@@ -316,6 +316,174 @@ func TestDeviceClient_Set_ClientPoolGetError(t *testing.T) {
 	mockPool.AssertExpectations(t)
 }
 
+func TestVlanReconciler_FullReconcile(t *testing.T) {
+	// Arrange
+	ctx := context.Background()
+	deviceID := "192.168.1.1"
+	req := reconcile.Request{
+		DeviceID: deviceID,
+		Path:     "/vlans",
+	}
+
+	// desired VLAN configuration
+	desired := &openconfig.OpenconfigVlan_Vlans{
+		Vlan: map[uint16]*openconfig.OpenconfigVlan_Vlans_Vlan{
+			100: {
+				VlanId: ptrUint16(100),
+				Config: &openconfig.OpenconfigVlan_Vlans_Vlan_Config{
+					Name:   ptrString("VLAN100"),
+					Status: openconfig.OpenconfigVlan_Vlans_Vlan_Config_Status_ACTIVE,
+				},
+			},
+		},
+	}
+
+	mockCS := new(mockConfigStore)
+	mockCS.On("Get", deviceID, "/vlans").Return(desired, nil)
+
+	// actual is empty on device
+	actual := &openconfig.OpenconfigVlan_Vlans{
+		Vlan: map[uint16]*openconfig.OpenconfigVlan_Vlans_Vlan{},
+	}
+	deviceRoot := &openconfig.Device{Vlans: actual}
+	jsonActual, err := json.Marshal(deviceRoot)
+	assert.NoError(t, err)
+
+	mockClient := new(MockClient)
+	mockClient.On("Get", ctx, "/vlans", mock.Anything).Return(&client.GetResult{
+		Data: jsonActual,
+	}, nil)
+	mockClient.On("Set", ctx, mock.Anything, mock.Anything).Return(&client.SetResult{
+		Success: true,
+	}, nil)
+
+	mockPool := new(MockClientPool)
+	mockPool.On("Get", client.DeviceConnectionInfo{IP: deviceID}).Return(mockClient, nil)
+
+	r := New(mockCS, mockPool)
+
+	// Act
+	result := r.Reconcile(ctx, req)
+
+	// Assert
+	assert.False(t, result.Requeue)
+	assert.Nil(t, result.Error)
+	mockCS.AssertExpectations(t)
+	mockPool.AssertExpectations(t)
+	mockClient.AssertExpectations(t)
+	// One Set call should be made with one ADD change
+	mockClient.AssertNumberOfCalls(t, "Set", 1)
+}
+
+func TestVlanReconciler_ConfigStoreGetError(t *testing.T) {
+	// Arrange
+	ctx := context.Background()
+	deviceID := "192.168.1.1"
+	req := reconcile.Request{
+		DeviceID: deviceID,
+		Path:     "/vlans",
+	}
+
+	mockCS := new(mockConfigStore)
+	mockCS.On("Get", deviceID, "/vlans").Return(nil, assert.AnError)
+
+	mockPool := new(MockClientPool)
+
+	r := New(mockCS, mockPool)
+
+	// Act
+	result := r.Reconcile(ctx, req)
+
+	// Assert
+	assert.True(t, result.Requeue)
+	assert.Error(t, result.Error)
+}
+
+func TestVlanReconciler_NoDiff(t *testing.T) {
+	// Arrange
+	ctx := context.Background()
+	deviceID := "192.168.1.1"
+	req := reconcile.Request{
+		DeviceID: deviceID,
+		Path:     "/vlans",
+	}
+
+	desired := &openconfig.OpenconfigVlan_Vlans{
+		Vlan: map[uint16]*openconfig.OpenconfigVlan_Vlans_Vlan{
+			100: {
+				VlanId: ptrUint16(100),
+				Config: &openconfig.OpenconfigVlan_Vlans_Vlan_Config{
+					Name:   ptrString("VLAN100"),
+					Status: openconfig.OpenconfigVlan_Vlans_Vlan_Config_Status_ACTIVE,
+				},
+			},
+		},
+	}
+
+	// desired and actual are identical
+	deviceRoot := &openconfig.Device{Vlans: desired}
+	jsonBytes, err := json.Marshal(deviceRoot)
+	assert.NoError(t, err)
+
+	mockCS := new(mockConfigStore)
+	mockCS.On("Get", deviceID, "/vlans").Return(desired, nil)
+
+	mockClient := new(MockClient)
+	mockClient.On("Get", ctx, "/vlans", mock.Anything).Return(&client.GetResult{
+		Data: jsonBytes,
+	}, nil)
+
+	mockPool := new(MockClientPool)
+	mockPool.On("Get", client.DeviceConnectionInfo{IP: deviceID}).Return(mockClient, nil)
+
+	r := New(mockCS, mockPool)
+
+	// Act
+	result := r.Reconcile(ctx, req)
+
+	// Assert
+	assert.False(t, result.Requeue)
+	assert.Nil(t, result.Error)
+	// No changes, so no Set call
+	mockClient.AssertNumberOfCalls(t, "Set", 0)
+}
+
+// mockConfigStore is a mock implementation of reconcile.ConfigStore
+type mockConfigStore struct {
+	mock.Mock
+}
+
+func (m *mockConfigStore) Get(deviceID, path string) (interface{}, error) {
+	args := m.Called(deviceID, path)
+	return args.Get(0), args.Error(1)
+}
+
+func (m *mockConfigStore) Set(deviceID, path string, value interface{}) error {
+	args := m.Called(deviceID, path, value)
+	return args.Error(0)
+}
+
+func (m *mockConfigStore) Delete(deviceID, path string) error {
+	args := m.Called(deviceID, path)
+	return args.Error(0)
+}
+
+func (m *mockConfigStore) List(deviceID string) ([]string, error) {
+	args := m.Called(deviceID)
+	if res, ok := args.Get(0).([]string); ok {
+		return res, args.Error(1)
+	}
+	return nil, args.Error(1)
+}
+
+func (m *mockConfigStore) ListDevices() ([]string, error) {
+	args := m.Called()
+	if res, ok := args.Get(0).([]string); ok {
+		return res, args.Error(1)
+	}
+	return nil, args.Error(0)
+}
+
 func ptrUint16(v uint16) *uint16 {
 	return &v
 }

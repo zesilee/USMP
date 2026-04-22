@@ -3,6 +3,7 @@ package vlan
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 
 	"github.com/leezesi/usmp/internal/generated/openconfig"
 	"github.com/leezesi/usmp/pkg/yang-runtime/client"
@@ -98,7 +99,7 @@ func (d *deviceClient) Get(ctx context.Context, deviceID string) (interface{}, e
 	}
 
 	// Unknown data format
-	return nil, nil
+	return nil, fmt.Errorf("unknown data format for vlan config: %T", result.Data)
 }
 
 // Set applies the computed changes to the device
