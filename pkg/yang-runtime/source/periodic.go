@@ -95,8 +95,9 @@ func (s *PeriodicSource) run(ctx context.Context) {
 }
 
 // Stop implements Source interface
-func (s *PeriodicSource) Stop() {
+func (s *PeriodicSource) Stop() error {
 	close(s.done)
 	s.ticker.Stop()
 	s.wg.Wait()
+	return nil
 }

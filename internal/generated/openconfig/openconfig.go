@@ -3,11 +3,8 @@
 
 package openconfig
 
-// Only generate VLAN module directly - dependencies are imported via YANG import and should be found on search path
-// Search paths:
-//  - /tmp/yang-vlan = our direct modules (openconfig-vlan, openconfig-vlan-types)
-//  - /Users/leezesi/Documents/code/usmp/yang-models/openconfig-public/release/models = all other openconfig modules
-//  - /Users/leezesi/Documents/code/usmp/yang-models/openconfig-public/third_party/ietf = IETF modules
-// This avoids duplicate root because ietf-interfaces is only in the third_party search path not in our temp dir
-//go:generate go run github.com/openconfig/ygot/generator -path=/tmp/yang-vlan:/Users/leezesi/Documents/code/usmp/yang-models/openconfig-public/release/models:/Users/leezesi/Documents/code/usmp/yang-models/openconfig-public/third_party/ietf -output_file=./vlan.gen.go -package_name=openconfig -generate_fakeroot=true openconfig-vlan openconfig-vlan-types
+// Only generate VLAN module directly - all dependencies are already downloaded to /tmp/yang-vlan
+// Use exclude_modules to exclude openconfig-interfaces which conflicts with ietf-interfaces on the root interfaces container
+// openconfig-vlan only uses augment paths from openconfig-interfaces which still works without generating its top-level container
+//go:generate go run github.com/openconfig/ygot/generator -path=/tmp/yang-vlan -output_file=./vlan.gen.go -package_name=openconfig -generate_fakeroot=true -exclude_modules=openconfig-interfaces openconfig-vlan openconfig-vlan-types
 //go:generate gofmt -w ./vlan.gen.go

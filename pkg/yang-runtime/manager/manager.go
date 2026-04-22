@@ -2,12 +2,64 @@ package manager
 
 import (
 	"context"
+	"fmt"
+	"time"
 
 	"github.com/leezesi/usmp/pkg/yang-runtime/client"
 	"github.com/leezesi/usmp/pkg/yang-runtime/controller"
 	"github.com/leezesi/usmp/pkg/yang-runtime/plugin"
+	"github.com/leezesi/usmp/pkg/yang-runtime/reconcile"
 	"github.com/leezesi/usmp/pkg/yang-runtime/schema"
+	"github.com/leezesi/usmp/internal/cache"
 )
+
+// InMemoryConfigStore is an in-memory ConfigStore implementation backed by TTL+LRU cache
+type InMemoryConfigStore struct {
+	cache *cache.TTLLRUCache
+}
+
+// NewInMemoryConfigStore creates a new in-memory config store
+func NewInMemoryConfigStore(c *cache.TTLLRUCache) *InMemoryConfigStore {
+	return &InMemoryConfigStore{
+		cache: c,
+	}
+}
+
+// Get retrieves the desired configuration at the given path for a device
+func (s *InMemoryConfigStore) Get(deviceID, path string) (interface{}, error) {
+	key := fmt.Sprintf("%s:%s", deviceID, path)
+	val, ok := s.cache.Get(key)
+	if !ok {
+		return nil, nil // nil means no config exists
+	}
+	return val, nil
+}
+
+// Set stores the desired configuration at the given path for a device
+func (s *InMemoryConfigStore) Set(deviceID, path string, value interface{}) error {
+	key := fmt.Sprintf("%s:%s", deviceID, path)
+	s.cache.Set(key, value)
+	return nil
+}
+
+// Delete removes the desired configuration at the given path for a device
+func (s *InMemoryConfigStore) Delete(deviceID, path string) error {
+	key := fmt.Sprintf("%s:%s", deviceID, path)
+	s.cache.Delete(key)
+	return nil
+}
+
+// List lists all paths that have desired configuration for a device
+func (s *InMemoryConfigStore) List(deviceID string) ([]string, error) {
+	// TODO: Implement full path listing - not needed for basic functionality
+	return nil, nil
+}
+
+// ListDevices lists all devices that have desired configuration
+func (s *InMemoryConfigStore) ListDevices() ([]string, error) {
+	// TODO: Implement full device listing - not needed for basic functionality
+	return nil, nil
+}
 
 // Manager is the main entry point for the yang-controller-runtime framework
 // It manages:
@@ -27,6 +79,8 @@ type Manager interface {
 	GetSchema() schema.Schema
 	// GetClientPool returns the client connection pool
 	GetClientPool() client.ClientPool
+	// GetConfigStore returns the desired configuration store
+	GetConfigStore() reconcile.ConfigStore
 	// GetPluginManager returns the plugin manager
 	GetPluginManager() *plugin.Manager
 	// AddPlugin adds a plugin
@@ -38,6 +92,7 @@ type DefaultManager struct {
 	options       Options
 	schema         schema.Schema
 	clientPool     client.ClientPool
+	configStore    reconcile.ConfigStore
 	controllers    []controller.Controller
 	pluginManager  *plugin.Manager
 	started        bool
@@ -60,10 +115,16 @@ func New(opts ...Option) *DefaultManager {
 		s = schema.NewSchema()
 	}
 
+	// Use the existing TTL+LRU cache as backing store for config store
+	// max entries 1000, cleanup every minute, entry TTL 5 minutes
+	cache := cache.NewTTLLRUCache(1000, 1*time.Minute, 5*time.Minute)
+	cs := NewInMemoryConfigStore(cache)
+
 	m := &DefaultManager{
 		options:        options,
 		schema:          s,
 		clientPool:      client.NewDefaultClientPool(options.ClientFactory),
+		configStore:     cs,
 		controllers:     make([]controller.Controller, 0),
 		pluginManager:   plugin.NewManager(),
 	}
@@ -134,6 +195,11 @@ func (m *DefaultManager) GetSchema() schema.Schema {
 // GetClientPool implements Manager interface
 func (m *DefaultManager) GetClientPool() client.ClientPool {
 	return m.clientPool
+}
+
+// GetConfigStore implements Manager interface
+func (m *DefaultManager) GetConfigStore() reconcile.ConfigStore {
+	return m.configStore
 }
 
 // GetPluginManager implements Manager interface

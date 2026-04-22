@@ -10,6 +10,7 @@ import (
 type Builder struct {
 	name        string
 	reconciler  reconcile.Reconciler
+	source      Source
 	predicates  []predicate.Predicate
 	workerCount int
 	queue       queue.RateLimitingInterface
@@ -26,6 +27,12 @@ func ControllerManagedBy(name string) *Builder {
 // WithReconciler sets the reconciler for the controller
 func (b *Builder) WithReconciler(r reconcile.Reconciler) *Builder {
 	b.reconciler = r
+	return b
+}
+
+// WithSource sets the event source for the controller
+func (b *Builder) WithSource(s Source) *Builder {
+	b.source = s
 	return b
 }
 
@@ -60,5 +67,5 @@ func (b *Builder) Build() Controller {
 		q = queue.NewRateLimitingQueue(queue.DefaultRateLimiter())
 	}
 
-	return New(b.name, b.reconciler, q, b.predicates, b.workerCount)
+	return New(b.name, b.source, b.reconciler, q, b.predicates, b.workerCount)
 }

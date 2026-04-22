@@ -9,6 +9,15 @@ import (
 	"github.com/leezesi/usmp/pkg/yang-runtime/reconcile"
 )
 
+// Source is the interface for event sources
+// An event source generates events that trigger reconciliation
+type Source interface {
+	// Start starts the event source and sends events to the controller
+	Start(ctx context.Context, ctrl Controller) error
+	// Stop stops the event source
+	Stop() error
+}
+
 // Controller is the interface that all controllers must implement
 // A controller watches events from a Source, filters them through Predicates,
 // and enqueues them for reconciliation via the Reconciler.
@@ -27,6 +36,8 @@ type Controller interface {
 type DefaultController struct {
 	// name is the controller name
 	name string
+	// source is the event source that generates reconciliation events
+	source Source
 	// reconciler is the reconciler to use
 	reconciler reconcile.Reconciler
 	// queue is the work queue
@@ -46,6 +57,7 @@ type DefaultController struct {
 // New creates a new DefaultController
 func New(
 	name string,
+	s Source,
 	r reconcile.Reconciler,
 	q queue.RateLimitingInterface,
 	predicates []predicate.Predicate,
@@ -57,6 +69,7 @@ func New(
 
 	return &DefaultController{
 		name:        name,
+		source:      s,
 		reconciler:  r,
 		queue:       q,
 		predicates:  predicates,
@@ -77,6 +90,13 @@ func (c *DefaultController) Start(ctx context.Context) error {
 	}
 
 	c.started = true
+
+	// Start the event source if present
+	if c.source != nil {
+		if err := c.source.Start(ctx, c); err != nil {
+			return err
+		}
+	}
 
 	// Start worker goroutines
 	for i := 0; i < c.workerCount; i++ {

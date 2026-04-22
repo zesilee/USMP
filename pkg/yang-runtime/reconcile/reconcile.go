@@ -41,9 +41,9 @@ type ConfigStore interface {
 // This is typically implemented by the client package.
 type DeviceClient interface {
 	// Get retrieves the actual configuration from the device at the given path
-	Get(ctx context.Context, path string) (interface{}, error)
+	Get(ctx context.Context, deviceID string) (interface{}, error)
 	// Set applies configuration changes to the device
-	Set(ctx context.Context, changes []Change) error
+	Set(ctx context.Context, deviceID string, changes []Change) error
 }
 
 // GenericReconciler is a base implementation of Reconciler that handles the common
@@ -98,7 +98,7 @@ func (g *GenericReconciler) Reconcile(ctx context.Context, req Request) Result {
 	}
 
 	// Get actual configuration from device
-	actual, err := g.deviceClient.Get(ctx, req.Path)
+	actual, err := g.deviceClient.Get(ctx, req.DeviceID)
 	if err != nil {
 		return Result{
 			Requeue: true,
@@ -132,7 +132,7 @@ func (g *GenericReconciler) Reconcile(ctx context.Context, req Request) Result {
 	}
 
 	// Apply changes to device
-	if err := g.deviceClient.Set(ctx, changes); err != nil {
+	if err := g.deviceClient.Set(ctx, req.DeviceID, changes); err != nil {
 		return Result{
 			Requeue: true,
 			Error: &ReconcileError{
