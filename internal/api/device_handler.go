@@ -1,25 +1,34 @@
 package api
 
 import (
-	"time"
+	"sync"
 
-	protoactor "github.com/asynkron/protoactor-go/actor"
 	"github.com/gin-gonic/gin"
-	"github.com/leezesi/usmp/internal/actor"
+	"github.com/leezesi/usmp/pkg/yang-runtime/client"
+	"github.com/leezesi/usmp/pkg/yang-runtime/manager"
 )
+
+// DeviceInfo stores device connection information
+type DeviceInfo struct {
+	IP       string `json:"ip"`
+	Port     int    `json:"port"`
+	Username string `json:"username"`
+	Password string `json:"password"`
+}
 
 // DeviceHandler handles device-related API requests
 type DeviceHandler struct {
-	root        *protoactor.RootContext
-	managerPID  *protoactor.PID
+	manager manager.Manager
+	devices map[string]DeviceInfo
+	mu      sync.RWMutex
 }
 
 // NewDeviceHandler creates a new DeviceHandler
-func NewDeviceHandler(root *protoactor.RootContext, managerPID *protoactor.PID) *DeviceHandler {
+func NewDeviceHandler(manager manager.Manager) *DeviceHandler {
 	return &DeviceHandler{
-		root:        root,
-	managerPID:  managerPID,
-}
+		manager: manager,
+		devices: make(map[string]DeviceInfo),
+	}
 }
 
 // AddDeviceRequest is the request body for adding a device
@@ -32,20 +41,24 @@ type AddDeviceRequest struct {
 
 // ListDevices lists all devices
 func (h *DeviceHandler) ListDevices(c *gin.Context) {
-	future := h.root.RequestFuture(h.managerPID, &actor.ListDevicesRequest{}, 5*time.Second)
-	res, err := future.Result()
-	if err != nil {
-		Error(c, 500, "Failed to get devices: "+err.Error())
-		return
+	h.mu.RLock()
+	defer h.mu.RUnlock()
+
+	devices := make([]DeviceInfo, 0, len(h.devices))
+	for _, d := range h.devices {
+		devices = append(devices, d)
 	}
 
-	listRes, ok := res.(*actor.ListDevicesResponse)
-	if !ok {
-		Error(c, 500, "Invalid response from actor")
-		return
-	}
+	stats := h.manager.GetClientPool().Stats()
 
-	Success(c, listRes.Devices, "Devices retrieved successfully")
+	Success(c, gin.H{
+		"devices": devices,
+		"stats": gin.H{
+			"active_connections": stats.ActiveConnections,
+			"total_connections": stats.TotalConnections,
+			"errors":            stats.Errors,
+		},
+	}, "Devices retrieved successfully")
 }
 
 // AddDevice adds a new device
@@ -61,99 +74,83 @@ func (h *DeviceHandler) AddDevice(c *gin.Context) {
 		req.Port = 830
 	}
 
-	future := h.root.RequestFuture(h.managerPID, &actor.AddDeviceRequest{
-		Device: actor.DeviceInfo{
-			IP:       req.IP,
-			Port:     req.Port,
-			Username: req.Username,
-			Password: req.Password,
-		},
-	}, 10*time.Second)
+	h.mu.Lock()
+	h.devices[req.IP] = DeviceInfo{
+		IP:       req.IP,
+		Port:     req.Port,
+		Username: req.Username,
+		Password: req.Password,
+	}
+	h.mu.Unlock()
 
-	res, err := future.Result()
+	// Try to create client and connect immediately
+	pool := h.manager.GetClientPool()
+	_, err := pool.Get(client.DeviceConnectionInfo{
+		IP:       req.IP,
+		Port:     req.Port,
+		Username: req.Username,
+		Password: req.Password,
+		Protocol: client.ProtocolAUTO,
+	})
 	if err != nil {
-		Error(c, 500, "Failed to add device: "+err.Error())
+		// We still store the device info but return the error
+		Error(c, 500, "Failed to connect to device: "+err.Error())
 		return
 	}
 
-	addRes, ok := res.(*actor.AddDeviceResponse)
-	if !ok {
-		Error(c, 500, "Invalid response from actor")
-		return
-	}
-
-	if !addRes.Success {
-		Error(c, 400, addRes.Message)
-		return
-	}
-
-	Success(c, nil, addRes.Message)
+	Success(c, nil, "Device added successfully")
 }
 
 // RemoveDevice removes a device
 func (h *DeviceHandler) RemoveDevice(c *gin.Context) {
 	ip := c.Param("ip")
 
-	future := h.root.RequestFuture(h.managerPID, &actor.RemoveDeviceRequest{IP: ip}, 5*time.Second)
-	res, err := future.Result()
-	if err != nil {
-		Error(c, 500, "Failed to remove device: "+err.Error())
-		return
-	}
+	h.mu.Lock()
+	delete(h.devices, ip)
+	h.mu.Unlock()
 
-	removeRes, ok := res.(*actor.RemoveDeviceResponse)
-	if !ok {
-		Error(c, 500, "Invalid response from actor")
-		return
-	}
+	// Close the connection
+	pool := h.manager.GetClientPool()
+	pool.Release(ip)
 
-	if !removeRes.Success {
-		Error(c, 400, removeRes.Message)
-		return
-	}
-
-	Success(c, nil, removeRes.Message)
+	Success(c, nil, "Device removed successfully")
 }
 
 // GetStatus gets device status
 func (h *DeviceHandler) GetStatus(c *gin.Context) {
 	ip := c.Param("ip")
 
-	// First get device PID from manager
-	future := h.root.RequestFuture(h.managerPID, &actor.GetDeviceRequest{IP: ip}, 5*time.Second)
-	res, err := future.Result()
-	if err != nil {
-		Error(c, 500, "Failed to get device: "+err.Error())
-		return
-	}
+	h.mu.RLock()
+	_, exists := h.devices[ip]
+	h.mu.RUnlock()
 
-	getRes, ok := res.(*actor.GetDeviceResponse)
-	if !ok {
-		Error(c, 500, "Invalid response from actor")
-		return
-	}
-
-	if !getRes.Exists {
+	if !exists {
 		Error(c, 404, "Device not found")
 		return
 	}
 
-	// Get status from device
-	statusFuture := h.root.RequestFuture(getRes.PID, &actor.GetDeviceStatusRequest{}, 5*time.Second)
-	statusRes, err := statusFuture.Result()
-	if err != nil {
-		Error(c, 500, "Failed to get device status: "+err.Error())
-		return
-	}
+	// Get client from pool and check connection status
+	pool := h.manager.GetClientPool()
+	// We need to get the full info from our devices map
+	h.mu.RLock()
+	devInfo := h.devices[ip]
+	h.mu.RUnlock()
 
-	status, ok := statusRes.(*actor.GetDeviceStatusResponse)
-	if !ok {
-		Error(c, 500, "Invalid response from device actor")
-		return
+	cli, err := pool.Get(client.DeviceConnectionInfo{
+		IP:       devInfo.IP,
+		Port:     devInfo.Port,
+		Username: devInfo.Username,
+		Password: devInfo.Password,
+		Protocol: client.ProtocolAUTO,
+	})
+
+	connected := false
+	if err == nil && cli != nil {
+		connected = cli.IsConnected()
 	}
 
 	Success(c, gin.H{
-		"running":   status.Running,
-		"connected": status.Connected,
+		"running":   true, // API server is always running
+		"connected": connected,
 	}, "Status retrieved")
 }

@@ -1,24 +1,22 @@
 package api
 
 import (
-	protoactor "github.com/asynkron/protoactor-go/actor"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
+	"github.com/leezesi/usmp/pkg/yang-runtime/manager"
 )
 
 // Server represents the API server
 type Server struct {
-	router      *gin.Engine
-	root        *protoactor.RootContext
-	managerPID  *protoactor.PID
+	router  *gin.Engine
+	manager manager.Manager
 }
 
 // NewServer creates a new API server
-func NewServer(root *protoactor.RootContext, managerPID *protoactor.PID) *Server {
+func NewServer(manager manager.Manager) *Server {
 	s := &Server{
-		root:     root,
-		router:     gin.Default(),
-		managerPID: managerPID,
+		router:  gin.Default(),
+		manager: manager,
 	}
 
 	s.setupCORS()
@@ -41,7 +39,7 @@ func (s *Server) setupRoutes() {
 		// Device endpoints
 		deviceGroup := v1.Group("/devices")
 		{
-			deviceHandler := NewDeviceHandler(s.root, s.managerPID)
+			deviceHandler := NewDeviceHandler(s.manager)
 			deviceGroup.GET("", deviceHandler.ListDevices)
 			deviceGroup.POST("", deviceHandler.AddDevice)
 			deviceGroup.DELETE("/:ip", deviceHandler.RemoveDevice)
@@ -51,7 +49,7 @@ func (s *Server) setupRoutes() {
 		// Configuration endpoints
 		configGroup := v1.Group("/config")
 		{
-			configHandler := NewConfigHandler(s.root, s.managerPID)
+			configHandler := NewConfigHandler(s.manager)
 			configGroup.GET("/:ip/:path", configHandler.GetConfig)
 			configGroup.POST("/:ip/:path", configHandler.SetConfig)
 		}
@@ -59,7 +57,7 @@ func (s *Server) setupRoutes() {
 		// YANG model endpoints
 		yangGroup := v1.Group("/yang")
 		{
-			yangHandler := NewYangHandler()
+			yangHandler := NewYangHandler(s.manager)
 			yangGroup.GET("/modules", yangHandler.ListModules)
 		}
 	}

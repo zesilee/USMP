@@ -1,24 +1,23 @@
 package api
 
 import (
+	"context"
 	"time"
 
-	protoactor "github.com/asynkron/protoactor-go/actor"
 	"github.com/gin-gonic/gin"
-	"github.com/leezesi/usmp/internal/actor"
+	"github.com/leezesi/usmp/pkg/yang-runtime/client"
+	"github.com/leezesi/usmp/pkg/yang-runtime/manager"
 )
 
 // ConfigHandler handles configuration API requests
 type ConfigHandler struct {
-	root       *protoactor.RootContext
-	managerPID *protoactor.PID
+	manager manager.Manager
 }
 
 // NewConfigHandler creates a new ConfigHandler
-func NewConfigHandler(root *protoactor.RootContext, managerPID *protoactor.PID) *ConfigHandler {
+func NewConfigHandler(manager manager.Manager) *ConfigHandler {
 	return &ConfigHandler{
-		root:       root,
-		managerPID: managerPID,
+		manager: manager,
 	}
 }
 
@@ -26,68 +25,39 @@ func NewConfigHandler(root *protoactor.RootContext, managerPID *protoactor.PID) 
 func (h *ConfigHandler) GetConfig(c *gin.Context) {
 	ip := c.Param("ip")
 	path := "/" + c.Param("path")
-	forceRefresh := c.Query("force_refresh") == "true"
+	_ = c.Query("force_refresh") == "true" // TODO: Implement cache invalidation when we have caching
 
-	// First get device PID from manager
-	future := h.root.RequestFuture(h.managerPID, &actor.GetDeviceRequest{IP: ip}, 5*time.Second)
-	res, err := future.Result()
+	// Get the device info from device handler
+	// We need to get it from the device registry
+	// For now, we just get the client from pool
+	pool := h.manager.GetClientPool()
+
+	cli, err := pool.Get(client.DeviceConnectionInfo{
+		IP: ip,
+	})
 	if err != nil {
-		Error(c, 500, "Failed to get device: "+err.Error())
+		Error(c, 500, "Failed to get device client: "+err.Error())
 		return
 	}
 
-	deviceRes, ok := res.(*actor.GetDeviceResponse)
-	if !ok {
-		Error(c, 500, "Invalid response from manager")
+	if !cli.IsConnected() {
+		Error(c, 503, "Device is not connected")
 		return
 	}
 
-	if !deviceRes.Exists {
-		Error(c, 404, "Device not found")
-		return
-	}
+	// Create context with timeout
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
 
-	// Get YANG object actor from device
-	yangFuture := h.root.RequestFuture(deviceRes.PID, &actor.GetYANGObjectActorRequest{Path: path}, 5*time.Second)
-	yangRes, err := yangFuture.Result()
+	// Get configuration from device
+	result, err := cli.Get(ctx, path, client.WithDatastore("running"))
 	if err != nil {
-		Error(c, 500, "Failed to get YANG actor: "+err.Error())
-		return
-	}
-
-	yangResp, ok := yangRes.(*actor.GetYANGObjectActorResponse)
-	if !ok {
-		Error(c, 500, "Invalid response from device")
-		return
-	}
-
-	if !yangResp.Exists {
-		Error(c, 404, "YANG path not found: "+path)
-		return
-	}
-
-	// Request configuration from YANG actor
-	configFuture := h.root.RequestFuture(yangResp.PID, &actor.GetConfigRequest{ForceRefresh: forceRefresh}, 10*time.Second)
-	configRes, err := configFuture.Result()
-	if err != nil {
-		Error(c, 500, "Failed to get config: "+err.Error())
-		return
-	}
-
-	configResp, ok := configRes.(*actor.GetConfigResponse)
-	if !ok {
-		Error(c, 500, "Invalid response from YANG actor")
-		return
-	}
-
-	if !configResp.Success {
-		Error(c, 500, configResp.Message)
+		Error(c, 500, "Failed to get configuration: "+err.Error())
 		return
 	}
 
 	Success(c, gin.H{
-		"data":        configResp.Data,
-		"from_cache":  configResp.FromCache,
+		"data": result.Data,
 	}, "Configuration retrieved")
 }
 
@@ -96,68 +66,48 @@ func (h *ConfigHandler) SetConfig(c *gin.Context) {
 	ip := c.Param("ip")
 	path := "/" + c.Param("path")
 
-	var data interface{}
+	var data map[string]interface{}
 	if err := c.ShouldBindJSON(&data); err != nil {
 		Error(c, 400, "Invalid request: "+err.Error())
 		return
 	}
 
-	// First get device PID from manager
-	future := h.root.RequestFuture(h.managerPID, &actor.GetDeviceRequest{IP: ip}, 5*time.Second)
-	res, err := future.Result()
+	pool := h.manager.GetClientPool()
+	cli, err := pool.Get(client.DeviceConnectionInfo{
+		IP: ip,
+	})
 	if err != nil {
-		Error(c, 500, "Failed to get device: "+err.Error())
+		Error(c, 500, "Failed to get device client: "+err.Error())
 		return
 	}
 
-	deviceRes, ok := res.(*actor.GetDeviceResponse)
-	if !ok {
-		Error(c, 500, "Invalid response from manager")
+	if !cli.IsConnected() {
+		Error(c, 503, "Device is not connected")
 		return
 	}
 
-	if !deviceRes.Exists {
-		Error(c, 404, "Device not found")
-		return
-	}
+	// Create context with timeout
+	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+	defer cancel()
 
-	// Get YANG object actor from device
-	yangFuture := h.root.RequestFuture(deviceRes.PID, &actor.GetYANGObjectActorRequest{Path: path}, 5*time.Second)
-	yangRes, err := yangFuture.Result()
+	// For simplicity in the new API, we create a single change that covers the path
+	// The actual YANG parsing and diff should be handled by the controller reconciliation
+	changes := []client.Change{{
+		Type:     client.ModifyChange,
+		Path:     path,
+		NewValue: data,
+	}}
+
+	result, err := cli.Set(ctx, changes, client.WithCommit(true))
 	if err != nil {
-		Error(c, 500, "Failed to get YANG actor: "+err.Error())
+		Error(c, 500, "Failed to apply configuration: "+err.Error())
 		return
 	}
 
-	yangResp, ok := yangRes.(*actor.GetYANGObjectActorResponse)
-	if !ok {
-		Error(c, 500, "Invalid response from device")
+	if !result.Success {
+		Error(c, 500, result.Message)
 		return
 	}
 
-	if !yangResp.Exists {
-		Error(c, 404, "YANG path not found: "+path)
-		return
-	}
-
-	// Send configuration to YANG actor
-	setFuture := h.root.RequestFuture(yangResp.PID, &actor.SetConfigRequest{Data: data}, 15*time.Second)
-	setRes, err := setFuture.Result()
-	if err != nil {
-		Error(c, 500, "Failed to set config: "+err.Error())
-		return
-	}
-
-	setResp, ok := setRes.(*actor.SetConfigResponse)
-	if !ok {
-		Error(c, 500, "Invalid response from YANG actor")
-		return
-	}
-
-	if !setResp.Success {
-		Error(c, 500, setResp.Message)
-		return
-	}
-
-	Success(c, nil, setResp.Message)
+	Success(c, nil, "Configuration applied successfully")
 }

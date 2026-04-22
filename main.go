@@ -1,39 +1,38 @@
 package main
 
 import (
+	"context"
 	"log"
+	"time"
 
-	"github.com/leezesi/usmp/internal/actor"
 	"github.com/leezesi/usmp/internal/api"
-	"github.com/leezesi/usmp/internal/cache"
-
-	protoactor "github.com/asynkron/protoactor-go/actor"
+	"github.com/leezesi/usmp/pkg/yang-runtime/manager"
 )
 
 func main() {
-	// 初始化全局TTL+LRU缓存
-	cache.InitGlobalCache()
+	// Create and start the yang-controller-runtime Manager
+	mgr := manager.New(
+		manager.WithDefaultTimeout(10 * time.Second),
+		// TODO: Set schema directory when we have dynamic schema loading
+		// manager.WithSchemeDir("./yang-modules"),
+	)
 
-	// 启动Actor系统
-	system := protoactor.NewActorSystem()
-	root := system.Root
+	// Start the manager - loads schema, starts all controllers
+	ctx, cancel := context.WithCancel(context.Background())
+	defer cancel()
 
-	// 创建并启动ManagerActor
-	managerProps := protoactor.PropsFromProducer(func() protoactor.Actor {
-		return actor.NewManagerActor()
-	})
-	managerPID, err := root.SpawnNamed(managerProps, "manager")
-	if err != nil {
-		log.Fatalf("Failed to start ManagerActor: %v", err)
+	if err := mgr.Start(ctx); err != nil {
+		log.Fatalf("Failed to start Manager: %v", err)
 	}
-
-	// 保存ManagerPID供API使用
-	actor.SetManagerPID(managerPID)
+	log.Printf("YANG Controller Runtime started successfully")
 
 	// 启动Gin API服务器
-	server := api.NewServer(root, managerPID)
+	server := api.NewServer(mgr)
 	log.Printf("Starting server on :8080")
 	if err := server.Run(":8080"); err != nil {
 		log.Fatalf("Failed to start server: %v", err)
 	}
+
+	// Stop manager on exit
+	mgr.Stop()
 }
