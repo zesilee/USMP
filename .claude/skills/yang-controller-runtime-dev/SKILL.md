@@ -1,3 +1,8 @@
+---
+name: yang-controller-runtime-dev
+description: 基于 yang-controller-runtime 框架开发 YANG 模块控制器，框架处理 boilerplate，只写 Reconciler 业务逻辑
+---
+
 # yang-controller-runtime 开发技能
 
 ## 技能名称
@@ -172,10 +177,13 @@ pred := predicate.And(
 - 使用 `github.com/stretchr/testify/mock` 做 mock
 - 覆盖正常路径、错误路径、边界情况
 
-### 集成测试
-- 端到端测试用真实设备连接（可选，标记为长测试）
-- 验证 diff 算法正确性
-- 验证配置下发真的生效
+### 集成测试（**强制要求**）
+- 必须添加基于 `test/netconf-simulator` NETCONF 模拟网元的端到端集成测试
+- 使用 `netconf-sim-integration-test` 技能自动生成测试用例
+- 必须覆盖：至少一个正常全流程 + 至少一个异常场景
+- 所有集成测试必须执行成功才能提交代码
+- 使用 `if testing.Short() { t.Skip() }` 跳过集成测试让日常单元测试更快
+- 必须在测试中**断言模拟网元上的最终配置**，验证配置真的下发成功
 
 ## 故障排查
 
