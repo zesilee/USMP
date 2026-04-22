@@ -108,4 +108,4 @@ func TestTTLLRUCache_Concurrent(t *testing.T) {
 ```
 
 ### 样例 3：联动其他技能
-为DeviceActor的注册功能，编写TDD测试用例，覆盖正常注册、重复注册异常场景
+为Controller的Reconcile功能，编写TDD测试用例，覆盖正常配置对齐、配置下发失败重试异常场景

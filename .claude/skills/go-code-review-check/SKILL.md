@@ -1,6 +1,6 @@
 ---
 name: go-code-review-check
-description: 自动审查Actor并发、ygot类型安全、内存缓存泄漏、NETCONF异常、协程安全、架构合规
+description: 自动审查controller/reconciler并发、ygot类型安全、内存缓存泄漏、NETCONF异常、协程安全、架构合规
 ---
 
 # 技能详情

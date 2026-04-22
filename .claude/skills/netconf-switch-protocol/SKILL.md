@@ -7,7 +7,7 @@ description: SSH 830端口NETCONF连接，get-config/edit-config/commit，对接
 ## 一、激活时机（何时自动触发）
 1.  当用户需求包含「NETCONF」「交换机对接」「配置获取」「配置下发」等关键词时，自动激活。
 2.  开发流程中，涉及「设备连接」「RPC请求」「配置读写」「断线重连」时，自动启用。
-3.  与 DeviceActor、ygot 技能联动，需要通过 NETCONF 读取/下发配置，并映射为 ygot 对象时，自动触发。
+3.  与 yang-controller-runtime、ygot 技能联动，需要通过 NETCONF 读取/下发配置，并映射为 ygot 对象时，自动触发。
 
 ## 二、核心原则（底层设计逻辑）
 1.  标准化原则：严格遵循 RFC6241 标准，确保与所有支持 NETCONF 的交换机兼容（华为/H3C/思科等）。
@@ -118,4 +118,4 @@ func (c *NETCONFClient) reconnectLoop() {
 ```
 
 ### 样例 3：联动其他技能
-DeviceActor通过NETCONF客户端获取接口配置，写入TTL缓存，供前端查询
+yang-controller-runtime reconciler 通过 NETCONF 客户端获取接口配置，写入 TTL 缓存，供前端查询

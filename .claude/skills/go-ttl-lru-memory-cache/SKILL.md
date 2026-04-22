@@ -1,19 +1,19 @@
 ---
 name: go-ttl-lru-memory-cache
-description: 无数据库架构，设备YANG配置内存缓存，TTL自动过期、LRU淘汰、Actor托管、协程安全
+description: 无数据库架构，设备YANG配置内存缓存，TTL自动过期、LRU淘汰、协程安全，作为 ConfigStore 后端给 Manager 使用
 ---
 
 # 技能详情（补全激活时机+核心原则+使用样例）
 ## 一、激活时机（何时自动触发）
 1.  当用户需求包含「内存缓存」「TTL过期」「LRU淘汰」「缓存清理」等关键词时，自动激活。
 2.  开发流程中，涉及「设备配置读取」「缓存管理」「配置下发后缓存失效」时，自动启用。
-3.  与 DeviceActor 联动，DeviceActor 启动时自动初始化缓存，销毁时自动清理缓存。
+3.  与 Manager 联动，Manager 启动时自动初始化缓存，作为 ConfigStore 存储 desired 配置。
 
 ## 二、核心原则（底层设计逻辑）
 1.  高性能原则：纯内存操作，无磁盘IO，确保配置读取响应速度，降低NETCONF请求频率。
 2.  时效性原则：TTL自动过期，确保缓存数据与交换机实时配置一致，避免脏数据。
 3.  安全原则：使用 sync 包保证协程安全，避免并发读写竞态；LRU淘汰机制防止内存溢出。
-4.  联动原则：与 DeviceActor、NETCONF 技能深度联动，配置下发后主动失效缓存，确保数据一致性。
+4.  联动原则：与 Manager、NETCONF 技能深度联动，配置下发后主动失效缓存，确保数据一致性。
 
 ## 三、使用样例（实操指令+输出效果）
 ### 样例1：触发技能指令
@@ -45,19 +45,19 @@ type TTLLRUCache struct {
 }
 
 // 初始化缓存
-func NewTTLLRUCache(maxSize int, ttl time.Duration) *TTLLRUCache {
+func NewTTLLRUCache(maxSize int, cleanupInterval time.Duration, ttl time.Duration) *TTLLRUCache {
 	c := &TTLLRUCache{
 		cache:   make(map[string]*cacheItem),
 		maxSize: maxSize,
 		ttl:     ttl,
 	}
 	// 启动定时清理过期缓存
-	go c.cleanExpired()
+	go c.cleanExpired(cleanupInterval)
 	return c
 }
 
 // 设置缓存
-func (c *TTLLRUCache) Set(key string, value interface{}) {
+func (c *TTLLruCache) Set(key string, value interface{}) {
 	c.mu.Lock()
 	defer c.mu.Unlock()
 
@@ -102,9 +102,9 @@ func (c *TTLLRUCache) Invalidate(key string) {
 	delete(c.cache, key)
 }
 
-// 定时清理过期缓存（每10秒）
-func (c *TTLLRUCache) cleanExpired() {
-	ticker := time.NewTicker(10 * time.Second)
+// 定时清理过期缓存
+func (c *TTLLRUCache) cleanExpired(cleanupInterval time.Duration) {
+	ticker := time.NewTicker(cleanupInterval)
 	defer ticker.Stop()
 	for range ticker.C {
 		c.mu.Lock()
@@ -133,4 +133,4 @@ func (c *TTLLRUCache) updateLRU(key string) {
 
 ### 样例 3：联动其他技能
 
-DeviceActor获取设备接口配置时，先查缓存，未命中则通过NETCONF拉取，再写入缓存
+Manager 的 ConfigStore 获取设备 VLAN 配置，desired 状态存储在 TTL LRU 缓存，controller  reconcile 时读取。
