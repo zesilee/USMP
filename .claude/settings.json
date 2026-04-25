@@ -1,18 +1,4 @@
 {
-  "hooks": {
-    "Stop": [
-      {
-        "matcher": "Stop",
-        "hooks": [
-          {
-            "type": "prompt",
-            "prompt": "检查当前工作区的 git status：\n\n1. 如果有未提交的 Go 代码变更，按照以下格式输出提醒：\n   ⚠️ 检测到未提交代码\n   📋 变更文件：[列出变更的 .go 文件]\n   💡 建议：请使用 go-code-review-check 技能评审后，按规范提交\n\n2. 如果没有变更，输出：✅ 工作区干净，无待提交代码\n\n注意：只输出提醒，不要自动执行任何操作，由用户决定何时评审和提交。",
-            "statusMessage": "检查工作区状态..."
-          }
-        ]
-      }
-    ]
-  },
   "permissions": {
     "allow": [
       "Bash(git status *)",
