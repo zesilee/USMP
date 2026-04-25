@@ -1,6 +1,8 @@
 package api
 
 import (
+	"strconv"
+
 	"github.com/gin-gonic/gin"
 	"github.com/leezesi/usmp/pkg/yang-runtime/manager"
 )
@@ -41,7 +43,7 @@ func (h *YangHandler) ListModules(c *gin.Context) {
 			Name:        mod.Name(),
 			Path:        "/" + root.Name(),
 			Description: root.Description(),
-			Type:        string(root.Type()),
+			Type:        strconv.Itoa(int(root.Type())),
 		}
 		modules = append(modules, info)
 	}

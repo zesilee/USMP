@@ -49,8 +49,8 @@ func (m *MockDeviceClient) Get(ctx context.Context, path string) (interface{}, e
 	return args.Get(0), args.Error(1)
 }
 
-func (m *MockDeviceClient) Set(ctx context.Context, changes []Change) error {
-	args := m.Called(ctx, changes)
+func (m *MockDeviceClient) Set(ctx context.Context, deviceID string, changes []Change) error {
+	args := m.Called(ctx, deviceID, changes)
 	return args.Error(0)
 }
 
@@ -108,7 +108,7 @@ func TestGenericReconciler_NoChanges(t *testing.T) {
 	actual := map[string]interface{}{"description": "test"}
 
 	cs.On("Get", "192.168.1.1", "/interfaces/interface[name='eth0']").Return(desired, nil)
-	dc.On("Get", mock.Anything, "/interfaces/interface[name='eth0']").Return(actual, nil)
+	dc.On("Get", mock.Anything, "192.168.1.1").Return(actual, nil)
 	de.On("Diff", desired, actual, "/interfaces/interface[name='eth0']").Return([]Change{}, nil)
 
 	r := NewGenericReconciler(cs, dc, de)
@@ -141,9 +141,9 @@ func TestGenericReconciler_WithChanges(t *testing.T) {
 	}
 
 	cs.On("Get", "192.168.1.1", "/interfaces/interface[name='eth0']").Return(desired, nil)
-	dc.On("Get", mock.Anything, "/interfaces/interface[name='eth0']").Return(actual, nil)
+	dc.On("Get", mock.Anything, "192.168.1.1").Return(actual, nil)
 	de.On("Diff", desired, actual, "/interfaces/interface[name='eth0']").Return(changes, nil)
-	dc.On("Set", mock.Anything, changes).Return(nil)
+	dc.On("Set", mock.Anything, "192.168.1.1", changes).Return(nil)
 
 	r := NewGenericReconciler(cs, dc, de)
 	result := r.Reconcile(context.Background(), Request{
@@ -187,7 +187,7 @@ func TestGenericReconciler_DeviceGetError(t *testing.T) {
 	expectedErr := errors.New("device connection failed")
 
 	cs.On("Get", "192.168.1.1", "/interfaces/interface[name='eth0']").Return(desired, nil)
-	dc.On("Get", mock.Anything, "/interfaces/interface[name='eth0']").Return(nil, expectedErr)
+	dc.On("Get", mock.Anything, "192.168.1.1").Return(nil, expectedErr)
 
 	r := NewGenericReconciler(cs, dc, de)
 	result := r.Reconcile(context.Background(), Request{
@@ -211,7 +211,7 @@ func TestGenericReconciler_DiffError(t *testing.T) {
 	expectedErr := errors.New("diff computation failed")
 
 	cs.On("Get", "192.168.1.1", "/interfaces/interface[name='eth0']").Return(desired, nil)
-	dc.On("Get", mock.Anything, "/interfaces/interface[name='eth0']").Return(actual, nil)
+	dc.On("Get", mock.Anything, "192.168.1.1").Return(actual, nil)
 	de.On("Diff", desired, actual, "/interfaces/interface[name='eth0']").Return([]Change{}, expectedErr)
 
 	r := NewGenericReconciler(cs, dc, de)
@@ -245,9 +245,9 @@ func TestGenericReconciler_SetError(t *testing.T) {
 	expectedErr := errors.New("failed to apply changes")
 
 	cs.On("Get", "192.168.1.1", "/interfaces/interface[name='eth0']").Return(desired, nil)
-	dc.On("Get", mock.Anything, "/interfaces/interface[name='eth0']").Return(actual, nil)
+	dc.On("Get", mock.Anything, "192.168.1.1").Return(actual, nil)
 	de.On("Diff", desired, actual, "/interfaces/interface[name='eth0']").Return(changes, nil)
-	dc.On("Set", mock.Anything, changes).Return(expectedErr)
+	dc.On("Set", mock.Anything, "192.168.1.1", changes).Return(expectedErr)
 
 	r := NewGenericReconciler(cs, dc, de)
 	result := r.Reconcile(context.Background(), Request{

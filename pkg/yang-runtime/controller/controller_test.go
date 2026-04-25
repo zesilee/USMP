@@ -6,6 +6,7 @@ import (
 	"time"
 
 	"github.com/leezesi/usmp/pkg/yang-runtime/predicate"
+	"github.com/leezesi/usmp/pkg/yang-runtime/queue"
 	"github.com/leezesi/usmp/pkg/yang-runtime/reconcile"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
@@ -21,39 +22,39 @@ func (m *MockReconciler) Reconcile(ctx context.Context, req reconcile.Request) r
 	return args.Get(0).(reconcile.Result)
 }
 
+// MockSource is a mock for Source
+type MockSource struct {
+	started bool
+	stopped bool
+}
+
+func (m *MockSource) Start(ctx context.Context, ctrl Controller) error {
+	m.started = true
+	return nil
+}
+
+func (m *MockSource) Stop() error {
+	m.stopped = true
+	return nil
+}
+
 func TestNewController(t *testing.T) {
 	mr := &MockReconciler{}
-	c := New("test-controller", mr, nil, nil, 0)
+	ms := &MockSource{}
+	q := queue.NewRateLimitingQueue(queue.DefaultRateLimiter())
+	c := New("test-controller", ms, mr, q, nil, 0)
 
 	assert.Equal(t, "test-controller", c.Name())
 	assert.Equal(t, 1, c.workerCount) // Default to 1 when 0 given
-}
-
-func TestBuilder(t *testing.T) {
-	mr := &MockReconciler{}
-	b := ControllerManagedBy("test-builder").
-		WithReconciler(mr).
-		WithWorkerCount(2)
-
-	c := b.Build()
-
-	assert.NotNil(t, c)
-	assert.Equal(t, "test-builder", c.Name())
-}
-
-func TestBuilderWithPredicate(t *testing.T) {
-	mr := &MockReconciler{}
-	p := predicate.Prefix("/interfaces")
-	b := ControllerManagedBy("test").WithReconciler(mr).WithPredicate(p)
-
-	c := b.Build()
-	assert.NotNil(t, c)
+	c.Stop()
 }
 
 func TestEnqueueFiltersEvent(t *testing.T) {
 	mr := &MockReconciler{}
+	ms := &MockSource{}
+	q := queue.NewRateLimitingQueue(queue.DefaultRateLimiter())
 	p := predicate.Not(predicate.Prefix("/interfaces"))
-	c := ControllerManagedBy("test").WithReconciler(mr).WithPredicate(p).Build()
+	c := New("test", ms, mr, q, []predicate.Predicate{p}, 1)
 
 	// Event that should be filtered out
 	evt := predicate.Event{
@@ -67,10 +68,13 @@ func TestEnqueueFiltersEvent(t *testing.T) {
 
 	// Since the worker isn't started, we can't really check the queue directly
 	// but this just verifies it doesn't panic and correctly filtered
+	c.Stop()
 }
 
 func TestReconciliationSuccess(t *testing.T) {
 	mr := &MockReconciler{}
+	ms := &MockSource{}
+	q := queue.NewRateLimitingQueue(queue.DefaultRateLimiter())
 	req := reconcile.Request{
 		DeviceID: "192.168.1.1",
 		Path:     "/interfaces/interface[name='eth0']",
@@ -78,7 +82,7 @@ func TestReconciliationSuccess(t *testing.T) {
 
 	mr.On("Reconcile", mock.Anything, req).Return(reconcile.Result{Requeue: false})
 
-	c := ControllerManagedBy("test").WithReconciler(mr).Build()
+	c := New("test", ms, mr, q, nil, 1)
 
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
@@ -103,6 +107,8 @@ func TestReconciliationSuccess(t *testing.T) {
 
 func TestReconciliationRequeue(t *testing.T) {
 	mr := &MockReconciler{}
+	ms := &MockSource{}
+	q := queue.NewRateLimitingQueue(queue.DefaultRateLimiter())
 	req := reconcile.Request{
 		DeviceID: "192.168.1.1",
 		Path:     "/interfaces/interface[name='eth0']",
@@ -110,7 +116,7 @@ func TestReconciliationRequeue(t *testing.T) {
 
 	mr.On("Reconcile", mock.Anything, req).Return(reconcile.Result{Requeue: true}).Once()
 
-	c := ControllerManagedBy("test").WithReconciler(mr).Build()
+	c := New("test", ms, mr, q, nil, 1)
 
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
@@ -133,6 +139,8 @@ func TestReconciliationRequeue(t *testing.T) {
 
 func TestReconciliationWithError(t *testing.T) {
 	mr := &MockReconciler{}
+	ms := &MockSource{}
+	q := queue.NewRateLimitingQueue(queue.DefaultRateLimiter())
 	req := reconcile.Request{
 		DeviceID: "192.168.1.1",
 		Path:     "/interfaces/interface[name='eth0']",
@@ -144,7 +152,7 @@ func TestReconciliationWithError(t *testing.T) {
 		Error:   assert.AnError,
 	}).Once()
 
-	c := ControllerManagedBy("test").WithReconciler(mr).Build()
+	c := New("test", ms, mr, q, nil, 1)
 
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
@@ -167,9 +175,11 @@ func TestReconciliationWithError(t *testing.T) {
 
 func TestMultipleWorkers(t *testing.T) {
 	mr := &MockReconciler{}
+	ms := &MockSource{}
+	q := queue.NewRateLimitingQueue(queue.DefaultRateLimiter())
 	mr.On("Reconcile", mock.Anything, mock.Anything).Return(reconcile.Result{Requeue: false})
 
-	c := ControllerManagedBy("test").WithReconciler(mr).WithWorkerCount(4).Build()
+	c := New("test", ms, mr, q, nil, 4)
 
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
@@ -195,7 +205,9 @@ func TestMultipleWorkers(t *testing.T) {
 
 func TestStartStopIdempotent(t *testing.T) {
 	mr := &MockReconciler{}
-	c := ControllerManagedBy("test").WithReconciler(mr).Build()
+	ms := &MockSource{}
+	q := queue.NewRateLimitingQueue(queue.DefaultRateLimiter())
+	c := New("test", ms, mr, q, nil, 1)
 
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()

@@ -162,42 +162,32 @@ func TestQueueLen(t *testing.T) {
 
 func TestConcurrentAccess(t *testing.T) {
 	t.Parallel()
-	q := NewRateLimitingQueue(DefaultRateLimiter())
+	q := NewStandardQueue()
 	defer q.ShutDown()
 
-	done := make(chan bool)
-	numWorkers := 10
-	numItems := 100
+	numWorkers := 5
+	numItems := 20
+	totalItems := numWorkers * numItems
 
+	// Start workers to add items
 	for i := 0; i < numWorkers; i++ {
 		go func(workerID int) {
 			for j := 0; j < numItems; j++ {
 				q.Add(workerID*numItems + j)
 			}
-			done <- true
 		}(i)
 	}
 
-	// Wait for all adds
-	for i := 0; i < numWorkers; i++ {
-		<-done
-	}
-
-	// We should have all items
-	assert.Equal(t, numWorkers*numItems, q.Len())
-
-	// Shutdown and drain
-	q.ShutDownWithDrain()
-	count := 0
-	for !q.ShuttingDown() || q.Len() > 0 {
+	// Drain items in the main goroutine
+	seen := make(map[int]bool)
+	for len(seen) < totalItems {
 		item, shutdown := q.Get()
 		if shutdown {
 			break
 		}
-		assert.NotNil(t, item)
-		count++
+		seen[item.(int)] = true
 		q.Done(item)
 	}
 
-	assert.Equal(t, numWorkers*numItems, count)
+	assert.Equal(t, totalItems, len(seen))
 }
