@@ -1,0 +1,63 @@
+module openconfig-vlan {
+  namespace "http://openconfig.net/yang/vlan";
+  prefix "vlan";
+
+  organization "OpenConfig working group";
+ contact "openconfig-netdev@googlegroups.com";
+  description
+    "This module defines configuration and operational state for
+     VLANs on a network device.";
+
+  revision 2017-07-14 {
+    description
+      "Initial revision of VLAN model.";
+    reference
+      "OpenConfig release v0.5.0";
+  }
+
+  container vlans {
+    description
+      "Top-level container for VLANs";
+
+    list vlan {
+      key "vlan-id";
+      description
+        "The list of VLANs configured on the device.";
+
+      leaf vlan-id {
+        type uint16;
+        description
+          "The VLAN ID (1-4094) for the VLAN.";
+      }
+
+      leaf name {
+        type string;
+        description
+          "The name assigned to the VLAN.";
+      }
+
+      leaf status {
+        type enumeration {
+          enum ACTIVE;
+          enum SUSPENDED;
+        }
+        default "ACTIVE";
+        description
+          "The operational status of the VLAN.";
+      }
+
+      leaf enabled {
+        type boolean;
+        default "true";
+        description
+          "Whether the VLAN is enabled.";
+      }
+
+      leaf description {
+        type string;
+        description
+          "A textual description of the VLAN.";
+      }
+    }
+  }
+}

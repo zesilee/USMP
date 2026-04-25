@@ -1,0 +1,67 @@
+module openconfig-interfaces {
+  namespace "http://openconfig.net/yang/interfaces";
+  prefix "if";
+
+  organization "OpenConfig working group";
+  contact "openconfig-netdev@googlegroups.com";
+  description
+    "This module defines configuration and operational state data
+     for network interfaces on a network device.
+
+     The model supports physical, aggregate (LACP), and logical
+     interfaces (e.g., VLAN subinterfaces).";
+
+  revision 2017-07-14 {
+    description
+      "Add IP data to interfaces model, add channel struct
+       configurable to aggregate interfaces.";
+    reference
+      "OpenConfig release v0.5.0";
+  }
+
+  container interfaces {
+    description
+      "Top-level container for interfaces";
+
+    list interface {
+      key "name";
+      description
+        "The list of interfaces on the device.";
+
+      leaf name {
+        type string;
+        description
+          "The name of the interface.  This is the primary key
+           for the interface list.";
+      }
+
+      leaf type {
+        identityref base:interface-type;
+        description
+          "The type of the interface, e.g., PHYSICAL, LAG, etc.";
+      }
+
+      leaf mtu {
+        type uint16;
+        description
+          "The MTU (maximum transmission unit) configured on the
+           interface.";
+      }
+
+      leaf enabled {
+        type boolean;
+        default "true";
+        description
+          "Whether the interface is enabled (administratively up).";
+      }
+
+      container description {
+        leaf description {
+          type string;
+          description
+            "A user-defined textual description of the interface.";
+        }
+      }
+    }
+  }
+}

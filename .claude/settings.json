@@ -1,0 +1,39 @@
+{
+  "hooks": {
+    "Stop": [
+      {
+        "matcher": "Stop",
+        "hooks": [
+          {
+            "type": "agent",
+            "prompt": "检查当前Git仓库状态：\n1. 执行 git status --porcelain 查看是否有未提交的变更\n2. 如果有未提交的变更：\n   - 明确提醒用户：注意：当前有未提交的代码变更！\n   - 使用 git-what-why-how-commit 技能规范生成提交信息并自动提交\n   - 遵循三段式：What（做了什么）、Why（为什么）、Impact（影响范围）\n   - 使用中文编写提交信息\n3. 如果没有变更，输出：当前无未提交的代码变更\n\n输出格式：返回检查结果和执行的操作",
+            "statusMessage": "检查Git状态..."
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Bash",
+        "if": "Bash(go test *)",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "STATUS=$(git status --porcelain); if [ -n \"$STATUS\" ]; then echo \"{\\\"systemMessage\\\":\\\"⚠️ 检测到测试已运行但有未提交的代码变更，请记得提交！\\\"}\"; else echo \"{}\"; fi",
+            "statusMessage": "检查Git提交状态..."
+          }
+        ]
+      }
+    ]
+  },
+  "permissions": {
+    "allow": [
+      "Bash(git status *)",
+      "Bash(git diff *)",
+      "Bash(git log *)"
+    ]
+  },
+  "attribution": {
+    "commit": "Co-Authored-By: Claude Code <noreply@anthropic.com>"
+  }
+}

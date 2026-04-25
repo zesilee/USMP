@@ -124,7 +124,8 @@ func DefaultClientFactory(defaultTimeout time.Duration) ClientFactory {
 
 		switch info.Protocol {
 		case ProtocolNETCONF:
-			return NewNETCONFClient(info), nil
+			c, err := NewNETCONFClient(info)
+			return c, err
 		case ProtocolGNMI:
 			return NewGNMIClient(info), nil
 		case ProtocolAUTO:
@@ -132,19 +133,22 @@ func DefaultClientFactory(defaultTimeout time.Duration) ClientFactory {
 			if info.Port == 0 {
 				info.Port = 830
 				info.Protocol = ProtocolNETCONF
-				return NewNETCONFClient(info), nil
+				c, err := NewNETCONFClient(info)
+				return c, err
 			}
 			switch info.Port {
 			case 830:
 				info.Protocol = ProtocolNETCONF
-				return NewNETCONFClient(info), nil
+				c, err := NewNETCONFClient(info)
+				return c, err
 			case 9339:
 				info.Protocol = ProtocolGNMI
 				return NewGNMIClient(info), nil
 			default:
 				// Default to NETCONF
 				info.Protocol = ProtocolNETCONF
-				return NewNETCONFClient(info), nil
+				c, err := NewNETCONFClient(info)
+				return c, err
 			}
 		default:
 			return nil, fmt.Errorf("unsupported protocol: %s", info.Protocol)

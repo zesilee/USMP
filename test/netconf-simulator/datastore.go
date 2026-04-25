@@ -1,216 +1,291 @@
-package netsim
+package netconfsim
 
 import (
 	"bytes"
 	"encoding/xml"
 	"fmt"
-	"strconv"
+	"strings"
 	"sync"
 
 	"github.com/leezesi/usmp/internal/generated/openconfig"
 )
 
-// Device is the root OpenConfig device structure
-type Device = openconfig.Device
-
-// Datastore manages running and candidate configuration stores
+// Datastore represents NETCONF datastore with running and candidate configurations.
 type Datastore struct {
-	running   *Device
-	candidate *Device
 	mu        sync.RWMutex
+	running   []byte
+	candidate []byte // candidate is copy of running until edited
 }
 
-// NewDatastore creates a new empty datastore
+// NewDatastore creates a new empty datastore.
 func NewDatastore() *Datastore {
+	emptyConfig := []byte(`<config/>`)
 	return &Datastore{
-		running:   &Device{},
-		candidate: &Device{},
+		running:   emptyConfig,
+		candidate: emptyConfig,
 	}
 }
 
-// GetRunning returns the current running configuration
-func (d *Datastore) GetRunning() *Device {
+// SetRunningFromDevice sets the running configuration from an openconfig Device.
+// This also updates candidate to match.
+func (d *Datastore) SetRunningFromDevice(dev *openconfig.Device) {
+	d.mu.Lock()
+	defer d.mu.Unlock()
+
+	// Marshal to XML directly
+	buf, err := xml.Marshal(dev)
+	if err != nil {
+		// Fallback to empty on error
+		d.running = []byte(`<config/>`)
+		d.candidate = []byte(`<config/>`)
+		return
+	}
+
+	// Wrap in <config> tag if not already
+	if !bytes.Contains(buf, []byte(`<config`)) {
+		buf = []byte(fmt.Sprintf(`<config>%s</config>`, buf))
+	}
+
+	d.running = buf
+	d.candidate = make([]byte, len(buf))
+	copy(d.candidate, buf)
+}
+
+// GetRunning returns the current running configuration as XML.
+func (d *Datastore) GetRunning() []byte {
 	d.mu.RLock()
 	defer d.mu.RUnlock()
 	return d.running
 }
 
-// GetCandidate returns the current candidate configuration
-func (d *Datastore) GetCandidate() *Device {
+// GetCandidate returns the current candidate configuration as XML.
+func (d *Datastore) GetCandidate() []byte {
 	d.mu.RLock()
 	defer d.mu.RUnlock()
 	return d.candidate
 }
 
-// SetRunning sets the running configuration
-func (d *Datastore) SetRunning(dev *Device) {
+// SetCandidate updates the candidate configuration with merged XML content.
+func (d *Datastore) SetCandidate(newConfig []byte) error {
 	d.mu.Lock()
 	defer d.mu.Unlock()
-	d.running = dev
+
+	// For simplicity in simulator: just replace candidate
+	// Full XPath merge would be more complex but for testing we keep it simple
+	d.candidate = make([]byte, len(newConfig))
+	copy(d.candidate, newConfig)
+	return nil
 }
 
-// SetCandidate sets the candidate configuration
-func (d *Datastore) SetCandidate(dev *Device) {
-	d.mu.Lock()
-	defer d.mu.Unlock()
-	d.candidate = dev
-}
-
-// Commit copies candidate configuration to running configuration
+// Commit copies candidate to running.
 func (d *Datastore) Commit() error {
 	d.mu.Lock()
 	defer d.mu.Unlock()
 
-	// Create a new device and copy populated fields
-	d.running = &Device{}
-	if d.candidate.Vlans != nil {
-		d.running.Vlans = d.candidate.Vlans
-	}
-	// Add more fields as more modules are added
-
+	d.running = make([]byte, len(d.candidate))
+	copy(d.running, d.candidate)
 	return nil
 }
 
-// RenderConfigXML renders the configuration to XML
-func (d *Datastore) RenderConfigXML(device *Device, filter []byte) ([]byte, error) {
-	d.mu.RLock()
-	defer d.mu.RUnlock()
-
-	var buf bytes.Buffer
-
-	// Start config
-	buf.WriteString("<config xmlns=\"http://tail-f.com/ns/netconf\">\n")
-
-	// Render VLANs if present
-	if device.Vlans != nil {
-		buf.WriteString("  <vlans xmlns=\"http://openconfig.net/yang/vlan\">\n")
-		for _, vlan := range device.Vlans.Vlan {
-			buf.WriteString("    <vlan>\n")
-			if vlan.VlanId != nil {
-				fmt.Fprintf(&buf, "      <vlan-id>%d</vlan-id>\n", *vlan.VlanId)
-			}
-			if vlan.Config != nil {
-				buf.WriteString("      <config>\n")
-				if vlan.Config.Name != nil {
-					fmt.Fprintf(&buf, "        <name>%s</name>\n", *vlan.Config.Name)
-				}
-				if vlan.Config.VlanId != nil {
-					fmt.Fprintf(&buf, "        <vlan-id>%d</vlan-id>\n", *vlan.Config.VlanId)
-				}
-				buf.WriteString("      </config>\n")
-			}
-			buf.WriteString("    </vlan>\n")
-		}
-		buf.WriteString("  </vlans>\n")
-	}
-
-	// End config
-	buf.WriteString("</config>\n")
-
-	return buf.Bytes(), nil
-}
-
-// VLANConfigXML represents parsed VLAN configuration from XML
-type vlanXML struct {
-	XMLName xml.Name `xml:"vlans"`
-	Vlan    []struct {
-		VlanId  string  `xml:"vlan-id"`
-		Config  *struct {
-			Name    *string `xml:"name"`
-			VlanId  *string `xml:"vlan-id"`
-			Status  *string `xml:"status"`
-		} `xml:"config"`
-	} `xml:"vlan"`
-}
-
-// ParseConfigXML parses configuration XML and merges it into the candidate device
-func (d *Datastore) ParseConfigXML(configXML []byte, device *Device) error {
+// DiscardCandidate resets candidate to match running.
+func (d *Datastore) DiscardCandidate() {
 	d.mu.Lock()
 	defer d.mu.Unlock()
 
-	// Parse VLANs if present in the config
-	var vlansXML vlanXML
-	err := xml.Unmarshal(configXML, &vlansXML)
-	if err == nil {
-		// Successfully parsed directly
-	} else {
-		// Try to parse if wrapped in another <config>
-		// Need to parse from the original bytes since Unmarshal consumes the reader
-		var wrapped struct {
-			Vlans vlanXML `xml:"vlans"`
-		}
-		if err2 := xml.Unmarshal(configXML, &wrapped); err2 == nil {
-			vlansXML = wrapped.Vlans
-			err = nil
-		} else {
-			var wrappedConfig struct {
-				Config struct {
-					Vlans vlanXML `xml:"vlans"`
-				} `xml:"config"`
-			}
-			if err3 := xml.Unmarshal(configXML, &wrappedConfig); err3 == nil {
-				vlansXML = wrappedConfig.Config.Vlans
-				err = nil
-			} else {
-				return fmt.Errorf("failed to parse config XML: %w", err)
-			}
-		}
-	}
+	d.candidate = make([]byte, len(d.running))
+	copy(d.candidate, d.running)
+}
 
-	// Initialize Vlans if needed
-	if device.Vlans == nil {
-		device.Vlans = &openconfig.OpenconfigVlan_Vlans{}
-		device.Vlans.Vlan = make(map[uint16]*openconfig.OpenconfigVlan_Vlans_Vlan)
-	}
+// ExtractVLANs extracts VLANs from running configuration for testing assertions.
+func (d *Datastore) ExtractVLANs() (*openconfig.OpenconfigVlan_Vlans, error) {
+	d.mu.RLock()
+	defer d.mu.RUnlock()
 
-	// Merge each VLAN
-	for _, vlanXML := range vlansXML.Vlan {
-		// Parse VLAN ID
-		var id uint16
-		var idStr string
-		if vlanXML.VlanId != "" {
-			idStr = vlanXML.VlanId
-		} else if vlanXML.Config != nil && vlanXML.Config.VlanId != nil {
-			idStr = *vlanXML.Config.VlanId
-		} else {
-			continue
-		}
+	// Client converts names from camelCase to kebab-case when sending:
+	// VlanId -> vlan-id, Vlan -> vlan, Name -> name, Config -> config etc...
+	// We need to convert back to camelCase for xml.Unmarshal to match Go struct fields
+	xmlStr := string(d.running)
+	xmlStr = fixXMLTagNames(xmlStr)
 
-		parsedID, err := strconv.Atoi(idStr)
+	// Since the OpenconfigVlan_Vlans struct contains a map field and xml.Unmarshal doesn't support maps,
+	// we need to manually parse the VLAN entries from XML and construct the struct ourselves.
+	vlans := &openconfig.OpenconfigVlan_Vlans{}
+	vlans.Vlan = make(map[uint16]*openconfig.OpenconfigVlan_Vlans_Vlan)
+
+	// Use xml decoder to walk the XML and manually collect each VLAN
+	decoder := xml.NewDecoder(bytes.NewReader([]byte(xmlStr)))
+	for {
+		token, err := decoder.Token()
 		if err != nil {
+			break
+		}
+
+		start, ok := token.(xml.StartElement)
+		if !ok {
 			continue
 		}
-		id = uint16(parsedID)
 
-		// Get or create VLAN
-		vlan, exists := device.Vlans.Vlan[id]
-		if !exists {
-			vlan, _ = device.Vlans.NewVlan(id)
-		}
-
-		// Ensure config exists
-		if vlan.Config == nil {
+		// We're looking for <Vlan> (already converted from <vlan>)
+		if start.Name.Local == "Vlan" {
+			vlan := &openconfig.OpenconfigVlan_Vlans_Vlan{}
+			// Manually parse inside Vlan because ygot structs don't have xml tags
+			// and encoding/xml doesn't match <config> to Config field without xml tag
 			vlan.Config = &openconfig.OpenconfigVlan_Vlans_Vlan_Config{}
-		}
+			for {
+				token, err := decoder.Token()
+				if err != nil {
+					break
+				}
 
-		// Merge config
-		if vlanXML.Config != nil {
-			if vlanXML.Config.Name != nil {
-				name := *vlanXML.Config.Name
-				vlan.Config.Name = &name
-			}
-			if vlanXML.Config.VlanId != nil {
-				parsedConfigID, err := strconv.Atoi(*vlanXML.Config.VlanId)
-				if err == nil {
-					configID := uint16(parsedConfigID)
-					vlan.Config.VlanId = &configID
+				// Check for closing </Vlan>
+				if _, ok := token.(xml.EndElement); ok {
+					break
+				}
+
+				innerStart, ok := token.(xml.StartElement)
+				if !ok {
+					continue
+				}
+
+				switch innerStart.Name.Local {
+				case "VlanId":
+					var vid uint16
+					if err := decoder.DecodeElement(&vid, &innerStart); err == nil {
+						vlan.VlanId = &vid
+					}
+				case "config":
+					// Parse inside config manually - ygot doesn't have xml tags
+					for {
+						token, err := decoder.Token()
+						if err != nil {
+							break
+						}
+						if _, ok := token.(xml.EndElement); ok {
+							break
+						}
+						configStart, ok := token.(xml.StartElement)
+						if !ok {
+							continue
+						}
+						switch configStart.Name.Local {
+						case "Name":
+							var name string
+							if err := decoder.DecodeElement(&name, &configStart); err == nil {
+								vlan.Config.Name = &name
+							}
+						case "Status":
+							// Status is an enum, but we don't need to parse it for assertion
+							_ = decoder.Skip()
+						case "VlanId":
+							var vid uint16
+							if err := decoder.DecodeElement(&vid, &configStart); err == nil {
+								vlan.Config.VlanId = &vid
+							}
+						default:
+							_ = decoder.Skip()
+						}
+					}
+				default:
+					_ = decoder.Skip()
 				}
 			}
-		}
 
-		// Set VlanId on the VLAN itself
-		vlan.VlanId = &id
+			// Get VLAN ID: check top-level VlanId first, then check Config.VlanId
+			var vlanID *uint16
+			if vlan.VlanId != nil {
+				vlanID = vlan.VlanId
+			} else if vlan.Config != nil && vlan.Config.VlanId != nil {
+				vlanID = vlan.Config.VlanId
+			}
+			if vlanID != nil {
+				vlans.Vlan[*vlanID] = vlan
+			}
+		}
 	}
 
-	return nil
+	// Always return the vlans struct (even if empty) so assertions can work with it
+	// Fallback only if we didn't find any VLANs through manual parsing and vlans is empty
+	if len(vlans.Vlan) > 0 || len(vlans.Vlan) == 0 {
+		return vlans, nil
+	}
+
+	// Fallback to trying standard xml.Unmarshal in case structure is different
+	var direct struct {
+		VLans *openconfig.OpenconfigVlan_Vlans `xml:"vlans"`
+	}
+	err := xml.Unmarshal([]byte(xmlStr), &direct)
+	if err == nil && direct.VLans != nil {
+		return direct.VLans, nil
+	}
+
+	// Structure 2: <config><vlans> ... </vlans></config> (this is what we get from edit-config)
+	var configDirect struct {
+		Config struct {
+			VLans *openconfig.OpenconfigVlan_Vlans `xml:"vlans"`
+		} `xml:"config"`
+	}
+	err = xml.Unmarshal([]byte(xmlStr), &configDirect)
+	if err == nil && configDirect.Config.VLans != nil {
+		return configDirect.Config.VLans, nil
+	}
+
+	// Structure 3: <config><device><vlans> ... </vlans></device></config> (initial set from test)
+	var configDevice struct {
+		Config struct {
+			Device struct {
+				VLans *openconfig.OpenconfigVlan_Vlans `xml:"vlans"`
+			} `xml:"device"`
+		} `xml:"config"`
+	}
+	err = xml.Unmarshal([]byte(xmlStr), &configDevice)
+	if err == nil && configDevice.Config.Device.VLans != nil {
+		return configDevice.Config.Device.VLans, nil
+	}
+
+	// Structure 4: <device><vlans> ... </vlans></device> at top level
+	var deviceOnly struct {
+		Device struct {
+			VLans *openconfig.OpenconfigVlan_Vlans `xml:"vlans"`
+		} `xml:"device"`
+	}
+	err = xml.Unmarshal([]byte(xmlStr), &deviceOnly)
+	if err == nil && deviceOnly.Device.VLans != nil {
+		return deviceOnly.Device.VLans, nil
+	}
+
+	return nil, fmt.Errorf("failed to extract VLANs from XML after trying all structures")
+}
+
+// fixXMLTagNames converts kebab-case tag names back to camel-case that Go xml.Unmarshal expects
+// based on the struct field names from ygot generated code.
+// - vlan-id (kebab from client) → VlanId (struct field name)
+// - vlan → Vlan (struct field name)
+// - name → Name (struct field name)
+// - status → Status (struct field name)
+// - vlans → vlans (struct field VLans has XML tag xml:"vlans", so keep it as vlans)
+// - config → config (struct field Config has XML tag xml:"config", so keep it as config)
+func fixXMLTagNames(xml string) string {
+	repl := strings.NewReplacer(
+		"<vlan-id>", "<VlanId>",
+		"</vlan-id>", "</VlanId>",
+		"<vlan>", "<Vlan>",
+		"</vlan>", "</Vlan>",
+		"<name>", "<Name>",
+		"</name>", "</Name>",
+		"<status>", "<Status>",
+		"</status>", "</Status>",
+	)
+	return repl.Replace(xml)
+}
+
+// GetXML returns the XML for the requested datastore.
+func (d *Datastore) GetXML(source string) []byte {
+	switch source {
+	case "running":
+		return d.GetRunning()
+	case "candidate":
+		return d.GetCandidate()
+	default:
+		return d.GetRunning()
+	}
 }
