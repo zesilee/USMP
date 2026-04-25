@@ -5,22 +5,9 @@
         "matcher": "Stop",
         "hooks": [
           {
-            "type": "agent",
-            "prompt": "【提交前强制代码检视】\n\n1. git status 检查是否有 Go 代码变更，无变更则结束\n2. 有变更则用 go-code-review-check 技能检视所有修改的 .go 文件\n   - 检查项：并发安全、ygot 类型安全、内存缓存、NETCONF 异常、架构合规、代码规范\n3. 输出完整检视报告：文件列表、问题清单（高/中/低）、修改建议、检视结论\n4. 检视不通过：自动修复 → 重新检视 → 循环直到通过\n5. 检视通过：用 git-what-why-how-commit 规范自动提交（What/Why/Impact 三段式，中文）\n\n重要：必须先修复所有严重问题才能提交，每次迭代输出完整检视报告。\n详细流程见 .claude/HOOKS.md",
-            "statusMessage": "执行提交前代码检视..."
-          }
-        ]
-      }
-    ],
-    "PostToolUse": [
-      {
-        "matcher": "Bash",
-        "if": "Bash(go test *)",
-        "hooks": [
-          {
-            "type": "agent",
-            "prompt": "【测试完成后触发代码检视】\n\ngo test 已执行完成，触发代码检视流程：\n1. git diff HEAD --name-only 列出所有变更的 .go 文件\n2. 用 go-code-review-check 技能对变更文件进行检视\n3. 输出检视报告：变更文件列表、问题清单、修改建议、检视结论\n4. 严重问题 → 标记【需要修复】，列出修复项\n5. 检视通过 → 标记【检视通过，可安全提交】\n\n输出完整的中文检视报告。\n详细流程见 .claude/HOOKS.md",
-            "statusMessage": "测试完成，执行代码检视..."
+            "type": "prompt",
+            "prompt": "检查当前工作区的 git status：\n\n1. 如果有未提交的 Go 代码变更，按照以下格式输出提醒：\n   ⚠️ 检测到未提交代码\n   📋 变更文件：[列出变更的 .go 文件]\n   💡 建议：请使用 go-code-review-check 技能评审后，按规范提交\n\n2. 如果没有变更，输出：✅ 工作区干净，无待提交代码\n\n注意：只输出提醒，不要自动执行任何操作，由用户决定何时评审和提交。",
+            "statusMessage": "检查工作区状态..."
           }
         ]
       }

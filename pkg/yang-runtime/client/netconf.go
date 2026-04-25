@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"reflect"
 	"strings"
+	"sync"
 	"time"
 
 	"github.com/leezesi/usmp/internal/generated/openconfig"
@@ -21,8 +22,9 @@ const NETCONFDefaultPort = 830
 
 // NETCONFClient implements Client interface for NETCONF protocol
 type NETCONFClient struct {
-	info   DeviceConnectionInfo
-	driver *netconf.Driver
+	mu        sync.RWMutex
+	info      DeviceConnectionInfo
+	driver    *netconf.Driver
 	connected bool
 }
 
@@ -79,11 +81,24 @@ func (c *NETCONFClient) connect() error {
 
 // Get implements Client interface
 func (c *NETCONFClient) Get(ctx context.Context, path string, opts ...GetOption) (*GetResult, error) {
+	c.mu.RLock()
 	if !c.connected || c.driver == nil {
-		return &GetResult{
-			Error: fmt.Errorf("not connected"),
-		}, fmt.Errorf("not connected")
+		c.mu.RUnlock()
+		// Try to reconnect
+		c.mu.Lock()
+		defer c.mu.Unlock()
+		if err := c.connect(); err != nil {
+			return &GetResult{
+				Error: err,
+			}, err
+		}
+	} else {
+		c.mu.RUnlock()
 	}
+
+	c.mu.RLock()
+	driver := c.driver
+	c.mu.RUnlock()
 
 	// Apply options
 	getOpts := &GetOptions{
@@ -104,7 +119,7 @@ func (c *NETCONFClient) Get(ctx context.Context, path string, opts ...GetOption)
 		op.Filter = filter
 		return nil
 	}
-	resp, err := c.driver.GetConfig(getOpts.Datastore, withFilter)
+	resp, err := driver.GetConfig(getOpts.Datastore, withFilter)
 	if err != nil {
 		return &GetResult{
 			Error: err,
@@ -132,9 +147,22 @@ func (c *NETCONFClient) Get(ctx context.Context, path string, opts ...GetOption)
 
 // Set implements Client interface
 func (c *NETCONFClient) Set(ctx context.Context, changes []Change, opts ...SetOption) (*SetResult, error) {
+	c.mu.RLock()
 	if !c.connected || c.driver == nil {
-		return nil, fmt.Errorf("not connected")
+		c.mu.RUnlock()
+		// Try to reconnect
+		c.mu.Lock()
+		defer c.mu.Unlock()
+		if err := c.connect(); err != nil {
+			return nil, err
+		}
+	} else {
+		c.mu.RUnlock()
 	}
+
+	c.mu.RLock()
+	driver := c.driver
+	c.mu.RUnlock()
 
 	// Apply options
 	setOpts := &SetOptions{
@@ -166,7 +194,7 @@ func (c *NETCONFClient) Set(ctx context.Context, changes []Change, opts ...SetOp
 		}
 
 		var resp *response.NetconfResponse
-		resp, err = c.driver.EditConfig(setOpts.Datastore, xmlConfig)
+		resp, err = driver.EditConfig(setOpts.Datastore, xmlConfig)
 		if err != nil {
 			result.Changes[i] = ChangeResult{
 				Change:  change,
@@ -233,24 +261,23 @@ func (c *NETCONFClient) Subscribe(ctx context.Context, path string, handler func
 
 // Close implements Client interface
 func (c *NETCONFClient) Close() error {
+	c.mu.Lock()
+	defer c.mu.Unlock()
+
 	if !c.connected || c.driver == nil {
 		return nil
 	}
 
 	err := c.driver.Close()
-	if err != nil {
-		c.connected = false
-		c.driver = nil
-		return err
-	}
-
 	c.connected = false
 	c.driver = nil
-	return nil
+	return err
 }
 
 // IsConnected implements Client interface
 func (c *NETCONFClient) IsConnected() bool {
+	c.mu.RLock()
+	defer c.mu.RUnlock()
 	return c.connected && c.driver != nil
 }
 

@@ -135,14 +135,20 @@ func (d *deviceClient) Get(ctx context.Context, deviceID string) (interface{}, e
 				// If direct unmarshal fails, try wrapping the content because it's inside <data>
 				wrapped := []byte(fmt.Sprintf("<data>%s</data>", string(data)))
 				if err2 := xml.Unmarshal(wrapped, deviceRoot); err2 != nil {
-					return nil, err
+					return nil, fmt.Errorf("unmarshal wrapped XML failed: %w (original: %w)", err2, err)
 				}
+			}
+			if deviceRoot.Vlans == nil {
+				return &openconfig.OpenconfigVlan_Vlans{}, nil
 			}
 			return deviceRoot.Vlans, nil
 		}
 		// JSON format from gNMI
 		if err := json.Unmarshal(data, deviceRoot); err != nil {
-			return nil, err
+			return nil, fmt.Errorf("unmarshal JSON failed: %w", err)
+		}
+		if deviceRoot.Vlans == nil {
+			return &openconfig.OpenconfigVlan_Vlans{}, nil
 		}
 		return deviceRoot.Vlans, nil
 	}
