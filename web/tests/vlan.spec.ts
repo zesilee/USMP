@@ -4,6 +4,8 @@ test.describe('VLAN 管理 - 端到端测试', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/')
     await page.waitForTimeout(1000)
+    // ✅ 显式验证设备树加载成功（确保 CORS 和 API 正常）
+    await expect(page.getByText('192.168.1.1')).toBeVisible()
     // 点击 VLANs 节点
     await page.getByText('VLANs').first().click()
     await page.waitForTimeout(1000)

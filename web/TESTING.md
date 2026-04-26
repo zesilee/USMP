@@ -170,6 +170,84 @@ test.describe('功能模块', () => {
 
 ---
 
+## ⚠️ E2E 测试避坑指南 (血泪经验)
+
+### 问题案例：CORS 端口不匹配导致验收失败
+
+**现象：**
+- E2E 测试全部通过 ✅
+- 开发人员手动验收时，设备树为空 ❌
+
+**根因：**
+```go
+// 后端 CORS 只配置了 5173 端口
+AllowOrigins: []string{"http://localhost:5173"}
+
+// 但 Vite 实际运行在 3000 端口
+// Playwright 配置不一致
+baseURL: 'http://localhost:5173'
+webServer: { url: 'http://localhost:3000' }
+```
+
+**教训：**
+
+| 序号 | 规则 | 强制执行方式 |
+|------|------|-------------|
+| **1** | **测试环境必须与开发环境完全一致** | `playwright.config.ts` 中 `baseURL` 必须与 `webServer.url` 端口一致 |
+| **2** | **必须验证前置条件** | beforeEach 中不能只做操作，必须显式断言关键前置条件 |
+| **3** | **所有涉及的端口必须在 CORS 白名单** | 后端 CORS 配置必须包含所有可能的前端端口 |
+
+---
+
+### E2E 测试编写黄金法则
+
+#### ✅ 法则 1：显式验证前置条件
+
+**错误写法 ❌**
+```typescript
+test.beforeEach(async ({ page }) => {
+  await page.goto('/')
+  await page.click('text=VLANs')  // 假设元素存在，CORS 失败时这里会静默超时
+})
+```
+
+**正确写法 ✅**
+```typescript
+test.beforeEach(async ({ page }) => {
+  await page.goto('/')
+  // 显式断言设备树加载成功 - 验证 CORS + API 正常工作
+  await expect(page.getByText('192.168.1.1')).toBeVisible()
+  // 再执行后续操作
+  await page.getByText('VLANs').first().click()
+})
+```
+
+#### ✅ 法则 2：端口配置单一数据源
+
+**项目约定：**
+```
+前端开发端口：3000 (Vite 默认)
+后端测试端口：8080
+```
+
+所有配置文件必须统一：
+- `playwright.config.ts`: `baseURL: 'http://localhost:3000'`
+- `vite.config.ts`: `server.port: 3000`
+- 后端 CORS: 必须包含 `http://localhost:3000`
+
+#### ✅ 法则 3：环境一致性检查
+
+在 `e2e-demo.spec.ts` 中必须包含：
+```typescript
+// 验证 API 连通性
+test('后端 API 应该可以正常访问', async ({ request }) => {
+  const res = await request.get('/api/v1/devices')
+  expect(res.ok()).toBeTruthy()
+})
+```
+
+---
+
 ## 三、测试后端服务器
 
 ### 启动方式
