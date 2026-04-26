@@ -1,0 +1,78 @@
+// ==================== 配色系统 ====================
+// 专业网管风格 - 深色主题
+
+// 主色调 - 深蓝系
+$color-primary: #165DFF;
+$color-primary-light: #4080FF;
+$color-primary-dark: #0E42D2;
+$color-primary-bg: rgba(22, 93, 255, 0.15);
+
+// 功能色
+$color-success: #00B42A;
+$color-success-bg: rgba(0, 180, 42, 0.15);
+$color-warning: #FF7D00;
+$color-warning-bg: rgba(255, 125, 0, 0.15);
+$color-error: #F53F3F;
+$color-error-bg: rgba(245, 63, 63, 0.15);
+$color-info: #86909C;
+$color-info-bg: rgba(134, 144, 156, 0.15);
+
+// 中性色 - 深色背景
+$bg-page: #0F172A;
+$bg-card: #1E293B;
+$bg-card-hover: #273549;
+$bg-elevated: #334155;
+$bg-hover: rgba(255, 255, 255, 0.06);
+$bg-active: rgba(255, 255, 255, 0.1);
+
+// 边框
+$border-color: #334155;
+$border-color-light: #475569;
+$border-color-dark: #1E293B;
+
+// 文字
+$text-primary: #F1F5F9;
+$text-secondary: #94A3B8;
+$text-tertiary: #64748B;
+$text-disabled: #475569;
+
+// ==================== 间距系统 ====================
+$spacing-xs: 4px;
+$spacing-sm: 8px;
+$spacing-md: 12px;
+$spacing-lg: 16px;
+$spacing-xl: 24px;
+$spacing-2xl: 32px;
+
+// ==================== 圆角系统 ====================
+// 差异化圆角 - 避免 AI 模板感
+$radius-sm: 2px;      // 小标签、状态点
+$radius-md: 4px;      // 按钮、输入框
+$radius-lg: 6px;      // 卡片
+$radius-xl: 8px;      // 弹窗、抽屉
+$radius-full: 9999px; // 圆形、胶囊
+
+// ==================== 阴影系统 ====================
+$shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+$shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+$shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
+$shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.6);
+
+// ==================== 字体系统 ====================
+$font-size-xs: 12px;
+$font-size-sm: 13px;
+$font-size-base: 14px;
+$font-size-lg: 16px;
+$font-size-xl: 18px;
+$font-size-2xl: 20px;
+$font-size-3xl: 24px;
+
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+
+// ==================== 过渡动画 ====================
+$transition-fast: 0.15s ease;
+$transition-base: 0.2s ease;
+$transition-slow: 0.3s ease;

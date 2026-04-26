@@ -29,3 +29,19 @@ Thumbs.db
 
 # Claude
 .claude/settings.local.json
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Frontend build
+web/dist/
+web/test-results/
+web/playwright-report/
+web/.vite/
+web/package-lock.json
+
+# Logs
+*.log

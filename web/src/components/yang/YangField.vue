@@ -1,0 +1,65 @@
+<template>
+  <el-form-item
+    :label="label"
+    :prop="node.name"
+    :error="errorMessage"
+  >
+    <YangSwitch
+      v-if="node.type === 'boolean'"
+      v-model="fieldValue"
+      :disabled="!node.config"
+    />
+
+    <YangSelect
+      v-else-if="node.type === 'enum'"
+      v-model="fieldValue"
+      :node="node"
+      :disabled="!node.config"
+    />
+
+    <YangInput
+      v-else-if="['string', 'int', 'uint'].includes(node.type)"
+      v-model="fieldValue"
+      :node="node"
+      :disabled="!node.config"
+    />
+
+    <div v-else class="unsupported-type">
+      <el-tag type="info" size="small">不支持的类型: {{ node.type }}</el-tag>
+    </div>
+  </el-form-item>
+</template>
+
+<script setup lang="ts">
+import { computed } from 'vue'
+import YangSwitch from './YangSwitch.vue'
+import YangSelect from './YangSelect.vue'
+import YangInput from './YangInput.vue'
+import type { YangNode, FieldValue } from '../../types/yang-schema'
+
+interface Props {
+  node: YangNode
+  modelValue: FieldValue
+  errorMessage?: string
+}
+
+const props = defineProps<Props>()
+
+const emit = defineEmits<{
+  'update:modelValue': [value: FieldValue]
+}>()
+
+const label = computed(() => props.node.description || props.node.name)
+
+const fieldValue = computed({
+  get: () => props.modelValue,
+  set: (val) => emit('update:modelValue', val)
+})
+</script>
+
+<style scoped>
+.unsupported-type {
+  display: flex;
+  align-items: center;
+}
+</style>

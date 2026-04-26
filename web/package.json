@@ -5,16 +5,31 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest run --coverage",
+    "e2e": "playwright test",
+    "e2e:ui": "playwright test --ui",
+    "e2e:headed": "playwright test --headed",
+    "e2e:report": "playwright show-report"
   },
   "dependencies": {
-    "vue": "^3.4.0",
+    "axios": "^1.6.0",
     "element-plus": "^2.5.0",
-    "axios": "^1.6.0"
+    "vue": "^3.4.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.59.1",
     "@vitejs/plugin-vue": "^5.0.0",
+    "@vitest/ui": "^4.1.5",
+    "@vue/test-utils": "^2.4.8",
+    "@vue/tsconfig": "^0.9.1",
+    "happy-dom": "^20.9.0",
+    "sass": "^1.99.0",
     "typescript": "^5.3.0",
-    "vite": "^5.0.0"
+    "vite": "^5.0.0",
+    "vitest": "^4.1.5"
   }
 }
