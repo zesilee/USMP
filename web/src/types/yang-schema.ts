@@ -88,7 +88,7 @@ export const VLAN_SCHEMA: YangNode = {
   path: '/vlans',
   name: 'vlans',
   type: 'container',
-  description: 'VLAN 配置容器',
+  description: 'VLAN 配置管理',
   config: true,
   children: [
     {

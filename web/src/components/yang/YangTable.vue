@@ -9,7 +9,7 @@
         @click="handleAdd"
       >
         <el-icon><Plus /></el-icon>
-        新建 VLAN
+        {{ addButtonText }}
       </el-button>
     </div>
 
@@ -113,6 +113,13 @@ const tableData = computed(() => props.modelValue || [])
 const title = computed(() =>
   props.node.description || props.node.name
 )
+
+const addButtonText = computed(() => {
+  const name = props.node.name || ''
+  if (name.includes('vlan')) return '新建 VLAN'
+  if (name.includes('interface')) return '新建接口'
+  return '新建'
+})
 
 // 对于 VLAN schema，list node 是 /vlans/vlan，它的子节点就是字段
 // 对于其他嵌套结构，需要适配

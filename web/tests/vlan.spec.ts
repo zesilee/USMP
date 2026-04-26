@@ -3,8 +3,10 @@ import { test, expect } from '@playwright/test'
 test.describe('VLAN 管理 - 端到端测试', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/')
-    // 等待页面加载并点击设备节点
-    await page.waitForTimeout(2000)
+    await page.waitForTimeout(1000)
+    // 点击 VLANs 节点
+    await page.getByText('VLANs').first().click()
+    await page.waitForTimeout(1000)
   })
 
   test('页面加载 - 应显示 VLAN 管理标题', async ({ page }) => {
