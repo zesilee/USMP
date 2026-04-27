@@ -4,14 +4,14 @@
 
 ## 📖 项目简介
 
-USMP 是一个基于 **Actor 模型** + **YANG 模型驱动** 的网络交换机配置管理平台，实现了设备级和配置对象级的故障隔离，完全运行在内存中，**无需任何数据库**。
+USMP 是一个基于 **yang-controller-runtime**（Kubernetes controller-runtime 风格架构）+ **YANG 模型驱动** 的网络交换机配置管理平台。采用声明式配置管理，框架处理所有 boilerplate，开发者仅需编写 Reconciler 业务逻辑。
 
 ### 核心设计理念
 
 | 设计原则 | 说明 |
 |---------|------|
 | **无数据库** | 仅 JSON 存储设备元信息，运行配置全靠 NETCONF 实时拉取 + TTL+LRU 内存缓存 |
-| **双层 Actor 架构** | ManagerActor → DeviceActor → YANG Object Actor，故障隔离，高并发 |
+| **Controller 架构** | Manager → Controller → Reconciler → Source，每 YANG 模块一个 Controller |
 | **模型驱动全流程** | YANG → ygot 自动生成 Go 结构体 → 后端暴露模型结构 → 前端自动生成动态表单 |
 | **缓存一致性** | 配置下发成功后主动失效对应缓存，下次读取自动拉取最新配置 |
 | **NETCONF 标准** | 遵循 RFC6241，支持 get-config/edit-config/commit，断线自动重连 |
@@ -26,27 +26,27 @@ USMP 是一个基于 **Actor 模型** + **YANG 模型驱动** 的网络交换机
 ┌─────────────────────────────────────────────────────────────┐
 │                     Gin · 后端 API 层                         │
 └─────────────────────────────────────────────────────────────┘
-                              ↓ 消息路由
+                              ↓ 调用
 ┌─────────────────────────────────────────────────────────────┐
-│               ManagerActor · 单例设备管理                     │
-│  • 注册/查找/销毁 DeviceActor                                  │
-│  • 从本地 JSON 加载设备元信息                                  │
+│           Manager · 全局生命周期管理                           │
+│  • Controller 注册、Schema 加载、Client 连接池管理              │
 └─────────────────────────────────────────────────────────────┘
            ┌───────────────┬───────────────┬───────────────┐
            ↓               ↓               ↓               ↓
 ┌──────────────────┐┌──────────────────┐┌──────────────────┐
-│  DeviceActor 1   ││  DeviceActor 2   ││  DeviceActor N   │  ← 每设备一个
-│  (192.168.1.1)   ││  (192.168.1.2)   ││  (192.168.1.N)   │
+│  VLAN Controller ││  IF Controller   ││  Sys Controller  │  ← 每YANG模块一个
+│  Reconciler      ││  Reconciler      ││  Reconciler      │
+│  Event Queue     ││  Event Queue     ││  Event Queue     │
 └──────────────────┘└──────────────────┘└──────────────────┘
            │
            ├───────────────┬───────────────┬───────────────┐
            ↓               ↓               ↓               ↓
 ┌────────────────────┐┌────────────────────┐┌────────────────────┐
-│ YANG Object Actor  ││ YANG Object Actor  ││ YANG Object Actor  │  ← 每YANG对象一个
-│ /interfaces        ││ /vlans             ││ /system            │
+│  Periodic Source   ││  File Watcher      ││  gNMI Subscribe     │  ← 事件源
+│  周期性轮询        ││  文件变更监听      ││  订阅推送           │
 └────────────────────┘└────────────────────┘└────────────────────┘
            │
-           ↓ 缓存未命中 → NETCONF 拉取
+           ↓ Reconcile 请求
 ┌─────────────────────────────────────────────────────────────┐
 │              TTL+LRU · 内存缓存 (无数据库)                      │
 │              Key = 设备IP + YANG路径 · TTL自动过期             │
@@ -69,7 +69,7 @@ USMP 是一个基于 **Actor 模型** + **YANG 模型驱动** 的网络交换机
 | 层级 | 技术 | 用途 |
 |------|------|------|
 | 后端语言 | Go 1.21+ | 静态类型，高并发 |
-| Actor 模型 | [protoactor-go](https://github.com/asynkron/protoactor-go) | 双层 Actor 架构，故障隔离 |
+| Controller 架构 | yang-controller-runtime | 声明式配置管理，类似 K8s controller-runtime |
 | Web 框架 | [Gin](https://github.com/gin-gonic/gin) | REST API |
 | YANG 代码生成 | [ygot](https://github.com/openconfig/ygot) | YANG → Go 强类型结构体 |
 | NETCONF 客户端 | [scrapligo](https://github.com/scrapli/scrapligo) | NETCONF 协议对接 |
@@ -82,12 +82,12 @@ USMP 是一个基于 **Actor 模型** + **YANG 模型驱动** 的网络交换机
 
 ```bash
 git clone https://github.com/leezesi/usmp.git
-cd usmp
+cd usmp/backend
 go mod tidy
 go build -o usmp .
 ```
 
-### 运行
+### 运行后端
 
 ```bash
 ./usmp
@@ -98,7 +98,7 @@ go build -o usmp .
 ### 启动前端（开发模式）
 
 ```bash
-cd web
+cd frontend
 npm install
 npm run dev
 ```
@@ -107,54 +107,34 @@ npm run dev
 
 ```
 usmp/
-├── main.go                          # 程序入口
-├── go.mod/go.sum                    # Go 模块定义
-├── internal/
-│   ├── actor/
-│   │   ├── manager.go             # ManagerActor 顶层设备管理
-│   │   ├── manager_test.go
-│   │   ├── device.go              # DeviceActor 单设备实例
-│   │   ├── device_test.go
-│   │   ├── yang_object.go         # YANG Object Actor 基类
-│   │   ├── yang_object_test.go
-│   │   ├── messages.go            # 所有 Actor 消息定义
-│   │   └── types.go               # 公共类型导出
-│   ├── cache/
-│   │   ├── ttl_lru.go             # TTL+LRU 内存缓存实现
-│   │   └── ttl_lru_test.go
-│   ├── netconf/
-│   │   ├── client.go              # NETCONF 客户端
-│   │   ├── session.go             # 会话管理 + 自动重连
-│   │   ├── xml_convert.go         # ygot ↔ XML 双向转换
-│   │   └── messages.go           # NETCONF XML 消息模板
-│   ├── types/
-│   │   └── types.go               # 公共类型定义（解决导入循环）
-│   ├── yang/
-│   │   ├── generate.go            # ygot 代码生成脚本
-│   │   ├── models/                # YANG 源文件
-│   │   └── generated/             # 自动生成的 Go 结构体
-│   ├── api/
-│   │   ├── server.go              # Gin 服务器初始化
-│   │   ├── device_handler.go      # 设备相关 API
-│   │   ├── config_handler.go      # 配置读写 API
-│   │   ├── yang_handler.go        # YANG 模型 API
-│   │   └── response.go            # 统一 API 响应格式
-│   └── config/
-│       └── devices.json           # 设备元信息存储（初始为空）
-├── web/                            # Vue3 前端项目
+├── backend/                       # Go 后端代码
+│   ├── main.go                    # 程序入口
+│   ├── go.mod/go.sum              # Go 模块定义
+│   ├── cmd/
+│   │   └── test-server/           # E2E 测试服务器
+│   ├── internal/
+│   │   ├── api/                   # REST API 层
+│   │   ├── cache/                 # TTL+LRU 内存缓存
+│   │   ├── controller/vlan/       # VLAN Controller + Reconciler
+│   │   ├── types/                 # 公共类型定义
+│   │   ├── yang/                  # YANG 代码生成工具
+│   │   └── generated/openconfig/  # ygot 自动生成的 Go 结构体
+│   ├── pkg/
+│   │   └── yang-runtime/          # 核心框架（Manager/Controller/Source/Client）
+│   └── simulator/                 # NETCONF 模拟网元
+│       ├── netconfsim/            # 完整 SSH 模拟器
+│       └── netsim/                # 简单 REST 模拟器
+├── frontend/                      # Vue3 前端项目
 │   ├── package.json
 │   ├── vite.config.ts
+│   ├── playwright.config.ts
 │   ├── index.html
-│   └── src/
-│       ├── main.ts
-│       ├── App.vue
-│       ├── api/index.ts           # API 请求封装
-│       ├── types/yang.ts          # 前端类型定义
-│       └── components/
-│           ├── DeviceTree.vue     # 设备+YANG 树形菜单
-│           ├── DynamicForm.vue    # 动态表单组件
-│           └── YangNodeRenderer.vue # YANG 节点渲染器
-└── README.md
+│   ├── src/                       # 源代码
+│   └── tests/                     # E2E 测试
+├── scripts/                       # 公共脚本
+│   └── e2e-test.sh               # E2E 测试启动脚本
+├── spec/                          # YANG 规范文档
+└── yang-models/                   # YANG 模型文件
 ```
 
 ## 🌐 API 端点
@@ -164,8 +144,6 @@ usmp/
 | 方法 | 路径 | 功能 |
 |------|------|------|
 | GET | `/api/v1/devices` | 列出所有设备 |
-| POST | `/api/v1/devices` | 添加设备 |
-| DELETE | `/api/v1/devices/:ip` | 删除设备 |
 | GET | `/api/v1/devices/:ip/status` | 获取设备状态 |
 
 ### 配置读写
@@ -183,36 +161,62 @@ usmp/
 
 ## ✅ 测试
 
-运行所有单元测试：
+### 后端单元测试
 
 ```bash
+cd backend
 go test ./... -v
 ```
 
-当前测试状态：
+### 后端集成测试（包含 NETCONF 模拟器）
 
+```bash
+cd backend
+go test ./... -v                    # 包含集成测试
+go test ./... -v -short            # 跳过集成测试，只跑单元测试
 ```
-ok  	github.com/leezesi/usmp/internal/cache	0.767s
-ok  	github.com/leezesi/usmp/internal/actor	0.719s
+
+### 前端单元测试
+
+```bash
+cd frontend
+npm run test
+```
+
+### E2E 端到端测试
+
+```bash
+# 方式 1：使用自动化脚本（推荐）
+./scripts/e2e-test.sh
+
+# 方式 2：手动启动后端 + 前端测试
+cd backend && go run ./cmd/test-server/main.go &
+cd frontend && npm run e2e
 ```
 
 ## 🎯 核心特性
 
-### 1. 故障隔离
-- 一台设备故障不影响其他设备
-- 一个 YANG 配置对象故障不影响其他对象
-- Actor 模型天然隔离，避免跨设备并发竞态
+### 1. yang-controller-runtime 架构
 
-### 2. 无数据库
+- **声明式配置**：只需要定义 desired state，框架自动对齐 actual state
+- **自动重试**：配置失败自动指数退避重试
+- **事件驱动**：支持 Periodic/File/gNMI 多种事件源
+- **并发安全**：Controller 队列机制，避免竞态
+
+### 2. 故障隔离
+
+- 一台设备故障不影响其他设备
+- Client 连接池自动管理，断线自动重连
+- 配置下发失败不影响缓存，保留原配置
+
+### 3. 无数据库
+
 - 无需安装运行 MySQL/Redis 等任何数据库
 - 设备元信息存在本地 JSON 文件
 - 运行配置全在内存，重启自动从设备重新拉取
 
-### 3. 自动重连
-- NETCONF 连接断开后自动指数退避重连
-- 不丢失配置请求，排队等待重连完成
-
 ### 4. 动态表单
+
 - 前端完全根据 YANG 模型自动生成表单控件
   - `boolean` → Switch 开关
   - `enumeration` → Select 下拉框
@@ -223,13 +227,14 @@ ok  	github.com/leezesi/usmp/internal/actor	0.719s
 
 ## 📝 开发流程
 
-本项目严格遵循 TDD 测试驱动开发：
+本项目严格遵循 TDD 测试驱动开发 + 小步迭代：
 
 1. `Plan` → 需求拆分，每个迭代一个原子功能
-2. `Test` → 先写单元测试
+2. `Test` → 先写单元测试（正常/异常/并发场景）
 3. `Code` → 实现功能（单次 ≤ 500 行）
 4. `Review` → 自动代码评审
-5. `Commit` → 标准 What/Why/Commit 提交信息
+5. `Integration Test` → 添加基于 NETCONF 模拟网元的集成测试
+6. `Commit` → 标准 What/Why/How 三段式提交
 
 ## 📄 License
 
@@ -237,7 +242,6 @@ MIT License
 
 ## 🙏 致谢
 
-- [protoactor-go](https://github.com/asynkron/protoactor-go) - Actor 模型实现
 - [openconfig](https://github.com/openconfig) - YANG 模型标准
 - [ygot](https://github.com/openconfig/ygot) - YANG Go 代码生成
 - [scrapligo](https://github.com/scrapli/scrapligo) - NETCONF 客户端

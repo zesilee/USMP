@@ -19,6 +19,7 @@ fi
 
 # 启动后端测试服务器
 echo "启动后端测试服务器..."
+cd backend
 go run ./cmd/test-server/main.go > /tmp/e2e-backend.log 2>&1 &
 BACKEND_PID=$!
 
@@ -40,7 +41,7 @@ echo ""
 echo "启动前端并运行 E2E 测试..."
 echo "="
 
-cd web
+cd ../frontend
 
 # 运行 Playwright 测试
 npx playwright test "$@"
