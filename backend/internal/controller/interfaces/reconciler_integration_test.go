@@ -70,6 +70,11 @@ func TestReconciler_Integration_CreateInterface(t *testing.T) {
 	// 6. Verify result - reconciliation should succeed without requeue
 	assert.NoError(t, result.Error)
 	assert.False(t, result.Requeue)
+
+	// 7. Verify config was actually applied - read back from simulator
+	sim.AssertInterfaceExists(t, "GigabitEthernet0/0")
+	sim.AssertInterfaceEnabled(t, "GigabitEthernet0/0", true)
+	sim.AssertInterfaceMtu(t, "GigabitEthernet0/0", 1500)
 }
 
 // TestReconciler_Integration_ModifyInterface tests modifying an existing interface configuration
@@ -127,6 +132,10 @@ func TestReconciler_Integration_ModifyInterface(t *testing.T) {
 	// 6. Verify result
 	assert.NoError(t, result.Error)
 	assert.False(t, result.Requeue)
+
+	// 7. Verify config was updated in simulator
+	sim.AssertInterfaceExists(t, "GigabitEthernet0/0")
+	sim.AssertInterfaceMtu(t, "GigabitEthernet0/0", 9000)
 }
 
 // TestReconciler_Integration_DisableInterface tests disabling an interface
@@ -182,6 +191,10 @@ func TestReconciler_Integration_DisableInterface(t *testing.T) {
 	// 6. Verify result
 	assert.NoError(t, result.Error)
 	assert.False(t, result.Requeue)
+
+	// 7. Verify interface was disabled in simulator
+	sim.AssertInterfaceExists(t, "GigabitEthernet0/1")
+	sim.AssertInterfaceEnabled(t, "GigabitEthernet0/1", false)
 }
 
 // TestReconciler_Integration_CommitError tests handling of commit failures

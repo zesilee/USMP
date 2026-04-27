@@ -5,8 +5,10 @@ import (
 	"fmt"
 	"net"
 	"sync"
+	"testing"
 
 	"github.com/leezesi/usmp/backend/internal/generated/openconfig"
+	"github.com/stretchr/testify/assert"
 	"golang.org/x/crypto/ssh"
 )
 
@@ -166,5 +168,64 @@ func (s *Simulator) acceptLoop() {
 			s.server.handleConnection(conn)
 			s.wg.Done()
 		}()
+	}
+}
+
+// GetDatastore returns the underlying datastore for direct assertions.
+func (s *Simulator) GetDatastore() *Datastore {
+	return s.datastore
+}
+
+// AssertInterfaceExists verifies that the interface with the given name exists in the running config.
+func (s *Simulator) AssertInterfaceExists(t *testing.T, name string) {
+	interfaces, err := s.datastore.ExtractInterfaces()
+	assert.NoError(t, err, "failed to extract interfaces from running config")
+	assert.NotNil(t, interfaces, "interfaces should not be nil")
+
+	_, exists := interfaces.Interface[name]
+	assert.True(t, exists, "interface %q should exist in running config, but got: %v", name, interfaces.Interface)
+}
+
+// AssertInterfaceEnabled verifies that the interface exists and has the expected enabled state.
+func (s *Simulator) AssertInterfaceEnabled(t *testing.T, name string, expected bool) {
+	interfaces, err := s.datastore.ExtractInterfaces()
+	assert.NoError(t, err, "failed to extract interfaces from running config")
+
+	iface, exists := interfaces.Interface[name]
+	assert.True(t, exists, "interface %q should exist", name)
+	if !exists {
+		return
+	}
+
+	assert.NotNil(t, iface.Config, "interface %q should have Config", name)
+	if iface.Config == nil {
+		return
+	}
+
+	assert.NotNil(t, iface.Config.Enabled, "interface %q should have Enabled field set", name)
+	if iface.Config.Enabled != nil {
+		assert.Equal(t, expected, *iface.Config.Enabled, "interface %q enabled state should match", name)
+	}
+}
+
+// AssertInterfaceMtu verifies that the interface exists and has the expected MTU.
+func (s *Simulator) AssertInterfaceMtu(t *testing.T, name string, expectedMtu uint16) {
+	interfaces, err := s.datastore.ExtractInterfaces()
+	assert.NoError(t, err, "failed to extract interfaces from running config")
+
+	iface, exists := interfaces.Interface[name]
+	assert.True(t, exists, "interface %q should exist", name)
+	if !exists {
+		return
+	}
+
+	assert.NotNil(t, iface.Config, "interface %q should have Config", name)
+	if iface.Config == nil {
+		return
+	}
+
+	assert.NotNil(t, iface.Config.Mtu, "interface %q should have Mtu field set", name)
+	if iface.Config.Mtu != nil {
+		assert.Equal(t, expectedMtu, *iface.Config.Mtu, "interface %q MTU should match", name)
 	}
 }

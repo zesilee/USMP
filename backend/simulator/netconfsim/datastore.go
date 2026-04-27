@@ -256,6 +256,137 @@ func (d *Datastore) ExtractVLANs() (*openconfig.OpenconfigVlan_Vlans, error) {
 	return nil, fmt.Errorf("failed to extract VLANs from XML after trying all structures")
 }
 
+// ExtractInterfaces extracts Interfaces from running configuration for testing assertions.
+func (d *Datastore) ExtractInterfaces() (*openconfig.OpenconfigInterfaces_Interfaces, error) {
+	d.mu.RLock()
+	defer d.mu.RUnlock()
+
+	// Convert kebab-case XML tags back to camelCase for matching Go struct fields
+	xmlStr := string(d.running)
+	xmlStr = fixXMLTagNames(xmlStr)
+
+	interfaces := &openconfig.OpenconfigInterfaces_Interfaces{}
+	interfaces.Interface = make(map[string]*openconfig.OpenconfigInterfaces_Interfaces_Interface)
+
+	// Use xml decoder to manually parse Interface entries (ygot structs don't have xml tags)
+	decoder := xml.NewDecoder(bytes.NewReader([]byte(xmlStr)))
+	for {
+		token, err := decoder.Token()
+		if err != nil {
+			break
+		}
+
+		start, ok := token.(xml.StartElement)
+		if !ok {
+			continue
+		}
+
+		// Look for <Interface> or <OpenconfigInterfaces_Interfaces_Interface>
+		if start.Name.Local == "Interface" || start.Name.Local == "OpenconfigInterfaces_Interfaces_Interface" {
+			iface := &openconfig.OpenconfigInterfaces_Interfaces_Interface{}
+			iface.Config = &openconfig.OpenconfigInterfaces_Interfaces_Interface_Config{}
+
+			for {
+				token, err := decoder.Token()
+				if err != nil {
+					break
+				}
+
+				// Check for closing tag
+				if _, ok := token.(xml.EndElement); ok {
+					break
+				}
+
+				innerStart, ok := token.(xml.StartElement)
+				if !ok {
+					continue
+				}
+
+				switch innerStart.Name.Local {
+				case "Name":
+					var name string
+					if err := decoder.DecodeElement(&name, &innerStart); err == nil {
+						iface.Name = &name
+						iface.Config.Name = &name
+					}
+				case "Type":
+					// Type parsing skipped for assertions - not needed for basic existence checks
+					_ = decoder.Skip()
+				case "Enabled":
+					var enabled bool
+					if err := decoder.DecodeElement(&enabled, &innerStart); err == nil {
+						iface.Config.Enabled = &enabled
+					}
+				case "Mtu":
+					var mtu uint16
+					if err := decoder.DecodeElement(&mtu, &innerStart); err == nil {
+						iface.Config.Mtu = &mtu
+					}
+				case "Description":
+					var desc string
+					if err := decoder.DecodeElement(&desc, &innerStart); err == nil {
+						iface.Config.Description = &desc
+					}
+				case "config":
+					// Parse inside config manually
+					for {
+						token, err := decoder.Token()
+						if err != nil {
+							break
+						}
+						if _, ok := token.(xml.EndElement); ok {
+							break
+						}
+						configStart, ok := token.(xml.StartElement)
+						if !ok {
+							continue
+						}
+						switch configStart.Name.Local {
+						case "Name":
+							var name string
+							if err := decoder.DecodeElement(&name, &configStart); err == nil {
+								iface.Config.Name = &name
+							}
+						case "Type":
+							// Type parsing skipped
+							_ = decoder.Skip()
+						case "Enabled":
+							var enabled bool
+							if err := decoder.DecodeElement(&enabled, &configStart); err == nil {
+								iface.Config.Enabled = &enabled
+							}
+						case "Mtu":
+							var mtu uint16
+							if err := decoder.DecodeElement(&mtu, &configStart); err == nil {
+								iface.Config.Mtu = &mtu
+							}
+						case "Description":
+							var desc string
+							if err := decoder.DecodeElement(&desc, &configStart); err == nil {
+								iface.Config.Description = &desc
+							}
+						default:
+							_ = decoder.Skip()
+						}
+					}
+				default:
+					_ = decoder.Skip()
+				}
+			}
+
+			// Add to map if we found a name
+			if iface.Name != nil {
+				interfaces.Interface[*iface.Name] = iface
+			} else if iface.Config != nil && iface.Config.Name != nil {
+				interfaces.Interface[*iface.Config.Name] = iface
+			}
+		}
+	}
+
+	// Always return interfaces struct
+	return interfaces, nil
+}
+
 // fixXMLTagNames converts kebab-case tag names back to camel-case that Go xml.Unmarshal expects
 // based on the struct field names from ygot generated code.
 // - vlan-id (kebab from client) → VlanId (struct field name)
@@ -264,6 +395,12 @@ func (d *Datastore) ExtractVLANs() (*openconfig.OpenconfigVlan_Vlans, error) {
 // - status → Status (struct field name)
 // - vlans → vlans (struct field VLans has XML tag xml:"vlans", so keep it as vlans)
 // - config → config (struct field Config has XML tag xml:"config", so keep it as config)
+// - mtu → Mtu (struct field name for interfaces)
+// - enabled → Enabled (struct field name for interfaces)
+// - description → Description (struct field name for interfaces)
+// - type → Type (struct field name for interfaces)
+// - interface → Interface (struct field name for interfaces)
+// - interfaces → Interfaces (struct field name)
 func fixXMLTagNames(xml string) string {
 	repl := strings.NewReplacer(
 		"<vlan-id>", "<VlanId>",
@@ -274,6 +411,18 @@ func fixXMLTagNames(xml string) string {
 		"</name>", "</Name>",
 		"<status>", "<Status>",
 		"</status>", "</Status>",
+		"<mtu>", "<Mtu>",
+		"</mtu>", "</Mtu>",
+		"<enabled>", "<Enabled>",
+		"</enabled>", "</Enabled>",
+		"<description>", "<Description>",
+		"</description>", "</Description>",
+		"<type>", "<Type>",
+		"</type>", "</Type>",
+		"<interface>", "<Interface>",
+		"</interface>", "</Interface>",
+		"<interfaces>", "<Interfaces>",
+		"</interfaces>", "</Interfaces>",
 	)
 	return repl.Replace(xml)
 }
