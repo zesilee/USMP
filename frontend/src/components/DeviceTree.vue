@@ -79,7 +79,7 @@ const refreshDevices = async () => {
   try {
     const res = await listDevices()
     if (res.data.success) {
-      devices.value = res.data.data || []
+      devices.value = res.data.data.devices || []
     }
   } catch (err) {
     console.error('Failed to refresh devices', err)
