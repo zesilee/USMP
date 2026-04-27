@@ -177,12 +177,12 @@ export const VLAN_SCHEMA: YangNode = {
   ]
 }
 
-/** OpenConfig Interfaces 模型 (简化版) */
+/** OpenConfig Interfaces 模型 */
 export const INTERFACES_SCHEMA: YangNode = {
   path: '/interfaces',
   name: 'interfaces',
   type: 'container',
-  description: '接口配置容器',
+  description: '接口配置管理',
   config: true,
   children: [
     {
@@ -202,19 +202,105 @@ export const INTERFACES_SCHEMA: YangNode = {
           mandatory: true
         },
         {
-          path: '/interfaces/interface/description',
-          name: 'description',
-          type: 'string',
-          description: '接口描述',
-          config: true
+          path: '/interfaces/interface/config',
+          name: 'config',
+          type: 'container',
+          description: '接口配置',
+          config: true,
+          children: [
+            {
+              path: '/interfaces/interface/config/name',
+              name: 'name',
+              type: 'string',
+              description: '接口名称',
+              config: true,
+              mandatory: true
+            },
+            {
+              path: '/interfaces/interface/config/type',
+              name: 'type',
+              type: 'enum',
+              description: '接口类型',
+              config: true,
+              enumOptions: [
+                { name: '物理接口', value: 'PHYSICAL', description: '物理接口' },
+                { name: '逻辑接口', value: 'LOGICAL', description: '逻辑接口' },
+                { name: '聚合接口', value: 'LAG', description: '链路聚合接口' },
+                { name: 'Loopback', value: 'LOOPBACK', description: '环回接口' },
+                { name: 'VLAN', value: 'VLAN', description: 'VLAN 子接口' }
+              ],
+              default: 'PHYSICAL'
+            },
+            {
+              path: '/interfaces/interface/config/mtu',
+              name: 'mtu',
+              type: 'uint',
+              description: 'MTU (最大传输单元)',
+              config: true,
+              range: { min: 64, max: 9216 },
+              default: 1500
+            },
+            {
+              path: '/interfaces/interface/config/enabled',
+              name: 'enabled',
+              type: 'boolean',
+              description: '是否启用',
+              config: true,
+              default: true
+            },
+            {
+              path: '/interfaces/interface/config/description',
+              name: 'description',
+              type: 'string',
+              description: '接口描述',
+              config: true,
+              length: { min: 0, max: 255 }
+            }
+          ]
         },
         {
-          path: '/interfaces/interface/enabled',
-          name: 'enabled',
-          type: 'boolean',
-          description: '是否启用',
-          config: true,
-          default: true
+          path: '/interfaces/interface/state',
+          name: 'state',
+          type: 'container',
+          description: '接口运行状态',
+          config: false,
+          children: [
+            {
+              path: '/interfaces/interface/state/ifindex',
+              name: 'ifindex',
+              type: 'uint',
+              description: '接口索引',
+              config: false
+            },
+            {
+              path: '/interfaces/interface/state/admin-status',
+              name: 'admin-status',
+              type: 'enum',
+              description: '管理状态',
+              config: false,
+              enumOptions: [
+                { name: 'UP', value: 'UP', description: '启用' },
+                { name: 'DOWN', value: 'DOWN', description: '禁用' },
+                { name: 'TESTING', value: 'TESTING', description: '测试中' }
+              ]
+            },
+            {
+              path: '/interfaces/interface/state/oper-status',
+              name: 'oper-status',
+              type: 'enum',
+              description: '运行状态',
+              config: false,
+              enumOptions: [
+                { name: 'UP', value: 'UP', description: '正常运行' },
+                { name: 'DOWN', value: 'DOWN', description: '关闭' },
+                { name: 'TESTING', value: 'TESTING', description: '测试中' },
+                { name: 'UNKNOWN', value: 'UNKNOWN', description: '未知' },
+                { name: 'DORMANT', value: 'DORMANT', description: '休眠' },
+                { name: 'NOT_PRESENT', value: 'NOT_PRESENT', description: '不存在' },
+                { name: 'LOWER_LAYER_DOWN', value: 'LOWER_LAYER_DOWN', description: '下层链路断开' }
+              ]
+            }
+          ]
         }
       ]
     }

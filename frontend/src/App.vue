@@ -37,6 +37,10 @@
             v-if="currentYangPath === '/vlans'"
             :device-ip="currentDevice.ip"
           />
+          <InterfaceManager
+            v-else-if="currentYangPath === '/interfaces'"
+            :device-ip="currentDevice.ip"
+          />
         </div>
 
         <!-- Empty State -->
@@ -55,6 +59,7 @@
 import { ref } from 'vue'
 import DeviceTree from './components/DeviceTree.vue'
 import VlanManager from './components/vlan/VlanManager.vue'
+import InterfaceManager from './components/interfaces/InterfaceManager.vue'
 import type { DeviceInfo } from './types/yang'
 
 const devices = ref<DeviceInfo[]>([
