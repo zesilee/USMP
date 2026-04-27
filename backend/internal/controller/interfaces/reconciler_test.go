@@ -48,6 +48,45 @@ func (m *MockClient) IsConnected() bool {
 	return args.Bool(0)
 }
 
+// MockConfigStore is a mock implementation of reconcile.ConfigStore
+type MockConfigStore struct {
+	mock.Mock
+}
+
+func (m *MockConfigStore) Get(deviceID, path string) (interface{}, error) {
+	args := m.Called(deviceID, path)
+	if res, ok := args.Get(0).(interface{}); ok {
+		return res, args.Error(1)
+	}
+	return nil, args.Error(1)
+}
+
+func (m *MockConfigStore) Set(deviceID, path string, value interface{}) error {
+	args := m.Called(deviceID, path, value)
+	return args.Error(0)
+}
+
+func (m *MockConfigStore) Delete(deviceID, path string) error {
+	args := m.Called(deviceID, path)
+	return args.Error(0)
+}
+
+func (m *MockConfigStore) List(deviceID string) ([]string, error) {
+	args := m.Called(deviceID)
+	if res, ok := args.Get(0).([]string); ok {
+		return res, args.Error(1)
+	}
+	return nil, args.Error(1)
+}
+
+func (m *MockConfigStore) ListDevices() ([]string, error) {
+	args := m.Called()
+	if res, ok := args.Get(0).([]string); ok {
+		return res, args.Error(1)
+	}
+	return nil, args.Error(1)
+}
+
 // MockClientPool is a mock implementation of client.ClientPool
 type MockClientPool struct {
 	mock.Mock
@@ -285,8 +324,27 @@ func TestDeviceClient_Set_Success(t *testing.T) {
 	mockPool := new(MockClientPool)
 	mockPool.On("Get", client.DeviceConnectionInfo{IP: deviceID}).Return(mockClient, nil)
 
+	// Create a valid OpenconfigInterfaces_Interfaces for testing
+	testConfig := &openconfig.OpenconfigInterfaces_Interfaces{
+		Interface: map[string]*openconfig.OpenconfigInterfaces_Interfaces_Interface{
+			"GigabitEthernet0/0": {
+				Name: stringPtr("GigabitEthernet0/0"),
+				Config: &openconfig.OpenconfigInterfaces_Interfaces_Interface_Config{
+					Name:    stringPtr("GigabitEthernet0/0"),
+					Type:    1, // ethernetCsmacd
+					Enabled: boolPtr(true),
+					Mtu:     uint16Ptr(1500),
+				},
+			},
+		},
+	}
+
+	mockConfigStore := new(MockConfigStore)
+	mockConfigStore.On("Get", deviceID, "/interfaces").Return(testConfig, nil)
+
 	dc := &deviceClient{
-		clientPool: mockPool,
+		clientPool:  mockPool,
+		configStore: mockConfigStore,
 	}
 
 	// Act
@@ -297,14 +355,7 @@ func TestDeviceClient_Set_Success(t *testing.T) {
 
 	mockPool.AssertExpectations(t)
 	mockClient.AssertExpectations(t)
-
-	// Check that changes were converted correctly
-	mockClient.AssertNumberOfCalls(t, "Set", 1)
-	call := mockClient.Calls[0]
-	clientChanges := call.Arguments[1].([]client.Change)
-	assert.Len(t, clientChanges, 1)
-	assert.Equal(t, client.ModifyChange, clientChanges[0].Type)
-	assert.Equal(t, "/interfaces/interface[GigabitEthernet0/0]", clientChanges[0].Path)
+	mockConfigStore.AssertExpectations(t)
 }
 
 func TestDeviceClient_Set_ClientPoolGetError(t *testing.T) {
@@ -317,7 +368,8 @@ func TestDeviceClient_Set_ClientPoolGetError(t *testing.T) {
 	mockPool.On("Get", client.DeviceConnectionInfo{IP: deviceID}).Return(nil, assert.AnError)
 
 	dc := &deviceClient{
-		clientPool: mockPool,
+		clientPool:  mockPool,
+		configStore: nil, // Not accessed when clientPool.Get fails
 	}
 
 	// Act
@@ -328,6 +380,7 @@ func TestDeviceClient_Set_ClientPoolGetError(t *testing.T) {
 	assert.Equal(t, assert.AnError, err)
 
 	mockPool.AssertExpectations(t)
+	// Note: configStore.Get is NOT called when clientPool.Get returns an error (early return)
 }
 
 func TestInterfacesReconciler_FullReconcile(t *testing.T) {

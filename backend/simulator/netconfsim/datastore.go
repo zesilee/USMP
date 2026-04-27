@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/xml"
 	"fmt"
+	"regexp"
 	"strings"
 	"sync"
 
@@ -97,15 +98,15 @@ func (d *Datastore) DiscardCandidate() {
 }
 
 // ExtractVLANs extracts VLANs from running configuration for testing assertions.
+// Supports both legacy format and standard OpenConfig XML with namespaces.
 func (d *Datastore) ExtractVLANs() (*openconfig.OpenconfigVlan_Vlans, error) {
 	d.mu.RLock()
 	defer d.mu.RUnlock()
 
-	// Client converts names from camelCase to kebab-case when sending:
-	// VlanId -> vlan-id, Vlan -> vlan, Name -> name, Config -> config etc...
-	// We need to convert back to camelCase for xml.Unmarshal to match Go struct fields
+	// Normalize XML: remove namespaces, convert tag names to match Go struct fields
+	// Supports both legacy format and standard OpenConfig XML format
 	xmlStr := string(d.running)
-	xmlStr = fixXMLTagNames(xmlStr)
+	xmlStr = normalizeOpenConfigXML(xmlStr)
 
 	// Since the OpenconfigVlan_Vlans struct contains a map field and xml.Unmarshal doesn't support maps,
 	// we need to manually parse the VLAN entries from XML and construct the struct ourselves.
@@ -257,13 +258,15 @@ func (d *Datastore) ExtractVLANs() (*openconfig.OpenconfigVlan_Vlans, error) {
 }
 
 // ExtractInterfaces extracts Interfaces from running configuration for testing assertions.
+// Supports both legacy format and standard OpenConfig XML with namespaces.
 func (d *Datastore) ExtractInterfaces() (*openconfig.OpenconfigInterfaces_Interfaces, error) {
 	d.mu.RLock()
 	defer d.mu.RUnlock()
 
-	// Convert kebab-case XML tags back to camelCase for matching Go struct fields
+	// Normalize XML: remove namespaces, convert tag names to match Go struct fields
+	// Supports both legacy format and standard OpenConfig XML format
 	xmlStr := string(d.running)
-	xmlStr = fixXMLTagNames(xmlStr)
+	xmlStr = normalizeOpenConfigXML(xmlStr)
 
 	interfaces := &openconfig.OpenconfigInterfaces_Interfaces{}
 	interfaces.Interface = make(map[string]*openconfig.OpenconfigInterfaces_Interfaces_Interface)
@@ -387,44 +390,64 @@ func (d *Datastore) ExtractInterfaces() (*openconfig.OpenconfigInterfaces_Interf
 	return interfaces, nil
 }
 
-// fixXMLTagNames converts kebab-case tag names back to camel-case that Go xml.Unmarshal expects
-// based on the struct field names from ygot generated code.
-// - vlan-id (kebab from client) → VlanId (struct field name)
-// - vlan → Vlan (struct field name)
-// - name → Name (struct field name)
-// - status → Status (struct field name)
-// - vlans → vlans (struct field VLans has XML tag xml:"vlans", so keep it as vlans)
-// - config → config (struct field Config has XML tag xml:"config", so keep it as config)
-// - mtu → Mtu (struct field name for interfaces)
-// - enabled → Enabled (struct field name for interfaces)
-// - description → Description (struct field name for interfaces)
-// - type → Type (struct field name for interfaces)
-// - interface → Interface (struct field name for interfaces)
-// - interfaces → Interfaces (struct field name)
-func fixXMLTagNames(xml string) string {
+// cleanNamespaces removes XML namespace declarations and prefixes from tags.
+// Example: <if:interface xmlns:if="http://openconfig.net/yang/interfaces"> → <interface>
+func cleanNamespaces(xmlStr string) string {
+	// Remove xmlns attributes
+	re1 := regexp.MustCompile(`\s+xmlns(:[a-zA-Z0-9_-]+)?="[^"]*"`)
+	xmlStr = re1.ReplaceAllString(xmlStr, "")
+
+	// Remove tag prefixes (e.g., <if:interface> → <interface>)
+	re2 := regexp.MustCompile(`<(/?)([a-zA-Z0-9_-]+):([a-zA-Z0-9_-]+)`)
+	xmlStr = re2.ReplaceAllString(xmlStr, "<$1$3")
+
+	return xmlStr
+}
+
+// normalizeOpenConfigXML transforms standard OpenConfig XML into a format
+// that can be parsed by Go's xml.Unmarshal using ygot-generated structs.
+// Steps:
+//  1. Remove namespace declarations and prefixes
+//  2. Convert lowercase YANG tag names to PascalCase to match Go struct fields
+//  3. Convert kebab-case to PascalCase (e.g., vlan-id → VlanId)
+func normalizeOpenConfigXML(xmlStr string) string {
+	// Step 1: Clean namespaces
+	xmlStr = cleanNamespaces(xmlStr)
+
+	// Step 2: Convert tag names from YANG conventions to Go struct conventions
 	repl := strings.NewReplacer(
-		"<vlan-id>", "<VlanId>",
-		"</vlan-id>", "</VlanId>",
+		// VLAN related
+		"<vlans>", "<Vlans>",
+		"</vlans>", "</Vlans>",
 		"<vlan>", "<Vlan>",
 		"</vlan>", "</Vlan>",
+		"<vlan-id>", "<VlanId>",
+		"</vlan-id>", "</VlanId>",
 		"<name>", "<Name>",
 		"</name>", "</Name>",
 		"<status>", "<Status>",
 		"</status>", "</Status>",
-		"<mtu>", "<Mtu>",
-		"</mtu>", "</Mtu>",
-		"<enabled>", "<Enabled>",
-		"</enabled>", "</Enabled>",
-		"<description>", "<Description>",
-		"</description>", "</Description>",
-		"<type>", "<Type>",
-		"</type>", "</Type>",
-		"<interface>", "<Interface>",
-		"</interface>", "</Interface>",
+		// Interface related
 		"<interfaces>", "<Interfaces>",
 		"</interfaces>", "</Interfaces>",
+		"<interface>", "<Interface>",
+		"</interface>", "</Interface>",
+		"<type>", "<Type>",
+		"</type>", "</Type>",
+		"<enabled>", "<Enabled>",
+		"</enabled>", "</Enabled>",
+		"<mtu>", "<Mtu>",
+		"</mtu>", "</Mtu>",
+		"<description>", "<Description>",
+		"</description>", "</Description>",
 	)
-	return repl.Replace(xml)
+	return repl.Replace(xmlStr)
+}
+
+// fixXMLTagNames is DEPRECATED - use normalizeOpenConfigXML instead
+// Kept for backward compatibility during transition
+func fixXMLTagNames(xml string) string {
+	return normalizeOpenConfigXML(xml)
 }
 
 // GetXML returns the XML for the requested datastore.

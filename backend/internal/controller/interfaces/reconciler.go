@@ -48,7 +48,8 @@ type InterfacesReconciler struct {
 // New creates a new InterfacesReconciler with the given dependencies
 func New(cs reconcile.ConfigStore, clientPool client.ClientPool) *InterfacesReconciler {
 	dc := &deviceClient{
-		clientPool: clientPool,
+		clientPool:  clientPool,
+		configStore: cs,
 	}
 	de := &diffEngineAdapter{
 		de: diff.NewDefaultDiffEngine(),
@@ -59,8 +60,12 @@ func New(cs reconcile.ConfigStore, clientPool client.ClientPool) *InterfacesReco
 }
 
 // deviceClient implements reconcile.DeviceClient interface for getting interface configuration from device
+// NOTE: This client sends the FULL desired configuration as properly formatted OpenConfig XML
+// instead of individual field changes. This ensures compliance with OpenConfig YANG models
+// and NETCONF standards.
 type deviceClient struct {
-	clientPool client.ClientPool
+	clientPool  client.ClientPool
+	configStore reconcile.ConfigStore // To get full config for OpenConfig-compliant XML
 }
 
 // Get retrieves the actual interface configuration from the device and converts it to the openconfig.Interfaces struct
@@ -158,7 +163,11 @@ func (d *deviceClient) Get(ctx context.Context, deviceID string) (interface{}, e
 	return nil, fmt.Errorf("unknown data format for interfaces config: %T", result.Data)
 }
 
-// Set applies the computed changes to the device
+// Set applies the configuration to the device.
+// Unlike generic change-based reconciliation, this method sends the FULL
+// desired configuration as properly formatted OpenConfig XML. This approach
+// ensures strict compliance with OpenConfig YANG models and NETCONF standards,
+// rather than sending individual field changes which may not align with YANG structure.
 func (d *deviceClient) Set(ctx context.Context, deviceID string, changes []reconcile.Change) error {
 	var info client.DeviceConnectionInfo
 
@@ -202,27 +211,34 @@ func (d *deviceClient) Set(ctx context.Context, deviceID string, changes []recon
 		return err
 	}
 
-	// Convert reconcile.Change to client.Change
-	clientChanges := make([]client.Change, len(changes))
-	for i, rc := range changes {
-		var changeType client.ChangeType
-		switch rc.Type {
-		case "ADD":
-			changeType = client.AddChange
-		case "DELETE":
-			changeType = client.DeleteChange
-		case "MODIFY":
-			changeType = client.ModifyChange
-		default:
-			changeType = client.ModifyChange
-		}
-		clientChanges[i] = client.Change{
-			Type:        changeType,
-			Path:        rc.Path,
-			OldValue:    rc.ActualValue,
-			NewValue:    rc.DesiredValue,
-			SchemaPath:  rc.Path,
-		}
+	// ==============================================
+	// OpenConfig Compliance Implementation:
+	//
+	// Instead of sending individual diff changes, we retrieve the FULL desired
+	// configuration from configStore and send it as a single OpenConfig-standard
+	// XML document. This ensures:
+	// 1. Proper XML namespace (http://openconfig.net/yang/interfaces)
+	// 2. Correct YANG element names (lowercase, kebab-case where applicable)
+	// 3. Properly formatted enum values (e.g., ianaift:ethernetCsmacd)
+	// 4. Complete structure compliance with OpenConfig YANG models
+	// ==============================================
+
+	// Get the FULL desired interfaces configuration for OpenConfig-compliant XML generation
+	fullConfig, err := d.configStore.Get(deviceID, "/interfaces")
+	if err != nil {
+		return fmt.Errorf("failed to get full desired config for OpenConfig XML generation: %w", err)
+	}
+
+	// Create a single change with the FULL config object
+	// The underlying NETCONF client's marshalChange function will detect this
+	// is an *openconfig.OpenconfigInterfaces_Interfaces and generate proper OpenConfig XML
+	clientChanges := []client.Change{
+		{
+			Type:       client.ModifyChange,
+			Path:       "/interfaces",
+			NewValue:   fullConfig,
+			SchemaPath: "/interfaces",
+		},
 	}
 
 	// Apply changes with commit

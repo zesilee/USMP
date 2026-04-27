@@ -341,6 +341,12 @@ func (c *NETCONFClient) marshalChange(change Change) (string, error) {
 		return outputStr, nil
 	}
 
+	// Special case: *openconfig.OpenconfigInterfaces_Interfaces - generates
+	// OpenConfig standard XML with proper namespace and YANG-conforming element names
+	if interfaces, ok := change.NewValue.(*openconfig.OpenconfigInterfaces_Interfaces); ok && interfaces != nil {
+		return buildOpenConfigInterfacesXML(interfaces)
+	}
+
 	// Try xml.Marshal for other types
 	output, err := xml.Marshal(change.NewValue)
 	if err == nil {
@@ -419,4 +425,96 @@ func (c *NETCONFClient) marshalChange(change Change) (string, error) {
 
 	// Still failed - return original error
 	return "", fmt.Errorf("failed to marshal config to XML: %w", err)
+}
+
+// OpenConfig XML namespace constants
+const (
+	OpenConfigInterfacesNS = "http://openconfig.net/yang/interfaces"
+	IanaIfTypeNS           = "urn:ietf:params:xml:ns:yang:iana-if-type"
+)
+
+// buildOpenConfigInterfacesXML generates OpenConfig-standard XML for interfaces.
+func buildOpenConfigInterfacesXML(interfaces *openconfig.OpenconfigInterfaces_Interfaces) (string, error) {
+	if interfaces == nil || len(interfaces.Interface) == 0 {
+		return fmt.Sprintf(`<interfaces xmlns="%s"/>`, OpenConfigInterfacesNS), nil
+	}
+
+	var builder strings.Builder
+	builder.WriteString(fmt.Sprintf(`<interfaces xmlns="%s">`, OpenConfigInterfacesNS))
+
+	// Iterate through all interface entries
+	for name, iface := range interfaces.Interface {
+		if iface == nil {
+			continue
+		}
+
+		builder.WriteString("<interface>")
+
+		// Interface name - required, use map key as fallback
+		if iface.Name != nil {
+			builder.WriteString(fmt.Sprintf("<name>%s</name>", xmlEscape(*iface.Name)))
+		} else {
+			builder.WriteString(fmt.Sprintf("<name>%s</name>", xmlEscape(name)))
+		}
+
+		// Config container - standard YANG pattern
+		if iface.Config != nil {
+			builder.WriteString("<config>")
+
+			if iface.Config.Name != nil {
+				builder.WriteString(fmt.Sprintf("<name>%s</name>", xmlEscape(*iface.Config.Name)))
+			}
+
+			// config/type - convert enum integer to IANA standard type name
+			switch iface.Config.Type {
+			case 1: // ethernetCsmacd
+				builder.WriteString(fmt.Sprintf(`<type xmlns:ianaift="%s">ianaift:ethernetCsmacd</type>`, IanaIfTypeNS))
+			case 24: // softwareLoopback
+				builder.WriteString(fmt.Sprintf(`<type xmlns:ianaift="%s">ianaift:softwareLoopback</type>`, IanaIfTypeNS))
+			default:
+				builder.WriteString(fmt.Sprintf(`<type xmlns:ianaift="%s">ianaift:ethernetCsmacd</type>`, IanaIfTypeNS))
+			}
+
+			if iface.Config.Mtu != nil {
+				builder.WriteString(fmt.Sprintf("<mtu>%d</mtu>", *iface.Config.Mtu))
+			}
+
+			if iface.Config.Enabled != nil {
+				builder.WriteString(fmt.Sprintf("<enabled>%t</enabled>", *iface.Config.Enabled))
+			}
+
+			if iface.Config.Description != nil {
+				builder.WriteString(fmt.Sprintf("<description>%s</description>", xmlEscape(*iface.Config.Description)))
+			}
+
+			builder.WriteString("</config>")
+		}
+
+		builder.WriteString("</interface>")
+	}
+
+	builder.WriteString("</interfaces>")
+	return builder.String(), nil
+}
+
+// xmlEscape escapes XML special characters in a string
+func xmlEscape(s string) string {
+	var buf strings.Builder
+	for _, r := range s {
+		switch r {
+		case '<':
+			buf.WriteString("&lt;")
+		case '>':
+			buf.WriteString("&gt;")
+		case '&':
+			buf.WriteString("&amp;")
+		case '"':
+			buf.WriteString("&quot;")
+		case '\'':
+			buf.WriteString("&apos;")
+		default:
+			buf.WriteRune(r)
+		}
+	}
+	return buf.String()
 }
