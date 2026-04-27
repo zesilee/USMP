@@ -30,33 +30,85 @@ module openconfig-vlan {
           "The VLAN ID (1-4094) for the VLAN.";
       }
 
-      leaf name {
-        type string;
+      container config {
         description
-          "The name assigned to the VLAN.";
-      }
+          "Configuration data for each VLAN";
 
-      leaf status {
-        type enumeration {
-          enum ACTIVE;
-          enum SUSPENDED;
+        leaf vlan-id {
+          type uint16;
+          description
+            "The VLAN ID (1-4094) for the VLAN.";
         }
-        default "ACTIVE";
-        description
-          "The operational status of the VLAN.";
+
+        leaf name {
+          type string;
+          description
+            "The name assigned to the VLAN.";
+        }
+
+        leaf status {
+          type enumeration {
+            enum ACTIVE {
+              value 0;
+            }
+            enum SUSPENDED {
+              value 1;
+            }
+          }
+          default "ACTIVE";
+          description
+            "The operational status of the VLAN.";
+        }
+
+        leaf enabled {
+          type boolean;
+          default "true";
+          description
+            "Whether the VLAN is enabled.";
+        }
+
+        leaf description {
+          type string;
+          description
+            "A textual description of the VLAN.";
+        }
       }
 
-      leaf enabled {
-        type boolean;
-        default "true";
+      container state {
+        config false;
         description
-          "Whether the VLAN is enabled.";
-      }
+          "Operational state data for each VLAN";
 
-      leaf description {
-        type string;
-        description
-          "A textual description of the VLAN.";
+        leaf vlan-id {
+          type uint16;
+          description
+            "The VLAN ID (1-4094) for the VLAN.";
+        }
+
+        leaf name {
+          type string;
+          description
+            "The name assigned to the VLAN.";
+        }
+
+        leaf status {
+          type enumeration {
+            enum ACTIVE {
+              value 0;
+            }
+            enum SUSPENDED {
+              value 1;
+            }
+          }
+          description
+            "The operational status of the VLAN.";
+        }
+
+        leaf member-ports {
+          type string;
+          description
+            "List of member ports in this VLAN.";
+        }
       }
     }
   }

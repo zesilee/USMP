@@ -8,15 +8,14 @@ module openconfig-interfaces {
     "This module defines configuration and operational state data
      for network interfaces on a network device.
 
-     The model supports physical, aggregate (LACP), and logical
-     interfaces (e.g., VLAN subinterfaces).";
+     Simplified version for USMP project - basic interface configuration only,
+     without subinterfaces to avoid XML serialization issues with maps.";
 
   revision 2017-07-14 {
     description
-      "Add IP data to interfaces model, add channel struct
-       configurable to aggregate interfaces.";
+      "Simplified version - remove subinterfaces to avoid XML map serialization issues";
     reference
-      "OpenConfig release v0.5.0";
+      "OpenConfig release v0.5.0 - USMP simplified";
   }
 
   container interfaces {
@@ -36,9 +35,25 @@ module openconfig-interfaces {
       }
 
       leaf type {
-        identityref base:interface-type;
+        type enumeration {
+          enum PHYSICAL {
+            value 0;
+          }
+          enum LOGICAL {
+            value 1;
+          }
+          enum LAG {
+            value 2;
+          }
+          enum LOOPBACK {
+            value 3;
+          }
+          enum VLAN {
+            value 4;
+          }
+        }
         description
-          "The type of the interface, e.g., PHYSICAL, LAG, etc.";
+          "The type of the interface, e.g., PHYSICAL, LAG, LOGICAL, etc.";
       }
 
       leaf mtu {
@@ -55,11 +70,163 @@ module openconfig-interfaces {
           "Whether the interface is enabled (administratively up).";
       }
 
-      container description {
+      leaf description {
+        type string;
+        description
+          "A user-defined textual description of the interface.";
+      }
+
+      container config {
+        description
+          "Configuration data for each interface";
+
+        leaf name {
+          type string;
+          description
+            "The name of the interface";
+        }
+
+        leaf type {
+          type enumeration {
+            enum PHYSICAL {
+              value 0;
+            }
+            enum LOGICAL {
+              value 1;
+            }
+            enum LAG {
+              value 2;
+            }
+            enum LOOPBACK {
+              value 3;
+            }
+            enum VLAN {
+              value 4;
+            }
+          }
+          description
+            "The type of the interface";
+        }
+
+        leaf mtu {
+          type uint16;
+          description
+            "The MTU of the interface";
+        }
+
+        leaf enabled {
+          type boolean;
+          default "true";
+          description
+            "Whether the interface is enabled";
+        }
+
         leaf description {
           type string;
           description
-            "A user-defined textual description of the interface.";
+            "The description of the interface";
+        }
+      }
+
+      container state {
+        config false;
+        description
+          "Operational state data for each interface";
+
+        leaf name {
+          type string;
+          description
+            "The name of the interface";
+        }
+
+        leaf type {
+          type enumeration {
+            enum PHYSICAL {
+              value 0;
+            }
+            enum LOGICAL {
+              value 1;
+            }
+            enum LAG {
+              value 2;
+            }
+            enum LOOPBACK {
+              value 3;
+            }
+            enum VLAN {
+              value 4;
+            }
+          }
+          description
+            "The type of the interface";
+        }
+
+        leaf mtu {
+          type uint16;
+          description
+            "The MTU of the interface";
+        }
+
+        leaf enabled {
+          type boolean;
+          description
+            "Whether the interface is enabled";
+        }
+
+        leaf description {
+          type string;
+          description
+            "The description of the interface";
+        }
+
+        leaf ifindex {
+          type uint32;
+          description
+            "System assigned index number for the interface";
+        }
+
+        leaf admin-status {
+          type enumeration {
+            enum UP {
+              value 0;
+            }
+            enum DOWN {
+              value 1;
+            }
+            enum TESTING {
+              value 2;
+            }
+          }
+          description
+            "The administrative status of the interface";
+        }
+
+        leaf oper-status {
+          type enumeration {
+            enum UP {
+              value 0;
+            }
+            enum DOWN {
+              value 1;
+            }
+            enum TESTING {
+              value 2;
+            }
+            enum UNKNOWN {
+              value 3;
+            }
+            enum DORMANT {
+              value 4;
+            }
+            enum NOT_PRESENT {
+              value 5;
+            }
+            enum LOWER_LAYER_DOWN {
+              value 6;
+            }
+          }
+          description
+            "The current operational state of the interface";
         }
       }
     }
