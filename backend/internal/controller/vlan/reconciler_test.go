@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 	"testing"
 
-	"github.com/leezesi/usmp/backend/internal/generated/openconfig"
+	"github.com/leezesi/usmp/backend/internal/generated/huawei"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/client"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/reconcile"
 	"github.com/stretchr/testify/assert"
@@ -80,13 +80,13 @@ func TestDeviceClient_Get_Success(t *testing.T) {
 	ctx := context.Background()
 	deviceID := "192.168.1.1"
 
-	// Create test JSON response with one VLAN
-	deviceRoot := &openconfig.Device{
-		Vlans: &openconfig.OpenconfigVlan_Vlans{
-			Vlan: map[uint16]*openconfig.OpenconfigVlan_Vlans_Vlan{
-				100: {
-					VlanId: ptrUint16(100),
-					Config: &openconfig.OpenconfigVlan_Vlans_Vlan_Config{
+	// Create test JSON response with one VLAN (Huawei model structure)
+	deviceRoot := &huawei.Device{
+		Vlan: &huawei.HuaweiVlan_Vlan{
+			Vlans: &huawei.HuaweiVlan_Vlan_Vlans{
+				Vlan: map[uint16]*huawei.HuaweiVlan_Vlan_Vlans_Vlan{
+					100: {
+						Id:   ptrUint16(100),
 						Name: ptrString("VLAN100"),
 					},
 				},
@@ -98,7 +98,7 @@ func TestDeviceClient_Get_Success(t *testing.T) {
 	assert.NoError(t, err)
 
 	mockClient := new(MockClient)
-	mockClient.On("Get", ctx, "/vlans", mock.Anything).Return(&client.GetResult{
+	mockClient.On("Get", ctx, "/vlan:vlan/vlan:vlans", mock.Anything).Return(&client.GetResult{
 		Data: jsonBytes,
 	}, nil)
 
@@ -116,14 +116,14 @@ func TestDeviceClient_Get_Success(t *testing.T) {
 	assert.NoError(t, err)
 	assert.NotNil(t, result)
 
-	vlans, ok := result.(*openconfig.OpenconfigVlan_Vlans)
+	vlans, ok := result.(*huawei.HuaweiVlan_Vlan_Vlans)
 	assert.True(t, ok)
 	assert.NotNil(t, vlans)
 	assert.Contains(t, vlans.Vlan, uint16(100))
 	vlan := vlans.Vlan[100]
 	assert.NotNil(t, vlan)
-	assert.Equal(t, uint16(100), *vlan.VlanId)
-	assert.Equal(t, "VLAN100", *vlan.Config.Name)
+	assert.Equal(t, uint16(100), *vlan.Id)
+	assert.Equal(t, "VLAN100", *vlan.Name)
 
 	mockPool.AssertExpectations(t)
 	mockClient.AssertExpectations(t)
@@ -158,7 +158,7 @@ func TestDeviceClient_Get_ClientGetError(t *testing.T) {
 	deviceID := "192.168.1.1"
 
 	mockClient := new(MockClient)
-	mockClient.On("Get", ctx, "/vlans", mock.Anything).Return(nil, assert.AnError)
+	mockClient.On("Get", ctx, "/vlan:vlan/vlan:vlans", mock.Anything).Return(nil, assert.AnError)
 
 	mockPool := new(MockClientPool)
 	mockPool.On("Get", client.DeviceConnectionInfo{IP: deviceID}).Return(mockClient, nil)
@@ -187,7 +187,7 @@ func TestDeviceClient_Get_InvalidJSON(t *testing.T) {
 	invalidJSON := []byte(`{"invalid": json}`)
 
 	mockClient := new(MockClient)
-	mockClient.On("Get", ctx, "/vlans", mock.Anything).Return(&client.GetResult{
+	mockClient.On("Get", ctx, "/vlan:vlan/vlan:vlans", mock.Anything).Return(&client.GetResult{
 		Data: invalidJSON,
 	}, nil)
 
@@ -214,18 +214,20 @@ func TestDeviceClient_Get_AlreadyUnmarshaledDeviceRoot(t *testing.T) {
 	ctx := context.Background()
 	deviceID := "192.168.1.1"
 
-	deviceRoot := &openconfig.Device{
-		Vlans: &openconfig.OpenconfigVlan_Vlans{
-			Vlan: map[uint16]*openconfig.OpenconfigVlan_Vlans_Vlan{
-				200: {
-					VlanId: ptrUint16(200),
+	deviceRoot := &huawei.Device{
+		Vlan: &huawei.HuaweiVlan_Vlan{
+			Vlans: &huawei.HuaweiVlan_Vlan_Vlans{
+				Vlan: map[uint16]*huawei.HuaweiVlan_Vlan_Vlans_Vlan{
+					200: {
+						Id: ptrUint16(200),
+					},
 				},
 			},
 		},
 	}
 
 	mockClient := new(MockClient)
-	mockClient.On("Get", ctx, "/vlans", mock.Anything).Return(&client.GetResult{
+	mockClient.On("Get", ctx, "/vlan:vlan/vlan:vlans", mock.Anything).Return(&client.GetResult{
 		Data: deviceRoot,
 	}, nil)
 
@@ -243,7 +245,7 @@ func TestDeviceClient_Get_AlreadyUnmarshaledDeviceRoot(t *testing.T) {
 	assert.NoError(t, err)
 	assert.NotNil(t, result)
 
-	vlans, ok := result.(*openconfig.OpenconfigVlan_Vlans)
+	vlans, ok := result.(*huawei.HuaweiVlan_Vlan_Vlans)
 	assert.True(t, ok)
 	assert.Contains(t, vlans.Vlan, uint16(200))
 
@@ -257,7 +259,7 @@ func TestDeviceClient_Set_Success(t *testing.T) {
 	deviceID := "192.168.1.1"
 	changes := []reconcile.Change{
 		{
-			Path:         "/vlans/vlan[100]",
+			Path:         "/vlan:vlan/vlan:vlans/vlan:vlan[100]",
 			Type:         "ADD",
 			DesiredValue: map[string]interface{}{"name": "VLAN100"},
 		},
@@ -290,7 +292,7 @@ func TestDeviceClient_Set_Success(t *testing.T) {
 	clientChanges := call.Arguments[1].([]client.Change)
 	assert.Len(t, clientChanges, 1)
 	assert.Equal(t, client.AddChange, clientChanges[0].Type)
-	assert.Equal(t, "/vlans/vlan[100]", clientChanges[0].Path)
+	assert.Equal(t, "/vlan:vlan/vlan:vlans/vlan:vlan[100]", clientChanges[0].Path)
 }
 
 func TestDeviceClient_Set_ClientPoolGetError(t *testing.T) {
@@ -322,35 +324,33 @@ func TestVlanReconciler_FullReconcile(t *testing.T) {
 	deviceID := "192.168.1.1"
 	req := reconcile.Request{
 		DeviceID: deviceID,
-		Path:     "/vlans",
+		Path:     "/vlan:vlan/vlan:vlans",
 	}
 
-	// desired VLAN configuration
-	desired := &openconfig.OpenconfigVlan_Vlans{
-		Vlan: map[uint16]*openconfig.OpenconfigVlan_Vlans_Vlan{
+	// desired VLAN configuration (Huawei model)
+	desired := &huawei.HuaweiVlan_Vlan_Vlans{
+		Vlan: map[uint16]*huawei.HuaweiVlan_Vlan_Vlans_Vlan{
 			100: {
-				VlanId: ptrUint16(100),
-				Config: &openconfig.OpenconfigVlan_Vlans_Vlan_Config{
-					Name:   ptrString("VLAN100"),
-					Status: openconfig.OpenconfigVlan_Vlans_Vlan_Config_Status_ACTIVE,
-				},
+				Id:   ptrUint16(100),
+				Name: ptrString("VLAN100"),
+				Type: huawei.HuaweiVlan_VlanType_common,
 			},
 		},
 	}
 
 	mockCS := new(mockConfigStore)
-	mockCS.On("Get", deviceID, "/vlans").Return(desired, nil)
+	mockCS.On("Get", deviceID, "/vlan:vlan/vlan:vlans").Return(desired, nil)
 
 	// actual is empty on device
-	actual := &openconfig.OpenconfigVlan_Vlans{
-		Vlan: map[uint16]*openconfig.OpenconfigVlan_Vlans_Vlan{},
+	actual := &huawei.HuaweiVlan_Vlan_Vlans{
+		Vlan: map[uint16]*huawei.HuaweiVlan_Vlan_Vlans_Vlan{},
 	}
-	deviceRoot := &openconfig.Device{Vlans: actual}
+	deviceRoot := &huawei.Device{Vlan: &huawei.HuaweiVlan_Vlan{Vlans: actual}}
 	jsonActual, err := json.Marshal(deviceRoot)
 	assert.NoError(t, err)
 
 	mockClient := new(MockClient)
-	mockClient.On("Get", ctx, "/vlans", mock.Anything).Return(&client.GetResult{
+	mockClient.On("Get", ctx, "/vlan:vlan/vlan:vlans", mock.Anything).Return(&client.GetResult{
 		Data: jsonActual,
 	}, nil)
 	mockClient.On("Set", ctx, mock.Anything, mock.Anything).Return(&client.SetResult{
@@ -381,11 +381,11 @@ func TestVlanReconciler_ConfigStoreGetError(t *testing.T) {
 	deviceID := "192.168.1.1"
 	req := reconcile.Request{
 		DeviceID: deviceID,
-		Path:     "/vlans",
+		Path:     "/vlan:vlan/vlan:vlans",
 	}
 
 	mockCS := new(mockConfigStore)
-	mockCS.On("Get", deviceID, "/vlans").Return(nil, assert.AnError)
+	mockCS.On("Get", deviceID, "/vlan:vlan/vlan:vlans").Return(nil, assert.AnError)
 
 	mockPool := new(MockClientPool)
 
@@ -405,31 +405,29 @@ func TestVlanReconciler_NoDiff(t *testing.T) {
 	deviceID := "192.168.1.1"
 	req := reconcile.Request{
 		DeviceID: deviceID,
-		Path:     "/vlans",
+		Path:     "/vlan:vlan/vlan:vlans",
 	}
 
-	desired := &openconfig.OpenconfigVlan_Vlans{
-		Vlan: map[uint16]*openconfig.OpenconfigVlan_Vlans_Vlan{
+	desired := &huawei.HuaweiVlan_Vlan_Vlans{
+		Vlan: map[uint16]*huawei.HuaweiVlan_Vlan_Vlans_Vlan{
 			100: {
-				VlanId: ptrUint16(100),
-				Config: &openconfig.OpenconfigVlan_Vlans_Vlan_Config{
-					Name:   ptrString("VLAN100"),
-					Status: openconfig.OpenconfigVlan_Vlans_Vlan_Config_Status_ACTIVE,
-				},
+				Id:   ptrUint16(100),
+				Name: ptrString("VLAN100"),
+				Type: huawei.HuaweiVlan_VlanType_common,
 			},
 		},
 	}
 
 	// desired and actual are identical
-	deviceRoot := &openconfig.Device{Vlans: desired}
+	deviceRoot := &huawei.Device{Vlan: &huawei.HuaweiVlan_Vlan{Vlans: desired}}
 	jsonBytes, err := json.Marshal(deviceRoot)
 	assert.NoError(t, err)
 
 	mockCS := new(mockConfigStore)
-	mockCS.On("Get", deviceID, "/vlans").Return(desired, nil)
+	mockCS.On("Get", deviceID, "/vlan:vlan/vlan:vlans").Return(desired, nil)
 
 	mockClient := new(MockClient)
-	mockClient.On("Get", ctx, "/vlans", mock.Anything).Return(&client.GetResult{
+	mockClient.On("Get", ctx, "/vlan:vlan/vlan:vlans", mock.Anything).Return(&client.GetResult{
 		Data: jsonBytes,
 	}, nil)
 

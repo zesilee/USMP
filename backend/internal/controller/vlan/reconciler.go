@@ -8,7 +8,7 @@ import (
 	"net"
 	"strconv"
 
-	"github.com/leezesi/usmp/backend/internal/generated/openconfig"
+	"github.com/leezesi/usmp/backend/internal/generated/huawei"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/client"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/diff"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/reconcile"
@@ -116,12 +116,12 @@ func (d *deviceClient) Get(ctx context.Context, deviceID string) (interface{}, e
 		return nil, err
 	}
 
-	result, err := c.Get(ctx, "/vlans")
+	result, err := c.Get(ctx, "/vlan:vlan/vlan:vlans")
 	if err != nil {
 		return nil, err
 	}
 
-	deviceRoot := &openconfig.Device{}
+	deviceRoot := &huawei.Device{}
 
 	// Check data type and parse accordingly
 	switch data := result.Data.(type) {
@@ -130,7 +130,7 @@ func (d *deviceClient) Get(ctx context.Context, deviceID string) (interface{}, e
 		if len(data) > 0 && data[0] == '<' {
 			// XML format from NETCONF
 			// Response from get-config is inside <data> tag, so we need to find the actual config
-			// ygot generated structs know how to unmarshal XML with openconfig namespaces
+			// ygot generated structs know how to unmarshal XML with huawei namespaces
 			if err := xml.Unmarshal(data, deviceRoot); err != nil {
 				// If direct unmarshal fails, try wrapping the content because it's inside <data>
 				wrapped := []byte(fmt.Sprintf("<data>%s</data>", string(data)))
@@ -138,27 +138,27 @@ func (d *deviceClient) Get(ctx context.Context, deviceID string) (interface{}, e
 					return nil, fmt.Errorf("unmarshal wrapped XML failed: %w (original: %w)", err2, err)
 				}
 			}
-			if deviceRoot.Vlans == nil {
-				return &openconfig.OpenconfigVlan_Vlans{}, nil
+			if deviceRoot.Vlan == nil || deviceRoot.Vlan.Vlans == nil {
+				return &huawei.HuaweiVlan_Vlan_Vlans{}, nil
 			}
-			return deviceRoot.Vlans, nil
+			return deviceRoot.Vlan.Vlans, nil
 		}
 		// JSON format from gNMI
 		if err := json.Unmarshal(data, deviceRoot); err != nil {
 			return nil, fmt.Errorf("unmarshal JSON failed: %w", err)
 		}
-		if deviceRoot.Vlans == nil {
-			return &openconfig.OpenconfigVlan_Vlans{}, nil
+		if deviceRoot.Vlan == nil || deviceRoot.Vlan.Vlans == nil {
+			return &huawei.HuaweiVlan_Vlan_Vlans{}, nil
 		}
-		return deviceRoot.Vlans, nil
+		return deviceRoot.Vlan.Vlans, nil
 	}
 
 	// If it's already unmarshaled into a struct, check directly
-	if vlans, ok := result.Data.(*openconfig.OpenconfigVlan_Vlans); ok {
+	if vlans, ok := result.Data.(*huawei.HuaweiVlan_Vlan_Vlans); ok {
 		return vlans, nil
 	}
-	if deviceRoot, ok := result.Data.(*openconfig.Device); ok && deviceRoot.Vlans != nil {
-		return deviceRoot.Vlans, nil
+	if deviceRoot, ok := result.Data.(*huawei.Device); ok && deviceRoot.Vlan != nil && deviceRoot.Vlan.Vlans != nil {
+		return deviceRoot.Vlan.Vlans, nil
 	}
 
 	// Unknown data format

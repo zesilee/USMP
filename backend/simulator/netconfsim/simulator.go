@@ -7,7 +7,6 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/leezesi/usmp/backend/internal/generated/openconfig"
 	"github.com/stretchr/testify/assert"
 	"golang.org/x/crypto/ssh"
 )
@@ -136,9 +135,15 @@ func (s *Simulator) Port() int {
 	return s.port
 }
 
-// SetRunningConfig sets the initial running configuration from an openconfig Device.
-func (s *Simulator) SetRunningConfig(dev *openconfig.Device) {
+// SetRunningConfig sets the initial running configuration from a Device struct.
+// Accepts any device struct (e.g., openconfig.Device or huawei.Device).
+func (s *Simulator) SetRunningConfig(dev interface{}) {
 	s.datastore.SetRunningFromDevice(dev)
+}
+
+// SetRunningConfigXML sets the initial running configuration directly from XML bytes.
+func (s *Simulator) SetRunningConfigXML(xmlBytes []byte) {
+	s.datastore.SetRunningFromXML(xmlBytes)
 }
 
 // SetScenario sets the scenario configuration for error injection testing.

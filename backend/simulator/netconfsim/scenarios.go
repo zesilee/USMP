@@ -54,6 +54,39 @@ func (s *Simulator) AssertVlanCount(t *testing.T, expected int) {
 	assert.Len(t, vlans.Vlan, expected)
 }
 
+// Huawei model assertion methods for VLAN testing
+
+// AssertHuaweiVlanExists asserts that a VLAN with the given ID exists using Huawei model parsing.
+func (s *Simulator) AssertHuaweiVlanExists(t *testing.T, vlanID uint16) {
+	t.Helper()
+	vlans, err := s.datastore.ExtractHuaweiVLANs()
+	assert.NoError(t, err)
+	assert.NotNil(t, vlans)
+	assert.Contains(t, vlans, vlanID)
+}
+
+// AssertHuaweiVlanName asserts that a VLAN has the expected name using Huawei model parsing.
+func (s *Simulator) AssertHuaweiVlanName(t *testing.T, vlanID uint16, expected string) {
+	t.Helper()
+	vlans, err := s.datastore.ExtractHuaweiVLANs()
+	assert.NoError(t, err)
+	name, ok := vlans[vlanID]
+	assert.True(t, ok)
+	assert.Equal(t, expected, name)
+}
+
+// AssertHuaweiVlanCount asserts the total number of VLANs in running config using Huawei model parsing.
+func (s *Simulator) AssertHuaweiVlanCount(t *testing.T, expected int) {
+	t.Helper()
+	vlans, err := s.datastore.ExtractHuaweiVLANs()
+	assert.NoError(t, err)
+	if vlans == nil {
+		assert.Equal(t, expected, 0)
+		return
+	}
+	assert.Len(t, vlans, expected)
+}
+
 // Force import to satisfy Go's unused check
 var _ openconfig.OpenconfigVlan_Vlans
 

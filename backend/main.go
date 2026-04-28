@@ -22,22 +22,22 @@ func main() {
 		// manager.WithSchemeDir("./yang-modules"),
 	)
 
-	// Create and register the OpenConfig VLAN controller
+	// Create and register the Huawei VLAN controller
 	// The VLAN controller reconciles VLAN configuration every 5 minutes
 	cs := mgr.GetConfigStore()
 	clientPool := mgr.GetClientPool()
 
 	// Periodic source polls all configured devices for reconciliation
 	// Pass nil for deviceIDs to indicate all devices that have desired config
-	vlanCtrl := controller.ControllerManagedBy("openconfig-vlan").
+	vlanCtrl := controller.ControllerManagedBy("huawei-vlan").
 		WithReconciler(vlan.New(cs, clientPool)).
-		WithSource(source.NewPeriodicSource(5 * time.Minute, nil, "/vlans")).
-		WithPredicate(predicate.Prefix("/vlans")).
+		WithSource(source.NewPeriodicSource(5 * time.Minute, nil, "/vlan:vlan/vlan:vlans")).
+		WithPredicate(predicate.Prefix("/vlan:vlan/vlan:vlans")).
 		WithWorkerCount(2).
 		Build()
 
 	mgr.AddController(vlanCtrl)
-	log.Printf("OpenConfig VLAN controller registered successfully")
+	log.Printf("Huawei VLAN controller registered successfully")
 
 	// Create and register the OpenConfig Interfaces controller
 	// The Interfaces controller reconciles interface configuration every 5 minutes

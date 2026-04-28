@@ -27,30 +27,42 @@ func NewDatastore() *Datastore {
 	}
 }
 
-// SetRunningFromDevice sets the running configuration from an openconfig Device.
-// This also updates candidate to match.
-func (d *Datastore) SetRunningFromDevice(dev *openconfig.Device) {
-	d.mu.Lock()
-	defer d.mu.Unlock()
+// SetRunningFromDevice sets the running configuration from a Device struct.
+	// This also updates candidate to match. Accepts any device struct type.
+	func (d *Datastore) SetRunningFromDevice(dev interface{}) {
+		d.mu.Lock()
+		defer d.mu.Unlock()
 
-	// Marshal to XML directly
-	buf, err := xml.Marshal(dev)
-	if err != nil {
-		// Fallback to empty on error
-		d.running = []byte(`<config/>`)
-		d.candidate = []byte(`<config/>`)
-		return
-	}
+		// Marshal to XML directly
+		buf, err := xml.Marshal(dev)
+		if err != nil {
+			// Fallback to empty on error
+			d.running = []byte(`<config/>`)
+			d.candidate = []byte(`<config/>`)
+			return
+		}
 
-	// Wrap in <config> tag if not already
-	if !bytes.Contains(buf, []byte(`<config`)) {
-		buf = []byte(fmt.Sprintf(`<config>%s</config>`, buf))
-	}
+		// Wrap in <config> tag if not already
+		if !bytes.Contains(buf, []byte(`<config`)) {
+			buf = []byte(fmt.Sprintf(`<config>%s</config>`, buf))
+		}
 
-	d.running = buf
+		d.running = buf
 	d.candidate = make([]byte, len(buf))
 	copy(d.candidate, buf)
 }
+
+	// SetRunningFromXML sets the running configuration directly from XML bytes.
+	// This also updates candidate to match.
+	func (d *Datastore) SetRunningFromXML(xmlBytes []byte) {
+		d.mu.Lock()
+		defer d.mu.Unlock()
+
+		d.running = xmlBytes
+		d.candidate = make([]byte, len(xmlBytes))
+		copy(d.candidate, xmlBytes)
+	}
+
 
 // GetRunning returns the current running configuration as XML.
 func (d *Datastore) GetRunning() []byte {
@@ -388,6 +400,67 @@ func (d *Datastore) ExtractInterfaces() (*openconfig.OpenconfigInterfaces_Interf
 
 	// Always return interfaces struct
 	return interfaces, nil
+}
+
+// ExtractHuaweiVLANs extracts Huawei model VLANs from running configuration for testing assertions.
+func (d *Datastore) ExtractHuaweiVLANs() (map[uint16]string, error) {
+	d.mu.RLock()
+	defer d.mu.RUnlock()
+
+	xmlStr := string(d.running)
+	vlans := make(map[uint16]string)
+
+	decoder := xml.NewDecoder(bytes.NewReader([]byte(xmlStr)))
+	for {
+		token, err := decoder.Token()
+		if err != nil {
+			break
+		}
+
+		start, ok := token.(xml.StartElement)
+		if !ok {
+			continue
+		}
+
+		// We're looking for <HuaweiVlan_Vlan_Vlans_Vlan> which is the Go XML serialization format
+		if strings.Contains(start.Name.Local, "HuaweiVlan") && strings.Contains(start.Name.Local, "Vlan") {
+			var vlanID uint16
+			var name string
+
+			for {
+				token, err := decoder.Token()
+				if err != nil {
+					break
+				}
+
+				if _, ok := token.(xml.EndElement); ok {
+					break
+				}
+
+				innerStart, ok := token.(xml.StartElement)
+				if !ok {
+					continue
+				}
+
+				switch innerStart.Name.Local {
+				case "Id", "id", "VlanId":
+					if err := decoder.DecodeElement(&vlanID, &innerStart); err == nil {
+					}
+				case "Name", "name":
+					if err := decoder.DecodeElement(&name, &innerStart); err == nil {
+					}
+				default:
+					_ = decoder.Skip()
+				}
+			}
+
+			if vlanID > 0 {
+				vlans[vlanID] = name
+			}
+		}
+	}
+
+	return vlans, nil
 }
 
 // cleanNamespaces removes XML namespace declarations and prefixes from tags.
