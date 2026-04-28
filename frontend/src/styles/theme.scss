@@ -329,7 +329,13 @@ html, body {
   .el-form-item__label {
     color: $text-secondary;
     font-weight: $font-weight-medium;
+    white-space: nowrap;
   }
+}
+
+// 表格单元格不换行
+.el-table .cell {
+  white-space: nowrap;
 }
 
 // 选择器
@@ -494,6 +500,7 @@ html, body {
   font-weight: $font-weight-medium;
   line-height: 1.5;
   border-radius: $radius-sm;
+  white-space: nowrap;
 
   &--success {
     color: $color-success;
@@ -561,4 +568,9 @@ html, body {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: $spacing-xl;
+}
+
+// 宽度工具类
+.w-full {
+  width: 100% !important;
 }

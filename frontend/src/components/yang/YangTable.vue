@@ -17,13 +17,14 @@
       :data="tableData"
       style="width: 100%"
       border
+      fit
     >
       <el-table-column
         v-for="col in columns"
         :key="col.name"
         :prop="col.name"
         :label="col.description || col.name"
-        :width="getColumnWidth(col)"
+        :min-width="getColumnWidth(col)"
       >
         <template #default="{ row }">
           <span v-if="col.type === 'boolean'">
@@ -44,8 +45,8 @@
       <el-table-column
         v-if="editable"
         label="操作"
-        width="120"
-        fixed="right"
+        :min-width="140"
+        align="center"
       >
         <template #default="{ row, $index }">
           <el-button size="small" @click="handleEdit(row, $index)">
@@ -61,13 +62,14 @@
     <!-- 编辑弹窗 -->
     <el-dialog
       v-model="dialogVisible"
-      :title="isEditing ? '编辑' : '新增'"
-      width="500px"
+      :title="isEditing ? '编辑' : '新增 VLAN'"
+      width="600px"
     >
       <el-form
         ref="formRef"
         :model="editForm"
-        label-width="100px"
+        label-width="120px"
+        class="vlan-form"
       >
         <YangField
           v-for="child in childNodes"
@@ -149,10 +151,12 @@ const editIndex = ref(-1)
 const formRef = ref<FormInstance>()
 const editForm = reactive<Record<string, FieldValue>>({})
 
-const getColumnWidth = (col: YangNode): number | undefined => {
+const getColumnWidth = (col: YangNode): number => {
   if (col.type === 'boolean') return 80
-  if (col.type === 'uint' || col.type === 'int') return 120
-  return undefined
+  if (col.type === 'uint' || col.type === 'int') return 100
+  if (col.type === 'enum') return 120
+  if (col.name === 'name' || col.name === 'description') return 180
+  return 150
 }
 
 const getEnumLabel = (col: YangNode, value: FieldValue): string => {
@@ -231,7 +235,14 @@ const handleSave = () => {
     font-size: var(--font-size-base);
     font-weight: var(--font-weight-semibold);
     color: var(--text-primary);
+    white-space: nowrap;
   }
+}
+
+:deep(.el-table .cell) {
+  white-space: nowrap;
+  padding-left: 12px;
+  padding-right: 12px;
 }
 
 :deep(.el-dialog) {
@@ -239,8 +250,44 @@ const handleSave = () => {
   border: 1px solid var(--border-color);
 }
 
+:deep(.el-table th .cell) {
+  font-weight: var(--font-weight-semibold);
+}
+
+:deep(.el-table__body-wrapper) {
+  overflow-x: auto;
+}
+
+/* 表格容器添加横向滚动支持，小屏幕下可滚动 */
+.yang-table {
+  overflow-x: auto;
+}
+
+
 :deep(.el-dialog__overlay) {
   background-color: rgba(0, 0, 0, 0.7);
   backdrop-filter: blur(4px);
+}
+
+.vlan-form {
+  :deep(.el-form-item) {
+    margin-bottom: 16px;
+  }
+
+  :deep(.el-input__wrapper) {
+    width: 100%;
+  }
+
+  :deep(.el-select) {
+    width: 100%;
+  }
+
+  :deep(.el-input-number) {
+    width: 100%;
+  }
+
+  :deep(.el-input-number .el-input__inner) {
+    text-align: left;
+  }
 }
 </style>
