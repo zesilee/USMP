@@ -3,11 +3,13 @@ package manager
 import (
 	"context"
 	"fmt"
+	"strings"
 	"time"
 
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/client"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/controller"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/plugin"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/predicate"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/reconcile"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/schema"
 	"github.com/leezesi/usmp/backend/internal/cache"
@@ -85,6 +87,9 @@ type Manager interface {
 	GetPluginManager() *plugin.Manager
 	// AddPlugin adds a plugin
 	AddPlugin(p plugin.Plugin)
+	// TriggerReconcile triggers immediate reconciliation for a device and path
+	// Returns true if a matching controller was found and triggered
+	TriggerReconcile(deviceID, path string) bool
 }
 
 // DefaultManager is the default implementation of Manager
@@ -224,4 +229,36 @@ func (m *DefaultManager) AddPlugin(p plugin.Plugin) {
 // Controllers returns the list of registered controllers
 func (m *DefaultManager) Controllers() []controller.Controller {
 	return m.controllers
+}
+
+// TriggerReconcile triggers immediate reconciliation for a device and path
+// It finds the controller that handles the given path prefix and enqueues an event
+func (m *DefaultManager) TriggerReconcile(deviceID, path string) bool {
+	for _, ctrl := range m.controllers {
+		// Check if this controller handles the path using its predicates
+		// We use a simple prefix match heuristic since we can't inspect predicates directly
+		// The controller name typically contains the module identifier
+		ctrlName := ctrl.Name()
+
+		// Match based on path prefixes - this aligns with our controller registration
+		if (strings.Contains(path, "vlan:") || strings.Contains(path, "vlans")) &&
+			strings.Contains(ctrlName, "vlan") {
+			ctrl.Enqueue(predicate.Event{
+				Type:     predicate.UpdateEvent,
+				DeviceID: deviceID,
+				Path:     path,
+			})
+			return true
+		}
+		if (strings.Contains(path, "ifm:") || strings.Contains(path, "interfaces")) &&
+			strings.Contains(ctrlName, "ifm") {
+			ctrl.Enqueue(predicate.Event{
+				Type:     predicate.UpdateEvent,
+				DeviceID: deviceID,
+				Path:     path,
+			})
+			return true
+		}
+	}
+	return false
 }
