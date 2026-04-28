@@ -5,10 +5,21 @@
       :props="props"
       @node-click="handleNodeClick"
       default-expand-all
-    />
+      :expand-on-click-node="false"
+      node-key="key"
+      :highlight-current="true"
+    >
+      <template #default="{ node, data }">
+        <div class="tree-node">
+          <span v-if="data.device && !data.yangPath" class="node-status status-dot status-dot--success"></span>
+          <span v-if="data.yangPath" class="node-module"></span>
+          <span class="node-label">{{ node.label }}</span>
+        </div>
+      </template>
+    </el-tree>
     <div class="device-actions">
-      <el-button type="primary" size="small" @click="refreshDevices">
-        刷新
+      <el-button size="small" @click="refreshDevices" class="refresh-btn">
+        刷新设备
       </el-button>
     </div>
   </div>
@@ -91,15 +102,51 @@ onMounted(() => {
 })
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .device-tree {
-  padding: 10px 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.tree-node {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.node-status {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background-color: var(--color-success);
+  box-shadow: 0 0 0 3px var(--color-success-bg);
+}
+
+.node-module {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background-color: var(--text-tertiary);
+  opacity: 0.5;
+}
+
+.node-label {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-primary);
 }
 
 .device-actions {
-  margin-top: 10px;
-  padding-top: 10px;
-  border-top: 1px solid #dcdfe6;
-  text-align: center;
+  padding: var(--spacing-lg) var(--spacing-xl);
+  border-top: 1px solid var(--border-color);
+  margin-top: auto;
+
+  .refresh-btn {
+    width: 100%;
+  }
 }
 </style>

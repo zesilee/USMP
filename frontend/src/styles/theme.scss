@@ -1,8 +1,92 @@
 @import './variables.scss';
 
+// ==================== CSS 变量导出 ====================
+// 将 SCSS 变量导出为 CSS 变量，供运行时使用
+:root {
+  // 主色调
+  --color-primary: #{$color-primary};
+  --color-primary-light: #{$color-primary-light};
+  --color-primary-dark: #{$color-primary-dark};
+  --color-primary-bg: #{$color-primary-bg};
+  --color-primary-glow: #{$color-primary-glow};
+
+  // 功能色
+  --color-success: #{$color-success};
+  --color-success-bg: #{$color-success-bg};
+  --color-warning: #{$color-warning};
+  --color-warning-bg: #{$color-warning-bg};
+  --color-error: #{$color-error};
+  --color-error-bg: #{$color-error-bg};
+  --color-info: #{$color-info};
+  --color-info-bg: #{$color-info-bg};
+
+  // 背景
+  --bg-page: #{$bg-page};
+  --bg-card: #{$bg-card};
+  --bg-card-hover: #{$bg-card-hover};
+  --bg-elevated: #{$bg-elevated};
+  --bg-hover: #{$bg-hover};
+  --bg-active: #{$bg-active};
+
+  // 边框
+  --border-color: #{$border-color};
+  --border-color-light: #{$border-color-light};
+  --border-color-dark: #{$border-color-dark};
+  --border-focus: #{$border-focus};
+
+  // 文字
+  --text-primary: #{$text-primary};
+  --text-secondary: #{$text-secondary};
+  --text-tertiary: #{$text-tertiary};
+  --text-disabled: #{$text-disabled};
+  --text-inverse: #{$text-inverse};
+
+  // 间距
+  --spacing-xs: #{$spacing-xs};
+  --spacing-sm: #{$spacing-sm};
+  --spacing-md: #{$spacing-md};
+  --spacing-lg: #{$spacing-lg};
+  --spacing-xl: #{$spacing-xl};
+  --spacing-2xl: #{$spacing-2xl};
+
+  // 圆角
+  --radius-sm: #{$radius-sm};
+  --radius-md: #{$radius-md};
+  --radius-lg: #{$radius-lg};
+  --radius-xl: #{$radius-xl};
+  --radius-full: #{$radius-full};
+
+  // 阴影
+  --shadow-e1: #{$shadow-e1};
+  --shadow-e2: #{$shadow-e2};
+  --shadow-e3: #{$shadow-e3};
+  --shadow-e4: #{$shadow-e4};
+
+  // 字体
+  --font-family: #{$font-family};
+  --font-family-mono: #{$font-family-mono};
+  --font-size-xs: #{$font-size-xs};
+  --font-size-sm: #{$font-size-sm};
+  --font-size-base: #{$font-size-base};
+  --font-size-lg: #{$font-size-lg};
+  --font-size-xl: #{$font-size-xl};
+  --font-size-2xl: #{$font-size-2xl};
+  --font-size-3xl: #{$font-size-3xl};
+  --font-size-4xl: #{$font-size-4xl};
+  --font-weight-normal: #{$font-weight-normal};
+  --font-weight-medium: #{$font-weight-medium};
+  --font-weight-semibold: #{$font-weight-semibold};
+  --font-weight-bold: #{$font-weight-bold};
+
+  // 动画
+  --transition-fast: #{$transition-fast};
+  --transition-base: #{$transition-base};
+  --transition-slow: #{$transition-slow};
+}
+
 // ==================== Element Plus 主题覆盖 ====================
 :root {
-  // 基础颜色覆盖
+  // 基础颜色
   --el-color-primary: #{$color-primary};
   --el-color-primary-light-3: #{$color-primary-light};
   --el-color-primary-dark-2: #{$color-primary-dark};
@@ -31,22 +115,20 @@
   // 填充
   --el-fill-color-blank: #{$bg-card};
   --el-fill-color: #{$bg-elevated};
+
+  // 字体
+  --el-font-family: #{$font-family};
+  --el-font-size-base: #{$font-size-base};
 }
 
 // ==================== 全局样式 ====================
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 html, body {
   height: 100%;
   background-color: $bg-page;
   color: $text-primary;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-family: $font-family;
   font-size: $font-size-base;
-  line-height: 1.6;
+  line-height: $line-height-base;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -55,18 +137,26 @@ html, body {
   height: 100%;
 }
 
+// 加载 Google Fonts
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
 // ==================== Element Plus 组件覆盖 ====================
 
-// 按钮 - 非对称设计，去 AI 味
+// 按钮 - 非对称设计，去 AI 陈词滥调感
 .el-button {
   border-radius: $radius-md;
   font-weight: $font-weight-medium;
+  font-family: $font-family;
   transition: all $transition-fast;
 
   &--primary {
     box-shadow: 0 2px 8px rgba(22, 93, 255, 0.3);
     &:hover {
       box-shadow: 0 4px 12px rgba(22, 93, 255, 0.4);
+      transform: translateY(-1px);
+    }
+    &:active {
+      transform: translateY(0);
     }
   }
 
@@ -111,6 +201,7 @@ html, body {
 
   .el-input__inner {
     color: $text-primary;
+    font-family: $font-family;
     &::placeholder {
       color: $text-tertiary;
     }
@@ -127,6 +218,7 @@ html, body {
 
   border-radius: $radius-lg;
   overflow: hidden;
+  font-family: $font-family;
 
   &::before {
     background-color: $border-color;
@@ -161,12 +253,14 @@ html, body {
   --el-tree-node-content-bg-color: transparent;
   background-color: transparent;
   color: $text-primary;
+  font-family: $font-family;
 
   .el-tree-node__content {
     border-radius: $radius-md;
     margin: 2px 8px;
     padding: 0 8px;
-    height: 32px;
+    height: 36px;
+    transition: all $transition-fast;
   }
 
   .el-tree-node.is-current > .el-tree-node__content {
@@ -181,12 +275,20 @@ html, body {
   --el-card-bg-color: $bg-card;
   --el-card-border-color: $border-color;
   border-radius: $radius-lg;
-  box-shadow: $shadow-sm;
+  box-shadow: $shadow-e1;
+  transition: all $transition-base;
+
+  &:hover {
+    box-shadow: $shadow-e3;
+    border-color: $color-primary;
+    transform: translateY(-2px);
+  }
 }
 
 // 抽屉
 .el-drawer {
   --el-drawer-bg-color: $bg-card;
+  font-family: $font-family;
 
   .el-drawer__header {
     color: $text-primary;
@@ -205,7 +307,8 @@ html, body {
   --el-dialog-bg-color: $bg-card;
   --el-dialog-title-color: $text-primary;
   border-radius: $radius-xl;
-  box-shadow: $shadow-xl;
+  box-shadow: $shadow-e4;
+  font-family: $font-family;
 
   .el-dialog__body {
     color: $text-secondary;
@@ -214,19 +317,25 @@ html, body {
 
 // 表单
 .el-form {
+  font-family: $font-family;
+
   .el-form-item__label {
     color: $text-secondary;
+    font-weight: $font-weight-medium;
   }
 }
 
 // 选择器
 .el-select {
+  font-family: $font-family;
+
   .el-select__wrapper {
     background-color: $bg-elevated;
     border-color: $border-color;
     color: $text-primary;
     border-radius: $radius-md;
     box-shadow: none;
+    transition: all $transition-fast;
 
     &:hover {
       border-color: $border-color-light;
@@ -244,7 +353,7 @@ html, body {
   --el-option-hover-bg-color: $bg-hover;
   --el-option-selected-bg-color: $color-primary-bg;
   border-color: $border-color;
-  box-shadow: $shadow-lg;
+  box-shadow: $shadow-e3;
 }
 
 // 分页
@@ -253,6 +362,7 @@ html, body {
   --el-pagination-text-color: $text-secondary;
   --el-pagination-button-bg-color: $bg-elevated;
   --el-pagination-button-disabled-bg-color: $bg-card;
+  font-family: $font-family;
 
   .btn-prev, .btn-next {
     background-color: $bg-elevated;
@@ -287,67 +397,48 @@ html, body {
 // 空状态
 .el-empty {
   --el-empty-description-color: #{$text-tertiary};
+  font-family: $font-family;
 
   .el-empty__description p {
     color: $text-tertiary;
   }
 }
 
+// 标签
+.el-tag {
+  font-family: $font-family;
+  border-radius: $radius-sm;
+  font-weight: $font-weight-medium;
+}
+
 // ==================== 工具类 ====================
 
-// 状态徽章基础样式
-.status-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 2px 8px;
-  font-size: $font-size-xs;
-  font-weight: $font-weight-medium;
-  line-height: 1.5;
+// 通用卡片容器
+.card-container {
+  background-color: $bg-card;
+  border: 1px solid $border-color;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-e1;
+  transition: all $transition-base;
 
-  &--success {
-    color: $color-success;
-    background-color: $color-success-bg;
-    border-radius: $radius-sm;
-  }
-
-  &--warning {
-    color: $color-warning;
-    background-color: $color-warning-bg;
-    border-radius: $radius-sm;
-  }
-
-  &--error {
-    color: $color-error;
-    background-color: $color-error-bg;
-    border-radius: $radius-sm;
-  }
-
-  &--info {
-    color: $color-info;
-    background-color: $color-info-bg;
-    border-radius: $radius-sm;
-  }
-
-  &--dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    flex-shrink: 0;
-
-    &.status-dot--success { background-color: $color-success; }
-    &.status-dot--warning { background-color: $color-warning; }
-    &.status-dot--error { background-color: $color-error; }
-    &.status-dot--info { background-color: $color-info; }
+  &:hover {
+    box-shadow: $shadow-e3;
+    border-color: rgba($color-primary, 0.5);
   }
 }
 
 // 页面标题
 .page-title {
-  font-size: $font-size-2xl;
+  font-size: $font-size-3xl;
   font-weight: $font-weight-semibold;
   color: $text-primary;
-  margin-bottom: $spacing-lg;
+  margin-bottom: $spacing-sm;
+}
+
+.page-description {
+  font-size: $font-size-base;
+  color: $text-secondary;
+  margin-bottom: $spacing-2xl;
 }
 
 // 卡片标题
@@ -363,4 +454,104 @@ html, body {
     font-weight: $font-weight-semibold;
     color: $text-primary;
   }
+}
+
+// 统计卡片
+.stat-card {
+  text-align: center;
+  padding: $spacing-xl;
+
+  .stat-value {
+    font-size: $font-size-4xl;
+    font-weight: $font-weight-bold;
+    color: $color-primary-light;
+    line-height: $line-height-tight;
+    margin-bottom: $spacing-sm;
+  }
+
+  .stat-label {
+    font-size: $font-size-sm;
+    color: $text-secondary;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+}
+
+// 状态徽章
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 8px;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+  line-height: 1.5;
+  border-radius: $radius-sm;
+
+  &--success {
+    color: $color-success;
+    background-color: $color-success-bg;
+  }
+
+  &--warning {
+    color: $color-warning;
+    background-color: $color-warning-bg;
+  }
+
+  &--error {
+    color: $color-error;
+    background-color: $color-error-bg;
+  }
+
+  &--info {
+    color: $color-info;
+    background-color: $color-info-bg;
+  }
+}
+
+// 状态点（带光晕效果）
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+
+  &--success {
+    background-color: $color-success;
+    box-shadow: 0 0 0 3px $color-success-bg;
+  }
+
+  &--warning {
+    background-color: $color-warning;
+    box-shadow: 0 0 0 3px $color-warning-bg;
+  }
+
+  &--error {
+    background-color: $color-error;
+    box-shadow: 0 0 0 3px $color-error-bg;
+  }
+
+  &--info {
+    background-color: $color-info;
+    box-shadow: 0 0 0 3px $color-info-bg;
+  }
+}
+
+// 网格布局
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $spacing-xl;
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $spacing-xl;
+}
+
+.grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: $spacing-xl;
 }

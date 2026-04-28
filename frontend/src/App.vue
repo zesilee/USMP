@@ -24,6 +24,7 @@
     <div class="app-body">
       <!-- Sidebar - Device Tree -->
       <aside class="app-sidebar">
+        <div class="sidebar-title">设备列表</div>
         <DeviceTree
           :devices="devices"
           @node-selected="onNodeSelected"
@@ -33,6 +34,10 @@
       <!-- Content Area -->
       <main class="app-content">
         <div v-if="currentDevice && currentYangPath" class="content-wrapper">
+          <div class="page-header">
+            <h2 class="page-title">{{ currentYangName }}</h2>
+            <p class="page-description">设备: {{ currentDevice.ip }}</p>
+          </div>
           <VlanManager
             v-if="currentYangPath === '/vlans'"
             :device-ip="currentDevice.ip"
@@ -43,13 +48,8 @@
           />
         </div>
 
-        <!-- Empty State -->
-        <div v-else class="empty-state">
-          <div class="empty-icon">
-          </div>
-          <h3 class="empty-title">选择设备和配置项</h3>
-          <p class="empty-desc">从左侧导航树选择设备和 YANG 配置节点，开始管理交换机配置</p>
-        </div>
+        <!-- Dashboard - Default View -->
+        <Dashboard v-else />
       </main>
     </div>
   </div>
@@ -60,6 +60,7 @@ import { ref } from 'vue'
 import DeviceTree from './components/DeviceTree.vue'
 import VlanManager from './components/vlan/VlanManager.vue'
 import InterfaceManager from './components/interfaces/InterfaceManager.vue'
+import Dashboard from './components/Dashboard.vue'
 import type { DeviceInfo } from './types/yang'
 
 const devices = ref<DeviceInfo[]>([
@@ -83,13 +84,11 @@ const onNodeSelected = (device: DeviceInfo, yangPath: string, name: string) => {
 </script>
 
 <style lang="scss">
-@import './styles/variables.scss';
-
 .app-container {
   height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: $bg-page;
+  background-color: var(--bg-page);
 }
 
 // Header
@@ -97,37 +96,44 @@ const onNodeSelected = (device: DeviceInfo, yangPath: string, name: string) => {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 56px;
-  padding: 0 $spacing-xl;
-  background-color: $bg-card;
-  border-bottom: 1px solid $border-color;
+  height: 64px;
+  padding: 0 var(--spacing-xl);
+  background-color: var(--bg-card);
+  border-bottom: 1px solid var(--border-color);
+  box-shadow: var(--shadow-e1);
+  z-index: 10;
 
   .header-left {
     display: flex;
     align-items: center;
-    gap: $spacing-md;
+    gap: var(--spacing-md);
 
     .app-title {
-      font-size: $font-size-lg;
-      font-weight: $font-weight-semibold;
-      color: $text-primary;
+      font-size: var(--font-size-xl);
+      font-weight: var(--font-weight-semibold);
+      color: var(--text-primary);
       margin: 0;
+      letter-spacing: -0.01em;
     }
   }
 
   .header-right {
     display: flex;
     align-items: center;
-    gap: $spacing-lg;
+    gap: var(--spacing-lg);
 
     .header-status {
       display: flex;
       align-items: center;
-      gap: $spacing-sm;
+      gap: var(--spacing-sm);
+      padding: var(--spacing-sm) var(--spacing-md);
+      background-color: var(--bg-elevated);
+      border-radius: var(--radius-md);
 
       .status-text {
-        font-size: $font-size-sm;
-        color: $text-secondary;
+        font-size: var(--font-size-sm);
+        color: var(--text-secondary);
+        font-weight: var(--font-weight-medium);
       }
     }
   }
@@ -141,23 +147,52 @@ const onNodeSelected = (device: DeviceInfo, yangPath: string, name: string) => {
 }
 
 .app-sidebar {
-  width: 260px;
-  background-color: $bg-card;
-  border-right: 1px solid $border-color;
+  width: 280px;
+  background-color: var(--bg-card);
+  border-right: 1px solid var(--border-color);
   overflow-y: auto;
   flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+
+  .sidebar-title {
+    padding: var(--spacing-lg) var(--spacing-xl) var(--spacing-md);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
 }
 
 .app-content {
   flex: 1;
   overflow-y: auto;
-  padding: $spacing-xl;
+  padding: var(--spacing-2xl);
+}
+
+// Page Header
+.page-header {
+  margin-bottom: var(--spacing-2xl);
+
+  .page-title {
+    font-size: var(--font-size-3xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+    margin: 0 0 var(--spacing-sm);
+    letter-spacing: -0.02em;
+  }
+
+  .page-description {
+    font-size: var(--font-size-base);
+    color: var(--text-secondary);
+    margin: 0;
+  }
 }
 
 // Content Wrapper
 .content-wrapper {
-  max-width: 1000px;
-  margin: 0 auto;
+  max-width: 1200px;
 }
 
 // Empty State
@@ -167,19 +202,26 @@ const onNodeSelected = (device: DeviceInfo, yangPath: string, name: string) => {
   align-items: center;
   justify-content: center;
   height: 100%;
-  min-height: 400px;
+  min-height: 500px;
+
+  .empty-icon {
+    opacity: 0.4;
+    margin-bottom: var(--spacing-xl);
+  }
 
   .empty-title {
-    font-size: $font-size-xl;
-    font-weight: $font-weight-semibold;
-    color: $text-primary;
-    margin: 20px 0 8px 0;
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+    margin: 0 0 var(--spacing-sm);
   }
 
   .empty-desc {
-    font-size: $font-size-base;
-    color: $text-tertiary;
+    font-size: var(--font-size-base);
+    color: var(--text-tertiary);
     margin: 0;
+    max-width: 400px;
+    text-align: center;
   }
 }
 
@@ -191,13 +233,8 @@ const onNodeSelected = (device: DeviceInfo, yangPath: string, name: string) => {
   flex-shrink: 0;
 
   &--success {
-    background-color: $color-success;
-    box-shadow: 0 0 0 3px rgba($color-success, 0.2);
+    background-color: var(--color-success);
+    box-shadow: 0 0 0 3px var(--color-success-bg);
   }
-}
-
-// Module Placeholder
-.module-placeholder {
-  padding: 60px 20px;
 }
 </style>

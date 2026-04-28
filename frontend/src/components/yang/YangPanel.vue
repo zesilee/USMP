@@ -1,16 +1,13 @@
 <template>
-  <el-card class="yang-panel" shadow="never">
-    <template #header>
-      <div class="panel-header">
-        <span class="panel-title">{{ title }}</span>
-        <el-tag v-if="!node.config" size="small" type="info">只读</el-tag>
-      </div>
-    </template>
-
+  <div class="yang-panel">
+    <div class="panel-header">
+      <span class="panel-title">{{ title }}</span>
+      <el-tag v-if="!node.config" size="small" type="info">只读</el-tag>
+    </div>
     <div class="panel-content">
       <slot />
     </div>
-  </el-card>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -30,22 +27,27 @@ const title = computed(() =>
 
 <style lang="scss" scoped>
 .yang-panel {
-  margin-bottom: 16px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  background-color: var(--bg-elevated);
+  margin-bottom: var(--spacing-xl);
 
   .panel-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    font-weight: 500;
-    color: var(--text-color-primary);
+    padding: var(--spacing-lg) var(--spacing-xl);
+    border-bottom: 1px solid var(--border-color);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+
+    .panel-title {
+      font-size: var(--font-size-base);
+    }
   }
 
-  .panel-title {
-    font-size: 15px;
-  }
-
-  :deep(.el-card__body) {
-    padding: 16px 20px;
+  .panel-content {
+    padding: var(--spacing-xl);
   }
 }
 </style>

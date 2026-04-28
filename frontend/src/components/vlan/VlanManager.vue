@@ -2,10 +2,6 @@
   <div class="vlan-manager">
     <!-- 操作栏 -->
     <div class="toolbar">
-      <div class="toolbar-left">
-        <h2 class="page-title">VLAN 配置管理</h2>
-        <el-tag size="small" type="info">{{ deviceIp }}</el-tag>
-      </div>
       <div class="toolbar-right">
         <el-button @click="handleRefresh" :loading="loading">
           <el-icon><Refresh /></el-icon>
@@ -19,11 +15,15 @@
     </div>
 
     <!-- 动态渲染 YANG 表单 -->
-    <YangRenderer
-      ref="rendererRef"
-      :yang-path="yangPath"
-      :device-ip="deviceIp"
-    />
+    <div class="card-container">
+      <div class="card-body">
+        <YangRenderer
+          ref="rendererRef"
+          :yang-path="yangPath"
+          :device-ip="deviceIp"
+        />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -32,6 +32,7 @@ import { ref } from 'vue'
 import { Refresh, Check } from '@element-plus/icons-vue'
 import { ElMessage } from 'element-plus'
 import YangRenderer from '../yang/YangRenderer.vue'
+import { setConfig } from '../../api'
 
 interface Props {
   deviceIp: string
@@ -51,9 +52,15 @@ const handleRefresh = () => {
 const handleSubmit = async () => {
   submitting.value = true
   try {
-    // TODO: 调用后端下发配置
-    await new Promise(resolve => setTimeout(resolve, 1000))
-    ElMessage.success('配置下发成功')
+    const formData = rendererRef.value?.formData || {}
+    const res = await setConfig(props.deviceIp, yangPath, formData)
+
+    if (res.data.success) {
+      ElMessage.success('配置下发成功')
+      await handleRefresh()
+    } else {
+      ElMessage.error(res.data.message || '下发失败')
+    }
   } catch (err: any) {
     ElMessage.error(err.message || '下发失败')
   } finally {
@@ -63,8 +70,6 @@ const handleSubmit = async () => {
 </script>
 
 <style lang="scss" scoped>
-@import '../../styles/variables.scss';
-
 .vlan-manager {
   width: 100%;
 }
@@ -72,27 +77,16 @@ const handleSubmit = async () => {
 .toolbar {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 16px 0;
-  margin-bottom: 16px;
-  border-bottom: 1px solid var(--border-color);
-
-  .toolbar-left {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-
-    .page-title {
-      font-size: 18px;
-      font-weight: 600;
-      color: var(--text-color-primary);
-      margin: 0;
-    }
-  }
+  justify-content: flex-end;
+  margin-bottom: var(--spacing-xl);
 
   .toolbar-right {
     display: flex;
-    gap: 8px;
+    gap: var(--spacing-md);
   }
+}
+
+.card-body {
+  padding: var(--spacing-xl);
 }
 </style>

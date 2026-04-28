@@ -164,20 +164,24 @@ watch(() => props.yangPath, () => {
 }
 
 .loading-state, .error-state {
-  padding: 40px 20px;
+  padding: 60px 20px;
   text-align: center;
 }
 
 .loading-state {
-  color: var(--text-color-secondary);
+  color: var(--text-secondary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-md);
 
   .el-icon {
     font-size: 32px;
-    margin-bottom: 12px;
+    color: var(--color-primary);
   }
 }
 
 .empty-state {
-  padding: 40px 20px;
+  padding: 60px 20px;
 }
 </style>

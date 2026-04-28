@@ -2,10 +2,6 @@
   <div class="interface-manager">
     <!-- 操作栏 -->
     <div class="toolbar">
-      <div class="toolbar-left">
-        <h2 class="page-title">接口配置管理</h2>
-        <el-tag size="small" type="info">{{ deviceIp }}</el-tag>
-      </div>
       <div class="toolbar-right">
         <el-button @click="handleRefresh" :loading="loading">
           <el-icon><Refresh /></el-icon>
@@ -19,11 +15,15 @@
     </div>
 
     <!-- 动态渲染 YANG 表单 -->
-    <YangRenderer
-      ref="rendererRef"
-      :yang-path="yangPath"
-      :device-ip="deviceIp"
-    />
+    <div class="card-container">
+      <div class="card-body">
+        <YangRenderer
+          ref="rendererRef"
+          :yang-path="yangPath"
+          :device-ip="deviceIp"
+        />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -52,15 +52,11 @@ const handleRefresh = () => {
 const handleSubmit = async () => {
   submitting.value = true
   try {
-    // 获取当前表单数据
     const formData = rendererRef.value?.formData || {}
-
-    // 调用后端下发配置
     const res = await setConfig(props.deviceIp, yangPath, formData)
 
     if (res.data.success) {
       ElMessage.success('配置下发成功')
-      // 刷新数据
       await handleRefresh()
     } else {
       ElMessage.error(res.data.message || '下发失败')
@@ -74,8 +70,6 @@ const handleSubmit = async () => {
 </script>
 
 <style lang="scss" scoped>
-@import '../../styles/variables.scss';
-
 .interface-manager {
   width: 100%;
 }
@@ -83,27 +77,16 @@ const handleSubmit = async () => {
 .toolbar {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 16px 0;
-  margin-bottom: 16px;
-  border-bottom: 1px solid $border-color;
-
-  .toolbar-left {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-
-    .page-title {
-      font-size: 18px;
-      font-weight: 600;
-      color: $text-primary;
-      margin: 0;
-    }
-  }
+  justify-content: flex-end;
+  margin-bottom: var(--spacing-xl);
 
   .toolbar-right {
     display: flex;
-    gap: 8px;
+    gap: var(--spacing-md);
   }
+}
+
+.card-body {
+  padding: var(--spacing-xl);
 }
 </style>
