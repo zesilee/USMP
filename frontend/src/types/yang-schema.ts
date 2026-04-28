@@ -388,3 +388,47 @@ export function getDefaultValue(node: YangNode): FieldValue {
     default: return undefined
   }
 }
+
+// ============== 键名转换工具 ==============
+
+/** kebab-case 转 camelCase */
+export function kebabToCamel(str: string): string {
+  return str.replace(/-([a-z])/g, (_, c) => c.toUpperCase())
+}
+
+/** camelCase 转 kebab-case */
+export function camelToKebab(str: string): string {
+  return str.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase()
+}
+
+/** 递归转换对象的键名 - 方向: kebab -> camel */
+export function convertKeysToCamel<T = any>(obj: any): T {
+  if (obj === null || obj === undefined) return obj as T
+  if (Array.isArray(obj)) return obj.map(item => convertKeysToCamel(item)) as unknown as T
+  if (typeof obj !== 'object') return obj as T
+
+  const result: Record<string, any> = {}
+  for (const key in obj) {
+    if (Object.prototype.hasOwnProperty.call(obj, key)) {
+      const newKey = kebabToCamel(key)
+      result[newKey] = convertKeysToCamel(obj[key])
+    }
+  }
+  return result as T
+}
+
+/** 递归转换对象的键名 - 方向: camel -> kebab */
+export function convertKeysToKebab<T = any>(obj: any): T {
+  if (obj === null || obj === undefined) return obj as T
+  if (Array.isArray(obj)) return obj.map(item => convertKeysToKebab(item)) as unknown as T
+  if (typeof obj !== 'object') return obj as T
+
+  const result: Record<string, any> = {}
+  for (const key in obj) {
+    if (Object.prototype.hasOwnProperty.call(obj, key)) {
+      const newKey = camelToKebab(key)
+      result[newKey] = convertKeysToKebab(obj[key])
+    }
+  }
+  return result as T
+}

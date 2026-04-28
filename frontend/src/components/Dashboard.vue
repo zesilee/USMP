@@ -121,6 +121,10 @@ onMounted(() => {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: var(--spacing-xl);
+
+  @media (max-width: 1200px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 .stat-card {
@@ -130,6 +134,7 @@ onMounted(() => {
   padding: var(--spacing-xl) var(--spacing-2xl);
   text-align: center;
   transition: all var(--transition-fast);
+  min-width: 140px;
 
   &:hover {
     border-color: rgba(22, 93, 255, 0.5);
@@ -143,6 +148,7 @@ onMounted(() => {
     color: var(--text-primary);
     line-height: 1.2;
     margin-bottom: var(--spacing-sm);
+    white-space: nowrap;
 
     &--success {
       color: var(--color-success);
@@ -163,6 +169,7 @@ onMounted(() => {
     text-transform: uppercase;
     letter-spacing: 0.08em;
     font-weight: var(--font-weight-medium);
+    white-space: nowrap;
   }
 }
 
@@ -177,10 +184,12 @@ onMounted(() => {
   font-weight: var(--font-weight-medium);
   color: var(--text-primary);
   font-family: var(--font-family-mono);
+  white-space: nowrap;
 }
 
 .text-secondary {
   color: var(--text-secondary);
+  white-space: nowrap;
 }
 
 .card-header {

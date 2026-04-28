@@ -71,7 +71,7 @@ import { Loading } from '@element-plus/icons-vue'
 import YangPanel from './YangPanel.vue'
 import YangTable from './YangTable.vue'
 import YangField from './YangField.vue'
-import { getSchemaByPath, getDefaultValue } from '../../types/yang-schema'
+import { getSchemaByPath, getDefaultValue, convertKeysToKebab } from '../../types/yang-schema'
 import { getConfig, setConfig } from '../../api'
 import type { YangNode, FormData, FieldValue } from '../../types/yang-schema'
 
@@ -124,7 +124,8 @@ const loadData = async () => {
       // 后端返回 { vlans: [...], fromCache, lastSync } 格式
       // 使用除了元数据字段之外的配置数据
       const { fromCache, lastSync, ...configData } = res.data.data
-      formData.value = configData
+      // 统一转换为 kebab-case 格式，确保与 schema 一致
+      formData.value = convertKeysToKebab(configData)
     } else {
       // 初始化默认值
       initDefaultValues()

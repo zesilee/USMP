@@ -138,6 +138,11 @@ onMounted(() => {
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-medium);
   color: var(--text-primary);
+  white-space: nowrap;
+}
+
+:deep(.el-tree-node__content) {
+  white-space: nowrap;
 }
 
 .device-actions {

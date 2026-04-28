@@ -43,6 +43,7 @@ const title = computed(() =>
 
     .panel-title {
       font-size: var(--font-size-base);
+      white-space: nowrap;
     }
   }
 

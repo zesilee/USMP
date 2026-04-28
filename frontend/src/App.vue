@@ -181,12 +181,14 @@ const onNodeSelected = (device: DeviceInfo, yangPath: string, name: string) => {
     color: var(--text-primary);
     margin: 0 0 var(--spacing-sm);
     letter-spacing: -0.02em;
+    white-space: nowrap;
   }
 
   .page-description {
     font-size: var(--font-size-base);
     color: var(--text-secondary);
     margin: 0;
+    white-space: nowrap;
   }
 }
 

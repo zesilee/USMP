@@ -62,7 +62,7 @@
     <!-- 编辑弹窗 -->
     <el-dialog
       v-model="dialogVisible"
-      :title="isEditing ? '编辑' : '新增 VLAN'"
+      :title="dialogTitle"
       width="600px"
     >
       <el-form
@@ -76,6 +76,7 @@
           :key="child.path"
           :node="child"
           v-model="editForm[child.name]"
+          @validate="(r) => handleFieldValidate(child.name, r)"
         />
       </el-form>
 
@@ -90,10 +91,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, reactive } from 'vue'
+import { ref, computed, reactive, nextTick } from 'vue'
 import { Plus } from '@element-plus/icons-vue'
+import { ElMessage } from 'element-plus'
 import YangField from './YangField.vue'
-import type { YangNode, FormData, FieldValue } from '../../types/yang-schema'
+import { validateField, kebabToCamel, convertKeysToCamel, convertKeysToKebab, type YangNode, type FormData, type FieldValue } from '../../types/yang-schema'
 import type { FormInstance } from 'element-plus'
 
 interface Props {
@@ -123,6 +125,15 @@ const addButtonText = computed(() => {
   return '新建'
 })
 
+const dialogTitle = computed(() => {
+  const name = props.node.name || ''
+  let itemName = '项'
+  if (name.includes('vlan')) itemName = 'VLAN'
+  if (name.includes('interface')) itemName = '接口'
+  if (name.includes('port')) itemName = '端口'
+  return isEditing.value ? `编辑 ${itemName}` : `新建 ${itemName}`
+})
+
 // 对于 VLAN schema，list node 是 /vlans/vlan，它的子节点就是字段
 // 对于其他嵌套结构，需要适配
 const childNodes = computed(() => {
@@ -133,6 +144,17 @@ const childNodes = computed(() => {
   }
   // 否则直接使用 node 的 children
   return props.node.children?.filter(c => c.config !== false) || []
+})
+
+// 收集所有子节点的验证结果
+const validationResults = ref<Record<string, boolean>>({})
+
+const handleFieldValidate = (fieldName: string, result: any) => {
+  validationResults.value[fieldName] = result.valid
+}
+
+const hasValidationErrors = computed(() => {
+  return Object.values(validationResults.value).some(v => v === false)
 })
 
 const columns = computed(() => {
@@ -164,11 +186,6 @@ const getEnumLabel = (col: YangNode, value: FieldValue): string => {
   return opt?.name || String(value || '-')
 }
 
-// kebab-case to camelCase: admin-status -> adminStatus
-const kebabToCamel = (str: string): string => {
-  return str.replace(/-([a-z])/g, (_, c) => c.toUpperCase())
-}
-
 // 兼容处理字段名：支持 schema 中的 kebab-case 和数据中的 camelCase
 const getFieldValue = (row: Record<string, any>, fieldName: string): any => {
   // 先尝试直接访问
@@ -186,6 +203,7 @@ const getFieldValue = (row: Record<string, any>, fieldName: string): any => {
 const handleAdd = () => {
   isEditing.value = false
   editIndex.value = -1
+  validationResults.value = {}
   Object.keys(editForm).forEach(key => delete editForm[key])
   // 设置默认值
   childNodes.value.forEach(child => {
@@ -199,8 +217,11 @@ const handleAdd = () => {
 const handleEdit = (row: Record<string, any>, index: number) => {
   isEditing.value = true
   editIndex.value = index
+  validationResults.value = {}
   Object.keys(editForm).forEach(key => delete editForm[key])
-  Object.assign(editForm, row)
+  // 确保键名格式一致，转换为 kebab-case
+  const normalizedRow = convertKeysToKebab(row)
+  Object.assign(editForm, normalizedRow)
   dialogVisible.value = true
 }
 
@@ -210,15 +231,33 @@ const handleDelete = (index: number) => {
   emit('update:modelValue', newValue)
 }
 
-const handleSave = () => {
+const handleSave = async () => {
+  // 触发表单验证 - 先触发所有字段的验证
+  let hasErrors = false
+  childNodes.value.forEach(node => {
+    const result = validateField(node, editForm[node.name])
+    if (!result.valid) {
+      hasErrors = true
+      validationResults.value[node.name] = false
+    }
+  })
+
+  if (hasErrors) {
+    ElMessage.error('请检查表单中的错误')
+    return
+  }
+
+  // 保存前确保键名格式一致
+  const formDataKebab = convertKeysToKebab({ ...editForm })
   const newValue = [...tableData.value]
   if (isEditing.value && editIndex.value >= 0) {
-    newValue[editIndex.value] = { ...editForm }
+    newValue[editIndex.value] = formDataKebab
   } else {
-    newValue.push({ ...editForm })
+    newValue.push(formDataKebab)
   }
   emit('update:modelValue', newValue)
   dialogVisible.value = false
+  ElMessage.success('保存成功')
 }
 </script>
 
