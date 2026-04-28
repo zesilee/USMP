@@ -64,7 +64,7 @@
 - 配置编辑→提交→下发，全程联动后端 YANG Actor + NETCONF
 - 展示设备状态、缓存状态、下发结果、异常信息（设备离线、NETCONF失败等）
 
-## 四、技能集关联（10个技能，自动联动）
+## 四、技能集关联（自动联动）
 | 技能名称 | 核心作用 | 联动模块 |
 |----------|----------|----------|
 | **yang-controller-runtime-dev** | 基于 yang-controller-runtime 开发 YANG 模块控制器 | 所有新 YANG 控制器开发，遵循架构规范 |
@@ -76,6 +76,12 @@
 | go-code-review-check | 自动代码评审，确保合规性 | 所有代码提交前强制评审 |
 | git-what-why-how-commit | 标准三段式 Commit 规范 | **每次迭代完成必须提交**，小步迭代 |
 | frontend-yang-dynamic-form | 基于 YANG 自动生成前端表单 | 后端 API 接口，实现前后端联动 |
+| **web-design-engineer** | 高质量视觉 Web 设计（HTML/CSS/JS/React） | **所有前端 UI/UX 设计、页面开发、可视化需求自动触发**，包括：仪表盘、登录页、配置页面、数据可视化、交互原型、动画效果等 |
+
+### 前端开发技能触发规则
+- **功能型前端开发**（动态表单、YANG 模型驱动页面）→ 使用 `frontend-yang-dynamic-form` skill
+- **视觉设计型前端开发**（页面美化、UI/UX 优化、数据可视化、交互原型、动画效果）→ 使用 `web-design-engineer` skill
+- **纯逻辑前端开发**（状态管理、API 对接、组件封装）→ 按通用流程，不强制使用特定 skill
 
 ## 五、开发优先级（迭代顺序）
 1.  **框架实现**：yang-controller-runtime 核心架构（已完成）
