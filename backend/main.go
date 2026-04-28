@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/leezesi/usmp/backend/internal/api"
-	"github.com/leezesi/usmp/backend/internal/controller/interfaces"
+	"github.com/leezesi/usmp/backend/internal/controller/ifm"
 	"github.com/leezesi/usmp/backend/internal/controller/vlan"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/controller"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/manager"
@@ -39,17 +39,17 @@ func main() {
 	mgr.AddController(vlanCtrl)
 	log.Printf("Huawei VLAN controller registered successfully")
 
-	// Create and register the OpenConfig Interfaces controller
-	// The Interfaces controller reconciles interface configuration every 5 minutes
-	interfacesCtrl := controller.ControllerManagedBy("openconfig-interfaces").
-		WithReconciler(interfaces.New(cs, clientPool)).
-		WithSource(source.NewPeriodicSource(5 * time.Minute, nil, "/interfaces")).
-		WithPredicate(predicate.Prefix("/interfaces")).
+	// Create and register the Huawei IFM controller
+	// The IFM controller reconciles interface configuration every 5 minutes
+	ifmCtrl := controller.ControllerManagedBy("huawei-ifm").
+		WithReconciler(ifm.New(cs, clientPool)).
+		WithSource(source.NewPeriodicSource(5 * time.Minute, nil, "/ifm:ifm/ifm:interfaces")).
+		WithPredicate(predicate.Prefix("/ifm:ifm/ifm:interfaces")).
 		WithWorkerCount(2).
 		Build()
 
-	mgr.AddController(interfacesCtrl)
-	log.Printf("OpenConfig Interfaces controller registered successfully")
+	mgr.AddController(ifmCtrl)
+	log.Printf("Huawei IFM controller registered successfully")
 
 	// Start the manager - loads schema, starts all controllers
 	ctx, cancel := context.WithCancel(context.Background())

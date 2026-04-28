@@ -123,10 +123,10 @@ export const VLAN_SCHEMA: YangNode = {
           description: '管理状态',
           config: true,
           enumOptions: [
-            { name: 'UP', value: 'UP', description: '启用' },
-            { name: 'DOWN', value: 'DOWN', description: '禁用' }
+            { name: 'Up', value: 2, description: '启用' },
+            { name: 'Down', value: 1, description: '禁用' }
           ],
-          default: 'UP'
+          default: 2
         },
         {
           path: '/vlans/vlan/oper-status',
@@ -177,16 +177,16 @@ export const VLAN_SCHEMA: YangNode = {
   ]
 }
 
-/** OpenConfig Interfaces 模型 */
+/** 华为 IFM 接口管理模型 */
 export const INTERFACES_SCHEMA: YangNode = {
-  path: '/interfaces',
+  path: '/ifm:ifm/ifm:interfaces',
   name: 'interfaces',
   type: 'container',
   description: '接口配置管理',
   config: true,
   children: [
     {
-      path: '/interfaces/interface',
+      path: '/ifm:ifm/ifm:interfaces/interface',
       name: 'interface',
       type: 'list',
       description: '接口列表',
@@ -194,7 +194,7 @@ export const INTERFACES_SCHEMA: YangNode = {
       config: true,
       children: [
         {
-          path: '/interfaces/interface/name',
+          path: '/ifm:ifm/ifm:interfaces/interface/name',
           name: 'name',
           type: 'string',
           description: '接口名称',
@@ -202,105 +202,50 @@ export const INTERFACES_SCHEMA: YangNode = {
           mandatory: true
         },
         {
-          path: '/interfaces/interface/config',
-          name: 'config',
-          type: 'container',
-          description: '接口配置',
-          config: true,
-          children: [
-            {
-              path: '/interfaces/interface/config/name',
-              name: 'name',
-              type: 'string',
-              description: '接口名称',
-              config: true,
-              mandatory: true
-            },
-            {
-              path: '/interfaces/interface/config/type',
-              name: 'type',
-              type: 'enum',
-              description: '接口类型',
-              config: true,
-              enumOptions: [
-                { name: '物理接口', value: 'PHYSICAL', description: '物理接口' },
-                { name: '逻辑接口', value: 'LOGICAL', description: '逻辑接口' },
-                { name: '聚合接口', value: 'LAG', description: '链路聚合接口' },
-                { name: 'Loopback', value: 'LOOPBACK', description: '环回接口' },
-                { name: 'VLAN', value: 'VLAN', description: 'VLAN 子接口' }
-              ],
-              default: 'PHYSICAL'
-            },
-            {
-              path: '/interfaces/interface/config/mtu',
-              name: 'mtu',
-              type: 'uint',
-              description: 'MTU (最大传输单元)',
-              config: true,
-              range: { min: 64, max: 9216 },
-              default: 1500
-            },
-            {
-              path: '/interfaces/interface/config/enabled',
-              name: 'enabled',
-              type: 'boolean',
-              description: '是否启用',
-              config: true,
-              default: true
-            },
-            {
-              path: '/interfaces/interface/config/description',
-              name: 'description',
-              type: 'string',
-              description: '接口描述',
-              config: true,
-              length: { min: 0, max: 255 }
-            }
-          ]
+          path: '/ifm:ifm/ifm:interfaces/interface/description',
+          name: 'description',
+          type: 'string',
+          description: '接口描述',
+          config: true
         },
         {
-          path: '/interfaces/interface/state',
-          name: 'state',
-          type: 'container',
-          description: '接口运行状态',
-          config: false,
-          children: [
-            {
-              path: '/interfaces/interface/state/ifindex',
-              name: 'ifindex',
-              type: 'uint',
-              description: '接口索引',
-              config: false
-            },
-            {
-              path: '/interfaces/interface/state/admin-status',
-              name: 'admin-status',
-              type: 'enum',
-              description: '管理状态',
-              config: false,
-              enumOptions: [
-                { name: 'UP', value: 'UP', description: '启用' },
-                { name: 'DOWN', value: 'DOWN', description: '禁用' },
-                { name: 'TESTING', value: 'TESTING', description: '测试中' }
-              ]
-            },
-            {
-              path: '/interfaces/interface/state/oper-status',
-              name: 'oper-status',
-              type: 'enum',
-              description: '运行状态',
-              config: false,
-              enumOptions: [
-                { name: 'UP', value: 'UP', description: '正常运行' },
-                { name: 'DOWN', value: 'DOWN', description: '关闭' },
-                { name: 'TESTING', value: 'TESTING', description: '测试中' },
-                { name: 'UNKNOWN', value: 'UNKNOWN', description: '未知' },
-                { name: 'DORMANT', value: 'DORMANT', description: '休眠' },
-                { name: 'NOT_PRESENT', value: 'NOT_PRESENT', description: '不存在' },
-                { name: 'LOWER_LAYER_DOWN', value: 'LOWER_LAYER_DOWN', description: '下层链路断开' }
-              ]
-            }
-          ]
+          path: '/ifm:ifm/ifm:interfaces/interface/admin-status',
+          name: 'admin-status',
+          type: 'enum',
+          description: '管理状态',
+          config: true,
+          enumOptions: [
+            { name: 'Up', value: 2, description: '启用' },
+            { name: 'Down', value: 1, description: '禁用' }
+          ],
+          default: 2
+        },
+        {
+          path: '/ifm:ifm/ifm:interfaces/interface/mtu',
+          name: 'mtu',
+          type: 'uint',
+          description: 'MTU (最大传输单元)',
+          config: true,
+          range: { min: 64, max: 9216 },
+          default: 1500
+        },
+        {
+          path: '/ifm:ifm/ifm:interfaces/interface/type',
+          name: 'type',
+          type: 'enum',
+          description: '接口类型',
+          config: true,
+          enumOptions: [
+            { name: 'Ethernet', value: 1, description: '以太网接口' },
+            { name: 'GigabitEthernet', value: 3, description: '千兆以太网接口' },
+            { name: '100GE', value: 21, description: '100G 以太网接口' },
+            { name: '40GE', value: 24, description: '40G 以太网接口' },
+            { name: 'Eth-Trunk', value: 5, description: '链路聚合接口' },
+            { name: 'Vlanif', value: 16, description: 'VLAN 接口' },
+            { name: 'LoopBack', value: 20, description: '环回接口' },
+            { name: 'Tunnel', value: 15, description: '隧道接口' }
+          ],
+          default: 1
         }
       ]
     }
@@ -310,6 +255,8 @@ export const INTERFACES_SCHEMA: YangNode = {
 /** Schema 注册表 */
 export const SCHEMA_REGISTRY: Record<string, YangNode> = {
   '/vlans': VLAN_SCHEMA,
+  '/ifm:ifm/ifm:interfaces': INTERFACES_SCHEMA,
+  // 向后兼容
   '/interfaces': INTERFACES_SCHEMA
 }
 

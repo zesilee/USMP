@@ -40,7 +40,7 @@ interface Props {
 
 const props = defineProps<Props>()
 
-const yangPath = '/interfaces'
+const yangPath = '/ifm:ifm/ifm:interfaces'
 const loading = ref(false)
 const submitting = ref(false)
 const rendererRef = ref()
