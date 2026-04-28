@@ -5,10 +5,12 @@ import (
 	"encoding/xml"
 	"fmt"
 	"reflect"
+	"strconv"
 	"strings"
 	"sync"
 	"time"
 
+	"github.com/leezesi/usmp/backend/internal/generated/huawei"
 	"github.com/leezesi/usmp/backend/internal/generated/openconfig"
 	"github.com/scrapli/scrapligo/driver/netconf"
 	"github.com/scrapli/scrapligo/driver/options"
@@ -347,6 +349,11 @@ func (c *NETCONFClient) marshalChange(change Change) (string, error) {
 		return buildOpenConfigInterfacesXML(interfaces)
 	}
 
+	// Special case: *huawei.HuaweiIfm_Ifm_Interfaces - Huawei IFM model
+	if ifaces, ok := change.NewValue.(*huawei.HuaweiIfm_Ifm_Interfaces); ok && ifaces != nil {
+		return buildHuaweiIfmInterfacesXML(ifaces)
+	}
+
 	// Try xml.Marshal for other types
 	output, err := xml.Marshal(change.NewValue)
 	if err == nil {
@@ -376,6 +383,14 @@ func (c *NETCONFClient) marshalChange(change Change) (string, error) {
 		v = v.Elem()
 	}
 	if v.Kind() == reflect.Map {
+		// Special case: Huawei IFM interface config from JSON map
+		if strings.Contains(change.Path, "ifm:ifm") && strings.Contains(change.Path, "interfaces") {
+			ifaces, err := mapToHuaweiIfmInterfaces(change.NewValue)
+			if err == nil {
+				return buildHuaweiIfmInterfacesXML(ifaces)
+			}
+		}
+
 		var builder strings.Builder
 
 		// Determine container tag based on the path
@@ -495,6 +510,173 @@ func buildOpenConfigInterfacesXML(interfaces *openconfig.OpenconfigInterfaces_In
 
 	builder.WriteString("</interfaces>")
 	return builder.String(), nil
+}
+
+// buildHuaweiIfmInterfacesXML generates Huawei IFM standard XML for interfaces.
+func buildHuaweiIfmInterfacesXML(ifaces *huawei.HuaweiIfm_Ifm_Interfaces) (string, error) {
+	if ifaces == nil || len(ifaces.Interface) == 0 {
+		return `<interfaces xmlns="urn:huawei:params:xml:ns:yang:huawei-ifm"/>`, nil
+	}
+
+	var builder strings.Builder
+	builder.WriteString(`<interfaces xmlns="urn:huawei:params:xml:ns:yang:huawei-ifm">`)
+
+	for name, iface := range ifaces.Interface {
+		if iface == nil {
+			continue
+		}
+
+		builder.WriteString("<interface>")
+
+		// Interface name (required)
+		if iface.Name != nil {
+			builder.WriteString(fmt.Sprintf("<name>%s</name>", xmlEscape(*iface.Name)))
+		} else {
+			builder.WriteString(fmt.Sprintf("<name>%s</name>", xmlEscape(name)))
+		}
+
+		// Description
+		if iface.Description != nil {
+			builder.WriteString(fmt.Sprintf("<description>%s</description>", xmlEscape(*iface.Description)))
+		}
+
+		// AdminStatus (enum 1=down, 2=up)
+		if iface.AdminStatus != 0 {
+			builder.WriteString(fmt.Sprintf("<admin-status>%d</admin-status>", iface.AdminStatus))
+		}
+
+		// MTU
+		if iface.Mtu != nil {
+			builder.WriteString(fmt.Sprintf("<mtu>%d</mtu>", *iface.Mtu))
+		}
+
+		// Interface Type (enum value)
+		if iface.Type != 0 {
+			builder.WriteString(fmt.Sprintf("<type>%d</type>", iface.Type))
+		}
+
+		builder.WriteString("</interface>")
+	}
+
+	builder.WriteString("</interfaces>")
+	return builder.String(), nil
+}
+
+// mapToHuaweiIfmInterfaces converts a map (from JSON unmarshal) to Huawei IFM struct
+func mapToHuaweiIfmInterfaces(data interface{}) (*huawei.HuaweiIfm_Ifm_Interfaces, error) {
+	result := &huawei.HuaweiIfm_Ifm_Interfaces{
+		Interface: make(map[string]*huawei.HuaweiIfm_Ifm_Interfaces_Interface),
+	}
+
+	dataMap, ok := data.(map[string]interface{})
+	if !ok {
+		return nil, fmt.Errorf("expected map[string]interface{}, got %T", data)
+	}
+
+	// The "interface" key contains the list of interfaces
+	ifacesData, ok := dataMap["interface"]
+	if !ok {
+		// Try kebab-case "interface" (from frontend schema)
+		ifacesData, ok = dataMap["interface"]
+		if !ok {
+			// Try with "Interface" (PascalCase from marshaled struct)
+			ifacesData, ok = dataMap["Interface"]
+			if !ok {
+				// If no interface field, assume this IS the interface config itself
+				// Create a dummy entry with the data
+				result.Interface["default"] = mapEntryToHuaweiInterface(dataMap)
+				return result, nil
+			}
+		}
+	}
+
+	// ifacesData could be a slice or a map
+	v := reflect.ValueOf(ifacesData)
+	switch v.Kind() {
+	case reflect.Map:
+		// Map case: key is interface name, value is interface config
+		for _, key := range v.MapKeys() {
+			entryVal := v.MapIndex(key)
+			if entryMap, ok := entryVal.Interface().(map[string]interface{}); ok {
+				ifaceName := key.String()
+				result.Interface[ifaceName] = mapEntryToHuaweiInterface(entryMap)
+			}
+		}
+	case reflect.Slice:
+		// Slice case: array of interface configs
+		for i := 0; i < v.Len(); i++ {
+			entryVal := v.Index(i)
+			if entryMap, ok := entryVal.Interface().(map[string]interface{}); ok {
+				iface := mapEntryToHuaweiInterface(entryMap)
+				if iface.Name != nil {
+					result.Interface[*iface.Name] = iface
+				} else {
+					result.Interface[fmt.Sprintf("iface-%d", i)] = iface
+				}
+			}
+		}
+	}
+
+	return result, nil
+}
+
+// mapEntryToHuaweiInterface converts a single interface config map entry to Huawei struct
+func mapEntryToHuaweiInterface(m map[string]interface{}) *huawei.HuaweiIfm_Ifm_Interfaces_Interface {
+	result := &huawei.HuaweiIfm_Ifm_Interfaces_Interface{}
+
+	for k, v := range m {
+		// Normalize key to handle kebab-case, camelCase, PascalCase variations
+		key := strings.ToLower(strings.ReplaceAll(k, "-", ""))
+
+		switch key {
+		case "name":
+			if s, ok := v.(string); ok {
+				result.Name = &s
+			}
+		case "description":
+			if s, ok := v.(string); ok {
+				result.Description = &s
+			}
+		case "adminstatus":
+			if num, ok := valueToUint(v); ok {
+				result.AdminStatus = huawei.E_HuaweiIfm_PortStatus(num)
+			}
+		case "mtu":
+			if num, ok := valueToUint(v); ok {
+				uint32Val := uint32(num)
+				result.Mtu = &uint32Val
+			}
+		case "type":
+			if num, ok := valueToUint(v); ok {
+				result.Type = huawei.E_HuaweiIfm_PortType(num)
+			}
+		}
+	}
+
+	return result
+}
+
+// valueToUint converts various numeric types to uint64
+func valueToUint(v interface{}) (uint64, bool) {
+	switch val := v.(type) {
+	case float64:
+		return uint64(val), true
+	case int:
+		return uint64(val), true
+	case int64:
+		return uint64(val), true
+	case uint:
+		return uint64(val), true
+	case uint32:
+		return uint64(val), true
+	case uint64:
+		return val, true
+	case string:
+		if num, err := strconv.ParseUint(val, 10, 64); err == nil {
+			return num, true
+		}
+	}
+	return 0, false
 }
 
 // xmlEscape escapes XML special characters in a string

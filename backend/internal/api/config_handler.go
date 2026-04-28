@@ -24,7 +24,7 @@ func NewConfigHandler(manager manager.Manager) *ConfigHandler {
 // GetConfig gets the configuration for a specific device and YANG path
 func (h *ConfigHandler) GetConfig(c *gin.Context) {
 	ip := c.Param("ip")
-	path := "/" + c.Param("path")
+	path := c.Param("path") // *path already includes leading slash
 	_ = c.Query("force_refresh") == "true" // TODO: Implement cache invalidation when we have caching
 
 	// Get the device info from device handler
@@ -64,7 +64,7 @@ func (h *ConfigHandler) GetConfig(c *gin.Context) {
 // SetConfig sets the configuration for a specific device and YANG path
 func (h *ConfigHandler) SetConfig(c *gin.Context) {
 	ip := c.Param("ip")
-	path := "/" + c.Param("path")
+	path := c.Param("path") // *path already includes leading slash
 
 	var data map[string]interface{}
 	if err := c.ShouldBindJSON(&data); err != nil {
