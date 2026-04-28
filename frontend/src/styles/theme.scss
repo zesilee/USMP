@@ -306,13 +306,20 @@ html, body {
 .el-dialog {
   --el-dialog-bg-color: $bg-card;
   --el-dialog-title-color: $text-primary;
+  --el-dialog-border-color: $border-color;
   border-radius: $radius-xl;
   box-shadow: $shadow-e4;
   font-family: $font-family;
+  border: 1px solid $border-color;
 
   .el-dialog__body {
     color: $text-secondary;
   }
+}
+
+.el-overlay {
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
 }
 
 // 表单

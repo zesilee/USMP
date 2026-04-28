@@ -224,13 +224,23 @@ const handleSave = () => {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 12px;
+    margin-bottom: var(--spacing-lg);
   }
 
   .table-title {
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--text-color-primary);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
   }
+}
+
+:deep(.el-dialog) {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+}
+
+:deep(.el-dialog__overlay) {
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
 }
 </style>
