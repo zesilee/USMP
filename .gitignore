@@ -5,6 +5,7 @@
 *.so
 *.dylib
 usmp
+backend/backend
 
 # Test binary
 *.test

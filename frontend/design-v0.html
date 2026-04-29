@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>交换机设备管理平台 - 设计 v0</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ============================================
+           设计系统 - Design Tokens
+           ============================================ */
+
+        :root {
+            /* 色彩系统 - Color Palette */
+            --color-primary: #165DFF;
+            --color-primary-light: #4080FF;
+            --color-primary-dark: #0E42D2;
+            --color-primary-bg: rgba(22, 93, 255, 0.15);
+            --color-primary-glow: rgba(22, 93, 255, 0.4);
+
+            --color-success: #00B42A;
+            --color-success-bg: rgba(0, 180, 42, 0.15);
+            --color-warning: #FF7D00;
+            --color-warning-bg: rgba(255, 125, 0, 0.15);
+            --color-error: #F53F3F;
+            --color-error-bg: rgba(245, 63, 63, 0.15);
+            --color-info: #86909C;
+            --color-info-bg: rgba(134, 144, 156, 0.15);
+
+            --bg-page: #0F172A;
+            --bg-card: #1E293B;
+            --bg-card-hover: #273549;
+            --bg-elevated: #334155;
+            --bg-hover: rgba(255, 255, 255, 0.06);
+            --bg-active: rgba(255, 255, 255, 0.1);
+
+            --border-color: #334155;
+            --border-color-light: #475569;
+            --border-color-dark: #1E293B;
+
+            --text-primary: #F1F5F9;
+            --text-secondary: #94A3B8;
+            --text-tertiary: #64748B;
+            --text-disabled: #475569;
+
+            /* 间距系统 - Spacing */
+            --spacing-xs: 4px;
+            --spacing-sm: 8px;
+            --spacing-md: 12px;
+            --spacing-lg: 16px;
+            --spacing-xl: 24px;
+            --spacing-2xl: 32px;
+
+            /* 圆角系统 - Border Radius */
+            --radius-sm: 4px;
+            --radius-md: 6px;
+            --radius-lg: 8px;
+            --radius-xl: 12px;
+            --radius-full: 9999px;
+
+            /* 阴影系统 - Shadow */
+            --shadow-e1: 0 2px 8px rgba(22, 93, 255, 0.08);
+            --shadow-e2: 0 4px 16px rgba(22, 93, 255, 0.12);
+            --shadow-e3: 0 8px 24px rgba(0, 0, 0, 0.4);
+            --shadow-e4: 0 16px 48px rgba(0, 0, 0, 0.5);
+
+            /* 字体系统 - Typography */
+            --font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            --font-size-xs: 12px;
+            --font-size-sm: 13px;
+            --font-size-base: 14px;
+            --font-size-lg: 16px;
+            --font-size-xl: 18px;
+            --font-size-2xl: 20px;
+            --font-size-3xl: 24px;
+            --font-size-4xl: 28px;
+
+            --font-weight-normal: 400;
+            --font-weight-medium: 500;
+            --font-weight-semibold: 600;
+            --font-weight-bold: 700;
+
+            /* 动画 - Motion */
+            --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-base: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* ============================================
+           基础样式 - Base Styles
+           ============================================ */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family);
+            font-size: var(--font-size-base);
+            font-weight: var(--font-weight-normal);
+            color: var(--text-primary);
+            background-color: var(--bg-page);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* ============================================
+           v0 草案展示样式
+           ============================================ */
+
+        .v0-container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .v0-header {
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border-color);
+            padding: var(--spacing-lg) var(--spacing-2xl);
+        }
+
+        .v0-header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .v0-brand {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+        }
+
+        .v0-logo {
+            width: 36px;
+            height: 36px;
+            background: var(--color-primary);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: var(--font-weight-bold);
+            font-size: 18px;
+        }
+
+        .v0-title {
+            font-size: var(--font-size-xl);
+            font-weight: var(--font-weight-semibold);
+            color: var(--text-primary);
+        }
+
+        .v0-status-bar {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+        }
+
+        .v0-status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--color-success);
+            box-shadow: 0 0 0 3px var(--color-success-bg);
+        }
+
+        .v0-body {
+            flex: 1;
+            display: flex;
+            overflow: hidden;
+        }
+
+        .v0-sidebar {
+            width: 280px;
+            background: var(--bg-card);
+            border-right: 1px solid var(--border-color);
+            padding: var(--spacing-xl) 0;
+        }
+
+        .v0-nav-section {
+            padding: 0 var(--spacing-lg);
+            margin-bottom: var(--spacing-2xl);
+        }
+
+        .v0-nav-label {
+            font-size: var(--font-size-xs);
+            font-weight: var(--font-weight-semibold);
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .v0-nav-item {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            padding: var(--spacing-md) var(--spacing-lg);
+            margin: 0 var(--spacing-md);
+            border-radius: var(--radius-md);
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+
+        .v0-nav-item:hover {
+            background: var(--bg-hover);
+            color: var(--text-primary);
+        }
+
+        .v0-nav-item.active {
+            background: var(--color-primary-bg);
+            color: var(--color-primary-light);
+        }
+
+        .v0-nav-icon {
+            width: 20px;
+            height: 20px;
+            opacity: 0.7;
+        }
+
+        .v0-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: var(--spacing-2xl);
+        }
+
+        .v0-content-header {
+            margin-bottom: var(--spacing-2xl);
+        }
+
+        .v0-page-title {
+            font-size: var(--font-size-3xl);
+            font-weight: var(--font-weight-semibold);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .v0-page-desc {
+            color: var(--text-secondary);
+            font-size: var(--font-size-base);
+        }
+
+        /* ============================================
+           卡片组件 - Cards (v0 占位符样式)
+           ============================================ */
+
+        .v0-grid {
+            display: grid;
+            gap: var(--spacing-xl);
+            margin-bottom: var(--spacing-2xl);
+        }
+
+        .v0-grid-2 {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .v0-grid-3 {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .v0-grid-4 {
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        .v0-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-xl);
+            transition: all var(--transition-base);
+        }
+
+        .v0-card:hover {
+            border-color: var(--color-primary);
+            box-shadow: var(--shadow-e2);
+            transform: translateY(-2px);
+        }
+
+        .v0-stat-card {
+            text-align: center;
+        }
+
+        .v0-stat-value {
+            font-size: var(--font-size-4xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--color-primary-light);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .v0-stat-label {
+            font-size: var(--font-size-sm);
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .v0-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: var(--spacing-xl);
+            padding-bottom: var(--spacing-lg);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .v0-card-title {
+            font-size: var(--font-size-lg);
+            font-weight: var(--font-weight-semibold);
+        }
+
+        .v0-placeholder-content {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-md);
+            opacity: 0.4;
+        }
+
+        .v0-placeholder-line {
+            height: 16px;
+            background: var(--bg-elevated);
+            border-radius: var(--radius-sm);
+        }
+
+        .v0-placeholder-line.short {
+            width: 60%;
+        }
+
+        .v0-placeholder-line.medium {
+            width: 80%;
+        }
+
+        /* ============================================
+           表格占位符 - Table Placeholder
+           ============================================ */
+
+        .v0-table-placeholder {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .v0-table-placeholder th,
+        .v0-table-placeholder td {
+            padding: var(--spacing-md) var(--spacing-lg);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .v0-table-placeholder th {
+            text-align: left;
+            font-weight: var(--font-weight-semibold);
+            font-size: var(--font-size-sm);
+            color: var(--text-secondary);
+            background: var(--bg-hover);
+        }
+
+        .v0-cell-placeholder {
+            height: 20px;
+            background: var(--bg-elevated);
+            border-radius: var(--radius-sm);
+            opacity: 0.3;
+        }
+
+        /* ============================================
+           设计假设注释
+           ============================================ */
+
+        .v0-assumptions {
+            position: fixed;
+            bottom: var(--spacing-xl);
+            right: var(--spacing-xl);
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-xl);
+            max-width: 320px;
+            font-size: var(--font-size-sm);
+            box-shadow: var(--shadow-e3);
+        }
+
+        .v0-assumptions h4 {
+            color: var(--color-primary-light);
+            margin-bottom: var(--spacing-md);
+            font-size: var(--font-size-base);
+        }
+
+        .v0-assumptions ul {
+            list-style: none;
+            color: var(--text-secondary);
+        }
+
+        .v0-assumptions li {
+            padding: var(--spacing-sm) 0;
+            padding-left: var(--spacing-lg);
+            position: relative;
+        }
+
+        .v0-assumptions li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--color-primary);
+        }
+
+        /* ============================================
+           响应式适配
+           ============================================ */
+
+        @media (max-width: 1200px) {
+            .v0-grid-4 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .v0-sidebar {
+                width: 240px;
+            }
+
+            .v0-grid-2,
+            .v0-grid-3 {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="v0-container">
+        <!-- Header -->
+        <header class="v0-header">
+            <div class="v0-header-content">
+                <div class="v0-brand">
+                    <div class="v0-logo">N</div>
+                    <h1 class="v0-title">交换机设备管理平台</h1>
+                </div>
+                <div class="v0-status-bar">
+                    <span class="v0-status-dot"></span>
+                    <span style="color: var(--text-secondary); font-size: var(--font-size-sm);">系统运行正常</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Body -->
+        <div class="v0-body">
+            <!-- Sidebar -->
+            <aside class="v0-sidebar">
+                <div class="v0-nav-section">
+                    <div class="v0-nav-label">设备管理</div>
+                    <div class="v0-nav-item active">
+                        <span class="v0-nav-icon">◉</span>
+                        <span>设备概览</span>
+                    </div>
+                    <div class="v0-nav-item">
+                        <span class="v0-nav-icon">◉</span>
+                        <span>设备列表</span>
+                    </div>
+                    <div class="v0-nav-item">
+                        <span class="v0-nav-icon">◉</span>
+                        <span>配置下发</span>
+                    </div>
+                </div>
+                <div class="v0-nav-section">
+                    <div class="v0-nav-label">网络配置</div>
+                    <div class="v0-nav-item">
+                        <span class="v0-nav-icon">◉</span>
+                        <span>VLAN 管理</span>
+                    </div>
+                    <div class="v0-nav-item">
+                        <span class="v0-nav-icon">◉</span>
+                        <span>接口配置</span>
+                    </div>
+                    <div class="v0-nav-item">
+                        <span class="v0-nav-icon">◉</span>
+                        <span>路由管理</span>
+                    </div>
+                </div>
+                <div class="v0-nav-section">
+                    <div class="v0-nav-label">系统</div>
+                    <div class="v0-nav-item">
+                        <span class="v0-nav-icon">◉</span>
+                        <span>操作日志</span>
+                    </div>
+                    <div class="v0-nav-item">
+                        <span class="v0-nav-icon">◉</span>
+                        <span>系统设置</span>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Content Area -->
+            <main class="v0-content">
+                <div class="v0-content-header">
+                    <h2 class="v0-page-title">设备概览</h2>
+                    <p class="v0-page-desc">实时监控所有交换机设备的运行状态和配置信息</p>
+                </div>
+
+                <!-- 统计卡片区域 -->
+                <div class="v0-grid v0-grid-4">
+                    <div class="v0-card v0-stat-card">
+                        <div class="v0-stat-value">12</div>
+                        <div class="v0-stat-label">在线设备</div>
+                    </div>
+                    <div class="v0-card v0-stat-card">
+                        <div class="v0-stat-value">3</div>
+                        <div class="v0-stat-label">离线设备</div>
+                    </div>
+                    <div class="v0-card v0-stat-card">
+                        <div class="v0-stat-value">156</div>
+                        <div class="v0-stat-label">已配置 VLAN</div>
+                    </div>
+                    <div class="v0-card v0-stat-card">
+                        <div class="v0-stat-value">248</div>
+                        <div class="v0-stat-label">活跃接口</div>
+                    </div>
+                </div>
+
+                <!-- 设备状态表格 -->
+                <div class="v0-card">
+                    <div class="v0-card-header">
+                        <h3 class="v0-card-title">设备状态列表</h3>
+                        <div style="opacity: 0.4;">[ 筛选 / 操作按钮 ]</div>
+                    </div>
+                    <table class="v0-table-placeholder">
+                        <thead>
+                            <tr>
+                                <th>设备 IP</th>
+                                <th>设备名称</th>
+                                <th>状态</th>
+                                <th>VLAN 数</th>
+                                <th>接口数</th>
+                                <th>最后同步</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><div class="v0-cell-placeholder"></div></td>
+                                <td><div class="v0-cell-placeholder"></div></td>
+                                <td><div class="v0-cell-placeholder short"></div></td>
+                                <td><div class="v0-cell-placeholder short"></div></td>
+                                <td><div class="v0-cell-placeholder short"></div></td>
+                                <td><div class="v0-cell-placeholder medium"></div></td>
+                                <td><div class="v0-cell-placeholder short"></div></td>
+                            </tr>
+                            <tr>
+                                <td><div class="v0-cell-placeholder"></div></td>
+                                <td><div class="v0-cell-placeholder"></div></td>
+                                <td><div class="v0-cell-placeholder short"></div></td>
+                                <td><div class="v0-cell-placeholder short"></div></td>
+                                <td><div class="v0-cell-placeholder short"></div></td>
+                                <td><div class="v0-cell-placeholder medium"></div></td>
+                                <td><div class="v0-cell-placeholder short"></div></td>
+                            </tr>
+                            <tr>
+                                <td><div class="v0-cell-placeholder"></div></td>
+                                <td><div class="v0-cell-placeholder"></div></td>
+                                <td><div class="v0-cell-placeholder short"></div></td>
+                                <td><div class="v0-cell-placeholder short"></div></td>
+                                <td><div class="v0-cell-placeholder short"></div></td>
+                                <td><div class="v0-cell-placeholder medium"></div></td>
+                                <td><div class="v0-cell-placeholder short"></div></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- 配置管理区域 -->
+                <div class="v0-grid v0-grid-2">
+                    <div class="v0-card">
+                        <div class="v0-card-header">
+                            <h3 class="v0-card-title">最近配置变更</h3>
+                        </div>
+                        <div class="v0-placeholder-content">
+                            <div class="v0-placeholder-line"></div>
+                            <div class="v0-placeholder-line medium"></div>
+                            <div class="v0-placeholder-line short"></div>
+                            <div class="v0-placeholder-line"></div>
+                            <div class="v0-placeholder-line medium"></div>
+                        </div>
+                    </div>
+                    <div class="v0-card">
+                        <div class="v0-card-header">
+                            <h3 class="v0-card-title">系统告警</h3>
+                        </div>
+                        <div class="v0-placeholder-content">
+                            <div class="v0-placeholder-line short"></div>
+                            <div class="v0-placeholder-line"></div>
+                            <div class="v0-placeholder-line medium"></div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- 设计假设说明 -->
+    <div class="v0-assumptions">
+        <h4>📋 v0 设计假设</h4>
+        <ul>
+            <li>采用深色科技感主题，符合网管系统专业调性</li>
+            <li>左侧导航 + 右侧内容的经典管理后台布局</li>
+            <li>顶部状态栏展示系统整体运行状态</li>
+            <li>Plus Jakarta Sans 字体替代 Inter，避免 AI 陈词滥调</li>
+            <li>统计卡片使用蓝色主题数字，突出数据</li>
+            <li>悬停卡片有轻微上浮 + 蓝色边框发光效果</li>
+            <li>后续将增加：暗黑/亮色切换、自定义主题色等</li>
+            <li>VLAN / 接口配置页面将采用表单卡片化设计</li>
+        </ul>
+    </div>
+</body>
+</html>
