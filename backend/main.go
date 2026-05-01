@@ -7,6 +7,7 @@ import (
 
 	"github.com/leezesi/usmp/backend/internal/api"
 	"github.com/leezesi/usmp/backend/internal/controller/ifm"
+	"github.com/leezesi/usmp/backend/internal/controller/system"
 	"github.com/leezesi/usmp/backend/internal/controller/vlan"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/controller"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/manager"
@@ -50,6 +51,18 @@ func main() {
 
 	mgr.AddController(ifmCtrl)
 	log.Printf("Huawei IFM controller registered successfully")
+
+	// Create and register the Huawei System controller
+	// The System controller reconciles system configuration every 5 minutes
+	systemCtrl := controller.ControllerManagedBy("huawei-system").
+		WithReconciler(system.New(cs, clientPool)).
+		WithSource(source.NewPeriodicSource(5 * time.Minute, nil, "/system:system")).
+		WithPredicate(predicate.Prefix("/system:system")).
+		WithWorkerCount(2).
+		Build()
+
+	mgr.AddController(systemCtrl)
+	log.Printf("Huawei System controller registered successfully")
 
 	// Start the manager - loads schema, starts all controllers
 	ctx, cancel := context.WithCancel(context.Background())
