@@ -99,6 +99,7 @@ func (d *deviceClient) Get(ctx context.Context, deviceID string) (interface{}, e
 			info.Protocol = client.ProtocolNETCONF
 		} else {
 			info.IP = hostPort
+			info.Protocol = client.ProtocolAUTO
 		}
 	} else if host, portStr, err := splitHostPort(deviceID); err == nil {
 		// No credentials, just host:port
@@ -110,6 +111,7 @@ func (d *deviceClient) Get(ctx context.Context, deviceID string) (interface{}, e
 	} else {
 		// Just IP, use all defaults
 		info.IP = deviceID
+		info.Protocol = client.ProtocolAUTO
 	}
 	c, err := d.clientPool.Get(info)
 	if err != nil {
@@ -198,6 +200,7 @@ func (d *deviceClient) Set(ctx context.Context, deviceID string, changes []recon
 			info.Protocol = client.ProtocolNETCONF
 		} else {
 			info.IP = hostPort
+			info.Protocol = client.ProtocolAUTO
 		}
 	} else if host, portStr, err := splitHostPort(deviceID); err == nil {
 		// No credentials, just host:port
@@ -209,6 +212,7 @@ func (d *deviceClient) Set(ctx context.Context, deviceID string, changes []recon
 	} else {
 		// Just IP, use all defaults
 		info.IP = deviceID
+		info.Protocol = client.ProtocolAUTO
 	}
 	c, err := d.clientPool.Get(info)
 	if err != nil {

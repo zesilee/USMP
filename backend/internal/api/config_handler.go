@@ -221,11 +221,169 @@ func mapEntryToInterface(m map[string]interface{}) *huawei.HuaweiIfm_Ifm_Interfa
 	return result
 }
 
-// convertMapToHuaweiVlan - placeholder for VLAN support (future)
-func convertMapToHuaweiVlan(data map[string]interface{}) (interface{}, error) {
-	// Return raw map for now - VLAN reconciler will handle
-	return data, nil
+// convertMapToHuaweiVlan converts a map to HuaweiVlan_Vlan_Vlans struct
+func convertMapToHuaweiVlan(data map[string]interface{}) (*huawei.HuaweiVlan_Vlan_Vlans, error) {
+	result := &huawei.HuaweiVlan_Vlan_Vlans{
+		Vlan: make(map[uint16]*huawei.HuaweiVlan_Vlan_Vlans_Vlan),
+	}
+
+	// Extract vlans array
+	var vlansData interface{}
+	if v, ok := data["vlans"]; ok {
+		vlansData = v
+	} else if v, ok := data["Vlan"]; ok {
+		vlansData = v
+	} else {
+		// If no vlans container, assume the data itself is the vlan list
+		vlansData = data
+	}
+
+	// Handle both slice and map formats
+	switch v := vlansData.(type) {
+	case []interface{}:
+		for _, item := range v {
+			if m, ok := item.(map[string]interface{}); ok {
+				entry := mapEntryToVlan(m)
+				if entry.Id != nil {
+					result.Vlan[*entry.Id] = entry
+				}
+			}
+		}
+	case map[string]interface{}:
+		for key, item := range v {
+			if m, ok := item.(map[string]interface{}); ok {
+				entry := mapEntryToVlan(m)
+				if entry.Id == nil {
+					// Try to parse key as VLAN ID
+					if id, err := strconv.ParseUint(key, 10, 16); err == nil {
+						id16 := uint16(id)
+						entry.Id = &id16
+					}
+				}
+				if entry.Id != nil {
+					result.Vlan[*entry.Id] = entry
+				}
+			}
+		}
+	}
+
+	return result, nil
 }
+
+// mapEntryToVlan converts a single VLAN entry map to struct
+func mapEntryToVlan(m map[string]interface{}) *huawei.HuaweiVlan_Vlan_Vlans_Vlan {
+	result := &huawei.HuaweiVlan_Vlan_Vlans_Vlan{}
+
+	for k, v := range m {
+		key := strings.ToLower(strings.ReplaceAll(k, "-", ""))
+		switch key {
+		case "id":
+			if num, ok := valueToUint(v); ok {
+				id := uint16(num)
+				result.Id = &id
+			}
+		case "name":
+			if s, ok := v.(string); ok {
+				result.Name = &s
+			}
+		case "description":
+			if s, ok := v.(string); ok {
+				result.Description = &s
+			}
+		case "type":
+			if num, ok := valueToUint(v); ok {
+				result.Type = huawei.E_HuaweiVlan_VlanType(num)
+			}
+		case "adminstatus":
+			if num, ok := valueToUint(v); ok {
+				result.AdminStatus = huawei.E_HuaweiVlan_AdminStatus(num)
+			}
+		case "broadcastdiscard":
+			if num, ok := valueToUint(v); ok {
+				result.BroadcastDiscard = huawei.E_HuaweiVlan_EnableStatus(num)
+			}
+		case "unknownmulticastdiscard":
+			if num, ok := valueToUint(v); ok {
+				result.UnknownMulticastDiscard = huawei.E_HuaweiVlan_EnableStatus(num)
+			}
+		case "maclearning":
+			if num, ok := valueToUint(v); ok {
+				result.MacLearning = huawei.E_HuaweiVlan_EnableStatus(num)
+			}
+		case "macagingtime":
+			if num, ok := valueToUint(v); ok {
+				val := uint32(num)
+				result.MacAgingTime = &val
+			}
+		case "statisticenable":
+			if num, ok := valueToUint(v); ok {
+				result.StatisticEnable = huawei.E_HuaweiVlan_EnableStatus(num)
+			}
+		case "statisticdiscard":
+			if num, ok := valueToUint(v); ok {
+				result.StatisticDiscard = huawei.E_HuaweiVlan_EnableStatus(num)
+			}
+		case "supervlan":
+			if num, ok := valueToUint(v); ok {
+				val := uint16(num)
+				result.SuperVlan = &val
+			}
+		case "unknownunicastdiscard":
+			if nested, ok := v.(map[string]interface{}); ok {
+				result.UnkownUnicastDiscard = mapToUnicastDiscard(nested)
+			}
+		case "suppression":
+			if nested, ok := v.(map[string]interface{}); ok {
+				result.Suppression = mapToSuppression(nested)
+			}
+		}
+	}
+
+	return result
+}
+
+// mapToUnicastDiscard converts map to UnkownUnicastDiscard struct
+func mapToUnicastDiscard(m map[string]interface{}) *huawei.HuaweiVlan_Vlan_Vlans_Vlan_UnkownUnicastDiscard {
+	result := &huawei.HuaweiVlan_Vlan_Vlans_Vlan_UnkownUnicastDiscard{}
+
+	for k, v := range m {
+		key := strings.ToLower(strings.ReplaceAll(k, "-", ""))
+		switch key {
+		case "discard":
+			if num, ok := valueToUint(v); ok {
+				result.Discard = huawei.E_HuaweiVlan_EnableStatus(num)
+			}
+		case "maclearningenable":
+			if num, ok := valueToUint(v); ok {
+				result.MacLearningEnable = huawei.E_HuaweiVlan_EnableStatus(num)
+			}
+		}
+	}
+
+	return result
+}
+
+// mapToSuppression converts map to Suppression struct
+func mapToSuppression(m map[string]interface{}) *huawei.HuaweiVlan_Vlan_Vlans_Vlan_Suppression {
+	result := &huawei.HuaweiVlan_Vlan_Vlans_Vlan_Suppression{}
+
+	for k, v := range m {
+		key := strings.ToLower(strings.ReplaceAll(k, "-", ""))
+		switch key {
+		case "inbound":
+			if num, ok := valueToUint(v); ok {
+				result.Inbound = huawei.E_HuaweiVlan_EnableStatus(num)
+			}
+		case "outbound":
+			if num, ok := valueToUint(v); ok {
+				result.Outbound = huawei.E_HuaweiVlan_EnableStatus(num)
+			}
+		}
+	}
+
+	return result
+}
+
 
 // valueToUint converts various numeric types to uint64
 func valueToUint(v interface{}) (uint64, bool) {

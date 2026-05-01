@@ -39,6 +39,22 @@
       :disabled="!node.config"
     />
 
+    <!-- empty 类型映射为 Checkbox/开关 -->
+    <YangSwitch
+      v-else-if="node.type === 'empty'"
+      v-model="emptyValue"
+      :disabled="!node.config"
+    />
+
+    <!-- leafref 类型映射为数字输入框 (VLAN ID 引用) -->
+    <YangInput
+      v-else-if="node.type === 'leafref'"
+      v-model="fieldValue"
+      :node="node"
+      :disabled="!node.config"
+      @change="handleValueChange"
+    />
+
     <div v-else class="unsupported-type">
       <el-tag type="info" size="small">不支持的类型: {{ node.type }}</el-tag>
     </div>
@@ -75,6 +91,15 @@ const fieldValue = computed({
   set: (val) => {
     emit('update:modelValue', val)
     validate(val)
+  }
+})
+
+// empty 类型值转换：YANG empty 映射为 boolean
+const emptyValue = computed({
+  get: () => props.modelValue === true || props.modelValue !== undefined,
+  set: (val: boolean) => {
+    // YANG empty 类型：存在即为 true，不存在即为 false
+    emit('update:modelValue', val ? {} : undefined)
   }
 })
 

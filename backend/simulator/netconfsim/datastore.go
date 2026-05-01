@@ -534,3 +534,170 @@ func (d *Datastore) GetXML(source string) []byte {
 		return d.GetRunning()
 	}
 }
+
+// HuaweiVlanTestData contains parsed VLAN data for testing assertions.
+type HuaweiVlanTestData struct {
+	ID                      uint16
+	Name                    string
+	Description             string
+	Type                    int
+	AdminStatus             int
+	BroadcastDiscard        int
+	UnknownMulticastDiscard int
+	MacLearning             int
+	MacAgingTime            uint32
+	StatisticEnable         int
+	StatisticDiscard        int
+	SuperVlan               *uint16
+	// Nested containers
+	UnkownUnicastDiscard struct {
+		Discard           int
+		MacLearningEnable int
+	}
+	Suppression struct {
+		Inbound  int
+		Outbound int
+	}
+}
+
+// ExtractHuaweiVLANsFull extracts complete Huawei model VLAN data including all fields.
+func (d *Datastore) ExtractHuaweiVLANsFull() (map[uint16]*HuaweiVlanTestData, error) {
+	d.mu.RLock()
+	defer d.mu.RUnlock()
+
+	xmlStr := string(d.running)
+	vlans := make(map[uint16]*HuaweiVlanTestData)
+
+	decoder := xml.NewDecoder(bytes.NewReader([]byte(xmlStr)))
+	for {
+		token, err := decoder.Token()
+		if err != nil {
+			break
+		}
+
+		start, ok := token.(xml.StartElement)
+		if !ok {
+			continue
+		}
+
+		// We're looking for <HuaweiVlan_Vlan_Vlans_Vlan> which is the Go XML serialization format
+		if strings.Contains(start.Name.Local, "HuaweiVlan") && strings.Contains(start.Name.Local, "Vlan") {
+			vlan := &HuaweiVlanTestData{}
+
+			for {
+				token, err := decoder.Token()
+				if err != nil {
+					break
+				}
+
+				if _, ok := token.(xml.EndElement); ok {
+					break
+				}
+
+				innerStart, ok := token.(xml.StartElement)
+				if !ok {
+					continue
+				}
+
+				switch innerStart.Name.Local {
+				case "Id", "id", "VlanId":
+					if err := decoder.DecodeElement(&vlan.ID, &innerStart); err == nil {
+					}
+				case "Name", "name":
+					if err := decoder.DecodeElement(&vlan.Name, &innerStart); err == nil {
+					}
+				case "Description", "description":
+					if err := decoder.DecodeElement(&vlan.Description, &innerStart); err == nil {
+					}
+				case "Type", "type":
+					if err := decoder.DecodeElement(&vlan.Type, &innerStart); err == nil {
+					}
+				case "AdminStatus", "admin-status":
+					if err := decoder.DecodeElement(&vlan.AdminStatus, &innerStart); err == nil {
+					}
+				case "BroadcastDiscard", "broadcast-discard":
+					if err := decoder.DecodeElement(&vlan.BroadcastDiscard, &innerStart); err == nil {
+					}
+				case "UnknownMulticastDiscard", "unknown-multicast-discard":
+					if err := decoder.DecodeElement(&vlan.UnknownMulticastDiscard, &innerStart); err == nil {
+					}
+				case "MacLearning", "mac-learning":
+					if err := decoder.DecodeElement(&vlan.MacLearning, &innerStart); err == nil {
+					}
+				case "MacAgingTime", "mac-aging-time":
+					if err := decoder.DecodeElement(&vlan.MacAgingTime, &innerStart); err == nil {
+					}
+				case "StatisticEnable", "statistic-enable":
+					if err := decoder.DecodeElement(&vlan.StatisticEnable, &innerStart); err == nil {
+					}
+				case "StatisticDiscard", "statistic-discard":
+					if err := decoder.DecodeElement(&vlan.StatisticDiscard, &innerStart); err == nil {
+					}
+				case "SuperVlan", "super-vlan":
+					var sv uint16
+					if err := decoder.DecodeElement(&sv, &innerStart); err == nil {
+						vlan.SuperVlan = &sv
+					}
+				case "UnkownUnicastDiscard", "unknown-unicast-discard":
+					// Parse nested container
+					for {
+						token, err := decoder.Token()
+						if err != nil {
+							break
+						}
+						if _, ok := token.(xml.EndElement); ok {
+							break
+						}
+						nestedStart, ok := token.(xml.StartElement)
+						if !ok {
+							continue
+						}
+						switch nestedStart.Name.Local {
+						case "Discard", "discard":
+							if err := decoder.DecodeElement(&vlan.UnkownUnicastDiscard.Discard, &nestedStart); err == nil {
+							}
+						case "MacLearningEnable", "mac-learning-enable":
+							if err := decoder.DecodeElement(&vlan.UnkownUnicastDiscard.MacLearningEnable, &nestedStart); err == nil {
+							}
+						default:
+							_ = decoder.Skip()
+						}
+					}
+				case "Suppression", "suppression":
+					// Parse nested container
+					for {
+						token, err := decoder.Token()
+						if err != nil {
+							break
+						}
+						if _, ok := token.(xml.EndElement); ok {
+							break
+						}
+						nestedStart, ok := token.(xml.StartElement)
+						if !ok {
+							continue
+						}
+						switch nestedStart.Name.Local {
+						case "Inbound", "inbound":
+							if err := decoder.DecodeElement(&vlan.Suppression.Inbound, &nestedStart); err == nil {
+							}
+						case "Outbound", "outbound":
+							if err := decoder.DecodeElement(&vlan.Suppression.Outbound, &nestedStart); err == nil {
+							}
+						default:
+							_ = decoder.Skip()
+						}
+					}
+				default:
+					_ = decoder.Skip()
+				}
+			}
+
+			if vlan.ID > 0 {
+				vlans[vlan.ID] = vlan
+			}
+		}
+	}
+
+	return vlans, nil
+}

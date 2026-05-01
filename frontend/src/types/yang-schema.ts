@@ -83,7 +83,29 @@ export interface ConfigChange {
 
 // ============== 预置的 YANG 模型 ==============
 
-/** OpenConfig VLAN 模型 */
+/** 华为 VLAN 类型枚举 */
+const VLAN_TYPE_OPTIONS = [
+  { name: 'Common', value: 1, description: '普通 VLAN' },
+  { name: 'Super', value: 2, description: '超级 VLAN' },
+  { name: 'Sub', value: 3, description: '子 VLAN' },
+  { name: 'Principal', value: 4, description: '主 VLAN (MUX)' },
+  { name: 'Separate', value: 5, description: '隔离 VLAN (MUX)' },
+  { name: 'Group', value: 6, description: '组 VLAN (MUX)' }
+]
+
+/** 启用状态枚举 */
+const ENABLE_STATUS_OPTIONS = [
+  { name: 'Disable', value: 0, description: '禁用' },
+  { name: 'Enable', value: 1, description: '启用' }
+]
+
+/** 管理状态枚举 */
+const ADMIN_STATUS_OPTIONS = [
+  { name: 'Down', value: 0, description: '禁用' },
+  { name: 'Up', value: 1, description: '启用' }
+]
+
+/** 华为 VLAN 模型 - 完整 config=true 属性 */
 export const VLAN_SCHEMA: YangNode = {
   path: '/vlans',
   name: 'vlans',
@@ -99,11 +121,12 @@ export const VLAN_SCHEMA: YangNode = {
       key: 'id',
       config: true,
       children: [
+        // ========== 基础属性 ==========
         {
           path: '/vlans/vlan/id',
           name: 'id',
           type: 'uint',
-          description: 'VLAN ID (1-4094)',
+          description: 'VLAN ID',
           config: true,
           mandatory: true,
           range: { min: 1, max: 4094 }
@@ -114,7 +137,24 @@ export const VLAN_SCHEMA: YangNode = {
           type: 'string',
           description: 'VLAN 名称',
           config: true,
-          length: { min: 1, max: 32 }
+          length: { min: 1, max: 31 }
+        },
+        {
+          path: '/vlans/vlan/description',
+          name: 'description',
+          type: 'string',
+          description: 'VLAN 描述',
+          config: true,
+          length: { min: 1, max: 80 }
+        },
+        {
+          path: '/vlans/vlan/type',
+          name: 'type',
+          type: 'enum',
+          description: 'VLAN 类型',
+          config: true,
+          enumOptions: VLAN_TYPE_OPTIONS,
+          default: 1 // common
         },
         {
           path: '/vlans/vlan/admin-status',
@@ -122,12 +162,138 @@ export const VLAN_SCHEMA: YangNode = {
           type: 'enum',
           description: '管理状态',
           config: true,
-          enumOptions: [
-            { name: 'Up', value: 2, description: '启用' },
-            { name: 'Down', value: 1, description: '禁用' }
-          ],
-          default: 2
+          enumOptions: ADMIN_STATUS_OPTIONS,
+          default: 1 // up
         },
+
+        // ========== 流量控制 ==========
+        {
+          path: '/vlans/vlan/broadcast-discard',
+          name: 'broadcast-discard',
+          type: 'enum',
+          description: '丢弃广播包',
+          config: true,
+          enumOptions: ENABLE_STATUS_OPTIONS,
+          default: 0 // disable
+        },
+        {
+          path: '/vlans/vlan/unknown-multicast-discard',
+          name: 'unknown-multicast-discard',
+          type: 'enum',
+          description: '丢弃未知组播包',
+          config: true,
+          enumOptions: ENABLE_STATUS_OPTIONS,
+          default: 0 // disable
+        },
+
+        // ========== MAC 学习 ==========
+        {
+          path: '/vlans/vlan/mac-learning',
+          name: 'mac-learning',
+          type: 'enum',
+          description: 'MAC 地址学习',
+          config: true,
+          enumOptions: ENABLE_STATUS_OPTIONS,
+          default: 1 // enable
+        },
+        {
+          path: '/vlans/vlan/mac-aging-time',
+          name: 'mac-aging-time',
+          type: 'uint',
+          description: 'MAC 老化时间 (秒)，0 表示不老化',
+          config: true,
+          range: { min: 0, max: 1000000 }
+        },
+
+        // ========== 统计功能 ==========
+        {
+          path: '/vlans/vlan/statistic-enable',
+          name: 'statistic-enable',
+          type: 'enum',
+          description: 'VLAN 统计收集',
+          config: true,
+          enumOptions: ENABLE_STATUS_OPTIONS,
+          default: 0 // disable
+        },
+        {
+          path: '/vlans/vlan/statistic-discard',
+          name: 'statistic-discard',
+          type: 'enum',
+          description: 'BUM 丢弃统计 (需先启用统计)',
+          config: true,
+          enumOptions: ENABLE_STATUS_OPTIONS,
+          default: 0 // disable
+        },
+
+        // ========== 关联 VLAN ID (leafref) ==========
+        {
+          path: '/vlans/vlan/super-vlan',
+          name: 'super-vlan',
+          type: 'leafref',
+          description: '超级 VLAN ID (仅 Sub VLAN 生效)',
+          config: true,
+          range: { min: 1, max: 4094 }
+        },
+
+        // ========== 嵌套容器 - 未知单播丢弃 ==========
+        {
+          path: '/vlans/vlan/unknown-unicast-discard',
+          name: 'unknown-unicast-discard',
+          type: 'container',
+          description: '未知单播丢弃配置',
+          config: true,
+          children: [
+            {
+              path: '/vlans/vlan/unknown-unicast-discard/discard',
+              name: 'discard',
+              type: 'enum',
+              description: '丢弃未知单播包',
+              config: true,
+              enumOptions: ENABLE_STATUS_OPTIONS,
+              default: 0 // disable
+            },
+            {
+              path: '/vlans/vlan/unknown-unicast-discard/mac-learning-enable',
+              name: 'mac-learning-enable',
+              type: 'enum',
+              description: '未知单播 MAC 学习 (需先启用丢弃)',
+              config: true,
+              enumOptions: ENABLE_STATUS_OPTIONS,
+              default: 0 // disable
+            }
+          ]
+        },
+
+        // ========== 嵌套容器 - 流量抑制 ==========
+        {
+          path: '/vlans/vlan/suppression',
+          name: 'suppression',
+          type: 'container',
+          description: '流量抑制配置',
+          config: true,
+          children: [
+            {
+              path: '/vlans/vlan/suppression/inbound',
+              name: 'inbound',
+              type: 'enum',
+              description: '入方向抑制',
+              config: true,
+              enumOptions: ENABLE_STATUS_OPTIONS,
+              default: 0 // disable
+            },
+            {
+              path: '/vlans/vlan/suppression/outbound',
+              name: 'outbound',
+              type: 'enum',
+              description: '出方向抑制',
+              config: true,
+              enumOptions: ENABLE_STATUS_OPTIONS,
+              default: 0 // disable
+            }
+          ]
+        },
+
+        // ========== 只读属性 (config false) ==========
         {
           path: '/vlans/vlan/oper-status',
           name: 'oper-status',
@@ -135,9 +301,8 @@ export const VLAN_SCHEMA: YangNode = {
           description: '运行状态',
           config: false,
           enumOptions: [
-            { name: 'ACTIVE', value: 'ACTIVE', description: '运行中' },
-            { name: 'INACTIVE', value: 'INACTIVE', description: '未激活' },
-            { name: 'SUSPENDED', value: 'SUSPENDED', description: '已暂停' }
+            { name: 'ACTIVE', value: 1, description: '运行中' },
+            { name: 'INACTIVE', value: 0, description: '未激活' }
           ]
         },
         {
@@ -169,6 +334,44 @@ export const VLAN_SCHEMA: YangNode = {
               type: 'string',
               description: '端口名称',
               config: true
+            }
+          ]
+        }
+      ]
+    },
+
+    // ========== VLAN Instances ==========
+    {
+      path: '/vlans/instances',
+      name: 'instances',
+      type: 'container',
+      description: 'VLAN 实例配置',
+      config: true,
+      children: [
+        {
+          path: '/vlans/instances/instance',
+          name: 'instance',
+          type: 'list',
+          description: 'VLAN 实例',
+          key: 'id',
+          config: true,
+          children: [
+            {
+              path: '/vlans/instances/instance/id',
+              name: 'id',
+              type: 'uint',
+              description: '实例 ID',
+              config: true,
+              mandatory: true,
+              range: { min: 1, max: 4094 }
+            },
+            {
+              path: '/vlans/instances/instance/vlan-list',
+              name: 'vlan-list',
+              type: 'string',
+              description: 'VLAN 范围 (如 1-10,20,30)',
+              config: true,
+              mandatory: true
             }
           ]
         }

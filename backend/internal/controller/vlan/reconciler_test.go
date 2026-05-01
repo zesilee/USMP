@@ -103,7 +103,7 @@ func TestDeviceClient_Get_Success(t *testing.T) {
 	}, nil)
 
 	mockPool := new(MockClientPool)
-	mockPool.On("Get", client.DeviceConnectionInfo{IP: deviceID}).Return(mockClient, nil)
+	mockPool.On("Get", client.DeviceConnectionInfo{IP: deviceID, Protocol: client.ProtocolAUTO}).Return(mockClient, nil)
 
 	dc := &deviceClient{
 		clientPool: mockPool,
@@ -135,7 +135,7 @@ func TestDeviceClient_Get_ClientPoolGetError(t *testing.T) {
 	deviceID := "192.168.1.1"
 
 	mockPool := new(MockClientPool)
-	mockPool.On("Get", client.DeviceConnectionInfo{IP: deviceID}).Return(nil, assert.AnError)
+	mockPool.On("Get", client.DeviceConnectionInfo{IP: deviceID, Protocol: client.ProtocolAUTO}).Return(nil, assert.AnError)
 
 	dc := &deviceClient{
 		clientPool: mockPool,
@@ -161,7 +161,7 @@ func TestDeviceClient_Get_ClientGetError(t *testing.T) {
 	mockClient.On("Get", ctx, "/vlan:vlan/vlan:vlans", mock.Anything).Return(nil, assert.AnError)
 
 	mockPool := new(MockClientPool)
-	mockPool.On("Get", client.DeviceConnectionInfo{IP: deviceID}).Return(mockClient, nil)
+	mockPool.On("Get", client.DeviceConnectionInfo{IP: deviceID, Protocol: client.ProtocolAUTO}).Return(mockClient, nil)
 
 	dc := &deviceClient{
 		clientPool: mockPool,
@@ -192,7 +192,7 @@ func TestDeviceClient_Get_InvalidJSON(t *testing.T) {
 	}, nil)
 
 	mockPool := new(MockClientPool)
-	mockPool.On("Get", client.DeviceConnectionInfo{IP: deviceID}).Return(mockClient, nil)
+	mockPool.On("Get", client.DeviceConnectionInfo{IP: deviceID, Protocol: client.ProtocolAUTO}).Return(mockClient, nil)
 
 	dc := &deviceClient{
 		clientPool: mockPool,
@@ -232,7 +232,7 @@ func TestDeviceClient_Get_AlreadyUnmarshaledDeviceRoot(t *testing.T) {
 	}, nil)
 
 	mockPool := new(MockClientPool)
-	mockPool.On("Get", client.DeviceConnectionInfo{IP: deviceID}).Return(mockClient, nil)
+	mockPool.On("Get", client.DeviceConnectionInfo{IP: deviceID, Protocol: client.ProtocolAUTO}).Return(mockClient, nil)
 
 	dc := &deviceClient{
 		clientPool: mockPool,
@@ -271,7 +271,7 @@ func TestDeviceClient_Set_Success(t *testing.T) {
 	}, nil)
 
 	mockPool := new(MockClientPool)
-	mockPool.On("Get", client.DeviceConnectionInfo{IP: deviceID}).Return(mockClient, nil)
+	mockPool.On("Get", client.DeviceConnectionInfo{IP: deviceID, Protocol: client.ProtocolAUTO}).Return(mockClient, nil)
 
 	dc := &deviceClient{
 		clientPool: mockPool,
@@ -302,7 +302,7 @@ func TestDeviceClient_Set_ClientPoolGetError(t *testing.T) {
 	changes := []reconcile.Change{}
 
 	mockPool := new(MockClientPool)
-	mockPool.On("Get", client.DeviceConnectionInfo{IP: deviceID}).Return(nil, assert.AnError)
+	mockPool.On("Get", client.DeviceConnectionInfo{IP: deviceID, Protocol: client.ProtocolAUTO}).Return(nil, assert.AnError)
 
 	dc := &deviceClient{
 		clientPool: mockPool,
@@ -358,7 +358,7 @@ func TestVlanReconciler_FullReconcile(t *testing.T) {
 	}, nil)
 
 	mockPool := new(MockClientPool)
-	mockPool.On("Get", client.DeviceConnectionInfo{IP: deviceID}).Return(mockClient, nil)
+	mockPool.On("Get", client.DeviceConnectionInfo{IP: deviceID, Protocol: client.ProtocolAUTO}).Return(mockClient, nil)
 
 	r := New(mockCS, mockPool)
 
@@ -432,7 +432,7 @@ func TestVlanReconciler_NoDiff(t *testing.T) {
 	}, nil)
 
 	mockPool := new(MockClientPool)
-	mockPool.On("Get", client.DeviceConnectionInfo{IP: deviceID}).Return(mockClient, nil)
+	mockPool.On("Get", client.DeviceConnectionInfo{IP: deviceID, Protocol: client.ProtocolAUTO}).Return(mockClient, nil)
 
 	r := New(mockCS, mockPool)
 

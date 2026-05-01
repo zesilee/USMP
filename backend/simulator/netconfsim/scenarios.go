@@ -87,6 +87,133 @@ func (s *Simulator) AssertHuaweiVlanCount(t *testing.T, expected int) {
 	assert.Len(t, vlans, expected)
 }
 
+// ============================================
+// Full VLAN attribute assertion methods
+// ============================================
+
+// AssertHuaweiVlanDescription asserts the description of a VLAN.
+func (s *Simulator) AssertHuaweiVlanDescription(t *testing.T, vlanID uint16, expected string) {
+	t.Helper()
+	vlans, err := s.datastore.ExtractHuaweiVLANsFull()
+	assert.NoError(t, err)
+	vlan, ok := vlans[vlanID]
+	assert.True(t, ok, "VLAN %d not found", vlanID)
+	assert.Equal(t, expected, vlan.Description, "VLAN %d description mismatch", vlanID)
+}
+
+// AssertHuaweiVlanType asserts the type of a VLAN.
+func (s *Simulator) AssertHuaweiVlanType(t *testing.T, vlanID uint16, expected int) {
+	t.Helper()
+	vlans, err := s.datastore.ExtractHuaweiVLANsFull()
+	assert.NoError(t, err)
+	vlan, ok := vlans[vlanID]
+	assert.True(t, ok, "VLAN %d not found", vlanID)
+	assert.Equal(t, expected, vlan.Type, "VLAN %d type mismatch", vlanID)
+}
+
+// AssertHuaweiVlanAdminStatus asserts the admin status of a VLAN.
+func (s *Simulator) AssertHuaweiVlanAdminStatus(t *testing.T, vlanID uint16, expected int) {
+	t.Helper()
+	vlans, err := s.datastore.ExtractHuaweiVLANsFull()
+	assert.NoError(t, err)
+	vlan, ok := vlans[vlanID]
+	assert.True(t, ok, "VLAN %d not found", vlanID)
+	assert.Equal(t, expected, vlan.AdminStatus, "VLAN %d admin status mismatch", vlanID)
+}
+
+// AssertHuaweiVlanBroadcastDiscard asserts broadcast discard setting.
+func (s *Simulator) AssertHuaweiVlanBroadcastDiscard(t *testing.T, vlanID uint16, expected int) {
+	t.Helper()
+	vlans, err := s.datastore.ExtractHuaweiVLANsFull()
+	assert.NoError(t, err)
+	vlan, ok := vlans[vlanID]
+	assert.True(t, ok, "VLAN %d not found", vlanID)
+	assert.Equal(t, expected, vlan.BroadcastDiscard, "VLAN %d broadcast discard mismatch", vlanID)
+}
+
+// AssertHuaweiVlanUnknownMulticastDiscard asserts unknown multicast discard setting.
+func (s *Simulator) AssertHuaweiVlanUnknownMulticastDiscard(t *testing.T, vlanID uint16, expected int) {
+	t.Helper()
+	vlans, err := s.datastore.ExtractHuaweiVLANsFull()
+	assert.NoError(t, err)
+	vlan, ok := vlans[vlanID]
+	assert.True(t, ok, "VLAN %d not found", vlanID)
+	assert.Equal(t, expected, vlan.UnknownMulticastDiscard, "VLAN %d unknown multicast discard mismatch", vlanID)
+}
+
+// AssertHuaweiVlanMacLearning asserts MAC learning enable status.
+func (s *Simulator) AssertHuaweiVlanMacLearning(t *testing.T, vlanID uint16, expected int) {
+	t.Helper()
+	vlans, err := s.datastore.ExtractHuaweiVLANsFull()
+	assert.NoError(t, err)
+	vlan, ok := vlans[vlanID]
+	assert.True(t, ok, "VLAN %d not found", vlanID)
+	assert.Equal(t, expected, vlan.MacLearning, "VLAN %d MAC learning mismatch", vlanID)
+}
+
+// AssertHuaweiVlanMacAgingTime asserts MAC aging time.
+func (s *Simulator) AssertHuaweiVlanMacAgingTime(t *testing.T, vlanID uint16, expected uint32) {
+	t.Helper()
+	vlans, err := s.datastore.ExtractHuaweiVLANsFull()
+	assert.NoError(t, err)
+	vlan, ok := vlans[vlanID]
+	assert.True(t, ok, "VLAN %d not found", vlanID)
+	assert.Equal(t, expected, vlan.MacAgingTime, "VLAN %d MAC aging time mismatch", vlanID)
+}
+
+// AssertHuaweiVlanStatisticEnable asserts statistic enable status.
+func (s *Simulator) AssertHuaweiVlanStatisticEnable(t *testing.T, vlanID uint16, expected int) {
+	t.Helper()
+	vlans, err := s.datastore.ExtractHuaweiVLANsFull()
+	assert.NoError(t, err)
+	vlan, ok := vlans[vlanID]
+	assert.True(t, ok, "VLAN %d not found", vlanID)
+	assert.Equal(t, expected, vlan.StatisticEnable, "VLAN %d statistic enable mismatch", vlanID)
+}
+
+// AssertHuaweiVlanStatisticDiscard asserts statistic discard status.
+func (s *Simulator) AssertHuaweiVlanStatisticDiscard(t *testing.T, vlanID uint16, expected int) {
+	t.Helper()
+	vlans, err := s.datastore.ExtractHuaweiVLANsFull()
+	assert.NoError(t, err)
+	vlan, ok := vlans[vlanID]
+	assert.True(t, ok, "VLAN %d not found", vlanID)
+	assert.Equal(t, expected, vlan.StatisticDiscard, "VLAN %d statistic discard mismatch", vlanID)
+}
+
+// AssertHuaweiVlanSuperVlan asserts super VLAN ID.
+func (s *Simulator) AssertHuaweiVlanSuperVlan(t *testing.T, vlanID uint16, expectedSuperVlanID uint16) {
+	t.Helper()
+	vlans, err := s.datastore.ExtractHuaweiVLANsFull()
+	assert.NoError(t, err)
+	vlan, ok := vlans[vlanID]
+	assert.True(t, ok, "VLAN %d not found", vlanID)
+	assert.NotNil(t, vlan.SuperVlan, "VLAN %d super VLAN should be set", vlanID)
+	assert.Equal(t, expectedSuperVlanID, *vlan.SuperVlan, "VLAN %d super VLAN mismatch", vlanID)
+}
+
+// AssertHuaweiVlanUnkownUnicastDiscard asserts unknown unicast discard settings.
+func (s *Simulator) AssertHuaweiVlanUnkownUnicastDiscard(t *testing.T, vlanID uint16, discard int, macLearningEnable int) {
+	t.Helper()
+	vlans, err := s.datastore.ExtractHuaweiVLANsFull()
+	assert.NoError(t, err)
+	vlan, ok := vlans[vlanID]
+	assert.True(t, ok, "VLAN %d not found", vlanID)
+	assert.Equal(t, discard, vlan.UnkownUnicastDiscard.Discard, "VLAN %d unknown unicast discard mismatch", vlanID)
+	assert.Equal(t, macLearningEnable, vlan.UnkownUnicastDiscard.MacLearningEnable, "VLAN %d unknown unicast MAC learning mismatch", vlanID)
+}
+
+// AssertHuaweiVlanSuppression asserts traffic suppression settings.
+func (s *Simulator) AssertHuaweiVlanSuppression(t *testing.T, vlanID uint16, inbound int, outbound int) {
+	t.Helper()
+	vlans, err := s.datastore.ExtractHuaweiVLANsFull()
+	assert.NoError(t, err)
+	vlan, ok := vlans[vlanID]
+	assert.True(t, ok, "VLAN %d not found", vlanID)
+	assert.Equal(t, inbound, vlan.Suppression.Inbound, "VLAN %d inbound suppression mismatch", vlanID)
+	assert.Equal(t, outbound, vlan.Suppression.Outbound, "VLAN %d outbound suppression mismatch", vlanID)
+}
+
 // Force import to satisfy Go's unused check
 var _ openconfig.OpenconfigVlan_Vlans
 
