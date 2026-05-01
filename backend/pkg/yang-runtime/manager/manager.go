@@ -241,6 +241,14 @@ func (m *DefaultManager) TriggerReconcile(deviceID, path string) bool {
 		ctrlName := ctrl.Name()
 
 		// Match based on path prefixes - this aligns with our controller registration
+		if strings.Contains(path, "system:") && strings.Contains(ctrlName, "system") {
+			ctrl.Enqueue(predicate.Event{
+				Type:     predicate.UpdateEvent,
+				DeviceID: deviceID,
+				Path:     path,
+			})
+			return true
+		}
 		if (strings.Contains(path, "vlan:") || strings.Contains(path, "vlans")) &&
 			strings.Contains(ctrlName, "vlan") {
 			ctrl.Enqueue(predicate.Event{

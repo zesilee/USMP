@@ -116,6 +116,11 @@ func (h *ConfigHandler) SetConfig(c *gin.Context) {
 // convertToTypedStruct converts raw JSON map to the appropriate strongly-typed
 // YANG model struct based on the path. This ensures proper diff calculation.
 func convertToTypedStruct(path string, data map[string]interface{}) (interface{}, error) {
+	// Huawei System
+	if strings.Contains(path, "system:") {
+		return convertMapToHuaweiSystem(data)
+	}
+
 	// Huawei IFM Interfaces
 	if strings.Contains(path, "ifm:ifm") && strings.Contains(path, "interfaces") {
 		return convertMapToHuaweiIfm(data)
@@ -194,6 +199,7 @@ func mapEntryToInterface(m map[string]interface{}) *huawei.HuaweiIfm_Ifm_Interfa
 	for k, v := range m {
 		key := strings.ToLower(strings.ReplaceAll(k, "-", ""))
 		switch key {
+		// ===== 基础属性 =====
 		case "name":
 			if s, ok := v.(string); ok {
 				result.Name = &s
@@ -202,18 +208,260 @@ func mapEntryToInterface(m map[string]interface{}) *huawei.HuaweiIfm_Ifm_Interfa
 			if s, ok := v.(string); ok {
 				result.Description = &s
 			}
+		case "index":
+			if num, ok := valueToUint(v); ok {
+				uint32Val := uint32(num)
+				result.Index = &uint32Val
+			}
+		case "number":
+			if s, ok := v.(string); ok {
+				result.Number = &s
+			}
+		case "position":
+			if s, ok := v.(string); ok {
+				result.Position = &s
+			}
+		case "parentname":
+			if s, ok := v.(string); ok {
+				result.ParentName = &s
+			}
+
+		// ===== 状态和类型 =====
 		case "adminstatus":
 			if num, ok := valueToUint(v); ok {
 				result.AdminStatus = huawei.E_HuaweiIfm_PortStatus(num)
 			}
+		case "type":
+			if num, ok := valueToUint(v); ok {
+				result.Type = huawei.E_HuaweiIfm_PortType(num)
+			}
+		case "class":
+			if num, ok := valueToUint(v); ok {
+				result.Class = huawei.E_HuaweiIfm_ClassType(num)
+			}
+		case "linkprotocol":
+			if num, ok := valueToUint(v); ok {
+				result.LinkProtocol = huawei.E_HuaweiIfm_LinkProtocol(num)
+			}
+		case "routertype":
+			if num, ok := valueToUint(v); ok {
+				result.RouterType = huawei.E_HuaweiIfm_RouterType(num)
+			}
+		case "servicetype":
+			if num, ok := valueToUint(v); ok {
+				result.ServiceType = huawei.E_HuaweiIfm_ServiceType(num)
+			}
+
+		// ===== 网络参数 =====
 		case "mtu":
 			if num, ok := valueToUint(v); ok {
 				uint32Val := uint32(num)
 				result.Mtu = &uint32Val
 			}
-		case "type":
+		case "macaddress":
+			if s, ok := v.(string); ok {
+				result.MacAddress = &s
+			}
+		case "bandwidth":
 			if num, ok := valueToUint(v); ok {
-				result.Type = huawei.E_HuaweiIfm_PortType(num)
+				uint32Val := uint32(num)
+				result.Bandwidth = &uint32Val
+			}
+		case "bandwidthkbps":
+			if num, ok := valueToUint(v); ok {
+				uint32Val := uint32(num)
+				result.BandwidthKbps = &uint32Val
+			}
+		case "vrfname":
+			if s, ok := v.(string); ok {
+				result.VrfName = &s
+			}
+		case "vsname":
+			if s, ok := v.(string); ok {
+				result.VsName = &s
+			}
+
+		// ===== 链路聚合 =====
+		case "aggregationname":
+			if s, ok := v.(string); ok {
+				result.AggregationName = &s
+			}
+
+		// ===== 定时器和延迟 =====
+		case "downdelaytime":
+			if num, ok := valueToUint(v); ok {
+				uint32Val := uint32(num)
+				result.DownDelayTime = &uint32Val
+			}
+		case "protocolupdelaytime":
+			if num, ok := valueToUint(v); ok {
+				uint32Val := uint32(num)
+				result.ProtocolUpDelayTime = &uint32Val
+			}
+
+		// ===== 功能开关 =====
+		case "clearipdf":
+			if b, ok := v.(bool); ok {
+				result.ClearIpDf = &b
+			}
+		case "isl2switch":
+			if b, ok := v.(bool); ok {
+				result.IsL2Switch = &b
+			}
+		case "l2modeenable":
+			if b, ok := v.(bool); ok {
+				result.L2ModeEnable = &b
+			}
+		case "linkupdowntrapenable":
+			if b, ok := v.(bool); ok {
+				result.LinkUpDownTrapEnable = &b
+			}
+		case "statisticenable":
+			if b, ok := v.(bool); ok {
+				result.StatisticEnable = &b
+			}
+		case "spreadmtuflag":
+			if b, ok := v.(bool); ok {
+				result.SpreadMtuFlag = &b
+			}
+
+		// ===== 统计配置 =====
+		case "statisticinterval":
+			if num, ok := valueToUint(v); ok {
+				uint32Val := uint32(num)
+				result.StatisticInterval = &uint32Val
+			}
+		case "statisticmode":
+			if num, ok := valueToUint(v); ok {
+				result.StatisticMode = huawei.E_HuaweiIfm_StatisticMode(num)
+			}
+
+		// ===== 嵌套容器 =====
+		case "controlflap":
+			if nested, ok := v.(map[string]interface{}); ok {
+				result.ControlFlap = mapToInterfaceControlFlap(nested)
+			}
+		case "damp":
+			if nested, ok := v.(map[string]interface{}); ok {
+				result.Damp = mapToInterfaceDamp(nested)
+			}
+		}
+	}
+
+	return result
+}
+
+// mapToInterfaceControlFlap converts map to ControlFlap struct
+func mapToInterfaceControlFlap(m map[string]interface{}) *huawei.HuaweiIfm_Ifm_Interfaces_Interface_ControlFlap {
+	result := &huawei.HuaweiIfm_Ifm_Interfaces_Interface_ControlFlap{}
+
+	for k, v := range m {
+		key := strings.ToLower(strings.ReplaceAll(k, "-", ""))
+		switch key {
+		case "ceiling":
+			if num, ok := valueToUint(v); ok {
+				uint32Val := uint32(num)
+				result.Ceiling = &uint32Val
+			}
+		case "controlflapcount":
+			if num, ok := valueToUint(v); ok {
+				uint32Val := uint32(num)
+				result.ControlFlapCount = &uint32Val
+			}
+		case "decayng":
+			if num, ok := valueToUint(v); ok {
+				uint32Val := uint32(num)
+				result.DecayNg = &uint32Val
+			}
+		case "decayok":
+			if num, ok := valueToUint(v); ok {
+				uint32Val := uint32(num)
+				result.DecayOk = &uint32Val
+			}
+		case "reuse":
+			if num, ok := valueToUint(v); ok {
+				uint32Val := uint32(num)
+				result.Reuse = &uint32Val
+			}
+		case "suppress":
+			if num, ok := valueToUint(v); ok {
+				uint32Val := uint32(num)
+				result.Suppress = &uint32Val
+			}
+		}
+	}
+
+	return result
+}
+
+// mapToInterfaceDamp converts map to Damp struct
+func mapToInterfaceDamp(m map[string]interface{}) *huawei.HuaweiIfm_Ifm_Interfaces_Interface_Damp {
+	result := &huawei.HuaweiIfm_Ifm_Interfaces_Interface_Damp{}
+
+	for k, v := range m {
+		key := strings.ToLower(strings.ReplaceAll(k, "-", ""))
+		switch key {
+		case "txoff":
+			if b, ok := v.(bool); ok {
+				result.TxOff = &b
+			}
+		case "auto":
+			if nested, ok := v.(map[string]interface{}); ok {
+				result.Auto = mapToInterfaceDampAuto(nested)
+			}
+		case "manual":
+			if nested, ok := v.(map[string]interface{}); ok {
+				result.Manual = mapToInterfaceDampManual(nested)
+			}
+		}
+	}
+
+	return result
+}
+
+// mapToInterfaceDampAuto converts map to Damp.Auto struct
+func mapToInterfaceDampAuto(m map[string]interface{}) *huawei.HuaweiIfm_Ifm_Interfaces_Interface_Damp_Auto {
+	result := &huawei.HuaweiIfm_Ifm_Interfaces_Interface_Damp_Auto{}
+
+	for k, v := range m {
+		key := strings.ToLower(strings.ReplaceAll(k, "-", ""))
+		switch key {
+		case "level":
+			if num, ok := valueToUint(v); ok {
+				result.Level = huawei.E_HuaweiIfm_DampLevelType(num)
+			}
+		}
+	}
+
+	return result
+}
+
+// mapToInterfaceDampManual converts map to Damp.Manual struct
+func mapToInterfaceDampManual(m map[string]interface{}) *huawei.HuaweiIfm_Ifm_Interfaces_Interface_Damp_Manual {
+	result := &huawei.HuaweiIfm_Ifm_Interfaces_Interface_Damp_Manual{}
+
+	for k, v := range m {
+		key := strings.ToLower(strings.ReplaceAll(k, "-", ""))
+		switch key {
+		case "halflifeperiod":
+			if num, ok := valueToUint(v); ok {
+				uint16Val := uint16(num)
+				result.HalfLifePeriod = &uint16Val
+			}
+		case "maxsuppresstime":
+			if num, ok := valueToUint(v); ok {
+				uint16Val := uint16(num)
+				result.MaxSuppressTime = &uint16Val
+			}
+		case "reuse":
+			if num, ok := valueToUint(v); ok {
+				uint32Val := uint32(num)
+				result.Reuse = &uint32Val
+			}
+		case "suppress":
+			if num, ok := valueToUint(v); ok {
+				uint32Val := uint32(num)
+				result.Suppress = &uint32Val
 			}
 		}
 	}
@@ -406,4 +654,62 @@ func valueToUint(v interface{}) (uint64, bool) {
 		}
 	}
 	return 0, false
+}
+
+// convertMapToHuaweiSystem converts a map to HuaweiSystem_System struct
+func convertMapToHuaweiSystem(data map[string]interface{}) (*huawei.HuaweiSystem_System, error) {
+	result := &huawei.HuaweiSystem_System{}
+
+	// Extract system-info container
+	var sysInfoData map[string]interface{}
+	if v, ok := data["system-info"]; ok {
+		if m, ok := v.(map[string]interface{}); ok {
+			sysInfoData = m
+		}
+	} else if v, ok := data["systemInfo"]; ok {
+		if m, ok := v.(map[string]interface{}); ok {
+			sysInfoData = m
+		}
+	} else if v, ok := data["SystemInfo"]; ok {
+		if m, ok := v.(map[string]interface{}); ok {
+			sysInfoData = m
+		}
+	} else {
+		// If no system-info container, assume the data itself is the system-info config
+		sysInfoData = data
+	}
+
+	if sysInfoData != nil {
+		result.SystemInfo = mapEntryToSystemInfo(sysInfoData)
+	}
+
+	return result, nil
+}
+
+// mapEntryToSystemInfo converts a single system-info entry map to struct
+func mapEntryToSystemInfo(m map[string]interface{}) *huawei.HuaweiSystem_System_SystemInfo {
+	result := &huawei.HuaweiSystem_System_SystemInfo{}
+
+	for k, v := range m {
+		key := strings.ToLower(strings.ReplaceAll(k, "-", ""))
+		switch key {
+		case "sysname", "name":
+			if s, ok := v.(string); ok {
+				result.SysName = &s
+			}
+		case "syscontact", "contact":
+			if s, ok := v.(string); ok {
+				result.SysContact = &s
+			}
+		case "syslocation", "location":
+			if s, ok := v.(string); ok {
+				result.SysLocation = &s
+			}
+		// Read-only fields - ignore for configuration
+		case "sysdesc", "productname", "productversion", "esn", "sysuptime":
+			// These are read-only, do not set them
+		}
+	}
+
+	return result
 }

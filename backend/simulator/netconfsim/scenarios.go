@@ -214,6 +214,148 @@ func (s *Simulator) AssertHuaweiVlanSuppression(t *testing.T, vlanID uint16, inb
 	assert.Equal(t, outbound, vlan.Suppression.Outbound, "VLAN %d outbound suppression mismatch", vlanID)
 }
 
+// ============================================
+// IFM Interface assertion methods
+// ============================================
+
+// AssertHuaweiInterfaceExists asserts that an interface with the given name exists.
+func (s *Simulator) AssertHuaweiInterfaceExists(t *testing.T, ifaceName string) {
+	t.Helper()
+	ifaces, err := s.datastore.ExtractHuaweiInterfaces()
+	assert.NoError(t, err)
+	assert.Contains(t, ifaces, ifaceName, "Interface %s not found", ifaceName)
+}
+
+// AssertHuaweiInterfaceDescription asserts interface description.
+func (s *Simulator) AssertHuaweiInterfaceDescription(t *testing.T, ifaceName string, expected string) {
+	t.Helper()
+	ifaces, err := s.datastore.ExtractHuaweiInterfaces()
+	assert.NoError(t, err)
+	iface, ok := ifaces[ifaceName]
+	assert.True(t, ok, "Interface %s not found", ifaceName)
+	assert.Equal(t, expected, iface.Description, "Interface %s description mismatch", ifaceName)
+}
+
+// AssertHuaweiInterfaceAdminStatus asserts interface admin status.
+func (s *Simulator) AssertHuaweiInterfaceAdminStatus(t *testing.T, ifaceName string, expected int) {
+	t.Helper()
+	ifaces, err := s.datastore.ExtractHuaweiInterfaces()
+	assert.NoError(t, err)
+	iface, ok := ifaces[ifaceName]
+	assert.True(t, ok, "Interface %s not found", ifaceName)
+	assert.Equal(t, expected, iface.AdminStatus, "Interface %s admin status mismatch", ifaceName)
+}
+
+// AssertHuaweiInterfaceMtu asserts interface MTU.
+func (s *Simulator) AssertHuaweiInterfaceMtu(t *testing.T, ifaceName string, expected uint32) {
+	t.Helper()
+	ifaces, err := s.datastore.ExtractHuaweiInterfaces()
+	assert.NoError(t, err)
+	iface, ok := ifaces[ifaceName]
+	assert.True(t, ok, "Interface %s not found", ifaceName)
+	assert.Equal(t, expected, iface.Mtu, "Interface %s MTU mismatch", ifaceName)
+}
+
+// AssertHuaweiInterfaceControlFlap asserts control-flap configuration.
+func (s *Simulator) AssertHuaweiInterfaceControlFlap(t *testing.T, ifaceName string, ceiling uint32, decayNg uint32, decayOk uint32, reuse uint32, suppress uint32) {
+	t.Helper()
+	ifaces, err := s.datastore.ExtractHuaweiInterfaces()
+	assert.NoError(t, err)
+	iface, ok := ifaces[ifaceName]
+	assert.True(t, ok, "Interface %s not found", ifaceName)
+	assert.Equal(t, ceiling, iface.ControlFlap.Ceiling, "Interface %s control-flap ceiling mismatch", ifaceName)
+	assert.Equal(t, decayNg, iface.ControlFlap.DecayNg, "Interface %s control-flap decay-ng mismatch", ifaceName)
+	assert.Equal(t, decayOk, iface.ControlFlap.DecayOk, "Interface %s control-flap decay-ok mismatch", ifaceName)
+	assert.Equal(t, reuse, iface.ControlFlap.Reuse, "Interface %s control-flap reuse mismatch", ifaceName)
+	assert.Equal(t, suppress, iface.ControlFlap.Suppress, "Interface %s control-flap suppress mismatch", ifaceName)
+}
+
+// AssertHuaweiInterfaceDampManual asserts damp manual configuration.
+func (s *Simulator) AssertHuaweiInterfaceDampManual(t *testing.T, ifaceName string, halfLife uint16, maxSuppress uint16, reuse uint32, suppress uint32) {
+	t.Helper()
+	ifaces, err := s.datastore.ExtractHuaweiInterfaces()
+	assert.NoError(t, err)
+	iface, ok := ifaces[ifaceName]
+	assert.True(t, ok, "Interface %s not found", ifaceName)
+	assert.Equal(t, halfLife, iface.Damp.Manual.HalfLifePeriod, "Interface %s damp manual half-life mismatch", ifaceName)
+	assert.Equal(t, maxSuppress, iface.Damp.Manual.MaxSuppressTime, "Interface %s damp manual max-suppress mismatch", ifaceName)
+	assert.Equal(t, reuse, iface.Damp.Manual.Reuse, "Interface %s damp manual reuse mismatch", ifaceName)
+	assert.Equal(t, suppress, iface.Damp.Manual.Suppress, "Interface %s damp manual suppress mismatch", ifaceName)
+}
+
+// AssertHuaweiInterfaceTimers asserts interface timer configurations.
+func (s *Simulator) AssertHuaweiInterfaceTimers(t *testing.T, ifaceName string, downDelay uint32, upDelay uint32) {
+	t.Helper()
+	ifaces, err := s.datastore.ExtractHuaweiInterfaces()
+	assert.NoError(t, err)
+	iface, ok := ifaces[ifaceName]
+	assert.True(t, ok, "Interface %s not found", ifaceName)
+	assert.Equal(t, downDelay, iface.DownDelayTime, "Interface %s down-delay-time mismatch", ifaceName)
+	assert.Equal(t, upDelay, iface.ProtocolUpDelayTime, "Interface %s protocol-up-delay-time mismatch", ifaceName)
+}
+
+// AssertHuaweiInterfaceFlags asserts interface boolean flag configurations.
+func (s *Simulator) AssertHuaweiInterfaceFlags(t *testing.T, ifaceName string, clearIpDf bool, isL2Switch bool, l2ModeEnable bool, linkUpDownTrap bool, statisticEnable bool, spreadMtuFlag bool) {
+	t.Helper()
+	ifaces, err := s.datastore.ExtractHuaweiInterfaces()
+	assert.NoError(t, err)
+	iface, ok := ifaces[ifaceName]
+	assert.True(t, ok, "Interface %s not found", ifaceName)
+	assert.Equal(t, clearIpDf, iface.ClearIpDf, "Interface %s clear-ip-df mismatch", ifaceName)
+	assert.Equal(t, isL2Switch, iface.IsL2Switch, "Interface %s is-l2-switch mismatch", ifaceName)
+	assert.Equal(t, l2ModeEnable, iface.L2ModeEnable, "Interface %s l2-mode-enable mismatch", ifaceName)
+	assert.Equal(t, linkUpDownTrap, iface.LinkUpDownTrapEnable, "Interface %s link-up-down-trap-enable mismatch", ifaceName)
+	assert.Equal(t, statisticEnable, iface.StatisticEnable, "Interface %s statistic-enable mismatch", ifaceName)
+	assert.Equal(t, spreadMtuFlag, iface.SpreadMtuFlag, "Interface %s spread-mtu-flag mismatch", ifaceName)
+}
+
+// AssertHuaweiInterfaceStatistics asserts interface statistic configurations.
+func (s *Simulator) AssertHuaweiInterfaceStatistics(t *testing.T, ifaceName string, interval uint32, mode int) {
+	t.Helper()
+	ifaces, err := s.datastore.ExtractHuaweiInterfaces()
+	assert.NoError(t, err)
+	iface, ok := ifaces[ifaceName]
+	assert.True(t, ok, "Interface %s not found", ifaceName)
+	assert.Equal(t, interval, iface.StatisticInterval, "Interface %s statistic-interval mismatch", ifaceName)
+	assert.Equal(t, mode, iface.StatisticMode, "Interface %s statistic-mode mismatch", ifaceName)
+}
+
+// AssertHuaweiInterfaceNetwork asserts interface network configurations.
+func (s *Simulator) AssertHuaweiInterfaceNetwork(t *testing.T, ifaceName string, macAddress string, vrfName string, vsName string) {
+	t.Helper()
+	ifaces, err := s.datastore.ExtractHuaweiInterfaces()
+	assert.NoError(t, err)
+	iface, ok := ifaces[ifaceName]
+	assert.True(t, ok, "Interface %s not found", ifaceName)
+	assert.Equal(t, macAddress, iface.MacAddress, "Interface %s mac-address mismatch", ifaceName)
+	assert.Equal(t, vrfName, iface.VrfName, "Interface %s vrf-name mismatch", ifaceName)
+	assert.Equal(t, vsName, iface.VsName, "Interface %s vs-name mismatch", ifaceName)
+}
+
+// AssertHuaweiSystem asserts system configuration.
+func (s *Simulator) AssertHuaweiSystem(t *testing.T, sysName string, sysContact string, sysLocation string) {
+	t.Helper()
+	sys, err := s.datastore.ExtractHuaweiSystem()
+	assert.NoError(t, err)
+	if sysName != "" {
+		assert.Equal(t, sysName, sys.SysName, "System name mismatch")
+	}
+	if sysContact != "" {
+		assert.Equal(t, sysContact, sys.SysContact, "System contact mismatch")
+	}
+	if sysLocation != "" {
+		assert.Equal(t, sysLocation, sys.SysLocation, "System location mismatch")
+	}
+}
+
+// AssertHuaweiSystemName asserts system name.
+func (s *Simulator) AssertHuaweiSystemName(t *testing.T, expected string) {
+	t.Helper()
+	sys, err := s.datastore.ExtractHuaweiSystem()
+	assert.NoError(t, err)
+	assert.Equal(t, expected, sys.SysName, "System name mismatch")
+}
+
 // Force import to satisfy Go's unused check
 var _ openconfig.OpenconfigVlan_Vlans
 

@@ -295,8 +295,320 @@ func TestReconciler_Integration_CommitFailure(t *testing.T) {
 	assert.Contains(t, result.Error.Error(), "commit rejected")
 }
 
+// TestReconciler_Integration_FullInterfaceConfig tests applying full interface configuration including nested containers
+func TestReconciler_Integration_FullInterfaceConfig(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping integration test in short mode")
+	}
+
+	// 1. Start NETCONF simulator
+	sim := netsim.NewSimulator()
+	err := sim.Start()
+	assert.NoError(t, err)
+	defer sim.Stop()
+
+	// 2. Create in-memory cache and config store
+	c := cache.NewTTLLRUCache(100, 30*time.Second, 1*time.Minute)
+	cs := manager.NewInMemoryConfigStore(c)
+
+	// 3. Create client pool
+	pool := client.NewDefaultClientPool(client.DefaultClientFactory(5 * time.Second))
+	defer pool.CloseAll()
+
+	// 4. Set desired configuration with full attributes including nested containers
+	ge1 := "GigabitEthernet0/0/1"
+	desired := &huawei.HuaweiIfm_Ifm_Interfaces{
+		Interface: map[string]*huawei.HuaweiIfm_Ifm_Interfaces_Interface{
+			ge1: {
+				Name:              &ge1,
+				Description:       stringPtr("Full Config Interface"),
+				AdminStatus:       huawei.HuaweiIfm_PortStatus_up,
+				Mtu:               uint32Ptr(9000),
+				Class:             huawei.HuaweiIfm_ClassType_main_interface,
+				Type:              huawei.HuaweiIfm_PortType_GigabitEthernet,
+				ControlFlap: &huawei.HuaweiIfm_Ifm_Interfaces_Interface_ControlFlap{
+					Ceiling:         uint32Ptr(6000),
+					ControlFlapCount: uint32Ptr(5),
+					DecayNg:         uint32Ptr(10),
+					DecayOk:         uint32Ptr(120),
+					Reuse:           uint32Ptr(1000),
+					Suppress:        uint32Ptr(3000),
+				},
+				Damp: &huawei.HuaweiIfm_Ifm_Interfaces_Interface_Damp{
+					TxOff: boolPtr(true),
+					Manual: &huawei.HuaweiIfm_Ifm_Interfaces_Interface_Damp_Manual{
+						HalfLifePeriod:  uint16Ptr(10),
+						MaxSuppressTime: uint16Ptr(60),
+						Reuse:           uint32Ptr(500),
+						Suppress:        uint32Ptr(4000),
+					},
+				},
+			},
+		},
+	}
+
+	deviceID := fmt.Sprintf("%s:%s@%s:%d", sim.Username(), sim.Password(), sim.Addr(), sim.Port())
+	path := "/ifm:ifm/ifm:interfaces"
+	err = cs.Set(deviceID, path, desired)
+	assert.NoError(t, err)
+
+	// 5. Create reconciler and execute reconciliation
+	r := New(cs, pool)
+	req := reconcile.Request{
+		DeviceID: deviceID,
+		Path:     path,
+	}
+
+	ctx := context.Background()
+	result := r.Reconcile(ctx, req)
+
+	// 6. Verify result
+	if result.Error != nil {
+		t.Fatalf("reconciliation failed: %v", result.Error)
+	}
+	assert.NoError(t, result.Error)
+	assert.False(t, result.Requeue)
+
+	// 7. Verify all attributes using new assertion methods
+	sim.AssertHuaweiInterfaceExists(t, ge1)
+	sim.AssertHuaweiInterfaceDescription(t, ge1, "Full Config Interface")
+	sim.AssertHuaweiInterfaceAdminStatus(t, ge1, 2) // up = 2
+	sim.AssertHuaweiInterfaceMtu(t, ge1, 9000)
+	sim.AssertHuaweiInterfaceControlFlap(t, ge1, 6000, 10, 120, 1000, 3000)
+	sim.AssertHuaweiInterfaceDampManual(t, ge1, 10, 60, 500, 4000)
+}
+
+// TestReconciler_Integration_TimersAndFlags tests interface timer and flag configurations
+func TestReconciler_Integration_TimersAndFlags(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping integration test in short mode")
+	}
+
+	// 1. Start NETCONF simulator
+	sim := netsim.NewSimulator()
+	err := sim.Start()
+	assert.NoError(t, err)
+	defer sim.Stop()
+
+	// 2. Create in-memory cache and config store
+	c := cache.NewTTLLRUCache(100, 30*time.Second, 1*time.Minute)
+	cs := manager.NewInMemoryConfigStore(c)
+
+	// 3. Create client pool
+	pool := client.NewDefaultClientPool(client.DefaultClientFactory(5 * time.Second))
+	defer pool.CloseAll()
+
+	// 4. Set desired configuration with timers and flags
+	ge1 := "GigabitEthernet0/0/2"
+	desired := &huawei.HuaweiIfm_Ifm_Interfaces{
+		Interface: map[string]*huawei.HuaweiIfm_Ifm_Interfaces_Interface{
+			ge1: {
+				Name:                 &ge1,
+				Description:          stringPtr("Timers and Flags Test"),
+				AdminStatus:          huawei.HuaweiIfm_PortStatus_down,
+				Mtu:                  uint32Ptr(1500),
+				// Timers
+				DownDelayTime:      uint32Ptr(50),
+				ProtocolUpDelayTime: uint32Ptr(100),
+				// Boolean flags
+				ClearIpDf:           boolPtr(true),
+				IsL2Switch:          boolPtr(false),
+				L2ModeEnable:         boolPtr(true),
+				LinkUpDownTrapEnable: boolPtr(true),
+				StatisticEnable:      boolPtr(false),
+				SpreadMtuFlag:        boolPtr(false),
+			},
+		},
+	}
+
+	deviceID := fmt.Sprintf("%s:%s@%s:%d", sim.Username(), sim.Password(), sim.Addr(), sim.Port())
+	path := "/ifm:ifm/ifm:interfaces"
+	err = cs.Set(deviceID, path, desired)
+	assert.NoError(t, err)
+
+	// 5. Create reconciler and execute reconciliation
+	r := New(cs, pool)
+	req := reconcile.Request{
+		DeviceID: deviceID,
+		Path:     path,
+	}
+
+	ctx := context.Background()
+	result := r.Reconcile(ctx, req)
+
+	// 6. Verify result
+	if result.Error != nil {
+		t.Fatalf("reconciliation failed: %v", result.Error)
+	}
+	assert.NoError(t, result.Error)
+	assert.False(t, result.Requeue)
+
+	// 7. Verify timers and flags
+	sim.AssertHuaweiInterfaceExists(t, ge1)
+	sim.AssertHuaweiInterfaceDescription(t, ge1, "Timers and Flags Test")
+	sim.AssertHuaweiInterfaceAdminStatus(t, ge1, 1) // down = 1
+	sim.AssertHuaweiInterfaceTimers(t, ge1, 50, 100)
+	sim.AssertHuaweiInterfaceFlags(t, ge1, true, false, true, true, false, false)
+}
+
+// TestReconciler_Integration_StatisticsConfig tests interface statistic configurations
+func TestReconciler_Integration_StatisticsConfig(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping integration test in short mode")
+	}
+
+	// 1. Start NETCONF simulator
+	sim := netsim.NewSimulator()
+	err := sim.Start()
+	assert.NoError(t, err)
+	defer sim.Stop()
+
+	// 2. Create in-memory cache and config store
+	c := cache.NewTTLLRUCache(100, 30*time.Second, 1*time.Minute)
+	cs := manager.NewInMemoryConfigStore(c)
+
+	// 3. Create client pool
+	pool := client.NewDefaultClientPool(client.DefaultClientFactory(5 * time.Second))
+	defer pool.CloseAll()
+
+	// 4. Set desired configuration with statistics and network attributes
+	ge1 := "GigabitEthernet0/0/3"
+	desired := &huawei.HuaweiIfm_Ifm_Interfaces{
+		Interface: map[string]*huawei.HuaweiIfm_Ifm_Interfaces_Interface{
+			ge1: {
+				Name:              &ge1,
+				Description:       stringPtr("Statistics Config Test"),
+				AdminStatus:       huawei.HuaweiIfm_PortStatus_up,
+				Mtu:               uint32Ptr(9000),
+				// Statistics
+				StatisticEnable:   boolPtr(true),
+				StatisticInterval: uint32Ptr(600),
+				StatisticMode:     huawei.E_HuaweiIfm_StatisticMode(2),
+				// Network
+				MacAddress: stringPtr("00:11:22:33:44:66"),
+				VrfName:    stringPtr("management"),
+				VsName:     stringPtr("vs0"),
+			},
+		},
+	}
+
+	deviceID := fmt.Sprintf("%s:%s@%s:%d", sim.Username(), sim.Password(), sim.Addr(), sim.Port())
+	path := "/ifm:ifm/ifm:interfaces"
+	err = cs.Set(deviceID, path, desired)
+	assert.NoError(t, err)
+
+	// 5. Create reconciler and execute reconciliation
+	r := New(cs, pool)
+	req := reconcile.Request{
+		DeviceID: deviceID,
+		Path:     path,
+	}
+
+	ctx := context.Background()
+	result := r.Reconcile(ctx, req)
+
+	// 6. Verify result
+	if result.Error != nil {
+		t.Fatalf("reconciliation failed: %v", result.Error)
+	}
+	assert.NoError(t, result.Error)
+	assert.False(t, result.Requeue)
+
+	// 7. Verify statistics and network attributes
+	sim.AssertHuaweiInterfaceExists(t, ge1)
+	sim.AssertHuaweiInterfaceDescription(t, ge1, "Statistics Config Test")
+	sim.AssertHuaweiInterfaceMtu(t, ge1, 9000)
+	sim.AssertHuaweiInterfaceStatistics(t, ge1, 600, 2)
+	sim.AssertHuaweiInterfaceNetwork(t, ge1, "00:11:22:33:44:66", "management", "vs0")
+}
+
+// TestReconciler_Integration_ModifyMultipleAttributes tests modifying multiple attributes on existing interface
+func TestReconciler_Integration_ModifyMultipleAttributes(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping integration test in short mode")
+	}
+
+	// 1. Start NETCONF simulator
+	sim := netsim.NewSimulator()
+	err := sim.Start()
+	assert.NoError(t, err)
+	defer sim.Stop()
+
+	// 2. Create in-memory cache and config store
+	c := cache.NewTTLLRUCache(100, 30*time.Second, 1*time.Minute)
+	cs := manager.NewInMemoryConfigStore(c)
+
+	// 3. Create client pool
+	pool := client.NewDefaultClientPool(client.DefaultClientFactory(5 * time.Second))
+	defer pool.CloseAll()
+
+	// 4. First, create interface with initial config
+	ge1 := "GigabitEthernet0/0/4"
+	desired := &huawei.HuaweiIfm_Ifm_Interfaces{
+		Interface: map[string]*huawei.HuaweiIfm_Ifm_Interfaces_Interface{
+			ge1: {
+				Name:              &ge1,
+				Description:       stringPtr("Initial Config"),
+				AdminStatus:       huawei.HuaweiIfm_PortStatus_up,
+				Mtu:               uint32Ptr(1500),
+			},
+		},
+	}
+
+	deviceID := fmt.Sprintf("%s:%s@%s:%d", sim.Username(), sim.Password(), sim.Addr(), sim.Port())
+	path := "/ifm:ifm/ifm:interfaces"
+	err = cs.Set(deviceID, path, desired)
+	assert.NoError(t, err)
+
+	r := New(cs, pool)
+	req := reconcile.Request{DeviceID: deviceID, Path: path}
+
+	ctx := context.Background()
+	result := r.Reconcile(ctx, req)
+	assert.NoError(t, result.Error)
+
+	// 5. Now modify multiple attributes: MTU, description, admin status, and add damp config
+	desired.Interface[ge1].Mtu = uint32Ptr(9000)
+	desired.Interface[ge1].Description = stringPtr("Modified Config")
+	desired.Interface[ge1].AdminStatus = huawei.HuaweiIfm_PortStatus_down
+	desired.Interface[ge1].Damp = &huawei.HuaweiIfm_Ifm_Interfaces_Interface_Damp{
+		TxOff: boolPtr(true),
+		Manual: &huawei.HuaweiIfm_Ifm_Interfaces_Interface_Damp_Manual{
+			HalfLifePeriod:  uint16Ptr(30),
+			MaxSuppressTime: uint16Ptr(120),
+			Reuse:           uint32Ptr(2000),
+			Suppress:        uint32Ptr(8000),
+		},
+	}
+
+	err = cs.Set(deviceID, path, desired)
+	assert.NoError(t, err)
+
+	// 6. Reconcile again to apply changes
+	result = r.Reconcile(ctx, req)
+	assert.NoError(t, result.Error)
+	assert.False(t, result.Requeue)
+
+	// 7. Verify all modified attributes
+	sim.AssertHuaweiInterfaceExists(t, ge1)
+	sim.AssertHuaweiInterfaceDescription(t, ge1, "Modified Config")
+	sim.AssertHuaweiInterfaceAdminStatus(t, ge1, 1) // down
+	sim.AssertHuaweiInterfaceMtu(t, ge1, 9000)
+	sim.AssertHuaweiInterfaceDampManual(t, ge1, 30, 120, 2000, 8000)
+}
+
 // uint32Ptr is a helper to create a *uint32 from a uint32
 func uint32Ptr(v uint32) *uint32 {
+	return &v
+}
+
+// uint16Ptr is a helper to create a *uint16 from a uint16
+func uint16Ptr(v uint16) *uint16 {
+	return &v
+}
+
+// boolPtr is a helper to create a *bool from a bool
+func boolPtr(v bool) *bool {
 	return &v
 }
 

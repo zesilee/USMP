@@ -381,6 +381,55 @@ export const VLAN_SCHEMA: YangNode = {
 }
 
 /** 华为 IFM 接口管理模型 */
+// Interface 常用枚举选项
+const PORT_STATUS_OPTIONS = [
+  { name: 'Down', value: 1, description: '关闭' },
+  { name: 'Up', value: 2, description: '启用' }
+]
+
+const PORT_TYPE_OPTIONS = [
+  { name: 'Ethernet', value: 1, description: '以太网接口' },
+  { name: 'GigabitEthernet', value: 3, description: '千兆以太网接口' },
+  { name: '100GE', value: 21, description: '100G 以太网接口' },
+  { name: '40GE', value: 24, description: '40G 以太网接口' },
+  { name: 'Eth-Trunk', value: 5, description: '链路聚合接口' },
+  { name: 'Vlanif', value: 16, description: 'VLAN 接口' },
+  { name: 'LoopBack', value: 20, description: '环回接口' },
+  { name: 'Tunnel', value: 15, description: '隧道接口' }
+]
+
+const LINK_PROTOCOL_OPTIONS = [
+  { name: 'Ethernet', value: 0, description: '以太网协议' },
+  { name: 'PPP', value: 1, description: 'PPP 协议' },
+  { name: 'HDLC', value: 2, description: 'HDLC 协议' }
+]
+
+const ROUTER_TYPE_OPTIONS = [
+  { name: 'PtoP', value: 0, description: '点到点' },
+  { name: 'NBMA', value: 1, description: '非广播多点接入' },
+  { name: 'P2MP', value: 2, description: '点到多点' },
+  { name: 'Broadcast', value: 3, description: '广播模式' }
+]
+
+const SERVICE_TYPE_OPTIONS = [
+  { name: 'Unknown', value: 0, description: '未知' },
+  { name: 'L3', value: 1, description: '三层接口' },
+  { name: 'L2', value: 2, description: '二层接口' },
+  { name: 'L3Main', value: 3, description: '三层主接口' }
+]
+
+const CLASS_TYPE_OPTIONS = [
+  { name: 'Main', value: 1, description: '主接口' },
+  { name: 'Sub', value: 2, description: '子接口' },
+  { name: 'Tunnel', value: 3, description: '隧道接口' }
+]
+
+const STATISTIC_MODE_OPTIONS = [
+  { name: 'Interface', value: 1, description: '接口统计' },
+  { name: 'SubInterface', value: 2, description: '子接口统计' },
+  { name: 'All', value: 3, description: '全部统计' }
+]
+
 export const INTERFACES_SCHEMA: YangNode = {
   path: '/ifm:ifm/ifm:interfaces',
   name: 'interfaces',
@@ -396,6 +445,7 @@ export const INTERFACES_SCHEMA: YangNode = {
       key: 'name',
       config: true,
       children: [
+        // ===== 基础属性 =====
         {
           path: '/ifm:ifm/ifm:interfaces/interface/name',
           name: 'name',
@@ -412,17 +462,91 @@ export const INTERFACES_SCHEMA: YangNode = {
           config: true
         },
         {
+          path: '/ifm:ifm/ifm:interfaces/interface/index',
+          name: 'index',
+          type: 'uint',
+          description: '接口索引',
+          config: true
+        },
+        {
+          path: '/ifm:ifm/ifm:interfaces/interface/number',
+          name: 'number',
+          type: 'string',
+          description: '接口编号',
+          config: true
+        },
+        {
+          path: '/ifm:ifm/ifm:interfaces/interface/position',
+          name: 'position',
+          type: 'string',
+          description: '接口位置',
+          config: true
+        },
+        {
+          path: '/ifm:ifm/ifm:interfaces/interface/parent-name',
+          name: 'parent-name',
+          type: 'string',
+          description: '父接口名称',
+          config: true
+        },
+
+        // ===== 状态和类型 =====
+        {
           path: '/ifm:ifm/ifm:interfaces/interface/admin-status',
           name: 'admin-status',
           type: 'enum',
           description: '管理状态',
           config: true,
-          enumOptions: [
-            { name: 'Up', value: 2, description: '启用' },
-            { name: 'Down', value: 1, description: '禁用' }
-          ],
+          enumOptions: PORT_STATUS_OPTIONS,
           default: 2
         },
+        {
+          path: '/ifm:ifm/ifm:interfaces/interface/type',
+          name: 'type',
+          type: 'enum',
+          description: '接口类型',
+          config: true,
+          enumOptions: PORT_TYPE_OPTIONS,
+          default: 1
+        },
+        {
+          path: '/ifm:ifm/ifm:interfaces/interface/class',
+          name: 'class',
+          type: 'enum',
+          description: '接口分类',
+          config: true,
+          enumOptions: CLASS_TYPE_OPTIONS,
+          default: 1
+        },
+        {
+          path: '/ifm:ifm/ifm:interfaces/interface/link-protocol',
+          name: 'link-protocol',
+          type: 'enum',
+          description: '链路协议类型',
+          config: true,
+          enumOptions: LINK_PROTOCOL_OPTIONS,
+          default: 0
+        },
+        {
+          path: '/ifm:ifm/ifm:interfaces/interface/router-type',
+          name: 'router-type',
+          type: 'enum',
+          description: '路由类型',
+          config: true,
+          enumOptions: ROUTER_TYPE_OPTIONS,
+          default: 3
+        },
+        {
+          path: '/ifm:ifm/ifm:interfaces/interface/service-type',
+          name: 'service-type',
+          type: 'enum',
+          description: '服务类型',
+          config: true,
+          enumOptions: SERVICE_TYPE_OPTIONS,
+          default: 1
+        },
+
+        // ===== 网络参数 =====
         {
           path: '/ifm:ifm/ifm:interfaces/interface/mtu',
           name: 'mtu',
@@ -433,22 +557,280 @@ export const INTERFACES_SCHEMA: YangNode = {
           default: 1500
         },
         {
-          path: '/ifm:ifm/ifm:interfaces/interface/type',
-          name: 'type',
-          type: 'enum',
-          description: '接口类型',
+          path: '/ifm:ifm/ifm:interfaces/interface/mac-address',
+          name: 'mac-address',
+          type: 'string',
+          description: 'MAC 地址',
+          config: true
+        },
+        {
+          path: '/ifm:ifm/ifm:interfaces/interface/bandwidth',
+          name: 'bandwidth',
+          type: 'uint',
+          description: '带宽 (Mbps)',
           config: true,
-          enumOptions: [
-            { name: 'Ethernet', value: 1, description: '以太网接口' },
-            { name: 'GigabitEthernet', value: 3, description: '千兆以太网接口' },
-            { name: '100GE', value: 21, description: '100G 以太网接口' },
-            { name: '40GE', value: 24, description: '40G 以太网接口' },
-            { name: 'Eth-Trunk', value: 5, description: '链路聚合接口' },
-            { name: 'Vlanif', value: 16, description: 'VLAN 接口' },
-            { name: 'LoopBack', value: 20, description: '环回接口' },
-            { name: 'Tunnel', value: 15, description: '隧道接口' }
-          ],
+          range: { min: 1, max: 1000000 }
+        },
+        {
+          path: '/ifm:ifm/ifm:interfaces/interface/bandwidth-kbps',
+          name: 'bandwidth-kbps',
+          type: 'uint',
+          description: '带宽 (Kbps)',
+          config: true,
+          range: { min: 1, max: 100000000 }
+        },
+        {
+          path: '/ifm:ifm/ifm:interfaces/interface/vrf-name',
+          name: 'vrf-name',
+          type: 'string',
+          description: 'VRF 名称',
+          config: true
+        },
+        {
+          path: '/ifm:ifm/ifm:interfaces/interface/vs-name',
+          name: 'vs-name',
+          type: 'string',
+          description: 'VS 名称',
+          config: true
+        },
+
+        // ===== 链路聚合 =====
+        {
+          path: '/ifm:ifm/ifm:interfaces/interface/aggregation-name',
+          name: 'aggregation-name',
+          type: 'string',
+          description: '聚合接口名称',
+          config: true
+        },
+
+        // ===== 定时器和延迟 =====
+        {
+          path: '/ifm:ifm/ifm:interfaces/interface/down-delay-time',
+          name: 'down-delay-time',
+          type: 'uint',
+          description: 'Down 延迟时间 (秒)',
+          config: true,
+          range: { min: 0, max: 600 },
+          default: 0
+        },
+        {
+          path: '/ifm:ifm/ifm:interfaces/interface/protocol-up-delay-time',
+          name: 'protocol-up-delay-time',
+          type: 'uint',
+          description: '协议 Up 延迟时间 (秒)',
+          config: true,
+          range: { min: 0, max: 600 },
+          default: 0
+        },
+
+        // ===== 功能开关 =====
+        {
+          path: '/ifm:ifm/ifm:interfaces/interface/clear-ip-df',
+          name: 'clear-ip-df',
+          type: 'boolean',
+          description: '清除 IP DF 标志',
+          config: true,
+          default: false
+        },
+        {
+          path: '/ifm:ifm/ifm:interfaces/interface/is-l2-switch',
+          name: 'is-l2-switch',
+          type: 'boolean',
+          description: '是否为二层交换口',
+          config: true,
+          default: false
+        },
+        {
+          path: '/ifm:ifm/ifm:interfaces/interface/l2-mode-enable',
+          name: 'l2-mode-enable',
+          type: 'boolean',
+          description: '启用二层模式',
+          config: true,
+          default: false
+        },
+        {
+          path: '/ifm:ifm/ifm:interfaces/interface/link-up-down-trap-enable',
+          name: 'link-up-down-trap-enable',
+          type: 'boolean',
+          description: '启用 Link Up/Down Trap',
+          config: true,
+          default: true
+        },
+        {
+          path: '/ifm:ifm/ifm:interfaces/interface/statistic-enable',
+          name: 'statistic-enable',
+          type: 'boolean',
+          description: '启用统计',
+          config: true,
+          default: true
+        },
+        {
+          path: '/ifm:ifm/ifm:interfaces/interface/spread-mtu-flag',
+          name: 'spread-mtu-flag',
+          type: 'boolean',
+          description: '传播 MTU 标志',
+          config: true,
+          default: false
+        },
+
+        // ===== 统计配置 =====
+        {
+          path: '/ifm:ifm/ifm:interfaces/interface/statistic-interval',
+          name: 'statistic-interval',
+          type: 'uint',
+          description: '统计间隔 (秒)',
+          config: true,
+          range: { min: 10, max: 600 },
+          default: 300
+        },
+        {
+          path: '/ifm:ifm/ifm:interfaces/interface/statistic-mode',
+          name: 'statistic-mode',
+          type: 'enum',
+          description: '统计模式',
+          config: true,
+          enumOptions: STATISTIC_MODE_OPTIONS,
           default: 1
+        },
+
+        // ===== 嵌套容器：ControlFlap =====
+        {
+          path: '/ifm:ifm/ifm:interfaces/interface/control-flap',
+          name: 'control-flap',
+          type: 'container',
+          description: '接口振荡抑制配置',
+          config: true,
+          children: [
+            {
+              path: '/ifm:ifm/ifm:interfaces/interface/control-flap/ceiling',
+              name: 'ceiling',
+              type: 'uint',
+              description: '抑制阈值上限',
+              config: true,
+              range: { min: 1, max: 20000 }
+            },
+            {
+              path: '/ifm:ifm/ifm:interfaces/interface/control-flap/control-flap-count',
+              name: 'control-flap-count',
+              type: 'uint',
+              description: '振荡次数统计',
+              config: true
+            },
+            {
+              path: '/ifm:ifm/ifm:interfaces/interface/control-flap/decay-ng',
+              name: 'decay-ng',
+              type: 'uint',
+              description: '故障状态衰减系数',
+              config: true,
+              range: { min: 1, max: 900 }
+            },
+            {
+              path: '/ifm:ifm/ifm:interfaces/interface/control-flap/decay-ok',
+              name: 'decay-ok',
+              type: 'uint',
+              description: '正常状态衰减系数',
+              config: true,
+              range: { min: 1, max: 900 }
+            },
+            {
+              path: '/ifm:ifm/ifm:interfaces/interface/control-flap/reuse',
+              name: 'reuse',
+              type: 'uint',
+              description: '恢复阈值',
+              config: true,
+              range: { min: 1, max: 20000 }
+            },
+            {
+              path: '/ifm:ifm/ifm:interfaces/interface/control-flap/suppress',
+              name: 'suppress',
+              type: 'uint',
+              description: '抑制启动阈值',
+              config: true,
+              range: { min: 1, max: 20000 }
+            }
+          ]
+        },
+
+        // ===== 嵌套容器：Damp =====
+        {
+          path: '/ifm:ifm/ifm:interfaces/interface/damp',
+          name: 'damp',
+          type: 'container',
+          description: '接口 Damp 抑制配置',
+          config: true,
+          children: [
+            {
+              path: '/ifm:ifm/ifm:interfaces/interface/damp/tx-off',
+              name: 'tx-off',
+              type: 'boolean',
+              description: '关闭 TX 发送',
+              config: true,
+              default: false
+            },
+            {
+              path: '/ifm:ifm/ifm:interfaces/interface/damp/auto',
+              name: 'auto',
+              type: 'container',
+              description: '自动 Damp 配置',
+              config: true,
+              children: [
+                {
+                  path: '/ifm:ifm/ifm:interfaces/interface/damp/auto/level',
+                  name: 'level',
+                  type: 'enum',
+                  description: 'Damp 等级',
+                  config: true,
+                  enumOptions: [
+                    { name: 'Level 1', value: 1, description: '等级 1' },
+                    { name: 'Level 2', value: 2, description: '等级 2' },
+                    { name: 'Level 3', value: 3, description: '等级 3' },
+                    { name: 'Level 4', value: 4, description: '等级 4' }
+                  ]
+                }
+              ]
+            },
+            {
+              path: '/ifm:ifm/ifm:interfaces/interface/damp/manual',
+              name: 'manual',
+              type: 'container',
+              description: '手动 Damp 配置',
+              config: true,
+              children: [
+                {
+                  path: '/ifm:ifm/ifm:interfaces/interface/damp/manual/half-life-period',
+                  name: 'half-life-period',
+                  type: 'uint',
+                  description: '半衰期 (秒)',
+                  config: true,
+                  range: { min: 1, max: 45 }
+                },
+                {
+                  path: '/ifm:ifm/ifm:interfaces/interface/damp/manual/max-suppress-time',
+                  name: 'max-suppress-time',
+                  type: 'uint',
+                  description: '最大抑制时间 (秒)',
+                  config: true,
+                  range: { min: 1, max: 255 }
+                },
+                {
+                  path: '/ifm:ifm/ifm:interfaces/interface/damp/manual/reuse',
+                  name: 'reuse',
+                  type: 'uint',
+                  description: '恢复阈值',
+                  config: true,
+                  range: { min: 1, max: 20000 }
+                },
+                {
+                  path: '/ifm:ifm/ifm:interfaces/interface/damp/manual/suppress',
+                  name: 'suppress',
+                  type: 'uint',
+                  description: '抑制启动阈值',
+                  config: true,
+                  range: { min: 1, max: 20000 }
+                }
+              ]
+            }
+          ]
         }
       ]
     }
@@ -456,9 +838,90 @@ export const INTERFACES_SCHEMA: YangNode = {
 }
 
 /** Schema 注册表 */
+/** 华为 System 系统配置模型 */
+export const SYSTEM_SCHEMA: YangNode = {
+  path: '/system:system',
+  name: 'system',
+  type: 'container',
+  description: '系统配置管理',
+  config: true,
+  children: [
+    {
+      path: '/system:system/system:system-info',
+      name: 'system-info',
+      type: 'container',
+      description: '系统基本信息',
+      config: true,
+      children: [
+        {
+          path: '/system:system/system:system-info/sys-name',
+          name: 'sys-name',
+          type: 'string',
+          description: '系统名称',
+          config: true,
+          length: { min: 1, max: 246 },
+          default: 'HUAWEI'
+        },
+        {
+          path: '/system:system/system:system-info/sys-contact',
+          name: 'sys-contact',
+          type: 'string',
+          description: '系统联系信息',
+          config: true,
+          length: { min: 1, max: 255 }
+        },
+        {
+          path: '/system:system/system:system-info/sys-location',
+          name: 'sys-location',
+          type: 'string',
+          description: '系统位置',
+          config: true,
+          length: { min: 1, max: 255 }
+        },
+        {
+          path: '/system:system/system:system-info/sys-desc',
+          name: 'sys-desc',
+          type: 'string',
+          description: '系统描述',
+          config: false // 只读
+        },
+        {
+          path: '/system:system/system:system-info/product-name',
+          name: 'product-name',
+          type: 'string',
+          description: '产品名称',
+          config: false // 只读
+        },
+        {
+          path: '/system:system/system:system-info/product-version',
+          name: 'product-version',
+          type: 'string',
+          description: '产品版本',
+          config: false // 只读
+        },
+        {
+          path: '/system:system/system:system-info/esn',
+          name: 'esn',
+          type: 'string',
+          description: '设备序列号',
+          config: false // 只读
+        },
+        {
+          path: '/system:system/system:system-info/sys-uptime',
+          name: 'sys-uptime',
+          type: 'uint',
+          description: '系统运行时间 (秒)',
+          config: false // 只读
+        }
+      ]
+    }
+  ]
+}
+
 export const SCHEMA_REGISTRY: Record<string, YangNode> = {
   '/vlans': VLAN_SCHEMA,
   '/ifm:ifm/ifm:interfaces': INTERFACES_SCHEMA,
+  '/system:system': SYSTEM_SCHEMA,
   // 向后兼容
   '/interfaces': INTERFACES_SCHEMA
 }
