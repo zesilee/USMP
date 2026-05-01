@@ -25,10 +25,20 @@ type DeviceHandler struct {
 
 // NewDeviceHandler creates a new DeviceHandler
 func NewDeviceHandler(manager manager.Manager) *DeviceHandler {
-	return &DeviceHandler{
+	h := &DeviceHandler{
 		manager: manager,
 		devices: make(map[string]DeviceInfo),
 	}
+
+	// Add default test device for development
+	h.devices["192.168.1.1"] = DeviceInfo{
+		IP:       "192.168.1.1",
+		Port:     830,
+		Username: "admin",
+		Password: "admin",
+	}
+
+	return h
 }
 
 // AddDeviceRequest is the request body for adding a device
