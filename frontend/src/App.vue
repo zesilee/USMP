@@ -46,6 +46,11 @@
             v-else-if="currentYangPath === '/interfaces'"
             :device-ip="currentDevice.ip"
           />
+          <YangRenderer
+            v-else-if="currentYangPath === '/system:system'"
+            :yang-path="currentYangPath"
+            :device-ip="currentDevice.ip"
+          />
         </div>
 
         <!-- Dashboard - Default View -->
@@ -60,6 +65,7 @@ import { ref } from 'vue'
 import DeviceTree from './components/DeviceTree.vue'
 import VlanManager from './components/vlan/VlanManager.vue'
 import InterfaceManager from './components/interfaces/InterfaceManager.vue'
+import YangRenderer from './components/yang/YangRenderer.vue'
 import Dashboard from './components/Dashboard.vue'
 import type { DeviceInfo } from './types/yang'
 

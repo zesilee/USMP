@@ -67,9 +67,9 @@ const treeData = computed(() => {
       },
       {
         label: 'System',
-        key: `${device.ip}-/system`,
+        key: `${device.ip}-/system:system`,
         device: device,
-        yangPath: '/system',
+        yangPath: '/system:system',
         yangName: 'System',
       },
     ],
