@@ -318,6 +318,7 @@ func (a *ModelActor[T]) handleValidate(cmd *ValidateCmd) Result {
 }
 
 // handleApply processes an ApplyCmd message (direct apply without 2PC).
+// Uses a full state replacement strategy for NETCONF compatibility.
 func (a *ModelActor[T]) handleApply(cmd *ApplyCmd) Result {
 	a.mu.Lock()
 	defer a.mu.Unlock()
@@ -329,7 +330,7 @@ func (a *ModelActor[T]) handleApply(cmd *ApplyCmd) Result {
 	}
 	a.actual = actual
 
-	// 2. Compute diff between desired and actual
+	// 2. Compute diff to determine if changes are needed
 	diffEngine := diff.NewDefaultDiffEngine()
 	diffResult, err := diffEngine.Diff(a.desired, a.actual, nil)
 	if err != nil {
@@ -341,22 +342,28 @@ func (a *ModelActor[T]) handleApply(cmd *ApplyCmd) Result {
 		return Success(cmd.ID())
 	}
 
-	// 3. Convert diff changes to client changes
-	clientChanges := a.convertDiffToClientChanges(diffResult.Changes)
+	// 3. Apply entire desired state as a single configuration change
+	// This ensures proper XML namespace and structure for NETCONF
+	clientChange := client.Change{
+		Type:      client.ModifyChange,
+		Path:      a.module,
+		NewValue:  a.desired,
+		OldValue:  a.actual,
+		SchemaPath: a.module,
+	}
 
-	// 4. Apply changes to device
-	if err := a.applyChangesToDevice(cmd.Context(), clientChanges); err != nil {
+	if err := a.applyChangesToDevice(cmd.Context(), []client.Change{clientChange}); err != nil {
 		return Failure(cmd.ID(), fmt.Errorf("failed to apply changes: %w", err))
 	}
 
-	// 5. Verify by refetching actual config from device
+	// 4. Verify by refetching actual config from device
 	verifiedActual, err := a.fetchActualFromDevice(cmd.Context())
 	if err != nil {
 		return Failure(cmd.ID(), fmt.Errorf("failed to verify changes: %w", err))
 	}
 	a.actual = verifiedActual
 
-	// 6. Create version snapshot of the new desired state
+	// 5. Create version snapshot of the new desired state
 	version, err := a.versionMgr.CreateSnapshot(a.desired, "Configuration applied", a.actorID)
 	if err != nil {
 		return Failure(cmd.ID(), fmt.Errorf("failed to create snapshot: %w", err))

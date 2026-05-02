@@ -354,6 +354,11 @@ func (c *NETCONFClient) marshalChange(change Change) (string, error) {
 		return buildHuaweiIfmInterfacesXML(ifaces)
 	}
 
+	// Special case: *huawei.HuaweiVlan_Vlan_Vlans - Huawei VLAN model
+	if vlans, ok := change.NewValue.(*huawei.HuaweiVlan_Vlan_Vlans); ok && vlans != nil {
+		return buildHuaweiVlanVlansXML(vlans)
+	}
+
 	// Try xml.Marshal for other types
 	output, err := xml.Marshal(change.NewValue)
 	if err == nil {
@@ -699,4 +704,121 @@ func xmlEscape(s string) string {
 		}
 	}
 	return buf.String()
+}
+
+const HuaweiVlanNS = "urn:huawei:params:xml:ns:yang:huawei-vlan"
+
+// buildHuaweiVlanVlansXML generates Huawei VLAN standard XML for VLAN configuration.
+func buildHuaweiVlanVlansXML(vlans *huawei.HuaweiVlan_Vlan_Vlans) (string, error) {
+	if vlans == nil || len(vlans.Vlan) == 0 {
+		return fmt.Sprintf(`<vlans xmlns="%s"/>`, HuaweiVlanNS), nil
+	}
+
+	var builder strings.Builder
+	builder.WriteString(fmt.Sprintf(`<vlans xmlns="%s">`, HuaweiVlanNS))
+
+	for vlanID, vlan := range vlans.Vlan {
+		if vlan == nil {
+			continue
+		}
+
+		builder.WriteString("<vlan>")
+
+		// VLAN ID (required)
+		if vlan.Id != nil {
+			builder.WriteString(fmt.Sprintf("<id>%d</id>", *vlan.Id))
+		} else {
+			// Use the map key as ID
+			builder.WriteString(fmt.Sprintf("<id>%d</id>", vlanID))
+		}
+
+		// Name
+		if vlan.Name != nil {
+			builder.WriteString(fmt.Sprintf("<name>%s</name>", xmlEscape(*vlan.Name)))
+		}
+
+		// Description
+		if vlan.Description != nil {
+			builder.WriteString(fmt.Sprintf("<description>%s</description>", xmlEscape(*vlan.Description)))
+		}
+
+		// AdminStatus (enum)
+		if vlan.AdminStatus != 0 {
+			builder.WriteString(fmt.Sprintf("<admin-status>%d</admin-status>", vlan.AdminStatus))
+		}
+
+		// Type (enum)
+		if vlan.Type != 0 {
+			builder.WriteString(fmt.Sprintf("<type>%d</type>", vlan.Type))
+		}
+
+		// BroadcastDiscard (enum)
+		if vlan.BroadcastDiscard != 0 {
+			builder.WriteString(fmt.Sprintf("<broadcast-discard>%d</broadcast-discard>", vlan.BroadcastDiscard))
+		}
+
+		// MacLearning (enum)
+		if vlan.MacLearning != 0 {
+			builder.WriteString(fmt.Sprintf("<mac-learning>%d</mac-learning>", vlan.MacLearning))
+		}
+
+		// StatisticEnable (enum)
+		if vlan.StatisticEnable != 0 {
+			builder.WriteString(fmt.Sprintf("<statistic-enable>%d</statistic-enable>", vlan.StatisticEnable))
+		}
+
+		// MacAgingTime
+		if vlan.MacAgingTime != nil {
+			builder.WriteString(fmt.Sprintf("<mac-aging-time>%d</mac-aging-time>", *vlan.MacAgingTime))
+		}
+
+		// SuperVlan
+		if vlan.SuperVlan != nil {
+			builder.WriteString(fmt.Sprintf("<super-vlan>%d</super-vlan>", *vlan.SuperVlan))
+		}
+
+		// MemberPorts (container with port list)
+		if vlan.MemberPorts != nil && len(vlan.MemberPorts.MemberPort) > 0 {
+			builder.WriteString("<member-ports>")
+			for portKey, port := range vlan.MemberPorts.MemberPort {
+				if port == nil {
+					continue
+				}
+				builder.WriteString("<member-port>")
+				// Interface name
+				if port.InterfaceName != nil {
+					builder.WriteString(fmt.Sprintf("<interface-name>%s</interface-name>", xmlEscape(*port.InterfaceName)))
+				} else {
+					builder.WriteString(fmt.Sprintf("<interface-name>%s</interface-name>", xmlEscape(portKey)))
+				}
+				// AccessType
+				if port.AccessType != 0 {
+					builder.WriteString(fmt.Sprintf("<access-type>%d</access-type>", port.AccessType))
+				}
+				// TagMode
+				if port.TagMode != 0 {
+					builder.WriteString(fmt.Sprintf("<tag-mode>%d</tag-mode>", port.TagMode))
+				}
+				builder.WriteString("</member-port>")
+			}
+			builder.WriteString("</member-ports>")
+		}
+
+		// Suppression container
+		if vlan.Suppression != nil {
+			builder.WriteString("<suppression>")
+			if vlan.Suppression.Inbound != 0 {
+				builder.WriteString(fmt.Sprintf("<inbound>%d</inbound>", vlan.Suppression.Inbound))
+			}
+			if vlan.Suppression.Outbound != 0 {
+				builder.WriteString(fmt.Sprintf("<outbound>%d</outbound>", vlan.Suppression.Outbound))
+			}
+			builder.WriteString("</suppression>")
+		}
+
+		builder.WriteString("</vlan>")
+	}
+
+	builder.WriteString("</vlans>")
+	return builder.String(), nil
 }
