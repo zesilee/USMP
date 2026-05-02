@@ -117,4 +117,6 @@ type Client interface {
 	Close() error
 	// IsConnected checks if the client is currently connected
 	IsConnected() bool
+	// DiscardCandidate discards the candidate configuration (aborts 2PC transaction)
+	DiscardCandidate(ctx context.Context) error
 }

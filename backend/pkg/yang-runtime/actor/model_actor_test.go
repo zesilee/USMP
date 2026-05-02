@@ -225,3 +225,5 @@ func (c *mockClient) Subscribe(ctx context.Context, path string, handler func(cl
 func (c *mockClient) Close() error { return nil }
 
 func (c *mockClient) IsConnected() bool { return true }
+
+func (c *mockClient) DiscardCandidate(ctx context.Context) error { return nil }

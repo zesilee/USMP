@@ -17,6 +17,8 @@ const (
 	MsgPrepare MessageType = "prepare"
 	// MsgCommit requests committing the prepared configuration (2PC phase 2).
 	MsgCommit MessageType = "commit"
+	// MsgAbort requests aborting the 2PC transaction (discard candidate config).
+	MsgAbort MessageType = "abort"
 	// MsgRollback requests rolling back to a previous configuration version.
 	MsgRollback MessageType = "rollback"
 	// MsgApply requests applying configuration directly (no 2PC).
@@ -138,6 +140,13 @@ type StatusQueryCmd struct {
 	BaseMessage
 	// IncludeDetails if true returns additional state details (may be expensive).
 	IncludeDetails bool
+}
+
+// AbortCmd requests aborting the 2PC transaction and discarding candidate config.
+type AbortCmd struct {
+	BaseMessage
+	// Reason is optional human-readable reason for the abort.
+	Reason string
 }
 
 // Result represents the outcome of processing a message.

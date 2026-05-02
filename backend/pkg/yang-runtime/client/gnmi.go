@@ -265,3 +265,10 @@ func (c *GNMIClient) Close() error {
 func (c *GNMIClient) IsConnected() bool {
 	return c.connected && c.conn != nil && c.client != nil
 }
+
+// DiscardCandidate implements Client interface.
+// gNMI does not support candidate configurations, so this is a no-op.
+func (c *GNMIClient) DiscardCandidate(ctx context.Context) error {
+	// gNMI uses immediate commits with Set operations - no candidate concept
+	return nil
+}

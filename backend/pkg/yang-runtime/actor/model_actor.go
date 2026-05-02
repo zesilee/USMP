@@ -257,6 +257,8 @@ func (a *ModelActor[T]) processMessage(msg Message) Result {
 		result = a.handleCommit(m)
 	case *RollbackCmd:
 		result = a.handleRollback(m)
+		case *AbortCmd:
+			result = a.handleAbort(m)
 	case *StatusQueryCmd:
 		result = a.handleStatusQuery(m)
 	default:
@@ -477,6 +479,8 @@ func (a *ModelActor[T]) applyChangesToDevice(ctx context.Context, changes []clie
 }
 
 // handlePrepare processes a PrepareCmd message (2PC phase 1).
+// Validates config, computes diff, and applies changes to the candidate datastore
+// without committing them to running config.
 func (a *ModelActor[T]) handlePrepare(cmd *PrepareCmd) Result {
 	a.mu.Lock()
 	defer a.mu.Unlock()
@@ -493,29 +497,41 @@ func (a *ModelActor[T]) handlePrepare(cmd *PrepareCmd) Result {
 	}
 	a.actual = actual
 
-	// 3. Compute diff and store in working state
+	// 3. Compute diff to determine if changes needed
 	diffEngine := diff.NewDefaultDiffEngine()
 	diffResult, err := diffEngine.Diff(a.desired, a.actual, nil)
 	if err != nil {
 		return Failure(cmd.ID(), fmt.Errorf("failed to compute diff: %w", err))
 	}
 
-	// Store pending changes in working state for commit phase
-	// Deep copy desired to state as the candidate
+	// No changes needed - can commit immediately (no-op)
+	if diffResult.Summary.Total == 0 {
+		return Result{
+			MsgID:   cmd.ID(),
+			Success: true,
+			Data: map[string]interface{}{
+				"dry_run":    cmd.DryRun,
+				"can_commit": false,
+				"message":    "no changes needed - config already matches desired state",
+			},
+		}
+	}
+
+	// 4. Store candidate in working state for commit phase
 	stateCopy, err := deepCopy(a.desired)
 	if err != nil {
 		return Failure(cmd.ID(), fmt.Errorf("failed to copy desired state: %w", err))
 	}
 	a.state = stateCopy
 
-	// 4. In dry run mode, just return changes without applying them
+	// 5. In dry run mode, just return changes without applying them
 	if cmd.DryRun {
 		return Result{
 			MsgID:   cmd.ID(),
 			Success: true,
 			Data: map[string]interface{}{
 				"dry_run":    true,
-				"can_commit": diffResult.Summary.Total > 0,
+				"can_commit": true,
 				"changes": map[string]interface{}{
 					"total":   diffResult.Summary.Total,
 					"adds":    diffResult.Summary.Adds,
@@ -526,9 +542,17 @@ func (a *ModelActor[T]) handlePrepare(cmd *PrepareCmd) Result {
 		}
 	}
 
-	// 5. Create candidate config on device (apply to candidate datastore only)
-	clientChanges := a.convertDiffToClientChanges(diffResult.Changes)
-	if err := a.prepareCandidateOnDevice(cmd.Context(), clientChanges); err != nil {
+	// 6. Apply full desired configuration to candidate datastore
+	// Using full config replacement instead of diff changes to ensure XML structure correctness
+	clientChange := client.Change{
+		Type:      client.ModifyChange,
+		Path:      a.module,
+		NewValue:  a.desired,
+		OldValue:  a.actual,
+		SchemaPath: a.module,
+	}
+
+	if err := a.prepareCandidateOnDevice(cmd.Context(), []client.Change{clientChange}); err != nil {
 		return Failure(cmd.ID(), fmt.Errorf("failed to prepare candidate config: %w", err))
 	}
 
@@ -537,13 +561,14 @@ func (a *ModelActor[T]) handlePrepare(cmd *PrepareCmd) Result {
 		Success: true,
 		Data: map[string]interface{}{
 			"dry_run":    false,
-			"can_commit": diffResult.Summary.Total > 0,
+			"can_commit": true,
 			"changes": map[string]interface{}{
 				"total":   diffResult.Summary.Total,
 				"adds":    diffResult.Summary.Adds,
 				"deletes": diffResult.Summary.Deletes,
 				"modifies": diffResult.Summary.Modifies,
 			},
+			"message": "candidate configuration prepared, ready to commit",
 		},
 	}
 }
@@ -623,6 +648,51 @@ func (a *ModelActor[T]) commitCandidateOnDevice(ctx context.Context, force bool)
 	// Apply empty changes with commit flag to commit the candidate config
 	_, err = deviceClient.Set(ctx, []client.Change{}, client.WithCommit(true))
 	return err
+}
+
+// handleAbort processes an AbortCmd message to abort a 2PC transaction.
+// This discards the candidate configuration on the device without committing
+// and clears the pending state in the actor.
+func (a *ModelActor[T]) handleAbort(cmd *AbortCmd) Result {
+	a.mu.Lock()
+	defer a.mu.Unlock()
+
+	// Clear the working state (pending changes)
+	var zero T
+	a.state = zero
+
+	// Discard candidate config on device
+	if err := a.abortCandidateOnDevice(cmd.Context()); err != nil {
+		return Failure(cmd.ID(), fmt.Errorf("failed to abort transaction: %w", err))
+	}
+
+	data := map[string]interface{}{
+		"message": "transaction aborted successfully",
+	}
+	if cmd.Reason != "" {
+		data["reason"] = cmd.Reason
+	}
+
+	return Result{
+		MsgID:   cmd.ID(),
+		Success: true,
+		Data:    data,
+	}
+}
+
+// abortCandidateOnDevice discards the candidate configuration on the device.
+func (a *ModelActor[T]) abortCandidateOnDevice(ctx context.Context) error {
+	info := client.DeviceConnectionInfo{
+		IP:       a.deviceID,
+		Protocol: client.ProtocolNETCONF,
+	}
+
+	deviceClient, err := a.clientPool.Get(info)
+	if err != nil {
+		return err
+	}
+
+	return deviceClient.DiscardCandidate(ctx)
 }
 
 // handleRollback processes a RollbackCmd message.

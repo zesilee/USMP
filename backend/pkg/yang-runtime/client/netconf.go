@@ -283,6 +283,38 @@ func (c *NETCONFClient) IsConnected() bool {
 	return c.connected && c.driver != nil
 }
 
+// DiscardCandidate discards the candidate configuration on the device.
+// This is used to abort a 2PC transaction before commit.
+func (c *NETCONFClient) DiscardCandidate(ctx context.Context) error {
+	c.mu.RLock()
+	if !c.connected || c.driver == nil {
+		c.mu.RUnlock()
+		c.mu.Lock()
+		defer c.mu.Unlock()
+		if err := c.connect(); err != nil {
+			return err
+		}
+	} else {
+		c.mu.RUnlock()
+	}
+
+	c.mu.RLock()
+	driver := c.driver
+	c.mu.RUnlock()
+
+	// scrapligo's Discard method discards the candidate config
+	resp, err := driver.Discard()
+	if err != nil {
+		return fmt.Errorf("failed to discard candidate: %w", err)
+	}
+
+	if resp.Failed != nil {
+		return fmt.Errorf("discard candidate failed: %w", resp.Failed)
+	}
+
+	return nil
+}
+
 func (c *NETCONFClient) constructFilter(path string) string {
 	// For simplicity, we use an XPath filter for the path
 	// Convert /interfaces/interface[name='eth0'] to XPath notation
