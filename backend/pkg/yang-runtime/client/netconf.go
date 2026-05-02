@@ -552,11 +552,11 @@ func buildOpenConfigInterfacesXML(interfaces *openconfig.OpenconfigInterfaces_In
 // buildHuaweiIfmInterfacesXML generates Huawei IFM standard XML for interfaces.
 func buildHuaweiIfmInterfacesXML(ifaces *huawei.HuaweiIfm_Ifm_Interfaces) (string, error) {
 	if ifaces == nil || len(ifaces.Interface) == 0 {
-		return `<interfaces xmlns="urn:huawei:params:xml:ns:yang:huawei-ifm"/>`, nil
+		return fmt.Sprintf(`<interfaces xmlns="%s"/>`, HuaweiIfmNS), nil
 	}
 
 	var builder strings.Builder
-	builder.WriteString(`<interfaces xmlns="urn:huawei:params:xml:ns:yang:huawei-ifm">`)
+	builder.WriteString(fmt.Sprintf(`<interfaces xmlns="%s">`, HuaweiIfmNS))
 
 	for name, iface := range ifaces.Interface {
 		if iface == nil {
@@ -590,6 +590,199 @@ func buildHuaweiIfmInterfacesXML(ifaces *huawei.HuaweiIfm_Ifm_Interfaces) (strin
 		// Interface Type (enum value)
 		if iface.Type != 0 {
 			builder.WriteString(fmt.Sprintf("<type>%d</type>", iface.Type))
+		}
+
+		// Bandwidth
+		if iface.Bandwidth != nil {
+			builder.WriteString(fmt.Sprintf("<bandwidth>%d</bandwidth>", *iface.Bandwidth))
+		}
+
+		// BandwidthKbps
+		if iface.BandwidthKbps != nil {
+			builder.WriteString(fmt.Sprintf("<bandwidth-kbps>%d</bandwidth-kbps>", *iface.BandwidthKbps))
+		}
+
+		// MAC Address
+		if iface.MacAddress != nil {
+			builder.WriteString(fmt.Sprintf("<mac-address>%s</mac-address>", xmlEscape(*iface.MacAddress)))
+		}
+
+		// Class (enum)
+		if iface.Class != 0 {
+			builder.WriteString(fmt.Sprintf("<class>%d</class>", iface.Class))
+		}
+
+		// ServiceType (enum)
+		if iface.ServiceType != 0 {
+			builder.WriteString(fmt.Sprintf("<service-type>%d</service-type>", iface.ServiceType))
+		}
+
+		// LinkProtocol (enum)
+		if iface.LinkProtocol != 0 {
+			builder.WriteString(fmt.Sprintf("<link-protocol>%d</link-protocol>", iface.LinkProtocol))
+		}
+
+		// EncapsulationType (enum)
+		if iface.EncapsulationType != 0 {
+			builder.WriteString(fmt.Sprintf("<encapsulation-type>%d</encapsulation-type>", iface.EncapsulationType))
+		}
+
+		// RouterType (enum)
+		if iface.RouterType != 0 {
+			builder.WriteString(fmt.Sprintf("<router-type>%d</router-type>", iface.RouterType))
+		}
+
+		// NetworkLayerStatus (enum)
+		if iface.NetworkLayerStatus != 0 {
+			builder.WriteString(fmt.Sprintf("<network-layer-status>%d</network-layer-status>", iface.NetworkLayerStatus))
+		}
+
+		// Index
+		if iface.Index != nil {
+			builder.WriteString(fmt.Sprintf("<index>%d</index>", *iface.Index))
+		}
+
+		// Number
+		if iface.Number != nil {
+			builder.WriteString(fmt.Sprintf("<number>%s</number>", xmlEscape(*iface.Number)))
+		}
+
+		// ParentName
+		if iface.ParentName != nil {
+			builder.WriteString(fmt.Sprintf("<parent-name>%s</parent-name>", xmlEscape(*iface.ParentName)))
+		}
+
+		// Position
+		if iface.Position != nil {
+			builder.WriteString(fmt.Sprintf("<position>%s</position>", xmlEscape(*iface.Position)))
+		}
+
+		// VrfName
+		if iface.VrfName != nil {
+			builder.WriteString(fmt.Sprintf("<vrf-name>%s</vrf-name>", xmlEscape(*iface.VrfName)))
+		}
+
+		// VsName
+		if iface.VsName != nil {
+			builder.WriteString(fmt.Sprintf("<vs-name>%s</vs-name>", xmlEscape(*iface.VsName)))
+		}
+
+		// AggregationName
+		if iface.AggregationName != nil {
+			builder.WriteString(fmt.Sprintf("<aggregation-name>%s</aggregation-name>", xmlEscape(*iface.AggregationName)))
+		}
+
+		// Boolean flags
+		if iface.ClearIpDf != nil {
+			builder.WriteString(fmt.Sprintf("<clear-ip-df>%t</clear-ip-df>", *iface.ClearIpDf))
+		}
+		if iface.IsL2Switch != nil {
+			builder.WriteString(fmt.Sprintf("<is-l2-switch>%t</is-l2-switch>", *iface.IsL2Switch))
+		}
+		if iface.L2ModeEnable != nil {
+			builder.WriteString(fmt.Sprintf("<l2-mode-enable>%t</l2-mode-enable>", *iface.L2ModeEnable))
+		}
+		if iface.LinkUpDownTrapEnable != nil {
+			builder.WriteString(fmt.Sprintf("<link-up-down-trap-enable>%t</link-up-down-trap-enable>", *iface.LinkUpDownTrapEnable))
+		}
+		if iface.SpreadMtuFlag != nil {
+			builder.WriteString(fmt.Sprintf("<spread-mtu-flag>%t</spread-mtu-flag>", *iface.SpreadMtuFlag))
+		}
+		if iface.StatisticEnable != nil {
+			builder.WriteString(fmt.Sprintf("<statistic-enable>%t</statistic-enable>", *iface.StatisticEnable))
+		}
+
+		// StatisticInterval
+		if iface.StatisticInterval != nil {
+			builder.WriteString(fmt.Sprintf("<statistic-interval>%d</statistic-interval>", *iface.StatisticInterval))
+		}
+
+		// StatisticMode (enum)
+		if iface.StatisticMode != 0 {
+			builder.WriteString(fmt.Sprintf("<statistic-mode>%d</statistic-mode>", iface.StatisticMode))
+		}
+
+		// L2SwitchPortIndex
+		if iface.L2SwitchPortIndex != nil {
+			builder.WriteString(fmt.Sprintf("<l2-switch-port-index>%d</l2-switch-port-index>", *iface.L2SwitchPortIndex))
+		}
+
+		// DownDelayTime
+		if iface.DownDelayTime != nil {
+			builder.WriteString(fmt.Sprintf("<down-delay-time>%d</down-delay-time>", *iface.DownDelayTime))
+		}
+
+		// ProtocolUpDelayTime
+		if iface.ProtocolUpDelayTime != nil {
+			builder.WriteString(fmt.Sprintf("<protocol-up-delay-time>%d</protocol-up-delay-time>", *iface.ProtocolUpDelayTime))
+		}
+
+		// Damp container
+		if iface.Damp != nil {
+			builder.WriteString("<damp>")
+			if iface.Damp.Auto != nil {
+				builder.WriteString("<auto>")
+				if iface.Damp.Auto.Level != 0 {
+					builder.WriteString(fmt.Sprintf("<level>%d</level>", iface.Damp.Auto.Level))
+				}
+				builder.WriteString("</auto>")
+			}
+			if iface.Damp.Manual != nil {
+				builder.WriteString("<manual>")
+				if iface.Damp.Manual.HalfLifePeriod != nil {
+					builder.WriteString(fmt.Sprintf("<half-life-period>%d</half-life-period>", *iface.Damp.Manual.HalfLifePeriod))
+				}
+				if iface.Damp.Manual.MaxSuppressTime != nil {
+					builder.WriteString(fmt.Sprintf("<max-suppress-time>%d</max-suppress-time>", *iface.Damp.Manual.MaxSuppressTime))
+				}
+				if iface.Damp.Manual.Reuse != nil {
+					builder.WriteString(fmt.Sprintf("<reuse>%d</reuse>", *iface.Damp.Manual.Reuse))
+				}
+				if iface.Damp.Manual.Suppress != nil {
+					builder.WriteString(fmt.Sprintf("<suppress>%d</suppress>", *iface.Damp.Manual.Suppress))
+				}
+				builder.WriteString("</manual>")
+			}
+			builder.WriteString("</damp>")
+		}
+
+		// ErrorDown container
+		if iface.ErrorDown != nil {
+			builder.WriteString("<error-down>")
+			if iface.ErrorDown.Cause != 0 {
+				builder.WriteString(fmt.Sprintf("<cause>%d</cause>", iface.ErrorDown.Cause))
+			}
+			if iface.ErrorDown.RecoveryTime != nil {
+				builder.WriteString(fmt.Sprintf("<recovery-time>%d</recovery-time>", *iface.ErrorDown.RecoveryTime))
+			}
+			if iface.ErrorDown.RemainderTime != nil {
+				builder.WriteString(fmt.Sprintf("<remainder-time>%d</remainder-time>", *iface.ErrorDown.RemainderTime))
+			}
+			builder.WriteString("</error-down>")
+		}
+
+		// ControlFlap container
+		if iface.ControlFlap != nil {
+			builder.WriteString("<control-flap>")
+			if iface.ControlFlap.Ceiling != nil {
+				builder.WriteString(fmt.Sprintf("<ceiling>%d</ceiling>", *iface.ControlFlap.Ceiling))
+			}
+			if iface.ControlFlap.Reuse != nil {
+				builder.WriteString(fmt.Sprintf("<reuse>%d</reuse>", *iface.ControlFlap.Reuse))
+			}
+			if iface.ControlFlap.Suppress != nil {
+				builder.WriteString(fmt.Sprintf("<suppress>%d</suppress>", *iface.ControlFlap.Suppress))
+			}
+			if iface.ControlFlap.DecayOk != nil {
+				builder.WriteString(fmt.Sprintf("<decay-ok>%d</decay-ok>", *iface.ControlFlap.DecayOk))
+			}
+			if iface.ControlFlap.DecayNg != nil {
+				builder.WriteString(fmt.Sprintf("<decay-ng>%d</decay-ng>", *iface.ControlFlap.DecayNg))
+			}
+			if iface.ControlFlap.ControlFlapCount != nil {
+				builder.WriteString(fmt.Sprintf("<control-flap-count>%d</control-flap-count>", *iface.ControlFlap.ControlFlapCount))
+			}
+			builder.WriteString("</control-flap>")
 		}
 
 		builder.WriteString("</interface>")
@@ -739,6 +932,7 @@ func xmlEscape(s string) string {
 }
 
 const HuaweiVlanNS = "urn:huawei:params:xml:ns:yang:huawei-vlan"
+const HuaweiIfmNS = "urn:huawei:params:xml:ns:yang:huawei-ifm"
 
 // buildHuaweiVlanVlansXML generates Huawei VLAN standard XML for VLAN configuration.
 func buildHuaweiVlanVlansXML(vlans *huawei.HuaweiVlan_Vlan_Vlans) (string, error) {
