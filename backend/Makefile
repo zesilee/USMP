@@ -1,0 +1,169 @@
+.PHONY: all build test test-unit test-integration test-e2e test-all clean help e2e-cluster e2e-deploy e2e-clean
+
+# 项目配置
+BINARY_NAME=usmp-backend
+BUILD_DIR=bin
+
+# Go 配置
+GO=go
+GOFLAGS=-v
+
+# 默认目标
+all: build
+
+## build: 编译后端服务
+build:
+	@echo "Building backend..."
+	@mkdir -p $(BUILD_DIR)
+	$(GO) build -o $(BUILD_DIR)/$(BINARY_NAME) .
+	@echo "Build completed: $(BUILD_DIR)/$(BINARY_NAME)"
+
+## run: 启动后端服务
+run:
+	@echo "Starting USMP backend server..."
+	$(GO) run main.go
+
+## test-unit: 运行单元测试
+test-unit:
+	@echo "Running unit tests..."
+	$(GO) test $(GOFLAGS) ./internal/... ./pkg/...
+	@echo "Unit tests completed"
+
+## test-integration: 运行集成测试（需要先启动服务器）
+test-integration:
+	@echo "Running integration tests..."
+	$(GO) test $(GOFLAGS) -tags=integration ./test/integration/...
+	@echo "Integration tests completed"
+
+## test-all: 运行所有测试（单元 + 集成）
+test-all: test-unit test-integration
+	@echo "All tests completed"
+
+## test-vlan: 只运行 VLAN 相关集成测试
+test-vlan:
+	@echo "Running VLAN integration tests..."
+	$(GO) test $(GOFLAGS) -tags=integration ./test/integration/... -run TestE2E_VLAN
+	@echo "VLAN tests completed"
+
+## test-device: 只运行设备相关集成测试
+test-device:
+	@echo "Running device integration tests..."
+	$(GO) test $(GOFLAGS) -tags=integration ./test/integration/... -run TestE2E_Device
+	@echo "Device tests completed"
+
+## coverage: 生成测试覆盖率报告
+coverage:
+	@echo "Generating test coverage report..."
+	$(GO) test $(GOFLAGS) -tags=integration ./... -coverprofile=coverage.out
+	$(GO) tool cover -html=coverage.out -o coverage.html
+	@echo "Coverage report generated: coverage.html"
+
+## lint: 运行代码检查
+lint:
+	@echo "Running linter..."
+	@golangci-lint run ./... 2>/dev/null || echo "golangci-lint not installed, skipping"
+
+## clean: 清理构建产物
+clean:
+	@echo "Cleaning build artifacts..."
+	@rm -rf $(BUILD_DIR) coverage.out coverage.html
+	@echo "Clean completed"
+
+## help: 显示帮助信息
+help:
+	@echo "USMP Backend - Available targets:"
+	@echo ""
+	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z_-]+:.*?## / {printf "  \033[36m%-15s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST) | sort
+
+## integration-setup: 集成测试环境准备
+integration-setup: build
+	@echo "Setting up integration test environment..."
+	@echo "Make sure to run 'make run' in a separate terminal before running integration tests"
+	@echo ""
+	@echo "Quick start:"
+	@echo "  Terminal 1: make run"
+	@echo "  Terminal 2: make test-integration"
+	@echo ""
+
+## check-server: 检查服务器是否运行
+check-server:
+	@curl -s http://localhost:8080/api/v1/yang/modules > /dev/null 2>&1 && echo "✓ Server is running" || echo "✗ Server is NOT running - please run 'make run' first"
+
+# =========================
+# E2E 测试相关命令
+# =========================
+
+## e2e-cluster: 创建 E2E 测试用 Kind 集群
+e2e-cluster:
+	@echo "Creating Kind cluster for E2E testing..."
+	@kind create cluster --name usmp-e2e --config ./test/e2e/config/kind-cluster.yaml
+	@echo "Kind cluster created successfully"
+
+## e2e-clean: 删除 E2E 测试用 Kind 集群
+e2e-clean:
+	@echo "Cleaning up E2E test cluster..."
+	@kind delete cluster --name usmp-e2e
+	@echo "E2E test cluster cleaned up"
+
+## e2e-deploy: 部署所有资源到 E2E 集群
+e2e-deploy:
+	@echo "Deploying resources to E2E cluster..."
+	@kubectl --context=kind-usmp-e2e create namespace usmp-e2e --dry-run=client -o yaml | kubectl --context=kind-usmp-e2e apply -f -
+	@kubectl --context=kind-usmp-e2e apply -f config/crd/bases/
+	@kubectl --context=kind-usmp-e2e apply -f test/e2e/config/netconf-simulator.yaml
+	@echo "Waiting for NETCONF simulator to be ready..."
+	@kubectl --context=kind-usmp-e2e -n usmp-e2e wait --for=condition=Ready pods -l app=netconf-simulator --timeout=120s
+	@echo "All resources deployed successfully"
+
+## test-e2e: 运行完整的端到端测试（使用脚本）
+test-e2e:
+	@echo "Running end-to-end tests..."
+	@./test/e2e/run_e2e.sh
+	@echo "E2E tests completed"
+
+## e2e-quick: 快速运行 E2E 集成测试（不构建镜像）
+e2e-quick:
+	@echo "Running quick E2E tests (skipping image build)..."
+	@./test/e2e/run_e2e.sh --skip-image --skip-cleanup
+	@echo "Quick E2E tests completed"
+
+## e2e-status: 显示 E2E 集群状态
+e2e-status:
+	@echo "=== E2E Test Cluster Status ==="
+	@echo ""
+	@echo "Cluster info:"
+	@kubectl --context=kind-usmp-e2e cluster-info 2>/dev/null || echo "Cluster not found or not accessible"
+	@echo ""
+	@echo "Namespace usmp-e2e resources:"
+	@kubectl --context=kind-usmp-e2e -n usmp-e2e get all 2>/dev/null || echo "Namespace usmp-e2e not found"
+	@echo ""
+	@echo "CRD Instances:"
+	@kubectl --context=kind-usmp-e2e -n usmp-e2e get businessswitches,businessvlans,businessinterfaces,businessroutes,nativedeviceconfigs 2>/dev/null || echo "No CRD instances found"
+
+## e2e-logs: 查看 E2E 控制器日志
+e2e-logs:
+	@echo "Controller manager logs:"
+	@kubectl --context=kind-usmp-e2e -n usmp-e2e logs -l control-plane=controller-manager --tail=50 -f 2>/dev/null || echo "No controller pod found or log error"
+
+## e2e-simulator-logs: 查看 NETCONF 模拟器日志
+e2e-simulator-logs:
+	@echo "NETCONF Simulator logs:"
+	@kubectl --context=kind-usmp-e2e -n usmp-e2e logs -l app=netconf-simulator --tail=50 -f 2>/dev/null || echo "No simulator pod found or log error"
+
+## docker-build: 构建控制器 Docker 镜像
+docker-build:
+	@echo "Building Docker image..."
+	docker build -t usmp-controller:e2e-test -f Dockerfile .
+	@echo "Docker image built successfully"
+
+## kind-load-image: 加载镜像到 Kind 集群
+kind-load-image:
+	@echo "Loading Docker image to Kind cluster..."
+	kind load docker-image usmp-controller:e2e-test --name usmp-e2e
+	@echo "Docker image loaded to Kind cluster"
+
+## install-ginkgo: 安装 Ginkgo 测试框架
+install-ginkgo:
+	@echo "Installing Ginkgo testing framework..."
+	go install github.com/onsi/ginkgo/v2/ginkgo@latest
+	@echo "Ginkgo installed successfully"

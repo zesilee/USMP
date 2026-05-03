@@ -1,0 +1,410 @@
+# NETCONF 模拟器部署 - 用于 E2E 测试
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: usmp-e2e
+  labels:
+    app: usmp
+    environment: e2e
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: netconf-simulator-config
+  namespace: usmp-e2e
+data:
+  initial-config.xml: |
+    <config>
+      <vlans xmlns="urn:huawei:params:xml:ns:yang:huawei-vlan">
+        <vlan>
+          <id>1</id>
+          <name>default</name>
+          <description>Default VLAN</description>
+          <admin-status>1</admin-status>
+        </vlan>
+      </vlans>
+      <interfaces xmlns="urn:huawei:params:xml:ns:yang:huawei-ifm">
+        <interface>
+          <name>GigabitEthernet0/0/1</name>
+          <description>Uplink Port</description>
+          <admin-status>1</admin-status>
+          <mtu>1500</mtu>
+        </interface>
+      </interfaces>
+      <system xmlns="urn:huawei:params:xml:ns:yang:huawei-system">
+        <system-info>
+          <sysName>USMP-E2E-Switch</sysName>
+          <sysContact>neteng@company.com</sysContact>
+          <sysLocation>E2E-Test-Lab</sysLocation>
+        </system-info>
+      </system>
+    </config>
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: netconf-simulator
+  namespace: usmp-e2e
+  labels:
+    app: netconf-simulator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: netconf-simulator
+  template:
+    metadata:
+      labels:
+        app: netconf-simulator
+    spec:
+      containers:
+        - name: netconf-simulator
+          image: golang:1.21-alpine
+          command:
+            - /bin/sh
+            - -c
+            - |
+              set -e
+              # 安装依赖
+              apk add --no-cache git openssh
+
+              # 创建工作目录
+              mkdir -p /app
+              cd /app
+
+              # 克隆代码并运行模拟器
+              # 这里使用内联的 Go 代码运行模拟器
+              cat > simulator.go << 'EOF'
+              package main
+
+              import (
+                "crypto/rand"
+                "crypto/rsa"
+                "encoding/xml"
+                "fmt"
+                "log"
+                "net"
+                "strings"
+                "sync"
+                "time"
+
+                "golang.org/x/crypto/ssh"
+              )
+
+              const (
+                username = "admin"
+                password = "Admin@123"
+                port     = ":830"
+              )
+
+              var (
+                runningConfig = make(map[string]interface{})
+                configMu      sync.RWMutex
+              )
+
+              func main() {
+                log.Printf("NETCONF Simulator starting on %s", port)
+
+                // 初始化配置
+                initDefaultConfig()
+
+                // 生成 SSH 密钥
+                key, err := rsa.GenerateKey(rand.Reader, 2048)
+                if err != nil {
+                  log.Fatalf("Failed to generate RSA key: %v", err)
+                }
+                signer, err := ssh.NewSignerFromKey(key)
+                if err != nil {
+                  log.Fatalf("Failed to create signer: %v", err)
+                }
+
+                // SSH 服务端配置
+                config := &ssh.ServerConfig{
+                  PasswordCallback: func(conn ssh.ConnMetadata, pass []byte) (*ssh.Permissions, error) {
+                    if conn.User() == username && string(pass) == password {
+                      return &ssh.Permissions{}, nil
+                    }
+                    return nil, fmt.Errorf("invalid credentials")
+                  },
+                }
+                config.AddHostKey(signer)
+
+                // 启动监听
+                listener, err := net.Listen("tcp", port)
+                if err != nil {
+                  log.Fatalf("Failed to listen: %v", err)
+                }
+                defer listener.Close()
+
+                log.Printf("NETCONF Simulator ready on %s", port)
+
+                for {
+                  conn, err := listener.Accept()
+                  if err != nil {
+                    log.Printf("Accept error: %v", err)
+                    continue
+                  }
+                  go handleConnection(conn, config)
+                }
+              }
+
+              func initDefaultConfig() {
+                configMu.Lock()
+                defer configMu.Unlock()
+
+                // 默认 VLAN 1
+                runningConfig["vlans"] = map[string]interface{}{
+                  "1": map[string]interface{}{
+                    "id":          1,
+                    "name":        "default",
+                    "description": "Default VLAN",
+                  },
+                }
+
+                // 默认接口
+                runningConfig["interfaces"] = map[string]interface{}{
+                  "GigabitEthernet0/0/1": map[string]interface{}{
+                    "name":        "GigabitEthernet0/0/1",
+                    "description": "Default Port",
+                    "mtu":         1500,
+                  },
+                }
+
+                log.Printf("Default configuration initialized")
+              }
+
+              func handleConnection(conn net.Conn, config *ssh.ServerConfig) {
+                defer conn.Close()
+                log.Printf("New connection from %s", conn.RemoteAddr())
+
+                // SSH 握手
+                sshConn, chans, reqs, err := ssh.NewServerConn(conn, config)
+                if err != nil {
+                  log.Printf("SSH handshake failed: %v", err)
+                  return
+                }
+                defer sshConn.Close()
+                log.Printf("SSH connection established from %s", sshConn.RemoteAddr())
+
+                // 处理请求
+                go ssh.DiscardRequests(reqs)
+
+                // 处理通道
+                for newChan := range chans {
+                  if newChan.ChannelType() != "session" {
+                    newChan.Reject(ssh.UnknownChannelType, "unknown channel type")
+                    continue
+                  }
+
+                  ch, reqs, err := newChan.Accept()
+                  if err != nil {
+                    log.Printf("Failed to accept channel: %v", err)
+                    return
+                  }
+
+                  // 处理子系统请求
+                  go func() {
+                    for req := range reqs {
+                      if req.Type == "subsystem" && len(req.Payload) >= 4 {
+                        name := string(req.Payload[4:])
+                        if name == "netconf" {
+                          log.Printf("NETCONF subsystem requested")
+                          req.Reply(true, nil)
+                          continue
+                        }
+                      }
+                      req.Reply(false, nil)
+                    }
+                  }()
+
+                  handleNETCONFSession(ch)
+                  return
+                }
+              }
+
+              func handleNETCONFSession(ch ssh.Channel) {
+                defer ch.Close()
+                log.Printf("NETCONF session started")
+
+                // 发送 hello
+                hello := `<?xml version="1.0" encoding="UTF-8"?>
+<hello xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+  <capabilities>
+    <capability>urn:ietf:params:netconf:base:1.0</capability>
+    <capability>urn:ietf:params:netconf:capability:candidate:1.0</capability>
+    <capability>urn:ietf:params:netconf:capability:validate:1.0</capability>
+    <capability>urn:ietf:params:netconf:capability:startup:1.0</capability>
+  </capabilities>
+  <session-id>1001</session-id>
+</hello>
+]]>]]>`
+                ch.Write([]byte(hello))
+
+                // 读取客户端 hello
+                buf := make([]byte, 4096)
+                n, err := ch.Read(buf)
+                if err != nil {
+                  log.Printf("Failed to read client hello: %v", err)
+                  return
+                }
+                log.Printf("Client hello: %.200s", string(buf[:n]))
+
+                // 处理请求
+                for {
+                  n, err := ch.Read(buf)
+                  if err != nil {
+                    log.Printf("Read error: %v", err)
+                    return
+                  }
+
+                  msg := string(buf[:n])
+                  log.Printf("Received request: %.500s", msg)
+
+                  // 解析消息 ID
+                  msgID := extractMsgID(msg)
+
+                  var response string
+                  switch {
+                  case strings.Contains(msg, "<get-config"):
+                    response = handleGetConfig(msgID)
+                  case strings.Contains(msg, "<edit-config"):
+                    response = handleEditConfig(msgID, msg)
+                  case strings.Contains(msg, "<commit"):
+                    response = handleCommit(msgID)
+                  default:
+                    response = okReply(msgID)
+                  }
+
+                  response += "]]>]]>"
+                  ch.Write([]byte(response))
+                  log.Printf("Sent response: %.200s", response)
+                }
+              }
+
+              func extractMsgID(msg string) string {
+                const attr = `message-id="`
+                start := strings.Index(msg, attr)
+                if start == -1 {
+                  return "1"
+                }
+                start += len(attr)
+                end := strings.Index(msg[start:], `"`)
+                if end == -1 {
+                  return "1"
+                }
+                return msg[start : start+end]
+              }
+
+              func handleGetConfig(msgID string) string {
+                configMu.RLock()
+                defer configMu.RUnlock()
+
+                // 构建简单的 VLAN 配置响应
+                vlansXML := ""
+                if vlans, ok := runningConfig["vlans"].(map[string]interface{}); ok {
+                  for _, v := range vlans {
+                    if vlan, ok := v.(map[string]interface{}); ok {
+                      vlansXML += fmt.Sprintf(`<vlan><id>%v</id><name>%v</name><description>%v</description></vlan>`,
+                        vlan["id"], vlan["name"], vlan["description"])
+                    }
+                  }
+                }
+
+                return fmt.Sprintf(`<rpc-reply xmlns="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="%s">
+  <data>
+    <vlans xmlns="urn:huawei:params:xml:ns:yang:huawei-vlan">%s</vlans>
+  </data>
+</rpc-reply>`, msgID, vlansXML)
+              }
+
+              func handleEditConfig(msgID, msg string) string {
+                configMu.Lock()
+                defer configMu.Unlock()
+
+                // 简化的 VLAN 配置解析
+                if strings.Contains(msg, "<vlans") {
+                  // 提取 VLAN ID 和名称
+                  // 这里简化处理，实际应该用 XML 解析
+                  log.Printf("Edit-config received for VLANs")
+                }
+
+                return okReply(msgID)
+              }
+
+              func handleCommit(msgID string) string {
+                log.Printf("Commit received")
+                return okReply(msgID)
+              }
+
+              func okReply(msgID string) string {
+                return fmt.Sprintf(`<rpc-reply xmlns="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="%s"><ok/></rpc-reply>`, msgID)
+              }
+              EOF
+
+              # 运行模拟器
+              go mod init simulator
+              go get golang.org/x/crypto/ssh
+              go run simulator.go
+          ports:
+            - name: netconf
+              containerPort: 830
+              protocol: TCP
+          env:
+            - name: SIMULATOR_USERNAME
+              value: admin
+            - name: SIMULATOR_PASSWORD
+              value: Admin@123
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 256Mi
+          livenessProbe:
+            tcpSocket:
+              port: 830
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          readinessProbe:
+            tcpSocket:
+              port: 830
+            initialDelaySeconds: 5
+            periodSeconds: 5
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: netconf-simulator
+  namespace: usmp-e2e
+  labels:
+    app: netconf-simulator
+spec:
+  type: NodePort
+  selector:
+    app: netconf-simulator
+  ports:
+    - name: netconf
+      port: 830
+      targetPort: 830
+      nodePort: 30830
+      protocol: TCP
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: netconf-simulator-internal
+  namespace: usmp-e2e
+spec:
+  type: ClusterIP
+  selector:
+    app: netconf-simulator
+  ports:
+    - name: netconf
+      port: 830
+      targetPort: 830
+      protocol: TCP
