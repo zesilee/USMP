@@ -324,3 +324,292 @@ func (a *DeviceActor) RollbackAll(ctx context.Context, targetVersion int64) ([]R
 
 	return results, nil
 }
+
+// =============================================================================
+// Cross-Module 2PC Transaction Coordination
+// =============================================================================
+
+// DeviceTransactionState tracks the state of a multi-module 2PC transaction.
+type DeviceTransactionState struct {
+	TransactionID string
+	Status        string // "init", "preparing", "prepared", "committing", "committed", "aborting", "aborted", "failed"
+	Modules       []string
+	PrepareResults map[string]Result
+	CommitResults  map[string]Result
+	AbortResults   map[string]Result
+	StartedAt     time.Time
+	CompletedAt   time.Time
+	Error         error
+}
+
+// PrepareAll executes Phase 1 (Prepare) of 2PC across all modules.
+// If any module fails to prepare, the entire transaction fails and Abort is called.
+func (a *DeviceActor) PrepareAll(ctx context.Context, dryRun bool) (*DeviceTransactionState, error) {
+	a.mu.Lock()
+
+	// Cannot prepare if device is not running
+	if a.status != StatusReady && a.status != StatusRunning {
+		a.mu.Unlock()
+		return nil, fmt.Errorf("device not ready: %s", a.status)
+	}
+
+	// Get all module actors
+	moduleNames := make([]string, 0, len(a.modules))
+	moduleActors := make(map[string]Actor)
+	for name, actor := range a.modules {
+		moduleNames = append(moduleNames, name)
+		moduleActors[name] = actor
+	}
+	a.mu.Unlock()
+
+	// Initialize transaction state
+	txState := &DeviceTransactionState{
+		TransactionID:  fmt.Sprintf("tx-%d", time.Now().UnixNano()),
+		Status:         "preparing",
+		Modules:        moduleNames,
+		PrepareResults: make(map[string]Result),
+		CommitResults:  make(map[string]Result),
+		AbortResults:   make(map[string]Result),
+		StartedAt:      time.Now(),
+	}
+
+	// Step 1: Prepare all modules sequentially (parallel could be added later)
+	allPrepared := true
+
+	for moduleName, actor := range moduleActors {
+		prepareCmd := &PrepareCmd{
+			BaseMessage: NewBaseMessageWithContext(
+				fmt.Sprintf("prepare-%s-%s", moduleName, txState.TransactionID),
+				MsgPrepare,
+				ctx,
+			),
+			DryRun: dryRun,
+		}
+
+		promise, err := actor.Send(prepareCmd)
+		if err != nil {
+			txState.PrepareResults[moduleName] = Result{
+				MsgID:   prepareCmd.ID(),
+				Success: false,
+				Error:   err,
+			}
+			allPrepared = false
+			continue
+		}
+
+		result := <-promise
+		txState.PrepareResults[moduleName] = result
+
+		if !result.Success {
+			allPrepared = false
+		}
+	}
+
+	// Step 2: Handle prepare outcome
+	if !allPrepared {
+		txState.Status = "failed"
+
+		// Attempt to abort all modules on prepare failure (best effort)
+		for moduleName, actor := range moduleActors {
+			result, prepared := txState.PrepareResults[moduleName]
+			if prepared && result.Success {
+				// Only abort modules that successfully prepared (may have candidate)
+				abortCmd := &AbortCmd{
+					BaseMessage: NewBaseMessageWithContext(
+						fmt.Sprintf("abort-%s-%s", moduleName, txState.TransactionID),
+						MsgAbort,
+						ctx,
+					),
+					Reason: "Prepare phase failed for other module",
+				}
+
+				promise, _ := actor.Send(abortCmd)
+				abortResult := <-promise
+				txState.AbortResults[moduleName] = abortResult
+			}
+		}
+
+		txState.CompletedAt = time.Now()
+		txState.Error = fmt.Errorf("prepare phase failed for one or more modules")
+		return txState, txState.Error
+	}
+
+	txState.Status = "prepared"
+	return txState, nil
+}
+
+// CommitAll executes Phase 2 (Commit) of 2PC across all modules.
+// Must be called after a successful PrepareAll.
+func (a *DeviceActor) CommitAll(ctx context.Context, forceCommit bool) (*DeviceTransactionState, error) {
+	a.mu.Lock()
+
+	if a.status != StatusReady && a.status != StatusRunning {
+		a.mu.Unlock()
+		return nil, fmt.Errorf("device not ready: %s", a.status)
+	}
+
+	// Get all module actors (consistent set as when prepare was called)
+	moduleActors := make(map[string]Actor)
+	for name, actor := range a.modules {
+		moduleActors[name] = actor
+	}
+	a.mu.Unlock()
+
+	// Initialize transaction state for commit
+	txState := &DeviceTransactionState{
+		TransactionID: fmt.Sprintf("tx-commit-%d", time.Now().UnixNano()),
+		Status:        "committing",
+		Modules:       make([]string, 0, len(moduleActors)),
+		CommitResults: make(map[string]Result),
+		StartedAt:     time.Now(),
+	}
+
+	for name := range moduleActors {
+		txState.Modules = append(txState.Modules, name)
+	}
+
+	// Commit all modules
+	allCommitted := true
+
+	for moduleName, actor := range moduleActors {
+		commitCmd := &CommitCmd{
+			BaseMessage: NewBaseMessageWithContext(
+				fmt.Sprintf("commit-%s-%s", moduleName, txState.TransactionID),
+				MsgCommit,
+				ctx,
+			),
+			ForceCommit: forceCommit,
+		}
+
+		promise, err := actor.Send(commitCmd)
+		if err != nil {
+			txState.CommitResults[moduleName] = Result{
+				MsgID:   commitCmd.ID(),
+				Success: false,
+				Error:   err,
+			}
+			allCommitted = false
+			continue
+		}
+
+		result := <-promise
+		txState.CommitResults[moduleName] = result
+
+		if !result.Success {
+			allCommitted = false
+		}
+	}
+
+	if allCommitted {
+		txState.Status = "committed"
+	} else {
+		txState.Status = "failed"
+		txState.Error = fmt.Errorf("commit phase failed for one or more modules")
+	}
+
+	txState.CompletedAt = time.Now()
+
+	if !allCommitted {
+		return txState, txState.Error
+	}
+
+	return txState, nil
+}
+
+// AbortAll aborts a multi-module 2PC transaction across all modules.
+// This can be called after PrepareAll but before CommitAll.
+func (a *DeviceActor) AbortAll(ctx context.Context, reason string) (*DeviceTransactionState, error) {
+	a.mu.Lock()
+
+	if a.status != StatusReady && a.status != StatusRunning {
+		a.mu.Unlock()
+		return nil, fmt.Errorf("device not ready: %s", a.status)
+	}
+
+	moduleActors := make(map[string]Actor)
+	for name, actor := range a.modules {
+		moduleActors[name] = actor
+	}
+	a.mu.Unlock()
+
+	txState := &DeviceTransactionState{
+		TransactionID: fmt.Sprintf("tx-abort-%d", time.Now().UnixNano()),
+		Status:        "aborting",
+		Modules:       make([]string, 0, len(moduleActors)),
+		AbortResults:  make(map[string]Result),
+		StartedAt:     time.Now(),
+	}
+
+	for name := range moduleActors {
+		txState.Modules = append(txState.Modules, name)
+	}
+
+	allAborted := true
+
+	for moduleName, actor := range moduleActors {
+		abortCmd := &AbortCmd{
+			BaseMessage: NewBaseMessageWithContext(
+				fmt.Sprintf("abort-%s-%s", moduleName, txState.TransactionID),
+				MsgAbort,
+				ctx,
+			),
+			Reason: reason,
+		}
+
+		promise, err := actor.Send(abortCmd)
+		if err != nil {
+			txState.AbortResults[moduleName] = Result{
+				MsgID:   abortCmd.ID(),
+				Success: false,
+				Error:   err,
+			}
+			allAborted = false
+			continue
+		}
+
+		result := <-promise
+		txState.AbortResults[moduleName] = result
+
+		if !result.Success {
+			allAborted = false
+		}
+	}
+
+	if allAborted {
+		txState.Status = "aborted"
+	} else {
+		txState.Status = "failed"
+		txState.Error = fmt.Errorf("abort failed for one or more modules")
+	}
+
+	txState.CompletedAt = time.Now()
+
+	if !allAborted {
+		return txState, txState.Error
+	}
+
+	return txState, nil
+}
+
+// PrepareAndCommitAll executes the full 2PC transaction (Prepare -> Commit) atomically.
+// This is the primary API for multi-module configuration deployment.
+func (a *DeviceActor) PrepareAndCommitAll(ctx context.Context, dryRun bool) (*DeviceTransactionState, error) {
+	// Phase 1: Prepare
+	txState, err := a.PrepareAll(ctx, dryRun)
+	if err != nil {
+		return txState, fmt.Errorf("prepare phase failed: %w", err)
+	}
+
+	// If dry run, return after prepare without committing
+	if dryRun {
+		return txState, nil
+	}
+
+	// Phase 2: Commit
+	txState, err = a.CommitAll(ctx, false)
+	if err != nil {
+		return txState, fmt.Errorf("commit phase failed: %w", err)
+	}
+
+	return txState, nil
+}
