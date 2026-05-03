@@ -125,6 +125,12 @@ type BusinessVlanStatus struct {
 	// 配置版本（用于乐观锁）
 	ConfigVersion int64 `json:"configVersion,omitempty"`
 
+	// 重试次数
+	RetryCount int `json:"retryCount,omitempty"`
+
+	// 错误类型: Temporary/Permanent
+	ErrorType string `json:"errorType,omitempty"`
+
 	// 设备上实际的 VLAN 状态
 	Actual *VlanStatus `json:"actual,omitempty"`
 

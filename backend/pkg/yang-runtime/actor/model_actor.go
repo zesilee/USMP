@@ -913,6 +913,17 @@ func (a *ModelActor[T]) handleStatusQuery(cmd *StatusQueryCmd) Result {
 		if status.LastError != nil {
 			data["last_error"] = status.LastError.Error()
 		}
+
+		// 从设备读取实际配置状态
+		ctx := cmd.Context()
+		if ctx != nil {
+			actual, err := a.fetchActualFromDevice(ctx)
+			if err == nil {
+				data["actual_config"] = actual
+			} else {
+				data["fetch_error"] = err.Error()
+			}
+		}
 	}
 
 	return Result{
