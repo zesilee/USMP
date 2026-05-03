@@ -70,15 +70,20 @@ type ModelActor[T YANGGoStruct] struct {
 	module   string
 
 	// State management
-	mu          sync.RWMutex
-	desired     T       // Desired configuration from CR Spec
-	actual      T       // Actual configuration from device
-	state       T       // Working state (merged for reconciliation)
-	status      ActorStatus
-	lastError   error
-	lastActivity time.Time
-	messageCount int64
-	startTime   time.Time
+	mu             sync.RWMutex
+	desired        T       // Desired configuration from CR Spec
+	actual         T       // Actual configuration from device
+	state          T       // Working state (merged for reconciliation)
+	status         ActorStatus
+	lastError      error
+	lastActivity   time.Time
+	messageCount   int64
+	startTime      time.Time
+
+	// 2PC transaction state
+	txActive       bool    // 2PC transaction is active (Prepare completed, waiting for Commit/Abort)
+	txDesiredChecksum string // Checksum of desired state at Prepare time
+	txDiffSummary  *diff.DiffSummary // Diff summary from Prepare phase
 
 	// Dependencies
 	versionMgr *VersionManager[T]
@@ -485,6 +490,11 @@ func (a *ModelActor[T]) handlePrepare(cmd *PrepareCmd) Result {
 	a.mu.Lock()
 	defer a.mu.Unlock()
 
+	// Pre-check: Cannot prepare if another transaction is already active
+	if a.txActive {
+		return Failure(cmd.ID(), fmt.Errorf("transaction already active - commit or abort first"))
+	}
+
 	// 1. Validate desired configuration
 	if err := a.desired.Validate(); err != nil {
 		return Failure(cmd.ID(), fmt.Errorf("desired config validation failed: %w", err))
@@ -556,6 +566,16 @@ func (a *ModelActor[T]) handlePrepare(cmd *PrepareCmd) Result {
 		return Failure(cmd.ID(), fmt.Errorf("failed to prepare candidate config: %w", err))
 	}
 
+	// 7. Mark transaction as active and store state for commit phase
+	checksum, err := computeChecksum(a.desired)
+	if err != nil {
+		// On checksum failure, still proceed but mark checksum as empty (skip validation)
+		checksum = ""
+	}
+	a.txActive = true
+	a.txDesiredChecksum = checksum
+	a.txDiffSummary = &diffResult.Summary
+
 	return Result{
 		MsgID:   cmd.ID(),
 		Success: true,
@@ -599,27 +619,75 @@ func (a *ModelActor[T]) prepareCandidateOnDevice(ctx context.Context, changes []
 }
 
 // handleCommit processes a CommitCmd message (2PC phase 2).
+// Validates that a Prepare has been completed, commits the candidate config,
+// verifies configuration consistency, and creates a version snapshot.
 func (a *ModelActor[T]) handleCommit(cmd *CommitCmd) Result {
 	a.mu.Lock()
 	defer a.mu.Unlock()
 
-	// Commit the candidate config on device
-	if err := a.commitCandidateOnDevice(cmd.Context(), cmd.ForceCommit); err != nil {
-		return Failure(cmd.ID(), fmt.Errorf("commit failed: %w", err))
+	// 1. Pre-check: Must have an active transaction from Prepare phase
+	if !a.txActive {
+		return Failure(cmd.ID(), fmt.Errorf("no active transaction - call Prepare first"))
 	}
 
-	// Update actual state from device after commit
+	// 2. Verify desired state hasn't changed since Prepare (protect against concurrent modifications)
+	currentChecksum, _ := computeChecksum(a.desired)
+	if a.txDesiredChecksum != "" && a.txDesiredChecksum != currentChecksum && !cmd.ForceCommit {
+		// Rollback on checksum mismatch
+		_ = a.abortCandidateOnDevice(cmd.Context())
+		a.clearTxState()
+		return Failure(cmd.ID(), fmt.Errorf("desired state modified since Prepare - use ForceCommit to override"))
+	}
+
+	// 3. Commit the candidate config on device
+	if err := a.commitCandidateOnDevice(cmd.Context(), cmd.ForceCommit); err != nil {
+		// Rollback: Discard candidate on commit failure
+		_ = a.abortCandidateOnDevice(cmd.Context())
+		a.clearTxState()
+		return Failure(cmd.ID(), fmt.Errorf("commit failed, candidate discarded: %w", err))
+	}
+
+	// 4. Update actual state from device after commit
 	actual, err := a.fetchActualFromDevice(cmd.Context())
 	if err != nil {
-		return Failure(cmd.ID(), fmt.Errorf("failed to verify commit: %w", err))
+		// Note: Commit likely succeeded but we can't verify, keep txActive to allow retry
+		return Failure(cmd.ID(), fmt.Errorf("commit succeeded but failed to verify: %w", err))
 	}
 	a.actual = actual
 
-	// Create version snapshot
+	// 5. Configuration consistency verification
+	diffEngine := diff.NewDefaultDiffEngine()
+	diffResult, err := diffEngine.Diff(a.desired, a.actual, nil)
+	if err != nil {
+		a.clearTxState()
+		return Failure(cmd.ID(), fmt.Errorf("commit succeeded but consistency check failed: %w", err))
+	}
+
+	// 6. Handle consistency mismatch (only fail if not ForceCommit)
+	if diffResult.Summary.Total > 0 && !cmd.ForceCommit {
+		// Partial success: commit happened but config doesn't match desired
+		a.clearTxState()
+		return Result{
+			MsgID:   cmd.ID(),
+			Success: false,
+			Error:   fmt.Errorf("commit succeeded but device config differs from desired (changes=%d)", diffResult.Summary.Total),
+			Data: map[string]interface{}{
+				"message":        "commit succeeded with consistency warning",
+				"mismatch_count": diffResult.Summary.Total,
+				"device_applied": true,
+			},
+		}
+	}
+
+	// 7. Create version snapshot on successful commit
 	version, err := a.versionMgr.CreateSnapshot(a.desired, "Configuration committed", a.actorID)
 	if err != nil {
-		return Failure(cmd.ID(), err)
+		a.clearTxState()
+		return Failure(cmd.ID(), fmt.Errorf("commit succeeded but snapshot failed: %w", err))
 	}
+
+	// 8. Clear transaction state on success
+	a.clearTxState()
 
 	return Result{
 		MsgID:    cmd.ID(),
@@ -627,10 +695,21 @@ func (a *ModelActor[T]) handleCommit(cmd *CommitCmd) Result {
 		Version:  version.Number,
 		Checksum: version.Checksum,
 		Data: map[string]interface{}{
-			"force_commit": cmd.ForceCommit,
-			"message":      "commit successful",
+			"force_commit":     cmd.ForceCommit,
+			"message":          "commit successful",
+			"consistency_pass": diffResult.Summary.Total == 0,
+			"pending_changes":  diffResult.Summary.Total,
 		},
 	}
+}
+
+// clearTxState clears the 2PC transaction state after commit or abort.
+func (a *ModelActor[T]) clearTxState() {
+	a.txActive = false
+	a.txDesiredChecksum = ""
+	a.txDiffSummary = nil
+	var zero T
+	a.state = zero
 }
 
 // commitCandidateOnDevice commits the candidate configuration to running.
@@ -657,14 +736,28 @@ func (a *ModelActor[T]) handleAbort(cmd *AbortCmd) Result {
 	a.mu.Lock()
 	defer a.mu.Unlock()
 
-	// Clear the working state (pending changes)
-	var zero T
-	a.state = zero
-
-	// Discard candidate config on device
-	if err := a.abortCandidateOnDevice(cmd.Context()); err != nil {
-		return Failure(cmd.ID(), fmt.Errorf("failed to abort transaction: %w", err))
+	// Pre-check: Only abort if there's an active transaction
+	if !a.txActive {
+		// No-op if no active transaction
+		return Result{
+			MsgID:   cmd.ID(),
+			Success: true,
+			Data: map[string]interface{}{
+				"message": "no active transaction to abort",
+			},
+		}
 	}
+
+	// Discard candidate config on device first
+	if err := a.abortCandidateOnDevice(cmd.Context()); err != nil {
+		// Still clear local state even if device discard fails
+		// (candidate may have already been discarded or timed out)
+		a.clearTxState()
+		return Failure(cmd.ID(), fmt.Errorf("device discard failed (local state cleared): %w", err))
+	}
+
+	// Clear transaction state
+	a.clearTxState()
 
 	data := map[string]interface{}{
 		"message": "transaction aborted successfully",
