@@ -1,0 +1,222 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.14.0
+  name: businessinterfaces.biz.usmp.io
+spec:
+  group: biz.usmp.io
+  names:
+    kind: BusinessInterface
+    listKind: BusinessInterfaceList
+    plural: businessinterfaces
+    singular: businessinterface
+    shortNames:
+    - bi
+    - if
+    - interfaces
+  scope: Namespaced
+  versions:
+  - name: v1
+    served: true
+    storage: true
+    subresources:
+      status: {}
+    schema:
+      openAPIV3Schema:
+        description: BusinessInterface 是 businessinterfaces API 的 Schema
+        type: object
+        properties:
+          apiVersion:
+            description: 'APIVersion defines the versioned schema of this representation
+              of an object. Servers should convert recognized schemas to the latest
+              internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+            type: string
+          kind:
+            description: 'Kind is a string value representing the REST resource this
+              object represents. Servers may infer this from the endpoint the client
+              submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: BusinessInterfaceSpec 定义 BusinessInterface 的期望状态
+            type: object
+            required:
+            - deviceID
+            - interfaceName
+            properties:
+              deviceID:
+                description: 所属交换机设备 ID
+                type: string
+              interfaceName:
+                description: 接口名称（如 GigabitEthernet0/0/1）
+                type: string
+              description:
+                description: 接口描述
+                type: string
+              mode:
+                description: 接口模式
+                type: string
+                enum:
+                - Access
+                - Trunk
+                - Hybrid
+                - L3
+                - L2
+              adminStatus:
+                description: 管理状态
+                type: string
+                enum:
+                - Up
+                - Down
+                default: Up
+              accessVlan:
+                description: Access VLAN（仅 Access 模式有效）
+                type: integer
+                minimum: 1
+                maximum: 4094
+              trunkAllowedVlans:
+                description: Trunk 允许通过的 VLAN 列表（仅 Trunk/Hybrid 模式有效）
+                type: array
+                items:
+                  type: object
+                  properties:
+                    vlanID:
+                      description: VLAN ID
+                      type: integer
+                      minimum: 1
+                      maximum: 4094
+                    isNative:
+                      description: 是否是 Native VLAN（仅 Trunk 模式有效）
+                      type: boolean
+              nativeVlan:
+                description: Native VLAN ID（仅 Trunk/Hybrid 模式有效）
+                type: integer
+                minimum: 1
+                maximum: 4094
+              ipAddress:
+                description: 三层接口 IP 地址（仅 L3 模式有效）
+                type: string
+                format: ipv4
+              netmask:
+                description: 子网掩码（仅 L3 模式有效）
+                type: string
+              mtu:
+                description: MTU 值
+                type: integer
+                minimum: 64
+                maximum: 9216
+                default: 1500
+              speed:
+                description: 速率配置（Mbps），0 表示自动协商
+                type: integer
+                minimum: 0
+              duplex:
+                description: 双工模式：auto/full/half
+                type: string
+                enum:
+                - auto
+                - full
+                - half
+                default: auto
+              lldpEnabled:
+                description: 是否启用 LLDP
+                type: boolean
+                default: true
+              stormControlEnabled:
+                description: 是否启用风暴控制
+                type: boolean
+                default: false
+          status:
+            description: BusinessInterfaceStatus 定义 BusinessInterface 的实际状态
+            type: object
+            properties:
+              phase:
+                description: 同步阶段
+                type: string
+                enum:
+                - Pending
+                - Syncing
+                - Synced
+                - Failed
+                default: Pending
+              lastSyncTime:
+                description: 最后同步时间
+                type: string
+                format: date-time
+              message:
+                description: 同步消息/错误信息
+                type: string
+              retryCount:
+                description: 重试次数
+                type: integer
+                minimum: 0
+              errorType:
+                description: 错误类型：Temporary/Permanent
+                type: string
+                enum:
+                - Temporary
+                - Permanent
+              operStatus:
+                description: 运行状态
+                type: string
+                enum:
+                - Up
+                - Down
+                - Testing
+                - Unknown
+                - Dormant
+                - NotPresent
+              interfaceType:
+                description: 接口类型（从设备读取）
+                type: string
+              physAddress:
+                description: 物理地址/MAC
+                type: string
+              actualSpeed:
+                description: 实际速率（Mbps）
+                type: integer
+              actualMTU:
+                description: 实际 MTU
+                type: integer
+              counters:
+                description: 统计信息
+                type: object
+                properties:
+                  inOctets:
+                    description: 入方向字节数
+                    type: integer
+                  outOctets:
+                    description: 出方向字节数
+                    type: integer
+                  inPackets:
+                    description: 入方向数据包数
+                    type: integer
+                  outPackets:
+                    description: 出方向数据包数
+                    type: integer
+                  inErrors:
+                    description: 入方向错误数
+                    type: integer
+                  outErrors:
+                    description: 出方向错误数
+                    type: integer
+                  inDiscards:
+                    description: 入方向丢弃数
+                    type: integer
+                  outDiscards:
+                    description: 出方向丢弃数
+                    type: integer
+              actualAccessVlan:
+                description: 设备上实际配置的 Access VLAN
+                type: integer
+              actualTrunkVlans:
+                description: 设备上实际配置的 Trunk VLAN 列表
+                type: array
+                items:
+                  type: integer
+              actualNativeVlan:
+                description: 设备上实际配置的 Native VLAN
+                type: integer
