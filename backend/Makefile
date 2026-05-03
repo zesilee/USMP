@@ -1,4 +1,4 @@
-.PHONY: all build test test-unit test-integration test-e2e test-all clean help e2e-cluster e2e-deploy e2e-clean
+.PHONY: all build test test-unit test-integration test-e2e test-all clean help e2e-cluster e2e-deploy e2e-clean manifests-custom
 
 # 项目配置
 BINARY_NAME=usmp-backend
@@ -7,6 +7,13 @@ BUILD_DIR=bin
 # Go 配置
 GO=go
 GOFLAGS=-v
+
+# CRD 注解注入
+.PHONY: manifests-custom
+manifests-custom: ## Inject custom annotations into CRDs
+	@echo "Injecting custom annotations into CRDs..."
+	@cd hack/crd-injector && $(GO) run main.go ../../api ../../config/crd/bases
+	@echo "CRD annotation injection completed"
 
 # 默认目标
 all: build

@@ -1,0 +1,149 @@
+spec:
+    versions:
+        - name: v1
+          schema:
+            openAPIV3Schema:
+                properties:
+                    apiVersion:
+                        description: 'APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+                        type: string
+                    kind:
+                        description: 'Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+                        type: string
+                    metadata:
+                        type: object
+                    spec:
+                        description: NativeDeviceConfigSpec 定义原生配置的期望状态
+                        properties:
+                            content:
+                                description: 配置内容
+                                type: string
+                            description:
+                                description: 配置描述
+                                type: string
+                                x-custom-group: 基本信息
+                                x-custom-label: 描述
+                                x-custom-placeholder: 描述该 VLAN 用途
+                            deviceID:
+                                description: 所属交换机设备 ID
+                                type: string
+                                x-custom-group: 基本信息
+                                x-custom-label: 设备 ID
+                                x-custom-placeholder: '例如: 192.168.1.1:830'
+                            encrypted:
+                                default: false
+                                description: 配置是否加密
+                                type: boolean
+                            encryptionAlgorithm:
+                                description: 加密算法（如 AES-256）
+                                type: string
+                            executionMode:
+                                default: Once
+                                description: 执行模式
+                                enum:
+                                    - Once
+                                    - Persistent
+                                type: string
+                            format:
+                                description: 配置格式
+                                enum:
+                                    - CLI
+                                    - YANG
+                                    - XML
+                                    - JSON
+                                type: string
+                            group:
+                                description: 配置分组（用于批量管理）
+                                type: string
+                            keySecretRef:
+                                description: 密钥引用（Secret 名称）
+                                type: string
+                            maxRetries:
+                                default: 3
+                                description: 失败重试次数，默认 3 次
+                                minimum: 0
+                                type: integer
+                            priority:
+                                default: 50
+                                description: 优先级（用于控制下发顺序，数字越小越先执行）
+                                type: integer
+                            saveAfterApply:
+                                default: false
+                                description: 是否在下发后保存配置
+                                type: boolean
+                            saveBeforeApply:
+                                default: false
+                                description: 是否在下发前保存配置
+                                type: boolean
+                            timeoutSeconds:
+                                default: 60
+                                description: 执行超时时间（秒），默认 60 秒
+                                minimum: 1
+                                type: integer
+                        required:
+                            - deviceID
+                            - format
+                            - content
+                        type: object
+                    status:
+                        description: NativeDeviceConfigStatus 定义原生配置的实际状态
+                        properties:
+                            appliedOnDevice:
+                                description: 配置已在设备上生效
+                                type: boolean
+                            configHash:
+                                description: 配置内容的哈希值（用于检测变化）
+                                type: string
+                            deviceResponse:
+                                description: 设备返回的响应
+                                type: string
+                            errorType:
+                                description: 错误类型：Temporary/Permanent
+                                enum:
+                                    - Temporary
+                                    - Permanent
+                                type: string
+                            executionDurationMs:
+                                description: 执行耗时（毫秒）
+                                type: integer
+                            executionEndTime:
+                                description: 执行结束时间
+                                format: date-time
+                                type: string
+                            executionStartTime:
+                                description: 执行开始时间
+                                format: date-time
+                                type: string
+                            executionStatus:
+                                default: Pending
+                                description: 执行状态
+                                enum:
+                                    - Pending
+                                    - Running
+                                    - Succeeded
+                                    - Failed
+                                    - Skipped
+                                type: string
+                            lastSyncTime:
+                                description: 最后同步时间
+                                format: date-time
+                                type: string
+                                x-custom-label: 最后同步时间
+                            message:
+                                description: 同步消息/错误信息
+                                type: string
+                            phase:
+                                default: Pending
+                                description: 同步阶段
+                                enum:
+                                    - Pending
+                                    - Syncing
+                                    - Synced
+                                    - Failed
+                                type: string
+                                x-custom-label: 同步状态
+                            retryCount:
+                                description: 重试次数
+                                minimum: 0
+                                type: integer
+                        type: object
