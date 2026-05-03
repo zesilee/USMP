@@ -71,12 +71,13 @@ describe('InterfaceManager', () => {
     vi.clearAllMocks()
   })
 
-  it('应正确渲染标题和设备 IP', async () => {
+  it('应正确渲染组件和 YangRenderer', async () => {
     const wrapper = createWrapper()
     await waitForUpdate(wrapper)
 
-    expect(wrapper.text()).toContain('接口配置管理')
-    expect(wrapper.text()).toContain(deviceIp)
+    const renderer = wrapper.find('.yang-renderer-mock')
+    expect(renderer.exists()).toBe(true)
+    expect(renderer.text()).toContain('Yang Renderer')
   })
 
   it('应正确渲染刷新按钮', async () => {
@@ -121,7 +122,7 @@ describe('InterfaceManager', () => {
     const submitButton = wrapper.find('.el-button--primary')
     await submitButton.trigger('click')
 
-    expect(setConfig).toHaveBeenCalledWith(deviceIp, '/interfaces', expect.any(Object))
+    expect(setConfig).toHaveBeenCalledWith(deviceIp, '/ifm:ifm/ifm:interfaces', expect.any(Object))
   })
 
   it('配置下发成功应显示成功消息', async () => {
