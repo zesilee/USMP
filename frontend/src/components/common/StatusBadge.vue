@@ -10,7 +10,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { Loading } from '@element-plus/icons-vue'
-import type { ConfigPhase } from '../../api/crd'
+import type { ConfigPhase } from '../../composables/useK8sCRD'
 
 const props = defineProps<{
   phase: ConfigPhase

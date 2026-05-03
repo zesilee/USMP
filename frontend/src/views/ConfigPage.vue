@@ -2,8 +2,8 @@
   <div class="config-page">
     <div class="page-header">
       <div class="title-section">
-        <h2 class="page-title">{{ moduleTitle }}</h2>
-        <StatusBadge v-if="configHook" :phase="configHook.currentPhase.value" />
+        <h2 class="page-title">{{ configHook?.title.value || moduleTitle }}</h2>
+        <StatusBadge v-if="currentPhase" :phase="currentPhase" />
       </div>
       <el-select
         v-model="selectedDevice"
@@ -16,14 +16,14 @@
     </div>
 
     <el-alert
-      v-if="configHook?.error?.value"
-      :title="configHook.error.value"
+      v-if="configHook?.schemaError.value || configHook?.error?.value"
+      :title="configHook.schemaError.value || configHook.error.value"
       type="error"
       :closable="false"
       style="margin-bottom: 20px"
     />
 
-    <div v-if="configHook?.isLoading.value" class="loading-container">
+    <div v-if="configHook?.schemaLoading.value || configHook?.loading.value" class="loading-container">
       <el-icon class="is-loading" size="40">
         <Loading />
       </el-icon>
@@ -32,8 +32,8 @@
 
     <template v-else>
       <DynamicTable
-        v-if="configHook?.schema.value"
-        :columns="configHook.schema.value.listFields"
+        v-if="configHook?.schema.value && configHook.schema.value.length > 0"
+        :columns="listColumns"
         :data="configList"
         @add="handleAdd"
         @edit="handleEdit"
@@ -50,7 +50,7 @@
       <DynamicForm
         ref="formRef"
         v-if="configHook?.schema.value"
-        :fields="configHook.schema.value.fields"
+        :fields="configHook.schema.value"
         v-model="formData"
       />
     </DetailDrawer>
@@ -58,15 +58,16 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue'
+import { ref, computed, watch, onMounted } from 'vue'
 import { useDeviceStore } from '../stores/device'
-import { useDeviceConfig } from '../composables/useDeviceConfig'
+import { useConfigPage } from '../composables/useConfigPage'
 import StatusBadge from '../components/common/StatusBadge.vue'
 import DetailDrawer from '../components/common/DetailDrawer.vue'
 import DynamicTable from '../components/config/DynamicTable.vue'
 import DynamicForm from '../components/config/DynamicForm.vue'
 import { Loading } from '@element-plus/icons-vue'
 import type { FormInstance } from 'element-plus'
+import type { ConfigPhase } from '../composables/useK8sCRD'
 
 const props = defineProps<{
   module?: string
@@ -75,7 +76,7 @@ const props = defineProps<{
 const deviceStore = useDeviceStore()
 const devices = computed(() => deviceStore.devices)
 const selectedDevice = ref('')
-const configHook = ref<ReturnType<typeof useDeviceConfig> | null>(null)
+const configHook = ref<ReturnType<typeof useConfigPage> | null>(null)
 
 const drawerVisible = ref(false)
 const isEditing = ref(false)
@@ -83,6 +84,7 @@ const submitLoading = ref(false)
 const formRef = ref<FormInstance>()
 const formData = ref<Record<string, any>>({})
 const editingIndex = ref(-1)
+const editingItemName = ref<string>('')
 
 const moduleTitle = computed(() => {
   const titles: Record<string, string> = {
@@ -95,14 +97,27 @@ const moduleTitle = computed(() => {
 })
 
 const configList = computed(() => {
-  const spec = configHook.value?.configCR.value?.spec
-  if (!spec) return []
-  return Array.isArray(spec) ? spec : [spec]
+  if (!configHook.value) return []
+  return configHook.value.items.value.map(item => item.spec)
 })
 
-function initConfig(deviceId: string) {
+const listColumns = computed(() => {
+  if (!configHook.value) return []
+  return configHook.value.schema.value.filter(f => !f.hidden)
+})
+
+const currentPhase = computed<ConfigPhase | null>(() => {
+  if (!configHook.value || configHook.value.items.value.length === 0) {
+    return null
+  }
+  return configHook.value.items.value[0].status?.phase || 'Pending'
+})
+
+async function initConfig(deviceId: string) {
   if (deviceId && props.module) {
-    configHook.value = useDeviceConfig(deviceId, props.module)
+    configHook.value = useConfigPage(props.module)
+    await configHook.value.getSchema()
+    await configHook.value.listByDevice(deviceId)
   }
 }
 
@@ -113,6 +128,7 @@ function handleDeviceChange() {
 function handleAdd() {
   isEditing.value = false
   editingIndex.value = -1
+  editingItemName.value = ''
   formData.value = {}
   drawerVisible.value = true
 }
@@ -120,27 +136,48 @@ function handleAdd() {
 function handleEdit(row: Record<string, any>, index: number) {
   isEditing.value = true
   editingIndex.value = index
+  if (configHook.value && configHook.value.items.value[index]) {
+    editingItemName.value = configHook.value.items.value[index].metadata.name
+  }
   formData.value = { ...row }
   drawerVisible.value = true
 }
 
 async function handleDelete(row: Record<string, any>, index: number) {
-  if (!configHook.value) return
+  if (!configHook.value || !configHook.value.items.value[index]) return
   try {
-    await configHook.value.remove()
+    const itemName = configHook.value.items.value[index].metadata.name
+    await configHook.value.remove(itemName)
   } catch (e) {
     console.error('Delete failed:', e)
   }
 }
 
 async function handleSubmit() {
-  if (!formRef.value || !configHook.value) return
+  if (!formRef.value || !configHook.value || !selectedDevice.value) return
 
   try {
     await formRef.value.validate()
     submitLoading.value = true
 
-    await configHook.value.save(formData.value)
+    if (isEditing.value && editingItemName.value) {
+      // Update existing
+      await configHook.value.update(editingItemName.value, {
+        spec: formData.value
+      })
+    } else {
+      // Create new
+      const moduleName = props.module || 'unknown'
+      const name = `${selectedDevice.value}-${moduleName}-${Date.now()}`
+      await configHook.value.create({
+        metadata: { name },
+        spec: {
+          ...formData.value,
+          deviceID: selectedDevice.value,
+          module: moduleName
+        }
+      })
+    }
 
     drawerVisible.value = false
     formData.value = {}
@@ -155,6 +192,10 @@ watch(() => props.module, () => {
   if (selectedDevice.value) {
     initConfig(selectedDevice.value)
   }
+})
+
+onMounted(() => {
+  deviceStore.fetchDevices()
 })
 </script>
 

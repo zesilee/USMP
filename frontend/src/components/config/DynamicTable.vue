@@ -40,7 +40,7 @@
 </template>
 
 <script setup lang="ts">
-import type { Field } from '../../api/crd'
+import type { Field } from '../../utils/crdSchemaParser'
 
 defineProps<{
   columns: Field[]
