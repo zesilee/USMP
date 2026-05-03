@@ -1,0 +1,174 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.14.0
+  name: businessvlans.biz.usmp.io
+spec:
+  group: biz.usmp.io
+  names:
+    kind: BusinessVlan
+    listKind: BusinessVlanList
+    plural: businessvlans
+    singular: businessvlan
+    shortNames:
+    - bv
+    - vlans
+  scope: Namespaced
+  versions:
+  - name: v1
+    served: true
+    storage: true
+    subresources:
+      status: {}
+    schema:
+      openAPIV3Schema:
+        description: BusinessVlan 是 businessvlans API 的 Schema
+        type: object
+        properties:
+          apiVersion:
+            description: 'APIVersion defines the versioned schema of this representation
+              of an object. Servers should convert recognized schemas to the latest
+              internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+            type: string
+          kind:
+            description: 'Kind is a string value representing the REST resource this
+              object represents. Servers may infer this from the endpoint the client
+              submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: BusinessVlanSpec 定义 BusinessVlan 的期望状态
+            type: object
+            required:
+            - vlanID
+            - deviceID
+            properties:
+              vlanID:
+                description: VLAN ID (1-4094)
+                type: integer
+                minimum: 1
+                maximum: 4094
+              deviceID:
+                description: 所属交换机设备 ID
+                type: string
+              name:
+                description: VLAN 名称
+                type: string
+                maxLength: 31
+              description:
+                description: VLAN 描述
+                type: string
+                maxLength: 255
+              type:
+                description: VLAN 类型
+                type: string
+                enum:
+                - Common
+                - Super
+                - Sub
+                - Principal
+                - Separate
+                - Group
+                default: Common
+              adminStatus:
+                description: 管理状态
+                type: string
+                enum:
+                - Up
+                - Down
+                default: Up
+              taggedPorts:
+                description: Tagged 端口列表
+                type: array
+                items:
+                  type: string
+              untaggedPorts:
+                description: Untagged 端口列表
+                type: array
+                items:
+                  type: string
+              macLearningEnabled:
+                description: 是否启用 MAC 地址学习
+                type: boolean
+              statisticEnabled:
+                description: 统计收集开关
+                type: boolean
+              broadcastDiscardEnabled:
+                description: 广播丢弃开关
+                type: boolean
+          status:
+            description: BusinessVlanStatus 定义 BusinessVlan 的实际状态
+            type: object
+            properties:
+              phase:
+                description: 同步阶段
+                type: string
+                enum:
+                - Pending
+                - Syncing
+                - Synced
+                - Failed
+                default: Pending
+              lastSyncTime:
+                description: 最后同步时间
+                type: string
+                format: date-time
+              message:
+                description: 同步消息
+                type: string
+              configVersion:
+                description: 配置版本（用于乐观锁）
+                type: integer
+                format: int64
+              actual:
+                description: 设备上实际的 VLAN 状态
+                type: object
+                properties:
+                  vlanID:
+                    type: integer
+                  name:
+                    type: string
+                  description:
+                    type: string
+                  type:
+                    type: string
+                  operStatus:
+                    type: string
+                  ports:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        tagged:
+                          type: boolean
+                        active:
+                          type: boolean
+                  macCount:
+                    type: integer
+              diff:
+                description: 期望状态与实际状态的差异
+                type: array
+                items:
+                  type: string
+    additionalPrinterColumns:
+    - name: VlanID
+      type: integer
+      jsonPath: .spec.vlanID
+    - name: Device
+      type: string
+      jsonPath: .spec.deviceID
+    - name: Phase
+      type: string
+      jsonPath: .status.phase
+    - name: Age
+      type: date
+      jsonPath: .metadata.creationTimestamp
+    - name: LastSync
+      type: date
+      jsonPath: .status.lastSyncTime
+      priority: 1

@@ -1,0 +1,19 @@
+apiVersion: biz.usmp.io/v1
+kind: BusinessVlan
+metadata:
+  name: businessvlan-sample
+  namespace: usmp-system
+spec:
+  vlanID: 100
+  deviceID: "admin:admin@192.168.1.100:830"
+  name: "Management-VLAN"
+  description: "Management VLAN for network devices"
+  type: "Common"
+  adminStatus: "Up"
+  taggedPorts:
+    - "GigabitEthernet0/0/1"
+    - "GigabitEthernet0/0/2"
+  untaggedPorts:
+    - "GigabitEthernet0/0/3"
+  macLearningEnabled: true
+  statisticEnabled: true
