@@ -17,52 +17,71 @@ const (
 type BusinessSwitchSpec struct {
 	// DeviceID is the identifier of the target device (format: ip:port)
 	// +kubebuilder:validation:Required
+	// +custom:label="设备 ID"
+	// +custom:group="基本信息"
 	DeviceID string `json:"deviceID"`
 
 	// Vendor is the device manufacturer
-	// +kubebuilder:validation:Enum=huawei;cisco;h3c;juniper
+	// +kubebuilder:validation:Enum=huawei;h3c;cisco;juniper
 	// +kubebuilder:default=huawei
+	// +custom:label="厂商"
+	// +custom:group="基本信息"
 	Vendor string `json:"vendor,omitempty"`
 
 	// Model is the device model identifier
+	// +custom:label="设备型号"
+	// +custom:group="基本信息"
 	Model string `json:"model,omitempty"`
 
 	// ManagementIP is the management IP address of the device
 	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Pattern=`^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$`
+	// +custom:label="管理 IP"
+	// +custom:group="基本信息"
 	ManagementIP string `json:"managementIP"`
 
 	// AdminStatus indicates the intended operational status
 	// +kubebuilder:validation:Enum=online;maintenance;offline
 	// +kubebuilder:default=online
+	// +custom:label="管理状态"
+	// +custom:group="基本信息"
 	AdminStatus AdminStatus `json:"adminStatus,omitempty"`
 
 	// Location describes the physical location of the device
+	// +custom:label="物理位置"
+	// +custom:placeholder="例如: A区3楼机架5"
+	// +custom:group="基本信息"
 	Location string `json:"location,omitempty"`
 
 	// Tags are user-defined tags for categorization
+	// +custom:label="标签"
+	// +custom:group="高级设置"
 	Tags []string `json:"tags,omitempty"`
 }
 
 // BusinessSwitchStatus defines the observed state of BusinessSwitch.
 type BusinessSwitchStatus struct {
+	// Phase indicates the current reconciliation phase
+	// +kubebuilder:validation:Enum=Pending;Updating;Ready;Failed
+	// +custom:label="同步状态"
+	Phase ConfigPhase `json:"phase,omitempty"`
+
+	// LastSyncTime is the timestamp of the last successful sync
+	// +custom:label="最后同步时间"
+	LastSyncTime metav1.Time `json:"lastSyncTime,omitempty"`
+
 	// Online indicates whether the device is currently reachable
 	Online bool `json:"online,omitempty"`
 
 	// PlatformVersion is the running OS version
 	PlatformVersion string `json:"platformVersion,omitempty"`
 
-	// PatchVersion is the installed patch version
-	PatchVersion string `json:"patchVersion,omitempty"`
-
 	// Uptime is the duration the device has been running
 	Uptime string `json:"uptime,omitempty"`
 
-	// SyncState indicates the result of the last synchronization
-	// +kubebuilder:validation:Enum=Success;Failed;Syncing;Timeout
-	SyncState SyncState `json:"syncState,omitempty"`
-
-	// LastSyncTime is the timestamp of the last successful sync
-	LastSyncTime metav1.Time `json:"lastSyncTime,omitempty"`
+	// Error contains error message if synchronization failed
+	// +custom:label="错误信息"
+	Error string `json:"error,omitempty"`
 
 	// Conditions represents the latest available observations
 	Conditions []metav1.Condition `json:"conditions,omitempty"`
@@ -73,7 +92,7 @@ type BusinessSwitchStatus struct {
 // +kubebuilder:printcolumn:name="DeviceID",type="string",JSONPath=".spec.deviceID"
 // +kubebuilder:printcolumn:name="Vendor",type="string",JSONPath=".spec.vendor"
 // +kubebuilder:printcolumn:name="Online",type="boolean",JSONPath=".status.online"
-// +kubebuilder:printcolumn:name="State",type="string",JSONPath=".status.syncState"
+// +kubebuilder:printcolumn:name="Phase",type="string",JSONPath=".status.phase"
 // +kubebuilder:printcolumn:name="Age",type="date",JSONPath=".metadata.creationTimestamp"
 
 // BusinessSwitch is the Schema for the businessswitches API.
