@@ -108,6 +108,32 @@ rules:
   - patch
   - update
 - apiGroups:
+  - biz.usmp.io
+  resources:
+  - nativedeviceconfigs
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - biz.usmp.io
+  resources:
+  - nativedeviceconfigs/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - biz.usmp.io
+  resources:
+  - nativedeviceconfigs/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
   - ""
   resources:
   - secrets

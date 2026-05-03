@@ -94,6 +94,16 @@ func main() {
 		os.Exit(1)
 	}
 
+	// 设置 NativeDeviceConfig Reconciler（通用原生配置透传
+	if err = (&controllers.NativeDeviceConfigReconciler{
+		Client:     mgr.GetClient(),
+		Scheme:     mgr.GetScheme(),
+		ClientPool: clientPool,
+	}).SetupWithManager(mgr); err != nil {
+		setupLog.Error(err, "unable to create controller", "controller", "NativeDeviceConfig")
+		os.Exit(1)
+	}
+
 	setupLog.Info("=============================================")
 	setupLog.Info("USMP Controller - 仅支持华为交换机")
 	setupLog.Info("=============================================")
