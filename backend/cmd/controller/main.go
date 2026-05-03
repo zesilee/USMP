@@ -84,6 +84,16 @@ func main() {
 		os.Exit(1)
 	}
 
+	// 设置 BusinessRoute Reconciler（仅支持华为交换机）
+	if err = (&controllers.BusinessRouteReconciler{
+		Client:     mgr.GetClient(),
+		Scheme:     mgr.GetScheme(),
+		ClientPool: clientPool,
+	}).SetupWithManager(mgr); err != nil {
+		setupLog.Error(err, "unable to create controller", "controller", "BusinessRoute")
+		os.Exit(1)
+	}
+
 	setupLog.Info("=============================================")
 	setupLog.Info("USMP Controller - 仅支持华为交换机")
 	setupLog.Info("=============================================")

@@ -1,0 +1,155 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.14.0
+  name: businessroutes.biz.usmp.io
+spec:
+  group: biz.usmp.io
+  names:
+    kind: BusinessRoute
+    listKind: BusinessRouteList
+    plural: businessroutes
+    singular: businessroute
+    shortNames:
+    - br
+    - routes
+  scope: Namespaced
+  versions:
+  - name: v1
+    served: true
+    storage: true
+    subresources:
+      status: {}
+    schema:
+      openAPIV3Schema:
+        description: BusinessRoute 是 businessroutes API 的 Schema
+        type: object
+        properties:
+          apiVersion:
+            description: 'APIVersion defines the versioned schema of this representation
+              of an object. Servers should convert recognized schemas to the latest
+              internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+            type: string
+          kind:
+            description: 'Kind is a string value representing the REST resource this
+              object represents. Servers may infer this from the endpoint the client
+              submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: BusinessRouteSpec 定义 BusinessRoute 的期望状态
+            type: object
+            required:
+            - deviceID
+            - destinationCIDR
+            properties:
+              deviceID:
+                description: 所属交换机设备 ID
+                type: string
+              type:
+                description: 路由类型
+                type: string
+                enum:
+                - Static
+                - Default
+                - Blackhole
+                default: Static
+              destinationCIDR:
+                description: 目标网络（CIDR 格式，如 192.168.1.0/24）
+                type: string
+                format: cidr
+              nextHopType:
+                description: 下一跳类型
+                type: string
+                enum:
+                - IPAddress
+                - Interface
+                default: IPAddress
+              nextHopIP:
+                description: 下一跳 IP 地址（当 NextHopType=IPAddress 时必填）
+                type: string
+                format: ipv4
+              outInterface:
+                description: 出接口名称（当 NextHopType=Interface 时必填，如 Vlanif10、GigabitEthernet0/0/1）
+                type: string
+              preference:
+                description: 路由优先级（值越小优先级越高，1-255，默认 60）
+                type: integer
+                minimum: 1
+                maximum: 255
+                default: 60
+              tag:
+                description: 路由标签（用于路由策略匹配用）
+                type: integer
+                minimum: 0
+                maximum: 4294967295
+              description:
+                description: 描述信息
+                type: string
+              bfdEnabled:
+                description: 是否启用 BFD 检测
+                type: boolean
+                default: false
+              bfdSessionName:
+                description: BFD 会话名称
+                type: string
+              permanent:
+                description: 是否为永久路由（接口 Down 时不删除）
+                type: boolean
+                default: false
+              advertise:
+                description: 路由是否发布到其他协议
+                type: boolean
+                default: true
+          status:
+            description: BusinessRouteStatus 定义 BusinessRoute 的实际状态
+            type: object
+            properties:
+              phase:
+                description: 同步阶段
+                type: string
+                enum:
+                - Pending
+                - Syncing
+                - Synced
+                - Failed
+                default: Pending
+              lastSyncTime:
+                description: 最后同步时间
+                type: string
+                format: date-time
+              message:
+                description: 同步消息/错误信息
+                type: string
+              retryCount:
+                description: 重试次数
+                type: integer
+                minimum: 0
+              errorType:
+                description: 错误类型：Temporary/Permanent
+                type: string
+                enum:
+                - Temporary
+                - Permanent
+              routeStatus:
+                description: 路由实际状态
+                type: string
+                enum:
+                - Active
+                - Inactive
+                - Failed
+              outInterfaceStatus:
+                description: 出接口状态（Up/Down）
+                type: string
+              nextHopReachable:
+                description: 下一跳可达性
+                type: boolean
+              actualPreference:
+                description: 路由的实际优先级
+                type: integer
+              nextHopMac:
+                description: 下一跳的 MAC 地址
+                type: string
