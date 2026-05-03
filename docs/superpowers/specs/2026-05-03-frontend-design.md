@@ -120,40 +120,142 @@
 
 ## 五、配置管理页面设计（动态渲染架构）
 
-### 5.1 前后端协作架构
+### 5.1 前后端协作架构（CRD 声明式 API）
 
 ```
-后端                                      前端
-┌────────────────────┐          ┌──────────────────────────┐
-│ YANG Schema        │  JSON    │ 通用控件映射表            │
-│   ↓ 解析           │────────→│  - boolean → ElSwitch     │
-│ SchemaRenderer     │          │  - enum → ElSelect       │
-│   ↓ 输出           │          │  - string → ElInput      │
-│ 控件描述元数据      │          │  - number → ElInputNumber│
-└────────────────────┘          └──────────────────────────┘
+┌─────────────────────────────────────────────────────────────────────────┐
+│                              前端                                      │
+│  ┌──────────────┐    ┌──────────────┐    ┌─────────────────────────┐  │
+│  │              │    │              │    │                         │  │
+│  │  创建/更新  │───→│  List&Watch  │───→│ 动态表单/表格渲染       │  │
+│  │  Config CR  │    │  CR 状态变化 │    │                         │  │
+│  │              │    │              │    │                         │  │
+│  └──────────────┘    └──────────────┘    └─────────────────────────┘  │
+└─────────────────────────────────────────────────────────────────────────┘
+                                    │
+                                    │ HTTP
+                                    ▼
+┌─────────────────────────────────────────────────────────────────────────┐
+│                              后端                                      │
+│  ┌──────────────┐    ┌──────────────┐    ┌─────────────────────────┐  │
+│  │              │    │              │    │                         │  │
+│  │  Config CR   │───→│  Controller  │───→│ 交换机 NETCONF 协议层   │  │
+│  │  API Server  │    │  Reconciler  │    │                         │  │
+│  │              │    │              │    │                         │  │
+│  └──────────────┘    └──────────────┘    └─────────────────────────┘  │
+│            ↑                                                             │
+│            │                        ┌─────────────────────────┐        │
+│            └────────────────────────│ 更新 CR Status          │        │
+│                                     │ - 配置数据              │        │
+│                                     │ - 同步状态              │        │
+│                                     │ - 错误信息              │        │
+│                                     └─────────────────────────┘        │
+└─────────────────────────────────────────────────────────────────────────┘
 ```
 
-### 5.2 控件元数据格式
+### 5.2 架构原则
 
-```json
-{
-  "module": "openconfig-interfaces",
-  "title": "接口配置",
-  "fields": [
-    {
-      "path": "/interfaces/interface/name",
-      "type": "string",
-      "label": "接口名称",
-      "placeholder": "例如: GigabitEthernet0/0/1",
-      "required": true,
-      "pattern": "^[a-zA-Z0-9/]+$",
-      "readonly": false
-    }
-  ]
-}
+**声明式配置管理：**
+1. 前端仅通过 CRD 接口创建/更新/删除 Config 自定义资源（CR）
+2. 后端 Controller 通过 List & Watch 监控 CR 变化
+3. Reconciler 循环处理 CR，执行实际的配置查询/下发
+4. 后端将处理结果写入 CR 的 Status 字段
+5. 前端通过 Watch 机制实时获取 CR 状态更新并渲染页面
+
+**异步处理流程：**
+1. 前端创建 CR Spec（期望状态）→ Pending 状态
+2. 后端 Reconciler 发现 CR → 处理中 → Updating 状态
+3. 后端执行 NETCONF 配置下发/查询 → 完成/失败
+4. 后端更新 CR Status（Ready / Failed）
+5. 前端 Watch 到状态变化 → 刷新 UI 显示最新状态
+
+### 5.2 Config CR 定义
+
+**Custom Resource 结构：**
+
+```yaml
+apiVersion: network.usmp.io/v1alpha1
+kind: DeviceConfig
+metadata:
+  name: device1-interfaces
+  labels:
+    device: "192.168.1.1"
+    module: "openconfig-interfaces"
+spec:
+  # Schema 定义 - 前端动态渲染表单
+  schema:
+    module: "openconfig-interfaces"
+    title: "接口配置"
+    fields:
+      - path: "/interfaces/interface/name"
+        type: "string"
+        label: "接口名称"
+        placeholder: "例如: GigabitEthernet0/0/1"
+        required: true
+        pattern: "^[a-zA-Z0-9/]+$"
+
+  # 期望配置数据 - 用户在前端填写提交
+  desired:
+    interfaces:
+      interface:
+        - name: "GigabitEthernet0/0/1"
+          enabled: true
+          vlan: 100
+
+status:
+  # 处理状态: Pending | Updating | Ready | Failed
+  phase: "Ready"
+
+  # 实际配置数据 - 从交换机读取的真实配置
+  actual:
+    interfaces:
+      interface:
+        - name: "GigabitEthernet0/0/1"
+          enabled: true
+          vlan: 100
+
+  # 最后同步时间
+  lastSyncTime: "2026-05-03T14:30:00Z"
+
+  # 错误信息（失败时）
+  error: ""
 ```
 
-### 5.3 通用控件映射表
+### 5.3 CRD API 接口设计
+
+**1. 创建 Config CR**
+```
+POST /api/crd/configs
+Body: { metadata, spec }
+```
+
+**2. 更新 Config CR**
+```
+PUT /api/crd/configs/{name}
+Body: { metadata, spec }
+```
+
+**3. 删除 Config CR**
+```
+DELETE /api/crd/configs/{name}
+```
+
+**4. List & Watch Config CR（SSE 流式）**
+```
+GET /api/crd/configs/watch?device={deviceIp}&module={module}
+
+# SSE 事件流格式
+event: ADDED | MODIFIED | DELETED
+data: {完整 CR JSON}
+```
+
+**5. 获取 Schema 元数据**
+```
+GET /api/crd/schema/{module}
+返回：字段定义列表（用于前端动态渲染）
+```
+
+### 5.4 通用控件映射表
 
 | YANG 类型 | 前端控件 | 说明 |
 |-----------|----------|------|
@@ -165,33 +267,65 @@
 | list | ElTable | 动态表格 |
 | container | ElCollapse | 分组面板 |
 
-### 5.4 页面布局
+### 5.5 页面布局
 
 ```
 ┌───────────────────────────────────────────────────────────┐
-│  选择设备: [设备下拉选择▼ 192.168.1.1        ] [刷新] │
+│  选择设备: [设备下拉选择▼ 192.168.1.1        ]          │
+│  状态: [ 🔵 同步中 ] - 通过 Watch 实时更新状态徽章     │
 ├───────────────────────────────────────────────────────────┤
 │  ┌───────────────────────────────────────────────────┐   │
-│  │  (基于 YANG list 动态渲染的配置表格)              │   │
+│  │  (基于 CR status.actual 动态渲染的配置表格)       │   │
 │  └───────────────────────────────────────────────────┘   │
 │  [+ 新增配置项]                                           │
 └───────────────────────────────────────────────────────────┘
 ```
 
-### 5.5 提交流程
-1. 点击提交
-2. 前端校验（基于 YANG Schema 规则）
-3. 显示配置差异预览
-4. 用户确认
-5. 下发到设备
-6. 成功/失败 toast 提示
+### 5.6 配置提交流程（声明式异步）
+
+1. **用户点击提交**
+   - 前端校验表单
+   - 显示配置差异预览（desired vs actual）
+
+2. **用户确认提交**
+   - 前端创建/更新 Config CR（仅更新 spec.desired）
+   - 页面显示 "Pending" 状态徽章
+
+3. **后端 Reconciler 处理**
+   - Controller Watch 到 CR 变化
+   - 执行 NETCONF 配置下发到交换机
+   - 更新 CR status.phase = "Updating"
+
+4. **前端 Watch 状态更新**
+   - SSE 推送 MODIFIED 事件
+   - 页面状态徽章更新为 "Updating"（蓝色旋转）
+
+5. **处理完成**
+   - 后端更新 CR status = Ready / Failed
+   - 前端 Watch 到变化，更新表格和状态徽章
+   - 显示成功/失败 Toast 提示
+
+### 5.7 配置查询流程
+
+1. **进入配置页面**
+   - 前端发起 SSE Watch 连接
+   - 按设备 + 模块过滤
+
+2. **CR 不存在时自动创建**
+   - 首次查询无 CR → 前端创建空 CR
+   - 后端 Reconciler 自动从交换机拉取配置
+   - 填充 status.actual 字段
+
+3. **实时更新**
+   - 任何配置变化通过 Watch 推送到前端
+   - 页面自动刷新显示最新配置
 
 ## 六、原生配置页面设计（CRD 动态驱动）
 
 ### 6.1 动态菜单加载流程
 
 1. 初次点击 "原生配置" 菜单
-2. 调用后端接口 `GET /api/crd/models?type=native`
+2. 调用后端接口 `GET /api/crd/models?type=native` 获取可用的 YANG 模型列表
 3. 动态展开子菜单，显示所有模型名称
 4. 缓存菜单数据，避免重复请求
 
@@ -212,8 +346,17 @@
 ```
 
 ### 6.3 组件复用
-- 原生配置页面与业务配置页面 100% 复用同一套通用配置组件
+- 原生配置与业务配置 100% 复用同一套通用配置组件
 - 仅通过 `module` 参数区分不同的 YANG 模块
+- 相同的 CRD API、相同的 Watch 机制、相同的渲染逻辑
+
+### 6.4 CR 命名规范
+
+业务配置 CR：`{deviceIp}-{module}`
+- 例：`192.168.1.1-openconfig-interfaces`
+
+原生配置 CR：`{deviceIp}-native-{vendor}-{module}`
+- 例：`192.168.1.1-native-huawei-if`
 
 ## 七、操作日志和系统设置
 
@@ -251,20 +394,45 @@ src/
 │   │   ├── DynamicForm.vue     # 动态表单渲染器
 │   │   ├── DynamicTable.vue    # 动态表格渲染器
 │   │   └── FieldRenderer.vue   # 字段→控件映射器
-│   └── dashboard/
+│   └── common/
+│       └── StatusBadge.vue     # CR 状态徽章（Pending/Updating/Ready/Failed）
+├── composables/
+│   └── useDeviceConfig.ts      # CRD Watch 封装 Composable
 ├── stores/
 │   ├── menu.ts                 # 动态菜单状态
 │   └── device.ts               # 当前设备状态
 ├── api/
-│   ├── crd.ts                  # CRD 接口
-│   ├── device.ts               # 设备接口
-│   └── config.ts               # 配置接口
+│   ├── crd.ts                  # CRD REST + SSE Watch 接口
+│   └── device.ts               # 设备接口
 └── utils/
     └── yang-schema.ts          # YANG Schema 解析工具
 ```
 
-### 8.3 核心实现原则
-1. **无状态设计**: 所有业务数据实时从后端拉取，前端仅存 UI 状态
-2. **组件复用最大化**: 业务配置和原生配置 100% 复用同一套组件
-3. **动态渲染优先**: 尽量避免手写固定表单
-4. **类型安全**: TypeScript 严格模式
+### 8.3 useDeviceConfig Composable 设计
+
+```typescript
+const {
+  configCR,        // 当前 CR 响应式对象
+  isLoading,       // 加载状态
+  isSyncing,       // 同步中状态
+  error,           // 错误信息
+  save,            // 创建/更新 CR
+  remove,          // 删除 CR
+  refresh          // 手动刷新
+} = useDeviceConfig(deviceIp, moduleName)
+```
+
+**核心功能：**
+- 自动建立 SSE Watch 连接
+- 响应式 CR 状态管理
+- 自动重连机制
+- 统一的 save/remove API
+
+### 8.4 核心实现原则
+1. **纯 CRD 接口**: 前端仅通过 CRD API 与后端交互，无其他私有接口
+2. **声明式优先**: 仅更新 Spec，不直接调用 RPC 接口
+3. **Watch 驱动**: 所有状态变化通过 SSE Watch 实时推送
+4. **无状态设计**: 前端不缓存业务数据，所有数据来自 CR Status
+5. **组件复用最大化**: 业务配置和原生配置 100% 复用同一套组件
+6. **动态渲染优先**: 所有表单基于 Schema 动态生成
+7. **类型安全**: TypeScript 严格模式，CR 结构完整类型定义
