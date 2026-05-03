@@ -4,49 +4,56 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
-// ConfigType represents the type of native configuration.
-type ConfigType string
+// ConfigPhase represents the reconciliation phase of a configuration.
+type ConfigPhase string
 
 const (
-	ConfigTypeYangXML ConfigType = "yang-xml"
-	ConfigTypeCLI     ConfigType = "cli"
-	ConfigTypeJSON    ConfigType = "json"
+	PhasePending  ConfigPhase = "Pending"
+	PhaseUpdating ConfigPhase = "Updating"
+	PhaseReady    ConfigPhase = "Ready"
+	PhaseFailed   ConfigPhase = "Failed"
 )
 
 // NativeDeviceConfigSpec defines the desired state of NativeDeviceConfig.
 type NativeDeviceConfigSpec struct {
 	// DeviceID is the identifier of the target device (format: ip:port)
 	// +kubebuilder:validation:Required
+	// +custom:label="设备 ID"
+	// +custom:group="基本信息"
 	DeviceID string `json:"deviceID"`
 
-	// ConfigType specifies the type of configuration content
-	// +kubebuilder:validation:Enum=yang-xml;cli;json
-	// +kubebuilder:default=yang-xml
-	ConfigType ConfigType `json:"configType,omitempty"`
-
-	// Content is the raw configuration content to be applied directly
+	// Module is the YANG module name (e.g., huawei-ifm, huawei-vlan)
 	// +kubebuilder:validation:Required
-	Content string `json:"content"`
+	// +custom:label="YANG 模块"
+	// +custom:readonly=true
+	// +custom:group="基本信息"
+	Module string `json:"module"`
 
-	// Encrypt indicates whether the content should be encrypted at rest
-	// +kubebuilder:default=false
-	Encrypt bool `json:"encrypt,omitempty"`
+	// Config contains the raw YANG configuration (JSON format)
+	// Schema is dynamically loaded based on Module from backend YANG library
+	// +kubebuilder:validation:Required
+	// +custom:label="配置内容"
+	// +custom:dynamic=true
+	Config map[string]interface{} `json:"config"`
 }
 
 // NativeDeviceConfigStatus defines the observed state of NativeDeviceConfig.
 type NativeDeviceConfigStatus struct {
-	// SyncState indicates the result of the last configuration sync
-	// +kubebuilder:validation:Enum=Success;Failed;Syncing;Timeout
-	SyncState SyncState `json:"syncState,omitempty"`
+	// Phase indicates the current reconciliation phase
+	// +kubebuilder:validation:Enum=Pending;Updating;Ready;Failed
+	// +custom:label="同步状态"
+	Phase ConfigPhase `json:"phase,omitempty"`
 
-	// SyncTime is the timestamp of the last successful synchronization
-	SyncTime metav1.Time `json:"syncTime,omitempty"`
+	// LastSyncTime is the timestamp of the last successful synchronization
+	// +custom:label="最后同步时间"
+	LastSyncTime metav1.Time `json:"lastSyncTime,omitempty"`
+
+	// ActualConfigChecksum is the checksum of the actual device configuration
+	ActualConfigChecksum string `json:"actualConfigChecksum,omitempty"`
 
 	// Error contains error details if the last sync failed
+	// +custom:label="错误信息"
 	Error string `json:"error,omitempty"`
-
-	// ActualConfigChecksum is the SHA256 checksum of the actual device configuration
-	ActualConfigChecksum string `json:"actualConfigChecksum,omitempty"`
 
 	// Conditions represents the latest available observations of the config's state
 	Conditions []metav1.Condition `json:"conditions,omitempty"`
@@ -55,7 +62,8 @@ type NativeDeviceConfigStatus struct {
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
 // +kubebuilder:printcolumn:name="DeviceID",type="string",JSONPath=".spec.deviceID"
-// +kubebuilder:printcolumn:name="State",type="string",JSONPath=".status.syncState"
+// +kubebuilder:printcolumn:name="Module",type="string",JSONPath=".spec.module"
+// +kubebuilder:printcolumn:name="Phase",type="string",JSONPath=".status.phase"
 // +kubebuilder:printcolumn:name="Age",type="date",JSONPath=".metadata.creationTimestamp"
 
 // NativeDeviceConfig is the Schema for the nativedeviceconfigs API.
