@@ -118,13 +118,13 @@ func TestDeviceActor_PrepareAll(t *testing.T) {
 	// For IFM module (using empty config for this test)
 	ifmTranslateCmd := &TranslateCmd{
 		BaseMessage: NewBaseMessageWithContext("ifm-translate", MsgTranslate, ctx),
-		Payload:     map[string]interface{}{"Name": "GigabitEthernet0/0/1"},
+		Payload:     map[string]interface{}{"Id": "GigabitEthernet0/0/1", "Name": "GigabitEthernet0/0/1"},
 		Operation:   OperationMerge,
 	}
 	promise, err = ifmActor.Send(ifmTranslateCmd)
 	require.NoError(t, err)
 	result = <-promise
-	require.True(t, result.Success)
+	require.True(t, result.Success, "IFM translate failed: %v", result.Error)
 
 	// Execute PrepareAll (dry run)
 	txState, err := deviceActor.PrepareAll(ctx, true)

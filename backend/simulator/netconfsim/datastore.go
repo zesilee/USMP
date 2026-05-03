@@ -422,8 +422,13 @@ func (d *Datastore) ExtractHuaweiVLANs() (map[uint16]string, error) {
 			continue
 		}
 
-		// We're looking for <HuaweiVlan_Vlan_Vlans_Vlan> which is the Go XML serialization format
-		if strings.Contains(start.Name.Local, "HuaweiVlan") && strings.Contains(start.Name.Local, "Vlan") {
+		// We're looking for either:
+		// 1. <HuaweiVlan_Vlan_Vlans_Vlan> - Go XML serialization format
+		// 2. <vlan> - Standard Huawei YANG XML format (from NETCONF client)
+		isVlanElement := (strings.Contains(start.Name.Local, "HuaweiVlan") && strings.Contains(start.Name.Local, "Vlan")) ||
+			strings.EqualFold(start.Name.Local, "vlan")
+
+		if isVlanElement {
 			var vlanID uint16
 			var name string
 
@@ -580,8 +585,13 @@ func (d *Datastore) ExtractHuaweiVLANsFull() (map[uint16]*HuaweiVlanTestData, er
 			continue
 		}
 
-		// We're looking for <HuaweiVlan_Vlan_Vlans_Vlan> which is the Go XML serialization format
-		if strings.Contains(start.Name.Local, "HuaweiVlan") && strings.Contains(start.Name.Local, "Vlan") {
+		// We're looking for either:
+		// 1. <HuaweiVlan_Vlan_Vlans_Vlan> - Go XML serialization format
+		// 2. <vlan> - Standard Huawei YANG XML format (from NETCONF client)
+		isVlanElement := (strings.Contains(start.Name.Local, "HuaweiVlan") && strings.Contains(start.Name.Local, "Vlan")) ||
+			strings.EqualFold(start.Name.Local, "vlan")
+
+		if isVlanElement {
 			vlan := &HuaweiVlanTestData{}
 
 			for {

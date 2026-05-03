@@ -44,6 +44,17 @@ func (t *ReflectTranslator[T]) AddCustomMapping(path string, fn FieldMappingFunc
 // Translate implements the Translator interface.
 func (t *ReflectTranslator[T]) Translate(payload map[string]interface{}, target T) error {
 	targetVal := reflect.ValueOf(target).Elem()
+
+	// Special case: if target is a "container" struct with a single map field
+	// (common pattern for YANG lists like VLAN.Vlans), create a new list entry
+	// and map the payload to it.
+	if targetVal.NumField() == 1 {
+		field := targetVal.Field(0)
+		if field.Kind() == reflect.Map {
+			return t.translateMapToListEntry(payload, targetVal, field)
+		}
+	}
+
 	return t.translateMap("", payload, targetVal)
 }
 
@@ -186,6 +197,36 @@ func (t *ReflectTranslator[T]) setFieldValue(target reflect.Value, fieldName str
 
 // convertAndSet converts the value to the field type and sets it.
 func (t *ReflectTranslator[T]) convertAndSet(field reflect.Value, value interface{}) error {
+	// Handle YANG enum types (custom int64 types)
+	if field.Kind() == reflect.Int64 && field.Type().Name() != "int64" {
+		// This is a custom int64 type (likely a YANG enum)
+		var intVal int64
+		switch v := value.(type) {
+		case int:
+			intVal = int64(v)
+		case int32:
+			intVal = int64(v)
+		case int64:
+			intVal = v
+		case float64:
+			intVal = int64(v)
+		default:
+			// Try to get the underlying value via reflection for enum types
+			val := reflect.ValueOf(value)
+			if val.Kind() == reflect.Int64 {
+				intVal = val.Int()
+			} else {
+				// Try to convert via string representation
+				str := fmt.Sprintf("%v", value)
+				if i, err := strconv.ParseInt(str, 10, 64); err == nil {
+					intVal = i
+				}
+			}
+		}
+		field.SetInt(intVal)
+		return nil
+	}
+
 	switch field.Kind() {
 	case reflect.String:
 		if s, ok := value.(string); ok {
@@ -265,6 +306,88 @@ func (t *ReflectTranslator[T]) setSliceField(field reflect.Value, values []inter
 	}
 
 	field.Set(slice)
+	return nil
+}
+
+// translateMapToListEntry handles the special case where target is a container
+// struct with a single map field (e.g., HuaweiVlan_Vlan_Vlans with Vlan map).
+// It creates a new entry in the map and maps the payload to it.
+func (t *ReflectTranslator[T]) translateMapToListEntry(
+	payload map[string]interface{},
+	targetVal reflect.Value,
+	mapField reflect.Value,
+) error {
+	// Initialize map if nil
+	if mapField.IsNil() {
+		mapField.Set(reflect.MakeMap(mapField.Type()))
+	}
+
+	// Get the value type of the map (e.g., *HuaweiVlan_Vlan_Vlans_Vlan)
+	elemType := mapField.Type().Elem()
+	if elemType.Kind() == reflect.Ptr {
+		elemType = elemType.Elem()
+	}
+
+	// Create a new instance of the list entry
+	newEntry := reflect.New(elemType)
+
+	// Map payload to the new entry
+	if err := t.translateMap("", payload, newEntry.Elem()); err != nil {
+		return err
+	}
+
+	// Find the key field value: first look for exact "Id" or "Name",
+	// then fallback to fields containing "id" or "name" in their name
+	keyVal := reflect.Value{}
+	keyFieldName := ""
+
+	// First pass: look for exact "Id" or "Name" fields (case-insensitive)
+	for i := 0; i < newEntry.Elem().NumField(); i++ {
+		fieldName := newEntry.Elem().Type().Field(i).Name
+		fieldNameLower := strings.ToLower(fieldName)
+		if (fieldNameLower == "id" || fieldNameLower == "name") &&
+			(newEntry.Elem().Field(i).Kind() == reflect.Ptr ||
+				newEntry.Elem().Field(i).Kind() == reflect.Uint16 ||
+				newEntry.Elem().Field(i).Kind() == reflect.Uint32 ||
+				newEntry.Elem().Field(i).Kind() == reflect.String) {
+			keyVal = newEntry.Elem().Field(i)
+			keyFieldName = fieldName
+			break
+		}
+	}
+
+	// Second pass: look for any field containing "id" or "name" if exact match not found
+	if !keyVal.IsValid() {
+		for i := 0; i < newEntry.Elem().NumField(); i++ {
+			fieldName := newEntry.Elem().Type().Field(i).Name
+			fieldNameLower := strings.ToLower(fieldName)
+			if (strings.Contains(fieldNameLower, "id") || strings.Contains(fieldNameLower, "name")) &&
+				(newEntry.Elem().Field(i).Kind() == reflect.Ptr ||
+					newEntry.Elem().Field(i).Kind() == reflect.Uint16 ||
+					newEntry.Elem().Field(i).Kind() == reflect.Uint32 ||
+					newEntry.Elem().Field(i).Kind() == reflect.String) {
+				keyVal = newEntry.Elem().Field(i)
+				keyFieldName = fieldName
+				break
+			}
+		}
+	}
+
+	if !keyVal.IsValid() {
+		return fmt.Errorf("could not find key field in list entry")
+	}
+
+	// Dereference if pointer
+	if keyVal.Kind() == reflect.Ptr {
+		if keyVal.IsNil() {
+			return fmt.Errorf("key field is nil - must provide %s in payload", keyFieldName)
+		}
+		keyVal = keyVal.Elem()
+	}
+
+	// Add the new entry to the map
+	mapField.SetMapIndex(keyVal, newEntry)
+
 	return nil
 }
 

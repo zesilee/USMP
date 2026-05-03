@@ -140,7 +140,7 @@ func (s *sshServer) handleSession(ch ssh.Channel) {
 			return
 		}
 
-		log.Printf("Got request: %.100s", msg)
+		log.Printf("Got request: %.500s", msg)
 		response := s.handleRequest(msg)
 		if response != "" {
 			response += "]]>]]>"
@@ -165,6 +165,8 @@ func (s *sshServer) handleRequest(msg string) string {
 		return s.handleEditConfig(msg, msgID)
 	case strings.Contains(msg, "<commit"):
 		return s.handleCommit(msg, msgID)
+	case strings.Contains(msg, "<discard-changes"):
+		return s.handleDiscardChanges(msg, msgID)
 	default:
 		// Return ok for unknown RPC
 		return okReply(msgID)
@@ -263,7 +265,10 @@ func (s *sshServer) handleEditConfig(msg, msgID string) string {
 	}
 
 	// Extract target - for most cases it's candidate
-	targetIsCandidate := strings.Contains(msg, `<target><candidate/>`)
+	// Handle both <candidate/> and <candidate></candidate> formats
+	hasCandidateTarget := strings.Contains(msg, "<candidate")
+	targetIsRunning := strings.Contains(msg, "<running")
+	targetIsCandidate := hasCandidateTarget && !targetIsRunning
 
 	// Extract the config content
 	// Logic:
@@ -338,6 +343,16 @@ func (s *sshServer) handleCommit(msg, msgID string) string {
 	if err != nil {
 		return errorReply(msgID, err.Error())
 	}
+	return okReply(msgID)
+}
+
+func (s *sshServer) handleDiscardChanges(msg, msgID string) string {
+	// Check for scenario error
+	if err, ok := s.scenario.ErrorOnRPC["discard-changes"]; ok {
+		return errorReply(msgID, err.Error())
+	}
+
+	s.datastore.DiscardCandidate()
 	return okReply(msgID)
 }
 
