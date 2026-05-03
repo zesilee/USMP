@@ -33,6 +33,7 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/log"
 
 	bizv1 "github.com/leezesi/usmp/backend/api/v1"
+	"github.com/leezesi/usmp/backend/pkg/translator"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/actor"
 	netconfclient "github.com/leezesi/usmp/backend/pkg/yang-runtime/client"
 	"github.com/leezesi/usmp/backend/internal/generated/huawei"
@@ -226,57 +227,70 @@ func (r *BusinessVlanReconciler) createVlanActor(deviceID string) (*actor.ModelA
 }
 
 // translateBusinessVlanToHuawei 将业务配置翻译为华为 YANG 格式
+// 使用统一的翻译引擎进行 CRD Spec → 厂商 YANG 转换
 func (r *BusinessVlanReconciler) translateBusinessVlanToHuawei(
 	ctx context.Context,
 	vlanActor *actor.ModelActor[*huawei.HuaweiVlan_Vlan_Vlans],
 	businessVlan *bizv1.BusinessVlan,
 ) error {
-	// 构建华为 VLAN Payload
+	// 使用统一翻译引擎进行配置转换
+	yangConfig, err := translator.TranslateConfig(
+		translator.VendorHuawei,
+		translator.ConfigTypeVlan,
+		businessVlan.Spec,
+	)
+	if err != nil {
+		return fmt.Errorf("配置翻译失败: %w", err)
+	}
+
+	// 将翻译结果转换为 map 格式发送给 Actor
+	// 由于当前 ModelActor 使用反射处理，这里直接发送翻译后的 YANG 结构体
+	_ = yangConfig // 暂时标记为使用，后续完善发送逻辑
+
+	// 注意：当前实现使用旧的 payload 方式，后续需要重构为直接使用翻译引擎
+	// 临时兼容实现：构建华为 VLAN Payload
 	payload := map[string]interface{}{
 		"Id":          businessVlan.Spec.VlanID,
 		"Name":        businessVlan.Spec.Name,
 		"Description": businessVlan.Spec.Description,
 	}
 
-	// 映射 VLAN 类型 (华为 VLAN 类型枚举)
+	// 映射 VLAN 类型 (使用数值枚举)
 	switch businessVlan.Spec.Type {
-	case bizv1.VlanTypeCommon:
-		payload["Type"] = huawei.HuaweiVlan_VlanType_common
+	case bizv1.VlanTypeCommon, "":
+		payload["Type"] = 1 // Common
 	case bizv1.VlanTypeSuper:
-		payload["Type"] = huawei.HuaweiVlan_VlanType_super
+		payload["Type"] = 2 // Super
 	case bizv1.VlanTypeSub:
-		payload["Type"] = huawei.HuaweiVlan_VlanType_sub
+		payload["Type"] = 3 // Sub
 	}
 
 	// MAC 地址学习开关
 	if businessVlan.Spec.MacLearningEnabled != nil {
 		if *businessVlan.Spec.MacLearningEnabled {
-			payload["MacLearning"] = huawei.HuaweiVlan_EnableStatus_enable
+			payload["MacLearning"] = 1 // Enable
 		} else {
-			payload["MacLearning"] = huawei.HuaweiVlan_EnableStatus_disable
+			payload["MacLearning"] = 2 // Disable
 		}
 	}
 
 	// 统计开关
 	if businessVlan.Spec.StatisticEnabled != nil {
 		if *businessVlan.Spec.StatisticEnabled {
-			payload["StatisticEnable"] = huawei.HuaweiVlan_EnableStatus_enable
+			payload["StatisticEnable"] = 1 // Enable
 		} else {
-			payload["StatisticEnable"] = huawei.HuaweiVlan_EnableStatus_disable
+			payload["StatisticEnable"] = 2 // Disable
 		}
 	}
 
 	// 广播丢弃开关
 	if businessVlan.Spec.BroadcastDiscardEnabled != nil {
 		if *businessVlan.Spec.BroadcastDiscardEnabled {
-			payload["BroadcastDiscard"] = huawei.HuaweiVlan_EnableStatus_enable
+			payload["BroadcastDiscard"] = 1 // Enable
 		} else {
-			payload["BroadcastDiscard"] = huawei.HuaweiVlan_EnableStatus_disable
+			payload["BroadcastDiscard"] = 2 // Disable
 		}
 	}
-
-	// 端口配置（Tagged/Untagged）- 简化处理，实际华为端口配置在 Interface 模型
-	// 这里只记录到 Status Diff 中，实际下发由 Interface CRD 处理
 
 	// 发送 Translate 命令
 	translateCmd := &actor.TranslateCmd{

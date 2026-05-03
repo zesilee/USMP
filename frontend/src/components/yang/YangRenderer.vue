@@ -1,5 +1,22 @@
 <template>
   <div class="yang-renderer">
+    <!-- 工具栏 - 仅顶层渲染显示 -->
+    <div v-if="!rootSchema && !loading" class="toolbar">
+      <div class="toolbar-left">
+        <span class="toolbar-title">{{ schemaDescription }}</span>
+      </div>
+      <div class="toolbar-right">
+        <el-button @click="loadData" :loading="loading">
+          <el-icon><Refresh /></el-icon>
+          刷新
+        </el-button>
+        <el-button type="primary" @click="handleSubmit" :loading="submitting">
+          <el-icon><Check /></el-icon>
+          下发配置
+        </el-button>
+      </div>
+    </div>
+
     <!-- Loading -->
     <div v-if="loading" class="loading-state">
       <el-icon class="is-loading"><Loading /></el-icon>
@@ -39,7 +56,7 @@
           </template>
 
           <!-- 简单字段：渲染表单 -->
-          <el-form v-else label-width="120px">
+          <el-form v-else label-width="180px">
             <YangField
               v-for="field in editableChildFields"
               :key="field.path"
@@ -67,7 +84,8 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted, watch } from 'vue'
-import { Loading } from '@element-plus/icons-vue'
+import { Loading, Refresh, Check } from '@element-plus/icons-vue'
+import { ElMessage } from 'element-plus'
 import YangPanel from './YangPanel.vue'
 import YangTable from './YangTable.vue'
 import YangField from './YangField.vue'
@@ -89,11 +107,16 @@ interface Props {
 const props = defineProps<Props>()
 
 const loading = ref(false)
+const submitting = ref(false)
 const error = ref('')
 const formData = ref<FormData>({})
 
 const schema = computed(() =>
   props.rootSchema || getSchemaByPath(props.yangPath)
+)
+
+const schemaDescription = computed(() =>
+  schema.value?.description || props.yangPath
 )
 
 // 可编辑的子节点
@@ -138,6 +161,24 @@ const loadData = async () => {
   }
 }
 
+const handleSubmit = async () => {
+  submitting.value = true
+  try {
+    const res = await setConfig(props.deviceIp, props.yangPath, formData.value)
+
+    if (res.data.success) {
+      ElMessage.success('配置下发成功')
+      await loadData()
+    } else {
+      ElMessage.error(res.data.message || '下发失败')
+    }
+  } catch (err: any) {
+    ElMessage.error(err.message || '下发失败')
+  } finally {
+    submitting.value = false
+  }
+}
+
 const initDefaultValues = () => {
   if (!schema.value) return
 
@@ -149,6 +190,12 @@ const initDefaultValues = () => {
   })
   formData.value = data
 }
+
+// 暴露方法给父组件
+defineExpose({
+  loadData,
+  formData
+})
 
 onMounted(() => {
   loadData()
@@ -162,6 +209,24 @@ watch(() => props.yangPath, () => {
 <style lang="scss" scoped>
 .yang-renderer {
   width: 100%;
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-xl);
+
+  .toolbar-title {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+  }
+
+  .toolbar-right {
+    display: flex;
+    gap: var(--spacing-md);
+  }
 }
 
 .loading-state, .error-state {

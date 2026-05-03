@@ -38,16 +38,8 @@
             <h2 class="page-title">{{ currentYangName }}</h2>
             <p class="page-description">设备: {{ currentDevice.ip }}</p>
           </div>
-          <VlanManager
-            v-if="currentYangPath === '/vlans'"
-            :device-ip="currentDevice.ip"
-          />
-          <InterfaceManager
-            v-else-if="currentYangPath === '/interfaces'"
-            :device-ip="currentDevice.ip"
-          />
+          <!-- 所有 YANG 路径统一使用 YangRenderer 渲染 - 零代码架构 -->
           <YangRenderer
-            v-else-if="currentYangPath === '/system:system'"
             :yang-path="currentYangPath"
             :device-ip="currentDevice.ip"
           />
@@ -63,8 +55,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import DeviceTree from './components/DeviceTree.vue'
-import VlanManager from './components/vlan/VlanManager.vue'
-import InterfaceManager from './components/interfaces/InterfaceManager.vue'
 import YangRenderer from './components/yang/YangRenderer.vue'
 import Dashboard from './components/Dashboard.vue'
 import type { DeviceInfo } from './types/yang'
