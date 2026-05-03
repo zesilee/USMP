@@ -1,0 +1,42 @@
+---
+apiVersion: biz.usmp.io/v1
+kind: BusinessSwitch
+metadata:
+  name: switch-demo-01
+  labels:
+    app: usmp
+    environment: demo
+spec:
+  deviceIP: 192.168.1.100
+  vendor: Huawei
+  model: CE6857
+  port: 830
+  credentials:
+    username: admin
+    password: Admin@123
+  enabled: true
+  syncInterval: 5
+  description: 数据中心核心交换机 01
+  location: 北京机房-A区-3机柜
+  owner: network-team
+---
+apiVersion: biz.usmp.io/v1
+kind: BusinessSwitch
+metadata:
+  name: switch-demo-02
+  labels:
+    app: usmp
+    environment: demo
+spec:
+  deviceIP: 192.168.1.101
+  vendor: Huawei
+  model: CE6857
+  port: 830
+  credentials:
+    username: admin
+    password: Admin@123
+  enabled: true
+  syncInterval: 5
+  description: 数据中心核心交换机 02
+  location: 北京机房-A区-3机柜
+  owner: network-team

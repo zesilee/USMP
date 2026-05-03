@@ -1,0 +1,184 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.14.0
+  name: businessswitches.biz.usmp.io
+spec:
+  group: biz.usmp.io
+  names:
+    kind: BusinessSwitch
+    listKind: BusinessSwitchList
+    plural: businessswitches
+    singular: businessswitch
+    shortNames:
+    - bs
+    - switches
+  scope: Namespaced
+  versions:
+  - name: v1
+    served: true
+    storage: true
+    subresources:
+      status: {}
+    schema:
+      openAPIV3Schema:
+        description: BusinessSwitch 是交换机设备配置的 Schema
+        type: object
+        properties:
+          apiVersion:
+            description: 'APIVersion defines the versioned schema of this representation
+              of an object. Servers should convert recognized schemas to the latest
+              internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+            type: string
+          kind:
+            description: 'Kind is a string value representing the REST resource this
+              object represents. Servers may infer this from the endpoint the client
+              submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: BusinessSwitchSpec 定义交换机的期望状态
+            type: object
+            required:
+            - deviceIP
+            properties:
+              deviceIP:
+                description: 设备 IP 地址（必填）
+                type: string
+                format: ipv4
+              vendor:
+                description: 厂商
+                type: string
+                enum:
+                - Huawei
+                - Cisco
+                - H3C
+                - Juniper
+                - Unknown
+                default: Huawei
+              model:
+                description: 设备型号
+                type: string
+              port:
+                description: NETCONF 端口，默认 830
+                type: integer
+                default: 830
+                minimum: 1
+                maximum: 65535
+              credentials:
+                description: 认证信息
+                type: object
+                properties:
+                  username:
+                    description: 用户名
+                    type: string
+                  password:
+                    description: 密码（明文，建议使用 Secret）
+                    type: string
+                  passwordSecretRef:
+                    description: Secret 引用格式: secret-name/key
+                    type: string
+              enabled:
+                description: 是否启用自动同步
+                type: boolean
+                default: true
+              syncInterval:
+                description: 自动同步间隔（分钟），默认 5
+                type: integer
+                default: 5
+                minimum: 1
+              description:
+                description: 设备描述
+                type: string
+              location:
+                description: 位置信息
+                type: string
+              owner:
+                description: 负责人
+                type: string
+          status:
+            description: BusinessSwitchStatus 定义交换机的实际状态
+            type: object
+            properties:
+              phase:
+                description: 同步阶段
+                type: string
+                enum:
+                - Pending
+                - Syncing
+                - Synced
+                - Failed
+                default: Pending
+              onlineStatus:
+                description: 设备在线状态
+                type: string
+                enum:
+                - Online
+                - Offline
+                - Unknown
+                default: Unknown
+              lastSeenTime:
+                description: 最后探活时间
+                type: string
+                format: date-time
+              lastSyncTime:
+                description: 最后同步时间
+                type: string
+                format: date-time
+              message:
+                description: 消息/错误信息
+                type: string
+              retryCount:
+                description: 重试次数
+                type: integer
+                minimum: 0
+              errorType:
+                description: 错误类型
+                type: string
+                enum:
+                - Temporary
+                - Permanent
+              hardware:
+                description: 硬件状态
+                type: object
+                properties:
+                  serialNumber:
+                    description: 序列号
+                    type: string
+                  hardwareVersion:
+                    description: 硬件版本
+                    type: string
+                  softwareVersion:
+                    description: 软件版本
+                    type: string
+                  uptime:
+                    description: 运行时间
+                    type: string
+                  cpuUsage:
+                    description: CPU 使用率
+                    type: integer
+                    minimum: 0
+                    maximum: 100
+                  memoryUsage:
+                    description: 内存使用率
+                    type: integer
+                    minimum: 0
+                    maximum: 100
+                  temperature:
+                    description: 温度
+                    type: integer
+              vlanCount:
+                description: VLAN 数量
+                type: integer
+                minimum: 0
+              interfaceCount:
+                description: 接口数量
+                type: integer
+                minimum: 0
+              onlineInterfaceCount:
+                description: 在线接口数量
+                type: integer
+                minimum: 0

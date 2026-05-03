@@ -30,6 +30,32 @@ rules:
   - patch
   - update
 - apiGroups:
+  - biz.usmp.io
+  resources:
+  - businessswitches
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - biz.usmp.io
+  resources:
+  - businessswitches/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - biz.usmp.io
+  resources:
+  - businessswitches/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
   - ""
   resources:
   - secrets
