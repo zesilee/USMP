@@ -15,6 +15,8 @@
       :model-value="modelValue"
       @update:model-value="$emit('update:modelValue', $event)"
       :disabled="field.readonly"
+      :min="field.minimum"
+      :max="field.maximum"
       controls-position="right"
       style="width: 100%"
     />
@@ -62,7 +64,7 @@
 </template>
 
 <script setup lang="ts">
-import type { Field } from '../../api/crd'
+import type { Field } from '../../utils/crdSchemaParser'
 
 const props = defineProps<{
   field: Field
