@@ -12,9 +12,8 @@ import (
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 
-	corev1 "k8s.io/api/core/v1"
+	k8scorev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/client-go/kubernetes/scheme"
 	"k8s.io/client-go/rest"
 	ctrl "sigs.k8s.io/controller-runtime"
@@ -23,7 +22,8 @@ import (
 	logf "sigs.k8s.io/controller-runtime/pkg/log"
 	"sigs.k8s.io/controller-runtime/pkg/log/zap"
 
-	bizv1 "github.com/leezesi/usmp/backend/api/v1"
+	bizv1 "github.com/leezesi/usmp/backend/api/biz/v1"
+	usmpcorev1 "github.com/leezesi/usmp/backend/api/core/v1"
 )
 
 var (
@@ -81,7 +81,7 @@ var _ = BeforeSuite(func() {
 	time.Sleep(2 * time.Second)
 
 	By("创建测试命名空间")
-	ns := &corev1.Namespace{
+	ns := &k8scorev1.Namespace{
 		ObjectMeta: metav1.ObjectMeta{
 			Name: "usmp-e2e-test",
 		},
@@ -90,18 +90,22 @@ var _ = BeforeSuite(func() {
 })
 
 var _ = AfterSuite(func() {
-	By("清理测试命名空间")
-	ns := &corev1.Namespace{
-		ObjectMeta: metav1.ObjectMeta{
-			Name: "usmp-e2e-test",
-		},
+	if k8sClient != nil {
+		By("清理测试命名空间")
+		ns := &k8scorev1.Namespace{
+			ObjectMeta: metav1.ObjectMeta{
+				Name: "usmp-e2e-test",
+			},
+		}
+		_ = k8sClient.Delete(ctx, ns)
 	}
-	_ = k8sClient.Delete(ctx, ns)
 
 	cancel()
-	By("停止测试环境")
-	err := testEnv.Stop()
-	Expect(err).NotTo(HaveOccurred())
+	if testEnv != nil {
+		By("停止测试环境")
+		err := testEnv.Stop()
+		Expect(err).NotTo(HaveOccurred())
+	}
 })
 
 // waitForCondition 等待资源达到指定状态
@@ -131,7 +135,7 @@ func getStatusPhase(obj client.Object) (string, bool) {
 		return string(o.Status.Phase), true
 	case *bizv1.BusinessRoute:
 		return string(o.Status.Phase), true
-	case *bizv1.NativeDeviceConfig:
+	case *usmpcorev1.NativeDeviceConfig:
 		return string(o.Status.Phase), true
 	}
 	return "", false

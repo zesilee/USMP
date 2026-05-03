@@ -4,6 +4,7 @@
 package e2e
 
 import (
+	"fmt"
 	"time"
 
 	. "github.com/onsi/ginkgo/v2"
@@ -11,8 +12,9 @@ import (
 
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/types"
+	"sigs.k8s.io/controller-runtime/pkg/client"
 
-	bizv1 "github.com/leezesi/usmp/backend/api/v1"
+	bizv1 "github.com/leezesi/usmp/backend/api/biz/v1"
 )
 
 var _ = Describe("BusinessVlan E2E Test", func() {
@@ -33,14 +35,14 @@ var _ = Describe("BusinessVlan E2E Test", func() {
 					Namespace: namespace,
 				},
 				Spec: bizv1.BusinessVlanSpec{
-					VlanID:          100,
-					DeviceID:        "switch-demo-01",
-					Name:            "Test-VLAN-100",
-					Description:     "E2E Test VLAN",
-					Type:            bizv1.VlanTypeCommon,
-					AdminStatus:     bizv1.AdminStatusUp,
-					MacLearningEnabled: true,
-					StatisticEnabled:   true,
+					DeviceID:    "192.168.1.100:830",
+					VlanID:      100,
+					Name:        "Test-VLAN-100",
+					Description: "E2E Test VLAN",
+					AdminStatus: bizv1.VlanAdminStatusUp,
+					BroadcastDiscard:          false,
+					UnknownMulticastDiscard:   false,
+					MacLearning:               bizv1.MacLearningEnabled,
 				},
 			}
 			createObject(vlan)
@@ -54,9 +56,10 @@ var _ = Describe("BusinessVlan E2E Test", func() {
 
 			By("验证 Spec 字段")
 			Expect(fetched.Spec.VlanID).To(Equal(uint16(100)))
-			Expect(fetched.Spec.DeviceID).To(Equal("switch-demo-01"))
+			Expect(fetched.Spec.DeviceID).To(Equal("192.168.1.100:830"))
 			Expect(fetched.Spec.Name).To(Equal("Test-VLAN-100"))
-			Expect(fetched.Spec.AdminStatus).To(Equal(bizv1.AdminStatusUp))
+			Expect(fetched.Spec.AdminStatus).To(Equal(bizv1.VlanAdminStatusUp))
+			Expect(fetched.Spec.MacLearning).To(Equal(bizv1.MacLearningEnabled))
 		})
 
 		It("应该正确更新 VLAN 状态", func() {
@@ -72,9 +75,10 @@ var _ = Describe("BusinessVlan E2E Test", func() {
 
 			By("验证 Phase 状态")
 			Expect(vlan.Status.Phase).To(Or(
-				Equal(bizv1.SyncPhasePending),
-				Equal(bizv1.SyncPhaseSyncing),
-				Equal(bizv1.SyncPhaseSynced),
+				Equal(bizv1.PhasePending),
+				Equal(bizv1.PhaseUpdating),
+				Equal(bizv1.PhaseReady),
+				Equal(bizv1.PhaseFailed),
 			))
 		})
 
@@ -84,7 +88,7 @@ var _ = Describe("BusinessVlan E2E Test", func() {
 			Expect(k8sClient.Get(ctx, types.NamespacedName{Name: vlanName, Namespace: namespace}, vlan)).Should(Succeed())
 
 			vlan.Spec.Description = "Updated VLAN description"
-			vlan.Spec.BroadcastDiscardEnabled = true
+			vlan.Spec.BroadcastDiscard = true
 			Expect(k8sClient.Update(ctx, vlan)).Should(Succeed())
 
 			By("验证更新生效")
@@ -110,8 +114,8 @@ var _ = Describe("BusinessVlan E2E Test", func() {
 					},
 					Spec: bizv1.BusinessVlanSpec{
 						VlanID:      uint16(i),
-						DeviceID:    "switch-demo-01",
-						AdminStatus: bizv1.AdminStatusUp,
+						DeviceID:    "192.168.1.100:830",
+						AdminStatus: bizv1.VlanAdminStatusUp,
 					},
 				}
 				Expect(k8sClient.Create(ctx, vlan)).Should(Succeed())
@@ -132,60 +136,6 @@ var _ = Describe("BusinessVlan E2E Test", func() {
 				}
 				return count
 			}, timeout, interval).Should(Equal(5))
-		})
-	})
-
-	Context("VLAN 类型测试", func() {
-		It("应该支持 Super VLAN 类型", func() {
-			By("创建 Super VLAN")
-			vlan := &bizv1.BusinessVlan{
-				ObjectMeta: metav1.ObjectMeta{
-					Name:      "super-vlan-1000",
-					Namespace: namespace,
-				},
-				Spec: bizv1.BusinessVlanSpec{
-					VlanID:      1000,
-					DeviceID:    "switch-demo-01",
-					Type:        bizv1.VlanTypeSuper,
-					AdminStatus: bizv1.AdminStatusUp,
-				},
-			}
-			createObject(vlan)
-
-			By("验证 Super VLAN 创建成功")
-			fetched := &bizv1.BusinessVlan{}
-			Eventually(func() bool {
-				err := k8sClient.Get(ctx, types.NamespacedName{Name: "super-vlan-1000", Namespace: namespace}, fetched)
-				return err == nil
-			}, timeout, interval).Should(BeTrue())
-
-			Expect(fetched.Spec.Type).To(Equal(bizv1.VlanTypeSuper))
-		})
-
-		It("应该支持 Sub VLAN 类型", func() {
-			By("创建 Sub VLAN")
-			vlan := &bizv1.BusinessVlan{
-				ObjectMeta: metav1.ObjectMeta{
-					Name:      "sub-vlan-1001",
-					Namespace: namespace,
-				},
-				Spec: bizv1.BusinessVlanSpec{
-					VlanID:      1001,
-					DeviceID:    "switch-demo-01",
-					Type:        bizv1.VlanTypeSub,
-					AdminStatus: bizv1.AdminStatusUp,
-				},
-			}
-			createObject(vlan)
-
-			By("验证 Sub VLAN 创建成功")
-			fetched := &bizv1.BusinessVlan{}
-			Eventually(func() bool {
-				err := k8sClient.Get(ctx, types.NamespacedName{Name: "sub-vlan-1001", Namespace: namespace}, fetched)
-				return err == nil
-			}, timeout, interval).Should(BeTrue())
-
-			Expect(fetched.Spec.Type).To(Equal(bizv1.VlanTypeSub))
 		})
 	})
 

@@ -1,4 +1,4 @@
-.PHONY: all build test test-unit test-integration test-e2e test-all clean help e2e-cluster e2e-deploy e2e-clean manifests-custom
+.PHONY: all build test test-unit test-integration test-e2e test-all clean help e2e-cluster e2e-deploy e2e-clean manifests-custom test-e2e-go test-e2e-go-verbose test-e2e-kind test-all-full e2e-kind-setup install-ginkgo install-envtest docker-build kind-load-image e2e-status e2e-logs e2e-simulator-logs kind-kubeconfig kind-export-kubeconfig e2e-test-info
 
 # 项目配置
 BINARY_NAME=usmp-backend
@@ -174,3 +174,81 @@ install-ginkgo:
 	@echo "Installing Ginkgo testing framework..."
 	go install github.com/onsi/ginkgo/v2/ginkgo@latest
 	@echo "Ginkgo installed successfully"
+
+## test-e2e-go: 使用 Ginkgo 运行 Go E2E 测试（envtest 环境，快速）
+test-e2e-go:
+	@echo "Running Go E2E tests with envtest..."
+	go test -tags=e2e -v ./test/e2e/... -ginkgo.v
+	@echo "Go E2E tests completed"
+
+## test-e2e-go-verbose: 运行详细的 Go E2E 测试
+test-e2e-go-verbose:
+	@echo "Running verbose Go E2E tests..."
+	go test -tags=e2e -v ./test/e2e/... -ginkgo.v -ginkgo.fail-fast
+	@echo "Go E2E tests completed"
+
+## test-e2e-kind: 使用 Kind 集群运行完整 E2E 测试（真实环境，较慢）
+test-e2e-kind:
+	@echo "Running full E2E tests with Kind cluster..."
+	@./test/e2e/run_e2e.sh
+	@echo "Kind E2E tests completed"
+
+## test-all-full: 运行所有测试（单元 + 集成 + E2E）
+test-all-full: test-unit test-integration test-e2e-go
+	@echo "All tests (unit, integration, E2E) completed successfully"
+
+## e2e-kind-setup: 只设置 Kind 测试集群（不运行测试）
+e2e-kind-setup: e2e-cluster e2e-deploy
+	@echo "Kind E2E cluster setup completed"
+	@echo "Run 'make e2e-status' to check cluster status"
+	@echo "Run 'make test-e2e-kind' to run tests"
+
+## kind-kubeconfig: 获取 Kind 集群的 kubeconfig
+kind-kubeconfig:
+	@echo "Kind cluster kubeconfig:"
+	@kind get kubeconfig --name usmp-e2e
+
+## kind-export-kubeconfig: 导出 Kind 集群 kubeconfig 到文件
+kind-export-kubeconfig:
+	@echo "Exporting Kind kubeconfig to ~/.kube/usmp-e2e-config..."
+	@kind get kubeconfig --name usmp-e2e > ~/.kube/usmp-e2e-config
+	@echo "Usage: export KUBECONFIG=~/.kube/usmp-e2e-config"
+
+## install-envtest: 安装 envtest 二进制文件（运行 Go E2E 测试需要）
+install-envtest:
+	@echo "Installing envtest tools..."
+	go install sigs.k8s.io/controller-runtime/tools/setup-envtest@latest
+	setup-envtest use 1.29.x! --bin-dir ./bin/k8s
+	@echo "envtest installed successfully"
+
+## e2e-test-info: 显示 E2E 测试说明
+e2e-test-info:
+	@echo "=== USMP E2E Testing Guide ==="
+	@echo ""
+	@echo "Two types of E2E tests are available:"
+	@echo ""
+	@echo "1. Go E2E Tests (envtest - fast, in-memory cluster):"
+	@echo "   make test-e2e-go          # Run all Go E2E tests"
+	@echo "   make test-e2e-go-verbose  # Run with verbose output"
+	@echo ""
+	@echo "   Requirements:"
+	@echo "   - Run 'make install-envtest' first to install envtest binaries"
+	@echo ""
+	@echo "2. Kind Cluster E2E Tests (full Kubernetes cluster):"
+	@echo "   make test-e2e-kind        # Run full E2E test with Kind cluster"
+	@echo "   make e2e-kind-setup       # Setup Kind cluster without running tests"
+	@echo "   make e2e-clean            # Delete Kind cluster"
+	@echo ""
+	@echo "   Requirements:"
+	@echo "   - kind (installed)"
+	@echo "   - docker (installed)"
+	@echo "   - kubectl (installed)"
+	@echo ""
+	@echo "Debug Commands:"
+	@echo "   make e2e-status           # Show cluster status"
+	@echo "   make e2e-logs             # View controller logs"
+	@echo "   make e2e-simulator-logs   # View NETCONF simulator logs"
+	@echo ""
+	@echo "Kind Kubeconfig:"
+	@echo "   export KUBECONFIG=\$$(kind get kubeconfig --name usmp-e2e)"
+	@echo "   OR use: kubectl --context=kind-usmp-e2e"
