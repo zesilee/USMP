@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: netconf-simulator
+  namespace: usmp-system
+  labels:
+    app: netconf-simulator
+spec:
+  type: NodePort
+  selector:
+    app: netconf-simulator
+  ports:
+  - name: netconf
+    port: 830
+    targetPort: 830
+    nodePort: 30830
+    protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: netconf-simulator-internal
+  namespace: usmp-system
+spec:
+  type: ClusterIP
+  selector:
+    app: netconf-simulator
+  ports:
+  - name: netconf
+    port: 830
+    targetPort: 830
+    protocol: TCP

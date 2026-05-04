@@ -4,6 +4,9 @@ kind: Kustomization
 namespace: usmp-system
 
 resources:
+  # CRD Definitions
+  - ../../config/crd/bases
+  # Namespace
   - namespace.yaml
   # Controller
   - controller/service_account.yaml
@@ -18,6 +21,10 @@ resources:
   - frontend/configmap.yaml
   - frontend/deployment.yaml
   - frontend/service.yaml
+  # NETCONF Simulator
+  - netconf-simulator/configmap.yaml
+  - netconf-simulator/deployment.yaml
+  - netconf-simulator/service.yaml
 
 commonLabels:
   app: usmp
