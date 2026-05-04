@@ -1,0 +1,19 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: usmp-frontend-role
+rules:
+# 业务 CRD 完整读写权限
+- apiGroups: ["biz.usmp.io"]
+  resources: ["businessvlans", "businessinterfaces", "businessroutes", "businessswitches"]
+  verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+
+# 原生配置 CRD 完整读写权限
+- apiGroups: ["core.usmp.io"]
+  resources: ["nativedeviceconfigs"]
+  verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+
+# CRD 定义读取权限（用于 Schema 解析）
+- apiGroups: ["apiextensions.k8s.io"]
+  resources: ["customresourcedefinitions"]
+  verbs: ["get", "list", "watch"]

@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: usmp-frontend-config
+  namespace: usmp-system
+data:
+  K8S_API_SERVER: "https://kubernetes.default.svc"
+  K8S_NAMESPACE: "usmp-system"

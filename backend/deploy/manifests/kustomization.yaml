@@ -11,6 +11,13 @@ resources:
   - controller/role_binding.yaml
   - controller/deployment.yaml
   - controller/service.yaml
+  # Frontend
+  - frontend/service_account.yaml
+  - frontend/cluster_role.yaml
+  - frontend/cluster_role_binding.yaml
+  - frontend/configmap.yaml
+  - frontend/deployment.yaml
+  - frontend/service.yaml
 
 commonLabels:
   app: usmp
