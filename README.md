@@ -98,9 +98,31 @@ npm install
 npm run dev
 ```
 
-### Kind 集群一键部署（推荐）
+### Kind 集群一键部署（推荐）⭐
 
-快速在本地 Kubernetes 集群中部署完整的 USMP 环境：
+推荐使用 `make deploy` 一键部署，包含完整的服务状态校验：
+
+```bash
+# ✨ 一键部署（推荐）
+cd backend
+make deploy        # 自动完成：环境检查 -> 创建集群 -> 加载镜像 -> 部署 -> 服务校验
+
+# 📊 独立校验部署状态
+make kind-verify   # 20+ 项检查：集群/Namespace/CRD/Controller/前端/模拟器/RBAC
+
+# 📋 其他常用命令
+make kind-status   # 查看集群状态
+make kind-logs     # 查看 Controller 日志
+make kind-clean    # 清理集群
+
+# 🎯 访问地址
+# 前端界面: http://localhost:30081
+# 后端 API: http://localhost:30080
+# NETCONF 模拟器: localhost:30830
+```
+
+<details>
+<summary>🔧 手动分步部署（高级用户）</summary>
 
 ```bash
 # 1. 构建镜像
@@ -108,25 +130,20 @@ cd backend
 make docker-build
 make docker-build-frontend
 
-# 2. 一键创建集群并部署
-make kind-up
+# 2. 创建 Kind 集群
+make kind-cluster
 
-# 3. 查看集群状态
-make kind-status
+# 3. 加载镜像到集群
+make kind-load-images
 
-# 4. 查看日志
-make kind-logs           # Controller 日志
-make kind-frontend-logs  # 前端日志
-make kind-simulator-logs # 模拟器日志
+# 4. 部署组件
+make kind-deploy
 
-# 5. 访问服务
-# 前端界面: http://localhost:30081
-# 后端 API: http://localhost:30080
-# NETCONF 模拟器: localhost:30830
-
-# 6. 清理集群
-make kind-clean
+# 5. 校验服务状态
+make kind-verify
 ```
+
+</details>
 
 ## 📁 项目结构
 
