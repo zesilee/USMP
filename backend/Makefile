@@ -261,6 +261,19 @@ e2e-test-info:
 # Kind 开发环境相关命令
 # =========================
 
+## deploy: 一键部署并校验服务（推荐使用）
+deploy: one-click-deploy
+
+## one-click-deploy: 一键部署完整环境，包含前置检查、部署和校验（推荐使用）
+one-click-deploy:
+	@echo "🚀 开始 USMP Kind 一键部署..."
+	@./deploy/scripts/one-click-deploy.sh
+
+## kind-verify: 校验已部署服务的状态
+kind-verify:
+	@echo "🔍 开始校验 USMP 部署状态..."
+	@./deploy/scripts/verify-deployment.sh
+
 kind-up: kind-cluster kind-load-images kind-deploy ## 创建集群并部署完整开发环境
 	@echo ""
 	@echo "✅ USMP Kind 开发环境部署完成！"
