@@ -98,6 +98,36 @@ npm install
 npm run dev
 ```
 
+### Kind 集群一键部署（推荐）
+
+快速在本地 Kubernetes 集群中部署完整的 USMP 环境：
+
+```bash
+# 1. 构建镜像
+cd backend
+make docker-build
+make docker-build-frontend
+
+# 2. 一键创建集群并部署
+make kind-up
+
+# 3. 查看集群状态
+make kind-status
+
+# 4. 查看日志
+make kind-logs           # Controller 日志
+make kind-frontend-logs  # 前端日志
+make kind-simulator-logs # 模拟器日志
+
+# 5. 访问服务
+# 前端界面: http://localhost:30081
+# 后端 API: http://localhost:30080
+# NETCONF 模拟器: localhost:30830
+
+# 6. 清理集群
+make kind-clean
+```
+
 ## 📁 项目结构
 
 ```
