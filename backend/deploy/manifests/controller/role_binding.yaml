@@ -1,0 +1,12 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: usmp-controller-rolebinding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: usmp-controller-role
+subjects:
+- kind: ServiceAccount
+  name: usmp-controller
+  namespace: usmp-system

@@ -5,6 +5,12 @@ namespace: usmp-system
 
 resources:
   - namespace.yaml
+  # Controller
+  - controller/service_account.yaml
+  - controller/role.yaml
+  - controller/role_binding.yaml
+  - controller/deployment.yaml
+  - controller/service.yaml
 
 commonLabels:
   app: usmp

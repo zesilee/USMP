@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: usmp-controller
+  namespace: usmp-system
+spec:
+  type: NodePort
+  selector:
+    control-plane: controller-manager
+  ports:
+  - name: api
+    port: 8080
+    targetPort: 8080
+    nodePort: 30080
+    protocol: TCP
+  - name: health
+    port: 8081
+    targetPort: 8081
+    protocol: TCP
