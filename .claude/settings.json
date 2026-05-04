@@ -1,4 +1,10 @@
 {
+  "plugins": ["superpowers"],
+  "superpowers": {
+    "autoPlan": true,
+    "autoTest": true,
+    "autoReview": true
+  },
   "permissions": {
     "allow": [
       "Bash(git status *)",

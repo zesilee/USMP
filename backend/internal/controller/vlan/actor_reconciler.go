@@ -153,14 +153,14 @@ func (r *ActorBasedVlanReconciler) updateStatus(
 	status metav1.ConditionStatus,
 	reason, message string,
 ) (ctrl.Result, error) {
-	// Map condition status to SyncState
+	// Map condition status to Phase
 	switch status {
 	case metav1.ConditionTrue:
-		vlan.Status.SyncState = bizv1.SyncStateSuccess
+		vlan.Status.Phase = bizv1.PhaseReady
 	case metav1.ConditionFalse:
-		vlan.Status.SyncState = bizv1.SyncStateFailed
+		vlan.Status.Phase = bizv1.PhaseFailed
 	case metav1.ConditionUnknown:
-		vlan.Status.SyncState = bizv1.SyncStateSyncing
+		vlan.Status.Phase = bizv1.PhaseUpdating
 	}
 
 	// Update conditions
