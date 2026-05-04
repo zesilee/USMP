@@ -1,4 +1,4 @@
-.PHONY: all build test test-unit test-integration test-e2e test-all clean help e2e-cluster e2e-deploy e2e-clean manifests-custom test-e2e-go test-e2e-go-verbose test-e2e-kind test-all-full e2e-kind-setup install-ginkgo install-envtest docker-build kind-load-image e2e-status e2e-logs e2e-simulator-logs kind-kubeconfig kind-export-kubeconfig e2e-test-info
+.PHONY: all build test test-unit test-integration test-e2e test-all clean help e2e-cluster e2e-deploy e2e-clean manifests-custom test-e2e-go test-e2e-go-verbose test-e2e-kind test-all-full e2e-kind-setup install-ginkgo install-envtest docker-build docker-build-dev kind-load-image e2e-status e2e-logs e2e-simulator-logs kind-kubeconfig kind-export-kubeconfig e2e-test-info kind-up kind-cluster kind-delete kind-clean kind-deploy kind-redeploy kind-status kind-logs kind-frontend-logs kind-simulator-logs kind-load-images docker-build-frontend kind-shell kind-port-forward
 
 # 项目配置
 BINARY_NAME=usmp-backend
@@ -9,7 +9,6 @@ GO=go
 GOFLAGS=-v
 
 # CRD 注解注入
-.PHONY: manifests-custom
 manifests-custom: ## Inject custom annotations into CRDs
 	@echo "Injecting custom annotations into CRDs..."
 	@cd hack/crd-injector && $(GO) run main.go ../../api ../../config/crd/bases
@@ -80,7 +79,7 @@ clean:
 help:
 	@echo "USMP Backend - Available targets:"
 	@echo ""
-	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z_-]+:.*?## / {printf "  \033[36m%-15s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST) | sort
+	@awk 'BEGIN {FS = ":.*##"} /^[a-zA-Z_-]+:.*##/ {split($$1, a, ":"); printf "  \033[36m%-15s\033[0m %s\n", a[1], $$2}' $(MAKEFILE_LIST) | sort
 
 ## integration-setup: 集成测试环境准备
 integration-setup: build
@@ -169,6 +168,11 @@ kind-load-image:
 	kind load docker-image usmp-controller:e2e-test --name usmp-e2e
 	@echo "Docker image loaded to Kind cluster"
 
+docker-build-dev: ## 构建控制器开发环境 Docker 镜像
+	@echo "Building development Docker image..."
+	docker build -t usmp-controller:latest -f Dockerfile .
+	@echo "Development Docker image built successfully"
+
 ## install-ginkgo: 安装 Ginkgo 测试框架
 install-ginkgo:
 	@echo "Installing Ginkgo testing framework..."
@@ -252,3 +256,92 @@ e2e-test-info:
 	@echo "Kind Kubeconfig:"
 	@echo "   export KUBECONFIG=\$$(kind get kubeconfig --name usmp-e2e)"
 	@echo "   OR use: kubectl --context=kind-usmp-e2e"
+
+# =========================
+# Kind 开发环境相关命令
+# =========================
+
+kind-up: kind-cluster kind-load-images kind-deploy ## 创建集群并部署完整开发环境
+	@echo ""
+	@echo "✅ USMP Kind 开发环境部署完成！"
+	@echo ""
+	@echo "访问地址："
+	@echo "  前端界面: http://localhost:30081"
+	@echo "  后端 API: http://localhost:30080"
+	@echo "  NETCONF 模拟器: localhost:30830"
+	@echo ""
+	@echo "查看状态: make kind-status"
+	@echo "查看日志: make kind-logs"
+	@echo "清理环境: make kind-clean"
+
+kind-cluster: ## 创建 Kind 集群
+	@echo "Creating Kind cluster for USMP development..."
+	kind create cluster --name usmp-dev --config deploy/kind-cluster.yaml
+	@echo "Kind cluster created successfully"
+
+kind-delete: kind-clean ## 删除 Kind 集群 (别名)
+
+kind-clean: ## 删除 Kind 集群
+	@echo "Cleaning up Kind cluster..."
+	kind delete cluster --name usmp-dev
+	@echo "Kind cluster cleaned up"
+
+kind-deploy: ## 部署/更新所有组件到 Kind 集群
+	@echo "Deploying resources to Kind cluster..."
+	kubectl --context=kind-usmp-dev apply -k deploy/manifests/
+	@echo "Waiting for pods to be ready..."
+	kubectl --context=kind-usmp-dev -n usmp-system wait --for=condition=Ready pods --all --timeout=120s || true
+	@echo "Deployment completed"
+
+kind-redeploy: ## 重新部署（先删除再应用）
+	@echo "Redeploying all resources..."
+	kubectl --context=kind-usmp-dev delete -k deploy/manifests/ || true
+	kubectl --context=kind-usmp-dev apply -k deploy/manifests/
+	@echo "Redeployment completed"
+
+kind-status: ## 查看 Kind 集群状态
+	@echo "=== USMP Kind Development Cluster Status ==="
+	@echo ""
+	@echo "Cluster info:"
+	@kubectl --context=kind-usmp-dev cluster-info 2>/dev/null || echo "Cluster not found or not accessible"
+	@echo ""
+	@echo "Namespace usmp-system resources:"
+	@kubectl --context=kind-usmp-dev -n usmp-system get all 2>/dev/null || echo "Namespace usmp-system not found"
+	@echo ""
+	@echo "CRD Instances:"
+	@kubectl --context=kind-usmp-dev -n usmp-system get businessswitches,businessvlans,businessinterfaces,businessroutes,nativedeviceconfigs 2>/dev/null || echo "No CRD instances found"
+
+kind-logs: ## 查看 Controller 日志
+	@echo "Controller manager logs:"
+	@kubectl --context=kind-usmp-dev -n usmp-system logs -l control-plane=controller-manager --tail=50 -f 2>/dev/null || echo "No controller pod found or log error"
+
+kind-frontend-logs: ## 查看前端日志
+	@echo "Frontend logs:"
+	@kubectl --context=kind-usmp-dev -n usmp-system logs -l app=usmp-frontend --tail=50 -f 2>/dev/null || echo "No frontend pod found or log error"
+
+kind-simulator-logs: ## 查看模拟器日志
+	@echo "NETCONF Simulator logs:"
+	@kubectl --context=kind-usmp-dev -n usmp-system logs -l app=netconf-simulator --tail=50 -f 2>/dev/null || echo "No simulator pod found or log error"
+
+kind-load-images: docker-build-dev docker-build-frontend ## 加载本地镜像到 Kind 集群
+	@echo "Loading Docker images to Kind cluster..."
+	kind load docker-image usmp-controller:latest --name usmp-dev
+	kind load docker-image usmp-frontend:latest --name usmp-dev
+	@echo "Docker images loaded to Kind cluster"
+
+docker-build-frontend: ## 构建前端 Docker 镜像
+	@echo "Building frontend Docker image..."
+	cd ../frontend && docker build -t usmp-frontend:latest .
+	@echo "Frontend Docker image built successfully"
+
+kind-shell: ## 在 Controller Pod 中打开 Shell
+	@echo "Opening shell in controller pod..."
+	@kubectl --context=kind-usmp-dev -n usmp-system exec -it deployment/usmp-controller -- sh 2>/dev/null || echo "Failed to open shell"
+
+kind-port-forward: ## 端口转发（用于本地调试）
+	@echo "Starting port forwarding..."
+	@echo "API: 8080 -> 30080, Frontend: 30081 -> 30081"
+	kubectl --context=kind-usmp-dev -n usmp-system port-forward service/usmp-controller 8080:8080 &
+	kubectl --context=kind-usmp-dev -n usmp-system port-forward service/usmp-frontend 30081:80 &
+	@echo "Port forwarding started. Press Ctrl+C to stop."
+	wait
