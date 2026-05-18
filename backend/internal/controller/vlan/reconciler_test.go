@@ -18,7 +18,7 @@ type MockClient struct {
 }
 
 func (m *MockClient) Get(ctx context.Context, path string, opts ...client.GetOption) (*client.GetResult, error) {
-	args := m.Called(ctx, path, opts)
+	args := m.Called(ctx, path)
 	if res, ok := args.Get(0).(*client.GetResult); ok {
 		return res, args.Error(1)
 	}
@@ -26,7 +26,7 @@ func (m *MockClient) Get(ctx context.Context, path string, opts ...client.GetOpt
 }
 
 func (m *MockClient) Set(ctx context.Context, changes []client.Change, opts ...client.SetOption) (*client.SetResult, error) {
-	args := m.Called(ctx, changes, opts)
+	args := m.Called(ctx, changes)
 	if res, ok := args.Get(0).(*client.SetResult); ok {
 		return res, args.Error(1)
 	}
@@ -48,17 +48,20 @@ func (m *MockClient) IsConnected() bool {
 	return args.Bool(0)
 }
 
+func (m *MockClient) DiscardCandidate(ctx context.Context) error {
+	args := m.Called(ctx)
+	return args.Error(0)
+}
+
 // MockClientPool is a mock implementation of client.ClientPool
 type MockClientPool struct {
 	mock.Mock
+	Client client.Client
+	Err    error
 }
 
 func (m *MockClientPool) Get(info client.DeviceConnectionInfo) (client.Client, error) {
-	args := m.Called(info)
-	if c, ok := args.Get(0).(client.Client); ok {
-		return c, args.Error(1)
-	}
-	return nil, args.Error(1)
+	return m.Client, m.Err
 }
 
 func (m *MockClientPool) Release(ip string) {
@@ -98,12 +101,13 @@ func TestDeviceClient_Get_Success(t *testing.T) {
 	assert.NoError(t, err)
 
 	mockClient := new(MockClient)
-	mockClient.On("Get", ctx, "/vlan:vlan/vlan:vlans", mock.Anything).Return(&client.GetResult{
+	mockClient.On("Get", ctx, "/vlan:vlan/vlan:vlans").Return(&client.GetResult{
 		Data: jsonBytes,
 	}, nil)
 
 	mockPool := new(MockClientPool)
-	mockPool.On("Get", client.DeviceConnectionInfo{IP: deviceID, Protocol: client.ProtocolAUTO}).Return(mockClient, nil)
+	mockPool.Client = mockClient
+	mockPool.Err = nil
 
 	dc := &deviceClient{
 		clientPool: mockPool,
@@ -135,7 +139,8 @@ func TestDeviceClient_Get_ClientPoolGetError(t *testing.T) {
 	deviceID := "192.168.1.1"
 
 	mockPool := new(MockClientPool)
-	mockPool.On("Get", client.DeviceConnectionInfo{IP: deviceID, Protocol: client.ProtocolAUTO}).Return(nil, assert.AnError)
+	mockPool.Client = nil
+	mockPool.Err = assert.AnError
 
 	dc := &deviceClient{
 		clientPool: mockPool,
@@ -158,10 +163,11 @@ func TestDeviceClient_Get_ClientGetError(t *testing.T) {
 	deviceID := "192.168.1.1"
 
 	mockClient := new(MockClient)
-	mockClient.On("Get", ctx, "/vlan:vlan/vlan:vlans", mock.Anything).Return(nil, assert.AnError)
+	mockClient.On("Get", ctx, "/vlan:vlan/vlan:vlans").Return(nil, assert.AnError)
 
 	mockPool := new(MockClientPool)
-	mockPool.On("Get", client.DeviceConnectionInfo{IP: deviceID, Protocol: client.ProtocolAUTO}).Return(mockClient, nil)
+	mockPool.Client = mockClient
+	mockPool.Err = nil
 
 	dc := &deviceClient{
 		clientPool: mockPool,
@@ -187,12 +193,13 @@ func TestDeviceClient_Get_InvalidJSON(t *testing.T) {
 	invalidJSON := []byte(`{"invalid": json}`)
 
 	mockClient := new(MockClient)
-	mockClient.On("Get", ctx, "/vlan:vlan/vlan:vlans", mock.Anything).Return(&client.GetResult{
+	mockClient.On("Get", ctx, "/vlan:vlan/vlan:vlans").Return(&client.GetResult{
 		Data: invalidJSON,
 	}, nil)
 
 	mockPool := new(MockClientPool)
-	mockPool.On("Get", client.DeviceConnectionInfo{IP: deviceID, Protocol: client.ProtocolAUTO}).Return(mockClient, nil)
+	mockPool.Client = mockClient
+	mockPool.Err = nil
 
 	dc := &deviceClient{
 		clientPool: mockPool,
@@ -227,12 +234,13 @@ func TestDeviceClient_Get_AlreadyUnmarshaledDeviceRoot(t *testing.T) {
 	}
 
 	mockClient := new(MockClient)
-	mockClient.On("Get", ctx, "/vlan:vlan/vlan:vlans", mock.Anything).Return(&client.GetResult{
+	mockClient.On("Get", ctx, "/vlan:vlan/vlan:vlans").Return(&client.GetResult{
 		Data: deviceRoot,
 	}, nil)
 
 	mockPool := new(MockClientPool)
-	mockPool.On("Get", client.DeviceConnectionInfo{IP: deviceID, Protocol: client.ProtocolAUTO}).Return(mockClient, nil)
+	mockPool.Client = mockClient
+	mockPool.Err = nil
 
 	dc := &deviceClient{
 		clientPool: mockPool,
@@ -271,7 +279,8 @@ func TestDeviceClient_Set_Success(t *testing.T) {
 	}, nil)
 
 	mockPool := new(MockClientPool)
-	mockPool.On("Get", client.DeviceConnectionInfo{IP: deviceID, Protocol: client.ProtocolAUTO}).Return(mockClient, nil)
+	mockPool.Client = mockClient
+	mockPool.Err = nil
 
 	dc := &deviceClient{
 		clientPool: mockPool,
@@ -302,7 +311,8 @@ func TestDeviceClient_Set_ClientPoolGetError(t *testing.T) {
 	changes := []reconcile.Change{}
 
 	mockPool := new(MockClientPool)
-	mockPool.On("Get", client.DeviceConnectionInfo{IP: deviceID, Protocol: client.ProtocolAUTO}).Return(nil, assert.AnError)
+	mockPool.Client = nil
+	mockPool.Err = assert.AnError
 
 	dc := &deviceClient{
 		clientPool: mockPool,
@@ -350,7 +360,7 @@ func TestVlanReconciler_FullReconcile(t *testing.T) {
 	assert.NoError(t, err)
 
 	mockClient := new(MockClient)
-	mockClient.On("Get", ctx, "/vlan:vlan/vlan:vlans", mock.Anything).Return(&client.GetResult{
+	mockClient.On("Get", ctx, "/vlan:vlan/vlan:vlans").Return(&client.GetResult{
 		Data: jsonActual,
 	}, nil)
 	mockClient.On("Set", ctx, mock.Anything, mock.Anything).Return(&client.SetResult{
@@ -358,7 +368,8 @@ func TestVlanReconciler_FullReconcile(t *testing.T) {
 	}, nil)
 
 	mockPool := new(MockClientPool)
-	mockPool.On("Get", client.DeviceConnectionInfo{IP: deviceID, Protocol: client.ProtocolAUTO}).Return(mockClient, nil)
+	mockPool.Client = mockClient
+	mockPool.Err = nil
 
 	r := New(mockCS, mockPool)
 
@@ -427,12 +438,13 @@ func TestVlanReconciler_NoDiff(t *testing.T) {
 	mockCS.On("Get", deviceID, "/vlan:vlan/vlan:vlans").Return(desired, nil)
 
 	mockClient := new(MockClient)
-	mockClient.On("Get", ctx, "/vlan:vlan/vlan:vlans", mock.Anything).Return(&client.GetResult{
+	mockClient.On("Get", ctx, "/vlan:vlan/vlan:vlans").Return(&client.GetResult{
 		Data: jsonBytes,
 	}, nil)
 
 	mockPool := new(MockClientPool)
-	mockPool.On("Get", client.DeviceConnectionInfo{IP: deviceID, Protocol: client.ProtocolAUTO}).Return(mockClient, nil)
+	mockPool.Client = mockClient
+	mockPool.Err = nil
 
 	r := New(mockCS, mockPool)
 
