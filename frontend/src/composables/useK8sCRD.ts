@@ -1,5 +1,4 @@
 import { ref, onMounted, onUnmounted } from 'vue'
-import { KubeConfig, CustomObjectsApi } from '@kubernetes/client-node'
 
 export type ConfigPhase = 'Pending' | 'Updating' | 'Ready' | 'Failed'
 
@@ -25,33 +24,131 @@ export interface UseK8sCRDOptions {
   autoWatch?: boolean
   autoList?: boolean
   namespace?: string
+  baseUrl?: string
+}
+
+// Simple K8s API client using browser native fetch
+class K8sClient {
+  private baseUrl: string
+  private headers: Record<string, string>
+
+  constructor(baseUrl: string = '') {
+    this.baseUrl = baseUrl
+    this.headers = {
+      'Content-Type': 'application/json',
+    }
+  }
+
+  // In a browser environment, we rely on:
+  // 1. kubectl proxy running for development
+  // 2. ServiceAccount + kube-rbac-proxy for in-cluster
+  // 3. Backend API proxy endpoint
+  private async request<T>(path: string, options: RequestInit = {}): Promise<T> {
+    const url = `${this.baseUrl}${path}`
+    const response = await fetch(url, {
+      ...options,
+      headers: {
+        ...this.headers,
+        ...options.headers,
+      },
+    })
+
+    if (!response.ok) {
+      throw new Error(`K8s API Error: ${response.status} ${response.statusText}`)
+    }
+
+    return response.json()
+  }
+
+  // List custom objects
+  async listCustomObject(group: string, version: string, plural: string, namespace?: string): Promise<{ items: CRDItem[] }> {
+    const path = namespace
+      ? `/apis/${group}/${version}/namespaces/${namespace}/${plural}`
+      : `/apis/${group}/${version}/${plural}`
+    return this.request(path)
+  }
+
+  // Get single custom object
+  async getCustomObject(group: string, version: string, plural: string, name: string, namespace?: string): Promise<CRDItem> {
+    const path = namespace
+      ? `/apis/${group}/${version}/namespaces/${namespace}/${plural}/${name}`
+      : `/apis/${group}/${version}/${plural}/${name}`
+    return this.request(path)
+  }
+
+  // Create custom object
+  async createCustomObject(group: string, version: string, plural: string, body: any, namespace?: string): Promise<CRDItem> {
+    const path = namespace
+      ? `/apis/${group}/${version}/namespaces/${namespace}/${plural}`
+      : `/apis/${group}/${version}/${plural}`
+    return this.request(path, {
+      method: 'POST',
+      body: JSON.stringify(body),
+    })
+  }
+
+  // Replace custom object
+  async replaceCustomObject(group: string, version: string, plural: string, name: string, body: any, namespace?: string): Promise<CRDItem> {
+    const path = namespace
+      ? `/apis/${group}/${version}/namespaces/${namespace}/${plural}/${name}`
+      : `/apis/${group}/${version}/${plural}/${name}`
+    return this.request(path, {
+      method: 'PUT',
+      body: JSON.stringify(body),
+    })
+  }
+
+  // Delete custom object
+  async deleteCustomObject(group: string, version: string, plural: string, name: string, namespace?: string): Promise<void> {
+    const path = namespace
+      ? `/apis/${group}/${version}/namespaces/${namespace}/${plural}/${name}`
+      : `/apis/${group}/${version}/${plural}/${name}`
+    await this.request(path, { method: 'DELETE' })
+  }
+
+  // Get CRD definition for schema
+  async getCRD(group: string, plural: string): Promise<any> {
+    const crdName = `${plural}.${group}`
+    return this.request(`/apis/apiextensions.k8s.io/v1/customresourcedefinitions/${crdName}`)
+  }
+
+  // Get watch URL
+  getWatchUrl(group: string, version: string, plural: string, namespace?: string): string {
+    const path = namespace
+      ? `/apis/${group}/${version}/namespaces/${namespace}/${plural}?watch=true`
+      : `/apis/${group}/${version}/${plural}?watch=true`
+    return `${this.baseUrl}${path}`
+  }
 }
 
 export function useK8sCRD(group: string, version: string, plural: string, options: UseK8sCRDOptions = {}) {
-  const { autoWatch = true, autoList = true, namespace } = options
+  const { autoWatch = true, autoList = true, namespace, baseUrl = '' } = options
 
   const items = ref<CRDItem[]>([])
   const loading = ref(false)
   const error = ref<string | null>(null)
   const watchAbortController = ref<AbortController | null>(null)
 
-  // Initialize KubeConfig
-  const kc = new KubeConfig()
+  // Initialize lightweight fetch-based K8s client
+  // Works with:
+  // - kubectl proxy (dev): http://localhost:8001
+  // - Backend API proxy: /api/k8s
+  // - In-cluster via ServiceAccount (needs kube-rbac-proxy for browser access)
+  const client = new K8sClient(baseUrl || getDefaultBaseUrl())
 
-  // In development, try to load from default kubeconfig
-  // In production, this will automatically load from the service account
-  try {
-    kc.loadFromDefault()
-  } catch (e) {
-    console.warn('Failed to load kubeconfig, K8s API may not be available:', e)
-  }
-
-  const client = kc.makeApiClient(CustomObjectsApi)
-
-  // Get base URL for fetch requests that aren't supported by the client
-  const getBaseURL = () => {
-    const currentCluster = (kc as any).getCurrentCluster()
-    return currentCluster?.server || 'http://localhost:8001'
+  // Try to determine default base URL based on environment
+  function getDefaultBaseUrl(): string {
+    // In-cluster: expect backend proxy at /api/k8s
+    // Dev: try kubectl proxy default
+    if (typeof window !== 'undefined') {
+      // For development with kubectl proxy
+      if (window.location.hostname === 'localhost') {
+        return '' // Assume proxy at same origin or path-based proxy
+      }
+      // For production in-cluster: use backend proxy endpoint
+      return '/api/k8s'
+    }
+    return ''
   }
 
   // List CRD items
@@ -59,13 +156,8 @@ export function useK8sCRD(group: string, version: string, plural: string, option
     loading.value = true
     error.value = null
     try {
-      if (namespace) {
-        const res = await client.listNamespacedCustomObject(group, version, namespace, plural)
-        items.value = (res.body as any).items || []
-      } else {
-        const res = await client.listClusterCustomObject(group, version, plural)
-        items.value = (res.body as any).items || []
-      }
+      const res = await client.listCustomObject(group, version, plural, namespace)
+      items.value = res.items || []
     } catch (e: any) {
       error.value = e.message || 'Failed to list CRD items'
       console.error('List CRD error:', e)
@@ -75,17 +167,12 @@ export function useK8sCRD(group: string, version: string, plural: string, option
   }
 
   // Get a single CRD item
-  const get = async (name: string) => {
-    if (namespace) {
-      const res = await client.getNamespacedCustomObject(group, version, namespace, plural, name)
-      return res.body as CRDItem
-    }
-    const res = await client.getClusterCustomObject(group, version, plural, name)
-    return res.body as CRDItem
+  const get = async (name: string): Promise<CRDItem> => {
+    return client.getCustomObject(group, version, plural, name, namespace)
   }
 
   // Create a new CRD item
-  const create = async (body: Partial<CRDItem>) => {
+  const create = async (body: Partial<CRDItem>): Promise<CRDItem> => {
     const fullBody = {
       apiVersion: `${group}/${version}`,
       kind: plural.charAt(0).toUpperCase() + plural.slice(1).replace(/s$/, ''),
@@ -97,31 +184,17 @@ export function useK8sCRD(group: string, version: string, plural: string, option
       ...body,
     }
 
-    if (namespace) {
-      const res = await client.createNamespacedCustomObject(group, version, namespace, plural, fullBody)
-      return res.body as CRDItem
-    }
-    const res = await client.createClusterCustomObject(group, version, plural, fullBody)
-    return res.body as CRDItem
+    return client.createCustomObject(group, version, plural, fullBody, namespace)
   }
 
   // Update an existing CRD item
-  const update = async (name: string, body: CRDItem) => {
-    if (namespace) {
-      const res = await client.replaceNamespacedCustomObject(group, version, namespace, plural, name, body)
-      return res.body as CRDItem
-    }
-    const res = await client.replaceClusterCustomObject(group, version, plural, name, body)
-    return res.body as CRDItem
+  const update = async (name: string, body: CRDItem): Promise<CRDItem> => {
+    return client.replaceCustomObject(group, version, plural, name, body, namespace)
   }
 
   // Delete a CRD item
-  const remove = async (name: string) => {
-    if (namespace) {
-      await client.deleteNamespacedCustomObject(group, version, namespace, plural, name)
-    } else {
-      await client.deleteClusterCustomObject(group, version, plural, name)
-    }
+  const remove = async (name: string): Promise<void> => {
+    return client.deleteCustomObject(group, version, plural, name, namespace)
   }
 
   // Watch for real-time updates using native K8s watch API
@@ -129,14 +202,10 @@ export function useK8sCRD(group: string, version: string, plural: string, option
     stopWatch()
     watchAbortController.value = new AbortController()
 
-    const baseUrl = getBaseURL()
-    const watchUrl = namespace
-      ? `${baseUrl}/apis/${group}/${version}/namespaces/${namespace}/${plural}?watch=true`
-      : `${baseUrl}/apis/${group}/${version}/${plural}?watch=true`
+    const watchUrl = client.getWatchUrl(group, version, plural, namespace)
 
     fetch(watchUrl, {
       signal: watchAbortController.value.signal,
-      headers: kc.getDefaultHeaders(),
     })
       .then(async (response) => {
         if (!response.ok) {
@@ -210,19 +279,8 @@ export function useK8sCRD(group: string, version: string, plural: string, option
 
   // Get CRD OpenAPI Schema for dynamic form rendering
   const getSchema = async () => {
-    const crdName = `${plural}.${group}`
-    const baseUrl = getBaseURL()
-
     try {
-      const res = await fetch(`${baseUrl}/apis/apiextensions.k8s.io/v1/customresourcedefinitions/${crdName}`, {
-        headers: kc.getDefaultHeaders(),
-      })
-
-      if (!res.ok) {
-        throw new Error(`HTTP ${res.status}: Failed to fetch CRD schema`)
-      }
-
-      const crd = await res.json()
+      const crd = await client.getCRD(group, plural)
       const versionDef = crd.spec.versions.find((v: any) => v.name === version)
       return versionDef?.schema?.openAPIV3Schema || null
     } catch (e) {

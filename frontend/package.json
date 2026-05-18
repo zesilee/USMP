@@ -16,7 +16,6 @@
     "e2e:report": "playwright show-report"
   },
   "dependencies": {
-    "@kubernetes/client-node": "^1.4.0",
     "axios": "^1.16.0",
     "echarts": "^6.0.0",
     "element-plus": "^2.5.0",
