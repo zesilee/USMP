@@ -203,3 +203,63 @@ func TestValidateApplyRejectsInvalidRowType(t *testing.T) {
 		t.Errorf("FieldErrors[%q] = %v, want message '接口行格式不正确'", InterfacesWidgetID, vErr.FieldErrors[InterfacesWidgetID])
 	}
 }
+
+func TestValidateApplyRejectsFractionalMTU(t *testing.T) {
+	g := NewInterfacesGenerator()
+	req := ApplyRequest{
+		SchemaVersion: "interfaces:v1",
+		Values: map[string]interface{}{
+			InterfacesWidgetID: []interface{}{
+				map[string]interface{}{
+					"name": "GigabitEthernet0/0/1",
+					"mtu":  float64(1500.5),
+				},
+			},
+		},
+	}
+
+	err := g.ValidateApply(req)
+	if err == nil {
+		t.Fatalf("ValidateApply() error = nil, want non-nil")
+	}
+
+	var vErr *ValidationError
+	if !errors.As(err, &vErr) {
+		t.Fatalf("ValidateApply() error = %T, want *ValidationError", err)
+	}
+
+	fieldKey := "interfaces-table:row:GigabitEthernet0/0/1:mtu"
+	if len(vErr.FieldErrors[fieldKey]) == 0 {
+		t.Errorf("FieldErrors[%q] is empty, want non-empty", fieldKey)
+	}
+}
+
+func TestValidateApplyRejectsInvalidAdminStatus(t *testing.T) {
+	g := NewInterfacesGenerator()
+	req := ApplyRequest{
+		SchemaVersion: "interfaces:v1",
+		Values: map[string]interface{}{
+			InterfacesWidgetID: []interface{}{
+				map[string]interface{}{
+					"name":         "GigabitEthernet0/0/1",
+					"admin-status": float64(999),
+				},
+			},
+		},
+	}
+
+	err := g.ValidateApply(req)
+	if err == nil {
+		t.Fatalf("ValidateApply() error = nil, want non-nil")
+	}
+
+	var vErr *ValidationError
+	if !errors.As(err, &vErr) {
+		t.Fatalf("ValidateApply() error = %T, want *ValidationError", err)
+	}
+
+	fieldKey := "interfaces-table:row:GigabitEthernet0/0/1:admin-status"
+	if len(vErr.FieldErrors[fieldKey]) == 0 {
+		t.Errorf("FieldErrors[%q] is empty, want non-empty", fieldKey)
+	}
+}

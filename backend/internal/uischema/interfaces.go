@@ -1,6 +1,9 @@
 package uischema
 
-import "fmt"
+import (
+	"fmt"
+	"math"
+)
 
 const (
 	// InterfacesWidgetID is the ID of the interfaces table widget
@@ -174,6 +177,17 @@ func (g *InterfacesGenerator) ValidateApply(req ApplyRequest) error {
 				fieldErrors[fieldKey] = append(fieldErrors[fieldKey], fmt.Sprintf("描述长度不能超过 %d 个字符", InterfaceDescriptionMaxLength))
 			}
 		}
+
+		if statusVal, ok := row["admin-status"]; ok {
+			status, ok := numberToInt(statusVal)
+			if !ok {
+				fieldKey := fmt.Sprintf("interfaces-table:row:%s:admin-status", name)
+				fieldErrors[fieldKey] = append(fieldErrors[fieldKey], "管理状态必须是数字")
+			} else if status != 0 && status != 1 {
+				fieldKey := fmt.Sprintf("interfaces-table:row:%s:admin-status", name)
+				fieldErrors[fieldKey] = append(fieldErrors[fieldKey], "管理状态必须是启用或禁用")
+			}
+		}
 	}
 
 	if len(fieldErrors) > 0 {
@@ -197,8 +211,15 @@ func numberToInt(v interface{}) (int, bool) {
 	case int64:
 		return int(val), true
 	case float64:
+		if math.Trunc(val) != val {
+			return 0, false
+		}
 		return int(val), true
 	case float32:
+		floatVal := float64(val)
+		if math.Trunc(floatVal) != floatVal {
+			return 0, false
+		}
 		return int(val), true
 	default:
 		return 0, false

@@ -49,7 +49,7 @@ defineEmits<{
 }
 .grid-section-body {
   display: grid;
-  grid-template-columns: repeat(24, 1fr);
+  grid-template-columns: repeat(12, 1fr);
   gap: 16px;
 }
 </style>

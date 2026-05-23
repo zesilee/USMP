@@ -71,3 +71,32 @@ func TestUISchemaHandlerApplyRejectsInvalidMTU(t *testing.T) {
 	assert.False(t, response["success"].(bool))
 	assert.Equal(t, "VALIDATION_FAILED", response["code"])
 }
+
+func TestUISchemaHandlerApplyPreservesSchemaVersionMismatchCode(t *testing.T) {
+	gin.SetMode(gin.TestMode)
+	router := gin.Default()
+
+	handler := NewUISchemaHandler(nil)
+	router.POST("/api/v1/ui-schema/devices/:ip/interfaces/apply", handler.ApplyInterfaces)
+
+	requestBody := map[string]interface{}{
+		"schemaVersion": "interfaces:old",
+		"values": map[string]interface{}{
+			"interfaces-table": []interface{}{},
+		},
+	}
+
+	bodyBytes, _ := json.Marshal(requestBody)
+	w := httptest.NewRecorder()
+	req, _ := http.NewRequest("POST", "/api/v1/ui-schema/devices/192.168.1.1/interfaces/apply", bytes.NewBuffer(bodyBytes))
+	req.Header.Set("Content-Type", "application/json")
+	router.ServeHTTP(w, req)
+
+	assert.Equal(t, http.StatusOK, w.Code)
+
+	var response map[string]interface{}
+	err := json.Unmarshal(w.Body.Bytes(), &response)
+	assert.NoError(t, err)
+	assert.False(t, response["success"].(bool))
+	assert.Equal(t, "SCHEMA_VERSION_MISMATCH", response["code"])
+}

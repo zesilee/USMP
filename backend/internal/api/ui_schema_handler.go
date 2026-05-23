@@ -54,7 +54,7 @@ func (h *UISchemaHandler) ApplyInterfaces(c *gin.Context) {
 			// Validation error with details
 			c.JSON(http.StatusOK, gin.H{
 				"success":     false,
-				"code":        "VALIDATION_FAILED",
+				"code":        valErr.Code,
 				"message":     valErr.Message,
 				"fieldErrors": valErr.FieldErrors,
 			})
