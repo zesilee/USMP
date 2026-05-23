@@ -61,6 +61,14 @@ func (s *Server) setupRoutes() {
 			yangGroup.GET("/modules", yangHandler.ListModules)
 			yangGroup.GET("/schema/:module", yangHandler.GetSchema)
 		}
+
+		// UI Schema endpoints
+		uiSchemaGroup := v1.Group("/ui-schema")
+		{
+			uiSchemaHandler := NewUISchemaHandler(s.manager)
+			uiSchemaGroup.GET("/devices/:ip/interfaces", uiSchemaHandler.GetInterfaces)
+			uiSchemaGroup.POST("/devices/:ip/interfaces/apply", uiSchemaHandler.ApplyInterfaces)
+		}
 	}
 }
 
