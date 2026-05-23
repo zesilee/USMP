@@ -1,6 +1,83 @@
 package uischema
 
-import "testing"
+import (
+	"errors"
+	"testing"
+)
+
+func TestValidateApplyAcceptsValidInterfaces(t *testing.T) {
+	g := NewInterfacesGenerator()
+	req := ApplyRequest{
+		SchemaVersion: "interfaces:v1",
+		Values: map[string]interface{}{
+			InterfacesWidgetID: []interface{}{
+				map[string]interface{}{
+					"name":         "GigabitEthernet0/0/1",
+					"description":  "uplink",
+					"mtu":          float64(1500),
+					"admin-status": float64(1),
+				},
+			},
+		},
+	}
+
+	err := g.ValidateApply(req)
+	if err != nil {
+		t.Fatalf("ValidateApply() error = %v, want nil", err)
+	}
+}
+
+func TestValidateApplyRejectsSchemaVersionMismatch(t *testing.T) {
+	g := NewInterfacesGenerator()
+	req := ApplyRequest{
+		SchemaVersion: "interfaces:old",
+		Values:        map[string]interface{}{},
+	}
+
+	err := g.ValidateApply(req)
+	if err == nil {
+		t.Fatalf("ValidateApply() error = nil, want non-nil")
+	}
+
+	var vErr *ValidationError
+	if !errors.As(err, &vErr) {
+		t.Fatalf("ValidateApply() error = %T, want *ValidationError", err)
+	}
+
+	if vErr.Code != "SCHEMA_VERSION_MISMATCH" {
+		t.Errorf("ValidationError.Code = %q, want SCHEMA_VERSION_MISMATCH", vErr.Code)
+	}
+}
+
+func TestValidateApplyRejectsInvalidMTU(t *testing.T) {
+	g := NewInterfacesGenerator()
+	req := ApplyRequest{
+		SchemaVersion: "interfaces:v1",
+		Values: map[string]interface{}{
+			InterfacesWidgetID: []interface{}{
+				map[string]interface{}{
+					"name": "GigabitEthernet0/0/1",
+					"mtu":  float64(42),
+				},
+			},
+		},
+	}
+
+	err := g.ValidateApply(req)
+	if err == nil {
+		t.Fatalf("ValidateApply() error = nil, want non-nil")
+	}
+
+	var vErr *ValidationError
+	if !errors.As(err, &vErr) {
+		t.Fatalf("ValidateApply() error = %T, want *ValidationError", err)
+	}
+
+	fieldKey := "interfaces-table:row:GigabitEthernet0/0/1:mtu"
+	if len(vErr.FieldErrors[fieldKey]) == 0 {
+		t.Errorf("FieldErrors[%q] is empty, want non-empty", fieldKey)
+	}
+}
 
 func TestInterfacesSchemaShape(t *testing.T) {
 	schema := NewInterfacesGenerator().BuildSchema("192.168.1.1")

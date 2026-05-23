@@ -1,5 +1,7 @@
 package uischema
 
+import "fmt"
+
 const (
 	// InterfacesWidgetID is the ID of the interfaces table widget
 	InterfacesWidgetID = "interfaces-table"
@@ -93,5 +95,105 @@ func (g *InterfacesGenerator) BuildSchema(deviceIP string) GridSchema {
 		Values: map[string]interface{}{
 			InterfacesWidgetID: []interface{}{},
 		},
+	}
+}
+
+// ValidateApply validates an apply request for interfaces
+func (g *InterfacesGenerator) ValidateApply(req ApplyRequest) error {
+	// Check schema version
+	if req.SchemaVersion != "interfaces:v1" {
+		return &ValidationError{
+			Code:    "SCHEMA_VERSION_MISMATCH",
+			Message: "Schema 已更新，请刷新后重试",
+		}
+	}
+
+	fieldErrors := make(map[string][]string)
+
+	// Get interfaces table
+	tableVal, ok := req.Values[InterfacesWidgetID]
+	if !ok {
+		fieldErrors[InterfacesWidgetID] = []string{"接口列表是必填项"}
+		return &ValidationError{
+			Code:        "VALIDATION_FAILED",
+			Message:     "配置校验失败",
+			FieldErrors: fieldErrors,
+		}
+	}
+
+	rows, ok := tableVal.([]interface{})
+	if !ok {
+		fieldErrors[InterfacesWidgetID] = []string{"接口列表格式错误"}
+		return &ValidationError{
+			Code:        "VALIDATION_FAILED",
+			Message:     "配置校验失败",
+			FieldErrors: fieldErrors,
+		}
+	}
+
+	// Validate each row
+	for _, rowVal := range rows {
+		row, ok := rowVal.(map[string]interface{})
+		if !ok {
+			continue
+		}
+
+		// Get row name
+		nameVal, nameOk := row["name"]
+		name, nameStrOk := nameVal.(string)
+		if !nameOk || !nameStrOk || name == "" {
+			fieldKey := "interfaces-table:row:unknown:name"
+			fieldErrors[fieldKey] = append(fieldErrors[fieldKey], "接口名称是必填项")
+			continue
+		}
+
+		// Validate MTU
+		if mtuVal, ok := row["mtu"]; ok {
+			mtu, ok := numberToInt(mtuVal)
+			if !ok {
+				fieldKey := fmt.Sprintf("interfaces-table:row:%s:mtu", name)
+				fieldErrors[fieldKey] = append(fieldErrors[fieldKey], "MTU 必须是数字")
+			} else if mtu < 1280 || mtu > 9216 {
+				fieldKey := fmt.Sprintf("interfaces-table:row:%s:mtu", name)
+				fieldErrors[fieldKey] = append(fieldErrors[fieldKey], "MTU 必须在 1280 到 9216 之间")
+			}
+		}
+
+		// Validate description
+		if descVal, ok := row["description"]; ok {
+			desc, ok := descVal.(string)
+			if ok && len(desc) > 80 {
+				fieldKey := fmt.Sprintf("interfaces-table:row:%s:description", name)
+				fieldErrors[fieldKey] = append(fieldErrors[fieldKey], "描述长度不能超过 80 个字符")
+			}
+		}
+	}
+
+	if len(fieldErrors) > 0 {
+		return &ValidationError{
+			Code:        "VALIDATION_FAILED",
+			Message:     "配置校验失败",
+			FieldErrors: fieldErrors,
+		}
+	}
+
+	return nil
+}
+
+// numberToInt converts various numeric types to int
+func numberToInt(v interface{}) (int, bool) {
+	switch val := v.(type) {
+	case int:
+		return val, true
+	case int32:
+		return int(val), true
+	case int64:
+		return int(val), true
+	case float64:
+		return int(val), true
+	case float32:
+		return int(val), true
+	default:
+		return 0, false
 	}
 }
