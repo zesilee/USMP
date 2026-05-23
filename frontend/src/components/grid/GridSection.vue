@@ -8,7 +8,7 @@
     </template>
     <div class="grid-section-body">
       <GridWidget
-        v-for="widget in sectionWidgets"
+        v-for="widget in widgets"
         :key="widget.id"
         :widget="widget"
         :model-value="modelValue"
@@ -20,7 +20,6 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
 import GridWidget from './GridWidget.vue'
 import type { GridSection as IGridSection, GridWidget as IGridWidget } from '../../types/grid-schema'
 
@@ -36,10 +35,6 @@ const props = defineProps<Props>()
 defineEmits<{
   'update:modelValue': [value: Record<string, unknown>]
 }>()
-
-const sectionWidgets = computed(() => {
-  return props.widgets.filter(w => props.section.widgets.includes(w.id))
-})
 </script>
 
 <style scoped>

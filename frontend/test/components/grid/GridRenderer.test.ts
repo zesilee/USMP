@@ -56,6 +56,8 @@ describe('GridRenderer Component', () => {
     await flushPromises()
     expect(wrapper.text()).toContain('接口配置')
     expect(wrapper.text()).toContain('接口列表')
+    expect(wrapper.text()).toContain('GigabitEthernet0/0/1')
+    expect(wrapper.text()).toContain('MTU')
     // Check that grid widget exists
     const gridWidget = wrapper.findComponent({ name: 'GridWidget' })
     expect(gridWidget.exists()).toBe(true)

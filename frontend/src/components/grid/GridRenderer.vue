@@ -35,7 +35,7 @@
         v-for="section in schema.sections"
         :key="section.id"
         :section="section"
-        :widgets="schema.widgets"
+        :widgets="widgetsBySection(section.widgets)"
         :model-value="modelValue"
         :errors="errors"
         @update:model-value="$emit('update:modelValue', $event)"
@@ -47,7 +47,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import GridSection from './GridSection.vue'
-import type { GridSchema } from '../../types/grid-schema'
+import type { GridSchema, GridWidget } from '../../types/grid-schema'
 
 interface Props {
   schema: GridSchema
@@ -69,6 +69,10 @@ defineEmits<{
 const toolbarTitle = computed(() => {
   return props.schema.sections[0]?.title || '配置管理'
 })
+
+const widgetsBySection = (sectionWidgetIds: string[]): GridWidget[] => {
+  return props.schema.widgets.filter(w => sectionWidgetIds.includes(w.id))
+}
 </script>
 
 <style scoped>
