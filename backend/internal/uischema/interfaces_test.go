@@ -135,8 +135,8 @@ func TestInterfacesSchemaShape(t *testing.T) {
 	if !ok {
 		t.Fatalf("missing description column")
 	}
-	if descCol.Validation.MaxLength == nil || *descCol.Validation.MaxLength != 80 {
-		t.Fatalf("description column should have max length 80")
+	if descCol.Validation.MaxLength == nil || *descCol.Validation.MaxLength != InterfaceDescriptionMaxLength {
+		t.Fatalf("description column should have max length %d", InterfaceDescriptionMaxLength)
 	}
 
 	// Check mtu column
@@ -144,11 +144,11 @@ func TestInterfacesSchemaShape(t *testing.T) {
 	if !ok {
 		t.Fatalf("missing mtu column")
 	}
-	if mtuCol.Validation.Min == nil || *mtuCol.Validation.Min != 1280 {
-		t.Fatalf("mtu column should have min 1280")
+	if mtuCol.Validation.Min == nil || *mtuCol.Validation.Min != InterfaceMTUMin {
+		t.Fatalf("mtu column should have min %d", InterfaceMTUMin)
 	}
-	if mtuCol.Validation.Max == nil || *mtuCol.Validation.Max != 9216 {
-		t.Fatalf("mtu column should have max 9216")
+	if mtuCol.Validation.Max == nil || *mtuCol.Validation.Max != InterfaceMTUMax {
+		t.Fatalf("mtu column should have max %d", InterfaceMTUMax)
 	}
 
 	// Check admin-status column
@@ -166,5 +166,40 @@ func TestInterfacesSchemaShape(t *testing.T) {
 	}
 	if _, ok := schema.Values[InterfacesWidgetID]; !ok {
 		t.Fatalf("missing widget values")
+	}
+}
+
+func TestValidateApplyRejectsInvalidRowType(t *testing.T) {
+	g := NewInterfacesGenerator()
+	req := ApplyRequest{
+		SchemaVersion: "interfaces:v1",
+		Values: map[string]interface{}{
+			InterfacesWidgetID: []interface{}{"not-a-row"},
+		},
+	}
+
+	err := g.ValidateApply(req)
+	if err == nil {
+		t.Fatalf("ValidateApply() error = nil, want non-nil")
+	}
+
+	var vErr *ValidationError
+	if !errors.As(err, &vErr) {
+		t.Fatalf("ValidateApply() error = %T, want *ValidationError", err)
+	}
+
+	if len(vErr.FieldErrors[InterfacesWidgetID]) == 0 {
+		t.Errorf("FieldErrors[%q] is empty, want non-empty", InterfacesWidgetID)
+	}
+
+	found := false
+	for _, msg := range vErr.FieldErrors[InterfacesWidgetID] {
+		if msg == "接口行格式不正确" {
+			found = true
+			break
+		}
+	}
+	if !found {
+		t.Errorf("FieldErrors[%q] = %v, want message '接口行格式不正确'", InterfacesWidgetID, vErr.FieldErrors[InterfacesWidgetID])
 	}
 }

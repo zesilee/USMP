@@ -7,6 +7,12 @@ const (
 	InterfacesWidgetID = "interfaces-table"
 	// InterfacesTargetPath is the target path for interfaces configuration
 	InterfacesTargetPath = "/ifm:ifm/ifm:interfaces"
+	// InterfaceMTUMin is the minimum allowed MTU value
+	InterfaceMTUMin = 1280
+	// InterfaceMTUMax is the maximum allowed MTU value
+	InterfaceMTUMax = 9216
+	// InterfaceDescriptionMaxLength is the maximum allowed length for interface description
+	InterfaceDescriptionMaxLength = 80
 )
 
 // InterfacesGenerator generates UI schema for Huawei IFM interfaces
@@ -19,9 +25,9 @@ func NewInterfacesGenerator() *InterfacesGenerator {
 
 // BuildSchema builds the complete UI schema for interfaces
 func (g *InterfacesGenerator) BuildSchema(deviceIP string) GridSchema {
-	maxLength80 := 80
-	min1280 := 1280
-	max9216 := 9216
+	descMaxLen := InterfaceDescriptionMaxLength
+	mtuMin := InterfaceMTUMin
+	mtuMax := InterfaceMTUMax
 
 	return GridSchema{
 		SchemaVersion:    "interfaces:v1",
@@ -65,7 +71,7 @@ func (g *InterfacesGenerator) BuildSchema(deviceIP string) GridSchema {
 						Type:  WidgetText,
 						Label: "描述",
 						Validation: GridValidation{
-							MaxLength: &maxLength80,
+							MaxLength: &descMaxLen,
 						},
 					},
 					{
@@ -73,8 +79,8 @@ func (g *InterfacesGenerator) BuildSchema(deviceIP string) GridSchema {
 						Type:  WidgetNumber,
 						Label: "MTU",
 						Validation: GridValidation{
-							Min: &min1280,
-							Max: &max9216,
+							Min: &mtuMin,
+							Max: &mtuMax,
 						},
 					},
 					{
@@ -135,6 +141,7 @@ func (g *InterfacesGenerator) ValidateApply(req ApplyRequest) error {
 	for _, rowVal := range rows {
 		row, ok := rowVal.(map[string]interface{})
 		if !ok {
+			fieldErrors[InterfacesWidgetID] = append(fieldErrors[InterfacesWidgetID], "接口行格式不正确")
 			continue
 		}
 
@@ -153,18 +160,18 @@ func (g *InterfacesGenerator) ValidateApply(req ApplyRequest) error {
 			if !ok {
 				fieldKey := fmt.Sprintf("interfaces-table:row:%s:mtu", name)
 				fieldErrors[fieldKey] = append(fieldErrors[fieldKey], "MTU 必须是数字")
-			} else if mtu < 1280 || mtu > 9216 {
+			} else if mtu < InterfaceMTUMin || mtu > InterfaceMTUMax {
 				fieldKey := fmt.Sprintf("interfaces-table:row:%s:mtu", name)
-				fieldErrors[fieldKey] = append(fieldErrors[fieldKey], "MTU 必须在 1280 到 9216 之间")
+				fieldErrors[fieldKey] = append(fieldErrors[fieldKey], fmt.Sprintf("MTU 必须在 %d 到 %d 之间", InterfaceMTUMin, InterfaceMTUMax))
 			}
 		}
 
 		// Validate description
 		if descVal, ok := row["description"]; ok {
 			desc, ok := descVal.(string)
-			if ok && len(desc) > 80 {
+			if ok && len(desc) > InterfaceDescriptionMaxLength {
 				fieldKey := fmt.Sprintf("interfaces-table:row:%s:description", name)
-				fieldErrors[fieldKey] = append(fieldErrors[fieldKey], "描述长度不能超过 80 个字符")
+				fieldErrors[fieldKey] = append(fieldErrors[fieldKey], fmt.Sprintf("描述长度不能超过 %d 个字符", InterfaceDescriptionMaxLength))
 			}
 		}
 	}
