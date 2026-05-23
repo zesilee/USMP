@@ -5,12 +5,6 @@ const (
 	InterfacesWidgetID = "interfaces-table"
 	// InterfacesTargetPath is the target path for interfaces configuration
 	InterfacesTargetPath = "/ifm:ifm/ifm:interfaces"
-	// InterfacesModuleName is the YANG module name for interfaces
-	InterfacesModuleName = "huawei-ifm"
-	// InterfacesSchemaVersion is the schema version for interfaces
-	InterfacesSchemaVersion = "interfaces:v1"
-	// InterfacesCapabilitySource is the capability source for interfaces
-	InterfacesCapabilitySource = "module-set"
 )
 
 // InterfacesGenerator generates UI schema for Huawei IFM interfaces
@@ -22,18 +16,16 @@ func NewInterfacesGenerator() *InterfacesGenerator {
 }
 
 // BuildSchema builds the complete UI schema for interfaces
-func (g *InterfacesGenerator) BuildSchema(deviceID string) *GridSchema {
-	// Create required boolean pointers for validation
-	requiredTrue := true
+func (g *InterfacesGenerator) BuildSchema(deviceIP string) GridSchema {
+	maxLength80 := 80
 	min1280 := 1280
 	max9216 := 9216
-	maxLength80 := 80
 
-	return &GridSchema{
-		SchemaVersion:    InterfacesSchemaVersion,
-		Module:           InterfacesModuleName,
+	return GridSchema{
+		SchemaVersion:    "interfaces:v1",
+		Module:           "huawei-ifm",
 		TargetPath:       InterfacesTargetPath,
-		CapabilitySource: InterfacesCapabilitySource,
+		CapabilitySource: "module-set",
 		Layout: GridLayout{
 			Type:    "grid",
 			Columns: 12,
@@ -49,44 +41,44 @@ func (g *InterfacesGenerator) BuildSchema(deviceID string) *GridSchema {
 		},
 		Widgets: []GridWidget{
 			{
-				ID:      InterfacesWidgetID,
-				Type:    WidgetTable,
-				Label:   "接口列表",
-				RowKey:  "name",
-				Grid: &WidgetGrid{
+				ID:     InterfacesWidgetID,
+				Type:   WidgetTable,
+				Label:  "接口列表",
+				RowKey: "name",
+				Grid: WidgetGrid{
 					Span: 12,
 				},
 				Columns: []GridColumn{
 					{
-						ID:          "name",
-						Type:        "text",
-						Label:       "接口名称",
-						Readonly:    true,
-						Validation: &GridValidation{
-							Required: &requiredTrue,
+						ID:       "name",
+						Type:     WidgetText,
+						Label:    "接口名称",
+						Readonly: true,
+						Validation: GridValidation{
+							Required: true,
 						},
 					},
 					{
-						ID:          "description",
-						Type:        "text",
-						Label:       "描述",
-						Validation: &GridValidation{
+						ID:    "description",
+						Type:  WidgetText,
+						Label: "描述",
+						Validation: GridValidation{
 							MaxLength: &maxLength80,
 						},
 					},
 					{
-						ID:          "mtu",
-						Type:        "number",
-						Label:       "MTU",
-						Validation: &GridValidation{
+						ID:    "mtu",
+						Type:  WidgetNumber,
+						Label: "MTU",
+						Validation: GridValidation{
 							Min: &min1280,
 							Max: &max9216,
 						},
 					},
 					{
-						ID:          "admin-status",
-						Type:        "select",
-						Label:       "管理状态",
+						ID:    "admin-status",
+						Type:  WidgetSelect,
+						Label: "管理状态",
 						Options: []GridOption{
 							{Label: "启用", Value: 1},
 							{Label: "禁用", Value: 0},
