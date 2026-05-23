@@ -32,7 +32,7 @@ test('interfaces grid page renders backend-driven grid', async ({ page }) => {
 
   await page.goto('/config/interface')
 
-  await expect(page.getByText('接口配置')).toBeVisible()
-  await expect(page.getByText('接口列表')).toBeVisible()
+  await expect(page.getByRole('heading', { name: '接口配置' })).toBeVisible()
+  await expect(page.getByRole('heading', { name: '接口列表' })).toBeVisible()
   await expect(page.getByText('GigabitEthernet0/0/1')).toBeVisible()
 })
