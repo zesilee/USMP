@@ -14,8 +14,7 @@ const routes = [
   {
     path: '/config/interface',
     name: 'interface',
-    component: () => import('../views/ConfigPage.vue'),
-    props: { module: 'openconfig-interfaces' }
+    component: () => import('../views/InterfaceGridPage.vue')
   },
   {
     path: '/config/vlan',
