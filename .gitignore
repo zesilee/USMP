@@ -43,6 +43,7 @@ yarn-error.log*
 frontend/dist/
 frontend/test-results/
 frontend/playwright-report/
+frontend/coverage/
 frontend/.vite/
 frontend/package-lock.json
 

@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
-import { mount } from '@vue/test-utils'
+import { flushPromises, mount } from '@vue/test-utils'
 import { createPinia, setActivePinia } from 'pinia'
 import { createRouter, createMemoryHistory } from 'vue-router'
 import Devices from '../../src/views/Devices.vue'
@@ -14,10 +14,15 @@ const mockDevices = [
   { id: '3', ip: '192.168.1.3', name: 'Core-Switch-02', vendor: 'Cisco', model: 'N9K', status: 'offline', lastSync: '2026-05-02 18:00:00' }
 ]
 
-const router = createRouter({
-  history: createMemoryHistory(),
-  routes: [{ path: '/', name: 'dashboard', component: {} }]
-})
+function createTestRouter() {
+  return createRouter({
+    history: createMemoryHistory(),
+    routes: [
+      { path: '/', name: 'dashboard', component: {} },
+      { path: '/config/interface', name: 'interface', component: {} }
+    ]
+  })
+}
 
 describe('Devices View', () => {
   beforeEach(() => {
@@ -28,14 +33,14 @@ describe('Devices View', () => {
 
   it('should render search input field', () => {
     const wrapper = mount(Devices, {
-      global: { plugins: [ElementPlus, createPinia(), router] }
+      global: { plugins: [ElementPlus, createPinia(), createTestRouter()] }
     })
     expect(wrapper.find('.el-input').exists()).toBe(true)
   })
 
   it('should render device table', async () => {
     const wrapper = mount(Devices, {
-      global: { plugins: [ElementPlus, createPinia(), router] }
+      global: { plugins: [ElementPlus, createPinia(), createTestRouter()] }
     })
     await wrapper.vm.$nextTick()
     expect(wrapper.find('.el-table').exists()).toBe(true)
@@ -43,12 +48,31 @@ describe('Devices View', () => {
 
   it('should display status badges correctly', async () => {
     const wrapper = mount(Devices, {
-      global: { plugins: [ElementPlus, createPinia(), router] }
+      global: { plugins: [ElementPlus, createPinia(), createTestRouter()] }
     })
     await wrapper.vm.$nextTick()
     await new Promise(resolve => setTimeout(resolve, 100))
     await wrapper.vm.$nextTick()
     const tags = wrapper.findAllComponents({ name: 'ElTag' })
     expect(tags.length).toBeGreaterThan(0)
+  })
+
+  it('should navigate to interface config with device ip', async () => {
+    const testRouter = createTestRouter()
+    const wrapper = mount(Devices, {
+      global: { plugins: [ElementPlus, createPinia(), testRouter] }
+    })
+    await flushPromises()
+    await wrapper.vm.$nextTick()
+
+    const configButton = wrapper.findAll('button').find(button => button.text().includes('查看配置'))
+    expect(configButton).toBeDefined()
+    await configButton!.trigger('click')
+    await flushPromises()
+
+    expect(testRouter.currentRoute.value).toMatchObject({
+      name: 'interface',
+      query: { device: '192.168.1.1' }
+    })
   })
 })

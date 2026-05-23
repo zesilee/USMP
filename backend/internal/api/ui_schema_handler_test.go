@@ -11,8 +11,10 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/leezesi/usmp/backend/internal/generated/huawei"
+	"github.com/leezesi/usmp/backend/internal/uischema"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/client"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/manager"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/predicate"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -42,6 +44,26 @@ func (f fakeUISchemaClient) IsConnected() bool {
 
 func (f fakeUISchemaClient) DiscardCandidate(ctx context.Context) error {
 	return nil
+}
+
+type fakeIFMController struct {
+	events []predicate.Event
+}
+
+func (f *fakeIFMController) Start(ctx context.Context) error {
+	return nil
+}
+
+func (f *fakeIFMController) Stop() error {
+	return nil
+}
+
+func (f *fakeIFMController) Enqueue(evt predicate.Event) {
+	f.events = append(f.events, evt)
+}
+
+func (f *fakeIFMController) Name() string {
+	return "ifm-controller"
 }
 
 func TestUISchemaHandlerGetInterfaces(t *testing.T) {
@@ -106,6 +128,60 @@ func TestUISchemaHandlerGetInterfacesPopulatesDeviceValues(t *testing.T) {
 	assert.Equal(t, "uplink", row["description"])
 	assert.Equal(t, float64(1500), row["mtu"])
 	assert.Equal(t, float64(2), row["admin-status"])
+}
+
+func TestUISchemaHandlerApplyStoresTypedConfigAndTriggersReconcile(t *testing.T) {
+	gin.SetMode(gin.TestMode)
+	router := gin.Default()
+
+	ctrl := &fakeIFMController{}
+	m := manager.New(manager.WithClientFactory(func(info client.DeviceConnectionInfo) (client.Client, error) {
+		return fakeUISchemaClient{}, nil
+	}))
+	m.AddController(ctrl)
+	handler := NewUISchemaHandler(m)
+	router.POST("/api/v1/ui-schema/devices/:ip/interfaces/apply", handler.ApplyInterfaces)
+
+	requestBody := map[string]interface{}{
+		"schemaVersion": "interfaces:v1",
+		"values": map[string]interface{}{
+			"interfaces-table": []interface{}{
+				map[string]interface{}{
+					"name":         "GigabitEthernet0/0/1",
+					"description":  "uplink",
+					"mtu":          1500,
+					"admin-status": 2,
+				},
+			},
+		},
+	}
+
+	bodyBytes, _ := json.Marshal(requestBody)
+	w := httptest.NewRecorder()
+	req, _ := http.NewRequest("POST", "/api/v1/ui-schema/devices/192.168.1.1/interfaces/apply", bytes.NewBuffer(bodyBytes))
+	req.Header.Set("Content-Type", "application/json")
+	router.ServeHTTP(w, req)
+
+	assert.Equal(t, http.StatusOK, w.Code)
+
+	var response map[string]interface{}
+	err := json.Unmarshal(w.Body.Bytes(), &response)
+	assert.NoError(t, err)
+	assert.Equal(t, true, response["success"])
+
+	stored, err := m.GetConfigStore().Get("192.168.1.1", uischema.InterfacesTargetPath)
+	assert.NoError(t, err)
+	ifm, ok := stored.(*huawei.HuaweiIfm_Ifm_Interfaces)
+	assert.True(t, ok)
+	iface := ifm.Interface["GigabitEthernet0/0/1"]
+	assert.NotNil(t, iface)
+	assert.Equal(t, "uplink", *iface.Description)
+	assert.Equal(t, uint32(1500), *iface.Mtu)
+	assert.Equal(t, huawei.E_HuaweiIfm_PortStatus(2), iface.AdminStatus)
+	assert.Len(t, ctrl.events, 1)
+	assert.Equal(t, "192.168.1.1", ctrl.events[0].DeviceID)
+	assert.Equal(t, uischema.InterfacesTargetPath, ctrl.events[0].Path)
+	assert.Equal(t, predicate.UpdateEvent, ctrl.events[0].Type)
 }
 
 func TestUISchemaHandlerApplyRejectsInvalidMTU(t *testing.T) {

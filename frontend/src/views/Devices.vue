@@ -113,7 +113,7 @@ function handleRefresh() {
 }
 
 function goToConfig(device: any) {
-  router.push({ name: 'interface', query: { device: device.id } })
+  router.push({ name: 'interface', query: { device: device.ip } })
 }
 
 async function handleTestConnection(device: any) {

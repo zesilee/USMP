@@ -14,7 +14,8 @@ const routes = [
   {
     path: '/config/interface',
     name: 'interface',
-    component: () => import('../views/InterfaceGridPage.vue')
+    component: () => import('../views/InterfaceGridPage.vue'),
+    props: route => ({ deviceIp: route.query.device })
   },
   {
     path: '/config/vlan',
