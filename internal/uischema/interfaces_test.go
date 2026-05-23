@@ -31,7 +31,60 @@ func TestInterfacesSchemaShape(t *testing.T) {
     if widget.RowKey != "name" {
         t.Fatalf("row key = %q, want name", widget.RowKey)
     }
-    if len(widget.Columns) < 4 {
-        t.Fatalf("columns = %d, want at least 4", len(widget.Columns))
+    if len(widget.Columns) != 4 {
+        t.Fatalf("columns = %d, want 4", len(widget.Columns))
+    }
+
+    // Check column configuration
+    columns := make(map[string]GridColumn)
+    for _, col := range widget.Columns {
+        columns[col.ID] = col
+    }
+
+    // Check name column
+    nameCol, ok := columns["name"]
+    if !ok {
+        t.Fatalf("missing name column")
+    }
+    if !nameCol.Readonly {
+        t.Fatalf("name column should be readonly")
+    }
+    if nameCol.Validation == nil || !*nameCol.Validation.Required {
+        t.Fatalf("name column should be required")
+    }
+
+    // Check description column
+    descCol, ok := columns["description"]
+    if !ok {
+        t.Fatalf("missing description column")
+    }
+    if descCol.Validation == nil || *descCol.Validation.MaxLength != 80 {
+        t.Fatalf("description column should have max length 80")
+    }
+
+    // Check mtu column
+    mtuCol, ok := columns["mtu"]
+    if !ok {
+        t.Fatalf("missing mtu column")
+    }
+    if mtuCol.Validation == nil || *mtuCol.Validation.Min != 1280 || *mtuCol.Validation.Max != 9216 {
+        t.Fatalf("mtu column should have min 1280 and max 9216")
+    }
+
+    // Check admin-status column
+    adminCol, ok := columns["admin-status"]
+    if !ok {
+        t.Fatalf("missing admin-status column")
+    }
+    if len(adminCol.Options) != 2 {
+        t.Fatalf("admin-status should have 2 options")
+    }
+
+    // Check values
+    if schema.Values == nil {
+        t.Fatalf("missing values map")
+    }
+    if _, ok := schema.Values[InterfacesWidgetID]; !ok {
+        t.Fatalf("missing widget values")
     }
 }

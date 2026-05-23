@@ -8,7 +8,7 @@ const (
 	// InterfacesModuleName is the YANG module name for interfaces
 	InterfacesModuleName = "huawei-ifm"
 	// InterfacesSchemaVersion is the schema version for interfaces
-	InterfacesSchemaVersion = SchemaVersion
+	InterfacesSchemaVersion = "interfaces:v1"
 	// InterfacesCapabilitySource is the capability source for interfaces
 	InterfacesCapabilitySource = "module-set"
 )
@@ -22,67 +22,84 @@ func NewInterfacesGenerator() *InterfacesGenerator {
 }
 
 // BuildSchema builds the complete UI schema for interfaces
-func (g *InterfacesGenerator) BuildSchema(deviceID string) *UISchema {
-	return &UISchema{
-		SchemaVersion:  InterfacesSchemaVersion,
-		Module:         InterfacesModuleName,
-		TargetPath:     InterfacesTargetPath,
+func (g *InterfacesGenerator) BuildSchema(deviceID string) *GridSchema {
+	// Create required boolean pointers for validation
+	requiredTrue := true
+	min1280 := 1280
+	max9216 := 9216
+	maxLength80 := 80
+
+	return &GridSchema{
+		SchemaVersion:    InterfacesSchemaVersion,
+		Module:           InterfacesModuleName,
+		TargetPath:       InterfacesTargetPath,
 		CapabilitySource: InterfacesCapabilitySource,
-		Layout: Layout{
+		Layout: GridLayout{
 			Type:    "grid",
 			Columns: 12,
 			Gap:     "md",
 		},
-		Sections: []Section{
+		Sections: []GridSection{
 			{
-				ID:      "interfaces-section",
-				Title:   "Interfaces",
-				Widgets: []string{InterfacesWidgetID},
+				ID:          "interfaces",
+				Title:       "接口配置",
+				Description: "管理设备接口基础配置",
+				Widgets:     []string{InterfacesWidgetID},
 			},
 		},
-		Widgets: []Widget{
+		Widgets: []GridWidget{
 			{
 				ID:      InterfacesWidgetID,
 				Type:    WidgetTable,
-				Title:   "Interfaces",
+				Label:   "接口列表",
 				RowKey:  "name",
-				Columns: []WidgetColumn{
+				Grid: &WidgetGrid{
+					Span: 12,
+				},
+				Columns: []GridColumn{
 					{
-						Key:        "name",
-						Label:      "Interface Name",
-						Sortable:   true,
-						Filterable: true,
+						ID:          "name",
+						Type:        "text",
+						Label:       "接口名称",
+						Readonly:    true,
+						Validation: &GridValidation{
+							Required: &requiredTrue,
+						},
 					},
 					{
-						Key:        "description",
-						Label:      "Description",
-						Sortable:   true,
-						Filterable: true,
+						ID:          "description",
+						Type:        "text",
+						Label:       "描述",
+						Validation: &GridValidation{
+							MaxLength: &maxLength80,
+						},
 					},
 					{
-						Key:        "mtu",
-						Label:      "MTU",
-						Type:       "number",
-						Align:      "right",
-						Sortable:   true,
+						ID:          "mtu",
+						Type:        "number",
+						Label:       "MTU",
+						Validation: &GridValidation{
+							Min: &min1280,
+							Max: &max9216,
+						},
 					},
 					{
-						Key:        "admin-status",
-						Label:      "Admin Status",
-						Type:       "badge",
-						Sortable:   true,
-						Filterable: true,
-					},
-					{
-						Key:        "oper-status",
-						Label:      "Operational Status",
-						Type:       "badge",
-						Sortable:   true,
-						Filterable: true,
+						ID:          "admin-status",
+						Type:        "select",
+						Label:       "管理状态",
+						Options: []GridOption{
+							{Label: "启用", Value: 1},
+							{Label: "禁用", Value: 0},
+						},
 					},
 				},
-				Values: make(map[string][]interface{}),
+				Binding: map[string]interface{}{
+					"targetPath": InterfacesTargetPath,
+				},
 			},
+		},
+		Values: map[string]interface{}{
+			InterfacesWidgetID: []interface{}{},
 		},
 	}
 }
