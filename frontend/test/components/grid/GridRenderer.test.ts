@@ -25,8 +25,9 @@ const mockSchema = {
       rowKey: 'name',
       grid: { span: 24 },
       columns: [
-        { id: 'name', type: 'text' as const, label: '接口名称' },
-        { id: 'mtu', type: 'number' as const, label: 'MTU' }
+        { id: 'name', type: 'text' as const, label: '接口名称', readonly: true },
+        { id: 'mtu', type: 'number' as const, label: 'MTU' },
+        { id: 'admin-status', type: 'select' as const, label: '管理状态', options: [{ label: '启用', value: 2 }, { label: '禁用', value: 1 }] }
       ]
     }
   ],
@@ -35,7 +36,7 @@ const mockSchema = {
 
 const mockValues = {
   'interfaces-table': [
-    { name: 'GigabitEthernet0/0/1', mtu: 1500 }
+    { name: 'GigabitEthernet0/0/1', mtu: 1500, 'admin-status': 2 }
   ]
 }
 
@@ -63,7 +64,7 @@ describe('GridRenderer Component', () => {
     expect(gridWidget.exists()).toBe(true)
     // Check that modelValue has the data
     expect(wrapper.props('modelValue')['interfaces-table']).toEqual([
-      { name: 'GigabitEthernet0/0/1', mtu: 1500 }
+      { name: 'GigabitEthernet0/0/1', mtu: 1500, 'admin-status': 2 }
     ])
   })
 
@@ -78,6 +79,34 @@ describe('GridRenderer Component', () => {
 
     await wrapper.find('[data-test="grid-refresh"]').trigger('click')
     expect(wrapper.emitted('refresh')).toBeDefined()
+  })
+
+  it('should emit updated table values after editing a row', async () => {
+    const wrapper = mount(GridRenderer, {
+      props: {
+        schema: mockSchema,
+        modelValue: mockValues
+      },
+      global: { plugins: [ElementPlus] },
+      attachTo: document.body
+    })
+
+    await flushPromises()
+    await wrapper.find('[data-test="grid-edit-row"]').trigger('click')
+    await flushPromises()
+
+    await wrapper.find('[data-test="grid-field-mtu"] input').setValue('9000')
+    await wrapper.find('[data-test="grid-save-row"]').trigger('click')
+    await flushPromises()
+
+    expect(wrapper.emitted('update:modelValue')).toBeDefined()
+    const updates = wrapper.emitted('update:modelValue') as unknown[][]
+    expect(updates.at(-1)?.[0]).toEqual({
+      'interfaces-table': [
+        { name: 'GigabitEthernet0/0/1', mtu: 9000, 'admin-status': 2 }
+      ]
+    })
+    wrapper.unmount()
   })
 
   it('should emit submit event when submit button is clicked', async () => {
