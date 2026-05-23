@@ -91,8 +91,8 @@ func (g *InterfacesGenerator) BuildSchema(deviceIP string) GridSchema {
 						Type:  WidgetSelect,
 						Label: "管理状态",
 						Options: []GridOption{
-							{Label: "启用", Value: 1},
-							{Label: "禁用", Value: 0},
+							{Label: "启用", Value: 2},
+							{Label: "禁用", Value: 1},
 						},
 					},
 				},
@@ -183,7 +183,7 @@ func (g *InterfacesGenerator) ValidateApply(req ApplyRequest) error {
 			if !ok {
 				fieldKey := fmt.Sprintf("interfaces-table:row:%s:admin-status", name)
 				fieldErrors[fieldKey] = append(fieldErrors[fieldKey], "管理状态必须是数字")
-			} else if status != 0 && status != 1 {
+			} else if status != 1 && status != 2 {
 				fieldKey := fmt.Sprintf("interfaces-table:row:%s:admin-status", name)
 				fieldErrors[fieldKey] = append(fieldErrors[fieldKey], "管理状态必须是启用或禁用")
 			}

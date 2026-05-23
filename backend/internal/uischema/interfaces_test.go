@@ -15,6 +15,26 @@ func TestValidateApplyAcceptsValidInterfaces(t *testing.T) {
 					"name":         "GigabitEthernet0/0/1",
 					"description":  "uplink",
 					"mtu":          float64(1500),
+					"admin-status": float64(2),
+				},
+			},
+		},
+	}
+
+	err := g.ValidateApply(req)
+	if err != nil {
+		t.Fatalf("ValidateApply() error = %v, want nil", err)
+	}
+}
+
+func TestValidateApplyAcceptsDisabledAdminStatus(t *testing.T) {
+	g := NewInterfacesGenerator()
+	req := ApplyRequest{
+		SchemaVersion: "interfaces:v1",
+		Values: map[string]interface{}{
+			InterfacesWidgetID: []interface{}{
+				map[string]interface{}{
+					"name":         "GigabitEthernet0/0/1",
 					"admin-status": float64(1),
 				},
 			},
@@ -159,6 +179,9 @@ func TestInterfacesSchemaShape(t *testing.T) {
 	if len(adminCol.Options) != 2 {
 		t.Fatalf("admin-status should have 2 options")
 	}
+	if adminCol.Options[0].Value != 2 || adminCol.Options[1].Value != 1 {
+		t.Fatalf("admin-status options = %+v, want enable=2 disable=1", adminCol.Options)
+	}
 
 	// Check values
 	if schema.Values == nil {
@@ -242,7 +265,7 @@ func TestValidateApplyRejectsInvalidAdminStatus(t *testing.T) {
 			InterfacesWidgetID: []interface{}{
 				map[string]interface{}{
 					"name":         "GigabitEthernet0/0/1",
-					"admin-status": float64(999),
+					"admin-status": float64(0),
 				},
 			},
 		},
