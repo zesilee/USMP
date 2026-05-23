@@ -1,5 +1,6 @@
 import axios from 'axios'
 import type { ApiResponse } from '../types/yang'
+import type { GridSchema, InterfaceGridApplyPayload, InterfaceGridApplyResult } from '../types/grid-schema'
 
 // API 基础配置
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8080/api/v1'
@@ -35,6 +36,15 @@ export const setConfig = (ip: string, path: string, data: any) => {
 // Schema API - 获取 YANG 模型定义
 export const getSchema = (path: string) => {
   return api.get<ApiResponse<any>>(`/schema/${path}`)
+}
+
+// Grid Schema API
+export const getInterfaceGridSchema = (ip: string) => {
+  return api.get<ApiResponse<GridSchema>>(`/ui-schema/devices/${ip}/interfaces`)
+}
+
+export const applyInterfaceGridConfig = (ip: string, payload: InterfaceGridApplyPayload) => {
+  return api.post<ApiResponse<InterfaceGridApplyResult>>(`/ui-schema/devices/${ip}/interfaces/apply`, payload)
 }
 
 export default api
