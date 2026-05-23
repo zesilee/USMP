@@ -38,7 +38,12 @@ func (h *UISchemaHandler) ApplyInterfaces(c *gin.Context) {
 
 	var req uischema.ApplyRequest
 	if err := c.ShouldBindJSON(&req); err != nil {
-		Error(c, 400, "Invalid request: "+err.Error())
+		// Invalid JSON/request format
+		c.JSON(http.StatusOK, gin.H{
+			"success": false,
+			"code":    "INVALID_REQUEST",
+			"message": "Invalid request: " + err.Error(),
+		})
 		return
 	}
 
@@ -46,19 +51,21 @@ func (h *UISchemaHandler) ApplyInterfaces(c *gin.Context) {
 	if err := h.interfaces.ValidateApply(req); err != nil {
 		var valErr *uischema.ValidationError
 		if errors.As(err, &valErr) {
-			// Return validation error details
-			c.JSON(http.StatusOK, Response{
-				Code:    400,
-				Message: valErr.Message,
-				Data: gin.H{
-					"code":        valErr.Code,
-					"fieldErrors": valErr.FieldErrors,
-				},
-				Success: false,
+			// Validation error with details
+			c.JSON(http.StatusOK, gin.H{
+				"success":     false,
+				"code":        "VALIDATION_FAILED",
+				"message":     valErr.Message,
+				"fieldErrors": valErr.FieldErrors,
 			})
 			return
 		}
-		Error(c, 500, "Validation failed: "+err.Error())
+		// Non-validation error during validation
+		c.JSON(http.StatusOK, gin.H{
+			"success": false,
+			"code":    "APPLY_FAILED",
+			"message": "Validation failed: " + err.Error(),
+		})
 		return
 	}
 
@@ -67,7 +74,12 @@ func (h *UISchemaHandler) ApplyInterfaces(c *gin.Context) {
 		"interface": req.Values[uischema.InterfacesWidgetID],
 	})
 	if err != nil {
-		Error(c, 400, "Failed to convert configuration: "+err.Error())
+		// Conversion failure
+		c.JSON(http.StatusOK, gin.H{
+			"success": false,
+			"code":    "CONVERT_FAILED",
+			"message": "Failed to convert configuration: " + err.Error(),
+		})
 		return
 	}
 
@@ -76,7 +88,12 @@ func (h *UISchemaHandler) ApplyInterfaces(c *gin.Context) {
 		// Store desired config
 		configStore := h.manager.GetConfigStore()
 		if err := configStore.Set(ip, uischema.InterfacesTargetPath, desiredConfig); err != nil {
-			Error(c, 500, "Failed to store configuration: "+err.Error())
+			// Config store failure
+			c.JSON(http.StatusOK, gin.H{
+				"success": false,
+				"code":    "STORE_FAILED",
+				"message": "Failed to store configuration: " + err.Error(),
+			})
 			return
 		}
 

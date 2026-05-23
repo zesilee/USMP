@@ -64,8 +64,10 @@ func TestUISchemaHandlerApplyRejectsInvalidMTU(t *testing.T) {
 	// Assert response
 	assert.Equal(t, http.StatusOK, w.Code)
 
-	var response Response
+	// Use a map to assert the string code
+	var response map[string]interface{}
 	err := json.Unmarshal(w.Body.Bytes(), &response)
 	assert.NoError(t, err)
-	assert.False(t, response.Success)
+	assert.False(t, response["success"].(bool))
+	assert.Equal(t, "VALIDATION_FAILED", response["code"])
 }
