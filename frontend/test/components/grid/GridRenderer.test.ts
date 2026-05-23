@@ -109,6 +109,23 @@ describe('GridRenderer Component', () => {
     wrapper.unmount()
   })
 
+  it('should render backend field errors for table rows', async () => {
+    const wrapper = mount(GridRenderer, {
+      props: {
+        schema: mockSchema,
+        modelValue: mockValues,
+        errors: {
+          'interfaces-table:row:GigabitEthernet0/0/1:mtu': ['MTU 必须在 1280 到 9216 之间']
+        }
+      },
+      global: { plugins: [ElementPlus] }
+    })
+
+    await flushPromises()
+
+    expect(wrapper.text()).toContain('MTU 必须在 1280 到 9216 之间')
+  })
+
   it('should emit submit event when submit button is clicked', async () => {
     const wrapper = mount(GridRenderer, {
       props: {

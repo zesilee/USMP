@@ -4,6 +4,14 @@
       <div class="grid-table-header">
         <h3>{{ widget.label }}</h3>
       </div>
+      <el-alert
+        v-for="message in tableErrors"
+        :key="message"
+        :title="message"
+        type="error"
+        :closable="false"
+        class="grid-field-error"
+      />
       <el-table :data="rows" :row-key="widget.rowKey">
         <el-table-column
           v-for="column in widget.columns"
@@ -11,6 +19,13 @@
           :prop="column.id"
           :label="column.label"
         />
+        <el-table-column label="校验错误" min-width="220">
+          <template #default="scope">
+            <div v-for="message in rowErrors(scope.row)" :key="message" class="grid-field-error-message">
+              {{ message }}
+            </div>
+          </template>
+        </el-table-column>
         <el-table-column label="操作" width="100">
           <template #default="scope">
             <el-button data-test="grid-edit-row" link type="primary" @click="openEditor(scope.$index)">
@@ -26,6 +41,7 @@
             v-for="column in editableColumns"
             :key="column.id"
             :label="column.label"
+            :error="fieldError(column.id)"
           >
             <el-input
               v-if="column.type === 'text' || column.type === 'textarea'"
@@ -103,6 +119,31 @@ const editableColumns = computed(() => {
   return (props.widget.columns || []).filter(column => !column.readonly)
 })
 
+const tableErrors = computed(() => props.errors?.[props.widget.id] || [])
+
+function rowKey(row: unknown) {
+  const record = row as Record<string, unknown>
+  const key = props.widget.rowKey || 'name'
+  return String(record[key] || '')
+}
+
+function rowErrors(row: unknown) {
+  const key = rowKey(row)
+  if (!key) return []
+
+  return Object.entries(props.errors || {})
+    .filter(([field]) => field.startsWith(`${props.widget.id}:row:${key}:`))
+    .flatMap(([, messages]) => messages)
+}
+
+function fieldError(columnId: string) {
+  if (editingIndex.value < 0) return ''
+  const key = rowKey(editingRow)
+  if (!key) return ''
+
+  return props.errors?.[`${props.widget.id}:row:${key}:${columnId}`]?.join('；') || ''
+}
+
 function openEditor(index: number) {
   editingIndex.value = index
   Object.keys(editingRow).forEach(key => delete editingRow[key])
@@ -135,5 +176,13 @@ function saveEditor() {
 .grid-table-header h3 {
   margin: 0 0 12px;
   font-size: 16px;
+}
+.grid-field-error {
+  margin-bottom: 12px;
+}
+.grid-field-error-message {
+  color: var(--el-color-danger);
+  font-size: 12px;
+  line-height: 20px;
 }
 </style>
