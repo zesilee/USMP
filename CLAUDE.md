@@ -259,3 +259,17 @@ explore → propose → apply → sync → archive
 | 前端 | 可运行 Vue3 项目：动态表单 + 树形菜单 + 配置下发 |
 | 测试 | 单元 + 异常 + 并发 + NETCONF 模拟网元集成测试 |
 | 合规 | 满足 §2 全部红线，无违规代码 |
+
+## §11 团队协作
+
+> 详见 [TEAM_HANDBOOK.md](TEAM_HANDBOOK.md) — 多人并行开发、代码评审、安全合入主干完整流程。
+
+| 编号 | 规则 |
+|------|------|
+| TM01 | 合入 main 须经 PR + ≥1 人 approve + CI 全绿 |
+| TM02 | 分支命名：`<dev>/<change-name>` |
+| TM03 | 并行开发不可修改同一 Go package 或 YANG 模块 |
+| TM04 | PR 体积 ≤800 行，超出拆分 |
+| TM05 | 评审 24h 响应，BLOCK 必须处理，NIT 可选 |
+| TM06 | hotfix 允许 main 直修但须 24h 内补 PR |
+| TM07 | 迭代完成须满足 D01-D09 全部标准（见手册 §3） |
