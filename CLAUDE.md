@@ -119,11 +119,3 @@ EnterWorktree → 开发+测试+Commit → PR/Merge → ExitWorktree
 2. 前端：可运行的 Vue3 项目（动态表单、树形菜单、配置下发）
 3. 测试：所有模块单元测试 + 异常测试 + 并发测试 + NETCONF 模拟网元集成测试
 4. 合规：符合本文档全部约束，无数据库、无违规代码
-
-## 当前迭代优先级
-1. ~~框架实现：yang-controller-runtime 核心架构~~ ✅
-2. ~~API 迁移：REST API 迁移到新框架~~ ✅
-3. ~~移除旧架构：删除 legacy Actor 实现~~ ✅
-4. 新增 YANG 模块控制器：Interfaces / VLANs / System
-5. 端到端测试：真实设备连接测试、配置读写验证
-6. 异常处理：设备离线、重连、缓存过期、故障恢复
