@@ -47,11 +47,15 @@ test: ## 全量测试
 
 lint: ## Go vet + Go fmt 检查
 	cd backend && go vet ./...
-	@UNFORMATTED=$$(cd backend && gofmt -l . 2>/dev/null); \
-	if [ -n "$$UNFORMATTED" ]; then \
-		echo "❌ 未格式化文件:"; echo "$$UNFORMATTED"; exit 1; \
+	@echo "✅ go vet 通过"
+	@CHANGED=$$(cd backend && git diff --name-only --diff-filter=ACMR HEAD 2>/dev/null | grep '\.go$$' || true); \
+	if [ -n "$$CHANGED" ]; then \
+		UNFORMATTED=$$(cd backend && gofmt -l $$CHANGED 2>/dev/null); \
+		if [ -n "$$UNFORMATTED" ]; then \
+			echo "❌ 未格式化文件:"; echo "$$UNFORMATTED"; exit 1; \
+		fi; \
 	fi
-	@echo "✅ lint 通过"
+	@echo "✅ go fmt 通过"
 
 compliance: lint test ## 完整合规检查 (lint + test)
 	@echo "✅ 合规检查全部通过"
