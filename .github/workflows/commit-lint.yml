@@ -1,0 +1,54 @@
+name: Commit Message Lint
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  commit-lint:
+    name: Check Commit Messages
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Lint Commit Messages
+        run: |
+          VALID_TYPES="feat|fix|docs|test|refactor|style|chore|perf"
+          FAILED=0
+
+          # Get all commits in this PR
+          COMMITS=$(git log origin/main..HEAD --format="%H")
+
+          for COMMIT in $COMMITS; do
+            MSG=$(git log -1 --format="%B" "$COMMIT")
+            FIRST_LINE=$(echo "$MSG" | head -1)
+
+            # Check type prefix
+            if ! echo "$FIRST_LINE" | grep -qE "^(${VALID_TYPES}): .+$"; then
+              echo "::error::Commit ${COMMIT:0:8}: Invalid type prefix: ${FIRST_LINE}"
+              FAILED=1
+            fi
+
+            # Check What/Why/How
+            if [ "$(echo "$MSG" | grep -c "^What:")" -eq 0 ]; then
+              echo "::error::Commit ${COMMIT:0:8}: Missing 'What:' section"
+              FAILED=1
+            fi
+            if [ "$(echo "$MSG" | grep -c "^Why:")" -eq 0 ]; then
+              echo "::error::Commit ${COMMIT:0:8}: Missing 'Why:' section"
+              FAILED=1
+            fi
+            if [ "$(echo "$MSG" | grep -c "^How:")" -eq 0 ]; then
+              echo "::error::Commit ${COMMIT:0:8}: Missing 'How:' section"
+              FAILED=1
+            fi
+          done
+
+          if [ "$FAILED" -eq 1 ]; then
+            echo "::error::Commit message format check failed"
+            exit 1
+          fi
+
+          echo "All commit messages are compliant"

@@ -1,0 +1,18 @@
+# USMP CODEOWNERS — 分区审批规则
+# https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# 默认: 所有变更需 Maintainer 审批
+*           @usmp-maintainers
+
+# YANG 生成代码 — 任何变更必须 Maintainer 审批 (R04)
+/backend/internal/generated/  @usmp-maintainers
+
+# 架构核心 — 任何变更必须 Maintainer 审批 (R01)
+/backend/pkg/yang-runtime/    @usmp-maintainers
+
+# 合规配置文件 — 任何变更必须 Maintainer 审批
+/.githooks/                   @usmp-maintainers
+/.github/                     @usmp-maintainers
+/CLAUDE.md                    @usmp-maintainers
+/TEAM_HANDBOOK.md             @usmp-maintainers
+/Makefile                     @usmp-maintainers

@@ -1,0 +1,62 @@
+name: OpenSpec Check
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  openspec-check:
+    name: Check OpenSpec Artifacts (D01)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check OpenSpec Change Artifacts
+        run: |
+          # Find active (non-archived) OpenSpec changes
+          CHANGES_DIR="openspec/specs"
+
+          if [ ! -d "$CHANGES_DIR" ]; then
+            echo "No OpenSpec specs directory, skipping check"
+            exit 0
+          fi
+
+          # Check if PR touches any change directory
+          CHANGED_FILES=$(git diff origin/main...HEAD --name-only)
+          CHANGED_CHANGES=$(echo "$CHANGED_FILES" | grep "^openspec/specs/" | cut -d'/' -f3 | sort -u || true)
+
+          if [ -z "$CHANGED_CHANGES" ]; then
+            echo "No OpenSpec changes in this PR, skipping"
+            exit 0
+          fi
+
+          FAILED=0
+          for CHANGE in $CHANGED_CHANGES; do
+            CHANGE_DIR="${CHANGES_DIR}/${CHANGE}"
+
+            # D01: Check three artifacts exist
+            for ARTIFACT in proposal.md design.md tasks.md; do
+              if [ ! -f "${CHANGE_DIR}/${ARTIFACT}" ]; then
+                echo "::error::[D01] Missing artifact: ${CHANGE_DIR}/${ARTIFACT}"
+                FAILED=1
+              fi
+            done
+
+            # D02: Check tasks.md has [x] items (at least some completed)
+            if [ -f "${CHANGE_DIR}/tasks.md" ]; then
+              DONE=$(grep -c '\[x\]' "${CHANGE_DIR}/tasks.md" 2>/dev/null || echo "0")
+              TOTAL=$(grep -c '\[[ x]\]' "${CHANGE_DIR}/tasks.md" 2>/dev/null || echo "0")
+              if [ "$TOTAL" -gt 0 ] && [ "$DONE" -eq 0 ]; then
+                echo "::warning::[D02] No tasks completed in ${CHANGE_DIR}/tasks.md"
+              fi
+            fi
+          done
+
+          if [ "$FAILED" -eq 1 ]; then
+            echo "::error::OpenSpec artifact check failed"
+            exit 1
+          fi
+
+          echo "OpenSpec artifacts check passed"

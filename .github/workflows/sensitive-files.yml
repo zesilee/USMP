@@ -1,0 +1,36 @@
+name: Sensitive Files Check
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  sensitive-files:
+    name: Check for Sensitive Files (R16)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Scan for Sensitive Files
+        run: |
+          CHANGED=$(git diff origin/main...HEAD --name-only)
+          SENSITIVE=$(echo "$CHANGED" | grep -iE '\.(env|pem|key|p12|pfx|jks|keystore)$' || true)
+
+          if [ -n "$SENSITIVE" ]; then
+            echo "::error::[R16] Sensitive files detected in PR:"
+            echo "$SENSITIVE"
+            exit 1
+          fi
+
+          # Also check for common secret patterns in code
+          SECRETS=$(git diff origin/main...HEAD --diff-filter=ACMR -p | \
+            grep -iE '^\+.*(password|secret|api_key|private_key)\s*=\s*["\x27][^"\x27]{8,}' || true)
+
+          if [ -n "$SECRETS" ]; then
+            echo "::warning::[R16] Possible hardcoded secrets detected, please review"
+            echo "$SECRETS"
+          fi
+
+          echo "No sensitive files detected"

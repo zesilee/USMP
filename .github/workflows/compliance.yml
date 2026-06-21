@@ -1,0 +1,67 @@
+name: Compliance Check
+
+on:
+  push:
+    branches: ['*']
+  pull_request:
+    branches: [main]
+
+jobs:
+  compliance:
+    name: Test + Lint + Coverage
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.21'
+
+      - name: Go Mod Download
+        run: go mod download
+
+      - name: Run Tests with Coverage
+        run: |
+          go test ./... -race -count=1 -coverprofile=coverage.out -timeout=120s
+          go tool cover -func=coverage.out
+
+      - name: Check Coverage Baseline
+        run: |
+          CURRENT=$(go tool cover -func=coverage.out | grep total | awk '{print $3}' | sed 's/%//')
+          echo "Current coverage: ${CURRENT}%"
+          # Baseline check: if baseline file exists, compare
+          if [ -f .coverage-baseline ]; then
+            BASELINE=$(cat .coverage-baseline)
+            echo "Baseline coverage: ${BASELINE}%"
+            if (( $(echo "$CURRENT < $BASELINE" | bc -l) )); then
+              echo "::error::Coverage dropped from ${BASELINE}% to ${CURRENT}%"
+              exit 1
+            fi
+          else
+            echo "No baseline file, recording current coverage"
+            echo "$CURRENT" > .coverage-baseline
+          fi
+
+      - name: Go Vet
+        run: go vet ./...
+
+      - name: Go Fmt Check
+        run: |
+          UNFORMATTED=$(gofmt -l .)
+          if [ -n "$UNFORMATTED" ]; then
+            echo "::error::Unformatted files:"
+            echo "$UNFORMATTED"
+            exit 1
+          fi
+
+      - name: Check Generated Code (R04)
+        run: |
+          CHANGED=$(git diff --name-only origin/main...HEAD 2>/dev/null | grep '^backend/internal/generated/' || true)
+          if [ -n "$CHANGED" ]; then
+            echo "::error::[R04] Direct edit to generated code detected:"
+            echo "$CHANGED"
+            exit 1
+          fi
