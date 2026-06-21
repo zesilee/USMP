@@ -27,6 +27,10 @@
 | R10 | 禁止无关依赖 | 不引入与项目无关的第三方库 |
 | R11 | 禁止 AI 陈词滥调 | 紫粉蓝渐变、左边框圆角卡片、滥用 Inter/Roboto |
 | R12 | 禁止 emoji 替代图标 | 无真实图标时使用规范占位符 |
+| R13 | 禁止直接 push main | 使用 PR 合入，L2-L5 四层拦截兜底 |
+| R14 | 禁止绕过 PR 合入 | CI required checks + 分支保护 |
+| R15 | 禁止无测试提交 | pre-commit + CI 双重拦截 |
+| R16 | 禁止提交敏感文件 | `.env`/`.pem`/`.key`/`.p12` 等，pre-commit + CI 扫描 |
 
 ## §3 技术栈
 
@@ -189,6 +193,7 @@ explore → propose → apply → sync → archive
 | W04 | 禁止合并成功前删除 worktree |
 | W05 | 禁止未经确认执行丢弃（需输入 'discard' 确认） |
 | W06 | 禁止清理非自己创建的 worktree（路径溯源） |
+| W07 | 禁止 force push 任何分支（hotfix 除外需 Maintainer 确认） |
 
 ## §7 技能映射
 
@@ -273,3 +278,5 @@ explore → propose → apply → sync → archive
 | TM05 | 评审 24h 响应，BLOCK 必须处理，NIT 可选 |
 | TM06 | hotfix 允许 main 直修但须 24h 内补 PR |
 | TM07 | 迭代完成须满足 D01-D09 全部标准（见手册 §3） |
+| TM08 | `make setup` 为 clone 后必执行步骤，激活本地拦截层 |
+| TM09 | CI required checks 全通过才可合入（compliance + commit-lint + pr-size + branch-name + sensitive-files） |
