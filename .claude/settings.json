@@ -11,7 +11,23 @@
       "Bash(git diff *)",
       "Bash(git log *)",
       "Bash(go fmt *)",
-      "Bash(go vet *)"
+      "Bash(go vet *)",
+      "Bash(go test *)",
+      "Bash(make *)",
+      "Bash(chmod +x .githooks/*)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": ".claude/hooks/pre-tool-use.sh \"$TOOL_INPUT\""
+          }
+        ]
+      }
     ]
   },
   "attribution": {

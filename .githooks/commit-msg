@@ -1,0 +1,76 @@
+#!/usr/bin/env bash
+# USMP commit-msg hook — L3 合规拦截
+# 拦截: commit message 格式 (What/Why/How 三段式) + type 前缀 + 代码量 ≤500 行
+set -euo pipefail
+
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+NC='\033[0m'
+
+MSG_FILE="$1"
+MSG=$(cat "$MSG_FILE")
+FAILED=0
+
+echo -e "${YELLOW}[commit-msg] USMP 提交消息合规检查...${NC}"
+
+# ──────────────────────────────────────────────
+# 1. Type 前缀校验
+# ──────────────────────────────────────────────
+VALID_TYPES="feat|fix|docs|test|refactor|style|chore|perf"
+FIRST_LINE=$(echo "$MSG" | head -1)
+
+if ! echo "$FIRST_LINE" | grep -qE "^(${VALID_TYPES}): .+$"; then
+  echo -e "${RED}[commit-msg] 拒绝: commit 类型前缀不合规${NC}"
+  echo -e "${YELLOW}  要求: <type>: <subject>${NC}"
+  echo -e "${YELLOW}  可用: feat|fix|docs|test|refactor|style|chore|perf${NC}"
+  echo -e "${YELLOW}  实际: ${FIRST_LINE}${NC}"
+  FAILED=1
+fi
+
+# ──────────────────────────────────────────────
+# 2. What/Why/How 三段式
+# ──────────────────────────────────────────────
+HAS_WHAT=$(echo "$MSG" | grep -c "^What:" || true)
+HAS_WHY=$(echo "$MSG" | grep -c "^Why:" || true)
+HAS_HOW=$(echo "$MSG" | grep -c "^How:" || true)
+
+if [ "$HAS_WHAT" -eq 0 ]; then
+  echo -e "${RED}[commit-msg] 拒绝: 缺少 What: 段${NC}"
+  FAILED=1
+fi
+if [ "$HAS_WHY" -eq 0 ]; then
+  echo -e "${RED}[commit-msg] 拒绝: 缺少 Why: 段${NC}"
+  FAILED=1
+fi
+if [ "$HAS_HOW" -eq 0 ]; then
+  echo -e "${RED}[commit-msg] 拒绝: 缺少 How: 段${NC}"
+  FAILED=1
+fi
+
+# ──────────────────────────────────────────────
+# 3. 代码量限制 (≤500 行)
+# ──────────────────────────────────────────────
+STAT_LINE=$(git diff --cached --stat 2>/dev/null | tail -1 || true)
+if [ -n "$STAT_LINE" ]; then
+  INSERTIONS=$(echo "$STAT_LINE" | grep -oE '[0-9]+ insertion' | grep -oE '[0-9]+' || echo "0")
+  DELETIONS=$(echo "$STAT_LINE" | grep -oE '[0-9]+ deletion' | grep -oE '[0-9]+' || echo "0")
+  TOTAL=$((INSERTIONS + DELETIONS))
+
+  if [ "$TOTAL" -gt 500 ]; then
+    echo -e "${RED}[commit-msg] 拒绝: 变更量 ${TOTAL} 行超过 500 行限制${NC}"
+    echo -e "${YELLOW}  要求: 单次 commit ≤500 行，超出拆分到下一迭代${NC}"
+    FAILED=1
+  fi
+fi
+
+# ──────────────────────────────────────────────
+# 结果
+# ──────────────────────────────────────────────
+if [ "$FAILED" -eq 1 ]; then
+  echo -e "${RED}[commit-msg] ❌ 提交消息不合规，提交被拦截${NC}"
+  exit 1
+fi
+
+echo -e "${GREEN}[commit-msg] ✅ 提交消息合规${NC}"
+exit 0
