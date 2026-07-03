@@ -86,12 +86,29 @@ fi
 # 6. 环境摘要
 # ──────────────────────────────────────────────
 echo ""
-echo -e "${YELLOW}[6/6] 环境摘要${NC}"
+echo -e "${YELLOW}[6/7] 环境摘要${NC}"
 echo -e "  CLAUDE.md:    $(wc -l < CLAUDE.md 2>/dev/null || echo '?') 行（AI 执行规范）"
 echo -e "  TEAM_HANDBOOK:$(wc -l < TEAM_HANDBOOK.md 2>/dev/null || echo '?') 行（开发协作指南）"
 echo -e "  OpenSpec:     $(ls openspec/specs/ 2>/dev/null | wc -l | tr -d ' ') 个能力规格"
 echo -e "  CI Workflows: $(ls .github/workflows/ 2>/dev/null | wc -l | tr -d ' ') 个"
 echo -e "  Git Hooks:    $(ls .githooks/ 2>/dev/null | wc -l | tr -d ' ') 个"
+
+# ──────────────────────────────────────────────
+# 7. 任务目录
+# ──────────────────────────────────────────────
+echo -e "${YELLOW}[7/7] 初始化任务目录...${NC}"
+mkdir -p openspec/tasks/archive
+IN_PROGRESS=$(grep -rl 'status: in_progress' openspec/tasks/ 2>/dev/null | grep -v archive | wc -l | tr -d ' ' || true)
+PENDING=$(grep -rl 'status: pending' openspec/tasks/ 2>/dev/null | grep -v archive | wc -l | tr -d ' ' || true)
+IN_PROGRESS=${IN_PROGRESS:-0}
+PENDING=${PENDING:-0}
+TOTAL=$((IN_PROGRESS + PENDING))
+if [ "$TOTAL" -gt 0 ]; then
+  echo -e "  ✅ openspec/tasks/ 就绪 (${IN_PROGRESS} 进行中, ${PENDING} 待处理)"
+  echo -e "  💡 运行 /task list 查看未完成任务"
+else
+  echo -e "  ✅ openspec/tasks/ 就绪 (无进行中任务)"
+fi
 
 # ──────────────────────────────────────────────
 # 结果
