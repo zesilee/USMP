@@ -14,14 +14,20 @@ echo -e "${YELLOW}[pre-push] USMP 推送合规检查...${NC}"
 
 # ──────────────────────────────────────────────
 # 1. 分支保护 (R13: 禁止直接 push main)
+#    个人仓库: 仅警告，不拦截（Owner 自行判断）
+#    团队仓库: 设环境变量 USMP_TEAM_MODE=1 启用拦截
 # ──────────────────────────────────────────────
 CURRENT_BRANCH=$(git branch --show-current 2>/dev/null || echo "")
 
 if [ "$CURRENT_BRANCH" = "main" ] || [ "$CURRENT_BRANCH" = "master" ]; then
-  echo -e "${RED}[R13] 拒绝: 禁止直接 push ${CURRENT_BRANCH} 分支${NC}"
-  echo -e "${YELLOW}  要求: 使用 PR 合入 (见 TEAM_HANDBOOK.md §6-7)${NC}"
-  echo -e "${YELLOW}  Hotfix: 仅在紧急情况下允许，需 Maintainer 确认${NC}"
-  FAILED=1
+  if [ "${USMP_TEAM_MODE:-0}" = "1" ]; then
+    echo -e "${RED}[R13] 拒绝: 禁止直接 push ${CURRENT_BRANCH} 分支${NC}"
+    echo -e "${YELLOW}  要求: 使用 PR 合入 (见 TEAM_HANDBOOK.md §6-7)${NC}"
+    FAILED=1
+  else
+    echo -e "${YELLOW}[R13] 警告: 正在直接 push ${CURRENT_BRANCH}（个人仓库模式）${NC}"
+    echo -e "${YELLOW}  团队模式请设置: export USMP_TEAM_MODE=1${NC}"
+  fi
 fi
 
 # ──────────────────────────────────────────────
