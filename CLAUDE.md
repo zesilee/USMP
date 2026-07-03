@@ -282,3 +282,15 @@ explore → propose → apply → sync → archive
 | TM08 | `make setup` 为 clone 后必执行步骤，一键激活全部拦截层 + 依赖 + 基线测试 |
 | TM09 | CI required checks 全通过才可合入（compliance + commit-lint + pr-size + branch-name + sensitive-files + openspec-check） |
 | TM10 | OpenSpec 项目配置固化在 `openspec/.openspec.yaml`，克隆自动可用 |
+
+## §12 会话恢复
+
+> 任务持久化到 `openspec/tasks/`，支持跨会话和跨机器续做。
+
+| 编号 | 规则 |
+|------|------|
+| SR01 | 新会话启动时，检查 `openspec/tasks/` 是否有 `status: in_progress` 的任务，如有则提示运行 `/task resume <slug>` |
+| SR02 | 任务完成后，运行 `/task archive <slug>` 归档 |
+| SR03 | 任务切换时，先 `/task sync` 保存当前状态，再切换 |
+| SR04 | `/task list` 随时可查看所有任务状态 |
+| SR05 | `/task resume <slug>` 恢复任务时，自动读取上下文恢复提示和恢复指令 |
