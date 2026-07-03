@@ -16,22 +16,26 @@ jobs:
           BRANCH: ${{ github.head_ref }}
         run: |
           # Valid patterns:
-          #   <dev>/<change-name>    (e.g., alice/vlan-api)
-          #   <dev>/fix-<issue>      (e.g., bob/fix-cache-race)
-          #   <dev>/migrate-<module> (e.g., carol/migrate-ifm-actor)
-          #   hotfix/<description>   (e.g., hotfix/netconf-reconnect)
+          #   <change-name>           (e.g., vlan-api)
+          #   fix-<issue>             (e.g., fix-cache-race)
+          #   migrate-<module>        (e.g., migrate-ifm-actor)
+          #   hotfix/<description>    (e.g., hotfix/netconf-reconnect)
+          #   <dev>/<change-name>     (e.g., alice/vlan-api, compatible with team mode)
 
+          # Feature / fix / migrate (simple name, no slash)
+          if echo "$BRANCH" | grep -qE '^[a-z0-9_-]+$'; then
+            echo "Branch name '${BRANCH}' is valid"
+            exit 0
+          fi
+
+          # Hotfix or team-style branch (with slash)
           if echo "$BRANCH" | grep -qE '^[a-z0-9_-]+/[a-z0-9_-]+$'; then
             echo "Branch name '${BRANCH}' is valid"
             exit 0
           fi
 
-          if echo "$BRANCH" | grep -qE '^hotfix/[a-z0-9_-]+$'; then
-            echo "Branch name '${BRANCH}' is valid (hotfix)"
-            exit 0
-          fi
-
           echo "::error::[TM02] Invalid branch name: '${BRANCH}'"
-          echo "Required format: <dev>/<change-name> or hotfix/<description>"
-          echo "Examples: alice/vlan-api, bob/fix-cache-race, hotfix/netconf-reconnect"
+          echo "Required format: <change-name> or hotfix/<description>"
+          echo "Examples: vlan-api, fix-cache-race, hotfix/netconf-reconnect"
+          echo "Team mode: <dev>/<change-name> (e.g., alice/vlan-api)"
           exit 1

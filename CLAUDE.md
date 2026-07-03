@@ -265,18 +265,19 @@ explore → propose → apply → sync → archive
 | 测试 | 单元 + 异常 + 并发 + NETCONF 模拟网元集成测试 |
 | 合规 | 满足 §2 全部红线，无违规代码 |
 
-## §11 团队协作
+## §11 开发协作
 
-> 详见 [TEAM_HANDBOOK.md](TEAM_HANDBOOK.md) — 多人并行开发、代码评审、安全合入主干完整流程。
+> 详见 [TEAM_HANDBOOK.md](TEAM_HANDBOOK.md) — 开发流程、自审清单、安全合入完整指南。
+> 个人项目：无他人审批，用结构化自审 + CI 自动化替代人工评审。
 
 | 编号 | 规则 |
 |------|------|
-| TM01 | 合入 main 须经 PR + ≥1 人 approve + CI 全绿 |
-| TM02 | 分支命名：`<dev>/<change-name>` |
-| TM03 | 并行开发不可修改同一 Go package 或 YANG 模块 |
+| TM01 | 合入 main 须经 PR + CI 全绿 + 自审清单通过 |
+| TM02 | 分支命名：`<change-name>` 或 `hotfix/<desc>` |
+| TM03 | 多 worktree 不可修改同一 Go package 或 YANG 模块 |
 | TM04 | PR 体积 ≤800 行，超出拆分 |
-| TM05 | 评审 24h 响应，BLOCK 必须处理，NIT 可选 |
-| TM06 | hotfix 允许 main 直修但须 24h 内补 PR |
+| TM05 | 自审清单（§6.2）全部 ✓ 才可合入 |
+| TM06 | hotfix 允许 main 直修但须补 PR 供 CI 验证 |
 | TM07 | 迭代完成须满足 D01-D09 全部标准（见手册 §3） |
 | TM08 | `make setup` 为 clone 后必执行步骤，激活本地拦截层 |
 | TM09 | CI required checks 全通过才可合入（compliance + commit-lint + pr-size + branch-name + sensitive-files） |

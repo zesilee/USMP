@@ -92,8 +92,7 @@ make hook-verify
 GitHub → Settings → Branches → Branch protection rules → `main`
 
 1. ☑ Require a pull request before merging
-   - ☑ Require approvals: **1**
-   - ☑ Dismiss stale reviews on push
+   - 不勾选 Require approvals（个人仓库无他人审批）
 2. ☑ Require status checks to pass
    - 选择: `compliance`, `commit-lint`, `pr-size`, `branch-name`, `sensitive-files`
    - ☑ Require branches to be up to date
@@ -103,12 +102,10 @@ GitHub → Settings → Branches → Branch protection rules → `main`
 ### CODEOWNERS
 
 已在 `.github/CODEOWNERS` 配置分区审批规则：
-- 默认：所有变更需 `@usmp-maintainers` 审批
-- `internal/generated/`：必须 Maintainer 审批（R04）
-- `pkg/yang-runtime/`：必须 Maintainer 审批（R01）
-- 合规配置文件：必须 Maintainer 审批
-
-> **注意**：需在 GitHub Organization 中创建 `usmp-maintainers` 团队并添加成员。
+- 默认：所有变更需 `@zesilee` 审批
+- `internal/generated/`：必须 Owner 审批（R04）
+- `pkg/yang-runtime/`：必须 Owner 审批（R01）
+- 合规配置文件：必须 Owner 审批
 
 ## 测试拦截是否生效
 
