@@ -22,13 +22,13 @@ jobs:
 
           echo "PR size: ${TOTAL} lines (+${INSERTIONS} -${DELETIONS})"
 
-          # File count determines limit tier:
-          #   ≤20 files changed: 800 lines (feature PR)
-          #   >20 files changed: 50000 lines (infrastructure/migration PR)
+          # Limits:
+          #   Feature PR (≤20 files): 800 lines
+          #   Infrastructure PR (>20 files): 3000 lines
           CHANGED_FILES=$(git diff --name-only origin/main...HEAD | wc -l | tr -d ' ')
           if [ "$CHANGED_FILES" -gt 20 ]; then
-            LIMIT=50000
-            echo "Large PR detected (${CHANGED_FILES} files), limit raised to ${LIMIT}"
+            LIMIT=3000
+            echo "Infrastructure PR detected (${CHANGED_FILES} files), limit: ${LIMIT}"
           else
             LIMIT=800
           fi
