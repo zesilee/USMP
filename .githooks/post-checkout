@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
 # USMP post-checkout hook — 分支切换后自动验证环境
 # 仅在分支切换时触发（非首次 clone，首次需手动 make setup）
-set -euo pipefail
+set -uo pipefail
 
 # $1 = previous HEAD, $2 = new HEAD, $3 = 1 if branch checkout
-if [ "$3" != "1" ]; then
+CHECKOUT_TYPE="${3:-0}"
+if [ "$CHECKOUT_TYPE" != "1" ]; then
   exit 0
 fi
 
