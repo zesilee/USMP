@@ -1,0 +1,47 @@
+# USMP OpenSpec 项目配置
+version: "1.0"
+project: USMP
+description: 无数据库、高并发、模型驱动的交换机设备管理平台
+
+# 目录结构
+specsDir: specs
+changesDir: changes
+archiveDir: changes/archive
+
+# 制品模板
+templates:
+  spec: templates/spec.md
+  design: templates/design.md
+  tasks: templates/tasks.md
+
+# 工作流约束
+workflow:
+  stages:
+    - explore
+    - propose
+    - apply
+    - sync
+    - archive
+  requiredArtifacts:
+    propose: [proposal.md, design.md, tasks.md]
+  legacyMigration:
+    strategy: progressive  # 渐进替换，禁止一次性重写
+    steps:
+      - 保留旧代码
+      - 新旧并行
+      - 双路径验证
+      - 切换入口
+      - 删除旧代码
+
+# 项目架构红线（对应 CLAUDE.md §2）
+constraints:
+  - id: R01
+    rule: 禁止更换架构
+  - id: R03
+    rule: 禁止数据库
+  - id: R04
+    rule: 禁止手写 YANG 结构体
+  - id: R06
+    rule: 禁止先代码后测试
+  - id: R07
+    rule: 禁止合并流程

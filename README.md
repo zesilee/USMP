@@ -67,6 +67,19 @@ USMP 是一个基于 **Kubernetes CRD + Operator 架构** + **YANG 模型驱动*
 
 ## 🚀 快速开始
 
+### ⚡ 一键激活开发环境（克隆后必执行）
+
+```bash
+git clone https://github.com/zesilee/USMP.git
+cd USMP
+make setup
+```
+
+`make setup` 自动完成：Git Hooks 激活 + Go/前端依赖安装 + 基线测试 + 拦截体系验证。
+**未执行 `make setup` 会导致提交拦截和 CI 检查不生效。**
+
+详见 [TEAM_HANDBOOK.md](TEAM_HANDBOOK.md) 和 [docs/compliance/SETUP_GUIDE.md](docs/compliance/SETUP_GUIDE.md)。
+
 ### 编译后端
 
 ```bash

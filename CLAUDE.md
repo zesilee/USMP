@@ -279,5 +279,6 @@ explore → propose → apply → sync → archive
 | TM05 | 自审清单（§6.2）全部 ✓ 才可合入 |
 | TM06 | hotfix 允许 main 直修但须补 PR 供 CI 验证 |
 | TM07 | 迭代完成须满足 D01-D09 全部标准（见手册 §3） |
-| TM08 | `make setup` 为 clone 后必执行步骤，激活本地拦截层 |
-| TM09 | CI required checks 全通过才可合入（compliance + commit-lint + pr-size + branch-name + sensitive-files） |
+| TM08 | `make setup` 为 clone 后必执行步骤，一键激活全部拦截层 + 依赖 + 基线测试 |
+| TM09 | CI required checks 全通过才可合入（compliance + commit-lint + pr-size + branch-name + sensitive-files + openspec-check） |
+| TM10 | OpenSpec 项目配置固化在 `openspec/.openspec.yaml`，克隆自动可用 |
