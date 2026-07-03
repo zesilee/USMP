@@ -4,8 +4,6 @@ kind: Kustomization
 namespace: usmp-system
 
 resources:
-  # CRD Definitions
-  - ../../config/crd/bases
   # Namespace
   - namespace.yaml
   # Controller

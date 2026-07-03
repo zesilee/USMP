@@ -1,0 +1,72 @@
+name: Compliance Check
+
+on:
+  push:
+    branches: ['*']
+  pull_request:
+    branches: [main]
+
+jobs:
+  compliance:
+    name: Test + Lint + Coverage
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.21'
+
+      - name: Go Mod Download
+        run: go mod download
+
+      - name: Run Tests with Coverage
+        run: |
+          go test ./... -count=1 -coverprofile=coverage.out -timeout=120s 2>&1 | tee test-output.txt
+          go tool cover -func=coverage.out 2>/dev/null || true
+
+      - name: Check Coverage Baseline
+        run: |
+          CURRENT=$(go tool cover -func=coverage.out 2>/dev/null | grep total | awk '{print $3}' | sed 's/%//' || echo "0")
+          echo "Current coverage: ${CURRENT}%"
+          if [ -f .coverage-baseline ]; then
+            BASELINE=$(cat .coverage-baseline)
+            echo "Baseline coverage: ${BASELINE}%"
+            if [ "$BASELINE" != "0" ] && [ "$CURRENT" != "0" ]; then
+              if (( $(echo "$CURRENT < $BASELINE" | bc -l 2>/dev/null || echo "0") )); then
+                echo "::warning::Coverage dropped from ${BASELINE}% to ${CURRENT}%"
+              fi
+            fi
+          else
+            echo "No baseline file, recording current coverage"
+            echo "$CURRENT" > .coverage-baseline
+          fi
+
+      - name: Go Vet
+        run: go vet ./...
+
+      - name: Go Fmt Check
+        run: |
+          # Only check files changed in this PR (not entire codebase)
+          CHANGED=$(git diff --name-only --diff-filter=ACMR origin/main...HEAD 2>/dev/null | grep '\.go$' || true)
+          if [ -n "$CHANGED" ]; then
+            UNFORMATTED=$(gofmt -l $CHANGED 2>/dev/null || true)
+            if [ -n "$UNFORMATTED" ]; then
+              echo "::error::Unformatted files:"
+              echo "$UNFORMATTED"
+              exit 1
+            fi
+          fi
+          echo "Go fmt check passed"
+
+      - name: Check Generated Code (R04)
+        run: |
+          CHANGED=$(git diff --name-only origin/main...HEAD 2>/dev/null | grep '^backend/internal/generated/' || true)
+          if [ -n "$CHANGED" ]; then
+            echo "::error::[R04] Direct edit to generated code detected:"
+            echo "$CHANGED"
+            exit 1
+          fi

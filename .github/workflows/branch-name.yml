@@ -1,0 +1,41 @@
+name: Branch Name Check
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  branch-name:
+    name: Check Branch Naming Convention
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check Branch Name
+        env:
+          BRANCH: ${{ github.head_ref }}
+        run: |
+          # Valid patterns:
+          #   <change-name>           (e.g., vlan-api)
+          #   fix-<issue>             (e.g., fix-cache-race)
+          #   migrate-<module>        (e.g., migrate-ifm-actor)
+          #   hotfix/<description>    (e.g., hotfix/netconf-reconnect)
+          #   <dev>/<change-name>     (e.g., alice/vlan-api, compatible with team mode)
+
+          # Feature / fix / migrate (simple name, no slash)
+          if echo "$BRANCH" | grep -qE '^[a-z0-9_-]+$'; then
+            echo "Branch name '${BRANCH}' is valid"
+            exit 0
+          fi
+
+          # Hotfix or team-style branch (with slash)
+          if echo "$BRANCH" | grep -qE '^[a-z0-9_-]+/[a-z0-9_-]+$'; then
+            echo "Branch name '${BRANCH}' is valid"
+            exit 0
+          fi
+
+          echo "::error::[TM02] Invalid branch name: '${BRANCH}'"
+          echo "Required format: <change-name> or hotfix/<description>"
+          echo "Examples: vlan-api, fix-cache-race, hotfix/netconf-reconnect"
+          echo "Team mode: <dev>/<change-name> (e.g., alice/vlan-api)"
+          exit 1

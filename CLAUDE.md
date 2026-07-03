@@ -1,119 +1,283 @@
-# 交换机设备管理平台 - Claude Code 开发规范
-本文件用于指导 Claude Code 按项目架构、全局规则、技能集，全程遵循 Plan 模式+TDD+小步迭代，所有开发行为需严格匹配已加载的 skills 和 rules。
+# USMP — 开发规范
 
-## 一、项目概述
-### 项目目标
-开发一套 **无数据库、高并发、模型驱动** 的交换机设备管理平台，支持设备管控、配置读写、动态表单展示，基于 **yang-controller-runtime**（controller-runtime 风格架构）实现声明式配置管理。框架处理所有 boilerplate，开发者仅需编写 Reconciler 业务逻辑。
+## §1 项目身份
 
-### 核心架构（不可变更）
-- 后端：Go 1.21+，**yang-controller-runtime** 框架（Kubernetes controller-runtime 架构风格）
-- 配置模型：YANG 模型 + ygot 自动生成强类型结构体
-- 协议：NETCONF（RFC6241）+ gNMI 双协议支持
-- 缓存：TTL+LRU 内存缓存（无数据库）
-- 前端：基于 YANG 模型自动生成动态表单，无本地存储
+| 维度 | 值 |
+|------|------|
+| 定位 | 无数据库、高并发、模型驱动的交换机设备管理平台 |
+| 架构 | yang-controller-runtime 声明式配置管理 **[R01: 禁止更换]** |
+| 语言 | Go 1.21+ / Vue3 |
+| 协议 | NETCONF (SSH 830) + gNMI (9339/9340) **[R02: 禁止旧协议]** |
 
-### 技术栈（固定）
-| 模块 | 技术选型 | 核心依赖 |
-|------|----------|----------|
-| 后端框架 | Go + Gin | yang-controller-runtime、ygot、scrapligo（NETCONF）|
-| controller-runtime 架构 | Manager → Controller → Reconciler → Source | 全局生命周期管理、每 YANG 模块一个 Controller |
-| 配置模型 | YANG + ygot | openconfig/ygot（自动生成结构体） |
-| 协议通信 | NETCONF + gNMI | RFC6241 标准 + openconfig/gnmi |
-| 缓存 | 内存缓存 | TTL+LRU、协程安全 |
-| 前端 | Vue3 + Element Plus | 动态表单、树形菜单、Axios |
+## §2 架构红线
 
-## 二、开发流程规范（**严格遵循，违者重罚**）
-全程执行 **Plan 模式 + TDD 测试驱动 + 小步迭代**，步骤不可跳过、不可合并：
-1.  **需求拆分**：每个迭代仅做 **1 个原子功能**，**必须**拆分到可在单次迭代中完成，输出 Iteration Plan
-2.  **测试先行**：先编写单元测试用例（覆盖正常/异常/并发场景），测试不写不写实现代码
-3.  **代码实现**：**单次输出代码 ≤ 500 行**，这是硬性约束，超过必须拆分到下一个迭代
-    - 即使是一个大功能，也要拆分多次迭代，每次不超过 500 行
-    - 不许一次性输出上千行代码，必须小步前进
-4.  **代码评审**：自动执行 Code Review，不通过则整改
-5.  **集成测试**：**所有新增 YANG 模块业务功能，必须添加基于 NETCONF 模拟网元的集成测试**
-    - 集成测试放在对应业务包 `*_integration_test.go`
-    - 必须覆盖正常流程和至少一个异常场景
-    - 所有集成测试必须执行成功才能提交代码
-    - 使用 `if testing.Short() { t.Skip() }` 跳过集成测试让日常单元测试更快
-6.  **提交代码**：**每次迭代完成一个完整原子功能且所有测试通过后，必须立即提交代码**，不许积累多个功能再提交
-    - 使用 `git-what-why-how-commit` 规范生成标准三段式 Commit
-    - 一个原子功能一个 Commit，方便追溯和回滚
-7.  **迭代循环**：完成一个原子功能，进入下一个迭代
+> 违反任一条即视为不合规，禁止提交。
 
-## 三、核心架构约束（与 rules.md 一致）
-### 1. yang-controller-runtime 架构约束（核心）
-- **Manager**：全局生命周期管理，负责 schema 加载、client 连接池、controller 注册、插件管理
-- **Controller**：每个 YANG 模块一个 Controller，处理事件队列，调用 Reconciler
-- **Reconciler**：用户实现，对齐 desired ↔ actual 配置（差异比对 + 配置推送）
-- **EventSource**：产生 reconcile 事件（周期轮询、gNMI 订阅、文件变更）
-- **ClientPool**：设备连接池，自动重连，复用连接
-- 框架处理所有 boilerplate：schema 解析、连接管理、diff 计算、协议编码、限频重试、事件排队
-- 用户只需要实现 Reconciler 接口，不需要处理并发和连接管理
+| 编号 | 红线 | 说明 |
+|------|------|------|
+| R01 | 禁止更换架构 | Manager→Controller→Reconciler→Source，禁止回退 Actor 模型 |
+| R02 | 禁止旧协议 | 仅 NETCONF/gNMI，禁止 Telnet/SNMP |
+| R03 | 禁止数据库 | 仅 TTL+LRU 内存缓存 + 本地 JSON 元信息，禁止 MySQL/Redis/SQLite |
+| R04 | 禁止手写 YANG 结构体 | ygot 自动生成，禁止手写，禁止滥用 interface{} |
+| R05 | 禁止手写固定表单 | 前端由 YANG 模型自动渲染 |
+| R06 | 禁止先代码后测试 | TDD 红绿循环，测试先行 |
+| R07 | 禁止合并流程 | OpenSpec→测试→代码→Review→Commit，不可跳过或合并 |
+| R08 | 禁止崩溃 | 所有异常必须有降级处理 |
+| R09 | 禁止数据竞态 | 协程安全、无内存泄漏、panic 防护 |
+| R10 | 禁止无关依赖 | 不引入与项目无关的第三方库 |
+| R11 | 禁止 AI 陈词滥调 | 紫粉蓝渐变、左边框圆角卡片、滥用 Inter/Roboto |
+| R12 | 禁止 emoji 替代图标 | 无真实图标时使用规范占位符 |
+| R13 | 禁止直接 push main | 使用 PR 合入，L2-L5 四层拦截兜底 |
+| R14 | 禁止绕过 PR 合入 | CI required checks + 分支保护 |
+| R15 | 禁止无测试提交 | pre-commit + CI 双重拦截 |
+| R16 | 禁止提交敏感文件 | `.env`/`.pem`/`.key`/`.p12` 等，pre-commit + CI 扫描 |
 
-### 2. 配置管理约束
-- 无任何数据库（禁止使用 MySQL、Redis、SQLite 等）
-- 设备元信息：仅存储在本地 JSON 文件（不存储运行配置）
-- 运行配置：实时通过 NETCONF 从交换机读取，存入 TTL 内存缓存
-- 缓存规则：Key = 设备IP + YANG节点路径，TTL默认30秒，配置下发后主动失效
-- YANG 模型：所有配置结构体由 ygot 自动生成，不手写
+## §3 技术栈
 
-### 3. 前端约束
-- 所有界面由 YANG 模型自动生成，不手写固定表单
-- 支持 YANG 类型自动映射（boolean→开关、enum→下拉、list→表格等）
-- 前端无状态，不存储任何配置，所有数据来自后端 Actor API
-- 配置编辑→提交→下发，全程联动后端 YANG Actor + NETCONF
-- 展示设备状态、缓存状态、下发结果、异常信息（设备离线、NETCONF失败等）
+| 层 | 选型 | 依赖 | 约束 |
+|----|------|------|------|
+| 后端 | Go 1.21+ / yang-controller-runtime / Gin | ygot, scrapligo | §4 分层架构 |
+| 模型 | YANG + ygot | openconfig/ygot | R04: 自动生成 |
+| 协议 | NETCONF (SSH 830) + gNMI | RFC6241, openconfig/gnmi | R02: 禁止旧协议 |
+| 缓存 | TTL+LRU 内存 | 协程安全 | R03: 无数据库, Key=IP+YANG路径, TTL 30s, 下发后失效 |
+| 前端 | Vue3 + Element Plus | Axios, Pinia | R05: YANG 自动渲染, 编辑→提交→下发联动后端, 展示设备/缓存/下发/异常状态 |
 
-## 四、技能集关联（自动联动）
-| 技能名称 | 核心作用 | 联动模块 |
+## §4 yang-controller-runtime 分层
+
+| 组件 | 职责 | 用户接口 |
+|------|------|----------|
+| C1 Manager | 全局生命周期：schema 加载、client 连接池、controller 注册、插件管理 | 启动/停止 |
+| C2 Controller | 每 YANG 模块一个，处理事件队列，调用 Reconciler | 注册 Reconciler |
+| C3 Reconciler | 对齐 desired↔actual（diff + 推送），无状态 | **用户实现此接口** |
+| C4 EventSource | 产生 reconcile 事件：周期轮询 / gNMI 订阅 / 文件变更 | 注册 Source |
+| C5 ClientPool | 设备连接池：断线重连、超时重试、异常处理 | 获取连接 |
+
+> 框架处理所有 boilerplate（schema 解析、连接管理、diff 计算、协议编码、限频重试、事件排队）。用户只需实现 C3 Reconciler。
+
+## §5 开发工作流
+
+> 所有功能开发必须遵循此工作流，禁止跳过阶段。hotfix 允许在 main 操作但必须即时提交。
+
+### 阶段总览
+
+```
+explore → propose → apply → sync → archive
+   │         │         │        │        │
+   │         │         │        │        └─ 归档 change
+   │         │         │        └─ delta spec → 主 spec
+   │         │         └─ worktree 内: 实现+测试+review+commit
+   │         └─ 创建 change: proposal + design + tasks
+   └─ 探索需求，禁止写代码
+```
+
+### 5.1 explore — 探索
+
+| 项 | 值 |
+|----|------|
+| 命令 | `/opsx:explore` |
+| 产出 | 需求澄清、架构映射、风险清单 |
+| 门禁 | **禁止写代码** |
+| 存量改造 | 必须审计存量代码，标记 `legacy` / `新架构` 边界，输出改造策略（渐进替换 / 并行运行 / 隔离封装） |
+
+### 5.2 propose — 提案
+
+| 项 | 值 |
+|----|------|
+| 命令 | `/opsx:propose` |
+| 产出 | `proposal.md` + `design.md` + `tasks.md` |
+| 门禁 | 三件制品齐全才能进入 apply |
+| 存量改造 | tasks.md 须标注 `legacy→新架构` 迁移步骤，禁止一次性重写 |
+
+### 5.3 apply — 实现（worktree 内）
+
+| 项 | 值 |
+|----|------|
+| 命令 | `/opsx:apply` |
+| 前置 | **必须进入 worktree 隔离**（§6） |
+| 循环 | 按 tasks.md 逐项：写测试 → 写代码 → review → commit |
+| 门禁 | 全部测试通过 + code review 通过 → 才能进入 §6.3 完成分支 |
+| 代码量 | 单次输出 ≤500 行，超出拆分到下一迭代 |
+| 存量改造 | 每步迁移必须：旧代码保留 + 新代码并行 + 双路径验证 → 切换 → 删除旧代码 |
+
+### 5.4 sync — 同步
+
+| 项 | 值 |
+|----|------|
+| 命令 | `/opsx:sync` |
+| 产出 | delta spec 合并到主 spec |
+
+### 5.5 archive — 归档
+
+| 项 | 值 |
+|----|------|
+| 命令 | `/opsx:archive` |
+| 产出 | change 移入归档目录 |
+
+### TDD 规则（适用于 apply 阶段）
+
+| 编号 | 规则 |
+|------|------|
+| T01 | 先写测试（正常/异常/并发），再写实现，**禁止先代码后测试** |
+| T02 | 新增 YANG 模块必须添加 NETCONF 模拟网元集成测试（`*_integration_test.go`） |
+| T03 | 集成测试用 `testing.Short()` 跳过短测试 |
+| T04 | 代码评审不通过，禁止提交 |
+
+### 提交规范
+
+| 项 | 规则 |
+|----|------|
+| 时机 | 原子功能完成 + 测试通过 → 立即提交，禁止积累 |
+| 格式 | What/Why/How 三段式（`git-what-why-how-commit` 技能） |
+| What | 明确变更的具体功能点/BUG 修复内容，不模糊、不冗余 |
+| Why | 业务背景、解决的痛点、架构必要性，禁止无理由提交 |
+| How | 技术实现逻辑、改动范围、核心交互流程，贴合本次 ≤500 行变更 |
+| 范围 | 单次 Commit 仅对应一个原子功能 |
+
+## §6 Worktree 安全隔离
+
+> 新功能开发 **必须** 在 worktree 中进行，禁止在 main 上直接开发。
+> hotfix 允许在 main 操作但必须即时提交。
+
+### 6.1 创建 Worktree
+
+| 步骤 | 操作 |
+|------|------|
+| 1 | 调用 `EnterWorktree`，每个 change/feature 对应一个 worktree |
+| 2 | 验证 worktree 目录已在 `.gitignore` 中（避免污染 git status） |
+| 3 | 执行项目基线测试，确认环境可用 |
+| 4 | 记录 worktree 名称与 change 对应关系 |
+
+### 6.2 开发中门禁
+
+| 门禁 | 条件 |
+|------|------|
+| 测试通过 | `go test ./...` 全绿才能 commit |
+| 代码评审 | `go-code-review-check` 技能通过 |
+| 提交规范 | What/Why/How 三段式完整 |
+
+### 6.3 完成分支
+
+> 开发完成、测试全绿后，**必须**执行完成分支流程（`superpowers:finishing-a-development-branch`），禁止直接 merge/push。
+
+| 步骤 | 操作 |
+|------|------|
+| 1 | **验证测试**：`go test ./...` 全绿，否则禁止继续 |
+| 2 | **检测环境**：判断 normal repo / named-branch worktree / detached HEAD |
+| 3 | **选择合入方式** |
+
+| 选项 | 操作 | 保留 worktree | 删除分支 |
+|------|------|---------------|----------|
+| A. 本地合并 | merge 到 main → 验证测试 → 删除 worktree → 删除分支 | ❌ | ✅ |
+| B. 推送+PR | push -u origin → 创建 PR | ✅ | ❌ |
+| C. 保持现状 | 保留分支和 worktree | ✅ | ❌ |
+| D. 丢弃 | 确认后强制删除 | ❌ | ✅(force) |
+
+| 4 | **清理 worktree**（仅 A/D 选项） |
+
+### 6.4 Worktree 清理规则
+
+| 条件 | 操作 |
+|------|------|
+| worktree 路径在 `.claude/worktrees/` 下 | Superpowers 创建 → 本工具负责清理 |
+| worktree 路径在其他位置 | 外部环境创建 → 禁止删除，使用 ExitWorktree |
+| 删除前 | 必须 `cd` 到主仓库根目录 |
+| 删除后 | 执行 `git worktree prune` 清理过期注册 |
+
+### 6.5 安全红线
+
+| 编号 | 红线 |
+|------|------|
+| W01 | 禁止在 main 上开发新功能 |
+| W02 | 禁止测试未通过就合入 |
+| W03 | 禁止从 worktree 内部执行 `git worktree remove` |
+| W04 | 禁止合并成功前删除 worktree |
+| W05 | 禁止未经确认执行丢弃（需输入 'discard' 确认） |
+| W06 | 禁止清理非自己创建的 worktree（路径溯源） |
+| W07 | 禁止 force push 任何分支（hotfix 除外需 Maintainer 确认） |
+
+## §7 技能映射
+
+> 触发时 **必须** 调用对应技能，禁止跳过。
+
+### 7.1 后端技能
+
+| 触发场景 | 技能 | 说明 |
+|----------|------|------|
+| 新 YANG 控制器开发 | `yang-controller-runtime-dev` | 架构合规（§4） |
+| YANG→Go 结构体 | `yang-ygot-generate` | 自动生成（R04） |
+| 配置缓存开发 | `go-ttl-lru-memory-cache` | TTL+LRU 并发安全（R03） |
+| NETCONF 对接 | `netconf-switch-protocol` | SSH 830（R02） |
+| 集成测试 | `netconf-sim-integration-test` | 模拟网元端到端（T02） |
+| TDD 开发 | `tdd-test-driven-dev` | 测试先行（T01） |
+| 代码评审 | `go-code-review-check` | 提交前强制（T04） |
+| 提交规范 | `git-what-why-how-commit` | 三段式 Commit |
+
+### 7.2 前端技能
+
+| 触发场景 | 技能 | 规则 |
+|----------|------|------|
+| 功能型（YANG 驱动表单/动态渲染） | `frontend-yang-dynamic-form` | YANG 类型自动映射：boolean→开关、enum→下拉、list→表格（R05） |
+| 视觉型（美化/可视化/交互原型） | `web-design-engineer` | 先声明设计系统→v0 草案→≥2 变体 |
+| 纯逻辑/工程化/纯功能 | **不触发设计技能** | 状态管理/API/构建/校验/路由/权限 |
+
+### 7.3 Superpowers 技能
+
+| 触发场景 | 技能 | 说明 |
+|----------|------|------|
+| 任何创造性工作前 | `superpowers:brainstorming` | 探索意图→设计→审批 |
+| 功能开发开始 | `superpowers:using-git-worktrees` | §6 隔离环境 |
+| 实施计划执行 | `superpowers:executing-plans` | 按计划逐步执行 |
+| 多任务并行 | `superpowers:subagent-driven-development` | 独立子任务并行 |
+| 开发完成 | `superpowers:finishing-a-development-branch` | §6.3 完成分支 |
+| Bug/测试失败 | `superpowers:systematic-debugging` | 根因分析优先 |
+| TDD 实现 | `superpowers:test-driven-development` | 红绿循环 |
+| 声称完成前 | `superpowers:verification-before-completion` | 必须有新鲜验证证据 |
+| 编写实施计划 | `superpowers:writing-plans` | 从规格到可执行计划 |
+
+## §8 数据存储
+
+| 数据类型 | 存储方式 | 生命周期 |
 |----------|----------|----------|
-| **yang-controller-runtime-dev** | 基于 yang-controller-runtime 开发 YANG 模块控制器 | 所有新 YANG 控制器开发，遵循架构规范 |
-| yang-ygot-generate | YANG 模型→Go 强类型结构体 | 所有配置读写、NETCONF/gNMI 序列化/反序列化 |
-| go-ttl-lru-memory-cache | 高性能内存缓存（TTL+LRU） | 配置缓存、desired state 存储 |
-| netconf-switch-protocol | NETCONF 协议对接交换机 | 设备连接、配置读写 |
-| **netconf-sim-integration-test** | NETCONF 模拟网元生成集成测试 | **所有新增业务必须添加**，端到端验证 |
-| tdd-test-driven-dev | TDD 测试驱动，先测试后代码 | 所有模块（框架、controller、client） |
-| go-code-review-check | 自动代码评审，确保合规性 | 所有代码提交前强制评审 |
-| git-what-why-how-commit | 标准三段式 Commit 规范 | **每次迭代完成必须提交**，小步迭代 |
-| frontend-yang-dynamic-form | 基于 YANG 自动生成前端表单 | 后端 API 接口，实现前后端联动 |
-| **web-design-engineer** | 高质量视觉 Web 设计（HTML/CSS/JS/React） | **所有前端 UI/UX 设计、页面开发、可视化需求自动触发**，包括：仪表盘、登录页、配置页面、数据可视化、交互原型、动画效果等 |
+| 运行配置 | 实时 NETCONF/gNMI 从交换机读取 | 缓存 TTL 30s，过期自动重拉 |
+| 配置缓存 | TTL+LRU 内存 | Key=设备IP+YANG路径，下发后主动失效 |
+| 元信息 | 本地 JSON 文件 | 持久 |
 
-### 前端开发技能触发规则
-- **功能型前端开发**（动态表单、YANG 模型驱动页面）→ 使用 `frontend-yang-dynamic-form` skill
-- **视觉设计型前端开发**（页面美化、UI/UX 优化、数据可视化、交互原型、动画效果）→ 使用 `web-design-engineer` skill
-- **纯逻辑前端开发**（状态管理、API 对接、组件封装）→ 按通用流程，不强制使用特定 skill
+> **R03: 禁止数据库** — 不持久化运行配置，不使用 MySQL/Redis/SQLite。
 
-## 五、开发优先级（迭代顺序）
-1.  **框架实现**：yang-controller-runtime 核心架构（已完成）
-2.  **API 迁移**：REST API 迁移到新框架（已完成）
-3.  **移除旧架构**：删除 legacy Actor 实现（已完成）
-4.  **新增 YANG 模块控制器**：每个 YANG 模块一个 Controller + Reconciler
-    - OpenConfig Interfaces 接口配置
-    - OpenConfig VLANs VLAN 配置
-    - OpenConfig System 系统信息
-5.  **端到端测试**：真实设备连接测试、配置读写验证
-6.  **异常处理**：设备离线、重连、缓存过期、故障恢复
+## §9 异常处理
 
-## 六、Claude Code 操作说明
-1.  自动加载：启动后自动加载 `.claude/rules.md` 和 `.claude/skills/*` 所有技能
-2.  技能触发：根据开发场景自动匹配对应技能（无需手动指定）
-3.  流程约束：严格执行 Plan→测试→代码→Review→Commit，不跳过任何步骤
-4.  代码约束：单次代码 ≤ 500 行，贴合所有 rules 和 skills 规范
-5.  联动要求：前后端、Actor、NETCONF、缓存需自动联动，确保数据一致性
+| 异常场景 | 处理策略 | 前端表现 |
+|----------|----------|----------|
+| 设备离线 | NETCONF 自动重连 | 展示离线状态，API 返回明确错误 |
+| 缓存过期 | 自动重新拉取配置 | 静默更新 |
+| Controller 故障 | Manager 自动重启，隔离其他模块 | 部分功能降级 |
+| NETCONF 下发失败 | 前端提示错误，缓存不更新 | 保留原配置 |
+| 前端表单校验失败 | 不提交，展示 YANG 约束提示 | 行内校验提示 |
 
-## 七、异常场景处理规范
-1.  设备离线：NETCONF 自动重连，前端展示离线状态，API 返回明确错误
-2.  缓存过期：自动通过 NETCONF 重新拉取配置，更新缓存
-3.  Actor 故障：DeviceActor 故障不影响其他设备，ManagerActor 自动重启故障 Actor
-4.  NETCONF 异常：配置下发失败时，前端提示错误，缓存不更新，保留原配置
-5.  前端异常：表单校验失败不提交，展示 YANG 模型约束提示
+> **R08: 禁止崩溃** — 所有异常必须有降级处理。
 
-## 八、交付标准
-1.  后端：可运行的 Go 项目（Actor 系统、API 接口、NETCONF 对接）
-2.  前端：可运行的 Vue3 项目（动态表单、树形菜单、配置下发）
-3.  测试用例：
-    - 所有模块的单元测试、异常测试、并发测试
-    - **所有新增业务必须包含基于 NETCONF 模拟网元的集成测试**
-    - 所有集成测试必须执行成功才能提交
-4.  文档：代码注释、API 文档、部署说明
-5.  合规性：符合所有 rules 和 skills 规范，无数据库、无违规代码
+## §10 交付标准
+
+| 维度 | 标准 |
+|------|------|
+| 后端 | 可运行 Go 项目：Controller 系统 + API 接口 + NETCONF 对接 |
+| 前端 | 可运行 Vue3 项目：动态表单 + 树形菜单 + 配置下发 |
+| 测试 | 单元 + 异常 + 并发 + NETCONF 模拟网元集成测试 |
+| 合规 | 满足 §2 全部红线，无违规代码 |
+
+## §11 开发协作
+
+> 详见 [TEAM_HANDBOOK.md](TEAM_HANDBOOK.md) — 开发流程、自审清单、安全合入完整指南。
+> 个人项目：无他人审批，用结构化自审 + CI 自动化替代人工评审。
+
+| 编号 | 规则 |
+|------|------|
+| TM01 | 合入 main 须经 PR + CI 全绿 + 自审清单通过 |
+| TM02 | 分支命名：`<change-name>` 或 `hotfix/<desc>` |
+| TM03 | 多 worktree 不可修改同一 Go package 或 YANG 模块 |
+| TM04 | PR 体积 ≤800 行，超出拆分 |
+| TM05 | 自审清单（§6.2）全部 ✓ 才可合入 |
+| TM06 | hotfix 允许 main 直修但须补 PR 供 CI 验证 |
+| TM07 | 迭代完成须满足 D01-D09 全部标准（见手册 §3） |
+| TM08 | `make setup` 为 clone 后必执行步骤，激活本地拦截层 |
+| TM09 | CI required checks 全通过才可合入（compliance + commit-lint + pr-size + branch-name + sensitive-files） |

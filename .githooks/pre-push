@@ -1,0 +1,66 @@
+#!/usr/bin/env bash
+# USMP pre-push hook — L3 合规拦截
+# 拦截: 直接 push main (R13) / force push (W07) / 测试未通过
+set -euo pipefail
+
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+NC='\033[0m'
+
+FAILED=0
+
+echo -e "${YELLOW}[pre-push] USMP 推送合规检查...${NC}"
+
+# ──────────────────────────────────────────────
+# 1. 分支保护 (R13: 禁止直接 push main)
+#    个人仓库: 仅警告，不拦截（Owner 自行判断）
+#    团队仓库: 设环境变量 USMP_TEAM_MODE=1 启用拦截
+# ──────────────────────────────────────────────
+CURRENT_BRANCH=$(git branch --show-current 2>/dev/null || echo "")
+
+if [ "$CURRENT_BRANCH" = "main" ] || [ "$CURRENT_BRANCH" = "master" ]; then
+  if [ "${USMP_TEAM_MODE:-0}" = "1" ]; then
+    echo -e "${RED}[R13] 拒绝: 禁止直接 push ${CURRENT_BRANCH} 分支${NC}"
+    echo -e "${YELLOW}  要求: 使用 PR 合入 (见 TEAM_HANDBOOK.md §6-7)${NC}"
+    FAILED=1
+  else
+    echo -e "${YELLOW}[R13] 警告: 正在直接 push ${CURRENT_BRANCH}（个人仓库模式）${NC}"
+    echo -e "${YELLOW}  团队模式请设置: export USMP_TEAM_MODE=1${NC}"
+  fi
+fi
+
+# ──────────────────────────────────────────────
+# 2. Force push 保护 (W07: 禁止 force push)
+# ──────────────────────────────────────────────
+# 检测 --force / --force-with-lease 标志
+for arg in "$@"; do
+  case "$arg" in
+    --force|--force-with-lease|-f)
+      echo -e "${RED}[W07] 拒绝: 禁止 force push${NC}"
+      echo -e "${YELLOW}  Hotfix 除外需 Maintainer 确认${NC}"
+      FAILED=1
+      ;;
+  esac
+done
+
+# ──────────────────────────────────────────────
+# 3. 全量测试
+# ──────────────────────────────────────────────
+echo -e "${YELLOW}[pre-push] 运行全量测试...${NC}"
+if ! (cd backend && go test ./... -count=1 -timeout=120s 2>&1); then
+  echo -e "${RED}[pre-push] 拒绝: 全量测试未通过${NC}"
+  FAILED=1
+fi
+
+# ──────────────────────────────────────────────
+# 结果
+# ──────────────────────────────────────────────
+if [ "$FAILED" -eq 1 ]; then
+  echo -e "${RED}[pre-push] ❌ 推送合规检查失败，推送被拦截${NC}"
+  echo -e "${YELLOW}  绕过方式 (仅紧急情况): git push --no-verify${NC}"
+  exit 1
+fi
+
+echo -e "${GREEN}[pre-push] ✅ 推送合规检查通过${NC}"
+exit 0

@@ -1,0 +1,91 @@
+#!/usr/bin/env bash
+# USMP pre-commit hook — L3 合规拦截
+# 拦截: 敏感文件(R16) / generated 目录(R04) / go vet / go fmt / 测试(R15)
+set -euo pipefail
+
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+NC='\033[0m'
+
+STAGED_FILES=$(git diff --cached --name-only 2>/dev/null)
+
+if [ -z "$STAGED_FILES" ]; then
+  exit 0
+fi
+
+echo -e "${YELLOW}[pre-commit] USMP 合规检查开始...${NC}"
+FAILED=0
+
+# ──────────────────────────────────────────────
+# 1. 敏感文件扫描 (R16: 禁止提交 .env / 密钥 / 证书)
+# ──────────────────────────────────────────────
+SENSITIVE=$(echo "$STAGED_FILES" | grep -iE '\.(env|pem|key|p12|pfx|jks|keystore)$' || true)
+if [ -n "$SENSITIVE" ]; then
+  echo -e "${RED}[R16] 拒绝: 检测到敏感文件${NC}"
+  echo "$SENSITIVE" | sed 's/^/  /'
+  FAILED=1
+fi
+
+# ──────────────────────────────────────────────
+# 2. Generated 目录保护 (R04: 禁止手写 YANG 结构体)
+# ──────────────────────────────────────────────
+GENERATED=$(echo "$STAGED_FILES" | grep -E '^backend/internal/generated/' || true)
+if [ -n "$GENERATED" ]; then
+  echo -e "${RED}[R04] 拒绝: 检测到修改自动生成代码 (internal/generated/)${NC}"
+  echo "$GENERATED" | sed 's/^/  /'
+  echo -e "${YELLOW}  提示: 使用 yang-ygot-generate 技能重新生成，禁止手动编辑${NC}"
+  FAILED=1
+fi
+
+# ──────────────────────────────────────────────
+# 3. Go vet (静态分析)
+# ──────────────────────────────────────────────
+GO_FILES=$(echo "$STAGED_FILES" | grep -E '\.go$' || true)
+if [ -n "$GO_FILES" ]; then
+  echo -e "${YELLOW}[pre-commit] 运行 go vet...${NC}"
+  if ! (cd backend && go vet ./... 2>&1); then
+    echo -e "${RED}[pre-commit] go vet 发现问题${NC}"
+    FAILED=1
+  fi
+
+  # ──────────────────────────────────────────────
+  # 4. Go fmt 检查
+  # ──────────────────────────────────────────────
+  echo -e "${YELLOW}[pre-commit] 检查 go fmt...${NC}"
+  UNFORMATTED=$(cd backend && gofmt -l . 2>/dev/null || true)
+  if [ -n "$UNFORMATTED" ]; then
+    echo -e "${RED}[pre-commit] 以下文件未格式化:${NC}"
+    echo "$UNFORMATTED" | sed 's/^/  /'
+    echo -e "${YELLOW}  修复: cd backend && gofmt -w .${NC}"
+    FAILED=1
+  fi
+fi
+
+# ──────────────────────────────────────────────
+# 5. 变更包测试 (R15: 禁止无测试提交)
+# ──────────────────────────────────────────────
+if [ -n "$GO_FILES" ]; then
+  # 提取变更的 Go package 目录
+  CHANGED_PKGS=$(echo "$GO_FILES" | grep -v '_test\.go$' | xargs -I{} dirname {} | sort -u || true)
+  if [ -n "$CHANGED_PKGS" ]; then
+    echo -e "${YELLOW}[pre-commit] 运行变更包测试 (R15)...${NC}"
+    for pkg in $CHANGED_PKGS; do
+      if ! (cd backend && go test "./${pkg}/..." -count=1 -timeout=30s 2>&1); then
+        echo -e "${RED}[R15] 拒绝: 测试未通过 (${pkg})${NC}"
+        FAILED=1
+      fi
+    done
+  fi
+fi
+
+# ──────────────────────────────────────────────
+# 结果
+# ──────────────────────────────────────────────
+if [ "$FAILED" -eq 1 ]; then
+  echo -e "${RED}[pre-commit] ❌ 合规检查失败，提交被拦截${NC}"
+  exit 1
+fi
+
+echo -e "${GREEN}[pre-commit] ✅ 合规检查通过${NC}"
+exit 0

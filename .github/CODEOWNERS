@@ -1,0 +1,18 @@
+# USMP CODEOWNERS — 分区审批规则
+# https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# 默认: 所有变更需仓库 Owner 审批
+*           @zesilee
+
+# YANG 生成代码 — 任何变更必须 Owner 审批 (R04)
+/backend/internal/generated/  @zesilee
+
+# 架构核心 — 任何变更必须 Owner 审批 (R01)
+/backend/pkg/yang-runtime/    @zesilee
+
+# 合规配置文件 — 任何变更必须 Owner 审批
+/.githooks/                   @zesilee
+/.github/                     @zesilee
+/CLAUDE.md                    @zesilee
+/TEAM_HANDBOOK.md             @zesilee
+/Makefile                     @zesilee

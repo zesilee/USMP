@@ -4,9 +4,9 @@
 
 ## 项目结构适配
 
-本项目已实现前后端分离，验证时需要分别进入对应目录：
-- **后端**：`backend/` - Go 代码
-- **前端**：`frontend/` - Vue3 + TypeScript
+本项目已实现前后端分离，验证时必须先定位 Git 仓库根目录，再进入对应目录，避免当前工作目录已在子目录时路径错误：
+- **后端**：`$(git rev-parse --show-toplevel)/backend` - Go 代码
+- **前端**：`$(git rev-parse --show-toplevel)/frontend` - Vue3 + TypeScript
 
 ---
 
@@ -16,21 +16,24 @@
 
 ### 1. **后端构建检查（Backend Build Check）**
 ```bash
-cd backend
+REPO_ROOT=$(git rev-parse --show-toplevel)
+cd "$REPO_ROOT/backend"
 go build ./...
 ```
 - 如果构建失败，报告错误并停止（STOP）
 
 ### 2. **前端构建检查（Frontend Build Check）**
 ```bash
-cd frontend
+REPO_ROOT=$(git rev-parse --show-toplevel)
+cd "$REPO_ROOT/frontend"
 npm run build
 ```
 - 如果构建失败，报告错误并停止（STOP）
 
 ### 3. **后端测试套件（Backend Test Suite）**
 ```bash
-cd backend
+REPO_ROOT=$(git rev-parse --show-toplevel)
+cd "$REPO_ROOT/backend"
 go test ./... -short -v  # 快速测试（跳过集成测试）
 go test ./... -v          # 完整测试（含集成测试）
 ```
@@ -38,15 +41,20 @@ go test ./... -v          # 完整测试（含集成测试）
 
 ### 4. **前端测试套件（Frontend Test Suite）**
 ```bash
-cd frontend
+REPO_ROOT=$(git rev-parse --show-toplevel)
+cd "$REPO_ROOT/frontend"
 npm run test
 ```
 - 报告通过/失败的数量
 - 报告覆盖率百分比
 
 ### 5. **Console.log 审计**
-- 在 `backend/` 和 `frontend/src/` 中搜索 `console.log`
-- 报告其所在位置
+```bash
+REPO_ROOT=$(git rev-parse --show-toplevel)
+grep -RIn --exclude-dir=node_modules --exclude-dir=dist --exclude-dir=.git "console\.log" "$REPO_ROOT/backend" "$REPO_ROOT/frontend/src" || true
+```
+- 如果没有匹配结果，报告 `OK`
+- 如果有匹配结果，报告其所在位置
 
 ### 6. **Git 状态（Git Status）**
 - 显示未提交的更改
