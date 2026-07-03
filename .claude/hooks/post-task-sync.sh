@@ -32,10 +32,28 @@ get_worktree() {
     git -C "$REPO_ROOT" rev-parse --git-dir 2>/dev/null | grep -q "worktrees" && echo "yes" || echo "no"
 }
 
-# Generate slug from subject
+# Generate slug from subject (supports Chinese — transliterates common chars, falls back to timestamp)
 generate_slug() {
     local subject="$1"
-    echo "$subject" | tr '[:upper:]' '[:lower:]' | sed -e 's/[^a-z0-9-]/-/g' -e 's/-\+/-/g' -e 's/^-//' -e 's/-$//' | cut -c 1-60
+    local slug
+    # Try transliteration via python3; if slug is empty (all non-ASCII), use timestamp
+    slug=$(python3 -c "
+import sys, re, unicodedata
+text = sys.argv[1].strip().lower()
+# Normalize unicode and remove combining marks for basic transliteration
+text = unicodedata.normalize('NFKD', text)
+text = re.sub(r'[̀-ͯ]', '', text)  # remove combining marks
+text = re.sub(r'[^\w\s-]', '-', text)
+text = re.sub(r'[\s_]+', '-', text)
+text = re.sub(r'-+', '-', text)
+text = text.strip('-')
+if not text or set(text) == {'-'}:
+    # Fallback: use timestamp-based slug
+    import time
+    text = f'task-{int(time.time())}'
+print(text[:60])
+" "$subject" 2>/dev/null)
+    echo "${slug:-task-$(date +%s)}"
 }
 
 # Get current timestamp in ISO format
