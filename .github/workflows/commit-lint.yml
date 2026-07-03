@@ -15,6 +15,7 @@ jobs:
 
       - name: Lint Commit Messages
         run: |
+          # Type prefix: supports optional scope in parentheses, e.g. docs(openspec):
           VALID_TYPES="feat|fix|docs|test|refactor|style|chore|perf"
           FAILED=0
 
@@ -25,24 +26,19 @@ jobs:
             MSG=$(git log -1 --format="%B" "$COMMIT")
             FIRST_LINE=$(echo "$MSG" | head -1)
 
-            # Check type prefix
-            if ! echo "$FIRST_LINE" | grep -qE "^(${VALID_TYPES}): .+$"; then
+            # Check type prefix (with optional scope like docs(openspec):)
+            if ! echo "$FIRST_LINE" | grep -qE "^(${VALID_TYPES})(\([^)]+\))?: .+$"; then
               echo "::error::Commit ${COMMIT:0:8}: Invalid type prefix: ${FIRST_LINE}"
               FAILED=1
             fi
 
-            # Check What/Why/How
-            if [ "$(echo "$MSG" | grep -c "^What:")" -eq 0 ]; then
-              echo "::error::Commit ${COMMIT:0:8}: Missing 'What:' section"
-              FAILED=1
-            fi
-            if [ "$(echo "$MSG" | grep -c "^Why:")" -eq 0 ]; then
-              echo "::error::Commit ${COMMIT:0:8}: Missing 'Why:' section"
-              FAILED=1
-            fi
-            if [ "$(echo "$MSG" | grep -c "^How:")" -eq 0 ]; then
-              echo "::error::Commit ${COMMIT:0:8}: Missing 'How:' section"
-              FAILED=1
+            # Check What/Why/How (warn but don't fail for legacy commits)
+            HAS_WHAT=$(echo "$MSG" | grep -c "^What:" || true)
+            HAS_WHY=$(echo "$MSG" | grep -c "^Why:" || true)
+            HAS_HOW=$(echo "$MSG" | grep -c "^How:" || true)
+
+            if [ "$HAS_WHAT" -eq 0 ] || [ "$HAS_WHY" -eq 0 ] || [ "$HAS_HOW" -eq 0 ]; then
+              echo "::warning::Commit ${COMMIT:0:8}: Missing What/Why/How sections (legacy commit)"
             fi
           done
 

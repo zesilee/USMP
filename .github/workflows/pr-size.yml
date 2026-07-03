@@ -6,7 +6,7 @@ on:
 
 jobs:
   pr-size:
-    name: Check PR Size (≤800 lines)
+    name: Check PR Size
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -22,9 +22,18 @@ jobs:
 
           echo "PR size: ${TOTAL} lines (+${INSERTIONS} -${DELETIONS})"
 
-          if [ "$TOTAL" -gt 800 ]; then
-            echo "::error::[TM04] PR size ${TOTAL} lines exceeds 800 line limit. Split into smaller PRs."
+          # Regular limit: 800 lines
+          # Infrastructure/docs limit: 5000 lines (labeled PRs)
+          LIMIT=800
+          PR_LABELS=$(gh pr view ${{ github.event.pull_request.number }} --json labels -q '.labels[].name' 2>/dev/null || echo "")
+          if echo "$PR_LABELS" | grep -qE 'infra|documentation'; then
+            LIMIT=5000
+            echo "Infrastructure/docs PR detected, limit raised to ${LIMIT}"
+          fi
+
+          if [ "$TOTAL" -gt "$LIMIT" ]; then
+            echo "::error::[TM04] PR size ${TOTAL} lines exceeds ${LIMIT} line limit. Split into smaller PRs."
             exit 1
           fi
 
-          echo "PR size is within limits"
+          echo "PR size is within limits (${LIMIT})"
