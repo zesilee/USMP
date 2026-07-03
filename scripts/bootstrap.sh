@@ -98,8 +98,10 @@ echo -e "  Git Hooks:    $(ls .githooks/ 2>/dev/null | wc -l | tr -d ' ') 个"
 # ──────────────────────────────────────────────
 echo -e "${YELLOW}[7/7] 初始化任务目录...${NC}"
 mkdir -p openspec/tasks/archive
-IN_PROGRESS=$(grep -rl 'status: in_progress' openspec/tasks/ 2>/dev/null | grep -v archive | wc -l | tr -d ' ')
-PENDING=$(grep -rl 'status: pending' openspec/tasks/ 2>/dev/null | grep -v archive | wc -l | tr -d ' ')
+IN_PROGRESS=$(grep -rl 'status: in_progress' openspec/tasks/ 2>/dev/null | grep -v archive | wc -l | tr -d ' ' || true)
+PENDING=$(grep -rl 'status: pending' openspec/tasks/ 2>/dev/null | grep -v archive | wc -l | tr -d ' ' || true)
+IN_PROGRESS=${IN_PROGRESS:-0}
+PENDING=${PENDING:-0}
 TOTAL=$((IN_PROGRESS + PENDING))
 if [ "$TOTAL" -gt 0 ]; then
   echo -e "  ✅ openspec/tasks/ 就绪 (${IN_PROGRESS} 进行中, ${PENDING} 待处理)"
