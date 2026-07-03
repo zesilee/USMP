@@ -28,6 +28,17 @@
           }
         ]
       }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "TaskCreate|TaskUpdate|TaskDelete",
+        "hooks": [
+          {
+            "type": "command",
+            "command": ".claude/hooks/post-task-sync.sh"
+          }
+        ]
+      }
     ]
   },
   "attribution": {
