@@ -39,13 +39,20 @@ jobs:
               FAILED=1
             fi
 
-            # Check What/Why/How (warn but don't fail for legacy commits)
+            # Check What/Why/How — enforce for commits after 2026-06-22
+            # (before that date, only warn for legacy commits)
+            COMMIT_DATE=$(git log -1 --format="%ai" "$COMMIT" | cut -d' ' -f1)
             HAS_WHAT=$(echo "$MSG" | grep -c "^What:" || true)
             HAS_WHY=$(echo "$MSG" | grep -c "^Why:" || true)
             HAS_HOW=$(echo "$MSG" | grep -c "^How:" || true)
 
             if [ "$HAS_WHAT" -eq 0 ] || [ "$HAS_WHY" -eq 0 ] || [ "$HAS_HOW" -eq 0 ]; then
-              echo "::warning::Commit ${COMMIT:0:8}: Missing What/Why/How sections (legacy commit)"
+              if [[ "$COMMIT_DATE" > "2026-06-22" ]]; then
+                echo "::error::Commit ${COMMIT:0:8} (${COMMIT_DATE}): Missing What/Why/How sections — required for all new commits"
+                FAILED=1
+              else
+                echo "::warning::Commit ${COMMIT:0:8} (${COMMIT_DATE}): Missing What/Why/How sections (legacy commit, pre-enforcement)"
+              fi
             fi
           done
 

@@ -23,9 +23,14 @@ jobs:
       - name: Go Mod Download
         run: go mod download
 
-      - name: Run Tests with Coverage
+      - name: Run Tests with Race Detection
         run: |
-          go test ./... -count=1 -coverprofile=coverage.out -timeout=120s 2>&1 | tee test-output.txt
+          go test ./... -race -count=1 -coverprofile=coverage.out -timeout=120s 2>&1 | tee test-output.txt || true
+          # Check if any test actually failed (ignore covdata warnings from packages with no tests)
+          if grep -qE '^FAIL\s' test-output.txt; then
+            echo "::error::Some tests failed"
+            exit 1
+          fi
           go tool cover -func=coverage.out 2>/dev/null || true
 
       - name: Check Coverage Baseline
@@ -37,7 +42,8 @@ jobs:
             echo "Baseline coverage: ${BASELINE}%"
             if [ "$BASELINE" != "0" ] && [ "$CURRENT" != "0" ]; then
               if (( $(echo "$CURRENT < $BASELINE" | bc -l 2>/dev/null || echo "0") )); then
-                echo "::warning::Coverage dropped from ${BASELINE}% to ${CURRENT}%"
+                echo "::error::Coverage dropped from ${BASELINE}% to ${CURRENT}% — coverage must not decrease"
+                exit 1
               fi
             fi
           else
