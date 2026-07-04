@@ -70,7 +70,10 @@ export function useConfigPage(module: string) {
       if (!res.ok) {
         throw new Error(`HTTP ${res.status}: Failed to fetch schema`)
       }
-      const yangSchema = await res.json()
+      // The backend wraps payloads in a {code,message,data,success} envelope;
+      // unwrap .data (tolerating an already-unwrapped body).
+      const body = await res.json()
+      const yangSchema = body?.data ?? body
       title.value = yangSchema.title || module
       schema.value = yangSchema.fields || []
       return schema.value
@@ -111,8 +114,9 @@ export function useNativeModules() {
     loading.value = true
     try {
       const res = await fetch('/api/v1/yang/modules')
-      const data = await res.json()
-      modules.value = data.models || []
+      const body = await res.json()
+      // Unwrap the {code,message,data,success} envelope; data is the module array.
+      modules.value = body?.data ?? body?.models ?? []
     } catch (e: any) {
       error.value = e.message
     } finally {

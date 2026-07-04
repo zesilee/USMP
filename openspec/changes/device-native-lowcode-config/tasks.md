@@ -36,10 +36,10 @@
 
 ## 4. 前端接通动态 YANG 表单（复用活跃引擎）
 
-- [ ] 4.1 先写测试（Vitest + @vue/test-utils）：设备原生模块页由 `/yang/schema/:module` 动态 schema → `DynamicForm`/`FieldRenderer` 渲染可配置属性
-- [ ] 4.2 改 `useConfigPage.ts` 原生模块分支：schema 源为动态 YANG schema（复用活跃低码引擎，不新建渲染器）
-- [ ] 4.3 编辑→提交→联动 config-api 下发；展示设备/缓存/下发/异常状态
-- [ ] 4.4 E2E（Playwright，本地/手动）：设备原生模块低码配置全链路（非 CI 必需，标注手动验证）
+- [x] 4.1 Vitest：`useConfigPage` 原生分支 unwrap `{data}` 信封→动态 YANG fields（number/enum）→复用 `Field[]`（DynamicForm 引擎）；`useNativeModules` unwrap data 数组 + vendor 分组
+- [x] 4.2 修 `useConfigPage.ts` 原生分支 schema 源信封解包 bug（`yangSchema.fields`→`.data.fields`）+ `useNativeModules`（`data.models`→`.data`）；FieldDef 结构对齐前端 `Field`，复用活跃 DynamicForm，不新建渲染器
+- [~] 4.3 编辑→提交：原生页现经 NativeDeviceConfig CRD（Stack A，下发为 D6 stub）；切到 config-api RFC7951 直接下发是较大改动（耦合 D6/Stack A），留作后续
+- [~] 4.4 E2E（Playwright）本环境无法无头运行；以 Vitest 单测 + 前端 CI(Node22) 覆盖读路径
 
 ## 5. 清理死代码（退役 D9 设备侧）
 
