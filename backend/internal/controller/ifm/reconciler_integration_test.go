@@ -12,6 +12,7 @@ import (
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/manager"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/reconcile"
 	netsim "github.com/leezesi/usmp/backend/simulator/netconfsim"
+	testsupport "github.com/leezesi/usmp/backend/simulator/netconfsim/testsupport"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -370,12 +371,12 @@ func TestReconciler_Integration_FullInterfaceConfig(t *testing.T) {
 	assert.False(t, result.Requeue)
 
 	// 7. Verify all attributes using new assertion methods
-	sim.AssertHuaweiInterfaceExists(t, ge1)
-	sim.AssertHuaweiInterfaceDescription(t, ge1, "Full Config Interface")
-	sim.AssertHuaweiInterfaceAdminStatus(t, ge1, 2) // up = 2
-	sim.AssertHuaweiInterfaceMtu(t, ge1, 9000)
-	sim.AssertHuaweiInterfaceControlFlap(t, ge1, 6000, 10, 120, 1000, 3000)
-	sim.AssertHuaweiInterfaceDampManual(t, ge1, 10, 60, 500, 4000)
+	testsupport.AssertHuaweiInterfaceExists(t, sim, ge1)
+	testsupport.AssertHuaweiInterfaceDescription(t, sim, ge1, "Full Config Interface")
+	testsupport.AssertHuaweiInterfaceAdminStatus(t, sim, ge1, 2) // up = 2
+	testsupport.AssertHuaweiInterfaceMtu(t, sim, ge1, 9000)
+	testsupport.AssertHuaweiInterfaceControlFlap(t, sim, ge1, 6000, 10, 120, 1000, 3000)
+	testsupport.AssertHuaweiInterfaceDampManual(t, sim, ge1, 10, 60, 500, 4000)
 }
 
 // TestReconciler_Integration_TimersAndFlags tests interface timer and flag configurations
@@ -444,11 +445,11 @@ func TestReconciler_Integration_TimersAndFlags(t *testing.T) {
 	assert.False(t, result.Requeue)
 
 	// 7. Verify timers and flags
-	sim.AssertHuaweiInterfaceExists(t, ge1)
-	sim.AssertHuaweiInterfaceDescription(t, ge1, "Timers and Flags Test")
-	sim.AssertHuaweiInterfaceAdminStatus(t, ge1, 1) // down = 1
-	sim.AssertHuaweiInterfaceTimers(t, ge1, 50, 100)
-	sim.AssertHuaweiInterfaceFlags(t, ge1, true, false, true, true, false, false)
+	testsupport.AssertHuaweiInterfaceExists(t, sim, ge1)
+	testsupport.AssertHuaweiInterfaceDescription(t, sim, ge1, "Timers and Flags Test")
+	testsupport.AssertHuaweiInterfaceAdminStatus(t, sim, ge1, 1) // down = 1
+	testsupport.AssertHuaweiInterfaceTimers(t, sim, ge1, 50, 100)
+	testsupport.AssertHuaweiInterfaceFlags(t, sim, ge1, true, false, true, true, false, false)
 }
 
 // TestReconciler_Integration_StatisticsConfig tests interface statistic configurations
@@ -515,11 +516,11 @@ func TestReconciler_Integration_StatisticsConfig(t *testing.T) {
 	assert.False(t, result.Requeue)
 
 	// 7. Verify statistics and network attributes
-	sim.AssertHuaweiInterfaceExists(t, ge1)
-	sim.AssertHuaweiInterfaceDescription(t, ge1, "Statistics Config Test")
-	sim.AssertHuaweiInterfaceMtu(t, ge1, 9000)
-	sim.AssertHuaweiInterfaceStatistics(t, ge1, 600, 2)
-	sim.AssertHuaweiInterfaceNetwork(t, ge1, "00:11:22:33:44:66", "management", "vs0")
+	testsupport.AssertHuaweiInterfaceExists(t, sim, ge1)
+	testsupport.AssertHuaweiInterfaceDescription(t, sim, ge1, "Statistics Config Test")
+	testsupport.AssertHuaweiInterfaceMtu(t, sim, ge1, 9000)
+	testsupport.AssertHuaweiInterfaceStatistics(t, sim, ge1, 600, 2)
+	testsupport.AssertHuaweiInterfaceNetwork(t, sim, ge1, "00:11:22:33:44:66", "management", "vs0")
 }
 
 // TestReconciler_Integration_ModifyMultipleAttributes tests modifying multiple attributes on existing interface
@@ -590,11 +591,11 @@ func TestReconciler_Integration_ModifyMultipleAttributes(t *testing.T) {
 	assert.False(t, result.Requeue)
 
 	// 7. Verify all modified attributes
-	sim.AssertHuaweiInterfaceExists(t, ge1)
-	sim.AssertHuaweiInterfaceDescription(t, ge1, "Modified Config")
-	sim.AssertHuaweiInterfaceAdminStatus(t, ge1, 1) // down
-	sim.AssertHuaweiInterfaceMtu(t, ge1, 9000)
-	sim.AssertHuaweiInterfaceDampManual(t, ge1, 30, 120, 2000, 8000)
+	testsupport.AssertHuaweiInterfaceExists(t, sim, ge1)
+	testsupport.AssertHuaweiInterfaceDescription(t, sim, ge1, "Modified Config")
+	testsupport.AssertHuaweiInterfaceAdminStatus(t, sim, ge1, 1) // down
+	testsupport.AssertHuaweiInterfaceMtu(t, sim, ge1, 9000)
+	testsupport.AssertHuaweiInterfaceDampManual(t, sim, ge1, 30, 120, 2000, 8000)
 }
 
 // uint32Ptr is a helper to create a *uint32 from a uint32
