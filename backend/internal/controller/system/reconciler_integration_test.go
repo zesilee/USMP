@@ -12,6 +12,7 @@ import (
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/manager"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/reconcile"
 	netsim "github.com/leezesi/usmp/backend/simulator/netconfsim"
+	testsupport "github.com/leezesi/usmp/backend/simulator/netconfsim/testsupport"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -67,7 +68,7 @@ func TestReconciler_Integration_SystemBasics(t *testing.T) {
 	assert.False(t, result.Requeue)
 
 	// 7. Verify the configuration exists in the simulator
-	sim.AssertHuaweiSystem(t, "TestRouter", "admin@example.com", "Beijing, China")
+	testsupport.AssertHuaweiSystem(t, sim, "TestRouter", "admin@example.com", "Beijing, China")
 }
 
 // TestReconciler_Integration_SystemModify tests modifying existing system configuration
@@ -128,8 +129,8 @@ func TestReconciler_Integration_SystemModify(t *testing.T) {
 	assert.False(t, result.Requeue)
 
 	// 7. Verify updated configuration
-	sim.AssertHuaweiSystemName(t, "NewRouter")
-	sim.AssertHuaweiSystem(t, "", "support@example.com", "Shanghai, China")
+	testsupport.AssertHuaweiSystemName(t, sim, "NewRouter")
+	testsupport.AssertHuaweiSystem(t, sim, "", "support@example.com", "Shanghai, China")
 }
 
 // stringPtr is a helper to create a *string from a string

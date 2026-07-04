@@ -12,6 +12,7 @@ import (
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/manager"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/reconcile"
 	netsim "github.com/leezesi/usmp/backend/simulator/netconfsim"
+	testsupport "github.com/leezesi/usmp/backend/simulator/netconfsim/testsupport"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -70,9 +71,9 @@ func TestReconciler_Integration_CreateVLAN(t *testing.T) {
 	assert.False(t, result.Requeue)
 
 	// 7. Verify the VLAN exists in the simulator with correct name (Huawei model)
-	sim.AssertHuaweiVlanExists(t, 100)
-	sim.AssertHuaweiVlanName(t, 100, "TestVLAN")
-	sim.AssertHuaweiVlanCount(t, 1)
+	testsupport.AssertHuaweiVlanExists(t, sim, 100)
+	testsupport.AssertHuaweiVlanName(t, sim, 100, "TestVLAN")
+	testsupport.AssertHuaweiVlanCount(t, sim, 1)
 }
 
 // TestReconciler_Integration_ModifyVLAN tests modifying an existing VLAN configuration
@@ -132,9 +133,9 @@ func TestReconciler_Integration_ModifyVLAN(t *testing.T) {
 	assert.False(t, result.Requeue)
 
 	// 8. Verify the name was updated (Huawei model)
-	sim.AssertHuaweiVlanExists(t, 100)
-	sim.AssertHuaweiVlanName(t, 100, "NewName")
-	sim.AssertHuaweiVlanCount(t, 1)
+	testsupport.AssertHuaweiVlanExists(t, sim, 100)
+	testsupport.AssertHuaweiVlanName(t, sim, 100, "NewName")
+	testsupport.AssertHuaweiVlanCount(t, sim, 1)
 }
 
 // TestReconciler_Integration_DeleteVLAN tests deleting a VLAN configuration
@@ -210,8 +211,8 @@ func TestReconciler_Integration_DeleteVLAN(t *testing.T) {
 	assert.False(t, result.Requeue)
 
 	// 8. Verify only VLAN 100 remains, VLAN 200 is gone (Huawei model)
-	sim.AssertHuaweiVlanExists(t, 100)
-	sim.AssertHuaweiVlanCount(t, 1)
+	testsupport.AssertHuaweiVlanExists(t, sim, 100)
+	testsupport.AssertHuaweiVlanCount(t, sim, 1)
 }
 
 // TestReconciler_Integration_EmptyConfig tests handling of empty VLAN configuration
@@ -258,7 +259,7 @@ func TestReconciler_Integration_EmptyConfig(t *testing.T) {
 	assert.False(t, result.Requeue)
 
 	// 7. Verify still no VLANs (Huawei model)
-	sim.AssertHuaweiVlanCount(t, 0)
+	testsupport.AssertHuaweiVlanCount(t, sim, 0)
 }
 
 // TestReconciler_Integration_CommitFailure tests handling when NETCONF commit fails
@@ -465,33 +466,33 @@ func TestReconciler_Integration_FullVLANConfig(t *testing.T) {
 
 	// 7. Verify ALL fields were correctly applied
 	// Basic fields
-	sim.AssertHuaweiVlanExists(t, 100)
-	sim.AssertHuaweiVlanName(t, 100, "FullConfigVLAN")
-	sim.AssertHuaweiVlanDescription(t, 100, "VLAN with complete configuration")
-	sim.AssertHuaweiVlanType(t, 100, int(huawei.HuaweiVlan_VlanType_common))
-	sim.AssertHuaweiVlanAdminStatus(t, 100, int(huawei.HuaweiVlan_AdminStatus_up))
+	testsupport.AssertHuaweiVlanExists(t, sim, 100)
+	testsupport.AssertHuaweiVlanName(t, sim, 100, "FullConfigVLAN")
+	testsupport.AssertHuaweiVlanDescription(t, sim, 100, "VLAN with complete configuration")
+	testsupport.AssertHuaweiVlanType(t, sim, 100, int(huawei.HuaweiVlan_VlanType_common))
+	testsupport.AssertHuaweiVlanAdminStatus(t, sim, 100, int(huawei.HuaweiVlan_AdminStatus_up))
 
 	// Traffic control fields
-	sim.AssertHuaweiVlanBroadcastDiscard(t, 100, int(huawei.HuaweiVlan_EnableStatus_enable))
-	sim.AssertHuaweiVlanUnknownMulticastDiscard(t, 100, int(huawei.HuaweiVlan_EnableStatus_disable))
+	testsupport.AssertHuaweiVlanBroadcastDiscard(t, sim, 100, int(huawei.HuaweiVlan_EnableStatus_enable))
+	testsupport.AssertHuaweiVlanUnknownMulticastDiscard(t, sim, 100, int(huawei.HuaweiVlan_EnableStatus_disable))
 
 	// MAC learning fields
-	sim.AssertHuaweiVlanMacLearning(t, 100, int(huawei.HuaweiVlan_EnableStatus_enable))
-	sim.AssertHuaweiVlanMacAgingTime(t, 100, uint32(300))
+	testsupport.AssertHuaweiVlanMacLearning(t, sim, 100, int(huawei.HuaweiVlan_EnableStatus_enable))
+	testsupport.AssertHuaweiVlanMacAgingTime(t, sim, 100, uint32(300))
 
 	// Statistics fields
-	sim.AssertHuaweiVlanStatisticEnable(t, 100, int(huawei.HuaweiVlan_EnableStatus_enable))
-	sim.AssertHuaweiVlanStatisticDiscard(t, 100, int(huawei.HuaweiVlan_EnableStatus_disable))
+	testsupport.AssertHuaweiVlanStatisticEnable(t, sim, 100, int(huawei.HuaweiVlan_EnableStatus_enable))
+	testsupport.AssertHuaweiVlanStatisticDiscard(t, sim, 100, int(huawei.HuaweiVlan_EnableStatus_disable))
 
 	// VLAN association
-	sim.AssertHuaweiVlanSuperVlan(t, 100, uint16(999))
+	testsupport.AssertHuaweiVlanSuperVlan(t, sim, 100, uint16(999))
 
 	// Nested container fields
-	sim.AssertHuaweiVlanUnkownUnicastDiscard(t, 100,
+	testsupport.AssertHuaweiVlanUnkownUnicastDiscard(t, sim, 100,
 		int(huawei.HuaweiVlan_EnableStatus_enable),
 		int(huawei.HuaweiVlan_EnableStatus_disable),
 	)
-	sim.AssertHuaweiVlanSuppression(t, 100,
+	testsupport.AssertHuaweiVlanSuppression(t, sim, 100,
 		int(huawei.HuaweiVlan_EnableStatus_enable),
 		int(huawei.HuaweiVlan_EnableStatus_enable),
 	)
@@ -542,7 +543,7 @@ func TestReconciler_Integration_DescriptionOnly(t *testing.T) {
 	result := r.Reconcile(context.Background(), reconcile.Request{DeviceID: deviceID, Path: path})
 
 	assert.NoError(t, result.Error)
-	sim.AssertHuaweiVlanDescription(t, 400, "Testing description field only")
+	testsupport.AssertHuaweiVlanDescription(t, sim, 400, "Testing description field only")
 }
 
 // TestReconciler_Integration_AdminStatus tests admin status enable/disable.
@@ -581,7 +582,7 @@ func TestReconciler_Integration_AdminStatus(t *testing.T) {
 	result := r.Reconcile(context.Background(), reconcile.Request{DeviceID: deviceID, Path: path})
 
 	assert.NoError(t, result.Error)
-	sim.AssertHuaweiVlanAdminStatus(t, 500, int(huawei.HuaweiVlan_AdminStatus_down))
+	testsupport.AssertHuaweiVlanAdminStatus(t, sim, 500, int(huawei.HuaweiVlan_AdminStatus_down))
 }
 
 // TestReconciler_Integration_MacAgingTime tests MAC aging time configuration.
@@ -620,5 +621,5 @@ func TestReconciler_Integration_MacAgingTime(t *testing.T) {
 	result := r.Reconcile(context.Background(), reconcile.Request{DeviceID: deviceID, Path: path})
 
 	assert.NoError(t, result.Error)
-	sim.AssertHuaweiVlanMacAgingTime(t, 600, uint32(600))
+	testsupport.AssertHuaweiVlanMacAgingTime(t, sim, 600, uint32(600))
 }

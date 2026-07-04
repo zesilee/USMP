@@ -6,16 +6,16 @@
 
 ## T0 — 决策与基线（apply 首步）
 
-- [ ] **T0.1** 确认 test-server 去向：(a) 显式内存 REST 桩 / (b) 复用 netconfsim 全链路（design §D6）→ 记录选型
-- [ ] **T0.2** 跑基线 `go test ./...` 全绿，记录当前 netconfsim/netsim 覆盖的测试清单
-- [ ] **T0.3** 实测 scrapligo 客户端 hello 是否协商 1.1 chunked framing（决定 D4 深度）
+- [x] **T0.1** test-server 去向：选 **(a) 显式内存 REST 桩**。理由：test-server 现仅服务前端 Playwright E2E 的 REST 接口，本就不经 NETCONF；抽成诚实命名的内存 fixture 即可删 netsim，(b) 全链路属过度工程，不在本次范围。
+- [x] **T0.2** 基线：`go test ./simulator/... ./internal/controller/... ./pkg/yang-runtime/actor/...` 全绿。netconfsim 被 4 个 reconciler + actor + e2e 集成测试覆盖；netsim 仅 cmd/test-server。
+- [x] **T0.3** scrapligo v1.4.0 **自动协商最高公共版本**，客户端（`netconf.go:65` 未强制版本）随服务端广告而定。模拟器只广告 `base:1.0` → 用 1.0 EOM framing（现状）。**结论：保持 1.0 framing，不实现 1.1 chunked（T4.3 移出范围）**，capability 补 `:candidate`/`:writable-running`。
 
-## T1 — 测试脚手架 + 解耦（不改行为）
+## T1 — 测试脚手架 + 解耦（不改行为）✅
 
-- [ ] **T1.1** 新增 `netconfsim/testsupport` 子包，迁移 `Assert*`（`simulator.go:185-236`）到此
-- [ ] **T1.2** 集成测试改调 `testsupport.Assert*`，`netconfsim` core 移除 `import "testing"`/testify
-- [ ] **T1.3** 验证：`go list -deps ./backend/simulator/netconfsim` 不含 `testing`
-- [ ] **T1.4** 新增 `cmd/netconf-simulator/main.go`（flag 端口/初始配置），`go build` 通过
+- [x] **T1.1** 新增 `netconfsim/testsupport` 子包，迁移 33 个 `Assert*`（scenarios.go 30 + simulator.go 3）为函数 `Assert*(t, sim, …)`
+- [x] **T1.2** 6 个集成测试文件改调 `testsupport.Assert*`；core（scenarios.go/simulator.go）移除 `testing`/testify，`ScenarioConfig` 保留在 core
+- [x] **T1.3** 验证：`go list -deps ./simulator/netconfsim` 与 `./cmd/netconf-simulator` 均不含 `testing`
+- [x] **T1.4** 新增 `cmd/netconf-simulator/main.go`（flag -addr/-port）+ 核心 `SetListen`；二进制构建、绑定、优雅退出均通过
 
 ## T2 — 结构化 datastore（新旧并行）
 
@@ -35,7 +35,7 @@
 
 - [ ] **T4.1** 先写测试：hello capability 广告断言（base:1.0/1.1、:candidate、:writable-running）
 - [ ] **T4.2** 实现 capability 广告 + `encoding/xml` RPC 分发（替换 strings.Contains）
-- [ ] **T4.3**（条件，依 T0.3）实现 1.1 chunked framing；否则仅广告不实现并记录
+- [x] **T4.3** ~~1.1 chunked framing~~ **移出范围**（T0.3 结论：模拟器只广告 1.0，scrapligo 随之用 1.0 framing，无需 1.1）
 
 ## T5 — 双路径验证与切换
 
