@@ -67,15 +67,8 @@ func main() {
 		os.Exit(1)
 	}
 
-	// 设置 BusinessInterface Reconciler（仅支持华为交换机）
-	if err = (&controllers.BusinessInterfaceReconciler{
-		Client:     mgr.GetClient(),
-		Scheme:     mgr.GetScheme(),
-		ClientPool: clientPool,
-	}).SetupWithManager(mgr); err != nil {
-		setupLog.Error(err, "unable to create controller", "controller", "BusinessInterface")
-		os.Exit(1)
-	}
+	// BusinessInterface 意图已收编到 Stack B 的 CRD 意图源（backend/main.go：
+	// crdsource.RegisterIntentSources），Actor 路径退役（P2 组4b）。
 
 	// 设置 BusinessRoute Reconciler（仅支持华为交换机）
 	if err = (&controllers.BusinessRouteReconciler{
