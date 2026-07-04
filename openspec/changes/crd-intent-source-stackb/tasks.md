@@ -19,9 +19,9 @@
 
 ## 3. 迁移 Interface/Route/Switch
 
-- [ ] 3.1 BusinessInterface 接入 CRD 源 + 双路径验证 + netconfsim 集成
-- [ ] 3.2 BusinessRoute/Switch：补齐 Route/System ygot 翻译（或显式标注受限）；接入 + 验证
-- [ ] 3.3 NativeDeviceConfig（core.usmp.io）如需，评估经 CRD 源或维持 config-api（记边界）
+- [x] 3.1 BusinessInterface 接入：`InterfaceProjectFunc`（→ Huawei ifm ygot，path=/ifm:ifm/ifm:interfaces）+ register.go 收敛为**单 cache 双源**（Vlan+Interface）；双路径等价单测（DeepEqual translator）；reconcile→netconfsim 一段由既有 ifm reconciler 集成套件覆盖
+- [~] 3.2 BusinessRoute/Switch：**显式标注受限**——`TranslateRoute` 返回裸 map、`TranslateSystem` 未支持（D5/D8）；按 R04 不把非 ygot desired 投影进 ConfigStore，故暂不注册其 CRD 源（register.go 注释说明），待补 ygot 翻译后接入
+- [~] 3.3 NativeDeviceConfig（core.usmp.io）：维持 config-api 路径（场景①原生面，P1 已覆盖），不经 business CRD 源；记为边界
 
 ## 4. 切换生产入口 + 退役 Actor
 

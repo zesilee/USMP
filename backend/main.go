@@ -75,7 +75,7 @@ func main() {
 
 	// Register the BusinessVlan CRD intent source (场景② 意图面收编 Stack B),
 	// parallel to the legacy Actor path. Degrades gracefully without a K8s cluster.
-	crdCache, err := crdsource.RegisterVlanIntentSource(mgr)
+	crdCache, err := crdsource.RegisterIntentSources(mgr)
 	if err != nil {
 		log.Printf("Failed to register CRD intent source: %v", err)
 	}
