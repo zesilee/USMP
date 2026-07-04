@@ -30,9 +30,7 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/log"
 
 	bizv1 "github.com/leezesi/usmp/backend/api/v1"
-	"github.com/leezesi/usmp/backend/pkg/yang-runtime/actor"
 	netconfclient "github.com/leezesi/usmp/backend/pkg/yang-runtime/client"
-	"github.com/leezesi/usmp/backend/internal/generated/huawei"
 )
 
 const (
@@ -148,67 +146,29 @@ func (r *BusinessSwitchReconciler) probeDevice(
 	ctx context.Context,
 	businessSwitch *bizv1.BusinessSwitch,
 ) error {
-	// 构建设备连接信息
-	deviceAddr := fmt.Sprintf("%s:%d", businessSwitch.Spec.DeviceIP, businessSwitch.Spec.Port)
-	if businessSwitch.Spec.Port == 0 {
-		deviceAddr = fmt.Sprintf("%s:830", businessSwitch.Spec.DeviceIP)
+	// 经 ClientPool 直连探活（去 Actor）：NewNETCONFClient 立即连接，
+	// 创建失败即离线；连接成功即在线。
+	port := businessSwitch.Spec.Port
+	if port == 0 {
+		port = 830
+	}
+	connInfo := netconfclient.DeviceConnectionInfo{
+		IP:       businessSwitch.Spec.DeviceIP,
+		Port:     port,
+		Username: businessSwitch.Spec.Credentials.Username,
+		Password: businessSwitch.Spec.Credentials.Password,
 	}
 
-	deviceID := fmt.Sprintf("%s:%s@%s",
-		businessSwitch.Spec.Credentials.Username,
-		businessSwitch.Spec.Credentials.Password,
-		deviceAddr,
-	)
-
-	// 创建 VLAN Actor 用于探测（复用现有连接机制）
-	translator := actor.NewReflectTranslator[*huawei.HuaweiVlan_Vlan_Vlans]()
-	vlanActor := actor.NewModelActor[*huawei.HuaweiVlan_Vlan_Vlans](
-		fmt.Sprintf("probe-%s", businessSwitch.Name),
-		deviceID,
-		r.ClientPool,
-		translator,
-	)
-	defer vlanActor.Stop()
-
-	// 启动 Actor 并等待初始化
-	if err := vlanActor.Start(); err != nil {
+	client, err := r.ClientPool.Get(connInfo)
+	if err != nil {
 		return fmt.Errorf("连接设备失败: %w", err)
 	}
-
-	// 等待 Actor 初始化
-	time.Sleep(500 * time.Millisecond)
-
-	// 发送 StatusQuery 探测
-	statusCmd := &actor.StatusQueryCmd{
-		BaseMessage: actor.NewBaseMessageWithContext(
-			fmt.Sprintf("probe-%s", businessSwitch.Name),
-			actor.MsgStatusQuery,
-			ctx,
-		),
-		IncludeDetails: true,
+	if !client.IsConnected() {
+		return fmt.Errorf("设备未连接: %s", connInfo.IP)
 	}
 
-	promise, err := vlanActor.Send(statusCmd)
-	if err != nil {
-		return fmt.Errorf("探测命令发送失败: %w", err)
-	}
-
-	result := <-promise
-	if !result.Success {
-		return fmt.Errorf("设备探测失败: %v", result.Error)
-	}
-
-	// 从返回结果中提取设备信息（简化处理）
-	data := result.Data
-	if data != nil {
-		// 更新硬件状态
-		hardware := &bizv1.DeviceHardwareStatus{}
-		if uptime, ok := data["uptime"].(string); ok {
-			hardware.Uptime = uptime
-		}
-		businessSwitch.Status.Hardware = hardware
-	}
-
+	// 连接成功即在线。uptime 等明细此前为「简化处理」，去 Actor 后不再采集，
+	// 如需可后续经 client.Get 补（不影响在线/离线判定）。
 	return nil
 }
 
