@@ -3,6 +3,7 @@ package api
 import (
 	"context"
 	"fmt"
+	"log"
 	"strconv"
 	"strings"
 	"time"
@@ -28,7 +29,7 @@ func NewConfigHandler(manager manager.Manager) *ConfigHandler {
 // GetConfig gets the configuration for a specific device and YANG path
 func (h *ConfigHandler) GetConfig(c *gin.Context) {
 	ip := c.Param("ip")
-	path := c.Param("path") // *path already includes leading slash
+	path := c.Param("path")                // *path already includes leading slash
 	_ = c.Query("force_refresh") == "true" // TODO: Implement cache invalidation when we have caching
 
 	// Get the device info from device handler
@@ -81,7 +82,7 @@ func (h *ConfigHandler) SetConfig(c *gin.Context) {
 	// Convert the raw data to the appropriate YANG model struct
 	// This ensures the ConfigStore stores properly typed data that the
 	// Reconciler can work with for diff calculation
-	desiredConfig, err := convertToTypedStruct(path, data)
+	desiredConfig, err := convertConfig(path, data)
 	if err != nil {
 		Error(c, 400, "Failed to parse configuration: "+err.Error())
 		return
@@ -104,8 +105,8 @@ func (h *ConfigHandler) SetConfig(c *gin.Context) {
 	controllerFound := h.manager.TriggerReconcile(ip, path)
 
 	Success(c, gin.H{
-		"status":        "ACCEPTED",
-		"path":          path,
+		"status": "ACCEPTED",
+		"path":   path,
 		"reconciliation": map[string]interface{}{
 			"triggered": controllerFound,
 			"message":   "Configuration stored. Reconciliation will sync device state.",
@@ -131,8 +132,9 @@ func convertToTypedStruct(path string, data map[string]interface{}) (interface{}
 		return convertMapToHuaweiVlan(data)
 	}
 
-	// Fallback: return the raw map for unhandled paths
-	// Reconciler will handle it or report error appropriately
+	// Fallback: return the raw map for unhandled paths. Log a warning so unknown
+	// paths are visible rather than silently degraded (R08 — no silent truncation).
+	log.Printf("config-api: no typed codec for path %q, storing raw map", path)
 	return data, nil
 }
 
@@ -631,7 +633,6 @@ func mapToSuppression(m map[string]interface{}) *huawei.HuaweiVlan_Vlan_Vlans_Vl
 
 	return result
 }
-
 
 // valueToUint converts various numeric types to uint64
 func valueToUint(v interface{}) (uint64, bool) {
