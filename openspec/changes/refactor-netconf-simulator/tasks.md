@@ -47,7 +47,7 @@
 
 ## T6 — 删除旧代码
 
-- [ ] **T6.1** 删除旧 XML datastore、`Extract*`、`*TestData`、旧 server 字符串解析分支
+- [x] **T6.1** 删除旧 XML datastore、`Extract*`、`*TestData`、旧 server 字符串解析分支（datastore.go 全删；testsupport 改查通用树；server RPC 分发已于 T4 改结构化解码）
 - [ ] **T6.2** 删除 `backend/simulator/netsim/`，清理引用
 - [ ] **T6.3** 更新 `openspec/specs/netconf-simulator/{spec,design,tasks}.md`，D10 迁移债勾除
 - [ ] **T6.4** 全量 `go test ./...` 绿；`go build ./cmd/netconf-simulator` 绿
