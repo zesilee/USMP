@@ -20,15 +20,16 @@ const (
 
 // Simulator is a NETCONF simulator that provides a fake NETCONF server for testing.
 type Simulator struct {
-	username string
-	password string
-	addr     string
-	port     int
-	listener net.Listener
-	server   *sshServer
-	config   *ssh.ServerConfig
-	store    *treeDatastore
-	scenario *ScenarioConfig
+	username  string
+	password  string
+	addr      string
+	port      int
+	listener  net.Listener
+	server    *sshServer
+	config    *ssh.ServerConfig
+	store     *treeDatastore
+	scenario  *ScenarioConfig
+	extraCaps []string
 
 	listenPort int // 0 = random free port
 
@@ -98,10 +99,11 @@ func (s *Simulator) Start() error {
 	s.port = listener.Addr().(*net.TCPAddr).Port
 
 	s.server = &sshServer{
-		config:   s.config,
-		store:    s.store,
-		scenario: s.scenario,
-		done:     s.done,
+		config:    s.config,
+		store:     s.store,
+		scenario:  s.scenario,
+		extraCaps: s.extraCaps,
+		done:      s.done,
 	}
 
 	s.wg.Add(1)
@@ -170,6 +172,13 @@ func deviceToConfigXML(dev interface{}) []byte {
 		buf = []byte(fmt.Sprintf("<config>%s</config>", buf))
 	}
 	return buf
+}
+
+// SetCapabilities sets extra YANG-module capabilities to advertise in the NETCONF
+// hello (in addition to base:1.0/:candidate/:writable-running). Must be called
+// before Start. Used to exercise per-device capability-based module narrowing.
+func (s *Simulator) SetCapabilities(caps []string) {
+	s.extraCaps = caps
 }
 
 // SetScenario sets the scenario configuration for error injection testing.

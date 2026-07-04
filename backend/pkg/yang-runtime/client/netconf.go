@@ -283,6 +283,19 @@ func (c *NETCONFClient) IsConnected() bool {
 	return c.connected && c.driver != nil
 }
 
+// ServerCapabilities returns the NETCONF capabilities the device advertised in
+// its hello, or nil if not connected. Used by the hybrid schema resolver to
+// narrow the usable YANG module set per device.
+func (c *NETCONFClient) ServerCapabilities() []string {
+	c.mu.RLock()
+	driver := c.driver
+	c.mu.RUnlock()
+	if driver == nil {
+		return nil
+	}
+	return driver.ServerCapabilities()
+}
+
 // DiscardCandidate discards the candidate configuration on the device.
 // This is used to abort a 2PC transaction before commit.
 func (c *NETCONFClient) DiscardCandidate(ctx context.Context) error {
