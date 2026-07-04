@@ -1,4 +1,7 @@
-// Package main E2E 测试服务器 - 启动后端服务连接到模拟网元
+// Package main E2E 测试服务器 — 为前端 Playwright 提供内存 REST 桩。
+//
+// 该服务只服务前端的 REST 接口，从不经 NETCONF。历史上它误用 netsim 假
+// “模拟器” 作后端；现改为诚实命名的内存 VLAN store（fixture.go）。
 package main
 
 import (
@@ -14,11 +17,18 @@ import (
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
-	"github.com/leezesi/usmp/backend/simulator/netsim"
 )
 
-// 全局模拟服务器
-var sim *netsim.Simulator
+// 内存 VLAN store（替代原 netsim 假模拟器）
+var store *vlanStore
+
+// 前端展示用的固定设备描述（本服务不经 NETCONF，仅供设备列表展示）。
+const (
+	fixtureDeviceIP   = "192.168.1.1"
+	fixtureDevicePort = 830
+	fixtureUsername   = "admin"
+	fixturePassword   = "admin"
+)
 
 // API 响应结构
 type ApiResponse[T any] struct {
@@ -29,12 +39,12 @@ type ApiResponse[T any] struct {
 
 // VLANInfo VLAN 信息
 type VLANInfo struct {
-	ID             int      `json:"id"`
-	Name           string   `json:"name"`
-	AdminStatus    string   `json:"adminStatus"`
-	OperStatus     string   `json:"operStatus"`
-	TaggedPorts    []string `json:"taggedPorts"`
-	UntaggedPorts  []string `json:"untaggedPorts"`
+	ID            int      `json:"id"`
+	Name          string   `json:"name"`
+	AdminStatus   string   `json:"adminStatus"`
+	OperStatus    string   `json:"operStatus"`
+	TaggedPorts   []string `json:"taggedPorts"`
+	UntaggedPorts []string `json:"untaggedPorts"`
 }
 
 func main() {
@@ -51,14 +61,8 @@ func main() {
 		MaxAge:           12 * time.Hour,
 	}))
 
-	// 启动 NETCONF 模拟服务器
-	sim = netsim.NewSimulator()
-	if err := sim.Start(); err != nil {
-		log.Fatalf("Failed to start NETCONF simulator: %v", err)
-	}
-	defer sim.Stop()
-
-	log.Printf("NETCONF Simulator started on %s:%d", sim.Addr(), sim.Port())
+	// 初始化内存 VLAN store
+	store = newVLANStore()
 
 	// API 路由
 	api := r.Group("/api/v1")
@@ -96,7 +100,7 @@ func main() {
 
 	log.Println("=")
 	log.Println("E2E Test Server started on http://localhost:8080")
-	log.Println("NETCONF Simulator on port:", sim.Port())
+	log.Println("In-memory VLAN REST fixture (no NETCONF)")
 	log.Println("=")
 	log.Println("Run E2E tests: cd frontend && npm run e2e")
 	log.Println("=")
@@ -112,10 +116,10 @@ func listDevices(c *gin.Context) {
 		Success: true,
 		Data: []map[string]interface{}{
 			{
-				"ip":       "192.168.1.1",
-				"port":     sim.Port(),
-				"username": sim.Username(),
-				"password": sim.Password(),
+				"ip":       fixtureDeviceIP,
+				"port":     fixtureDevicePort,
+				"username": fixtureUsername,
+				"password": fixturePassword,
 				"status":   "online",
 			},
 		},
@@ -137,7 +141,7 @@ func getDeviceStatus(c *gin.Context) {
 func getVLANConfig(c *gin.Context) {
 	forceRefresh := c.Query("force_refresh") == "true"
 
-	vlans := sim.GetAllVLANs()
+	vlans := store.all()
 	result := make([]VLANInfo, 0, len(vlans))
 
 	for _, v := range vlans {
@@ -159,9 +163,9 @@ func getVLANConfig(c *gin.Context) {
 	c.JSON(http.StatusOK, ApiResponse[map[string]interface{}]{
 		Success: true,
 		Data: map[string]interface{}{
-			"vlans":       result,
-			"fromCache":   !forceRefresh,
-			"lastSync":    time.Now().Format(time.RFC3339),
+			"vlans":     result,
+			"fromCache": !forceRefresh,
+			"lastSync":  time.Now().Format(time.RFC3339),
 		},
 	})
 }
@@ -185,12 +189,12 @@ func createVLAN(c *gin.Context) {
 		return
 	}
 
-	sim.AddVLAN(&netsim.VLANConfig{
-		ID:             vlan.ID,
-		Name:           vlan.Name,
-		AdminState:     vlan.AdminStatus,
-		TaggedPorts:    vlan.TaggedPorts,
-		UntaggedPorts:  vlan.UntaggedPorts,
+	store.put(&VLAN{
+		ID:            vlan.ID,
+		Name:          vlan.Name,
+		AdminState:    vlan.AdminStatus,
+		TaggedPorts:   vlan.TaggedPorts,
+		UntaggedPorts: vlan.UntaggedPorts,
 	})
 
 	c.JSON(http.StatusOK, ApiResponse[any]{
@@ -220,7 +224,7 @@ func updateVLAN(c *gin.Context) {
 		return
 	}
 
-	existing := sim.GetVLAN(id)
+	existing := store.get(id)
 	if existing == nil {
 		c.JSON(http.StatusNotFound, ApiResponse[any]{
 			Success: false,
@@ -234,7 +238,7 @@ func updateVLAN(c *gin.Context) {
 	existing.TaggedPorts = vlan.TaggedPorts
 	existing.UntaggedPorts = vlan.UntaggedPorts
 
-	sim.AddVLAN(existing)
+	store.put(existing)
 
 	c.JSON(http.StatusOK, ApiResponse[any]{
 		Success: true,
@@ -254,7 +258,7 @@ func deleteVLAN(c *gin.Context) {
 		return
 	}
 
-	sim.DeleteVLAN(id)
+	store.remove(id)
 
 	c.JSON(http.StatusOK, ApiResponse[any]{
 		Success: true,

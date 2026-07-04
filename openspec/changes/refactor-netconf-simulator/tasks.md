@@ -43,12 +43,12 @@
 
 - [x] **T5.1** 现有 `*_integration_test.go` 对新树 datastore 各跑一遍，断言与旧实现等价（T2.3 对拍 + 全量集成套件对切换后 tree-backed server 全绿）
 - [x] **T5.2** 集成测试切到新实现（`server.go`/`simulator.go` 切到 `treeDatastore`，行为保持等价；`GetDatastore()` 过渡 shim 保留 `Extract*` 断言）
-- [ ] **T5.3** test-server 按 T0.1 选型改接口，前端 E2E 绿
+- [x] **T5.3** test-server 按 T0.1 选型改接口（诚实内存 VLAN REST 桩，脱离 netsim）；REST 契约不变 + 运行时冒烟已验证（Playwright 浏览器用例本环境无法无头运行）
 
 ## T6 — 删除旧代码
 
 - [x] **T6.1** 删除旧 XML datastore、`Extract*`、`*TestData`、旧 server 字符串解析分支（datastore.go 全删；testsupport 改查通用树；server RPC 分发已于 T4 改结构化解码）
-- [ ] **T6.2** 删除 `backend/simulator/netsim/`，清理引用
+- [x] **T6.2** 删除 `backend/simulator/netsim/`，清理引用（唯一使用方 test-server 已于 T5.3 脱离）
 - [ ] **T6.3** 更新 `openspec/specs/netconf-simulator/{spec,design,tasks}.md`，D10 迁移债勾除
 - [ ] **T6.4** 全量 `go test ./...` 绿；`go build ./cmd/netconf-simulator` 绿
 
