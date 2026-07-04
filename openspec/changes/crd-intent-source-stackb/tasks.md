@@ -5,14 +5,11 @@
 
 ## 0. 基线
 
-- [ ] 0.1 基线 `go test ./...` 全绿；快照 Stack A（Actor）路径对 BusinessVlan 产出的 desired ygot 作对拍基准
-- [ ] 0.2 审计 controllers/* 的 Actor 调用点、translator 消费点、api/v1 vs api/biz/v1 引用，列迁移清单
-
-## 1. KubernetesCRDSource（C4，translate-and-project）
-
-- [ ] 1.1 先写测试：源 add/update→`TranslateConfig`→`ConfigStore.Set`→`Enqueue`；delete→`ConfigStore.Delete`→Enqueue；deviceID/path 提取；translator 错误降级（R08）
-- [ ] 1.2 实现 `pkg/yang-runtime/source/KubernetesCRDSource`：参数化（GVK/vendor/configType/deviceIDFn/pathFn），基于 controller-runtime informer/client-go watch，实现 `controller.Source`
-- [ ] 1.3 单测用 fake K8s client（controller-runtime fake）驱动事件，断言 ConfigStore/enqueue 效果，含 -race
+- [x] 0.1 基线 `go test ./...` 全绿（已验证）；translator 输入为 `bizv1.BusinessVlanSpec`（对拍基准在组2 采集）
+- [x] 0.2 审计：`controllers/*` 用 `actor.ModelActor`(Translate/Prepare/Commit 2PC)；translator `TranslateConfig(vendor,configType,spec)`；biz CRD 在 `api/biz/v1`；旧 `api/v1` 待退（D1）
+- [x] 1.1 先写测试：`handleUpsert`→project(translate)→`ConfigStore.Set`→UpdateEvent；`handleDelete`→`Delete`→DeleteEvent；translate 错误/空 deviceID 降级（R08）；Start 无 cache 报错
+- [x] 1.2 实现 `pkg/yang-runtime/source/KubernetesCRDSource`：**框架泛用**（`ProjectFunc` 由 app 提供 translate+提取，不 import translator/bizv1），`controller.Source`；Start 用 controller-runtime cache informer 挂 add/update/delete
+- [x] 1.3 项目化核心（handleUpsert/handleDelete）用 fake ConfigStore 单测（-race 全绿）；informer 挂载为薄封装，端到端留组2（backend 接线）
 
 ## 2. BusinessVlan 接入 Stack B（并行 + 双路径验证）
 
