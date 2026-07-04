@@ -1,7 +1,7 @@
 ---
 id: refactor-netconf-simulator
 title: 重构 NETCONF 模拟网元
-status: in_progress
+status: completed
 priority: high
 branch: 各阶段独立分支（refactor/sim-tN-*）
 change: refactor-netconf-simulator
