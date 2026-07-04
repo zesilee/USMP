@@ -18,6 +18,13 @@ import (
 // The ygot schema's root entry (keyed in SchemaTree by the root struct name) has
 // each top-level YANG container as a child; each such child is exposed as a Module.
 func AddYgotSchema(ds *DefaultSchema, s *ytypes.Schema) {
+	AddYgotSchemaWithVendor(ds, s, "")
+}
+
+// AddYgotSchemaWithVendor is like AddYgotSchema but tags each added module with
+// the given vendor label (known by the caller from which generated package the
+// schema came, since the unzipped entries carry no namespace).
+func AddYgotSchemaWithVendor(ds *DefaultSchema, s *ytypes.Schema, vendor string) {
 	if ds == nil || s == nil {
 		return
 	}
@@ -26,7 +33,7 @@ func AddYgotSchema(ds *DefaultSchema, s *ytypes.Schema) {
 		return
 	}
 	for _, child := range sortedDir(rootEntry) {
-		ds.AddModule(entryToModule(child))
+		ds.AddModule(entryToModule(child, vendor))
 	}
 }
 
@@ -79,10 +86,12 @@ func entryNamespace(e *yang.Entry) string {
 	return ""
 }
 
-// entryToModule wraps a top-level container entry as a Module.
-func entryToModule(e *yang.Entry) Module {
+// entryToModule wraps a top-level container entry as a Module tagged with vendor.
+func entryToModule(e *yang.Entry, vendor string) Module {
 	root := entryToContainer(e, nil, "/"+e.Name)
-	return NewModule(e.Name, entryNamespace(e), "", root)
+	m := NewModule(e.Name, entryNamespace(e), "", root).(*defaultModule)
+	m.vendor = vendor
+	return m
 }
 
 // entryToNode dispatches an entry to the appropriate node kind.

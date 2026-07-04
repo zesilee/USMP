@@ -7,9 +7,9 @@ import (
 
 // DefaultSchema is the default implementation of Schema
 type DefaultSchema struct {
-	modules map[string]Module
+	modules   map[string]Module
 	pathCache map[string]Node
-	mu       sync.RWMutex
+	mu        sync.RWMutex
 }
 
 // NewSchema creates a new empty DefaultSchema
@@ -138,10 +138,16 @@ func (n *defaultNode) SchemaPath() string {
 // defaultModule is the default implementation of Module
 type defaultModule struct {
 	defaultNode
-	name        string
-	namespace   string
-	revision    string
-	root        ContainerNode
+	name      string
+	namespace string
+	revision  string
+	vendor    string
+	root      ContainerNode
+}
+
+// Vendor implements Module interface
+func (m *defaultModule) Vendor() string {
+	return m.vendor
 }
 
 // Name implements Module interface
@@ -182,9 +188,9 @@ func NewModule(name, namespace, revision string, root ContainerNode) Module {
 // defaultContainer is the default implementation of ContainerNode
 type defaultContainer struct {
 	defaultNode
-	children   []Node
+	children    []Node
 	childrenMap map[string]Node
-	isPresence bool
+	isPresence  bool
 }
 
 // Children implements ContainerNode interface
@@ -213,7 +219,7 @@ func NewContainer(name, description, path string, parent Node, isPresence bool) 
 			nodeType:    ContainerNodeType,
 			parent:      parent,
 		},
-		isPresence: isPresence,
+		isPresence:  isPresence,
 		childrenMap: make(map[string]Node),
 	}
 	c.children = make([]Node, 0)
@@ -229,9 +235,9 @@ func (c *defaultContainer) AddChild(child Node) {
 // defaultList is the default implementation of ListNode
 type defaultList struct {
 	defaultNode
-	keys        []LeafNode
-	children    []Node
-	childrenMap map[string]Node
+	keys          []LeafNode
+	children      []Node
+	childrenMap   map[string]Node
 	isUserOrdered bool
 }
 
@@ -336,8 +342,8 @@ func NewLeaf(name, description, path string, parent Node, leafType LeafType, isK
 			nodeType:    LeafNodeType,
 			parent:      parent,
 		},
-		leafType:  leafType,
-		isKey:     isKey,
+		leafType:   leafType,
+		isKey:      isKey,
 		mandatory:  mandatory,
 		enumValues: []string{},
 	}

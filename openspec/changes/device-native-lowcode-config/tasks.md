@@ -19,11 +19,11 @@
 
 ## 2. yang-api 动态化（去硬编码）
 
-- [ ] 2.1 先写测试：`/yang/schema/:module` 从 schema 树生成 FieldDef，覆盖 leaf/leaf-list/container/list/enum/bool/number/string 类型映射；未知模块→明确「未知」而非 2 字段桩
-- [ ] 2.2 实现 schema 树 → 前端 FieldDef 生成器（YANG 类型 → 控件类型映射）
-- [ ] 2.3 切 `/yang/schema/:module` handler 到动态生成；**保留旧硬编码为回退分支**，双路径对拍 IFM/VLAN 等价
-- [ ] 2.4 先写测试 + 实现 `/yang/modules` 从 schema 树枚举（含 vendor 判定；响应结构与迁移前兼容）
-- [ ] 2.5 双路径验证通过 → 切换入口 → 删旧硬编码 schema 分支
+- [x] 2.1 先写测试：FieldDef 生成器（类型映射 bool/number/enum/string、list 键→ListCols）+ handler `GetSchema` 动态（真实 vlan schema 多字段、非 2 字段桩）
+- [x] 2.2 实现 `field_gen.go` schema 树→FieldDef 生成器（YANG LeafType→控件类型）+ Module `Vendor()` 贯穿（load 时标 huawei/openconfig）
+- [x] 2.3 切 `GetSchema` handler：schema 树命中→动态生成；**保留旧硬编码为回退分支**（legacy 别名，task 2.5/组5 删）
+- [x] 2.4 `ListModules` 从 schema 树枚举，vendor 用 `mod.Vendor()`（vlan→huawei、interfaces→openconfig）；删无模块时的硬编码桩；响应结构兼容
+- [ ] 2.5 前端切换后（组4）删旧硬编码 schema 回退分支（并入组5清理）
 
 ## 3. config-api 通用编解码（去硬编码三条）
 

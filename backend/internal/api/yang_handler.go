@@ -71,10 +71,14 @@ func (h *YangHandler) ListModules(c *gin.Context) {
 			continue
 		}
 
+		vendor := mod.Vendor()
+		if vendor == "" {
+			vendor = vendorForNamespace(mod.Namespace())
+		}
 		info := YangModuleInfo{
 			Name:        mod.Name(),
 			Title:       root.Name(),
-			Vendor:      "huawei",
+			Vendor:      vendor,
 			Path:        "/" + root.Name(),
 			Description: root.Description(),
 			Type:        strconv.Itoa(int(root.Type())),
@@ -82,34 +86,21 @@ func (h *YangHandler) ListModules(c *gin.Context) {
 		modules = append(modules, info)
 	}
 
-	// If no modules are loaded, return some example for now
-	if len(modules) == 0 {
-		modules = []YangModuleInfo{
-			{
-				Name:        "huawei-ifm",
-				Title:       "华为接口管理",
-				Vendor:      "huawei",
-				Path:        "/ifm",
-				Description: "Network interfaces configuration",
-			},
-			{
-				Name:        "huawei-vlan",
-				Title:       "华为 VLAN 配置",
-				Vendor:      "huawei",
-				Path:        "/vlans",
-				Description: "VLAN configuration",
-			},
-		}
-	}
-
 	Success(c, modules, "YANG modules retrieved successfully")
 }
 
-// GetSchema returns dynamic form schema for a specific YANG module
+// GetSchema returns dynamic form schema for a specific YANG module. Modules
+// present in the loaded schema tree are rendered dynamically; a hard-coded
+// fallback (legacy aliases) is retained during migration (removed in task 2.5).
 func (h *YangHandler) GetSchema(c *gin.Context) {
 	module := c.Param("module")
 
-	// Example schema definitions based on module name
+	if mod, ok := h.manager.GetSchema().Module(module); ok {
+		Success(c, buildYangSchema(mod), "Schema retrieved successfully")
+		return
+	}
+
+	// Legacy hard-coded fallback for aliases not present in the schema tree.
 	var schema YangSchema
 
 	switch module {
