@@ -4,9 +4,9 @@
 
 ## 1. DeviceHandler 在线探活（新路径）
 
-- [ ] 1.1 先写测试：ClientPool 桩——设备连接成功→`online:true`；`Get` 报错→`online:false`（R08）；多设备互不影响
-- [ ] 1.2 实现：`ListDevices` 逐设备 `ClientPool.Get`+`IsConnected` → 响应加 `online` 字段（DeviceInfo 或包装）；失败降级离线
-- [ ] 1.3 `go build ./...` + api 包测试绿
+- [x] 1.1 先写测试：ClientPool 桩——设备连接成功→`online:true`；`Get` 报错→`online:false`（R08）；多设备互不影响
+- [x] 1.2 实现：`ListDevices` 逐设备 `ClientPool.Get`+`IsConnected` → 响应加 `online` 字段（DeviceInfo 或包装）；失败降级离线
+- [x] 1.3 `go build ./...` + api 包测试绿
 
 ## 2. 退役 cmd/controller + 冗余控制器（删除，分批）
 

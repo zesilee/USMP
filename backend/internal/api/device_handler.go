@@ -2,6 +2,7 @@ package api
 
 import (
 	"sync"
+	"time"
 
 	"github.com/gin-gonic/gin"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/client"
@@ -49,24 +50,53 @@ type AddDeviceRequest struct {
 	Password string `json:"password" binding:"required"`
 }
 
-// ListDevices lists all devices
+// DeviceStatus is a device plus its live online status (Stack B REST替代
+// BusinessSwitch 控制器的 CR-status 探活).
+type DeviceStatus struct {
+	DeviceInfo
+	Online bool `json:"online"`
+}
+
+// probeOnline reports whether a device is reachable, via the ClientPool直连
+// (Get + IsConnected). A connection error is treated as offline (R08).
+func probeOnline(pool client.ClientPool, d DeviceInfo) bool {
+	port := d.Port
+	if port == 0 {
+		port = 830
+	}
+	c, err := pool.Get(client.DeviceConnectionInfo{
+		IP:       d.IP,
+		Port:     port,
+		Username: d.Username,
+		Password: d.Password,
+		Timeout:  3 * time.Second,
+	})
+	return err == nil && c != nil && c.IsConnected()
+}
+
+// ListDevices lists all devices with their live online status.
 func (h *DeviceHandler) ListDevices(c *gin.Context) {
 	h.mu.RLock()
-	defer h.mu.RUnlock()
-
-	devices := make([]DeviceInfo, 0, len(h.devices))
+	snapshot := make([]DeviceInfo, 0, len(h.devices))
 	for _, d := range h.devices {
-		devices = append(devices, d)
+		snapshot = append(snapshot, d)
+	}
+	h.mu.RUnlock()
+
+	pool := h.manager.GetClientPool()
+	devices := make([]DeviceStatus, 0, len(snapshot))
+	for _, d := range snapshot {
+		devices = append(devices, DeviceStatus{DeviceInfo: d, Online: probeOnline(pool, d)})
 	}
 
-	stats := h.manager.GetClientPool().Stats()
+	stats := pool.Stats()
 
 	Success(c, gin.H{
 		"devices": devices,
 		"stats": gin.H{
 			"active_connections": stats.ActiveConnections,
-			"total_connections": stats.TotalConnections,
-			"errors":            stats.Errors,
+			"total_connections":  stats.TotalConnections,
+			"errors":             stats.Errors,
 		},
 	}, "Devices retrieved successfully")
 }
