@@ -6,13 +6,13 @@ import (
 	"strings"
 	"time"
 
+	"github.com/leezesi/usmp/backend/internal/cache"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/client"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/controller"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/plugin"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/predicate"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/reconcile"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/schema"
-	"github.com/leezesi/usmp/backend/internal/cache"
 )
 
 // InMemoryConfigStore is an in-memory ConfigStore implementation backed by TTL+LRU cache
@@ -51,16 +51,36 @@ func (s *InMemoryConfigStore) Delete(deviceID, path string) error {
 	return nil
 }
 
-// List lists all paths that have desired configuration for a device
+// List lists all paths that have desired configuration for a device. Keys are
+// stored as "deviceID:path" (see Set); the deviceID is assumed colon-free (IPv4),
+// so the first colon separates deviceID from path.
 func (s *InMemoryConfigStore) List(deviceID string) ([]string, error) {
-	// TODO: Implement full path listing - not needed for basic functionality
-	return nil, nil
+	prefix := deviceID + ":"
+	paths := make([]string, 0)
+	for _, k := range s.cache.Keys() {
+		if strings.HasPrefix(k, prefix) {
+			paths = append(paths, strings.TrimPrefix(k, prefix))
+		}
+	}
+	return paths, nil
 }
 
-// ListDevices lists all devices that have desired configuration
+// ListDevices lists the distinct devices that have desired configuration.
 func (s *InMemoryConfigStore) ListDevices() ([]string, error) {
-	// TODO: Implement full device listing - not needed for basic functionality
-	return nil, nil
+	seen := make(map[string]struct{})
+	devices := make([]string, 0)
+	for _, k := range s.cache.Keys() {
+		i := strings.Index(k, ":")
+		if i < 0 {
+			continue
+		}
+		dev := k[:i]
+		if _, ok := seen[dev]; !ok {
+			seen[dev] = struct{}{}
+			devices = append(devices, dev)
+		}
+	}
+	return devices, nil
 }
 
 // Manager is the main entry point for the yang-controller-runtime framework
@@ -95,14 +115,14 @@ type Manager interface {
 // DefaultManager is the default implementation of Manager
 type DefaultManager struct {
 	options       Options
-	schema         schema.Schema
-	clientPool     client.ClientPool
-	configStore    reconcile.ConfigStore
-	controllers    []controller.Controller
-	pluginManager  *plugin.Manager
-	started        bool
-	ctx            context.Context
-	cancel         context.CancelFunc
+	schema        schema.Schema
+	clientPool    client.ClientPool
+	configStore   reconcile.ConfigStore
+	controllers   []controller.Controller
+	pluginManager *plugin.Manager
+	started       bool
+	ctx           context.Context
+	cancel        context.CancelFunc
 }
 
 // New creates a new DefaultManager with the given options
@@ -126,12 +146,12 @@ func New(opts ...Option) *DefaultManager {
 	cs := NewInMemoryConfigStore(cache)
 
 	m := &DefaultManager{
-		options:        options,
-		schema:          s,
-		clientPool:      client.NewDefaultClientPool(options.ClientFactory),
-		configStore:     cs,
-		controllers:     make([]controller.Controller, 0),
-		pluginManager:   plugin.NewManager(),
+		options:       options,
+		schema:        s,
+		clientPool:    client.NewDefaultClientPool(options.ClientFactory),
+		configStore:   cs,
+		controllers:   make([]controller.Controller, 0),
+		pluginManager: plugin.NewManager(),
 	}
 
 	return m

@@ -141,6 +141,22 @@ func (c *TTLLRUCache) Size() int {
 	return len(c.entries)
 }
 
+// Keys returns a snapshot of the keys of all non-expired entries. Expired
+// entries are excluded (consistent with Get) but not evicted here; the cleanup
+// loop reclaims them. Safe for concurrent use.
+func (c *TTLLRUCache) Keys() []string {
+	c.mu.RLock()
+	defer c.mu.RUnlock()
+	now := time.Now()
+	keys := make([]string, 0, len(c.entries))
+	for k, e := range c.entries {
+		if now.Sub(e.createdAt) <= c.ttl {
+			keys = append(keys, k)
+		}
+	}
+	return keys
+}
+
 func (c *TTLLRUCache) evictLRU() {
 	var lruKey string
 	var oldestTime time.Time
