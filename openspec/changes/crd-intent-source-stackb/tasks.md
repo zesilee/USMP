@@ -23,12 +23,15 @@
 - [~] 3.2 BusinessRoute/Switch：**显式标注受限**——`TranslateRoute` 返回裸 map、`TranslateSystem` 未支持（D5/D8）；按 R04 不把非 ygot desired 投影进 ConfigStore，故暂不注册其 CRD 源（register.go 注释说明），待补 ygot 翻译后接入
 - [~] 3.3 NativeDeviceConfig（core.usmp.io）：维持 config-api 路径（场景①原生面，P1 已覆盖），不经 business CRD 源；记为边界
 
-## 4. 切换生产入口 + 退役 Actor
+## 4. 退役 Actor（部分——用户决策：只删已验证等价的 Vlan+Interface）
 
-- [ ] 4.1 生产入口切到 `backend/main.go` 单进程跑全部 CRD 源 + 原生面 + 北向 API（K8s informer 与 Stack B manager 生命周期协调、优雅退出）
-- [ ] 4.2 删 `controllers/*` 的 Actor 调用（改为 CRD 源已承接，controllers 逻辑迁移/删除）
-- [ ] 4.3 删 `pkg/yang-runtime/actor` 包（D2 退役，合 R01）；删 `cmd/controller/main.go` 入口
-- [ ] 4.4 全量 `go test ./...` 绿（含 netconfsim 集成，-race）；`go build ./...` 绿
+> BusinessSwitch 走 System 翻译（stub，D8），无 CRD 源替代——整包退役 Actor +
+> 退 cmd/controller 被 D8 阻塞，留待 System 翻译补齐（P3 或 P2 扩展）。
+
+- [x] 4.2a 删 BusinessVlan Actor 路径：删 `controllers/businessvlan_controller.go`，共享助手抽到 `controllers/retry.go`，去 cmd/controller 注册（组4a）
+- [x] 4.2b 删 BusinessInterface Actor 路径：删 `controllers/businessinterface_controller.go`，去 cmd/controller 注册（组4b）
+- [~] 4.1/4.3 **暂缓**（D8 阻塞）：保留 `pkg/yang-runtime/actor` 包 + `controllers/businessswitch_controller.go` + `cmd/controller` 入口，待 System ygot 翻译补齐后再整包退役 D2、切单入口
+- [x] 4.4 全量 `go test ./...` + `go build ./...` 绿（每步验证）
 
 ## 5. 收敛 CRD 树（解 D1）
 
