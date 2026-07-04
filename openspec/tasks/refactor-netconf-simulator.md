@@ -19,25 +19,27 @@ updated: 2026-07-04
   - core 去 `testing`/testify 依赖；`Assert*` 迁入 `netconfsim/testsupport`；新增 `cmd/netconf-simulator` + `SetListen`
 - [x] **T2** 结构化 datastore（通用 XML 数据树）— PR #14 已合入（main `657a64b`）
   - `datatree.go`（`dataNode`）+ `tree_datastore.go`（`treeDatastore`），与旧 blob `Datastore` **并存未切换**；TDD 全绿含 -race + 与 legacy 对拍等价
-- [ ] **T3** edit-config `operation=merge/replace/create/delete/remove`（在 `treeDatastore` 树上做增量语义，元素路径 + list 键启发式匹配）← **下一步**
-- [ ] **T4** get-config subtree `<filter>`（对 running 树裁剪后序列化）
-- [ ] **T5** 切换 `server.go` 到 `treeDatastore`（双路径验证后），`testsupport` 断言改查通用树
+- [x] **T3** edit-config operation 增量语义 + get-config subtree filter — PR #16 已合入（main `ef04431`）
+  - `editconfig.go`（merge/replace/create/delete/remove，元素名 + 首个 leaf 键启发式）+ `filter.go`（RFC6241 §6 selection/content-match/containment）；`treeDatastore.EditConfig`/`GetConfigFiltered`，仍**并存未切换**
+- [x] **T4** 协议保真：hello capability 广告（`base:1.0` + `:candidate` + `:writable-running`）+ `encoding/xml` RPC 分发替换 `strings.Contains` — 本 PR（`refactor-sim-t4-protocol`，待合入）
+  - `server.go`：`buildHello` / `classifyRPC` / `rpcEnvelope`；base:1.1 不广告（T0.3，保持 1.0 EOM framing）；集成测试真跑 scrapligo 握手全绿
+- [ ] **T5** 切换 `server.go` 到 `treeDatastore`（双路径验证后），`testsupport` 断言改查通用树 ← **下一步**
 - [ ] **T6** 删 `netsim` + 旧 blob `Datastore`/`Extract*`/`*TestData`；test-server 改内存 REST 桩；勾除迁移债 D10
 
 ## 上下文恢复提示
 
 - **权威 change**：`openspec/changes/refactor-netconf-simulator/`。`design.md` D1 已记录「ygot `*Device` 树不可行 → 改用通用 XML 树（Option C）」的关键修订及原因（两独立 ygot 根 + ygot 仅解析 JSON + 生成体零 xml tag）。
 - **T2 落地代码**：`backend/simulator/netconfsim/datatree.go`（`dataNode`：parse/serialize/find/clone，命名空间以默认声明重建）、`tree_datastore.go`（`treeDatastore`，方法面镜像旧 `Datastore` 便于 T5 平滑替换）。
-- **待改造的旧代码**：`datastore.go`（1068 行 blob + `Extract*` + `*TestData`，T6 删）；`server.go`（`strings.Contains` RPC 分发 + 整树覆盖式 edit-config，T3/T5 改）；`scenarios.go`（`ScenarioConfig` 故障注入，保留）；`testsupport/`（T1 断言，T5 改查树）。
+- **待改造的旧代码**：`datastore.go`（1068 行 blob + `Extract*` + `*TestData`，T6 删）；`server.go`（RPC 分发已于 T4 改为 `classifyRPC`/`encoding/xml`；仍走旧 blob `Datastore` + 整树覆盖式 edit-config，T5 切到 `treeDatastore`）；`scenarios.go`（`ScenarioConfig` 故障注入，保留）；`testsupport/`（T1 断言，T5 改查树）。
 - **T0 既定决策**：test-server 走内存 REST 桩（方案 a）；模拟器只广告 `base:1.0` → 保持 1.0 EOM framing，1.1 chunked **移出范围**。
 - **环境注意**：pre-commit hook 已修（PR #13），Go 提交**无需 `--no-verify`**；但本机 go1.26 与仓库 go1.21 gofmt 有分歧——**只 `gofmt -w` 自己改动的文件**，勿动 pre-existing。集成测试默认（非 `-short`）会真跑 SSH 模拟器，用 `go test`（不加 -short）验证。
 - **每阶段流程**：`EnterWorktree` → TDD 测试先行 → **≤500 行/commit**（commit-msg hook 硬限）→ 独立分支 → PR（≤800 行/≤20 文件，否则 3000）→ CI 全绿 → squash 合入 → 删远端分支（gh 常跳过需手删）→ `ExitWorktree remove` 清理。
 
 ## 恢复指令
 
-1. 新 session：`git pull origin main`（确保含 `657a64b` 及后续合入）。
+1. 新 session：`git pull origin main`（确保含 `ef04431`（T3/PR#16）及 T4 合入）。
 2. 恢复本任务：`/task resume refactor-netconf-simulator`。
-3. 继续实现：`/opsx:apply refactor-netconf-simulator`，从 **T3** 起。
+3. 继续实现：`/opsx:apply refactor-netconf-simulator`，从 **T5** 起（切换 `server.go` 到 `treeDatastore`，双路径验证）。
 4. 相关记忆：`[[dual-stack-migration]]`（双栈架构背景）、`[[openspec-cli]]`（CLI 安装/使用注意）。
 
 ## 遗留旁项（非本迭代阻塞）
