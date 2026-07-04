@@ -9,6 +9,7 @@ import (
 	"github.com/leezesi/usmp/backend/internal/controller/ifm"
 	"github.com/leezesi/usmp/backend/internal/controller/system"
 	"github.com/leezesi/usmp/backend/internal/controller/vlan"
+	"github.com/leezesi/usmp/backend/internal/crdsource"
 	"github.com/leezesi/usmp/backend/internal/yangschema"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/controller"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/manager"
@@ -72,9 +73,18 @@ func main() {
 	mgr.AddController(systemCtrl)
 	log.Printf("Huawei System controller registered successfully")
 
+	// Register the BusinessVlan CRD intent source (场景② 意图面收编 Stack B),
+	// parallel to the legacy Actor path. Degrades gracefully without a K8s cluster.
+	crdCache, err := crdsource.RegisterVlanIntentSource(mgr)
+	if err != nil {
+		log.Printf("Failed to register CRD intent source: %v", err)
+	}
+
 	// Start the manager - loads schema, starts all controllers
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
+
+	go crdsource.StartCache(ctx, crdCache)
 
 	if err := mgr.Start(ctx); err != nil {
 		log.Fatalf("Failed to start Manager: %v", err)
