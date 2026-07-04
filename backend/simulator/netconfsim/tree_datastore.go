@@ -38,6 +38,26 @@ func (d *treeDatastore) SetCandidate(xmlBytes []byte) error {
 	return nil
 }
 
+// EditConfig applies an edit-config <config> subtree to the candidate tree using
+// per-node operation semantics (merge/replace/create/delete/remove), instead of
+// the whole-tree replace that SetCandidate performs. Errors (malformed XML,
+// create-on-existing, delete-of-missing) leave the candidate unchanged.
+func (d *treeDatastore) EditConfig(xmlBytes []byte) error {
+	edit, err := parseXML(xmlBytes)
+	if err != nil {
+		return err
+	}
+	d.mu.Lock()
+	defer d.mu.Unlock()
+	// Apply to a working copy so a mid-way error cannot leave a partial edit.
+	next := d.candidate.clone()
+	if err := next.applyEdit(edit); err != nil {
+		return err
+	}
+	d.candidate = next
+	return nil
+}
+
 // SetRunning parses the given config XML and replaces the running tree
 // (candidate is reset to match). Used to seed initial device state.
 func (d *treeDatastore) SetRunning(xmlBytes []byte) error {
@@ -87,4 +107,12 @@ func (d *treeDatastore) runningTree() *dataNode {
 	d.mu.RLock()
 	defer d.mu.RUnlock()
 	return d.running
+}
+
+// candidateTree returns the candidate tree for structured assertions/queries.
+// Callers must not mutate the returned tree.
+func (d *treeDatastore) candidateTree() *dataNode {
+	d.mu.RLock()
+	defer d.mu.RUnlock()
+	return d.candidate
 }
