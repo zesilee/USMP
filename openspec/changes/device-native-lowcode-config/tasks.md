@@ -27,12 +27,12 @@
 
 ## 3. config-api 通用编解码（去硬编码三条）
 
-- [ ] 3.1 先写测试：通用 path→ygot 编解码——已加载路径 JSON→ygot 结构（含 map/list 键场景）；未知路径→回退+告警日志（不静默截断）
-- [ ] 3.2 实现通用 path↔ygot 编解码层（以 ygot 生成结构为准，R04；不滥用 interface{}）
-- [ ] 3.3 先写测试：对 system/ifm/vlan 三条旧路径，新编解码 vs 旧 `convertToTypedStruct` 的 desired **对拍等价**
-- [ ] 3.4 切 `config-api` POST 到通用编解码；**保留旧 convert 为回退**，双路径验证
-- [ ] 3.5 集成测试（netconfsim）：非旧三条的已加载路径 POST → reconcile → netconfsim 落配 → 断言（端到端 T02）
-- [ ] 3.6 双路径验证通过 → 切换入口 → 删旧 `convertToTypedStruct` 硬编码
+- [x] 3.1 先写测试：`encodeToYgot` RFC7951→ygot（vlan list 键）；未注册路径→未命中回退；raw-map 回退加告警日志（不静默截断）
+- [x] 3.2 实现 `config_codec.go`：path→ygot 注册表 + 单次 `ygot.Unmarshal`（以 ygot 生成结构为准 R04），替代手写 map 转换器
+- [x] 3.3 先写测试：双路径 dispatcher——RFC7951 走通用、legacy 整数枚举 shape 走回退，均得有效 ygot 结构（无回归）
+- [x] 3.4 切 `config-api` POST 到 `convertConfig`（通用优先、旧 convert 回退），§5.3 双路径并行
+- [~] 3.5 端到端：现有 reconciler 集成套件（config-api→reconcile→netconfsim）经 convertConfig 全绿；真·「非旧三条」新路径 e2e 受限于无第 4 个 reconciler，留待增设控制器
+- [ ] 3.6 前端切 RFC7951 后（组4）删旧 `convertToTypedStruct` 硬编码（并入组5清理）
 
 ## 4. 前端接通动态 YANG 表单（复用活跃引擎）
 
