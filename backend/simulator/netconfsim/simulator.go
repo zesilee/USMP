@@ -4,10 +4,9 @@ package netconfsim
 import (
 	"fmt"
 	"net"
+	"strconv"
 	"sync"
-	"testing"
 
-	"github.com/stretchr/testify/assert"
 	"golang.org/x/crypto/ssh"
 )
 
@@ -29,10 +28,22 @@ type Simulator struct {
 	datastore *Datastore
 	scenario  *ScenarioConfig
 
-	mu     sync.Mutex
+	listenPort int // 0 = random free port
+
+	mu      sync.Mutex
 	running bool
-	done   chan struct{}
-	wg     sync.WaitGroup
+	done    chan struct{}
+	wg      sync.WaitGroup
+}
+
+// SetListen configures the bind address and port before Start.
+// A port of 0 selects a random free port. Intended for the standalone binary;
+// tests keep the default random port.
+func (s *Simulator) SetListen(addr string, port int) {
+	if addr != "" {
+		s.addr = addr
+	}
+	s.listenPort = port
 }
 
 // NewSimulator creates a new NETCONF simulator with default credentials.
@@ -78,7 +89,7 @@ func (s *Simulator) Start() error {
 	s.config.AddHostKey(signer)
 
 	// Start listening
-	listener, err := net.Listen("tcp", net.JoinHostPort(s.addr, "0"))
+	listener, err := net.Listen("tcp", net.JoinHostPort(s.addr, strconv.Itoa(s.listenPort)))
 	if err != nil {
 		return fmt.Errorf("start listener: %w", err)
 	}
@@ -179,58 +190,4 @@ func (s *Simulator) acceptLoop() {
 // GetDatastore returns the underlying datastore for direct assertions.
 func (s *Simulator) GetDatastore() *Datastore {
 	return s.datastore
-}
-
-// AssertInterfaceExists verifies that the interface with the given name exists in the running config.
-func (s *Simulator) AssertInterfaceExists(t *testing.T, name string) {
-	interfaces, err := s.datastore.ExtractInterfaces()
-	assert.NoError(t, err, "failed to extract interfaces from running config")
-	assert.NotNil(t, interfaces, "interfaces should not be nil")
-
-	_, exists := interfaces.Interface[name]
-	assert.True(t, exists, "interface %q should exist in running config, but got: %v", name, interfaces.Interface)
-}
-
-// AssertInterfaceEnabled verifies that the interface exists and has the expected enabled state.
-func (s *Simulator) AssertInterfaceEnabled(t *testing.T, name string, expected bool) {
-	interfaces, err := s.datastore.ExtractInterfaces()
-	assert.NoError(t, err, "failed to extract interfaces from running config")
-
-	iface, exists := interfaces.Interface[name]
-	assert.True(t, exists, "interface %q should exist", name)
-	if !exists {
-		return
-	}
-
-	assert.NotNil(t, iface.Config, "interface %q should have Config", name)
-	if iface.Config == nil {
-		return
-	}
-
-	assert.NotNil(t, iface.Config.Enabled, "interface %q should have Enabled field set", name)
-	if iface.Config.Enabled != nil {
-		assert.Equal(t, expected, *iface.Config.Enabled, "interface %q enabled state should match", name)
-	}
-}
-
-// AssertInterfaceMtu verifies that the interface exists and has the expected MTU.
-func (s *Simulator) AssertInterfaceMtu(t *testing.T, name string, expectedMtu uint16) {
-	interfaces, err := s.datastore.ExtractInterfaces()
-	assert.NoError(t, err, "failed to extract interfaces from running config")
-
-	iface, exists := interfaces.Interface[name]
-	assert.True(t, exists, "interface %q should exist", name)
-	if !exists {
-		return
-	}
-
-	assert.NotNil(t, iface.Config, "interface %q should have Config", name)
-	if iface.Config == nil {
-		return
-	}
-
-	assert.NotNil(t, iface.Config.Mtu, "interface %q should have Mtu field set", name)
-	if iface.Config.Mtu != nil {
-		assert.Equal(t, expectedMtu, *iface.Config.Mtu, "interface %q MTU should match", name)
-	}
 }

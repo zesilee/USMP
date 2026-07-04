@@ -11,6 +11,7 @@ import (
 	"github.com/leezesi/usmp/backend/internal/generated/huawei"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/client"
 	netsim "github.com/leezesi/usmp/backend/simulator/netconfsim"
+	testsupport "github.com/leezesi/usmp/backend/simulator/netconfsim/testsupport"
 )
 
 // TestModelActor_Integration_PrepareAndCommit tests the complete 2PC flow
@@ -97,9 +98,9 @@ func TestModelActor_Integration_PrepareAndCommit(t *testing.T) {
 	assert.Equal(t, "commit successful", result.Data["message"])
 
 	// 8. Verify the VLAN now exists in the simulator's running config
-	sim.AssertHuaweiVlanExists(t, 100)
-	sim.AssertHuaweiVlanName(t, 100, "IntegrationTestVLAN")
-	sim.AssertHuaweiVlanCount(t, 1)
+	testsupport.AssertHuaweiVlanExists(t, sim, 100)
+	testsupport.AssertHuaweiVlanName(t, sim, 100, "IntegrationTestVLAN")
+	testsupport.AssertHuaweiVlanCount(t, sim, 1)
 }
 
 // TestModelActor_Integration_PrepareDryRun tests Dry Run mode
@@ -389,8 +390,8 @@ func TestModelActor_Integration_MultiVLAN(t *testing.T) {
 	require.True(t, result.Success)
 
 	// 5. Verify the VLAN exists
-	sim.AssertHuaweiVlanExists(t, 501)
-	sim.AssertHuaweiVlanName(t, 501, "VLAN501")
+	testsupport.AssertHuaweiVlanExists(t, sim, 501)
+	testsupport.AssertHuaweiVlanName(t, sim, 501, "VLAN501")
 }
 
 // TestModelActor_Integration_ApplyDirect tests direct Apply without 2PC
@@ -453,6 +454,6 @@ func TestModelActor_Integration_ApplyDirect(t *testing.T) {
 	require.True(t, result.Success, "apply failed: %v", result.Error)
 
 	// 5. Verify VLAN exists in running config
-	sim.AssertHuaweiVlanExists(t, 600)
-	sim.AssertHuaweiVlanName(t, 600, "DirectApplyVLAN")
+	testsupport.AssertHuaweiVlanExists(t, sim, 600)
+	testsupport.AssertHuaweiVlanName(t, sim, 600, "DirectApplyVLAN")
 }

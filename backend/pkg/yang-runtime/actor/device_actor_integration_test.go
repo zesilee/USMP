@@ -11,6 +11,7 @@ import (
 	"github.com/leezesi/usmp/backend/internal/generated/huawei"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/client"
 	netsim "github.com/leezesi/usmp/backend/simulator/netconfsim"
+	testsupport "github.com/leezesi/usmp/backend/simulator/netconfsim/testsupport"
 )
 
 // TestDeviceActor_Integration_SingleModule tests DeviceActor with a single module
@@ -84,8 +85,8 @@ func TestDeviceActor_Integration_SingleModule(t *testing.T) {
 	assert.Equal(t, "committed", txState.Status)
 
 	// 8. Verify VLAN exists in simulator
-	sim.AssertHuaweiVlanExists(t, 1000)
-	sim.AssertHuaweiVlanName(t, 1000, "DeviceActorTestVLAN")
+	testsupport.AssertHuaweiVlanExists(t, sim, 1000)
+	testsupport.AssertHuaweiVlanName(t, sim, 1000, "DeviceActorTestVLAN")
 }
 
 // TestDeviceActor_Integration_DryRun tests DeviceActor dry run mode
@@ -290,8 +291,8 @@ func TestDeviceActor_Integration_PrepareAndCommitAll(t *testing.T) {
 	assert.Equal(t, "committed", txState.Status)
 
 	// 6. Verify the VLAN exists
-	sim.AssertHuaweiVlanExists(t, 4000)
-	sim.AssertHuaweiVlanName(t, 4000, "FullFlowVLAN")
+	testsupport.AssertHuaweiVlanExists(t, sim, 4000)
+	testsupport.AssertHuaweiVlanName(t, sim, 4000, "FullFlowVLAN")
 }
 
 // TestDeviceActor_Integration_ApplyAll tests ApplyAll for direct config push
@@ -356,6 +357,6 @@ func TestDeviceActor_Integration_ApplyAll(t *testing.T) {
 	assert.GreaterOrEqual(t, len(results), 1, "expected at least one apply result")
 
 	// 6. Verify VLAN exists
-	sim.AssertHuaweiVlanExists(t, 500)
-	sim.AssertHuaweiVlanName(t, 500, "ApplyAllVLAN")
+	testsupport.AssertHuaweiVlanExists(t, sim, 500)
+	testsupport.AssertHuaweiVlanName(t, sim, 500, "ApplyAllVLAN")
 }
