@@ -17,7 +17,7 @@
 
 ## 改进建议（演进，需专门 /opsx:propose）
 
-- [ ] 确立单栈：生产入口从 cmd/controller/main.go(Stack A) 切到 backend/main.go(Stack B)
+- [x] 确立单栈：生产入口从 cmd/controller/main.go(Stack A) 切到 backend/main.go(Stack B)——`cmd/controller` + `controllers/*`（Business{Vlan,Interface,Switch,Route}/NativeDeviceConfig 控制器）全部退役；设备探活收编进 DeviceHandler `/api/devices`；`backend/main.go` 为唯一生产入口（retire-stack-a-entry）
 - [ ] 收敛 CRD 树：退役 api/v1，统一 api/biz/v1 + api/core/v1
 - [ ] 偿还空转件：接通 plugin 钩子、加载 schema、补 gNMI 或明确弃用、实现 NativeDeviceConfig 下发
 - [ ] 每条迁移遵循 §5.3「旧保留 + 新并行 + 双路径验证 → 切换 → 删除」

@@ -10,15 +10,15 @@
 
 ## 2. 退役 cmd/controller + 冗余控制器（删除，分批）
 
-- [ ] 2.1 删 `controllers/nativedeviceconfig_controller.go`（空壳下发，场景①由 config-api 承接）
-- [ ] 2.2 删 `controllers/businessroute_controller.go`（下发 TODO 空壳）
-- [ ] 2.3 删 `controllers/businessswitch_controller.go` + `controllers/retry.go`（探活已由 DeviceHandler 承接；retry 仅其用）
-- [ ] 2.4 删 `cmd/controller/main.go`（Stack A 入口）；grep 确认无残留引用
-- [ ] 2.5 每批 `go build ./...` + `go test ./...` 绿
+- [x] 2.1 删 `controllers/nativedeviceconfig_controller.go`（空壳下发，场景①由 config-api 承接）
+- [x] 2.2 删 `controllers/businessroute_controller.go`（下发 TODO 空壳）
+- [x] 2.3 删 `controllers/businessswitch_controller.go` + `controllers/retry.go`（探活已由 DeviceHandler 承接；retry 仅其用）
+- [x] 2.4 删 `cmd/controller/main.go`（Stack A 入口）；grep 确认无残留引用
+- [x] 2.5 每批 `go build ./...` + `go test ./...` 绿
 
 ## 3. 收尾与验收
 
-- [ ] 3.1 全量 `go test ./...` + `go build ./...` 绿；`backend/main.go` 单进程可起（无 K8s 优雅降级）
-- [ ] 3.2 更新 `system-architecture` 主 spec：单一入口、Stack A 退役
-- [ ] 3.3 满足 R01（单 Stack B 权威）/R08（探活降级）/R06（TDD）
+- [x] 3.1 全量 `go test ./...` + `go build ./...` 绿；`backend/main.go` 单进程可起（无 K8s 优雅降级）
+- [x] 3.2 更新 `system-architecture` 主 spec：单一入口、Stack A 退役
+- [x] 3.3 满足 R01（单 Stack B 权威）/R08（探活降级）/R06（TDD）
 - [~] 3.4 暂缓（记债）：CRD 类型 api/v1→biz/v1 收敛（D1）；物理删 actor 包（pr-size）；gNMI/plugin 空转（D3/D5）
