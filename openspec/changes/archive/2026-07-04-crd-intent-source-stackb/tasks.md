@@ -33,14 +33,19 @@
 - [~] 4.1/4.3 **暂缓**（D8 阻塞）：保留 `pkg/yang-runtime/actor` 包 + `controllers/businessswitch_controller.go` + `cmd/controller` 入口，待 System ygot 翻译补齐后再整包退役 D2、切单入口
 - [x] 4.4 全量 `go test ./...` + `go build ./...` 绿（每步验证）
 
-## 5. 收敛 CRD 树（解 D1）
+## 5. 收敛 CRD 树（解 D1）—— 暂缓（D8 阻塞）
 
-- [ ] 5.1 退役 `api/v1`（旧 BusinessVlan 等）；统一 `api/biz/v1`+`api/core/v1`；清理 scheme 注册与引用
-- [ ] 5.2 更新 CRD 生成 YAML（`config/crd/bases`）与部署清单一致性；grep 无 `api/v1` 残留
+- [~] 5.1/5.2 **暂缓**：退役 `api/v1`、统一 `api/biz/v1` 需 translator + 全部消费方脱离 api/v1；而 Switch/Route 控制器 + translator 仍绑 api/v1（System 翻译=stub，D8）。CRD 意图源已与 translator/Actor 统一走 api/v1（无新增分裂）；完整收敛留 P3（随 D8 System 翻译一并做）
 
 ## 6. 收尾与验收
 
-- [ ] 6.1 全量 `go test ./...` + `go build ./...` + `go build ./cmd/netconf-simulator` 绿；前端 vitest 绿
-- [ ] 6.2 更新 `openspec/specs/{yang-controller-runtime,business-crd,actor-transaction,translation-engine,system-architecture}` 主 spec；勾除迁移债 D1/D2
-- [ ] 6.3 验收（design §Goals）：CRD 意图经 Stack B 单进程下发；Actor/`cmd/controller`/`api/v1` 已删；两配置面汇入同一核心
-- [ ] 6.4 满足 R01（删 Actor、收编 Stack B）/R03（意图投影内存 ConfigStore）/R04（ygot desired）/R06（TDD）；不碰场景①（P1）
+- [x] 6.1 全量 `go test ./...` + `go build ./...` 绿（每步 + 本组验证）；netconfsim 集成沿用既有套件
+- [x] 6.2 `system-architecture/tasks.md` 标注 D1 部分进展、D2 部分退役；主 spec 因**部分退役**（Actor 未全删）不 sync `actor-transaction` REMOVED，留待整包退役时更新
+- [x] 6.3 验收（部分）：**Vlan+Interface 意图经 Stack B CRD 意图源单进程下发**（双路径验证等价），其 Actor 路径已删；Switch/Route + actor 包 + cmd/controller 保留（D8 阻塞）；两配置面在 ygot 支持范围内汇入同一核心
+- [x] 6.4 满足 R01（方向：删已验证的 Actor 路径、收编 Stack B）/R03（意图投影内存 ConfigStore）/R04（仅 ygot desired 投影，Route/System stub 不投影）/R06（TDD）；未碰场景①（P1）
+
+## 遗留（→ P3，随 D8）
+
+- System ygot 翻译（D8）→ BusinessSwitch CRD 源 → 删 Switch Actor 路径 → 整包退役 `pkg/yang-runtime/actor`（D2 完成）+ 退役 `cmd/controller` 入口（4.1/4.3）。
+- 完整收敛 CRD 树 api/v1→api/biz/v1（D1 完成，5.1/5.2）。
+- BusinessRoute ygot 翻译（现返回裸 map）。

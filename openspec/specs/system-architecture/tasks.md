@@ -4,8 +4,8 @@
 
 ## spec 与代码差异（迁移债）
 
-- [ ] **D1 双 CRD 树抢注同 group**：`api/v1` 与 `api/biz/v1` 均注册 `biz.usmp.io/v1`，BusinessVlan schema 不兼容
-- [ ] **D2 Actor 子系统 vs R01**：最大子系统被红线禁止但生产在用
+- [ ] **D1 双 CRD 树抢注同 group**：`api/v1` 与 `api/biz/v1` 均注册 `biz.usmp.io/v1`，BusinessVlan schema 不兼容。（部分进展：CRD 意图源统一走 api/v1 与 translator/Actor 同树；收敛到 api/biz/v1 被 D8 阻塞——Switch/Route 仍用 api/v1，见 crd-intent-source-stackb）
+- [~] **D2 Actor 子系统 vs R01**：**部分退役**——Vlan+Interface 意图收编 Stack B CRD 意图源、其 Actor 路径已删（crd-intent-source-stackb 组4）；`pkg/yang-runtime/actor` 包 + Switch 控制器 + `cmd/controller` 保留，待 System ygot 翻译(D8)补齐后整包退役
 - [ ] **D3 plugin 空转**：四类插件可注册但从不被调用
 - [x] **D4 schema 层空转**：已消除——`internal/yangschema.Load` 从 ygot 模型构建 schema 树、manager `WithSchema` 挂载、设备 capabilities 收敛模块集合（device-native-lowcode-config）
 - [ ] **D5 gNMI 空壳**：Get 发空 GetRequest，Set 发空 Path/Val
