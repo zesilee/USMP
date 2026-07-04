@@ -28,41 +28,40 @@ func NewDatastore() *Datastore {
 }
 
 // SetRunningFromDevice sets the running configuration from a Device struct.
-	// This also updates candidate to match. Accepts any device struct type.
-	func (d *Datastore) SetRunningFromDevice(dev interface{}) {
-		d.mu.Lock()
-		defer d.mu.Unlock()
+// This also updates candidate to match. Accepts any device struct type.
+func (d *Datastore) SetRunningFromDevice(dev interface{}) {
+	d.mu.Lock()
+	defer d.mu.Unlock()
 
-		// Marshal to XML directly
-		buf, err := xml.Marshal(dev)
-		if err != nil {
-			// Fallback to empty on error
-			d.running = []byte(`<config/>`)
-			d.candidate = []byte(`<config/>`)
-			return
-		}
+	// Marshal to XML directly
+	buf, err := xml.Marshal(dev)
+	if err != nil {
+		// Fallback to empty on error
+		d.running = []byte(`<config/>`)
+		d.candidate = []byte(`<config/>`)
+		return
+	}
 
-		// Wrap in <config> tag if not already
-		if !bytes.Contains(buf, []byte(`<config`)) {
-			buf = []byte(fmt.Sprintf(`<config>%s</config>`, buf))
-		}
+	// Wrap in <config> tag if not already
+	if !bytes.Contains(buf, []byte(`<config`)) {
+		buf = []byte(fmt.Sprintf(`<config>%s</config>`, buf))
+	}
 
-		d.running = buf
+	d.running = buf
 	d.candidate = make([]byte, len(buf))
 	copy(d.candidate, buf)
 }
 
-	// SetRunningFromXML sets the running configuration directly from XML bytes.
-	// This also updates candidate to match.
-	func (d *Datastore) SetRunningFromXML(xmlBytes []byte) {
-		d.mu.Lock()
-		defer d.mu.Unlock()
+// SetRunningFromXML sets the running configuration directly from XML bytes.
+// This also updates candidate to match.
+func (d *Datastore) SetRunningFromXML(xmlBytes []byte) {
+	d.mu.Lock()
+	defer d.mu.Unlock()
 
-		d.running = xmlBytes
-		d.candidate = make([]byte, len(xmlBytes))
-		copy(d.candidate, xmlBytes)
-	}
-
+	d.running = xmlBytes
+	d.candidate = make([]byte, len(xmlBytes))
+	copy(d.candidate, xmlBytes)
+}
 
 // GetRunning returns the current running configuration as XML.
 func (d *Datastore) GetRunning() []byte {
@@ -402,72 +401,6 @@ func (d *Datastore) ExtractInterfaces() (*openconfig.OpenconfigInterfaces_Interf
 	return interfaces, nil
 }
 
-// ExtractHuaweiVLANs extracts Huawei model VLANs from running configuration for testing assertions.
-func (d *Datastore) ExtractHuaweiVLANs() (map[uint16]string, error) {
-	d.mu.RLock()
-	defer d.mu.RUnlock()
-
-	xmlStr := string(d.running)
-	vlans := make(map[uint16]string)
-
-	decoder := xml.NewDecoder(bytes.NewReader([]byte(xmlStr)))
-	for {
-		token, err := decoder.Token()
-		if err != nil {
-			break
-		}
-
-		start, ok := token.(xml.StartElement)
-		if !ok {
-			continue
-		}
-
-		// We're looking for either:
-		// 1. <HuaweiVlan_Vlan_Vlans_Vlan> - Go XML serialization format
-		// 2. <vlan> - Standard Huawei YANG XML format (from NETCONF client)
-		isVlanElement := (strings.Contains(start.Name.Local, "HuaweiVlan") && strings.Contains(start.Name.Local, "Vlan")) ||
-			strings.EqualFold(start.Name.Local, "vlan")
-
-		if isVlanElement {
-			var vlanID uint16
-			var name string
-
-			for {
-				token, err := decoder.Token()
-				if err != nil {
-					break
-				}
-
-				if _, ok := token.(xml.EndElement); ok {
-					break
-				}
-
-				innerStart, ok := token.(xml.StartElement)
-				if !ok {
-					continue
-				}
-
-				switch innerStart.Name.Local {
-				case "Id", "id", "VlanId":
-					if err := decoder.DecodeElement(&vlanID, &innerStart); err == nil {
-					}
-				case "Name", "name":
-					if err := decoder.DecodeElement(&name, &innerStart); err == nil {
-					}
-				default:
-					_ = decoder.Skip()
-				}
-			}
-
-			if vlanID > 0 {
-				vlans[vlanID] = name
-			}
-		}
-	}
-
-	return vlans, nil
-}
-
 // cleanNamespaces removes XML namespace declarations and prefixes from tags.
 // Example: <if:interface xmlns:if="http://openconfig.net/yang/interfaces"> → <interface>
 func cleanNamespaces(xmlStr string) string {
@@ -565,457 +498,58 @@ type HuaweiVlanTestData struct {
 	}
 }
 
-// ExtractHuaweiVLANsFull extracts complete Huawei model VLAN data including all fields.
-func (d *Datastore) ExtractHuaweiVLANsFull() (map[uint16]*HuaweiVlanTestData, error) {
-	d.mu.RLock()
-	defer d.mu.RUnlock()
-
-	xmlStr := string(d.running)
-	vlans := make(map[uint16]*HuaweiVlanTestData)
-
-	decoder := xml.NewDecoder(bytes.NewReader([]byte(xmlStr)))
-	for {
-		token, err := decoder.Token()
-		if err != nil {
-			break
-		}
-
-		start, ok := token.(xml.StartElement)
-		if !ok {
-			continue
-		}
-
-		// We're looking for either:
-		// 1. <HuaweiVlan_Vlan_Vlans_Vlan> - Go XML serialization format
-		// 2. <vlan> - Standard Huawei YANG XML format (from NETCONF client)
-		isVlanElement := (strings.Contains(start.Name.Local, "HuaweiVlan") && strings.Contains(start.Name.Local, "Vlan")) ||
-			strings.EqualFold(start.Name.Local, "vlan")
-
-		if isVlanElement {
-			vlan := &HuaweiVlanTestData{}
-
-			for {
-				token, err := decoder.Token()
-				if err != nil {
-					break
-				}
-
-				if _, ok := token.(xml.EndElement); ok {
-					break
-				}
-
-				innerStart, ok := token.(xml.StartElement)
-				if !ok {
-					continue
-				}
-
-				switch innerStart.Name.Local {
-				case "Id", "id", "VlanId":
-					if err := decoder.DecodeElement(&vlan.ID, &innerStart); err == nil {
-					}
-				case "Name", "name":
-					if err := decoder.DecodeElement(&vlan.Name, &innerStart); err == nil {
-					}
-				case "Description", "description":
-					if err := decoder.DecodeElement(&vlan.Description, &innerStart); err == nil {
-					}
-				case "Type", "type":
-					if err := decoder.DecodeElement(&vlan.Type, &innerStart); err == nil {
-					}
-				case "AdminStatus", "admin-status":
-					if err := decoder.DecodeElement(&vlan.AdminStatus, &innerStart); err == nil {
-					}
-				case "BroadcastDiscard", "broadcast-discard":
-					if err := decoder.DecodeElement(&vlan.BroadcastDiscard, &innerStart); err == nil {
-					}
-				case "UnknownMulticastDiscard", "unknown-multicast-discard":
-					if err := decoder.DecodeElement(&vlan.UnknownMulticastDiscard, &innerStart); err == nil {
-					}
-				case "MacLearning", "mac-learning":
-					if err := decoder.DecodeElement(&vlan.MacLearning, &innerStart); err == nil {
-					}
-				case "MacAgingTime", "mac-aging-time":
-					if err := decoder.DecodeElement(&vlan.MacAgingTime, &innerStart); err == nil {
-					}
-				case "StatisticEnable", "statistic-enable":
-					if err := decoder.DecodeElement(&vlan.StatisticEnable, &innerStart); err == nil {
-					}
-				case "StatisticDiscard", "statistic-discard":
-					if err := decoder.DecodeElement(&vlan.StatisticDiscard, &innerStart); err == nil {
-					}
-				case "SuperVlan", "super-vlan":
-					var sv uint16
-					if err := decoder.DecodeElement(&sv, &innerStart); err == nil {
-						vlan.SuperVlan = &sv
-					}
-				case "UnkownUnicastDiscard", "unknown-unicast-discard":
-					// Parse nested container
-					for {
-						token, err := decoder.Token()
-						if err != nil {
-							break
-						}
-						if _, ok := token.(xml.EndElement); ok {
-							break
-						}
-						nestedStart, ok := token.(xml.StartElement)
-						if !ok {
-							continue
-						}
-						switch nestedStart.Name.Local {
-						case "Discard", "discard":
-							if err := decoder.DecodeElement(&vlan.UnkownUnicastDiscard.Discard, &nestedStart); err == nil {
-							}
-						case "MacLearningEnable", "mac-learning-enable":
-							if err := decoder.DecodeElement(&vlan.UnkownUnicastDiscard.MacLearningEnable, &nestedStart); err == nil {
-							}
-						default:
-							_ = decoder.Skip()
-						}
-					}
-				case "Suppression", "suppression":
-					// Parse nested container
-					for {
-						token, err := decoder.Token()
-						if err != nil {
-							break
-						}
-						if _, ok := token.(xml.EndElement); ok {
-							break
-						}
-						nestedStart, ok := token.(xml.StartElement)
-						if !ok {
-							continue
-						}
-						switch nestedStart.Name.Local {
-						case "Inbound", "inbound":
-							if err := decoder.DecodeElement(&vlan.Suppression.Inbound, &nestedStart); err == nil {
-							}
-						case "Outbound", "outbound":
-							if err := decoder.DecodeElement(&vlan.Suppression.Outbound, &nestedStart); err == nil {
-							}
-						default:
-							_ = decoder.Skip()
-						}
-					}
-				default:
-					_ = decoder.Skip()
-				}
-			}
-
-			if vlan.ID > 0 {
-				vlans[vlan.ID] = vlan
-			}
-		}
-	}
-
-	return vlans, nil
-}
-
 // HuaweiInterfaceTestData represents interface test data from Huawei IFM model.
 type HuaweiInterfaceTestData struct {
-	Name        string
-	Description string
-	Index       uint32
-	Number      string
-	Position    string
-	ParentName  string
-	AdminStatus int
-	Type        int
-	Class       int
-	LinkProtocol int
-	RouterType  int
-	ServiceType int
-	Mtu         uint32
-	MacAddress  string
-	Bandwidth   uint32
-	BandwidthKbps uint32
-	VrfName     string
-	VsName      string
-	AggregationName string
-	DownDelayTime uint32
-	ProtocolUpDelayTime uint32
-	ClearIpDf   bool
-	IsL2Switch  bool
-	L2ModeEnable bool
+	Name                 string
+	Description          string
+	Index                uint32
+	Number               string
+	Position             string
+	ParentName           string
+	AdminStatus          int
+	Type                 int
+	Class                int
+	LinkProtocol         int
+	RouterType           int
+	ServiceType          int
+	Mtu                  uint32
+	MacAddress           string
+	Bandwidth            uint32
+	BandwidthKbps        uint32
+	VrfName              string
+	VsName               string
+	AggregationName      string
+	DownDelayTime        uint32
+	ProtocolUpDelayTime  uint32
+	ClearIpDf            bool
+	IsL2Switch           bool
+	L2ModeEnable         bool
 	LinkUpDownTrapEnable bool
-	StatisticEnable bool
-	SpreadMtuFlag bool
-	StatisticInterval uint32
-	StatisticMode int
+	StatisticEnable      bool
+	SpreadMtuFlag        bool
+	StatisticInterval    uint32
+	StatisticMode        int
 	// Nested containers
 	ControlFlap struct {
-		Ceiling         uint32
+		Ceiling          uint32
 		ControlFlapCount uint32
-		DecayNg         uint32
-		DecayOk         uint32
-		Reuse           uint32
-		Suppress        uint32
+		DecayNg          uint32
+		DecayOk          uint32
+		Reuse            uint32
+		Suppress         uint32
 	}
 	Damp struct {
 		TxOff bool
-		Auto struct {
+		Auto  struct {
 			Level int
 		}
 		Manual struct {
-			HalfLifePeriod   uint16
-			MaxSuppressTime  uint16
-			Reuse            uint32
-			Suppress         uint32
+			HalfLifePeriod  uint16
+			MaxSuppressTime uint16
+			Reuse           uint32
+			Suppress        uint32
 		}
 	}
-}
-
-// ExtractHuaweiInterfaces extracts Huawei IFM interface data from running configuration.
-func (d *Datastore) ExtractHuaweiInterfaces() (map[string]*HuaweiInterfaceTestData, error) {
-	d.mu.RLock()
-	defer d.mu.RUnlock()
-
-	xmlStr := string(d.running)
-	interfaces := make(map[string]*HuaweiInterfaceTestData)
-
-	decoder := xml.NewDecoder(bytes.NewReader([]byte(xmlStr)))
-	for {
-		token, err := decoder.Token()
-		if err != nil {
-			break
-		}
-
-		start, ok := token.(xml.StartElement)
-		if !ok {
-			continue
-		}
-
-		// Look for interface XML elements
-		if strings.Contains(start.Name.Local, "Interface") || strings.Contains(start.Name.Local, "interface") {
-			iface := &HuaweiInterfaceTestData{}
-
-			for {
-				token, err := decoder.Token()
-				if err != nil {
-					break
-				}
-
-				if _, ok := token.(xml.EndElement); ok {
-					break
-				}
-
-				innerStart, ok := token.(xml.StartElement)
-				if !ok {
-					continue
-				}
-
-				switch innerStart.Name.Local {
-				case "Name", "name":
-					if err := decoder.DecodeElement(&iface.Name, &innerStart); err == nil {
-					}
-				case "Description", "description":
-					if err := decoder.DecodeElement(&iface.Description, &innerStart); err == nil {
-					}
-				case "Index", "index":
-					if err := decoder.DecodeElement(&iface.Index, &innerStart); err == nil {
-					}
-				case "Number", "number":
-					if err := decoder.DecodeElement(&iface.Number, &innerStart); err == nil {
-					}
-				case "Position", "position":
-					if err := decoder.DecodeElement(&iface.Position, &innerStart); err == nil {
-					}
-				case "ParentName", "parent-name":
-					if err := decoder.DecodeElement(&iface.ParentName, &innerStart); err == nil {
-					}
-				case "AdminStatus", "admin-status":
-					if err := decoder.DecodeElement(&iface.AdminStatus, &innerStart); err == nil {
-					}
-				case "Type", "type":
-					if err := decoder.DecodeElement(&iface.Type, &innerStart); err == nil {
-					}
-				case "Class", "class":
-					if err := decoder.DecodeElement(&iface.Class, &innerStart); err == nil {
-					}
-				case "LinkProtocol", "link-protocol":
-					if err := decoder.DecodeElement(&iface.LinkProtocol, &innerStart); err == nil {
-					}
-				case "RouterType", "router-type":
-					if err := decoder.DecodeElement(&iface.RouterType, &innerStart); err == nil {
-					}
-				case "ServiceType", "service-type":
-					if err := decoder.DecodeElement(&iface.ServiceType, &innerStart); err == nil {
-					}
-				case "Mtu", "mtu":
-					if err := decoder.DecodeElement(&iface.Mtu, &innerStart); err == nil {
-					}
-				case "MacAddress", "mac-address":
-					if err := decoder.DecodeElement(&iface.MacAddress, &innerStart); err == nil {
-					}
-				case "Bandwidth", "bandwidth":
-					if err := decoder.DecodeElement(&iface.Bandwidth, &innerStart); err == nil {
-					}
-				case "BandwidthKbps", "bandwidth-kbps":
-					if err := decoder.DecodeElement(&iface.BandwidthKbps, &innerStart); err == nil {
-					}
-				case "VrfName", "vrf-name":
-					if err := decoder.DecodeElement(&iface.VrfName, &innerStart); err == nil {
-					}
-				case "VsName", "vs-name":
-					if err := decoder.DecodeElement(&iface.VsName, &innerStart); err == nil {
-					}
-				case "AggregationName", "aggregation-name":
-					if err := decoder.DecodeElement(&iface.AggregationName, &innerStart); err == nil {
-					}
-				case "DownDelayTime", "down-delay-time":
-					if err := decoder.DecodeElement(&iface.DownDelayTime, &innerStart); err == nil {
-					}
-				case "ProtocolUpDelayTime", "protocol-up-delay-time":
-					if err := decoder.DecodeElement(&iface.ProtocolUpDelayTime, &innerStart); err == nil {
-					}
-				case "ClearIpDf", "clear-ip-df":
-					if err := decoder.DecodeElement(&iface.ClearIpDf, &innerStart); err == nil {
-					}
-				case "IsL2Switch", "is-l2-switch":
-					if err := decoder.DecodeElement(&iface.IsL2Switch, &innerStart); err == nil {
-					}
-				case "L2ModeEnable", "l2-mode-enable":
-					if err := decoder.DecodeElement(&iface.L2ModeEnable, &innerStart); err == nil {
-					}
-				case "LinkUpDownTrapEnable", "link-up-down-trap-enable":
-					if err := decoder.DecodeElement(&iface.LinkUpDownTrapEnable, &innerStart); err == nil {
-					}
-				case "StatisticEnable", "statistic-enable":
-					if err := decoder.DecodeElement(&iface.StatisticEnable, &innerStart); err == nil {
-					}
-				case "SpreadMtuFlag", "spread-mtu-flag":
-					if err := decoder.DecodeElement(&iface.SpreadMtuFlag, &innerStart); err == nil {
-					}
-				case "StatisticInterval", "statistic-interval":
-					if err := decoder.DecodeElement(&iface.StatisticInterval, &innerStart); err == nil {
-					}
-				case "StatisticMode", "statistic-mode":
-					if err := decoder.DecodeElement(&iface.StatisticMode, &innerStart); err == nil {
-					}
-				case "ControlFlap", "control-flap":
-					// Parse nested container
-					for {
-						token, err := decoder.Token()
-						if err != nil {
-							break
-						}
-						if _, ok := token.(xml.EndElement); ok {
-							break
-						}
-						nestedStart, ok := token.(xml.StartElement)
-						if !ok {
-							continue
-						}
-						switch nestedStart.Name.Local {
-						case "Ceiling", "ceiling":
-							if err := decoder.DecodeElement(&iface.ControlFlap.Ceiling, &nestedStart); err == nil {
-							}
-						case "ControlFlapCount", "control-flap-count":
-							if err := decoder.DecodeElement(&iface.ControlFlap.ControlFlapCount, &nestedStart); err == nil {
-							}
-						case "DecayNg", "decay-ng":
-							if err := decoder.DecodeElement(&iface.ControlFlap.DecayNg, &nestedStart); err == nil {
-							}
-						case "DecayOk", "decay-ok":
-							if err := decoder.DecodeElement(&iface.ControlFlap.DecayOk, &nestedStart); err == nil {
-							}
-						case "Reuse", "reuse":
-							if err := decoder.DecodeElement(&iface.ControlFlap.Reuse, &nestedStart); err == nil {
-							}
-						case "Suppress", "suppress":
-							if err := decoder.DecodeElement(&iface.ControlFlap.Suppress, &nestedStart); err == nil {
-							}
-						default:
-							_ = decoder.Skip()
-						}
-					}
-				case "Damp", "damp":
-					// Parse nested Damp container
-					for {
-						token, err := decoder.Token()
-						if err != nil {
-							break
-						}
-						if _, ok := token.(xml.EndElement); ok {
-							break
-						}
-						nestedStart, ok := token.(xml.StartElement)
-						if !ok {
-							continue
-						}
-						switch nestedStart.Name.Local {
-						case "TxOff", "tx-off":
-							if err := decoder.DecodeElement(&iface.Damp.TxOff, &nestedStart); err == nil {
-							}
-						case "Auto", "auto":
-							// Parse Auto sub-container
-							for {
-								token, err := decoder.Token()
-								if err != nil {
-									break
-								}
-								if _, ok := token.(xml.EndElement); ok {
-									break
-								}
-								autoStart, ok := token.(xml.StartElement)
-								if !ok {
-									continue
-								}
-								if autoStart.Name.Local == "Level" || autoStart.Name.Local == "level" {
-									if err := decoder.DecodeElement(&iface.Damp.Auto.Level, &autoStart); err == nil {
-									}
-								} else {
-									_ = decoder.Skip()
-								}
-							}
-						case "Manual", "manual":
-							// Parse Manual sub-container
-							for {
-								token, err := decoder.Token()
-								if err != nil {
-									break
-								}
-								if _, ok := token.(xml.EndElement); ok {
-									break
-								}
-								manualStart, ok := token.(xml.StartElement)
-								if !ok {
-									continue
-								}
-								switch manualStart.Name.Local {
-								case "HalfLifePeriod", "half-life-period":
-									if err := decoder.DecodeElement(&iface.Damp.Manual.HalfLifePeriod, &manualStart); err == nil {
-									}
-								case "MaxSuppressTime", "max-suppress-time":
-									if err := decoder.DecodeElement(&iface.Damp.Manual.MaxSuppressTime, &manualStart); err == nil {
-									}
-								case "Reuse", "reuse":
-									if err := decoder.DecodeElement(&iface.Damp.Manual.Reuse, &manualStart); err == nil {
-									}
-								case "Suppress", "suppress":
-									if err := decoder.DecodeElement(&iface.Damp.Manual.Suppress, &manualStart); err == nil {
-									}
-								default:
-									_ = decoder.Skip()
-								}
-							}
-						default:
-							_ = decoder.Skip()
-						}
-					}
-				default:
-					_ = decoder.Skip()
-				}
-			}
-
-			if iface.Name != "" {
-				interfaces[iface.Name] = iface
-			}
-		}
-	}
-
-	return interfaces, nil
 }
 
 // HuaweiSystemTestData represents system configuration test data.
@@ -1023,46 +557,4 @@ type HuaweiSystemTestData struct {
 	SysName     string
 	SysContact  string
 	SysLocation string
-}
-
-// ExtractHuaweiSystem extracts Huawei system configuration from running config.
-func (d *Datastore) ExtractHuaweiSystem() (*HuaweiSystemTestData, error) {
-	d.mu.RLock()
-	defer d.mu.RUnlock()
-
-	xmlStr := string(d.running)
-	sys := &HuaweiSystemTestData{}
-
-	decoder := xml.NewDecoder(strings.NewReader(xmlStr))
-	for {
-		token, err := decoder.Token()
-		if err != nil {
-			break
-		}
-
-		start, ok := token.(xml.StartElement)
-		if !ok {
-			continue
-		}
-
-		// Look for system-info elements
-		switch start.Name.Local {
-		case "SysName", "sys-name":
-			if err := decoder.DecodeElement(&sys.SysName, &start); err == nil {
-			}
-		case "SysContact", "sys-contact":
-			if err := decoder.DecodeElement(&sys.SysContact, &start); err == nil {
-			}
-		case "SysLocation", "sys-location":
-			if err := decoder.DecodeElement(&sys.SysLocation, &start); err == nil {
-			}
-		default:
-			// Check if this is a system-info container - recursively process children
-			if strings.Contains(strings.ToLower(start.Name.Local), "system") {
-				// Continue parsing - the inner elements will be processed
-			}
-		}
-	}
-
-	return sys, nil
 }
