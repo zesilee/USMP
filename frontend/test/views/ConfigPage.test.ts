@@ -3,21 +3,6 @@ import { mount } from '@vue/test-utils'
 import { createPinia, setActivePinia } from 'pinia'
 import ConfigPage from '../../src/views/ConfigPage.vue'
 import ElementPlus from 'element-plus'
-import * as composables from '../../src/composables/useDeviceConfig'
-
-vi.mock('../../src/composables/useDeviceConfig', () => ({
-  useDeviceConfig: vi.fn(() => ({
-    configCR: null,
-    schema: { value: { fields: [], listFields: [] } },
-    isLoading: { value: false },
-    isSyncing: { value: false },
-    currentPhase: { value: 'Ready' },
-    error: { value: null },
-    save: vi.fn(),
-    remove: vi.fn(),
-    refresh: vi.fn()
-  }))
-}))
 
 describe('ConfigPage View', () => {
   beforeEach(() => {
