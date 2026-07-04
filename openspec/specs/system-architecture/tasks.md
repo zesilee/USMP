@@ -13,7 +13,7 @@
 - [ ] **D7 ConfigStore.List/ListDevices = stub**：返回 nil,nil
 - [ ] **D8 多厂商翻译仅 Huawei**：Cisco/H3C/Juniper 仅枚举占位
 - [ ] **D9 前端双代动态表单**：旧 yang/ 静态路径未接路由
-- [ ] **D10 两个模拟器并存**：netconfsim(协议级) 与 netsim(数据级)
+- [x] **D10 两个模拟器并存**：已消除——删除 netsim，收敛为单一结构化 netconfsim，test-server 改内存 REST 桩（refactor-netconf-simulator）
 
 ## 改进建议（演进，需专门 /opsx:propose）
 
