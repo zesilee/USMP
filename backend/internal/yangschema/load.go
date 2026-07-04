@@ -22,13 +22,13 @@ func Load() (schema.Schema, error) {
 	if err != nil {
 		return nil, fmt.Errorf("load huawei schema: %w", err)
 	}
-	schema.AddYgotSchema(ds, hs)
+	schema.AddYgotSchemaWithVendor(ds, hs, "huawei")
 
 	os, err := openconfig.Schema()
 	if err != nil {
 		return nil, fmt.Errorf("load openconfig schema: %w", err)
 	}
-	schema.AddYgotSchema(ds, os)
+	schema.AddYgotSchemaWithVendor(ds, os, "openconfig")
 
 	return ds, nil
 }
