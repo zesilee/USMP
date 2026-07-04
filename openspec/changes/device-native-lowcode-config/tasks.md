@@ -13,9 +13,9 @@
 
 - [x] 1.1 先写测试：ygot yang.Entry→Schema 转换器（合成树：模块/叶类型/list 键/路径/nil 安全）+ 从 huawei/openconfig ygot 模型构建 schema（Modules() 非空含 ifm/system/vlan/interfaces/vlans、叶属性非空）
 - [x] 1.2 实现 `schema.AddYgotSchema`（yang.Entry→框架节点模型）+ `internal/yangschema.Load`（huawei+openconfig）+ manager `WithSchema` 选项 + `main.go` 挂载（去 D4 空转，schema 树运行时非空）
-- [ ] 1.3 先写测试：设备 NETCONF hello capabilities → 收敛该设备可用模块集合（能力已知/未知回退全集）
-- [ ] 1.4 实现 capabilities 读取与「能力定模块集合、模型树定属性 schema」组合；`<get-schema>` 增强留 TODO（不阻塞）
-- [ ] 1.5 集成测试（netconfsim）：模拟器广告 capabilities → manager 收敛模块集合与预期一致
+- [x] 1.3 先写测试：`schema.NarrowModulesByCapabilities`——命名空间/module= 参数/名称启发式匹配；仅 base caps→回退全集
+- [x] 1.4 实现 collapse 逻辑 + client `ServerCapabilities()`（读 scrapligo 服务端 hello caps）+ netconfsim `SetCapabilities`（hello 广告额外模块 caps）；`<get-schema>` 增强留 TODO
+- [x] 1.5 集成测试（netconfsim，真 SSH）：sim 广告 huawei-vlan cap → client 读回 → 收敛到 vlan（排除 system/interfaces/ifm）；base-only→回退全集
 
 ## 2. yang-api 动态化（去硬编码）
 

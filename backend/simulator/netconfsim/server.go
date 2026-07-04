@@ -16,10 +16,11 @@ import (
 )
 
 type sshServer struct {
-	config   *ssh.ServerConfig
-	store    *treeDatastore
-	scenario *ScenarioConfig
-	done     chan struct{}
+	config    *ssh.ServerConfig
+	store     *treeDatastore
+	scenario  *ScenarioConfig
+	extraCaps []string // extra YANG-module capabilities advertised in hello
+	done      chan struct{}
 }
 
 func generateSigner() (ssh.Signer, error) {
@@ -82,7 +83,7 @@ func (s *sshServer) handleSession(ch ssh.Channel) {
 	reader := bufio.NewReader(ch)
 
 	// Send server hello
-	hello := buildHello(1)
+	hello := buildHello(1, s.extraCaps)
 
 	var buf bytes.Buffer
 	buf.WriteString(xml.Header)
@@ -214,17 +215,19 @@ func classifyRPC(msg string) rpcKind {
 // buildHello constructs the server hello advertising base:1.0 plus the
 // :candidate and :writable-running capabilities. base:1.1 is intentionally not
 // advertised so scrapligo negotiates 1.0 EOM framing (design D4 / T0.3).
-func buildHello(sessionID int) *Hello {
+func buildHello(sessionID int, extraCaps []string) *Hello {
+	caps := []Capability{
+		{URN: "urn:ietf:params:netconf:base:1.0"},
+		{URN: "urn:ietf:params:netconf:capability:candidate:1.0"},
+		{URN: "urn:ietf:params:netconf:capability:writable-running:1.0"},
+	}
+	for _, c := range extraCaps {
+		caps = append(caps, Capability{URN: c})
+	}
 	return &Hello{
-		XMLName:   xml.Name{Space: "urn:ietf:params:xml:ns:netconf:base:1.0 hello"},
-		SessionID: sessionID,
-		Capabilities: Capabilities{
-			Capabilities: []Capability{
-				{URN: "urn:ietf:params:netconf:base:1.0"},
-				{URN: "urn:ietf:params:netconf:capability:candidate:1.0"},
-				{URN: "urn:ietf:params:netconf:capability:writable-running:1.0"},
-			},
-		},
+		XMLName:      xml.Name{Space: "urn:ietf:params:xml:ns:netconf:base:1.0 hello"},
+		SessionID:    sessionID,
+		Capabilities: Capabilities{Capabilities: caps},
 	}
 }
 
