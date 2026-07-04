@@ -1,6 +1,9 @@
 package netconfsim
 
-import "sync"
+import (
+	"strings"
+	"sync"
+)
 
 // treeDatastore is the structured, model-agnostic replacement for the legacy
 // blob Datastore. running/candidate are generic XML data trees (*dataNode)
@@ -92,6 +95,22 @@ func (d *treeDatastore) GetRunning() []byte {
 	d.mu.RLock()
 	defer d.mu.RUnlock()
 	return d.running.xmlBytes()
+}
+
+// GetConfigFiltered serializes the running tree after applying a subtree filter.
+// An empty/nil filter returns the whole running config. filterXML is the inner
+// content of a NETCONF <filter> element (its top-level filter nodes).
+func (d *treeDatastore) GetConfigFiltered(filterXML []byte) ([]byte, error) {
+	if len(strings.TrimSpace(string(filterXML))) == 0 {
+		return d.GetRunning(), nil
+	}
+	filter, err := parseXML(filterXML)
+	if err != nil {
+		return nil, err
+	}
+	d.mu.RLock()
+	defer d.mu.RUnlock()
+	return filterTree(d.running, filter).xmlBytes(), nil
 }
 
 // GetCandidate serializes the candidate tree to XML.

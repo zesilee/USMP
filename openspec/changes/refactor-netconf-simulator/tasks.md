@@ -30,8 +30,8 @@
 
 - [x] **T3.1** 先写测试：merge/create/delete/replace 各 operation 的候选库变更断言
 - [x] **T3.2** 实现 `editconfig.go`：解析 operation，合并/删除进 candidate 树
-- [ ] **T3.3** 先写测试：get-config subtree filter 裁剪断言
-- [ ] **T3.4** 实现 `filter.go` subtree filter
+- [x] **T3.3** 先写测试：get-config subtree filter 裁剪断言
+- [x] **T3.4** 实现 `filter.go` subtree filter
 
 ## T4 — 协议保真（TDD）
 
