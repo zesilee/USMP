@@ -52,12 +52,15 @@ if [ -n "$GO_FILES" ]; then
   # ──────────────────────────────────────────────
   # 4. Go fmt 检查
   # ──────────────────────────────────────────────
-  echo -e "${YELLOW}[pre-commit] 检查 go fmt...${NC}"
-  UNFORMATTED=$(cd backend && gofmt -l . 2>/dev/null || true)
+  # 仅检查本次暂存的 Go 文件（与 CI compliance.yml 的 changed-files 口径一致）。
+  # 不再全局 `gofmt -l .`：否则本机 gofmt 版本高于仓库目标(go1.21)时，会误报
+  # 大量本次未改动的 pre-existing 文件，导致所有 Go 提交被无差别拦截。
+  echo -e "${YELLOW}[pre-commit] 检查 go fmt (仅暂存文件)...${NC}"
+  UNFORMATTED=$(gofmt -l $GO_FILES 2>/dev/null || true)
   if [ -n "$UNFORMATTED" ]; then
-    echo -e "${RED}[pre-commit] 以下文件未格式化:${NC}"
+    echo -e "${RED}[pre-commit] 以下暂存文件未格式化:${NC}"
     echo "$UNFORMATTED" | sed 's/^/  /'
-    echo -e "${YELLOW}  修复: cd backend && gofmt -w .${NC}"
+    echo -e "${YELLOW}  修复: gofmt -w $UNFORMATTED${NC}"
     FAILED=1
   fi
 fi
@@ -71,7 +74,14 @@ if [ -n "$GO_FILES" ]; then
   if [ -n "$CHANGED_PKGS" ]; then
     echo -e "${YELLOW}[pre-commit] 运行变更包测试 (R15)...${NC}"
     for pkg in $CHANGED_PKGS; do
-      if ! (cd backend && go test "./${pkg}/..." -count=1 -timeout=30s 2>&1); then
+      # STAGED_FILES 路径相对仓库根(如 backend/xxx)；测试在 backend 模块内执行，
+      # 需剥离 backend/ 前缀，否则会构造出不存在的 ./backend/backend/... 路径。
+      case "$pkg" in
+        backend/*) rel="${pkg#backend/}" ;;
+        backend)   rel="." ;;
+        *) continue ;;  # backend 模块外的目录不在此测试
+      esac
+      if ! (cd backend && go test "./${rel}/..." -count=1 -timeout=30s 2>&1); then
         echo -e "${RED}[R15] 拒绝: 测试未通过 (${pkg})${NC}"
         FAILED=1
       fi
