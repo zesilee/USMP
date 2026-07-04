@@ -82,15 +82,7 @@ func (s *sshServer) handleSession(ch ssh.Channel) {
 	reader := bufio.NewReader(ch)
 
 	// Send server hello
-	hello := &Hello{
-		XMLName: xml.Name{Space: "urn:ietf:params:xml:ns:netconf:base:1.0 hello"},
-		SessionID: 1,
-		Capabilities: Capabilities{
-			Capabilities: []Capability{
-				{URN: "urn:ietf:params:netconf:base:1.0"},
-			},
-		},
-	}
+	hello := buildHello(1)
 
 	var buf bytes.Buffer
 	buf.WriteString(xml.Header)
@@ -154,30 +146,93 @@ func (s *sshServer) handleSession(ch ssh.Channel) {
 }
 
 func (s *sshServer) handleRequest(msg string) string {
-	// Extract message-id
+	// Extract message-id (kept as a raw-string scan so it works even when the
+	// RPC body is malformed and classifyRPC falls back to rpcUnknown).
 	msgID := extractMessageID(msg)
 
-	// Check what RPC it is
-	switch {
-	case strings.Contains(msg, "<get-config"):
+	// Dispatch by structurally decoding the RPC envelope rather than substring
+	// matching, so an RPC keyword appearing in element content cannot mislead.
+	switch classifyRPC(msg) {
+	case rpcGetConfig:
 		return s.handleGetConfig(msg, msgID)
-	case strings.Contains(msg, "<edit-config"):
+	case rpcEditConfig:
 		return s.handleEditConfig(msg, msgID)
-	case strings.Contains(msg, "<commit"):
+	case rpcCommit:
 		return s.handleCommit(msg, msgID)
-	case strings.Contains(msg, "<discard-changes"):
+	case rpcDiscardChanges:
 		return s.handleDiscardChanges(msg, msgID)
 	default:
-		// Return ok for unknown RPC
+		// Return ok for unsupported/unknown RPCs (lock/unlock/get/…).
 		return okReply(msgID)
+	}
+}
+
+// rpcKind identifies a decoded NETCONF RPC for dispatch.
+type rpcKind int
+
+const (
+	rpcUnknown rpcKind = iota
+	rpcGetConfig
+	rpcEditConfig
+	rpcCommit
+	rpcDiscardChanges
+)
+
+// rpcEnvelope decodes just enough of an <rpc> element to identify the operation.
+// Each operation is a pointer field so a nil check reports element presence; the
+// bodies are still parsed from the raw string by the individual handlers until
+// the datastore switch (T5).
+type rpcEnvelope struct {
+	XMLName        xml.Name  `xml:"rpc"`
+	GetConfig      *struct{} `xml:"get-config"`
+	EditConfig     *struct{} `xml:"edit-config"`
+	Commit         *struct{} `xml:"commit"`
+	DiscardChanges *struct{} `xml:"discard-changes"`
+}
+
+// classifyRPC returns the kind of the RPC by structurally decoding the envelope.
+// Malformed XML or a non-rpc root yields rpcUnknown (graceful fallback, R08).
+func classifyRPC(msg string) rpcKind {
+	var env rpcEnvelope
+	if err := xml.Unmarshal([]byte(msg), &env); err != nil {
+		return rpcUnknown
+	}
+	switch {
+	case env.GetConfig != nil:
+		return rpcGetConfig
+	case env.EditConfig != nil:
+		return rpcEditConfig
+	case env.Commit != nil:
+		return rpcCommit
+	case env.DiscardChanges != nil:
+		return rpcDiscardChanges
+	default:
+		return rpcUnknown
+	}
+}
+
+// buildHello constructs the server hello advertising base:1.0 plus the
+// :candidate and :writable-running capabilities. base:1.1 is intentionally not
+// advertised so scrapligo negotiates 1.0 EOM framing (design D4 / T0.3).
+func buildHello(sessionID int) *Hello {
+	return &Hello{
+		XMLName:   xml.Name{Space: "urn:ietf:params:xml:ns:netconf:base:1.0 hello"},
+		SessionID: sessionID,
+		Capabilities: Capabilities{
+			Capabilities: []Capability{
+				{URN: "urn:ietf:params:netconf:base:1.0"},
+				{URN: "urn:ietf:params:netconf:capability:candidate:1.0"},
+				{URN: "urn:ietf:params:netconf:capability:writable-running:1.0"},
+			},
+		},
 	}
 }
 
 // Hello represents a NETCONF hello message.
 type Hello struct {
-	XMLName      xml.Name       `xml:"urn:ietf:params:xml:ns:netconf:base:1.0 hello"`
-	Capabilities Capabilities   `xml:"capabilities"`
-	SessionID    int            `xml:"session-id,omitempty"`
+	XMLName      xml.Name     `xml:"urn:ietf:params:xml:ns:netconf:base:1.0 hello"`
+	Capabilities Capabilities `xml:"capabilities"`
+	SessionID    int          `xml:"session-id,omitempty"`
 }
 
 // Capabilities contains capability list.

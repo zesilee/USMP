@@ -35,8 +35,8 @@
 
 ## T4 — 协议保真（TDD）
 
-- [ ] **T4.1** 先写测试：hello capability 广告断言（base:1.0/1.1、:candidate、:writable-running）
-- [ ] **T4.2** 实现 capability 广告 + `encoding/xml` RPC 分发（替换 strings.Contains）
+- [x] **T4.1** 先写测试：hello capability 广告断言（base:1.0/1.1、:candidate、:writable-running）
+- [x] **T4.2** 实现 capability 广告 + `encoding/xml` RPC 分发（替换 strings.Contains）
 - [x] **T4.3** ~~1.1 chunked framing~~ **移出范围**（T0.3 结论：模拟器只广告 1.0，scrapligo 随之用 1.0 framing，无需 1.1）
 
 ## T5 — 双路径验证与切换
