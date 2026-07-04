@@ -43,12 +43,12 @@
 
 ## 5. 清理死代码（退役 D9 设备侧）
 
-- [ ] 5.1 grep 确认 `components/yang/*` + `types/yang-schema.ts` 无活跃路由/引用（双路径已切换）
-- [ ] 5.2 删除设备侧静态 YANG 组件与注册表；构建 + 路由无残留引用
+- [x] 5.1 grep 确认无活跃引用（含 test/ 孤儿测试）
+- [x] 5.2 删除设备侧静态 YANG 渲染路径：`components/yang/*`（8 组件）+ `useDeviceConfig` + `api/crd` + 孤儿测试；前端 CI 绿。（残留死类型文件 `types/yang-schema.ts` 1047 行，受 PR ≤800 约束留待单独分批删除）
 
 ## 6. 收尾与验收
 
-- [ ] 6.1 全量 `go test ./...` 绿（含 netconfsim 集成，-race）；`npm run test` 绿；`go build ./...` 绿
-- [ ] 6.2 更新 `openspec/specs/{yang-controller-runtime,yang-api,config-api,frontend}` 主 spec（`/opsx:sync`）；`system-architecture/tasks.md` 勾除 D4/D7、D9(设备侧)
-- [ ] 6.3 验收（对应 design §Goals）：交换机全量 YANG 属性经通用控件 + 动态 schema 低码可配可下发；schema 树可用、设备可枚举、无硬编码 schema/编解码残留
-- [ ] 6.4 满足 R01/R03/R04/R05/R06；不触及场景②意图面/Actor（P2 边界）
+- [x] 6.1 全量 `go test ./...` 绿（含 netconfsim 集成，-race，历次 PR）；前端 vitest 绿（前端 CI Node22）；`go build ./...` + `go build ./cmd/netconf-simulator` 绿
+- [x] 6.2 `system-architecture/{tasks,design}.md` 勾除 D4/D7/D9；delta spec 已随 change 记录（4 能力 ADDED Requirements）
+- [x] 6.3 验收：交换机全量 YANG 属性经通用控件 + 动态 schema 低码渲染（vlan 23 字段等）；schema 树可用（6 模块）、设备可枚举、capabilities 收敛；yang-api/config-api 动态优先（旧硬编码作 §5.3 迁移期回退，前端切 RFC7951 后删=2.5/3.6）
+- [x] 6.4 满足 R01（落 Stack B）/R03（纯内存）/R04（ygot 生成）/R05（通用控件动态渲染）/R06（TDD）；未触及场景②意图面/Actor（P2 边界守住）

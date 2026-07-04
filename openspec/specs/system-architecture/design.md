@@ -167,12 +167,12 @@ frontend/                        # 【Vue3 动态表单】→ frontend/design.md
 | D1 | **双 CRD 树冲突**：`api/v1` 与 `api/biz/v1` 抢注 `biz.usmp.io/v1`，BusinessVlan schema 不兼容 | `api/v1` vs `api/biz/v1` | 无法同 scheme 注册；生产控制器仍绑 `api/v1` |
 | D2 | **Actor 子系统 vs R01**：最大子系统被红线禁止但生产在用 | `pkg/yang-runtime/actor/` | 迁移到 Stack B 前无法删除 |
 | D3 | **plugin 空转**：4 类插件可注册，但 `Controller`/`GenericReconciler`/Actor 均从不调用 Validate/Mutate/Pre/PostReconcile | `pkg/yang-runtime/plugin` | 扩展点形同虚设 |
-| D4 | **schema 层空转**：`main.go` 从不设 `SchemeDir`，schema 树运行时为空；diff 靠反射，schema 参数传 nil | `manager.go:22`, `internal/controller/vlan/reconciler.go:27` | 路径校验/schema 感知缺失 |
+| D4 | ✅ **已解决**：`internal/yangschema.Load` 从 ygot 模型构建 schema 树 + manager `WithSchema` 挂载 + 设备 capabilities 收敛模块集合；`GetSchema().Modules()` 运行时非空 | `internal/yangschema`, `pkg/yang-runtime/schema/entry.go`, `manager.WithSchema` | device-native-lowcode-config |
 | D5 | **gNMI 空壳**：`Get` 发空 `GetRequest`，`Set` 发空 Path/Val | `client/gnmi.go:97,154` | gNMI 实际不可用，AUTO 永远落 NETCONF |
 | D6 | **NativeDeviceConfig 下发 = TODO**：`applyNativeConfig` 仅 `time.Sleep`，无真实 NETCONF | `controllers/nativedeviceconfig_controller.go:223` | 原生配置通道未实现 |
-| D7 | **ConfigStore.List/ListDevices = stub**：返回 `nil,nil` | `manager.go:55,61` | `PeriodicSource(deviceIDs=nil)` 无法枚举设备 |
+| D7 | ✅ **已解决**：基于 `cache.Keys()` 枚举设备/路径（纯内存 R03），`PeriodicSource` 可枚举 | `manager.go` `InMemoryConfigStore`, `cache.Keys` | device-native-lowcode-config |
 | D8 | **多厂商翻译仅 Huawei**：Cisco/H3C/Juniper 仅枚举占位 | `pkg/translator/factory.go:21` | 单厂商 |
-| D9 | **前端双代动态表单**：新 CRD 驱动路径活跃，旧 `components/yang/*` 静态路径未接路由 | `frontend/src` | 死代码待清理 |
+| D9 | ✅ **基本解决**：设备侧静态 YANG 渲染路径（`components/yang/*`/`useDeviceConfig`/`api/crd`）已删，yang-api 动态 schema 经 `DynamicForm` 渲染；残留死类型文件 `types/yang-schema.ts` 待删 | `frontend/src` | device-native-lowcode-config |
 | D10 | ✅ **已解决**：删除 `netsim`，收敛为单一结构化 `netconfsim`（通用 XML 树 + operation/filter 语义 + 独立二进制）；`test-server` 改内存 REST 桩 | `simulator/netconfsim` | refactor-netconf-simulator |
 
 ## 8. 后续演进建议（仅列，不在本次范围内决策）
