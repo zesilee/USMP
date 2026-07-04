@@ -1,0 +1,63 @@
+name: Frontend CI
+
+# 轻量前端 CI —— 只做 Lint + 单元测试，最大化节省私有仓库 Actions 免费分钟数。
+#
+# 省流策略：
+#   1. paths 过滤：仅当 frontend/** 或本工作流自身变更时才运行（后端 PR 不触发）。
+#   2. concurrency：同分支新推送自动取消进行中的旧运行，不叠加。
+#   3. 只触发 PR→main 与 push→main（不监听所有分支推送）。
+#   4. 单 OS + 单 Node，npm 依赖缓存，跳过 audit/fund。
+#   5. **不跑重型 Playwright E2E**（浏览器下载 + 无头执行最耗分钟）；
+#      E2E 请本地 `npm run e2e`，或另行以 workflow_dispatch 手动触发。
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'frontend/**'
+      - '.github/workflows/frontend-ci.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'frontend/**'
+      - '.github/workflows/frontend-ci.yml'
+
+# 同一分支/PR 新推送时取消进行中的旧运行，避免并行叠加消耗分钟。
+concurrency:
+  group: frontend-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+# 最小权限。
+permissions:
+  contents: read
+
+jobs:
+  lint-and-test:
+    name: Lint + Unit Tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: frontend
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci --prefer-offline --no-audit --fund=false
+
+      # Lint：若定义了 lint 脚本则运行，未定义则静默跳过（--if-present），
+      # 便于日后接入 ESLint 时零改动自动生效。
+      - name: Lint
+        run: npm run lint --if-present
+
+      # 单元测试：vitest（happy-dom），不含 Playwright E2E。
+      - name: Unit tests
+        run: npm run test
