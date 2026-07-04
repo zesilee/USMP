@@ -19,10 +19,12 @@
 
 ## T2 — 结构化 datastore（新旧并行）
 
-- [ ] **T2.1** 先写测试：ygot 树 datastore 的 Set/Get/Commit/Discard 单测（正常/异常/并发）
-- [ ] **T2.2** 实现 `treeDatastore`（running/candidate 为 ygot `*Device`），与旧 XML datastore 并存
-- [ ] **T2.3** 先写测试：客户端产出 XML → `ygot.Unmarshal` → 树的往返等价（对拍旧 Extract*）
-- [ ] **T2.4** 实现 get-config：树 + filter → Marshal（先无 filter，全量往返绿）
+> ⚠️ 方案修订：ygot 树经核实不可行（两独立根 + ygot 仅 JSON + 零 xml tag），改用**通用 XML 数据树**（Option C，见 design.md D1）。
+
+- [x] **T2.1** 测试先行：`dataNode` parse/serialize 往返 + find/children + clone 隔离 + 解析错误（`datatree_test.go`）
+- [x] **T2.2** 实现 `dataNode`（std encoding/xml 通用节点，含命名空间默认声明重建）+ `treeDatastore`（running/candidate 为 `*dataNode`），与旧 `Datastore` 并存
+- [x] **T2.3** 对拍测试：同一 huawei/openconfig 配置经 legacy Datastore 与 treeDatastore 输出语义等价（`TestTreeVsLegacyDatastoreEquivalence`）
+- [x] **T2.4** treeDatastore 的 SetCandidate/SetRunning/GetRunning/GetCandidate/Commit/Discard（整树替换 + 深拷贝隔离 + `-race` 并发测试）；merge/filter 留给 T3/T4
 
 ## T3 — edit-config 语义（TDD）
 
