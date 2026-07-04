@@ -6,12 +6,12 @@ import (
 	"testing"
 	"time"
 
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
 	"github.com/leezesi/usmp/backend/internal/generated/huawei"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/client"
 	netsim "github.com/leezesi/usmp/backend/simulator/netconfsim"
 	testsupport "github.com/leezesi/usmp/backend/simulator/netconfsim/testsupport"
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 // TestDeviceActor_Integration_SingleModule tests DeviceActor with a single module
@@ -151,8 +151,7 @@ func TestDeviceActor_Integration_DryRun(t *testing.T) {
 	assert.Equal(t, "prepared", txState.Status)
 
 	// 6. Verify VLAN should NOT exist in running config (dry run mode)
-	vlans, err := sim.GetDatastore().ExtractHuaweiVLANs()
-	require.NoError(t, err)
+	vlans := sim.RunningHuaweiVLANs()
 	assert.Equal(t, 0, len(vlans), "dry run should not modify running config")
 }
 
@@ -223,8 +222,7 @@ func TestDeviceActor_Integration_Abort(t *testing.T) {
 	assert.Equal(t, "aborted", txState.Status)
 
 	// 7. Verify VLAN should NOT exist after abort
-	vlans, err := sim.GetDatastore().ExtractHuaweiVLANs()
-	require.NoError(t, err)
+	vlans := sim.RunningHuaweiVLANs()
 	assert.Equal(t, 0, len(vlans), "aborted changes should not be in running config")
 }
 
