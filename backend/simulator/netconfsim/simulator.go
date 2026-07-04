@@ -2,6 +2,8 @@
 package netconfsim
 
 import (
+	"bytes"
+	"encoding/xml"
 	"fmt"
 	"net"
 	"strconv"
@@ -18,15 +20,15 @@ const (
 
 // Simulator is a NETCONF simulator that provides a fake NETCONF server for testing.
 type Simulator struct {
-	username  string
-	password  string
-	addr      string
-	port      int
-	listener  net.Listener
-	server    *sshServer
-	config    *ssh.ServerConfig
-	datastore *Datastore
-	scenario  *ScenarioConfig
+	username string
+	password string
+	addr     string
+	port     int
+	listener net.Listener
+	server   *sshServer
+	config   *ssh.ServerConfig
+	store    *treeDatastore
+	scenario *ScenarioConfig
 
 	listenPort int // 0 = random free port
 
@@ -48,14 +50,13 @@ func (s *Simulator) SetListen(addr string, port int) {
 
 // NewSimulator creates a new NETCONF simulator with default credentials.
 func NewSimulator() *Simulator {
-	ds := NewDatastore()
 	return &Simulator{
-		username:  defaultUsername,
-		password:  defaultPassword,
-		addr:      defaultAddr,
-		datastore: ds,
-		scenario:  NewScenarioConfig(),
-		done:      make(chan struct{}),
+		username: defaultUsername,
+		password: defaultPassword,
+		addr:     defaultAddr,
+		store:    newTreeDatastore(),
+		scenario: NewScenarioConfig(),
+		done:     make(chan struct{}),
 	}
 }
 
@@ -97,10 +98,10 @@ func (s *Simulator) Start() error {
 	s.port = listener.Addr().(*net.TCPAddr).Port
 
 	s.server = &sshServer{
-		config:    s.config,
-		datastore: s.datastore,
-		scenario:  s.scenario,
-		done:      s.done,
+		config:   s.config,
+		store:    s.store,
+		scenario: s.scenario,
+		done:     s.done,
 	}
 
 	s.wg.Add(1)
@@ -149,12 +150,26 @@ func (s *Simulator) Port() int {
 // SetRunningConfig sets the initial running configuration from a Device struct.
 // Accepts any device struct (e.g., openconfig.Device or huawei.Device).
 func (s *Simulator) SetRunningConfig(dev interface{}) {
-	s.datastore.SetRunningFromDevice(dev)
+	_ = s.store.SetRunning(deviceToConfigXML(dev))
 }
 
 // SetRunningConfigXML sets the initial running configuration directly from XML bytes.
 func (s *Simulator) SetRunningConfigXML(xmlBytes []byte) {
-	s.datastore.SetRunningFromXML(xmlBytes)
+	_ = s.store.SetRunning(xmlBytes)
+}
+
+// deviceToConfigXML marshals a device struct to XML, wrapping it in <config> when
+// needed. Mirrors the legacy Datastore.SetRunningFromDevice marshaling so seeded
+// running config is byte-for-byte equivalent to the pre-switch behavior.
+func deviceToConfigXML(dev interface{}) []byte {
+	buf, err := xml.Marshal(dev)
+	if err != nil {
+		return []byte(`<config/>`)
+	}
+	if !bytes.Contains(buf, []byte("<config")) {
+		buf = []byte(fmt.Sprintf("<config>%s</config>", buf))
+	}
+	return buf
 }
 
 // SetScenario sets the scenario configuration for error injection testing.
@@ -187,7 +202,13 @@ func (s *Simulator) acceptLoop() {
 	}
 }
 
-// GetDatastore returns the underlying datastore for direct assertions.
+// GetDatastore returns a blob Datastore hydrated from the authoritative tree
+// store's running config, purely so the existing Extract* assertion helpers keep
+// working during the migration. This transitional shim (and the blob Datastore /
+// Extract* it depends on) is removed in T6, when testsupport asserts against the
+// generic tree directly.
 func (s *Simulator) GetDatastore() *Datastore {
-	return s.datastore
+	blob := NewDatastore()
+	blob.SetRunningFromXML(s.store.GetRunning())
+	return blob
 }

@@ -41,8 +41,8 @@
 
 ## T5 — 双路径验证与切换
 
-- [ ] **T5.1** 现有 `*_integration_test.go` 对新树 datastore 各跑一遍，断言与旧实现等价
-- [ ] **T5.2** 集成测试切到新实现（切换入口）
+- [x] **T5.1** 现有 `*_integration_test.go` 对新树 datastore 各跑一遍，断言与旧实现等价（T2.3 对拍 + 全量集成套件对切换后 tree-backed server 全绿）
+- [x] **T5.2** 集成测试切到新实现（`server.go`/`simulator.go` 切到 `treeDatastore`，行为保持等价；`GetDatastore()` 过渡 shim 保留 `Extract*` 断言）
 - [ ] **T5.3** test-server 按 T0.1 选型改接口，前端 E2E 绿
 
 ## T6 — 删除旧代码

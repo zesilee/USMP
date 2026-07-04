@@ -16,10 +16,10 @@ import (
 )
 
 type sshServer struct {
-	config    *ssh.ServerConfig
-	datastore *Datastore
-	scenario  *ScenarioConfig
-	done      chan struct{}
+	config   *ssh.ServerConfig
+	store    *treeDatastore
+	scenario *ScenarioConfig
+	done     chan struct{}
 }
 
 func generateSigner() (ssh.Signer, error) {
@@ -305,7 +305,12 @@ func (s *sshServer) handleGetConfig(msg, msgID string) string {
 		source = "candidate"
 	}
 
-	config := s.datastore.GetXML(source)
+	var config []byte
+	if source == "candidate" {
+		config = s.store.GetCandidate()
+	} else {
+		config = s.store.GetRunning()
+	}
 	response := fmt.Sprintf(`<rpc-reply xmlns="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="%s"><data>%s</data></rpc-reply>`, msgID, config)
 	log.Printf("handleGetConfig: full response:\n%s", response)
 	log.Printf("handleGetConfig: response len: %d", len(response))
@@ -370,19 +375,22 @@ func (s *sshServer) handleEditConfig(msg, msgID string) string {
 	configContent = strings.TrimSpace(configContent)
 	log.Printf("handleEditConfig: extracted config: %.500s", configContent)
 
-	// Update candidate or running directly
+	// Update candidate or running directly. SetCandidate performs a whole-tree
+	// replace, matching the legacy blob datastore's behavior exactly (T5 is a
+	// behavior-preserving switch; per-operation merge via EditConfig is a
+	// deliberate later adoption, not part of this equivalence switch).
 	if targetIsCandidate {
-		err := s.datastore.SetCandidate([]byte(configContent))
+		err := s.store.SetCandidate([]byte(configContent))
 		if err != nil {
 			return errorReply(msgID, err.Error())
 		}
 	} else {
 		// If directly editing running, update immediately
-		err := s.datastore.SetCandidate([]byte(configContent))
+		err := s.store.SetCandidate([]byte(configContent))
 		if err != nil {
 			return errorReply(msgID, err.Error())
 		}
-		_ = s.datastore.Commit()
+		_ = s.store.Commit()
 	}
 
 	return okReply(msgID)
@@ -394,7 +402,7 @@ func (s *sshServer) handleCommit(msg, msgID string) string {
 		return errorReply(msgID, err.Error())
 	}
 
-	err := s.datastore.Commit()
+	err := s.store.Commit()
 	if err != nil {
 		return errorReply(msgID, err.Error())
 	}
@@ -407,7 +415,7 @@ func (s *sshServer) handleDiscardChanges(msg, msgID string) string {
 		return errorReply(msgID, err.Error())
 	}
 
-	s.datastore.DiscardCandidate()
+	s.store.DiscardCandidate()
 	return okReply(msgID)
 }
 
