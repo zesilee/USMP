@@ -6,12 +6,12 @@ import (
 	"testing"
 	"time"
 
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
 	"github.com/leezesi/usmp/backend/internal/generated/huawei"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/client"
 	netsim "github.com/leezesi/usmp/backend/simulator/netconfsim"
 	testsupport "github.com/leezesi/usmp/backend/simulator/netconfsim/testsupport"
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 // TestModelActor_Integration_PrepareAndCommit tests the complete 2PC flow
@@ -167,8 +167,7 @@ func TestModelActor_Integration_PrepareDryRun(t *testing.T) {
 	assert.Contains(t, result.Data, "changes")
 
 	// 5. IMPORTANT: VLAN 200 should NOT exist in running config (dry run)
-	vlans, err := sim.GetDatastore().ExtractHuaweiVLANs()
-	require.NoError(t, err)
+	vlans := sim.RunningHuaweiVLANs()
 	assert.Equal(t, 0, len(vlans), "dry run should not modify running config")
 }
 
@@ -247,8 +246,7 @@ func TestModelActor_Integration_AbortAfterPrepare(t *testing.T) {
 	assert.Equal(t, "Abort after prepare for integration test", result.Data["reason"])
 
 	// 6. Verify VLAN 300 should NOT exist in running config (aborted)
-	vlans, err := sim.GetDatastore().ExtractHuaweiVLANs()
-	require.NoError(t, err)
+	vlans := sim.RunningHuaweiVLANs()
 	assert.Equal(t, 0, len(vlans), "aborted changes should not be in running config")
 }
 

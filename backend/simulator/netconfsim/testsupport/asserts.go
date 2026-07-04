@@ -1,64 +1,31 @@
 // Package testsupport provides test-only assertion helpers for the netconfsim
 // simulator. Keeping these out of the netconfsim core package lets the core be
 // compiled into a standalone deployable binary without a testing/testify dependency.
+//
+// Assertions query the simulator's structured tree store via its Running* methods
+// (no XML string parsing on the test side).
 package testsupport
 
 import (
 	"testing"
 
-	"github.com/leezesi/usmp/backend/internal/generated/openconfig"
 	"github.com/leezesi/usmp/backend/simulator/netconfsim"
 	"github.com/stretchr/testify/assert"
 )
-
-// AssertVlanExists asserts that a VLAN with the given ID exists in running config.
-func AssertVlanExists(t *testing.T, sim *netconfsim.Simulator, vlanID uint16) {
-	t.Helper()
-	vlans, err := sim.GetDatastore().ExtractVLANs()
-	assert.NoError(t, err)
-	assert.NotNil(t, vlans)
-	assert.Contains(t, vlans.Vlan, vlanID)
-}
-
-// AssertVlanName asserts that a VLAN has the expected name.
-func AssertVlanName(t *testing.T, sim *netconfsim.Simulator, vlanID uint16, expected string) {
-	t.Helper()
-	vlans, err := sim.GetDatastore().ExtractVLANs()
-	assert.NoError(t, err)
-	vlan, ok := vlans.Vlan[vlanID]
-	assert.True(t, ok)
-	assert.NotNil(t, vlan.Config)
-	assert.Equal(t, expected, *vlan.Config.Name)
-}
-
-// AssertVlanCount asserts the total number of VLANs in running config.
-func AssertVlanCount(t *testing.T, sim *netconfsim.Simulator, expected int) {
-	t.Helper()
-	vlans, err := sim.GetDatastore().ExtractVLANs()
-	assert.NoError(t, err)
-	if vlans == nil {
-		assert.Equal(t, expected, 0)
-		return
-	}
-	assert.Len(t, vlans.Vlan, expected)
-}
 
 // Huawei model assertion methods for VLAN testing
 
 // AssertHuaweiVlanExists asserts that a VLAN with the given ID exists using Huawei model parsing.
 func AssertHuaweiVlanExists(t *testing.T, sim *netconfsim.Simulator, vlanID uint16) {
 	t.Helper()
-	vlans, err := sim.GetDatastore().ExtractHuaweiVLANs()
-	assert.NoError(t, err)
-	assert.NotNil(t, vlans)
+	vlans := sim.RunningHuaweiVLANs()
 	assert.Contains(t, vlans, vlanID)
 }
 
 // AssertHuaweiVlanName asserts that a VLAN has the expected name using Huawei model parsing.
 func AssertHuaweiVlanName(t *testing.T, sim *netconfsim.Simulator, vlanID uint16, expected string) {
 	t.Helper()
-	vlans, err := sim.GetDatastore().ExtractHuaweiVLANs()
-	assert.NoError(t, err)
+	vlans := sim.RunningHuaweiVLANs()
 	name, ok := vlans[vlanID]
 	assert.True(t, ok)
 	assert.Equal(t, expected, name)
@@ -67,12 +34,7 @@ func AssertHuaweiVlanName(t *testing.T, sim *netconfsim.Simulator, vlanID uint16
 // AssertHuaweiVlanCount asserts the total number of VLANs in running config using Huawei model parsing.
 func AssertHuaweiVlanCount(t *testing.T, sim *netconfsim.Simulator, expected int) {
 	t.Helper()
-	vlans, err := sim.GetDatastore().ExtractHuaweiVLANs()
-	assert.NoError(t, err)
-	if vlans == nil {
-		assert.Equal(t, expected, 0)
-		return
-	}
+	vlans := sim.RunningHuaweiVLANs()
 	assert.Len(t, vlans, expected)
 }
 
@@ -83,8 +45,7 @@ func AssertHuaweiVlanCount(t *testing.T, sim *netconfsim.Simulator, expected int
 // AssertHuaweiVlanDescription asserts the description of a VLAN.
 func AssertHuaweiVlanDescription(t *testing.T, sim *netconfsim.Simulator, vlanID uint16, expected string) {
 	t.Helper()
-	vlans, err := sim.GetDatastore().ExtractHuaweiVLANsFull()
-	assert.NoError(t, err)
+	vlans := sim.RunningHuaweiVLANsFull()
 	vlan, ok := vlans[vlanID]
 	assert.True(t, ok, "VLAN %d not found", vlanID)
 	assert.Equal(t, expected, vlan.Description, "VLAN %d description mismatch", vlanID)
@@ -93,8 +54,7 @@ func AssertHuaweiVlanDescription(t *testing.T, sim *netconfsim.Simulator, vlanID
 // AssertHuaweiVlanType asserts the type of a VLAN.
 func AssertHuaweiVlanType(t *testing.T, sim *netconfsim.Simulator, vlanID uint16, expected int) {
 	t.Helper()
-	vlans, err := sim.GetDatastore().ExtractHuaweiVLANsFull()
-	assert.NoError(t, err)
+	vlans := sim.RunningHuaweiVLANsFull()
 	vlan, ok := vlans[vlanID]
 	assert.True(t, ok, "VLAN %d not found", vlanID)
 	assert.Equal(t, expected, vlan.Type, "VLAN %d type mismatch", vlanID)
@@ -103,8 +63,7 @@ func AssertHuaweiVlanType(t *testing.T, sim *netconfsim.Simulator, vlanID uint16
 // AssertHuaweiVlanAdminStatus asserts the admin status of a VLAN.
 func AssertHuaweiVlanAdminStatus(t *testing.T, sim *netconfsim.Simulator, vlanID uint16, expected int) {
 	t.Helper()
-	vlans, err := sim.GetDatastore().ExtractHuaweiVLANsFull()
-	assert.NoError(t, err)
+	vlans := sim.RunningHuaweiVLANsFull()
 	vlan, ok := vlans[vlanID]
 	assert.True(t, ok, "VLAN %d not found", vlanID)
 	assert.Equal(t, expected, vlan.AdminStatus, "VLAN %d admin status mismatch", vlanID)
@@ -113,8 +72,7 @@ func AssertHuaweiVlanAdminStatus(t *testing.T, sim *netconfsim.Simulator, vlanID
 // AssertHuaweiVlanBroadcastDiscard asserts broadcast discard setting.
 func AssertHuaweiVlanBroadcastDiscard(t *testing.T, sim *netconfsim.Simulator, vlanID uint16, expected int) {
 	t.Helper()
-	vlans, err := sim.GetDatastore().ExtractHuaweiVLANsFull()
-	assert.NoError(t, err)
+	vlans := sim.RunningHuaweiVLANsFull()
 	vlan, ok := vlans[vlanID]
 	assert.True(t, ok, "VLAN %d not found", vlanID)
 	assert.Equal(t, expected, vlan.BroadcastDiscard, "VLAN %d broadcast discard mismatch", vlanID)
@@ -123,8 +81,7 @@ func AssertHuaweiVlanBroadcastDiscard(t *testing.T, sim *netconfsim.Simulator, v
 // AssertHuaweiVlanUnknownMulticastDiscard asserts unknown multicast discard setting.
 func AssertHuaweiVlanUnknownMulticastDiscard(t *testing.T, sim *netconfsim.Simulator, vlanID uint16, expected int) {
 	t.Helper()
-	vlans, err := sim.GetDatastore().ExtractHuaweiVLANsFull()
-	assert.NoError(t, err)
+	vlans := sim.RunningHuaweiVLANsFull()
 	vlan, ok := vlans[vlanID]
 	assert.True(t, ok, "VLAN %d not found", vlanID)
 	assert.Equal(t, expected, vlan.UnknownMulticastDiscard, "VLAN %d unknown multicast discard mismatch", vlanID)
@@ -133,8 +90,7 @@ func AssertHuaweiVlanUnknownMulticastDiscard(t *testing.T, sim *netconfsim.Simul
 // AssertHuaweiVlanMacLearning asserts MAC learning enable status.
 func AssertHuaweiVlanMacLearning(t *testing.T, sim *netconfsim.Simulator, vlanID uint16, expected int) {
 	t.Helper()
-	vlans, err := sim.GetDatastore().ExtractHuaweiVLANsFull()
-	assert.NoError(t, err)
+	vlans := sim.RunningHuaweiVLANsFull()
 	vlan, ok := vlans[vlanID]
 	assert.True(t, ok, "VLAN %d not found", vlanID)
 	assert.Equal(t, expected, vlan.MacLearning, "VLAN %d MAC learning mismatch", vlanID)
@@ -143,8 +99,7 @@ func AssertHuaweiVlanMacLearning(t *testing.T, sim *netconfsim.Simulator, vlanID
 // AssertHuaweiVlanMacAgingTime asserts MAC aging time.
 func AssertHuaweiVlanMacAgingTime(t *testing.T, sim *netconfsim.Simulator, vlanID uint16, expected uint32) {
 	t.Helper()
-	vlans, err := sim.GetDatastore().ExtractHuaweiVLANsFull()
-	assert.NoError(t, err)
+	vlans := sim.RunningHuaweiVLANsFull()
 	vlan, ok := vlans[vlanID]
 	assert.True(t, ok, "VLAN %d not found", vlanID)
 	assert.Equal(t, expected, vlan.MacAgingTime, "VLAN %d MAC aging time mismatch", vlanID)
@@ -153,8 +108,7 @@ func AssertHuaweiVlanMacAgingTime(t *testing.T, sim *netconfsim.Simulator, vlanI
 // AssertHuaweiVlanStatisticEnable asserts statistic enable status.
 func AssertHuaweiVlanStatisticEnable(t *testing.T, sim *netconfsim.Simulator, vlanID uint16, expected int) {
 	t.Helper()
-	vlans, err := sim.GetDatastore().ExtractHuaweiVLANsFull()
-	assert.NoError(t, err)
+	vlans := sim.RunningHuaweiVLANsFull()
 	vlan, ok := vlans[vlanID]
 	assert.True(t, ok, "VLAN %d not found", vlanID)
 	assert.Equal(t, expected, vlan.StatisticEnable, "VLAN %d statistic enable mismatch", vlanID)
@@ -163,8 +117,7 @@ func AssertHuaweiVlanStatisticEnable(t *testing.T, sim *netconfsim.Simulator, vl
 // AssertHuaweiVlanStatisticDiscard asserts statistic discard status.
 func AssertHuaweiVlanStatisticDiscard(t *testing.T, sim *netconfsim.Simulator, vlanID uint16, expected int) {
 	t.Helper()
-	vlans, err := sim.GetDatastore().ExtractHuaweiVLANsFull()
-	assert.NoError(t, err)
+	vlans := sim.RunningHuaweiVLANsFull()
 	vlan, ok := vlans[vlanID]
 	assert.True(t, ok, "VLAN %d not found", vlanID)
 	assert.Equal(t, expected, vlan.StatisticDiscard, "VLAN %d statistic discard mismatch", vlanID)
@@ -173,19 +126,19 @@ func AssertHuaweiVlanStatisticDiscard(t *testing.T, sim *netconfsim.Simulator, v
 // AssertHuaweiVlanSuperVlan asserts super VLAN ID.
 func AssertHuaweiVlanSuperVlan(t *testing.T, sim *netconfsim.Simulator, vlanID uint16, expectedSuperVlanID uint16) {
 	t.Helper()
-	vlans, err := sim.GetDatastore().ExtractHuaweiVLANsFull()
-	assert.NoError(t, err)
+	vlans := sim.RunningHuaweiVLANsFull()
 	vlan, ok := vlans[vlanID]
 	assert.True(t, ok, "VLAN %d not found", vlanID)
 	assert.NotNil(t, vlan.SuperVlan, "VLAN %d super VLAN should be set", vlanID)
-	assert.Equal(t, expectedSuperVlanID, *vlan.SuperVlan, "VLAN %d super VLAN mismatch", vlanID)
+	if vlan.SuperVlan != nil {
+		assert.Equal(t, expectedSuperVlanID, *vlan.SuperVlan, "VLAN %d super VLAN mismatch", vlanID)
+	}
 }
 
 // AssertHuaweiVlanUnkownUnicastDiscard asserts unknown unicast discard settings.
 func AssertHuaweiVlanUnkownUnicastDiscard(t *testing.T, sim *netconfsim.Simulator, vlanID uint16, discard int, macLearningEnable int) {
 	t.Helper()
-	vlans, err := sim.GetDatastore().ExtractHuaweiVLANsFull()
-	assert.NoError(t, err)
+	vlans := sim.RunningHuaweiVLANsFull()
 	vlan, ok := vlans[vlanID]
 	assert.True(t, ok, "VLAN %d not found", vlanID)
 	assert.Equal(t, discard, vlan.UnkownUnicastDiscard.Discard, "VLAN %d unknown unicast discard mismatch", vlanID)
@@ -195,8 +148,7 @@ func AssertHuaweiVlanUnkownUnicastDiscard(t *testing.T, sim *netconfsim.Simulato
 // AssertHuaweiVlanSuppression asserts traffic suppression settings.
 func AssertHuaweiVlanSuppression(t *testing.T, sim *netconfsim.Simulator, vlanID uint16, inbound int, outbound int) {
 	t.Helper()
-	vlans, err := sim.GetDatastore().ExtractHuaweiVLANsFull()
-	assert.NoError(t, err)
+	vlans := sim.RunningHuaweiVLANsFull()
 	vlan, ok := vlans[vlanID]
 	assert.True(t, ok, "VLAN %d not found", vlanID)
 	assert.Equal(t, inbound, vlan.Suppression.Inbound, "VLAN %d inbound suppression mismatch", vlanID)
@@ -210,16 +162,14 @@ func AssertHuaweiVlanSuppression(t *testing.T, sim *netconfsim.Simulator, vlanID
 // AssertHuaweiInterfaceExists asserts that an interface with the given name exists.
 func AssertHuaweiInterfaceExists(t *testing.T, sim *netconfsim.Simulator, ifaceName string) {
 	t.Helper()
-	ifaces, err := sim.GetDatastore().ExtractHuaweiInterfaces()
-	assert.NoError(t, err)
+	ifaces := sim.RunningHuaweiInterfaces()
 	assert.Contains(t, ifaces, ifaceName, "Interface %s not found", ifaceName)
 }
 
 // AssertHuaweiInterfaceDescription asserts interface description.
 func AssertHuaweiInterfaceDescription(t *testing.T, sim *netconfsim.Simulator, ifaceName string, expected string) {
 	t.Helper()
-	ifaces, err := sim.GetDatastore().ExtractHuaweiInterfaces()
-	assert.NoError(t, err)
+	ifaces := sim.RunningHuaweiInterfaces()
 	iface, ok := ifaces[ifaceName]
 	assert.True(t, ok, "Interface %s not found", ifaceName)
 	assert.Equal(t, expected, iface.Description, "Interface %s description mismatch", ifaceName)
@@ -228,8 +178,7 @@ func AssertHuaweiInterfaceDescription(t *testing.T, sim *netconfsim.Simulator, i
 // AssertHuaweiInterfaceAdminStatus asserts interface admin status.
 func AssertHuaweiInterfaceAdminStatus(t *testing.T, sim *netconfsim.Simulator, ifaceName string, expected int) {
 	t.Helper()
-	ifaces, err := sim.GetDatastore().ExtractHuaweiInterfaces()
-	assert.NoError(t, err)
+	ifaces := sim.RunningHuaweiInterfaces()
 	iface, ok := ifaces[ifaceName]
 	assert.True(t, ok, "Interface %s not found", ifaceName)
 	assert.Equal(t, expected, iface.AdminStatus, "Interface %s admin status mismatch", ifaceName)
@@ -238,8 +187,7 @@ func AssertHuaweiInterfaceAdminStatus(t *testing.T, sim *netconfsim.Simulator, i
 // AssertHuaweiInterfaceMtu asserts interface MTU.
 func AssertHuaweiInterfaceMtu(t *testing.T, sim *netconfsim.Simulator, ifaceName string, expected uint32) {
 	t.Helper()
-	ifaces, err := sim.GetDatastore().ExtractHuaweiInterfaces()
-	assert.NoError(t, err)
+	ifaces := sim.RunningHuaweiInterfaces()
 	iface, ok := ifaces[ifaceName]
 	assert.True(t, ok, "Interface %s not found", ifaceName)
 	assert.Equal(t, expected, iface.Mtu, "Interface %s MTU mismatch", ifaceName)
@@ -248,8 +196,7 @@ func AssertHuaweiInterfaceMtu(t *testing.T, sim *netconfsim.Simulator, ifaceName
 // AssertHuaweiInterfaceControlFlap asserts control-flap configuration.
 func AssertHuaweiInterfaceControlFlap(t *testing.T, sim *netconfsim.Simulator, ifaceName string, ceiling uint32, decayNg uint32, decayOk uint32, reuse uint32, suppress uint32) {
 	t.Helper()
-	ifaces, err := sim.GetDatastore().ExtractHuaweiInterfaces()
-	assert.NoError(t, err)
+	ifaces := sim.RunningHuaweiInterfaces()
 	iface, ok := ifaces[ifaceName]
 	assert.True(t, ok, "Interface %s not found", ifaceName)
 	assert.Equal(t, ceiling, iface.ControlFlap.Ceiling, "Interface %s control-flap ceiling mismatch", ifaceName)
@@ -262,8 +209,7 @@ func AssertHuaweiInterfaceControlFlap(t *testing.T, sim *netconfsim.Simulator, i
 // AssertHuaweiInterfaceDampManual asserts damp manual configuration.
 func AssertHuaweiInterfaceDampManual(t *testing.T, sim *netconfsim.Simulator, ifaceName string, halfLife uint16, maxSuppress uint16, reuse uint32, suppress uint32) {
 	t.Helper()
-	ifaces, err := sim.GetDatastore().ExtractHuaweiInterfaces()
-	assert.NoError(t, err)
+	ifaces := sim.RunningHuaweiInterfaces()
 	iface, ok := ifaces[ifaceName]
 	assert.True(t, ok, "Interface %s not found", ifaceName)
 	assert.Equal(t, halfLife, iface.Damp.Manual.HalfLifePeriod, "Interface %s damp manual half-life mismatch", ifaceName)
@@ -275,8 +221,7 @@ func AssertHuaweiInterfaceDampManual(t *testing.T, sim *netconfsim.Simulator, if
 // AssertHuaweiInterfaceTimers asserts interface timer configurations.
 func AssertHuaweiInterfaceTimers(t *testing.T, sim *netconfsim.Simulator, ifaceName string, downDelay uint32, upDelay uint32) {
 	t.Helper()
-	ifaces, err := sim.GetDatastore().ExtractHuaweiInterfaces()
-	assert.NoError(t, err)
+	ifaces := sim.RunningHuaweiInterfaces()
 	iface, ok := ifaces[ifaceName]
 	assert.True(t, ok, "Interface %s not found", ifaceName)
 	assert.Equal(t, downDelay, iface.DownDelayTime, "Interface %s down-delay-time mismatch", ifaceName)
@@ -286,8 +231,7 @@ func AssertHuaweiInterfaceTimers(t *testing.T, sim *netconfsim.Simulator, ifaceN
 // AssertHuaweiInterfaceFlags asserts interface boolean flag configurations.
 func AssertHuaweiInterfaceFlags(t *testing.T, sim *netconfsim.Simulator, ifaceName string, clearIpDf bool, isL2Switch bool, l2ModeEnable bool, linkUpDownTrap bool, statisticEnable bool, spreadMtuFlag bool) {
 	t.Helper()
-	ifaces, err := sim.GetDatastore().ExtractHuaweiInterfaces()
-	assert.NoError(t, err)
+	ifaces := sim.RunningHuaweiInterfaces()
 	iface, ok := ifaces[ifaceName]
 	assert.True(t, ok, "Interface %s not found", ifaceName)
 	assert.Equal(t, clearIpDf, iface.ClearIpDf, "Interface %s clear-ip-df mismatch", ifaceName)
@@ -301,8 +245,7 @@ func AssertHuaweiInterfaceFlags(t *testing.T, sim *netconfsim.Simulator, ifaceNa
 // AssertHuaweiInterfaceStatistics asserts interface statistic configurations.
 func AssertHuaweiInterfaceStatistics(t *testing.T, sim *netconfsim.Simulator, ifaceName string, interval uint32, mode int) {
 	t.Helper()
-	ifaces, err := sim.GetDatastore().ExtractHuaweiInterfaces()
-	assert.NoError(t, err)
+	ifaces := sim.RunningHuaweiInterfaces()
 	iface, ok := ifaces[ifaceName]
 	assert.True(t, ok, "Interface %s not found", ifaceName)
 	assert.Equal(t, interval, iface.StatisticInterval, "Interface %s statistic-interval mismatch", ifaceName)
@@ -312,8 +255,7 @@ func AssertHuaweiInterfaceStatistics(t *testing.T, sim *netconfsim.Simulator, if
 // AssertHuaweiInterfaceNetwork asserts interface network configurations.
 func AssertHuaweiInterfaceNetwork(t *testing.T, sim *netconfsim.Simulator, ifaceName string, macAddress string, vrfName string, vsName string) {
 	t.Helper()
-	ifaces, err := sim.GetDatastore().ExtractHuaweiInterfaces()
-	assert.NoError(t, err)
+	ifaces := sim.RunningHuaweiInterfaces()
 	iface, ok := ifaces[ifaceName]
 	assert.True(t, ok, "Interface %s not found", ifaceName)
 	assert.Equal(t, macAddress, iface.MacAddress, "Interface %s mac-address mismatch", ifaceName)
@@ -324,8 +266,7 @@ func AssertHuaweiInterfaceNetwork(t *testing.T, sim *netconfsim.Simulator, iface
 // AssertHuaweiSystem asserts system configuration.
 func AssertHuaweiSystem(t *testing.T, sim *netconfsim.Simulator, sysName string, sysContact string, sysLocation string) {
 	t.Helper()
-	sys, err := sim.GetDatastore().ExtractHuaweiSystem()
-	assert.NoError(t, err)
+	sys := sim.RunningHuaweiSystem()
 	if sysName != "" {
 		assert.Equal(t, sysName, sys.SysName, "System name mismatch")
 	}
@@ -340,64 +281,48 @@ func AssertHuaweiSystem(t *testing.T, sim *netconfsim.Simulator, sysName string,
 // AssertHuaweiSystemName asserts system name.
 func AssertHuaweiSystemName(t *testing.T, sim *netconfsim.Simulator, expected string) {
 	t.Helper()
-	sys, err := sim.GetDatastore().ExtractHuaweiSystem()
-	assert.NoError(t, err)
+	sys := sim.RunningHuaweiSystem()
 	assert.Equal(t, expected, sys.SysName, "System name mismatch")
 }
 
-// Force import to satisfy Go's unused check
-var _ openconfig.OpenconfigVlan_Vlans
+// ============================================
+// OpenConfig interface assertion methods
+// ============================================
 
 // AssertInterfaceExists verifies that the interface with the given name exists in the running config.
 func AssertInterfaceExists(t *testing.T, sim *netconfsim.Simulator, name string) {
-	interfaces, err := sim.GetDatastore().ExtractInterfaces()
-	assert.NoError(t, err, "failed to extract interfaces from running config")
-	assert.NotNil(t, interfaces, "interfaces should not be nil")
-
-	_, exists := interfaces.Interface[name]
-	assert.True(t, exists, "interface %q should exist in running config, but got: %v", name, interfaces.Interface)
+	t.Helper()
+	ifaces := sim.RunningOCInterfaces()
+	_, exists := ifaces[name]
+	assert.True(t, exists, "interface %q should exist in running config, but got: %v", name, ifaces)
 }
 
 // AssertInterfaceEnabled verifies that the interface exists and has the expected enabled state.
 func AssertInterfaceEnabled(t *testing.T, sim *netconfsim.Simulator, name string, expected bool) {
-	interfaces, err := sim.GetDatastore().ExtractInterfaces()
-	assert.NoError(t, err, "failed to extract interfaces from running config")
-
-	iface, exists := interfaces.Interface[name]
+	t.Helper()
+	ifaces := sim.RunningOCInterfaces()
+	iface, exists := ifaces[name]
 	assert.True(t, exists, "interface %q should exist", name)
 	if !exists {
 		return
 	}
-
-	assert.NotNil(t, iface.Config, "interface %q should have Config", name)
-	if iface.Config == nil {
-		return
-	}
-
-	assert.NotNil(t, iface.Config.Enabled, "interface %q should have Enabled field set", name)
-	if iface.Config.Enabled != nil {
-		assert.Equal(t, expected, *iface.Config.Enabled, "interface %q enabled state should match", name)
+	assert.NotNil(t, iface.Enabled, "interface %q should have Enabled field set", name)
+	if iface.Enabled != nil {
+		assert.Equal(t, expected, *iface.Enabled, "interface %q enabled state should match", name)
 	}
 }
 
 // AssertInterfaceMtu verifies that the interface exists and has the expected MTU.
 func AssertInterfaceMtu(t *testing.T, sim *netconfsim.Simulator, name string, expectedMtu uint16) {
-	interfaces, err := sim.GetDatastore().ExtractInterfaces()
-	assert.NoError(t, err, "failed to extract interfaces from running config")
-
-	iface, exists := interfaces.Interface[name]
+	t.Helper()
+	ifaces := sim.RunningOCInterfaces()
+	iface, exists := ifaces[name]
 	assert.True(t, exists, "interface %q should exist", name)
 	if !exists {
 		return
 	}
-
-	assert.NotNil(t, iface.Config, "interface %q should have Config", name)
-	if iface.Config == nil {
-		return
-	}
-
-	assert.NotNil(t, iface.Config.Mtu, "interface %q should have Mtu field set", name)
-	if iface.Config.Mtu != nil {
-		assert.Equal(t, expectedMtu, *iface.Config.Mtu, "interface %q MTU should match", name)
+	assert.NotNil(t, iface.Mtu, "interface %q should have Mtu field set", name)
+	if iface.Mtu != nil {
+		assert.Equal(t, expectedMtu, *iface.Mtu, "interface %q MTU should match", name)
 	}
 }
