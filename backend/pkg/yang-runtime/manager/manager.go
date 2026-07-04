@@ -133,10 +133,11 @@ func New(opts ...Option) *DefaultManager {
 	}
 
 	var s schema.Schema
-	if options.SchemeDir != "" {
-		// Will be loaded in Start
-		s = schema.NewSchema()
+	if options.Schema != nil {
+		// Pre-built schema (e.g. from generated ygot models) takes precedence.
+		s = options.Schema
 	} else {
+		// Empty; may be loaded from SchemeDir in Start.
 		s = schema.NewSchema()
 	}
 
@@ -165,8 +166,8 @@ func (m *DefaultManager) Start(ctx context.Context) error {
 
 	m.ctx, m.cancel = context.WithCancel(ctx)
 
-	// Load schemas from directory if provided
-	if m.options.SchemeDir != "" {
+	// Load schemas from directory if provided and no pre-built schema was injected.
+	if m.options.Schema == nil && m.options.SchemeDir != "" {
 		loader := schema.NewLoader(m.options.SchemeDir)
 		loadedSchema, err := loader.Load()
 		if err != nil {

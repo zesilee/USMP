@@ -9,6 +9,7 @@ import (
 	"github.com/leezesi/usmp/backend/internal/controller/ifm"
 	"github.com/leezesi/usmp/backend/internal/controller/system"
 	"github.com/leezesi/usmp/backend/internal/controller/vlan"
+	"github.com/leezesi/usmp/backend/internal/yangschema"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/controller"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/manager"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/predicate"
@@ -16,11 +17,18 @@ import (
 )
 
 func main() {
+	// Build the YANG schema tree from generated ygot models (huawei + openconfig)
+	// so the manager's schema tree is populated (fixes the empty-schema gap).
+	// Device NETCONF capabilities narrow the usable module set at runtime.
+	yangSchema, err := yangschema.Load()
+	if err != nil {
+		log.Fatalf("failed to load YANG schema: %v", err)
+	}
+
 	// Create and start the yang-controller-runtime Manager
 	mgr := manager.New(
-		manager.WithDefaultTimeout(10 * time.Second),
-		// TODO: Set schema directory when we have dynamic schema loading
-		// manager.WithSchemeDir("./yang-modules"),
+		manager.WithDefaultTimeout(10*time.Second),
+		manager.WithSchema(yangSchema),
 	)
 
 	// Create and register the Huawei VLAN controller
@@ -32,7 +40,7 @@ func main() {
 	// Pass nil for deviceIDs to indicate all devices that have desired config
 	vlanCtrl := controller.ControllerManagedBy("huawei-vlan").
 		WithReconciler(vlan.New(cs, clientPool)).
-		WithSource(source.NewPeriodicSource(5 * time.Minute, nil, "/vlan:vlan/vlan:vlans")).
+		WithSource(source.NewPeriodicSource(5*time.Minute, nil, "/vlan:vlan/vlan:vlans")).
 		WithPredicate(predicate.Prefix("/vlan:vlan/vlan:vlans")).
 		WithWorkerCount(2).
 		Build()
@@ -44,7 +52,7 @@ func main() {
 	// The IFM controller reconciles interface configuration every 5 minutes
 	ifmCtrl := controller.ControllerManagedBy("huawei-ifm").
 		WithReconciler(ifm.New(cs, clientPool)).
-		WithSource(source.NewPeriodicSource(5 * time.Minute, nil, "/ifm:ifm/ifm:interfaces")).
+		WithSource(source.NewPeriodicSource(5*time.Minute, nil, "/ifm:ifm/ifm:interfaces")).
 		WithPredicate(predicate.Prefix("/ifm:ifm/ifm:interfaces")).
 		WithWorkerCount(2).
 		Build()
@@ -56,7 +64,7 @@ func main() {
 	// The System controller reconciles system configuration every 5 minutes
 	systemCtrl := controller.ControllerManagedBy("huawei-system").
 		WithReconciler(system.New(cs, clientPool)).
-		WithSource(source.NewPeriodicSource(5 * time.Minute, nil, "/system:system")).
+		WithSource(source.NewPeriodicSource(5*time.Minute, nil, "/system:system")).
 		WithPredicate(predicate.Prefix("/system:system")).
 		WithWorkerCount(2).
 		Build()

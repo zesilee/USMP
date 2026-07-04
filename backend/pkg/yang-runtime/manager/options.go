@@ -5,6 +5,7 @@ import (
 
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/client"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/queue"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/schema"
 )
 
 // Options contains options for creating a new Manager
@@ -17,6 +18,9 @@ type Options struct {
 	RateLimiter queue.RateLimiter
 	// SchemeDir is the directory containing YANG schema files
 	SchemeDir string
+	// Schema is a pre-built YANG schema to use (takes precedence over SchemeDir).
+	// Typically built from generated ygot models via schema.AddYgotSchema.
+	Schema schema.Schema
 	// EnableDebug enables debug logging
 	EnableDebug bool
 }
@@ -49,6 +53,14 @@ func WithRateLimiter(r queue.RateLimiter) Option {
 func WithSchemeDir(dir string) Option {
 	return func(o *Options) {
 		o.SchemeDir = dir
+	}
+}
+
+// WithSchema injects a pre-built YANG schema (e.g. built from generated ygot
+// models). Takes precedence over SchemeDir. Fixes the empty-schema-tree gap.
+func WithSchema(s schema.Schema) Option {
+	return func(o *Options) {
+		o.Schema = s
 	}
 }
 
