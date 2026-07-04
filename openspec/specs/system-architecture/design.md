@@ -173,7 +173,7 @@ frontend/                        # 【Vue3 动态表单】→ frontend/design.md
 | D7 | **ConfigStore.List/ListDevices = stub**：返回 `nil,nil` | `manager.go:55,61` | `PeriodicSource(deviceIDs=nil)` 无法枚举设备 |
 | D8 | **多厂商翻译仅 Huawei**：Cisco/H3C/Juniper 仅枚举占位 | `pkg/translator/factory.go:21` | 单厂商 |
 | D9 | **前端双代动态表单**：新 CRD 驱动路径活跃，旧 `components/yang/*` 静态路径未接路由 | `frontend/src` | 死代码待清理 |
-| D10 | **两个模拟器**：`netconfsim`(真 SSH，集成测试用) 与 `netsim`(内存，test-server 用) 无关并存 | `simulator/*` | 概念重叠 |
+| D10 | ✅ **已解决**：删除 `netsim`，收敛为单一结构化 `netconfsim`（通用 XML 树 + operation/filter 语义 + 独立二进制）；`test-server` 改内存 REST 桩 | `simulator/netconfsim` | refactor-netconf-simulator |
 
 ## 8. 后续演进建议（仅列，不在本次范围内决策）
 

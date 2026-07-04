@@ -49,12 +49,12 @@
 
 - [x] **T6.1** 删除旧 XML datastore、`Extract*`、`*TestData`、旧 server 字符串解析分支（datastore.go 全删；testsupport 改查通用树；server RPC 分发已于 T4 改结构化解码）
 - [x] **T6.2** 删除 `backend/simulator/netsim/`，清理引用（唯一使用方 test-server 已于 T5.3 脱离）
-- [ ] **T6.3** 更新 `openspec/specs/netconf-simulator/{spec,design,tasks}.md`，D10 迁移债勾除
-- [ ] **T6.4** 全量 `go test ./...` 绿；`go build ./cmd/netconf-simulator` 绿
+- [x] **T6.3** 更新 `openspec/specs/netconf-simulator/{spec,design,tasks}.md` + `system-architecture/{design,tasks}.md`，D10 迁移债勾除
+- [x] **T6.4** 全量 `go test ./...` 绿；`go build ./cmd/netconf-simulator` 绿
 
 ## 验收（对应 design §5）
 
-- [ ] 新增测试覆盖 edit-config merge/delete、get-config filter、capability 广告
-- [ ] netconfsim core 无 testing 依赖；独立二进制可构建
-- [ ] netsim 删除无残留；datastore string-parsing 消除
-- [ ] 满足 R02/R04/R06/§5.3
+- [x] 新增测试覆盖 edit-config merge/delete、get-config filter、capability 广告（editconfig_test/filter_test/server_test）
+- [x] netconfsim core 无 testing 依赖（`go list -deps` 验证）；独立二进制 `cmd/netconf-simulator` 可构建
+- [x] netsim 删除无残留；datastore string-parsing 消除（datastore.go 全删）
+- [x] 满足 R02/R04/R06/§5.3
