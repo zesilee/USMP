@@ -54,15 +54,8 @@ func main() {
 	// 初始化全局 NETCONF Client Pool（仅华为交换机）
 	clientPool := netconfclient.NewDefaultClientPool(netconfclient.DefaultClientFactory(5))
 
-	// 设置 BusinessVlan Reconciler（仅支持华为交换机）
-	if err = (&controllers.BusinessVlanReconciler{
-		Client:     mgr.GetClient(),
-		Scheme:     mgr.GetScheme(),
-		ClientPool: clientPool,
-	}).SetupWithManager(mgr); err != nil {
-		setupLog.Error(err, "unable to create controller", "controller", "BusinessVlan")
-		os.Exit(1)
-	}
+	// BusinessVlan 意图已收编到 Stack B 的 CRD 意图源（backend/main.go：
+	// crdsource.RegisterIntentSources），Actor 路径退役（P2 组4a）。
 
 	// 设置 BusinessSwitch Reconciler（仅支持华为交换机）
 	if err = (&controllers.BusinessSwitchReconciler{
