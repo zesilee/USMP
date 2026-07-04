@@ -273,3 +273,92 @@ func (s *Simulator) RunningOCInterfaces() map[string]*OCInterfaceView {
 	}
 	return out
 }
+
+// View structs returned by the Running* queries. Moved here from the deleted
+// blob datastore.go; field shapes are unchanged so assertion call sites stay put.
+
+// HuaweiVlanTestData contains parsed VLAN data for testing assertions.
+type HuaweiVlanTestData struct {
+	ID                      uint16
+	Name                    string
+	Description             string
+	Type                    int
+	AdminStatus             int
+	BroadcastDiscard        int
+	UnknownMulticastDiscard int
+	MacLearning             int
+	MacAgingTime            uint32
+	StatisticEnable         int
+	StatisticDiscard        int
+	SuperVlan               *uint16
+	// Nested containers
+	UnkownUnicastDiscard struct {
+		Discard           int
+		MacLearningEnable int
+	}
+	Suppression struct {
+		Inbound  int
+		Outbound int
+	}
+}
+
+// HuaweiInterfaceTestData represents interface test data from Huawei IFM model.
+type HuaweiInterfaceTestData struct {
+	Name                 string
+	Description          string
+	Index                uint32
+	Number               string
+	Position             string
+	ParentName           string
+	AdminStatus          int
+	Type                 int
+	Class                int
+	LinkProtocol         int
+	RouterType           int
+	ServiceType          int
+	Mtu                  uint32
+	MacAddress           string
+	Bandwidth            uint32
+	BandwidthKbps        uint32
+	VrfName              string
+	VsName               string
+	AggregationName      string
+	DownDelayTime        uint32
+	ProtocolUpDelayTime  uint32
+	ClearIpDf            bool
+	IsL2Switch           bool
+	L2ModeEnable         bool
+	LinkUpDownTrapEnable bool
+	StatisticEnable      bool
+	SpreadMtuFlag        bool
+	StatisticInterval    uint32
+	StatisticMode        int
+	// Nested containers
+	ControlFlap struct {
+		Ceiling          uint32
+		ControlFlapCount uint32
+		DecayNg          uint32
+		DecayOk          uint32
+		Reuse            uint32
+		Suppress         uint32
+	}
+	Damp struct {
+		TxOff bool
+		Auto  struct {
+			Level int
+		}
+		Manual struct {
+			HalfLifePeriod  uint16
+			MaxSuppressTime uint16
+			Reuse           uint32
+			Suppress        uint32
+		}
+	}
+}
+
+// HuaweiSystemTestData represents system configuration test data.
+type HuaweiSystemTestData struct {
+	SysName     string
+	SysContact  string
+	SysLocation string
+}
