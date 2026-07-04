@@ -5,9 +5,9 @@
 
 ## 0. 基线与前置（P0：修 D7）
 
-- [ ] 0.1 基线：`go test ./...` 全绿；记录当前 `yang-api`/`config-api` 硬编码行为作为对拍基准（快照 IFM/VLAN schema 与 system/ifm/vlan 编解码结果）
-- [ ] 0.2 先写测试：`ConfigStore.List`/`ListDevices` 的单测（已存多设备→去重枚举、空存储→空列表、-race 并发）
-- [ ] 0.3 实现 `ConfigStore.List`/`ListDevices`（纯内存，修 D7），替换返回 nil 的 stub；接通 `PeriodicSource(deviceIDs)` 枚举
+- [x] 0.1 基线：`go test ./...` 全绿（对拍快照留待 group 2/3 的 yang-api/config-api 双路径实现时采集）
+- [x] 0.2 先写测试：`ConfigStore.List`/`ListDevices` 单测（多设备去重、空列表、-race）+ 新增 `cache.Keys()` 单测（存活/空/排除过期）
+- [x] 0.3 实现 `cache.TTLLRUCache.Keys()`（RLock 快照、排除过期）+ `ConfigStore.List`/`ListDevices`（解析 `deviceID:path` 键，纯内存修 D7），替换返回 nil 的 stub
 
 ## 1. schema 树加载（修 D4，混合源）
 
