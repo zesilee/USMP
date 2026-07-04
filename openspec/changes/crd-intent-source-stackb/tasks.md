@@ -13,9 +13,9 @@
 
 ## 2. BusinessVlan 接入 Stack B（并行 + 双路径验证）
 
-- [ ] 2.1 `backend/main.go` 为 BusinessVlan 注册 CRD 源（vendor=huawei, configType=vlan, deviceID=spec.deviceID, path=/vlan:vlan/vlan:vlans），与 Stack A Actor 路径**并行**
-- [ ] 2.2 双路径对拍测试：同一 BusinessVlanSpec，Actor 路径 desired vs CRD-source 路径 desired **语义等价**
-- [ ] 2.3 集成测试（netconfsim，T02）：创建 BusinessVlan CR（fake K8s）→ CRD 源 → reconcile → netconfsim 落配 → 断言与 Actor 路径一致
+- [x] 2.1 `internal/crdsource`：`VlanProjectFunc`（**用 api/v1，与 Actor/translator 同树**——D1 发现：translator 绑 api/v1，非 api/biz/v1）+ `RegisterVlanIntentSource`（graceful 无 K8s 跳过）；`main.go` 注册 CRD 源，与 Stack A Actor 路径并行
+- [x] 2.2 双路径对拍测试：`VlanProjectFunc` 的 desired `reflect.DeepEqual` `translator.TranslateConfig(Huawei,Vlan,spec)`（Actor 路径翻译）——两路同调 translator 故等价
+- [~] 2.3 reconcile→netconfsim 一段已由既有 Huawei VLAN reconciler 集成套件覆盖（同 ConfigStore→reconcile→netconfsim 同 desired）；ProjectFunc→ConfigStore 已单测；真·CR-watch e2e 需 envtest/集群，留后续
 
 ## 3. 迁移 Interface/Route/Switch
 
