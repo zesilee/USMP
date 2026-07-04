@@ -37,7 +37,7 @@ openspec/specs/
 - Reference: `backend/internal/api/device_handler.go`
 - Reference: `backend/internal/api/response.go`
 
-- [ ] **Step 1: 编写 devices-api/spec.md**
+- [x] **Step 1: 编写 devices-api/spec.md**
 
 从代码还原以下内容：
 
@@ -248,7 +248,7 @@ openspec/specs/
 ```
 ```
 
-- [ ] **Step 2: 提交**
+- [x] **Step 2: 提交**
 
 ```bash
 git add openspec/specs/devices-api/spec.md
@@ -264,7 +264,7 @@ git commit -m "docs(openspec): 补齐 devices-api 行为契约 spec"
 - Reference: `backend/internal/api/device_handler.go`
 - Reference: `backend/internal/api/server.go`
 
-- [ ] **Step 1: 编写 devices-api/design.md**
+- [x] **Step 1: 编写 devices-api/design.md**
 
 ```markdown
 # devices-api - 架构设计
@@ -347,7 +347,7 @@ Request → DeviceHandler.GetStatus()
 - 无JSON文件持久化（与CLAUDE.md描述的"本地JSON元信息文件"不一致）
 ```
 
-- [ ] **Step 2: 提交**
+- [x] **Step 2: 提交**
 
 ```bash
 git add openspec/specs/devices-api/design.md
@@ -361,7 +361,7 @@ git commit -m "docs(openspec): 补齐 devices-api 架构设计 design"
 **Files:**
 - Create: `openspec/specs/devices-api/tasks.md`
 
-- [ ] **Step 1: 编写 devices-api/tasks.md**
+- [x] **Step 1: 编写 devices-api/tasks.md**
 
 ```markdown
 # devices-api - 补全清单
@@ -390,7 +390,7 @@ git commit -m "docs(openspec): 补齐 devices-api 架构设计 design"
 - [ ] 添加IP格式和端口范围校验
 ```
 
-- [ ] **Step 2: 提交**
+- [x] **Step 2: 提交**
 
 ```bash
 git add openspec/specs/devices-api/tasks.md
@@ -405,7 +405,7 @@ git commit -m "docs(openspec): 补齐 devices-api 补全清单 tasks"
 - Create: `openspec/specs/config-api/spec.md`
 - Reference: `backend/internal/api/config_handler.go`
 
-- [ ] **Step 1: 编写 config-api/spec.md**
+- [x] **Step 1: 编写 config-api/spec.md**
 
 ```markdown
 # config-api - 行为契约
@@ -562,7 +562,7 @@ git commit -m "docs(openspec): 补齐 devices-api 补全清单 tasks"
 ```
 ```
 
-- [ ] **Step 2: 提交**
+- [x] **Step 2: 提交**
 
 ```bash
 git add openspec/specs/config-api/spec.md
@@ -576,7 +576,7 @@ git commit -m "docs(openspec): 补齐 config-api 行为契约 spec"
 **Files:**
 - Create: `openspec/specs/config-api/design.md`
 
-- [ ] **Step 1: 编写 config-api/design.md**
+- [x] **Step 1: 编写 config-api/design.md**
 
 ```markdown
 # config-api - 架构设计
@@ -644,7 +644,7 @@ Request → ConfigHandler.SetConfig()
 | 其他 | 无转换（原始map） | map[string]interface{} |
 ```
 
-- [ ] **Step 2: 提交**
+- [x] **Step 2: 提交**
 
 ```bash
 git add openspec/specs/config-api/design.md
@@ -658,7 +658,7 @@ git commit -m "docs(openspec): 补齐 config-api 架构设计 design"
 **Files:**
 - Create: `openspec/specs/config-api/tasks.md`
 
-- [ ] **Step 1: 编写 config-api/tasks.md**
+- [x] **Step 1: 编写 config-api/tasks.md**
 
 ```markdown
 # config-api - 补全清单
@@ -686,7 +686,7 @@ git commit -m "docs(openspec): 补齐 config-api 架构设计 design"
 - [ ] 提供Reconcile状态查询接口
 ```
 
-- [ ] **Step 2: 提交**
+- [x] **Step 2: 提交**
 
 ```bash
 git add openspec/specs/config-api/tasks.md
@@ -701,7 +701,7 @@ git commit -m "docs(openspec): 补齐 config-api 补全清单 tasks"
 - Create: `openspec/specs/yang-api/spec.md`
 - Reference: `backend/internal/api/yang_handler.go`
 
-- [ ] **Step 1: 编写 yang-api/spec.md**
+- [x] **Step 1: 编写 yang-api/spec.md**
 
 ```markdown
 # yang-api - 行为契约
@@ -836,7 +836,7 @@ git commit -m "docs(openspec): 补齐 config-api 补全清单 tasks"
 ```
 ```
 
-- [ ] **Step 2: 提交**
+- [x] **Step 2: 提交**
 
 ```bash
 git add openspec/specs/yang-api/spec.md
@@ -850,7 +850,7 @@ git commit -m "docs(openspec): 补齐 yang-api 行为契约 spec"
 **Files:**
 - Create: `openspec/specs/yang-api/design.md`
 
-- [ ] **Step 1: 编写 yang-api/design.md**
+- [x] **Step 1: 编写 yang-api/design.md**
 
 ```markdown
 # yang-api - 架构设计
@@ -898,7 +898,7 @@ Request → YangHandler.GetSchema()
 - GetSchema: IFM和VLAN各有一套预定义FieldDef，未知模块返回通用2字段Schema
 ```
 
-- [ ] **Step 2: 提交**
+- [x] **Step 2: 提交**
 
 ```bash
 git add openspec/specs/yang-api/design.md
@@ -912,7 +912,7 @@ git commit -m "docs(openspec): 补齐 yang-api 架构设计 design"
 **Files:**
 - Create: `openspec/specs/yang-api/tasks.md`
 
-- [ ] **Step 1: 编写 yang-api/tasks.md**
+- [x] **Step 1: 编写 yang-api/tasks.md**
 
 ```markdown
 # yang-api - 补全清单
@@ -936,7 +936,7 @@ git commit -m "docs(openspec): 补齐 yang-api 架构设计 design"
 - [ ] FieldDef自动从ygot结构体注解生成，保证同步
 ```
 
-- [ ] **Step 2: 提交**
+- [x] **Step 2: 提交**
 
 ```bash
 git add openspec/specs/yang-api/tasks.md
