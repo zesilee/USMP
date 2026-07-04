@@ -7,12 +7,12 @@
 - [ ] **D1 双 CRD 树抢注同 group**：`api/v1` 与 `api/biz/v1` 均注册 `biz.usmp.io/v1`，BusinessVlan schema 不兼容
 - [ ] **D2 Actor 子系统 vs R01**：最大子系统被红线禁止但生产在用
 - [ ] **D3 plugin 空转**：四类插件可注册但从不被调用
-- [ ] **D4 schema 层空转**：`SchemeDir` 未设，运行时 schema 为空，diff 传 nil
+- [x] **D4 schema 层空转**：已消除——`internal/yangschema.Load` 从 ygot 模型构建 schema 树、manager `WithSchema` 挂载、设备 capabilities 收敛模块集合（device-native-lowcode-config）
 - [ ] **D5 gNMI 空壳**：Get 发空 GetRequest，Set 发空 Path/Val
 - [ ] **D6 NativeDeviceConfig 下发 = TODO**：`applyNativeConfig` 仅 time.Sleep
-- [ ] **D7 ConfigStore.List/ListDevices = stub**：返回 nil,nil
+- [x] **D7 ConfigStore.List/ListDevices = stub**：已消除——基于 `cache.Keys()` 枚举设备/路径（device-native-lowcode-config）
 - [ ] **D8 多厂商翻译仅 Huawei**：Cisco/H3C/Juniper 仅枚举占位
-- [ ] **D9 前端双代动态表单**：旧 yang/ 静态路径未接路由
+- [x] **D9 前端双代动态表单**：设备侧静态 YANG 渲染路径（`components/yang/*`、`useDeviceConfig`、`api/crd`）已删；yang-api 动态 schema 经 DynamicForm 渲染。（残留死类型文件 `types/yang-schema.ts` 待后续删）
 - [x] **D10 两个模拟器并存**：已消除——删除 netsim，收敛为单一结构化 netconfsim，test-server 改内存 REST 桩（refactor-netconf-simulator）
 
 ## 改进建议（演进，需专门 /opsx:propose）
