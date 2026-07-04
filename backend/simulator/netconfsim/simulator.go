@@ -201,14 +201,3 @@ func (s *Simulator) acceptLoop() {
 		}()
 	}
 }
-
-// GetDatastore returns a blob Datastore hydrated from the authoritative tree
-// store's running config, purely so the existing Extract* assertion helpers keep
-// working during the migration. This transitional shim (and the blob Datastore /
-// Extract* it depends on) is removed in T6, when testsupport asserts against the
-// generic tree directly.
-func (s *Simulator) GetDatastore() *Datastore {
-	blob := NewDatastore()
-	blob.SetRunningFromXML(s.store.GetRunning())
-	return blob
-}

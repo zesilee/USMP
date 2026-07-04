@@ -88,41 +88,6 @@ func TestTreeDatastoreSetCandidateError(t *testing.T) {
 	}
 }
 
-// TestTreeVsLegacyDatastoreEquivalence is the T2.3 dual-path check: identical
-// config fed through the legacy blob Datastore and the new treeDatastore must
-// yield semantically-equal running config. This locks the tree store as a
-// faithful drop-in before the server is switched over (T5).
-func TestTreeVsLegacyDatastoreEquivalence(t *testing.T) {
-	samples := []string{
-		sampleVlan100,
-		`<interfaces xmlns="http://openconfig.net/yang/interfaces"><interface><name>eth0</name><config><name>eth0</name><enabled>true</enabled><mtu>1500</mtu></config></interface></interfaces>`,
-		`<system xmlns="urn:huawei:system"><info><name>sw1</name></info></system>`,
-	}
-	for _, s := range samples {
-		legacy := NewDatastore()
-		if err := legacy.SetCandidate([]byte(s)); err != nil {
-			t.Fatal(err)
-		}
-		if err := legacy.Commit(); err != nil {
-			t.Fatal(err)
-		}
-
-		tree := newTreeDatastore()
-		if err := tree.SetCandidate([]byte(s)); err != nil {
-			t.Fatal(err)
-		}
-		if err := tree.Commit(); err != nil {
-			t.Fatal(err)
-		}
-
-		legacyTree := treeFromXML(t, string(legacy.GetRunning()))
-		newTree := treeFromXML(t, string(tree.GetRunning()))
-		if !nodesEqual(legacyTree, newTree) {
-			t.Fatalf("legacy vs tree datastore differ\n legacy: %s\n tree:   %s", legacy.GetRunning(), tree.GetRunning())
-		}
-	}
-}
-
 // TestTreeDatastoreConcurrent exercises the RWMutex under -race.
 func TestTreeDatastoreConcurrent(t *testing.T) {
 	ds := newTreeDatastore()
