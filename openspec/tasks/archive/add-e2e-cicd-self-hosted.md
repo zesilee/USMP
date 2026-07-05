@@ -1,12 +1,14 @@
 ---
 id: add-e2e-cicd-self-hosted
 title: 端到端 CI/CD —— 自托管 Runner 部署流水线 + 常驻本地 staging
-status: in_progress
+status: completed
 priority: high
 branch: worktree-add-e2e-cicd-self-hosted
 worktree: .claude/worktrees/add-e2e-cicd-self-hosted
 change: add-e2e-cicd-self-hosted
 updated: 2026-07-05
+merged_pr: 53
+merge_commit: ca67bbc
 ---
 
 ## 目标
@@ -20,8 +22,9 @@ updated: 2026-07-05
   - [x] 流水线：`.github/workflows/e2e-staging.yml`（push→main + workflow_dispatch，self-hosted macOS）、`frontend/tests/staging-smoke.spec.ts`（真浏览器实测 2 passed）
   - [x] 运维：`scripts/setup-mac-runner.sh`、`docs/CICD.md`、`Makefile`（staging-up/down/ps/logs、e2e-local）
   - [x] 三镜像 docker build 全过；backend↔simulator SSH 链路实跑连通；过程修掉 3 硬 bug（/simulator 写成目录、compose 网关抢 .1、Dockerfile go 版本/探针失效）
-- [ ] **用户操作（我无法代做）**：① 合并 PR #53 ② Mac 装 Docker Desktop(开机自启)+Node≥20 ③ 取 Runner token ④ 跑 `scripts/setup-mac-runner.sh <token>` ⑤ 合并后确认 e2e-staging 绿 + localhost:3002 可访问
-- [ ] **合并后清理 worktree**（`.claude/worktrees/add-e2e-cicd-self-hosted`）+ `/task archive add-e2e-cicd-self-hosted`
+- [x] **合并 PR #53**（squash → `ca67bbc`，2026-07-05T07:12:38Z）
+- [ ] **用户本地基建（我无法代做，非阻塞）**：Mac 装 Docker Desktop(开机自启)+Node≥20 → 取 Runner token → 跑 `scripts/setup-mac-runner.sh <token>` → 确认 e2e-staging 绿 + localhost:3002 可访问
+- [x] **合并后清理 worktree** + 归档任务（本次会话完成）
 - [ ] **v2（另立 OpenSpec change）**：让数据丰富 E2E 真绿
 
 ## 上下文恢复提示

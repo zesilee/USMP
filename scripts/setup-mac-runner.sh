@@ -67,7 +67,7 @@ if [ ! -f config.sh ]; then
   tar xzf "$TARBALL"
   rm -f "$TARBALL"
 else
-  info "已存在 Runner 安装（$RUNNER_DIR），跳过下载。"
+  info "已存在 Runner 安装（${RUNNER_DIR}），跳过下载。"
 fi
 
 # ── 配置（幂等：已配置则先移除）───────────────
@@ -75,7 +75,7 @@ if [ -f .runner ]; then
   info "检测到已有配置，先移除旧注册…"
   ./config.sh remove --token "$RUNNER_TOKEN" || true
 fi
-info "注册 Runner（labels=$LABELS）…"
+info "注册 Runner（labels=${LABELS}）…"
 ./config.sh --unattended \
   --url "$REPO_URL" \
   --token "$RUNNER_TOKEN" \
@@ -89,9 +89,9 @@ info "安装为后台服务（登录自启）…"
 ./svc.sh start
 
 echo ""
-echo "✅ 完成。Runner「$RUNNER_NAME」已注册并作为服务运行（标签：$LABELS）。"
+echo "✅ 完成。Runner「${RUNNER_NAME}」已注册并作为服务运行（标签：${LABELS}）。"
 echo "   验证：仓库 → Settings → Actions → Runners 应显示为 Idle。"
 echo "   之后 merge→main 会自动触发 e2e-staging，部署并常驻本地 staging："
 echo "     前端 http://localhost:3002   后端 http://localhost:8080/api/v1"
 echo ""
-echo "   管理：cd $RUNNER_DIR && ./svc.sh {status|stop|start|uninstall}"
+echo "   管理：cd ${RUNNER_DIR} && ./svc.sh {status|stop|start|uninstall}"
