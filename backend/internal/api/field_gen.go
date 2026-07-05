@@ -25,6 +25,51 @@ func buildYangSchema(mod schema.Module) YangSchema {
 	return ys
 }
 
+// buildYangSchemaNested generates a *nested tree* form schema: containers become
+// type=group FieldDefs and lists become type=list FieldDefs, each carrying their
+// child fields in .Fields (recursively). This preserves structure that the flat
+// collectFields loses — required for list-in-list configs like VLAN member-ports.
+// R05: the whole tree is derived from the loaded YANG model, nothing hand-written.
+func buildYangSchemaNested(mod schema.Module) YangSchema {
+	vendor := mod.Vendor()
+	if vendor == "" {
+		vendor = vendorForNamespace(mod.Namespace())
+	}
+	ys := YangSchema{
+		Module: mod.Name(),
+		Title:  mod.Root().Name(),
+		Vendor: vendor,
+		Fields: []FieldDef{},
+	}
+	for _, ch := range mod.Root().Children() {
+		ys.Fields = append(ys.Fields, nodeToNestedField(ch))
+	}
+	return ys
+}
+
+// nodeToNestedField maps a schema node to a nested FieldDef tree.
+func nodeToNestedField(node schema.Node) FieldDef {
+	// 注意 case 顺序：list 节点同时满足 ListNode 与 ContainerNode 接口，
+	// 必须先判 ListNode（与扁平 collectFields 一致），否则 list 会被误判为 group。
+	switch n := node.(type) {
+	case schema.LeafNode:
+		return leafToField(n, "")
+	case schema.ListNode:
+		f := FieldDef{Path: n.Path(), Type: "list", Label: n.Name()}
+		for _, ch := range n.Children() {
+			f.Fields = append(f.Fields, nodeToNestedField(ch))
+		}
+		return f
+	case schema.ContainerNode:
+		f := FieldDef{Path: n.Path(), Type: "group", Label: n.Name()}
+		for _, ch := range n.Children() {
+			f.Fields = append(f.Fields, nodeToNestedField(ch))
+		}
+		return f
+	}
+	return FieldDef{Path: node.Path(), Label: node.Name(), Type: "string"}
+}
+
 // collectFields walks a schema node, appending a FieldDef for each leaf (grouped
 // under the nearest container/list name) and a ListCols entry for each list key.
 func collectFields(node schema.Node, group string, fields *[]FieldDef, listCols *[]FieldDef) {

@@ -31,6 +31,9 @@ type FieldDef struct {
 	Minimum     int         `json:"minimum,omitempty"`
 	Maximum     int         `json:"maximum,omitempty"`
 	Readonly    bool        `json:"readonly,omitempty"`
+	// Fields 承载嵌套子字段：type=group（单个嵌套对象）/ type=list（可重复列表）时非空。
+	// 由 ?form=nested 的嵌套 schema 生成，用于 member-ports 等 list-in-list 结构（R05）。
+	Fields []FieldDef `json:"fields,omitempty"`
 }
 
 // Option represents a select option
@@ -102,13 +105,19 @@ func (h *YangHandler) ListModules(c *gin.Context) {
 // @Summary  获取指定 YANG 模块的动态表单 schema
 // @Tags     yang
 // @Produce  json
-// @Param    module path string true "模块名"
+// @Param    module path  string true  "模块名"
+// @Param    form   query string false "nested 返回嵌套树 schema（保留 list-in-list 结构）"
 // @Success  200 {object} Response{data=YangSchema} "动态表单 schema"
 // @Router   /yang/schema/{module} [get]
 func (h *YangHandler) GetSchema(c *gin.Context) {
 	module := c.Param("module")
 
 	if mod, ok := h.manager.GetSchema().Module(module); ok {
+		// ?form=nested 返回嵌套树 schema（保留 list-in-list 结构，如 VLAN member-ports）
+		if c.Query("form") == "nested" {
+			Success(c, buildYangSchemaNested(mod), "Schema retrieved successfully")
+			return
+		}
 		Success(c, buildYangSchema(mod), "Schema retrieved successfully")
 		return
 	}

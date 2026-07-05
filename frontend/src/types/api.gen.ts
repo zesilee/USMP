@@ -335,7 +335,10 @@ export interface paths {
         /** 获取指定 YANG 模块的动态表单 schema */
         get: {
             parameters: {
-                query?: never;
+                query?: {
+                    /** @description nested 返回嵌套树 schema（保留 list-in-list 结构） */
+                    form?: string;
+                };
                 header?: never;
                 path: {
                     /** @description 模块名 */
@@ -401,6 +404,11 @@ export interface components {
         };
         "api.FieldDef": {
             default?: unknown;
+            /**
+             * @description Fields 承载嵌套子字段：type=group（单个嵌套对象）/ type=list（可重复列表）时非空。
+             *     由 ?form=nested 的嵌套 schema 生成，用于 member-ports 等 list-in-list 结构（R05）。
+             */
+            fields?: components["schemas"]["api.FieldDef"][];
             group?: string;
             label?: string;
             maximum?: number;
