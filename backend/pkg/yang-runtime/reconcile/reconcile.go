@@ -49,7 +49,7 @@ type DeviceClient interface {
 // GenericReconciler is a base implementation of Reconciler that handles the common
 // reconciliation pattern: get desired, get actual, compute diff, apply changes.
 type GenericReconciler struct {
-	configStore ConfigStore
+	configStore  ConfigStore
 	deviceClient DeviceClient
 	diffEngine   DiffEngine
 }
@@ -67,7 +67,7 @@ func NewGenericReconciler(
 	de DiffEngine,
 ) *GenericReconciler {
 	return &GenericReconciler{
-		configStore: cs,
+		configStore:  cs,
 		deviceClient: dc,
 		diffEngine:   de,
 	}
@@ -143,9 +143,10 @@ func (g *GenericReconciler) Reconcile(ctx context.Context, req Request) Result {
 		}
 	}
 
-	// All changes applied successfully
+	// All changes applied successfully; report the drift that was corrected.
 	return Result{
 		Requeue: false,
 		Error:   nil,
+		Changes: len(changes),
 	}
 }
