@@ -39,4 +39,12 @@ export const getSchema = (path: string) => {
   return api.get<ApiResponse<any>>(`/schema/${path}`)
 }
 
+// YANG 模块动态表单 schema。走 api 客户端（绝对 baseURL，staging 下 nginx 不代理 /api，
+// 故不能用裸相对 fetch）。form='nested' 返回嵌套树（保留 member-ports 等 list-in-list）。
+export const getYangSchema = (module: string, form?: 'nested') => {
+  return api.get<ApiResponse<any>>(`/yang/schema/${module}`, {
+    params: form ? { form } : {},
+  })
+}
+
 export default api

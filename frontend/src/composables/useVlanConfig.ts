@@ -1,5 +1,5 @@
 import { ref } from 'vue'
-import { getConfig, setConfig } from '../api'
+import { getConfig, setConfig, getYangSchema } from '../api'
 import type { Field } from '../utils/crdSchemaParser'
 
 // 华为 VLAN 配置路径。含 "vlan:" → 后端 convertToTypedStruct 路由到 convertMapToHuaweiVlan。
@@ -33,10 +33,9 @@ export function useVlanConfig() {
   const error = ref<string | null>(null)
 
   async function loadSchema() {
-    const res = await fetch('/api/v1/yang/schema/vlan?form=nested')
-    if (!res.ok) throw new Error(`HTTP ${res.status}`)
-    const body = await res.json()
-    fields.value = extractVlanItemFields(body?.data ?? body)
+    // 走 api 客户端（绝对 baseURL）——staging 的 nginx 不代理 /api，裸相对 fetch 会拿到 index.html。
+    const res = await getYangSchema('vlan', 'nested')
+    fields.value = extractVlanItemFields(res.data?.data)
   }
 
   async function loadVlans(ip: string) {
