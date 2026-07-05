@@ -37,12 +37,8 @@ func applyVlan(t *testing.T, cs *manager.InMemoryConfigStore, pool client.Client
 	t.Helper()
 	typed, err := convertMapToHuaweiVlan(map[string]interface{}{"vlans": vlansPayload})
 	assert.NoError(t, err)
-	// 走与 SetConfig 处理器一致的合并存储逻辑（防覆盖抹除）
-	var toStore interface{} = typed
-	if existing, gerr := cs.Get(deviceID, vlanPath); gerr == nil && existing != nil {
-		toStore = mergeConfig(existing, typed)
-	}
-	assert.NoError(t, cs.Set(deviceID, vlanPath, toStore))
+	// 走与 SetConfig 处理器一致的合并存储逻辑（带锁，防覆盖抹除 + 并发丢更新）
+	assert.NoError(t, storeConfigMerged(cs, deviceID, vlanPath, typed))
 	res := vlanctl.New(cs, pool).Reconcile(context.Background(), reconcile.Request{DeviceID: deviceID, Path: vlanPath})
 	if res.Error != nil {
 		t.Fatalf("reconcile: %v", res.Error)
