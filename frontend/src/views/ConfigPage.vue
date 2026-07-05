@@ -58,7 +58,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch, onMounted } from 'vue'
+import { ref, shallowRef, computed, watch, onMounted } from 'vue'
 import { useDeviceStore } from '../stores/device'
 import { useConfigPage } from '../composables/useConfigPage'
 import StatusBadge from '../components/common/StatusBadge.vue'
@@ -76,7 +76,9 @@ const props = defineProps<{
 const deviceStore = useDeviceStore()
 const devices = computed(() => deviceStore.devices)
 const selectedDevice = ref('')
-const configHook = ref<ReturnType<typeof useConfigPage> | null>(null)
+// shallowRef：不递归解包内部 ref，使 configHook.value.xxx.value 在类型与运行时都成立
+// （普通 ref 的 UnwrapRef 会把 useConfigPage 返回的内部 ref 解包，导致 .value 访问错位）
+const configHook = shallowRef<ReturnType<typeof useConfigPage> | null>(null)
 
 const drawerVisible = ref(false)
 const isEditing = ref(false)

@@ -76,13 +76,13 @@
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
 import { listDevices } from '../api'
-import type { DeviceInfo } from '../types/yang'
+import type { DeviceStatusDTO } from '../types/api'
 
 const emit = defineEmits<{
-  'select-device': [device: DeviceInfo]
+  'select-device': [device: DeviceStatusDTO]
 }>()
 
-const devices = ref<DeviceInfo[]>([])
+const devices = ref<DeviceStatusDTO[]>([])
 
 const totalDevices = computed(() => devices.value.length)
 const onlineDevices = computed(() => devices.value.length)
@@ -93,14 +93,14 @@ const refreshData = async () => {
   try {
     const res = await listDevices()
     if (res.data.success) {
-      devices.value = res.data.data.devices || []
+      devices.value = res.data.data?.devices ?? []
     }
   } catch (err) {
     console.error('Failed to refresh devices', err)
   }
 }
 
-const goToDevice = (device: DeviceInfo) => {
+const goToDevice = (device: DeviceStatusDTO) => {
   emit('select-device', device)
 }
 

@@ -7,7 +7,7 @@ export interface CRDItem {
   kind: string
   metadata: {
     name: string
-    creationTimestamp: string
+    creationTimestamp?: string // 服务端赋值，客户端 create 时不提供
     annotations?: Record<string, string>
     labels?: Record<string, string>
   }
@@ -188,7 +188,7 @@ export function useK8sCRD(group: string, version: string, plural: string, option
   }
 
   // Update an existing CRD item
-  const update = async (name: string, body: CRDItem): Promise<CRDItem> => {
+  const update = async (name: string, body: Partial<CRDItem>): Promise<CRDItem> => {
     return client.replaceCustomObject(group, version, plural, name, body, namespace)
   }
 
