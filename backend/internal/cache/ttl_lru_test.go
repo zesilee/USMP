@@ -1,6 +1,7 @@
 package cache
 
 import (
+	"sync"
 	"testing"
 	"time"
 
@@ -190,5 +191,34 @@ func TestTTLGetter(t *testing.T) {
 	c := NewTTLLRUCache(10, 30*time.Second, 0)
 	if c.TTL() != 30*time.Second {
 		t.Errorf("TTL() = %v, want 30s", c.TTL())
+	}
+}
+
+// TestGetWithAge_SameKeyConcurrent reproduces the race where concurrent GET
+// (miss -> Set) on the SAME key mutates one *entry in place while other
+// goroutines read it via GetWithAge/Get. Must be clean under -race.
+func TestGetWithAge_SameKeyConcurrent(t *testing.T) {
+	c := NewTTLLRUCache(10, time.Minute, 0)
+	c.Set("k", 0)
+	var wg sync.WaitGroup
+	for i := 0; i < 100; i++ {
+		wg.Add(3)
+		go func(n int) { defer wg.Done(); c.Set("k", n) }(i)
+		go func() { defer wg.Done(); c.GetWithAge("k") }()
+		go func() { defer wg.Done(); c.Get("k") }()
+	}
+	wg.Wait()
+}
+
+// TestGetWithAge_AfterLRUEviction: an evicted entry must report found=false.
+func TestGetWithAge_AfterLRUEviction(t *testing.T) {
+	c := NewTTLLRUCache(1, time.Minute, 0) // capacity 1
+	c.Set("a", "va")
+	c.Set("b", "vb") // evicts "a" (LRU)
+	if _, _, ok := c.GetWithAge("a"); ok {
+		t.Errorf("evicted key 'a' should report found=false")
+	}
+	if _, _, ok := c.GetWithAge("b"); !ok {
+		t.Errorf("key 'b' should be present")
 	}
 }

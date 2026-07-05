@@ -123,6 +123,7 @@ type DefaultManager struct {
 	schema          schema.Schema
 	clientPool      client.ClientPool
 	configStore     reconcile.ConfigStore
+	desiredCache    *cache.TTLLRUCache
 	runningCache    *cache.TTLLRUCache
 	reconcileStatus *status.Store
 	controllers     []controller.Controller
@@ -162,6 +163,7 @@ func New(opts ...Option) *DefaultManager {
 		schema:          s,
 		clientPool:      client.NewDefaultClientPool(options.ClientFactory),
 		configStore:     cs,
+		desiredCache:    desiredCache,
 		runningCache:    runningCache,
 		reconcileStatus: status.NewStore(),
 		controllers:     make([]controller.Controller, 0),
@@ -216,7 +218,8 @@ func (m *DefaultManager) Stop() error {
 		// Log but continue shutdown
 	}
 
-	// Stop the running-config cache cleanup goroutine (no leak).
+	// Stop both cache cleanup goroutines (no leak).
+	m.desiredCache.Stop()
 	m.runningCache.Stop()
 
 	m.cancel()
