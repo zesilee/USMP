@@ -51,7 +51,8 @@ fi
 # ──────────────────────────────────────────────
 # 3. 代码量限制 (≤500 行)
 # ──────────────────────────────────────────────
-STAT_LINE=$(git diff --cached --stat 2>/dev/null | tail -1 || true)
+# 体积只算「手写代码」，排除生成物/锁文件（lockfile、*.gen.ts、go.sum、openapi 中间产物）
+STAT_LINE=$(git diff --cached --stat -- . ':(exclude)**/package-lock.json' ':(exclude)**/*.gen.ts' ':(exclude)**/go.sum' ':(exclude)backend/docs/openapi/**' 2>/dev/null | tail -1 || true)
 if [ -n "$STAT_LINE" ]; then
   INSERTIONS=$(echo "$STAT_LINE" | grep -oE '[0-9]+ insertion' | grep -oE '[0-9]+' || echo "0")
   DELETIONS=$(echo "$STAT_LINE" | grep -oE '[0-9]+ deletion' | grep -oE '[0-9]+' || echo "0")

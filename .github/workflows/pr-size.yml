@@ -15,7 +15,9 @@ jobs:
 
       - name: Check PR Size
         run: |
-          STATS=$(git diff origin/main...HEAD --stat | tail -1)
+          # 体积只算「手写代码」，排除生成物/锁文件（lockfile、*.gen.ts、go.sum、openapi 中间产物）
+          EXCLUDE=(':(exclude)**/package-lock.json' ':(exclude)**/*.gen.ts' ':(exclude)**/go.sum' ':(exclude)backend/docs/openapi/**')
+          STATS=$(git diff origin/main...HEAD --stat -- . "${EXCLUDE[@]}" | tail -1)
           INSERTIONS=$(echo "$STATS" | grep -oE '[0-9]+ insertion' | grep -oE '[0-9]+' || echo "0")
           DELETIONS=$(echo "$STATS" | grep -oE '[0-9]+ deletion' | grep -oE '[0-9]+' || echo "0")
           TOTAL=$((INSERTIONS + DELETIONS))
