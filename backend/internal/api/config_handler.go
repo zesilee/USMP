@@ -560,6 +560,83 @@ func convertMapToHuaweiVlan(data map[string]interface{}) (*huawei.HuaweiVlan_Vla
 	return result, nil
 }
 
+// enumInt 把前端提交的枚举值转为 ygot 枚举整数值。兼容两种形式：
+//
+//	数字（旧路径，如 2）→ 直通；字符串枚举名（如 "up"）→ 经生成的 ΛEnum 反查。
+//
+// 表单动态渲染用字符串名（可读），故字符串路径是主用路径。
+func enumInt(v interface{}, enumTypeName string) (int64, bool) {
+	if num, ok := valueToUint(v); ok {
+		return int64(num), true
+	}
+	if s, ok := v.(string); ok {
+		if m, ok := huawei.ΛEnum[enumTypeName]; ok {
+			for val, def := range m {
+				if def.Name == s {
+					return val, true
+				}
+			}
+		}
+	}
+	return 0, false
+}
+
+// mapToMemberPorts 把端口成员列表转为 MemberPorts 结构。接受 [ {interface-name,
+// access-type, tag-mode} ... ]（或以 interface-name 为键的 map），按 interface-name 建键。
+func mapToMemberPorts(v interface{}) *huawei.HuaweiVlan_Vlan_Vlans_Vlan_MemberPorts {
+	mp := &huawei.HuaweiVlan_Vlan_Vlans_Vlan_MemberPorts{
+		MemberPort: map[string]*huawei.HuaweiVlan_Vlan_Vlans_Vlan_MemberPorts_MemberPort{},
+	}
+	add := func(m map[string]interface{}) {
+		port := &huawei.HuaweiVlan_Vlan_Vlans_Vlan_MemberPorts_MemberPort{}
+		for k, val := range m {
+			switch strings.ToLower(strings.ReplaceAll(k, "-", "")) {
+			case "interfacename":
+				if s, ok := val.(string); ok {
+					port.InterfaceName = &s
+				}
+			case "accesstype":
+				if n, ok := enumInt(val, "E_HuaweiVlan_AccessType"); ok {
+					port.AccessType = huawei.E_HuaweiVlan_AccessType(n)
+				}
+			case "tagmode":
+				if n, ok := enumInt(val, "E_HuaweiVlan_TagMode"); ok {
+					port.TagMode = huawei.E_HuaweiVlan_TagMode(n)
+				}
+			}
+		}
+		if port.InterfaceName != nil {
+			mp.MemberPort[*port.InterfaceName] = port
+		}
+	}
+	// member-ports 可能是 { "member-port": [...] } 包一层，先解包
+	if outer, ok := v.(map[string]interface{}); ok {
+		if inner, ok := outer["member-port"]; ok {
+			v = inner
+		} else if inner, ok := outer["memberPort"]; ok {
+			v = inner
+		}
+	}
+	switch list := v.(type) {
+	case []interface{}:
+		for _, it := range list {
+			if m, ok := it.(map[string]interface{}); ok {
+				add(m)
+			}
+		}
+	case map[string]interface{}:
+		for _, it := range list {
+			if m, ok := it.(map[string]interface{}); ok {
+				add(m)
+			}
+		}
+	}
+	if len(mp.MemberPort) == 0 {
+		return nil
+	}
+	return mp
+}
+
 // mapEntryToVlan converts a single VLAN entry map to struct
 func mapEntryToVlan(m map[string]interface{}) *huawei.HuaweiVlan_Vlan_Vlans_Vlan {
 	result := &huawei.HuaweiVlan_Vlan_Vlans_Vlan{}
@@ -581,24 +658,28 @@ func mapEntryToVlan(m map[string]interface{}) *huawei.HuaweiVlan_Vlan_Vlans_Vlan
 				result.Description = &s
 			}
 		case "type":
-			if num, ok := valueToUint(v); ok {
-				result.Type = huawei.E_HuaweiVlan_VlanType(num)
+			if n, ok := enumInt(v, "E_HuaweiVlan_VlanType"); ok {
+				result.Type = huawei.E_HuaweiVlan_VlanType(n)
 			}
 		case "adminstatus":
-			if num, ok := valueToUint(v); ok {
-				result.AdminStatus = huawei.E_HuaweiVlan_AdminStatus(num)
+			if n, ok := enumInt(v, "E_HuaweiVlan_AdminStatus"); ok {
+				result.AdminStatus = huawei.E_HuaweiVlan_AdminStatus(n)
 			}
 		case "broadcastdiscard":
-			if num, ok := valueToUint(v); ok {
-				result.BroadcastDiscard = huawei.E_HuaweiVlan_EnableStatus(num)
+			if n, ok := enumInt(v, "E_HuaweiVlan_EnableStatus"); ok {
+				result.BroadcastDiscard = huawei.E_HuaweiVlan_EnableStatus(n)
 			}
 		case "unknownmulticastdiscard":
-			if num, ok := valueToUint(v); ok {
-				result.UnknownMulticastDiscard = huawei.E_HuaweiVlan_EnableStatus(num)
+			if n, ok := enumInt(v, "E_HuaweiVlan_EnableStatus"); ok {
+				result.UnknownMulticastDiscard = huawei.E_HuaweiVlan_EnableStatus(n)
+			}
+		case "memberports":
+			if mp := mapToMemberPorts(v); mp != nil {
+				result.MemberPorts = mp
 			}
 		case "maclearning":
-			if num, ok := valueToUint(v); ok {
-				result.MacLearning = huawei.E_HuaweiVlan_EnableStatus(num)
+			if n, ok := enumInt(v, "E_HuaweiVlan_EnableStatus"); ok {
+				result.MacLearning = huawei.E_HuaweiVlan_EnableStatus(n)
 			}
 		case "macagingtime":
 			if num, ok := valueToUint(v); ok {
@@ -606,12 +687,12 @@ func mapEntryToVlan(m map[string]interface{}) *huawei.HuaweiVlan_Vlan_Vlans_Vlan
 				result.MacAgingTime = &val
 			}
 		case "statisticenable":
-			if num, ok := valueToUint(v); ok {
-				result.StatisticEnable = huawei.E_HuaweiVlan_EnableStatus(num)
+			if n, ok := enumInt(v, "E_HuaweiVlan_EnableStatus"); ok {
+				result.StatisticEnable = huawei.E_HuaweiVlan_EnableStatus(n)
 			}
 		case "statisticdiscard":
-			if num, ok := valueToUint(v); ok {
-				result.StatisticDiscard = huawei.E_HuaweiVlan_EnableStatus(num)
+			if n, ok := enumInt(v, "E_HuaweiVlan_EnableStatus"); ok {
+				result.StatisticDiscard = huawei.E_HuaweiVlan_EnableStatus(n)
 			}
 		case "supervlan":
 			if num, ok := valueToUint(v); ok {
@@ -640,12 +721,12 @@ func mapToUnicastDiscard(m map[string]interface{}) *huawei.HuaweiVlan_Vlan_Vlans
 		key := strings.ToLower(strings.ReplaceAll(k, "-", ""))
 		switch key {
 		case "discard":
-			if num, ok := valueToUint(v); ok {
-				result.Discard = huawei.E_HuaweiVlan_EnableStatus(num)
+			if n, ok := enumInt(v, "E_HuaweiVlan_EnableStatus"); ok {
+				result.Discard = huawei.E_HuaweiVlan_EnableStatus(n)
 			}
 		case "maclearningenable":
-			if num, ok := valueToUint(v); ok {
-				result.MacLearningEnable = huawei.E_HuaweiVlan_EnableStatus(num)
+			if n, ok := enumInt(v, "E_HuaweiVlan_EnableStatus"); ok {
+				result.MacLearningEnable = huawei.E_HuaweiVlan_EnableStatus(n)
 			}
 		}
 	}
@@ -661,12 +742,12 @@ func mapToSuppression(m map[string]interface{}) *huawei.HuaweiVlan_Vlan_Vlans_Vl
 		key := strings.ToLower(strings.ReplaceAll(k, "-", ""))
 		switch key {
 		case "inbound":
-			if num, ok := valueToUint(v); ok {
-				result.Inbound = huawei.E_HuaweiVlan_EnableStatus(num)
+			if n, ok := enumInt(v, "E_HuaweiVlan_EnableStatus"); ok {
+				result.Inbound = huawei.E_HuaweiVlan_EnableStatus(n)
 			}
 		case "outbound":
-			if num, ok := valueToUint(v); ok {
-				result.Outbound = huawei.E_HuaweiVlan_EnableStatus(num)
+			if n, ok := enumInt(v, "E_HuaweiVlan_EnableStatus"); ok {
+				result.Outbound = huawei.E_HuaweiVlan_EnableStatus(n)
 			}
 		}
 	}
