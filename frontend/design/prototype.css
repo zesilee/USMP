@@ -212,7 +212,7 @@ select.inp{cursor:pointer;appearance:none;background-image:url("data:image/svg+x
 .grid-2{display:grid;grid-template-columns:1.4fr 1fr;gap:16px}
 
 /* ---------------- Config: model tree + table ---------------- */
-.cfg{display:grid;grid-template-columns:236px 1fr;gap:16px;align-items:start}
+.cfg{display:grid;grid-template-columns:288px 1fr;gap:16px;align-items:start}
 .tree{padding:8px}
 .tree-h{font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);font-weight:600;padding:8px 10px}
 .tree-item{padding:8px 11px;border-radius:var(--r-ctl);cursor:pointer;font-size:13px;color:var(--ink-2);display:flex;align-items:center;justify-content:space-between}
@@ -257,16 +257,17 @@ select.inp{cursor:pointer;appearance:none;background-image:url("data:image/svg+x
 .dva .was{color:var(--st-drift);text-decoration:line-through;opacity:.7}
 .tag-new{font-family:var(--f-sans);font-size:10px;font-weight:700;color:var(--st-conv);background:var(--st-conv-bg);padding:1px 6px;border-radius:4px;letter-spacing:.03em}
 
-/* YANG 架构树（当前模型，非全量）：节点 = 容器/列表/叶子 + 类型 */
-#modelTree{padding:6px 6px 4px}
-.ynode{display:flex;align-items:center;gap:8px;padding:5px 10px;border-radius:6px;font-size:12.5px;color:var(--ink-2)}
+/* YANG 架构树（当前模型，非全量）：节点 = 容器/列表/叶子 + 类型
+   内容超宽时横向滚动，保留全部信息、不换行不裁剪，支撑任意复杂模型 */
+#modelTree{padding:6px 6px 4px;overflow-x:auto}
+.ynode{display:flex;align-items:center;gap:8px;padding:5px 10px;border-radius:6px;font-size:12.5px;color:var(--ink-2);width:max-content;min-width:100%}
 .ynode:hover{background:var(--sunken)}
 .ynode .kind{font-size:9.5px;letter-spacing:.02em;font-weight:700;padding:1px 5px;border-radius:4px;flex-shrink:0}
 .ynode .kind.container{background:#EAEEF3;color:var(--ink-3)}
 .ynode .kind.list{background:var(--primary-weak);color:var(--primary-ink)}
 .ynode .kind.leaf{background:var(--st-conv-bg);color:var(--st-conv)}
 .ynode .nm{font-family:var(--f-mono);color:var(--ink);font-size:12px;white-space:nowrap}
-.ynode .rt{margin-left:auto;display:flex;align-items:center;justify-content:flex-end;flex-wrap:nowrap;gap:6px;flex-shrink:0}
+.ynode .rt{display:inline-flex;align-items:center;flex-wrap:nowrap;gap:6px;flex-shrink:0}
 .ynode .ty.keyt{background:var(--primary-weak);color:var(--primary-ink);font-weight:700;padding:0 5px;border-radius:4px;font-size:9.5px;letter-spacing:.02em}
 .ynode .ty{font-family:var(--f-mono);font-size:10.5px;color:var(--ink-3)}
 .ynode.ro{opacity:.5}
