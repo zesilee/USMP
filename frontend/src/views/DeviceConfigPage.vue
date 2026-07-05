@@ -29,9 +29,9 @@
     </el-table>
 
     <el-drawer v-model="drawerVisible" :title="editing ? '编辑' : addLabel" size="560px">
-      <el-form label-position="top" class="config-form">
+      <el-form ref="formRef" :model="formData" :rules="rules" label-position="top" class="config-form">
         <el-form-item v-for="field in cfg.fields.value" :key="field.path" :label="field.label"
-          :required="field.required">
+          :prop="keyOf(field)">
           <FieldRenderer :field="field" :model-value="formData[keyOf(field)]"
             @update:model-value="formData[keyOf(field)] = $event" />
         </el-form-item>
@@ -45,9 +45,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, onMounted } from 'vue'
+import { ref, reactive, computed, onMounted } from 'vue'
 import { Plus } from '@element-plus/icons-vue'
-import { ElMessage } from 'element-plus'
+import { ElMessage, type FormInstance, type FormRules } from 'element-plus'
 import { useDeviceStore } from '../stores/device'
 import { useDeviceConfig, type DeviceConfigOptions } from '../composables/useDeviceConfig'
 import type { Field } from '../utils/crdSchemaParser'
@@ -68,10 +68,29 @@ const drawerVisible = ref(false)
 const editing = ref(false)
 const submitting = ref(false)
 const formData = reactive<Record<string, any>>({})
+const formRef = ref<FormInstance>()
 
 function keyOf(f: Field): string {
   return f.path.split('/').filter(Boolean).pop() || f.path
 }
+
+// 由 schema 生成校验规则：主键(keyField)与 required 叶子必填；数值字段带 min/max 时校验范围。
+// 服务端仍有权威兜底(如 VLAN ID 1-4094)，此处提前拦截、行内提示。
+const rules = computed<FormRules>(() => {
+  const r: FormRules = {}
+  for (const f of cfg.fields.value) {
+    const key = keyOf(f)
+    const list: any[] = []
+    if (f.required || key === props.options.keyField) {
+      list.push({ required: true, message: `${f.label} 必填`, trigger: ['change', 'blur'] })
+    }
+    if (f.type === 'number' && (f.minimum != null || f.maximum != null)) {
+      list.push({ type: 'number', min: f.minimum, max: f.maximum, message: `${f.label} 超出范围`, trigger: ['change', 'blur'] })
+    }
+    if (list.length) r[key] = list
+  }
+  return r
+})
 
 function resetForm(seed: Record<string, any> = {}) {
   Object.keys(formData).forEach((k) => delete formData[k])
@@ -81,6 +100,7 @@ function resetForm(seed: Record<string, any> = {}) {
 function openAdd() {
   editing.value = false
   resetForm()
+  formRef.value?.clearValidate()
   drawerVisible.value = true
 }
 
@@ -92,6 +112,14 @@ function openEdit(row: Record<string, any>) {
 
 async function submit() {
   if (!selectedDevice.value) return
+  // 表单校验不通过则不提交（§9：不提交、行内提示 YANG 约束）
+  if (formRef.value) {
+    try {
+      await formRef.value.validate()
+    } catch {
+      return
+    }
+  }
   submitting.value = true
   try {
     await cfg.saveItem(selectedDevice.value, { ...formData })

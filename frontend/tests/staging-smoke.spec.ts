@@ -72,6 +72,19 @@ test.describe('部署冒烟 - 前端 SPA', () => {
     await expect(page.getByText('admin-status', { exact: false }).first()).toBeVisible({ timeout: 15000 })
   })
 
+  // 空表单提交应被前端校验拦截（§9：不提交、行内提示），不静默下发非法配置。
+  test('VLAN 表单缺主键(id)时下发应被校验拦截', async ({ page }) => {
+    await page.goto('/config/vlan', { waitUntil: 'networkidle' })
+    await page.locator('.el-select').first().click()
+    await page.locator('.el-select-dropdown__item', { hasText: '192.168.1.1' }).first().click()
+    await page.getByRole('button', { name: /新增 VLAN/ }).click()
+    await expect(page.getByText('admin-status', { exact: false }).first()).toBeVisible({ timeout: 15000 })
+
+    // 不填 id 直接点下发 → 行内「必填」校验提示出现（提交被拦，抽屉仍在）
+    await page.getByRole('button', { name: /下发/ }).click()
+    await expect(page.getByText('必填', { exact: false }).first()).toBeVisible({ timeout: 5000 })
+  })
+
   // 接口（华为 IFM）新增表单应由 YANG schema 动态渲染（与 VLAN 共用通用配置流 DeviceConfigPage）。
   test('接口新增表单应动态渲染出 YANG 字段', async ({ page }) => {
     await page.goto('/config/interface', { waitUntil: 'networkidle' })
