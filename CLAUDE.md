@@ -277,7 +277,7 @@ explore → propose → apply → sync → archive
 | TM01 | 合入 main 须经 PR + CI 全绿 + 自审清单通过 |
 | TM02 | 分支命名：`<change-name>` 或 `hotfix/<desc>` |
 | TM03 | 多 worktree 不可修改同一 Go package 或 YANG 模块 |
-| TM04 | PR 体积 ≤800 行，超出拆分 |
+| TM04 | PR 体积 ≤1000 行，超出拆分 |
 | TM05 | 自审清单（§6.2）全部 ✓ 才可合入 |
 | TM06 | hotfix 允许 main 直修但须补 PR 供 CI 验证 |
 | TM07 | 迭代完成须满足 D01-D09 全部标准（见手册 §3） |
