@@ -2,6 +2,7 @@ package api
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"log"
 	"strconv"
@@ -16,21 +17,60 @@ import (
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/reconcile"
 )
 
+// errDeviceNotConnected marks a fetch failure due to the device being offline,
+// so GetConfig can map it to 503 (vs 500 for other fetch errors).
+var errDeviceNotConnected = errors.New("device is not connected")
+
 // ConfigHandler handles configuration API requests
 type ConfigHandler struct {
 	manager manager.Manager
+	// fetch reads a device's running config at a path. Injectable so cache
+	// behaviour can be tested without a device/sim; defaults to fetchFromDevice.
+	fetch func(ctx context.Context, ip, path string) (interface{}, error)
 }
 
 // NewConfigHandler creates a new ConfigHandler
-func NewConfigHandler(manager manager.Manager) *ConfigHandler {
-	return &ConfigHandler{
-		manager: manager,
+func NewConfigHandler(mgr manager.Manager) *ConfigHandler {
+	h := &ConfigHandler{manager: mgr}
+	h.fetch = h.fetchFromDevice
+	return h
+}
+
+// fetchFromDevice reads running config from the device via the client pool.
+func (h *ConfigHandler) fetchFromDevice(ctx context.Context, ip, path string) (interface{}, error) {
+	cli, err := h.manager.GetClientPool().Get(client.DeviceConnectionInfo{IP: ip})
+	if err != nil {
+		return nil, err
 	}
+	if !cli.IsConnected() {
+		return nil, errDeviceNotConnected
+	}
+	result, err := cli.Get(ctx, path, client.WithDatastore("running"))
+	if err != nil {
+		return nil, err
+	}
+	return result.Data, nil
+}
+
+// runKey builds the running-cache key "ip|path", normalising a trailing slash
+// so "/vlans" and "/vlans/" map to the same entry.
+func runKey(ip, path string) string {
+	p := strings.TrimRight(path, "/")
+	if p == "" {
+		p = "/"
+	}
+	return ip + "|" + p
 }
 
 // ConfigGetData 是 GET /config 的 data 负载。Data 为动态 YANG 配置（结构随路径而变）。
+// Cached/CacheAgeSeconds/TTLSeconds/Source 描述数据新鲜度（供前端新鲜度环）。
+// 注意：命中缓存只表「配置新鲜度」，设备在线/离线判定走 /devices/:ip/status。
 type ConfigGetData struct {
-	Data interface{} `json:"data"`
+	Data            interface{} `json:"data"`
+	Cached          bool        `json:"cached"`
+	CacheAgeSeconds int         `json:"cache_age_seconds"`
+	TTLSeconds      int         `json:"ttl_seconds"`
+	Source          string      `json:"source"` // "device" | "cache"
 }
 
 // ReconcileInfo 描述下发后的异步对账触发状态。
@@ -59,40 +99,48 @@ type ConfigSetData struct {
 // @Router   /config/{ip}/{path} [get]
 func (h *ConfigHandler) GetConfig(c *gin.Context) {
 	ip := c.Param("ip")
-	path := c.Param("path")                // *path already includes leading slash
-	_ = c.Query("force_refresh") == "true" // TODO: Implement cache invalidation when we have caching
+	path := c.Param("path") // *path already includes leading slash
+	forceRefresh := c.Query("force_refresh") == "true"
 
-	// Get the device info from device handler
-	// We need to get it from the device registry
-	// For now, we just get the client from pool
-	pool := h.manager.GetClientPool()
+	rc := h.manager.GetRunningCache()
+	key := runKey(ip, path)
+	ttlSec := int(rc.TTL().Seconds())
 
-	cli, err := pool.Get(client.DeviceConnectionInfo{
-		IP: ip,
-	})
-	if err != nil {
-		Error(c, 500, "Failed to get device client: "+err.Error())
-		return
+	// Serve fresh cache (§8 TTL 30s) unless a refresh is forced. A hit reflects
+	// config freshness only; device liveness is /devices/:ip/status.
+	if !forceRefresh {
+		if val, age, ok := rc.GetWithAge(key); ok {
+			Success(c, ConfigGetData{
+				Data:            val,
+				Cached:          true,
+				CacheAgeSeconds: int(age.Seconds()),
+				TTLSeconds:      ttlSec,
+				Source:          "cache",
+			}, "Configuration retrieved (cached)")
+			return
+		}
 	}
 
-	if !cli.IsConnected() {
-		Error(c, 503, "Device is not connected")
-		return
-	}
-
-	// Create context with timeout
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
-	// Get configuration from device
-	result, err := cli.Get(ctx, path, client.WithDatastore("running"))
+	data, err := h.fetch(ctx, ip, path)
 	if err != nil {
+		if errors.Is(err, errDeviceNotConnected) {
+			Error(c, 503, "Device is not connected")
+			return
+		}
 		Error(c, 500, "Failed to get configuration: "+err.Error())
 		return
 	}
 
+	rc.Set(key, data)
 	Success(c, ConfigGetData{
-		Data: result.Data,
+		Data:            data,
+		Cached:          false,
+		CacheAgeSeconds: 0,
+		TTLSeconds:      ttlSec,
+		Source:          "device",
 	}, "Configuration retrieved")
 }
 
@@ -147,6 +195,11 @@ func (h *ConfigHandler) SetConfig(c *gin.Context) {
 		Error(c, 500, "Failed to store configuration: "+err.Error())
 		return
 	}
+
+	// Invalidate this device's cached running config (§8: 下发后主动失效), by
+	// prefix so any sub-path reads are cleared too. Only after a successful
+	// store — a rejected push must not evict good cache.
+	h.manager.GetRunningCache().InvalidatePrefix(ip + "|")
 
 	// Trigger immediate reconciliation
 	// The controller will:
