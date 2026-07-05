@@ -1,6 +1,6 @@
 export interface Field {
   path: string
-  type: 'string' | 'number' | 'boolean' | 'enum' | 'group'
+  type: 'string' | 'number' | 'boolean' | 'enum' | 'group' | 'list'
   label: string
   placeholder?: string
   required?: boolean
