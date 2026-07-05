@@ -28,7 +28,7 @@
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
 import { listDevices } from '../api'
-import { DeviceInfo } from '../types/yang'
+import type { DeviceStatusDTO } from '../types/api'
 
 const props = {
   label: 'label',
@@ -38,13 +38,13 @@ const props = {
 interface TreeNode {
   label: string
   key: string
-  device?: DeviceInfo
+  device?: DeviceStatusDTO
   yangPath?: string
   yangName?: string
   children?: TreeNode[]
 }
 
-const devices = ref<DeviceInfo[]>([])
+const devices = ref<DeviceStatusDTO[]>([])
 const treeData = computed(() => {
   return devices.value.map(device => ({
     label: device.ip,
@@ -77,7 +77,7 @@ const treeData = computed(() => {
 })
 
 const emit = defineEmits<{
-  'node-selected': [device: DeviceInfo, yangPath: string, yangName: string]
+  'node-selected': [device: DeviceStatusDTO, yangPath: string, yangName: string]
 }>()
 
 const handleNodeClick = (node: TreeNode) => {
@@ -90,7 +90,7 @@ const refreshDevices = async () => {
   try {
     const res = await listDevices()
     if (res.data.success) {
-      devices.value = res.data.data.devices || []
+      devices.value = res.data.data?.devices ?? []
     }
   } catch (err) {
     console.error('Failed to refresh devices', err)

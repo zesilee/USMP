@@ -59,6 +59,11 @@ jobs:
       - name: Lint
         run: npm run lint --if-present
 
+      # 类型检查（vue-tsc）：契约门禁的强制力所在。写错端点/字段（如 res.data.devices）
+      # 在此变编译错误、阻断合并。src/ 全量零类型错为准（tsconfig 排除 test/tests）。
+      - name: Typecheck
+        run: npm run typecheck
+
       # 单元测试：vitest（happy-dom），不含 Playwright E2E。
       - name: Unit tests
         run: npm run test

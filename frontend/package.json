@@ -9,6 +9,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
+    "typecheck": "vue-tsc --noEmit -p tsconfig.json",
     "gen:api": "openapi-typescript ../backend/docs/openapi/openapi3.json -o src/types/api.gen.ts",
     "test": "vitest run",
     "test:watch": "vitest",
@@ -37,7 +38,9 @@
     "happy-dom": "^20.9.0",
     "openapi-typescript": "^7.13.0",
     "sass": "^1.99.0",
+    "typescript": "^5.9.3",
     "vite": "^5.0.0",
-    "vitest": "^4.1.5"
+    "vitest": "^4.1.5",
+    "vue-tsc": "^2.2.12"
   }
 }
