@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>USMP · 交换机管理平台 — 设计原型</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="prototype.css">
+</head>
+<body>
+<div class="app">
+
+  <!-- ============ SIDEBAR ============ -->
+  <aside class="side">
+    <div class="brand">
+      <div class="brand-mark"></div>
+      <div>
+        <div class="brand-name">USMP</div>
+        <div class="brand-sub">Switch Fabric</div>
+      </div>
+    </div>
+    <nav class="nav">
+      <div class="nav-item active" data-view="dash">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        概览
+      </div>
+      <div class="nav-item" data-view="devices">
+        <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="6" rx="1.5"/><rect x="3" y="14" width="18" height="6" rx="1.5"/><path d="M7 7h.01M7 17h.01"/></svg>
+        设备管理
+      </div>
+      <div class="nav-group">业务网络配置</div>
+      <div class="nav-item" data-view="config">
+        <svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/><circle cx="9" cy="6" r="2" fill="var(--surface)"/><circle cx="15" cy="12" r="2" fill="var(--surface)"/><circle cx="8" cy="18" r="2" fill="var(--surface)"/></svg>
+        配置下发
+      </div>
+      <div class="nav-sub active" data-model="接口 (ifm)"><span class="dot"></span>接口</div>
+      <div class="nav-sub" data-model="VLAN (huawei-vlan)"><span class="dot"></span>VLAN</div>
+      <div class="nav-sub" data-model="路由 (openconfig-route)"><span class="dot"></span>路由</div>
+      <div class="nav-group">运维</div>
+      <div class="nav-item" data-view="logs">
+        <svg viewBox="0 0 24 24"><path d="M8 6h11M8 12h11M8 18h11"/><path d="M4 6h.01M4 12h.01M4 18h.01"/></svg>
+        操作日志
+      </div>
+      <div class="nav-item" data-view="settings">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9L17 7M7 17l-2.1 2.1"/></svg>
+        系统设置
+      </div>
+    </nav>
+    <div class="side-foot">
+      <span class="pulse-dot"></span>
+      Manager 运行中 · 3 控制器
+    </div>
+  </aside>
+
+  <!-- ============ MAIN ============ -->
+  <div class="main">
+    <header class="topbar">
+      <div class="crumb"><b id="crumb">概览</b></div>
+      <div class="scope">
+        <svg viewBox="0 0 24 24" stroke-linecap="round"><path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 12l9 4 9-4M3 17l9 4 9-4"/></svg>
+        总部数据中心 · 园区 A
+      </div>
+      <div class="top-spacer"></div>
+      <div class="fresh" title="缓存新鲜度 · TTL 30s 到期自动重拉（无数据库架构）">
+        <svg class="fresh-ring" viewBox="0 0 24 24">
+          <circle class="track" cx="12" cy="12" r="9"/>
+          <circle class="val" id="freshVal" cx="12" cy="12" r="9" stroke-dasharray="56.5" stroke-dashoffset="0"/>
+        </svg>
+        <div class="fresh-txt">缓存新鲜度<b><span id="freshSec">14</span>s / TTL 30s</b></div>
+      </div>
+      <button class="top-btn" title="告警"><svg viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg><span class="badge">3</span></button>
+      <div class="user">
+        <div class="avatar">A</div>
+        <div class="user-meta"><b>admin</b><span>网络管理员</span></div>
+      </div>
+    </header>
+
+    <div class="scroll">
+
+      <!-- ==================== DASHBOARD ==================== -->
+      <section class="view active" id="view-dash">
+        <div class="ph">
+          <div>
+            <h1>车队概览</h1>
+            <div class="sub">28 台设备 · 声明式对账实时同步 · 数据直读自 NETCONF / gNMI，不落库</div>
+          </div>
+          <div class="ph-actions">
+            <button class="btn btn-ghost"><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg>全量对账</button>
+            <button class="btn btn-pri" onclick="openDrawer()"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>下发配置</button>
+          </div>
+        </div>
+
+        <!-- hero: convergence (signature) + stat stack -->
+        <div class="grid-hero">
+          <div class="card conv">
+            <div class="conv-top">
+              <div class="conv-lead">
+                <div class="conv-pct">89<small>%</small></div>
+                <div class="conv-cap">车队<b>收敛率</b><br>期望态与实际态一致的设备占比</div>
+              </div>
+              <span class="chip recon"><span class="glyph"></span>3 台收敛中</span>
+            </div>
+            <div class="segbar" title="按收敛状态分段">
+              <span class="s-conv" style="flex-grow:22"></span>
+              <span class="s-recon" style="flex-grow:3"></span>
+              <span class="s-drift" style="flex-grow:2"></span>
+              <span class="s-off" style="flex-grow:1"></span>
+            </div>
+            <div class="legend">
+              <div class="legend-row"><span class="k" style="background:var(--st-conv)"></span>已收敛<span class="n">22</span></div>
+              <div class="legend-row"><span class="k" style="background:var(--st-recon)"></span>收敛中<span class="n">3</span></div>
+              <div class="legend-row"><span class="k" style="background:var(--st-drift)"></span>已漂移<span class="n">2</span></div>
+              <div class="legend-row"><span class="k" style="background:var(--st-off)"></span>离线<span class="n">1</span></div>
+            </div>
+          </div>
+
+          <div class="stat-stack">
+            <div class="card stat">
+              <div class="stat-k">在线设备</div>
+              <div class="stat-v">25<span class="u">/ 28</span> <span class="trend up">▲ +2</span></div>
+            </div>
+            <div class="card stat">
+              <div class="stat-k">待对账变更</div>
+              <div class="stat-v">3 <span class="trend warn">需处理</span></div>
+            </div>
+            <div class="card stat">
+              <div class="stat-k">今日下发</div>
+              <div class="stat-v">15 <span class="u">次 · 全部成功</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <!-- reconcile ledger (signature) -->
+          <div class="card">
+            <div class="card-h">
+              <h3>待对账设备 · 期望态 ↔ 实际态</h3>
+              <span class="meta">Reconciler 每 10s 轮询</span>
+            </div>
+            <div class="wrap-tbl">
+              <table class="tbl">
+                <thead><tr><th>设备</th><th>YANG 路径</th><th>差异（实际 → 期望）</th><th>状态</th></tr></thead>
+                <tbody>
+                  <tr>
+                    <td><div class="strong">Core-Switch-01</div><div class="mono" style="font-size:11.5px;color:var(--ink-3)">10.0.0.1</div></td>
+                    <td class="mono" style="font-size:11.5px">vlan/vlans/vlan[10]</td>
+                    <td class="diff"><span class="was">access</span><span class="arrow">→</span><span class="now">trunk</span></td>
+                    <td><span class="chip recon"><span class="glyph"></span>收敛中</span></td>
+                  </tr>
+                  <tr>
+                    <td><div class="strong">Access-Switch-03</div><div class="mono" style="font-size:11.5px;color:var(--ink-3)">10.0.2.13</div></td>
+                    <td class="mono" style="font-size:11.5px">ifm/interfaces/GE0/0/7</td>
+                    <td class="diff"><span class="was">mtu 1500</span><span class="arrow">→</span><span class="now">mtu 9000</span></td>
+                    <td><span class="chip drift"><span class="glyph"></span>已漂移</span></td>
+                  </tr>
+                  <tr>
+                    <td><div class="strong">Access-Switch-07</div><div class="mono" style="font-size:11.5px;color:var(--ink-3)">10.0.2.17</div></td>
+                    <td class="mono" style="font-size:11.5px">ifm/interfaces/GE0/0/2</td>
+                    <td class="diff"><span class="now">description "uplink-core"</span> <span class="tag-new">新增</span></td>
+                    <td><span class="chip recon"><span class="glyph"></span>收敛中</span></td>
+                  </tr>
+                  <tr>
+                    <td><div class="strong">Access-Switch-11</div><div class="mono" style="font-size:11.5px;color:var(--ink-3)">10.0.2.21</div></td>
+                    <td class="mono" style="font-size:11.5px">—</td>
+                    <td style="color:var(--ink-3)">会话中断，无法读取实际态</td>
+                    <td><span class="chip off"><span class="glyph"></span>离线</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- recent pushes -->
+          <div class="card">
+            <div class="card-h"><h3>最近下发</h3><button class="link" data-view="logs">查看全部</button></div>
+            <div class="wrap-tbl">
+              <table class="tbl">
+                <thead><tr><th>设备 · 操作</th><th>结果</th></tr></thead>
+                <tbody>
+                  <tr><td><div class="strong">Core-Switch-01</div><div style="font-size:12px;color:var(--ink-3)">VLAN 下发 · 14:30</div></td><td><span class="chip conv"><span class="glyph"></span>已收敛</span></td></tr>
+                  <tr><td><div class="strong">Access-Switch-03</div><div style="font-size:12px;color:var(--ink-3)">接口 MTU · 13:15</div></td><td><span class="chip conv"><span class="glyph"></span>已收敛</span></td></tr>
+                  <tr><td><div class="strong">Core-Switch-02</div><div style="font-size:12px;color:var(--ink-3)">接口描述 · 11:45</div></td><td><span class="chip conv"><span class="glyph"></span>已收敛</span></td></tr>
+                  <tr><td><div class="strong">Access-Switch-01</div><div style="font-size:12px;color:var(--ink-3)">路由下发 · 10:20</div></td><td><span class="chip off"><span class="glyph"></span>下发失败</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== DEVICES ==================== -->
+      <section class="view" id="view-devices">
+        <div class="ph">
+          <div><h1>设备管理</h1><div class="sub">直连 NETCONF (SSH 830) / gNMI · 会话状态实时刷新</div></div>
+          <div class="ph-actions">
+            <div class="field-search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg><input class="inp" placeholder="按 IP 或名称搜索"></div>
+            <select class="inp"><option>全部状态</option><option>在线</option><option>离线</option></select>
+            <select class="inp"><option>全部厂商</option><option>Huawei</option><option>H3C</option><option>Cisco</option></select>
+            <button class="btn btn-ghost"><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg>刷新</button>
+          </div>
+        </div>
+        <div class="card wrap-tbl">
+          <table class="tbl">
+            <thead><tr><th>IP 地址</th><th>名称</th><th>厂商 / 型号</th><th>会话</th><th>负载 (1h)</th><th>收敛态</th><th>最后同步</th><th></th></tr></thead>
+            <tbody id="devBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ==================== CONFIG ==================== -->
+      <section class="view" id="view-config">
+        <div class="ph">
+          <div><h1 id="cfgTitle">接口配置</h1><div class="sub">表单由 <span class="mono">ietf-interfaces / huawei-ifm</span> YANG 模型自动渲染 · 无手写表单</div></div>
+          <div class="ph-actions">
+            <select class="inp" style="width:210px"><option>Core-Switch-01 · 10.0.0.1</option><option>Access-Switch-03 · 10.0.2.13</option></select>
+            <button class="btn btn-pri" onclick="openDrawer()"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>新增接口</button>
+          </div>
+        </div>
+        <div class="cfg">
+          <div class="card tree">
+            <div class="tree-h">YANG 模型</div>
+            <div class="tree-item active"><span>接口<span class="path">ifm</span></span><span class="count-pill">48</span></div>
+            <div class="tree-item"><span>VLAN<span class="path">huawei-vlan</span></span><span class="count-pill">12</span></div>
+            <div class="tree-item"><span>路由<span class="path">oc-route</span></span><span class="count-pill">6</span></div>
+          </div>
+          <div class="card wrap-tbl">
+            <table class="tbl">
+              <thead><tr><th>接口名</th><th>描述</th><th>管理状态</th><th>MTU</th><th>收敛态</th><th></th></tr></thead>
+              <tbody>
+                <tr><td class="mono strong">GE0/0/1</td><td>uplink-to-core</td><td><span class="chip conv"><span class="glyph"></span>up</span></td><td class="mono">9000</td><td><span class="chip conv"><span class="glyph"></span>已收敛</span></td><td><div class="actions"><button class="link" onclick="openDrawer(true)">编辑</button></div></td></tr>
+                <tr><td class="mono strong">GE0/0/2</td><td>—</td><td><span class="chip conv"><span class="glyph"></span>up</span></td><td class="mono">1500</td><td><span class="chip recon"><span class="glyph"></span>收敛中</span></td><td><div class="actions"><button class="link" onclick="openDrawer(true)">编辑</button></div></td></tr>
+                <tr><td class="mono strong">GE0/0/7</td><td>to-access-03</td><td><span class="chip off"><span class="glyph"></span>down</span></td><td class="mono">1500</td><td><span class="chip drift"><span class="glyph"></span>已漂移</span></td><td><div class="actions"><button class="link" onclick="openDrawer(true)">编辑</button></div></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== LOGS ==================== -->
+      <section class="view" id="view-logs">
+        <div class="ph">
+          <div><h1>操作日志</h1><div class="sub">每条下发的对账结局都可追溯 · 保留于本地 JSON 元信息</div></div>
+          <div class="ph-actions">
+            <div class="field-search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg><input class="inp" placeholder="按设备 / 操作人搜索"></div>
+            <select class="inp"><option>全部结果</option><option>已收敛</option><option>下发失败</option></select>
+          </div>
+        </div>
+        <div class="card wrap-tbl">
+          <table class="tbl">
+            <thead><tr><th>时间</th><th>操作</th><th>设备</th><th>变更</th><th>操作人</th><th>对账结局</th></tr></thead>
+            <tbody>
+              <tr class="log-row"><td class="mono">14:30:25</td><td><div class="log-op"><div class="op-ico"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg></div>VLAN 配置</div></td><td class="strong">Core-Switch-01</td><td class="diff"><span class="was">access</span><span class="arrow">→</span><span class="now">trunk</span></td><td>admin</td><td><span class="chip conv"><span class="glyph"></span>已收敛</span></td></tr>
+              <tr class="log-row"><td class="mono">13:15:42</td><td><div class="log-op"><div class="op-ico"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="6" rx="1.5"/><rect x="3" y="14" width="18" height="6" rx="1.5"/></svg></div>接口 MTU</div></td><td class="strong">Access-Switch-03</td><td class="diff"><span class="was">1500</span><span class="arrow">→</span><span class="now">9000</span></td><td>admin</td><td><span class="chip conv"><span class="glyph"></span>已收敛</span></td></tr>
+              <tr class="log-row"><td class="mono">11:45:18</td><td><div class="log-op"><div class="op-ico"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="6" rx="1.5"/><rect x="3" y="14" width="18" height="6" rx="1.5"/></svg></div>接口描述</div></td><td class="strong">Core-Switch-02</td><td class="diff"><span class="now">"uplink-core"</span></td><td>user01</td><td><span class="chip conv"><span class="glyph"></span>已收敛</span></td></tr>
+              <tr class="log-row"><td class="mono">10:20:55</td><td><div class="log-op"><div class="op-ico"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg></div>路由配置</div></td><td class="strong">Access-Switch-01</td><td class="diff"><span class="now">0.0.0.0/0 → 10.0.0.254</span></td><td>admin</td><td><span class="chip off"><span class="glyph"></span>下发失败 · 会话超时</span></td></tr>
+              <tr class="log-row"><td class="mono">09:05:33</td><td><div class="log-op"><div class="op-ico"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg></div>VLAN 配置</div></td><td class="strong">Access-Switch-02</td><td class="diff"><span class="now">vlan 20 "guest"</span> <span class="tag-new">新增</span></td><td>user01</td><td><span class="chip conv"><span class="glyph"></span>已收敛</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ==================== SETTINGS ==================== -->
+      <section class="view" id="view-settings">
+        <div class="ph"><div><h1>系统设置</h1><div class="sub">连接与缓存策略 · 无数据库，运行配置实时读取</div></div></div>
+        <div class="set-grid">
+          <div class="card">
+            <div class="card-h"><h3>协议连接</h3></div>
+            <div class="card-b" style="padding-top:4px">
+              <div class="set-row"><div class="k"><b>NETCONF 端口</b><span>SSH over 830</span></div><div class="v">830</div></div>
+              <div class="set-row"><div class="k"><b>gNMI 端口</b><span>gRPC 遥测订阅</span></div><div class="v">9339 / 9340</div></div>
+              <div class="set-row"><div class="k"><b>断线重连</b><span>ClientPool 自动重试</span></div><div class="v"><span class="switch"></span></div></div>
+              <div class="set-row"><div class="k"><b>连接超时</b><span>单次请求上限</span></div><div class="v">15s</div></div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-h"><h3>缓存策略</h3><span class="meta">TTL + LRU · 内存</span></div>
+            <div class="card-b" style="padding-top:4px">
+              <div class="set-row"><div class="k"><b>缓存 TTL</b><span>过期自动重拉设备配置</span></div><div class="v">30s</div></div>
+              <div class="set-row"><div class="k"><b>LRU 容量</b><span>Key = 设备IP + YANG路径</span></div><div class="v">4096 条</div></div>
+              <div class="set-row"><div class="k"><b>下发后失效</b><span>edit-config 成功即清缓存</span></div><div class="v"><span class="switch"></span></div></div>
+              <div class="set-row"><div class="k"><b>持久化</b><span>运行配置不落库（R03）</span></div><div class="v" style="color:var(--ink-3)">禁用</div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</div>
+
+<!-- ============ CONFIG PUSH DRAWER (reconcile) ============ -->
+<div class="scrim" id="scrim" onclick="closeDrawer()"></div>
+<aside class="drawer" id="drawer">
+  <div class="drawer-h">
+    <div>
+      <h3 id="drawerTitle">新增接口</h3>
+      <div class="sub">Core-Switch-01 · 10.0.0.1 · huawei-ifm</div>
+    </div>
+    <button class="x" onclick="closeDrawer()"><svg viewBox="0 0 24 24" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  </div>
+  <div class="drawer-b" id="drawerBody">
+    <div class="yang-note">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>
+      下方字段与约束均由 YANG 模型自动生成。校验不通过不会下发；下发即触发对账。
+    </div>
+    <div class="form-row"><label>接口名<span class="req">*</span><span class="yp">/ifm:name</span></label><input class="inp" value="GE0/0/8"><div class="hint">pattern: (GE|XGE|Eth-Trunk)[0-9/]+</div></div>
+    <div class="form-row"><label>描述<span class="yp">/ifm:description</span></label><input class="inp" placeholder="最长 242 字符" value="to-access-08"></div>
+    <div class="form-row"><label>管理状态<span class="req">*</span><span class="yp">/ifm:admin-status</span></label><select class="inp"><option>up</option><option>down</option></select><div class="hint">enum · 由模型枚举渲染为下拉</div></div>
+    <div class="form-row"><label>MTU<span class="yp">/ifm:mtu</span></label><input class="inp mono" value="9000"><div class="hint">range: 46 .. 9600</div></div>
+
+    <div class="section-lbl">下发预览 · 期望态 ↔ 实际态</div>
+    <div class="dva">
+      <div class="dva-row"><div class="dk">接口名</div><div class="dv"><span class="now">GE0/0/8</span> <span class="tag-new">新增</span></div></div>
+      <div class="dva-row"><div class="dk">描述</div><div class="dv changed"><span class="now">"to-access-08"</span></div></div>
+      <div class="dva-row"><div class="dk">管理状态</div><div class="dv"><span class="now">up</span></div></div>
+      <div class="dva-row"><div class="dk">MTU</div><div class="dv changed"><span class="was">1500</span><span class="arrow">→</span><span class="now">9000</span></div></div>
+    </div>
+  </div>
+  <div class="drawer-f">
+    <button class="btn btn-ghost" onclick="closeDrawer()">取消</button>
+    <button class="btn btn-pri" id="pushBtn" onclick="doPush()"><svg viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></svg>下发并对账</button>
+  </div>
+</aside>
+
+<script src="prototype.js"></script>
+</body>
+</html>
