@@ -257,6 +257,29 @@ select.inp{cursor:pointer;appearance:none;background-image:url("data:image/svg+x
 .dva .was{color:var(--st-drift);text-decoration:line-through;opacity:.7}
 .tag-new{font-family:var(--f-sans);font-size:10px;font-weight:700;color:var(--st-conv);background:var(--st-conv-bg);padding:1px 6px;border-radius:4px;letter-spacing:.03em}
 
+/* simple form: 2-col row, segmented toggle, collapsible preview */
+.form-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:var(--r-ctl);overflow:hidden;background:var(--surface);width:100%}
+.seg-btn{flex:1;height:34px;border:none;background:none;font-family:inherit;font-size:13px;font-weight:600;color:var(--ink-2);cursor:pointer;transition:background .12s,color .12s;display:flex;align-items:center;justify-content:center;gap:6px}
+.seg-btn+.seg-btn{border-left:1px solid var(--line)}
+.seg-btn .sg{width:7px;height:7px;border-radius:50%;background:var(--line-strong)}
+.seg-btn.active{background:var(--primary-weak);color:var(--primary-ink)}
+.seg-btn.active[data-v="up"] .sg{background:var(--st-conv)}
+.seg-btn.active[data-v="down"] .sg{background:var(--st-off)}
+.seg-btn:hover:not(.active){background:var(--sunken);color:var(--ink)}
+.preview-head{width:100%;display:flex;align-items:center;justify-content:space-between;background:var(--sunken);border:1px solid var(--line);border-radius:var(--r-ctl);padding:11px 14px;cursor:pointer;font-family:inherit;font-size:12.5px;font-weight:600;color:var(--ink);margin-top:22px}
+.preview-head:hover{border-color:var(--line-strong)}
+.preview-head b{font-family:var(--f-mono);color:var(--primary)}
+.preview-head .chev{width:15px;height:15px;stroke:var(--ink-3);fill:none;stroke-width:1.8;transition:transform .2s}
+.preview-head.open .chev{transform:rotate(180deg)}
+.preview-body{margin-top:10px;display:none}
+.preview-body.open{display:block}
+.preview-empty{padding:16px;text-align:center;color:var(--ink-3);font-size:12.5px;border:1px dashed var(--line-strong);border-radius:var(--r-ctl)}
+.form-tip{font-size:11.5px;color:var(--ink-3);margin-top:18px;display:flex;align-items:center;gap:7px}
+.form-tip svg{width:14px;height:14px;stroke:var(--ink-3);fill:none;stroke-width:1.7;flex-shrink:0}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn:disabled:hover{background:var(--primary)}
+
 /* reconcile progress (post-push state, shown in drawer) */
 .recon-steps{display:flex;flex-direction:column;gap:2px;margin-top:6px}
 .rstep{display:flex;gap:12px;align-items:flex-start;padding:9px 0}

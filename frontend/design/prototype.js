@@ -33,12 +33,103 @@ function tickFresh(){
 }
 setInterval(tickFresh,1000);
 
+/* ---- 接口配置表（数据驱动，编辑可回填真实值）---- */
+const ifaces=[
+  {name:'GE0/0/1', description:'uplink-to-core', adminStatus:'up',   mtu:9000, conv:'conv',  convLabel:'已收敛'},
+  {name:'GE0/0/2', description:'',               adminStatus:'up',   mtu:1500, conv:'recon', convLabel:'收敛中'},
+  {name:'GE0/0/7', description:'to-access-03',   adminStatus:'down', mtu:1500, conv:'drift', convLabel:'已漂移'},
+];
+function renderIfaces(){
+  document.getElementById('ifBody').innerHTML=ifaces.map((r,i)=>`
+    <tr>
+      <td class="mono strong">${r.name}</td>
+      <td>${r.description||'<span style="color:var(--ink-3)">—</span>'}</td>
+      <td><span class="chip ${r.adminStatus==='up'?'conv':'off'}"><span class="glyph"></span>${r.adminStatus}</span></td>
+      <td class="mono">${r.mtu}</td>
+      <td><span class="chip ${r.conv}"><span class="glyph"></span>${r.convLabel}</span></td>
+      <td><div class="actions"><button class="link" onclick="openDrawer(${i})">编辑</button></div></td>
+    </tr>`).join('');
+}
+renderIfaces();
+
+/* ---- YANG 字段模型（表单据此自动渲染）---- */
+const ifmFields=[
+  {key:'name',        label:'接口名', yang:'/ifm:name',         type:'text',   required:true, hint:'GE / XGE / Eth-Trunk 开头', ph:'如 GE0/0/8'},
+  {key:'description', label:'描述',   yang:'/ifm:description',  type:'text',   hint:'最长 242 字符', ph:'可选'},
+  {key:'adminStatus', label:'管理状态', yang:'/ifm:admin-status', type:'enum', required:true, options:['up','down']},
+  {key:'mtu',         label:'MTU',    yang:'/ifm:mtu',          type:'number', required:true, hint:'46 – 9600', mono:true},
+];
+let formState={}, original={}, isEdit=false;
+const fmt=(k,v)=> k==='description'?`"${v}"`:v;
+
 /* ---- drawer ---- */
-function openDrawer(edit){
-  document.getElementById('drawerTitle').textContent=edit?'编辑接口 · GE0/0/1':'新增接口';
-  document.getElementById('pushBtn').innerHTML='<svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.7" stroke-linecap="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>下发并对账';
+function openDrawer(idx){
+  isEdit = typeof idx==='number';
+  const seed = isEdit ? {...ifaces[idx]} : {name:'',description:'',adminStatus:'up',mtu:1500};
+  formState = {...seed};
+  // 编辑：以设备实际态为基线做差异；新增：基线为空 → 填入即“新增”
+  original = isEdit ? {...ifaces[idx]} : {name:'',description:'',adminStatus:'',mtu:''};
+
+  document.getElementById('drawerTitle').textContent = isEdit ? `编辑接口 · ${seed.name}` : '新增接口';
+  document.getElementById('drawerSub').textContent = 'Core-Switch-01 · 10.0.0.1 · huawei-ifm';
+  // 重置底部按钮（doPush 会改写）
+  document.getElementById('cancelBtn').textContent='取消';
+  const pb=document.getElementById('pushBtn');
+  pb.style.display=''; pb.disabled=false;
+  pb.innerHTML='<svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.7" stroke-linecap="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>下发并对账';
+
+  renderForm();
   document.getElementById('scrim').classList.add('open');
   document.getElementById('drawer').classList.add('open');
+}
+function renderForm(){
+  const ctrl=f=>{
+    if(f.type==='enum') return `<div class="seg" data-key="${f.key}">`+
+      f.options.map(o=>`<button type="button" class="seg-btn${formState[f.key]===o?' active':''}" data-v="${o}"><span class="sg"></span>${o}</button>`).join('')+`</div>`;
+    return `<input class="inp${f.mono?' mono':''}" data-key="${f.key}" ${f.type==='number'?'inputmode="numeric"':''} value="${formState[f.key]??''}" placeholder="${f.ph||''}">`;
+  };
+  const row=f=>`<div class="form-row"><label>${f.label}${f.required?'<span class="req">*</span>':''}<span class="yp">${f.yang}</span></label>${ctrl(f)}${f.hint?`<div class="hint">${f.hint}</div>`:''}</div>`;
+  const [nameF,descF,statF,mtuF]=ifmFields;
+  document.getElementById('drawerBody').innerHTML=
+    row(nameF)+row(descF)+
+    `<div class="form-2">${row(statF)}${row(mtuF)}</div>`+
+    `<button type="button" class="preview-head" id="previewHead" onclick="togglePreview()"><span>下发预览 · <b id="diffCount">0</b> 项改动</span><svg class="chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>`+
+    `<div class="preview-body" id="previewBody"></div>`+
+    `<div class="form-tip"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>字段与约束由 YANG 模型生成，校验通过才会下发，下发即触发对账。</div>`;
+  // 绑定
+  document.querySelectorAll('#drawerBody .inp').forEach(el=>el.addEventListener('input',()=>{
+    formState[el.dataset.key]=el.value; renderPreview();
+  }));
+  document.querySelectorAll('#drawerBody .seg-btn').forEach(el=>el.addEventListener('click',()=>{
+    const k=el.parentElement.dataset.key;
+    el.parentElement.querySelectorAll('.seg-btn').forEach(b=>b.classList.remove('active'));
+    el.classList.add('active'); formState[k]=el.dataset.v; renderPreview();
+  }));
+  renderPreview();
+}
+function renderPreview(){
+  const changed=ifmFields.filter(f=>{
+    const nv=(formState[f.key]??'').toString().trim(), ov=(original[f.key]??'').toString();
+    return nv!==ov && nv!=='';
+  });
+  document.getElementById('diffCount').textContent=changed.length;
+  document.getElementById('previewBody').innerHTML = changed.length
+    ? '<div class="dva">'+changed.map(f=>{
+        const nv=formState[f.key], ov=original[f.key];
+        const isNew = ov===''||ov==null;
+        return `<div class="dva-row"><div class="dk">${f.label}</div><div class="dv changed">`+
+          (isNew?`<span class="now">${fmt(f.key,nv)}</span> <span class="tag-new">新增</span>`
+                :`<span class="was">${fmt(f.key,ov)}</span><span class="arrow">→</span><span class="now">${fmt(f.key,nv)}</span>`)+
+          `</div></div>`;
+      }).join('')+'</div>'
+    : '<div class="preview-empty">尚无改动 · 修改字段后在此预览下发差异</div>';
+  // 下发按钮：有改动 + 必填齐全才可点
+  const okReq = ifmFields.filter(f=>f.required).every(f=>(formState[f.key]??'').toString().trim()!=='');
+  document.getElementById('pushBtn').disabled = changed.length===0 || !okReq;
+}
+function togglePreview(){
+  document.getElementById('previewHead').classList.toggle('open');
+  document.getElementById('previewBody').classList.toggle('open');
 }
 function closeDrawer(){
   document.getElementById('scrim').classList.remove('open');
