@@ -61,6 +61,12 @@ func NewYangHandler(manager manager.Manager) *YangHandler {
 }
 
 // ListModules lists all supported YANG modules
+//
+// @Summary  列出所有支持的 YANG 模块
+// @Tags     yang
+// @Produce  json
+// @Success  200 {object} Response{data=[]YangModuleInfo} "模块列表"
+// @Router   /yang/modules [get]
 func (h *YangHandler) ListModules(c *gin.Context) {
 	s := h.manager.GetSchema()
 	modules := make([]YangModuleInfo, 0)
@@ -92,6 +98,13 @@ func (h *YangHandler) ListModules(c *gin.Context) {
 // GetSchema returns dynamic form schema for a specific YANG module. Modules
 // present in the loaded schema tree are rendered dynamically; a hard-coded
 // fallback (legacy aliases) is retained during migration (removed in task 2.5).
+//
+// @Summary  获取指定 YANG 模块的动态表单 schema
+// @Tags     yang
+// @Produce  json
+// @Param    module path string true "模块名"
+// @Success  200 {object} Response{data=YangSchema} "动态表单 schema"
+// @Router   /yang/schema/{module} [get]
 func (h *YangHandler) GetSchema(c *gin.Context) {
 	module := c.Param("module")
 
