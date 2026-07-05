@@ -104,6 +104,8 @@ type Manager interface {
 	GetClientPool() client.ClientPool
 	// GetConfigStore returns the desired configuration store
 	GetConfigStore() reconcile.ConfigStore
+	// GetRunningCache returns the TTL cache of device running-config reads
+	GetRunningCache() *cache.TTLLRUCache
 	// GetReconcileStatus returns a read-only view of most-recent reconcile outcomes
 	GetReconcileStatus() status.Reader
 	// GetPluginManager returns the plugin manager
@@ -121,6 +123,7 @@ type DefaultManager struct {
 	schema          schema.Schema
 	clientPool      client.ClientPool
 	configStore     reconcile.ConfigStore
+	runningCache    *cache.TTLLRUCache
 	reconcileStatus *status.Store
 	controllers     []controller.Controller
 	pluginManager   *plugin.Manager
@@ -145,16 +148,21 @@ func New(opts ...Option) *DefaultManager {
 		s = schema.NewSchema()
 	}
 
-	// Use the existing TTL+LRU cache as backing store for config store
-	// max entries 1000, cleanup every minute, entry TTL 5 minutes
-	cache := cache.NewTTLLRUCache(1000, 1*time.Minute, 5*time.Minute)
-	cs := NewInMemoryConfigStore(cache)
+	// Desired-config store: TTL+LRU cache, ttl=1min, cleanup every 5min.
+	desiredCache := cache.NewTTLLRUCache(1000, 1*time.Minute, 5*time.Minute)
+	cs := NewInMemoryConfigStore(desiredCache)
+
+	// Running-config read cache (§8): key = "ip|path", TTL 30s, invalidated on
+	// push. Separate instance from the desired store. Owned by the Manager so
+	// its cleanup goroutine is stopped in Stop() (no leak).
+	runningCache := cache.NewTTLLRUCache(4096, 30*time.Second, 1*time.Minute)
 
 	m := &DefaultManager{
 		options:         options,
 		schema:          s,
 		clientPool:      client.NewDefaultClientPool(options.ClientFactory),
 		configStore:     cs,
+		runningCache:    runningCache,
 		reconcileStatus: status.NewStore(),
 		controllers:     make([]controller.Controller, 0),
 		pluginManager:   plugin.NewManager(),
@@ -208,6 +216,9 @@ func (m *DefaultManager) Stop() error {
 		// Log but continue shutdown
 	}
 
+	// Stop the running-config cache cleanup goroutine (no leak).
+	m.runningCache.Stop()
+
 	m.cancel()
 	m.started = false
 	return nil
@@ -222,6 +233,11 @@ func (m *DefaultManager) AddController(ctrl controller.Controller) {
 		setter.SetStatusRecorder(m.reconcileStatus)
 	}
 	m.controllers = append(m.controllers, ctrl)
+}
+
+// GetRunningCache implements Manager interface
+func (m *DefaultManager) GetRunningCache() *cache.TTLLRUCache {
+	return m.runningCache
 }
 
 // GetReconcileStatus implements Manager interface
