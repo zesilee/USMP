@@ -84,4 +84,25 @@ test.describe('部署冒烟 - 前端 SPA', () => {
     // mtu 为 IFM 叶子名，schema 动态渲染才会出现
     await expect(page.getByText('mtu', { exact: false }).first()).toBeVisible({ timeout: 15000 })
   })
+
+  // 应用内（SPA）从 VLAN 导航到接口应加载各自模型（回归门禁）。
+  //
+  // 此前 VLAN/接口共用 DeviceConfigPage，vue-router 复用实例 → 切换后 schema 不重载 →
+  // 接口表单显示 VLAN 字段。之前的冒烟用 page.goto 全量重载各自页面，未走应用内导航故漏测。
+  // 此断言点侧栏在 SPA 内从 VLAN 切到接口，校验加载的是接口(mtu)而非 VLAN 字段。
+  test('SPA 内从 VLAN 切换到接口应加载接口模型（非沿用 VLAN）', async ({ page }) => {
+    await page.goto('/config/vlan', { waitUntil: 'networkidle' })
+    await expect(page.getByText('VLAN 配置', { exact: false }).first()).toBeVisible()
+
+    // 侧栏点「接口配置」——SPA 内导航（非整页重载）
+    await page.getByText('接口配置', { exact: false }).first().click()
+    await expect(page).toHaveURL(/config\/interface/)
+
+    await page.locator('.el-select').first().click()
+    await page.locator('.el-select-dropdown__item', { hasText: '192.168.1.1' }).first().click()
+    await page.getByRole('button', { name: /新增接口/ }).click()
+
+    // 接口独有字段 mtu 应出现（若仍沿用 VLAN schema 则不会有）
+    await expect(page.getByText('mtu', { exact: false }).first()).toBeVisible({ timeout: 15000 })
+  })
 })
