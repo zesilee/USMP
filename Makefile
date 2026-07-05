@@ -2,7 +2,7 @@
 # 用法: make <target>
 
 .PHONY: setup bootstrap test lint compliance hook-install hook-verify help \
-	staging-up staging-down staging-logs staging-ps e2e-local gen-contract
+	staging-up staging-down staging-logs staging-ps e2e-local gen-contract dev
 
 # 默认目标
 help: ## 显示所有可用目标
@@ -75,6 +75,9 @@ staging-ps: ## 查看 staging 容器状态
 
 staging-logs: ## 跟随 staging 日志
 	docker compose logs -f --tail=100
+
+dev: ## 本地全栈热循环（免 docker）：go run 后端(:8080) + vite dev 前端(:3000, HMR)
+	@bash scripts/dev.sh
 
 gen-contract: ## 生成 API 契约类型：Go 注解 → OpenAPI → 前端 TS（后端为唯一真源）
 	cd backend && go tool swag init -g main.go -o docs/openapi \
