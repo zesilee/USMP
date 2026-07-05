@@ -128,6 +128,13 @@ func (h *ConfigHandler) SetConfig(c *gin.Context) {
 		return
 	}
 
+	// 域约束校验（YANG 模型未编码的业务范围，如 VLAN ID 1-4094）——非法值必须被拒，
+	// 不能静默下发到设备（§9 前端表单校验的服务端权威兜底）。
+	if verr := validateConfig(desiredConfig); verr != nil {
+		Error(c, 400, "配置校验失败: "+verr.Error())
+		return
+	}
+
 	// Store the desired configuration in ConfigStore.
 	//
 	// 合并语义（防数据丢失）：UI 每次只提交单个 VLAN/接口，但对账把 desired 当「完整状态」。
@@ -158,6 +165,19 @@ func (h *ConfigHandler) SetConfig(c *gin.Context) {
 			Message:   "Configuration stored. Reconciliation will sync device state.",
 		},
 	}, "Configuration accepted - reconciliation in progress")
+}
+
+// validateConfig 对已转换的配置做 YANG 模型未编码的域约束校验。华为 VLAN 模型未在 schema
+// 里编码 VLAN ID 范围，故此处显式校验 1-4094（0/4095+ 为保留/非法，真机会拒绝或误配）。
+func validateConfig(cfg interface{}) error {
+	if v, ok := cfg.(*huawei.HuaweiVlan_Vlan_Vlans); ok {
+		for id := range v.Vlan {
+			if id < 1 || id > 4094 {
+				return fmt.Errorf("VLAN ID %d 超出有效范围 [1, 4094]", id)
+			}
+		}
+	}
+	return nil
 }
 
 // mergeConfig 把新提交的配置并入已存 desired（按列表主键 union），使增量 UI 提交不会
