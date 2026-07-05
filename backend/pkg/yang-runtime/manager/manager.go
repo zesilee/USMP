@@ -13,6 +13,7 @@ import (
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/predicate"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/reconcile"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/schema"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/status"
 )
 
 // InMemoryConfigStore is an in-memory ConfigStore implementation backed by TTL+LRU cache
@@ -103,6 +104,8 @@ type Manager interface {
 	GetClientPool() client.ClientPool
 	// GetConfigStore returns the desired configuration store
 	GetConfigStore() reconcile.ConfigStore
+	// GetReconcileStatus returns the store of most-recent reconcile outcomes
+	GetReconcileStatus() *status.Store
 	// GetPluginManager returns the plugin manager
 	GetPluginManager() *plugin.Manager
 	// AddPlugin adds a plugin
@@ -114,15 +117,16 @@ type Manager interface {
 
 // DefaultManager is the default implementation of Manager
 type DefaultManager struct {
-	options       Options
-	schema        schema.Schema
-	clientPool    client.ClientPool
-	configStore   reconcile.ConfigStore
-	controllers   []controller.Controller
-	pluginManager *plugin.Manager
-	started       bool
-	ctx           context.Context
-	cancel        context.CancelFunc
+	options         Options
+	schema          schema.Schema
+	clientPool      client.ClientPool
+	configStore     reconcile.ConfigStore
+	reconcileStatus *status.Store
+	controllers     []controller.Controller
+	pluginManager   *plugin.Manager
+	started         bool
+	ctx             context.Context
+	cancel          context.CancelFunc
 }
 
 // New creates a new DefaultManager with the given options
@@ -147,12 +151,13 @@ func New(opts ...Option) *DefaultManager {
 	cs := NewInMemoryConfigStore(cache)
 
 	m := &DefaultManager{
-		options:       options,
-		schema:        s,
-		clientPool:    client.NewDefaultClientPool(options.ClientFactory),
-		configStore:   cs,
-		controllers:   make([]controller.Controller, 0),
-		pluginManager: plugin.NewManager(),
+		options:         options,
+		schema:          s,
+		clientPool:      client.NewDefaultClientPool(options.ClientFactory),
+		configStore:     cs,
+		reconcileStatus: status.NewStore(),
+		controllers:     make([]controller.Controller, 0),
+		pluginManager:   plugin.NewManager(),
 	}
 
 	return m
@@ -208,9 +213,20 @@ func (m *DefaultManager) Stop() error {
 	return nil
 }
 
-// AddController implements Manager interface
+// AddController implements Manager interface.
+// If the controller can accept a status recorder, it is wired to the manager's
+// shared reconcile-status store so its outcomes become queryable. Controllers
+// that do not implement status.RecorderSetter simply do not record (R08).
 func (m *DefaultManager) AddController(ctrl controller.Controller) {
+	if setter, ok := ctrl.(status.RecorderSetter); ok {
+		setter.SetStatusRecorder(m.reconcileStatus)
+	}
 	m.controllers = append(m.controllers, ctrl)
+}
+
+// GetReconcileStatus implements Manager interface
+func (m *DefaultManager) GetReconcileStatus() *status.Store {
+	return m.reconcileStatus
 }
 
 // GetSchema implements Manager interface
