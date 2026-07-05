@@ -1,0 +1,28 @@
+name: Compliance Check (skip)
+
+# 「必需检查 + 路径过滤」的 GitHub 标准解法：compliance.yml 的重型 go test 只在后端代码
+# 变更时运行；本 workflow 在「非后端代码」变更（纯文档/前端/技能等）时以**同名 job**
+# (Test + Lint + Coverage) 直接报绿，使必需检查满足、docs PR 不被永远 pending 卡住合并，
+# 又不空跑 ~4-5min 后端测试。两处 paths 必须与 compliance.yml 严格互补。
+
+on:
+  push:
+    branches: ['*']
+    paths-ignore:
+      - 'backend/**'
+      - '.github/workflows/compliance.yml'
+      - '.github/workflows/compliance-skip.yml'
+  pull_request:
+    branches: [main]
+    paths-ignore:
+      - 'backend/**'
+      - '.github/workflows/compliance.yml'
+      - '.github/workflows/compliance-skip.yml'
+
+jobs:
+  compliance:
+    name: Test + Lint + Coverage
+    runs-on: ubuntu-latest
+    steps:
+      - name: 非后端变更，跳过重型合规测试
+        run: echo "No backend code changes — compliance test skipped (required check satisfied)."
