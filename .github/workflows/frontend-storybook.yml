@@ -1,0 +1,48 @@
+name: Frontend Storybook
+
+# 构建 Storybook（YANG 动态渲染组件的隔离展示环境）。构建通过即保证 stories 与
+# 组件契约一致、配置健康；产物可作为组件文档站发布（此处仅做构建门禁）。
+
+on:
+  pull_request:
+    paths:
+      - 'frontend/**'
+  push:
+    branches: [main]
+    paths:
+      - 'frontend/**'
+
+permissions:
+  contents: read
+
+jobs:
+  build-storybook:
+    name: Build Storybook
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: frontend/.nvmrc
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci --prefer-offline --no-audit --fund=false
+
+      - name: Build Storybook
+        run: npm run build-storybook
+
+      - name: Upload Storybook static
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: storybook-static
+          path: frontend/storybook-static/
+          retention-days: 7
+          if-no-files-found: ignore
