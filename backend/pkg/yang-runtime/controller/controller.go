@@ -7,6 +7,7 @@ import (
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/predicate"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/queue"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/reconcile"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/status"
 )
 
 // Source is the interface for event sources
@@ -52,6 +53,16 @@ type DefaultController struct {
 	started bool
 	// stopChan is used to signal workers to stop
 	stopChan chan struct{}
+	// recorder records the reconcile outcome per device+path after each run.
+	// Optional: nil means outcomes are not recorded (degradation, R08).
+	recorder status.Recorder
+}
+
+// SetStatusRecorder injects the reconcile-status recorder. Implements
+// status.RecorderSetter so the Manager can wire the shared store at
+// AddController time without changing existing call sites.
+func (c *DefaultController) SetStatusRecorder(r status.Recorder) {
+	c.recorder = r
 }
 
 // New creates a new DefaultController
@@ -181,6 +192,8 @@ func (c *DefaultController) worker(ctx context.Context) {
 func (c *DefaultController) process(ctx context.Context, req reconcile.Request) {
 	result := c.reconciler.Reconcile(ctx, req)
 
+	c.recordOutcome(req, result)
+
 	// Handle requeuing
 	switch {
 	case result.Requeue:
@@ -196,6 +209,30 @@ func (c *DefaultController) process(ctx context.Context, req reconcile.Request) 
 		// Success - forget the entry for rate limiting
 		c.queue.Forget(req)
 	}
+}
+
+// recordOutcome maps a reconcile Result to a coarse outcome and records it.
+// No-op when no recorder is set (R08 degradation).
+func (c *DefaultController) recordOutcome(req reconcile.Request, result reconcile.Result) {
+	if c.recorder == nil {
+		return
+	}
+	var (
+		outcome status.Outcome
+		diff    int
+	)
+	switch {
+	case result.Error != nil:
+		outcome = status.OutcomeError
+	case result.Requeue:
+		outcome = status.OutcomeReconciling
+	case result.Changes > 0:
+		outcome = status.OutcomeDrifted
+		diff = result.Changes
+	default:
+		outcome = status.OutcomeConverged
+	}
+	c.recorder.Record(req.DeviceID, req.Path, outcome, diff, result.Error)
 }
 
 // ControllerOptions contains options for creating a controller
