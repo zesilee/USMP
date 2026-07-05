@@ -7,7 +7,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
-	apiv1 "github.com/leezesi/usmp/backend/api/v1"
+	apiv1 "github.com/leezesi/usmp/backend/api/biz/v1"
 	"github.com/leezesi/usmp/backend/internal/generated/huawei"
 	"github.com/leezesi/usmp/backend/pkg/translator"
 )
@@ -16,9 +16,9 @@ func sampleInterfaceCR() *apiv1.BusinessInterface {
 	return &apiv1.BusinessInterface{
 		ObjectMeta: metav1.ObjectMeta{Name: "ge-1"},
 		Spec: apiv1.BusinessInterfaceSpec{
-			DeviceID:      "10.0.0.2:830",
-			InterfaceName: "GigabitEthernet0/0/1",
-			Description:   "uplink",
+			DeviceID:    "10.0.0.2:830",
+			IfName:      "GigabitEthernet0/0/1",
+			Description: "uplink",
 		},
 	}
 }

@@ -1,14 +1,14 @@
 package translator
 
 import (
-	bizv1 "github.com/leezesi/usmp/backend/api/v1"
+	bizv1 "github.com/leezesi/usmp/backend/api/biz/v1"
 )
 
 // HuaweiTranslator 华为交换机完整翻译器实现
 type HuaweiTranslator struct {
 	*BaseTranslator
-	vlanTrans      *HuaweiVlanTranslator
-	ifaceTrans     *HuaweiInterfaceTranslator
+	vlanTrans  *HuaweiVlanTranslator
+	ifaceTrans *HuaweiInterfaceTranslator
 }
 
 // NewHuaweiTranslator 创建华为翻译器
@@ -62,24 +62,20 @@ func (h *HuaweiTranslator) TranslateRoute(spec interface{}) (interface{}, error)
 		routeSpec = *ptr
 	}
 
-	// 华为路由配置是通过 CLI 或 huawei-ip YANG 模型下发
-	// 这里返回 map 格式供后续处理
+	// 华为路由配置经 CLI 或 huawei-ip YANG 模型下发；此处返回 map 供后续处理
+	// （Route 尚未 ygot 化，为 stub，后续完善）。
 	config := map[string]interface{}{
-		"destination": routeSpec.DestinationCIDR,
-		"type":        routeSpec.Type,
+		"destination": routeSpec.Destination,
 	}
 
-	if routeSpec.NextHopIP != "" {
-		config["nextHop"] = routeSpec.NextHopIP
-	}
-	if routeSpec.OutInterface != "" {
-		config["outInterface"] = routeSpec.OutInterface
+	if routeSpec.NextHop != "" {
+		config["nextHop"] = routeSpec.NextHop
 	}
 	if routeSpec.Preference > 0 {
 		config["preference"] = routeSpec.Preference
 	}
-	if routeSpec.Tag > 0 {
-		config["tag"] = routeSpec.Tag
+	if routeSpec.BfdEnabled {
+		config["bfdEnabled"] = true
 	}
 	if routeSpec.Description != "" {
 		config["description"] = routeSpec.Description
@@ -127,23 +123,16 @@ func (h *HuaweiTranslator) Validate(configType ConfigType, spec interface{}) err
 			routeSpec = *ptr
 		}
 
-		// 华为静态路由最大支持 255 条等价路由
-		// 优先级范围 1-255
-		if routeSpec.Preference > 255 {
-			return NewValidationError(h.vendor, ConfigTypeRoute, "preference",
-				"优先级必须在 1-255 范围内")
-		}
-
 		// 验证 CIDR 格式
-		if err := ValidateCIDR(routeSpec.DestinationCIDR); err != nil {
-			return NewValidationError(h.vendor, ConfigTypeRoute, "destinationCIDR",
+		if err := ValidateCIDR(routeSpec.Destination); err != nil {
+			return NewValidationError(h.vendor, ConfigTypeRoute, "destination",
 				err.Error())
 		}
 
 		// 验证下一跳 IP
-		if routeSpec.NextHopIP != "" {
-			if err := ValidateIP(routeSpec.NextHopIP); err != nil {
-				return NewValidationError(h.vendor, ConfigTypeRoute, "nextHopIP",
+		if routeSpec.NextHop != "" {
+			if err := ValidateIP(routeSpec.NextHop); err != nil {
+				return NewValidationError(h.vendor, ConfigTypeRoute, "nextHop",
 					err.Error())
 			}
 		}
