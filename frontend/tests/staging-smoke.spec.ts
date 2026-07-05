@@ -51,4 +51,24 @@ test.describe('部署冒烟 - 前端 SPA', () => {
     // 设备表格里出现种子设备 IP（证明 store→/api/v1/devices→表格 整条链路打通）
     await expect(page.getByText('192.168.1.1', { exact: false }).first()).toBeVisible({ timeout: 15000 })
   })
+
+  // VLAN 新增表单应由 YANG schema 动态渲染出字段（回归门禁）。
+  //
+  // 此前两次故障：① VLAN 走 Stack A K8s CRD 死路；② schema 用裸相对 fetch 被 nginx 拦成 index.html
+  // → 表单恒空。修复后 schema 走 api 客户端、表单由 /yang/schema/vlan?form=nested 动态渲染。
+  // 本断言进 /config/vlan → 选设备 → 新增 → 校验 schema 字段真实渲染，兜住「表单空」回归。
+  test('VLAN 新增表单应动态渲染出 YANG 字段', async ({ page }) => {
+    await page.goto('/config/vlan', { waitUntil: 'networkidle' })
+    await expect(page.getByText('VLAN 配置', { exact: false }).first()).toBeVisible()
+
+    // 选择种子设备（el-select 下拉项）
+    await page.locator('.el-select').first().click()
+    await page.locator('.el-select-dropdown__item', { hasText: '192.168.1.1' }).first().click()
+
+    // 打开新增抽屉
+    await page.getByRole('button', { name: /新增 VLAN/ }).click()
+
+    // 抽屉里出现 schema 驱动的字段（admin-status 为 YANG 叶子名，动态渲染才会有）
+    await expect(page.getByText('admin-status', { exact: false }).first()).toBeVisible({ timeout: 15000 })
+  })
 })
