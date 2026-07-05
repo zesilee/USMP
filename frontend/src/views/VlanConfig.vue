@@ -1,0 +1,151 @@
+<template>
+  <div class="vlan-config">
+    <div class="page-header">
+      <h2>VLAN 配置（华为）</h2>
+      <div class="header-actions">
+        <el-select v-model="selectedDevice" placeholder="选择设备" style="width: 220px" @change="reload">
+          <el-option v-for="d in store.devices" :key="d.id" :label="d.ip" :value="d.ip" />
+        </el-select>
+        <el-button type="primary" :icon="Plus" :disabled="!selectedDevice" @click="openAdd">
+          新增 VLAN
+        </el-button>
+      </div>
+    </div>
+
+    <el-alert v-if="vlan.error.value" :title="vlan.error.value" type="warning" :closable="false" show-icon
+      style="margin-bottom: 16px" />
+
+    <el-table :data="vlan.vlans.value" stripe v-loading="vlan.loading.value" class="vlan-table">
+      <el-table-column prop="id" label="VLAN ID" width="120" />
+      <el-table-column prop="name" label="名称" width="180" />
+      <el-table-column prop="description" label="描述" min-width="180" />
+      <el-table-column prop="admin-status" label="管理状态" width="120" />
+      <el-table-column label="操作" width="120" fixed="right">
+        <template #default="{ row }">
+          <el-button type="primary" size="small" link @click="openEdit(row)">编辑</el-button>
+        </template>
+      </el-table-column>
+      <template #empty>
+        <span>{{ selectedDevice ? '暂无 VLAN（点击新增 VLAN）' : '请先选择设备' }}</span>
+      </template>
+    </el-table>
+
+    <el-drawer v-model="drawerVisible" :title="editing ? '编辑 VLAN' : '新增 VLAN'" size="560px">
+      <el-form label-position="top" class="vlan-form">
+        <el-form-item v-for="field in vlan.fields.value" :key="field.path" :label="field.label"
+          :required="field.required">
+          <FieldRenderer :field="field" :model-value="formData[keyOf(field)]"
+            @update:model-value="formData[keyOf(field)] = $event" />
+        </el-form-item>
+      </el-form>
+      <template #footer>
+        <el-button @click="drawerVisible = false">取消</el-button>
+        <el-button type="primary" :loading="submitting" @click="submit">下发</el-button>
+      </template>
+    </el-drawer>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { ref, reactive, onMounted } from 'vue'
+import { Plus } from '@element-plus/icons-vue'
+import { ElMessage } from 'element-plus'
+import { useDeviceStore } from '../stores/device'
+import { useVlanConfig } from '../composables/useVlanConfig'
+import type { Field } from '../utils/crdSchemaParser'
+import FieldRenderer from '../components/config/FieldRenderer.vue'
+
+const store = useDeviceStore()
+const vlan = useVlanConfig()
+
+const selectedDevice = ref('')
+const drawerVisible = ref(false)
+const editing = ref(false)
+const submitting = ref(false)
+const formData = reactive<Record<string, any>>({})
+
+function keyOf(f: Field): string {
+  return f.path.split('/').filter(Boolean).pop() || f.path
+}
+
+function resetForm(seed: Record<string, any> = {}) {
+  Object.keys(formData).forEach((k) => delete formData[k])
+  Object.assign(formData, seed)
+}
+
+function openAdd() {
+  editing.value = false
+  resetForm()
+  drawerVisible.value = true
+}
+
+function openEdit(row: Record<string, any>) {
+  editing.value = true
+  resetForm({ ...row })
+  drawerVisible.value = true
+}
+
+async function submit() {
+  if (!selectedDevice.value) return
+  submitting.value = true
+  try {
+    await vlan.saveVlan(selectedDevice.value, { ...formData })
+    ElMessage.success('VLAN 配置已下发，正在对账')
+    drawerVisible.value = false
+    await vlan.loadVlans(selectedDevice.value)
+  } catch (e: any) {
+    ElMessage.error(e?.response?.data?.message || e?.message || '下发失败')
+  } finally {
+    submitting.value = false
+  }
+}
+
+function reload() {
+  if (selectedDevice.value) vlan.loadVlans(selectedDevice.value)
+}
+
+onMounted(async () => {
+  await store.fetchDevices()
+  try {
+    await vlan.loadSchema()
+  } catch {
+    /* schema 拉取失败不阻断页面 */
+  }
+})
+</script>
+
+<style scoped>
+.vlan-config {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.page-header h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: #303133;
+}
+
+.header-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.vlan-table {
+  background: #fff;
+  border-radius: 8px;
+}
+
+.vlan-form {
+  padding: 0 4px;
+}
+</style>
