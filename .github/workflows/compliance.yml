@@ -3,8 +3,13 @@ name: Compliance Check
 on:
   push:
     branches: ['*']
+    paths: &code-paths
+      - 'backend/**'
+      - '.github/workflows/compliance.yml'
+      - '.github/workflows/compliance-skip.yml'
   pull_request:
     branches: [main]
+    paths: *code-paths
 
 jobs:
   compliance:
