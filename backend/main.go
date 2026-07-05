@@ -17,6 +17,11 @@ import (
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/source"
 )
 
+// @title           USMP 交换机设备管理平台 API
+// @version         1.0
+// @description     无数据库、模型驱动的交换机配置管理 REST API（NETCONF/gNMI）。
+// @description     响应统一信封 {code,message,data,success}；此规格是前端 TS 类型的唯一真源（勿手改生成物）。
+// @BasePath        /api/v1
 func main() {
 	// Build the YANG schema tree from generated ygot models (huawei + openconfig)
 	// so the manager's schema tree is populated (fixes the empty-schema gap).

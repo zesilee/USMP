@@ -1,5 +1,6 @@
 import axios from 'axios'
 import type { ApiResponse } from '../types/yang'
+import type { ApiEnvelope, DeviceListData, DeviceConnStatus } from '../types/api'
 
 // API 基础配置
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8080/api/v1'
@@ -9,13 +10,14 @@ const api = axios.create({
   timeout: 15000,
 })
 
-// Device API
+// Device API —— 响应类型由后端 OpenAPI 契约生成（见 types/api.ts），
+// 写错字段（res.data.devices）会编译报错。
 export const listDevices = () => {
-  return api.get<ApiResponse<any[]>>('/devices')
+  return api.get<ApiEnvelope<DeviceListData>>('/devices')
 }
 
 export const getDeviceStatus = (ip: string) => {
-  return api.get<ApiResponse<{ running: boolean; connected: boolean }>>(`/devices/${ip}/status`)
+  return api.get<ApiEnvelope<DeviceConnStatus>>(`/devices/${ip}/status`)
 }
 
 // Config API - 通用 YANG 配置接口
