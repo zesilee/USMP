@@ -128,12 +128,14 @@ function renderConfig(key){
   renderTree(m); renderTable(m);
 }
 function renderTree(m){
+  const keyName=(m.tree.find(x=>x.kind==='list'&&x.key)||{}).key;
   document.getElementById('modelTree').innerHTML=m.tree.map(nd=>{
     let right='';
-    if(nd.kind==='list') right=(nd.key?`<span class="ty">key ${nd.key}</span>`:'')+`<span class="count-pill">${m.count}</span>`;
+    if(nd.kind==='list') right=nd.key?`<span class="count-pill">${m.count}</span>`:'';
+    else if(nd.n===keyName) right=`<span class="ty keyt">key</span><span class="ty">${nd.ty||''}</span>`;
     else if(nd.ty) right=`<span class="ty">${nd.ty}</span>`;
     return `<div class="ynode${nd.f?' cfg':''}${nd.ro?' ro':''}" style="padding-left:${10+nd.d*14}px"><span class="kind ${nd.kind}">${kindLabel[nd.kind]}</span><span class="nm">${nd.n}</span><span class="rt">${right}</span></div>`;
-  }).join('')+'<div class="tree-foot">绿色叶子＝可配置字段，灰色＝只读状态</div>';
+  }).join('')+'<div class="tree-foot">绿色＝可配置字段 · 灰色＝只读</div>';
 }
 function renderTable(m){
   document.getElementById('cfgHead').innerHTML='<tr>'+m.cols.map(c=>`<th>${c.label}</th>`).join('')+'<th></th></tr>';
