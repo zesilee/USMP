@@ -25,38 +25,55 @@ func (s *stubReconciler) Reconcile(ctx context.Context, req reconcile.Request) r
 // and asserts a reconcile outcome flows all the way into the manager's
 // queryable status store: AddController injection -> worker -> process ->
 // recordOutcome -> Store. Proves the whole PR-B1 write path together.
+//
+// Covers the two settling outcomes (Requeue:false, deterministic). The
+// requeue-based outcomes (error/reconciling) keep re-enqueuing, so they are
+// covered deterministically at the recordOutcome unit level instead
+// (controller.TestProcess_OutcomePriority) rather than raced here.
 func TestReconcileStatus_EndToEnd(t *testing.T) {
-	mgr := manager.New()
-	q := queue.NewRateLimitingQueue(queue.DefaultRateLimiter())
-	// Changes>0, no error/requeue -> drifted (detected & corrected).
-	rec := &stubReconciler{result: reconcile.Result{Requeue: false, Changes: 3}}
-	c := controller.New("vlan", nil, rec, q, nil, 1)
-
-	mgr.AddController(c) // wires the controller to the manager's shared store
-
-	ctx, cancel := context.WithCancel(context.Background())
-	defer cancel()
-	assert.NoError(t, c.Start(ctx))
-	defer c.Stop()
-
-	c.Enqueue(predicate.Event{
-		DeviceID: "10.0.0.1",
-		Path:     "/vlans",
-		Type:     predicate.UpdateEvent,
-	})
-
-	var (
-		st status.Status
-		ok bool
-	)
-	for i := 0; i < 100; i++ {
-		if st, ok = mgr.GetReconcileStatus().Get("10.0.0.1", "/vlans"); ok {
-			break
-		}
-		time.Sleep(10 * time.Millisecond)
+	cases := []struct {
+		name     string
+		result   reconcile.Result
+		wantOut  status.Outcome
+		wantDiff int
+	}{
+		{"drifted", reconcile.Result{Requeue: false, Changes: 3}, status.OutcomeDrifted, 3},
+		{"converged", reconcile.Result{Requeue: false, Changes: 0}, status.OutcomeConverged, 0},
 	}
+	for _, tc := range cases {
+		t.Run(tc.name, func(t *testing.T) {
+			mgr := manager.New()
+			q := queue.NewRateLimitingQueue(queue.DefaultRateLimiter())
+			rec := &stubReconciler{result: tc.result}
+			c := controller.New("vlan", nil, rec, q, nil, 1)
 
-	assert.True(t, ok, "reconcile outcome should be recorded and queryable via the manager")
-	assert.Equal(t, status.OutcomeDrifted, st.Outcome)
-	assert.Equal(t, 3, st.DiffCount)
+			mgr.AddController(c) // wires controller to the manager's shared store
+
+			ctx, cancel := context.WithCancel(context.Background())
+			defer cancel()
+			assert.NoError(t, c.Start(ctx))
+			defer c.Stop()
+
+			c.Enqueue(predicate.Event{
+				DeviceID: "10.0.0.1",
+				Path:     "/vlans",
+				Type:     predicate.UpdateEvent,
+			})
+
+			var (
+				st status.Status
+				ok bool
+			)
+			for i := 0; i < 100; i++ {
+				if st, ok = mgr.GetReconcileStatus().Get("10.0.0.1", "/vlans"); ok {
+					break
+				}
+				time.Sleep(10 * time.Millisecond)
+			}
+
+			assert.True(t, ok, "reconcile outcome should be recorded and queryable via the manager")
+			assert.Equal(t, tc.wantOut, st.Outcome)
+			assert.Equal(t, tc.wantDiff, st.DiffCount)
+		})
+	}
 }

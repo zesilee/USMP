@@ -96,3 +96,28 @@ func TestProcess_NilRecorderNoPanic(t *testing.T) {
 func TestDefaultController_IsRecorderSetter(t *testing.T) {
 	var _ status.RecorderSetter = (*DefaultController)(nil)
 }
+
+// TestProcess_OutcomePriority locks the mapping precedence Error > Requeue >
+// Changes, so a future reconciler that returns combined signals is recorded
+// with the most severe outcome.
+func TestProcess_OutcomePriority(t *testing.T) {
+	cases := []struct {
+		name   string
+		result reconcile.Result
+		want   status.Outcome
+	}{
+		{"error beats changes", reconcile.Result{Error: errors.New("x"), Changes: 5}, status.OutcomeError},
+		{"error beats requeue", reconcile.Result{Requeue: true, Error: errors.New("x")}, status.OutcomeError},
+		{"requeue beats changes", reconcile.Result{Requeue: true, Changes: 5}, status.OutcomeReconciling},
+	}
+	for _, tc := range cases {
+		t.Run(tc.name, func(t *testing.T) {
+			req := reconcile.Request{DeviceID: "10.0.0.1", Path: "/vlans"}
+			mr := &MockReconciler{}
+			mr.On("Reconcile", mock.Anything, req).Return(tc.result).Once()
+			rec := &fakeRecorder{}
+			newCtrlWithRecorder(mr, rec).process(context.Background(), req)
+			assert.Equal(t, tc.want, rec.outcome)
+		})
+	}
+}

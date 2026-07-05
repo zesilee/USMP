@@ -43,6 +43,14 @@ type Recorder interface {
 	Record(deviceID, path string, outcome Outcome, diffCount int, err error)
 }
 
+// Reader is the read-only view of the store, handed to consumers that must
+// not mutate reconcile status (e.g. API handlers). *Store satisfies it.
+type Reader interface {
+	Get(deviceID, path string) (Status, bool)
+	ListByDevice(deviceID string) []Status
+	Snapshot() []Status
+}
+
 // RecorderSetter is implemented by controllers that can accept a Recorder.
 // The Manager injects the shared store via this optional interface, so
 // controllers that do not implement it simply do not record (degradation).

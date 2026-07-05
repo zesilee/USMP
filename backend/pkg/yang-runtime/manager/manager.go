@@ -104,8 +104,8 @@ type Manager interface {
 	GetClientPool() client.ClientPool
 	// GetConfigStore returns the desired configuration store
 	GetConfigStore() reconcile.ConfigStore
-	// GetReconcileStatus returns the store of most-recent reconcile outcomes
-	GetReconcileStatus() *status.Store
+	// GetReconcileStatus returns a read-only view of most-recent reconcile outcomes
+	GetReconcileStatus() status.Reader
 	// GetPluginManager returns the plugin manager
 	GetPluginManager() *plugin.Manager
 	// AddPlugin adds a plugin
@@ -225,7 +225,7 @@ func (m *DefaultManager) AddController(ctrl controller.Controller) {
 }
 
 // GetReconcileStatus implements Manager interface
-func (m *DefaultManager) GetReconcileStatus() *status.Store {
+func (m *DefaultManager) GetReconcileStatus() status.Reader {
 	return m.reconcileStatus
 }
 

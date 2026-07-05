@@ -52,15 +52,19 @@ var outcomeSeverity = map[status.Outcome]int{
 	status.OutcomeError:       4,
 }
 
-// rollup returns the worst outcome and most recent run across a set of statuses.
+// rollup returns the worst outcome across a set of statuses and the most recent
+// run time among entries at that worst outcome (so Outcome and LastRun are
+// consistent — LastRun tells you when the reported worst state was observed).
 func rollup(list []status.Status) (status.Outcome, time.Time) {
 	worst := status.OutcomeUnknown
-	var last time.Time
 	for _, st := range list {
 		if outcomeSeverity[st.Outcome] > outcomeSeverity[worst] {
 			worst = st.Outcome
 		}
-		if st.LastRun.After(last) {
+	}
+	var last time.Time
+	for _, st := range list {
+		if st.Outcome == worst && st.LastRun.After(last) {
 			last = st.LastRun
 		}
 	}

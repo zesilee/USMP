@@ -114,3 +114,23 @@ func TestStore_Concurrent(t *testing.T) {
 	}
 	wg.Wait()
 }
+
+// TestStore_RecordClearsLastError fixes the documented contract: a later record
+// with nil err must clear a previously set LastError.
+func TestStore_RecordClearsLastError(t *testing.T) {
+	s := NewStore()
+	s.Record("10.0.0.1", "/vlans", OutcomeError, 0, errors.New("boom"))
+	if got, _ := s.Get("10.0.0.1", "/vlans"); got.LastError != "boom" {
+		t.Fatalf("precondition: LastError = %q, want boom", got.LastError)
+	}
+	s.Record("10.0.0.1", "/vlans", OutcomeConverged, 0, nil)
+	got, _ := s.Get("10.0.0.1", "/vlans")
+	if got.LastError != "" {
+		t.Errorf("LastError = %q, want cleared after nil-err record", got.LastError)
+	}
+}
+
+// TestStore_SatisfiesReader is a compile-time guard that *Store is a Reader.
+func TestStore_SatisfiesReader(t *testing.T) {
+	var _ Reader = NewStore()
+}
