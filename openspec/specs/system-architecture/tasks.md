@@ -4,7 +4,7 @@
 
 ## spec 与代码差异（迁移债）
 
-- [ ] **D1 双 CRD 树抢注同 group**：`api/v1` 与 `api/biz/v1` 均注册 `biz.usmp.io/v1`，BusinessVlan schema 不兼容。（部分进展：CRD 意图源统一走 api/v1 与 translator/Actor 同树；收敛到 api/biz/v1 被 D8 阻塞——Switch/Route 仍用 api/v1，见 crd-intent-source-stackb）
+- [x] **D1 双 CRD 树抢注同 group**：已消除——translator + crdsource 迁到部署权威 `api/biz/v1`（修复此前解码错位 bug：用户能设的 biz/v1 字段被忽略），删除 `api/v1` 整包（Route/Switch/Native/Vlan/Interface/groupversion），CRD 树统一 `api/biz/v1`+`api/core/v1`（converge-crd-tree-bizv1）
 - [x] **D2 Actor 子系统 vs R01**：**生产使用清零**——Vlan+Interface Actor 下发路径已删（crd-intent-source-stackb 组4）；BusinessSwitch 探活改 ClientPool 直连、删死码 `vlan/actor_reconciler.go`（retire-actor-usage）→ `pkg/yang-runtime/actor` 无任何非测试引用，R01 实质满足。物理删包（4709 行，`model_actor.go` 单文件 1089 > pr-size 800）为机械清理债，同 `datastore.go`/`yang-schema.ts`
 - [ ] **D3 plugin 空转**：四类插件可注册但从不被调用
 - [x] **D4 schema 层空转**：已消除——`internal/yangschema.Load` 从 ygot 模型构建 schema 树、manager `WithSchema` 挂载、设备 capabilities 收敛模块集合（device-native-lowcode-config）
