@@ -13,11 +13,11 @@
 
 ## 2. 删除 api/v1（随后 PR，迁移后零引用）
 
-- [ ] 2.1 grep 确认 `api/v1` 无非自身引用
-- [ ] 2.2 删除 `api/v1/*`（6 文件；NativeDeviceConfig 死类型，真身 api/core/v1）
-- [ ] 2.3 `go build ./...` + `go test ./...` 绿
+- [x] 2.1 grep 确认 `api/v1` 无非自身引用
+- [x] 2.2 删除 `api/v1/*`（6 文件；NativeDeviceConfig 死类型，真身 api/core/v1）
+- [x] 2.3 `go build ./...` + `go test ./...` 绿
 
 ## 3. 收尾
 
-- [ ] 3.1 `system-architecture/tasks.md` 勾除 D1
-- [ ] 3.2 满足 R04（ygot 映射对齐生成模型）/R06（TDD）
+- [x] 3.1 `system-architecture/tasks.md` 勾除 D1
+- [x] 3.2 满足 R04（ygot 映射对齐生成模型）/R06（TDD）
