@@ -6,12 +6,14 @@ import (
 	"log"
 	"strconv"
 	"strings"
+	"sync"
 	"time"
 
 	"github.com/gin-gonic/gin"
 	"github.com/leezesi/usmp/backend/internal/generated/huawei"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/client"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/manager"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/reconcile"
 )
 
 // ConfigHandler handles configuration API requests
@@ -141,10 +143,7 @@ func (h *ConfigHandler) SetConfig(c *gin.Context) {
 	// 若直接覆盖，第二次下发会让对账删除设备上已有但本次未提交的条目。故先并入已存 desired
 	// （按 key union），使 desired 累积为完整意图。删除走独立 DELETE 端点，不经此路径。
 	configStore := h.manager.GetConfigStore()
-	if existing, gerr := configStore.Get(ip, path); gerr == nil && existing != nil {
-		desiredConfig = mergeConfig(existing, desiredConfig)
-	}
-	if err := configStore.Set(ip, path, desiredConfig); err != nil {
+	if err := storeConfigMerged(configStore, ip, path, desiredConfig); err != nil {
 		Error(c, 500, "Failed to store configuration: "+err.Error())
 		return
 	}
@@ -180,30 +179,49 @@ func validateConfig(cfg interface{}) error {
 	return nil
 }
 
+// configMergeMu 串行化 Get→merge→Set 临界区，避免并发下发时的丢更新与竞态（R09）。
+// 配置下发频率低，单锁足够；storeConfigMerged 是唯一并发写入口。
+var configMergeMu sync.Mutex
+
+// storeConfigMerged 原子地把 incoming 并入已存 desired 并存回（加锁串行化）。SetConfig
+// 与集成测试共用，保证「先读后并再写」不被并发打断。
+func storeConfigMerged(cs reconcile.ConfigStore, ip, path string, incoming interface{}) error {
+	configMergeMu.Lock()
+	defer configMergeMu.Unlock()
+	desired := incoming
+	if existing, gerr := cs.Get(ip, path); gerr == nil && existing != nil {
+		desired = mergeConfig(existing, incoming)
+	}
+	return cs.Set(ip, path, desired)
+}
+
 // mergeConfig 把新提交的配置并入已存 desired（按列表主键 union），使增量 UI 提交不会
-// 让声明式对账删除设备上已有条目。同键以新值覆盖（=编辑）。非列表类型（如 System 单例）
-// 无既有合并语义，直接返回新值。
+// 让声明式对账删除设备上已有条目。同键以新值覆盖（=编辑）。
+// 构造全新对象（不原地改共享 stored 对象），使并发读（对账器）不会读到正在变更的 map。
+// 非列表类型（如 System 单例）无既有合并语义，直接返回新值。
 func mergeConfig(existing, incoming interface{}) interface{} {
 	switch inc := incoming.(type) {
 	case *huawei.HuaweiVlan_Vlan_Vlans:
 		if ex, ok := existing.(*huawei.HuaweiVlan_Vlan_Vlans); ok && ex != nil {
-			if ex.Vlan == nil {
-				ex.Vlan = map[uint16]*huawei.HuaweiVlan_Vlan_Vlans_Vlan{}
+			merged := &huawei.HuaweiVlan_Vlan_Vlans{Vlan: map[uint16]*huawei.HuaweiVlan_Vlan_Vlans_Vlan{}}
+			for k, v := range ex.Vlan {
+				merged.Vlan[k] = v
 			}
 			for k, v := range inc.Vlan {
-				ex.Vlan[k] = v
+				merged.Vlan[k] = v
 			}
-			return ex
+			return merged
 		}
 	case *huawei.HuaweiIfm_Ifm_Interfaces:
 		if ex, ok := existing.(*huawei.HuaweiIfm_Ifm_Interfaces); ok && ex != nil {
-			if ex.Interface == nil {
-				ex.Interface = map[string]*huawei.HuaweiIfm_Ifm_Interfaces_Interface{}
+			merged := &huawei.HuaweiIfm_Ifm_Interfaces{Interface: map[string]*huawei.HuaweiIfm_Ifm_Interfaces_Interface{}}
+			for k, v := range ex.Interface {
+				merged.Interface[k] = v
 			}
 			for k, v := range inc.Interface {
-				ex.Interface[k] = v
+				merged.Interface[k] = v
 			}
-			return ex
+			return merged
 		}
 	}
 	return incoming
@@ -754,7 +772,7 @@ func mapEntryToVlan(m map[string]interface{}) *huawei.HuaweiVlan_Vlan_Vlans_Vlan
 				val := uint16(num)
 				result.SuperVlan = &val
 			}
-		case "unknownunicastdiscard":
+		case "unkownunicastdiscard", "unknownunicastdiscard": // YANG 模型拼写为 unkown（缺 n），兼容两种
 			if nested, ok := v.(map[string]interface{}); ok {
 				result.UnkownUnicastDiscard = mapToUnicastDiscard(nested)
 			}
