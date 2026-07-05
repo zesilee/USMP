@@ -1,5 +1,5 @@
 # 构建阶段
-FROM golang:1.21-alpine AS builder
+FROM golang:1.26-alpine AS builder
 
 WORKDIR /app
 
@@ -30,9 +30,10 @@ ENV TZ=Asia/Shanghai
 # 复制二进制文件
 COPY --from=builder /app/manager /manager
 
-# 暴露健康检查
-HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
-  CMD wget --no-verbose --tries=1 --spider http://localhost:8081/healthz || exit 1
+# 健康检查：命中真实存在的 GET 路由（服务监听 :8080，且无 /healthz）。
+# 用 GET（-O /dev/null）而非 --spider 的 HEAD —— gin 仅注册了 GET，HEAD 会 404。
+HEALTHCHECK --interval=30s --timeout=10s --start-period=10s --retries=3 \
+  CMD wget -q -O /dev/null http://localhost:8080/api/v1/yang/modules || exit 1
 
 # 非 root 用户运行
 RUN adduser -D usmp

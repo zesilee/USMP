@@ -1,0 +1,103 @@
+name: E2E Staging (self-hosted)
+
+# 端到端部署 + 验证 + 常驻 staging —— 在个人 Mac 自托管 Runner 上运行。
+#
+# 职责边界：
+#   • 基础质量门禁（compliance / commit-lint / pr-size / branch-name /
+#     sensitive-files / openspec / frontend-ci）仍在 GitHub 托管 Runner 上跑，是 PR 合并门禁。
+#   • 本工作流是「合并后」的重量级验证：把整套系统真正跑起来，跑真浏览器 E2E，然后保持常驻，
+#     成为随时可访问的本地 staging（前端 http://localhost:3002，后端 http://localhost:8080/api/v1）。
+#
+# E2E 门禁范围（v1）：navigation 真浏览器渲染 + 三容器健康 + 后端 API 冒烟。
+#   数据丰富的 vlan/interfaces/e2e-demo 规格暂不纳入门禁（它们断言的是当前后端未实现的接口契约，
+#   需应用级改造 + CRD 数据注入，另立 OpenSpec change 处理）。
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# 部署不叠加、不半路砍：一次跑完再跑下一次。
+concurrency:
+  group: e2e-staging
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  deploy-and-verify:
+    name: Build → Deploy → E2E → Keep running
+    runs-on: [self-hosted, macOS, macos-staging]
+    timeout-minutes: 30
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # 1) 构建三镜像（simulator / backend / frontend）
+      - name: Build images
+        run: docker compose build
+
+      # 2) 部署（detached）；restart: unless-stopped + 本步不 teardown ⇒ 作业结束后常驻
+      - name: Deploy (compose up)
+        run: docker compose up -d --remove-orphans
+
+      # 3) 等待后端与前端健康就绪（最长 ~120s）
+      - name: Wait for health
+        run: |
+          set -e
+          ok() { curl -fsS -o /dev/null "$1"; }
+          echo "waiting for backend :8080 ..."
+          for i in $(seq 1 40); do
+            if ok http://localhost:8080/api/v1/yang/modules; then echo "backend healthy"; break; fi
+            [ "$i" = "40" ] && { echo "::error::backend did not become healthy"; docker compose ps; docker compose logs --tail=80 backend; exit 1; }
+            sleep 3
+          done
+          echo "waiting for frontend :3002 ..."
+          for i in $(seq 1 20); do
+            if ok http://localhost:3002/healthz; then echo "frontend healthy"; break; fi
+            [ "$i" = "20" ] && { echo "::error::frontend did not become healthy"; docker compose ps; docker compose logs --tail=80 frontend; exit 1; }
+            sleep 3
+          done
+
+      # 4) 后端 API 冒烟：设备列表返回 200 且 success=true
+      - name: Backend API smoke
+        run: |
+          set -e
+          resp=$(curl -fsS http://localhost:8080/api/v1/devices)
+          echo "$resp"
+          echo "$resp" | grep -q '"success":true' || { echo "::error::/devices did not return success:true"; exit 1; }
+
+      # 4.5) 预热默认设备（best-effort）：注册即触发连接池建连，
+      #      让常驻 staging 打开就是「设备在线」状态。失败不阻断（连接是懒加载的）。
+      - name: Pre-warm default device (best-effort)
+        continue-on-error: true
+        run: |
+          curl -fsS -X POST http://localhost:8080/api/v1/devices \
+            -H 'Content-Type: application/json' \
+            -d '{"ip":"192.168.1.1","port":830,"username":"admin","password":"admin"}' || true
+
+      # 5) 真浏览器 E2E（部署冒烟规格，chromium）
+      #    playwright.config baseURL = http://localhost:3002 ⇒ 命中已部署的前端容器。
+      #    仅跑 staging-smoke（真实可稳定通过）；数据丰富的旧规格属 v2，见 docs/CICD.md。
+      - name: Playwright staging smoke (browser E2E)
+        working-directory: frontend
+        run: |
+          npm ci --prefer-offline --no-audit --fund=false
+          npx playwright install chromium
+          npx playwright test tests/staging-smoke.spec.ts --project=chromium --reporter=list
+
+      # 6) 归档 Playwright 报告（无论成败）
+      - name: Upload Playwright report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: frontend/playwright-report/
+          retention-days: 7
+          if-no-files-found: ignore
+
+      # 7) 打印最终常驻状态（供日志确认 staging 在跑）
+      - name: Staging status
+        if: always()
+        run: docker compose ps

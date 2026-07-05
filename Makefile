@@ -1,7 +1,8 @@
 # USMP Makefile — 标准开发命令
 # 用法: make <target>
 
-.PHONY: setup bootstrap test lint compliance hook-install hook-verify help
+.PHONY: setup bootstrap test lint compliance hook-install hook-verify help \
+	staging-up staging-down staging-logs staging-ps e2e-local
 
 # 默认目标
 help: ## 显示所有可用目标
@@ -57,3 +58,30 @@ lint: ## Go vet + Go fmt 检查
 
 compliance: lint test ## 完整合规检查 (lint + test)
 	@echo "✅ 合规检查全部通过"
+
+# ──────────────────────────────────────────────
+# 本地 Staging（docker-compose）—— 复现 e2e-staging 工作流
+# 详见 docs/CICD.md。需要 Docker（Mac 用 Docker Desktop）。
+# ──────────────────────────────────────────────
+staging-up: ## 构建并起本地 staging（simulator+backend+frontend，常驻）
+	docker compose up -d --build --remove-orphans
+	@echo "✅ staging 已启动 → 前端 http://localhost:3002  后端 http://localhost:8080/api/v1"
+
+staging-down: ## 停止并移除本地 staging
+	docker compose down
+
+staging-ps: ## 查看 staging 容器状态
+	docker compose ps
+
+staging-logs: ## 跟随 staging 日志
+	docker compose logs -f --tail=100
+
+e2e-local: ## 本地复现 CI：起 staging → 健康等待 → 浏览器冒烟
+	docker compose up -d --build --remove-orphans
+	@echo "waiting for backend/frontend health..."
+	@for i in $$(seq 1 40); do curl -fsS -o /dev/null http://localhost:8080/api/v1/yang/modules && break || sleep 3; done
+	@for i in $$(seq 1 20); do curl -fsS -o /dev/null http://localhost:3002/healthz && break || sleep 3; done
+	cd frontend && npm ci --prefer-offline --no-audit --fund=false && \
+		npx playwright install chromium && \
+		npx playwright test tests/staging-smoke.spec.ts --project=chromium --reporter=list
+	@echo "✅ e2e-local 通过（staging 仍在运行，make staging-down 可停止）"
