@@ -71,4 +71,17 @@ test.describe('部署冒烟 - 前端 SPA', () => {
     // 抽屉里出现 schema 驱动的字段（admin-status 为 YANG 叶子名，动态渲染才会有）
     await expect(page.getByText('admin-status', { exact: false }).first()).toBeVisible({ timeout: 15000 })
   })
+
+  // 接口（华为 IFM）新增表单应由 YANG schema 动态渲染（与 VLAN 共用通用配置流 DeviceConfigPage）。
+  test('接口新增表单应动态渲染出 YANG 字段', async ({ page }) => {
+    await page.goto('/config/interface', { waitUntil: 'networkidle' })
+    await expect(page.getByText('接口配置', { exact: false }).first()).toBeVisible()
+
+    await page.locator('.el-select').first().click()
+    await page.locator('.el-select-dropdown__item', { hasText: '192.168.1.1' }).first().click()
+    await page.getByRole('button', { name: /新增接口/ }).click()
+
+    // mtu 为 IFM 叶子名，schema 动态渲染才会出现
+    await expect(page.getByText('mtu', { exact: false }).first()).toBeVisible({ timeout: 15000 })
+  })
 })

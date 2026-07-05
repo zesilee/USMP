@@ -1,38 +1,36 @@
 <template>
-  <div class="vlan-config">
+  <div class="device-config">
     <div class="page-header">
-      <h2>VLAN 配置（华为）</h2>
+      <h2>{{ title }}</h2>
       <div class="header-actions">
         <el-select v-model="selectedDevice" placeholder="选择设备" style="width: 220px" @change="reload">
           <el-option v-for="d in store.devices" :key="d.id" :label="d.ip" :value="d.ip" />
         </el-select>
         <el-button type="primary" :icon="Plus" :disabled="!selectedDevice" @click="openAdd">
-          新增 VLAN
+          {{ addLabel }}
         </el-button>
       </div>
     </div>
 
-    <el-alert v-if="vlan.error.value" :title="vlan.error.value" type="warning" :closable="false" show-icon
+    <el-alert v-if="cfg.error.value" :title="cfg.error.value" type="warning" :closable="false" show-icon
       style="margin-bottom: 16px" />
 
-    <el-table :data="vlan.vlans.value" stripe v-loading="vlan.loading.value" class="vlan-table">
-      <el-table-column prop="id" label="VLAN ID" width="120" />
-      <el-table-column prop="name" label="名称" width="180" />
-      <el-table-column prop="description" label="描述" min-width="180" />
-      <el-table-column prop="admin-status" label="管理状态" width="120" />
+    <el-table :data="cfg.items.value" stripe v-loading="cfg.loading.value" class="config-table">
+      <el-table-column v-for="col in columns" :key="col.prop" :prop="col.prop" :label="col.label"
+        :width="col.width" :min-width="col.width ? undefined : 160" />
       <el-table-column label="操作" width="120" fixed="right">
         <template #default="{ row }">
           <el-button type="primary" size="small" link @click="openEdit(row)">编辑</el-button>
         </template>
       </el-table-column>
       <template #empty>
-        <span>{{ selectedDevice ? '暂无 VLAN（点击新增 VLAN）' : '请先选择设备' }}</span>
+        <span>{{ selectedDevice ? '暂无配置（点击新增）' : '请先选择设备' }}</span>
       </template>
     </el-table>
 
-    <el-drawer v-model="drawerVisible" :title="editing ? '编辑 VLAN' : '新增 VLAN'" size="560px">
-      <el-form label-position="top" class="vlan-form">
-        <el-form-item v-for="field in vlan.fields.value" :key="field.path" :label="field.label"
+    <el-drawer v-model="drawerVisible" :title="editing ? '编辑' : addLabel" size="560px">
+      <el-form label-position="top" class="config-form">
+        <el-form-item v-for="field in cfg.fields.value" :key="field.path" :label="field.label"
           :required="field.required">
           <FieldRenderer :field="field" :model-value="formData[keyOf(field)]"
             @update:model-value="formData[keyOf(field)] = $event" />
@@ -51,12 +49,19 @@ import { ref, reactive, onMounted } from 'vue'
 import { Plus } from '@element-plus/icons-vue'
 import { ElMessage } from 'element-plus'
 import { useDeviceStore } from '../stores/device'
-import { useVlanConfig } from '../composables/useVlanConfig'
+import { useDeviceConfig, type DeviceConfigOptions } from '../composables/useDeviceConfig'
 import type { Field } from '../utils/crdSchemaParser'
 import FieldRenderer from '../components/config/FieldRenderer.vue'
 
+const props = defineProps<{
+  title: string
+  addLabel: string
+  options: DeviceConfigOptions
+  columns: { prop: string; label: string; width?: number }[]
+}>()
+
 const store = useDeviceStore()
-const vlan = useVlanConfig()
+const cfg = useDeviceConfig(props.options)
 
 const selectedDevice = ref('')
 const drawerVisible = ref(false)
@@ -89,10 +94,10 @@ async function submit() {
   if (!selectedDevice.value) return
   submitting.value = true
   try {
-    await vlan.saveVlan(selectedDevice.value, { ...formData })
-    ElMessage.success('VLAN 配置已下发，正在对账')
+    await cfg.saveItem(selectedDevice.value, { ...formData })
+    ElMessage.success('配置已下发，正在对账')
     drawerVisible.value = false
-    await vlan.loadVlans(selectedDevice.value)
+    await cfg.loadItems(selectedDevice.value)
   } catch (e: any) {
     ElMessage.error(e?.response?.data?.message || e?.message || '下发失败')
   } finally {
@@ -101,13 +106,13 @@ async function submit() {
 }
 
 function reload() {
-  if (selectedDevice.value) vlan.loadVlans(selectedDevice.value)
+  if (selectedDevice.value) cfg.loadItems(selectedDevice.value)
 }
 
 onMounted(async () => {
   await store.fetchDevices()
   try {
-    await vlan.loadSchema()
+    await cfg.loadSchema()
   } catch {
     /* schema 拉取失败不阻断页面 */
   }
@@ -115,7 +120,7 @@ onMounted(async () => {
 </script>
 
 <style scoped>
-.vlan-config {
+.device-config {
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -140,12 +145,12 @@ onMounted(async () => {
   gap: 12px;
 }
 
-.vlan-table {
+.config-table {
   background: #fff;
   border-radius: 8px;
 }
 
-.vlan-form {
+.config-form {
   padding: 0 4px;
 }
 </style>

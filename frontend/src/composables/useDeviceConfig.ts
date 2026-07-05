@@ -1,0 +1,76 @@
+import { ref } from 'vue'
+import { getConfig, setConfig, getYangSchema } from '../api'
+import type { Field } from '../utils/crdSchemaParser'
+
+// 通用设备配置流（Stack B 直连）。任意华为模块（vlan/ifm/...）只需提供下述参数即可
+// 用同一套「schema 动态渲染 + 列表 + 下发」界面。schema/list/下发均走 api 客户端。
+export interface DeviceConfigOptions {
+  module: string // schema 模块键，如 'vlan' / 'ifm'
+  configPath: string // 配置 API 路径（须含 vlan:/ifm:ifm 等以路由到后端转换器）
+  itemListSuffix: string // 目标 list 的 path 后缀，如 '/vlan' / '/interface'
+  listKey: string // POST body 包裹 list 的键，如 'vlans' / 'interface'
+  keyField: string // 单条记录主键叶子名，如 'id' / 'name'
+}
+
+// DFS 找到 path 以 suffix 结尾的 list 字段，返回其子字段（单条记录的字段集）。
+export function extractItemFields(schema: any, suffix: string): Field[] {
+  function dfs(fields: Field[]): Field | null {
+    for (const f of fields) {
+      if (f.type === 'list' && f.path.endsWith(suffix)) return f
+      if (f.fields) {
+        const r = dfs(f.fields)
+        if (r) return r
+      }
+    }
+    return null
+  }
+  return dfs(schema?.fields ?? [])?.fields ?? []
+}
+
+// 从运行配置归一化出行数组（兼容 {listKey:[...]}、数组、以主键为键的 map）。
+export function extractRows(data: any, listKey: string, keyField: string): Record<string, any>[] {
+  const payload = data?.data ?? data
+  const rows = payload?.[listKey] ?? payload
+  if (Array.isArray(rows)) return rows
+  if (rows && typeof rows === 'object') {
+    return Object.entries(rows).map(([k, v]) =>
+      typeof v === 'object' && v !== null
+        ? { [keyField]: isNaN(Number(k)) ? k : Number(k), ...(v as object) }
+        : { [keyField]: k },
+    )
+  }
+  return []
+}
+
+export function useDeviceConfig(opts: DeviceConfigOptions) {
+  const fields = ref<Field[]>([])
+  const items = ref<Record<string, any>[]>([])
+  const loading = ref(false)
+  const error = ref<string | null>(null)
+
+  async function loadSchema() {
+    // 走 api 客户端（绝对 baseURL）——staging 的 nginx 不代理 /api，裸相对 fetch 会拿到 index.html。
+    const res = await getYangSchema(opts.module, 'nested')
+    fields.value = extractItemFields(res.data?.data, opts.itemListSuffix)
+  }
+
+  async function loadItems(ip: string) {
+    loading.value = true
+    error.value = null
+    try {
+      const res = await getConfig(ip, opts.configPath)
+      items.value = extractRows(res.data?.data, opts.listKey, opts.keyField)
+    } catch (e: any) {
+      error.value = e?.response?.data?.message || e?.message || '读取失败'
+      items.value = []
+    } finally {
+      loading.value = false
+    }
+  }
+
+  async function saveItem(ip: string, item: Record<string, any>) {
+    await setConfig(ip, opts.configPath, { [opts.listKey]: [item] })
+  }
+
+  return { fields, items, loading, error, loadSchema, loadItems, saveItem }
+}
