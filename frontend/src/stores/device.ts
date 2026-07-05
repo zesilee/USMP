@@ -41,10 +41,12 @@ export const useDeviceStore = defineStore('device', () => {
     isLoading.value = true
     try {
       const res = await listDevices()
-      // 真实后端信封: { success, data: { devices: [...], stats } }
-      // 旧二进制信封: { success, data: [...] } —— 两者都兼容。
-      const payload: any = res.data?.data
-      const raw = Array.isArray(payload) ? payload : (payload?.devices ?? [])
+      // 真实契约信封(类型安全): { success, data: { devices: [...], stats } }
+      // 旧二进制信封(兼容降级): { success, data: [...] }
+      const env = res.data
+      const raw = Array.isArray((env as any).data)
+        ? (env as any).data // 旧后端扁平 data[]
+        : (env.data?.devices ?? []) // res.data.data.devices —— 写成 res.data.devices 会编译报错
       devices.value = raw.map(normalizeDevice)
     } catch (e) {
       console.error('Failed to fetch devices:', e)
@@ -58,7 +60,7 @@ export const useDeviceStore = defineStore('device', () => {
     try {
       // 后端无 test-connection 端点，用设备状态探活 GET /devices/:ip/status
       const res = await getDeviceStatus(ip)
-      const connected = (res.data?.data as any)?.connected === true
+      const connected = res.data.data?.connected === true
       return connected
         ? { success: true, message: '连接正常' }
         : { success: false, message: '设备未连接' }

@@ -74,7 +74,32 @@ func probeOnline(pool client.ClientPool, d DeviceInfo) bool {
 	return err == nil && c != nil && c.IsConnected()
 }
 
+// PoolStatsDTO 是连接池统计（对齐 client.PoolStats，仅暴露 JSON 契约）。
+type PoolStatsDTO struct {
+	ActiveConnections int `json:"active_connections"`
+	TotalConnections  int `json:"total_connections"`
+	Errors            int `json:"errors"`
+}
+
+// DeviceListData 是 GET /devices 的 data 字段负载（前端 res.data.data）。
+type DeviceListData struct {
+	Devices []DeviceStatus `json:"devices"`
+	Stats   PoolStatsDTO   `json:"stats"`
+}
+
+// DeviceConnStatus 是 GET /devices/:ip/status 的 data 字段负载。
+type DeviceConnStatus struct {
+	Running   bool `json:"running"`
+	Connected bool `json:"connected"`
+}
+
 // ListDevices lists all devices with their live online status.
+//
+// @Summary  列出所有设备及在线状态
+// @Tags     devices
+// @Produce  json
+// @Success  200 {object} Response{data=DeviceListData} "设备列表 + 连接池统计"
+// @Router   /devices [get]
 func (h *DeviceHandler) ListDevices(c *gin.Context) {
 	h.mu.RLock()
 	snapshot := make([]DeviceInfo, 0, len(h.devices))
@@ -91,17 +116,27 @@ func (h *DeviceHandler) ListDevices(c *gin.Context) {
 
 	stats := pool.Stats()
 
-	Success(c, gin.H{
-		"devices": devices,
-		"stats": gin.H{
-			"active_connections": stats.ActiveConnections,
-			"total_connections":  stats.TotalConnections,
-			"errors":             stats.Errors,
+	Success(c, DeviceListData{
+		Devices: devices,
+		Stats: PoolStatsDTO{
+			ActiveConnections: stats.ActiveConnections,
+			TotalConnections:  stats.TotalConnections,
+			Errors:            stats.Errors,
 		},
 	}, "Devices retrieved successfully")
 }
 
 // AddDevice adds a new device
+//
+// @Summary  添加设备并即时建连
+// @Tags     devices
+// @Accept   json
+// @Produce  json
+// @Param    device body AddDeviceRequest true "设备连接信息"
+// @Success  200 {object} Response "添加成功"
+// @Failure  400 {object} Response "请求非法"
+// @Failure  500 {object} Response "连接设备失败"
+// @Router   /devices [post]
 func (h *DeviceHandler) AddDevice(c *gin.Context) {
 	var req AddDeviceRequest
 	if err := c.ShouldBindJSON(&req); err != nil {
@@ -142,6 +177,13 @@ func (h *DeviceHandler) AddDevice(c *gin.Context) {
 }
 
 // RemoveDevice removes a device
+//
+// @Summary  移除设备并释放连接
+// @Tags     devices
+// @Produce  json
+// @Param    ip path string true "设备 IP"
+// @Success  200 {object} Response "移除成功"
+// @Router   /devices/{ip} [delete]
 func (h *DeviceHandler) RemoveDevice(c *gin.Context) {
 	ip := c.Param("ip")
 
@@ -157,6 +199,14 @@ func (h *DeviceHandler) RemoveDevice(c *gin.Context) {
 }
 
 // GetStatus gets device status
+//
+// @Summary  查询设备运行/连接状态
+// @Tags     devices
+// @Produce  json
+// @Param    ip path string true "设备 IP"
+// @Success  200 {object} Response{data=DeviceConnStatus} "运行与连接状态"
+// @Failure  404 {object} Response "设备不存在"
+// @Router   /devices/{ip}/status [get]
 func (h *DeviceHandler) GetStatus(c *gin.Context) {
 	ip := c.Param("ip")
 
@@ -189,8 +239,8 @@ func (h *DeviceHandler) GetStatus(c *gin.Context) {
 		connected = cli.IsConnected()
 	}
 
-	Success(c, gin.H{
-		"running":   true, // API server is always running
-		"connected": connected,
+	Success(c, DeviceConnStatus{
+		Running:   true, // API server is always running
+		Connected: connected,
 	}, "Status retrieved")
 }

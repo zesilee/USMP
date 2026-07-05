@@ -47,3 +47,7 @@ frontend/package-lock.json
 
 # Logs
 *.log
+
+# API 契约中间产物（swag/openapi）—— Go 注解为真源，drift 门禁按需重生成
+# 仅 frontend/src/types/api.gen.ts 提交入库
+backend/docs/openapi/

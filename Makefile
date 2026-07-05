@@ -2,7 +2,7 @@
 # 用法: make <target>
 
 .PHONY: setup bootstrap test lint compliance hook-install hook-verify help \
-	staging-up staging-down staging-logs staging-ps e2e-local
+	staging-up staging-down staging-logs staging-ps e2e-local gen-contract
 
 # 默认目标
 help: ## 显示所有可用目标
@@ -75,6 +75,13 @@ staging-ps: ## 查看 staging 容器状态
 
 staging-logs: ## 跟随 staging 日志
 	docker compose logs -f --tail=100
+
+gen-contract: ## 生成 API 契约类型：Go 注解 → OpenAPI → 前端 TS（后端为唯一真源）
+	cd backend && go tool swag init -g main.go -o docs/openapi \
+		--parseDependency --parseInternal --outputTypes json,yaml
+	cd backend && npx --yes swagger2openapi@7.0.8 docs/openapi/swagger.json -o docs/openapi/openapi3.json
+	cd frontend && npm run gen:api
+	@echo "✅ 契约已生成：frontend/src/types/api.gen.ts（勿手改）"
 
 e2e-local: ## 本地复现 CI：起 staging → 健康等待 → 浏览器冒烟
 	docker compose up -d --build --remove-orphans
