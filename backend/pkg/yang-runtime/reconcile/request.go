@@ -22,6 +22,11 @@ type Result struct {
 	RequeueAfter time.Duration
 	// Error is the error that occurred during reconciliation
 	Error error
+	// Changes is how many changes this reconcile applied to align actual with
+	// desired. 0 means already in sync (converged); >0 means drift was detected
+	// and corrected (drifted). Lets the controller distinguish converged from
+	// drifted when recording reconcile status.
+	Changes int
 }
 
 // ConfigResult contains the result of comparing desired and actual configuration

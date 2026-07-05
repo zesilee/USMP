@@ -37,6 +37,8 @@ func (s *Server) setupRoutes() {
 	v1 := s.router.Group("/api/v1")
 	{
 		// Device endpoints
+		reconcileHandler := NewReconcileHandler(s.manager)
+
 		deviceGroup := v1.Group("/devices")
 		{
 			deviceHandler := NewDeviceHandler(s.manager)
@@ -44,7 +46,12 @@ func (s *Server) setupRoutes() {
 			deviceGroup.POST("", deviceHandler.AddDevice)
 			deviceGroup.DELETE("/:ip", deviceHandler.RemoveDevice)
 			deviceGroup.GET("/:ip/status", deviceHandler.GetStatus)
+			// Per-device reconcile outcome (desired↔actual convergence)
+			deviceGroup.GET("/:ip/reconcile", reconcileHandler.GetDeviceReconcile)
 		}
+
+		// Fleet-wide reconcile aggregate (for the convergence dashboard)
+		v1.GET("/reconcile/status", reconcileHandler.GetFleetReconcile)
 
 		// Configuration endpoints
 		configGroup := v1.Group("/config")

@@ -119,6 +119,7 @@ func TestGenericReconciler_NoChanges(t *testing.T) {
 
 	assert.False(t, result.Requeue)
 	assert.Nil(t, result.Error)
+	assert.Equal(t, 0, result.Changes, "no diff must report Changes==0 (converged)")
 	cs.AssertExpectations(t)
 	dc.AssertExpectations(t)
 	de.AssertExpectations(t)
@@ -153,9 +154,29 @@ func TestGenericReconciler_WithChanges(t *testing.T) {
 
 	assert.False(t, result.Requeue)
 	assert.Nil(t, result.Error)
+	assert.Equal(t, 1, result.Changes, "applied diff must report Changes==len(changes) (drifted)")
 	cs.AssertExpectations(t)
 	dc.AssertExpectations(t)
 	de.AssertExpectations(t)
+}
+
+func TestGenericReconciler_DesiredNil_NoChanges(t *testing.T) {
+	cs := &MockConfigStore{}
+	dc := &MockDeviceClient{}
+	de := &MockDiffEngine{}
+
+	cs.On("Get", "192.168.1.1", "/interfaces/interface[name='eth0']").Return(nil, nil)
+
+	r := NewGenericReconciler(cs, dc, de)
+	result := r.Reconcile(context.Background(), Request{
+		DeviceID: "192.168.1.1",
+		Path:     "/interfaces/interface[name='eth0']",
+	})
+
+	assert.False(t, result.Requeue)
+	assert.Nil(t, result.Error)
+	assert.Equal(t, 0, result.Changes, "desired nil means nothing to apply (converged)")
+	cs.AssertExpectations(t)
 }
 
 func TestGenericReconciler_ConfigStoreError(t *testing.T) {
