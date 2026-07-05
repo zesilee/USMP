@@ -20,8 +20,7 @@ const routes = [
   {
     path: '/config/vlan',
     name: 'vlan',
-    component: () => import('../views/ConfigPage.vue'),
-    props: { module: 'openconfig-vlan' }
+    component: () => import('../views/VlanConfig.vue')
   },
   {
     path: '/config/route',
