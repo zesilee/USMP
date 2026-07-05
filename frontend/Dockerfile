@@ -1,6 +1,7 @@
 # frontend/Dockerfile
 # 构建阶段
-FROM node:20-alpine AS builder
+# Node 版本与 .nvmrc / frontend-ci / 本地开发统一为 22（vitest4 要求 ≥20.12，锁 22 保证本地构建==出厂构建）
+FROM node:22-alpine AS builder
 
 WORKDIR /app
 
