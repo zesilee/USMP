@@ -119,6 +119,7 @@ explore → propose → apply → sync → archive
 |------|------|
 | T01 | 先写测试（正常/异常/并发），再写实现，**禁止先代码后测试** |
 | T02 | 新增 YANG 模块必须添加 NETCONF 模拟网元集成测试（`*_integration_test.go`） |
+| T02b | 新增 YANG 模型接入设备配置时**一定触发 `yang-config-test-design`**，产出并通过其完备测试矩阵（全属性可配/端到端到设备/并发-race/边界/嵌套/幂等/负路径），未覆盖视为未完成、禁止合并 |
 | T03 | 集成测试用 `testing.Short()` 跳过短测试 |
 | T04 | 代码评审不通过，禁止提交 |
 
@@ -208,6 +209,7 @@ explore → propose → apply → sync → archive
 | 配置缓存开发 | `go-ttl-lru-memory-cache` | TTL+LRU 并发安全（R03） |
 | NETCONF 对接 | `netconf-switch-protocol` | SSH 830（R02） |
 | 集成测试 | `netconf-sim-integration-test` | 模拟网元端到端（T02） |
+| **新增 YANG 模型接入设备配置** | **`yang-config-test-design`** | **一定触发：产出完备测试用例矩阵（全属性/端到端/并发/边界/嵌套/幂等/负路径），未覆盖禁止合并（T02b）** |
 | TDD 开发 | `tdd-test-driven-dev` | 测试先行（T01） |
 | 代码评审 | `go-code-review-check` | 提交前强制（T04） |
 | 提交规范 | `git-what-why-how-commit` | 三段式 Commit |
