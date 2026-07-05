@@ -270,28 +270,28 @@ func mapEntryToInterface(m map[string]interface{}) *huawei.HuaweiIfm_Ifm_Interfa
 
 		// ===== 状态和类型 =====
 		case "adminstatus":
-			if num, ok := valueToUint(v); ok {
-				result.AdminStatus = huawei.E_HuaweiIfm_PortStatus(num)
+			if n, ok := enumInt(v, "E_HuaweiIfm_PortStatus"); ok {
+				result.AdminStatus = huawei.E_HuaweiIfm_PortStatus(n)
 			}
 		case "type":
-			if num, ok := valueToUint(v); ok {
-				result.Type = huawei.E_HuaweiIfm_PortType(num)
+			if n, ok := enumInt(v, "E_HuaweiIfm_PortType"); ok {
+				result.Type = huawei.E_HuaweiIfm_PortType(n)
 			}
 		case "class":
-			if num, ok := valueToUint(v); ok {
-				result.Class = huawei.E_HuaweiIfm_ClassType(num)
+			if n, ok := enumInt(v, "E_HuaweiIfm_ClassType"); ok {
+				result.Class = huawei.E_HuaweiIfm_ClassType(n)
 			}
 		case "linkprotocol":
-			if num, ok := valueToUint(v); ok {
-				result.LinkProtocol = huawei.E_HuaweiIfm_LinkProtocol(num)
+			if n, ok := enumInt(v, "E_HuaweiIfm_LinkProtocol"); ok {
+				result.LinkProtocol = huawei.E_HuaweiIfm_LinkProtocol(n)
 			}
 		case "routertype":
-			if num, ok := valueToUint(v); ok {
-				result.RouterType = huawei.E_HuaweiIfm_RouterType(num)
+			if n, ok := enumInt(v, "E_HuaweiIfm_RouterType"); ok {
+				result.RouterType = huawei.E_HuaweiIfm_RouterType(n)
 			}
 		case "servicetype":
-			if num, ok := valueToUint(v); ok {
-				result.ServiceType = huawei.E_HuaweiIfm_ServiceType(num)
+			if n, ok := enumInt(v, "E_HuaweiIfm_ServiceType"); ok {
+				result.ServiceType = huawei.E_HuaweiIfm_ServiceType(n)
 			}
 
 		// ===== 网络参数 =====
