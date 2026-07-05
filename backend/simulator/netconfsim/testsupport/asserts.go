@@ -105,6 +105,23 @@ func AssertHuaweiVlanMacAgingTime(t *testing.T, sim *netconfsim.Simulator, vlanI
 	assert.Equal(t, expected, vlan.MacAgingTime, "VLAN %d MAC aging time mismatch", vlanID)
 }
 
+// AssertHuaweiVlanMemberPort asserts a VLAN's member port exists with the given
+// access-type and tag-mode (VLAN 端口成员端到端断言).
+func AssertHuaweiVlanMemberPort(t *testing.T, sim *netconfsim.Simulator, vlanID uint16, ifName string, accessType, tagMode int) {
+	t.Helper()
+	vlans := sim.RunningHuaweiVLANsFull()
+	vlan, ok := vlans[vlanID]
+	assert.True(t, ok, "VLAN %d not found", vlanID)
+	for _, p := range vlan.MemberPorts {
+		if p.InterfaceName == ifName {
+			assert.Equal(t, accessType, p.AccessType, "VLAN %d port %s access-type", vlanID, ifName)
+			assert.Equal(t, tagMode, p.TagMode, "VLAN %d port %s tag-mode", vlanID, ifName)
+			return
+		}
+	}
+	t.Errorf("VLAN %d member-port %q not found on device (got %d ports)", vlanID, ifName, len(vlan.MemberPorts))
+}
+
 // AssertHuaweiVlanStatisticEnable asserts statistic enable status.
 func AssertHuaweiVlanStatisticEnable(t *testing.T, sim *netconfsim.Simulator, vlanID uint16, expected int) {
 	t.Helper()

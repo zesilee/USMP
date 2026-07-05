@@ -124,13 +124,24 @@ func (s *Simulator) RunningHuaweiVLANsFull() map[uint16]*HuaweiVlanTestData {
 			x := toU16(sv.leafText())
 			d.SuperVlan = &x
 		}
-		if u := v.childFold("unknown-unicast-discard", "unkownunicastdiscard"); u != nil {
+		if u := v.childFold("unkown-unicast-discard", "unknown-unicast-discard", "unkownunicastdiscard"); u != nil {
 			d.UnkownUnicastDiscard.Discard = toInt(u.leaf("discard"))
 			d.UnkownUnicastDiscard.MacLearningEnable = toInt(u.leaf("mac-learning-enable", "maclearningenable"))
 		}
 		if sup := v.childFold("suppression"); sup != nil {
 			d.Suppression.Inbound = toInt(sup.leaf("inbound"))
 			d.Suppression.Outbound = toInt(sup.leaf("outbound"))
+		}
+		if mp := v.childFold("member-ports", "memberports"); mp != nil {
+			for _, c := range mp.Children {
+				if strings.EqualFold(c.Name.Local, "member-port") || strings.EqualFold(c.Name.Local, "memberport") {
+					d.MemberPorts = append(d.MemberPorts, HuaweiVlanMemberPort{
+						InterfaceName: c.leaf("interface-name", "interfacename"),
+						AccessType:    toInt(c.leaf("access-type", "accesstype")),
+						TagMode:       toInt(c.leaf("tag-mode", "tagmode")),
+					})
+				}
+			}
 		}
 		out[id] = d
 	}
@@ -300,6 +311,15 @@ type HuaweiVlanTestData struct {
 		Inbound  int
 		Outbound int
 	}
+	// 端口成员（VLAN 最核心功能：哪些口属于该 VLAN + 端口模式）
+	MemberPorts []HuaweiVlanMemberPort
+}
+
+// HuaweiVlanMemberPort is a parsed member-port entry for test assertions.
+type HuaweiVlanMemberPort struct {
+	InterfaceName string
+	AccessType    int
+	TagMode       int
 }
 
 // HuaweiInterfaceTestData represents interface test data from Huawei IFM model.
