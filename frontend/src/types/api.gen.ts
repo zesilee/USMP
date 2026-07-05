@@ -4,6 +4,119 @@
  */
 
 export interface paths {
+    "/config/{ip}/{path}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** 读取设备指定 YANG 路径的运行配置 */
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    /** @description 设备 IP */
+                    ip: string;
+                    /** @description YANG 路径 */
+                    path: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description 运行配置 */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["api.Response"] & {
+                            data?: components["schemas"]["api.ConfigGetData"];
+                        };
+                    };
+                };
+                /** @description 获取失败 */
+                500: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["api.Response"];
+                    };
+                };
+                /** @description 设备未连接 */
+                503: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["api.Response"];
+                    };
+                };
+            };
+        };
+        put?: never;
+        /** 声明式下发配置并触发对账 */
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    /** @description 设备 IP */
+                    ip: string;
+                    /** @description YANG 路径 */
+                    path: string;
+                };
+                cookie?: never;
+            };
+            /** @description 期望配置（YANG JSON） */
+            requestBody: {
+                content: {
+                    "application/json": {
+                        [key: string]: unknown;
+                    };
+                };
+            };
+            responses: {
+                /** @description 已接受，对账进行中 */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["api.Response"] & {
+                            data?: components["schemas"]["api.ConfigSetData"];
+                        };
+                    };
+                };
+                /** @description 请求或配置解析失败 */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["api.Response"];
+                    };
+                };
+                /** @description 存储失败 */
+                500: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["api.Response"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/devices": {
         parameters: {
             query?: never;
@@ -174,6 +287,85 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/yang/modules": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** 列出所有支持的 YANG 模块 */
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description 模块列表 */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["api.Response"] & {
+                            data?: components["schemas"]["api.YangModuleInfo"][];
+                        };
+                    };
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/yang/schema/{module}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** 获取指定 YANG 模块的动态表单 schema */
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    /** @description 模块名 */
+                    module: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description 动态表单 schema */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["api.Response"] & {
+                            data?: components["schemas"]["api.YangSchema"];
+                        };
+                    };
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -183,6 +375,14 @@ export interface components {
             password: string;
             port?: number;
             username: string;
+        };
+        "api.ConfigGetData": {
+            data?: unknown;
+        };
+        "api.ConfigSetData": {
+            path?: string;
+            reconciliation?: components["schemas"]["api.ReconcileInfo"];
+            status?: string;
         };
         "api.DeviceConnStatus": {
             connected?: boolean;
@@ -199,16 +399,53 @@ export interface components {
             port?: number;
             username?: string;
         };
+        "api.FieldDef": {
+            default?: unknown;
+            group?: string;
+            label?: string;
+            maximum?: number;
+            minimum?: number;
+            options?: components["schemas"]["api.Option"][];
+            path?: string;
+            pattern?: string;
+            placeholder?: string;
+            readonly?: boolean;
+            required?: boolean;
+            type?: string;
+        };
+        "api.Option": {
+            label?: string;
+            value?: unknown;
+        };
         "api.PoolStatsDTO": {
             active_connections?: number;
             errors?: number;
             total_connections?: number;
+        };
+        "api.ReconcileInfo": {
+            message?: string;
+            triggered?: boolean;
         };
         "api.Response": {
             code?: number;
             data?: unknown;
             message?: string;
             success?: boolean;
+        };
+        "api.YangModuleInfo": {
+            description?: string;
+            name?: string;
+            path?: string;
+            title?: string;
+            type?: string;
+            vendor?: string;
+        };
+        "api.YangSchema": {
+            fields?: components["schemas"]["api.FieldDef"][];
+            listCols?: components["schemas"]["api.FieldDef"][];
+            module?: string;
+            title?: string;
+            vendor?: string;
         };
     };
     responses: never;

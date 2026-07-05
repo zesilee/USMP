@@ -26,7 +26,35 @@ func NewConfigHandler(manager manager.Manager) *ConfigHandler {
 	}
 }
 
+// ConfigGetData 是 GET /config 的 data 负载。Data 为动态 YANG 配置（结构随路径而变）。
+type ConfigGetData struct {
+	Data interface{} `json:"data"`
+}
+
+// ReconcileInfo 描述下发后的异步对账触发状态。
+type ReconcileInfo struct {
+	Triggered bool   `json:"triggered"`
+	Message   string `json:"message"`
+}
+
+// ConfigSetData 是 POST /config 的 data 负载（声明式下发 + 对账）。
+type ConfigSetData struct {
+	Status         string        `json:"status"`
+	Path           string        `json:"path"`
+	Reconciliation ReconcileInfo `json:"reconciliation"`
+}
+
 // GetConfig gets the configuration for a specific device and YANG path
+//
+// @Summary  读取设备指定 YANG 路径的运行配置
+// @Tags     config
+// @Produce  json
+// @Param    ip   path string true "设备 IP"
+// @Param    path path string true "YANG 路径"
+// @Success  200 {object} Response{data=ConfigGetData} "运行配置"
+// @Failure  500 {object} Response "获取失败"
+// @Failure  503 {object} Response "设备未连接"
+// @Router   /config/{ip}/{path} [get]
 func (h *ConfigHandler) GetConfig(c *gin.Context) {
 	ip := c.Param("ip")
 	path := c.Param("path")                // *path already includes leading slash
@@ -61,14 +89,26 @@ func (h *ConfigHandler) GetConfig(c *gin.Context) {
 		return
 	}
 
-	Success(c, gin.H{
-		"data": result.Data,
+	Success(c, ConfigGetData{
+		Data: result.Data,
 	}, "Configuration retrieved")
 }
 
 // SetConfig sets the desired configuration and triggers reconciliation
 // This is the DECLARATIVE API: desired state is stored, and the controller
 // will asynchronously reconcile the actual device state to match it.
+//
+// @Summary  声明式下发配置并触发对账
+// @Tags     config
+// @Accept   json
+// @Produce  json
+// @Param    ip     path string                 true "设备 IP"
+// @Param    path   path string                 true "YANG 路径"
+// @Param    config body map[string]interface{} true "期望配置（YANG JSON）"
+// @Success  200 {object} Response{data=ConfigSetData} "已接受，对账进行中"
+// @Failure  400 {object} Response "请求或配置解析失败"
+// @Failure  500 {object} Response "存储失败"
+// @Router   /config/{ip}/{path} [post]
 func (h *ConfigHandler) SetConfig(c *gin.Context) {
 	ip := c.Param("ip")
 	path := c.Param("path") // *path already includes leading slash
@@ -104,12 +144,12 @@ func (h *ConfigHandler) SetConfig(c *gin.Context) {
 	// 4. Commit (if supported by protocol)
 	controllerFound := h.manager.TriggerReconcile(ip, path)
 
-	Success(c, gin.H{
-		"status": "ACCEPTED",
-		"path":   path,
-		"reconciliation": map[string]interface{}{
-			"triggered": controllerFound,
-			"message":   "Configuration stored. Reconciliation will sync device state.",
+	Success(c, ConfigSetData{
+		Status: "ACCEPTED",
+		Path:   path,
+		Reconciliation: ReconcileInfo{
+			Triggered: controllerFound,
+			Message:   "Configuration stored. Reconciliation will sync device state.",
 		},
 	}, "Configuration accepted - reconciliation in progress")
 }
