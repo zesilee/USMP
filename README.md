@@ -528,3 +528,5 @@ MIT License
 - [openconfig](https://github.com/openconfig) - YANG 模型标准
 - [scrapligo](https://github.com/scrapli/scrapligo) - NETCONF 客户端
 - [onsi/ginkgo](https://github.com/onsi/ginkgo) - BDD 测试框架
+
+<!-- ci: 验证纯文档变更走 compliance-skip 哑绿兜底、不空跑后端测试 -->
