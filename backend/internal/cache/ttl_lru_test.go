@@ -131,3 +131,64 @@ func TestClearExpired(t *testing.T) {
 	assert.False(t, ok1)
 	assert.False(t, ok2)
 }
+
+func TestGetWithAge_HitFreshMissExpired(t *testing.T) {
+	c := NewTTLLRUCache(10, 60*time.Millisecond, 0)
+	c.Set("k", "v")
+
+	val, age, ok := c.GetWithAge("k")
+	if !ok || val != "v" {
+		t.Fatalf("hit: got (%v,%v), want (v,true)", val, ok)
+	}
+	if age < 0 || age > 40*time.Millisecond {
+		t.Errorf("fresh age = %v, want ~0 (<40ms)", age)
+	}
+
+	if _, _, ok := c.GetWithAge("missing"); ok {
+		t.Errorf("miss should report found=false")
+	}
+
+	time.Sleep(120 * time.Millisecond) // > TTL
+	if _, _, ok := c.GetWithAge("k"); ok {
+		t.Errorf("expired entry should report found=false")
+	}
+}
+
+func TestGetWithAge_Monotonic(t *testing.T) {
+	c := NewTTLLRUCache(10, 500*time.Millisecond, 0)
+	c.Set("k", "v")
+	time.Sleep(60 * time.Millisecond)
+	_, age, ok := c.GetWithAge("k")
+	if !ok {
+		t.Fatalf("expected hit")
+	}
+	if age <= 0 { // lower bound only, avoid upper-bound flakiness under load
+		t.Errorf("age = %v, want > 0 after sleep", age)
+	}
+}
+
+func TestInvalidatePrefix(t *testing.T) {
+	c := NewTTLLRUCache(10, time.Minute, 0)
+	c.Set("10.0.0.1|/vlans", "a")
+	c.Set("10.0.0.1|/ifm", "b")
+	c.Set("10.0.0.2|/vlans", "c")
+
+	c.InvalidatePrefix("10.0.0.1|")
+
+	if _, ok := c.Get("10.0.0.1|/vlans"); ok {
+		t.Errorf("10.0.0.1|/vlans should be invalidated")
+	}
+	if _, ok := c.Get("10.0.0.1|/ifm"); ok {
+		t.Errorf("10.0.0.1|/ifm should be invalidated")
+	}
+	if _, ok := c.Get("10.0.0.2|/vlans"); !ok {
+		t.Errorf("other device 10.0.0.2 must not be invalidated")
+	}
+}
+
+func TestTTLGetter(t *testing.T) {
+	c := NewTTLLRUCache(10, 30*time.Second, 0)
+	if c.TTL() != 30*time.Second {
+		t.Errorf("TTL() = %v, want 30s", c.TTL())
+	}
+}
