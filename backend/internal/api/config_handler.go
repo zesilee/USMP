@@ -128,9 +128,15 @@ func (h *ConfigHandler) SetConfig(c *gin.Context) {
 		return
 	}
 
-	// Store the desired configuration in ConfigStore
-	// This is the source of truth for what configuration SHOULD be
+	// Store the desired configuration in ConfigStore.
+	//
+	// 合并语义（防数据丢失）：UI 每次只提交单个 VLAN/接口，但对账把 desired 当「完整状态」。
+	// 若直接覆盖，第二次下发会让对账删除设备上已有但本次未提交的条目。故先并入已存 desired
+	// （按 key union），使 desired 累积为完整意图。删除走独立 DELETE 端点，不经此路径。
 	configStore := h.manager.GetConfigStore()
+	if existing, gerr := configStore.Get(ip, path); gerr == nil && existing != nil {
+		desiredConfig = mergeConfig(existing, desiredConfig)
+	}
 	if err := configStore.Set(ip, path, desiredConfig); err != nil {
 		Error(c, 500, "Failed to store configuration: "+err.Error())
 		return
@@ -152,6 +158,35 @@ func (h *ConfigHandler) SetConfig(c *gin.Context) {
 			Message:   "Configuration stored. Reconciliation will sync device state.",
 		},
 	}, "Configuration accepted - reconciliation in progress")
+}
+
+// mergeConfig 把新提交的配置并入已存 desired（按列表主键 union），使增量 UI 提交不会
+// 让声明式对账删除设备上已有条目。同键以新值覆盖（=编辑）。非列表类型（如 System 单例）
+// 无既有合并语义，直接返回新值。
+func mergeConfig(existing, incoming interface{}) interface{} {
+	switch inc := incoming.(type) {
+	case *huawei.HuaweiVlan_Vlan_Vlans:
+		if ex, ok := existing.(*huawei.HuaweiVlan_Vlan_Vlans); ok && ex != nil {
+			if ex.Vlan == nil {
+				ex.Vlan = map[uint16]*huawei.HuaweiVlan_Vlan_Vlans_Vlan{}
+			}
+			for k, v := range inc.Vlan {
+				ex.Vlan[k] = v
+			}
+			return ex
+		}
+	case *huawei.HuaweiIfm_Ifm_Interfaces:
+		if ex, ok := existing.(*huawei.HuaweiIfm_Ifm_Interfaces); ok && ex != nil {
+			if ex.Interface == nil {
+				ex.Interface = map[string]*huawei.HuaweiIfm_Ifm_Interfaces_Interface{}
+			}
+			for k, v := range inc.Interface {
+				ex.Interface[k] = v
+			}
+			return ex
+		}
+	}
+	return incoming
 }
 
 // convertToTypedStruct converts raw JSON map to the appropriate strongly-typed

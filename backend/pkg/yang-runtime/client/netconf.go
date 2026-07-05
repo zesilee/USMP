@@ -433,6 +433,13 @@ func (c *NETCONFClient) marshalChange(change Change) (string, error) {
 		v = v.Elem()
 	}
 	if v.Kind() == reflect.Map {
+		// Special case: Huawei VLAN entries map — the generic per-entry xml.Marshal
+		// chokes on the nested member-port map (xml 不支持 map). Route through the
+		// dedicated builder which serializes member-ports correctly.
+		if vlanMap, ok := change.NewValue.(map[uint16]*huawei.HuaweiVlan_Vlan_Vlans_Vlan); ok {
+			return buildHuaweiVlanVlansXML(&huawei.HuaweiVlan_Vlan_Vlans{Vlan: vlanMap})
+		}
+
 		// Special case: Huawei IFM interface config from JSON map
 		if strings.Contains(change.Path, "ifm:ifm") && strings.Contains(change.Path, "interfaces") {
 			ifaces, err := mapToHuaweiIfmInterfaces(change.NewValue)
@@ -1004,6 +1011,40 @@ func buildHuaweiVlanVlansXML(vlans *huawei.HuaweiVlan_Vlan_Vlans) (string, error
 		// StatisticEnable (enum)
 		if vlan.StatisticEnable != 0 {
 			builder.WriteString(fmt.Sprintf("<statistic-enable>%d</statistic-enable>", vlan.StatisticEnable))
+		}
+
+		// StatisticDiscard (enum)
+		if vlan.StatisticDiscard != 0 {
+			builder.WriteString(fmt.Sprintf("<statistic-discard>%d</statistic-discard>", vlan.StatisticDiscard))
+		}
+
+		// UnknownMulticastDiscard (enum)
+		if vlan.UnknownMulticastDiscard != 0 {
+			builder.WriteString(fmt.Sprintf("<unknown-multicast-discard>%d</unknown-multicast-discard>", vlan.UnknownMulticastDiscard))
+		}
+
+		// UnkownUnicastDiscard (nested container)
+		if vlan.UnkownUnicastDiscard != nil {
+			builder.WriteString("<unkown-unicast-discard>")
+			if vlan.UnkownUnicastDiscard.Discard != 0 {
+				builder.WriteString(fmt.Sprintf("<discard>%d</discard>", vlan.UnkownUnicastDiscard.Discard))
+			}
+			if vlan.UnkownUnicastDiscard.MacLearningEnable != 0 {
+				builder.WriteString(fmt.Sprintf("<mac-learning-enable>%d</mac-learning-enable>", vlan.UnkownUnicastDiscard.MacLearningEnable))
+			}
+			builder.WriteString("</unkown-unicast-discard>")
+		}
+
+		// Suppression (nested container)
+		if vlan.Suppression != nil {
+			builder.WriteString("<suppression>")
+			if vlan.Suppression.Inbound != 0 {
+				builder.WriteString(fmt.Sprintf("<inbound>%d</inbound>", vlan.Suppression.Inbound))
+			}
+			if vlan.Suppression.Outbound != 0 {
+				builder.WriteString(fmt.Sprintf("<outbound>%d</outbound>", vlan.Suppression.Outbound))
+			}
+			builder.WriteString("</suppression>")
 		}
 
 		// MacAgingTime
