@@ -212,27 +212,21 @@
       <!-- ==================== CONFIG ==================== -->
       <section class="view" id="view-config">
         <div class="ph">
-          <div><h1 id="cfgTitle">接口配置</h1><div class="sub">表单由 <span class="mono">ietf-interfaces / huawei-ifm</span> YANG 模型自动渲染 · 无手写表单</div></div>
+          <div><h1 id="cfgTitle">接口配置</h1><div class="sub" id="cfgSub">表单由 <span class="mono">ietf-interfaces / huawei-ifm</span> 模型自动渲染 · 无手写表单</div></div>
           <div class="ph-actions">
             <select class="inp" style="width:210px"><option>Core-Switch-01 · 10.0.0.1</option><option>Access-Switch-03 · 10.0.2.13</option></select>
-            <button class="btn btn-pri" onclick="openDrawer()"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>新增接口</button>
+            <button class="btn btn-pri" onclick="openDrawer()"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg><span id="addLabel">新增接口</span></button>
           </div>
         </div>
         <div class="cfg">
           <div class="card tree">
-            <div class="tree-h">YANG 模型</div>
-            <div class="tree-item active"><span>接口<span class="path">ifm</span></span><span class="count-pill">48</span></div>
-            <div class="tree-item"><span>VLAN<span class="path">huawei-vlan</span></span><span class="count-pill">12</span></div>
-            <div class="tree-item"><span>路由<span class="path">oc-route</span></span><span class="count-pill">6</span></div>
+            <div class="tree-h" id="treeH">YANG 模型</div>
+            <div id="modelTree"></div>
           </div>
           <div class="card wrap-tbl">
             <table class="tbl">
-              <thead><tr><th>接口名</th><th>描述</th><th>管理状态</th><th>MTU</th><th>收敛态</th><th></th></tr></thead>
-              <tbody>
-                <tr><td class="mono strong">GE0/0/1</td><td>uplink-to-core</td><td><span class="chip conv"><span class="glyph"></span>up</span></td><td class="mono">9000</td><td><span class="chip conv"><span class="glyph"></span>已收敛</span></td><td><div class="actions"><button class="link" onclick="openDrawer(true)">编辑</button></div></td></tr>
-                <tr><td class="mono strong">GE0/0/2</td><td>—</td><td><span class="chip conv"><span class="glyph"></span>up</span></td><td class="mono">1500</td><td><span class="chip recon"><span class="glyph"></span>收敛中</span></td><td><div class="actions"><button class="link" onclick="openDrawer(true)">编辑</button></div></td></tr>
-                <tr><td class="mono strong">GE0/0/7</td><td>to-access-03</td><td><span class="chip off"><span class="glyph"></span>down</span></td><td class="mono">1500</td><td><span class="chip drift"><span class="glyph"></span>已漂移</span></td><td><div class="actions"><button class="link" onclick="openDrawer(true)">编辑</button></div></td></tr>
-              </tbody>
+              <thead id="cfgHead"></thead>
+              <tbody id="ifBody"></tbody>
             </table>
           </div>
         </div>
@@ -296,30 +290,13 @@
   <div class="drawer-h">
     <div>
       <h3 id="drawerTitle">新增接口</h3>
-      <div class="sub">Core-Switch-01 · 10.0.0.1 · huawei-ifm</div>
+      <div class="sub" id="drawerSub">Core-Switch-01 · 10.0.0.1 · huawei-ifm</div>
     </div>
     <button class="x" onclick="closeDrawer()"><svg viewBox="0 0 24 24" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
   </div>
-  <div class="drawer-b" id="drawerBody">
-    <div class="yang-note">
-      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>
-      下方字段与约束均由 YANG 模型自动生成。校验不通过不会下发；下发即触发对账。
-    </div>
-    <div class="form-row"><label>接口名<span class="req">*</span><span class="yp">/ifm:name</span></label><input class="inp" value="GE0/0/8"><div class="hint">pattern: (GE|XGE|Eth-Trunk)[0-9/]+</div></div>
-    <div class="form-row"><label>描述<span class="yp">/ifm:description</span></label><input class="inp" placeholder="最长 242 字符" value="to-access-08"></div>
-    <div class="form-row"><label>管理状态<span class="req">*</span><span class="yp">/ifm:admin-status</span></label><select class="inp"><option>up</option><option>down</option></select><div class="hint">enum · 由模型枚举渲染为下拉</div></div>
-    <div class="form-row"><label>MTU<span class="yp">/ifm:mtu</span></label><input class="inp mono" value="9000"><div class="hint">range: 46 .. 9600</div></div>
-
-    <div class="section-lbl">下发预览 · 期望态 ↔ 实际态</div>
-    <div class="dva">
-      <div class="dva-row"><div class="dk">接口名</div><div class="dv"><span class="now">GE0/0/8</span> <span class="tag-new">新增</span></div></div>
-      <div class="dva-row"><div class="dk">描述</div><div class="dv changed"><span class="now">"to-access-08"</span></div></div>
-      <div class="dva-row"><div class="dk">管理状态</div><div class="dv"><span class="now">up</span></div></div>
-      <div class="dva-row"><div class="dk">MTU</div><div class="dv changed"><span class="was">1500</span><span class="arrow">→</span><span class="now">9000</span></div></div>
-    </div>
-  </div>
-  <div class="drawer-f">
-    <button class="btn btn-ghost" onclick="closeDrawer()">取消</button>
+  <div class="drawer-b" id="drawerBody"></div>
+  <div class="drawer-f" id="drawerFoot">
+    <button class="btn btn-ghost" id="cancelBtn" onclick="closeDrawer()">取消</button>
     <button class="btn btn-pri" id="pushBtn" onclick="doPush()"><svg viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></svg>下发并对账</button>
   </div>
 </aside>
