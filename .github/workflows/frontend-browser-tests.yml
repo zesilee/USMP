@@ -36,8 +36,10 @@ jobs:
       - name: Install dependencies
         run: npm ci --prefer-offline --no-audit --fund=false
 
-      - name: Install Chromium
-        run: npx playwright install chromium --with-deps
+      # 直接用 vitest-browser 依赖的 playwright 包自身的 CLI 安装，避免与
+      # @playwright/test 的版本歧义导致装错 chromium 修订版（headless-shell 缺失）。
+      - name: Install Chromium（匹配 vitest browser provider 的 playwright 版本）
+        run: node node_modules/playwright/cli.js install --with-deps chromium
 
       - name: Browser component tests
         run: npm run test:browser
