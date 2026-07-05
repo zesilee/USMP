@@ -4,12 +4,12 @@
 
 ## 1. translator + crdsource 原子迁移（一 PR）
 
-- [ ] 1.1 先写测试：`pkg/translator` 单测——VLAN(biz/v1: MacLearning/BroadcastDiscard/UnknownMulticastDiscard/AdminStatus→huawei ygot)、Interface(biz/v1: IfName/MTU/access|trunk|hybrid→L2 ygot)、错误路径
-- [ ] 1.2 重写 `huawei_vlan.go`：bizv1 导入→api/biz/v1；映射 biz/v1 字段；删 Type/convertVlanType/MacLearningEnabled/StatisticEnabled/BroadcastDiscardEnabled/TaggedPorts 相关
-- [ ] 1.3 重写 `huawei_interface.go`：IfName/TrunkVlans；删 L3/IpAddress/Netmask/NativeVlan/Speed/Duplex 分支；模式收敛 L2
-- [ ] 1.4 `huawei.go`：bizv1 导入→api/biz/v1；Route map 用 biz/v1 字段（Destination/NextHop/Preference/Description/BfdEnabled）；`translator.go` 注释
-- [ ] 1.5 crdsource：`businessvlan.go`/`businessinterface.go`/`register.go`（AddToScheme/VlanObject/InterfaceObject）+ 测试 → api/biz/v1
-- [ ] 1.6 `go build ./...` + `go test ./...` 全绿
+- [x] 1.1 先写测试：`pkg/translator` 单测——VLAN(biz/v1: MacLearning/BroadcastDiscard/UnknownMulticastDiscard/AdminStatus→huawei ygot)、Interface(biz/v1: IfName/MTU/access|trunk|hybrid→L2 ygot)、错误路径
+- [x] 1.2 重写 `huawei_vlan.go`：bizv1 导入→api/biz/v1；映射 biz/v1 字段；删 Type/convertVlanType/MacLearningEnabled/StatisticEnabled/BroadcastDiscardEnabled/TaggedPorts 相关
+- [x] 1.3 重写 `huawei_interface.go`：IfName/TrunkVlans；删 L3/IpAddress/Netmask/NativeVlan/Speed/Duplex 分支；模式收敛 L2
+- [x] 1.4 `huawei.go`：bizv1 导入→api/biz/v1；Route map 用 biz/v1 字段（Destination/NextHop/Preference/Description/BfdEnabled）；`translator.go` 注释
+- [x] 1.5 crdsource：`businessvlan.go`/`businessinterface.go`/`register.go`（AddToScheme/VlanObject/InterfaceObject）+ 测试 → api/biz/v1
+- [x] 1.6 `go build ./...` + `go test ./...` 全绿
 
 ## 2. 删除 api/v1（随后 PR，迁移后零引用）
 

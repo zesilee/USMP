@@ -8,7 +8,7 @@ import (
 
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
-	apiv1 "github.com/leezesi/usmp/backend/api/v1"
+	apiv1 "github.com/leezesi/usmp/backend/api/biz/v1"
 	"github.com/leezesi/usmp/backend/pkg/translator"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/source"
 )

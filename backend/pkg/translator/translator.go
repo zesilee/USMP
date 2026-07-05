@@ -10,11 +10,11 @@ import (
 type VendorType string
 
 const (
-	VendorHuawei   VendorType = "Huawei"
-	VendorCisco    VendorType = "Cisco"
-	VendorH3C      VendorType = "H3C"
-	VendorJuniper  VendorType = "Juniper"
-	VendorUnknown  VendorType = "Unknown"
+	VendorHuawei  VendorType = "Huawei"
+	VendorCisco   VendorType = "Cisco"
+	VendorH3C     VendorType = "H3C"
+	VendorJuniper VendorType = "Juniper"
+	VendorUnknown VendorType = "Unknown"
 )
 
 // ConfigType 配置类型
