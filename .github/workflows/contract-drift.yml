@@ -43,8 +43,9 @@ jobs:
 
       - name: 比对生成物（漂移即失败）
         run: |
-          if ! git diff --exit-status -- frontend/src/types/api.gen.ts; then
+          if [ -n "$(git status --porcelain -- frontend/src/types/api.gen.ts)" ]; then
             echo "::error::frontend/src/types/api.gen.ts 与后端注解不一致。请本地运行 'make gen-contract' 后提交生成物。"
+            git --no-pager diff -- frontend/src/types/api.gen.ts
             exit 1
           fi
           echo "✅ 契约生成物与后端 swag 注解一致"
