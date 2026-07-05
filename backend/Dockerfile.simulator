@@ -1,0 +1,42 @@
+# NETCONF 模拟网元镜像
+# 现有构建体系（backend/Dockerfile 只 build main.go）不产出模拟器，端到端 staging 必须补此镜像。
+# 构建上下文与 backend/Dockerfile 相同：backend/
+
+# 构建阶段
+FROM golang:1.26-alpine AS builder
+
+WORKDIR /app
+
+RUN apk add --no-cache git
+
+# 依赖缓存
+COPY go.mod go.sum ./
+RUN go mod download
+
+# 源码
+COPY . .
+
+# 构建模拟器（cmd/netconf-simulator），纯 Go 的 SSH 实现，可静态编译。
+# 输出到 /out/simulator（绝对路径）：backend/ 下已存在 simulator/ 源码目录，
+# 若用 -o simulator 会把二进制写进那个目录而非生成同名文件，导致运行期 "is a directory"。
+RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o /out/simulator ./cmd/netconf-simulator
+
+# 运行阶段
+FROM alpine:3.19
+
+WORKDIR /
+
+RUN apk add --no-cache ca-certificates tzdata
+ENV TZ=Asia/Shanghai
+
+COPY --from=builder /out/simulator /simulator
+
+# NETCONF over SSH 端口
+EXPOSE 830
+
+# 非 root 运行
+RUN adduser -D usmp
+USER usmp
+
+# 默认监听 0.0.0.0:830（与 backend 种子设备 192.168.1.1:830 对齐）
+ENTRYPOINT ["/simulator", "-addr", "0.0.0.0", "-port", "830"]
