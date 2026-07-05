@@ -380,7 +380,12 @@ export interface components {
             username: string;
         };
         "api.ConfigGetData": {
+            cache_age_seconds?: number;
+            cached?: boolean;
             data?: unknown;
+            /** @description "device" | "cache" */
+            source?: string;
+            ttl_seconds?: number;
         };
         "api.ConfigSetData": {
             path?: string;
