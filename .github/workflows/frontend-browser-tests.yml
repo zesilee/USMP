@@ -1,0 +1,45 @@
+name: Frontend Browser Tests
+
+# 真浏览器组件测试（Vitest Browser Mode + Chromium）。
+# 与 frontend-ci 的 happy-dom 单测互补：验证 Element Plus 等组件在真实浏览器里的渲染，
+# happy-dom 近似 DOM 测不真的层次（el-table 出行、el-select 展开等）在此覆盖。
+
+on:
+  pull_request:
+    paths:
+      - 'frontend/**'
+  push:
+    branches: [main]
+    paths:
+      - 'frontend/**'
+
+permissions:
+  contents: read
+
+jobs:
+  browser-tests:
+    name: Vitest Browser Mode (chromium)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: frontend/.nvmrc
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci --prefer-offline --no-audit --fund=false
+
+      # 直接用 vitest-browser 依赖的 playwright 包自身的 CLI 安装，避免与
+      # @playwright/test 的版本歧义导致装错 chromium 修订版（headless-shell 缺失）。
+      - name: Install Chromium（匹配 vitest browser provider 的 playwright 版本）
+        run: node node_modules/playwright/cli.js install --with-deps chromium
+
+      - name: Browser component tests
+        run: npm run test:browser
