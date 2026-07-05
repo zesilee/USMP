@@ -212,22 +212,20 @@
       <!-- ==================== CONFIG ==================== -->
       <section class="view" id="view-config">
         <div class="ph">
-          <div><h1 id="cfgTitle">接口配置</h1><div class="sub">表单由 <span class="mono">ietf-interfaces / huawei-ifm</span> YANG 模型自动渲染 · 无手写表单</div></div>
+          <div><h1 id="cfgTitle">接口配置</h1><div class="sub" id="cfgSub">表单由 <span class="mono">ietf-interfaces / huawei-ifm</span> 模型自动渲染 · 无手写表单</div></div>
           <div class="ph-actions">
             <select class="inp" style="width:210px"><option>Core-Switch-01 · 10.0.0.1</option><option>Access-Switch-03 · 10.0.2.13</option></select>
-            <button class="btn btn-pri" onclick="openDrawer()"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>新增接口</button>
+            <button class="btn btn-pri" onclick="openDrawer()"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg><span id="addLabel">新增接口</span></button>
           </div>
         </div>
         <div class="cfg">
           <div class="card tree">
-            <div class="tree-h">YANG 模型</div>
-            <div class="tree-item active"><span>接口<span class="path">ifm</span></span><span class="count-pill">48</span></div>
-            <div class="tree-item"><span>VLAN<span class="path">huawei-vlan</span></span><span class="count-pill">12</span></div>
-            <div class="tree-item"><span>路由<span class="path">oc-route</span></span><span class="count-pill">6</span></div>
+            <div class="tree-h" id="treeH">YANG 模型</div>
+            <div id="modelTree"></div>
           </div>
           <div class="card wrap-tbl">
             <table class="tbl">
-              <thead><tr><th>接口名</th><th>描述</th><th>管理状态</th><th>MTU</th><th>收敛态</th><th></th></tr></thead>
+              <thead id="cfgHead"></thead>
               <tbody id="ifBody"></tbody>
             </table>
           </div>
