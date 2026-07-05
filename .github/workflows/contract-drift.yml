@@ -1,0 +1,50 @@
+name: Contract Drift
+
+# API 契约漂移门禁：后端 swag 注解是唯一真源，前端 src/types/api.gen.ts 是生成物。
+# 本工作流按后端注解重新生成契约，与仓库里提交的 api.gen.ts 比对——不一致即失败，
+# 强制「改了后端契约必须重新生成前端类型」，杜绝虚构契约（如设备页恒空那次）复发。
+
+on:
+  pull_request:
+    paths:
+      - 'backend/**'
+      - 'frontend/src/types/api.gen.ts'
+      - 'frontend/package.json'
+      - 'Makefile'
+      - '.github/workflows/contract-drift.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  drift:
+    name: 契约生成物与后端注解一致
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: backend/go.mod
+          cache-dependency-path: backend/go.sum
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: frontend/.nvmrc
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: 安装前端依赖（openapi-typescript）
+        working-directory: frontend
+        run: npm ci --prefer-offline --no-audit --fund=false
+
+      - name: 重新生成契约
+        run: make gen-contract
+
+      - name: 比对生成物（漂移即失败）
+        run: |
+          if ! git diff --exit-status -- frontend/src/types/api.gen.ts; then
+            echo "::error::frontend/src/types/api.gen.ts 与后端注解不一致。请本地运行 'make gen-contract' 后提交生成物。"
+            exit 1
+          fi
+          echo "✅ 契约生成物与后端 swag 注解一致"
