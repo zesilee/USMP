@@ -38,4 +38,17 @@ test.describe('部署冒烟 - 前端 SPA', () => {
     await expect(page.getByText('概览', { exact: false }).first()).toBeVisible()
     await expect(page.getByText('系统设置', { exact: false }).first()).toBeVisible()
   })
+
+  // 设备管理页应渲染出后端种子设备（回归门禁）。
+  //
+  // 此断言此前被排除，原因是 stores/device.ts 对接的是一个虚构后端契约
+  // （GET /api/devices + res.data.devices），设备永远拉不到、表格恒空。store 修复后
+  // 改用真实契约（GET /api/v1/devices + res.data.data.devices，兼容 online/status），
+  // 后端种子设备 192.168.1.1 现在能真实渲染 —— 故此断言现在诚实为真，用作该 BUG 的回归防线。
+  test('设备管理页应列出种子设备 192.168.1.1', async ({ page }) => {
+    await page.goto('/devices', { waitUntil: 'networkidle' })
+
+    // 设备表格里出现种子设备 IP（证明 store→/api/v1/devices→表格 整条链路打通）
+    await expect(page.getByText('192.168.1.1', { exact: false }).first()).toBeVisible({ timeout: 15000 })
+  })
 })

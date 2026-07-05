@@ -4,15 +4,25 @@ import { createPinia, setActivePinia } from 'pinia'
 import { createRouter, createMemoryHistory } from 'vue-router'
 import Devices from '../../src/views/Devices.vue'
 import ElementPlus from 'element-plus'
-import axios from 'axios'
+import { listDevices, getDeviceStatus } from '../../src/api'
 
-vi.mock('axios')
+vi.mock('../../src/api')
 
-const mockDevices = [
-  { id: '1', ip: '192.168.1.1', name: 'Core-Switch-01', vendor: 'H3C', model: 'S6800', status: 'online', lastSync: '2026-05-03 10:00:00' },
-  { id: '2', ip: '192.168.1.2', name: 'Access-Switch-01', vendor: 'Huawei', model: 'S5735', status: 'online', lastSync: '2026-05-03 09:30:00' },
-  { id: '3', ip: '192.168.1.3', name: 'Core-Switch-02', vendor: 'Cisco', model: 'N9K', status: 'offline', lastSync: '2026-05-02 18:00:00' }
-]
+// 真实后端信封: { success, data: { devices: [...], stats } }
+// 设备字段为后端 DeviceStatus（ip / online），name/vendor/model 由前端 ip 兜底。
+const backendEnvelope = {
+  data: {
+    success: true,
+    data: {
+      devices: [
+        { ip: '192.168.1.1', port: 830, online: true },
+        { ip: '192.168.1.2', port: 830, online: true },
+        { ip: '192.168.1.3', port: 830, online: false },
+      ],
+      stats: { active_connections: 2, total_connections: 3, errors: 0 },
+    },
+  },
+}
 
 const router = createRouter({
   history: createMemoryHistory(),
@@ -22,8 +32,8 @@ const router = createRouter({
 describe('Devices View', () => {
   beforeEach(() => {
     setActivePinia(createPinia())
-    vi.mocked(axios.get).mockResolvedValue({ data: { devices: mockDevices } })
-    vi.mocked(axios.post).mockResolvedValue({ data: { success: true, message: '成功' } })
+    vi.mocked(listDevices).mockResolvedValue(backendEnvelope as any)
+    vi.mocked(getDeviceStatus).mockResolvedValue({ data: { success: true, data: { running: true, connected: true } } } as any)
   })
 
   it('should render search input field', () => {
