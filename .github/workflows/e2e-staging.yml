@@ -15,6 +15,14 @@ name: E2E Staging (self-hosted)
 on:
   push:
     branches: [main]
+    # 纯文档/技能/元数据变更不触发重型部署+E2E（不影响运行的应用）。
+    # 需强制跑仍可用 workflow_dispatch。
+    paths-ignore:
+      - '**.md'
+      - '.claude/**'
+      - 'docs/**'
+      - '.gitignore'
+      - 'openspec/**'
   workflow_dispatch:
 
 # 部署不叠加、不半路砍：一次跑完再跑下一次。
