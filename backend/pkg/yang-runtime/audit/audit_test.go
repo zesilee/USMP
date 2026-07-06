@@ -125,6 +125,16 @@ func TestLoad_CorruptFileDegradesEmpty(t *testing.T) {
 	assert.Len(t, s.List(), 1)
 }
 
+func TestRecord_PersistFailureDoesNotPanicOrBlock(t *testing.T) {
+	// 让持久化必失败：父路径是文件而非目录 → MkdirAll/WriteFile 都失败。
+	blocker := filepath.Join(t.TempDir(), "blocker")
+	assert.NoError(t, os.WriteFile(blocker, []byte("x"), 0o600))
+	s := NewStore(filepath.Join(blocker, "audit.json"), 100)
+
+	assert.NotPanics(t, func() { s.Record(rec("a", "/p", "x")) })
+	assert.Len(t, s.List(), 1, "写盘失败仍应保留内存记录(R08)")
+}
+
 func TestConcurrent_RecordAndList(t *testing.T) {
 	// Run with -race
 	s := NewStore("", 1000)

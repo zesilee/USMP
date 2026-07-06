@@ -12,6 +12,7 @@ package audit
 
 import (
 	"encoding/json"
+	"log"
 	"os"
 	"path/filepath"
 	"strconv"
@@ -80,7 +81,10 @@ func (s *Store) Record(r Record) {
 	if len(s.records) > s.maxRecords {
 		s.records = append(s.records[:0], s.records[len(s.records)-s.maxRecords:]...)
 	}
-	s.persistLocked() // best-effort; error ignored so a push never fails on I/O
+	if err := s.persistLocked(); err != nil {
+		// best-effort：写失败不阻断下发，但让 durability 降级可见（重启会丢盘外记录）。
+		log.Printf("[audit] persist failed, keeping in-memory only: %v", err)
+	}
 	s.mu.Unlock()
 }
 

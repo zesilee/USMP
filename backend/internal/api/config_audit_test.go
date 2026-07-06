@@ -24,6 +24,20 @@ func TestSetConfig_RecordsAudit(t *testing.T) {
 	assert.Equal(t, "system", logs[0].Actor)      // 无鉴权来源
 }
 
+func TestSummarizeSubmitted(t *testing.T) {
+	assert.Equal(t, "(空)", summarizeSubmitted(map[string]interface{}{}))
+	assert.Equal(t, "(空)", summarizeSubmitted(nil))
+	// 数组 → 键 (N)；非数组 → 键；多键按字母序稳定
+	assert.Equal(t, "vlans (2)", summarizeSubmitted(map[string]interface{}{
+		"vlans": []interface{}{map[string]interface{}{"id": 1}, map[string]interface{}{"id": 2}},
+	}))
+	assert.Equal(t, "enable", summarizeSubmitted(map[string]interface{}{"enable": true}))
+	assert.Equal(t, "iface (1), name", summarizeSubmitted(map[string]interface{}{
+		"name":  "x",
+		"iface": []interface{}{"GE0/0/1"},
+	}))
+}
+
 // 被拒下发（校验失败 400）不产生审计记录——只有真正接受的操作才入日志。
 func TestSetConfig_RejectedPush_NoAudit(t *testing.T) {
 	mgr := manager.New()
