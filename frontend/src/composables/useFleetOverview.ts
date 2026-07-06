@@ -75,7 +75,9 @@ export interface Overview {
   recent: LedgerRow[]
 }
 
-const OUTCOME_TO_STATE: Record<string, DisplayState> = {
+// 后端 reconcile outcome → 展示态（收敛/收敛中/漂移/失败/未对账）。离线态由调用方另判。
+// 导出供 deviceRows 等复用，保持「outcome→态」单一真源。
+export const OUTCOME_TO_STATE: Record<string, DisplayState> = {
   converged: 'conv',
   reconciling: 'recon',
   drifted: 'drift',
@@ -97,8 +99,8 @@ function emptyCounts(): StateCounts {
   return { conv: 0, recon: 0, drift: 0, error: 0, off: 0, unknown: 0 }
 }
 
-/** last_run 是否为「有效时刻」（非空、非零值 0001-01-01）。 */
-function normalizeLastRun(raw?: string): string | null {
+/** last_run 是否为「有效时刻」（非空、非零值 0001-01-01）。导出供 deviceRows 复用。 */
+export function normalizeLastRun(raw?: string): string | null {
   if (!raw) return null
   if (raw.startsWith('0001-01-01')) return null // Go time.Time 零值
   return raw
