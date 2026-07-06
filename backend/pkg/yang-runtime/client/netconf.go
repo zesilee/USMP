@@ -982,6 +982,124 @@ type ifmInterfaceXML struct {
 	Type        *uint64 `xml:"type"`
 }
 
+// vlanMemberPortXML / vlanEntryXML are plain intermediate structs for decoding a device
+// get-config <vlan> element. Same rationale as ifmInterfaceXML: ygot renders the VLAN list
+// (and its member-port list) as Go maps with no xml tags, so encoding/xml cannot unmarshal
+// into them — actual 恒空 → VLAN 永久漂移。覆盖 UI 可配置的扁平叶子 + 嵌套 member-port，
+// 与 buildHuaweiVlanVlansXML 下发字段对齐，保证设备落盘 desired 后对账收敛。
+type vlanMemberPortXML struct {
+	InterfaceName string  `xml:"interface-name"`
+	AccessType    *uint64 `xml:"access-type"`
+	TagMode       *uint64 `xml:"tag-mode"`
+}
+
+type vlanEntryXML struct {
+	Id               *uint16             `xml:"id"`
+	Name             *string             `xml:"name"`
+	Description      *string             `xml:"description"`
+	AdminStatus      *uint64             `xml:"admin-status"`
+	Type             *uint64             `xml:"type"`
+	BroadcastDiscard *uint64             `xml:"broadcast-discard"`
+	MacLearning      *uint64             `xml:"mac-learning"`
+	StatisticEnable  *uint64             `xml:"statistic-enable"`
+	MemberPorts      []vlanMemberPortXML `xml:"member-ports>member-port"`
+}
+
+// ParseHuaweiVlanVlansXML parses a NETCONF get-config reply (raw XML bytes, wrapped or bare)
+// into a *huawei.HuaweiVlan_Vlan_Vlans with its Vlan map (key = VLAN id) populated. Robust to
+// namespace prefixes and outer wrappers via token scanning. Returns an empty (non-nil) container
+// when no vlans are present.
+func ParseHuaweiVlanVlansXML(data []byte) (*huawei.HuaweiVlan_Vlan_Vlans, error) {
+	result := &huawei.HuaweiVlan_Vlan_Vlans{
+		Vlan: make(map[uint16]*huawei.HuaweiVlan_Vlan_Vlans_Vlan),
+	}
+	if len(data) == 0 {
+		return result, nil
+	}
+
+	dec := xml.NewDecoder(bytes.NewReader(data))
+	idx := 0
+	for {
+		tok, err := dec.Token()
+		if err == io.EOF {
+			break
+		}
+		if err != nil {
+			return nil, fmt.Errorf("parse vlan vlans xml: %w", err)
+		}
+		se, ok := tok.(xml.StartElement)
+		if !ok || se.Name.Local != "vlan" {
+			continue
+		}
+
+		var x vlanEntryXML
+		if err := dec.DecodeElement(&x, &se); err != nil {
+			return nil, fmt.Errorf("decode <vlan>: %w", err)
+		}
+
+		entry := &huawei.HuaweiVlan_Vlan_Vlans_Vlan{}
+		if x.Id != nil {
+			entry.Id = x.Id
+		}
+		if x.Name != nil {
+			entry.Name = x.Name
+		}
+		if x.Description != nil {
+			entry.Description = x.Description
+		}
+		if x.AdminStatus != nil {
+			entry.AdminStatus = huawei.E_HuaweiVlan_AdminStatus(*x.AdminStatus)
+		}
+		if x.Type != nil {
+			entry.Type = huawei.E_HuaweiVlan_VlanType(*x.Type)
+		}
+		if x.BroadcastDiscard != nil {
+			entry.BroadcastDiscard = huawei.E_HuaweiVlan_EnableStatus(*x.BroadcastDiscard)
+		}
+		if x.MacLearning != nil {
+			entry.MacLearning = huawei.E_HuaweiVlan_EnableStatus(*x.MacLearning)
+		}
+		if x.StatisticEnable != nil {
+			entry.StatisticEnable = huawei.E_HuaweiVlan_EnableStatus(*x.StatisticEnable)
+		}
+		if len(x.MemberPorts) > 0 {
+			mp := &huawei.HuaweiVlan_Vlan_Vlans_Vlan_MemberPorts{
+				MemberPort: make(map[string]*huawei.HuaweiVlan_Vlan_Vlans_Vlan_MemberPorts_MemberPort),
+			}
+			for _, p := range x.MemberPorts {
+				port := &huawei.HuaweiVlan_Vlan_Vlans_Vlan_MemberPorts_MemberPort{}
+				if p.InterfaceName != "" {
+					name := p.InterfaceName
+					port.InterfaceName = &name
+				}
+				if p.AccessType != nil {
+					port.AccessType = huawei.E_HuaweiVlan_AccessType(*p.AccessType)
+				}
+				if p.TagMode != nil {
+					port.TagMode = huawei.E_HuaweiVlan_TagMode(*p.TagMode)
+				}
+				key := p.InterfaceName
+				if key == "" {
+					key = fmt.Sprintf("port-%d", len(mp.MemberPort))
+				}
+				mp.MemberPort[key] = port
+			}
+			entry.MemberPorts = mp
+		}
+
+		var key uint16
+		if x.Id != nil {
+			key = *x.Id
+		} else {
+			key = uint16(idx)
+		}
+		idx++
+		result.Vlan[key] = entry
+	}
+
+	return result, nil
+}
+
 // ParseHuaweiIfmInterfacesXML parses a NETCONF get-config reply (raw XML bytes, whether
 // wrapped in <data>/<rpc-reply> or bare <interfaces>) into a *huawei.HuaweiIfm_Ifm_Interfaces
 // with its Interface map populated. It scans the token stream for <interface> elements so it

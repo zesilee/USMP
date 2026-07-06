@@ -76,6 +76,70 @@ func TestReconciler_Integration_CreateVLAN(t *testing.T) {
 	testsupport.AssertHuaweiVlanCount(t, sim, 1)
 }
 
+// TestReconciler_Integration_CreateVLAN_ConvergesAndReadable 锁死 VLAN 侧「一直漂移」回归：
+// 设备回读 XML 原先无法解析进 ygot map（actual 恒空）→ 每轮都算出 diff。修复后第二次对账必须收敛。
+func TestReconciler_Integration_CreateVLAN_ConvergesAndReadable(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping integration test in short mode")
+	}
+
+	sim := netsim.NewSimulator()
+	if err := sim.Start(); err != nil {
+		t.Fatalf("start simulator: %v", err)
+	}
+	defer sim.Stop()
+
+	c := cache.NewTTLLRUCache(100, 30*time.Second, 1*time.Minute)
+	cs := manager.NewInMemoryConfigStore(c)
+	pool := client.NewDefaultClientPool(client.DefaultClientFactory(5 * time.Second))
+	defer pool.CloseAll()
+
+	// UI 新建：稀疏意图（id + name）
+	desired := &huawei.HuaweiVlan_Vlan_Vlans{
+		Vlan: map[uint16]*huawei.HuaweiVlan_Vlan_Vlans_Vlan{
+			300: {Id: uint16Ptr(300), Name: stringPtr("v300")},
+		},
+	}
+
+	deviceID := fmt.Sprintf("%s:%s@%s:%d", sim.Username(), sim.Password(), sim.Addr(), sim.Port())
+	path := "/vlan:vlan/vlan:vlans"
+	if err := cs.Set(deviceID, path, desired); err != nil {
+		t.Fatalf("config store set: %v", err)
+	}
+
+	r := New(cs, pool)
+	req := reconcile.Request{DeviceID: deviceID, Path: path}
+	ctx := context.Background()
+
+	first := r.Reconcile(ctx, req)
+	if first.Error != nil {
+		t.Fatalf("first reconcile failed: %v", first.Error)
+	}
+	assert.Greater(t, first.Changes, 0, "首轮应检测到漂移并下发新 VLAN")
+
+	// 回读设备：VLAN 必须真正落盘且能解析进 ygot map（根因 C 修复）
+	dc := &deviceClient{clientPool: pool}
+	got, err := dc.Get(ctx, deviceID)
+	if err != nil {
+		t.Fatalf("readback device config: %v", err)
+	}
+	vlans, ok := got.(*huawei.HuaweiVlan_Vlan_Vlans)
+	if !ok {
+		t.Fatalf("unexpected readback type %T", got)
+	}
+	if _, present := vlans.Vlan[300]; !present {
+		t.Fatalf("新建的 VLAN 300 未在设备回读中出现")
+	}
+
+	// 二次对账必须收敛（不再永久漂移）
+	second := r.Reconcile(ctx, req)
+	if second.Error != nil {
+		t.Fatalf("second reconcile failed: %v", second.Error)
+	}
+	assert.Equal(t, 0, second.Changes, "设备已落盘 desired 后第二轮对账必须收敛")
+	assert.False(t, second.Requeue)
+}
+
 // TestReconciler_Integration_ModifyVLAN tests modifying an existing VLAN configuration
 func TestReconciler_Integration_ModifyVLAN(t *testing.T) {
 	if testing.Short() {
@@ -429,10 +493,10 @@ func TestReconciler_Integration_FullVLANConfig(t *testing.T) {
 				BroadcastDiscard:        huawei.HuaweiVlan_EnableStatus_enable,
 				UnknownMulticastDiscard: huawei.HuaweiVlan_EnableStatus_disable,
 				MacLearning:             huawei.HuaweiVlan_EnableStatus_enable,
-				MacAgingTime:           uint32Ptr(300),
-				StatisticEnable:        huawei.HuaweiVlan_EnableStatus_enable,
-				StatisticDiscard:       huawei.HuaweiVlan_EnableStatus_disable,
-				SuperVlan:              uint16Ptr(999),
+				MacAgingTime:            uint32Ptr(300),
+				StatisticEnable:         huawei.HuaweiVlan_EnableStatus_enable,
+				StatisticDiscard:        huawei.HuaweiVlan_EnableStatus_disable,
+				SuperVlan:               uint16Ptr(999),
 				UnkownUnicastDiscard: &huawei.HuaweiVlan_Vlan_Vlans_Vlan_UnkownUnicastDiscard{
 					Discard:           huawei.HuaweiVlan_EnableStatus_enable,
 					MacLearningEnable: huawei.HuaweiVlan_EnableStatus_disable,
@@ -604,10 +668,10 @@ func TestReconciler_Integration_MacAgingTime(t *testing.T) {
 	desired := &huawei.HuaweiVlan_Vlan_Vlans{
 		Vlan: map[uint16]*huawei.HuaweiVlan_Vlan_Vlans_Vlan{
 			600: {
-				Id:            uint16Ptr(600),
-				Name:          stringPtr("AgingTimeTest"),
-				Type:          huawei.HuaweiVlan_VlanType_common,
-				MacAgingTime:  uint32Ptr(600), // 10 minutes
+				Id:           uint16Ptr(600),
+				Name:         stringPtr("AgingTimeTest"),
+				Type:         huawei.HuaweiVlan_VlanType_common,
+				MacAgingTime: uint32Ptr(600), // 10 minutes
 			},
 		},
 	}

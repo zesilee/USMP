@@ -3,7 +3,6 @@ package vlan
 import (
 	"context"
 	"encoding/json"
-	"encoding/xml"
 	"fmt"
 	"net"
 	"strconv"
@@ -130,20 +129,11 @@ func (d *deviceClient) Get(ctx context.Context, deviceID string) (interface{}, e
 	case []byte:
 		// Try JSON first (gNMI case), then XML (NETCONF case)
 		if len(data) > 0 && data[0] == '<' {
-			// XML format from NETCONF
-			// Response from get-config is inside <data> tag, so we need to find the actual config
-			// ygot generated structs know how to unmarshal XML with huawei namespaces
-			if err := xml.Unmarshal(data, deviceRoot); err != nil {
-				// If direct unmarshal fails, try wrapping the content because it's inside <data>
-				wrapped := []byte(fmt.Sprintf("<data>%s</data>", string(data)))
-				if err2 := xml.Unmarshal(wrapped, deviceRoot); err2 != nil {
-					return nil, fmt.Errorf("unmarshal wrapped XML failed: %w (original: %w)", err2, err)
-				}
-			}
-			if deviceRoot.Vlan == nil || deviceRoot.Vlan.Vlans == nil {
-				return &huawei.HuaweiVlan_Vlan_Vlans{}, nil
-			}
-			return deviceRoot.Vlan.Vlans, nil
+			// XML format from NETCONF get-config.
+			// ygot 把 vlans/vlan（及 member-port）生成为 Go map 且无 xml tag，encoding/xml
+			// 无法解析进 map —— 直接 xml.Unmarshal 会得到空 actual，导致对账永远算出 diff
+			// （VLAN「一直漂移」）。改用手写 token 解析器把 <vlan> 填进 ygot map。
+			return client.ParseHuaweiVlanVlansXML(data)
 		}
 		// JSON format from gNMI
 		if err := json.Unmarshal(data, deviceRoot); err != nil {
@@ -234,10 +224,10 @@ func (d *deviceClient) Set(ctx context.Context, deviceID string, changes []recon
 			changeType = client.ModifyChange
 		}
 		clientChanges[i] = client.Change{
-			Type:      changeType,
-			Path:      rc.Path,
-			OldValue:  rc.ActualValue,
-			NewValue:  rc.DesiredValue,
+			Type:       changeType,
+			Path:       rc.Path,
+			OldValue:   rc.ActualValue,
+			NewValue:   rc.DesiredValue,
 			SchemaPath: rc.Path,
 		}
 	}
@@ -283,4 +273,3 @@ func parseInt(s string) (int, error) {
 	p, err := strconv.Atoi(s)
 	return p, err
 }
-
