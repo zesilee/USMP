@@ -4,7 +4,8 @@ import { createPinia, setActivePinia } from 'pinia'
 import { createRouter, createMemoryHistory } from 'vue-router'
 import ElementPlus from 'element-plus'
 import Devices from '../../src/views/Devices.vue'
-import { listDevices, getDeviceStatus } from '../../src/api'
+import ReconcileChip from '../../src/components/dashboard/ReconcileChip.vue'
+import { listDevices, getFleetReconcile, getDeviceStatus } from '../../src/api'
 
 // 真 Chromium 组件测试：验证 happy-dom 测不真的东西 —— Element Plus el-table
 // 在真实浏览器里把设备数据渲染成可见表格行。这是 happy-dom（近似 DOM，el-table
@@ -33,6 +34,7 @@ describe('Devices（真浏览器渲染）', () => {
   beforeEach(() => {
     setActivePinia(createPinia())
     vi.mocked(listDevices).mockResolvedValue(backendEnvelope as any)
+    vi.mocked(getFleetReconcile).mockResolvedValue({ data: { success: true, data: { devices: [{ device_id: '192.168.1.1', outcome: 'converged' }] } } } as any)
     vi.mocked(getDeviceStatus).mockResolvedValue({ data: { success: true, data: { running: true, connected: true } } } as any)
   })
 
@@ -47,10 +49,11 @@ describe('Devices（真浏览器渲染）', () => {
       expect(document.body.textContent).toContain('192.168.1.1')
     }, { timeout: 3000 })
 
-    // 真实 DOM 里出现两台设备 + 在线/离线状态标签真实落地
+    // 真实 DOM 里出现两台设备 + 收敛态 chip / 会话 chip 真实落地
     expect(document.body.textContent).toContain('192.168.1.2')
-    const tags = wrapper.findAllComponents({ name: 'ElTag' })
-    expect(tags.length).toBeGreaterThanOrEqual(2)
+    const chips = wrapper.findAllComponents(ReconcileChip)
+    expect(chips.length).toBeGreaterThanOrEqual(2)
+    expect(document.body.textContent).toMatch(/已连接|断开/)
 
     wrapper.unmount()
   })

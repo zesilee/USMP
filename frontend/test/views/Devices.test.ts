@@ -1,16 +1,15 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
-import { mount } from '@vue/test-utils'
+import { mount, flushPromises } from '@vue/test-utils'
 import { createPinia, setActivePinia } from 'pinia'
 import { createRouter, createMemoryHistory } from 'vue-router'
 import Devices from '../../src/views/Devices.vue'
+import ReconcileChip from '../../src/components/dashboard/ReconcileChip.vue'
 import ElementPlus from 'element-plus'
-import { listDevices, getDeviceStatus } from '../../src/api'
+import { listDevices, getFleetReconcile, getDeviceStatus } from '../../src/api'
 
 vi.mock('../../src/api')
 
-// 真实后端信封: { success, data: { devices: [...], stats } }
-// 设备字段为后端 DeviceStatus（ip / online），name/vendor/model 由前端 ip 兜底。
-const backendEnvelope = {
+const devicesEnvelope = {
   data: {
     success: true,
     data: {
@@ -23,42 +22,93 @@ const backendEnvelope = {
     },
   },
 }
+const fleetEnvelope = {
+  data: {
+    success: true,
+    data: {
+      devices: [
+        { device_id: '192.168.1.1', outcome: 'converged', last_run: '2026-07-06T10:00:00Z' },
+        { device_id: '192.168.1.2', outcome: 'drifted', last_run: '2026-07-06T09:00:00Z' },
+      ],
+    },
+  },
+}
 
 const router = createRouter({
   history: createMemoryHistory(),
-  routes: [{ path: '/', name: 'dashboard', component: {} }]
+  routes: [{ path: '/', name: 'dashboard', component: {} }, { path: '/config/interface', name: 'interface', component: {} }],
 })
 
-describe('Devices View', () => {
+function mountView() {
+  return mount(Devices, { global: { plugins: [ElementPlus, createPinia(), router] } })
+}
+
+describe('Devices View · 设备管理列表', () => {
   beforeEach(() => {
     setActivePinia(createPinia())
-    vi.mocked(listDevices).mockResolvedValue(backendEnvelope as any)
+    vi.clearAllMocks()
+    vi.mocked(listDevices).mockResolvedValue(devicesEnvelope as any)
+    vi.mocked(getFleetReconcile).mockResolvedValue(fleetEnvelope as any)
     vi.mocked(getDeviceStatus).mockResolvedValue({ data: { success: true, data: { running: true, connected: true } } } as any)
   })
 
-  it('should render search input field', () => {
-    const wrapper = mount(Devices, {
-      global: { plugins: [ElementPlus, createPinia(), router] }
-    })
-    expect(wrapper.find('.el-input').exists()).toBe(true)
+  it('渲染搜索框与设备表', async () => {
+    const w = mountView()
+    await flushPromises()
+    expect(w.find('.el-input').exists()).toBe(true)
+    expect(w.find('.el-table').exists()).toBe(true)
   })
 
-  it('should render device table', async () => {
-    const wrapper = mount(Devices, {
-      global: { plugins: [ElementPlus, createPinia(), router] }
-    })
-    await wrapper.vm.$nextTick()
-    expect(wrapper.find('.el-table').exists()).toBe(true)
+  it('join 对账聚合派生收敛态：在线映结局、离线恒 off', async () => {
+    const w = mountView()
+    await flushPromises()
+    const vm = w.vm as any
+    const byIp = (ip: string) => vm.rows.find((r: any) => r.ip === ip)
+    expect(byIp('192.168.1.1').reconcileState).toBe('conv')
+    expect(byIp('192.168.1.2').reconcileState).toBe('drift')
+    expect(byIp('192.168.1.3').reconcileState).toBe('off')
+    expect(byIp('192.168.1.3').session).toBe('disconnected')
   })
 
-  it('should display status badges correctly', async () => {
-    const wrapper = mount(Devices, {
-      global: { plugins: [ElementPlus, createPinia(), router] }
-    })
-    await wrapper.vm.$nextTick()
-    await new Promise(resolve => setTimeout(resolve, 100))
-    await wrapper.vm.$nextTick()
-    const tags = wrapper.findAllComponents({ name: 'ElTag' })
-    expect(tags.length).toBeGreaterThan(0)
+  it('渲染收敛态 chip（ReconcileChip）每行一枚', async () => {
+    const w = mountView()
+    await flushPromises()
+    const chips = w.findAllComponents(ReconcileChip)
+    expect(chips.length).toBe(3)
+  })
+
+  it('会话 chip 文案随在线态', async () => {
+    const w = mountView()
+    await flushPromises()
+    expect(w.text()).toContain('已连接')
+    expect(w.text()).toContain('断开')
+  })
+
+  it('状态筛选：仅离线', async () => {
+    const w = mountView()
+    await flushPromises()
+    const vm = w.vm as any
+    vm.statusFilter = 'offline'
+    await flushPromises()
+    expect(vm.filteredRows).toHaveLength(1)
+    expect(vm.filteredRows[0].ip).toBe('192.168.1.3')
+  })
+
+  it('搜索按 IP 过滤', async () => {
+    const w = mountView()
+    await flushPromises()
+    const vm = w.vm as any
+    vm.searchKeyword = '1.1'
+    await flushPromises()
+    expect(vm.filteredRows.map((r: any) => r.ip)).toEqual(['192.168.1.1'])
+  })
+
+  it('对账聚合拉取失败不阻断设备表（收敛态降级）', async () => {
+    vi.mocked(getFleetReconcile).mockRejectedValue(new Error('reconcile down'))
+    const w = mountView()
+    await flushPromises()
+    const vm = w.vm as any
+    expect(vm.rows).toHaveLength(3) // 设备仍在
+    expect(vm.rows.find((r: any) => r.ip === '192.168.1.1').reconcileState).toBe('unknown') // 在线无记录
   })
 })
