@@ -1,5 +1,5 @@
 import { ref } from 'vue'
-import { getConfig, setConfig, getYangSchema } from '../api'
+import { getConfig, getYangSchema } from '../api'
 import type { Field } from '../utils/crdSchemaParser'
 import { useFreshnessStore } from '../stores/freshness'
 
@@ -89,9 +89,5 @@ export function useDeviceConfig(opts: DeviceConfigOptions) {
     }
   }
 
-  async function saveItem(ip: string, item: Record<string, any>) {
-    await setConfig(ip, opts.configPath, { [opts.listKey]: [item] })
-  }
-
-  return { fields, schemaFields, itemListPath, items, loading, error, loadSchema, loadItems, saveItem }
+  return { fields, schemaFields, itemListPath, items, loading, error, loadSchema, loadItems }
 }

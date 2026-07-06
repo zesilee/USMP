@@ -33,19 +33,31 @@
       </el-table>
     </div>
 
-    <el-drawer v-model="drawerVisible" :title="editing ? '编辑' : addLabel" size="560px">
-      <el-form ref="formRef" :model="formData" :rules="rules" label-position="top" class="config-form">
-        <el-form-item v-for="field in cfg.fields.value" :key="field.path" :label="field.label"
-          :prop="keyOf(field)">
-          <FieldRenderer :field="field" :model-value="formData[keyOf(field)]"
-            @update:model-value="formData[keyOf(field)] = $event" />
-        </el-form-item>
-      </el-form>
-      <DiffPreview :diff="diff" />
-      <div class="form-tip">字段与约束由 YANG 模型生成，校验通过才会下发，下发即触发对账。</div>
+    <el-drawer v-model="drawerVisible" :title="editing ? '编辑' : addLabel" size="560px"
+      :close-on-click-modal="!flowActive" :close-on-press-escape="!flowActive" @closed="onDrawerClosed">
+      <!-- idle：模型驱动表单 + 实时差异预览 -->
+      <template v-if="!flowActive">
+        <el-form ref="formRef" :model="formData" :rules="rules" label-position="top" class="config-form">
+          <el-form-item v-for="field in cfg.fields.value" :key="field.path" :label="field.label"
+            :prop="keyOf(field)">
+            <FieldRenderer :field="field" :model-value="formData[keyOf(field)]"
+              @update:model-value="formData[keyOf(field)] = $event" />
+          </el-form-item>
+        </el-form>
+        <DiffPreview :diff="diff" />
+        <div class="form-tip">字段与约束由 YANG 模型生成，校验通过才会下发，下发即触发对账。</div>
+      </template>
+      <!-- 下发中/后：真实对账三步进度 -->
+      <ReconcileSteps v-else :progress="submitFlow.progress.value" :timed-out="submitFlow.timedOut.value" />
+
       <template #footer>
-        <el-button @click="drawerVisible = false">取消</el-button>
-        <el-button type="primary" :loading="submitting" :disabled="!submittable" @click="submit">下发</el-button>
+        <template v-if="!flowActive">
+          <el-button @click="drawerVisible = false">取消</el-button>
+          <el-button type="primary" :disabled="!submittable" @click="submit">下发并对账</el-button>
+        </template>
+        <el-button v-else type="primary" :disabled="!flowDone" @click="drawerVisible = false">
+          {{ flowDone ? '关闭' : '对账中…' }}
+        </el-button>
       </template>
     </el-drawer>
   </div>
@@ -54,14 +66,16 @@
 <script setup lang="ts">
 import { ref, reactive, computed, onMounted } from 'vue'
 import { Plus } from '@element-plus/icons-vue'
-import { ElMessage, type FormInstance, type FormRules } from 'element-plus'
+import { type FormInstance, type FormRules } from 'element-plus'
 import { useDeviceStore } from '../stores/device'
 import { useDeviceConfig, type DeviceConfigOptions } from '../composables/useDeviceConfig'
-import type { Field } from '../utils/crdSchemaParser'
+import { useConfigSubmit } from '../composables/useConfigSubmit'
 import { computeDiff, missingRequired } from '../utils/configDiff'
+import type { Field } from '../utils/crdSchemaParser'
 import FieldRenderer from '../components/config/FieldRenderer.vue'
 import SchemaTree from '../components/config/SchemaTree.vue'
 import DiffPreview from '../components/config/DiffPreview.vue'
+import ReconcileSteps from '../components/config/ReconcileSteps.vue'
 
 const props = defineProps<{
   title: string
@@ -72,24 +86,28 @@ const props = defineProps<{
 
 const store = useDeviceStore()
 const cfg = useDeviceConfig(props.options)
+const submitFlow = useConfigSubmit({ configPath: props.options.configPath, listKey: props.options.listKey })
 
 const selectedDevice = ref('')
 const drawerVisible = ref(false)
 const editing = ref(false)
-const submitting = ref(false)
 const formData = reactive<Record<string, any>>({})
 const original = ref<Record<string, any>>({}) // 已回填的实际态基线（新增时为空），供实时差异比对
 const formRef = ref<FormInstance>()
 
-function keyOf(f: Field): string {
-  return f.path.split('/').filter(Boolean).pop() || f.path
-}
+// 抽屉编排态：idle 显示表单+差异预览；flowActive 显示对账进度。
+const flowActive = computed(() => submitFlow.phase.value !== 'idle')
+const flowDone = computed(() => submitFlow.progress.value.done || submitFlow.timedOut.value)
 
 // 实时差异（表单期望值 ↔ 已回填实际态）；下发按钮 = 有改动 && 无缺失必填。
 const diff = computed(() => computeDiff(formData, original.value, cfg.fields.value))
 const submittable = computed(
   () => diff.value.length > 0 && missingRequired(cfg.fields.value, formData, props.options.keyField).length === 0,
 )
+
+function keyOf(f: Field): string {
+  return f.path.split('/').filter(Boolean).pop() || f.path
+}
 
 // 架构树上目标 list 的数量 pill：把当前已配置行数挂到该 list 节点 path 上。
 const itemCounts = computed<Record<string, number>>(() =>
@@ -121,6 +139,7 @@ function resetForm(seed: Record<string, any> = {}) {
 
 function openAdd() {
   editing.value = false
+  submitFlow.reset()
   original.value = {} // 新增：基线空 → 填入即“新增”
   resetForm()
   formRef.value?.clearValidate()
@@ -129,6 +148,7 @@ function openAdd() {
 
 function openEdit(row: Record<string, any>) {
   editing.value = true
+  submitFlow.reset()
   original.value = { ...row } // 编辑：基线 = 已回填实际态
   resetForm({ ...row })
   drawerVisible.value = true
@@ -144,17 +164,15 @@ async function submit() {
       return
     }
   }
-  submitting.value = true
-  try {
-    await cfg.saveItem(selectedDevice.value, { ...formData })
-    ElMessage.success('配置已下发，正在对账')
-    drawerVisible.value = false
-    await cfg.loadItems(selectedDevice.value)
-  } catch (e: any) {
-    ElMessage.error(e?.response?.data?.message || e?.message || '下发失败')
-  } finally {
-    submitting.value = false
-  }
+  // 下发 → 回读 → 轮询对账（真实进度由 ReconcileSteps 展示）
+  await submitFlow.run(selectedDevice.value, { ...formData })
+  // 下发成功（非 setConfig 失败）则重读列表，反映最新配置
+  if (submitFlow.phase.value !== 'error') await cfg.loadItems(selectedDevice.value)
+}
+
+// 抽屉关闭后复位编排态，下次打开回到表单
+function onDrawerClosed() {
+  submitFlow.reset()
 }
 
 function reload() {
