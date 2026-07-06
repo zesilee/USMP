@@ -1,5 +1,5 @@
 import type { Device } from '../stores/device'
-import { OUTCOME_TO_STATE, type DisplayState, type FleetInput, type RollupInput } from '../composables/useFleetOverview'
+import { OUTCOME_TO_STATE, normalizeLastRun, type DisplayState, type FleetInput, type RollupInput } from '../composables/useFleetOverview'
 
 // 设备管理列表的单行：设备事实 + 会话态 + 对账态（真数据，join /reconcile/status）。
 export interface DeviceRow {
@@ -42,7 +42,8 @@ export function deriveDeviceRows(devices: Device[], fleet: FleetInput): DeviceRo
       online,
       session: online ? 'connected' : 'disconnected',
       reconcileState,
-      lastSync: d.lastSync,
+      // 归一 Go 零值(0001-01-01)为空，与概览台账口径一致（避免设备表字面显示零值时刻）
+      lastSync: normalizeLastRun(d.lastSync) ?? '',
       load: null,
     }
   })

@@ -58,6 +58,15 @@ describe('deriveDeviceRows · 设备表 + 对账聚合 join', () => {
     expect(rows[0]).toMatchObject({ id: '10.0.0.1', ip: '10.0.0.1', name: 'Core-01', lastSync: 't1' })
   })
 
+  it('lastSync 归一 Go 零值(0001-01-01)为空，与概览台账一致', () => {
+    const rows = deriveDeviceRows(
+      [dev({ ip: '1', lastSync: '0001-01-01T00:00:00Z' }), dev({ ip: '2', lastSync: '2026-07-06T10:00:00Z' })],
+      { devices: [] },
+    )
+    expect(rows[0].lastSync).toBe('') // 零值 → 空（模板显 —）
+    expect(rows[1].lastSync).toBe('2026-07-06T10:00:00Z')
+  })
+
   it('空/异常输入安全降级（R08）', () => {
     expect(deriveDeviceRows([], {})).toEqual([])
     expect(deriveDeviceRows(null as any, {})).toEqual([])

@@ -103,6 +103,16 @@ describe('Devices View · 设备管理列表', () => {
     expect(vm.filteredRows.map((r: any) => r.ip)).toEqual(['192.168.1.1'])
   })
 
+  it('筛选变化时回到第一页（避免停在越界空页）', async () => {
+    const w = mountView()
+    await flushPromises()
+    const vm = w.vm as any
+    vm.currentPage = 3
+    vm.statusFilter = 'online'
+    await flushPromises()
+    expect(vm.currentPage).toBe(1)
+  })
+
   it('对账聚合拉取失败不阻断设备表（收敛态降级）', async () => {
     vi.mocked(getFleetReconcile).mockRejectedValue(new Error('reconcile down'))
     const w = mountView()
