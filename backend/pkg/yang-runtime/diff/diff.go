@@ -129,6 +129,9 @@ func (de *DefaultDiffEngine) walk(parentPath, schemaPath string, desired, actual
 	case reflect.Slice, reflect.Array:
 		return de.walkSlice(parentPath, schemaPath, desired, actual, w)
 
+	case reflect.Map:
+		return de.walkMap(parentPath, schemaPath, desired, actual, w)
+
 	case reflect.Struct:
 		return de.walkStruct(parentPath, schemaPath, desired, actual, w)
 
@@ -237,6 +240,129 @@ func (de *DefaultDiffEngine) walkSlice(parentPath, schemaPath string, desired, a
 	}
 
 	return nil
+}
+
+// walkMap handles ygot-generated YANG lists, which ygot renders as Go maps
+// (map[key]*Entry) rather than slices — so without this branch a list field would
+// fall through to the leaf default and be compared with reflect.DeepEqual, which is
+// always false when desired is the UI's sparse intent and actual is the device's full
+// readback (extra keys + device defaults + read-only leaves). That永远 produces a
+// change → 对账永不收敛 → 前端「一直漂移」。
+//
+// 采用「合并/子集」语义，与 config_handler.storeConfigMerged 把 desired 当累积意图一致：
+//   - desired 的每个 key 必须在 actual 出现，且其「已设字段」匹配，否则视为需下发的漂移；
+//   - actual 独有的 key（设备物理口/默认条目）忽略，绝不产生 DeleteChange（不误删）。
+//
+// 一旦 desired 被 actual 满足即 0 change → 收敛。未满足时产出单个整表 ModifyChange
+// （NewValue = desired 内层 map），交由 client.marshalChange 走对应模型的 XML builder
+// 做 merge edit-config（VLAN/IFM 各有专用序列化分支）。
+func (de *DefaultDiffEngine) walkMap(parentPath, schemaPath string, desired, actual interface{}, w *diffWalker) error {
+	if de.subsetMatches(reflect.ValueOf(desired), reflect.ValueOf(actual)) {
+		return nil
+	}
+	w.result.AddChange(Change{
+		Type:       ModifyChange,
+		Path:       parentPath,
+		OldValue:   actual,
+		NewValue:   desired,
+		SchemaPath: schemaPath,
+	})
+	return nil
+}
+
+// subsetMatches reports whether every value the caller explicitly set in desired is
+// already present and equal in actual — i.e. desired ⊆ actual under merge semantics.
+// 「已设」= 非零值：nil 指针 / 空 map/slice / 枚举 0(UNSET) / "" / 0 / false 都算未设，
+// 视为「不管理」→ 直接匹配，从而不会因设备侧的额外字段/条目而误报漂移。
+func (de *DefaultDiffEngine) subsetMatches(d, a reflect.Value) bool {
+	// desired 未设（零值/无效）→ 不管理，视为匹配
+	if !d.IsValid() || d.IsZero() {
+		return true
+	}
+	// desired 已设但 actual 缺失 → 漂移
+	if !a.IsValid() {
+		return false
+	}
+
+	// 解包 interface 层
+	if d.Kind() == reflect.Interface {
+		d = d.Elem()
+	}
+	if a.Kind() == reflect.Interface {
+		a = a.Elem()
+	}
+	if !d.IsValid() || d.IsZero() {
+		return true
+	}
+	if !a.IsValid() {
+		return false
+	}
+	if d.Kind() != a.Kind() {
+		return false
+	}
+
+	switch d.Kind() {
+	case reflect.Ptr:
+		if d.IsNil() {
+			return true
+		}
+		if a.IsNil() {
+			return false
+		}
+		return de.subsetMatches(d.Elem(), a.Elem())
+
+	case reflect.Struct:
+		// desired/actual 在对账中恒为同一 ygot 类型；类型不一致时退化为整体相等比较，
+		// 避免按 desired 字段索引 actual 字段导致越界 panic（R08/R09 禁止崩溃）。
+		if d.Type() != a.Type() {
+			return reflect.DeepEqual(d.Interface(), a.Interface())
+		}
+		dType := d.Type()
+		for i := 0; i < d.NumField(); i++ {
+			if !dType.Field(i).IsExported() {
+				continue
+			}
+			if !de.subsetMatches(d.Field(i), a.Field(i)) {
+				return false
+			}
+		}
+		return true
+
+	case reflect.Map:
+		for _, k := range d.MapKeys() {
+			dv := d.MapIndex(k)
+			if !dv.IsValid() || dv.IsZero() {
+				continue // 未设条目不管理
+			}
+			av := a.MapIndex(k)
+			if !av.IsValid() {
+				return false // desired 声明的 key 不在设备上 → 需下发
+			}
+			if !de.subsetMatches(dv, av) {
+				return false
+			}
+		}
+		return true
+
+	case reflect.Slice, reflect.Array:
+		// leaf-list / 有序列表：desired 每个元素需能在 actual 中找到匹配（子集）
+		for i := 0; i < d.Len(); i++ {
+			found := false
+			for j := 0; j < a.Len(); j++ {
+				if de.subsetMatches(d.Index(i), a.Index(j)) {
+					found = true
+					break
+				}
+			}
+			if !found {
+				return false
+			}
+		}
+		return true
+
+	default:
+		return reflect.DeepEqual(d.Interface(), a.Interface())
+	}
 }
 
 // extractKey extracts a string key from a list entry
