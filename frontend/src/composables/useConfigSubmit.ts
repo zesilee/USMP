@@ -1,6 +1,12 @@
 import { ref, computed } from 'vue'
 import { setConfig, getConfig, getDeviceReconcile } from '../api'
-import { deriveReconcileProgress, outcomeToPhase, type ReconcilePhase } from '../utils/reconcileProgress'
+import {
+  deriveReconcileProgress,
+  outcomeToPhase,
+  parseRun,
+  selectStatus,
+  type ReconcilePhase,
+} from '../utils/reconcileProgress'
 
 export interface UseConfigSubmitOptions {
   configPath: string // 配置 API 路径（含 vlan:/ifm:ifm 前缀）
@@ -47,6 +53,16 @@ export function useConfigSubmit(opts: UseConfigSubmitOptions) {
     }
     reset()
 
+    // 0) 记录下发前该 path 的最近对账时刻 baseline。轮询只认 last_run 推进过 baseline 的
+    //    「新一次」对账结局，避免把「推送前就已 converged 的旧态」误当本次下发的终态。
+    let baselineRun = 0
+    try {
+      const b = await getDeviceReconcile(ip)
+      baselineRun = parseRun(selectStatus(b.data?.data?.statuses, opts.configPath)?.last_run)
+    } catch {
+      /* 拿不到 baseline 视为 0（宽松）——首次下发/从未对账时任何新记录都算推进 */
+    }
+
     // 1) 编码并下发 edit-config
     set('pushing')
     try {
@@ -65,14 +81,18 @@ export function useConfigSubmit(opts: UseConfigSubmitOptions) {
       /* 回读失败不阻断：继续以 reconcile 轮询为权威收敛信号 */
     }
 
-    // 3) 轮询单设备 reconcile 结局直到终态或超时
+    // 3) 轮询单设备 reconcile 结局，直到出现 last_run 推进过 baseline 的「新一次」终态或超时。
     for (let i = 0; i < maxPolls; i++) {
       try {
         const res = await getDeviceReconcile(ip)
-        const next = outcomeToPhase(res.data?.data?.outcome)
-        if (isTerminal(next)) {
-          set(next)
-          return
+        const st = selectStatus(res.data?.data?.statuses, opts.configPath)
+        // 仅当这一次对账是本次下发触发的（last_run 已推进）才认其终态。
+        if (st && parseRun(st.last_run) > baselineRun) {
+          const next = outcomeToPhase(st.outcome)
+          if (isTerminal(next)) {
+            set(next)
+            return
+          }
         }
       } catch {
         /* reconcile 查询报错视为非终态，继续轮询（设备可能尚未产生对账记录） */
