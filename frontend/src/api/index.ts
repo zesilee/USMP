@@ -1,6 +1,12 @@
 import axios from 'axios'
 import type { ApiResponse } from '../types/yang'
-import type { ApiEnvelope, DeviceListData, DeviceConnStatus } from '../types/api'
+import type {
+  ApiEnvelope,
+  DeviceListData,
+  DeviceConnStatus,
+  FleetReconcileData,
+  DeviceReconcileData,
+} from '../types/api'
 
 // API 基础配置
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8080/api/v1'
@@ -18,6 +24,15 @@ export const listDevices = () => {
 
 export const getDeviceStatus = (ip: string) => {
   return api.get<ApiEnvelope<DeviceConnStatus>>(`/devices/${ip}/status`)
+}
+
+// Reconcile API —— 车队/单设备对账结局（desired↔actual 收敛），供概览大盘消费。
+export const getFleetReconcile = () => {
+  return api.get<ApiEnvelope<FleetReconcileData>>('/reconcile/status')
+}
+
+export const getDeviceReconcile = (ip: string) => {
+  return api.get<ApiEnvelope<DeviceReconcileData>>(`/devices/${ip}/reconcile`)
 }
 
 // Config API - 通用 YANG 配置接口
