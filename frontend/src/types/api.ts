@@ -18,3 +18,11 @@ export interface ApiEnvelope<T> {
 export type DeviceStatusDTO = Schemas['api.DeviceStatus']
 export type DeviceListData = Schemas['api.DeviceListData']
 export type DeviceConnStatus = Schemas['api.DeviceConnStatus']
+
+// 对账（desired↔actual 收敛）契约（PR-B1 端点 + PR-B3 注解）。
+export type ReconcileOutcome = NonNullable<Schemas['status.Outcome']>
+export type ReconcileStatus =
+  Schemas['github_com_leezesi_usmp_backend_pkg_yang-runtime_status.Status']
+export type DeviceRollup = Schemas['api.DeviceRollup']
+export type FleetReconcileData = Schemas['api.FleetReconcileData']
+export type DeviceReconcileData = Schemas['api.DeviceReconcileData']
