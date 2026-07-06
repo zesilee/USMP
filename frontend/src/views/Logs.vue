@@ -1,122 +1,134 @@
 <template>
   <div class="logs">
     <div class="page-header">
-      <h2>操作日志</h2>
-      <el-button type="primary" :icon="Download" @click="handleExport">
-        导出
-      </el-button>
+      <div>
+        <h2>操作日志</h2>
+        <div class="sub">每条下发的对账结局都可追溯 · 保留于本地 JSON 元信息（§8）</div>
+      </div>
+      <div class="header-actions">
+        <el-input v-model="searchKeyword" placeholder="按设备 / 操作人搜索" :prefix-icon="Search" clearable class="search-input" />
+        <el-select v-model="statusFilter" placeholder="全部结果" clearable class="filter-select">
+          <el-option v-for="o in statusOptions" :key="o.value" :label="o.label" :value="o.value" />
+        </el-select>
+        <el-button :icon="Refresh" @click="load" :loading="loading">刷新</el-button>
+      </div>
     </div>
 
-    <div class="filter-bar">
-      <el-input
-        v-model="searchKeyword"
-        placeholder="搜索设备或操作类型"
-        :prefix-icon="Search"
-        clearable
-        class="search-input"
-        @keyup.enter="fetchLogs"
-      />
-      <el-date-picker
-        v-model="dateRange"
-        type="daterange"
-        range-separator="至"
-        start-placeholder="开始日期"
-        end-placeholder="结束日期"
-        class="date-picker"
-        @change="fetchLogs"
-      />
-      <el-select v-model="statusFilter" placeholder="状态筛选" clearable class="filter-select" @change="fetchLogs">
-        <el-option label="全部" value="" />
-        <el-option label="成功" value="success" />
-        <el-option label="失败" value="failed" />
-      </el-select>
-    </div>
-
-    <el-table :data="logs" stripe class="logs-table" v-loading="loading">
-      <el-table-column prop="time" label="时间" width="180" />
-      <el-table-column prop="device" label="设备" width="140" />
-      <el-table-column prop="type" label="操作类型" width="140" />
-      <el-table-column prop="status" label="状态" width="100">
+    <el-table :data="paginatedRows" class="logs-table" v-loading="loading">
+      <el-table-column label="时间" width="180">
+        <template #default="{ row }"><span class="mono dim">{{ formatTime(row.timestamp) }}</span></template>
+      </el-table-column>
+      <el-table-column label="操作" width="170">
         <template #default="{ row }">
-          <el-tag :type="row.status === 'success' ? 'success' : 'danger'" size="small">
-            {{ row.status === 'success' ? '成功' : '失败' }}
-          </el-tag>
+          <div class="log-op">
+            <div class="op-ico">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" /></svg>
+            </div>
+            {{ row.opLabel }}
+          </div>
         </template>
       </el-table-column>
-      <el-table-column prop="user" label="操作人" width="120" />
-      <el-table-column prop="detail" label="详情" min-width="200" show-overflow-tooltip />
+      <el-table-column label="设备" width="150">
+        <template #default="{ row }"><span class="strong">{{ row.device || '—' }}</span></template>
+      </el-table-column>
+      <el-table-column label="变更" min-width="160">
+        <template #default="{ row }"><span class="mono change">{{ row.summary || '—' }}</span></template>
+      </el-table-column>
+      <el-table-column label="操作人" width="120">
+        <template #default="{ row }"><span class="dim">{{ row.actor || '—' }}</span></template>
+      </el-table-column>
+      <el-table-column label="对账结局" width="130">
+        <template #default="{ row }"><ReconcileChip :state="row.reconcileState" /></template>
+      </el-table-column>
+      <template #empty>
+        <span>{{ loading ? '加载中…' : '暂无操作日志' }}</span>
+      </template>
     </el-table>
 
+    <div class="footnote">
+      变更列为下发内容摘要（值级 was→now 差异待后端记录）· 操作人为 system（后端无鉴权用户上下文）· 对账结局为查询时实时态。
+    </div>
+
     <div class="pagination-wrapper">
-      <el-pagination
-        v-model:current-page="currentPage"
-        v-model:page-size="pageSize"
-        :page-sizes="[20, 50, 100]"
-        :total="total"
-        layout="total, sizes, prev, pager, next, jumper"
-        @size-change="handleSizeChange"
-        @current-change="fetchLogs"
-      />
+      <el-pagination v-model:current-page="currentPage" v-model:page-size="pageSize" :page-sizes="[20, 50, 100]"
+        :total="filteredRows.length" layout="total, sizes, prev, pager, next, jumper"
+        @size-change="handleSizeChange" @current-change="handleCurrentChange" />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import { Download, Search } from '@element-plus/icons-vue'
-import { ElMessage } from 'element-plus'
-import { getLogs, type Log } from '../api/logs'
+import { ref, computed, onMounted, watch } from 'vue'
+import { Refresh, Search } from '@element-plus/icons-vue'
+import { getLogs } from '../api'
+import { deriveLogRows, type LogRow } from '../utils/logRows'
+import type { DisplayState } from '../composables/useFleetOverview'
+import ReconcileChip from '../components/dashboard/ReconcileChip.vue'
 
-const logs = ref<Log[]>([])
+const statusOptions: { label: string; value: DisplayState }[] = [
+  { label: '已收敛', value: 'conv' },
+  { label: '收敛中', value: 'recon' },
+  { label: '已漂移', value: 'drift' },
+  { label: '下发失败', value: 'error' },
+  { label: '未对账', value: 'unknown' },
+]
+
+const rows = ref<LogRow[]>([])
 const loading = ref(false)
 const searchKeyword = ref('')
-const dateRange = ref<[string, string] | null>(null)
-const statusFilter = ref('')
+const statusFilter = ref<DisplayState | ''>('')
 const currentPage = ref(1)
 const pageSize = ref(20)
-const total = ref(0)
 
-async function fetchLogs() {
+// 一次拉一批后客户端筛选/分页（与设备页一致）。后端 /logs 单批上限 500 条
+// （maxLogLimit）；审计量超 500 时最旧记录在此不可达（低频，可接受）。
+async function load() {
   loading.value = true
   try {
-    const params: any = {
-      page: currentPage.value,
-      pageSize: pageSize.value
-    }
-    if (searchKeyword.value) {
-      params.keyword = searchKeyword.value
-    }
-    if (dateRange.value && dateRange.value.length === 2) {
-      params.startTime = dateRange.value[0]
-      params.endTime = dateRange.value[1]
-    }
-    if (statusFilter.value) {
-      params.status = statusFilter.value
-    }
-
-    const result = await getLogs(params)
-    logs.value = result.data
-    total.value = result.total
-  } catch (err) {
-    ElMessage.error('获取日志失败')
+    const res = await getLogs({ limit: 500 })
+    rows.value = deriveLogRows(res.data?.data?.logs ?? [])
+  } catch {
+    rows.value = [] // 拉取失败降级空表（R08）
   } finally {
     loading.value = false
   }
 }
 
+const filteredRows = computed(() => {
+  let result = rows.value
+  if (searchKeyword.value) {
+    const kw = searchKeyword.value.toLowerCase()
+    result = result.filter((r) => r.device.toLowerCase().includes(kw) || r.actor.toLowerCase().includes(kw))
+  }
+  if (statusFilter.value) result = result.filter((r) => r.reconcileState === statusFilter.value)
+  return result
+})
+
+const paginatedRows = computed(() => {
+  const start = (currentPage.value - 1) * pageSize.value
+  return filteredRows.value.slice(start, start + pageSize.value)
+})
+
+watch([searchKeyword, statusFilter], () => {
+  currentPage.value = 1
+})
+
+function formatTime(iso: string): string {
+  if (!iso) return '—'
+  const t = new Date(iso)
+  return isNaN(t.getTime()) ? iso : t.toLocaleString('zh-CN', { hour12: false })
+}
+
 function handleSizeChange(size: number) {
   pageSize.value = size
   currentPage.value = 1
-  fetchLogs()
 }
 
-function handleExport() {
-  ElMessage.info('导出功能开发中')
+function handleCurrentChange(page: number) {
+  currentPage.value = page
 }
 
-onMounted(() => {
-  fetchLogs()
-})
+onMounted(load)
 </script>
 
 <style scoped>
@@ -124,57 +136,117 @@ onMounted(() => {
   padding: 20px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 16px;
 }
 
 .page-header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
+  gap: 16px;
+  flex-wrap: wrap;
 }
 
 .page-header h2 {
   margin: 0;
   font-size: 20px;
   font-weight: 600;
-  color: #303133;
+  color: var(--ink, #1f2d3d);
 }
 
-.filter-bar {
+.page-header .sub {
+  margin-top: 4px;
+  font-size: 12.5px;
+  color: var(--ink-3, #93a2b1);
+}
+
+.header-actions {
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
+  align-items: center;
 }
 
 .search-input {
-  width: 300px;
-}
-
-.date-picker {
-  width: 360px;
+  width: 240px;
 }
 
 .filter-select {
-  width: 150px;
+  width: 140px;
 }
 
 .logs-table {
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.08);
+  background: var(--bg-card, #fff);
+  border-radius: var(--r-card, 12px);
+}
+
+.mono {
+  font-family: var(--f-mono, monospace);
+}
+
+.strong {
+  font-weight: 600;
+  color: var(--ink, #1f2d3d);
+}
+
+.dim {
+  color: var(--ink-2, #52627a);
+  font-size: 12.5px;
+}
+
+.mono.dim {
+  color: var(--ink-3, #93a2b1);
+  font-size: 12px;
+}
+
+.change {
+  font-size: 12.5px;
+  color: var(--ink, #1f2d3d);
+}
+
+.log-op {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.op-ico {
+  width: 30px;
+  height: 30px;
+  border-radius: var(--r-ctl, 8px);
+  background: var(--sunken, #f4f6f9);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  color: var(--ink-2, #52627a);
+}
+
+.op-ico svg {
+  width: 15px;
+  height: 15px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.7;
+}
+
+.footnote {
+  font-size: 11.5px;
+  line-height: 1.6;
+  color: var(--ink-3, #93a2b1);
 }
 
 .pagination-wrapper {
   display: flex;
   justify-content: flex-end;
-  padding: 16px 0;
+  padding: 8px 0;
 }
 
 @media (max-width: 768px) {
   .search-input,
-  .date-picker,
   .filter-select {
     width: 100%;
+    flex: 1;
+    min-width: 120px;
   }
 }
 </style>

@@ -2,108 +2,55 @@
   <div class="settings">
     <div class="page-header">
       <h2>系统设置</h2>
+      <div class="sub">连接与缓存策略 · 无数据库，运行配置实时读取（R03）</div>
     </div>
 
-    <el-card class="setting-card">
-      <template #header>
-        <div class="card-header">
-          <span>全局设置</span>
+    <div class="set-grid">
+      <div v-for="card in cards" :key="card.title" class="card">
+        <div class="card-h">
+          <h3>{{ card.title }}</h3>
+          <span v-if="card.meta" class="meta">{{ card.meta }}</span>
         </div>
-      </template>
-
-      <el-form :model="globalSettings" label-width="120px">
-        <el-form-item label="缓存有效期">
-          <el-select v-model="globalSettings.cacheTTL" style="width: 200px">
-            <el-option label="30秒" :value="30" />
-            <el-option label="60秒" :value="60" />
-            <el-option label="120秒" :value="120" />
-          </el-select>
-        </el-form-item>
-
-        <el-form-item label="同步间隔">
-          <el-select v-model="globalSettings.syncInterval" style="width: 200px">
-            <el-option label="30秒" :value="30" />
-            <el-option label="60秒" :value="60" />
-            <el-option label="120秒" :value="120" />
-          </el-select>
-        </el-form-item>
-
-        <el-form-item label="请求超时">
-          <el-input-number
-            v-model="globalSettings.requestTimeout"
-            :min="5"
-            :max="120"
-            :step="5"
-            style="width: 200px"
-          />
-          <span class="unit">秒</span>
-        </el-form-item>
-
-        <el-form-item label="重试次数">
-          <el-input-number
-            v-model="globalSettings.retryCount"
-            :min="0"
-            :max="5"
-            :step="1"
-            style="width: 200px"
-          />
-          <span class="unit">次</span>
-        </el-form-item>
-      </el-form>
-    </el-card>
-
-    <el-card class="setting-card">
-      <template #header>
-        <div class="card-header">
-          <span>主题设置</span>
+        <div class="card-b">
+          <div v-for="row in card.rows" :key="row.k" class="set-row">
+            <div class="k"><b>{{ row.k }}</b><span>{{ row.hint }}</span></div>
+            <div class="v" :class="{ muted: row.muted }">{{ row.v }}</div>
+          </div>
         </div>
-      </template>
+      </div>
+    </div>
 
-      <el-form :model="themeSettings" label-width="120px">
-        <el-form-item label="配色方案">
-          <el-radio-group v-model="themeSettings.theme">
-            <el-radio-button value="light">浅色模式</el-radio-button>
-            <el-radio-button value="dark">深色模式</el-radio-button>
-            <el-radio-button value="system">跟随系统</el-radio-button>
-          </el-radio-group>
-        </el-form-item>
-      </el-form>
-    </el-card>
-
-    <div class="action-bar">
-      <el-button @click="handleReset">重置</el-button>
-      <el-button type="primary" @click="handleSave">保存设置</el-button>
+    <div class="footnote">
+      以上为平台架构固定策略（NETCONF/gNMI 端口、缓存 TTL/LRU），非运行时可改项；配置的下发在「配置下发」页完成。
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
-import { ElMessage } from 'element-plus'
-
-const defaultGlobalSettings = {
-  cacheTTL: 60,
-  syncInterval: 60,
-  requestTimeout: 30,
-  retryCount: 3
-}
-
-const defaultThemeSettings = {
-  theme: 'light'
-}
-
-const globalSettings = reactive({ ...defaultGlobalSettings })
-const themeSettings = reactive({ ...defaultThemeSettings })
-
-function handleSave() {
-  ElMessage.success('设置已保存')
-}
-
-function handleReset() {
-  Object.assign(globalSettings, defaultGlobalSettings)
-  Object.assign(themeSettings, defaultThemeSettings)
-  ElMessage.info('已恢复默认设置')
-}
+// 只读架构事实（非可编辑设置——无设置持久化后端，展示系统实际策略更诚实）。
+// 数值与后端一致：runningCache=TTL 30s/LRU 4096（manager.go）；端口见 CLAUDE.md §1/§3。
+const cards = [
+  {
+    title: '协议连接',
+    meta: '',
+    rows: [
+      { k: 'NETCONF 端口', hint: 'SSH over 830', v: '830', muted: false },
+      { k: 'gNMI 端口', hint: 'gRPC 遥测订阅', v: '9339 / 9340', muted: false },
+      { k: '断线重连', hint: 'ClientPool 自动重试', v: '启用', muted: false },
+      { k: '连接超时', hint: 'NETCONF 单次请求上限', v: '10s', muted: false },
+    ],
+  },
+  {
+    title: '缓存策略',
+    meta: 'TTL + LRU · 内存',
+    rows: [
+      { k: '缓存 TTL', hint: '过期自动重拉设备配置', v: '30s', muted: false },
+      { k: 'LRU 容量', hint: 'Key = 设备IP + YANG路径', v: '4096 条', muted: false },
+      { k: '下发后失效', hint: 'edit-config 成功即清缓存', v: '启用', muted: false },
+      { k: '持久化', hint: '运行配置不落库（R03）', v: '禁用', muted: true },
+    ],
+  },
+]
 </script>
 
 <style scoped>
@@ -111,38 +58,102 @@ function handleReset() {
   padding: 20px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  max-width: 800px;
+  gap: 16px;
 }
 
 .page-header h2 {
   margin: 0;
   font-size: 20px;
   font-weight: 600;
-  color: #303133;
+  color: var(--ink, #1f2d3d);
 }
 
-.setting-card {
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.08);
+.page-header .sub {
+  margin-top: 4px;
+  font-size: 12.5px;
+  color: var(--ink-3, #93a2b1);
 }
 
-.card-header {
-  font-weight: 600;
-  color: #303133;
+.set-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
 }
 
-.unit {
-  margin-left: 12px;
-  color: #909399;
-  font-size: 14px;
+.card {
+  background: var(--bg-card, #fff);
+  border: 1px solid var(--line, #e6ebf0);
+  border-radius: var(--r-card, 12px);
+  overflow: hidden;
 }
 
-.action-bar {
+.card-h {
   display: flex;
-  justify-content: flex-end;
-  gap: 12px;
-  padding-top: 12px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 18px;
+  border-bottom: 1px solid var(--line, #e6ebf0);
+}
+
+.card-h h3 {
+  margin: 0;
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--ink, #1f2d3d);
+}
+
+.card-h .meta {
+  font-size: 12px;
+  color: var(--ink-3, #93a2b1);
+}
+
+.card-b {
+  padding: 4px 18px 10px;
+}
+
+.set-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line, #e6ebf0);
+}
+
+.set-row:last-child {
+  border-bottom: none;
+}
+
+.set-row .k b {
+  display: block;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--ink, #1f2d3d);
+}
+
+.set-row .k span {
+  font-size: 12px;
+  color: var(--ink-3, #93a2b1);
+}
+
+.set-row .v {
+  font-family: var(--f-mono, monospace);
+  font-size: 13px;
+  color: var(--ink, #1f2d3d);
+}
+
+.set-row .v.muted {
+  color: var(--ink-3, #93a2b1);
+}
+
+.footnote {
+  font-size: 11.5px;
+  line-height: 1.6;
+  color: var(--ink-3, #93a2b1);
+}
+
+@media (max-width: 768px) {
+  .set-grid {
+    grid-template-columns: 1fr;
+  }
 }
 </style>
