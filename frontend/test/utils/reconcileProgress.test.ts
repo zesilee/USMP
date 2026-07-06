@@ -1,5 +1,11 @@
 import { describe, it, expect } from 'vitest'
-import { deriveReconcileProgress, outcomeToPhase, type ReconcilePhase } from '../../src/utils/reconcileProgress'
+import {
+  deriveReconcileProgress,
+  outcomeToPhase,
+  parseRun,
+  selectStatus,
+  type ReconcilePhase,
+} from '../../src/utils/reconcileProgress'
 
 describe('deriveReconcileProgress · 下发对账三步进度', () => {
   const stepStates = (phase: ReconcilePhase) => deriveReconcileProgress(phase).steps.map((s) => s.state)
@@ -43,6 +49,37 @@ describe('deriveReconcileProgress · 下发对账三步进度', () => {
     const p = deriveReconcileProgress('idle')
     expect(p.steps.map((s) => s.key)).toEqual(['validate', 'push', 'read'])
     expect(p.steps.every((s) => s.title && s.sub)).toBe(true)
+  })
+})
+
+describe('parseRun · last_run → 毫秒', () => {
+  it('有效时刻解析为正数、可比较先后', () => {
+    expect(parseRun('2026-07-06T10:00:00Z')).toBeGreaterThan(parseRun('2026-07-06T09:00:00Z'))
+  })
+  it('空/Go零值/非法 → 0（视为从未对账）', () => {
+    expect(parseRun('')).toBe(0)
+    expect(parseRun(null)).toBe(0)
+    expect(parseRun('0001-01-01T00:00:00Z')).toBe(0)
+    expect(parseRun('garbage')).toBe(0)
+  })
+})
+
+describe('selectStatus · 选目标 path 状态（回退最新）', () => {
+  const statuses = [
+    { path: '/huawei-vlan:vlan/vlans', outcome: 'converged', last_run: '2026-07-06T10:00:00Z' },
+    { path: '/ifm:ifm/ifm:interfaces', outcome: 'drifted', last_run: '2026-07-06T11:00:00Z' },
+  ]
+  it('按归一 path 精确匹配（后端 path 带前导斜杠，configPath 不带）', () => {
+    const s = selectStatus(statuses, 'huawei-vlan:vlan/vlans')
+    expect(s?.outcome).toBe('converged')
+  })
+  it('无精确匹配 → 回退 last_run 最新一条', () => {
+    const s = selectStatus(statuses, 'route:route/static')
+    expect(s?.outcome).toBe('drifted') // 11:00 最新
+  })
+  it('空 statuses → null', () => {
+    expect(selectStatus([], 'x')).toBeNull()
+    expect(selectStatus(null, 'x')).toBeNull()
   })
 })
 

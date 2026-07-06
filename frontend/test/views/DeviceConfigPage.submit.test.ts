@@ -44,7 +44,10 @@ describe('DeviceConfigPage · 下发对账编排接线', () => {
     vi.mocked(getYangSchema).mockResolvedValue({ data: { success: true, data: vlanNested } } as any)
     vi.mocked(getConfig).mockResolvedValue({ data: { data: { data: { vlans: [] } } } } as any)
     vi.mocked(setConfig).mockResolvedValue({ data: { data: { reconciliation: { triggered: true } } } } as any)
-    vi.mocked(getDeviceReconcile).mockResolvedValue({ data: { data: { outcome: 'converged' } } } as any)
+    // baseline 无历史(空 statuses)，下发后对账出现推进过 baseline 的 converged。
+    vi.mocked(getDeviceReconcile)
+      .mockResolvedValueOnce({ data: { data: { statuses: [] } } } as any)
+      .mockResolvedValue({ data: { data: { statuses: [{ path: '/' + options.configPath, outcome: 'converged', last_run: '2026-07-06T10:00:05Z' }] } } } as any)
   })
 
   it('提交后展示对账进度并到达已收敛，setConfig 被调用、列表重读', async () => {
@@ -99,7 +102,8 @@ describe('DeviceConfigPage · 下发对账编排接线', () => {
     await vm.submit()
     await flushPromises()
     expect(vm.submitFlow.phase.value).toBe('error')
-    expect(getDeviceReconcile).not.toHaveBeenCalled()
+    // 下发失败后不进入轮询；仅下发前的 baseline 一次读（无副作用）。
+    expect(getDeviceReconcile).toHaveBeenCalledTimes(1)
     w.unmount()
   })
 })
