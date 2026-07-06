@@ -86,6 +86,21 @@ describe('deriveSchemaTree', () => {
     expect(byPath(nodes, '/sys/things/thing/id').isKey).toBe(true)
   })
 
+  it('key 按 path 末段匹配，label 被本地化也不失效', () => {
+    const schema: Field[] = [
+      {
+        path: '/vlan/vlans/vlan',
+        type: 'list',
+        label: 'vlan',
+        fields: [{ path: '/vlan/vlans/vlan/id', type: 'number', label: '标识' }], // label 已本地化
+      },
+    ]
+    const nodes = deriveSchemaTree(schema, { keyField: 'id' })
+    const idNode = byPath(nodes, '/vlan/vlans/vlan/id')
+    expect(idNode.name).toBe('标识') // 展示仍用 label
+    expect(idNode.isKey).toBe(true) // 但 key 匹配走 path 末段，稳
+  })
+
   it('未提供 keyField 时不标注任何 key', () => {
     const nodes = deriveSchemaTree(vlanSchema)
     expect(nodes.every((n) => !n.isKey)).toBe(true)

@@ -18,8 +18,12 @@ export interface DeriveSchemaTreeOptions {
   keyField?: string // list 主键叶子名（如 'id' / 'name'），来自 DeviceConfigOptions
 }
 
+function segOf(f: Field): string {
+  return f.path.split('/').filter(Boolean).pop() || f.path
+}
+
 function nameOf(f: Field): string {
-  return f.label || f.path.split('/').filter(Boolean).pop() || f.path
+  return f.label || segOf(f)
 }
 
 // 把嵌套 Field 树 DFS 前序展平为带 depth 的节点列表。
@@ -36,7 +40,9 @@ export function deriveSchemaTree(fields: Field[], opts: DeriveSchemaTreeOptions 
         kind,
         depth,
         dataType: kind === 'leaf' ? f.type : undefined,
-        isKey: kind === 'leaf' && parentKind === 'list' && !!opts.keyField && nameOf(f) === opts.keyField,
+        // key 匹配走 path 末段（与 DeviceConfigPage.keyOf/校验规则同源），
+        // 而非展示用的 label——后端若将来本地化 label，key 徽标仍稳。
+        isKey: kind === 'leaf' && parentKind === 'list' && !!opts.keyField && segOf(f) === opts.keyField,
         isConfig: kind === 'leaf' && !isReadonly,
         isReadonly,
         required: !!f.required,
