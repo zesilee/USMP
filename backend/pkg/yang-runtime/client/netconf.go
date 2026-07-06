@@ -1,9 +1,11 @@
 package client
 
 import (
+	"bytes"
 	"context"
 	"encoding/xml"
 	"fmt"
+	"io"
 	"reflect"
 	"strconv"
 	"strings"
@@ -438,6 +440,17 @@ func (c *NETCONFClient) marshalChange(change Change) (string, error) {
 		// dedicated builder which serializes member-ports correctly.
 		if vlanMap, ok := change.NewValue.(map[uint16]*huawei.HuaweiVlan_Vlan_Vlans_Vlan); ok {
 			return buildHuaweiVlanVlansXML(&huawei.HuaweiVlan_Vlan_Vlans{Vlan: vlanMap})
+		}
+
+		// Special case: Huawei IFM interfaces map — the diff engine emits the interfaces/interface
+		// list (ygot renders it as map[string]*..._Interface) as a single change whose NewValue is
+		// this typed inner map and whose Path is the Go field name "Interface". The path-based
+		// detection below (change.Path contains "ifm:ifm") never matches that, so without this
+		// dedicated type assertion IFM falls through to the malformed generic <list> builder and the
+		// interface is never actually pushed to the device（表现为「新建接口后配置里看不到」）。
+		// 镜像上面 VLAN 的处理，路由到专用 builder。
+		if ifaceMap, ok := change.NewValue.(map[string]*huawei.HuaweiIfm_Ifm_Interfaces_Interface); ok {
+			return buildHuaweiIfmInterfacesXML(&huawei.HuaweiIfm_Ifm_Interfaces{Interface: ifaceMap})
 		}
 
 		// Special case: Huawei IFM interface config from JSON map
@@ -953,6 +966,81 @@ func xmlEscape(s string) string {
 
 const HuaweiVlanNS = "urn:huawei:params:xml:ns:yang:huawei-vlan"
 const HuaweiIfmNS = "urn:huawei:params:xml:ns:yang:huawei-ifm"
+
+// ifmInterfaceXML is a plain intermediate struct for decoding a single <interface>
+// element from a device get-config reply. ygot-generated structs render YANG lists as
+// Go maps and carry no `xml:` tags, so encoding/xml cannot unmarshal into them directly
+// —— that is why the actual config was silently empty and the reconciler永远算出 diff
+// （前端「一直漂移」）。We decode into this struct, then build the ygot map by hand.
+// 覆盖 UI 可配置字段（与 mapEntryToHuaweiInterface 对齐：name/description/admin-status/mtu/type），
+// 这些正是对账 diff 会比较的字段，足以让设备落盘 desired 后收敛。
+type ifmInterfaceXML struct {
+	Name        string  `xml:"name"`
+	Description *string `xml:"description"`
+	AdminStatus *uint64 `xml:"admin-status"`
+	Mtu         *uint32 `xml:"mtu"`
+	Type        *uint64 `xml:"type"`
+}
+
+// ParseHuaweiIfmInterfacesXML parses a NETCONF get-config reply (raw XML bytes, whether
+// wrapped in <data>/<rpc-reply> or bare <interfaces>) into a *huawei.HuaweiIfm_Ifm_Interfaces
+// with its Interface map populated. It scans the token stream for <interface> elements so it
+// is robust to namespace prefixes and outer wrapper tags. Returns an empty (non-nil) container
+// when the reply carries no interfaces.
+func ParseHuaweiIfmInterfacesXML(data []byte) (*huawei.HuaweiIfm_Ifm_Interfaces, error) {
+	result := &huawei.HuaweiIfm_Ifm_Interfaces{
+		Interface: make(map[string]*huawei.HuaweiIfm_Ifm_Interfaces_Interface),
+	}
+	if len(data) == 0 {
+		return result, nil
+	}
+
+	dec := xml.NewDecoder(bytes.NewReader(data))
+	for {
+		tok, err := dec.Token()
+		if err == io.EOF {
+			break
+		}
+		if err != nil {
+			return nil, fmt.Errorf("parse ifm interfaces xml: %w", err)
+		}
+		se, ok := tok.(xml.StartElement)
+		if !ok || se.Name.Local != "interface" {
+			continue
+		}
+
+		var x ifmInterfaceXML
+		if err := dec.DecodeElement(&x, &se); err != nil {
+			return nil, fmt.Errorf("decode <interface>: %w", err)
+		}
+
+		entry := &huawei.HuaweiIfm_Ifm_Interfaces_Interface{}
+		if x.Name != "" {
+			name := x.Name
+			entry.Name = &name
+		}
+		if x.Description != nil {
+			entry.Description = x.Description
+		}
+		if x.Mtu != nil {
+			entry.Mtu = x.Mtu
+		}
+		if x.AdminStatus != nil {
+			entry.AdminStatus = huawei.E_HuaweiIfm_PortStatus(*x.AdminStatus)
+		}
+		if x.Type != nil {
+			entry.Type = huawei.E_HuaweiIfm_PortType(*x.Type)
+		}
+
+		key := x.Name
+		if key == "" {
+			key = fmt.Sprintf("iface-%d", len(result.Interface))
+		}
+		result.Interface[key] = entry
+	}
+
+	return result, nil
+}
 
 // buildHuaweiVlanVlansXML generates Huawei VLAN standard XML for VLAN configuration.
 func buildHuaweiVlanVlansXML(vlans *huawei.HuaweiVlan_Vlan_Vlans) (string, error) {

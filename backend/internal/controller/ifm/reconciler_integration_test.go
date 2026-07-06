@@ -77,6 +77,83 @@ func TestReconciler_Integration_CreateInterface(t *testing.T) {
 	// Verify using Get to check the data was correctly sent to simulator
 }
 
+// TestReconciler_Integration_CreateInterface_ConvergesAndReadable 复现并锁死用户报的两个症状：
+//
+//	① 通过界面新建 interface 后「一直显示已漂移」——第二次对账必须收敛（Changes==0）；
+//	② 新接口「在接口配置里看不到」——回读设备必须能读到刚建的接口及其描述。
+//
+// UI 只提交稀疏字段（name + description），不带 MTU/admin-status，模拟真实前端提交。
+func TestReconciler_Integration_CreateInterface_ConvergesAndReadable(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping integration test in short mode")
+	}
+
+	sim := netsim.NewSimulator()
+	if err := sim.Start(); err != nil {
+		t.Fatalf("start simulator: %v", err)
+	}
+	defer sim.Stop()
+
+	c := cache.NewTTLLRUCache(100, 30*time.Second, 1*time.Minute)
+	cs := manager.NewInMemoryConfigStore(c)
+	pool := client.NewDefaultClientPool(client.DefaultClientFactory(5 * time.Second))
+	defer pool.CloseAll()
+
+	// UI 新建：仅 name + description（稀疏意图，其余字段不管理）
+	ifName := "Vlanif900"
+	desired := &huawei.HuaweiIfm_Ifm_Interfaces{
+		Interface: map[string]*huawei.HuaweiIfm_Ifm_Interfaces_Interface{
+			ifName: {
+				Name:        &ifName,
+				Description: stringPtr("created-via-ui"),
+			},
+		},
+	}
+
+	deviceID := fmt.Sprintf("%s:%s@%s:%d", sim.Username(), sim.Password(), sim.Addr(), sim.Port())
+	path := "/ifm:ifm/ifm:interfaces"
+	if err := cs.Set(deviceID, path, desired); err != nil {
+		t.Fatalf("config store set: %v", err)
+	}
+
+	r := New(cs, pool)
+	req := reconcile.Request{DeviceID: deviceID, Path: path}
+	ctx := context.Background()
+
+	// 第一次对账：检测到新接口未在设备 → 下发（Changes>0）
+	first := r.Reconcile(ctx, req)
+	if first.Error != nil {
+		t.Fatalf("first reconcile failed: %v", first.Error)
+	}
+	assert.Greater(t, first.Changes, 0, "首轮应检测到漂移并下发新接口")
+
+	// 症状② 断言：回读设备，新接口必须真正落盘（根因 B：序列化正确）
+	dc := &deviceClient{clientPool: pool}
+	got, err := dc.Get(ctx, deviceID)
+	if err != nil {
+		t.Fatalf("readback device config: %v", err)
+	}
+	ifaces, ok := got.(*huawei.HuaweiIfm_Ifm_Interfaces)
+	if !ok {
+		t.Fatalf("unexpected readback type %T", got)
+	}
+	entry, present := ifaces.Interface[ifName]
+	if !present {
+		t.Fatalf("新建的接口 %q 未在设备回读中出现（接口未真正下发）", ifName)
+	}
+	if assert.NotNil(t, entry.Description) {
+		assert.Equal(t, "created-via-ui", *entry.Description, "回读描述应与下发一致")
+	}
+
+	// 症状① 断言：desired 未变，再次对账必须收敛（根因 A：map 子集比对不再永远算出 diff）
+	second := r.Reconcile(ctx, req)
+	if second.Error != nil {
+		t.Fatalf("second reconcile failed: %v", second.Error)
+	}
+	assert.Equal(t, 0, second.Changes, "设备已落盘 desired 后，第二轮对账必须收敛（否则前端一直显示漂移）")
+	assert.False(t, second.Requeue)
+}
+
 // TestReconciler_Integration_ModifyInterface tests modifying an existing interface configuration
 func TestReconciler_Integration_ModifyInterface(t *testing.T) {
 	if testing.Short() {
@@ -321,19 +398,19 @@ func TestReconciler_Integration_FullInterfaceConfig(t *testing.T) {
 	desired := &huawei.HuaweiIfm_Ifm_Interfaces{
 		Interface: map[string]*huawei.HuaweiIfm_Ifm_Interfaces_Interface{
 			ge1: {
-				Name:              &ge1,
-				Description:       stringPtr("Full Config Interface"),
-				AdminStatus:       huawei.HuaweiIfm_PortStatus_up,
-				Mtu:               uint32Ptr(9000),
-				Class:             huawei.HuaweiIfm_ClassType_main_interface,
-				Type:              huawei.HuaweiIfm_PortType_GigabitEthernet,
+				Name:        &ge1,
+				Description: stringPtr("Full Config Interface"),
+				AdminStatus: huawei.HuaweiIfm_PortStatus_up,
+				Mtu:         uint32Ptr(9000),
+				Class:       huawei.HuaweiIfm_ClassType_main_interface,
+				Type:        huawei.HuaweiIfm_PortType_GigabitEthernet,
 				ControlFlap: &huawei.HuaweiIfm_Ifm_Interfaces_Interface_ControlFlap{
-					Ceiling:         uint32Ptr(6000),
+					Ceiling:          uint32Ptr(6000),
 					ControlFlapCount: uint32Ptr(5),
-					DecayNg:         uint32Ptr(10),
-					DecayOk:         uint32Ptr(120),
-					Reuse:           uint32Ptr(1000),
-					Suppress:        uint32Ptr(3000),
+					DecayNg:          uint32Ptr(10),
+					DecayOk:          uint32Ptr(120),
+					Reuse:            uint32Ptr(1000),
+					Suppress:         uint32Ptr(3000),
 				},
 				Damp: &huawei.HuaweiIfm_Ifm_Interfaces_Interface_Damp{
 					TxOff: boolPtr(true),
@@ -404,16 +481,16 @@ func TestReconciler_Integration_TimersAndFlags(t *testing.T) {
 	desired := &huawei.HuaweiIfm_Ifm_Interfaces{
 		Interface: map[string]*huawei.HuaweiIfm_Ifm_Interfaces_Interface{
 			ge1: {
-				Name:                 &ge1,
-				Description:          stringPtr("Timers and Flags Test"),
-				AdminStatus:          huawei.HuaweiIfm_PortStatus_down,
-				Mtu:                  uint32Ptr(1500),
+				Name:        &ge1,
+				Description: stringPtr("Timers and Flags Test"),
+				AdminStatus: huawei.HuaweiIfm_PortStatus_down,
+				Mtu:         uint32Ptr(1500),
 				// Timers
-				DownDelayTime:      uint32Ptr(50),
+				DownDelayTime:       uint32Ptr(50),
 				ProtocolUpDelayTime: uint32Ptr(100),
 				// Boolean flags
-				ClearIpDf:           boolPtr(true),
-				IsL2Switch:          boolPtr(false),
+				ClearIpDf:            boolPtr(true),
+				IsL2Switch:           boolPtr(false),
 				L2ModeEnable:         boolPtr(true),
 				LinkUpDownTrapEnable: boolPtr(true),
 				StatisticEnable:      boolPtr(false),
@@ -477,10 +554,10 @@ func TestReconciler_Integration_StatisticsConfig(t *testing.T) {
 	desired := &huawei.HuaweiIfm_Ifm_Interfaces{
 		Interface: map[string]*huawei.HuaweiIfm_Ifm_Interfaces_Interface{
 			ge1: {
-				Name:              &ge1,
-				Description:       stringPtr("Statistics Config Test"),
-				AdminStatus:       huawei.HuaweiIfm_PortStatus_up,
-				Mtu:               uint32Ptr(9000),
+				Name:        &ge1,
+				Description: stringPtr("Statistics Config Test"),
+				AdminStatus: huawei.HuaweiIfm_PortStatus_up,
+				Mtu:         uint32Ptr(9000),
 				// Statistics
 				StatisticEnable:   boolPtr(true),
 				StatisticInterval: uint32Ptr(600),
@@ -548,10 +625,10 @@ func TestReconciler_Integration_ModifyMultipleAttributes(t *testing.T) {
 	desired := &huawei.HuaweiIfm_Ifm_Interfaces{
 		Interface: map[string]*huawei.HuaweiIfm_Ifm_Interfaces_Interface{
 			ge1: {
-				Name:              &ge1,
-				Description:       stringPtr("Initial Config"),
-				AdminStatus:       huawei.HuaweiIfm_PortStatus_up,
-				Mtu:               uint32Ptr(1500),
+				Name:        &ge1,
+				Description: stringPtr("Initial Config"),
+				AdminStatus: huawei.HuaweiIfm_PortStatus_up,
+				Mtu:         uint32Ptr(1500),
 			},
 		},
 	}
