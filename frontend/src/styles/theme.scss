@@ -84,6 +84,53 @@
   --transition-slow: #{$transition-slow};
 }
 
+// ==================== 原型对齐令牌（浅色 iMaster） ====================
+// 与 frontend/design/prototype.css 逐字对齐的变量名，供新外壳/页面组件直接消费，
+// 无需在组件内再翻译 SCSS 变量。单一事实源仍是 variables.scss。
+:root {
+  // 中性 / 表面
+  --paper: #{$bg-page};
+  --surface: #{$bg-card};
+  --sunken: #{$sunken};
+  --ink: #{$text-primary};
+  --ink-2: #{$text-secondary};
+  --ink-3: #{$text-tertiary};
+  --line: #{$border-color};
+  --line-strong: #{$border-color-light};
+
+  // 主交互 - 深钢蓝
+  --primary: #{$color-primary};
+  --primary-ink: #{$color-primary-dark};
+  --primary-weak: #{$color-primary-bg};
+
+  // 品牌 / 极危
+  --brand: #{$brand};
+
+  // 收敛四态语义
+  --st-conv: #{$st-conv};   --st-conv-bg: #{$st-conv-bg};
+  --st-recon: #{$st-recon}; --st-recon-bg: #{$st-recon-bg};
+  --st-drift: #{$st-drift}; --st-drift-bg: #{$st-drift-bg};
+  --st-off: #{$st-off};     --st-off-bg: #{$st-off-bg};
+
+  // 字体
+  --f-sans: #{$font-family};
+  --f-mono: #{$font-family-mono};
+
+  // 圆角
+  --r-card: #{$radius-card};
+  --r-ctl: #{$radius-ctl};
+  --r-chip: #{$radius-chip};
+
+  // 阴影 - 极克制
+  --sh-1: #{$shadow-e1};
+  --sh-2: #{$shadow-e2};
+  --sh-pop: #{$shadow-e4};
+
+  // 外壳几何
+  --sidebar-w: #{$sidebar-w};
+  --topbar-h: #{$topbar-h};
+}
+
 // ==================== Element Plus 主题覆盖 ====================
 :root {
   // 基础颜色
@@ -101,8 +148,8 @@
   --el-text-color-secondary: #{$text-tertiary};
   --el-text-color-disabled: #{$text-disabled};
 
-  // 背景色
-  --el-bg-color: #{$bg-page};
+  // 背景色（浅色：组件面为 surface，页面底为 paper）
+  --el-bg-color: #{$bg-card};
   --el-bg-color-page: #{$bg-page};
   --el-bg-color-overlay: #{$bg-card};
 
@@ -121,6 +168,9 @@
   --el-font-size-base: #{$font-size-base};
 }
 
+// 加载 IBM Plex Sans/Mono（去 Inter/Roboto 陈词滥调 R11；失败则回退系统/中文字体）
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap');
+
 // ==================== 全局样式 ====================
 html, body {
   height: 100%;
@@ -131,14 +181,23 @@ html, body {
   line-height: $line-height-base;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-wrap: pretty;
 }
 
 #app {
   height: 100%;
 }
 
-// 加载 Google Fonts
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+::selection {
+  background: $color-primary-bg;
+  color: $color-primary-dark;
+}
+
+// 等宽数字/事实（IP、路径、计数）统一字形
+.mono {
+  font-family: $font-family-mono;
+  font-feature-settings: 'zero' 1;
+}
 
 // ==================== Element Plus 组件覆盖 ====================
 
@@ -150,13 +209,15 @@ html, body {
   transition: all $transition-fast;
 
   &--primary {
-    box-shadow: 0 2px 8px rgba(22, 93, 255, 0.3);
+    background-color: $color-primary;
+    border-color: $color-primary;
+    box-shadow: none;
     &:hover {
-      box-shadow: 0 4px 12px rgba(22, 93, 255, 0.4);
-      transform: translateY(-1px);
+      background-color: $color-primary-dark;
+      border-color: $color-primary-dark;
     }
     &:active {
-      transform: translateY(0);
+      transform: translateY(0.5px);
     }
   }
 
@@ -265,23 +326,21 @@ html, body {
 
   .el-tree-node.is-current > .el-tree-node__content {
     background-color: $color-primary-bg;
-    color: $color-primary-light;
-    font-weight: $font-weight-medium;
+    color: $color-primary-dark;   // 浅底上用深主色，保对比度
+    font-weight: $font-weight-semibold;
   }
 }
 
-// 卡片
+// 卡片（浅色 iMaster：克制，无上浮，hover 仅微增阴影）
 .el-card {
   --el-card-bg-color: $bg-card;
   --el-card-border-color: $border-color;
-  border-radius: $radius-lg;
+  border-radius: $radius-card;
   box-shadow: $shadow-e1;
-  transition: all $transition-base;
+  transition: box-shadow $transition-base;
 
   &:hover {
-    box-shadow: $shadow-e3;
-    border-color: $color-primary;
-    transform: translateY(-2px);
+    box-shadow: $shadow-e2;
   }
 }
 
@@ -318,8 +377,8 @@ html, body {
 }
 
 .el-overlay {
-  background-color: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(4px);
+  // 浅色 scrim：克制的墨蓝半透明，不做重黑蒙层
+  background-color: rgba(16, 28, 40, 0.42);
 }
 
 // 表单
@@ -430,13 +489,12 @@ html, body {
 .card-container {
   background-color: $bg-card;
   border: 1px solid $border-color;
-  border-radius: $radius-lg;
+  border-radius: $radius-card;
   box-shadow: $shadow-e1;
-  transition: all $transition-base;
+  transition: box-shadow $transition-base;
 
   &:hover {
-    box-shadow: $shadow-e3;
-    border-color: rgba($color-primary, 0.5);
+    box-shadow: $shadow-e2;
   }
 }
 
