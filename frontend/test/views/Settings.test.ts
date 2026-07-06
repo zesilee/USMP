@@ -10,6 +10,7 @@ describe('Settings View · 只读架构事实', () => {
     expect(t).toContain('协议连接')
     expect(t).toContain('830')
     expect(t).toContain('9339 / 9340')
+    expect(t).toContain('10s') // NETCONF 连接超时，与后端 WithDefaultTimeout(10s) 一致
   })
 
   it('展示缓存策略事实（TTL 30s / LRU 4096 / R03 禁用）', () => {

@@ -80,7 +80,8 @@ const statusFilter = ref<DisplayState | ''>('')
 const currentPage = ref(1)
 const pageSize = ref(20)
 
-// 审计日志有界（后端 ≤1000），一次拉一批后客户端筛选/分页（与设备页一致）。
+// 一次拉一批后客户端筛选/分页（与设备页一致）。后端 /logs 单批上限 500 条
+// （maxLogLimit）；审计量超 500 时最旧记录在此不可达（低频，可接受）。
 async function load() {
   loading.value = true
   try {
