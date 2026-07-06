@@ -13,6 +13,7 @@ package audit
 import (
 	"encoding/json"
 	"os"
+	"path/filepath"
 	"strconv"
 	"sync"
 	"time"
@@ -128,6 +129,9 @@ func (s *Store) persistLocked() error {
 	data, err := json.Marshal(s.records)
 	if err != nil {
 		return err
+	}
+	if dir := filepath.Dir(s.filePath); dir != "" && dir != "." {
+		_ = os.MkdirAll(dir, 0o755) // best-effort：目录已存在或权限不足时下方写入自会报错
 	}
 	tmp := s.filePath + ".tmp"
 	if err := os.WriteFile(tmp, data, 0o600); err != nil {
