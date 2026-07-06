@@ -64,6 +64,7 @@ jobs:
       - name: Typecheck
         run: npm run typecheck
 
-      # 单元测试：vitest（happy-dom），不含 Playwright E2E。
-      - name: Unit tests
-        run: npm run test
+      # 单元测试 + 覆盖率门禁：vitest（happy-dom），不含 Playwright E2E。
+      # test:coverage 带 coverage.thresholds（T08 覆盖率不下降），低于基线即 fail。
+      - name: Unit tests + coverage gate
+        run: npm run test:coverage

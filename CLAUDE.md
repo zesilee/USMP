@@ -122,6 +122,51 @@ explore → propose → apply → sync → archive
 | T02b | 新增 YANG 模型接入设备配置时**一定触发 `yang-config-test-design`**，产出并通过其完备测试矩阵（全属性可配/端到端到设备/并发-race/边界/嵌套/幂等/负路径），未覆盖视为未完成、禁止合并 |
 | T03 | 集成测试用 `testing.Short()` 跳过短测试 |
 | T04 | 代码评审不通过，禁止提交 |
+| T05 | **测试设计先行**：写实现前先产出该改动的完备测试用例清单（对照 §5.6 选层 + 正常/异常/边界/并发/负路径），红灯先行。T01 推广到**所有改动类型**（不止 YANG） |
+| T06 | **按层补齐**：每个改动按 §5.6「改动类型→必补层」补齐对应测试，**缺层=未完成、禁止合并**（T02b 的强制性推广到全部改动） |
+| T07 | **Bug 必先回归**：修 Bug 前必先写复现该 Bug 的回归测试（红），再修（绿） |
+| T08 | **覆盖率不下降**：后端 `backend/.coverage-baseline`、前端 `vitest` thresholds 为棘轮，低于基线 CI 即 fail；补测后同步上调阈值 |
+| T09 | **本地门禁对称**：前端与后端一样有本地拦截——pre-commit 前端变更跑 happy-dom 单测、pre-push 全量 `-race` + 前端 e2e smoke |
+
+> **§2 R15 补充**：「无测试提交」对前后端对称生效——后端变更包测试 + 前端 happy-dom 单测均在 pre-commit 本地拦截，CI 兜底。
+
+### 5.6 测试分层与职责（军规）
+
+> 每个改动**必须**按下表选层补齐测试，缺层即未完成（T06）。测试设计先于编码（T05）。
+
+**后端 Go 层**
+
+| 层 | 命名/位置 | 职责 |
+|----|-----------|------|
+| B1 单元/表格驱动 | `*_test.go`（`pkg/yang-runtime/*`、`internal/cache`、`internal/api` 编解码） | 纯逻辑：diff/cache/schema/parser，正常·异常·边界·**并发(race)** |
+| B2 集成-模拟网元 | `*_integration_test.go` + `simulator/netconfsim`，`testing.Short()` 跳过 | Reconciler↔设备端到端：下发→回读→收敛 |
+| B3 API/契约 | `internal/api/*_test.go` | HTTP handler、配置编解码、域约束、错误码 |
+| ~~B0 退役遗留~~ | `backend/test/{e2e,integration}`（build-tag，Stack A/K8s CRD） | Stack A 遗留，不进任何门禁、不再维护 |
+
+**前端层**
+
+| 层 | 配置/位置 | 职责 |
+|----|-----------|------|
+| F1 纯逻辑单测 | happy-dom，`test/{utils,composables,stores}` | 纯函数/composable/store |
+| F2 组件单测 | happy-dom，`test/{components,views}` + `@vue/test-utils` | 组件渲染·props·emit·分支（list/group 的 add/**edit/remove**、校验错误态） |
+| F3 真浏览器 | 真 Chromium，`vitest.browser.config.ts`，`test/browser/` | **仅** happy-dom 伪造不了的：el-select 弹层/teleport、嵌套 list 真实交互（add/edit/remove 全覆盖） |
+| F4 E2E | Playwright，`frontend/tests/staging-smoke.spec.ts` | 部署冒烟：路由·挂载·种子数据·YANG 表单渲染·校验拦截 |
+
+**改动类型 → 必须补的测试层**
+
+| 改动类型 | 必补层 |
+|----------|--------|
+| 后端纯逻辑 | B1（表格驱动 + race） |
+| 新增/改 Reconciler·协议编解码 | B1 + **B2 集成** |
+| 新增 YANG 模型接入设备配置 | **`yang-config-test-design` 完备矩阵**（T02b） |
+| API handler/编解码 | B3（+B2 若涉下发） |
+| **Bug 修复** | **先写复现回归测试（红）再修**（T07） |
+| 前端 util/composable/store | F1 |
+| 前端组件/页面逻辑 | F2（含 add/**edit/remove**/校验态，非只 render） |
+| 前端 el-select/teleport/嵌套 list 增删改 | **F3 真浏览器** |
+| 新页面/路由/端到端流 | F4 staging-smoke |
+
+> 详见 [frontend/TESTING.md](frontend/TESTING.md)（前端分层权威规范）。
 
 ### 提交规范
 
@@ -222,6 +267,7 @@ explore → propose → apply → sync → archive
 | 功能型（YANG 驱动表单/动态渲染） | `frontend-yang-dynamic-form` | YANG 类型自动映射：boolean→开关、enum→下拉、list→表格（R05） |
 | 视觉型（美化/可视化/交互原型） | `web-design-engineer` | 先声明设计系统→v0 草案→≥2 变体 |
 | 纯逻辑/工程化/纯功能 | **不触发设计技能** | 状态管理/API/构建/校验/路由/权限 |
+| 前端测试 | 按 §5.6 选层：util/composable/store→F1、组件/页面→F2、el-select/嵌套 list 交互→F3 真浏览器、端到端流→F4 | 缺层禁止合并（T06）；详见 [frontend/TESTING.md](frontend/TESTING.md) |
 
 ### 7.3 Superpowers 技能
 
