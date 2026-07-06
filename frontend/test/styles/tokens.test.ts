@@ -1,13 +1,15 @@
 import { describe, it, expect } from 'vitest'
 import * as sass from 'sass'
-import { fileURLToPath } from 'node:url'
+import { resolve } from 'node:path'
 
 // 设计令牌契约测试：编译 theme.scss，断言其 :root 导出的 CSS 自定义属性。
 // 目的——锁定「浅色 iMaster NCE」令牌契约，防止误改回深色科技感主题，
 // 并保证新外壳组件依赖的原型变量名（--paper/--surface/--ink/--st-* 等）始终存在。
 // 无数据库、无运行时依赖：纯编译期快照式断言。
 
-const themePath = fileURLToPath(new URL('../../src/styles/theme.scss', import.meta.url))
+// 用 cwd 定位（vitest 从 frontend/ 运行），不依赖 import.meta.url——
+// happy-dom 环境下 import.meta.url 是 http:// 而非 file://，fileURLToPath 会抛错。
+const themePath = resolve(process.cwd(), 'src/styles/theme.scss')
 
 /** 编译 theme.scss，抽取所有 `--name: value;` 自定义属性为 map（后写覆盖先写，贴合 CSS 级联）。 */
 function compileTokens(): Record<string, string> {
