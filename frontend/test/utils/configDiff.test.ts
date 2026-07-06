@@ -44,9 +44,23 @@ describe('computeDiff · 实时差异（表单值 ↔ 已回填 actual）', () =
     expect(diff.map((d) => d.key)).toEqual(['id', 'name', 'admin-status'])
   })
 
+  it('数值 0 是合法值：算作改动、不被当空（防 !v 判空回归）', () => {
+    const original = { id: 100, name: 'x' }
+    const numFields: Field[] = [{ path: '/x/mtu', type: 'number', label: 'MTU' }, ...fields]
+    const diff = computeDiff({ mtu: 0 }, {}, numFields)
+    expect(diff.find((d) => d.key === 'mtu')).toMatchObject({ now: 0, isNew: true })
+  })
+
   it('空/异常输入安全降级（R08）', () => {
     expect(computeDiff(null as any, null as any, fields)).toEqual([])
     expect(computeDiff({}, {}, [])).toEqual([])
+  })
+})
+
+describe('missingRequired · 数值 0 视为已填', () => {
+  it('required 数值字段填 0 不算缺失', () => {
+    const numFields: Field[] = [{ path: '/x/mtu', type: 'number', label: 'MTU', required: true }]
+    expect(missingRequired(numFields, { mtu: 0 }, 'name')).toEqual([])
   })
 })
 

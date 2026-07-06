@@ -105,6 +105,7 @@ const fmt = (v: any): string => (v === '' || v == null ? '—' : String(v))
 }
 
 .tag-new {
+  font-family: var(--f-sans, sans-serif); /* 父级 .dv 为等宽，标签回到 sans（对齐原型） */
   font-size: 10px;
   font-weight: 700;
   color: var(--st-conv, #2f8a4c);
