@@ -155,6 +155,7 @@ explore → propose → apply → sync → archive
 | 测试通过 | `go test ./...` 全绿才能 commit |
 | 代码评审 | `go-code-review-check` 技能通过 |
 | 提交规范 | What/Why/How 三段式完整 |
+| 前端 e2e smoke | **推送含 `frontend/` 改动时，提交代码前必须本地跑 Playwright staging smoke 全绿**：`make e2e-local`（起 docker 全栈→浏览器冒烟）。pre-push 钩子自动拦截，`USMP_SKIP_E2E=1` 仅限无 docker 机器显式跳过 |
 
 ### 6.3 完成分支
 

@@ -80,9 +80,10 @@ test.describe('部署冒烟 - 前端 SPA', () => {
     await page.getByRole('button', { name: /新增 VLAN/ }).click()
     await expect(page.getByText('admin-status', { exact: false }).first()).toBeVisible({ timeout: 15000 })
 
-    // 不填 id 直接点下发 → 行内「必填」校验提示出现（提交被拦，抽屉仍在）
-    await page.getByRole('button', { name: /下发/ }).click()
-    await expect(page.getByText('必填', { exact: false }).first()).toBeVisible({ timeout: 5000 })
+    // 缺主键 id（及其它必填项）为空时，「下发并对账」按钮禁用 —— §9 的拦截在当前设计里以
+    // 「不可提交」实现，比行内提示更强：不完整/非法配置根本无法下发。
+    // （旧断言点击该按钮并等「必填」文案，但当前按钮 disabled-until-valid，点击恒 30s 超时。）
+    await expect(page.getByRole('button', { name: /下发并对账/ })).toBeDisabled()
   })
 
   // 接口（华为 IFM）新增表单应由 YANG schema 动态渲染（与 VLAN 共用通用配置流 DeviceConfigPage）。
