@@ -90,6 +90,20 @@ if [ -n "$GO_FILES" ]; then
 fi
 
 # ──────────────────────────────────────────────
+# 6. 前端变更 → happy-dom 单测 (R15/T09: 前端与后端本地拦截对称)
+#    暂存含 frontend/ 源码/测试时跑 npm run test（快，不含 Playwright/浏览器模式）。
+#    与后端变更包测试对称，杜绝前端裸提交。USMP_SKIP_FE_TEST=1 显式跳过。
+# ──────────────────────────────────────────────
+FE_FILES=$(echo "$STAGED_FILES" | grep -E '^frontend/.*\.(ts|tsx|js|vue)$' || true)
+if [ -n "$FE_FILES" ] && [ "${USMP_SKIP_FE_TEST:-0}" != 1 ]; then
+  echo -e "${YELLOW}[pre-commit] 前端变更 → 运行 happy-dom 单测 (R15/T09)...${NC}"
+  if ! (cd frontend && npm run test --silent 2>&1); then
+    echo -e "${RED}[pre-commit] 拒绝: 前端单测未通过（修复或 USMP_SKIP_FE_TEST=1 跳过）${NC}"
+    FAILED=1
+  fi
+fi
+
+# ──────────────────────────────────────────────
 # 结果
 # ──────────────────────────────────────────────
 if [ "$FAILED" -eq 1 ]; then
