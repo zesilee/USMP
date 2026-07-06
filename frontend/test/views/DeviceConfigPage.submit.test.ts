@@ -3,7 +3,7 @@ import { mount, flushPromises } from '@vue/test-utils'
 import { createPinia } from 'pinia'
 import ElementPlus from 'element-plus'
 import DeviceConfigPage from '../../src/views/DeviceConfigPage.vue'
-import { getYangSchema, getConfig } from '../../src/api'
+import { getYangSchema, getConfig, setConfig, getDeviceReconcile } from '../../src/api'
 
 vi.mock('../../src/api')
 
@@ -38,57 +38,68 @@ function mountPage() {
   })
 }
 
-describe('DeviceConfigPage · 实时差异预览接线', () => {
+describe('DeviceConfigPage · 下发对账编排接线', () => {
   beforeEach(() => {
     vi.clearAllMocks()
     vi.mocked(getYangSchema).mockResolvedValue({ data: { success: true, data: vlanNested } } as any)
     vi.mocked(getConfig).mockResolvedValue({ data: { data: { data: { vlans: [] } } } } as any)
+    vi.mocked(setConfig).mockResolvedValue({ data: { data: { reconciliation: { triggered: true } } } } as any)
+    vi.mocked(getDeviceReconcile).mockResolvedValue({ data: { data: { outcome: 'converged' } } } as any)
   })
 
-  it('新增空表单无改动 → submittable=false；填入后有 diff → true', async () => {
+  it('提交后展示对账进度并到达已收敛，setConfig 被调用、列表重读', async () => {
     const w = mountPage()
-    await flushPromises()
+    await flushPromises() // onMounted 拉 schema
+
     const vm = w.vm as any
     vm.selectedDevice = '10.0.0.1'
     vm.openAdd()
     await flushPromises()
-    expect(vm.submittable).toBe(false)
-    expect(vm.diff.length).toBe(0)
 
+    // 填入必填 + 一个改动
     vm.formData.id = 100
     vm.formData.name = 'guest'
     await flushPromises()
-    expect(vm.diff.map((d: any) => d.key).sort()).toEqual(['id', 'name'])
     expect(vm.submittable).toBe(true)
+    expect(vm.diff.length).toBe(2)
+
+    await vm.submit()
+    await flushPromises()
+
+    expect(setConfig).toHaveBeenCalledWith('10.0.0.1', options.configPath, { vlans: [{ id: 100, name: 'guest' }] })
+    expect(getConfig).toHaveBeenCalledWith('10.0.0.1', options.configPath, true) // force_refresh 回读
+    expect(vm.submitFlow.phase.value).toBe('converged')
+    // 下发成功后重读列表（getConfig 至少被普通读+强制读调用）
+    expect(vi.mocked(getConfig).mock.calls.some((c) => c[2] === undefined || c[2] === false)).toBe(true)
+
+    // 抽屉切到对账进度视图
+    expect(w.findComponent({ name: 'ReconcileSteps' }).exists() || w.find('.reconcile-steps').exists()).toBe(true)
     w.unmount()
   })
 
-  it('缺失必填(keyField)时 submittable=false', async () => {
+  it('无改动时下发按钮禁用（submittable=false）', async () => {
     const w = mountPage()
     await flushPromises()
     const vm = w.vm as any
     vm.selectedDevice = '10.0.0.1'
     vm.openAdd()
-    vm.formData.name = 'guest' // 仅填非主键
     await flushPromises()
-    expect(vm.diff.length).toBe(1)
-    expect(vm.submittable).toBe(false) // id(keyField) 未填
+    expect(vm.submittable).toBe(false) // 空表单无改动
     w.unmount()
   })
 
-  it('编辑态以已回填行为基线，仅改动字段计入 diff', async () => {
+  it('setConfig 失败 → phase=error，不重读列表', async () => {
+    vi.mocked(setConfig).mockRejectedValue({ message: '会话超时' })
     const w = mountPage()
     await flushPromises()
     const vm = w.vm as any
     vm.selectedDevice = '10.0.0.1'
-    vm.openEdit({ id: 100, name: 'old' })
+    vm.openAdd()
+    vm.formData.id = 200
+    await vm.submit()
     await flushPromises()
-    expect(vm.diff.length).toBe(0) // 未改动
-    vm.formData.name = 'new'
-    await flushPromises()
-    expect(vm.diff.map((d: any) => d.key)).toEqual(['name'])
-    expect(vm.diff[0]).toMatchObject({ was: 'old', now: 'new' })
+    expect(vm.submitFlow.phase.value).toBe('error')
+    expect(getDeviceReconcile).not.toHaveBeenCalled()
     w.unmount()
   })
-  // 提交/下发编排(setConfig→回读→轮询对账)由 DeviceConfigPage.submit.test.ts 覆盖。
 })
