@@ -3,7 +3,6 @@ package ifm
 import (
 	"context"
 	"encoding/json"
-	"encoding/xml"
 	"fmt"
 	"net"
 	"strconv"
@@ -130,20 +129,11 @@ func (d *deviceClient) Get(ctx context.Context, deviceID string) (interface{}, e
 	case []byte:
 		// Try JSON first (gNMI case), then XML (NETCONF case)
 		if len(data) > 0 && data[0] == '<' {
-			// XML format from NETCONF
-			// Response from get-config is inside <data> tag, so we need to find the actual config
-			// ygot generated structs know how to unmarshal XML with huawei namespaces
-			if err := xml.Unmarshal(data, deviceRoot); err != nil {
-				// If direct unmarshal fails, try wrapping the content because it's inside <data>
-				wrapped := []byte(fmt.Sprintf("<data>%s</data>", string(data)))
-				if err2 := xml.Unmarshal(wrapped, deviceRoot); err2 != nil {
-					return nil, fmt.Errorf("unmarshal wrapped XML failed: %w (original: %w)", err2, err)
-				}
-			}
-			if deviceRoot.Ifm == nil || deviceRoot.Ifm.Interfaces == nil {
-				return &huawei.HuaweiIfm_Ifm_Interfaces{}, nil
-			}
-			return deviceRoot.Ifm.Interfaces, nil
+			// XML format from NETCONF get-config.
+			// ygot 结构体把 interfaces/interface 生成为 Go map 且无 xml tag，encoding/xml
+			// 无法解析进 map —— 直接 xml.Unmarshal 会得到空 actual，导致对账永远算出 diff
+			// （前端「一直漂移」）。改用手写 token 解析器把 <interface> 填进 ygot map。
+			return client.ParseHuaweiIfmInterfacesXML(data)
 		}
 		// JSON format from gNMI
 		if err := json.Unmarshal(data, deviceRoot); err != nil {
