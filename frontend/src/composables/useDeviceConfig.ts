@@ -13,19 +13,26 @@ export interface DeviceConfigOptions {
   keyField: string // 单条记录主键叶子名，如 'id' / 'name'
 }
 
+// DFS 找到 path 以 suffix 结尾的 list 字段节点（供取字段集与 path 复用）。
+function findItemList(fields: Field[], suffix: string): Field | null {
+  for (const f of fields ?? []) {
+    if (f.type === 'list' && f.path.endsWith(suffix)) return f
+    if (f.fields) {
+      const r = findItemList(f.fields, suffix)
+      if (r) return r
+    }
+  }
+  return null
+}
+
 // DFS 找到 path 以 suffix 结尾的 list 字段，返回其子字段（单条记录的字段集）。
 export function extractItemFields(schema: any, suffix: string): Field[] {
-  function dfs(fields: Field[]): Field | null {
-    for (const f of fields) {
-      if (f.type === 'list' && f.path.endsWith(suffix)) return f
-      if (f.fields) {
-        const r = dfs(f.fields)
-        if (r) return r
-      }
-    }
-    return null
-  }
-  return dfs(schema?.fields ?? [])?.fields ?? []
+  return findItemList(schema?.fields ?? [], suffix)?.fields ?? []
+}
+
+// DFS 找到目标 list 的完整 path（供架构树的数量 pill 定位到该 list 节点）。
+export function findItemListPath(schema: any, suffix: string): string {
+  return findItemList(schema?.fields ?? [], suffix)?.path ?? ''
 }
 
 // 从运行配置归一化出行数组（兼容 {listKey:[...]}、数组、以主键为键的 map）。
@@ -45,6 +52,8 @@ export function extractRows(data: any, listKey: string, keyField: string): Recor
 
 export function useDeviceConfig(opts: DeviceConfigOptions) {
   const fields = ref<Field[]>([])
+  const schemaFields = ref<Field[]>([]) // 完整嵌套 schema 树（供架构树 SchemaTree 渲染）
+  const itemListPath = ref('') // 目标 list 节点的完整 path（供架构树数量 pill 定位）
   const items = ref<Record<string, any>[]>([])
   const loading = ref(false)
   const error = ref<string | null>(null)
@@ -52,7 +61,10 @@ export function useDeviceConfig(opts: DeviceConfigOptions) {
   async function loadSchema() {
     // 走 api 客户端（绝对 baseURL）——staging 的 nginx 不代理 /api，裸相对 fetch 会拿到 index.html。
     const res = await getYangSchema(opts.module, 'nested')
-    fields.value = extractItemFields(res.data?.data, opts.itemListSuffix)
+    const data = res.data?.data
+    schemaFields.value = data?.fields ?? []
+    fields.value = extractItemFields(data, opts.itemListSuffix)
+    itemListPath.value = findItemListPath(data, opts.itemListSuffix)
   }
 
   async function loadItems(ip: string) {
@@ -81,5 +93,5 @@ export function useDeviceConfig(opts: DeviceConfigOptions) {
     await setConfig(ip, opts.configPath, { [opts.listKey]: [item] })
   }
 
-  return { fields, items, loading, error, loadSchema, loadItems, saveItem }
+  return { fields, schemaFields, itemListPath, items, loading, error, loadSchema, loadItems, saveItem }
 }
