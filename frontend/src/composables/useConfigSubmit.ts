@@ -37,6 +37,10 @@ export function useConfigSubmit(opts: UseConfigSubmitOptions) {
     item: Record<string, any>,
     hooks: { onPhase?: (p: ReconcilePhase) => void } = {},
   ) {
+    // in-flight 守卫：一条对账链未结束时忽略重复 run（防并发写同一 phase 竞态 R09）。
+    // UI 层提交后即切进度视图已基本互斥，此处再兜底一层，让 composable 自身可复用安全。
+    if (phase.value !== 'idle' && !isTerminal(phase.value)) return
+
     const set = (p: ReconcilePhase) => {
       phase.value = p
       hooks.onPhase?.(p)

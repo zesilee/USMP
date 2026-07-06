@@ -75,6 +75,21 @@ describe('useConfigSubmit · 下发→回读→轮询对账', () => {
     expect(s.phase.value).toBe('converged')
   })
 
+  it('对账进行中重复 run 被忽略（in-flight 守卫，防并发竞态）', async () => {
+    let release: () => void = () => {}
+    const gate = new Promise<void>((r) => (release = r))
+    vi.mocked(setConfig).mockImplementation(() => gate.then(() => ({ data: {} }) as any))
+    vi.mocked(getDeviceReconcile).mockResolvedValue({ data: { data: { outcome: 'converged' } } } as any)
+    const s = useConfigSubmit(opts)
+    const first = s.run('10.0.0.1', { id: 100 }) // 卡在 setConfig（pushing）
+    await Promise.resolve()
+    await s.run('10.0.0.1', { id: 200 }) // 应被守卫忽略，立即返回
+    expect(setConfig).toHaveBeenCalledTimes(1)
+    release()
+    await first
+    expect(s.phase.value).toBe('converged')
+  })
+
   it('reset 回到 idle', async () => {
     vi.mocked(getDeviceReconcile).mockResolvedValue({ data: { data: { outcome: 'converged' } } } as any)
     const s = useConfigSubmit(opts)
