@@ -43,12 +43,19 @@ jobs:
       - uses: actions/checkout@v4
 
       # 1) 构建三镜像（simulator / backend / frontend）
+      #    前端强制 --no-cache：self-hosted runner 复用陈旧前端镜像层会让 staging 服务旧 SPA
+      #    （曾导致 VLAN 页仍是 #69 前的老 VlanFormDrawer，下发按钮 disabled → 冒烟点击 30s 超时）。
+      #    每轮从当前 checkout 全新构建前端；backend/simulator 仍走缓存以省时。
       - name: Build images
-        run: docker compose build
+        run: |
+          docker compose build --no-cache frontend
+          docker compose build backend simulator
 
       # 2) 部署（detached）；restart: unless-stopped + 本步不 teardown ⇒ 作业结束后常驻
+      #    --force-recreate：常驻容器不会因「镜像已重建」自动替换全部，显式强制用新镜像重建，
+      #    确保部署反映当前 main（尤其前端），杜绝「镜像新了但容器还是旧的」。
       - name: Deploy (compose up)
-        run: docker compose up -d --remove-orphans
+        run: docker compose up -d --remove-orphans --force-recreate
 
       # 3) 等待后端与前端健康就绪（最长 ~120s）
       - name: Wait for health
