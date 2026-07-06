@@ -1,6 +1,7 @@
 package cache
 
 import (
+	"strings"
 	"sync"
 	"time"
 )
@@ -80,33 +81,64 @@ func (c *TTLLRUCache) Set(key string, value interface{}) {
 	}
 }
 
-// Get retrieves a cache entry, returns (value, found)
+// Get retrieves a cache entry, returns (value, found).
+// The whole read is under the write lock: Set mutates *entry fields in place,
+// so createdAt/value must not be read after unlocking (R09 data race).
 func (c *TTLLRUCache) Get(key string) (interface{}, bool) {
-	c.mu.RLock()
-	e, exists := c.entries[key]
-	c.mu.RUnlock()
+	c.mu.Lock()
+	defer c.mu.Unlock()
 
+	e, exists := c.entries[key]
 	if !exists {
 		return nil, false
 	}
-
-	// Check if expired
 	if time.Since(e.createdAt) > c.ttl {
-		c.Delete(key)
+		delete(c.entries, key)
 		return nil, false
 	}
-
-	// Update last used time
-	c.mu.Lock()
 	e.lastUsed = time.Now()
-	c.mu.Unlock()
-
 	return e.value, true
 }
+
+// GetWithAge retrieves a cache entry together with how long it has been cached.
+// Returns (value, age, true) on a fresh hit; (nil, 0, false) on miss or expiry
+// (expired entries are deleted, consistent with Get). Used to surface cache-age
+// to API consumers (e.g. the freshness indicator).
+func (c *TTLLRUCache) GetWithAge(key string) (interface{}, time.Duration, bool) {
+	c.mu.Lock()
+	defer c.mu.Unlock()
+
+	e, exists := c.entries[key]
+	if !exists {
+		return nil, 0, false
+	}
+	age := time.Since(e.createdAt)
+	if age > c.ttl {
+		delete(c.entries, key)
+		return nil, 0, false
+	}
+	e.lastUsed = time.Now()
+	return e.value, age, true
+}
+
+// TTL returns the configured time-to-live for entries.
+func (c *TTLLRUCache) TTL() time.Duration { return c.ttl }
 
 // Invalidate explicitly invalidates a cache entry
 func (c *TTLLRUCache) Invalidate(key string) {
 	c.Delete(key)
+}
+
+// InvalidatePrefix removes all entries whose key starts with prefix. Used to
+// evict every cached path of a device at once (e.g. after a config push).
+func (c *TTLLRUCache) InvalidatePrefix(prefix string) {
+	c.mu.Lock()
+	defer c.mu.Unlock()
+	for k := range c.entries {
+		if strings.HasPrefix(k, prefix) {
+			delete(c.entries, k)
+		}
+	}
 }
 
 // Delete removes an entry from the cache

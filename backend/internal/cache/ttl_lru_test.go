@@ -1,6 +1,7 @@
 package cache
 
 import (
+	"sync"
 	"testing"
 	"time"
 
@@ -130,4 +131,94 @@ func TestClearExpired(t *testing.T) {
 	_, ok2 := cache.Get("key2")
 	assert.False(t, ok1)
 	assert.False(t, ok2)
+}
+
+func TestGetWithAge_HitFreshMissExpired(t *testing.T) {
+	c := NewTTLLRUCache(10, 60*time.Millisecond, 0)
+	c.Set("k", "v")
+
+	val, age, ok := c.GetWithAge("k")
+	if !ok || val != "v" {
+		t.Fatalf("hit: got (%v,%v), want (v,true)", val, ok)
+	}
+	if age < 0 || age > 40*time.Millisecond {
+		t.Errorf("fresh age = %v, want ~0 (<40ms)", age)
+	}
+
+	if _, _, ok := c.GetWithAge("missing"); ok {
+		t.Errorf("miss should report found=false")
+	}
+
+	time.Sleep(120 * time.Millisecond) // > TTL
+	if _, _, ok := c.GetWithAge("k"); ok {
+		t.Errorf("expired entry should report found=false")
+	}
+}
+
+func TestGetWithAge_Monotonic(t *testing.T) {
+	c := NewTTLLRUCache(10, 500*time.Millisecond, 0)
+	c.Set("k", "v")
+	time.Sleep(60 * time.Millisecond)
+	_, age, ok := c.GetWithAge("k")
+	if !ok {
+		t.Fatalf("expected hit")
+	}
+	if age <= 0 { // lower bound only, avoid upper-bound flakiness under load
+		t.Errorf("age = %v, want > 0 after sleep", age)
+	}
+}
+
+func TestInvalidatePrefix(t *testing.T) {
+	c := NewTTLLRUCache(10, time.Minute, 0)
+	c.Set("10.0.0.1|/vlans", "a")
+	c.Set("10.0.0.1|/ifm", "b")
+	c.Set("10.0.0.2|/vlans", "c")
+
+	c.InvalidatePrefix("10.0.0.1|")
+
+	if _, ok := c.Get("10.0.0.1|/vlans"); ok {
+		t.Errorf("10.0.0.1|/vlans should be invalidated")
+	}
+	if _, ok := c.Get("10.0.0.1|/ifm"); ok {
+		t.Errorf("10.0.0.1|/ifm should be invalidated")
+	}
+	if _, ok := c.Get("10.0.0.2|/vlans"); !ok {
+		t.Errorf("other device 10.0.0.2 must not be invalidated")
+	}
+}
+
+func TestTTLGetter(t *testing.T) {
+	c := NewTTLLRUCache(10, 30*time.Second, 0)
+	if c.TTL() != 30*time.Second {
+		t.Errorf("TTL() = %v, want 30s", c.TTL())
+	}
+}
+
+// TestGetWithAge_SameKeyConcurrent reproduces the race where concurrent GET
+// (miss -> Set) on the SAME key mutates one *entry in place while other
+// goroutines read it via GetWithAge/Get. Must be clean under -race.
+func TestGetWithAge_SameKeyConcurrent(t *testing.T) {
+	c := NewTTLLRUCache(10, time.Minute, 0)
+	c.Set("k", 0)
+	var wg sync.WaitGroup
+	for i := 0; i < 100; i++ {
+		wg.Add(3)
+		go func(n int) { defer wg.Done(); c.Set("k", n) }(i)
+		go func() { defer wg.Done(); c.GetWithAge("k") }()
+		go func() { defer wg.Done(); c.Get("k") }()
+	}
+	wg.Wait()
+}
+
+// TestGetWithAge_AfterLRUEviction: an evicted entry must report found=false.
+func TestGetWithAge_AfterLRUEviction(t *testing.T) {
+	c := NewTTLLRUCache(1, time.Minute, 0) // capacity 1
+	c.Set("a", "va")
+	c.Set("b", "vb") // evicts "a" (LRU)
+	if _, _, ok := c.GetWithAge("a"); ok {
+		t.Errorf("evicted key 'a' should report found=false")
+	}
+	if _, _, ok := c.GetWithAge("b"); !ok {
+		t.Errorf("key 'b' should be present")
+	}
 }
