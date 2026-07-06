@@ -237,6 +237,47 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/devices/{ip}/reconcile": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** 读取单设备对账结局（desired↔actual，含各 YANG 路径明细） */
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    /** @description 设备 IP */
+                    ip: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description 设备对账结局；从未对账返回 outcome=unknown */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["api.Response"] & {
+                            data?: components["schemas"]["api.DeviceReconcileData"];
+                        };
+                    };
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/devices/{ip}/status": {
         parameters: {
             query?: never;
@@ -275,6 +316,44 @@ export interface paths {
                     };
                     content: {
                         "application/json": components["schemas"]["api.Response"];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/reconcile/status": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** 车队级对账结局聚合（收敛台账 / 概览大盘用） */
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description 车队对账聚合；summary 按结局计数，仅含已对账设备（unknown 需与设备列表相减派生） */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["api.Response"] & {
+                            data?: components["schemas"]["api.FleetReconcileData"];
+                        };
                     };
                 };
             };
@@ -400,6 +479,16 @@ export interface components {
             devices?: components["schemas"]["api.DeviceStatus"][];
             stats?: components["schemas"]["api.PoolStatsDTO"];
         };
+        "api.DeviceReconcileData": {
+            device_id?: string;
+            outcome?: string;
+            statuses?: components["schemas"]["github_com_leezesi_usmp_backend_pkg_yang-runtime_status.Status"][];
+        };
+        "api.DeviceRollup": {
+            device_id?: string;
+            last_run?: string;
+            outcome?: string;
+        };
         "api.DeviceStatus": {
             ip?: string;
             online?: boolean;
@@ -425,6 +514,12 @@ export interface components {
             readonly?: boolean;
             required?: boolean;
             type?: string;
+        };
+        "api.FleetReconcileData": {
+            devices?: components["schemas"]["api.DeviceRollup"][];
+            summary?: {
+                [key: string]: number;
+            };
         };
         "api.Option": {
             label?: string;
@@ -460,6 +555,16 @@ export interface components {
             title?: string;
             vendor?: string;
         };
+        "github_com_leezesi_usmp_backend_pkg_yang-runtime_status.Status": {
+            device_id?: string;
+            diff_count?: number;
+            last_error?: string;
+            last_run?: string;
+            outcome?: components["schemas"]["status.Outcome"];
+            path?: string;
+        };
+        /** @enum {string} */
+        "status.Outcome": "unknown" | "converged" | "drifted" | "reconciling" | "error";
     };
     responses: never;
     parameters: never;
