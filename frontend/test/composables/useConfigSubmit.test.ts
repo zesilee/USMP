@@ -115,6 +115,23 @@ describe('useConfigSubmit · 下发→回读→轮询对账', () => {
     expect(s.phase.value).toBe('converged')
   })
 
+  it('baseline 读期间的并发 run 也被守卫忽略（同步 in-flight 标志）', async () => {
+    let releaseBaseline: () => void = () => {}
+    const gate = new Promise<void>((r) => (releaseBaseline = r))
+    // 首个 getDeviceReconcile（baseline）挂起，模拟网络往返窗口；之后的 poll 返回推进终态。
+    vi.mocked(getDeviceReconcile)
+      .mockImplementationOnce(() => gate.then(() => noStatuses) as any)
+      .mockResolvedValue(recon('converged', T1))
+    const s = useConfigSubmit(opts)
+    const first = s.run('10.0.0.1', { id: 100 }) // 卡在 baseline 读
+    await s.run('10.0.0.1', { id: 200 }) // baseline 窗口内并发 → 守卫忽略
+    expect(setConfig).not.toHaveBeenCalled() // 第二次未下发；第一次还卡在 baseline
+    releaseBaseline()
+    await first
+    expect(setConfig).toHaveBeenCalledTimes(1) // 只有第一次下发
+    expect(s.phase.value).toBe('converged')
+  })
+
   it('reset 回到 idle', async () => {
     vi.mocked(getDeviceReconcile).mockResolvedValueOnce(noStatuses).mockResolvedValue(recon('converged', T1))
     const s = useConfigSubmit(opts)
