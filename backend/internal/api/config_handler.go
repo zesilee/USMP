@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"log"
+	"sort"
 	"strconv"
 	"strings"
 	"sync"
@@ -12,6 +13,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/leezesi/usmp/backend/internal/generated/huawei"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/audit"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/client"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/manager"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/reconcile"
@@ -208,6 +210,16 @@ func (h *ConfigHandler) SetConfig(c *gin.Context) {
 	// 3. Apply changes to device
 	// 4. Commit (if supported by protocol)
 	controllerFound := h.manager.TriggerReconcile(ip, path)
+
+	// 记录操作审计（§8 本地 JSON）。仅在成功接受下发后记录——被拒下发(400)不产生
+	// 审计记录。诚实字段：ip/path/提交摘要/是否触发对账/时间(store 自打)/actor(system)；
+	// reconcile 结局不在此存，查询 /logs 时按当前态 live-join。
+	h.manager.GetAuditStore().Record(audit.Record{
+		DeviceIP:  ip,
+		Path:      path,
+		Summary:   summarizeSubmitted(data),
+		Triggered: controllerFound,
+	})
 
 	Success(c, ConfigSetData{
 		Status: "ACCEPTED",
@@ -960,4 +972,27 @@ func mapEntryToSystemInfo(m map[string]interface{}) *huawei.HuaweiSystem_System_
 	}
 
 	return result
+}
+
+// summarizeSubmitted 生成下发内容的简明审计摘要（诚实、确定性）。
+// 对每个顶层键：值为数组 → "键 (N)"（N=提交条目数），否则 "键"。键排序保证稳定。
+// 例：{"vlans":[{id:100},{id:200}]} → "vlans (2)"。空提交 → "(空)"。
+func summarizeSubmitted(data map[string]interface{}) string {
+	if len(data) == 0 {
+		return "(空)"
+	}
+	keys := make([]string, 0, len(data))
+	for k := range data {
+		keys = append(keys, k)
+	}
+	sort.Strings(keys)
+	parts := make([]string, 0, len(keys))
+	for _, k := range keys {
+		if arr, ok := data[k].([]interface{}); ok {
+			parts = append(parts, fmt.Sprintf("%s (%d)", k, len(arr)))
+		} else {
+			parts = append(parts, k)
+		}
+	}
+	return strings.Join(parts, ", ")
 }

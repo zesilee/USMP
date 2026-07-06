@@ -328,6 +328,53 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/logs": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** 操作日志（配置下发审计 + 当前对账结局） */
+        get: {
+            parameters: {
+                query?: {
+                    /** @description 按设备 IP 筛选 */
+                    device?: string;
+                    /** @description 按当前对账结局筛选(converged/drifted/error/reconciling/unknown) */
+                    status?: string;
+                    /** @description 每页条数(默认 50，上限 500) */
+                    limit?: number;
+                    /** @description 偏移(默认 0) */
+                    offset?: number;
+                };
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description 操作日志 */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["api.Response"] & {
+                            data?: components["schemas"]["api.AuditListData"];
+                        };
+                    };
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/reconcile/status": {
         parameters: {
             query?: never;
@@ -458,6 +505,10 @@ export interface components {
             port?: number;
             username: string;
         };
+        "api.AuditListData": {
+            logs?: components["schemas"]["api.LogEntry"][];
+            total?: number;
+        };
         "api.ConfigGetData": {
             cache_age_seconds?: number;
             cached?: boolean;
@@ -520,6 +571,19 @@ export interface components {
             summary?: {
                 [key: string]: number;
             };
+        };
+        "api.LogEntry": {
+            actor?: string;
+            device_ip?: string;
+            /** @description 当前差异数（live-join） */
+            diff_count?: number;
+            id?: string;
+            /** @description 当前对账结局（live-join；无记录为 unknown） */
+            outcome?: string;
+            path?: string;
+            summary?: string;
+            timestamp?: string;
+            triggered?: boolean;
         };
         "api.Option": {
             label?: string;

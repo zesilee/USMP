@@ -53,6 +53,9 @@ func (s *Server) setupRoutes() {
 		// Fleet-wide reconcile aggregate (for the convergence dashboard)
 		v1.GET("/reconcile/status", reconcileHandler.GetFleetReconcile)
 
+		// Operation audit log (config-delivery records + live reconcile outcome)
+		v1.GET("/logs", NewAuditHandler(s.manager).ListLogs)
+
 		// Configuration endpoints
 		configGroup := v1.Group("/config")
 		{

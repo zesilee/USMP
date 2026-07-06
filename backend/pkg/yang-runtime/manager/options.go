@@ -23,6 +23,9 @@ type Options struct {
 	Schema schema.Schema
 	// EnableDebug enables debug logging
 	EnableDebug bool
+	// AuditFile is the local JSON file the operation-audit log persists to
+	// (§8). Empty ("") keeps the audit log in memory only.
+	AuditFile string
 }
 
 // Option is a function that modifies Options
@@ -53,6 +56,14 @@ func WithRateLimiter(r queue.RateLimiter) Option {
 func WithSchemeDir(dir string) Option {
 	return func(o *Options) {
 		o.SchemeDir = dir
+	}
+}
+
+// WithAuditFile sets the local JSON file the operation-audit log persists to
+// (§8). Empty keeps it in memory only.
+func WithAuditFile(path string) Option {
+	return func(o *Options) {
+		o.AuditFile = path
 	}
 }
 

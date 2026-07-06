@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"log"
+	"os"
 	"time"
 
 	"github.com/leezesi/usmp/backend/internal/api"
@@ -35,6 +36,8 @@ func main() {
 	mgr := manager.New(
 		manager.WithDefaultTimeout(10*time.Second),
 		manager.WithSchema(yangSchema),
+		// 操作审计日志持久化到本地 JSON（§8，可用 USMP_AUDIT_FILE 覆盖）。
+		manager.WithAuditFile(auditFilePath()),
 	)
 
 	// Create and register the Huawei VLAN controller
@@ -105,4 +108,13 @@ func main() {
 
 	// Stop manager on exit
 	mgr.Stop()
+}
+
+// auditFilePath 返回操作审计日志的本地 JSON 路径，可用 USMP_AUDIT_FILE 覆盖，
+// 默认 data/audit.json（§8 本地元信息，非数据库 R03）。
+func auditFilePath() string {
+	if p := os.Getenv("USMP_AUDIT_FILE"); p != "" {
+		return p
+	}
+	return "data/audit.json"
 }

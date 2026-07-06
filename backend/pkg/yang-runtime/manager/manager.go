@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/leezesi/usmp/backend/internal/cache"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/audit"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/client"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/controller"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/plugin"
@@ -108,6 +109,8 @@ type Manager interface {
 	GetRunningCache() *cache.TTLLRUCache
 	// GetReconcileStatus returns a read-only view of most-recent reconcile outcomes
 	GetReconcileStatus() status.Reader
+	// GetAuditStore returns the operation-audit log (config-delivery records)
+	GetAuditStore() *audit.Store
 	// GetPluginManager returns the plugin manager
 	GetPluginManager() *plugin.Manager
 	// AddPlugin adds a plugin
@@ -126,6 +129,7 @@ type DefaultManager struct {
 	desiredCache    *cache.TTLLRUCache
 	runningCache    *cache.TTLLRUCache
 	reconcileStatus *status.Store
+	auditStore      *audit.Store
 	controllers     []controller.Controller
 	pluginManager   *plugin.Manager
 	started         bool
@@ -166,8 +170,10 @@ func New(opts ...Option) *DefaultManager {
 		desiredCache:    desiredCache,
 		runningCache:    runningCache,
 		reconcileStatus: status.NewStore(),
-		controllers:     make([]controller.Controller, 0),
-		pluginManager:   plugin.NewManager(),
+		// 操作审计日志：内存 + 最佳努力持久化到本地 JSON（§8）。AuditFile 为空则内存模式。
+		auditStore:    audit.NewStore(options.AuditFile, 1000),
+		controllers:   make([]controller.Controller, 0),
+		pluginManager: plugin.NewManager(),
 	}
 
 	return m
@@ -222,6 +228,9 @@ func (m *DefaultManager) Stop() error {
 	m.desiredCache.Stop()
 	m.runningCache.Stop()
 
+	// Final flush of the audit log to disk (best-effort; already persisted per-record).
+	_ = m.auditStore.Flush()
+
 	m.cancel()
 	m.started = false
 	return nil
@@ -246,6 +255,11 @@ func (m *DefaultManager) GetRunningCache() *cache.TTLLRUCache {
 // GetReconcileStatus implements Manager interface
 func (m *DefaultManager) GetReconcileStatus() status.Reader {
 	return m.reconcileStatus
+}
+
+// GetAuditStore implements Manager interface
+func (m *DefaultManager) GetAuditStore() *audit.Store {
+	return m.auditStore
 }
 
 // GetSchema implements Manager interface
