@@ -22,10 +22,12 @@ import Header from './Header.vue'
 </script>
 
 <style scoped>
+/* 外壳：侧栏 + 内容两栏，内容区独立滚动（浅色 iMaster） */
 .main-layout {
   display: flex;
   height: 100vh;
   overflow: hidden;
+  background: var(--paper);
 }
 
 .sidebar-wrapper {
@@ -37,12 +39,13 @@ import Header from './Header.vue'
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  min-width: 0;
 }
 
 .main-content {
   flex: 1;
-  padding: 24px;
+  padding: 22px;
   overflow-y: auto;
-  background: #f5f7fa;
+  background: var(--paper);
 }
 </style>
