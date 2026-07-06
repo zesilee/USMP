@@ -1,6 +1,7 @@
 import { ref } from 'vue'
 import { getConfig, setConfig, getYangSchema } from '../api'
 import type { Field } from '../utils/crdSchemaParser'
+import { useFreshnessStore } from '../stores/freshness'
 
 // 通用设备配置流（Stack B 直连）。任意华为模块（vlan/ifm/...）只需提供下述参数即可
 // 用同一套「schema 动态渲染 + 列表 + 下发」界面。schema/list/下发均走 api 客户端。
@@ -59,7 +60,15 @@ export function useDeviceConfig(opts: DeviceConfigOptions) {
     error.value = null
     try {
       const res = await getConfig(ip, opts.configPath)
-      items.value = extractRows(res.data?.data, opts.listKey, opts.keyField)
+      const payload = res.data?.data
+      // 生产者：把后端返回的缓存新鲜度（PR-B2 真数据）写入 store，供顶栏新鲜度环消费。
+      // cache_age_seconds/ttl_seconds/source 与配置负载同为 ConfigGetData 的兄弟字段。
+      useFreshnessStore().record({
+        cache_age_seconds: payload?.cache_age_seconds,
+        ttl_seconds: payload?.ttl_seconds,
+        source: payload?.source,
+      })
+      items.value = extractRows(payload, opts.listKey, opts.keyField)
     } catch (e: any) {
       error.value = e?.response?.data?.message || e?.message || '读取失败'
       items.value = []
