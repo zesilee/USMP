@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
-import { extractItemFields, extractRows, useDeviceConfig } from '../../src/composables/useDeviceConfig'
+import { extractItemFields, extractRows, findItemListPath, useDeviceConfig } from '../../src/composables/useDeviceConfig'
 import { getYangSchema } from '../../src/api'
 
 vi.mock('../../src/api')
@@ -71,6 +71,12 @@ describe('useDeviceConfig helpers', () => {
     expect(extractRows({}, 'vlans', 'id')).toEqual([])
   })
 
+  it('findItemListPath 返回目标 list 的完整 path，未命中返回空串', () => {
+    expect(findItemListPath(nestedSchema, '/vlan')).toBe('/vlan/vlans/vlan')
+    expect(findItemListPath(nestedSchema, '/nope')).toBe('')
+    expect(findItemListPath(null, '/vlan')).toBe('')
+  })
+
   describe('loadSchema（走 api 客户端而非裸 fetch，staging 无 nginx /api 代理）', () => {
     beforeEach(() => {
       vi.mocked(getYangSchema).mockResolvedValue({ data: { success: true, data: nestedSchema } } as any)
@@ -81,6 +87,14 @@ describe('useDeviceConfig helpers', () => {
       await cfg.loadSchema()
       expect(getYangSchema).toHaveBeenCalledWith('vlan', 'nested')
       expect(cfg.fields.value.map((f) => f.label)).toContain('admin-status')
+    })
+
+    it('同时暴露完整 schema 树与目标 list path（供架构树渲染/数量 pill）', async () => {
+      const cfg = useDeviceConfig({ module: 'vlan', configPath: 'huawei-vlan:vlan/vlans', itemListSuffix: '/vlan', listKey: 'vlans', keyField: 'id' })
+      await cfg.loadSchema()
+      // schemaFields = 顶层容器（default-instance / vlans），非仅单条记录字段
+      expect(cfg.schemaFields.value.map((f) => f.label)).toEqual(['default-instance', 'vlans'])
+      expect(cfg.itemListPath.value).toBe('/vlan/vlans/vlan')
     })
   })
 })

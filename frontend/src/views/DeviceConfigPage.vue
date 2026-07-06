@@ -15,18 +15,23 @@
     <el-alert v-if="cfg.error.value" :title="cfg.error.value" type="warning" :closable="false" show-icon
       style="margin-bottom: 16px" />
 
-    <el-table :data="cfg.items.value" stripe v-loading="cfg.loading.value" class="config-table">
-      <el-table-column v-for="col in columns" :key="col.prop" :prop="col.prop" :label="col.label"
-        :width="col.width" :min-width="col.width ? undefined : 160" />
-      <el-table-column label="操作" width="120" fixed="right">
-        <template #default="{ row }">
-          <el-button type="primary" size="small" link @click="openEdit(row)">编辑</el-button>
+    <div class="cfg">
+      <SchemaTree class="cfg-tree" :fields="cfg.schemaFields.value" :key-field="options.keyField"
+        :module-label="options.module" :item-counts="itemCounts" />
+
+      <el-table :data="cfg.items.value" stripe v-loading="cfg.loading.value" class="config-table">
+        <el-table-column v-for="col in columns" :key="col.prop" :prop="col.prop" :label="col.label"
+          :width="col.width" :min-width="col.width ? undefined : 160" />
+        <el-table-column label="操作" width="120" fixed="right">
+          <template #default="{ row }">
+            <el-button type="primary" size="small" link @click="openEdit(row)">编辑</el-button>
+          </template>
+        </el-table-column>
+        <template #empty>
+          <span>{{ selectedDevice ? '暂无配置（点击新增）' : '请先选择设备' }}</span>
         </template>
-      </el-table-column>
-      <template #empty>
-        <span>{{ selectedDevice ? '暂无配置（点击新增）' : '请先选择设备' }}</span>
-      </template>
-    </el-table>
+      </el-table>
+    </div>
 
     <el-drawer v-model="drawerVisible" :title="editing ? '编辑' : addLabel" size="560px">
       <el-form ref="formRef" :model="formData" :rules="rules" label-position="top" class="config-form">
@@ -52,6 +57,7 @@ import { useDeviceStore } from '../stores/device'
 import { useDeviceConfig, type DeviceConfigOptions } from '../composables/useDeviceConfig'
 import type { Field } from '../utils/crdSchemaParser'
 import FieldRenderer from '../components/config/FieldRenderer.vue'
+import SchemaTree from '../components/config/SchemaTree.vue'
 
 const props = defineProps<{
   title: string
@@ -73,6 +79,11 @@ const formRef = ref<FormInstance>()
 function keyOf(f: Field): string {
   return f.path.split('/').filter(Boolean).pop() || f.path
 }
+
+// 架构树上目标 list 的数量 pill：把当前已配置行数挂到该 list 节点 path 上。
+const itemCounts = computed<Record<string, number>>(() =>
+  cfg.itemListPath.value ? { [cfg.itemListPath.value]: cfg.items.value.length } : {},
+)
 
 // 由 schema 生成校验规则：主键(keyField)与 required 叶子必填；数值字段带 min/max 时校验范围。
 // 服务端仍有权威兜底(如 VLAN ID 1-4094)，此处提前拦截、行内提示。
@@ -173,9 +184,28 @@ onMounted(async () => {
   gap: 12px;
 }
 
+/* 左侧 YANG 架构树 + 右侧配置表格（对齐设计原型 .cfg 双栏） */
+.cfg {
+  display: grid;
+  grid-template-columns: 288px 1fr;
+  gap: 16px;
+  align-items: start;
+}
+
+.cfg-tree {
+  position: sticky;
+  top: 16px;
+}
+
 .config-table {
   background: #fff;
   border-radius: 8px;
+}
+
+@media (max-width: 900px) {
+  .cfg {
+    grid-template-columns: 1fr;
+  }
 }
 
 .config-form {
