@@ -26,3 +26,7 @@ export type ReconcileStatus =
 export type DeviceRollup = Schemas['api.DeviceRollup']
 export type FleetReconcileData = Schemas['api.FleetReconcileData']
 export type DeviceReconcileData = Schemas['api.DeviceReconcileData']
+
+// 操作日志（配置下发审计 + 当前对账结局 live-join）契约（PR-B4 端点）。
+export type AuditListData = Schemas['api.AuditListData']
+export type LogEntry = Schemas['api.LogEntry']

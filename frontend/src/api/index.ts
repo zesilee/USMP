@@ -6,6 +6,7 @@ import type {
   DeviceConnStatus,
   FleetReconcileData,
   DeviceReconcileData,
+  AuditListData,
 } from '../types/api'
 
 // API 基础配置
@@ -33,6 +34,11 @@ export const getFleetReconcile = () => {
 
 export const getDeviceReconcile = (ip: string) => {
   return api.get<ApiEnvelope<DeviceReconcileData>>(`/devices/${ip}/reconcile`)
+}
+
+// 操作日志 API —— 配置下发审计 + 当前对账结局（PR-B4，真数据端点）。
+export const getLogs = (params: { device?: string; status?: string; limit?: number; offset?: number } = {}) => {
+  return api.get<ApiEnvelope<AuditListData>>('/logs', { params })
 }
 
 // Config API - 通用 YANG 配置接口
