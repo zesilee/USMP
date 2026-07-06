@@ -41,9 +41,11 @@
             @update:model-value="formData[keyOf(field)] = $event" />
         </el-form-item>
       </el-form>
+      <DiffPreview :diff="diff" />
+      <div class="form-tip">字段与约束由 YANG 模型生成，校验通过才会下发，下发即触发对账。</div>
       <template #footer>
         <el-button @click="drawerVisible = false">取消</el-button>
-        <el-button type="primary" :loading="submitting" @click="submit">下发</el-button>
+        <el-button type="primary" :loading="submitting" :disabled="!submittable" @click="submit">下发</el-button>
       </template>
     </el-drawer>
   </div>
@@ -56,8 +58,10 @@ import { ElMessage, type FormInstance, type FormRules } from 'element-plus'
 import { useDeviceStore } from '../stores/device'
 import { useDeviceConfig, type DeviceConfigOptions } from '../composables/useDeviceConfig'
 import type { Field } from '../utils/crdSchemaParser'
+import { computeDiff, missingRequired } from '../utils/configDiff'
 import FieldRenderer from '../components/config/FieldRenderer.vue'
 import SchemaTree from '../components/config/SchemaTree.vue'
+import DiffPreview from '../components/config/DiffPreview.vue'
 
 const props = defineProps<{
   title: string
@@ -74,11 +78,18 @@ const drawerVisible = ref(false)
 const editing = ref(false)
 const submitting = ref(false)
 const formData = reactive<Record<string, any>>({})
+const original = ref<Record<string, any>>({}) // 已回填的实际态基线（新增时为空），供实时差异比对
 const formRef = ref<FormInstance>()
 
 function keyOf(f: Field): string {
   return f.path.split('/').filter(Boolean).pop() || f.path
 }
+
+// 实时差异（表单期望值 ↔ 已回填实际态）；下发按钮 = 有改动 && 无缺失必填。
+const diff = computed(() => computeDiff(formData, original.value, cfg.fields.value))
+const submittable = computed(
+  () => diff.value.length > 0 && missingRequired(cfg.fields.value, formData, props.options.keyField).length === 0,
+)
 
 // 架构树上目标 list 的数量 pill：把当前已配置行数挂到该 list 节点 path 上。
 const itemCounts = computed<Record<string, number>>(() =>
@@ -110,6 +121,7 @@ function resetForm(seed: Record<string, any> = {}) {
 
 function openAdd() {
   editing.value = false
+  original.value = {} // 新增：基线空 → 填入即“新增”
   resetForm()
   formRef.value?.clearValidate()
   drawerVisible.value = true
@@ -117,6 +129,7 @@ function openAdd() {
 
 function openEdit(row: Record<string, any>) {
   editing.value = true
+  original.value = { ...row } // 编辑：基线 = 已回填实际态
   resetForm({ ...row })
   drawerVisible.value = true
 }
@@ -210,5 +223,12 @@ onMounted(async () => {
 
 .config-form {
   padding: 0 4px;
+}
+
+.form-tip {
+  margin-top: 14px;
+  font-size: 11.5px;
+  line-height: 1.6;
+  color: var(--ink-3, #93a2b1);
 }
 </style>
