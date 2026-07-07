@@ -67,6 +67,51 @@ func TestPeriodicSourceStartStop(t *testing.T) {
 	mc.AssertCalled(t, "Enqueue", mock.Anything)
 }
 
+// fakeLister is a DeviceLister test double.
+type fakeLister struct{ ids []string }
+
+func (f fakeLister) List() []string { return f.ids }
+
+// TestPeriodicSource_EnqueuesFromLister: with a dynamic lister the source must
+// enqueue one event per listed device each tick (regression: the old nil static
+// list made the periodic source a no-op → no out-of-band drift detection).
+func TestPeriodicSource_EnqueuesFromLister(t *testing.T) {
+	mc := &MockController{}
+	mc.On("Name").Return("test-controller")
+	mc.On("Start", mock.Anything).Return(nil)
+	mc.On("Stop").Return(nil)
+	mc.On("Enqueue", mock.Anything).Return()
+
+	s := NewPeriodicSourceWithLister(30*time.Millisecond, fakeLister{ids: []string{"192.168.1.1"}}, "/ifm:ifm/ifm:interfaces")
+
+	ctx, cancel := context.WithCancel(context.Background())
+	defer cancel()
+	assert.NoError(t, s.Start(ctx, mc))
+	time.Sleep(90 * time.Millisecond)
+	s.Stop()
+
+	mc.AssertCalled(t, "Enqueue", mock.Anything)
+}
+
+// TestPeriodicSource_EmptyListerNoEnqueue: an empty lister must enqueue nothing
+// (no panic, no spurious events).
+func TestPeriodicSource_EmptyListerNoEnqueue(t *testing.T) {
+	mc := &MockController{}
+	mc.On("Name").Return("test-controller")
+	mc.On("Start", mock.Anything).Return(nil)
+	mc.On("Stop").Return(nil)
+
+	s := NewPeriodicSourceWithLister(30*time.Millisecond, fakeLister{ids: nil}, "/ifm:ifm/ifm:interfaces")
+
+	ctx, cancel := context.WithCancel(context.Background())
+	defer cancel()
+	assert.NoError(t, s.Start(ctx, mc))
+	time.Sleep(90 * time.Millisecond)
+	s.Stop()
+
+	mc.AssertNotCalled(t, "Enqueue", mock.Anything)
+}
+
 func TestBaseSourceEnqueue(t *testing.T) {
 	mc := &MockController{}
 	called := false

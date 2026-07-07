@@ -8,12 +8,21 @@ import (
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/predicate"
 )
 
+// DeviceLister yields the current set of device IDs to reconcile. A DeviceStore
+// satisfies it, so the periodic source can poll whatever devices are registered
+// at each tick (new devices need no restart). Defined here to avoid a source→
+// device package dependency.
+type DeviceLister interface {
+	List() []string
+}
+
 // PeriodicSource is an event source that triggers reconciliation at fixed intervals
 // It can be used for periodic polling of device configuration to detect drift
 type PeriodicSource struct {
 	BaseSource
 	interval  time.Duration
 	deviceIDs []string
+	lister    DeviceLister
 	path      string
 	ticker    *time.Ticker
 	done      chan struct{}
@@ -47,8 +56,7 @@ func (wg *DoneWaitGroup) Wait() {
 	}
 }
 
-// NewPeriodicSource creates a new periodic source that triggers reconciliation
-// at the specified interval for all devices/paths
+// NewPeriodicSource creates a periodic source over a static device list.
 func NewPeriodicSource(interval time.Duration, deviceIDs []string, path string) *PeriodicSource {
 	return &PeriodicSource{
 		interval:  interval,
@@ -56,6 +64,28 @@ func NewPeriodicSource(interval time.Duration, deviceIDs []string, path string) 
 		path:      path,
 		done:      make(chan struct{}),
 	}
+}
+
+// NewPeriodicSourceWithLister creates a periodic source that polls whatever
+// devices the lister reports at each tick (dynamic; the shared DeviceStore is
+// the lister in production). Replaces the previous nil-device-list wiring that
+// made the periodic source a no-op, so out-of-band drift is actually detected.
+func NewPeriodicSourceWithLister(interval time.Duration, lister DeviceLister, path string) *PeriodicSource {
+	return &PeriodicSource{
+		interval: interval,
+		lister:   lister,
+		path:     path,
+		done:     make(chan struct{}),
+	}
+}
+
+// deviceList returns the devices to reconcile this tick: the dynamic lister when
+// set, otherwise the static list.
+func (s *PeriodicSource) deviceList() []string {
+	if s.lister != nil {
+		return s.lister.List()
+	}
+	return s.deviceIDs
 }
 
 // Start implements Source interface
@@ -81,8 +111,8 @@ func (s *PeriodicSource) run(ctx context.Context) {
 			s.ticker.Stop()
 			return
 		case <-s.ticker.C:
-			// Enqueue all devices for reconciliation
-			for _, deviceID := range s.deviceIDs {
+			// Enqueue all currently-registered devices for reconciliation
+			for _, deviceID := range s.deviceList() {
 				evt := predicate.Event{
 					DeviceID: deviceID,
 					Path:     s.path,
