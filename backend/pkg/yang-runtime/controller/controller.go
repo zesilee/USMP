@@ -205,8 +205,16 @@ func (c *DefaultController) process(ctx context.Context, req reconcile.Request) 
 	case result.Error != nil:
 		// If there's an error but Requeue isn't explicitly set, still requeue with rate limiting
 		c.queue.AddRateLimited(req)
+	case result.Changes > 0:
+		// A corrective apply just ran and was recorded as "drifted". Requeue a
+		// re-verify so a follow-up reconcile that finds nothing to change records
+		// "converged" — otherwise the device stays "drifted" until the next
+		// periodic poll, which is currently a no-op, i.e. forever. Rate-limited so
+		// a genuinely non-convergent config backs off instead of hammering the
+		// device; a converged re-verify hits the default branch and Forgets.
+		c.queue.AddRateLimited(req)
 	default:
-		// Success - forget the entry for rate limiting
+		// Success and converged - forget the entry for rate limiting
 		c.queue.Forget(req)
 	}
 }
