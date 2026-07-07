@@ -31,9 +31,9 @@
 ## 5. 删旧路径（迁移阶段③，切换完成）
 
 - [ ] 5.1 删 `reconciler.go` 的 `parseDeviceID`（`user:pass@ip:port` 解析）+ 相关 helper（ifm/vlan/system）；集成测试改「先 `DeviceStore.Put(id,info)` 再纯 id 触发」（取代 `New(...,nil)` + `user:pass@ip:port`）
-- [ ] 5.2 删 `netconf.go` 的 `admin/admin` 空凭据兜底（#100）及其测试；保留 Port/Timeout 兜底
-- [ ] 5.3 删 DeviceHandler 旧私有 `devices` map（双写切单一来源）
-- [ ] 5.4 全量 `go test ./... -race` + `go vet ./...` 绿
+- [x] 5.2 删 `netconf.go` 的 `admin/admin` 空凭据兜底（#100）；测试改为断言空凭据不再被填充；保留 Port/Timeout 兜底
+- [x] 5.3 删 DeviceHandler 旧私有 `devices` map + `sync.RWMutex`（读写纯 store，单一来源）；重写 api E2E 用例走 store 注册
+- [ ] 5.4 全量 `go test ./... -race` + `go vet ./...` 绿（5a 已绿；5.1 完成后再全量复核）
 
 ## 6. 收尾与验收
 
