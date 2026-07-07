@@ -16,10 +16,10 @@
 
 ## 3. reconciler 从库解析（迁移阶段②，切读）
 
-- [ ] 3.1 先写测试：`deviceClient` 用纯 DeviceID + 已注册 store → 建连带正确凭据（复用/替换 #100 的凭据回归用例）；未注册 → AUTO 兜底且记 warning（R08，不崩）
-- [ ] 3.2 实现：ifm `deviceClient.Get/Set` 注入并查 `DeviceStore`；ifm 集成测试改「先 `Put(id,info)` 再纯 id 触发」
-- [ ] 3.3 vlan / system 同构改造；各自集成测试同步改造
-- [ ] 3.4 全量 `go test ./... -race` 绿
+- [x] 3.1 先写测试：`deviceClient.resolveConn` 用纯 DeviceID + 已注册 store → 带正确凭据；未注册 → AUTO 兜底无凭据（R08，不崩）；无 store → 回退字符串解析（迁移兼容）
+- [x] 3.2 实现：ifm `deviceClient.Get/Set` 注入并**优先查 `DeviceStore`**，未命中回退 `parseDeviceID`（§5.3 新旧并存，DRY 掉 Get/Set 重复解析）；`New` 加 resolver 参
+- [x] 3.3 vlan / system 同构改造；`main.go`/crdsource 三处 `New` 传 `mgr.GetDeviceStore()`；集成测试暂以 `New(..., nil)` 保持绿（store 化改写并入阶段5删解析）
+- [x] 3.4 全量 `go test ./... -race` 绿（flaky `TestDelayingQueueAddAfter` 重跑过）
 
 ## 4. config 回读 + 周期源从库（迁移阶段②续）
 
@@ -30,7 +30,7 @@
 
 ## 5. 删旧路径（迁移阶段③，切换完成）
 
-- [ ] 5.1 删 `reconciler.go` 的 `user:pass@ip:port` / `ip:port` 字符串解析分支（ifm/vlan/system）；grep 确认无残留调用
+- [ ] 5.1 删 `reconciler.go` 的 `parseDeviceID`（`user:pass@ip:port` 解析）+ 相关 helper（ifm/vlan/system）；集成测试改「先 `DeviceStore.Put(id,info)` 再纯 id 触发」（取代 `New(...,nil)` + `user:pass@ip:port`）
 - [ ] 5.2 删 `netconf.go` 的 `admin/admin` 空凭据兜底（#100）及其测试；保留 Port/Timeout 兜底
 - [ ] 5.3 删 DeviceHandler 旧私有 `devices` map（双写切单一来源）
 - [ ] 5.4 全量 `go test ./... -race` + `go vet ./...` 绿
