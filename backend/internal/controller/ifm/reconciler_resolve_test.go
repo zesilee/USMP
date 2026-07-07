@@ -37,15 +37,13 @@ func TestDeviceClient_ResolveConn_UnregisteredFallback(t *testing.T) {
 	assert.Empty(t, got.Username, "未注册设备不应带凭据")
 }
 
-// TestDeviceClient_ResolveConn_NilResolver: with no store wired, the legacy
-// DeviceID-string parse still works (migration compatibility for integration
-// tests using user:pass@ip:port).
+// TestDeviceClient_ResolveConn_NilResolver: with no store wired, the DeviceID is
+// used as-is for the IP with an AUTO/no-credential connection (no string parsing).
 func TestDeviceClient_ResolveConn_NilResolver(t *testing.T) {
 	dc := &deviceClient{}
 
-	got := dc.resolveConn("admin:admin@127.0.0.1:830")
-	assert.Equal(t, "127.0.0.1", got.IP)
-	assert.Equal(t, 830, got.Port)
-	assert.Equal(t, "admin", got.Username)
-	assert.Equal(t, "admin", got.Password)
+	got := dc.resolveConn("192.168.1.1")
+	assert.Equal(t, "192.168.1.1", got.IP)
+	assert.Equal(t, client.ProtocolAUTO, got.Protocol)
+	assert.Empty(t, got.Username, "无 store 不应凭空产生凭据")
 }

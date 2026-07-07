@@ -2,7 +2,6 @@ package api
 
 import (
 	"context"
-	"fmt"
 	"testing"
 	"time"
 
@@ -58,11 +57,15 @@ func TestInterfaceConfig_Integration_EnumStringToDevice(t *testing.T) {
 	typed, err := convertMapToHuaweiIfm(raw)
 	assert.NoError(t, err)
 
-	deviceID := fmt.Sprintf("%s:%s@%s:%d", sim.Username(), sim.Password(), sim.Addr(), sim.Port())
+	deviceID := "sim"
+	ds := device.NewStore()
+	ds.Put(deviceID, client.DeviceConnectionInfo{
+		IP: sim.Addr(), Port: sim.Port(), Username: sim.Username(), Password: sim.Password(), Protocol: client.ProtocolNETCONF,
+	})
 	path := "/ifm:ifm/ifm:interfaces"
 	assert.NoError(t, cs.Set(deviceID, path, typed))
 
-	r := ifmctl.New(cs, pool, nil)
+	r := ifmctl.New(cs, pool, ds)
 	result := r.Reconcile(context.Background(), reconcile.Request{DeviceID: deviceID, Path: path})
 	if result.Error != nil {
 		t.Fatalf("reconcile: %v", result.Error)

@@ -2,13 +2,13 @@ package system
 
 import (
 	"context"
-	"fmt"
 	"testing"
 	"time"
 
 	"github.com/leezesi/usmp/backend/internal/cache"
 	"github.com/leezesi/usmp/backend/internal/generated/huawei"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/client"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/device"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/manager"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/reconcile"
 	netsim "github.com/leezesi/usmp/backend/simulator/netconfsim"
@@ -45,13 +45,13 @@ func TestReconciler_Integration_SystemBasics(t *testing.T) {
 		},
 	}
 
-	deviceID := fmt.Sprintf("%s:%s@%s:%d", sim.Username(), sim.Password(), sim.Addr(), sim.Port())
+	ds, deviceID := simStore(sim)
 	path := "/system:system"
 	err = cs.Set(deviceID, path, desired)
 	assert.NoError(t, err)
 
 	// 5. Create reconciler and execute reconciliation
-	r := New(cs, pool, nil)
+	r := New(cs, pool, ds)
 	req := reconcile.Request{
 		DeviceID: deviceID,
 		Path:     path,
@@ -92,7 +92,7 @@ func TestReconciler_Integration_SystemModify(t *testing.T) {
 	defer pool.CloseAll()
 
 	// 4. First set initial config
-	deviceID := fmt.Sprintf("%s:%s@%s:%d", sim.Username(), sim.Password(), sim.Addr(), sim.Port())
+	ds, deviceID := simStore(sim)
 	path := "/system:system"
 
 	initial := &huawei.HuaweiSystem_System{
@@ -104,7 +104,7 @@ func TestReconciler_Integration_SystemModify(t *testing.T) {
 	err = cs.Set(deviceID, path, initial)
 	assert.NoError(t, err)
 
-	r := New(cs, pool, nil)
+	r := New(cs, pool, ds)
 	req := reconcile.Request{DeviceID: deviceID, Path: path}
 
 	ctx := context.Background()
@@ -136,4 +136,15 @@ func TestReconciler_Integration_SystemModify(t *testing.T) {
 // stringPtr is a helper to create a *string from a string
 func stringPtr(s string) *string {
 	return &s
+}
+
+// simStore registers the simulator as a device in a fresh DeviceStore (source of
+// truth) and returns (store, deviceID).
+func simStore(sim *netsim.Simulator) (device.Store, string) {
+	ds := device.NewStore()
+	id := "sim"
+	ds.Put(id, client.DeviceConnectionInfo{
+		IP: sim.Addr(), Port: sim.Port(), Username: sim.Username(), Password: sim.Password(), Protocol: client.ProtocolNETCONF,
+	})
+	return ds, id
 }

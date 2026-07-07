@@ -9,6 +9,7 @@ import (
 	"github.com/leezesi/usmp/backend/internal/cache"
 	"github.com/leezesi/usmp/backend/internal/generated/huawei"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/client"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/device"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/manager"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/reconcile"
 	netsim "github.com/leezesi/usmp/backend/simulator/netconfsim"
@@ -51,13 +52,13 @@ func TestReconciler_Integration_CreateInterface(t *testing.T) {
 	}
 
 	// deviceID format "user:pass@host:port" includes credentials and port for integration testing
-	deviceID := fmt.Sprintf("%s:%s@%s:%d", sim.Username(), sim.Password(), sim.Addr(), sim.Port())
+	ds, deviceID := simStore(sim)
 	path := "/ifm:ifm/ifm:interfaces"
 	err = cs.Set(deviceID, path, desired)
 	assert.NoError(t, err)
 
 	// 5. Create reconciler and execute reconciliation
-	r := New(cs, pool, nil)
+	r := New(cs, pool, ds)
 	req := reconcile.Request{
 		DeviceID: deviceID,
 		Path:     path,
@@ -110,13 +111,13 @@ func TestReconciler_Integration_CreateInterface_ConvergesAndReadable(t *testing.
 		},
 	}
 
-	deviceID := fmt.Sprintf("%s:%s@%s:%d", sim.Username(), sim.Password(), sim.Addr(), sim.Port())
+	ds, deviceID := simStore(sim)
 	path := "/ifm:ifm/ifm:interfaces"
 	if err := cs.Set(deviceID, path, desired); err != nil {
 		t.Fatalf("config store set: %v", err)
 	}
 
-	r := New(cs, pool, nil)
+	r := New(cs, pool, ds)
 	req := reconcile.Request{DeviceID: deviceID, Path: path}
 	ctx := context.Background()
 
@@ -128,7 +129,7 @@ func TestReconciler_Integration_CreateInterface_ConvergesAndReadable(t *testing.
 	assert.Greater(t, first.Changes, 0, "首轮应检测到漂移并下发新接口")
 
 	// 症状② 断言：回读设备，新接口必须真正落盘（根因 B：序列化正确）
-	dc := &deviceClient{clientPool: pool}
+	dc := &deviceClient{clientPool: pool, resolver: ds}
 	got, err := dc.Get(ctx, deviceID)
 	if err != nil {
 		t.Fatalf("readback device config: %v", err)
@@ -187,12 +188,12 @@ func TestReconciler_Integration_ModifyInterface(t *testing.T) {
 		},
 	}
 
-	deviceID := fmt.Sprintf("%s:%s@%s:%d", sim.Username(), sim.Password(), sim.Addr(), sim.Port())
+	ds, deviceID := simStore(sim)
 	path := "/ifm:ifm/ifm:interfaces"
 	err = cs.Set(deviceID, path, desired)
 	assert.NoError(t, err)
 
-	r := New(cs, pool, nil)
+	r := New(cs, pool, ds)
 	req := reconcile.Request{DeviceID: deviceID, Path: path}
 
 	ctx := context.Background()
@@ -245,12 +246,12 @@ func TestReconciler_Integration_ModifyMTU(t *testing.T) {
 		},
 	}
 
-	deviceID := fmt.Sprintf("%s:%s@%s:%d", sim.Username(), sim.Password(), sim.Addr(), sim.Port())
+	ds, deviceID := simStore(sim)
 	path := "/ifm:ifm/ifm:interfaces"
 	err = cs.Set(deviceID, path, desired)
 	assert.NoError(t, err)
 
-	r := New(cs, pool, nil)
+	r := New(cs, pool, ds)
 	req := reconcile.Request{DeviceID: deviceID, Path: path}
 
 	ctx := context.Background()
@@ -293,13 +294,13 @@ func TestReconciler_Integration_EmptyConfig(t *testing.T) {
 	desired := &huawei.HuaweiIfm_Ifm_Interfaces{}
 
 	// deviceID format "user:pass@host:port" includes credentials and port for integration testing
-	deviceID := fmt.Sprintf("%s:%s@%s:%d", sim.Username(), sim.Password(), sim.Addr(), sim.Port())
+	ds, deviceID := simStore(sim)
 	path := "/ifm:ifm/ifm:interfaces"
 	err = cs.Set(deviceID, path, desired)
 	assert.NoError(t, err)
 
 	// 5. Execute reconciliation
-	r := New(cs, pool, nil)
+	r := New(cs, pool, ds)
 	req := reconcile.Request{
 		DeviceID: deviceID,
 		Path:     path,
@@ -352,13 +353,13 @@ func TestReconciler_Integration_CommitFailure(t *testing.T) {
 	}
 
 	// deviceID format "user:pass@host:port" includes credentials and port for integration testing
-	deviceID := fmt.Sprintf("%s:%s@%s:%d", sim.Username(), sim.Password(), sim.Addr(), sim.Port())
+	ds, deviceID := simStore(sim)
 	path := "/ifm:ifm/ifm:interfaces"
 	err = cs.Set(deviceID, path, desired)
 	assert.NoError(t, err)
 
 	// 6. Execute reconciliation
-	r := New(cs, pool, nil)
+	r := New(cs, pool, ds)
 	req := reconcile.Request{
 		DeviceID: deviceID,
 		Path:     path,
@@ -425,13 +426,13 @@ func TestReconciler_Integration_FullInterfaceConfig(t *testing.T) {
 		},
 	}
 
-	deviceID := fmt.Sprintf("%s:%s@%s:%d", sim.Username(), sim.Password(), sim.Addr(), sim.Port())
+	ds, deviceID := simStore(sim)
 	path := "/ifm:ifm/ifm:interfaces"
 	err = cs.Set(deviceID, path, desired)
 	assert.NoError(t, err)
 
 	// 5. Create reconciler and execute reconciliation
-	r := New(cs, pool, nil)
+	r := New(cs, pool, ds)
 	req := reconcile.Request{
 		DeviceID: deviceID,
 		Path:     path,
@@ -499,13 +500,13 @@ func TestReconciler_Integration_TimersAndFlags(t *testing.T) {
 		},
 	}
 
-	deviceID := fmt.Sprintf("%s:%s@%s:%d", sim.Username(), sim.Password(), sim.Addr(), sim.Port())
+	ds, deviceID := simStore(sim)
 	path := "/ifm:ifm/ifm:interfaces"
 	err = cs.Set(deviceID, path, desired)
 	assert.NoError(t, err)
 
 	// 5. Create reconciler and execute reconciliation
-	r := New(cs, pool, nil)
+	r := New(cs, pool, ds)
 	req := reconcile.Request{
 		DeviceID: deviceID,
 		Path:     path,
@@ -570,13 +571,13 @@ func TestReconciler_Integration_StatisticsConfig(t *testing.T) {
 		},
 	}
 
-	deviceID := fmt.Sprintf("%s:%s@%s:%d", sim.Username(), sim.Password(), sim.Addr(), sim.Port())
+	ds, deviceID := simStore(sim)
 	path := "/ifm:ifm/ifm:interfaces"
 	err = cs.Set(deviceID, path, desired)
 	assert.NoError(t, err)
 
 	// 5. Create reconciler and execute reconciliation
-	r := New(cs, pool, nil)
+	r := New(cs, pool, ds)
 	req := reconcile.Request{
 		DeviceID: deviceID,
 		Path:     path,
@@ -633,12 +634,12 @@ func TestReconciler_Integration_ModifyMultipleAttributes(t *testing.T) {
 		},
 	}
 
-	deviceID := fmt.Sprintf("%s:%s@%s:%d", sim.Username(), sim.Password(), sim.Addr(), sim.Port())
+	ds, deviceID := simStore(sim)
 	path := "/ifm:ifm/ifm:interfaces"
 	err = cs.Set(deviceID, path, desired)
 	assert.NoError(t, err)
 
-	r := New(cs, pool, nil)
+	r := New(cs, pool, ds)
 	req := reconcile.Request{DeviceID: deviceID, Path: path}
 
 	ctx := context.Background()
@@ -693,4 +694,16 @@ func boolPtr(v bool) *bool {
 // stringPtr is a helper to create a *string from a string
 func stringPtr(s string) *string {
 	return &s
+}
+
+// simStore registers the simulator as a device in a fresh DeviceStore and returns
+// (store, deviceID). Reconcilers resolve credentials/port from the store, matching
+// production wiring (DeviceStore is the source of truth; DeviceID carries no creds).
+func simStore(sim *netsim.Simulator) (device.Store, string) {
+	ds := device.NewStore()
+	id := "sim"
+	ds.Put(id, client.DeviceConnectionInfo{
+		IP: sim.Addr(), Port: sim.Port(), Username: sim.Username(), Password: sim.Password(), Protocol: client.ProtocolNETCONF,
+	})
+	return ds, id
 }
