@@ -73,3 +73,48 @@ func TestInterfaceConfig_Integration_EnumStringToDevice(t *testing.T) {
 	testsupport.AssertHuaweiInterfaceAdminStatus(t, sim, "GigabitEthernet0/0/1", 2)
 	testsupport.AssertHuaweiInterfaceMtu(t, sim, "GigabitEthernet0/0/1", 1500)
 }
+
+// TestInterfaceConfig_Integration_NoCredentialsInDeviceID 复现「生产接线」下的下发：
+// HTTP API 触发对账时 DeviceID 是 URL 里的裸设备标识，**不含凭据**——而其它集成测试
+// 都用 "user:pass@ip:port" 把 admin/admin 塞进了 DeviceID，恰好绕过了缺凭据的缺陷。
+// 本用例用无凭据的 "ip:port"（reconciler 的 ip:port 分支，Username/Password 为空），
+// 若 NETCONF 客户端不对空凭据兜底，SSH 只会提供 "none" 认证被模拟器拒绝
+// （"attempted methods [none]"，即界面「新增接口」下发失败的真实报错）。
+// 断言配置仍真正落到模拟器，锁住凭据兜底这条生产链路。
+func TestInterfaceConfig_Integration_NoCredentialsInDeviceID(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping integration test in short mode")
+	}
+
+	sim := netsim.NewSimulator()
+	if err := sim.Start(); err != nil {
+		t.Fatalf("start sim: %v", err)
+	}
+	defer sim.Stop()
+
+	c := cache.NewTTLLRUCache(100, 30*time.Second, 1*time.Minute)
+	cs := manager.NewInMemoryConfigStore(c)
+	pool := client.NewDefaultClientPool(client.DefaultClientFactory(5 * time.Second))
+	defer pool.CloseAll()
+
+	raw := map[string]interface{}{
+		"interface": []interface{}{
+			map[string]interface{}{"name": "GigabitEthernet0/0/2"},
+		},
+	}
+	typed, err := convertMapToHuaweiIfm(raw)
+	assert.NoError(t, err)
+
+	// 关键：无 "user:pass@"，只有 ip:port —— 正是 API 触发对账时产生的设备标识形状。
+	deviceID := fmt.Sprintf("%s:%d", sim.Addr(), sim.Port())
+	path := "/ifm:ifm/ifm:interfaces"
+	assert.NoError(t, cs.Set(deviceID, path, typed))
+
+	r := ifmctl.New(cs, pool)
+	result := r.Reconcile(context.Background(), reconcile.Request{DeviceID: deviceID, Path: path})
+	if result.Error != nil {
+		t.Fatalf("无凭据设备标识的对账仍须认证成功并下发（回归 ssh none-auth 缺陷）: %v", result.Error)
+	}
+
+	testsupport.AssertHuaweiInterfaceExists(t, sim, "GigabitEthernet0/0/2")
+}
