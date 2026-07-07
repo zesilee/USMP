@@ -23,10 +23,10 @@
 
 ## 4. config 回读 + 周期源从库（迁移阶段②续）
 
-- [ ] 4.1 先写测试：`fetchFromDevice` 对已注册设备建连带 Port/凭据/Protocol（捕获型 pool 断言 info 完整）
-- [ ] 4.2 实现：`config_handler.fetchFromDevice` 查 `DeviceStore`（替代只传 IP+AUTO）
-- [ ] 4.3 先写测试：周期源每 tick 对 `DeviceStore.List()` 中设备发事件；空库不发（回归 #101 的 nil 空转）
-- [ ] 4.4 实现：`NewPeriodicSource` 持 store 引用、tick 时动态 `List()`（D-3b）；`main.go` 接线三个 controller
+- [x] 4.1 先写测试：`fetchFromDevice` 对已注册设备建连带 Port/凭据/Protocol（捕获型 pool 断言 info 完整），fakePoolManager 加 GetDeviceStore
+- [x] 4.2 实现：`config_handler.fetchFromDevice` 查 `DeviceStore`（命中用库 info，未注册回退 IP+AUTO）
+- [x] 4.3 先写测试：周期源用 lister 每 tick 发事件；空 lister 不发（回归 #101 的 nil 空转）
+- [x] 4.4 实现：新增 `DeviceLister` 接口 + `NewPeriodicSourceWithLister`（tick 时动态 `List()`，D-3b）；`main.go` 三个 controller 传 `mgr.GetDeviceStore()`
 
 ## 5. 删旧路径（迁移阶段③，切换完成）
 

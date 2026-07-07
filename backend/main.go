@@ -49,7 +49,7 @@ func main() {
 	// Pass nil for deviceIDs to indicate all devices that have desired config
 	vlanCtrl := controller.ControllerManagedBy("huawei-vlan").
 		WithReconciler(vlan.New(cs, clientPool, mgr.GetDeviceStore())).
-		WithSource(source.NewPeriodicSource(5*time.Minute, nil, "/vlan:vlan/vlan:vlans")).
+		WithSource(source.NewPeriodicSourceWithLister(5*time.Minute, mgr.GetDeviceStore(), "/vlan:vlan/vlan:vlans")).
 		WithPredicate(predicate.Prefix("/vlan:vlan/vlan:vlans")).
 		WithWorkerCount(2).
 		Build()
@@ -61,7 +61,7 @@ func main() {
 	// The IFM controller reconciles interface configuration every 5 minutes
 	ifmCtrl := controller.ControllerManagedBy("huawei-ifm").
 		WithReconciler(ifm.New(cs, clientPool, mgr.GetDeviceStore())).
-		WithSource(source.NewPeriodicSource(5*time.Minute, nil, "/ifm:ifm/ifm:interfaces")).
+		WithSource(source.NewPeriodicSourceWithLister(5*time.Minute, mgr.GetDeviceStore(), "/ifm:ifm/ifm:interfaces")).
 		WithPredicate(predicate.Prefix("/ifm:ifm/ifm:interfaces")).
 		WithWorkerCount(2).
 		Build()
@@ -73,7 +73,7 @@ func main() {
 	// The System controller reconciles system configuration every 5 minutes
 	systemCtrl := controller.ControllerManagedBy("huawei-system").
 		WithReconciler(system.New(cs, clientPool, mgr.GetDeviceStore())).
-		WithSource(source.NewPeriodicSource(5*time.Minute, nil, "/system:system")).
+		WithSource(source.NewPeriodicSourceWithLister(5*time.Minute, mgr.GetDeviceStore(), "/system:system")).
 		WithPredicate(predicate.Prefix("/system:system")).
 		WithWorkerCount(2).
 		Build()

@@ -40,9 +40,17 @@ func NewConfigHandler(mgr manager.Manager) *ConfigHandler {
 
 // fetchFromDevice reads running config from the device via the client pool.
 func (h *ConfigHandler) fetchFromDevice(ctx context.Context, ip, path string) (interface{}, error) {
-	// Protocol must be set or the client factory falls into its default branch
-	// ("unsupported protocol"); AUTO picks NETCONF for the default 830 port.
-	cli, err := h.manager.GetClientPool().Get(client.DeviceConnectionInfo{IP: ip, Protocol: client.ProtocolAUTO})
+	// Resolve full connection info (port + credentials + protocol) from the shared
+	// DeviceStore. Fall back to an AUTO/no-cred stub for unregistered devices —
+	// Protocol must be set or the client factory hits its "unsupported protocol"
+	// default branch.
+	info := client.DeviceConnectionInfo{IP: ip, Protocol: client.ProtocolAUTO}
+	if ds := h.manager.GetDeviceStore(); ds != nil {
+		if stored, ok := ds.Get(ip); ok {
+			info = stored
+		}
+	}
+	cli, err := h.manager.GetClientPool().Get(info)
 	if err != nil {
 		return nil, err
 	}
