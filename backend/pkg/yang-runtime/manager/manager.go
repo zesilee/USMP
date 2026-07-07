@@ -10,6 +10,7 @@ import (
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/audit"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/client"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/controller"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/device"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/plugin"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/predicate"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/reconcile"
@@ -118,6 +119,9 @@ type Manager interface {
 	// TriggerReconcile triggers immediate reconciliation for a device and path
 	// Returns true if a matching controller was found and triggered
 	TriggerReconcile(deviceID, path string) bool
+	// GetDeviceStore returns the shared device connection-info registry (single
+	// source of truth for reconcilers / config reads / the periodic source).
+	GetDeviceStore() device.Store
 }
 
 // DefaultManager is the default implementation of Manager
@@ -130,6 +134,7 @@ type DefaultManager struct {
 	runningCache    *cache.TTLLRUCache
 	reconcileStatus *status.Store
 	auditStore      *audit.Store
+	deviceStore     device.Store
 	controllers     []controller.Controller
 	pluginManager   *plugin.Manager
 	started         bool
@@ -172,6 +177,7 @@ func New(opts ...Option) *DefaultManager {
 		reconcileStatus: status.NewStore(),
 		// 操作审计日志：内存 + 最佳努力持久化到本地 JSON（§8）。AuditFile 为空则内存模式。
 		auditStore:    audit.NewStore(options.AuditFile, 1000),
+		deviceStore:   device.NewStore(),
 		controllers:   make([]controller.Controller, 0),
 		pluginManager: plugin.NewManager(),
 	}
@@ -260,6 +266,11 @@ func (m *DefaultManager) GetReconcileStatus() status.Reader {
 // GetAuditStore implements Manager interface
 func (m *DefaultManager) GetAuditStore() *audit.Store {
 	return m.auditStore
+}
+
+// GetDeviceStore implements Manager interface
+func (m *DefaultManager) GetDeviceStore() device.Store {
+	return m.deviceStore
 }
 
 // GetSchema implements Manager interface
