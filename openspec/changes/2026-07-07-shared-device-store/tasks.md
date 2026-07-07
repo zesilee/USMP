@@ -4,9 +4,9 @@
 
 ## 1. DeviceStore（新能力，独立）
 
-- [ ] 1.1 先写测试：`Put/Get/Delete/List` 正常路径；未命中 `Get` 返回 `ok=false`；并发读写无 race（`-race`，R09）
-- [ ] 1.2 实现 `DeviceStore` 接口 + 默认内存实现（`sync.RWMutex`，值用 `client.DeviceConnectionInfo`），无 DB（R03）
-- [ ] 1.3 `Manager` 接口加 `GetDeviceStore()`；实现持有默认 store；`go build ./...` 绿
+- [x] 1.1 先写测试：`Put/Get/Delete/List` 正常路径；未命中 `Get` 返回 `ok=false`；并发读写无 race（`-race`，R09）
+- [x] 1.2 实现 `DeviceStore` 接口 + 默认内存实现（`sync.RWMutex`，值用 `client.DeviceConnectionInfo`），无 DB（R03）
+- [x] 1.3 `Manager` 接口加 `GetDeviceStore()`；实现持有默认 store；`go build ./...` 绿
 
 ## 2. DeviceHandler 双写 + 读库（迁移阶段①，新旧并存）
 
