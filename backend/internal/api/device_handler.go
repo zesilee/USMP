@@ -31,15 +31,82 @@ func NewDeviceHandler(manager manager.Manager) *DeviceHandler {
 		devices: make(map[string]DeviceInfo),
 	}
 
-	// Add default test device for development
-	h.devices["192.168.1.1"] = DeviceInfo{
+	// Add default test device for development. Write it to the shared DeviceStore
+	// (single source of truth) so reconcile/config/periodic can resolve its
+	// credentials; the local map is kept in parallel during migration.
+	seed := DeviceInfo{
 		IP:       "192.168.1.1",
 		Port:     830,
 		Username: "admin",
 		Password: "admin",
 	}
+	h.devices[seed.IP] = seed
+	h.putStore(seed)
 
 	return h
+}
+
+// toConnInfo maps a DeviceInfo to the shared store's connection-info type,
+// defaulting Protocol to AUTO (port-based NETCONF/gNMI selection).
+func toConnInfo(d DeviceInfo) client.DeviceConnectionInfo {
+	return client.DeviceConnectionInfo{
+		IP:       d.IP,
+		Port:     d.Port,
+		Username: d.Username,
+		Password: d.Password,
+		Protocol: client.ProtocolAUTO,
+	}
+}
+
+// deviceInfoFromConn is the inverse of toConnInfo for API responses.
+func deviceInfoFromConn(info client.DeviceConnectionInfo) DeviceInfo {
+	return DeviceInfo{IP: info.IP, Port: info.Port, Username: info.Username, Password: info.Password}
+}
+
+// putStore registers a device in the shared DeviceStore (no-op if the manager
+// exposes none, keeping the handler usable in minimal test setups).
+func (h *DeviceHandler) putStore(d DeviceInfo) {
+	if ds := h.manager.GetDeviceStore(); ds != nil {
+		ds.Put(d.IP, toConnInfo(d))
+	}
+}
+
+// snapshotDevices returns all registered devices, reading from the shared
+// DeviceStore (single source of truth) and falling back to the local map when no
+// store is available (minimal test setups).
+func (h *DeviceHandler) snapshotDevices() []DeviceInfo {
+	if ds := h.manager.GetDeviceStore(); ds != nil {
+		ids := ds.List()
+		out := make([]DeviceInfo, 0, len(ids))
+		for _, id := range ids {
+			if info, ok := ds.Get(id); ok {
+				out = append(out, deviceInfoFromConn(info))
+			}
+		}
+		return out
+	}
+	h.mu.RLock()
+	defer h.mu.RUnlock()
+	out := make([]DeviceInfo, 0, len(h.devices))
+	for _, d := range h.devices {
+		out = append(out, d)
+	}
+	return out
+}
+
+// lookupDevice resolves a single device by IP from the shared DeviceStore, with
+// the same local-map fallback as snapshotDevices.
+func (h *DeviceHandler) lookupDevice(ip string) (DeviceInfo, bool) {
+	if ds := h.manager.GetDeviceStore(); ds != nil {
+		if info, ok := ds.Get(ip); ok {
+			return deviceInfoFromConn(info), true
+		}
+		return DeviceInfo{}, false
+	}
+	h.mu.RLock()
+	defer h.mu.RUnlock()
+	d, ok := h.devices[ip]
+	return d, ok
 }
 
 // AddDeviceRequest is the request body for adding a device
@@ -104,12 +171,7 @@ type DeviceConnStatus struct {
 // @Success  200 {object} Response{data=DeviceListData} "设备列表 + 连接池统计"
 // @Router   /devices [get]
 func (h *DeviceHandler) ListDevices(c *gin.Context) {
-	h.mu.RLock()
-	snapshot := make([]DeviceInfo, 0, len(h.devices))
-	for _, d := range h.devices {
-		snapshot = append(snapshot, d)
-	}
-	h.mu.RUnlock()
+	snapshot := h.snapshotDevices()
 
 	pool := h.manager.GetClientPool()
 	devices := make([]DeviceStatus, 0, len(snapshot))
@@ -152,14 +214,16 @@ func (h *DeviceHandler) AddDevice(c *gin.Context) {
 		req.Port = 830
 	}
 
-	h.mu.Lock()
-	h.devices[req.IP] = DeviceInfo{
+	dev := DeviceInfo{
 		IP:       req.IP,
 		Port:     req.Port,
 		Username: req.Username,
 		Password: req.Password,
 	}
+	h.mu.Lock()
+	h.devices[req.IP] = dev
 	h.mu.Unlock()
+	h.putStore(dev)
 
 	// Try to create client and connect immediately
 	pool := h.manager.GetClientPool()
@@ -193,6 +257,9 @@ func (h *DeviceHandler) RemoveDevice(c *gin.Context) {
 	h.mu.Lock()
 	delete(h.devices, ip)
 	h.mu.Unlock()
+	if ds := h.manager.GetDeviceStore(); ds != nil {
+		ds.Delete(ip)
+	}
 
 	// Close the connection
 	pool := h.manager.GetClientPool()
@@ -213,10 +280,7 @@ func (h *DeviceHandler) RemoveDevice(c *gin.Context) {
 func (h *DeviceHandler) GetStatus(c *gin.Context) {
 	ip := c.Param("ip")
 
-	h.mu.RLock()
-	_, exists := h.devices[ip]
-	h.mu.RUnlock()
-
+	devInfo, exists := h.lookupDevice(ip)
 	if !exists {
 		Error(c, 404, "Device not found")
 		return
@@ -224,10 +288,6 @@ func (h *DeviceHandler) GetStatus(c *gin.Context) {
 
 	// Get client from pool and check connection status
 	pool := h.manager.GetClientPool()
-	// We need to get the full info from our devices map
-	h.mu.RLock()
-	devInfo := h.devices[ip]
-	h.mu.RUnlock()
 
 	cli, err := pool.Get(client.DeviceConnectionInfo{
 		IP:       devInfo.IP,
