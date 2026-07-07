@@ -9,6 +9,7 @@ import (
 	"github.com/leezesi/usmp/backend/internal/cache"
 	"github.com/leezesi/usmp/backend/internal/generated/huawei"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/client"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/device"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/manager"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/reconcile"
 	netsim "github.com/leezesi/usmp/backend/simulator/netconfsim"
@@ -48,13 +49,13 @@ func TestReconciler_Integration_CreateVLAN(t *testing.T) {
 	}
 
 	// deviceID format "user:pass@host:port" includes credentials and port for integration testing
-	deviceID := fmt.Sprintf("%s:%s@%s:%d", sim.Username(), sim.Password(), sim.Addr(), sim.Port())
+	ds, deviceID := simStore(sim)
 	path := "/vlan:vlan/vlan:vlans"
 	err = cs.Set(deviceID, path, desired)
 	assert.NoError(t, err)
 
 	// 5. Create reconciler and execute reconciliation
-	r := New(cs, pool, nil)
+	r := New(cs, pool, ds)
 	req := reconcile.Request{
 		DeviceID: deviceID,
 		Path:     path,
@@ -101,13 +102,13 @@ func TestReconciler_Integration_CreateVLAN_ConvergesAndReadable(t *testing.T) {
 		},
 	}
 
-	deviceID := fmt.Sprintf("%s:%s@%s:%d", sim.Username(), sim.Password(), sim.Addr(), sim.Port())
+	ds, deviceID := simStore(sim)
 	path := "/vlan:vlan/vlan:vlans"
 	if err := cs.Set(deviceID, path, desired); err != nil {
 		t.Fatalf("config store set: %v", err)
 	}
 
-	r := New(cs, pool, nil)
+	r := New(cs, pool, ds)
 	req := reconcile.Request{DeviceID: deviceID, Path: path}
 	ctx := context.Background()
 
@@ -118,7 +119,7 @@ func TestReconciler_Integration_CreateVLAN_ConvergesAndReadable(t *testing.T) {
 	assert.Greater(t, first.Changes, 0, "首轮应检测到漂移并下发新 VLAN")
 
 	// 回读设备：VLAN 必须真正落盘且能解析进 ygot map（根因 C 修复）
-	dc := &deviceClient{clientPool: pool}
+	dc := &deviceClient{clientPool: pool, resolver: ds}
 	got, err := dc.Get(ctx, deviceID)
 	if err != nil {
 		t.Fatalf("readback device config: %v", err)
@@ -177,13 +178,13 @@ func TestReconciler_Integration_ModifyVLAN(t *testing.T) {
 	}
 
 	// deviceID format "user:pass@host:port" includes credentials and port for integration testing
-	deviceID := fmt.Sprintf("%s:%s@%s:%d", sim.Username(), sim.Password(), sim.Addr(), sim.Port())
+	ds, deviceID := simStore(sim)
 	path := "/vlan:vlan/vlan:vlans"
 	err = cs.Set(deviceID, path, desired)
 	assert.NoError(t, err)
 
 	// 6. Execute reconciliation
-	r := New(cs, pool, nil)
+	r := New(cs, pool, ds)
 	req := reconcile.Request{
 		DeviceID: deviceID,
 		Path:     path,
@@ -255,13 +256,13 @@ func TestReconciler_Integration_DeleteVLAN(t *testing.T) {
 	}
 
 	// deviceID format "user:pass@host:port" includes credentials and port for integration testing
-	deviceID := fmt.Sprintf("%s:%s@%s:%d", sim.Username(), sim.Password(), sim.Addr(), sim.Port())
+	ds, deviceID := simStore(sim)
 	path := "/vlan:vlan/vlan:vlans"
 	err = cs.Set(deviceID, path, desired)
 	assert.NoError(t, err)
 
 	// 6. Execute reconciliation
-	r := New(cs, pool, nil)
+	r := New(cs, pool, ds)
 	req := reconcile.Request{
 		DeviceID: deviceID,
 		Path:     path,
@@ -303,13 +304,13 @@ func TestReconciler_Integration_EmptyConfig(t *testing.T) {
 	desired := &huawei.HuaweiVlan_Vlan_Vlans{}
 
 	// deviceID format "user:pass@host:port" includes credentials and port for integration testing
-	deviceID := fmt.Sprintf("%s:%s@%s:%d", sim.Username(), sim.Password(), sim.Addr(), sim.Port())
+	ds, deviceID := simStore(sim)
 	path := "/vlan:vlan/vlan:vlans"
 	err = cs.Set(deviceID, path, desired)
 	assert.NoError(t, err)
 
 	// 5. Execute reconciliation
-	r := New(cs, pool, nil)
+	r := New(cs, pool, ds)
 	req := reconcile.Request{
 		DeviceID: deviceID,
 		Path:     path,
@@ -363,13 +364,13 @@ func TestReconciler_Integration_CommitFailure(t *testing.T) {
 	}
 
 	// deviceID format "user:pass@host:port" includes credentials and port for integration testing
-	deviceID := fmt.Sprintf("%s:%s@%s:%d", sim.Username(), sim.Password(), sim.Addr(), sim.Port())
+	ds, deviceID := simStore(sim)
 	path := "/vlan:vlan/vlan:vlans"
 	err = cs.Set(deviceID, path, desired)
 	assert.NoError(t, err)
 
 	// 6. Execute reconciliation
-	r := New(cs, pool, nil)
+	r := New(cs, pool, ds)
 	req := reconcile.Request{
 		DeviceID: deviceID,
 		Path:     path,
@@ -420,14 +421,18 @@ func TestReconciler_Integration_AuthenticationFailure(t *testing.T) {
 		},
 	}
 
-	// Use wrong credentials in deviceID to test authentication failure
-	deviceID := fmt.Sprintf("wrong:wrong@%s:%d", sim.Addr(), sim.Port())
+	// Register the device with WRONG credentials to test authentication failure.
+	deviceID := "sim-wrongcreds"
+	ds := device.NewStore()
+	ds.Put(deviceID, client.DeviceConnectionInfo{
+		IP: sim.Addr(), Port: sim.Port(), Username: "wrong", Password: "wrong", Protocol: client.ProtocolNETCONF,
+	})
 	path := "/vlan:vlan/vlan:vlans"
 	err = cs.Set(deviceID, path, desired)
 	assert.NoError(t, err)
 
 	// 6. Execute reconciliation - this is where authentication fails
-	r := New(cs, pool, nil)
+	r := New(cs, pool, ds)
 	req := reconcile.Request{
 		DeviceID: deviceID,
 		Path:     path,
@@ -509,13 +514,13 @@ func TestReconciler_Integration_FullVLANConfig(t *testing.T) {
 		},
 	}
 
-	deviceID := fmt.Sprintf("%s:%s@%s:%d", sim.Username(), sim.Password(), sim.Addr(), sim.Port())
+	ds, deviceID := simStore(sim)
 	path := "/vlan:vlan/vlan:vlans"
 	err = cs.Set(deviceID, path, desired)
 	assert.NoError(t, err)
 
 	// 5. Execute reconciliation
-	r := New(cs, pool, nil)
+	r := New(cs, pool, ds)
 	req := reconcile.Request{
 		DeviceID: deviceID,
 		Path:     path,
@@ -598,12 +603,12 @@ func TestReconciler_Integration_DescriptionOnly(t *testing.T) {
 		},
 	}
 
-	deviceID := fmt.Sprintf("%s:%s@%s:%d", sim.Username(), sim.Password(), sim.Addr(), sim.Port())
+	ds, deviceID := simStore(sim)
 	path := "/vlan:vlan/vlan:vlans"
 	err = cs.Set(deviceID, path, desired)
 	assert.NoError(t, err)
 
-	r := New(cs, pool, nil)
+	r := New(cs, pool, ds)
 	result := r.Reconcile(context.Background(), reconcile.Request{DeviceID: deviceID, Path: path})
 
 	assert.NoError(t, result.Error)
@@ -637,12 +642,12 @@ func TestReconciler_Integration_AdminStatus(t *testing.T) {
 		},
 	}
 
-	deviceID := fmt.Sprintf("%s:%s@%s:%d", sim.Username(), sim.Password(), sim.Addr(), sim.Port())
+	ds, deviceID := simStore(sim)
 	path := "/vlan:vlan/vlan:vlans"
 	err = cs.Set(deviceID, path, desired)
 	assert.NoError(t, err)
 
-	r := New(cs, pool, nil)
+	r := New(cs, pool, ds)
 	result := r.Reconcile(context.Background(), reconcile.Request{DeviceID: deviceID, Path: path})
 
 	assert.NoError(t, result.Error)
@@ -676,14 +681,25 @@ func TestReconciler_Integration_MacAgingTime(t *testing.T) {
 		},
 	}
 
-	deviceID := fmt.Sprintf("%s:%s@%s:%d", sim.Username(), sim.Password(), sim.Addr(), sim.Port())
+	ds, deviceID := simStore(sim)
 	path := "/vlan:vlan/vlan:vlans"
 	err = cs.Set(deviceID, path, desired)
 	assert.NoError(t, err)
 
-	r := New(cs, pool, nil)
+	r := New(cs, pool, ds)
 	result := r.Reconcile(context.Background(), reconcile.Request{DeviceID: deviceID, Path: path})
 
 	assert.NoError(t, result.Error)
 	testsupport.AssertHuaweiVlanMacAgingTime(t, sim, 600, uint32(600))
+}
+
+// simStore registers the simulator as a device in a fresh DeviceStore and returns
+// (store, deviceID) — production wiring: DeviceStore is the source of truth.
+func simStore(sim *netsim.Simulator) (device.Store, string) {
+	ds := device.NewStore()
+	id := "sim"
+	ds.Put(id, client.DeviceConnectionInfo{
+		IP: sim.Addr(), Port: sim.Port(), Username: sim.Username(), Password: sim.Password(), Protocol: client.ProtocolNETCONF,
+	})
+	return ds, id
 }
