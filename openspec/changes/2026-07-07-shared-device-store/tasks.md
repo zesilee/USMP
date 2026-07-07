@@ -10,9 +10,9 @@
 
 ## 2. DeviceHandler 双写 + 读库（迁移阶段①，新旧并存）
 
-- [ ] 2.1 先写测试：种子设备与 `AddDevice` 后 `DeviceStore.Get("192.168.1.1")` 命中且字段完整（IP/Port/User/Pass/Protocol=AUTO）
-- [ ] 2.2 实现：DeviceHandler 构造时把种子写入 store；`AddDevice` 同时写 store（旧私有 map 暂留，双写）
-- [ ] 2.3 `/api/devices`（含 #47 在线探活）改从 store 读；api 包测试绿
+- [x] 2.1 先写测试：种子设备与 `AddDevice` 后 `DeviceStore.Get("192.168.1.1")` 命中且字段完整（IP/Port/User/Pass/Protocol=AUTO）；`RemoveDevice` 从库删除
+- [x] 2.2 实现：DeviceHandler 构造时把种子写入 store；`AddDevice`/`RemoveDevice` 同步写/删 store（旧私有 map 暂留，双写）
+- [x] 2.3 `/api/devices`（ListDevices，含 #47 在线探活）+ GetStatus 改从 store 读（nil 兜底回退 map）；api 包全量 -race 绿
 
 ## 3. reconciler 从库解析（迁移阶段②，切读）
 
