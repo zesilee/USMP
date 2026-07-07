@@ -8,7 +8,46 @@ import (
 	"github.com/openconfig/ygot/ytypes"
 
 	"github.com/leezesi/usmp/backend/internal/generated/huawei"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/client"
 )
+
+// decodeRunningConfig turns a raw NETCONF XML readback into an RFC7951-shaped
+// map (yang-named keys, list-as-array) so config-read endpoints return the same
+// structure the frontend submits and lists — e.g. {"interface":[{"name":...}]}.
+// Without this the handler returned opaque XML bytes (a base64 string over JSON)
+// from which the "接口配置" list could extract no rows. Unrecognised paths or
+// already-decoded (non-[]byte) data pass through unchanged.
+func decodeRunningConfig(path string, data interface{}) interface{} {
+	raw, ok := data.([]byte)
+	if !ok || len(raw) == 0 || raw[0] != '<' {
+		return data
+	}
+
+	var parsed ygot.GoStruct
+	switch {
+	case strings.Contains(path, "ifm:interfaces"):
+		if p, err := client.ParseHuaweiIfmInterfacesXML(raw); err == nil {
+			parsed = p
+		}
+	case strings.Contains(path, "vlan:vlans"):
+		if p, err := client.ParseHuaweiVlanVlansXML(raw); err == nil {
+			parsed = p
+		}
+	}
+	if parsed == nil {
+		return data
+	}
+
+	js, err := ygot.EmitJSON(parsed, &ygot.EmitJSONConfig{Format: ygot.RFC7951})
+	if err != nil {
+		return data
+	}
+	var out map[string]interface{}
+	if err := json.Unmarshal([]byte(js), &out); err != nil {
+		return data
+	}
+	return out
+}
 
 // ygotTarget describes how to decode a config path into a strongly-typed ygot
 // GoStruct: a constructor for the destination struct and the vendor Unmarshal

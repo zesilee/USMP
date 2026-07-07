@@ -53,7 +53,7 @@ func (h *ConfigHandler) fetchFromDevice(ctx context.Context, ip, path string) (i
 	if err != nil {
 		return nil, err
 	}
-	return result.Data, nil
+	return decodeRunningConfig(path, result.Data), nil
 }
 
 // runKey builds the running-cache key "ip|path", normalising a trailing slash
