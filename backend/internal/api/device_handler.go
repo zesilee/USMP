@@ -1,7 +1,6 @@
 package api
 
 import (
-	"sync"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -17,31 +16,25 @@ type DeviceInfo struct {
 	Password string `json:"password"`
 }
 
-// DeviceHandler handles device-related API requests
+// DeviceHandler handles device-related API requests. Device connection info
+// lives solely in the shared DeviceStore (single source of truth); the handler
+// holds no private device map.
 type DeviceHandler struct {
 	manager manager.Manager
-	devices map[string]DeviceInfo
-	mu      sync.RWMutex
 }
 
 // NewDeviceHandler creates a new DeviceHandler
 func NewDeviceHandler(manager manager.Manager) *DeviceHandler {
-	h := &DeviceHandler{
-		manager: manager,
-		devices: make(map[string]DeviceInfo),
-	}
+	h := &DeviceHandler{manager: manager}
 
-	// Add default test device for development. Write it to the shared DeviceStore
-	// (single source of truth) so reconcile/config/periodic can resolve its
-	// credentials; the local map is kept in parallel during migration.
-	seed := DeviceInfo{
+	// Seed the default test device into the shared DeviceStore so reconcile /
+	// config / periodic can resolve its credentials.
+	h.putStore(DeviceInfo{
 		IP:       "192.168.1.1",
 		Port:     830,
 		Username: "admin",
 		Password: "admin",
-	}
-	h.devices[seed.IP] = seed
-	h.putStore(seed)
+	})
 
 	return h
 }
@@ -71,42 +64,32 @@ func (h *DeviceHandler) putStore(d DeviceInfo) {
 	}
 }
 
-// snapshotDevices returns all registered devices, reading from the shared
-// DeviceStore (single source of truth) and falling back to the local map when no
-// store is available (minimal test setups).
+// snapshotDevices returns all registered devices from the shared DeviceStore.
 func (h *DeviceHandler) snapshotDevices() []DeviceInfo {
-	if ds := h.manager.GetDeviceStore(); ds != nil {
-		ids := ds.List()
-		out := make([]DeviceInfo, 0, len(ids))
-		for _, id := range ids {
-			if info, ok := ds.Get(id); ok {
-				out = append(out, deviceInfoFromConn(info))
-			}
-		}
-		return out
+	ds := h.manager.GetDeviceStore()
+	if ds == nil {
+		return nil
 	}
-	h.mu.RLock()
-	defer h.mu.RUnlock()
-	out := make([]DeviceInfo, 0, len(h.devices))
-	for _, d := range h.devices {
-		out = append(out, d)
+	ids := ds.List()
+	out := make([]DeviceInfo, 0, len(ids))
+	for _, id := range ids {
+		if info, ok := ds.Get(id); ok {
+			out = append(out, deviceInfoFromConn(info))
+		}
 	}
 	return out
 }
 
-// lookupDevice resolves a single device by IP from the shared DeviceStore, with
-// the same local-map fallback as snapshotDevices.
+// lookupDevice resolves a single device by IP from the shared DeviceStore.
 func (h *DeviceHandler) lookupDevice(ip string) (DeviceInfo, bool) {
-	if ds := h.manager.GetDeviceStore(); ds != nil {
-		if info, ok := ds.Get(ip); ok {
-			return deviceInfoFromConn(info), true
-		}
+	ds := h.manager.GetDeviceStore()
+	if ds == nil {
 		return DeviceInfo{}, false
 	}
-	h.mu.RLock()
-	defer h.mu.RUnlock()
-	d, ok := h.devices[ip]
-	return d, ok
+	if info, ok := ds.Get(ip); ok {
+		return deviceInfoFromConn(info), true
+	}
+	return DeviceInfo{}, false
 }
 
 // AddDeviceRequest is the request body for adding a device
@@ -214,16 +197,12 @@ func (h *DeviceHandler) AddDevice(c *gin.Context) {
 		req.Port = 830
 	}
 
-	dev := DeviceInfo{
+	h.putStore(DeviceInfo{
 		IP:       req.IP,
 		Port:     req.Port,
 		Username: req.Username,
 		Password: req.Password,
-	}
-	h.mu.Lock()
-	h.devices[req.IP] = dev
-	h.mu.Unlock()
-	h.putStore(dev)
+	})
 
 	// Try to create client and connect immediately
 	pool := h.manager.GetClientPool()
@@ -254,9 +233,6 @@ func (h *DeviceHandler) AddDevice(c *gin.Context) {
 func (h *DeviceHandler) RemoveDevice(c *gin.Context) {
 	ip := c.Param("ip")
 
-	h.mu.Lock()
-	delete(h.devices, ip)
-	h.mu.Unlock()
 	if ds := h.manager.GetDeviceStore(); ds != nil {
 		ds.Delete(ip)
 	}

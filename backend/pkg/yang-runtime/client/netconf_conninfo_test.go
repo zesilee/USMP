@@ -5,18 +5,17 @@ import (
 	"time"
 )
 
-// TestNewNETCONFClient_DefaultsCredentials: when connection info carries no
-// username/password (e.g. reconcile is triggered with a bare device IP and the
-// credential store is not shared), the client must fall back to admin/admin so
-// SSH offers password auth instead of only "none". The immediate connect fails
-// (no real device) but info defaults are applied before connecting.
-func TestNewNETCONFClient_DefaultsCredentials(t *testing.T) {
+// TestNewNETCONFClient_NoCredentialFallback: credentials come from the shared
+// DeviceStore, not a hardcoded fallback. Empty credentials must stay empty so an
+// unregistered device fails authentication cleanly instead of silently using
+// admin/admin.
+func TestNewNETCONFClient_NoCredentialFallback(t *testing.T) {
 	c, _ := NewNETCONFClient(DeviceConnectionInfo{IP: "192.0.2.1", Timeout: 10 * time.Millisecond})
 	if c == nil {
 		t.Fatal("client must be returned even on connect failure")
 	}
-	if c.info.Username != "admin" || c.info.Password != "admin" {
-		t.Fatalf("empty credentials must default to admin/admin, got %q/%q", c.info.Username, c.info.Password)
+	if c.info.Username != "" || c.info.Password != "" {
+		t.Fatalf("empty credentials must NOT be defaulted, got %q/%q", c.info.Username, c.info.Password)
 	}
 }
 
