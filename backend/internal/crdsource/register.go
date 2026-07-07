@@ -50,9 +50,9 @@ func RegisterIntentSources(mgr manager.Manager) (crcache.Cache, error) {
 		return nil, err
 	}
 
-	cs, pool := mgr.GetConfigStore(), mgr.GetClientPool()
-	addIntentController(mgr, c, "huawei-vlan-crd", VlanObject(), VlanProjectFunc, vlan.New(cs, pool))
-	addIntentController(mgr, c, "huawei-ifm-crd", InterfaceObject(), InterfaceProjectFunc, ifm.New(cs, pool))
+	cs, pool, ds := mgr.GetConfigStore(), mgr.GetClientPool(), mgr.GetDeviceStore()
+	addIntentController(mgr, c, "huawei-vlan-crd", VlanObject(), VlanProjectFunc, vlan.New(cs, pool, ds))
+	addIntentController(mgr, c, "huawei-ifm-crd", InterfaceObject(), InterfaceProjectFunc, ifm.New(cs, pool, ds))
 
 	log.Printf("crdsource: CRD intent sources registered (BusinessVlan, BusinessInterface; parallel to Actor path)")
 	return c, nil

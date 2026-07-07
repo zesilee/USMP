@@ -54,7 +54,7 @@ func TestReconciler_Integration_CreateVLAN(t *testing.T) {
 	assert.NoError(t, err)
 
 	// 5. Create reconciler and execute reconciliation
-	r := New(cs, pool)
+	r := New(cs, pool, nil)
 	req := reconcile.Request{
 		DeviceID: deviceID,
 		Path:     path,
@@ -107,7 +107,7 @@ func TestReconciler_Integration_CreateVLAN_ConvergesAndReadable(t *testing.T) {
 		t.Fatalf("config store set: %v", err)
 	}
 
-	r := New(cs, pool)
+	r := New(cs, pool, nil)
 	req := reconcile.Request{DeviceID: deviceID, Path: path}
 	ctx := context.Background()
 
@@ -183,7 +183,7 @@ func TestReconciler_Integration_ModifyVLAN(t *testing.T) {
 	assert.NoError(t, err)
 
 	// 6. Execute reconciliation
-	r := New(cs, pool)
+	r := New(cs, pool, nil)
 	req := reconcile.Request{
 		DeviceID: deviceID,
 		Path:     path,
@@ -261,7 +261,7 @@ func TestReconciler_Integration_DeleteVLAN(t *testing.T) {
 	assert.NoError(t, err)
 
 	// 6. Execute reconciliation
-	r := New(cs, pool)
+	r := New(cs, pool, nil)
 	req := reconcile.Request{
 		DeviceID: deviceID,
 		Path:     path,
@@ -309,7 +309,7 @@ func TestReconciler_Integration_EmptyConfig(t *testing.T) {
 	assert.NoError(t, err)
 
 	// 5. Execute reconciliation
-	r := New(cs, pool)
+	r := New(cs, pool, nil)
 	req := reconcile.Request{
 		DeviceID: deviceID,
 		Path:     path,
@@ -369,7 +369,7 @@ func TestReconciler_Integration_CommitFailure(t *testing.T) {
 	assert.NoError(t, err)
 
 	// 6. Execute reconciliation
-	r := New(cs, pool)
+	r := New(cs, pool, nil)
 	req := reconcile.Request{
 		DeviceID: deviceID,
 		Path:     path,
@@ -427,7 +427,7 @@ func TestReconciler_Integration_AuthenticationFailure(t *testing.T) {
 	assert.NoError(t, err)
 
 	// 6. Execute reconciliation - this is where authentication fails
-	r := New(cs, pool)
+	r := New(cs, pool, nil)
 	req := reconcile.Request{
 		DeviceID: deviceID,
 		Path:     path,
@@ -515,7 +515,7 @@ func TestReconciler_Integration_FullVLANConfig(t *testing.T) {
 	assert.NoError(t, err)
 
 	// 5. Execute reconciliation
-	r := New(cs, pool)
+	r := New(cs, pool, nil)
 	req := reconcile.Request{
 		DeviceID: deviceID,
 		Path:     path,
@@ -603,7 +603,7 @@ func TestReconciler_Integration_DescriptionOnly(t *testing.T) {
 	err = cs.Set(deviceID, path, desired)
 	assert.NoError(t, err)
 
-	r := New(cs, pool)
+	r := New(cs, pool, nil)
 	result := r.Reconcile(context.Background(), reconcile.Request{DeviceID: deviceID, Path: path})
 
 	assert.NoError(t, result.Error)
@@ -642,7 +642,7 @@ func TestReconciler_Integration_AdminStatus(t *testing.T) {
 	err = cs.Set(deviceID, path, desired)
 	assert.NoError(t, err)
 
-	r := New(cs, pool)
+	r := New(cs, pool, nil)
 	result := r.Reconcile(context.Background(), reconcile.Request{DeviceID: deviceID, Path: path})
 
 	assert.NoError(t, result.Error)
@@ -681,7 +681,7 @@ func TestReconciler_Integration_MacAgingTime(t *testing.T) {
 	err = cs.Set(deviceID, path, desired)
 	assert.NoError(t, err)
 
-	r := New(cs, pool)
+	r := New(cs, pool, nil)
 	result := r.Reconcile(context.Background(), reconcile.Request{DeviceID: deviceID, Path: path})
 
 	assert.NoError(t, result.Error)

@@ -55,7 +55,7 @@ func TestVlanConfig_Integration_EnumStringToDevice(t *testing.T) {
 	path := "/vlan:vlan/vlan:vlans"
 	assert.NoError(t, cs.Set(deviceID, path, typed))
 
-	r := vlanctl.New(cs, pool)
+	r := vlanctl.New(cs, pool, nil)
 	result := r.Reconcile(context.Background(), reconcile.Request{DeviceID: deviceID, Path: path})
 	if result.Error != nil {
 		t.Fatalf("reconcile: %v", result.Error)

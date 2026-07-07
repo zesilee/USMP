@@ -371,7 +371,7 @@ func TestVlanReconciler_FullReconcile(t *testing.T) {
 	mockPool.Client = mockClient
 	mockPool.Err = nil
 
-	r := New(mockCS, mockPool)
+	r := New(mockCS, mockPool, nil)
 
 	// Act
 	result := r.Reconcile(ctx, req)
@@ -400,7 +400,7 @@ func TestVlanReconciler_ConfigStoreGetError(t *testing.T) {
 
 	mockPool := new(MockClientPool)
 
-	r := New(mockCS, mockPool)
+	r := New(mockCS, mockPool, nil)
 
 	// Act
 	result := r.Reconcile(ctx, req)
@@ -446,7 +446,7 @@ func TestVlanReconciler_NoDiff(t *testing.T) {
 	mockPool.Client = mockClient
 	mockPool.Err = nil
 
-	r := New(mockCS, mockPool)
+	r := New(mockCS, mockPool, nil)
 
 	// Act
 	result := r.Reconcile(ctx, req)

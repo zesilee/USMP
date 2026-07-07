@@ -39,7 +39,7 @@ func applyVlan(t *testing.T, cs *manager.InMemoryConfigStore, pool client.Client
 	assert.NoError(t, err)
 	// 走与 SetConfig 处理器一致的合并存储逻辑（带锁，防覆盖抹除 + 并发丢更新）
 	assert.NoError(t, storeConfigMerged(cs, deviceID, vlanPath, typed))
-	res := vlanctl.New(cs, pool).Reconcile(context.Background(), reconcile.Request{DeviceID: deviceID, Path: vlanPath})
+	res := vlanctl.New(cs, pool, nil).Reconcile(context.Background(), reconcile.Request{DeviceID: deviceID, Path: vlanPath})
 	if res.Error != nil {
 		t.Fatalf("reconcile: %v", res.Error)
 	}
