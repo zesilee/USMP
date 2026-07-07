@@ -4,8 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"net"
-	"strconv"
+	"log"
 
 	"github.com/leezesi/usmp/backend/internal/generated/huawei"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/client"
@@ -50,8 +49,8 @@ type IfmReconciler struct {
 
 // New creates a new IfmReconciler with the given dependencies. resolver is the
 // shared DeviceStore used to look up per-device connection info (credentials,
-// port, protocol) by DeviceID; may be nil in minimal setups (falls back to
-// parsing the DeviceID string).
+// port, protocol) by DeviceID; when nil or a device is unregistered the client
+// degrades to an AUTO/no-credential connection.
 func New(cs reconcile.ConfigStore, clientPool client.ClientPool, resolver device.Store) *IfmReconciler {
 	dc := &deviceClient{
 		clientPool: clientPool,
@@ -71,18 +70,20 @@ type deviceClient struct {
 	resolver   device.Store
 }
 
-// resolveConn resolves connection info for a device: the shared DeviceStore is
-// the source of truth; when the device is not registered (or no store is wired)
-// it falls back to parsing the DeviceID string (legacy path, removed in a later
-// migration step). An unregistered device therefore degrades to an AUTO/no-cred
-// connection rather than crashing (R08).
+// resolveConn resolves connection info for a device from the shared DeviceStore
+// (source of truth). An unregistered device (or no store) degrades to an AUTO/
+// no-credential connection — authentication fails cleanly rather than crashing
+// (R08).
 func (d *deviceClient) resolveConn(deviceID string) client.DeviceConnectionInfo {
 	if d.resolver != nil {
 		if info, ok := d.resolver.Get(deviceID); ok {
 			return info
 		}
 	}
-	return parseDeviceID(deviceID)
+	// Unregistered device (or no store): degrade to an AUTO/no-credential
+	// connection. Authentication will fail cleanly (R08) rather than crash.
+	log.Printf("[ifm] device %q not registered in DeviceStore; using AUTO/no-credential connection", deviceID)
+	return client.DeviceConnectionInfo{IP: deviceID, Protocol: client.ProtocolAUTO}
 }
 
 // Get retrieves the actual Interface configuration from the device and converts it to the huawei.HuaweiIfm_Ifm_Interfaces struct
@@ -165,78 +166,4 @@ func (d *deviceClient) Set(ctx context.Context, deviceID string, changes []recon
 	// Apply changes with commit
 	_, err = c.Set(ctx, clientChanges, client.WithCommit(true))
 	return err
-}
-
-// parseDeviceID is the legacy fallback that derives connection info from the
-// DeviceID string. Supported forms: "ip" | "ip:port" | "user:pass@ip:port".
-// Kept only for the migration window; the DeviceStore is the real source.
-func parseDeviceID(deviceID string) client.DeviceConnectionInfo {
-	var info client.DeviceConnectionInfo
-	if atIdx := lastAt(deviceID); atIdx >= 0 {
-		creds := deviceID[:atIdx]
-		hostPort := deviceID[atIdx+1:]
-		if colonIdx := lastColon(creds); colonIdx >= 0 {
-			info.Username = creds[:colonIdx]
-			info.Password = creds[colonIdx+1:]
-		} else {
-			info.Username = creds
-		}
-		if host, portStr, err := splitHostPort(hostPort); err == nil {
-			info.IP = host
-			if p, err := parseInt(portStr); err == nil {
-				info.Port = p
-			}
-			info.Protocol = client.ProtocolNETCONF
-		} else {
-			info.IP = hostPort
-			info.Protocol = client.ProtocolAUTO
-		}
-	} else if host, portStr, err := splitHostPort(deviceID); err == nil {
-		info.IP = host
-		if p, err := parseInt(portStr); err == nil {
-			info.Port = p
-		}
-		info.Protocol = client.ProtocolNETCONF
-	} else {
-		info.IP = deviceID
-		info.Protocol = client.ProtocolAUTO
-	}
-	return info
-}
-
-// splitHostPort splits a string into host and port, compatible with net.SplitHostPort
-// but handles cases where there's no port.
-func splitHostPort(deviceID string) (host, port string, err error) {
-	// If there's no colon, it's just host
-	if i := lastColon(deviceID); i < 0 {
-		return "", "", fmt.Errorf("no port in deviceID")
-	} else {
-		return net.SplitHostPort(deviceID)
-	}
-}
-
-// lastColon returns the index of the last colon in s
-func lastColon(s string) int {
-	for i := len(s) - 1; i >= 0; i-- {
-		if s[i] == ':' {
-			return i
-		}
-	}
-	return -1
-}
-
-// lastAt returns the index of the last @ in s
-func lastAt(s string) int {
-	for i := len(s) - 1; i >= 0; i-- {
-		if s[i] == '@' {
-			return i
-		}
-	}
-	return -1
-}
-
-// parseInt parses a string to int
-func parseInt(s string) (int, error) {
-	p, err := strconv.Atoi(s)
-	return p, err
 }

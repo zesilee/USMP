@@ -5,8 +5,7 @@ import (
 	"encoding/json"
 	"encoding/xml"
 	"fmt"
-	"net"
-	"strconv"
+	"log"
 
 	"github.com/leezesi/usmp/backend/internal/generated/huawei"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/client"
@@ -59,52 +58,17 @@ func New(cs reconcile.ConfigStore, clientPool client.ClientPool, resolver device
 	}
 }
 
-// resolveConn resolves connection info via the shared DeviceStore (source of
-// truth), falling back to parsing the DeviceID string when unregistered or no
-// store is wired (legacy path, R08 degrade — no crash).
+// resolveConn resolves connection info from the shared DeviceStore (source of
+// truth). An unregistered device (or no store) degrades to an AUTO/no-credential
+// connection — authentication fails cleanly rather than crashing (R08).
 func (d *deviceClient) resolveConn(deviceID string) client.DeviceConnectionInfo {
 	if d.resolver != nil {
 		if info, ok := d.resolver.Get(deviceID); ok {
 			return info
 		}
 	}
-	return parseDeviceID(deviceID)
-}
-
-// parseDeviceID is the legacy fallback deriving connection info from the
-// DeviceID string ("ip" | "ip:port" | "user:pass@ip:port"). Migration-only.
-func parseDeviceID(deviceID string) client.DeviceConnectionInfo {
-	var info client.DeviceConnectionInfo
-	if atIdx := lastAt(deviceID); atIdx >= 0 {
-		creds := deviceID[:atIdx]
-		hostPort := deviceID[atIdx+1:]
-		if colonIdx := lastColon(creds); colonIdx >= 0 {
-			info.Username = creds[:colonIdx]
-			info.Password = creds[colonIdx+1:]
-		} else {
-			info.Username = creds
-		}
-		if host, portStr, err := splitHostPort(hostPort); err == nil {
-			info.IP = host
-			if p, err := parseInt(portStr); err == nil {
-				info.Port = p
-			}
-			info.Protocol = client.ProtocolNETCONF
-		} else {
-			info.IP = hostPort
-			info.Protocol = client.ProtocolAUTO
-		}
-	} else if host, portStr, err := splitHostPort(deviceID); err == nil {
-		info.IP = host
-		if p, err := parseInt(portStr); err == nil {
-			info.Port = p
-		}
-		info.Protocol = client.ProtocolNETCONF
-	} else {
-		info.IP = deviceID
-		info.Protocol = client.ProtocolAUTO
-	}
-	return info
+	log.Printf("[system] device %q not registered in DeviceStore; using AUTO/no-credential connection", deviceID)
+	return client.DeviceConnectionInfo{IP: deviceID, Protocol: client.ProtocolAUTO}
 }
 
 // deviceClient implements reconcile.DeviceClient interface for getting system configuration from device
@@ -187,35 +151,4 @@ func (d *deviceClient) Set(ctx context.Context, deviceID string, changes []recon
 	// Apply changes with commit
 	_, err = c.Set(ctx, clientChanges, client.WithCommit(true))
 	return err
-}
-
-// Helper functions from VLAN reconciler
-func lastAt(s string) int {
-	for i := len(s) - 1; i >= 0; i-- {
-		if s[i] == '@' {
-			return i
-		}
-	}
-	return -1
-}
-
-func lastColon(s string) int {
-	for i := len(s) - 1; i >= 0; i-- {
-		if s[i] == ':' {
-			return i
-		}
-	}
-	return -1
-}
-
-func splitHostPort(s string) (host string, port string, err error) {
-	if lastColon(s) < 0 {
-		return "", "", fmt.Errorf("no port in deviceID")
-	}
-	return net.SplitHostPort(s)
-}
-
-func parseInt(s string) (int, error) {
-	p, err := strconv.Atoi(s)
-	return p, err
 }

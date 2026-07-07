@@ -8,6 +8,7 @@ import (
 	vlanctl "github.com/leezesi/usmp/backend/internal/controller/vlan"
 	"github.com/leezesi/usmp/backend/internal/generated/huawei"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/client"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/device"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/manager"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/reconcile"
 	testsupport "github.com/leezesi/usmp/backend/simulator/netconfsim/testsupport"
@@ -18,11 +19,11 @@ func TestVlanConfig_Integration_AllAttributes(t *testing.T) {
 	if testing.Short() {
 		t.Skip("skipping integration test in short mode")
 	}
-	sim, cs, pool, deviceID := newVlanSimStack(t)
+	sim, cs, pool, ds, deviceID := newVlanSimStack(t)
 	defer sim.Stop()
 	defer pool.CloseAll()
 
-	applyVlan(t, cs, pool, deviceID, []interface{}{
+	applyVlan(t, cs, pool, ds, deviceID, []interface{}{
 		map[string]interface{}{
 			"id":                        float64(100),
 			"name":                      "full",
@@ -61,15 +62,15 @@ func TestVlanConfig_Integration_Idempotent(t *testing.T) {
 	if testing.Short() {
 		t.Skip("skipping integration test in short mode")
 	}
-	sim, cs, pool, deviceID := newVlanSimStack(t)
+	sim, cs, pool, ds, deviceID := newVlanSimStack(t)
 	defer sim.Stop()
 	defer pool.CloseAll()
 
-	applyVlan(t, cs, pool, deviceID, []interface{}{
+	applyVlan(t, cs, pool, ds, deviceID, []interface{}{
 		map[string]interface{}{"id": float64(50), "name": "idem"},
 	})
 	// 第二次对账（desired 未变）——应无错、无 requeue
-	res := reconcileVlan(cs, pool, deviceID)
+	res := reconcileVlan(cs, pool, ds, deviceID)
 	if res.Error != nil {
 		t.Fatalf("second reconcile errored: %v", res.Error)
 	}
@@ -85,15 +86,15 @@ func TestVlanConfig_Integration_EditPreservesAttributes(t *testing.T) {
 	if testing.Short() {
 		t.Skip("skipping integration test in short mode")
 	}
-	sim, cs, pool, deviceID := newVlanSimStack(t)
+	sim, cs, pool, ds, deviceID := newVlanSimStack(t)
 	defer sim.Stop()
 	defer pool.CloseAll()
 
-	applyVlan(t, cs, pool, deviceID, []interface{}{
+	applyVlan(t, cs, pool, ds, deviceID, []interface{}{
 		map[string]interface{}{"id": float64(60), "name": "orig", "description": "keep-me", "admin-status": "up"},
 	})
 	// 编辑：改 name，其余按 UI 行为回填完整条目
-	applyVlan(t, cs, pool, deviceID, []interface{}{
+	applyVlan(t, cs, pool, ds, deviceID, []interface{}{
 		map[string]interface{}{"id": float64(60), "name": "edited", "description": "keep-me", "admin-status": "up"},
 	})
 	testsupport.AssertHuaweiVlanName(t, sim, 60, "edited")
@@ -106,7 +107,7 @@ func TestVlanConfig_Integration_MemberPortsReplace(t *testing.T) {
 	if testing.Short() {
 		t.Skip("skipping integration test in short mode")
 	}
-	sim, cs, pool, deviceID := newVlanSimStack(t)
+	sim, cs, pool, ds, deviceID := newVlanSimStack(t)
 	defer sim.Stop()
 	defer pool.CloseAll()
 
@@ -117,12 +118,12 @@ func TestVlanConfig_Integration_MemberPortsReplace(t *testing.T) {
 			map[string]interface{}{"interface-name": "GE0/0/2", "access-type": "trunk"},
 		}},
 	}
-	applyVlan(t, cs, pool, deviceID, []interface{}{twoPorts})
+	applyVlan(t, cs, pool, ds, deviceID, []interface{}{twoPorts})
 	testsupport.AssertHuaweiVlanMemberPort(t, sim, 70, "GE0/0/1", int(huawei.HuaweiVlan_AccessType_access), 0)
 	testsupport.AssertHuaweiVlanMemberPort(t, sim, 70, "GE0/0/2", int(huawei.HuaweiVlan_AccessType_trunk), 0)
 
 	// 改为单端口（回填完整条目，仅保留 GE0/0/1）
-	applyVlan(t, cs, pool, deviceID, []interface{}{
+	applyVlan(t, cs, pool, ds, deviceID, []interface{}{
 		map[string]interface{}{"id": float64(70), "name": "ports",
 			"member-ports": map[string]interface{}{"member-port": []interface{}{
 				map[string]interface{}{"interface-name": "GE0/0/1", "access-type": "access"},
@@ -136,11 +137,11 @@ func TestVlanConfig_Integration_ReadBack(t *testing.T) {
 	if testing.Short() {
 		t.Skip("skipping integration test in short mode")
 	}
-	sim, cs, pool, deviceID := newVlanSimStack(t)
+	sim, cs, pool, ds, deviceID := newVlanSimStack(t)
 	defer sim.Stop()
 	defer pool.CloseAll()
 
-	applyVlan(t, cs, pool, deviceID, []interface{}{
+	applyVlan(t, cs, pool, ds, deviceID, []interface{}{
 		map[string]interface{}{"id": float64(80), "name": "readback", "description": "rb"},
 	})
 	// 通过设备运行配置读回（asserts 走 sim running config，即真实 edit-config 结果）
@@ -163,7 +164,7 @@ func TestVlanConfig_Integration_ConcurrentNoRace(t *testing.T) {
 	if testing.Short() {
 		t.Skip("skipping integration test in short mode")
 	}
-	sim, cs, pool, deviceID := newVlanSimStack(t)
+	sim, cs, pool, ds, deviceID := newVlanSimStack(t)
 	defer sim.Stop()
 	defer pool.CloseAll()
 
@@ -195,7 +196,7 @@ func TestVlanConfig_Integration_ConcurrentNoRace(t *testing.T) {
 	}
 
 	// 单次对账后设备应有全部 VLAN
-	reconcileVlan(cs, pool, deviceID)
+	reconcileVlan(cs, pool, ds, deviceID)
 	for i := 1; i <= n; i++ {
 		testsupport.AssertHuaweiVlanExists(t, sim, uint16(i))
 	}
@@ -215,6 +216,6 @@ func TestConvertVlan_MalformedGraceful(t *testing.T) {
 }
 
 // reconcileVlan 直接触发一次 VLAN 对账（幂等测试用，desired 不变）。
-func reconcileVlan(cs *manager.InMemoryConfigStore, pool client.ClientPool, deviceID string) reconcile.Result {
-	return vlanctl.New(cs, pool, nil).Reconcile(context.Background(), reconcile.Request{DeviceID: deviceID, Path: vlanPath})
+func reconcileVlan(cs *manager.InMemoryConfigStore, pool client.ClientPool, ds device.Store, deviceID string) reconcile.Result {
+	return vlanctl.New(cs, pool, ds).Reconcile(context.Background(), reconcile.Request{DeviceID: deviceID, Path: vlanPath})
 }

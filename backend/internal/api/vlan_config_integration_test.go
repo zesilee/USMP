@@ -2,13 +2,13 @@ package api
 
 import (
 	"context"
-	"fmt"
 	"testing"
 	"time"
 
 	"github.com/leezesi/usmp/backend/internal/cache"
 	vlanctl "github.com/leezesi/usmp/backend/internal/controller/vlan"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/client"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/device"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/manager"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/reconcile"
 	netsim "github.com/leezesi/usmp/backend/simulator/netconfsim"
@@ -51,11 +51,13 @@ func TestVlanConfig_Integration_EnumStringToDevice(t *testing.T) {
 	typed, err := convertMapToHuaweiVlan(raw)
 	assert.NoError(t, err)
 
-	deviceID := fmt.Sprintf("%s:%s@%s:%d", sim.Username(), sim.Password(), sim.Addr(), sim.Port())
+	deviceID := "sim"
+	ds := device.NewStore()
+	ds.Put(deviceID, client.DeviceConnectionInfo{IP: sim.Addr(), Port: sim.Port(), Username: sim.Username(), Password: sim.Password(), Protocol: client.ProtocolNETCONF})
 	path := "/vlan:vlan/vlan:vlans"
 	assert.NoError(t, cs.Set(deviceID, path, typed))
 
-	r := vlanctl.New(cs, pool, nil)
+	r := vlanctl.New(cs, pool, ds)
 	result := r.Reconcile(context.Background(), reconcile.Request{DeviceID: deviceID, Path: path})
 	if result.Error != nil {
 		t.Fatalf("reconcile: %v", result.Error)

@@ -2,7 +2,6 @@ package api
 
 import (
 	"context"
-	"fmt"
 	"testing"
 	"time"
 
@@ -10,6 +9,7 @@ import (
 	vlanctl "github.com/leezesi/usmp/backend/internal/controller/vlan"
 	"github.com/leezesi/usmp/backend/internal/generated/huawei"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/client"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/device"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/manager"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/reconcile"
 	netsim "github.com/leezesi/usmp/backend/simulator/netconfsim"
@@ -19,7 +19,7 @@ import (
 
 const vlanPath = "/vlan:vlan/vlan:vlans"
 
-func newVlanSimStack(t *testing.T) (*netsim.Simulator, *manager.InMemoryConfigStore, client.ClientPool, string) {
+func newVlanSimStack(t *testing.T) (*netsim.Simulator, *manager.InMemoryConfigStore, client.ClientPool, device.Store, string) {
 	t.Helper()
 	sim := netsim.NewSimulator()
 	if err := sim.Start(); err != nil {
@@ -28,18 +28,23 @@ func newVlanSimStack(t *testing.T) (*netsim.Simulator, *manager.InMemoryConfigSt
 	c := cache.NewTTLLRUCache(100, 30*time.Second, 1*time.Minute)
 	cs := manager.NewInMemoryConfigStore(c)
 	pool := client.NewDefaultClientPool(client.DefaultClientFactory(5 * time.Second))
-	deviceID := fmt.Sprintf("%s:%s@%s:%d", sim.Username(), sim.Password(), sim.Addr(), sim.Port())
-	return sim, cs, pool, deviceID
+	// Register the sim in a DeviceStore (source of truth); DeviceID carries no creds.
+	deviceID := "sim"
+	ds := device.NewStore()
+	ds.Put(deviceID, client.DeviceConnectionInfo{
+		IP: sim.Addr(), Port: sim.Port(), Username: sim.Username(), Password: sim.Password(), Protocol: client.ProtocolNETCONF,
+	})
+	return sim, cs, pool, ds, deviceID
 }
 
 // applyVlan：走真实 API 转换路径下发一批 VLAN（前端形状 map）。
-func applyVlan(t *testing.T, cs *manager.InMemoryConfigStore, pool client.ClientPool, deviceID string, vlansPayload []interface{}) {
+func applyVlan(t *testing.T, cs *manager.InMemoryConfigStore, pool client.ClientPool, ds device.Store, deviceID string, vlansPayload []interface{}) {
 	t.Helper()
 	typed, err := convertMapToHuaweiVlan(map[string]interface{}{"vlans": vlansPayload})
 	assert.NoError(t, err)
 	// 走与 SetConfig 处理器一致的合并存储逻辑（带锁，防覆盖抹除 + 并发丢更新）
 	assert.NoError(t, storeConfigMerged(cs, deviceID, vlanPath, typed))
-	res := vlanctl.New(cs, pool, nil).Reconcile(context.Background(), reconcile.Request{DeviceID: deviceID, Path: vlanPath})
+	res := vlanctl.New(cs, pool, ds).Reconcile(context.Background(), reconcile.Request{DeviceID: deviceID, Path: vlanPath})
 	if res.Error != nil {
 		t.Fatalf("reconcile: %v", res.Error)
 	}
@@ -51,11 +56,11 @@ func TestVlanConfig_Integration_MemberPortsToDevice(t *testing.T) {
 	if testing.Short() {
 		t.Skip("skipping integration test in short mode")
 	}
-	sim, cs, pool, deviceID := newVlanSimStack(t)
+	sim, cs, pool, ds, deviceID := newVlanSimStack(t)
 	defer sim.Stop()
 	defer pool.CloseAll()
 
-	applyVlan(t, cs, pool, deviceID, []interface{}{
+	applyVlan(t, cs, pool, ds, deviceID, []interface{}{
 		map[string]interface{}{
 			"id":   float64(100),
 			"name": "with-ports",
@@ -81,18 +86,18 @@ func TestVlanConfig_Integration_MergePreservesOtherVLANs(t *testing.T) {
 	if testing.Short() {
 		t.Skip("skipping integration test in short mode")
 	}
-	sim, cs, pool, deviceID := newVlanSimStack(t)
+	sim, cs, pool, ds, deviceID := newVlanSimStack(t)
 	defer sim.Stop()
 	defer pool.CloseAll()
 
 	// 先配 VLAN 10
-	applyVlan(t, cs, pool, deviceID, []interface{}{
+	applyVlan(t, cs, pool, ds, deviceID, []interface{}{
 		map[string]interface{}{"id": float64(10), "name": "vlan-ten"},
 	})
 	testsupport.AssertHuaweiVlanExists(t, sim, 10)
 
 	// 再单独配 VLAN 20（模拟用户第二次新增）
-	applyVlan(t, cs, pool, deviceID, []interface{}{
+	applyVlan(t, cs, pool, ds, deviceID, []interface{}{
 		map[string]interface{}{"id": float64(20), "name": "vlan-twenty"},
 	})
 
