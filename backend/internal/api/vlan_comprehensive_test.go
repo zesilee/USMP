@@ -216,5 +216,5 @@ func TestConvertVlan_MalformedGraceful(t *testing.T) {
 
 // reconcileVlan 直接触发一次 VLAN 对账（幂等测试用，desired 不变）。
 func reconcileVlan(cs *manager.InMemoryConfigStore, pool client.ClientPool, deviceID string) reconcile.Result {
-	return vlanctl.New(cs, pool).Reconcile(context.Background(), reconcile.Request{DeviceID: deviceID, Path: vlanPath})
+	return vlanctl.New(cs, pool, nil).Reconcile(context.Background(), reconcile.Request{DeviceID: deviceID, Path: vlanPath})
 }

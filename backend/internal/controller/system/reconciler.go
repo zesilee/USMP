@@ -10,6 +10,7 @@ import (
 
 	"github.com/leezesi/usmp/backend/internal/generated/huawei"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/client"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/device"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/diff"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/reconcile"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/schema"
@@ -45,9 +46,10 @@ type SystemReconciler struct {
 }
 
 // New creates a new SystemReconciler with the given dependencies
-func New(cs reconcile.ConfigStore, clientPool client.ClientPool) *SystemReconciler {
+func New(cs reconcile.ConfigStore, clientPool client.ClientPool, resolver device.Store) *SystemReconciler {
 	dc := &deviceClient{
 		clientPool: clientPool,
+		resolver:   resolver,
 	}
 	de := &diffEngineAdapter{
 		de: diff.NewDefaultDiffEngine(),
@@ -57,27 +59,31 @@ func New(cs reconcile.ConfigStore, clientPool client.ClientPool) *SystemReconcil
 	}
 }
 
-// deviceClient implements reconcile.DeviceClient interface for getting system configuration from device
-type deviceClient struct {
-	clientPool client.ClientPool
+// resolveConn resolves connection info via the shared DeviceStore (source of
+// truth), falling back to parsing the DeviceID string when unregistered or no
+// store is wired (legacy path, R08 degrade — no crash).
+func (d *deviceClient) resolveConn(deviceID string) client.DeviceConnectionInfo {
+	if d.resolver != nil {
+		if info, ok := d.resolver.Get(deviceID); ok {
+			return info
+		}
+	}
+	return parseDeviceID(deviceID)
 }
 
-// Get retrieves the actual system configuration from the device
-func (d *deviceClient) Get(ctx context.Context, deviceID string) (interface{}, error) {
+// parseDeviceID is the legacy fallback deriving connection info from the
+// DeviceID string ("ip" | "ip:port" | "user:pass@ip:port"). Migration-only.
+func parseDeviceID(deviceID string) client.DeviceConnectionInfo {
 	var info client.DeviceConnectionInfo
-
-	// Parse device ID using the same logic as VLAN
 	if atIdx := lastAt(deviceID); atIdx >= 0 {
 		creds := deviceID[:atIdx]
 		hostPort := deviceID[atIdx+1:]
-
 		if colonIdx := lastColon(creds); colonIdx >= 0 {
 			info.Username = creds[:colonIdx]
 			info.Password = creds[colonIdx+1:]
 		} else {
 			info.Username = creds
 		}
-
 		if host, portStr, err := splitHostPort(hostPort); err == nil {
 			info.IP = host
 			if p, err := parseInt(portStr); err == nil {
@@ -98,8 +104,18 @@ func (d *deviceClient) Get(ctx context.Context, deviceID string) (interface{}, e
 		info.IP = deviceID
 		info.Protocol = client.ProtocolAUTO
 	}
+	return info
+}
 
-	c, err := d.clientPool.Get(info)
+// deviceClient implements reconcile.DeviceClient interface for getting system configuration from device
+type deviceClient struct {
+	clientPool client.ClientPool
+	resolver   device.Store
+}
+
+// Get retrieves the actual system configuration from the device
+func (d *deviceClient) Get(ctx context.Context, deviceID string) (interface{}, error) {
+	c, err := d.clientPool.Get(d.resolveConn(deviceID))
 	if err != nil {
 		return nil, err
 	}
@@ -141,40 +157,7 @@ func (d *deviceClient) Get(ctx context.Context, deviceID string) (interface{}, e
 
 // Set applies the configuration changes to the device
 func (d *deviceClient) Set(ctx context.Context, deviceID string, changes []reconcile.Change) error {
-	var info client.DeviceConnectionInfo
-
-	if atIdx := lastAt(deviceID); atIdx >= 0 {
-		creds := deviceID[:atIdx]
-		hostPort := deviceID[atIdx+1:]
-
-		if colonIdx := lastColon(creds); colonIdx >= 0 {
-			info.Username = creds[:colonIdx]
-			info.Password = creds[colonIdx+1:]
-		} else {
-			info.Username = creds
-		}
-
-		if host, portStr, err := splitHostPort(hostPort); err == nil {
-			info.IP = host
-			if p, err := parseInt(portStr); err == nil {
-				info.Port = p
-			}
-			info.Protocol = client.ProtocolNETCONF
-		} else {
-			info.IP = hostPort
-			info.Protocol = client.ProtocolAUTO
-		}
-	} else if host, portStr, err := splitHostPort(deviceID); err == nil {
-		info.IP = host
-		if p, err := parseInt(portStr); err == nil {
-			info.Port = p
-		}
-		info.Protocol = client.ProtocolNETCONF
-	} else {
-		info.IP = deviceID
-		info.Protocol = client.ProtocolAUTO
-	}
-	c, err := d.clientPool.Get(info)
+	c, err := d.clientPool.Get(d.resolveConn(deviceID))
 	if err != nil {
 		return err
 	}
@@ -193,10 +176,10 @@ func (d *deviceClient) Set(ctx context.Context, deviceID string, changes []recon
 			changeType = client.ModifyChange
 		}
 		clientChanges[i] = client.Change{
-			Type:      changeType,
-			Path:      rc.Path,
-			OldValue:  rc.ActualValue,
-			NewValue:  rc.DesiredValue,
+			Type:       changeType,
+			Path:       rc.Path,
+			OldValue:   rc.ActualValue,
+			NewValue:   rc.DesiredValue,
 			SchemaPath: rc.Path,
 		}
 	}

@@ -61,7 +61,7 @@ func TestInterfaceConfig_Integration_EnumStringToDevice(t *testing.T) {
 	path := "/ifm:ifm/ifm:interfaces"
 	assert.NoError(t, cs.Set(deviceID, path, typed))
 
-	r := ifmctl.New(cs, pool)
+	r := ifmctl.New(cs, pool, nil)
 	result := r.Reconcile(context.Background(), reconcile.Request{DeviceID: deviceID, Path: path})
 	if result.Error != nil {
 		t.Fatalf("reconcile: %v", result.Error)
@@ -110,7 +110,7 @@ func TestInterfaceConfig_Integration_NoCredentialsInDeviceID(t *testing.T) {
 	path := "/ifm:ifm/ifm:interfaces"
 	assert.NoError(t, cs.Set(deviceID, path, typed))
 
-	r := ifmctl.New(cs, pool)
+	r := ifmctl.New(cs, pool, nil)
 	result := r.Reconcile(context.Background(), reconcile.Request{DeviceID: deviceID, Path: path})
 	if result.Error != nil {
 		t.Fatalf("无凭据设备标识的对账仍须认证成功并下发（回归 ssh none-auth 缺陷）: %v", result.Error)

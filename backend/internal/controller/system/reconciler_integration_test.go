@@ -51,7 +51,7 @@ func TestReconciler_Integration_SystemBasics(t *testing.T) {
 	assert.NoError(t, err)
 
 	// 5. Create reconciler and execute reconciliation
-	r := New(cs, pool)
+	r := New(cs, pool, nil)
 	req := reconcile.Request{
 		DeviceID: deviceID,
 		Path:     path,
@@ -104,7 +104,7 @@ func TestReconciler_Integration_SystemModify(t *testing.T) {
 	err = cs.Set(deviceID, path, initial)
 	assert.NoError(t, err)
 
-	r := New(cs, pool)
+	r := New(cs, pool, nil)
 	req := reconcile.Request{DeviceID: deviceID, Path: path}
 
 	ctx := context.Background()

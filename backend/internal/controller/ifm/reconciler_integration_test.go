@@ -57,7 +57,7 @@ func TestReconciler_Integration_CreateInterface(t *testing.T) {
 	assert.NoError(t, err)
 
 	// 5. Create reconciler and execute reconciliation
-	r := New(cs, pool)
+	r := New(cs, pool, nil)
 	req := reconcile.Request{
 		DeviceID: deviceID,
 		Path:     path,
@@ -116,7 +116,7 @@ func TestReconciler_Integration_CreateInterface_ConvergesAndReadable(t *testing.
 		t.Fatalf("config store set: %v", err)
 	}
 
-	r := New(cs, pool)
+	r := New(cs, pool, nil)
 	req := reconcile.Request{DeviceID: deviceID, Path: path}
 	ctx := context.Background()
 
@@ -192,7 +192,7 @@ func TestReconciler_Integration_ModifyInterface(t *testing.T) {
 	err = cs.Set(deviceID, path, desired)
 	assert.NoError(t, err)
 
-	r := New(cs, pool)
+	r := New(cs, pool, nil)
 	req := reconcile.Request{DeviceID: deviceID, Path: path}
 
 	ctx := context.Background()
@@ -250,7 +250,7 @@ func TestReconciler_Integration_ModifyMTU(t *testing.T) {
 	err = cs.Set(deviceID, path, desired)
 	assert.NoError(t, err)
 
-	r := New(cs, pool)
+	r := New(cs, pool, nil)
 	req := reconcile.Request{DeviceID: deviceID, Path: path}
 
 	ctx := context.Background()
@@ -299,7 +299,7 @@ func TestReconciler_Integration_EmptyConfig(t *testing.T) {
 	assert.NoError(t, err)
 
 	// 5. Execute reconciliation
-	r := New(cs, pool)
+	r := New(cs, pool, nil)
 	req := reconcile.Request{
 		DeviceID: deviceID,
 		Path:     path,
@@ -358,7 +358,7 @@ func TestReconciler_Integration_CommitFailure(t *testing.T) {
 	assert.NoError(t, err)
 
 	// 6. Execute reconciliation
-	r := New(cs, pool)
+	r := New(cs, pool, nil)
 	req := reconcile.Request{
 		DeviceID: deviceID,
 		Path:     path,
@@ -431,7 +431,7 @@ func TestReconciler_Integration_FullInterfaceConfig(t *testing.T) {
 	assert.NoError(t, err)
 
 	// 5. Create reconciler and execute reconciliation
-	r := New(cs, pool)
+	r := New(cs, pool, nil)
 	req := reconcile.Request{
 		DeviceID: deviceID,
 		Path:     path,
@@ -505,7 +505,7 @@ func TestReconciler_Integration_TimersAndFlags(t *testing.T) {
 	assert.NoError(t, err)
 
 	// 5. Create reconciler and execute reconciliation
-	r := New(cs, pool)
+	r := New(cs, pool, nil)
 	req := reconcile.Request{
 		DeviceID: deviceID,
 		Path:     path,
@@ -576,7 +576,7 @@ func TestReconciler_Integration_StatisticsConfig(t *testing.T) {
 	assert.NoError(t, err)
 
 	// 5. Create reconciler and execute reconciliation
-	r := New(cs, pool)
+	r := New(cs, pool, nil)
 	req := reconcile.Request{
 		DeviceID: deviceID,
 		Path:     path,
@@ -638,7 +638,7 @@ func TestReconciler_Integration_ModifyMultipleAttributes(t *testing.T) {
 	err = cs.Set(deviceID, path, desired)
 	assert.NoError(t, err)
 
-	r := New(cs, pool)
+	r := New(cs, pool, nil)
 	req := reconcile.Request{DeviceID: deviceID, Path: path}
 
 	ctx := context.Background()

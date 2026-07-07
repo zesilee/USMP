@@ -9,6 +9,7 @@ import (
 
 	"github.com/leezesi/usmp/backend/internal/generated/huawei"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/client"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/device"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/diff"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/reconcile"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/schema"
@@ -48,9 +49,10 @@ type VlanReconciler struct {
 }
 
 // New creates a new VlanReconciler with the given dependencies
-func New(cs reconcile.ConfigStore, clientPool client.ClientPool) *VlanReconciler {
+func New(cs reconcile.ConfigStore, clientPool client.ClientPool, resolver device.Store) *VlanReconciler {
 	dc := &deviceClient{
 		clientPool: clientPool,
+		resolver:   resolver,
 	}
 	de := &diffEngineAdapter{
 		de: diff.NewDefaultDiffEngine(),
@@ -63,56 +65,24 @@ func New(cs reconcile.ConfigStore, clientPool client.ClientPool) *VlanReconciler
 // deviceClient implements reconcile.DeviceClient interface for getting VLAN configuration from device
 type deviceClient struct {
 	clientPool client.ClientPool
+	resolver   device.Store
+}
+
+// resolveConn resolves connection info via the shared DeviceStore (source of
+// truth), falling back to parsing the DeviceID string when the device is not
+// registered or no store is wired (legacy path, R08 degrade — no crash).
+func (d *deviceClient) resolveConn(deviceID string) client.DeviceConnectionInfo {
+	if d.resolver != nil {
+		if info, ok := d.resolver.Get(deviceID); ok {
+			return info
+		}
+	}
+	return parseDeviceID(deviceID)
 }
 
 // Get retrieves the actual VLAN configuration from the device and converts it to the openconfig.VLans struct
 func (d *deviceClient) Get(ctx context.Context, deviceID string) (interface{}, error) {
-	// deviceID format supports:
-	// - "ip" - just IP, use default port (830) and default credentials
-	// - "ip:port" - custom port, use default credentials
-	// - "user:pass@ip:port" - custom port and credentials (for integration testing)
-	var info client.DeviceConnectionInfo
-
-	// Split credentials if present (@ separates credentials from host:port)
-	if atIdx := lastAt(deviceID); atIdx >= 0 {
-		// credentials part is everything before @
-		creds := deviceID[:atIdx]
-		// host:port part is everything after @
-		hostPort := deviceID[atIdx+1:]
-
-		// Split credentials into username and password
-		if colonIdx := lastColon(creds); colonIdx >= 0 {
-			info.Username = creds[:colonIdx]
-			info.Password = creds[colonIdx+1:]
-		} else {
-			info.Username = creds
-			// no password provided
-		}
-
-		// Parse host and port
-		if host, portStr, err := splitHostPort(hostPort); err == nil {
-			info.IP = host
-			if p, err := parseInt(portStr); err == nil {
-				info.Port = p
-			}
-			info.Protocol = client.ProtocolNETCONF
-		} else {
-			info.IP = hostPort
-			info.Protocol = client.ProtocolAUTO
-		}
-	} else if host, portStr, err := splitHostPort(deviceID); err == nil {
-		// No credentials, just host:port
-		info.IP = host
-		if p, err := parseInt(portStr); err == nil {
-			info.Port = p
-		}
-		info.Protocol = client.ProtocolNETCONF
-	} else {
-		// Just IP, use all defaults
-		info.IP = deviceID
-		info.Protocol = client.ProtocolAUTO
-	}
-	c, err := d.clientPool.Get(info)
+	c, err := d.clientPool.Get(d.resolveConn(deviceID))
 	if err != nil {
 		return nil, err
 	}
@@ -159,52 +129,7 @@ func (d *deviceClient) Get(ctx context.Context, deviceID string) (interface{}, e
 
 // Set applies the computed changes to the device
 func (d *deviceClient) Set(ctx context.Context, deviceID string, changes []reconcile.Change) error {
-	// deviceID format supports:
-	// - "ip" - just IP, use default port (830) and default credentials
-	// - "ip:port" - custom port, use default credentials
-	// - "user:pass@ip:port" - custom port and credentials (for integration testing)
-	var info client.DeviceConnectionInfo
-
-	// Split credentials if present (@ separates credentials from host:port)
-	if atIdx := lastAt(deviceID); atIdx >= 0 {
-		// credentials part is everything before @
-		creds := deviceID[:atIdx]
-		// host:port part is everything after @
-		hostPort := deviceID[atIdx+1:]
-
-		// Split credentials into username and password
-		if colonIdx := lastColon(creds); colonIdx >= 0 {
-			info.Username = creds[:colonIdx]
-			info.Password = creds[colonIdx+1:]
-		} else {
-			info.Username = creds
-			// no password provided
-		}
-
-		// Parse host and port
-		if host, portStr, err := splitHostPort(hostPort); err == nil {
-			info.IP = host
-			if p, err := parseInt(portStr); err == nil {
-				info.Port = p
-			}
-			info.Protocol = client.ProtocolNETCONF
-		} else {
-			info.IP = hostPort
-			info.Protocol = client.ProtocolAUTO
-		}
-	} else if host, portStr, err := splitHostPort(deviceID); err == nil {
-		// No credentials, just host:port
-		info.IP = host
-		if p, err := parseInt(portStr); err == nil {
-			info.Port = p
-		}
-		info.Protocol = client.ProtocolNETCONF
-	} else {
-		// Just IP, use all defaults
-		info.IP = deviceID
-		info.Protocol = client.ProtocolAUTO
-	}
-	c, err := d.clientPool.Get(info)
+	c, err := d.clientPool.Get(d.resolveConn(deviceID))
 	if err != nil {
 		return err
 	}
@@ -235,6 +160,43 @@ func (d *deviceClient) Set(ctx context.Context, deviceID string, changes []recon
 	// Apply changes with commit
 	_, err = c.Set(ctx, clientChanges, client.WithCommit(true))
 	return err
+}
+
+// parseDeviceID is the legacy fallback that derives connection info from the
+// DeviceID string ("ip" | "ip:port" | "user:pass@ip:port"). Kept only for the
+// migration window; the DeviceStore is the real source.
+func parseDeviceID(deviceID string) client.DeviceConnectionInfo {
+	var info client.DeviceConnectionInfo
+	if atIdx := lastAt(deviceID); atIdx >= 0 {
+		creds := deviceID[:atIdx]
+		hostPort := deviceID[atIdx+1:]
+		if colonIdx := lastColon(creds); colonIdx >= 0 {
+			info.Username = creds[:colonIdx]
+			info.Password = creds[colonIdx+1:]
+		} else {
+			info.Username = creds
+		}
+		if host, portStr, err := splitHostPort(hostPort); err == nil {
+			info.IP = host
+			if p, err := parseInt(portStr); err == nil {
+				info.Port = p
+			}
+			info.Protocol = client.ProtocolNETCONF
+		} else {
+			info.IP = hostPort
+			info.Protocol = client.ProtocolAUTO
+		}
+	} else if host, portStr, err := splitHostPort(deviceID); err == nil {
+		info.IP = host
+		if p, err := parseInt(portStr); err == nil {
+			info.Port = p
+		}
+		info.Protocol = client.ProtocolNETCONF
+	} else {
+		info.IP = deviceID
+		info.Protocol = client.ProtocolAUTO
+	}
+	return info
 }
 
 // splitHostPort splits a string into host and port, compatible with net.SplitHostPort
