@@ -69,6 +69,9 @@ func probeOnline(pool client.ClientPool, d DeviceInfo) bool {
 		Port:     port,
 		Username: d.Username,
 		Password: d.Password,
+		// Protocol must be set or the factory hits its default ("unsupported
+		// protocol") branch and the probe would falsely report the device offline.
+		Protocol: client.ProtocolAUTO,
 		Timeout:  3 * time.Second,
 	})
 	return err == nil && c != nil && c.IsConnected()
