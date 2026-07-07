@@ -23,14 +23,18 @@ func (f *fakeClient) IsConnected() bool                                         
 func (f *fakeClient) DiscardCandidate(context.Context) error                             { return nil }
 
 type fakePool struct {
-	client client.Client
-	err    error
+	client   client.Client
+	err      error
+	lastInfo client.DeviceConnectionInfo // captured from the most recent Get, for assertions
 }
 
-func (p *fakePool) Get(client.DeviceConnectionInfo) (client.Client, error) { return p.client, p.err }
-func (p *fakePool) Release(string)                                         {}
-func (p *fakePool) CloseAll() error                                        { return nil }
-func (p *fakePool) Stats() client.PoolStats                                { return client.PoolStats{} }
+func (p *fakePool) Get(info client.DeviceConnectionInfo) (client.Client, error) {
+	p.lastInfo = info
+	return p.client, p.err
+}
+func (p *fakePool) Release(string)          {}
+func (p *fakePool) CloseAll() error         { return nil }
+func (p *fakePool) Stats() client.PoolStats { return client.PoolStats{} }
 
 // TestProbeOnline: a connected client → online.
 func TestProbeOnline(t *testing.T) {
@@ -57,5 +61,16 @@ func TestProbeOfflineNotConnected(t *testing.T) {
 func TestProbeDefaultPort(t *testing.T) {
 	if !probeOnline(&fakePool{client: &fakeClient{connected: true}}, DeviceInfo{IP: "1.1.1.1"}) {
 		t.Fatal("default-port device should be online")
+	}
+}
+
+// TestProbeOnline_PassesProtocolAuto: probeOnline must set Protocol so the client
+// factory picks a concrete protocol; an empty Protocol falls into the factory's
+// default branch ("unsupported protocol") and would falsely report the device offline.
+func TestProbeOnline_PassesProtocolAuto(t *testing.T) {
+	p := &fakePool{client: &fakeClient{connected: true}}
+	probeOnline(p, DeviceInfo{IP: "1.1.1.1", Port: 830, Username: "admin", Password: "admin"})
+	if p.lastInfo.Protocol != client.ProtocolAUTO {
+		t.Fatalf("probeOnline must pass Protocol=AUTO, got %q", p.lastInfo.Protocol)
 	}
 }

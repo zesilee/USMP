@@ -40,6 +40,17 @@ func NewNETCONFClient(info DeviceConnectionInfo) (*NETCONFClient, error) {
 	if info.Timeout == 0 {
 		info.Timeout = 10 * time.Second
 	}
+	// Credential fallback: reconcile/read paths are triggered with a bare device
+	// IP and no shared credential store, so Username/Password arrive empty. Without
+	// them SSH offers only "none" auth and the device rejects the handshake. Default
+	// to admin/admin (the seeded device credential) so authentication can proceed.
+	// TODO: remove once a shared device store propagates real per-device credentials.
+	if info.Username == "" {
+		info.Username = "admin"
+	}
+	if info.Password == "" {
+		info.Password = "admin"
+	}
 
 	c := &NETCONFClient{
 		info: info,

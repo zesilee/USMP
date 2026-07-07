@@ -40,7 +40,9 @@ func NewConfigHandler(mgr manager.Manager) *ConfigHandler {
 
 // fetchFromDevice reads running config from the device via the client pool.
 func (h *ConfigHandler) fetchFromDevice(ctx context.Context, ip, path string) (interface{}, error) {
-	cli, err := h.manager.GetClientPool().Get(client.DeviceConnectionInfo{IP: ip})
+	// Protocol must be set or the client factory falls into its default branch
+	// ("unsupported protocol"); AUTO picks NETCONF for the default 830 port.
+	cli, err := h.manager.GetClientPool().Get(client.DeviceConnectionInfo{IP: ip, Protocol: client.ProtocolAUTO})
 	if err != nil {
 		return nil, err
 	}
