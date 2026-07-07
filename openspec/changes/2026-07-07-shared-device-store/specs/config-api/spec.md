@@ -1,4 +1,4 @@
-## MODIFIED Requirements
+## ADDED Requirements
 
 ### Requirement: 设备注册以共享 DeviceStore 为单一来源
 

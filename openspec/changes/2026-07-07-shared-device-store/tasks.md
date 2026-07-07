@@ -37,7 +37,7 @@
 
 ## 6. 收尾与验收
 
-- [ ] 6.1 端到端：注册设备→提交接口配置→对账认证成功下发→回读可见→二次对账收敛；周期源持续复验
-- [ ] 6.2 更新 `config-api` / `yang-controller-runtime` 主 spec + 新增 `device-store` spec（sync 阶段）
-- [ ] 6.3 满足 R01/R03/R06/R08/R09；#100 兜底与 #101 controller 复验保留（复验仍是快速收敛路径，与周期源互补）
-- [ ] 6.4 记债：设备信息持久化到本地 JSON（§8）留后续增量；真机 gNMI（D3/D5）不在范围
+- [x] 6.1 端到端：注册设备→提交接口配置→对账认证成功下发→回读可见→二次对账收敛；周期源持续复验
+- [~] 6.2 delta spec 已产出并 `openspec validate` 通过（config-api/yang-controller-runtime 改用 ADDED、device-store 新增）；`openspec archive` 自动合并主 spec 受阻——既有主 spec 用自定义中文结构，不符 CLI 的 `## Purpose`/`## Requirements`（预存 tooling 缺口，非本变更范围）。change 保持 active(已校验)，归档待主 spec 格式统一
+- [x] 6.3 满足 R01/R03/R06/R08/R09；#100 兜底与 #101 controller 复验保留（复验仍是快速收敛路径，与周期源互补）
+- [x] 6.4 记债：设备信息持久化到本地 JSON（§8）留后续增量；真机 gNMI（D3/D5）不在范围

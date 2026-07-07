@@ -1,4 +1,4 @@
-## MODIFIED Requirements
+## ADDED Requirements
 
 ### Requirement: Reconciler 从 DeviceStore 解析建连参数
 
