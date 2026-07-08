@@ -26,6 +26,15 @@ export interface Field {
   when?: string
   // must 携带 YANG `must` 约束（XPath 表达式 + 可选提示），驱动跨字段校验（FE-07）。
   must?: { expr: string; message?: string }[]
+  // supportFilter 标记厂商 support-filter 扩展：该叶可作查询条件（高级搜索，FE-11）。
+  supportFilter?: boolean
+  // operationExclude 承载厂商 operation-exclude 扩展（小写归一）：叶级=create-only
+  // 标识字段（编辑态禁用）；list/group 级=整节点排除对应操作（FE-11）。
+  operationExclude?: string[]
+  // presence 标记 YANG presence 容器（type==='group'）：存在即开关（FE-12）。
+  presence?: boolean
+  // isKey 标记 list key 叶：通用控制台据此派生 keyField（FE-11）。
+  isKey?: boolean
 }
 
 interface OpenAPIProperty {
