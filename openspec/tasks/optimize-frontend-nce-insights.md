@@ -1,6 +1,6 @@
 ---
 id: optimize-frontend-nce-insights
-title: 基于 iMaster NCE 洞察优化 USMP 前端渲染 + YANG UI 契约（4 阶段路线图）
+title: 基于 iMaster NCE 洞察优化 USMP 前端渲染 + YANG UI 契约 + 异构多设备 SND（分阶段路线图）
 status: in_progress
 priority: medium
 branch: (未开始 — 每阶段独立 worktree)
@@ -29,7 +29,7 @@ next: P3' 扩展 ext:* 注解词汇（主线）；P1' 保真微调低优先
 - **P3 注解机制已在跑**：华为 `ext:support-filter`/`ext:operation-exclude` 已从 goyang `Entry.Exts` 消费，FieldDef 已带 supportFilter/operationExclude/presence/isKey，`make gen-contract` 漂移门禁已存在。**「注解存 YANG extension vs sidecar JSON」的分叉已被现实解答：走 YANG extension（Entry.Exts/Extra）。** P3 从「绿地战略赌注」降级为「扩展已验证的注解词汇表」，风险大减。
 - **P4 删除语义债已定位**：删除按钮按门禁渲染但**禁用**（后端 /config 无 DELETE、POST 合并语义）→ 精确已知起点。声明式 SND 仍是绿地后端。
 
-**校准后的真实路线（P0 已合入，均已代码核验 @origin/main）：主线 = P3' 扩展注解词汇（机制已在跑、去风险）；P1' 保真微调（segmented/transfer/token 均未做，低优先）；P2 视图切分已完成、仅下发 Stepper 可选；P4 删除语义（删除按钮仍禁用、后端 /config 无 DELETE 已确认）+ 声明式 SND 最后做。**
+**校准后的真实路线（P0 已合入，均已代码核验 @origin/main）：主线 = P3' 扩展注解词汇（机制已在跑、去风险）；P1' 保真微调（segmented/transfer/token 均未做，低优先）；P2 视图切分已完成、仅下发 Stepper 可选；P4 删除语义（删除按钮仍禁用、后端 /config 无 DELETE 已确认）；P5 异构多设备 SND（从 P4 拆出的战略项——骨架已在、要泛化+声明式化，Go 后端不阻塞，独立立项）。**
 
 ## 路线图与进度（已按对账校准）
 
@@ -56,11 +56,27 @@ next: P3' 扩展 ext:* 注解词汇（主线）；P1' 保真微调低优先
 - ⚠️ choice 元数据被 ygot 拍平（[[yang-constraint-engine]]），涉 choice 的注解需构建期 codegen 兜底
 - 测试层 B1（扩展解析）+ B3（schema API 契约）+ F1/F2（渲染器消费）；存量并行→切换（§5.3）
 
-### [ ] P4 — 删除语义模型化 + 声明式 SND（洞察 E + C）｜最后
+### [ ] P4 — 删除语义模型化（洞察 E）
 - [ ] 删除语义：已知精确起点——删除按钮按门禁渲染但**禁用**（后端 /config 无 DELETE、POST 合并语义）。补后端 DELETE/删除下发契约 + 前端启用行删除（[[generic-module-console]] follow-up 债）
-- [ ] 声明式 SND 驱动描述（绿地）：每设备型号一个声明式描述，加设备只加一个包不碰核心（参照华为 SND）
-- 动 huawei translator/Reconciler 核心，爆炸半径最大；VLAN/IFM 链路已跑通（[[vlan-config-stackb]]）不急
-- 测试层 B1+**B2 集成**；涉新模型接入触发 `yang-config-test-design` 完备矩阵（T02b）
+- 测试层 B1+**B2 集成**（涉下发）
+
+### [ ] P5 — 异构多设备 SND 驱动：泛化 + 声明式化（洞察 C）｜战略项，独立立项
+> 从 P4 拆出（原被低估地捆在删除债里）。USMP 后续对接异构多厂商设备的**核心能力**，值得独立 explore/propose，非"最后随手做"。
+
+- **纠正认知：不是绿地。SND 等价骨架已在 Go 后端**（2026-07-08 核对代码）：
+  - `Translator` 接口（`pkg/translator/translator.go:31`：Vendor/TranslateVlan/Interface/Route/System/Validate）
+  - 驱动注册表 `RegisterTranslator`+`GetTranslator`+`map[VendorType]Translator`（`factory.go:9,14,19`）
+  - 厂商枚举**已内置** Huawei/Cisco/H3C/Juniper（`translator.go:13-16`），只实现了 Huawei
+  - plugin 钩子接口 Validation/Mutation/Notification/ReconciliationHook（`plugin/plugin.go`）
+  - → 要做的是**泛化 + 声明式化**（把手写 `TranslateXxx` 胶水变数据驱动），不是从零建
+- **Go 后端可行性已定（后端是 Go 不阻塞 SND）**，三条地道路径按契合度：
+  - ① **声明式数据驱动**（推荐终态）：设备特定部分=数据非代码（ygot 生成厂商 YANG 结构 R04 + 路径/模板描述符 + sysoid/协议/能力元数据），加设备=加数据+重跑 ygot，核心几乎不动。最契合 R04/R05
+  - ③ **编译期注册表**（现状，起步）：保留 RegisterTranslator，每厂商一个 Go 包，重编译。够用于可控厂商集合
+  - ② **进程外 gRPC 插件**（逃生舱，Terraform provider/HashiCorp go-plugin 模式）：语言无关，**驱动甚至可以是 Python**，真热插拔但最重；仅"托管第三方/热加载"才需
+  - **建议 ③ 起步 → ① 成熟；不需要 Python，也不需要 Go .so 插件**
+- **⚠️ 待厘清（explore 阶段）**：现有 `Translator` 吃 CRD Spec（`bizv1.BusinessInterfaceSpec`）= **Stack A 遗留**；SND 设计必须瞄准 **Stack B（yang-controller-runtime 的 Reconciler + 通用引擎）**，别复活 CRD translator（[[dual-stack-migration]]）
+- **⚠️ 待用户拍板的设计决策**：驱动是否需要"运行时可插拔/第三方热加载"？否→③/①（纯 Go 编译期）；是→②（gRPC 进程外）
+- 动 translator/Reconciler 核心，爆炸半径最大；VLAN/IFM 链路已跑通（[[vlan-config-stackb]]）；测试层 B1+**B2 集成**；新模型接入触发 `yang-config-test-design` 完备矩阵（T02b）
 
 ## 上下文恢复提示
 
