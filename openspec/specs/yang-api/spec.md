@@ -1,130 +1,97 @@
-# yang-api - 行为契约
+# yang-api — YANG 动态表单 Schema 北向接口
 
-## 接口定义
+## Purpose
 
-### GET /api/v1/yang/modules
+yang-api 是 Stack B 北向 REST 接口，向前端供给**由 YANG 模型驱动**的动态表单元数据：模块列表（`GET /api/v1/yang/modules`）与单模块表单 Schema（`GET /api/v1/yang/schema/:module`，含扁平/嵌套两态）。Schema 从 ygot 内嵌的 goyang `yang.Entry` 树**动态生成**（R04：派生自 ygot 生成模型，非手写、非硬编码），并透出 YANG 业务约束（when/must/pattern/range/default）与 choice/case 分组，供前端 100% 数据驱动渲染（R05）。连接/加载能力由 Manager 的 schema 树决定。
 
-**描述**：返回所有已支持的YANG模块列表
+## Requirements
 
-**参数**：无
+### Requirement: BR-01 模块列表（已加载）
 
-**响应**：
-| 状态码 | 含义 | Body |
-|--------|------|------|
-| 200 | 成功 | `{"code":0,"data":[...],"success":true}` |
+`GET /api/v1/yang/modules` 当 Manager 已加载 YANG 模块时 SHALL 遍历 `Schema.Modules()` 返回实际模块列表（每项含 `name`/`title`/`vendor`/`path`/`description`/`type`）。
 
-**数据模型 — YangModuleInfo**：
-| 字段 | 类型 | 约束 | 示例 |
-|------|------|------|------|
-| name | string | 模块名 | "huawei-ifm" |
-| title | string | 中文标题 | "华为接口管理" |
-| vendor | string | 固定"huawei" | "huawei" |
-| path | string | YANG根路径 | "/ifm" |
-| description | string | 模块描述 | "Network interfaces configuration" |
-| type | string | 根节点类型（数字字符串） | "1" |
+#### Scenario: 有已加载模块
+- **WHEN** Manager 的 schema 树已加载模块
+- **THEN** SHALL 从 `Schema.Modules()` 动态遍历返回实际模块列表
 
-### GET /api/v1/yang/schema/:module
+### Requirement: BR-02 模块列表降级（无已加载）
 
-**描述**：返回指定YANG模块的动态表单Schema定义
+`GET /api/v1/yang/modules` 当无已加载模块时 SHALL 返回一份最小示例模块列表（huawei-ifm + huawei-vlan）以保证页面可用，SHALL NOT panic（R08）。
 
-**参数**：
-| 参数 | 位置 | 类型 | 必填 | 约束 | 示例 |
-|------|------|------|------|------|------|
-| module | path | string | 是 | YANG模块名 | "huawei-ifm" |
+#### Scenario: 无已加载模块
+- **WHEN** Manager 尚无已加载模块
+- **THEN** SHALL 返回最小示例模块列表，接口 SHALL NOT 失败
 
-**响应**：
-| 状态码 | 含义 | Body |
-|--------|------|------|
-| 200 | 成功 | `{"code":0,"data":{...},"success":true}` |
+### Requirement: BR-03 Schema 动态生成（已知模块）
 
-**数据模型 — YangSchema**：
-| 字段 | 类型 | 约束 | 示例 |
-|------|------|------|------|
-| module | string | 模块名 | "huawei-ifm" |
-| title | string | 中文标题 | "华为接口管理" |
-| vendor | string | 固定"huawei" | "huawei" |
-| fields | FieldDef[] | 表单字段定义 | 见下方 |
-| listCols | FieldDef[] | 列表视图列定义 | 见下方 |
+`GET /api/v1/yang/schema/:module` 对**已加载**的 YANG 模块 SHALL 由 `buildYangSchema`/`buildYangSchemaNested` **从 ygot schema 树动态生成** `fields`（含类型/枚举/必填/默认/约束元数据），SHALL NOT 返回硬编码/预定义 schema。`?form=nested` SHALL 返回容器/列表/叶的嵌套树。
 
-**数据模型 — FieldDef**：
-| 字段 | 类型 | 约束 | 示例 |
-|------|------|------|------|
-| path | string | 字段路径 | "ifName" |
-| type | string | 字段类型(string/number/enum/boolean) | "string" |
-| label | string | 中文标签 | "接口名称" |
-| placeholder | string | 可选，占位提示 | "例如: GE0/0/1" |
-| required | bool | 可选，是否必填 | true |
-| pattern | string | 可选，正则校验 | "^[0-9]+$" |
-| default | any | 可选，默认值 | 1500 |
-| options | Option[] | 可选，enum选项 | 见下方 |
-| group | string | 可选，分组名 | "基本信息" |
-| minimum | int | 可选，最小值 | 1 |
-| maximum | int | 可选，最大值 | 4094 |
-| readonly | bool | 可选，只读标记 | false |
+#### Scenario: 动态生成已加载模块 schema
+- **WHEN** 请求模块名（如 `ifm`）在 Manager 已加载的 schema 树中
+- **THEN** SHALL 遍历该模块 node model 动态产出 `YangSchema{fields,listCols}`，字段类型/枚举/必填/默认取自 ygot 生成的 `yang.Entry`
 
-**数据模型 — Option**：
-| 字段 | 类型 | 约束 | 示例 |
-|------|------|------|------|
-| label | string | 选项中文显示 | "启用" |
-| value | any | 选项值 | "up" |
+#### Scenario: nested 形态
+- **WHEN** 带 `?form=nested`
+- **THEN** SHALL 返回容器→列表→叶的嵌套 `FieldDef` 树（`fields` 递归）
 
-## 业务规则
+### Requirement: BR-04 未加载模块降级
 
-### BR-01: 模块列表-有已加载模块
+`GET /api/v1/yang/schema/:module` 对**未加载**到 schema 树的模块名 SHALL 降级返回一个最小通用 schema（不崩，R08），SHALL NOT 500。
 
-- Given: Manager中已加载YANG模块
-- When: 调用 GET /api/v1/yang/modules
-- Then: 从Schema.Modules()遍历返回实际模块列表
+#### Scenario: 未知/未加载模块
+- **WHEN** 请求模块名不在已加载 schema 树中
+- **THEN** SHALL 返回最小通用 schema（如仅 name/description 字段）或明确错误码，页面仍可用
 
-### BR-02: 模块列表-无已加载模块
+### Requirement: BR-05 约束元数据透出（when/must/pattern/range/default）
 
-- Given: Manager中无已加载YANG模块
-- When: 调用 GET /api/v1/yang/modules
-- Then: 返回硬编码的示例模块列表（huawei-ifm + huawei-vlan）
+`GET /api/v1/yang/schema/:module` 生成的 `FieldDef` SHALL 从 ygot 内嵌的 goyang `yang.Entry` 采集并透出以下 YANG 约束元数据：`when`（可见性 XPath 表达式）、`must`（`[{expr,message}]`，`message` 取叶 `description` 兜底、缺省生成通用提示）、`pattern`（string 正则）、`minimum`/`maximum`（数值 `range`）、`default`。缺失某项时对应字段 SHALL 省略（omitempty），SHALL NOT 崩溃。
 
-### BR-03: Schema-已知模块
+#### Scenario: 透出 when/must
+- **WHEN** 某 leaf 在 YANG 定义了 `when`（如 `../class='sub-interface'`）或 `must`（如 `(../suppress>../reuse)`）
+- **THEN** 该字段的 `FieldDef.when` / `FieldDef.must[].expr` SHALL 携带原始 XPath 表达式
 
-- Given: 请求模块名为 "huawei-ifm" / "Interfaces" / "huawei-vlan" / "VLANs"
-- When: 调用 GET /api/v1/yang/schema/:module
-- Then: 返回预定义的完整Schema（含fields和listCols）
+#### Scenario: 透出 pattern/range/default
+- **WHEN** 某 leaf 定义了 `pattern`、`range`/`length` 或 `default`
+- **THEN** SHALL 分别填充 `FieldDef.pattern` / `minimum`+`maximum` / `default`
 
-### BR-04: Schema-未知模块
+#### Scenario: 无约束的字段
+- **WHEN** leaf 无 when/must/pattern/range/default
+- **THEN** 对应字段 SHALL 省略，schema 生成 SHALL NOT 因缺约束而报错（R08）
 
-- Given: 请求模块名不匹配任何预定义模块
-- When: 调用 GET /api/v1/yang/schema/:module
-- Then: 返回通用Schema（仅含name+description两个字段）
+### Requirement: BR-06 choice/case 呈现分组
+
+`?form=nested` schema SHALL 将 YANG `choice`/`case` 呈现为 `FieldDef{type:"choice", cases:[{name,label,fields}]}` 分组节点。choice/case 元数据 SHALL 直接取自 ygot 内嵌的 goyang `Entry` 树（`huawei.Schema()` 由编译进二进制的 gzip schema blob 重建，运行期不读 `.yang`；该树完整保留 `IsChoice()`/`IsCase()` 与嵌套），SHALL NOT 依赖构建期生成器或运行期解析原始 `.yang`。分组内子字段的 `path` SHALL 为其**扁平** YANG 数据路径（剥除 choice/case 段，保留真实 container/list 段，如 `/ifm/interfaces/interface/bandwidth`、嵌套 `…/damp/manual/suppress`），以保证 NETCONF 写入链路不受影响。schema 中无 choice 时该模块 SHALL 退化为原扁平字段（R08）。
+
+#### Scenario: 恢复 choice 分组
+- **WHEN** 已加载模块的 schema 树含 `choice`（如 IFM `choice bandwidth-type` 的 `bandwidth-mbps`/`bandwidth-kbps` 两 case）
+- **THEN** SHALL 输出 `type:"choice"` 节点，其 `cases[]` 分组对应各 `case` 的子字段，子字段 `path` 为扁平数据路径（不含 choice/case 段）
+
+#### Scenario: 嵌套 choice
+- **WHEN** `case` 内嵌套 `container` 且其内再含 `choice`（如 IFM `damping→damp→level`）
+- **THEN** SHALL 递归呈现嵌套 `type:"choice"` 节点，各层子字段 `path` 均剥除本层 choice/case 段、保留 container 段
+
+#### Scenario: 无 choice 的模块
+- **WHEN** 模块 schema 树不含任何 `choice`
+- **THEN** SHALL 退化为原有扁平/嵌套字段输出，接口 SHALL NOT 失败（R08）
 
 ## 数据模型
 
-### YangModuleInfo 示例
+**FieldDef**（动态表单字段；omitempty 字段缺省即省略）：
 
-```json
-{
-  "name": "huawei-ifm",
-  "title": "华为接口管理",
-  "vendor": "huawei",
-  "path": "/ifm",
-  "description": "Network interfaces configuration",
-  "type": "1"
-}
-```
+| 字段 | 类型 | 说明 |
+|------|------|------|
+| path | string | 字段数据路径（扁平 YANG path，末段为数据键） |
+| type | string | `string`/`number`/`boolean`/`enum`/`group`/`list`/`leaf-list`/`choice` |
+| label | string | 字段标签（取 YANG 节点名） |
+| required | bool | 是否必填（YANG mandatory） |
+| default | any | 默认值 |
+| options | Option[] | enum 选项（`{label,value}`） |
+| group | string | 扁平形态下的分组名 |
+| minimum/maximum | int | 显式数值 `range` 边界 |
+| pattern | string | string `pattern` 正则 |
+| when | string | `when` XPath 表达式（BR-05） |
+| must | MustRule[] | `must` 约束 `[{expr,message}]`（BR-05） |
+| fields | FieldDef[] | `group`/`list` 的嵌套子字段（nested 形态） |
+| cases | CaseDef[] | `choice` 的互斥分支（BR-06） |
 
-### YangSchema 示例（huawei-vlan）
-
-```json
-{
-  "module": "huawei-vlan",
-  "title": "华为 VLAN 配置",
-  "vendor": "huawei",
-  "fields": [
-    {"path": "vlanId", "type": "number", "label": "VLAN ID", "required": true, "minimum": 1, "maximum": 4094, "group": "基本信息"},
-    {"path": "vlanName", "type": "string", "label": "VLAN 名称", "placeholder": "例如: VLAN-100", "group": "基本信息"},
-    {"path": "description", "type": "string", "label": "描述", "group": "基本信息"},
-    {"path": "portList", "type": "string", "label": "端口列表", "placeholder": "例如: GE0/0/1,GE0/0/2", "group": "端口配置"}
-  ],
-  "listCols": [
-    {"path": "vlanId", "type": "number", "label": "VLAN ID"},
-    {"path": "vlanName", "type": "string", "label": "VLAN 名称"}
-  ]
-}
-```
+**CaseDef**：`{name, label, fields: FieldDef[]}` —— 一个 `case` 分支及其子字段（子字段 path 为扁平数据路径）。
