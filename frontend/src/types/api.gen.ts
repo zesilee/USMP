@@ -558,6 +558,8 @@ export interface components {
             label?: string;
             maximum?: number;
             minimum?: number;
+            /** @description Must 携带 YANG `must` 约束（XPath 表达式 + 提示），驱动前端跨字段校验（R05）。 */
+            must?: components["schemas"]["api.MustRule"][];
             options?: components["schemas"]["api.Option"][];
             path?: string;
             pattern?: string;
@@ -565,6 +567,8 @@ export interface components {
             readonly?: boolean;
             required?: boolean;
             type?: string;
+            /** @description When 携带 YANG `when` XPath 表达式，驱动前端数据驱动的条件显隐（R05）。空表示无条件。 */
+            when?: string;
         };
         "api.FleetReconcileData": {
             devices?: components["schemas"]["api.DeviceRollup"][];
@@ -584,6 +588,10 @@ export interface components {
             summary?: string;
             timestamp?: string;
             triggered?: boolean;
+        };
+        "api.MustRule": {
+            expr?: string;
+            message?: string;
         };
         "api.Option": {
             label?: string;
