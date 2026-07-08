@@ -216,3 +216,37 @@ describe('ModuleFormTab · dynamicDefault 空值语义（FE-15）', () => {
     expect(payload['admin-status']).toBe('down')
   })
 })
+
+describe('ModuleFormTab · readonly 叶 must 不入门禁（FE-14 回归）', () => {
+  it('readonly state 叶 must 违例不得卡死提交门禁（用户不可改 state 值）', async () => {
+    const tab = deriveTabs([
+      {
+        path: '/ifm/mix2',
+        type: 'group' as const,
+        label: 'mix2',
+        fields: [
+          { path: '/ifm/mix2/mtu', type: 'number' as const, label: 'mtu' },
+          {
+            path: '/ifm/mix2/oper-state', type: 'string' as const, label: 'oper-state',
+            readonly: true, must: [{ expr: "../oper-state='up'", message: 'state must be up' }],
+          },
+        ],
+      },
+    ])[0]
+    // 设备回读 state=down → readonly 叶 must 违例
+    vi.mocked(getConfig).mockResolvedValue({
+      data: { data: { data: { 'oper-state': 'down' } } },
+    } as any)
+    const w = mount(ModuleFormTab, {
+      props: { tab, rootName: 'ifm', device: '10.0.0.1' },
+      global: { plugins: [createPinia(), ElementPlus] },
+    })
+    await flushPromises()
+    const vm = w.vm as any
+    vm.form.formData['mtu'] = 9000
+    await flushPromises()
+    // readonly 叶的 must 不入权威门禁：可正常提交可编辑改动
+    expect(vm.form.blocked.value).toBe(false)
+    expect(vm.form.submittable.value).toBe(true)
+  })
+})

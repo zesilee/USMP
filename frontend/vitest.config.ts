@@ -20,10 +20,10 @@ export default defineConfig({
       // 基线实测(2026-07-06)：Stmts 66.55 / Branch 66.57 / Funcs 56.67 / Lines 66.88。
       // 2026-07-08 P3 choice 补测后实测：Stmts 71.25 / Branch 70.02 / Funcs 62.75 / Lines 71.47。
       thresholds: {
-        statements: 73,
-        branches: 70,
-        functions: 65,
-        lines: 73
+        statements: 74,
+        branches: 71,
+        functions: 67,
+        lines: 74
       }
     }
   },

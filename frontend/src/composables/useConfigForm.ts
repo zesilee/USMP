@@ -51,6 +51,8 @@ export function useConfigForm(fields: Ref<Field[]> | ComputedRef<Field[]>, keyFi
   const mustViolations = computed(() =>
     engine.mustViolations.value.filter((v) => {
       const f = fields.value.find((x) => x.path === v.path)
+      // readonly state 叶的 must 不入门禁（FE-14）：设备值用户不可改，违例会永久卡死提交。
+      if (f?.readonly) return false
       return !(f?.type === 'group' && f.presence && formData[keyOf(f)] === undefined)
     }),
   )
