@@ -24,11 +24,11 @@
 - [x] 1.11 [绿] `staging-smoke.spec.ts`(F4)：`/config/interface`→新增→class=sub-interface 显现 parent-name（限定 .el-drawer；playwright --list 通过，全量待 make e2e-local）
 - [x] 1.12 review（go-code-review-check 通过）+ commit（What/Why/How）；覆盖率上调留到 P4 收尾一并处理
 
-## P2 · `must` 跨字段校验
-- [ ] 2.1 [红/绿] 后端透出 `must`（`e.Extra["must"]`→`FieldDef.Must[{expr,message}]`，message 取 description 兜底）；B1+B3
-- [ ] 2.2 [红/绿] `xpathEval` 扩 `mod`/`>`/`<`/关系运算；`useConstraintEngine.validate()` 返回违例
-- [ ] 2.3 [红/绿] F2：`suppress>reuse`、`(interval) mod 10 = 0` 违例阻断提交并行内提示；缺 error-message 用生成提示
-- [ ] 2.4 review + commit → PR
+## P2 · `must` 跨字段校验 ✅ 已交付（commit 795df5e / e981fea）
+- [x] 2.1 [红/绿] 后端透出 `must`（`e.Extra["must"]`→`FieldDef.Must[{expr,message}]`，message 取 description 兜底）；B1+B3（真实 IFM down-delay-time mod 100）
+- [x] 2.2 [绿] `xpathEval` 已含 `mod`/关系/逻辑；`useConstraintEngine.mustViolations` 对可见字段逐条求值返回违例
+- [x] 2.3 [红/绿] F2：`suppress>reuse` 违例阻断提交（submittable+submit 双门）并行内提示；缺 error-message 生成含标签提示
+- [x] 2.4 review + commit（覆盖率上调留 P4 收尾）
 
 ## P3 · `choice`/`case` 渲染
 - [ ] 3.1 [红/绿] `schema/loader.go` 解析原始 `.yang` 恢复 `choice/case` 映射；缺文件降级（R08）；B1 用 IFM `choice bandwidth-type`、嵌套 `choice damping`
