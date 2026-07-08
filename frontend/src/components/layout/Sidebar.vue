@@ -24,13 +24,20 @@
         <template #title>设备管理</template>
       </el-menu-item>
 
+      <!-- 业务配置菜单：/yang/modules 模型驱动，指向通用模块控制台（FE-13）。
+           加载失败回退内置项（R08）；路由配置为 legacy 独立流，保留静态项。 -->
       <el-sub-menu index="business-config">
         <template #title>
           <el-icon><Connection /></el-icon>
           <span>业务网络配置</span>
         </template>
-        <el-menu-item index="/config/interface">接口配置</el-menu-item>
-        <el-menu-item index="/config/vlan">VLAN配置</el-menu-item>
+        <el-menu-item
+          v-for="m in businessModules"
+          :key="m.name"
+          :index="`/module/${m.name}`"
+        >
+          {{ m.title }}
+        </el-menu-item>
         <el-menu-item index="/config/route">路由配置</el-menu-item>
       </el-sub-menu>
 
@@ -76,7 +83,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { useMenuStore } from '../../stores/menu'
 import { DataLine, Monitor, Connection, Setting, Document, Tools, Loading, Fold, Expand } from '@element-plus/icons-vue'
@@ -88,6 +95,11 @@ const activeMenu = computed(() => route.path)
 const isCollapsed = computed(() => menuStore.isCollapsed)
 const nativeModels = computed(() => menuStore.nativeModels)
 const nativeMenuLoaded = computed(() => menuStore.nativeMenuLoaded)
+const businessModules = computed(() => menuStore.businessModules)
+
+onMounted(() => {
+  menuStore.loadBusinessModules()
+})
 
 function toggleCollapse() {
   menuStore.toggleCollapse()

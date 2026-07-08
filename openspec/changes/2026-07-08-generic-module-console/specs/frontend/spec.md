@@ -12,7 +12,7 @@ Tab/列/字段。Tab 切换 SHALL 保留各 Tab 的表单与搜索状态。
 
 #### Scenario: huawei-ifm 派生
 
-- **WHEN** 打开 `/module/huawei-ifm`
+- **WHEN** 打开 `/module/ifm`
 - **THEN** Tab 集合 SHALL 含 `global`（表单）、`damp`（表单）、`auto-recovery-times`（列表或表单）、
   `interfaces`（列表）等根子节点，无任何硬编码模块名
 
@@ -67,7 +67,7 @@ SHALL 重定向到对应 `/module/:module`。
 
 #### Scenario: 菜单生成与回退
 
-- **WHEN** `/yang/modules` 返回含 `huawei-ifm` 的列表
-- **THEN** 菜单 SHALL 含指向 `/module/huawei-ifm` 的项
+- **WHEN** `/yang/modules` 返回含 `ifm`（模块根名）的列表
+- **THEN** 菜单 SHALL 含指向 `/module/ifm` 的项
 - **WHEN** 该 API 失败
 - **THEN** 菜单 SHALL 显示回退项且不崩

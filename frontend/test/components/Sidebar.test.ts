@@ -48,3 +48,33 @@ describe('Sidebar Component', () => {
     }
   })
 })
+
+describe('Sidebar · 业务菜单模型驱动（FE-13）', () => {
+  beforeEach(() => {
+    setActivePinia(createPinia())
+  })
+
+  const router = createRouter({
+    history: createWebHistory(),
+    routes: [{ path: '/', name: 'dashboard', component: {} }]
+  })
+
+  it('业务配置子菜单项来自 menu store，指向 /module/:name', async () => {
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({
+      json: async () => ({ data: [{ name: 'ifm', description: '接口管理', vendor: 'huawei' }] })
+    }))
+    const wrapper = mount(Sidebar, { global: { plugins: [router, ElementPlus] } })
+    await new Promise((r) => setTimeout(r))
+    expect(wrapper.text()).toContain('接口管理')
+    const item = wrapper.findAll('.el-menu-item').find((n) => n.text().includes('接口管理'))
+    expect(item).toBeTruthy()
+  })
+
+  it('模块列表加载失败：回退内置项，菜单不空（R08）', async () => {
+    vi.stubGlobal('fetch', vi.fn().mockRejectedValue(new Error('down')))
+    const wrapper = mount(Sidebar, { global: { plugins: [router, ElementPlus] } })
+    await new Promise((r) => setTimeout(r))
+    expect(wrapper.text()).toContain('接口管理')
+    expect(wrapper.text()).toContain('VLAN 配置')
+  })
+})

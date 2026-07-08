@@ -12,6 +12,12 @@ const routes = [
     component: () => import('../views/Devices.vue')
   },
   {
+    // 通用模块控制台（FE-10）：零 per-module props，Tab/列/表单全部由 schema 派生。
+    path: '/module/:module',
+    name: 'module-console',
+    component: () => import('../views/ModuleConsolePage.vue')
+  },
+  {
     path: '/config/interface',
     name: 'interface',
     component: () => import('../views/DeviceConfigPage.vue'),
