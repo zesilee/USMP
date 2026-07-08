@@ -31,10 +31,11 @@
 - [x] 2.4 review + commit（覆盖率上调留 P4 收尾）
 
 ## P3 · `choice`/`case` 渲染
-- [ ] 3.1 [红/绿] `schema/loader.go` 解析原始 `.yang` 恢复 `choice/case` 映射；缺文件降级（R08）；B1 用 IFM `choice bandwidth-type`、嵌套 `choice damping`
-- [ ] 3.2 [红/绿] `buildYangSchemaNested` 注入 `NodeKind:choice`+`Cases`，**子叶 path 不变**；B2 集成：choice 字段下发→回读收敛（写路径未破）
-- [ ] 3.3 [红/绿] `FieldRenderer` choice→`el-tabs`/`el-radio-group`，切 case 清空非激活分支；F2 + F3 真浏览器（el-tabs teleport）
-- [ ] 3.4 review + commit → PR
+> ⚠️ 修订：实测 `huawei.Schema()` 内嵌 schema **已完整保留 choice/case**（`IsChoice()/IsCase()`），运行期零读 `.yang`。**去除**「构建期生成 choice-map + go:embed」旧计划——不需生成器、不依赖 yang-models submodule。仅需让 `schema/entry.go` 识别 choice/case 并**扁平化成员 path**。
+- [x] 3.1 [红/绿] `schema/entry.go` 识别 `IsChoice()/IsCase()` 建 `ChoiceNode/CaseNode`，成员子字段 **path 扁平化**（剥 choice/case 段、留 container 段）；`defaultChoice/defaultCase` 实现；B1 `entry_choice_test.go` 用 IFM `bandwidth-type`（双单叶 case）+ 嵌套 `damping→damp→level→manual`（container 段保留）（commit b690219）
+- [x] 3.2 [红/绿] `field_gen` `nodeToNestedField` 加 `ChoiceNode` 分支→`FieldDef{type:"choice", cases:[{name,label,fields}]}`；`collectFields` 递归 choice cases；`FieldDef.Cases` + `CaseDef`；B3 `field_gen_choice_test.go` 真实 IFM 透出；B2 集成 `bandwidth` 经前端 map 端到端落到设备（commit 8b6d22e）。注：`bandwidth-type` choice 容器二轮对账收敛属既有 reconciler 缺口、与本呈现改动无关，独立 follow-up（B2 只断言落到设备）
+- [x] 3.3 [红/绿] `FieldRenderer` choice→`el-tabs`(含多字段 case)/`el-radio-group`(全单叶)，切 case 清空非激活分支、payload 仅激活 case 扁平 path；F2（FieldRenderer.choice + DeviceConfigPage.choice）+ F3 真浏览器（el-tabs/el-radio 真实交互）（commit 816e5c1）
+- [ ] 3.4 review（go-code-review-check 通过）+ 覆盖率棘轮上调 + commit → PR
 
 ## P4 · `leaf-list` + `pattern` + `range` ✅ 已交付（commit 8d401df / 4d4dae1）
 - [x] 4.1 [红/绿] 后端透出 `pattern`（真实 IFM `number`）+ 显式 `range`→min/max（真实 IFM `statistic-interval` 10..600，跳过类型全域默认区间避免噪声）；B1/B3

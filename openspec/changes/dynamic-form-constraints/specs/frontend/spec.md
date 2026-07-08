@@ -22,10 +22,10 @@ change delta：frontend。主 spec 已是 CLI 标准格式，本次仅 ADDED 新
 
 ### Requirement: FE-08 choice/case 渲染
 
-`FieldRenderer` SHALL 将 `nodeKind:"choice"` 的字段渲染为互斥切换控件（多字段 case→`el-tabs`，单叶 case→`el-radio-group`），分支内子字段按 `cases[].fields` 递归渲染。切换到某 case 时 SHALL 清空其它非激活 case 的数据（YANG choice 互斥语义），提交 payload SHALL 只含激活 case 的字段且保持其扁平 path。
+`FieldRenderer` SHALL 将 `type:"choice"` 的字段渲染为互斥切换控件（任一 case 含多字段→`el-tabs`，所有 case 均为单叶→`el-radio-group`），分支内子字段按 `cases[].fields` 递归渲染。切换到某 case 时 SHALL 清空其它非激活 case 的数据（YANG choice 互斥语义），提交 payload SHALL 只含激活 case 的字段且保持其扁平 path。
 
 #### Scenario: choice 渲染为切换控件
-- **WHEN** schema 含 `nodeKind:"choice"` 节点（如 IFM `bandwidth-type` 的 mbps/kbps 两 case）
+- **WHEN** schema 含 `type:"choice"` 节点（如 IFM `bandwidth-type` 的 mbps/kbps 两 case）
 - **THEN** SHALL 渲染为 Tabs/RadioGroup，可切换不同 case 的配置块
 
 #### Scenario: 切换 case 清空非激活分支

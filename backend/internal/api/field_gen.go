@@ -54,6 +54,17 @@ func nodeToNestedField(node schema.Node) FieldDef {
 	switch n := node.(type) {
 	case schema.LeafNode:
 		return leafToField(n, "")
+	case schema.ChoiceNode:
+		// choice → 互斥分支节点：每个 case 递归携带其子字段（扁平 path 保持不变）。
+		f := FieldDef{Path: n.Path(), Type: "choice", Label: n.Name()}
+		for _, cs := range n.Cases() {
+			cd := CaseDef{Name: cs.Name(), Label: cs.Name()}
+			for _, ch := range cs.Children() {
+				cd.Fields = append(cd.Fields, nodeToNestedField(ch))
+			}
+			f.Cases = append(f.Cases, cd)
+		}
+		return f
 	case schema.ListNode:
 		f := FieldDef{Path: n.Path(), Type: "list", Label: n.Name()}
 		for _, ch := range n.Children() {
@@ -86,6 +97,13 @@ func collectFields(node schema.Node, group string, fields *[]FieldDef, listCols 
 	case schema.ContainerNode:
 		for _, ch := range n.Children() {
 			collectFields(ch, group, fields, listCols)
+		}
+	case schema.ChoiceNode:
+		// 扁平形态下 choice 透明：递归展开各 case 的成员叶（保留其扁平 path）。
+		for _, cs := range n.Cases() {
+			for _, ch := range cs.Children() {
+				collectFields(ch, group, fields, listCols)
+			}
 		}
 	}
 }

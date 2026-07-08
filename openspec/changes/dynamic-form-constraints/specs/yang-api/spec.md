@@ -45,12 +45,18 @@ MODIFIED 的 Requirement 标题必须与迁移后的主 spec 完全一致。
 
 ### Requirement: BR-06 choice/case 呈现分组
 
-由于 ygot 拍平 `choice`/`case`，`?form=nested` schema SHALL 从原始 `.yang`（goyang 解析）恢复 choice/case 分组，以 `FieldDef{nodeKind:"choice", cases:[{name,label,fields}]}` 呈现；分组内子叶的 `path` SHALL 保持其真实**扁平** YANG 路径（不因分组而改变），以保证 NETCONF 写入链路不受影响。原始 `.yang` 不可得时 SHALL 降级为扁平字段（R08）。
+`?form=nested` schema SHALL 将 YANG `choice`/`case` 呈现为 `FieldDef{type:"choice", cases:[{name,label,fields}]}` 分组节点。choice/case 元数据 SHALL 直接取自 ygot 内嵌的 goyang `Entry` 树（`huawei.Schema()` 由编译进二进制的 gzip schema blob 重建，运行期不读 `.yang`；该树完整保留 `IsChoice()`/`IsCase()` 与嵌套），SHALL NOT 依赖构建期生成器或运行期解析原始 `.yang`。分组内子字段的 `path` SHALL 为其**扁平** YANG 数据路径（剥除 choice/case 段，保留真实 container/list 段，如 `/ifm/interfaces/interface/bandwidth`、嵌套 `…/damp/manual/suppress`），以保证 NETCONF 写入链路不受影响。schema 中无 choice 时该模块 SHALL 退化为原扁平字段（R08）。
+
+> 说明：先前设计基于「ygot 拍平 choice/case、须构建期生成 choice-map」的判断；实测 `huawei.Schema()` 内嵌 schema 已完整保留 choice/case，故改为直接从内嵌 schema 恢复，去除生成器与 `.yang` 运行期依赖。
 
 #### Scenario: 恢复 choice 分组
-- **WHEN** 模块含 `choice`（如 IFM `choice bandwidth-type`）且原始 `.yang` 可解析
-- **THEN** SHALL 输出 `nodeKind:"choice"` 节点，其 `cases[]` 分组对应各 `case` 的子字段，子字段 `path` 不变
+- **WHEN** 已加载模块的 schema 树含 `choice`（如 IFM `choice bandwidth-type` 的 `bandwidth-mbps`/`bandwidth-kbps` 两 case）
+- **THEN** SHALL 输出 `type:"choice"` 节点，其 `cases[]` 分组对应各 `case` 的子字段，子字段 `path` 为扁平数据路径（不含 choice/case 段）
 
-#### Scenario: 缺原始 yang 降级
-- **WHEN** 原始 `.yang` 文件缺失或解析失败
-- **THEN** SHALL 跳过 choice 分组、退化为扁平字段并记录告警，接口 SHALL NOT 失败
+#### Scenario: 嵌套 choice
+- **WHEN** `case` 内嵌套 `container` 且其内再含 `choice`（如 IFM `damping→damp→level`）
+- **THEN** SHALL 递归呈现嵌套 `type:"choice"` 节点，各层子字段 `path` 均剥除本层 choice/case 段、保留 container 段
+
+#### Scenario: 无 choice 的模块
+- **WHEN** 模块 schema 树不含任何 `choice`
+- **THEN** SHALL 退化为原有扁平/嵌套字段输出，接口 SHALL NOT 失败（R08）

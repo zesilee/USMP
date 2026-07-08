@@ -40,7 +40,10 @@
         <el-form ref="formRef" :model="formData" :rules="rules" label-position="top" class="config-form">
           <el-form-item v-for="field in visibleFields" :key="field.path" :label="field.label"
             :prop="keyOf(field)">
-            <FieldRenderer :field="field" :model-value="formData[keyOf(field)]"
+            <!-- choice：成员扁平同级，传 scope 切片并按成员键 reconcile 回写 -->
+            <FieldRenderer v-if="field.type === 'choice'" :field="field" :model-value="choiceScope(field)"
+              @update:model-value="onChoiceUpdate(field, $event)" />
+            <FieldRenderer v-else :field="field" :model-value="formData[keyOf(field)]"
               @update:model-value="formData[keyOf(field)] = $event" />
           </el-form-item>
         </el-form>
@@ -101,10 +104,10 @@ const flowActive = computed(() => submitFlow.phase.value !== 'idle')
 const flowDone = computed(() => submitFlow.progress.value.done || submitFlow.timedOut.value)
 
 // 实时差异（表单期望值 ↔ 已回填实际态）；下发按钮 = 有改动 && 无缺失必填。
-const diff = computed(() => computeDiff(formData, original.value, visibleFields.value))
+const diff = computed(() => computeDiff(formData, original.value, flatFields.value))
 // pattern 违例：可见字段中非空值不匹配其 YANG 正则者（空值交给 required）。
 const patternViolations = computed(() =>
-  visibleFields.value.filter((f) => {
+  flatFields.value.filter((f) => {
     const re = compilePattern(f.pattern)
     if (!re) return false
     const v = formData[keyOf(f)]
@@ -115,13 +118,36 @@ const patternViolations = computed(() =>
 const submittable = computed(
   () =>
     diff.value.length > 0 &&
-    missingRequired(visibleFields.value, formData, props.options.keyField).length === 0 &&
+    missingRequired(flatFields.value, formData, props.options.keyField).length === 0 &&
     engine.mustViolations.value.length === 0 &&
     patternViolations.value.length === 0,
 )
 
 function keyOf(f: Field): string {
   return f.path.split('/').filter(Boolean).pop() || f.path
+}
+
+// ===== choice 展开 =====
+// choice 成员字段与其它字段同级（扁平 path），故 formData 里以成员叶名为键。以下把 choice
+// 展开成其成员字段（供 diff/下发/校验消费），并提供 scope 切片与回写 reconcile 给渲染层。
+function choiceMemberFields(field: Field): Field[] {
+  return (field.cases || []).flatMap((c) => c.fields || [])
+}
+function choiceMemberKeys(field: Field): string[] {
+  return choiceMemberFields(field).map(keyOf)
+}
+// 传给 choice FieldRenderer 的 scope：仅含该 choice 的成员键切片。
+function choiceScope(field: Field): Record<string, any> {
+  const o: Record<string, any> = {}
+  for (const k of choiceMemberKeys(field)) if (k in formData) o[k] = formData[k]
+  return o
+}
+// choice 成员回写：按成员键 set / delete（emit 省略的键=切换 case 已清空的非激活分支）。
+function onChoiceUpdate(field: Field, next: Record<string, any>) {
+  for (const k of choiceMemberKeys(field)) {
+    if (next[k] === undefined) delete formData[k]
+    else formData[k] = next[k]
+  }
 }
 
 // 编译 YANG pattern 为 RegExp；非法正则返回 null（降级为不校验 + 告警，R08）。
@@ -141,9 +167,15 @@ function compilePattern(pattern?: string): RegExp | null {
 const engine = useConstraintEngine(cfg.fields, formData)
 const visibleFields = computed(() => cfg.fields.value.filter((f) => engine.isVisible(f)))
 
+// 校验/差异/下发以「扁平叶字段」为单位：choice 展开为各 case 成员字段（与其它字段同级）。
+// 非激活 case 的成员键在切换时已从 formData 清除，故展开全部 case 也只有激活成员携带值。
+const flatFields = computed(() =>
+  visibleFields.value.flatMap((f) => (f.type === 'choice' ? choiceMemberFields(f) : [f])),
+)
+
 // 下发 payload：仅保留当前可见字段对应的键（隐藏字段按 YANG when 语义视为不存在）。
 function visiblePayload(): Record<string, any> {
-  const keys = new Set(visibleFields.value.map(keyOf))
+  const keys = new Set(flatFields.value.map(keyOf))
   const out: Record<string, any> = {}
   for (const k of Object.keys(formData)) if (keys.has(k)) out[k] = formData[k]
   return out
@@ -227,7 +259,7 @@ async function submit() {
   }
   // 权威门禁（§9：不提交、行内提示 YANG 约束）：缺必填或 must 违例一律拦截。
   if (
-    missingRequired(visibleFields.value, formData, props.options.keyField).length > 0 ||
+    missingRequired(flatFields.value, formData, props.options.keyField).length > 0 ||
     engine.mustViolations.value.length > 0 ||
     patternViolations.value.length > 0
   ) {
