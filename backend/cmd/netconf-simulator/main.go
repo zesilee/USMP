@@ -19,10 +19,16 @@ import (
 func main() {
 	addr := flag.String("addr", "0.0.0.0", "bind address")
 	port := flag.Int("port", 830, "NETCONF SSH port (0 = random free port)")
+	seed := flag.Bool("seed", true, "load the demo IFM running-config seed (5 interfaces)")
 	flag.Parse()
 
 	sim := netconfsim.NewSimulator()
 	sim.SetListen(*addr, *port)
+	if *seed {
+		// staging 演示种子：3 main-interface/200GE/up + 2 sub-interface/Vlanif/down，
+		// 供通用模块控制台的表格/高级搜索/行级 when 冒烟断言。
+		sim.SetRunningConfigXML([]byte(netconfsim.DemoSeedConfig))
+	}
 
 	if err := sim.Start(); err != nil {
 		log.Fatalf("start netconf-simulator: %v", err)

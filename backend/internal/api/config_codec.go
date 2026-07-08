@@ -38,7 +38,9 @@ func decodeRunningConfig(path string, data interface{}) interface{} {
 		return data
 	}
 
-	js, err := ygot.EmitJSON(parsed, &ygot.EmitJSONConfig{Format: ygot.RFC7951})
+	// SkipValidation：回读是「展示设备真值」，设备侧值不合本地 pattern（如子接口
+	// number 带小数点）不应让整个回读降级成不透明 XML（R08）；写路径校验不受影响。
+	js, err := ygot.EmitJSON(parsed, &ygot.EmitJSONConfig{Format: ygot.RFC7951, SkipValidation: true})
 	if err != nil {
 		return data
 	}
