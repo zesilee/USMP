@@ -98,6 +98,7 @@ func leafToField(leaf schema.LeafNode, group string) FieldDef {
 		Label:    leaf.Name(),
 		Required: leaf.Mandatory(),
 		Group:    group,
+		When:     leaf.WhenExpr(),
 	}
 	if leaf.LeafType() == schema.LeafTypeEnum {
 		for _, v := range leaf.EnumValues() {

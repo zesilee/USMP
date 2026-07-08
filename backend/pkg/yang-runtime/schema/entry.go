@@ -155,7 +155,50 @@ func entryToLeaf(e *yang.Entry, parent Node, path string, isKey bool) LeafNode {
 			leaf.defaultValue = e.Type.Default
 		}
 	}
+	leaf.whenExpr = firstExtraExpr(e.Extra["when"])
 	return leaf
+}
+
+// firstExtraExpr returns the XPath argument of the first element of a goyang
+// Entry.Extra slice (e.g. Extra["when"]/["must"]). It tolerates the two shapes
+// that occur at runtime: the ygot-unzipped JSON map ({"Name": "<xpath>"}) and the
+// goyang-parsed *yang.Value struct (exported Name field). Returns "" if absent or
+// unrecognized — callers degrade gracefully (R08), never panic.
+func firstExtraExpr(extra []interface{}) string {
+	for _, v := range extra {
+		if s := extraExprName(v); s != "" {
+			return s
+		}
+	}
+	return ""
+}
+
+func extraExprName(v interface{}) string {
+	switch t := v.(type) {
+	case nil:
+		return ""
+	case map[string]interface{}:
+		if s, ok := t["Name"].(string); ok {
+			return s
+		}
+		return ""
+	case interface{ NName() string }:
+		return t.NName()
+	}
+	// Reflection fallback for structs (e.g. *yang.Value) with an exported Name.
+	rv := reflect.ValueOf(v)
+	for rv.Kind() == reflect.Ptr {
+		if rv.IsNil() {
+			return ""
+		}
+		rv = rv.Elem()
+	}
+	if rv.Kind() == reflect.Struct {
+		if f := rv.FieldByName("Name"); f.IsValid() && f.Kind() == reflect.String {
+			return f.String()
+		}
+	}
+	return ""
 }
 
 // mapLeafType maps a resolved goyang YANG type to the framework LeafType.

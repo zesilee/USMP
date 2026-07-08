@@ -300,6 +300,7 @@ type defaultLeaf struct {
 	enumValues   []string
 	mandatory    bool
 	units        string
+	whenExpr     string
 }
 
 // LeafType implements LeafNode interface
@@ -330,6 +331,16 @@ func (l *defaultLeaf) Mandatory() bool {
 // Units implements LeafNode interface
 func (l *defaultLeaf) Units() string {
 	return l.units
+}
+
+// WhenExpr implements LeafNode interface
+func (l *defaultLeaf) WhenExpr() string {
+	return l.whenExpr
+}
+
+// SetWhenExpr sets the leaf's YANG `when` XPath expression.
+func (l *defaultLeaf) SetWhenExpr(expr string) {
+	l.whenExpr = expr
 }
 
 // NewLeaf creates a new leaf node

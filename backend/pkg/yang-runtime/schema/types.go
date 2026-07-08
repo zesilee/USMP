@@ -137,6 +137,9 @@ type LeafNode interface {
 	Mandatory() bool
 	// Units returns the units string, empty if none
 	Units() string
+	// WhenExpr returns the leaf's YANG `when` XPath expression, "" if none.
+	// Drives data-driven conditional visibility in the dynamic form (R05).
+	WhenExpr() string
 }
 
 // LeafListNode represents a YANG leaf-list node
