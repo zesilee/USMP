@@ -66,13 +66,21 @@ func nodeToNestedField(node schema.Node) FieldDef {
 		}
 		return f
 	case schema.ListNode:
-		f := FieldDef{Path: n.Path(), Type: "list", Label: n.Name()}
+		f := FieldDef{Path: n.Path(), Type: "list", Label: n.Name(), OperationExclude: n.OperationExcludes()}
 		for _, ch := range n.Children() {
 			f.Fields = append(f.Fields, nodeToNestedField(ch))
 		}
 		return f
 	case schema.ContainerNode:
-		f := FieldDef{Path: n.Path(), Type: "group", Label: n.Name()}
+		// presence 容器 + 容器级 when/must 一并透出（BR-08）：presence=开关语义，
+		// must 门禁该节点能否存在（如 IFM ipv4-conflict-enable）。
+		f := FieldDef{
+			Path: n.Path(), Type: "group", Label: n.Name(),
+			Presence: n.IsPresence(), When: n.WhenExpr(), OperationExclude: n.OperationExcludes(),
+		}
+		for _, expr := range n.MustExprs() {
+			f.Must = append(f.Must, MustRule{Expr: expr, Message: n.Description()})
+		}
 		for _, ch := range n.Children() {
 			f.Fields = append(f.Fields, nodeToNestedField(ch))
 		}
@@ -117,6 +125,11 @@ func leafToField(leaf schema.LeafNode, group string) FieldDef {
 		Required: leaf.Mandatory(),
 		Group:    group,
 		When:     leaf.WhenExpr(),
+		// 厂商呈现扩展（BR-07）：supportFilter 驱动高级搜索，operationExclude 驱动
+		// 编辑态字段禁用/操作门禁；isKey 供通用控制台派生 keyField。
+		SupportFilter:    leaf.SupportFilter(),
+		OperationExclude: leaf.OperationExcludes(),
+		IsKey:            leaf.IsKey(),
 	}
 	if leaf.LeafType() == schema.LeafTypeEnum {
 		for _, v := range leaf.EnumValues() {
