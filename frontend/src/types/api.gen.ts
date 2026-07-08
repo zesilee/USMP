@@ -509,6 +509,11 @@ export interface components {
             logs?: components["schemas"]["api.LogEntry"][];
             total?: number;
         };
+        "api.CaseDef": {
+            fields?: components["schemas"]["api.FieldDef"][];
+            label?: string;
+            name?: string;
+        };
         "api.ConfigGetData": {
             cache_age_seconds?: number;
             cached?: boolean;
@@ -548,6 +553,11 @@ export interface components {
             username?: string;
         };
         "api.FieldDef": {
+            /**
+             * @description Cases 承载 YANG `choice` 的互斥分支：type=choice 时非空，每个 case 携带自身子字段。
+             *     前端据此渲染 Tabs/RadioGroup（BR-06）。case 子字段 path 为扁平数据路径。
+             */
+            cases?: components["schemas"]["api.CaseDef"][];
             default?: unknown;
             /**
              * @description Fields 承载嵌套子字段：type=group（单个嵌套对象）/ type=list（可重复列表）时非空。
