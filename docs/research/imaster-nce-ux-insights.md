@@ -104,6 +104,41 @@
 
 ---
 
+## 3.5 一致性审计 —— USMP 当前实现 vs 华为"哑终端"理想（2026-07-08，代码核对 @origin/main）
+
+> 命题:华为把"渲染决策"从前端代码抽走、变成模型元数据,前端渲染器纯执行 `render-*` 注解 → ①新字段不改前端 ②"怎么渲染"进契约。
+> **审计结论:USMP 约 2/3 一致——数据+抽象类型+领域门禁已模型驱动(哑终端成立);但纯呈现决策仍是前端启发式,未进模型/契约。命中后果①,半中后果②。**
+
+### ✅ 已是哑终端(渲染器只执行,不判断)
+| 决策 | 驱动来源 | 证据 |
+|------|---------|------|
+| 控件类型 input/switch/select/number | 后端从 YANG leaf 类型派生 | `backend/internal/api/field_gen.go:162` `fieldType(leaf.LeafType())`；前端 `FieldRenderer.vue:5,26,34` `v-if field.type===x` 仅执行 |
+| 必填/isKey/create-only 禁用 | YANG `isKey`/`operationExclude` | `field_gen.go:132,69` → `utils/moduleConsole.ts:63,76` |
+| presence 开关 / when 条件可见 | YANG `presence`/`when` | `field_gen.go:78`；`FieldRenderer.vue:52`、`moduleConsole.ts:119` |
+| 高级搜索字段 | 厂商 `ext:support-filter` | `moduleConsole.ts:95` `filterableFields` |
+
+→ 加新模块/字段零前端代码（`/yang/schema`→FieldDef→渲染器）。**命中华为后果①。**
+
+### ⚠️ 仍是前端业务判断(华为会放进模型注解)
+| 前端自拍的渲染决策 | 证据 | 华为对应注解 |
+|-----------------|------|-------------|
+| 控件变体不可覆盖(enum 恒 select、string 恒 input;无法从模型指定 segmented/password/textarea) | `FieldRenderer.vue:33,4`;FieldDef **无 `Widget` 字段** | widget 注解 |
+| 列选择+优先级+封顶9 是前端算法 | `moduleConsole.ts:72-92` `deriveColumns`(key→identity→when→enum→其余,cap=9) | `render-view`/`render-in-view`/`insert-before` |
+| Tab/视图切分是前端启发式 | `moduleConsole.ts:30-60` `deriveTabs` | `render-view` |
+| choice 用 radio 还是 tabs 是前端阈值 | `FieldRenderer.vue:231` `choiceUsesRadio` | case 呈现注解 |
+| 字段顺序=schema 顺序,不可从模型调 | 无 `Order` 字段 | `insert-before/after` |
+| 状态色 up→绿/down→红 硬编码 | `moduleConsole.ts:135` `statusTone` | 值映射注解 |
+
+→ 这些改动要动前端代码,且**不在契约里**（`make gen-contract` 漂移门禁管不到）。**华为后果② 仅半中**：领域门禁(`support-filter`/`operation-exclude`/`presence`/`isKey`)进了契约,纯呈现决策没进。
+
+### 差距本质与闭合路径（= 路线图 P3'+P1' 的立项依据）
+USMP 把**数据契约**做成模型驱动,但**呈现契约**只做了一半:领域语义进模型,纯呈现语义(长什么样/排什么序/切几个视图)还在前端。当前是**"类型驱动"**而非华为的**"注解驱动"**。闭合:
+1. 后端 FieldDef 加 `Widget`/`Order`/`View` 字段,从 `Entry.Exts` 读 `ext:ui-widget`/`ext:ui-order`/`ext:ui-view`（复用已验证的 `ext:*` 消费管线）
+2. 前端 `deriveColumns`/`deriveTabs`/`choiceUsesRadio` 从"算法决定"改为"注解优先、算法兜底"
+3. 新注解纳入 `make gen-contract` 漂移门禁 → 呈现决策才真正进契约
+
+---
+
 ## 4. 查证边界
 
 - ✅ **确凿(一手原文/截图)**:AOC/SND 架构、四件套自动生成、render-* 扩展语句、Jinja2 南向模板、NE8000/S6720 交换机 SND 示例(引自《开放可编程 V100R023C00 开发指南》643 页);§2 三张 UI 截图为**实际渲染看过**的真实 iMaster NCE-Campus 后台(Campus 版,与 Fabric 版共用 NCE 设计系统)。
