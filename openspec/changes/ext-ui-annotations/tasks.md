@@ -44,6 +44,6 @@
 
 ## 7. 收口
 
-- [ ] 7.1 全量验证：后端 `go test ./...`（含 -race）、前端单测 + `vue-tsc` + gen-contract 漂移检查全绿
-- [ ] 7.2 覆盖率对齐棘轮（后端 57 / 前端 73/70/65/73），补测后按需上调基线
-- [ ] 7.3 `go-code-review-check` + What/Why/How 提交整理，PR ≤1000 行自检
+- [x] 7.1 全量验证：后端 `go test ./...`（含 -race）、前端单测 + `vue-tsc` + gen-contract 漂移检查全绿
+- [x] 7.2 覆盖率对齐棘轮（后端 57 / 前端 73/70/65/73），补测后按需上调基线
+- [x] 7.3 `go-code-review-check` + What/Why/How 提交整理，PR ≤1000 行自检
