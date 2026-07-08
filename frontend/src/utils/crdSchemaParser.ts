@@ -15,6 +15,8 @@ export interface Field {
   fields?: Field[]
   // when 携带 YANG `when` XPath 表达式（后端从 schema 透出），驱动数据驱动的条件显隐（FE-07）。
   when?: string
+  // must 携带 YANG `must` 约束（XPath 表达式 + 可选提示），驱动跨字段校验（FE-07）。
+  must?: { expr: string; message?: string }[]
 }
 
 interface OpenAPIProperty {

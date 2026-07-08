@@ -103,7 +103,10 @@ const flowDone = computed(() => submitFlow.progress.value.done || submitFlow.tim
 // 实时差异（表单期望值 ↔ 已回填实际态）；下发按钮 = 有改动 && 无缺失必填。
 const diff = computed(() => computeDiff(formData, original.value, visibleFields.value))
 const submittable = computed(
-  () => diff.value.length > 0 && missingRequired(visibleFields.value, formData, props.options.keyField).length === 0,
+  () =>
+    diff.value.length > 0 &&
+    missingRequired(visibleFields.value, formData, props.options.keyField).length === 0 &&
+    engine.mustViolations.value.length === 0,
 )
 
 function keyOf(f: Field): string {
@@ -147,6 +150,16 @@ const rules = computed<FormRules>(() => {
     if (f.type === 'number' && (f.minimum != null || f.maximum != null)) {
       list.push({ type: 'number', min: f.minimum, max: f.maximum, message: `${f.label} 超出范围`, trigger: ['change', 'blur'] })
     }
+    // YANG must 跨字段约束：以约束引擎为唯一真源，命中违例则行内报错（§9 行内提示）。
+    if (f.must?.length) {
+      list.push({
+        validator: (_rule: unknown, _value: unknown, cb: (e?: Error) => void) => {
+          const v = engine.mustViolations.value.find((x) => x.path === f.path)
+          cb(v ? new Error(v.message) : undefined)
+        },
+        trigger: ['change', 'blur'],
+      })
+    }
     if (list.length) r[key] = list
   }
   return r
@@ -176,13 +189,21 @@ function openEdit(row: Record<string, any>) {
 
 async function submit() {
   if (!selectedDevice.value) return
-  // 表单校验不通过则不提交（§9：不提交、行内提示 YANG 约束）
+  // 先跑 el-form 校验以在行内显示错误（必填/范围/must）。EP 部分版本 validate() 对失败
+  // 是 resolve(false) 而非 reject，故不能只靠它拦截。
   if (formRef.value) {
     try {
       await formRef.value.validate()
     } catch {
-      return
+      /* 忽略 reject：下面以约束引擎为权威判定是否放行 */
     }
+  }
+  // 权威门禁（§9：不提交、行内提示 YANG 约束）：缺必填或 must 违例一律拦截。
+  if (
+    missingRequired(visibleFields.value, formData, props.options.keyField).length > 0 ||
+    engine.mustViolations.value.length > 0
+  ) {
+    return
   }
   // 下发 → 回读 → 轮询对账（真实进度由 ReconcileSteps 展示）。
   // 只下发当前可见字段：被 when 隐藏的字段按 YANG 语义视为不存在，不入 payload。

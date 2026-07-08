@@ -28,20 +28,45 @@ export function useConstraintEngine(
     return map
   })
 
-  const warnings = computed<string[]>(() => {
-    const ctx = toValue(formData) ?? {}
-    const w: string[] = []
-    for (const f of toValue(fields) ?? []) {
-      if (!f.when) continue
-      const r = evalPredicate(f.when, ctx)
-      if ('error' in r && r.error) w.push(`[${f.path}] when 解析失败：${r.error}`)
-    }
-    return w
-  })
-
   function isVisible(f: Field): boolean {
     return visibleMap.value[f.path] ?? true
   }
 
-  return { visibleMap, warnings, isVisible }
+  // must 违例：仅对当前可见字段（when=false 的节点视为不存在，其 must 不适用）逐条求值。
+  // 违反 → 收集 { path, label, message }（message 兜底：优先 YANG 提示，否则生成含标签的通用提示）。
+  const mustViolations = computed<{ path: string; label: string; message: string }[]>(() => {
+    const ctx = toValue(formData) ?? {}
+    const vmap = visibleMap.value
+    const out: { path: string; label: string; message: string }[] = []
+    for (const f of toValue(fields) ?? []) {
+      if (!f.must?.length) continue
+      if (!(vmap[f.path] ?? true)) continue // 隐藏字段跳过
+      for (const rule of f.must) {
+        const r = evalPredicate(rule.expr, ctx)
+        if ('value' in r && r.value === false) {
+          out.push({ path: f.path, label: f.label, message: rule.message || `${f.label}：不满足约束 ${rule.expr}` })
+        }
+      }
+    }
+    return out
+  })
+
+  // 告警汇总：when 与 must 表达式解析失败（降级、不阻断）。
+  const warnings = computed<string[]>(() => {
+    const ctx = toValue(formData) ?? {}
+    const w: string[] = []
+    for (const f of toValue(fields) ?? []) {
+      if (f.when) {
+        const r = evalPredicate(f.when, ctx)
+        if ('error' in r && r.error) w.push(`[${f.path}] when 解析失败：${r.error}`)
+      }
+      for (const rule of f.must ?? []) {
+        const r = evalPredicate(rule.expr, ctx)
+        if ('error' in r && r.error) w.push(`[${f.path}] must 解析失败：${r.error}`)
+      }
+    }
+    return w
+  })
+
+  return { visibleMap, warnings, mustViolations, isVisible }
 }
