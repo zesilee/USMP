@@ -35,6 +35,7 @@
           v-for="m in businessModules"
           :key="m.name"
           :index="`/module/${m.name}`"
+          :data-test="`module-item-${m.name}`"
         >
           {{ m.title }}
         </el-menu-item>

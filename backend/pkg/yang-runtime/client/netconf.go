@@ -984,6 +984,13 @@ type ifmInterfaceXML struct {
 	AdminStatus *uint64 `xml:"admin-status"`
 	Mtu         *uint32 `xml:"mtu"`
 	Type        *uint64 `xml:"type"`
+	// 标识/呈现叶（通用控制台表格列）：此前回读不透出 → 前端列恒空、
+	// 种子/真机数据无法展示（同「回读解析恒空」根因谱系）。
+	Class        *uint64 `xml:"class"`
+	ParentName   *string `xml:"parent-name"`
+	Number       *string `xml:"number"`
+	LinkProtocol *uint64 `xml:"link-protocol"`
+	RouterType   *uint64 `xml:"router-type"`
 }
 
 // vlanMemberPortXML / vlanEntryXML are plain intermediate structs for decoding a device
@@ -1152,6 +1159,21 @@ func ParseHuaweiIfmInterfacesXML(data []byte) (*huawei.HuaweiIfm_Ifm_Interfaces,
 		}
 		if x.Type != nil {
 			entry.Type = huawei.E_HuaweiIfm_PortType(*x.Type)
+		}
+		if x.Class != nil {
+			entry.Class = huawei.E_HuaweiIfm_ClassType(*x.Class)
+		}
+		if x.ParentName != nil {
+			entry.ParentName = x.ParentName
+		}
+		if x.Number != nil {
+			entry.Number = x.Number
+		}
+		if x.LinkProtocol != nil {
+			entry.LinkProtocol = huawei.E_HuaweiIfm_LinkProtocol(*x.LinkProtocol)
+		}
+		if x.RouterType != nil {
+			entry.RouterType = huawei.E_HuaweiIfm_RouterType(*x.RouterType)
 		}
 
 		key := x.Name

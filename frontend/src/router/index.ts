@@ -17,37 +17,15 @@ const routes = [
     name: 'module-console',
     component: () => import('../views/ModuleConsolePage.vue')
   },
+  // 旧配置页路由迁移到通用模块控制台（FE-13）：保留书签可达。
+  // DeviceConfigPage.vue 暂存（无路由引用），新控制台稳定后随后续 change 删除。
   {
     path: '/config/interface',
-    name: 'interface',
-    component: () => import('../views/DeviceConfigPage.vue'),
-    props: {
-      title: '接口配置（华为）',
-      addLabel: '新增接口',
-      options: { module: 'ifm', configPath: 'ifm:ifm/ifm:interfaces', itemListSuffix: '/interface', listKey: 'interface', keyField: 'name' },
-      columns: [
-        { prop: 'name', label: '接口名', width: 200 },
-        { prop: 'description', label: '描述' },
-        { prop: 'admin-status', label: '管理状态', width: 120 },
-        { prop: 'mtu', label: 'MTU', width: 100 }
-      ]
-    }
+    redirect: '/module/ifm'
   },
   {
     path: '/config/vlan',
-    name: 'vlan',
-    component: () => import('../views/DeviceConfigPage.vue'),
-    props: {
-      title: 'VLAN 配置（华为）',
-      addLabel: '新增 VLAN',
-      options: { module: 'vlan', configPath: 'huawei-vlan:vlan/vlans', itemListSuffix: '/vlan', listKey: 'vlans', keyField: 'id' },
-      columns: [
-        { prop: 'id', label: 'VLAN ID', width: 120 },
-        { prop: 'name', label: '名称', width: 180 },
-        { prop: 'description', label: '描述' },
-        { prop: 'admin-status', label: '管理状态', width: 120 }
-      ]
-    }
+    redirect: '/module/vlan'
   },
   {
     path: '/config/route',

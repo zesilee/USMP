@@ -36,22 +36,21 @@
 - [x] 3.4 [红] 操作门禁：编辑抽屉中 operationExclude∋update 字段禁用（新增态可编）；
       list 级 exclude 隐藏对应按钮
 - [x] 3.5 [绿] `components/config/ModuleListTab.vue`（drawer/对账流复用既有 composable）
-- [ ] 3.6 review + commit
+- [x] 3.6 review + commit
 
 ## P4 · 表单 Tab + presence（PR-2 收尾或 PR-3，F2）
 - [x] 4.1 [红] presence：`ipv4-conflict-enable` 形 group→开关、关=键不存在、
       `ipv4-ignore-primary-sub=true` 时开关禁用并强制关、求值失败降级可用
 - [x] 4.2 [红] 全局属性表单：statistic-interval range 10..600 + must mod10 违例行内报错并拦截提交
 - [x] 4.3 [绿] `FieldRenderer` presence 分支 + `components/config/ModuleFormTab.vue`（GET/POST 路径派生、后端不支持路径错误透出）
-- [ ] 4.4 review + commit
+- [x] 4.4 review + commit
 
 ## P5 · 导航/路由迁移 + 种子 + 冒烟（PR-3）
 - [x] 5.1 [红/绿] Sidebar 业务菜单模型驱动（menu store businessModules；失败回退硬编码，F2）
-- [ ] 5.2 [绿] `/config/interface`、`/config/vlan` redirect `/module/…`
-- [ ] 5.3 [绿] netconfsim ifm 种子 5 条（design §3）
-- [ ] 5.4 [红/绿] F4 staging-smoke：/module/huawei-ifm 渲染 Tab、种子行、class 过滤、
-      全局属性 Tab must 拦截
-- [ ] 5.5 覆盖率棘轮上调（T08）+ review + commit
+- [x] 5.2 [绿] `/config/interface`、`/config/vlan` redirect `/module/…`
+- [x] 5.3 [绿] netconfsim ifm 种子 5 条（design §3）+ 回读解析扩标识叶（class/parent-name/number/link-protocol/router-type）
+- [x] 5.4 [红/绿] F4 staging-smoke：控制台重定向/Tab 派生/种子行/class 过滤/when 显隐/SPA 模块切换（must 拦截由 F2 覆盖）
+- [x] 5.5 覆盖率棘轮上调（前端 73/70/65/73、后端 56→57，T08）+ review + commit
 
 ## 收尾
 - [ ] 6.1 `/opsx:sync` delta→主 spec；`openspec validate` 改动能力全绿
