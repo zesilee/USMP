@@ -8,6 +8,8 @@ worktree: (未创建)
 change: (每阶段独立 OpenSpec change)
 updated: 2026-07-08
 evidence: docs/research/imaster-nce-ux-insights.md
+p0_done: generic-module-console 已合入 main (#121/#123/#124, 2026-07-08)
+next: P3' 扩展 ext:* 注解词汇（主线）；P1' 保真微调低优先
 ---
 
 ## 目标
@@ -17,24 +19,24 @@ evidence: docs/research/imaster-nce-ux-insights.md
 
 本任务是**跨会话总跟踪器**（防止长周期迭代中漏做后续阶段）；每阶段真正开工时再各自 `/opsx:propose` 建 change。
 
-## ⚠️ 对账结论（2026-07-08，与 [[generic-module-console]] 存量核对后校准）
+## ⚠️ 对账结论（2026-07-08，与 [[generic-module-console]] 存量核对后校准；P0 已合入后二次刷新）
 
-**原路线图是盲写的，与已交付/在途的 `generic-module-console` 分支重叠严重，剩余工作量被大幅高估。经代码核对（非仅记忆）校准：**
+**原路线图是盲写的，与 `generic-module-console` 重叠严重、剩余工作量被大幅高估。经代码核对（非仅记忆）校准：**
 
-- **前置：`generic-module-console` 分支（未合 main，基于 52a5a36=#119）先合入。** 它交付了模型驱动通用控制台 `/module/:module`（左导航 /yang/modules 驱动 + 面包屑+一级 Tab，零 per-module 前端代码），并**退役** DeviceConfigPage/frontend-yang-dynamic-form。本路线图所有阶段都应叠在它之上，**不要**再基于已退役组件。
+- **✅ P0 已完成：`generic-module-console` 已合入 main（PR #121 呈现扩展透出 → #123 通用控制台 → #124 sync+归档）。** 它交付了模型驱动通用控制台 `/module/:module`（左导航 /yang/modules 驱动 + 面包屑+一级 Tab，零 per-module 前端代码），并**退役** DeviceConfigPage/frontend-yang-dynamic-form（`/config/interface`·`/config/vlan` 已 redirect 到 `/module/*`）。本路线图所有剩余阶段都叠在它之上，**不要**再基于已退役组件。
 - **P1 渲染器 ~80% 已交付**：`FieldRenderer.vue` 已映射 string→input / number→input-number / boolean→switch / enum→select / group / **presence→switch** / leaf-list / **choice→radio** / list。剩余仅**保真微调**（enum≤3→segmented、leafref→transfer、设计 token），不是一个完整 Phase。
 - **P2 视图切分已交付**：模块根派生 Tab + 左导航已在 module console 里。仅「下发 Stepper」可能是新增，且当前是单个「下发」按钮 → 低优先。
 - **P3 注解机制已在跑**：华为 `ext:support-filter`/`ext:operation-exclude` 已从 goyang `Entry.Exts` 消费，FieldDef 已带 supportFilter/operationExclude/presence/isKey，`make gen-contract` 漂移门禁已存在。**「注解存 YANG extension vs sidecar JSON」的分叉已被现实解答：走 YANG extension（Entry.Exts/Extra）。** P3 从「绿地战略赌注」降级为「扩展已验证的注解词汇表」，风险大减。
 - **P4 删除语义债已定位**：删除按钮按门禁渲染但**禁用**（后端 /config 无 DELETE、POST 合并语义）→ 精确已知起点。声明式 SND 仍是绿地后端。
 
-**校准后的真实路线（见下方 [x]/[ ] 已更新）：先合 module-console，再做 P1' 保真微调（可选低优先），P3' 扩展注解词汇（去风险后的主线），P4 删除语义+SND（最后）。P2 基本已完成。**
+**校准后的真实路线（P0 已合入，均已代码核验 @origin/main）：主线 = P3' 扩展注解词汇（机制已在跑、去风险）；P1' 保真微调（segmented/transfer/token 均未做，低优先）；P2 视图切分已完成、仅下发 Stepper 可选；P4 删除语义（删除按钮仍禁用、后端 /config 无 DELETE 已确认）+ 声明式 SND 最后做。**
 
 ## 路线图与进度（已按对账校准）
 
-### [ ] P0 — 前置：合入 `generic-module-console` 分支｜真正的下一步
-- 未合 main，基于 52a5a36（=#119），PR 前须 `rebase --onto origin/main 52a5a36`（[[generic-module-console]] 记）
-- 它交付模型驱动通用控制台 + FieldRenderer + 注解消费管线，是后续所有阶段的地基
-- **本任务后续阶段全部叠在它合入之后**；未合入前不要另起 P1'/P3'
+### [x] P0 — 前置：合入 `generic-module-console`｜已完成
+- ✅ 已合入 main：PR #121（呈现扩展透出 support-filter/operation-exclude/presence/isKey）→ #123（通用控制台 FE-10~13）→ #124（sync 主 spec + 归档）
+- 交付模型驱动通用控制台 `/module/:module` + `FieldRenderer.vue` + `ext:*` 注解消费管线，是后续所有阶段的地基
+- 覆盖率棘轮已上调：后端 57、前端 73/70/65/73（改这块前对齐，见 [[test-governance-military-rules]]）
 
 ### [~] P1' — NCE 保真微调（洞察 G + F）｜大部分已由 FieldRenderer 交付，仅剩微调，低优先
 - [x] 类型→控件主映射已在 `FieldRenderer.vue`（string/number/boolean/enum/group/presence/leaf-list/choice/list）
