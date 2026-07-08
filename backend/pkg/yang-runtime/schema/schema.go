@@ -103,6 +103,14 @@ type defaultNode struct {
 	schemaPath  string
 	nodeType    NodeType
 	parent      Node
+	// readOnly marks state data (`config false`, inherited down the subtree per
+	// YANG semantics — BR-09). Set once at build time, immutable afterwards (R09).
+	readOnly bool
+}
+
+// ReadOnly implements Node interface
+func (n *defaultNode) ReadOnly() bool {
+	return n.readOnly
 }
 
 // Name implements Node interface

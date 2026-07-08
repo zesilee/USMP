@@ -96,6 +96,10 @@ type Node interface {
 	Parent() Node
 	// SchemaPath returns the schema path in the module
 	SchemaPath() string
+	// ReadOnly reports whether this node is state data (YANG `config false`,
+	// including inheritance from an ancestor — BR-09). Read-only nodes render
+	// as non-editable views and never enter a device write payload.
+	ReadOnly() bool
 }
 
 // ContainerNode represents a YANG container node

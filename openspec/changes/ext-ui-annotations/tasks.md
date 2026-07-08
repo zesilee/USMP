@@ -5,10 +5,10 @@
 
 ## 1. S1 后端：config-false → Readonly 透出（B1+B3）
 
-- [ ] 1.1 B1 红：`schema/entry_readonly_test.go` 表格驱动——`config false` 子树根/后代/config-true 兄弟/混合容器叶（含 race）
-- [ ] 1.2 绿：`entry.go` 构树时下推继承只读（design D1），Node/LeafNode 增 `ReadOnly()` 存取器
-- [ ] 1.3 B3 红：`field_gen` 测试——readonly 落 FieldDef（容器/list/叶一致）、config-true 无键（omitempty）
-- [ ] 1.4 绿：`field_gen.go` 填充既有 `FieldDef.Readonly`
+- [x] 1.1 B1 红：`schema/entry_readonly_test.go` 表格驱动——`config false` 子树根/后代/config-true 兄弟/混合容器叶（含 race）
+- [x] 1.2 绿：`entry.go` 构树时下推继承只读（design D1），Node/LeafNode 增 `ReadOnly()` 存取器
+- [x] 1.3 B3 红：`field_gen` 测试——readonly 落 FieldDef（容器/list/叶一致）、config-true 无键（omitempty）
+- [x] 1.4 绿：`field_gen.go` 填充既有 `FieldDef.Readonly`
 
 ## 2. S2+S3 后端：dynamic-default + units 透出（B1+B3）
 

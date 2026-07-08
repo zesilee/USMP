@@ -88,36 +88,40 @@ func entryNamespace(e *yang.Entry) string {
 
 // entryToModule wraps a top-level container entry as a Module tagged with vendor.
 func entryToModule(e *yang.Entry, vendor string) Module {
-	root := entryToContainer(e, nil, "/"+e.Name)
+	root := entryToContainer(e, nil, "/"+e.Name, false)
 	m := NewModule(e.Name, entryNamespace(e), "", root).(*defaultModule)
 	m.vendor = vendor
 	return m
 }
 
-// entryToNode dispatches an entry to the appropriate node kind.
-func entryToNode(e *yang.Entry, parent Node, path string) Node {
+// entryToNode dispatches an entry to the appropriate node kind. inheritedRO
+// carries an ancestor's `config false` down the subtree (YANG config inheritance,
+// BR-09).
+func entryToNode(e *yang.Entry, parent Node, path string, inheritedRO bool) Node {
 	switch {
 	case e.IsLeafList():
 		// Modeled as a leaf carrying the element type, flagged as a leaf-list so the
 		// form renders repeatable scalar values.
-		leaf := entryToLeaf(e, parent, path, false)
+		leaf := entryToLeaf(e, parent, path, false, inheritedRO)
 		if dl, ok := leaf.(*defaultLeaf); ok {
 			dl.leafList = true
 		}
 		return leaf
 	case e.IsLeaf():
-		return entryToLeaf(e, parent, path, false)
+		return entryToLeaf(e, parent, path, false, inheritedRO)
 	case e.IsList():
-		return entryToList(e, parent, path)
+		return entryToList(e, parent, path, inheritedRO)
 	default:
-		return entryToContainer(e, parent, path)
+		return entryToContainer(e, parent, path, inheritedRO)
 	}
 }
 
-func entryToContainer(e *yang.Entry, parent Node, path string) ContainerNode {
+func entryToContainer(e *yang.Entry, parent Node, path string, inheritedRO bool) ContainerNode {
 	// presence containers survive the ygot gzip round-trip under Extra["presence"]
 	// (same shape as when/must); their existence toggles a feature (BR-08).
 	c := NewContainer(e.Name, e.Description, path, parent, len(e.Extra["presence"]) > 0).(*defaultContainer)
+	ro := inheritedRO || e.Config == yang.TSFalse
+	c.readOnly = ro
 	c.whenExpr = firstExtraExpr(e.Extra["when"])
 	c.mustExprs = allExtraExprs(e.Extra["must"])
 	c.opExcludes = extOperationExcludes(e)
@@ -125,10 +129,10 @@ func entryToContainer(e *yang.Entry, parent Node, path string) ContainerNode {
 		if child.IsChoice() {
 			// A choice contributes no data-path segment: its case members inherit
 			// this container's `path` so their data paths stay flat.
-			c.AddChild(entryToChoice(child, c, path))
+			c.AddChild(entryToChoice(child, c, path, ro))
 			continue
 		}
-		if n := entryToNode(child, c, path+"/"+child.Name); n != nil {
+		if n := entryToNode(child, c, path+"/"+child.Name, ro); n != nil {
 			c.AddChild(n)
 		}
 	}
@@ -138,10 +142,12 @@ func entryToContainer(e *yang.Entry, parent Node, path string) ContainerNode {
 // entryToChoice converts a goyang choice Entry to a ChoiceNode. parentPath is the
 // enclosing container/list path — case members are flattened onto it (choice and
 // case names never appear in data paths), keeping the NETCONF write path intact.
-func entryToChoice(e *yang.Entry, parent Node, parentPath string) ChoiceNode {
+func entryToChoice(e *yang.Entry, parent Node, parentPath string, inheritedRO bool) ChoiceNode {
 	ch := NewChoice(e.Name, e.Description, parentPath+"/"+e.Name, parent).(*defaultChoice)
+	ro := inheritedRO || e.Config == yang.TSFalse
+	ch.readOnly = ro
 	for _, caseEntry := range sortedDir(e) {
-		ch.AddCase(entryToCase(caseEntry, ch, parentPath))
+		ch.AddCase(entryToCase(caseEntry, ch, parentPath, ro))
 	}
 	return ch
 }
@@ -149,17 +155,19 @@ func entryToChoice(e *yang.Entry, parent Node, parentPath string) ChoiceNode {
 // entryToCase converts a goyang case Entry to a CaseNode. A "shorthand" case (a
 // bare node directly under the choice, not wrapped in `case`) is treated as an
 // implicit single-member case. Members inherit parentPath (no case segment).
-func entryToCase(e *yang.Entry, parent Node, parentPath string) CaseNode {
+func entryToCase(e *yang.Entry, parent Node, parentPath string, inheritedRO bool) CaseNode {
 	cs := NewCase(e.Name, e.Description, parentPath+"/"+e.Name, parent).(*defaultCase)
+	ro := inheritedRO || e.Config == yang.TSFalse
+	cs.readOnly = ro
 	if !e.IsCase() {
 		// Shorthand case: the entry itself is the single member node.
-		if n := caseMember(e, cs, parentPath); n != nil {
+		if n := caseMember(e, cs, parentPath, ro); n != nil {
 			cs.AddChild(n)
 		}
 		return cs
 	}
 	for _, child := range sortedDir(e) {
-		if n := caseMember(child, cs, parentPath); n != nil {
+		if n := caseMember(child, cs, parentPath, ro); n != nil {
 			cs.AddChild(n)
 		}
 	}
@@ -168,19 +176,21 @@ func entryToCase(e *yang.Entry, parent Node, parentPath string) CaseNode {
 
 // caseMember builds one member of a case, flattening onto parentPath. A choice
 // nested directly in a case (no intervening container) recurses as a nested choice.
-func caseMember(e *yang.Entry, parent Node, parentPath string) Node {
+func caseMember(e *yang.Entry, parent Node, parentPath string, inheritedRO bool) Node {
 	if e.IsChoice() {
-		return entryToChoice(e, parent, parentPath)
+		return entryToChoice(e, parent, parentPath, inheritedRO)
 	}
-	return entryToNode(e, parent, parentPath+"/"+e.Name)
+	return entryToNode(e, parent, parentPath+"/"+e.Name, inheritedRO)
 }
 
-func entryToList(e *yang.Entry, parent Node, path string) ListNode {
+func entryToList(e *yang.Entry, parent Node, path string, inheritedRO bool) ListNode {
 	keyNames := map[string]bool{}
 	for _, k := range strings.Fields(e.Key) {
 		keyNames[k] = true
 	}
 	l := NewList(e.Name, e.Description, path, parent, nil, false).(*defaultList)
+	ro := inheritedRO || e.Config == yang.TSFalse
+	l.readOnly = ro
 	l.whenExpr = firstExtraExpr(e.Extra["when"])
 	l.mustExprs = allExtraExprs(e.Extra["must"])
 	l.opExcludes = extOperationExcludes(e)
@@ -188,17 +198,17 @@ func entryToList(e *yang.Entry, parent Node, path string) ListNode {
 	for _, child := range sortedDir(e) {
 		if child.IsChoice() {
 			// Choice members are flattened onto the list path (see entryToChoice).
-			l.AddChild(entryToChoice(child, l, path))
+			l.AddChild(entryToChoice(child, l, path, ro))
 			continue
 		}
 		childPath := path + "/" + child.Name
 		var n Node
 		if child.IsLeaf() && keyNames[child.Name] {
-			leaf := entryToLeaf(child, l, childPath, true)
+			leaf := entryToLeaf(child, l, childPath, true, ro)
 			keys = append(keys, leaf)
 			n = leaf
 		} else {
-			n = entryToNode(child, l, childPath)
+			n = entryToNode(child, l, childPath, ro)
 		}
 		if n != nil {
 			l.AddChild(n)
@@ -208,8 +218,9 @@ func entryToList(e *yang.Entry, parent Node, path string) ListNode {
 	return l
 }
 
-func entryToLeaf(e *yang.Entry, parent Node, path string, isKey bool) LeafNode {
+func entryToLeaf(e *yang.Entry, parent Node, path string, isKey bool, inheritedRO bool) LeafNode {
 	leaf := NewLeaf(e.Name, e.Description, path, parent, mapLeafType(e.Type), isKey, e.Mandatory.Value()).(*defaultLeaf)
+	leaf.readOnly = inheritedRO || e.Config == yang.TSFalse
 	if e.Type != nil {
 		if e.Type.Enum != nil {
 			leaf.enumValues = append([]string(nil), e.Type.Enum.Names()...)
