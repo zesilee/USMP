@@ -1,0 +1,8 @@
+module demo-ext {
+  namespace "urn:demo:ext";
+  prefix dext;
+  extension task-name {
+    argument value;
+    description "Task domain a module belongs to.";
+  }
+}

@@ -20,10 +20,10 @@
 
 ## 3. S4 后端：task-name 构建期 codegen + /yang/modules category（B1+B3）
 
-- [ ] 3.1 B1 红：生成器测试——goyang 解析模块级 `ext:task-name`、键=根容器名、无 task-name 模块缺省
-- [ ] 3.2 绿：生成器（goyang 解析 8.20.10/ne40e-x8x16 的 huawei-vlan/ifm/system）+ go:generate 声明（与 huawei.go 相邻）+ 提交 `taskname.gen.go`
-- [ ] 3.3 B3 红：ListModules 测试——有映射附 `category`、无映射省略且不失败（R08）
-- [ ] 3.4 绿：`YangModuleInfo` 增 `Category`（omitempty）+ handler 查表填充；`make gen-contract`
+- [x] 3.1 B1 红：生成器测试——goyang 解析模块级 `ext:task-name`、键=根容器名、无 task-name 模块缺省
+- [x] 3.2 绿：生成器（goyang 解析 8.20.10/ne40e-x8x16 的 huawei-vlan/ifm/system）+ go:generate 声明（与 huawei.go 相邻）+ 提交 `taskname.gen.go`
+- [x] 3.3 B3 红：ListModules 测试——有映射附 `category`、无映射省略且不失败（R08）
+- [x] 3.4 绿：`YangModuleInfo` 增 `Category`（omitempty）+ handler 查表填充；`make gen-contract`
 
 ## 4. S1 前端：只读降级（F1+F2）
 

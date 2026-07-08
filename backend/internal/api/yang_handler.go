@@ -4,6 +4,7 @@ import (
 	"strconv"
 
 	"github.com/gin-gonic/gin"
+	"github.com/leezesi/usmp/backend/internal/yangschema"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/manager"
 )
 
@@ -15,6 +16,9 @@ type YangModuleInfo struct {
 	Path        string `json:"path"`
 	Description string `json:"description"`
 	Type        string `json:"type"`
+	// Category 是模块所属任务域（源 YANG 模块级 task-name 扩展，构建期提取，BR-01）：
+	// 驱动前端左导航分组；无映射省略（omitempty，R08）。
+	Category string `json:"category,omitempty"`
 }
 
 // FieldDef represents a schema field definition for dynamic forms
@@ -130,6 +134,7 @@ func (h *YangHandler) ListModules(c *gin.Context) {
 			Path:        "/" + root.Name(),
 			Description: root.Description(),
 			Type:        strconv.Itoa(int(root.Type())),
+			Category:    yangschema.Category(mod.Name()),
 		}
 		modules = append(modules, info)
 	}

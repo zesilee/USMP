@@ -1,0 +1,25 @@
+module demo-a {
+  namespace "urn:demo:a";
+  prefix da;
+  import demo-ext {
+    prefix dext;
+  }
+  dext:task-name "group-a";
+  container widgets {
+    leaf name {
+      type string;
+    }
+  }
+  container gadgets {
+    leaf id {
+      type string;
+    }
+  }
+  rpc reset-widgets {
+    input {
+      leaf name {
+        type string;
+      }
+    }
+  }
+}

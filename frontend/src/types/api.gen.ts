@@ -650,6 +650,11 @@ export interface components {
             success?: boolean;
         };
         "api.YangModuleInfo": {
+            /**
+             * @description Category 是模块所属任务域（源 YANG 模块级 task-name 扩展，构建期提取，BR-01）：
+             *     驱动前端左导航分组；无映射省略（omitempty，R08）。
+             */
+            category?: string;
             description?: string;
             name?: string;
             path?: string;
