@@ -13,55 +13,59 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Check OpenSpec Change Artifacts
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install OpenSpec CLI
+        run: npm install -g @fission-ai/openspec@latest
+
+      # 只校验本次 PR 改动的主 spec（openspec/specs/<cap>/spec.md）。
+      # 未迁移到标准格式的旧 spec 过渡期不卡（渐进迁移，见 SPEC_CONVENTIONS.md §6）。
+      - name: Validate changed main specs
         run: |
-          SPEC_DIR="openspec/specs"
-
-          if [ ! -d "$SPEC_DIR" ]; then
-            echo "No OpenSpec specs directory, skipping check"
+          CHANGED=$(git diff origin/main...HEAD --name-only 2>/dev/null || true)
+          CAPS=$(echo "$CHANGED" | grep -E '^openspec/specs/[^/]+/spec\.md$' | cut -d'/' -f3 | sort -u || true)
+          if [ -z "$CAPS" ]; then
+            echo "No main-spec changes in this PR, skipping spec validation"
             exit 0
           fi
-
-          # Check if PR touches any spec directory
-          CHANGED_FILES=$(git diff origin/main...HEAD --name-only 2>/dev/null || true)
-          CHANGED_CHANGES=$(echo "$CHANGED_FILES" | grep "^openspec/specs/" | cut -d'/' -f3 | sort -u || true)
-
-          if [ -z "$CHANGED_CHANGES" ]; then
-            echo "No OpenSpec changes in this PR, skipping"
-            exit 0
-          fi
-
           FAILED=0
-          for CHANGE in $CHANGED_CHANGES; do
-            CHANGE_DIR="${SPEC_DIR}/${CHANGE}"
-
-            if [ ! -d "$CHANGE_DIR" ]; then
-              continue
+          for CAP in $CAPS; do
+            [ -f "openspec/specs/${CAP}/spec.md" ] || continue
+            echo "→ openspec validate ${CAP} --type spec"
+            if ! openspec validate "$CAP" --type spec; then
+              echo "::error::[spec] ${CAP} 不符合 SPEC_CONVENTIONS.md 标准格式（## Purpose / ## Requirements / ### Requirement / #### Scenario）"
+              FAILED=1
             fi
+          done
+          [ "$FAILED" -eq 0 ] || exit 1
+          echo "Changed main specs valid ✓"
 
-            # D01: Check required artifacts exist
-            # spec.md is the behavioral contract (equivalent to proposal)
-            REQUIRED_ARTIFACTS="spec.md design.md tasks.md"
-            for ARTIFACT in $REQUIRED_ARTIFACTS; do
-              if [ ! -f "${CHANGE_DIR}/${ARTIFACT}" ]; then
-                echo "::error::[D01] Missing artifact: ${CHANGE_DIR}/${ARTIFACT}"
+      # change 制品校验（D01）+ change 格式校验：只查本次改动、非归档的 change。
+      - name: Check changed change artifacts
+        run: |
+          CHANGED=$(git diff origin/main...HEAD --name-only 2>/dev/null || true)
+          CHANGES=$(echo "$CHANGED" | grep -E '^openspec/changes/[^/]+/' | grep -v '^openspec/changes/archive/' | cut -d'/' -f3 | sort -u || true)
+          if [ -z "$CHANGES" ]; then
+            echo "No active change touched in this PR, skipping"
+            exit 0
+          fi
+          FAILED=0
+          for CHANGE in $CHANGES; do
+            DIR="openspec/changes/${CHANGE}"
+            [ -d "$DIR" ] || continue
+            for ART in proposal.md design.md tasks.md; do
+              if [ ! -f "${DIR}/${ART}" ]; then
+                echo "::error::[D01] Missing artifact: ${DIR}/${ART}"
                 FAILED=1
               fi
             done
-
-            # D02: Check tasks.md has completed items
-            if [ -f "${CHANGE_DIR}/tasks.md" ]; then
-              DONE=$(grep -cE '\[x\]' "${CHANGE_DIR}/tasks.md" 2>/dev/null || echo "0")
-              TOTAL=$(grep -cE '\[[ x]\]' "${CHANGE_DIR}/tasks.md" 2>/dev/null || echo "0")
-              if [ "$TOTAL" -gt 0 ] && [ "$DONE" -eq 0 ]; then
-                echo "::warning::[D02] No tasks completed in ${CHANGE_DIR}/tasks.md"
-              fi
+            echo "→ openspec validate ${CHANGE}"
+            if ! openspec validate "$CHANGE"; then
+              echo "::error::[change] ${CHANGE} delta spec 校验失败（见 SPEC_CONVENTIONS.md §4）"
+              FAILED=1
             fi
           done
-
-          if [ "$FAILED" -eq 1 ]; then
-            echo "::error::OpenSpec artifact check failed"
-            exit 1
-          fi
-
-          echo "OpenSpec artifacts check passed"
+          [ "$FAILED" -eq 0 ] || exit 1
+          echo "Changed change artifacts valid ✓"

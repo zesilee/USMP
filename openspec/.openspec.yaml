@@ -45,3 +45,12 @@ constraints:
     rule: 禁止先代码后测试
   - id: R07
     rule: 禁止合并流程
+  - id: R17
+    rule: 禁止先代码后刷 spec（契约变更 spec-first，详见 SPEC_CONVENTIONS.md）
+
+# spec 格式规范（唯一权威）：openspec/SPEC_CONVENTIONS.md
+# 主 spec 对齐 OpenSpec CLI 标准（## Purpose / ## Requirements / ### Requirement / #### Scenario）
+specFormat:
+  standard: openspec-cli
+  conventions: SPEC_CONVENTIONS.md
+  validate: openspec validate <capability> --type spec  # CI 只校验本次改动的 spec
