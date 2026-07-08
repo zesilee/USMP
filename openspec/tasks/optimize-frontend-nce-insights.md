@@ -9,7 +9,8 @@ change: (每阶段独立 OpenSpec change)
 updated: 2026-07-08
 evidence: docs/research/imaster-nce-ux-insights.md
 p0_done: generic-module-console 已合入 main (#121/#123/#124, 2026-07-08)
-next: P3' 扩展 ext:* 注解词汇（主线）；P1' 保真微调低优先
+p3_status: apply 完成，PR #126 待 CI+merge（change ext-ui-annotations，分支 worktree-ext-ui-annotations）
+next: PR #126 合入后 /opsx:sync + archive + 勾选 P3'；后续 P4 删除语义 或 P1' 保真微调
 ---
 
 ## 目标
@@ -49,11 +50,12 @@ next: P3' 扩展 ext:* 注解词汇（主线）；P1' 保真微调低优先
 - [x] 大模型按模块根/container 派生 Tab + 左导航（module console 已实现）
 - [ ] （可选低优先）「编辑→校验→下发→回读收敛」下发 `el-steps` Stepper（当前是单「下发」按钮）；接收敛台账/新鲜度环
 
-### [ ] P3' — 扩展注解词汇表（洞察 A + B）｜去风险后的主线
+### [~] P3' — 扩展注解词汇表（洞察 A + B）｜apply 完成，PR #126 待合入
 - 机制已在跑：`ext:support-filter`/`ext:operation-exclude` 从 `Entry.Exts` 消费 → FieldDef → `make gen-contract` 漂移门禁
 - **分叉已解答**：走 YANG extension（Entry.Exts/Extra），不再纠结 sidecar JSON
-- 剩余：按需扩展新注解关键字（如 `ext:ui-widget`/`ext:ui-order`/`ext:ui-view` 控制 widget/排序/视图切分），复用现有消费+门禁管线
-- ⚠️ choice 元数据被 ygot 拍平（[[yang-constraint-engine]]），涉 choice 的注解需构建期 codegen 兜底
+- ✅ 2026-07-08 apply 完成（change `ext-ui-annotations`，PR #126）：经审计重划范围为**收割存量**（用户拍板）——S1 config-false→readonly+前端只读降级（还债#3）/ S2 dynamic-default 占位 / S3 units 后缀 / S4 task-name 构建期 codegen→category→左导航分组。**零自造 ui-* 词汇**（无消费场景+fork 维护债，决策在 design.md）。关键实证：模块级扩展不存活于运行期 schema（全树扫描=0）→ S4 走 tasknamegen 构建期生成
+- 合入后收尾：/opsx:sync（delta→主 spec）+ archive + 勾选本阶段
+- ~~choice 拍平顾虑~~ 已被 P3 实测推翻（choice/case 完整保留），本期未涉 choice 注解
 - 测试层 B1（扩展解析）+ B3（schema API 契约）+ F1/F2（渲染器消费）；存量并行→切换（§5.3）
 
 ### [ ] P4 — 删除语义模型化（洞察 E）
