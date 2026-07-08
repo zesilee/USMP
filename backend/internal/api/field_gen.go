@@ -126,9 +126,10 @@ func leafToField(leaf schema.LeafNode, group string) FieldDef {
 		Group:    group,
 		When:     leaf.WhenExpr(),
 		// 厂商呈现扩展（BR-07）：supportFilter 驱动高级搜索，operationExclude 驱动
-		// 编辑态字段禁用/操作门禁。
+		// 编辑态字段禁用/操作门禁；isKey 供通用控制台派生 keyField。
 		SupportFilter:    leaf.SupportFilter(),
 		OperationExclude: leaf.OperationExcludes(),
+		IsKey:            leaf.IsKey(),
 	}
 	if leaf.LeafType() == schema.LeafTypeEnum {
 		for _, v := range leaf.EnumValues() {

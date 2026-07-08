@@ -565,6 +565,11 @@ export interface components {
              */
             fields?: components["schemas"]["api.FieldDef"][];
             group?: string;
+            /**
+             * @description IsKey 标记 list 的 key 叶：通用控制台据此派生 keyField/首列，免去 per-module
+             *     路由 props（BR-07）。
+             */
+            isKey?: boolean;
             label?: string;
             maximum?: number;
             minimum?: number;

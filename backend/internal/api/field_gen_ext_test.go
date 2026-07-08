@@ -111,3 +111,26 @@ func TestNestedSchemaCarriesListOperationExclude(t *testing.T) {
 		t.Errorf("list OperationExclude = %v, want %v", list.OperationExclude, want)
 	}
 }
+
+// TestNestedSchemaMarksListKey verifies list key leaves carry isKey=true so the
+// generic console can derive keyField without per-module route props (BR-07).
+func TestNestedSchemaMarksListKey(t *testing.T) {
+	s, err := yangschema.Load()
+	if err != nil {
+		t.Fatalf("Load: %v", err)
+	}
+	mod, _ := s.Module("ifm")
+	ys := buildYangSchemaNested(mod)
+
+	name, ok := findFieldBySuffix(ys.Fields, "interface/name")
+	if !ok {
+		t.Fatal("interface/name not found")
+	}
+	if !name.IsKey {
+		t.Error("interface name IsKey = false, want true")
+	}
+	desc, ok := findFieldBySuffix(ys.Fields, "interface/description")
+	if ok && desc.IsKey {
+		t.Error("description IsKey = true, want false")
+	}
+}

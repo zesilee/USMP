@@ -50,6 +50,9 @@ type FieldDef struct {
 	// Presence 标记 YANG presence 容器（type=group 时有意义）：节点存在与否即开关，
 	// 前端渲染为 switch、关闭时键不入 payload（BR-08）。
 	Presence bool `json:"presence,omitempty"`
+	// IsKey 标记 list 的 key 叶：通用控制台据此派生 keyField/首列，免去 per-module
+	// 路由 props（BR-07）。
+	IsKey bool `json:"isKey,omitempty"`
 }
 
 // CaseDef 是 YANG `choice` 的一个 `case` 分支：name 为 case 名，fields 为其子字段
