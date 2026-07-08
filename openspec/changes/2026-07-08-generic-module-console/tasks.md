@@ -8,18 +8,17 @@
 - [x] 0.2 `openspec validate 2026-07-08-generic-module-console` 通过
 
 ## P1 · 后端扩展元数据透出（PR-1，B1+B3）
-- [ ] 1.1 [红] `schema/entry_ext_test.go`：真实 IFM `class`/`type` 透出 `SupportFilter()=true`、
-      `class`/`number`/`parent-name` 等透出 `OperationExcludes()=[update delete]`；合成用例覆盖
-      异前缀（`hw:support-filter`）、参数大小写、`|`/`,` 混合切分、无参数降级
-- [ ] 1.2 [绿] `schema/types.go` LeafNode += `SupportFilter()/OperationExcludes()`；
+- [x] 1.1 [红] `schema/entry_ext_test.go`：合成 IFM 形 schema 断言 `SupportFilter()`/
+      `OperationExcludes()`；覆盖异前缀（`hw-ext:`）、参数大小写、`|`/`,` 混合切分、无参数降级
+- [x] 1.2 [绿] `schema/types.go` LeafNode += `SupportFilter()/OperationExcludes()`；
       `entry.go` 从 `Entry.Exts` 按关键字本名采集；`schema.go` 默认实现
-- [ ] 1.3 [红] 同文件：ContainerNode `WhenExpr()/MustExprs()`（IFM `ipv4-conflict-enable`
-      must=`../ipv4-ignore-primary-sub='false'` + presence）与 `IsPresence()` 联动断言
-- [ ] 1.4 [绿] ContainerNode 接口扩展 + entry.go 容器级 Extra 采集
-- [ ] 1.5 [红] `api/field_gen_ext_test.go`：nested schema 中叶级 `supportFilter`/`operationExclude`、
-      group 级 `presence`/`must`、list 级 `operationExclude` 全透传；omitempty 不污染无扩展字段
-- [ ] 1.6 [绿] `FieldDef` 三字段 + `nodeToNestedField`/`leafToField` 填充
-- [ ] 1.7 review（go-code-review-check）+ commit（What/Why/How）
+- [x] 1.3 [红] 同文件：ContainerNode `WhenExpr()/MustExprs()` 与 `IsPresence()`（Extra["presence"]）
+      联动断言；list 级 `OperationExcludes()`
+- [x] 1.4 [绿] ContainerNode/ListNode 接口扩展 + entry.go 容器/list 级 Extra/Exts 采集
+- [x] 1.5 [红] `api/field_gen_ext_test.go`：真实 IFM `class` 透出 supportFilter+operationExclude、
+      `ipv4-conflict-enable` group 透出 presence+must；合成 list 级 operationExclude；omitempty 不污染
+- [x] 1.6 [绿] `FieldDef` 三字段 + `nodeToNestedField`/`leafToField` 填充；`make gen-contract` 同步 api.gen.ts
+- [x] 1.7 review（go-code-review-check 通过）+ commit（What/Why/How）
 
 ## P2 · 前端列表纯逻辑 + 通用控制台骨架（PR-2 起步，F1+F2）
 - [ ] 2.1 [红] `test/utils/moduleConsole.test.ts`：`deriveColumns`（分层取列/封顶/层内序稳定）、

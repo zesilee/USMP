@@ -115,7 +115,12 @@ func entryToNode(e *yang.Entry, parent Node, path string) Node {
 }
 
 func entryToContainer(e *yang.Entry, parent Node, path string) ContainerNode {
-	c := NewContainer(e.Name, e.Description, path, parent, false).(*defaultContainer)
+	// presence containers survive the ygot gzip round-trip under Extra["presence"]
+	// (same shape as when/must); their existence toggles a feature (BR-08).
+	c := NewContainer(e.Name, e.Description, path, parent, len(e.Extra["presence"]) > 0).(*defaultContainer)
+	c.whenExpr = firstExtraExpr(e.Extra["when"])
+	c.mustExprs = allExtraExprs(e.Extra["must"])
+	c.opExcludes = extOperationExcludes(e)
 	for _, child := range sortedDir(e) {
 		if child.IsChoice() {
 			// A choice contributes no data-path segment: its case members inherit
@@ -176,6 +181,9 @@ func entryToList(e *yang.Entry, parent Node, path string) ListNode {
 		keyNames[k] = true
 	}
 	l := NewList(e.Name, e.Description, path, parent, nil, false).(*defaultList)
+	l.whenExpr = firstExtraExpr(e.Extra["when"])
+	l.mustExprs = allExtraExprs(e.Extra["must"])
+	l.opExcludes = extOperationExcludes(e)
 	var keys []LeafNode
 	for _, child := range sortedDir(e) {
 		if child.IsChoice() {
@@ -217,7 +225,52 @@ func entryToLeaf(e *yang.Entry, parent Node, path string, isKey bool) LeafNode {
 	}
 	leaf.whenExpr = firstExtraExpr(e.Extra["when"])
 	leaf.mustExprs = allExtraExprs(e.Extra["must"])
+	leaf.supportFilter = extSupportFilter(e)
+	leaf.opExcludes = extOperationExcludes(e)
 	return leaf
+}
+
+// extLocalName returns the local name of an extension keyword, i.e. the part
+// after the module-prefix colon ("ext:support-filter" → "support-filter").
+// Prefixes vary with each module's import alias, so matching is prefix-agnostic.
+func extLocalName(kw string) string {
+	if i := strings.LastIndex(kw, ":"); i >= 0 {
+		return kw[i+1:]
+	}
+	return kw
+}
+
+// extSupportFilter reports whether e carries a vendor `support-filter` extension
+// with argument "true" (case-insensitive). Marks query/filter fields (BR-07).
+// Missing/unparsable arguments degrade to false (R08).
+func extSupportFilter(e *yang.Entry) bool {
+	for _, x := range e.Exts {
+		if x != nil && extLocalName(x.Keyword) == "support-filter" &&
+			strings.EqualFold(strings.TrimSpace(x.Argument), "true") {
+			return true
+		}
+	}
+	return false
+}
+
+// extOperationExcludes collects a vendor `operation-exclude` extension's argument
+// as a normalized operation list: split on `|` and `,`, trimmed, lower-cased
+// (real IFM uses "update|delete"). Nil when absent or the argument is empty (R08).
+func extOperationExcludes(e *yang.Entry) []string {
+	var out []string
+	for _, x := range e.Exts {
+		if x == nil || extLocalName(x.Keyword) != "operation-exclude" {
+			continue
+		}
+		for _, op := range strings.FieldsFunc(x.Argument, func(r rune) bool {
+			return r == '|' || r == ','
+		}) {
+			if op = strings.ToLower(strings.TrimSpace(op)); op != "" {
+				out = append(out, op)
+			}
+		}
+	}
+	return out
 }
 
 // leafRangeBounds extracts integer min/max from a leaf's YANG `range`. It returns

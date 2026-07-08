@@ -41,6 +41,15 @@ type FieldDef struct {
 	// Cases 承载 YANG `choice` 的互斥分支：type=choice 时非空，每个 case 携带自身子字段。
 	// 前端据此渲染 Tabs/RadioGroup（BR-06）。case 子字段 path 为扁平数据路径。
 	Cases []CaseDef `json:"cases,omitempty"`
+	// SupportFilter 标记厂商 `support-filter` 扩展：该叶可作查询条件，驱动前端
+	// 高级搜索控件（BR-07）。
+	SupportFilter bool `json:"supportFilter,omitempty"`
+	// OperationExclude 承载厂商 `operation-exclude` 扩展（小写归一）：叶级表示
+	// create-only 标识字段（编辑态禁用），list/group 级表示整节点排除对应操作（BR-07）。
+	OperationExclude []string `json:"operationExclude,omitempty"`
+	// Presence 标记 YANG presence 容器（type=group 时有意义）：节点存在与否即开关，
+	// 前端渲染为 switch、关闭时键不入 payload（BR-08）。
+	Presence bool `json:"presence,omitempty"`
 }
 
 // CaseDef 是 YANG `choice` 的一个 `case` 分支：name 为 case 名，fields 为其子字段
