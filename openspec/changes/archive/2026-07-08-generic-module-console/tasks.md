@@ -53,5 +53,5 @@
 - [x] 5.5 覆盖率棘轮上调（前端 73/70/65/73、后端 56→57，T08）+ review + commit
 
 ## 收尾
-- [ ] 6.1 `/opsx:sync` delta→主 spec；`openspec validate` 改动能力全绿
-- [ ] 6.2 `/opsx:archive` 归档
+- [x] 6.1 `/opsx:sync` delta→主 spec（yang-api BR-07/08 + frontend FE-10~13 ADDED + FieldDef 数据模型表）；validate 全绿
+- [x] 6.2 `/opsx:archive` 归档（交付经 PR #121/#123，#122 误合堆叠 base 后经 #123 重投递）

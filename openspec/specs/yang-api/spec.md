@@ -74,6 +74,44 @@ yang-api 是 Stack B 北向 REST 接口，向前端供给**由 YANG 模型驱动
 - **WHEN** 模块 schema 树不含任何 `choice`
 - **THEN** SHALL 退化为原有扁平/嵌套字段输出，接口 SHALL NOT 失败（R08）
 
+### Requirement: BR-07 呈现扩展透出（support-filter / operation-exclude）
+
+`GET /yang/schema/{module}`（含 `?form=nested`）SHALL 把 YANG 扩展 `support-filter` 与
+`operation-exclude` 从 schema 树透出到 `FieldDef`：叶级 `supportFilter`(bool)、
+`operationExclude`([]string，按 `|`/`,` 切分、小写归一)；list/container 节点上的
+`operation-exclude` SHALL 透出在对应 group/list FieldDef 上；list key 叶 SHALL 以
+`isKey=true` 标注。匹配 SHALL 按扩展关键字本名（前缀无关）。无扩展的字段 SHALL
+省略这些键（omitempty）。
+
+#### Scenario: 真实模型透出
+
+- **WHEN** 请求 `huawei-ifm` 的 nested schema
+- **THEN** `interfaces/interface` 的 `class`、`type` 叶 SHALL 带 `supportFilter=true`
+- **AND** `class`、`number`、`parent-name`、`router-type` 叶 SHALL 带
+  `operationExclude=["update","delete"]`，`name` 叶 SHALL 带 `isKey=true`
+
+#### Scenario: 前缀与参数容错
+
+- **WHEN** 扩展以任意 import 前缀出现（如 `hw:support-filter`），或参数含大小写/混合分隔符
+- **THEN** 采集 SHALL 按本名匹配并归一化；参数缺失或无法解析时 SHALL 视为无扩展（降级，不报错）
+
+### Requirement: BR-08 presence 容器与容器级 when/must 透出
+
+nested schema 中 presence 容器 SHALL 以 `presence=true` 标注在其 group FieldDef 上；
+容器级 `when`/`must`（goyang `Entry.Extra`）SHALL 与叶级同构透出（`when` 字符串、
+`must` 为 `[{expr,message}]`）。
+
+#### Scenario: IFM 全局冲突开关
+
+- **WHEN** 请求 `huawei-ifm` 的 nested schema
+- **THEN** `global/ipv4-conflict-enable` group SHALL 带 `presence=true` 且
+  `must` 含 `../ipv4-ignore-primary-sub='false'`
+
+#### Scenario: 非 presence 容器不受影响
+
+- **WHEN** 容器无 presence 语句
+- **THEN** 其 group FieldDef SHALL 不含 `presence` 键
+
 ## 数据模型
 
 **FieldDef**（动态表单字段；omitempty 字段缺省即省略）：
@@ -93,5 +131,9 @@ yang-api 是 Stack B 北向 REST 接口，向前端供给**由 YANG 模型驱动
 | must | MustRule[] | `must` 约束 `[{expr,message}]`（BR-05） |
 | fields | FieldDef[] | `group`/`list` 的嵌套子字段（nested 形态） |
 | cases | CaseDef[] | `choice` 的互斥分支（BR-06） |
+| supportFilter | bool | 厂商 `support-filter` 扩展：可作查询条件（BR-07） |
+| operationExclude | string[] | 厂商 `operation-exclude` 扩展（小写归一，BR-07） |
+| presence | bool | YANG presence 容器（type=group 时有意义，BR-08） |
+| isKey | bool | list key 叶标注（BR-07） |
 
 **CaseDef**：`{name, label, fields: FieldDef[]}` —— 一个 `case` 分支及其子字段（子字段 path 为扁平数据路径）。
