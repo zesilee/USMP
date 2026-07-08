@@ -18,11 +18,12 @@ export default defineConfig({
       // 覆盖率「不下降」棘轮（T08）：阈值 = 当前实测水平向下取整留余量。
       // 只准升不准降——低于阈值 CI 即 fail。补测后应把阈值同步上调，形成单向棘轮。
       // 基线实测(2026-07-06)：Stmts 66.55 / Branch 66.57 / Funcs 56.67 / Lines 66.88。
+      // 2026-07-08 P3 choice 补测后实测：Stmts 71.25 / Branch 70.02 / Funcs 62.75 / Lines 71.47。
       thresholds: {
-        statements: 64,
-        branches: 64,
-        functions: 54,
-        lines: 64
+        statements: 70,
+        branches: 68,
+        functions: 60,
+        lines: 70
       }
     }
   },
