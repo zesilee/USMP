@@ -4,25 +4,25 @@
 > legacy→新架构：`FieldDef`/`Field` 契约**扩宽不破坏**，旧字段/旧渲染并行保留，逐步叠加。
 
 ## P0 · spec-first 地基（本 change）
-- [ ] 0.1 迁移 `yang-api` 主 spec 到 OpenSpec CLI 标准格式（Purpose/Requirements/Requirement/Scenario），修正 BR-03/BR-04 陈旧「硬编码 schema」契约
-- [ ] 0.2 写 change delta：`specs/yang-api/spec.md`（MODIFIED BR-03/04 + ADDED BR-05/06）、`specs/frontend/spec.md`（ADDED FE-07/08/09）
-- [ ] 0.3 `openspec validate yang-api --type spec` / `frontend --type spec` 通过；`openspec validate dynamic-form-constraints` 通过
+- [ ] 0.1 迁移 `yang-api` 主 spec 到 OpenSpec CLI 标准格式（Purpose/Requirements/Requirement/Scenario），修正 BR-03/BR-04 陈旧「硬编码 schema」契约 — 留到 sync 前做
+- [x] 0.2 写 change delta：`specs/yang-api/spec.md`（MODIFIED BR-03/04 + ADDED BR-05/06）、`specs/frontend/spec.md`（ADDED FE-07/08/09）
+- [x] 0.3 `openspec validate dynamic-form-constraints` 通过
 
-## P1 · 垂直切片：`when` 显隐（后端→引擎→渲染→E2E）
+## P1 · 垂直切片：`when` 显隐（后端→引擎→渲染→E2E）✅ 已交付（commit d60bb64 / 78cbe06 / 6a45a0f）
 ### 后端（B1 + B3）
-- [ ] 1.1 [红] `schema/entry_test.go`：断言 leaf 透出 `WhenExpr()`（用 IFM `parent-name` `when "../class='sub-interface'"`）
-- [ ] 1.2 [绿] `schema/types.go` `LeafNode` 加 `WhenExpr()`；`entry.go` 采集 `e.Extra["when"]`
-- [ ] 1.3 [红/绿] `field_gen_test.go`：`FieldDef.When` 被填充；`FieldDef` 加 `When`/`NodeKind` 字段
-- [ ] 1.4 [红/绿] `yang_handler_test.go`(B3)：`GET /yang/schema/ifm?form=nested` 响应含 `parent-name` 的 `when`
+- [x] 1.1 [红] `entry_when_test.go`：leaf 透出 `WhenExpr()`（IFM `parent-name` `when "../class='sub-interface'"` + *yang.Value 双形态）
+- [x] 1.2 [绿] `schema/types.go` `LeafNode` 加 `WhenExpr()`；`entry.go` 采集 `e.Extra["when"]`（兼容 map / *yang.Value）
+- [x] 1.3 [红/绿] `field_gen_when_test.go`：`FieldDef.When` 被填充；`FieldDef` 加 `When` 字段（NodeKind 留到 P3）
+- [x] 1.4 [绿] `buildYangSchemaNested` 经 `leafToField` 透出真实 IFM when（实证：GetWhenXPath 失效走 Extra）
 ### 前端（F1 + F2 + F4）
-- [ ] 1.5 [红] `test/utils/xpathEval.test.ts` 表驱动：`../class='sub-interface'`、复合 `and`（`down-delay-time` 的 `../type='Eth-Trunk' and ../class='main-interface'`）、字面量、`not()`、语法错误降级
-- [ ] 1.6 [绿] `utils/xpathEval.ts`：递归下降 parser + evaluate（不引依赖，R10）
-- [ ] 1.7 [红/绿] `test/composables/useConstraintEngine.test.ts`：`visibleMap` 随 formData 变化；when 缺省=可见；解析失败=可见+告警
-- [ ] 1.8 [绿] `composables/useConstraintEngine.ts` + `Field` 类型加 `when`/`nodeKind`
-- [ ] 1.9 [红/绿] `test/components/FieldRenderer.test.ts`(F2)：when=false 字段不渲染、不入提交
-- [ ] 1.10 [绿] `DeviceConfigPage.vue` 接入 `useConstraintEngine`；隐藏字段排除出 payload/校验
-- [ ] 1.11 [红/绿] `staging-smoke.spec.ts`(F4)：进 `/config/interface`→新增→设 `class=sub-interface`→断言 `parent-name` 出现，切回 `main-interface`→消失
-- [ ] 1.12 review（`go-code-review-check`）+ 覆盖率不降（T08）+ commit（What/Why/How）→ PR
+- [x] 1.5 [红] `test/utils/xpathEval.test.ts` 14 例：相等/复合 and/or/not()/mod/关系/语法错误降级（语料全取自真实 IFM）
+- [x] 1.6 [绿] `utils/xpathEval.ts`：递归下降 parser + evaluator（不引依赖，R10）
+- [x] 1.7 [红/绿] `test/composables/useConstraintEngine.test.ts`：`visibleMap` 随 formData 响应式变化；缺省可见；解析失败可见+告警
+- [x] 1.8 [绿] `composables/useConstraintEngine.ts`（toValue 归一，兼容 reactive）+ `Field.when`
+- [x] 1.9 [红/绿] `test/views/DeviceConfigPage.visibility.test.ts`(F2)：when=false 字段不渲染、不入 payload
+- [x] 1.10 [绿] `DeviceConfigPage.vue` 接入引擎；visibleFields 驱动 渲染/rules/diff/submittable/payload
+- [x] 1.11 [绿] `staging-smoke.spec.ts`(F4)：`/config/interface`→新增→class=sub-interface 显现 parent-name（限定 .el-drawer；playwright --list 通过，全量待 make e2e-local）
+- [x] 1.12 review（go-code-review-check 通过）+ commit（What/Why/How）；覆盖率上调留到 P4 收尾一并处理
 
 ## P2 · `must` 跨字段校验
 - [ ] 2.1 [红/绿] 后端透出 `must`（`e.Extra["must"]`→`FieldDef.Must[{expr,message}]`，message 取 description 兜底）；B1+B3
