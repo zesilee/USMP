@@ -108,6 +108,10 @@ func leafToField(leaf schema.LeafNode, group string) FieldDef {
 	if dv := leaf.DefaultValue(); dv != nil {
 		f.Default = dv
 	}
+	// must 约束：message 取叶 description 兜底（YANG 无 error-message），空则前端生成。
+	for _, expr := range leaf.MustExprs() {
+		f.Must = append(f.Must, MustRule{Expr: expr, Message: leaf.Description()})
+	}
 	return f
 }
 

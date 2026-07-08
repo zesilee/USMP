@@ -301,6 +301,7 @@ type defaultLeaf struct {
 	mandatory    bool
 	units        string
 	whenExpr     string
+	mustExprs    []string
 }
 
 // LeafType implements LeafNode interface
@@ -341,6 +342,16 @@ func (l *defaultLeaf) WhenExpr() string {
 // SetWhenExpr sets the leaf's YANG `when` XPath expression.
 func (l *defaultLeaf) SetWhenExpr(expr string) {
 	l.whenExpr = expr
+}
+
+// MustExprs implements LeafNode interface
+func (l *defaultLeaf) MustExprs() []string {
+	return l.mustExprs
+}
+
+// SetMustExprs sets the leaf's YANG `must` XPath expressions.
+func (l *defaultLeaf) SetMustExprs(exprs []string) {
+	l.mustExprs = exprs
 }
 
 // NewLeaf creates a new leaf node

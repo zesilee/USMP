@@ -156,6 +156,7 @@ func entryToLeaf(e *yang.Entry, parent Node, path string, isKey bool) LeafNode {
 		}
 	}
 	leaf.whenExpr = firstExtraExpr(e.Extra["when"])
+	leaf.mustExprs = allExtraExprs(e.Extra["must"])
 	return leaf
 }
 
@@ -171,6 +172,18 @@ func firstExtraExpr(extra []interface{}) string {
 		}
 	}
 	return ""
+}
+
+// allExtraExprs returns the XPath argument of every element of an Entry.Extra slice
+// (order-preserved, empties skipped). Used for `must` where a leaf may carry many.
+func allExtraExprs(extra []interface{}) []string {
+	var out []string
+	for _, v := range extra {
+		if s := extraExprName(v); s != "" {
+			out = append(out, s)
+		}
+	}
+	return out
 }
 
 func extraExprName(v interface{}) string {

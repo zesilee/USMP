@@ -140,6 +140,9 @@ type LeafNode interface {
 	// WhenExpr returns the leaf's YANG `when` XPath expression, "" if none.
 	// Drives data-driven conditional visibility in the dynamic form (R05).
 	WhenExpr() string
+	// MustExprs returns the leaf's YANG `must` XPath expressions (order-preserved),
+	// empty if none. Drives data-driven cross-field validation in the form (R05).
+	MustExprs() []string
 }
 
 // LeafListNode represents a YANG leaf-list node
