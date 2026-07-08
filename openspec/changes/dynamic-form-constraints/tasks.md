@@ -36,10 +36,10 @@
 - [ ] 3.3 [红/绿] `FieldRenderer` choice→`el-tabs`/`el-radio-group`，切 case 清空非激活分支；F2 + F3 真浏览器（el-tabs teleport）
 - [ ] 3.4 review + commit → PR
 
-## P4 · `leaf-list` + `pattern` + `range`
-- [ ] 4.1 [红/绿] 后端透出 `pattern`（IFM `number`）+ `range`→min/max；B1
-- [ ] 4.2 [红/绿] `FieldRenderer` 接 `pattern` 校验（非法正则降级）；`leaf-list`→增删输入行（**合成 schema** 测，IFM 无 leaf-list）；F2 + F3
-- [ ] 4.3 review + commit → PR
+## P4 · `leaf-list` + `pattern` + `range` ✅ 已交付（commit 8d401df / 4d4dae1）
+- [x] 4.1 [红/绿] 后端透出 `pattern`（真实 IFM `number`）+ 显式 `range`→min/max（真实 IFM `statistic-interval` 10..600，跳过类型全域默认区间避免噪声）；B1/B3
+- [x] 4.2 [红/绿] DeviceConfigPage 接 `pattern` 校验（^(?:…)$ 锚定、非法正则降级 R08、纳入 submit 权威门禁）；`FieldRenderer` `leaf-list`→增删标量行（合成 schema，IFM 无 leaf-list）；F2（pattern 拦截 + leaf-list add/edit/remove/枚举 5 例）
+- [x] 4.3 review + commit（F3 真浏览器留待与 P3 el-tabs 合并跑）
 
 ## 收尾
 - [ ] 5.1 `/opsx:sync`：delta → 主 spec；`openspec validate --specs` 改动能力全绿
