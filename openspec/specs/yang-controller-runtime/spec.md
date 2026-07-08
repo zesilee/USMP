@@ -1,41 +1,77 @@
-# yang-controller-runtime — 行为契约（反向还原）
+# yang-controller-runtime — 声明式配置对齐框架
 
-> 反向还原自 `backend/pkg/yang-runtime/`，忠实 as-built。详细架构见 `design.md`。权威栈（R01）。
+## Purpose
 
-## 能力概述
+yang-controller-runtime 是权威栈（R01）的声明式对齐框架（C1–C5）：把设备 actual 配置向 desired 对齐。用户仅实现 C3 `Reconciler`，框架承担连接/排队/限频/反射 diff/协议编解码。连接信息由共享 DeviceStore 按 DeviceID 解析（见 [[device-store]]）。
 
-声明式配置对齐框架（C1–C5）：把设备 actual 配置向 desired 对齐。用户实现 C3 `Reconciler`，框架承担连接/排队/限频/反射 diff/协议编解码。
+> 已知契约缺口（as-built）：plugin 钩子已声明但**从不执行**；schema 层运行时为空；`ConfigStore.List` 等为 stub。
 
-## 行为契约
+## Requirements
 
-### YR-01 期望态触发对齐
-- **Given** 已 `ConfigStore.Set(deviceID:path, desired)`
-- **When** 调用 `Manager.TriggerReconcile(deviceID, path)` 或 `PeriodicSource` 到期
-- **Then** 事件经 predicate 过滤后入 `RateLimitingQueue`，worker 调用对应 `Reconciler.Reconcile`
+### Requirement: YR-01 期望态触发对齐
 
-### YR-02 diff-then-push
-- **Given** desired 与 actual 存在差异
-- **When** `GenericReconciler.Reconcile` 执行
-- **Then** 反射 diff 产出 `[]Change`，经 `DeviceClient.Set` 下发（edit-config + commit）；desired 为 nil 时视为 no-op（**不删除**）
+已 `ConfigStore.Set(deviceID:path, desired)` 后，`Manager.TriggerReconcile` 或 `PeriodicSource` 到期 SHALL 产生事件，经 predicate 过滤入 `RateLimitingQueue`，worker SHALL 调用对应 `Reconciler.Reconcile`。
 
-### YR-03 失败重投带退避
-- **Given** Reconcile 返回 error 或 Requeue
-- **When** `process` 处理 Result
-- **Then** `AddRateLimited`（指数退避 1s–30s + 令牌桶 10qps）或 `AddAfter(RequeueAfter)`；成功则 `Forget`
+#### Scenario: 提交触发对账
+- **WHEN** 调用 `TriggerReconcile(deviceID, path)` 且有匹配 Controller
+- **THEN** 事件 SHALL 入队并被 worker 处理，返回 `triggered=true`
 
-### YR-04 每模块一控制器
-- **Given** 一个 YANG 模块（vlan/ifm/system）
-- **When** 经 `ControllerManagedBy(name).WithReconciler(...).WithSource(...).Build()` 注册
-- **Then** 独立事件队列 + worker 池处理该模块，模块间隔离
+### Requirement: YR-02 diff-then-push（不删除）
 
-### YR-05 事件源多样性
-- **Given** 需要产生 reconcile 事件
-- **When** 配置 Source
-- **Then** 支持 PeriodicSource(轮询)/GNMISubSource(订阅)/FileSource(文件变更)
+`GenericReconciler.Reconcile` SHALL 反射 diff 出 `[]Change`，经 `DeviceClient.Set` 下发（edit-config + commit）。desired 为 nil 时 SHALL 视为 no-op，SHALL NOT 删除设备已有配置。
 
-## 契约缺口（详见 design.md §5）
+#### Scenario: 检测漂移并下发
+- **WHEN** desired 与回读的 actual 有差异
+- **THEN** SHALL 产出 Change 并 edit-config+commit 到设备
 
-- plugin 钩子声明存在但**从不被执行**；schema 层运行时为空；`ConfigStore.List/ListDevices` 为 stub。
+#### Scenario: 期望态为空不删除
+- **WHEN** desired 为 nil
+- **THEN** SHALL no-op（Changes=0），SHALL NOT 下发删除
 
-## 关联
-- `design.md`、`device-protocol/spec.md`（C5）、`config-cache/spec.md`（ConfigStore）、根 `yang-controller-runtime.md`。
+### Requirement: YR-03 从 DeviceStore 解析建连
+
+Reconciler 的 `DeviceClient` SHALL 用 `req.DeviceID` 查共享 DeviceStore 取完整连接信息（IP/端口/凭据/协议）建连。设备未注册（或无 store）SHALL 降级为 AUTO/无凭据连接并记 warning，认证失败干净返回（R08），SHALL NOT panic，SHALL NOT 硬编码凭据。
+
+#### Scenario: 已注册设备带凭据建连
+- **WHEN** 以纯 DeviceID 触发、设备已在 DeviceStore 注册
+- **THEN** SHALL 用库中凭据建 NETCONF 连接，SSH 以 password 认证（非 none）
+
+#### Scenario: 未注册设备降级
+- **WHEN** DeviceID 未在库中
+- **THEN** SHALL 以 AUTO/无凭据建连、认证失败返回错误，SHALL NOT panic
+
+### Requirement: YR-04 失败重投带退避
+
+`process` 处理 Result：error 或 Requeue SHALL `AddRateLimited`（指数退避 + 令牌桶）或按 `RequeueAfter` `AddAfter`；收敛成功 SHALL `Forget`。
+
+#### Scenario: 失败退避重投
+- **WHEN** Reconcile 返回 error
+- **THEN** SHALL 以指数退避重新入队
+
+### Requirement: YR-05 纠正后复验收敛
+
+对账下发有变更（`Changes>0`、无 error）时 SHALL 记 `Drifted`，且 controller SHALL 入队一次复验；复验若无变更 SHALL 记 `Converged` 并 `Forget`，使状态自 `Drifted` 自愈为 `Converged`，避免"纠正后永久显示漂移"。
+
+#### Scenario: 纠正后自愈为收敛
+- **WHEN** 首轮下发 `Changes>0`（记 Drifted）
+- **THEN** SHALL 入队复验；复验 `Changes==0` 时 SHALL 记 `Converged`
+
+### Requirement: YR-06 每模块一控制器隔离
+
+每 YANG 模块（vlan/ifm/system）经 `ControllerManagedBy(name).WithReconciler().WithSource().Build()` 注册，SHALL 有独立事件队列 + worker 池，模块间 SHALL 隔离（一模块阻塞不影响另一模块）。
+
+#### Scenario: 模块隔离
+- **WHEN** 注册 vlan/ifm/system 三控制器
+- **THEN** 各自独立队列处理，互不干扰
+
+### Requirement: YR-07 事件源驱动漂移检测
+
+事件源 SHALL 支持周期轮询 / gNMI 订阅 / 文件变更。`PeriodicSource` SHALL 按提供的设备列表（生产为共享 DeviceStore 的 `List()`，动态取）逐设备入队对账，实现持续 out-of-band 漂移检测；设备列表为空 SHALL 不入队、SHALL NOT panic。
+
+#### Scenario: 周期按库中设备发对账
+- **WHEN** 周期 tick 且 DeviceStore 中有 N 个设备
+- **THEN** SHALL 为每个设备就配置路径入队一个对账事件
+
+#### Scenario: 空设备列表不空转报错
+- **WHEN** 设备列表为空
+- **THEN** SHALL 不入队任何事件，SHALL NOT panic
