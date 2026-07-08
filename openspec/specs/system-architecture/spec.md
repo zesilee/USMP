@@ -1,41 +1,55 @@
-# system-architecture — 行为契约（反向还原）
+# system-architecture — 系统级架构不变量与红线契约
 
-> 反向还原自实现（Brownfield），忠实 as-built。详细架构见同目录 `design.md`。
+## Purpose
 
-## 能力概述
+system-architecture 约束整个平台的架构边界：无数据库、模型驱动、仅 NETCONF/gNMI、单一权威栈（yang-controller-runtime）。本契约以**可观测的系统级行为**表述架构红线（CLAUDE.md §2），保证平台运行在合规边界内；子系统的细化行为契约见各能力 `spec.md`，详细架构见同目录 `design.md`。
 
-系统级架构不变量与红线契约：约束整个平台"无数据库、模型驱动、NETCONF/gNMI、yang-controller-runtime"的边界。本契约以**可观测的系统级行为**表述；子系统行为契约见各能力 `spec.md`。
+## Requirements
 
-## 系统级契约
+### Requirement: SC-01 单一权威栈与单一进程入口
 
-### SC-01 单一权威栈
-- **Given** 代码存在 Stack A(K8s CRD+Actor) 与 Stack B(yang-controller-runtime) 双栈
-- **When** 判定架构权威性
-- **Then** 依 R01，Stack B 为权威；Stack A 标注 `legacy` 待退役（现状：生产入口仍为 Stack A，属已知迁移债）
+系统 SHALL 以 Stack B（yang-controller-runtime）作为**唯一权威且唯一生产栈**（R01），生产进程 SHALL 只有一个入口 `backend/main.go`（真·单进程）。原 Stack A（K8s CRD + Actor）入口 `cmd/controller` 已删除，SHALL NOT 存在第二条生产运行路径。残留的 `pkg/yang-runtime/actor` 包代码物理未删属低优先「物理删除」机械债，SHALL NOT 出现在任何生产路径上。
 
-### SC-02 无数据库
-- **Given** 需要存储期望配置
-- **When** 系统运行
-- **Then** 仅用 TTL+LRU 内存 + 本地 JSON 元信息；不得引入 MySQL/Redis/SQLite（R03）。Stack A 的 etcd 依赖为与 R03 张力的 legacy 项。
+#### Scenario: 生产启动入口唯一
+- **WHEN** 启动生产进程
+- **THEN** SHALL 经由 `backend/main.go` 单一入口拉起 yang-controller-runtime（Manager→Controller→Reconciler→Source），不存在 Stack A 入口
 
-### SC-03 仅现代协议
-- **Given** 需要与设备通信
-- **When** 下发/读取配置
-- **Then** 仅 NETCONF(SSH 830)/gNMI；禁止 Telnet/SNMP（R02）。`NativeDeviceConfig` 的 `format: CLI` 透传为软张力项。
+#### Scenario: 残留 actor 包不入生产路径
+- **WHEN** 审计生产运行路径的依赖引用
+- **THEN** `pkg/yang-runtime/actor` 残留代码 SHALL NOT 被生产入口引用，仅为待物理删除的机械债
 
-### SC-04 模型驱动渲染
-- **Given** 新增 YANG/CRD 模块
-- **When** 前端展示配置表单
-- **Then** 由模型 schema 自动渲染，零手写固定表单（R05）；YANG 结构由 ygot 自动生成（R04）。
+### Requirement: SC-02 无数据库
 
-### SC-05 异常降级不崩溃
-- **Given** 设备离线/缓存过期/下发失败/校验失败
-- **When** 异常发生
-- **Then** 每种异常均有降级路径（重连/重拉/保留原配置/行内提示），进程不崩溃（R08）。
+系统存储期望配置与元信息时 SHALL 仅使用 TTL+LRU 内存缓存 + 本地 JSON 元信息，SHALL NOT 引入 MySQL/Redis/SQLite（R03）。Stack A 退役后其 etcd 依赖已消除，SHALL NOT 存在与 R03 相冲突的外部数据库依赖。
 
-## 红线合规现状
+#### Scenario: 运行时无外部数据库依赖
+- **WHEN** 系统运行并存储期望配置
+- **THEN** SHALL 仅落在 TTL+LRU 内存缓存与本地 JSON 元信息，不连接任何 MySQL/Redis/SQLite/etcd
 
-见 `design.md` §6 合规矩阵。当前 R01/R03 因双栈处于**部分违反**（legacy 栈所致），R02/R04/R05 合规。
+### Requirement: SC-03 仅现代协议
 
-## 关联
-- `design.md`（本能力）、各子系统 `spec.md`/`design.md`、`CLAUDE.md` §2 红线。
+系统与设备通信时 SHALL 仅使用 NETCONF(SSH 830) 或 gNMI，SHALL NOT 使用 Telnet/SNMP 等旧协议（R02）。
+
+#### Scenario: 下发/读取仅走 NETCONF/gNMI
+- **WHEN** 系统下发或读取设备配置
+- **THEN** SHALL 通过 NETCONF(SSH 830) 或 gNMI 通道完成，不建立任何 Telnet/SNMP 连接
+
+### Requirement: SC-04 模型驱动渲染
+
+新增 YANG 模块并在前端展示配置时，前端 SHALL 由模型 schema 自动渲染表单，SHALL NOT 手写固定表单（R05）；对应 YANG 结构 SHALL 由 ygot 自动生成，SHALL NOT 手写 YANG 结构体（R04）。
+
+#### Scenario: 新增模块零手写表单
+- **WHEN** 接入一个新 YANG 模块并在前端展示
+- **THEN** 前端 SHALL 依模型 schema 自动渲染表单，后端结构 SHALL 由 ygot 生成，二者均无手写固定内容
+
+### Requirement: SC-05 异常降级不崩溃
+
+系统遭遇设备离线、缓存过期、下发失败或校验失败时 SHALL 走对应降级路径（重连/重拉/保留原配置/行内提示），进程 SHALL NOT 崩溃（R08）。
+
+#### Scenario: 设备离线降级
+- **WHEN** 目标设备离线
+- **THEN** SHALL 触发 NETCONF 自动重连并对外返回明确错误状态，进程不崩溃
+
+#### Scenario: 下发失败保留原配置
+- **WHEN** NETCONF 下发失败
+- **THEN** SHALL 保留原配置、缓存不更新并向前端提示错误，进程不崩溃
