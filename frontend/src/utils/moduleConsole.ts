@@ -12,6 +12,8 @@ export interface ConsoleTab {
   field: Field
   /** kind==='list' 时的目标 list 节点。 */
   listField?: Field
+  /** 整棵子树为 state 数据（config false，FE-14）：降级只读视图，无编辑/下发入口。 */
+  readonly?: boolean
 }
 
 const SCALAR_TYPES = new Set<Field['type']>(['string', 'number', 'boolean', 'enum'])
@@ -27,26 +29,30 @@ function scalarLeaves(f: Field): Field[] {
 
 // 模块根顶层子节点 → 一级 Tab：list（含「group 包裹单 list」的常见形态）→列表页，
 // group/choice→表单页；散落根叶子聚合为「基本属性」表单 Tab 排最前（FE-10）。
+// readonly 子树（config false state 数据）照常派生但整 Tab 标只读（FE-14）——
+// 降级为可查看视图而非隐藏，state 数据仍有查看价值。
 export function deriveTabs(fields: Field[] | undefined): ConsoleTab[] {
   const tabs: ConsoleTab[] = []
   const looseLeaves: Field[] = []
   for (const f of fields || []) {
+    const ro = !!f.readonly
     if (SCALAR_TYPES.has(f.type) || f.type === 'leaf-list') {
       looseLeaves.push(f)
       continue
     }
     if (f.type === 'list') {
-      tabs.push({ name: leafName(f), label: f.label || leafName(f), kind: 'list', field: f, listField: f })
+      tabs.push({ name: leafName(f), label: f.label || leafName(f), kind: 'list', field: f, listField: f, readonly: ro })
       continue
     }
     if (f.type === 'group') {
-      const kids = (f.fields || []).filter((c) => !c.readonly)
+      // 只读 group 整棵同源只读，list 包裹判定无须再按 readonly 过滤子节点。
+      const kids = (f.fields || []).filter((c) => ro || !c.readonly)
       if (kids.length === 1 && kids[0].type === 'list') {
-        tabs.push({ name: leafName(f), label: f.label || leafName(f), kind: 'list', field: f, listField: kids[0] })
+        tabs.push({ name: leafName(f), label: f.label || leafName(f), kind: 'list', field: f, listField: kids[0], readonly: ro })
         continue
       }
     }
-    tabs.push({ name: leafName(f), label: f.label || leafName(f), kind: 'form', field: f })
+    tabs.push({ name: leafName(f), label: f.label || leafName(f), kind: 'form', field: f, readonly: ro })
   }
   if (looseLeaves.length) {
     tabs.unshift({
@@ -54,6 +60,7 @@ export function deriveTabs(fields: Field[] | undefined): ConsoleTab[] {
       label: '基本属性',
       kind: 'form',
       field: { path: '', type: 'group', label: '基本属性', fields: looseLeaves },
+      readonly: looseLeaves.every((f) => !!f.readonly),
     })
   }
   return tabs

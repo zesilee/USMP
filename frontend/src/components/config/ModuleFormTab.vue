@@ -8,16 +8,20 @@
         :error="presenceMustError(field)">
         <FieldRenderer v-if="field.type === 'choice'" :field="field" :model-value="form.choiceScope(field)"
           @update:model-value="form.onChoiceUpdate(field, $event)" />
-        <FieldRenderer v-else :field="field" :disabled="presenceBlocked(field)"
+        <FieldRenderer v-else :field="field" :disabled="presenceBlocked(field) || !!field.readonly"
           :model-value="form.formData[form.keyOf(field)]"
           @update:model-value="form.formData[form.keyOf(field)] = $event" />
       </el-form-item>
       <div v-if="!form.visibleFields.value.length" class="empty-tip">该分组暂无可配置字段。</div>
     </el-form>
 
-    <div class="actions">
+    <!-- 整 Tab readonly（config false state 子树）：只读视图，无下发入口（FE-14） -->
+    <div v-if="!tab.readonly" class="actions">
       <el-button type="primary" :disabled="!device || !form.submittable.value" @click="submit">下发</el-button>
       <span class="form-tip">字段与约束由 YANG 模型生成；presence 开关关闭即该节点不存在。</span>
+    </div>
+    <div v-else class="actions">
+      <span class="form-tip">该分组为设备状态数据（config false），仅供查看。</span>
     </div>
   </div>
 </template>
@@ -43,7 +47,8 @@ const props = defineProps<{
 const configPath = computed(() =>
   configPathFor(props.rootName, props.tab.field.path || `/${props.rootName}`),
 )
-const fields = computed<Field[]>(() => (props.tab.field.fields || []).filter((f) => !f.readonly))
+// readonly 叶保留渲染（禁用态回显 state 值），payload/校验排除由 useConfigForm 处理（FE-14）。
+const fields = computed<Field[]>(() => props.tab.field.fields || [])
 const form = useConfigForm(fields)
 const formRef = ref<FormInstance>()
 const error = ref('')

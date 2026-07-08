@@ -27,10 +27,10 @@
 
 ## 4. S1 前端：只读降级（F1+F2）
 
-- [ ] 4.1 F1 红：`moduleConsole` 派生测试——整棵 readonly 子树→只读 Tab、混合容器 readonly 叶标记
-- [ ] 4.2 绿：`moduleConsole.ts` Tab 派生携带 readonly 标记（现有 `!f.readonly` 过滤改为降级派生）
-- [ ] 4.3 F2 红：只读 Tab 只读视图（无编辑/下发入口）、只读 list 表格无操作列、混合容器叶禁用态且不入 payload/校验
-- [ ] 4.4 绿：控制台/FieldRenderer 只读呈现路径（design D4 两层）
+- [x] 4.1 F1 红：`moduleConsole` 派生测试——整棵 readonly 子树→只读 Tab、混合容器 readonly 叶标记
+- [x] 4.2 绿：`moduleConsole.ts` Tab 派生携带 readonly 标记（现有 `!f.readonly` 过滤改为降级派生）
+- [x] 4.3 F2 红：只读 Tab 只读视图（无编辑/下发入口）、只读 list 表格无操作列、混合容器叶禁用态且不入 payload/校验
+- [x] 4.4 绿：控制台/FieldRenderer 只读呈现路径（design D4 两层）
 
 ## 5. S2+S3 前端：动态缺省占位 + 单位后缀（F2）
 

@@ -114,3 +114,66 @@ describe('ModuleFormTab · 全局属性校验（statistic-interval，FE-11/FE-07
     expect(w.text()).toContain('no converter for path')
   })
 })
+
+describe('ModuleFormTab · readonly 降级（FE-14）', () => {
+  const mixedTab = deriveTabs([
+    {
+      path: '/ifm/mixed',
+      type: 'group' as const,
+      label: 'mixed',
+      fields: [
+        { path: '/ifm/mixed/mtu', type: 'number' as const, label: 'mtu' },
+        { path: '/ifm/mixed/oper-status', type: 'string' as const, label: 'oper-status', readonly: true },
+      ],
+    },
+  ])[0]
+
+  it('混合容器内 readonly 叶：渲染禁用态、不入 diff/payload、无必填规则', async () => {
+    vi.mocked(getConfig).mockResolvedValue({
+      data: { data: { data: { mtu: 1500, 'oper-status': 'up' } } },
+    } as any)
+    const w = mount(ModuleFormTab, {
+      props: { tab: mixedTab, rootName: 'ifm', device: '10.0.0.1' },
+      global: { plugins: [createPinia(), ElementPlus] },
+    })
+    await flushPromises()
+    const vm = w.vm as any
+
+    // readonly 叶可见但禁用（回显设备 state 值）
+    const inputs = w.findAll('.el-form-item')
+    const operItem = inputs.find((n) => n.text().includes('oper-status'))!
+    expect(operItem.find('input').attributes('disabled')).toBeDefined()
+
+    // 改可编辑叶后：diff/payload 只含可编辑键，readonly 键不入
+    vm.form.formData['mtu'] = 9000
+    await flushPromises()
+    const payload = vm.form.visiblePayload()
+    expect(payload['mtu']).toBe(9000)
+    expect('oper-status' in payload).toBe(false)
+    expect(vm.form.diff.value.every((d: any) => d.key !== 'oper-status')).toBe(true)
+    expect(vm.form.rules.value['oper-status']).toBeUndefined()
+  })
+
+  it('整 Tab readonly：无「下发」按钮', async () => {
+    const roTab = deriveTabs([
+      {
+        path: '/ifm/ipv4-interface-count',
+        type: 'group' as const,
+        label: 'ipv4-interface-count',
+        readonly: true,
+        fields: [
+          { path: '/ifm/ipv4-interface-count/protocol-up-count', type: 'number' as const, label: 'protocol-up-count', readonly: true },
+        ],
+      },
+    ])[0]
+    vi.mocked(getConfig).mockResolvedValue({ data: { data: { data: { 'protocol-up-count': 3 } } } } as any)
+    const w = mount(ModuleFormTab, {
+      props: { tab: roTab, rootName: 'ifm', device: '10.0.0.1' },
+      global: { plugins: [createPinia(), ElementPlus] },
+    })
+    await flushPromises()
+    expect(w.text()).not.toContain('下发')
+    // state 值照常回显
+    expect((w.vm as any).form.formData['protocol-up-count']).toBe(3)
+  })
+})

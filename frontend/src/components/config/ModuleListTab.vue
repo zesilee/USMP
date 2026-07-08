@@ -1,8 +1,8 @@
 <template>
   <div class="module-list-tab">
-    <!-- 工具栏：新增 + 高级搜索折叠开关（FE-11） -->
+    <!-- 工具栏：新增 + 高级搜索折叠开关（FE-11）；只读 Tab 无编辑入口（FE-14） -->
     <div class="toolbar">
-      <el-button type="primary" :icon="Plus" :disabled="!device" @click="openAdd">新增</el-button>
+      <el-button v-if="!tab.readonly" type="primary" :icon="Plus" :disabled="!device" @click="openAdd">新增</el-button>
       <el-button v-if="searchFields.length" link type="primary" class="adv-toggle" @click="searchOpen = !searchOpen">
         高级搜索
         <el-icon><ArrowUp v-if="searchOpen" /><ArrowDown v-else /></el-icon>
@@ -59,7 +59,7 @@
           <span v-else>{{ rowVal(row, col) }}</span>
         </template>
       </el-table-column>
-      <el-table-column v-if="canUpdate || canDelete" label="操作" width="130" fixed="right">
+      <el-table-column v-if="!tab.readonly && (canUpdate || canDelete)" label="操作" width="130" fixed="right">
         <template #default="{ row }">
           <el-button v-if="canUpdate" type="primary" size="small" link @click="openEdit(row)">编辑</el-button>
           <el-button
@@ -89,8 +89,9 @@
       />
     </div>
 
-    <!-- 新增/编辑抽屉：模型驱动表单 + 差异预览 + 对账进度（复用既有编排） -->
-    <el-drawer v-model="drawerVisible" :title="editing ? '编辑' : '新增'" size="560px"
+    <!-- 新增/编辑抽屉：模型驱动表单 + 差异预览 + 对账进度（复用既有编排）；
+         只读 Tab（state 子树）无编辑语义，整个抽屉不渲染（FE-14）。 -->
+    <el-drawer v-if="!tab.readonly" v-model="drawerVisible" :title="editing ? '编辑' : '新增'" size="560px"
       :close-on-click-modal="!flowActive" :close-on-press-escape="!flowActive" @closed="onDrawerClosed">
       <template v-if="!flowActive">
         <el-form ref="formRef" :model="form.formData" :rules="form.rules.value" label-position="top" class="config-form">
@@ -98,7 +99,7 @@
             :prop="form.keyOf(field)">
             <FieldRenderer v-if="field.type === 'choice'" :field="field" :model-value="form.choiceScope(field)"
               @update:model-value="form.onChoiceUpdate(field, $event)" />
-            <FieldRenderer v-else :field="field" :disabled="editing && isCreateOnly(field)"
+            <FieldRenderer v-else :field="field" :disabled="(editing && isCreateOnly(field)) || !!field.readonly"
               :model-value="form.formData[form.keyOf(field)]"
               @update:model-value="form.formData[form.keyOf(field)] = $event" />
           </el-form-item>
@@ -156,8 +157,8 @@ const configPath = computed(() => configPathFor(props.rootName, props.tab.field.
 const keyField = computed(() => deriveKeyField(listField.value))
 const columns = computed(() => deriveColumns(listField.value))
 const searchFields = computed(() => filterableFields(listField.value))
-// 编辑表单字段：list 子字段（只读 oper 叶不参与配置）。
-const itemFields = computed<Field[]>(() => (listField.value.fields || []).filter((f) => !f.readonly))
+// 编辑表单字段：list 全部子字段——readonly 叶禁用回显，payload/校验排除在 useConfigForm（FE-14）。
+const itemFields = computed<Field[]>(() => listField.value.fields || [])
 
 // list 级 operation-exclude 门禁（FE-11）；叶级 exclude 见 isCreateOnly。
 const canUpdate = computed(() => !props.tab.field.operationExclude?.includes('update') &&

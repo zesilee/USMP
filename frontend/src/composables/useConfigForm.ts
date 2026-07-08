@@ -57,9 +57,12 @@ export function useConfigForm(fields: Ref<Field[]> | ComputedRef<Field[]>, keyFi
   const flatFields = computed(() =>
     visibleFields.value.flatMap((f) => (f.type === 'choice' ? choiceMemberFields(f) : [f])),
   )
+  // 可编辑字段面（FE-14）：readonly（config false state）叶可见可回显，但不参与
+  // 校验/diff/payload——state 数据永不进设备写路径。
+  const editableFlat = computed(() => flatFields.value.filter((f) => !f.readonly))
 
   const patternViolations = computed(() =>
-    flatFields.value.filter((f) => {
+    editableFlat.value.filter((f) => {
       const re = compilePattern(f.pattern)
       if (!re) return false
       const v = formData[keyOf(f)]
@@ -68,11 +71,11 @@ export function useConfigForm(fields: Ref<Field[]> | ComputedRef<Field[]>, keyFi
     }),
   )
 
-  const diff = computed(() => computeDiff(formData, original.value, flatFields.value))
+  const diff = computed(() => computeDiff(formData, original.value, editableFlat.value))
   const submittable = computed(
     () =>
       diff.value.length > 0 &&
-      missingRequired(flatFields.value, formData, keyField?.value ?? '').length === 0 &&
+      missingRequired(editableFlat.value, formData, keyField?.value ?? '').length === 0 &&
       mustViolations.value.length === 0 &&
       patternViolations.value.length === 0,
   )
@@ -80,7 +83,7 @@ export function useConfigForm(fields: Ref<Field[]> | ComputedRef<Field[]>, keyFi
   // 权威门禁（§9）：缺必填/must 违例/pattern 违例一律拦截（el-form validate 只管行内展示）。
   const blocked = computed(
     () =>
-      missingRequired(flatFields.value, formData, keyField?.value ?? '').length > 0 ||
+      missingRequired(editableFlat.value, formData, keyField?.value ?? '').length > 0 ||
       mustViolations.value.length > 0 ||
       patternViolations.value.length > 0,
   )
@@ -89,6 +92,7 @@ export function useConfigForm(fields: Ref<Field[]> | ComputedRef<Field[]>, keyFi
   const rules = computed<FormRules>(() => {
     const r: FormRules = {}
     for (const f of visibleFields.value) {
+      if (f.readonly) continue // state 叶只读展示，无校验规则（FE-14）
       const key = keyOf(f)
       const list: any[] = []
       if (f.required || (keyField && key === keyField.value)) {
@@ -118,7 +122,7 @@ export function useConfigForm(fields: Ref<Field[]> | ComputedRef<Field[]>, keyFi
   // 下发 payload：仅当前可见字段的键（when 隐藏 = 节点不存在）；undefined 键剔除
   //（presence 关闭 = 节点不存在，FE-12）。
   function visiblePayload(): Record<string, any> {
-    const keys = new Set(flatFields.value.map(keyOf))
+    const keys = new Set(editableFlat.value.map(keyOf))
     const out: Record<string, any> = {}
     for (const k of Object.keys(formData)) {
       if (keys.has(k) && formData[k] !== undefined) out[k] = formData[k]
