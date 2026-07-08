@@ -34,8 +34,8 @@
 
 ## 5. S2+S3 前端：动态缺省占位 + 单位后缀（F2）
 
-- [ ] 5.1 F2 红：FieldRenderer——dynamicDefault 占位提示、空值不入 diff/不报必填、显式覆写正常下发（边界）、units 后缀展示
-- [ ] 5.2 绿：FieldRenderer 消费 `dynamicDefault`/`units`；useConfigForm 空值豁免必填与 diff
+- [x] 5.1 F2 红：FieldRenderer——dynamicDefault 占位提示、空值不入 diff/不报必填、显式覆写正常下发（边界）、units 后缀展示
+- [x] 5.2 绿：FieldRenderer 消费 `dynamicDefault`/`units`；useConfigForm 空值豁免必填与 diff
 
 ## 6. S4 前端：左导航任务域分组（F1+F2）
 

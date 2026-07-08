@@ -95,7 +95,8 @@ export function useConfigForm(fields: Ref<Field[]> | ComputedRef<Field[]>, keyFi
       if (f.readonly) continue // state 叶只读展示，无校验规则（FE-14）
       const key = keyOf(f)
       const list: any[] = []
-      if (f.required || (keyField && key === keyField.value)) {
+      // dynamicDefault 豁免必填（FE-15）：空值=系统自动分配；keyField 恒必填。
+      if ((f.required && !f.dynamicDefault) || (keyField && key === keyField.value)) {
         list.push({ required: true, message: `${f.label} 必填`, trigger: ['change', 'blur'] })
       }
       if (f.type === 'number' && (f.minimum != null || f.maximum != null)) {
@@ -123,9 +124,13 @@ export function useConfigForm(fields: Ref<Field[]> | ComputedRef<Field[]>, keyFi
   //（presence 关闭 = 节点不存在，FE-12）。
   function visiblePayload(): Record<string, any> {
     const keys = new Set(editableFlat.value.map(keyOf))
+    // dynamicDefault 叶空值不入 payload（FE-15）：空=「设备自行决定」，下发空串会覆写设备缺省。
+    const dynKeys = new Set(editableFlat.value.filter((f) => f.dynamicDefault).map(keyOf))
     const out: Record<string, any> = {}
     for (const k of Object.keys(formData)) {
-      if (keys.has(k) && formData[k] !== undefined) out[k] = formData[k]
+      if (!keys.has(k) || formData[k] === undefined) continue
+      if (dynKeys.has(k) && (formData[k] === '' || formData[k] === null)) continue
+      out[k] = formData[k]
     }
     return out
   }

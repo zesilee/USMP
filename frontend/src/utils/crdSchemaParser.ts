@@ -35,6 +35,11 @@ export interface Field {
   presence?: boolean
   // isKey 标记 list key 叶：通用控制台据此派生 keyField（FE-11）。
   isKey?: boolean
+  // dynamicDefault 标记厂商 dynamic-default 扩展：值由系统动态缺省——空值=「设备
+  // 自行决定」而非缺配置，展示自动分配占位、不强制必填、不入 payload（FE-15）。
+  dynamicDefault?: boolean
+  // units 携带 YANG units：输入控件展示单位后缀（FE-15）。
+  units?: string
 }
 
 interface OpenAPIProperty {

@@ -37,6 +37,7 @@ export function computeDiff(
 }
 
 // 必填未填的字段 label 列表（keyField 恒视为必填）。下发按钮 = 有改动 && 无缺失必填。
+// dynamicDefault 叶豁免必填（FE-15）：空值=系统自动分配，非缺配置；keyField 例外恒必填。
 export function missingRequired(
   fields: Field[],
   formData: Record<string, any> | null | undefined,
@@ -46,7 +47,8 @@ export function missingRequired(
   const out: string[] = []
   for (const f of fields ?? []) {
     const key = segOf(f)
-    if ((f.required || key === keyField) && norm(form[key]) === '') out.push(f.label)
+    const req = (f.required && !f.dynamicDefault) || key === keyField
+    if (req && norm(form[key]) === '') out.push(f.label)
   }
   return out
 }

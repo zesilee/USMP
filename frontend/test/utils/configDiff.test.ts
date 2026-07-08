@@ -78,3 +78,24 @@ describe('missingRequired · 必填未填校验（下发按钮启用前置）', 
     expect(missingRequired(fields, { id: 10, name: 'x' }, 'id')).toEqual([])
   })
 })
+
+describe('missingRequired · dynamicDefault 豁免（FE-15）', () => {
+  const f = (name: string, extra: any = {}) => ({
+    path: `/x/${name}`, type: 'string' as const, label: name, ...extra,
+  })
+
+  it('required + dynamicDefault 空值不算缺失（系统自动分配）', () => {
+    const fields = [f('admin-status', { required: true, dynamicDefault: true })]
+    expect(missingRequired(fields, {}, '')).toEqual([])
+  })
+
+  it('required 无 dynamicDefault 空值仍算缺失', () => {
+    const fields = [f('name', { required: true })]
+    expect(missingRequired(fields, {}, '')).toEqual(['name'])
+  })
+
+  it('keyField 即使 dynamicDefault 也恒必填（键不可缺）', () => {
+    const fields = [f('id', { dynamicDefault: true })]
+    expect(missingRequired(fields, {}, 'id')).toEqual(['id'])
+  })
+})

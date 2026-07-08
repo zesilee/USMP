@@ -177,3 +177,42 @@ describe('ModuleFormTab · readonly 降级（FE-14）', () => {
     expect((w.vm as any).form.formData['protocol-up-count']).toBe(3)
   })
 })
+
+describe('ModuleFormTab · dynamicDefault 空值语义（FE-15）', () => {
+  const dynTab = deriveTabs([
+    {
+      path: '/ifm/dyncfg',
+      type: 'group' as const,
+      label: 'dyncfg',
+      fields: [
+        { path: '/ifm/dyncfg/mtu', type: 'number' as const, label: 'mtu' },
+        { path: '/ifm/dyncfg/admin-status', type: 'string' as const, label: 'admin-status', required: true, dynamicDefault: true },
+      ],
+    },
+  ])[0]
+
+  it('空值不入 payload/不报必填；显式覆写正常入 payload（边界）', async () => {
+    vi.mocked(getConfig).mockResolvedValue({ data: { data: { data: {} } } } as any)
+    const w = mount(ModuleFormTab, {
+      props: { tab: dynTab, rootName: 'ifm', device: '10.0.0.1' },
+      global: { plugins: [createPinia(), ElementPlus] },
+    })
+    await flushPromises()
+    const vm = w.vm as any
+
+    // 空值：required+dynamicDefault 不拦截（blocked=false 前提是有其它有效改动）
+    vm.form.formData['mtu'] = 9000
+    vm.form.formData['admin-status'] = ''
+    await flushPromises()
+    expect(vm.form.blocked.value).toBe(false)
+    let payload = vm.form.visiblePayload()
+    expect(payload['mtu']).toBe(9000)
+    expect('admin-status' in payload).toBe(false)
+
+    // 显式覆写：正常进入 payload
+    vm.form.formData['admin-status'] = 'down'
+    await flushPromises()
+    payload = vm.form.visiblePayload()
+    expect(payload['admin-status']).toBe('down')
+  })
+})
