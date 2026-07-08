@@ -114,3 +114,139 @@ describe('ModuleFormTab · 全局属性校验（statistic-interval，FE-11/FE-07
     expect(w.text()).toContain('no converter for path')
   })
 })
+
+describe('ModuleFormTab · readonly 降级（FE-14）', () => {
+  const mixedTab = deriveTabs([
+    {
+      path: '/ifm/mixed',
+      type: 'group' as const,
+      label: 'mixed',
+      fields: [
+        { path: '/ifm/mixed/mtu', type: 'number' as const, label: 'mtu' },
+        { path: '/ifm/mixed/oper-status', type: 'string' as const, label: 'oper-status', readonly: true },
+      ],
+    },
+  ])[0]
+
+  it('混合容器内 readonly 叶：渲染禁用态、不入 diff/payload、无必填规则', async () => {
+    vi.mocked(getConfig).mockResolvedValue({
+      data: { data: { data: { mtu: 1500, 'oper-status': 'up' } } },
+    } as any)
+    const w = mount(ModuleFormTab, {
+      props: { tab: mixedTab, rootName: 'ifm', device: '10.0.0.1' },
+      global: { plugins: [createPinia(), ElementPlus] },
+    })
+    await flushPromises()
+    const vm = w.vm as any
+
+    // readonly 叶可见但禁用（回显设备 state 值）
+    const inputs = w.findAll('.el-form-item')
+    const operItem = inputs.find((n) => n.text().includes('oper-status'))!
+    expect(operItem.find('input').attributes('disabled')).toBeDefined()
+
+    // 改可编辑叶后：diff/payload 只含可编辑键，readonly 键不入
+    vm.form.formData['mtu'] = 9000
+    await flushPromises()
+    const payload = vm.form.visiblePayload()
+    expect(payload['mtu']).toBe(9000)
+    expect('oper-status' in payload).toBe(false)
+    expect(vm.form.diff.value.every((d: any) => d.key !== 'oper-status')).toBe(true)
+    expect(vm.form.rules.value['oper-status']).toBeUndefined()
+  })
+
+  it('整 Tab readonly：无「下发」按钮', async () => {
+    const roTab = deriveTabs([
+      {
+        path: '/ifm/ipv4-interface-count',
+        type: 'group' as const,
+        label: 'ipv4-interface-count',
+        readonly: true,
+        fields: [
+          { path: '/ifm/ipv4-interface-count/protocol-up-count', type: 'number' as const, label: 'protocol-up-count', readonly: true },
+        ],
+      },
+    ])[0]
+    vi.mocked(getConfig).mockResolvedValue({ data: { data: { data: { 'protocol-up-count': 3 } } } } as any)
+    const w = mount(ModuleFormTab, {
+      props: { tab: roTab, rootName: 'ifm', device: '10.0.0.1' },
+      global: { plugins: [createPinia(), ElementPlus] },
+    })
+    await flushPromises()
+    expect(w.text()).not.toContain('下发')
+    // state 值照常回显
+    expect((w.vm as any).form.formData['protocol-up-count']).toBe(3)
+  })
+})
+
+describe('ModuleFormTab · dynamicDefault 空值语义（FE-15）', () => {
+  const dynTab = deriveTabs([
+    {
+      path: '/ifm/dyncfg',
+      type: 'group' as const,
+      label: 'dyncfg',
+      fields: [
+        { path: '/ifm/dyncfg/mtu', type: 'number' as const, label: 'mtu' },
+        { path: '/ifm/dyncfg/admin-status', type: 'string' as const, label: 'admin-status', required: true, dynamicDefault: true },
+      ],
+    },
+  ])[0]
+
+  it('空值不入 payload/不报必填；显式覆写正常入 payload（边界）', async () => {
+    vi.mocked(getConfig).mockResolvedValue({ data: { data: { data: {} } } } as any)
+    const w = mount(ModuleFormTab, {
+      props: { tab: dynTab, rootName: 'ifm', device: '10.0.0.1' },
+      global: { plugins: [createPinia(), ElementPlus] },
+    })
+    await flushPromises()
+    const vm = w.vm as any
+
+    // 空值：required+dynamicDefault 不拦截（blocked=false 前提是有其它有效改动）
+    vm.form.formData['mtu'] = 9000
+    vm.form.formData['admin-status'] = ''
+    await flushPromises()
+    expect(vm.form.blocked.value).toBe(false)
+    let payload = vm.form.visiblePayload()
+    expect(payload['mtu']).toBe(9000)
+    expect('admin-status' in payload).toBe(false)
+
+    // 显式覆写：正常进入 payload
+    vm.form.formData['admin-status'] = 'down'
+    await flushPromises()
+    payload = vm.form.visiblePayload()
+    expect(payload['admin-status']).toBe('down')
+  })
+})
+
+describe('ModuleFormTab · readonly 叶 must 不入门禁（FE-14 回归）', () => {
+  it('readonly state 叶 must 违例不得卡死提交门禁（用户不可改 state 值）', async () => {
+    const tab = deriveTabs([
+      {
+        path: '/ifm/mix2',
+        type: 'group' as const,
+        label: 'mix2',
+        fields: [
+          { path: '/ifm/mix2/mtu', type: 'number' as const, label: 'mtu' },
+          {
+            path: '/ifm/mix2/oper-state', type: 'string' as const, label: 'oper-state',
+            readonly: true, must: [{ expr: "../oper-state='up'", message: 'state must be up' }],
+          },
+        ],
+      },
+    ])[0]
+    // 设备回读 state=down → readonly 叶 must 违例
+    vi.mocked(getConfig).mockResolvedValue({
+      data: { data: { data: { 'oper-state': 'down' } } },
+    } as any)
+    const w = mount(ModuleFormTab, {
+      props: { tab, rootName: 'ifm', device: '10.0.0.1' },
+      global: { plugins: [createPinia(), ElementPlus] },
+    })
+    await flushPromises()
+    const vm = w.vm as any
+    vm.form.formData['mtu'] = 9000
+    await flushPromises()
+    // readonly 叶的 must 不入权威门禁：可正常提交可编辑改动
+    expect(vm.form.blocked.value).toBe(false)
+    expect(vm.form.submittable.value).toBe(true)
+  })
+})

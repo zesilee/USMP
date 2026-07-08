@@ -1,25 +1,30 @@
 <template>
   <div class="field-renderer">
-    <!-- String -->
-    <el-input
-      v-if="field.type === 'string'"
-      :model-value="modelValue"
-      @update:model-value="$emit('update:modelValue', $event)"
-      :placeholder="field.placeholder"
-      :disabled="field.readonly || disabled"
-    />
+    <!-- String（units → 单位后缀，FE-15） -->
+    <div v-if="field.type === 'string'" class="field-scalar">
+      <el-input
+        :model-value="modelValue"
+        @update:model-value="$emit('update:modelValue', $event)"
+        :placeholder="placeholderOf"
+        :disabled="field.readonly || disabled"
+      />
+      <span v-if="field.units" class="field-units">{{ field.units }}</span>
+    </div>
 
-    <!-- Number -->
-    <el-input-number
-      v-else-if="field.type === 'number'"
-      :model-value="modelValue"
-      @update:model-value="$emit('update:modelValue', $event)"
-      :disabled="field.readonly || disabled"
-      :min="field.minimum"
-      :max="field.maximum"
-      controls-position="right"
-      style="width: 100%"
-    />
+    <!-- Number（units → 单位后缀，FE-15） -->
+    <div v-else-if="field.type === 'number'" class="field-scalar">
+      <el-input-number
+        :model-value="modelValue"
+        @update:model-value="$emit('update:modelValue', $event)"
+        :placeholder="placeholderOf"
+        :disabled="field.readonly || disabled"
+        :min="field.minimum"
+        :max="field.maximum"
+        controls-position="right"
+        style="width: 100%"
+      />
+      <span v-if="field.units" class="field-units">{{ field.units }}</span>
+    </div>
 
     <!-- Boolean -->
     <el-switch
@@ -34,7 +39,7 @@
       v-else-if="field.type === 'enum'"
       :model-value="modelValue"
       @update:model-value="$emit('update:modelValue', $event)"
-      :placeholder="field.placeholder"
+      :placeholder="placeholderOf"
       :disabled="field.readonly || disabled"
       clearable
       style="width: 100%"
@@ -256,6 +261,11 @@ const emit = defineEmits<{
   'update:modelValue': [value: any]
 }>()
 
+// dynamicDefault（FE-15）：空值=系统自动分配，占位提示之；显式 placeholder 优先。
+const placeholderOf = computed<string | undefined>(() =>
+  props.field.placeholder || (props.field.dynamicDefault ? '系统自动分配（可覆写）' : undefined),
+)
+
 // 数据以 YANG 叶子名（path 末段）为键，对齐后端转换（非 full path）。
 function keyOf(f: Field): string {
   const seg = f.path.split('/').filter(Boolean).pop()
@@ -308,6 +318,23 @@ function removeItem(idx: number) {
 <style scoped>
 .field-renderer {
   width: 100%;
+}
+
+.field-scalar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.field-scalar > :first-child {
+  flex: 1;
+}
+
+.field-units {
+  flex: none;
+  font-size: 12px;
+  color: #909399;
 }
 
 .field-presence {

@@ -56,7 +56,7 @@ func nodeToNestedField(node schema.Node) FieldDef {
 		return leafToField(n, "")
 	case schema.ChoiceNode:
 		// choice → 互斥分支节点：每个 case 递归携带其子字段（扁平 path 保持不变）。
-		f := FieldDef{Path: n.Path(), Type: "choice", Label: n.Name()}
+		f := FieldDef{Path: n.Path(), Type: "choice", Label: n.Name(), Readonly: n.ReadOnly()}
 		for _, cs := range n.Cases() {
 			cd := CaseDef{Name: cs.Name(), Label: cs.Name()}
 			for _, ch := range cs.Children() {
@@ -66,7 +66,7 @@ func nodeToNestedField(node schema.Node) FieldDef {
 		}
 		return f
 	case schema.ListNode:
-		f := FieldDef{Path: n.Path(), Type: "list", Label: n.Name(), OperationExclude: n.OperationExcludes()}
+		f := FieldDef{Path: n.Path(), Type: "list", Label: n.Name(), OperationExclude: n.OperationExcludes(), Readonly: n.ReadOnly()}
 		for _, ch := range n.Children() {
 			f.Fields = append(f.Fields, nodeToNestedField(ch))
 		}
@@ -77,6 +77,8 @@ func nodeToNestedField(node schema.Node) FieldDef {
 		f := FieldDef{
 			Path: n.Path(), Type: "group", Label: n.Name(),
 			Presence: n.IsPresence(), When: n.WhenExpr(), OperationExclude: n.OperationExcludes(),
+			// config false 子树降级只读视图（BR-09）。
+			Readonly: n.ReadOnly(),
 		}
 		for _, expr := range n.MustExprs() {
 			f.Must = append(f.Must, MustRule{Expr: expr, Message: n.Description()})
@@ -130,6 +132,11 @@ func leafToField(leaf schema.LeafNode, group string) FieldDef {
 		SupportFilter:    leaf.SupportFilter(),
 		OperationExclude: leaf.OperationExcludes(),
 		IsKey:            leaf.IsKey(),
+		// config false 叶（含继承）编辑态禁用且不入 payload（BR-09）。
+		Readonly: leaf.ReadOnly(),
+		// 系统动态缺省（BR-10）+ 单位后缀（BR-09）。
+		DynamicDefault: leaf.DynamicDefault(),
+		Units:          leaf.Units(),
 	}
 	if leaf.LeafType() == schema.LeafTypeEnum {
 		for _, v := range leaf.EnumValues() {

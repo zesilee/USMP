@@ -96,6 +96,10 @@ type Node interface {
 	Parent() Node
 	// SchemaPath returns the schema path in the module
 	SchemaPath() string
+	// ReadOnly reports whether this node is state data (YANG `config false`,
+	// including inheritance from an ancestor — BR-09). Read-only nodes render
+	// as non-editable views and never enter a device write payload.
+	ReadOnly() bool
 }
 
 // ContainerNode represents a YANG container node
@@ -167,6 +171,10 @@ type LeafNode interface {
 	// SupportFilter reports whether the vendor `support-filter` extension marks
 	// this leaf as a query/filter field (drives advanced-search controls, BR-07).
 	SupportFilter() bool
+	// DynamicDefault reports whether the vendor `dynamic-default` extension marks
+	// this leaf as system-defaulted (BR-10): an empty value means "device decides",
+	// not "missing configuration" — the form shows an auto-assigned placeholder.
+	DynamicDefault() bool
 	// OperationExcludes returns the operations excluded for this leaf by the
 	// vendor `operation-exclude` extension (normalized lower-case, e.g.
 	// ["update","delete"] for create-only identity fields), empty if none.

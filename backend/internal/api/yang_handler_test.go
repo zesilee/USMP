@@ -3,6 +3,7 @@ package api
 import (
 	"encoding/json"
 	"net/http/httptest"
+	"strings"
 	"testing"
 
 	"github.com/gin-gonic/gin"
@@ -79,5 +80,47 @@ func TestListModulesDynamic(t *testing.T) {
 	}
 	if byName["interfaces"].Vendor != "openconfig" {
 		t.Errorf("interfaces vendor = %q, want openconfig", byName["interfaces"].Vendor)
+	}
+}
+
+// TestListModulesCategory (BR-01): modules whose source YANG declares a
+// module-level `task-name` carry `category` from the build-time map; modules
+// without a mapping omit it and the endpoint never fails (R08).
+func TestListModulesCategory(t *testing.T) {
+	gin.SetMode(gin.TestMode)
+	h := newYangHandlerWithSchema(t)
+
+	w := httptest.NewRecorder()
+	c, _ := gin.CreateTestContext(w)
+	h.ListModules(c)
+
+	var mods []YangModuleInfo
+	decodeData(t, w.Body.Bytes(), &mods)
+	byName := map[string]YangModuleInfo{}
+	for _, m := range mods {
+		byName[m.Name] = m
+	}
+	cases := []struct {
+		module string
+		want   string
+	}{
+		{"ifm", "interface-mgr"},
+		{"vlan", "vlan"},
+		{"system", "system"},
+		{"interfaces", ""}, // openconfig — no task-name mapping → omitted
+	}
+	for _, cse := range cases {
+		if got := byName[cse.module].Category; got != cse.want {
+			t.Errorf("%s category = %q, want %q", cse.module, got, cse.want)
+		}
+	}
+
+	// omitempty boundary: unmapped module serializes without a category key.
+	raw, err := json.Marshal(byName["interfaces"])
+	if err != nil {
+		t.Fatalf("marshal: %v", err)
+	}
+	if strings.Contains(string(raw), `"category"`) {
+		t.Errorf("interfaces serializes category unexpectedly: %s", raw)
 	}
 }

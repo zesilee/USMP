@@ -103,6 +103,14 @@ type defaultNode struct {
 	schemaPath  string
 	nodeType    NodeType
 	parent      Node
+	// readOnly marks state data (`config false`, inherited down the subtree per
+	// YANG semantics — BR-09). Set once at build time, immutable afterwards (R09).
+	readOnly bool
+}
+
+// ReadOnly implements Node interface
+func (n *defaultNode) ReadOnly() bool {
+	return n.readOnly
 }
 
 // Name implements Node interface
@@ -415,27 +423,33 @@ func NewCase(name, description, path string, parent Node) CaseNode {
 // defaultLeaf is the default implementation of LeafNode
 type defaultLeaf struct {
 	defaultNode
-	leafType      LeafType
-	isKey         bool
-	defaultValue  interface{}
-	enumValues    []string
-	mandatory     bool
-	units         string
-	whenExpr      string
-	mustExprs     []string
-	pattern       string
-	rangeMin      int
-	rangeMax      int
-	hasMin        bool
-	hasMax        bool
-	leafList      bool
-	supportFilter bool
-	opExcludes    []string
+	leafType       LeafType
+	isKey          bool
+	defaultValue   interface{}
+	enumValues     []string
+	mandatory      bool
+	units          string
+	whenExpr       string
+	mustExprs      []string
+	pattern        string
+	rangeMin       int
+	rangeMax       int
+	hasMin         bool
+	hasMax         bool
+	leafList       bool
+	supportFilter  bool
+	dynamicDefault bool
+	opExcludes     []string
 }
 
 // SupportFilter implements LeafNode interface
 func (l *defaultLeaf) SupportFilter() bool {
 	return l.supportFilter
+}
+
+// DynamicDefault implements LeafNode interface
+func (l *defaultLeaf) DynamicDefault() bool {
+	return l.dynamicDefault
 }
 
 // OperationExcludes implements LeafNode interface

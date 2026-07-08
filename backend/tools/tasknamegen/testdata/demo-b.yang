@@ -1,0 +1,9 @@
+module demo-b {
+  namespace "urn:demo:b";
+  prefix db;
+  container things {
+    leaf name {
+      type string;
+    }
+  }
+}

@@ -182,3 +182,61 @@ describe('statusTone · 值驱动状态色（非字段名驱动）', () => {
     expect(statusTone(1500)).toBe('')
   })
 })
+
+describe('deriveTabs · readonly 子树降级只读 Tab（FE-14）', () => {
+  const roList: Field = {
+    path: '/ifm/remote-interfaces/remote-interface',
+    type: 'list',
+    label: 'remote-interface',
+    readonly: true,
+    fields: [
+      { path: '/ifm/remote-interfaces/remote-interface/index', type: 'string', label: 'index', readonly: true, isKey: true },
+    ],
+  }
+  const roGroup: Field = {
+    path: '/ifm/remote-interfaces',
+    type: 'group',
+    label: 'remote-interfaces',
+    readonly: true,
+    fields: [roList],
+  }
+
+  it('整棵 readonly group 包裹单 list → 只读列表 Tab（不因 readonly 过滤而误判成表单）', () => {
+    const tabs = deriveTabs([roGroup])
+    expect(tabs).toHaveLength(1)
+    expect(tabs[0].kind).toBe('list')
+    expect(tabs[0].readonly).toBe(true)
+    expect(tabs[0].listField?.path).toBe('/ifm/remote-interfaces/remote-interface')
+  })
+
+  it('readonly 裸 list → 只读列表 Tab；可编辑节点 readonly 不置位', () => {
+    const tabs = deriveTabs([roList, ...rootFields])
+    const byName = Object.fromEntries(tabs.map((t) => [t.name, t]))
+    expect(byName['remote-interface'].readonly).toBe(true)
+    expect(byName['interfaces'].readonly).toBeFalsy()
+    expect(byName['global'].readonly).toBeFalsy()
+  })
+
+  it('readonly 普通 group → 只读表单 Tab', () => {
+    const roForm: Field = {
+      path: '/ifm/ipv4-interface-count',
+      type: 'group',
+      label: 'ipv4-interface-count',
+      readonly: true,
+      fields: [
+        { path: '/ifm/ipv4-interface-count/protocol-up-count', type: 'number', label: 'protocol-up-count', readonly: true },
+        { path: '/ifm/ipv4-interface-count/protocol-down-count', type: 'number', label: 'protocol-down-count', readonly: true },
+      ],
+    }
+    const tabs = deriveTabs([roForm])
+    expect(tabs[0].kind).toBe('form')
+    expect(tabs[0].readonly).toBe(true)
+  })
+
+  it('全 readonly 散落根叶 → 基本属性 Tab 只读；混有可编辑叶则不只读', () => {
+    const roLeaf: Field = { path: '/ifm/uptime', type: 'string', label: 'uptime', readonly: true }
+    const rwLeaf: Field = { path: '/ifm/name', type: 'string', label: 'name' }
+    expect(deriveTabs([roLeaf])[0].readonly).toBe(true)
+    expect(deriveTabs([roLeaf, rwLeaf])[0].readonly).toBeFalsy()
+  })
+})

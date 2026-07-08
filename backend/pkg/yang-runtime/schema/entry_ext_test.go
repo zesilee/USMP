@@ -44,12 +44,22 @@ func buildExtSchema() *ytypes.Schema {
 		ext("ext:support-filter", ""),
 		ext("ext:operation-exclude", ""),
 	}}
+	// dynamic-default: bare form (real IFM admin-status) and alternate prefix with
+	// a default-value substatement form (huawei-extension Example2) — both mark the
+	// leaf as system-defaulted (BR-10, boolean presence only).
+	adminStatus := &yang.Entry{Name: "admin-status", Type: str(), Exts: []*yang.Statement{
+		ext("ext:dynamic-default", ""),
+	}}
+	mtu := &yang.Entry{Name: "mtu", Type: str(), Exts: []*yang.Statement{
+		ext("hw-ext:dynamic-default", "../bbb + ../ccc"),
+	}}
 
 	iface := &yang.Entry{
 		Name: "interface", Key: "name", ListAttr: &yang.ListAttr{},
 		Dir: map[string]*yang.Entry{
 			"name": name, "class": class, "type": typ, "number": number,
 			"description": desc, "no-arg": noArg,
+			"admin-status": adminStatus, "mtu": mtu,
 		},
 		Exts: []*yang.Statement{ext("ext:operation-exclude", "delete")},
 	}
@@ -126,6 +136,23 @@ func TestLeafOperationExcludesFromExts(t *testing.T) {
 	for _, c := range cases {
 		if got := extTestLeaf(t, c.leaf).OperationExcludes(); !reflect.DeepEqual(got, c.want) {
 			t.Errorf("%s OperationExcludes = %v, want %v", c.leaf, got, c.want)
+		}
+	}
+}
+
+func TestLeafDynamicDefaultFromExts(t *testing.T) {
+	cases := []struct {
+		leaf string
+		want bool
+	}{
+		{"admin-status", true}, // bare form (real IFM)
+		{"mtu", true},          // alternate prefix + default-value argument form
+		{"class", false},       // carries other extensions only → no false positive
+		{"description", false}, // no extensions
+	}
+	for _, c := range cases {
+		if got := extTestLeaf(t, c.leaf).DynamicDefault(); got != c.want {
+			t.Errorf("%s DynamicDefault = %v, want %v", c.leaf, got, c.want)
 		}
 	}
 }

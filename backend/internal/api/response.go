@@ -37,4 +37,3 @@ func Error(c *gin.Context, code int, message string) {
 func DeviceOfflineError(c *gin.Context, ip string) {
 	Error(c, 503, "Device "+ip+" is offline, please check connection")
 }
-

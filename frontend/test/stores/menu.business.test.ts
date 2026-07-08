@@ -51,3 +51,38 @@ describe('menu store · loadBusinessModules', () => {
     expect(f).toHaveBeenCalledTimes(1)
   })
 })
+
+// FE-13 扩展：模块携带 category（任务域）时按组聚合；无 category 归默认组，渲染不失败（R08）。
+describe('menu store · businessGroups 任务域分组', () => {
+  beforeEach(() => {
+    setActivePinia(createPinia())
+    vi.restoreAllMocks()
+  })
+
+  it('带/不带 category 混合：按任务域聚合，未标注归「其他」且排最后', async () => {
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({
+      json: async () => ({
+        data: [
+          { name: 'ifm', title: 'ifm', vendor: 'huawei', description: '接口管理', category: 'interface-mgr' },
+          { name: 'vlan', title: 'vlan', vendor: 'huawei', description: 'VLAN', category: 'vlan' },
+          { name: 'interfaces', title: 'interfaces', vendor: 'openconfig', description: 'oc 接口' },
+        ],
+      }),
+    }))
+    const store = useMenuStore()
+    await store.loadBusinessModules()
+    const groups = store.businessGroups
+    expect(groups.map((g) => g.category)).toEqual(['interface-mgr', 'vlan', ''])
+    expect(groups[0].modules.map((m) => m.name)).toEqual(['ifm'])
+    expect(groups[2].modules.map((m) => m.name)).toEqual(['interfaces'])
+  })
+
+  it('全部无 category（含回退项）：单一默认组，等价平铺', async () => {
+    vi.stubGlobal('fetch', vi.fn().mockRejectedValue(new Error('down')))
+    const store = useMenuStore()
+    await store.loadBusinessModules()
+    expect(store.businessGroups).toHaveLength(1)
+    expect(store.businessGroups[0].category).toBe('')
+    expect(store.businessGroups[0].modules.length).toBeGreaterThan(0)
+  })
+})

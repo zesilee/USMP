@@ -173,3 +173,55 @@ describe('ModuleListTab · 操作门禁（operation-exclude，FE-11）', () => {
     expect(headers).not.toContain('操作')
   })
 })
+
+describe('ModuleListTab · 只读列表 Tab（FE-14）', () => {
+  const roGroup = {
+    path: '/ifm/remote-interfaces',
+    type: 'group' as const,
+    label: 'remote-interfaces',
+    readonly: true,
+    fields: [
+      {
+        path: '/ifm/remote-interfaces/remote-interface',
+        type: 'list' as const,
+        label: 'remote-interface',
+        readonly: true,
+        fields: [
+          { path: '/ifm/remote-interfaces/remote-interface/index', type: 'string' as const, label: 'index', readonly: true, isKey: true },
+          { path: '/ifm/remote-interfaces/remote-interface/port-name', type: 'string' as const, label: 'port-name', readonly: true },
+        ],
+      },
+    ],
+  }
+  const roTab = deriveTabs([roGroup])[0]
+
+  it('只读 Tab：无「新增」、无操作列，state 行数据照常可查看', async () => {
+    vi.mocked(getConfig).mockResolvedValue({
+      data: { data: { data: { 'remote-interface': [
+        { index: '1', 'port-name': 'GE0/0/1' },
+        { index: '2', 'port-name': 'GE0/0/2' },
+      ] } } } } as any)
+    const w = mount(ModuleListTab, {
+      props: { tab: roTab, rootName: 'ifm', device: '10.0.0.1' },
+      global: { plugins: [createPinia(), ElementPlus] },
+    })
+    await flushPromises()
+
+    // 行数据照常渲染（可查看）
+    expect(w.findAll('.el-table__body tr')).toHaveLength(2)
+    expect(w.text()).toContain('GE0/0/1')
+    // 无编辑/下发入口
+    expect(w.text()).not.toContain('新增')
+    const headers = w.findAll('.el-table__header th .cell').map((n) => n.text().trim())
+    expect(headers).not.toContain('操作')
+    expect(w.text()).not.toContain('编辑')
+  })
+
+  it('可编辑 Tab 不受影响：仍有「新增」与操作列', async () => {
+    const w = mountTab()
+    await flushPromises()
+    expect(w.text()).toContain('新增')
+    const headers = w.findAll('.el-table__header th .cell').map((n) => n.text().trim())
+    expect(headers).toContain('操作')
+  })
+})
