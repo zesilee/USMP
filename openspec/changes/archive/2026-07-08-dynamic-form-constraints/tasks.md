@@ -4,7 +4,7 @@
 > legacy→新架构：`FieldDef`/`Field` 契约**扩宽不破坏**，旧字段/旧渲染并行保留，逐步叠加。
 
 ## P0 · spec-first 地基（本 change）
-- [ ] 0.1 迁移 `yang-api` 主 spec 到 OpenSpec CLI 标准格式（Purpose/Requirements/Requirement/Scenario），修正 BR-03/BR-04 陈旧「硬编码 schema」契约 — 留到 sync 前做
+- [x] 0.1 迁移 `yang-api` 主 spec 到 OpenSpec CLI 标准格式（Purpose/Requirements/Requirement/Scenario），修正 BR-03/BR-04 陈旧「硬编码 schema」契约（sync 时一并做）
 - [x] 0.2 写 change delta：`specs/yang-api/spec.md`（MODIFIED BR-03/04 + ADDED BR-05/06）、`specs/frontend/spec.md`（ADDED FE-07/08/09）
 - [x] 0.3 `openspec validate dynamic-form-constraints` 通过
 
@@ -43,6 +43,6 @@
 - [x] 4.3 review + commit（F3 真浏览器留待与 P3 el-tabs 合并跑）
 
 ## 收尾
-- [ ] 5.1 `/opsx:sync`：delta → 主 spec；`openspec validate --specs` 改动能力全绿
-- [ ] 5.2 `/opsx:archive`：归档 change
-- [ ] 5.3 覆盖率基线上调（后端 `.coverage-baseline`、前端 vitest thresholds）（T08）
+- [x] 5.1 `/opsx:sync`：delta → 主 spec（yang-api BR-03/04 MODIFIED + BR-05/06 ADDED 并迁移标准格式；frontend FE-07/08/09 ADDED）；`openspec validate --specs` 改动能力全绿
+- [x] 5.2 `/opsx:archive`：归档 change
+- [x] 5.3 覆盖率基线上调（后端 `.coverage-baseline` 54→56、前端 vitest thresholds 70/68/60/70）（T08，随 P3 commit 75e9d54）

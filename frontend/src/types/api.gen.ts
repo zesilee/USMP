@@ -565,17 +565,37 @@ export interface components {
              */
             fields?: components["schemas"]["api.FieldDef"][];
             group?: string;
+            /**
+             * @description IsKey 标记 list 的 key 叶：通用控制台据此派生 keyField/首列，免去 per-module
+             *     路由 props（BR-07）。
+             */
+            isKey?: boolean;
             label?: string;
             maximum?: number;
             minimum?: number;
             /** @description Must 携带 YANG `must` 约束（XPath 表达式 + 提示），驱动前端跨字段校验（R05）。 */
             must?: components["schemas"]["api.MustRule"][];
+            /**
+             * @description OperationExclude 承载厂商 `operation-exclude` 扩展（小写归一）：叶级表示
+             *     create-only 标识字段（编辑态禁用），list/group 级表示整节点排除对应操作（BR-07）。
+             */
+            operationExclude?: string[];
             options?: components["schemas"]["api.Option"][];
             path?: string;
             pattern?: string;
             placeholder?: string;
+            /**
+             * @description Presence 标记 YANG presence 容器（type=group 时有意义）：节点存在与否即开关，
+             *     前端渲染为 switch、关闭时键不入 payload（BR-08）。
+             */
+            presence?: boolean;
             readonly?: boolean;
             required?: boolean;
+            /**
+             * @description SupportFilter 标记厂商 `support-filter` 扩展：该叶可作查询条件，驱动前端
+             *     高级搜索控件（BR-07）。
+             */
+            supportFilter?: boolean;
             type?: string;
             /** @description When 携带 YANG `when` XPath 表达式，驱动前端数据驱动的条件显隐（R05）。空表示无条件。 */
             when?: string;

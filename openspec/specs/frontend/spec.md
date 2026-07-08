@@ -77,3 +77,113 @@ route / native 配置 SHALL 走 legacy K8s CRD 链路：`ConfigPage.vue` 经 `us
 #### Scenario: 缺 proxy 降级
 - **WHEN** K8s API 不可达（外部 proxy 缺失或返回非 2xx）
 - **THEN** SHALL 展示错误、SHALL NOT 崩溃（R08）
+
+### Requirement: FE-07 约束引擎（when 显隐 / must 校验）
+
+前端 SHALL 提供**通用**约束引擎（`utils/xpathEval` + `composables/useConstraintEngine`），把 schema 中的 `when`/`must` XPath 表达式求值为运行时行为，SHALL NOT 硬编码任何厂商/模型/字段名。求值器 SHALL 为自研 YANG XPath 子集解析器（相对路径 `../leaf`、`= != > < >= <=`、`and`/`or`/`not()`、`mod`、字面量），SHALL NOT 引入 `eval`/`safe-eval` 等依赖（R10）。表达式解析失败 SHALL 降级（when 失败=字段可见、must 失败=不阻断）并记录告警，SHALL NOT 崩溃（R08）。
+
+#### Scenario: when 驱动显隐
+- **WHEN** 字段带 `when`（如 `../class='sub-interface'`），用户改动被引用字段的值
+- **THEN** 引擎 SHALL 实时重算该字段 `visible`；`visible=false` 的字段 SHALL 隐藏且 SHALL NOT 参与提交与校验
+
+#### Scenario: must 阻断非法提交
+- **WHEN** 字段带 `must`（如 `(../suppress>../reuse)` 或 `(../interval) mod 10 = 0`）且当前表单违反该约束
+- **THEN** 引擎 SHALL 返回违例，前端 SHALL 阻止提交并行内提示（message 取 YANG `description` 或生成的通用提示）
+
+#### Scenario: 表达式语法错误降级
+- **WHEN** `when`/`must` 表达式无法被求值器解析
+- **THEN** SHALL 降级（可见 / 不阻断）并记录告警，页面 SHALL NOT 崩溃（R08）
+
+### Requirement: FE-08 choice/case 渲染
+
+`FieldRenderer` SHALL 将 `type:"choice"` 的字段渲染为互斥切换控件（任一 case 含多字段→`el-tabs`，所有 case 均为单叶→`el-radio-group`），分支内子字段按 `cases[].fields` 递归渲染。切换到某 case 时 SHALL 清空其它非激活 case 的数据（YANG choice 互斥语义），提交 payload SHALL 只含激活 case 的字段且保持其扁平 path。
+
+#### Scenario: choice 渲染为切换控件
+- **WHEN** schema 含 `type:"choice"` 节点（如 IFM `bandwidth-type` 的 mbps/kbps 两 case）
+- **THEN** SHALL 渲染为 Tabs/RadioGroup，可切换不同 case 的配置块
+
+#### Scenario: 切换 case 清空非激活分支
+- **WHEN** 用户从 case A 切到 case B
+- **THEN** SHALL 清空 case A 字段值，提交时 SHALL 只携带 case B 字段（扁平 path）
+
+### Requirement: FE-09 leaf-list 与 pattern 校验
+
+`FieldRenderer` SHALL 支持 `type:"leaf-list"`（可增删的多值输入行，成员复用叶渲染），并 SHALL 对带 `pattern` 的 string 字段绑定正则校验；非法正则 SHALL 降级为不校验并告警（R08），SHALL NOT 崩溃。
+
+#### Scenario: leaf-list 增删多值
+- **WHEN** 字段为 `type:"leaf-list"`
+- **THEN** SHALL 渲染可增删的多值输入，提交为数组
+
+#### Scenario: pattern 校验
+- **WHEN** string 字段带 `pattern`（如 IFM `number` 的接口编号正则）
+- **THEN** SHALL 以该正则校验输入，不匹配时行内报错、阻止提交
+
+### Requirement: FE-10 通用模块控制台（Tab 由模块根派生）
+
+前端 SHALL 提供通用模块控制台页（路由 `/module/:module`，零 per-module props）：
+右侧内容区 SHALL 渲染面包屑（配置/厂商/模块/激活 Tab）与一级 Tab；Tab 集合 SHALL 由
+nested schema 模块根的顶层子节点自动派生——list→列表 Tab、group/choice→表单 Tab、
+散落根叶子聚合为「基本属性」表单 Tab。SHALL NOT 针对任一具体 YANG 模块硬编码
+Tab/列/字段。Tab 切换 SHALL 保留各 Tab 的表单与搜索状态。
+
+#### Scenario: huawei-ifm 派生
+
+- **WHEN** 打开 `/module/ifm`
+- **THEN** Tab 集合 SHALL 含 `global`（表单）、`damp`（表单）、`auto-recovery-times`（列表或表单）、
+  `interfaces`（列表）等根子节点，无任何硬编码模块名
+
+#### Scenario: schema 加载失败降级
+
+- **WHEN** schema API 失败
+- **THEN** 页面 SHALL 展示错误提示且不崩（R08），设备选择仍可用
+
+### Requirement: FE-11 模型驱动列表 Tab（列派生/高级搜索/分页/操作门禁）
+
+列表 Tab SHALL：
+- 按分层启发式（key→operationExclude∋update 的 identity 叶→带 when 的条件叶→enum→其余标量）
+  从 list 子叶派生表格列并封顶，enum 列渲染 Tag、值 up/down 类渲染状态点（值驱动）；
+- 对带 `when` 的列按行数据求值：不满足 SHALL 显示 `-`，求值失败 SHALL 降级正常渲染（R08）；
+- 工具栏 SHALL 含新增按钮与「高级搜索」折叠面板，搜索字段集 SHALL 仅取 `supportFilter=true`
+  的叶（enum→下拉、其余→文本），支持查询/重置，客户端过滤；
+- 表格底部 SHALL 分页（总数/页码/每页条数）；
+- 操作列 SHALL 受 `operationExclude` 门禁：list 级含 update/delete 时隐藏对应按钮；
+  编辑抽屉中叶级含 update 的字段 SHALL 禁用（新增态可填）。
+
+#### Scenario: 高级搜索过滤
+
+- **WHEN** 数据含 3 条 main-interface 与 2 条 sub-interface，按 class=sub-interface 查询
+- **THEN** 表格 SHALL 仅显 2 行；重置后 SHALL 还原 5 行
+
+#### Scenario: 行级 when 单元格
+
+- **WHEN** 行 class=main-interface 且 parent-name 列的 when 为 `../class='sub-interface'`
+- **THEN** 该行 parent-name 单元格 SHALL 显示 `-`；sub-interface 行 SHALL 显示其父接口名
+
+#### Scenario: 编辑态 identity 字段禁用
+
+- **WHEN** 编辑一条既有记录且某叶 `operationExclude` 含 `update`
+- **THEN** 该字段 SHALL 禁用；新增抽屉中同字段 SHALL 可编辑
+
+### Requirement: FE-12 presence 容器渲染与门禁
+
+`presence=true` 的 group SHALL 渲染为开关：关闭时对应键 SHALL NOT 进入 payload
+（YANG presence 语义）；容器 `must` 依赖不满足时开关 SHALL 禁用并强制关闭，
+must 求值失败 SHALL 降级为可用（R08）。
+
+#### Scenario: 条件互斥开关
+
+- **WHEN** `ipv4-ignore-primary-sub=true`
+- **THEN** `ipv4-conflict-enable` 开关 SHALL 禁用且为关；置 false 后 SHALL 恢复可用
+
+### Requirement: FE-13 模型驱动业务导航与路由迁移
+
+左侧业务配置菜单 SHALL 由 `/yang/modules` 返回的模块列表驱动生成（指向 `/module/:name`），
+加载失败 SHALL 回退既有硬编码项（R08）；旧路由 `/config/interface`、`/config/vlan`
+SHALL 重定向到对应 `/module/:module`。
+
+#### Scenario: 菜单生成与回退
+
+- **WHEN** `/yang/modules` 返回含 `ifm`（模块根名）的列表
+- **THEN** 菜单 SHALL 含指向 `/module/ifm` 的项
+- **WHEN** 该 API 失败
+- **THEN** 菜单 SHALL 显示回退项且不崩

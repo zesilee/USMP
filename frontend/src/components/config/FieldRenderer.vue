@@ -6,7 +6,7 @@
       :model-value="modelValue"
       @update:model-value="$emit('update:modelValue', $event)"
       :placeholder="field.placeholder"
-      :disabled="field.readonly"
+      :disabled="field.readonly || disabled"
     />
 
     <!-- Number -->
@@ -14,7 +14,7 @@
       v-else-if="field.type === 'number'"
       :model-value="modelValue"
       @update:model-value="$emit('update:modelValue', $event)"
-      :disabled="field.readonly"
+      :disabled="field.readonly || disabled"
       :min="field.minimum"
       :max="field.maximum"
       controls-position="right"
@@ -26,7 +26,7 @@
       v-else-if="field.type === 'boolean'"
       :model-value="modelValue"
       @update:model-value="$emit('update:modelValue', $event)"
-      :disabled="field.readonly"
+      :disabled="field.readonly || disabled"
     />
 
     <!-- Enum -->
@@ -35,7 +35,7 @@
       :model-value="modelValue"
       @update:model-value="$emit('update:modelValue', $event)"
       :placeholder="field.placeholder"
-      :disabled="field.readonly"
+      :disabled="field.readonly || disabled"
       clearable
       style="width: 100%"
     >
@@ -47,6 +47,29 @@
       />
     </el-select>
 
+    <!-- Presence group (YANG presence 容器)：存在即开关。关闭 → emit undefined
+         （键不入 payload，节点不存在）；开启 → 保留/新建对象并展开子表单（FE-12）。 -->
+    <div v-else-if="field.type === 'group' && field.presence" class="field-presence">
+      <el-switch
+        :model-value="presenceOn"
+        :disabled="field.readonly || disabled"
+        @update:model-value="togglePresence(!!$event)"
+      />
+      <div v-if="presenceOn && childFields.length" class="field-group presence-fields">
+        <div class="group-fields">
+          <div v-for="subField in childFields" :key="subField.path" class="sub-field">
+            <label class="field-label">{{ subField.label }}</label>
+            <FieldRenderer
+              :field="subField"
+              :disabled="disabled"
+              :model-value="(modelValue || {})[keyOf(subField)]"
+              @update:model-value="updateSubField(keyOf(subField), $event)"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Group (single nested object) -->
     <div v-else-if="field.type === 'group'" class="field-group">
       <div class="group-fields">
@@ -54,6 +77,7 @@
           <label class="field-label">{{ subField.label }}</label>
           <FieldRenderer
             :field="subField"
+            :disabled="disabled"
             :model-value="(modelValue || {})[keyOf(subField)]"
             @update:model-value="updateSubField(keyOf(subField), $event)"
           />
@@ -68,7 +92,7 @@
           v-if="field.options?.length"
           :model-value="item"
           @update:model-value="updateItem(idx, $event)"
-          :disabled="field.readonly"
+          :disabled="field.readonly || disabled"
           clearable
           style="width: 100%"
         >
@@ -84,7 +108,7 @@
           :model-value="item"
           @update:model-value="updateItem(idx, $event)"
           :placeholder="field.placeholder"
-          :disabled="field.readonly"
+          :disabled="field.readonly || disabled"
         />
         <el-button type="danger" size="small" link :icon="Delete" @click="removeItem(idx)">删除</el-button>
       </div>
@@ -105,6 +129,7 @@
             <label class="field-label">{{ sub.label }}</label>
             <FieldRenderer
               :field="sub"
+              :disabled="disabled"
               :model-value="scope[keyOf(sub)]"
               @update:model-value="updateMember(keyOf(sub), $event)"
             />
@@ -118,6 +143,7 @@
             <label class="field-label">{{ sub.label }}</label>
             <FieldRenderer
               :field="sub"
+              :disabled="disabled"
               :model-value="scope[keyOf(sub)]"
               @update:model-value="updateMember(keyOf(sub), $event)"
             />
@@ -162,7 +188,17 @@ import type { Field } from '../../utils/crdSchemaParser'
 const props = defineProps<{
   field: Field
   modelValue: any
+  // 外部禁用（如编辑态的 create-only 标识字段、must 未满足的 presence 开关，FE-11/12）。
+  disabled?: boolean
 }>()
+
+// ===== presence 容器（FE-12）=====
+// modelValue 为对象（含空对象 {}）即「存在=开」；undefined/null 即「不存在=关」。
+const presenceOn = computed<boolean>(() => props.modelValue != null)
+
+function togglePresence(on: boolean) {
+  emit('update:modelValue', on ? { ...(props.modelValue || {}) } : undefined)
+}
 
 // ===== choice（YANG choice/case 互斥分支）=====
 // 成员数据以扁平叶名为键、与其它字段同级（sibling），因此 modelValue 直接是承载这些
@@ -271,6 +307,13 @@ function removeItem(idx: number) {
 
 <style scoped>
 .field-renderer {
+  width: 100%;
+}
+
+.field-presence {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   width: 100%;
 }
 

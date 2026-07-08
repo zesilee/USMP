@@ -107,6 +107,14 @@ type ContainerNode interface {
 	Child(name string) (Node, bool)
 	// IsPresence returns whether this is a presence container
 	IsPresence() bool
+	// WhenExpr returns the container's YANG `when` XPath expression, "" if none.
+	WhenExpr() string
+	// MustExprs returns the container's YANG `must` XPath expressions, empty if none.
+	// Presence containers use these to gate whether the node may exist (BR-08).
+	MustExprs() []string
+	// OperationExcludes returns the operations excluded for this node by the
+	// vendor `operation-exclude` extension (normalized lower-case), empty if none.
+	OperationExcludes() []string
 }
 
 // ListNode represents a YANG list node
@@ -120,6 +128,9 @@ type ListNode interface {
 	Child(name string) (Node, bool)
 	// IsUserOrdered returns whether the list is user-ordered
 	IsUserOrdered() bool
+	// OperationExcludes returns the operations excluded for this list by the
+	// vendor `operation-exclude` extension (normalized lower-case), empty if none.
+	OperationExcludes() []string
 }
 
 // LeafNode represents a YANG leaf node
@@ -153,6 +164,13 @@ type LeafNode interface {
 	// IsLeafList reports whether this node is a YANG leaf-list (repeatable scalar),
 	// as opposed to a single-valued leaf. Drives leaf-list rendering in the form.
 	IsLeafList() bool
+	// SupportFilter reports whether the vendor `support-filter` extension marks
+	// this leaf as a query/filter field (drives advanced-search controls, BR-07).
+	SupportFilter() bool
+	// OperationExcludes returns the operations excluded for this leaf by the
+	// vendor `operation-exclude` extension (normalized lower-case, e.g.
+	// ["update","delete"] for create-only identity fields), empty if none.
+	OperationExcludes() []string
 }
 
 // LeafListNode represents a YANG leaf-list node

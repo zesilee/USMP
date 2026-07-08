@@ -30,25 +30,22 @@ const vlanNested = {
   ],
 }
 
-// PR-2a：设备配置页应从 /yang/schema 真数据渲染左侧 YANG 架构树（模型驱动，R05）。
-describe('DeviceConfigPage 渲染 YANG 架构树（真 schema）', () => {
+// FE-13：/config/vlan 重定向到通用模块控制台，页面由 schema 派生 Tab 渲染
+//（原「左侧 YANG 架构树」随 DeviceConfigPage 退出路由，SchemaTree 组件契约
+// 由 test/components/SchemaTree.test.ts 单测继续兜底）。
+describe('旧配置路由重定向到通用模块控制台（真路由挂载）', () => {
   beforeEach(() => {
     vi.mocked(getYangSchema).mockResolvedValue({ data: { success: true, data: vlanNested } } as any)
   })
 
-  it('/config/vlan 展示架构树的 container/list/leaf 节点与 key 标记', async () => {
+  it('/config/vlan → /module/vlan，schema 派生出 vlans 列表 Tab', async () => {
     const wrapper = mount(App, { global: { plugins: [createPinia(), ElementPlus, router] } })
     await router.push('/config/vlan')
     await flushPromises()
 
-    const tree = wrapper.find('.schema-tree')
-    expect(tree.exists()).toBe(true)
-    const names = tree.findAll('.ynode .nm').map((n) => n.text())
-    expect(names).toEqual(expect.arrayContaining(['vlans', 'vlan', 'id', 'name']))
-
-    // keyField='id'（路由 options）→ id 叶子带 key 标记
-    const idNode = tree.findAll('.ynode').find((n) => n.find('.nm').text() === 'id')!
-    expect(idNode.find('.keyt').exists()).toBe(true)
+    expect(router.currentRoute.value.fullPath).toBe('/module/vlan')
+    const tabs = wrapper.findAll('.el-tabs__item').map((n) => n.text().trim())
+    expect(tabs).toContain('vlans')
 
     wrapper.unmount()
   })

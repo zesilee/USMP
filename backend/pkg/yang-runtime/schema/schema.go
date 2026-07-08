@@ -191,6 +191,9 @@ type defaultContainer struct {
 	children    []Node
 	childrenMap map[string]Node
 	isPresence  bool
+	whenExpr    string
+	mustExprs   []string
+	opExcludes  []string
 }
 
 // Children implements ContainerNode interface
@@ -207,6 +210,21 @@ func (c *defaultContainer) Child(name string) (Node, bool) {
 // IsPresence implements ContainerNode interface
 func (c *defaultContainer) IsPresence() bool {
 	return c.isPresence
+}
+
+// WhenExpr implements ContainerNode interface
+func (c *defaultContainer) WhenExpr() string {
+	return c.whenExpr
+}
+
+// MustExprs implements ContainerNode interface
+func (c *defaultContainer) MustExprs() []string {
+	return c.mustExprs
+}
+
+// OperationExcludes implements ContainerNode interface
+func (c *defaultContainer) OperationExcludes() []string {
+	return c.opExcludes
 }
 
 // NewContainer creates a new container node
@@ -239,6 +257,9 @@ type defaultList struct {
 	children      []Node
 	childrenMap   map[string]Node
 	isUserOrdered bool
+	whenExpr      string
+	mustExprs     []string
+	opExcludes    []string
 }
 
 // Keys implements ListNode interface
@@ -289,6 +310,21 @@ func (l *defaultList) AddChild(child Node) {
 // IsPresence implements ContainerNode interface for defaultList when used as parent
 func (l *defaultList) IsPresence() bool {
 	return false
+}
+
+// WhenExpr implements ContainerNode interface for defaultList when used as parent
+func (l *defaultList) WhenExpr() string {
+	return l.whenExpr
+}
+
+// MustExprs implements ContainerNode interface for defaultList when used as parent
+func (l *defaultList) MustExprs() []string {
+	return l.mustExprs
+}
+
+// OperationExcludes implements ListNode/ContainerNode interfaces
+func (l *defaultList) OperationExcludes() []string {
+	return l.opExcludes
 }
 
 // defaultChoice is the default implementation of ChoiceNode. A choice groups
@@ -379,20 +415,32 @@ func NewCase(name, description, path string, parent Node) CaseNode {
 // defaultLeaf is the default implementation of LeafNode
 type defaultLeaf struct {
 	defaultNode
-	leafType     LeafType
-	isKey        bool
-	defaultValue interface{}
-	enumValues   []string
-	mandatory    bool
-	units        string
-	whenExpr     string
-	mustExprs    []string
-	pattern      string
-	rangeMin     int
-	rangeMax     int
-	hasMin       bool
-	hasMax       bool
-	leafList     bool
+	leafType      LeafType
+	isKey         bool
+	defaultValue  interface{}
+	enumValues    []string
+	mandatory     bool
+	units         string
+	whenExpr      string
+	mustExprs     []string
+	pattern       string
+	rangeMin      int
+	rangeMax      int
+	hasMin        bool
+	hasMax        bool
+	leafList      bool
+	supportFilter bool
+	opExcludes    []string
+}
+
+// SupportFilter implements LeafNode interface
+func (l *defaultLeaf) SupportFilter() bool {
+	return l.supportFilter
+}
+
+// OperationExcludes implements LeafNode interface
+func (l *defaultLeaf) OperationExcludes() []string {
+	return l.opExcludes
 }
 
 // LeafType implements LeafNode interface
