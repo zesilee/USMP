@@ -68,6 +68,7 @@ test.describe('部署冒烟 - 前端 SPA', () => {
     await expect(page).toHaveURL(/module\/vlan/)
 
     await pickDevice(page)
+    await page.getByRole('tab', { name: 'vlans', exact: true }).click()
     await page.getByRole('button', { name: '新增' }).first().click()
 
     // 抽屉里出现 schema 驱动的字段（admin-status 为 YANG 叶子名，动态渲染才会有）
@@ -78,6 +79,7 @@ test.describe('部署冒烟 - 前端 SPA', () => {
   test('VLAN 表单缺主键(id)时下发应被校验拦截', async ({ page }) => {
     await page.goto('/module/vlan', { waitUntil: 'networkidle' })
     await pickDevice(page)
+    await page.getByRole('tab', { name: 'vlans', exact: true }).click()
     await page.getByRole('button', { name: '新增' }).first().click()
     await expect(page.getByText('admin-status', { exact: false }).first()).toBeVisible({ timeout: 15000 })
 
@@ -90,7 +92,7 @@ test.describe('部署冒烟 - 前端 SPA', () => {
     await expect(page).toHaveURL(/module\/ifm/)
 
     await pickDevice(page)
-    await page.getByRole('tab', { name: 'interfaces' }).click()
+    await page.getByRole('tab', { name: 'interfaces', exact: true }).click()
     await page.getByRole('button', { name: '新增' }).first().click()
 
     // mtu 为 IFM 叶子名，schema 动态渲染才会出现
@@ -101,7 +103,7 @@ test.describe('部署冒烟 - 前端 SPA', () => {
   test('接口列表应展示模拟网元种子行（3 main + 2 sub）', async ({ page }) => {
     await page.goto('/module/ifm', { waitUntil: 'networkidle' })
     await pickDevice(page)
-    await page.getByRole('tab', { name: 'interfaces' }).click()
+    await page.getByRole('tab', { name: 'interfaces', exact: true }).click()
 
     await expect(page.getByText('200GE0/1/0', { exact: true }).first()).toBeVisible({ timeout: 20000 })
     await expect(page.getByText('200GE0/1/1.1', { exact: false }).first()).toBeVisible()
@@ -111,13 +113,13 @@ test.describe('部署冒烟 - 前端 SPA', () => {
   test('高级搜索按 class 过滤（support-filter 驱动）', async ({ page }) => {
     await page.goto('/module/ifm', { waitUntil: 'networkidle' })
     await pickDevice(page)
-    await page.getByRole('tab', { name: 'interfaces' }).click()
+    await page.getByRole('tab', { name: 'interfaces', exact: true }).click()
     await expect(page.getByText('200GE0/1/0', { exact: true }).first()).toBeVisible({ timeout: 20000 })
 
     await page.getByRole('button', { name: /高级搜索/ }).click()
     const panel = page.locator('.search-panel')
     await panel.locator('.el-select').first().click()
-    await page.locator('.el-select-dropdown__item', { hasText: 'sub-interface' }).first().click()
+    await page.locator('.el-select-dropdown__item:visible', { hasText: 'sub-interface' }).first().click()
     await panel.getByRole('button', { name: '查询' }).click()
 
     // 主接口行被过滤掉，仅剩 2 条 sub-interface
@@ -130,15 +132,20 @@ test.describe('部署冒烟 - 前端 SPA', () => {
   test('接口 when 约束：class=sub-interface 才显现 parent-name（数据驱动显隐）', async ({ page }) => {
     await page.goto('/module/ifm', { waitUntil: 'networkidle' })
     await pickDevice(page)
-    await page.getByRole('tab', { name: 'interfaces' }).click()
+    await page.getByRole('tab', { name: 'interfaces', exact: true }).click()
     await page.getByRole('button', { name: '新增' }).first().click()
 
     const drawer = page.locator('.el-drawer')
     await expect(drawer.getByText('class', { exact: false }).first()).toBeVisible({ timeout: 15000 })
     await expect(drawer.locator('.el-form-item__label', { hasText: 'parent-name' })).toHaveCount(0)
 
-    await drawer.locator('.el-select').first().click()
-    await page.locator('.el-select-dropdown__item', { hasText: 'sub-interface' }).first().click()
+    // 精确定位 class 字段的下拉（抽屉首个 el-select 是字母序在前的 admin-status），
+    // 并只点“可见”的下拉项（teleport 的历史下拉会残留在 DOM 中）。
+    const classItem = drawer.locator('.el-form-item', {
+      has: page.locator('.el-form-item__label', { hasText: /^class$/ }),
+    })
+    await classItem.locator('.el-select').click()
+    await page.locator('.el-select-dropdown__item:visible', { hasText: 'sub-interface' }).first().click()
 
     await expect(drawer.getByText('parent-name', { exact: false }).first()).toBeVisible({ timeout: 15000 })
   })
@@ -146,14 +153,14 @@ test.describe('部署冒烟 - 前端 SPA', () => {
   // SPA 内从 VLAN 模块切到 IFM 模块应重载 schema（回归门禁：路由参数变化 → schema 重载）。
   test('SPA 内从 VLAN 切换到接口模块应加载接口模型（非沿用 VLAN）', async ({ page }) => {
     await page.goto('/module/vlan', { waitUntil: 'networkidle' })
-    await expect(page.getByRole('tab', { name: 'vlans' })).toBeVisible({ timeout: 15000 })
+    await expect(page.getByRole('tab', { name: 'vlans', exact: true })).toBeVisible({ timeout: 15000 })
 
     // 侧栏业务菜单（/yang/modules 驱动）内点 ifm 模块 —— SPA 内导航
     await page.locator('[data-test="module-item-ifm"]').click()
     await expect(page).toHaveURL(/module\/ifm/)
 
     await pickDevice(page)
-    await page.getByRole('tab', { name: 'interfaces' }).click()
+    await page.getByRole('tab', { name: 'interfaces', exact: true }).click()
     await page.getByRole('button', { name: '新增' }).first().click()
 
     // 接口独有字段 mtu 应出现（若仍沿用 VLAN schema 则不会有）

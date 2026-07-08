@@ -42,7 +42,6 @@ const DemoSeedConfig = `<ifm xmlns="urn:huawei:params:xml:ns:yang:huawei-ifm">
         <class>2</class>
         <type>16</type>
         <parent-name>200GE0/1/0</parent-name>
-        <number>0/1/0.1</number>
         <admin-status>1</admin-status>
         <description>tenant-a sub-interface</description>
       </interface>
@@ -51,7 +50,6 @@ const DemoSeedConfig = `<ifm xmlns="urn:huawei:params:xml:ns:yang:huawei-ifm">
         <class>2</class>
         <type>16</type>
         <parent-name>200GE0/1/1</parent-name>
-        <number>0/1/1.1</number>
         <admin-status>1</admin-status>
         <description>tenant-b sub-interface</description>
       </interface>
