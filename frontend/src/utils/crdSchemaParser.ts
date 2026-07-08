@@ -13,6 +13,8 @@ export interface Field {
   group?: string
   default?: any
   fields?: Field[]
+  // when 携带 YANG `when` XPath 表达式（后端从 schema 透出），驱动数据驱动的条件显隐（FE-07）。
+  when?: string
 }
 
 interface OpenAPIProperty {
