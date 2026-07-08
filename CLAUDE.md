@@ -31,6 +31,7 @@
 | R14 | 禁止绕过 PR 合入 | CI required checks + 分支保护 |
 | R15 | 禁止无测试提交 | pre-commit + CI 双重拦截 |
 | R16 | 禁止提交敏感文件 | `.env`/`.pem`/`.key`/`.p12` 等，pre-commit + CI 扫描 |
+| R17 | 禁止先代码后刷 spec | 契约变更 **spec-first**：先刷 spec/change delta 再启动开发，禁止先写代码后补 spec。spec 格式对齐 OpenSpec CLI 标准，详见 [openspec/SPEC_CONVENTIONS.md](openspec/SPEC_CONVENTIONS.md) |
 
 ## §3 技术栈
 
