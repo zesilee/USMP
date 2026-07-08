@@ -112,6 +112,15 @@ func leafToField(leaf schema.LeafNode, group string) FieldDef {
 	for _, expr := range leaf.MustExprs() {
 		f.Must = append(f.Must, MustRule{Expr: expr, Message: leaf.Description()})
 	}
+	if p := leaf.Pattern(); p != "" {
+		f.Pattern = p
+	}
+	if mn, ok := leaf.RangeMin(); ok {
+		f.Minimum = mn
+	}
+	if mx, ok := leaf.RangeMax(); ok {
+		f.Maximum = mx
+	}
 	return f
 }
 

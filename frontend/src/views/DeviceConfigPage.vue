@@ -102,15 +102,37 @@ const flowDone = computed(() => submitFlow.progress.value.done || submitFlow.tim
 
 // 实时差异（表单期望值 ↔ 已回填实际态）；下发按钮 = 有改动 && 无缺失必填。
 const diff = computed(() => computeDiff(formData, original.value, visibleFields.value))
+// pattern 违例：可见字段中非空值不匹配其 YANG 正则者（空值交给 required）。
+const patternViolations = computed(() =>
+  visibleFields.value.filter((f) => {
+    const re = compilePattern(f.pattern)
+    if (!re) return false
+    const v = formData[keyOf(f)]
+    if (v == null || v === '') return false
+    return !re.test(String(v))
+  }),
+)
 const submittable = computed(
   () =>
     diff.value.length > 0 &&
     missingRequired(visibleFields.value, formData, props.options.keyField).length === 0 &&
-    engine.mustViolations.value.length === 0,
+    engine.mustViolations.value.length === 0 &&
+    patternViolations.value.length === 0,
 )
 
 function keyOf(f: Field): string {
   return f.path.split('/').filter(Boolean).pop() || f.path
+}
+
+// 编译 YANG pattern 为 RegExp；非法正则返回 null（降级为不校验 + 告警，R08）。
+function compilePattern(pattern?: string): RegExp | null {
+  if (!pattern) return null
+  try {
+    return new RegExp(`^(?:${pattern})$`)
+  } catch {
+    console.warn('[DeviceConfigPage] 非法 YANG pattern，已跳过校验：', pattern)
+    return null
+  }
 }
 
 // 约束引擎（FE-07）：由 YANG `when` 表达式对 formData 求值，得到每字段响应式可见性。
@@ -160,6 +182,11 @@ const rules = computed<FormRules>(() => {
         trigger: ['change', 'blur'],
       })
     }
+    // YANG string pattern 正则校验；非法正则降级为不校验（R08）。
+    const re = compilePattern(f.pattern)
+    if (re) {
+      list.push({ pattern: re, message: `${f.label} 格式不符合约束`, trigger: ['change', 'blur'] })
+    }
     if (list.length) r[key] = list
   }
   return r
@@ -201,7 +228,8 @@ async function submit() {
   // 权威门禁（§9：不提交、行内提示 YANG 约束）：缺必填或 must 违例一律拦截。
   if (
     missingRequired(visibleFields.value, formData, props.options.keyField).length > 0 ||
-    engine.mustViolations.value.length > 0
+    engine.mustViolations.value.length > 0 ||
+    patternViolations.value.length > 0
   ) {
     return
   }

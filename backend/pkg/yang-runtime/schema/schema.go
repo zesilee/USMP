@@ -302,6 +302,11 @@ type defaultLeaf struct {
 	units        string
 	whenExpr     string
 	mustExprs    []string
+	pattern      string
+	rangeMin     int
+	rangeMax     int
+	hasMin       bool
+	hasMax       bool
 }
 
 // LeafType implements LeafNode interface
@@ -352,6 +357,21 @@ func (l *defaultLeaf) MustExprs() []string {
 // SetMustExprs sets the leaf's YANG `must` XPath expressions.
 func (l *defaultLeaf) SetMustExprs(exprs []string) {
 	l.mustExprs = exprs
+}
+
+// Pattern implements LeafNode interface
+func (l *defaultLeaf) Pattern() string {
+	return l.pattern
+}
+
+// RangeMin implements LeafNode interface
+func (l *defaultLeaf) RangeMin() (int, bool) {
+	return l.rangeMin, l.hasMin
+}
+
+// RangeMax implements LeafNode interface
+func (l *defaultLeaf) RangeMax() (int, bool) {
+	return l.rangeMax, l.hasMax
 }
 
 // NewLeaf creates a new leaf node

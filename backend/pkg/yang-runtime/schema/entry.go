@@ -154,10 +154,59 @@ func entryToLeaf(e *yang.Entry, parent Node, path string, isKey bool) LeafNode {
 		if e.Type.Default != "" {
 			leaf.defaultValue = e.Type.Default
 		}
+		if len(e.Type.Pattern) > 0 {
+			leaf.pattern = e.Type.Pattern[0]
+		}
+		leaf.rangeMin, leaf.hasMin, leaf.rangeMax, leaf.hasMax = leafRangeBounds(e.Type)
 	}
 	leaf.whenExpr = firstExtraExpr(e.Extra["when"])
 	leaf.mustExprs = allExtraExprs(e.Extra["must"])
 	return leaf
+}
+
+// leafRangeBounds extracts integer min/max from a leaf's YANG `range`. It returns
+// no bounds when: there is no range, the range is merely the type's full default
+// (i.e. no explicit `range` statement), or a bound is non-integer/overflows int
+// (callers then omit that bound — R08, no panic).
+func leafRangeBounds(yt *yang.YangType) (min int, hasMin bool, max int, hasMax bool) {
+	if yt == nil || len(yt.Range) == 0 {
+		return
+	}
+	if def := defaultRangeForKind(yt.Kind); def != nil && yt.Range.String() == def.String() {
+		return // full type-default range → not an explicit constraint
+	}
+	if v, err := yt.Range[0].Min.Int(); err == nil {
+		min, hasMin = int(v), true
+	}
+	if v, err := yt.Range[len(yt.Range)-1].Max.Int(); err == nil {
+		max, hasMax = int(v), true
+	}
+	return
+}
+
+// defaultRangeForKind returns goyang's full default range for an integer kind, or
+// nil for non-integer kinds. Used to distinguish explicit ranges from type bounds.
+func defaultRangeForKind(k yang.TypeKind) yang.YangRange {
+	switch k {
+	case yang.Yint8:
+		return yang.Int8Range
+	case yang.Yint16:
+		return yang.Int16Range
+	case yang.Yint32:
+		return yang.Int32Range
+	case yang.Yint64:
+		return yang.Int64Range
+	case yang.Yuint8:
+		return yang.Uint8Range
+	case yang.Yuint16:
+		return yang.Uint16Range
+	case yang.Yuint32:
+		return yang.Uint32Range
+	case yang.Yuint64:
+		return yang.Uint64Range
+	default:
+		return nil
+	}
 }
 
 // firstExtraExpr returns the XPath argument of the first element of a goyang

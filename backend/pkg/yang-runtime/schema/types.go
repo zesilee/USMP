@@ -143,6 +143,13 @@ type LeafNode interface {
 	// MustExprs returns the leaf's YANG `must` XPath expressions (order-preserved),
 	// empty if none. Drives data-driven cross-field validation in the form (R05).
 	MustExprs() []string
+	// Pattern returns the leaf's YANG string `pattern` regex, "" if none.
+	Pattern() string
+	// RangeMin returns the leaf's explicit integer range minimum and whether present
+	// (absent for no explicit range / non-integer / unrepresentable bounds).
+	RangeMin() (int, bool)
+	// RangeMax returns the leaf's explicit integer range maximum and whether present.
+	RangeMax() (int, bool)
 }
 
 // LeafListNode represents a YANG leaf-list node
