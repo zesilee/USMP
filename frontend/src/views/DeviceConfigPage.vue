@@ -38,7 +38,7 @@
       <!-- idle：模型驱动表单 + 实时差异预览 -->
       <template v-if="!flowActive">
         <el-form ref="formRef" :model="formData" :rules="rules" label-position="top" class="config-form">
-          <el-form-item v-for="field in cfg.fields.value" :key="field.path" :label="field.label"
+          <el-form-item v-for="field in visibleFields" :key="field.path" :label="field.label"
             :prop="keyOf(field)">
             <FieldRenderer :field="field" :model-value="formData[keyOf(field)]"
               @update:model-value="formData[keyOf(field)] = $event" />
@@ -64,12 +64,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, computed, onMounted } from 'vue'
+import { ref, reactive, computed, onMounted, watch } from 'vue'
 import { Plus } from '@element-plus/icons-vue'
 import { type FormInstance, type FormRules } from 'element-plus'
 import { useDeviceStore } from '../stores/device'
 import { useDeviceConfig, type DeviceConfigOptions } from '../composables/useDeviceConfig'
 import { useConfigSubmit } from '../composables/useConfigSubmit'
+import { useConstraintEngine } from '../composables/useConstraintEngine'
 import { computeDiff, missingRequired } from '../utils/configDiff'
 import type { Field } from '../utils/crdSchemaParser'
 import FieldRenderer from '../components/config/FieldRenderer.vue'
@@ -100,14 +101,33 @@ const flowActive = computed(() => submitFlow.phase.value !== 'idle')
 const flowDone = computed(() => submitFlow.progress.value.done || submitFlow.timedOut.value)
 
 // 实时差异（表单期望值 ↔ 已回填实际态）；下发按钮 = 有改动 && 无缺失必填。
-const diff = computed(() => computeDiff(formData, original.value, cfg.fields.value))
+const diff = computed(() => computeDiff(formData, original.value, visibleFields.value))
 const submittable = computed(
-  () => diff.value.length > 0 && missingRequired(cfg.fields.value, formData, props.options.keyField).length === 0,
+  () => diff.value.length > 0 && missingRequired(visibleFields.value, formData, props.options.keyField).length === 0,
 )
 
 function keyOf(f: Field): string {
   return f.path.split('/').filter(Boolean).pop() || f.path
 }
+
+// 约束引擎（FE-07）：由 YANG `when` 表达式对 formData 求值，得到每字段响应式可见性。
+// visibleFields 只含当前可见字段 → 隐藏字段既不渲染、不参与校验、也不进下发 payload
+//（YANG when=false 语义即该节点不存在）。when 解析失败降级为可见（R08）。
+const engine = useConstraintEngine(cfg.fields, formData)
+const visibleFields = computed(() => cfg.fields.value.filter((f) => engine.isVisible(f)))
+
+// 下发 payload：仅保留当前可见字段对应的键（隐藏字段按 YANG when 语义视为不存在）。
+function visiblePayload(): Record<string, any> {
+  const keys = new Set(visibleFields.value.map(keyOf))
+  const out: Record<string, any> = {}
+  for (const k of Object.keys(formData)) if (keys.has(k)) out[k] = formData[k]
+  return out
+}
+
+// when 表达式解析失败时记录告警（R08：降级为可见，不崩、不静默误判）。
+watch(engine.warnings, (w) => {
+  if (w.length) console.warn('[DeviceConfigPage] YANG when 约束降级：', w)
+})
 
 // 架构树上目标 list 的数量 pill：把当前已配置行数挂到该 list 节点 path 上。
 const itemCounts = computed<Record<string, number>>(() =>
@@ -118,7 +138,7 @@ const itemCounts = computed<Record<string, number>>(() =>
 // 服务端仍有权威兜底(如 VLAN ID 1-4094)，此处提前拦截、行内提示。
 const rules = computed<FormRules>(() => {
   const r: FormRules = {}
-  for (const f of cfg.fields.value) {
+  for (const f of visibleFields.value) {
     const key = keyOf(f)
     const list: any[] = []
     if (f.required || key === props.options.keyField) {
@@ -164,8 +184,9 @@ async function submit() {
       return
     }
   }
-  // 下发 → 回读 → 轮询对账（真实进度由 ReconcileSteps 展示）
-  await submitFlow.run(selectedDevice.value, { ...formData })
+  // 下发 → 回读 → 轮询对账（真实进度由 ReconcileSteps 展示）。
+  // 只下发当前可见字段：被 when 隐藏的字段按 YANG 语义视为不存在，不入 payload。
+  await submitFlow.run(selectedDevice.value, visiblePayload())
   // 下发成功（非 setConfig 失败）则重读列表，反映最新配置
   if (submitFlow.phase.value !== 'error') await cfg.loadItems(selectedDevice.value)
 }
