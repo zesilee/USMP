@@ -78,3 +78,41 @@ describe('Sidebar · 业务菜单模型驱动（FE-13）', () => {
     expect(wrapper.text()).toContain('VLAN 配置')
   })
 })
+
+describe('Sidebar · 业务菜单任务域分组（FE-13）', () => {
+  const router = createRouter({
+    history: createWebHistory(),
+    routes: [{ path: '/', name: 'dashboard', component: {} }],
+  })
+
+  it('模块带 category → 渲染分组标题；未标注模块归「其他」', async () => {
+    setActivePinia(createPinia())
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({
+      json: async () => ({
+        data: [
+          { name: 'ifm', description: '接口管理', vendor: 'huawei', category: 'interface-mgr' },
+          { name: 'interfaces', description: 'oc 接口', vendor: 'openconfig' },
+        ],
+      }),
+    }))
+    const wrapper = mount(Sidebar, { global: { plugins: [router, ElementPlus] } })
+    await new Promise((r) => setTimeout(r))
+    expect(wrapper.text()).toContain('interface-mgr')
+    expect(wrapper.text()).toContain('其他')
+    expect(wrapper.find('[data-test="module-item-ifm"]').exists()).toBe(true)
+    expect(wrapper.find('[data-test="module-item-interfaces"]').exists()).toBe(true)
+  })
+
+  it('全部无 category → 不渲染分组标题（平铺，渲染不失败 R08）', async () => {
+    setActivePinia(createPinia())
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({
+      json: async () => ({
+        data: [{ name: 'ifm', description: '接口管理', vendor: 'huawei' }],
+      }),
+    }))
+    const wrapper = mount(Sidebar, { global: { plugins: [router, ElementPlus] } })
+    await new Promise((r) => setTimeout(r))
+    expect(wrapper.find('[data-test="module-item-ifm"]').exists()).toBe(true)
+    expect(wrapper.text()).not.toContain('其他')
+  })
+})

@@ -31,14 +31,34 @@
           <el-icon><Connection /></el-icon>
           <span>业务网络配置</span>
         </template>
-        <el-menu-item
-          v-for="m in businessModules"
-          :key="m.name"
-          :index="`/module/${m.name}`"
-          :data-test="`module-item-${m.name}`"
-        >
-          {{ m.title }}
-        </el-menu-item>
+        <!-- 任务域分组（FE-13）：任一模块带 category 时按组渲染，未标注归「其他」；
+             全部未标注则平铺（等价旧形态）。 -->
+        <template v-if="businessGrouped">
+          <el-menu-item-group
+            v-for="g in businessGroups"
+            :key="g.category || '__default__'"
+            :title="g.category || '其他'"
+          >
+            <el-menu-item
+              v-for="m in g.modules"
+              :key="m.name"
+              :index="`/module/${m.name}`"
+              :data-test="`module-item-${m.name}`"
+            >
+              {{ m.title }}
+            </el-menu-item>
+          </el-menu-item-group>
+        </template>
+        <template v-else>
+          <el-menu-item
+            v-for="m in businessModules"
+            :key="m.name"
+            :index="`/module/${m.name}`"
+            :data-test="`module-item-${m.name}`"
+          >
+            {{ m.title }}
+          </el-menu-item>
+        </template>
         <el-menu-item index="/config/route">路由配置</el-menu-item>
       </el-sub-menu>
 
@@ -97,6 +117,8 @@ const isCollapsed = computed(() => menuStore.isCollapsed)
 const nativeModels = computed(() => menuStore.nativeModels)
 const nativeMenuLoaded = computed(() => menuStore.nativeMenuLoaded)
 const businessModules = computed(() => menuStore.businessModules)
+const businessGroups = computed(() => menuStore.businessGroups)
+const businessGrouped = computed(() => businessGroups.value.some((g) => g.category))
 
 onMounted(() => {
   menuStore.loadBusinessModules()

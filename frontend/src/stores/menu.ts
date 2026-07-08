@@ -5,6 +5,8 @@ interface NativeModel {
   name: string
   title: string
   vendor: string
+  // 任务域（后端 /yang/modules category，源自模块级 task-name 扩展，FE-13）。
+  category?: string
 }
 
 export const useMenuStore = defineStore('menu', () => {
@@ -53,6 +55,7 @@ export const useMenuStore = defineStore('menu', () => {
         name: m.name,
         title: m.description || m.title || m.name,
         vendor: m.vendor || '其他',
+        category: m.category,
       }))
       if (!mods.length) throw new Error('empty modules')
       businessModules.value = mods
@@ -67,6 +70,24 @@ export const useMenuStore = defineStore('menu', () => {
       businessLoaded.value = true
     }
   }
+
+  // 业务模块按任务域聚合（FE-13）：category 首现序，未标注归默认组('')排最后；
+  // 全部未标注 → 单一默认组，菜单退化为平铺（R08 渲染不失败）。
+  const businessGroups = computed(() => {
+    const order: string[] = []
+    const byCat = new Map<string, NativeModel[]>()
+    for (const m of businessModules.value) {
+      const c = m.category || ''
+      if (!byCat.has(c)) {
+        byCat.set(c, [])
+        if (c) order.push(c)
+      }
+      byCat.get(c)!.push(m)
+    }
+    const out = order.map((c) => ({ category: c, modules: byCat.get(c)! }))
+    if (byCat.has('')) out.push({ category: '', modules: byCat.get('')! })
+    return out
+  })
 
   // Group modules by vendor
   const groupedByVendor = computed(() => {
@@ -92,6 +113,7 @@ export const useMenuStore = defineStore('menu', () => {
     isCollapsed,
     loadNativeModels,
     businessModules,
+    businessGroups,
     businessLoaded,
     loadBusinessModules,
     groupedByVendor,
