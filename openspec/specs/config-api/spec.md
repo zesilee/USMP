@@ -1,152 +1,79 @@
-# config-api - 行为契约
+# config-api — 设备配置读写北向接口
 
-## 接口定义
+## Purpose
 
-### GET /api/v1/config/:ip/*path
+config-api 是 Stack B 北向 REST 接口，提供设备运行配置的**读**（`GET /api/v1/config/:ip/*path`，带 TTL 缓存 + `force_refresh` 绕缓存回读）与**声明式下发**（`POST …` → 存入 ConfigStore → 触发异步对账）。连接信息（IP/端口/凭据/协议）统一由共享 DeviceStore 解析（见 [[device-store]]）。
 
-**描述**：从设备读取指定YANG路径的运行配置
+## Requirements
 
-**参数**：
-| 参数 | 位置 | 类型 | 必填 | 约束 | 示例 |
-|------|------|------|------|------|------|
-| ip | path | string | 是 | 设备IP | "192.168.1.1" |
-| path | path | string | 是 | YANG节点路径（含前导/） | "/ifm:ifm/interfaces" |
-| force_refresh | query | string | 否 | "true"强制刷新（**未实现**） | "true" |
+### Requirement: BR-01 配置读取（缓存优先）
 
-**响应**：
-| 状态码 | 含义 | Body |
-|--------|------|------|
-| 200(成功) | 配置读取成功 | `{"code":0,"data":{"data":{...}},"success":true}` |
-| 200(错误) | 获取客户端失败 | `{"code":500,"message":"Failed to get device client: ...","success":false}` |
-| 200(错误) | 设备未连接 | `{"code":503,"message":"Device is not connected","success":false}` |
-| 200(错误) | NETCONF操作失败 | `{"code":500,"message":"Failed to get configuration: ...","success":false}` |
+`GET /api/v1/config/:ip/*path` SHALL 优先返回运行缓存（§8 TTL 30s）中的新鲜配置；缓存未命中时 SHALL 经共享 DeviceStore 解析的连接从设备回读（NETCONF get-config，running 数据源），并回填缓存。回读结果 SHALL 为 RFC7951 结构（如 `{"interface":[{"name":…}]}`），可被前端列表化，而非裸 XML 字节。响应 SHALL 携带 `cached` / `cache_age_seconds` / `ttl_seconds` / `source`（`cache`\|`device`）。
 
-### POST /api/v1/config/:ip/*path
+#### Scenario: 缓存命中
+- **WHEN** 距上次读取 < TTL 且未带 `force_refresh`
+- **THEN** SHALL 返回缓存数据，`source="cache"`、`cached=true`，不访问设备
 
-**描述**：声明式配置下发——存储期望配置并触发异步Reconciliation
+#### Scenario: 缓存未命中回读设备
+- **WHEN** 缓存过期/无 且设备已在 DeviceStore 注册
+- **THEN** SHALL 用库中凭据回读设备，返回 RFC7951 结构，`source="device"`，并回填缓存
 
-**参数**：
-| 参数 | 位置 | 类型 | 必填 | 约束 | 示例 |
-|------|------|------|------|------|------|
-| ip | path | string | 是 | 设备IP | "192.168.1.1" |
-| path | path | string | 是 | YANG节点路径 | "/vlan:vlans" |
-| body | body | object | 是 | JSON配置数据 | `{"vlans":[...]}` |
+### Requirement: BR-02 读取降级（离线/未连接/未注册）
 
-**响应**：
-| 状态码 | 含义 | Body |
-|--------|------|------|
-| 200(成功) | 配置已接受 | `{"code":0,"data":{"status":"ACCEPTED","path":"/vlan:vlans","reconciliation":{"triggered":bool,"message":"..."}},"success":true}` |
-| 200(错误) | 请求格式错误 | `{"code":400,"message":"Invalid request: ...","success":false}` |
-| 200(错误) | YANG类型转换失败 | `{"code":400,"message":"Failed to parse configuration: ...","success":false}` |
-| 200(错误) | ConfigStore写入失败 | `{"code":500,"message":"Failed to store configuration: ...","success":false}` |
+读取路径 SHALL NOT panic（R08）。设备连接建立失败 SHALL 返回 `code=500`；连接存在但未就绪（`IsConnected()=false`）SHALL 返回 `code=503`。设备未在 DeviceStore 注册时以 AUTO/无凭据连接、认证失败 SHALL 归为连接错误返回。
 
-## 业务规则
+#### Scenario: 设备未连接
+- **WHEN** 回读时客户端 `IsConnected()=false`
+- **THEN** SHALL 返回 `code=503` "Device is not connected"
 
-### BR-01: 配置读取-正常
+#### Scenario: 建连失败
+- **WHEN** 连接池建连报错
+- **THEN** SHALL 返回 `code=500`，其余请求不受影响
 
-- Given: 设备在线且NETCONF连接活跃
-- When: 调用 GET /api/v1/config/:ip/*path
-- Then: 通过NETCONF GetConfig(running)读取配置，10秒超时，返回配置数据
+### Requirement: BR-03 读取超时
 
-### BR-02: 配置读取-设备离线
+设备回读 SHALL 受 10s 上下文超时约束；超时 SHALL 返回 `code=500` 且不阻塞。
 
-- Given: 设备NETCONF连接断开
-- When: 调用 GET /api/v1/config/:ip/*path
-- Then: pool.Get()失败返回 code=500，或 cli.IsConnected()=false 返回 code=503
+#### Scenario: get-config 超时
+- **WHEN** 设备回读超过 10s
+- **THEN** context 取消，SHALL 返回 `code=500`
 
-### BR-03: 配置读取-超时
+### Requirement: BR-04 force_refresh 绕缓存回读
 
-- Given: NETCONF GetConfig操作超过10秒
-- When: 调用 GET /api/v1/config/:ip/*path
-- Then: context超时，返回 code=500
+`force_refresh=true` 查询参数 SHALL 绕过缓存、强制从设备回读并回填缓存（已实现；取代早期"参数被忽略"的行为）。
 
-### BR-04: 配置读取-force_refresh未实现
+#### Scenario: 强制刷新
+- **WHEN** 带 `force_refresh=true`
+- **THEN** SHALL 跳过缓存直接回读设备，`source="device"`
 
-- Given: 请求包含 force_refresh=true 查询参数
-- When: 调用 GET /api/v1/config/:ip/*path
-- Then: 参数被解析但忽略，行为与无参数相同（代码中有TODO注释）
+### Requirement: BR-05 声明式下发
 
-### BR-05: 配置下发-声明式
+`POST /api/v1/config/:ip/*path` SHALL 将 JSON 配置转为强类型 ygot 结构 → 存入 ConfigStore → 触发对账，返回 `status="ACCEPTED"`。下发即接受语义：配置**存储成功即返回**，实际对齐设备由异步对账完成。
 
-- Given: 有效的YANG路径和JSON配置数据
-- When: 调用 POST /api/v1/config/:ip/*path
-- Then: JSON数据转换为强类型YANG结构体 → 存入ConfigStore → 触发Reconcile → 返回ACCEPTED
+#### Scenario: 下发被接受
+- **WHEN** 提交合法 YANG 路径 + JSON 配置
+- **THEN** SHALL 存入 ConfigStore、触发对账，返回 `ACCEPTED` + `reconciliation.triggered`
 
-### BR-06: 配置下发-类型转换路由
+### Requirement: BR-06 类型转换路由
 
-- Given: 请求path包含特定YANG模块关键字
-- When: 调用 POST /api/v1/config/:ip/*path
-- Then: 按路径关键字路由到对应转换函数：
-  - 含"system:" → convertMapToHuaweiSystem
-  - 含"ifm:ifm"+"interfaces" → convertMapToHuaweiIfm
-  - 含"vlan:"+"vlan/vlans" → convertMapToHuaweiVlan
-  - 其他 → 原始map回退
+下发 SHALL 按 path 关键字路由到对应转换函数：含 `system:`→System、含 `ifm:ifm`+`interfaces`→Ifm、含 `vlan:`+`vlan/vlans`→Vlan；其余回退原始 map。
 
-### BR-07: 配置下发-Reconcile触发
+#### Scenario: 按路径路由
+- **WHEN** path 含 `ifm:ifm/ifm:interfaces`
+- **THEN** SHALL 用 `convertMapToHuaweiIfm` 转换为 `HuaweiIfm_Ifm_Interfaces`
 
-- Given: 配置已成功存入ConfigStore
-- When: manager.TriggerReconcile(ip, path) 被调用
-- Then: 返回值 triggered 表示是否找到对应Controller；无论结果如何配置已存储
+### Requirement: BR-07 对账异步触发
 
-### BR-08: 配置下发-无效JSON
+`TriggerReconcile(ip, path)` 的返回 SHALL 表示是否命中对应 Controller；无论是否命中，配置 SHALL 已完成存储。
 
-- Given: 请求body不是合法JSON
-- When: 调用 POST /api/v1/config/:ip/*path
-- Then: ShouldBindJSON失败，返回 code=400 "Invalid request"
+#### Scenario: 无匹配 Controller
+- **WHEN** 该 path 无注册 Controller
+- **THEN** `reconciliation.triggered=false`，但配置仍已存储、响应 `ACCEPTED`
 
-## 数据模型
+### Requirement: BR-08 无效请求拒绝
 
-### ConfigGetResponse
+非法 JSON 或类型转换失败 SHALL 返回 `code=400`，SHALL NOT 存储或触发对账。
 
-| 字段 | 类型 | 约束 | 示例 |
-|------|------|------|------|
-| data | object | NETCONF返回的配置数据 | {"interfaces":{...}} |
-
-**示例**：
-```json
-{
-  "data": {
-    "interfaces": {
-      "interface": [
-        {"name": "GE0/0/1", "adminStatus": 1}
-      ]
-    }
-  }
-}
-```
-
-### ConfigSetRequest
-
-| 字段 | 类型 | 约束 | 示例 |
-|------|------|------|------|
-| (root) | object | 任意JSON配置数据 | {"vlans": [...]} |
-
-**示例（VLAN）**：
-```json
-{
-  "vlans": [
-    {"id": 100, "name": "mgmt", "description": "管理VLAN"}
-  ]
-}
-```
-
-### ConfigSetResponse
-
-| 字段 | 类型 | 约束 | 示例 |
-|------|------|------|------|
-| status | string | 固定"ACCEPTED" | "ACCEPTED" |
-| path | string | 请求的YANG路径 | "/vlan:vlans" |
-| reconciliation.triggered | bool | 是否触发到Controller | true |
-| reconciliation.message | string | 说明信息 | "Configuration stored..." |
-
-**示例**：
-```json
-{
-  "status": "ACCEPTED",
-  "path": "/vlan:vlans",
-  "reconciliation": {
-    "triggered": true,
-    "message": "Configuration stored. Reconciliation will sync device state."
-  }
-}
-```
+#### Scenario: 非法 JSON
+- **WHEN** 请求 body 非合法 JSON
+- **THEN** SHALL 返回 `code=400` "Invalid request"，不写 ConfigStore
