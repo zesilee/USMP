@@ -291,6 +291,91 @@ func (l *defaultList) IsPresence() bool {
 	return false
 }
 
+// defaultChoice is the default implementation of ChoiceNode. A choice groups
+// mutually-exclusive cases; it is schema-only and contributes no data-path segment
+// (its members carry the enclosing container/list path — see entry.go).
+type defaultChoice struct {
+	defaultNode
+	cases       []CaseNode
+	casesMap    map[string]CaseNode
+	defaultCase string
+}
+
+// Cases implements ChoiceNode interface
+func (c *defaultChoice) Cases() []CaseNode {
+	return c.cases
+}
+
+// Case implements ChoiceNode interface
+func (c *defaultChoice) Case(name string) (CaseNode, bool) {
+	n, ok := c.casesMap[name]
+	return n, ok
+}
+
+// DefaultCase implements ChoiceNode interface
+func (c *defaultChoice) DefaultCase() string {
+	return c.defaultCase
+}
+
+// AddCase adds a case to the choice
+func (c *defaultChoice) AddCase(cs CaseNode) {
+	c.cases = append(c.cases, cs)
+	c.casesMap[cs.Name()] = cs
+}
+
+// NewChoice creates a new choice node
+func NewChoice(name, description, path string, parent Node) ChoiceNode {
+	return &defaultChoice{
+		defaultNode: defaultNode{
+			name:        name,
+			description: description,
+			path:        path,
+			nodeType:    ChoiceNodeType,
+			parent:      parent,
+		},
+		casesMap: make(map[string]CaseNode),
+	}
+}
+
+// defaultCase is the default implementation of CaseNode. Like choice it is
+// schema-only; its children carry flat data paths (no case segment).
+type defaultCase struct {
+	defaultNode
+	children    []Node
+	childrenMap map[string]Node
+}
+
+// Children implements CaseNode interface
+func (c *defaultCase) Children() []Node {
+	return c.children
+}
+
+// Child implements CaseNode interface
+func (c *defaultCase) Child(name string) (Node, bool) {
+	node, ok := c.childrenMap[name]
+	return node, ok
+}
+
+// AddChild adds a child to the case
+func (c *defaultCase) AddChild(child Node) {
+	c.children = append(c.children, child)
+	c.childrenMap[child.Name()] = child
+}
+
+// NewCase creates a new case node
+func NewCase(name, description, path string, parent Node) CaseNode {
+	return &defaultCase{
+		defaultNode: defaultNode{
+			name:        name,
+			description: description,
+			path:        path,
+			nodeType:    CaseNodeType,
+			parent:      parent,
+		},
+		childrenMap: make(map[string]Node),
+	}
+}
+
 // defaultLeaf is the default implementation of LeafNode
 type defaultLeaf struct {
 	defaultNode
@@ -300,6 +385,14 @@ type defaultLeaf struct {
 	enumValues   []string
 	mandatory    bool
 	units        string
+	whenExpr     string
+	mustExprs    []string
+	pattern      string
+	rangeMin     int
+	rangeMax     int
+	hasMin       bool
+	hasMax       bool
+	leafList     bool
 }
 
 // LeafType implements LeafNode interface
@@ -330,6 +423,51 @@ func (l *defaultLeaf) Mandatory() bool {
 // Units implements LeafNode interface
 func (l *defaultLeaf) Units() string {
 	return l.units
+}
+
+// WhenExpr implements LeafNode interface
+func (l *defaultLeaf) WhenExpr() string {
+	return l.whenExpr
+}
+
+// SetWhenExpr sets the leaf's YANG `when` XPath expression.
+func (l *defaultLeaf) SetWhenExpr(expr string) {
+	l.whenExpr = expr
+}
+
+// MustExprs implements LeafNode interface
+func (l *defaultLeaf) MustExprs() []string {
+	return l.mustExprs
+}
+
+// SetMustExprs sets the leaf's YANG `must` XPath expressions.
+func (l *defaultLeaf) SetMustExprs(exprs []string) {
+	l.mustExprs = exprs
+}
+
+// Pattern implements LeafNode interface
+func (l *defaultLeaf) Pattern() string {
+	return l.pattern
+}
+
+// RangeMin implements LeafNode interface
+func (l *defaultLeaf) RangeMin() (int, bool) {
+	return l.rangeMin, l.hasMin
+}
+
+// RangeMax implements LeafNode interface
+func (l *defaultLeaf) RangeMax() (int, bool) {
+	return l.rangeMax, l.hasMax
+}
+
+// IsLeafList implements LeafNode interface
+func (l *defaultLeaf) IsLeafList() bool {
+	return l.leafList
+}
+
+// SetLeafList marks this leaf as a leaf-list (repeatable scalar).
+func (l *defaultLeaf) SetLeafList(v bool) {
+	l.leafList = v
 }
 
 // NewLeaf creates a new leaf node

@@ -61,6 +61,71 @@
       </div>
     </div>
 
+    <!-- Leaf-list (repeatable scalar values) -->
+    <div v-else-if="field.type === 'leaf-list'" class="field-list">
+      <div v-for="(item, idx) in items" :key="idx" class="list-row leaf-list-row">
+        <el-select
+          v-if="field.options?.length"
+          :model-value="item"
+          @update:model-value="updateItem(idx, $event)"
+          :disabled="field.readonly"
+          clearable
+          style="width: 100%"
+        >
+          <el-option
+            v-for="option in field.options"
+            :key="String(option.value)"
+            :label="option.label"
+            :value="option.value"
+          />
+        </el-select>
+        <el-input
+          v-else
+          :model-value="item"
+          @update:model-value="updateItem(idx, $event)"
+          :placeholder="field.placeholder"
+          :disabled="field.readonly"
+        />
+        <el-button type="danger" size="small" link :icon="Delete" @click="removeItem(idx)">删除</el-button>
+      </div>
+      <el-button type="primary" size="small" plain :icon="Plus" @click="addItem">
+        添加{{ field.label }}
+      </el-button>
+    </div>
+
+    <!-- Choice (mutually-exclusive branches → RadioGroup / Tabs) -->
+    <div v-else-if="field.type === 'choice'" class="field-choice">
+      <!-- 全单叶 case → RadioGroup（选分支 + 展示激活分支的单个输入） -->
+      <template v-if="choiceUsesRadio">
+        <el-radio-group :model-value="activeCase" @update:model-value="switchCase(String($event))">
+          <el-radio v-for="c in field.cases" :key="c.name" :value="c.name">{{ c.label }}</el-radio>
+        </el-radio-group>
+        <div v-if="activeCaseFields.length" class="choice-active-fields">
+          <div v-for="sub in activeCaseFields" :key="sub.path" class="sub-field">
+            <label class="field-label">{{ sub.label }}</label>
+            <FieldRenderer
+              :field="sub"
+              :model-value="scope[keyOf(sub)]"
+              @update:model-value="updateMember(keyOf(sub), $event)"
+            />
+          </div>
+        </div>
+      </template>
+      <!-- 任一 case 含多字段/容器 → Tabs -->
+      <el-tabs v-else :model-value="activeCase" @update:model-value="switchCase(String($event))">
+        <el-tab-pane v-for="c in field.cases" :key="c.name" :label="c.label" :name="c.name">
+          <div v-for="sub in (c.fields || [])" :key="sub.path" class="sub-field">
+            <label class="field-label">{{ sub.label }}</label>
+            <FieldRenderer
+              :field="sub"
+              :model-value="scope[keyOf(sub)]"
+              @update:model-value="updateMember(keyOf(sub), $event)"
+            />
+          </div>
+        </el-tab-pane>
+      </el-tabs>
+    </div>
+
     <!-- List (repeatable rows of a nested sub-form) -->
     <div v-else-if="field.type === 'list'" class="field-list">
       <div v-for="(row, idx) in rows" :key="idx" class="list-row">
@@ -90,7 +155,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { Plus, Delete } from '@element-plus/icons-vue'
 import type { Field } from '../../utils/crdSchemaParser'
 
@@ -98,6 +163,58 @@ const props = defineProps<{
   field: Field
   modelValue: any
 }>()
+
+// ===== choice（YANG choice/case 互斥分支）=====
+// 成员数据以扁平叶名为键、与其它字段同级（sibling），因此 modelValue 直接是承载这些
+// 成员键的 scope 对象；本组件读写其中的成员键并整体 emit 回去，由父层按成员键 reconcile。
+const LEAF_TYPES = ['string', 'number', 'boolean', 'enum']
+const scope = computed<Record<string, any>>(() => (props.modelValue as Record<string, any>) || {})
+
+// 用户显式选择的激活 case（未选时由数据推断）。
+const activeCaseRef = ref<string | null>(null)
+
+function caseKeys(c: { fields: Field[] }): string[] {
+  return (c.fields || []).map(keyOf)
+}
+function caseHasData(c: { fields: Field[] }): boolean {
+  return caseKeys(c).some((k) => {
+    const v = scope.value[k]
+    return v !== undefined && v !== null && v !== ''
+  })
+}
+
+// 激活 case：显式选择 > 有数据的 case > 首个 case。
+const activeCase = computed<string>(() => {
+  const cases = props.field.cases || []
+  if (activeCaseRef.value && cases.some((c) => c.name === activeCaseRef.value)) return activeCaseRef.value
+  const withData = cases.find(caseHasData)
+  return withData?.name || cases[0]?.name || ''
+})
+
+// 全部 case 均为「单个叶字段」→ RadioGroup；否则 Tabs（FE-08）。
+const choiceUsesRadio = computed<boolean>(() =>
+  (props.field.cases || []).every((c) => c.fields?.length === 1 && LEAF_TYPES.includes(c.fields[0].type)),
+)
+
+const activeCaseFields = computed<Field[]>(
+  () => (props.field.cases || []).find((c) => c.name === activeCase.value)?.fields || [],
+)
+
+// 切换 case：记录激活分支并清空其它非激活 case 的成员键（YANG choice 互斥语义），整体 emit。
+function switchCase(name: string) {
+  activeCaseRef.value = name
+  const next: Record<string, any> = { ...scope.value }
+  for (const c of props.field.cases || []) {
+    if (c.name === name) continue
+    for (const k of caseKeys(c)) delete next[k]
+  }
+  emit('update:modelValue', next)
+}
+
+// 编辑激活成员：写入扁平成员键并整体 emit（保留 scope 内其它键）。
+function updateMember(key: string, value: any) {
+  emit('update:modelValue', { ...scope.value, [key]: value })
+}
 
 const emit = defineEmits<{
   'update:modelValue': [value: any]
@@ -134,6 +251,21 @@ function addRow() {
 
 function removeRow(idx: number) {
   emit('update:modelValue', rows.value.filter((_, i) => i !== idx))
+}
+
+// leaf-list：可增删的标量数组（元素为字符串/数字/枚举值）。
+const items = computed<any[]>(() => (Array.isArray(props.modelValue) ? props.modelValue : []))
+
+function updateItem(idx: number, value: any) {
+  emit('update:modelValue', items.value.map((v, i) => (i === idx ? value : v)))
+}
+
+function addItem() {
+  emit('update:modelValue', [...items.value, ''])
+}
+
+function removeItem(idx: number) {
+  emit('update:modelValue', items.value.filter((_, i) => i !== idx))
 }
 </script>
 

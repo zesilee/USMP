@@ -31,8 +31,23 @@ type FieldDef struct {
 	Minimum     int         `json:"minimum,omitempty"`
 	Maximum     int         `json:"maximum,omitempty"`
 	Readonly    bool        `json:"readonly,omitempty"`
+	// When 携带 YANG `when` XPath 表达式，驱动前端数据驱动的条件显隐（R05）。空表示无条件。
+	When string `json:"when,omitempty"`
+	// Must 携带 YANG `must` 约束（XPath 表达式 + 提示），驱动前端跨字段校验（R05）。
+	Must []MustRule `json:"must,omitempty"`
 	// Fields 承载嵌套子字段：type=group（单个嵌套对象）/ type=list（可重复列表）时非空。
 	// 由 ?form=nested 的嵌套 schema 生成，用于 member-ports 等 list-in-list 结构（R05）。
+	Fields []FieldDef `json:"fields,omitempty"`
+	// Cases 承载 YANG `choice` 的互斥分支：type=choice 时非空，每个 case 携带自身子字段。
+	// 前端据此渲染 Tabs/RadioGroup（BR-06）。case 子字段 path 为扁平数据路径。
+	Cases []CaseDef `json:"cases,omitempty"`
+}
+
+// CaseDef 是 YANG `choice` 的一个 `case` 分支：name 为 case 名，fields 为其子字段
+// （扁平 path，切换 case 时前端只保留激活 case 的字段）。
+type CaseDef struct {
+	Name   string     `json:"name"`
+	Label  string     `json:"label"`
 	Fields []FieldDef `json:"fields,omitempty"`
 }
 
@@ -40,6 +55,13 @@ type FieldDef struct {
 type Option struct {
 	Label string      `json:"label"`
 	Value interface{} `json:"value"`
+}
+
+// MustRule 是一条 YANG `must` 约束：expr 为 XPath 表达式，message 为提示（取自叶
+// description 兜底；为空时前端生成通用提示）。YANG 无 error-message 时 message 为空。
+type MustRule struct {
+	Expr    string `json:"expr"`
+	Message string `json:"message,omitempty"`
 }
 
 // YangSchema represents a YANG module schema for dynamic form rendering

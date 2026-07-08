@@ -54,6 +54,17 @@ func nodeToNestedField(node schema.Node) FieldDef {
 	switch n := node.(type) {
 	case schema.LeafNode:
 		return leafToField(n, "")
+	case schema.ChoiceNode:
+		// choice → 互斥分支节点：每个 case 递归携带其子字段（扁平 path 保持不变）。
+		f := FieldDef{Path: n.Path(), Type: "choice", Label: n.Name()}
+		for _, cs := range n.Cases() {
+			cd := CaseDef{Name: cs.Name(), Label: cs.Name()}
+			for _, ch := range cs.Children() {
+				cd.Fields = append(cd.Fields, nodeToNestedField(ch))
+			}
+			f.Cases = append(f.Cases, cd)
+		}
+		return f
 	case schema.ListNode:
 		f := FieldDef{Path: n.Path(), Type: "list", Label: n.Name()}
 		for _, ch := range n.Children() {
@@ -87,6 +98,13 @@ func collectFields(node schema.Node, group string, fields *[]FieldDef, listCols 
 		for _, ch := range n.Children() {
 			collectFields(ch, group, fields, listCols)
 		}
+	case schema.ChoiceNode:
+		// 扁平形态下 choice 透明：递归展开各 case 的成员叶（保留其扁平 path）。
+		for _, cs := range n.Cases() {
+			for _, ch := range cs.Children() {
+				collectFields(ch, group, fields, listCols)
+			}
+		}
 	}
 }
 
@@ -98,6 +116,7 @@ func leafToField(leaf schema.LeafNode, group string) FieldDef {
 		Label:    leaf.Name(),
 		Required: leaf.Mandatory(),
 		Group:    group,
+		When:     leaf.WhenExpr(),
 	}
 	if leaf.LeafType() == schema.LeafTypeEnum {
 		for _, v := range leaf.EnumValues() {
@@ -106,6 +125,23 @@ func leafToField(leaf schema.LeafNode, group string) FieldDef {
 	}
 	if dv := leaf.DefaultValue(); dv != nil {
 		f.Default = dv
+	}
+	// must 约束：message 取叶 description 兜底（YANG 无 error-message），空则前端生成。
+	for _, expr := range leaf.MustExprs() {
+		f.Must = append(f.Must, MustRule{Expr: expr, Message: leaf.Description()})
+	}
+	if p := leaf.Pattern(); p != "" {
+		f.Pattern = p
+	}
+	if mn, ok := leaf.RangeMin(); ok {
+		f.Minimum = mn
+	}
+	if mx, ok := leaf.RangeMax(); ok {
+		f.Maximum = mx
+	}
+	// leaf-list → 前端渲染为可增删的多值输入（元素类型/枚举选项仍随 f 携带）。
+	if leaf.IsLeafList() {
+		f.Type = "leaf-list"
 	}
 	return f
 }

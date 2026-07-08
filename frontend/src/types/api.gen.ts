@@ -509,6 +509,11 @@ export interface components {
             logs?: components["schemas"]["api.LogEntry"][];
             total?: number;
         };
+        "api.CaseDef": {
+            fields?: components["schemas"]["api.FieldDef"][];
+            label?: string;
+            name?: string;
+        };
         "api.ConfigGetData": {
             cache_age_seconds?: number;
             cached?: boolean;
@@ -548,6 +553,11 @@ export interface components {
             username?: string;
         };
         "api.FieldDef": {
+            /**
+             * @description Cases 承载 YANG `choice` 的互斥分支：type=choice 时非空，每个 case 携带自身子字段。
+             *     前端据此渲染 Tabs/RadioGroup（BR-06）。case 子字段 path 为扁平数据路径。
+             */
+            cases?: components["schemas"]["api.CaseDef"][];
             default?: unknown;
             /**
              * @description Fields 承载嵌套子字段：type=group（单个嵌套对象）/ type=list（可重复列表）时非空。
@@ -558,6 +568,8 @@ export interface components {
             label?: string;
             maximum?: number;
             minimum?: number;
+            /** @description Must 携带 YANG `must` 约束（XPath 表达式 + 提示），驱动前端跨字段校验（R05）。 */
+            must?: components["schemas"]["api.MustRule"][];
             options?: components["schemas"]["api.Option"][];
             path?: string;
             pattern?: string;
@@ -565,6 +577,8 @@ export interface components {
             readonly?: boolean;
             required?: boolean;
             type?: string;
+            /** @description When 携带 YANG `when` XPath 表达式，驱动前端数据驱动的条件显隐（R05）。空表示无条件。 */
+            when?: string;
         };
         "api.FleetReconcileData": {
             devices?: components["schemas"]["api.DeviceRollup"][];
@@ -584,6 +598,10 @@ export interface components {
             summary?: string;
             timestamp?: string;
             triggered?: boolean;
+        };
+        "api.MustRule": {
+            expr?: string;
+            message?: string;
         };
         "api.Option": {
             label?: string;

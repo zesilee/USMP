@@ -1,6 +1,12 @@
+export interface CaseDef {
+  name: string
+  label: string
+  fields: Field[]
+}
+
 export interface Field {
   path: string
-  type: 'string' | 'number' | 'boolean' | 'enum' | 'group' | 'list'
+  type: 'string' | 'number' | 'boolean' | 'enum' | 'group' | 'list' | 'leaf-list' | 'choice'
   label: string
   placeholder?: string
   required?: boolean
@@ -13,6 +19,13 @@ export interface Field {
   group?: string
   default?: any
   fields?: Field[]
+  // cases 承载 YANG `choice` 的互斥分支（type==='choice' 时非空）；成员字段 path 扁平、
+  // 与其它字段同级（sibling），前端据此渲染 Tabs/RadioGroup（FE-08）。
+  cases?: CaseDef[]
+  // when 携带 YANG `when` XPath 表达式（后端从 schema 透出），驱动数据驱动的条件显隐（FE-07）。
+  when?: string
+  // must 携带 YANG `must` 约束（XPath 表达式 + 可选提示），驱动跨字段校验（FE-07）。
+  must?: { expr: string; message?: string }[]
 }
 
 interface OpenAPIProperty {

@@ -99,6 +99,30 @@ test.describe('部署冒烟 - 前端 SPA', () => {
     await expect(page.getByText('mtu', { exact: false }).first()).toBeVisible({ timeout: 15000 })
   })
 
+  // 接口 when 约束（FE-07）：parent-name 由 YANG `when "../class='sub-interface'"` 门控。
+  // 证明显隐 100% 数据驱动——切 class=sub-interface 才显现 parent-name，非前端硬编码。
+  // 断言全部限定在 .el-drawer 表单内：左侧 SchemaTree 恒列出所有叶名（含 parent-name），
+  // 不能用整页文本判断表单字段是否渲染。
+  test('接口 when 约束：class=sub-interface 才显现 parent-name（数据驱动显隐）', async ({ page }) => {
+    await page.goto('/config/interface', { waitUntil: 'networkidle' })
+    await page.locator('.el-select').first().click()
+    await page.locator('.el-select-dropdown__item', { hasText: '192.168.1.1' }).first().click()
+    await page.getByRole('button', { name: /新增接口/ }).click()
+
+    const drawer = page.locator('.el-drawer')
+    // class 字段（enum→el-select）渲染出来（schema 动态）
+    await expect(drawer.getByText('class', { exact: false }).first()).toBeVisible({ timeout: 15000 })
+    // class 未选 sub-interface → parent-name 表单项隐藏（drawer 内 0 个）
+    await expect(drawer.getByText('parent-name', { exact: false })).toHaveCount(0)
+
+    // 在抽屉表单内的 class 下拉选 sub-interface（device 下拉在抽屉外，故取 drawer 内首个 el-select）
+    await drawer.locator('.el-select').first().click()
+    await page.locator('.el-select-dropdown__item', { hasText: 'sub-interface' }).first().click()
+
+    // when 求值为真 → parent-name 表单项显现
+    await expect(drawer.getByText('parent-name', { exact: false }).first()).toBeVisible({ timeout: 15000 })
+  })
+
   // 应用内（SPA）从 VLAN 导航到接口应加载各自模型（回归门禁）。
   //
   // 此前 VLAN/接口共用 DeviceConfigPage，vue-router 复用实例 → 切换后 schema 不重载 →
