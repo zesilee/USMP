@@ -117,11 +117,57 @@ func entryToNode(e *yang.Entry, parent Node, path string) Node {
 func entryToContainer(e *yang.Entry, parent Node, path string) ContainerNode {
 	c := NewContainer(e.Name, e.Description, path, parent, false).(*defaultContainer)
 	for _, child := range sortedDir(e) {
+		if child.IsChoice() {
+			// A choice contributes no data-path segment: its case members inherit
+			// this container's `path` so their data paths stay flat.
+			c.AddChild(entryToChoice(child, c, path))
+			continue
+		}
 		if n := entryToNode(child, c, path+"/"+child.Name); n != nil {
 			c.AddChild(n)
 		}
 	}
 	return c
+}
+
+// entryToChoice converts a goyang choice Entry to a ChoiceNode. parentPath is the
+// enclosing container/list path — case members are flattened onto it (choice and
+// case names never appear in data paths), keeping the NETCONF write path intact.
+func entryToChoice(e *yang.Entry, parent Node, parentPath string) ChoiceNode {
+	ch := NewChoice(e.Name, e.Description, parentPath+"/"+e.Name, parent).(*defaultChoice)
+	for _, caseEntry := range sortedDir(e) {
+		ch.AddCase(entryToCase(caseEntry, ch, parentPath))
+	}
+	return ch
+}
+
+// entryToCase converts a goyang case Entry to a CaseNode. A "shorthand" case (a
+// bare node directly under the choice, not wrapped in `case`) is treated as an
+// implicit single-member case. Members inherit parentPath (no case segment).
+func entryToCase(e *yang.Entry, parent Node, parentPath string) CaseNode {
+	cs := NewCase(e.Name, e.Description, parentPath+"/"+e.Name, parent).(*defaultCase)
+	if !e.IsCase() {
+		// Shorthand case: the entry itself is the single member node.
+		if n := caseMember(e, cs, parentPath); n != nil {
+			cs.AddChild(n)
+		}
+		return cs
+	}
+	for _, child := range sortedDir(e) {
+		if n := caseMember(child, cs, parentPath); n != nil {
+			cs.AddChild(n)
+		}
+	}
+	return cs
+}
+
+// caseMember builds one member of a case, flattening onto parentPath. A choice
+// nested directly in a case (no intervening container) recurses as a nested choice.
+func caseMember(e *yang.Entry, parent Node, parentPath string) Node {
+	if e.IsChoice() {
+		return entryToChoice(e, parent, parentPath)
+	}
+	return entryToNode(e, parent, parentPath+"/"+e.Name)
 }
 
 func entryToList(e *yang.Entry, parent Node, path string) ListNode {
@@ -132,6 +178,11 @@ func entryToList(e *yang.Entry, parent Node, path string) ListNode {
 	l := NewList(e.Name, e.Description, path, parent, nil, false).(*defaultList)
 	var keys []LeafNode
 	for _, child := range sortedDir(e) {
+		if child.IsChoice() {
+			// Choice members are flattened onto the list path (see entryToChoice).
+			l.AddChild(entryToChoice(child, l, path))
+			continue
+		}
 		childPath := path + "/" + child.Name
 		var n Node
 		if child.IsLeaf() && keyNames[child.Name] {
