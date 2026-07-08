@@ -8,11 +8,15 @@ describe('Router Configuration', () => {
     expect(route?.path).toBe('/')
   })
 
-  it('should have all business config routes', () => {
-    const names = router.getRoutes().map(r => r.name)
-    expect(names).toContain('interface')
-    expect(names).toContain('vlan')
-    expect(names).toContain('route')
+  // FE-13：业务配置迁移到通用模块控制台，旧路由重定向保留书签可达。
+  it('should have module console route and legacy redirects', () => {
+    const routes = router.getRoutes()
+    const console_ = routes.find(r => r.name === 'module-console')
+    expect(console_?.path).toBe('/module/:module')
+
+    expect(routes.find(r => r.path === '/config/interface')?.redirect).toBe('/module/ifm')
+    expect(routes.find(r => r.path === '/config/vlan')?.redirect).toBe('/module/vlan')
+    expect(routes.map(r => r.name)).toContain('route')
   })
 
   it('should have native config dynamic route', () => {

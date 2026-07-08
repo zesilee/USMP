@@ -52,93 +52,116 @@ test.describe('部署冒烟 - 前端 SPA', () => {
     await expect(page.getByText('192.168.1.1', { exact: false }).first()).toBeVisible({ timeout: 15000 })
   })
 
-  // VLAN 新增表单应由 YANG schema 动态渲染出字段（回归门禁）。
-  //
-  // 此前两次故障：① VLAN 走 Stack A K8s CRD 死路；② schema 用裸相对 fetch 被 nginx 拦成 index.html
-  // → 表单恒空。修复后 schema 走 api 客户端、表单由 /yang/schema/vlan?form=nested 动态渲染。
-  // 本断言进 /config/vlan → 选设备 → 新增 → 校验 schema 字段真实渲染，兜住「表单空」回归。
-  test('VLAN 新增表单应动态渲染出 YANG 字段', async ({ page }) => {
-    await page.goto('/config/vlan', { waitUntil: 'networkidle' })
-    await expect(page.getByText('VLAN 配置', { exact: false }).first()).toBeVisible()
+  // ===== 通用模块控制台（generic-module-console，FE-10~13）=====
+  // 旧 /config/vlan、/config/interface 重定向到 /module/:module；页面 Tab/列/表单
+  // 全部由 schema 派生。以下把原「表单动态渲染/when 显隐/校验拦截/SPA 切换」回归
+  // 断言迁移到控制台，并新增「种子行/高级搜索」断言。
 
-    // 选择种子设备（el-select 下拉项）
+  // 选设备（页头首个 el-select）。
+  async function pickDevice(page: import('@playwright/test').Page) {
     await page.locator('.el-select').first().click()
     await page.locator('.el-select-dropdown__item', { hasText: '192.168.1.1' }).first().click()
+  }
 
-    // 打开新增抽屉
-    await page.getByRole('button', { name: /新增 VLAN/ }).click()
+  test('VLAN 旧路由重定向到控制台，新增表单动态渲染出 YANG 字段', async ({ page }) => {
+    await page.goto('/config/vlan', { waitUntil: 'networkidle' })
+    await expect(page).toHaveURL(/module\/vlan/)
+
+    await pickDevice(page)
+    await page.getByRole('tab', { name: 'vlans', exact: true }).click()
+    await page.getByRole('button', { name: '新增' }).first().click()
 
     // 抽屉里出现 schema 驱动的字段（admin-status 为 YANG 叶子名，动态渲染才会有）
     await expect(page.getByText('admin-status', { exact: false }).first()).toBeVisible({ timeout: 15000 })
   })
 
-  // 空表单提交应被前端校验拦截（§9：不提交、行内提示），不静默下发非法配置。
+  // 空表单提交应被前端校验拦截（§9）：缺主键 id 时「下发并对账」禁用。
   test('VLAN 表单缺主键(id)时下发应被校验拦截', async ({ page }) => {
-    await page.goto('/config/vlan', { waitUntil: 'networkidle' })
-    await page.locator('.el-select').first().click()
-    await page.locator('.el-select-dropdown__item', { hasText: '192.168.1.1' }).first().click()
-    await page.getByRole('button', { name: /新增 VLAN/ }).click()
+    await page.goto('/module/vlan', { waitUntil: 'networkidle' })
+    await pickDevice(page)
+    await page.getByRole('tab', { name: 'vlans', exact: true }).click()
+    await page.getByRole('button', { name: '新增' }).first().click()
     await expect(page.getByText('admin-status', { exact: false }).first()).toBeVisible({ timeout: 15000 })
 
-    // 缺主键 id（及其它必填项）为空时，「下发并对账」按钮禁用 —— §9 的拦截在当前设计里以
-    // 「不可提交」实现，比行内提示更强：不完整/非法配置根本无法下发。
-    // （旧断言点击该按钮并等「必填」文案，但当前按钮 disabled-until-valid，点击恒 30s 超时。）
     await expect(page.getByRole('button', { name: /下发并对账/ })).toBeDisabled()
   })
 
-  // 接口（华为 IFM）新增表单应由 YANG schema 动态渲染（与 VLAN 共用通用配置流 DeviceConfigPage）。
-  test('接口新增表单应动态渲染出 YANG 字段', async ({ page }) => {
+  // 接口（华为 IFM）：Tab 由模块根派生，interfaces 列表 Tab 内新增表单动态渲染。
+  test('接口控制台 Tab 派生 + 新增表单动态渲染出 YANG 字段', async ({ page }) => {
     await page.goto('/config/interface', { waitUntil: 'networkidle' })
-    await expect(page.getByText('接口配置', { exact: false }).first()).toBeVisible()
+    await expect(page).toHaveURL(/module\/ifm/)
 
-    await page.locator('.el-select').first().click()
-    await page.locator('.el-select-dropdown__item', { hasText: '192.168.1.1' }).first().click()
-    await page.getByRole('button', { name: /新增接口/ }).click()
+    await pickDevice(page)
+    await page.getByRole('tab', { name: 'interfaces', exact: true }).click()
+    await page.getByRole('button', { name: '新增' }).first().click()
 
     // mtu 为 IFM 叶子名，schema 动态渲染才会出现
     await expect(page.getByText('mtu', { exact: false }).first()).toBeVisible({ timeout: 15000 })
   })
 
+  // 种子数据（模拟网元 DemoSeedConfig）：5 条接口回读进表格，sub 行显示 parent-name。
+  test('接口列表应展示模拟网元种子行（3 main + 2 sub）', async ({ page }) => {
+    await page.goto('/module/ifm', { waitUntil: 'networkidle' })
+    await pickDevice(page)
+    await page.getByRole('tab', { name: 'interfaces', exact: true }).click()
+
+    await expect(page.getByText('200GE0/1/0', { exact: true }).first()).toBeVisible({ timeout: 20000 })
+    await expect(page.getByText('200GE0/1/1.1', { exact: false }).first()).toBeVisible()
+  })
+
+  // 高级搜索（ext:support-filter 驱动）：class=sub-interface 过滤后主接口行消失。
+  test('高级搜索按 class 过滤（support-filter 驱动）', async ({ page }) => {
+    await page.goto('/module/ifm', { waitUntil: 'networkidle' })
+    await pickDevice(page)
+    await page.getByRole('tab', { name: 'interfaces', exact: true }).click()
+    await expect(page.getByText('200GE0/1/0', { exact: true }).first()).toBeVisible({ timeout: 20000 })
+
+    await page.getByRole('button', { name: /高级搜索/ }).click()
+    const panel = page.locator('.search-panel')
+    await panel.locator('.el-select').first().click()
+    await page.locator('.el-select-dropdown__item:visible', { hasText: 'sub-interface' }).first().click()
+    await panel.getByRole('button', { name: '查询' }).click()
+
+    // 主接口行被过滤掉，仅剩 2 条 sub-interface
+    await expect(page.getByText('200GE0/1/2', { exact: false })).toHaveCount(0)
+    await expect(page.getByText('200GE0/1/0.1', { exact: false }).first()).toBeVisible()
+  })
+
   // 接口 when 约束（FE-07）：parent-name 由 YANG `when "../class='sub-interface'"` 门控。
-  // 证明显隐 100% 数据驱动——切 class=sub-interface 才显现 parent-name，非前端硬编码。
-  // 断言全部限定在 .el-drawer 表单内：左侧 SchemaTree 恒列出所有叶名（含 parent-name），
-  // 不能用整页文本判断表单字段是否渲染。
+  // 断言限定在 .el-drawer 内（页面其他区域可能出现同名文本）。
   test('接口 when 约束：class=sub-interface 才显现 parent-name（数据驱动显隐）', async ({ page }) => {
-    await page.goto('/config/interface', { waitUntil: 'networkidle' })
-    await page.locator('.el-select').first().click()
-    await page.locator('.el-select-dropdown__item', { hasText: '192.168.1.1' }).first().click()
-    await page.getByRole('button', { name: /新增接口/ }).click()
+    await page.goto('/module/ifm', { waitUntil: 'networkidle' })
+    await pickDevice(page)
+    await page.getByRole('tab', { name: 'interfaces', exact: true }).click()
+    await page.getByRole('button', { name: '新增' }).first().click()
 
     const drawer = page.locator('.el-drawer')
-    // class 字段（enum→el-select）渲染出来（schema 动态）
     await expect(drawer.getByText('class', { exact: false }).first()).toBeVisible({ timeout: 15000 })
-    // class 未选 sub-interface → parent-name 表单项隐藏（drawer 内 0 个）
-    await expect(drawer.getByText('parent-name', { exact: false })).toHaveCount(0)
+    await expect(drawer.locator('.el-form-item__label', { hasText: 'parent-name' })).toHaveCount(0)
 
-    // 在抽屉表单内的 class 下拉选 sub-interface（device 下拉在抽屉外，故取 drawer 内首个 el-select）
-    await drawer.locator('.el-select').first().click()
-    await page.locator('.el-select-dropdown__item', { hasText: 'sub-interface' }).first().click()
+    // 精确定位 class 字段的下拉（抽屉首个 el-select 是字母序在前的 admin-status），
+    // 并只点“可见”的下拉项（teleport 的历史下拉会残留在 DOM 中）。
+    const classItem = drawer.locator('.el-form-item', {
+      has: page.locator('.el-form-item__label', { hasText: /^class$/ }),
+    })
+    await classItem.locator('.el-select').click()
+    await page.locator('.el-select-dropdown__item:visible', { hasText: 'sub-interface' }).first().click()
 
-    // when 求值为真 → parent-name 表单项显现
     await expect(drawer.getByText('parent-name', { exact: false }).first()).toBeVisible({ timeout: 15000 })
   })
 
-  // 应用内（SPA）从 VLAN 导航到接口应加载各自模型（回归门禁）。
-  //
-  // 此前 VLAN/接口共用 DeviceConfigPage，vue-router 复用实例 → 切换后 schema 不重载 →
-  // 接口表单显示 VLAN 字段。之前的冒烟用 page.goto 全量重载各自页面，未走应用内导航故漏测。
-  // 此断言点侧栏在 SPA 内从 VLAN 切到接口，校验加载的是接口(mtu)而非 VLAN 字段。
-  test('SPA 内从 VLAN 切换到接口应加载接口模型（非沿用 VLAN）', async ({ page }) => {
-    await page.goto('/config/vlan', { waitUntil: 'networkidle' })
-    await expect(page.getByText('VLAN 配置', { exact: false }).first()).toBeVisible()
+  // SPA 内从 VLAN 模块切到 IFM 模块应重载 schema（回归门禁：路由参数变化 → schema 重载）。
+  test('SPA 内从 VLAN 切换到接口模块应加载接口模型（非沿用 VLAN）', async ({ page }) => {
+    await page.goto('/module/vlan', { waitUntil: 'networkidle' })
+    await expect(page.getByRole('tab', { name: 'vlans', exact: true })).toBeVisible({ timeout: 15000 })
 
-    // 侧栏点「接口配置」——SPA 内导航（非整页重载）
-    await page.getByText('接口配置', { exact: false }).first().click()
-    await expect(page).toHaveURL(/config\/interface/)
+    // 侧栏业务菜单（/yang/modules 驱动）内点 ifm 模块 —— SPA 内导航
+    await page.locator('[data-test="module-item-ifm"]').click()
+    await expect(page).toHaveURL(/module\/ifm/)
 
-    await page.locator('.el-select').first().click()
-    await page.locator('.el-select-dropdown__item', { hasText: '192.168.1.1' }).first().click()
-    await page.getByRole('button', { name: /新增接口/ }).click()
+    await pickDevice(page)
+    await page.getByRole('tab', { name: 'interfaces', exact: true }).click()
+    await page.getByRole('button', { name: '新增' }).first().click()
 
     // 接口独有字段 mtu 应出现（若仍沿用 VLAN schema 则不会有）
     await expect(page.getByText('mtu', { exact: false }).first()).toBeVisible({ timeout: 15000 })
