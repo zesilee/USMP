@@ -98,8 +98,13 @@ func entryToModule(e *yang.Entry, vendor string) Module {
 func entryToNode(e *yang.Entry, parent Node, path string) Node {
 	switch {
 	case e.IsLeafList():
-		// Modeled as a leaf carrying the element type (leaf-list refinement later).
-		return entryToLeaf(e, parent, path, false)
+		// Modeled as a leaf carrying the element type, flagged as a leaf-list so the
+		// form renders repeatable scalar values.
+		leaf := entryToLeaf(e, parent, path, false)
+		if dl, ok := leaf.(*defaultLeaf); ok {
+			dl.leafList = true
+		}
+		return leaf
 	case e.IsLeaf():
 		return entryToLeaf(e, parent, path, false)
 	case e.IsList():

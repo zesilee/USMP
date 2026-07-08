@@ -307,6 +307,7 @@ type defaultLeaf struct {
 	rangeMax     int
 	hasMin       bool
 	hasMax       bool
+	leafList     bool
 }
 
 // LeafType implements LeafNode interface
@@ -372,6 +373,16 @@ func (l *defaultLeaf) RangeMin() (int, bool) {
 // RangeMax implements LeafNode interface
 func (l *defaultLeaf) RangeMax() (int, bool) {
 	return l.rangeMax, l.hasMax
+}
+
+// IsLeafList implements LeafNode interface
+func (l *defaultLeaf) IsLeafList() bool {
+	return l.leafList
+}
+
+// SetLeafList marks this leaf as a leaf-list (repeatable scalar).
+func (l *defaultLeaf) SetLeafList(v bool) {
+	l.leafList = v
 }
 
 // NewLeaf creates a new leaf node

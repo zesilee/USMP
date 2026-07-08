@@ -121,6 +121,10 @@ func leafToField(leaf schema.LeafNode, group string) FieldDef {
 	if mx, ok := leaf.RangeMax(); ok {
 		f.Maximum = mx
 	}
+	// leaf-list → 前端渲染为可增删的多值输入（元素类型/枚举选项仍随 f 携带）。
+	if leaf.IsLeafList() {
+		f.Type = "leaf-list"
+	}
 	return f
 }
 

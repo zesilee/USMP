@@ -150,6 +150,9 @@ type LeafNode interface {
 	RangeMin() (int, bool)
 	// RangeMax returns the leaf's explicit integer range maximum and whether present.
 	RangeMax() (int, bool)
+	// IsLeafList reports whether this node is a YANG leaf-list (repeatable scalar),
+	// as opposed to a single-valued leaf. Drives leaf-list rendering in the form.
+	IsLeafList() bool
 }
 
 // LeafListNode represents a YANG leaf-list node
