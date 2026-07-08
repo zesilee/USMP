@@ -61,6 +61,38 @@
       </div>
     </div>
 
+    <!-- Leaf-list (repeatable scalar values) -->
+    <div v-else-if="field.type === 'leaf-list'" class="field-list">
+      <div v-for="(item, idx) in items" :key="idx" class="list-row leaf-list-row">
+        <el-select
+          v-if="field.options?.length"
+          :model-value="item"
+          @update:model-value="updateItem(idx, $event)"
+          :disabled="field.readonly"
+          clearable
+          style="width: 100%"
+        >
+          <el-option
+            v-for="option in field.options"
+            :key="String(option.value)"
+            :label="option.label"
+            :value="option.value"
+          />
+        </el-select>
+        <el-input
+          v-else
+          :model-value="item"
+          @update:model-value="updateItem(idx, $event)"
+          :placeholder="field.placeholder"
+          :disabled="field.readonly"
+        />
+        <el-button type="danger" size="small" link :icon="Delete" @click="removeItem(idx)">删除</el-button>
+      </div>
+      <el-button type="primary" size="small" plain :icon="Plus" @click="addItem">
+        添加{{ field.label }}
+      </el-button>
+    </div>
+
     <!-- List (repeatable rows of a nested sub-form) -->
     <div v-else-if="field.type === 'list'" class="field-list">
       <div v-for="(row, idx) in rows" :key="idx" class="list-row">
@@ -134,6 +166,21 @@ function addRow() {
 
 function removeRow(idx: number) {
   emit('update:modelValue', rows.value.filter((_, i) => i !== idx))
+}
+
+// leaf-list：可增删的标量数组（元素为字符串/数字/枚举值）。
+const items = computed<any[]>(() => (Array.isArray(props.modelValue) ? props.modelValue : []))
+
+function updateItem(idx: number, value: any) {
+  emit('update:modelValue', items.value.map((v, i) => (i === idx ? value : v)))
+}
+
+function addItem() {
+  emit('update:modelValue', [...items.value, ''])
+}
+
+function removeItem(idx: number) {
+  emit('update:modelValue', items.value.filter((_, i) => i !== idx))
 }
 </script>
 

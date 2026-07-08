@@ -98,6 +98,7 @@ func leafToField(leaf schema.LeafNode, group string) FieldDef {
 		Label:    leaf.Name(),
 		Required: leaf.Mandatory(),
 		Group:    group,
+		When:     leaf.WhenExpr(),
 	}
 	if leaf.LeafType() == schema.LeafTypeEnum {
 		for _, v := range leaf.EnumValues() {
@@ -106,6 +107,23 @@ func leafToField(leaf schema.LeafNode, group string) FieldDef {
 	}
 	if dv := leaf.DefaultValue(); dv != nil {
 		f.Default = dv
+	}
+	// must 约束：message 取叶 description 兜底（YANG 无 error-message），空则前端生成。
+	for _, expr := range leaf.MustExprs() {
+		f.Must = append(f.Must, MustRule{Expr: expr, Message: leaf.Description()})
+	}
+	if p := leaf.Pattern(); p != "" {
+		f.Pattern = p
+	}
+	if mn, ok := leaf.RangeMin(); ok {
+		f.Minimum = mn
+	}
+	if mx, ok := leaf.RangeMax(); ok {
+		f.Maximum = mx
+	}
+	// leaf-list → 前端渲染为可增删的多值输入（元素类型/枚举选项仍随 f 携带）。
+	if leaf.IsLeafList() {
+		f.Type = "leaf-list"
 	}
 	return f
 }

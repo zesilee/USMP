@@ -38,7 +38,7 @@
       <!-- idle：模型驱动表单 + 实时差异预览 -->
       <template v-if="!flowActive">
         <el-form ref="formRef" :model="formData" :rules="rules" label-position="top" class="config-form">
-          <el-form-item v-for="field in cfg.fields.value" :key="field.path" :label="field.label"
+          <el-form-item v-for="field in visibleFields" :key="field.path" :label="field.label"
             :prop="keyOf(field)">
             <FieldRenderer :field="field" :model-value="formData[keyOf(field)]"
               @update:model-value="formData[keyOf(field)] = $event" />
@@ -64,12 +64,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, computed, onMounted } from 'vue'
+import { ref, reactive, computed, onMounted, watch } from 'vue'
 import { Plus } from '@element-plus/icons-vue'
 import { type FormInstance, type FormRules } from 'element-plus'
 import { useDeviceStore } from '../stores/device'
 import { useDeviceConfig, type DeviceConfigOptions } from '../composables/useDeviceConfig'
 import { useConfigSubmit } from '../composables/useConfigSubmit'
+import { useConstraintEngine } from '../composables/useConstraintEngine'
 import { computeDiff, missingRequired } from '../utils/configDiff'
 import type { Field } from '../utils/crdSchemaParser'
 import FieldRenderer from '../components/config/FieldRenderer.vue'
@@ -100,14 +101,58 @@ const flowActive = computed(() => submitFlow.phase.value !== 'idle')
 const flowDone = computed(() => submitFlow.progress.value.done || submitFlow.timedOut.value)
 
 // 实时差异（表单期望值 ↔ 已回填实际态）；下发按钮 = 有改动 && 无缺失必填。
-const diff = computed(() => computeDiff(formData, original.value, cfg.fields.value))
+const diff = computed(() => computeDiff(formData, original.value, visibleFields.value))
+// pattern 违例：可见字段中非空值不匹配其 YANG 正则者（空值交给 required）。
+const patternViolations = computed(() =>
+  visibleFields.value.filter((f) => {
+    const re = compilePattern(f.pattern)
+    if (!re) return false
+    const v = formData[keyOf(f)]
+    if (v == null || v === '') return false
+    return !re.test(String(v))
+  }),
+)
 const submittable = computed(
-  () => diff.value.length > 0 && missingRequired(cfg.fields.value, formData, props.options.keyField).length === 0,
+  () =>
+    diff.value.length > 0 &&
+    missingRequired(visibleFields.value, formData, props.options.keyField).length === 0 &&
+    engine.mustViolations.value.length === 0 &&
+    patternViolations.value.length === 0,
 )
 
 function keyOf(f: Field): string {
   return f.path.split('/').filter(Boolean).pop() || f.path
 }
+
+// 编译 YANG pattern 为 RegExp；非法正则返回 null（降级为不校验 + 告警，R08）。
+function compilePattern(pattern?: string): RegExp | null {
+  if (!pattern) return null
+  try {
+    return new RegExp(`^(?:${pattern})$`)
+  } catch {
+    console.warn('[DeviceConfigPage] 非法 YANG pattern，已跳过校验：', pattern)
+    return null
+  }
+}
+
+// 约束引擎（FE-07）：由 YANG `when` 表达式对 formData 求值，得到每字段响应式可见性。
+// visibleFields 只含当前可见字段 → 隐藏字段既不渲染、不参与校验、也不进下发 payload
+//（YANG when=false 语义即该节点不存在）。when 解析失败降级为可见（R08）。
+const engine = useConstraintEngine(cfg.fields, formData)
+const visibleFields = computed(() => cfg.fields.value.filter((f) => engine.isVisible(f)))
+
+// 下发 payload：仅保留当前可见字段对应的键（隐藏字段按 YANG when 语义视为不存在）。
+function visiblePayload(): Record<string, any> {
+  const keys = new Set(visibleFields.value.map(keyOf))
+  const out: Record<string, any> = {}
+  for (const k of Object.keys(formData)) if (keys.has(k)) out[k] = formData[k]
+  return out
+}
+
+// when 表达式解析失败时记录告警（R08：降级为可见，不崩、不静默误判）。
+watch(engine.warnings, (w) => {
+  if (w.length) console.warn('[DeviceConfigPage] YANG when 约束降级：', w)
+})
 
 // 架构树上目标 list 的数量 pill：把当前已配置行数挂到该 list 节点 path 上。
 const itemCounts = computed<Record<string, number>>(() =>
@@ -118,7 +163,7 @@ const itemCounts = computed<Record<string, number>>(() =>
 // 服务端仍有权威兜底(如 VLAN ID 1-4094)，此处提前拦截、行内提示。
 const rules = computed<FormRules>(() => {
   const r: FormRules = {}
-  for (const f of cfg.fields.value) {
+  for (const f of visibleFields.value) {
     const key = keyOf(f)
     const list: any[] = []
     if (f.required || key === props.options.keyField) {
@@ -126,6 +171,21 @@ const rules = computed<FormRules>(() => {
     }
     if (f.type === 'number' && (f.minimum != null || f.maximum != null)) {
       list.push({ type: 'number', min: f.minimum, max: f.maximum, message: `${f.label} 超出范围`, trigger: ['change', 'blur'] })
+    }
+    // YANG must 跨字段约束：以约束引擎为唯一真源，命中违例则行内报错（§9 行内提示）。
+    if (f.must?.length) {
+      list.push({
+        validator: (_rule: unknown, _value: unknown, cb: (e?: Error) => void) => {
+          const v = engine.mustViolations.value.find((x) => x.path === f.path)
+          cb(v ? new Error(v.message) : undefined)
+        },
+        trigger: ['change', 'blur'],
+      })
+    }
+    // YANG string pattern 正则校验；非法正则降级为不校验（R08）。
+    const re = compilePattern(f.pattern)
+    if (re) {
+      list.push({ pattern: re, message: `${f.label} 格式不符合约束`, trigger: ['change', 'blur'] })
     }
     if (list.length) r[key] = list
   }
@@ -156,16 +216,26 @@ function openEdit(row: Record<string, any>) {
 
 async function submit() {
   if (!selectedDevice.value) return
-  // 表单校验不通过则不提交（§9：不提交、行内提示 YANG 约束）
+  // 先跑 el-form 校验以在行内显示错误（必填/范围/must）。EP 部分版本 validate() 对失败
+  // 是 resolve(false) 而非 reject，故不能只靠它拦截。
   if (formRef.value) {
     try {
       await formRef.value.validate()
     } catch {
-      return
+      /* 忽略 reject：下面以约束引擎为权威判定是否放行 */
     }
   }
-  // 下发 → 回读 → 轮询对账（真实进度由 ReconcileSteps 展示）
-  await submitFlow.run(selectedDevice.value, { ...formData })
+  // 权威门禁（§9：不提交、行内提示 YANG 约束）：缺必填或 must 违例一律拦截。
+  if (
+    missingRequired(visibleFields.value, formData, props.options.keyField).length > 0 ||
+    engine.mustViolations.value.length > 0 ||
+    patternViolations.value.length > 0
+  ) {
+    return
+  }
+  // 下发 → 回读 → 轮询对账（真实进度由 ReconcileSteps 展示）。
+  // 只下发当前可见字段：被 when 隐藏的字段按 YANG 语义视为不存在，不入 payload。
+  await submitFlow.run(selectedDevice.value, visiblePayload())
   // 下发成功（非 setConfig 失败）则重读列表，反映最新配置
   if (submitFlow.phase.value !== 'error') await cfg.loadItems(selectedDevice.value)
 }

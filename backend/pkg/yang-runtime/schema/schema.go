@@ -300,6 +300,14 @@ type defaultLeaf struct {
 	enumValues   []string
 	mandatory    bool
 	units        string
+	whenExpr     string
+	mustExprs    []string
+	pattern      string
+	rangeMin     int
+	rangeMax     int
+	hasMin       bool
+	hasMax       bool
+	leafList     bool
 }
 
 // LeafType implements LeafNode interface
@@ -330,6 +338,51 @@ func (l *defaultLeaf) Mandatory() bool {
 // Units implements LeafNode interface
 func (l *defaultLeaf) Units() string {
 	return l.units
+}
+
+// WhenExpr implements LeafNode interface
+func (l *defaultLeaf) WhenExpr() string {
+	return l.whenExpr
+}
+
+// SetWhenExpr sets the leaf's YANG `when` XPath expression.
+func (l *defaultLeaf) SetWhenExpr(expr string) {
+	l.whenExpr = expr
+}
+
+// MustExprs implements LeafNode interface
+func (l *defaultLeaf) MustExprs() []string {
+	return l.mustExprs
+}
+
+// SetMustExprs sets the leaf's YANG `must` XPath expressions.
+func (l *defaultLeaf) SetMustExprs(exprs []string) {
+	l.mustExprs = exprs
+}
+
+// Pattern implements LeafNode interface
+func (l *defaultLeaf) Pattern() string {
+	return l.pattern
+}
+
+// RangeMin implements LeafNode interface
+func (l *defaultLeaf) RangeMin() (int, bool) {
+	return l.rangeMin, l.hasMin
+}
+
+// RangeMax implements LeafNode interface
+func (l *defaultLeaf) RangeMax() (int, bool) {
+	return l.rangeMax, l.hasMax
+}
+
+// IsLeafList implements LeafNode interface
+func (l *defaultLeaf) IsLeafList() bool {
+	return l.leafList
+}
+
+// SetLeafList marks this leaf as a leaf-list (repeatable scalar).
+func (l *defaultLeaf) SetLeafList(v bool) {
+	l.leafList = v
 }
 
 // NewLeaf creates a new leaf node

@@ -137,6 +137,22 @@ type LeafNode interface {
 	Mandatory() bool
 	// Units returns the units string, empty if none
 	Units() string
+	// WhenExpr returns the leaf's YANG `when` XPath expression, "" if none.
+	// Drives data-driven conditional visibility in the dynamic form (R05).
+	WhenExpr() string
+	// MustExprs returns the leaf's YANG `must` XPath expressions (order-preserved),
+	// empty if none. Drives data-driven cross-field validation in the form (R05).
+	MustExprs() []string
+	// Pattern returns the leaf's YANG string `pattern` regex, "" if none.
+	Pattern() string
+	// RangeMin returns the leaf's explicit integer range minimum and whether present
+	// (absent for no explicit range / non-integer / unrepresentable bounds).
+	RangeMin() (int, bool)
+	// RangeMax returns the leaf's explicit integer range maximum and whether present.
+	RangeMax() (int, bool)
+	// IsLeafList reports whether this node is a YANG leaf-list (repeatable scalar),
+	// as opposed to a single-valued leaf. Drives leaf-list rendering in the form.
+	IsLeafList() bool
 }
 
 // LeafListNode represents a YANG leaf-list node
