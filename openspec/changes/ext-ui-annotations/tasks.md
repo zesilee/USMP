@@ -12,11 +12,11 @@
 
 ## 2. S2+S3 后端：dynamic-default + units 透出（B1+B3）
 
-- [ ] 2.1 B1 红：`entry_ext_test.go` 增 dynamic-default 用例——有/无子句形态、其他扩展不误报（负路径）
-- [ ] 2.2 绿：`entry.go` 增 `extDynamicDefault()`（本名匹配，同 BR-07 规约）+ LeafNode 存取器
-- [ ] 2.3 B3 红：field_gen 测试——`dynamicDefault`/`units` 透出与省略；units 取 `Type.Units` 兜底 `Entry.Units`
-- [ ] 2.4 绿：FieldDef 增 `DynamicDefault bool`/`Units string`（omitempty）+ field_gen 填充
-- [ ] 2.5 `make gen-contract` 同步 api.gen.ts，确认漂移门禁绿
+- [x] 2.1 B1 红：`entry_ext_test.go` 增 dynamic-default 用例——有/无子句形态、其他扩展不误报（负路径）
+- [x] 2.2 绿：`entry.go` 增 `extDynamicDefault()`（本名匹配，同 BR-07 规约）+ LeafNode 存取器
+- [x] 2.3 B3 红：field_gen 测试——`dynamicDefault`/`units` 透出与省略；units 取 `Type.Units` 兜底 `Entry.Units`
+- [x] 2.4 绿：FieldDef 增 `DynamicDefault bool`/`Units string`（omitempty）+ field_gen 填充
+- [x] 2.5 `make gen-contract` 同步 api.gen.ts，确认漂移门禁绿
 
 ## 3. S4 后端：task-name 构建期 codegen + /yang/modules category（B1+B3）
 

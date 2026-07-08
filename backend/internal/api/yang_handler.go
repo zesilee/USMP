@@ -53,6 +53,11 @@ type FieldDef struct {
 	// IsKey 标记 list 的 key 叶：通用控制台据此派生 keyField/首列，免去 per-module
 	// 路由 props（BR-07）。
 	IsKey bool `json:"isKey,omitempty"`
+	// DynamicDefault 标记厂商 `dynamic-default` 扩展（BR-10）：值由系统动态缺省，
+	// 空值=「设备自行决定」而非缺配置——前端展示自动分配占位、不强制必填。
+	DynamicDefault bool `json:"dynamicDefault,omitempty"`
+	// Units 携带 YANG `units`（BR-09）：输入控件展示单位后缀（如 bit/s）。
+	Units string `json:"units,omitempty"`
 }
 
 // CaseDef 是 YANG `choice` 的一个 `case` 分支：name 为 case 名，fields 为其子字段

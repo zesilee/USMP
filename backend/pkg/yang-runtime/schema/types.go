@@ -171,6 +171,10 @@ type LeafNode interface {
 	// SupportFilter reports whether the vendor `support-filter` extension marks
 	// this leaf as a query/filter field (drives advanced-search controls, BR-07).
 	SupportFilter() bool
+	// DynamicDefault reports whether the vendor `dynamic-default` extension marks
+	// this leaf as system-defaulted (BR-10): an empty value means "device decides",
+	// not "missing configuration" — the form shows an auto-assigned placeholder.
+	DynamicDefault() bool
 	// OperationExcludes returns the operations excluded for this leaf by the
 	// vendor `operation-exclude` extension (normalized lower-case, e.g.
 	// ["update","delete"] for create-only identity fields), empty if none.

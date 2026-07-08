@@ -100,7 +100,7 @@ func TestSplitPath(t *testing.T) {
 func TestJoinPath(t *testing.T) {
 	tests := []struct {
 		components []string
-		expected    string
+		expected   string
 	}{
 		{[]string{}, "/"},
 		{[]string{"interfaces"}, "/interfaces"},

@@ -560,6 +560,11 @@ export interface components {
             cases?: components["schemas"]["api.CaseDef"][];
             default?: unknown;
             /**
+             * @description DynamicDefault 标记厂商 `dynamic-default` 扩展（BR-10）：值由系统动态缺省，
+             *     空值=「设备自行决定」而非缺配置——前端展示自动分配占位、不强制必填。
+             */
+            dynamicDefault?: boolean;
+            /**
              * @description Fields 承载嵌套子字段：type=group（单个嵌套对象）/ type=list（可重复列表）时非空。
              *     由 ?form=nested 的嵌套 schema 生成，用于 member-ports 等 list-in-list 结构（R05）。
              */
@@ -597,6 +602,8 @@ export interface components {
              */
             supportFilter?: boolean;
             type?: string;
+            /** @description Units 携带 YANG `units`（BR-09）：输入控件展示单位后缀（如 bit/s）。 */
+            units?: string;
             /** @description When 携带 YANG `when` XPath 表达式，驱动前端数据驱动的条件显隐（R05）。空表示无条件。 */
             when?: string;
         };

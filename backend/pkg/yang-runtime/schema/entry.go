@@ -234,9 +234,14 @@ func entryToLeaf(e *yang.Entry, parent Node, path string, isKey bool, inheritedR
 		}
 		leaf.rangeMin, leaf.hasMin, leaf.rangeMax, leaf.hasMax = leafRangeBounds(e.Type)
 	}
+	if leaf.units == "" {
+		// units may sit on the leaf statement itself rather than the (derived) type.
+		leaf.units = e.Units
+	}
 	leaf.whenExpr = firstExtraExpr(e.Extra["when"])
 	leaf.mustExprs = allExtraExprs(e.Extra["must"])
 	leaf.supportFilter = extSupportFilter(e)
+	leaf.dynamicDefault = extDynamicDefault(e)
 	leaf.opExcludes = extOperationExcludes(e)
 	return leaf
 }
@@ -258,6 +263,19 @@ func extSupportFilter(e *yang.Entry) bool {
 	for _, x := range e.Exts {
 		if x != nil && extLocalName(x.Keyword) == "support-filter" &&
 			strings.EqualFold(strings.TrimSpace(x.Argument), "true") {
+			return true
+		}
+	}
+	return false
+}
+
+// extDynamicDefault reports whether e carries a vendor `dynamic-default`
+// extension (BR-10). Only boolean presence is taken: both the bare form and the
+// form carrying `default-value` substatements/arguments mark the leaf as
+// system-defaulted; expressions are not evaluated (R08 — no parsing to fail).
+func extDynamicDefault(e *yang.Entry) bool {
+	for _, x := range e.Exts {
+		if x != nil && extLocalName(x.Keyword) == "dynamic-default" {
 			return true
 		}
 	}

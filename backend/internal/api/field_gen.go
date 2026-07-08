@@ -134,6 +134,9 @@ func leafToField(leaf schema.LeafNode, group string) FieldDef {
 		IsKey:            leaf.IsKey(),
 		// config false 叶（含继承）编辑态禁用且不入 payload（BR-09）。
 		Readonly: leaf.ReadOnly(),
+		// 系统动态缺省（BR-10）+ 单位后缀（BR-09）。
+		DynamicDefault: leaf.DynamicDefault(),
+		Units:          leaf.Units(),
 	}
 	if leaf.LeafType() == schema.LeafTypeEnum {
 		for _, v := range leaf.EnumValues() {

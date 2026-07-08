@@ -423,27 +423,33 @@ func NewCase(name, description, path string, parent Node) CaseNode {
 // defaultLeaf is the default implementation of LeafNode
 type defaultLeaf struct {
 	defaultNode
-	leafType      LeafType
-	isKey         bool
-	defaultValue  interface{}
-	enumValues    []string
-	mandatory     bool
-	units         string
-	whenExpr      string
-	mustExprs     []string
-	pattern       string
-	rangeMin      int
-	rangeMax      int
-	hasMin        bool
-	hasMax        bool
-	leafList      bool
-	supportFilter bool
-	opExcludes    []string
+	leafType       LeafType
+	isKey          bool
+	defaultValue   interface{}
+	enumValues     []string
+	mandatory      bool
+	units          string
+	whenExpr       string
+	mustExprs      []string
+	pattern        string
+	rangeMin       int
+	rangeMax       int
+	hasMin         bool
+	hasMax         bool
+	leafList       bool
+	supportFilter  bool
+	dynamicDefault bool
+	opExcludes     []string
 }
 
 // SupportFilter implements LeafNode interface
 func (l *defaultLeaf) SupportFilter() bool {
 	return l.supportFilter
+}
+
+// DynamicDefault implements LeafNode interface
+func (l *defaultLeaf) DynamicDefault() bool {
+	return l.dynamicDefault
 }
 
 // OperationExcludes implements LeafNode interface
