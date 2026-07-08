@@ -38,6 +38,17 @@ type FieldDef struct {
 	// Fields 承载嵌套子字段：type=group（单个嵌套对象）/ type=list（可重复列表）时非空。
 	// 由 ?form=nested 的嵌套 schema 生成，用于 member-ports 等 list-in-list 结构（R05）。
 	Fields []FieldDef `json:"fields,omitempty"`
+	// Cases 承载 YANG `choice` 的互斥分支：type=choice 时非空，每个 case 携带自身子字段。
+	// 前端据此渲染 Tabs/RadioGroup（BR-06）。case 子字段 path 为扁平数据路径。
+	Cases []CaseDef `json:"cases,omitempty"`
+}
+
+// CaseDef 是 YANG `choice` 的一个 `case` 分支：name 为 case 名，fields 为其子字段
+// （扁平 path，切换 case 时前端只保留激活 case 的字段）。
+type CaseDef struct {
+	Name   string     `json:"name"`
+	Label  string     `json:"label"`
+	Fields []FieldDef `json:"fields,omitempty"`
 }
 
 // Option represents a select option
