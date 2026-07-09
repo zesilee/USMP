@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"context"
 	"encoding/xml"
+	"errors"
 	"fmt"
 	"io"
 	"reflect"
@@ -26,14 +27,17 @@ const NETCONFDefaultPort = 830
 
 // NETCONFClient implements Client interface for NETCONF protocol
 type NETCONFClient struct {
+	// opMu 串行化同一连接上的所有 RPC（含整段写事务 edit-config…commit/discard）。
+	// scrapligo 的 Driver 非并发安全：buildPayload 的 messageID++ 无锁（并发时
+	// 产生重复 message-id，响应被错领/丢失后 RPC 挂到 op-timeout），Channel.Write
+	// 也无锁（并发写使 NETCONF 帧字节交错，设备端解析卡死）；且两个并发 Set 交错
+	// 会把彼此的变更混进同一 candidate（2PC 原子性破坏，R09）。并发调用方
+	// （API handler、各 Reconciler）在此排队，而不是并发打到 driver 上。
+	opMu      sync.Mutex
 	mu        sync.RWMutex
 	info      DeviceConnectionInfo
 	driver    *netconf.Driver
 	connected bool
-	// opMu 串行化整段写事务（edit-config…commit/discard）：scrapligo driver 单通道
-	// 不承受并发 RPC，且两个并发 Set 交错会把彼此的变更混进同一 candidate（2PC 原子性
-	// 破坏，R09）。读走 get-config 单 RPC，同样经 opMu 防通道交错。
-	opMu sync.Mutex
 }
 
 // NewNETCONFClient creates a new NETCONF client and connects immediately
@@ -91,28 +95,72 @@ func (c *NETCONFClient) connect() error {
 	return nil
 }
 
+// ensureConnected returns a usable driver, dialing if the connection is absent
+// or was marked dead. Callers must hold opMu.
+func (c *NETCONFClient) ensureConnected() (*netconf.Driver, error) {
+	c.mu.RLock()
+	driver, ok := c.driver, c.connected
+	c.mu.RUnlock()
+	if ok && driver != nil {
+		return driver, nil
+	}
+
+	c.mu.Lock()
+	defer c.mu.Unlock()
+	if c.connected && c.driver != nil {
+		return c.driver, nil
+	}
+	if err := c.connect(); err != nil {
+		return nil, err
+	}
+	return c.driver, nil
+}
+
+// markDisconnected tears down a dead connection so the next call redials.
+// 之前传输层死亡后 connected 恒为 true，ClientPool 的 IsConnected() 检查
+// 形同虚设，死连接被永久复用——所有请求瞬间 EOF 直到进程重启。
+func (c *NETCONFClient) markDisconnected() {
+	c.mu.Lock()
+	defer c.mu.Unlock()
+	if c.driver != nil {
+		driver := c.driver
+		// 不能调 driver.Close()：scrapligo v1.4.0 在死连接上 Close 必死锁
+		// （read loop 阻塞在无缓冲 errs 发送、Close 阻塞在无缓冲 done 发送）。
+		// 直接关 Channel/Transport 释放 fd；卡在 errs 上的 read goroutine 是
+		// scrapligo 缺陷，泄漏量与断连次数同阶，可接受。异步 + recover：
+		// 关闭仅是清理，不能阻塞调用链，第三方 double-close 也不许崩进程（R08）。
+		go func() {
+			defer func() { _ = recover() }()
+			_ = driver.Channel.Close()
+		}()
+	}
+	c.driver = nil
+	c.connected = false
+}
+
+// isTransportError reports whether err means the NETCONF session itself is
+// unusable (vs. an RPC-level <rpc-error>), so the connection must be redialed.
+func isTransportError(err error) bool {
+	if err == nil {
+		return false
+	}
+	if errors.Is(err, io.EOF) ||
+		errors.Is(err, util.ErrTimeoutError) ||
+		errors.Is(err, util.ErrConnectionError) {
+		return true
+	}
+	msg := err.Error()
+	return strings.Contains(msg, "EOF") ||
+		strings.Contains(msg, "connection reset") ||
+		strings.Contains(msg, "broken pipe") ||
+		strings.Contains(msg, "use of closed") ||
+		strings.Contains(msg, "session closed")
+}
+
 // Get implements Client interface
 func (c *NETCONFClient) Get(ctx context.Context, path string, opts ...GetOption) (*GetResult, error) {
 	c.opMu.Lock()
 	defer c.opMu.Unlock()
-	c.mu.RLock()
-	if !c.connected || c.driver == nil {
-		c.mu.RUnlock()
-		// Try to reconnect
-		c.mu.Lock()
-		defer c.mu.Unlock()
-		if err := c.connect(); err != nil {
-			return &GetResult{
-				Error: err,
-			}, err
-		}
-	} else {
-		c.mu.RUnlock()
-	}
-
-	c.mu.RLock()
-	driver := c.driver
-	c.mu.RUnlock()
 
 	// Apply options
 	getOpts := &GetOptions{
@@ -133,8 +181,27 @@ func (c *NETCONFClient) Get(ctx context.Context, path string, opts ...GetOption)
 		op.Filter = filter
 		return nil
 	}
-	resp, err := driver.GetConfig(getOpts.Datastore, withFilter)
+
+	driver, err := c.ensureConnected()
 	if err != nil {
+		return &GetResult{Error: err}, err
+	}
+
+	resp, err := driver.GetConfig(getOpts.Datastore, withFilter)
+	if err != nil && isTransportError(err) {
+		// 连接已死（设备重启/闪断/超时后被 scrapligo 关闭）：重连并重试一次。
+		// get-config 幂等，重试安全。
+		c.markDisconnected()
+		driver, rerr := c.ensureConnected()
+		if rerr != nil {
+			return &GetResult{Error: err}, err
+		}
+		resp, err = driver.GetConfig(getOpts.Datastore, withFilter)
+	}
+	if err != nil {
+		if isTransportError(err) {
+			c.markDisconnected()
+		}
 		return &GetResult{
 			Error: err,
 		}, err
@@ -163,22 +230,11 @@ func (c *NETCONFClient) Get(ctx context.Context, path string, opts ...GetOption)
 func (c *NETCONFClient) Set(ctx context.Context, changes []Change, opts ...SetOption) (*SetResult, error) {
 	c.opMu.Lock()
 	defer c.opMu.Unlock()
-	c.mu.RLock()
-	if !c.connected || c.driver == nil {
-		c.mu.RUnlock()
-		// Try to reconnect
-		c.mu.Lock()
-		defer c.mu.Unlock()
-		if err := c.connect(); err != nil {
-			return nil, err
-		}
-	} else {
-		c.mu.RUnlock()
-	}
 
-	c.mu.RLock()
-	driver := c.driver
-	c.mu.RUnlock()
+	driver, err := c.ensureConnected()
+	if err != nil {
+		return nil, err
+	}
 
 	// Apply options
 	setOpts := &SetOptions{
@@ -212,6 +268,14 @@ func (c *NETCONFClient) Set(ctx context.Context, changes []Change, opts ...SetOp
 		var resp *response.NetconfResponse
 		resp, err = driver.EditConfig(setOpts.Datastore, xmlConfig)
 		if err != nil {
+			// 事务中途连接死亡：不在此重试（candidate 状态已不可知），只标记
+			// 断连让下一次调用重连重推整个 desired，避免半套配置落盘。
+			if isTransportError(err) {
+				result.Changes[i] = ChangeResult{Change: change, Success: false, Error: err}
+				result.Success = false
+				c.markDisconnected()
+				return result, err
+			}
 			result.Changes[i] = ChangeResult{
 				Change:  change,
 				Success: false,
@@ -240,8 +304,11 @@ func (c *NETCONFClient) Set(ctx context.Context, changes []Change, opts ...SetOp
 
 	// Commit if requested and all changes succeeded
 	if setOpts.Commit && result.Success {
-		resp, err := c.driver.Commit()
+		resp, err := driver.Commit()
 		if err != nil {
+			if isTransportError(err) {
+				c.markDisconnected()
+			}
 			result.Success = false
 			result.Message = fmt.Sprintf("partial success: failed to commit: %v", err)
 			return result, err
@@ -315,25 +382,17 @@ func (c *NETCONFClient) ServerCapabilities() []string {
 func (c *NETCONFClient) DiscardCandidate(ctx context.Context) error {
 	c.opMu.Lock()
 	defer c.opMu.Unlock()
-	c.mu.RLock()
-	if !c.connected || c.driver == nil {
-		c.mu.RUnlock()
-		c.mu.Lock()
-		defer c.mu.Unlock()
-		if err := c.connect(); err != nil {
-			return err
-		}
-	} else {
-		c.mu.RUnlock()
+	driver, err := c.ensureConnected()
+	if err != nil {
+		return err
 	}
-
-	c.mu.RLock()
-	driver := c.driver
-	c.mu.RUnlock()
 
 	// scrapligo's Discard method discards the candidate config
 	resp, err := driver.Discard()
 	if err != nil {
+		if isTransportError(err) {
+			c.markDisconnected()
+		}
 		return fmt.Errorf("failed to discard candidate: %w", err)
 	}
 
