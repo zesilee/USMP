@@ -9,10 +9,14 @@
 package driver
 
 import (
+	"fmt"
+	"reflect"
 	"sync"
 
 	"github.com/openconfig/ygot/ygot"
 	"github.com/openconfig/ygot/ytypes"
+
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/xmlcodec"
 )
 
 // Descriptor describes one device driver module: how config paths map to its
@@ -39,6 +43,44 @@ type Descriptor struct {
 	MatchEncode func(path string) bool
 	NewStruct   func() ygot.GoStruct
 	Unmarshal   func([]byte, ygot.GoStruct, ...ytypes.UnmarshalOpt) error
+
+	// XML carries the generic NETCONF XML codec data for this module
+	// (yang-xml-codec XC-01/02/03)：namespace + SchemaTree 入口。nil 表示该
+	// 模块不走通用 XML 引擎（如 system 无 XML 通道），调用方保持既有降级。
+	XML *xmlcodec.Spec
+}
+
+// WrapXMLValue normalizes a change value to the descriptor's container
+// GoStruct: containers pass through, inner list-map values (diff 引擎产出的
+// map[K]*Entry 形态) are wrapped into a fresh container. Values of any other
+// type are an explicit error (R08).
+func (d Descriptor) WrapXMLValue(v interface{}) (ygot.GoStruct, error) {
+	if d.NewStruct == nil {
+		return nil, fmt.Errorf("driver: descriptor %s/%s has no NewStruct", d.Vendor, d.Module)
+	}
+	container := d.NewStruct()
+	if reflect.TypeOf(v) == reflect.TypeOf(container) {
+		return v.(ygot.GoStruct), nil
+	}
+	if err := xmlcodec.WrapListMap(container, v); err != nil {
+		return nil, fmt.Errorf("driver %s/%s: %w", d.Vendor, d.Module, err)
+	}
+	return container, nil
+}
+
+// matchesXMLValue reports whether v is this descriptor's container type or
+// its inner list-map type.
+func (d Descriptor) matchesXMLValue(v interface{}) bool {
+	if d.XML == nil || d.NewStruct == nil || v == nil {
+		return false
+	}
+	container := d.NewStruct()
+	tv := reflect.TypeOf(v)
+	if tv == reflect.TypeOf(container) {
+		return true
+	}
+	mt, err := xmlcodec.ListMapType(container)
+	return err == nil && tv == mt
 }
 
 // Registry holds descriptors in registration order (first match wins — 对拍
@@ -78,6 +120,14 @@ func (r *Registry) EncoderFor(path string) (Descriptor, bool) {
 	})
 }
 
+// XMLEncoderForValue returns the first descriptor whose container GoStruct
+// type (or inner list-map type) matches v and that carries XML codec data.
+// 按类型而非路径匹配：Change 的 Path 在 diff 引擎产出内层 map 时不可靠
+// （当年 IFM 漏发 bug 根因），类型匹配是唯一稳定信号。
+func (r *Registry) XMLEncoderForValue(v interface{}) (Descriptor, bool) {
+	return r.lookup(func(d Descriptor) bool { return d.matchesXMLValue(v) })
+}
+
 func (r *Registry) lookup(pred func(Descriptor) bool) (Descriptor, bool) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
@@ -103,3 +153,8 @@ func DecoderFor(path string) (Descriptor, bool) { return defaultRegistry.Decoder
 
 // EncoderFor looks up the default registry for RFC7951 encoding.
 func EncoderFor(path string) (Descriptor, bool) { return defaultRegistry.EncoderFor(path) }
+
+// XMLEncoderForValue looks up the default registry by change value type.
+func XMLEncoderForValue(v interface{}) (Descriptor, bool) {
+	return defaultRegistry.XMLEncoderForValue(v)
+}

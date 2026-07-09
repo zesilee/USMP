@@ -1,0 +1,1 @@
+{urn:huawei:params:xml:ns:yang:huawei-vlan}vlans({urn:huawei:params:xml:ns:yang:huawei-vlan}vlan({urn:huawei:params:xml:ns:yang:huawei-vlan}description(desc <&> quoted),{urn:huawei:params:xml:ns:yang:huawei-vlan}id(40),{urn:huawei:params:xml:ns:yang:huawei-vlan}name(a<b&c"d'e>f)))
