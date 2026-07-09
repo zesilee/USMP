@@ -21,17 +21,17 @@
 
 ## 3. 描述符扩展与接线（DR-01/03、XC-04）
 
-- [ ] 3.1 先写 registry 扩展测试：按 GoStruct 类型（容器型 + 内层 list map 型）查得 XML 编解码数据、未命中 ok=false、并发 `-race`
-- [ ] 3.2 `driver.Descriptor` 增加 `XML *XMLCodecSpec`（Namespace/RootElem/RootSchema/类型标识）与按类型查找 API
-- [ ] 3.3 `internal/drivers/huawei.go` 为 vlan/ifm 登记 XMLCodecSpec（namespace 从 SchemaTree 取，消灭 HuaweiVlanNS/HuaweiIfmNS 硬编码常量的第二来源）；DecodeXML 闭包改指通用引擎
-- [ ] 3.4 `client.marshalChange` 切换：string/[]byte 直通 → 注册表按类型分发（容器/内层 map 两形态）→ openconfig 遗留分支保留 → xml.Marshal 兜底保留；`marshalDeleteChange` 切换注册表+EncodeDelete
-- [ ] 3.5 reconciler（ifm/vlan）Parse 调用点改经描述符 DecodeXML；确认 netconfsim seed.go 引用不受影响
+- [x] 3.1 先写 registry 扩展测试：按 GoStruct 类型（容器型 + 内层 list map 型）查得 XML 编解码数据、未命中 ok=false、并发 `-race`
+- [x] 3.2 `driver.Descriptor` 增加 `XML *XMLCodecSpec`（Namespace/RootElem/RootSchema/类型标识）与按类型查找 API
+- [x] 3.3 `internal/drivers/huawei.go` 为 vlan/ifm 登记 XMLCodecSpec（namespace 从 SchemaTree 取，消灭 HuaweiVlanNS/HuaweiIfmNS 硬编码常量的第二来源）；DecodeXML 闭包改指通用引擎
+- [x] 3.4 `client.marshalChange` 切换：string/[]byte 直通 → 注册表按类型分发（容器/内层 map 两形态）→ openconfig 遗留分支保留 → xml.Marshal 兜底保留；`marshalDeleteChange` 切换注册表+EncodeDelete
+- [x] 3.5 reconciler（ifm/vlan）Parse 调用点改经描述符 DecodeXML；确认 netconfsim seed.go 引用不受影响
 
 ## 4. 双路径验证与退役
 
-- [ ] 4.1 全量验证：`go test ./... -race` 全绿；B2 集成（下发→回读→收敛、删除、全字段配置→回读→diff 为空新用例）全绿
-- [ ] 4.2 删除手写三件套：buildHuaweiVlanVlansXML/buildHuaweiIfmInterfacesXML/ParseHuaweiVlanVlansXML/ParseHuaweiIfmInterfacesXML/中间结构/mapToHuaweiIfmInterfaces/kebab 替换器/marshalDeleteChange 型 switch；client 移除 `internal/generated/huawei` import（XC-04 验收：grep 无引用）
-- [ ] 4.3 删除后全量回归：`go test ./... -race` + B2 全绿；覆盖率不低于基线 58.3（T08，补测后同步上调 `.coverage-baseline`）
+- [x] 4.1 全量验证：`go test ./... -race` 全绿；B2 集成（下发→回读→收敛、删除、全字段配置→回读→diff 为空新用例）全绿
+- [x] 4.2 删除手写三件套：buildHuaweiVlanVlansXML/buildHuaweiIfmInterfacesXML/ParseHuaweiVlanVlansXML/ParseHuaweiIfmInterfacesXML/中间结构/mapToHuaweiIfmInterfaces/kebab 替换器/marshalDeleteChange 型 switch；client 移除 `internal/generated/huawei` import（XC-04 验收：grep 无引用）
+- [x] 4.3 删除后全量回归：`go test ./... -race` + B2 全绿；覆盖率不低于基线 58.3（T08，补测后同步上调 `.coverage-baseline`）
 - [ ] 4.4 code review（`go-code-review-check`）通过；What/Why/How 提交（可多个原子 commit：golden→引擎→接线→退役）
 
 ## 5. 收尾
