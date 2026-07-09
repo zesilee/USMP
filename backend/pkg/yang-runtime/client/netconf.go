@@ -313,6 +313,8 @@ func (c *NETCONFClient) ServerCapabilities() []string {
 // DiscardCandidate discards the candidate configuration on the device.
 // This is used to abort a 2PC transaction before commit.
 func (c *NETCONFClient) DiscardCandidate(ctx context.Context) error {
+	c.opMu.Lock()
+	defer c.opMu.Unlock()
 	c.mu.RLock()
 	if !c.connected || c.driver == nil {
 		c.mu.RUnlock()

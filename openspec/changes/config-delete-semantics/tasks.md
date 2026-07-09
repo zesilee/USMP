@@ -29,6 +29,6 @@
 
 ## 5. 收口
 
-- [ ] 5.1 全量验证：后端 `go test ./...`（-race）、前端单测 + vue-tsc + gen-contract 漂移、`make e2e-local`
-- [ ] 5.2 覆盖率对齐棘轮（后端 57.8 / 前端 74/71/67/74），补测后按需上调
-- [ ] 5.3 `go-code-review-check` + What/Why/How 提交整理 + PR 体积自检
+- [x] 5.1 全量验证：后端 `go test ./...`（-race）、前端单测 + vue-tsc + gen-contract 漂移、`make e2e-local`
+- [x] 5.2 覆盖率对齐棘轮（后端 57.8 / 前端 74/71/67/74），补测后按需上调
+- [x] 5.3 `go-code-review-check` + What/Why/How 提交整理 + PR 体积自检
