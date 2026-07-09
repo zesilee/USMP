@@ -1,9 +1,9 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { mount, flushPromises } from '@vue/test-utils'
 import { createPinia } from 'pinia'
-import ElementPlus from 'element-plus'
+import ElementPlus, { ElMessageBox } from 'element-plus'
 import ModuleListTab from '../../src/components/config/ModuleListTab.vue'
-import { getConfig, setConfig, getDeviceReconcile } from '../../src/api'
+import { getConfig, setConfig, deleteConfig, getDeviceReconcile } from '../../src/api'
 import { deriveTabs } from '../../src/utils/moduleConsole'
 import { ifmNestedSchema, seedRows } from '../views/moduleConsole.fixture'
 
@@ -151,7 +151,7 @@ describe('ModuleListTab · 操作门禁（operation-exclude，FE-11）', () => {
     expect(Object.values(disabledOf()).every((v) => v === false)).toBe(true)
   })
 
-  it('list 级无 exclude → 编辑按钮可见；删除按钮存在但禁用（后端暂无删除语义）', async () => {
+  it('list 级无 exclude → 编辑/删除按钮均可用（FE-16 起删除有真实语义）', async () => {
     const w = mountTab()
     await flushPromises()
     const ops = w.findAll('.el-table__body .el-button')
@@ -159,7 +159,7 @@ describe('ModuleListTab · 操作门禁（operation-exclude，FE-11）', () => {
     expect(texts).toContain('编辑')
     expect(texts).toContain('删除')
     const del = ops.find((b) => b.text().trim() === '删除')!
-    expect(del.attributes('disabled')).toBeDefined()
+    expect(del.attributes('disabled')).toBeUndefined()
   })
 
   it('list 级 operationExclude=update|delete → 操作列整列隐藏', async () => {
@@ -223,5 +223,64 @@ describe('ModuleListTab · 只读列表 Tab（FE-14）', () => {
     expect(w.text()).toContain('新增')
     const headers = w.findAll('.el-table__header th .cell').map((n) => n.text().trim())
     expect(headers).toContain('操作')
+  })
+})
+
+describe('ModuleListTab · 行删除（FE-16）', () => {
+  it('门禁允许时删除按钮可用；确认后以行主键调 DELETE 并刷新', async () => {
+    const w = mountTab()
+    await flushPromises()
+
+    const delBtn = w.findAll('.el-table__body .el-button').find((b) => b.text() === '删除')!
+    expect(delBtn.attributes('disabled')).toBeUndefined()
+    expect(delBtn.attributes('aria-disabled')).not.toBe('true')
+
+    // 打桩确认框：直接确认
+    const confirmSpy = vi.spyOn(ElMessageBox, 'confirm').mockResolvedValue('confirm' as any)
+    vi.mocked(deleteConfig).mockResolvedValue({ data: { code: 0, success: true, data: {} } } as any)
+    const loadsBefore = vi.mocked(getConfig).mock.calls.length
+
+    await delBtn.trigger('click')
+    await flushPromises()
+
+    expect(confirmSpy).toHaveBeenCalled()
+    expect(vi.mocked(deleteConfig)).toHaveBeenCalledTimes(1)
+    const [ip, path, key] = vi.mocked(deleteConfig).mock.calls[0]
+    expect(ip).toBe('10.0.0.1')
+    expect(path).toContain('ifm:interfaces')
+    expect(key).toBe('200GE0/1/0') // 首行主键（keyField=name）
+    // 成功后刷新列表
+    expect(vi.mocked(getConfig).mock.calls.length).toBeGreaterThan(loadsBefore)
+    confirmSpy.mockRestore()
+  })
+
+  it('取消确认：零请求', async () => {
+    const w = mountTab()
+    await flushPromises()
+    const confirmSpy = vi.spyOn(ElMessageBox, 'confirm').mockRejectedValue('cancel')
+
+    const delBtn = w.findAll('.el-table__body .el-button').find((b) => b.text() === '删除')!
+    await delBtn.trigger('click')
+    await flushPromises()
+
+    expect(vi.mocked(deleteConfig)).not.toHaveBeenCalled()
+    confirmSpy.mockRestore()
+  })
+
+  it('删除失败：错误如实可见、列表不变（R08/§9）', async () => {
+    const w = mountTab()
+    await flushPromises()
+    const confirmSpy = vi.spyOn(ElMessageBox, 'confirm').mockResolvedValue('confirm' as any)
+    vi.mocked(deleteConfig).mockRejectedValue({
+      response: { data: { message: '设备删除失败: data-missing' } },
+    })
+
+    const delBtn = w.findAll('.el-table__body .el-button').find((b) => b.text() === '删除')!
+    await delBtn.trigger('click')
+    await flushPromises()
+
+    expect(w.text()).toContain('data-missing')
+    expect(w.findAll('.el-table__body tr')).toHaveLength(5)
+    confirmSpy.mockRestore()
   })
 })

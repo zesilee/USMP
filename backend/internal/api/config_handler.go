@@ -29,12 +29,16 @@ type ConfigHandler struct {
 	// fetch reads a device's running config at a path. Injectable so cache
 	// behaviour can be tested without a device/sim; defaults to fetchFromDevice.
 	fetch func(ctx context.Context, ip, path string) (interface{}, error)
+	// pushDelete 同步下发单条目删除（BR-09，命令语义）。可注入以便无设备/模拟器
+	// 测试；默认 pushDeleteToDevice。
+	pushDelete func(ctx context.Context, ip string, target interface{}) error
 }
 
 // NewConfigHandler creates a new ConfigHandler
 func NewConfigHandler(mgr manager.Manager) *ConfigHandler {
 	h := &ConfigHandler{manager: mgr}
 	h.fetch = h.fetchFromDevice
+	h.pushDelete = h.pushDeleteToDevice
 	return h
 }
 
@@ -1005,4 +1009,106 @@ func summarizeSubmitted(data map[string]interface{}) string {
 		}
 	}
 	return strings.Join(parts, ", ")
+}
+
+// ConfigDeleteData 是 DELETE /config 的 data 负载（命令语义：同步下发成功才返回）。
+type ConfigDeleteData struct {
+	Status         string        `json:"status"`
+	Path           string        `json:"path"`
+	Key            string        `json:"key"`
+	Reconciliation ReconcileInfo `json:"reconciliation"`
+}
+
+// pushDeleteToDevice 经客户端池同步下发单条目删除（candidate→commit，DP-04/DP-07）。
+func (h *ConfigHandler) pushDeleteToDevice(ctx context.Context, ip string, target interface{}) error {
+	info := client.DeviceConnectionInfo{IP: ip, Protocol: client.ProtocolAUTO}
+	if ds := h.manager.GetDeviceStore(); ds != nil {
+		if stored, ok := ds.Get(ip); ok {
+			info = stored
+		}
+	}
+	cli, err := h.manager.GetClientPool().Get(info)
+	if err != nil {
+		return err
+	}
+	if !cli.IsConnected() {
+		return errDeviceNotConnected
+	}
+	result, err := cli.Set(ctx, []client.Change{{Type: client.DeleteChange, OldValue: target}}, client.WithCommit(true))
+	// per-change 错误优先：聚合错误（"one or more changes failed"）会吞掉设备的
+	// data-missing 等细节（§9 诚实透出）。
+	if result != nil && !result.Success {
+		for _, cr := range result.Changes {
+			if cr.Error != nil {
+				return cr.Error
+			}
+		}
+	}
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+// DeleteConfig 以命令语义删除列表单条目（BR-09/BR-10）
+//
+// @Summary  删除设备指定 YANG 列表路径下的单条目
+// @Tags     config
+// @Produce  json
+// @Param    ip   path  string true "设备 IP"
+// @Param    path path  string true "YANG 列表路径"
+// @Param    key  query string true "条目主键（vlan→id，interface→name）"
+// @Success  200 {object} Response{data=ConfigDeleteData} "删除成功"
+// @Failure  400 {object} Response "非法 key / 未知路径 / 模型门禁拒绝"
+// @Failure  502 {object} Response "设备删除失败（含 data-missing）"
+// @Router   /config/{ip}/{path} [delete]
+func (h *ConfigHandler) DeleteConfig(c *gin.Context) {
+	ip := c.Param("ip")
+	path := c.Param("path")
+	key := c.Query("key")
+
+	// 模型门禁先行（BR-10）：operation-exclude/readonly 拒绝比未知路径更明确。
+	if err := deleteGate(h.manager.GetSchema(), path); err != nil {
+		Error(c, 400, "删除被模型门禁拒绝: "+err.Error())
+		return
+	}
+	target, err := parseDeleteTarget(path, key)
+	if err != nil {
+		Error(c, 400, "无法解析删除目标: "+err.Error())
+		return
+	}
+
+	// 先移 desired 再下发（design D4）：对账不会把刚删的条目加回。
+	if err := storeConfigDeleted(h.manager.GetConfigStore(), ip, path, target); err != nil {
+		Error(c, 500, "移除期望配置失败: "+err.Error())
+		return
+	}
+
+	// 同步下发（命令语义）：失败原样透出，不失效缓存、不写审计（§9）。
+	ctx, cancel := context.WithTimeout(c.Request.Context(), 15*time.Second)
+	defer cancel()
+	if err := h.pushDelete(ctx, ip, target); err != nil {
+		Error(c, 502, "设备删除失败: "+err.Error())
+		return
+	}
+
+	// 成功：失效运行缓存 + 审计 + 触发对账验证收敛。
+	h.manager.GetRunningCache().InvalidatePrefix(ip + "|")
+	controllerFound := h.manager.TriggerReconcile(ip, path)
+	h.manager.GetAuditStore().Record(audit.Record{
+		DeviceIP:  ip,
+		Path:      path,
+		Summary:   summarizeDeleted(target),
+		Triggered: controllerFound,
+	})
+
+	Success(c, ConfigDeleteData{
+		Status: "DELETED",
+		Path:   path,
+		Key:    key,
+		Reconciliation: ReconcileInfo{
+			Triggered: controllerFound,
+			Message:   "Entry deleted on device. Reconciliation will verify convergence.",
+		},
+	}, "Entry deleted")
 }

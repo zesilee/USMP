@@ -10,7 +10,8 @@ updated: 2026-07-08
 evidence: docs/research/imaster-nce-ux-insights.md
 p0_done: generic-module-console 已合入 main (#121/#123/#124, 2026-07-08)
 p3_done: ext-ui-annotations 已合入 main (#126) + sync + 归档 (2026-07-08)
-next: P4 删除语义（主线，已知精确起点）或 P1' 保真微调（低优先）
+p4_status: apply 完成，PR #128 待 CI+merge（change config-delete-semantics，分支 worktree-config-delete-semantics）
+next: PR #128 合入后 sync+archive+勾选 P4；剩余 P1' 保真微调（低优先）、P5 SND（独立立项）
 ---
 
 ## 目标
@@ -58,9 +59,9 @@ next: P4 删除语义（主线，已知精确起点）或 P1' 保真微调（低
 - ~~choice 拍平顾虑~~ 已被 P3 实测推翻（choice/case 完整保留），本期未涉 choice 注解
 - 测试层 B1（扩展解析）+ B3（schema API 契约）+ F1/F2（渲染器消费）；存量并行→切换（§5.3）
 
-### [ ] P4 — 删除语义模型化（洞察 E）
-- [ ] 删除语义：已知精确起点——删除按钮按门禁渲染但**禁用**（后端 /config 无 DELETE、POST 合并语义）。补后端 DELETE/删除下发契约 + 前端启用行删除（[[generic-module-console]] follow-up 债）
-- 测试层 B1+**B2 集成**（涉下发）
+### [~] P4 — 删除语义模型化（洞察 E）｜apply 完成，PR #128 待合入
+- ✅ 2026-07-09 apply 完成（change `config-delete-semantics`，PR #128）：DELETE 显式命令通道（BR-09/BR-10）+ NETCONF 键式删除编码（DP-07）+ 前端行删除（FE-16）。关键实证：声明式通道被 walkMap merge/subset 语义刻意封死→删除必须走命令通道；顺带交付 netconfsim RFC edit-config 接线 + NETCONF 客户端 opMu 写事务串行化（R09）
+- 合入后收尾：/opsx:sync + archive + 勾选本阶段
 
 ### [ ] P5 — 异构多设备 SND 驱动：泛化 + 声明式化（洞察 C）｜战略项，独立立项
 > 从 P4 拆出（原被低估地捆在删除债里）。USMP 后续对接异构多厂商设备的**核心能力**，值得独立 explore/propose，非"最后随手做"。

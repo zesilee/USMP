@@ -235,3 +235,53 @@ func TestEditConfigMalformedXMLErrors(t *testing.T) {
 		t.Fatal("expected error for malformed edit-config XML")
 	}
 }
+
+// 回归（config-delete-semantics 接线暴露）：存量仅 1 个列表条目时，merge 一批含新键的
+// 条目不得把新条目误并进已有条目——list 判定除「存量多兄弟」外还须看「edit 内多兄弟」。
+// 此前 server 走整树替换掩盖了该缺陷；切到 per-operation EditConfig 后成为主路径。
+func TestEditConfigMergeAddsSecondEntryToSingletonList(t *testing.T) {
+	ds := newTreeDatastore()
+	single := `<vlan xmlns="urn:huawei:vlan"><vlans>` +
+		`<vlan><id>10</id><name>ten</name></vlan>` +
+		`</vlans></vlan>`
+	if err := ds.SetRunning([]byte(single)); err != nil {
+		t.Fatalf("SetRunning: %v", err)
+	}
+	// 全量 desired 形态（union）：既有 10 + 新增 20
+	edit := `<vlan xmlns="urn:huawei:vlan"><vlans>` +
+		`<vlan><id>10</id><name>ten</name></vlan>` +
+		`<vlan><id>20</id><name>twenty</name></vlan>` +
+		`</vlans></vlan>`
+	if err := ds.EditConfig([]byte(edit)); err != nil {
+		t.Fatalf("EditConfig: %v", err)
+	}
+	if got := candidateVlanCount(ds); got != 2 {
+		t.Fatalf("vlan count = %d, want 2 (new entry must not merge into existing)", got)
+	}
+	v10 := candidateVlanByID(ds, "10")
+	if v10 == nil || v10.child("name").leafText() != "ten" {
+		t.Fatalf("vlan 10 corrupted: %s", ds.GetCandidate())
+	}
+	if v20 := candidateVlanByID(ds, "20"); v20 == nil || v20.child("name").leafText() != "twenty" {
+		t.Fatalf("vlan 20 missing/corrupted: %s", ds.GetCandidate())
+	}
+}
+
+// 容器 merge 不受 list 判定影响：单实例容器按名匹配原地并（无 key 概念）。
+func TestEditConfigMergeContainerLeafUpdateStillWorks(t *testing.T) {
+	ds := newTreeDatastore()
+	if err := ds.SetRunning([]byte(`<ifm xmlns="urn:huawei:ifm"><global><statistic-interval>10</statistic-interval></global></ifm>`)); err != nil {
+		t.Fatalf("SetRunning: %v", err)
+	}
+	edit := `<ifm xmlns="urn:huawei:ifm"><global><statistic-interval>5</statistic-interval></global></ifm>`
+	if err := ds.EditConfig([]byte(edit)); err != nil {
+		t.Fatalf("EditConfig: %v", err)
+	}
+	ifm := ds.candidateTree().find("ifm")
+	if ifm == nil || len(ifm.children("global")) != 1 {
+		t.Fatalf("global duplicated or missing: %s", ds.GetCandidate())
+	}
+	if got := ifm.find("global", "statistic-interval").leafText(); got != "5" {
+		t.Fatalf("statistic-interval = %s, want 5", got)
+	}
+}

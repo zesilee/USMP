@@ -55,6 +55,13 @@ export const setConfig = (ip: string, path: string, data: any) => {
   return api.post<ApiResponse<void>>(`/config/${ip}/${cleanPath}`, data)
 }
 
+// 行删除（FE-16，命令语义）：key 为条目主键（vlan→id、interface→name），经 query 承载
+// （接口名含斜杠，axios params 自动 URL 编码）。
+export const deleteConfig = (ip: string, path: string, key: string | number) => {
+  const cleanPath = path.startsWith('/') ? path.slice(1) : path
+  return api.delete<ApiResponse<any>>(`/config/${ip}/${cleanPath}`, { params: { key } })
+}
+
 // Schema API - 获取 YANG 模型定义
 export const getSchema = (path: string) => {
   return api.get<ApiResponse<any>>(`/schema/${path}`)
