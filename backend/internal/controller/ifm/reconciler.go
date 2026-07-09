@@ -6,10 +6,12 @@ import (
 	"fmt"
 	"log"
 
+	_ "github.com/leezesi/usmp/backend/internal/drivers" // 描述符注册（回读解码经注册表，XC-04）
 	"github.com/leezesi/usmp/backend/internal/generated/huawei"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/client"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/device"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/diff"
+	yangdriver "github.com/leezesi/usmp/backend/pkg/yang-runtime/driver"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/reconcile"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/schema"
 )
@@ -105,11 +107,14 @@ func (d *deviceClient) Get(ctx context.Context, deviceID string) (interface{}, e
 	case []byte:
 		// Try JSON first (gNMI case), then XML (NETCONF case)
 		if len(data) > 0 && data[0] == '<' {
-			// XML format from NETCONF get-config.
-			// ygot 结构体把 interfaces/interface 生成为 Go map 且无 xml tag，encoding/xml
-			// 无法解析进 map —— 直接 xml.Unmarshal 会得到空 actual，导致对账永远算出 diff
-			// （前端「一直漂移」）。改用手写 token 解析器把 <interface> 填进 ygot map。
-			return client.ParseHuaweiIfmInterfacesXML(data)
+			// XML format from NETCONF get-config：经驱动描述符注册表解码
+			// （DR-03/XC-02，通用引擎全字段填充；直接 xml.Unmarshal 进 ygot
+			// map 会得到空 actual → 对账永远算出 diff、「一直漂移」）。
+			d, ok := yangdriver.DecoderFor("/ifm:ifm/ifm:interfaces")
+			if !ok {
+				return nil, fmt.Errorf("no XML decoder registered for ifm readback")
+			}
+			return d.DecodeXML(data)
 		}
 		// JSON format from gNMI
 		if err := json.Unmarshal(data, deviceRoot); err != nil {
