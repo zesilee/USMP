@@ -5,6 +5,7 @@ import (
 
 	"github.com/leezesi/usmp/backend/internal/generated/huawei"
 	yangdriver "github.com/leezesi/usmp/backend/pkg/yang-runtime/driver"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/xmlcodec"
 )
 
 // 本文件是 test-only shim：手写 parser（snd-xml-codec 退役中）的历史回归
@@ -34,4 +35,15 @@ func ParseHuaweiIfmInterfacesXML(data []byte) (*huawei.HuaweiIfm_Ifm_Interfaces,
 		return nil, err
 	}
 	return gs.(*huawei.HuaweiIfm_Ifm_Interfaces), nil
+}
+
+func buildHuaweiIfmInterfacesXML(ifaces *huawei.HuaweiIfm_Ifm_Interfaces) (string, error) {
+	if ifaces == nil {
+		ifaces = &huawei.HuaweiIfm_Ifm_Interfaces{}
+	}
+	d, ok := yangdriver.XMLEncoderForValue(ifaces)
+	if !ok {
+		return "", fmt.Errorf("shim: ifm encoder not registered")
+	}
+	return xmlcodec.Encode(d.XML, ifaces)
 }
