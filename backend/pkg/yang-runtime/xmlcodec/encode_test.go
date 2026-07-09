@@ -55,8 +55,12 @@ func TestEncodeMatchesGolden(t *testing.T) {
 			if err != nil {
 				t.Fatalf("canonicalize engine output: %v\nraw: %s", err, out)
 			}
+			if *hwfix.Update {
+				hwfix.WriteGolden(t, tt.golden, canon)
+				return
+			}
 			if want := hwfix.Golden(t, tt.golden); canon != want {
-				t.Errorf("engine output != legacy golden %s\n got: %s\nwant: %s\nraw: %s", tt.golden, canon, want, out)
+				t.Errorf("engine output != golden %s\n got: %s\nwant: %s\nraw: %s", tt.golden, canon, want, out)
 			}
 		})
 	}

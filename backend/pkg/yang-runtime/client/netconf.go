@@ -11,7 +11,6 @@ import (
 	"sync"
 	"time"
 
-	"github.com/leezesi/usmp/backend/internal/generated/huawei"
 	"github.com/leezesi/usmp/backend/internal/generated/openconfig"
 	yangdriver "github.com/leezesi/usmp/backend/pkg/yang-runtime/driver"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/xmlcodec"
@@ -483,10 +482,6 @@ func (c *NETCONFClient) marshalChange(change Change) (string, error) {
 		return buildOpenConfigInterfacesXML(interfaces)
 	}
 
-	if vlans, ok := change.NewValue.(*huawei.HuaweiVlan_Vlan_Vlans); ok && vlans != nil {
-		return buildHuaweiVlanVlansXML(vlans)
-	}
-
 	// Try xml.Marshal for other types
 	output, err := xml.Marshal(change.NewValue)
 	if err == nil {
@@ -516,13 +511,6 @@ func (c *NETCONFClient) marshalChange(change Change) (string, error) {
 		v = v.Elem()
 	}
 	if v.Kind() == reflect.Map {
-		// Special case: Huawei VLAN entries map — the generic per-entry xml.Marshal
-		// chokes on the nested member-port map (xml 不支持 map). Route through the
-		// dedicated builder which serializes member-ports correctly.
-		if vlanMap, ok := change.NewValue.(map[uint16]*huawei.HuaweiVlan_Vlan_Vlans_Vlan); ok {
-			return buildHuaweiVlanVlansXML(&huawei.HuaweiVlan_Vlan_Vlans{Vlan: vlanMap})
-		}
-
 		var builder strings.Builder
 
 		// Determine container tag based on the path
@@ -666,9 +654,6 @@ func xmlEscape(s string) string {
 	return buf.String()
 }
 
-const HuaweiVlanNS = "urn:huawei:params:xml:ns:yang:huawei-vlan"
-const HuaweiIfmNS = "urn:huawei:params:xml:ns:yang:huawei-ifm"
-
 // NetconfBaseNS is the NETCONF base namespace carrying the edit-config
 // `operation` attribute (RFC 6241 §7.2).
 const NetconfBaseNS = "urn:ietf:params:xml:ns:netconf:base:1.0"
@@ -686,186 +671,5 @@ func marshalDeleteChange(target interface{}) (string, error) {
 		}
 		return xmlcodec.EncodeDelete(d.XML, gs)
 	}
-	switch v := target.(type) {
-	case *huawei.HuaweiVlan_Vlan_Vlans:
-		if v == nil || len(v.Vlan) == 0 {
-			return "", fmt.Errorf("marshal delete: empty vlan target")
-		}
-		var b strings.Builder
-		fmt.Fprintf(&b, `<vlans xmlns="%s">`, HuaweiVlanNS)
-		for id, vlan := range v.Vlan {
-			key := id
-			if vlan != nil && vlan.Id != nil {
-				key = *vlan.Id
-			}
-			fmt.Fprintf(&b, `<vlan nc:operation="delete" xmlns:nc="%s"><id>%d</id></vlan>`, NetconfBaseNS, key)
-		}
-		b.WriteString(`</vlans>`)
-		return b.String(), nil
-	case *huawei.HuaweiIfm_Ifm_Interfaces:
-		if v == nil || len(v.Interface) == 0 {
-			return "", fmt.Errorf("marshal delete: empty ifm target")
-		}
-		var b strings.Builder
-		fmt.Fprintf(&b, `<interfaces xmlns="%s">`, HuaweiIfmNS)
-		for name, iface := range v.Interface {
-			key := name
-			if iface != nil && iface.Name != nil {
-				key = *iface.Name
-			}
-			fmt.Fprintf(&b, `<interface nc:operation="delete" xmlns:nc="%s"><name>%s</name></interface>`, NetconfBaseNS, xmlEscape(key))
-		}
-		b.WriteString(`</interfaces>`)
-		return b.String(), nil
-	}
 	return "", fmt.Errorf("marshal delete: unsupported model %T", target)
-}
-
-// buildHuaweiVlanVlansXML generates Huawei VLAN standard XML for VLAN configuration.
-func buildHuaweiVlanVlansXML(vlans *huawei.HuaweiVlan_Vlan_Vlans) (string, error) {
-	if vlans == nil || len(vlans.Vlan) == 0 {
-		return fmt.Sprintf(`<vlans xmlns="%s"/>`, HuaweiVlanNS), nil
-	}
-
-	var builder strings.Builder
-	builder.WriteString(fmt.Sprintf(`<vlans xmlns="%s">`, HuaweiVlanNS))
-
-	for vlanID, vlan := range vlans.Vlan {
-		if vlan == nil {
-			continue
-		}
-
-		builder.WriteString("<vlan>")
-
-		// VLAN ID (required)
-		if vlan.Id != nil {
-			builder.WriteString(fmt.Sprintf("<id>%d</id>", *vlan.Id))
-		} else {
-			// Use the map key as ID
-			builder.WriteString(fmt.Sprintf("<id>%d</id>", vlanID))
-		}
-
-		// Name
-		if vlan.Name != nil {
-			builder.WriteString(fmt.Sprintf("<name>%s</name>", xmlEscape(*vlan.Name)))
-		}
-
-		// Description
-		if vlan.Description != nil {
-			builder.WriteString(fmt.Sprintf("<description>%s</description>", xmlEscape(*vlan.Description)))
-		}
-
-		// AdminStatus (enum)
-		if vlan.AdminStatus != 0 {
-			builder.WriteString(fmt.Sprintf("<admin-status>%d</admin-status>", vlan.AdminStatus))
-		}
-
-		// Type (enum)
-		if vlan.Type != 0 {
-			builder.WriteString(fmt.Sprintf("<type>%d</type>", vlan.Type))
-		}
-
-		// BroadcastDiscard (enum)
-		if vlan.BroadcastDiscard != 0 {
-			builder.WriteString(fmt.Sprintf("<broadcast-discard>%d</broadcast-discard>", vlan.BroadcastDiscard))
-		}
-
-		// MacLearning (enum)
-		if vlan.MacLearning != 0 {
-			builder.WriteString(fmt.Sprintf("<mac-learning>%d</mac-learning>", vlan.MacLearning))
-		}
-
-		// StatisticEnable (enum)
-		if vlan.StatisticEnable != 0 {
-			builder.WriteString(fmt.Sprintf("<statistic-enable>%d</statistic-enable>", vlan.StatisticEnable))
-		}
-
-		// StatisticDiscard (enum)
-		if vlan.StatisticDiscard != 0 {
-			builder.WriteString(fmt.Sprintf("<statistic-discard>%d</statistic-discard>", vlan.StatisticDiscard))
-		}
-
-		// UnknownMulticastDiscard (enum)
-		if vlan.UnknownMulticastDiscard != 0 {
-			builder.WriteString(fmt.Sprintf("<unknown-multicast-discard>%d</unknown-multicast-discard>", vlan.UnknownMulticastDiscard))
-		}
-
-		// UnkownUnicastDiscard (nested container)
-		if vlan.UnkownUnicastDiscard != nil {
-			builder.WriteString("<unkown-unicast-discard>")
-			if vlan.UnkownUnicastDiscard.Discard != 0 {
-				builder.WriteString(fmt.Sprintf("<discard>%d</discard>", vlan.UnkownUnicastDiscard.Discard))
-			}
-			if vlan.UnkownUnicastDiscard.MacLearningEnable != 0 {
-				builder.WriteString(fmt.Sprintf("<mac-learning-enable>%d</mac-learning-enable>", vlan.UnkownUnicastDiscard.MacLearningEnable))
-			}
-			builder.WriteString("</unkown-unicast-discard>")
-		}
-
-		// Suppression (nested container)
-		if vlan.Suppression != nil {
-			builder.WriteString("<suppression>")
-			if vlan.Suppression.Inbound != 0 {
-				builder.WriteString(fmt.Sprintf("<inbound>%d</inbound>", vlan.Suppression.Inbound))
-			}
-			if vlan.Suppression.Outbound != 0 {
-				builder.WriteString(fmt.Sprintf("<outbound>%d</outbound>", vlan.Suppression.Outbound))
-			}
-			builder.WriteString("</suppression>")
-		}
-
-		// MacAgingTime
-		if vlan.MacAgingTime != nil {
-			builder.WriteString(fmt.Sprintf("<mac-aging-time>%d</mac-aging-time>", *vlan.MacAgingTime))
-		}
-
-		// SuperVlan
-		if vlan.SuperVlan != nil {
-			builder.WriteString(fmt.Sprintf("<super-vlan>%d</super-vlan>", *vlan.SuperVlan))
-		}
-
-		// MemberPorts (container with port list)
-		if vlan.MemberPorts != nil && len(vlan.MemberPorts.MemberPort) > 0 {
-			builder.WriteString("<member-ports>")
-			for portKey, port := range vlan.MemberPorts.MemberPort {
-				if port == nil {
-					continue
-				}
-				builder.WriteString("<member-port>")
-				// Interface name
-				if port.InterfaceName != nil {
-					builder.WriteString(fmt.Sprintf("<interface-name>%s</interface-name>", xmlEscape(*port.InterfaceName)))
-				} else {
-					builder.WriteString(fmt.Sprintf("<interface-name>%s</interface-name>", xmlEscape(portKey)))
-				}
-				// AccessType
-				if port.AccessType != 0 {
-					builder.WriteString(fmt.Sprintf("<access-type>%d</access-type>", port.AccessType))
-				}
-				// TagMode
-				if port.TagMode != 0 {
-					builder.WriteString(fmt.Sprintf("<tag-mode>%d</tag-mode>", port.TagMode))
-				}
-				builder.WriteString("</member-port>")
-			}
-			builder.WriteString("</member-ports>")
-		}
-
-		// Suppression container
-		if vlan.Suppression != nil {
-			builder.WriteString("<suppression>")
-			if vlan.Suppression.Inbound != 0 {
-				builder.WriteString(fmt.Sprintf("<inbound>%d</inbound>", vlan.Suppression.Inbound))
-			}
-			if vlan.Suppression.Outbound != 0 {
-				builder.WriteString(fmt.Sprintf("<outbound>%d</outbound>", vlan.Suppression.Outbound))
-			}
-			builder.WriteString("</suppression>")
-		}
-
-		builder.WriteString("</vlan>")
-	}
-
-	builder.WriteString("</vlans>")
-	return builder.String(), nil
 }
