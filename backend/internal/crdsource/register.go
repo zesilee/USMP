@@ -51,8 +51,9 @@ func RegisterIntentSources(mgr manager.Manager) (crcache.Cache, error) {
 	}
 
 	cs, pool, ds := mgr.GetConfigStore(), mgr.GetClientPool(), mgr.GetDeviceStore()
-	addIntentController(mgr, c, "huawei-vlan-crd", VlanObject(), VlanProjectFunc, vlan.New(cs, pool, ds))
-	addIntentController(mgr, c, "huawei-ifm-crd", InterfaceObject(), InterfaceProjectFunc, ifm.New(cs, pool, ds))
+	// ProjectFunc 按设备 Vendor 解析驱动（TE-02）：注入共享 DeviceStore。
+	addIntentController(mgr, c, "huawei-vlan-crd", VlanObject(), NewVlanProjectFunc(ds), vlan.New(cs, pool, ds))
+	addIntentController(mgr, c, "huawei-ifm-crd", InterfaceObject(), NewInterfaceProjectFunc(ds), ifm.New(cs, pool, ds))
 
 	log.Printf("crdsource: CRD intent sources registered (BusinessVlan, BusinessInterface; parallel to Actor path)")
 	return c, nil
