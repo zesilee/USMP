@@ -23,4 +23,4 @@
 
 - [x] 4.1 全量验证：前端单测 + vue-tsc + `make gen-contract` 零漂移 + `make e2e-local`（frontend/ 改动强制，§6.2）
 - [x] 4.2 覆盖率对齐棘轮（前端 74/71/67/74），补测后按需上调
-- [ ] 4.3 delta spec sync 前自检 + code review + What/Why/How 提交整理
+- [x] 4.3 delta spec sync 前自检 + code review + What/Why/How 提交整理

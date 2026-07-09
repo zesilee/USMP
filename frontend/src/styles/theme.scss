@@ -129,6 +129,12 @@
   // 外壳几何
   --sidebar-w: #{$sidebar-w};
   --topbar-h: #{$topbar-h};
+
+  // 表格台账密度（NCE 高密度运维台账风，nce-fidelity-polish）：
+  // 纵向 padding 收紧（EP 默认 8px→6px）+ 字号降至 sm，全站 el-table 统一继承
+  --table-cell-py: 6px;
+  --table-cell-px: 10px;
+  --table-font-size: #{$font-size-sm};
 }
 
 // ==================== Element Plus 主题覆盖 ====================
@@ -280,6 +286,8 @@ html, body {
   border-radius: $radius-lg;
   overflow: hidden;
   font-family: $font-family;
+  // 台账密度：字号与单元格 padding 走密度令牌（NCE 高密度）
+  font-size: var(--table-font-size);
 
   &::before {
     background-color: $border-color;
@@ -290,10 +298,16 @@ html, body {
     color: $text-secondary;
     font-weight: $font-weight-semibold;
     border-bottom: 1px solid $border-color;
+    padding: var(--table-cell-py) 0;
   }
 
   td.el-table__cell {
     border-bottom: 1px solid $border-color;
+    padding: var(--table-cell-py) 0;
+  }
+
+  .cell {
+    padding: 0 var(--table-cell-px);
   }
 
   .el-table__row {
