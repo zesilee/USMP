@@ -2,7 +2,7 @@
 # 用法: make <target>
 
 .PHONY: setup bootstrap test lint compliance hook-install hook-verify help \
-	staging-up staging-down staging-logs staging-ps e2e-local gen-contract dev
+	staging-up staging-down staging-logs staging-ps e2e-local gen-contract gen-yang dev
 
 # 默认目标
 help: ## 显示所有可用目标
@@ -85,6 +85,9 @@ gen-contract: ## 生成 API 契约类型：Go 注解 → OpenAPI → 前端 TS�
 	cd backend && npx --yes swagger2openapi@7.0.8 docs/openapi/swagger.json -o docs/openapi/openapi3.json
 	cd frontend && npm run gen:api
 	@echo "✅ 契约已生成：frontend/src/types/api.gen.ts（勿手改）"
+
+gen-yang: ## 重新生成 ygot YANG→Go 生成物（VENDOR=<pkg> 单包，缺省全量；CI 以 regen-and-diff 验证零漂移）
+	@sh scripts/gen-yang.sh $(VENDOR)
 
 e2e-local: ## 本地复现 CI：起 staging → 健康等待 → 浏览器冒烟（提交前必跑，pre-push 亦调用）
 	@bash scripts/e2e-smoke.sh
