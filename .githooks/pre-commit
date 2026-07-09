@@ -28,14 +28,20 @@ if [ -n "$SENSITIVE" ]; then
 fi
 
 # ──────────────────────────────────────────────
-# 2. Generated 目录保护 (R04: 禁止手写 YANG 结构体)
+# 2. Generated 目录保护 (R04: regen-and-diff——生成物改动必须可由管线复现；
+#    与 CI compliance 同口径，README/doc.go 等纯文档不触发)
 # ──────────────────────────────────────────────
-GENERATED=$(echo "$STAGED_FILES" | grep -E '^backend/internal/generated/' || true)
+GENERATED=$(echo "$STAGED_FILES" | grep -E '^backend/internal/generated/' | grep -vE '(README\.md|doc\.go)$' || true)
 if [ -n "$GENERATED" ]; then
-  echo -e "${RED}[R04] 拒绝: 检测到修改自动生成代码 (internal/generated/)${NC}"
-  echo "$GENERATED" | sed 's/^/  /'
-  echo -e "${YELLOW}  提示: 使用 yang-ygot-generate 技能重新生成，禁止手动编辑${NC}"
-  FAILED=1
+  echo -e "${YELLOW}[pre-commit] 检测到生成物/manifest 变更 → regen-and-diff 验证 (R04)...${NC}"
+  if ! make gen-yang >/dev/null 2>&1; then
+    echo -e "${RED}[R04] 拒绝: make gen-yang 执行失败（yang-models submodule 已初始化？）${NC}"
+    FAILED=1
+  elif ! git diff --quiet backend/internal/generated/; then
+    echo -e "${RED}[R04] 拒绝: 生成物与 make gen-yang 输出不一致（生成物勿手改，改 YANG/gen.conf 后重跑）${NC}"
+    git diff --stat backend/internal/generated/ | sed 's/^/  /'
+    FAILED=1
+  fi
 fi
 
 # ──────────────────────────────────────────────
@@ -81,6 +87,10 @@ if [ -n "$GO_FILES" ]; then
         backend)   rel="." ;;
         *) continue ;;  # backend 模块外的目录不在此测试
       esac
+      # 包目录已删除或不再含 Go 文件（包退役提交）时跳过，避免 no-packages 误判
+      if [ "$rel" != "." ] && ! ls backend/"${rel}"/*.go >/dev/null 2>&1; then
+        continue
+      fi
       if ! (cd backend && go test "./${rel}/..." -count=1 -timeout=30s 2>&1); then
         echo -e "${RED}[R15] 拒绝: 测试未通过 (${pkg})${NC}"
         FAILED=1

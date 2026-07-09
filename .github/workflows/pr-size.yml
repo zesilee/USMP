@@ -15,8 +15,9 @@ jobs:
 
       - name: Check PR Size
         run: |
-          # 体积只算「手写代码」，排除生成物/锁文件（lockfile、*.gen.ts、go.sum、openapi 中间产物）
-          EXCLUDE=(':(exclude)**/package-lock.json' ':(exclude)**/*.gen.ts' ':(exclude)**/go.sum' ':(exclude)backend/docs/openapi/**')
+          # 体积只算「手写代码」，排除生成物/锁文件（lockfile、*.gen.ts、go.sum、openapi 中间产物、
+          # ygot 生成物目录——该目录由 compliance 的 R04 regen-and-diff 门禁守护，手写内容仅 gen.conf/文档）
+          EXCLUDE=(':(exclude)**/package-lock.json' ':(exclude)**/*.gen.ts' ':(exclude)**/go.sum' ':(exclude)backend/docs/openapi/**' ':(exclude)backend/internal/generated/**')
           STATS=$(git diff origin/main...HEAD --stat -- . "${EXCLUDE[@]}" | tail -1)
           INSERTIONS=$(echo "$STATS" | grep -oE '[0-9]+ insertion' | grep -oE '[0-9]+' || echo "0")
           DELETIONS=$(echo "$STATS" | grep -oE '[0-9]+ deletion' | grep -oE '[0-9]+' || echo "0")
