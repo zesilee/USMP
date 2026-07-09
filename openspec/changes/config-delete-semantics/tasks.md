@@ -24,8 +24,8 @@
 
 ## 4. 前端：启用行删除（F2，FE-16）
 
-- [ ] 4.1 F2 红：ModuleListTab——按钮可用态（门禁允许时非 disabled）、确认→调 deleteConfig（断言 ip/path/key）→ 刷新；取消→零请求；失败→错误可见列表不变
-- [ ] 4.2 绿：`src/api` 增 deleteConfig；按钮启用 + ElMessageBox confirm + 成功刷新/新鲜度 + 失败透出
+- [x] 4.1 F2 红：ModuleListTab——按钮可用态（门禁允许时非 disabled）、确认→调 deleteConfig（断言 ip/path/key）→ 刷新；取消→零请求；失败→错误可见列表不变
+- [x] 4.2 绿：`src/api` 增 deleteConfig；按钮启用 + ElMessageBox confirm + 成功刷新/新鲜度 + 失败透出
 
 ## 5. 收口
 

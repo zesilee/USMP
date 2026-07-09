@@ -67,8 +67,7 @@
             type="danger"
             size="small"
             link
-            disabled
-            title="删除下发待后端支持（当前为合并语义）"
+            @click="onDelete(row)"
           >删除</el-button>
         </template>
       </el-table-column>
@@ -125,8 +124,8 @@
 <script setup lang="ts">
 import { ref, reactive, computed, watch } from 'vue'
 import { Plus, ArrowDown, ArrowUp } from '@element-plus/icons-vue'
-import type { FormInstance } from 'element-plus'
-import { getConfig } from '../../api'
+import { ElMessage, ElMessageBox, type FormInstance } from 'element-plus'
+import { getConfig, deleteConfig } from '../../api'
 import { useConfigSubmit } from '../../composables/useConfigSubmit'
 import { useConfigForm } from '../../composables/useConfigForm'
 import { useFreshnessStore } from '../../stores/freshness'
@@ -312,6 +311,29 @@ async function submit() {
 
 function onDrawerClosed() {
   submitFlow.reset()
+}
+
+// ===== 行删除（FE-16，命令语义）：确认 → DELETE → 成功刷新 / 失败如实透出（§9） =====
+async function onDelete(row: Record<string, any>) {
+  const key = row[keyField.value]
+  try {
+    await ElMessageBox.confirm(
+      `将从设备删除 ${keyField.value} = ${key} 的条目，该操作不可撤销。`,
+      '确认删除',
+      { type: 'warning', confirmButtonText: '删除', cancelButtonText: '取消' },
+    )
+  } catch {
+    return // 用户取消：零请求
+  }
+  try {
+    await deleteConfig(props.device, configPath.value, key)
+    ElMessage.success('已删除并触发对账')
+    error.value = ''
+    await load()
+  } catch (e: any) {
+    // 设备/门禁错误如实展示，列表保持原状（R08/§9）。
+    error.value = e?.response?.data?.message || e?.message || '删除失败'
+  }
 }
 </script>
 
