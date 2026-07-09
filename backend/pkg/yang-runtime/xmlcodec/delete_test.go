@@ -32,8 +32,12 @@ func TestEncodeDeleteMatchesGolden(t *testing.T) {
 			if err != nil {
 				t.Fatalf("canonicalize: %v\nraw: %s", err, out)
 			}
+			if *hwfix.Update {
+				hwfix.WriteGolden(t, tt.golden, canon)
+				return
+			}
 			if want := hwfix.Golden(t, tt.golden); canon != want {
-				t.Errorf("delete encoding != legacy golden %s\n got: %s\nwant: %s\nraw: %s", tt.golden, canon, want, out)
+				t.Errorf("delete encoding != golden %s\n got: %s\nwant: %s\nraw: %s", tt.golden, canon, want, out)
 			}
 		})
 	}
