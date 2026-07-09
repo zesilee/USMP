@@ -30,6 +30,10 @@ type NETCONFClient struct {
 	info      DeviceConnectionInfo
 	driver    *netconf.Driver
 	connected bool
+	// opMu 串行化整段写事务（edit-config…commit/discard）：scrapligo driver 单通道
+	// 不承受并发 RPC，且两个并发 Set 交错会把彼此的变更混进同一 candidate（2PC 原子性
+	// 破坏，R09）。读走 get-config 单 RPC，同样经 opMu 防通道交错。
+	opMu sync.Mutex
 }
 
 // NewNETCONFClient creates a new NETCONF client and connects immediately
@@ -89,6 +93,8 @@ func (c *NETCONFClient) connect() error {
 
 // Get implements Client interface
 func (c *NETCONFClient) Get(ctx context.Context, path string, opts ...GetOption) (*GetResult, error) {
+	c.opMu.Lock()
+	defer c.opMu.Unlock()
 	c.mu.RLock()
 	if !c.connected || c.driver == nil {
 		c.mu.RUnlock()
@@ -155,6 +161,8 @@ func (c *NETCONFClient) Get(ctx context.Context, path string, opts ...GetOption)
 
 // Set implements Client interface
 func (c *NETCONFClient) Set(ctx context.Context, changes []Change, opts ...SetOption) (*SetResult, error) {
+	c.opMu.Lock()
+	defer c.opMu.Unlock()
 	c.mu.RLock()
 	if !c.connected || c.driver == nil {
 		c.mu.RUnlock()

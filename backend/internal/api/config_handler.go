@@ -1035,16 +1035,17 @@ func (h *ConfigHandler) pushDeleteToDevice(ctx context.Context, ip string, targe
 		return errDeviceNotConnected
 	}
 	result, err := cli.Set(ctx, []client.Change{{Type: client.DeleteChange, OldValue: target}}, client.WithCommit(true))
-	if err != nil {
-		return err
-	}
+	// per-change 错误优先：聚合错误（"one or more changes failed"）会吞掉设备的
+	// data-missing 等细节（§9 诚实透出）。
 	if result != nil && !result.Success {
 		for _, cr := range result.Changes {
 			if cr.Error != nil {
 				return cr.Error
 			}
 		}
-		return fmt.Errorf("delete edit-config failed")
+	}
+	if err != nil {
+		return err
 	}
 	return nil
 }
