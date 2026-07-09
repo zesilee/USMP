@@ -19,8 +19,8 @@
 
 ## 3. B2 集成：端到端删除（netconfsim）
 
-- [ ] 3.1 B2 红：`config_delete_integration_test.go`——建 vlan→删→回读消失→二轮对账 0 change（不复活）；删不存在→data-missing 透出；ifm 接口同构；并发删+下发交错
-- [ ] 3.2 绿：跑通全链路（依赖组 1/2 实现，此处修集成暴露的缺口）
+- [x] 3.1 B2 红：`config_delete_integration_test.go`——建 vlan→删→回读消失→二轮对账 0 change（不复活）；删不存在→data-missing 透出；ifm 接口同构；并发删+下发交错
+- [x] 3.2 绿：跑通全链路（依赖组 1/2 实现，此处修集成暴露的缺口）
 
 ## 4. 前端：启用行删除（F2，FE-16）
 
