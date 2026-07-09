@@ -32,10 +32,10 @@
 - [x] 4.1 全量验证：`go test ./... -race` 全绿；B2 集成（下发→回读→收敛、删除、全字段配置→回读→diff 为空新用例）全绿
 - [x] 4.2 删除手写三件套：buildHuaweiVlanVlansXML/buildHuaweiIfmInterfacesXML/ParseHuaweiVlanVlansXML/ParseHuaweiIfmInterfacesXML/中间结构/mapToHuaweiIfmInterfaces/kebab 替换器/marshalDeleteChange 型 switch；client 移除 `internal/generated/huawei` import（XC-04 验收：grep 无引用）
 - [x] 4.3 删除后全量回归：`go test ./... -race` + B2 全绿；覆盖率不低于基线 58.3（T08，补测后同步上调 `.coverage-baseline`）
-- [ ] 4.4 code review（`go-code-review-check`）通过；What/Why/How 提交（可多个原子 commit：golden→引擎→接线→退役）
+- [x] 4.4 code review（`go-code-review-check`）通过；What/Why/How 提交（可多个原子 commit：golden→引擎→接线→退役）
 
 ## 5. 收尾
 
-- [ ] 5.1 PR（分支 push + gh pr create，body 含 spec 对照与等价性证据）；CI 全绿后合入
-- [ ] 5.2 `/opsx:sync` delta→主 spec（yang-xml-codec 新建、device-driver-registry/device-protocol 合并）+ `/opsx:archive`
-- [ ] 5.3 回写 openspec/tasks/optimize-frontend-nce-insights.md 勾选 P5-2 + `/task sync`；记忆更新（snd-driver-registry 记忆中「netconf.go 45KB 三件套」剩余硬编码条目改写）
+- [x] 5.1 PR（分支 push + gh pr create，body 含 spec 对照与等价性证据）；CI 全绿后合入
+- [x] 5.2 `/opsx:sync` delta→主 spec（yang-xml-codec 新建、device-driver-registry/device-protocol 合并）+ `/opsx:archive`
+- [x] 5.3 回写 openspec/tasks/optimize-frontend-nce-insights.md 勾选 P5-2 + `/task sync`；记忆更新（snd-driver-registry 记忆中「netconf.go 45KB 三件套」剩余硬编码条目改写）
