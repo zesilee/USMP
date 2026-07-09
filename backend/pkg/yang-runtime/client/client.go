@@ -103,6 +103,9 @@ type DeviceConnectionInfo struct {
 	Protocol Protocol
 	// Timeout is the connection timeout
 	Timeout time.Duration
+	// Vendor identifies the device vendor for driver selection (SND registry).
+	// Empty means unspecified — consumers default to "huawei" (R08 降级).
+	Vendor string
 }
 
 // Client is the unified interface for device configuration clients
