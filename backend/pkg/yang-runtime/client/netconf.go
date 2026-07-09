@@ -341,9 +341,12 @@ func (c *NETCONFClient) constructFilter(path string) string {
 }
 
 func (c *NETCONFClient) marshalChange(change Change) (string, error) {
+	if change.Type == DeleteChange {
+		return marshalDeleteChange(change.OldValue)
+	}
 	if change.NewValue == nil {
-		// Delete operation
-		return fmt.Sprintf(`<delete operation="delete" xmlns="urn:ietf:params:xml:ns:netconf:base:1.0"/>`), nil
+		// 非删除变更缺 NewValue 无从编码——明确报错优于发送无目标的裸元素（R08）。
+		return "", fmt.Errorf("marshal change: nil NewValue for %s change at %s", change.Type, change.Path)
 	}
 
 	// If the value is already a byte slice/string, use it directly
@@ -970,6 +973,50 @@ func xmlEscape(s string) string {
 
 const HuaweiVlanNS = "urn:huawei:params:xml:ns:yang:huawei-vlan"
 const HuaweiIfmNS = "urn:huawei:params:xml:ns:yang:huawei-ifm"
+
+// NetconfBaseNS is the NETCONF base namespace carrying the edit-config
+// `operation` attribute (RFC 6241 §7.2).
+const NetconfBaseNS = "urn:ietf:params:xml:ns:netconf:base:1.0"
+
+// marshalDeleteChange builds a keyed edit-config delete for the model entries in
+// target (DP-07)：外层模型容器 + 条目元素带 nc:operation="delete" + 仅 key 叶
+// （key 为首元素，对齐 RFC 键匹配惯例；真机与 netconfsim 均按此匹配条目）。
+// 未知模型返回明确错误，绝不发送无目标的裸 delete 元素（R08）。
+func marshalDeleteChange(target interface{}) (string, error) {
+	switch v := target.(type) {
+	case *huawei.HuaweiVlan_Vlan_Vlans:
+		if v == nil || len(v.Vlan) == 0 {
+			return "", fmt.Errorf("marshal delete: empty vlan target")
+		}
+		var b strings.Builder
+		fmt.Fprintf(&b, `<vlans xmlns="%s">`, HuaweiVlanNS)
+		for id, vlan := range v.Vlan {
+			key := id
+			if vlan != nil && vlan.Id != nil {
+				key = *vlan.Id
+			}
+			fmt.Fprintf(&b, `<vlan nc:operation="delete" xmlns:nc="%s"><id>%d</id></vlan>`, NetconfBaseNS, key)
+		}
+		b.WriteString(`</vlans>`)
+		return b.String(), nil
+	case *huawei.HuaweiIfm_Ifm_Interfaces:
+		if v == nil || len(v.Interface) == 0 {
+			return "", fmt.Errorf("marshal delete: empty ifm target")
+		}
+		var b strings.Builder
+		fmt.Fprintf(&b, `<interfaces xmlns="%s">`, HuaweiIfmNS)
+		for name, iface := range v.Interface {
+			key := name
+			if iface != nil && iface.Name != nil {
+				key = *iface.Name
+			}
+			fmt.Fprintf(&b, `<interface nc:operation="delete" xmlns:nc="%s"><name>%s</name></interface>`, NetconfBaseNS, xmlEscape(key))
+		}
+		b.WriteString(`</interfaces>`)
+		return b.String(), nil
+	}
+	return "", fmt.Errorf("marshal delete: unsupported model %T", target)
+}
 
 // ifmInterfaceXML is a plain intermediate struct for decoding a single <interface>
 // element from a device get-config reply. ygot-generated structs render YANG lists as
