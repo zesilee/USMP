@@ -5,17 +5,17 @@
 
 ## 1. client：DeleteChange 删除编码（B1，DP-07）
 
-- [ ] 1.1 B1 红：`netconf_delete_marshal_test.go`——vlan 键式删除 XML（operation 属性+仅 key 叶）、ifm 同构、未知模型报错、rpc-error 反映失败（表格驱动）
-- [ ] 1.2 绿：`marshalChange` DeleteChange 分支替换死代码 stub——按 OldValue 模型路由 per-model 删除 XML builder（vlan/ifm）
+- [x] 1.1 B1 红：`netconf_delete_marshal_test.go`——vlan 键式删除 XML（operation 属性+仅 key 叶）、ifm 同构、未知模型报错、rpc-error 反映失败（表格驱动）
+- [x] 1.2 绿：`marshalChange` DeleteChange 分支替换死代码 stub——按 OldValue 模型路由 per-model 删除 XML builder（vlan/ifm）
 
 ## 2. 后端 API：DELETE 通道 + desired 移除 + 门禁（B1+B3，BR-09/BR-10）
 
-- [ ] 2.1 B1 红：desired 键移除——vlan/ifm 分支、幂等（无键 no-op）、并发与合并写互斥（race）；key 解析——类型/缺失/未知路径负例
-- [ ] 2.2 绿：`storeConfigDeleted`（复用 configMergeMu，新对象不原地改）+ per-model key 解析
-- [ ] 2.3 B1 红：门禁判定——operation-exclude∋delete 拒绝、readonly 拒绝、schema 未覆盖放行（降级）
-- [ ] 2.4 绿：`yangschema` 门禁查询接入 handler
-- [ ] 2.5 B3 红：DeleteConfig 契约——成功（desired 移除+缓存失效+审计+triggered）、非法 key 400、门禁 400、下发失败透出且不失效缓存/不审计
-- [ ] 2.6 绿：`DeleteConfig` handler + main.go 路由 + swagger 注解；`make gen-contract`
+- [x] 2.1 B1 红：desired 键移除——vlan/ifm 分支、幂等（无键 no-op）、并发与合并写互斥（race）；key 解析——类型/缺失/未知路径负例
+- [x] 2.2 绿：`storeConfigDeleted`（复用 configMergeMu，新对象不原地改）+ per-model key 解析
+- [x] 2.3 B1 红：门禁判定——operation-exclude∋delete 拒绝、readonly 拒绝、schema 未覆盖放行（降级）
+- [x] 2.4 绿：`yangschema` 门禁查询接入 handler
+- [x] 2.5 B3 红：DeleteConfig 契约——成功（desired 移除+缓存失效+审计+triggered）、非法 key 400、门禁 400、下发失败透出且不失效缓存/不审计
+- [x] 2.6 绿：`DeleteConfig` handler + main.go 路由 + swagger 注解；`make gen-contract`
 
 ## 3. B2 集成：端到端删除（netconfsim）
 

@@ -62,6 +62,7 @@ func (s *Server) setupRoutes() {
 			configHandler := NewConfigHandler(s.manager)
 			configGroup.GET("/:ip/*path", configHandler.GetConfig)
 			configGroup.POST("/:ip/*path", configHandler.SetConfig)
+			configGroup.DELETE("/:ip/*path", configHandler.DeleteConfig)
 		}
 
 		// YANG model endpoints

@@ -111,7 +111,55 @@ export interface paths {
                 };
             };
         };
-        delete?: never;
+        /** 删除设备指定 YANG 列表路径下的单条目 */
+        delete: {
+            parameters: {
+                query: {
+                    /** @description 条目主键（vlan→id，interface→name） */
+                    key: string;
+                };
+                header?: never;
+                path: {
+                    /** @description 设备 IP */
+                    ip: string;
+                    /** @description YANG 列表路径 */
+                    path: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description 删除成功 */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["api.Response"] & {
+                            data?: components["schemas"]["api.ConfigDeleteData"];
+                        };
+                    };
+                };
+                /** @description 非法 key / 未知路径 / 模型门禁拒绝 */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["api.Response"];
+                    };
+                };
+                /** @description 设备删除失败（含 data-missing） */
+                502: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["api.Response"];
+                    };
+                };
+            };
+        };
         options?: never;
         head?: never;
         patch?: never;
@@ -513,6 +561,12 @@ export interface components {
             fields?: components["schemas"]["api.FieldDef"][];
             label?: string;
             name?: string;
+        };
+        "api.ConfigDeleteData": {
+            key?: string;
+            path?: string;
+            reconciliation?: components["schemas"]["api.ReconcileInfo"];
+            status?: string;
         };
         "api.ConfigGetData": {
             cache_age_seconds?: number;

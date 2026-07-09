@@ -9,7 +9,7 @@
 #### Scenario: 删除成功端到端
 
 - **WHEN** 设备存在 vlan 10，请求 `DELETE /config/<ip>/vlan:vlan/vlan:vlans?key=10`
-- **THEN** SHALL 返回成功，回读 SHALL 不再含 vlan 10
+- **THEN** SHALL 返回成功，回读 SHALL 不再含 vlan 10（删除元素仅含 key 叶 `<id>`）
 - **AND** desired SHALL 已移除键 10，二轮对账 SHALL 0 change（不复活、不漂移）
 
 #### Scenario: 删除不存在条目（负路径）

@@ -4,12 +4,12 @@
 
 ### Requirement: DP-07 NETCONF 删除变更编码（operation=delete 键式条目）
 
-NETCONF 客户端对 `DeleteChange` SHALL 按 `OldValue` 的模型类型构造删除 edit-config：外层包裹模型容器，条目元素携带 NETCONF base 命名空间的 `operation="delete"` 属性，且 SHALL 仅序列化 key 叶（vlan→`vlan-id`、ifm→`name`）。编码 SHALL 经既有 `Set`（candidate→commit 两阶段，DP-04）下发；`<rpc-error>`（如 data-missing）SHALL 反映为该变更失败。未知模型类型 SHALL 返回明确编码错误（R08 不 panic）。
+NETCONF 客户端对 `DeleteChange` SHALL 按 `OldValue` 的模型类型构造删除 edit-config：外层包裹模型容器，条目元素携带 NETCONF base 命名空间的 `operation="delete"` 属性，且 SHALL 仅序列化 key 叶（vlan→`id`、ifm→`name`，且 key 为首个子元素以对齐 RFC 键匹配惯例）。编码 SHALL 经既有 `Set`（candidate→commit 两阶段，DP-04）下发；`<rpc-error>`（如 data-missing）SHALL 反映为该变更失败。未知模型类型 SHALL 返回明确编码错误（R08 不 panic）。
 
 #### Scenario: VLAN 条目删除编码
 
 - **WHEN** DeleteChange 的 OldValue 为仅含键 10 的 HuaweiVlan 条目集
-- **THEN** 编码 SHALL 形如 `<vlans><vlan …operation="delete"><vlan-id>10</vlan-id></vlan></vlans>`
+- **THEN** 编码 SHALL 形如 `<vlans><vlan nc:operation="delete" …><id>10</id></vlan></vlans>`（operation 属性带 NETCONF base 命名空间前缀）
 - **AND** SHALL NOT 序列化 key 以外的叶
 
 #### Scenario: IFM 接口删除编码
