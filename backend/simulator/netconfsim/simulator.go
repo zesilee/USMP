@@ -37,6 +37,12 @@ type Simulator struct {
 	running bool
 	done    chan struct{}
 	wg      sync.WaitGroup
+
+	// conns tracks live client connections so Stop can force-close them.
+	// handleSession 阻塞在 readMessage（bufio 读）时感知不到 done channel，
+	// 不主动断开连接 Stop 会在 wg.Wait 上永久挂起。
+	connMu sync.Mutex
+	conns  map[net.Conn]struct{}
 }
 
 // SetListen configures the bind address and port before Start.
@@ -58,6 +64,7 @@ func NewSimulator() *Simulator {
 		store:    newTreeDatastore(),
 		scenario: NewScenarioConfig(),
 		done:     make(chan struct{}),
+		conns:    make(map[net.Conn]struct{}),
 	}
 }
 
@@ -126,6 +133,15 @@ func (s *Simulator) Stop() {
 		_ = s.listener.Close()
 	}
 	s.mu.Unlock()
+
+	// Force-close live sessions: readMessage blocks on the socket and only
+	// notices done between messages, so an idle client would hang Stop forever.
+	s.connMu.Lock()
+	for conn := range s.conns {
+		_ = conn.Close()
+	}
+	s.connMu.Unlock()
+
 	s.wg.Wait()
 }
 
@@ -203,9 +219,26 @@ func (s *Simulator) acceptLoop() {
 			}
 		}
 
+		// Register under connMu with a done re-check: Stop closes done before
+		// sweeping conns, so a conn registered after the sweep must observe done
+		// here and close itself — otherwise it would outlive Stop and hang wg.Wait.
+		s.connMu.Lock()
+		select {
+		case <-s.done:
+			s.connMu.Unlock()
+			_ = conn.Close()
+			return
+		default:
+		}
+		s.conns[conn] = struct{}{}
+		s.connMu.Unlock()
+
 		s.wg.Add(1)
 		go func() {
 			s.server.handleConnection(conn)
+			s.connMu.Lock()
+			delete(s.conns, conn)
+			s.connMu.Unlock()
 			s.wg.Done()
 		}()
 	}
