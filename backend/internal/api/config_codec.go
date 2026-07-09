@@ -2,13 +2,13 @@ package api
 
 import (
 	"encoding/json"
-	"strings"
 
 	"github.com/openconfig/ygot/ygot"
-	"github.com/openconfig/ygot/ytypes"
 
-	"github.com/leezesi/usmp/backend/internal/generated/huawei"
-	"github.com/leezesi/usmp/backend/pkg/yang-runtime/client"
+	// 空白导入触发 huawei 驱动描述符注册（DR-01）：本包编解码与 manager 路由
+	// 均从 driver 注册表查表。
+	_ "github.com/leezesi/usmp/backend/internal/drivers"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/driver"
 )
 
 // decodeRunningConfig turns a raw NETCONF XML readback into an RFC7951-shaped
@@ -23,14 +23,10 @@ func decodeRunningConfig(path string, data interface{}) interface{} {
 		return data
 	}
 
+	// 解码器按驱动描述符注册表查表（DR-03）——不再散落路径字符串匹配。
 	var parsed ygot.GoStruct
-	switch {
-	case strings.Contains(path, "ifm:interfaces"):
-		if p, err := client.ParseHuaweiIfmInterfacesXML(raw); err == nil {
-			parsed = p
-		}
-	case strings.Contains(path, "vlan:vlans"):
-		if p, err := client.ParseHuaweiVlanVlansXML(raw); err == nil {
+	if d, ok := driver.DecoderFor(path); ok {
+		if p, err := d.DecodeXML(raw); err == nil {
 			parsed = p
 		}
 	}
@@ -51,36 +47,6 @@ func decodeRunningConfig(path string, data interface{}) interface{} {
 	return out
 }
 
-// ygotTarget describes how to decode a config path into a strongly-typed ygot
-// GoStruct: a constructor for the destination struct and the vendor Unmarshal
-// (which consumes RFC7951 JSON).
-type ygotTarget struct {
-	newStruct func() ygot.GoStruct
-	unmarshal func([]byte, ygot.GoStruct, ...ytypes.UnmarshalOpt) error
-}
-
-// ygotRegistry maps a YANG config path (matched by substring, as the existing
-// handler does) to its ygot target. One line per module keeps this generic:
-// the decode itself is a single ygot.Unmarshal, replacing the hand-written
-// per-module map converters (R04). Add a module by adding a registry entry.
-var ygotRegistry = []struct {
-	match  func(path string) bool
-	target ygotTarget
-}{
-	{
-		match:  func(p string) bool { return strings.Contains(p, "ifm:ifm") && strings.Contains(p, "interfaces") },
-		target: ygotTarget{func() ygot.GoStruct { return &huawei.HuaweiIfm_Ifm_Interfaces{} }, huawei.Unmarshal},
-	},
-	{
-		match:  func(p string) bool { return strings.Contains(p, "vlan:") && strings.Contains(p, "vlan") },
-		target: ygotTarget{func() ygot.GoStruct { return &huawei.HuaweiVlan_Vlan_Vlans{} }, huawei.Unmarshal},
-	},
-	{
-		match:  func(p string) bool { return strings.Contains(p, "system:") },
-		target: ygotTarget{func() ygot.GoStruct { return &huawei.HuaweiSystem_System{} }, huawei.Unmarshal},
-	},
-}
-
 // convertConfig decodes request data into a typed desired config. It prefers the
 // generic ygot codec (RFC7951 input) and falls back to the legacy hard-coded
 // converters for the legacy (non-RFC7951, e.g. integer-enum) input shape. The
@@ -93,25 +59,21 @@ func convertConfig(path string, data map[string]interface{}) (interface{}, error
 }
 
 // encodeToYgot decodes RFC7951-shaped request data into the ygot GoStruct for the
-// given path via a single ygot.Unmarshal. It returns (value, matched, err):
-// matched is false when no registry entry covers the path (caller falls back).
+// given path via a single ygot.Unmarshal. The path→(struct, unmarshal) mapping
+// comes from the driver descriptor registry (DR-03)——加模块 = 注册一条描述符。
+// It returns (value, matched, err): matched is false when no descriptor covers
+// the path (caller falls back to the legacy converters).
 func encodeToYgot(path string, data map[string]interface{}) (interface{}, bool, error) {
-	var t *ygotTarget
-	for i := range ygotRegistry {
-		if ygotRegistry[i].match(path) {
-			t = &ygotRegistry[i].target
-			break
-		}
-	}
-	if t == nil {
+	d, ok := driver.EncoderFor(path)
+	if !ok {
 		return nil, false, nil
 	}
 	jsonBytes, err := json.Marshal(data)
 	if err != nil {
 		return nil, true, err
 	}
-	dest := t.newStruct()
-	if err := t.unmarshal(jsonBytes, dest); err != nil {
+	dest := d.NewStruct()
+	if err := d.Unmarshal(jsonBytes, dest); err != nil {
 		return nil, true, err
 	}
 	return dest, true, nil
