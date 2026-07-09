@@ -82,4 +82,21 @@ describe('设计令牌契约 · 浅色 iMaster', () => {
     expect(tokens['--paper']!.toUpperCase()).toMatch(/^#[E-F]/)
     expect(tokens['--surface']!.toUpperCase()).toBe('#FFFFFF')
   })
+
+  it('导出表格台账密度令牌（NCE 高密度，nce-fidelity-polish）', () => {
+    // 纵向 padding 收紧到 ≤6px（EP 默认 8px）、字号降至 13px：高密度运维台账风
+    expect(tokens['--table-cell-py']).toBe('6px')
+    expect(tokens['--table-cell-px']).toBe('10px')
+    expect(tokens['--table-font-size']).toBe('13px')
+  })
+})
+
+describe('el-table 台账密度消费（编译产物级断言）', () => {
+  it('el-table 单元格 padding/字号消费密度令牌', () => {
+    const { css } = sass.compile(themePath)
+    // 断言覆盖块存在：td/th 纵向 padding 与 .cell 横向 padding 走令牌
+    expect(css).toMatch(/\.el-table[^}]*\{[^]*?font-size:\s*var\(--table-font-size\)/)
+    expect(css).toContain('padding: var(--table-cell-py) 0')
+    expect(css).toContain('padding: 0 var(--table-cell-px)')
+  })
 })

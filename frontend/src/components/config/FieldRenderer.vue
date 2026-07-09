@@ -34,7 +34,15 @@
       :disabled="field.readonly || disabled"
     />
 
-    <!-- Enum -->
+    <!-- Enum：必填且 ≤3 选项 → 分段控件（FE-01，NCE 保真）；segmented 无清空能力，
+         可选枚举需保留「清空=键不入 payload」语义，故仅必填走此分支。 -->
+    <el-segmented
+      v-else-if="field.type === 'enum' && enumUsesSegmented"
+      :model-value="modelValue"
+      @update:model-value="$emit('update:modelValue', $event)"
+      :options="segmentedOptions"
+      :disabled="field.readonly || disabled"
+    />
     <el-select
       v-else-if="field.type === 'enum'"
       :model-value="modelValue"
@@ -261,6 +269,16 @@ const emit = defineEmits<{
   'update:modelValue': [value: any]
 }>()
 
+// enum 控件细分（FE-01）：必填且 ≤3 选项用分段控件；零选项（异常 schema）降级 select（R08）。
+const enumUsesSegmented = computed<boolean>(() => {
+  const n = props.field.options?.length ?? 0
+  return !!props.field.required && n > 0 && n <= 3
+})
+
+const segmentedOptions = computed(() =>
+  (props.field.options || []).map((o) => ({ label: o.label, value: o.value })),
+)
+
 // dynamicDefault（FE-15）：空值=系统自动分配，占位提示之；显式 placeholder 优先。
 const placeholderOf = computed<string | undefined>(() =>
   props.field.placeholder || (props.field.dynamicDefault ? '系统自动分配（可覆写）' : undefined),
@@ -334,7 +352,7 @@ function removeItem(idx: number) {
 .field-units {
   flex: none;
   font-size: 12px;
-  color: #909399;
+  color: var(--text-tertiary);
 }
 
 .field-presence {
@@ -347,9 +365,9 @@ function removeItem(idx: number) {
 .field-group {
   width: 100%;
   padding: 12px;
-  background-color: #f9fafb;
+  background-color: var(--bg-elevated);
   border-radius: 8px;
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--border-color);
 }
 
 .group-fields {
@@ -367,7 +385,7 @@ function removeItem(idx: number) {
 .field-label {
   min-width: 96px;
   font-size: 14px;
-  color: #606266;
+  color: var(--text-secondary);
   margin: 0;
 }
 
@@ -383,9 +401,9 @@ function removeItem(idx: number) {
   align-items: flex-start;
   gap: 12px;
   padding: 12px;
-  background-color: #f9fafb;
+  background-color: var(--bg-elevated);
   border-radius: 8px;
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--border-color);
 }
 
 .list-row-fields {
