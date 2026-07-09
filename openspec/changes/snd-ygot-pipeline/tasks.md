@@ -19,11 +19,11 @@
 ## 3. regen 收敛（D3）
 
 - [x] 3.1 `make gen-yang` 重出 `huawei/all.gen.go`，删除手拆 6 文件（types/device/enums/ifm/system/vlan）；openconfig 按 2.1 结论处置
-- [ ] 3.2 等价性验证证据：`go build ./...` + 全量 `go test ./...`（含 xmlcodec golden、B2 需非 short）全绿；声明集合 diff + ySchema md5 对比记录进 PR 描述
+- [x] 3.2 等价性验证证据：`go build ./...` + 全量 `go test ./...`（含 xmlcodec golden、B2 需非 short）全绿；声明集合 diff + ySchema md5 对比记录进 PR 描述
 - [x] 3.3 重复执行 `make gen-yang` 验证零漂移（CG-01 场景 1 = CI 门禁的本地预演）
 
 ## 4. 收尾
 
-- [ ] 4.1 全量测试 + `go vet` + gofmt 检查；每 commit What/Why/How 三段式；`go-code-review-check` 通过
+- [x] 4.1 全量测试 + `go vet` + gofmt 检查；每 commit What/Why/How 三段式；`go-code-review-check` 通过
 - [ ] 4.2 推送 + PR（§6.3 选项 B），CI 全绿（新 R04 regen-and-diff 门禁在本 PR 自举生效）自助 merge
 - [ ] 4.3 合入后：`/opsx:sync`（delta → 主 spec 新能力 yang-codegen-pipeline）+ `/opsx:archive` + 路线图勾选 P5-3 + `/task sync`
