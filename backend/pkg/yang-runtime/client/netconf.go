@@ -15,6 +15,8 @@ import (
 
 	"github.com/leezesi/usmp/backend/internal/generated/huawei"
 	"github.com/leezesi/usmp/backend/internal/generated/openconfig"
+	yangdriver "github.com/leezesi/usmp/backend/pkg/yang-runtime/driver"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/xmlcodec"
 	"github.com/scrapli/scrapligo/driver/netconf"
 	"github.com/scrapli/scrapligo/driver/options"
 	"github.com/scrapli/scrapligo/response"
@@ -424,6 +426,17 @@ func (c *NETCONFClient) marshalChange(change Change) (string, error) {
 		return v, nil
 	case []byte:
 		return string(v), nil
+	}
+
+	// Registry-first dispatch (XC-04)：按 GoStruct 类型（容器或 diff 引擎产出的
+	// 内层 list map 形态）查驱动描述符，命中则由通用引擎按描述符数据编码。
+	// 未命中走既有 fallback 链（openconfig 遗留分支、xml.Marshal 兜底），行为不变。
+	if d, ok := yangdriver.XMLEncoderForValue(change.NewValue); ok {
+		gs, err := d.WrapXMLValue(change.NewValue)
+		if err != nil {
+			return "", err
+		}
+		return xmlcodec.Encode(d.XML, gs)
 	}
 
 	// Special case: *openconfig.OpenconfigVlan_Vlans - contains a map field that xml.Marshal can't handle
@@ -1050,8 +1063,16 @@ const NetconfBaseNS = "urn:ietf:params:xml:ns:netconf:base:1.0"
 // marshalDeleteChange builds a keyed edit-config delete for the model entries in
 // target (DP-07)：外层模型容器 + 条目元素带 nc:operation="delete" + 仅 key 叶
 // （key 为首元素，对齐 RFC 键匹配惯例；真机与 netconfsim 均按此匹配条目）。
-// 未知模型返回明确错误，绝不发送无目标的裸 delete 元素（R08）。
+// 经驱动注册表 + 通用引擎（ΛListKeyMap）编码（XC-03）；未注册模型返回明确
+// 错误，绝不发送无目标的裸 delete 元素（R08）。
 func marshalDeleteChange(target interface{}) (string, error) {
+	if d, ok := yangdriver.XMLEncoderForValue(target); ok {
+		gs, err := d.WrapXMLValue(target)
+		if err != nil {
+			return "", err
+		}
+		return xmlcodec.EncodeDelete(d.XML, gs)
+	}
 	switch v := target.(type) {
 	case *huawei.HuaweiVlan_Vlan_Vlans:
 		if v == nil || len(v.Vlan) == 0 {
