@@ -8,6 +8,7 @@ import (
 
 	"github.com/leezesi/usmp/backend/internal/cache"
 	"github.com/leezesi/usmp/backend/internal/generated/huawei"
+	"github.com/leezesi/usmp/backend/internal/testutil/hwfix"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/client"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/device"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/manager"
@@ -706,4 +707,49 @@ func simStore(sim *netsim.Simulator) (device.Store, string) {
 		IP: sim.Addr(), Port: sim.Port(), Username: sim.Username(), Password: sim.Password(), Protocol: client.ProtocolNETCONF,
 	})
 	return ds, id
+}
+
+// TestReconciler_Integration_FullFieldConvergence（snd-xml-codec 新增）：
+// 全字段接口意图（30+ 字段含 damp/error-down/control-flap 嵌套容器）
+// 下发→回读→二次对账必须收敛（XC-02）。旧手写 parser 只回读 10 字段，
+// bandwidth 等超出白名单的字段「可下发不可回读」→ 该场景永久漂移。
+func TestReconciler_Integration_FullFieldConvergence(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping integration test in short mode")
+	}
+
+	sim := netsim.NewSimulator()
+	if err := sim.Start(); err != nil {
+		t.Fatalf("start simulator: %v", err)
+	}
+	defer sim.Stop()
+
+	c := cache.NewTTLLRUCache(100, 30*time.Second, 1*time.Minute)
+	cs := manager.NewInMemoryConfigStore(c)
+	pool := client.NewDefaultClientPool(client.DefaultClientFactory(5 * time.Second))
+	defer pool.CloseAll()
+
+	desired := hwfix.IfmFull()
+	ds, deviceID := simStore(sim)
+	path := "/ifm:ifm/ifm:interfaces"
+	if err := cs.Set(deviceID, path, desired); err != nil {
+		t.Fatalf("config store set: %v", err)
+	}
+
+	r := New(cs, pool, ds)
+	req := reconcile.Request{DeviceID: deviceID, Path: path}
+	ctx := context.Background()
+
+	first := r.Reconcile(ctx, req)
+	if first.Error != nil {
+		t.Fatalf("first reconcile failed: %v", first.Error)
+	}
+	assert.Greater(t, first.Changes, 0, "首轮应下发全字段接口")
+
+	second := r.Reconcile(ctx, req)
+	if second.Error != nil {
+		t.Fatalf("second reconcile failed: %v", second.Error)
+	}
+	assert.Equal(t, 0, second.Changes, "全字段配置落盘后第二轮必须收敛（decode 全字段对称）")
+	assert.False(t, second.Requeue)
 }
