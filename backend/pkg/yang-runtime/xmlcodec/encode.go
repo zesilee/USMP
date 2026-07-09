@@ -29,11 +29,10 @@ var goEnumType = reflect.TypeOf((*ygot.GoEnum)(nil)).Elem()
 
 // resolved carries the per-call view of a Spec after validation.
 type resolved struct {
-	ns       string
-	root     string
-	schema   *yang.Entry // container entry; may carry list child in Dir
-	listName string      // list element name (from container struct's map field tag)
-	list     *yang.Entry // list child entry (nil if schema lacks it)
+	ns     string
+	root   string
+	schema *yang.Entry // container entry; may carry list child in Dir
+	list   *yang.Entry // list child entry (nil if schema lacks it)
 }
 
 func (s *Spec) resolve(listName string) (*resolved, error) {
@@ -47,7 +46,7 @@ func (s *Spec) resolve(listName string) (*resolved, error) {
 	if s.Namespace == "" {
 		return nil, fmt.Errorf("xmlcodec: spec namespace is empty for %s", e.Name)
 	}
-	r := &resolved{ns: s.Namespace, root: e.Name, schema: e, listName: listName}
+	r := &resolved{ns: s.Namespace, root: e.Name, schema: e}
 	if c, ok := e.Dir[listName]; ok {
 		r.list = c
 	}
