@@ -4,6 +4,12 @@ import (
 	bizv1 "github.com/leezesi/usmp/backend/api/biz/v1"
 )
 
+// 编译期自注册（TE-01）：进程启动即可经 GetTranslator(VendorHuawei) 取得，
+// 注册表不再依赖 GetTranslator 内的延迟硬编码初始化。
+func init() {
+	RegisterTranslator(VendorHuawei, NewHuaweiTranslator())
+}
+
 // HuaweiTranslator 华为交换机完整翻译器实现
 type HuaweiTranslator struct {
 	*BaseTranslator

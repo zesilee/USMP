@@ -4,9 +4,14 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
+	"github.com/leezesi/usmp/backend/pkg/translator"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/client"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/manager"
 )
+
+// defaultVendor is the vendor assumed when registration omits one — keeps the
+// pre-registry behavior intact (all existing devices are Huawei switches).
+const defaultVendor = "huawei"
 
 // DeviceInfo stores device connection information
 type DeviceInfo struct {
@@ -14,6 +19,8 @@ type DeviceInfo struct {
 	Port     int    `json:"port"`
 	Username string `json:"username"`
 	Password string `json:"password"`
+	// Vendor 厂商标识（SND 驱动选择，缺省 huawei）
+	Vendor string `json:"vendor,omitempty"`
 }
 
 // DeviceHandler handles device-related API requests. Device connection info
@@ -34,26 +41,33 @@ func NewDeviceHandler(manager manager.Manager) *DeviceHandler {
 		Port:     830,
 		Username: "admin",
 		Password: "admin",
+		Vendor:   defaultVendor,
 	})
 
 	return h
 }
 
 // toConnInfo maps a DeviceInfo to the shared store's connection-info type,
-// defaulting Protocol to AUTO (port-based NETCONF/gNMI selection).
+// defaulting Protocol to AUTO (port-based NETCONF/gNMI selection) and Vendor
+// to huawei (DS-01 零值缺省语义).
 func toConnInfo(d DeviceInfo) client.DeviceConnectionInfo {
+	vendor := d.Vendor
+	if vendor == "" {
+		vendor = defaultVendor
+	}
 	return client.DeviceConnectionInfo{
 		IP:       d.IP,
 		Port:     d.Port,
 		Username: d.Username,
 		Password: d.Password,
 		Protocol: client.ProtocolAUTO,
+		Vendor:   vendor,
 	}
 }
 
 // deviceInfoFromConn is the inverse of toConnInfo for API responses.
 func deviceInfoFromConn(info client.DeviceConnectionInfo) DeviceInfo {
-	return DeviceInfo{IP: info.IP, Port: info.Port, Username: info.Username, Password: info.Password}
+	return DeviceInfo{IP: info.IP, Port: info.Port, Username: info.Username, Password: info.Password, Vendor: info.Vendor}
 }
 
 // putStore registers a device in the shared DeviceStore (no-op if the manager
@@ -98,6 +112,8 @@ type AddDeviceRequest struct {
 	Port     int    `json:"port"`
 	Username string `json:"username" binding:"required"`
 	Password string `json:"password" binding:"required"`
+	// Vendor 可选厂商标识：缺省 huawei；无已注册驱动的厂商将被拒绝（400）
+	Vendor string `json:"vendor,omitempty"`
 }
 
 // DeviceStatus is a device plus its live online status (Stack B REST替代
@@ -197,11 +213,23 @@ func (h *DeviceHandler) AddDevice(c *gin.Context) {
 		req.Port = 830
 	}
 
+	// Vendor 门禁（BR-04）：缺省 huawei；无已注册驱动的厂商早失败（优于下发时报错）。
+	// 标签大小写无关（"huawei" → 枚举 "Huawei"），存储侧保留小写标签。
+	if req.Vendor == "" {
+		req.Vendor = defaultVendor
+	}
+	vt, known := translator.VendorFromString(req.Vendor)
+	if !known || !translator.IsVendorSupported(vt) {
+		Error(c, 400, "Invalid request: unsupported vendor '"+req.Vendor+"'")
+		return
+	}
+
 	h.putStore(DeviceInfo{
 		IP:       req.IP,
 		Port:     req.Port,
 		Username: req.Username,
 		Password: req.Password,
+		Vendor:   req.Vendor,
 	})
 
 	// Try to create client and connect immediately

@@ -552,6 +552,8 @@ export interface components {
             password: string;
             port?: number;
             username: string;
+            /** @description Vendor 可选厂商标识：缺省 huawei；无已注册驱动的厂商将被拒绝（400） */
+            vendor?: string;
         };
         "api.AuditListData": {
             logs?: components["schemas"]["api.LogEntry"][];
@@ -605,6 +607,8 @@ export interface components {
             password?: string;
             port?: number;
             username?: string;
+            /** @description Vendor 厂商标识（SND 驱动选择，缺省 huawei） */
+            vendor?: string;
         };
         "api.FieldDef": {
             /**

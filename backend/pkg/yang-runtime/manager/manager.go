@@ -11,6 +11,7 @@ import (
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/client"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/controller"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/device"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/driver"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/plugin"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/predicate"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/reconcile"
@@ -312,35 +313,18 @@ func (m *DefaultManager) Controllers() []controller.Controller {
 	return m.controllers
 }
 
-// TriggerReconcile triggers immediate reconciliation for a device and path
-// It finds the controller that handles the given path prefix and enqueues an event
+// TriggerReconcile triggers immediate reconciliation for a device and path.
+// The path→controller mapping comes from the driver descriptor registry
+// (DR-02)——不再在此硬编码模块前缀；注册表未命中时保持既有降级（返回 false，
+// 调用方按「无控制器」处理，R08）。
 func (m *DefaultManager) TriggerReconcile(deviceID, path string) bool {
+	d, ok := driver.Route(path)
+	if !ok {
+		return false
+	}
 	for _, ctrl := range m.controllers {
-		// Check if this controller handles the path using its predicates
-		// We use a simple prefix match heuristic since we can't inspect predicates directly
-		// The controller name typically contains the module identifier
-		ctrlName := ctrl.Name()
-
-		// Match based on path prefixes - this aligns with our controller registration
-		if strings.Contains(path, "system:") && strings.Contains(ctrlName, "system") {
-			ctrl.Enqueue(predicate.Event{
-				Type:     predicate.UpdateEvent,
-				DeviceID: deviceID,
-				Path:     path,
-			})
-			return true
-		}
-		if (strings.Contains(path, "vlan:") || strings.Contains(path, "vlans")) &&
-			strings.Contains(ctrlName, "vlan") {
-			ctrl.Enqueue(predicate.Event{
-				Type:     predicate.UpdateEvent,
-				DeviceID: deviceID,
-				Path:     path,
-			})
-			return true
-		}
-		if (strings.Contains(path, "ifm:") || strings.Contains(path, "interfaces")) &&
-			strings.Contains(ctrlName, "ifm") {
+		// The controller name contains the module identifier at registration.
+		if strings.Contains(ctrl.Name(), d.ControllerToken) {
 			ctrl.Enqueue(predicate.Event{
 				Type:     predicate.UpdateEvent,
 				DeviceID: deviceID,
