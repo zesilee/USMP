@@ -14,7 +14,8 @@ p4_done: config-delete-semantics 已合入 main (#128) + sync + 归档 (2026-07-
 p1p_done: nce-fidelity-polish 已合入 main (#132) + sync + 归档 (2026-07-09)
 p5_1_done: snd-vendor-registry（P5 第一步）已合入 main (#134) + sync + 归档 (2026-07-09)；插拔性已拍板=纯 Go 编译期（③→①）
 p5_2_done: snd-xml-codec（XML 编解码声明式化）已合入 main (#136/#137/#138 三部曲) + sync + 归档 (2026-07-09)；netconf.go -777 行、新能力 yang-xml-codec
-next: P5 后续步骤（每步独立 change）：P5-3 ygot 生成管线参数化（sed 四连击）→ P5-4 首个非 Huawei 驱动（含 mergeConfig/config_delete type-switch 收敛）
+p5_3_done: snd-ygot-pipeline（ygot 生成管线参数化）已合入 main (#140) + sync + 归档 (2026-07-09)；make gen-yang manifest 驱动、genfix 跨平台后处理、R04 门禁 regen-and-diff 化、新能力 yang-codegen-pipeline
+next: P5-4 首个非 Huawei 驱动（最后一步；含 mergeConfig/config_delete type-switch 收敛；需该厂商 YANG 模型集 + netconfsim 方言）
 ---
 
 ## 目标
@@ -73,9 +74,10 @@ next: P5 后续步骤（每步独立 change）：P5-3 ygot 生成管线参数化
 
 **✅ P5-2 `snd-xml-codec` 已合入 + sync + 归档（PR #136/#137/#138 三部曲，2026-07-09）**：通用 schema 驱动 XML 编解码引擎 `pkg/yang-runtime/xmlcodec`（新能力 yang-xml-codec XC-01~04）——Encode/Decode/EncodeDelete 全部由 ygot 生成物数据（path tag/SchemaTree/ΛListKeyMap）+ 描述符数据（namespace 显式登记，`Entry.Namespace()` 实测为空不可派生）驱动；netconf.go 1452→675 行，手写三件套退役，client 与 `generated/huawei` 解耦；顺带修复 suppression 重复发送 bug 与「下发 35 字段/回读 10 字段」字段级永久漂移债（B2 全字段收敛用例锁死）。golden 先行方法论：规范化比较器（同级全排序+相同同级去重）冻结 legacy 输出→引擎逐 fixture 对拍→历史回归用例原文经 shim 走新路径全绿。超 3000 行按「并行→切换→删除」拆三个顺序 PR（防 #129 堆叠翻车）。覆盖率棘轮 59.5→60.6。
 
-**剩余步骤（每步独立 change）**：
-- [ ] P5-3 ygot 生成管线参数化（Makefile 化、多厂商 -path、消灭手工 sed 四连击；注意 huawei.go:9 -path 注释漂移）
-- [ ] P5-4 首个非 Huawei 驱动（真实验证注册表端到端；需该厂商 YANG 模型集 + netconfsim 方言）；mergeConfig/config_delete 的 per-model type-switch 收敛也在此步或独立小 change；注意 xmlcodec Decode 顶层按 Local 名扫描条目元素——若新厂商回读含与条目同名的模块根容器需按方言处理（评审已知观察项）
+**✅ P5-3 `snd-ygot-pipeline` 已合入 + sync + 归档（PR #140，2026-07-09）**：`make gen-yang` 厂商 manifest 驱动（`backend/internal/generated/*/gen.conf`，加厂商=加一条 gen.conf 零脚本改动）、`backend/tools/genfix` 跨平台后处理（枚举 `|`→`_OR_` + 生成头部机器路径规范化，替换 macOS-only sed）、手拆 6 文件收敛回单 all.gen.go（等价性三重实证：声明集合一致/ySchema md5 一致/全量 -race 绿）、R04 门禁 CI+本地钩子对称进化为 regen-and-diff（解开冻结死锁）、pr-size/commit-msg 体积口径排除生成物、删除死管线 internal/yang/generate.go（models/ 保留=openconfig 生成输入）。新能力 yang-codegen-pipeline（CG-01~03）。坑：worktree 里改 .githooks 要 `git -c core.hooksPath=$PWD/.githooks`（相对路径解析到主仓库旧副本，见 [[worktree-hooks-gotcha]] 记忆）。
+
+**剩余步骤**：
+- [ ] P5-4 首个非 Huawei 驱动（真实验证注册表端到端；需该厂商 YANG 模型集 + netconfsim 方言；YANG 生成=加一条 gen.conf、接入下发=注册 driver.Descriptor）；mergeConfig/config_delete 的 per-model type-switch 收敛也在此步或独立小 change；注意 xmlcodec Decode 顶层按 Local 名扫描条目元素——若新厂商回读含与条目同名的模块根容器需按方言处理（评审已知观察项）
 
 > 从 P4 拆出（原被低估地捆在删除债里）。USMP 后续对接异构多厂商设备的**核心能力**，值得独立 explore/propose，非"最后随手做"。
 
