@@ -22,18 +22,32 @@ const (
 // "merge" operation unless it carries an explicit operation attribute.
 func (target *dataNode) applyEdit(edit *dataNode) error {
 	for _, ec := range edit.Children {
-		if err := applyNode(target, ec, opMerge); err != nil {
+		if err := applyNode(target, ec, opMerge, countSameName(edit.Children, ec)); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
+// countSameName returns how many of siblings share ec's qualified name — the
+// "edit-side list" signal for findMatch.
+func countSameName(siblings []*dataNode, ec *dataNode) int {
+	n := 0
+	for _, c := range siblings {
+		if c.Name.Local == ec.Name.Local && c.Name.Space == ec.Name.Space {
+			n++
+		}
+	}
+	return n
+}
+
 // applyNode applies a single edit element ec into parent according to its
 // effective operation (its own operation attribute, else the inherited one).
-func applyNode(parent, ec *dataNode, inherited string) error {
+// editSiblings is how many same-named siblings ec has in the edit itself —
+// a second list signal beyond the store side (see findMatch).
+func applyNode(parent, ec *dataNode, inherited string, editSiblings int) error {
 	op := effectiveOp(ec, inherited)
-	match := findMatch(parent, ec, op)
+	match := findMatch(parent, ec, op, editSiblings)
 
 	switch op {
 	case opDelete:
@@ -65,7 +79,7 @@ func applyNode(parent, ec *dataNode, inherited string) error {
 			return nil
 		}
 		for _, gc := range ec.Children {
-			if err := applyNode(match, gc, opMerge); err != nil {
+			if err := applyNode(match, gc, opMerge, countSameName(ec.Children, gc)); err != nil {
 				return err
 			}
 		}
@@ -94,16 +108,19 @@ func opAttr(n *dataNode) string {
 }
 
 // findMatch locates the child of parent that ec refers to. For explicit
-// operations or genuine lists (multiple same-named siblings) it matches by the
-// element name plus the key leaf; otherwise it matches the single same-named
-// container.
-func findMatch(parent, ec *dataNode, op string) *dataNode {
+// operations or genuine lists (multiple same-named siblings on either the store
+// side or the edit side) it matches by the element name plus the key leaf;
+// otherwise it matches the single same-named container. The edit-side signal
+// (editSiblings > 1) is essential: merging a two-entry list batch into a store
+// holding a single entry must key-match, not fold the new entry into the old
+// one（config-delete-semantics 回归——此前被 server 整树替换掩盖）。
+func findMatch(parent, ec *dataNode, op string, editSiblings int) *dataNode {
 	same := sameNameChildren(parent, ec)
 	if len(same) == 0 {
 		return nil
 	}
 	key := keyLeaf(ec)
-	needKey := key != nil && (op != opMerge || len(same) > 1)
+	needKey := key != nil && (op != opMerge || len(same) > 1 || editSiblings > 1)
 	if !needKey {
 		return same[0]
 	}

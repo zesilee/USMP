@@ -378,19 +378,18 @@ func (s *sshServer) handleEditConfig(msg, msgID string) string {
 	configContent = strings.TrimSpace(configContent)
 	log.Printf("handleEditConfig: extracted config: %.500s", configContent)
 
-	// Update candidate or running directly. SetCandidate performs a whole-tree
-	// replace, matching the legacy blob datastore's behavior exactly (T5 is a
-	// behavior-preserving switch; per-operation merge via EditConfig is a
-	// deliberate later adoption, not part of this equivalence switch).
+	// Per-operation edit-config 语义（RFC 6241 §7.2，treeDatastore.EditConfig）：
+	// merge 默认 + 显式 operation（create/delete/remove/replace）。这是 editconfig.go
+	// 预留的 "deliberate later adoption"——删除语义落地（DP-07）时接线：整树替换会把
+	// 删除报文原样并入并抹掉未提交的兄弟条目/其它模块子树。delete-of-missing 等错误
+	// 通过 rpc-error 透出（data-missing）。
 	if targetIsCandidate {
-		err := s.store.SetCandidate([]byte(configContent))
-		if err != nil {
+		if err := s.store.EditConfig([]byte(configContent)); err != nil {
 			return errorReply(msgID, err.Error())
 		}
 	} else {
 		// If directly editing running, update immediately
-		err := s.store.SetCandidate([]byte(configContent))
-		if err != nil {
+		if err := s.store.EditConfig([]byte(configContent)); err != nil {
 			return errorReply(msgID, err.Error())
 		}
 		_ = s.store.Commit()
