@@ -1,12 +1,12 @@
 ---
 id: optimize-frontend-nce-insights
 title: 基于 iMaster NCE 洞察优化 USMP 前端渲染 + YANG UI 契约 + 异构多设备 SND（分阶段路线图）
-status: in_progress
+status: completed
 priority: medium
-branch: (未开始 — 每阶段独立 worktree)
-worktree: (未创建)
-change: (每阶段独立 OpenSpec change)
-updated: 2026-07-09
+branch: (已全部合入 main)
+worktree: (无活跃)
+change: (每阶段独立 OpenSpec change，均已归档)
+updated: 2026-07-10
 evidence: docs/research/imaster-nce-ux-insights.md
 p0_done: generic-module-console 已合入 main (#121/#123/#124, 2026-07-08)
 p3_done: ext-ui-annotations 已合入 main (#126) + sync + 归档 (2026-07-08)
@@ -15,7 +15,8 @@ p1p_done: nce-fidelity-polish 已合入 main (#132) + sync + 归档 (2026-07-09)
 p5_1_done: snd-vendor-registry（P5 第一步）已合入 main (#134) + sync + 归档 (2026-07-09)；插拔性已拍板=纯 Go 编译期（③→①）
 p5_2_done: snd-xml-codec（XML 编解码声明式化）已合入 main (#136/#137/#138 三部曲) + sync + 归档 (2026-07-09)；netconf.go -777 行、新能力 yang-xml-codec
 p5_3_done: snd-ygot-pipeline（ygot 生成管线参数化）已合入 main (#140) + sync + 归档 (2026-07-09)；make gen-yang manifest 驱动、genfix 跨平台后处理、R04 门禁 regen-and-diff 化、新能力 yang-codegen-pipeline
-next: P5-4 首个非 Huawei 驱动（最后一步；含 mergeConfig/config_delete type-switch 收敛；需该厂商 YANG 模型集 + netconfsim 方言）
+p5_4_cut: P5-4 首个非 Huawei 驱动**已剪出**——用户拍板不需要接入非华为设备（2026-07-10）；P5 到 P5-3 完结。遗留低优先机械债（无载体、按需另立小 change）：mergeConfig/config_delete 的 per-model type-switch 收敛（internal/api，华为模型自身也受益）；xmlcodec Decode 顶层按 Local 名扫描条目的方言观察项（仅未来真要接新厂商时才相关）
+next: (无——任务完结归档)
 ---
 
 ## 目标
@@ -68,7 +69,7 @@ next: P5-4 首个非 Huawei 驱动（最后一步；含 mergeConfig/config_delet
 - ✅ 2026-07-09 apply 完成（change `config-delete-semantics`，PR #128）：DELETE 显式命令通道（BR-09/BR-10）+ NETCONF 键式删除编码（DP-07）+ 前端行删除（FE-16）。关键实证：声明式通道被 walkMap merge/subset 语义刻意封死→删除必须走命令通道；顺带交付 netconfsim RFC edit-config 接线 + NETCONF 客户端 opMu 写事务串行化（R09）
 - ✅ 收尾完成：delta 已 sync 主 spec（config-api BR-09/BR-10、device-protocol DP-07、frontend FE-16）、change 归档 archive/2026-07-09-config-delete-semantics；覆盖率棘轮升至 后端 58.3
 
-### [~] P5 — 异构多设备 SND 驱动：泛化 + 声明式化（洞察 C）｜第一步已交付（PR #134，2026-07-09）
+### [x] P5 — 异构多设备 SND 驱动：泛化 + 声明式化（洞察 C）｜P5-1~3 交付，P5-4 剪出，完结（2026-07-10）
 
 **✅ P5-1 `snd-vendor-registry` 已合入 + sync + 归档**：Vendor 贯穿（DS-01/03、BR-04）、translator init() 编译期自注册（TE-05）、按设备厂商解析驱动（TE-06）、驱动描述符注册表+manager 路由/config 编解码查表化（新能力 device-driver-registry DR-01~03）。行为严格等价（对拍表格+存量 B2 全绿）。**插拔性已拍板：纯 Go 编译期（③起步→①终态）。**
 
@@ -77,7 +78,7 @@ next: P5-4 首个非 Huawei 驱动（最后一步；含 mergeConfig/config_delet
 **✅ P5-3 `snd-ygot-pipeline` 已合入 + sync + 归档（PR #140，2026-07-09）**：`make gen-yang` 厂商 manifest 驱动（`backend/internal/generated/*/gen.conf`，加厂商=加一条 gen.conf 零脚本改动）、`backend/tools/genfix` 跨平台后处理（枚举 `|`→`_OR_` + 生成头部机器路径规范化，替换 macOS-only sed）、手拆 6 文件收敛回单 all.gen.go（等价性三重实证：声明集合一致/ySchema md5 一致/全量 -race 绿）、R04 门禁 CI+本地钩子对称进化为 regen-and-diff（解开冻结死锁）、pr-size/commit-msg 体积口径排除生成物、删除死管线 internal/yang/generate.go（models/ 保留=openconfig 生成输入）。新能力 yang-codegen-pipeline（CG-01~03）。坑：worktree 里改 .githooks 要 `git -c core.hooksPath=$PWD/.githooks`（相对路径解析到主仓库旧副本，见 [[worktree-hooks-gotcha]] 记忆）。
 
 **剩余步骤**：
-- [ ] P5-4 首个非 Huawei 驱动（真实验证注册表端到端；需该厂商 YANG 模型集 + netconfsim 方言；YANG 生成=加一条 gen.conf、接入下发=注册 driver.Descriptor）；mergeConfig/config_delete 的 per-model type-switch 收敛也在此步或独立小 change；注意 xmlcodec Decode 顶层按 Local 名扫描条目元素——若新厂商回读含与条目同名的模块根容器需按方言处理（评审已知观察项）
+- ~~P5-4 首个非 Huawei 驱动~~ **剪出（用户拍板，2026-07-10）**：不需要接入非华为设备。多厂商**架构能力已就位且零成本待命**（注册表 DR-01~03 + 通用 XML 引擎 XC-01~04 + manifest 生成管线 CG-01~03：未来若需接新厂商=加 gen.conf + 注册 driver.Descriptor + netconfsim 方言），只是不再为其立项验证。遗留低优先机械债（按需另立小 change）：mergeConfig/config_delete per-model type-switch 收敛（华为模型自身也受益）；xmlcodec Decode 按 Local 名扫描条目的方言观察项（仅真接新厂商时相关）
 
 > 从 P4 拆出（原被低估地捆在删除债里）。USMP 后续对接异构多厂商设备的**核心能力**，值得独立 explore/propose，非"最后随手做"。
 
