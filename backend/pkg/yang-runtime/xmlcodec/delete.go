@@ -34,7 +34,12 @@ func EncodeDelete(spec *Spec, v ygot.GoStruct) (string, error) {
 	}
 
 	var b strings.Builder
-	fmt.Fprintf(&b, "<%s xmlns=%q>", r.root, r.ns)
+	wrapped := openWrappers(&b, r)
+	if wrapped {
+		fmt.Fprintf(&b, "<%s>", r.root)
+	} else {
+		fmt.Fprintf(&b, "<%s xmlns=%q>", r.root, r.ns)
+	}
 	for _, mk := range sortedKeys(mapVal) {
 		ev := mapVal.MapIndex(mk)
 		keyName, keyVal, err := deleteKey(ev, mk, r)
@@ -48,6 +53,7 @@ func EncodeDelete(spec *Spec, v ygot.GoStruct) (string, error) {
 		fmt.Fprintf(&b, "</%s>", elemTag)
 	}
 	fmt.Fprintf(&b, "</%s>", r.root)
+	closeWrappers(&b, r)
 	return b.String(), nil
 }
 

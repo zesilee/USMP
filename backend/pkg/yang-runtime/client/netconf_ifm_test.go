@@ -3,9 +3,9 @@ package client
 import (
 	"testing"
 
+	"github.com/leezesi/usmp/backend/internal/generated/huawei"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"github.com/leezesi/usmp/backend/internal/generated/huawei"
 )
 
 func strPtr(s string) *string {
@@ -15,14 +15,14 @@ func strPtr(s string) *string {
 func TestBuildHuaweiIfmInterfacesXML_NilInput(t *testing.T) {
 	result, err := buildHuaweiIfmInterfacesXML(nil)
 	require.NoError(t, err)
-	assert.Equal(t, `<interfaces xmlns="urn:huawei:params:xml:ns:yang:huawei-ifm"/>`, result)
+	assert.Equal(t, `<ifm xmlns="urn:huawei:params:xml:ns:yang:huawei-ifm"><interfaces/></ifm>`, result)
 }
 
 func TestBuildHuaweiIfmInterfacesXML_EmptyInput(t *testing.T) {
 	ifaces := &huawei.HuaweiIfm_Ifm_Interfaces{}
 	result, err := buildHuaweiIfmInterfacesXML(ifaces)
 	require.NoError(t, err)
-	assert.Equal(t, `<interfaces xmlns="urn:huawei:params:xml:ns:yang:huawei-ifm"/>`, result)
+	assert.Equal(t, `<ifm xmlns="urn:huawei:params:xml:ns:yang:huawei-ifm"><interfaces/></ifm>`, result)
 }
 
 func TestBuildHuaweiIfmInterfacesXML_SingleInterface(t *testing.T) {
@@ -42,14 +42,14 @@ func TestBuildHuaweiIfmInterfacesXML_SingleInterface(t *testing.T) {
 		Mtu:         &mtu,
 		Bandwidth:   &bandwidth,
 		MacAddress:  &mac,
-		Type:        huawei.E_HuaweiIfm_PortType(6), // ethernet-csmacd
+		Type:        huawei.E_HuaweiIfm_PortType(6),  // ethernet-csmacd
 		Class:       huawei.E_HuaweiIfm_ClassType(1), // physical
 	}
 
 	result, err := buildHuaweiIfmInterfacesXML(ifaces)
 	require.NoError(t, err)
 
-	assert.Contains(t, result, `<interfaces xmlns="urn:huawei:params:xml:ns:yang:huawei-ifm">`)
+	assert.Contains(t, result, `<ifm xmlns="urn:huawei:params:xml:ns:yang:huawei-ifm"><interfaces>`)
 	assert.Contains(t, result, `<interface>`)
 	assert.Contains(t, result, `<name>GigabitEthernet0/0/1</name>`)
 	assert.Contains(t, result, `<description>Test Interface</description>`)
@@ -233,4 +233,3 @@ func TestBuildHuaweiIfmInterfacesXML_XMLEscaping(t *testing.T) {
 	assert.Contains(t, result, "&quot;special&quot;")
 	assert.Contains(t, result, "&amp;")
 }
-
