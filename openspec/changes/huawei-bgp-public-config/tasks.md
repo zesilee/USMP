@@ -44,10 +44,12 @@
 
 ## 5. 模拟网元 BGP 方言 + 端到端集成（B2）
 
-- [ ] 5.1 [红] 写 `*_integration_test.go`（`testing.Short()` 跳过）：下发公网 BGP → get-config 回读 → Reconciler 收敛（BGP-04）
-- [ ] 5.2 [绿] `simulator/netconfsim` 增加 BGP edit-config（整树替换，对齐既有 RFC 通道）+ get-config 回读方言
-- [ ] 5.3 幂等集成用例：同配置连续下发两次，第二次判定 no-op（BGP-04）
-- [ ] 5.4 下发失败用例：netconfsim 模拟 edit-config 失败 → 缓存不更新、保留原配置、明确错误码（BGP-05/§9）
+- [x] 5.0 **（计划外必需）** BGP reconciler（internal/controller/bgp）+ main.go 控制器注册——BGP 配置光有描述符+编解码不到设备，需 reconciler 驱动对账;含 **D8 容器根 diff 收敛**（commit f632d84）
+- [x] 5.1 [红→绿] `reconciler_integration_test.go`（`testing.Short()` 跳过）：下发公网 BGP→get-config 回读→二次收敛（Changes==0）；当场揪出第 5 处 list 中心缺口（写路径发 Go 类型名）
+- [x] 5.2 netconfsim 无需 BGP 专门方言：sim 是通用 tree datastore（按 local 名存取），BGP 容器根 edit-config/get-config 直接跑通（on-wire XML 实证正确）
+- [x] 5.3 幂等：二次对账 Changes==0 即幂等（同配置连下两次收敛，集成实证）
+- [x] 5.4 下发失败降级：`ErrorOnRPC["edit-config"]` 注入 → 对账 result.Error 诚实报错、不 panic（BGP-05/§9，缓存不更新由 API 层保证）
+- [ ] 5.5 [债/建议] 给 netconfsim 加 namespace 严格校验，堵上"namespace 正确性全测试套件测不出"盲区（本期 BGP 用权威 namespace，未实现严格校验；独立小改）
 
 ## 6. 完备测试矩阵补齐（yang-config-test-design / T02b）
 
