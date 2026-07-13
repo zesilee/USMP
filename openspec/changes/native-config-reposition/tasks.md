@@ -25,6 +25,6 @@
 
 ## 5. 收尾
 
-- [ ] 5.1 `make e2e-local` 全绿（frontend 改动强制，§6.2）；`go-code-review-check`/前端自审通过；commit What/Why/How
+- [x] 5.1 `make e2e-local` 全绿（frontend 改动强制，§6.2）；`go-code-review-check`/前端自审通过；commit What/Why/How
 - [ ] 5.2 推送 + PR，CI 全绿自助 merge
 - [ ] 5.3 合入后：`/opsx:sync`（frontend/business-crd delta + Purpose/头注重写）+ `/opsx:archive` + `/task sync`
