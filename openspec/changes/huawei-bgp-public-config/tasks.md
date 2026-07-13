@@ -28,9 +28,11 @@
 
 ## 3. 驱动描述符谓词（B1 单测先行 → 实现）
 
-- [ ] 3.1 [红] 写描述符谓词单测：`MatchRoute`/`MatchDecode`/`MatchEncode` 正路径（`/bgp:bgp/base-process/...` 命中）+ **负路径**（`bgp-flow:`/`bgp-evpn:`/`bgp-l2vpnad:` 不误命中）+ 未命中 `ok=false` 降级（BGP-03）
-- [ ] 3.2 [绿] 在 `backend/internal/drivers/huawei.go` 注册 `Descriptor{Vendor:"huawei", Module:"bgp", ControllerToken:"bgp"}`：谓词锚定 `bgp:bgp`、显式 `HuaweiBgpNS = "urn:huawei:yang:huawei-bgp"` 常量、`Schema` 闭包指向公网根 SchemaTree 入口（BGP-02/BGP-03/D3）
-- [ ] 3.3 注册可达性单测：断言 BGP 集成测试二进制空白导入 `internal/drivers`，`Lookup("huawei","/bgp:bgp/...")` 返回 `ok=true`（BGP-03，design R5）
+- [x] 3.1 [红] 描述符谓词单测：dispatchEquivalence 表加 BGP 正路径 + 负路径（bgp-flow:/bgp-evpn:/per-VPN 均不误命中）；commit be95683
+- [x] 3.2 [绿] 注册 `Descriptor{huawei/bgp}`：谓词用 **HasPrefix("/bgp:bgp")**（比 Contains 更精确，排除 per-VPN 与 feature 前缀）、显式 HuaweiBgpNS=urn:huawei:yang:huawei-bgp、Schema→SchemaTree["HuaweiBgp_Bgp"]
+- [x] 3.3 注册可达性 + 全链路真值往返测试（RFC7951 解码→XML 编码带正确 namespace→回读等价），断言真值非仅非空
+- [x] 3.4 **（计划外，quality gate 揪出）** 往返测试实测 Encode 报"no list map field"——xmlcodec 是 list 中心引擎、不支持容器根。已补 XC-05 plain-container 模式（commit 6113fe1）+ yang-xml-codec delta。列此为第二处"通用引擎不够通用"缺口（第一=genfix）
+- [ ] 3.5 [债] 容器根 delete（EncodeDelete 目前对容器根返干净错误、未支持）→ 归入 group 4 BGP 删除语义设计
 
 ## 4. XML 编解码等价性（B1 + golden 方法论）
 
