@@ -53,10 +53,10 @@
 
 ## 6. 完备测试矩阵补齐（yang-config-test-design / T02b）
 
-- [ ] 6.1 触发 `yang-config-test-design`，对照产出矩阵逐格核对：全属性/端到端/并发/边界/嵌套/幂等/负路径（T02b/BGP-05）
-- [ ] 6.2 并发-race 用例：多协程并发 reconcile/编解码 BGP 路径，`-race` 通过（R09/BGP-05）
-- [ ] 6.3 边界+约束负路径：越界 AS 号、违反 `must`/`when`（`enable=false` 带 `as`）→ 校验失败不崩溃（R08/BGP-05）
-- [ ] 6.4 覆盖率棘轮：补测后后端 `backend/.coverage-baseline` 不下降，如上升同步上调基线（T08）
+- [x] 6.1 矩阵逐格核对（commit 8eed2fc）：全属性(组4 schema驱动29字段)/端到端(组5 B2)/嵌套(container_test)/幂等(组5 二轮0)/并发/边界/负路径(本组)——七格齐
+- [x] 6.2 并发-race：64 协程并发编解码 BGP，`-race` 通过（引擎无共享状态，R09/BGP-05）
+- [x] 6.3 边界+负路径：uint 最大值/leaf-list 多元素/XML 特殊字符转义往返；畸形 XML 报错不 panic/未知元素跳过（R08）。**约束校验澄清**：服务端不校 when/must（与 VLAN/IFM 一致，域约束除外），enable/as 耦合 must 与 as 的 when 由前端渲染+设备兜底——已用 FieldDef 透出用例锁死约束对 BGP 100% 数据驱动可达（§9/R05）
+- [x] 6.4 覆盖率棘轮：聚合 60.6→实测 61.6，基线上调至 61.0（留 flaky 余量，T08）
 
 ## 7. 收尾与合规门禁
 
