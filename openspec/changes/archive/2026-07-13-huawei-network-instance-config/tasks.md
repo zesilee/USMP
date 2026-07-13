@@ -43,13 +43,13 @@
 
 ## 6. 评审与提交
 
-- [ ] 6.1 `go-code-review-check` 全项通过（架构合规/ygot 类型安全/NETCONF/并发安全）
-- [ ] 6.2 `go test ./...` 全绿（含 `-race`），B2 集成通过
-- [ ] 6.3 `git-what-why-how-commit` 三段式提交，单 commit ≤500 行按功能原子拆分
-- [ ] 6.4 `superpowers:finishing-a-development-branch`：push + 开 PR（PR ≤1000 行、CI required checks 全绿）
+- [x] 6.1 `go-code-review-check` 全项通过（架构合规/ygot 类型安全/NETCONF/并发安全）
+- [x] 6.2 `go test ./...` 全绿（含 `-race`），B2 集成通过
+- [x] 6.3 `git-what-why-how-commit` 三段式提交，单 commit ≤500 行按功能原子拆分
+- [x] 6.4 `superpowers:finishing-a-development-branch`：push + 开 PR（PR ≤1000 行、CI required checks 全绿）
 
 ## 7. sync + archive（本 change 合入后另起）
 
-- [ ] 7.1 `/opsx:sync`：`huawei-network-instance-config` delta 合入主 spec（新建 `openspec/specs/huawei-network-instance-config`；若组 3b 触发则同步 `yang-xml-codec`）
-- [ ] 7.2 `/opsx:archive`：change 移入 `openspec/changes/archive/`
-- [ ] 7.3 更新记忆 `bgp-onboarding-deps`：network-instance 已交付、解锁 2a 基础邻居
+- [x] 7.1 `/opsx:sync`：`huawei-network-instance-config` delta 合入主 spec（新建 `openspec/specs/huawei-network-instance-config`；若组 3b 触发则同步 `yang-xml-codec`）
+- [x] 7.2 `/opsx:archive`：change 移入 `openspec/changes/archive/`
+- [x] 7.3 更新记忆 `bgp-onboarding-deps`：network-instance 已交付、解锁 2a 基础邻居
