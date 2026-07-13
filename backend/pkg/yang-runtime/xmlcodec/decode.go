@@ -132,7 +132,7 @@ func decodeStruct(dec *xml.Decoder, start xml.StartElement, sv reflect.Value) er
 		case xml.EndElement:
 			return nil
 		case xml.StartElement:
-			f, ok := fieldByTag(sv, t.Name.Local)
+			f, _, ok := fieldByTag(sv, t.Name.Local)
 			if !ok {
 				if err := dec.Skip(); err != nil {
 					return fmt.Errorf("skip <%s>: %w", t.Name.Local, err)

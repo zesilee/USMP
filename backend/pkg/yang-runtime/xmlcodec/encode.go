@@ -23,7 +23,36 @@ type Spec struct {
 	// Name is the root element name; the engine picks list- or container-mode
 	// by whether the GoStruct has a root YANG-list map field.
 	Schema func() *yang.Entry
+	// Namespaces optionally maps module name (the generated struct field's
+	// `module:"…"` tag) to its XML namespace URI, enabling per-node namespace
+	// for augment 跨模块 trees (XC-06): a node whose module resolves to a
+	// namespace different from its parent's effective namespace gets an explicit
+	// xmlns. Nil/empty preserves the single-root-namespace behavior byte-for-byte
+	// (single-module trees never resolve a differing namespace → no new xmlns).
+	Namespaces map[string]string
 }
+
+// nsResolver decides per-node namespace emission from module tags (XC-06).
+// A nil/empty resolver always returns "" → no per-node xmlns (byte-identical
+// legacy behavior for single-module trees).
+type nsResolver map[string]string
+
+// at returns the namespace to declare on a child element whose module tag is
+// `mod`, given the parent's effective namespace `parentNS` — or "" when no new
+// xmlns is needed (unknown module, unmapped, or same as parent).
+func (r nsResolver) at(mod, parentNS string) string {
+	if len(r) == 0 || mod == "" {
+		return ""
+	}
+	n, ok := r[mod]
+	if !ok || n == "" || n == parentNS {
+		return ""
+	}
+	return n
+}
+
+// moduleTag returns the generated struct field's `module:"…"` tag.
+func moduleTag(f reflect.StructField) string { return f.Tag.Get("module") }
 
 // NetconfBaseNS carries the edit-config `operation` attribute (RFC 6241 §7.2).
 const NetconfBaseNS = "urn:ietf:params:xml:ns:netconf:base:1.0"
@@ -175,6 +204,7 @@ func Encode(spec *Spec, v ygot.GoStruct) (string, error) {
 	if err != nil {
 		return "", err
 	}
+	res := nsResolver(spec.Namespaces)
 	var b strings.Builder
 	wrapped := openWrappers(&b, r)
 	if mapVal.IsNil() || mapVal.Len() == 0 {
@@ -191,7 +221,9 @@ func Encode(spec *Spec, v ygot.GoStruct) (string, error) {
 	} else {
 		fmt.Fprintf(&b, "<%s xmlns=%q>", r.root, r.ns)
 	}
-	if err := encodeList(&b, r, mapVal, elemTag, nil); err != nil {
+	// Root list entries share the module of the root container; entryMod "" ⇒
+	// no per-node xmlns at a list root (single-module, byte-identical).
+	if err := encodeList(&b, r, mapVal, elemTag, nil, res, r.ns, ""); err != nil {
 		return "", err
 	}
 	fmt.Fprintf(&b, "</%s>", r.root)
@@ -211,7 +243,7 @@ func encodeContainer(spec *Spec, cv reflect.Value) (string, error) {
 		return "", err
 	}
 	var body strings.Builder
-	if err := encodeFields(&body, cv, r.schema, nil); err != nil {
+	if err := encodeFields(&body, cv, r.schema, nil, nsResolver(spec.Namespaces), r.ns); err != nil {
 		return "", err
 	}
 	var b strings.Builder
@@ -233,21 +265,29 @@ func encodeContainer(spec *Spec, cv reflect.Value) (string, error) {
 
 // encodeList emits every entry of a YANG list map, key leaves first. schema
 // may be nil (schema-less lists fall back to ΛListKeyMap for key names).
-func encodeList(b *strings.Builder, r *resolved, mapVal reflect.Value, elemTag string, schema *yang.Entry) error {
+// entryMod is the list field's module tag; when it resolves (via res) to a
+// namespace differing from parentNS, each entry element declares that xmlns
+// and its children inherit it (XC-06). entryMod "" ⇒ no per-node xmlns.
+func encodeList(b *strings.Builder, r *resolved, mapVal reflect.Value, elemTag string, schema *yang.Entry, res nsResolver, parentNS, entryMod string) error {
 	if schema == nil {
 		schema = r.list
+	}
+	entryNS := res.at(entryMod, parentNS)
+	effNS := parentNS
+	if entryNS != "" {
+		effNS = entryNS
 	}
 	for _, mk := range sortedKeys(mapVal) {
 		ev := mapVal.MapIndex(mk)
 		if ev.Kind() == reflect.Ptr && ev.IsNil() {
 			continue
 		}
-		b.WriteString("<" + elemTag + ">")
-		emitted, err := encodeKeysFirst(b, ev, mk, schema)
+		openTag(b, elemTag, entryNS)
+		emitted, err := encodeKeysFirst(b, ev, mk, schema, res, effNS)
 		if err != nil {
 			return fmt.Errorf("list %s: %w", elemTag, err)
 		}
-		if err := encodeFields(b, ev.Elem(), schema, emitted); err != nil {
+		if err := encodeFields(b, ev.Elem(), schema, emitted, res, effNS); err != nil {
 			return fmt.Errorf("list %s: %w", elemTag, err)
 		}
 		b.WriteString("</" + elemTag + ">")
@@ -258,7 +298,7 @@ func encodeList(b *strings.Builder, r *resolved, mapVal reflect.Value, elemTag s
 // encodeKeysFirst writes the entry's key leaves before any other field,
 // falling back to the map key value when the key leaf is nil（legacy 语义）.
 // Key names come from the schema Key statement, else from ΛListKeyMap.
-func encodeKeysFirst(b *strings.Builder, ev reflect.Value, mapKey reflect.Value, schema *yang.Entry) (map[string]bool, error) {
+func encodeKeysFirst(b *strings.Builder, ev reflect.Value, mapKey reflect.Value, schema *yang.Entry, res nsResolver, parentNS string) (map[string]bool, error) {
 	var names []string
 	if schema != nil && schema.Key != "" {
 		names = strings.Fields(schema.Key)
@@ -274,15 +314,19 @@ func encodeKeysFirst(b *strings.Builder, ev reflect.Value, mapKey reflect.Value,
 	sv := ev.Elem()
 	for _, kn := range names {
 		emitted[kn] = true
-		f, ok := fieldByTag(sv, kn)
+		f, sf, ok := fieldByTag(sv, kn)
+		keyNS := ""
+		if ok {
+			keyNS = res.at(moduleTag(sf), parentNS)
+		}
 		if ok && f.Kind() == reflect.Ptr && !f.IsNil() {
-			if err := encodeLeaf(b, kn, f.Elem()); err != nil {
+			if err := encodeLeaf(b, kn, f.Elem(), keyNS); err != nil {
 				return nil, err
 			}
 			continue
 		}
 		// Key leaf absent on the entry: use the map key（legacy fallback）.
-		if err := encodeLeaf(b, kn, mapKey); err != nil {
+		if err := encodeLeaf(b, kn, mapKey, keyNS); err != nil {
 			return nil, err
 		}
 	}
@@ -290,10 +334,13 @@ func encodeKeysFirst(b *strings.Builder, ev reflect.Value, mapKey reflect.Value,
 }
 
 // encodeFields serializes the remaining struct fields in declaration order.
-func encodeFields(b *strings.Builder, sv reflect.Value, schema *yang.Entry, skip map[string]bool) error {
+// parentNS is the enclosing element's effective namespace; each field may open
+// a module boundary (XC-06) resolved from its `module` tag.
+func encodeFields(b *strings.Builder, sv reflect.Value, schema *yang.Entry, skip map[string]bool, res nsResolver, parentNS string) error {
 	t := sv.Type()
 	for i := 0; i < t.NumField(); i++ {
-		tag := pathTag(t.Field(i))
+		f := t.Field(i)
+		tag := pathTag(f)
 		if tag == "" || (skip != nil && skip[tag]) {
 			continue
 		}
@@ -302,19 +349,28 @@ func encodeFields(b *strings.Builder, sv reflect.Value, schema *yang.Entry, skip
 		if schema != nil {
 			child = schema.Dir[tag]
 		}
-		if err := encodeField(b, tag, fv, child); err != nil {
+		if err := encodeField(b, tag, fv, child, res, parentNS, moduleTag(f)); err != nil {
 			return fmt.Errorf("field %s: %w", tag, err)
 		}
 	}
 	return nil
 }
 
-func encodeField(b *strings.Builder, tag string, fv reflect.Value, schema *yang.Entry) error {
+func encodeField(b *strings.Builder, tag string, fv reflect.Value, schema *yang.Entry, res nsResolver, parentNS, mod string) error {
+	ns := res.at(mod, parentNS) // module boundary xmlns ("" ⇒ inherit parent)
+	effNS := parentNS
+	if ns != "" {
+		effNS = ns
+	}
 	if fv.Type().Implements(goEnumType) && fv.Kind() == reflect.Int64 {
 		if fv.Int() == 0 { // UNSET
 			return nil
 		}
-		fmt.Fprintf(b, "<%s>%d</%s>", tag, fv.Int(), tag)
+		if ns == "" {
+			fmt.Fprintf(b, "<%s>%d</%s>", tag, fv.Int(), tag)
+		} else {
+			fmt.Fprintf(b, "<%s xmlns=%q>%d</%s>", tag, ns, fv.Int(), tag)
+		}
 		return nil
 	}
 	switch fv.Kind() {
@@ -323,26 +379,26 @@ func encodeField(b *strings.Builder, tag string, fv reflect.Value, schema *yang.
 			return nil
 		}
 		if fv.Elem().Kind() == reflect.Struct {
-			b.WriteString("<" + tag + ">")
-			if err := encodeFields(b, fv.Elem(), schema, nil); err != nil {
+			openTag(b, tag, ns)
+			if err := encodeFields(b, fv.Elem(), schema, nil, res, effNS); err != nil {
 				return err
 			}
 			b.WriteString("</" + tag + ">")
 			return nil
 		}
-		return encodeLeaf(b, tag, fv.Elem())
+		return encodeLeaf(b, tag, fv.Elem(), ns)
 	case reflect.Map: // nested YANG list
 		if fv.IsNil() || fv.Len() == 0 {
 			return nil
 		}
 		r := &resolved{list: schema}
-		return encodeList(b, r, fv, tag, schema)
+		return encodeList(b, r, fv, tag, schema, res, parentNS, mod)
 	case reflect.Slice: // leaf-list of scalars
 		if fv.Type().Elem().Kind() == reflect.Uint8 {
 			return fmt.Errorf("binary leaf unsupported")
 		}
 		for i := 0; i < fv.Len(); i++ {
-			if err := encodeLeaf(b, tag, fv.Index(i)); err != nil {
+			if err := encodeLeaf(b, tag, fv.Index(i), ns); err != nil {
 				return err
 			}
 		}
@@ -352,18 +408,34 @@ func encodeField(b *strings.Builder, tag string, fv reflect.Value, schema *yang.
 	}
 }
 
-func encodeLeaf(b *strings.Builder, tag string, v reflect.Value) error {
+// openTag writes a child element's open tag, declaring xmlns only when ns != ""
+// (a module boundary, XC-06). ns == "" reproduces the legacy plain `<tag>`.
+func openTag(b *strings.Builder, tag, ns string) {
+	if ns == "" {
+		b.WriteString("<" + tag + ">")
+	} else {
+		fmt.Fprintf(b, "<%s xmlns=%q>", tag, ns)
+	}
+}
+
+// encodeLeaf writes a scalar leaf. ns != "" declares a per-node xmlns on the leaf
+// (XC-06 module boundary for a lone augment leaf); ns == "" is the legacy form.
+func encodeLeaf(b *strings.Builder, tag string, v reflect.Value, ns string) error {
+	openEl, closeEl := "<"+tag+">", "</"+tag+">"
+	if ns != "" {
+		openEl = fmt.Sprintf("<%s xmlns=%q>", tag, ns)
+	}
 	switch v.Kind() {
 	case reflect.String:
-		fmt.Fprintf(b, "<%s>%s</%s>", tag, escape(v.String()), tag)
+		b.WriteString(openEl + escape(v.String()) + closeEl)
 	case reflect.Bool:
-		fmt.Fprintf(b, "<%s>%t</%s>", tag, v.Bool(), tag)
+		fmt.Fprintf(b, "%s%t%s", openEl, v.Bool(), closeEl)
 	case reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32, reflect.Int64:
-		fmt.Fprintf(b, "<%s>%d</%s>", tag, v.Int(), tag)
+		fmt.Fprintf(b, "%s%d%s", openEl, v.Int(), closeEl)
 	case reflect.Uint, reflect.Uint8, reflect.Uint16, reflect.Uint32, reflect.Uint64:
-		fmt.Fprintf(b, "<%s>%d</%s>", tag, v.Uint(), tag)
+		fmt.Fprintf(b, "%s%d%s", openEl, v.Uint(), closeEl)
 	case reflect.Float64, reflect.Float32:
-		fmt.Fprintf(b, "<%s>%g</%s>", tag, v.Float(), tag)
+		fmt.Fprintf(b, "%s%g%s", openEl, v.Float(), closeEl)
 	default:
 		return fmt.Errorf("unsupported leaf kind %s", v.Kind())
 	}
@@ -423,13 +495,14 @@ func escape(s string) string {
 	return b.String()
 }
 
-// fieldByTag finds a struct field by its YANG path tag.
-func fieldByTag(sv reflect.Value, tag string) (reflect.Value, bool) {
+// fieldByTag finds a struct field by its YANG path tag, returning its value and
+// the StructField (for the `module` tag, XC-06).
+func fieldByTag(sv reflect.Value, tag string) (reflect.Value, reflect.StructField, bool) {
 	t := sv.Type()
 	for i := 0; i < t.NumField(); i++ {
 		if pathTag(t.Field(i)) == tag {
-			return sv.Field(i), true
+			return sv.Field(i), t.Field(i), true
 		}
 	}
-	return reflect.Value{}, false
+	return reflect.Value{}, reflect.StructField{}, false
 }
