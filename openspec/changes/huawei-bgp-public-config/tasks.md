@@ -8,7 +8,7 @@
 - [x] 1.1 spike 完成：`make gen-yang VENDOR=huawei`（+huawei-bgp，不含 network-instance）生成成功（73543 行），结果=**ygot 不报错、不剪枝，物化整个 import 闭包**（含 network-instance/acl/bfd/routing 等兄弟根 struct）— 记录于 design「Spike 结论」
 - [x] 1.2 import 闭包核验通过：无二级依赖缺失，`go build ./...` 全通过（R2 消解）
 - [x] 1.3 入口名锚定：`type HuaweiBgp_Bgp struct` + `SchemaTree["HuaweiBgp_Bgp"]`（与 VLAN 同机制），全公网子树 struct 齐全（_Global/_BaseProcess/_Confederation/_GracefulRestart/_ReferencePeriod/_Timer/_DefaultParameter）— 回填 design D4
-- [x] 1.4 结论分支：落 (a) 变体——D2 确认（modules 仅加 huawei-bgp），但**新增权衡**：会引入 ~73k 行含未功能集成模型的惰性生成物，须用户确认是否可接受（design Open Questions / 已暂停待确认）
+- [x] 1.4 结论分支：落 (a) 变体——D2 确认（modules 仅加 huawei-bgp）；~73k 行闭包生成权衡**用户已拍板接受**（2026-07-13），强制缓解=proposal/spec 登记 generated-but-not-integrated 边界（已落）
 
 ## 2. ygot 生成落地（R04）
 
