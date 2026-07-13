@@ -14,17 +14,17 @@
 
 > BGP 全闭包含多模块 augment 同一目标（bfd/ethernet/tunnel-management → ifm/network-instance），触发 goyang 非确定 augment 序 → schema blob 字节漂移 → R04 门禁永失败。必须先修 genfix 才能落 G2。
 
-- [ ] 1B.1 [红] 写 genfix schema 规范化单测：构造含 `Augmented` 双序的 gzip schema fixture → 规范化后字节一致；`ygot.GzipToSchema` 前后语义等价（键集合/类型/约束不变）；幂等 no-op
-- [ ] 1B.2 [绿] 实现规范化：定位 `var ySchema = []byte{…}` → gunzip → JSON 用 `Decoder.UseNumber()` 解析（避免数字重格式化）→ 递归排序无序集合数组（首要 `Augmented`，按元素规范化内容排序）+ 对象键 → 固定参数 gzip（无时间戳/固定级别）→ 按确定格式回填 byte 数组
-- [ ] 1B.3 验证不影响基线：基线（vlan/ifm/system/pub-type/extension，无 Augmented 漂移）经新 genfix 后 `all.gen.go` 字节不变（`git diff` 空）；`go build ./...` 通过
-- [ ] 1B.4 端到端确定性：临时加 huawei-bgp 后连续两次 `make gen-yang VENDOR=huawei` → `all.gen.go` 字节一致（消解 CG-03 门禁阻塞）；若仍漂移则定位下一个非确定数组并纳入排序
-- [ ] 1B.5 补 `yang-codegen-pipeline` delta（MODIFY CG-02）已随本 change specs 提交；确认覆盖率/门禁对齐
+- [x] 1B.1 [红] genfix schema 规范化单测：确定性(5元素×4序,暴露 decorate-sort bug)/语义等价/数字保真(max uint64)/幂等——4 个新用例
+- [x] 1B.2 [绿] 实现规范化：gunzip → UseNumber 解析 → 递归排序无序数组(Augmented)+对象键 → 固定参数 gzip → 回填；**关键修 decorate-sort 缺陷**(key+val 绑定同排,旧独立 keys 切片比较器错位)
+- [x] 1B.3 基线：新 genfix 下基线 regen×2 确定(md5 稳定)、`go build`+API 测试(走 GzipToSchema)通过；注：基线 schema blob 一次性重规范化(合法可复现),非"字节不变"——语义等价才是保证(护栏已订正)
+- [x] 1B.4 端到端确定性：+bgp regen×3 字节一致(消解 CG-03 阻塞)；**发现 Augmented 之外无其他非确定数组**(修 sort bug 后即收敛)；全量(含 openconfig)regen×2 确定
+- [x] 1B.5 `yang-codegen-pipeline` delta(MODIFY CG-02)已随 specs 提交并 validate；commit cbf3c8f，go-code-review-check 通过
 
 ## 2. ygot 生成落地（R04）
 
-- [ ] 2.1 正式在 `gen.conf` 追加 `huawei-bgp`（含 spike 结论要求的任何附加模块），`make gen-yang` 生成 `backend/internal/generated/huawei/*`
-- [ ] 2.2 验证 regen-and-diff 门禁零漂移（本地 pre-commit 对称）；确认 `generated/` 未手改；确认 pr-size/commit-msg 已排除 `generated/`（design R4）
-- [ ] 2.3 BGP-01 场景：ygot 生成物零漂移用例纳入验证证据
+- [x] 2.1 gen.conf 追加 `huawei-bgp`（无须附加模块，D2 确认），`make gen-yang` 生成；commit d8418bb
+- [x] 2.2 regen-and-diff 零漂移：pre-commit R04 hook 通过、暂存后再 regen `git diff` 空；`generated/` 未手改；pr-size 排除生成物（hook 未拦体积）
+- [x] 2.3 BGP-01 零漂移证据：regen×3 md5 一致 + pre-commit regen-and-diff 通过（已留证）
 
 ## 3. 驱动描述符谓词（B1 单测先行 → 实现）
 
