@@ -31,12 +31,17 @@ describe('Sidebar Component', () => {
     const wrapper = mount(Sidebar, { global: { plugins: [router, ElementPlus] } })
     expect(wrapper.text()).toContain('概览')
     expect(wrapper.text()).toContain('设备管理')
-    expect(wrapper.text()).toContain('业务网络配置')
+    expect(wrapper.text()).toContain('原生配置')
   })
 
-  it('should have native config menu item', () => {
+  // 概念重定位：模块控制台菜单 = 原生配置；旧「业务网络配置」文案与
+  // Stack A CRD 菜单（/native/*）不得存在（FE-13 菜单命名与概念对齐场景）
+  it('概念对齐：无「业务网络配置」文案、无 /native/* 菜单项', () => {
     const wrapper = mount(Sidebar, { global: { plugins: [router, ElementPlus] } })
-    expect(wrapper.text()).toContain('原生配置')
+    expect(wrapper.text()).not.toContain('业务网络配置')
+    const deadItems = wrapper.findAll('.el-menu-item').filter((n) =>
+      (n.attributes('index') || '').startsWith('/native/'))
+    expect(deadItems).toHaveLength(0)
   })
 
   it('should toggle menu collapse', async () => {
@@ -49,7 +54,7 @@ describe('Sidebar Component', () => {
   })
 })
 
-describe('Sidebar · 业务菜单模型驱动（FE-13）', () => {
+describe('Sidebar · 原生配置菜单模型驱动（FE-13）', () => {
   beforeEach(() => {
     setActivePinia(createPinia())
   })
@@ -59,7 +64,7 @@ describe('Sidebar · 业务菜单模型驱动（FE-13）', () => {
     routes: [{ path: '/', name: 'dashboard', component: {} }]
   })
 
-  it('业务配置子菜单项来自 menu store，指向 /module/:name', async () => {
+  it('原生配置子菜单项来自 menu store，指向 /module/:name', async () => {
     vi.stubGlobal('fetch', vi.fn().mockResolvedValue({
       json: async () => ({ data: [{ name: 'ifm', description: '接口管理', vendor: 'huawei' }] })
     }))

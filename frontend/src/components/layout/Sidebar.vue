@@ -24,18 +24,20 @@
         <template #title>设备管理</template>
       </el-menu-item>
 
-      <!-- 业务配置菜单：/yang/modules 模型驱动，指向通用模块控制台（FE-13）。
-           加载失败回退内置项（R08）；路由配置为 legacy 独立流，保留静态项。 -->
-      <el-sub-menu index="business-config">
+      <!-- 原生配置菜单：/yang/modules 模型驱动，指向通用模块控制台（FE-13）。
+           原生配置 = 直接基于 YANG 模型的设备配置管理；加载失败回退内置项（R08）。
+           「业务网络配置」为未来扩展层（业务模型→编排为原生配置下发），
+           方向见 openspec/tasks/business-network-config.md。 -->
+      <el-sub-menu index="native-config">
         <template #title>
           <el-icon><Connection /></el-icon>
-          <span>业务网络配置</span>
+          <span>原生配置</span>
         </template>
         <!-- 任务域分组（FE-13）：任一模块带 category 时按组渲染，未标注归「其他」；
              全部未标注则平铺（等价旧形态）。 -->
-        <template v-if="businessGrouped">
+        <template v-if="nativeGrouped">
           <el-menu-item-group
-            v-for="g in businessGroups"
+            v-for="g in nativeGroups"
             :key="g.category || '__default__'"
             :title="g.category || '其他'"
           >
@@ -51,7 +53,7 @@
         </template>
         <template v-else>
           <el-menu-item
-            v-for="m in businessModules"
+            v-for="m in nativeModules"
             :key="m.name"
             :index="`/module/${m.name}`"
             :data-test="`module-item-${m.name}`"
@@ -59,25 +61,6 @@
             {{ m.title }}
           </el-menu-item>
         </template>
-        <el-menu-item index="/config/route">路由配置</el-menu-item>
-      </el-sub-menu>
-
-      <el-sub-menu index="native-config" @click="handleNativeMenuClick">
-        <template #title>
-          <el-icon><Setting /></el-icon>
-          <span>原生配置</span>
-        </template>
-        <el-menu-item
-          v-for="model in nativeModels"
-          :key="model.name"
-          :index="`/native/${model.name}`"
-        >
-          {{ model.title }}
-        </el-menu-item>
-        <el-menu-item v-if="!nativeMenuLoaded" index="loading" disabled>
-          <el-icon class="is-loading"><Loading /></el-icon>
-          加载中...
-        </el-menu-item>
       </el-sub-menu>
 
       <el-menu-item index="/logs">
@@ -107,31 +90,23 @@
 import { computed, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { useMenuStore } from '../../stores/menu'
-import { DataLine, Monitor, Connection, Setting, Document, Tools, Loading, Fold, Expand } from '@element-plus/icons-vue'
+import { DataLine, Monitor, Connection, Document, Tools, Fold, Expand } from '@element-plus/icons-vue'
 
 const route = useRoute()
 const menuStore = useMenuStore()
 
 const activeMenu = computed(() => route.path)
 const isCollapsed = computed(() => menuStore.isCollapsed)
-const nativeModels = computed(() => menuStore.nativeModels)
-const nativeMenuLoaded = computed(() => menuStore.nativeMenuLoaded)
-const businessModules = computed(() => menuStore.businessModules)
-const businessGroups = computed(() => menuStore.businessGroups)
-const businessGrouped = computed(() => businessGroups.value.some((g) => g.category))
+const nativeModules = computed(() => menuStore.nativeModules)
+const nativeGroups = computed(() => menuStore.nativeGroups)
+const nativeGrouped = computed(() => nativeGroups.value.some((g) => g.category))
 
 onMounted(() => {
-  menuStore.loadBusinessModules()
+  menuStore.loadNativeModules()
 })
 
 function toggleCollapse() {
   menuStore.toggleCollapse()
-}
-
-function handleNativeMenuClick() {
-  if (!nativeMenuLoaded.value) {
-    menuStore.loadNativeModels()
-  }
 }
 </script>
 
