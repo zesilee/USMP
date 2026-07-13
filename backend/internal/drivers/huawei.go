@@ -24,6 +24,11 @@ import (
 const (
 	HuaweiVlanNS = "urn:huawei:params:xml:ns:yang:huawei-vlan"
 	HuaweiIfmNS  = "urn:huawei:params:xml:ns:yang:huawei-ifm"
+	// HuaweiBgpNS 取 8.20.10 huawei-bgp.yang 声明的 module namespace（RFC7950：
+	// 模块 namespace 即其数据节点的 XML namespace，真实 8.20.10 设备据此校验）。
+	// 注意与 VLAN/IFM 上面两条的旧式 params:xml:ns 形态不同——各模块用自身声明值；
+	// namespace 须显式（内嵌 gzip schema 的 Entry.Namespace() 实测返回空，不可派生）。
+	HuaweiBgpNS = "urn:huawei:yang:huawei-bgp"
 )
 
 func init() {
@@ -34,6 +39,10 @@ func init() {
 	ifmXML := &xmlcodec.Spec{
 		Namespace: HuaweiIfmNS,
 		Schema:    func() *yang.Entry { return huawei.SchemaTree["HuaweiIfm_Ifm_Interfaces"] },
+	}
+	bgpXML := &xmlcodec.Spec{
+		Namespace: HuaweiBgpNS,
+		Schema:    func() *yang.Entry { return huawei.SchemaTree["HuaweiBgp_Bgp"] },
 	}
 
 	// 注册序 = 原 manager if-链检查序（system → vlan → ifm），先注册先匹配。
@@ -88,5 +97,25 @@ func init() {
 		NewStruct:   func() ygot.GoStruct { return &huawei.HuaweiIfm_Ifm_Interfaces{} },
 		Unmarshal:   huawei.Unmarshal,
 		XML:         ifmXML,
+	})
+	// BGP 公网进程（/bgp:bgp）——本期接入面（design D1/D3）。谓词用 HasPrefix
+	// "/bgp:bgp" 精确锚定公网根：排除 feature 模块前缀（/bgp-flow:、/bgp-evpn:）
+	// 与 per-VPN 增强（/ni:.../bgp:bgp，三期）；避免裸子串 "bgp" 误命中（BGP-03）。
+	driver.Register(driver.Descriptor{
+		Vendor: "huawei", Module: "bgp",
+		MatchRoute:      func(p string) bool { return strings.HasPrefix(p, "/bgp:bgp") },
+		ControllerToken: "bgp",
+		MatchDecode:     func(p string) bool { return strings.HasPrefix(p, "/bgp:bgp") },
+		DecodeXML: func(raw []byte) (ygot.GoStruct, error) {
+			v := &huawei.HuaweiBgp_Bgp{}
+			if err := xmlcodec.Decode(bgpXML, raw, v); err != nil {
+				return nil, err
+			}
+			return v, nil
+		},
+		MatchEncode: func(p string) bool { return strings.HasPrefix(p, "/bgp:bgp") },
+		NewStruct:   func() ygot.GoStruct { return &huawei.HuaweiBgp_Bgp{} },
+		Unmarshal:   huawei.Unmarshal,
+		XML:         bgpXML,
 	})
 }
