@@ -165,6 +165,34 @@ func TestHuaweiDescriptors_NetworkInstanceEncodeDecodeRoundtrip(t *testing.T) {
 	}
 }
 
+// XC-06 真机正确性：经 ni 描述符编码含 huawei-bgp augment 子树的 network-instance，
+// <bgp> 元素须带 huawei-bgp namespace（真机按 namespace 校验，否则拒绝）；ni 原生字段
+// 不另发 xmlns。sim/decode namespace-宽容测不出，故断言 encode 输出真值。
+func TestHuaweiDescriptors_NetworkInstancePerNodeNamespace(t *testing.T) {
+	enc, ok := driver.EncoderFor("/ni:network-instance")
+	if !ok || enc.XML == nil {
+		t.Fatal("network-instance 编码描述符/XML Spec 应命中")
+	}
+	dest := enc.NewStruct()
+	// instance[_public_] + huawei-bgp augment 子树（base-process/router-id）
+	if err := enc.Unmarshal([]byte(`{"instances":{"instance":[{"name":"_public_","bgp":{"base-process":{"router-id":"1.1.1.1"}}}]}}`), dest); err != nil {
+		t.Fatalf("RFC7951 解码失败: %v", err)
+	}
+	xml, err := xmlcodec.Encode(enc.XML, dest)
+	if err != nil {
+		t.Fatalf("XML 编码失败: %v", err)
+	}
+	if !strings.Contains(xml, `<bgp xmlns="urn:huawei:yang:huawei-bgp">`) {
+		t.Errorf("bgp augment 子树缺 huawei-bgp namespace（真机会拒绝）\n实际: %s", xml)
+	}
+	if !strings.HasPrefix(xml, `<network-instance xmlns="urn:huawei:yang:huawei-network-instance">`) {
+		t.Errorf("根 namespace 错\n实际: %s", xml)
+	}
+	if strings.Contains(xml, `<name xmlns=`) || strings.Contains(xml, `<router-id xmlns=`) {
+		t.Errorf("原生/继承节点不应另发 xmlns\n实际: %s", xml)
+	}
+}
+
 // 编解码闭包可实际工作（非空指针装配）：vlan XML 回读解码冒烟。
 func TestHuaweiDescriptors_VlanDecodeSmoke(t *testing.T) {
 	d, ok := driver.DecoderFor("/vlan:vlan/vlan:vlans")

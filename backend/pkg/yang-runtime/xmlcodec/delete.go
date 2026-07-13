@@ -47,7 +47,7 @@ func EncodeDelete(spec *Spec, v ygot.GoStruct) (string, error) {
 			return "", fmt.Errorf("xmlcodec delete %s: %w", elemTag, err)
 		}
 		fmt.Fprintf(&b, `<%s nc:operation="delete" xmlns:nc=%q>`, elemTag, NetconfBaseNS)
-		if err := encodeLeaf(&b, keyName, keyVal); err != nil {
+		if err := encodeLeaf(&b, keyName, keyVal, ""); err != nil {
 			return "", fmt.Errorf("xmlcodec delete %s: %w", elemTag, err)
 		}
 		fmt.Fprintf(&b, "</%s>", elemTag)

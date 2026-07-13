@@ -50,6 +50,13 @@ func init() {
 	niXML := &xmlcodec.Spec{
 		Namespace: HuaweiNetworkInstanceNS,
 		Schema:    func() *yang.Entry { return huawei.SchemaTree["HuaweiNetworkInstance_NetworkInstance"] },
+		// per-node namespace（XC-06）：network-instance 根下的 huawei-bgp augment
+		// 子树（peers/afs，2a）须带自身 namespace，真机才接受。单模块字段（ni 原生）
+		// 解析为根 namespace → 不另发 xmlns。加新 augment 模块（l3vpn 等）时在此登记。
+		Namespaces: map[string]string{
+			"huawei-network-instance": HuaweiNetworkInstanceNS,
+			"huawei-bgp":              HuaweiBgpNS,
+		},
 	}
 
 	// 注册序 = 原 manager if-链检查序（system → vlan → ifm），先注册先匹配。

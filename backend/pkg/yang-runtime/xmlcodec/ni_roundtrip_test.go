@@ -35,10 +35,6 @@ const niNativeConfigTrueLeaves = 5
 
 const niModule = "huawei-network-instance"
 
-func moduleTag(f reflect.StructField) string {
-	return f.Tag.Get("module")
-}
-
 // populateNativeConfigTrue 按 schema config 继承 + module tag 过滤，给 sv 下每个
 // **原生（module=huawei-network-instance）config-true 标量 leaf** 赋唯一值；augment
 // 字段（他模块）、config-false、list（Map，另路径覆盖）跳过。返回赋值 leaf 数。
