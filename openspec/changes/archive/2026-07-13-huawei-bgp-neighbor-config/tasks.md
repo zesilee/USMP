@@ -30,12 +30,12 @@
 
 ## 5. 评审与提交
 
-- [ ] 5.1 `go-code-review-check` 通过
-- [ ] 5.2 `git-what-why-how-commit` 三段式，≤500 行/commit（测试为主，按功能拆）
-- [ ] 5.3 push + PR（CI required checks 全绿，PR ≤1000 行）
+- [x] 5.1 `go-code-review-check` 通过
+- [x] 5.2 `git-what-why-how-commit` 三段式，≤500 行/commit（测试为主，按功能拆）
+- [x] 5.3 push + PR（CI required checks 全绿，PR ≤1000 行）
 
 ## 6. sync + archive（合入后）
 
-- [ ] 6.1 `/opsx:sync`：BN-01~04 合入主 spec（新建 `openspec/specs/huawei-bgp-neighbor-config`；若 2b' 触发同步 yang-xml-codec）
-- [ ] 6.2 `/opsx:archive`
-- [ ] 6.3 更新记忆 `bgp-onboarding-deps`：2a 基础邻居已交付，2b 策略属性门控 routing-policy/xpl/acl/tunnel-management
+- [x] 6.1 `/opsx:sync`：BN-01~04 合入主 spec（新建 `openspec/specs/huawei-bgp-neighbor-config`；若 2b' 触发同步 yang-xml-codec）
+- [x] 6.2 `/opsx:archive`
+- [x] 6.3 更新记忆 `bgp-onboarding-deps`：2a 基础邻居已交付，2b 策略属性门控 routing-policy/xpl/acl/tunnel-management
