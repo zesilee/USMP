@@ -19,11 +19,13 @@ export default defineConfig({
       // 只准升不准降——低于阈值 CI 即 fail。补测后应把阈值同步上调，形成单向棘轮。
       // 基线实测(2026-07-06)：Stmts 66.55 / Branch 66.57 / Funcs 56.67 / Lines 66.88。
       // 2026-07-08 P3 choice 补测后实测：Stmts 71.25 / Branch 70.02 / Funcs 62.75 / Lines 71.47。
+      // 2026-07-13 legacy CRD 链路退役（低覆盖代码删除，分母重算）后实测：
+      // Stmts 79.53 / Branch 75.61 / Funcs 72.21 / Lines 80.08。
       thresholds: {
-        statements: 74,
-        branches: 71,
-        functions: 67,
-        lines: 74
+        statements: 78,
+        branches: 74,
+        functions: 71,
+        lines: 78
       }
     }
   },

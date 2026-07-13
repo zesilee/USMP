@@ -27,17 +27,8 @@ const routes = [
     path: '/config/vlan',
     redirect: '/module/vlan'
   },
-  {
-    path: '/config/route',
-    name: 'route',
-    component: () => import('../views/ConfigPage.vue'),
-    props: { module: 'openconfig-route' }
-  },
-  {
-    path: '/native/:module',
-    name: 'native',
-    component: () => import('../views/ConfigPage.vue')
-  },
+  // /config/route 与 /native/:module（Stack A CRD 死路）已退役（FE-13）：
+  // 生产中从未可用（K8s API 面已退出生产），无重定向义务。
   {
     path: '/logs',
     name: 'logs',
