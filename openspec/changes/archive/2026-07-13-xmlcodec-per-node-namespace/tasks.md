@@ -24,12 +24,12 @@
 
 ## 5. 评审与提交
 
-- [ ] 5.1 `go-code-review-check` 通过
-- [ ] 5.2 `git-what-why-how-commit` 三段式提交，≤500 行/commit
-- [ ] 5.3 push + PR（CI required checks 全绿，PR ≤1000 行）
+- [x] 5.1 `go-code-review-check` 通过
+- [x] 5.2 `git-what-why-how-commit` 三段式提交，≤500 行/commit
+- [x] 5.3 push + PR（CI required checks 全绿，PR ≤1000 行）
 
 ## 6. sync + archive（合入后）
 
-- [ ] 6.1 `/opsx:sync`：XC-06 合入主 spec `openspec/specs/yang-xml-codec`
-- [ ] 6.2 `/opsx:archive`
-- [ ] 6.3 更新记忆：per-node namespace 已交付，解锁 2a peers
+- [x] 6.1 `/opsx:sync`：XC-06 合入主 spec `openspec/specs/yang-xml-codec`
+- [x] 6.2 `/opsx:archive`
+- [x] 6.3 更新记忆：per-node namespace 已交付，解锁 2a peers
