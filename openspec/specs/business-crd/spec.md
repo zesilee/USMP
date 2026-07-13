@@ -2,7 +2,7 @@
 
 ## Purpose
 
-> **LEGACY / 已退出生产。** 本能力属 Stack A（K8s CRD + controller-runtime Reconciler → 翻译引擎 → Actor 2PC → NETCONF 下发）。Stack A 已退出生产：`cmd/controller` 入口已删除，`backend/main.go`（Stack B）为唯一进程入口。本 spec 作历史契约保留，**不代表当前生产配置面**——生产配置读写走 [[config-api]] / [[yang-controller-runtime]] 直连链路。唯一可能仍被前端使用的是 BC-05（CRD 作为前端表单 schema 来源，route/native 的 ConfigPage + useK8sCRD），据实保留。
+> **LEGACY / 已退出生产。** 本能力属 Stack A（K8s CRD + controller-runtime Reconciler → 翻译引擎 → Actor 2PC → NETCONF 下发）。Stack A 已退出生产：`cmd/controller` 入口已删除，`backend/main.go`（Stack B）为唯一进程入口。本 spec 作历史契约保留，**不代表当前生产配置面**——生产配置读写走 [[config-api]] / [[yang-controller-runtime]] 直连链路。前端最后的 CRD 消费链（route/native 的 ConfigPage + useK8sCRD）已随 native-config-reposition 退役删除，BC-05 已据实移除——本 spec 全量为纯历史契约，零生产/前端消费。另注：「业务网络配置」概念已重新定义为未来扩展层（业务侧 YANG 模型定义自动化能力，USMP 编排为原生配置下发，方向见 openspec/tasks/business-network-config.md），与本 legacy CRD 意图面无实现延续关系，仅思想同源。
 
 business-crd 以 K8s CRD 表达厂商中立的设备配置意图，经 controller-runtime Reconciler → 翻译引擎 → Actor 2PC → NETCONF 下发；CRD 同时充当前端表单 schema 来源。
 
@@ -50,10 +50,3 @@ BusinessVlan CR 变更时 Reconciler SHALL 执行声明式对齐：以 finalizer
 - **WHEN** 通过 legacy `api/v1` 提交 Format/Content 透传配置
 - **THEN** 系统 SHALL 以传输化方式承载该原始配置
 
-### Requirement: BC-05 表单 schema 来源
-
-带 `+custom:*` 标注的新树 CRD 在生成 CRD YAML 时，标注 SHALL 转为 OpenAPI `x-` 扩展，供前端 `parseCRDSchemaToFields` 渲染表单。此为当前可能仍被前端（route/native 的 ConfigPage + useK8sCRD）使用的能力面。
-
-#### Scenario: 标注转 OpenAPI 扩展供前端渲染
-- **WHEN** 生成带 `+custom:*` 标注的 CRD YAML
-- **THEN** 系统 SHALL 将标注转为 OpenAPI `x-` 扩展，前端 SHALL 可经 `parseCRDSchemaToFields` 据此渲染表单字段
