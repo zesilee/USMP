@@ -206,6 +206,13 @@ func decodeField(dec *xml.Decoder, start xml.StartElement, fv reflect.Value) err
 		}
 		fv.Set(reflect.Append(fv, item.Elem()))
 		return nil
+	case reflect.Bool: // YANG empty 类型（YANGEmpty，非指针 bool）：presence-only
+		// 编码器仅在 true 时发 <tag/>、false 时不发，故元素存在即 true（无值）。
+		if _, err := collectText(dec, start); err != nil {
+			return err
+		}
+		fv.SetBool(true)
+		return nil
 	default:
 		return fmt.Errorf("leaf %s: unsupported field form %s", tag, fv.Kind())
 	}

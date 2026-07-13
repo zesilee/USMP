@@ -403,6 +403,16 @@ func encodeField(b *strings.Builder, tag string, fv reflect.Value, schema *yang.
 			}
 		}
 		return nil
+	case reflect.Bool: // YANG empty 类型（ygot YANGEmpty，非指针 bool）：presence-only
+		if !fv.Bool() { // 不存在 → 不发（同 nil 叶跳发语义）
+			return nil
+		}
+		if ns == "" {
+			fmt.Fprintf(b, "<%s/>", tag)
+		} else {
+			fmt.Fprintf(b, "<%s xmlns=%q/>", tag, ns)
+		}
+		return nil
 	default:
 		return fmt.Errorf("unsupported field form %s", fv.Kind())
 	}
