@@ -60,7 +60,7 @@
 
 ## 7. 收尾与合规门禁
 
-- [ ] 7.1 `go test ./...` 全绿（含 `-race`）；`go-code-review-check` 技能通过（T04/§6.2）
-- [ ] 7.2 `superpowers:verification-before-completion`：留新鲜验证证据（gen 零漂移、集成收敛、race 通过）
-- [ ] 7.3 分拆提交（每 commit ≤500 行、单原子功能、What/Why/How 三段式）；PR ≤3000 行，超限按「gen 生成物→驱动+编解码→sim+集成」拆顺序 PR
-- [ ] 7.4 `/opsx:sync` 把 `huawei-bgp-config` delta（及 spike 触发的 `yang-codegen-pipeline` delta，若有）合入主 spec；`/opsx:archive` 归档 change
+- [x] 7.1 `go test -race ./...` 30 包全绿；各代码单元 go-code-review-check 通过（T04/§6.2）
+- [x] 7.2 verification：gen 零漂移(regen×3)、B2 集成收敛(Changes==0)、-race 全绿、覆盖率 60.6→61.0——新鲜证据齐
+- [x] 7.3 16 原子提交(What/Why/How)；PR #146 人工~1941 行<3000 门禁(生成物排除)、CI 10/10 绿、已 merge(sha 2ae4ec1)
+- [x] 7.4 `/opsx:sync` 三 delta 合主 spec(huawei-bgp-config 新建 / yang-xml-codec XC-05 / yang-codegen-pipeline CG-02) + `/opsx:archive` 归档（本收尾 PR）
