@@ -15,10 +15,13 @@ import (
 // because the embedded gzip SchemaTree does not resolve Entry.Namespace()
 // (实测为空，见 design D3b).
 type Spec struct {
-	// Namespace is the XML namespace of the module's list container.
+	// Namespace is the module's XML namespace, declared on the root element.
 	Namespace string
-	// Schema returns the yang.Entry of the list container (e.g. "vlans");
-	// its Name is the root element and Dir carries the list child with Key.
+	// Schema returns the yang.Entry of the module's root container — either a
+	// list container (e.g. "vlans", whose Dir carries the keyed list child) or
+	// a plain container (e.g. "bgp", holding only scalars/sub-containers). Its
+	// Name is the root element name; the engine picks list- or container-mode
+	// by whether the GoStruct has a root YANG-list map field.
 	Schema func() *yang.Entry
 }
 
@@ -103,8 +106,12 @@ func (r *resolved) keyNames() []string {
 	return strings.Fields(r.list.Key)
 }
 
-// containerMap locates the unique YANG-list map field of a container struct.
-func containerMap(cv reflect.Value) (mapVal reflect.Value, elemTag string, err error) {
+// findContainerMap locates the container's unique YANG-list map field.
+// found is false when the container has no map field at all — a plain-container
+// root (e.g. /bgp:bgp holds only scalars and sub-containers, no root list),
+// which Encode/Decode serve via container-mode. err is returned only when the
+// container has multiple map fields (malformed).
+func findContainerMap(cv reflect.Value) (mapVal reflect.Value, elemTag string, found bool, err error) {
 	t := cv.Type()
 	for i := 0; i < t.NumField(); i++ {
 		f := t.Field(i)
@@ -112,13 +119,23 @@ func containerMap(cv reflect.Value) (mapVal reflect.Value, elemTag string, err e
 		if tag == "" || f.Type.Kind() != reflect.Map {
 			continue
 		}
-		if mapVal.IsValid() {
-			return reflect.Value{}, "", fmt.Errorf("xmlcodec: container %s has multiple list map fields", t.Name())
+		if found {
+			return reflect.Value{}, "", false, fmt.Errorf("xmlcodec: container %s has multiple list map fields", t.Name())
 		}
-		mapVal, elemTag = cv.Field(i), tag
+		mapVal, elemTag, found = cv.Field(i), tag, true
 	}
-	if !mapVal.IsValid() {
-		return reflect.Value{}, "", fmt.Errorf("xmlcodec: container %s has no list map field", t.Name())
+	return mapVal, elemTag, found, nil
+}
+
+// containerMap requires a YANG-list map field; callers on the list-only paths
+// (delete, wrap) use it. Container-rooted modules use findContainerMap instead.
+func containerMap(cv reflect.Value) (reflect.Value, string, error) {
+	mapVal, elemTag, found, err := findContainerMap(cv)
+	if err != nil {
+		return reflect.Value{}, "", err
+	}
+	if !found {
+		return reflect.Value{}, "", fmt.Errorf("xmlcodec: container %s has no list map field", cv.Type().Name())
 	}
 	return mapVal, elemTag, nil
 }
@@ -145,9 +162,14 @@ func Encode(spec *Spec, v ygot.GoStruct) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	mapVal, elemTag, err := containerMap(cv)
+	mapVal, elemTag, found, err := findContainerMap(cv)
 	if err != nil {
 		return "", err
+	}
+	if !found {
+		// Plain-container root (no root YANG list, e.g. /bgp:bgp): emit the
+		// container element + its fields via the shared field machinery.
+		return encodeContainer(spec, cv)
 	}
 	r, err := spec.resolve(elemTag)
 	if err != nil {
@@ -173,6 +195,38 @@ func Encode(spec *Spec, v ygot.GoStruct) (string, error) {
 		return "", err
 	}
 	fmt.Fprintf(&b, "</%s>", r.root)
+	closeWrappers(&b, r)
+	return b.String(), nil
+}
+
+// encodeContainer serializes a plain-container root GoStruct (no YANG list at
+// the root, e.g. /bgp:bgp) to edit-config XML: <root xmlns=NS>{fields}</root>,
+// or a self-closing <root xmlns=NS/> when every field is empty. It reuses
+// encodeFields — the same leaf / nested-container / nested-list machinery that
+// serves list entries — so scalars, sub-containers and deeper nested lists all
+// encode identically to the list path (no separate leaf logic to drift).
+func encodeContainer(spec *Spec, cv reflect.Value) (string, error) {
+	r, err := spec.resolve("") // no list child; r.root = container element name
+	if err != nil {
+		return "", err
+	}
+	var body strings.Builder
+	if err := encodeFields(&body, cv, r.schema, nil); err != nil {
+		return "", err
+	}
+	var b strings.Builder
+	wrapped := openWrappers(&b, r)
+	empty := body.Len() == 0
+	switch {
+	case empty && wrapped:
+		fmt.Fprintf(&b, "<%s/>", r.root)
+	case empty:
+		fmt.Fprintf(&b, "<%s xmlns=%q/>", r.root, r.ns)
+	case wrapped:
+		fmt.Fprintf(&b, "<%s>%s</%s>", r.root, body.String(), r.root)
+	default:
+		fmt.Fprintf(&b, "<%s xmlns=%q>%s</%s>", r.root, r.ns, body.String(), r.root)
+	}
 	closeWrappers(&b, r)
 	return b.String(), nil
 }

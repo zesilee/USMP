@@ -25,9 +25,14 @@ func Decode(spec *Spec, raw []byte, dst ygot.GoStruct) error {
 	if err != nil {
 		return err
 	}
-	mapVal, elemTag, err := containerMap(cv)
+	mapVal, elemTag, found, err := findContainerMap(cv)
 	if err != nil {
 		return err
+	}
+	if !found {
+		// Plain-container root (e.g. /bgp:bgp): parse the container element's
+		// children straight into dst via the shared struct machinery.
+		return decodeContainer(spec, raw, cv)
 	}
 	if mapVal.IsNil() {
 		mapVal.Set(reflect.MakeMap(mapVal.Type()))
@@ -81,6 +86,35 @@ func Decode(spec *Spec, raw []byte, dst ygot.GoStruct) error {
 			if se.Name.Local == r.root && depth > 0 {
 				depth--
 			}
+		}
+	}
+}
+
+// decodeContainer parses a get-config reply into a plain-container root struct
+// (no root YANG list, e.g. /bgp:bgp). It scans the token stream for the module
+// root element (robust to rpc-reply/data/namespace-prefixed wrappers, matching
+// by local name like the list path) and fills cv via decodeStruct — the same
+// machinery list entries use. Root element absent → cv left empty (lenient,
+// mirrors the list path's empty-map behavior).
+func decodeContainer(spec *Spec, raw []byte, cv reflect.Value) error {
+	if len(raw) == 0 {
+		return nil
+	}
+	r, err := spec.resolve("")
+	if err != nil {
+		return err
+	}
+	dec := xml.NewDecoder(bytes.NewReader(raw))
+	for {
+		tok, err := dec.Token()
+		if err == io.EOF {
+			return nil
+		}
+		if err != nil {
+			return fmt.Errorf("xmlcodec decode: %w", err)
+		}
+		if se, ok := tok.(xml.StartElement); ok && se.Name.Local == r.root {
+			return decodeStruct(dec, se, cv)
 		}
 	}
 }
