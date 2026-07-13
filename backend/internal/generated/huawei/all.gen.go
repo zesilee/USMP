@@ -12,6 +12,7 @@ using the following YANG input files:
   - huawei-pub-type
   - huawei-extension
   - huawei-bgp
+  - huawei-network-instance
 
 Imported modules were sourced from:
   - ../yang-models/network-router/8.20.10/ne40e-x8x16/...

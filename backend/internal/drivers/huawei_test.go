@@ -30,7 +30,14 @@ var dispatchEquivalence = []struct {
 	// BGP 负路径（谓词精确锚定，禁止误命中，BGP-03）：
 	{"/bgp-flow:flow", "", "", ""}, // feature 模块前缀含 "bgp" 但非 "/bgp:bgp"
 	{"/bgp-evpn:evpn", "", "", ""}, // 同上
-	{"/ni:network-instance/ni:instances/ni:instance/bgp:bgp/base-process", "", "", ""}, // per-VPN（三期，本期不接）——不以 "/bgp:bgp" 起头
+	// network-instance 根：三处均命中（HasPrefix "/ni:network-instance"，NI-03）
+	{"/ni:network-instance", "network-instance", "network-instance", "network-instance"},
+	{"/ni:network-instance/instances/instance", "network-instance", "network-instance", "network-instance"},
+	// per-VPN BGP（/ni:.../bgp:bgp/…）结构上在 ni 根下（单一 ygot 根，design D1）——
+	// 由 network-instance 描述符路由，而非 /bgp:bgp 公网描述符（后者 HasPrefix 不命中）。
+	{"/ni:network-instance/instances/instance/bgp:bgp/base-process", "network-instance", "network-instance", "network-instance"},
+	// network-instance 负路径：前缀含 "network-instance" 但非 "/ni:network-instance" 起头
+	{"/ni-feature:network-instance-x", "", "", ""},
 	// 未覆盖路径：三处均降级
 	{"/route:routing", "", "", ""},
 	{"", "", "", ""},
@@ -102,6 +109,59 @@ func TestHuaweiDescriptors_BgpEncodeDecodeRoundtrip(t *testing.T) {
 	if rt.BaseProcess == nil || rt.BaseProcess.Enable == nil || !*rt.BaseProcess.Enable ||
 		rt.BaseProcess.As == nil || *rt.BaseProcess.As != "100" {
 		t.Fatalf("回读真值不等价: %#v", rt.BaseProcess)
+	}
+}
+
+// network-instance 描述符全链路真值往返（RFC7951 写 → XML 编码下发 → XML 回读），
+// 覆盖容器根 global 标量 + 嵌套 instance list（NI-01/NI-02/NI-03）。
+func TestHuaweiDescriptors_NetworkInstanceEncodeDecodeRoundtrip(t *testing.T) {
+	enc, ok := driver.EncoderFor("/ni:network-instance")
+	if !ok {
+		t.Fatal("network-instance 编码描述符应命中")
+	}
+	dest := enc.NewStruct()
+	if err := enc.Unmarshal([]byte(`{"global":{"cfg-router-id":"1.1.1.1"},"instances":{"instance":[{"name":"vpn-a","description":"d1"}]}}`), dest); err != nil {
+		t.Fatalf("RFC7951 解码失败: %v", err)
+	}
+	ni, ok := dest.(*huawei.HuaweiNetworkInstance_NetworkInstance)
+	if !ok || ni.Global == nil || ni.Instances == nil {
+		t.Fatalf("NewStruct/Unmarshal 装配错误: %#v", dest)
+	}
+	if ni.Global.CfgRouterId == nil || *ni.Global.CfgRouterId != "1.1.1.1" {
+		t.Fatalf("cfg-router-id 未正确解码: %v", ni.Global.CfgRouterId)
+	}
+
+	if enc.XML == nil {
+		t.Fatal("network-instance 描述符缺 XML Spec（下发通道未装配）")
+	}
+	xml, err := xmlcodec.Encode(enc.XML, ni)
+	if err != nil {
+		t.Fatalf("XML 编码失败: %v", err)
+	}
+	for _, want := range []string{
+		`xmlns="urn:huawei:yang:huawei-network-instance"`,
+		"<cfg-router-id>1.1.1.1</cfg-router-id>", "<name>vpn-a</name>", "<description>d1</description>",
+	} {
+		if !strings.Contains(xml, want) {
+			t.Errorf("下发 XML 缺 %q\n实际: %s", want, xml)
+		}
+	}
+
+	dec, ok := driver.DecoderFor("/ni:network-instance")
+	if !ok {
+		t.Fatal("network-instance 解码描述符应命中")
+	}
+	parsed, err := dec.DecodeXML([]byte(xml))
+	if err != nil {
+		t.Fatalf("XML 解码失败: %v", err)
+	}
+	rt := parsed.(*huawei.HuaweiNetworkInstance_NetworkInstance)
+	if rt.Global == nil || rt.Global.CfgRouterId == nil || *rt.Global.CfgRouterId != "1.1.1.1" {
+		t.Fatalf("回读 global 真值不等价: %#v", rt.Global)
+	}
+	inst := rt.Instances.Instance["vpn-a"]
+	if inst == nil || inst.Description == nil || *inst.Description != "d1" {
+		t.Fatalf("回读嵌套 list 真值不等价: %#v", rt.Instances)
 	}
 }
 

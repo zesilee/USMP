@@ -29,6 +29,9 @@ const (
 	// 注意与 VLAN/IFM 上面两条的旧式 params:xml:ns 形态不同——各模块用自身声明值；
 	// namespace 须显式（内嵌 gzip schema 的 Entry.Namespace() 实测返回空，不可派生）。
 	HuaweiBgpNS = "urn:huawei:yang:huawei-bgp"
+	// HuaweiNetworkInstanceNS 取 8.20.10 huawei-network-instance.yang 声明的 module
+	// namespace（BGP peering 的唯一硬前置，peers/afs/peer-groups 均 augment 于此根下）。
+	HuaweiNetworkInstanceNS = "urn:huawei:yang:huawei-network-instance"
 )
 
 func init() {
@@ -43,6 +46,10 @@ func init() {
 	bgpXML := &xmlcodec.Spec{
 		Namespace: HuaweiBgpNS,
 		Schema:    func() *yang.Entry { return huawei.SchemaTree["HuaweiBgp_Bgp"] },
+	}
+	niXML := &xmlcodec.Spec{
+		Namespace: HuaweiNetworkInstanceNS,
+		Schema:    func() *yang.Entry { return huawei.SchemaTree["HuaweiNetworkInstance_NetworkInstance"] },
 	}
 
 	// 注册序 = 原 manager if-链检查序（system → vlan → ifm），先注册先匹配。
@@ -117,5 +124,26 @@ func init() {
 		NewStruct:   func() ygot.GoStruct { return &huawei.HuaweiBgp_Bgp{} },
 		Unmarshal:   huawei.Unmarshal,
 		XML:         bgpXML,
+	})
+	// network-instance（/ni:network-instance）——BGP 二期 peering 唯一硬前置（NI-03）。
+	// 单描述符覆盖整棵子树：因 augment 合并，peers（huawei-bgp）/afs（huawei-l3vpn）结构
+	// 上同属此根，未来 peering 分期扩展本描述符驱动面、不另立描述符（design D1）。谓词用
+	// HasPrefix "/ni:network-instance" 精确锚定，避免裸子串误命中。
+	driver.Register(driver.Descriptor{
+		Vendor: "huawei", Module: "network-instance",
+		MatchRoute:      func(p string) bool { return strings.HasPrefix(p, "/ni:network-instance") },
+		ControllerToken: "network-instance",
+		MatchDecode:     func(p string) bool { return strings.HasPrefix(p, "/ni:network-instance") },
+		DecodeXML: func(raw []byte) (ygot.GoStruct, error) {
+			v := &huawei.HuaweiNetworkInstance_NetworkInstance{}
+			if err := xmlcodec.Decode(niXML, raw, v); err != nil {
+				return nil, err
+			}
+			return v, nil
+		},
+		MatchEncode: func(p string) bool { return strings.HasPrefix(p, "/ni:network-instance") },
+		NewStruct:   func() ygot.GoStruct { return &huawei.HuaweiNetworkInstance_NetworkInstance{} },
+		Unmarshal:   huawei.Unmarshal,
+		XML:         niXML,
 	})
 }

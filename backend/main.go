@@ -9,6 +9,7 @@ import (
 	"github.com/leezesi/usmp/backend/internal/api"
 	"github.com/leezesi/usmp/backend/internal/controller/bgp"
 	"github.com/leezesi/usmp/backend/internal/controller/ifm"
+	"github.com/leezesi/usmp/backend/internal/controller/networkinstance"
 	"github.com/leezesi/usmp/backend/internal/controller/system"
 	"github.com/leezesi/usmp/backend/internal/controller/vlan"
 	"github.com/leezesi/usmp/backend/internal/crdsource"
@@ -93,6 +94,19 @@ func main() {
 
 	mgr.AddController(bgpCtrl)
 	log.Printf("Huawei BGP controller registered successfully")
+
+	// Create and register the Huawei network-instance controller（容器根 + 嵌套 list，
+	// /ni:network-instance）——BGP 二期 peering 唯一硬前置。Name 含 "network-instance"
+	// → manager.TriggerReconcile 按 ControllerToken="network-instance" 路由命中。
+	niCtrl := controller.ControllerManagedBy("huawei-network-instance").
+		WithReconciler(networkinstance.New(cs, clientPool, mgr.GetDeviceStore())).
+		WithSource(source.NewPeriodicSourceWithLister(5*time.Minute, mgr.GetDeviceStore(), networkinstance.NetworkInstancePath)).
+		WithPredicate(predicate.Prefix(networkinstance.NetworkInstancePath)).
+		WithWorkerCount(2).
+		Build()
+
+	mgr.AddController(niCtrl)
+	log.Printf("Huawei network-instance controller registered successfully")
 
 	// Register the BusinessVlan CRD intent source (场景② 意图面收编 Stack B),
 	// parallel to the legacy Actor path. Degrades gracefully without a K8s cluster.
