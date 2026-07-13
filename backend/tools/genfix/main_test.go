@@ -1,8 +1,12 @@
 package main
 
 import (
+	"bytes"
+	"compress/gzip"
+	"encoding/json"
 	"os"
 	"path/filepath"
+	"strings"
 	"testing"
 )
 
@@ -65,14 +69,134 @@ func TestFixSource(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got := fixSource(tt.in)
+			got, err := fixSource(tt.in)
+			if err != nil {
+				t.Fatalf("fixSource() error = %v", err)
+			}
 			if got != tt.want {
 				t.Errorf("fixSource() = %q, want %q", got, tt.want)
 			}
-			if again := fixSource(got); again != tt.want {
+			again, err := fixSource(got)
+			if err != nil {
+				t.Fatalf("fixSource() 二次 error = %v", err)
+			}
+			if again != tt.want {
 				t.Errorf("fixSource 不幂等: 第二次执行 = %q, want %q", again, tt.want)
 			}
 		})
+	}
+}
+
+// makeYSchemaBlock 用 jsonStr 构造一个 ygot 同款 ySchema gzip blob 声明块。
+// 故意用非确定性无关的 gzip（默认级别）——genfix 会重压为确定性形式。
+func makeYSchemaBlock(t *testing.T, jsonStr string) string {
+	t.Helper()
+	var buf bytes.Buffer
+	w := gzip.NewWriter(&buf)
+	if _, err := w.Write([]byte(jsonStr)); err != nil {
+		t.Fatal(err)
+	}
+	if err := w.Close(); err != nil {
+		t.Fatal(err)
+	}
+	return "\tySchema = []byte{\n" + emitHexBytes(buf.Bytes()) + "\n\t}"
+}
+
+// extractSchemaJSON 从 fixSource 处理后的块中取回 schema JSON（供语义断言）。
+func extractSchemaJSON(t *testing.T, src string) []byte {
+	t.Helper()
+	m := ySchemaBlock.FindStringSubmatch(src)
+	if m == nil {
+		t.Fatalf("未找到 ySchema 块: %q", src)
+	}
+	raw, err := parseHexBytes(m[2])
+	if err != nil {
+		t.Fatal(err)
+	}
+	j, err := gunzip(raw)
+	if err != nil {
+		t.Fatal(err)
+	}
+	return j
+}
+
+func TestFixSchemaBlobDeterministic(t *testing.T) {
+	// 同一 schema、Augmented 多种顺序 → genfix 后字节一致。用 5 个元素（含 3+）
+	// 以暴露 decorate-sort 错位 bug（2 元素时会假性通过）。
+	elems := []string{
+		`{"Name":"aaa","Config":1}`, `{"Name":"bbb","Config":0}`,
+		`{"Name":"ccc","Config":2}`, `{"Name":"ddd","Config":0}`,
+		`{"Name":"eee","Config":1}`,
+	}
+	wrap := func(order []int) string {
+		parts := make([]string, len(order))
+		for i, o := range order {
+			parts[i] = elems[o]
+		}
+		return `{"Name":"root","Dir":{"iface":{"Augmented":[` + strings.Join(parts, ",") + `]}}}`
+	}
+	orders := [][]int{{0, 1, 2, 3, 4}, {4, 3, 2, 1, 0}, {2, 0, 4, 1, 3}, {1, 4, 0, 3, 2}}
+	var canonical string
+	for i, ord := range orders {
+		fixed, err := fixSource(makeYSchemaBlock(t, wrap(ord)))
+		if err != nil {
+			t.Fatalf("fixSource(order %v) error = %v", ord, err)
+		}
+		if i == 0 {
+			canonical = fixed
+		} else if fixed != canonical {
+			t.Errorf("Augmented 顺序 %v 的 genfix 输出与基准不一致", ord)
+		}
+	}
+}
+
+func TestFixSchemaBlobSemanticEquiv(t *testing.T) {
+	// 规范化后 schema 语义等价：键集合与值不变，仅 Augmented 排序。
+	in := `{"Name":"root","Dir":{"iface":{"Augmented":[{"Name":"b"},{"Name":"a"}]}}}`
+	fixed, err := fixSource(makeYSchemaBlock(t, in))
+	if err != nil {
+		t.Fatalf("fixSource error = %v", err)
+	}
+	var got map[string]interface{}
+	if err := json.Unmarshal(extractSchemaJSON(t, fixed), &got); err != nil {
+		t.Fatal(err)
+	}
+	aug := got["Dir"].(map[string]interface{})["iface"].(map[string]interface{})["Augmented"].([]interface{})
+	names := []string{
+		aug[0].(map[string]interface{})["Name"].(string),
+		aug[1].(map[string]interface{})["Name"].(string),
+	}
+	if names[0] != "a" || names[1] != "b" {
+		t.Errorf("Augmented 未按稳定序排序: got %v, want [a b]", names)
+	}
+}
+
+func TestFixSchemaBlobPreservesNumbers(t *testing.T) {
+	// UseNumber 保证大整数不被 float64 重格式化损坏。
+	const big = "18446744073709551615" // max uint64
+	in := `{"Name":"root","Big":` + big + `,"Config":0}`
+	fixed, err := fixSource(makeYSchemaBlock(t, in))
+	if err != nil {
+		t.Fatalf("fixSource error = %v", err)
+	}
+	j := extractSchemaJSON(t, fixed)
+	if !bytes.Contains(j, []byte(big)) {
+		t.Errorf("大整数被损坏，规范化后 JSON = %s", j)
+	}
+}
+
+func TestFixSchemaBlobIdempotent(t *testing.T) {
+	in := `{"Name":"root","Dir":{"iface":{"Augmented":[{"Name":"b"},{"Name":"a"}]}}}`
+	once, err := fixSource(makeYSchemaBlock(t, in))
+	if err != nil {
+		t.Fatalf("fixSource error = %v", err)
+	}
+	twice, err := fixSource(once)
+	if err != nil {
+		t.Fatalf("fixSource 二次 error = %v", err)
+	}
+	if once != twice {
+		t.Errorf("schema 规范化不幂等\n一次=%q\n二次=%q", once, twice)
 	}
 }
 
