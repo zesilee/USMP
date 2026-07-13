@@ -36,11 +36,11 @@
 
 ## 4. XML 编解码等价性（B1 + golden 方法论）
 
-- [ ] 4.1 [红] 用 `xmlcodec.Canonicalize` 建立公网 BGP 编码/解码 golden fixtures，落 `internal/testutil/hwfix`（`-args -update-golden` 刷新）
-- [ ] 4.2 编码单测：`/bgp:bgp/base-process` 全字段编码→根 namespace 正确（BGP-02）、config-false 在发字段不被 schema 过滤（D5）
-- [ ] 4.3 解码单测：running config XML → `HuaweiBgp_Bgp` 结构体，Decode 锚定顶层容器；键式 delete 场景（若小容器/leaf 涉及）
-- [ ] 4.4 全属性可配单测：**从生成结构体枚举 `/bgp:bgp/global`+`base-process` 全部 rw 字段**（禁字段挑选），逐一编码下发+原值回读；含 confederation/graceful-restart/reference-period/timer/default-parameter 全部可配字段（BGP-01 完整性）
-- [ ] 4.5 config-false 负用例：断言 `base-process` 下 config-false 态（vpn-brief-infos/graceful-restart-status/error-discard-info/remote-prefix-sid-states）不出现在 edit-config 下发报文（BGP-01/BGP-06）
+- [x] 4.1 编码/解码精确形态断言（container_test.go：根 namespace、嵌套、空自闭合、rpc-reply/data 包裹、namespace 前缀）——等价 golden 冻结意图；未另落 golden 文件（精确断言已覆盖）
+- [x] 4.2 编码：完备性测试内断言根 namespace `urn:huawei:yang:huawei-bgp`、config-false 不入报文（commit 3fb9179）
+- [x] 4.3 解码：container_test 解码 + 完备性往返；~~键式 delete~~ 容器根 delete 缺（EncodeDelete 返干净错误非 panic，API parseDeleteTarget 亦干净报错）→ **债留 group 4b**：BGP MVP 禁用走 enable=false modify，node-delete 后续单列
+- [x] 4.4 **全属性可配（schema 驱动，反射枚举全 29 config-true 标量含 leaf-list，禁挑选）**：编码→解码→DeepEqual + 计数断言=29；当场揪出 default-parameter 误判 rw、confederation/as leaf-list 漏覆盖（commit 3fb9179，BGP-01 完整性）
+- [x] 4.5 config-false 负用例：断言 default-parameter/error-discard-info/graceful-restart-status/vpn-brief-infos/remote-prefix-sid-states 不出现在 edit-config（commit 3fb9179，BGP-06）
 
 ## 5. 模拟网元 BGP 方言 + 端到端集成（B2）
 
