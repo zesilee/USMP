@@ -10,6 +10,16 @@
 - [x] 1.3 入口名锚定：`type HuaweiBgp_Bgp struct` + `SchemaTree["HuaweiBgp_Bgp"]`（与 VLAN 同机制），全公网子树 struct 齐全（_Global/_BaseProcess/_Confederation/_GracefulRestart/_ReferencePeriod/_Timer/_DefaultParameter）— 回填 design D4
 - [x] 1.4 结论分支：落 (a) 变体——D2 确认（modules 仅加 huawei-bgp）；~73k 行闭包生成权衡**用户已拍板接受**（2026-07-13），强制缓解=proposal/spec 登记 generated-but-not-integrated 边界（已落）
 
+## 1B. genfix 确定性 schema 规范化（前置 G2 的共享基础设施，spike 暴露；CG-02 扩展）
+
+> BGP 全闭包含多模块 augment 同一目标（bfd/ethernet/tunnel-management → ifm/network-instance），触发 goyang 非确定 augment 序 → schema blob 字节漂移 → R04 门禁永失败。必须先修 genfix 才能落 G2。
+
+- [ ] 1B.1 [红] 写 genfix schema 规范化单测：构造含 `Augmented` 双序的 gzip schema fixture → 规范化后字节一致；`ygot.GzipToSchema` 前后语义等价（键集合/类型/约束不变）；幂等 no-op
+- [ ] 1B.2 [绿] 实现规范化：定位 `var ySchema = []byte{…}` → gunzip → JSON 用 `Decoder.UseNumber()` 解析（避免数字重格式化）→ 递归排序无序集合数组（首要 `Augmented`，按元素规范化内容排序）+ 对象键 → 固定参数 gzip（无时间戳/固定级别）→ 按确定格式回填 byte 数组
+- [ ] 1B.3 验证不影响基线：基线（vlan/ifm/system/pub-type/extension，无 Augmented 漂移）经新 genfix 后 `all.gen.go` 字节不变（`git diff` 空）；`go build ./...` 通过
+- [ ] 1B.4 端到端确定性：临时加 huawei-bgp 后连续两次 `make gen-yang VENDOR=huawei` → `all.gen.go` 字节一致（消解 CG-03 门禁阻塞）；若仍漂移则定位下一个非确定数组并纳入排序
+- [ ] 1B.5 补 `yang-codegen-pipeline` delta（MODIFY CG-02）已随本 change specs 提交；确认覆盖率/门禁对齐
+
 ## 2. ygot 生成落地（R04）
 
 - [ ] 2.1 正式在 `gen.conf` 追加 `huawei-bgp`（含 spike 结论要求的任何附加模块），`make gen-yang` 生成 `backend/internal/generated/huawei/*`
