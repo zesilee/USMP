@@ -37,7 +37,7 @@ func TestMarshalChange_IfmTypedInnerMap(t *testing.T) {
 	require.NoError(t, err)
 
 	// 合法 ifm XML 的特征
-	assert.Contains(t, out, `<interfaces xmlns="urn:huawei:params:xml:ns:yang:huawei-ifm">`)
+	assert.Contains(t, out, `<ifm xmlns="urn:huawei:params:xml:ns:yang:huawei-ifm"><interfaces>`)
 	assert.Contains(t, out, `<interface>`)
 	assert.Contains(t, out, `<name>GigabitEthernet0/0/9</name>`)
 	assert.Contains(t, out, `<description>uplink</description>`)

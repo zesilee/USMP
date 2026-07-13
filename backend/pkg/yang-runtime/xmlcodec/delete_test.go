@@ -57,8 +57,8 @@ func TestEncodeDeleteRawShape(t *testing.T) {
 	if strings.Contains(out, "<name>") || strings.Contains(out, "<description>") {
 		t.Errorf("delete encoding must carry key leaves only: %s", out)
 	}
-	if !strings.HasPrefix(out, `<vlans xmlns="`+vlanNS+`">`) {
-		t.Errorf("missing namespaced model container: %s", out)
+	if !strings.HasPrefix(out, `<vlan xmlns="`+vlanNS+`"><vlans>`) {
+		t.Errorf("missing namespaced module container wrapper: %s", out)
 	}
 }
 

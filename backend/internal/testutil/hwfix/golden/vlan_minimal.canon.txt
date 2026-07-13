@@ -1,1 +1,1 @@
-{urn:huawei:params:xml:ns:yang:huawei-vlan}vlans({urn:huawei:params:xml:ns:yang:huawei-vlan}vlan({urn:huawei:params:xml:ns:yang:huawei-vlan}id(30)))
+{urn:huawei:params:xml:ns:yang:huawei-vlan}vlan({urn:huawei:params:xml:ns:yang:huawei-vlan}vlans({urn:huawei:params:xml:ns:yang:huawei-vlan}vlan({urn:huawei:params:xml:ns:yang:huawei-vlan}id(30))))

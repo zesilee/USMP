@@ -22,7 +22,7 @@ func TestMarshalDeleteChangeVlan(t *testing.T) {
 		t.Fatalf("marshalChange: %v", err)
 	}
 	for _, want := range []string{
-		`<vlans xmlns="` + HuaweiVlanNS + `">`,
+		`<vlan xmlns="` + HuaweiVlanNS + `"><vlans>`,
 		`nc:operation="delete"`,
 		`xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0"`,
 		`<id>10</id>`,
@@ -66,7 +66,7 @@ func TestMarshalDeleteChangeIfm(t *testing.T) {
 		t.Fatalf("marshalChange: %v", err)
 	}
 	for _, want := range []string{
-		`<interfaces xmlns="` + HuaweiIfmNS + `">`,
+		`<ifm xmlns="` + HuaweiIfmNS + `"><interfaces>`,
 		`nc:operation="delete"`,
 		`<name>GigabitEthernet0/0/1</name>`,
 	} {

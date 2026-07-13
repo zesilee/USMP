@@ -53,6 +53,48 @@ func (s *Spec) resolve(listName string) (*resolved, error) {
 	return r, nil
 }
 
+// wrappers returns the list container's ancestor container element names,
+// outermost-first (e.g. ["ifm"] for interfaces, ["vlan"] for vlans), excluding
+// the synthetic fake root. The edit-config payload must nest the list container
+// inside these so it matches the device's YANG data tree（真机与模拟器种子
+// DemoSeedConfig 均把 list 容器嵌套在模块顶层容器下）——扁平根会在设备树里匹配不到
+// 存量条目，正是「内置接口删不掉」的根因。列表容器若直接挂在 fake root 下则返回空
+// （无模块容器可包，退回扁平根 + 自带 xmlns，R08 降级）。
+func (r *resolved) wrappers() []string {
+	var names []string
+	for p := r.schema.Parent; p != nil && p.Parent != nil; p = p.Parent {
+		names = append(names, p.Name)
+	}
+	for i, j := 0, len(names)-1; i < j; i, j = i+1, j-1 {
+		names[i], names[j] = names[j], names[i]
+	}
+	return names
+}
+
+// openWrappers writes the ancestor container open tags; xmlns is declared on the
+// outermost wrapper only (inner containers inherit it, matching the seed shape
+// <ifm xmlns=NS><interfaces>). Returns true if any wrapper was written, so the
+// list container omits its own redundant xmlns.
+func openWrappers(b *strings.Builder, r *resolved) bool {
+	w := r.wrappers()
+	for i, name := range w {
+		if i == 0 {
+			fmt.Fprintf(b, "<%s xmlns=%q>", name, r.ns)
+		} else {
+			fmt.Fprintf(b, "<%s>", name)
+		}
+	}
+	return len(w) > 0
+}
+
+// closeWrappers writes the ancestor container close tags in innermost-first order.
+func closeWrappers(b *strings.Builder, r *resolved) {
+	w := r.wrappers()
+	for i := len(w) - 1; i >= 0; i-- {
+		fmt.Fprintf(b, "</%s>", w[i])
+	}
+}
+
 // keyNames returns the list key leaf names in YANG order, or nil if unknown.
 func (r *resolved) keyNames() []string {
 	if r.list == nil || r.list.Key == "" {
@@ -111,16 +153,27 @@ func Encode(spec *Spec, v ygot.GoStruct) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	if mapVal.IsNil() || mapVal.Len() == 0 {
-		return fmt.Sprintf("<%s xmlns=%q/>", r.root, r.ns), nil
-	}
-
 	var b strings.Builder
-	fmt.Fprintf(&b, "<%s xmlns=%q>", r.root, r.ns)
+	wrapped := openWrappers(&b, r)
+	if mapVal.IsNil() || mapVal.Len() == 0 {
+		if wrapped {
+			fmt.Fprintf(&b, "<%s/>", r.root)
+		} else {
+			fmt.Fprintf(&b, "<%s xmlns=%q/>", r.root, r.ns)
+		}
+		closeWrappers(&b, r)
+		return b.String(), nil
+	}
+	if wrapped {
+		fmt.Fprintf(&b, "<%s>", r.root)
+	} else {
+		fmt.Fprintf(&b, "<%s xmlns=%q>", r.root, r.ns)
+	}
 	if err := encodeList(&b, r, mapVal, elemTag, nil); err != nil {
 		return "", err
 	}
 	fmt.Fprintf(&b, "</%s>", r.root)
+	closeWrappers(&b, r)
 	return b.String(), nil
 }
 

@@ -9,6 +9,7 @@ import (
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/client"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/device"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/reconcile"
+	netsim "github.com/leezesi/usmp/backend/simulator/netconfsim"
 	"github.com/leezesi/usmp/backend/simulator/netconfsim/testsupport"
 	"github.com/stretchr/testify/assert"
 
@@ -127,6 +128,40 @@ func TestDeleteConfig_Integration_IfmEndToEnd(t *testing.T) {
 	res = ifmctl.New(cs, pool, ds).Reconcile(context.Background(), reconcile.Request{DeviceID: deviceID, Path: ifmPath})
 	assert.Nil(t, res.Error)
 	assert.Equal(t, 0, res.Changes)
+}
+
+// BR-09 回归（「内置接口删不掉」bug，T07）：删除设备既有但 desired 里没有的**种子**接口
+// （模拟器 DemoSeedConfig 嵌套在 <ifm> 下，正是部署态 UI 列出的物理口）。修复前 edit-config
+// 发扁平 <interfaces> 在设备嵌套树里匹配不到条目 → 删除落空、对账 subset 语义还误报「已收敛」。
+// 断言：种子接口真正从设备消失，且二轮对账不复活。
+func TestDeleteConfig_Integration_SeededInterfaceEndToEnd(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping integration test in short mode")
+	}
+	sim, cs, pool, ds, deviceID := newVlanSimStack(t)
+	defer sim.Stop()
+	defer pool.CloseAll()
+
+	// 部署态：设备已带种子接口，desired 为空（新起后端未存过意图）。
+	sim.SetRunningConfigXML([]byte(netsim.DemoSeedConfig))
+	ifmPath := "/ifm:ifm/ifm:interfaces"
+	testsupport.AssertHuaweiInterfaceExists(t, sim, "200GE0/1/2")
+
+	// UI 删除流：storeConfigDeleted 对空 desired 是幂等 no-op，删除靠命令通道同步下发。
+	target, err := parseDeleteTarget(ifmPath, "200GE0/1/2")
+	assert.NoError(t, err)
+	assert.NoError(t, storeConfigDeleted(cs, deviceID, ifmPath, target))
+	assert.NoError(t, pushDeleteViaPool(t, pool, ds, deviceID, target))
+
+	assert.NotContains(t, sim.RunningHuaweiInterfaces(), "200GE0/1/2",
+		"种子接口必须真正从设备删除（修复前扁平报文匹配不到嵌套条目而落空）")
+	// 同表其它种子接口不受影响
+	assert.Contains(t, sim.RunningHuaweiInterfaces(), "200GE0/1/0")
+
+	// 二轮对账：desired 空、actual 已删该口 → 收敛且不复活
+	res := ifmctl.New(cs, pool, ds).Reconcile(context.Background(), reconcile.Request{DeviceID: deviceID, Path: ifmPath})
+	assert.Nil(t, res.Error)
+	assert.NotContains(t, sim.RunningHuaweiInterfaces(), "200GE0/1/2", "deleted seeded interface must not resurrect")
 }
 
 // R09：并发删除不同键与合并下发交错——desired 串行化、设备终态正确（-race）。

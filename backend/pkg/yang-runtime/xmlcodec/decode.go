@@ -35,9 +35,20 @@ func Decode(spec *Spec, raw []byte, dst ygot.GoStruct) error {
 	if len(raw) == 0 {
 		return nil
 	}
+	r, err := spec.resolve(elemTag)
+	if err != nil {
+		return err
+	}
 
+	// List entries are only decoded while inside their list container (r.root,
+	// e.g. <vlans>/<interfaces>). Anchoring here is essential for Huawei models
+	// whose module container shares the entry's name（<vlan><vlans><vlan>）——a
+	// naive "scan for <vlan> anywhere" would mis-match the outer module container
+	// as a bogus entry. depth counts open r.root containers (robust to the
+	// rpc-reply/data/module-container wrappers a get-config reply carries).
 	dec := xml.NewDecoder(bytes.NewReader(raw))
 	idx := 0
+	depth := 0
 	for {
 		tok, err := dec.Token()
 		if err == io.EOF {
@@ -46,20 +57,31 @@ func Decode(spec *Spec, raw []byte, dst ygot.GoStruct) error {
 		if err != nil {
 			return fmt.Errorf("xmlcodec decode: %w", err)
 		}
-		se, ok := tok.(xml.StartElement)
-		if !ok || se.Name.Local != elemTag {
-			continue
+		switch se := tok.(type) {
+		case xml.StartElement:
+			switch se.Name.Local {
+			case r.root:
+				depth++
+			case elemTag:
+				if depth == 0 {
+					continue // outside the list container: not an entry (wrapper collision)
+				}
+				entry := reflect.New(mapVal.Type().Elem().Elem()) // *EntryStruct
+				if err := decodeStruct(dec, se, entry.Elem()); err != nil {
+					return fmt.Errorf("xmlcodec decode <%s>: %w", elemTag, err)
+				}
+				key, err := entryKey(entry, mapVal.Type().Key(), elemTag, idx)
+				if err != nil {
+					return err
+				}
+				mapVal.SetMapIndex(key, entry)
+				idx++
+			}
+		case xml.EndElement:
+			if se.Name.Local == r.root && depth > 0 {
+				depth--
+			}
 		}
-		entry := reflect.New(mapVal.Type().Elem().Elem()) // *EntryStruct
-		if err := decodeStruct(dec, se, entry.Elem()); err != nil {
-			return fmt.Errorf("xmlcodec decode <%s>: %w", elemTag, err)
-		}
-		key, err := entryKey(entry, mapVal.Type().Key(), elemTag, idx)
-		if err != nil {
-			return err
-		}
-		mapVal.SetMapIndex(key, entry)
-		idx++
 	}
 }
 

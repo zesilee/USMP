@@ -3,22 +3,22 @@ package client
 import (
 	"testing"
 
+	"github.com/leezesi/usmp/backend/internal/generated/huawei"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"github.com/leezesi/usmp/backend/internal/generated/huawei"
 )
 
 func TestBuildHuaweiVlanVlansXML_NilInput(t *testing.T) {
 	result, err := buildHuaweiVlanVlansXML(nil)
 	require.NoError(t, err)
-	assert.Equal(t, `<vlans xmlns="urn:huawei:params:xml:ns:yang:huawei-vlan"/>`, result)
+	assert.Equal(t, `<vlan xmlns="urn:huawei:params:xml:ns:yang:huawei-vlan"><vlans/></vlan>`, result)
 }
 
 func TestBuildHuaweiVlanVlansXML_EmptyInput(t *testing.T) {
 	vlans := &huawei.HuaweiVlan_Vlan_Vlans{}
 	result, err := buildHuaweiVlanVlansXML(vlans)
 	require.NoError(t, err)
-	assert.Equal(t, `<vlans xmlns="urn:huawei:params:xml:ns:yang:huawei-vlan"/>`, result)
+	assert.Equal(t, `<vlan xmlns="urn:huawei:params:xml:ns:yang:huawei-vlan"><vlans/></vlan>`, result)
 }
 
 func TestBuildHuaweiVlanVlansXML_SingleVlan(t *testing.T) {
@@ -31,21 +31,21 @@ func TestBuildHuaweiVlanVlansXML_SingleVlan(t *testing.T) {
 	desc := "Test Description"
 
 	vlans.Vlan[vlanID] = &huawei.HuaweiVlan_Vlan_Vlans_Vlan{
-		Id:              &vlanID,
-		Name:            &name,
-		Description:     &desc,
-		AdminStatus:     huawei.E_HuaweiVlan_AdminStatus(2), // up
-		Type:            huawei.E_HuaweiVlan_VlanType(1),   // common
+		Id:               &vlanID,
+		Name:             &name,
+		Description:      &desc,
+		AdminStatus:      huawei.E_HuaweiVlan_AdminStatus(2),  // up
+		Type:             huawei.E_HuaweiVlan_VlanType(1),     // common
 		BroadcastDiscard: huawei.E_HuaweiVlan_EnableStatus(2), // disable
-		MacLearning:     huawei.E_HuaweiVlan_EnableStatus(1), // enable
-		StatisticEnable: huawei.E_HuaweiVlan_EnableStatus(1), // enable
+		MacLearning:      huawei.E_HuaweiVlan_EnableStatus(1), // enable
+		StatisticEnable:  huawei.E_HuaweiVlan_EnableStatus(1), // enable
 	}
 
 	result, err := buildHuaweiVlanVlansXML(vlans)
 	require.NoError(t, err)
 
 	// Verify the result contains expected elements
-	assert.Contains(t, result, `<vlans xmlns="urn:huawei:params:xml:ns:yang:huawei-vlan">`)
+	assert.Contains(t, result, `<vlan xmlns="urn:huawei:params:xml:ns:yang:huawei-vlan"><vlans>`)
 	assert.Contains(t, result, `<vlan>`)
 	assert.Contains(t, result, `<id>100</id>`)
 	assert.Contains(t, result, `<name>TestVLAN</name>`)
@@ -157,7 +157,7 @@ func TestMarshalChange_HuaweiVlan(t *testing.T) {
 	result, err := nc.marshalChange(change)
 	require.NoError(t, err)
 
-	assert.Contains(t, result, `<vlans xmlns="urn:huawei:params:xml:ns:yang:huawei-vlan">`)
+	assert.Contains(t, result, `<vlan xmlns="urn:huawei:params:xml:ns:yang:huawei-vlan"><vlans>`)
 	assert.Contains(t, result, `<id>100</id>`)
 	assert.Contains(t, result, `<name>TestVLAN</name>`)
 }

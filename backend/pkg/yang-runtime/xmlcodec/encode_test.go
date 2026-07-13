@@ -74,7 +74,7 @@ func TestEncodeRawShape(t *testing.T) {
 		if err != nil {
 			t.Fatal(err)
 		}
-		want := `<vlans xmlns="` + vlanNS + `"><vlan><id>30</id></vlan></vlans>`
+		want := `<vlan xmlns="` + vlanNS + `"><vlans><vlan><id>30</id></vlan></vlans></vlan>`
 		if out != want {
 			t.Errorf("got %s\nwant %s", out, want)
 		}
@@ -84,7 +84,7 @@ func TestEncodeRawShape(t *testing.T) {
 		if err != nil {
 			t.Fatal(err)
 		}
-		if want := `<interfaces xmlns="` + ifmNS + `"/>`; out != want {
+		if want := `<ifm xmlns="` + ifmNS + `"><interfaces/></ifm>`; out != want {
 			t.Errorf("got %s want %s", out, want)
 		}
 	})
