@@ -113,9 +113,20 @@ func TestDecodeEdgeCases(t *testing.T) {
 			t.Error("want error for truncated XML")
 		}
 	})
-	t.Run("non-numeric enum", func(t *testing.T) {
+	t.Run("enum decodes by YANG name", func(t *testing.T) {
+		// XC-08：枚举按值域名解码（真机/本引擎 encode 均发名），"up" → AdminStatus_up。
 		got := &huawei.HuaweiVlan_Vlan_Vlans{}
-		err := Decode(vlanSpec(), []byte(`<vlans><vlan><id>1</id><admin-status>up</admin-status></vlan></vlans>`), got)
+		if err := Decode(vlanSpec(), []byte(`<vlans><vlan><id>1</id><admin-status>up</admin-status></vlan></vlans>`), got); err != nil {
+			t.Fatalf("枚举名解码不应报错: %v", err)
+		}
+		if got.Vlan[1] == nil || got.Vlan[1].AdminStatus != huawei.HuaweiVlan_AdminStatus_up {
+			t.Errorf("admin-status=up 未解码为枚举常量: %#v", got.Vlan[1])
+		}
+	})
+	t.Run("unknown enum value errors", func(t *testing.T) {
+		// 真正非法的枚举值（非名非整数）SHALL 报错命名该叶（R08，不静默）。
+		got := &huawei.HuaweiVlan_Vlan_Vlans{}
+		err := Decode(vlanSpec(), []byte(`<vlans><vlan><id>1</id><admin-status>bogus-xyz</admin-status></vlan></vlans>`), got)
 		if err == nil || !strings.Contains(err.Error(), "admin-status") {
 			t.Errorf("want parse error naming the leaf, got %v", err)
 		}

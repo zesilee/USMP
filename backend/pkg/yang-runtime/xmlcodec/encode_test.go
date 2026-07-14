@@ -211,3 +211,25 @@ func TestEncodeConcurrent(t *testing.T) {
 }
 
 func hwuint32(v uint32) *uint32 { return &v }
+
+// TestEncode_EnumEmitsYANGName 是 XC-08 回归锚点：合法枚举 leaf SHALL 编码为其 YANG
+// 值域名（真机据此校验），SHALL NOT 发整数。此缺陷曾潜伏于 vlan/ifm（golden 固化整数、
+// 宽容 sim 测不出），由 acl 的 mandatory type 枚举在完备矩阵中暴露。
+func TestEncode_EnumEmitsYANGName(t *testing.T) {
+	id := uint16(1)
+	v := &huawei.HuaweiVlan_Vlan_Vlans{
+		Vlan: map[uint16]*huawei.HuaweiVlan_Vlan_Vlans_Vlan{
+			1: {Id: &id, AdminStatus: huawei.HuaweiVlan_AdminStatus_up},
+		},
+	}
+	out, err := Encode(vlanSpec(), v)
+	if err != nil {
+		t.Fatalf("Encode: %v", err)
+	}
+	if !strings.Contains(out, "<admin-status>up</admin-status>") {
+		t.Errorf("枚举须发值域名 <admin-status>up</admin-status>\n实际: %s", out)
+	}
+	if strings.Contains(out, "<admin-status>2</admin-status>") {
+		t.Errorf("枚举不得发整数\n实际: %s", out)
+	}
+}

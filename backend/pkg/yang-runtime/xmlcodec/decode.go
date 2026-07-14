@@ -153,12 +153,20 @@ func decodeField(dec *xml.Decoder, start xml.StartElement, fv reflect.Value) err
 		if err != nil {
 			return err
 		}
-		n, err := strconv.ParseInt(text, 10, 64)
-		if err != nil {
-			return fmt.Errorf("leaf %s: non-numeric enum value %q", tag, text)
+		// 值域名解码（XC-08）：真机/本引擎 encode 均发 YANG 名（如 "basic"），经 ΛMap
+		// 反查 名→int。兼容旧整数形态（回退 ParseInt）以不破坏历史报文。
+		enum := fv.Interface().(ygot.GoEnum)
+		for val, def := range enum.ΛMap()[fv.Type().Name()] {
+			if def.Name == text {
+				fv.SetInt(val)
+				return nil
+			}
 		}
-		fv.SetInt(n)
-		return nil
+		if n, perr := strconv.ParseInt(text, 10, 64); perr == nil {
+			fv.SetInt(n)
+			return nil
+		}
+		return fmt.Errorf("leaf %s: unknown enum value %q", tag, text)
 	}
 	switch fv.Kind() {
 	case reflect.Ptr:
