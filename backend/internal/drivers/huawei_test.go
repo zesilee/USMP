@@ -2,6 +2,7 @@ package drivers
 
 import (
 	"strings"
+	"sync"
 	"testing"
 
 	"github.com/leezesi/usmp/backend/internal/generated/huawei"
@@ -449,5 +450,85 @@ func TestHuaweiDescriptors_AclEncodeDecodeRoundtrip(t *testing.T) {
 	}
 	if rt.Group6S.Group6["G6"] == nil || rt.Group6S.Group6["G6"].Type != huawei.HuaweiAcl_Group6Type_basic {
 		t.Fatalf("回读 group6 枚举不等价: %#v", rt.Group6S)
+	}
+}
+
+// BGP 2b 波次⑤：AF import-filter-policy 策略属性（acl-name-or-num→acl、filter-name→xpl）
+// 经既有 network-instance 描述符编码——零新描述符，`<bgp>` 子树带 huawei-bgp namespace
+// （XC-06），leaf 值真值正确（AFPOL-01）。证明 2b 全链路：AF 策略属性→已集成目标模型。
+func TestHuaweiDescriptors_BgpAfImportFilterPolicyEncode(t *testing.T) {
+	// 复用 ni 描述符（谓词已覆盖 af 路径），零新描述符
+	d, ok := driver.Route("/ni:network-instance/instances/instance/bgp:bgp/base-process/afs/af/ipv4-unicast/import-filter-policy")
+	if !ok || d.ControllerToken != "network-instance" {
+		t.Fatalf("AF 策略属性路径应由 ni 描述符处理，得 token=%q ok=%v", d.ControllerToken, ok)
+	}
+	enc, ok := driver.EncoderFor("/ni:network-instance")
+	if !ok || enc.XML == nil {
+		t.Fatal("ni 编码描述符/XML Spec 应命中")
+	}
+	dest := enc.NewStruct()
+	j := `{"instances":{"instance":[{"name":"_public_","bgp":{"base-process":{"afs":{"af":[` +
+		`{"type":"ipv4uni","ipv4-unicast":{"import-filter-policy":` +
+		`{"acl-name-or-num":"G1","filter-name":"RF1","filter-parameter":"P1"}}}]}}}}]}}`
+	if err := enc.Unmarshal([]byte(j), dest); err != nil {
+		t.Fatalf("RFC7951 解码失败: %v", err)
+	}
+	xml, err := xmlcodec.Encode(enc.XML, dest)
+	if err != nil {
+		t.Fatalf("XML 编码失败: %v", err)
+	}
+	for _, want := range []string{
+		`<bgp xmlns="urn:huawei:yang:huawei-bgp">`,
+		"<import-filter-policy>",
+		"<acl-name-or-num>G1</acl-name-or-num>",
+		"<filter-name>RF1</filter-name>",
+		"<filter-parameter>P1</filter-parameter>",
+	} {
+		if !strings.Contains(xml, want) {
+			t.Errorf("AF 策略属性编码缺 %q\n实际: %s", want, xml)
+		}
+	}
+	// 回读真值等价（经 ni decode）
+	dec, _ := driver.DecoderFor("/ni:network-instance")
+	parsed, err := dec.DecodeXML([]byte(xml))
+	if err != nil {
+		t.Fatalf("XML 解码失败: %v", err)
+	}
+	rt := parsed.(*huawei.HuaweiNetworkInstance_NetworkInstance)
+	af := rt.Instances.Instance["_public_"].Bgp.BaseProcess.Afs.Af[huawei.HuaweiBgp_AfType_ipv4uni]
+	ifp := af.Ipv4Unicast.ImportFilterPolicy
+	if ifp == nil || ifp.AclNameOrNum == nil || *ifp.AclNameOrNum != "G1" || ifp.FilterName == nil || *ifp.FilterName != "RF1" {
+		t.Fatalf("回读 AF 策略属性真值不等价: %#v", ifp)
+	}
+}
+
+// AF 策略属性并发编码无竞态 + 空 import-filter-policy 不 panic（AFPOL-03，R08/R09）。
+func TestHuaweiDescriptors_BgpAfPolicy_ConcurrentAndNegative(t *testing.T) {
+	enc, _ := driver.EncoderFor("/ni:network-instance")
+	j := `{"instances":{"instance":[{"name":"_public_","bgp":{"base-process":{"afs":{"af":[{"type":"ipv4uni","ipv4-unicast":{"import-filter-policy":{"acl-name-or-num":"G1"}}}]}}}}]}}`
+	dest := enc.NewStruct()
+	if err := enc.Unmarshal([]byte(j), dest); err != nil {
+		t.Fatalf("unmarshal: %v", err)
+	}
+	var wg sync.WaitGroup
+	for i := 0; i < 16; i++ {
+		wg.Add(1)
+		go func() {
+			defer wg.Done()
+			if _, err := xmlcodec.Encode(enc.XML, dest); err != nil {
+				t.Errorf("concurrent encode: %v", err)
+			}
+		}()
+	}
+	wg.Wait()
+	// 负路径：空 _public_ 实例（无 afs）编码不 panic、不发策略元素
+	empty := enc.NewStruct()
+	_ = enc.Unmarshal([]byte(`{"instances":{"instance":[{"name":"_public_"}]}}`), empty)
+	xml, err := xmlcodec.Encode(enc.XML, empty)
+	if err != nil {
+		t.Fatalf("empty encode: %v", err)
+	}
+	if strings.Contains(xml, "import-filter-policy") {
+		t.Errorf("空实例不应含策略元素: %s", xml)
 	}
 }
