@@ -32,6 +32,9 @@ const (
 	// HuaweiNetworkInstanceNS 取 8.20.10 huawei-network-instance.yang 声明的 module
 	// namespace（BGP peering 的唯一硬前置，peers/afs/peer-groups 均 augment 于此根下）。
 	HuaweiNetworkInstanceNS = "urn:huawei:yang:huawei-network-instance"
+	// HuaweiTunnelManagementNS 取 8.20.10 huawei-tunnel-management.yang 声明的 module
+	// namespace（BGP 2b tunnel-policy leafref 目标，越序禁令要求先接成可配模型）。
+	HuaweiTunnelManagementNS = "urn:huawei:yang:huawei-tunnel-management"
 )
 
 func init() {
@@ -57,6 +60,10 @@ func init() {
 			"huawei-network-instance": HuaweiNetworkInstanceNS,
 			"huawei-bgp":              HuaweiBgpNS,
 		},
+	}
+	tnlmXML := &xmlcodec.Spec{
+		Namespace: HuaweiTunnelManagementNS,
+		Schema:    func() *yang.Entry { return huawei.SchemaTree["HuaweiTunnelManagement_TunnelManagement"] },
 	}
 
 	// 注册序 = 原 manager if-链检查序（system → vlan → ifm），先注册先匹配。
@@ -152,5 +159,26 @@ func init() {
 		NewStruct:   func() ygot.GoStruct { return &huawei.HuaweiNetworkInstance_NetworkInstance{} },
 		Unmarshal:   huawei.Unmarshal,
 		XML:         niXML,
+	})
+	// tunnel-management（/tnlm:tunnel-management）——BGP 2b tunnel-policy leafref 前置
+	// （越序禁令：目标模型须先可配，TNLM-01/03）。容器根模块（非 list 根），与 /bgp:bgp
+	// 同构，走通用引擎 plain-container（XC-05）。谓词用 HasPrefix "/tnlm:tunnel-management"
+	// 精确锚定：tnlm-ext 数据 augment 入本树不独立成根，裸前缀不误命中其他模块。
+	driver.Register(driver.Descriptor{
+		Vendor: "huawei", Module: "tunnel-management",
+		MatchRoute:      func(p string) bool { return strings.HasPrefix(p, "/tnlm:tunnel-management") },
+		ControllerToken: "tunnel-management",
+		MatchDecode:     func(p string) bool { return strings.HasPrefix(p, "/tnlm:tunnel-management") },
+		DecodeXML: func(raw []byte) (ygot.GoStruct, error) {
+			v := &huawei.HuaweiTunnelManagement_TunnelManagement{}
+			if err := xmlcodec.Decode(tnlmXML, raw, v); err != nil {
+				return nil, err
+			}
+			return v, nil
+		},
+		MatchEncode: func(p string) bool { return strings.HasPrefix(p, "/tnlm:tunnel-management") },
+		NewStruct:   func() ygot.GoStruct { return &huawei.HuaweiTunnelManagement_TunnelManagement{} },
+		Unmarshal:   huawei.Unmarshal,
+		XML:         tnlmXML,
 	})
 }

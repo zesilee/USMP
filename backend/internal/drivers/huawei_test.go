@@ -38,6 +38,12 @@ var dispatchEquivalence = []struct {
 	{"/ni:network-instance/instances/instance/bgp:bgp/base-process", "network-instance", "network-instance", "network-instance"},
 	// network-instance 负路径：前缀含 "network-instance" 但非 "/ni:network-instance" 起头
 	{"/ni-feature:network-instance-x", "", "", ""},
+	// tunnel-management 根（BGP 2b tunnel-policy leafref 前置，TNLM-03）：三处均命中
+	{"/tnlm:tunnel-management", "tunnel-management", "tunnel-management", "tunnel-management"},
+	{"/tnlm:tunnel-management/tunnel-policys/tunnel-policy", "tunnel-management", "tunnel-management", "tunnel-management"},
+	// tunnel-management 负路径：ext 模块（tnlm-ext）数据 augment 入 tnlm 树、不独立成根，
+	// 裸前缀不得误命中（谓词精确锚定 "/tnlm:tunnel-management"）
+	{"/tnlm-ext:foo", "", "", ""},
 	// 未覆盖路径：三处均降级
 	{"/route:routing", "", "", ""},
 	{"", "", "", ""},
@@ -203,5 +209,63 @@ func TestHuaweiDescriptors_VlanDecodeSmoke(t *testing.T) {
 	parsed, err := d.DecodeXML(xml)
 	if err != nil || parsed == nil {
 		t.Fatalf("vlan XML 解码应成功: %v", err)
+	}
+}
+
+// tunnel-management 描述符全链路真值往返（RFC7951 写 → XML 编码下发 → XML 回读），
+// 覆盖容器根标量边界：tunnel-policy(name+description) 嵌套 list + tunnel-down-switch
+// enable 标量（TNLM-01/02）。BGP 2b tunnel-policy leafref 的目标实例经此路径可配。
+func TestHuaweiDescriptors_TunnelManagementEncodeDecodeRoundtrip(t *testing.T) {
+	enc, ok := driver.EncoderFor("/tnlm:tunnel-management")
+	if !ok {
+		t.Fatal("tunnel-management 编码描述符应命中")
+	}
+	dest := enc.NewStruct()
+	if err := enc.Unmarshal([]byte(`{"tunnel-policys":{"tunnel-policy":[{"name":"P1","description":"policy one"}]},"tunnel-down-switch":{"enable":true}}`), dest); err != nil {
+		t.Fatalf("RFC7951 解码失败: %v", err)
+	}
+	tm, ok := dest.(*huawei.HuaweiTunnelManagement_TunnelManagement)
+	if !ok || tm.TunnelPolicys == nil || tm.TunnelDownSwitch == nil {
+		t.Fatalf("NewStruct/Unmarshal 装配错误: %#v", dest)
+	}
+	p := tm.TunnelPolicys.TunnelPolicy["P1"]
+	if p == nil || p.Description == nil || *p.Description != "policy one" {
+		t.Fatalf("tunnel-policy 未正确解码: %#v", tm.TunnelPolicys)
+	}
+	if tm.TunnelDownSwitch.Enable == nil || !*tm.TunnelDownSwitch.Enable {
+		t.Fatalf("tunnel-down-switch/enable 未正确解码: %#v", tm.TunnelDownSwitch)
+	}
+
+	if enc.XML == nil {
+		t.Fatal("tunnel-management 描述符缺 XML Spec（下发通道未装配）")
+	}
+	xml, err := xmlcodec.Encode(enc.XML, tm)
+	if err != nil {
+		t.Fatalf("XML 编码失败: %v", err)
+	}
+	for _, want := range []string{
+		`xmlns="urn:huawei:yang:huawei-tunnel-management"`,
+		"<name>P1</name>", "<description>policy one</description>", "<enable>true</enable>",
+	} {
+		if !strings.Contains(xml, want) {
+			t.Errorf("下发 XML 缺 %q\n实际: %s", want, xml)
+		}
+	}
+
+	dec, ok := driver.DecoderFor("/tnlm:tunnel-management")
+	if !ok {
+		t.Fatal("tunnel-management 解码描述符应命中")
+	}
+	parsed, err := dec.DecodeXML([]byte(xml))
+	if err != nil {
+		t.Fatalf("XML 解码失败: %v", err)
+	}
+	rt := parsed.(*huawei.HuaweiTunnelManagement_TunnelManagement)
+	rp := rt.TunnelPolicys.TunnelPolicy["P1"]
+	if rp == nil || rp.Description == nil || *rp.Description != "policy one" {
+		t.Fatalf("回读嵌套 list 真值不等价: %#v", rt.TunnelPolicys)
+	}
+	if rt.TunnelDownSwitch == nil || rt.TunnelDownSwitch.Enable == nil || !*rt.TunnelDownSwitch.Enable {
+		t.Fatalf("回读 tunnel-down-switch 真值不等价: %#v", rt.TunnelDownSwitch)
 	}
 }
