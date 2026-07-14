@@ -54,6 +54,12 @@ var dispatchEquivalence = []struct {
 	{"/rtp:routing-policy/policy-definitions/policy-definition", "routing-policy", "routing-policy", "routing-policy"},
 	// routing-policy 负路径：前缀含 "routing" 但非 "/rtp:routing-policy" 起头
 	{"/route:routing-x", "", "", ""},
+	// acl 根（BGP 2b ACL group leafref 前置，ACL-03）：三处均命中
+	{"/acl:acl", "acl", "acl", "acl"},
+	{"/acl:acl/groups/group", "acl", "acl", "acl"},
+	{"/acl:acl/group6s/group6", "acl", "acl", "acl"},
+	// acl 负路径：前缀含 "acl" 但非 "/acl:acl" 起头，谓词精确锚定不误命中
+	{"/acl-x:y", "", "", ""},
 	// 未覆盖路径：三处均降级
 	{"/route:routing", "", "", ""},
 	{"", "", "", ""},
@@ -381,5 +387,67 @@ func TestHuaweiDescriptors_RoutingPolicyEncodeDecodeRoundtrip(t *testing.T) {
 	rpd := rt.PolicyDefinitions.PolicyDefinition["RP1"]
 	if rpd == nil || rpd.AddressFamilyMismatchDeny == nil || !*rpd.AddressFamilyMismatchDeny {
 		t.Fatalf("回读嵌套 list 真值不等价: %#v", rt.PolicyDefinitions)
+	}
+}
+
+// acl 描述符全链路真值往返（RFC7951 写 → XML 编码下发 → XML 回读），覆盖容器根下
+// groups/group(IPv4) + group6s/group6(IPv6) 标量+枚举边界（ACL-01/02）。首次覆盖枚举
+// leaf（type/match-order）：断言编码为值域名、回读还原枚举常量。BGP 2b ACL group
+// leafref 的目标实例经此路径可配。
+func TestHuaweiDescriptors_AclEncodeDecodeRoundtrip(t *testing.T) {
+	enc, ok := driver.EncoderFor("/acl:acl")
+	if !ok {
+		t.Fatal("acl 编码描述符应命中")
+	}
+	dest := enc.NewStruct()
+	raw := `{"groups":{"group":[{"identity":"G1","type":"basic","match-order":"config","description":"d1","number":2001}]},` +
+		`"group6s":{"group6":[{"identity":"G6","type":"basic"}]}}`
+	if err := enc.Unmarshal([]byte(raw), dest); err != nil {
+		t.Fatalf("RFC7951 解码失败: %v", err)
+	}
+	acl, ok := dest.(*huawei.HuaweiAcl_Acl)
+	if !ok || acl.Groups == nil || acl.Group6S == nil {
+		t.Fatalf("NewStruct/Unmarshal 装配错误: %#v", dest)
+	}
+	g := acl.Groups.Group["G1"]
+	if g == nil || g.Type != huawei.HuaweiAcl_Group4Type_basic {
+		t.Fatalf("group type 枚举未正确解码: %#v", g)
+	}
+	if g.Description == nil || *g.Description != "d1" {
+		t.Fatalf("group description 未正确解码: %#v", g)
+	}
+
+	if enc.XML == nil {
+		t.Fatal("acl 描述符缺 XML Spec（下发通道未装配）")
+	}
+	xml, err := xmlcodec.Encode(enc.XML, acl)
+	if err != nil {
+		t.Fatalf("XML 编码失败: %v", err)
+	}
+	for _, want := range []string{
+		`xmlns="urn:huawei:yang:huawei-acl"`,
+		"<identity>G1</identity>", "<type>basic</type>", "<match-order>config</match-order>",
+		"<identity>G6</identity>",
+	} {
+		if !strings.Contains(xml, want) {
+			t.Errorf("下发 XML 缺 %q（枚举须为值域名，非整数）\n实际: %s", want, xml)
+		}
+	}
+
+	dec, ok := driver.DecoderFor("/acl:acl")
+	if !ok {
+		t.Fatal("acl 解码描述符应命中")
+	}
+	parsed, err := dec.DecodeXML([]byte(xml))
+	if err != nil {
+		t.Fatalf("XML 解码失败: %v", err)
+	}
+	rt := parsed.(*huawei.HuaweiAcl_Acl)
+	rg := rt.Groups.Group["G1"]
+	if rg == nil || rg.Type != huawei.HuaweiAcl_Group4Type_basic || rg.MatchOrder != huawei.HuaweiAcl_MatchOrder_config {
+		t.Fatalf("回读枚举真值不等价: %#v", rg)
+	}
+	if rt.Group6S.Group6["G6"] == nil || rt.Group6S.Group6["G6"].Type != huawei.HuaweiAcl_Group6Type_basic {
+		t.Fatalf("回读 group6 枚举不等价: %#v", rt.Group6S)
 	}
 }

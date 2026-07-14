@@ -42,6 +42,9 @@ const (
 	// （BGP 2b import/export route-policy leafref 目标
 	// /rtp:routing-policy/policy-definitions/policy-definition，越序禁令要求先接成可配模型）。
 	HuaweiRoutingPolicyNS = "urn:huawei:yang:huawei-routing-policy"
+	// HuaweiAclNS 取 8.20.10 huawei-acl.yang 声明的 module namespace（BGP 2b ACL group
+	// leafref 目标 /acl:acl/groups/group 与 /acl:acl/group6s/group6，越序禁令要求先接成可配模型）。
+	HuaweiAclNS = "urn:huawei:yang:huawei-acl"
 )
 
 func init() {
@@ -79,6 +82,10 @@ func init() {
 	rtpXML := &xmlcodec.Spec{
 		Namespace: HuaweiRoutingPolicyNS,
 		Schema:    func() *yang.Entry { return huawei.SchemaTree["HuaweiRoutingPolicy_RoutingPolicy"] },
+	}
+	aclXML := &xmlcodec.Spec{
+		Namespace: HuaweiAclNS,
+		Schema:    func() *yang.Entry { return huawei.SchemaTree["HuaweiAcl_Acl"] },
 	}
 
 	// 注册序 = 原 manager if-链检查序（system → vlan → ifm），先注册先匹配。
@@ -237,5 +244,26 @@ func init() {
 		NewStruct:   func() ygot.GoStruct { return &huawei.HuaweiRoutingPolicy_RoutingPolicy{} },
 		Unmarshal:   huawei.Unmarshal,
 		XML:         rtpXML,
+	})
+	// acl（/acl:acl）——BGP 2b ACL group leafref 前置（越序禁令：目标模型须先可配，
+	// ACL-01/03）。容器根模块，与 /bgp:bgp 等同构，走通用引擎 plain-container（XC-05）。
+	// 谓词 HasPrefix "/acl:acl" 精确锚定。本波次功能面仅 groups/group + group6s/group6
+	// 标量/枚举边界；深层 rule-* 与 ip-pools/port-pools 仍 generated-but-not-integrated。
+	driver.Register(driver.Descriptor{
+		Vendor: "huawei", Module: "acl",
+		MatchRoute:      func(p string) bool { return strings.HasPrefix(p, "/acl:acl") },
+		ControllerToken: "acl",
+		MatchDecode:     func(p string) bool { return strings.HasPrefix(p, "/acl:acl") },
+		DecodeXML: func(raw []byte) (ygot.GoStruct, error) {
+			v := &huawei.HuaweiAcl_Acl{}
+			if err := xmlcodec.Decode(aclXML, raw, v); err != nil {
+				return nil, err
+			}
+			return v, nil
+		},
+		MatchEncode: func(p string) bool { return strings.HasPrefix(p, "/acl:acl") },
+		NewStruct:   func() ygot.GoStruct { return &huawei.HuaweiAcl_Acl{} },
+		Unmarshal:   huawei.Unmarshal,
+		XML:         aclXML,
 	})
 }
