@@ -18,7 +18,7 @@
 
 ## 4. 提交与合入
 
-- [ ] 4.1 What/Why/How 三段式提交（≤500 行/commit，超限拆 codec / sim+tests）
-- [ ] 4.2 `/opsx:sync`：XC-08 delta → 主 spec
-- [ ] 4.3 `/opsx:archive`：归档 change
+- [x] 4.1 What/Why/How 三段式提交（≤500 行/commit，超限拆 codec / sim+tests）
+- [x] 4.2 `/opsx:sync`：XC-08 delta → 主 spec
+- [x] 4.3 `/opsx:archive`：归档 change
 - [ ] 4.4 push + PR，CI 全绿后合入；合入后波次④ acl rebase
