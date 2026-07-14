@@ -31,7 +31,7 @@
 
 ## 6. 提交与合入
 
-- [ ] 6.1 What/Why/How 三段式提交（≤500 行/commit，原子功能，超限拆描述符+codec / reconciler+B2）
-- [ ] 6.2 `/opsx:sync`：delta spec → 主 spec
-- [ ] 6.3 `/opsx:archive`：归档 change
+- [x] 6.1 What/Why/How 三段式提交（≤500 行/commit，原子功能，超限拆描述符+codec / reconciler+B2）
+- [x] 6.2 `/opsx:sync`：delta spec → 主 spec
+- [x] 6.3 `/opsx:archive`：归档 change
 - [ ] 6.4 push + PR（≤1000 行），CI required checks 全绿后合入
