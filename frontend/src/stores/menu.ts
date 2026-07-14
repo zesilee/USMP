@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
+import { listYangModules } from '../api'
 
 interface NativeModel {
   name: string
@@ -22,8 +23,10 @@ export const useMenuStore = defineStore('menu', () => {
   async function loadNativeModules() {
     if (nativeLoaded.value) return
     try {
-      const res = await fetch('/api/v1/yang/modules')
-      const data = await res.json()
+      // 必须走 api 客户端（绝对 baseURL）：staging nginx 不代理 /api，裸相对
+      // fetch('/api/...') 会命中 SPA fallback 返回 index.html → JSON 解析报错。
+      const res = await listYangModules()
+      const data = res.data
       const mods = (data.data || []).map((m: any) => ({
         name: m.name,
         title: m.description || m.title || m.name,

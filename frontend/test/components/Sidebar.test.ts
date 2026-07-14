@@ -4,6 +4,14 @@ import Sidebar from '../../src/components/layout/Sidebar.vue'
 import { createPinia, setActivePinia } from 'pinia'
 import { createRouter, createWebHistory } from 'vue-router'
 import ElementPlus from 'element-plus'
+import * as apiModule from '../../src/api'
+
+// 菜单模块列表走 api 客户端（listYangModules，绝对 baseURL）——staging nginx
+// 不代理 /api，裸相对 fetch 会命中 SPA fallback 返回 index.html。测试统一 mock
+// 该导出，而非 stubGlobal(fetch)。
+function mockYangModules(data: any[]) {
+  return vi.spyOn(apiModule, 'listYangModules').mockResolvedValue({ data: { data } } as any)
+}
 
 vi.mock('@element-plus/icons-vue', () => ({
   DataLine: { template: '<span />' },
@@ -65,9 +73,7 @@ describe('Sidebar · 原生配置菜单模型驱动（FE-13）', () => {
   })
 
   it('原生配置子菜单项来自 menu store，指向 /module/:name', async () => {
-    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({
-      json: async () => ({ data: [{ name: 'ifm', description: '接口管理', vendor: 'huawei' }] })
-    }))
+    mockYangModules([{ name: 'ifm', description: '接口管理', vendor: 'huawei' }])
     const wrapper = mount(Sidebar, { global: { plugins: [router, ElementPlus] } })
     await new Promise((r) => setTimeout(r))
     expect(wrapper.text()).toContain('接口管理')
@@ -76,7 +82,7 @@ describe('Sidebar · 原生配置菜单模型驱动（FE-13）', () => {
   })
 
   it('模块列表加载失败：回退内置项，菜单不空（R08）', async () => {
-    vi.stubGlobal('fetch', vi.fn().mockRejectedValue(new Error('down')))
+    vi.spyOn(apiModule, 'listYangModules').mockRejectedValue(new Error('down'))
     const wrapper = mount(Sidebar, { global: { plugins: [router, ElementPlus] } })
     await new Promise((r) => setTimeout(r))
     expect(wrapper.text()).toContain('接口管理')
@@ -92,14 +98,10 @@ describe('Sidebar · 业务菜单任务域分组（FE-13）', () => {
 
   it('模块带 category → 渲染分组标题；未标注模块归「其他」', async () => {
     setActivePinia(createPinia())
-    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({
-      json: async () => ({
-        data: [
-          { name: 'ifm', description: '接口管理', vendor: 'huawei', category: 'interface-mgr' },
-          { name: 'interfaces', description: 'oc 接口', vendor: 'openconfig' },
-        ],
-      }),
-    }))
+    mockYangModules([
+      { name: 'ifm', description: '接口管理', vendor: 'huawei', category: 'interface-mgr' },
+      { name: 'interfaces', description: 'oc 接口', vendor: 'openconfig' },
+    ])
     const wrapper = mount(Sidebar, { global: { plugins: [router, ElementPlus] } })
     await new Promise((r) => setTimeout(r))
     expect(wrapper.text()).toContain('interface-mgr')
@@ -110,11 +112,7 @@ describe('Sidebar · 业务菜单任务域分组（FE-13）', () => {
 
   it('全部无 category → 不渲染分组标题（平铺，渲染不失败 R08）', async () => {
     setActivePinia(createPinia())
-    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({
-      json: async () => ({
-        data: [{ name: 'ifm', description: '接口管理', vendor: 'huawei' }],
-      }),
-    }))
+    mockYangModules([{ name: 'ifm', description: '接口管理', vendor: 'huawei' }])
     const wrapper = mount(Sidebar, { global: { plugins: [router, ElementPlus] } })
     await new Promise((r) => setTimeout(r))
     expect(wrapper.find('[data-test="module-item-ifm"]').exists()).toBe(true)

@@ -67,6 +67,13 @@ export const getSchema = (path: string) => {
   return api.get<ApiResponse<any>>(`/schema/${path}`)
 }
 
+// YANG 模块列表（原生配置菜单驱动，FE-13）。必须走 api 客户端（绝对 baseURL）：
+// staging 下 nginx 不代理 /api，裸相对 fetch('/api/...') 会命中 SPA fallback 返回
+// index.html，res.json() 抛「Unexpected token '<'」。
+export const listYangModules = () => {
+  return api.get<ApiResponse<any[]>>('/yang/modules')
+}
+
 // YANG 模块动态表单 schema。走 api 客户端（绝对 baseURL，staging 下 nginx 不代理 /api，
 // 故不能用裸相对 fetch）。form='nested' 返回嵌套树（保留 member-ports 等 list-in-list）。
 export const getYangSchema = (module: string, form?: 'nested') => {
