@@ -53,12 +53,12 @@ func TestBuildHuaweiIfmInterfacesXML_SingleInterface(t *testing.T) {
 	assert.Contains(t, result, `<interface>`)
 	assert.Contains(t, result, `<name>GigabitEthernet0/0/1</name>`)
 	assert.Contains(t, result, `<description>Test Interface</description>`)
-	assert.Contains(t, result, `<admin-status>2</admin-status>`)
+	assert.Contains(t, result, `<admin-status>up</admin-status>`)
 	assert.Contains(t, result, `<mtu>1500</mtu>`)
 	assert.Contains(t, result, `<bandwidth>1000000</bandwidth>`)
 	assert.Contains(t, result, `<mac-address>00:11:22:33:44:55</mac-address>`)
-	assert.Contains(t, result, `<type>6</type>`)
-	assert.Contains(t, result, `<class>1</class>`)
+	assert.Contains(t, result, `<type>Ip-Trunk</type>`)
+	assert.Contains(t, result, `<class>main-interface</class>`)
 	assert.Contains(t, result, `</interface>`)
 	assert.Contains(t, result, `</interfaces>`)
 }
@@ -140,7 +140,7 @@ func TestBuildHuaweiIfmInterfacesXML_DampContainer(t *testing.T) {
 
 	assert.Contains(t, result, `<damp>`)
 	assert.Contains(t, result, `<auto>`)
-	assert.Contains(t, result, `<level>2</level>`)
+	assert.Contains(t, result, `<level>middle</level>`)
 	assert.Contains(t, result, `</auto>`)
 	assert.Contains(t, result, `<manual>`)
 	assert.Contains(t, result, `<half-life-period>10</half-life-period>`)
@@ -172,7 +172,7 @@ func TestBuildHuaweiIfmInterfacesXML_ErrorDownContainer(t *testing.T) {
 	require.NoError(t, err)
 
 	assert.Contains(t, result, `<error-down>`)
-	assert.Contains(t, result, `<cause>1</cause>`)
+	assert.Contains(t, result, `<cause>bpdu-protection</cause>`)
 	assert.Contains(t, result, `<recovery-time>300</recovery-time>`)
 	assert.Contains(t, result, `<remainder-time>150</remainder-time>`)
 	assert.Contains(t, result, `</error-down>`)

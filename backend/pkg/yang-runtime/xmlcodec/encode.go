@@ -366,12 +366,8 @@ func encodeField(b *strings.Builder, tag string, fv reflect.Value, schema *yang.
 		if fv.Int() == 0 { // UNSET
 			return nil
 		}
-		if ns == "" {
-			fmt.Fprintf(b, "<%s>%d</%s>", tag, fv.Int(), tag)
-		} else {
-			fmt.Fprintf(b, "<%s xmlns=%q>%d</%s>", tag, ns, fv.Int(), tag)
-		}
-		return nil
+		// 值域名编码（XC-08）：委托 encodeLeaf，与 key 枚举走同一 ygot.EnumName 路径。
+		return encodeLeaf(b, tag, fv, ns)
 	}
 	switch fv.Kind() {
 	case reflect.Ptr:
@@ -434,6 +430,22 @@ func encodeLeaf(b *strings.Builder, tag string, v reflect.Value, ns string) erro
 	openEl, closeEl := "<"+tag+">", "</"+tag+">"
 	if ns != "" {
 		openEl = fmt.Sprintf("<%s xmlns=%q>", tag, ns)
+	}
+	// YANG enumeration（ygot GoEnum，derived int64）：真机按值域名（如 "basic"）校验，
+	// SHALL NOT 发整数（XC-08）。经 ygot.EnumName 由 ΛMap 映射 int→名；UNSET(0) 跳发。
+	// 映射不到（ΛMap 无此值——仅合成/异常值会命中，真机有效枚举必在 ΛMap）时退回整数，
+	// 不报错（R08：不因单个异常枚举值中断整树编码）。
+	if v.Type().Implements(goEnumType) {
+		if name, err := ygot.EnumName(v.Interface().(ygot.GoEnum)); err == nil {
+			if name == "" { // UNSET
+				return nil
+			}
+			b.WriteString(openEl + escape(name) + closeEl)
+			return nil
+		}
+		// 退回整数（合成值/未映射值）
+		fmt.Fprintf(b, "%s%d%s", openEl, v.Int(), closeEl)
+		return nil
 	}
 	switch v.Kind() {
 	case reflect.String:

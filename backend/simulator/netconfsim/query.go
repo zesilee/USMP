@@ -1,9 +1,34 @@
 package netconfsim
 
 import (
+	"reflect"
 	"strconv"
 	"strings"
+
+	"github.com/openconfig/ygot/ygot"
+
+	"github.com/leezesi/usmp/backend/internal/generated/huawei"
 )
+
+// enumInt resolves a YANG enumeration leaf's on-wire text to its ygot int value.
+// 真机/通用引擎 encode 发值域名（如 "up"），本模拟器读回后经 sample 枚举的 ΛMap 反查
+// 名→int（XC-08）。兼容历史整数形态（回退 Atoi）。sample 是该叶对应 ygot 枚举的零值，
+// 提供 ΛMap 与类型名。text 为空/未知返回 0（UNSET）。
+func enumInt(text string, sample ygot.GoEnum) int {
+	text = strings.TrimSpace(text)
+	if text == "" {
+		return 0
+	}
+	if n, err := strconv.Atoi(text); err == nil {
+		return n
+	}
+	for v, def := range sample.ΛMap()[reflect.TypeOf(sample).Name()] {
+		if def.Name == text {
+			return int(v)
+		}
+	}
+	return 0
+}
 
 // Structured, tree-based read queries over the running config, replacing the
 // legacy blob Datastore's XML token-walking Extract* helpers. testsupport (and a
@@ -111,34 +136,34 @@ func (s *Simulator) RunningHuaweiVLANsFull() map[uint16]*HuaweiVlanTestData {
 			ID:                      id,
 			Name:                    v.leaf("name"),
 			Description:             v.leaf("description"),
-			Type:                    toInt(v.leaf("type")),
-			AdminStatus:             toInt(v.leaf("admin-status", "adminstatus")),
-			BroadcastDiscard:        toInt(v.leaf("broadcast-discard", "broadcastdiscard")),
-			UnknownMulticastDiscard: toInt(v.leaf("unknown-multicast-discard", "unknownmulticastdiscard")),
-			MacLearning:             toInt(v.leaf("mac-learning", "maclearning")),
+			Type:                    enumInt(v.leaf("type"), huawei.HuaweiVlan_VlanType_UNSET),
+			AdminStatus:             enumInt(v.leaf("admin-status", "adminstatus"), huawei.HuaweiVlan_AdminStatus_UNSET),
+			BroadcastDiscard:        enumInt(v.leaf("broadcast-discard", "broadcastdiscard"), huawei.HuaweiVlan_EnableStatus_UNSET),
+			UnknownMulticastDiscard: enumInt(v.leaf("unknown-multicast-discard", "unknownmulticastdiscard"), huawei.HuaweiVlan_EnableStatus_UNSET),
+			MacLearning:             enumInt(v.leaf("mac-learning", "maclearning"), huawei.HuaweiVlan_EnableStatus_UNSET),
 			MacAgingTime:            toU32(v.leaf("mac-aging-time", "macagingtime")),
-			StatisticEnable:         toInt(v.leaf("statistic-enable", "statisticenable")),
-			StatisticDiscard:        toInt(v.leaf("statistic-discard", "statisticdiscard")),
+			StatisticEnable:         enumInt(v.leaf("statistic-enable", "statisticenable"), huawei.HuaweiVlan_EnableStatus_UNSET),
+			StatisticDiscard:        enumInt(v.leaf("statistic-discard", "statisticdiscard"), huawei.HuaweiVlan_EnableStatus_UNSET),
 		}
 		if sv := v.childFold("super-vlan", "supervlan"); sv != nil {
 			x := toU16(sv.leafText())
 			d.SuperVlan = &x
 		}
 		if u := v.childFold("unkown-unicast-discard", "unknown-unicast-discard", "unkownunicastdiscard"); u != nil {
-			d.UnkownUnicastDiscard.Discard = toInt(u.leaf("discard"))
-			d.UnkownUnicastDiscard.MacLearningEnable = toInt(u.leaf("mac-learning-enable", "maclearningenable"))
+			d.UnkownUnicastDiscard.Discard = enumInt(u.leaf("discard"), huawei.HuaweiVlan_EnableStatus_UNSET)
+			d.UnkownUnicastDiscard.MacLearningEnable = enumInt(u.leaf("mac-learning-enable", "maclearningenable"), huawei.HuaweiVlan_EnableStatus_UNSET)
 		}
 		if sup := v.childFold("suppression"); sup != nil {
-			d.Suppression.Inbound = toInt(sup.leaf("inbound"))
-			d.Suppression.Outbound = toInt(sup.leaf("outbound"))
+			d.Suppression.Inbound = enumInt(sup.leaf("inbound"), huawei.HuaweiVlan_EnableStatus_UNSET)
+			d.Suppression.Outbound = enumInt(sup.leaf("outbound"), huawei.HuaweiVlan_EnableStatus_UNSET)
 		}
 		if mp := v.childFold("member-ports", "memberports"); mp != nil {
 			for _, c := range mp.Children {
 				if strings.EqualFold(c.Name.Local, "member-port") || strings.EqualFold(c.Name.Local, "memberport") {
 					d.MemberPorts = append(d.MemberPorts, HuaweiVlanMemberPort{
 						InterfaceName: c.leaf("interface-name", "interfacename"),
-						AccessType:    toInt(c.leaf("access-type", "accesstype")),
-						TagMode:       toInt(c.leaf("tag-mode", "tagmode")),
+						AccessType:    enumInt(c.leaf("access-type", "accesstype"), huawei.HuaweiVlan_AccessType_UNSET),
+						TagMode:       enumInt(c.leaf("tag-mode", "tagmode"), huawei.HuaweiVlan_TagMode_UNSET),
 					})
 				}
 			}
@@ -169,12 +194,12 @@ func (s *Simulator) RunningHuaweiInterfaces() map[string]*HuaweiInterfaceTestDat
 			Number:               e.leaf("number"),
 			Position:             e.leaf("position"),
 			ParentName:           e.leaf("parent-name", "parentname"),
-			AdminStatus:          toInt(e.leaf("admin-status", "adminstatus")),
-			Type:                 toInt(e.leaf("type")),
-			Class:                toInt(e.leaf("class")),
-			LinkProtocol:         toInt(e.leaf("link-protocol", "linkprotocol")),
-			RouterType:           toInt(e.leaf("router-type", "routertype")),
-			ServiceType:          toInt(e.leaf("service-type", "servicetype")),
+			AdminStatus:          enumInt(e.leaf("admin-status", "adminstatus"), huawei.HuaweiIfm_PortStatus_UNSET),
+			Type:                 enumInt(e.leaf("type"), huawei.HuaweiIfm_PortType_UNSET),
+			Class:                enumInt(e.leaf("class"), huawei.HuaweiIfm_ClassType_UNSET),
+			LinkProtocol:         enumInt(e.leaf("link-protocol", "linkprotocol"), huawei.HuaweiIfm_LinkProtocol_UNSET),
+			RouterType:           enumInt(e.leaf("router-type", "routertype"), huawei.HuaweiIfm_RouterType_UNSET),
+			ServiceType:          enumInt(e.leaf("service-type", "servicetype"), huawei.HuaweiIfm_ServiceType_UNSET),
 			Mtu:                  toU32(e.leaf("mtu")),
 			MacAddress:           e.leaf("mac-address", "macaddress"),
 			Bandwidth:            toU32(e.leaf("bandwidth")),
@@ -191,7 +216,7 @@ func (s *Simulator) RunningHuaweiInterfaces() map[string]*HuaweiInterfaceTestDat
 			StatisticEnable:      toBool(e.leaf("statistic-enable", "statisticenable")),
 			SpreadMtuFlag:        toBool(e.leaf("spread-mtu-flag", "spreadmtuflag")),
 			StatisticInterval:    toU32(e.leaf("statistic-interval", "statisticinterval")),
-			StatisticMode:        toInt(e.leaf("statistic-mode", "statisticmode")),
+			StatisticMode:        enumInt(e.leaf("statistic-mode", "statisticmode"), huawei.HuaweiIfm_StatisticMode_UNSET),
 		}
 		if cf := e.childFold("control-flap", "controlflap"); cf != nil {
 			d.ControlFlap.Ceiling = toU32(cf.leaf("ceiling"))
