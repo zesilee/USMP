@@ -38,6 +38,10 @@ const (
 	// HuaweiXplNS 取 8.20.10 huawei-xpl.yang 声明的 module namespace（BGP 2b route-filter
 	// leafref 目标 /xpl:xpl/route-filters/route-filter，越序禁令要求先接成可配模型）。
 	HuaweiXplNS = "urn:huawei:yang:huawei-xpl"
+	// HuaweiRoutingPolicyNS 取 8.20.10 huawei-routing-policy.yang 声明的 module namespace
+	// （BGP 2b import/export route-policy leafref 目标
+	// /rtp:routing-policy/policy-definitions/policy-definition，越序禁令要求先接成可配模型）。
+	HuaweiRoutingPolicyNS = "urn:huawei:yang:huawei-routing-policy"
 )
 
 func init() {
@@ -71,6 +75,10 @@ func init() {
 	xplXML := &xmlcodec.Spec{
 		Namespace: HuaweiXplNS,
 		Schema:    func() *yang.Entry { return huawei.SchemaTree["HuaweiXpl_Xpl"] },
+	}
+	rtpXML := &xmlcodec.Spec{
+		Namespace: HuaweiRoutingPolicyNS,
+		Schema:    func() *yang.Entry { return huawei.SchemaTree["HuaweiRoutingPolicy_RoutingPolicy"] },
 	}
 
 	// 注册序 = 原 manager if-链检查序（system → vlan → ifm），先注册先匹配。
@@ -208,5 +216,26 @@ func init() {
 		NewStruct:   func() ygot.GoStruct { return &huawei.HuaweiXpl_Xpl{} },
 		Unmarshal:   huawei.Unmarshal,
 		XML:         xplXML,
+	})
+	// routing-policy（/rtp:routing-policy）——BGP 2b import/export route-policy leafref 前置
+	// （越序禁令：目标模型须先可配，RTP-01/03）。容器根模块，与 /bgp:bgp 等同构，走通用引擎
+	// plain-container（XC-05）。谓词 HasPrefix "/rtp:routing-policy" 精确锚定。本波次功能面仅
+	// policy-definitions/policy-definition 标量边界；深层 nodes 与其他 rtp filter 仍未集成。
+	driver.Register(driver.Descriptor{
+		Vendor: "huawei", Module: "routing-policy",
+		MatchRoute:      func(p string) bool { return strings.HasPrefix(p, "/rtp:routing-policy") },
+		ControllerToken: "routing-policy",
+		MatchDecode:     func(p string) bool { return strings.HasPrefix(p, "/rtp:routing-policy") },
+		DecodeXML: func(raw []byte) (ygot.GoStruct, error) {
+			v := &huawei.HuaweiRoutingPolicy_RoutingPolicy{}
+			if err := xmlcodec.Decode(rtpXML, raw, v); err != nil {
+				return nil, err
+			}
+			return v, nil
+		},
+		MatchEncode: func(p string) bool { return strings.HasPrefix(p, "/rtp:routing-policy") },
+		NewStruct:   func() ygot.GoStruct { return &huawei.HuaweiRoutingPolicy_RoutingPolicy{} },
+		Unmarshal:   huawei.Unmarshal,
+		XML:         rtpXML,
 	})
 }

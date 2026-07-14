@@ -49,6 +49,11 @@ var dispatchEquivalence = []struct {
 	{"/xpl:xpl/route-filters/route-filter", "xpl", "xpl", "xpl"},
 	// xpl 负路径：前缀含 "xpl" 但非 "/xpl:xpl" 起头，谓词精确锚定不误命中
 	{"/xpl-x:y", "", "", ""},
+	// routing-policy 根（BGP 2b import/export route-policy leafref 前置，RTP-03）：三处均命中
+	{"/rtp:routing-policy", "routing-policy", "routing-policy", "routing-policy"},
+	{"/rtp:routing-policy/policy-definitions/policy-definition", "routing-policy", "routing-policy", "routing-policy"},
+	// routing-policy 负路径：前缀含 "routing" 但非 "/rtp:routing-policy" 起头
+	{"/route:routing-x", "", "", ""},
 	// 未覆盖路径：三处均降级
 	{"/route:routing", "", "", ""},
 	{"", "", "", ""},
@@ -324,5 +329,57 @@ func TestHuaweiDescriptors_XplEncodeDecodeRoundtrip(t *testing.T) {
 	rrf := rt.RouteFilters.RouteFilter["RF1"]
 	if rrf == nil || rrf.Content == nil || *rrf.Content != "if-match protocol bgp" {
 		t.Fatalf("回读嵌套 list 真值不等价: %#v", rt.RouteFilters)
+	}
+}
+
+// routing-policy 描述符全链路真值往返（RFC7951 写 → XML 编码下发 → XML 回读），覆盖容器根
+// 下 policy-definitions/policy-definition(name+address-family-mismatch-deny) 标量边界
+// （RTP-01/02）。BGP 2b import/export route-policy leafref 的目标实例经此路径可配。
+func TestHuaweiDescriptors_RoutingPolicyEncodeDecodeRoundtrip(t *testing.T) {
+	enc, ok := driver.EncoderFor("/rtp:routing-policy")
+	if !ok {
+		t.Fatal("routing-policy 编码描述符应命中")
+	}
+	dest := enc.NewStruct()
+	if err := enc.Unmarshal([]byte(`{"policy-definitions":{"policy-definition":[{"name":"RP1","address-family-mismatch-deny":true}]}}`), dest); err != nil {
+		t.Fatalf("RFC7951 解码失败: %v", err)
+	}
+	rp, ok := dest.(*huawei.HuaweiRoutingPolicy_RoutingPolicy)
+	if !ok || rp.PolicyDefinitions == nil {
+		t.Fatalf("NewStruct/Unmarshal 装配错误: %#v", dest)
+	}
+	pd := rp.PolicyDefinitions.PolicyDefinition["RP1"]
+	if pd == nil || pd.AddressFamilyMismatchDeny == nil || !*pd.AddressFamilyMismatchDeny {
+		t.Fatalf("policy-definition 未正确解码: %#v", rp.PolicyDefinitions)
+	}
+
+	if enc.XML == nil {
+		t.Fatal("routing-policy 描述符缺 XML Spec（下发通道未装配）")
+	}
+	xml, err := xmlcodec.Encode(enc.XML, rp)
+	if err != nil {
+		t.Fatalf("XML 编码失败: %v", err)
+	}
+	for _, want := range []string{
+		`xmlns="urn:huawei:yang:huawei-routing-policy"`,
+		"<name>RP1</name>", "<address-family-mismatch-deny>true</address-family-mismatch-deny>",
+	} {
+		if !strings.Contains(xml, want) {
+			t.Errorf("下发 XML 缺 %q\n实际: %s", want, xml)
+		}
+	}
+
+	dec, ok := driver.DecoderFor("/rtp:routing-policy")
+	if !ok {
+		t.Fatal("routing-policy 解码描述符应命中")
+	}
+	parsed, err := dec.DecodeXML([]byte(xml))
+	if err != nil {
+		t.Fatalf("XML 解码失败: %v", err)
+	}
+	rt := parsed.(*huawei.HuaweiRoutingPolicy_RoutingPolicy)
+	rpd := rt.PolicyDefinitions.PolicyDefinition["RP1"]
+	if rpd == nil || rpd.AddressFamilyMismatchDeny == nil || !*rpd.AddressFamilyMismatchDeny {
+		t.Fatalf("回读嵌套 list 真值不等价: %#v", rt.PolicyDefinitions)
 	}
 }
