@@ -18,7 +18,7 @@
 
 ## 4. 提交与合入（BGP 2b 收官）
 
-- [ ] 4.1 What/Why/How 三段式提交（≤500 行/commit）
-- [ ] 4.2 `/opsx:sync`：AFPOL delta → 主 spec
-- [ ] 4.3 `/opsx:archive`：归档 change
+- [x] 4.1 What/Why/How 三段式提交（≤500 行/commit）
+- [x] 4.2 `/opsx:sync`：AFPOL delta → 主 spec
+- [x] 4.3 `/opsx:archive`：归档 change
 - [ ] 4.4 push + PR，CI 全绿后合入 → BGP 2b 完成
