@@ -44,6 +44,11 @@ var dispatchEquivalence = []struct {
 	// tunnel-management 负路径：ext 模块（tnlm-ext）数据 augment 入 tnlm 树、不独立成根，
 	// 裸前缀不得误命中（谓词精确锚定 "/tnlm:tunnel-management"）
 	{"/tnlm-ext:foo", "", "", ""},
+	// xpl 根（BGP 2b route-filter leafref 前置，XPL-03）：三处均命中
+	{"/xpl:xpl", "xpl", "xpl", "xpl"},
+	{"/xpl:xpl/route-filters/route-filter", "xpl", "xpl", "xpl"},
+	// xpl 负路径：前缀含 "xpl" 但非 "/xpl:xpl" 起头，谓词精确锚定不误命中
+	{"/xpl-x:y", "", "", ""},
 	// 未覆盖路径：三处均降级
 	{"/route:routing", "", "", ""},
 	{"", "", "", ""},
@@ -267,5 +272,57 @@ func TestHuaweiDescriptors_TunnelManagementEncodeDecodeRoundtrip(t *testing.T) {
 	}
 	if rt.TunnelDownSwitch == nil || rt.TunnelDownSwitch.Enable == nil || !*rt.TunnelDownSwitch.Enable {
 		t.Fatalf("回读 tunnel-down-switch 真值不等价: %#v", rt.TunnelDownSwitch)
+	}
+}
+
+// xpl 描述符全链路真值往返（RFC7951 写 → XML 编码下发 → XML 回读），覆盖容器根下
+// route-filters/route-filter(name+content) 嵌套 list（XPL-01/02）。BGP 2b route-filter
+// leafref 的目标实例经此路径可配。
+func TestHuaweiDescriptors_XplEncodeDecodeRoundtrip(t *testing.T) {
+	enc, ok := driver.EncoderFor("/xpl:xpl")
+	if !ok {
+		t.Fatal("xpl 编码描述符应命中")
+	}
+	dest := enc.NewStruct()
+	if err := enc.Unmarshal([]byte(`{"route-filters":{"route-filter":[{"name":"RF1","content":"if-match protocol bgp"}]}}`), dest); err != nil {
+		t.Fatalf("RFC7951 解码失败: %v", err)
+	}
+	xp, ok := dest.(*huawei.HuaweiXpl_Xpl)
+	if !ok || xp.RouteFilters == nil {
+		t.Fatalf("NewStruct/Unmarshal 装配错误: %#v", dest)
+	}
+	rf := xp.RouteFilters.RouteFilter["RF1"]
+	if rf == nil || rf.Content == nil || *rf.Content != "if-match protocol bgp" {
+		t.Fatalf("route-filter 未正确解码: %#v", xp.RouteFilters)
+	}
+
+	if enc.XML == nil {
+		t.Fatal("xpl 描述符缺 XML Spec（下发通道未装配）")
+	}
+	xml, err := xmlcodec.Encode(enc.XML, xp)
+	if err != nil {
+		t.Fatalf("XML 编码失败: %v", err)
+	}
+	for _, want := range []string{
+		`xmlns="urn:huawei:yang:huawei-xpl"`,
+		"<name>RF1</name>", "<content>if-match protocol bgp</content>",
+	} {
+		if !strings.Contains(xml, want) {
+			t.Errorf("下发 XML 缺 %q\n实际: %s", want, xml)
+		}
+	}
+
+	dec, ok := driver.DecoderFor("/xpl:xpl")
+	if !ok {
+		t.Fatal("xpl 解码描述符应命中")
+	}
+	parsed, err := dec.DecodeXML([]byte(xml))
+	if err != nil {
+		t.Fatalf("XML 解码失败: %v", err)
+	}
+	rt := parsed.(*huawei.HuaweiXpl_Xpl)
+	rrf := rt.RouteFilters.RouteFilter["RF1"]
+	if rrf == nil || rrf.Content == nil || *rrf.Content != "if-match protocol bgp" {
+		t.Fatalf("回读嵌套 list 真值不等价: %#v", rt.RouteFilters)
 	}
 }

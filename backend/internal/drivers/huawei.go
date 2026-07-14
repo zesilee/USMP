@@ -35,6 +35,9 @@ const (
 	// HuaweiTunnelManagementNS 取 8.20.10 huawei-tunnel-management.yang 声明的 module
 	// namespace（BGP 2b tunnel-policy leafref 目标，越序禁令要求先接成可配模型）。
 	HuaweiTunnelManagementNS = "urn:huawei:yang:huawei-tunnel-management"
+	// HuaweiXplNS 取 8.20.10 huawei-xpl.yang 声明的 module namespace（BGP 2b route-filter
+	// leafref 目标 /xpl:xpl/route-filters/route-filter，越序禁令要求先接成可配模型）。
+	HuaweiXplNS = "urn:huawei:yang:huawei-xpl"
 )
 
 func init() {
@@ -64,6 +67,10 @@ func init() {
 	tnlmXML := &xmlcodec.Spec{
 		Namespace: HuaweiTunnelManagementNS,
 		Schema:    func() *yang.Entry { return huawei.SchemaTree["HuaweiTunnelManagement_TunnelManagement"] },
+	}
+	xplXML := &xmlcodec.Spec{
+		Namespace: HuaweiXplNS,
+		Schema:    func() *yang.Entry { return huawei.SchemaTree["HuaweiXpl_Xpl"] },
 	}
 
 	// 注册序 = 原 manager if-链检查序（system → vlan → ifm），先注册先匹配。
@@ -180,5 +187,26 @@ func init() {
 		NewStruct:   func() ygot.GoStruct { return &huawei.HuaweiTunnelManagement_TunnelManagement{} },
 		Unmarshal:   huawei.Unmarshal,
 		XML:         tnlmXML,
+	})
+	// xpl（/xpl:xpl）——BGP 2b route-filter leafref 前置（越序禁令：目标模型须先可配，
+	// XPL-01/03）。容器根模块（非 list 根），与 /bgp:bgp、/tnlm:tunnel-management 同构，
+	// 走通用引擎 plain-container（XC-05）。谓词 HasPrefix "/xpl:xpl" 精确锚定。本波次功能
+	// 面仅 route-filters/route-filter；xpl 其他策略 list 仍 generated-but-not-integrated。
+	driver.Register(driver.Descriptor{
+		Vendor: "huawei", Module: "xpl",
+		MatchRoute:      func(p string) bool { return strings.HasPrefix(p, "/xpl:xpl") },
+		ControllerToken: "xpl",
+		MatchDecode:     func(p string) bool { return strings.HasPrefix(p, "/xpl:xpl") },
+		DecodeXML: func(raw []byte) (ygot.GoStruct, error) {
+			v := &huawei.HuaweiXpl_Xpl{}
+			if err := xmlcodec.Decode(xplXML, raw, v); err != nil {
+				return nil, err
+			}
+			return v, nil
+		},
+		MatchEncode: func(p string) bool { return strings.HasPrefix(p, "/xpl:xpl") },
+		NewStruct:   func() ygot.GoStruct { return &huawei.HuaweiXpl_Xpl{} },
+		Unmarshal:   huawei.Unmarshal,
+		XML:         xplXML,
 	})
 }
