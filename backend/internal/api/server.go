@@ -65,6 +65,9 @@ func (s *Server) setupRoutes() {
 			configGroup.DELETE("/:ip/*path", configHandler.DeleteConfig)
 		}
 
+		// Soft-ownership query (BIO-07：原生控制台徽标/手改提示数据面)
+		v1.GET("/ownership/:device", NewOwnershipHandler().Query)
+
 		// YANG model endpoints
 		yangGroup := v1.Group("/yang")
 		{

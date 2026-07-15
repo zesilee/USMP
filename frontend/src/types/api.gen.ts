@@ -423,6 +423,59 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/ownership/{device}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** 查询设备原生配置的业务意图归属（软归属，BIO-07） */
+        get: {
+            parameters: {
+                query?: {
+                    /** @description 原生 YANG 路径（前缀匹配；缺省返回设备全量认领） */
+                    path?: string;
+                };
+                header?: never;
+                path: {
+                    /** @description 设备 IP */
+                    device: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description 归属信息（未认领时 intents/claims 为空） */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["api.Response"] & {
+                            data?: components["schemas"]["api.OwnershipData"];
+                        };
+                    };
+                };
+                /** @description 缺少设备参数 */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["api.Response"];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/reconcile/status": {
         parameters: {
             query?: never;
@@ -566,6 +619,8 @@ export interface components {
         };
         "api.ConfigDeleteData": {
             key?: string;
+            /** @description OwnershipWarning 软归属提示（BR-11）：条目被业务意图认领时附带，不拦截。 */
+            ownershipWarning?: components["schemas"]["api.OwnershipWarning"];
             path?: string;
             reconciliation?: components["schemas"]["api.ReconcileInfo"];
             status?: string;
@@ -579,6 +634,8 @@ export interface components {
             ttl_seconds?: number;
         };
         "api.ConfigSetData": {
+            /** @description OwnershipWarning 软归属提示（BR-11）：路径被业务意图认领时附带，不拦截。 */
+            ownershipWarning?: components["schemas"]["api.OwnershipWarning"];
             path?: string;
             reconciliation?: components["schemas"]["api.ReconcileInfo"];
             status?: string;
@@ -691,6 +748,26 @@ export interface components {
         "api.Option": {
             label?: string;
             value?: unknown;
+        };
+        "api.OwnershipClaim": {
+            /** @description Intent 认领方（意图 CR 的 namespace/name）。 */
+            intent?: string;
+            module?: string;
+            path?: string;
+        };
+        "api.OwnershipData": {
+            /** @description Claims 设备全量认领（无 path 查询模式）。 */
+            claims?: components["schemas"]["api.OwnershipClaim"][];
+            device?: string;
+            /** @description Intents 命中 path 的认领意图（path 查询模式）。 */
+            intents?: string[];
+            /** @description Path 为空时返回该设备全部认领。 */
+            path?: string;
+        };
+        "api.OwnershipWarning": {
+            /** @description Intents 认领该路径的意图 CR（namespace/name）。 */
+            intents?: string[];
+            message?: string;
         };
         "api.PoolStatsDTO": {
             active_connections?: number;

@@ -13,6 +13,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/leezesi/usmp/backend/internal/generated/huawei"
+	"github.com/leezesi/usmp/backend/internal/intent"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/audit"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/client"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/manager"
@@ -100,6 +101,27 @@ type ConfigSetData struct {
 	Status         string        `json:"status"`
 	Path           string        `json:"path"`
 	Reconciliation ReconcileInfo `json:"reconciliation"`
+	// OwnershipWarning 软归属提示（BR-11）：路径被业务意图认领时附带，不拦截。
+	OwnershipWarning *OwnershipWarning `json:"ownershipWarning,omitempty"`
+}
+
+// OwnershipWarning 标记手改命中业务意图认领路径（BIO-07 软归属：意图收敛会覆盖手改）。
+type OwnershipWarning struct {
+	// Intents 认领该路径的意图 CR（namespace/name）。
+	Intents []string `json:"intents"`
+	Message string   `json:"message"`
+}
+
+// ownershipWarningFor 查归属索引，未认领返回 nil（响应体零噪音）。
+func ownershipWarningFor(device, path string) *OwnershipWarning {
+	owners := intent.DefaultOwnership.Owners(device, path)
+	if len(owners) == 0 {
+		return nil
+	}
+	return &OwnershipWarning{
+		Intents: owners,
+		Message: "该路径由业务网络配置管理，意图收敛时会覆盖此手工修改",
+	}
 }
 
 // GetConfig gets the configuration for a specific device and YANG path
@@ -242,6 +264,7 @@ func (h *ConfigHandler) SetConfig(c *gin.Context) {
 			Triggered: controllerFound,
 			Message:   "Configuration stored. Reconciliation will sync device state.",
 		},
+		OwnershipWarning: ownershipWarningFor(ip, path),
 	}, "Configuration accepted - reconciliation in progress")
 }
 
@@ -1017,6 +1040,8 @@ type ConfigDeleteData struct {
 	Path           string        `json:"path"`
 	Key            string        `json:"key"`
 	Reconciliation ReconcileInfo `json:"reconciliation"`
+	// OwnershipWarning 软归属提示（BR-11）：条目被业务意图认领时附带，不拦截。
+	OwnershipWarning *OwnershipWarning `json:"ownershipWarning,omitempty"`
 }
 
 // pushDeleteToDevice 经客户端池同步下发单条目删除（candidate→commit，DP-04/DP-07）。
@@ -1110,5 +1135,6 @@ func (h *ConfigHandler) DeleteConfig(c *gin.Context) {
 			Triggered: controllerFound,
 			Message:   "Entry deleted on device. Reconciliation will verify convergence.",
 		},
+		OwnershipWarning: ownershipWarningFor(ip, path),
 	}, "Entry deleted")
 }
