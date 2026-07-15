@@ -46,8 +46,8 @@
 
 ## 9. 软归属与 config-api（BIO-07，BR-11）
 
-- [ ] 9.1 测试先行：B3——认领索引聚合/重建、SetConfig/Delete 命中返回 ownershipWarning、未命中无警告、归属查询 API 红灯
-- [ ] 9.2 实现认领内存索引（watch 驱动）+ config-api 警告字段 + `GET /ownership`，绿灯
+- [x] 9.1 测试先行：B3——认领索引聚合/重建、SetConfig/Delete 命中返回 ownershipWarning、未命中无警告、归属查询 API 红灯
+- [x] 9.2 实现认领内存索引（watch 驱动）+ config-api 警告字段 + `GET /ownership`，绿灯
 
 ## 10. 前端（FE-17/FE-18）
 
