@@ -1,10 +1,6 @@
-# yang-codegen-pipeline — ygot 生成管线
+# yang-codegen-pipeline（delta）— 生成物按文件拆分
 
-## Purpose
-
-ygot YANG→Go 生成管线（R04 的可执行形态）：厂商 manifest（`backend/internal/generated/*/gen.conf`）驱动的可复现生成入口 `make gen-yang` + 跨平台后处理（`backend/tools/genfix`）+ 生成物漂移 CI/本地门禁（regen-and-diff，取代无条件冻结）。新增厂商 = 新增目录 + gen.conf，是异构多设备 SND（P5）加厂商路径的构建期一环（运行期对应 device-driver-registry）。
-
-## Requirements
+## MODIFIED Requirements
 
 ### Requirement: CG-01 厂商 manifest 驱动的可复现生成
 
@@ -58,19 +54,3 @@ ygot YANG→Go 生成管线（R04 的可执行形态）：厂商 manifest（`bac
 #### Scenario: 幂等 no-op
 - **WHEN** 对同一文件集执行后处理两次
 - **THEN** 第二次执行 SHALL 不产生任何变更
-
-### Requirement: CG-03 生成物漂移 CI 门禁（R04 可验证形态）
-
-CI SHALL 以 regen-and-diff 验证生成物：当 PR 变更触及 `backend/internal/generated/**`、生成脚本/后处理器或 yang-models submodule 指针时，SHALL 重跑 `make gen-yang` 并断言 `git diff --exit-code backend/internal/generated/` 为空——生成物改动合法当且仅当可由管线复现（取代无条件冻结 `generated/` 的旧检查）。未触及上述路径的 PR SHALL 跳过该验证。本地 pre-commit 钩子 SHALL 以同口径对称拦截（T09）：暂存触及生成物/manifest（纯文档除外）时本地 regen + diff 校验。
-
-#### Scenario: 手改生成物被拦截
-- **WHEN** PR 直接手工编辑 `all.gen.go` 而未经管线生成
-- **THEN** CI regen-and-diff SHALL fail
-
-#### Scenario: 管线产物合法通过
-- **WHEN** PR 通过修改 `gen.conf` 并执行 `make gen-yang` 提交生成物变更
-- **THEN** CI regen-and-diff SHALL pass
-
-#### Scenario: 无关 PR 跳过
-- **WHEN** PR 未触及生成物、生成脚本与 yang-models 指针
-- **THEN** SHALL 跳过 regen 验证（不消耗生成耗时）
