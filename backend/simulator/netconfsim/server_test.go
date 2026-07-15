@@ -10,7 +10,7 @@ import (
 // :writable-running capabilities the platform relies on. base:1.1 is out of
 // scope (T0.3): the simulator only speaks 1.0 EOM framing.
 func TestServerHelloAdvertisesCapabilities(t *testing.T) {
-	h := buildHello(1, nil)
+	h := buildHello(1, nil, true)
 	got := make(map[string]bool)
 	for _, c := range h.Capabilities.Capabilities {
 		got[c.URN] = true
@@ -36,7 +36,7 @@ func TestServerHelloAdvertisesCapabilities(t *testing.T) {
 // The hello must still serialize to well-formed XML in the base:1.0 namespace so
 // the SSH handshake framing is unchanged.
 func TestServerHelloEncodesToXML(t *testing.T) {
-	out, err := xml.Marshal(buildHello(1, nil))
+	out, err := xml.Marshal(buildHello(1, nil, true))
 	if err != nil {
 		t.Fatalf("marshal hello: %v", err)
 	}

@@ -3,6 +3,7 @@ package netconfsim
 import (
 	"strings"
 	"sync"
+	"time"
 )
 
 // treeDatastore is the structured, model-agnostic replacement for the legacy
@@ -17,6 +18,12 @@ type treeDatastore struct {
 	mu        sync.RWMutex
 	running   *dataNode
 	candidate *dataNode
+
+	// confirmed-commit state (NS-07): snapshot of running taken at the FIRST
+	// confirmed commit of a chain, and the confirmation timer. A non-nil timer
+	// means a confirmed commit is pending.
+	ccTimer    *time.Timer
+	ccSnapshot *dataNode
 }
 
 // newTreeDatastore returns an empty tree datastore (running and candidate are
@@ -81,6 +88,55 @@ func (d *treeDatastore) Commit() error {
 	defer d.mu.Unlock()
 	d.running = d.candidate.clone()
 	return nil
+}
+
+// CommitConfirmed promotes candidate to running like Commit, but starts a
+// confirmation timer: unless a confirming (plain) commit arrives before
+// timeout, running rolls back to the snapshot taken at the FIRST confirmed
+// commit of the chain — a follow-up confirmed commit extends the timer while
+// keeping the original snapshot (RFC 6241 §8.4).
+func (d *treeDatastore) CommitConfirmed(timeout time.Duration) error {
+	d.mu.Lock()
+	defer d.mu.Unlock()
+	if d.ccTimer != nil {
+		d.ccTimer.Stop()
+	} else {
+		d.ccSnapshot = d.running.clone()
+	}
+	d.running = d.candidate.clone()
+	d.ccTimer = time.AfterFunc(timeout, d.rollbackConfirmed)
+	return nil
+}
+
+// ConfirmCommit finalizes a pending confirmed commit (cancels the rollback
+// timer and commits any further candidate edits). Returns false when no
+// confirmed commit is pending, so the caller falls back to a normal Commit.
+func (d *treeDatastore) ConfirmCommit() bool {
+	d.mu.Lock()
+	defer d.mu.Unlock()
+	if d.ccTimer == nil {
+		return false
+	}
+	d.ccTimer.Stop()
+	d.ccTimer = nil
+	d.ccSnapshot = nil
+	d.running = d.candidate.clone()
+	return true
+}
+
+// rollbackConfirmed is the confirmation-timer callback: running (and candidate)
+// return to the pre-chain snapshot. A no-op when the commit was confirmed in
+// the meantime (Stop can race with an already-fired timer).
+func (d *treeDatastore) rollbackConfirmed() {
+	d.mu.Lock()
+	defer d.mu.Unlock()
+	if d.ccSnapshot == nil {
+		return
+	}
+	d.running = d.ccSnapshot
+	d.candidate = d.ccSnapshot.clone()
+	d.ccTimer = nil
+	d.ccSnapshot = nil
 }
 
 // DiscardCandidate resets the candidate tree to match running.

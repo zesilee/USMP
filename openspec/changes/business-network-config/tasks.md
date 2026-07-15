@@ -4,8 +4,8 @@
 
 ## 1. 模拟网元 confirmed-commit（NS-07，B2 前置）
 
-- [ ] 1.1 测试先行：sim confirmed-commit 三场景（确认转正/超时回滚/能力开关）红灯
-- [ ] 1.2 实现 netconfsim candidate 快照 + 确认计时器 + hello capability 开关，绿灯（-race）
+- [x] 1.1 测试先行：sim confirmed-commit 三场景（确认转正/超时回滚/能力开关）红灯
+- [x] 1.2 实现 netconfsim candidate 快照 + 确认计时器 + hello capability 开关，绿灯（-race）
 
 ## 2. NETCONF 客户端 2PC 原语（DP-08）
 
