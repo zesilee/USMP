@@ -1,0 +1,72 @@
+module usmp-crdgen-fixture {
+  namespace "urn:usmp:yang:usmp-crdgen-fixture";
+  prefix ucf;
+
+  description
+    "crdgen 类型映射矩阵 fixture：range/pattern/enum/boolean/leaf-list/
+     嵌套 list+key/mandatory，覆盖 BIC-01 场景「类型映射」。";
+
+  container fixture-service {
+    description "single top-level container maps to the CR .spec schema";
+
+    leaf vlan-id {
+      type uint16 {
+        range "1..4094";
+      }
+      mandatory true;
+      description "integer with min/max from range";
+    }
+
+    leaf name {
+      type string {
+        pattern "[A-Za-z0-9_-]+";
+      }
+      description "string with pattern";
+    }
+
+    leaf mode {
+      type enumeration {
+        enum access;
+        enum trunk;
+      }
+      description "string enum";
+    }
+
+    leaf enabled {
+      type boolean;
+      description "boolean";
+    }
+
+    leaf-list tags {
+      type string;
+      description "array of scalar";
+    }
+
+    list devices {
+      key "ip";
+      description "array of object, key required";
+
+      leaf ip {
+        type string {
+          pattern "([0-9]{1,3}\\.){3}[0-9]{1,3}";
+        }
+      }
+
+      leaf-list access-ports {
+        type string;
+      }
+
+      list sub-entries {
+        key "index";
+        leaf index {
+          type uint32 {
+            range "0..1024";
+          }
+        }
+        leaf note {
+          type string;
+        }
+      }
+    }
+  }
+}

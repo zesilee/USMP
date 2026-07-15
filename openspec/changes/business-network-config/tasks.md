@@ -14,8 +14,8 @@
 
 ## 3. YANG→CRD codegen（BIC-01/BIC-02）
 
-- [ ] 3.1 测试先行：crdgen golden 测试（类型映射矩阵：range/pattern/enum/leaf-list/嵌套 list+key 必填；不可映射类型 fail-fast）红灯
-- [ ] 3.2 实现 `tools/crdgen`（goyang Entry → CRD manifest，printer columns + status 子资源），生成物入库 + regen-and-diff 门禁接 CI
+- [x] 3.1 测试先行：crdgen golden 测试（类型映射矩阵：range/pattern/enum/leaf-list/嵌套 list+key 必填；不可映射类型 fail-fast）红灯
+- [x] 3.2 实现 `tools/crdgen`（goyang Entry → CRD manifest，printer columns + status 子资源），生成物入库 + regen-and-diff 门禁接 CI
 
 ## 4. 意图 YANG 模型与管线接入（BVS-01，D2）
 

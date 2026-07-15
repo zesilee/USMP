@@ -1,0 +1,15 @@
+module usmp-crdgen-union {
+  namespace "urn:usmp:yang:usmp-crdgen-union";
+  prefix ucu;
+
+  description "crdgen fail-fast fixture：union 不可映射为 OpenAPI，必须报错。";
+
+  container union-service {
+    leaf value {
+      type union {
+        type uint32;
+        type string;
+      }
+    }
+  }
+}

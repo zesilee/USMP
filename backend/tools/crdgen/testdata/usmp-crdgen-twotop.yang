@@ -1,0 +1,18 @@
+module usmp-crdgen-twotop {
+  namespace "urn:usmp:yang:usmp-crdgen-twotop";
+  prefix uct;
+
+  description "crdgen fail-fast fixture：两个顶层容器违反单容器约定，必须报错。";
+
+  container first {
+    leaf a {
+      type string;
+    }
+  }
+
+  container second {
+    leaf b {
+      type string;
+    }
+  }
+}
