@@ -30,8 +30,8 @@
 
 ## 6. 意图控制器与校验分层（BIO-01，BIC-03/BIC-04）
 
-- [ ] 6.1 测试先行：envtest/fake client——CR 创建触发 reconcile、无 kubeconfig 优雅降级、must 违约 Validated=False 不展开、status 结构（observedGeneration/conditions/deviceStates/claims）红灯
-- [ ] 6.2 泛化 crdsource 为意图 watch 源 + IntentReconciler 骨架 + 约束引擎 admission-by-watch 校验 + status patch 冲突重试，绿灯（旧 BusinessVlan 桥接并行保留）
+- [x] 6.1 测试先行：envtest/fake client——CR 创建触发 reconcile、无 kubeconfig 优雅降级、must 违约 Validated=False 不展开、status 结构（observedGeneration/conditions/deviceStates/claims）红灯
+- [x] 6.2 泛化 crdsource 为意图 watch 源 + IntentReconciler 骨架 + 约束引擎 admission-by-watch 校验 + status patch 冲突重试，绿灯（旧 BusinessVlan 桥接并行保留）
 
 ## 7. 跨设备 2PC 下发（BIO-03/BIO-04，BVS-03/BVS-04）
 
