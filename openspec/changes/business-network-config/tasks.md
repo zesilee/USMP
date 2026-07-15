@@ -25,8 +25,8 @@
 
 ## 5. 展开引擎（BIO-02，BVS-02）
 
-- [ ] 5.1 测试先行：expand 纯函数 golden 测试（双设备展开/幂等重入/空 devices 边界；ifm trunk 放行精确叶子以 generated structs 锁定）红灯
-- [ ] 5.2 实现 expand(spec)→[]Fragment 与认领集合推导，绿灯
+- [x] 5.1 测试先行：expand 纯函数 golden 测试（双设备展开/幂等重入/空 devices 边界；ifm trunk 放行精确叶子以 generated structs 锁定）红灯
+- [x] 5.2 实现 expand(spec)→[]Fragment 与认领集合推导，绿灯
 
 ## 6. 意图控制器与校验分层（BIO-01，BIC-03/BIC-04）
 
