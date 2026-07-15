@@ -41,8 +41,8 @@
 
 ## 8. 生命周期（BIO-05/BIO-06）
 
-- [ ] 8.1 测试先行：finalizer 删除双设备清理、部分失败保留重试、devices 收缩差集孤儿清理（差集仅依赖 CR status）红灯
-- [ ] 8.2 实现 finalizer + DELETE 命令通道展开 + 上一代认领差集清理，绿灯
+- [x] 8.1 测试先行：finalizer 删除双设备清理、部分失败保留重试、devices 收缩差集孤儿清理（差集仅依赖 CR status）红灯
+- [x] 8.2 实现 finalizer + DELETE 命令通道展开 + 上一代认领差集清理，绿灯
 
 ## 9. 软归属与 config-api（BIO-07，BR-11）
 
