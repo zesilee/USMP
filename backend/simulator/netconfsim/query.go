@@ -226,6 +226,15 @@ func (s *Simulator) RunningHuaweiInterfaces() map[string]*HuaweiInterfaceTestDat
 			d.ControlFlap.Reuse = toU32(cf.leaf("reuse"))
 			d.ControlFlap.Suppress = toU32(cf.leaf("suppress"))
 		}
+		if eth := e.childFold("ethernet"); eth != nil {
+			if main := eth.childFold("main-interface", "maininterface"); main != nil {
+				if l2 := main.childFold("l2-attribute", "l2attribute"); l2 != nil {
+					d.L2.LinkType = enumInt(l2.leaf("link-type", "linktype"), huawei.HuaweiEthernet_LinkType_UNSET)
+					d.L2.Pvid = toU16(l2.leaf("pvid"))
+					d.L2.TrunkVlans = l2.leaf("trunk-vlans", "trunkvlans")
+				}
+			}
+		}
 		if damp := e.childFold("damp"); damp != nil {
 			d.Damp.TxOff = toBool(damp.leaf("tx-off", "txoff"))
 			if auto := damp.childFold("auto"); auto != nil {
@@ -398,6 +407,13 @@ type HuaweiInterfaceTestData struct {
 			Reuse           uint32
 			Suppress        uint32
 		}
+	}
+	// L2 attributes（ethernet/main-interface/l2-attribute，huawei-ethernet
+	// augment）——业务 VLAN 打通展开的端口断言面（矩阵 A1/A2）。
+	L2 struct {
+		LinkType   int
+		Pvid       uint16
+		TrunkVlans string
 	}
 }
 

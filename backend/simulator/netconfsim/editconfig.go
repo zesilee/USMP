@@ -119,6 +119,19 @@ func findMatch(parent, ec *dataNode, op string, editSiblings int) *dataNode {
 	if len(same) == 0 {
 		return nil
 	}
+	// 已知 keyed list（最小模型知识）：单-单 merge 场景没有任何结构信号可判定
+	// 「这是 list 条目还是容器」，启发式会把不同 key 的新条目就地折叠进旧条目
+	// （business-network-config 2PC 集成暴露的回归）。命中登记表即恒按键匹配。
+	if keyName := wellKnownListKey(parent, ec); keyName != "" {
+		if ek := ec.child(keyName); ek != nil {
+			for _, cand := range same {
+				if k := cand.child(keyName); k != nil && k.leafText() == ek.leafText() {
+					return cand
+				}
+			}
+			return nil
+		}
+	}
 	key := keyLeaf(ec)
 	needKey := key != nil && (op != opMerge || len(same) > 1 || editSiblings > 1)
 	if !needKey {
@@ -130,6 +143,20 @@ func findMatch(parent, ec *dataNode, op string, editSiblings int) *dataNode {
 		}
 	}
 	return nil
+}
+
+// wellKnownListKeys 是 schema-less 模拟器的最小模型知识：按 (父元素/条目元素)
+// 登记 keyed list 的键叶子名。仅登记单-单 merge 无信号可判的高频 list；其余
+// list 仍走通用启发式（多兄弟信号）。新增模型接入若踩同坑在此登记。
+var wellKnownListKeys = map[string]string{
+	"vlans/vlan":           "id",   // huawei-vlan
+	"interfaces/interface": "name", // huawei-ifm / openconfig-interfaces
+}
+
+// wellKnownListKey returns the registered key leaf name for parent/ec, "" when
+// unregistered.
+func wellKnownListKey(parent, ec *dataNode) string {
+	return wellKnownListKeys[parent.Name.Local+"/"+ec.Name.Local]
 }
 
 // sameNameChildren returns parent's children whose qualified name (local +
