@@ -1,7 +1,9 @@
 package intent
 
 import (
+	"context"
 	"log"
+	"time"
 
 	"k8s.io/apimachinery/pkg/runtime"
 	crcache "sigs.k8s.io/controller-runtime/pkg/cache"
@@ -12,8 +14,17 @@ import (
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/manager"
 )
 
+// intentResyncInterval paces the periodic re-reconcile of every intent CR
+// (BIO-04 稳态：幂等短路重写 desired，对冲 desired TTL 过期与设备漂移).
+const intentResyncInterval = 5 * time.Minute
+
+// confirmTimeout is the confirmed-commit window for the cross-device 2PC
+// (design open-question 初值 60s).
+const confirmTimeout = 60 * time.Second
+
 // Register wires the business-vlan intent controller into the Stack B manager
-// (BIO-01): a CR watch source (C4) feeding the intent Reconciler (C3). CRD is
+// (BIO-01): a CR watch source + periodic resync source (C4) feeding the intent
+// Reconciler (C3) with the cross-device TxCoordinator (BIO-03). CRD is
 // persistence + watch carrier only — the reconcile architecture is unchanged
 // (R01, 禁止复活 Stack A 式 CRD 架构).
 //
@@ -37,13 +48,41 @@ func Register(mgr manager.Manager) (crcache.Cache, error) {
 		return nil, err
 	}
 
+	tx := NewTxCoordinator(mgr.GetClientPool(), mgr.GetDeviceStore(), confirmTimeout)
+	rec := NewReconciler(cl).WithPush(tx, mgr.GetConfigStore(), mgr.TriggerReconcile)
+
 	ctrl := controller.ControllerManagedBy("business-vlan-intent").
-		WithReconciler(NewReconciler(cl)).
-		WithSource(NewSource(c)).
+		WithReconciler(rec).
+		WithSource(multiSource{NewSource(c), NewResyncSource(cl, intentResyncInterval)}).
 		WithWorkerCount(1).
 		Build()
 	mgr.AddController(ctrl)
 
-	log.Printf("intent: business-vlan intent controller registered (CRD watch → expand → status)")
+	log.Printf("intent: business-vlan intent controller registered (CRD watch + resync → expand → 2PC → status)")
 	return c, nil
+}
+
+// multiSource fans a controller into several event sources (builder 单源限制
+// 的最小组合器).
+type multiSource []controller.Source
+
+// Start implements controller.Source.
+func (m multiSource) Start(ctx context.Context, ctrl controller.Controller) error {
+	for _, s := range m {
+		if err := s.Start(ctx, ctrl); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+// Stop implements controller.Source.
+func (m multiSource) Stop() error {
+	var last error
+	for _, s := range m {
+		if err := s.Stop(); err != nil {
+			last = err
+		}
+	}
+	return last
 }
