@@ -51,15 +51,15 @@
 
 ## 10. 前端（FE-17/FE-18）
 
-- [ ] 10.1 测试先行：F2——BusinessConsolePage 列表/详情/表单三态、deviceStates 聚合呈现、校验错误态；F1——ownership/状态聚合 util
-- [ ] 10.2 实现平台作用域业务控制台（表单复用 YANG 动态渲染，数据面走 USMP API 代理 CR CRUD）
-- [ ] 10.3 F3 真浏览器：devices 嵌套 list 增删改全覆盖
-- [ ] 10.4 原生控制台归属徽标 + 手改非阻断警告提示（F2）
-- [ ] 10.5 F4 staging-smoke：业务菜单组出现、意图创建到收敛状态呈现（`make e2e-local` 全绿）
+- [x] 10.1 测试先行：F2——BusinessConsolePage 列表/详情/表单三态、deviceStates 聚合呈现、校验错误态；F1——ownership/状态聚合 util
+- [x] 10.2 实现平台作用域业务控制台（表单复用 YANG 动态渲染，数据面走 USMP API 代理 CR CRUD）
+- [x] 10.3 F3 真浏览器：devices 嵌套 list 增删改全覆盖
+- [x] 10.4 原生控制台归属徽标 + 手改非阻断警告提示（F2）
+- [x] 10.5 F4 staging-smoke：业务菜单组出现、意图创建到收敛状态呈现（`make e2e-local` 全绿）
 
 ## 11. 部署与收官
 
-- [ ] 11.1 CRD manifest + RBAC（biz CR/status + Lease）进部署编排，CRD 先于应用滚动；leader election 接缝（默认关）
+- [x] 11.1 CRD manifest + RBAC（biz CR/status + Lease）进部署编排，CRD 先于应用滚动；leader election 接缝（默认关）
 - [ ] 11.2 覆盖率棘轮上调（T08）+ 全量 `go test ./...` -race + 前端全层绿
 - [ ] 11.3 /opsx:sync 同步 delta→主 spec；修订 CLAUDE.md §8/R03 措辞与任务文件「禁止复活 CRD 通道」表述；回写 openspec/tasks/business-network-config.md
 - [ ] 11.4 归档 change + 更新记忆（k8s-paas-deployment-constraints 交付状态；全局 HA/硬锁/旧桥接退役三项 follow-up 立任务）

@@ -71,7 +71,7 @@ func Register(mgr manager.Manager) (crcache.Cache, error) {
 
 	ctrl := controller.ControllerManagedBy("business-vlan-intent").
 		WithReconciler(rec).
-		WithSource(multiSource{NewSource(c), NewResyncSource(cl, intentResyncInterval)}).
+		WithSource(gateSources(cfg, multiSource{NewSource(c), NewResyncSource(cl, intentResyncInterval)})).
 		WithWorkerCount(1).
 		Build()
 	mgr.AddController(ctrl)
