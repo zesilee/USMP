@@ -61,5 +61,5 @@
 
 - [x] 11.1 CRD manifest + RBAC（biz CR/status + Lease）进部署编排，CRD 先于应用滚动；leader election 接缝（默认关）
 - [x] 11.2 覆盖率棘轮上调（T08）+ 全量 `go test ./...` -race + 前端全层绿
-- [ ] 11.3 /opsx:sync 同步 delta→主 spec；修订 CLAUDE.md §8/R03 措辞与任务文件「禁止复活 CRD 通道」表述；回写 openspec/tasks/business-network-config.md
+- [x] 11.3 /opsx:sync 同步 delta→主 spec；修订 CLAUDE.md §8/R03 措辞与任务文件「禁止复活 CRD 通道」表述；回写 openspec/tasks/business-network-config.md
 - [ ] 11.4 归档 change + 更新记忆（k8s-paas-deployment-constraints 交付状态；全局 HA/硬锁/旧桥接退役三项 follow-up 立任务）

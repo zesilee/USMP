@@ -17,7 +17,7 @@
 |------|------|------|
 | R01 | 禁止更换架构 | Manager→Controller→Reconciler→Source，禁止回退 Actor 模型 |
 | R02 | 禁止旧协议 | 仅 NETCONF/gNMI，禁止 Telnet/SNMP |
-| R03 | 禁止数据库 | 仅 TTL+LRU 内存缓存 + 本地 JSON 元信息，禁止 MySQL/Redis/SQLite |
+| R03 | 禁止数据库 | 仅 TTL+LRU 内存缓存；持久元信息经 K8s CRD（apiserver，平台 etcd 承载）；禁止 MySQL/Redis/SQLite 等自管数据库，多实例部署禁止本地持久文件（SC-02/SC-06） |
 | R04 | 禁止手写 YANG 结构体 | ygot 自动生成，禁止手写，禁止滥用 interface{} |
 | R05 | 禁止手写固定表单 | 前端由 YANG 模型自动渲染 |
 | R06 | 禁止先代码后测试 | TDD 红绿循环，测试先行 |
@@ -290,9 +290,10 @@ explore → propose → apply → sync → archive
 |----------|----------|----------|
 | 运行配置 | 实时 NETCONF/gNMI 从交换机读取 | 缓存 TTL 30s，过期自动重拉 |
 | 配置缓存 | TTL+LRU 内存 | Key=设备IP+YANG路径，下发后主动失效 |
-| 元信息 | 本地 JSON 文件 | 持久 |
+| 元信息（业务意图/认领/收敛状态） | K8s CRD（apiserver；CRD 仅当持久化+watch 载体，禁止当架构通道） | 持久 |
+| 操作审计 | 本地 JSON 文件（全局 HA 任务待迁出） | 持久 |
 
-> **R03: 禁止数据库** — 不持久化运行配置，不使用 MySQL/Redis/SQLite。
+> **R03: 禁止数据库** — 不持久化运行配置，不使用 MySQL/Redis/SQLite 等自管数据库；持久元信息走 K8s CRD（2026-07-15 拍板：USMP 为 K8s 内多实例 PaaS 组件，禁止本地存储）。
 
 ## §9 异常处理
 
