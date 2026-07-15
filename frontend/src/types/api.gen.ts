@@ -4,6 +4,198 @@
  */
 
 export interface paths {
+    "/business/vlan-services": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** 列出业务 VLAN 打通意图实例 */
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description 实例清单（含收敛状态） */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["api.Response"] & {
+                            data?: components["schemas"]["api.BusinessListData"];
+                        };
+                    };
+                };
+                /** @description 未连接集群，业务配置不可用 */
+                503: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["api.Response"];
+                    };
+                };
+            };
+        };
+        put?: never;
+        /** 创建/更新业务 VLAN 打通意图实例 */
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            /** @description 实例名 + 意图 spec（结构由 usmp-business-vlan YANG 定义） */
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["api.BusinessApplyRequest"];
+                };
+            };
+            responses: {
+                /** @description 已提交（控制器异步收敛，状态见 status） */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["api.Response"] & {
+                            data?: components["schemas"]["api.BusinessVlanServiceItem"];
+                        };
+                    };
+                };
+                /** @description spec 违反意图 YANG 约束 */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["api.Response"];
+                    };
+                };
+                /** @description 未连接集群 */
+                503: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["api.Response"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/business/vlan-services/{name}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** 读取单个业务 VLAN 打通意图实例 */
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    /** @description 实例名 */
+                    name: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description 实例详情 */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["api.Response"] & {
+                            data?: components["schemas"]["api.BusinessVlanServiceItem"];
+                        };
+                    };
+                };
+                /** @description 实例不存在 */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["api.Response"];
+                    };
+                };
+                /** @description 未连接集群 */
+                503: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["api.Response"];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        /** 删除业务 VLAN 打通意图实例（设备配置由控制器清理后放行） */
+        delete: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    /** @description 实例名 */
+                    name: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description 删除已受理 */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["api.Response"];
+                    };
+                };
+                /** @description 实例不存在 */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["api.Response"];
+                    };
+                };
+                /** @description 未连接集群 */
+                503: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["api.Response"];
+                    };
+                };
+            };
+        };
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/config/{ip}/{path}": {
         parameters: {
             query?: never;
@@ -611,6 +803,24 @@ export interface components {
         "api.AuditListData": {
             logs?: components["schemas"]["api.LogEntry"][];
             total?: number;
+        };
+        "api.BusinessApplyRequest": {
+            name: string;
+            spec: {
+                [key: string]: unknown;
+            };
+        };
+        "api.BusinessListData": {
+            items?: components["schemas"]["api.BusinessVlanServiceItem"][];
+        };
+        "api.BusinessVlanServiceItem": {
+            name?: string;
+            spec?: {
+                [key: string]: unknown;
+            };
+            status?: {
+                [key: string]: unknown;
+            };
         };
         "api.CaseDef": {
             fields?: components["schemas"]["api.FieldDef"][];
