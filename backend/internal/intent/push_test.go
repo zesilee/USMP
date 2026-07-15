@@ -45,7 +45,7 @@ func TestReconcilePushSuccessWritesDesiredAndTriggers(t *testing.T) {
 	pusher := &fakePusher{results: syncedResults()}
 	cs := newStore()
 	var triggered []string
-	r := NewReconciler(cl).WithPush(pusher, cs, func(deviceID, path string) bool {
+	r := NewReconciler(cl).WithPush(pusher, nil, cs, func(deviceID, path string) bool {
 		triggered = append(triggered, deviceID+path)
 		return true
 	})
@@ -84,7 +84,7 @@ func TestReconcilePushFailureNoDesiredWrite(t *testing.T) {
 		"10.0.0.2": {Device: "10.0.0.2", Err: context.DeadlineExceeded},
 	}}
 	cs := newStore()
-	r := NewReconciler(cl).WithPush(pusher, cs, func(string, string) bool { return true })
+	r := NewReconciler(cl).WithPush(pusher, nil, cs, func(string, string) bool { return true })
 
 	res := r.Reconcile(context.Background(), reconcile.Request{DeviceID: "default/biz-100", Path: IntentPath})
 	if res.Error != nil {
@@ -113,7 +113,7 @@ func TestReconcileIdempotentShortCircuit(t *testing.T) {
 	cl := newFakeClient(t, newCR(1, validSpec()))
 	pusher := &fakePusher{results: syncedResults()}
 	cs := newStore()
-	r := NewReconciler(cl).WithPush(pusher, cs, func(string, string) bool { return true })
+	r := NewReconciler(cl).WithPush(pusher, nil, cs, func(string, string) bool { return true })
 
 	ctx := context.Background()
 	req := reconcile.Request{DeviceID: "default/biz-100", Path: IntentPath}
@@ -144,7 +144,7 @@ func TestReconcileNonTransactionalDeviceAnnotated(t *testing.T) {
 		"10.0.0.1": {Device: "10.0.0.1"},
 		"10.0.0.2": {Device: "10.0.0.2", NonTransactional: true},
 	}}
-	r := NewReconciler(cl).WithPush(pusher, newStore(), func(string, string) bool { return true })
+	r := NewReconciler(cl).WithPush(pusher, nil, newStore(), func(string, string) bool { return true })
 
 	if res := r.Reconcile(context.Background(), reconcile.Request{DeviceID: "default/biz-100", Path: IntentPath}); res.Error != nil {
 		t.Fatal(res.Error)

@@ -49,7 +49,7 @@ func Register(mgr manager.Manager) (crcache.Cache, error) {
 	}
 
 	tx := NewTxCoordinator(mgr.GetClientPool(), mgr.GetDeviceStore(), confirmTimeout)
-	rec := NewReconciler(cl).WithPush(tx, mgr.GetConfigStore(), mgr.TriggerReconcile)
+	rec := NewReconciler(cl).WithPush(tx, tx, mgr.GetConfigStore(), mgr.TriggerReconcile)
 
 	ctrl := controller.ControllerManagedBy("business-vlan-intent").
 		WithReconciler(rec).
