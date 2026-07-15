@@ -4,7 +4,7 @@
 
 ### Requirement: CG-01 厂商 manifest 驱动的可复现生成
 
-系统 SHALL 提供 `make gen-yang` 生成入口：扫描 `backend/internal/generated/*/gen.conf`（每厂商包一份声明式生成配置：YANG 模型路径、模块列表、fakeroot/compress 选项，及**可选 `split_count`**），对每包执行 ygot generator（版本由 go.mod 锁定）→ 跨平台后处理 → gofmt，输出该包生成物。生成物布局由 `split_count` 决定：**未设置**时输出单文件 `all.gen.go`；**设置为 N** 时输出 `-output_dir` 拆分文件集（`structs-0..(N-1).go` + `enum.go`/`enum_map.go`/`union.go`/`schema.go`），使**单文件规模可控**（避免单包生成物随模型集成无限膨胀）。文件命名 SHALL 由 generator 确定性给定。`make gen-yang VENDOR=<pkg>` SHALL 仅重生成指定包。新增厂商 SHALL 只需新增目录 + `gen.conf`，零脚本/Makefile 改动。管线 SHALL 可复现且机器无关：同一仓库状态下重复执行输出字节一致（拆分模式下每个生成文件的内容与 struct→文件分配均确定），生成物 SHALL NOT 包含生成机器特定内容（如生成器绝对路径头部注释——由后处理规范化）。拆分 SHALL 语义等价于单文件：同包类型集合、导出符号（`Schema()`/`UnzipSchema()`/`SchemaTree`/`Unmarshal` 等）、schema 内容不变，下游 import 路径与消费无改动。
+系统 SHALL 提供 `make gen-yang` 生成入口：扫描 `backend/internal/generated/*/gen.conf`（每厂商包一份声明式生成配置：YANG 模型路径、模块列表、fakeroot/compress 选项，及**可选 `split_count`**），对每包执行 ygot generator（版本由 go.mod 锁定）→ 跨平台后处理 → 格式化收尾（单文件模式 gofmt；拆分模式 goimports——`-output_dir` 给每个文件写同一份 import 块，须剪除未用 import 方可编译，goimports 版本同由 go.mod `tool` 指令锁定），输出该包生成物。生成物布局由 `split_count` 决定：**未设置**时输出单文件 `all.gen.go`；**设置为 N** 时输出 `-output_dir` 拆分文件集（`structs-0..(N-1).go` + `enum.go`/`enum_map.go`/`union.go`/`schema.go`），使**单文件规模可控**（避免单包生成物随模型集成无限膨胀）。文件命名 SHALL 由 generator 确定性给定。`make gen-yang VENDOR=<pkg>` SHALL 仅重生成指定包。新增厂商 SHALL 只需新增目录 + `gen.conf`，零脚本/Makefile 改动。管线 SHALL 可复现且机器无关：同一仓库状态下重复执行输出字节一致（拆分模式下每个生成文件的内容与 struct→文件分配均确定），生成物 SHALL NOT 包含生成机器特定内容（如生成器绝对路径头部注释——由后处理规范化）。拆分 SHALL 语义等价于单文件：同包类型集合、导出符号（`Schema()`/`UnzipSchema()`/`SchemaTree`/`Unmarshal` 等）、schema 内容不变，下游 import 路径与消费无改动。
 
 #### Scenario: 全量重生成零漂移
 - **WHEN** 在干净工作区执行 `make gen-yang`

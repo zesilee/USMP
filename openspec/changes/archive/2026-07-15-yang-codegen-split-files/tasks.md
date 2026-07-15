@@ -41,8 +41,8 @@
 ## 5. 门禁复验（零改动确认）
 
 - [x] 本地 pre-commit（regen-and-diff 对称）通过——生成物 commit 触发全量 `make gen-yang` + diff 空校验实跑通过
-- [ ] CI CG-03（compliance regen-and-diff）通过——路径前缀 `backend/internal/generated/` 匹配已静态审计覆盖新文件名，待 PR 实跑
-- [ ] CI pr-size 通过——`:(exclude)backend/internal/generated/**` 已静态审计生效，待 PR 实跑
+- [x] CI CG-03（compliance regen-and-diff）通过——PR #162 实跑 pass（Test + Lint + Coverage 3m13s）
+- [x] CI pr-size 通过——PR #162 实跑 pass（`:(exclude)backend/internal/generated/**` 生效）
 - [x] 门禁路径审计：pre-commit/commit-msg/compliance/pr-size 全部目录前缀匹配，新文件名零改动覆盖
 
 ## 6. 代码评审 + 提交（§6.2 / T04）
@@ -54,12 +54,12 @@
 
 ## 7. 完成分支（§6.3）
 
-- [ ] `go test ./...` 全绿
-- [ ] `superpowers:finishing-a-development-branch` → push + PR（选项 B）
-- [ ] PR ≤3000 行逻辑（生成物排除后）
+- [x] `go test ./...` 全绿（pre-push 全量 `-race` 实跑 + CI compliance 复验）
+- [x] 完成分支选项 B → push + PR **#162**（worktree 保留至合入）
+- [x] PR ≤3000 行逻辑（生成物排除后逻辑改动 ~181 行 + docs）
 
 ## 8. sync / archive
 
-- [ ] CI 全绿 + 自审清单（TM05）通过 → 合入 main
-- [ ] `/opsx:sync`：delta（CG-01/CG-02 MODIFIED）合入主 spec `yang-codegen-pipeline`
-- [ ] `/opsx:archive`：change 归档
+- [x] CI 全绿（PR #162 十项 check 全 pass）+ 自审清单（TM05）通过 → 合入 main（sync/archive commit 随本 PR 收尾后自助 merge，沿 AFPOL PR#160 先例）
+- [x] `/opsx:sync`：delta（CG-01/CG-02 MODIFIED）已合入主 spec `yang-codegen-pipeline`，`openspec validate --specs` 24 项全过；apply 期 goimports 发现同步进 delta 与主 spec 措辞
+- [x] `/opsx:archive`：change 归档至 `archive/2026-07-15-yang-codegen-split-files`
