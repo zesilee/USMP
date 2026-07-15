@@ -1,12 +1,12 @@
 ---
 id: business-network-config
 title: 业务网络配置——业务侧 YANG 模型定义网络自动化能力，USMP 编排为原生配置下发
-status: pending
+status: in_progress
 priority: medium
-branch: (未开始)
-worktree: (未创建)
-change: (启动时 /opsx:explore → /opsx:propose 立项)
-updated: 2026-07-13
+branch: worktree-business-network-config
+worktree: .claude/worktrees/business-network-config
+change: (explore 进行中 → /opsx:propose 立项)
+updated: 2026-07-15
 origin: 用户拍板 2026-07-13；概念更名与前端死路退役见 change native-config-reposition
 ---
 
