@@ -35,9 +35,9 @@
 
 ## 7. 跨设备 2PC 下发（BIO-03/BIO-04，BVS-03/BVS-04）
 
-- [ ] 7.1 测试先行：TxCoordinator 对双 sim 集成测试——全体成功、prepare 部分失败全体 discard 不留残配置、confirming 失联超时回滚告警、能力缺失降级普通 commit、并发 -race 红灯
-- [ ] 7.2 实现 TxCoordinator（prepare→discard-all/CommitConfirmed→ConfirmCommit；成功才写 desired+TriggerReconcile；每设备互斥）
-- [ ] 7.3 稳态：意图周期 resync 重写 desired（对冲 TTL 过期）+ 漂移单设备修复集成测试
+- [x] 7.1 测试先行：TxCoordinator 对双 sim 集成测试——全体成功、prepare 部分失败全体 discard 不留残配置、confirming 失联超时回滚告警、能力缺失降级普通 commit、并发 -race 红灯
+- [x] 7.2 实现 TxCoordinator（prepare→discard-all/CommitConfirmed→ConfirmCommit；成功才写 desired+TriggerReconcile；每设备互斥）
+- [x] 7.3 稳态：意图周期 resync 重写 desired（对冲 TTL 过期）+ 漂移单设备修复集成测试
 
 ## 8. 生命周期（BIO-05/BIO-06）
 
