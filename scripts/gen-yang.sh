@@ -2,9 +2,14 @@
 # gen-yang.sh — ygot YANG→Go 生成管线（厂商 manifest 驱动，CG-01）
 #
 # 扫描 backend/internal/generated/*/gen.conf，对每个厂商包执行：
-#   ygot generator（版本由 backend/go.mod 锁定）→ genfix 后处理（跨平台，CG-02）→ gofmt
-# 输出固定为该包目录下的 all.gen.go，package 名 = 目录名。
-# 新增厂商 = 新增目录 + gen.conf，本脚本与 Makefile 零改动。
+#   ygot generator（版本由 backend/go.mod 锁定）→ genfix 后处理（跨平台，CG-02）
+#   → 格式化收尾：单文件模式 gofmt；拆分模式 go tool goimports（ygot -output_dir
+#     给每个文件写同一份 import 块，须剪未用 import 才能编译，版本同由 go.mod 锁定）
+# 输出双模式（gen.conf 可选键 split_count 控制）：
+#   未设置 → 单文件 all.gen.go（向后兼容，小厂商包零迁移）
+#   split_count=N → -output_dir 拆分为 structs-*.go/enum*.go/union.go/schema.go，
+#                   structs 按 N 分桶（blob 独占 schema.go，struct/blob diff 分离）
+# package 名 = 目录名。新增厂商 = 新增目录 + gen.conf，本脚本与 Makefile 零改动。
 #
 # 用法: scripts/gen-yang.sh [<pkg>]   缺省全量；<pkg> 为 backend/internal/generated/ 下目录名
 set -eu
@@ -26,12 +31,14 @@ for conf in "$GEN_DIR"/*/gen.conf; do
     modules=""
     generate_fakeroot=true
     compress_paths=false
+    split_count=""
     while IFS='=' read -r key val; do
         case "$key" in
         yang_path) yang_path="$val" ;;
         modules) modules="$val" ;;
         generate_fakeroot) generate_fakeroot="$val" ;;
         compress_paths) compress_paths="$val" ;;
+        split_count) split_count="$val" ;;
         '' | \#*) ;;
         *)
             echo "gen-yang: $conf 含未知键: $key" >&2
@@ -52,20 +59,51 @@ for conf in "$GEN_DIR"/*/gen.conf; do
         exit 1
     fi
 
-    echo "gen-yang: 生成 $pkg（modules: $modules）"
-    # $modules 依赖空格分词展开为多个模块参数，勿加引号
-    (
-        cd "$ROOT/backend" &&
-            go run github.com/openconfig/ygot/generator \
-                -path="../$yang_path" \
-                -output_file="internal/generated/$pkg/all.gen.go" \
-                -package_name="$pkg" \
-                -generate_fakeroot="$generate_fakeroot" \
-                -compress_paths="$compress_paths" \
-                $modules &&
-            go run ./tools/genfix "internal/generated/$pkg/all.gen.go" &&
-            gofmt -w "internal/generated/$pkg/all.gen.go"
-    )
+    if [ -n "$split_count" ]; then
+        case "$split_count" in
+        *[!0-9]* | 0*)
+            echo "gen-yang: $conf 的 split_count 须为正整数: $split_count" >&2
+            exit 1
+            ;;
+        esac
+        echo "gen-yang: 生成 $pkg（modules: $modules，split_count=$split_count）"
+        # 拆分模式：生成前清理新旧两种布局的产物（幂等，防 N 缩小残留旧分片），
+        # 仅删生成物文件名，不动 doc.go/gen.conf。
+        # $modules 依赖空格分词展开为多个模块参数，勿加引号
+        (
+            cd "$ROOT/backend" &&
+                rm -f "internal/generated/$pkg/all.gen.go" \
+                    "internal/generated/$pkg"/structs-*.go \
+                    "internal/generated/$pkg"/enum*.go \
+                    "internal/generated/$pkg/union.go" \
+                    "internal/generated/$pkg/schema.go" &&
+                go run github.com/openconfig/ygot/generator \
+                    -path="../$yang_path" \
+                    -output_dir="internal/generated/$pkg" \
+                    -structs_split_files_count="$split_count" \
+                    -package_name="$pkg" \
+                    -generate_fakeroot="$generate_fakeroot" \
+                    -compress_paths="$compress_paths" \
+                    $modules &&
+                go run ./tools/genfix "internal/generated/$pkg"/*.go &&
+                go tool goimports -w "internal/generated/$pkg"
+        )
+    else
+        echo "gen-yang: 生成 $pkg（modules: $modules）"
+        # $modules 依赖空格分词展开为多个模块参数，勿加引号
+        (
+            cd "$ROOT/backend" &&
+                go run github.com/openconfig/ygot/generator \
+                    -path="../$yang_path" \
+                    -output_file="internal/generated/$pkg/all.gen.go" \
+                    -package_name="$pkg" \
+                    -generate_fakeroot="$generate_fakeroot" \
+                    -compress_paths="$compress_paths" \
+                    $modules &&
+                go run ./tools/genfix "internal/generated/$pkg/all.gen.go" &&
+                gofmt -w "internal/generated/$pkg/all.gen.go"
+        )
+    fi
 done
 
 if [ "$found" = 0 ]; then
