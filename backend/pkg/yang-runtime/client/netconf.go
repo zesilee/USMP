@@ -15,6 +15,7 @@ import (
 	yangdriver "github.com/leezesi/usmp/backend/pkg/yang-runtime/driver"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/xmlcodec"
 	"github.com/scrapli/scrapligo/driver/netconf"
+	"github.com/scrapli/scrapligo/driver/opoptions"
 	"github.com/scrapli/scrapligo/driver/options"
 	"github.com/scrapli/scrapligo/response"
 	"github.com/scrapli/scrapligo/transport"
@@ -399,6 +400,76 @@ func (c *NETCONFClient) DiscardCandidate(ctx context.Context) error {
 		return fmt.Errorf("discard candidate failed: %w", resp.Failed)
 	}
 
+	return nil
+}
+
+// ErrConfirmedCommitUnsupported reports that the device did not advertise the
+// :confirmed-commit capability; callers downgrade to a plain commit (呈现为
+// 非事务下发, DP-08).
+var ErrConfirmedCommitUnsupported = errors.New("device does not advertise :confirmed-commit capability")
+
+// supportsConfirmedCommit reports whether the advertised capabilities include
+// :confirmed-commit (1.0 or 1.1).
+func supportsConfirmedCommit(caps []string) bool {
+	for _, cap := range caps {
+		if strings.HasPrefix(cap, "urn:ietf:params:netconf:capability:confirmed-commit:") {
+			return true
+		}
+	}
+	return false
+}
+
+// CommitConfirmed sends <commit><confirmed/><confirm-timeout>N</confirm-timeout></commit>:
+// the device promotes candidate to running but rolls back automatically unless
+// ConfirmCommit arrives within the timeout. Capability is checked before any
+// RPC is sent (DP-08).
+func (c *NETCONFClient) CommitConfirmed(ctx context.Context, timeout time.Duration) error {
+	c.opMu.Lock()
+	defer c.opMu.Unlock()
+	driver, err := c.ensureConnected()
+	if err != nil {
+		return err
+	}
+	if !supportsConfirmedCommit(driver.ServerCapabilities()) {
+		return fmt.Errorf("commit confirmed: %w", ErrConfirmedCommitUnsupported)
+	}
+
+	secs := uint(timeout / time.Second)
+	if secs == 0 {
+		secs = 1
+	}
+	resp, err := driver.Commit(opoptions.WithCommitConfirmed(), opoptions.WithCommitConfirmTimeout(secs))
+	if err != nil {
+		if isTransportError(err) {
+			c.markDisconnected()
+		}
+		return fmt.Errorf("commit confirmed failed: %w", err)
+	}
+	if resp.Failed != nil {
+		return fmt.Errorf("commit confirmed rejected: %w", resp.Failed)
+	}
+	return nil
+}
+
+// ConfirmCommit sends the confirming <commit/> that finalizes a pending
+// confirmed commit (cancels the device-side rollback timer).
+func (c *NETCONFClient) ConfirmCommit(ctx context.Context) error {
+	c.opMu.Lock()
+	defer c.opMu.Unlock()
+	driver, err := c.ensureConnected()
+	if err != nil {
+		return err
+	}
+	resp, err := driver.Commit()
+	if err != nil {
+		if isTransportError(err) {
+			c.markDisconnected()
+		}
+		return fmt.Errorf("confirming commit failed: %w", err)
+	}
+	if resp.Failed != nil {
+		return fmt.Errorf("confirming commit rejected: %w", resp.Failed)
+	}
 	return nil
 }
 

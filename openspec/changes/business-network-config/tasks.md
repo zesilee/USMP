@@ -9,8 +9,8 @@
 
 ## 2. NETCONF 客户端 2PC 原语（DP-08）
 
-- [ ] 2.1 测试先行：CommitConfirmed/ConfirmCommit 单测 + 对 sim 集成测试（含超时回滚回读、能力缺失负路径）红灯
-- [ ] 2.2 实现客户端原语（复用 opMu 串行化，不新增并发写路径），绿灯
+- [x] 2.1 测试先行：CommitConfirmed/ConfirmCommit 单测 + 对 sim 集成测试（含超时回滚回读、能力缺失负路径）红灯
+- [x] 2.2 实现客户端原语（复用 opMu 串行化，不新增并发写路径），绿灯
 
 ## 3. YANG→CRD codegen（BIC-01/BIC-02）
 
