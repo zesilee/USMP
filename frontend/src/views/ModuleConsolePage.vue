@@ -9,6 +9,15 @@
         <el-breadcrumb-item v-if="activeTabLabel">{{ activeTabLabel }}</el-breadcrumb-item>
       </el-breadcrumb>
       <div class="header-actions">
+        <!-- 软归属徽标（FE-18）：本模块在选中设备上被业务意图认领时提示（不拦截）。 -->
+        <el-tooltip
+          v-if="ownershipIntents.length"
+          :content="`由业务配置管理：${ownershipIntents.join('、')}（意图收敛会覆盖手工修改）`"
+        >
+          <el-tag type="warning" size="small" data-test="ownership-badge">
+            由业务配置管理 ({{ ownershipIntents.length }})
+          </el-tag>
+        </el-tooltip>
         <el-select v-model="selectedDevice" placeholder="选择设备" style="width: 220px">
           <el-option v-for="d in store.devices" :key="d.id" :label="d.ip" :value="d.ip" />
         </el-select>
@@ -32,7 +41,7 @@
 <script setup lang="ts">
 import { ref, computed, watch, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
-import { getYangSchema } from '../api'
+import { getYangSchema, getOwnership } from '../api'
 import { useDeviceStore } from '../stores/device'
 import type { Field } from '../utils/crdSchemaParser'
 import { deriveTabs, type ConsoleTab } from '../utils/moduleConsole'
@@ -49,6 +58,24 @@ const title = ref('')
 const vendor = ref('')
 const rootName = ref('')
 const schemaFields = ref<Field[]>([])
+
+// 软归属（FE-18）：选中设备上本模块的认领意图清单；查询失败静默降级为无徽标（R08）。
+const ownershipIntents = ref<string[]>([])
+async function loadOwnership() {
+  ownershipIntents.value = []
+  if (!selectedDevice.value || !moduleName.value) return
+  try {
+    const res = await getOwnership(selectedDevice.value)
+    const claims: any[] = res.data?.data?.claims || []
+    const intents = new Set<string>()
+    for (const c of claims) {
+      if (c?.module === moduleName.value && c?.intent) intents.add(c.intent)
+    }
+    ownershipIntents.value = [...intents].sort()
+  } catch {
+    /* 无徽标即可，不打扰原生配置主流程 */
+  }
+}
 
 const tabs = computed<ConsoleTab[]>(() => deriveTabs(schemaFields.value))
 const activeTab = ref('')
@@ -73,6 +100,7 @@ async function loadSchema() {
 }
 
 watch(moduleName, loadSchema)
+watch([selectedDevice, moduleName], loadOwnership)
 
 onMounted(async () => {
   await Promise.allSettled([store.fetchDevices(), loadSchema()])

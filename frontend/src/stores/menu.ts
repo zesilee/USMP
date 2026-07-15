@@ -47,12 +47,20 @@ export const useMenuStore = defineStore('menu', () => {
     }
   }
 
+  // 业务网络配置模块（FE-17）：task-name=business-network 的模块归业务菜单组
+  // （意图层，平台作用域控制台 /business/:module），不进「原生配置」分组。
+  const BUSINESS_CATEGORY = 'business-network'
+  const businessModules = computed(() =>
+    nativeModules.value.filter((m) => m.category === BUSINESS_CATEGORY),
+  )
+
   // 原生模块按任务域聚合（FE-13）：category 首现序，未标注归默认组('')排最后；
   // 全部未标注 → 单一默认组，菜单退化为平铺（R08 渲染不失败）。
   const nativeGroups = computed(() => {
     const order: string[] = []
     const byCat = new Map<string, NativeModel[]>()
     for (const m of nativeModules.value) {
+      if (m.category === BUSINESS_CATEGORY) continue
       const c = m.category || ''
       if (!byCat.has(c)) {
         byCat.set(c, [])
@@ -73,6 +81,7 @@ export const useMenuStore = defineStore('menu', () => {
     isCollapsed,
     nativeModules,
     nativeGroups,
+    businessModules,
     nativeLoaded,
     loadNativeModules,
     toggleCollapse

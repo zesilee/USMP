@@ -25,9 +25,7 @@
       </el-menu-item>
 
       <!-- 原生配置菜单：/yang/modules 模型驱动，指向通用模块控制台（FE-13）。
-           原生配置 = 直接基于 YANG 模型的设备配置管理；加载失败回退内置项（R08）。
-           「业务网络配置」为未来扩展层（业务模型→编排为原生配置下发），
-           方向见 openspec/tasks/business-network-config.md。 -->
+           原生配置 = 直接基于 YANG 模型的设备配置管理；加载失败回退内置项（R08）。 -->
       <el-sub-menu index="native-config">
         <template #title>
           <el-icon><Connection /></el-icon>
@@ -63,6 +61,24 @@
         </template>
       </el-sub-menu>
 
+      <!-- 业务网络配置（FE-17）：task-name=business-network 的意图模块自动出现
+           （category 分桶零硬编码），指向平台作用域业务控制台 /business/:module。
+           无业务模块（后端未接入/降级）时整组隐藏。 -->
+      <el-sub-menu v-if="businessModules.length" index="business-config" data-test="business-group">
+        <template #title>
+          <el-icon><Share /></el-icon>
+          <span>业务网络配置</span>
+        </template>
+        <el-menu-item
+          v-for="m in businessModules"
+          :key="m.name"
+          :index="`/business/${m.name}`"
+          :data-test="`business-item-${m.name}`"
+        >
+          {{ m.title }}
+        </el-menu-item>
+      </el-sub-menu>
+
       <el-menu-item index="/logs">
         <el-icon><Document /></el-icon>
         <template #title>操作日志</template>
@@ -90,7 +106,7 @@
 import { computed, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { useMenuStore } from '../../stores/menu'
-import { DataLine, Monitor, Connection, Document, Tools, Fold, Expand } from '@element-plus/icons-vue'
+import { DataLine, Monitor, Connection, Document, Tools, Fold, Expand, Share } from '@element-plus/icons-vue'
 
 const route = useRoute()
 const menuStore = useMenuStore()
@@ -100,6 +116,7 @@ const isCollapsed = computed(() => menuStore.isCollapsed)
 const nativeModules = computed(() => menuStore.nativeModules)
 const nativeGroups = computed(() => menuStore.nativeGroups)
 const nativeGrouped = computed(() => nativeGroups.value.some((g) => g.category))
+const businessModules = computed(() => menuStore.businessModules)
 
 onMounted(() => {
   menuStore.loadNativeModules()
