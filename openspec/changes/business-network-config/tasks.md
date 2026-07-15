@@ -19,9 +19,9 @@
 
 ## 4. 意图 YANG 模型与管线接入（BVS-01，D2）
 
-- [ ] 4.1 编写 `usmp-business-vlan.yang`（vlan-id/name/devices{ip,access-ports,trunk-ports}，task-name=业务网络配置）
-- [ ] 4.2 gen.conf 接入 + ygot 生成 `internal/generated/business/` + `/yang/modules`、`/yang/schema` 暴露（含 category 断言测试）
-- [ ] 4.3 触发 `yang-config-test-design` 产出意图模型完备测试矩阵（T02b），矩阵项落入后续任务验收
+- [x] 4.1 编写 `usmp-business-vlan.yang`（vlan-id/name/devices{ip,access-ports,trunk-ports}，task-name=业务网络配置）
+- [x] 4.2 gen.conf 接入 + ygot 生成 `internal/generated/business/` + `/yang/modules`、`/yang/schema` 暴露（含 category 断言测试）
+- [x] 4.3 触发 `yang-config-test-design` 产出意图模型完备测试矩阵（T02b），矩阵项落入后续任务验收
 
 ## 5. 展开引擎（BIO-02，BVS-02）
 
