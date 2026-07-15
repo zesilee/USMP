@@ -10,7 +10,9 @@ import (
 	"io"
 	"log"
 	"net"
+	"strconv"
 	"strings"
+	"time"
 
 	"golang.org/x/crypto/ssh"
 )
@@ -83,7 +85,7 @@ func (s *sshServer) handleSession(ch ssh.Channel) {
 	reader := bufio.NewReader(ch)
 
 	// Send server hello
-	hello := buildHello(1, s.extraCaps)
+	hello := buildHello(1, s.extraCaps, !s.scenario.DisableConfirmedCommit)
 
 	var buf bytes.Buffer
 	buf.WriteString(xml.Header)
@@ -215,11 +217,15 @@ func classifyRPC(msg string) rpcKind {
 // buildHello constructs the server hello advertising base:1.0 plus the
 // :candidate and :writable-running capabilities. base:1.1 is intentionally not
 // advertised so scrapligo negotiates 1.0 EOM framing (design D4 / T0.3).
-func buildHello(sessionID int, extraCaps []string) *Hello {
+// confirmedCommit gates the :confirmed-commit capability (NS-07 能力开关).
+func buildHello(sessionID int, extraCaps []string, confirmedCommit bool) *Hello {
 	caps := []Capability{
 		{URN: "urn:ietf:params:netconf:base:1.0"},
 		{URN: "urn:ietf:params:netconf:capability:candidate:1.0"},
 		{URN: "urn:ietf:params:netconf:capability:writable-running:1.0"},
+	}
+	if confirmedCommit {
+		caps = append(caps, Capability{URN: "urn:ietf:params:netconf:capability:confirmed-commit:1.1"})
 	}
 	for _, c := range extraCaps {
 		caps = append(caps, Capability{URN: c})
@@ -404,11 +410,48 @@ func (s *sshServer) handleCommit(msg, msgID string) string {
 		return errorReply(msgID, err.Error())
 	}
 
+	// NS-07: <commit><confirmed/> starts a confirmation window; a plain
+	// <commit/> inside the window is the confirming commit.
+	if confirmed, timeout := parseConfirmedCommit(msg); confirmed {
+		if s.scenario.DisableConfirmedCommit {
+			return errorReply(msgID, "confirmed commit not supported")
+		}
+		if err := s.store.CommitConfirmed(timeout); err != nil {
+			return errorReply(msgID, err.Error())
+		}
+		return okReply(msgID)
+	}
+	if s.store.ConfirmCommit() {
+		return okReply(msgID)
+	}
+
 	err := s.store.Commit()
 	if err != nil {
 		return errorReply(msgID, err.Error())
 	}
 	return okReply(msgID)
+}
+
+// parseConfirmedCommit reports whether the commit RPC carries <confirmed/>,
+// and its confirm-timeout (seconds; RFC 6241 default 600).
+func parseConfirmedCommit(msg string) (bool, time.Duration) {
+	var env struct {
+		XMLName xml.Name `xml:"rpc"`
+		Commit  *struct {
+			Confirmed      *struct{} `xml:"confirmed"`
+			ConfirmTimeout string    `xml:"confirm-timeout"`
+		} `xml:"commit"`
+	}
+	if err := xml.Unmarshal([]byte(msg), &env); err != nil || env.Commit == nil || env.Commit.Confirmed == nil {
+		return false, 0
+	}
+	timeout := 600 * time.Second
+	if v := strings.TrimSpace(env.Commit.ConfirmTimeout); v != "" {
+		if secs, err := strconv.Atoi(v); err == nil && secs > 0 {
+			timeout = time.Duration(secs) * time.Second
+		}
+	}
+	return true, timeout
 }
 
 func (s *sshServer) handleDiscardChanges(msg, msgID string) string {
