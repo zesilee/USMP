@@ -35,8 +35,10 @@ subjects:
     name: usmp
     namespace: usmp-system
 ---
-# leader election（BIO-08 接缝，USMP_INTENT_LEADER_ELECTION=1 时启用）：
-# Lease 限定在意图 CR 所在 namespace（USMP_INTENT_NAMESPACE，默认 default）。
+# leader election：Lease 限定在意图 CR 所在 namespace（USMP_INTENT_NAMESPACE，
+# 默认 default）。同时覆盖两把锁：意图面 usmp-business-intent
+# （USMP_INTENT_LEADER_ELECTION=1，BIO-08）与原生周期控制器面
+# usmp-native-controllers（USMP_NATIVE_LEADER_ELECTION=1，YR-08 全局 HA W3）。
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:

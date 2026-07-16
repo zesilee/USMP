@@ -17,6 +17,7 @@ import (
 	"github.com/leezesi/usmp/backend/internal/yangschema"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/controller"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/device"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/leader"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/manager"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/predicate"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/source"
@@ -57,11 +58,15 @@ func main() {
 	cs := mgr.GetConfigStore()
 	clientPool := mgr.GetClientPool()
 
+	// YR-08: 原生周期控制器统一选主门（单全局 Lease usmp-native-controllers，
+	// USMP_NATIVE_LEADER_ELECTION=1 且集群可达时生效；否则透传零行为变化）。
+	nativeGate := buildNativeGate()
+
 	// Periodic source polls all configured devices for reconciliation
 	// Pass nil for deviceIDs to indicate all devices that have desired config
 	vlanCtrl := controller.ControllerManagedBy("huawei-vlan").
 		WithReconciler(vlan.New(cs, clientPool, mgr.GetDeviceStore())).
-		WithSource(source.NewPeriodicSourceWithLister(5*time.Minute, mgr.GetDeviceStore(), "/vlan:vlan/vlan:vlans")).
+		WithSource(nativeGate.Wrap(source.NewPeriodicSourceWithLister(5*time.Minute, mgr.GetDeviceStore(), "/vlan:vlan/vlan:vlans"))).
 		WithPredicate(predicate.Prefix("/vlan:vlan/vlan:vlans")).
 		WithWorkerCount(2).
 		Build()
@@ -73,7 +78,7 @@ func main() {
 	// The IFM controller reconciles interface configuration every 5 minutes
 	ifmCtrl := controller.ControllerManagedBy("huawei-ifm").
 		WithReconciler(ifm.New(cs, clientPool, mgr.GetDeviceStore())).
-		WithSource(source.NewPeriodicSourceWithLister(5*time.Minute, mgr.GetDeviceStore(), "/ifm:ifm/ifm:interfaces")).
+		WithSource(nativeGate.Wrap(source.NewPeriodicSourceWithLister(5*time.Minute, mgr.GetDeviceStore(), "/ifm:ifm/ifm:interfaces"))).
 		WithPredicate(predicate.Prefix("/ifm:ifm/ifm:interfaces")).
 		WithWorkerCount(2).
 		Build()
@@ -85,7 +90,7 @@ func main() {
 	// The System controller reconciles system configuration every 5 minutes
 	systemCtrl := controller.ControllerManagedBy("huawei-system").
 		WithReconciler(system.New(cs, clientPool, mgr.GetDeviceStore())).
-		WithSource(source.NewPeriodicSourceWithLister(5*time.Minute, mgr.GetDeviceStore(), "/system:system")).
+		WithSource(nativeGate.Wrap(source.NewPeriodicSourceWithLister(5*time.Minute, mgr.GetDeviceStore(), "/system:system"))).
 		WithPredicate(predicate.Prefix("/system:system")).
 		WithWorkerCount(2).
 		Build()
@@ -97,7 +102,7 @@ func main() {
 	// Name 含 "bgp" → manager.TriggerReconcile 按 ControllerToken="bgp" 路由命中。
 	bgpCtrl := controller.ControllerManagedBy("huawei-bgp").
 		WithReconciler(bgp.New(cs, clientPool, mgr.GetDeviceStore())).
-		WithSource(source.NewPeriodicSourceWithLister(5*time.Minute, mgr.GetDeviceStore(), bgp.BgpPath)).
+		WithSource(nativeGate.Wrap(source.NewPeriodicSourceWithLister(5*time.Minute, mgr.GetDeviceStore(), bgp.BgpPath))).
 		WithPredicate(predicate.Prefix(bgp.BgpPath)).
 		WithWorkerCount(2).
 		Build()
@@ -110,7 +115,7 @@ func main() {
 	// → manager.TriggerReconcile 按 ControllerToken="network-instance" 路由命中。
 	niCtrl := controller.ControllerManagedBy("huawei-network-instance").
 		WithReconciler(networkinstance.New(cs, clientPool, mgr.GetDeviceStore())).
-		WithSource(source.NewPeriodicSourceWithLister(5*time.Minute, mgr.GetDeviceStore(), networkinstance.NetworkInstancePath)).
+		WithSource(nativeGate.Wrap(source.NewPeriodicSourceWithLister(5*time.Minute, mgr.GetDeviceStore(), networkinstance.NetworkInstancePath))).
 		WithPredicate(predicate.Prefix(networkinstance.NetworkInstancePath)).
 		WithWorkerCount(2).
 		Build()
@@ -160,6 +165,27 @@ func auditFilePath() string {
 		return p
 	}
 	return "data/audit.json"
+}
+
+// buildNativeGate 构建原生周期控制器的统一选主门（YR-08）：开关
+// USMP_NATIVE_LEADER_ELECTION=1 且集群可达时返回 usmp-native-controllers
+// Lease 的 Gate（与意图面 usmp-business-intent 互不干扰）；否则返回 nil
+// Gate（Wrap 透传，现行为零变化，R08）。
+func buildNativeGate() *leader.Gate {
+	if os.Getenv("USMP_NATIVE_LEADER_ELECTION") != "1" {
+		return nil
+	}
+	cfg, err := ctrlcfg.GetConfig()
+	if err != nil {
+		log.Printf("native leader election: no reachable cluster, sources run ungated: %v", err)
+		return nil
+	}
+	log.Printf("native leader election enabled (lease usmp-native-controllers, namespace %q)", intent.Namespace())
+	return leader.NewGate(cfg, leader.Options{
+		LeaseName: "usmp-native-controllers",
+		Namespace: intent.Namespace(),
+		LogPrefix: "native",
+	})
 }
 
 // buildDeviceStore 按集群可达性选择设备注册表后端（DS-01/DS-05）：可达走

@@ -26,7 +26,8 @@ kubectl apply -f deploy/rbac/
 | 变量 | 缺省 | 说明 |
 |------|------|------|
 | `USMP_INTENT_NAMESPACE` | `default` | 意图 CR、Device CR 与凭据 Secret 所在 namespace（USMP API 代理与 Lease 同域） |
-| `USMP_INTENT_LEADER_ELECTION` | 关 | `1` 启用意图控制器 leader election（多副本时仅 leader 执行展开/2PC/清理；BIO-08 接缝。注意：存量原生周期控制器选主见 global-ha-multi-instance W3） |
+| `USMP_INTENT_LEADER_ELECTION` | 关 | `1` 启用意图控制器 leader election（多副本时仅 leader 执行展开/2PC/清理；BIO-08 接缝，Lease `usmp-business-intent`） |
+| `USMP_NATIVE_LEADER_ELECTION` | 关 | `1` 启用原生周期控制器（vlan/ifm/system/bgp/ni）统一 leader election（YR-08：多副本仅 leader 产生周期对账事件，Lease `usmp-native-controllers`，与意图面互不干扰；无集群透传） |
 | `USMP_SEED_DEVICE` | 无 | 种子设备 `ip[:port],user,pass[,vendor]`（DS-03，仅无集群内存降级模式生效；集群模式设备集合来自 Device CR，该变量被忽略） |
 
 ## 设备注册表（DS-01/04/05）
