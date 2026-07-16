@@ -122,6 +122,13 @@ spec:
   template:
     metadata: { labels: { app: netconf-sim } }
     spec:
+      # 镜像以非 root（USER usmp）运行绑 830 特权端口：Docker 默认放开
+      # ip_unprivileged_port_start=0 而 K8s/containerd 不放 → 不加此 sysctl
+      # 会 "bind: permission denied"（安全 sysctl，K8s ≥1.22 免配置白名单）。
+      securityContext:
+        sysctls:
+          - name: net.ipv4.ip_unprivileged_port_start
+            value: "0"
       containers:
         - name: sim
           image: usmp-simulator:latest
