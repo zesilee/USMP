@@ -12,7 +12,6 @@ import (
 	"github.com/leezesi/usmp/backend/internal/controller/networkinstance"
 	"github.com/leezesi/usmp/backend/internal/controller/system"
 	"github.com/leezesi/usmp/backend/internal/controller/vlan"
-	"github.com/leezesi/usmp/backend/internal/crdsource"
 	"github.com/leezesi/usmp/backend/internal/intent"
 	"github.com/leezesi/usmp/backend/internal/yangschema"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/audit"
@@ -125,15 +124,8 @@ func main() {
 	mgr.AddController(niCtrl)
 	log.Printf("Huawei network-instance controller registered successfully")
 
-	// Register the BusinessVlan CRD intent source (场景② 意图面收编 Stack B),
-	// parallel to the legacy Actor path. Degrades gracefully without a K8s cluster.
-	crdCache, err := crdsource.RegisterIntentSources(mgr)
-	if err != nil {
-		log.Printf("Failed to register CRD intent source: %v", err)
-	}
-
 	// 业务网络配置意图控制器（business-network-config）：BusinessVlanService CR
-	// watch → 校验/展开/status 回写；旧 BusinessVlan 桥接并行保留（渐进替换）。
+	// watch → 校验/展开/status 回写（旧 BusinessVlan 桥接已退役，本控制器是唯一意图面）。
 	// 无 K8s 集群时优雅降级（BIO-01）。
 	intentCache, err := intent.Register(mgr)
 	if err != nil {
@@ -141,8 +133,7 @@ func main() {
 	}
 
 	// Start the manager - loads schema, starts all controllers
-	go crdsource.StartCache(ctx, crdCache)
-	go crdsource.StartCache(ctx, intentCache)
+	go intent.StartCache(ctx, intentCache)
 
 	if err := mgr.Start(ctx); err != nil {
 		log.Fatalf("Failed to start Manager: %v", err)
