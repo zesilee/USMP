@@ -39,6 +39,6 @@
 
 ## 5. 收官
 
-- [ ] 5.1 双路径验证汇总：staging 多副本演练（两副本 + 两开关开 → 单 leader 日志、设备/审计跨副本可见、杀 leader 接管）证据留档
+- [x] 5.1 双路径验证汇总：staging 多副本演练（两副本 + 两开关开 → 单 leader 日志、设备/审计跨副本可见、杀 leader 接管）证据留档
 - [ ] 5.2 `/opsx:sync` delta → 主 spec；更新 `openspec/tasks/global-ha-multi-instance.md` 状态与记忆（k8s-paas-deployment-constraints follow-up 勾销本项）
 - [ ] 5.3 `/opsx:archive` 归档 change

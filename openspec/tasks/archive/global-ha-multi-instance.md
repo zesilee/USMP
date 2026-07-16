@@ -26,4 +26,4 @@ USMP 多实例（≥2 副本）真 HA：意图层已就绪（CR 持久化 + lead
 ## 交付记录（2026-07-16）
 
 - 四波次全部合入 main（#175/#177/#176/#178/#179），主 spec 已 sync（device-store/devices-api/yang-controller-runtime/system-architecture + 新能力 operation-audit）。
-- **部署时验收项（本机无 K8s 集群，未演练）**：真实集群两副本 + `USMP_INTENT_LEADER_ELECTION=1` + `USMP_NATIVE_LEADER_ELECTION=1` → 验证单 leader 日志、设备/审计跨副本可见、杀 leader 接管。多副本性质已由 envtest 双实例矩阵覆盖（双 store watch、双 gate 接管、并发清理收敛）。
+- **部署时验收项（✅ 2026-07-16 WSL kind 实测通过：双副本+双选主开关，单 leader/接管/跨副本可见/审计跨重启/无本地持久全过；环境=scripts/kind-deploy.sh，踩坑记录见记忆 kind-deploy-gotchas 与 PR#182-#184）**：真实集群两副本 + `USMP_INTENT_LEADER_ELECTION=1` + `USMP_NATIVE_LEADER_ELECTION=1` → 验证单 leader 日志、设备/审计跨副本可见、杀 leader 接管。多副本性质已由 envtest 双实例矩阵覆盖（双 store watch、双 gate 接管、并发清理收敛）。
