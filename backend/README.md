@@ -195,10 +195,6 @@ spec:
 
 | 文档 | 说明 |
 |------|------|
-| [BusinessSwitch CRD 使用指南](docs/crd/businessswitch.md) | 交换机设备管理 |
-| [BusinessVlan CRD 使用指南](docs/crd/businessvlan.md) | VLAN 配置管理 |
-| [BusinessInterface CRD 使用指南](docs/crd/businessinterface.md) | 接口配置管理 |
-| [BusinessRoute CRD 使用指南](docs/crd/businessroute.md) | 路由配置管理 |
 | [NativeDeviceConfig CRD 使用指南](docs/crd/nativedeviceconfig.md) | 原生配置透传 |
 
 ### 🔌 API 文档
