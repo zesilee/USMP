@@ -167,17 +167,12 @@ func (t *TxCoordinator) discardAll(ctx context.Context, clients map[string]txCli
 	}
 }
 
-// resolveConn resolves connection info via the shared DeviceStore, degrading
-// to an AUTO/no-credential connection for unregistered devices (PR#100 兜底,
-// R08 — auth fails cleanly rather than crash).
+// resolveConn delegates to the shared device.ResolveConn helper (DS-06):
+// registered devices use stored info, unregistered degrade to
+// AUTO/no-credential (R08).
 func (t *TxCoordinator) resolveConn(deviceID string) client.DeviceConnectionInfo {
-	if t.devices != nil {
-		if info, ok := t.devices.Get(deviceID); ok {
-			return info
-		}
-	}
-	log.Printf("intent: device %q not registered in DeviceStore; using AUTO/no-credential connection", deviceID)
-	return client.DeviceConnectionInfo{IP: deviceID, Protocol: client.ProtocolAUTO}
+	info, _ := device.ResolveConn(t.devices, deviceID)
+	return info
 }
 
 // lockAll acquires per-device mutexes in slice order and returns the combined

@@ -4,9 +4,10 @@
 #   后端：go build 后直接运行（:8080）
 #   前端：vite dev（:3000，HMR，/api 代理到 :8080）
 #
-# 设备接线说明：backend 硬编码种子设备 192.168.1.1:830（不可经 env 配置）。本地无 docker
-# 自定义网桥，该地址不可达 → 设备展示「离线」。这对前端/API 迭代无碍：页面渲染、路由、
-# 动态表单、YANG 契约、绝大多数 API 端点照常工作。
+# 设备接线说明：种子设备经 USMP_SEED_DEVICE 注入（DS-03，本脚本缺省注入
+# 192.168.1.1:830,admin,admin 保持既有开发体验）。本地无 docker 自定义网桥，该地址
+# 不可达 → 设备展示「离线」。这对前端/API 迭代无碍：页面渲染、路由、动态表单、
+# YANG 契约、绝大多数 API 端点照常工作。
 # 需要「设备在线」的端到端（配置读写对账、E2E）请用 docker 路径：make staging-up / make e2e-local
 # （它把 simulator 固定到 192.168.1.1:830，正确对齐种子设备）。
 set -euo pipefail
@@ -33,7 +34,7 @@ echo "[dev] 编译后端..."
 ( cd "$ROOT/backend" && go build -o "$BIN" . )
 
 echo "[dev] 启动后端（:8080）..."
-( cd "$ROOT/backend" && exec "$BIN" ) &
+( cd "$ROOT/backend" && USMP_SEED_DEVICE="${USMP_SEED_DEVICE:-192.168.1.1:830,admin,admin}" exec "$BIN" ) &
 BACK_PID=$!
 
 echo "[dev] 等待后端就绪..."

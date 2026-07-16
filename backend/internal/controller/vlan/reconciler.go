@@ -4,7 +4,6 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"log"
 
 	_ "github.com/leezesi/usmp/backend/internal/drivers" // 描述符注册（回读解码经注册表，XC-04）
 	"github.com/leezesi/usmp/backend/internal/generated/huawei"
@@ -69,19 +68,12 @@ type deviceClient struct {
 	resolver   device.Store
 }
 
-// resolveConn resolves connection info via the shared DeviceStore (source of
-// truth), falling back to parsing the DeviceID string when the device is not
-// registered or no store is wired (legacy path, R08 degrade — no crash).
+// resolveConn delegates to the shared device.ResolveConn helper (DS-06):
+// registered devices use stored info, unregistered degrade to
+// AUTO/no-credential (R08).
 func (d *deviceClient) resolveConn(deviceID string) client.DeviceConnectionInfo {
-	if d.resolver != nil {
-		if info, ok := d.resolver.Get(deviceID); ok {
-			return info
-		}
-	}
-	// Unregistered device (or no store): degrade to an AUTO/no-credential
-	// connection; authentication fails cleanly (R08) rather than crash.
-	log.Printf("[vlan] device %q not registered in DeviceStore; using AUTO/no-credential connection", deviceID)
-	return client.DeviceConnectionInfo{IP: deviceID, Protocol: client.ProtocolAUTO}
+	info, _ := device.ResolveConn(d.resolver, deviceID)
+	return info
 }
 
 // Get retrieves the actual VLAN configuration from the device and converts it to the openconfig.VLans struct

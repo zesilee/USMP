@@ -12,10 +12,10 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-// TestDeviceHandler_SeedWritesToStore: the seeded device must land in the shared
-// DeviceStore with complete connection info, so reconcile/config/periodic can
-// resolve its credentials (root fix for #100/#101).
-func TestDeviceHandler_SeedWritesToStore(t *testing.T) {
+// DS-03: 种子设备不再硬编码，仅经 USMP_SEED_DEVICE 注入（root fix for #100/#101
+// 的注册语义保持：完整连接信息进共享 DeviceStore）。
+func TestDeviceHandler_SeedFromEnvWritesToStore(t *testing.T) {
+	t.Setenv("USMP_SEED_DEVICE", "192.168.1.1:830,admin,admin")
 	mgr := manager.New()
 	NewDeviceHandler(mgr)
 
@@ -25,6 +25,37 @@ func TestDeviceHandler_SeedWritesToStore(t *testing.T) {
 	assert.Equal(t, "admin", info.Username)
 	assert.Equal(t, "admin", info.Password)
 	assert.Equal(t, client.ProtocolAUTO, info.Protocol)
+}
+
+// DS-03: 未设种子变量则空库启动，不崩溃。
+func TestDeviceHandler_NoSeedEnvEmptyStore(t *testing.T) {
+	t.Setenv("USMP_SEED_DEVICE", "")
+	mgr := manager.New()
+	NewDeviceHandler(mgr)
+
+	assert.Empty(t, mgr.GetDeviceStore().List(), "未设 USMP_SEED_DEVICE 应空库启动")
+}
+
+// DS-03 边界：格式错误的种子变量仅告警不入库、不崩溃（R08）。
+func TestDeviceHandler_MalformedSeedEnvIgnored(t *testing.T) {
+	for _, bad := range []string{"192.168.1.1", "192.168.1.1,admin", "ip:notaport,u,p", ",u,p"} {
+		t.Setenv("USMP_SEED_DEVICE", bad)
+		mgr := manager.New()
+		NewDeviceHandler(mgr)
+		assert.Empty(t, mgr.GetDeviceStore().List(), "格式错误 %q 不应入库", bad)
+	}
+}
+
+// DS-03: 端口缺省 830、厂商可显式指定。
+func TestDeviceHandler_SeedEnvDefaultsAndVendor(t *testing.T) {
+	t.Setenv("USMP_SEED_DEVICE", "10.0.0.5,op,pw,h3c")
+	mgr := manager.New()
+	NewDeviceHandler(mgr)
+
+	info, ok := mgr.GetDeviceStore().Get("10.0.0.5")
+	assert.True(t, ok)
+	assert.Equal(t, 830, info.Port, "未带端口应缺省 830")
+	assert.Equal(t, "h3c", info.Vendor)
 }
 
 // TestDeviceHandler_AddDeviceWritesToStore: AddDevice must also register the
@@ -51,6 +82,7 @@ func TestDeviceHandler_AddDeviceWritesToStore(t *testing.T) {
 // TestDeviceHandler_RemoveDeviceDeletesFromStore: RemoveDevice must drop the
 // device from the shared store too, keeping it as the single source of truth.
 func TestDeviceHandler_RemoveDeviceDeletesFromStore(t *testing.T) {
+	t.Setenv("USMP_SEED_DEVICE", "192.168.1.1:830,admin,admin")
 	mgr := manager.New()
 	h := NewDeviceHandler(mgr)
 

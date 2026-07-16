@@ -1,11 +1,11 @@
 ---
 id: global-ha-multi-instance
 title: 全局 HA——device store 共享化、全控制器 leader election、audit 迁出本地文件
-status: pending
+status: in_progress
 priority: medium
-branch: (未开始)
+branch: (未开始，apply 时按波次开 worktree)
 worktree: (未创建)
-change: (启动时 /opsx:explore → /opsx:propose 立项)
+change: openspec/changes/global-ha-multi-instance（proposal/design/specs/tasks 四件齐，2026-07-16 立项）
 updated: 2026-07-16
 origin: business-network-config 收官 follow-up（SC-06 遗留）；部署约束见记忆 k8s-paas-deployment-constraints
 ---

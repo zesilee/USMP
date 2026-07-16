@@ -1,6 +1,10 @@
 package api
 
 import (
+	"log"
+	"os"
+	"strconv"
+	"strings"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -34,17 +38,45 @@ type DeviceHandler struct {
 func NewDeviceHandler(manager manager.Manager) *DeviceHandler {
 	h := &DeviceHandler{manager: manager}
 
-	// Seed the default test device into the shared DeviceStore so reconcile /
-	// config / periodic can resolve its credentials.
-	h.putStore(DeviceInfo{
-		IP:       "192.168.1.1",
-		Port:     830,
-		Username: "admin",
-		Password: "admin",
-		Vendor:   defaultVendor,
-	})
+	// DS-03: 种子设备不再硬编码，仅经 USMP_SEED_DEVICE 注入（供本地开发/E2E；
+	// 集群模式下设备集合来自 Device CR，该变量被忽略——W2 装配时生效）。
+	if seed, ok := parseSeedDevice(os.Getenv("USMP_SEED_DEVICE")); ok {
+		h.putStore(seed)
+	}
 
 	return h
+}
+
+// parseSeedDevice parses USMP_SEED_DEVICE: "ip[:port],username,password[,vendor]"
+// (port 缺省 830，vendor 缺省 huawei)。格式错误仅告警不入库（R08）。
+func parseSeedDevice(raw string) (DeviceInfo, bool) {
+	if raw == "" {
+		return DeviceInfo{}, false
+	}
+	parts := strings.Split(raw, ",")
+	if len(parts) < 3 || len(parts) > 4 {
+		log.Printf("device: invalid USMP_SEED_DEVICE %q (want ip[:port],user,pass[,vendor]); no seed", raw)
+		return DeviceInfo{}, false
+	}
+	host, user, pass := strings.TrimSpace(parts[0]), parts[1], parts[2]
+	port := 830
+	if ip, portStr, found := strings.Cut(host, ":"); found {
+		p, err := strconv.Atoi(portStr)
+		if err != nil || p <= 0 || p > 65535 {
+			log.Printf("device: invalid port in USMP_SEED_DEVICE %q; no seed", raw)
+			return DeviceInfo{}, false
+		}
+		host, port = ip, p
+	}
+	if host == "" || user == "" || pass == "" {
+		log.Printf("device: empty field in USMP_SEED_DEVICE %q; no seed", raw)
+		return DeviceInfo{}, false
+	}
+	vendor := defaultVendor
+	if len(parts) == 4 && strings.TrimSpace(parts[3]) != "" {
+		vendor = strings.TrimSpace(parts[3])
+	}
+	return DeviceInfo{IP: host, Port: port, Username: user, Password: pass, Vendor: vendor}, true
 }
 
 // toConnInfo maps a DeviceInfo to the shared store's connection-info type,
@@ -126,20 +158,13 @@ type DeviceStatus struct {
 // probeOnline reports whether a device is reachable, via the ClientPool直连
 // (Get + IsConnected). A connection error is treated as offline (R08).
 func probeOnline(pool client.ClientPool, d DeviceInfo) bool {
-	port := d.Port
-	if port == 0 {
-		port = 830
+	info := toConnInfo(d)
+	if info.Port == 0 {
+		info.Port = 830
 	}
-	c, err := pool.Get(client.DeviceConnectionInfo{
-		IP:       d.IP,
-		Port:     port,
-		Username: d.Username,
-		Password: d.Password,
-		// Protocol must be set or the factory hits its default ("unsupported
-		// protocol") branch and the probe would falsely report the device offline.
-		Protocol: client.ProtocolAUTO,
-		Timeout:  3 * time.Second,
-	})
+	// Short probe timeout — an unreachable device must not hang the API.
+	info.Timeout = 3 * time.Second
+	c, err := pool.Get(info)
 	return err == nil && c != nil && c.IsConnected()
 }
 
@@ -224,23 +249,18 @@ func (h *DeviceHandler) AddDevice(c *gin.Context) {
 		return
 	}
 
-	h.putStore(DeviceInfo{
+	added := DeviceInfo{
 		IP:       req.IP,
 		Port:     req.Port,
 		Username: req.Username,
 		Password: req.Password,
 		Vendor:   req.Vendor,
-	})
+	}
+	h.putStore(added)
 
 	// Try to create client and connect immediately
 	pool := h.manager.GetClientPool()
-	_, err := pool.Get(client.DeviceConnectionInfo{
-		IP:       req.IP,
-		Port:     req.Port,
-		Username: req.Username,
-		Password: req.Password,
-		Protocol: client.ProtocolAUTO,
-	})
+	_, err := pool.Get(toConnInfo(added))
 	if err != nil {
 		// We still store the device info but return the error
 		Error(c, 500, "Failed to connect to device: "+err.Error())

@@ -4,9 +4,9 @@
 #       跑完 Playwright 全栈 E2E 后保持常驻，成为随时可访问的本地 staging。
 #   前端：http://localhost:3002    后端 API：http://localhost:8080/api/v1
 #
-# 关键接线：backend 硬编码默认设备 192.168.1.1:830 admin/admin（不可经 env 配置），
-#   且 E2E 断言该设备返回 ≥4 VLAN。故给 simulator 在自定义 bridge 上固定 IP 192.168.1.1，
-#   backend 同网即可用种子设备直连模拟器 —— 无需改任何后端代码或 E2E 断言。
+# 关键接线：backend 种子设备经 USMP_SEED_DEVICE 注入（DS-03，缺省无种子），
+#   E2E 断言该设备返回 ≥4 VLAN。故给 simulator 在自定义 bridge 上固定 IP 192.168.1.1，
+#   backend 同网即可用种子设备直连模拟器。
 #   （Docker Desktop for Mac 的 bridge 运行在其 LinuxKit VM 内，与宿主 LAN 隔离，
 #    即便家用路由器同为 192.168.1.1 也不冲突。冲突回退见 docs/CICD.md。）
 
@@ -37,6 +37,9 @@ services:
       dockerfile: Dockerfile
     image: usmp-controller:latest
     restart: unless-stopped
+    environment:
+      # DS-03 种子设备：ip[:port],user,pass[,vendor]，对齐 simulator 固定 IP
+      USMP_SEED_DEVICE: "192.168.1.1:830,admin,admin"
     ports:
       - "8080:8080"
     depends_on:
