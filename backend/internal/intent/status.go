@@ -100,6 +100,11 @@ func updateStatusWithRetry(ctx context.Context, c client.Client, key types.Names
 		if err := c.Get(ctx, key, u); err != nil {
 			return err
 		}
+		// 归一化：status 键可能以显式 nil 存在（fake client 的普通 Update 会写入
+		// "status": nil），SetNestedField 遇非 map 值会静默失败——先立空 map。
+		if s, ok := u.Object["status"]; !ok || s == nil {
+			u.Object["status"] = map[string]interface{}{}
+		}
 		mutate(u)
 		// 原样返回错误：RetryOnConflict 依赖 apierrors.IsConflict 判定。
 		return c.Status().Update(ctx, u)
