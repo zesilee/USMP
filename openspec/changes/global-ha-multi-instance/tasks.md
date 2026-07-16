@@ -23,11 +23,11 @@
 
 ## 3. W3 选主泛化 + 原生面 gate
 
-- [ ] 3.1 测试设计：泛化 `leader.GateSources` 用例（开关关透传/无集群透传/仅 leader 启动 inner/失主停止/两 gate 独立 Lease 互不干扰；envtest 双副本仅 leader 入队）——迁移并扩展 `intent/leader_test.go`，红灯先行
-- [ ] 3.2 提取 `pkg/yang-runtime/leader`：参数化 Lease name/开关 env 的 `GateSources`（YR-08），Lease 参数照搬 intent（15s/10s/2s、ReleaseOnCancel）
-- [ ] 3.3 原生面接线：`main.go` 5 个周期 source 统一包 `usmp-native-leader gate`（`USMP_NATIVE_LEADER_ELECTION`，缺省关）；intent 改调泛化实现并删除本地副本（行为等价验证）
-- [ ] 3.4 部署物料：rbac 加 `usmp-native-controllers` Lease、README 环境变量表更新
-- [ ] 3.5 全量验证：`go test ./... -race` 全绿（含 envtest）→ review → commit → PR-W3
+- [x] 3.1 测试设计：泛化 `leader.GateSources` 用例（开关关透传/无集群透传/仅 leader 启动 inner/失主停止/两 gate 独立 Lease 互不干扰；envtest 双副本仅 leader 入队）——迁移并扩展 `intent/leader_test.go`，红灯先行
+- [x] 3.2 提取 `pkg/yang-runtime/leader`：参数化 Lease name/开关 env 的 `GateSources`（YR-08），Lease 参数照搬 intent（15s/10s/2s、ReleaseOnCancel）
+- [x] 3.3 原生面接线：`main.go` 5 个周期 source 统一包 `usmp-native-leader gate`（`USMP_NATIVE_LEADER_ELECTION`，缺省关）；intent 改调泛化实现并删除本地副本（行为等价验证）
+- [x] 3.4 部署物料：rbac 加 `usmp-native-controllers` Lease、README 环境变量表更新
+- [x] 3.5 全量验证：`go test ./... -race` 全绿（含 envtest）→ review → commit → PR-W3
 
 ## 4. W4 audit 接口化 + CRD 后端 + 本地文件退役
 
