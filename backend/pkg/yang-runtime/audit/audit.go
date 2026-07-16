@@ -1,8 +1,8 @@
 // Package audit records config-delivery operations as an append-only log so
-// they can be surfaced via the API (操作日志). It is an in-memory,
-// concurrency-safe store (R09) with best-effort persistence to a local JSON
-// file (§8 本地 JSON 元信息) — no database (R03). Missing/corrupt files degrade
-// to an empty log rather than crashing (R08).
+// they can be surfaced via the API (操作日志). Two backends implement Store:
+// an in-memory, concurrency-safe log (R09, 无集群降级) and an AuditRecord CRD
+// log (OA-02: 每条一 CR、跨副本可见、跨重启存活). 本地文件持久化已退役
+// （OA-05/SC-06）——传入文件路径仅产生弃用警告。No database (R03).
 //
 // Honesty: only fields with a truthful source at push time are recorded. The
 // reconcile outcome is NOT stored here (it is joined live from status.Reader at
@@ -11,10 +11,7 @@
 package audit
 
 import (
-	"encoding/json"
 	"log"
-	"os"
-	"path/filepath"
 	"strconv"
 	"sync"
 	"time"
@@ -42,32 +39,44 @@ type Reader interface {
 	ListByDevice(ip string) []Record
 }
 
-// Store is an in-memory, concurrency-safe audit log with best-effort JSON
-// persistence. Bounded to maxRecords newest entries. Zero value unusable;
-// construct with NewStore.
-type Store struct {
+// Store 是操作审计日志的统一接口（内存降级实现与 AuditRecord CRD 实现共用，
+// GET /logs 契约只依赖此四方法）。
+type Store interface {
+	Recorder
+	Reader
+	// Flush 留给需要落盘语义的实现（内存/CRD 实现恒 nil）。
+	Flush() error
+}
+
+// memStore is an in-memory, concurrency-safe audit log bounded to maxRecords
+// newest entries（无集群降级路径，重启即丢）。
+type memStore struct {
 	mu         sync.RWMutex
 	records    []Record // oldest → newest
 	maxRecords int
-	filePath   string // "" → memory only (no persistence)
 	seq        uint64
 }
 
-// NewStore creates an audit store bounded to maxRecords, persisting to filePath
-// ("" for memory-only). Any existing file is loaded; a missing or corrupt file
-// degrades to an empty log (R08).
-func NewStore(filePath string, maxRecords int) *Store {
+// NewStore creates an in-memory audit store bounded to maxRecords. filePath
+// 已退役（OA-05/SC-06 禁本地持久）：非空仅产生弃用警告，不读不写任何文件。
+func NewStore(filePath string, maxRecords int) Store {
+	if filePath != "" {
+		log.Printf("[audit] USMP_AUDIT_FILE/本地审计文件已退役（SC-06），忽略 %q：集群模式走 AuditRecord CRD，无集群为纯内存", filePath)
+	}
+	return NewMemStore(maxRecords)
+}
+
+// NewMemStore creates the in-memory Store implementation.
+func NewMemStore(maxRecords int) Store {
 	if maxRecords <= 0 {
 		maxRecords = 1000
 	}
-	s := &Store{records: make([]Record, 0), maxRecords: maxRecords, filePath: filePath}
-	s.load()
-	return s
+	return &memStore{records: make([]Record, 0), maxRecords: maxRecords}
 }
 
 // Record appends an entry, assigning ID/Timestamp/Actor defaults, trimming to
 // the bound, and persisting best-effort (a write failure never breaks a push).
-func (s *Store) Record(r Record) {
+func (s *memStore) Record(r Record) {
 	s.mu.Lock()
 	s.seq++
 	r.ID = strconv.FormatUint(s.seq, 10)
@@ -81,22 +90,18 @@ func (s *Store) Record(r Record) {
 	if len(s.records) > s.maxRecords {
 		s.records = append(s.records[:0], s.records[len(s.records)-s.maxRecords:]...)
 	}
-	if err := s.persistLocked(); err != nil {
-		// best-effort：写失败不阻断下发，但让 durability 降级可见（重启会丢盘外记录）。
-		log.Printf("[audit] persist failed, keeping in-memory only: %v", err)
-	}
 	s.mu.Unlock()
 }
 
 // List returns every record, newest-first (copy).
-func (s *Store) List() []Record {
+func (s *memStore) List() []Record {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	return reversed(s.records)
 }
 
 // ListByDevice returns records for a single device, newest-first.
-func (s *Store) ListByDevice(ip string) []Record {
+func (s *memStore) ListByDevice(ip string) []Record {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	out := make([]Record, 0)
@@ -108,13 +113,8 @@ func (s *Store) ListByDevice(ip string) []Record {
 	return out
 }
 
-// Flush persists the current log to disk (used on shutdown). No-op when
-// memory-only. Returns any write error for callers that care.
-func (s *Store) Flush() error {
-	s.mu.RLock()
-	defer s.mu.RUnlock()
-	return s.persistLocked()
-}
+// Flush implements Store（内存模式无落盘语义，恒 nil）。
+func (s *memStore) Flush() error { return nil }
 
 func reversed(in []Record) []Record {
 	out := make([]Record, len(in))
@@ -122,51 +122,4 @@ func reversed(in []Record) []Record {
 		out[len(in)-1-i] = r
 	}
 	return out
-}
-
-// persistLocked writes the log atomically (temp + rename). Caller holds the
-// lock. Best-effort: a nil filePath or write error is not fatal.
-func (s *Store) persistLocked() error {
-	if s.filePath == "" {
-		return nil
-	}
-	data, err := json.Marshal(s.records)
-	if err != nil {
-		return err
-	}
-	if dir := filepath.Dir(s.filePath); dir != "" && dir != "." {
-		_ = os.MkdirAll(dir, 0o755) // best-effort：目录已存在或权限不足时下方写入自会报错
-	}
-	tmp := s.filePath + ".tmp"
-	if err := os.WriteFile(tmp, data, 0o600); err != nil {
-		return err
-	}
-	return os.Rename(tmp, s.filePath)
-}
-
-// load reads an existing log file, restoring records and the ID sequence.
-// A missing or corrupt file leaves the store empty (R08).
-func (s *Store) load() {
-	if s.filePath == "" {
-		return
-	}
-	data, err := os.ReadFile(s.filePath)
-	if err != nil {
-		return // missing file → empty log
-	}
-	var recs []Record
-	if err := json.Unmarshal(data, &recs); err != nil {
-		return // corrupt file → empty log (do not crash)
-	}
-	if len(recs) > s.maxRecords {
-		recs = recs[len(recs)-s.maxRecords:]
-	}
-	s.records = recs
-	// Continue the ID sequence past the highest loaded numeric ID so restart
-	// records never collide with persisted ones.
-	for _, r := range recs {
-		if n, perr := strconv.ParseUint(r.ID, 10, 64); perr == nil && n > s.seq {
-			s.seq = n
-		}
-	}
 }

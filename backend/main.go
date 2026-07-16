@@ -15,6 +15,7 @@ import (
 	"github.com/leezesi/usmp/backend/internal/crdsource"
 	"github.com/leezesi/usmp/backend/internal/intent"
 	"github.com/leezesi/usmp/backend/internal/yangschema"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/audit"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/controller"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/device"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/leader"
@@ -46,8 +47,9 @@ func main() {
 	mgr := manager.New(
 		manager.WithDefaultTimeout(10*time.Second),
 		manager.WithSchema(yangSchema),
-		// 操作审计日志持久化到本地 JSON（§8，可用 USMP_AUDIT_FILE 覆盖）。
-		manager.WithAuditFile(auditFilePath()),
+		// 操作审计（OA-02）：集群可达走 AuditRecord CRD（跨副本可见+重启
+		// 保留），否则内存降级；USMP_AUDIT_FILE 已退役（设置仅弃用警告）。
+		manager.WithAuditStore(buildAuditStore(ctx)),
 		// DS-01/DS-05: 集群可达时设备注册表走 Device CRD（跨副本共享+重启
 		// 恢复+凭据 Secret 引用），否则降级进程内存实现（R08）。
 		manager.WithDeviceStore(buildDeviceStore(ctx)),
@@ -158,13 +160,26 @@ func main() {
 	mgr.Stop()
 }
 
-// auditFilePath 返回操作审计日志的本地 JSON 路径，可用 USMP_AUDIT_FILE 覆盖，
-// 默认 data/audit.json（§8 本地元信息，非数据库 R03）。
-func auditFilePath() string {
-	if p := os.Getenv("USMP_AUDIT_FILE"); p != "" {
-		return p
+// buildAuditStore 按集群可达性选择审计后端（OA-02/OA-05）：可达走
+// AuditRecord CRD store；否则内存降级（R08）。USMP_AUDIT_FILE 已退役：设置时
+// 经 audit.NewStore 产生弃用警告（不再写文件，SC-06 禁本地持久）。
+func buildAuditStore(ctx context.Context) audit.Store {
+	deprecatedFile := os.Getenv("USMP_AUDIT_FILE")
+	cfg, err := ctrlcfg.GetConfig()
+	if err != nil {
+		log.Printf("audit store: no reachable cluster, using in-memory store (records lost on restart): %v", err)
+		return audit.NewStore(deprecatedFile, 1000)
 	}
-	return "data/audit.json"
+	s, err := audit.NewCRDStore(ctx, cfg, intent.Namespace(), 1000)
+	if err != nil {
+		log.Printf("audit store: CRD store unavailable, degrading to in-memory: %v", err)
+		return audit.NewStore(deprecatedFile, 1000)
+	}
+	if deprecatedFile != "" {
+		log.Printf("audit store: USMP_AUDIT_FILE 已退役（SC-06），忽略 %q（集群模式走 AuditRecord CRD）", deprecatedFile)
+	}
+	log.Printf("audit store: CRD-backed (namespace %q)", intent.Namespace())
+	return s
 }
 
 // buildNativeGate 构建原生周期控制器的统一选主门（YR-08）：开关
