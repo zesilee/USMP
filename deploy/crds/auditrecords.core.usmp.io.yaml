@@ -1,0 +1,53 @@
+# AuditRecord CRD —— 操作审计记录（OA-01~05，global-ha-multi-instance W4）。
+# 手写 manifest：非 YANG 源，不走 crdgen（对齐 backend/api/core/v1/auditrecord_types.go，
+# 字段变更需两处同步）。每条审计一个 CR，超上限由写入方按时间清理。
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: auditrecords.core.usmp.io
+spec:
+  group: core.usmp.io
+  names:
+    kind: AuditRecord
+    listKind: AuditRecordList
+    plural: auditrecords
+    singular: auditrecord
+  scope: Namespaced
+  versions:
+    - name: v1
+      served: true
+      storage: true
+      additionalPrinterColumns:
+        - jsonPath: .spec.deviceIP
+          name: Device
+          type: string
+        - jsonPath: .spec.path
+          name: Path
+          type: string
+        - jsonPath: .spec.timestamp
+          name: When
+          type: string
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+            spec:
+              type: object
+              required:
+                - timestamp
+                - deviceIP
+              properties:
+                timestamp:
+                  type: string
+                  format: date-time
+                deviceIP:
+                  type: string
+                  minLength: 1
+                path:
+                  type: string
+                summary:
+                  type: string
+                triggered:
+                  type: boolean
+                actor:
+                  type: string
