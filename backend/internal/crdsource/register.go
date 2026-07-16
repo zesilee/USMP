@@ -6,8 +6,10 @@ import (
 
 	"k8s.io/apimachinery/pkg/runtime"
 	clientgoscheme "k8s.io/client-go/kubernetes/scheme"
+	"k8s.io/client-go/rest"
 	crcache "sigs.k8s.io/controller-runtime/pkg/cache"
 	"sigs.k8s.io/controller-runtime/pkg/client"
+	"sigs.k8s.io/controller-runtime/pkg/client/apiutil"
 	ctrlcfg "sigs.k8s.io/controller-runtime/pkg/client/config"
 
 	apiv1 "github.com/leezesi/usmp/backend/api/biz/v1"
@@ -36,13 +38,46 @@ func RegisterIntentSources(mgr manager.Manager) (crcache.Cache, error) {
 		log.Printf("crdsource: no Kubernetes config (%v); CRD intent sources disabled", err)
 		return nil, nil
 	}
+	return registerIntentSourcesWithConfig(mgr, cfg)
+}
 
+// registerIntentSourcesWithConfig 是可测试的注册实体：集群可达但旧桥接 CRD
+// 未安装（其 manifest 从未进 deploy/crds，退役任务 retire-businessvlan-bridge
+// 跟踪）时 SHALL 跳过对应源并记日志，而非让 mgr.Start 因 informer
+// "no matches for kind" 失败（R08 降级；kind 双副本部署实测崩溃的回归口）。
+func registerIntentSourcesWithConfig(mgr manager.Manager, cfg *rest.Config) (crcache.Cache, error) {
 	scheme := runtime.NewScheme()
 	if err := clientgoscheme.AddToScheme(scheme); err != nil {
 		return nil, err
 	}
 	if err := apiv1.AddToScheme(scheme); err != nil {
 		return nil, err
+	}
+
+	httpClient, err := rest.HTTPClientFor(cfg)
+	if err != nil {
+		return nil, err
+	}
+	mapper, err := apiutil.NewDynamicRESTMapper(cfg, httpClient)
+	if err != nil {
+		return nil, err
+	}
+	crdInstalled := func(obj client.Object) bool {
+		gvk, err := apiutil.GVKForObject(obj, scheme)
+		if err != nil {
+			return false
+		}
+		_, err = mapper.RESTMapping(gvk.GroupKind(), gvk.Version)
+		if err != nil {
+			log.Printf("crdsource: legacy CRD %s not installed; bridge source skipped (retire-businessvlan-bridge)", gvk.Kind)
+			return false
+		}
+		return true
+	}
+
+	vlanOK, ifmOK := crdInstalled(VlanObject()), crdInstalled(InterfaceObject())
+	if !vlanOK && !ifmOK {
+		return nil, nil
 	}
 
 	c, err := crcache.New(cfg, crcache.Options{Scheme: scheme})
@@ -52,10 +87,14 @@ func RegisterIntentSources(mgr manager.Manager) (crcache.Cache, error) {
 
 	cs, pool, ds := mgr.GetConfigStore(), mgr.GetClientPool(), mgr.GetDeviceStore()
 	// ProjectFunc 按设备 Vendor 解析驱动（TE-02）：注入共享 DeviceStore。
-	addIntentController(mgr, c, "huawei-vlan-crd", VlanObject(), NewVlanProjectFunc(ds), vlan.New(cs, pool, ds))
-	addIntentController(mgr, c, "huawei-ifm-crd", InterfaceObject(), NewInterfaceProjectFunc(ds), ifm.New(cs, pool, ds))
+	if vlanOK {
+		addIntentController(mgr, c, "huawei-vlan-crd", VlanObject(), NewVlanProjectFunc(ds), vlan.New(cs, pool, ds))
+	}
+	if ifmOK {
+		addIntentController(mgr, c, "huawei-ifm-crd", InterfaceObject(), NewInterfaceProjectFunc(ds), ifm.New(cs, pool, ds))
+	}
 
-	log.Printf("crdsource: CRD intent sources registered (BusinessVlan, BusinessInterface; parallel to Actor path)")
+	log.Printf("crdsource: CRD intent sources registered (vlan=%t, ifm=%t; parallel legacy bridge)", vlanOK, ifmOK)
 	return c, nil
 }
 
