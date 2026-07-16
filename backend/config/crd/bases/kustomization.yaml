@@ -1,8 +1,4 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-- biz.usmp.io_businessinterfaces.yaml
-- biz.usmp.io_businessroutes.yaml
-- biz.usmp.io_businessswitches.yaml
-- biz.usmp.io_businessvlans.yaml
 - core.usmp.io_nativedeviceconfigs.yaml
