@@ -75,10 +75,6 @@ fi
 echo ""
 print_info "3. CRD 检查"
 required_crds=(
-    "businessswitches.biz.usmp.io"
-    "businessvlans.biz.usmp.io"
-    "businessinterfaces.biz.usmp.io"
-    "businessroutes.biz.usmp.io"
     "nativedeviceconfigs.core.usmp.io"
 )
 
