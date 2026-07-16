@@ -1,0 +1,158 @@
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    usmp.io/generated-from: usmp-crdgen-fixture
+  creationTimestamp: null
+  name: fixtureservices.biz.usmp.io
+spec:
+  group: biz.usmp.io
+  names:
+    kind: FixtureService
+    listKind: FixtureServiceList
+    plural: fixtureservices
+    singular: fixtureservice
+  scope: Namespaced
+  versions:
+  - additionalPrinterColumns:
+    - jsonPath: .spec.enabled
+      name: enabled
+      type: boolean
+    - jsonPath: .spec.mode
+      name: mode
+      type: string
+    - jsonPath: .spec.name
+      name: name
+      type: string
+    - jsonPath: .status.conditions[?(@.type=="Converged")].status
+      name: Converged
+      type: string
+    - jsonPath: .metadata.creationTimestamp
+      name: Age
+      type: date
+    name: v1alpha1
+    schema:
+      openAPIV3Schema:
+        properties:
+          spec:
+            properties:
+              devices:
+                items:
+                  properties:
+                    access-ports:
+                      items:
+                        type: string
+                      type: array
+                    ip:
+                      pattern: ([0-9]{1,3}\.){3}[0-9]{1,3}
+                      type: string
+                    sub-entries:
+                      items:
+                        properties:
+                          index:
+                            maximum: 1024
+                            minimum: 0
+                            type: integer
+                          note:
+                            type: string
+                        required:
+                        - index
+                        type: object
+                      type: array
+                  required:
+                  - ip
+                  type: object
+                type: array
+              enabled:
+                type: boolean
+              mode:
+                enum:
+                - access
+                - trunk
+                type: string
+              name:
+                pattern: '[A-Za-z0-9_-]+'
+                type: string
+              tags:
+                items:
+                  type: string
+                type: array
+              vlan-id:
+                maximum: 4094
+                minimum: 1
+                type: integer
+            required:
+            - vlan-id
+            type: object
+          status:
+            properties:
+              claims:
+                items:
+                  properties:
+                    device:
+                      type: string
+                    module:
+                      type: string
+                    path:
+                      type: string
+                  required:
+                  - device
+                  - module
+                  - path
+                  type: object
+                type: array
+              conditions:
+                items:
+                  properties:
+                    lastTransitionTime:
+                      format: date-time
+                      type: string
+                    message:
+                      type: string
+                    reason:
+                      type: string
+                    status:
+                      type: string
+                    type:
+                      type: string
+                  required:
+                  - status
+                  - type
+                  type: object
+                type: array
+              deviceStates:
+                items:
+                  properties:
+                    device:
+                      type: string
+                    lastTransition:
+                      format: date-time
+                      type: string
+                    phase:
+                      enum:
+                      - pending
+                      - synced
+                      - failed
+                      type: string
+                    reason:
+                      type: string
+                  required:
+                  - device
+                  - phase
+                  type: object
+                type: array
+              observedGeneration:
+                format: int64
+                type: integer
+            type: object
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}
+status:
+  acceptedNames:
+    kind: ""
+    plural: ""
+  conditions: null
+  storedVersions: null

@@ -1,0 +1,69 @@
+module usmp-business-vlan {
+  namespace "urn:usmp:yang:usmp-business-vlan";
+  prefix ubv;
+
+  organization "USMP";
+  description
+    "业务网络配置——跨设备 VLAN 打通意图模型（BVS-01）。
+     一个实例描述一个跨设备 VLAN 业务：vlan-id + 每设备 access/trunk 端口，
+     由意图编排层展开为每设备 huawei-vlan + huawei-ifm 原生配置（BVS-02）。
+     本模型是唯一 schema 源：CRD OpenAPI 由 tools/crdgen 构建期派生（BIC-01），
+     Go 结构体由 ygot 生成（R04），前端表单由 /yang/schema 自动渲染（R05）。
+     类型受限于 crdgen 可映射集（integer/string/boolean/enum 及其 list）。";
+
+  revision 2026-07-15 {
+    description "Initial revision: cross-device VLAN service intent.";
+  }
+
+  extension task-name {
+    argument name;
+    description
+      "任务域标记（与华为模型 task-name 语义对齐，tasknamegen 前缀无关匹配）：
+       驱动 /yang/modules category 与前端「业务网络配置」菜单组（FE-17）。";
+  }
+
+  ubv:task-name "business-network";
+
+  container business-vlan-service {
+    description
+      "跨设备 VLAN 打通意图：CR .spec 即本容器（crdgen 单顶层容器约定）。";
+
+    leaf vlan-id {
+      type uint16 {
+        range "1..4094";
+      }
+      mandatory true;
+      description "业务 VLAN ID（全意图统一，展开到每台设备）。";
+    }
+
+    leaf name {
+      type string {
+        pattern "[A-Za-z0-9_-]{1,31}";
+      }
+      description "业务名称（落到每设备 VLAN name，缺省 VLAN<id>）。";
+    }
+
+    list devices {
+      key "ip";
+      min-elements 1;
+      description "参与打通的设备清单（key=设备 IP，与 DeviceStore 一致）。";
+
+      leaf ip {
+        type string {
+          pattern "([0-9]{1,3}\\.){3}[0-9]{1,3}";
+        }
+        description "设备管理 IP。";
+      }
+
+      leaf-list access-ports {
+        type string;
+        description "以 access 方式加入该 VLAN 的接口名（PVID=vlan-id）。";
+      }
+
+      leaf-list trunk-ports {
+        type string;
+        description "以 trunk 方式放行该 VLAN 的接口名。";
+      }
+    }
+  }
+}

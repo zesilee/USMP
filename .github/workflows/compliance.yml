@@ -82,7 +82,7 @@ jobs:
           # 生成物改动合法当且仅当可由管线复现：触及生成物/管线/模型指针时
           # 重跑 make gen-yang 并断言零漂移（取代旧的无条件冻结 generated/）
           git fetch --depth=1 origin main 2>/dev/null || true
-          CHANGED=$(git diff --name-only origin/main HEAD 2>/dev/null | grep -E '^(backend/internal/generated/|backend/tools/genfix/|scripts/gen-yang\.sh|yang-models)' || true)
+          CHANGED=$(git diff --name-only origin/main HEAD 2>/dev/null | grep -E '^(backend/internal/generated/|backend/internal/yang/models/|backend/tools/genfix/|backend/tools/crdgen/|deploy/crds/|scripts/gen-yang\.sh|yang-models)' || true)
           if [ -z "$CHANGED" ]; then
             echo "No generated-pipeline related changes, skipping regen check"
             exit 0
@@ -93,6 +93,12 @@ jobs:
           make gen-yang
           if ! git diff --exit-code backend/internal/generated/; then
             echo "::error::[R04] Generated code drift: backend/internal/generated/ 与 make gen-yang 输出不一致（生成物勿手改，改 YANG/gen.conf 后重跑 make gen-yang 提交）"
+            exit 1
+          fi
+          # 业务意图 CRD manifest 同为生成物（BIC-01 regen-and-diff）
+          make gen-crd
+          if ! git diff --exit-code deploy/crds/; then
+            echo "::error::[BIC-01] CRD manifest drift: deploy/crds/ 与 make gen-crd 输出不一致（生成物勿手改，改意图 YANG 后重跑 make gen-crd 提交）"
             exit 1
           fi
           echo "Generated code is reproducible"

@@ -14,14 +14,14 @@
 
 ## 3. YANG→CRD codegen（BIC-01/BIC-02）
 
-- [ ] 3.1 测试先行：crdgen golden 测试（类型映射矩阵：range/pattern/enum/leaf-list/嵌套 list+key 必填；不可映射类型 fail-fast）红灯
-- [ ] 3.2 实现 `tools/crdgen`（goyang Entry → CRD manifest，printer columns + status 子资源），生成物入库 + regen-and-diff 门禁接 CI
+- [x] 3.1 测试先行：crdgen golden 测试（类型映射矩阵：range/pattern/enum/leaf-list/嵌套 list+key 必填；不可映射类型 fail-fast）红灯
+- [x] 3.2 实现 `tools/crdgen`（goyang Entry → CRD manifest，printer columns + status 子资源），生成物入库 + regen-and-diff 门禁接 CI
 
 ## 4. 意图 YANG 模型与管线接入（BVS-01，D2）
 
-- [ ] 4.1 编写 `usmp-business-vlan.yang`（vlan-id/name/devices{ip,access-ports,trunk-ports}，task-name=业务网络配置）
-- [ ] 4.2 gen.conf 接入 + ygot 生成 `internal/generated/business/` + `/yang/modules`、`/yang/schema` 暴露（含 category 断言测试）
-- [ ] 4.3 触发 `yang-config-test-design` 产出意图模型完备测试矩阵（T02b），矩阵项落入后续任务验收
+- [x] 4.1 编写 `usmp-business-vlan.yang`（vlan-id/name/devices{ip,access-ports,trunk-ports}，task-name=业务网络配置）
+- [x] 4.2 gen.conf 接入 + ygot 生成 `internal/generated/business/` + `/yang/modules`、`/yang/schema` 暴露（含 category 断言测试）
+- [x] 4.3 触发 `yang-config-test-design` 产出意图模型完备测试矩阵（T02b），矩阵项落入后续任务验收
 
 ## 5. 展开引擎（BIO-02，BVS-02）
 

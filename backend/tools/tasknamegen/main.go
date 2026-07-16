@@ -24,6 +24,7 @@ func main() {
 	modules := flag.String("modules", "", "comma-separated module names to scan")
 	output := flag.String("output", "taskname.gen.go", "output file")
 	pkg := flag.String("package", "huawei", "package name for the generated file")
+	varName := flag.String("var", "TaskNames", "name of the generated map variable (multiple model sources per package need distinct names)")
 	flag.Parse()
 	if *path == "" || *modules == "" {
 		log.Fatal("tasknamegen: -path and -modules are required")
@@ -33,7 +34,7 @@ func main() {
 	if err != nil {
 		log.Fatalf("tasknamegen: %v", err)
 	}
-	src, err := renderSource(*pkg, names)
+	src, err := renderSource(*pkg, *varName, names)
 	if err != nil {
 		log.Fatalf("tasknamegen: %v", err)
 	}
@@ -105,7 +106,7 @@ func moduleTaskName(mod *yang.Module) string {
 }
 
 // renderSource renders the generated Go file, sorted for deterministic output.
-func renderSource(pkg string, names map[string]string) (string, error) {
+func renderSource(pkg, varName string, names map[string]string) (string, error) {
 	keys := make([]string, 0, len(names))
 	for k := range names {
 		keys = append(keys, k)
@@ -117,8 +118,8 @@ func renderSource(pkg string, names map[string]string) (string, error) {
 	b.WriteString("//\n// Maps module root-container names to the module-level `task-name`\n")
 	b.WriteString("// extension value (task domain) — drives /yang/modules `category` (BR-01).\n")
 	fmt.Fprintf(&b, "package %s\n\n", pkg)
-	b.WriteString("// TaskNames maps a module's root container name to its task domain.\n")
-	b.WriteString("var TaskNames = map[string]string{\n")
+	fmt.Fprintf(&b, "// %s maps a module's root container name to its task domain.\n", varName)
+	fmt.Fprintf(&b, "var %s = map[string]string{\n", varName)
 	for _, k := range keys {
 		fmt.Fprintf(&b, "\t%q: %q,\n", k, names[k])
 	}

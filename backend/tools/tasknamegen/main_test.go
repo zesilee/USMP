@@ -39,7 +39,7 @@ func TestExtractTaskNamesUnknownModule(t *testing.T) {
 }
 
 func TestRenderSource(t *testing.T) {
-	src, err := renderSource("huawei", map[string]string{"ifm": "interface-mgr", "vlan": "vlan"})
+	src, err := renderSource("huawei", "TaskNames", map[string]string{"ifm": "interface-mgr", "vlan": "vlan"})
 	if err != nil {
 		t.Fatalf("renderSource: %v", err)
 	}
@@ -49,7 +49,7 @@ func TestRenderSource(t *testing.T) {
 		}
 	}
 	// Deterministic output: map iteration order must not leak into the file.
-	src2, _ := renderSource("huawei", map[string]string{"vlan": "vlan", "ifm": "interface-mgr"})
+	src2, _ := renderSource("huawei", "TaskNames", map[string]string{"vlan": "vlan", "ifm": "interface-mgr"})
 	if src != src2 {
 		t.Error("renderSource is not deterministic across map orderings")
 	}
