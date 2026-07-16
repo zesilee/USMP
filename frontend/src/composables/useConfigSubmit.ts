@@ -1,4 +1,5 @@
 import { ref, computed } from 'vue'
+import { ElMessage } from 'element-plus'
 import { setConfig, getConfig, getDeviceReconcile } from '../api'
 import {
   deriveReconcileProgress,
@@ -72,7 +73,12 @@ export function useConfigSubmit(opts: UseConfigSubmitOptions) {
       // 1) 编码并下发 edit-config
       set('pushing')
       try {
-        await setConfig(ip, opts.configPath, { [opts.listKey]: [item] })
+        const res = await setConfig(ip, opts.configPath, { [opts.listKey]: [item] })
+        // 软归属警告（FE-18/BR-11）：命中业务意图认领路径时非阻断提示，流程照常。
+        const warn = (res.data as any)?.data?.ownershipWarning
+        if (warn?.message) {
+          ElMessage.warning(`${warn.message}（${(warn.intents || []).join('、')}）`)
+        }
       } catch (e: any) {
         error.value = e?.response?.data?.message || e?.message || '下发失败'
         set('error')

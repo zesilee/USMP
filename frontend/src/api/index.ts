@@ -82,4 +82,32 @@ export const getYangSchema = (module: string, form?: 'nested') => {
   })
 }
 
+// ===== 业务网络配置（意图层，FE-17）=====
+// 平台作用域：一个意图实例管 N 台设备。数据面走 USMP API 代理 CR CRUD（design D7，
+// 前端不直连 apiserver）；spec 结构由意图 YANG 定义（/yang/schema/business-vlan-service）。
+export interface BusinessVlanServiceItem {
+  name: string
+  spec: Record<string, any>
+  status?: Record<string, any>
+}
+
+export const listBusinessVlanServices = () => {
+  return api.get<ApiResponse<{ items: BusinessVlanServiceItem[] }>>('/business/vlan-services')
+}
+
+export const applyBusinessVlanService = (name: string, spec: Record<string, any>) => {
+  return api.post<ApiResponse<BusinessVlanServiceItem>>('/business/vlan-services', { name, spec })
+}
+
+export const deleteBusinessVlanService = (name: string) => {
+  return api.delete<ApiResponse<any>>(`/business/vlan-services/${name}`)
+}
+
+// 软归属查询（FE-18 徽标数据面，BIO-07）：path 缺省返回设备全量认领。
+export const getOwnership = (device: string, path?: string) => {
+  return api.get<ApiResponse<any>>(`/ownership/${device}`, {
+    params: path ? { path } : {},
+  })
+}
+
 export default api

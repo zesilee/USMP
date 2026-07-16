@@ -125,8 +125,14 @@ async function submit() {
   }
   if (form.blocked.value) return
   try {
-    await setConfig(props.device, configPath.value, form.visiblePayload())
-    ElMessage.success('已下发')
+    const res = await setConfig(props.device, configPath.value, form.visiblePayload())
+    // 软归属警告（FE-18/BR-11）：命中业务意图认领路径时非阻断提示，下发照常。
+    const warn = (res.data as any)?.data?.ownershipWarning
+    if (warn?.message) {
+      ElMessage.warning(`${warn.message}（${(warn.intents || []).join('、')}）`)
+    } else {
+      ElMessage.success('已下发')
+    }
     await load()
   } catch (e: any) {
     // 后端不支持写入的路径（如尚无转换器）原样透出错误（§9）。
