@@ -285,3 +285,42 @@ func TestEditConfigMergeContainerLeafUpdateStillWorks(t *testing.T) {
 		t.Fatalf("statistic-interval = %s, want 5", got)
 	}
 }
+
+// 回归（business-network-config 2PC 集成暴露）：店侧仅一条 keyed 条目时 merge 进
+// 不同 key 的新条目，必须按键追加而非就地折叠（否则 id 被改写、原条目丢失）。
+// 判定依赖 wellKnownListKeys 的最小模型知识（schema-less 启发式对单-单场景无信号）。
+func TestEditConfigMergeSingleEntryStoreAddsNewKeyedEntry(t *testing.T) {
+	ds := newTreeDatastore()
+	if err := ds.SetRunning([]byte(`<vlan xmlns="urn:huawei:vlan"><vlans><vlan><id>300</id><name>manual</name></vlan></vlans></vlan>`)); err != nil {
+		t.Fatalf("SetRunning: %v", err)
+	}
+	edit := `<vlan xmlns="urn:huawei:vlan"><vlans><vlan><id>100</id><name>biz</name></vlan></vlans></vlan>`
+	if err := ds.EditConfig([]byte(edit)); err != nil {
+		t.Fatalf("EditConfig: %v", err)
+	}
+	if got := candidateVlanCount(ds); got != 2 {
+		t.Fatalf("vlan count = %d, want 2 (single-entry store must key-match, not fold): %s", got, ds.GetCandidate())
+	}
+	if v := candidateVlanByID(ds, "300"); v == nil || v.child("name").leafText() != "manual" {
+		t.Fatalf("manual vlan 300 corrupted: %s", ds.GetCandidate())
+	}
+	if v := candidateVlanByID(ds, "100"); v == nil || v.child("name").leafText() != "biz" {
+		t.Fatalf("new vlan 100 missing: %s", ds.GetCandidate())
+	}
+}
+
+// 同场景的 interfaces/interface（键=name）：单条店侧接口 + 新接口 merge。
+func TestEditConfigMergeSingleInterfaceStoreAddsNew(t *testing.T) {
+	ds := newTreeDatastore()
+	if err := ds.SetRunning([]byte(`<ifm xmlns="urn:huawei:ifm"><interfaces><interface><name>GE0/0/1</name><mtu>1500</mtu></interface></interfaces></ifm>`)); err != nil {
+		t.Fatalf("SetRunning: %v", err)
+	}
+	edit := `<ifm xmlns="urn:huawei:ifm"><interfaces><interface><name>GE0/0/2</name><mtu>9000</mtu></interface></interfaces></ifm>`
+	if err := ds.EditConfig([]byte(edit)); err != nil {
+		t.Fatalf("EditConfig: %v", err)
+	}
+	ifaces := ds.candidateTree().find("ifm", "interfaces")
+	if ifaces == nil || len(ifaces.children("interface")) != 2 {
+		t.Fatalf("interface count wrong (fold?): %s", ds.GetCandidate())
+	}
+}
