@@ -3,6 +3,7 @@ package api
 import (
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
+	"github.com/leezesi/usmp/backend/internal/intent"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/manager"
 )
 
@@ -63,6 +64,19 @@ func (s *Server) setupRoutes() {
 			configGroup.GET("/:ip/*path", configHandler.GetConfig)
 			configGroup.POST("/:ip/*path", configHandler.SetConfig)
 			configGroup.DELETE("/:ip/*path", configHandler.DeleteConfig)
+		}
+
+		// Soft-ownership query (BIO-07：原生控制台徽标/手改提示数据面)
+		v1.GET("/ownership/:device", NewOwnershipHandler().Query)
+
+		// 业务网络配置（意图 CR 代理，design D7：前端不直连 apiserver）
+		bizGroup := v1.Group("/business")
+		{
+			bizHandler := NewBusinessHandler(intent.APIClient, intent.Namespace())
+			bizGroup.GET("/vlan-services", bizHandler.List)
+			bizGroup.GET("/vlan-services/:name", bizHandler.Get)
+			bizGroup.POST("/vlan-services", bizHandler.Apply)
+			bizGroup.DELETE("/vlan-services/:name", bizHandler.Delete)
 		}
 
 		// YANG model endpoints

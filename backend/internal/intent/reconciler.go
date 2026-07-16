@@ -30,6 +30,9 @@ type Reconciler struct {
 	cleaner Cleaner
 	cs      reconcile.ConfigStore
 	trigger func(deviceID, path string) bool
+	// ownership mirrors status claims for the config-api soft-ownership
+	// warnings (BIO-07); defaults to the process-wide index.
+	ownership *OwnershipIndex
 }
 
 // pushRetryBackoff is the requeue delay after a failed cross-device push.
@@ -40,7 +43,7 @@ const Finalizer = "biz.usmp.io/cleanup"
 
 // NewReconciler builds an intent reconciler over a controller-runtime client.
 func NewReconciler(c client.Client) *Reconciler {
-	return &Reconciler{client: c, now: time.Now}
+	return &Reconciler{client: c, now: time.Now, ownership: DefaultOwnership}
 }
 
 // WithPush wires the cross-device transaction stage: pusher executes the 2PC,
@@ -49,6 +52,13 @@ func NewReconciler(c client.Client) *Reconciler {
 // reconciliation (manager.TriggerReconcile).
 func (r *Reconciler) WithPush(p Pusher, cl Cleaner, cs reconcile.ConfigStore, trigger func(deviceID, path string) bool) *Reconciler {
 	r.pusher, r.cleaner, r.cs, r.trigger = p, cl, cs, trigger
+	return r
+}
+
+// WithOwnership swaps the ownership index (test isolation from the
+// process-wide default).
+func (r *Reconciler) WithOwnership(ix *OwnershipIndex) *Reconciler {
+	r.ownership = ix
 	return r
 }
 
@@ -85,7 +95,7 @@ func (r *Reconciler) Reconcile(ctx context.Context, req reconcile.Request) recon
 		msg := err.Error()
 		if statusErr := updateStatusWithRetry(ctx, r.client, key, func(u *unstructured.Unstructured) {
 			_ = unstructured.SetNestedField(u.Object, gen, "status", "observedGeneration")
-			_ = unstructured.SetNestedSlice(u.Object, []interface{}{}, "status", "claims")
+			// 保留既有认领：意图曾经合法下发过的话，清理（删除/收缩）依赖上一代认领。
 			setCondition(u, CondValidated, "False", "InvalidSpec", msg, r.now())
 			setCondition(u, CondConverged, "False", "NotValidated", "spec failed validation", r.now())
 		}); statusErr != nil {
@@ -186,6 +196,9 @@ func (r *Reconciler) Reconcile(ctx context.Context, req reconcile.Request) recon
 	if !allSynced || len(cleanupFailures) > 0 {
 		return reconcile.Result{RequeueAfter: pushRetryBackoff}
 	}
+	if r.ownership != nil {
+		r.ownership.Replace(key.String(), statusClaims)
+	}
 	return reconcile.Result{}
 }
 
@@ -227,6 +240,9 @@ func (r *Reconciler) reconcileDelete(ctx context.Context, key types.NamespacedNa
 		u.SetFinalizers(kept)
 	}); err != nil && !apierrors.IsNotFound(err) {
 		return reconcile.Result{Error: err}
+	}
+	if r.ownership != nil {
+		r.ownership.Remove(key.String())
 	}
 	log.Printf("intent: %s cleaned up on all devices, finalizer released", key)
 	return reconcile.Result{}

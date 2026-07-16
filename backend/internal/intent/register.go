@@ -3,6 +3,7 @@ package intent
 import (
 	"context"
 	"log"
+	"os"
 	"time"
 
 	"k8s.io/apimachinery/pkg/runtime"
@@ -21,6 +22,22 @@ const intentResyncInterval = 5 * time.Minute
 // confirmTimeout is the confirmed-commit window for the cross-device 2PC
 // (design open-question 初值 60s).
 const confirmTimeout = 60 * time.Second
+
+// apiClient is the controller-runtime client wired at Register, consumed by
+// the config-api business proxy (nil without a cluster → API 降级 503).
+var apiClient client.Client
+
+// APIClient returns the shared CR client (nil when no cluster is reachable).
+func APIClient() client.Client { return apiClient }
+
+// Namespace returns the namespace intent CRs live in (USMP_INTENT_NAMESPACE,
+// default "default").
+func Namespace() string {
+	if ns := os.Getenv("USMP_INTENT_NAMESPACE"); ns != "" {
+		return ns
+	}
+	return "default"
+}
 
 // Register wires the business-vlan intent controller into the Stack B manager
 // (BIO-01): a CR watch source + periodic resync source (C4) feeding the intent
@@ -47,6 +64,7 @@ func Register(mgr manager.Manager) (crcache.Cache, error) {
 	if err != nil {
 		return nil, err
 	}
+	apiClient = cl
 
 	tx := NewTxCoordinator(mgr.GetClientPool(), mgr.GetDeviceStore(), confirmTimeout)
 	rec := NewReconciler(cl).WithPush(tx, tx, mgr.GetConfigStore(), mgr.TriggerReconcile)
