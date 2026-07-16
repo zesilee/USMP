@@ -5,15 +5,15 @@
 
 ## 1. W1 — 桥接摘除 + translator 退役（PR ①）
 
-- [ ] 1.1 pr-size 门禁增设纯删除豁免：insertions ≤ 50 的 PR 上限放宽到 6000（design D5，TM04 契约变更，PR 描述中显式标注请用户确认）
-- [ ] 1.2 【测试先行 T05】driver 注册表 `VendorSupported` 表格驱动测试（B1）：已注册大小写无关命中 / 未注册 false / 空串 false / 与 Register 并发 race——红灯
-- [ ] 1.3 实现 `driver.Registry.VendorSupported` + 包级 facade（DR-04）——绿灯
-- [ ] 1.4 `device_handler.go` BR-04 厂商门禁切换到 `driver.VendorSupported`，删除 translator import；既有 B3 设备注册测试（缺省 huawei / 未知厂商 400）不改断言全绿证明行为等价
-- [ ] 1.5 `crdsource.StartCache` 原样平移为 `intent.StartCache`（含既有测试迁移），main.go 新意图 cache 调用点切换
-- [ ] 1.6 main.go 摘除 `RegisterIntentSources` 调用与「并行保留」注释，删除 `internal/crdsource` 整包
-- [ ] 1.7 删除 `pkg/translator` 整包（1.4 后零引用）
-- [ ] 1.8 全量验证：`go test ./... -race` 全绿、`go vet` 通过、覆盖率不低于基线（T08，纯删除通常抬升覆盖率，若基线可上调则同步上调 `.coverage-baseline`）
-- [ ] 1.9 W1 提交（What/Why/How、≤500 行/commit 按 1.1-1.7 原子拆分）、push、创建 PR ①（含本 change 全部 openspec 制品），CI 全绿后合入
+- [ ] 1.1 （移至 3.0，W1/W2 实测无需豁免）pr-size 门禁纯删除豁免——auto-mode 权限分类器拦截了该 TM04 契约变更的提交，需用户显式批准后落地，仅 W3 actor 删除依赖
+- [x] 1.2 【测试先行 T05】driver 注册表 `VendorSupported` 表格驱动测试（B1）：已注册大小写无关命中 / 未注册 false / 空串 false / 与 Register 并发 race——红灯
+- [x] 1.3 实现 `driver.Registry.VendorSupported` + 包级 facade（DR-04）——绿灯
+- [x] 1.4 `device_handler.go` BR-04 厂商门禁切换到 `driver.VendorSupported`，删除 translator import；既有 B3 设备注册测试（缺省 huawei / 未知厂商 400）不改断言全绿证明行为等价
+- [x] 1.5 `crdsource.StartCache` 原样平移为 `intent.StartCache`（含既有测试迁移），main.go 新意图 cache 调用点切换
+- [x] 1.6 main.go 摘除 `RegisterIntentSources` 调用与「并行保留」注释，删除 `internal/crdsource` 整包
+- [x] 1.7 删除 `pkg/translator` 整包（1.4 后零引用）
+- [x] 1.8 全量验证：`go test ./... -race` 全绿、`go vet` 通过、覆盖率不低于基线（T08，纯删除通常抬升覆盖率，若基线可上调则同步上调 `.coverage-baseline`）
+- [x] 1.9 W1 提交（What/Why/How、≤500 行/commit 按 1.1-1.7 原子拆分）、push、创建 PR ①（含本 change 全部 openspec 制品），CI 全绿后合入
 
 ## 2. W2 — 旧 CRD 类型与 Stack A 载体退役（PR ②）
 
@@ -28,6 +28,7 @@
 
 ## 3. W3 — actor 包物理删除 + spec 收尾（PR ③）
 
+- [ ] 3.0 【需用户批准】pr-size（CI）与 commit-msg（本地钩子）两处同口径增设纯删除豁免：insertions ≤ 50 上限 6000（design D5，TM04 契约变更；auto-mode 分类器已拦截自动提交，须由用户确认后落地——actor 4718 行整包删除的唯一可行通道）
 - [ ] 3.1 rebase 到 W2 合入后的 main
 - [ ] 3.2 删除 `pkg/yang-runtime/actor` 整包（14 文件 4718 行，一次性删保编译，走 1.1 纯删除豁免）
 - [ ] 3.3 验证零残留：`grep -r "yang-runtime/actor" backend` 零命中、`go build ./...` + `go test ./... -race` 全绿
