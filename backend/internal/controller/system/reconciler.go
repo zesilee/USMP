@@ -5,7 +5,6 @@ import (
 	"encoding/json"
 	"encoding/xml"
 	"fmt"
-	"log"
 
 	"github.com/leezesi/usmp/backend/internal/generated/huawei"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/client"
@@ -58,17 +57,12 @@ func New(cs reconcile.ConfigStore, clientPool client.ClientPool, resolver device
 	}
 }
 
-// resolveConn resolves connection info from the shared DeviceStore (source of
-// truth). An unregistered device (or no store) degrades to an AUTO/no-credential
-// connection — authentication fails cleanly rather than crashing (R08).
+// resolveConn delegates to the shared device.ResolveConn helper (DS-06):
+// registered devices use stored info, unregistered degrade to
+// AUTO/no-credential (R08).
 func (d *deviceClient) resolveConn(deviceID string) client.DeviceConnectionInfo {
-	if d.resolver != nil {
-		if info, ok := d.resolver.Get(deviceID); ok {
-			return info
-		}
-	}
-	log.Printf("[system] device %q not registered in DeviceStore; using AUTO/no-credential connection", deviceID)
-	return client.DeviceConnectionInfo{IP: deviceID, Protocol: client.ProtocolAUTO}
+	info, _ := device.ResolveConn(d.resolver, deviceID)
+	return info
 }
 
 // deviceClient implements reconcile.DeviceClient interface for getting system configuration from device

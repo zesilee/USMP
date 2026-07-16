@@ -16,6 +16,7 @@ import (
 	"github.com/leezesi/usmp/backend/internal/intent"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/audit"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/client"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/device"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/manager"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/reconcile"
 )
@@ -45,16 +46,9 @@ func NewConfigHandler(mgr manager.Manager) *ConfigHandler {
 
 // fetchFromDevice reads running config from the device via the client pool.
 func (h *ConfigHandler) fetchFromDevice(ctx context.Context, ip, path string) (interface{}, error) {
-	// Resolve full connection info (port + credentials + protocol) from the shared
-	// DeviceStore. Fall back to an AUTO/no-cred stub for unregistered devices —
-	// Protocol must be set or the client factory hits its "unsupported protocol"
-	// default branch.
-	info := client.DeviceConnectionInfo{IP: ip, Protocol: client.ProtocolAUTO}
-	if ds := h.manager.GetDeviceStore(); ds != nil {
-		if stored, ok := ds.Get(ip); ok {
-			info = stored
-		}
-	}
+	// DS-06: resolve full connection info via the shared helper (unregistered
+	// devices degrade to AUTO/no-credential).
+	info, _ := device.ResolveConn(h.manager.GetDeviceStore(), ip)
 	cli, err := h.manager.GetClientPool().Get(info)
 	if err != nil {
 		return nil, err
@@ -1046,12 +1040,8 @@ type ConfigDeleteData struct {
 
 // pushDeleteToDevice 经客户端池同步下发单条目删除（candidate→commit，DP-04/DP-07）。
 func (h *ConfigHandler) pushDeleteToDevice(ctx context.Context, ip string, target interface{}) error {
-	info := client.DeviceConnectionInfo{IP: ip, Protocol: client.ProtocolAUTO}
-	if ds := h.manager.GetDeviceStore(); ds != nil {
-		if stored, ok := ds.Get(ip); ok {
-			info = stored
-		}
-	}
+	// DS-06: resolve via the shared helper（未注册降级 AUTO/空凭据）。
+	info, _ := device.ResolveConn(h.manager.GetDeviceStore(), ip)
 	cli, err := h.manager.GetClientPool().Get(info)
 	if err != nil {
 		return err

@@ -62,8 +62,9 @@ func TestAddDevice_UnknownVendorRejected(t *testing.T) {
 	assert.False(t, ok, "未知厂商不应写入 DeviceStore")
 }
 
-// DS-03: 种子设备携带缺省厂商。
+// DS-03: 种子设备（env 注入）携带缺省厂商。
 func TestSeedDevice_VendorHuawei(t *testing.T) {
+	t.Setenv("USMP_SEED_DEVICE", "192.168.1.1:830,admin,admin")
 	mgr := manager.New()
 	NewDeviceHandler(mgr)
 

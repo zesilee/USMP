@@ -9,7 +9,7 @@
 - [x] 1.2 实现 `device.ResolveConn(store, id)`（DS-06）：未注册 → `{IP, Protocol: AUTO}`+空凭据+统一日志
 - [x] 1.3 收敛消费方：9 个 `internal/controller/*/reconciler.go` resolveConn、`intent/tx.go`、`config_handler.go` 读/删、`device_handler.go` 探活/AddDevice 全部改调 helper，删除内联副本
 - [x] 1.4 种子设备迁移：删除 `NewDeviceHandler` 硬编码 `192.168.1.1`，实现 `USMP_SEED_DEVICE` 解析（仅内存 store 时生效；未设则空库启动）；补 B1 用例（设/未设/格式错） + 更新受影响的 handler 测试与 E2E 起手数据（compose/staging env 注入种子）
-- [ ] 1.5 全量验证：`go test ./... -race` 全绿 + `make e2e-local`（涉 staging 行为）→ review → commit → PR-W1
+- [x] 1.5 全量验证：`go test ./... -race` 全绿 + `make e2e-local`（涉 staging 行为）→ review → commit → PR-W1
 
 ## 2. W2 Device CRD + crdStore + 装配降级
 
