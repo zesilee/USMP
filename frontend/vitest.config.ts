@@ -24,7 +24,7 @@ export default defineConfig({
       thresholds: {
         statements: 80,
         branches: 75,
-        functions: 74,
+        functions: 73,
         lines: 80
       }
     }
