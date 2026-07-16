@@ -5,39 +5,41 @@ status: in_progress
 priority: medium
 branch: worktree-business-network-config
 worktree: .claude/worktrees/business-network-config
-change: (explore 进行中 → /opsx:propose 立项)
+change: business-network-config（29 任务全勾稽，实现完毕；剩 PR 分段合入 + 归档）
 updated: 2026-07-15
-origin: 用户拍板 2026-07-13；概念更名与前端死路退役见 change native-config-reposition
+origin: 用户拍板 2026-07-13；2026-07-15 拍板部署约束（K8s 多实例、CRD 公共契约、跨设备 2PC）见记忆 k8s-paas-deployment-constraints
 ---
 
-## 目标（概念定义，用户拍板原文语义）
+## 交付状态（2026-07-15，实现全部完成）
 
-- **原生配置**（已交付，本任务的地基）：直接基于 YANG 模型对交换机进行配置管理 = 模块控制台 `/module/:name` + config-api + driver registry + xmlcodec + gen-yang 全链路。
-- **业务网络配置**（本任务）：在业务侧基于 YANG 模型定义网络自动化配置能力（意图模型）；USMP 将业务自动化配置模型**编排**为原生配置下发。
+- **意图管线**：usmp-business-vlan.yang（唯一 schema 源）→ ygot（generated/business）+ CRD OpenAPI（tools/crdgen，deploy/crds 生成物 + regen-and-diff 门禁）+ /yang/schema 表单渲染 + task-name=business-network 菜单 category 四路派生。
+- **编排**：internal/intent——expand 纯函数（BIO-02）、TxCoordinator 跨设备 2PC（prepare→discard-all / confirmed-commit(60s)→confirming；能力缺失降级普通 commit 标非事务）、事务成功才写 desired（合并防抹除）+ TriggerReconcile、周期 resync 对冲 desired TTL、finalizer 删除 + 收缩差集（差集只依赖 CR status）、软归属索引。
+- **协议层**：netconfsim confirmed-commit 仿真（NS-07）+ 客户端 CommitConfirmed/ConfirmCommit（DP-08）；顺手修 sim 单条目 keyed list merge 折叠 bug（wellKnownListKeys）。
+- **API**：/business/vlan-services CRUD 代理（写前约束校验，无集群 503 降级）、/ownership/:device、SetConfig/Delete 附 ownershipWarning。
+- **前端**：业务菜单组（category 分桶零硬编码）、/business/:module 平台作用域控制台（列表/表单/详情三态，复用 useConfigForm+FieldRenderer）、原生控制台归属徽标 + 手改警告；F1/F2/F3/F4 全层绿（make e2e-local 13/13）。
+- **部署**：deploy/crds + deploy/rbac + README（CRD→RBAC→应用滚动）；leader election 接缝（USMP_INTENT_LEADER_ELECTION，默认关）。
+- **spec**：8 个 delta 已 sync 入主 spec（validate 27/27）；CLAUDE.md R03/§8 措辞已修订；覆盖率棘轮 后端 65.1 / 前端 80/75/74/80。
 
-```
-业务网络配置（意图层）: 业务 YANG 模型（如「业务VLAN打通」「园区接入」）
-        │ USMP 编排引擎：意图 → 多设备/多模块原生配置展开
-        ▼
-原生配置（设备层）: 华为 YANG 模型 → NETCONF 下发（现有全链路，不动）
-```
+## 剩余步骤（跨会话续做）
 
-## 架构落位思路（explore 输入，非结论）
-
-- **意图模型也是 YANG**：业务自动化能力用自定义 YANG 模块定义 → 复用 gen-yang manifest 管线（加一条 gen.conf）+ ygot 生成 + R05 自动渲染（业务模型零前端代码得到表单/控制台）+ 前端「业务网络配置」菜单组（与「原生配置」并列，代码标识符 business* 已清场）。
-- **意图也走 Reconciler**：业务模型实例作为 desired，Reconciler 的「对齐」= 展开为原生配置并经现有原生链路下发/收敛（C3 用户只写编排逻辑，框架管 diff/事件/重试）。
-- **编排 = 模型间映射**：意图模型 → N×(设备, 原生模块, 配置片段)；与 translator（厂商翻译）不同层——编排在意图→原生模型层，翻译在原生模型→设备方言层（已由 driver registry 承担）。
-- **历史教训**（[[dual-stack-migration]]、business-crd spec）：Stack A 的 BusinessVlan/BusinessRoute CRD 意图面思想同源但死于 K8s CRD 载体——本任务**必须**长在 Stack B（yang-controller-runtime），禁止复活 CRD 通道（R01/R03）。
-- **待 explore 的关键问题**：意图模型的存储与生命周期（R03 无数据库——意图实例存本地 JSON 元信息？）；多设备事务语义（部分失败怎么回滚/呈现）；意图与原生配置的归属标记（原生侧被意图管理的字段是否锁定）；首个业务能力选型（建议从「跨设备 VLAN 打通」起步——VLAN+IFM 原生链路最成熟）。
+1. **PR 分段合入**（TM04，串行，前段 merge 后开下一段——#129 死分支坑）：
+   - s1 = **PR #164**（立项制品 + netconfsim confirmed-commit）——已开，等 CI + merge。
+   - s2..s6 建议切法：s2 客户端 2PC 原语+crdgen 实现；s3 crdgen 测试+意图模型管线；s4 展开引擎+意图控制器；s5 2PC 下发+生命周期+软归属；s6 API 代理+前端+部署+spec 同步。每段 ≤1000 行（pr-size 排除 generated/）。
+   - 分段方式：`git branch business-network-config-sN <worktree 分支上的对应提交>` + push + PR（复用 s1 正文格式）。
+2. 全部 merge 后：`/opsx:archive business-network-config` 归档 change；`/task archive business-network-config`。
+3. Follow-up 任务（已在本文件登记，立项时另开 openspec/tasks）：
+   - **全局 HA**：device store 上共享存储、全控制器 leader election、audit 迁出本地文件（SC-06 遗留）。
+   - **归属硬锁二期**：config-api 命中认领路径 409 拒绝（当前软归属仅警告）。
+   - **旧 BusinessVlan 桥接退役**：internal/crdsource 的 BusinessVlan/BusinessInterface 与 pkg/translator 被意图控制器替代后删除（渐进替换收尾）。
 
 ## 上下文恢复提示
 
-- 地基（全部已交付，别重建）：通用模块控制台（[[generic-module-console]]）、driver registry + xmlcodec + gen-yang（[[snd-driver-registry]]）、删除命令通道（[[config-delete-semantics]]）、约束引擎（[[yang-constraint-engine]]）。
-- 前端命名已清场：菜单「原生配置」= 模块控制台；`business*` 标识符已释放给本任务（change native-config-reposition）。
-- 相关 spec：frontend（FE-03/FE-10/FE-13）、config-api、yang-controller-runtime、device-driver-registry、yang-codegen-pipeline；business-crd 为 legacy 历史契约仅供思想参考。
+- 拍板与坟场边界：记忆 [[k8s-paas-deployment-constraints]]（CRD 当载体不当架构、2PC、多实例约束）。
+- 制品：openspec/changes/business-network-config/（proposal/design/specs/tasks/test-matrix 全齐）。
+- 关键实现坑已记录在提交信息：驱动注册空白导入、池按 IP 键控（测试用 loopback 别名）、sim 单-单 merge 折叠、fake client status:nil、confirming 部分失败残余窗口。
 
 ## 恢复指令
 
-1. 新会话：`/task resume business-network-config`。
-2. 启动时 `EnterWorktree` → `/opsx:explore`（先解决「待 explore 的关键问题」四项，尤其意图实例存储与 R03 的关系、首个业务能力选型）→ `/opsx:propose`。
-3. 每阶段完成照例 sync + 归档 + 回写本文件。
+1. `/task resume business-network-config` → `EnterWorktree`（path=.claude/worktrees/business-network-config）。
+2. 查 `gh pr list` 分段进度，按「剩余步骤 1」继续切段/开 PR；CI 绿后自助 merge（落地工作方式记忆）。
+3. 全段合入后走归档（剩余步骤 2）并立 follow-up 任务（步骤 3）。

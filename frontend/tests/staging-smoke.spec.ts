@@ -167,3 +167,50 @@ test.describe('部署冒烟 - 前端 SPA', () => {
     await expect(page.getByText('mtu', { exact: false }).first()).toBeVisible({ timeout: 15000 })
   })
 })
+
+// ===== 业务网络配置（FE-17，矩阵 A8/A11/A12 冒烟）=====
+// staging 无 K8s 集群：菜单与 schema 渲染必须可用（/yang/modules、/yang/schema
+// 不依赖集群），实例数据面诚实呈现 503 降级告警（R08）。
+test.describe('部署冒烟 - 业务网络配置', () => {
+  test('业务菜单组出现且业务控制台渲染（含无集群降级告警）', async ({ page }) => {
+    await page.goto('/', { waitUntil: 'networkidle' })
+
+    // 菜单组由 task-name=business-network 自动分桶（零硬编码）。
+    const group = page.locator('[data-test="business-group"]')
+    await expect(group).toBeVisible({ timeout: 15000 })
+    await group.click()
+    await page.locator('[data-test="business-item-business-vlan-service"]').click()
+    await expect(page).toHaveURL(/business\/business-vlan-service/)
+
+    // 页面骨架 + 无集群降级告警（staging 无 apiserver）。
+    await expect(page.getByText('业务网络配置').first()).toBeVisible()
+    await expect(page.locator('[data-test="business-unavailable"]')).toBeVisible({ timeout: 15000 })
+  })
+
+  test('新建抽屉由意图 YANG schema 驱动渲染（devices 嵌套 list）', async ({ page }) => {
+    await page.goto('/business/business-vlan-service', { waitUntil: 'networkidle' })
+    await page.locator('[data-test="business-create"]').click()
+
+    // 页面含新建/详情两个抽屉容器，按 aria-label 精确定位（strict mode）。
+    const drawer = page.getByRole('dialog', { name: '新建业务实例' })
+    await expect(drawer).toBeVisible({ timeout: 15000 })
+    await expect(drawer.getByText('实例名').first()).toBeVisible()
+    // schema 派生字段（意图 YANG 叶子）与嵌套 devices list 的添加入口。
+    await expect(drawer.getByText('vlan-id', { exact: false }).first()).toBeVisible({ timeout: 15000 })
+    await expect(drawer.getByRole('button', { name: /添加/ }).first()).toBeVisible()
+
+    // 校验拦截：缺实例名/必填字段时提交按钮禁用（§9 不提交）。
+    await expect(drawer.locator('[data-test="business-submit"]')).toBeDisabled()
+  })
+
+  test('SPA 内业务控制台 ⇄ 原生模块控制台切换不串 schema', async ({ page }) => {
+    await page.goto('/business/business-vlan-service', { waitUntil: 'networkidle' })
+    await expect(page.locator('[data-test="business-table"], [data-test="business-unavailable"]').first()).toBeVisible({ timeout: 15000 })
+
+    // 原生配置子菜单在业务路由下默认折叠，先展开再点模块项。
+    await page.locator('.el-sub-menu', { hasText: '原生配置' }).locator('.el-sub-menu__title').first().click()
+    await page.locator('[data-test="module-item-vlan"]').click()
+    await expect(page).toHaveURL(/module\/vlan/)
+    await expect(page.getByRole('tab', { name: 'vlans', exact: true })).toBeVisible({ timeout: 15000 })
+  })
+})

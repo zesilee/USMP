@@ -1,0 +1,62 @@
+# 业务网络配置（business-network-config）RBAC：USMP ServiceAccount 读写意图 CR
+# 与 status/finalizers + leader election Lease（BIC-02 / BIO-08）。
+# 安装顺序：deploy/crds/ 先于本文件，本文件先于 USMP 新版本滚动（design 迁移计划）。
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: usmp
+  namespace: usmp-system
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: usmp-business-intent
+rules:
+  - apiGroups: ["biz.usmp.io"]
+    resources: ["businessvlanservices"]
+    verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+  - apiGroups: ["biz.usmp.io"]
+    resources: ["businessvlanservices/status"]
+    verbs: ["get", "update", "patch"]
+  - apiGroups: ["biz.usmp.io"]
+    resources: ["businessvlanservices/finalizers"]
+    verbs: ["update"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: usmp-business-intent
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: usmp-business-intent
+subjects:
+  - kind: ServiceAccount
+    name: usmp
+    namespace: usmp-system
+---
+# leader election（BIO-08 接缝，USMP_INTENT_LEADER_ELECTION=1 时启用）：
+# Lease 限定在意图 CR 所在 namespace（USMP_INTENT_NAMESPACE，默认 default）。
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: usmp-intent-leader-election
+  namespace: default
+rules:
+  - apiGroups: ["coordination.k8s.io"]
+    resources: ["leases"]
+    verbs: ["get", "list", "watch", "create", "update", "patch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: usmp-intent-leader-election
+  namespace: default
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: usmp-intent-leader-election
+subjects:
+  - kind: ServiceAccount
+    name: usmp
+    namespace: usmp-system

@@ -22,10 +22,10 @@ export default defineConfig({
       // 2026-07-13 legacy CRD 链路退役（低覆盖代码删除，分母重算）后实测：
       // Stmts 79.53 / Branch 75.61 / Funcs 72.21 / Lines 80.08。
       thresholds: {
-        statements: 78,
-        branches: 74,
-        functions: 71,
-        lines: 78
+        statements: 80,
+        branches: 75,
+        functions: 73,
+        lines: 80
       }
     }
   },

@@ -17,6 +17,7 @@ vi.mock('@element-plus/icons-vue', () => ({
   DataLine: { template: '<span />' },
   Monitor: { template: '<span />' },
   Connection: { template: '<span />' },
+  Share: { template: '<span />' },
   Setting: { template: '<span />' },
   Document: { template: '<span />' },
   Tools: { template: '<span />' },
