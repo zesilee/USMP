@@ -210,6 +210,12 @@ spec:
   ports: [{ port: 80, targetPort: 80, nodePort: 30002 }]
 EOF
 
+# 同 tag（latest + imagePullPolicy: Never）换镜像时 podSpec 不变、apply 不会
+# 滚动——显式 restart 保证重跑脚本必然吃到刚 kind load 的新镜像（幂等更新）。
+log "滚动重启以套用新载入的镜像"
+kubectl -n default     rollout restart deploy/netconf-sim
+kubectl -n usmp-system rollout restart deploy/usmp-backend deploy/usmp-frontend
+
 log "等待滚动就绪"
 kubectl -n default     rollout status deploy/netconf-sim   --timeout=180s
 kubectl -n usmp-system rollout status deploy/usmp-backend  --timeout=300s
