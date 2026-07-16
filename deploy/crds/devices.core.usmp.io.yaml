@@ -1,0 +1,61 @@
+# Device CRD —— 设备连接元信息（DS-01/DS-04/DS-05，global-ha-multi-instance W2）。
+# 手写 manifest：Device 非 YANG 源，不走 crdgen 管线（对齐 backend/api/core/v1/device_types.go，
+# 字段变更需两处同步）。凭据不进 CR：仅 credentialsSecretRef 引用同 namespace Secret。
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: devices.core.usmp.io
+spec:
+  group: core.usmp.io
+  names:
+    kind: Device
+    listKind: DeviceList
+    plural: devices
+    singular: device
+  scope: Namespaced
+  versions:
+    - name: v1
+      served: true
+      storage: true
+      additionalPrinterColumns:
+        - jsonPath: .spec.managementIP
+          name: IP
+          type: string
+        - jsonPath: .spec.protocol
+          name: Protocol
+          type: string
+        - jsonPath: .spec.vendor
+          name: Vendor
+          type: string
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+            spec:
+              type: object
+              required:
+                - managementIP
+              properties:
+                managementIP:
+                  type: string
+                  minLength: 1
+                port:
+                  type: integer
+                  minimum: 0
+                  maximum: 65535
+                protocol:
+                  type: string
+                  enum: ["netconf", "gnmi", "auto", ""]
+                timeoutSeconds:
+                  type: integer
+                  minimum: 0
+                vendor:
+                  type: string
+                credentialsSecretRef:
+                  type: object
+                  required:
+                    - name
+                  properties:
+                    name:
+                      type: string
+                      minLength: 1

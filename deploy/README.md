@@ -8,14 +8,16 @@
 
 | 路径 | 内容 | 生成方式 |
 |------|------|----------|
-| `crds/` | 业务意图 CRD manifest | **生成物**：`make gen-crd`（源 = `backend/internal/yang/models/usmp-business-vlan.yang`，勿手改，CI regen-and-diff 门禁） |
-| `rbac/` | ServiceAccount + 意图 CR/status/finalizers + Lease 权限 | 手写 |
+| `crds/businessvlanservices.*` | 业务意图 CRD manifest | **生成物**：`make gen-crd`（源 = `backend/internal/yang/models/usmp-business-vlan.yang`，勿手改，CI regen-and-diff 门禁） |
+| `crds/devices.core.usmp.io.yaml` | 设备注册表 CRD（DS-01/04/05） | 手写（非 YANG 源，对齐 `backend/api/core/v1/device_types.go`，两处同步） |
+| `rbac/business-intent-rbac.yaml` | ServiceAccount + 意图 CR/status/finalizers + Lease 权限 | 手写 |
+| `rbac/device-store-rbac.yaml` | Device CR + 凭据 Secret（namespace 级）权限 | 手写 |
 
 ## 安装顺序（BIC-02：CRD 先于应用滚动）
 
 ```sh
 kubectl apply -f deploy/crds/
-kubectl apply -f deploy/rbac/business-intent-rbac.yaml
+kubectl apply -f deploy/rbac/
 # 然后再滚动 USMP 新版本
 ```
 
@@ -23,8 +25,15 @@ kubectl apply -f deploy/rbac/business-intent-rbac.yaml
 
 | 变量 | 缺省 | 说明 |
 |------|------|------|
-| `USMP_INTENT_NAMESPACE` | `default` | 意图 CR 所在 namespace（USMP API 代理与 Lease 同域） |
-| `USMP_INTENT_LEADER_ELECTION` | 关 | `1` 启用意图控制器 leader election（多副本时仅 leader 执行展开/2PC/清理；BIO-08 接缝。注意：存量原生周期控制器尚未纳入选主，全局 HA 另立任务） |
+| `USMP_INTENT_NAMESPACE` | `default` | 意图 CR、Device CR 与凭据 Secret 所在 namespace（USMP API 代理与 Lease 同域） |
+| `USMP_INTENT_LEADER_ELECTION` | 关 | `1` 启用意图控制器 leader election（多副本时仅 leader 执行展开/2PC/清理；BIO-08 接缝。注意：存量原生周期控制器选主见 global-ha-multi-instance W3） |
+| `USMP_SEED_DEVICE` | 无 | 种子设备 `ip[:port],user,pass[,vendor]`（DS-03，仅无集群内存降级模式生效；集群模式设备集合来自 Device CR，该变量被忽略） |
+
+## 设备注册表（DS-01/04/05）
+
+集群可达时设备连接元信息持久化为 `Device` CR（跨副本 watch 共享、重启恢复），
+凭据存同 namespace Secret（CR 仅存 `credentialsSecretRef` 引用，etcd 不落明文）；
+无可达集群自动降级进程内存（重启即丢，R08）。
 
 ## 版本策略（v1alpha1）
 
