@@ -1,0 +1,51 @@
+# 设备注册表 CRD 化（global-ha-multi-instance W2，DS-01/04/05）RBAC：
+# USMP ServiceAccount 读写 Device CR 与凭据 Secret（限定意图 namespace，
+# USMP_INTENT_NAMESPACE，默认 default）。
+# 安装顺序：deploy/crds/ 先于本文件，本文件先于 USMP 新版本滚动（BIC-02）。
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: usmp-device-store
+rules:
+  - apiGroups: ["core.usmp.io"]
+    resources: ["devices"]
+    verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: usmp-device-store
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: usmp-device-store
+subjects:
+  - kind: ServiceAccount
+    name: usmp
+    namespace: usmp-system
+---
+# 凭据 Secret 读写限定在设备 CR 所在 namespace（DS-04：CR 存引用、Secret 存
+# 凭据），不授予集群级 Secret 权限。
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: usmp-device-credentials
+  namespace: default
+rules:
+  - apiGroups: [""]
+    resources: ["secrets"]
+    verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: usmp-device-credentials
+  namespace: default
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: usmp-device-credentials
+subjects:
+  - kind: ServiceAccount
+    name: usmp
+    namespace: usmp-system
