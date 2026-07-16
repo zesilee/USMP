@@ -16,11 +16,11 @@ import (
 // fakeAuditMgr 只覆写 ListLogs 用到的两个 getter，其余方法零值（不会被调用）。
 type fakeAuditMgr struct {
 	manager.Manager
-	audit  *audit.Store
+	audit  audit.Store
 	status *status.Store
 }
 
-func (f fakeAuditMgr) GetAuditStore() *audit.Store       { return f.audit }
+func (f fakeAuditMgr) GetAuditStore() audit.Store        { return f.audit }
 func (f fakeAuditMgr) GetReconcileStatus() status.Reader { return f.status }
 
 func listLogsReq(h *AuditHandler, query string) *httptest.ResponseRecorder {

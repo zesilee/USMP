@@ -31,11 +31,11 @@
 
 ## 4. W4 audit 接口化 + CRD 后端 + 本地文件退役
 
-- [ ] 4.1 测试设计：audit 接口抽取回归（现内存/文件行为）+ CRD 后端矩阵（envtest：写 create CR/失败不阻断/跨 client 可见/重启保留/超限删最旧/并发清理容忍 NotFound/无集群降级内存；`GET /logs` 契约回归 B3）——红灯先行
-- [ ] 4.2 `audit.Store` 接口化：现实现拆为内存降级路径（去文件写），`USMP_AUDIT_FILE` 弃用警告（OA-05）
-- [ ] 4.3 类型脚手架：`core/v1 AuditRecord` types + deepcopy + scheme + `deploy/crds`/`rbac` 物料
-- [ ] 4.4 实现 CRD 后端：create-per-record + label 索引 + watch 镜像 List + 超限清理（OA-01/02/03/04），`manager` 装配按集群可达性选后端
-- [ ] 4.5 全量验证：`go test ./... -race` 全绿 + `GET /logs` 前端契约回归（契约生成无漂移）→ review → commit → PR-W4
+- [x] 4.1 测试设计：audit 接口抽取回归（现内存/文件行为）+ CRD 后端矩阵（envtest：写 create CR/失败不阻断/跨 client 可见/重启保留/超限删最旧/并发清理容忍 NotFound/无集群降级内存；`GET /logs` 契约回归 B3）——红灯先行
+- [x] 4.2 `audit.Store` 接口化：现实现拆为内存降级路径（去文件写），`USMP_AUDIT_FILE` 弃用警告（OA-05）
+- [x] 4.3 类型脚手架：`core/v1 AuditRecord` types + deepcopy + scheme + `deploy/crds`/`rbac` 物料
+- [x] 4.4 实现 CRD 后端：create-per-record + label 索引 + watch 镜像 List + 超限清理（OA-01/02/03/04），`manager` 装配按集群可达性选后端
+- [x] 4.5 全量验证：`go test ./... -race` 全绿 + `GET /logs` 前端契约回归（契约生成无漂移）→ review → commit → PR-W4
 
 ## 5. 收官
 

@@ -3,6 +3,7 @@ package manager
 import (
 	"time"
 
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/audit"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/client"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/device"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/queue"
@@ -24,9 +25,11 @@ type Options struct {
 	Schema schema.Schema
 	// EnableDebug enables debug logging
 	EnableDebug bool
-	// AuditFile is the local JSON file the operation-audit log persists to
-	// (§8). Empty ("") keeps the audit log in memory only.
+	// AuditFile 已退役（OA-05/SC-06）：非空仅产生弃用警告（不再写文件）。
 	AuditFile string
+	// AuditStore overrides the operation-audit backend（集群模式注入 CRD
+	// 实现，OA-02）。nil 时按 AuditFile 缺省为内存实现。
+	AuditStore audit.Store
 	// DeviceStore overrides the shared device registry backend（集群模式注入
 	// CRD store，DS-01）。nil 时使用缺省内存实现。
 	DeviceStore device.Store
@@ -63,8 +66,7 @@ func WithSchemeDir(dir string) Option {
 	}
 }
 
-// WithAuditFile sets the local JSON file the operation-audit log persists to
-// (§8). Empty keeps it in memory only.
+// WithAuditFile 已退役（OA-05）：仅保留兼容，非空路径产生弃用警告。
 func WithAuditFile(path string) Option {
 	return func(o *Options) {
 		o.AuditFile = path
@@ -101,5 +103,13 @@ func DefaultOptions() Options {
 func WithDeviceStore(s device.Store) Option {
 	return func(o *Options) {
 		o.DeviceStore = s
+	}
+}
+
+// WithAuditStore overrides the operation-audit backend（集群模式注入
+// AuditRecord CRD 实现，OA-02；缺省为进程内存实现）。
+func WithAuditStore(s audit.Store) Option {
+	return func(o *Options) {
+		o.AuditStore = s
 	}
 }

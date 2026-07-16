@@ -10,6 +10,7 @@
 |------|------|----------|
 | `crds/businessvlanservices.*` | 业务意图 CRD manifest | **生成物**：`make gen-crd`（源 = `backend/internal/yang/models/usmp-business-vlan.yang`，勿手改，CI regen-and-diff 门禁） |
 | `crds/devices.core.usmp.io.yaml` | 设备注册表 CRD（DS-01/04/05） | 手写（非 YANG 源，对齐 `backend/api/core/v1/device_types.go`，两处同步） |
+| `crds/auditrecords.core.usmp.io.yaml` | 操作审计 CRD（OA-01~05） | 手写（非 YANG 源，对齐 `backend/api/core/v1/auditrecord_types.go`，两处同步） |
 | `rbac/business-intent-rbac.yaml` | ServiceAccount + 意图 CR/status/finalizers + Lease 权限 | 手写 |
 | `rbac/device-store-rbac.yaml` | Device CR + 凭据 Secret（namespace 级）权限 | 手写 |
 
@@ -29,6 +30,7 @@ kubectl apply -f deploy/rbac/
 | `USMP_INTENT_LEADER_ELECTION` | 关 | `1` 启用意图控制器 leader election（多副本时仅 leader 执行展开/2PC/清理；BIO-08 接缝，Lease `usmp-business-intent`） |
 | `USMP_NATIVE_LEADER_ELECTION` | 关 | `1` 启用原生周期控制器（vlan/ifm/system/bgp/ni）统一 leader election（YR-08：多副本仅 leader 产生周期对账事件，Lease `usmp-native-controllers`，与意图面互不干扰；无集群透传） |
 | `USMP_SEED_DEVICE` | 无 | 种子设备 `ip[:port],user,pass[,vendor]`（DS-03，仅无集群内存降级模式生效；集群模式设备集合来自 Device CR，该变量被忽略） |
+| `USMP_AUDIT_FILE` | — | **已退役**（OA-05/SC-06 禁本地持久）：设置仅产生弃用警告；集群模式审计走 AuditRecord CRD，无集群为纯内存 |
 
 ## 设备注册表（DS-01/04/05）
 

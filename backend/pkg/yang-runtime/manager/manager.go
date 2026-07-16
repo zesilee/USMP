@@ -112,7 +112,7 @@ type Manager interface {
 	// GetReconcileStatus returns a read-only view of most-recent reconcile outcomes
 	GetReconcileStatus() status.Reader
 	// GetAuditStore returns the operation-audit log (config-delivery records)
-	GetAuditStore() *audit.Store
+	GetAuditStore() audit.Store
 	// GetPluginManager returns the plugin manager
 	GetPluginManager() *plugin.Manager
 	// AddPlugin adds a plugin
@@ -134,7 +134,7 @@ type DefaultManager struct {
 	desiredCache    *cache.TTLLRUCache
 	runningCache    *cache.TTLLRUCache
 	reconcileStatus *status.Store
-	auditStore      *audit.Store
+	auditStore      audit.Store
 	deviceStore     device.Store
 	controllers     []controller.Controller
 	pluginManager   *plugin.Manager
@@ -151,6 +151,9 @@ func New(opts ...Option) *DefaultManager {
 	}
 	if options.DeviceStore == nil {
 		options.DeviceStore = device.NewStore()
+	}
+	if options.AuditStore == nil {
+		options.AuditStore = audit.NewStore(options.AuditFile, 1000)
 	}
 
 	var s schema.Schema
@@ -179,8 +182,9 @@ func New(opts ...Option) *DefaultManager {
 		desiredCache:    desiredCache,
 		runningCache:    runningCache,
 		reconcileStatus: status.NewStore(),
-		// 操作审计日志：内存 + 最佳努力持久化到本地 JSON（§8）。AuditFile 为空则内存模式。
-		auditStore:    audit.NewStore(options.AuditFile, 1000),
+		// 操作审计日志（OA-02）：集群模式经 WithAuditStore 注入 CRD 后端，
+		// 缺省内存实现（AuditFile 已退役，仅弃用警告）。
+		auditStore:    options.AuditStore,
 		deviceStore:   options.DeviceStore,
 		controllers:   make([]controller.Controller, 0),
 		pluginManager: plugin.NewManager(),
@@ -268,7 +272,7 @@ func (m *DefaultManager) GetReconcileStatus() status.Reader {
 }
 
 // GetAuditStore implements Manager interface
-func (m *DefaultManager) GetAuditStore() *audit.Store {
+func (m *DefaultManager) GetAuditStore() audit.Store {
 	return m.auditStore
 }
 

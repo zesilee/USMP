@@ -16,16 +16,21 @@ func TestManager_AuditStore_Present(t *testing.T) {
 	assert.Len(t, m.GetAuditStore().List(), 1)
 }
 
-func TestManager_AuditFile_Persists(t *testing.T) {
-	fp := filepath.Join(t.TempDir(), "sub", "audit.json") // 子目录不存在，store 应自建
+// OA-05: WithAuditFile 已退役——设置路径仅弃用警告、走内存、绝不写盘（SC-06）。
+func TestManager_AuditFile_Deprecated_NoWrite(t *testing.T) {
+	fp := filepath.Join(t.TempDir(), "sub", "audit.json")
 	m := New(WithAuditFile(fp))
 	m.GetAuditStore().Record(audit.Record{DeviceIP: "10.0.0.1", Path: "/vlan", Summary: "vlans (1)"})
 
-	// 文件已落盘
+	assert.Len(t, m.GetAuditStore().List(), 1, "内存记录照常")
 	_, err := os.Stat(fp)
-	assert.NoError(t, err, "记录后应持久化到本地 JSON（§8）")
+	assert.True(t, os.IsNotExist(err), "OA-05: 不应写任何审计文件")
+}
 
-	// 新 Manager 从同文件加载（模拟重启）
-	m2 := New(WithAuditFile(fp))
-	assert.Len(t, m2.GetAuditStore().List(), 1)
+// OA-02: WithAuditStore 注入自定义后端（集群模式 CRD 实现走此缝）。
+func TestManager_WithAuditStore_Injects(t *testing.T) {
+	custom := audit.NewMemStore(5)
+	m := New(WithAuditStore(custom))
+	m.GetAuditStore().Record(audit.Record{DeviceIP: "10.0.0.2"})
+	assert.Len(t, custom.List(), 1, "注入的后端应被 Manager 使用")
 }
