@@ -4,6 +4,7 @@ import (
 	"time"
 
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/client"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/device"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/queue"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/schema"
 )
@@ -26,6 +27,9 @@ type Options struct {
 	// AuditFile is the local JSON file the operation-audit log persists to
 	// (§8). Empty ("") keeps the audit log in memory only.
 	AuditFile string
+	// DeviceStore overrides the shared device registry backend（集群模式注入
+	// CRD store，DS-01）。nil 时使用缺省内存实现。
+	DeviceStore device.Store
 }
 
 // Option is a function that modifies Options
@@ -89,5 +93,13 @@ func DefaultOptions() Options {
 		DefaultTimeout: 10 * time.Second,
 		RateLimiter:    queue.DefaultRateLimiter(),
 		EnableDebug:    false,
+	}
+}
+
+// WithDeviceStore overrides the shared device registry backend（集群模式注入
+// CRD store，DS-01；缺省为进程内存实现）。
+func WithDeviceStore(s device.Store) Option {
+	return func(o *Options) {
+		o.DeviceStore = s
 	}
 }

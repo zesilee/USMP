@@ -15,10 +15,11 @@ import (
 type Store interface {
 	// Get returns the connection info for id, or ok=false if not registered.
 	Get(id string) (client.DeviceConnectionInfo, bool)
-	// Put registers/updates the connection info for id.
-	Put(id string, info client.DeviceConnectionInfo)
-	// Delete removes id from the registry (no-op if absent).
-	Delete(id string)
+	// Put registers/updates the connection info for id. 持久化后端（CRD）写
+	// 失败时返回错误（DS-04 写失败可见）；内存实现恒返回 nil。
+	Put(id string, info client.DeviceConnectionInfo) error
+	// Delete removes id from the registry (no-op if absent)。失败语义同 Put。
+	Delete(id string) error
 	// List returns all registered device IDs.
 	List() []string
 }
@@ -41,16 +42,18 @@ func (s *memStore) Get(id string) (client.DeviceConnectionInfo, bool) {
 	return info, ok
 }
 
-func (s *memStore) Put(id string, info client.DeviceConnectionInfo) {
+func (s *memStore) Put(id string, info client.DeviceConnectionInfo) error {
 	s.mu.Lock()
 	defer s.mu.Unlock()
 	s.devices[id] = info
+	return nil
 }
 
-func (s *memStore) Delete(id string) {
+func (s *memStore) Delete(id string) error {
 	s.mu.Lock()
 	defer s.mu.Unlock()
 	delete(s.devices, id)
+	return nil
 }
 
 func (s *memStore) List() []string {

@@ -149,6 +149,9 @@ func New(opts ...Option) *DefaultManager {
 	for _, opt := range opts {
 		opt(&options)
 	}
+	if options.DeviceStore == nil {
+		options.DeviceStore = device.NewStore()
+	}
 
 	var s schema.Schema
 	if options.Schema != nil {
@@ -178,7 +181,7 @@ func New(opts ...Option) *DefaultManager {
 		reconcileStatus: status.NewStore(),
 		// 操作审计日志：内存 + 最佳努力持久化到本地 JSON（§8）。AuditFile 为空则内存模式。
 		auditStore:    audit.NewStore(options.AuditFile, 1000),
-		deviceStore:   device.NewStore(),
+		deviceStore:   options.DeviceStore,
 		controllers:   make([]controller.Controller, 0),
 		pluginManager: plugin.NewManager(),
 	}
