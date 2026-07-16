@@ -31,9 +31,13 @@ jobs:
       - name: Go Mod Download
         run: go mod download
 
+      - name: Install envtest binaries (真 apiserver 集成测试，矩阵 A7/BIO-05)
+        run: |
+          echo "KUBEBUILDER_ASSETS=$(go run sigs.k8s.io/controller-runtime/tools/setup-envtest@release-0.19 use 1.31.0 -p path)" >> "$GITHUB_ENV"
+
       - name: Run Tests with Race Detection
         run: |
-          go test ./... -race -count=1 -coverprofile=coverage.out -timeout=120s 2>&1 | tee test-output.txt || true
+          go test ./... -race -count=1 -coverprofile=coverage.out -timeout=300s 2>&1 | tee test-output.txt || true
           # Check if any test actually failed (ignore covdata warnings from packages with no tests)
           if grep -qE '^FAIL\s' test-output.txt; then
             echo "::error::Some tests failed"
