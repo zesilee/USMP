@@ -79,60 +79,24 @@ func TestMaxRecords_DropsOldest(t *testing.T) {
 	assert.Equal(t, "3", got[2].Summary) // 最旧保留
 }
 
-func TestPersistence_SurvivesReload(t *testing.T) {
-	dir := t.TempDir()
-	fp := filepath.Join(dir, "audit.json")
-
-	s1 := NewStore(fp, 100)
-	s1.Record(rec("10.0.0.1", "/vlan", "vlans: [100]"))
-	s1.Record(rec("10.0.0.2", "/ifm", "interface: [GE0/0/1]"))
-
-	// 模拟重启：新 Store 从同一文件加载
-	s2 := NewStore(fp, 100)
-	got := s2.List()
-	assert.Len(t, got, 2)
-	assert.Equal(t, "/ifm", got[0].Path) // 仍新最先
-
-	// 加载后继续记录，ID 不与已加载记录冲突
-	s2.Record(rec("10.0.0.3", "/vlan", "x"))
-	ids := map[string]bool{}
-	for _, r := range s2.List() {
-		assert.False(t, ids[r.ID], "重启续记 ID 不应与已加载冲突")
-		ids[r.ID] = true
-	}
-}
-
-func TestPersistence_EmptyPathIsMemoryOnly(t *testing.T) {
-	s := NewStore("", 100)
-	s.Record(rec("a", "/p", "x"))
-	assert.Len(t, s.List(), 1) // 不崩、无文件
-}
-
-func TestLoad_MissingFileDegradesEmpty(t *testing.T) {
-	s := NewStore(filepath.Join(t.TempDir(), "nope.json"), 100)
-	assert.Empty(t, s.List(), "文件不存在应降级为空、不报错(R08)")
-	s.Record(rec("a", "/p", "x"))
-	assert.Len(t, s.List(), 1)
-}
-
-func TestLoad_CorruptFileDegradesEmpty(t *testing.T) {
+// OA-05: 本地审计文件退役——传入文件路径仅弃用警告、走内存、绝不写盘。
+func TestDeprecatedFilePath_NoFileWritten(t *testing.T) {
 	fp := filepath.Join(t.TempDir(), "audit.json")
-	assert.NoError(t, os.WriteFile(fp, []byte("{not json"), 0o600))
-	s := NewStore(fp, 100) // 不应 panic
-	assert.Empty(t, s.List())
-	// 损坏文件仍可继续记录并覆盖
-	s.Record(rec("a", "/p", "x"))
-	assert.Len(t, s.List(), 1)
+	s := NewStore(fp, 100)
+	s.Record(rec("10.0.0.1", "/vlan", "vlans: [100]"))
+
+	assert.Len(t, s.List(), 1, "内存记录照常工作")
+	_, err := os.Stat(fp)
+	assert.True(t, os.IsNotExist(err), "OA-05: 不应再写任何审计文件")
+	assert.NoError(t, s.Flush(), "Flush 在内存模式恒为 nil")
 }
 
-func TestRecord_PersistFailureDoesNotPanicOrBlock(t *testing.T) {
-	// 让持久化必失败：父路径是文件而非目录 → MkdirAll/WriteFile 都失败。
-	blocker := filepath.Join(t.TempDir(), "blocker")
-	assert.NoError(t, os.WriteFile(blocker, []byte("x"), 0o600))
-	s := NewStore(filepath.Join(blocker, "audit.json"), 100)
-
-	assert.NotPanics(t, func() { s.Record(rec("a", "/p", "x")) })
-	assert.Len(t, s.List(), 1, "写盘失败仍应保留内存记录(R08)")
+// OA-05: 历史遗留文件不加载（滚动窗口数据，可接受截断）。
+func TestDeprecatedFilePath_LegacyFileIgnored(t *testing.T) {
+	fp := filepath.Join(t.TempDir(), "audit.json")
+	assert.NoError(t, os.WriteFile(fp, []byte(`[{"id":"1","device_ip":"a"}]`), 0o600))
+	s := NewStore(fp, 100)
+	assert.Empty(t, s.List(), "退役后不再读取历史文件")
 }
 
 func TestConcurrent_RecordAndList(t *testing.T) {
