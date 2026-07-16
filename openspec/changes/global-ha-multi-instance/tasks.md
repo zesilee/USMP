@@ -13,12 +13,12 @@
 
 ## 2. W2 Device CRD + crdStore + 装配降级
 
-- [ ] 2.1 Spike（半天封顶）：Device CRD manifest 生成方式定案（controller-gen vs 扩 crdgen）+ namespace env 复用 `USMP_INTENT_NAMESPACE` 定案（design Open Questions）
-- [ ] 2.2 类型脚手架：`backend/api/core/v1` 新增 `Device` types（spec: managementIP/port/protocol/timeoutSeconds/vendor/credentialsSecretRef）+ deepcopy 生成 + scheme 注册
-- [ ] 2.3 测试设计：crdStore 完备矩阵（envtest：Put 双资源落库/写序 Secret 先行/Get 还原凭据/Secret 缺失空凭据降级/Delete 反向/apiserver 拒绝时镜像不变更/watch 跨 client 可见/重启重建镜像/并发 race；无集群降级选择内存版）——红灯先行（B1+envtest 集成，参照 intent envtest 先例）
-- [ ] 2.4 实现 `device.NewCRDStore`：watch 镜像读路径 + write-through 写穿（DS-01/04/05），凭据 Secret 读写与失效跟随
-- [ ] 2.5 装配：`manager.WithDeviceStore` option + `main.go` 按 `ctrlcfg.GetConfig()` 成败选 store（复用 crdsource 降级模式）；devices-api 持久化失败 5xx 信封（BR-13）+ B3 用例
-- [ ] 2.6 部署物料：`deploy/crds/` device manifest、`deploy/rbac/` Device+Secret 权限、README 环境变量表与安装顺序更新
+- [x] 2.1 Spike（半天封顶）：Device CRD manifest 生成方式定案（controller-gen vs 扩 crdgen）+ namespace env 复用 `USMP_INTENT_NAMESPACE` 定案（design Open Questions）
+- [x] 2.2 类型脚手架：`backend/api/core/v1` 新增 `Device` types（spec: managementIP/port/protocol/timeoutSeconds/vendor/credentialsSecretRef）+ deepcopy 生成 + scheme 注册
+- [x] 2.3 测试设计：crdStore 完备矩阵（envtest：Put 双资源落库/写序 Secret 先行/Get 还原凭据/Secret 缺失空凭据降级/Delete 反向/apiserver 拒绝时镜像不变更/watch 跨 client 可见/重启重建镜像/并发 race；无集群降级选择内存版）——红灯先行（B1+envtest 集成，参照 intent envtest 先例）
+- [x] 2.4 实现 `device.NewCRDStore`：watch 镜像读路径 + write-through 写穿（DS-01/04/05），凭据 Secret 读写与失效跟随
+- [x] 2.5 装配：`manager.WithDeviceStore` option + `main.go` 按 `ctrlcfg.GetConfig()` 成败选 store（复用 crdsource 降级模式）；devices-api 持久化失败 5xx 信封（BR-13）+ B3 用例
+- [x] 2.6 部署物料：`deploy/crds/` device manifest、`deploy/rbac/` Device+Secret 权限、README 环境变量表与安装顺序更新
 - [ ] 2.7 双路径验证：envtest 全绿 + 无集群模式 `go test ./... -race` 全绿 + `make e2e-local` 全绿 → review → commit → PR-W2
 
 ## 3. W3 选主泛化 + 原生面 gate

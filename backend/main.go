@@ -16,9 +16,11 @@ import (
 	"github.com/leezesi/usmp/backend/internal/intent"
 	"github.com/leezesi/usmp/backend/internal/yangschema"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/controller"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/device"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/manager"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/predicate"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/source"
+	ctrlcfg "sigs.k8s.io/controller-runtime/pkg/client/config"
 )
 
 // @title           USMP 交换机设备管理平台 API
@@ -35,12 +37,19 @@ func main() {
 		log.Fatalf("failed to load YANG schema: %v", err)
 	}
 
+	// 根 context：CRD store watch 与 Manager 同生命周期。
+	ctx, cancel := context.WithCancel(context.Background())
+	defer cancel()
+
 	// Create and start the yang-controller-runtime Manager
 	mgr := manager.New(
 		manager.WithDefaultTimeout(10*time.Second),
 		manager.WithSchema(yangSchema),
 		// 操作审计日志持久化到本地 JSON（§8，可用 USMP_AUDIT_FILE 覆盖）。
 		manager.WithAuditFile(auditFilePath()),
+		// DS-01/DS-05: 集群可达时设备注册表走 Device CRD（跨副本共享+重启
+		// 恢复+凭据 Secret 引用），否则降级进程内存实现（R08）。
+		manager.WithDeviceStore(buildDeviceStore(ctx)),
 	)
 
 	// Create and register the Huawei VLAN controller
@@ -125,9 +134,6 @@ func main() {
 	}
 
 	// Start the manager - loads schema, starts all controllers
-	ctx, cancel := context.WithCancel(context.Background())
-	defer cancel()
-
 	go crdsource.StartCache(ctx, crdCache)
 	go crdsource.StartCache(ctx, intentCache)
 
@@ -154,4 +160,22 @@ func auditFilePath() string {
 		return p
 	}
 	return "data/audit.json"
+}
+
+// buildDeviceStore 按集群可达性选择设备注册表后端（DS-01/DS-05）：可达走
+// Device CRD store（namespace 复用 USMP_INTENT_NAMESPACE），任一步失败降级
+// 进程内存实现并记日志（R08，不崩溃）。
+func buildDeviceStore(ctx context.Context) device.Store {
+	cfg, err := ctrlcfg.GetConfig()
+	if err != nil {
+		log.Printf("device store: no reachable cluster, using in-memory store (devices lost on restart): %v", err)
+		return device.NewStore()
+	}
+	s, err := device.NewCRDStore(ctx, cfg, intent.Namespace())
+	if err != nil {
+		log.Printf("device store: CRD store unavailable, degrading to in-memory: %v", err)
+		return device.NewStore()
+	}
+	log.Printf("device store: CRD-backed (namespace %q)", intent.Namespace())
+	return s
 }

@@ -10,6 +10,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/leezesi/usmp/backend/pkg/translator"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/client"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/device"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/manager"
 )
 
@@ -38,10 +39,14 @@ type DeviceHandler struct {
 func NewDeviceHandler(manager manager.Manager) *DeviceHandler {
 	h := &DeviceHandler{manager: manager}
 
-	// DS-03: 种子设备不再硬编码，仅经 USMP_SEED_DEVICE 注入（供本地开发/E2E；
-	// 集群模式下设备集合来自 Device CR，该变量被忽略——W2 装配时生效）。
+	// DS-03: 种子设备不再硬编码，仅经 USMP_SEED_DEVICE 注入（供本地开发/E2E）；
+	// 集群模式（持久 store）下设备集合来自 Device CR，该变量被忽略。
 	if seed, ok := parseSeedDevice(os.Getenv("USMP_SEED_DEVICE")); ok {
-		h.putStore(seed)
+		if ds := manager.GetDeviceStore(); ds != nil && device.IsPersistent(ds) {
+			log.Printf("device: USMP_SEED_DEVICE ignored in cluster mode (devices come from Device CRs)")
+		} else if err := h.putStore(seed); err != nil {
+			log.Printf("device: seed device %s not registered: %v", seed.IP, err)
+		}
 	}
 
 	return h
@@ -103,11 +108,13 @@ func deviceInfoFromConn(info client.DeviceConnectionInfo) DeviceInfo {
 }
 
 // putStore registers a device in the shared DeviceStore (no-op if the manager
-// exposes none, keeping the handler usable in minimal test setups).
-func (h *DeviceHandler) putStore(d DeviceInfo) {
+// exposes none, keeping the handler usable in minimal test setups)。持久化
+// 失败向上返回（BR-13，API 层呈现 5xx）。
+func (h *DeviceHandler) putStore(d DeviceInfo) error {
 	if ds := h.manager.GetDeviceStore(); ds != nil {
-		ds.Put(d.IP, toConnInfo(d))
+		return ds.Put(d.IP, toConnInfo(d))
 	}
+	return nil
 }
 
 // snapshotDevices returns all registered devices from the shared DeviceStore.
@@ -256,7 +263,11 @@ func (h *DeviceHandler) AddDevice(c *gin.Context) {
 		Password: req.Password,
 		Vendor:   req.Vendor,
 	}
-	h.putStore(added)
+	// BR-13: 持久化失败（apiserver 不可达等）必须可见，不假装成功。
+	if err := h.putStore(added); err != nil {
+		Error(c, 500, "Failed to persist device: "+err.Error())
+		return
+	}
 
 	// Try to create client and connect immediately
 	pool := h.manager.GetClientPool()
@@ -282,7 +293,11 @@ func (h *DeviceHandler) RemoveDevice(c *gin.Context) {
 	ip := c.Param("ip")
 
 	if ds := h.manager.GetDeviceStore(); ds != nil {
-		ds.Delete(ip)
+		// BR-13: 删除持久化失败同样 5xx 可见。
+		if err := ds.Delete(ip); err != nil {
+			Error(c, 500, "Failed to remove device: "+err.Error())
+			return
+		}
 	}
 
 	// Close the connection
