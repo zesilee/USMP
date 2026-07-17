@@ -195,7 +195,6 @@ spec:
 
 | 文档 | 说明 |
 |------|------|
-| [NativeDeviceConfig CRD 使用指南](docs/crd/nativedeviceconfig.md) | 原生配置透传 |
 
 ### 🔌 API 文档
 
