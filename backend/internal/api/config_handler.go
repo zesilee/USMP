@@ -236,7 +236,7 @@ func (h *ConfigHandler) SetConfig(c *gin.Context) {
 	// Convert the raw data to the appropriate YANG model struct
 	// This ensures the ConfigStore stores properly typed data that the
 	// Reconciler can work with for diff calculation
-	desiredConfig, err := convertConfig(path, data)
+	desiredConfig, anchor, err := convertConfigAnchored(path, data)
 	if err != nil {
 		Error(c, 400, "Failed to parse configuration: "+err.Error())
 		return
@@ -254,8 +254,10 @@ func (h *ConfigHandler) SetConfig(c *gin.Context) {
 	// 合并语义（防数据丢失）：UI 每次只提交单个 VLAN/接口，但对账把 desired 当「完整状态」。
 	// 若直接覆盖，第二次下发会让对账删除设备上已有但本次未提交的条目。故先并入已存 desired
 	// （按 key union），使 desired 累积为完整意图。删除走独立 DELETE 端点，不经此路径。
+	// desired 以描述符锚点为 key 存储（BR-05）：解码值以锚点为根，子路径下发归一化，
+	// 周期对账（模块路径入队）与本次触发读同一 key，不产生分叉副本。
 	configStore := h.manager.GetConfigStore()
-	if err := storeConfigMerged(configStore, ip, path, desiredConfig); err != nil {
+	if err := storeConfigMerged(configStore, ip, anchor, desiredConfig); err != nil {
 		Error(c, 500, "Failed to store configuration: "+err.Error())
 		return
 	}
@@ -271,7 +273,7 @@ func (h *ConfigHandler) SetConfig(c *gin.Context) {
 	// 2. Calculate diff between desired and actual
 	// 3. Apply changes to device
 	// 4. Commit (if supported by protocol)
-	controllerFound := h.manager.TriggerReconcile(ip, path)
+	controllerFound := h.manager.TriggerReconcile(ip, anchor)
 
 	// 记录操作审计（§8 本地 JSON）。仅在成功接受下发后记录——被拒下发(400)不产生
 	// 审计记录。诚实字段：ip/path/提交摘要/是否触发对账/时间(store 自打)/actor(system)；

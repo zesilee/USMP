@@ -58,7 +58,7 @@ func TestSetConfig_OwnedPathRejected409(t *testing.T) {
 	mgr := manager.New()
 	h := NewConfigHandler(mgr)
 
-	w := postConfigRaw(h, "10.0.0.1", intent.VlanPath, "", `{"vlans":[{"id":100,"name":"HAND"}]}`)
+	w := postConfigRaw(h, "10.0.0.1", intent.VlanPath, "", `{"vlan":[{"id":100,"name":"HAND"}]}`)
 	assert.Equal(t, http.StatusOK, w.Code) // 信封恒 200
 	env := decodeLockEnvelope(t, w)
 	assert.Equal(t, 409, env.Code)
@@ -76,7 +76,7 @@ func TestSetConfig_ForceBypassesLock(t *testing.T) {
 	mgr := manager.New()
 	h := NewConfigHandler(mgr)
 
-	w := postConfigRaw(h, "10.0.0.1", intent.VlanPath, "force=true", `{"vlans":[{"id":100,"name":"HAND"}]}`)
+	w := postConfigRaw(h, "10.0.0.1", intent.VlanPath, "force=true", `{"vlan":[{"id":100,"name":"HAND"}]}`)
 	env := decodeLockEnvelope(t, w)
 	assert.Equal(t, 0, env.Code)
 	assert.True(t, env.Success)
@@ -95,7 +95,7 @@ func TestSetConfig_UnownedPathUnaffected(t *testing.T) {
 	mgr := manager.New()
 	h := NewConfigHandler(mgr)
 
-	w := postConfigRaw(h, "10.0.0.1", intent.VlanPath, "", `{"vlans":[{"id":10,"name":"OK"}]}`)
+	w := postConfigRaw(h, "10.0.0.1", intent.VlanPath, "", `{"vlan":[{"id":10,"name":"OK"}]}`)
 	env := decodeLockEnvelope(t, w)
 	assert.Equal(t, 0, env.Code)
 	assert.True(t, env.Success)
@@ -115,7 +115,7 @@ func TestSetConfig_SiblingPathNotLocked(t *testing.T) {
 	mgr := manager.New()
 	h := NewConfigHandler(mgr)
 
-	w := postConfigRaw(h, "10.0.0.1", intent.IfmPath, "", `{"interfaces":[{"name":"GE0/0/1"}]}`)
+	w := postConfigRaw(h, "10.0.0.1", intent.IfmPath, "", `{"interface":[{"name":"GE0/0/1"}]}`)
 	env := decodeLockEnvelope(t, w)
 	assert.NotEqual(t, 409, env.Code, "未认领的兄弟路径不应被硬锁: %s", w.Body.String())
 }

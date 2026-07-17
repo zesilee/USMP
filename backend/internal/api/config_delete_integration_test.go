@@ -109,7 +109,7 @@ func TestDeleteConfig_Integration_IfmEndToEnd(t *testing.T) {
 			map[string]interface{}{"name": "GigabitEthernet0/0/9", "description": "temp"},
 		},
 	}
-	typed, err := convertMapToHuaweiIfm(raw)
+	typed, err := convertConfig("/ifm:ifm/ifm:interfaces", raw)
 	assert.NoError(t, err)
 	ifmPath := "/ifm:ifm/ifm:interfaces"
 	assert.NoError(t, storeConfigMerged(cs, deviceID, ifmPath, typed))
@@ -204,7 +204,7 @@ func TestDeleteConfig_Integration_ConcurrentDeleteAndMerge(t *testing.T) {
 	wg.Add(1)
 	go func() {
 		defer wg.Done()
-		typed, err := convertMapToHuaweiVlan(map[string]interface{}{"vlans": []interface{}{
+		typed, err := convertConfig(vlanPath, map[string]interface{}{"vlan": []interface{}{
 			map[string]interface{}{"id": float64(200), "name": "merged"},
 		}})
 		if err != nil {

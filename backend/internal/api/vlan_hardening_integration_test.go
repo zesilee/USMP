@@ -40,7 +40,7 @@ func newVlanSimStack(t *testing.T) (*netsim.Simulator, *manager.InMemoryConfigSt
 // applyVlan：走真实 API 转换路径下发一批 VLAN（前端形状 map）。
 func applyVlan(t *testing.T, cs *manager.InMemoryConfigStore, pool client.ClientPool, ds device.Store, deviceID string, vlansPayload []interface{}) {
 	t.Helper()
-	typed, err := convertMapToHuaweiVlan(map[string]interface{}{"vlans": vlansPayload})
+	typed, err := convertConfig(vlanPath, map[string]interface{}{"vlan": vlansPayload})
 	assert.NoError(t, err)
 	// 走与 SetConfig 处理器一致的合并存储逻辑（带锁，防覆盖抹除 + 并发丢更新）
 	assert.NoError(t, storeConfigMerged(cs, deviceID, vlanPath, typed))

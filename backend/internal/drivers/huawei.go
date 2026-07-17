@@ -97,9 +97,10 @@ func init() {
 		// system 无 XML 回读解码（原 decodeRunningConfig 不含 system 分支），
 		// 亦无 XML 下发通道 → XML 数据缺省 nil，调用方走既有降级（XC-04）。
 		// 原 ygotRegistry: strings.Contains(p, "system:")
-		MatchEncode: func(p string) bool { return strings.Contains(p, "system:") },
-		NewStruct:   func() ygot.GoStruct { return &huawei.HuaweiSystem_System{} },
-		Unmarshal:   huawei.Unmarshal,
+		MatchEncode:  func(p string) bool { return strings.Contains(p, "system:") },
+		NewStruct:    func() ygot.GoStruct { return &huawei.HuaweiSystem_System{} },
+		EncodeAnchor: "/system:system",
+		Unmarshal:    huawei.Unmarshal,
 	})
 	driver.Register(driver.Descriptor{
 		Vendor: "huawei", Module: "vlan",
@@ -116,10 +117,11 @@ func init() {
 			return v, nil
 		},
 		// 原 ygotRegistry: vlan: 且 vlan
-		MatchEncode: func(p string) bool { return strings.Contains(p, "vlan:") && strings.Contains(p, "vlan") },
-		NewStruct:   func() ygot.GoStruct { return &huawei.HuaweiVlan_Vlan_Vlans{} },
-		Unmarshal:   huawei.Unmarshal,
-		XML:         vlanXML,
+		MatchEncode:  func(p string) bool { return strings.Contains(p, "vlan:") && strings.Contains(p, "vlan") },
+		NewStruct:    func() ygot.GoStruct { return &huawei.HuaweiVlan_Vlan_Vlans{} },
+		EncodeAnchor: "/vlan:vlan/vlan:vlans",
+		Unmarshal:    huawei.Unmarshal,
+		XML:          vlanXML,
 	})
 	driver.Register(driver.Descriptor{
 		Vendor: "huawei", Module: "ifm",
@@ -136,10 +138,11 @@ func init() {
 			return v, nil
 		},
 		// 原 ygotRegistry: ifm:ifm 且 interfaces
-		MatchEncode: func(p string) bool { return strings.Contains(p, "ifm:ifm") && strings.Contains(p, "interfaces") },
-		NewStruct:   func() ygot.GoStruct { return &huawei.HuaweiIfm_Ifm_Interfaces{} },
-		Unmarshal:   huawei.Unmarshal,
-		XML:         ifmXML,
+		MatchEncode:  func(p string) bool { return strings.Contains(p, "ifm:ifm") && strings.Contains(p, "interfaces") },
+		NewStruct:    func() ygot.GoStruct { return &huawei.HuaweiIfm_Ifm_Interfaces{} },
+		EncodeAnchor: "/ifm:ifm/ifm:interfaces",
+		Unmarshal:    huawei.Unmarshal,
+		XML:          ifmXML,
 	})
 	// BGP 公网进程（/bgp:bgp）——本期接入面（design D1/D3）。谓词用 HasPrefix
 	// "/bgp:bgp" 精确锚定公网根：排除 feature 模块前缀（/bgp-flow:、/bgp-evpn:）
@@ -156,10 +159,11 @@ func init() {
 			}
 			return v, nil
 		},
-		MatchEncode: func(p string) bool { return strings.HasPrefix(p, "/bgp:bgp") },
-		NewStruct:   func() ygot.GoStruct { return &huawei.HuaweiBgp_Bgp{} },
-		Unmarshal:   huawei.Unmarshal,
-		XML:         bgpXML,
+		MatchEncode:  func(p string) bool { return strings.HasPrefix(p, "/bgp:bgp") },
+		NewStruct:    func() ygot.GoStruct { return &huawei.HuaweiBgp_Bgp{} },
+		EncodeAnchor: "/bgp:bgp",
+		Unmarshal:    huawei.Unmarshal,
+		XML:          bgpXML,
 	})
 	// network-instance（/ni:network-instance）——BGP 二期 peering 唯一硬前置（NI-03）。
 	// 单描述符覆盖整棵子树：因 augment 合并，peers（huawei-bgp）/afs（huawei-l3vpn）结构
@@ -177,10 +181,11 @@ func init() {
 			}
 			return v, nil
 		},
-		MatchEncode: func(p string) bool { return strings.HasPrefix(p, "/ni:network-instance") },
-		NewStruct:   func() ygot.GoStruct { return &huawei.HuaweiNetworkInstance_NetworkInstance{} },
-		Unmarshal:   huawei.Unmarshal,
-		XML:         niXML,
+		MatchEncode:  func(p string) bool { return strings.HasPrefix(p, "/ni:network-instance") },
+		NewStruct:    func() ygot.GoStruct { return &huawei.HuaweiNetworkInstance_NetworkInstance{} },
+		EncodeAnchor: "/ni:network-instance",
+		Unmarshal:    huawei.Unmarshal,
+		XML:          niXML,
 	})
 	// tunnel-management（/tnlm:tunnel-management）——BGP 2b tunnel-policy leafref 前置
 	// （越序禁令：目标模型须先可配，TNLM-01/03）。容器根模块（非 list 根），与 /bgp:bgp
@@ -198,10 +203,11 @@ func init() {
 			}
 			return v, nil
 		},
-		MatchEncode: func(p string) bool { return strings.HasPrefix(p, "/tnlm:tunnel-management") },
-		NewStruct:   func() ygot.GoStruct { return &huawei.HuaweiTunnelManagement_TunnelManagement{} },
-		Unmarshal:   huawei.Unmarshal,
-		XML:         tnlmXML,
+		MatchEncode:  func(p string) bool { return strings.HasPrefix(p, "/tnlm:tunnel-management") },
+		NewStruct:    func() ygot.GoStruct { return &huawei.HuaweiTunnelManagement_TunnelManagement{} },
+		EncodeAnchor: "/tnlm:tunnel-management",
+		Unmarshal:    huawei.Unmarshal,
+		XML:          tnlmXML,
 	})
 	// xpl（/xpl:xpl）——BGP 2b route-filter leafref 前置（越序禁令：目标模型须先可配，
 	// XPL-01/03）。容器根模块（非 list 根），与 /bgp:bgp、/tnlm:tunnel-management 同构，
@@ -219,10 +225,11 @@ func init() {
 			}
 			return v, nil
 		},
-		MatchEncode: func(p string) bool { return strings.HasPrefix(p, "/xpl:xpl") },
-		NewStruct:   func() ygot.GoStruct { return &huawei.HuaweiXpl_Xpl{} },
-		Unmarshal:   huawei.Unmarshal,
-		XML:         xplXML,
+		MatchEncode:  func(p string) bool { return strings.HasPrefix(p, "/xpl:xpl") },
+		NewStruct:    func() ygot.GoStruct { return &huawei.HuaweiXpl_Xpl{} },
+		EncodeAnchor: "/xpl:xpl",
+		Unmarshal:    huawei.Unmarshal,
+		XML:          xplXML,
 	})
 	// routing-policy（/rtp:routing-policy）——BGP 2b import/export route-policy leafref 前置
 	// （越序禁令：目标模型须先可配，RTP-01/03）。容器根模块，与 /bgp:bgp 等同构，走通用引擎
@@ -240,10 +247,11 @@ func init() {
 			}
 			return v, nil
 		},
-		MatchEncode: func(p string) bool { return strings.HasPrefix(p, "/rtp:routing-policy") },
-		NewStruct:   func() ygot.GoStruct { return &huawei.HuaweiRoutingPolicy_RoutingPolicy{} },
-		Unmarshal:   huawei.Unmarshal,
-		XML:         rtpXML,
+		MatchEncode:  func(p string) bool { return strings.HasPrefix(p, "/rtp:routing-policy") },
+		NewStruct:    func() ygot.GoStruct { return &huawei.HuaweiRoutingPolicy_RoutingPolicy{} },
+		EncodeAnchor: "/rtp:routing-policy",
+		Unmarshal:    huawei.Unmarshal,
+		XML:          rtpXML,
 	})
 	// acl（/acl:acl）——BGP 2b ACL group leafref 前置（越序禁令：目标模型须先可配，
 	// ACL-01/03）。容器根模块，与 /bgp:bgp 等同构，走通用引擎 plain-container（XC-05）。
@@ -261,9 +269,10 @@ func init() {
 			}
 			return v, nil
 		},
-		MatchEncode: func(p string) bool { return strings.HasPrefix(p, "/acl:acl") },
-		NewStruct:   func() ygot.GoStruct { return &huawei.HuaweiAcl_Acl{} },
-		Unmarshal:   huawei.Unmarshal,
-		XML:         aclXML,
+		MatchEncode:  func(p string) bool { return strings.HasPrefix(p, "/acl:acl") },
+		NewStruct:    func() ygot.GoStruct { return &huawei.HuaweiAcl_Acl{} },
+		EncodeAnchor: "/acl:acl",
+		Unmarshal:    huawei.Unmarshal,
+		XML:          aclXML,
 	})
 }

@@ -73,7 +73,7 @@ func TestEnumInt_StringName(t *testing.T) {
 // 提交含 member-ports + 枚举字符串的 VLAN，转换应落到强类型结构。
 func TestConvertVlan_MemberPortsAndEnums(t *testing.T) {
 	data := map[string]interface{}{
-		"vlans": []interface{}{
+		"vlan": []interface{}{
 			map[string]interface{}{
 				"id":           float64(100),
 				"name":         "VLAN-100",
@@ -89,10 +89,11 @@ func TestConvertVlan_MemberPortsAndEnums(t *testing.T) {
 			},
 		},
 	}
-	res, err := convertMapToHuaweiVlan(data)
+	typed, err := convertConfig("/vlan:vlan/vlan:vlans", data)
 	if err != nil {
 		t.Fatalf("convert: %v", err)
 	}
+	res := typed.(*huawei.HuaweiVlan_Vlan_Vlans)
 	v := res.Vlan[100]
 	if v == nil {
 		t.Fatal("vlan 100 not converted")
