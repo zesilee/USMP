@@ -23,11 +23,11 @@
 - [x] 3.1 后端 `go test ./... -race` 全绿；前端单测 + typecheck 全绿；`openspec validate ownership-hard-lock` 通过
 - [x] 3.2 含 frontend/ 改动：本地 `make e2e-local` Playwright staging smoke 全绿（无 docker 机器才许 USMP_SKIP_E2E=1）
 - [x] 3.3 code review（go-code-review-check）通过 → What/Why/How 原子提交（≤500 行/commit）
-- [ ] 3.4 push + PR（CI 全绿后合入，用户已授权 merge-on-green）
+- [x] 3.4 push + PR（CI 全绿后合入，用户已授权 merge-on-green）
 
 ## 4. 收尾
 
-- [ ] 4.1 `/opsx:sync` delta 合入主 spec（config-api BR-11 / operation-audit OA-01 / frontend FE-18）
-- [ ] 4.2 `/opsx:archive` 归档 change；`openspec/tasks/ownership-hard-lock.md` 置 completed 并归档
+- [x] 4.1 `/opsx:sync` delta 合入主 spec（config-api BR-11 / operation-audit OA-01 / frontend FE-18）
+- [x] 4.2 `/opsx:archive` 归档 change；`openspec/tasks/ownership-hard-lock.md` 置 completed 并归档
 - [ ] 4.3 更新记忆（k8s-paas-deployment-constraints：硬锁二期完成，follow-up 清零）
 - [ ] 4.4 清理 worktree（§6.3）
