@@ -118,6 +118,27 @@ func ownershipWarningFor(device, path string) *OwnershipWarning {
 	}
 }
 
+// OwnershipRejection 是归属硬锁 409 的 data 负载（前端据此渲染阻断确认流）。
+type OwnershipRejection struct {
+	// Intents 认领该路径的意图 CR（namespace/name）。
+	Intents []string `json:"intents"`
+}
+
+// rejectOwnedPath 以信封码 409 拒绝命中认领路径的手改（BR-11 二期硬锁）。
+func rejectOwnedPath(c *gin.Context, owners []string) {
+	ErrorWithData(c, 409,
+		"路径由业务意图 "+strings.Join(owners, "、")+" 管理：请先删除/修改对应意图，或携带 force=true 强制下发（意图收敛仍会覆盖）",
+		OwnershipRejection{Intents: owners})
+}
+
+// forcedOwners 是审计 ForcedOwners 的取值：仅 force 覆盖时留名单，普通下发零噪音。
+func forcedOwners(force bool, owners []string) []string {
+	if !force || len(owners) == 0 {
+		return nil
+	}
+	return append([]string(nil), owners...)
+}
+
 // GetConfig gets the configuration for a specific device and YANG path
 //
 // @Summary  读取设备指定 YANG 路径的运行配置
@@ -187,13 +208,24 @@ func (h *ConfigHandler) GetConfig(c *gin.Context) {
 // @Param    ip     path string                 true "设备 IP"
 // @Param    path   path string                 true "YANG 路径"
 // @Param    config body map[string]interface{} true "期望配置（YANG JSON）"
+// @Param    force  query bool                   false "覆盖业务意图归属硬锁（force=true，审计留痕）"
 // @Success  200 {object} Response{data=ConfigSetData} "已接受，对账进行中"
 // @Failure  400 {object} Response "请求或配置解析失败"
+// @Failure  409 {object} Response{data=OwnershipRejection} "路径被业务意图认领（无 force 拒绝）"
 // @Failure  500 {object} Response "存储失败"
 // @Router   /config/{ip}/{path} [post]
 func (h *ConfigHandler) SetConfig(c *gin.Context) {
 	ip := c.Param("ip")
 	path := c.Param("path") // *path already includes leading slash
+
+	// 归属硬锁（BR-11 二期）：认领路径缺省 409 早拒（编解码/建连之前），
+	// force=true 放行且后续审计留痕。被拒请求不产生审计记录（OA-01）。
+	force := c.Query("force") == "true"
+	owners := intent.DefaultOwnership.Owners(ip, path)
+	if len(owners) > 0 && !force {
+		rejectOwnedPath(c, owners)
+		return
+	}
 
 	var data map[string]interface{}
 	if err := c.ShouldBindJSON(&data); err != nil {
@@ -249,6 +281,9 @@ func (h *ConfigHandler) SetConfig(c *gin.Context) {
 		Path:      path,
 		Summary:   summarizeSubmitted(data),
 		Triggered: controllerFound,
+		// force 覆盖归属硬锁必须留痕（OA-01 二期）：owners 非空到达此处仅可能是 force。
+		Forced:       force && len(owners) > 0,
+		ForcedOwners: forcedOwners(force, owners),
 	})
 
 	Success(c, ConfigSetData{
@@ -1073,14 +1108,24 @@ func (h *ConfigHandler) pushDeleteToDevice(ctx context.Context, ip string, targe
 // @Param    ip   path  string true "设备 IP"
 // @Param    path path  string true "YANG 列表路径"
 // @Param    key  query string true "条目主键（vlan→id，interface→name）"
+// @Param    force query bool  false "覆盖业务意图归属硬锁（force=true，审计留痕）"
 // @Success  200 {object} Response{data=ConfigDeleteData} "删除成功"
 // @Failure  400 {object} Response "非法 key / 未知路径 / 模型门禁拒绝"
+// @Failure  409 {object} Response{data=OwnershipRejection} "条目被业务意图认领（无 force 拒绝）"
 // @Failure  502 {object} Response "设备删除失败（含 data-missing）"
 // @Router   /config/{ip}/{path} [delete]
 func (h *ConfigHandler) DeleteConfig(c *gin.Context) {
 	ip := c.Param("ip")
 	path := c.Param("path")
 	key := c.Query("key")
+
+	// 归属硬锁（BR-11 二期）：认领条目缺省 409 早拒，force=true 放行留痕。
+	force := c.Query("force") == "true"
+	owners := intent.DefaultOwnership.Owners(ip, path)
+	if len(owners) > 0 && !force {
+		rejectOwnedPath(c, owners)
+		return
+	}
 
 	// 模型门禁先行（BR-10）：operation-exclude/readonly 拒绝比未知路径更明确。
 	if err := deleteGate(h.manager.GetSchema(), path); err != nil {
@@ -1115,6 +1160,9 @@ func (h *ConfigHandler) DeleteConfig(c *gin.Context) {
 		Path:      path,
 		Summary:   summarizeDeleted(target),
 		Triggered: controllerFound,
+		Forced:    force && len(owners) > 0,
+		// force 覆盖归属硬锁必须留痕（OA-01 二期）。
+		ForcedOwners: forcedOwners(force, owners),
 	})
 
 	Success(c, ConfigDeleteData{

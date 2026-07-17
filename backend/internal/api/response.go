@@ -33,6 +33,17 @@ func Error(c *gin.Context, code int, message string) {
 	})
 }
 
+// ErrorWithData responds with error plus a structured data payload (同信封，
+// 供前端渲染细节——如归属硬锁 409 携认领意图列表)。
+func ErrorWithData(c *gin.Context, code int, message string, data interface{}) {
+	c.JSON(http.StatusOK, Response{
+		Code:    code,
+		Message: message,
+		Data:    data,
+		Success: false,
+	})
+}
+
 // DeviceOfflineError responds with specific device offline error
 func DeviceOfflineError(c *gin.Context, ip string) {
 	Error(c, 503, "Device "+ip+" is offline, please check connection")

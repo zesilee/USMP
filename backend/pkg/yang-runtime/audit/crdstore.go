@@ -156,12 +156,14 @@ func (s *crdStore) Record(r Record) {
 				Labels:    map[string]string{DeviceIPLabel: r.DeviceIP},
 			},
 			Spec: usmpv1.AuditRecordSpec{
-				Timestamp: metav1.NewTime(r.Timestamp),
-				DeviceIP:  r.DeviceIP,
-				Path:      r.Path,
-				Summary:   r.Summary,
-				Triggered: r.Triggered,
-				Actor:     r.Actor,
+				Timestamp:    metav1.NewTime(r.Timestamp),
+				DeviceIP:     r.DeviceIP,
+				Path:         r.Path,
+				Summary:      r.Summary,
+				Triggered:    r.Triggered,
+				Actor:        r.Actor,
+				Forced:       r.Forced,
+				ForcedOwners: append([]string(nil), r.ForcedOwners...),
 			},
 		}
 		if err := s.writer.Create(ctx, cr); err != nil && !apierrors.IsAlreadyExists(err) {
@@ -240,13 +242,15 @@ func (s *crdStore) sortedLocked() []Record {
 
 func recordFromCR(cr *usmpv1.AuditRecord) Record {
 	return Record{
-		ID:        cr.Name,
-		Timestamp: cr.Spec.Timestamp.Time,
-		DeviceIP:  cr.Spec.DeviceIP,
-		Path:      cr.Spec.Path,
-		Summary:   cr.Spec.Summary,
-		Triggered: cr.Spec.Triggered,
-		Actor:     cr.Spec.Actor,
+		ID:           cr.Name,
+		Timestamp:    cr.Spec.Timestamp.Time,
+		DeviceIP:     cr.Spec.DeviceIP,
+		Path:         cr.Spec.Path,
+		Summary:      cr.Spec.Summary,
+		Triggered:    cr.Spec.Triggered,
+		Actor:        cr.Spec.Actor,
+		Forced:       cr.Spec.Forced,
+		ForcedOwners: append([]string(nil), cr.Spec.ForcedOwners...),
 	}
 }
 

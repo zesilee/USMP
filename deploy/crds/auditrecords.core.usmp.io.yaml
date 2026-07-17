@@ -51,3 +51,9 @@ spec:
                   type: boolean
                 actor:
                   type: string
+                forced:
+                  type: boolean
+                forcedOwners:
+                  type: array
+                  items:
+                    type: string

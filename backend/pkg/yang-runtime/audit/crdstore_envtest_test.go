@@ -108,7 +108,8 @@ func TestCRDAudit_RecordCreatesCR_Integration(t *testing.T) {
 	cfg, cl := envtestConfig(t)
 	s := newTestStore(t, cfg, "default", 100)
 
-	s.Record(Record{DeviceIP: "10.3.0.1", Path: "/vlan:vlan/vlan:vlans", Summary: "vlan keys [10]", Triggered: true})
+	s.Record(Record{DeviceIP: "10.3.0.1", Path: "/vlan:vlan/vlan:vlans", Summary: "vlan keys [10]", Triggered: true,
+		Forced: true, ForcedOwners: []string{"default/biz-100"}})
 
 	// 写穿：本地 List 立即可见，ID 已分配
 	recs := s.List()
@@ -123,6 +124,13 @@ func TestCRDAudit_RecordCreatesCR_Integration(t *testing.T) {
 	spec := list.Items[0].Spec
 	if spec.DeviceIP != "10.3.0.1" || spec.Path != "/vlan:vlan/vlan:vlans" || !spec.Triggered || spec.Actor != "system" {
 		t.Fatalf("CR spec mismatch: %+v", spec)
+	}
+	// OA-01 二期：force 覆盖归属的留痕字段随 CR 往返（含 CRD schema 可选字段兼容）。
+	if !spec.Forced || len(spec.ForcedOwners) != 1 || spec.ForcedOwners[0] != "default/biz-100" {
+		t.Fatalf("CR forced fields mismatch: %+v", spec)
+	}
+	if got := recs[0]; !got.Forced || len(got.ForcedOwners) != 1 {
+		t.Fatalf("mirror forced fields mismatch: %+v", got)
 	}
 }
 
