@@ -40,7 +40,7 @@ export function deriveSchemaTree(fields: Field[], opts: DeriveSchemaTreeOptions 
         kind,
         depth,
         dataType: kind === 'leaf' ? f.type : undefined,
-        // key 匹配走 path 末段（与 DeviceConfigPage.keyOf/校验规则同源），
+        // key 匹配走 path 末段（与表单 keyOf/校验规则同源），
         // 而非展示用的 label——后端若将来本地化 label，key 徽标仍稳。
         isKey: kind === 'leaf' && parentKind === 'list' && !!opts.keyField && segOf(f) === opts.keyField,
         isConfig: kind === 'leaf' && !isReadonly,
