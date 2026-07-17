@@ -2,7 +2,7 @@
 
 ### Requirement: BR-05 声明式下发
 
-`POST /api/v1/config/:ip/*path` 的请求体 SHALL 为**以 path 为根的 RFC7951 子树**（YANG 真名、枚举用名字字符串）；服务端 SHALL 将其解码为强类型 ygot 结构 → 存入 ConfigStore → 触发对账，返回 `status="ACCEPTED"`。下发即接受语义：配置**存储成功即返回**，实际对齐设备由异步对账完成。ConfigStore SHALL 只存类型化结构，SHALL NOT 存原始 map。
+`POST /api/v1/config/:ip/*path` 的请求体 SHALL 为**以 path 为根的 RFC7951 子树**（YANG 真名、枚举用名字字符串）；服务端 SHALL 将其解码为强类型 ygot 结构 → 存入 ConfigStore → 触发对账，返回 `status="ACCEPTED"`。下发即接受语义：配置**存储成功即返回**，实际对齐设备由异步对账完成。ConfigStore SHALL 只存类型化结构，SHALL NOT 存原始 map。desired 的存储与对账触发 SHALL 以描述符编码锚点路径（DR-05）为 key（子路径下发归一化）：解码值以锚点为根，周期对账按模块路径入队读到同一 key，SHALL NOT 在子路径 key 留分叉副本。
 
 #### Scenario: 下发被接受
 - **WHEN** 提交合法 YANG 路径 + RFC7951 子树
@@ -11,6 +11,10 @@
 #### Scenario: 表单子路径扁平载荷
 - **WHEN** 对 `/system:system/system:system-info` 提交 `{"sys-name": "sw-01"}`
 - **THEN** SHALL 解码为对应容器的类型化结构并接受（锚点相对包裹语义）
+
+#### Scenario: 子路径下发锚点归一化
+- **WHEN** 对锚点的子路径下发成功后，周期对账以模块路径（锚点）读取 desired
+- **THEN** SHALL 读到本次下发的类型化结构；子路径 key SHALL NOT 存有分叉副本
 
 ### Requirement: BR-06 类型转换路由
 

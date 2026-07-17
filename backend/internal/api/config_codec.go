@@ -2,6 +2,8 @@ package api
 
 import (
 	"encoding/json"
+	"fmt"
+	"strings"
 
 	"github.com/openconfig/ygot/ygot"
 
@@ -47,34 +49,64 @@ func decodeRunningConfig(path string, data interface{}) interface{} {
 	return out
 }
 
-// convertConfig decodes request data into a typed desired config. It prefers the
-// generic ygot codec (RFC7951 input) and falls back to the legacy hard-coded
-// converters for the legacy (non-RFC7951, e.g. integer-enum) input shape. The
-// legacy path is removed once the frontend emits RFC7951 (task 3.6 / group 5).
+// convertConfig decodes request data into a typed desired config via the single
+// RFC7951 path (BR-06)：body 契约 = 以 path 为根的 RFC7951 子树。按 driver 注册表
+// 查得编码描述符 → 按其 EncodeAnchor（DR-05）把子树机械包裹成锚点相对 JSON →
+// 生成的 Unmarshal 根级解码。未注册路径 / path 与锚点非前缀 / path 段含 list 谓词 /
+// 解码失败一律显式报错（调用方 400），SHALL NOT 回退手写转换器或静默存原始 map。
 func convertConfig(path string, data map[string]interface{}) (interface{}, error) {
-	if v, matched, err := encodeToYgot(path, data); matched && err == nil {
-		return v, nil
-	}
-	return convertToTypedStruct(path, data)
+	v, _, err := convertConfigAnchored(path, data)
+	return v, err
 }
 
-// encodeToYgot decodes RFC7951-shaped request data into the ygot GoStruct for the
-// given path via a single ygot.Unmarshal. The path→(struct, unmarshal) mapping
-// comes from the driver descriptor registry (DR-03)——加模块 = 注册一条描述符。
-// It returns (value, matched, err): matched is false when no descriptor covers
-// the path (caller falls back to the legacy converters).
-func encodeToYgot(path string, data map[string]interface{}) (interface{}, bool, error) {
+// convertConfigAnchored 同 convertConfig，并返回描述符锚点路径：解码值以锚点为根，
+// desired 的存储与对账触发 SHALL 以锚点为 key（子路径下发归一化，周期对账按模块
+// 路径入队才能看到它）。
+func convertConfigAnchored(path string, data map[string]interface{}) (interface{}, string, error) {
 	d, ok := driver.EncoderFor(path)
 	if !ok {
-		return nil, false, nil
+		return nil, "", fmt.Errorf("路径 %q 未注册编码驱动（driver 注册表无描述符覆盖）", path)
 	}
-	jsonBytes, err := json.Marshal(data)
+	wrapped, err := wrapToAnchor(d.EncodeAnchor, path, data)
 	if err != nil {
-		return nil, true, err
+		return nil, "", err
+	}
+	jsonBytes, err := json.Marshal(wrapped)
+	if err != nil {
+		return nil, "", err
 	}
 	dest := d.NewStruct()
 	if err := d.Unmarshal(jsonBytes, dest); err != nil {
-		return nil, true, err
+		return nil, "", fmt.Errorf("RFC7951 解码失败（body 须为以 path 为根的 YANG 真名子树）: %w", err)
 	}
-	return dest, true, nil
+	return dest, d.EncodeAnchor, nil
+}
+
+// wrapToAnchor 把「以 path 为根的子树」机械包裹为「以描述符锚点为根」的 JSON：
+// path 剥去锚点前缀后的每个段（去模块前缀）自内向外套一层对象。path==锚点 → 零包裹。
+func wrapToAnchor(anchor, path string, data map[string]interface{}) (map[string]interface{}, error) {
+	if anchor == "" {
+		return nil, fmt.Errorf("驱动描述符缺少 EncodeAnchor（DR-05）")
+	}
+	norm := strings.TrimRight(path, "/")
+	if norm != anchor && !strings.HasPrefix(norm, anchor+"/") {
+		return nil, fmt.Errorf("路径 %q 不在编码锚点 %q 之下", path, anchor)
+	}
+	cur := data
+	suffix := strings.TrimPrefix(norm, anchor)
+	segs := strings.Split(strings.Trim(suffix, "/"), "/")
+	for i := len(segs) - 1; i >= 0; i-- {
+		seg := segs[i]
+		if seg == "" {
+			continue
+		}
+		if strings.ContainsAny(seg, "[]") {
+			return nil, fmt.Errorf("路径段 %q 含 list 谓词，子树写入不支持（请写入其容器路径）", seg)
+		}
+		if j := strings.Index(seg, ":"); j >= 0 {
+			seg = seg[j+1:]
+		}
+		cur = map[string]interface{}{seg: cur}
+	}
+	return cur, nil
 }

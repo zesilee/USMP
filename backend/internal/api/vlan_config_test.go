@@ -58,22 +58,10 @@ func TestBuildYangSchemaNested_VlanTree(t *testing.T) {
 	}
 }
 
-// 枚举字符串（"up"）应正确映射到 ygot 枚举值（AdminStatus_up）。
-func TestEnumInt_StringName(t *testing.T) {
-	n, ok := enumInt("up", "E_HuaweiVlan_AdminStatus")
-	if !ok || huawei.E_HuaweiVlan_AdminStatus(n) != huawei.HuaweiVlan_AdminStatus_up {
-		t.Fatalf("enumInt(up) = %d ok=%v, want AdminStatus_up", n, ok)
-	}
-	// 数字直通仍兼容
-	if n, ok := enumInt(float64(2), "E_HuaweiVlan_AdminStatus"); !ok || n != 2 {
-		t.Fatalf("enumInt(2) = %d ok=%v, want 2", n, ok)
-	}
-}
-
 // 提交含 member-ports + 枚举字符串的 VLAN，转换应落到强类型结构。
 func TestConvertVlan_MemberPortsAndEnums(t *testing.T) {
 	data := map[string]interface{}{
-		"vlans": []interface{}{
+		"vlan": []interface{}{
 			map[string]interface{}{
 				"id":           float64(100),
 				"name":         "VLAN-100",
@@ -89,10 +77,11 @@ func TestConvertVlan_MemberPortsAndEnums(t *testing.T) {
 			},
 		},
 	}
-	res, err := convertMapToHuaweiVlan(data)
+	typed, err := convertConfig("/vlan:vlan/vlan:vlans", data)
 	if err != nil {
 		t.Fatalf("convert: %v", err)
 	}
+	res := typed.(*huawei.HuaweiVlan_Vlan_Vlans)
 	v := res.Vlan[100]
 	if v == nil {
 		t.Fatal("vlan 100 not converted")

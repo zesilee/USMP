@@ -45,6 +45,11 @@ type Descriptor struct {
 	NewStruct   func() ygot.GoStruct
 	Unmarshal   func([]byte, ygot.GoStruct, ...ytypes.UnmarshalOpt) error
 
+	// EncodeAnchor 是 NewStruct 容器的规范配置路径（DR-05，如 "/vlan:vlan/vlan:vlans"）。
+	// config-api 写路径据此把「以请求 path 为根的 RFC7951 子树」机械包裹成锚点相对
+	// JSON 后根级解码；SND 谓词声明式化的第一块数据（后续 MatchEncode 可由其派生）。
+	EncodeAnchor string
+
 	// XML carries the generic NETCONF XML codec data for this module
 	// (yang-xml-codec XC-01/02/03)：namespace + SchemaTree 入口。nil 表示该
 	// 模块不走通用 XML 引擎（如 system 无 XML 通道），调用方保持既有降级。

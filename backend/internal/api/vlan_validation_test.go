@@ -16,8 +16,8 @@ func TestValidateConfig_VlanIDRange(t *testing.T) {
 		{5000, true},
 	}
 	for _, tc := range cases {
-		typed, err := convertMapToHuaweiVlan(map[string]interface{}{
-			"vlans": []interface{}{map[string]interface{}{"id": tc.id, "name": "v"}},
+		typed, err := convertConfig("/vlan:vlan/vlan:vlans", map[string]interface{}{
+			"vlan": []interface{}{map[string]interface{}{"id": tc.id, "name": "v"}},
 		})
 		if err != nil {
 			t.Fatalf("convert id=%v: %v", tc.id, err)

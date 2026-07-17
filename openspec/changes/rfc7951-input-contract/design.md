@@ -22,6 +22,10 @@
 
 `NewStruct` 容器的规范配置路径（如 `/vlan:vlan/vlan:vlans`、`/system:system`）。包裹段 = `strings.TrimPrefix(path, anchor)` 的斜杠段剥模块前缀。path 与 anchor 不构成前缀关系或段含 `[` 谓词 → 显式 400。这是 SND 声明式化（谓词→数据）的第一块：后续 `MatchEncode` 可由 anchor 派生退役。
 
+### D2b 存储/触发 key 归一化为锚点（apply 期发现补全）
+
+实现中发现：SetConfig 历来以**请求路径**为 desired key，而解码值以**锚点**为根——子路径下发的 desired 周期对账（模块路径入队）读不到，且会留分叉副本。补全：`convertConfigAnchored` 返回锚点，SetConfig 的存储/失效/TriggerReconcile 一律用锚点；审计仍记请求路径（诚实记录用户动作）。
+
 ### D3 未注册/不可解 → 400，raw-map 路径删除
 
 `convertConfig` 变为：`EncoderFor` 未命中 → 400（错误信息含 path 与已注册模块提示）；`Unmarshal` 失败 → 400 透出 ygot 错误（§9 诚实）。ConfigStore 从此只存类型化 ygot 结构——下游 diff/XML 编码链的类型假设成为不变式。

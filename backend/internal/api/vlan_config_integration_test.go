@@ -17,7 +17,7 @@ import (
 )
 
 // 端到端：前端形状的配置 map（枚举用字符串名，如 admin-status:"up"）→ API 层
-// convertMapToHuaweiVlan → ConfigStore → 对账 → NETCONF edit-config → 模拟网元运行配置。
+// convertConfig(RFC7951) → ConfigStore → 对账 → NETCONF edit-config → 模拟网元运行配置。
 // 验证「VLAN 配不了」修复后，枚举字符串一路正确落到设备（这是此前断裂处）。
 func TestVlanConfig_Integration_EnumStringToDevice(t *testing.T) {
 	if testing.Short() {
@@ -37,7 +37,7 @@ func TestVlanConfig_Integration_EnumStringToDevice(t *testing.T) {
 
 	// 前端提交的原始 map：枚举为字符串名、含描述。
 	raw := map[string]interface{}{
-		"vlans": []interface{}{
+		"vlan": []interface{}{
 			map[string]interface{}{
 				"id":           float64(100),
 				"name":         "TestVLAN",
@@ -48,7 +48,7 @@ func TestVlanConfig_Integration_EnumStringToDevice(t *testing.T) {
 		},
 	}
 
-	typed, err := convertMapToHuaweiVlan(raw)
+	typed, err := convertConfig("/vlan:vlan/vlan:vlans", raw)
 	assert.NoError(t, err)
 
 	deviceID := "sim"

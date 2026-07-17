@@ -49,7 +49,7 @@ func TestDeviceStore_E2E_RegisterPushReadbackConverge(t *testing.T) {
 	})
 
 	// 2. Submit a name-only interface (the reported case).
-	typed, err := convertMapToHuaweiIfm(map[string]interface{}{
+	typed, err := convertConfig("/ifm:ifm/ifm:interfaces", map[string]interface{}{
 		"interface": []interface{}{map[string]interface{}{"name": "GigabitEthernet0/0/3"}},
 	})
 	assert.NoError(t, err)

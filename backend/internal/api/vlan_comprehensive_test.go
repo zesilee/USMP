@@ -174,8 +174,8 @@ func TestVlanConfig_Integration_ConcurrentNoRace(t *testing.T) {
 		wg.Add(1)
 		go func(id int) {
 			defer wg.Done()
-			typed, err := convertMapToHuaweiVlan(map[string]interface{}{
-				"vlans": []interface{}{map[string]interface{}{"id": float64(id), "name": "c"}},
+			typed, err := convertConfig(vlanPath, map[string]interface{}{
+				"vlan": []interface{}{map[string]interface{}{"id": float64(id), "name": "c"}},
 			})
 			if err != nil {
 				return
@@ -202,16 +202,16 @@ func TestVlanConfig_Integration_ConcurrentNoRace(t *testing.T) {
 	}
 }
 
-// 畸形输入：id 为非数字字符串——不 panic，转换优雅降级（该条被跳过）。
-func TestConvertVlan_MalformedGraceful(t *testing.T) {
-	_, err := convertMapToHuaweiVlan(map[string]interface{}{
-		"vlans": []interface{}{
+// 畸形输入：id 为非数字字符串——RFC7951 严格解码显式拒绝（BR-06，不静默跳过）。
+func TestConvertVlan_MalformedRejected(t *testing.T) {
+	_, err := convertConfig("/vlan:vlan/vlan:vlans", map[string]interface{}{
+		"vlan": []interface{}{
 			map[string]interface{}{"id": "not-a-number", "name": "bad"},
 			map[string]interface{}{"id": float64(200), "name": "good"},
 		},
 	})
-	if err != nil {
-		t.Fatalf("畸形输入不应致错(应跳过坏条目): %v", err)
+	if err == nil {
+		t.Fatal("畸形 id 应被显式拒绝（RFC7951 严格解码），不得静默跳过")
 	}
 }
 

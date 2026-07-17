@@ -141,7 +141,7 @@ func TestSetConfig_InvalidatesRunningCache(t *testing.T) {
 	getConfigReq(h, "10.0.0.1", "/vlan:vlan/vlan:vlans", false) // hit
 	assert.Equal(t, 1, calls)
 
-	w := postConfigReq(h, "10.0.0.1", "/vlan:vlan/vlan:vlans", `{"vlans":[{"id":10,"name":"VLAN10"}]}`)
+	w := postConfigReq(h, "10.0.0.1", "/vlan:vlan/vlan:vlans", `{"vlan":[{"id":10,"name":"VLAN10"}]}`)
 	assert.Equal(t, http.StatusOK, w.Code)
 
 	getConfigReq(h, "10.0.0.1", "/vlan:vlan/vlan:vlans", false) // must re-fetch
@@ -160,7 +160,7 @@ func TestSetConfig_InvalidatesSubPaths(t *testing.T) {
 	assert.Equal(t, 1, calls)
 
 	// push at the container path -> prefix invalidation clears the sub-path too
-	postConfigReq(h, "10.0.0.1", "/vlan:vlan/vlan:vlans", `{"vlans":[{"id":10,"name":"VLAN10"}]}`)
+	postConfigReq(h, "10.0.0.1", "/vlan:vlan/vlan:vlans", `{"vlan":[{"id":10,"name":"VLAN10"}]}`)
 
 	getConfigReq(h, "10.0.0.1", "/vlan:vlan/vlan:vlans/detail", false)
 	assert.Equal(t, 2, calls, "push must invalidate all cached sub-paths of the device")
@@ -175,7 +175,7 @@ func TestSetConfig_StoreFailDoesNotInvalidate(t *testing.T) {
 	getConfigReq(h, "10.0.0.1", "/vlan:vlan/vlan:vlans", false) // calls=1, cached
 
 	// invalid VLAN ID -> validateConfig rejects (400) before any store/invalidate
-	w := postConfigReq(h, "10.0.0.1", "/vlan:vlan/vlan:vlans", `{"vlans":[{"id":9999,"name":"BAD"}]}`)
+	w := postConfigReq(h, "10.0.0.1", "/vlan:vlan/vlan:vlans", `{"vlan":[{"id":9999,"name":"BAD"}]}`)
 	assert.Equal(t, http.StatusOK, w.Code) // envelope is 200 with error code in body
 	var env struct {
 		Code int `json:"code"`

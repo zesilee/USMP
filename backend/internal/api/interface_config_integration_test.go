@@ -7,7 +7,6 @@ import (
 
 	"github.com/leezesi/usmp/backend/internal/cache"
 	ifmctl "github.com/leezesi/usmp/backend/internal/controller/ifm"
-	"github.com/leezesi/usmp/backend/internal/generated/huawei"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/client"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/device"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/manager"
@@ -17,15 +16,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-// IFM 枚举字符串（"up"）应映射到 ygot 枚举值（PortStatus_up=2）。
-func TestEnumInt_IfmPortStatus(t *testing.T) {
-	n, ok := enumInt("up", "E_HuaweiIfm_PortStatus")
-	if !ok || huawei.E_HuaweiIfm_PortStatus(n) != huawei.HuaweiIfm_PortStatus_up {
-		t.Fatalf("enumInt(up) = %d ok=%v, want PortStatus_up", n, ok)
-	}
-}
-
-// 端到端：前端形状的接口配置 map（枚举字符串 admin-status:"up"）→ convertMapToHuaweiIfm
+// 端到端：前端形状的接口配置 map（枚举字符串 admin-status:"up"）→ convertConfig("/ifm:ifm/ifm:interfaces",
 // → 对账 → NETCONF → 模拟网元。验证接口配置枚举字符串一路正确落到设备。
 func TestInterfaceConfig_Integration_EnumStringToDevice(t *testing.T) {
 	if testing.Short() {
@@ -54,7 +45,7 @@ func TestInterfaceConfig_Integration_EnumStringToDevice(t *testing.T) {
 		},
 	}
 
-	typed, err := convertMapToHuaweiIfm(raw)
+	typed, err := convertConfig("/ifm:ifm/ifm:interfaces", raw)
 	assert.NoError(t, err)
 
 	deviceID := "sim"
@@ -103,7 +94,7 @@ func TestInterfaceConfig_Integration_CredsFromDeviceStore(t *testing.T) {
 			map[string]interface{}{"name": "GigabitEthernet0/0/2"},
 		},
 	}
-	typed, err := convertMapToHuaweiIfm(raw)
+	typed, err := convertConfig("/ifm:ifm/ifm:interfaces", raw)
 	assert.NoError(t, err)
 
 	// 设备以纯 DeviceID 注册进共享库，连接信息（含凭据/端口）由库提供。
@@ -127,7 +118,7 @@ func TestInterfaceConfig_Integration_CredsFromDeviceStore(t *testing.T) {
 
 // TestInterfaceConfig_Integration_ChoiceMemberToDevice 锁 BR-06 契约：`bandwidth` 是
 // YANG `choice bandwidth-type` 的 case 成员，前端把它扁平携带（key=bandwidth，无 choice/
-// case 段）。本用例走前端形状的 map → convertMapToHuaweiIfm → 对账 → 模拟器，断言 choice
+// case 段）。本用例走前端形状的 map → convertConfig("/ifm:ifm/ifm:interfaces",  → 对账 → 模拟器，断言 choice
 // 成员端到端落到设备且第二轮对账收敛（Changes==0）——证明呈现层的 choice 分组不影响写链路。
 func TestInterfaceConfig_Integration_ChoiceMemberToDevice(t *testing.T) {
 	if testing.Short() {
@@ -151,7 +142,7 @@ func TestInterfaceConfig_Integration_ChoiceMemberToDevice(t *testing.T) {
 			map[string]interface{}{"name": "GigabitEthernet0/0/3", "bandwidth": float64(1000)},
 		},
 	}
-	typed, err := convertMapToHuaweiIfm(raw)
+	typed, err := convertConfig("/ifm:ifm/ifm:interfaces", raw)
 	assert.NoError(t, err)
 
 	deviceID := "sim"

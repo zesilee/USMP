@@ -144,7 +144,7 @@ func (h *YangHandler) ListModules(c *gin.Context) {
 
 // GetSchema returns dynamic form schema for a specific YANG module. Modules
 // present in the loaded schema tree are rendered dynamically; a hard-coded
-// fallback (legacy aliases) is retained during migration (removed in task 2.5).
+// fallback is a minimal generic schema (BR-04)——legacy alias 假 schema 已删（task 2.5 收口）.
 //
 // @Summary  获取指定 YANG 模块的动态表单 schema
 // @Tags     yang
@@ -166,54 +166,16 @@ func (h *YangHandler) GetSchema(c *gin.Context) {
 		return
 	}
 
-	// Legacy hard-coded fallback for aliases not present in the schema tree.
-	var schema YangSchema
-
-	switch module {
-	case "huawei-ifm", "Interfaces":
-		schema = YangSchema{
-			Module: module,
-			Title:  "华为接口管理",
-			Vendor: "huawei",
-			Fields: []FieldDef{
-				{Path: "ifName", Type: "string", Label: "接口名称", Placeholder: "例如: GigabitEthernet0/0/1", Required: true, Group: "基本信息"},
-				{Path: "description", Type: "string", Label: "描述", Placeholder: "例如: 上行端口", Group: "基本信息"},
-				{Path: "adminStatus", Type: "enum", Label: "管理状态", Default: "up", Group: "基本设置", Options: []Option{{Label: "启用", Value: "up"}, {Label: "禁用", Value: "down"}}},
-				{Path: "mtu", Type: "number", Label: "MTU", Default: 1500, Minimum: 64, Maximum: 9216, Group: "高级设置"},
-				{Path: "speed", Type: "enum", Label: "接口速率", Default: "auto", Group: "高级设置", Options: []Option{{Label: "自动协商", Value: "auto"}, {Label: "10M", Value: "10M"}, {Label: "100M", Value: "100M"}, {Label: "1G", Value: "1G"}}},
-			},
-			ListCols: []FieldDef{
-				{Path: "ifName", Type: "string", Label: "接口名称"},
-				{Path: "adminStatus", Type: "string", Label: "状态"},
-				{Path: "mtu", Type: "number", Label: "MTU"},
-			},
-		}
-	case "huawei-vlan", "VLANs":
-		schema = YangSchema{
-			Module: module,
-			Title:  "华为 VLAN 配置",
-			Vendor: "huawei",
-			Fields: []FieldDef{
-				{Path: "vlanId", Type: "number", Label: "VLAN ID", Required: true, Minimum: 1, Maximum: 4094, Group: "基本信息"},
-				{Path: "vlanName", Type: "string", Label: "VLAN 名称", Placeholder: "例如: VLAN-100", Group: "基本信息"},
-				{Path: "description", Type: "string", Label: "描述", Group: "基本信息"},
-				{Path: "portList", Type: "string", Label: "端口列表", Placeholder: "例如: GigabitEthernet0/0/1,GigabitEthernet0/0/2", Group: "端口配置"},
-			},
-			ListCols: []FieldDef{
-				{Path: "vlanId", Type: "number", Label: "VLAN ID"},
-				{Path: "vlanName", Type: "string", Label: "VLAN 名称"},
-			},
-		}
-	default:
-		schema = YangSchema{
-			Module: module,
-			Title:  module,
-			Vendor: "huawei",
-			Fields: []FieldDef{
-				{Path: "name", Type: "string", Label: "名称", Required: true, Group: "基本信息"},
-				{Path: "description", Type: "string", Label: "描述", Group: "基本信息"},
-			},
-		}
+	// 未加载模块的最小通用降级（BR-04）：不崩不 500，页面仍可用。
+	// per-module 硬编码 alias 假 schema 已随 rfc7951-input-contract 删除（task 2.5 收口）。
+	schema := YangSchema{
+		Module: module,
+		Title:  module,
+		Vendor: "huawei",
+		Fields: []FieldDef{
+			{Path: "name", Type: "string", Label: "名称", Required: true, Group: "基本信息"},
+			{Path: "description", Type: "string", Label: "描述", Group: "基本信息"},
+		},
 	}
 
 	Success(c, schema, "Schema retrieved successfully")
