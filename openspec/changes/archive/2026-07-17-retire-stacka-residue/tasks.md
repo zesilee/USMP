@@ -17,10 +17,10 @@
 - [x] 2.4 删 NDC 闭包：`nativedeviceconfig_types.go`、`zz_generated.deepcopy.go`、`types_common.go`、`docs/crd/nativedeviceconfig.md`
 - [x] 2.5 backend/Makefile 裁剪 Stack A target（design D4 边界），`make -C backend help` 仍可用
 - [x] 2.6 验证：`go build ./...` + `go test ./... -race` 全绿；`grep -r "NativeDeviceConfig\|test/e2e\|test/integration" backend --include="*.go"` 零命中；每 commit ≤500 或纯删除 ≤6000
-- [ ] 2.7 提交、push、PR ②（insertions ≤ 50 走豁免档），CI 全绿合入
+- [x] 2.7 提交、push、PR ②（insertions ≤ 50 走豁免档），CI 全绿合入
 
 ## 3. PR③ — 收尾
 
-- [ ] 3.1 sync：system-architecture SC-01 delta 合入主 spec；business-crd LEGACY 横幅补记 NDC 载体已删
-- [ ] 3.2 archive change + 记忆更新（arch-optimization-roadmap D1 勾销、test-server 泄漏坑注记 integration 腿已删）
+- [x] 3.1 sync：system-architecture SC-01 delta 合入主 spec；business-crd LEGACY 横幅补记 NDC 载体已删
+- [x] 3.2 archive change + 记忆更新（arch-optimization-roadmap D1 勾销、test-server 泄漏坑注记 integration 腿已删）
 - [ ] 3.3 PR ③ 合入后清理 worktree（§6.3）
