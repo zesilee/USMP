@@ -59,9 +59,15 @@ if [ -n "$STAT_LINE" ]; then
   DELETIONS=$(echo "$STAT_LINE" | grep -oE '[0-9]+ deletion' | grep -oE '[0-9]+' || echo "0")
   TOTAL=$((INSERTIONS + DELETIONS))
 
-  if [ "$TOTAL" -gt 500 ]; then
-    echo -e "${RED}[commit-msg] 拒绝: 变更量 ${TOTAL} 行超过 500 行限制${NC}"
-    echo -e "${YELLOW}  要求: 单次 commit ≤500 行，超出拆分到下一迭代${NC}"
+  # 纯删除豁免（与 pr-size.yml 同口径，两处同步；2026-07-17 用户批准）：
+  # 整包物理删除拆分会破坏包内编译，insertions ≤ 50 硬条件防止借道夹带新代码。
+  COMMIT_LIMIT=500
+  if [ "$INSERTIONS" -le 50 ]; then
+    COMMIT_LIMIT=6000
+  fi
+  if [ "$TOTAL" -gt "$COMMIT_LIMIT" ]; then
+    echo -e "${RED}[commit-msg] 拒绝: 变更量 ${TOTAL} 行超过 ${COMMIT_LIMIT} 行限制${NC}"
+    echo -e "${YELLOW}  要求: 单次 commit ≤500 行（纯删除 ≤6000），超出拆分到下一迭代${NC}"
     FAILED=1
   fi
 fi
