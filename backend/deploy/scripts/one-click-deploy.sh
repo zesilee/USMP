@@ -177,10 +177,6 @@ validate_services() {
     # ============================================
     print_info "6.3 CRD 检查..."
     local required_crds=(
-        "businessswitches.biz.usmp.io"
-        "businessvlans.biz.usmp.io"
-        "businessinterfaces.biz.usmp.io"
-        "businessroutes.biz.usmp.io"
         "nativedeviceconfigs.core.usmp.io"
     )
 

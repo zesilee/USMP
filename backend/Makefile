@@ -1,4 +1,4 @@
-.PHONY: all build test test-unit test-integration test-e2e test-all clean help e2e-cluster e2e-deploy e2e-clean manifests-custom test-e2e-go test-e2e-go-verbose test-e2e-kind test-all-full e2e-kind-setup install-ginkgo install-envtest docker-build docker-build-dev kind-load-image e2e-status e2e-logs e2e-simulator-logs kind-kubeconfig kind-export-kubeconfig e2e-test-info kind-up kind-cluster kind-delete kind-clean kind-deploy kind-redeploy kind-status kind-logs kind-frontend-logs kind-simulator-logs kind-load-images docker-build-frontend kind-shell kind-port-forward
+.PHONY: all build test test-unit test-integration test-e2e test-all clean help e2e-cluster e2e-deploy e2e-clean test-e2e-go test-e2e-go-verbose test-e2e-kind test-all-full e2e-kind-setup install-ginkgo install-envtest docker-build docker-build-dev kind-load-image e2e-status e2e-logs e2e-simulator-logs kind-kubeconfig kind-export-kubeconfig e2e-test-info kind-up kind-cluster kind-delete kind-clean kind-deploy kind-redeploy kind-status kind-logs kind-frontend-logs kind-simulator-logs kind-load-images docker-build-frontend kind-shell kind-port-forward
 
 # 项目配置
 BINARY_NAME=usmp-backend
@@ -8,11 +8,6 @@ BUILD_DIR=bin
 GO=go
 GOFLAGS=-v
 
-# CRD 注解注入
-manifests-custom: ## Inject custom annotations into CRDs
-	@echo "Injecting custom annotations into CRDs..."
-	@cd hack/crd-injector && $(GO) run main.go ../../api ../../config/crd/bases
-	@echo "CRD annotation injection completed"
 
 # 默认目标
 all: build

@@ -17,14 +17,14 @@
 
 ## 2. W2 — 旧 CRD 类型与 Stack A 载体退役（PR ②）
 
-- [ ] 2.1 rebase 到 W1 合入后的 main
-- [ ] 2.2 删除 `backend/api/biz/v1` 整包（四 Kind + groupversion + zz_generated deepcopy）
-- [ ] 2.3 删除退役 B0 e2e：`backend/test/e2e` 中引用 biz/v1 的测试（build-tag 隔离件），连带清理 backend/Makefile kind-e2e target 中对 `config/crd/bases` 的 apply
-- [ ] 2.4 删除 `backend/config/crd/bases/biz.usmp.io_business{vlans,interfaces,routes,switches}.yaml` 与 `config/samples/biz_v1_*.yaml`（NativeDeviceConfig 清单不动，属 roadmap D1 范围）
-- [ ] 2.5 删除 `backend/hack/crd-injector`（唯一调用方是 backend/Makefile `manifests` target）并裁剪该 target；裁剪前 grep CI workflows/scripts 确认无其他引用
-- [ ] 2.6 裁剪 `backend/deploy/scripts/{one-click-deploy,verify-deployment}.sh` 中 businessvlans/businessinterfaces/businessroutes/businessswitches CRD 等待/校验条目
-- [ ] 2.7 全量验证：`go test ./... -race` 全绿；`grep -r "api/biz/v1\|bizv1" backend` 零命中
-- [ ] 2.8 W2 提交、push、PR ②，CI 全绿后合入
+- [x] 2.1 改为堆叠分支 retire-businessvlan-bridge-w2（W1 未合入期间继续推进；PR ② base=W1 分支，W1 合入后重定向 main）
+- [x] 2.2 删除 `backend/api/biz/v1` 整包（四 Kind + groupversion + zz_generated deepcopy）
+- [x] 2.3 删除退役 B0 e2e：`backend/test/e2e` 中引用 biz/v1 的测试（build-tag 隔离件），（bases 目录仍存 NDC 清单，apply 行保留仍语义成立；e2e 脚手架目录级退役另立 follow-up）
+- [x] 2.4 删除 `backend/config/crd/bases/biz.usmp.io_business{vlans,interfaces,routes,switches}.yaml` 与 `config/samples/biz_v1_*.yaml`（NativeDeviceConfig 清单不动，属 roadmap D1 范围）
+- [x] 2.5 删除 `backend/hack/crd-injector`（唯一调用方是 backend/Makefile `manifests` target）并裁剪该 target；裁剪前 grep CI workflows/scripts 确认无其他引用
+- [x] 2.6 裁剪 `backend/deploy/scripts/{one-click-deploy,verify-deployment}.sh` 中 businessvlans/businessinterfaces/businessroutes/businessswitches CRD 等待/校验条目
+- [x] 2.7 全量验证：`go test ./... -race` 全绿；`grep -r "api/biz/v1\|bizv1" backend` 零命中
+- [x] 2.8 W2 提交、push、PR ②，CI 全绿后合入
 
 ## 3. W3 — actor 包物理删除 + spec 收尾（PR ③）
 
