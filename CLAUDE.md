@@ -142,7 +142,7 @@ explore → propose → apply → sync → archive
 | B1 单元/表格驱动 | `*_test.go`（`pkg/yang-runtime/*`、`internal/cache`、`internal/api` 编解码） | 纯逻辑：diff/cache/schema/parser，正常·异常·边界·**并发(race)** |
 | B2 集成-模拟网元 | `*_integration_test.go` + `simulator/netconfsim`，`testing.Short()` 跳过 | Reconciler↔设备端到端：下发→回读→收敛 |
 | B3 API/契约 | `internal/api/*_test.go` | HTTP handler、配置编解码、域约束、错误码 |
-| ~~B0 退役遗留~~ | `backend/test/{e2e,integration}`（build-tag，Stack A/K8s CRD） | Stack A 遗留，不进任何门禁、不再维护 |
+| ~~B0 退役遗留~~ | ~~`backend/test/{e2e,integration}`~~（已物理删除，retire-stacka-residue） | Stack A 遗留层，载体已清零；历史仅作层编号占位 |
 
 **前端层**
 
