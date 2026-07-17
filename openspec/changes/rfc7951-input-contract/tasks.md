@@ -4,16 +4,16 @@
 
 ## 1. PR① — 立项
 
-- [ ] 1.1 change 四件制品 + `openspec validate` 通过（spike 结论沉淀进 design）
-- [ ] 1.2 提交、push、PR ①，CI 全绿合入
+- [x] 1.1 change 四件制品 + `openspec validate` 通过（spike 结论沉淀进 design）
+- [x] 1.2 提交、push、PR ①，CI 全绿合入
 
 ## 2. PR② — 单一解码路径实现（TDD）
 
-- [ ] 2.1 【测试先行】B1 包裹/锚点矩阵红灯：path=锚点零包裹 / 子路径单层与多层包裹 / 非前缀 400 / 段含 `[` 谓词 400 / 未注册路径 400 / Unmarshal 失败 400 透出原因 / 旧形状（复数键、camelCase）400
-- [ ] 2.2 driver.Descriptor + `EncodeAnchor` 字段（DR-05）+ 注册表单测；internal/drivers 六模块登记锚点
-- [ ] 2.3 config_codec：`convertConfig` 改单一路径（wrap + encodeToYgot，删 legacy 回退调用）——绿灯
-- [ ] 2.4 存量测试形状对齐：~20 处 `{"vlans":…}`/camelCase 改 RFC7951 真名形状（顺带覆盖率核对）
-- [ ] 2.5 B2：system form-tab 形状（`/system:system/system:system-info` 扁平载荷）经 netconfsim 端到端下发→回读
+- [x] 2.1 【测试先行】B1 包裹/锚点矩阵红灯：path=锚点零包裹 / 子路径单层与多层包裹 / 非前缀 400 / 段含 `[` 谓词 400 / 未注册路径 400 / Unmarshal 失败 400 透出原因 / 旧形状（复数键、camelCase）400
+- [x] 2.2 driver.Descriptor + `EncodeAnchor` 字段（DR-05）+ 注册表单测；internal/drivers 六模块登记锚点
+- [x] 2.3 config_codec：`convertConfig` 改单一路径（wrap + encodeToYgot，删 legacy 回退调用）——绿灯
+- [x] 2.4 存量测试形状对齐：~20 处 `{"vlans":…}`/camelCase 改 RFC7951 真名形状（顺带覆盖率核对）
+- [x] 2.5 B2：system form-tab 形状（`/system:system/system:system-info` 扁平载荷）经 netconfsim 端到端下发→回读
 - [ ] 2.6 `go test ./... -race` 全绿 + code review + 提交 push PR ②，CI 全绿合入
 
 ## 3. PR③ — 纯删除 + 收尾
