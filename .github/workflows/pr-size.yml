@@ -28,8 +28,16 @@ jobs:
           # Limits:
           #   Feature PR (≤20 files): 1000 lines
           #   Infrastructure PR (>20 files): 3000 lines
+          #   Deletion-only PR (insertions ≤ 50): 6000 lines
+          #     TM04 的目的是限制 review 负担，负担来自新增手写代码；纯删除型退役 PR
+          #     （如整包物理删除，拆分会破坏包内编译）review 内容是「确认无人引用」，
+          #     与删除行数弱相关。insertions ≤ 50 硬条件防止借道夹带新代码。
+          #     2026-07-17 用户批准（retire-businessvlan-bridge design.md D5）。
           CHANGED_FILES=$(git diff --name-only origin/main...HEAD | wc -l | tr -d ' ')
-          if [ "$CHANGED_FILES" -gt 20 ]; then
+          if [ "$INSERTIONS" -le 50 ]; then
+            LIMIT=6000
+            echo "Deletion-only PR detected (+${INSERTIONS}), limit: ${LIMIT}"
+          elif [ "$CHANGED_FILES" -gt 20 ]; then
             LIMIT=3000
             echo "Infrastructure PR detected (${CHANGED_FILES} files), limit: ${LIMIT}"
           else
