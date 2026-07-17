@@ -253,7 +253,10 @@ export interface paths {
         /** 声明式下发配置并触发对账 */
         post: {
             parameters: {
-                query?: never;
+                query?: {
+                    /** @description 覆盖业务意图归属硬锁（force=true，审计留痕） */
+                    force?: boolean;
+                };
                 header?: never;
                 path: {
                     /** @description 设备 IP */
@@ -292,6 +295,17 @@ export interface paths {
                         "application/json": components["schemas"]["api.Response"];
                     };
                 };
+                /** @description 路径被业务意图认领（无 force 拒绝） */
+                409: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["api.Response"] & {
+                            data?: components["schemas"]["api.OwnershipRejection"];
+                        };
+                    };
+                };
                 /** @description 存储失败 */
                 500: {
                     headers: {
@@ -309,6 +323,8 @@ export interface paths {
                 query: {
                     /** @description 条目主键（vlan→id，interface→name） */
                     key: string;
+                    /** @description 覆盖业务意图归属硬锁（force=true，审计留痕） */
+                    force?: boolean;
                 };
                 header?: never;
                 path: {
@@ -339,6 +355,17 @@ export interface paths {
                     };
                     content: {
                         "application/json": components["schemas"]["api.Response"];
+                    };
+                };
+                /** @description 条目被业务意图认领（无 force 拒绝） */
+                409: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["api.Response"] & {
+                            data?: components["schemas"]["api.OwnershipRejection"];
+                        };
                     };
                 };
                 /** @description 设备删除失败（含 data-missing） */
@@ -943,6 +970,9 @@ export interface components {
             device_ip?: string;
             /** @description 当前差异数（live-join） */
             diff_count?: number;
+            /** @description Forced/ForcedOwners：force 覆盖归属硬锁留痕（OA-01 二期，零值省略）。 */
+            forced?: boolean;
+            forcedOwners?: string[];
             id?: string;
             /** @description 当前对账结局（live-join；无记录为 unknown） */
             outcome?: string;
@@ -973,6 +1003,10 @@ export interface components {
             intents?: string[];
             /** @description Path 为空时返回该设备全部认领。 */
             path?: string;
+        };
+        "api.OwnershipRejection": {
+            /** @description Intents 认领该路径的意图 CR（namespace/name）。 */
+            intents?: string[];
         };
         "api.OwnershipWarning": {
             /** @description Intents 认领该路径的意图 CR（namespace/name）。 */

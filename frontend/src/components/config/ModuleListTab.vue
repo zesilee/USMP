@@ -126,6 +126,7 @@ import { ref, reactive, computed, watch } from 'vue'
 import { Plus, ArrowDown, ArrowUp } from '@element-plus/icons-vue'
 import { ElMessage, ElMessageBox, type FormInstance } from 'element-plus'
 import { getConfig, deleteConfig } from '../../api'
+import { ownershipRejectionOf, confirmOwnershipOverride } from '../../composables/ownershipGate'
 import { useConfigSubmit } from '../../composables/useConfigSubmit'
 import { useConfigForm } from '../../composables/useConfigForm'
 import { useFreshnessStore } from '../../stores/freshness'
@@ -326,7 +327,18 @@ async function onDelete(row: Record<string, any>) {
     return // 用户取消：零请求
   }
   try {
-    await deleteConfig(props.device, configPath.value, key)
+    const res = await deleteConfig(props.device, configPath.value, key)
+    // 归属硬锁（FE-18 二期）：信封 409 → 阻断确认 → 确认后携 force 重发，取消中止。
+    const rej = ownershipRejectionOf(res)
+    if (rej) {
+      if (!(await confirmOwnershipOverride(rej))) return
+      const forced = await deleteConfig(props.device, configPath.value, key, true)
+      // 信封恒 200：force 重发失败按 success 判定，如实透出（§9）。
+      if ((forced.data as any)?.success === false) {
+        error.value = (forced.data as any)?.message || '强制删除失败'
+        return
+      }
+    }
     ElMessage.success('已删除并触发对账')
     error.value = ''
     await load()

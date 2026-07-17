@@ -142,3 +142,70 @@ describe('useConfigSubmit · 下发→回读→轮询对账', () => {
     expect(s.error.value).toBeNull()
   })
 })
+
+// FE-18 二期（F2）：归属硬锁 409 → 阻断确认 → force 重发 / 取消中止。
+describe('useConfigSubmit · 归属硬锁 409 分支', () => {
+  const rejected409 = {
+    data: { code: 409, success: false, message: '路径由业务意图管理', data: { intents: ['default/biz-100'] } },
+  } as any
+  const acceptedWithWarn = {
+    data: { code: 0, success: true, data: { reconciliation: { triggered: true }, ownershipWarning: { intents: ['default/biz-100'], message: '会覆盖' } } },
+  } as any
+
+  beforeEach(() => {
+    vi.clearAllMocks()
+    vi.mocked(getConfig).mockResolvedValue({ data: { data: { data: {} } } } as any)
+  })
+
+  it('409 → 确认 → 携 force 重发并继续对账链', async () => {
+    const { ElMessageBox } = await import('element-plus')
+    vi.spyOn(ElMessageBox, 'confirm').mockResolvedValue('confirm' as any)
+    vi.mocked(setConfig).mockResolvedValueOnce(rejected409).mockResolvedValueOnce(acceptedWithWarn)
+    vi.mocked(getDeviceReconcile).mockResolvedValueOnce(noStatuses).mockResolvedValue(recon('converged', T1))
+
+    const s = useConfigSubmit(opts)
+    await s.run('10.0.0.1', { id: 100 })
+
+    expect(setConfig).toHaveBeenCalledTimes(2)
+    expect(vi.mocked(setConfig).mock.calls[0]).toEqual(['10.0.0.1', opts.configPath, { vlans: [{ id: 100 }] }])
+    expect(vi.mocked(setConfig).mock.calls[1]).toEqual(['10.0.0.1', opts.configPath, { vlans: [{ id: 100 }] }, true])
+    expect(s.phase.value).toBe('converged')
+    expect(s.error.value).toBeNull()
+  })
+
+  it('409 → 取消 → 中止且不置错误态', async () => {
+    const { ElMessageBox } = await import('element-plus')
+    vi.spyOn(ElMessageBox, 'confirm').mockRejectedValue('cancel')
+    vi.mocked(setConfig).mockResolvedValue(rejected409)
+    vi.mocked(getDeviceReconcile).mockResolvedValue(noStatuses)
+
+    const s = useConfigSubmit(opts)
+    await s.run('10.0.0.1', { id: 100 })
+
+    expect(setConfig).toHaveBeenCalledTimes(1)
+    expect(s.phase.value).toBe('idle')
+    expect(s.error.value).toBeNull()
+    expect(getConfig).not.toHaveBeenCalled()
+  })
+})
+
+// force 重发失败（信封 success=false）→ error 相位，不误入成功链（§9）。
+describe('useConfigSubmit · force 重发失败如实透出', () => {
+  it('409 → 确认 → force 重发返回失败信封 → error', async () => {
+    vi.clearAllMocks()
+    const { ElMessageBox } = await import('element-plus')
+    vi.spyOn(ElMessageBox, 'confirm').mockResolvedValue('confirm' as any)
+    vi.mocked(getConfig).mockResolvedValue({ data: { data: { data: {} } } } as any)
+    vi.mocked(getDeviceReconcile).mockResolvedValue(noStatuses)
+    vi.mocked(setConfig)
+      .mockResolvedValueOnce({ data: { code: 409, success: false, data: { intents: ['default/biz-100'] } } } as any)
+      .mockResolvedValueOnce({ data: { code: 502, success: false, message: '设备删除失败' } } as any)
+
+    const s = useConfigSubmit(opts)
+    await s.run('10.0.0.1', { id: 100 })
+
+    expect(s.phase.value).toBe('error')
+    expect(s.error.value).toContain('设备删除失败')
+    expect(getConfig).not.toHaveBeenCalled()
+  })
+})
