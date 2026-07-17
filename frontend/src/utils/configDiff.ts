@@ -2,7 +2,7 @@ import type { Field } from './crdSchemaParser'
 
 // 抽屉「下发预览」的单条差异（表单期望值 ↔ 已回填的实际值）。
 export interface DiffEntry {
-  key: string // 数据键（path 末段，与 DeviceConfigPage.keyOf/formData 同源）
+  key: string // 数据键（path 末段，与表单 keyOf/formData 同源）
   label: string
   was: any // 原实际值（新增时为空）
   now: any // 新期望值

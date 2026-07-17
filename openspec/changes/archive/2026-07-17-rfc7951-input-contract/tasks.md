@@ -14,12 +14,12 @@
 - [x] 2.3 config_codec：`convertConfig` 改单一路径（wrap + encodeToYgot，删 legacy 回退调用）——绿灯
 - [x] 2.4 存量测试形状对齐：~20 处 `{"vlans":…}`/camelCase 改 RFC7951 真名形状（顺带覆盖率核对）
 - [x] 2.5 B2：system form-tab 形状（`/system:system/system:system-info` 扁平载荷）经 netconfsim 端到端下发→回读
-- [ ] 2.6 `go test ./... -race` 全绿 + code review + 提交 push PR ②，CI 全绿合入
+- [x] 2.6 `go test ./... -race` 全绿 + code review + 提交 push PR ②，CI 全绿合入
 
 ## 3. PR③ — 纯删除 + 收尾
 
-- [ ] 3.1 rebase；删 `convertToTypedStruct`+`convertMapToHuawei*`+助手（config_handler.go ~685 行，task 3.6 收口）
-- [ ] 3.2 删 yang-api alias 假 schema switch（task 2.5 收口；BR-04 最小降级行为保持）
-- [ ] 3.3 删 `DeviceConfigPage.vue`、`types/yang-schema.ts`、router 暂存注释；前端单测/typecheck/e2e smoke 全绿
-- [ ] 3.4 sync：config-api BR-05/BR-06、DR-05、FE-03 合入主 spec；archive change
+- [x] 3.1 （提前并入 PR②——死代码拖覆盖率跌破棘轮）删 `convertToTypedStruct`+`convertMapToHuawei*`+助手（config_handler.go ~685 行，task 3.6 收口）
+- [x] 3.2 （提前并入 PR②）删 yang-api alias 假 schema switch（task 2.5 收口；BR-04 最小降级行为保持）
+- [x] 3.3 删 `DeviceConfigPage.vue`、`types/yang-schema.ts`、router 暂存注释；前端单测/typecheck/e2e smoke 全绿
+- [x] 3.4 sync：config-api BR-05/BR-06、DR-05、FE-03 合入主 spec；archive change
 - [ ] 3.5 记忆更新（arch-optimization-roadmap：P1 遗留 2.5/3.6/4.3 全收口）+ 任务归档 + worktree 清理

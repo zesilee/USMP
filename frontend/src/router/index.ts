@@ -24,8 +24,7 @@ const routes = [
     name: 'module-console',
     component: () => import('../views/ModuleConsolePage.vue')
   },
-  // 旧配置页路由迁移到通用模块控制台（FE-13）：保留书签可达。
-  // DeviceConfigPage.vue 暂存（无路由引用），新控制台稳定后随后续 change 删除。
+  // 旧配置页路由迁移到通用模块控制台（FE-13）：保留书签可达（DeviceConfigPage 已物理删除）。
   {
     path: '/config/interface',
     redirect: '/module/ifm'

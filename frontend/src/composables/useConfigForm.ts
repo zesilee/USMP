@@ -4,7 +4,7 @@ import { useConstraintEngine } from './useConstraintEngine'
 import { computeDiff, missingRequired } from '../utils/configDiff'
 import type { Field } from '../utils/crdSchemaParser'
 
-// 模型驱动表单编排（从 DeviceConfigPage 收敛的通用逻辑，FE-07/08/09 语义不变）：
+// 模型驱动表单编排（自旧配置页收敛的通用逻辑，FE-07/08/09 语义不变）：
 // 约束引擎（when 显隐/must 校验）、pattern/range/required 规则、choice 展开、
 // 差异比对与可提交门禁、仅可见字段入 payload。供通用控制台的列表/表单 Tab 复用。
 export function useConfigForm(fields: Ref<Field[]> | ComputedRef<Field[]>, keyField?: Ref<string> | ComputedRef<string>) {
@@ -15,7 +15,7 @@ export function useConfigForm(fields: Ref<Field[]> | ComputedRef<Field[]>, keyFi
     return f.path.split('/').filter(Boolean).pop() || f.path
   }
 
-  // ===== choice 展开（成员扁平同级，见 DeviceConfigPage 同名逻辑）=====
+  // ===== choice 展开（成员扁平同级）=====
   function choiceMemberFields(field: Field): Field[] {
     return (field.cases || []).flatMap((c) => c.fields || [])
   }
