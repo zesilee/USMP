@@ -2,7 +2,7 @@
 
 ## Purpose
 
-> **LEGACY / 已退出生产。** 本能力属于 **Stack A（K8s controller-runtime + Actor 模型）**，该栈**已退出生产**：生产入口 `cmd/controller` 已删除，`backend/main.go`（Stack B）是唯一入口。`backend/pkg/yang-runtime/actor/` 包代码**物理仍在**（低优先「物理删除」机械债），但**不在生产数据路径上**。本 spec 作为**历史契约保留**，忠实还原 actor 包现有代码行为；权威配置管理栈见 [[yang-controller-runtime]]。
+> **LEGACY / 已退出生产。** 本能力属于 **Stack A（K8s controller-runtime + Actor 模型）**，该栈**已退出生产**：生产入口 `cmd/controller` 已删除，`backend/main.go`（Stack B）是唯一入口。`backend/pkg/yang-runtime/actor/` 包代码已于 2026-07-17 **物理删除**（change retire-businessvlan-bridge，PR #190）。本 spec 作为**历史契约保留**，忠实还原 actor 包当年的代码行为；权威配置管理栈见 [[yang-controller-runtime]]。
 
 actor-transaction 描述消息驱动的单写者（actor）配置管理契约：每设备/每模块**串行写入**，提供 candidate/commit 两阶段提交（2PC）、跨模块原子事务、SHA256 校验的快照版本与回滚、以及下发后状态读回。历史上由 K8s controller-runtime 驱动（数据流路径 A）。
 

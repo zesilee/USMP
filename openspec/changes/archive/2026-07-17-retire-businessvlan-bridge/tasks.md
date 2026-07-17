@@ -5,7 +5,7 @@
 
 ## 1. W1 — 桥接摘除 + translator 退役（PR ①）
 
-- [ ] 1.1 （移至 3.0，W1/W2 实测无需豁免）pr-size 门禁纯删除豁免——auto-mode 权限分类器拦截了该 TM04 契约变更的提交，需用户显式批准后落地，仅 W3 actor 删除依赖
+- [x] 1.1 （移至 3.0，W1/W2 实测无需豁免）pr-size 门禁纯删除豁免——auto-mode 权限分类器拦截了该 TM04 契约变更的提交，需用户显式批准后落地，仅 W3 actor 删除依赖
 - [x] 1.2 【测试先行 T05】driver 注册表 `VendorSupported` 表格驱动测试（B1）：已注册大小写无关命中 / 未注册 false / 空串 false / 与 Register 并发 race——红灯
 - [x] 1.3 实现 `driver.Registry.VendorSupported` + 包级 facade（DR-04）——绿灯
 - [x] 1.4 `device_handler.go` BR-04 厂商门禁切换到 `driver.VendorSupported`，删除 translator import；既有 B3 设备注册测试（缺省 huawei / 未知厂商 400）不改断言全绿证明行为等价
@@ -28,16 +28,16 @@
 
 ## 3. W3 — actor 包物理删除 + spec 收尾（PR ③）
 
-- [ ] 3.0 【需用户批准】pr-size（CI）与 commit-msg（本地钩子）两处同口径增设纯删除豁免：insertions ≤ 50 上限 6000（design D5，TM04 契约变更；auto-mode 分类器已拦截自动提交，须由用户确认后落地——actor 4718 行整包删除的唯一可行通道）
-- [ ] 3.1 rebase 到 W2 合入后的 main
-- [ ] 3.2 删除 `pkg/yang-runtime/actor` 整包（14 文件 4718 行，一次性删保编译，走 1.1 纯删除豁免）
-- [ ] 3.3 验证零残留：`grep -r "yang-runtime/actor" backend` 零命中、`go build ./...` + `go test ./... -race` 全绿
-- [ ] 3.4 更新 LEGACY spec Purpose 横幅：`actor-transaction`（代码载体已物理删除）、`business-crd`（api/biz/v1 类型已物理删除）、`translation-engine`（能力退役，见 REMOVED delta）
-- [ ] 3.5 W3 提交、push、PR ③，CI 全绿后合入
+- [x] 3.0 【需用户批准】pr-size（CI）与 commit-msg（本地钩子）两处同口径增设纯删除豁免：insertions ≤ 50 上限 6000（design D5，TM04 契约变更；auto-mode 分类器已拦截自动提交，须由用户确认后落地——actor 4718 行整包删除的唯一可行通道）
+- [x] 3.1 W3 分支基于 W2 合入后的 main（retire-businessvlan-bridge-w3）
+- [x] 3.2 删除 `pkg/yang-runtime/actor` 整包（14 文件 4718 行，一次性删保编译，走 1.1 纯删除豁免）
+- [x] 3.3 验证零残留：`grep -r "yang-runtime/actor" backend` 零命中、`go build ./...` + `go test ./... -race` 全绿
+- [x] 3.4 更新 LEGACY spec Purpose 横幅：`actor-transaction`（代码载体已物理删除）、`business-crd`（api/biz/v1 类型已物理删除）、`translation-engine`（能力退役，见 REMOVED delta）
+- [x] 3.5 W3 提交、push、PR ③，CI 全绿后合入
 
 ## 4. 收尾
 
-- [ ] 4.1 `/opsx:sync`：delta 合入主 spec（device-driver-registry +DR-04、translation-engine REMOVED、system-architecture SC-01）
-- [ ] 4.2 `/opsx:archive` 归档 change；`openspec/tasks/retire-businessvlan-bridge.md` 置 completed 并 `/task archive`
+- [x] 4.1 `/opsx:sync`：delta 合入主 spec（device-driver-registry +DR-04、translation-engine REMOVED、system-architecture SC-01）
+- [x] 4.2 `/opsx:archive` 归档 change；`openspec/tasks/retire-businessvlan-bridge.md` 置 completed 并 `/task archive`
 - [ ] 4.3 更新记忆：arch-optimization-roadmap（actor 物理删除已勾销）、k8s-paas-deployment-constraints（旧桥接退役 follow-up 完成）
 - [ ] 4.4 清理 worktree（§6.3 完成分支流程，B 选项推送+PR 后视合入情况走 A 清理）
