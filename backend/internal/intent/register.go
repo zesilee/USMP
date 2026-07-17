@@ -47,7 +47,7 @@ func Namespace() string {
 //
 // Degrades gracefully: without a reachable Kubernetes config it logs, returns
 // (nil, nil) and the rest of the process runs unaffected (R08). On success the
-// returned cache must be started (crdsource.StartCache 同款).
+// returned cache must be started (StartCache).
 func Register(mgr manager.Manager) (crcache.Cache, error) {
 	cfg, err := ctrlcfg.GetConfig()
 	if err != nil {
@@ -103,4 +103,22 @@ func (m multiSource) Stop() error {
 		}
 	}
 	return last
+}
+
+// cacheStarter is the minimal surface StartCache needs (crcache.Cache 满足)，
+// narrow 接口便于单测注入。
+type cacheStarter interface {
+	Start(ctx context.Context) error
+}
+
+// StartCache starts a controller-runtime cache (blocking) if non-nil. Intended
+// to be run in a goroutine alongside the manager（自 crdsource 平移，旧桥接退役后
+// 本包是唯一消费方）。nil cache 是无集群降级路径，直接返回（R08）。
+func StartCache(ctx context.Context, c cacheStarter) {
+	if c == nil {
+		return
+	}
+	if err := c.Start(ctx); err != nil {
+		log.Printf("intent: cache stopped: %v", err)
+	}
 }

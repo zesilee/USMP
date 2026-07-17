@@ -11,6 +11,7 @@ package driver
 import (
 	"fmt"
 	"reflect"
+	"strings"
 	"sync"
 
 	"github.com/openconfig/ygot/ygot"
@@ -128,6 +129,14 @@ func (r *Registry) XMLEncoderForValue(v interface{}) (Descriptor, bool) {
 	return r.lookup(func(d Descriptor) bool { return d.matchesXMLValue(v) })
 }
 
+// VendorSupported reports whether any registered descriptor belongs to the
+// vendor (case-insensitive). It is the single source of truth for "厂商是否有
+// 已注册驱动" (DR-04)，供 devices-api BR-04 厂商门禁消费。
+func (r *Registry) VendorSupported(vendor string) bool {
+	_, ok := r.lookup(func(d Descriptor) bool { return strings.EqualFold(d.Vendor, vendor) })
+	return ok
+}
+
 func (r *Registry) lookup(pred func(Descriptor) bool) (Descriptor, bool) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
@@ -158,3 +167,7 @@ func EncoderFor(path string) (Descriptor, bool) { return defaultRegistry.Encoder
 func XMLEncoderForValue(v interface{}) (Descriptor, bool) {
 	return defaultRegistry.XMLEncoderForValue(v)
 }
+
+// VendorSupported reports whether the default registry has any driver
+// descriptor for the vendor (case-insensitive, DR-04).
+func VendorSupported(vendor string) bool { return defaultRegistry.VendorSupported(vendor) }

@@ -8,9 +8,9 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
-	"github.com/leezesi/usmp/backend/pkg/translator"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/client"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/device"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/driver"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/manager"
 )
 
@@ -246,12 +246,11 @@ func (h *DeviceHandler) AddDevice(c *gin.Context) {
 	}
 
 	// Vendor 门禁（BR-04）：缺省 huawei；无已注册驱动的厂商早失败（优于下发时报错）。
-	// 标签大小写无关（"huawei" → 枚举 "Huawei"），存储侧保留小写标签。
+	// 事实源是 driver 描述符注册表（DR-04），标签大小写无关，存储侧保留原始标签。
 	if req.Vendor == "" {
 		req.Vendor = defaultVendor
 	}
-	vt, known := translator.VendorFromString(req.Vendor)
-	if !known || !translator.IsVendorSupported(vt) {
+	if !driver.VendorSupported(req.Vendor) {
 		Error(c, 400, "Invalid request: unsupported vendor '"+req.Vendor+"'")
 		return
 	}
