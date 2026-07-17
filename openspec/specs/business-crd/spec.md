@@ -2,7 +2,7 @@
 
 ## Purpose
 
-> **LEGACY / 已退出生产。** 本能力属 Stack A（K8s CRD + controller-runtime Reconciler → 翻译引擎 → Actor 2PC → NETCONF 下发）。Stack A 已退出生产：`cmd/controller` 入口已删除，`backend/main.go`（Stack B）为唯一进程入口。本 spec 作历史契约保留，**不代表当前生产配置面**——生产配置读写走 [[config-api]] / [[yang-controller-runtime]] 直连链路。前端最后的 CRD 消费链（route/native 的 ConfigPage + useK8sCRD）已随 native-config-reposition 退役删除，BC-05 已据实移除——本 spec 全量为纯历史契约，零生产/前端消费。2026-07-17 起代码载体亦已物理删除（change retire-businessvlan-bridge，PR #186/#187：api/biz/v1 类型、crdsource 桥接、translator 翻译引擎、Stack A CRD 清单/样例/文档全清）。另注：「业务网络配置」概念已重新定义为未来扩展层（业务侧 YANG 模型定义自动化能力，USMP 编排为原生配置下发，方向见 openspec/tasks/business-network-config.md），与本 legacy CRD 意图面无实现延续关系，仅思想同源。
+> **LEGACY / 已退出生产。** 本能力属 Stack A（K8s CRD + controller-runtime Reconciler → 翻译引擎 → Actor 2PC → NETCONF 下发）。Stack A 已退出生产：`cmd/controller` 入口已删除，`backend/main.go`（Stack B）为唯一进程入口。本 spec 作历史契约保留，**不代表当前生产配置面**——生产配置读写走 [[config-api]] / [[yang-controller-runtime]] 直连链路。前端最后的 CRD 消费链（route/native 的 ConfigPage + useK8sCRD）已随 native-config-reposition 退役删除，BC-05 已据实移除——本 spec 全量为纯历史契约，零生产/前端消费。2026-07-17 起代码载体亦已物理删除（retire-businessvlan-bridge PR #186/#187：api/biz/v1 类型、crdsource 桥接、translator、Stack A CRD 清单/样例/文档；retire-stacka-residue PR #195：NativeDeviceConfig 类型闭包、backend/{deploy,config} 部署目录、B0 测试载体）。另注：「业务网络配置」概念已重新定义为未来扩展层（业务侧 YANG 模型定义自动化能力，USMP 编排为原生配置下发，方向见 openspec/tasks/business-network-config.md），与本 legacy CRD 意图面无实现延续关系，仅思想同源。
 
 business-crd 以 K8s CRD 表达厂商中立的设备配置意图，经 controller-runtime Reconciler → 翻译引擎 → Actor 2PC → NETCONF 下发；CRD 同时充当前端表单 schema 来源。
 
