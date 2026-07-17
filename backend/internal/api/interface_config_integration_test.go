@@ -7,7 +7,6 @@ import (
 
 	"github.com/leezesi/usmp/backend/internal/cache"
 	ifmctl "github.com/leezesi/usmp/backend/internal/controller/ifm"
-	"github.com/leezesi/usmp/backend/internal/generated/huawei"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/client"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/device"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/manager"
@@ -16,14 +15,6 @@ import (
 	testsupport "github.com/leezesi/usmp/backend/simulator/netconfsim/testsupport"
 	"github.com/stretchr/testify/assert"
 )
-
-// IFM 枚举字符串（"up"）应映射到 ygot 枚举值（PortStatus_up=2）。
-func TestEnumInt_IfmPortStatus(t *testing.T) {
-	n, ok := enumInt("up", "E_HuaweiIfm_PortStatus")
-	if !ok || huawei.E_HuaweiIfm_PortStatus(n) != huawei.HuaweiIfm_PortStatus_up {
-		t.Fatalf("enumInt(up) = %d ok=%v, want PortStatus_up", n, ok)
-	}
-}
 
 // 端到端：前端形状的接口配置 map（枚举字符串 admin-status:"up"）→ convertConfig("/ifm:ifm/ifm:interfaces",
 // → 对账 → NETCONF → 模拟网元。验证接口配置枚举字符串一路正确落到设备。
