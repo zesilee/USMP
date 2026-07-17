@@ -30,6 +30,7 @@
 import { ref, computed, watch } from 'vue'
 import { ElMessage, type FormInstance } from 'element-plus'
 import { getConfig, setConfig } from '../../api'
+import { ownershipRejectionOf, confirmOwnershipOverride } from '../../composables/ownershipGate'
 import { useConfigForm } from '../../composables/useConfigForm'
 import { evalPredicate } from '../../utils/xpathEval'
 import type { Field } from '../../utils/crdSchemaParser'
@@ -125,8 +126,20 @@ async function submit() {
   }
   if (form.blocked.value) return
   try {
-    const res = await setConfig(props.device, configPath.value, form.visiblePayload())
-    // 软归属警告（FE-18/BR-11）：命中业务意图认领路径时非阻断提示，下发照常。
+    let res = await setConfig(props.device, configPath.value, form.visiblePayload())
+    // 归属硬锁（FE-18 二期）：信封 409 → 阻断确认 → 确认后携 force 重发，取消则中止
+    // （不置错误态、不刷新）。
+    const rej = ownershipRejectionOf(res)
+    if (rej) {
+      if (!(await confirmOwnershipOverride(rej))) return
+      res = await setConfig(props.device, configPath.value, form.visiblePayload(), true)
+      // 信封恒 200：force 重发失败按 success 判定，如实透出（§9）。
+      if ((res.data as any)?.success === false) {
+        error.value = (res.data as any)?.message || '强制下发失败'
+        return
+      }
+    }
+    // 软归属警告（FE-18/BR-11）：force 放行仍附带，非阻断提示，下发照常。
     const warn = (res.data as any)?.data?.ownershipWarning
     if (warn?.message) {
       ElMessage.warning(`${warn.message}（${(warn.intents || []).join('、')}）`)

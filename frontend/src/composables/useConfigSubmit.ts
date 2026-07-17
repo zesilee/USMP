@@ -1,6 +1,7 @@
 import { ref, computed } from 'vue'
 import { ElMessage } from 'element-plus'
 import { setConfig, getConfig, getDeviceReconcile } from '../api'
+import { ownershipRejectionOf, confirmOwnershipOverride } from './ownershipGate'
 import {
   deriveReconcileProgress,
   outcomeToPhase,
@@ -73,8 +74,25 @@ export function useConfigSubmit(opts: UseConfigSubmitOptions) {
       // 1) 编码并下发 edit-config
       set('pushing')
       try {
-        const res = await setConfig(ip, opts.configPath, { [opts.listKey]: [item] })
-        // 软归属警告（FE-18/BR-11）：命中业务意图认领路径时非阻断提示，流程照常。
+        let res = await setConfig(ip, opts.configPath, { [opts.listKey]: [item] })
+        // 归属硬锁（FE-18 二期）：信封 409 → 阻断确认 → 确认后携 force 重发，
+        // 取消则中止流程且不置错误态（回 idle）。
+        const rej = ownershipRejectionOf(res)
+        if (rej) {
+          if (!(await confirmOwnershipOverride(rej))) {
+            set('idle')
+            return
+          }
+          res = await setConfig(ip, opts.configPath, { [opts.listKey]: [item] }, true)
+          // 信封恒 200：force 重发的失败（如设备错误）也以 resolved 信封到达，
+          // 必须按 success 判定，不能误入成功链（§9 不伪装成功）。
+          if ((res.data as any)?.success === false) {
+            error.value = (res.data as any)?.message || '强制下发失败'
+            set('error')
+            return
+          }
+        }
+        // 软归属警告（FE-18/BR-11）：force 放行仍附带，非阻断提示，流程照常。
         const warn = (res.data as any)?.data?.ownershipWarning
         if (warn?.message) {
           ElMessage.warning(`${warn.message}（${(warn.intents || []).join('、')}）`)

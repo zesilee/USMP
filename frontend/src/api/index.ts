@@ -50,16 +50,21 @@ export const getConfig = (ip: string, path: string, forceRefresh = false) => {
   })
 }
 
-export const setConfig = (ip: string, path: string, data: any) => {
+export const setConfig = (ip: string, path: string, data: any, force = false) => {
   const cleanPath = path.startsWith('/') ? path.slice(1) : path
-  return api.post<ApiResponse<void>>(`/config/${ip}/${cleanPath}`, data)
+  // force=true 覆盖业务意图归属硬锁（BR-11 二期，后端审计留痕）；缺省不带参数。
+  return api.post<ApiResponse<void>>(`/config/${ip}/${cleanPath}`, data, {
+    params: force ? { force: true } : undefined,
+  })
 }
 
 // 行删除（FE-16，命令语义）：key 为条目主键（vlan→id、interface→name），经 query 承载
 // （接口名含斜杠，axios params 自动 URL 编码）。
-export const deleteConfig = (ip: string, path: string, key: string | number) => {
+export const deleteConfig = (ip: string, path: string, key: string | number, force = false) => {
   const cleanPath = path.startsWith('/') ? path.slice(1) : path
-  return api.delete<ApiResponse<any>>(`/config/${ip}/${cleanPath}`, { params: { key } })
+  return api.delete<ApiResponse<any>>(`/config/${ip}/${cleanPath}`, {
+    params: force ? { key, force: true } : { key },
+  })
 }
 
 // Schema API - 获取 YANG 模型定义

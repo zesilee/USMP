@@ -1,12 +1,12 @@
 ---
 id: ownership-hard-lock
 title: 归属硬锁二期——config-api 命中业务意图认领路径时 409 拒绝手改
-status: pending
+status: in_progress
 priority: low
-branch: (未开始)
-worktree: (未创建)
-change: (启动时 /opsx:propose 立项，范围小可跳 explore)
-updated: 2026-07-16
+branch: worktree-ownership-hard-lock
+worktree: .claude/worktrees/ownership-hard-lock
+change: ownership-hard-lock
+updated: 2026-07-17
 origin: business-network-config 收官 follow-up（BIO-07 软归属一期拍板：硬锁留二期）
 ---
 

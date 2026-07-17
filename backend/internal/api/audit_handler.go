@@ -31,6 +31,9 @@ type LogEntry struct {
 	Actor     string    `json:"actor"`
 	Outcome   string    `json:"outcome"`    // 当前对账结局（live-join；无记录为 unknown）
 	DiffCount int       `json:"diff_count"` // 当前差异数（live-join）
+	// Forced/ForcedOwners：force 覆盖归属硬锁留痕（OA-01 二期，零值省略）。
+	Forced       bool     `json:"forced,omitempty"`
+	ForcedOwners []string `json:"forcedOwners,omitempty"`
 }
 
 // AuditListData 是 GET /logs 的 data 负载。Total 为筛选后总数（分页前）。
@@ -81,15 +84,17 @@ func (h *AuditHandler) ListLogs(c *gin.Context) {
 			continue
 		}
 		entries = append(entries, LogEntry{
-			ID:        r.ID,
-			Timestamp: r.Timestamp,
-			DeviceIP:  r.DeviceIP,
-			Path:      r.Path,
-			Summary:   r.Summary,
-			Triggered: r.Triggered,
-			Actor:     r.Actor,
-			Outcome:   outcome,
-			DiffCount: diffCount,
+			ID:           r.ID,
+			Timestamp:    r.Timestamp,
+			DeviceIP:     r.DeviceIP,
+			Path:         r.Path,
+			Summary:      r.Summary,
+			Triggered:    r.Triggered,
+			Actor:        r.Actor,
+			Outcome:      outcome,
+			DiffCount:    diffCount,
+			Forced:       r.Forced,
+			ForcedOwners: r.ForcedOwners,
 		})
 	}
 

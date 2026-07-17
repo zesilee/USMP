@@ -284,3 +284,74 @@ describe('ModuleListTab · 行删除（FE-16）', () => {
     confirmSpy.mockRestore()
   })
 })
+
+// FE-18 二期（F2）：行删除命中归属硬锁 409 → 阻断确认 → force 重发 / 取消中止。
+describe('ModuleListTab · 行删除归属硬锁 409', () => {
+  const rejected409 = {
+    data: { code: 409, success: false, message: '条目由业务意图管理', data: { intents: ['default/biz-100'] } },
+  } as any
+
+  it('409 → 确认覆盖 → 携 force 重发 DELETE', async () => {
+    const w = mountTab()
+    await flushPromises()
+    const delBtn = w.findAll('.el-table__body .el-button').find((b) => b.text() === '删除')!
+    // 两次确认框都点确认（删除确认 + 归属覆盖确认）
+    const confirmSpy = vi.spyOn(ElMessageBox, 'confirm').mockResolvedValue('confirm' as any)
+    vi.mocked(deleteConfig)
+      .mockResolvedValueOnce(rejected409)
+      .mockResolvedValueOnce({ data: { code: 0, success: true, data: {} } } as any)
+
+    await delBtn.trigger('click')
+    await flushPromises()
+
+    expect(vi.mocked(deleteConfig)).toHaveBeenCalledTimes(2)
+    expect(vi.mocked(deleteConfig).mock.calls[1][3]).toBe(true)
+    // 归属确认框文案含认领意图
+    const ownershipCall = confirmSpy.mock.calls.find((c) => String(c[0]).includes('default/biz-100'))
+    expect(ownershipCall).toBeTruthy()
+    expect(w.text()).not.toContain('条目由业务意图管理')
+    confirmSpy.mockRestore()
+  })
+
+  it('409 → 取消覆盖 → 不重发、不置错误态', async () => {
+    const w = mountTab()
+    await flushPromises()
+    const delBtn = w.findAll('.el-table__body .el-button').find((b) => b.text() === '删除')!
+    // 第一次（删除确认）通过，第二次（归属覆盖）取消
+    const confirmSpy = vi
+      .spyOn(ElMessageBox, 'confirm')
+      .mockResolvedValueOnce('confirm' as any)
+      .mockRejectedValueOnce('cancel')
+    vi.mocked(deleteConfig).mockResolvedValue(rejected409)
+
+    await delBtn.trigger('click')
+    await flushPromises()
+
+    expect(vi.mocked(deleteConfig)).toHaveBeenCalledTimes(1)
+    expect(w.find('.el-alert').exists()).toBe(false)
+    confirmSpy.mockRestore()
+  })
+})
+
+// force 重发失败（信封 success=false）→ 错误如实展示，不误报「已删除」（§9）。
+describe('ModuleListTab · force 重发失败如实透出', () => {
+  it('409 → 确认 → force DELETE 返回失败信封 → 展示错误', async () => {
+    const w = mountTab()
+    await flushPromises()
+    const delBtn = w.findAll('.el-table__body .el-button').find((b) => b.text() === '删除')!
+    const confirmSpy = vi.spyOn(ElMessageBox, 'confirm').mockResolvedValue('confirm' as any)
+    vi.mocked(deleteConfig)
+      .mockResolvedValueOnce({
+        data: { code: 409, success: false, message: '条目由业务意图管理', data: { intents: ['default/biz-100'] } },
+      } as any)
+      .mockResolvedValueOnce({ data: { code: 502, success: false, message: '设备删除失败: data-missing' } } as any)
+
+    await delBtn.trigger('click')
+    await flushPromises()
+
+    expect(vi.mocked(deleteConfig)).toHaveBeenCalledTimes(2)
+    expect(w.text()).toContain('设备删除失败')
+    expect(w.text()).not.toContain('已删除并触发对账')
+    confirmSpy.mockRestore()
+  })
+})

@@ -26,6 +26,10 @@ type Record struct {
 	Summary   string    `json:"summary"`   // 提交内容摘要（如 list keys）
 	Triggered bool      `json:"triggered"` // 是否有 controller 接管对账
 	Actor     string    `json:"actor"`     // 无鉴权来源，默认 "system"
+	// Forced/ForcedOwners：force 覆盖归属硬锁的留痕（OA-01 二期）——谁在哪条
+	// 认领路径上显式覆盖了哪些意图的认领。缺省零值=普通下发。
+	Forced       bool     `json:"forced,omitempty"`
+	ForcedOwners []string `json:"forcedOwners,omitempty"`
 }
 
 // Recorder is the write side (SetConfig records after a successful push).

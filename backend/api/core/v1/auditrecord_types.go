@@ -27,6 +27,12 @@ type AuditRecordSpec struct {
 
 	// Actor 是操作来源（无鉴权后端默认 system）。
 	Actor string `json:"actor,omitempty"`
+
+	// Forced 表示该下发经 force 覆盖了业务意图的归属硬锁（OA-01 二期）。
+	Forced bool `json:"forced,omitempty"`
+
+	// ForcedOwners 是被覆盖认领的意图 CR 名单（namespace/name）。
+	ForcedOwners []string `json:"forcedOwners,omitempty"`
 }
 
 // +kubebuilder:object:root=true
@@ -87,6 +93,10 @@ func (in *AuditRecord) DeepCopyObject() runtime.Object {
 func (in *AuditRecordSpec) DeepCopyInto(out *AuditRecordSpec) {
 	*out = *in
 	in.Timestamp.DeepCopyInto(&out.Timestamp)
+	if in.ForcedOwners != nil {
+		out.ForcedOwners = make([]string, len(in.ForcedOwners))
+		copy(out.ForcedOwners, in.ForcedOwners)
+	}
 }
 
 // DeepCopy creates a new AuditRecordSpec deep copy.

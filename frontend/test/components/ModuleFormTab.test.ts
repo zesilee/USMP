@@ -250,3 +250,49 @@ describe('ModuleFormTab · readonly 叶 must 不入门禁（FE-14 回归）', ()
     expect(vm.form.submittable.value).toBe(true)
   })
 })
+
+// FE-18 二期（F2）：表单下发命中归属硬锁 409 → 阻断确认 → force 重发 / 取消中止。
+describe('ModuleFormTab · 归属硬锁 409 阻断确认', () => {
+  const rejected409 = {
+    data: { code: 409, success: false, message: '路径由业务意图管理', data: { intents: ['default/biz-100'] } },
+  } as any
+
+  it('409 → 确认 → 携 force 重发，成功展示 force 分支警告', async () => {
+    const { ElMessageBox } = await import('element-plus')
+    const confirmSpy = vi.spyOn(ElMessageBox, 'confirm').mockResolvedValue('confirm' as any)
+    vi.mocked(setConfig)
+      .mockResolvedValueOnce(rejected409)
+      .mockResolvedValueOnce({
+        data: { code: 0, success: true, data: { ownershipWarning: { intents: ['default/biz-100'], message: '会覆盖' } } },
+      } as any)
+    const w = mountTab()
+    await flushPromises()
+    const vm = w.vm as any
+    vm.form.formData['statistic-interval'] = 300
+    await flushPromises()
+    await vm.submit()
+    await flushPromises()
+
+    expect(confirmSpy).toHaveBeenCalled()
+    expect(String(confirmSpy.mock.calls[0][0])).toContain('default/biz-100')
+    expect(vi.mocked(setConfig).mock.calls.length).toBe(2)
+    expect(vi.mocked(setConfig).mock.calls[1][3]).toBe(true)
+    expect(w.text()).not.toContain('路径由业务意图管理')
+  })
+
+  it('409 → 取消 → 中止：不重发、不置错误态', async () => {
+    const { ElMessageBox } = await import('element-plus')
+    vi.spyOn(ElMessageBox, 'confirm').mockRejectedValue('cancel')
+    vi.mocked(setConfig).mockResolvedValue(rejected409)
+    const w = mountTab()
+    await flushPromises()
+    const vm = w.vm as any
+    vm.form.formData['statistic-interval'] = 300
+    await flushPromises()
+    await vm.submit()
+    await flushPromises()
+
+    expect(vi.mocked(setConfig).mock.calls.length).toBe(1)
+    expect(w.find('.el-alert').exists()).toBe(false)
+  })
+})
