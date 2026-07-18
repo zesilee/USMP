@@ -1,6 +1,10 @@
 package main
 
-import "testing"
+import (
+	"os"
+	"strings"
+	"testing"
+)
 
 // collectBlacklistedRoots：revision 匹配的模块产出其顶层数据容器名；revision
 // 不匹配与文件缺失的条目跳过；RPC 不是数据容器（CN-03）。
@@ -21,5 +25,21 @@ func TestCollectBlacklistedRootsNegative(t *testing.T) {
 	}
 	if _, err := collectBlacklistedRoots("testdata/demo-bad.yang", "testdata"); err == nil {
 		t.Error("malformed xml should error")
+	}
+}
+
+// emit：生成物可编译格式、含条目、写盘成功（CN-03 生成器内核）。
+func TestEmit(t *testing.T) {
+	out := t.TempDir() + "/bl.gen.go"
+	emit([]string{"system", "xpl"}, "yangschema", out)
+	b, err := os.ReadFile(out)
+	if err != nil {
+		t.Fatalf("read: %v", err)
+	}
+	s := string(b)
+	for _, want := range []string{"package yangschema", `"system":`, `"xpl":`, "DO NOT EDIT"} {
+		if !strings.Contains(s, want) {
+			t.Errorf("emit 缺 %q", want)
+		}
 	}
 }
