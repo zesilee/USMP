@@ -2,9 +2,9 @@
   <div class="module-list-tab">
     <!-- 工具栏：新增 + 高级搜索折叠开关（FE-11）；只读 Tab 无编辑入口（FE-14） -->
     <div class="toolbar">
-      <el-button v-if="!tab.readonly" type="primary" :icon="Plus" :disabled="!device" @click="openAdd">新增</el-button>
+      <el-button v-if="!tab.readonly" type="primary" :icon="Plus" :disabled="!device" @click="openAdd">{{ t('common.add') }}</el-button>
       <el-button v-if="searchFields.length" link type="primary" class="adv-toggle" @click="searchOpen = !searchOpen">
-        高级搜索
+        {{ t('console.advancedSearch') }}
         <el-icon><ArrowUp v-if="searchOpen" /><ArrowDown v-else /></el-icon>
       </el-button>
     </div>
@@ -18,16 +18,16 @@
               v-if="f.type === 'enum'"
               v-model="draft[keyOf(f)]"
               clearable
-              :placeholder="`选择${f.label}`"
+              :placeholder="t('console.selectPlaceholder', { label: f.label })"
               class="search-ctl"
             >
               <el-option v-for="o in f.options" :key="String(o.value)" :label="o.label" :value="o.value" />
             </el-select>
-            <el-input v-else v-model="draft[keyOf(f)]" clearable :placeholder="`输入${f.label}`" class="search-ctl" />
+            <el-input v-else v-model="draft[keyOf(f)]" clearable :placeholder="t('console.inputPlaceholder', { label: f.label })" class="search-ctl" />
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" @click="applySearch">查询</el-button>
-            <el-button @click="resetSearch">重置</el-button>
+            <el-button type="primary" @click="applySearch">{{ t('common.apply') }}</el-button>
+            <el-button @click="resetSearch">{{ t('common.reset') }}</el-button>
           </el-form-item>
         </el-form>
       </div>
@@ -59,20 +59,20 @@
           <span v-else>{{ rowVal(row, col) }}</span>
         </template>
       </el-table-column>
-      <el-table-column v-if="!tab.readonly && (canUpdate || canDelete)" label="操作" width="130" fixed="right">
+      <el-table-column v-if="!tab.readonly && (canUpdate || canDelete)" :label="t('common.actions')" width="130" fixed="right">
         <template #default="{ row }">
-          <el-button v-if="canUpdate" type="primary" size="small" link @click="openEdit(row)">编辑</el-button>
+          <el-button v-if="canUpdate" type="primary" size="small" link @click="openEdit(row)">{{ t('common.edit') }}</el-button>
           <el-button
             v-if="canDelete"
             type="danger"
             size="small"
             link
             @click="onDelete(row)"
-          >删除</el-button>
+          >{{ t('common.delete') }}</el-button>
         </template>
       </el-table-column>
       <template #empty>
-        <span>{{ device ? '暂无配置（点击新增）' : '请先选择设备' }}</span>
+        <span>{{ device ? t('console.emptyNoConfig') : t('console.emptySelectDevice') }}</span>
       </template>
     </el-table>
 
@@ -90,7 +90,7 @@
 
     <!-- 新增/编辑抽屉：模型驱动表单 + 差异预览 + 对账进度（复用既有编排）；
          只读 Tab（state 子树）无编辑语义，整个抽屉不渲染（FE-14）。 -->
-    <el-drawer v-if="!tab.readonly" v-model="drawerVisible" :title="editing ? '编辑' : '新增'" size="560px"
+    <el-drawer v-if="!tab.readonly" v-model="drawerVisible" :title="editing ? t('common.edit') : t('common.add')" size="560px"
       :close-on-click-modal="!flowActive" :close-on-press-escape="!flowActive" @closed="onDrawerClosed">
       <template v-if="!flowActive">
         <el-form ref="formRef" :model="form.formData" :rules="form.rules.value" label-position="top" class="config-form">
@@ -104,17 +104,17 @@
           </el-form-item>
         </el-form>
         <DiffPreview :diff="form.diff.value" />
-        <div class="form-tip">字段与约束由 YANG 模型生成，校验通过才会下发，下发即触发对账。</div>
+        <div class="form-tip">{{ t('console.formTip') }}</div>
       </template>
       <ReconcileSteps v-else :progress="submitFlow.progress.value" :timed-out="submitFlow.timedOut.value" />
 
       <template #footer>
         <template v-if="!flowActive">
-          <el-button @click="drawerVisible = false">取消</el-button>
-          <el-button type="primary" :disabled="!form.submittable.value" @click="submit">下发并对账</el-button>
+          <el-button @click="drawerVisible = false">{{ t('common.cancel') }}</el-button>
+          <el-button type="primary" :disabled="!form.submittable.value" @click="submit">{{ t('console.pushAndReconcile') }}</el-button>
         </template>
         <el-button v-else type="primary" :disabled="!flowDone" @click="drawerVisible = false">
-          {{ flowDone ? '关闭' : '对账中…' }}
+          {{ flowDone ? t('common.close') : t('console.reconciling') }}
         </el-button>
       </template>
     </el-drawer>
@@ -123,6 +123,7 @@
 
 <script setup lang="ts">
 import { ref, reactive, computed, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { Plus, ArrowDown, ArrowUp } from '@element-plus/icons-vue'
 import { ElMessage, ElMessageBox, type FormInstance } from 'element-plus'
 import { getConfig, deleteConfig } from '../../api'
@@ -151,6 +152,8 @@ const props = defineProps<{
   rootName: string
   device: string
 }>()
+
+const { t } = useI18n()
 
 const listField = computed<Field>(() => props.tab.listField || props.tab.field)
 const configPath = computed(() => configPathFor(props.rootName, props.tab.field.path))
@@ -232,7 +235,7 @@ async function load() {
     items.value = rows
     postKey.value = key
   } catch (e: any) {
-    error.value = e?.response?.data?.message || e?.message || '读取失败'
+    error.value = e?.response?.data?.message || e?.message || t('console.readFailed')
     items.value = []
   } finally {
     loading.value = false
@@ -319,9 +322,9 @@ async function onDelete(row: Record<string, any>) {
   const key = row[keyField.value]
   try {
     await ElMessageBox.confirm(
-      `将从设备删除 ${keyField.value} = ${key} 的条目，该操作不可撤销。`,
-      '确认删除',
-      { type: 'warning', confirmButtonText: '删除', cancelButtonText: '取消' },
+      t('console.deleteConfirm', { key: keyField.value, value: key }),
+      t('common.confirmDelete'),
+      { type: 'warning', confirmButtonText: t('common.delete'), cancelButtonText: t('common.cancel') },
     )
   } catch {
     return // 用户取消：零请求
@@ -335,16 +338,16 @@ async function onDelete(row: Record<string, any>) {
       const forced = await deleteConfig(props.device, configPath.value, key, true)
       // 信封恒 200：force 重发失败按 success 判定，如实透出（§9）。
       if ((forced.data as any)?.success === false) {
-        error.value = (forced.data as any)?.message || '强制删除失败'
+        error.value = (forced.data as any)?.message || t('console.forceDeleteFailed')
         return
       }
     }
-    ElMessage.success('已删除并触发对账')
+    ElMessage.success(t('console.deletedReconcile'))
     error.value = ''
     await load()
   } catch (e: any) {
     // 设备/门禁错误如实展示，列表保持原状（R08/§9）。
-    error.value = e?.response?.data?.message || e?.message || '删除失败'
+    error.value = e?.response?.data?.message || e?.message || t('console.deleteFailed')
   }
 }
 </script>

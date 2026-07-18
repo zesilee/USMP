@@ -1,24 +1,24 @@
 <template>
   <div class="status-chart-card">
     <div class="card-header">
-      <h3>设备状态分布</h3>
+      <h3>{{ t('dashboard.statusDist') }}</h3>
     </div>
     <div class="chart-content">
       <div ref="chartRef" class="status-chart-container"></div>
       <div class="legend-area">
         <div class="legend-item">
           <span class="legend-dot online"></span>
-          <span class="legend-label">在线</span>
+          <span class="legend-label">{{ t('common.online') }}</span>
           <span class="legend-value">{{ online }}</span>
         </div>
         <div class="legend-item">
           <span class="legend-dot offline"></span>
-          <span class="legend-label">离线</span>
+          <span class="legend-label">{{ t('common.offline') }}</span>
           <span class="legend-value">{{ offline }}</span>
         </div>
         <div class="legend-item">
           <span class="legend-dot abnormal"></span>
-          <span class="legend-label">异常</span>
+          <span class="legend-label">{{ t('common.abnormal') }}</span>
           <span class="legend-value">{{ abnormal }}</span>
         </div>
       </div>
@@ -28,6 +28,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
 import * as echarts from 'echarts'
 
 interface Props {
@@ -37,6 +38,7 @@ interface Props {
 }
 
 const props = defineProps<Props>()
+const { t } = useI18n()
 
 const chartRef = ref<HTMLElement | null>(null)
 let chartInstance: echarts.ECharts | null = null
@@ -72,9 +74,9 @@ const updateChart = () => {
           }
         },
         data: [
-          { value: props.online, name: '在线', itemStyle: { color: '#67c23a' } },
-          { value: props.offline, name: '离线', itemStyle: { color: '#909399' } },
-          { value: props.abnormal, name: '异常', itemStyle: { color: '#f56c6c' } }
+          { value: props.online, name: t('common.online'), itemStyle: { color: '#67c23a' } },
+          { value: props.offline, name: t('common.offline'), itemStyle: { color: '#909399' } },
+          { value: props.abnormal, name: t('common.abnormal'), itemStyle: { color: '#f56c6c' } }
         ]
       }
     ]

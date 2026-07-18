@@ -1,7 +1,7 @@
 <template>
   <div class="diff-preview">
     <div class="preview-head">
-      下发预览 · <b>{{ diff.length }}</b> 项改动
+      {{ t('console.diff.headPre') }}<b>{{ diff.length }}</b>{{ t('console.diff.headPost') }}
     </div>
     <div v-if="diff.length" class="dva">
       <div v-for="d in diff" :key="d.key" class="dva-row">
@@ -9,7 +9,7 @@
         <div class="dv changed">
           <template v-if="d.isNew">
             <span class="now">{{ fmt(d.now) }}</span>
-            <span class="tag-new">新增</span>
+            <span class="tag-new">{{ t('console.diff.tagNew') }}</span>
           </template>
           <template v-else>
             <span class="was">{{ fmt(d.was) }}</span>
@@ -19,14 +19,17 @@
         </div>
       </div>
     </div>
-    <div v-else class="preview-empty">尚无改动 · 修改字段后在此预览下发差异</div>
+    <div v-else class="preview-empty">{{ t('console.diff.empty') }}</div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n'
 import type { DiffEntry } from '../../utils/configDiff'
 
 defineProps<{ diff: DiffEntry[] }>()
+
+const { t } = useI18n()
 
 // 空值显示占位；其余原样（数值/字符串）。
 const fmt = (v: any): string => (v === '' || v == null ? '—' : String(v))

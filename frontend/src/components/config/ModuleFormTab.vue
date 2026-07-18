@@ -12,22 +12,23 @@
           :model-value="form.formData[form.keyOf(field)]"
           @update:model-value="form.formData[form.keyOf(field)] = $event" />
       </el-form-item>
-      <div v-if="!form.visibleFields.value.length" class="empty-tip">该分组暂无可配置字段。</div>
+      <div v-if="!form.visibleFields.value.length" class="empty-tip">{{ t('console.emptyGroup') }}</div>
     </el-form>
 
     <!-- 整 Tab readonly（config false state 子树）：只读视图，无下发入口（FE-14） -->
     <div v-if="!tab.readonly" class="actions">
-      <el-button type="primary" :disabled="!device || !form.submittable.value" @click="submit">下发</el-button>
-      <span class="form-tip">字段与约束由 YANG 模型生成；presence 开关关闭即该节点不存在。</span>
+      <el-button type="primary" :disabled="!device || !form.submittable.value" @click="submit">{{ t('console.push') }}</el-button>
+      <span class="form-tip">{{ t('console.formTipPresence') }}</span>
     </div>
     <div v-else class="actions">
-      <span class="form-tip">该分组为设备状态数据（config false），仅供查看。</span>
+      <span class="form-tip">{{ t('console.readonlyTip') }}</span>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { ElMessage, type FormInstance } from 'element-plus'
 import { getConfig, setConfig } from '../../api'
 import { ownershipRejectionOf, confirmOwnershipOverride } from '../../composables/ownershipGate'
@@ -43,6 +44,8 @@ const props = defineProps<{
   rootName: string
   device: string
 }>()
+
+const { t } = useI18n()
 
 // 「基本属性」合成 Tab（path 为空）挂在模块根路径下。
 const configPath = computed(() =>
@@ -75,7 +78,7 @@ function presenceBlocked(f: Field): boolean {
 
 function presenceMustError(f: Field): string {
   if (!presenceBlocked(f)) return ''
-  return f.must?.[0]?.message || `${labelOf(f)} 的启用条件不满足`
+  return f.must?.[0]?.message || t('console.presenceCondNotMet', { label: labelOf(f) })
 }
 
 // must 变为不满足时强制关闭 presence（键删除 = 节点不存在）。
@@ -108,7 +111,7 @@ async function load() {
   } catch (e: any) {
     // 后端暂不支持该路径读时如实降级：空表单 + 告警（§9，不伪装成功）。
     form.resetForm()
-    error.value = e?.response?.data?.message || e?.message || '读取失败'
+    error.value = e?.response?.data?.message || e?.message || t('console.readFailed')
   }
 }
 
@@ -135,7 +138,7 @@ async function submit() {
       res = await setConfig(props.device, configPath.value, form.visiblePayload(), true)
       // 信封恒 200：force 重发失败按 success 判定，如实透出（§9）。
       if ((res.data as any)?.success === false) {
-        error.value = (res.data as any)?.message || '强制下发失败'
+        error.value = (res.data as any)?.message || t('console.forcePushFailed')
         return
       }
     }
@@ -144,12 +147,12 @@ async function submit() {
     if (warn?.message) {
       ElMessage.warning(`${warn.message}（${(warn.intents || []).join('、')}）`)
     } else {
-      ElMessage.success('已下发')
+      ElMessage.success(t('console.pushed'))
     }
     await load()
   } catch (e: any) {
     // 后端不支持写入的路径（如尚无转换器）原样透出错误（§9）。
-    error.value = e?.response?.data?.message || e?.message || '下发失败'
+    error.value = e?.response?.data?.message || e?.message || t('console.pushFailed')
   }
 }
 </script>

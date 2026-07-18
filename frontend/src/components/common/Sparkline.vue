@@ -1,22 +1,25 @@
 <template>
-  <svg v-if="geom" class="spark" :viewBox="`0 0 ${W} ${H}`" role="img" :aria-label="ariaLabel">
+  <svg v-if="geom" class="spark" :viewBox="`0 0 ${W} ${H}`" role="img" :aria-label="ariaText">
     <polygon class="fillarea" :points="geom.area" />
     <polyline :points="geom.line" />
   </svg>
-  <span v-else class="spark-empty" :title="emptyTitle">—</span>
+  <span v-else class="spark-empty" :title="emptyText">—</span>
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 
-const props = withDefaults(
-  defineProps<{
-    points: number[] | null | undefined
-    ariaLabel?: string
-    emptyTitle?: string
-  }>(),
-  { ariaLabel: '负载趋势', emptyTitle: '暂无负载遥测' },
-)
+const props = defineProps<{
+  points: number[] | null | undefined
+  ariaLabel?: string
+  emptyTitle?: string
+}>()
+
+const { t } = useI18n()
+
+const ariaText = computed(() => props.ariaLabel ?? t('devices.loadTrend'))
+const emptyText = computed(() => props.emptyTitle ?? t('devices.noLoadTelemetry'))
 
 const W = 80
 const H = 26

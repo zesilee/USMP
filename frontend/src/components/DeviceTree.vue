@@ -19,7 +19,7 @@
     </el-tree>
     <div class="device-actions">
       <el-button size="small" @click="refreshDevices" class="refresh-btn">
-        刷新设备
+        {{ t('devices.refreshDevices') }}
       </el-button>
     </div>
   </div>
@@ -27,8 +27,11 @@
 
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { listDevices } from '../api'
 import type { DeviceStatusDTO } from '../types/api'
+
+const { t } = useI18n()
 
 const props = {
   label: 'label',

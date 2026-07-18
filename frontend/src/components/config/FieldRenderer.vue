@@ -123,10 +123,10 @@
           :placeholder="field.placeholder"
           :disabled="field.readonly || disabled"
         />
-        <el-button type="danger" size="small" link :icon="Delete" @click="removeItem(idx)">删除</el-button>
+        <el-button type="danger" size="small" link :icon="Delete" @click="removeItem(idx)">{{ t('common.delete') }}</el-button>
       </div>
       <el-button type="primary" size="small" plain :icon="Plus" @click="addItem">
-        添加{{ field.label }}
+        {{ t('console.addItem', { label: field.label }) }}
       </el-button>
     </div>
 
@@ -184,10 +184,10 @@
           link
           :icon="Delete"
           @click="removeRow(idx)"
-        >删除</el-button>
+        >{{ t('common.delete') }}</el-button>
       </div>
       <el-button type="primary" size="small" plain :icon="Plus" @click="addRow">
-        添加{{ field.label }}
+        {{ t('console.addItem', { label: field.label }) }}
       </el-button>
     </div>
   </div>
@@ -195,8 +195,11 @@
 
 <script setup lang="ts">
 import { computed, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { Plus, Delete } from '@element-plus/icons-vue'
 import type { Field } from '../../utils/crdSchemaParser'
+
+const { t } = useI18n()
 
 const props = defineProps<{
   field: Field
@@ -281,7 +284,7 @@ const segmentedOptions = computed(() =>
 
 // dynamicDefault（FE-15）：空值=系统自动分配，占位提示之；显式 placeholder 优先。
 const placeholderOf = computed<string | undefined>(() =>
-  props.field.placeholder || (props.field.dynamicDefault ? '系统自动分配（可覆写）' : undefined),
+  props.field.placeholder || (props.field.dynamicDefault ? t('console.autoAssigned') : undefined),
 )
 
 // 数据以 YANG 叶子名（path 末段）为键，对齐后端转换（非 full path）。

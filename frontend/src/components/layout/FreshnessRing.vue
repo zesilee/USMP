@@ -18,7 +18,7 @@
       />
     </svg>
     <div class="fresh-txt">
-      缓存新鲜度
+      {{ t('header.freshness.label') }}
       <b v-if="hasData" class="mono">{{ remainingLabel }}</b>
       <b v-else class="mono">—</b>
     </div>
@@ -27,11 +27,14 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 import {
   RING_RADIUS,
   RING_CIRCUMFERENCE,
   computeFreshness,
 } from '../../composables/useFreshness'
+
+const { t } = useI18n()
 
 // 顶栏「缓存新鲜度环」——纯展示组件，全部输入经 props，便于确定性单测。
 // 数据来自 PR-B2 的 cache_age_seconds/ttl_seconds（真数据）；无缓存时显示空态「—」。
@@ -74,10 +77,17 @@ const remainingLabel = computed(
 )
 
 const ariaLabel = computed(() => {
-  if (!props.hasData) return '缓存新鲜度：暂无活跃缓存'
-  const src = props.source === 'cache' ? '（命中缓存）' : props.source === 'device' ? '（刚回源）' : ''
-  const tail = fresh.value.expired ? '，已过期将自动重拉' : `，距过期 ${fresh.value.remainingSeconds} 秒`
-  return `缓存新鲜度${src}：TTL ${props.ttlSeconds} 秒${tail}。此为配置缓存年龄，非设备在线状态`
+  if (!props.hasData) return t('header.freshness.ariaNoData')
+  const src =
+    props.source === 'cache'
+      ? t('header.freshness.srcCache')
+      : props.source === 'device'
+        ? t('header.freshness.srcDevice')
+        : ''
+  const tail = fresh.value.expired
+    ? t('header.freshness.tailExpired')
+    : t('header.freshness.tailRemaining', { seconds: fresh.value.remainingSeconds })
+  return t('header.freshness.aria', { src, ttl: props.ttlSeconds, tail })
 })
 </script>
 

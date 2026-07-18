@@ -3,13 +3,13 @@
     <div class="conv-top">
       <div class="conv-lead">
         <div class="conv-pct mono">{{ overview.convergenceRate }}<small>%</small></div>
-        <div class="conv-cap">车队<b>收敛率</b><br />期望态与实际态一致的设备占比</div>
+        <div class="conv-cap">{{ t('dashboard.hero.fleetPrefix') }}<b>{{ t('dashboard.hero.rateWord') }}</b><br />{{ t('dashboard.hero.rateDesc') }}</div>
       </div>
       <ReconcileChip v-if="overview.pendingCount > 0" state="recon" />
       <ReconcileChip v-else-if="overview.total > 0" state="conv" />
     </div>
 
-    <div class="segbar" title="按收敛状态分段">
+    <div class="segbar" :title="t('dashboard.hero.segbarTitle')">
       <span
         v-for="seg in visibleSegments"
         :key="seg.key"
@@ -26,15 +26,18 @@
       </div>
     </div>
     <div v-if="overview.unknownCount > 0" class="legend-foot">
-      另有 <b class="mono">{{ overview.unknownCount }}</b> 台在线设备未对账（尚无 desired 态）
+      {{ t('dashboard.hero.unknownPre') }}<b class="mono">{{ overview.unknownCount }}</b>{{ t('dashboard.hero.unknownPost') }}
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 import type { Overview } from '../../composables/useFleetOverview'
 import ReconcileChip from './ReconcileChip.vue'
+
+const { t } = useI18n()
 
 // 车队收敛率 hero：大号收敛率 + 分段条 + 四态图例。纯展示，全部输入经 overview prop。
 const props = defineProps<{
