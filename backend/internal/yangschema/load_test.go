@@ -7,18 +7,38 @@ import (
 )
 
 // TestLoadHasVendorModules verifies Load builds a non-empty schema tree with the
-// expected huawei and openconfig modules (fixes D4: schema tree no longer empty).
+// expected huawei modules (BR-11: huawei + usmp business only).
 func TestLoadHasVendorModules(t *testing.T) {
 	s, err := Load()
 	if err != nil {
 		t.Fatalf("Load: %v", err)
 	}
 	if len(s.Modules()) == 0 {
-		t.Fatal("schema tree is empty; expected huawei+openconfig modules")
+		t.Fatal("schema tree is empty; expected huawei+business modules")
 	}
-	for _, name := range []string{"ifm", "system", "vlan", "interfaces", "vlans"} {
+	for _, name := range []string{"ifm", "system", "vlan"} {
 		if _, ok := s.Module(name); !ok {
 			t.Errorf("expected module %q to be loaded", name)
+		}
+	}
+}
+
+// TestLoadVendorBoundary asserts BR-11: the runtime schema tree carries only
+// huawei vendor models and the usmp business intent model — openconfig/ietf
+// models must not be loaded.
+func TestLoadVendorBoundary(t *testing.T) {
+	s, err := Load()
+	if err != nil {
+		t.Fatalf("Load: %v", err)
+	}
+	for _, m := range s.Modules() {
+		if v := m.Vendor(); v != "huawei" && v != "usmp" {
+			t.Errorf("module %q vendor = %q, want huawei or usmp (BR-11)", m.Name(), v)
+		}
+	}
+	for _, name := range []string{"interfaces", "vlans"} {
+		if _, ok := s.Module(name); ok {
+			t.Errorf("openconfig root container %q must not be loaded (BR-11)", name)
 		}
 	}
 }

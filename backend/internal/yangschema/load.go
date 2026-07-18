@@ -1,5 +1,5 @@
 // Package yangschema builds the framework YANG schema tree from the generated
-// ygot models (huawei + openconfig + usmp business intent). This is the offline
+// ygot models (huawei + usmp business intent; BR-11 厂商边界). This is the offline
 // fallback source for the hybrid schema resolution: device NETCONF capabilities
 // narrow the usable module set at runtime, while attribute-level schema comes
 // from these generated models (R04: schema derived from ygot-generated models,
@@ -11,12 +11,11 @@ import (
 
 	"github.com/leezesi/usmp/backend/internal/generated/business"
 	"github.com/leezesi/usmp/backend/internal/generated/huawei"
-	"github.com/leezesi/usmp/backend/internal/generated/openconfig"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/schema"
 )
 
-// Load builds a Schema containing the huawei, openconfig and usmp business
-// intent modules from their generated ygot schemas.
+// Load builds a Schema containing the huawei and usmp business intent modules
+// from their generated ygot schemas.
 func Load() (schema.Schema, error) {
 	ds := schema.NewSchema()
 
@@ -25,12 +24,6 @@ func Load() (schema.Schema, error) {
 		return nil, fmt.Errorf("load huawei schema: %w", err)
 	}
 	schema.AddYgotSchemaWithVendor(ds, hs, "huawei")
-
-	os, err := openconfig.Schema()
-	if err != nil {
-		return nil, fmt.Errorf("load openconfig schema: %w", err)
-	}
-	schema.AddYgotSchemaWithVendor(ds, os, "openconfig")
 
 	// 业务意图模型（business-network-config）：不注册 driver registry（不下设备），
 	// 但进 schema 树以驱动 /yang/modules、/yang/schema 与前端表单渲染（R05）。

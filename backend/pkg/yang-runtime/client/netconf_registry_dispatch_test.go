@@ -6,7 +6,6 @@ import (
 
 	_ "github.com/leezesi/usmp/backend/internal/drivers" // 注册 huawei 描述符：使本测试二进制真实走注册表分发（XC-04）
 	"github.com/leezesi/usmp/backend/internal/generated/huawei"
-	"github.com/leezesi/usmp/backend/internal/generated/openconfig"
 	"github.com/leezesi/usmp/backend/internal/testutil/hwfix"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/xmlcodec"
 )
@@ -79,21 +78,22 @@ func TestMarshalDeleteChangeUnknownModelViaRegistry(t *testing.T) {
 	}
 }
 
-// TestMarshalChangeFallbackUnregistered：未注册类型不受注册表影响，仍走既有
-// fallback 链（XC-04 场景「未注册类型降级」——此处 openconfig 遗留分支）。
+// unregisteredLeaf 是无描述符覆盖的伪类型，专测注册表未命中降级链。
+type unregisteredLeaf struct {
+	XMLName struct{} `xml:"unregistered-leaf"`
+	Value   string   `xml:"value"`
+}
+
+// TestMarshalChangeFallbackUnregistered：未注册类型不受注册表影响，直接走
+// 通用 xml.Marshal 兜底，不报「未注册」硬错误（XC-04 场景「未注册类型降级」）。
 func TestMarshalChangeFallbackUnregistered(t *testing.T) {
 	c := &NETCONFClient{}
-	name := "eth0"
-	out, err := c.marshalChange(Change{Type: ModifyChange, Path: "/interfaces", NewValue: &openconfig.OpenconfigInterfaces_Interfaces{
-		Interface: map[string]*openconfig.OpenconfigInterfaces_Interfaces_Interface{
-			name: {Name: &name},
-		},
-	}})
+	out, err := c.marshalChange(Change{Type: ModifyChange, Path: "/unregistered", NewValue: &unregisteredLeaf{Value: "x"}})
 	if err != nil {
-		t.Fatalf("openconfig fallback broken: %v", err)
+		t.Fatalf("xml.Marshal fallback broken: %v", err)
 	}
-	if !strings.Contains(out, "openconfig.net/yang/interfaces") {
-		t.Errorf("openconfig legacy branch not taken: %s", out)
+	if !strings.Contains(out, "<unregistered-leaf>") || !strings.Contains(out, "<value>x</value>") {
+		t.Errorf("xml.Marshal fallback output unexpected: %s", out)
 	}
 }
 
