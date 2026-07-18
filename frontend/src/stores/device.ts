@@ -8,6 +8,7 @@ export interface Device {
   name: string
   vendor: string
   model: string
+  role: string
   status: 'online' | 'offline' | 'unknown'
   lastSync: string
 }
@@ -24,6 +25,7 @@ function normalizeDevice(d: any): Device {
     name: d.name || d.ip,
     vendor: d.vendor || '',
     model: d.model || '',
+    role: d.role || '',
     status: online ? 'online' : 'offline',
     lastSync: d.lastSync || '',
   }

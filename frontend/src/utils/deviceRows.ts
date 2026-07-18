@@ -9,6 +9,7 @@ export interface DeviceRow {
   vendor: string
   model: string
   vendorModel: string // 「厂商 · 型号」合并展示
+  role: string // 网络角色标签（DCGW/EOR 等，BR-14；空=未设置）
   online: boolean
   session: 'connected' | 'disconnected'
   reconcileState: DisplayState // 复用 ReconcileChip 六态（离线优先）
@@ -39,6 +40,7 @@ export function deriveDeviceRows(devices: Device[], fleet: FleetInput): DeviceRo
       vendor: d.vendor,
       model: d.model,
       vendorModel: [d.vendor, d.model].filter(Boolean).join(' · '),
+      role: d.role || '',
       online,
       session: online ? 'connected' : 'disconnected',
       reconcileState,

@@ -4,13 +4,13 @@ import type { Device } from '../../src/stores/device'
 
 const dev = (over: Partial<Device>): Device => ({
   id: over.ip ?? '0', ip: over.ip ?? '0', name: over.name ?? '', vendor: over.vendor ?? '',
-  model: over.model ?? '', status: over.status ?? 'online', lastSync: over.lastSync ?? '',
+  model: over.model ?? '', role: over.role ?? '', status: over.status ?? 'online', lastSync: over.lastSync ?? '',
   ...over,
 })
 
 describe('deriveDeviceRows · 设备表 + 对账聚合 join', () => {
   const devices: Device[] = [
-    dev({ ip: '10.0.0.1', name: 'Core-01', vendor: 'Huawei', model: 'CE6881', status: 'online' }),
+    dev({ ip: '10.0.0.1', name: 'Core-01', vendor: 'Huawei', model: 'CE6881', role: 'DCGW', status: 'online' }),
     dev({ ip: '10.0.2.13', name: 'Acc-03', vendor: 'H3C', model: 'S6520', status: 'online' }),
     dev({ ip: '10.0.2.21', name: 'Acc-11', vendor: 'Cisco', model: 'C9300', status: 'offline' }),
   ]
@@ -20,6 +20,12 @@ describe('deriveDeviceRows · 设备表 + 对账聚合 join', () => {
       { device_id: '10.0.2.13', outcome: 'drifted', last_run: '2026-07-06T09:00:00Z' },
     ],
   }
+
+  it('role 标签透传：有值原样、缺省空串（BR-14 展示）', () => {
+    const rows = deriveDeviceRows(devices, fleet)
+    expect(rows.find((r) => r.ip === '10.0.0.1')!.role).toBe('DCGW')
+    expect(rows.find((r) => r.ip === '10.0.2.13')!.role).toBe('')
+  })
 
   it('在线设备映射对账结局，离线设备恒为 off', () => {
     const rows = deriveDeviceRows(devices, fleet)

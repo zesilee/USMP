@@ -106,6 +106,9 @@ type DeviceConnectionInfo struct {
 	// Vendor identifies the device vendor for driver selection (SND registry).
 	// Empty means unspecified — consumers default to "huawei" (R08 降级).
 	Vendor string
+	// Role is the device's network role label (e.g. DCGW/EOR/TOR/BORDER).
+	// Display/policy tag only — never参与 module negotiation/裁剪 (BR-14).
+	Role string
 }
 
 // Client is the unified interface for device configuration clients

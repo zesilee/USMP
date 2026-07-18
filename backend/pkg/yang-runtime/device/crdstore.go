@@ -146,6 +146,7 @@ func (s *crdStore) resolveInfo(dev *usmpv1.Device) client.DeviceConnectionInfo {
 		Protocol: client.Protocol(dev.Spec.Protocol),
 		Timeout:  time.Duration(dev.Spec.TimeoutSeconds) * time.Second,
 		Vendor:   dev.Spec.Vendor,
+		Role:     dev.Spec.Role,
 	}
 	ref := dev.Spec.CredentialsSecretRef
 	if ref == nil {
@@ -218,6 +219,7 @@ func (s *crdStore) Put(id string, info client.DeviceConnectionInfo) error {
 			Protocol:             string(info.Protocol),
 			TimeoutSeconds:       int(info.Timeout / time.Second),
 			Vendor:               info.Vendor,
+			Role:                 info.Role,
 			CredentialsSecretRef: &usmpv1.LocalSecretRef{Name: secName},
 		},
 	}

@@ -24,6 +24,12 @@ type DeviceSpec struct {
 	// Vendor 是厂商标识（缺省语义 huawei，DS-01 零值缺省在消费方）。
 	Vendor string `json:"vendor,omitempty"`
 
+	// Role 是设备网络角色标签（如 DCGW/EOR/TOR/BORDER；自由标签，仅展示与
+	// 策略用途，不参与模块协商/裁剪，BR-14）。
+	// +kubebuilder:validation:MaxLength=32
+	// +kubebuilder:validation:Pattern=`^[A-Za-z0-9_-]*$`
+	Role string `json:"role,omitempty"`
+
 	// CredentialsSecretRef 指向同 namespace 的凭据 Secret（key: username/password）。
 	// 缺失/悬空引用时 Get 降级空凭据（DS-04，R08 clean fail）。
 	CredentialsSecretRef *LocalSecretRef `json:"credentialsSecretRef,omitempty"`

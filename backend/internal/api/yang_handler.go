@@ -2,10 +2,13 @@ package api
 
 import (
 	"strconv"
+	"time"
 
 	"github.com/gin-gonic/gin"
 	"github.com/leezesi/usmp/backend/internal/yangschema"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/client"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/manager"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/schema"
 )
 
 // YangModuleInfo represents information about a YANG module
@@ -19,6 +22,8 @@ type YangModuleInfo struct {
 	// Category 是模块所属任务域（源 YANG 模块级 task-name 扩展，构建期提取，BR-01）：
 	// 驱动前端左导航分组；无映射省略（omitempty，R08）。
 	Category string `json:"category,omitempty"`
+	// Blacklisted 标记该模块命中 SND blacklist（CN-03 注解语义，不据此裁剪）。
+	Blacklisted bool `json:"blacklisted,omitempty"`
 }
 
 // FieldDef represents a schema field definition for dynamic forms
@@ -135,11 +140,77 @@ func (h *YangHandler) ListModules(c *gin.Context) {
 			Description: root.Description(),
 			Type:        strconv.Itoa(int(root.Type())),
 			Category:    yangschema.Category(mod.Name()),
+			Blacklisted: yangschema.Blacklisted(mod.Name()),
 		}
 		modules = append(modules, info)
 	}
 
+	// CN-02/BR-12：可选 device 参数 → 按该设备 hello 能力协商子集。
+	if deviceID := c.Query("device"); deviceID != "" {
+		info, ok := h.manager.GetDeviceStore().Get(deviceID)
+		if !ok {
+			Error(c, 404, "device not registered: "+deviceID)
+			return
+		}
+		caps, negotiated := h.deviceCapabilities(info)
+		if negotiated {
+			modules = narrowModuleInfos(caps, modules, h.manager)
+		}
+		Success(c, NegotiatedModules{Modules: modules, Negotiated: negotiated},
+			"YANG modules retrieved successfully")
+		return
+	}
+
 	Success(c, modules, "YANG modules retrieved successfully")
+}
+
+// NegotiatedModules 是 ?device= 形态的负载（CN-02）：协商失败时降级全量并
+// 以 negotiated:false 诚实透出（R08）。
+type NegotiatedModules struct {
+	Modules    []YangModuleInfo `json:"modules"`
+	Negotiated bool             `json:"negotiated"`
+}
+
+// deviceCapabilities returns the device's NETCONF hello capabilities via the
+// shared ClientPool（连接即缓存：能力随连接生命周期，重连自动刷新，CN-01）。
+func (h *YangHandler) deviceCapabilities(info client.DeviceConnectionInfo) ([]string, bool) {
+	if info.Port == 0 {
+		info.Port = 830
+	}
+	if info.Timeout == 0 {
+		// 探测型建连：不可达设备不得拖死 API（对齐 probeOnline）。
+		info.Timeout = 3 * time.Second
+	}
+	cl, err := h.manager.GetClientPool().Get(info)
+	if err != nil || cl == nil {
+		return nil, false
+	}
+	cp, ok := cl.(interface{ ServerCapabilities() []string })
+	if !ok {
+		return nil, false
+	}
+	caps := cp.ServerCapabilities()
+	if len(caps) == 0 {
+		return nil, false
+	}
+	return caps, true
+}
+
+// narrowModuleInfos filters the module DTO list to the schema modules surviving
+// capability narrowing（复用 schema.NarrowModulesByCapabilities 的三重启发匹配）。
+func narrowModuleInfos(caps []string, modules []YangModuleInfo, m manager.Manager) []YangModuleInfo {
+	narrowed := schema.NarrowModulesByCapabilities(caps, m.GetSchema().Modules())
+	keep := make(map[string]bool, len(narrowed))
+	for _, mod := range narrowed {
+		keep[mod.Name()] = true
+	}
+	out := make([]YangModuleInfo, 0, len(modules))
+	for _, mi := range modules {
+		if keep[mi.Name] {
+			out = append(out, mi)
+		}
+	}
+	return out
 }
 
 // GetSchema returns dynamic form schema for a specific YANG module. Modules

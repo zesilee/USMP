@@ -51,6 +51,10 @@ spec:
                   minimum: 0
                 vendor:
                   type: string
+                role:
+                  type: string
+                  maxLength: 32
+                  pattern: "^[A-Za-z0-9_-]*$"
                 credentialsSecretRef:
                   type: object
                   required:

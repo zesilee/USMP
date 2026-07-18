@@ -117,7 +117,7 @@ func waitFor(t *testing.T, what string, cond func() bool) {
 func fullInfo(ip string) client.DeviceConnectionInfo {
 	return client.DeviceConnectionInfo{
 		IP: ip, Port: 830, Username: "op", Password: "s3cret",
-		Protocol: client.ProtocolNETCONF, Timeout: 5 * time.Second, Vendor: "huawei",
+		Protocol: client.ProtocolNETCONF, Timeout: 5 * time.Second, Vendor: "huawei", Role: "DCGW",
 	}
 }
 
@@ -147,7 +147,7 @@ func TestCRDStore_PutGetRoundTrip_Integration(t *testing.T) {
 		t.Fatalf("Device CR: %v", err)
 	}
 	if dev.Spec.ManagementIP != "10.0.0.1" || dev.Spec.Protocol != "netconf" ||
-		dev.Spec.Port != 830 || dev.Spec.TimeoutSeconds != 5 || dev.Spec.Vendor != "huawei" {
+		dev.Spec.Port != 830 || dev.Spec.TimeoutSeconds != 5 || dev.Spec.Vendor != "huawei" || dev.Spec.Role != "DCGW" {
 		t.Fatalf("CR spec mismatch: %+v", dev.Spec)
 	}
 	if dev.Spec.CredentialsSecretRef == nil {

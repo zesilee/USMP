@@ -823,6 +823,8 @@ export interface components {
             ip: string;
             password: string;
             port?: number;
+            /** @description Role 可选网络角色标签：≤32 字符且仅 [A-Za-z0-9_-]，非法 400（BR-14） */
+            role?: string;
             username: string;
             /** @description Vendor 可选厂商标识：缺省 huawei；无已注册驱动的厂商将被拒绝（400） */
             vendor?: string;
@@ -900,6 +902,8 @@ export interface components {
             online?: boolean;
             password?: string;
             port?: number;
+            /** @description Role 网络角色标签（DCGW/EOR/TOR/BORDER 等；展示/策略用途，BR-14） */
+            role?: string;
             username?: string;
             /** @description Vendor 厂商标识（SND 驱动选择，缺省 huawei） */
             vendor?: string;
@@ -1029,6 +1033,8 @@ export interface components {
             success?: boolean;
         };
         "api.YangModuleInfo": {
+            /** @description Blacklisted 标记该模块命中 SND blacklist（CN-03 注解语义，不据此裁剪）。 */
+            blacklisted?: boolean;
             /**
              * @description Category 是模块所属任务域（源 YANG 模块级 task-name 扩展，构建期提取，BR-01）：
              *     驱动前端左导航分组；无映射省略（omitempty，R08）。
