@@ -79,6 +79,11 @@ export const listYangModules = () => {
   return api.get<ApiResponse<any[]>>('/yang/modules')
 }
 
+// SND 左树（LT-02）：分组树 + 叶子可用性标注；device 可选叠加能力协商 supported。
+export const getLeftTree = (device?: string) => {
+  return api.get<ApiResponse<any[]>>('/yang/left-tree', { params: device ? { device } : {} })
+}
+
 // YANG 模块动态表单 schema。走 api 客户端（绝对 baseURL，staging 下 nginx 不代理 /api，
 // 故不能用裸相对 fetch）。form='nested' 返回嵌套树（保留 member-ports 等 list-in-list）。
 export const getYangSchema = (module: string, form?: 'nested') => {

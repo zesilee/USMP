@@ -13,6 +13,13 @@ function mockYangModules(data: any[]) {
   return vi.spyOn(apiModule, 'listYangModules').mockResolvedValue({ data: { data } } as any)
 }
 
+// LT-03：左树接口默认 mock 为失败（既有用例走 category 降级路径，行为不变）；
+// 左树用例单独 mock 成功载荷。
+function mockLeftTree(data: any[] | Error) {
+  if (data instanceof Error) return vi.spyOn(apiModule, 'getLeftTree').mockRejectedValue(data)
+  return vi.spyOn(apiModule, 'getLeftTree').mockResolvedValue({ data: { data } } as any)
+}
+
 vi.mock('@element-plus/icons-vue', () => ({
   DataLine: { template: '<span />' },
   Monitor: { template: '<span />' },
@@ -29,6 +36,7 @@ vi.mock('@element-plus/icons-vue', () => ({
 describe('Sidebar Component', () => {
   beforeEach(() => {
     setActivePinia(createPinia())
+    mockLeftTree(new Error('lefttree unavailable in legacy tests'))
   })
 
   const router = createRouter({
@@ -118,5 +126,69 @@ describe('Sidebar · 业务菜单任务域分组（FE-13）', () => {
     await new Promise((r) => setTimeout(r))
     expect(wrapper.find('[data-test="module-item-ifm"]').exists()).toBe(true)
     expect(wrapper.text()).not.toContain('其他')
+  })
+})
+
+
+describe('Sidebar · SND 左树（LT-03）', () => {
+  const router = createRouter({
+    history: createWebHistory(),
+    routes: [
+      { path: '/', name: 'dashboard', component: {} },
+      { path: '/module/:module', name: 'module-console', component: {} },
+    ],
+  })
+
+  const sampleTree = [
+    {
+      zh: '以太网交换', en: 'Ethernet Switching',
+      children: [
+        { zh: 'VLAN', en: 'VLAN', children: [
+          { zh: 'huawei-vlan', en: 'huawei-vlan', sourceModule: 'huawei-vlan', available: true, module: 'vlan' },
+        ]},
+      ],
+    },
+    {
+      zh: '安全', en: 'Security',
+      children: [{ zh: 'huawei-dsa', en: 'huawei-dsa', sourceModule: 'huawei-dsa', available: false }],
+    },
+  ]
+
+  beforeEach(() => {
+    setActivePinia(createPinia())
+    vi.restoreAllMocks()
+  })
+
+  it('左树加载成功：渲染分组与叶子，已接入叶路由 /module/<root>', async () => {
+    mockLeftTree(sampleTree)
+    mockYangModules([])
+    const wrapper = mount(Sidebar, { global: { plugins: [router, ElementPlus] } })
+    await new Promise((r) => setTimeout(r))
+    expect(wrapper.find('[data-test="lefttree-group-以太网交换"]').exists()).toBe(true)
+    const vlanLeaf = wrapper.find('[data-test="lefttree-leaf-huawei-vlan"]')
+    expect(vlanLeaf.exists()).toBe(true)
+    await vlanLeaf.trigger('click')
+    await new Promise((r) => setTimeout(r))
+    expect(router.currentRoute.value.path).toBe('/module/vlan')
+  })
+
+  it('未接入叶：禁用态 + 「未接入」占位（全树+占位拍板）', async () => {
+    mockLeftTree(sampleTree)
+    mockYangModules([])
+    const wrapper = mount(Sidebar, { global: { plugins: [router, ElementPlus] } })
+    await new Promise((r) => setTimeout(r))
+    const dsaLeaf = wrapper.find('[data-test="lefttree-leaf-huawei-dsa"]')
+    expect(dsaLeaf.exists()).toBe(true)
+    expect(dsaLeaf.classes()).toContain('is-disabled')
+    expect(dsaLeaf.text()).toContain('未接入')
+  })
+
+  it('左树失败：回退 category 分组导航（R08）', async () => {
+    mockLeftTree(new Error('down'))
+    mockYangModules([{ name: 'ifm', description: '接口管理', vendor: 'huawei', category: 'interface-mgr' }])
+    const wrapper = mount(Sidebar, { global: { plugins: [router, ElementPlus] } })
+    await new Promise((r) => setTimeout(r))
+    expect(wrapper.find('[data-test="module-item-ifm"]').exists()).toBe(true)
+    expect(wrapper.find('[data-test^="lefttree-leaf"]').exists()).toBe(false)
   })
 })

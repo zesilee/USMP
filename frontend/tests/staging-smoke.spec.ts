@@ -155,8 +155,10 @@ test.describe('部署冒烟 - 前端 SPA', () => {
     await page.goto('/module/vlan', { waitUntil: 'networkidle' })
     await expect(page.getByRole('tab', { name: 'vlans', exact: true })).toBeVisible({ timeout: 15000 })
 
-    // 侧栏业务菜单（/yang/modules 驱动）内点 ifm 模块 —— SPA 内导航
-    await page.locator('[data-test="module-item-ifm"]').click()
+    // 侧栏 SND 左树（LT-03）内点 ifm 叶 —— 需展开 接口管理→接口基础 分组。
+    await page.locator('[data-test="lefttree-group-接口管理"] .el-sub-menu__title').first().click()
+    await page.locator('[data-test="lefttree-group-接口基础"] .el-sub-menu__title').first().click()
+    await page.locator('[data-test="lefttree-leaf-huawei-ifm"]').click()
     await expect(page).toHaveURL(/module\/ifm/)
 
     await pickDevice(page)
@@ -207,9 +209,11 @@ test.describe('部署冒烟 - 业务网络配置', () => {
     await page.goto('/business/business-vlan-service', { waitUntil: 'networkidle' })
     await expect(page.locator('[data-test="business-table"], [data-test="business-unavailable"]').first()).toBeVisible({ timeout: 15000 })
 
-    // 原生配置子菜单在业务路由下默认折叠，先展开再点模块项。
+    // 原生配置子菜单在业务路由下默认折叠，逐层展开 SND 左树再点叶（LT-03）。
     await page.locator('.el-sub-menu', { hasText: '原生配置' }).locator('.el-sub-menu__title').first().click()
-    await page.locator('[data-test="module-item-vlan"]').click()
+    await page.locator('[data-test="lefttree-group-以太网交换"] .el-sub-menu__title').first().click()
+    await page.locator('[data-test="lefttree-group-VLAN"] .el-sub-menu__title').first().click()
+    await page.locator('[data-test="lefttree-leaf-huawei-vlan"]').click()
     await expect(page).toHaveURL(/module\/vlan/)
     await expect(page.getByRole('tab', { name: 'vlans', exact: true })).toBeVisible({ timeout: 15000 })
   })

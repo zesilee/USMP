@@ -24,16 +24,19 @@
         <template #title>设备管理</template>
       </el-menu-item>
 
-      <!-- 原生配置菜单：/yang/modules 模型驱动，指向通用模块控制台（FE-13）。
-           原生配置 = 直接基于 YANG 模型的设备配置管理；加载失败回退内置项（R08）。 -->
+      <!-- 原生配置菜单（LT-03）：SND 左树驱动 14 组/3 层导航（已接入可点、未接入
+           禁用占位）；left-tree 失败回退 category 分组（R08 导航不消失）。 -->
       <el-sub-menu index="native-config">
         <template #title>
           <el-icon><Connection /></el-icon>
           <span>原生配置</span>
         </template>
-        <!-- 任务域分组（FE-13）：任一模块带 category 时按组渲染，未标注归「其他」；
+        <template v-if="leftTreeReady">
+          <LeftTreeMenu :nodes="leftTree" index-prefix="lt" />
+        </template>
+        <!-- 降级：任务域分组（FE-13）：任一模块带 category 时按组渲染，未标注归「其他」；
              全部未标注则平铺（等价旧形态）。 -->
-        <template v-if="nativeGrouped">
+        <template v-else-if="nativeGrouped">
           <el-menu-item-group
             v-for="g in nativeGroups"
             :key="g.category || '__default__'"
@@ -106,6 +109,7 @@
 import { computed, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { useMenuStore } from '../../stores/menu'
+import LeftTreeMenu from './LeftTreeMenu.vue'
 import { DataLine, Monitor, Connection, Document, Tools, Fold, Expand, Share } from '@element-plus/icons-vue'
 
 const route = useRoute()
@@ -116,9 +120,13 @@ const isCollapsed = computed(() => menuStore.isCollapsed)
 const nativeModules = computed(() => menuStore.nativeModules)
 const nativeGroups = computed(() => menuStore.nativeGroups)
 const nativeGrouped = computed(() => nativeGroups.value.some((g) => g.category))
+const leftTree = computed(() => menuStore.leftTree)
+const leftTreeReady = computed(() => leftTree.value.length > 0)
 const businessModules = computed(() => menuStore.businessModules)
 
 onMounted(() => {
+  // 左树为主路径；nativeModules 仍加载（业务菜单 + 左树降级路径共用）。
+  menuStore.loadLeftTree()
   menuStore.loadNativeModules()
 })
 
