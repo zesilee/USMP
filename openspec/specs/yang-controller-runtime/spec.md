@@ -4,7 +4,7 @@
 
 yang-controller-runtime 是权威栈（R01）的声明式对齐框架（C1–C5）：把设备 actual 配置向 desired 对齐。用户仅实现 C3 `Reconciler`，框架承担连接/排队/限频/反射 diff/协议编解码。连接信息由共享 DeviceStore 按 DeviceID 解析（见 [[device-store]]）。
 
-> 已知契约缺口（as-built）：plugin 钩子已声明但**从不执行**；schema 层运行时为空；`ConfigStore.List` 等为 stub。
+> 已知契约缺口（as-built）：schema 层运行时为空；`ConfigStore.List` 等为 stub。（plugin 脚手架已随 retire-idle-scaffolds 物理删除。）
 
 ## Requirements
 
@@ -66,7 +66,7 @@ Reconciler 的 `DeviceClient` SHALL 用 `req.DeviceID` 查共享 DeviceStore 取
 
 ### Requirement: YR-07 事件源驱动漂移检测
 
-事件源 SHALL 支持周期轮询 / gNMI 订阅 / 文件变更。`PeriodicSource` SHALL 按提供的设备列表（生产为共享 DeviceStore 的 `List()`，动态取）逐设备入队对账，实现持续 out-of-band 漂移检测；设备列表为空 SHALL 不入队、SHALL NOT panic。
+事件源 SHALL 支持周期轮询 / K8s CRD watch / 文件变更（gNMI 订阅源已随 gNMI 空壳清除移除，协议为规划能力）。`PeriodicSource` SHALL 按提供的设备列表（生产为共享 DeviceStore 的 `List()`，动态取）逐设备入队对账，实现持续 out-of-band 漂移检测；设备列表为空 SHALL 不入队、SHALL NOT panic。
 
 #### Scenario: 周期按库中设备发对账
 - **WHEN** 周期 tick 且 DeviceStore 中有 N 个设备

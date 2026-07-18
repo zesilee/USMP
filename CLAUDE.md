@@ -7,7 +7,7 @@
 | 定位 | 无数据库、高并发、模型驱动的交换机设备管理平台 |
 | 架构 | yang-controller-runtime 声明式配置管理 **[R01: 禁止更换]** |
 | 语言 | Go 1.21+ / Vue3 |
-| 协议 | NETCONF (SSH 830) + gNMI (9339/9340) **[R02: 禁止旧协议]** |
+| 协议 | NETCONF (SSH 830)；gNMI (9339/9340) 为规划能力（空壳已删，工厂显式未实现错误） **[R02: 禁止旧协议]** |
 
 ## §2 架构红线
 
@@ -47,13 +47,13 @@
 
 | 组件 | 职责 | 用户接口 |
 |------|------|----------|
-| C1 Manager | 全局生命周期：schema 加载、client 连接池、controller 注册、插件管理 | 启动/停止 |
+| C1 Manager | 全局生命周期：schema 加载、client 连接池、controller 注册 | 启动/停止 |
 | C2 Controller | 每 YANG 模块一个，处理事件队列，调用 Reconciler | 注册 Reconciler |
 | C3 Reconciler | 对齐 desired↔actual（diff + 推送），无状态 | **用户实现此接口** |
-| C4 EventSource | 产生 reconcile 事件：周期轮询 / gNMI 订阅 / 文件变更 | 注册 Source |
+| C4 EventSource | 产生 reconcile 事件：周期轮询 / K8s CRD watch / 文件变更 | 注册 Source |
 | C5 ClientPool | 设备连接池：断线重连、超时重试、异常处理 | 获取连接 |
 
-> 框架处理所有 boilerplate（schema 解析、连接管理、diff 计算、协议编码、限频重试、事件排队）。用户只需实现 C3 Reconciler。
+> 框架处理所有 boilerplate（schema 解析、连接管理、diff 计算、协议编码、限频重试、事件排队）。用户只需实现 C3 Reconciler。（插件管理脚手架已随 retire-idle-scaffolds 删除——扩展点由真实需求驱动再设计。）
 
 ## §5 开发工作流
 
