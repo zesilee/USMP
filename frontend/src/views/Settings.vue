@@ -1,8 +1,8 @@
 <template>
   <div class="settings">
     <div class="page-header">
-      <h2>系统设置</h2>
-      <div class="sub">连接与缓存策略 · 无数据库，运行配置实时读取（R03）</div>
+      <h2>{{ t('settings.title') }}</h2>
+      <div class="sub">{{ t('settings.subtitle') }}</div>
     </div>
 
     <div class="set-grid">
@@ -21,36 +21,41 @@
     </div>
 
     <div class="footnote">
-      以上为平台架构固定策略（NETCONF/gNMI 端口、缓存 TTL/LRU），非运行时可改项；配置的下发在「配置下发」页完成。
+      {{ t('settings.footnote') }}
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
+
 // 只读架构事实（非可编辑设置——无设置持久化后端，展示系统实际策略更诚实）。
 // 数值与后端一致：runningCache=TTL 30s/LRU 4096（manager.go）；端口见 CLAUDE.md §1/§3。
-const cards = [
+const cards = computed(() => [
   {
-    title: '协议连接',
+    title: t('settings.protocolCard'),
     meta: '',
     rows: [
-      { k: 'NETCONF 端口', hint: 'SSH over 830', v: '830', muted: false },
-      { k: 'gNMI 端口', hint: 'gRPC 遥测订阅（规划能力，当前未实现）', v: '9339 / 9340', muted: true },
-      { k: '断线重连', hint: 'ClientPool 自动重试', v: '启用', muted: false },
-      { k: '连接超时', hint: 'NETCONF 单次请求上限', v: '10s', muted: false },
+      { k: t('settings.netconfPort'), hint: t('settings.netconfPortHint'), v: '830', muted: false },
+      { k: t('settings.gnmiPort'), hint: t('settings.gnmiPortHint'), v: '9339 / 9340', muted: true },
+      { k: t('settings.reconnect'), hint: t('settings.reconnectHint'), v: t('common.enabled'), muted: false },
+      { k: t('settings.connTimeout'), hint: t('settings.connTimeoutHint'), v: '10s', muted: false },
     ],
   },
   {
-    title: '缓存策略',
-    meta: 'TTL + LRU · 内存',
+    title: t('settings.cacheCard'),
+    meta: t('settings.cacheMeta'),
     rows: [
-      { k: '缓存 TTL', hint: '过期自动重拉设备配置', v: '30s', muted: false },
-      { k: 'LRU 容量', hint: 'Key = 设备IP + YANG路径', v: '4096 条', muted: false },
-      { k: '下发后失效', hint: 'edit-config 成功即清缓存', v: '启用', muted: false },
-      { k: '持久化', hint: '运行配置不落库（R03）', v: '禁用', muted: true },
+      { k: t('settings.cacheTtl'), hint: t('settings.cacheTtlHint'), v: '30s', muted: false },
+      { k: t('settings.lruCapacity'), hint: t('settings.lruCapacityHint'), v: t('settings.lruCapacityValue'), muted: false },
+      { k: t('settings.invalidateOnPush'), hint: t('settings.invalidateOnPushHint'), v: t('common.enabled'), muted: false },
+      { k: t('settings.persistence'), hint: t('settings.persistenceHint'), v: t('common.disabled'), muted: true },
     ],
   },
-]
+])
 </script>
 
 <style scoped>

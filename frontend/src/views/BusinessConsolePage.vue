@@ -1,7 +1,7 @@
 <template>
   <div class="business-console">
     <el-breadcrumb separator="/">
-      <el-breadcrumb-item>业务网络配置</el-breadcrumb-item>
+      <el-breadcrumb-item>{{ t('nav.businessConfig') }}</el-breadcrumb-item>
       <el-breadcrumb-item>{{ pageTitle }}</el-breadcrumb-item>
     </el-breadcrumb>
 
@@ -17,43 +17,43 @@
 
     <template v-if="!schemaError">
       <div class="toolbar">
-        <el-button type="primary" data-test="business-create" @click="openCreate">新建业务实例</el-button>
-        <span class="tip">意图实例由 YANG 模型驱动；提交后编排为各设备原生配置（跨设备事务下发）。</span>
+        <el-button type="primary" data-test="business-create" @click="openCreate">{{ t('business.create') }}</el-button>
+        <span class="tip">{{ t('business.tip') }}</span>
       </div>
 
       <!-- 实例列表：平台作用域——每行一个意图实例，收敛状态由 status 聚合。 -->
       <el-table :data="items" v-loading="loading" data-test="business-table">
-        <el-table-column prop="name" label="实例名" min-width="140" />
+        <el-table-column prop="name" :label="t('business.colInstance')" min-width="140" />
         <el-table-column label="VLAN" width="90">
           <template #default="{ row }">{{ row.spec?.['vlan-id'] ?? '-' }}</template>
         </el-table-column>
-        <el-table-column label="设备数" width="90">
+        <el-table-column :label="t('business.colDeviceCount')" width="90">
           <template #default="{ row }">{{ (row.spec?.devices || []).length }}</template>
         </el-table-column>
-        <el-table-column label="收敛状态" min-width="160">
+        <el-table-column :label="t('business.colConverge')" min-width="160">
           <template #default="{ row }">
             <el-tag :type="convergeTagType(row)" size="small" :data-test="`converge-${row.name}`">
               {{ convergeText(row) }}
             </el-tag>
           </template>
         </el-table-column>
-        <el-table-column label="操作" width="200">
+        <el-table-column :label="t('common.actions')" width="200">
           <template #default="{ row }">
-            <el-button size="small" text type="primary" @click="openDetail(row)">详情</el-button>
-            <el-button size="small" text type="primary" :data-test="`business-edit-${row.name}`" @click="openEdit(row)">编辑</el-button>
-            <el-button size="small" text type="danger" :data-test="`business-remove-${row.name}`" @click="remove(row)">删除</el-button>
+            <el-button size="small" text type="primary" @click="openDetail(row)">{{ t('business.detail') }}</el-button>
+            <el-button size="small" text type="primary" :data-test="`business-edit-${row.name}`" @click="openEdit(row)">{{ t('common.edit') }}</el-button>
+            <el-button size="small" text type="danger" :data-test="`business-remove-${row.name}`" @click="remove(row)">{{ t('common.delete') }}</el-button>
           </template>
         </el-table-column>
       </el-table>
 
       <!-- 新建/编辑抽屉：表单由意图 YANG schema 自动渲染（R05；devices 为嵌套 list）。 -->
-      <el-drawer v-model="drawerOpen" :title="editingName ? `编辑 ${editingName}` : '新建业务实例'" size="560px">
+      <el-drawer v-model="drawerOpen" :title="editingName ? t('business.editTitle', { name: editingName }) : t('business.create')" size="560px">
         <el-form ref="formRef" :model="form.formData" :rules="form.rules.value" label-position="top">
-          <el-form-item label="实例名" prop="__name" :error="nameError" required>
+          <el-form-item :label="t('business.nameLabel')" prop="__name" :error="nameError" required>
             <el-input
               v-model="instanceName"
               :disabled="!!editingName"
-              placeholder="如 biz-vlan-100（K8s 资源名规则）"
+              :placeholder="t('business.namePlaceholder')"
               data-test="business-name-input"
             />
           </el-form-item>
@@ -71,33 +71,33 @@
           </el-form-item>
         </el-form>
         <div class="drawer-actions">
-          <el-button @click="drawerOpen = false">取消</el-button>
+          <el-button @click="drawerOpen = false">{{ t('common.cancel') }}</el-button>
           <el-button
             type="primary"
             :disabled="!form.submittable.value || !instanceName"
             data-test="business-submit"
             @click="submit"
-          >提交</el-button>
+          >{{ t('common.submit') }}</el-button>
         </div>
       </el-drawer>
 
       <!-- 详情抽屉：每设备收敛状态与失败原因（BIC-04 deviceStates）。 -->
-      <el-drawer v-model="detailOpen" :title="`实例详情：${detail?.name || ''}`" size="480px">
+      <el-drawer v-model="detailOpen" :title="t('business.detailTitle', { name: detail?.name || '' })" size="480px">
         <template v-if="detail">
-          <h4>每设备状态</h4>
+          <h4>{{ t('business.perDeviceState') }}</h4>
           <el-table :data="deviceStates(detail)" size="small" data-test="device-states">
-            <el-table-column prop="device" label="设备" width="130" />
-            <el-table-column label="状态" width="90">
+            <el-table-column prop="device" :label="t('common.device')" width="130" />
+            <el-table-column :label="t('common.status')" width="90">
               <template #default="{ row }">
                 <el-tag :type="phaseTag(row.phase)" size="small">{{ row.phase }}</el-tag>
               </template>
             </el-table-column>
-            <el-table-column prop="reason" label="原因" min-width="160" show-overflow-tooltip />
+            <el-table-column prop="reason" :label="t('business.colReason')" min-width="160" show-overflow-tooltip />
           </el-table>
-          <h4>认领的原生配置</h4>
+          <h4>{{ t('business.claimedNative') }}</h4>
           <el-table :data="claims(detail)" size="small">
-            <el-table-column prop="device" label="设备" width="130" />
-            <el-table-column prop="path" label="路径" min-width="200" show-overflow-tooltip />
+            <el-table-column prop="device" :label="t('common.device')" width="130" />
+            <el-table-column prop="path" :label="t('business.colPath')" min-width="200" show-overflow-tooltip />
           </el-table>
         </template>
       </el-drawer>
@@ -107,6 +107,7 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { ElMessage, ElMessageBox, type FormInstance } from 'element-plus'
 import {
   getYangSchema,
@@ -123,7 +124,8 @@ import FieldRenderer from '../components/config/FieldRenderer.vue'
 // 一个意图实例管理 spec.devices 里的 N 台设备。
 const MODULE = 'business-vlan-service'
 
-const pageTitle = ref('跨设备 VLAN 打通')
+const { t } = useI18n()
+const pageTitle = ref(t('business.defaultTitle'))
 const schemaError = ref('')
 const listError = ref('')
 const loading = ref(false)
@@ -145,10 +147,10 @@ async function loadSchema() {
     const res = await getYangSchema(MODULE, 'nested')
     const payload = res.data?.data
     schemaFields.value = payload?.fields || []
-    if (payload?.title) pageTitle.value = payload.description || '跨设备 VLAN 打通'
-    if (!schemaFields.value.length) schemaError.value = `模块 ${MODULE} 无可渲染字段`
+    if (payload?.title) pageTitle.value = payload.description || t('business.defaultTitle')
+    if (!schemaFields.value.length) schemaError.value = t('business.noRenderableFields', { module: MODULE })
   } catch (e: any) {
-    schemaError.value = e?.response?.data?.message || e?.message || '加载业务模型失败'
+    schemaError.value = e?.response?.data?.message || e?.message || t('business.loadModelFailed')
   }
 }
 
@@ -159,13 +161,13 @@ async function loadList() {
     const res = await listBusinessVlanServices()
     if (res.data?.success === false) {
       // 后端信封错误（HTTP 恒 200）：如未连接集群的 503 降级。
-      listError.value = res.data?.message || '业务配置暂不可用'
+      listError.value = res.data?.message || t('business.unavailable')
       items.value = []
       return
     }
     items.value = res.data?.data?.items || []
   } catch (e: any) {
-    listError.value = e?.response?.data?.message || e?.message || '读取业务实例失败'
+    listError.value = e?.response?.data?.message || e?.message || t('business.listFailed')
     items.value = []
   } finally {
     loading.value = false
@@ -204,19 +206,19 @@ async function submit() {
   if (form.blocked.value || !instanceName.value) return
   try {
     await applyBusinessVlanService(instanceName.value, form.visiblePayload())
-    ElMessage.success('已提交，编排收敛中（状态见列表）')
+    ElMessage.success(t('business.submitted'))
     drawerOpen.value = false
     await loadList()
   } catch (e: any) {
-    ElMessage.error(e?.response?.data?.message || e?.message || '提交失败')
+    ElMessage.error(e?.response?.data?.message || e?.message || t('business.submitFailed'))
   }
 }
 
 async function remove(row: BusinessVlanServiceItem) {
   try {
     await ElMessageBox.confirm(
-      `删除业务实例 ${row.name}？各设备上认领的原生配置将被清理。`,
-      '确认删除',
+      t('business.removeConfirm', { name: row.name }),
+      t('common.confirmDelete'),
       { type: 'warning' },
     )
   } catch {
@@ -224,10 +226,10 @@ async function remove(row: BusinessVlanServiceItem) {
   }
   try {
     await deleteBusinessVlanService(row.name)
-    ElMessage.success('删除已受理（设备清理完成后实例消失）')
+    ElMessage.success(t('business.removeAccepted'))
     await loadList()
   } catch (e: any) {
-    ElMessage.error(e?.response?.data?.message || e?.message || '删除失败')
+    ElMessage.error(e?.response?.data?.message || e?.message || t('business.removeFailed'))
   }
 }
 
@@ -244,22 +246,44 @@ function claims(row: BusinessVlanServiceItem): any[] {
   return row.status?.claims || []
 }
 
-function convergeText(row: BusinessVlanServiceItem): string {
+// 收敛状态按语义分档（tag 类型据档位而非文案判断，避免与 i18n 文案耦合）。
+type ConvergeKind = 'validationFailed' | 'pending' | 'converged' | 'partialFailed' | 'converging'
+
+function convergeKind(row: BusinessVlanServiceItem): ConvergeKind {
   const v = condition(row, 'Validated')
-  if (v && v.status === 'False') return '校验失败'
+  if (v && v.status === 'False') return 'validationFailed'
   const c = condition(row, 'Converged')
-  if (!c) return '待处理'
-  if (c.status === 'True') return '已收敛'
+  if (!c) return 'pending'
+  if (c.status === 'True') return 'converged'
   const states = deviceStates(row)
   const failed = states.filter((s: any) => s.phase === 'failed').length
-  if (failed > 0) return `部分失败 ${states.length - failed}/${states.length}`
-  return '收敛中'
+  if (failed > 0) return 'partialFailed'
+  return 'converging'
+}
+
+function convergeText(row: BusinessVlanServiceItem): string {
+  const kind = convergeKind(row)
+  switch (kind) {
+    case 'validationFailed':
+      return t('business.stateValidationFailed')
+    case 'pending':
+      return t('business.statePending')
+    case 'converged':
+      return t('common.state.conv')
+    case 'partialFailed': {
+      const states = deviceStates(row)
+      const failed = states.filter((s: any) => s.phase === 'failed').length
+      return t('business.statePartialFailed', { ok: states.length - failed, total: states.length })
+    }
+    default:
+      return t('common.state.recon')
+  }
 }
 
 function convergeTagType(row: BusinessVlanServiceItem): string {
-  const text = convergeText(row)
-  if (text === '已收敛') return 'success'
-  if (text === '校验失败' || text.startsWith('部分失败')) return 'danger'
+  const kind = convergeKind(row)
+  if (kind === 'converged') return 'success'
+  if (kind === 'validationFailed' || kind === 'partialFailed') return 'danger'
   return 'info'
 }
 

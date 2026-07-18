@@ -3,7 +3,7 @@
     <div class="page-header">
       <!-- 面包屑：配置 / 厂商 / 模块 / 激活 Tab（FE-10） -->
       <el-breadcrumb separator=">">
-        <el-breadcrumb-item>配置</el-breadcrumb-item>
+        <el-breadcrumb-item>{{ t('console.breadcrumbConfig') }}</el-breadcrumb-item>
         <el-breadcrumb-item v-if="vendor">{{ vendor }}</el-breadcrumb-item>
         <el-breadcrumb-item>{{ title }}</el-breadcrumb-item>
         <el-breadcrumb-item v-if="activeTabLabel">{{ activeTabLabel }}</el-breadcrumb-item>
@@ -12,13 +12,13 @@
         <!-- 软归属徽标（FE-18）：本模块在选中设备上被业务意图认领时提示（不拦截）。 -->
         <el-tooltip
           v-if="ownershipIntents.length"
-          :content="`由业务配置管理：${ownershipIntents.join('、')}（意图收敛会覆盖手工修改）`"
+          :content="t('console.ownedTooltip', { intents: ownershipIntents.join('、') })"
         >
           <el-tag type="warning" size="small" data-test="ownership-badge">
-            由业务配置管理 ({{ ownershipIntents.length }})
+            {{ t('console.ownedBadge', { n: ownershipIntents.length }) }}
           </el-tag>
         </el-tooltip>
-        <el-select v-model="selectedDevice" placeholder="选择设备" style="width: 220px">
+        <el-select v-model="selectedDevice" :placeholder="t('console.selectDevicePlaceholder')" style="width: 220px">
           <el-option v-for="d in store.devices" :key="d.id" :label="d.ip" :value="d.ip" />
         </el-select>
       </div>
@@ -34,13 +34,14 @@
         <ModuleFormTab v-else :tab="tab" :root-name="rootName" :device="selectedDevice" />
       </el-tab-pane>
     </el-tabs>
-    <el-empty v-else-if="!schemaError" description="模块 schema 加载中…" />
+    <el-empty v-else-if="!schemaError" :description="t('console.schemaLoading')" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, computed, watch, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 import { getYangSchema, getOwnership } from '../api'
 import { useDeviceStore } from '../stores/device'
 import type { Field } from '../utils/crdSchemaParser'
@@ -49,6 +50,7 @@ import ModuleListTab from '../components/config/ModuleListTab.vue'
 import ModuleFormTab from '../components/config/ModuleFormTab.vue'
 
 const route = useRoute()
+const { t } = useI18n()
 const store = useDeviceStore()
 
 const moduleName = computed(() => String(route.params.module || ''))
@@ -95,7 +97,7 @@ async function loadSchema() {
     activeTab.value = tabs.value[0]?.name || ''
   } catch (e: any) {
     // schema 拉取失败降级：页面不崩，明确报错（R08/§9）。
-    schemaError.value = e?.response?.data?.message || e?.message || 'schema 加载失败'
+    schemaError.value = e?.response?.data?.message || e?.message || t('console.schemaLoadFailed')
   }
 }
 
