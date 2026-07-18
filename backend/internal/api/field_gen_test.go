@@ -27,7 +27,7 @@ func TestFieldTypeMapping(t *testing.T) {
 func TestVendorForNamespace(t *testing.T) {
 	cases := map[string]string{
 		"urn:huawei:yang:huawei-vlan":           "huawei",
-		"http://openconfig.net/yang/interfaces": "openconfig",
+		"http://openconfig.net/yang/interfaces": "unknown", // BR-11: openconfig 不再是受支持厂商
 		"urn:example:other":                     "unknown",
 	}
 	for ns, want := range cases {

@@ -59,7 +59,7 @@ func Contains(substr string) Predicate {
 }
 
 // ModulePrefix returns a predicate that matches events where the path starts with the module prefix
-// For example, "openconfig-interfaces:" will match any path under that starts with "/openconfig-interfaces:
+// For example, "huawei-ifm:" will match any path that starts with "/huawei-ifm:
 func ModulePrefix(module string) Predicate {
 	prefix := "/" + module + ":"
 	return Prefix(prefix)

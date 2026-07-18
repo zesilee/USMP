@@ -57,7 +57,7 @@ func TestGetSchemaDynamic(t *testing.T) {
 }
 
 // TestListModulesDynamic (task 2.4): module list reflects the loaded schema tree
-// with correct per-module vendors (not all "huawei").
+// with correct per-module vendors — huawei/usmp only (BR-11).
 func TestListModulesDynamic(t *testing.T) {
 	gin.SetMode(gin.TestMode)
 	h := newYangHandlerWithSchema(t)
@@ -78,8 +78,16 @@ func TestListModulesDynamic(t *testing.T) {
 	if byName["vlan"].Vendor != "huawei" {
 		t.Errorf("vlan vendor = %q, want huawei", byName["vlan"].Vendor)
 	}
-	if byName["interfaces"].Vendor != "openconfig" {
-		t.Errorf("interfaces vendor = %q, want openconfig", byName["interfaces"].Vendor)
+	if byName["business-vlan-service"].Vendor != "usmp" {
+		t.Errorf("business-vlan-service vendor = %q, want usmp", byName["business-vlan-service"].Vendor)
+	}
+	for _, m := range mods {
+		if m.Vendor != "huawei" && m.Vendor != "usmp" {
+			t.Errorf("module %q vendor = %q, want huawei or usmp (BR-11)", m.Name, m.Vendor)
+		}
+	}
+	if _, ok := byName["interfaces"]; ok {
+		t.Error("openconfig module \"interfaces\" must not be exposed (BR-11)")
 	}
 }
 
@@ -107,7 +115,7 @@ func TestListModulesCategory(t *testing.T) {
 		{"ifm", "interface-mgr"},
 		{"vlan", "vlan"},
 		{"system", "system"},
-		{"interfaces", ""}, // openconfig — no task-name mapping → omitted
+		{"bgp", ""}, // no task-name mapping → omitted
 	}
 	for _, cse := range cases {
 		if got := byName[cse.module].Category; got != cse.want {
@@ -116,11 +124,11 @@ func TestListModulesCategory(t *testing.T) {
 	}
 
 	// omitempty boundary: unmapped module serializes without a category key.
-	raw, err := json.Marshal(byName["interfaces"])
+	raw, err := json.Marshal(byName["bgp"])
 	if err != nil {
 		t.Fatalf("marshal: %v", err)
 	}
 	if strings.Contains(string(raw), `"category"`) {
-		t.Errorf("interfaces serializes category unexpectedly: %s", raw)
+		t.Errorf("bgp serializes category unexpectedly: %s", raw)
 	}
 }

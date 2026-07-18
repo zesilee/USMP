@@ -11,7 +11,6 @@ import (
 	"sync"
 	"time"
 
-	"github.com/leezesi/usmp/backend/internal/generated/openconfig"
 	yangdriver "github.com/leezesi/usmp/backend/pkg/yang-runtime/driver"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/xmlcodec"
 	"github.com/scrapli/scrapligo/driver/netconf"
@@ -498,59 +497,13 @@ func (c *NETCONFClient) marshalChange(change Change) (string, error) {
 
 	// Registry-first dispatch (XC-04)：按 GoStruct 类型（容器或 diff 引擎产出的
 	// 内层 list map 形态）查驱动描述符，命中则由通用引擎按描述符数据编码。
-	// 未命中走既有 fallback 链（openconfig 遗留分支、xml.Marshal 兜底），行为不变。
+	// 未命中降级为通用 xml.Marshal 兜底链（R08）。
 	if d, ok := yangdriver.XMLEncoderForValue(change.NewValue); ok {
 		gs, err := d.WrapXMLValue(change.NewValue)
 		if err != nil {
 			return "", err
 		}
 		return xmlcodec.Encode(d.XML, gs)
-	}
-
-	// Special case: *openconfig.OpenconfigVlan_Vlans - contains a map field that xml.Marshal can't handle
-	// We handle it manually by extracting the map and iterating
-	if vlans, ok := change.NewValue.(*openconfig.OpenconfigVlan_Vlans); ok && vlans != nil {
-		var builder strings.Builder
-		builder.WriteString("<vlans>")
-		// Iterate through all VLAN entries in the map
-		for _, vlan := range vlans.Vlan {
-			if vlan == nil {
-				continue
-			}
-			entryXML, err := xml.Marshal(vlan)
-			if err != nil {
-				return "", fmt.Errorf("failed to marshal VLAN entry: %w", err)
-			}
-			builder.Write(entryXML)
-		}
-		builder.WriteString("</vlans>")
-		outputStr := builder.String()
-		// Fix XML element naming: convert from Go camelCase to YANG kebab-case
-		// We specifically match the full opening and closing tags to avoid accidentally replacing
-		// substrings in element content (e.g. "NewName" → "Newname" when replacing "Name" → "name")
-		repl := strings.NewReplacer(
-			"<VlanId>", "<vlan-id>",
-			"</VlanId>", "</vlan-id>",
-			"OpenconfigVlan_Vlans_Vlan", "vlan",
-			"<Vlan>", "<vlan>",
-			"</Vlan>", "</vlan>",
-			"<Name>", "<name>",
-			"</Name>", "</name>",
-			"<Status>", "<status>",
-			"</Status>", "</status>",
-			"<Config>", "<config>",
-			"</Config>", "</config>",
-			"<VLans>", "<vlans>",
-			"</VLans>", "</vlans>",
-		)
-		outputStr = repl.Replace(outputStr)
-		return outputStr, nil
-	}
-
-	// Special case: *openconfig.OpenconfigInterfaces_Interfaces - generates
-	// OpenConfig standard XML with proper namespace and YANG-conforming element names
-	if interfaces, ok := change.NewValue.(*openconfig.OpenconfigInterfaces_Interfaces); ok && interfaces != nil {
-		return buildOpenConfigInterfacesXML(interfaces)
 	}
 
 	// Try xml.Marshal for other types
@@ -615,7 +568,6 @@ func (c *NETCONFClient) marshalChange(change Change) (string, error) {
 		repl := strings.NewReplacer(
 			"<VlanId>", "<vlan-id>",
 			"</VlanId>", "</vlan-id>",
-			"OpenconfigVlan_Vlans_Vlan", "vlan",
 			"<Vlan>", "<vlan>",
 			"</Vlan>", "</vlan>",
 			"<Name>", "<name>",
@@ -631,98 +583,6 @@ func (c *NETCONFClient) marshalChange(change Change) (string, error) {
 
 	// Still failed - return original error
 	return "", fmt.Errorf("failed to marshal config to XML: %w", err)
-}
-
-// OpenConfig XML namespace constants
-const (
-	OpenConfigInterfacesNS = "http://openconfig.net/yang/interfaces"
-	IanaIfTypeNS           = "urn:ietf:params:xml:ns:yang:iana-if-type"
-)
-
-// buildOpenConfigInterfacesXML generates OpenConfig-standard XML for interfaces.
-func buildOpenConfigInterfacesXML(interfaces *openconfig.OpenconfigInterfaces_Interfaces) (string, error) {
-	if interfaces == nil || len(interfaces.Interface) == 0 {
-		return fmt.Sprintf(`<interfaces xmlns="%s"/>`, OpenConfigInterfacesNS), nil
-	}
-
-	var builder strings.Builder
-	builder.WriteString(fmt.Sprintf(`<interfaces xmlns="%s">`, OpenConfigInterfacesNS))
-
-	// Iterate through all interface entries
-	for name, iface := range interfaces.Interface {
-		if iface == nil {
-			continue
-		}
-
-		builder.WriteString("<interface>")
-
-		// Interface name - required, use map key as fallback
-		if iface.Name != nil {
-			builder.WriteString(fmt.Sprintf("<name>%s</name>", xmlEscape(*iface.Name)))
-		} else {
-			builder.WriteString(fmt.Sprintf("<name>%s</name>", xmlEscape(name)))
-		}
-
-		// Config container - standard YANG pattern
-		if iface.Config != nil {
-			builder.WriteString("<config>")
-
-			if iface.Config.Name != nil {
-				builder.WriteString(fmt.Sprintf("<name>%s</name>", xmlEscape(*iface.Config.Name)))
-			}
-
-			// config/type - convert enum integer to IANA standard type name
-			switch iface.Config.Type {
-			case 1: // ethernetCsmacd
-				builder.WriteString(fmt.Sprintf(`<type xmlns:ianaift="%s">ianaift:ethernetCsmacd</type>`, IanaIfTypeNS))
-			case 24: // softwareLoopback
-				builder.WriteString(fmt.Sprintf(`<type xmlns:ianaift="%s">ianaift:softwareLoopback</type>`, IanaIfTypeNS))
-			default:
-				builder.WriteString(fmt.Sprintf(`<type xmlns:ianaift="%s">ianaift:ethernetCsmacd</type>`, IanaIfTypeNS))
-			}
-
-			if iface.Config.Mtu != nil {
-				builder.WriteString(fmt.Sprintf("<mtu>%d</mtu>", *iface.Config.Mtu))
-			}
-
-			if iface.Config.Enabled != nil {
-				builder.WriteString(fmt.Sprintf("<enabled>%t</enabled>", *iface.Config.Enabled))
-			}
-
-			if iface.Config.Description != nil {
-				builder.WriteString(fmt.Sprintf("<description>%s</description>", xmlEscape(*iface.Config.Description)))
-			}
-
-			builder.WriteString("</config>")
-		}
-
-		builder.WriteString("</interface>")
-	}
-
-	builder.WriteString("</interfaces>")
-	return builder.String(), nil
-}
-
-// xmlEscape escapes XML special characters in a string
-func xmlEscape(s string) string {
-	var buf strings.Builder
-	for _, r := range s {
-		switch r {
-		case '<':
-			buf.WriteString("&lt;")
-		case '>':
-			buf.WriteString("&gt;")
-		case '&':
-			buf.WriteString("&amp;")
-		case '"':
-			buf.WriteString("&quot;")
-		case '\'':
-			buf.WriteString("&apos;")
-		default:
-			buf.WriteRune(r)
-		}
-	}
-	return buf.String()
 }
 
 // NetconfBaseNS is the NETCONF base namespace carrying the edit-config

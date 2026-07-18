@@ -72,7 +72,7 @@ type Module interface {
 	Name() string
 	// Namespace returns the module namespace
 	Namespace() string
-	// Vendor returns the vendor label ("huawei"/"openconfig"/…) or "" if unknown
+	// Vendor returns the vendor label ("huawei"/"usmp"/…) or "" if unknown
 	Vendor() string
 	// Revision returns the module revision
 	Revision() string
