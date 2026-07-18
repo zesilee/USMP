@@ -253,7 +253,7 @@ CI 全绿 ──→ Owner 自审 ──→ 合入 main ──→ main 验证 ─
 
 | Worktree | Change | YANG 模块 | Go Package | 状态 |
 |----------|--------|-----------|------------|------|
-| `retire-openconfig-models` | retire-openconfig-models | （删 openconfig 载体） | yangschema / client / api | 开发中 |
+| （当前无活跃 worktree） | — | — | — | — |
 
 > 新建 worktree 后更新此表，防止多个 worktree 修改同一包。
 
