@@ -71,8 +71,9 @@ test.describe('部署冒烟 - 前端 SPA', () => {
     await page.getByRole('tab', { name: 'VLAN列表', exact: true }).click()
     await page.getByRole('button', { name: '新增' }).first().click()
 
-    // 抽屉里出现 schema 驱动的字段（UI-03 后标签经 snd res 本地化）
-    await expect(page.getByText('VLAN管理状态', { exact: false }).first()).toBeVisible({ timeout: 15000 })
+    // 抽屉里出现 schema 驱动的字段（UI-03 后标签经 snd res 本地化）；
+    // 限定 .el-drawer——列表列头同名且固定列副本隐藏，裸 first() 会命中隐藏 cell。
+    await expect(page.locator('.el-drawer').getByText('VLAN管理状态', { exact: false }).first()).toBeVisible({ timeout: 15000 })
   })
 
   // 空表单提交应被前端校验拦截（§9）：缺主键 id 时「下发并对账」禁用。
@@ -81,7 +82,7 @@ test.describe('部署冒烟 - 前端 SPA', () => {
     await pickDevice(page)
     await page.getByRole('tab', { name: 'VLAN列表', exact: true }).click()
     await page.getByRole('button', { name: '新增' }).first().click()
-    await expect(page.getByText('VLAN管理状态', { exact: false }).first()).toBeVisible({ timeout: 15000 })
+    await expect(page.locator('.el-drawer').getByText('VLAN管理状态', { exact: false }).first()).toBeVisible({ timeout: 15000 })
 
     await expect(page.getByRole('button', { name: /下发并对账/ })).toBeDisabled()
   })
