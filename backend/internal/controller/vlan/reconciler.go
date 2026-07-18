@@ -76,7 +76,7 @@ func (d *deviceClient) resolveConn(deviceID string) client.DeviceConnectionInfo 
 	return info
 }
 
-// Get retrieves the actual VLAN configuration from the device and converts it to the openconfig.VLans struct
+// Get retrieves the actual VLAN configuration from the device as a huawei VLAN container
 func (d *deviceClient) Get(ctx context.Context, deviceID string) (interface{}, error) {
 	c, err := d.clientPool.Get(d.resolveConn(deviceID))
 	if err != nil {

@@ -150,7 +150,7 @@ func findMatch(parent, ec *dataNode, op string, editSiblings int) *dataNode {
 // list 仍走通用启发式（多兄弟信号）。新增模型接入若踩同坑在此登记。
 var wellKnownListKeys = map[string]string{
 	"vlans/vlan":           "id",   // huawei-vlan
-	"interfaces/interface": "name", // huawei-ifm / openconfig-interfaces
+	"interfaces/interface": "name", // huawei-ifm
 }
 
 // wellKnownListKey returns the registered key leaf name for parent/ec, "" when

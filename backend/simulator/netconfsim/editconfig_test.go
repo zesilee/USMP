@@ -85,14 +85,14 @@ func TestEditConfigMergeAddsNewListEntry(t *testing.T) {
 
 func TestEditConfigMergeNestedContainerPreservesSiblings(t *testing.T) {
 	ds := newTreeDatastore()
-	base := `<interfaces xmlns="http://openconfig.net/yang/interfaces">` +
+	base := `<interfaces xmlns="http://example.com/yang/interfaces">` +
 		`<interface><name>eth0</name><config><name>eth0</name><enabled>true</enabled><mtu>1500</mtu></config></interface>` +
 		`</interfaces>`
 	if err := ds.SetRunning([]byte(base)); err != nil {
 		t.Fatal(err)
 	}
 	// Merge only mtu into the single <config> container; enabled must survive.
-	edit := `<interfaces xmlns="http://openconfig.net/yang/interfaces">` +
+	edit := `<interfaces xmlns="http://example.com/yang/interfaces">` +
 		`<interface><name>eth0</name><config><mtu>9000</mtu></config></interface></interfaces>`
 	if err := ds.EditConfig([]byte(edit)); err != nil {
 		t.Fatalf("EditConfig: %v", err)

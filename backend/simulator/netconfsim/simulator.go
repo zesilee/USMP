@@ -166,7 +166,7 @@ func (s *Simulator) Port() int {
 }
 
 // SetRunningConfig sets the initial running configuration from a Device struct.
-// Accepts any device struct (e.g., openconfig.Device or huawei.Device).
+// Accepts any device struct (e.g., huawei.Device).
 func (s *Simulator) SetRunningConfig(dev interface{}) {
 	_ = s.store.SetRunning(deviceToConfigXML(dev))
 }

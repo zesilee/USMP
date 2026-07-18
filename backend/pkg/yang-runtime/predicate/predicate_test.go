@@ -163,7 +163,7 @@ func TestContains(t *testing.T) {
 }
 
 func TestModulePrefix(t *testing.T) {
-	p := ModulePrefix("openconfig-interfaces")
+	p := ModulePrefix("example-interfaces")
 
 	tests := []struct {
 		name string
@@ -172,12 +172,12 @@ func TestModulePrefix(t *testing.T) {
 	}{
 		{
 			name: "correct module prefix",
-			path: "/openconfig-interfaces:interfaces/openconfig-interfaces:interface",
+			path: "/example-interfaces:interfaces/example-interfaces:interface",
 			want: true,
 		},
 		{
 			name: "wrong module",
-			path: "/openconfig-system:system",
+			path: "/example-system:system",
 			want: false,
 		},
 	}

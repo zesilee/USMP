@@ -51,7 +51,7 @@ func attrsEqual(x, y []xml.Attr) bool {
 func TestParseSerializeRoundtrip(t *testing.T) {
 	cases := map[string]string{
 		"huawei-vlan":        `<vlan xmlns="urn:huawei:vlan"><vlans><vlan><id>100</id><name>office</name></vlan><vlan><id>200</id><name>guest</name></vlan></vlans></vlan>`,
-		"openconfig-iface":   `<interfaces xmlns="http://openconfig.net/yang/interfaces"><interface><name>eth0</name><config><name>eth0</name><enabled>true</enabled><mtu>1500</mtu></config></interface></interfaces>`,
+		"foreign-iface":      `<interfaces xmlns="http://example.com/yang/interfaces"><interface><name>eth0</name><config><name>eth0</name><enabled>true</enabled><mtu>1500</mtu></config></interface></interfaces>`,
 		"self-closing-empty": `<system xmlns="urn:huawei:system"><info><name/></info></system>`,
 		"attr-operation":     `<vlan xmlns="urn:huawei:vlan"><vlans><vlan operation="delete"><id>300</id></vlan></vlans></vlan>`,
 		"multiple-top-level": `<vlan xmlns="urn:huawei:vlan"><vlans/></vlan><ifm xmlns="urn:huawei:ifm"><interfaces/></ifm>`,

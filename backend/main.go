@@ -30,7 +30,7 @@ import (
 // @description     响应统一信封 {code,message,data,success}；此规格是前端 TS 类型的唯一真源（勿手改生成物）。
 // @BasePath        /api/v1
 func main() {
-	// Build the YANG schema tree from generated ygot models (huawei + openconfig)
+	// Build the YANG schema tree from generated ygot models (huawei + usmp business)
 	// so the manager's schema tree is populated (fixes the empty-schema gap).
 	// Device NETCONF capabilities narrow the usable module set at runtime.
 	yangSchema, err := yangschema.Load()

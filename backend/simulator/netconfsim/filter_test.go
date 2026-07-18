@@ -89,7 +89,7 @@ func TestFilterNoMatchYieldsEmpty(t *testing.T) {
 // A namespace-less filter still matches namespaced data (client XPath/subtree
 // filters routinely omit namespaces).
 func TestFilterNamespaceLessMatchesNamespacedData(t *testing.T) {
-	data := `<interfaces xmlns="http://openconfig.net/yang/interfaces">` +
+	data := `<interfaces xmlns="http://example.com/yang/interfaces">` +
 		`<interface><name>eth0</name><config><mtu>1500</mtu></config></interface>` +
 		`<interface><name>eth1</name><config><mtu>9000</mtu></config></interface>` +
 		`</interfaces>`

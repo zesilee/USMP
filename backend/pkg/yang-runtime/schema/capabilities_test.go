@@ -10,7 +10,7 @@ func modsFixture() []Module {
 	return []Module{
 		NewModule("vlan", "urn:huawei:yang:huawei-vlan", "", NewContainer("vlan", "", "/vlan", nil, false)),
 		NewModule("ifm", "urn:huawei:yang:huawei-ifm", "", NewContainer("ifm", "", "/ifm", nil, false)),
-		NewModule("interfaces", "http://openconfig.net/yang/interfaces", "", NewContainer("interfaces", "", "/interfaces", nil, false)),
+		NewModule("interfaces", "http://example.com/yang/interfaces", "", NewContainer("interfaces", "", "/interfaces", nil, false)),
 	}
 }
 
@@ -48,10 +48,10 @@ func TestNarrowByNamespace(t *testing.T) {
 	}
 }
 
-// TestNarrowByModuleParamAndSubstring: openconfig cap narrows to interfaces.
+// TestNarrowByModuleParamAndSubstring: URL 形态命名空间 cap narrows to interfaces.
 func TestNarrowByModuleParam(t *testing.T) {
 	caps := []string{
-		"http://openconfig.net/yang/interfaces?module=openconfig-interfaces&revision=2022-01-01",
+		"http://example.com/yang/interfaces?module=example-interfaces&revision=2022-01-01",
 	}
 	got := names(NarrowModulesByCapabilities(caps, modsFixture()))
 	if len(got) != 1 || got[0] != "interfaces" {

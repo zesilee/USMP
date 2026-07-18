@@ -188,8 +188,6 @@ func vendorForNamespace(ns string) string {
 	switch {
 	case strings.Contains(l, "huawei"):
 		return "huawei"
-	case strings.Contains(l, "openconfig"):
-		return "openconfig"
 	default:
 		return "unknown"
 	}
