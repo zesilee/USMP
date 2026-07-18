@@ -101,14 +101,14 @@ describe('Sidebar · 业务菜单任务域分组（FE-13）', () => {
     setActivePinia(createPinia())
     mockYangModules([
       { name: 'ifm', description: '接口管理', vendor: 'huawei', category: 'interface-mgr' },
-      { name: 'interfaces', description: 'oc 接口', vendor: 'openconfig' },
+      { name: 'bgp', description: 'BGP', vendor: 'huawei' },
     ])
     const wrapper = mount(Sidebar, { global: { plugins: [router, ElementPlus] } })
     await new Promise((r) => setTimeout(r))
     expect(wrapper.text()).toContain('interface-mgr')
     expect(wrapper.text()).toContain('其他')
     expect(wrapper.find('[data-test="module-item-ifm"]').exists()).toBe(true)
-    expect(wrapper.find('[data-test="module-item-interfaces"]').exists()).toBe(true)
+    expect(wrapper.find('[data-test="module-item-bgp"]').exists()).toBe(true)
   })
 
   it('全部无 category → 不渲染分组标题（平铺，渲染不失败 R08）', async () => {

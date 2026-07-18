@@ -77,14 +77,14 @@ describe('menu store · nativeGroups 任务域分组', () => {
     mockModules([
       { name: 'ifm', title: 'ifm', vendor: 'huawei', description: '接口管理', category: 'interface-mgr' },
       { name: 'vlan', title: 'vlan', vendor: 'huawei', description: 'VLAN', category: 'vlan' },
-      { name: 'interfaces', title: 'interfaces', vendor: 'openconfig', description: 'oc 接口' },
+      { name: 'bgp', title: 'bgp', vendor: 'huawei', description: 'BGP' },
     ])
     const store = useMenuStore()
     await store.loadNativeModules()
     const groups = store.nativeGroups
     expect(groups.map((g) => g.category)).toEqual(['interface-mgr', 'vlan', ''])
     expect(groups[0].modules.map((m) => m.name)).toEqual(['ifm'])
-    expect(groups[2].modules.map((m) => m.name)).toEqual(['interfaces'])
+    expect(groups[2].modules.map((m) => m.name)).toEqual(['bgp'])
   })
 
   it('全部无 category（含回退项）：单一默认组，等价平铺', async () => {
