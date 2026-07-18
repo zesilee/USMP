@@ -45,8 +45,8 @@ type ClientFactory func(info DeviceConnectionInfo) (Client, error)
 func NewDefaultClientPool(factory ClientFactory) ClientPool {
 	return &DefaultClientPool{
 		clients: make(map[string]Client),
-		factory:  factory,
-		stats:    PoolStats{},
+		factory: factory,
+		stats:   PoolStats{},
 	}
 }
 
@@ -127,7 +127,9 @@ func DefaultClientFactory(defaultTimeout time.Duration) ClientFactory {
 			c, err := NewNETCONFClient(info)
 			return c, err
 		case ProtocolGNMI:
-			return NewGNMIClient(info), nil
+			// gNMI 为规划能力：空壳 client（Get/Set 发空请求的假成功路径）已删
+			// （retire-idle-scaffolds），显式错误优于伪装成功（R08）。
+			return nil, fmt.Errorf("gNMI 尚未实现（规划能力），设备 %s 请使用 NETCONF", info.IP)
 		case ProtocolAUTO:
 			// Auto-detect based on port
 			if info.Port == 0 {
@@ -142,8 +144,8 @@ func DefaultClientFactory(defaultTimeout time.Duration) ClientFactory {
 				c, err := NewNETCONFClient(info)
 				return c, err
 			case 9339:
-				info.Protocol = ProtocolGNMI
-				return NewGNMIClient(info), nil
+				// gNMI 端口显式未实现（规划能力，见 ProtocolGNMI 分支）。
+				return nil, fmt.Errorf("gNMI 尚未实现（规划能力），设备 %s:9339 请使用 NETCONF(830)", info.IP)
 			default:
 				// Default to NETCONF
 				info.Protocol = ProtocolNETCONF

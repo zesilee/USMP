@@ -131,15 +131,6 @@ func TestBaseSourceEnqueue(t *testing.T) {
 	assert.True(t, called)
 	mc.AssertCalled(t, "Enqueue", expectedEvt)
 }
-
-func TestGNMISourceCreation(t *testing.T) {
-	// Client is nil in this test just to check creation
-	s := NewGNMISubSource("192.168.1.1", "/interfaces", nil)
-	assert.NotNil(t, s)
-	assert.Equal(t, "192.168.1.1", s.deviceID)
-	assert.Equal(t, "/interfaces", s.path)
-}
-
 func TestControllerBuilderIntegration(t *testing.T) {
 	// Test that we can build a controller and source works together
 	mr := &MockReconciler{}

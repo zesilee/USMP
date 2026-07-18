@@ -27,7 +27,6 @@ func TestNewManager(t *testing.T) {
 	assert.NotNil(t, m)
 	assert.NotNil(t, m.GetSchema())
 	assert.NotNil(t, m.GetClientPool())
-	assert.NotNil(t, m.GetPluginManager())
 	assert.False(t, m.started)
 }
 
@@ -46,16 +45,6 @@ func TestAddController(t *testing.T) {
 	ctrl := controller.ControllerManagedBy("test").WithReconciler(mr).Build()
 	m.AddController(ctrl)
 	assert.Len(t, m.Controllers(), 1)
-}
-
-func TestAddPlugin(t *testing.T) {
-	m := New()
-	// This would need a concrete implementation, just test it doesn't panic
-	// Actual testing of plugin addition is covered in plugin package
-	assert.NotPanics(t, func() {
-		// Adding a plugin would correctly route it based on interface
-		m.AddPlugin(nil)
-	})
 }
 
 func TestStartStop(t *testing.T) {

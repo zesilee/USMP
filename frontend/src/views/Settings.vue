@@ -35,7 +35,7 @@ const cards = [
     meta: '',
     rows: [
       { k: 'NETCONF 端口', hint: 'SSH over 830', v: '830', muted: false },
-      { k: 'gNMI 端口', hint: 'gRPC 遥测订阅', v: '9339 / 9340', muted: false },
+      { k: 'gNMI 端口', hint: 'gRPC 遥测订阅（规划能力，当前未实现）', v: '9339 / 9340', muted: true },
       { k: '断线重连', hint: 'ClientPool 自动重试', v: '启用', muted: false },
       { k: '连接超时', hint: 'NETCONF 单次请求上限', v: '10s', muted: false },
     ],
