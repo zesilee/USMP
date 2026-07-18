@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<blacklist>
+    <module><name>demo-bad</name><revision>2020-01-01</revision></module>
+    <module><name>demo-oldrev</name><revision>2019-01-01</revision></module>
+    <module><name>demo-missing</name><revision>2020-01-01</revision></module>
+</blacklist>
