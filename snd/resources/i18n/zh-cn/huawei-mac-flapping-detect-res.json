@@ -1,0 +1,47 @@
+{
+  "/huawei-mac-flapping-detect:mac-flapping-detect": {
+    "name": "MAC漂移检测"
+  },
+  "/huawei-mac-flapping-detect:mac-flapping-detect/global-attribute": {
+    "name": "MAC漂移检测全局属性"
+  },
+  "/huawei-mac-flapping-detect:mac-flapping-detect/global-attribute/detect-enable": {
+    "name": "MAC漂移检测状态"
+  },
+  "/huawei-mac-flapping-detect:mac-flapping-detect/global-attribute/detect-type": {
+    "name": "MAC漂移检测类型"
+  },
+  "/huawei-mac-flapping-detect:mac-flapping-detect/global-attribute/detect-type/level": {
+    "name": "MAC漂移检测安全级别"
+  },
+  "/huawei-mac-flapping-detect:mac-flapping-detect/global-attribute/detect-type/level/detect-level": {
+    "name": "MAC漂移检测安全级别"
+  },
+  "/huawei-mac-flapping-detect:mac-flapping-detect/global-attribute/detect-type/threshold": {
+    "name": "MAC漂移检测安全阈值"
+  },
+  "/huawei-mac-flapping-detect:mac-flapping-detect/global-attribute/detect-type/threshold/detect-threshold": {
+    "name": "MAC漂移检测安全阈值"
+  },
+  "/huawei-mac-flapping-detect:mac-flapping-detect/global-attribute/trap-enable": {
+    "name": "MAC漂移定时告警状态"
+  },
+  "/huawei-mac-flapping-detect:mac-flapping-detect/exclude-vlan": {
+    "name": "MAC漂移检测的白名单"
+  },
+  "/huawei-mac-flapping-detect:mac-flapping-detect/exclude-vlan/vlan-list": {
+    "name": "MAC漂移检测的VLAN白名单"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l2-sub-interface/huawei-mac-flapping-detect:mac-address-flapping": {
+    "name": "配置MAC地址漂移"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l2-sub-interface/huawei-mac-flapping-detect:mac-address-flapping/error-down": {
+    "name": "使能/去使能error-down"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/main-interface/l2-attribute/huawei-mac-flapping-detect:mac-address-flapping": {
+    "name": "配置MAC地址漂移"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/main-interface/l2-attribute/huawei-mac-flapping-detect:mac-address-flapping/error-down": {
+    "name": "使能/去使能error-down"
+  }
+}

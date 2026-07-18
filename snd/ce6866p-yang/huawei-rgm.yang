@@ -1,0 +1,292 @@
+/*
+Copyright (C) 2019 Huawei Technologies Co., Ltd. All rights reserved.
+*/
+module huawei-rgm {
+  namespace "urn:huawei:yang:huawei-rgm";
+  prefix rgm;
+  import huawei-ifm {
+    prefix ifm;
+  }
+  import huawei-extension {
+    prefix ext;
+  }
+  import huawei-ip {
+    prefix ip;
+  }  
+  import huawei-vrrp {
+    prefix vrrp;
+  }
+  import ietf-yang-types {
+    prefix yang;
+  }
+  import huawei-route-monitor-group {
+    prefix rmg;
+  }
+  organization
+    "Huawei Technologies Co., Ltd.";
+  contact
+    "Huawei Industrial Base
+     Bantian, Longgang
+     Shenzhen 518129
+     People's Republic of China
+     Website: http://www.huawei.com
+     Email: support@huawei.com";
+  description
+    "IPv4 Direct Route Association.";
+  revision 2019-11-28 {
+    description
+      "Initial revision.";
+    reference
+      "Huawei private.";
+  }
+  typedef port-state {
+    type enumeration {
+      enum "down" {
+        value 0;
+        description
+          "The status of interface is down.";
+      }
+      enum "up" {
+        value 1;
+        description
+          "The status of interface is up.";
+      }
+      enum "none" {
+        value 255;
+        description
+          "None.";
+      }
+    }
+    description
+      "The status of interface adding to monitor group link.";
+  }
+  ext:task-name "rgm";  
+  container rgm {
+    description
+      "Direct Route Association.";
+    container monitor-link-groups {
+      description
+        "List of monitor link groups.";
+      list monitor-link-group {
+        key "id";
+        description
+          "Configure monitor link group.";
+        leaf id {
+          type uint8 {
+            range "1..24";
+          }
+          description
+            "Monitor link group ID.";
+        }
+        leaf status {
+          type boolean;
+          default "true";
+          description
+            "Enable/disable monitor link group.";
+        }
+        leaf recover-time {
+          type uint16 {
+            range "0..300";
+          }
+          units s;
+          default "3";
+          description
+            "Monitor link group recover time.";
+        }
+        container uplink-interfaces {
+          description
+            "List of monitor link group uplink interfaces.";
+          list uplink-interface {
+            key "if-name";
+            description
+              "Configure monitor link group uplink interface.";
+            leaf if-name {
+              type leafref {
+                path "/ifm:ifm/ifm:interfaces/ifm:interface/ifm:name";
+              }
+              description
+                "Specifies an interface to be added to a monitor link group.";
+            }
+            leaf port-state {
+              type port-state;
+              config false;
+              description
+                "The status of monitor link group interface.";
+            }
+            leaf last-up-time {
+              type yang:date-and-time;
+              config false;
+              description
+                "The last up time of monitor link group interface.";
+            }
+            leaf last-down-time {
+              type yang:date-and-time;
+              config false;
+              description
+                "The last down time of monitor link group interface.";
+            }
+          }
+        }
+        container downlink-interfaces {
+          description
+            "List of monitor link group downlink interfaces.";
+          list downlink-interface {
+            key "if-name";
+            unique "id";
+            description
+              "Configure monitor link group downlink interface.";
+            leaf if-name {
+              type leafref {
+                path "/ifm:ifm/ifm:interfaces/ifm:interface/ifm:name";
+              }
+              must "not(../../../uplink-interfaces/uplink-interface[if-name = current()])";
+              description
+                "Specifies an interface to be added to a monitor link group.";
+            }
+            leaf id {
+              type uint16 {
+                range "1..512";
+              }
+              mandatory true;
+              description
+                "Specifies a ID of monitor link group interface.";
+            }
+            leaf port-state {
+              type port-state;
+              config false;
+              description
+                "The status of monitor link group interface.";
+            }
+            leaf last-up-time {
+              type yang:date-and-time;
+              config false;
+              description
+                "The last up time of monitor link group interface.";
+            }
+            leaf last-down-time {
+              type yang:date-and-time;
+              config false;
+              description
+                "The last down time of monitor link group interface.";
+            }
+          }
+        }
+      }
+    }
+  }
+  augment "/ifm:ifm/ifm:interfaces/ifm:interface/ip:ipv4" {
+    description
+      "Association between direct routes and a VRRP backup group.";
+    container rgm {
+      description
+        "Configure IPv4 direct route track VRRP, PWs, virtual-access and so on under the ifm interface.";
+      choice rgm-track {
+        description
+          "Association between direct routes and a VRRP backup group, PW status and delay for advertising direct routes.";
+        case track-vrrp {
+          description
+            "Association between direct routes and a VRRP backup group.";
+          container track-vrrp {
+            description
+              "Configure association between direct routes and a VRRP backup group.";
+            leaf vrrp-id {
+              type leafref {
+                path "/ifm:ifm/ifm:interfaces/ifm:interface/ip:ipv4/vrrp:vrrp/vrrp:groups/vrrp:group/vrrp:id";
+              }
+              mandatory true;
+              description
+                "Virtual router identifier.";
+            }
+            leaf cost-change {
+              type uint32 {
+                range "1..4294967295";
+              }
+              mandatory true;
+              description
+                "Value that is used as the cost of direct routes when the associated VRRP backup group status changes.";
+            }
+          }
+        }
+        case track-pw {
+          description
+            "Association between direct routes and PW status.";
+          container track-pw {
+            when "../../../ifm:type='Remote-Ap' or ../../../ifm:type='VBridge' or ../../../ifm:type='Virtual-Ethernet' or ../../../ifm:type='Global-VE'";
+            description
+              "Configure association between direct routes and PW status.";
+            leaf cost-change {
+              type uint32 {
+                range "1..4294967295";
+              }
+              description
+                "Value that is used as the cost of direct routes when the associated PW status changes.";
+            }
+          }
+        }
+        case track-rtmtg {
+          ext:hidden ui;
+          description
+            "Association between route-monitor-group routes and interface status.";
+          container track-rtmtg {
+            presence "Track route-monitor-group.";
+            description
+              "Configure association between route-monitor-group routes and interface status.";
+            leaf name {
+              type leafref {
+                path "/rmg:route-monitor-group/rmg:monitor-groups/rmg:monitor-group/rmg:group-name";
+            }
+            mandatory true;
+            description
+              "The route-monitor-group was tracked under the interface.";
+            }
+            leaf down-weight {
+              type uint32 {
+                range "1..1000";
+            }
+            description
+              "Trigger down weight of a track interface.";
+            }
+          }
+        }
+      }
+    }
+  }
+  augment "/ifm:ifm/ifm:interfaces/ifm:interface/ip:ipv6" {
+    description
+      "Association between IPv6 direct route and a VRRP backup group.";
+    container rgm6 {
+      description
+        "Configure IPv6 direct route track VRRP6, PWs, virtual-access and so on under the ifm interface.";
+      choice rgm6-track {
+        description
+          "Association between direct routes and a VRRP6 backup group, PW status and delay for advertising direct routes.";
+        case advertise-delay {
+          description
+            "Delay for advertising direct routes.";
+          container advertise-delay {
+            when "../../../ifm:type='Remote-Ap' or ../../../ifm:type='VBridge' or ../../../ifm:type='Virtual-Ethernet' or ../../../ifm:type='Eth-Trunk'";
+            description
+              "Configure delay for advertising IPv6 direct route.";
+	        leaf cost-change {
+              type uint32 {
+                range "1..4294967295";
+              }
+              mandatory true;
+              description
+                "Value that is used as the cost of IPv6 direct route when the associated object status changes.";
+            }
+            leaf time-delay {
+              type uint32 {
+                range "1..3600";
+              }
+              units s;
+              mandatory true;
+              description
+                "Delay for advertising IPv6 direct route.";
+            }
+          }
+        }
+      }
+    }
+  }   
+}

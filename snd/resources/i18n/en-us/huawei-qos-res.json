@@ -1,0 +1,2030 @@
+{
+  "/huawei-qos:qos": {
+    "name": "Qos"
+  },
+  "/huawei-qos:qos/wred-template": {
+    "name": "Wred-template"
+  },
+  "/huawei-qos:qos/wred-template/port-wreds": {
+    "name": "Port-wreds"
+  },
+  "/huawei-qos:qos/wred-template/port-wreds/port-wred": {
+    "name": "Port-wred"
+  },
+  "/huawei-qos:qos/wred-template/port-wreds/port-wred/wred-color-states": {
+    "name": "Wred-color-states"
+  },
+  "/huawei-qos:qos/wred-template/port-wreds/port-wred/wred-color-states/wred-color-state": {
+    "name": "Wred-color-state"
+  },
+  "/huawei-qos:qos/wred-template/port-wreds/port-wred/wred-color-states/wred-color-state/color": {
+    "name": "Color"
+  },
+  "/huawei-qos:qos/wred-template/port-wreds/port-wred/wred-color-states/wred-color-state/low-limit-percentage": {
+    "name": "Low-limit-percentage"
+  },
+  "/huawei-qos:qos/wred-template/port-wreds/port-wred/wred-color-states/wred-color-state/high-limit-percentage": {
+    "name": "High-limit-percentage"
+  },
+  "/huawei-qos:qos/wred-template/port-wreds/port-wred/wred-color-states/wred-color-state/discard-percentage": {
+    "name": "Discard-percentage"
+  },
+  "/huawei-qos:qos/wred-template/wreds": {
+    "name": "Wreds"
+  },
+  "/huawei-qos:qos/wred-template/wreds/wred": {
+    "name": "Wred"
+  },
+  "/huawei-qos:qos/wred-template/wreds/wred/name": {
+    "name": "Name"
+  },
+  "/huawei-qos:qos/wred-template/wreds/wred/colors": {
+    "name": "Colors"
+  },
+  "/huawei-qos:qos/wred-template/wreds/wred/colors/color": {
+    "name": "Color"
+  },
+  "/huawei-qos:qos/wred-template/wreds/wred/colors/color/color": {
+    "name": "Color"
+  },
+  "/huawei-qos:qos/wred-template/wreds/wred/colors/color/low-limit-percentage": {
+    "name": "Low-limit-percentage"
+  },
+  "/huawei-qos:qos/wred-template/wreds/wred/colors/color/high-limit-percentage": {
+    "name": "High limit percentage"
+  },
+  "/huawei-qos:qos/wred-template/wreds/wred/colors/color/discard-percentage": {
+    "name": "Discarding percentage"
+  },
+  "/huawei-qos:qos/wred-template/wreds/wred/ecn": {
+    "name": "Ecn"
+  },
+  "/huawei-qos:qos/wred-template/wreds/wred/ecn/discard-threshold": {
+    "name": "Discard-threshold-choice"
+  },
+  "/huawei-qos:qos/wred-template/wreds/wred/ecn/discard-threshold/absolute-value": {
+    "name": "Absolute-value"
+  },
+  "/huawei-qos:qos/wred-template/wreds/wred/ecn/discard-threshold/absolute-value/absolute-flag": {
+    "name": "Absolute-flag"
+  },
+  "/huawei-qos:qos/wred-template/wreds/wred/ecn/discard-threshold/absolute-value/lowlimitaslt": {
+    "name": "Lowlimitaslt"
+  },
+  "/huawei-qos:qos/wred-template/wreds/wred/ecn/discard-threshold/absolute-value/highlimitaslt": {
+    "name": "Highlimitaslt"
+  },
+  "/huawei-qos:qos/wred-template/wreds/wred/ecn/discard-threshold/absolute-value/cell-flag": {
+    "name": "Cell-flag"
+  },
+  "/huawei-qos:qos/wred-template/wreds/wred/ecn/discard-threshold/absolute-value/lowlimitcell": {
+    "name": "Lowlimitcell"
+  },
+  "/huawei-qos:qos/wred-template/wreds/wred/ecn/discard-threshold/absolute-value/highlimitcell": {
+    "name": "Highlimitcell"
+  },
+  "/huawei-qos:qos/wred-template/wreds/wred/ecn/discard-threshold/percentage-value": {
+    "name": "Percentage-value"
+  },
+  "/huawei-qos:qos/wred-template/wreds/wred/ecn/discard-threshold/percentage-value/low-limit": {
+    "name": "Low-limit"
+  },
+  "/huawei-qos:qos/wred-template/wreds/wred/ecn/discard-threshold/percentage-value/high-limit": {
+    "name": "High-limit"
+  },
+  "/huawei-qos:qos/wred-template/wreds/wred/ecn/maximum-probability": {
+    "name": "Maximum-probability"
+  },
+  "/huawei-qos:qos/queue-scheduler-template": {
+    "name": "Queue-schedule-template"
+  },
+  "/huawei-qos:qos/queue-scheduler-template/flow-queues": {
+    "name": "Flow-queues"
+  },
+  "/huawei-qos:qos/queue-scheduler-template/flow-queues/flow-queue": {
+    "name": "Flow-queue"
+  },
+  "/huawei-qos:qos/queue-scheduler-template/flow-queues/flow-queue/name": {
+    "name": "Name"
+  },
+  "/huawei-qos:qos/queue-scheduler-template/flow-queues/flow-queue/mode": {
+    "name": "Mode"
+  },
+  "/huawei-qos:qos/queue-scheduler-template/flow-queues/flow-queue/normal-mode-queues": {
+    "name": "Normal-mode-queues"
+  },
+  "/huawei-qos:qos/queue-scheduler-template/flow-queues/flow-queue/normal-mode-queues/normal-mode-queue": {
+    "name": "Normal-mode-queues"
+  },
+  "/huawei-qos:qos/queue-scheduler-template/flow-queues/flow-queue/normal-mode-queues/normal-mode-queue/service-class": {
+    "name": "Service-class"
+  },
+  "/huawei-qos:qos/queue-scheduler-template/flow-queues/flow-queue/normal-mode-queues/normal-mode-queue/flow-wred-name": {
+    "name": "Flow-wred-name"
+  },
+  "/huawei-qos:qos/classifier-template": {
+    "name": "Classifier-template"
+  },
+  "/huawei-qos:qos/classifier-template/diffserv-domains": {
+    "name": "Diffserv-domain"
+  },
+  "/huawei-qos:qos/classifier-template/diffserv-domains/diffserv-domain": {
+    "name": "Diffserv-domain"
+  },
+  "/huawei-qos:qos/classifier-template/diffserv-domains/diffserv-domain/name": {
+    "name": "Name"
+  },
+  "/huawei-qos:qos/classifier-template/diffserv-domains/diffserv-domain/behavior-aggregations": {
+    "name": "Behavior-aggregations"
+  },
+  "/huawei-qos:qos/classifier-template/diffserv-domains/diffserv-domain/behavior-aggregations/behavior-aggregation": {
+    "name": "Behavior-aggregation"
+  },
+  "/huawei-qos:qos/classifier-template/diffserv-domains/diffserv-domain/behavior-aggregations/behavior-aggregation/type": {
+    "name": "Type"
+  },
+  "/huawei-qos:qos/classifier-template/diffserv-domains/diffserv-domain/behavior-aggregations/behavior-aggregation/value": {
+    "name": "Value"
+  },
+  "/huawei-qos:qos/classifier-template/diffserv-domains/diffserv-domain/behavior-aggregations/behavior-aggregation/service-class": {
+    "name": "Service-class"
+  },
+  "/huawei-qos:qos/classifier-template/diffserv-domains/diffserv-domain/behavior-aggregations/behavior-aggregation/color": {
+    "name": "Color"
+  },
+  "/huawei-qos:qos/classifier-template/diffserv-domains/diffserv-domain/per-hop-behaviors": {
+    "name": "Per-hop-behaviors"
+  },
+  "/huawei-qos:qos/classifier-template/diffserv-domains/diffserv-domain/per-hop-behaviors/per-hop-behavior": {
+    "name": "Per-hop-behavior"
+  },
+  "/huawei-qos:qos/classifier-template/diffserv-domains/diffserv-domain/per-hop-behaviors/per-hop-behavior/type": {
+    "name": "Type"
+  },
+  "/huawei-qos:qos/classifier-template/diffserv-domains/diffserv-domain/per-hop-behaviors/per-hop-behavior/service-class": {
+    "name": "Service-class"
+  },
+  "/huawei-qos:qos/classifier-template/diffserv-domains/diffserv-domain/per-hop-behaviors/per-hop-behavior/color": {
+    "name": "Color"
+  },
+  "/huawei-qos:qos/classifier-template/diffserv-domains/diffserv-domain/per-hop-behaviors/per-hop-behavior/value": {
+    "name": "Value"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers": {
+    "name": "Traffic-classifiers"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier": {
+    "name": "Traffic-classifier"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/name": {
+    "name": "Name"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/operator": {
+    "name": "Operator"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/tcp-flag": {
+    "name": "Tcp-flag"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/tcp-flag/tcp-flag-value": {
+    "name": "Tcp-flag-value"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-acls": {
+    "name": "Rule-acls"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-acls/rule-acl": {
+    "name": "Rule-acl"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-acls/rule-acl/acl-name": {
+    "name": "Acl-name"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-acl-ipv6s": {
+    "name": "Rule-acl-ipv6s"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-acl-ipv6s/rule-acl-ipv6": {
+    "name": "Rule-acl-ipv6"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-acl-ipv6s/rule-acl-ipv6/acl-name": {
+    "name": "Acl-name"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-acl-ipv6s/rule-acl-ipv6/loose-mode": {
+    "name": "Loose-mode"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-prioritys": {
+    "name": "Rule-prioritys"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-prioritys/rule-priority": {
+    "name": "Rule-priority"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-prioritys/rule-priority/type": {
+    "name": "Type"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-prioritys/rule-priority/value": {
+    "name": "Value"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/local-ids": {
+    "name": "Local-ids"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/local-ids/local-id": {
+    "name": "Local-id"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/local-ids/local-id/value": {
+    "name": "Value"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-eth-types": {
+    "name": "Rule-eth-types"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-eth-types/rule-eth-type": {
+    "name": "Rule-eth-type"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-eth-types/rule-eth-type/value": {
+    "name": "Value"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-mac-and-masks": {
+    "name": "Rule-mac-and-masks"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-mac-and-masks/rule-mac-and-mask": {
+    "name": "Rule-mac-and-mask"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-mac-and-masks/rule-mac-and-mask/mac-type": {
+    "name": "Mac-type"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-mac-and-masks/rule-mac-and-mask/mac-address": {
+    "name": "Mac-address"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-mac-and-masks/rule-mac-and-mask/mac-address-mask": {
+    "name": "Mac-address-mask"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-pevlans": {
+    "name": "Rule-pevlans"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-pevlans/rule-pevlan": {
+    "name": "Rule-pevlan"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-pevlans/rule-pevlan/start-vlan-id": {
+    "name": "Start-vlan-id"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-pevlans/rule-pevlan/end-vlan-id": {
+    "name": "End-vlan-id"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-cevlans": {
+    "name": "Rule-cevlans"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-cevlans/rule-cevlan": {
+    "name": "Rule-cevlan"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-cevlans/rule-cevlan/start-vlan-id": {
+    "name": "Start-vlan-id"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-cevlans/rule-cevlan/end-vlan-id": {
+    "name": "End-vlan-id"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-pe-cevlans": {
+    "name": "Rule-pe-cevlans"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-pe-cevlans/rule-pe-cevlan": {
+    "name": "Rule-pe-cevlan"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-pe-cevlans/rule-pe-cevlan/rule-start-pevlan-id": {
+    "name": "Rule-start-pevlan-id"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-pe-cevlans/rule-pe-cevlan/rule-end-pevlan-id": {
+    "name": "Rule-end-pevlan-id"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-pe-cevlans/rule-pe-cevlan/rule-start-cevlan-id": {
+    "name": "Rule-start-cevlan-id"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-pe-cevlans/rule-pe-cevlan/rule-end-cevlan-id": {
+    "name": "Rule-end-cevlan-id"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-any-packets": {
+    "name": "Rule-any-packets"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-any-packets/rule-any-packet": {
+    "name": "Rule-any-packet"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-interfaces": {
+    "name": "Rule-interfaces"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-interfaces/rule-interface": {
+    "name": "Rule-interfaces"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-interfaces/rule-interface/direction": {
+    "name": "Direction"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-interfaces/rule-interface/interface": {
+    "name": "Interface"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-double-tags": {
+    "name": "Rule-double-tags"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-double-tags/double-tag": {
+    "name": "Double-tag"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-discards": {
+    "name": "Rule-discards"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-discards/rule-discard-label": {
+    "name": "Rule-discard-label"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-ip-identifications": {
+    "name": "Rule-ip-identifications"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-ip-identifications/rule-ip-identification": {
+    "name": "Rule-ip-identification"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-ip-identifications/rule-ip-identification/identification-id": {
+    "name": "Identification-id"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-ip-identifications/rule-ip-identification/identification-mask": {
+    "name": "Identification-mask"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-nexthops": {
+    "name": "Rule-nexthops"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-nexthops/rule-nexthop": {
+    "name": "Rule-nexthop"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-nexthops/rule-nexthop/ip-address": {
+    "name": "IP-address"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-nexthops/rule-nexthop/interface": {
+    "name": "Interface"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-nexthop-ipv6s": {
+    "name": "Rule-nexthop-ipv6s"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-nexthop-ipv6s/rule-nexthop-ipv6": {
+    "name": "Rule-nexthop-ipv6"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-nexthop-ipv6s/rule-nexthop-ipv6/ipv6-address": {
+    "name": "IPV6-address"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-nexthop-ipv6s/rule-nexthop-ipv6/interface": {
+    "name": "Interface"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-packet-types": {
+    "name": "Rule-packet-types"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-packet-types/rule-packet-type": {
+    "name": "Rule-packet-type"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-gre-inner": {
+    "name": "Rule-gre-inner"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-gre-inner/source-port-num": {
+    "name": "Source-port-num"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-gre-inner/dest-port-num": {
+    "name": "Dest-port-num"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-gre-inner/source-ip": {
+    "name": "Source-ip"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-gre-inner/source-ip-mask": {
+    "name": "Source-ip-mask"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-gre-inner/destination-ip": {
+    "name": "Destination-ip"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-gre-inner/destination-ip-mask": {
+    "name": "Destination-ip-mask"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-gre-inner/protocol": {
+    "name": "Protocol"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-vxlan-acls": {
+    "name": "Rule-vxlan-acls"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-vxlan-acls/rule-vxlan-acl": {
+    "name": "Rule-vxlan-acl"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-vxlan-acls/rule-vxlan-acl/vxlan-acl": {
+    "name": "Vxlan-acl"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-vxlan-acls/rule-vxlan-acl/tag-format": {
+    "name": "Formatting Tags"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-vxlan-acls/rule-vxlan-acl/transit": {
+    "name": "Transit"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-vxlan-infos": {
+    "name": "Rule-vxlan-infos"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-vxlan-infos/rule-vxlan-info": {
+    "name": "Rule-vxlan-info"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-vxlan-infos/rule-vxlan-info/vxlan-field-type": {
+    "name": "Vxlan-field-type"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-vxlan-infos/rule-vxlan-info/field-value": {
+    "name": "Field-value"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-vxlan-infos/rule-vxlan-info/transit": {
+    "name": "Transit"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-rocev2": {
+    "name": "Rule-rocev2"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-rocev2/ip-family": {
+    "name": "Ip-family"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-rocev2/opcode": {
+    "name": "Opcode"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-rocev2/qpair": {
+    "name": "Qpair"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-rocev2/nack": {
+    "name": "Nack"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-rocev2/udf-l4-head-offs": {
+    "name": "Udf-l4-head-offs"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-rocev2/udf-l4-head-offs/udf-l4-head-off": {
+    "name": "Udf-l4-head-off"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-rocev2/udf-l4-head-offs/udf-l4-head-off/rule-string": {
+    "name": "Rule-string"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-rocev2/udf-l4-head-offs/udf-l4-head-off/rule-mask": {
+    "name": "Rule-mask"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-rocev2/udf-l4-head-offs/udf-l4-head-off/offset": {
+    "name": "Offset"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-vxlan-ipv6acls": {
+    "name": "Rule-vxlan-ipv6acls"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-vxlan-ipv6acls/rule-vxlan-ipv6acl": {
+    "name": "Rule-vxlan-ipv6acl"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-vxlan-ipv6acls/rule-vxlan-ipv6acl/vxlan-ipv6acl": {
+    "name": "Vxlan-ipv6acl"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-vxlan-ipv6acls/rule-vxlan-ipv6acl/ipv6-rule-mode": {
+    "name": "Ipv6-rule-mode"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors": {
+    "name": "Traffic-behaviors"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior": {
+    "name": "Traffic-behavior"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/name": {
+    "name": "Name"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/filter-action": {
+    "name": "Filter-action"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/filter-action/filter": {
+    "name": "Filter"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/car-actions": {
+    "name": "Car-actions"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/car-actions/car-action": {
+    "name": "Car-action"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/car-actions/car-action/action-type": {
+    "name": "Action-type"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/car-actions/car-action/cbs": {
+    "name": "Cbs"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/car-actions/car-action/pbs": {
+    "name": "Pbs"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/car-actions/car-action/green-action": {
+    "name": "Green-action"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/car-actions/car-action/green-action-parameters": {
+    "name": "Green-action-parameters"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/car-actions/car-action/green-action-parameters/green-service-class": {
+    "name": "Green-service-class"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/car-actions/car-action/green-action-parameters/green-service-class/green-service-class": {
+    "name": "Green-service-class"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/car-actions/car-action/green-action-parameters/green-service-class/green-color": {
+    "name": "Green-color"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/car-actions/car-action/green-action-parameters/green-remark-dscp": {
+    "name": "DSCP priority remarked to the green packets"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/car-actions/car-action/green-action-parameters/green-remark-dscp/green-remark-dscp": {
+    "name": "DSCP priority remarked to the green packets"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/car-actions/car-action/yellow-action": {
+    "name": "Yellow-action"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/car-actions/car-action/yellow-action-parameters": {
+    "name": "Yellow-action-parameters"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/car-actions/car-action/yellow-action-parameters/yellow-service-class": {
+    "name": "Yellow-service-class"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/car-actions/car-action/yellow-action-parameters/yellow-service-class/yellow-service-class": {
+    "name": "Yellow-service-class"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/car-actions/car-action/yellow-action-parameters/yellow-service-class/yellow-color": {
+    "name": "Yellow-color"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/car-actions/car-action/yellow-action-parameters/yellow-remark-dscp": {
+    "name": "DSCP priority remarked to the yellow packets"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/car-actions/car-action/yellow-action-parameters/yellow-remark-dscp/yellow-remark-dscp": {
+    "name": "DSCP priority remarked to the yellow packets"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/car-actions/car-action/red-action": {
+    "name": "Red-action"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/car-actions/car-action/red-action-parameters": {
+    "name": "Red-action-parameters"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/car-actions/car-action/red-action-parameters/red-service-class": {
+    "name": "Red-service-class"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/car-actions/car-action/red-action-parameters/red-service-class/red-service-class": {
+    "name": "Red-service-class"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/car-actions/car-action/red-action-parameters/red-service-class/red-color": {
+    "name": "Red-color"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/car-actions/car-action/red-action-parameters/red-remark-dscp": {
+    "name": "DSCP priority remarked to the red packets"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/car-actions/car-action/red-action-parameters/red-remark-dscp/red-remark-dscp": {
+    "name": "DSCP priority remarked to the red packets"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/car-actions/car-action/color-aware": {
+    "name": "Color-aware"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/car-actions/car-action/share-mode": {
+    "name": "Share-mode"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/car-actions/car-action/cir-unit": {
+    "name": "Cir-unit"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/car-actions/car-action/pir-unit": {
+    "name": "Pir-unit"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/car-actions/car-action/cbs-unit": {
+    "name": "Cbs-unit"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/car-actions/car-action/pbs-unit": {
+    "name": "Pbs-unit"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/car-shares": {
+    "name": "Aggregated CAR"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/car-shares/car-name-share": {
+    "name": "Aggregated CAR Name"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/policy-actions": {
+    "name": "Policy-actions"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/policy-actions/policy-action": {
+    "name": "Policy-action"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/policy-actions/policy-action/policy-name": {
+    "name": "Policy-name"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/urpf-action": {
+    "name": "Unicast Reverse Path Forwarding (URPF)"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/urpf-action/check-type": {
+    "name": "Check Type"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/urpf-action/allow-default": {
+    "name": "Allow Flag"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/urpf-action/ignore-default": {
+    "name": "Ignore Flag"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/vlan-oper-actions": {
+    "name": "Vlan-oper-actions"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/vlan-oper-actions/vlan-oper": {
+    "name": "Vlan-oper"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/vlan-oper-actions/vlan-oper/vlan-mapping": {
+    "name": "Vlan-mapping"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/vlan-oper-actions/vlan-oper/vlan-mapping/outer-vlanid": {
+    "name": "Outer-vlanid"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/vlan-oper-actions/vlan-oper/vlan-mapping/inner-vlanid": {
+    "name": "Inner-vlanid"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/vlan-oper-actions/vlan-oper/vlan-stacking": {
+    "name": "Vlan-stacking"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/vlan-oper-actions/vlan-oper/vlan-stacking/vlanid": {
+    "name": "Vlanid"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/mac-learning-disable": {
+    "name": "Mac-learning-disable"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/mac-learning-disable/mac-learning-disable": {
+    "name": "Mac-learning-disable"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/statistic-action": {
+    "name": "Statistic-action"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/statistic-action/statistic-enable": {
+    "name": "Statistic-enable"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/remark-action-colors": {
+    "name": "Remark-action-colors"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/remark-action-colors/remark-action-color": {
+    "name": "Remark-action-color"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/remark-action-colors/remark-action-color/remark-type": {
+    "name": "Remark-type"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/remark-action-colors/remark-action-color/remark-value": {
+    "name": "Remark-value"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/remark-action-colors/remark-action-color/color": {
+    "name": "Color"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/global-config": {
+    "name": "Global-config"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/global-config/anyflow-enable": {
+    "name": "Anyflow-enable"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/global-config/traffic-analysis-enable": {
+    "name": "Traffic-analysis-enable"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-policys": {
+    "name": "Traffic-policys"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-policys/traffic-policy": {
+    "name": "Traffic-policy"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-policys/traffic-policy/name": {
+    "name": "Name"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-policys/traffic-policy/description": {
+    "name": "Description"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-policys/traffic-policy/policy-nodes": {
+    "name": "Policy-nodes"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-policys/traffic-policy/policy-nodes/policy-node": {
+    "name": "Policy-node"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-policys/traffic-policy/policy-nodes/policy-node/classifier-name": {
+    "name": "Classifier-name"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-policys/traffic-policy/policy-nodes/policy-node/behavior-name": {
+    "name": "Behavior-name"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-policys/traffic-policy/policy-nodes/policy-node/priority": {
+    "name": "Priority"
+  },
+  "/huawei-qos:qos/classifier-template/qos-groups": {
+    "name": "Qos-groups"
+  },
+  "/huawei-qos:qos/classifier-template/qos-groups/qos-group": {
+    "name": "Qos-group"
+  },
+  "/huawei-qos:qos/classifier-template/qos-groups/qos-group/group-name": {
+    "name": "Group-name"
+  },
+  "/huawei-qos:qos/classifier-template/qos-groups/qos-group/group-interfaces": {
+    "name": "Group-interfaces"
+  },
+  "/huawei-qos:qos/classifier-template/qos-groups/qos-group/group-interfaces/group-interface": {
+    "name": "Group-interface"
+  },
+  "/huawei-qos:qos/classifier-template/qos-groups/qos-group/group-interfaces/group-interface/interface": {
+    "name": "Interface"
+  },
+  "/huawei-qos:qos/classifier-template/qos-groups/qos-group/group-vlans": {
+    "name": "Group-vlans"
+  },
+  "/huawei-qos:qos/classifier-template/qos-groups/qos-group/group-vlans/group-vlan": {
+    "name": "Group-vlan"
+  },
+  "/huawei-qos:qos/classifier-template/qos-groups/qos-group/group-vlans/group-vlan/begin-vlan": {
+    "name": "Begin-vlan"
+  },
+  "/huawei-qos:qos/classifier-template/qos-groups/qos-group/group-vlans/group-vlan/end-vlan": {
+    "name": "End-vlan"
+  },
+  "/huawei-qos:qos/classifier-template/qos-groups/qos-group/group-ips": {
+    "name": "Group-ips"
+  },
+  "/huawei-qos:qos/classifier-template/qos-groups/qos-group/group-ips/group-ip": {
+    "name": "Group-ip"
+  },
+  "/huawei-qos:qos/classifier-template/qos-groups/qos-group/group-ips/group-ip/source-ipv4": {
+    "name": "Source-ipv4"
+  },
+  "/huawei-qos:qos/classifier-template/qos-groups/qos-group/group-ips/group-ip/source-ip-mask": {
+    "name": "Source-ip-mask"
+  },
+  "/huawei-qos:qos/classifier-template/qos-groups/qos-group/group-policy-applys": {
+    "name": "Group-policy-applys"
+  },
+  "/huawei-qos:qos/classifier-template/qos-groups/qos-group/group-policy-applys/group-policy-apply": {
+    "name": "Group-policy-apply"
+  },
+  "/huawei-qos:qos/classifier-template/qos-groups/qos-group/group-policy-applys/group-policy-apply/policy-name": {
+    "name": "Policy-name"
+  },
+  "/huawei-qos:qos/classifier-template/qos-groups/qos-group/group-policy-applys/group-policy-apply/direction": {
+    "name": "Direction"
+  },
+  "/huawei-qos:qos/car-template": {
+    "name": "Car-template"
+  },
+  "/huawei-qos:qos/car-template/templates": {
+    "name": "Templates"
+  },
+  "/huawei-qos:qos/car-template/templates/template": {
+    "name": "Template"
+  },
+  "/huawei-qos:qos/car-template/templates/template/name": {
+    "name": "Name"
+  },
+  "/huawei-qos:qos/car-template/templates/template/cir-parameters": {
+    "name": "Cir-parameters"
+  },
+  "/huawei-qos:qos/car-template/templates/template/cir-parameters/cir": {
+    "name": "Cir"
+  },
+  "/huawei-qos:qos/car-template/templates/template/cir-parameters/cir/cir-value": {
+    "name": "Cir-value"
+  },
+  "/huawei-qos:qos/car-template/templates/template/cir-parameters/cir/pir-value": {
+    "name": "Pir-value"
+  },
+  "/huawei-qos:qos/car-template/templates/template/cir-parameters/cir/cbs-value": {
+    "name": "Cbs-value"
+  },
+  "/huawei-qos:qos/car-template/templates/template/cir-parameters/cir/pbs-value": {
+    "name": "Pbs-value"
+  },
+  "/huawei-qos:qos/car-template/templates/template/cir-parameters/cir/cir-unit": {
+    "name": "Cir-unit"
+  },
+  "/huawei-qos:qos/car-template/templates/template/cir-parameters/cir/pir-unit": {
+    "name": "Pir-unit"
+  },
+  "/huawei-qos:qos/car-template/templates/template/cir-parameters/cir/cbs-unit": {
+    "name": "Cbs-unit"
+  },
+  "/huawei-qos:qos/car-template/templates/template/cir-parameters/cir/pbs-unit": {
+    "name": "Pbs-unit"
+  },
+  "/huawei-qos:qos/car-template/templates/template/cir-parameters/cir-percentage": {
+    "name": "Cir-percentage"
+  },
+  "/huawei-qos:qos/car-template/templates/template/cir-parameters/cir-percentage/cir-percent": {
+    "name": "Cir-percent"
+  },
+  "/huawei-qos:qos/global-config": {
+    "name": "Global-config"
+  },
+  "/huawei-qos:qos/global-config/traffic-policys": {
+    "name": "Traffic-policys"
+  },
+  "/huawei-qos:qos/global-config/traffic-policys/traffic-policy": {
+    "name": "Traffic-policy"
+  },
+  "/huawei-qos:qos/global-config/traffic-policys/traffic-policy/direction": {
+    "name": "Direction"
+  },
+  "/huawei-qos:qos/global-config/traffic-policys/traffic-policy/policy-name": {
+    "name": "Policy-name"
+  },
+  "/huawei-qos:qos/global-config/traffic-policys/traffic-policy/slot-id": {
+    "name": "Slot-id"
+  },
+  "/huawei-qos:qos/global-config/burst-modes": {
+    "name": "Burst-modes"
+  },
+  "/huawei-qos:qos/global-config/burst-modes/burst-mode": {
+    "name": "Burst-mode"
+  },
+  "/huawei-qos:qos/global-config/burst-modes/burst-mode/slot-id": {
+    "name": "Slot-id"
+  },
+  "/huawei-qos:qos/global-config/burst-modes/burst-mode/mode": {
+    "name": "Mode"
+  },
+  "/huawei-qos:qos/global-config/traffic-class": {
+    "name": "Traffic-class"
+  },
+  "/huawei-qos:qos/global-config/traffic-class/priority": {
+    "name": "Priority"
+  },
+  "/huawei-qos:qos/global-config/queue-buffer-alarms-enable": {
+    "name": "Queue-buffer-alarms-enable"
+  },
+  "/huawei-qos:qos/global-config/queue-buffer-alarms-enable/enable": {
+    "name": "Enable"
+  },
+  "/huawei-qos:qos/global-config/queue-buffer-overrun-threshold": {
+    "name": "Queue-buffer-overrun-threshold"
+  },
+  "/huawei-qos:qos/global-config/queue-buffer-overrun-threshold/overrun-limit": {
+    "name": "Overrun-limit"
+  },
+  "/huawei-qos:qos/global-config/car-ifg": {
+    "name": "Car-ifg"
+  },
+  "/huawei-qos:qos/global-config/car-ifg/mode": {
+    "name": "Mode"
+  },
+  "/huawei-qos:qos/global-query": {
+    "name": "Global-query"
+  },
+  "/huawei-qos:qos/global-query/interface-classifier-statisticss": {
+    "name": "Interface-classifier-statisticss"
+  },
+  "/huawei-qos:qos/global-query/interface-classifier-statisticss/interface-classifier-statistics": {
+    "name": "Interface-classifier-statistics"
+  },
+  "/huawei-qos:qos/global-query/interface-classifier-statisticss/interface-classifier-statistics/interface-name": {
+    "name": "Interface-name"
+  },
+  "/huawei-qos:qos/global-query/interface-classifier-statisticss/interface-classifier-statistics/classifier-name": {
+    "name": "Classifier-name"
+  },
+  "/huawei-qos:qos/global-query/interface-classifier-statisticss/interface-classifier-statistics/policy-name": {
+    "name": "Policy-name"
+  },
+  "/huawei-qos:qos/global-query/interface-classifier-statisticss/interface-classifier-statistics/direction": {
+    "name": "Direction"
+  },
+  "/huawei-qos:qos/global-query/interface-classifier-statisticss/interface-classifier-statistics/slot-id": {
+    "name": "Slot-id"
+  },
+  "/huawei-qos:qos/global-query/interface-classifier-statisticss/interface-classifier-statistics/match-packets": {
+    "name": "Match-packets"
+  },
+  "/huawei-qos:qos/global-query/interface-classifier-statisticss/interface-classifier-statistics/match-bytes": {
+    "name": "Match-bytes"
+  },
+  "/huawei-qos:qos/global-query/interface-classifier-statisticss/interface-classifier-statistics/match-packet-rate": {
+    "name": "Match-packet-rate"
+  },
+  "/huawei-qos:qos/global-query/interface-classifier-statisticss/interface-classifier-statistics/match-byte-rate": {
+    "name": "Match-byte-rate"
+  },
+  "/huawei-qos:qos/global-query/interface-classifier-statisticss/interface-classifier-statistics/match-pass-packets": {
+    "name": "Match-pass-packets"
+  },
+  "/huawei-qos:qos/global-query/interface-classifier-statisticss/interface-classifier-statistics/match-pass-bytes": {
+    "name": "Match-pass-bytes"
+  },
+  "/huawei-qos:qos/global-query/interface-classifier-statisticss/interface-classifier-statistics/match-pass-packet-rate": {
+    "name": "Match-pass-packet-rate"
+  },
+  "/huawei-qos:qos/global-query/interface-classifier-statisticss/interface-classifier-statistics/match-pass-byte-rate": {
+    "name": "Match-pass-byte-rate"
+  },
+  "/huawei-qos:qos/global-query/interface-classifier-statisticss/interface-classifier-statistics/match-drop-packets": {
+    "name": "Match-drop-packets"
+  },
+  "/huawei-qos:qos/global-query/interface-classifier-statisticss/interface-classifier-statistics/match-drop-bytes": {
+    "name": "Match-drop-bytes"
+  },
+  "/huawei-qos:qos/global-query/interface-classifier-statisticss/interface-classifier-statistics/match-drop-packet-rate": {
+    "name": "Match-drop-packet-rate"
+  },
+  "/huawei-qos:qos/global-query/interface-classifier-statisticss/interface-classifier-statistics/match-drop-byte-rate": {
+    "name": "Match-drop-byte-rate"
+  },
+  "/huawei-qos:qos/global-query/interface-classifier-statisticss/interface-classifier-statistics/car-drop-packets": {
+    "name": "Car-drop-packets"
+  },
+  "/huawei-qos:qos/global-query/interface-classifier-statisticss/interface-classifier-statistics/car-drop-bytes": {
+    "name": "Car-drop-bytes"
+  },
+  "/huawei-qos:qos/global-query/interface-classifier-statisticss/interface-classifier-statistics/car-drop-packet-rate": {
+    "name": "Car-drop-packet-rate"
+  },
+  "/huawei-qos:qos/global-query/interface-classifier-statisticss/interface-classifier-statistics/car-drop-byte-rate": {
+    "name": "Car-drop-byte-rate"
+  },
+  "/huawei-qos:qos/global-query/interface-classifier-statisticss/interface-classifier-statistics/filter-packets": {
+    "name": "Filter-packets"
+  },
+  "/huawei-qos:qos/global-query/interface-classifier-statisticss/interface-classifier-statistics/filter-bytes": {
+    "name": "Filter-bytes"
+  },
+  "/huawei-qos:qos/global-query/interface-classifier-statisticss/interface-classifier-statistics/filter-packet-rate": {
+    "name": "Filter-packet-rate"
+  },
+  "/huawei-qos:qos/global-query/interface-classifier-statisticss/interface-classifier-statistics/filter-byte-rate": {
+    "name": "Filter-byte-rate"
+  },
+  "/huawei-qos:qos/global-query/vlan-classifier-statisticss": {
+    "name": "Vlan-classifier-statisticss"
+  },
+  "/huawei-qos:qos/global-query/vlan-classifier-statisticss/vlan-classifier-statistics": {
+    "name": "Vlan-classifier-statisticss"
+  },
+  "/huawei-qos:qos/global-query/vlan-classifier-statisticss/vlan-classifier-statistics/vlan-id": {
+    "name": "Vlan-id"
+  },
+  "/huawei-qos:qos/global-query/vlan-classifier-statisticss/vlan-classifier-statistics/direction": {
+    "name": "Direction"
+  },
+  "/huawei-qos:qos/global-query/vlan-classifier-statisticss/vlan-classifier-statistics/classifier-name": {
+    "name": "Classifier-name"
+  },
+  "/huawei-qos:qos/global-query/vlan-classifier-statisticss/vlan-classifier-statistics/policy-name": {
+    "name": "Policy-name"
+  },
+  "/huawei-qos:qos/global-query/vlan-classifier-statisticss/vlan-classifier-statistics/slot-id": {
+    "name": "Slot-id"
+  },
+  "/huawei-qos:qos/global-query/vlan-classifier-statisticss/vlan-classifier-statistics/match-packets": {
+    "name": "Match-packets"
+  },
+  "/huawei-qos:qos/global-query/vlan-classifier-statisticss/vlan-classifier-statistics/match-bytes": {
+    "name": "Match-bytes"
+  },
+  "/huawei-qos:qos/global-query/vlan-classifier-statisticss/vlan-classifier-statistics/match-packet-rate": {
+    "name": "Match-packet-rate"
+  },
+  "/huawei-qos:qos/global-query/vlan-classifier-statisticss/vlan-classifier-statistics/match-byte-rate": {
+    "name": "Match-byte-rate"
+  },
+  "/huawei-qos:qos/global-query/vlan-classifier-statisticss/vlan-classifier-statistics/match-pass-packets": {
+    "name": "Match-pass-packets"
+  },
+  "/huawei-qos:qos/global-query/vlan-classifier-statisticss/vlan-classifier-statistics/match-pass-bytes": {
+    "name": "Match-pass-bytes"
+  },
+  "/huawei-qos:qos/global-query/vlan-classifier-statisticss/vlan-classifier-statistics/match-pass-packet-rate": {
+    "name": "Match-pass-packet-rate"
+  },
+  "/huawei-qos:qos/global-query/vlan-classifier-statisticss/vlan-classifier-statistics/match-pass-byte-rate": {
+    "name": "Match-pass-byte-rate"
+  },
+  "/huawei-qos:qos/global-query/vlan-classifier-statisticss/vlan-classifier-statistics/match-drop-packets": {
+    "name": "Match-drop-packets"
+  },
+  "/huawei-qos:qos/global-query/vlan-classifier-statisticss/vlan-classifier-statistics/match-drop-bytes": {
+    "name": "Match-drop-bytes"
+  },
+  "/huawei-qos:qos/global-query/vlan-classifier-statisticss/vlan-classifier-statistics/match-drop-packet-rate": {
+    "name": "Match-drop-packet-rate"
+  },
+  "/huawei-qos:qos/global-query/vlan-classifier-statisticss/vlan-classifier-statistics/match-drop-byte-rate": {
+    "name": "Match-drop-byte-rate"
+  },
+  "/huawei-qos:qos/global-query/vlan-classifier-statisticss/vlan-classifier-statistics/car-drop-packets": {
+    "name": "Car-drop-packets"
+  },
+  "/huawei-qos:qos/global-query/vlan-classifier-statisticss/vlan-classifier-statistics/car-drop-bytes": {
+    "name": "Car-drop-bytes"
+  },
+  "/huawei-qos:qos/global-query/vlan-classifier-statisticss/vlan-classifier-statistics/car-drop-packet-rate": {
+    "name": "Car-drop-packet-rate"
+  },
+  "/huawei-qos:qos/global-query/vlan-classifier-statisticss/vlan-classifier-statistics/car-drop-byte-rate": {
+    "name": "Car-drop-byte-rate"
+  },
+  "/huawei-qos:qos/global-query/vlan-classifier-statisticss/vlan-classifier-statistics/filter-packets": {
+    "name": "Filter-packets"
+  },
+  "/huawei-qos:qos/global-query/vlan-classifier-statisticss/vlan-classifier-statistics/filter-bytes": {
+    "name": "Filter-bytes"
+  },
+  "/huawei-qos:qos/global-query/vlan-classifier-statisticss/vlan-classifier-statistics/filter-packet-rate": {
+    "name": "Filter-packet-rate"
+  },
+  "/huawei-qos:qos/global-query/vlan-classifier-statisticss/vlan-classifier-statistics/filter-byte-rate": {
+    "name": "Filter-byte-rate"
+  },
+  "/huawei-qos:qos/global-query/vpn-classifier-statisticss": {
+    "name": "Vpn-classifier-statisticss"
+  },
+  "/huawei-qos:qos/global-query/vpn-classifier-statisticss/vpn-classifier-statistics": {
+    "name": "Vlan-classifier-statistics"
+  },
+  "/huawei-qos:qos/global-query/vpn-classifier-statisticss/vpn-classifier-statistics/vpn-instance": {
+    "name": "Vpn-instance"
+  },
+  "/huawei-qos:qos/global-query/vpn-classifier-statisticss/vpn-classifier-statistics/classifier-name": {
+    "name": "Classifier-name"
+  },
+  "/huawei-qos:qos/global-query/vpn-classifier-statisticss/vpn-classifier-statistics/policy-name": {
+    "name": "Policy-name"
+  },
+  "/huawei-qos:qos/global-query/vpn-classifier-statisticss/vpn-classifier-statistics/direction": {
+    "name": "Direction"
+  },
+  "/huawei-qos:qos/global-query/vpn-classifier-statisticss/vpn-classifier-statistics/slot-id": {
+    "name": "Slot-id"
+  },
+  "/huawei-qos:qos/global-query/vpn-classifier-statisticss/vpn-classifier-statistics/match-packets": {
+    "name": "Match-packets"
+  },
+  "/huawei-qos:qos/global-query/vpn-classifier-statisticss/vpn-classifier-statistics/match-bytes": {
+    "name": "Match-bytes"
+  },
+  "/huawei-qos:qos/global-query/vpn-classifier-statisticss/vpn-classifier-statistics/match-packet-rate": {
+    "name": "Match-packet-rate"
+  },
+  "/huawei-qos:qos/global-query/vpn-classifier-statisticss/vpn-classifier-statistics/match-byte-rate": {
+    "name": "Match-byte-rate"
+  },
+  "/huawei-qos:qos/global-query/vpn-classifier-statisticss/vpn-classifier-statistics/match-pass-packets": {
+    "name": "Match-pass-packets"
+  },
+  "/huawei-qos:qos/global-query/vpn-classifier-statisticss/vpn-classifier-statistics/match-pass-bytes": {
+    "name": "Match-pass-bytes"
+  },
+  "/huawei-qos:qos/global-query/vpn-classifier-statisticss/vpn-classifier-statistics/match-pass-packet-rate": {
+    "name": "Match-pass-packet-rate"
+  },
+  "/huawei-qos:qos/global-query/vpn-classifier-statisticss/vpn-classifier-statistics/match-pass-byte-rate": {
+    "name": "Match-pass-byte-rate"
+  },
+  "/huawei-qos:qos/global-query/vpn-classifier-statisticss/vpn-classifier-statistics/match-drop-packets": {
+    "name": "Match-drop-packets"
+  },
+  "/huawei-qos:qos/global-query/vpn-classifier-statisticss/vpn-classifier-statistics/match-drop-bytes": {
+    "name": "Match-drop-bytes"
+  },
+  "/huawei-qos:qos/global-query/vpn-classifier-statisticss/vpn-classifier-statistics/match-drop-packet-rate": {
+    "name": "Match-drop-packet-rate"
+  },
+  "/huawei-qos:qos/global-query/vpn-classifier-statisticss/vpn-classifier-statistics/match-drop-byte-rate": {
+    "name": "Match-drop-byte-rate"
+  },
+  "/huawei-qos:qos/global-query/vpn-classifier-statisticss/vpn-classifier-statistics/car-drop-packets": {
+    "name": "Car-drop-packets"
+  },
+  "/huawei-qos:qos/global-query/vpn-classifier-statisticss/vpn-classifier-statistics/car-drop-bytes": {
+    "name": "Car-drop-bytes"
+  },
+  "/huawei-qos:qos/global-query/vpn-classifier-statisticss/vpn-classifier-statistics/car-drop-packet-rate": {
+    "name": "Car-drop-packet-rate"
+  },
+  "/huawei-qos:qos/global-query/vpn-classifier-statisticss/vpn-classifier-statistics/car-drop-byte-rate": {
+    "name": "Car-drop-byte-rate"
+  },
+  "/huawei-qos:qos/global-query/vpn-classifier-statisticss/vpn-classifier-statistics/filter-packets": {
+    "name": "Filter-packets"
+  },
+  "/huawei-qos:qos/global-query/vpn-classifier-statisticss/vpn-classifier-statistics/filter-bytes": {
+    "name": "Filter-bytes"
+  },
+  "/huawei-qos:qos/global-query/vpn-classifier-statisticss/vpn-classifier-statistics/filter-packet-rate": {
+    "name": "Filter-packet-rate"
+  },
+  "/huawei-qos:qos/global-query/vpn-classifier-statisticss/vpn-classifier-statistics/filter-byte-rate": {
+    "name": "Filter-byte-rate"
+  },
+  "/huawei-qos:qos/global-query/global-classifier-statisticss": {
+    "name": "Global-classifier-statisticss"
+  },
+  "/huawei-qos:qos/global-query/global-classifier-statisticss/global-classifier-statistics": {
+    "name": "Global-classifier-statisticss"
+  },
+  "/huawei-qos:qos/global-query/global-classifier-statisticss/global-classifier-statistics/classifier-name": {
+    "name": "Classifier-name"
+  },
+  "/huawei-qos:qos/global-query/global-classifier-statisticss/global-classifier-statistics/policy-name": {
+    "name": "Policy-name"
+  },
+  "/huawei-qos:qos/global-query/global-classifier-statisticss/global-classifier-statistics/direction": {
+    "name": "Direction"
+  },
+  "/huawei-qos:qos/global-query/global-classifier-statisticss/global-classifier-statistics/slot-id": {
+    "name": "Slot-id"
+  },
+  "/huawei-qos:qos/global-query/global-classifier-statisticss/global-classifier-statistics/match-packets": {
+    "name": "Match-packets"
+  },
+  "/huawei-qos:qos/global-query/global-classifier-statisticss/global-classifier-statistics/match-bytes": {
+    "name": "Match-bytes"
+  },
+  "/huawei-qos:qos/global-query/global-classifier-statisticss/global-classifier-statistics/match-packet-rate": {
+    "name": "Match-packet-rate"
+  },
+  "/huawei-qos:qos/global-query/global-classifier-statisticss/global-classifier-statistics/match-byte-rate": {
+    "name": "Match-byte-rate"
+  },
+  "/huawei-qos:qos/global-query/global-classifier-statisticss/global-classifier-statistics/match-pass-packets": {
+    "name": "Match-pass-packets"
+  },
+  "/huawei-qos:qos/global-query/global-classifier-statisticss/global-classifier-statistics/match-pass-bytes": {
+    "name": "Match-pass-bytes"
+  },
+  "/huawei-qos:qos/global-query/global-classifier-statisticss/global-classifier-statistics/match-pass-packet-rate": {
+    "name": "Match-pass-packet-rate"
+  },
+  "/huawei-qos:qos/global-query/global-classifier-statisticss/global-classifier-statistics/match-pass-byte-rate": {
+    "name": "Match-pass-byte-rate"
+  },
+  "/huawei-qos:qos/global-query/global-classifier-statisticss/global-classifier-statistics/match-drop-packets": {
+    "name": "Match-drop-packets"
+  },
+  "/huawei-qos:qos/global-query/global-classifier-statisticss/global-classifier-statistics/match-drop-bytes": {
+    "name": "Match-drop-bytes"
+  },
+  "/huawei-qos:qos/global-query/global-classifier-statisticss/global-classifier-statistics/match-drop-packet-rate": {
+    "name": "Match-drop-packet-rate"
+  },
+  "/huawei-qos:qos/global-query/global-classifier-statisticss/global-classifier-statistics/match-drop-byte-rate": {
+    "name": "Match-drop-byte-rate"
+  },
+  "/huawei-qos:qos/global-query/global-classifier-statisticss/global-classifier-statistics/car-drop-packets": {
+    "name": "Car-drop-packets"
+  },
+  "/huawei-qos:qos/global-query/global-classifier-statisticss/global-classifier-statistics/car-drop-bytes": {
+    "name": "Car-drop-bytes"
+  },
+  "/huawei-qos:qos/global-query/global-classifier-statisticss/global-classifier-statistics/car-drop-packet-rate": {
+    "name": "Car-drop-packet-rate"
+  },
+  "/huawei-qos:qos/global-query/global-classifier-statisticss/global-classifier-statistics/car-drop-byte-rate": {
+    "name": "Car-drop-byte-rate"
+  },
+  "/huawei-qos:qos/global-query/global-classifier-statisticss/global-classifier-statistics/filter-packets": {
+    "name": "Filter-packets"
+  },
+  "/huawei-qos:qos/global-query/global-classifier-statisticss/global-classifier-statistics/filter-bytes": {
+    "name": "Filter-bytes"
+  },
+  "/huawei-qos:qos/global-query/global-classifier-statisticss/global-classifier-statistics/filter-packet-rate": {
+    "name": "Filter-packet-rate"
+  },
+  "/huawei-qos:qos/global-query/global-classifier-statisticss/global-classifier-statistics/filter-byte-rate": {
+    "name": "Filter-byte-rate"
+  },
+  "/huawei-qos:qos/global-query/group-classifier-statisticss": {
+    "name": "Group-classifier-statisticss"
+  },
+  "/huawei-qos:qos/global-query/group-classifier-statisticss/group-classifier-statistics": {
+    "name": "Group-classifier-statistics"
+  },
+  "/huawei-qos:qos/global-query/group-classifier-statisticss/group-classifier-statistics/group-name": {
+    "name": "Group-name"
+  },
+  "/huawei-qos:qos/global-query/group-classifier-statisticss/group-classifier-statistics/classifier-name": {
+    "name": "Classifier-name"
+  },
+  "/huawei-qos:qos/global-query/group-classifier-statisticss/group-classifier-statistics/policy-name": {
+    "name": "Policy-name"
+  },
+  "/huawei-qos:qos/global-query/group-classifier-statisticss/group-classifier-statistics/direction": {
+    "name": "Direction"
+  },
+  "/huawei-qos:qos/global-query/group-classifier-statisticss/group-classifier-statistics/slot-id": {
+    "name": "Slot-id"
+  },
+  "/huawei-qos:qos/global-query/group-classifier-statisticss/group-classifier-statistics/match-packets": {
+    "name": "Match-packets"
+  },
+  "/huawei-qos:qos/global-query/group-classifier-statisticss/group-classifier-statistics/match-bytes": {
+    "name": "Match-bytes"
+  },
+  "/huawei-qos:qos/global-query/group-classifier-statisticss/group-classifier-statistics/match-packet-rate": {
+    "name": "Match-packet-rate"
+  },
+  "/huawei-qos:qos/global-query/group-classifier-statisticss/group-classifier-statistics/match-byte-rate": {
+    "name": "Match-byte-rate"
+  },
+  "/huawei-qos:qos/global-query/group-classifier-statisticss/group-classifier-statistics/match-pass-packets": {
+    "name": "Match-pass-packets"
+  },
+  "/huawei-qos:qos/global-query/group-classifier-statisticss/group-classifier-statistics/match-pass-bytes": {
+    "name": "Match-pass-bytes"
+  },
+  "/huawei-qos:qos/global-query/group-classifier-statisticss/group-classifier-statistics/match-pass-packet-rate": {
+    "name": "Match-pass-packet-rate"
+  },
+  "/huawei-qos:qos/global-query/group-classifier-statisticss/group-classifier-statistics/match-pass-byte-rate": {
+    "name": "Match-pass-byte-rate"
+  },
+  "/huawei-qos:qos/global-query/group-classifier-statisticss/group-classifier-statistics/match-drop-packets": {
+    "name": "Match-drop-packets"
+  },
+  "/huawei-qos:qos/global-query/group-classifier-statisticss/group-classifier-statistics/match-drop-bytes": {
+    "name": "Match-drop-bytes"
+  },
+  "/huawei-qos:qos/global-query/group-classifier-statisticss/group-classifier-statistics/match-drop-packet-rate": {
+    "name": "Match-drop-packet-rate"
+  },
+  "/huawei-qos:qos/global-query/group-classifier-statisticss/group-classifier-statistics/match-drop-byte-rate": {
+    "name": "Match-drop-byte-rate"
+  },
+  "/huawei-qos:qos/global-query/group-classifier-statisticss/group-classifier-statistics/car-drop-packets": {
+    "name": "Car-drop-packets"
+  },
+  "/huawei-qos:qos/global-query/group-classifier-statisticss/group-classifier-statistics/car-drop-bytes": {
+    "name": "Car-drop-bytes"
+  },
+  "/huawei-qos:qos/global-query/group-classifier-statisticss/group-classifier-statistics/car-drop-packet-rate": {
+    "name": "Car-drop-packet-rate"
+  },
+  "/huawei-qos:qos/global-query/group-classifier-statisticss/group-classifier-statistics/car-drop-byte-rate": {
+    "name": "Car-drop-byte-rate"
+  },
+  "/huawei-qos:qos/global-query/group-classifier-statisticss/group-classifier-statistics/filter-packets": {
+    "name": "Filter-packets"
+  },
+  "/huawei-qos:qos/global-query/group-classifier-statisticss/group-classifier-statistics/filter-bytes": {
+    "name": "Filter-bytes"
+  },
+  "/huawei-qos:qos/global-query/group-classifier-statisticss/group-classifier-statistics/filter-packet-rate": {
+    "name": "Filter-packet-rate"
+  },
+  "/huawei-qos:qos/global-query/group-classifier-statisticss/group-classifier-statistics/filter-byte-rate": {
+    "name": "Filter-byte-rate"
+  },
+  "/huawei-qos:qos/global-query/traffic-policy-states": {
+    "name": "Traffic-policy-states"
+  },
+  "/huawei-qos:qos/global-query/traffic-policy-states/interface-applys": {
+    "name": "Interface-applys"
+  },
+  "/huawei-qos:qos/global-query/traffic-policy-states/interface-applys/interface-apply": {
+    "name": "Interface-apply"
+  },
+  "/huawei-qos:qos/global-query/traffic-policy-states/interface-applys/interface-apply/interface-name": {
+    "name": "Interface-name"
+  },
+  "/huawei-qos:qos/global-query/traffic-policy-states/interface-applys/interface-apply/direction": {
+    "name": "Direction"
+  },
+  "/huawei-qos:qos/global-query/traffic-policy-states/interface-applys/interface-apply/slot-id": {
+    "name": "Slot-id"
+  },
+  "/huawei-qos:qos/global-query/traffic-policy-states/interface-applys/interface-apply/policy-name": {
+    "name": "Policy-name"
+  },
+  "/huawei-qos:qos/global-query/traffic-policy-states/interface-applys/interface-apply/result": {
+    "name": "Result"
+  },
+  "/huawei-qos:qos/global-query/traffic-policy-states/group-applys": {
+    "name": "Group-applys"
+  },
+  "/huawei-qos:qos/global-query/traffic-policy-states/group-applys/group-apply": {
+    "name": "Group-apply"
+  },
+  "/huawei-qos:qos/global-query/traffic-policy-states/group-applys/group-apply/group-name": {
+    "name": "Group-name"
+  },
+  "/huawei-qos:qos/global-query/traffic-policy-states/group-applys/group-apply/direction": {
+    "name": "Direction"
+  },
+  "/huawei-qos:qos/global-query/traffic-policy-states/group-applys/group-apply/slot-id": {
+    "name": "Slot-id"
+  },
+  "/huawei-qos:qos/global-query/traffic-policy-states/group-applys/group-apply/policy-name": {
+    "name": "Policy-name"
+  },
+  "/huawei-qos:qos/global-query/traffic-policy-states/group-applys/group-apply/result": {
+    "name": "Result"
+  },
+  "/huawei-qos:qos/global-query/traffic-policy-states/vpn-applys": {
+    "name": "Vpn-applys"
+  },
+  "/huawei-qos:qos/global-query/traffic-policy-states/vpn-applys/vpn-apply": {
+    "name": "Vpn-apply"
+  },
+  "/huawei-qos:qos/global-query/traffic-policy-states/vpn-applys/vpn-apply/vpn-instance": {
+    "name": "Vpn-instance"
+  },
+  "/huawei-qos:qos/global-query/traffic-policy-states/vpn-applys/vpn-apply/direction": {
+    "name": "Direction"
+  },
+  "/huawei-qos:qos/global-query/traffic-policy-states/vpn-applys/vpn-apply/slot-id": {
+    "name": "Slot-id"
+  },
+  "/huawei-qos:qos/global-query/traffic-policy-states/vpn-applys/vpn-apply/policy-name": {
+    "name": "Policy-name"
+  },
+  "/huawei-qos:qos/global-query/traffic-policy-states/vpn-applys/vpn-apply/result": {
+    "name": "Result"
+  },
+  "/huawei-qos:qos/global-query/traffic-policy-states/vlan-applys": {
+    "name": "Vlan-applys"
+  },
+  "/huawei-qos:qos/global-query/traffic-policy-states/vlan-applys/vlan-apply": {
+    "name": "Vlan-apply"
+  },
+  "/huawei-qos:qos/global-query/traffic-policy-states/vlan-applys/vlan-apply/vlan-id": {
+    "name": "Vlan-id"
+  },
+  "/huawei-qos:qos/global-query/traffic-policy-states/vlan-applys/vlan-apply/direction": {
+    "name": "Direction"
+  },
+  "/huawei-qos:qos/global-query/traffic-policy-states/vlan-applys/vlan-apply/slot-id": {
+    "name": "Slot-id"
+  },
+  "/huawei-qos:qos/global-query/traffic-policy-states/vlan-applys/vlan-apply/policy-name": {
+    "name": "Policy-name"
+  },
+  "/huawei-qos:qos/global-query/traffic-policy-states/vlan-applys/vlan-apply/result": {
+    "name": "Result"
+  },
+  "/huawei-qos:qos/global-query/traffic-policy-states/bd-applys": {
+    "name": "Bd-applys"
+  },
+  "/huawei-qos:qos/global-query/traffic-policy-states/bd-applys/bd-apply": {
+    "name": "BD-apply"
+  },
+  "/huawei-qos:qos/global-query/traffic-policy-states/bd-applys/bd-apply/bd-id": {
+    "name": "Bd-id"
+  },
+  "/huawei-qos:qos/global-query/traffic-policy-states/bd-applys/bd-apply/direction": {
+    "name": "Direction"
+  },
+  "/huawei-qos:qos/global-query/traffic-policy-states/bd-applys/bd-apply/slot-id": {
+    "name": "Slot-id"
+  },
+  "/huawei-qos:qos/global-query/traffic-policy-states/bd-applys/bd-apply/policy-name": {
+    "name": "Policy-name"
+  },
+  "/huawei-qos:qos/global-query/traffic-policy-states/bd-applys/bd-apply/result": {
+    "name": "Result"
+  },
+  "/huawei-qos:qos/global-query/traffic-policy-states/global-applys": {
+    "name": "Global-applys"
+  },
+  "/huawei-qos:qos/global-query/traffic-policy-states/global-applys/global-apply": {
+    "name": "Global-apply"
+  },
+  "/huawei-qos:qos/global-query/traffic-policy-states/global-applys/global-apply/direction": {
+    "name": "Direction"
+  },
+  "/huawei-qos:qos/global-query/traffic-policy-states/global-applys/global-apply/slot-id": {
+    "name": "Slot-id"
+  },
+  "/huawei-qos:qos/global-query/traffic-policy-states/global-applys/global-apply/policy-name": {
+    "name": "Policy-name"
+  },
+  "/huawei-qos:qos/global-query/traffic-policy-states/global-applys/global-apply/result": {
+    "name": "Result"
+  },
+  "/huawei-qos:qos/global-query/queue-statisticss": {
+    "name": "Queue-statisticss"
+  },
+  "/huawei-qos:qos/global-query/queue-statisticss/queue-statistics": {
+    "name": "Queue-statistics"
+  },
+  "/huawei-qos:qos/global-query/queue-statisticss/queue-statistics/interface-name": {
+    "name": "Interface-name"
+  },
+  "/huawei-qos:qos/global-query/queue-statisticss/queue-statistics/service-class": {
+    "name": "Service-class"
+  },
+  "/huawei-qos:qos/global-query/queue-statisticss/queue-statistics/pass-packets": {
+    "name": "Pass-packets"
+  },
+  "/huawei-qos:qos/global-query/queue-statisticss/queue-statistics/pass-bytes": {
+    "name": "Pass-bytes"
+  },
+  "/huawei-qos:qos/global-query/queue-statisticss/queue-statistics/pass-packet-rate": {
+    "name": "Pass-packet-rate"
+  },
+  "/huawei-qos:qos/global-query/queue-statisticss/queue-statistics/pass-byte-rate": {
+    "name": "Pass-byte-rate"
+  },
+  "/huawei-qos:qos/global-query/queue-statisticss/queue-statistics/discard-packets": {
+    "name": "Discard-packets"
+  },
+  "/huawei-qos:qos/global-query/queue-statisticss/queue-statistics/discard-bytes": {
+    "name": "Discard-bytes"
+  },
+  "/huawei-qos:qos/global-query/queue-statisticss/queue-statistics/discard-packet-rate": {
+    "name": "Discard-packet-rate"
+  },
+  "/huawei-qos:qos/global-query/queue-statisticss/queue-statistics/discard-byte-rate": {
+    "name": "Discard-byte-rate"
+  },
+  "/huawei-qos:qos/global-query/port-buffer-usage-statisticss": {
+    "name": "Port-buffer-usage-statisticss"
+  },
+  "/huawei-qos:qos/global-query/port-buffer-usage-statisticss/port-buffer-usage-statistics": {
+    "name": "Port-buffer-usage-statistics"
+  },
+  "/huawei-qos:qos/global-query/port-buffer-usage-statisticss/port-buffer-usage-statistics/slot-id": {
+    "name": "Slot-id"
+  },
+  "/huawei-qos:qos/global-query/port-buffer-usage-statisticss/port-buffer-usage-statistics/interface-name": {
+    "name": "Interface-name"
+  },
+  "/huawei-qos:qos/global-query/port-buffer-usage-statisticss/port-buffer-usage-statistics/total-buffer": {
+    "name": "Total-buffer"
+  },
+  "/huawei-qos:qos/global-query/port-buffer-usage-statisticss/port-buffer-usage-statistics/current-used": {
+    "name": "Current-used"
+  },
+  "/huawei-qos:qos/global-query/port-buffer-usage-statisticss/port-buffer-usage-statistics/remained": {
+    "name": "Remained"
+  },
+  "/huawei-qos:qos/global-query/port-buffer-usage-statisticss/port-buffer-usage-statistics/peak-used": {
+    "name": "Peak-used"
+  },
+  "/huawei-qos:qos/global-query/port-buffer-usage-statisticss/port-buffer-usage-statistics/average-used": {
+    "name": "Average-used"
+  },
+  "/huawei-qos:qos/global-query/queue-buffer-usage-statisticss": {
+    "name": "Queue-buffer-usage-statisticss"
+  },
+  "/huawei-qos:qos/global-query/queue-buffer-usage-statisticss/queue-buffer-usage-statistics": {
+    "name": "Queue-buffer-usage-statistics"
+  },
+  "/huawei-qos:qos/global-query/queue-buffer-usage-statisticss/queue-buffer-usage-statistics/slot-id": {
+    "name": "Slot-id"
+  },
+  "/huawei-qos:qos/global-query/queue-buffer-usage-statisticss/queue-buffer-usage-statistics/interface-name": {
+    "name": "Interface-name"
+  },
+  "/huawei-qos:qos/global-query/queue-buffer-usage-statisticss/queue-buffer-usage-statistics/queue-id": {
+    "name": "Queue-id"
+  },
+  "/huawei-qos:qos/global-query/queue-buffer-usage-statisticss/queue-buffer-usage-statistics/current-used": {
+    "name": "Current-used"
+  },
+  "/huawei-qos:qos/global-query/queue-buffer-usage-statisticss/queue-buffer-usage-statistics/peak-used": {
+    "name": "Peak-used"
+  },
+  "/huawei-qos:qos/global-query/queue-buffer-usage-statisticss/queue-buffer-usage-statistics/average-used": {
+    "name": "Average-used"
+  },
+  "/huawei-qos:qos/global-query/queue-drop-statisticss": {
+    "name": "Queue-drop-statisticss"
+  },
+  "/huawei-qos:qos/global-query/queue-drop-statisticss/queue-drop-statistics": {
+    "name": "Queue-drop-statistics"
+  },
+  "/huawei-qos:qos/global-query/queue-drop-statisticss/queue-drop-statistics/interface-name": {
+    "name": "Interface-name"
+  },
+  "/huawei-qos:qos/global-query/queue-drop-statisticss/queue-drop-statistics/queue0-drop-bytes": {
+    "name": "Queue0-drop-bytes"
+  },
+  "/huawei-qos:qos/global-query/queue-drop-statisticss/queue-drop-statistics/queue0-drop-packets": {
+    "name": "Queue0-drop-packets"
+  },
+  "/huawei-qos:qos/global-query/queue-drop-statisticss/queue-drop-statistics/queue1-drop-bytes": {
+    "name": "Queue1-drop-bytes"
+  },
+  "/huawei-qos:qos/global-query/queue-drop-statisticss/queue-drop-statistics/queue1-drop-packets": {
+    "name": "Queue1-drop-packets"
+  },
+  "/huawei-qos:qos/global-query/queue-drop-statisticss/queue-drop-statistics/queue2-drop-bytes": {
+    "name": "Queue2-drop-bytes"
+  },
+  "/huawei-qos:qos/global-query/queue-drop-statisticss/queue-drop-statistics/queue2-drop-packets": {
+    "name": "Queue2-drop-packets"
+  },
+  "/huawei-qos:qos/global-query/queue-drop-statisticss/queue-drop-statistics/queue3-drop-bytes": {
+    "name": "Queue3-drop-bytes"
+  },
+  "/huawei-qos:qos/global-query/queue-drop-statisticss/queue-drop-statistics/queue3-drop-packets": {
+    "name": "Queue3-drop-packets"
+  },
+  "/huawei-qos:qos/global-query/queue-drop-statisticss/queue-drop-statistics/queue4-drop-bytes": {
+    "name": "Queue4-drop-bytes"
+  },
+  "/huawei-qos:qos/global-query/queue-drop-statisticss/queue-drop-statistics/queue4-drop-packets": {
+    "name": "Queue4-drop-packets"
+  },
+  "/huawei-qos:qos/global-query/queue-drop-statisticss/queue-drop-statistics/queue5-drop-bytes": {
+    "name": "Queue5-drop-bytes"
+  },
+  "/huawei-qos:qos/global-query/queue-drop-statisticss/queue-drop-statistics/queue5-drop-packets": {
+    "name": "Queue5-drop-packets"
+  },
+  "/huawei-qos:qos/global-query/queue-drop-statisticss/queue-drop-statistics/queue6-drop-bytes": {
+    "name": "Queue6-drop-bytes"
+  },
+  "/huawei-qos:qos/global-query/queue-drop-statisticss/queue-drop-statistics/queue6-drop-packets": {
+    "name": "Queue6-drop-packets"
+  },
+  "/huawei-qos:qos/global-query/queue-drop-statisticss/queue-drop-statistics/queue7-drop-bytes": {
+    "name": "Queue7-drop-bytes"
+  },
+  "/huawei-qos:qos/global-query/queue-drop-statisticss/queue-drop-statistics/queue7-drop-packets": {
+    "name": "Queue7-drop-packets"
+  },
+  "/huawei-qos:qos/global-query/ing-port-drop-statisticss": {
+    "name": "Ing-port-drop-statisticss"
+  },
+  "/huawei-qos:qos/global-query/ing-port-drop-statisticss/ing-port-drop-statistics": {
+    "name": "Ing-port-drop-statistics"
+  },
+  "/huawei-qos:qos/global-query/ing-port-drop-statisticss/ing-port-drop-statistics/interface-name": {
+    "name": "Interface-name"
+  },
+  "/huawei-qos:qos/global-query/ing-port-drop-statisticss/ing-port-drop-statistics/drop-bytes": {
+    "name": "Drop-bytes"
+  },
+  "/huawei-qos:qos/global-query/ing-port-drop-statisticss/ing-port-drop-statistics/drop-packets": {
+    "name": "Drop-packets"
+  },
+  "/huawei-qos:qos/global-query/port-ecn-statisticss": {
+    "name": "Port-ecn-statisticss"
+  },
+  "/huawei-qos:qos/global-query/port-ecn-statisticss/port-ecn-statistics": {
+    "name": "Port-ecn-statistics"
+  },
+  "/huawei-qos:qos/global-query/port-ecn-statisticss/port-ecn-statistics/interface-name": {
+    "name": "Interface-name"
+  },
+  "/huawei-qos:qos/global-query/port-ecn-statisticss/port-ecn-statistics/packets": {
+    "name": "Packets"
+  },
+  "/huawei-qos:qos/global-query/acl-resource-usages": {
+    "name": "Acl-resource-usages"
+  },
+  "/huawei-qos:qos/global-query/acl-resource-usages/acl-resource-usage": {
+    "name": "Acl-resource-usage"
+  },
+  "/huawei-qos:qos/global-query/acl-resource-usages/acl-resource-usage/slot-id": {
+    "name": "Slot-id"
+  },
+  "/huawei-qos:qos/global-query/acl-resource-usages/acl-resource-usage/chip-id": {
+    "name": "Chip-id"
+  },
+  "/huawei-qos:qos/global-query/acl-resource-usages/acl-resource-usage/resource-name": {
+    "name": "Resource-name"
+  },
+  "/huawei-qos:qos/global-query/acl-resource-usages/acl-resource-usage/acl-total": {
+    "name": "Acl-total"
+  },
+  "/huawei-qos:qos/global-query/acl-resource-usages/acl-resource-usage/acl-used": {
+    "name": "Acl-used"
+  },
+  "/huawei-qos:qos/global-query/acl-bank-resource-usages": {
+    "name": "Acl-bank-resource-usages"
+  },
+  "/huawei-qos:qos/global-query/acl-bank-resource-usages/acl-bank-resource-usage": {
+    "name": "Acl-bank-resource-usage"
+  },
+  "/huawei-qos:qos/global-query/acl-bank-resource-usages/acl-bank-resource-usage/slot-id": {
+    "name": "Slot-id"
+  },
+  "/huawei-qos:qos/global-query/acl-bank-resource-usages/acl-bank-resource-usage/chip-id": {
+    "name": "Chip-id"
+  },
+  "/huawei-qos:qos/global-query/acl-bank-resource-usages/acl-bank-resource-usage/entry-used-list": {
+    "name": "Entry-used-list"
+  },
+  "/huawei-qos:qos/global-query/acl-bank-resource-usages/acl-bank-resource-usage/entry-free": {
+    "name": "Entry-free"
+  },
+  "/huawei-qos:qos/global-query/acl-bank-resource-usages/acl-bank-resource-usage/bankid-list": {
+    "name": "Bankid-list"
+  },
+  "/huawei-qos:qos/global-query/acl-bank-resource-usages/acl-bank-resource-usage/direction": {
+    "name": "Direction"
+  },
+  "/huawei-qos:qos/global-query/acl-bank-resource-usages/acl-bank-resource-usage/service-name": {
+    "name": "Service-name"
+  },
+  "/huawei-qos:qos/global-query/acl-bank-resource-usages/acl-bank-resource-usage/service-type": {
+    "name": "Service-type"
+  },
+  "/huawei-qos:qos/global-query/acl-bank-resource-usages/acl-bank-resource-usage/group-id": {
+    "name": "Group-id"
+  },
+  "/huawei-qos:qos/global-query/interface-ecn-thresholds": {
+    "name": "Interface-ecn-thresholds"
+  },
+  "/huawei-qos:qos/global-query/interface-ecn-thresholds/interface-ecn-threshold": {
+    "name": "Interface-ecn-threshold"
+  },
+  "/huawei-qos:qos/global-query/interface-ecn-thresholds/interface-ecn-threshold/interface-name": {
+    "name": "Interface-name"
+  },
+  "/huawei-qos:qos/global-query/interface-ecn-thresholds/interface-ecn-threshold/queue-id": {
+    "name": "Queue-id"
+  },
+  "/huawei-qos:qos/global-query/interface-ecn-thresholds/interface-ecn-threshold/ecn-min": {
+    "name": "Ecn-min"
+  },
+  "/huawei-qos:qos/global-query/interface-ecn-thresholds/interface-ecn-threshold/ecn-max": {
+    "name": "Ecn-max"
+  },
+  "/huawei-qos:qos/global-query/interface-ecn-thresholds/interface-ecn-threshold/probability": {
+    "name": "Probability"
+  },
+  "/huawei-qos:qos/global-query/interface-ecn-thresholds/interface-ecn-threshold/queue-size": {
+    "name": "Queue-size"
+  },
+  "/huawei-qos:qos/global-query/slot-forward-modes": {
+    "name": "Slot-forward-modes"
+  },
+  "/huawei-qos:qos/global-query/slot-forward-modes/slot-forward-mode": {
+    "name": "Slot-forward-mode"
+  },
+  "/huawei-qos:qos/global-query/slot-forward-modes/slot-forward-mode/slot-id": {
+    "name": "Slot-id"
+  },
+  "/huawei-qos:qos/global-query/slot-forward-modes/slot-forward-mode/config-mode": {
+    "name": "Config-mode"
+  },
+  "/huawei-qos:qos/global-query/slot-forward-modes/slot-forward-mode/current-mode": {
+    "name": "Current-mode"
+  },
+  "/huawei-qos:qos/global-query/interface-monitoring-results": {
+    "name": "Interface-monitoring-results"
+  },
+  "/huawei-qos:qos/global-query/interface-monitoring-results/interface-monitoring-result": {
+    "name": "Interface-monitoring-result"
+  },
+  "/huawei-qos:qos/global-query/interface-monitoring-results/interface-monitoring-result/interface-name": {
+    "name": "Interface-name"
+  },
+  "/huawei-qos:qos/global-query/interface-monitoring-results/interface-monitoring-result/queue-id": {
+    "name": "Queue-id"
+  },
+  "/huawei-qos:qos/global-query/interface-monitoring-results/interface-monitoring-result/record-number": {
+    "name": "Record-number"
+  },
+  "/huawei-qos:qos/global-query/interface-monitoring-results/interface-monitoring-result/query-type": {
+    "name": "Query-type"
+  },
+  "/huawei-qos:qos/global-query/interface-monitoring-results/interface-monitoring-result/time": {
+    "name": "Time"
+  },
+  "/huawei-qos:qos/global-query/interface-monitoring-results/interface-monitoring-result/buffer-usage": {
+    "name": "Buffer-usage"
+  },
+  "/huawei-qos:qos/global-query/interface-monitoring-results/interface-monitoring-result/percent": {
+    "name": "Percent"
+  },
+  "/huawei-qos:reset-interface-traffic-policy-statistics": {
+    "name": "Reset-interface-traffic-policy-statistics"
+  },
+  "/huawei-qos:reset-interface-traffic-policy-statistics/input/interface-name": {
+    "name": "Interface-name"
+  },
+  "/huawei-qos:reset-interface-traffic-policy-statistics/input/direction": {
+    "name": "Direction"
+  },
+  "/huawei-qos:reset-interface-traffic-policy-statistics/input/pe-vlan-id": {
+    "name": "Pe-vlan-id"
+  },
+  "/huawei-qos:reset-interface-traffic-policy-statistics/input/vlan-id": {
+    "name": "Vlan-id"
+  },
+  "/huawei-qos:reset-global-policy-statistics": {
+    "name": "Reset-global-policy-statistics"
+  },
+  "/huawei-qos:reset-global-policy-statistics/input/direction": {
+    "name": "Direction"
+  },
+  "/huawei-qos:reset-global-policy-statistics/input/slot-id": {
+    "name": "Slot-id"
+  },
+  "/huawei-qos:reset-global-policy-statistics/input/policy-name": {
+    "name": "Policy-name"
+  },
+  "/huawei-qos:reset-vlan-traffic-policy-statistics": {
+    "name": "Reset-vlan-traffic-policy-statistics"
+  },
+  "/huawei-qos:reset-vlan-traffic-policy-statistics/input/policy-name": {
+    "name": "Policy-name"
+  },
+  "/huawei-qos:reset-vlan-traffic-policy-statistics/input/direction": {
+    "name": "Direction"
+  },
+  "/huawei-qos:reset-vlan-traffic-policy-statistics/input/vlan-id": {
+    "name": "Vlan-id"
+  },
+  "/huawei-qos:reset-vpn-traffic-policy-statistics": {
+    "name": "Reset-vpn-traffic-policy-statistics"
+  },
+  "/huawei-qos:reset-vpn-traffic-policy-statistics/input/vpn-instance": {
+    "name": "Vpn-instance"
+  },
+  "/huawei-qos:reset-vpn-traffic-policy-statistics/input/policy-name": {
+    "name": "Policy-name"
+  },
+  "/huawei-qos:reset-vpn-traffic-policy-statistics/input/direction": {
+    "name": "Direction"
+  },
+  "/huawei-qos:reset-interface-car-statistics": {
+    "name": "Reset-interface-car-statistics"
+  },
+  "/huawei-qos:reset-interface-car-statistics/input/interface-name": {
+    "name": "Interface-name"
+  },
+  "/huawei-qos:reset-interface-car-statistics/input/direction": {
+    "name": "Direction"
+  },
+  "/huawei-qos:reset-queue-statistics": {
+    "name": "Reset-queue-statistics"
+  },
+  "/huawei-qos:reset-queue-statistics/input/interface-name": {
+    "name": "Interface-name"
+  },
+  "/huawei-qos:reset-queue-statistics/input/slot-id": {
+    "name": "Slot ID"
+  },
+  "/huawei-qos:reset-interface-ecn-statistics": {
+    "name": "Reset-interface-ecn-statistics"
+  },
+  "/huawei-qos:reset-interface-ecn-statistics/input/interface-name": {
+    "name": "Interface name"
+  },
+  "/huawei-qos:reset-interface-buffer-usage-statistics": {
+    "name": "Reset-interface-buffer-usage-statistics"
+  },
+  "/huawei-qos:reset-interface-buffer-usage-statistics/input/interface-name": {
+    "name": "Interface name"
+  },
+  "/huawei-qos:reset-interface-buffer-usage-statistics/input/slot-id": {
+    "name": "Slot ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos": {
+    "name": "QOS"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/traffic-policys": {
+    "name": "Traffic-policys"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/traffic-policys/traffic-policy": {
+    "name": "Traffic-policy"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/traffic-policys/traffic-policy/policy-name": {
+    "name": "Policy-name"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/traffic-policys/traffic-policy/direction": {
+    "name": "Direction"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/port-queues": {
+    "name": "Port-queues"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/port-queues/port-queue": {
+    "name": "Port-queue"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/port-queues/port-queue/service-class": {
+    "name": "Service-class"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/port-queues/port-queue/port-wred-name": {
+    "name": "Port-wred-name"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/drop-eligible-indicator": {
+    "name": "DEI"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/drop-eligible-indicator/enable": {
+    "name": "Enable"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/qos-lr": {
+    "name": "Qos-lr"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/qos-lr/cir-parameters": {
+    "name": "Cir-parameters"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/qos-lr/cir-parameters/cir": {
+    "name": "Cir"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/qos-lr/cir-parameters/cir/cir-value": {
+    "name": "Cir-value"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/qos-lr/cir-parameters/cir-percent": {
+    "name": "Cir-percent"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/qos-lr/cir-parameters/cir-percent/cir-percent-value": {
+    "name": "Cir-percent-value"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/qos-lr/pps": {
+    "name": "Pps"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/qos-lr/pps/packets": {
+    "name": "Packets"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/qos-lr-outbound": {
+    "name": "Qos-lr-outbound"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/qos-lr-outbound/cir": {
+    "name": "Cir"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/qos-lr-outbound/cir-unit": {
+    "name": "Cir-unit"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/qos-lr-outbound/cbs": {
+    "name": "Cbs"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/qos-lr-outbound/cbs-unit": {
+    "name": "Cbs-unit"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/queue-buffer-monitors": {
+    "name": "Queue-buffer-monitors"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/queue-buffer-monitors/queue-buffer-monitor": {
+    "name": "Queue-buffer-monitor"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/queue-buffer-monitors/queue-buffer-monitor/service-class": {
+    "name": "Service-class"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/queue-buffer-monitors/queue-buffer-monitor/enable": {
+    "name": "Enable"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/queue-buffer-monitors/queue-buffer-monitor-threds": {
+    "name": "Queue-buffer-monitor-threds"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/queue-buffer-monitors/queue-buffer-monitor-threds/queue-buffer-monitor-thred": {
+    "name": "Queue-buffer-monitor-thred"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/queue-buffer-monitors/queue-buffer-monitor-threds/queue-buffer-monitor-thred/service-class": {
+    "name": "Service-class"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/queue-buffer-monitors/queue-buffer-monitor-threds/queue-buffer-monitor-thred/low-limit-percentage": {
+    "name": "Low-limit-percentage"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/queue-buffer-monitors/queue-buffer-monitor-threds/queue-buffer-monitor-thred/high-limit-percentage": {
+    "name": "High-limit-percentage"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/port-priority": {
+    "name": "Port-priority"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/port-priority/priority": {
+    "name": "Priority"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/port-phb-trusts": {
+    "name": "Port-phb-trusts"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/port-phb-trusts/port-phb-trust": {
+    "name": "Port-phb-trust"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/port-phb-trusts/port-phb-trust/type": {
+    "name": "Type"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/port-phb-trusts/port-phb-trust/dscp-phb-enable": {
+    "name": "Dscp-phb-enable"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/queue-schedules": {
+    "name": "Queue-schedules"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/queue-schedules/queue-schedule": {
+    "name": "Queue-schedule"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/queue-schedules/queue-schedule/queue-index": {
+    "name": "Queue-index"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/queue-schedules/queue-schedule/schedule-mode": {
+    "name": "Schedule-mode"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/queue-schedules/queue-schedule/weight": {
+    "name": "Weight"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/burst-mode": {
+    "name": "Burst-mode"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/burst-mode/mode": {
+    "name": "Mode"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/trust-upstream": {
+    "name": "Trust-upstream"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/trust-upstream/diffserv-domain-name": {
+    "name": "Diffserv-domain-name"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/trust-8021p-dscp": {
+    "name": "Trust-8021p-dscp"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/trust-8021p-dscp/type": {
+    "name": "Type"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/queue-buffers": {
+    "name": "Queue-buffers"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/queue-buffers/queue-buffer": {
+    "name": "Queue-buffer"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/queue-buffers/queue-buffer/queue-index": {
+    "name": "Queue-index"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/queue-buffers/queue-buffer/config-mode": {
+    "name": "Config-mode"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/queue-buffers/queue-buffer/shaping-parameters": {
+    "name": "Shaping-parameters"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/queue-buffers/queue-buffer/shaping-parameters/shaping-percent": {
+    "name": "Shaping-percent"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/queue-buffers/queue-buffer/shaping-parameters/shaping-percent/cir-percent": {
+    "name": "Cir-percent"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/queue-buffers/queue-buffer/shaping-parameters/shaping-percent/pir-percent": {
+    "name": "Pir-percent"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/queue-buffers/queue-buffer/shaping-parameters/shaping-absolute": {
+    "name": "Shaping-absolute"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/queue-buffers/queue-buffer/shaping-parameters/shaping-absolute/cir-value": {
+    "name": "Cir-value"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/queue-buffers/queue-buffer/shaping-parameters/shaping-absolute/cir-unit": {
+    "name": "Cir-unit"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/queue-buffers/queue-buffer/shaping-parameters/shaping-absolute/cbs-value": {
+    "name": "Cbs-value"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/queue-buffers/queue-buffer/shaping-parameters/shaping-absolute/cbs-unit": {
+    "name": "Cbs-unit"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/queue-buffers/queue-buffer/shaping-parameters/shaping-absolute/pir-value": {
+    "name": "Pir-value"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/queue-buffers/queue-buffer/shaping-parameters/shaping-absolute/pir-unit": {
+    "name": "Pir-unit"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/queue-buffers/queue-buffer/shaping-parameters/shaping-absolute/pbs-value": {
+    "name": "Pbs-value"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/queue-buffers/queue-buffer/shaping-parameters/shaping-absolute/pbs-unit": {
+    "name": "Pbs-unit"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/queue-buffers/queue-buffer/queue-buffer-type": {
+    "name": "Queue-buffer-type"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/queue-buffers/queue-buffer/queue-buffer-type/static": {
+    "name": "Static"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/queue-buffers/queue-buffer/queue-buffer-type/static/static-value": {
+    "name": "Static-value"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/queue-buffers/queue-buffer/queue-buffer-type/static/static-unit": {
+    "name": "Static-unit"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/queue-buffers/queue-buffer/queue-buffer-type/dynamic": {
+    "name": "Dynamic"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/queue-buffers/queue-buffer/queue-buffer-type/dynamic/dynamic-value": {
+    "name": "Dynamic-value"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/car-templates": {
+    "name": "Car-templates"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/car-templates/car-template": {
+    "name": "Car-template"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/car-templates/car-template/direction": {
+    "name": "DIRECTION"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/car-templates/car-template/name": {
+    "name": "NAME"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/queue-ecns": {
+    "name": "Queue-ecns"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/queue-ecns/queue-ecn": {
+    "name": "Queue-ecn"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/queue-ecns/queue-ecn/service-class": {
+    "name": "Service-class"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/queue-ecns/queue-ecn/enable": {
+    "name": "Enable"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-qos:traffic-policy-applys": {
+    "name": "Traffic-policy-applys"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-qos:traffic-policy-applys/traffic-policy-apply": {
+    "name": "Traffic-policy-apply"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-qos:traffic-policy-applys/traffic-policy-apply/policy-name": {
+    "name": "Policy-name"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-qos:traffic-policy-applys/traffic-policy-apply/direction": {
+    "name": "Direction"
+  },
+  "/rpcs/huawei-qos:qos/reset-interface-traffic-policy-statistics": {
+    "name": "Reset-interface-traffic-policy-statistics"
+  },
+  "/rpcs/huawei-qos:qos/reset-global-policy-statistics": {
+    "name": "Reset-global-policy-statistics"
+  },
+  "/rpcs/huawei-qos:qos/reset-vlan-traffic-policy-statistics": {
+    "name": "Reset-vlan-traffic-policy-statistics"
+  },
+  "/rpcs/huawei-qos:qos/reset-vpn-traffic-policy-statistics": {
+    "name": "Reset-vpn-traffic-policy-statistics"
+  },
+  "/rpcs/huawei-qos:qos/reset-interface-car-statistics": {
+    "name": "Reset-interface-car-statistics"
+  },
+  "/rpcs/huawei-qos:qos/reset-queue-statistics": {
+    "name": "Reset-queue-statistics"
+  },
+  "/rpcs/huawei-qos:qos/reset-interface-ecn-statistics": {
+    "name": "Reset-interface-ecn-statistics"
+  },
+  "/rpcs/huawei-qos:qos/reset-interface-buffer-usage-statistics": {
+    "name": "Reset-interface-buffer-usage-statistics"
+  }
+}

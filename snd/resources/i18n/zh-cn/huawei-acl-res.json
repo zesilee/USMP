@@ -1,0 +1,1070 @@
+{
+  "/huawei-acl:acl": {
+    "name": "ACL"
+  },
+  "/huawei-acl:acl/groups": {
+    "name": "ACL规则组列表"
+  },
+  "/huawei-acl:acl/groups/group": {
+    "name": "ACL规则组"
+  },
+  "/huawei-acl:acl/groups/group/identity": {
+    "name": "规则组标识"
+  },
+  "/huawei-acl:acl/groups/group/type": {
+    "name": "规则组类型"
+  },
+  "/huawei-acl:acl/groups/group/match-order": {
+    "name": "规则的匹配顺序"
+  },
+  "/huawei-acl:acl/groups/group/step": {
+    "name": "规则组步长"
+  },
+  "/huawei-acl:acl/groups/group/description": {
+    "name": "规则组描述"
+  },
+  "/huawei-acl:acl/groups/group/number": {
+    "name": "规则组编号"
+  },
+  "/huawei-acl:acl/groups/group/rule-basics": {
+    "name": "基本ACL规则列表"
+  },
+  "/huawei-acl:acl/groups/group/rule-basics/rule-basic": {
+    "name": "基本ACL规则"
+  },
+  "/huawei-acl:acl/groups/group/rule-basics/rule-basic/name": {
+    "name": "规则名称"
+  },
+  "/huawei-acl:acl/groups/group/rule-basics/rule-basic/id": {
+    "name": "规则ID"
+  },
+  "/huawei-acl:acl/groups/group/rule-basics/rule-basic/action": {
+    "name": "规则行为"
+  },
+  "/huawei-acl:acl/groups/group/rule-basics/rule-basic/active-status": {
+    "name": "规则生效标记"
+  },
+  "/huawei-acl:acl/groups/group/rule-basics/rule-basic/source-ipaddr": {
+    "name": "源IP地址"
+  },
+  "/huawei-acl:acl/groups/group/rule-basics/rule-basic/source-wild": {
+    "name": "源IP地址反掩码"
+  },
+  "/huawei-acl:acl/groups/group/rule-basics/rule-basic/fragment-type": {
+    "name": "帧类型"
+  },
+  "/huawei-acl:acl/groups/group/rule-basics/rule-basic/vpn": {
+    "name": "规则的VPN配置"
+  },
+  "/huawei-acl:acl/groups/group/rule-basics/rule-basic/vpn/vpn-instance": {
+    "name": "VPN实例名"
+  },
+  "/huawei-acl:acl/groups/group/rule-basics/rule-basic/vpn/vpn-instance/vpn-name": {
+    "name": "VPN实例名"
+  },
+  "/huawei-acl:acl/groups/group/rule-basics/rule-basic/vpn/vpn-any": {
+    "name": "任意VPN"
+  },
+  "/huawei-acl:acl/groups/group/rule-basics/rule-basic/vpn/vpn-any/vpn-any": {
+    "name": "任意VPN实例"
+  },
+  "/huawei-acl:acl/groups/group/rule-basics/rule-basic/time-range-name": {
+    "name": "时间范围"
+  },
+  "/huawei-acl:acl/groups/group/rule-basics/rule-basic/description": {
+    "name": "规则描述"
+  },
+  "/huawei-acl:acl/groups/group/rule-basics/rule-basic/match-statistics": {
+    "name": "匹配次数"
+  },
+  "/huawei-acl:acl/groups/group/rule-basics/rule-basic/match-statistics/match-count": {
+    "name": "匹配次数"
+  },
+  "/huawei-acl:acl/groups/group/rule-basics/rule-basic/priority": {
+    "name": "规则优先级"
+  },
+  "/huawei-acl:acl/groups/group/rule-basics/rule-basic/log-enable": {
+    "name": "日志匹配"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances": {
+    "name": "高级ACL规则列表"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance": {
+    "name": "高级ACL规则"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/name": {
+    "name": "规则名称"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/id": {
+    "name": "规则ID"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/action": {
+    "name": "规则行为"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/active-status": {
+    "name": "规则生效标记"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/protocol-type": {
+    "name": "协议类型"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/protocol-type/single": {
+    "name": "协议号"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/protocol-type/single/protocol": {
+    "name": "协议值"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/protocol-type/zero": {
+    "name": "协议号为0"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/protocol-type/zero/protocol-zero": {
+    "name": "协议号为0"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/source": {
+    "name": "规则源参数"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/source/ip": {
+    "name": "源IP"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/source/ip/source-ipaddr": {
+    "name": "源IP地址"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/source/ip/source-wild": {
+    "name": "源IP地址反掩码"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/source/ip-pool": {
+    "name": "源IP池"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/source/ip-pool/source-pool-name": {
+    "name": "源地址池名称"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/dest": {
+    "name": "规则目的参数"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/dest/ip": {
+    "name": "目的IP"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/dest/ip/dest-ipaddr": {
+    "name": "目的IP地址"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/dest/ip/dest-wild": {
+    "name": "目的IP地址反掩码"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/dest/ip-pool": {
+    "name": "目的IP池"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/dest/ip-pool/dest-pool-name": {
+    "name": "目的地址池名称"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/packets-priority": {
+    "name": "报文优先级"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/packets-priority/tos": {
+    "name": "报文优先级"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/packets-priority/tos/precedence": {
+    "name": "数据报文优先级"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/packets-priority/tos/tos": {
+    "name": "数据包ToS值"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/packets-priority/dscp": {
+    "name": "差分服务代码点"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/packets-priority/dscp/dscp": {
+    "name": "DSCP值"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/vpn": {
+    "name": "规则的VPN配置"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/vpn/vpn-instance": {
+    "name": "VPN实例名"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/vpn/vpn-instance/vpn-name": {
+    "name": "VPN实例名"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/vpn/vpn-any": {
+    "name": "任意VPN"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/vpn/vpn-any/vpn-any": {
+    "name": "任意VPN实例"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/tcp-flag": {
+    "name": "TCP-FLAG的配置"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/tcp-flag/mask": {
+    "name": "TCP标识和掩码"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/tcp-flag/mask/tcp-flag-value": {
+    "name": "TCP-FLAG"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/tcp-flag/mask/tcp-flag-mask": {
+    "name": "TCP-FLAG掩码"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/tcp-flag/established": {
+    "name": "TCP Established标记"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/tcp-flag/established/established": {
+    "name": "是否匹配ESTABLISHED状态"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/source-port": {
+    "name": "源端口"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/source-port/range": {
+    "name": "源端口范围"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/source-port/range/source-port-begin": {
+    "name": "源端口的开始端口号"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/source-port/range/source-port-end": {
+    "name": "源端口的结束端口号"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/source-port/not-equal": {
+    "name": "源端口不等于的值"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/source-port/not-equal/source-port-value": {
+    "name": "源端口的值"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/source-port/port-pool": {
+    "name": "源端口池"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/source-port/port-pool/src-port-pool-name": {
+    "name": "源端口池名称"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/dest-port": {
+    "name": "目的端口"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/dest-port/range": {
+    "name": "目的端口范围"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/dest-port/range/dest-port-begin": {
+    "name": "目的端口的开始端口号"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/dest-port/range/dest-port-end": {
+    "name": "目的端口的结束端口号"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/dest-port/not-equal": {
+    "name": "目的端口不等于的值"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/dest-port/not-equal/dest-port-value": {
+    "name": "目的端口的值"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/dest-port/port-pool": {
+    "name": "目的端口池"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/dest-port/port-pool/dest-port-pool-name": {
+    "name": "目的端口池名称"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/ttl": {
+    "name": "TTL值"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/ttl/range": {
+    "name": "TTL范围"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/ttl/range/ttl-begin": {
+    "name": "TTL的起始值"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/ttl/range/ttl-end": {
+    "name": "TTL的结束值"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/ttl/not-equal": {
+    "name": "TTL不等于的值"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/ttl/not-equal/ttl-value": {
+    "name": "TTL值"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/description": {
+    "name": "规则描述"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/fragment-type": {
+    "name": "报文分片类型"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/packet-length": {
+    "name": "报文长度范围"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/packet-length/range": {
+    "name": "报文长度范围"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/packet-length/range/packet-len-begin": {
+    "name": "开始报文长度值"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/packet-length/range/packet-len-end": {
+    "name": "结束报文长度值"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/packet-length/not-equal": {
+    "name": "报文长度不等于值"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/packet-length/not-equal/packet-len-value": {
+    "name": "开始报文长度值"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/icmp-type": {
+    "name": "网络控制管理协议类型"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/icmp-type-end": {
+    "name": "ICMP类型结束"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/icmp-code": {
+    "name": "网络控制管理协议消息码"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/vni": {
+    "name": "VXLAN的ID"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/priority": {
+    "name": "规则优先级"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/time-range-name": {
+    "name": "时间范围"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/match-statistics": {
+    "name": "匹配次数"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/match-statistics/match-count": {
+    "name": "匹配次数"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/log-enable": {
+    "name": "日志使能"
+  },
+  "/huawei-acl:acl/groups/group/rule-ethernets": {
+    "name": "以太网帧头ACL规则列表"
+  },
+  "/huawei-acl:acl/groups/group/rule-ethernets/rule-ethernet": {
+    "name": "二层ACL规则"
+  },
+  "/huawei-acl:acl/groups/group/rule-ethernets/rule-ethernet/name": {
+    "name": "规则名称"
+  },
+  "/huawei-acl:acl/groups/group/rule-ethernets/rule-ethernet/id": {
+    "name": "规则ID"
+  },
+  "/huawei-acl:acl/groups/group/rule-ethernets/rule-ethernet/action": {
+    "name": "规则行为"
+  },
+  "/huawei-acl:acl/groups/group/rule-ethernets/rule-ethernet/active-status": {
+    "name": "规则生效标记"
+  },
+  "/huawei-acl:acl/groups/group/rule-ethernets/rule-ethernet/frame-type": {
+    "name": "以太帧头协议号"
+  },
+  "/huawei-acl:acl/groups/group/rule-ethernets/rule-ethernet/frame-mask": {
+    "name": "以太帧头协议掩码"
+  },
+  "/huawei-acl:acl/groups/group/rule-ethernets/rule-ethernet/source-mac": {
+    "name": "源MAC地址"
+  },
+  "/huawei-acl:acl/groups/group/rule-ethernets/rule-ethernet/source-mac-mask": {
+    "name": "源MAC地址掩码"
+  },
+  "/huawei-acl:acl/groups/group/rule-ethernets/rule-ethernet/dest-mac": {
+    "name": "目的MAC地址"
+  },
+  "/huawei-acl:acl/groups/group/rule-ethernets/rule-ethernet/dest-mac-mask": {
+    "name": "目的MAC地址掩码"
+  },
+  "/huawei-acl:acl/groups/group/rule-ethernets/rule-ethernet/vlan-id": {
+    "name": "VLAN值"
+  },
+  "/huawei-acl:acl/groups/group/rule-ethernets/rule-ethernet/vlan-id-mask": {
+    "name": "VLAN掩码"
+  },
+  "/huawei-acl:acl/groups/group/rule-ethernets/rule-ethernet/value-8021p": {
+    "name": "802.1的优先级"
+  },
+  "/huawei-acl:acl/groups/group/rule-ethernets/rule-ethernet/ce-vlan-id": {
+    "name": "内层VLAN"
+  },
+  "/huawei-acl:acl/groups/group/rule-ethernets/rule-ethernet/ce-vlan-id-mask": {
+    "name": "内层VLAN掩码"
+  },
+  "/huawei-acl:acl/groups/group/rule-ethernets/rule-ethernet/ce-vlan-value-8021p": {
+    "name": "外层VLAN的802.1p优先级"
+  },
+  "/huawei-acl:acl/groups/group/rule-ethernets/rule-ethernet/time-range-name": {
+    "name": "时间范围"
+  },
+  "/huawei-acl:acl/groups/group/rule-ethernets/rule-ethernet/description": {
+    "name": "规则描述"
+  },
+  "/huawei-acl:acl/groups/group/rule-ethernets/rule-ethernet/priority": {
+    "name": "规则优先级"
+  },
+  "/huawei-acl:acl/groups/group/rule-ethernets/rule-ethernet/match-statistics": {
+    "name": "匹配次数"
+  },
+  "/huawei-acl:acl/groups/group/rule-ethernets/rule-ethernet/match-statistics/match-count": {
+    "name": "匹配次数"
+  },
+  "/huawei-acl:acl/groups/group/rule-interfaces": {
+    "name": "接口ACL规则组"
+  },
+  "/huawei-acl:acl/groups/group/rule-interfaces/rule-interface": {
+    "name": "基于接口的ACL规则"
+  },
+  "/huawei-acl:acl/groups/group/rule-interfaces/rule-interface/name": {
+    "name": "ACL规则名称"
+  },
+  "/huawei-acl:acl/groups/group/rule-interfaces/rule-interface/id": {
+    "name": "规则ID"
+  },
+  "/huawei-acl:acl/groups/group/rule-interfaces/rule-interface/action": {
+    "name": "匹配模式"
+  },
+  "/huawei-acl:acl/groups/group/rule-interfaces/rule-interface/interface": {
+    "name": "接口参数"
+  },
+  "/huawei-acl:acl/groups/group/rule-interfaces/rule-interface/interface/interface-any": {
+    "name": "任意接口"
+  },
+  "/huawei-acl:acl/groups/group/rule-interfaces/rule-interface/interface/interface-any/if-any": {
+    "name": "任意接口"
+  },
+  "/huawei-acl:acl/groups/group/rule-interfaces/rule-interface/interface/interface-name": {
+    "name": "接口名称"
+  },
+  "/huawei-acl:acl/groups/group/rule-interfaces/rule-interface/interface/interface-name/if-name": {
+    "name": "接口名称"
+  },
+  "/huawei-acl:acl/groups/group/rule-interfaces/rule-interface/time-range-name": {
+    "name": "时间范围名称"
+  },
+  "/huawei-acl:acl/groups/group/rule-interfaces/rule-interface/active-status": {
+    "name": "生效状态"
+  },
+  "/huawei-acl:acl/groups/group/rule-interfaces/rule-interface/description": {
+    "name": "规则描述"
+  },
+  "/huawei-acl:acl/groups/group/rule-interfaces/rule-interface/match-statistics": {
+    "name": "匹配次数"
+  },
+  "/huawei-acl:acl/groups/group/rule-interfaces/rule-interface/match-statistics/match-count": {
+    "name": "匹配次数"
+  },
+  "/huawei-acl:acl/groups/group/rule-mplss": {
+    "name": "MPLS ACL规则列表"
+  },
+  "/huawei-acl:acl/groups/group/rule-mplss/rule-mpls": {
+    "name": "MPLS ACL规则"
+  },
+  "/huawei-acl:acl/groups/group/rule-mplss/rule-mpls/name": {
+    "name": "规则名称"
+  },
+  "/huawei-acl:acl/groups/group/rule-mplss/rule-mpls/id": {
+    "name": "规则ID"
+  },
+  "/huawei-acl:acl/groups/group/rule-mplss/rule-mpls/action": {
+    "name": "规则行为"
+  },
+  "/huawei-acl:acl/groups/group/rule-mplss/rule-mpls/description": {
+    "name": "规则描述"
+  },
+  "/huawei-acl:acl/groups/group/rule-mplss/rule-mpls/priority": {
+    "name": "优先级"
+  },
+  "/huawei-acl:acl/groups/group/rule-mplss/rule-mpls/lables": {
+    "name": "规则标签列表"
+  },
+  "/huawei-acl:acl/groups/group/rule-mplss/rule-mpls/lables/lable": {
+    "name": "规则标签配置"
+  },
+  "/huawei-acl:acl/groups/group/rule-mplss/rule-mpls/lables/lable/sequence": {
+    "name": "序列号"
+  },
+  "/huawei-acl:acl/groups/group/rule-mplss/rule-mpls/lables/lable/exp-value": {
+    "name": "EXP值"
+  },
+  "/huawei-acl:acl/groups/group/rule-mplss/rule-mpls/lables/lable/label-value": {
+    "name": "Label值"
+  },
+  "/huawei-acl:acl/groups/group/rule-mplss/rule-mpls/lables/lable/ttl-begin": {
+    "name": "TTL开始值"
+  },
+  "/huawei-acl:acl/groups/group/rule-mplss/rule-mpls/lables/lable/ttl-end": {
+    "name": "TTL结束值"
+  },
+  "/huawei-acl:acl/groups/group/rule-users": {
+    "name": "用户ACL规则列表"
+  },
+  "/huawei-acl:acl/groups/group/rule-users/rule-user": {
+    "name": "用户ACL规则"
+  },
+  "/huawei-acl:acl/groups/group/rule-users/rule-user/name": {
+    "name": "用户ACL规则名称"
+  },
+  "/huawei-acl:acl/groups/group/rule-users/rule-user/id": {
+    "name": "户ACL规则ID"
+  },
+  "/huawei-acl:acl/groups/group/rule-users/rule-user/action": {
+    "name": "用户ACL规则匹配模式"
+  },
+  "/huawei-acl:acl/groups/group/rule-users/rule-user/time-range-name": {
+    "name": "ACL规则生效时间范围"
+  },
+  "/huawei-acl:acl/groups/group/rule-users/rule-user/offset-begin": {
+    "name": "起始偏移量位置"
+  },
+  "/huawei-acl:acl/groups/group/rule-users/rule-user/user-rule1": {
+    "name": "第一个匹配字段值"
+  },
+  "/huawei-acl:acl/groups/group/rule-users/rule-user/user-rule1-mask": {
+    "name": "第一个匹配字段掩码"
+  },
+  "/huawei-acl:acl/groups/group/rule-users/rule-user/offset1": {
+    "name": "第一个匹配字段偏移量"
+  },
+  "/huawei-acl:acl/groups/group/rule-users/rule-user/user-rule2": {
+    "name": "第二个匹配字段值"
+  },
+  "/huawei-acl:acl/groups/group/rule-users/rule-user/user-rule2-mask": {
+    "name": "第二个匹配字段掩码"
+  },
+  "/huawei-acl:acl/groups/group/rule-users/rule-user/offset2": {
+    "name": "第二个匹配字段偏移量"
+  },
+  "/huawei-acl:acl/groups/group/rule-users/rule-user/user-rule3": {
+    "name": "第三个匹配字段值"
+  },
+  "/huawei-acl:acl/groups/group/rule-users/rule-user/user-rule3-mask": {
+    "name": "第三个匹配字段掩码"
+  },
+  "/huawei-acl:acl/groups/group/rule-users/rule-user/offset3": {
+    "name": "第三个匹配字段偏移量"
+  },
+  "/huawei-acl:acl/groups/group/rule-users/rule-user/user-rule4": {
+    "name": "第四个匹配字段值"
+  },
+  "/huawei-acl:acl/groups/group/rule-users/rule-user/user-rule4-mask": {
+    "name": "第四个匹配字段掩码"
+  },
+  "/huawei-acl:acl/groups/group/rule-users/rule-user/offset4": {
+    "name": "第四个匹配字段偏移量"
+  },
+  "/huawei-acl:acl/groups/group/rule-users/rule-user/user-rule5": {
+    "name": "第五个匹配字段值"
+  },
+  "/huawei-acl:acl/groups/group/rule-users/rule-user/user-rule5-mask": {
+    "name": "第五个匹配字段掩码"
+  },
+  "/huawei-acl:acl/groups/group/rule-users/rule-user/offset5": {
+    "name": "第五个匹配字段偏移量"
+  },
+  "/huawei-acl:acl/groups/group/rule-users/rule-user/user-rule6": {
+    "name": "第六个匹配字段值"
+  },
+  "/huawei-acl:acl/groups/group/rule-users/rule-user/user-rule6-mask": {
+    "name": "第六个匹配字段掩码"
+  },
+  "/huawei-acl:acl/groups/group/rule-users/rule-user/offset6": {
+    "name": "第六个匹配字段偏移量"
+  },
+  "/huawei-acl:acl/groups/group/rule-users/rule-user/user-rule7": {
+    "name": "第七个匹配字段值"
+  },
+  "/huawei-acl:acl/groups/group/rule-users/rule-user/user-rule7-mask": {
+    "name": "第七个匹配字段掩码"
+  },
+  "/huawei-acl:acl/groups/group/rule-users/rule-user/offset7": {
+    "name": "第七个匹配字段偏移量"
+  },
+  "/huawei-acl:acl/groups/group/rule-users/rule-user/user-rule8": {
+    "name": "第八个匹配字段值"
+  },
+  "/huawei-acl:acl/groups/group/rule-users/rule-user/user-rule8-mask": {
+    "name": "第八个匹配字段掩码"
+  },
+  "/huawei-acl:acl/groups/group/rule-users/rule-user/offset8": {
+    "name": "第八个匹配字段偏移量"
+  },
+  "/huawei-acl:acl/groups/group/rule-users/rule-user/active-status": {
+    "name": "规则生效标记"
+  },
+  "/huawei-acl:acl/groups/group/rule-users/rule-user/description": {
+    "name": "ACL规则的描述"
+  },
+  "/huawei-acl:acl/groups/group/rule-users/rule-user/match-statistics": {
+    "name": "用户ACL规则匹配计数"
+  },
+  "/huawei-acl:acl/groups/group/rule-users/rule-user/match-statistics/match-count": {
+    "name": "用户ACL规则匹配次数"
+  },
+  "/huawei-acl:acl/groups/group/rule-arps": {
+    "name": "ARP ACL规则列表"
+  },
+  "/huawei-acl:acl/groups/group/rule-arps/rule-arp": {
+    "name": "ARP ACL规则"
+  },
+  "/huawei-acl:acl/groups/group/rule-arps/rule-arp/name": {
+    "name": "规则名称"
+  },
+  "/huawei-acl:acl/groups/group/rule-arps/rule-arp/id": {
+    "name": "规则ID"
+  },
+  "/huawei-acl:acl/groups/group/rule-arps/rule-arp/action": {
+    "name": "规则行为"
+  },
+  "/huawei-acl:acl/groups/group/rule-arps/rule-arp/time-range-name": {
+    "name": "时间段名称"
+  },
+  "/huawei-acl:acl/groups/group/rule-arps/rule-arp/packet-mode": {
+    "name": "报文类型"
+  },
+  "/huawei-acl:acl/groups/group/rule-arps/rule-arp/source-ipaddr": {
+    "name": "源IP地址"
+  },
+  "/huawei-acl:acl/groups/group/rule-arps/rule-arp/source-wild": {
+    "name": "源IP地址反掩码"
+  },
+  "/huawei-acl:acl/groups/group/rule-arps/rule-arp/dest-ipaddr": {
+    "name": "目的IP地址"
+  },
+  "/huawei-acl:acl/groups/group/rule-arps/rule-arp/dest-wild": {
+    "name": "目的IP地址反掩码"
+  },
+  "/huawei-acl:acl/groups/group/rule-arps/rule-arp/source-mac": {
+    "name": "源MAC地址"
+  },
+  "/huawei-acl:acl/groups/group/rule-arps/rule-arp/source-mac-mask": {
+    "name": "源MAC地址掩码"
+  },
+  "/huawei-acl:acl/groups/group/rule-arps/rule-arp/dest-mac": {
+    "name": "目的MAC地址"
+  },
+  "/huawei-acl:acl/groups/group/rule-arps/rule-arp/dest-mac-mask": {
+    "name": "目的MAC地址掩码"
+  },
+  "/huawei-acl:acl/groups/group/rule-arps/rule-arp/active-status": {
+    "name": "激活状态"
+  },
+  "/huawei-acl:acl/groups/group/rule-arps/rule-arp/description": {
+    "name": "规则描述"
+  },
+  "/huawei-acl:acl/groups/group/rule-arps/rule-arp/match-statistics": {
+    "name": "规则匹配计数列表"
+  },
+  "/huawei-acl:acl/groups/group/rule-arps/rule-arp/match-statistics/match-count": {
+    "name": "规则匹配计数"
+  },
+  "/huawei-acl:acl/group6s": {
+    "name": "ACL6规则组列表"
+  },
+  "/huawei-acl:acl/group6s/group6": {
+    "name": "ACL6规则组"
+  },
+  "/huawei-acl:acl/group6s/group6/identity": {
+    "name": "规则组标识"
+  },
+  "/huawei-acl:acl/group6s/group6/type": {
+    "name": "规则组类型"
+  },
+  "/huawei-acl:acl/group6s/group6/match-order": {
+    "name": "规则的匹配顺序"
+  },
+  "/huawei-acl:acl/group6s/group6/step": {
+    "name": "规则组步长"
+  },
+  "/huawei-acl:acl/group6s/group6/description": {
+    "name": "规则组描述"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-basics": {
+    "name": "基本ACL6规则组"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-basics/rule-basic": {
+    "name": "基本ACL6规则"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-basics/rule-basic/name": {
+    "name": "ACL6规则的名称"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-basics/rule-basic/id": {
+    "name": "规则ID"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-basics/rule-basic/action": {
+    "name": "匹配模式"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-basics/rule-basic/active-status": {
+    "name": "生效状态"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-basics/rule-basic/source-ipaddr": {
+    "name": "源地址"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-basics/rule-basic/source-ip-mask": {
+    "name": "源地址掩码"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-basics/rule-basic/source-ip-mask/positive-mask-len": {
+    "name": "源地址掩码"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-basics/rule-basic/source-ip-mask/positive-mask-len/source-mask-len": {
+    "name": "源地址掩码"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-basics/rule-basic/source-ip-mask/negative-mask": {
+    "name": "反掩码"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-basics/rule-basic/source-ip-mask/negative-mask/source-wild": {
+    "name": "反掩码"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-basics/rule-basic/fragment-type": {
+    "name": "报文分片类型"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-basics/rule-basic/vpn": {
+    "name": "VPN实例"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-basics/rule-basic/vpn/vpn-instance": {
+    "name": "VPN实例"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-basics/rule-basic/vpn/vpn-instance/vpn-name": {
+    "name": "VPN实例"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-basics/rule-basic/vpn/vpn-any": {
+    "name": "任意VPN实例"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-basics/rule-basic/vpn/vpn-any/vpn-any": {
+    "name": "任意VPN实例"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-basics/rule-basic/time-range-name": {
+    "name": "时间范围名称"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-basics/rule-basic/description": {
+    "name": "规则描述"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-basics/rule-basic/match-statistics": {
+    "name": "匹配计数"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-basics/rule-basic/match-statistics/match-count": {
+    "name": "匹配计数"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances": {
+    "name": "高级ACL6规则列表"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance": {
+    "name": "高级ACL6规则"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/name": {
+    "name": "规则名称"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/id": {
+    "name": "规则ID"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/action": {
+    "name": "规则行为"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/active-status": {
+    "name": "生效状态"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/protocol-type": {
+    "name": "协议号"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/protocol-type/single": {
+    "name": "协议号值"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/protocol-type/single/protocol": {
+    "name": "协议值"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/protocol-type/zero": {
+    "name": "协议号为0"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/protocol-type/zero/hoport": {
+    "name": "协议号为0"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/source": {
+    "name": "源参数"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/source/ip": {
+    "name": "源IP和掩码"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/source/ip/source-ipaddr": {
+    "name": "源IPV6地址"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/source/ip/source-ipaddr-mask": {
+    "name": "源IP掩码"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/source/ip/source-ipaddr-mask/positive-mask-len": {
+    "name": "源IPV6地址掩码模式"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/source/ip/source-ipaddr-mask/positive-mask-len/source-mask-len": {
+    "name": "源IPV6地址正掩码"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/source/ip/source-ipaddr-mask/negative-mask": {
+    "name": "反掩码"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/source/ip/source-ipaddr-mask/negative-mask/source-wild": {
+    "name": "反掩码"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/source/ip-pool": {
+    "name": "源地址池"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/source/ip-pool/source-pool6-name": {
+    "name": "源IPv6池的名称"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/dest": {
+    "name": "目的参数"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/dest/ip": {
+    "name": "目的IPv6地址"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/dest/ip/dest-ipaddr": {
+    "name": "目的IPV6地址"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/dest/ip/dest-ipaddr-mask": {
+    "name": "目的掩码"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/dest/ip/dest-ipaddr-mask/positive-mask-len": {
+    "name": "目的IPV6地址掩码模式"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/dest/ip/dest-ipaddr-mask/positive-mask-len/dest-mask-len": {
+    "name": "目的IPV6地址正掩码"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/dest/ip/dest-ipaddr-mask/negative-mask": {
+    "name": "反掩码"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/dest/ip/dest-ipaddr-mask/negative-mask/dest-wild": {
+    "name": "反掩码"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/packets-priority": {
+    "name": "报文优先级"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/packets-priority/tos": {
+    "name": "指定报文优先级"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/packets-priority/tos/precedence": {
+    "name": "优先级"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/packets-priority/tos/tos": {
+    "name": "ToS值"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/packets-priority/dscp": {
+    "name": "差分服务码"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/packets-priority/dscp/dscp": {
+    "name": "差分服务码"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/icmp-type": {
+    "name": "ICMP类型"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/icmp-type-end": {
+    "name": "ICMP类型结束"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/icmp-code": {
+    "name": "ICMP消息编码"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/vpn": {
+    "name": "VPN实例"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/vpn/vpn-instance": {
+    "name": "VPN实例"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/vpn/vpn-instance/vpn-name": {
+    "name": "VPN实例名"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/vpn/vpn-any": {
+    "name": "任意VPN实例"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/vpn/vpn-any/vpn-any": {
+    "name": "任意VPN实例"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/tcp-flag": {
+    "name": "TCP标识"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/tcp-flag/mask": {
+    "name": "取值和掩码值"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/tcp-flag/mask/tcp-flag-value": {
+    "name": "TCP值"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/tcp-flag/mask/tcp-flag-mask": {
+    "name": "TCP掩码值"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/tcp-flag/established": {
+    "name": "已建立标识"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/tcp-flag/established/established": {
+    "name": "是否匹配ESTABLISHED状态"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/source-port": {
+    "name": "源端口"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/source-port/range": {
+    "name": "源端口"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/source-port/range/source-port-begin": {
+    "name": "起始端口号"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/source-port/range/source-port-end": {
+    "name": "结束端口号"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/source-port/not-equal": {
+    "name": "指定源端口号不等于"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/source-port/not-equal/source-port-value": {
+    "name": "源端口的端口号"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/dest-port": {
+    "name": "目的端口"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/dest-port/range": {
+    "name": "目的端口范围"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/dest-port/range/dest-port-begin": {
+    "name": "目的端口的开始端口号"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/dest-port/range/dest-port-end": {
+    "name": "目的端口的结束端口号"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/dest-port/not-equal": {
+    "name": "指定目的端口"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/dest-port/not-equal/dest-port-value": {
+    "name": "源端口的端口号"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/time-range-name": {
+    "name": "生效时间段"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/description": {
+    "name": "规则描述"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/fragment-type": {
+    "name": "报文分片类型"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/priority": {
+    "name": "高级ACL规则优先级"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/log-enable": {
+    "name": "日志匹配数据包"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/match-statistics": {
+    "name": "匹配次数状态"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/match-statistics/match-count": {
+    "name": "规则命中次数"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-interfaces": {
+    "name": "接口ACL6规则组"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-interfaces/rule-interface": {
+    "name": "基于接口的ACL6规则"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-interfaces/rule-interface/name": {
+    "name": "ACL6规则名称"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-interfaces/rule-interface/id": {
+    "name": "规则ID"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-interfaces/rule-interface/action": {
+    "name": "匹配模式"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-interfaces/rule-interface/interface": {
+    "name": "接口参数"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-interfaces/rule-interface/interface/interface-any": {
+    "name": "任意接口"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-interfaces/rule-interface/interface/interface-any/if-any": {
+    "name": "任意接口"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-interfaces/rule-interface/interface/interface-name": {
+    "name": "接口名称"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-interfaces/rule-interface/interface/interface-name/if-name": {
+    "name": "接口名称"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-interfaces/rule-interface/active-status": {
+    "name": "生效状态"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-interfaces/rule-interface/time-range-name": {
+    "name": "时间范围名称"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-interfaces/rule-interface/description": {
+    "name": "规则描述"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-interfaces/rule-interface/match-statistics": {
+    "name": "匹配次数"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-interfaces/rule-interface/match-statistics/match-count": {
+    "name": "匹配次数"
+  },
+  "/huawei-acl:acl/ip-pools": {
+    "name": "ACL地址池列表"
+  },
+  "/huawei-acl:acl/ip-pools/ip-pool": {
+    "name": "ACL地址池"
+  },
+  "/huawei-acl:acl/ip-pools/ip-pool/name": {
+    "name": "地址池名称"
+  },
+  "/huawei-acl:acl/ip-pools/ip-pool/apply-bgp-ipv4-peer": {
+    "name": "使用BGP"
+  },
+  "/huawei-acl:acl/ip-pools/ip-pool/bgp-peer-vpn": {
+    "name": "BGP使用的VPN类型"
+  },
+  "/huawei-acl:acl/ip-pools/ip-pool/bgp-peer-vpn-name": {
+    "name": "IPv4 BGP使用的VPN名称"
+  },
+  "/huawei-acl:acl/ip-pools/ip-pool/ipaddrs": {
+    "name": "IP地址表"
+  },
+  "/huawei-acl:acl/ip-pools/ip-pool/ipaddrs/ipaddr": {
+    "name": "配置IP地址"
+  },
+  "/huawei-acl:acl/ip-pools/ip-pool/ipaddrs/ipaddr/address": {
+    "name": "IP地址"
+  },
+  "/huawei-acl:acl/ip-pools/ip-pool/ipaddrs/ipaddr/mask": {
+    "name": "IP掩码"
+  },
+  "/huawei-acl:acl/ip-pool6s": {
+    "name": "ACL6地址池列表"
+  },
+  "/huawei-acl:acl/ip-pool6s/ip-pool6": {
+    "name": "ACL6地址池"
+  },
+  "/huawei-acl:acl/ip-pool6s/ip-pool6/name": {
+    "name": "地址池名称"
+  },
+  "/huawei-acl:acl/ip-pool6s/ip-pool6/apply-bgp-ipv6-peer": {
+    "name": "使用BGP"
+  },
+  "/huawei-acl:acl/ip-pool6s/ip-pool6/bgp-peer-vpn": {
+    "name": "IPv6 BGP使用的VPN类型"
+  },
+  "/huawei-acl:acl/ip-pool6s/ip-pool6/bgp-peer-vpn-name": {
+    "name": "IPv6 BGP使用的VPN名称"
+  },
+  "/huawei-acl:acl/port-pools": {
+    "name": "ACL端口池"
+  },
+  "/huawei-acl:acl/port-pools/port-pool": {
+    "name": "ACL端口池"
+  },
+  "/huawei-acl:acl/port-pools/port-pool/name": {
+    "name": "端口池名称"
+  },
+  "/huawei-acl:acl/port-pools/port-pool/ports": {
+    "name": "端口号列表"
+  },
+  "/huawei-acl:acl/port-pools/port-pool/ports/port": {
+    "name": "配置端口池"
+  },
+  "/huawei-acl:acl/port-pools/port-pool/ports/port/operation": {
+    "name": "范围类型"
+  },
+  "/huawei-acl:acl/port-pools/port-pool/ports/port/number-begin": {
+    "name": "起始值"
+  },
+  "/huawei-acl:acl/port-pools/port-pool/ports/port/number-end": {
+    "name": "结束值"
+  },
+  "/huawei-acl:reset-count": {
+    "name": "重置ACL匹配计数"
+  },
+  "/rpcs/huawei-acl:acl/reset-count": {
+    "name": "重置ACL匹配计数"
+  },
+  "/huawei-acl:reset-count/input/identify": {
+    "name": "规则组标识"
+  },
+  "/huawei-acl:reset-count6": {
+    "name": "重置ACL6匹配计数"
+  },
+  "/rpcs/huawei-acl:acl/reset-count6": {
+    "name": "重置ACL6匹配计数"
+  },
+  "/huawei-acl:reset-count6/input/identify": {
+    "name": "规则组标识"
+  }
+}

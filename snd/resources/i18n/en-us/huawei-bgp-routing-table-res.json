@@ -1,0 +1,2477 @@
+{
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route": {
+    "name": "BGP Routes Information"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast": {
+    "name": "IPv4-unicast BGP Route"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes": {
+    "name": "Route List"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route": {
+    "name": "Route Information"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/vpn-name": {
+    "name": "BGP VPN Instance Name"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/route-distinguisher": {
+    "name": "RD"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/prefix": {
+    "name": "Network Address"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/mask-length": {
+    "name": "Prefix Mask"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/route-type": {
+    "name": "Route Type"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/im-table-id": {
+    "name": "Import Table ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/from": {
+    "name": "Source Peer"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/path-id": {
+    "name": "Path ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/remote-nexthop-tunnel-address": {
+    "name": "RemoteNextHop-TunnelAddress"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/remote-nexthop-mac-address": {
+    "name": "RemoteNextHop-mac"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/nexthop": {
+    "name": "Next Hop Address"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/local-preference": {
+    "name": "Local Priority"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/preferred-value": {
+    "name": "Preferred Value of Protocol"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/preference": {
+    "name": "BGP Route Priority"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/path-as": {
+    "name": "List of AS-Paths"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/origin": {
+    "name": "Route Origin"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/med": {
+    "name": "Route MED"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/flag-string": {
+    "name": "Route Flag"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/worse-reason": {
+    "name": "Reason Why a Route Is Not Selected"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/sending-peers": {
+    "name": "List of Route Sending Peers"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/time": {
+    "name": "Time Stamp"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/community": {
+    "name": "Community Attribute"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/large-community": {
+    "name": "Large-Community Attribute Information"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/ext-community": {
+    "name": "Extended Community Attribute"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/interface-name": {
+    "name": "Name of the Outbound Interface"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/originator": {
+    "name": "Router ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/cluster-list": {
+    "name": "List of Cluster IDs"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/remote-route-id": {
+    "name": "Router ID of a Peer"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/relay-nexthop": {
+    "name": "Iteration Next Hop"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/relay-tunnel-name": {
+    "name": "Name of Iteration Tunnel"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/atomic-aggregate": {
+    "name": "Route Carrying the Atomic-Aggregate Attribute"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/aggregator-as": {
+    "name": "AS Number of the Route Summarizer"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/aggregator-id": {
+    "name": "Route Summarizer ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/in-label": {
+    "name": "In-Label"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/out-label": {
+    "name": "Out-Label"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/iterated-vpn": {
+    "name": "Iterated VRF"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/remote-nexthop-vni": {
+    "name": "RemoteNextHop-vni"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/advertise-nexthop": {
+    "name": "Advertisement Next Hop"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/prefix-sid": {
+    "name": "PrefixSid attribute of Route"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/aigp": {
+    "name": "AIGP attribute of Route"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/attribute-set": {
+    "name": "Attribute Set"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/gateway-ip": {
+    "name": "Gateway IP"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/entropy-label-padding": {
+    "name": "Entropy label attribute value"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes": {
+    "name": "Advertised Route List"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route": {
+    "name": "Advertised Route Information"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/vpn-name": {
+    "name": "BGP VPN Instance Name"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/remote-peer-address": {
+    "name": "Peer Address"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/route-distinguisher": {
+    "name": "RD"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/prefix": {
+    "name": "Network Address"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/mask-length": {
+    "name": "Prefix Mask"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/route-type": {
+    "name": "Route Type"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/im-table-id": {
+    "name": "Import Table ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/from": {
+    "name": "Source Peer"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/path-id": {
+    "name": "Path ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/remote-nexthop-tunnel-address": {
+    "name": "RemoteNextHop-TunnelAddress"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/remote-nexthop-mac-address": {
+    "name": "RemoteNextHop-mac"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/nexthop": {
+    "name": "Next Hop Address"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/local-preference": {
+    "name": "Local Priority"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/preferred-value": {
+    "name": "Preferred Value of Protocol"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/preference": {
+    "name": "BGP Route Priority"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/path-as": {
+    "name": "List of AS-Paths"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/origin": {
+    "name": "Route Origin"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/med": {
+    "name": "Route MED"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/flag-string": {
+    "name": "Route Flag"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/worse-reason": {
+    "name": "Reason Why a Route Is Not Selected"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/sending-peers": {
+    "name": "List of Route Sending Peers"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/time": {
+    "name": "Time Stamp"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/community": {
+    "name": "Community Attribute"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/large-community": {
+    "name": "Large-Community Attribute Information"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/ext-community": {
+    "name": "Extended Community Attribute"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/interface-name": {
+    "name": "Name of the Outbound Interface"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/originator": {
+    "name": "Router ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/cluster-list": {
+    "name": "List of Cluster IDs"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/remote-route-id": {
+    "name": "Router ID of a Peer"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/relay-nexthop": {
+    "name": "Iteration Next Hop"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/relay-tunnel-name": {
+    "name": "Name of Iteration Tunnel"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/atomic-aggregate": {
+    "name": "Route Carrying the Atomic-Aggregate Attribute"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/aggregator-as": {
+    "name": "AS Number of the Route Summarizer"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/aggregator-id": {
+    "name": "Route Summarizer ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/in-label": {
+    "name": "In-Label"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/out-label": {
+    "name": "Out-Label"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/iterated-vpn": {
+    "name": "Iterated VRF"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/remote-nexthop-vni": {
+    "name": "RemoteNextHop-vni"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/advertise-nexthop": {
+    "name": "Advertised Nexthop"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/prefix-sid": {
+    "name": "PrefixSid attribute of Route"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/aigp": {
+    "name": "AIGP attribute of Route"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/attribute-set": {
+    "name": "Attribute Set"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/gateway-ip": {
+    "name": "Gateway IP"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/entropy-label-padding": {
+    "name": "Entropy label attribute value"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes": {
+    "name": "Received Route List"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route": {
+    "name": "Received Route Information"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/vpn-name": {
+    "name": "BGP VPN Instance Name"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/remote-peer-address": {
+    "name": "Peer Address"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/route-distinguisher": {
+    "name": "RD"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/prefix": {
+    "name": "Network Address"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/mask-length": {
+    "name": "Prefix Mask"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/route-type": {
+    "name": "Route Type"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/im-table-id": {
+    "name": "Import Table ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/from": {
+    "name": "Source Peer"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/path-id": {
+    "name": "Path ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/remote-nexthop-tunnel-address": {
+    "name": "RemoteNextHop-TunnelAddress"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/remote-nexthop-mac-address": {
+    "name": "RemoteNextHop-mac"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/nexthop": {
+    "name": "Next Hop Address"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/local-preference": {
+    "name": "Local Priority"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/preferred-value": {
+    "name": "Preferred Value of Protocol"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/preference": {
+    "name": "BGP Route Priority"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/path-as": {
+    "name": "List of AS-Paths"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/origin": {
+    "name": "Route Origin"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/med": {
+    "name": "Route MED"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/flag-string": {
+    "name": "Route Flag"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/worse-reason": {
+    "name": "Reason Why a Route Is Not Selected"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/sending-peers": {
+    "name": "List of Route Sending Peers"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/time": {
+    "name": "Time Stamp"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/community": {
+    "name": "Community Attribute"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/large-community": {
+    "name": "Large-Community Attribute Information"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/ext-community": {
+    "name": "Extended Community Attribute"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/interface-name": {
+    "name": "Name of the Outbound Interface"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/originator": {
+    "name": "Router ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/cluster-list": {
+    "name": "List of Cluster IDs"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/remote-route-id": {
+    "name": "Router ID of a Peer"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/relay-nexthop": {
+    "name": "Iteration Next Hop"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/relay-tunnel-name": {
+    "name": "Name of Iteration Tunnel"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/atomic-aggregate": {
+    "name": "Route Carrying the Atomic-Aggregate Attribute"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/aggregator-as": {
+    "name": "AS Number of the Route Summarizer"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/aggregator-id": {
+    "name": "Route Summarizer ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/in-label": {
+    "name": "In-Label"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/out-label": {
+    "name": "Out-Label"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/iterated-vpn": {
+    "name": "Iterated VRF"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/remote-nexthop-vni": {
+    "name": "RemoteNextHop-vni"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/advertise-nexthop": {
+    "name": "Advertisement Next Hop"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/prefix-sid": {
+    "name": "PrefixSid attribute of Route"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/aigp": {
+    "name": "AIGP attribute of Route"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/attribute-set": {
+    "name": "Attribute Set"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/gateway-ip": {
+    "name": "Gateway IP"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/entropy-label-padding": {
+    "name": "Entropy label attribute value"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes": {
+    "name": "Active Routes Information Received by BGP Peer"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route": {
+    "name": "The information of active routes received"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/vpn-name": {
+    "name": "VPN name"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/remote-peer-address": {
+    "name": "Peer Address"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/route-distinguisher": {
+    "name": "RD"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/prefix": {
+    "name": "Network Address"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/mask-length": {
+    "name": "Prefix Mask"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/route-type": {
+    "name": "Route Type"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/im-table-id": {
+    "name": "Import Table ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/from": {
+    "name": "Source Peer"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/path-id": {
+    "name": "Path ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/remote-nexthop-tunnel-address": {
+    "name": "RemoteNextHop-TunnelAddress"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/remote-nexthop-mac-address": {
+    "name": "RemoteNextHop-MAC"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/nexthop": {
+    "name": "Next Hop Address"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/local-preference": {
+    "name": "Local Priority"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/preferred-value": {
+    "name": "Preferred Value of Protocol"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/preference": {
+    "name": "BGP Route Priority"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/path-as": {
+    "name": "List of AS-Paths"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/origin": {
+    "name": "Route Origin"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/med": {
+    "name": "MED"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/flag-string": {
+    "name": "Route Flag"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/worse-reason": {
+    "name": "Reason Why a Route Is Not Selected"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/sending-peers": {
+    "name": "List of Route Sending Peers"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/time": {
+    "name": "Time Stamp"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/community": {
+    "name": "Community Attribute"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/large-community": {
+    "name": "Large-Community Attribute Information"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/ext-community": {
+    "name": "Extended Community Attribute"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/interface-name": {
+    "name": "Name of the Outbound Interface"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/originator": {
+    "name": "Router ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/cluster-list": {
+    "name": "Cluster List Attribute"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/remote-route-id": {
+    "name": "Router ID of a Peer"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/relay-nexthop": {
+    "name": "Iteration Next Hop"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/relay-tunnel-name": {
+    "name": "Name of Iteration Tunnel"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/atomic-aggregate": {
+    "name": "Route Carrying the Atomic-Aggregate Attribute"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/aggregator-as": {
+    "name": "AS Number of the Route Summarizer"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/aggregator-id": {
+    "name": "Route Summarizer ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/in-label": {
+    "name": "In-label"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/out-label": {
+    "name": "Out-Label"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/iterated-vpn": {
+    "name": "BGP VPN Instance Name"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/remote-nexthop-vni": {
+    "name": "RemoteNextHop-VNI"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/advertise-nexthop": {
+    "name": "Advertisement Next Hop"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/prefix-sid": {
+    "name": "PrefixSid attribute of Route"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/aigp": {
+    "name": "AIGP attribute of Route"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/attribute-set": {
+    "name": "Attribute Set"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/gateway-ip": {
+    "name": "Gateway IP"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/statistics": {
+    "name": "Routing statistics count list"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/statistics/statistic": {
+    "name": "Routing statistics count"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/statistics/statistic/vpn-name": {
+    "name": "VPN name"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/statistics/statistic/total-number": {
+    "name": "Total number of routes"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/statistics/statistic/advertise-rm-total-number": {
+    "name": "Total number of routes advertised to RM"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/statistics/statistic/active-route-number": {
+    "name": "Number of active routes"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/statistics/statistic/best-route-number": {
+    "name": "Number of best routes"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/statistics/statistic/add-path-route-number": {
+    "name": "Number of add-path routes"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/statistics/statistic/best-external-route-number": {
+    "name": "Number of best-external routes"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/statistics/statistic/cidr-route-number": {
+    "name": "Number of Cidr routes"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/statistics/statistic/community-route-number": {
+    "name": "Number of routes in the BGP community"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/statistics/statistic/different-origin-as-route-number": {
+    "name": "Number of different-origin-as routes"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/statistics/statistic/dampened-route-number": {
+    "name": "Number of dampened routes"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast": {
+    "name": "IPv6-unicast BGP Route"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes": {
+    "name": "Route List"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route": {
+    "name": "Route Information"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route/vpn-name": {
+    "name": "BGP VPN Instance Name"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route/route-distinguisher": {
+    "name": "RD"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route/prefix": {
+    "name": "Network Address"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route/mask-length": {
+    "name": "Prefix Mask"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route/route-type": {
+    "name": "Route Type"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route/im-table-id": {
+    "name": "Import Table ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route/from": {
+    "name": "Source Peer"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route/path-id": {
+    "name": "Path ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route/remote-nexthop-tunnel-address": {
+    "name": "RemoteNextHop-TunnelAddress"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route/remote-nexthop-mac-address": {
+    "name": "RemoteNextHop-mac"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route/nexthop": {
+    "name": "Next Hop Address"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route/local-preference": {
+    "name": "Local Priority"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route/preferred-value": {
+    "name": "Preferred Value of Protocol"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route/preference": {
+    "name": "BGP Route Priority"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route/path-as": {
+    "name": "List of AS-Paths"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route/origin": {
+    "name": "Route Origin"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route/med": {
+    "name": "Route MED"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route/flag-string": {
+    "name": "Route Flag"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route/worse-reason": {
+    "name": "Reason Why a Route Is Not Selected"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route/sending-peers": {
+    "name": "List of Route Sending Peers"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route/time": {
+    "name": "Time Stamp"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route/community": {
+    "name": "Community Attribute"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route/large-community": {
+    "name": "Large-Community Attribute Information"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route/ext-community": {
+    "name": "Extended Community Attribute"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route/interface-name": {
+    "name": "Name of the Outbound Interface"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route/originator": {
+    "name": "Router ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route/cluster-list": {
+    "name": "List of Cluster IDs"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route/remote-route-id": {
+    "name": "Router ID of a Peer"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route/relay-nexthop": {
+    "name": "Iteration Next Hop"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route/relay-tunnel-name": {
+    "name": "Name of Iteration Tunnel"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route/atomic-aggregate": {
+    "name": "Route Carrying the Atomic-Aggregate Attribute"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route/aggregator-as": {
+    "name": "AS Number of the Route Summarizer"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route/aggregator-id": {
+    "name": "Route Summarizer ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route/in-label": {
+    "name": "In-Label"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route/out-label": {
+    "name": "Out-Label"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route/iterated-vpn": {
+    "name": "Iterated VRF"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route/remote-nexthop-vni": {
+    "name": "RemoteNextHop-vni"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route/advertise-nexthop": {
+    "name": "Advertisement Next Hop"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route/prefix-sid": {
+    "name": "PrefixSid attribute of Route"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route/aigp": {
+    "name": "AIGP attribute of Route"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route/attribute-set": {
+    "name": "Attribute Set"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route/gateway-ip": {
+    "name": "Gateway IP"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes": {
+    "name": "Advertised Route List"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route": {
+    "name": "Advertised Route Information"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/vpn-name": {
+    "name": "BGP VPN Instance Name"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/remote-peer-address": {
+    "name": "Peer Address"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/route-distinguisher": {
+    "name": "RD"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/prefix": {
+    "name": "Network Address"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/mask-length": {
+    "name": "Prefix Mask"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/route-type": {
+    "name": "Route Type"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/im-table-id": {
+    "name": "Import Table ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/from": {
+    "name": "Source Peer"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/path-id": {
+    "name": "Path ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/remote-nexthop-tunnel-address": {
+    "name": "RemoteNextHop-TunnelAddress"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/remote-nexthop-mac-address": {
+    "name": "RemoteNextHop-mac"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/nexthop": {
+    "name": "Next Hop Address"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/local-preference": {
+    "name": "Local Priority"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/preferred-value": {
+    "name": "Preferred Value of Protocol"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/preference": {
+    "name": "BGP Route Priority"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/path-as": {
+    "name": "List of AS-Paths"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/origin": {
+    "name": "Route Origin"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/med": {
+    "name": "Route MED"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/flag-string": {
+    "name": "Route Flag"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/worse-reason": {
+    "name": "Reason Why a Route Is Not Selected"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/sending-peers": {
+    "name": "List of Route Sending Peers"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/time": {
+    "name": "Time Stamp"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/community": {
+    "name": "Community Attribute"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/large-community": {
+    "name": "Large-Community Attribute Information"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/ext-community": {
+    "name": "Extended Community Attribute"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/interface-name": {
+    "name": "Name of the Outbound Interface"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/originator": {
+    "name": "Router ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/cluster-list": {
+    "name": "List of Cluster IDs"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/remote-route-id": {
+    "name": "Router ID of a Peer"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/relay-nexthop": {
+    "name": "Iteration Next Hop"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/relay-tunnel-name": {
+    "name": "Name of Iteration Tunnel"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/atomic-aggregate": {
+    "name": "Route Carrying the Atomic-Aggregate Attribute"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/aggregator-as": {
+    "name": "AS Number of the Route Summarizer"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/aggregator-id": {
+    "name": "Route Summarizer ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/in-label": {
+    "name": "In-Label"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/out-label": {
+    "name": "Out-Label"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/iterated-vpn": {
+    "name": "Iterated VRF"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/remote-nexthop-vni": {
+    "name": "RemoteNextHop-vni"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/advertise-nexthop": {
+    "name": "Advertised Nexthop"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/prefix-sid": {
+    "name": "PrefixSid attribute of Route"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/aigp": {
+    "name": "AIGP attribute of Route"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/attribute-set": {
+    "name": "Attribute Set"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/gateway-ip": {
+    "name": "Gateway IP"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes": {
+    "name": "Received Route List"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route": {
+    "name": "Received Route Information"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/vpn-name": {
+    "name": "BGP VPN Instance Name"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/remote-peer-address": {
+    "name": "Peer Address"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/route-distinguisher": {
+    "name": "RD"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/prefix": {
+    "name": "Network Address"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/mask-length": {
+    "name": "Prefix Mask"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/route-type": {
+    "name": "Route Type"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/im-table-id": {
+    "name": "Import Table ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/from": {
+    "name": "Source Peer"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/path-id": {
+    "name": "Path ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/remote-nexthop-tunnel-address": {
+    "name": "RemoteNextHop-TunnelAddress"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/remote-nexthop-mac-address": {
+    "name": "RemoteNextHop-mac"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/nexthop": {
+    "name": "Next Hop Address"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/local-preference": {
+    "name": "Local Priority"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/preferred-value": {
+    "name": "Preferred Value of Protocol"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/preference": {
+    "name": "BGP Route Priority"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/path-as": {
+    "name": "List of AS-Paths"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/origin": {
+    "name": "Route Origin"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/med": {
+    "name": "Route MED"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/flag-string": {
+    "name": "Route Flag"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/worse-reason": {
+    "name": "Reason Why a Route Is Not Selected"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/sending-peers": {
+    "name": "List of Route Sending Peers"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/time": {
+    "name": "Time Stamp"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/community": {
+    "name": "Community Attribute"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/large-community": {
+    "name": "Large-Community Attribute Information"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/ext-community": {
+    "name": "Extended Community Attribute"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/interface-name": {
+    "name": "Name of the Outbound Interface"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/originator": {
+    "name": "Router ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/cluster-list": {
+    "name": "List of Cluster IDs"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/remote-route-id": {
+    "name": "Router ID of a Peer"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/relay-nexthop": {
+    "name": "Iteration Next Hop"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/relay-tunnel-name": {
+    "name": "Name of Iteration Tunnel"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/atomic-aggregate": {
+    "name": "Route Carrying the Atomic-Aggregate Attribute"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/aggregator-as": {
+    "name": "AS Number of the Route Summarizer"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/aggregator-id": {
+    "name": "Route Summarizer ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/in-label": {
+    "name": "In-Label"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/out-label": {
+    "name": "Out-Label"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/iterated-vpn": {
+    "name": "Iterated VRF"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/remote-nexthop-vni": {
+    "name": "RemoteNextHop-vni"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/advertise-nexthop": {
+    "name": "Advertisement Next Hop"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/prefix-sid": {
+    "name": "PrefixSid attribute of Route"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/aigp": {
+    "name": "AIGP attribute of Route"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/attribute-set": {
+    "name": "Attribute Set"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/gateway-ip": {
+    "name": "Gateway IP"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes": {
+    "name": "Active Routes Information Received by BGP Peer"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route": {
+    "name": "The information of active routes received"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/vpn-name": {
+    "name": "VPN name"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/remote-peer-address": {
+    "name": "Peer Address"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/route-distinguisher": {
+    "name": "RD"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/prefix": {
+    "name": "Network Address"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/mask-length": {
+    "name": "Prefix Mask"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/route-type": {
+    "name": "Route Type"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/im-table-id": {
+    "name": "Import Table ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/from": {
+    "name": "Source Peer"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/path-id": {
+    "name": "Path ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/remote-nexthop-tunnel-address": {
+    "name": "RemoteNextHop-TunnelAddress"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/remote-nexthop-mac-address": {
+    "name": "RemoteNextHop-MAC"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/nexthop": {
+    "name": "Next Hop Address"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/local-preference": {
+    "name": "Local Priority"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/preferred-value": {
+    "name": "Preferred Value of Protocol"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/preference": {
+    "name": "BGP Route Priority"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/path-as": {
+    "name": "List of AS-Paths"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/origin": {
+    "name": "Route Origin"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/med": {
+    "name": "MED"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/flag-string": {
+    "name": "Route Flag"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/worse-reason": {
+    "name": "Reason Why a Route Is Not Selected"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/sending-peers": {
+    "name": "List of Route Sending Peers"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/time": {
+    "name": "Time Stamp"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/community": {
+    "name": "Community Attribute"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/large-community": {
+    "name": "Large-Community Attribute Information"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/ext-community": {
+    "name": "Extended Community Attribute"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/interface-name": {
+    "name": "Name of the Outbound Interface"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/originator": {
+    "name": "Router ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/cluster-list": {
+    "name": "Cluster List Attribute"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/remote-route-id": {
+    "name": "Router ID of a Peer"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/relay-nexthop": {
+    "name": "Iteration Next Hop"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/relay-tunnel-name": {
+    "name": "Name of Iteration Tunnel"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/atomic-aggregate": {
+    "name": "Route Carrying the Atomic-Aggregate Attribute"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/aggregator-as": {
+    "name": "AS Number of the Route Summarizer"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/aggregator-id": {
+    "name": "Route Summarizer ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/in-label": {
+    "name": "In-label"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/out-label": {
+    "name": "Out-Label"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/iterated-vpn": {
+    "name": "BGP VPN Instance Name"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/remote-nexthop-vni": {
+    "name": "RemoteNextHop-VNI"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/advertise-nexthop": {
+    "name": "Advertisement Next Hop"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/prefix-sid": {
+    "name": "PrefixSid attribute of Route"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/aigp": {
+    "name": "AIGP attribute of Route"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/attribute-set": {
+    "name": "Attribute Set"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/gateway-ip": {
+    "name": "Gateway IP"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/statistics": {
+    "name": "Routing statistics count list"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/statistics/statistic": {
+    "name": "Routing statistics count"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/statistics/statistic/vpn-name": {
+    "name": "VPN name"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/statistics/statistic/total-number": {
+    "name": "Total number of routes"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/statistics/statistic/advertise-rm-total-number": {
+    "name": "Total number of routes advertised to RM"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/statistics/statistic/active-route-number": {
+    "name": "Number of active routes"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/statistics/statistic/best-route-number": {
+    "name": "Number of best routes"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/statistics/statistic/add-path-route-number": {
+    "name": "Number of add-path routes"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/statistics/statistic/best-external-route-number": {
+    "name": "Number of best-external routes"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/statistics/statistic/community-route-number": {
+    "name": "Number of routes in the BGP community"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/statistics/statistic/dampened-route-number": {
+    "name": "Number of dampened routes"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn": {
+    "name": "IPv4-vpn BGP Route"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes": {
+    "name": "Route List"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route": {
+    "name": "Route Information"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route/vpn-name": {
+    "name": "BGP VPN Instance Name"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route/route-distinguisher": {
+    "name": "RD"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route/prefix": {
+    "name": "Network Address"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route/mask-length": {
+    "name": "Prefix Mask"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route/route-type": {
+    "name": "Route Type"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route/im-table-id": {
+    "name": "Import Table ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route/from": {
+    "name": "Source Peer"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route/path-id": {
+    "name": "Path ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route/remote-nexthop-tunnel-address": {
+    "name": "RemoteNextHop-TunnelAddress"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route/remote-nexthop-mac-address": {
+    "name": "RemoteNextHop-mac"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route/nexthop": {
+    "name": "Next Hop Address"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route/local-preference": {
+    "name": "Local Priority"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route/preferred-value": {
+    "name": "Preferred Value of Protocol"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route/preference": {
+    "name": "BGP Route Priority"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route/path-as": {
+    "name": "List of AS-Paths"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route/origin": {
+    "name": "Route Origin"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route/med": {
+    "name": "Route MED"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route/flag-string": {
+    "name": "Route Flag"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route/worse-reason": {
+    "name": "Reason Why a Route Is Not Selected"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route/sending-peers": {
+    "name": "List of Route Sending Peers"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route/time": {
+    "name": "Time Stamp"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route/community": {
+    "name": "Community Attribute"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route/large-community": {
+    "name": "Large-Community Attribute Information"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route/ext-community": {
+    "name": "Extended Community Attribute"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route/interface-name": {
+    "name": "Name of the Outbound Interface"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route/originator": {
+    "name": "Router ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route/cluster-list": {
+    "name": "List of Cluster IDs"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route/remote-route-id": {
+    "name": "Router ID of a Peer"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route/relay-nexthop": {
+    "name": "Iteration Next Hop"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route/relay-tunnel-name": {
+    "name": "Name of Iteration Tunnel"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route/atomic-aggregate": {
+    "name": "Route Carrying the Atomic-Aggregate Attribute"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route/aggregator-as": {
+    "name": "AS Number of the Route Summarizer"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route/aggregator-id": {
+    "name": "Route Summarizer ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route/in-label": {
+    "name": "In-Label"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route/out-label": {
+    "name": "Out-Label"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route/iterated-vpn": {
+    "name": "Iterated VRF"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route/remote-nexthop-vni": {
+    "name": "RemoteNextHop-vni"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route/advertise-nexthop": {
+    "name": "Advertisement Next Hop"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route/prefix-sid": {
+    "name": "PrefixSid attribute of Route"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route/aigp": {
+    "name": "AIGP attribute of Route"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route/attribute-set": {
+    "name": "Attribute Set"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route/gateway-ip": {
+    "name": "Gateway IP"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes": {
+    "name": "Advertised Route List"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route": {
+    "name": "Advertised Route Information"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/vpn-name": {
+    "name": "BGP VPN Instance Name"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/remote-peer-address": {
+    "name": "Peer Address"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/route-distinguisher": {
+    "name": "RD"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/prefix": {
+    "name": "Network Address"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/mask-length": {
+    "name": "Prefix Mask"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/route-type": {
+    "name": "Route Type"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/im-table-id": {
+    "name": "Import Table ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/from": {
+    "name": "Source Peer"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/path-id": {
+    "name": "Path ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/remote-nexthop-tunnel-address": {
+    "name": "RemoteNextHop-TunnelAddress"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/remote-nexthop-mac-address": {
+    "name": "RemoteNextHop-mac"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/nexthop": {
+    "name": "Next Hop Address"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/local-preference": {
+    "name": "Local Priority"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/preferred-value": {
+    "name": "Preferred Value of Protocol"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/preference": {
+    "name": "BGP Route Priority"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/path-as": {
+    "name": "List of AS-Paths"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/origin": {
+    "name": "Route Origin"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/med": {
+    "name": "Route MED"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/flag-string": {
+    "name": "Route Flag"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/worse-reason": {
+    "name": "Reason Why a Route Is Not Selected"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/sending-peers": {
+    "name": "List of Route Sending Peers"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/time": {
+    "name": "Time Stamp"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/community": {
+    "name": "Community Attribute"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/large-community": {
+    "name": "Large-Community Attribute Information"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/ext-community": {
+    "name": "Extended Community Attribute"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/interface-name": {
+    "name": "Name of the Outbound Interface"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/originator": {
+    "name": "Router ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/cluster-list": {
+    "name": "List of Cluster IDs"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/remote-route-id": {
+    "name": "Router ID of a Peer"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/relay-nexthop": {
+    "name": "Iteration Next Hop"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/relay-tunnel-name": {
+    "name": "Name of Iteration Tunnel"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/atomic-aggregate": {
+    "name": "Route Carrying the Atomic-Aggregate Attribute"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/aggregator-as": {
+    "name": "AS Number of the Route Summarizer"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/aggregator-id": {
+    "name": "Route Summarizer ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/in-label": {
+    "name": "In-Label"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/out-label": {
+    "name": "Out-Label"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/iterated-vpn": {
+    "name": "Iterated VRF"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/remote-nexthop-vni": {
+    "name": "RemoteNextHop-vni"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/advertise-nexthop": {
+    "name": "Advertised Nexthop"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/prefix-sid": {
+    "name": "PrefixSid attribute of Route"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/aigp": {
+    "name": "AIGP attribute of Route"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/attribute-set": {
+    "name": "Attribute Set"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/gateway-ip": {
+    "name": "Gateway IP"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes": {
+    "name": "Received Route List"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route": {
+    "name": "Received Route Information"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/vpn-name": {
+    "name": "BGP VPN Instance Name"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/remote-peer-address": {
+    "name": "Peer Address"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/route-distinguisher": {
+    "name": "RD"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/prefix": {
+    "name": "Network Address"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/mask-length": {
+    "name": "Prefix Mask"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/route-type": {
+    "name": "Route Type"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/im-table-id": {
+    "name": "Import Table ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/from": {
+    "name": "Source Peer"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/path-id": {
+    "name": "Path ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/remote-nexthop-tunnel-address": {
+    "name": "RemoteNextHop-TunnelAddress"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/remote-nexthop-mac-address": {
+    "name": "RemoteNextHop-mac"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/nexthop": {
+    "name": "Next Hop Address"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/local-preference": {
+    "name": "Local Priority"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/preferred-value": {
+    "name": "Preferred Value of Protocol"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/preference": {
+    "name": "BGP Route Priority"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/path-as": {
+    "name": "List of AS-Paths"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/origin": {
+    "name": "Route Origin"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/med": {
+    "name": "Route MED"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/flag-string": {
+    "name": "Route Flag"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/worse-reason": {
+    "name": "Reason Why a Route Is Not Selected"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/sending-peers": {
+    "name": "List of Route Sending Peers"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/time": {
+    "name": "Time Stamp"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/community": {
+    "name": "Community Attribute"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/large-community": {
+    "name": "Large-Community Attribute Information"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/ext-community": {
+    "name": "Extended Community Attribute"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/interface-name": {
+    "name": "Name of the Outbound Interface"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/originator": {
+    "name": "Router ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/cluster-list": {
+    "name": "List of Cluster IDs"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/remote-route-id": {
+    "name": "Router ID of a Peer"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/relay-nexthop": {
+    "name": "Iteration Next Hop"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/relay-tunnel-name": {
+    "name": "Name of Iteration Tunnel"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/atomic-aggregate": {
+    "name": "Route Carrying the Atomic-Aggregate Attribute"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/aggregator-as": {
+    "name": "AS Number of the Route Summarizer"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/aggregator-id": {
+    "name": "Route Summarizer ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/in-label": {
+    "name": "In-Label"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/out-label": {
+    "name": "Out-Label"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/iterated-vpn": {
+    "name": "Iterated VRF"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/remote-nexthop-vni": {
+    "name": "RemoteNextHop-vni"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/advertise-nexthop": {
+    "name": "Advertisement Next Hop"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/prefix-sid": {
+    "name": "PrefixSid attribute of Route"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/aigp": {
+    "name": "AIGP attribute of Route"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/attribute-set": {
+    "name": "Attribute Set"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/gateway-ip": {
+    "name": "Gateway IP"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes": {
+    "name": "Active Routes Information Received by BGP Peer"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route": {
+    "name": "The information of active routes received"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/vpn-name": {
+    "name": "VPN name"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/remote-peer-address": {
+    "name": "Peer Address"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/route-distinguisher": {
+    "name": "RD"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/prefix": {
+    "name": "Network Address"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/mask-length": {
+    "name": "Prefix Mask"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/route-type": {
+    "name": "Route Type"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/im-table-id": {
+    "name": "Import Table ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/from": {
+    "name": "Source Peer"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/path-id": {
+    "name": "Path ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/remote-nexthop-tunnel-address": {
+    "name": "RemoteNextHop-TunnelAddress"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/remote-nexthop-mac-address": {
+    "name": "RemoteNextHop-MAC"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/nexthop": {
+    "name": "Next Hop Address"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/local-preference": {
+    "name": "Local Priority"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/preferred-value": {
+    "name": "Preferred Value of Protocol"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/preference": {
+    "name": "BGP Route Priority"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/path-as": {
+    "name": "List of AS-Paths"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/origin": {
+    "name": "Route Origin"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/med": {
+    "name": "MED"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/flag-string": {
+    "name": "Route Flag"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/worse-reason": {
+    "name": "Reason Why a Route Is Not Selected"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/sending-peers": {
+    "name": "List of Route Sending Peers"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/time": {
+    "name": "Time Stamp"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/community": {
+    "name": "Community Attribute"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/large-community": {
+    "name": "Large-Community Attribute Information"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/ext-community": {
+    "name": "Extended Community Attribute"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/interface-name": {
+    "name": "Name of the Outbound Interface"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/originator": {
+    "name": "Router ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/cluster-list": {
+    "name": "Cluster List Attribute"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/remote-route-id": {
+    "name": "Router ID of a Peer"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/relay-nexthop": {
+    "name": "Iteration Next Hop"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/relay-tunnel-name": {
+    "name": "Name of Iteration Tunnel"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/atomic-aggregate": {
+    "name": "Route Carrying the Atomic-Aggregate Attribute"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/aggregator-as": {
+    "name": "AS Number of the Route Summarizer"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/aggregator-id": {
+    "name": "Route Summarizer ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/in-label": {
+    "name": "In-label"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/out-label": {
+    "name": "Out-Label"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/iterated-vpn": {
+    "name": "BGP VPN Instance Name"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/remote-nexthop-vni": {
+    "name": "RemoteNextHop-VNI"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/advertise-nexthop": {
+    "name": "Advertisement Next Hop"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/prefix-sid": {
+    "name": "PrefixSid attribute of Route"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/aigp": {
+    "name": "AIGP attribute of Route"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/attribute-set": {
+    "name": "Attribute Set"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/gateway-ip": {
+    "name": "Gateway IP"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/statistic": {
+    "name": "Routing statistics count"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/statistic/total-number": {
+    "name": "Total number of routes"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/statistic/active-route-number": {
+    "name": "Number of active routes"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/statistic/best-route-number": {
+    "name": "Number of best routes"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/statistic/add-path-route-number": {
+    "name": "Number of add-path routes"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/statistic/best-external-route-number": {
+    "name": "Number of best-external routes"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/statistic/cidr-route-number": {
+    "name": "Number of Cidr routes"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/statistic/community-route-number": {
+    "name": "Number of routes in the BGP community"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/statistic/different-origin-as-route-number": {
+    "name": "Number of different-origin-as routes"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/statistic/dampened-route-number": {
+    "name": "Number of dampened routes"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn": {
+    "name": "IPv6-vpn BGP Route"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes": {
+    "name": "Route List"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route": {
+    "name": "Route Information"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route/vpn-name": {
+    "name": "BGP VPN Instance Name"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route/route-distinguisher": {
+    "name": "RD"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route/prefix": {
+    "name": "Network Address"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route/mask-length": {
+    "name": "Prefix Mask"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route/route-type": {
+    "name": "Route Type"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route/im-table-id": {
+    "name": "Import Table ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route/from": {
+    "name": "Source Peer"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route/path-id": {
+    "name": "Path ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route/remote-nexthop-tunnel-address": {
+    "name": "RemoteNextHop-TunnelAddress"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route/remote-nexthop-mac-address": {
+    "name": "RemoteNextHop-mac"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route/nexthop": {
+    "name": "Next Hop Address"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route/local-preference": {
+    "name": "Local Priority"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route/preferred-value": {
+    "name": "Preferred Value of Protocol"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route/preference": {
+    "name": "BGP Route Priority"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route/path-as": {
+    "name": "List of AS-Paths"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route/origin": {
+    "name": "Route Origin"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route/med": {
+    "name": "Route MED"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route/flag-string": {
+    "name": "Route Flag"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route/worse-reason": {
+    "name": "Reason Why a Route Is Not Selected"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route/sending-peers": {
+    "name": "List of Route Sending Peers"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route/time": {
+    "name": "Time Stamp"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route/community": {
+    "name": "Community Attribute"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route/large-community": {
+    "name": "Large-Community Attribute Information"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route/ext-community": {
+    "name": "Extended Community Attribute"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route/interface-name": {
+    "name": "Name of the Outbound Interface"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route/originator": {
+    "name": "Router ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route/cluster-list": {
+    "name": "List of Cluster IDs"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route/remote-route-id": {
+    "name": "Router ID of a Peer"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route/relay-nexthop": {
+    "name": "Iteration Next Hop"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route/relay-tunnel-name": {
+    "name": "Name of Iteration Tunnel"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route/atomic-aggregate": {
+    "name": "Route Carrying the Atomic-Aggregate Attribute"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route/aggregator-as": {
+    "name": "AS Number of the Route Summarizer"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route/aggregator-id": {
+    "name": "Route Summarizer ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route/in-label": {
+    "name": "In-Label"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route/out-label": {
+    "name": "Out-Label"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route/iterated-vpn": {
+    "name": "Iterated VRF"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route/remote-nexthop-vni": {
+    "name": "RemoteNextHop-vni"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route/advertise-nexthop": {
+    "name": "Advertisement Next Hop"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route/prefix-sid": {
+    "name": "PrefixSid attribute of Route"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route/aigp": {
+    "name": "AIGP attribute of Route"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route/attribute-set": {
+    "name": "Attribute Set"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route/gateway-ip": {
+    "name": "Gateway IP"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes": {
+    "name": "Advertised Route List"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route": {
+    "name": "Advertised Route Information"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/vpn-name": {
+    "name": "BGP VPN Instance Name"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/remote-peer-address": {
+    "name": "Peer Address"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/route-distinguisher": {
+    "name": "RD"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/prefix": {
+    "name": "Network Address"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/mask-length": {
+    "name": "Prefix Mask"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/route-type": {
+    "name": "Route Type"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/im-table-id": {
+    "name": "Import Table ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/from": {
+    "name": "Source Peer"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/path-id": {
+    "name": "Path ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/remote-nexthop-tunnel-address": {
+    "name": "RemoteNextHop-TunnelAddress"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/remote-nexthop-mac-address": {
+    "name": "RemoteNextHop-mac"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/nexthop": {
+    "name": "Next Hop Address"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/local-preference": {
+    "name": "Local Priority"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/preferred-value": {
+    "name": "Preferred Value of Protocol"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/preference": {
+    "name": "BGP Route Priority"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/path-as": {
+    "name": "List of AS-Paths"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/origin": {
+    "name": "Route Origin"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/med": {
+    "name": "Route MED"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/flag-string": {
+    "name": "Route Flag"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/worse-reason": {
+    "name": "Reason Why a Route Is Not Selected"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/sending-peers": {
+    "name": "List of Route Sending Peers"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/time": {
+    "name": "Time Stamp"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/community": {
+    "name": "Community Attribute"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/large-community": {
+    "name": "Large-Community Attribute Information"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/ext-community": {
+    "name": "Extended Community Attribute"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/interface-name": {
+    "name": "Name of the Outbound Interface"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/originator": {
+    "name": "Router ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/cluster-list": {
+    "name": "List of Cluster IDs"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/remote-route-id": {
+    "name": "Router ID of a Peer"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/relay-nexthop": {
+    "name": "Iteration Next Hop"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/relay-tunnel-name": {
+    "name": "Name of Iteration Tunnel"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/atomic-aggregate": {
+    "name": "Route Carrying the Atomic-Aggregate Attribute"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/aggregator-as": {
+    "name": "AS Number of the Route Summarizer"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/aggregator-id": {
+    "name": "Route Summarizer ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/in-label": {
+    "name": "In-Label"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/out-label": {
+    "name": "Out-Label"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/iterated-vpn": {
+    "name": "Iterated VRF"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/remote-nexthop-vni": {
+    "name": "RemoteNextHop-vni"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/advertise-nexthop": {
+    "name": "Advertised Nexthop"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/prefix-sid": {
+    "name": "PrefixSid attribute of Route"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/aigp": {
+    "name": "AIGP attribute of Route"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/attribute-set": {
+    "name": "Attribute Set"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/gateway-ip": {
+    "name": "Gateway IP"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes": {
+    "name": "Received Route List"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route": {
+    "name": "Received Route Information"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/vpn-name": {
+    "name": "BGP VPN Instance Name"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/remote-peer-address": {
+    "name": "Peer Address"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/route-distinguisher": {
+    "name": "RD"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/prefix": {
+    "name": "Network Address"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/mask-length": {
+    "name": "Prefix Mask"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/route-type": {
+    "name": "Route Type"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/im-table-id": {
+    "name": "Import Table ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/from": {
+    "name": "Source Peer"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/path-id": {
+    "name": "Path ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/remote-nexthop-tunnel-address": {
+    "name": "RemoteNextHop-TunnelAddress"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/remote-nexthop-mac-address": {
+    "name": "RemoteNextHop-mac"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/nexthop": {
+    "name": "Next Hop Address"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/local-preference": {
+    "name": "Local Priority"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/preferred-value": {
+    "name": "Preferred Value of Protocol"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/preference": {
+    "name": "BGP Route Priority"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/path-as": {
+    "name": "List of AS-Paths"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/origin": {
+    "name": "Route Origin"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/med": {
+    "name": "Route MED"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/flag-string": {
+    "name": "Route Flag"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/worse-reason": {
+    "name": "Reason Why a Route Is Not Selected"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/sending-peers": {
+    "name": "List of Route Sending Peers"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/time": {
+    "name": "Time Stamp"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/community": {
+    "name": "Community Attribute"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/large-community": {
+    "name": "Large-Community Attribute Information"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/ext-community": {
+    "name": "Extended Community Attribute"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/interface-name": {
+    "name": "Name of the Outbound Interface"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/originator": {
+    "name": "Router ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/cluster-list": {
+    "name": "List of Cluster IDs"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/remote-route-id": {
+    "name": "Router ID of a Peer"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/relay-nexthop": {
+    "name": "Iteration Next Hop"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/relay-tunnel-name": {
+    "name": "Name of Iteration Tunnel"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/atomic-aggregate": {
+    "name": "Route Carrying the Atomic-Aggregate Attribute"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/aggregator-as": {
+    "name": "AS Number of the Route Summarizer"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/aggregator-id": {
+    "name": "Route Summarizer ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/in-label": {
+    "name": "In-Label"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/out-label": {
+    "name": "Out-Label"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/iterated-vpn": {
+    "name": "Iterated VRF"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/remote-nexthop-vni": {
+    "name": "RemoteNextHop-vni"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/advertise-nexthop": {
+    "name": "Advertisement Next Hop"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/prefix-sid": {
+    "name": "PrefixSid attribute of Route"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/aigp": {
+    "name": "AIGP attribute of Route"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/attribute-set": {
+    "name": "Attribute Set"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/gateway-ip": {
+    "name": "Gateway IP"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes": {
+    "name": "Active Routes Information Received by BGP Peer"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route": {
+    "name": "The information of active routes received"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/vpn-name": {
+    "name": "VPN name"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/remote-peer-address": {
+    "name": "Peer Address"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/route-distinguisher": {
+    "name": "RD"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/prefix": {
+    "name": "Network Address"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/mask-length": {
+    "name": "Prefix Mask"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/route-type": {
+    "name": "Route Type"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/im-table-id": {
+    "name": "Import Table ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/from": {
+    "name": "Source Peer"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/path-id": {
+    "name": "Path ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/remote-nexthop-tunnel-address": {
+    "name": "RemoteNextHop-TunnelAddress"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/remote-nexthop-mac-address": {
+    "name": "RemoteNextHop-MAC"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/nexthop": {
+    "name": "Next Hop Address"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/local-preference": {
+    "name": "Local Priority"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/preferred-value": {
+    "name": "Preferred Value of Protocol"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/preference": {
+    "name": "BGP Route Priority"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/path-as": {
+    "name": "List of AS-Paths"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/origin": {
+    "name": "Route Origin"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/med": {
+    "name": "MED"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/flag-string": {
+    "name": "Route Flag"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/worse-reason": {
+    "name": "Reason Why a Route Is Not Selected"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/sending-peers": {
+    "name": "List of Route Sending Peers"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/time": {
+    "name": "Time Stamp"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/community": {
+    "name": "Community Attribute"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/large-community": {
+    "name": "Large-Community Attribute Information"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/ext-community": {
+    "name": "Extended Community Attribute"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/interface-name": {
+    "name": "Name of the Outbound Interface"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/originator": {
+    "name": "Router ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/cluster-list": {
+    "name": "Cluster List Attribute"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/remote-route-id": {
+    "name": "Router ID of a Peer"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/relay-nexthop": {
+    "name": "Iteration Next Hop"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/relay-tunnel-name": {
+    "name": "Name of Iteration Tunnel"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/atomic-aggregate": {
+    "name": "Route Carrying the Atomic-Aggregate Attribute"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/aggregator-as": {
+    "name": "AS Number of the Route Summarizer"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/aggregator-id": {
+    "name": "Route Summarizer ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/in-label": {
+    "name": "In-label"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/out-label": {
+    "name": "Out-Label"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/iterated-vpn": {
+    "name": "BGP VPN Instance Name"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/remote-nexthop-vni": {
+    "name": "RemoteNextHop-VNI"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/advertise-nexthop": {
+    "name": "Advertisement Next Hop"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/prefix-sid": {
+    "name": "PrefixSid attribute of Route"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/aigp": {
+    "name": "AIGP attribute of Route"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/attribute-set": {
+    "name": "Attribute Set"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/gateway-ip": {
+    "name": "Gateway IP"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/statistic": {
+    "name": "Routing statistics count"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/statistic/total-number": {
+    "name": "Total number of routes"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/statistic/active-route-number": {
+    "name": "Number of active routes"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/statistic/best-route-number": {
+    "name": "Number of best routes"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/statistic/add-path-route-number": {
+    "name": "Number of add-path routes"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/statistic/best-external-route-number": {
+    "name": "Number of best-external routes"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/statistic/community-route-number": {
+    "name": "Number of routes in the BGP community"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/statistic/different-origin-as-route-number": {
+    "name": "Number of different-origin-as routes"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-labeluni": {
+    "name": "IPv4-label routes"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-labeluni/statistics": {
+    "name": "Routing statistics count list"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-labeluni/statistics/statistic": {
+    "name": "Routing statistics count"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-labeluni/statistics/statistic/vpn-name": {
+    "name": "VPN name"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-labeluni/statistics/statistic/total-number": {
+    "name": "Total number of routes"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-labeluni/statistics/statistic/advertise-rm-total-number": {
+    "name": "Total number of routes advertised to RM"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-labeluni/statistics/statistic/active-route-number": {
+    "name": "Number of active routes"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-labeluni/statistics/statistic/best-route-number": {
+    "name": "Number of best routes"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-labeluni/statistics/statistic/add-path-route-number": {
+    "name": "Number of add-path routes"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-labeluni/statistics/statistic/best-external-route-number": {
+    "name": "Number of best-external routes"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-labeluni/statistics/statistic/cidr-route-number": {
+    "name": "Number of Cidr routes"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-labeluni/statistics/statistic/community-route-number": {
+    "name": "Number of routes in the BGP community"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-labeluni/statistics/statistic/different-origin-as-route-number": {
+    "name": "Number of different-origin-as routes"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-labeluni/statistics/statistic/dampened-route-number": {
+    "name": "Number of dampened routes"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast": {
+    "name": "IPv4-multicast BGP Route"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes": {
+    "name": "Route List"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route": {
+    "name": "Route Information"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route/vpn-name": {
+    "name": "BGP VPN Instance Name"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route/route-distinguisher": {
+    "name": "RD"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route/prefix": {
+    "name": "Network Address"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route/mask-length": {
+    "name": "Prefix Mask"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route/route-type": {
+    "name": "Route Type"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route/im-table-id": {
+    "name": "Import Table ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route/from": {
+    "name": "Source Peer"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route/path-id": {
+    "name": "Path ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route/remote-nexthop-tunnel-address": {
+    "name": "RemoteNextHop-TunnelAddress"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route/remote-nexthop-mac-address": {
+    "name": "RemoteNextHop-mac"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route/nexthop": {
+    "name": "Next Hop Address"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route/local-preference": {
+    "name": "Local Priority"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route/preferred-value": {
+    "name": "Preferred Value of Protocol"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route/preference": {
+    "name": "BGP Route Priority"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route/path-as": {
+    "name": "List of AS-Paths"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route/origin": {
+    "name": "Route Origin"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route/med": {
+    "name": "Route MED"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route/flag-string": {
+    "name": "Route Flag"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route/worse-reason": {
+    "name": "Reason Why a Route Is Not Selected"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route/sending-peers": {
+    "name": "List of Route Sending Peers"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route/time": {
+    "name": "Time Stamp"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route/community": {
+    "name": "Community Attribute"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route/large-community": {
+    "name": "Large-Community Attribute Information"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route/ext-community": {
+    "name": "Extended Community Attribute"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route/interface-name": {
+    "name": "Name of the Outbound Interface"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route/originator": {
+    "name": "Router ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route/cluster-list": {
+    "name": "Cluster List Attribute"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route/remote-route-id": {
+    "name": "Router ID of a Peer"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route/relay-nexthop": {
+    "name": "Iteration Next Hop"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route/relay-tunnel-name": {
+    "name": "Name of Iteration Tunnel"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route/atomic-aggregate": {
+    "name": "Route Carrying the Atomic-Aggregate Attribute"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route/aggregator-as": {
+    "name": "AS Number of the Route Summarizer"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route/aggregator-id": {
+    "name": "Route Summarizer ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route/in-label": {
+    "name": "In-label"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route/out-label": {
+    "name": "Out-Label"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route/iterated-vpn": {
+    "name": "Iterated VRF"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route/remote-nexthop-vni": {
+    "name": "RemoteNextHop-VNI"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route/advertise-nexthop": {
+    "name": "Advertisement Next Hop"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route/prefix-sid": {
+    "name": "PrefixSid attribute of Route"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route/aigp": {
+    "name": "AIGP attribute of Route"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route/attribute-set": {
+    "name": "Attribute Set"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route/gateway-ip": {
+    "name": "Gateway IP"
+  }
+}

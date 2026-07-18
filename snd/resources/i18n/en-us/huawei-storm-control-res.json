@@ -1,0 +1,134 @@
+{
+  "/huawei-ifm:ifm/interfaces/interface/huawei-storm-control:storm-control": {
+    "name": "Storm control"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-storm-control:storm-control/storm-rates": {
+    "name": "Storm rates"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-storm-control:storm-control/storm-rates/storm-rate": {
+    "name": "Storm rate"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-storm-control:storm-control/storm-rates/storm-rate/packet-type": {
+    "name": "Packet type"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-storm-control:storm-control/storm-rates/storm-rate/rate-type": {
+    "name": "Rate type"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-storm-control:storm-control/storm-rates/storm-rate/rate-type/packet": {
+    "name": "Packet"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-storm-control:storm-control/storm-rates/storm-rate/rate-type/packet/pps-min-rate": {
+    "name": "Packets-per-second min rate"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-storm-control:storm-control/storm-rates/storm-rate/rate-type/packet/pps-max-rate": {
+    "name": "Packets-per-second max rate"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-storm-control:storm-control/storm-rates/storm-rate/rate-type/cir": {
+    "name": "Committed Information Rate"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-storm-control:storm-control/storm-rates/storm-rate/rate-type/cir/cir-min-rate": {
+    "name": "Committed Information Rate min rate"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-storm-control:storm-control/storm-rates/storm-rate/rate-type/cir/cir-max-rate": {
+    "name": "Committed Information Rate max rate"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-storm-control:storm-control/storm-rates/storm-rate/rate-type/percent": {
+    "name": "Percent"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-storm-control:storm-control/storm-rates/storm-rate/rate-type/percent/per-min-rate": {
+    "name": "Percent min rate"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-storm-control:storm-control/storm-rates/storm-rate/rate-type/percent/per-max-rate": {
+    "name": "Percent max rate"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-storm-control:storm-control/storm-control-action": {
+    "name": "Storm control action"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-storm-control:storm-control/storm-control-action/action": {
+    "name": "Action"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-storm-control:storm-control/storm-control-action/log": {
+    "name": "Log"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-storm-control:storm-control/storm-control-action/trap": {
+    "name": "Trap"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-storm-control:storm-control/storm-control-action/interval": {
+    "name": "Interval"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-storm-control:storm-control/storm-control-state": {
+    "name": "Storm control state"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-storm-control:storm-control/storm-control-state/packet-type": {
+    "name": "Packet type"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-storm-control:storm-control/storm-control-state/punish": {
+    "name": "Punish"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-storm-control:storm-control/storm-control-state/last-punish-time": {
+    "name": "Last punish time"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-storm-control:storm-control/storm-control-state/mode": {
+    "name": "Mode"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-storm-control:storm-suppress": {
+    "name": "Storm suppress"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-storm-control:storm-suppress/storm-rates": {
+    "name": "Storm rates"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-storm-control:storm-suppress/storm-rates/storm-rate": {
+    "name": "Storm rate"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-storm-control:storm-suppress/storm-rates/storm-rate/packet-type": {
+    "name": "Packet type"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-storm-control:storm-suppress/storm-rates/storm-rate/rate-type": {
+    "name": "Rate type"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-storm-control:storm-suppress/storm-rates/storm-rate/rate-type/packet": {
+    "name": "Packet"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-storm-control:storm-suppress/storm-rates/storm-rate/rate-type/packet/pps": {
+    "name": "Packets per second"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-storm-control:storm-suppress/storm-rates/storm-rate/rate-type/rate": {
+    "name": "Rate"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-storm-control:storm-suppress/storm-rates/storm-rate/rate-type/rate/cir": {
+    "name": "Committed Information Rate"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-storm-control:storm-suppress/storm-rates/storm-rate/rate-type/rate/cbs": {
+    "name": "Committed Burst Size"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-storm-control:storm-suppress/storm-rates/storm-rate/rate-type/percent": {
+    "name": "Percent"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-storm-control:storm-suppress/storm-rates/storm-rate/rate-type/percent/percent": {
+    "name": "Percent"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-storm-control:storm-suppress": {
+    "name": "Storm suppress"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-storm-control:storm-suppress/storm-rates": {
+    "name": "Storm rates"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-storm-control:storm-suppress/storm-rates/storm-rate": {
+    "name": "Storm rate"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-storm-control:storm-suppress/storm-rates/storm-rate/packet-type": {
+    "name": "Packet type"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-storm-control:storm-suppress/storm-rates/storm-rate/rate-type": {
+    "name": "Rate type"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-storm-control:storm-suppress/storm-rates/storm-rate/rate-type/rate": {
+    "name": "Rate"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-storm-control:storm-suppress/storm-rates/storm-rate/rate-type/rate/cir": {
+    "name": "Committed Information Rate"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-storm-control:storm-suppress/storm-rates/storm-rate/rate-type/rate/cbs": {
+    "name": "Committed Burst Size"
+  }
+}

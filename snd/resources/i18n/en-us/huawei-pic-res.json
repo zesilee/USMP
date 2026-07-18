@@ -1,0 +1,482 @@
+{
+  "/huawei-pic:pic": {
+    "name": "Pic Configuration"
+  },
+  "/huawei-pic:pic/panel-split-ports": {
+    "name": "Panel split ports"
+  },
+  "/huawei-pic:pic/panel-split-ports/panel-split-port": {
+    "name": "Panel split port"
+  },
+  "/huawei-pic:pic/panel-split-ports/panel-split-port/position": {
+    "name": "Position"
+  },
+  "/huawei-pic:pic/panel-split-ports/panel-split-port/split-type": {
+    "name": "Split type"
+  },
+  "/huawei-pic:pic/panel-split-ports/panel-split-port/split-ports": {
+    "name": "Split ports"
+  },
+  "/huawei-pic:pic/panel-split-ports/panel-split-port/split-ports/port": {
+    "name": "Port"
+  },
+  "/huawei-pic:pic/panel-split-ports/panel-split-port/split-ports/port/split-position": {
+    "name": "Split position"
+  },
+  "/huawei-pic:pic/panel-split-ports/panel-split-port/split-ports/port/port-name": {
+    "name": "Port name"
+  },
+  "/huawei-pic:laser-turn": {
+    "name": "Laser turn"
+  },
+  "/huawei-pic:laser-turn/input/port-position": {
+    "name": "Port position"
+  },
+  "/huawei-pic:port-prbs-check-start": {
+    "name": "PRBS check start"
+  },
+  "/huawei-pic:port-prbs-check-start/input/prbs-infos": {
+    "name": "PRBS information"
+  },
+  "/huawei-pic:port-prbs-check-start/input/prbs-infos/prbs-info": {
+    "name": "PRBS information"
+  },
+  "/huawei-pic:port-prbs-check-start/input/prbs-infos/prbs-info/port-name": {
+    "name": "Port name"
+  },
+  "/huawei-pic:port-prbs-check-start/input/prbs-infos/prbs-info/direction": {
+    "name": "Implement direction"
+  },
+  "/huawei-pic:port-prbs-check-start/input/prbs-infos/prbs-info/action": {
+    "name": "Action"
+  },
+  "/huawei-pic:port-prbs-check-start/input/prbs-infos/prbs-info/prbs-type": {
+    "name": "PRBS type"
+  },
+  "/huawei-pic:port-prbs-check-start/input/prbs-infos/prbs-info/timeout": {
+    "name": "Timeout duration"
+  },
+  "/huawei-pic:port-prbs-check-stop": {
+    "name": "PRBS check stop"
+  },
+  "/huawei-pic:port-prbs-check-stop/input/prbs-infos": {
+    "name": "PRBS information"
+  },
+  "/huawei-pic:port-prbs-check-stop/input/prbs-infos/prbs-info": {
+    "name": "PRBS infomation"
+  },
+  "/huawei-pic:port-prbs-check-stop/input/prbs-infos/prbs-info/port-name": {
+    "name": "Port name"
+  },
+  "/huawei-pic:port-prbs-check-stop/input/prbs-infos/prbs-info/direction": {
+    "name": "Direction"
+  },
+  "/huawei-pic:port-prbs-check-stop/input/prbs-infos/prbs-info/action": {
+    "name": "Action"
+  },
+  "/huawei-pic:port-prbs-check-result-get": {
+    "name": "Get PRBS check result"
+  },
+  "/huawei-pic:port-prbs-check-result-get/input/port-name": {
+    "name": "Port name"
+  },
+  "/huawei-pic:port-prbs-check-result-get/output/check-result-infos": {
+    "name": "Check result infomation"
+  },
+  "/huawei-pic:port-prbs-check-result-get/output/check-result-infos/check-result-info": {
+    "name": "Check result infomation"
+  },
+  "/huawei-pic:port-prbs-check-result-get/output/check-result-infos/check-result-info/port-name": {
+    "name": "Port name"
+  },
+  "/huawei-pic:port-prbs-check-result-get/output/check-result-infos/check-result-info/media-generator": {
+    "name": "Media generator"
+  },
+  "/huawei-pic:port-prbs-check-result-get/output/check-result-infos/check-result-info/media-generator-time-left": {
+    "name": "Media generate time left"
+  },
+  "/huawei-pic:port-prbs-check-result-get/output/check-result-infos/check-result-info/media-checker": {
+    "name": "Media checker"
+  },
+  "/huawei-pic:port-prbs-check-result-get/output/check-result-infos/check-result-info/media-checker-time-left": {
+    "name": "Media check time left"
+  },
+  "/huawei-pic:port-prbs-check-result-get/output/check-result-infos/check-result-info/media-side-check-result-infos": {
+    "name": "Media side check result infomation"
+  },
+  "/huawei-pic:port-prbs-check-result-get/output/check-result-infos/check-result-info/media-side-check-result-infos/media-side-check-result-info": {
+    "name": "Media side check result infomation"
+  },
+  "/huawei-pic:port-prbs-check-result-get/output/check-result-infos/check-result-info/media-side-check-result-infos/media-side-check-result-info/lane-num": {
+    "name": "Lane number"
+  },
+  "/huawei-pic:port-prbs-check-result-get/output/check-result-infos/check-result-info/media-side-check-result-infos/media-side-check-result-info/ber": {
+    "name": "Bit Error Rate"
+  },
+  "/huawei-pic:port-prbs-check-result-get/output/check-result-infos/check-result-info/media-side-check-result-infos/media-side-check-result-info/error-counters": {
+    "name": "Error counters"
+  },
+  "/huawei-pic:port-prbs-check-result-get/output/check-result-infos/check-result-info/media-side-check-result-infos/media-side-check-result-info/lol": {
+    "name": "Loss of lock"
+  },
+  "/huawei-pic:upgrade-optical-module": {
+    "name": "Optical module upgrade"
+  },
+  "/huawei-pic:upgrade-optical-module/input/board-position": {
+    "name": "Board Position"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/mib-statistics/huawei-pic:eth-port-err-sts": {
+    "name": "Error packet statistics on an Ethernet interface"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/mib-statistics/huawei-pic:eth-port-err-sts/rx-pause": {
+    "name": "Receive PAUSE Packets"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/mib-statistics/huawei-pic:eth-port-err-sts/rx-jumbo-octets": {
+    "name": "Receive Jumbo Octets"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/mib-statistics/huawei-pic:eth-port-err-sts/rx-crc": {
+    "name": "CRC error packet"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/mib-statistics/huawei-pic:eth-port-err-sts/rx-symbol": {
+    "name": "Receive Symbol Packets"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/mib-statistics/huawei-pic:eth-port-err-sts/rx-over-run": {
+    "name": "Receive Overrun"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/mib-statistics/huawei-pic:eth-port-err-sts/rx-inrange-len": {
+    "name": "Receive Inrange Len"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/mib-statistics/huawei-pic:eth-port-err-sts/rx-long": {
+    "name": "Receive Long"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/mib-statistics/huawei-pic:eth-port-err-sts/rx-jabber": {
+    "name": "Receive Jabber"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/mib-statistics/huawei-pic:eth-port-err-sts/rx-alignment": {
+    "name": "Receive Alignment"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/mib-statistics/huawei-pic:eth-port-err-sts/rx-fragment": {
+    "name": "Receive Fragment"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/mib-statistics/huawei-pic:eth-port-err-sts/rx-undersize": {
+    "name": "Receive UnderSize"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/mib-statistics/huawei-pic:eth-port-err-sts/tx-pause": {
+    "name": "Send Pause"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/mib-statistics/huawei-pic:eth-port-err-sts/tx-jumbo-octets": {
+    "name": "Send Jumbo Octets"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/mib-statistics/huawei-pic:eth-port-err-sts/tx-over-run": {
+    "name": "Send Over Run"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/mib-statistics/huawei-pic:eth-port-err-sts/tx-under-run": {
+    "name": "Send Under Run"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/mib-statistics/huawei-pic:eth-port-err-sts/tx-system": {
+    "name": "Send System"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/mib-statistics/huawei-pic:eth-port-err-sts/tx-lost": {
+    "name": "Send Lost"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/huawei-pic:jumbo-frame": {
+    "name": "Configure jumbo frame on the Eth-Trunk interface"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/huawei-pic:jumbo-frame/max-jumbo-frame": {
+    "name": "Maximum jumbo frame size"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/huawei-pic:jumbo-frame/max-non-jumbo-frame": {
+    "name": "Maximum non-jumbo frame size"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:ethernet": {
+    "name": "Configure Ethernet port"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:ethernet/speed": {
+    "name": "Speed(Mb/s)"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:ethernet/duplex": {
+    "name": "Duplex Type"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:ethernet/duplex-auto": {
+    "name": "Duplex auto negotiation mode"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:ethernet/negotiation": {
+    "name": "Auto Negotiation"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:ethernet/negotiation-mode": {
+    "name": "Negotiation mode"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:ethernet/down-hold-time": {
+    "name": "Down hold time"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:ethernet/up-hold-time": {
+    "name": "Up hold time"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:ethernet/trans-mode": {
+    "name": "Transmit Mode"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:ethernet/fec-mode": {
+    "name": "Fec mode"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:ethernet/jumbo-frame": {
+    "name": "Jumbo frame"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:ethernet/flowctl": {
+    "name": "Flow Control"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:ethernet/mac-itf-mode": {
+    "name": "Workmode of an Ethernet Interface"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:ethernet/combo-mode": {
+    "name": "Combo port mode"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:ethernet/peer-identity": {
+    "name": "Peer Port Identity"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:ethernet/fault-detect": {
+    "name": "Fault detect"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:ethernet/inter-frame-gap": {
+    "name": "Inter frame gap"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:ethernet/statistics-include-interframe": {
+    "name": "Statistics include interframe"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:ethernet/link-flap-protection": {
+    "name": "Link flap protection"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:ethernet/link-flap-interval": {
+    "name": "Link flap interval"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:ethernet/link-flap-threshold": {
+    "name": "Link flap threshold"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:ethernet/up-delay": {
+    "name": "Up delay"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:ethernet/flow-change-alarm-interval": {
+    "name": "Flow-change-alarm-interval"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:ethernet/flow-change-alarm-rx-threshold": {
+    "name": "Flow-change-alarm-rx-threshold"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:ethernet/flow-change-alarm-tx-threshold": {
+    "name": "Flow-change-alarm-tx-threshold"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:ethernet/flow-change-alarm-start-bandwidth": {
+    "name": "Flow-change-alarm-start-bandwidth"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:ethernet/auto-downgrade": {
+    "name": "Optical auto-downgrade"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:laser": {
+    "name": "Laser"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:laser/auto-shut-enable": {
+    "name": "Auto shut enable"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:laser/open-time": {
+    "name": "Open time"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:laser/close-time": {
+    "name": "Close time"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:laser/status": {
+    "name": "Status"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:optical-module": {
+    "name": "Optical Transceiver Information"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:optical-module/wavelength-channel-number": {
+    "name": "Wavelength channel number"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:optical-module/tunable-wavelength": {
+    "name": "Tunable wavelength"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:optical-module/tunable-frequency": {
+    "name": "Tunable frequency"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:optical-module/power-low-protection": {
+    "name": "Power low protection"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:optical-module/single-fiber": {
+    "name": "Single fiber"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:optical-module/single-fiber-rx": {
+    "name": "Single fiber rx"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:optical-module/vendor-name": {
+    "name": "Optical Transceiver Name"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:optical-module/vendor-pn": {
+    "name": "Verder PN"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:optical-module/app-firmware-version": {
+    "name": "APP firmware version"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:optical-module/trans-bw": {
+    "name": "Bandwidth (MB/s)"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:optical-module/trans-mode": {
+    "name": "Transmission Mode"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:optical-module/hot-plug": {
+    "name": "Hot plug"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:optical-module/type": {
+    "name": "Optical Type"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:optical-module/fiber-type": {
+    "name": "Optical Fiber Type"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:optical-module/wavelength": {
+    "name": "Wavelength"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:optical-module/transmission-distance": {
+    "name": "Transmission Distance(m)"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:optical-module/rx-high-warn-power": {
+    "name": "Receive High Warn Power"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:optical-module/rx-low-warn-power": {
+    "name": "Receive Low Warn Power"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:optical-module/tx-high-warn-power": {
+    "name": "Transmit High Warn Power"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:optical-module/tx-low-warn-power": {
+    "name": "Transmit Low Warn Power"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:optical-module/rx-high-alarm-power": {
+    "name": "Receive High Alarm Power"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:optical-module/rx-low-alarm-power": {
+    "name": "Receive Low Alarm Power"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:optical-module/tx-high-alarm-power": {
+    "name": "Transmit High Alarm Power"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:optical-module/tx-low-alarm-power": {
+    "name": "Transmit Low Alarm Power"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:optical-module/manufacture-date": {
+    "name": "Optical Module Manufacture Date"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:optical-module/transceiver-medium-type": {
+    "name": "Transmission Media Type"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:optical-module/voltage-float": {
+    "name": "Optical Voltage"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:optical-module/temperature-float": {
+    "name": "Optical Temperature"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:optical-module/serial-number": {
+    "name": "Serial number"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:optical-module/channels": {
+    "name": "Optical Channel Information"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:optical-module/channels/channel": {
+    "name": "Optical Channel Information"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:optical-module/channels/channel/number": {
+    "name": "Channel Number"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:optical-module/channels/channel/tx-power": {
+    "name": "Transmit Power(dBm)"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:optical-module/channels/channel/rx-power": {
+    "name": "Receive Power(dBm)"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:optical-module/channels/channel/bias": {
+    "name": "Optical Bias(mA)"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:optical-module/wave-mapping": {
+    "name": "Wave mapping"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:optical-module/wave-mapping/wave-map": {
+    "name": "Wave map"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:optical-module/wave-mapping/wave-map/index": {
+    "name": "Index"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:optical-module/wave-mapping/wave-map/frequency": {
+    "name": "Frequency"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:optical-module/wave-mapping/wave-map/wavelength": {
+    "name": "Wavelength"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:port-alarm": {
+    "name": "Port alarm"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:port-alarm/alarm-type": {
+    "name": "Alarm type"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:port-alarm/alarm-type/crc-error-threshold": {
+    "name": "Crc error threshold"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:port-alarm/alarm-type/crc-error-threshold/crc-error-threshold": {
+    "name": "Crc error threshold"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:port-alarm/alarm-type/crc-error-threshold/crc-error-threshold/crc-error": {
+    "name": "Crc- rror"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:port-alarm/alarm-type/crc-error-threshold/crc-error-threshold/crc-error-interval": {
+    "name": "Crc error interval"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:port-alarm/alarm-type/crc-error-threshold/crc-error-threshold/crc-shutdown-en": {
+    "name": "Crc shutdown en"
+  },
+  "/huawei-driver:driver/global-attribute/huawei-pic:global": {
+    "name": "Global"
+  },
+  "/huawei-driver:driver/global-attribute/huawei-pic:global/up-hold-time": {
+    "name": "Up hold time"
+  },
+  "/huawei-driver:driver/global-attribute/huawei-pic:global/down-hold-time": {
+    "name": "Down hold time"
+  },
+  "/huawei-driver:driver/global-attribute/huawei-pic:global/non-certified-optical-status-alarm": {
+    "name": "Non certified optical status alarm"
+  },
+  "/huawei-driver:driver/global-attribute/huawei-pic:global/link-flap-protection": {
+    "name": "Link flap protection"
+  },
+  "/huawei-license:license/huawei-pic:activated-license-ports": {
+    "name": "Activated-license-ports"
+  },
+  "/huawei-license:license/huawei-pic:activated-license-ports/activated-license-port": {
+    "name": "Activated-license-port"
+  },
+  "/huawei-license:license/huawei-pic:activated-license-ports/activated-license-port/start-port-name": {
+    "name": "Start-port-name"
+  },
+  "/huawei-license:license/huawei-pic:activated-license-ports/activated-license-port/end-port-name": {
+    "name": "End-port-name"
+  },
+  "/huawei-license:license/huawei-pic:activated-license-ports/activated-license-port/activated-licenses": {
+    "name": "Activated-licenses"
+  },
+  "/huawei-license:license/huawei-pic:activated-license-ports/activated-license-port/activated-licenses/activated-license": {
+    "name": "Activated-license"
+  },
+  "/huawei-license:license/huawei-pic:activated-license-ports/activated-license-port/activated-licenses/activated-license/license-type": {
+    "name": "License-type"
+  },
+  "/rpcs/huawei-pic:pic/laser-turn": {
+    "name": "Laser turn"
+  },
+  "/rpcs/huawei-pic:pic/port-prbs-check-start": {
+    "name": "PRBS check start"
+  },
+  "/rpcs/huawei-pic:pic/port-prbs-check-stop": {
+    "name": "PRBS check stop"
+  },
+  "/rpcs/huawei-pic:pic/port-prbs-check-result-get": {
+    "name": "Get PRBS check result"
+  },
+  "/rpcs/huawei-pic:pic/upgrade-optical-module": {
+    "name": "Optical module upgrade"
+  }
+}

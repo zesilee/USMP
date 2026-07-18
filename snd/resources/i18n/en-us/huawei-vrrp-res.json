@@ -1,0 +1,242 @@
+{
+  "/huawei-vrrp:vrrp": {
+    "name": "Vrrp"
+  },
+  "/huawei-vrrp:vrrp/global": {
+    "name": "Global Vrrp Configuration"
+  },
+  "/huawei-vrrp:vrrp/global/gratuitous-arp-enable": {
+    "name": "Gratuitous Arp"
+  },
+  "/huawei-vrrp:vrrp/global/gratuitous-timeout": {
+    "name": "Gratuitous Arp Timeout"
+  },
+  "/huawei-vrrp:vrrp/global/adv-time-learn": {
+    "name": "Advertise Time Learn"
+  },
+  "/huawei-vrrp:vrrp/global/ping-enable": {
+    "name": "Ping Enable"
+  },
+  "/huawei-vrrp:vrrp/global/recover-delay": {
+    "name": "Recover Delay"
+  },
+  "/huawei-vrrp:vrrp/global/version": {
+    "name": "Vrrp Version"
+  },
+  "/huawei-vrrp:vrrp/global/virtual-iproute-enable": {
+    "name": "Vip Routing Enable"
+  },
+  "/huawei-vrrp:vrrp/global/virtual-ospf-enable": {
+    "name": "Ospf Vip Routing Enable"
+  },
+  "/huawei-vrrp:vrrp/global/virtual-isis-enable": {
+    "name": "Is-Is Vip Routing Enable"
+  },
+  "/huawei-vrrp:vrrp/global/virtual-rip-enable": {
+    "name": "Rip Vip Routing Enable"
+  },
+  "/huawei-vrrp:vrrp/global/v6-cks-mode": {
+    "name": "Vrrp6 Checksum Mode"
+  },
+  "/huawei-vrrp:vrrp/global/smooth-switch-time": {
+    "name": "Smooth Switching Time (S)"
+  },
+  "/huawei-vrrp:vrrp/global/unicast-port": {
+    "name": "Unicast Vrrp Interface Number"
+  },
+  "/huawei-vrrp:vrrp/global/gratuitous-enhance-enable": {
+    "name": "Gratuitous Arp Enhance"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp": {
+    "name": "Vrrp"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups": {
+    "name": "Vrrp Groups"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group": {
+    "name": "Vrrp Group"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/id": {
+    "name": "Vrrp Identifier"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/priority": {
+    "name": "Priority"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/preempt": {
+    "name": "Preempt Configuration"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/preempt/preempt-enable": {
+    "name": "Preempt Mode"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/preempt/delay-time": {
+    "name": "Delay"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/adver-interval": {
+    "name": "Advertisement Interval"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/link-bfddown-num": {
+    "name": "Link Bfd Down Number"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/hold-multiper": {
+    "name": "Hold Multiplier"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/fast-resume": {
+    "name": "Fast Resume"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/v3-sendmode": {
+    "name": "Vrrp Advertisement Packet Mode"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/vrrp-type": {
+    "name": "Type Of Vrrp"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/vrrp-type/member-vrrp": {
+    "name": "Member Vrrp"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/vrrp-type/member-vrrp/admin-id": {
+    "name": "Admin Vrrp Id"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/vrrp-type/member-vrrp/admin-if-name": {
+    "name": "Admin Interface Name"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/vrrp-type/member-vrrp/unflowdown": {
+    "name": "Un Flowdown"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/vrrp-type/admin-vrrp": {
+    "name": "Admin Vrrp"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/vrrp-type/admin-vrrp/admin-flag": {
+    "name": "Management Vrrp"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/vrrp-type/admin-vrrp/admin-ignore-ifdown": {
+    "name": "Ignore Interface Down"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/vrrp-type/admin-vrrp/init-state-holdtime": {
+    "name": "Init State Holdtime"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/type": {
+    "name": "VRRP group type"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/state": {
+    "name": "State"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/create-time": {
+    "name": "Create Time"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/last-change-time": {
+    "name": "Last Change Time"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/virtual-ips": {
+    "name": "Virtual Ip List"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/virtual-ips/virtual-ip": {
+    "name": "Virtual Ip Config"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/virtual-ips/virtual-ip/address": {
+    "name": "Virtual IP Address"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/track-bfds": {
+    "name": "Vrrp Track Bfd List"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/track-bfds/track-bfd": {
+    "name": "Vrrp Track Bfd"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/track-bfds/track-bfd/session-name": {
+    "name": "Track Bfd Session Name"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/track-bfds/track-bfd/session-type": {
+    "name": "Track Bfd Type"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/track-bfds/track-bfd/priority-change": {
+    "name": "Priority Change"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/track-bfds/track-bfd/track-mode": {
+    "name": "Track Mode"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/track-bfds/track-bfd/session-id": {
+    "name": "Track Bfd Id"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/track-bfds/track-bfd/session-state": {
+    "name": "Track Bfd Session State"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/track-mtgrps": {
+    "name": "Vrrp Track Monitor-Group List"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/track-mtgrps/track-mtgrp": {
+    "name": "Vrrp Track Monitor-Group"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/track-mtgrps/track-mtgrp/monitor-group-name": {
+    "name": "Track Monitor-Group Name"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/track-mtgrps/track-mtgrp/failure-ratio": {
+    "name": "Failure Ratio"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/track-mtgrps/track-mtgrp/priority-change": {
+    "name": "Priority Change"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/track-mtgrps/track-mtgrp/track-mode": {
+    "name": "Track Mode"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/track-ip-routes": {
+    "name": "Vrrp Track Ip Routes"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/track-ip-routes/track-ip-route": {
+    "name": "Vrrp Tracking Ip Route"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/track-ip-routes/track-ip-route/vpn-name": {
+    "name": "Vpn"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/track-ip-routes/track-ip-route/ip-address": {
+    "name": "Ip Address"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/track-ip-routes/track-ip-route/mask-length": {
+    "name": "Ip Mask"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/track-ip-routes/track-ip-route/priority-change": {
+    "name": "Priority Value"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/track-ip-routes/track-ip-route/track-mode": {
+    "name": "Track Mode"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-vrrp:vrrp": {
+    "name": "Vrrp"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-vrrp:vrrp/backup-groups": {
+    "name": "Vrrp Interface"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-vrrp:vrrp/backup-groups/ttlcheck-flag": {
+    "name": "Ttl"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-vrrp:vrrp/backup-groups/recover-delay": {
+    "name": "Recovery Delay (S)"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-vrrp:vrrp/backup-groups/arpsend-simple": {
+    "name": "Simple Send Mode For Gratuitous Arp Packets"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-vrrp:vrrp/backup-groups/advertise-send-mode": {
+    "name": "Vrrp Backup Groups Send Packets Mode"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-vrrp:vrrp/backup-groups/advertise-send-mode/all-subvlans": {
+    "name": "All Sub-Vlans Of The Super Vlan"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-vrrp:vrrp/backup-groups/advertise-send-mode/all-subvlans/sendmode-all": {
+    "name": "Send Packets In All Sub-Vlans"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-vrrp:vrrp/backup-groups/advertise-send-mode/one-subvlan": {
+    "name": "One Sub-Vlan Of The Super Vlan"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-vrrp:vrrp/backup-groups/advertise-send-mode/one-subvlan/send-subvlanid": {
+    "name": "Simple Send Mode For Arp"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-vrrp:vrrp/track-admins": {
+    "name": "Service Interfaces"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-vrrp:vrrp/track-admins/track-admin": {
+    "name": "Service Interface"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-vrrp:vrrp/track-admins/track-admin/id": {
+    "name": "Admin Vrrp Id"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-vrrp:vrrp/track-admins/track-admin/if-name": {
+    "name": "Admin Interface Name"
+  }
+}

@@ -1,0 +1,1281 @@
+/*
+Copyright (C) 2020 Huawei Technologies Co., Ltd. All rights reserved.
+*/
+module huawei-ai-fabric {
+  namespace "urn:huawei:yang:huawei-ai-fabric";
+  prefix ai-fabric;
+  import ietf-inet-types {
+      prefix inet;
+  }
+  import huawei-ifm {
+    prefix ifm;
+  }
+  import ietf-yang-types {
+    prefix yang;
+  }
+  import huawei-extension {
+    prefix ext;
+  }
+  import huawei-qos {
+    prefix qos;
+  }
+  import huawei-ssl {
+    prefix ssl;
+  }
+  organization
+    "Huawei Technologies Co., Ltd.";
+  contact
+    "Huawei Industrial Base
+     Bantian, Longgang
+     Shenzhen 518129
+     People's Republic of China
+     Website: http://www.huawei.com
+     Email: support@huawei.com";
+  description
+    "To meet the high performance requirements of distributed applications, the AI Fabric intelligent and lossless data center network 
+     solution, which includes AI ECN, iQCN, PFC deadlock free and so on, provides a network environment with zero packet loss, low la-
+     tency, and high throughput for RoCEv2 distributed applications such as distributed storage, high-performance computing (HPC), and
+     artificial intelligence (AI).";
+  reference
+    "Huawei private.";
+  revision 2020-01-21 {
+    description
+      "Init revision.";
+    reference
+      "Huawei private.";
+  }
+  ext:task-name "ai-fabric";
+  typedef ai-ecn-calculate-mode {
+    type enumeration {
+      enum "NN" {
+        value 0;
+        description
+          "ECN threshold calculation based on Neural Network Model Inference Engine.";
+      }
+      enum "BBR" {
+        value 1;
+        description
+          "ECN threshold calculation based on Bottleneck bandwidth and round-trip propagation time.";
+      }
+      enum "STATIC" {
+        value 2;
+        description
+          "Traditional static ECN.";
+      }
+    }
+    description
+      "ECN threshold configuration mode";
+  }
+  typedef inof-role{
+    type enumeration {
+      enum "client" {
+        value 0;
+        description
+          "INOF client.";
+      }
+      enum "reflector" {
+        value 1;
+        description
+          "INOF reflector.";
+      }
+    }
+    description
+      "INOF role.";
+  }
+  typedef inof-host-access-type {
+    type enumeration {
+      enum "local" {
+        value 0;
+        description
+          "The host is connected to the local device.";
+      }
+      enum "remote" {
+        value 1;
+        description
+          "The host is connected to a remote device.";
+      }
+    }
+    description
+      "Access type of a host.";
+  }
+  typedef inof-hard-zoning-state {
+    type enumeration {
+      enum "normal" {
+        value 0;
+        description
+          "The iNOF zone isolation function configured to the interface linked with the host is normal.";
+      }
+      enum "abnormal" {
+        value 1;
+        description
+          "The iNOF zone isolation function configured to the interface linked with the host is abnormal.";
+      }
+      enum "remote" {
+        value 2;
+        description
+          "The interface linked with the host is on the remote device, please query on the remote device whether iNOF zone isolation function is normal.";
+      }
+    }
+    description
+      "Work state of iNOF zone isolation function configured to the interface linked with the host.";
+  }
+  typedef host-role-type {
+    type enumeration {
+      enum "invalid" {
+        value 0;
+        description
+          "The host role is invalid.";
+      }
+      enum "target" {
+        value 1;
+        description
+          "The host role is target.";
+      }
+      enum "initiator" {
+        value 2;
+        description
+          "The host role is initiator.";
+      }
+      enum "initiator-and-target" {
+        value 3;
+        description
+          "The host has initiator and target capabilities.";
+      }
+    }
+    description
+      "The role of the host.";
+  }
+  typedef rail-group-mode {
+    type enumeration {
+      enum "auto" {
+        value 0;
+        description
+          "The device automatically allocates the interface indexes in the Rail-Group.";
+      }
+      enum "manual" {
+        value 1;
+        description
+          "Manually allocate the interface indexes in the Rail-Group.";
+      }
+    }
+    description
+      "Interface index allocation mode in the Rail-Group.";
+  }
+  container ai-fabric {
+    description
+      "Configure AI Fabric global configuration.";
+    container ai-service {
+      description
+        "Configure AI service function.";
+      container ai-ecn {
+        presence "create ai-ecn";
+        description
+          "Configure AI ECN.";
+        leaf enable {
+          type boolean;
+          default "false";
+          description
+            "Enable/disable AI ECN.";
+        }
+        container queues {
+          description
+            "List of working queues for AI ECN.";
+          list queue {
+          key "queue-id";
+          max-elements "2";
+          description
+            "Configure the working queue for AI ECN.";
+            leaf queue-id {
+              type qos:qos-service-class;
+              must "../queue-id != 'cs6' and ../queue-id != 'cs7'";
+              description
+                "Configure the working queue for AI ECN.";
+            }
+          }
+        }
+      }
+
+      container iqcn {
+        presence "create iqcn";
+        description
+          "Configure iQCN function.";
+        leaf enable {
+          type boolean;
+          default "false";
+          description
+            "Enable/disable iQCN.";
+        }
+        leaf rpg-time-reset {
+          type uint32 {
+            range "200..600";
+          }
+          units "us";
+          default "300";
+          description
+            "Specify the time counter of NIC for rate increase event.";
+        }
+        container queues {
+          description
+            "List of working queues for iQCN.";
+          list queue {
+          key "queue-id";
+          max-elements "1";
+          description
+            "Configure the working queue for iQCN.";
+            leaf queue-id {
+              type qos:qos-service-class;
+              must "../queue-id != 'cs6' and ../queue-id != 'cs7'";
+              description
+                "Configure the working queue for iQCN.";
+            }
+          }
+        }
+      }
+
+      container ilossless-nvme-over-fabric {
+        must "not (role) or role = 'reflector' or (role = 'client' and hard-zoning-enable != 'true' and bfd/enable != 'true' and not (client-ip-list) and not (zones))";
+        presence "create inof";
+        description
+          "Configure ilossless NVME Over Fabric.";
+        leaf role {
+          type inof-role;
+          description
+            "Local role of reflector or client.";
+        }
+        container local-address {
+          presence "Configure local IPv4 address";
+          description
+            "Configure local IPv4 address and TCP port within iNOF domain.";
+          leaf service-address {
+            type inet:ipv4-address-no-zone;
+            mandatory true;
+            description
+              "Local IPv4 address. It must be a Class A, B, or C address and cannot be a loopback address or multicast
+               address.";
+          }
+          leaf service-port {
+            type inet:port-number {
+              range "10000..57999";
+            }
+            default "19516";
+            description
+              "TCP port for iNOF protocol.";
+          }
+        }
+        container local-ipv6-address {
+          presence "Configure local IPv6 address";
+          description
+            "Configure local IPv6 address and TCP port within iNOF domain.";
+          leaf ipv6-service-address {
+            type inet:ipv6-address-no-zone;
+            mandatory true;
+            description
+              "Local IPv6 address. It cannot be an unspecified address, loopback address, link-local address, or
+               multicast address.";
+          }
+          leaf ipv6-service-port {
+            type inet:port-number {
+              range "10000..57999";
+            }
+            default "19516";
+            description
+              "TCP port for iNOF protocol.";
+          }
+        }
+        container zones{
+          description
+            "List of zones.";
+          list zone {
+            key "name";
+            max-elements 16000;
+            description
+              "Configure zone related parameter.";
+            leaf name {
+              type string {
+                 length "1..63";
+              }
+              description
+                "Configure zone name.";
+            }
+            container host-ips {
+              description
+                "List of host IP address.";
+              list host-ip {
+                key "start-host-ip end-host-ip";
+                max-elements 8000;
+                description
+                  "Configure host IP address. The iNOF system supports a maximum of 8000 host IP addresses. A maximum
+                   of 32000 zone members can be added to all zones created on the device. A zone member can be added to
+                   multiple zones.";
+                leaf start-host-ip {
+                  type inet:ip-address-no-zone;
+                  description
+                    "Start host IP address. For an IPv4 address, it must be a Class A, B, or C address and cannot be a
+                     loopback address or multicast address. For an IPv6 address, it cannot be an unspecified address,
+                     loopback address, link-local address, or multicast address.";
+                }
+                leaf end-host-ip {
+                  type inet:ip-address-no-zone;
+                  description
+                    "End host IP address. The value of end-host-ip cannot be smaller than that of start-host-ip. The IP
+                     address type of end-host-ip must be the same as that of start-host-ip. For an IPv4 address, it
+                     must be a Class A, B, or C address and cannot be a loopback address or multicast address. For an
+                     IPv6 address, it cannot be an unspecified address, loopback address, link-local address, or
+                     multicast address.";
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    container ecn-overlay {
+      description
+        "Configure mapping the outer ECN to the inner ECN for VXLAN decapsulation.";
+      leaf enable {
+        type boolean;
+        default "false";
+        description
+          "Enable/disable ECN mapping for VXLAN decapsulation.";
+      }
+    }
+
+    container pfc-deadlock-free {
+      description
+        "Configure PFC deadlock-free.";
+      container uplink-groups {
+        description
+          "List of PFC deadlock-free uplink port group.";
+        list uplink-group {
+          key "name";
+          max-elements  "2";
+          description
+            "Configure a deadlock-free uplink port group.";
+          leaf name {
+            type string {
+              length "1..31";
+            }
+            description
+              "Configure the name of a deadlock-free uplink port group.";
+          }
+          container members {
+            description
+              "List of a deadlock-free uplink port group member interfaces.";
+            list member {
+              key "if-name";
+              description
+                "Configure a deadlock-free uplink port group member interfaces.";
+              leaf if-name {
+                type leafref {
+                  path "/ifm:ifm/ifm:interfaces/ifm:interface/ifm:name";
+                }
+                must "/ifm:ifm/ifm:interfaces/ifm:interface[ifm:name=current()]/ifm:type = '400GE' or '200GE' or '100GE' or '50GE' or '40GE' or '25GE' or '10GE'";
+                description
+                  "Configure the interface name of a deadlock-free uplink port group member.";
+              }
+            }
+          }
+          container adjusts {
+            description
+              "List of a deadlock-free actions.";
+            list adjust {
+                key "original-dscp";
+                description
+                  "Configure the PFC-deadlock-free parameters to match traffic and switch traffic.";
+                leaf original-dscp {
+                  type uint8 {
+                    range "0..63";
+                  }
+                  description
+                  "Configure the current DSCP field to perform the switching action";
+                }
+                leaf priority {
+                  type uint8 {
+                    range "0..7";
+                  }
+                  description
+                  "Configure a new priority to perform the switching action.";
+                }
+                leaf dscp {
+                  type uint8 {
+                    range "0..63";
+                  }
+                  description
+                  "Configure a new DSCP for the traffic after the switching action.";
+                }
+            }
+          }
+        }
+      }
+    }
+    container ai-ecn-statistics {
+      config false;
+      description
+        "List of AI ECN statistics.";
+      list ai-ecn-statistic {
+        key "if-name";
+        description
+          "AI ECN statistics.";
+        leaf if-name {
+          type leafref {
+            path "/ifm:ifm/ifm:interfaces/ifm:interface/ifm:name";
+          }
+        must "/ifm:ifm/ifm:interfaces/ifm:interface[ifm:name=current()]/ifm:type = '400GE' or '200GE' or '100GE' or '50GE' or '40GE' or '25GE' or '10GE'";
+          description
+            "interface name.";
+        }
+        leaf active-model {
+          type string {
+            length "1..31";
+          }
+          description
+            "AI ECN active model name.";
+        }
+        leaf model-version {
+          type string {
+            length "1..31";
+          }
+          description
+            "AI ECN active model version.";
+        }
+        leaf activated-time {
+          type yang:date-and-time;
+          description
+            "activated time of AI ECN.";
+        }
+        leaf queue-id {
+          type qos:qos-service-class;
+          must "../queue-id != 'cs6' and ../queue-id != 'cs7'";
+          description
+            "Working queue of AI ECN.";
+        }
+        leaf low-limit {
+          type uint32;
+          units "Byte";
+          description
+            "Calculated low-limit of ECN Threshold.";
+        }
+        leaf high-limit {
+          type uint32;
+          units "Byte";
+          description
+            "Calculated high-limit of ECN Threshold.";
+        }
+        leaf max-mark-percentage {
+          type uint8 {
+            range "0..100";
+          }
+          units "%";
+          description
+            "Specify max mark percentage when the average queue size reaches high-limit.";
+        }
+        leaf calculate-mode {
+          type ai-ecn-calculate-mode;
+          description
+            "Specify the calculate-mode of AI ECN.";
+        }
+      }
+    }
+    container pfc-deadlock-free-statistics {
+      config false;
+      ext:hidden ui;
+      description
+        "List of PFC deadlock free statistics.";
+      list pfc-deadlock-free-statistic {
+        key "slot-id";
+        description
+          "PFC deadlock free statistics.";
+        leaf slot-id {
+          type string {
+            length "1..32";
+          }
+          description
+            "Slot id.";
+        }
+        leaf chip-name {
+          type string {
+            length "1..32";
+          }
+          description
+            "Chip name.";
+        }
+        container members {
+          description
+            "List of the interfaces which adjust hook flow.";
+          list member {
+            key "if-name original-dscp";
+            description
+              "Statistics of interfaces which adjust hook flow.";
+            leaf if-name {
+              type leafref {
+                path "/ifm:ifm/ifm:interfaces/ifm:interface/ifm:name";
+              }
+            must "/ifm:ifm/ifm:interfaces/ifm:interface[ifm:name=current()]/ifm:type = '400GE' or '200GE' or '100GE' or '50GE' or '40GE' or '25GE' or '10GE'";
+              description
+                "Interface Name.";
+            }
+            leaf original-dscp {
+              type uint8 {
+                range "0..63";
+              }
+              description
+                "original Dscp of the hook flow.";
+            }
+            leaf original-priority {
+              type uint8 {
+                range "0..7";
+              }
+              description
+                "original Priority of the hook flow.";
+            }
+            leaf priority {
+              type uint8 {
+                range "0..7";
+              }
+              description
+                "New Priority of the hook flow.";
+            }
+            leaf dscp {
+              type uint8 {
+                range "0..63";
+              }
+              description
+                "New Dscp of the hook flow.";
+            }
+            leaf hook-count {
+              type uint64;
+              units "packet";
+              description
+                "Number of hook flow packets.";
+            }
+            leaf last-adjust-time {
+              type yang:date-and-time;
+              description
+                "Last adjustment time of hook flow.";
+            }
+          }
+        }
+      }
+    }
+    container iqcn-statistics {
+      config false;
+      description
+        "List of iQCN statistics.";
+      list iqcn-statistic {
+        key "slot-id";
+        config false;
+        description
+          "iQCN statistics.";
+        leaf slot-id {
+          type string {
+            length "1..32";
+          }
+          description
+            "Slot id.";
+        }
+        leaf enable {
+          type boolean;
+          description
+            "Enable/disable iQCN.";
+        }
+        leaf working-queue {
+          type qos:qos-service-class;
+          must "../working-queue != 'cs6' and ../working-queue != 'cs7'";
+          description
+            "Working queue of iQCN.";
+        }
+        leaf rpg-time-reset {
+          type uint32 {
+            range "200..600";
+          }
+          units "us";
+          description
+            "Specify rpg-time-reset of NIC.";
+        }
+        leaf tx-cnp-count {
+          type uint64;
+          units "packet";
+          description
+            "Number of Tx CNP packets.";
+        }
+        leaf tx-cnp-rate {
+          type uint64;
+          units "pps";
+          description
+            "Rate of Tx CNP packets.";
+        }
+        container members {
+          description
+            "List of the interfaces which receives CNP packets..";
+          list member {
+            key "if-name";
+            description
+              "Statistics of Deadlock-free uplink port group member interfaces.";
+            leaf if-name {
+              type leafref {
+                path "/ifm:ifm/ifm:interfaces/ifm:interface/ifm:name";
+              }
+            must "/ifm:ifm/ifm:interfaces/ifm:interface[ifm:name=current()]/ifm:type = '400GE' or '200GE' or '100GE' or '50GE' or '40GE' or '25GE' or '10GE'";
+              description
+                "Interface name of the interface which receives CNP packets.";
+            }
+            leaf rx-cnp-count {
+              type uint64;
+              units "packet";
+              description
+                "Number of Rx CNP packets.";
+            }
+            leaf rx-cnp-rate {
+              type uint64;
+              units "pps";
+              description
+                "Rate of Rx CNP packets.";
+            }
+          }
+        }
+      }
+    } //iqcn-statss
+    container inof-info-hosts {
+      config false;
+      description
+        "List of hosts managed by devices on the iNOF network.";
+      list inof-info-host {
+        key "host-ip";
+        description
+          "Operational data of hosts managed by devices on the iNOF network.";
+        leaf host-ip {
+          type inet:ip-address-no-zone;
+          description
+            "Host IP address.";
+        }
+        leaf access-type {
+          type inof-host-access-type;
+          description
+            "Access type of a host.";
+        }
+        leaf access-device-ip {
+          type inet:ip-address-no-zone;
+          description
+            "Access device IP address.";
+        }
+        leaf access-interface {
+          type leafref {
+            path "/ifm:ifm/ifm:interfaces/ifm:interface/ifm:name";
+          }
+          description
+            "Access interface name.";
+        }
+        leaf hard-zoning-state {
+          type inof-hard-zoning-state;
+          description
+            "Work state of iNOF zone isolation function configured to the interface linked with the host.";
+        }
+        leaf host-role {
+          type host-role-type;
+          description
+            "The role of the host.";
+        }
+      }
+    }
+
+    container inof-cfg-status {
+      config false;
+      description
+        "Operational data of configuration status on the iNOF network.";
+      container default-zone {
+        description
+          "Operational data of default-zone configuration status on the iNOF network.";
+        leaf reflector1-enable {
+          type boolean;
+          description
+            "Enable/disable status.";
+        }
+        leaf reflector2-enable {
+          type boolean;
+          description
+            "Enable/disable status.";
+        }
+        leaf inof-enable {
+          type boolean;
+          description
+            "Enable/disable status.";
+        }
+      }
+    }
+
+    container inof-zones {
+      config false;
+      description
+        "Operational state of zone configuration on the device.";
+      leaf zone-num {
+        type uint32;
+        description
+          "The total zone number.";
+      }
+      leaf default-zone-enable {
+        type boolean;
+        description
+          "The default-zone status.";
+      }
+      container zones {
+        description
+          "List of iNOF zone configurations on the device.";
+        list zone {
+          key "zone-name";
+          description
+            "Operational data of iNOF zone configurations on the device.";
+          leaf zone-name {
+            type string {
+              length "1..63";
+            }
+            description
+              "Zone name.";
+          }
+          container hosts {
+            config false;
+            description
+              "List of hosts in the zone configurations on the device.";
+            list host {
+              key "ip learn-from";
+              description
+                "Operational data of host in the zone configurations on the device.";
+              leaf ip {
+                type inet:ip-address-no-zone;
+                description
+                  "Host IP address.";
+              }
+              leaf learn-from {
+                type string {
+                  length "1..40";
+                }
+                description
+                  "The IP address of iNOF reflector.";
+              }
+              leaf inconsistent {
+                type boolean;
+                ext:support-filter true;
+                description
+                  "Query the configuration of zone on only one reflector.";
+              }
+            }
+          }
+        }
+      }
+    }
+    container rail-groups {
+      description
+        "List of rail-groups.";
+      list rail-group {
+        key "group-name";
+        max-elements  "512";
+        description
+          "Configure a rail-group port group.";
+        leaf group-name {
+          type string {
+            length "1..31";
+            pattern '[^_>$*^|][^^>$*|]{0,30}';
+          }
+          description
+            "Name of a rail-group port group. The name cannot start with _ and cannot contain |, >, $, *, or ^.";
+        }
+        leaf mode {
+          type rail-group-mode;
+          default "auto";
+          description
+            "Rail-group interface index allocation mode.";
+        }
+        container members {
+          description
+            "List of a rail-group port group member interfaces.";
+          list member {
+            key "interface-name";
+            max-elements  "1024";
+            description
+              "Configure a rail-group port group member interface. Eth-Trunk member interfaces are not supported. An interface cannot be added to different groups.";
+            leaf interface-name {
+              type leafref {
+                path "/ifm:ifm/ifm:interfaces/ifm:interface/ifm:name";
+              }
+              must "/ifm:ifm/ifm:interfaces/ifm:interface[ifm:name=current()]/ifm:type = '400GE' or " +
+                   "/ifm:ifm/ifm:interfaces/ifm:interface[ifm:name=current()]/ifm:type = '200GE' or " +
+                   "/ifm:ifm/ifm:interfaces/ifm:interface[ifm:name=current()]/ifm:type = '100GE' or " +
+                   "/ifm:ifm/ifm:interfaces/ifm:interface[ifm:name=current()]/ifm:type = '50GE' or " +
+                   "/ifm:ifm/ifm:interfaces/ifm:interface[ifm:name=current()]/ifm:type = '40GE' or " +
+                   "/ifm:ifm/ifm:interfaces/ifm:interface[ifm:name=current()]/ifm:type = '25GE' or " +
+                   "/ifm:ifm/ifm:interfaces/ifm:interface[ifm:name=current()]/ifm:type = '10GE'";
+              description
+                "Configure the interface name of a rail-group port group member.";
+            }
+            leaf index {
+              when "../../../mode = 'manual'";
+              type uint32 {
+                range "0..1023";
+              }
+              mandatory true;
+              description
+                "Configure the interface index of a rail-group port group member.";
+            }
+          }
+        }
+      }
+    }
+    container flow-matrix {
+      presence "create flow-matrix";
+      description
+        "Configure flow-matrix. The flow-matrix command and the second traffic-policy global command (used to to apply the traffic policy globally in the inbound direction) cannot be run at the same time.";
+      container flow-paths {
+        description
+          "List of flow-paths.";
+        list flow-path {
+          must "source-ip != destination-ip and source-ip != nexthop and destination-ip != nexthop";
+          key "source-ip destination-ip";
+          description
+            "Configure a flow-path.";
+          leaf source-ip {
+            type inet:ipv4-address-no-zone;
+            description
+              "Source IP address. For an IPv4 address, it must be a Class A, B, or C address and cannot be a
+               loopback address or multicast address.";
+          }
+          leaf destination-ip {
+            type inet:ipv4-address-no-zone;
+            description
+              "Destination IP address. For an IPv4 address, it must be a Class A, B, or C address and cannot be a
+               loopback address or multicast address.";
+          }
+          leaf flow-rail {
+            type leafref {
+              path "/ifm:ifm/ifm:interfaces/ifm:interface/ifm:name";
+            }
+            must "/ifm:ifm/ifm:interfaces/ifm:interface[ifm:name=current()]/ifm:type = '400GE' or " +
+                 "/ifm:ifm/ifm:interfaces/ifm:interface[ifm:name=current()]/ifm:type = '200GE' or " +
+                 "/ifm:ifm/ifm:interfaces/ifm:interface[ifm:name=current()]/ifm:type = '100GE' or " +
+                 "/ifm:ifm/ifm:interfaces/ifm:interface[ifm:name=current()]/ifm:type = '50GE' or " +
+                 "/ifm:ifm/ifm:interfaces/ifm:interface[ifm:name=current()]/ifm:type = '40GE' or " +
+                 "/ifm:ifm/ifm:interfaces/ifm:interface[ifm:name=current()]/ifm:type = '25GE' or " +
+                 "/ifm:ifm/ifm:interfaces/ifm:interface[ifm:name=current()]/ifm:type = '10GE'";
+            mandatory true;
+            description
+              "Flow rail name.";
+          }
+        }
+      }
+      container flow-exact-paths {
+        description
+          "List of flow-exact-paths.";
+        list flow-exact-path {
+          must "source-ip != destination-ip";
+          key "source-ip destination-ip udp-source-port";
+          max-elements 65536;
+          description
+            "Configure a flow-exact-path.";
+          leaf source-ip {
+            type inet:ipv4-address-no-zone;
+            description
+              "Source IP address. For an IPv4 address, it must be a Class A, B, or C address and cannot be a
+               loopback address or multicast address.";
+          }
+          leaf destination-ip {
+            type inet:ipv4-address-no-zone;
+            description
+              "Destination IP address. For an IPv4 address, it must be a Class A, B, or C address and cannot be a
+               loopback address or multicast address.";
+          }
+          leaf udp-source-port {
+            type inet:port-number {
+              range "0..65535";
+            }
+            description
+             "Indicate UDP source port.";
+          }
+          leaf mask-length {
+            type uint16 {
+              range "0..15";
+            }
+            description
+             "Mask length of UDP source port.";
+          }
+          leaf ingress-port {
+            type leafref {
+              path "/ifm:ifm/ifm:interfaces/ifm:interface/ifm:name";
+            }
+            must "/ifm:ifm/ifm:interfaces/ifm:interface[ifm:name=current()]/ifm:type = '800GE' or " +
+                 "/ifm:ifm/ifm:interfaces/ifm:interface[ifm:name=current()]/ifm:type = '400GE' or " +
+                 "/ifm:ifm/ifm:interfaces/ifm:interface[ifm:name=current()]/ifm:type = '200GE' or " +
+                 "/ifm:ifm/ifm:interfaces/ifm:interface[ifm:name=current()]/ifm:type = '100GE' or " +
+                 "/ifm:ifm/ifm:interfaces/ifm:interface[ifm:name=current()]/ifm:type = '50GE' or " +
+                 "/ifm:ifm/ifm:interfaces/ifm:interface[ifm:name=current()]/ifm:type = '40GE' or " +
+                 "/ifm:ifm/ifm:interfaces/ifm:interface[ifm:name=current()]/ifm:type = '25GE' or " +
+                 "/ifm:ifm/ifm:interfaces/ifm:interface[ifm:name=current()]/ifm:type = '10GE'";
+            mandatory true;
+            description
+              "Flow ingress port name.";
+          }
+          leaf flow-rail {
+            type leafref {
+              path "/ifm:ifm/ifm:interfaces/ifm:interface/ifm:name";
+            }
+            must "/ifm:ifm/ifm:interfaces/ifm:interface[ifm:name=current()]/ifm:type = '800GE' or " +
+                 "/ifm:ifm/ifm:interfaces/ifm:interface[ifm:name=current()]/ifm:type = '400GE' or " +
+                 "/ifm:ifm/ifm:interfaces/ifm:interface[ifm:name=current()]/ifm:type = '200GE' or " +
+                 "/ifm:ifm/ifm:interfaces/ifm:interface[ifm:name=current()]/ifm:type = '100GE' or " +
+                 "/ifm:ifm/ifm:interfaces/ifm:interface[ifm:name=current()]/ifm:type = '50GE' or " +
+                 "/ifm:ifm/ifm:interfaces/ifm:interface[ifm:name=current()]/ifm:type = '40GE' or " +
+                 "/ifm:ifm/ifm:interfaces/ifm:interface[ifm:name=current()]/ifm:type = '25GE' or " +
+                 "/ifm:ifm/ifm:interfaces/ifm:interface[ifm:name=current()]/ifm:type = '10GE'";
+            mandatory true;
+            description
+              "Flow rail name.";
+          }
+        }
+	}
+      container synergy-server {
+          presence "Configure flow-matrix synergy server";
+          description
+            "Configure local IPv4 address and TCP port within flow-matrix synergy function.";
+          leaf ssl-policy {
+            type leafref {
+              path "/ssl:ssl/ssl:ssl-policys/ssl:ssl-policy/ssl:policy-name";
+            }
+            description
+              "Specify the name of an SSL policy to bind an SSL policy to flow-matrix synergy server.";
+          }
+          leaf enable {
+            type boolean;
+            mandatory true;
+            description
+              "Enable/disable status.";
+          }
+          leaf service-address {
+            type inet:ipv4-address-no-zone;
+            description
+              "Local IPv4 address. It must be a Class A, B, or C address and cannot be a loopback address or multicast address.";
+          }
+          leaf service-port {
+            type inet:port-number {
+              range "10000..57999";
+            }
+            default "16666";
+            description
+              "TCP port for flow-matrix synergy function.";
+          }
+      }
+      container comm-infos {
+        config false;
+        description
+          "List of communication informations.";
+        list comm-info {
+          key "task-id comm-name comm-init-time packet-id";
+          description
+            "Operational data of communication information.";
+          leaf task-id {
+            type uint64;
+            description
+              "Task ID of communication domain.";
+          }
+          leaf comm-name {
+            type string {
+              length "1..128";
+            }
+            description
+              "Name of communication domain.";
+          }
+          leaf comm-init-time {
+            type uint64;
+            description
+              "Initialization time of communication domain.";
+          }
+          leaf packet-id {
+            type uint16;
+            description
+              "Serial number.";
+          }
+          leaf packet-num {
+            type uint16;
+            description
+              "Total number.";
+          }
+          leaf msg-version {
+            type uint16;
+            description
+              "Version of payload message.";
+          }
+          leaf payload {
+            type string {
+              length "1..30720";
+            }
+            description
+              "Information of communication domain.";
+          }
+          leaf time {
+            type uint64;
+            description
+              "Data collected time.";
+          }
+        }
+      }
+      container comm-op-infos {
+        config false;
+        description
+          "List of communication operator informations.";
+        list comm-op-info {
+          key "task-id comm-name comm-init-time operator algorithm root-rank";
+          description
+            "Operational data of communication operator information.";
+          leaf task-id {
+            type uint64;
+            description
+              "Task ID of communication domain.";
+          }
+          leaf comm-name {
+            type string {
+              length "1..128";
+            }
+            description
+              "Name of communication domain.";
+          }
+          leaf comm-init-time {
+            type uint64;
+            description
+              "Initialization time of communication domain.";
+          }
+          leaf operator {
+            type uint8;
+            description
+              "Communication operator.";
+          }
+          leaf algorithm {
+            type uint8;
+            description
+              "Communication algorithm.";
+          }
+          leaf root-rank {
+            type uint16;
+            description
+              "Root rank ID.";
+          }
+          leaf traffic-cnt {
+            type uint64;
+            description
+              "Traffic of the communication domain.";
+          }
+          leaf source-port-id {
+            type uint16;
+            description
+              "Source port ID.";
+          }
+          leaf mask-len {
+            type uint16;
+            description
+              "Mask length of source port ID.";
+          }
+          leaf time {
+            type uint64;
+            description
+              "Data collected time.";
+          }
+        }
+      }
+      container comm-adj-infos {
+        config false;
+        description
+          "List of communication adjacency informations.";
+        list comm-adj-info {
+          key "task-id comm-name comm-check-sum operator algorithm root-rank packet-id";
+          description
+            "Operational data of communication adjacency information.";
+          leaf task-id {
+            type uint64;
+            description
+              "Task ID of communication domain.";
+          }
+          leaf comm-name {
+            type string {
+              length "1..128";
+            }
+            description
+              "Name of communication domain.";
+          }
+          leaf comm-check-sum {
+            type string {
+              length "1..36";
+            }
+            description
+              "Check sum of communication domain.";
+          }
+          leaf operator {
+            type uint8;
+            description
+              "Communication operator.";
+          }
+          leaf algorithm {
+            type uint8;
+            description
+              "Communication algorithm.";
+          }
+          leaf root-rank {
+            type uint16;
+            description
+              "Root rank ID.";
+          }
+          leaf packet-id {
+            type uint16;
+            description
+              "Serial number.";
+          }
+          leaf packet-num {
+            type uint16;
+            description
+              "Total number.";
+          }
+          leaf msg-version {
+            type uint16;
+            description
+              "Version of payload message.";
+          }
+          leaf payload {
+            type string {
+              length "1..30720";
+            }
+            description
+              "Information of communication domain.";
+          }
+          leaf time {
+            type uint64;
+            description
+              "Data collected time.";
+          }
+        }
+      }
+      container comm-rank-infos {
+        config false;
+        description
+          "List of communication rank informations.";
+        list comm-rank-info {
+          key "task-id comm-name comm-init-time packet-id";
+          description
+            "Operational data of communication rank information.";
+          leaf task-id {
+            type uint64;
+            description
+              "Task ID of communication domain.";
+          }
+          leaf comm-name {
+            type string {
+              length "1..128";
+            }
+            description
+              "Name of communication domain.";
+          }
+          leaf comm-init-time {
+            type uint64;
+            description
+              "Initialization time of communication domain.";
+          }
+          leaf packet-id {
+            type uint16;
+            description
+              "Serial number.";
+          }
+          leaf packet-num {
+            type uint16;
+            description
+              "Total number.";
+          }
+          leaf msg-version {
+            type uint16;
+            description
+              "Version of payload message.";
+          }
+          leaf payload {
+            type string {
+              length "1..30720";
+            }
+            description
+              "Information of communication domain.";
+          }
+          leaf time {
+            type uint64;
+            description
+              "Data collected time.";
+          }
+        }
+      }
+      container comm-rank-agg-infos {
+        config false;
+        description
+          "List of communication rank informations.";
+        list comm-rank-agg-info {
+          key "task-id comm-init-time packet-id";
+          description
+            "Operational data of communication rank information.";
+          leaf task-id {
+            type uint64;
+            description
+              "Task ID of communication domain.";
+          }
+          leaf comm-name {
+            type string {
+              length "0..128";
+            }
+            description
+              "Name of communication domain.";
+          }
+          leaf comm-init-time {
+            type uint64;
+            description
+              "Initialization time of communication domain.";
+          }
+          leaf packet-id {
+            type uint16;
+            description
+              "Serial number.";
+          }
+          leaf packet-num {
+            type uint16;
+            description
+              "Total number.";
+          }
+          leaf msg-version {
+            type uint16;
+            description
+              "Version of payload message.";
+          }
+          leaf payload {
+            type string {
+              length "1..30720";
+            }
+            description
+              "Information of communication domain.";
+          }
+          leaf time {
+            type uint64;
+            description
+              "Data collected time.";
+          }
+        }
+      }
+    }
+  } //ai-fabric
+  
+  augment "/ifm:ifm/ifm:interfaces/ifm:interface" {
+    when "ifm:type = 'Ethernet'";
+    description
+      "Adds AI Fabric configuration to ifm interface model.";
+    container port-ai-fabric {
+      ext:hidden ui;
+      description
+        "Configure AI Fabric on the interface.";
+      container iqcns {
+        description
+          "Configure iQCN on the interface.";
+          leaf enable {
+            type boolean;
+            default "false";
+            description
+              "Enable/disable iQCN of the interface.";
+          }
+      }
+    }
+  }
+}

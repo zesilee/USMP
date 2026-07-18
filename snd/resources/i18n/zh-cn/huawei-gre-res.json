@@ -1,0 +1,140 @@
+{
+  "/huawei-gre:reset-keep-alive": {
+    "name": "清除Keepalive报文计数"
+  },
+  "/huawei-gre:reset-keep-alive/input/tnl-name": {
+    "name": "隧道名称"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/type/huawei-gre:gre": {
+    "name": "GRE隧道"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/type/huawei-gre:gre/gre-tunnel": {
+    "name": "GRE隧道"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/type/huawei-gre:gre/gre-tunnel/source": {
+    "name": "源接口"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/type/huawei-gre:gre/gre-tunnel/source/ip-info": {
+    "name": "源接口IP地址"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/type/huawei-gre:gre/gre-tunnel/source/ip-info/address": {
+    "name": "源接口地址"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/type/huawei-gre:gre/gre-tunnel/source/if-info": {
+    "name": "源接口名称"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/type/huawei-gre:gre/gre-tunnel/source/if-info/if-name": {
+    "name": "源接口名称"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/type/huawei-gre:gre/gre-tunnel/destination": {
+    "name": "配置目的地址"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/type/huawei-gre:gre/gre-tunnel/destination/vpn-name": {
+    "name": "目的接口所属VPN"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/type/huawei-gre:gre/gre-tunnel/destination/address": {
+    "name": "目的接口地址"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/type/huawei-gre:gre/gre-tunnel/key": {
+    "name": "GRE隧道会话标识"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/type/huawei-gre:gre/gre-tunnel/keep-alive-enable": {
+    "name": "GRE隧道保活"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/type/huawei-gre:gre/gre-tunnel/keep-alive-enable/period": {
+    "name": "保活报文发送间隔"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/type/huawei-gre:gre/gre-tunnel/keep-alive-enable/retry-cnt": {
+    "name": "保活报文重发次数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/type/huawei-gre:gre/gre-tunnel/path-mtu-enable": {
+    "name": "隧道path MTU学习"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/type/huawei-gre:gre/gre-tunnel/statistic-enable": {
+    "name": "GRE隧道流量统计"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/type/huawei-gre:gre/gre-tunnel/checksum-enable": {
+    "name": "GRE隧道校验和"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/type/huawei-gre:gre/gre-tunnel/mtu-check-enable": {
+    "name": "使能或去使能GRE隧道的MTU值验证功能"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/type/huawei-gre:gre/gre-tunnel/keep-alive": {
+    "name": "保活报文统计"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/type/huawei-gre:gre/gre-tunnel/keep-alive/send-req-cnt": {
+    "name": "本端发送保活报文请求个数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/type/huawei-gre:gre/gre-tunnel/keep-alive/recv-rsp-cnt": {
+    "name": "本端发送保活报文响应个数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/type/huawei-gre:gre/gre-tunnel/keep-alive/recv-req-cnt": {
+    "name": "对端发送保活报文请求个数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/type/huawei-gre:gre/gre-tunnel/keep-alive/send-rsp-cnt": {
+    "name": "对端发送保活报文响应个数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/type/huawei-gre:gre6": {
+    "name": "GRE IPv6隧道"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/type/huawei-gre:gre6/gre6-tunnel": {
+    "name": "配置GRE IPv6隧道"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/type/huawei-gre:gre6/gre6-tunnel/source": {
+    "name": "源地址"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/type/huawei-gre:gre6/gre6-tunnel/source/ip-info": {
+    "name": "IPV6源地址"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/type/huawei-gre:gre6/gre6-tunnel/source/ip-info/address": {
+    "name": "源接口IPv6地址"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/type/huawei-gre:gre6/gre6-tunnel/source/if-info": {
+    "name": "源接口"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/type/huawei-gre:gre6/gre6-tunnel/source/if-info/if-name": {
+    "name": "源接口名称"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/type/huawei-gre:gre6/gre6-tunnel/destination": {
+    "name": "配置GRE IPv6隧道目的地址"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/type/huawei-gre:gre6/gre6-tunnel/destination/vpn-name": {
+    "name": "配置目的地址所属VPN"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/type/huawei-gre:gre6/gre6-tunnel/destination/address": {
+    "name": "配置目的IPv6地址"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/type/huawei-gre:p2mp-gre": {
+    "name": "MGRE"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/type/huawei-gre:p2mp-gre/mgre-tunnel": {
+    "name": "配置MGRE隧道"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/type/huawei-gre:p2mp-gre/mgre-tunnel/source": {
+    "name": "隧道源信息"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/type/huawei-gre:p2mp-gre/mgre-tunnel/source/ip-info": {
+    "name": "IP地址信息"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/type/huawei-gre:p2mp-gre/mgre-tunnel/source/ip-info/address": {
+    "name": "配置源接口IPv4地址"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/type/huawei-gre:p2mp-gre/mgre-tunnel/source/if-info": {
+    "name": "接口信息"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/type/huawei-gre:p2mp-gre/mgre-tunnel/source/if-info/if-name": {
+    "name": "配置源接口名称"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/type/huawei-gre:p2mp-gre/mgre-tunnel/key": {
+    "name": "GRE隧道会话标识"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-gre:gre": {
+    "name": "配置GRE隧道"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-gre:gre/bind-src-interface-names": {
+    "name": "指定接口绑定GRE隧道"
+  },
+  "/rpcs/huawei-gre:gre/reset-keep-alive": {
+    "name": "清除Keepalive报文计数"
+  }
+}

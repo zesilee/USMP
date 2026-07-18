@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) Huawei Technologies Co., Ltd. 2025-2025. All rights reserved.
+  -->
+
+<netconf-driver xmlns="https://huawei.com/nce/netconf-driver">
+    <netconf-keepalive-info>
+        <!--keepAliveMsg为netconf的保活报文，必须用CDATA方式转义，它满足netconf xml报文格式，其中message-id的值必须用${messageId}替换-->
+        <keepAliveMsg><![CDATA[<?xml version="1.0" encoding="UTF-8"?><rpc message-id="${messageId}" xmlns="urn:ietf:params:xml:ns:netconf:base:1.0"><get-config><source><running/></source><filter type="subtree"><system xmlns="urn:huawei:yang:huawei-system"><system-info><sys-name/></system-info></system></filter></get-config></rpc>]]></keepAliveMsg>
+        <!--keepAlivePeriod：保活时间间隔，最小值10，单位：秒-->
+        <keepAlivePeriod>300</keepAlivePeriod>
+    </netconf-keepalive-info>
+</netconf-driver>

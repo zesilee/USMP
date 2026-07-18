@@ -1,0 +1,11 @@
+{
+  "/huawei-bgp:bgp/huawei-bgp-maintenance:rt-advertised-low-prioritys": {
+    "name": "降低路由发布优先级配置列表"
+  },
+  "/huawei-bgp:bgp/huawei-bgp-maintenance:rt-advertised-low-prioritys/rt-advertised-low-priority": {
+    "name": "降低路由发布优先级配置"
+  },
+  "/huawei-bgp:bgp/huawei-bgp-maintenance:rt-advertised-low-prioritys/rt-advertised-low-priority/address-family": {
+    "name": "地址族"
+  }
+}

@@ -1,0 +1,375 @@
+/*
+Copyright (C) 2019-2020 Huawei Technologies Co., Ltd. All rights reserved.
+*/
+submodule huawei-nqa-testflow {
+  yang-version 1;
+  belongs-to huawei-nqa {
+    prefix nqa;
+  }
+
+  import huawei-pub-type {
+    prefix pub-type;
+  }
+  import ietf-inet-types {
+    prefix inet;
+  }
+
+  organization
+    "Huawei Technologies Co., Ltd.";
+  contact
+    "Huawei Industrial Base
+     Bantian, Longgang
+     Shenzhen 518129
+     People's Republic of China
+     Website: http://www.huawei.com
+     Email: support@huawei.com";
+  description
+    "Description of submodule nqa-testflow.";
+
+  revision 2020-02-17 {
+    description
+      "Modify leafref path for grouping testflow-ids-type.";
+    reference
+      "Huawei private.";
+  }
+  revision 2019-10-16 {
+    description
+      "Init revision.";
+    reference
+      "Huawei private.";
+  }
+
+  typedef ethsvc-increment-type {
+    type enumeration {
+      enum none {
+        value 255;
+        description
+          "No increment.";
+      }
+      enum destination-mac-step {
+        value 10;
+        description
+          "Destination MAC increment.";
+      }
+      enum source-mac-step {
+        value 11;
+        description
+          "Source MAC increment.";
+      }
+      enum destination-ip-step {
+        value 12;
+        description
+          "Destination IP increment.";
+      }
+      enum source-ip-step {
+        value 13;
+        description
+          "Source IP increment.";
+      }
+    }
+    description
+      "description of ethsvc-increment-type";
+  }
+
+  typedef priority-type {
+    type enumeration {
+      enum 8021p {
+        value 0;
+        description
+          "802.1p.";
+      }
+      enum dscp {
+        value 1;
+        description
+          "DSCP.";
+      }
+      enum 8021p-blind {
+        value 2;
+        description
+          "802.1p.";
+      }
+      enum dscp-blind {
+        value 3;
+        description
+          "DSCP.";
+      }
+    }
+    description
+      "description of priority-type";
+  }
+
+  grouping testflows-type {
+    description
+      "Test flow configuration.";
+    list testflow {
+      key "testflow-id";
+      max-elements 1024;
+      description
+        "Test flow table.";
+      leaf testflow-id {
+        type uint16 {
+          range "1..65535";
+        }
+        description
+          "ID of a test flow.";
+      }
+      leaf begin-dest-mac {
+        type pub-type:mac-address;
+        description
+          "Start destination MAC address.";
+      }
+      leaf end-dest-mac {
+        type pub-type:mac-address;
+        must '../begin-dest-mac';
+        description
+          "End destination MAC address.";
+      }
+      leaf begin-source-mac {
+        type pub-type:mac-address;
+        description
+          "Start source MAC address.";
+      }
+      leaf end-source-mac {
+        type pub-type:mac-address;
+        must '../begin-source-mac';
+        description
+          "End source MAC address.";
+      }
+      leaf begin-dest-ip {
+        type inet:ipv4-address-no-zone;
+        default "0.0.0.0";
+        description
+          "Start destination IP address.";
+      }
+      leaf end-dest-ip {
+        type inet:ipv4-address-no-zone;
+        must '../begin-dest-ip';
+        description
+          "End destination IP address.";
+      }
+      leaf begin-source-ip {
+        type inet:ipv4-address-no-zone;
+        default "0.0.0.0";
+        description
+          "Start source IP address.";
+      }
+      leaf end-source-ip {
+        type inet:ipv4-address-no-zone;
+        must '../begin-source-ip';
+        description
+          "End source IP address.";
+      }
+      leaf pe-vid {
+        type uint16 {
+          range "1..4094";
+        }
+        must '../ce-vid';
+        description
+          "PE VLAN ID.";
+      }
+      leaf ce-vid {
+        type uint16 {
+          range "1..4094";
+        }
+        description
+          "CE VLAN ID.";
+      }
+      leaf end-ce-vid {
+        type uint16 {
+          range "1..4094";
+        }
+        must '../end-ce-vid';
+        description
+          "End CE VLAN ID.";
+      }
+      leaf begin-udp-dest-port {
+        type uint16 {
+          range "1..65535";
+        }
+        default "7";
+        description
+          "Start destination UDP port.";
+      }
+      leaf end-udp-dest-port {
+        type uint16 {
+          range "1..65535";
+        }
+        must '../begin-udp-dest-port';
+        description
+          "End destination UDP port.";
+      }
+      leaf begin-udp-source-port {
+        type uint16 {
+          range "1..65535";
+        }
+        default "49184";
+        description
+          "Start source UDP port.";
+      }
+      leaf end-udp-source-port {
+        type uint16 {
+          range "1..65535";
+        }
+        must '../begin-udp-source-port';
+        description
+          "End source UDP port.";
+      }
+      leaf cir {
+        type uint32 {
+          range "8..10000000";
+        }
+        description
+          "Committed information rate.(Unit:Kbps)";
+      }
+      leaf eir {
+        type uint32 {
+          range "1..10000000";
+        }
+        must '../cir';
+        description
+          "Excess information rate.(Unit:Kbps)";
+      }
+      leaf flr {
+        type uint32 {
+          range "0..100000";
+        }
+        must '../ftd and ../fdv';
+        description
+          "Frame loss ratio (0.001%).";
+      }
+      leaf ftd {
+        type uint32 {
+          range "1..10000000";
+        }
+        must '../flr and ../fdv';
+        description
+          "Frame transmission delay.(Unit:milliseconds)";
+      }
+      leaf fdv {
+        type uint32 {
+          range "1..10000000";
+        }
+        must '../ftd and ../flr';
+        description
+          "Frame delay variation.(Unit:milliseconds)";
+      }
+      leaf cir-simple-test {
+        type boolean;
+        default "false";
+        description
+          "Enable a simple CIR test.";
+      }
+      leaf traffic-policing {
+        type boolean;
+        default "false";
+        description
+          "Enable traffic policing test.";
+      }
+      leaf description {
+        type string {
+          length "1..127";
+        }
+        description
+          "Description of a tested flow.";
+      }
+      leaf increment-type {
+        type ethsvc-increment-type;
+        must "(../increment-type!='destination-mac-step') or (../increment-type='destination-mac-step' and ../begin-dest-mac)";
+        description
+          "Increment type.";
+      }
+      leaf ip-mask {
+        type inet:ipv4-address-no-zone;
+        description
+          "IPv4 mask address.";
+      }
+      leaf mac-mask {
+        type pub-type:mac-address;
+        description
+          "MAC mask address.";
+      }
+      leaf count {
+        type uint8 {
+          range "1..128";
+        }
+        description
+          "Increment count.";
+      }
+      leaf step {
+        type uint8 {
+          range "1..128";
+        }
+        description
+          "Increment step.";
+      }
+      leaf is-color-aware {
+        type boolean;
+        must "(../color-mode/priority-type and ../color-mode/green-begin-value and ../color-mode/yellow-begin-value and ../is-color-aware='true' and ../eir>=8) or ../is-color-aware!='true'";
+        default "false";
+        description
+          "Color-aware or color-blind.";
+      }
+      container color-mode {
+        when "../is-color-aware='true'";
+        description
+          "Color mode of a test flow.";
+        leaf priority-type {
+          type priority-type;
+          must '../../is-color-aware and ../green-begin-value and ../yellow-begin-value';
+          description
+            "Priority of a color-aware mode (802.1p or DSCP).";
+        }
+        leaf green-begin-value {
+          type uint8 {
+            range "0..255";
+          }
+          must '../../is-color-aware and ../priority-type and ../yellow-begin-value';
+          description
+            "Start priority value of green packets.";
+        }
+        leaf green-end-value {
+          type uint8 {
+            range "0..255";
+          }
+          must '../../is-color-aware and ../green-begin-value';
+          description
+            "End priority value of green packets.";
+        }
+        leaf yellow-begin-value {
+          type uint8 {
+            range "0..255";
+          }
+          must '../../is-color-aware and ../priority-type and ../green-begin-value';
+          description
+            "Start priority value of yellow packets.";
+        }
+        leaf yellow-end-value {
+          type uint8 {
+            range "0..255";
+          }
+          must '../../is-color-aware and ../yellow-begin-value';
+          description
+            "End priority value of yellow packets.";
+        }
+      }
+    }
+  }
+
+  grouping testflow-ids-type {
+    description
+      "Testflow ids collection.";
+    list testflow-id {
+      key "flow-id";
+      max-elements 16;
+      description
+        "Test instance referenced test flow table.";
+      leaf flow-id {
+        type leafref {
+          path "/nqa/testflows/testflow/testflow-id";
+        }
+        description
+          "Test flow ID.";
+      }
+    }
+  }
+}

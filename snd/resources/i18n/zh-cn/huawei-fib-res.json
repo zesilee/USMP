@@ -1,0 +1,104 @@
+{
+  "/huawei-fib:fib": {
+    "name": "转发信息表"
+  },
+  "/huawei-fib:fib/unicast-afs": {
+    "name": "转发信息清单"
+  },
+  "/huawei-fib:fib/unicast-afs/unicast-af": {
+    "name": "转发信息表单"
+  },
+  "/huawei-fib:fib/unicast-afs/unicast-af/vrf-name": {
+    "name": "VPN名称"
+  },
+  "/huawei-fib:fib/unicast-afs/unicast-af/af-type": {
+    "name": "协议类型"
+  },
+  "/huawei-fib:fib/unicast-afs/unicast-af/position": {
+    "name": "槽位号"
+  },
+  "/huawei-fib:fib/unicast-afs/unicast-af/routes": {
+    "name": "路由列表"
+  },
+  "/huawei-fib:fib/unicast-afs/unicast-af/routes/route": {
+    "name": "转发信息"
+  },
+  "/huawei-fib:fib/unicast-afs/unicast-af/routes/route/destination": {
+    "name": "目的地址"
+  },
+  "/huawei-fib:fib/unicast-afs/unicast-af/routes/route/mask": {
+    "name": "路由掩码"
+  },
+  "/huawei-fib:fib/unicast-afs/unicast-af/routes/route/nexthop": {
+    "name": "路由下一跳地址"
+  },
+  "/huawei-fib:fib/unicast-afs/unicast-af/routes/route/if-name": {
+    "name": "接口名称"
+  },
+  "/huawei-fib:fib/unicast-afs/unicast-af/routes/route/tunnel-id": {
+    "name": "隧道ID"
+  },
+  "/huawei-fib:fib/unicast-afs/unicast-af/routes/route/vlan-id": {
+    "name": "VLAN 值"
+  },
+  "/huawei-fib:fib/unicast-afs/unicast-af/routes/route/inner-label": {
+    "name": "内层标签"
+  },
+  "/huawei-fib:fib/unicast-afs/unicast-af/routes/route/lsp-token": {
+    "name": "LSP标记"
+  },
+  "/huawei-fib:fib/unicast-afs/unicast-af/routes/route/bak-nexthop": {
+    "name": "备下一跳"
+  },
+  "/huawei-fib:fib/unicast-afs/unicast-af/routes/route/bak-if-name": {
+    "name": "接口名称"
+  },
+  "/huawei-fib:fib/unicast-afs/unicast-af/routes/route/bak-inner-lable": {
+    "name": "内层标签"
+  },
+  "/huawei-fib:fib/unicast-afs/unicast-af/routes/route/bak-lsp-token": {
+    "name": "备下一跳LSP 标记"
+  },
+  "/huawei-fib:fib/unicast-afs/unicast-af/routes/route/bgp-nexthop": {
+    "name": "BGP下一跳"
+  },
+  "/huawei-fib:fib/unicast-afs/unicast-af/statistics": {
+    "name": "转发信息表统计"
+  },
+  "/huawei-fib:fib/unicast-afs/unicast-af/statistics/total-num": {
+    "name": "转发信息表数量"
+  },
+  "/huawei-fib:fib/route-statistics": {
+    "name": "路由统计"
+  },
+  "/huawei-fib:fib/route-statistics/ip-route-entry-counts": {
+    "name": "IP路由表数目"
+  },
+  "/huawei-fib:fib/route-statistics/ip-route-entry-counts/ip-route-entry-count": {
+    "name": "IP路由表数目"
+  },
+  "/huawei-fib:fib/route-statistics/ip-route-entry-counts/ip-route-entry-count/slot": {
+    "name": "槽位号"
+  },
+  "/huawei-fib:fib/route-statistics/ip-route-entry-counts/ip-route-entry-count/vpn-name": {
+    "name": "VPN实例名字"
+  },
+  "/huawei-fib:fib/route-statistics/ip-route-entry-counts/ip-route-entry-count/entrycount": {
+    "name": "表项数目"
+  },
+  "/huawei-fib:fib/route-statistics/ipv6-route-entry-counts": {
+    "name": "IPv6路由表数目"
+  },
+  "/huawei-fib:fib/route-statistics/ipv6-route-entry-counts/ipv6-route-entry-count": {
+    "name": "IPv6路由表数目"
+  },
+  "/huawei-fib:fib/route-statistics/ipv6-route-entry-counts/ipv6-route-entry-count/slot": {
+    "name": "槽位号"
+  },
+  "/huawei-fib:fib/route-statistics/ipv6-route-entry-counts/ipv6-route-entry-count/vpn-name": {
+    "name": "VPN实例名字"
+  },
+  "/huawei-fib:fib/route-statistics/ipv6-route-entry-counts/ipv6-route-entry-count/entry-count": {
+    "name": "表项数目"
+  }
+}

@@ -1,0 +1,428 @@
+{
+  "/huawei-cfg:cfg": {
+    "name": "Configuration Management"
+  },
+  "/huawei-cfg:cfg/autosave": {
+    "name": "Autosave Configuration"
+  },
+  "/huawei-cfg:cfg/autosave/interval-time": {
+    "name": "Interval (min)"
+  },
+  "/huawei-cfg:cfg/autosave/delay-time": {
+    "name": "Delay (min)"
+  },
+  "/huawei-cfg:cfg/autosave/cpu-limit": {
+    "name": "CPU Upper Limit"
+  },
+  "/huawei-cfg:cfg/backup-servers": {
+    "name": "Backup Servers"
+  },
+  "/huawei-cfg:cfg/backup-servers/backup-server": {
+    "name": "Backup Server"
+  },
+  "/huawei-cfg:cfg/backup-servers/backup-server/server-ip": {
+    "name": "Backup Server IP Address"
+  },
+  "/huawei-cfg:cfg/backup-servers/backup-server/vpn-instance": {
+    "name": "VPN Instance Name"
+  },
+  "/huawei-cfg:cfg/backup-servers/backup-server/transport-type": {
+    "name": "Transport Protocol Type"
+  },
+  "/huawei-cfg:cfg/backup-servers/backup-server/username": {
+    "name": "User Name for Server Access"
+  },
+  "/huawei-cfg:cfg/backup-servers/backup-server/password": {
+    "name": "Password for Server Access"
+  },
+  "/huawei-cfg:cfg/backup-servers/backup-server/path": {
+    "name": "Configuration File Backup Path"
+  },
+  "/huawei-cfg:cfg/backup-servers/backup-server/port": {
+    "name": "Port"
+  },
+  "/huawei-cfg:cfg/autosave-checkpoint": {
+    "name": "Auto Save Checkpoint"
+  },
+  "/huawei-cfg:cfg/autosave-checkpoint/start-time": {
+    "name": "Start time for auto saving checkpoint"
+  },
+  "/huawei-cfg:cfg/configuration-operation-cpu-limit": {
+    "name": "CPU Suppress on Configuration"
+  },
+  "/huawei-cfg:cfg/configuration-operation-cpu-limit/snmp-cpu-limit": {
+    "name": "CPU Usage Threshold in SNMP Access Mode"
+  },
+  "/huawei-cfg:cfg/configuration-operation-cpu-limit/snmp-switch": {
+    "name": "SNMP Access"
+  },
+  "/huawei-cfg:cfg/configuration-operation-cpu-limit/netconf-cpu-limit": {
+    "name": "CPU Usage Threshold in NETCONF Access Mode"
+  },
+  "/huawei-cfg:cfg/configuration-operation-cpu-limit/netconf-switch": {
+    "name": "NETCONF Access"
+  },
+  "/huawei-cfg:cfg/global-switch": {
+    "name": "Global Configuration of Configuration Management"
+  },
+  "/huawei-cfg:cfg/global-switch/configuration-slave-detect-switch": {
+    "name": "Automatic Verification of Configurations"
+  },
+  "/huawei-cfg:cfg/global-switch/appdata-detect-switch": {
+    "name": "Automatic Verification of Application Data"
+  },
+  "/huawei-cfg:cfg/global-switch/checkpoint-switch": {
+    "name": "The State of Configuration Rollback Checkpoint"
+  },
+  "/huawei-cfg:cfg/lock-by-users": {
+    "name": "Lock and Unlock the System Configuration by Users"
+  },
+  "/huawei-cfg:cfg/lock-by-users/lock-by-user": {
+    "name": "Lock and Unlock the System Configuration by Users"
+  },
+  "/huawei-cfg:cfg/lock-by-users/lock-by-user/lock-username": {
+    "name": "User Who Locks the Configuration"
+  },
+  "/huawei-cfg:cfg/lock-by-users/lock-by-user/lock-time": {
+    "name": "Time When the Configuration is Locked"
+  },
+  "/huawei-cfg:cfg/lock-by-users/lock-by-user/identifier": {
+    "name": "Unique ID of a Configuration Lock"
+  },
+  "/huawei-cfg:cfg/lock-by-users/lock-by-user/unlock-username": {
+    "name": "Name of a User Who Unlocks the Configuration"
+  },
+  "/huawei-cfg:cfg/lock-by-users/lock-by-user/unlock-time": {
+    "name": "Time When the Configuration is Unlocked"
+  },
+  "/huawei-cfg:cfg/startup-infos": {
+    "name": "Startup Information List"
+  },
+  "/huawei-cfg:cfg/startup-infos/startup-info": {
+    "name": "Startup Information"
+  },
+  "/huawei-cfg:cfg/startup-infos/startup-info/position": {
+    "name": "Position"
+  },
+  "/huawei-cfg:cfg/startup-infos/startup-info/configed-system-software": {
+    "name": "Cfg Current Startup Software"
+  },
+  "/huawei-cfg:cfg/startup-infos/startup-info/current-system-software": {
+    "name": "Actual Current Startup Software"
+  },
+  "/huawei-cfg:cfg/startup-infos/startup-info/next-system-software": {
+    "name": "Next Startup Software"
+  },
+  "/huawei-cfg:cfg/startup-infos/startup-info/current-cfg-file": {
+    "name": "Current Startup File"
+  },
+  "/huawei-cfg:cfg/startup-infos/startup-info/next-cfg-file": {
+    "name": "Next Startup File"
+  },
+  "/huawei-cfg:cfg/startup-infos/startup-info/current-patch-file": {
+    "name": "Current Startup Patch File"
+  },
+  "/huawei-cfg:cfg/startup-infos/startup-info/next-patch-file": {
+    "name": "Next Startup Patch File"
+  },
+  "/huawei-cfg:cfg/cfg-files": {
+    "name": "Configuration File List"
+  },
+  "/huawei-cfg:cfg/cfg-files/cfg-file": {
+    "name": "Configuration File"
+  },
+  "/huawei-cfg:cfg/cfg-files/cfg-file/filename": {
+    "name": "File Name"
+  },
+  "/huawei-cfg:cfg/cfg-files/cfg-file/size": {
+    "name": "File Size"
+  },
+  "/huawei-cfg:cfg/cfg-files/cfg-file/create-time": {
+    "name": "Creation Time"
+  },
+  "/huawei-cfg:cfg/cfg-files/cfg-file/file-current-changes": {
+    "name": "Configuration Difference List"
+  },
+  "/huawei-cfg:cfg/cfg-files/cfg-file/file-current-changes/file-current-change": {
+    "name": "Configuration Difference"
+  },
+  "/huawei-cfg:cfg/cfg-files/cfg-file/file-current-changes/file-current-change/index": {
+    "name": "Index"
+  },
+  "/huawei-cfg:cfg/cfg-files/cfg-file/file-current-changes/file-current-change/config-change": {
+    "name": "Configuration Change"
+  },
+  "/huawei-cfg:cfg/checkpoints": {
+    "name": "Configuration CheckPoints"
+  },
+  "/huawei-cfg:cfg/checkpoints/checkpoint": {
+    "name": "Configuration CheckPoint"
+  },
+  "/huawei-cfg:cfg/checkpoints/checkpoint/commit-id": {
+    "name": "Cfg CheckPoint ID"
+  },
+  "/huawei-cfg:cfg/checkpoints/checkpoint/user-label": {
+    "name": "User Label"
+  },
+  "/huawei-cfg:cfg/checkpoints/checkpoint/username": {
+    "name": "User Name"
+  },
+  "/huawei-cfg:cfg/checkpoints/checkpoint/line": {
+    "name": "Line"
+  },
+  "/huawei-cfg:cfg/checkpoints/checkpoint/client": {
+    "name": "Client"
+  },
+  "/huawei-cfg:cfg/checkpoints/checkpoint/timestamp": {
+    "name": "Timestamp"
+  },
+  "/huawei-cfg:cfg/checkpoints/checkpoint/description": {
+    "name": "Description"
+  },
+  "/huawei-cfg:cfg/checkpoints/checkpoint/current-point-changes": {
+    "name": "Current Point Changes"
+  },
+  "/huawei-cfg:cfg/checkpoints/checkpoint/current-point-changes/current-point-change": {
+    "name": "Current Point Change"
+  },
+  "/huawei-cfg:cfg/checkpoints/checkpoint/current-point-changes/current-point-change/index": {
+    "name": "Index"
+  },
+  "/huawei-cfg:cfg/checkpoints/checkpoint/current-point-changes/current-point-change/config-change": {
+    "name": "Configuration Change"
+  },
+  "/huawei-cfg:cfg/checkpoints/checkpoint/since-point-changes": {
+    "name": "CheckPoint Cfg Changes"
+  },
+  "/huawei-cfg:cfg/checkpoints/checkpoint/since-point-changes/since-point-change": {
+    "name": "CheckPoint Cfg Change"
+  },
+  "/huawei-cfg:cfg/checkpoints/checkpoint/since-point-changes/since-point-change/index": {
+    "name": "Index"
+  },
+  "/huawei-cfg:cfg/checkpoints/checkpoint/since-point-changes/since-point-change/config-change": {
+    "name": "Configuration Change"
+  },
+  "/huawei-cfg:cfg/trial-status": {
+    "name": "Trial Status"
+  },
+  "/huawei-cfg:cfg/trial-status/status": {
+    "name": "Trial Running Status"
+  },
+  "/huawei-cfg:cfg/trial-status/time-left": {
+    "name": "Trial Running Time Left"
+  },
+  "/huawei-cfg:cfg/lock-by-username": {
+    "name": "Lock and Unlock the System Configuration by Users"
+  },
+  "/huawei-cfg:cfg/lock-by-username/lock-username": {
+    "name": "User Who Locks the Configuration"
+  },
+  "/huawei-cfg:cfg/lock-by-username/lock-time": {
+    "name": "Time When the Configuration is Locked"
+  },
+  "/huawei-cfg:cfg/lock-by-username/identifier": {
+    "name": "Unique ID of a Configuration Lock"
+  },
+  "/huawei-cfg:cfg/lock-by-username/unlock-username": {
+    "name": "Name of a User Who Unlocks the Configuration"
+  },
+  "/huawei-cfg:cfg/lock-by-username/unlock-time": {
+    "name": "Time When the Configuration is Unlocked"
+  },
+  "/huawei-cfg:cfg/backup-and-recovery-states": {
+    "name": "List of Operation States"
+  },
+  "/huawei-cfg:cfg/backup-and-recovery-states/backup-and-recovery-state": {
+    "name": "Operation Status Table"
+  },
+  "/huawei-cfg:cfg/backup-and-recovery-states/backup-and-recovery-state/index": {
+    "name": "Operation ID"
+  },
+  "/huawei-cfg:cfg/backup-and-recovery-states/backup-and-recovery-state/operation-type": {
+    "name": "Operation Type"
+  },
+  "/huawei-cfg:cfg/backup-and-recovery-states/backup-and-recovery-state/state": {
+    "name": "Operation Result"
+  },
+  "/huawei-cfg:cfg/backup-and-recovery-states/backup-and-recovery-state/operate-progress": {
+    "name": "Operation Progress"
+  },
+  "/huawei-cfg:cfg/backup-and-recovery-states/backup-and-recovery-state/start-time": {
+    "name": "Operation Start Time"
+  },
+  "/huawei-cfg:cfg/backup-and-recovery-states/backup-and-recovery-state/last-time": {
+    "name": "Operation End Time"
+  },
+  "/huawei-cfg:cfg/backup-and-recovery-states/backup-and-recovery-state/filename": {
+    "name": "Configuration File Name"
+  },
+  "/huawei-cfg:cfg/backup-and-recovery-states/backup-and-recovery-state/service-type": {
+    "name": "File service type"
+  },
+  "/huawei-cfg:cfg/config-recover-results": {
+    "name": "Configuration Restoration Result List"
+  },
+  "/huawei-cfg:cfg/config-recover-results/config-recover-result": {
+    "name": "Configuration Restoration Result"
+  },
+  "/huawei-cfg:cfg/config-recover-results/config-recover-result/index": {
+    "name": "Command Index"
+  },
+  "/huawei-cfg:cfg/config-recover-results/config-recover-result/command": {
+    "name": "Configure Command"
+  },
+  "/huawei-cfg:cfg/config-recover-results/config-recover-result/view": {
+    "name": "Command View"
+  },
+  "/huawei-cfg:cfg/config-recover-results/config-recover-result/line": {
+    "name": "Command Row No"
+  },
+  "/huawei-cfg:cfg/config-recover-results/config-recover-result/reason": {
+    "name": "Cause of the Command Failure"
+  },
+  "/huawei-cfg:cfg/config-recover-results/config-recover-result/time": {
+    "name": "Command Execution Time"
+  },
+  "/huawei-cfg:set-startup": {
+    "name": "Set Startup File"
+  },
+  "/huawei-cfg:set-startup/input/filename": {
+    "name": "Configuration File Name"
+  },
+  "/huawei-cfg:rollback-by-commit-id": {
+    "name": "Rollback by Configure CheckPoint ID"
+  },
+  "/huawei-cfg:rollback-by-commit-id/input/commit-id": {
+    "name": "Configure CheckPoint ID"
+  },
+  "/huawei-cfg:rollback-by-user-label": {
+    "name": "Rollback by User Label Point ID"
+  },
+  "/huawei-cfg:rollback-by-user-label/input/commit-id": {
+    "name": "Configure CheckPoint ID"
+  },
+  "/huawei-cfg:rollback-by-user-label/input/user-label": {
+    "name": "User Label"
+  },
+  "/huawei-cfg:rollback-by-last-num": {
+    "name": "Rollback by Point Count"
+  },
+  "/huawei-cfg:rollback-by-last-num/input/checkpoint-num": {
+    "name": "The Number of CheckPoint"
+  },
+  "/huawei-cfg:rollback-by-file": {
+    "name": "Rollback by Configuration File Name"
+  },
+  "/huawei-cfg:rollback-by-file/input/filename": {
+    "name": "Configuration File Name"
+  },
+  "/huawei-cfg:delete-checkpoint-by-oldest-num": {
+    "name": "Deleted CheckPoints"
+  },
+  "/huawei-cfg:delete-checkpoint-by-oldest-num/input/checkpoint-num": {
+    "name": "The Number of Deleted CheckPoints"
+  },
+  "/huawei-cfg:set-user-label-by-commit-id": {
+    "name": "Set User Label"
+  },
+  "/huawei-cfg:set-user-label-by-commit-id/input/commit-id": {
+    "name": "Configure CheckPoint ID"
+  },
+  "/huawei-cfg:set-user-label-by-commit-id/input/user-label": {
+    "name": "User Label"
+  },
+  "/huawei-cfg:create-user-label-checkpoint": {
+    "name": "Create User Label Checkpoint"
+  },
+  "/huawei-cfg:create-user-label-checkpoint/input/user-label": {
+    "name": "User Label"
+  },
+  "/huawei-cfg:create-user-label-checkpoint/input/description": {
+    "name": "Description"
+  },
+  "/huawei-cfg:delete-user-label-checkpoint": {
+    "name": "Delete User Label Checkpoint"
+  },
+  "/huawei-cfg:delete-user-label-checkpoint/input/commit-id": {
+    "name": "Configure CheckPoint ID"
+  },
+  "/huawei-cfg:cfg-file-backup-and-recovery": {
+    "name": "Configuration Backup and Recovery"
+  },
+  "/huawei-cfg:cfg-file-backup-and-recovery/input/index": {
+    "name": "Operation ID"
+  },
+  "/huawei-cfg:cfg-file-backup-and-recovery/input/operation-type": {
+    "name": "Operation Type"
+  },
+  "/huawei-cfg:cfg-file-backup-and-recovery/input/filename": {
+    "name": "Configuration File Name"
+  },
+  "/huawei-cfg:cfg-file-backup-and-recovery/input/transport-type": {
+    "name": "Protocol Type"
+  },
+  "/huawei-cfg:cfg-file-backup-and-recovery/input/server-ip": {
+    "name": "Server IP Address"
+  },
+  "/huawei-cfg:cfg-file-backup-and-recovery/input/username": {
+    "name": "User Name"
+  },
+  "/huawei-cfg:cfg-file-backup-and-recovery/input/password": {
+    "name": "Password"
+  },
+  "/huawei-cfg:cfg-file-backup-and-recovery/input/vpn-instance": {
+    "name": "VPN Instance Name"
+  },
+  "/huawei-cfg:cfg-file-backup-and-recovery/input/use-net-manager-vpn": {
+    "name": "Whether Used Global VPN"
+  },
+  "/huawei-cfg:save": {
+    "name": "Save the Configuration"
+  },
+  "/huawei-cfg:save/input/filename": {
+    "name": "Configuration File Name"
+  },
+  "/huawei-cfg:clear-interface-config": {
+    "name": "Clear Interface Configuration"
+  },
+  "/huawei-cfg:clear-interface-config/input/interface-name": {
+    "name": "Interface Name"
+  },
+  "/rpcs/huawei-cfg:cfg/set-startup": {
+    "name": "Set Startup File"
+  },
+  "/rpcs/huawei-cfg:cfg/rollback-by-commit-id": {
+    "name": "Rollback by Configure CheckPoint ID"
+  },
+  "/rpcs/huawei-cfg:cfg/rollback-by-user-label": {
+    "name": "Rollback by User Label Point ID"
+  },
+  "/rpcs/huawei-cfg:cfg/rollback-by-last-num": {
+    "name": "Rollback by Point Count"
+  },
+  "/rpcs/huawei-cfg:cfg/rollback-by-file": {
+    "name": "Rollback by Configuration File Name"
+  },
+  "/rpcs/huawei-cfg:cfg/delete-checkpoint-by-oldest-num": {
+    "name": "Deleted CheckPoints"
+  },
+  "/rpcs/huawei-cfg:cfg/set-user-label-by-commit-id": {
+    "name": "Set User Label"
+  },
+  "/rpcs/huawei-cfg:cfg/create-user-label-checkpoint": {
+    "name": "Create User Label Checkpoint"
+  },
+  "/rpcs/huawei-cfg:cfg/delete-user-label-checkpoint": {
+    "name": "Delete User Label Checkpoint"
+  },
+  "/rpcs/huawei-cfg:cfg/cfg-file-backup-and-recovery": {
+    "name": "Configuration Backup and Recovery"
+  },
+  "/rpcs/huawei-cfg:cfg/save": {
+    "name": "Save the Configuration"
+  },
+  "/rpcs/huawei-cfg:cfg/clear-interface-config": {
+    "name": "Clear Interface Configuration"
+  }
+}

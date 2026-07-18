@@ -1,0 +1,245 @@
+{
+  "/huawei-mstp:mstp": {
+    "name": "MSTP"
+  },
+  "/huawei-mstp:mstp/global": {
+    "name": "全局配置"
+  },
+  "/huawei-mstp:mstp/global/bpdu-filter": {
+    "name": "BPDU过滤默认配置"
+  },
+  "/huawei-mstp:mstp/global/edge-port": {
+    "name": "边缘端口默认配置"
+  },
+  "/huawei-mstp:mstp/global/bridge-address": {
+    "name": "模拟根桥MAC地址"
+  },
+  "/huawei-mstp:mstp/global/transmit-limit": {
+    "name": "端口发送报文个数全局配置"
+  },
+  "/huawei-mstp:mstp/global/vstp-enable": {
+    "name": "V-STP使能"
+  },
+  "/huawei-mstp:mstp/default-process": {
+    "name": "MSTP默认进程"
+  },
+  "/huawei-mstp:mstp/default-process/mode": {
+    "name": "MSTP进程的工作模式"
+  },
+  "/huawei-mstp:mstp/default-process/enable": {
+    "name": "使能配置"
+  },
+  "/huawei-mstp:mstp/default-process/bpdu-protection": {
+    "name": "Bpdu保护功能"
+  },
+  "/huawei-mstp:mstp/default-process/max-hops": {
+    "name": "最大跳数值"
+  },
+  "/huawei-mstp:mstp/default-process/path-cost-standard": {
+    "name": "路径开销计算方法"
+  },
+  "/huawei-mstp:mstp/default-process/tc-protection": {
+    "name": "TC保护功能"
+  },
+  "/huawei-mstp:mstp/default-process/tc-protection-threshold": {
+    "name": "TC保护阈值"
+  },
+  "/huawei-mstp:mstp/default-process/tc-protection-interval": {
+    "name": "TC保护间隔"
+  },
+  "/huawei-mstp:mstp/default-process/timer-factor": {
+    "name": "HelloTime倍数"
+  },
+  "/huawei-mstp:mstp/default-process/region-name": {
+    "name": "MST域域名配置"
+  },
+  "/huawei-mstp:mstp/default-process/revision-level": {
+    "name": "MST域修订级别"
+  },
+  "/huawei-mstp:mstp/default-process/forward-delay": {
+    "name": "Forward Delay时间"
+  },
+  "/huawei-mstp:mstp/default-process/hello-time": {
+    "name": "Hello Time时间"
+  },
+  "/huawei-mstp:mstp/default-process/max-age": {
+    "name": "Max Age时间"
+  },
+  "/huawei-mstp:mstp/default-process/default-instance": {
+    "name": "默认进程实例配置"
+  },
+  "/huawei-mstp:mstp/default-process/default-instance/priority": {
+    "name": "指定实例桥优先级"
+  },
+  "/huawei-mstp:mstp/default-process/default-instance/root-type": {
+    "name": "指定实例桥根类型"
+  },
+  "/huawei-mstp:mstp/default-process/default-instance/vlan-mapping": {
+    "name": "VLAN列表"
+  },
+  "/huawei-mstp:mstp/default-process/instances": {
+    "name": "进程实例配置列表"
+  },
+  "/huawei-mstp:mstp/default-process/instances/instance": {
+    "name": "进程实例配置"
+  },
+  "/huawei-mstp:mstp/default-process/instances/instance/id": {
+    "name": "实例ID"
+  },
+  "/huawei-mstp:mstp/default-process/instances/instance/priority": {
+    "name": "指定实例桥优先级"
+  },
+  "/huawei-mstp:mstp/default-process/instances/instance/root-type": {
+    "name": "指定实例桥根类型"
+  },
+  "/huawei-mstp:mstp/default-process/instances/instance/vlan-mapping": {
+    "name": "VLAN列表"
+  },
+  "/huawei-mstp:mstp/processs": {
+    "name": "MSTP进程列表"
+  },
+  "/huawei-mstp:mstp/processs/process": {
+    "name": "MSTP进程"
+  },
+  "/huawei-mstp:mstp/processs/process/id": {
+    "name": "进程ID"
+  },
+  "/huawei-mstp:mstp/processs/process/mode": {
+    "name": "MSTP进程的工作模式"
+  },
+  "/huawei-mstp:mstp/processs/process/enable": {
+    "name": "使能配置"
+  },
+  "/huawei-mstp:mstp/processs/process/bpdu-protection": {
+    "name": "Bpdu保护功能"
+  },
+  "/huawei-mstp:mstp/processs/process/max-hops": {
+    "name": "最大跳数值"
+  },
+  "/huawei-mstp:mstp/processs/process/path-cost-standard": {
+    "name": "路径开销计算方法"
+  },
+  "/huawei-mstp:mstp/processs/process/tc-protection": {
+    "name": "TC保护功能"
+  },
+  "/huawei-mstp:mstp/processs/process/tc-protection-threshold": {
+    "name": "TC保护阈值"
+  },
+  "/huawei-mstp:mstp/processs/process/tc-protection-interval": {
+    "name": "TC保护间隔"
+  },
+  "/huawei-mstp:mstp/processs/process/timer-factor": {
+    "name": "HelloTime倍数"
+  },
+  "/huawei-mstp:mstp/processs/process/region-name": {
+    "name": "MST域域名配置"
+  },
+  "/huawei-mstp:mstp/processs/process/revision-level": {
+    "name": "MST域修订级别"
+  },
+  "/huawei-mstp:mstp/processs/process/forward-delay": {
+    "name": "Forward Delay时间"
+  },
+  "/huawei-mstp:mstp/processs/process/hello-time": {
+    "name": "Hello Time时间"
+  },
+  "/huawei-mstp:mstp/processs/process/max-age": {
+    "name": "Max Age时间"
+  },
+  "/huawei-mstp:mstp/processs/process/default-instance": {
+    "name": "默认进程实例配置"
+  },
+  "/huawei-mstp:mstp/processs/process/default-instance/priority": {
+    "name": "指定实例桥优先级"
+  },
+  "/huawei-mstp:mstp/processs/process/default-instance/root-type": {
+    "name": "指定实例桥根类型"
+  },
+  "/huawei-mstp:mstp/processs/process/default-instance/vlan-mapping": {
+    "name": "VLAN列表"
+  },
+  "/huawei-mstp:mstp/processs/process/instances": {
+    "name": "进程实例配置列表"
+  },
+  "/huawei-mstp:mstp/processs/process/instances/instance": {
+    "name": "进程实例配置"
+  },
+  "/huawei-mstp:mstp/processs/process/instances/instance/id": {
+    "name": "实例ID"
+  },
+  "/huawei-mstp:mstp/processs/process/instances/instance/priority": {
+    "name": "指定实例桥优先级"
+  },
+  "/huawei-mstp:mstp/processs/process/instances/instance/root-type": {
+    "name": "指定实例桥根类型"
+  },
+  "/huawei-mstp:mstp/processs/process/instances/instance/vlan-mapping": {
+    "name": "VLAN列表"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/main-interface/l2-attribute/huawei-mstp:mstp-attribute": {
+    "name": "二层口MSTP属性配置"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/main-interface/l2-attribute/huawei-mstp:mstp-attribute/enable": {
+    "name": "端口使能配置"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/main-interface/l2-attribute/huawei-mstp:mstp-attribute/loop-protection": {
+    "name": "环路保护功能"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/main-interface/l2-attribute/huawei-mstp:mstp-attribute/no-agreement-check": {
+    "name": "接口快速迁移机制"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/main-interface/l2-attribute/huawei-mstp:mstp-attribute/point-to-point": {
+    "name": "点到点链路功能"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/main-interface/l2-attribute/huawei-mstp:mstp-attribute/root-protection": {
+    "name": "根桥保护功能"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/main-interface/l2-attribute/huawei-mstp:mstp-attribute/transmit-limit": {
+    "name": "Hello Time内BPDU最大发送数目"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/main-interface/l2-attribute/huawei-mstp:mstp-attribute/tc-restriction": {
+    "name": "使能TC/TCN报文抑制"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/main-interface/l2-attribute/huawei-mstp:mstp-attribute/bpdu-filter": {
+    "name": "BPDU过滤功能"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/main-interface/l2-attribute/huawei-mstp:mstp-attribute/edge-port": {
+    "name": "边缘端口"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/main-interface/l2-attribute/huawei-mstp:mstp-attribute/vpls-sub-interface": {
+    "name": "主接口收到TC报文后通告其邦定vpls的子接口"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/main-interface/huawei-mstp:mstp-attribute": {
+    "name": "三层口MSTP属性配置"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/main-interface/huawei-mstp:mstp-attribute/enable": {
+    "name": "使能配置"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/main-interface/huawei-mstp:mstp-attribute/loop-protection": {
+    "name": "环路保护功能"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/main-interface/huawei-mstp:mstp-attribute/no-agreement-check": {
+    "name": "接口快速迁移机制"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/main-interface/huawei-mstp:mstp-attribute/point-to-point": {
+    "name": "点到点链路功能"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/main-interface/huawei-mstp:mstp-attribute/root-protection": {
+    "name": "根桥保护功能"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/main-interface/huawei-mstp:mstp-attribute/transmit-limit": {
+    "name": "Hello Time内BPDU最大发送数目"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/main-interface/huawei-mstp:mstp-attribute/tc-restriction": {
+    "name": "使能TC/TCN报文抑制"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/main-interface/huawei-mstp:mstp-attribute/bpdu-filter": {
+    "name": "BPDU过滤功能"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/main-interface/huawei-mstp:mstp-attribute/edge-port": {
+    "name": "边缘端口"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/main-interface/huawei-mstp:mstp-attribute/vpls-sub-interface": {
+    "name": "主接口收到TC报文后通告其邦定vpls的子接口"
+  }
+}

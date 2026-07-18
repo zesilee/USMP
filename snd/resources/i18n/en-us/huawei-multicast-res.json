@@ -1,0 +1,176 @@
+{
+  "/huawei-multicast:mc": {
+    "name": "Multicast Basic Service Package"
+  },
+  "/huawei-multicast:multicast/global": {
+    "name": "Multicast Global Configuration List"
+  },
+  "/huawei-multicast:multicast/global/ipv4": {
+    "name": "Address Family"
+  },
+  "/huawei-multicast:multicast/global/ipv4/vlanif-extranet-enable": {
+    "name": "Multicast VLANIF Extranet Enable"
+  },
+  "/huawei-multicast:multicast/global/ipv4/qinq-extranet-enable": {
+    "name": "Multicast QinQ Extranet Enable"
+  },
+  "/huawei-multicast:multicast/global/ipv4/bas-igmp-extranet-enable": {
+    "name": "Multicast BAS IGMP Extranet Enable"
+  },
+  "/huawei-multicast:multicast/global/ipv4/vbdif-extranet-enable": {
+    "name": "Multicast VBDIF Extranet Enable"
+  },
+  "/huawei-multicast:multicast/invalid-packet-max-count": {
+    "name": "Max Invalid Packet List"
+  },
+  "/huawei-multicast:multicast/invalid-packet-max-count/ipv4": {
+    "name": "Maximum Number of Invalid IPv4 Packets"
+  },
+  "/huawei-multicast:multicast/invalid-packet-max-count/ipv4/igmp-packets": {
+    "name": "Max Invalid IGMP Packets"
+  },
+  "/huawei-multicast:multicast/invalid-packet-max-count/ipv4/mvpn-packets": {
+    "name": "Max Invalid MVPN Packets"
+  },
+  "/huawei-multicast:multicast/invalid-packet-max-count/ipv4/msdp-packets": {
+    "name": "Max Invalid MSDP Packets"
+  },
+  "/huawei-multicast:multicast/invalid-packet-max-count/ipv4/pim-packets": {
+    "name": "Max Invalid PIM Packets"
+  },
+  "/huawei-multicast:multicast/invalid-packet-max-count/ipv4/igmp-snooping-packets": {
+    "name": "Max Invalid L2 Multicast Pkt"
+  },
+  "/huawei-multicast:multicast/invalid-packet-max-count/ipv6": {
+    "name": "Maximum Number of Invalid IPv6 Packets"
+  },
+  "/huawei-multicast:multicast/invalid-packet-max-count/ipv6/mld-packets": {
+    "name": "Max Invalid IGMP Packets"
+  },
+  "/huawei-multicast:multicast/invalid-packet-max-count/ipv6/pim-packets": {
+    "name": "Max Invalid PIM Packets"
+  },
+  "/huawei-multicast:multicast/invalid-packet-max-count/ipv6/mld-snooping-packets": {
+    "name": "Max Invalid L2 Multicast Pkt"
+  },
+  "/huawei-multicast:multicast/ssm-mapping-policys": {
+    "name": "Rule Configuration List"
+  },
+  "/huawei-multicast:multicast/ssm-mapping-policys/ssm-mapping-policy": {
+    "name": "SSM Mapping Policy Configuration"
+  },
+  "/huawei-multicast:multicast/ssm-mapping-policys/ssm-mapping-policy/address-family": {
+    "name": "Address Family"
+  },
+  "/huawei-multicast:multicast/ssm-mapping-policys/ssm-mapping-policy/policy-name": {
+    "name": "Policy Name"
+  },
+  "/huawei-multicast:multicast/ssm-mapping-policys/ssm-mapping-policy/groups": {
+    "name": "Rule Configuration List"
+  },
+  "/huawei-multicast:multicast/ssm-mapping-policys/ssm-mapping-policy/groups/group": {
+    "name": "Rule Configuration"
+  },
+  "/huawei-multicast:multicast/ssm-mapping-policys/ssm-mapping-policy/groups/group/group-address": {
+    "name": "Multicast Group Address"
+  },
+  "/huawei-multicast:multicast/ssm-mapping-policys/ssm-mapping-policy/groups/group/mask-length": {
+    "name": "Group Address Mask Length"
+  },
+  "/huawei-multicast:multicast/ssm-mapping-policys/ssm-mapping-policy/groups/group/source-address": {
+    "name": "Source Address"
+  },
+  "/huawei-multicast:multicast/trap-parameter": {
+    "name": "Multicast Trap Configuration"
+  },
+  "/huawei-multicast:multicast/trap-parameter/pim-notification-interval": {
+    "name": "Multicast Trap Configuration"
+  },
+  "/huawei-multicast:multicast/trap-parameter/pim-notification-interval/interface-election-dr": {
+    "name": "DR Election Trap Interval"
+  },
+  "/huawei-multicast:multicast/trap-parameter/pim-notification-interval/invalid-join-prune": {
+    "name": "Invalid JP Trap Interval"
+  },
+  "/huawei-multicast:multicast/trap-parameter/pim-notification-interval/invalid-register": {
+    "name": "Invalid Register Trap Interval"
+  },
+  "/huawei-multicast:multicast/trap-parameter/pim-notification-interval/neighbor-loss": {
+    "name": "Neighbor Loss Trap Interval"
+  },
+  "/huawei-multicast:multicast/trap-parameter/pim-notification-interval/new-neighbor": {
+    "name": "New Neighbor Trap Interval"
+  },
+  "/huawei-multicast:multicast/trap-parameter/pim-notification-interval/rp-mapping-change": {
+    "name": "RP Change Trap Interval"
+  },
+  "/huawei-multicast:multicast/global-outgoing-interface-limit-counts": {
+    "name": "Multicast Outgoing Interfaces Information List"
+  },
+  "/huawei-multicast:multicast/global-outgoing-interface-limit-counts/global-outgoing-interface-limit-count": {
+    "name": "Multicast Outgoing Interfaces Information"
+  },
+  "/huawei-multicast:multicast/global-outgoing-interface-limit-counts/global-outgoing-interface-limit-count/address-family": {
+    "name": "Address Family"
+  },
+  "/huawei-multicast:multicast/global-outgoing-interface-limit-counts/global-outgoing-interface-limit-count/limit-type": {
+    "name": "Limit Type"
+  },
+  "/huawei-multicast:multicast/global-outgoing-interface-limit-counts/global-outgoing-interface-limit-count/limit-value": {
+    "name": "Limit Value"
+  },
+  "/huawei-multicast:multicast/global-outgoing-interface-limit-counts/global-outgoing-interface-limit-count/upper-threshold-value": {
+    "name": "Upper Threshold Value"
+  },
+  "/huawei-multicast:multicast/global-outgoing-interface-limit-counts/global-outgoing-interface-limit-count/lower-threshold-value": {
+    "name": "Lower Threshold"
+  },
+  "/huawei-multicast:multicast/global-outgoing-interface-limit-counts/global-outgoing-interface-limit-count/total-outgoing-interface-count": {
+    "name": "Total Outgoing Interface Count"
+  },
+  "/huawei-multicast:multicast/global-outgoing-interface-limit-counts/global-outgoing-interface-limit-count/star-group-outgoing-interface-count": {
+    "name": "Star Group Outgoing Interface Count"
+  },
+  "/huawei-multicast:multicast/global-outgoing-interface-limit-counts/global-outgoing-interface-limit-count/source-group-outgoing-interface-count": {
+    "name": "Source Group Outgoing Interface Count"
+  },
+  "/huawei-multicast:multicast/session-car": {
+    "name": "Mcast Session CAR"
+  },
+  "/huawei-multicast:multicast/session-car/pim": {
+    "name": "PIM IPv4 Session CAR"
+  },
+  "/huawei-multicast:multicast/session-car/pim/enable": {
+    "name": "Enable"
+  },
+  "/huawei-multicast:multicast/session-car/pim/cir-interval": {
+    "name": "CIR Interval"
+  },
+  "/huawei-multicast:multicast/session-car/pim/cbs-interval": {
+    "name": "CBS Interval"
+  },
+  "/huawei-multicast:multicast/session-car/pim/pir-interval": {
+    "name": "PIR Interval"
+  },
+  "/huawei-multicast:multicast/session-car/pim/pbs-interval": {
+    "name": "PBS Interval"
+  },
+  "/huawei-multicast:multicast/session-car/pim-ipv6": {
+    "name": "PIM IPv6 Session CAR"
+  },
+  "/huawei-multicast:multicast/session-car/pim-ipv6/enable": {
+    "name": "PIM IPv6 Session CAR"
+  },
+  "/huawei-multicast:multicast/session-car/pim-ipv6/cir-interval": {
+    "name": "CIR Interval"
+  },
+  "/huawei-multicast:multicast/session-car/pim-ipv6/cbs-interval": {
+    "name": "CBS Interval"
+  },
+  "/huawei-multicast:multicast/session-car/pim-ipv6/pir-interval": {
+    "name": "PIR Interval"
+  },
+  "/huawei-multicast:multicast/session-car/pim-ipv6/pbs-interval": {
+    "name": "PBS Interval"
+  }
+}

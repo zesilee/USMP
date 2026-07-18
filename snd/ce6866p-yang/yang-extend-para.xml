@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<paraConfig>
+    <extendParas yangPath="/l3vpn/instances/instance" >
+        <extendPara fieldName="fdn" fieldType="String" />
+        <extendPara fieldName="status" fieldType="Integer" />    		
+    </extendParas>
+	<extendParas yangPath="/l3vpn" >
+        <extendPara fieldName="fdn" fieldType="String" />  		
+    </extendParas>
+</paraConfig>

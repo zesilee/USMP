@@ -1,0 +1,482 @@
+{
+  "/huawei-dcb:dcb": {
+    "name": "数据中心网桥"
+  },
+  "/huawei-dcb:dcb/global": {
+    "name": "配置dcb全局使能"
+  },
+  "/huawei-dcb:dcb/global/pfc-enable": {
+    "name": "使能pfc函数"
+  },
+  "/huawei-dcb:dcb/global/deadlock-interval": {
+    "name": "死锁检测周期精度和死锁恢复周期精度"
+  },
+  "/huawei-dcb:dcb/global/detect-time": {
+    "name": "侦测到死锁时间"
+  },
+  "/huawei-dcb:dcb/global/recovery-time": {
+    "name": "锁定恢复时间"
+  },
+  "/huawei-dcb:dcb/pfc-profiles": {
+    "name": "配置基于优先级的流控配置文件列表"
+  },
+  "/huawei-dcb:dcb/pfc-profiles/pfc-profile": {
+    "name": "基于优先级的流控制配置文件列表"
+  },
+  "/huawei-dcb:dcb/pfc-profiles/pfc-profile/name": {
+    "name": "基于优先级的流控制配置文件的名称"
+  },
+  "/huawei-dcb:dcb/pfc-profiles/pfc-profile/pfc-prioritys": {
+    "name": "PFC优先级列表"
+  },
+  "/huawei-dcb:dcb/pfc-profiles/pfc-profile/pfc-prioritys/pfc-priority": {
+    "name": "配置PFC优先级和死锁参数"
+  },
+  "/huawei-dcb:dcb/pfc-profiles/pfc-profile/pfc-prioritys/pfc-priority/priority": {
+    "name": "明确规划pfc的优先次序"
+  },
+  "/huawei-dcb:dcb/pfc-profiles/pfc-profile/pfc-prioritys/pfc-priority/turn-off-threshold": {
+    "name": "死锁关闭pfc阈值"
+  },
+  "/huawei-dcb:dcb/pfc-profiles/pfc-profile/pfc-prioritys/pfc-priority/error-down-threshold": {
+    "name": "PFC的死锁error-down阈值"
+  },
+  "/huawei-dcb:dcb/pfc-profiles/pfc-profile/pfc-prioritys/pfc-priority/detect-times": {
+    "name": "死锁检测周期"
+  },
+  "/huawei-dcb:dcb/pfc-profiles/pfc-profile/pfc-prioritys/pfc-priority/recovery-times": {
+    "name": "死锁恢复周期"
+  },
+  "/huawei-dcb:dcb/pfc-profiles/pfc-profile/pfc": {
+    "name": "配置pfc优先级"
+  },
+  "/huawei-dcb:dcb/pfc-profiles/pfc-profile/pfc/priority": {
+    "name": "明确规划pfc的优先次序"
+  },
+  "/huawei-dcb:dcb/pfc-profiles/pfc-profile/deadlocks": {
+    "name": "死锁列表"
+  },
+  "/huawei-dcb:dcb/pfc-profiles/pfc-profile/deadlocks/deadlock": {
+    "name": "配置优先级的pfc死锁参数"
+  },
+  "/huawei-dcb:dcb/pfc-profiles/pfc-profile/deadlocks/deadlock/priority": {
+    "name": "指定pfc死锁检测和恢复的优先级"
+  },
+  "/huawei-dcb:dcb/pfc-profiles/pfc-profile/deadlocks/deadlock/threshold": {
+    "name": "死锁关闭pfc阈值"
+  },
+  "/huawei-dcb:dcb/pfc-profiles/pfc-profile/deadlocks/deadlock/error-down-threshold": {
+    "name": "PFC的死锁error-down阈值"
+  },
+  "/huawei-dcb:dcb/ets-profiles": {
+    "name": "增强型传输选择配置文件列表"
+  },
+  "/huawei-dcb:dcb/ets-profiles/ets-profile": {
+    "name": "配置增强型传输选择配置文件"
+  },
+  "/huawei-dcb:dcb/ets-profiles/ets-profile/name": {
+    "name": "增强型传输选择配置文件的名称"
+  },
+  "/huawei-dcb:dcb/ets-profiles/ets-profile/prioritys": {
+    "name": "配置优先级调度和整形信息"
+  },
+  "/huawei-dcb:dcb/ets-profiles/ets-profile/prioritys/schedules": {
+    "name": "优先级调度信息列表"
+  },
+  "/huawei-dcb:dcb/ets-profiles/ets-profile/prioritys/schedules/schedule": {
+    "name": "配置优先级"
+  },
+  "/huawei-dcb:dcb/ets-profiles/ets-profile/prioritys/schedules/schedule/priority": {
+    "name": "优先级"
+  },
+  "/huawei-dcb:dcb/ets-profiles/ets-profile/prioritys/schedules/schedule/mode": {
+    "name": "队列计划模式"
+  },
+  "/huawei-dcb:dcb/ets-profiles/ets-profile/prioritys/schedules/schedule/weight": {
+    "name": "调度策略权重"
+  },
+  "/huawei-dcb:dcb/ets-profiles/ets-profile/prioritys/shapers": {
+    "name": "优先级整形信息列表"
+  },
+  "/huawei-dcb:dcb/ets-profiles/ets-profile/prioritys/shapers/shaper": {
+    "name": "配置优先级整形信息"
+  },
+  "/huawei-dcb:dcb/ets-profiles/ets-profile/prioritys/shapers/shaper/priority": {
+    "name": "优先级"
+  },
+  "/huawei-dcb:dcb/ets-profiles/ets-profile/prioritys/shapers/shaper/cir": {
+    "name": "承诺信息速率"
+  },
+  "/huawei-dcb:dcb/ets-profiles/ets-profile/prioritys/shapers/shaper/pir": {
+    "name": "峰值信息速率"
+  },
+  "/huawei-dcb:dcb/ets-profiles/ets-profile/prioritys/shapers/shaper/cbs": {
+    "name": "提交突发大小"
+  },
+  "/huawei-dcb:dcb/ets-profiles/ets-profile/prioritys/shapers/shaper/pbs": {
+    "name": "峰值脉冲大小"
+  },
+  "/huawei-dcb:dcb/ets-profiles/ets-profile/priority-groups": {
+    "name": "优先级组配置列表"
+  },
+  "/huawei-dcb:dcb/ets-profiles/ets-profile/priority-groups/priority-group": {
+    "name": "配置优先级组"
+  },
+  "/huawei-dcb:dcb/ets-profiles/ets-profile/priority-groups/priority-group/group-number": {
+    "name": "组号"
+  },
+  "/huawei-dcb:dcb/ets-profiles/ets-profile/priority-groups/priority-group/renumber": {
+    "name": "配置优先级组重新编号值"
+  },
+  "/huawei-dcb:dcb/ets-profiles/ets-profile/priority-groups/priority-group/priority": {
+    "name": "配置当前优先级组的优先级"
+  },
+  "/huawei-dcb:dcb/ets-profiles/ets-profile/priority-groups/priority-group/schedule": {
+    "name": "配置优先级组调度信息"
+  },
+  "/huawei-dcb:dcb/ets-profiles/ets-profile/priority-groups/priority-group/schedule/mode": {
+    "name": "组计划模式"
+  },
+  "/huawei-dcb:dcb/ets-profiles/ets-profile/priority-groups/priority-group/schedule/weight": {
+    "name": "调度策略权重"
+  },
+  "/huawei-dcb:dcb/ets-profiles/ets-profile/priority-groups/priority-group/shaper": {
+    "name": "配置优先级组成型信息"
+  },
+  "/huawei-dcb:dcb/ets-profiles/ets-profile/priority-groups/priority-group/shaper/cir": {
+    "name": "信息速率"
+  },
+  "/huawei-dcb:dcb/ets-profiles/ets-profile/priority-groups/priority-group/shaper/pir": {
+    "name": "峰值信息速率"
+  },
+  "/huawei-dcb:dcb/ets-profiles/ets-profile/priority-groups/priority-group/shaper/cbs": {
+    "name": "提交突发大小"
+  },
+  "/huawei-dcb:dcb/ets-profiles/ets-profile/priority-groups/priority-group/shaper/pbs": {
+    "name": "峰值脉冲大小"
+  },
+  "/huawei-dcb:dcb/app-profiles": {
+    "name": "应用程序配置文件列表"
+  },
+  "/huawei-dcb:dcb/app-profiles/app-profile": {
+    "name": "配置应用程序配置文件"
+  },
+  "/huawei-dcb:dcb/app-profiles/app-profile/name": {
+    "name": "应用程序配置文件的名称"
+  },
+  "/huawei-dcb:dcb/app-profiles/app-profile/storage-apps": {
+    "name": "存储应用程序列表"
+  },
+  "/huawei-dcb:dcb/app-profiles/app-profile/storage-apps/storage-app": {
+    "name": "配置存储应用程序"
+  },
+  "/huawei-dcb:dcb/app-profiles/app-profile/storage-apps/storage-app/app-name": {
+    "name": "应用程序名称"
+  },
+  "/huawei-dcb:dcb/app-profiles/app-profile/storage-apps/storage-app/priority": {
+    "name": "优先级"
+  },
+  "/huawei-dcb:dcb/app-profiles/app-profile/layer2-apps": {
+    "name": "第二层应用程序列表"
+  },
+  "/huawei-dcb:dcb/app-profiles/app-profile/layer2-apps/layer2-app": {
+    "name": "配置第 2 层应用程序"
+  },
+  "/huawei-dcb:dcb/app-profiles/app-profile/layer2-apps/layer2-app/ethtype": {
+    "name": "设置以太网十六进制值"
+  },
+  "/huawei-dcb:dcb/app-profiles/app-profile/layer2-apps/layer2-app/priority": {
+    "name": "优先级"
+  },
+  "/huawei-dcb:dcb/app-profiles/app-profile/layer3-apps": {
+    "name": "端口列表"
+  },
+  "/huawei-dcb:dcb/app-profiles/app-profile/layer3-apps/layer3-app": {
+    "name": "配置tcp或udp端口值"
+  },
+  "/huawei-dcb:dcb/app-profiles/app-profile/layer3-apps/layer3-app/app-name": {
+    "name": "第3层应用程序名称"
+  },
+  "/huawei-dcb:dcb/app-profiles/app-profile/layer3-apps/layer3-app/port": {
+    "name": "Tcp或者Udp端口"
+  },
+  "/huawei-dcb:dcb/app-profiles/app-profile/layer3-apps/layer3-app/priority": {
+    "name": "优先级"
+  },
+  "/huawei-dcb:reset-pfc-statistics": {
+    "name": "清除 dcb pfc 统计信息"
+  },
+  "/huawei-dcb:reset-pfc-statistics/input/interface-name": {
+    "name": "接口名称"
+  },
+  "/huawei-dcb:reset-fail-reasons": {
+    "name": "清除dcb失败的原因"
+  },
+  "/huawei-dcb:reset-fail-reasons/input/interface-name": {
+    "name": "接口名称"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb": {
+    "name": "Ifm接口模型"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/pfc": {
+    "name": "在接口上配置PFC"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/pfc/pfc-enable": {
+    "name": "在接口上配置PFC"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/pfc/pfc-enable/profile-name": {
+    "name": "PFC模板名称"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/pfc/pfc-enable/mode": {
+    "name": "PFC使能模式"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/pfc/profile-name": {
+    "name": "PFC模板名称"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/pfc/mode": {
+    "name": "PFC使能模式"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/pfc/thresholds": {
+    "name": "接口上PFC阈值列表"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/pfc/thresholds/threshold": {
+    "name": "PFC阈值"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/pfc/thresholds/threshold/priority": {
+    "name": "优先级"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/pfc/thresholds/threshold/guaranteed": {
+    "name": "Guaranteed缓存空间"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/pfc/thresholds/threshold/hdrm": {
+    "name": "Headroom缓存空间"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/pfc/thresholds/threshold/on-off-modes": {
+    "name": "指定xon/xoff参数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/pfc/thresholds/threshold/on-off-modes/static": {
+    "name": "静态门限"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/pfc/thresholds/threshold/on-off-modes/static/xon": {
+    "name": "指定xon值"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/pfc/thresholds/threshold/on-off-modes/static/xoff": {
+    "name": "指定xoff值"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/pfc/thresholds/threshold/on-off-modes/dynamic": {
+    "name": "Dynamic选项"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/pfc/thresholds/threshold/on-off-modes/dynamic/xon-alpha": {
+    "name": "指定xon alpha值"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/pfc/thresholds/threshold/on-off-modes/dynamic/xoff-alpha": {
+    "name": "指定xoff alpha值"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/pfc/statisticss": {
+    "name": "PFC统计信息列表"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/pfc/statisticss/statistics": {
+    "name": "PFC统计信息"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/pfc/statisticss/statistics/priority": {
+    "name": "优先级"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/pfc/statisticss/statistics/received-pause-pkts": {
+    "name": "收到的pause报文"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/pfc/statisticss/statistics/transmitted-pause-pkts": {
+    "name": "发送的pause报文"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/pfc/statisticss/statistics/received-rate": {
+    "name": "接收的PFC反压帧速率"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/pfc/statisticss/statistics/transmitted-rate": {
+    "name": "发送的PFC反压帧速率"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/pfc/statisticss/statistics/deadlock-detect-count": {
+    "name": "死锁检测次数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/pfc/statisticss/statistics/deadlock-recovery-count": {
+    "name": "死锁恢复次数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/pfc/pfc-parameters": {
+    "name": "PFC相关参数配置"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/pfc/pfc-parameters/pfc-parameter": {
+    "name": "PFC相关参数配置"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/pfc/pfc-parameters/pfc-parameter/priority": {
+    "name": "优先级队列"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/pfc/pfc-parameters/pfc-parameter/guaranteed": {
+    "name": "Guaranteed缓存空间大小"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/pfc/pfc-parameters/pfc-parameter/hdrm": {
+    "name": "Headroom缓存空间大小"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/pfc/pfc-parameters/pfc-parameter/xoff": {
+    "name": "PFC反压帧触发静态门限值"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/pfc/pfc-parameters/pfc-parameter/xoff-alpha": {
+    "name": "PFC反压帧触发动态门限值"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/pfc/pfc-parameters/pfc-parameter/xon-offset": {
+    "name": "Xon值相对Xoff值的偏移量"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/pfc/pfc-parameters/pfc-parameter/xon-lowest": {
+    "name": "Xon保护值"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/pfc/pfc-parameters/pfc-parameter/xon": {
+    "name": "PFC反压帧停止静态门限值"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/pfc/pfc-parameters/pfc-parameter/xon-alpha": {
+    "name": "PFC反压帧停止动态门限值"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/ets": {
+    "name": "设置DCB ets模板"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/ets/profile-name": {
+    "name": "Ets模板名称"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/app": {
+    "name": "设置DCB应用程序模板"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/app/profile-name": {
+    "name": "应用模板名称"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/app/enable": {
+    "name": "使能"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/version": {
+    "name": "DCB版本"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/version/version": {
+    "name": "设置DCB版本"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/negotiation-status": {
+    "name": "DCB协商状态"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/negotiation-status/pfc-profile-name": {
+    "name": "PFC模板名称"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/negotiation-status/pfc-status": {
+    "name": "PFC协商状态"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/negotiation-status/ets-profile-name": {
+    "name": "Ets模板名称"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/negotiation-status/ets-status": {
+    "name": "Ets协商状态"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/negotiation-status/app-profile-name": {
+    "name": "应用模板名称"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/failed-reasons": {
+    "name": "DCB失败原因列表"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/failed-reasons/failed-reason": {
+    "name": "DCB失败原因"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/failed-reasons/failed-reason/reason-index": {
+    "name": "原因索引"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/failed-reasons/failed-reason/reason": {
+    "name": "失败原因"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/local-peer-record": {
+    "name": "DCB本端和对端记录"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/local-peer-record/pfc-record": {
+    "name": "PFC记录"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/local-peer-record/pfc-record/local-pfc": {
+    "name": "本地PFC"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/local-peer-record/pfc-record/remote-pfc": {
+    "name": "远端PFC"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/local-peer-record/ets-records": {
+    "name": "DCB ets本端和对端记录列表"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/local-peer-record/ets-records/ets-record": {
+    "name": "DCB ets本端和对端记录的运行数据"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/local-peer-record/ets-records/ets-record/priority-group-number": {
+    "name": "优先级组编号"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/local-peer-record/ets-records/ets-record/local-priority": {
+    "name": "本端优先级组优先级列表"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/local-peer-record/ets-records/ets-record/remote-priority": {
+    "name": "远端优先级组优先级列表"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/local-peer-record/ets-records/ets-record/local-weight": {
+    "name": "本端优先级组权重"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/local-peer-record/ets-records/ets-record/remote-weight": {
+    "name": "远端优先级组权重"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/local-peer-record/app-records": {
+    "name": "DCB应用本端和对端记录列表"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/local-peer-record/app-records/app-record": {
+    "name": "DCB应用本端和对端记录运行数据"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/local-peer-record/app-records/app-record/app-name": {
+    "name": "应用名称"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/local-peer-record/app-records/app-record/local-priority": {
+    "name": "应用的本端优先级"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/local-peer-record/app-records/app-record/remote-priority": {
+    "name": "应用的远端优先级"
+  },
+  "/huawei-devm:devm/mpu-boards/mpu-board/huawei-dcb:dcb": {
+    "name": "DCB参数模型"
+  },
+  "/huawei-devm:devm/mpu-boards/mpu-board/huawei-dcb:dcb/headroom-pool": {
+    "name": "配置净空池大小"
+  },
+  "/huawei-devm:devm/mpu-boards/mpu-board/huawei-dcb:dcb/headroom-pool/pool": {
+    "name": "资源池大小"
+  },
+  "/huawei-devm:devm/mpu-boards/mpu-board/huawei-dcb:dcb/deadlock-recovery-behavior": {
+    "name": "配置死锁恢复期间的恢复行为"
+  },
+  "/huawei-devm:devm/mpu-boards/mpu-board/huawei-dcb:dcb/deadlock-recovery-behavior/behavior": {
+    "name": "行为类型"
+  },
+  "/huawei-devm:devm/mpu-boards/mpu-board/huawei-dcb:dcb/pfc-mapping-type": {
+    "name": "配置pfc反压映射类型"
+  },
+  "/huawei-devm:devm/mpu-boards/mpu-board/huawei-dcb:dcb/pfc-mapping-type/type": {
+    "name": "设置是否根据DSCP或8021p优先级执行pfc反压"
+  },
+  "/huawei-devm:devm/lpu-boards/lpu-board/huawei-dcb:dcb": {
+    "name": "DCB参数模型"
+  },
+  "/huawei-devm:devm/lpu-boards/lpu-board/huawei-dcb:dcb/headroom-pool": {
+    "name": "配置handroom池大小"
+  },
+  "/huawei-devm:devm/lpu-boards/lpu-board/huawei-dcb:dcb/headroom-pool/pool": {
+    "name": "资源池大小"
+  },
+  "/huawei-devm:devm/lpu-boards/lpu-board/huawei-dcb:dcb/deadlock-recovery-behavior": {
+    "name": "配置死锁恢复期间的恢复行为"
+  },
+  "/huawei-devm:devm/lpu-boards/lpu-board/huawei-dcb:dcb/deadlock-recovery-behavior/behavior": {
+    "name": "行为类型设置"
+  },
+  "/huawei-devm:devm/lpu-boards/lpu-board/huawei-dcb:dcb/pfc-mapping-type": {
+    "name": "配置pfc反压映射类型"
+  },
+  "/huawei-devm:devm/lpu-boards/lpu-board/huawei-dcb:dcb/pfc-mapping-type/type": {
+    "name": "设置是否根据DSCP或8021p优先级执行pfc反压"
+  },
+  "/rpcs/huawei-dcb:dcb/reset-pfc-statistics": {
+    "name": "清除 dcb pfc 统计信息"
+  },
+  "/rpcs/huawei-dcb:dcb/reset-fail-reasons": {
+    "name": "清除dcb失败的原因"
+  }
+}

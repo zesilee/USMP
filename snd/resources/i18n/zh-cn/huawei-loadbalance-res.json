@@ -1,0 +1,236 @@
+{
+  "/huawei-loadbalance:loadbalance": {
+    "name": "负载均衡"
+  },
+  "/huawei-loadbalance:loadbalance/global-attribute": {
+    "name": "全局属性"
+  },
+  "/huawei-loadbalance:loadbalance/global-attribute/dynamic-enable": {
+    "name": "动态负载分担功能"
+  },
+  "/huawei-loadbalance:loadbalance/global-attribute/rail-group-enable": {
+    "name": "开启Rail Group算法"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile": {
+    "name": "ECMP负载均衡"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/ecmp-attribute": {
+    "name": "ECMP属性"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/ecmp-attribute/gtp-teid": {
+    "name": "GTP TEID"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/ip-hash": {
+    "name": "IP哈希"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/ip-hash/sip": {
+    "name": "源IP"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/ip-hash/dip": {
+    "name": "目的IP"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/ip-hash/vlan": {
+    "name": "虚拟局域网"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/ip-hash/l4sport": {
+    "name": "源端口"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/ip-hash/l4dport": {
+    "name": "目的端口"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/ip-hash/protocol": {
+    "name": "协议号"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/ip-hash/src-interface": {
+    "name": "源接口"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/ip-hash/flowlabel": {
+    "name": "流标签"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/ip-hash/dscp": {
+    "name": "DSCP"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/ip-tunnel-hash": {
+    "name": "IP隧道哈希"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/ip-tunnel-hash/inner-src-ip": {
+    "name": "内层报文源IP"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/ip-tunnel-hash/inner-dst-ip": {
+    "name": "内层目的IP"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/ip-tunnel-hash/inner-l4-dport": {
+    "name": "内层传输层目的端口"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/ip-tunnel-hash/inner-l4-sport": {
+    "name": "内层传输层源端口"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/ip-tunnel-hash/inner-protocol": {
+    "name": "内层传输层协议"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/ip-tunnel-hash/src-interface": {
+    "name": "源接口"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/ip-tunnel-hash/src-mac": {
+    "name": "源MAC"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/ip-tunnel-hash/dst-mac": {
+    "name": "目的MAC"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/ip-tunnel-hash/include-erspan": {
+    "name": "Include ERSPAN"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/vxlan-hash": {
+    "name": "Vxlan哈希"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/vxlan-hash/inner-src-ip": {
+    "name": "内层报文源IP"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/vxlan-hash/inner-dst-ip": {
+    "name": "内层报文目的IP"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/vxlan-hash/inner-l4-dport": {
+    "name": "内层报文四层目的端口号"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/vxlan-hash/inner-l4-sport": {
+    "name": "内层报文四层源端口"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/vxlan-hash/inner-protocol": {
+    "name": "IPV4协议"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/vxlan-hash/src-interface": {
+    "name": "源接口"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/vxlan-hash/vni": {
+    "name": "VNI"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/load-balance-ecmp-hashmode": {
+    "name": "ECMP哈希模式"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/load-balance-ecmp-hashmode/hash-mode": {
+    "name": "哈希模式"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/load-balance-ecmp-hashmode/overlay-hash-mode": {
+    "name": "Overlay哈希模式"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/load-balance-ecmp-hashmode/underlay-hash-mode": {
+    "name": "Underlay哈希模式"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/load-balance-ecmp-universal": {
+    "name": "负载均衡Hash算法偏移"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/load-balance-ecmp-universal/universal-id": {
+    "name": "负载均衡Hash偏移值"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/load-balance-ecmp-universal/underlay-universal-id": {
+    "name": "Underlay负载均衡Hash偏移值"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/load-balance-ecmp-universal/overlay-universal-id": {
+    "name": "Overlay负载均衡Hash偏移值"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/load-balance-ecmp-seed": {
+    "name": "ECMP起始哈希值"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/load-balance-ecmp-seed/seed-data": {
+    "name": "哈希值"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/load-balance-ecmp-seed/underlay-seed-data": {
+    "name": "Underlay哈希值"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/load-balance-ecmp-seed/overlay-seed-data": {
+    "name": "Overlay哈希值"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/ecmp-local-preference": {
+    "name": "本框优先转发"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/ecmp-local-preference/enable": {
+    "name": "本框优先转发"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/dynamic-ecmp-mode": {
+    "name": "ECMP的动态负载分担模式"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/dynamic-ecmp-mode/mode": {
+    "name": "ECMP的动态负载分担模式"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/dynamic-ecmp-mode/flowlet-gap-time": {
+    "name": "ECMP的动态负载分担默认模式"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/local-preference-enhanced": {
+    "name": "本芯片优先转发"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/local-preference-enhanced/enable": {
+    "name": "本芯片优先转发"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/vxlan-overlay-local-preference": {
+    "name": "VXLAN隧道混合负载分担"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/vxlan-overlay-local-preference/local-preference-mode": {
+    "name": "本地负载分担模式"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/ecmp-symmetry": {
+    "name": "同源同宿"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/ecmp-symmetry/enable": {
+    "name": "同源同宿Hash算法"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-enable": {
+    "name": "ECMP哈希一致性功能使能"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-enable/is-enable": {
+    "name": "ECMP的哈希一致性功能"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-stateful-enhanced": {
+    "name": "ECMP的哈希一致性增强功能"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-stateful-enhanced/is-enable": {
+    "name": "ECMP的哈希一致性增强功能"
+  },
+  "/huawei-loadbalance:loadbalance/ip-load-balance": {
+    "name": "IP报文负载均衡"
+  },
+  "/huawei-loadbalance:loadbalance/ip-load-balance/mode": {
+    "name": "模式"
+  },
+  "/huawei-loadbalance:loadbalance/ip-load-balance/src-ip": {
+    "name": "源IP"
+  },
+  "/huawei-loadbalance:loadbalance/ip-load-balance/dst-ip": {
+    "name": "目的IP"
+  },
+  "/huawei-loadbalance:loadbalance/ip-load-balance/src-port": {
+    "name": "源端口"
+  },
+  "/huawei-loadbalance:loadbalance/ip-load-balance/dst-port": {
+    "name": "目的端口"
+  },
+  "/huawei-loadbalance:loadbalance/ipv6-load-balance": {
+    "name": "IPv6负载均衡"
+  },
+  "/huawei-loadbalance:loadbalance/ipv6-load-balance/mode": {
+    "name": "模式"
+  },
+  "/huawei-loadbalance:loadbalance/ipv6-load-balance/src-ip": {
+    "name": "源IP"
+  },
+  "/huawei-loadbalance:loadbalance/ipv6-load-balance/dst-ip": {
+    "name": "目的IP"
+  },
+  "/huawei-loadbalance:loadbalance/ipv6-load-balance/src-port": {
+    "name": "源端口"
+  },
+  "/huawei-loadbalance:loadbalance/ipv6-load-balance/dst-port": {
+    "name": "目的端口"
+  },
+  "/huawei-loadbalance:loadbalance/ip-load-balance-reverse-route-enable": {
+    "name": "IP反向路由的负载分担功能"
+  },
+  "/huawei-loadbalance:loadbalance/ip-load-balance-reverse-route-enable/enable": {
+    "name": "使能IP反向路由的负载分担功能"
+  },
+  "/huawei-loadbalance:loadbalance/ipv6-load-balance-reverse-route-enable": {
+    "name": "Ipv6反向路由的负载分担功能"
+  },
+  "/huawei-loadbalance:loadbalance/ipv6-load-balance-reverse-route-enable/enable": {
+    "name": "使能IPv6反向路由的负载分担功能"
+  }
+}

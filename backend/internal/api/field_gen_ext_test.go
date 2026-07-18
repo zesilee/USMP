@@ -32,7 +32,7 @@ func TestNestedSchemaCarriesExtensionsFromRealIFM(t *testing.T) {
 	if !class.SupportFilter {
 		t.Error("class SupportFilter = false, want true")
 	}
-	if want := []string{"update", "delete"}; !reflect.DeepEqual(class.OperationExclude, want) {
+	if want := []string{"update"}; !reflect.DeepEqual(class.OperationExclude, want) { // CE 基线 class 仅 exclude update
 		t.Errorf("class OperationExclude = %v, want %v", class.OperationExclude, want)
 	}
 

@@ -1,0 +1,89 @@
+{
+  "/huawei-grpc:hw-grpc": {
+    "name": "GRPC"
+  },
+  "/huawei-grpc:grpc/service": {
+    "name": "GRPC服务端"
+  },
+  "/huawei-grpc:grpc/service/server-enable": {
+    "name": "使能gRPC服务"
+  },
+  "/huawei-grpc:grpc/service/source-address": {
+    "name": "源IP地址"
+  },
+  "/huawei-grpc:grpc/service/vpn-name": {
+    "name": "VPN名称"
+  },
+  "/huawei-grpc:grpc/service/server-port": {
+    "name": "侦听端口号"
+  },
+  "/huawei-grpc:grpc/service/idle-timeout": {
+    "name": "空闲超时时间"
+  },
+  "/huawei-grpc:grpc/service/acl-number-or-name": {
+    "name": "ACL名称"
+  },
+  "/huawei-grpc:grpc/service/ssl-policy": {
+    "name": "SSL策略名称"
+  },
+  "/huawei-grpc:grpc/service/ssl-policy-peer": {
+    "name": "对服务端进行SSL校验"
+  },
+  "/huawei-grpc:grpc/service-ipv6": {
+    "name": "IPv6 gRPC服务端"
+  },
+  "/huawei-grpc:grpc/service-ipv6/server-enable": {
+    "name": "使能IPv6 gRPC服务"
+  },
+  "/huawei-grpc:grpc/service-ipv6/source-address": {
+    "name": "源IP地址"
+  },
+  "/huawei-grpc:grpc/service-ipv6/vpn-name": {
+    "name": "VPN名称"
+  },
+  "/huawei-grpc:grpc/service-ipv6/server-port": {
+    "name": "侦听端口号"
+  },
+  "/huawei-grpc:grpc/service-ipv6/idle-timeout": {
+    "name": "空闲超时时间"
+  },
+  "/huawei-grpc:grpc/service-ipv6/acl-number-or-name": {
+    "name": "ACL6名称"
+  },
+  "/huawei-grpc:grpc/service-ipv6/ssl-policy": {
+    "name": "SSL策略名称"
+  },
+  "/huawei-grpc:grpc/service-ipv6/ssl-policy-peer": {
+    "name": "对服务端进行SSL校验"
+  },
+  "/huawei-grpc:grpc/client": {
+    "name": "GRPC客户端"
+  },
+  "/huawei-grpc:grpc/client/ssl-policy": {
+    "name": "SSL策略名称"
+  },
+  "/huawei-grpc:grpc/client/ssl-verify-cn-name": {
+    "name": "SSL策略的CommonName"
+  },
+  "/huawei-grpc:grpc/client/ssl-policy-peer": {
+    "name": "对服务端进行SSL校验"
+  },
+  "/huawei-grpc:grpc/session-car": {
+    "name": "会话限速"
+  },
+  "/huawei-grpc:grpc/session-car/enable": {
+    "name": "使能"
+  },
+  "/huawei-grpc:grpc/session-car/cir-interval": {
+    "name": "承诺信息速率"
+  },
+  "/huawei-grpc:grpc/session-car/cbs-interval": {
+    "name": "承诺突发量"
+  },
+  "/huawei-grpc:grpc/session-car/pir-interval": {
+    "name": "峰值信息速率"
+  },
+  "/huawei-grpc:grpc/session-car/pbs-interval": {
+    "name": "峰值突发量"
+  }
+}

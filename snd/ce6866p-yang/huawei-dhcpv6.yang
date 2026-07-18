@@ -1,0 +1,941 @@
+/*
+Copyright (C) 2020 Huawei Technologies Co., Ltd. All rights reserved.
+*/
+module huawei-dhcpv6 {
+  namespace "urn:huawei:yang:huawei-dhcpv6";
+  prefix dhcpv6;
+  import huawei-extension {
+    prefix ext;
+  }
+  import ietf-inet-types {
+    prefix inet;
+  }
+  import huawei-ifm {
+    prefix ifm;
+  }
+  import huawei-ifm-trunk {
+    prefix ifm-trunk;
+  }
+  import huawei-network-instance {
+    prefix ni;
+  }
+  import huawei-pub-type {
+    prefix pub-type;
+  }
+  import huawei-ethernet {
+    prefix ethernet;
+  }
+  include huawei-dhcpv6-relay;
+  include huawei-dhcpv6-server;
+  include huawei-dhcpv6-client;
+  organization
+    "Huawei Technologies Co., Ltd.";
+  contact
+    "Huawei Industrial Base
+     Bantian, Longgang
+     Shenzhen 518129
+     People's Republic of China
+     Website: http://www.huawei.com
+     Email: support@huawei.com";
+  description
+    "Dynamic Host Configuration Protocol for IPv6.";
+  revision 2020-04-29 {
+    description
+      "Add must condition.";
+    reference
+      "Huawei private.";
+  }
+  revision 2020-04-17 {
+    description
+      "Add node.";
+    reference
+      "Huawei private.";
+  }
+  revision 2020-04-10 {
+    description
+      "Add session-car.";
+    reference
+      "Huawei private.";
+  }
+  revision 2020-03-09 {
+    description
+      "Modify description.";
+    reference
+      "Huawei private.";
+  }
+  revision 2020-02-25 {
+    description
+      "Initial revision.";
+    reference
+      "Huawei private.";
+  }
+  ext:task-name "dhcp"; 
+  typedef dhcpv6-duid {
+    type enumeration {
+      enum "invalid" {
+        value 0;
+        description
+          "-";
+      }
+      enum "llt" {
+        value 1;
+        description
+          "Link-layer address plus time.";
+      }
+      enum "ll" {
+        value 2;
+        description
+          "Link-layer address.";
+      }
+      enum "user-defined" {
+        value 3;
+        description
+          "User-defined.";
+      }
+    }
+    description
+      "The type of DHCPv6 DUID.";
+  }
+  typedef remote-id-format {
+    type enumeration {
+      enum "default" {
+        value 0;
+        description
+          "Default format.";
+      }
+      enum "user-defined" {
+        value 1;
+        description
+          "User-defined format.";
+      }
+    }
+    description
+      "The type of DHCPv6 remote-id format.";
+  }
+  container dhcpv6 {
+    description
+      "Configure a Dynamic Host Configuration Protocol for IPv6.";
+    container common {
+      description
+        "Configure basic attributes.";
+      container global {
+        description
+          "Configure DHCPv6 global attributes.";
+        leaf enable {
+          type boolean;
+          default "true";
+          description
+            "Enable/disable Dynamic Host Configuration Protocol for IPv6.";
+        }
+        leaf remote-id-format {
+          type remote-id-format;
+          default "default";
+          description
+            "Remote-id format.";
+        }
+        leaf remote-id-user-define-text {
+          when "../remote-id-format='user-defined'";
+          type string {
+            length "0..253";
+            pattern '([^\t]{0,})';
+          }
+          description
+            "DHCPv6 remote-id format defined by users. The value can be DUID, sysname, portname, porttype, iftype, MAC, slot, subslot, port, sVLAN, or cVLAN. For example, you can configure '%duid %portname:%sVLAN.%cVLAN'. The maximum length of the remote-id option is 251. ";
+        }
+        leaf interface-id-format {
+          type remote-id-format;
+          default "default";
+          description
+            "Configure the Interface-ID format in DHCPv6 packets. ";
+        }
+        leaf interface-id-user-define-text {
+          when "../interface-id-format='user-defined'";
+          type string {
+            length "0..253";
+            pattern "([^        ]{0,})";
+          }
+          description
+            "Specify a user-defined format as the Interface-ID format.";
+        }
+        leaf duid-format {
+          type dhcpv6-duid;
+          default "invalid";
+          description
+            "DHCPv6 unique identifier format.";
+        }
+        leaf duid-string {
+          when "../duid-format='user-defined'";
+          type string {
+            length "8..28";
+            pattern '([^\t]{0,})';
+          }
+          must "../duid-string";
+          description
+            "DUID string, in hexadecimal notation.";
+        }
+        leaf rate-limit-enable {
+          type boolean;
+          default "true";
+          description
+            "Enable/disable DHCPv6 packets rate limit.";
+        }
+        leaf rate-limit {
+          type uint32 {
+            range "1..2000";
+          }
+          units "pps";
+          default "512";
+          description
+            "DHCPv6 packets rate limit value.";
+        }
+        leaf source-ip-adaptive {
+          type boolean;
+          default "false";
+          description
+            "Enable/disable DHCPv6 source-ip-address format adaptive.";
+        }
+        leaf aging-time {
+          type uint32 {
+            range "1..1440";
+          }
+          units "min";
+          default "30";
+          description
+            "DHCPv6 session CAR aging time.";
+        }
+        leaf active-duid {
+          type string {
+            length "8..28";
+            pattern '([^\t]{0,})';
+          }
+          config false;
+          description
+            "DUID string, in hexadecimal notation.";
+        }
+        leaf packet-rate {
+          type uint16 {
+            range "0..400";
+          }
+          default "0";
+          description
+            "Specify the rate threshold for DHCPv6 messages.";
+        }
+        leaf drop-alarm-enable {
+          type boolean;
+          default "false";
+          description
+            "Enable/disable the alarm function for discarding DHCPv6 messages when the rate of DHCPv6 messages exceeds the limit.";
+        }
+        leaf drop-alarm-threshold {
+          type uint16 {
+            range "1..1000";
+          }
+          must "../drop-alarm-enable='true'";
+          default "100";
+          description
+            "Specify the alarm threshold for the number of DHCPv6 messages discarded when the rate of DHCPv6 messages exceeds the rate limit.";
+        }
+      }
+      container session-car {
+        must "pir-value >= cir-value and pbs-value >= cbs-value";
+        description
+          "Configure session CAR.";
+        leaf enable {
+          type boolean;
+          default "true";
+          description
+            "Enable/disable session CAR.";
+        }
+        leaf cir-value{
+          type uint32 {
+            range "0..1000000";
+          }
+          units "kbit/s";
+          default "256";
+          description
+            "Specify the session CAR CIR value.";
+        }
+        leaf cbs-value {
+          type uint32 {
+            range "0..9000000";
+          }
+          units "Byte";
+          default "32000";
+          description
+            "Specify the session car cbs value.";
+        }
+        leaf pir-value {
+          type uint32 {
+            range "0..1000000";
+          }
+          units "kbit/s";
+          default "512";
+          description
+          "Specify the session CAR PIR value.";
+        }
+        leaf pbs-value {
+          type uint32 {
+            range "0..9000000";
+          }
+          units "Byte";
+          default "64000";
+          description
+          "Specify the session CAR PBS value.";
+        }
+      }
+      container ipsec-peers {
+        description
+          "List of DHCPv6 IPsecs.";
+        list ipsec-peer {
+          key "peer-address vpn-name";
+          description
+            "Configure DHCPv6 IPsec attributes.";
+          leaf peer-address {
+            type inet:ipv6-address-no-zone;
+            description
+              "Peer address.";
+          }
+          leaf vpn-name {
+            type leafref {
+              path "/ni:network-instance/ni:instances/ni:instance/ni:name";
+            }
+            description
+              "VPN name.";
+          }
+          leaf sa-name {
+            type string {
+              length "1..15";
+            }
+            mandatory true;
+            description
+              "SA name.";
+          }
+        }
+      }
+    }
+    container relay {
+      description
+        "Configure DHCPv6 Relay.";
+      uses dhcpv6:dhcpv6-relay-type;
+    }
+    container server {
+      description
+        "Configure DHCPv6 server.";
+      uses dhcpv6:dhcpv6-server-type;
+    }
+  }
+  augment "/ifm:ifm/ifm:interfaces/ifm:interface" {
+    description
+      "Extend interface attribute.";
+    container dhcpv6-if {
+      description
+        "Configure DHCPv6 attributes on an interface.";
+      leaf is-enable {
+        type boolean;
+        default "false";
+        description
+          "Enable/disable DHCPv6 relay on an interface.";
+      }
+      container option {
+        description
+          "Configure DHCPv6 option attributes.";
+        leaf insert-interface-id {
+          type boolean;
+          default "true";
+          description
+            "Enable/disable to insert the interface-id option.";
+        }
+        leaf insert-remote-id {
+          type boolean;
+          default "false";
+          description
+            "Enable/disable to insert the remote-id option.";
+        }
+        leaf insert-option79 {
+          type boolean;
+          default "false";
+          description
+            "Enable/disable inserting the Option79 field into DHCPv6 messages.";
+        }
+        leaf insert-vss {
+          type boolean;
+          default "false";
+          description
+            "Enable/disable to insert the OPTION_VSS flag.";
+        }
+        leaf insert-client-lla {
+          type boolean;
+          default "false";
+          description
+            "Enable/disable to insert client link-layer address.";
+        }
+      }
+    }
+    container dhcpv6-relay-attribute {
+      must "(not(../ethernet:ethernet/ethernet:main-interface/ethernet:l2-attribute)) and
+            (not(../ethernet:ethernet/ethernet:l2-sub-interface)) and
+            (not(../ifm-trunk:trunk/ifm-trunk:members/ifm-trunk:member[ifm-trunk:name=current()/../ifm:name])) and
+            (not((../ifm:type = 'Virtual-Ethernet' or ../ifm:type = 'Global-VE' or ../ifm:type = 'PW-VE') and (../ifm:class = 'main-interface')))";
+      description
+        "Configure DHCPv6 relay attributes on an interface.";
+      leaf source-address {
+        type inet:ipv6-address-no-zone;
+        description
+          "Source address.";
+      }
+      leaf link-address {
+        type inet:ipv6-address-no-zone;
+        description
+          "Link address.";
+      }
+      leaf strict-check {
+        type boolean;
+        default "false";
+        description
+          "Enable/disable strict check on interfaces.";
+      }
+      leaf server-group-name {
+        type leafref {
+          path "/dhcpv6:dhcpv6/dhcpv6:relay/dhcpv6:server-groups/dhcpv6:server-group/dhcpv6:name";
+        }
+        description
+          "DHCPv6 relay server group name.";
+      }
+      leaf source-interface {
+        type leafref {
+          path "/ifm:ifm/ifm:interfaces/ifm:interface/ifm:name";
+        }
+        description
+          "Configure the IPv6 address of an interface as the source IPv6 address of packets.";
+      }
+      leaf pd-route {
+        type boolean;
+        default "false";
+        description
+          "Enable/disable a DHCPv6 relay agent to forward routing information of DHCPv6 prefix delegation terminals.";
+      }
+      container destination-addresses {
+        description
+          "List of DHCPv6 relay destination addresses.";
+        list destination-address {
+          key "ipv6-address";
+          max-elements "8";
+          description
+            "Configure the DHCPv6 relay destination address.";
+          leaf ipv6-address {
+            type inet:ipv6-address-no-zone;
+            description
+              "Destination address.";
+          }
+          choice net-type {
+            default "vpn-instance";
+            description
+              "Choice of vpn or public net.";
+            case vpn-instance {
+              description
+                "Case vpn instance.";
+              leaf vpn-instance {
+                type leafref {
+                  path "/ni:network-instance/ni:instances/ni:instance/ni:name";
+                }
+                description
+                  "VPN instance name.";
+              }
+            }
+            case public-net {
+              description
+                "Case public net.";
+              leaf public-net {
+                type boolean;
+                default "false";
+                description
+                  "Enable/disable that the destination VPN instance of the DHCPv6 messages is the public VPN instance.";
+              }
+            }
+          }
+        }
+      }
+      container destination-ifs {
+        description
+          "List of DHCPv6 relay destination interfaces.";
+        list destination-if {
+          key "if-name";
+          max-elements "8";
+          description
+            "Configure DHCPv6 relay destination interface.";
+          leaf if-name {
+            type leafref {
+              path "/ifm:ifm/ifm:interfaces/ifm:interface/ifm:name";
+            }
+            must "not(((../../../../ifm:type = 'Virtual-Ethernet') or (../../../../ifm:type = 'Global-VE')) and (../../../../ifm:class = 'main-interface'))";
+            description
+              "Destination interface name.";
+          }
+        }
+      }
+      container option {
+        ext:hidden ui;
+        description
+          "Configure DHCPv6 relay option attributes.";
+        choice interface-id-mode {
+          description
+            "Configure the interface-id-mode.";
+          case cn-telecom {
+            description
+              "CN-telecom interface-id mode.";
+            leaf cn-telecom-text {
+              type empty;
+              description
+                "No text.";
+            }
+          }
+          case tr-101 {
+            description
+              "TR-101 interface-id mode.";
+            leaf tr-101-text {
+              type empty;
+              description
+                "No text.";
+            }
+          }
+          case user-defined {
+            description
+              "User-defined interface-id mode.";
+            leaf interface-id-text {
+              type string {
+                length "1..255";
+                pattern '([^\t]{0,})';
+              }
+              description
+                "DHCPv6 interface-id string defined by users.";
+            }
+          }
+        }
+        leaf insert-remote-id {
+          type boolean;
+          default "false";
+          description
+            "Enable/disable to insert the remote-id option.";
+        }
+        choice remote-id-mode {
+          when "insert-remote-id='true'";
+          default default-format;
+          description
+            "Configure the remote-id mode.";
+          case default-format {
+            description
+              "Default remote-id mode.";
+            leaf default-format-text {
+              type empty;
+              description
+                "No text.";
+            }
+          }
+          case user-defined {
+            description
+              "User-defined remote-id mode.";
+            leaf remote-id-text {
+              type string {
+                length "1..255";
+                pattern '([^\t]{0,})';
+              }
+              description
+                "DHCPv6 remote-id string defined by users.";
+            }
+          }
+        }
+        leaf insert-subscriber-id {
+          type boolean;
+          default "false";
+          description
+            "Enable/disable to insert the subscriber-id option.";
+        }
+        leaf insert-prefix-exclude {
+          type boolean;
+          default "false";
+          description
+            "Enable/disable to insert exclude prefix option.";
+        }
+      }
+      container rebuild-option {
+        ext:hidden ui;
+        description
+          "Configure DHCPv6 relay option rebuild attributes.";
+        leaf rebuild-interface-id {
+          type empty;
+          description
+            "Rebuild the interface-id option.";
+        }
+        leaf rebuild-remote-id {
+          type empty;
+          description
+            "Rebuild the remote-id option.";
+        }
+      }
+      container access-limit-setting {
+        ext:hidden ui;
+        description
+          "Configure the maximum number of access users on an interface.";
+        leaf access-limit {
+          type uint32 {
+            range "0..65536";
+          }
+          description
+            "Maximum number of access users on an interface.";
+        }
+        leaf access-vlan-limit {
+          type uint32 {
+            range "0..65536";
+          }
+          must "(../../../ethernet:ethernet/ethernet:l3-sub-interface/ethernet:dot1q-termination) or (../../../ethernet:ethernet/ethernet:l3-sub-interface/ethernet:qinq-termination) or (../../../ethernet:ethernet/ethernet:l3-sub-interface/ethernet:vlan-type-dot1q)";
+          description
+            "Maximum number of access users in any VLAN.";
+        }
+      }
+      container destination-vpn-addresses {
+        description
+          "List of DHCPv6 relay server attributes.";
+        list destination-vpn-address {
+          key "address vpn-name";
+          max-elements "8";
+          description
+            "Configure DHCPv6 relay server VPN.";
+          leaf address {
+            type inet:ipv6-address-no-zone;
+            description
+              "DHCPv6 relay server VPN address.";
+          }
+          leaf vpn-name {
+            type leafref {
+              path "/ni:network-instance/ni:instances/ni:instance/ni:name";
+            }
+            description
+              "DHCPv6 relay server VPN name.";
+          }
+        }
+      }
+      container pd-route-track-vrrp {
+        ext:hidden ui;
+        description
+          "Configure DHCPv6 relay PD routes track VRRP.";
+        leaf degrade-cost {
+          type uint32 {
+            range "1..4294967295";
+          }
+          description
+            "Cost value to be adjusted for DHCPv6 relay PD route.";
+        }
+      }
+      container option18 {
+        ext:hidden ui;
+        description
+          "Configure option 18 field in a DHCPv6 message.";
+        leaf insert-enable {
+          type boolean;
+          default "false";
+          description
+            "Enable/disable the device to insert the Option 18 field to a DHCPv6 message.";
+        }
+        leaf rebuild-enable {
+          type boolean;
+          default "false";
+          description
+            "Enable/disable the device to forcibly insert the Option 18 field to a DHCPv6 message.";
+        }
+        container formats {
+          description
+            "List of the format of the Option 18 field in a DHCPv6 message.";
+          list format {
+            key "vlan ce-vlan";
+            description
+              "Configure the format of the Option 18 field in a DHCPv6 message.";
+            leaf vlan {
+              type uint16 {
+                range "0..4094";
+              }
+              description
+                "Specify the outer VLAN ID. Zero is no VLAN.";
+            }
+            leaf ce-vlan {
+              type uint16 {
+                range "0..4096";
+              }
+              description
+                "Specify the inner VLAN ID.Zero is no ce VLAN.";
+            }
+            leaf user-defined {
+              type string {
+                length "1..251";
+              }
+              description
+                "Indicate the user-defined format of the Option 18 field.";
+            }
+          }
+        }
+      }
+      container option37 {
+        ext:hidden ui;
+        description
+          "Configure option 37 field in a DHCPv6 message.";
+        leaf insert-enable {
+          type boolean;
+          default "false";
+          description
+            "Enable/disable the device to insert the Option 37 field to a DHCPv6 message.";
+        }
+        leaf rebuild-enable {
+          type boolean;
+          default "false";
+          description
+            "Enable/disable the device to forcibly insert the Option 37 field to a DHCPv6 message.";
+        }
+        container formats {
+          description
+            "List of the format of the Option 37 field in a DHCPv6 message.";
+          list format {
+            key "vlan ce-vlan";
+            description
+              "Configure the format of the Option 37 field in a DHCPv6 message.";
+            leaf vlan {
+              type uint16 {
+                range "0..4094";
+              }
+              description
+                "Specify the outer VLAN ID. Zero is no VLAN.";
+            }
+            leaf ce-vlan {
+              type uint16 {
+                range "0..4096";
+              }
+              description
+                "Specify the inner VLAN ID.Zero is no ce VLAN.";
+            }
+            leaf user-defined {
+              type string {
+                length "1..251";
+              }
+              description
+                "Indicate the user-defined format of the Option 37 field.";
+            }
+          }
+        }
+      }
+      container access-vlans {
+        config false;
+        ext:hidden ui;
+        description
+          "List of maximum number of access users that send VLAN tagged packets.";
+        list access-vlan {
+          key "access-limit pe-vlan ce-vlan";
+          config false;
+          max-elements "8";
+          description
+            "Operational state of the maximum number of access users that send VLAN tagged packets.";
+          leaf access-limit {
+            type uint32 {
+              range "0..65536";
+            }
+            config false;
+            description
+              "Maximum number of access users.";
+          }
+          leaf pe-vlan {
+            type uint16;
+            config false;
+            description
+              "PE VLAN ID in QinQ.";
+          }
+          leaf ce-vlan {
+            type boolean;
+            config false;
+            description
+              "Permit packets with any inner VLAN IDs.";
+          }
+          leaf vlan-batch {
+            type pub-type:vlan-range;
+            config false;
+            description
+              "VLAN list.";
+          }
+        }
+      }
+      container packet-statistics {
+        config false;
+        ext:hidden ui;
+        description
+          "Statistics of DHCPv6 relay interface packet.";
+        leaf solicit-received-count {
+          type uint32;
+          default "0";
+          config false;
+          description
+            "Solicit packets received from clients.";
+        }
+        leaf request-received-count {
+          type uint32;
+          default "0";
+          config false;
+          description
+            "Request packets received from clients.";
+        }
+        leaf confirm-received-count {
+          type uint32;
+          default "0";
+          config false;
+          description
+            "Confirm packets received from clients.";
+        }
+        leaf renew-received-count {
+          type uint32;
+          default "0";
+          config false;
+          description
+            "Renew packets received from clients.";
+        }
+        leaf rebind-received-count {
+          type uint32;
+          default "0";
+          config false;
+          description
+            "Rebind packets received from clients.";
+        }
+        leaf decline-received-count {
+          type uint32;
+          default "0";
+          config false;
+          description
+            "Decline packets received from clients.";
+        }
+        leaf release-received-count {
+          type uint32;
+          default "0";
+          config false;
+          description
+            "Release packets received from clients.";
+        }
+        leaf inform-received-count {
+          type uint32;
+          default "0";
+          config false;
+          description
+            "Information-request packets received from clients.";
+        }
+        leaf relay-forward-received-count {
+          type uint32;
+          default "0";
+          config false;
+          description
+            "Relay-forward packets received from relay agents or servers.";
+        }
+        leaf relay-reply-received-count {
+          type uint32;
+          default "0";
+          config false;
+          description
+            "Relay-reply packets received from relay agents or servers.";
+        }
+        leaf advertise-send-count {
+          type uint32;
+          default "0";
+          config false;
+          description
+            "Advertise packets sent to clients.";
+        }
+        leaf reply-send-count {
+          type uint32;
+          default "0";
+          config false;
+          description
+            "Relay-reply packets sent to clients.";
+        }
+        leaf reconfig-send-count {
+          type uint32;
+          default "0";
+          config false;
+          description
+            "Reconfigure packets sent to clients.";
+        }
+        leaf relay-forward-send-count {
+          type uint32;
+          default "0";
+          config false;
+          description
+            "Relay-forward packets sent to relay agents or servers.";
+        }
+        leaf relay-reply-send-count {
+          type uint32;
+          default "0";
+          config false;
+          description
+            "Relay-reply packets sent to relay agents or servers.";
+        }
+        leaf bad-packets-received-count {
+          type uint32;
+          default "0";
+          config false;
+          description
+            "Error packets received.";
+        }
+        leaf drop-packets-for-table-full {
+          type uint32;
+          default "0";
+          config false;
+          description
+            "Packets discarded because the table is full.";
+        }
+        leaf drop-packets-for-general-error {
+          type uint32;
+          default "0";
+          config false;
+          description
+            "Packets discarded due to general errors.";
+        }
+        leaf drop-packets-for-ipsec-authentication-fail {
+          type uint32;
+          default "0";
+          config false;
+          description
+            "Packets discarded due to IPsec authentication failures.";
+        }
+      }
+    }
+    container dhcpv6-relay-if {
+      must "(not(../ethernet:ethernet/ethernet:main-interface/ethernet:l2-attribute)) and
+            (not(../ethernet:ethernet/ethernet:l2-sub-interface)) and
+            (not(../ifm-trunk:trunk/ifm-trunk:members/ifm-trunk:member[ifm-trunk:name=current()/../ifm:name])) and
+            (not((../ifm:type = 'Virtual-Ethernet' or ../ifm:type = 'Global-VE' or ../ifm:type = 'PW-VE') and (../ifm:class = 'main-interface')))";
+      presence "Enable/disable DHCPv6 relay functions on an interface.";
+      status deprecated;
+      ext:hidden ui;
+      description
+        "Configure DHCPv6 relay attributes on an interface, it was replaced by a container named dhcpv6-relay-attribute.";
+      leaf source-address {
+        type inet:ipv6-address-no-zone;
+        status deprecated;
+        description
+          "Source address.";
+      }
+      leaf link-address {
+        type inet:ipv6-address-no-zone;
+        status deprecated;
+        description
+          "Link address.";
+      }
+      leaf strict-check {
+        type boolean;
+        default "false";
+        status deprecated;
+        description
+          "Enable/disable strict check on interfaces.";
+      }
+      leaf server-group-name {
+        type leafref {
+          path "/dhcpv6:dhcpv6/dhcpv6:relay/dhcpv6:server-groups/dhcpv6:server-group/dhcpv6:name";
+        }
+        status deprecated;
+        description
+          "DHCPv6 relay server group name.";
+      }
+    }
+  }
+}

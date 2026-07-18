@@ -1,0 +1,149 @@
+{
+  "/huawei-mirror:mirror": {
+    "name": "镜像"
+  },
+  "/huawei-mirror:mirror/global-observers": {
+    "name": "观察端口"
+  },
+  "/huawei-mirror:mirror/global-observers/global-observer": {
+    "name": "观察端口"
+  },
+  "/huawei-mirror:mirror/global-observers/global-observer/observe-index": {
+    "name": "观察端口序号"
+  },
+  "/huawei-mirror:mirror/global-observers/global-observer/interface-name": {
+    "name": "端口名"
+  },
+  "/huawei-mirror:mirror/global-observers/global-observer/vlan-id": {
+    "name": "Vlan值"
+  },
+  "/huawei-mirror:mirror/global-observers/global-observer/dst-ip": {
+    "name": "目的IP"
+  },
+  "/huawei-mirror:mirror/global-observers/global-observer/src-ip": {
+    "name": "源IP"
+  },
+  "/huawei-mirror:mirror/global-observers/global-observer/enhance-mode": {
+    "name": "增强模式"
+  },
+  "/huawei-mirror:mirror/global-observers/global-observer/dscp": {
+    "name": "Dscp值"
+  },
+  "/huawei-mirror:mirror/global-observers/global-observer/erspan-type": {
+    "name": "镜像"
+  },
+  "/huawei-mirror:mirror/global-observers/global-observer/erspan-id": {
+    "name": "远程镜像标签号"
+  },
+  "/huawei-mirror:mirror/global-observers/global-observer/cir": {
+    "name": "Cir"
+  },
+  "/huawei-mirror:mirror/global-observers/global-observer/cir-unit": {
+    "name": "Cir单位"
+  },
+  "/huawei-mirror:mirror/global-observers/global-observer/length": {
+    "name": "长度"
+  },
+  "/huawei-mirror:mirror/global-observe-groups": {
+    "name": "全局观察组"
+  },
+  "/huawei-mirror:mirror/global-observe-groups/global-observe-group": {
+    "name": "全局观察组"
+  },
+  "/huawei-mirror:mirror/global-observe-groups/global-observe-group/group-id": {
+    "name": "观察端口组序号"
+  },
+  "/huawei-mirror:mirror/global-observe-groups/global-observe-group/interface-name": {
+    "name": "接口名称"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-mirror:mirror": {
+    "name": "端口镜像"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-mirror:mirror/observe-ports": {
+    "name": "镜像到观察端口"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-mirror:mirror/observe-ports/observe-port": {
+    "name": "镜像到观察端口"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-mirror:mirror/observe-ports/observe-port/observe-index": {
+    "name": "观察端口序号"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-mirror:mirror/observe-ports/observe-port/direction": {
+    "name": "方向"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-mirror:mirror/observe-groups": {
+    "name": "镜像到观察端口组"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-mirror:mirror/observe-groups/observe-group": {
+    "name": "镜像到观察端口组"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-mirror:mirror/observe-groups/observe-group/group-id": {
+    "name": "观察端口组序号"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-mirror:mirror/observe-groups/observe-group/direction": {
+    "name": "方向"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/huawei-mirror:mirror": {
+    "name": "流镜像"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/huawei-mirror:mirror/mirror-to-observe": {
+    "name": "配置流镜像"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/huawei-mirror:mirror/mirror-to-observe/observe-parameters": {
+    "name": "观察端口参数"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/huawei-mirror:mirror/mirror-to-observe/observe-parameters/observe-port": {
+    "name": "观察端口"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/huawei-mirror:mirror/mirror-to-observe/observe-parameters/observe-port/port-indexs": {
+    "name": "镜像到观察端口"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/huawei-mirror:mirror/mirror-to-observe/observe-parameters/observe-port/port-indexs/port-index": {
+    "name": "镜像到观察端口"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/huawei-mirror:mirror/mirror-to-observe/observe-parameters/observe-port/port-indexs/port-index/index": {
+    "name": "序号"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/huawei-mirror:mirror/mirror-to-observe/observe-parameters/observe-group": {
+    "name": "观察端口组"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/huawei-mirror:mirror/mirror-to-observe/observe-parameters/observe-group/group-id": {
+    "name": "端口组序号"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-mirror:mirror": {
+    "name": "VLAN镜像"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-mirror:mirror/observe-ports": {
+    "name": "镜像到观察端口"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-mirror:mirror/observe-ports/observe-port": {
+    "name": "镜像到观察端口"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-mirror:mirror/observe-ports/observe-port/observe-index": {
+    "name": "观察端口序号"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-mirror:mirror/observe-ports/observe-port/direction": {
+    "name": "方向"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-mirror:mirror/observe-groups": {
+    "name": "镜像到观察端口组"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-mirror:mirror/observe-groups/observe-group": {
+    "name": "镜像到观察端口组"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-mirror:mirror/observe-groups/observe-group/group-id": {
+    "name": "观察端口组序号"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-mirror:mirror/observe-groups/observe-group/direction": {
+    "name": "方向"
+  },
+  "/huawei-qos:qos/global-config/huawei-mirror:mirror": {
+    "name": "流镜像"
+  },
+  "/huawei-qos:qos/global-config/huawei-mirror:mirror/to-observe": {
+    "name": "配置流镜像"
+  },
+  "/huawei-qos:qos/global-config/huawei-mirror:mirror/to-observe/index": {
+    "name": "序号"
+  }
+}

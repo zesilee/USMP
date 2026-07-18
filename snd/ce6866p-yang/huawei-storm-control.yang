@@ -1,0 +1,384 @@
+/*
+Copyright (C) 2020 Huawei Technologies Co., Ltd. All rights reserved.
+*/
+module huawei-storm-control {
+  namespace "urn:huawei:yang:huawei-storm-control";
+  prefix storm-control;
+  import huawei-ifm {
+    prefix ifm;
+  }
+  import huawei-extension {
+    prefix ext;
+  }
+  import huawei-bd {
+    prefix bd;
+  }
+  import huawei-ethernet {
+    prefix ethernet;
+  }
+  import ietf-yang-types {
+      prefix yang;
+  }
+  organization
+    "Huawei Technologies Co., Ltd.";
+  contact
+    "Huawei Industrial Base
+    Bantian, Longgang
+    Shenzhen 518129
+    People's Republic of China
+    Website: http://www.huawei.com
+    Email: support@huawei.com";
+  description
+    "This module contains a collection of YANG definitions for managing storm control.";
+  revision 2020-05-22 {
+    description
+      "Add storm suppress.";
+    reference
+      "Huawei private.";
+  }
+  revision 2020-01-02 {
+    description
+      "Initial revision.";
+    reference
+      "Huawei private.";
+  }
+  typedef packet-type {
+    type enumeration {
+      enum "broadcast" {
+        value 1;
+        description
+          "This value is used for performing on broadcast packets.";
+      }
+      enum "unknown-multicast" {
+        value 2;
+        description
+          "This value is used for performing on unknown-multicast packets.";
+      }
+      enum "unicast" {
+        value 3;
+        description
+          "This value is used for performing on unicast packets.";
+      }
+      enum "unknown-unicast" {
+        value 4;
+        description
+          "This value is used for performing on unknown-unicast packets.";
+      }
+    }
+    description
+      "Type of packets going through an interface.";
+  }
+  typedef action {
+    type enumeration {
+      enum "error-down" {
+        value 1;
+        description
+          "Error down an interface.";
+      }
+      enum "block" {
+        value 2;
+        description
+          "Block packet.";
+      }
+      enum "suppress" {
+        value 3;
+        description
+          "Suppress packets.";
+      }
+      enum "none" {
+        value 4;
+        description
+          "No action.";
+      }
+    }
+    description
+      "Action of storm control.";
+  }
+  typedef mode-state {
+    type enumeration {
+      enum "pps" {
+        value 1;
+        description
+          "packet mode.";
+      }
+      enum "per" {
+        value 2;
+        description
+          "percent mode.";
+      }
+      enum "kbps" {
+        value 3;
+        description
+          "Cir mode.";
+      }
+    }
+    description
+      "The mode of the storm control.";
+  }
+  typedef punish-status {
+    type enumeration {
+      enum "normal" {
+        value 1;
+        description
+          "Normal.";
+      }
+      enum "err-down" {
+        value 2;
+        description
+          "Error-down the interface.";
+      }
+      enum "block" {
+        value 3;
+        description
+          "Block packet.";
+      }
+      enum "suppress" {
+        value 4;
+        description
+          "Suppress packet.";
+      }
+    }
+    description
+      "The packet's state of the current interface.";
+  }
+  grouping storm-control-config{
+      description "Config storm control function.";
+      container storm-rates {
+        description
+          "List of storm rate config.";
+        list storm-rate {
+          key "packet-type";
+          description
+            "Configure packet-type which storm control support.";
+          leaf packet-type {
+            type packet-type;
+            description
+              "Type of packets going through an interface.";
+          }
+          choice rate-type {
+            mandatory true;
+            description
+              "Type of min-rate and max-rate parameters.";
+            case packet {
+              description
+                "Packet mode.";
+              leaf pps-min-rate {
+                type uint32;
+                units "pps";
+                mandatory true;
+                description
+                  "Specifies the lower threshold.";
+              }
+              leaf pps-max-rate {
+                type uint32;
+                units "pps";
+                mandatory true;
+                description
+                  "Specifies the upper threshold.";
+              }
+            }
+            case cir {
+              description
+                "Cir mode.";
+              leaf cir-min-rate {
+                type uint32;
+                units "kbit/s";
+                mandatory true;
+                description
+                  "Specifies the lower threshold.";
+              }
+              leaf cir-max-rate {
+                type uint32;
+                units "kbit/s";
+                mandatory true;
+                description
+                  "Specifies the upper threshold.";
+              }
+            }
+            case percent {
+              description
+                "Percent mode.";
+              leaf per-min-rate {
+                type uint32 {
+                  range "1..100";
+                }
+                units "%";
+                mandatory true;
+                description
+                  "Specifies the lower threshold.";
+              }
+              leaf per-max-rate {
+                type uint32 {
+                  range "1..100";
+                }
+                units "%";
+                mandatory true;
+                description
+                  "Specifies the upper threshold.";
+              }
+            }
+          }
+        }
+      }
+  }
+
+  grouping storm-suppress-config{
+      description "Config storm suppress function.";
+      container storm-rates {
+        description
+          "List of storm suppress rate config.";
+        list storm-rate {
+          key "packet-type";
+          description
+            "Configure packet-type which storm suppress support.";
+          leaf packet-type {
+            type packet-type;
+            description
+              "Type of packets going through an interface.";
+          }
+          choice rate-type {
+            mandatory true;
+            description
+              "Type of rate parameters.";
+            case packet {
+              ext:hidden ui;
+              description
+                "Packet mode.";
+              leaf pps {
+                type uint32 {
+			      range "0..595240000";
+		        }
+                units "pps";
+                description
+                  "Pps value.";
+              }
+            }
+            case rate {
+              description
+                "Cir mode.";
+              leaf cir {
+                type uint32;
+                units "kbit/s";
+                mandatory true;
+                description
+                  "Cir value.";
+              }
+              leaf cbs {
+                type uint32;
+                units "kbit/s";
+                description
+                  "Cbs value.";
+              }
+            }
+            case percent {
+              ext:hidden ui;
+              description
+                "Percent mode.";
+              leaf percent {
+                type uint32 {
+                  range "1..100";
+                }
+                units "%";
+                mandatory true;
+                description
+                  "Percent type.";
+              }
+            }
+          }
+        }
+      }
+  }
+
+  ext:task-name "storm-control";
+  augment /ifm:ifm/ifm:interfaces/ifm:interface {
+    description
+      "This module contains a collection of YANG definitions for
+      managing network interfaces";
+    container storm-control {
+      description
+        "Configure of storm-control.";
+
+      uses storm-control-config;
+
+      container storm-control-action {
+        description
+          "Configure action of storm-control.";
+          leaf action {
+              type action;
+              description
+                "Action of storm control.";
+          }
+          leaf log {
+              type boolean;
+              default "false";
+              description
+                "Enable/disable the log recording function.";
+          }
+          leaf trap {
+              type boolean;
+              default "false";
+              description
+                "Enable/disable the trap reporting function.";
+          }
+          leaf interval {
+              type uint16 {
+                  range "1..180";
+              }
+              units "s";
+              default "5";
+              description
+                "Specifies the storm detection interval(units seconds)";
+          }
+      }
+      container storm-control-state {
+          config false;
+          description
+            "Show The storm-control's state.";
+          leaf packet-type {
+              type packet-type;
+              description
+                "Type of packets going through an interface.";
+          }
+          leaf punish {
+              type punish-status;
+              description
+                "Punish status of storm-control table.";
+          }
+          leaf last-punish-time {
+              type yang:date-and-time;
+              description
+                "Last punish time of storm-control table.";
+          }
+          leaf mode {
+              type mode-state;
+              description
+                "Mode of storm-control table.";
+          }
+      }
+    }
+  
+    container storm-suppress {
+      when "../ethernet:ethernet/ethernet:main-interface/ethernet:l2-attribute";
+      description
+        "Configure of storm-suppress in interface view.";
+      uses storm-suppress-config;
+    }
+  }
+
+  augment "/bd:bd/bd:instances/bd:instance" {
+    description
+      "Add storm in bridge domain.";
+    container storm-control {
+      ext:hidden ui;
+      description
+        "Configure of storm-control in bridge domain.";
+      uses storm-control-config;
+    }
+
+    container storm-suppress {
+      description
+        "Configure of storm-suppress in bridge domain.";
+      uses storm-suppress-config;
+    }
+  }
+}

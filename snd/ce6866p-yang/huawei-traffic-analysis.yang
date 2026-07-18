@@ -1,0 +1,244 @@
+/*
+Copyright (C) 2020 Huawei Technologies Co., Ltd. All rights reserved.
+*/
+module huawei-traffic-analysis {
+  yang-version 1;
+  namespace "urn:huawei:yang:huawei-traffic-analysis";
+  prefix traffic-analysis;
+  import ietf-inet-types {
+    prefix inet;
+  }
+  import huawei-extension {
+    prefix ext;
+  }
+  import huawei-pub-type {
+    prefix pub-type;
+  }
+  import huawei-network-instance {
+    prefix ni;
+  }
+  import huawei-l3vpn {
+    prefix l3vpn;
+  }
+  import huawei-qos {
+    prefix qos;
+  }
+  organization
+    "Huawei Technologies Co., Ltd.";
+  contact
+    "Huawei Industrial Base
+    Bantian, Longgang
+    Shenzhen 518129
+    People's Republic of China
+    Website: http://www.huawei.com
+    Email: support@huawei.com";
+  description
+    "Intelligent traffic analysis allows the switch to capture sent and received packets of a specified TCP or UDP flow and calculate key flow indicators (including the traffic creation time,
+	TCP RTT, TCP status, and estimated number of discarded packets). The switch then sends the information to FabricInsight for further analysis of network quality and display.";
+  revision 2020-03-27 {
+    description
+      "Initial revision.";
+    reference
+      "Huawei private.";
+  }
+  typedef ta-flow-type {
+    type enumeration {
+      enum "tcp" {
+        value 1;
+        description
+          "TCP packet.";
+      }
+      enum "udp" {
+        value 2;
+        description
+          "UDP packet.";
+      }
+    }
+    description
+      "Type of flow to analyze.";
+  }
+  typedef ta-ip-family {
+    type enumeration {
+      enum "ipv4" {
+        value 0;
+        description
+          "IPv4 address family.";
+      }
+      enum "ipv6" {
+        value 1;
+        description
+          "IPv6 address family.";
+      }
+    }
+    description
+      "IP Version.";
+  }
+  container traffic-analysis {
+    description
+      "traffic analysis";
+    container global {
+      description
+        "Configure traffic analysis global setting.";
+      leaf tcp-session-aging {
+        type boolean;
+        default "false";
+        description
+          "Enable/disable tcp session termination packet-triggered aging.";
+      }
+      leaf udp-blocks {
+        type uint32 {
+          range "4 | 8 | 16 | 32 | 64 | 128 | 256";
+        }
+        default "256";
+        description
+          "Number of identification value segments for UDP packets";
+      }
+      container tcp-one-way {
+        must "(./sequence-value and ./sequence-mask) or (not(./sequence-value) and not(./sequence-mask))";
+        description
+          "Configure one-way TCP flows.";
+        leaf sequence-value {
+          type pub-type:hex-binary {
+            length "3..10";
+          }
+          description
+            "The sequence number range or acknowledgment number range of TCP packets to be matched.Value range: [0x0, 0xffffffff].";
+        }
+        leaf sequence-mask {
+          type pub-type:hex-binary {
+            length "3..10";
+            pattern "(0x|0X)?[0-9a-fA-F]{1,8}";
+          }
+          description
+            "Mask for the sequence number of TCP packets.Value range: [0x0, 0xffffffff].";
+        }
+      }
+    }
+    container export-sources {
+      description
+        "List of export source address.";
+      list export-source {
+        key "flow-type family-type";
+        description
+          "Configure source IP address of intelligent traffic analysis packets.";
+        leaf flow-type {
+          type ta-flow-type;
+          description
+            "Flow type.";
+        }
+        leaf family-type {
+          type ta-ip-family;
+          description
+            "IP family type.";
+        }
+        leaf ipv4-address {
+          when "../family-type='ipv4'";
+          type inet:ipv4-address-no-zone;
+          mandatory true;
+          description
+            "IPv4 address.";
+        }
+        leaf ipv6-address {
+          when "../family-type='ipv6'";
+          type inet:ipv6-address-no-zone;
+          mandatory true;
+          description
+            "IPv6 address.";
+        }
+      }
+    }
+    container export-hosts {
+      description
+        "List of configure export vpn destination address instance.";
+      list export-host {
+        key "flow-type address vpn-name port";
+        description
+          "Configure destination address of intelligent traffic analysis packets,
+		  it can configure only two export hosts on the same flow type.";
+        leaf flow-type {
+          type ta-flow-type;
+          description
+            "Flow type.";
+        }
+        leaf address {
+          type inet:ip-address-no-zone;
+          description
+            "Exported destination IPv4 or IPv6 address";
+        }
+        leaf vpn-name {
+          type leafref {
+            path "/ni:network-instance/ni:instances/ni:instance/ni:name";
+          }
+          must "/ni:network-instance/ni:instances/ni:instance[ni:name=current()]/l3vpn:afs/l3vpn:af[l3vpn:type='ipv4-unicast'] 
+		       or /ni:network-instance/ni:instances/ni:instance[ni:name=current()]/l3vpn:afs/l3vpn:af[l3vpn:type='ipv6-unicast']";
+          description
+            "VPN instance name.";
+        }
+        leaf port {
+          type uint16 {
+            range "1..65535";
+          }
+          description
+            "Destination UDP port number for sending intelligent traffic analysis packets.";
+        }
+      }
+    }
+    container timeouts {
+      description
+        "List of flow table aging functions in intelligent traffic analysis.";
+      list timeout {
+        key "flow-type";
+        description
+          "Configure aging settings.";
+        leaf flow-type {
+          type ta-flow-type;
+          description
+            "Flow type.";
+        }
+        leaf template-timeout {
+          type uint32 {
+            range "1..60";
+          }
+          units "min";
+          default "1";
+          description
+            "Configure template timeout value.";
+        }
+        leaf active-timeout {
+          when "not(../flow-type='udp')";
+          type uint32 {
+            range "5..500";
+          }
+          units "s";
+          default "10";
+          description
+            "Configure active timeout value.";
+        }
+        leaf inactive-timeout {
+          type uint32 {
+            range "5..500";
+          }
+          units "s";
+          default "30";
+          description
+            "Configure inactive timeout value.";
+        }
+      }
+    }
+  }
+  augment "/qos:qos/qos:classifier-template/qos:traffic-behaviors/qos:traffic-behavior" {
+    description
+      "Traffic behavior.";
+    container traffic-analysis {
+      ext:hidden ui;
+      description
+        "Configure traffic analysis action.";
+      leaf enable-flag {
+        type empty;
+        description
+          "Enable/disable traffic analysis.";
+      }
+    }
+  }
+  ext:task-name "traffic-analysis";
+}

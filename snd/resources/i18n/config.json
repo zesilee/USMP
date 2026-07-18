@@ -1,0 +1,8 @@
+{
+  "?备注": "语种：语言包目录， 当前cookie中有一个locale为界面显示的语言，根据locale字段匹配对应的资源，如果匹配不上，显示default下配置的目录资源",
+  "zh-cn": "zh-cn",
+  "zh": "zh-cn",
+  "en-us": "en-us",
+  "en": "en-us",
+  "default": "en-us"
+}

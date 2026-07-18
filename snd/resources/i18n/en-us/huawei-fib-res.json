@@ -1,0 +1,104 @@
+{
+  "/huawei-fib:fib": {
+    "name": "Forwarding information base"
+  },
+  "/huawei-fib:fib/unicast-afs": {
+    "name": "List of forwarding information base"
+  },
+  "/huawei-fib:fib/unicast-afs/unicast-af": {
+    "name": "Forwarding information base"
+  },
+  "/huawei-fib:fib/unicast-afs/unicast-af/vrf-name": {
+    "name": "VPN name"
+  },
+  "/huawei-fib:fib/unicast-afs/unicast-af/af-type": {
+    "name": "Protocol version"
+  },
+  "/huawei-fib:fib/unicast-afs/unicast-af/position": {
+    "name": "Slot numer"
+  },
+  "/huawei-fib:fib/unicast-afs/unicast-af/routes": {
+    "name": "The list of routes"
+  },
+  "/huawei-fib:fib/unicast-afs/unicast-af/routes/route": {
+    "name": "Routing information"
+  },
+  "/huawei-fib:fib/unicast-afs/unicast-af/routes/route/destination": {
+    "name": "Destination address"
+  },
+  "/huawei-fib:fib/unicast-afs/unicast-af/routes/route/mask": {
+    "name": "The route mask"
+  },
+  "/huawei-fib:fib/unicast-afs/unicast-af/routes/route/nexthop": {
+    "name": "Next hop address"
+  },
+  "/huawei-fib:fib/unicast-afs/unicast-af/routes/route/if-name": {
+    "name": "Interface name"
+  },
+  "/huawei-fib:fib/unicast-afs/unicast-af/routes/route/tunnel-id": {
+    "name": "Tunnel ID"
+  },
+  "/huawei-fib:fib/unicast-afs/unicast-af/routes/route/vlan-id": {
+    "name": "VLAN ID"
+  },
+  "/huawei-fib:fib/unicast-afs/unicast-af/routes/route/inner-label": {
+    "name": "Inner label"
+  },
+  "/huawei-fib:fib/unicast-afs/unicast-af/routes/route/lsp-token": {
+    "name": "LSP token"
+  },
+  "/huawei-fib:fib/unicast-afs/unicast-af/routes/route/bak-nexthop": {
+    "name": "Backup next hop address"
+  },
+  "/huawei-fib:fib/unicast-afs/unicast-af/routes/route/bak-if-name": {
+    "name": "Interface name"
+  },
+  "/huawei-fib:fib/unicast-afs/unicast-af/routes/route/bak-inner-lable": {
+    "name": "Inner laber"
+  },
+  "/huawei-fib:fib/unicast-afs/unicast-af/routes/route/bak-lsp-token": {
+    "name": "Backup LSP token"
+  },
+  "/huawei-fib:fib/unicast-afs/unicast-af/routes/route/bgp-nexthop": {
+    "name": "Bgp next hop address"
+  },
+  "/huawei-fib:fib/unicast-afs/unicast-af/statistics": {
+    "name": "FIB statistics"
+  },
+  "/huawei-fib:fib/unicast-afs/unicast-af/statistics/total-num": {
+    "name": "FIB number"
+  },
+  "/huawei-fib:fib/route-statistics": {
+    "name": "Statistics of route"
+  },
+  "/huawei-fib:fib/route-statistics/ip-route-entry-counts": {
+    "name": "IP route entry counts"
+  },
+  "/huawei-fib:fib/route-statistics/ip-route-entry-counts/ip-route-entry-count": {
+    "name": "IP route entry count"
+  },
+  "/huawei-fib:fib/route-statistics/ip-route-entry-counts/ip-route-entry-count/slot": {
+    "name": "Slot ID"
+  },
+  "/huawei-fib:fib/route-statistics/ip-route-entry-counts/ip-route-entry-count/vpn-name": {
+    "name": "VPN name"
+  },
+  "/huawei-fib:fib/route-statistics/ip-route-entry-counts/ip-route-entry-count/entrycount": {
+    "name": "Entry count"
+  },
+  "/huawei-fib:fib/route-statistics/ipv6-route-entry-counts": {
+    "name": "IPv6 route entry counts"
+  },
+  "/huawei-fib:fib/route-statistics/ipv6-route-entry-counts/ipv6-route-entry-count": {
+    "name": "IPv6 route entry count"
+  },
+  "/huawei-fib:fib/route-statistics/ipv6-route-entry-counts/ipv6-route-entry-count/slot": {
+    "name": "Slot ID"
+  },
+  "/huawei-fib:fib/route-statistics/ipv6-route-entry-counts/ipv6-route-entry-count/vpn-name": {
+    "name": "VPN name"
+  },
+  "/huawei-fib:fib/route-statistics/ipv6-route-entry-counts/ipv6-route-entry-count/entry-count": {
+    "name": "Entry count"
+  }
+}

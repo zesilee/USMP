@@ -1,0 +1,413 @@
+{
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp": {
+    "name": "MSDP"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global": {
+    "name": "MSDP Configuration"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/cache-sa-enable": {
+    "name": "Enable SA Cache"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/encap-data-enable": {
+    "name": "Enable Data Encapsulation"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/originating-rp-interface": {
+    "name": "Logical RP Interface Name"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/retry-interval": {
+    "name": "Connect Retry Interval"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/sa-cache-holdtime": {
+    "name": "SA cache holdtime"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/import-source-enable": {
+    "name": "Enable Import Source"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/import-source-policy-name": {
+    "name": "Import Source Policy"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers": {
+    "name": "MSDP Peer Configuration List"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer": {
+    "name": "MSDP Peer Configuration"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/address": {
+    "name": "Peer Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/connect-interface": {
+    "name": "Local Interface Name"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/minimum-ttl": {
+    "name": "TTL Threshold"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/description": {
+    "name": "Description"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/mesh-group-name": {
+    "name": "Full Mesh Group"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/sa-cache-maximum": {
+    "name": "Maximum SA Cache"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/request-sa-enable": {
+    "name": "Enable Immediate SA Sending"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/is-shutdown": {
+    "name": "Disconnect"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/authentication-type": {
+    "name": "Authentication Type"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/authentication-type/keychain": {
+    "name": "Keychain Authentication"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/authentication-type/keychain/keychain-name": {
+    "name": "Keychain Name"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/authentication-type/md5": {
+    "name": "Password for MD5 Authentication"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/authentication-type/md5/md5-password": {
+    "name": "MD5 Authentication Password"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/authentication-type/md5/md5-simple-flag": {
+    "name": "MD5 Password Type Flag"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/static-rpf-enable": {
+    "name": "Enable RPF"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/static-rpf-prefix-name": {
+    "name": "RPF Peer Policy"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/sa-policy-export-enable": {
+    "name": "Enable SA Export Policy"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/sa-policy-export-name": {
+    "name": "SA Export Policy"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/sa-policy-local-export-enable": {
+    "name": "Enable Send Local-export SA Policy"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/sa-policy-local-export-name": {
+    "name": "Send Local-export SA Policy"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/sa-policy-import-enable": {
+    "name": "Enable SA Import Policy"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/sa-policy-import-name": {
+    "name": "SA Import Policy"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/sa-request-policy-enable": {
+    "name": "Enable SA Request Policy"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/sa-request-policy-name": {
+    "name": "SA Request Policy"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/holdtime": {
+    "name": "Peer Holdtime"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/keep-alive-interval": {
+    "name": "Peer Keepalive Interval"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/status": {
+    "name": "MSDP Peer Information"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/status/as-num": {
+    "name": "AS Number"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/status/state": {
+    "name": "Session Status"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/status/up-or-down-time": {
+    "name": "Session Up/Down Time"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/status/connection-interface-address": {
+    "name": "Interface Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/status/send-message-count": {
+    "name": "Sent Packets"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/status/receive-message-count": {
+    "name": "Received Packets"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/status/discard-message-count": {
+    "name": "Discarded Packets to Be Sent"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/status/elapsed-time": {
+    "name": "Last Clearance Interval"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/status/sa-learned-count": {
+    "name": "Cache Number"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/status/input-queue-size": {
+    "name": "Data Length in Input Cache"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/status/output-queue-size": {
+    "name": "Data Length in Output Cache"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/status/rpf-check-fail-count": {
+    "name": "Discarded SA Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/status/receive-sa-message-count": {
+    "name": "Received SA Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/status/send-sa-message-count": {
+    "name": "Sent SA Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/status/receive-sa-requeset-count": {
+    "name": "Received SA Request Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/status/send-sa-request-count": {
+    "name": "Sent SA Request Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/status/receive-sa-response-count": {
+    "name": "Received SA Response Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/status/send-sa-response-count": {
+    "name": "Sent SA Response Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/status/receive-data-packet-count": {
+    "name": "Received SA Messages Carrying Data"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/status/send-data-packet-count": {
+    "name": "Sent SA Messages Carrying Data"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/status/reset-count": {
+    "name": "Reset Times"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/status/fsm-estab-trans": {
+    "name": "Entering Established State Times"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/status/fsm-estab-time": {
+    "name": "Entering Established State Time"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/status/last-receive-message-time": {
+    "name": "Last Receiving Time"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/status/remote-port": {
+    "name": "Remote Port"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/status/local-port": {
+    "name": "Local Port"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/status/encap-type": {
+    "name": "SA Encapsulation Type"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/status/connect-attempts": {
+    "name": "Connection Attempts"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/control-message-counters": {
+    "name": "MSDP Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/control-message-counters/sa-received": {
+    "name": "Received Source-Active Message"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/control-message-counters/sa-sent": {
+    "name": "Sent Source-Active Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/control-message-counters/sa-invalid": {
+    "name": "Invalid Source-Active Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/control-message-counters/sa-request-received": {
+    "name": "Received Source-Active Requests"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/control-message-counters/sa-request-sent": {
+    "name": "Sent Source-Active Requests"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/control-message-counters/sa-request-invalid": {
+    "name": "Invalid Source-Active Requests"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/control-message-counters/sa-response-received": {
+    "name": "Received Source-Active Response"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/control-message-counters/sa-response-sent": {
+    "name": "Sent Source-Active Responses"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/control-message-counters/sa-response-invalid": {
+    "name": "Invalid Source-Active Responses"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/control-message-counters/keep-alive-received": {
+    "name": "Received Keepalive Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/control-message-counters/keep-alive-sent": {
+    "name": "Sent Keepalive Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/control-message-counters/keep-alive-invalid": {
+    "name": "Invalid Keepalive Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/control-message-counters/notification-received": {
+    "name": "Received Notification Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/control-message-counters/notification-sent": {
+    "name": "Sent Notification Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/control-message-counters/notification-invalid": {
+    "name": "Invalid Notification Message"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/control-message-counters/traceroute-request-received": {
+    "name": "Received Traceroute Requests"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/control-message-counters/traceroute-request-sent": {
+    "name": "Sent Traceroute Request Message"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/control-message-counters/traceroute-request-invalid": {
+    "name": "Invalid Traceroute Requests"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/control-message-counters/traceroute-reply-received": {
+    "name": "Received Traceroute Reply"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/control-message-counters/traceroute-reply-sent": {
+    "name": "Sent Traceroute Reply Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/control-message-counters/traceroute-reply-invalid": {
+    "name": "Invalid Traceroute Reply"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/control-message-counters/data-received": {
+    "name": "Received Data Messages Message"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/control-message-counters/data-sent": {
+    "name": "Sent Data Messages Message"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/control-message-counters/data-invalid": {
+    "name": "Invalid Data Messages Message"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/control-message-counters/unknown-received": {
+    "name": "Received Unknown Type Message"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/control-message-counters/unknown-sent": {
+    "name": "Sent Unknown Type Message"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/control-message-counters/unknown-invalid": {
+    "name": "Invalid Unknown Type Message"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/invalid-packet": {
+    "name": "Invalid MSDP Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/invalid-packet/sa": {
+    "name": "Invalid SA Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/invalid-packet/sa/fault-length": {
+    "name": "Invalid Packet Length"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/invalid-packet/sa/bad-length-x": {
+    "name": "Invalid Length-x Field"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/invalid-packet/sa/bad-sprefix": {
+    "name": "Invalid Sprefix Field"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/invalid-packet/sa/invalid-multicast-group": {
+    "name": "Invalid Multicast Group"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/invalid-packet/sa/invalid-multicast-source": {
+    "name": "Invalid Multicast Source"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/invalid-packet/sa/bad-encap-data": {
+    "name": "Invalid Encapsulation Data"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/invalid-packet/sa/illegal-rp-address": {
+    "name": "Invalid RP Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/invalid-packet/sa/rp-loop": {
+    "name": "RP Address Being a Local Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/invalid-packet/sa-response": {
+    "name": "Invalid SA Response Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/invalid-packet/sa-response/fault-length": {
+    "name": "Invalid Packet Length"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/invalid-packet/sa-response/bad-length-x": {
+    "name": "Invalid Length-x Field"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/invalid-packet/sa-response/bad-sprefix": {
+    "name": "Invalid Sprefix Field"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/invalid-packet/sa-response/invalid-multicast-group": {
+    "name": "Invalid Multicast Group"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/invalid-packet/sa-response/invalid-multicast-source": {
+    "name": "Invalid Multicast Source"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/invalid-packet/sa-response/illegal-rp-address": {
+    "name": "Invalid RP Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/invalid-packet/sa-response/rp-loop": {
+    "name": "RP Address Being a Local Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/invalid-packet/sa-request": {
+    "name": "Invalid SA Request Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/invalid-packet/sa-request/fault-length": {
+    "name": "Invalid Packet Length"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/invalid-packet/sa-request/invalid-multicast-group": {
+    "name": "Invalid Multicast Group"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/invalid-packet/keep-alive": {
+    "name": "Invalid KeepAlive messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/invalid-packet/keep-alive/fault-length": {
+    "name": "Invalid Packet Length"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/invalid-packet/notification": {
+    "name": "Invalid Notification Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/invalid-packet/notification/fault-length": {
+    "name": "Invalid Packet Length"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/sa-caches": {
+    "name": "MSDP SA Cache Information"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/sa-caches/sa-cache": {
+    "name": "MSDP SA Cache Status"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/sa-caches/sa-cache/source-address": {
+    "name": "Source IP Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/sa-caches/sa-cache/group-address": {
+    "name": "Group Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/sa-caches/sa-cache/orig-rp-address": {
+    "name": "Source RP Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/sa-caches/sa-cache/protocol": {
+    "name": "Protocol"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/sa-caches/sa-cache/as-num": {
+    "name": "AS Number"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/sa-caches/sa-cache/up-time": {
+    "name": "Setup Time"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/sa-caches/sa-cache/expire-time": {
+    "name": "Timeout Interval"
+  },
+  "/huawei-multicast:multicast/huawei-msdp:msdp": {
+    "name": "Configuring Multicast Source Discovery Protocol (MSDP)"
+  },
+  "/huawei-multicast:multicast/huawei-msdp:msdp/invalid-packets": {
+    "name": "List of Invalid MSDP Messages"
+  },
+  "/huawei-multicast:multicast/huawei-msdp:msdp/invalid-packets/invalid-packet": {
+    "name": "Detailed Information About Invalid MSDP Messages"
+  },
+  "/huawei-multicast:multicast/huawei-msdp:msdp/invalid-packets/invalid-packet/packet-index": {
+    "name": "Index of Invalid MSDP Messages"
+  },
+  "/huawei-multicast:multicast/huawei-msdp:msdp/invalid-packets/invalid-packet/interface": {
+    "name": "Interface Name"
+  },
+  "/huawei-multicast:multicast/huawei-msdp:msdp/invalid-packets/invalid-packet/time": {
+    "name": "Time"
+  },
+  "/huawei-multicast:multicast/huawei-msdp:msdp/invalid-packets/invalid-packet/message-length": {
+    "name": "Packet Size"
+  },
+  "/huawei-multicast:multicast/huawei-msdp:msdp/invalid-packets/invalid-packet/invalid-reason": {
+    "name": "Invalid Message Type"
+  },
+  "/huawei-multicast:multicast/huawei-msdp:msdp/invalid-packets/invalid-packet/packet-content": {
+    "name": "Contents of the Invalid Message"
+  }
+}

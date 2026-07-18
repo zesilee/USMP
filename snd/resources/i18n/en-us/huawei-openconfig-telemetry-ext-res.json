@@ -1,0 +1,290 @@
+{
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/sensor-paths/sensor-path/config/huawei-openconfig-telemetry-ext:reset-when-start": {
+    "name": "Clear Sampling Path During Initial Configuration"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/sensor-paths/sensor-path/config/huawei-openconfig-telemetry-ext:depth": {
+    "name": "Sampling Depth"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/sensor-paths/sensor-path/state/huawei-openconfig-telemetry-ext:reset-when-start": {
+    "name": "Clear Sampling Path During Initial Configuration"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/sensor-paths/sensor-path/state/huawei-openconfig-telemetry-ext:depth": {
+    "name": "Sampling Depth"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/sensor-paths/sensor-path/huawei-openconfig-telemetry-ext:filters": {
+    "name": "Filter Group"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/sensor-paths/sensor-path/huawei-openconfig-telemetry-ext:filters/filter": {
+    "name": "Filter List"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/sensor-paths/sensor-path/huawei-openconfig-telemetry-ext:filters/filter/name": {
+    "name": "Filter Name"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/sensor-paths/sensor-path/huawei-openconfig-telemetry-ext:filters/filter/config": {
+    "name": "Configuration Node"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/sensor-paths/sensor-path/huawei-openconfig-telemetry-ext:filters/filter/config/name": {
+    "name": "Filter Name"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/sensor-paths/sensor-path/huawei-openconfig-telemetry-ext:filters/filter/config/condition-relation": {
+    "name": "Logical Operation Mode Between Filter Criteria"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/sensor-paths/sensor-path/huawei-openconfig-telemetry-ext:filters/filter/state": {
+    "name": "State Node"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/sensor-paths/sensor-path/huawei-openconfig-telemetry-ext:filters/filter/state/name": {
+    "name": "Filter Name"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/sensor-paths/sensor-path/huawei-openconfig-telemetry-ext:filters/filter/state/condition-relation": {
+    "name": "Logical Operation Mode Between Filter Criteria"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/sensor-paths/sensor-path/huawei-openconfig-telemetry-ext:filters/filter/conditions": {
+    "name": "Filter Criteria"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/sensor-paths/sensor-path/huawei-openconfig-telemetry-ext:filters/filter/conditions/condition": {
+    "name": "Filter Criterion List"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/sensor-paths/sensor-path/huawei-openconfig-telemetry-ext:filters/filter/conditions/condition/op-field": {
+    "name": "Filter Criterion Indicator"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/sensor-paths/sensor-path/huawei-openconfig-telemetry-ext:filters/filter/conditions/condition/op-type": {
+    "name": "Operator"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/sensor-paths/sensor-path/huawei-openconfig-telemetry-ext:filters/filter/conditions/condition/op-value": {
+    "name": "Value Involved in Operation"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/sensor-paths/sensor-path/huawei-openconfig-telemetry-ext:filters/filter/conditions/condition/config": {
+    "name": "Configuration Node"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/sensor-paths/sensor-path/huawei-openconfig-telemetry-ext:filters/filter/conditions/condition/config/op-field": {
+    "name": "Filter Criterion Indicator"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/sensor-paths/sensor-path/huawei-openconfig-telemetry-ext:filters/filter/conditions/condition/config/op-type": {
+    "name": "Operator"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/sensor-paths/sensor-path/huawei-openconfig-telemetry-ext:filters/filter/conditions/condition/config/op-value": {
+    "name": "Value Involved in Operation"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/sensor-paths/sensor-path/huawei-openconfig-telemetry-ext:filters/filter/conditions/condition/state": {
+    "name": "State Node"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/sensor-paths/sensor-path/huawei-openconfig-telemetry-ext:filters/filter/conditions/condition/state/op-field": {
+    "name": "Filter Criterion Indicator"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/sensor-paths/sensor-path/huawei-openconfig-telemetry-ext:filters/filter/conditions/condition/state/op-type": {
+    "name": "Operator"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/sensor-paths/sensor-path/huawei-openconfig-telemetry-ext:filters/filter/conditions/condition/state/op-value": {
+    "name": "Value Involved in Operation"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/huawei-openconfig-telemetry-ext:sensor-paths-self-define-event": {
+    "name": "Customized Event Group"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/huawei-openconfig-telemetry-ext:sensor-paths-self-define-event/sensor-path": {
+    "name": "List of Customized Events"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/huawei-openconfig-telemetry-ext:sensor-paths-self-define-event/sensor-path/path": {
+    "name": "Sampling Path Name"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/huawei-openconfig-telemetry-ext:sensor-paths-self-define-event/sensor-path/config": {
+    "name": "Configuration Node"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/huawei-openconfig-telemetry-ext:sensor-paths-self-define-event/sensor-path/config/path": {
+    "name": "Sampling Path Name"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/huawei-openconfig-telemetry-ext:sensor-paths-self-define-event/sensor-path/config/description": {
+    "name": "Description"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/huawei-openconfig-telemetry-ext:sensor-paths-self-define-event/sensor-path/config/level": {
+    "name": "Level"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/huawei-openconfig-telemetry-ext:sensor-paths-self-define-event/sensor-path/config/suppress-period": {
+    "name": "Suppression Period"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/huawei-openconfig-telemetry-ext:sensor-paths-self-define-event/sensor-path/config/depth": {
+    "name": "Sampling Depth"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/huawei-openconfig-telemetry-ext:sensor-paths-self-define-event/sensor-path/state": {
+    "name": "State Node"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/huawei-openconfig-telemetry-ext:sensor-paths-self-define-event/sensor-path/state/path": {
+    "name": "Sampling Path Name"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/huawei-openconfig-telemetry-ext:sensor-paths-self-define-event/sensor-path/state/description": {
+    "name": "Description"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/huawei-openconfig-telemetry-ext:sensor-paths-self-define-event/sensor-path/state/level": {
+    "name": "Level"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/huawei-openconfig-telemetry-ext:sensor-paths-self-define-event/sensor-path/state/suppress-period": {
+    "name": "Suppression Period"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/huawei-openconfig-telemetry-ext:sensor-paths-self-define-event/sensor-path/state/depth": {
+    "name": "Sampling Depth"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/huawei-openconfig-telemetry-ext:sensor-paths-self-define-event/sensor-path/filters": {
+    "name": "Filter Group"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/huawei-openconfig-telemetry-ext:sensor-paths-self-define-event/sensor-path/filters/filter": {
+    "name": "Filter List"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/huawei-openconfig-telemetry-ext:sensor-paths-self-define-event/sensor-path/filters/filter/name": {
+    "name": "Filter Name"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/huawei-openconfig-telemetry-ext:sensor-paths-self-define-event/sensor-path/filters/filter/config": {
+    "name": "Configuration Node"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/huawei-openconfig-telemetry-ext:sensor-paths-self-define-event/sensor-path/filters/filter/config/name": {
+    "name": "Filter Name"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/huawei-openconfig-telemetry-ext:sensor-paths-self-define-event/sensor-path/filters/filter/config/condition-relation": {
+    "name": "Logical Operation Mode Between Filter Criteria"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/huawei-openconfig-telemetry-ext:sensor-paths-self-define-event/sensor-path/filters/filter/state": {
+    "name": "State Node"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/huawei-openconfig-telemetry-ext:sensor-paths-self-define-event/sensor-path/filters/filter/state/name": {
+    "name": "Filter Name"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/huawei-openconfig-telemetry-ext:sensor-paths-self-define-event/sensor-path/filters/filter/state/condition-relation": {
+    "name": "Logical Operation Mode Between Filter Criteria"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/huawei-openconfig-telemetry-ext:sensor-paths-self-define-event/sensor-path/filters/filter/conditions": {
+    "name": "Filter Criteria"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/huawei-openconfig-telemetry-ext:sensor-paths-self-define-event/sensor-path/filters/filter/conditions/condition": {
+    "name": "Filter Criterion List"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/huawei-openconfig-telemetry-ext:sensor-paths-self-define-event/sensor-path/filters/filter/conditions/condition/op-field": {
+    "name": "Filter Criterion Indicator"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/huawei-openconfig-telemetry-ext:sensor-paths-self-define-event/sensor-path/filters/filter/conditions/condition/op-type": {
+    "name": "Operator"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/huawei-openconfig-telemetry-ext:sensor-paths-self-define-event/sensor-path/filters/filter/conditions/condition/op-value": {
+    "name": "Value Involved in Operation"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/huawei-openconfig-telemetry-ext:sensor-paths-self-define-event/sensor-path/filters/filter/conditions/condition/config": {
+    "name": "Configuration Node"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/huawei-openconfig-telemetry-ext:sensor-paths-self-define-event/sensor-path/filters/filter/conditions/condition/config/op-field": {
+    "name": "Filter Criterion Indicator"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/huawei-openconfig-telemetry-ext:sensor-paths-self-define-event/sensor-path/filters/filter/conditions/condition/config/op-type": {
+    "name": "Operator"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/huawei-openconfig-telemetry-ext:sensor-paths-self-define-event/sensor-path/filters/filter/conditions/condition/config/op-value": {
+    "name": "Value Involved in Operation"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/huawei-openconfig-telemetry-ext:sensor-paths-self-define-event/sensor-path/filters/filter/conditions/condition/state": {
+    "name": "State Node"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/huawei-openconfig-telemetry-ext:sensor-paths-self-define-event/sensor-path/filters/filter/conditions/condition/state/op-field": {
+    "name": "Filter Criterion Indicator"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/huawei-openconfig-telemetry-ext:sensor-paths-self-define-event/sensor-path/filters/filter/conditions/condition/state/op-type": {
+    "name": "Operator"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/huawei-openconfig-telemetry-ext:sensor-paths-self-define-event/sensor-path/filters/filter/conditions/condition/state/op-value": {
+    "name": "Value Involved in Operation"
+  },
+  "/openconfig-telemetry:telemetry-system/destination-groups/destination-group/destinations/destination/config/huawei-openconfig-telemetry-ext:protocol": {
+    "name": "Protocol Used to Send Data to Collector"
+  },
+  "/openconfig-telemetry:telemetry-system/destination-groups/destination-group/destinations/destination/config/huawei-openconfig-telemetry-ext:tls": {
+    "name": "Allow Data Encryption at the Transport Layer"
+  },
+  "/openconfig-telemetry:telemetry-system/destination-groups/destination-group/destinations/destination/state/huawei-openconfig-telemetry-ext:protocol": {
+    "name": "Protocol Used to Send Data to Collector"
+  },
+  "/openconfig-telemetry:telemetry-system/destination-groups/destination-group/destinations/destination/state/huawei-openconfig-telemetry-ext:tls": {
+    "name": "Allow Data Encryption at the Transport Layer"
+  },
+  "/openconfig-telemetry:telemetry-system/destination-groups/destination-group/huawei-openconfig-telemetry-ext:destinations-with-vpn": {
+    "name": "Destination Collector Group with VPN"
+  },
+  "/openconfig-telemetry:telemetry-system/destination-groups/destination-group/huawei-openconfig-telemetry-ext:destinations-with-vpn/destination-with-vpn": {
+    "name": "Destination Collector List with VPN"
+  },
+  "/openconfig-telemetry:telemetry-system/destination-groups/destination-group/huawei-openconfig-telemetry-ext:destinations-with-vpn/destination-with-vpn/destination-address": {
+    "name": "Destination Group IP Address"
+  },
+  "/openconfig-telemetry:telemetry-system/destination-groups/destination-group/huawei-openconfig-telemetry-ext:destinations-with-vpn/destination-with-vpn/destination-port": {
+    "name": "Destination Group Port Number"
+  },
+  "/openconfig-telemetry:telemetry-system/destination-groups/destination-group/huawei-openconfig-telemetry-ext:destinations-with-vpn/destination-with-vpn/vpn-instance": {
+    "name": "VPN Instance Name for Destination Collector"
+  },
+  "/openconfig-telemetry:telemetry-system/destination-groups/destination-group/huawei-openconfig-telemetry-ext:destinations-with-vpn/destination-with-vpn/config": {
+    "name": "Configuration Node"
+  },
+  "/openconfig-telemetry:telemetry-system/destination-groups/destination-group/huawei-openconfig-telemetry-ext:destinations-with-vpn/destination-with-vpn/config/destination-address": {
+    "name": "Destination Group IP Address"
+  },
+  "/openconfig-telemetry:telemetry-system/destination-groups/destination-group/huawei-openconfig-telemetry-ext:destinations-with-vpn/destination-with-vpn/config/destination-port": {
+    "name": "Destination Group Port Number"
+  },
+  "/openconfig-telemetry:telemetry-system/destination-groups/destination-group/huawei-openconfig-telemetry-ext:destinations-with-vpn/destination-with-vpn/config/vpn-instance": {
+    "name": "VPN Instance Name for Destination Collector"
+  },
+  "/openconfig-telemetry:telemetry-system/destination-groups/destination-group/huawei-openconfig-telemetry-ext:destinations-with-vpn/destination-with-vpn/config/protocol": {
+    "name": "Protocol Used to Send Data to Collector"
+  },
+  "/openconfig-telemetry:telemetry-system/destination-groups/destination-group/huawei-openconfig-telemetry-ext:destinations-with-vpn/destination-with-vpn/config/tls": {
+    "name": "Allow Data Encryption at the Transport Layer"
+  },
+  "/openconfig-telemetry:telemetry-system/destination-groups/destination-group/huawei-openconfig-telemetry-ext:destinations-with-vpn/destination-with-vpn/state": {
+    "name": "State Node"
+  },
+  "/openconfig-telemetry:telemetry-system/destination-groups/destination-group/huawei-openconfig-telemetry-ext:destinations-with-vpn/destination-with-vpn/state/destination-address": {
+    "name": "Destination Group IP Address"
+  },
+  "/openconfig-telemetry:telemetry-system/destination-groups/destination-group/huawei-openconfig-telemetry-ext:destinations-with-vpn/destination-with-vpn/state/destination-port": {
+    "name": "Destination Group Port Number"
+  },
+  "/openconfig-telemetry:telemetry-system/destination-groups/destination-group/huawei-openconfig-telemetry-ext:destinations-with-vpn/destination-with-vpn/state/vpn-instance": {
+    "name": "VPN Instance Name for Destination Collector"
+  },
+  "/openconfig-telemetry:telemetry-system/destination-groups/destination-group/huawei-openconfig-telemetry-ext:destinations-with-vpn/destination-with-vpn/state/protocol": {
+    "name": "Protocol Used to Send Data to Collector"
+  },
+  "/openconfig-telemetry:telemetry-system/destination-groups/destination-group/huawei-openconfig-telemetry-ext:destinations-with-vpn/destination-with-vpn/state/tls": {
+    "name": "Allow Data Encryption at the Transport Layer"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/persistent/subscription/config/huawei-openconfig-telemetry-ext:local-source-port": {
+    "name": "Source Port Number"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/persistent/subscription/config/huawei-openconfig-telemetry-ext:tls": {
+    "name": "Allow Data Encryption at the Transport Layer"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/persistent/subscription/config/huawei-openconfig-telemetry-ext:resync-interval": {
+    "name": "Resync interval"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/persistent/subscription/state/huawei-openconfig-telemetry-ext:local-source-port": {
+    "name": "Source Port Number"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/persistent/subscription/state/huawei-openconfig-telemetry-ext:tls": {
+    "name": "Allow Data Encryption at the Transport Layer"
+  },
+  "/openconfig-telemetry:telemetry-system/huawei-openconfig-telemetry-ext:global": {
+    "name": "Global Attributes"
+  },
+  "/openconfig-telemetry:telemetry-system/huawei-openconfig-telemetry-ext:global/config": {
+    "name": "Configuration Node"
+  },
+  "/openconfig-telemetry:telemetry-system/huawei-openconfig-telemetry-ext:global/config/json-only-content": {
+    "name": "JSON Encoding for Content Only"
+  },
+  "/openconfig-telemetry:telemetry-system/huawei-openconfig-telemetry-ext:global/config/cpu-max-usage": {
+    "name": "Maximum CPU Usage"
+  },
+  "/openconfig-telemetry:telemetry-system/huawei-openconfig-telemetry-ext:global/state": {
+    "name": "State Node"
+  },
+  "/openconfig-telemetry:telemetry-system/huawei-openconfig-telemetry-ext:global/state/json-only-content": {
+    "name": "JSON Encoding for Content Only"
+  },
+  "/openconfig-telemetry:telemetry-system/huawei-openconfig-telemetry-ext:global/state/cpu-max-usage": {
+    "name": "Maximum CPU Usage"
+  }
+}

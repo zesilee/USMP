@@ -1,0 +1,167 @@
+{
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4": {
+    "name": "配置IPv4地址"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/address": {
+    "name": "配置IPv4地址"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/address/common-address": {
+    "name": "IPv4普通地址"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/address/common-address/addresses": {
+    "name": "IPv4普通地址"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/address/common-address/addresses/address": {
+    "name": "IPv4普通地址"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/address/common-address/addresses/address/ip": {
+    "name": "IPv4地址"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/address/common-address/addresses/address/mask": {
+    "name": "IPv4地址掩码"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/address/common-address/addresses/address/type": {
+    "name": "IPv4地址类型"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/address/unnumbered-address": {
+    "name": "IPv4借用地址"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/address/unnumbered-address/unnumbered-address": {
+    "name": "IPv4借用地址"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/address/unnumbered-address/unnumbered-address/unnumbered-if-name": {
+    "name": "借用接口"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/address/negotiate-address": {
+    "name": "协商地址"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/address/negotiate-address/negotiation-address": {
+    "name": "协商地址"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/address/negotiate-address/negotiation-address/negotiation-type": {
+    "name": "协商类型"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/state": {
+    "name": "显示IPv4地址"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/state/addresses": {
+    "name": "地址列表"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/state/addresses/address": {
+    "name": "IPv4地址"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/state/addresses/address/ip": {
+    "name": "IPv4地址"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/state/addresses/address/mask": {
+    "name": "IPv4地址掩码"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/state/addresses/address/type": {
+    "name": "IPv4地址类型"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/state/addresses/address/is-block": {
+    "name": "是否阻塞"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/state/gateways": {
+    "name": "网关地址列表"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/state/gateways/gateway": {
+    "name": "网关地址运行状态"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/state/gateways/gateway/gateway": {
+    "name": "接口网关"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6": {
+    "name": "配置IPv6地址"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/mtu6": {
+    "name": "IPv6接口最大传输单元"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/spread-mtu-flag": {
+    "name": "IPv6最大传输单元扩散使能标记"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/auto-link-local": {
+    "name": "配置IPv6 Auto Link-local使能标记"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/address": {
+    "name": "IPv6地址列表"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/address/common-address": {
+    "name": "普通IPv6地址"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/address/common-address/addresses": {
+    "name": "普通IPv6地址"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/address/common-address/addresses/address": {
+    "name": "IPv6地址"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/address/common-address/addresses/address/ip": {
+    "name": "IPv6地址"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/address/common-address/addresses/address/prefix-length": {
+    "name": "IPv6地址前缀长度"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/address/common-address/addresses/address/type": {
+    "name": "IPv6地址类型"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/address/common-address/addresses/address/algorithm-type": {
+    "name": "IPv6地址算法类型"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/nd-prefixs": {
+    "name": "前缀列表"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/nd-prefixs/nd-prefix": {
+    "name": "前缀视图"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/nd-prefixs/nd-prefix/prefix": {
+    "name": "前缀的IPv6地址"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/nd-prefixs/nd-prefix/prefix-len": {
+    "name": "前缀的地址的长度"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/nd-prefixs/nd-prefix/valid-lifetime": {
+    "name": "有效生存期"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/nd-prefixs/nd-prefix/preferred-lifetime": {
+    "name": "优先生存期"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/nd-prefixs/nd-prefix/auto-flag": {
+    "name": "自治标志"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/nd-prefixs/nd-prefix/on-link-flag": {
+    "name": "在链路上标志"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/state": {
+    "name": "显示IPv6地址"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/state/mtu6": {
+    "name": "IPv6接口最大传输单元"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/state/addresses": {
+    "name": "IPv6地址"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/state/addresses/address": {
+    "name": "IPv6地址"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/state/addresses/address/ip": {
+    "name": "IPv6地址"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/state/addresses/address/prefix-length": {
+    "name": "IPv6地址前缀长度"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/state/addresses/address/type": {
+    "name": "IPv6地址类型"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/state/addresses/address/algorithm-type": {
+    "name": "IPv6地址算法类型"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/state/addresses/address/collision-count": {
+    "name": "IPv6地址冲突次数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/state/addresses/address/is-block": {
+    "name": "是否阻塞"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/state/addresses/address/status": {
+    "name": "IPv6地址状态"
+  }
+}

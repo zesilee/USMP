@@ -1,0 +1,130 @@
+/*
+Copyright (C) 2020 Huawei Technologies Co., Ltd. All rights reserved.
+*/
+module huawei-vxlan-path-detect {
+  yang-version 1;
+  namespace "urn:huawei:yang:huawei-vxlan-path-detect";
+  prefix vxlan-path-detect;
+  import ietf-inet-types {
+    prefix inet;
+  }
+  import huawei-pub-type {
+    prefix pub-type;
+  }
+  import huawei-extension {
+    prefix ext;
+  }
+  organization
+    "Huawei Technologies Co., Ltd.";
+  contact
+    "Huawei Industrial Base
+     Bantian, Longgang
+     Shenzhen 518129
+     People's Republic of China
+     Website: http://www.huawei.com
+     Email: support@huawei.com";
+  description
+    "Vxlan oam management, which includes dscp path detection, IP ping, MAC ping, IPv6 ping.";
+  reference
+    "Huawei private.";
+  revision 2020-01-21 {
+    description
+      "Initial revision.";
+    reference
+      "Huawei private.";
+  }
+  ext:task-name "forwarding";
+  container vxlan-path-detect {
+    description
+      "Vxlan path detect.";
+    container ipv4-dscp-path-detect {
+      presence "Enable IPv4 DSCP detect.";
+      description
+        "Configure IPv4 DSCP path detect.";
+      leaf dscp-value {
+        type inet:dscp;
+        mandatory true;
+        description
+          "DSCP value.";
+      }
+    }
+    container ipv6-dscp-path-detect {
+      presence "Enable IPv6 DSCP detect.";
+      description
+        "Configure IPv6 DSCP path detect.";
+      leaf dscp-value {
+        type inet:dscp;
+        mandatory true;
+        description
+          "DSCP value.";
+      }
+    }
+    container ip-ping-detects {
+      description
+        "List of IP ping detect.";
+      list ip-ping-detect {
+        key "src-ip dst-ip";
+        description
+          "Configure IP ping detect.";
+        leaf src-ip {
+          type inet:ipv4-address-no-zone;
+          description
+            "Source IPv4 address";
+        }
+        leaf dst-ip {
+          type inet:ipv4-address-no-zone;
+          description
+            "Destination IPv4 address";
+        }
+      }
+    }
+    container mac-ping-detects {
+      description
+        "List of MAC ping detect.";
+      list mac-ping-detect {
+        key "src-ip dst-ip";
+        description
+          "Configure MAC ping detect.";
+        leaf src-ip {
+          type inet:ipv4-address-no-zone;
+          description
+            "Source IPv4 address";
+        }
+        leaf dst-ip {
+          type inet:ipv4-address-no-zone;
+          description
+            "Destination IPv4 address";
+        }
+        leaf src-mac {
+          type pub-type:mac-address;
+          description
+            "Source MAC address";
+        }
+        leaf dst-mac {
+          type pub-type:mac-address;
+          description
+            "Destination MAC address";
+        }
+      }
+    }
+    container ipv6-ping-detects {
+      description
+        "List of IPv6 ping detect.";
+      list ipv6-ping-detect {
+        key "src-ipv6 dst-ipv6";
+        description
+          "Configure IPv6 ping detect.";
+        leaf src-ipv6 {
+          type inet:ipv6-address-no-zone;
+          description
+            "Source IPv6 address";
+        }
+        leaf dst-ipv6 {
+          type inet:ipv6-address-no-zone;
+          description
+            "Destination IPv6 address";
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,263 @@
+{
+  "/huawei-m-lag:m-lag": {
+    "name": "M-LAG配置和状态"
+  },
+  "/huawei-m-lag:m-lag/dfs-groups": {
+    "name": "创建DFS组列表"
+  },
+  "/huawei-m-lag:m-lag/dfs-groups/dfs-group": {
+    "name": "动态交换服务组"
+  },
+  "/huawei-m-lag:m-lag/dfs-groups/dfs-group/group-id": {
+    "name": "动态交换服务组ID"
+  },
+  "/huawei-m-lag:m-lag/dfs-groups/dfs-group/priority": {
+    "name": "优先级"
+  },
+  "/huawei-m-lag:m-lag/dfs-groups/dfs-group/mac-address-remain": {
+    "name": "配置peer-link上MAC地址"
+  },
+  "/huawei-m-lag:m-lag/dfs-groups/dfs-group/mac-address-remain/paired-port": {
+    "name": "不删除peer-link接口上对应的MAC地址"
+  },
+  "/huawei-m-lag:m-lag/dfs-groups/dfs-group/mac-address-remain/unpaired-port": {
+    "name": "Unpaired-port节点"
+  },
+  "/huawei-m-lag:m-lag/dfs-groups/dfs-group/authentication": {
+    "name": "配置同步报文的验证模式"
+  },
+  "/huawei-m-lag:m-lag/dfs-groups/dfs-group/authentication/mode": {
+    "name": "定义DFS认证模式"
+  },
+  "/huawei-m-lag:m-lag/dfs-groups/dfs-group/authentication/password": {
+    "name": "指定认证密码字符串"
+  },
+  "/huawei-m-lag:m-lag/dfs-groups/dfs-group/up-delay": {
+    "name": "状态的延时时间"
+  },
+  "/huawei-m-lag:m-lag/dfs-groups/dfs-group/up-delay/up-delay-timer": {
+    "name": "延时自动恢复时间间隔"
+  },
+  "/huawei-m-lag:m-lag/dfs-groups/dfs-group/up-delay/auto-recovery-interval": {
+    "name": "M-LAG UP-延迟自动恢复间隔时间"
+  },
+  "/huawei-m-lag:m-lag/dfs-groups/dfs-group/lacp-switch-delay": {
+    "name": "LACP的系统ID延迟切换时间"
+  },
+  "/huawei-m-lag:m-lag/dfs-groups/dfs-group/lacp-switch-delay/system-id-switch-mode": {
+    "name": "LACP系统ID延迟切换时间"
+  },
+  "/huawei-m-lag:m-lag/dfs-groups/dfs-group/lacp-switch-delay/system-id-switch-mode/immediately": {
+    "name": "延迟切换时间为立即切换"
+  },
+  "/huawei-m-lag:m-lag/dfs-groups/dfs-group/lacp-switch-delay/system-id-switch-mode/immediately/immediately": {
+    "name": "LACP的系统ID延迟切换时间为立即切换"
+  },
+  "/huawei-m-lag:m-lag/dfs-groups/dfs-group/lacp-switch-delay/system-id-switch-mode/no-switch": {
+    "name": "Lacp系统id保持不变选项"
+  },
+  "/huawei-m-lag:m-lag/dfs-groups/dfs-group/lacp-switch-delay/system-id-switch-mode/no-switch/no-switch": {
+    "name": "Lacp系统id保持不变"
+  },
+  "/huawei-m-lag:m-lag/dfs-groups/dfs-group/lacp-switch-delay/system-id-switch-mode/switch-delay": {
+    "name": "设置Lacp开关延迟定时器"
+  },
+  "/huawei-m-lag:m-lag/dfs-groups/dfs-group/lacp-switch-delay/system-id-switch-mode/switch-delay/delay-timer": {
+    "name": "设置Lacp开关延迟定时器"
+  },
+  "/huawei-m-lag:m-lag/dfs-groups/dfs-group/sessions": {
+    "name": "DFS协议会话参数列表"
+  },
+  "/huawei-m-lag:m-lag/dfs-groups/dfs-group/sessions/session": {
+    "name": "配置每个DFS协议会话参数"
+  },
+  "/huawei-m-lag:m-lag/dfs-groups/dfs-group/sessions/session/dfs-proto-type": {
+    "name": "定义DFS协议"
+  },
+  "/huawei-m-lag:m-lag/dfs-groups/dfs-group/sessions/session/source-ip": {
+    "name": "DFS 源 IP 地址"
+  },
+  "/huawei-m-lag:m-lag/dfs-groups/dfs-group/sessions/session/peer-ip": {
+    "name": "DFS对端IP地址"
+  },
+  "/huawei-m-lag:m-lag/dfs-groups/dfs-group/sessions/session/socket-type": {
+    "name": "定义DFS套接字类型"
+  },
+  "/huawei-m-lag:m-lag/dfs-groups/dfs-group/sessions/session/peer-port": {
+    "name": "DFS对端端口号"
+  },
+  "/huawei-m-lag:m-lag/dfs-groups/dfs-group/sessions/session/vpn-name": {
+    "name": "VPN实例名称"
+  },
+  "/huawei-m-lag:m-lag/dfs-groups/dfs-group/sessions/session/timeout": {
+    "name": "Keepalive超时值"
+  },
+  "/huawei-m-lag:m-lag/dfs-groups/dfs-group/dad-error-down": {
+    "name": "配置双活动检测错误"
+  },
+  "/huawei-m-lag:m-lag/dfs-groups/dfs-group/dad-error-down/enable": {
+    "name": "启用或禁用错误机制"
+  },
+  "/huawei-m-lag:m-lag/dfs-groups/dfs-group/dad-error-down/delay": {
+    "name": "Error-down延迟时间"
+  },
+  "/huawei-m-lag:m-lag/dfs-groups/dfs-group/dad-error-down/error-down-mode": {
+    "name": "定义错误向下模式"
+  },
+  "/huawei-m-lag:m-lag/dfs-groups/dfs-group/consistency-check": {
+    "name": "配置一致性检查参数"
+  },
+  "/huawei-m-lag:m-lag/dfs-groups/dfs-group/consistency-check/mode": {
+    "name": "指定一致性检查模式"
+  },
+  "/huawei-m-lag:m-lag/negotiation-states": {
+    "name": "协商参数和状态列表"
+  },
+  "/huawei-m-lag:m-lag/negotiation-states/negotiation-state": {
+    "name": "协商参数和状态"
+  },
+  "/huawei-m-lag:m-lag/negotiation-states/negotiation-state/dfs-role": {
+    "name": "定义本地或对端的DFS角色"
+  },
+  "/huawei-m-lag:m-lag/negotiation-states/negotiation-state/heart-beat-state": {
+    "name": "定义心跳状态"
+  },
+  "/huawei-m-lag:m-lag/negotiation-states/negotiation-state/dfs-group-states": {
+    "name": "M-LAG配置和状态列表"
+  },
+  "/huawei-m-lag:m-lag/negotiation-states/negotiation-state/dfs-group-states/dfs-group-state": {
+    "name": "每个DFS组的M-LAG配置和状态的操作状态"
+  },
+  "/huawei-m-lag:m-lag/negotiation-states/negotiation-state/dfs-group-states/dfs-group-state/group-id": {
+    "name": "动态结构服务组ID"
+  },
+  "/huawei-m-lag:m-lag/negotiation-states/negotiation-state/dfs-group-states/dfs-group-state/priority": {
+    "name": "动态结构服务组的优先级"
+  },
+  "/huawei-m-lag:m-lag/negotiation-states/negotiation-state/dfs-group-states/dfs-group-state/udp-port": {
+    "name": "DFS UDP 端口"
+  },
+  "/huawei-m-lag:m-lag/negotiation-states/negotiation-state/dfs-group-states/dfs-group-state/ip-address": {
+    "name": "DFS 源 IP 地址"
+  },
+  "/huawei-m-lag:m-lag/negotiation-states/negotiation-state/dfs-group-states/dfs-group-state/vpn-name": {
+    "name": "源ip地址绑定的VPN实例名称"
+  },
+  "/huawei-m-lag:m-lag/negotiation-states/negotiation-state/dfs-group-states/dfs-group-state/system-id": {
+    "name": "系统标识"
+  },
+  "/huawei-m-lag:m-lag/negotiation-states/negotiation-state/dfs-group-states/dfs-group-state/system-name": {
+    "name": "系统名称"
+  },
+  "/huawei-m-lag:m-lag/negotiation-states/negotiation-state/dfs-group-states/dfs-group-state/state": {
+    "name": "M-LAG 协商状态"
+  },
+  "/huawei-m-lag:m-lag/negotiation-states/negotiation-state/dfs-group-states/dfs-group-state/causation": {
+    "name": "协商失败原因"
+  },
+  "/huawei-m-lag:m-lag/negotiation-states/negotiation-state/dfs-group-states/dfs-group-state/consistency-check": {
+    "name": "配置一致性检查结果"
+  },
+  "/huawei-m-lag:m-lag/negotiation-states/negotiation-state/dfs-group-states/dfs-group-state/version": {
+    "name": "设备版本"
+  },
+  "/huawei-m-lag:m-lag/negotiation-states/negotiation-state/dfs-group-states/dfs-group-state/device-type": {
+    "name": "设备系列"
+  },
+  "/huawei-m-lag:m-lag/negotiation-states/negotiation-state/dfs-group-states/m-lags": {
+    "name": "一个DFS组中的M-LAG配置和状态列表"
+  },
+  "/huawei-m-lag:m-lag/negotiation-states/negotiation-state/dfs-group-states/m-lags/m-lag": {
+    "name": "M-LAG的本地或远程状态的操作状态"
+  },
+  "/huawei-m-lag:m-lag/negotiation-states/negotiation-state/dfs-group-states/m-lags/m-lag/id": {
+    "name": "M-LAG ID"
+  },
+  "/huawei-m-lag:m-lag/negotiation-states/negotiation-state/dfs-group-states/m-lags/m-lag/group-id": {
+    "name": "动态结构服务组ID"
+  },
+  "/huawei-m-lag:m-lag/negotiation-states/negotiation-state/dfs-group-states/m-lags/m-lag/interface-name": {
+    "name": "接口名称"
+  },
+  "/huawei-m-lag:m-lag/negotiation-states/negotiation-state/dfs-group-states/m-lags/m-lag/port-state": {
+    "name": "接口状态"
+  },
+  "/huawei-m-lag:m-lag/negotiation-states/negotiation-state/dfs-group-states/m-lags/m-lag/port-status": {
+    "name": "M-LAG对应的接口角色"
+  },
+  "/huawei-m-lag:m-lag/negotiation-states/negotiation-state/dfs-group-states/m-lags/m-lag/port-role": {
+    "name": "M-LAG对应的接口角色"
+  },
+  "/huawei-m-lag:m-lag/negotiation-states/negotiation-state/dfs-group-states/m-lags/m-lag/consistency-check": {
+    "name": "M-LAG的一致性检查结果"
+  },
+  "/huawei-m-lag:m-lag/negotiation-states/negotiation-state/dfs-group-states/m-lags/m-lag/causation": {
+    "name": "导致M-LAG协商失败且序列号最小的原因"
+  },
+  "/huawei-m-lag:m-lag/negotiation-states/negotiation-state/dfs-group-states/peer-link-states": {
+    "name": "对端链路配置和状态列表"
+  },
+  "/huawei-m-lag:m-lag/negotiation-states/negotiation-state/dfs-group-states/peer-link-states/peer-link-state": {
+    "name": "对端链路配置和状态的操作状态"
+  },
+  "/huawei-m-lag:m-lag/negotiation-states/negotiation-state/dfs-group-states/peer-link-states/peer-link-state/group-id": {
+    "name": "动态结构服务组ID"
+  },
+  "/huawei-m-lag:m-lag/negotiation-states/negotiation-state/dfs-group-states/peer-link-states/peer-link-state/link-id": {
+    "name": "成员交换机之间的Peer Link"
+  },
+  "/huawei-m-lag:m-lag/negotiation-states/negotiation-state/dfs-group-states/peer-link-states/peer-link-state/interface-name": {
+    "name": "对端链路对应的本地ETH-Trunk接口状态"
+  },
+  "/huawei-m-lag:m-lag/negotiation-states/negotiation-state/dfs-group-states/peer-link-states/peer-link-state/port-state": {
+    "name": "对端链路对应的本地ETH-Trunk接口状态"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-m-lag:m-lag": {
+    "name": "配置接口相关的M-LAG配置"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-m-lag:m-lag/dfs-groups": {
+    "name": "每个ETH-Trunk接口的DFS组和M-LAG ID列表"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-m-lag:m-lag/dfs-groups/dfs-group": {
+    "name": "在Eth-Trunk接口上配置M-LAG"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-m-lag:m-lag/dfs-groups/dfs-group/group-id": {
+    "name": "动态结构服务组ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-m-lag:m-lag/dfs-groups/dfs-group/m-lag-id": {
+    "name": "ETH-Trunk接口上定义M-LAG ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-m-lag:m-lag/peer-link": {
+    "name": "Peer-link配置"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-m-lag:m-lag/peer-link/peer-link-id": {
+    "name": "定义Eth-Trunk口为peer-link口"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-m-lag:m-lag/peer-link/exclude-vlan": {
+    "name": "配置端口排除 vlan 范围"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-m-lag:m-lag/peer-link/peer-link-type": {
+    "name": "Peer-link类型"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-m-lag:m-lag/error-down-port": {
+    "name": "配置或挂起端口配置"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-m-lag:m-lag/error-down-port/port": {
+    "name": "定义error down的端口"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-m-lag:m-lag/routing-addr": {
+    "name": "运行OSPF或BGP over M-LAG的路由协议"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-m-lag:m-lag/routing-addr/routing-ipv4-addr": {
+    "name": "OSPF和BGPv4对端的IPv4地址"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-m-lag:m-lag/routing-addr/ipv4-wild": {
+    "name": "路由IPv4地址的通配符掩码"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-m-lag:m-lag/routing-addr/routing-ipv6-addr": {
+    "name": "BGPv6对端的IPv6全局地址"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-m-lag:m-lag/routing-addr/routing-addr-linklocal": {
+    "name": "配置的链路本地IPv6地址的OSPFv3对端"
+  }
+}

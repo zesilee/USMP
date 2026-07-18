@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<split-table-nodes>
+    <leaflist-nodes>
+        <leaflist-node>
+            <path>/huawei-bfd:bfd/huawei-bfd-fwm:forwarding-match/remote-discriminator-values</path>
+        </leaflist-node>
+    </leaflist-nodes>
+</split-table-nodes>

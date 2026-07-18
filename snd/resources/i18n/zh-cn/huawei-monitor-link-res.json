@@ -1,0 +1,59 @@
+{
+  "/huawei-monitor-link:mtlk": {
+    "name": "监控接口"
+  },
+  "/huawei-monitor-link:monitor-link/monitor-link-groups": {
+    "name": "监控组列表"
+  },
+  "/huawei-monitor-link:monitor-link/monitor-link-groups/monitor-link-group": {
+    "name": "配置链路监控组"
+  },
+  "/huawei-monitor-link:monitor-link/monitor-link-groups/monitor-link-group/id": {
+    "name": "编号"
+  },
+  "/huawei-monitor-link:monitor-link/monitor-link-groups/monitor-link-group/enable": {
+    "name": "启用/禁用"
+  },
+  "/huawei-monitor-link:monitor-link/monitor-link-groups/monitor-link-group/recover-time": {
+    "name": "回切时间"
+  },
+  "/huawei-monitor-link:monitor-link/monitor-link-groups/monitor-link-group/uplink-interfaces": {
+    "name": "上行列表"
+  },
+  "/huawei-monitor-link:monitor-link/monitor-link-groups/monitor-link-group/uplink-interfaces/uplink-interface": {
+    "name": "配置上行接口"
+  },
+  "/huawei-monitor-link:monitor-link/monitor-link-groups/monitor-link-group/uplink-interfaces/uplink-interface/if-name": {
+    "name": "接口"
+  },
+  "/huawei-monitor-link:monitor-link/monitor-link-groups/monitor-link-group/uplink-interfaces/uplink-interface/port-state": {
+    "name": "状态"
+  },
+  "/huawei-monitor-link:monitor-link/monitor-link-groups/monitor-link-group/uplink-interfaces/uplink-interface/last-up-time": {
+    "name": "Up时间"
+  },
+  "/huawei-monitor-link:monitor-link/monitor-link-groups/monitor-link-group/uplink-interfaces/uplink-interface/last-down-time": {
+    "name": "Down时间"
+  },
+  "/huawei-monitor-link:monitor-link/monitor-link-groups/monitor-link-group/downlink-interfaces": {
+    "name": "下行列表"
+  },
+  "/huawei-monitor-link:monitor-link/monitor-link-groups/monitor-link-group/downlink-interfaces/downlink-interface": {
+    "name": "配置下行接口"
+  },
+  "/huawei-monitor-link:monitor-link/monitor-link-groups/monitor-link-group/downlink-interfaces/downlink-interface/if-name": {
+    "name": "指定接口"
+  },
+  "/huawei-monitor-link:monitor-link/monitor-link-groups/monitor-link-group/downlink-interfaces/downlink-interface/id": {
+    "name": "指定接口ID"
+  },
+  "/huawei-monitor-link:monitor-link/monitor-link-groups/monitor-link-group/downlink-interfaces/downlink-interface/port-state": {
+    "name": "状态"
+  },
+  "/huawei-monitor-link:monitor-link/monitor-link-groups/monitor-link-group/downlink-interfaces/downlink-interface/last-up-time": {
+    "name": "Up的时间"
+  },
+  "/huawei-monitor-link:monitor-link/monitor-link-groups/monitor-link-group/downlink-interfaces/downlink-interface/last-down-time": {
+    "name": "Down时间"
+  }
+}

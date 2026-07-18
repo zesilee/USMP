@@ -1,0 +1,197 @@
+{
+  "/huawei-vlan:vlan": {
+    "name": "VLAN"
+  },
+  "/huawei-vlan:vlan/vlans": {
+    "name": "VLAN List"
+  },
+  "/huawei-vlan:vlan/vlans/vlan": {
+    "name": "VLAN Information"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/id": {
+    "name": "VLAN ID"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/name": {
+    "name": "VLAN Name"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/description": {
+    "name": "VLAN Description"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/type": {
+    "name": "VLAN Type"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/admin-status": {
+    "name": "Administrative Status"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/broadcast-discard": {
+    "name": "Broadcast Enable"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/unknown-multicast-discard": {
+    "name": "Unknown Multicast Discard"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/mac-learning": {
+    "name": "MAC Learning Enable"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/statistic-enable": {
+    "name": "Statistic Enable"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/statistic-discard": {
+    "name": "BUM Statistic Discard Enable"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/mac-aging-time": {
+    "name": "MAC Address Aging Time"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/super-vlan": {
+    "name": "Super-VLAN ID"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/suppression": {
+    "name": "Suppression"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/suppression/inbound": {
+    "name": "Inbound Suppression"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/suppression/outbound": {
+    "name": "Outbound Suppression"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/ip-subnet-vlans": {
+    "name": "LAN assignments based on IP subnet"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/ip-subnet-vlans/ip-subnet-vlan": {
+    "name": "VLAN assignment based on IP subnet"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/ip-subnet-vlans/ip-subnet-vlan/index": {
+    "name": "Subnet index"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/ip-subnet-vlans/ip-subnet-vlan/ip-prefix": {
+    "name": "IP prefix"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/ip-subnet-vlans/ip-subnet-vlan/priority": {
+    "name": "Priority"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/member-ports": {
+    "name": "List of ports in a VLAN"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/member-ports/member-port": {
+    "name": "Port in a VLAN"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/member-ports/member-port/interface-name": {
+    "name": "Port Name"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/member-ports/member-port/access-type": {
+    "name": "Port Link Type"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/member-ports/member-port/state": {
+    "name": "State of port VLAN"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/statistics": {
+    "name": "VLAN state"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/statistics/inbound-packets": {
+    "name": "Number of inbound packets"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/statistics/inbound-bytes": {
+    "name": "Number of inbound bytes"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/statistics/outbound-packets": {
+    "name": "Number of outbound packets"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/statistics/outbound-bytes": {
+    "name": "Number of outbound bytes"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/statistics/inbound-unicasts": {
+    "name": "Number of inbound unicasts"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/statistics/inbound-multicasts": {
+    "name": "Number of inbound multicasts"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/statistics/inbound-broadcasts": {
+    "name": "Number of outbound broadcasts"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/statistics/inbound-unknown-unicast-drops": {
+    "name": "Number of inbound unknown unicast drops"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/statistics/inbound-unknown-multicast-drops": {
+    "name": "Number of inbound unknown multicast drops"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/statistics/inbound-broadcast-drops": {
+    "name": "Number of inbound broadcast drops"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/statistics/outbound-unicasts": {
+    "name": "Number of outbound unicasts"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/statistics/outbound-multicasts": {
+    "name": "Number of Outbound Multicast Groups"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/statistics/outbound-broadcasts": {
+    "name": "Number of outbound broadcasts"
+  },
+  "/huawei-vlan:vlan/instances": {
+    "name": "Instances"
+  },
+  "/huawei-vlan:vlan/instances/instance": {
+    "name": "Instances"
+  },
+  "/huawei-vlan:vlan/instances/instance/id": {
+    "name": "Instance ID"
+  },
+  "/huawei-vlan:vlan/instances/instance/vlan-list": {
+    "name": "VLAN list"
+  },
+  "/huawei-vlan:vlan/default-instance": {
+    "name": "Default instance"
+  },
+  "/huawei-vlan:vlan/default-instance/vlan-list": {
+    "name": "VLAN list"
+  },
+  "/huawei-vlan:vlan/dynamic-vlans": {
+    "name": "Dynamic VLAN List"
+  },
+  "/huawei-vlan:vlan/dynamic-vlans/dynamic-vlan": {
+    "name": "Dynamic VLAN Information"
+  },
+  "/huawei-vlan:vlan/dynamic-vlans/dynamic-vlan/id": {
+    "name": "Dynamic VLAN ID"
+  },
+  "/huawei-vlan:vlan/dynamic-vlans/dynamic-vlan/description": {
+    "name": "Dynamic VLAN Description"
+  },
+  "/huawei-vlan:vlan/dynamic-vlans/dynamic-vlan/status": {
+    "name": "Dynamic VLAN Management Status"
+  },
+  "/huawei-vlan:vlan/dynamic-vlans/dynamic-vlan/active-ports": {
+    "name": "List of Ports in a Dynamic VLAN"
+  },
+  "/huawei-vlan:vlan/dynamic-vlans/dynamic-vlan/active-ports/active-port": {
+    "name": "Ports in a Dynamic VLAN"
+  },
+  "/huawei-vlan:vlan/dynamic-vlans/dynamic-vlan/active-ports/active-port/interface-name": {
+    "name": "Port name"
+  },
+  "/huawei-vlan:vlan/dynamic-vlans/dynamic-vlan/active-ports/active-port/access-type": {
+    "name": "Port Link Type"
+  },
+  "/huawei-vlan:vlan/dynamic-vlans/dynamic-vlan/active-ports/active-port/tag-mode": {
+    "name": "Port tag mode"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-vlan:vlanif-attribute": {
+    "name": "VLANIF Interface"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-vlan:vlanif-attribute/band-width-type": {
+    "name": "VLANIF interface bandwidth"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-vlan:vlanif-attribute/band-width-type/band-width-mbps": {
+    "name": "VLANIF interface bandwidth (Mbit/s)"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-vlan:vlanif-attribute/band-width-type/band-width-mbps/band-width": {
+    "name": "VLANIF interface bandwidth (Mbit/s)"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-vlan:vlanif-attribute/band-width-type/band-width-kbps": {
+    "name": "VLANIF interface bandwidth (kbit/s)"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-vlan:vlanif-attribute/band-width-type/band-width-kbps/band-width-kbps": {
+    "name": "VLAIF interface bandwidth (kbit/s)"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-vlan:vlanif-attribute/damping-time": {
+    "name": "Damping Time (s)"
+  }
+}

@@ -1,0 +1,428 @@
+{
+  "/huawei-cfg:cfg": {
+    "name": "配置管理"
+  },
+  "/huawei-cfg:cfg/autosave": {
+    "name": "使能配置自动保存"
+  },
+  "/huawei-cfg:cfg/autosave/interval-time": {
+    "name": "定时保存间隔(min)"
+  },
+  "/huawei-cfg:cfg/autosave/delay-time": {
+    "name": "延时时间(min)"
+  },
+  "/huawei-cfg:cfg/autosave/cpu-limit": {
+    "name": "CPU占用率上限"
+  },
+  "/huawei-cfg:cfg/backup-servers": {
+    "name": "备份服务器列表"
+  },
+  "/huawei-cfg:cfg/backup-servers/backup-server": {
+    "name": "自动保存服务器"
+  },
+  "/huawei-cfg:cfg/backup-servers/backup-server/server-ip": {
+    "name": "服务器IP地址"
+  },
+  "/huawei-cfg:cfg/backup-servers/backup-server/vpn-instance": {
+    "name": "VPN实例名称"
+  },
+  "/huawei-cfg:cfg/backup-servers/backup-server/transport-type": {
+    "name": "传输协议"
+  },
+  "/huawei-cfg:cfg/backup-servers/backup-server/username": {
+    "name": "用户名"
+  },
+  "/huawei-cfg:cfg/backup-servers/backup-server/password": {
+    "name": "密码"
+  },
+  "/huawei-cfg:cfg/backup-servers/backup-server/path": {
+    "name": "路径"
+  },
+  "/huawei-cfg:cfg/backup-servers/backup-server/port": {
+    "name": "服务器端口"
+  },
+  "/huawei-cfg:cfg/autosave-checkpoint": {
+    "name": "定时配置回退点"
+  },
+  "/huawei-cfg:cfg/autosave-checkpoint/start-time": {
+    "name": "定时配置回退点的生成时间"
+  },
+  "/huawei-cfg:cfg/configuration-operation-cpu-limit": {
+    "name": "配置管理限速"
+  },
+  "/huawei-cfg:cfg/configuration-operation-cpu-limit/snmp-cpu-limit": {
+    "name": "SNMP接入类型限速CPU阈值"
+  },
+  "/huawei-cfg:cfg/configuration-operation-cpu-limit/snmp-switch": {
+    "name": "SNMP接入类型"
+  },
+  "/huawei-cfg:cfg/configuration-operation-cpu-limit/netconf-cpu-limit": {
+    "name": "NETCONF接入类型限速CPU阈值"
+  },
+  "/huawei-cfg:cfg/configuration-operation-cpu-limit/netconf-switch": {
+    "name": "NETCONF接入类型"
+  },
+  "/huawei-cfg:cfg/global-switch": {
+    "name": "配置管理特性全局配置"
+  },
+  "/huawei-cfg:cfg/global-switch/configuration-slave-detect-switch": {
+    "name": "主备一致自动校验"
+  },
+  "/huawei-cfg:cfg/global-switch/appdata-detect-switch": {
+    "name": "APPDATA自动校验"
+  },
+  "/huawei-cfg:cfg/global-switch/checkpoint-switch": {
+    "name": "二阶段配置提交配置回退点开关状态"
+  },
+  "/huawei-cfg:cfg/lock-by-users": {
+    "name": "用户锁定或解除锁定系统配置"
+  },
+  "/huawei-cfg:cfg/lock-by-users/lock-by-user": {
+    "name": "用户锁定或解除锁定系统配置"
+  },
+  "/huawei-cfg:cfg/lock-by-users/lock-by-user/lock-username": {
+    "name": "锁定配置用户"
+  },
+  "/huawei-cfg:cfg/lock-by-users/lock-by-user/lock-time": {
+    "name": "锁定时间"
+  },
+  "/huawei-cfg:cfg/lock-by-users/lock-by-user/identifier": {
+    "name": "锁定配置唯一ID"
+  },
+  "/huawei-cfg:cfg/lock-by-users/lock-by-user/unlock-username": {
+    "name": "解除系统配置锁定的用户"
+  },
+  "/huawei-cfg:cfg/lock-by-users/lock-by-user/unlock-time": {
+    "name": "解除锁定时间"
+  },
+  "/huawei-cfg:cfg/startup-infos": {
+    "name": "系统启动信息列表"
+  },
+  "/huawei-cfg:cfg/startup-infos/startup-info": {
+    "name": "系统启动信息"
+  },
+  "/huawei-cfg:cfg/startup-infos/startup-info/position": {
+    "name": "设备位置"
+  },
+  "/huawei-cfg:cfg/startup-infos/startup-info/configed-system-software": {
+    "name": "本次预期启动系统软件"
+  },
+  "/huawei-cfg:cfg/startup-infos/startup-info/current-system-software": {
+    "name": "本次实际启动系统软件"
+  },
+  "/huawei-cfg:cfg/startup-infos/startup-info/next-system-software": {
+    "name": "下次启动系统软件"
+  },
+  "/huawei-cfg:cfg/startup-infos/startup-info/current-cfg-file": {
+    "name": "本次启动文件"
+  },
+  "/huawei-cfg:cfg/startup-infos/startup-info/next-cfg-file": {
+    "name": "下次启动文件"
+  },
+  "/huawei-cfg:cfg/startup-infos/startup-info/current-patch-file": {
+    "name": "本次启动补丁包文件"
+  },
+  "/huawei-cfg:cfg/startup-infos/startup-info/next-patch-file": {
+    "name": "下次启动补丁包文件"
+  },
+  "/huawei-cfg:cfg/cfg-files": {
+    "name": "配置文件列表"
+  },
+  "/huawei-cfg:cfg/cfg-files/cfg-file": {
+    "name": "配置文件"
+  },
+  "/huawei-cfg:cfg/cfg-files/cfg-file/filename": {
+    "name": "文件名"
+  },
+  "/huawei-cfg:cfg/cfg-files/cfg-file/size": {
+    "name": "文件大小"
+  },
+  "/huawei-cfg:cfg/cfg-files/cfg-file/create-time": {
+    "name": "创建时间"
+  },
+  "/huawei-cfg:cfg/cfg-files/cfg-file/file-current-changes": {
+    "name": "配置文件与当前配置差异列表"
+  },
+  "/huawei-cfg:cfg/cfg-files/cfg-file/file-current-changes/file-current-change": {
+    "name": "配置文件与当前配置差异"
+  },
+  "/huawei-cfg:cfg/cfg-files/cfg-file/file-current-changes/file-current-change/index": {
+    "name": "配置差异序号"
+  },
+  "/huawei-cfg:cfg/cfg-files/cfg-file/file-current-changes/file-current-change/config-change": {
+    "name": "配置差异信息"
+  },
+  "/huawei-cfg:cfg/checkpoints": {
+    "name": "配置回退点列表"
+  },
+  "/huawei-cfg:cfg/checkpoints/checkpoint": {
+    "name": "配置回退点"
+  },
+  "/huawei-cfg:cfg/checkpoints/checkpoint/commit-id": {
+    "name": "配置回退点ID"
+  },
+  "/huawei-cfg:cfg/checkpoints/checkpoint/user-label": {
+    "name": "配置回退点标签"
+  },
+  "/huawei-cfg:cfg/checkpoints/checkpoint/username": {
+    "name": "用户名"
+  },
+  "/huawei-cfg:cfg/checkpoints/checkpoint/line": {
+    "name": "终端实例"
+  },
+  "/huawei-cfg:cfg/checkpoints/checkpoint/client": {
+    "name": "配置工具端"
+  },
+  "/huawei-cfg:cfg/checkpoints/checkpoint/timestamp": {
+    "name": "时间戳"
+  },
+  "/huawei-cfg:cfg/checkpoints/checkpoint/description": {
+    "name": "回退点注释信息"
+  },
+  "/huawei-cfg:cfg/checkpoints/checkpoint/current-point-changes": {
+    "name": "回退点配置变更列表"
+  },
+  "/huawei-cfg:cfg/checkpoints/checkpoint/current-point-changes/current-point-change": {
+    "name": "回退点配置变更"
+  },
+  "/huawei-cfg:cfg/checkpoints/checkpoint/current-point-changes/current-point-change/index": {
+    "name": "配置变更序号"
+  },
+  "/huawei-cfg:cfg/checkpoints/checkpoint/current-point-changes/current-point-change/config-change": {
+    "name": "配置变更信息"
+  },
+  "/huawei-cfg:cfg/checkpoints/checkpoint/since-point-changes": {
+    "name": "回退点与当前配置差异列表"
+  },
+  "/huawei-cfg:cfg/checkpoints/checkpoint/since-point-changes/since-point-change": {
+    "name": "回退点与当前配置差异"
+  },
+  "/huawei-cfg:cfg/checkpoints/checkpoint/since-point-changes/since-point-change/index": {
+    "name": "配置变更序号"
+  },
+  "/huawei-cfg:cfg/checkpoints/checkpoint/since-point-changes/since-point-change/config-change": {
+    "name": "配置变更信息"
+  },
+  "/huawei-cfg:cfg/trial-status": {
+    "name": "试运行状态"
+  },
+  "/huawei-cfg:cfg/trial-status/status": {
+    "name": "试运行状态"
+  },
+  "/huawei-cfg:cfg/trial-status/time-left": {
+    "name": "试运行剩余时间"
+  },
+  "/huawei-cfg:cfg/lock-by-username": {
+    "name": "用户锁定或解除锁定系统配置"
+  },
+  "/huawei-cfg:cfg/lock-by-username/lock-username": {
+    "name": "锁定配置用户"
+  },
+  "/huawei-cfg:cfg/lock-by-username/lock-time": {
+    "name": "锁定时间"
+  },
+  "/huawei-cfg:cfg/lock-by-username/identifier": {
+    "name": "锁定配置唯一ID"
+  },
+  "/huawei-cfg:cfg/lock-by-username/unlock-username": {
+    "name": "解除系统配置锁定的用户"
+  },
+  "/huawei-cfg:cfg/lock-by-username/unlock-time": {
+    "name": "解除锁定时间"
+  },
+  "/huawei-cfg:cfg/backup-and-recovery-states": {
+    "name": "操作状态列表"
+  },
+  "/huawei-cfg:cfg/backup-and-recovery-states/backup-and-recovery-state": {
+    "name": "操作状态表"
+  },
+  "/huawei-cfg:cfg/backup-and-recovery-states/backup-and-recovery-state/index": {
+    "name": "操作ID"
+  },
+  "/huawei-cfg:cfg/backup-and-recovery-states/backup-and-recovery-state/operation-type": {
+    "name": "操作类型"
+  },
+  "/huawei-cfg:cfg/backup-and-recovery-states/backup-and-recovery-state/state": {
+    "name": "操作结果"
+  },
+  "/huawei-cfg:cfg/backup-and-recovery-states/backup-and-recovery-state/operate-progress": {
+    "name": "操作进度"
+  },
+  "/huawei-cfg:cfg/backup-and-recovery-states/backup-and-recovery-state/start-time": {
+    "name": "操作开始时间"
+  },
+  "/huawei-cfg:cfg/backup-and-recovery-states/backup-and-recovery-state/last-time": {
+    "name": "操作结束时间"
+  },
+  "/huawei-cfg:cfg/backup-and-recovery-states/backup-and-recovery-state/filename": {
+    "name": "配置文件名"
+  },
+  "/huawei-cfg:cfg/backup-and-recovery-states/backup-and-recovery-state/service-type": {
+    "name": "文件服务类型"
+  },
+  "/huawei-cfg:cfg/config-recover-results": {
+    "name": "配置恢复结果列表"
+  },
+  "/huawei-cfg:cfg/config-recover-results/config-recover-result": {
+    "name": "配置恢复结果"
+  },
+  "/huawei-cfg:cfg/config-recover-results/config-recover-result/index": {
+    "name": "命令序号"
+  },
+  "/huawei-cfg:cfg/config-recover-results/config-recover-result/command": {
+    "name": "配置命令"
+  },
+  "/huawei-cfg:cfg/config-recover-results/config-recover-result/view": {
+    "name": "命令视图"
+  },
+  "/huawei-cfg:cfg/config-recover-results/config-recover-result/line": {
+    "name": "命令行号"
+  },
+  "/huawei-cfg:cfg/config-recover-results/config-recover-result/reason": {
+    "name": "命令失败原因"
+  },
+  "/huawei-cfg:cfg/config-recover-results/config-recover-result/time": {
+    "name": "命令执行时间"
+  },
+  "/huawei-cfg:set-startup": {
+    "name": "设置下次启动文件"
+  },
+  "/huawei-cfg:set-startup/input/filename": {
+    "name": "配置文件名"
+  },
+  "/huawei-cfg:rollback-by-commit-id": {
+    "name": "根据指定的配置回退点ID执行配置回退"
+  },
+  "/huawei-cfg:rollback-by-commit-id/input/commit-id": {
+    "name": "配置回退点ID"
+  },
+  "/huawei-cfg:rollback-by-user-label": {
+    "name": "根据指定的配置标签回退点执行配置回退"
+  },
+  "/huawei-cfg:rollback-by-user-label/input/commit-id": {
+    "name": "配置回退点ID"
+  },
+  "/huawei-cfg:rollback-by-user-label/input/user-label": {
+    "name": "配置回退点标签"
+  },
+  "/huawei-cfg:rollback-by-last-num": {
+    "name": "根据指定的配置回退点个数执行配置回退"
+  },
+  "/huawei-cfg:rollback-by-last-num/input/checkpoint-num": {
+    "name": "配置回退点个数"
+  },
+  "/huawei-cfg:rollback-by-file": {
+    "name": "配置替换到指定的配置文件"
+  },
+  "/huawei-cfg:rollback-by-file/input/filename": {
+    "name": "配置文件名"
+  },
+  "/huawei-cfg:delete-checkpoint-by-oldest-num": {
+    "name": "删除配置回退点"
+  },
+  "/huawei-cfg:delete-checkpoint-by-oldest-num/input/checkpoint-num": {
+    "name": "删除的配置回退点个数"
+  },
+  "/huawei-cfg:set-user-label-by-commit-id": {
+    "name": "设置配置回退点标签"
+  },
+  "/huawei-cfg:set-user-label-by-commit-id/input/commit-id": {
+    "name": "配置回退点ID"
+  },
+  "/huawei-cfg:set-user-label-by-commit-id/input/user-label": {
+    "name": "配置回退点标签"
+  },
+  "/huawei-cfg:create-user-label-checkpoint": {
+    "name": "创建配置标签回退点"
+  },
+  "/huawei-cfg:create-user-label-checkpoint/input/user-label": {
+    "name": "配置回退点标签"
+  },
+  "/huawei-cfg:create-user-label-checkpoint/input/description": {
+    "name": "回退点注释信息"
+  },
+  "/huawei-cfg:delete-user-label-checkpoint": {
+    "name": "删除配置标签回退点"
+  },
+  "/huawei-cfg:delete-user-label-checkpoint/input/commit-id": {
+    "name": "配置回退点ID"
+  },
+  "/huawei-cfg:cfg-file-backup-and-recovery": {
+    "name": "配置备份和恢复"
+  },
+  "/huawei-cfg:cfg-file-backup-and-recovery/input/index": {
+    "name": "操作ID"
+  },
+  "/huawei-cfg:cfg-file-backup-and-recovery/input/operation-type": {
+    "name": "操作类型"
+  },
+  "/huawei-cfg:cfg-file-backup-and-recovery/input/filename": {
+    "name": "配置文件名"
+  },
+  "/huawei-cfg:cfg-file-backup-and-recovery/input/transport-type": {
+    "name": "协议类型"
+  },
+  "/huawei-cfg:cfg-file-backup-and-recovery/input/server-ip": {
+    "name": "服务器IP地址"
+  },
+  "/huawei-cfg:cfg-file-backup-and-recovery/input/username": {
+    "name": "用户名"
+  },
+  "/huawei-cfg:cfg-file-backup-and-recovery/input/password": {
+    "name": "密码"
+  },
+  "/huawei-cfg:cfg-file-backup-and-recovery/input/vpn-instance": {
+    "name": "VPN实例名"
+  },
+  "/huawei-cfg:cfg-file-backup-and-recovery/input/use-net-manager-vpn": {
+    "name": "是否使用全局VPN"
+  },
+  "/huawei-cfg:save": {
+    "name": "保存配置"
+  },
+  "/huawei-cfg:save/input/filename": {
+    "name": "配置文件名"
+  },
+  "/huawei-cfg:clear-interface-config": {
+    "name": "清除接口配置"
+  },
+  "/huawei-cfg:clear-interface-config/input/interface-name": {
+    "name": "接口名称"
+  },
+  "/rpcs/huawei-cfg:cfg/set-startup": {
+    "name": "设置下次启动文件"
+  },
+  "/rpcs/huawei-cfg:cfg/rollback-by-commit-id": {
+    "name": "根据指定的配置回退点ID执行配置回退"
+  },
+  "/rpcs/huawei-cfg:cfg/rollback-by-user-label": {
+    "name": "根据指定的配置标签回退点执行配置回退"
+  },
+  "/rpcs/huawei-cfg:cfg/rollback-by-last-num": {
+    "name": "根据指定的配置回退点个数执行配置回退"
+  },
+  "/rpcs/huawei-cfg:cfg/rollback-by-file": {
+    "name": "配置替换到指定的配置文件"
+  },
+  "/rpcs/huawei-cfg:cfg/delete-checkpoint-by-oldest-num": {
+    "name": "删除配置回退点"
+  },
+  "/rpcs/huawei-cfg:cfg/set-user-label-by-commit-id": {
+    "name": "设置配置回退点标签"
+  },
+  "/rpcs/huawei-cfg:cfg/create-user-label-checkpoint": {
+    "name": "创建配置标签回退点"
+  },
+  "/rpcs/huawei-cfg:cfg/delete-user-label-checkpoint": {
+    "name": "删除配置标签回退点"
+  },
+  "/rpcs/huawei-cfg:cfg/cfg-file-backup-and-recovery": {
+    "name": "配置备份和恢复"
+  },
+  "/rpcs/huawei-cfg:cfg/save": {
+    "name": "保存配置"
+  },
+  "/rpcs/huawei-cfg:cfg/clear-interface-config": {
+    "name": "清除接口配置"
+  }
+}

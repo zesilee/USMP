@@ -16,7 +16,7 @@ import (
 // 深层子树（instance/bgp/base-process/peers/peer/afs/af），验证：深层嵌套 + list-under-
 // list + 枚举 key（af-type）+ 深处 per-node namespace。正确性靠 encode namespace 真值断言。
 
-const peerConfigTrueLeaves = 41 // 26 直属 + timer/graceful-restart/bfd-parameter 15（schema 实测锁定）
+const peerConfigTrueLeaves = 34 // CE 基线 schema 实测锁定（NE 为 41：CE 无 graceful-restart 等 peer 子容器标量）
 
 // 2a 纳入的 peer 基础子容器（其余 fake-as-parameter/egress-engineer-parameter/
 // local-graceful-restart/afs 与 config-false 状态容器不属基础邻居完备面）。

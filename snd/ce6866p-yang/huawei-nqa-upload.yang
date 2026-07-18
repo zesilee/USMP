@@ -1,0 +1,211 @@
+/*
+Copyright (C) 2019 Huawei Technologies Co., Ltd. All rights reserved.
+*/
+submodule huawei-nqa-upload {
+  yang-version 1;
+  belongs-to huawei-nqa {
+    prefix nqa;
+  }
+
+  import huawei-network-instance {
+    prefix ni;
+  }
+  import huawei-pub-type {
+    prefix pub-type;
+  }
+  import ietf-inet-types {
+    prefix inet;
+  }
+  import ietf-yang-types {
+    prefix yang;
+  }
+
+  organization
+    "Huawei Technologies Co., Ltd.";
+  contact
+    "Huawei Industrial Base
+     Bantian, Longgang
+     Shenzhen 518129
+     People's Republic of China
+     Website: http://www.huawei.com
+     Email: support@huawei.com";
+  description
+    "Submodule nqa-upload";
+
+  revision 2019-10-16 {
+    description
+      "Initial revision.";
+    reference
+      "Huawei private.";
+  }
+
+  typedef upload-status {
+    type enumeration {
+      enum success {
+        value 0;
+        description
+          "Success.";
+      }
+      enum failed {
+        value 1;
+        description
+          "Failed.";
+      }
+      enum uploading {
+        value 2;
+        description
+          "Uploading.";
+      }
+    }
+    description
+      "description of upload-status";
+  }
+
+  typedef upload-test-type {
+    type enumeration {
+      enum icmp {
+        value 1;
+        description
+          "ICMP test.";
+      }
+      enum icmpjitter {
+        value 2;
+        description
+          "ICMPJITTER test.";
+      }
+      enum jitter {
+        value 3;
+        description
+          "JITTTER test.";
+      }
+      enum udp {
+        value 4;
+        description
+          "UDP test.";
+      }
+    }
+    description
+      "description of upload-test-type";
+  }
+
+  grouping upload-type {
+    description
+      "Upload test instance.";
+    container intances {
+      description
+        "List of upload test results instance.";
+      list intance {
+        key "test-type";
+        description
+          "Configure upload test results instance.";
+        leaf test-type {
+          type upload-test-type;
+          description
+            "Test type.";
+        }
+        leaf server-address {
+          type inet:ipv4-address-no-zone;
+          description
+            "IP address of the FTP server.";
+        }
+        leaf file-name {
+          type string {
+            length "1..64";
+          }
+          description
+            "File name.";
+        }
+        leaf user-name {
+          type string {
+            length "1..256";
+          }
+          description
+            "User name.";
+        }
+        leaf pass-word {
+          type pub-type:password-extend {
+            length "1..169";
+          }
+          description
+            "Password.";
+        }
+        leaf ni-name {
+          type leafref {
+            path "/ni:network-instance/ni:instances/ni:instance/ni:name";
+          }
+          description
+            "VPN instance name.";
+        }
+        leaf port-number {
+          type uint16 {
+            range "1..65535";
+          }
+          default "21";
+          description
+            "FTP destination port number.";
+        }
+        leaf interval {
+          type uint32 {
+            range "60..4294967295";
+          }
+          default "300";
+          description
+            "Upload interval.";
+        }
+        leaf retry-times {
+          type uint8 {
+            range "1..3";
+          }
+          default "3";
+          description
+            "Number of retransmission times.";
+        }
+      }
+    }
+    container files {
+      config false;
+      description
+        "List of upload test results file name.";
+      list file {
+        key "index";
+        config false;
+        description
+          "Statistics of upload test results file name.";
+        leaf index {
+          type uint32;
+          config false;
+          description
+            "Index of the upload test results file name.";
+        }
+        leaf name {
+          type string {
+            length "1..256";
+          }
+          config false;
+          description
+            "File name.";
+        }
+        leaf status {
+          type upload-status;
+          config false;
+          description
+            "Upload status.";
+        }
+        leaf retry-times {
+          type uint8 {
+            range "1..3";
+          }
+          config false;
+          description
+            "Number of retransmission times.";
+        }
+        leaf upload-time {
+          type yang:date-and-time;
+          config false;
+          description
+            "Upload time.";
+        }
+      }
+    }
+  }
+}

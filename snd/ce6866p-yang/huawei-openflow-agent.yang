@@ -1,0 +1,258 @@
+/*
+Copyright (C) 2020 Huawei Technologies Co., Ltd. All rights reserved.
+*/
+module huawei-openflow-agent {
+  yang-version 1;
+  namespace "urn:huawei:yang:huawei-openflow-agent";
+  prefix openflow-agent;
+  import ietf-inet-types {
+    prefix inet;
+  }
+  import huawei-extension {
+    prefix ext;
+  }
+  import huawei-network-instance {
+    prefix ni;
+  }
+  import huawei-ssl {
+    prefix ssl;
+  }
+  import huawei-pub-type {
+    prefix pub-type;
+  }
+  organization
+    "Huawei Technologies Co., Ltd.";
+  contact
+    "Huawei Industrial Base
+     Bantian, Longgang
+     Shenzhen 518129
+     People's Republic of China
+     Website: http://www.huawei.com
+     Email: support@huawei.com";
+  description
+    "Sdn agent";
+  reference
+    "Huawei private.";
+   revision 2020-06-19 {
+    description
+      "Add the priority container.";
+    reference
+      "Huawei private.";
+  }
+  revision 2020-01-21 {
+    description
+      "Initial revision.";
+    reference
+      "Huawei private.";
+  }
+  ext:task-name "virtual-cluster";
+  typedef session-state {
+    type enumeration {
+      enum "INIT" {
+        value 0;
+        description
+          "INIT state";
+      }
+      enum "CONNECTED" {
+        value 4;
+        description
+          "CONNECTED state";
+      }
+      enum "REGISTERED" {
+        value 6;
+        description
+          "REGISTERED state";
+      }
+      enum "TOCREATE" {
+        value 7;
+        description
+          "TOCREATE state";
+      }
+    }
+    description
+      "Session state";
+  }
+  typedef session-role {
+    type enumeration {
+      enum "NOCHANGE" {
+        value 0;
+        description
+          "NOCHANGE role";
+      }
+      enum "EQUAL" {
+        value 1;
+        description
+          "EQUAL role";
+      }
+      enum "MASTER" {
+        value 2;
+        description
+          "MASTER role";
+      }
+      enum "SLAVE" {
+        value 3;
+        description
+          "SLAVE role";
+      }
+    }
+    description
+      "Session role";
+  }
+  container openflow-agent {
+    description
+      "Configure openflow agents.";
+    container sdnagent {
+       presence "Enable sdnagent.";
+       description
+        "Configure openflow agent.";
+       leaf description {
+        type string {
+          length "1..63";
+        }
+        description
+          "Openflow agent description";
+       }
+	  container source-ip {
+       description
+        "Configure source IPv4 address.";
+      leaf source-address {
+        type inet:ipv4-address-no-zone;
+        description
+          "Configure openflow agent IPv4 address";
+      }
+    }
+      container source-ipv6 {
+       description
+        "Configure source IPv6 address.";
+       leaf source-address {
+        type inet:ipv6-address-no-zone;
+        description
+          "Configure openflow agent IPv6 address.";
+       }
+     }
+    container controllers {
+      description
+        "List of controller configuration.";
+      list controller {
+        key "controller-address vpn-name";
+        description
+          "Configure controller.";
+        leaf controller-address {
+          type inet:ip-address-no-zone;
+          description
+            "Controller IP address.";
+        }
+        leaf vpn-name {
+          type leafref {
+            path "/ni:network-instance/ni:instances/ni:instance/ni:name";
+          }
+          description
+            "Controller vpn-instance name";
+        }
+        container openflow-attributes {
+		  presence "Enable openflow agent.";
+          description
+            "Configure openflow informations.";
+          leaf echo-interval {
+            type uint32 {
+              range "5..60";
+            }
+            units s;
+            default "5";
+            description
+              "Configure echo interval";
+          }
+          leaf keychain-name {
+            type string {
+              length "0..47";
+            }
+            description
+              "Configure keychain name";
+          }
+          leaf agent-address {
+            type inet:ip-address-no-zone;
+            must "(not(contains(., ':')) and not(contains(../../controller-address, ':'))) or (contains(., ':') and contains(../../controller-address, ':'))";
+            description
+              "Configure openflow agent IPv4 address";
+          }
+          leaf ssl-policy-name {
+            type leafref {
+              path "/ssl:ssl/ssl:ssl-policys/ssl:ssl-policy/ssl:policy-name";
+            }
+            description
+              "Configure ssl policy name";
+          }
+        }
+      }
+    }
+
+    }
+    
+    container session-infos {
+      config false;
+      description
+        "List of openflow session information.";
+      list session-info {
+        key "controller-address vpn-name";
+        config false;
+        description
+          "Operational state of openflow session.";
+        leaf controller-address {
+          type inet:ipv4-address-no-zone;
+          config false;
+          description
+            "Controller IPv4 address";
+        }
+        leaf vpn-name {
+          type string {
+            length "0..32";
+          }
+          config false;
+          description
+            "Controller vpn-instance name";
+        }
+        leaf agent-address {
+          type inet:ipv4-address-no-zone;
+          config false;
+          description
+            "Openflow agent IPv4 address";
+        }
+        leaf up-time {
+          type pub-type:time-tick;
+          config false;
+          description
+            "Up Time";
+        }
+        leaf state {
+          type session-state;
+          config false;
+          description
+            "Session state";
+        }
+        leaf role {
+          type session-role;
+          config false;
+          description
+            "Session role";
+        }
+      }
+    }
+	container priority {
+      description
+        "Configure openflow priority.";
+      leaf dscp {
+        type inet:dscp;
+        description
+          "Dscp value";
+      }
+    }
+  }
+  rpc reset-all-sessions {
+    description
+      "Reset all openflow sessions.";
+  }
+  rpc reset-all-statistics {
+    description
+      "Reset all openflow statistics.";
+  }
+}

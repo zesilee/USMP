@@ -1,0 +1,77 @@
+{
+  "/huawei-vty:vty": {
+    "name": "VTY"
+  },
+  "/huawei-vty:vty/lines": {
+    "name": "VTY配置列表"
+  },
+  "/huawei-vty:vty/lines/line": {
+    "name": "VTY配置"
+  },
+  "/huawei-vty:vty/lines/line/index": {
+    "name": "终端索引"
+  },
+  "/huawei-vty:vty/lines/line/idle-timeout-min": {
+    "name": "空闲超时(分)"
+  },
+  "/huawei-vty:vty/lines/line/idle-timeout-sec": {
+    "name": "空闲超时(秒)"
+  },
+  "/huawei-vty:vty/lines/line/auth-mode": {
+    "name": "验证方式"
+  },
+  "/huawei-vty:vty/lines/line/auth-password": {
+    "name": "密码"
+  },
+  "/huawei-vty:vty/lines/line/privilege-level": {
+    "name": "用户权限级别"
+  },
+  "/huawei-vty:vty/lines/line/history-cmd-size": {
+    "name": "历史命令缓存大小"
+  },
+  "/huawei-vty:vty/lines/line/screen-length": {
+    "name": "VTY屏幕长度"
+  },
+  "/huawei-vty:vty/lines/line/shell-enable": {
+    "name": "Shell使能"
+  },
+  "/huawei-vty:vty/lines/line/acl4-inbound": {
+    "name": "入方向IPv4 ACL名称"
+  },
+  "/huawei-vty:vty/lines/line/acl4-outbound": {
+    "name": "出方向IPv4 ACL名称"
+  },
+  "/huawei-vty:vty/lines/line/acl6-inbound": {
+    "name": "入方向IPv6 ACL名称"
+  },
+  "/huawei-vty:vty/lines/line/acl6-outbound": {
+    "name": "出方向IPv6 ACL名称"
+  },
+  "/huawei-vty:vty/lines/line/acl4-inbound-num": {
+    "name": "入方向IPv4 ACL编号"
+  },
+  "/huawei-vty:vty/lines/line/acl4-outbound-num": {
+    "name": "出方向IPv4 ACL编号"
+  },
+  "/huawei-vty:vty/lines/line/acl6-inbound-num": {
+    "name": "入方向IPv6 ACL编号"
+  },
+  "/huawei-vty:vty/lines/line/acl6-outbound-num": {
+    "name": "出方向IPv6 ACL编号"
+  },
+  "/huawei-vty:vty/lines/line/proto-inbound": {
+    "name": "协议类型"
+  },
+  "/huawei-vty:vty/line-global": {
+    "name": "全局VTY配置"
+  },
+  "/huawei-vty:vty/line-global/max-users": {
+    "name": "最大VTY用户数"
+  },
+  "/huawei-vty:vty/line-global/password-lock": {
+    "name": "VTY IP Block"
+  },
+  "/huawei-vty:vty/line-global/security-policy": {
+    "name": "VTY安全策略"
+  }
+}

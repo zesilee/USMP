@@ -1,0 +1,1865 @@
+{
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim": {
+    "name": "PIM"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp": {
+    "name": "候选BSR组范围"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/c-bsr-vpns": {
+    "name": "BSR配置列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/c-bsr-vpns/c-bsr-vpn": {
+    "name": "BSR配置"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/c-bsr-vpns/c-bsr-vpn/type": {
+    "name": "地址族"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/c-bsr-vpns/c-bsr-vpn/if-name": {
+    "name": "候选接口名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/c-bsr-vpns/c-bsr-vpn/if-addr": {
+    "name": "IPV6地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/c-bsr-vpns/c-bsr-vpn/hold-time": {
+    "name": "超时时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/c-bsr-vpns/c-bsr-vpn/interval": {
+    "name": "BSM消息发送间隔"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/c-bsr-vpns/c-bsr-vpn/hash-len": {
+    "name": "候选BSR哈希掩码长度"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/c-bsr-vpns/c-bsr-vpn/priority": {
+    "name": "候选BSR优先级"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/c-bsr-vpns/c-bsr-vpn/policy-name": {
+    "name": "IPv4 BSR源过滤策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/c-bsr-vpns/c-bsr-vpn/policy-name6": {
+    "name": "IPv6 BSR源过滤策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/c-bsr-vpns/c-bsr-vpn/admin-scope": {
+    "name": "使能管理区域"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/c-bsr-vpns/c-bsr-vpn/global-enable": {
+    "name": "使能Global域候选BSR"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/c-bsr-vpns/c-bsr-vpn/global-hash-len": {
+    "name": "Global域哈希掩码长度"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/c-bsr-vpns/c-bsr-vpn/global-priority": {
+    "name": "Global域优先级"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/c-bsr-vpns/c-bsr-vpn/c-rp-hold-time": {
+    "name": "候选RP超时时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/c-bsr-vpns/c-bsr-vpn/c-rp-priority": {
+    "name": "候选RP优先级"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/c-bsr-vpns/c-bsr-vpn/c-rp-ad-interval": {
+    "name": "发送Advertisement间隔"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/c-bsr-vpns/c-bsr-vpn/c-rp-policy": {
+    "name": "IPv4候选RP策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/c-bsr-vpns/c-bsr-vpn/c-rp-policy6": {
+    "name": "IPv6候选RP策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/c-bsr-vpns/c-bsr-vpn/is-fragable": {
+    "name": "使能BSR报文分片"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/ipv4-c-bsr-groups": {
+    "name": "候选BSR组范围列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/ipv4-c-bsr-groups/ipv4-c-bsr-group": {
+    "name": "候选BSR组范围"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/ipv4-c-bsr-groups/ipv4-c-bsr-group/group-addr": {
+    "name": "组地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/ipv4-c-bsr-groups/ipv4-c-bsr-group/group-mask": {
+    "name": "组地址掩码"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/ipv4-c-bsr-groups/ipv4-c-bsr-group/hash-length": {
+    "name": "哈希掩码长度"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/ipv4-c-bsr-groups/ipv4-c-bsr-group/priority": {
+    "name": "优先级"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/ipv4-c-rp-ifs": {
+    "name": "候选RP IPv4配置列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/ipv4-c-rp-ifs/ipv4-c-rp-if": {
+    "name": "候选RP IPv4配置"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/ipv4-c-rp-ifs/ipv4-c-rp-if/if-name": {
+    "name": "接口名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/ipv4-c-rp-ifs/ipv4-c-rp-if/group-policy": {
+    "name": "组策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/ipv4-c-rp-ifs/ipv4-c-rp-if/priority": {
+    "name": "优先级"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/ipv4-c-rp-ifs/ipv4-c-rp-if/hold-time": {
+    "name": "超时时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/ipv4-c-rp-ifs/ipv4-c-rp-if/ad-interval": {
+    "name": "发送Advertisement间隔"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/ipv6-c-rps": {
+    "name": "候选RP IPv6配置列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/ipv6-c-rps/ipv6-c-rp": {
+    "name": "候选RP IPv6配置"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/ipv6-c-rps/ipv6-c-rp/address": {
+    "name": "IPv6地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/ipv6-c-rps/ipv6-c-rp/holdtime": {
+    "name": "超时时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/ipv6-c-rps/ipv6-c-rp/priority": {
+    "name": "优先级"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/ipv6-c-rps/ipv6-c-rp/ad-interval": {
+    "name": "发送Advertisement间隔"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/ipv6-c-rps/ipv6-c-rp/group-policy": {
+    "name": "组策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/auto-rps": {
+    "name": "Auto-RP配置"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/static-rps": {
+    "name": "静态RP列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/static-rps/static-rp": {
+    "name": "静态RP"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/static-rps/static-rp/type": {
+    "name": "地址族"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/static-rps/static-rp/address": {
+    "name": "静态RP地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/static-rps/static-rp/policy": {
+    "name": "静态RP策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/static-rps/static-rp/policy-ipv6": {
+    "name": "IPv6静态RP策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/static-rps/static-rp/preference": {
+    "name": "静态RP优先"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/elected-bsrs": {
+    "name": "当选BSR信息列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/elected-bsrs/elected-bsr": {
+    "name": "当选BSR信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/elected-bsrs/elected-bsr/type": {
+    "name": "地址族"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/elected-bsrs/elected-bsr/address": {
+    "name": "当选BSR地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/elected-bsrs/elected-bsr/scope": {
+    "name": "管理域状态"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/elected-bsrs/elected-bsr/group-addr": {
+    "name": "组地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/elected-bsrs/elected-bsr/group-mask-length": {
+    "name": "组地址掩码长度"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/elected-bsrs/elected-bsr/priority": {
+    "name": "优先级"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/elected-bsrs/elected-bsr/hash-lenth": {
+    "name": "哈希长度"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/elected-bsrs/elected-bsr/fsm-state": {
+    "name": "状态"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/elected-bsrs/elected-bsr/up-time": {
+    "name": "存在时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/elected-bsrs/elected-bsr/expire-time": {
+    "name": "超时时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/elected-bsrs/elected-bsr/candidate-count": {
+    "name": "候选RP的数目"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/c-bsrs": {
+    "name": "候选BSR信息列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/c-bsrs/c-bsr": {
+    "name": "候选BSR信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/c-bsrs/c-bsr/type": {
+    "name": "地址族"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/c-bsrs/c-bsr/address": {
+    "name": "候选BSR地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/c-bsrs/c-bsr/scope": {
+    "name": "管理域状态"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/c-bsrs/c-bsr/group-addr": {
+    "name": "组地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/c-bsrs/c-bsr/group-mask-length": {
+    "name": "哈希掩码长度"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/c-bsrs/c-bsr/priority": {
+    "name": "优先级"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/c-bsrs/c-bsr/hash-lenth": {
+    "name": "掩码长度"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/c-bsrs/c-bsr/fsm-state": {
+    "name": "状态"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/c-bsrs/c-bsr/valid-flag": {
+    "name": "有效标志位"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/elected-bsr-rps": {
+    "name": "当选BSR RP信息列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/elected-bsr-rps/elected-bsr-rp": {
+    "name": "当选BSR RP信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/elected-bsr-rps/elected-bsr-rp/type": {
+    "name": "地址族"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/elected-bsr-rps/elected-bsr-rp/rp-addr": {
+    "name": "RP地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/elected-bsr-rps/elected-bsr-rp/is-local-addr": {
+    "name": "RP是本地地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/elected-bsr-rps/elected-bsr-rp/group-addr": {
+    "name": "组地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/elected-bsr-rps/elected-bsr-rp/group-mask-length": {
+    "name": "掩码长度"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/elected-bsr-rps/elected-bsr-rp/priority": {
+    "name": "优先级"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/elected-bsr-rps/elected-bsr-rp/up-time": {
+    "name": "存在时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/elected-bsr-rps/elected-bsr-rp/expiry-time": {
+    "name": "超时时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/elected-bsr-rps/elected-bsr-rp/bidir-enable": {
+    "name": "使能双向PIM"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol": {
+    "name": "PIM协议"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances": {
+    "name": "PIM配置列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance": {
+    "name": "PIM配置"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/type": {
+    "name": "地址族"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/assert-holdtime": {
+    "name": "Assert超时时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/jp-holdtime": {
+    "name": "JP报文超时时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/probe-interval": {
+    "name": "发送空注册消息间隔"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/jp-timer-interval": {
+    "name": "JP报文发送间隔"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/dr-priority": {
+    "name": "DR优先级"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/hello-holdtime": {
+    "name": "邻居超时时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/hello-landelay": {
+    "name": "剪枝延迟时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/hello-interval": {
+    "name": "Hello发送间隔"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/hello-override": {
+    "name": "Hello Override间隔"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/reg-checksum": {
+    "name": "注册消息全部内容计算校验和"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/reg-suppress-interval": {
+    "name": "注册抑制超时时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/embedded-rp": {
+    "name": "使能嵌入式RP"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/nbr-check-when-recv": {
+    "name": "接收时使能邻居检查"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/nbr-check-when-send": {
+    "name": "发送时使能邻居检查"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/reg-policy-name": {
+    "name": "注册报文过滤策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/reg-policy-name6": {
+    "name": "IPv6注册报文过滤策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/ssm-policy-name": {
+    "name": "SSM组范围策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/ssm-policy-name6": {
+    "name": "IPv6SSM组范围策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/src-policy-name": {
+    "name": "源过滤策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/src-policy-name6": {
+    "name": "IPv6源过滤策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/embedded-rp-policy-name": {
+    "name": "嵌入式RP策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/source-life-time": {
+    "name": "转发表项超时时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/spt-switch-check-interval": {
+    "name": "检查切换速率的间隔"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/packaging-jp-disable": {
+    "name": "去使能实时触发的Join/prune报文打包功能"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/ipsec-name": {
+    "name": "安全联盟名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/ipsec-type": {
+    "name": "使能Ipsec类型"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/unicast-ipsec-name": {
+    "name": "单播安全联盟名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/register-source-interface": {
+    "name": "指定源DR的接口名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/register-source-addr": {
+    "name": "IPv6源地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/state-refresh-interval": {
+    "name": "State-Refresh报文发送间隔"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/state-refresh-rate-limit": {
+    "name": "State-Refresh的最小等待时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/state-refresh-ttl": {
+    "name": "State-Refresh报文TTL值"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/fast-reroute": {
+    "name": "PIM FRR 使能"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/fast-reroute-policy": {
+    "name": "PIM FRR的策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/register-with-probe": {
+    "name": "源DR向RP使用Probe消息发注册"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/hello-join-attr-enable": {
+    "name": "Join attribute属性使能"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/clone-inherit-enable": {
+    "name": "允许克隆继承出接口表项"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/clone-inherit-policy": {
+    "name": "克隆后的表项继承出接口策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/gen-id-chang-enable": {
+    "name": "使能主备倒换发送hello携带的genid变化"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/rpf-prune-holdtime": {
+    "name": "配置向上游设备发送剪枝消息的延迟时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/rpf-prune-policy-ipv4": {
+    "name": "配置对需剪枝的组播表项的匹配策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/backup-rpf-switch-holdtime": {
+    "name": "设置延时时间延迟生成对应的转发表项"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/is-backup-rpf-switch-flow-based": {
+    "name": "配置备用链路组播流量触发生成转发表项"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/backup-rpf-switch-policy-ipv4": {
+    "name": "PIM FRR备用组播表项的匹配策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/spt-switchs": {
+    "name": "SPT切换配置列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/spt-switchs/spt-switch-no-acl": {
+    "name": "无ACL策略的SPT切换配置"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/spt-switchs/spt-switch-no-acl/spt-threshold-no-acl": {
+    "name": "切换速率阈值"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/spt-switchs/spt-switch": {
+    "name": "SPT切换配置"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/spt-switchs/spt-switch/group-policy": {
+    "name": "组播组策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/spt-switchs/spt-switch/spt-threshold": {
+    "name": "切换速率阈值"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/ipv6-spt-switchs": {
+    "name": "SPT6切换配置列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/ipv6-spt-switchs/spt-switch-no-acl": {
+    "name": "无ACL策略的SPT6切换配置"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/ipv6-spt-switchs/spt-switch-no-acl/spt-threshold-no-acl": {
+    "name": "切换速率阈值"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/ipv6-spt-switchs/ipv6-spt-switch": {
+    "name": "SPT6切换配置"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/ipv6-spt-switchs/ipv6-spt-switch/group-policy": {
+    "name": "组播组策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/ipv6-spt-switchs/ipv6-spt-switch/spt-threshold": {
+    "name": "切换速率阈值"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/anycast-rps": {
+    "name": "Anycast RP配置列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/anycast-rps/anycast-rp": {
+    "name": "Anycast RP配置"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/anycast-rps/anycast-rp/rp-addr": {
+    "name": "RP地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/anycast-rps/anycast-rp/local-addr": {
+    "name": "本地地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/anycast-rps/anycast-rp/rp-peers": {
+    "name": "Anycast RP peer配置列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/anycast-rps/anycast-rp/rp-peers/rp-peer": {
+    "name": "Anycast RP peer配置"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/anycast-rps/anycast-rp/rp-peers/rp-peer/peer-ip-addr": {
+    "name": "Peer地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/anycast-rps/anycast-rp/rp-peers/rp-peer/forward-sa-msg": {
+    "name": "转发从SA学到的源信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/anycast-rps/anycast-rp/rp-peers/rp-peer/forward-policy": {
+    "name": "转发策略名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/p2mp": {
+    "name": "P2MP配置"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/p2mp/rpf-disable": {
+    "name": "忽略RPF检查"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/p2mp/rpf-disable-policy": {
+    "name": "忽略RPF检查策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/p2mp/source-proxy-enable": {
+    "name": "使能源代理"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/p2mp/source-proxy-policy": {
+    "name": "源代理策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/p2mp/rpf-ecm-enable": {
+    "name": "ECMP不回切使能"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/vector": {
+    "name": "Vector配置"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/vector/compatible-standard-enable": {
+    "name": "Hello和Join报文使用标准协议格式封装"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/p2mp-tunnels": {
+    "name": "P2MP隧道与VPN关系配置列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/p2mp-tunnels/p2mp-tunnel": {
+    "name": "P2MP隧道与VPN关系配置"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/p2mp-tunnels/p2mp-tunnel/p2mp-root-ip": {
+    "name": "P2MP隧道根地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/p2mp-tunnels/p2mp-tunnel/tunnel-id": {
+    "name": "P2MP隧道ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/destination-addr-paths": {
+    "name": "配置目的地址的路径列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/destination-addr-paths/destination-addr-path": {
+    "name": "配置目的地址的路径"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/destination-addr-paths/destination-addr-path/destination-addr": {
+    "name": "指定组播源地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/destination-addr-paths/destination-addr-path/path-name": {
+    "name": "路径名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/destination-addr-paths/destination-addr-path/mask-len": {
+    "name": "掩码长度"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces": {
+    "name": "接口配置列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface": {
+    "name": "接口配置"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/type": {
+    "name": "地址族"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/if-name": {
+    "name": "接口名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/sm-enable": {
+    "name": "使能PIM"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/dr-priority": {
+    "name": "DR优先级"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/hello-interval": {
+    "name": "Hello报文发送间隔"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/hello-holdtime": {
+    "name": "邻居超时时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/hello-override": {
+    "name": "否决剪枝的时间间隔"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/hello-lan-delay": {
+    "name": "剪枝延迟时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/jp-timer-interval": {
+    "name": "JP报文发送间隔"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/jp-holdtime": {
+    "name": "JP报文超时时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/jp-policy": {
+    "name": "JP报文策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/jp-policy-ipv6": {
+    "name": "IPv6 JP报文策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/jp-asm-policy": {
+    "name": "ASM过滤JP报文策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/jp-asm-policy-ipv6": {
+    "name": "IPv6 ASM过滤JP报文策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/jp-ssm-policy": {
+    "name": "SSM过滤JP报文策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/jp-ssm-policy-ipv6": {
+    "name": "IPv6 SSM过滤JP报文策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/nbr-policy": {
+    "name": "邻居策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/nbr-policy-ipv6": {
+    "name": "IPv6邻居策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/assert-holdtime": {
+    "name": "Assert报文超时时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/require-gen-id": {
+    "name": "检查Generation ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/bsr-boundary": {
+    "name": "BSR域边界"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/bfd-enable": {
+    "name": "使能PIM BFD"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/bfd-min-tx": {
+    "name": "BFD最小发送间隔"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/bfd-min-rx": {
+    "name": "BFD最小接收间隔"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/bfd-multiplier": {
+    "name": "PIM BFD的本地检测倍数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/is-silent": {
+    "name": "使能PIM Silent功能"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/dr-swt-delay-enable": {
+    "name": "使能DR切换延迟功能"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/dr-swt-delay-interval": {
+    "name": "DR切换时延"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/ipsec-name": {
+    "name": "安全联盟名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/ipsec-type": {
+    "name": "使能Ipsec类型"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/mode": {
+    "name": "PIM模式"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/state-refresh-capable": {
+    "name": "使能State-Refresh功能"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/graft-retry": {
+    "name": "Graft报文重传间隔"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/ignore-dr": {
+    "name": "忽略PIM DR状态"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/ignore-assert": {
+    "name": "不触发PIM ASSERT相关协议行为"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/single-tag-fwd-enable": {
+    "name": "单Q对PIM报文转发使能"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/if-infos": {
+    "name": "接口信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/if-infos/pim-version": {
+    "name": "PIM版本号"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/if-infos/state": {
+    "name": "接口状态"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/if-infos/nbr-count": {
+    "name": "邻居个数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/if-infos/dr-priority": {
+    "name": "DR优先级"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/if-infos/dr-addr": {
+    "name": "DR地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/if-infos/hello-interval": {
+    "name": "Hello报文发送间隔"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/if-infos/hello-holdtime": {
+    "name": "Hello报文超时时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/if-infos/assert-holdtime": {
+    "name": "Assert状态超时时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/if-infos/jp-interval": {
+    "name": "JP报文发送间隔"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/if-infos/jp-holdtime": {
+    "name": "JP报文超时时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/if-infos/negotiated-msg-delay": {
+    "name": "协商的报文时延"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/if-infos/negotiated-override-interval": {
+    "name": "协商的否决间隔"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/if-infos/gen-id": {
+    "name": "邻居状态随机数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/if-infos/non-dr-nbr-count": {
+    "name": "非DR的邻居个数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/if-infos/non-landelay-nbr-count": {
+    "name": "非LanDelay的邻居个数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/if-infos/non-join-attribute-nbr-sount": {
+    "name": "非join attribute的邻居个数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/if-infos/join-attribute": {
+    "name": "协商join attribute能力"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/if-infos/offer-interval": {
+    "name": "Offer报文发送间隔"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/if-infos/election-robust-count": {
+    "name": "DF选举的健壮系数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/if-infos/backoff-interval": {
+    "name": "Backoff报文发送间隔"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/if-infos/ipsec-name": {
+    "name": "安全联盟名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/if-infos/ipsec-type": {
+    "name": "使能Ipsec类型"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/if-infos/pim-mode": {
+    "name": "PIM模式M"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/if-infos/state-refresh-enable": {
+    "name": "使能State-Refresh"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/if-infos/state-refresh-interval": {
+    "name": "State-Refresh报文发送间隔"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/if-infos/graft-retry": {
+    "name": "Graft报文重传间隔"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/if-infos/negotiated-state-refresh": {
+    "name": "协商State-Refresh能力"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/if-infos/ignore-dr-state": {
+    "name": "忽略PIM DR状态"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/if-infos/ignore-assert": {
+    "name": "不触发PIM ASSERT相关协议行为"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/if-infos/snooping-enable": {
+    "name": "PIM snooping功能的状态"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/nbrs": {
+    "name": "邻居信息列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/nbrs/nbr": {
+    "name": "邻居信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/nbrs/nbr/nbr-addr": {
+    "name": "邻居地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/nbrs/nbr/up-time": {
+    "name": "创建时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/nbrs/nbr/expire-time": {
+    "name": "超时时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/nbrs/nbr/dr-priority-existence": {
+    "name": "DR优先级存在"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/nbrs/nbr/dr-priority": {
+    "name": "DR优先级"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/nbrs/nbr/gen-id-existence": {
+    "name": "邻居状态随机数存在"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/nbrs/nbr/gen-id": {
+    "name": "邻居状态随机数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/nbrs/nbr/holdtime": {
+    "name": "生存时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/nbrs/nbr/lan-delay-existence": {
+    "name": "存在延迟时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/nbrs/nbr/lan-delay": {
+    "name": "延迟时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/nbrs/nbr/override-interval": {
+    "name": "否决剪枝时间间隔"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/nbrs/nbr/join-attribute": {
+    "name": "邻居join attribute能力"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/nbrs/nbr/bidir-enable": {
+    "name": "使能双向PIM"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/nbrs/nbr/state-refresh-interval": {
+    "name": "State-Refresh报文发送间隔"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/nbrs/nbr/second-addrs": {
+    "name": "邻居从地址信息列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/nbrs/nbr/second-addrs/second-addr": {
+    "name": "邻居从地址信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/nbrs/nbr/second-addrs/second-addr/address": {
+    "name": "邻居从地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/bfd-sessions": {
+    "name": "PIM BFD session信息的集合"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/bfd-sessions/bfd-session": {
+    "name": "PIM BFD session信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/bfd-sessions/bfd-session/nbr-addr": {
+    "name": "PIM邻居IP地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/bfd-sessions/bfd-session/actual-minimum-tx-interval": {
+    "name": "实际最小发送间隔"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/bfd-sessions/bfd-session/actual-minimum-rx-interval": {
+    "name": "实际最小接收间隔"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/bfd-sessions/bfd-session/actual-multiplier": {
+    "name": "实际本地检测倍数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/bfd-sessions/bfd-session/local-port": {
+    "name": "本地端口"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/bfd-sessions/bfd-session/remote-port": {
+    "name": "远端端口"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/bfd-sessions/bfd-session/bfd-status": {
+    "name": "状态"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages": {
+    "name": "PIM无效消息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-assert-cnt": {
+    "name": "无效PIM Assert消息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-assert-cnt/destination-addr": {
+    "name": "无效目的地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-assert-cnt/ip-source-addr": {
+    "name": "无效IP源地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-assert-cnt/multicast-source": {
+    "name": "无效组播源地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-assert-cnt/multicast-group": {
+    "name": "无效组播组地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-assert-cnt/fault-length": {
+    "name": "无效的消息长度"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-bsr-cnt": {
+    "name": "无效PIM BSR消息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-bsr-cnt/bad-payload": {
+    "name": "无效的Payload"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-bsr-cnt/fault-length": {
+    "name": "无效的消息长度"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-bsr-cnt/invalid-scope-mask": {
+    "name": "无效的Scope掩码"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-bsr-cnt/invalid-multicast-group": {
+    "name": "无效组播组地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-bsr-cnt/recv-by-non-c-bsr": {
+    "name": "不是C-BSR却收到BSR消息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-bsr-cnt/invalid-bsr-addr": {
+    "name": "无效BSR地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-bsr-cnt/fault-hash-length": {
+    "name": "无效的Hash长度"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-bsr-cnt/invalid-ip-source-addr": {
+    "name": "无效报文源地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-hello-cnt": {
+    "name": "无效PIM Hello消息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-hello-cnt/invalid-addr-list": {
+    "name": "无效地址列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-hello-cnt/invalid-length": {
+    "name": "无效的消息长度"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-hello-cnt/invalid-holdtime-length": {
+    "name": "无效的Holdtime长度"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-hello-cnt/invalid-lan-prune-delay-length": {
+    "name": "无效的LanPruneDelay长度"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-hello-cnt/invalid-dr-priority-length": {
+    "name": "无效的DrPriority长度"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-hello-cnt/invalid-gen-id-length": {
+    "name": "无效的GenerationID长度"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-hello-cnt/invalid-destination-addr": {
+    "name": "无效目的地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-hello-cnt/invalid-ip-source-addr": {
+    "name": "无效报文源地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-join-prune-cnt": {
+    "name": "无效PIM Join/Prune消息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-join-prune-cnt/invalid-multicast-source": {
+    "name": "无效组播源地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-join-prune-cnt/invalid-multicast-group": {
+    "name": "无效组播组地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-join-prune-cnt/invalid-upstream-nbr": {
+    "name": "无效的上游邻居"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-join-prune-cnt/invalid-ip-source-addr": {
+    "name": "无效报文源地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-join-prune-cnt/invalid-destination-addr": {
+    "name": "无效目的地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-join-prune-cnt/fault-length": {
+    "name": "无效的消息长度"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-graft-cnt": {
+    "name": "无效PIM Graft消息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-graft-cnt/invalid-multicast-source": {
+    "name": "无效组播源地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-graft-cnt/invalid-multicast-group": {
+    "name": "无效组播组地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-graft-cnt/invalid-up-nbr": {
+    "name": "无效的上游邻居"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-graft-cnt/invalid-ip-source-addr": {
+    "name": "无效报文源地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-graft-cnt/fault-length": {
+    "name": "无效的消息长度"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-graft-ack-cnt": {
+    "name": "无效PIM Graft-Ack消息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-graft-ack-cnt/invalid-multicast-source": {
+    "name": "无效组播源地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-graft-ack-cnt/invalid-multicast-group": {
+    "name": "无效组播组地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-graft-ack-cnt/invalid-up-nbr": {
+    "name": "无效的上游邻居"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-graft-ack-cnt/invalid-ip-source-addr": {
+    "name": "无效报文源地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-graft-ack-cnt/fault-length": {
+    "name": "无效的消息长度"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-state-refresh-cnt": {
+    "name": "无效的PIM State Refresh消息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-state-refresh-cnt/invalid-multicast-source": {
+    "name": "无效组播源地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-state-refresh-cnt/invalid-multicast-group": {
+    "name": "无效组播组地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-state-refresh-cnt/invalid-originator": {
+    "name": "无效的Originator地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-state-refresh-cnt/fault-length": {
+    "name": "无效的消息长度"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-auto-rp-announce-cnt": {
+    "name": "无效PIM Auto-RP Announcement消息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-auto-rp-announce-cnt/invalid-destination-addr": {
+    "name": "无效目的地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-auto-rp-announce-cnt/invalid-ip-source-addr": {
+    "name": "无效报文源地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-auto-rp-announce-cnt/invalid-ttl": {
+    "name": "无效的TTL"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-auto-rp-announce-cnt/invalid-source-port": {
+    "name": "无效的源端口号"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-auto-rp-discovery-cnt": {
+    "name": "无效PIM Auto-RP Discovery报文"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-auto-rp-discovery-cnt/invalid-length": {
+    "name": "无效的消息长度"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-auto-rp-discovery-cnt/invalid-rp": {
+    "name": "无效的RP地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-auto-rp-discovery-cnt/invalid-ip-source-addr": {
+    "name": "无效报文源地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-auto-rp-discovery-cnt/invalid-group": {
+    "name": "无效组播组地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-auto-rp-discovery-cnt/invalid-ttl": {
+    "name": "无效的TTL"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-auto-rp-discovery-cnt/invalid-source-port": {
+    "name": "无效的源端口号"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics": {
+    "name": "PIM消息统计信息列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic": {
+    "name": "PIM消息统计信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/type": {
+    "name": "地址族"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/register-recv-num": {
+    "name": "接收注册报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/register-send-num": {
+    "name": "发送注册报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/invalid-register-num": {
+    "name": "无效注册报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/filtered-register-num": {
+    "name": "过滤注册报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/register-stop-recv-num": {
+    "name": "接收注册停止报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/register-stop-send-num": {
+    "name": "发送注册停止报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/invalid-register-stop-num": {
+    "name": "无效注册停止报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/filtered-register-stop-num": {
+    "name": "过滤注册停止报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/probe-recv-num": {
+    "name": "接收空注册报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/probe-send-num": {
+    "name": "发送空注册报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/invalid-probe-num": {
+    "name": "无效空注册报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/filtered-probe-num": {
+    "name": "过滤空注册报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/c-rp-recv-num": {
+    "name": "接收候选RP报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/c-rp-send-num": {
+    "name": "发送候选RP报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/invalid-c-rp-num": {
+    "name": "无效候选RP报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/filtered-c-rp-num": {
+    "name": "过滤候选RP报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/anycast-rp-register-recv-num": {
+    "name": "接收Anycast-RP注册报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/anycast-rp-register-send-num": {
+    "name": "发送Anycast-RP注册报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/invalid-anycast-rp-register-num": {
+    "name": "无效Anycast-RP注册报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/filtered-anycast-rp-register-num": {
+    "name": "过滤Anycast-RP注册报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/anycast-rp-probe-recv-num": {
+    "name": "接收Anycast-RP空注册报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/anycast-rp-probe-send-num": {
+    "name": "发送Anycast-RP空注册报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/invalid-anycast-rp-probe-num": {
+    "name": "无效Anycast-RP空注册报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/filtered-anycast-rp-probe-num": {
+    "name": "过滤Anycast-RP空注册报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics": {
+    "name": "PIM消息接口统计列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic": {
+    "name": "PIM消息接口统计"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/if-name": {
+    "name": "接口名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/assert-recv-num": {
+    "name": "接收Assert报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/assert-send-num": {
+    "name": "发送Assert报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/invalid-assert-num": {
+    "name": "无效Assert报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/filtered-assert-num": {
+    "name": "过滤Assert报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/hello-recv-num": {
+    "name": "接收Hello报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/hello-send-num": {
+    "name": "发送Hello报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/invalid-hello-num": {
+    "name": "无效Hello报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/filtered-hello-num": {
+    "name": "过滤Hello报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/jp-recv-num": {
+    "name": "接收JP报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/jp-send-num": {
+    "name": "发送JP报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/invalid-jp-num": {
+    "name": "无效JP报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/filtered-jp-num": {
+    "name": "过滤JP报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/bsr-recv-num": {
+    "name": "接收BSR报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/bsr-send-num": {
+    "name": "发送BSR报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/invalid-bsr-num": {
+    "name": "无效BSR报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/filtered-bsr-num": {
+    "name": "过滤BSR报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/offer-recv-num": {
+    "name": "接收Offer报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/offer-send-num": {
+    "name": "发送Offer报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/invalid-offer-num": {
+    "name": "无效Offer报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/filtered-offer-num": {
+    "name": "过滤Offer报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/backoff-recv-num": {
+    "name": "接收Backoff报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/backoff-send-num": {
+    "name": "发送Backoff报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/invalid-backoff-num": {
+    "name": "无效Backoff报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/filtered-backoff-num": {
+    "name": "过滤Backoff报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/win-recv-num": {
+    "name": "接收Win报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/win-send-num": {
+    "name": "发送Win报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/invalid-win-num": {
+    "name": "无效Win报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/filtered-win-num": {
+    "name": "过滤Win报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/pass-recv-num": {
+    "name": "接收Pass报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/pass-send-num": {
+    "name": "发送Pass报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/invalid-pass-num": {
+    "name": "无效Pass报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/filtered-pass-num": {
+    "name": "过滤Pass报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/graft-recv-num": {
+    "name": "接收Graft报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/graft-send-num": {
+    "name": "发送Graft报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/invalid-graft-num": {
+    "name": "无效Graft报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/filtered-graft-num": {
+    "name": "过滤Graft报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/graft-ack-recv-num": {
+    "name": "接收Graft-Ack报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/graft-ack-send-num": {
+    "name": "发送Graft-Ack报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/invalid-graft-ack-num": {
+    "name": "无效Graft-Ack报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/filtered-graft-ack-num": {
+    "name": "过滤Graft-Ack报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/state-refresh-recv-num": {
+    "name": "接收State-Refresh报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/state-refresh-send-num": {
+    "name": "发送State-Refresh报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/invalid-state-refresh-num": {
+    "name": "无效State-Refresh报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/filtered-state-refresh-num": {
+    "name": "过滤State-Refresh报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/announce-recv-num": {
+    "name": "接收Auto-RP Announcement报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/announce-send-num": {
+    "name": "发送Auto-RP Announcement报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/invalid-announce-num": {
+    "name": "无效Auto-RP Announcement报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/filtered-announce-num": {
+    "name": "过滤Auto-RP Announcement报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/discovery-recv-num": {
+    "name": "接收Auto-RP Discovery报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/discovery-send-num": {
+    "name": "发送Auto-RP Discovery报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/invalid-discovery-num": {
+    "name": "无效Auto-RP Discovery报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/filtered-discovery-num": {
+    "name": "过滤Auto-RP Discovery报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings": {
+    "name": "PIM路由信息列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing": {
+    "name": "PIM路由信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/type": {
+    "name": "地址族"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/src-addr": {
+    "name": "源地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/grp-addr": {
+    "name": "组地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/protocol": {
+    "name": "协议类型"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/rp-mode-type": {
+    "name": "RP类型"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/rp-addr": {
+    "name": "RP地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/rp-is-local-addr": {
+    "name": "RP是本地地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/dg-flag": {
+    "name": "标志"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/sg-uptime": {
+    "name": "创建时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/inbound-interface": {
+    "name": "入接口"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/src-vrf-name": {
+    "name": "RPF源VPN实例"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/rpf-vector-rd": {
+    "name": "RPF Vector RD信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/rpf-vector-addr": {
+    "name": "RPF Vector 地址信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/elected-vector-rd": {
+    "name": "Elect Vector RD信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/elected-vector-addr": {
+    "name": "Elect Vector 地址信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/up-nbr-addr": {
+    "name": "邻居地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/rpf-addr": {
+    "name": "RPF地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/reference-addr": {
+    "name": "引用地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/rpf-mask-len": {
+    "name": "RPF路由掩码长度"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/rpf-metric": {
+    "name": "RPF路由Metric"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/rpf-metric-priority": {
+    "name": "RPF路由优先级"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/backup-inbound-if": {
+    "name": "备份入接口"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/backup-nbr-addr": {
+    "name": "备份邻居地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/backup-rpf-addr": {
+    "name": "备份RPF地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/up-status": {
+    "name": "加入状态"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/upstream-expiration-time": {
+    "name": "上游加入超时时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/rpt-status": {
+    "name": "RPT状态"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/rpt-timeout-period": {
+    "name": "RPT超时时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/registration-status": {
+    "name": "注册状态"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/registration-stop-time": {
+    "name": "注册停止时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/graft-retry-expiration-time": {
+    "name": "发送嫁接报文的超时时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/prune-limit-expiration-time": {
+    "name": "抑制发送剪枝报文的超时时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/override-expiration-time": {
+    "name": "剪枝否决定时器的超时时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/backup-upstream-expiration-time": {
+    "name": "备份上游超时时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/user-id": {
+    "name": "用户ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/original-src-addr": {
+    "name": "原始源信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/downstreams": {
+    "name": "下游信息列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/downstreams/downstream": {
+    "name": "下游信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/downstreams/downstream/if-name": {
+    "name": "接口名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/downstreams/downstream/protocol-type": {
+    "name": "地址族"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/downstreams/downstream/up-time": {
+    "name": "下游状态"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/downstreams/downstream/timeout-period": {
+    "name": "超时时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/downstreams/downstream/dr-status": {
+    "name": "DR状态"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/downstreams/downstream/downstream": {
+    "name": "下游信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/downstreams/downstream/downstream-ppt": {
+    "name": "下游PPT"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/downstreams/downstream/assert-state-machine": {
+    "name": "Assert状态机"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/downstreams/downstream/assert-timeout-period": {
+    "name": "Assert报文超时时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/downstreams/downstream/assert-winner-addr": {
+    "name": "Assert Winner的地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/downstreams/downstream/assert-winner-metric": {
+    "name": "Assert Winner的Metric"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/downstreams/downstream/assert-winner-metric-priority": {
+    "name": "Assert Winner的Metric优先级"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/downstreams/downstream/local-receiver-exist": {
+    "name": "存在本地接收者"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/downstreams/downstream/rpt-status": {
+    "name": "RPT状态"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/downstreams/downstream/rpt-state-machine-ppt": {
+    "name": "RPT状态机PPT"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/downstreams/downstream/rpt-timeout-period": {
+    "name": "RPT超时时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/downstreams/downstream/vector-attribute-status": {
+    "name": "下游Vector属性状态"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/downstreams/downstream/elected-vector": {
+    "name": "下游选中Vector"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/downstreams/downstream/elected-vector-nbr": {
+    "name": "下游选中Vector对应的邻居地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/downstreams/downstream/vector-num": {
+    "name": "接口vector个数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/downstreams/downstream/ignore-dr-status": {
+    "name": "忽略DR状态"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/downstreams/downstream/vectors": {
+    "name": "Vector信息列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/downstreams/downstream/vectors/vector": {
+    "name": "Vector信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/downstreams/downstream/vectors/vector/nbr-addr": {
+    "name": "邻居地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/downstreams/downstream/vectors/vector/vector-addr": {
+    "name": "Vector 地址信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/downstreams/downstream/vectors/vector/vector-rd": {
+    "name": "Vector RD信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/downstreams/downstream/vectors/vector/timeout-period": {
+    "name": "创建时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/downstreams/downstream/vectors/vector/vector-hop-addrs": {
+    "name": "显示接口Vector下每一跳地址信息列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/downstreams/downstream/vectors/vector/vector-hop-addrs/vector-hop-addr": {
+    "name": "显示接口Vector下每一跳地址信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/downstreams/downstream/vectors/vector/vector-hop-addrs/vector-hop-addr/vector-addr": {
+    "name": "Vector下每一跳地址信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/downstreams/downstream/vectors/vector/vector-hop-addrs/vector-hop-addr/sequence-num": {
+    "name": "序号"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/recv-vrfs": {
+    "name": "接收者VPN实例信息列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/recv-vrfs/recv-vrf": {
+    "name": "接收者VPN实例信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/recv-vrfs/recv-vrf/vrf-name": {
+    "name": "Extranet接收者VPN实例"
+  },
+  "/huawei-multicast:multicast/huawei-pim:rpf-vector-paths": {
+    "name": "配置到组播源的路径列表"
+  },
+  "/huawei-multicast:multicast/huawei-pim:rpf-vector-paths/rpf-vector-path": {
+    "name": "配置到组播源的路径"
+  },
+  "/huawei-multicast:multicast/huawei-pim:rpf-vector-paths/rpf-vector-path/path-name": {
+    "name": "路径名称"
+  },
+  "/huawei-multicast:multicast/huawei-pim:rpf-vector-paths/rpf-vector-path/path-type": {
+    "name": "路径类型"
+  },
+  "/huawei-multicast:multicast/huawei-pim:rpf-vector-paths/rpf-vector-path/hops": {
+    "name": "路径中逐跳节点IP地址列表"
+  },
+  "/huawei-multicast:multicast/huawei-pim:rpf-vector-paths/rpf-vector-path/hops/hop": {
+    "name": "路径中逐跳节点IP地址"
+  },
+  "/huawei-multicast:multicast/huawei-pim:rpf-vector-paths/rpf-vector-path/hops/hop/index": {
+    "name": "地址索引"
+  },
+  "/huawei-multicast:multicast/huawei-pim:rpf-vector-paths/rpf-vector-path/hops/hop/ip-addr": {
+    "name": "节点IP地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/claim-routings": {
+    "name": "Claim路由信息列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/claim-routings/claim-routing": {
+    "name": "Claim路由信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/claim-routings/claim-routing/type": {
+    "name": "地址族"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/claim-routings/claim-routing/destination-addr": {
+    "name": "目的地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/claim-routings/claim-routing/if-name": {
+    "name": "RPF接口名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/claim-routings/claim-routing/rpf-neighbour": {
+    "name": "RPF邻居"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/claim-routings/claim-routing/referenced-route": {
+    "name": "引用路由"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/claim-routings/claim-routing/referenced-route-mask": {
+    "name": "引用路由掩码"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/claim-routings/claim-routing/referenced-route-type": {
+    "name": "引用路由类型"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/claim-routings/claim-routing/global-administrator": {
+    "name": "扩展团体属性Global信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/claim-routings/claim-routing/local-administrator": {
+    "name": "扩展团体属性Local信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/claim-routings/claim-routing/as-number": {
+    "name": "路由器的AS域"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/claim-routings/claim-routing/backup-rpf-nbr": {
+    "name": "备份的RPF邻居"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/claim-routings/claim-routing/backup-global-administrator": {
+    "name": "备份的扩展团体属性Global信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/claim-routings/claim-routing/backup-local-administrator": {
+    "name": "备份的扩展团体属性Local信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/claim-routings/claim-routing/backup-as-number": {
+    "name": "备份的路由器AS域"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/claim-routings/claim-routing/claim-routing-entrys": {
+    "name": "PIM Claim路由表项列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/claim-routings/claim-routing/claim-routing-entrys/claim-routing-entry": {
+    "name": "PIM Claim路由表项"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/claim-routings/claim-routing/claim-routing-entrys/claim-routing-entry/src-addr": {
+    "name": "源地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/claim-routings/claim-routing/claim-routing-entrys/claim-routing-entry/grp-addr": {
+    "name": "组地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages": {
+    "name": "PIM无效消息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/general-cnts": {
+    "name": "公共无效PIM消息列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/general-cnts/general-cnt": {
+    "name": "公共无效PIM消息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/general-cnts/general-cnt/type": {
+    "name": "地址族"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/general-cnts/general-cnt/invalid-version": {
+    "name": "无效PIM版本"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/general-cnts/general-cnt/invalid-type": {
+    "name": "无效PIM消息类型"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/general-cnts/general-cnt/fault-length": {
+    "name": "无效的消息长度"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/general-cnts/general-cnt/bad-checksum": {
+    "name": "无效的校验和"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-register-cnts": {
+    "name": "无效PIM Register消息列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-register-cnts/invalid-register-cnt": {
+    "name": "无效PIM Register消息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-register-cnts/invalid-register-cnt/type": {
+    "name": "地址族"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-register-cnts/invalid-register-cnt/invalid-multicast-source": {
+    "name": "无效组播源地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-register-cnts/invalid-register-cnt/invalid-multicast-group": {
+    "name": "无效组播组地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-register-cnts/invalid-register-cnt/invalid-destination-addr": {
+    "name": "无效目的地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-register-stop-cnts": {
+    "name": "无效PIM Register-Stop消息列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-register-stop-cnts/invalid-register-stop-cnt": {
+    "name": "无效PIM Register-Stop消息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-register-stop-cnts/invalid-register-stop-cnt/type": {
+    "name": "地址族"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-register-stop-cnts/invalid-register-stop-cnt/invalid-multicast-source": {
+    "name": "无效组播源地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-register-stop-cnts/invalid-register-stop-cnt/invalid-multicast-group": {
+    "name": "无效组播组地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-register-stop-cnts/invalid-register-stop-cnt/invalid-destination-sddr": {
+    "name": "无效目的地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-register-stop-cnts/invalid-register-stop-cnt/source-addr-not-rp": {
+    "name": "源地址不是RP"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-c-rp-cnts": {
+    "name": "无效PIM CRP消息列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-c-rp-cnts/invalid-c-rp-cnt": {
+    "name": "无效PIM CRP消息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-c-rp-cnts/invalid-c-rp-cnt/type": {
+    "name": "地址族"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-c-rp-cnts/invalid-c-rp-cnt/invalid-destination-addr": {
+    "name": "无效目的地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-c-rp-cnts/invalid-c-rp-cnt/invalid-group-address": {
+    "name": "无效C-RP地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-c-rp-cnts/invalid-c-rp-cnt/fault-length": {
+    "name": "无效的消息长度"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-c-rp-cnts/invalid-c-rp-cnt/adv-fault-length": {
+    "name": "无效的CRP Adv长度"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-c-rp-cnts/invalid-c-rp-cnt/invalid-multicast-group": {
+    "name": "无效组播组地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-assert-cnts": {
+    "name": "无效PIM Assert消息列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-assert-cnts/invalid-assert-cnt": {
+    "name": "无效PIM Assert消息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-assert-cnts/invalid-assert-cnt/type": {
+    "name": "地址族"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-assert-cnts/invalid-assert-cnt/invalid-destination-addr": {
+    "name": "无效目的地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-assert-cnts/invalid-assert-cnt/invalid-ip-source-addr": {
+    "name": "无效报文源地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-assert-cnts/invalid-assert-cnt/invalid-multicast-source": {
+    "name": "无效组播源地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-assert-cnts/invalid-assert-cnt/invalid-multicast-group": {
+    "name": "无效组播组地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-assert-cnts/invalid-assert-cnt/fault-length": {
+    "name": "无效的消息长度"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-bsr-cnts": {
+    "name": "PIM无效BSR消息列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-bsr-cnts/invalid-bsr-cnt": {
+    "name": "PIM无效BSR消息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-bsr-cnts/invalid-bsr-cnt/type": {
+    "name": "地址族"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-bsr-cnts/invalid-bsr-cnt/bad-payload": {
+    "name": "无效的Payload"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-bsr-cnts/invalid-bsr-cnt/fault-length": {
+    "name": "无效的消息长度"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-bsr-cnts/invalid-bsr-cnt/invalid-scope-mask": {
+    "name": "无效的Scope掩码"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-bsr-cnts/invalid-bsr-cnt/invalid-multicast-group": {
+    "name": "无效组播组地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-bsr-cnts/invalid-bsr-cnt/recv-by-non-c-bsr": {
+    "name": "不是C-BSR却收到BSR消息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-bsr-cnts/invalid-bsr-cnt/invalid-bsr-addr": {
+    "name": "无效BSR地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-bsr-cnts/invalid-bsr-cnt/fault-hash-length": {
+    "name": "无效的Hash长度"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-bsr-cnts/invalid-bsr-cnt/invalid-ip-source-addr": {
+    "name": "无效报文源地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-hello-cnts": {
+    "name": "无效PIM Hello消息列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-hello-cnts/invalid-hello-cnt": {
+    "name": "无效PIM Hello消息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-hello-cnts/invalid-hello-cnt/type": {
+    "name": "地址族"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-hello-cnts/invalid-hello-cnt/invalid-addr-list": {
+    "name": "无效地址列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-hello-cnts/invalid-hello-cnt/invalid-length": {
+    "name": "无效的消息长度"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-hello-cnts/invalid-hello-cnt/invalid-holdtime-length": {
+    "name": "无效的Holdtime长度"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-hello-cnts/invalid-hello-cnt/invalid-lan-prune-delay-length": {
+    "name": "无效的LanPruneDelay长度"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-hello-cnts/invalid-hello-cnt/invalid-dr-priority-length": {
+    "name": "无效的DrPriority长度"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-hello-cnts/invalid-hello-cnt/invalid-gen-id-length": {
+    "name": "无效的GenerationID长度"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-hello-cnts/invalid-hello-cnt/invalid-destination-addr": {
+    "name": "无效目的地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-hello-cnts/invalid-hello-cnt/invalid-ip-source-addr": {
+    "name": "无效报文源地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-join-prune-cnts": {
+    "name": "无效PIM Join/Prune消息列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-join-prune-cnts/invalid-join-prune-cnt": {
+    "name": "无效PIM Join/Prune消息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-join-prune-cnts/invalid-join-prune-cnt/type": {
+    "name": "地址族"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-join-prune-cnts/invalid-join-prune-cnt/invalid-multicast-source": {
+    "name": "无效组播源地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-join-prune-cnts/invalid-join-prune-cnt/invalid-multicast-group": {
+    "name": "无效组播组地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-join-prune-cnts/invalid-join-prune-cnt/invalid-upstream-nbr": {
+    "name": "无效的上游邻居"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-join-prune-cnts/invalid-join-prune-cnt/invalid-ip-source-addr": {
+    "name": "无效报文源地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-join-prune-cnts/invalid-join-prune-cnt/invalid-destination-addr": {
+    "name": "无效目的地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-join-prune-cnts/invalid-join-prune-cnt/fault-length": {
+    "name": "无效的消息长度"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-graft-cnts": {
+    "name": "无效PIM Graft消息列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-graft-cnts/invalid-graft-cnt": {
+    "name": "无效PIM Graft消息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-graft-cnts/invalid-graft-cnt/type": {
+    "name": "地址族"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-graft-cnts/invalid-graft-cnt/invalid-multicast-source": {
+    "name": "无效组播源地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-graft-cnts/invalid-graft-cnt/invalid-multicast-group": {
+    "name": "无效组播组地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-graft-cnts/invalid-graft-cnt/invalid-up-nbr": {
+    "name": "无效的上游邻居"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-graft-cnts/invalid-graft-cnt/invalid-ip-source-addr": {
+    "name": "无效报文源地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-graft-cnts/invalid-graft-cnt/fault-length": {
+    "name": "无效的消息长度"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-graft-ack-cnts": {
+    "name": "无效PIM Graft-Ack消息列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-graft-ack-cnts/invalid-graft-ack-cnt": {
+    "name": "无效PIM Graft-Ack消息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-graft-ack-cnts/invalid-graft-ack-cnt/type": {
+    "name": "地址族"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-graft-ack-cnts/invalid-graft-ack-cnt/invalid-multicast-source": {
+    "name": "无效组播源地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-graft-ack-cnts/invalid-graft-ack-cnt/invalid-multicast-group": {
+    "name": "无效组播组地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-graft-ack-cnts/invalid-graft-ack-cnt/invalid-up-nbr": {
+    "name": "无效的上游邻居"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-graft-ack-cnts/invalid-graft-ack-cnt/invalid-ip-source-addr": {
+    "name": "无效报文源地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-graft-ack-cnts/invalid-graft-ack-cnt/fault-length": {
+    "name": "无效的消息长度"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-state-refresh-cnts": {
+    "name": "无效的PIM State Refresh消息列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-state-refresh-cnts/invalid-state-refresh-cnt": {
+    "name": "无效的PIM State Refresh消息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-state-refresh-cnts/invalid-state-refresh-cnt/type": {
+    "name": "地址族"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-state-refresh-cnts/invalid-state-refresh-cnt/invalid-multicast-source": {
+    "name": "无效组播源地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-state-refresh-cnts/invalid-state-refresh-cnt/invalid-multicast-group": {
+    "name": "无效组播组地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-state-refresh-cnts/invalid-state-refresh-cnt/invalid-originator": {
+    "name": "无效的Originator地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-state-refresh-cnts/invalid-state-refresh-cnt/fault-length": {
+    "name": "无效的消息长度"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-auto-rp-announce-cnts": {
+    "name": "无效PIM Auto-RP Announcement消息列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-auto-rp-announce-cnts/invalid-auto-rp-announce-cnt": {
+    "name": "无效PIM Auto-RP Announcement消息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-auto-rp-announce-cnts/invalid-auto-rp-announce-cnt/type": {
+    "name": "地址族"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-auto-rp-announce-cnts/invalid-auto-rp-announce-cnt/invalid-destination-addr": {
+    "name": "无效目的地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-auto-rp-announce-cnts/invalid-auto-rp-announce-cnt/invalid-ip-source-addr": {
+    "name": "无效报文源地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-auto-rp-announce-cnts/invalid-auto-rp-announce-cnt/invalid-ttl": {
+    "name": "无效的TTL"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-auto-rp-announce-cnts/invalid-auto-rp-announce-cnt/invalid-source-port": {
+    "name": "无效的源端口号"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-auto-rp-discovery-cnts": {
+    "name": "无效PIM Auto-RP Discovery报文列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-auto-rp-discovery-cnts/invalid-auto-rp-discovery-cnt": {
+    "name": "无效PIM Auto-RP Discovery报文"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-auto-rp-discovery-cnts/invalid-auto-rp-discovery-cnt/type": {
+    "name": "地址族"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-auto-rp-discovery-cnts/invalid-auto-rp-discovery-cnt/invalid-length": {
+    "name": "无效的消息长度"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-auto-rp-discovery-cnts/invalid-auto-rp-discovery-cnt/invalid-rp": {
+    "name": "无效的RP地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-auto-rp-discovery-cnts/invalid-auto-rp-discovery-cnt/invalid-ip-source-addr": {
+    "name": "无效报文源地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-auto-rp-discovery-cnts/invalid-auto-rp-discovery-cnt/invalid-group": {
+    "name": "无效组播组地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-auto-rp-discovery-cnts/invalid-auto-rp-discovery-cnt/invalid-ttl": {
+    "name": "无效的TTL"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-auto-rp-discovery-cnts/invalid-auto-rp-discovery-cnt/invalid-source-port": {
+    "name": "无效的源端口号"
+  }
+}

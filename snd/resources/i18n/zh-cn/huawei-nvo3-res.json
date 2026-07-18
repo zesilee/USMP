@@ -1,0 +1,242 @@
+{
+  "/huawei-nvo3:nvo3": {
+    "name": "NVO3管理"
+  },
+  "/huawei-nvo3:nvo3/vni-instances": {
+    "name": "VNI实例配置列表"
+  },
+  "/huawei-nvo3:nvo3/vni-instances/vni-instance": {
+    "name": "VNI实例配置"
+  },
+  "/huawei-nvo3:nvo3/vni-instances/vni-instance/vni": {
+    "name": "VNI ID"
+  },
+  "/huawei-nvo3:nvo3/vni-instances/vni-instance/source-nve": {
+    "name": "NVE接口名称"
+  },
+  "/huawei-nvo3:nvo3/vni-instances/vni-instance/state": {
+    "name": "VNI状态"
+  },
+  "/huawei-nvo3:nvo3/vni-instances/vni-instance/protocol-bgp": {
+    "name": "动态成员学习"
+  },
+  "/huawei-nvo3:nvo3/vni-instances/vni-instance/static-peers": {
+    "name": "静态头端复制成员列表"
+  },
+  "/huawei-nvo3:nvo3/vni-instances/vni-instance/static-peers/static-peer": {
+    "name": "静态头端复制成员"
+  },
+  "/huawei-nvo3:nvo3/vni-instances/vni-instance/static-peers/static-peer/address": {
+    "name": "VTEP的IP地址"
+  },
+  "/huawei-nvo3:nvo3/vni-instances/vni-instance/static-evpl-peers": {
+    "name": "静态点到点成员列表"
+  },
+  "/huawei-nvo3:nvo3/vni-instances/vni-instance/static-evpl-peers/static-evpl-peer": {
+    "name": "静态点到点成员"
+  },
+  "/huawei-nvo3:nvo3/vni-instances/vni-instance/static-evpl-peers/static-evpl-peer/address": {
+    "name": "VTEP的IP地址"
+  },
+  "/huawei-nvo3:nvo3/vni-instances/vni-instance/static-evpl-peers/static-evpl-peer/preference": {
+    "name": "VXLAN隧道优先级"
+  },
+  "/huawei-nvo3:nvo3/vni-instances/vni-instance/mcast-groups": {
+    "name": "组播复制配置"
+  },
+  "/huawei-nvo3:nvo3/vni-instances/vni-instance/mcast-groups/mcast-group": {
+    "name": "组播组"
+  },
+  "/huawei-nvo3:nvo3/vni-instances/vni-instance/mcast-groups/mcast-group/address": {
+    "name": "地址"
+  },
+  "/huawei-nvo3:nvo3/vni-labels": {
+    "name": "VXLAN网络标识列表"
+  },
+  "/huawei-nvo3:nvo3/vni-labels/vni-label": {
+    "name": "VXLAN网络标识"
+  },
+  "/huawei-nvo3:nvo3/vni-labels/vni-label/vni": {
+    "name": "VNI实例"
+  },
+  "/huawei-nvo3:nvo3/vteps": {
+    "name": "VNI 成员信息"
+  },
+  "/huawei-nvo3:nvo3/vteps/peers": {
+    "name": "头端复制成员信息列表"
+  },
+  "/huawei-nvo3:nvo3/vteps/peers/peer": {
+    "name": "头端复制成员信息"
+  },
+  "/huawei-nvo3:nvo3/vteps/peers/peer/vni": {
+    "name": "VXLAN网络标识"
+  },
+  "/huawei-nvo3:nvo3/vteps/peers/peer/source": {
+    "name": "源地址"
+  },
+  "/huawei-nvo3:nvo3/vteps/peers/peer/destination": {
+    "name": "目的地址"
+  },
+  "/huawei-nvo3:nvo3/vteps/peers/peer/type": {
+    "name": "隧道类型"
+  },
+  "/huawei-nvo3:nvo3/vteps/peers/peer/out-vni": {
+    "name": "用于映射的VNI"
+  },
+  "/huawei-nvo3:nvo3/vteps/evpl-peers": {
+    "name": "点到点成员信息列表"
+  },
+  "/huawei-nvo3:nvo3/vteps/evpl-peers/evpl-peer": {
+    "name": "点到点成员信息"
+  },
+  "/huawei-nvo3:nvo3/vteps/evpl-peers/evpl-peer/id": {
+    "name": "EVPL实例ID"
+  },
+  "/huawei-nvo3:nvo3/vteps/evpl-peers/evpl-peer/vni": {
+    "name": "VNI"
+  },
+  "/huawei-nvo3:nvo3/vteps/evpl-peers/evpl-peer/source": {
+    "name": "VXLAN隧道源地址"
+  },
+  "/huawei-nvo3:nvo3/vteps/evpl-peers/evpl-peer/peer": {
+    "name": "主隧道IP"
+  },
+  "/huawei-nvo3:nvo3/vteps/evpl-peers/evpl-peer/out-vni": {
+    "name": "映射VNI"
+  },
+  "/huawei-nvo3:nvo3/vteps/evpl-peers/evpl-peer/backup-peer": {
+    "name": "备份VTEP的IP"
+  },
+  "/huawei-nvo3:nvo3/vteps/evpl-peers/evpl-peer/backup-out-vni": {
+    "name": "备份VNI"
+  },
+  "/huawei-nvo3:nvo3/vteps/evpl-peers/evpl-peer/bypass-peer": {
+    "name": "Bypass隧道的IP"
+  },
+  "/huawei-nvo3:nvo3/vteps/evpl-peers/evpl-peer/bypass-out-vni": {
+    "name": "Bypass VNI标识"
+  },
+  "/huawei-nvo3:nvo3/vteps/cu-peers": {
+    "name": "CU模式成员信息列表"
+  },
+  "/huawei-nvo3:nvo3/vteps/cu-peers/cu-peer": {
+    "name": "CU模式成员信息"
+  },
+  "/huawei-nvo3:nvo3/vteps/cu-peers/cu-peer/vni": {
+    "name": "VNI ID"
+  },
+  "/huawei-nvo3:nvo3/vteps/cu-peers/cu-peer/source": {
+    "name": "源地址"
+  },
+  "/huawei-nvo3:nvo3/vteps/cu-peers/cu-peer/destination": {
+    "name": "远端地址"
+  },
+  "/huawei-nvo3:nvo3/vteps/cu-peers/cu-peer/type": {
+    "name": "隧道类型"
+  },
+  "/huawei-nvo3:nvo3/vteps/cu-peers/cu-peer/out-vni": {
+    "name": "出方向VNI的ID"
+  },
+  "/huawei-nvo3:nvo3/vteps/cu-peers/cu-peer/nqa-state": {
+    "name": "NQA探测的状态"
+  },
+  "/huawei-nvo3:nvo3/vteps/cu-peers/cu-peer/packet-loss-ratio": {
+    "name": "NQA探测的丢包率"
+  },
+  "/huawei-nvo3:nvo3/global-attribute": {
+    "name": "VXLAN全局属性"
+  },
+  "/huawei-nvo3:nvo3/global-attribute/exact-sub-enable": {
+    "name": "使能精确路由订阅"
+  },
+  "/huawei-nvo3:nvo3/tunnels": {
+    "name": "VXLAN隧道信息列表"
+  },
+  "/huawei-nvo3:nvo3/tunnels/tunnel": {
+    "name": "VXLAN隧道信息"
+  },
+  "/huawei-nvo3:nvo3/tunnels/tunnel/id": {
+    "name": "隧道ID"
+  },
+  "/huawei-nvo3:nvo3/tunnels/tunnel/source": {
+    "name": "源地址"
+  },
+  "/huawei-nvo3:nvo3/tunnels/tunnel/destination": {
+    "name": "目的地址"
+  },
+  "/huawei-nvo3:nvo3/tunnels/tunnel/mode": {
+    "name": "隧道模式"
+  },
+  "/huawei-nvo3:nvo3/tunnels/tunnel/state": {
+    "name": "隧道状态"
+  },
+  "/huawei-nvo3:nvo3/tunnels/tunnel/type": {
+    "name": "隧道类型"
+  },
+  "/huawei-nvo3:nvo3/tunnels/tunnel/up-time": {
+    "name": "隧道可达时间"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3:nve": {
+    "name": "NVE属性"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3:nve/attribute": {
+    "name": "NVE配置"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3:nve/attribute/source-vtep-ip": {
+    "name": "NVE接口源地址"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3:nve/attribute/source-vtep-ipv6": {
+    "name": "NVE接口源IPv6地址"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3:nve/attribute/phys-address": {
+    "name": "Physical MAC地址"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3:nve/attribute/bypass-vtep-ip": {
+    "name": "VXLAN 支路隧道源地址"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3:nve/attribute/bypass-vtep-ipv6": {
+    "name": "VXLAN 支路隧道源IPv6地址"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3:nvo3-gateway": {
+    "name": "分布式网关使能列表"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3:nvo3-gateway/vxlan-anycast-gateway": {
+    "name": "VXLAN分布式网关使能"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3:nvo3-gateway/common-anycast-gateway": {
+    "name": "通用分布式网关功能"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-nvo3:nvo3": {
+    "name": "VNI和VRF绑定配置列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-nvo3:nvo3/vni-list": {
+    "name": "VNI和VRF绑定配置"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-nvo3:nvo3/vni-list/vni": {
+    "name": "VNI ID"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-nvo3:nvo3": {
+    "name": "VNI和BD绑定配置列表"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-nvo3:nvo3/vni-list": {
+    "name": "VNI和BD绑定配置"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-nvo3:nvo3/vni-list/vni": {
+    "name": "VNI ID"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-nvo3:nvo3/vni-list/split-horizon": {
+    "name": "水平分割模式"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-nvo3:nvo3/map-vnis": {
+    "name": "Mapping VNI和BD绑定配置"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-nvo3:nvo3/map-vnis/map-vni": {
+    "name": "VNI映射"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-nvo3:nvo3/map-vnis/map-vni/vni": {
+    "name": "VXLAN网络标识符"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-nvo3:nvo3/map-vnis/map-vni/split-group": {
+    "name": "分割组"
+  }
+}

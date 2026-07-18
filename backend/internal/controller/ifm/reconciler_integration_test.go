@@ -488,8 +488,7 @@ func TestReconciler_Integration_TimersAndFlags(t *testing.T) {
 				AdminStatus: huawei.HuaweiIfm_PortStatus_down,
 				Mtu:         uint32Ptr(1500),
 				// Timers
-				DownDelayTime:       uint32Ptr(50),
-				ProtocolUpDelayTime: uint32Ptr(100),
+				DownDelayTime: uint32Ptr(50),
 				// Boolean flags
 				ClearIpDf:            boolPtr(true),
 				IsL2Switch:           boolPtr(false),
@@ -527,7 +526,7 @@ func TestReconciler_Integration_TimersAndFlags(t *testing.T) {
 	testsupport.AssertHuaweiInterfaceExists(t, sim, ge1)
 	testsupport.AssertHuaweiInterfaceDescription(t, sim, ge1, "Timers and Flags Test")
 	testsupport.AssertHuaweiInterfaceAdminStatus(t, sim, ge1, 1) // down = 1
-	testsupport.AssertHuaweiInterfaceTimers(t, sim, ge1, 50, 100)
+	testsupport.AssertHuaweiInterfaceTimers(t, sim, ge1, 50)
 	testsupport.AssertHuaweiInterfaceFlags(t, sim, ge1, true, false, true, true, false, false)
 }
 

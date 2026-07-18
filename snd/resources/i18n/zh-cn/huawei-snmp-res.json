@@ -1,0 +1,782 @@
+{
+  "/huawei-snmp:snmp": {
+    "name": "SNMP"
+  },
+  "/huawei-snmp:snmp/agent-flag": {
+    "name": "使能SNMP-Agent"
+  },
+  "/huawei-snmp:snmp/agent-flag/agent-enable": {
+    "name": "使能SNMP-Agent"
+  },
+  "/huawei-snmp:snmp/engine": {
+    "name": "SNMP引擎"
+  },
+  "/huawei-snmp:snmp/engine/version": {
+    "name": "SNMP版本"
+  },
+  "/huawei-snmp:snmp/engine/id": {
+    "name": "本地引擎ID"
+  },
+  "/huawei-snmp:snmp/engine/max-msg-size": {
+    "name": "最大报文长度"
+  },
+  "/huawei-snmp:snmp/system": {
+    "name": "SNMP全局配置"
+  },
+  "/huawei-snmp:snmp/system/trap-source-interface-name": {
+    "name": "Trap发送源接口"
+  },
+  "/huawei-snmp:snmp/system/trap-source-ipv4-address": {
+    "name": "Trap发送源地址"
+  },
+  "/huawei-snmp:snmp/system/inform-timeout": {
+    "name": "Inform响应超时时间"
+  },
+  "/huawei-snmp:snmp/system/inform-resend-times": {
+    "name": "Inform重发次数"
+  },
+  "/huawei-snmp:snmp/system/inform-pend-number": {
+    "name": "最大待确认告警数"
+  },
+  "/huawei-snmp:snmp/system/packet-priority": {
+    "name": "SNMP 响应报文优先级"
+  },
+  "/huawei-snmp:snmp/system/trap-packet-priority": {
+    "name": "SNMP trap报文优先级"
+  },
+  "/huawei-snmp:snmp/system/listen-port": {
+    "name": "SNMP侦听端口"
+  },
+  "/huawei-snmp:snmp/system/trap-listen-port": {
+    "name": "SNMP trap 端口"
+  },
+  "/huawei-snmp:snmp/system/acl": {
+    "name": "全局SNMP协议级的ACL"
+  },
+  "/huawei-snmp:snmp/system/community-cmplx-check": {
+    "name": "团体名复杂度检查"
+  },
+  "/huawei-snmp:snmp/system/usm-user-cmplx-check": {
+    "name": "USM用户复杂度检查"
+  },
+  "/huawei-snmp:snmp/system/ext-err-code-enable": {
+    "name": "扩展错误码使能"
+  },
+  "/huawei-snmp:snmp/system/set-cache-enable": {
+    "name": "设置缓存使能"
+  },
+  "/huawei-snmp:snmp/system/local-user-cmplx-check": {
+    "name": "Local用户复杂度检查"
+  },
+  "/huawei-snmp:snmp/system/protocol-source-interface-name": {
+    "name": "协议源接口"
+  },
+  "/huawei-snmp:snmp/system/password-min-length": {
+    "name": "密码最小长度"
+  },
+  "/huawei-snmp:snmp/system/getbulk-timeout": {
+    "name": "SNMP get-bulk超时时间"
+  },
+  "/huawei-snmp:snmp/system/protocol-source-ipv6-address": {
+    "name": "协议源IPv6地址"
+  },
+  "/huawei-snmp:snmp/system/vpn-instance-name": {
+    "name": "SNMP IPv4侦听服务的VPN实例名"
+  },
+  "/huawei-snmp:snmp/system/ipv6-vpn-instance-name": {
+    "name": "SNMP IPv6侦听服务的VPN实例名"
+  },
+  "/huawei-snmp:snmp/system/is-public-net": {
+    "name": "SNMP IPv4侦听服务绑定公网的标志"
+  },
+  "/huawei-snmp:snmp/system/is-ipv6-public-net": {
+    "name": "SNMP IPv6侦听服务绑定公网的标志"
+  },
+  "/huawei-snmp:snmp/system/ctx-engineid-check-enable": {
+    "name": "引擎ID检查使能"
+  },
+  "/huawei-snmp:snmp/system/ipv4-listen-disable": {
+    "name": "IPv4侦听功能去使能"
+  },
+  "/huawei-snmp:snmp/system/ipv6-listen-disable": {
+    "name": "IPv6侦听功能去使能"
+  },
+  "/huawei-snmp:snmp/source-interfaces": {
+    "name": "源接口配置列表"
+  },
+  "/huawei-snmp:snmp/source-interfaces/source-interface": {
+    "name": "SNMP源接口"
+  },
+  "/huawei-snmp:snmp/source-interfaces/source-interface/interface-name": {
+    "name": "源接口名称"
+  },
+  "/huawei-snmp:snmp/ipv6-sources": {
+    "name": "SNMP IPv6列表"
+  },
+  "/huawei-snmp:snmp/ipv6-sources/ipv6-source": {
+    "name": "SNMP IPv6"
+  },
+  "/huawei-snmp:snmp/ipv6-sources/ipv6-source/src-ipv6-address": {
+    "name": "IPv6地址"
+  },
+  "/huawei-snmp:snmp/ipv6-sources/ipv6-source/vpn-name": {
+    "name": "VPN名称"
+  },
+  "/huawei-snmp:snmp/all-interface": {
+    "name": "侦听全部接口"
+  },
+  "/huawei-snmp:snmp/all-interface/all-ipv4-interface": {
+    "name": "侦听全部IPv4接口"
+  },
+  "/huawei-snmp:snmp/all-interface/all-ipv6-interface": {
+    "name": "侦听全部IPv6接口"
+  },
+  "/huawei-snmp:snmp/target-hosts": {
+    "name": "告警主机地址列表"
+  },
+  "/huawei-snmp:snmp/target-hosts/target-host": {
+    "name": "告警主机"
+  },
+  "/huawei-snmp:snmp/target-hosts/target-host/nms-name": {
+    "name": "网管标识"
+  },
+  "/huawei-snmp:snmp/target-hosts/target-host/domain": {
+    "name": "网管地址类型标识"
+  },
+  "/huawei-snmp:snmp/target-hosts/target-host/address": {
+    "name": "网管地址"
+  },
+  "/huawei-snmp:snmp/target-hosts/target-host/target-inform-timeout": {
+    "name": "超时时间(秒)"
+  },
+  "/huawei-snmp:snmp/target-hosts/target-host/target-inform-resend-times": {
+    "name": "报文重发次数"
+  },
+  "/huawei-snmp:snmp/target-hosts/target-host/notify-type": {
+    "name": "通告信息类型"
+  },
+  "/huawei-snmp:snmp/target-hosts/target-host/vpn-instance-name": {
+    "name": "VPN实例名"
+  },
+  "/huawei-snmp:snmp/target-hosts/target-host/port-number": {
+    "name": "目的端口"
+  },
+  "/huawei-snmp:snmp/target-hosts/target-host/params": {
+    "name": "配置参数"
+  },
+  "/huawei-snmp:snmp/target-hosts/target-host/params/v1": {
+    "name": "V1安全模型"
+  },
+  "/huawei-snmp:snmp/target-hosts/target-host/params/v1/security-name-v1": {
+    "name": "SNMPv1安全名"
+  },
+  "/huawei-snmp:snmp/target-hosts/target-host/params/v2c": {
+    "name": "V2c安全模型"
+  },
+  "/huawei-snmp:snmp/target-hosts/target-host/params/v2c/security-name-v2c": {
+    "name": "SNMPv2c安全名"
+  },
+  "/huawei-snmp:snmp/target-hosts/target-host/params/usm": {
+    "name": "V3安全模型"
+  },
+  "/huawei-snmp:snmp/target-hosts/target-host/params/usm/usm-name": {
+    "name": "V3用户安全名"
+  },
+  "/huawei-snmp:snmp/target-hosts/target-host/params/usm/security-level": {
+    "name": "安全级别"
+  },
+  "/huawei-snmp:snmp/target-hosts/target-host/private-netmanager": {
+    "name": "私有网管"
+  },
+  "/huawei-snmp:snmp/target-hosts/target-host/is-public-net": {
+    "name": "公网"
+  },
+  "/huawei-snmp:snmp/target-hosts/target-host/ext-vb": {
+    "name": "扩展VB"
+  },
+  "/huawei-snmp:snmp/target-hosts/target-host/notify-fltr-profile-name": {
+    "name": "告警信息过滤视图"
+  },
+  "/huawei-snmp:snmp/target-hosts/target-host/retries-num": {
+    "name": "重发报文数"
+  },
+  "/huawei-snmp:snmp/target-hosts/target-host/pending-num": {
+    "name": "等待应答报文数"
+  },
+  "/huawei-snmp:snmp/target-hosts/target-host/sent-num": {
+    "name": "已发送报文数"
+  },
+  "/huawei-snmp:snmp/target-hosts/target-host/dropped-num": {
+    "name": "丢弃报文数"
+  },
+  "/huawei-snmp:snmp/target-hosts/target-host/failed-num": {
+    "name": "发送失败报文数"
+  },
+  "/huawei-snmp:snmp/target-hosts/target-host/confirmed-num": {
+    "name": "已确认报文数"
+  },
+  "/huawei-snmp:snmp/target-hosts/target-host/interface-name": {
+    "name": "发送接口"
+  },
+  "/huawei-snmp:snmp/target-hosts/target-host/is-need-heart-beat": {
+    "name": "是否需要心跳功能"
+  },
+  "/huawei-snmp:snmp/target-hosts/target-host/heart-beat-time": {
+    "name": "心跳功能间隔时间"
+  },
+  "/huawei-snmp:snmp/target-hosts/target-host/status": {
+    "name": "告警主机是否活动状态"
+  },
+  "/huawei-snmp:snmp/mib-views": {
+    "name": "MIB视图列表"
+  },
+  "/huawei-snmp:snmp/mib-views/mib-view": {
+    "name": "子树视图的名称"
+  },
+  "/huawei-snmp:snmp/mib-views/mib-view/view-name": {
+    "name": "子树视图的名称"
+  },
+  "/huawei-snmp:snmp/mib-views/mib-view/sub-tree": {
+    "name": "MIB子树"
+  },
+  "/huawei-snmp:snmp/mib-views/mib-view/type": {
+    "name": "过滤类型"
+  },
+  "/huawei-snmp:snmp/v3-groups": {
+    "name": "SNMPv3用户组"
+  },
+  "/huawei-snmp:snmp/v3-groups/v3-group": {
+    "name": "SNMPv3用户组"
+  },
+  "/huawei-snmp:snmp/v3-groups/v3-group/group-name": {
+    "name": "SNMPv3用户组名"
+  },
+  "/huawei-snmp:snmp/v3-groups/v3-group/security-level": {
+    "name": "安全等级"
+  },
+  "/huawei-snmp:snmp/v3-groups/v3-group/read-view-name": {
+    "name": "读视图名"
+  },
+  "/huawei-snmp:snmp/v3-groups/v3-group/write-view-name": {
+    "name": "写视图名"
+  },
+  "/huawei-snmp:snmp/v3-groups/v3-group/notify-view-name": {
+    "name": "告警视图名"
+  },
+  "/huawei-snmp:snmp/v3-groups/v3-group/acl-number": {
+    "name": "访问控制列表"
+  },
+  "/huawei-snmp:snmp/usm-users": {
+    "name": "USM用户列表"
+  },
+  "/huawei-snmp:snmp/usm-users/usm-user": {
+    "name": "USM用户"
+  },
+  "/huawei-snmp:snmp/usm-users/usm-user/user-name": {
+    "name": "SNMPv3协议用户名称"
+  },
+  "/huawei-snmp:snmp/usm-users/usm-user/group-name": {
+    "name": "组名称"
+  },
+  "/huawei-snmp:snmp/usm-users/usm-user/is-auth-localized": {
+    "name": "密文认证标记"
+  },
+  "/huawei-snmp:snmp/usm-users/usm-user/auth-protocol": {
+    "name": "认证协议"
+  },
+  "/huawei-snmp:snmp/usm-users/usm-user/auth-key": {
+    "name": "认证密码"
+  },
+  "/huawei-snmp:snmp/usm-users/usm-user/is-priv-localized": {
+    "name": "密文加密标记"
+  },
+  "/huawei-snmp:snmp/usm-users/usm-user/priv-protocol": {
+    "name": "加密协议"
+  },
+  "/huawei-snmp:snmp/usm-users/usm-user/priv-key": {
+    "name": "加密密码"
+  },
+  "/huawei-snmp:snmp/usm-users/usm-user/acl-number": {
+    "name": "访问控制列表"
+  },
+  "/huawei-snmp:snmp/usm-users/usm-user/active-status": {
+    "name": "状态"
+  },
+  "/huawei-snmp:snmp/usm-users/usm-user/left-lock-time": {
+    "name": "剩余锁定时间"
+  },
+  "/huawei-snmp:snmp/local-users": {
+    "name": "本地用户列表"
+  },
+  "/huawei-snmp:snmp/local-users/local-user": {
+    "name": "本地用户"
+  },
+  "/huawei-snmp:snmp/local-users/local-user/name": {
+    "name": "用户名"
+  },
+  "/huawei-snmp:snmp/local-users/local-user/auth-protocol": {
+    "name": "认证协议"
+  },
+  "/huawei-snmp:snmp/local-users/local-user/auth-key": {
+    "name": "认证密码"
+  },
+  "/huawei-snmp:snmp/local-users/local-user/priv-protocol": {
+    "name": "加密协议"
+  },
+  "/huawei-snmp:snmp/local-users/local-user/priv-key": {
+    "name": "加密密码"
+  },
+  "/huawei-snmp:snmp/local-users/local-user/active-status": {
+    "name": "状态"
+  },
+  "/huawei-snmp:snmp/local-users/local-user/left-lock-time": {
+    "name": "剩余锁定时间"
+  },
+  "/huawei-snmp:snmp/communitys": {
+    "name": "团体名列表"
+  },
+  "/huawei-snmp:snmp/communitys/community": {
+    "name": "团体名"
+  },
+  "/huawei-snmp:snmp/communitys/community/name": {
+    "name": "团体名"
+  },
+  "/huawei-snmp:snmp/communitys/community/access-right": {
+    "name": "访问权限"
+  },
+  "/huawei-snmp:snmp/communitys/community/view-name": {
+    "name": "Mib视图名称"
+  },
+  "/huawei-snmp:snmp/communitys/community/acl": {
+    "name": "访问控制列表"
+  },
+  "/huawei-snmp:snmp/communitys/community/alias-name": {
+    "name": "别名"
+  },
+  "/huawei-snmp:snmp/standard-communitys": {
+    "name": "团体字列表"
+  },
+  "/huawei-snmp:snmp/standard-communitys/standard-community": {
+    "name": "团体名"
+  },
+  "/huawei-snmp:snmp/standard-communitys/standard-community/alias-name": {
+    "name": "别名"
+  },
+  "/huawei-snmp:snmp/standard-communitys/standard-community/name": {
+    "name": "团体名"
+  },
+  "/huawei-snmp:snmp/standard-communitys/standard-community/access-right": {
+    "name": "访问权限"
+  },
+  "/huawei-snmp:snmp/standard-communitys/standard-community/view-name": {
+    "name": "Mib视图名称"
+  },
+  "/huawei-snmp:snmp/standard-communitys/standard-community/acl": {
+    "name": "访问控制列表"
+  },
+  "/huawei-snmp:snmp/black-list": {
+    "name": "SNMP黑名单特性"
+  },
+  "/huawei-snmp:snmp/black-list/ip-disable": {
+    "name": "IP地址锁定"
+  },
+  "/huawei-snmp:snmp/black-list/user-disable": {
+    "name": "用户锁定"
+  },
+  "/huawei-snmp:snmp/black-list/user-fail-count": {
+    "name": "用户登录失败次数"
+  },
+  "/huawei-snmp:snmp/black-list/user-period": {
+    "name": "用户已锁定时间"
+  },
+  "/huawei-snmp:snmp/black-list/user-reactive-time": {
+    "name": "用户重激活时间"
+  },
+  "/huawei-snmp:snmp/notification": {
+    "name": "SNMP告警日志参数"
+  },
+  "/huawei-snmp:snmp/notification/notif-log-enable": {
+    "name": "日志使能开关"
+  },
+  "/huawei-snmp:snmp/notification/notif-global-ageout": {
+    "name": "日志老化时间"
+  },
+  "/huawei-snmp:snmp/notification/notif-global-limit": {
+    "name": "日志限制"
+  },
+  "/huawei-snmp:snmp/ntfy-fltr-prfs": {
+    "name": "告警信息过滤视图列表"
+  },
+  "/huawei-snmp:snmp/ntfy-fltr-prfs/ntfy-fltr-prf": {
+    "name": "告警信息过滤视图"
+  },
+  "/huawei-snmp:snmp/ntfy-fltr-prfs/ntfy-fltr-prf/name": {
+    "name": "过滤视图名称"
+  },
+  "/huawei-snmp:snmp/ntfy-fltr-prfs/ntfy-fltr-prf/subtree": {
+    "name": "MIB子树"
+  },
+  "/huawei-snmp:snmp/ntfy-fltr-prfs/ntfy-fltr-prf/type": {
+    "name": "过滤方式"
+  },
+  "/huawei-snmp:snmp/glbal-stats": {
+    "name": "SNMP统计信息"
+  },
+  "/huawei-snmp:snmp/glbal-stats/in-pkts": {
+    "name": "接收报文数"
+  },
+  "/huawei-snmp:snmp/glbal-stats/out-pkts": {
+    "name": "发送报文数"
+  },
+  "/huawei-snmp:snmp/glbal-stats/in-bad-versions": {
+    "name": "版本不支持的报文数"
+  },
+  "/huawei-snmp:snmp/glbal-stats/in-bad-cmmty-names": {
+    "name": "未知团体名报文数"
+  },
+  "/huawei-snmp:snmp/glbal-stats/in-bad-cmmty-users": {
+    "name": "团体名有误报文数"
+  },
+  "/huawei-snmp:snmp/glbal-stats/in-asn-parse-errs": {
+    "name": "ASN解析错误报文数"
+  },
+  "/huawei-snmp:snmp/glbal-stats/in-too-bigs": {
+    "name": "收到TooBig错误数"
+  },
+  "/huawei-snmp:snmp/glbal-stats/in-nosuch-names": {
+    "name": "收到NoSuchName错误数"
+  },
+  "/huawei-snmp:snmp/glbal-stats/in-bad-values": {
+    "name": "收到BadValue错误数"
+  },
+  "/huawei-snmp:snmp/glbal-stats/in-read-onlys": {
+    "name": "收到ReadOnly错误数"
+  },
+  "/huawei-snmp:snmp/glbal-stats/in-gen-errs": {
+    "name": "收到GenErr错误数"
+  },
+  "/huawei-snmp:snmp/glbal-stats/in-total-req-vars": {
+    "name": "成功获取MIB节点数"
+  },
+  "/huawei-snmp:snmp/glbal-stats/in-total-set-vars": {
+    "name": "成功修改MIB节点数"
+  },
+  "/huawei-snmp:snmp/glbal-stats/in-get-reqs": {
+    "name": "已处理Get报文数"
+  },
+  "/huawei-snmp:snmp/glbal-stats/in-get-nexts": {
+    "name": "已处理GetNext报文数"
+  },
+  "/huawei-snmp:snmp/glbal-stats/in-set-reqs": {
+    "name": "已处理Set报文数"
+  },
+  "/huawei-snmp:snmp/glbal-stats/in-get-resps": {
+    "name": "已处理GetResponse报文数"
+  },
+  "/huawei-snmp:snmp/glbal-stats/in-traps": {
+    "name": "已处理Trap报文数"
+  },
+  "/huawei-snmp:snmp/glbal-stats/out-too-bigs": {
+    "name": "产生TooBig错误数"
+  },
+  "/huawei-snmp:snmp/glbal-stats/out-nosuch-names": {
+    "name": "产生NoSuchName错误数"
+  },
+  "/huawei-snmp:snmp/glbal-stats/out-bad-values": {
+    "name": "产生BadValue错误数"
+  },
+  "/huawei-snmp:snmp/glbal-stats/out-gen-errs": {
+    "name": "产生GenErr错误数"
+  },
+  "/huawei-snmp:snmp/glbal-stats/out-get-reqs": {
+    "name": "生成Get报文数"
+  },
+  "/huawei-snmp:snmp/glbal-stats/out-get-nexts": {
+    "name": "生成GetNext报文数"
+  },
+  "/huawei-snmp:snmp/glbal-stats/out-set-reqs": {
+    "name": "生成Set报文数"
+  },
+  "/huawei-snmp:snmp/glbal-stats/out-get-resps": {
+    "name": "生成GetResponse报文数"
+  },
+  "/huawei-snmp:snmp/glbal-stats/out-traps": {
+    "name": "生成Trap数"
+  },
+  "/huawei-snmp:snmp/glbal-stats/silent-drops": {
+    "name": "丢弃的报文数"
+  },
+  "/huawei-snmp:snmp/glbal-stats/in-get-bulks": {
+    "name": "已处理GetBulk报文数"
+  },
+  "/huawei-snmp:snmp/glbal-stats/out-get-bulks": {
+    "name": "生成GetBulk报文数"
+  },
+  "/huawei-snmp:snmp/glbal-stats/in-informs": {
+    "name": "生成Inform报文数"
+  },
+  "/huawei-snmp:snmp/glbal-stats/in-proxy-pkts": {
+    "name": "收到proxy报文数"
+  },
+  "/huawei-snmp:snmp/glbal-stats/proxy-drops": {
+    "name": "Proxy 丢弃的报文数"
+  },
+  "/huawei-snmp:snmp/usm-stats": {
+    "name": "USM统计信息"
+  },
+  "/huawei-snmp:snmp/usm-stats/unknown-user-mame": {
+    "name": "未知用户名报文数"
+  },
+  "/huawei-snmp:snmp/usm-stats/wrong-digests": {
+    "name": "错误摘要报文数"
+  },
+  "/huawei-snmp:snmp/usm-stats/unsuppt-sec-levs": {
+    "name": "安全级有误报文数"
+  },
+  "/huawei-snmp:snmp/usm-stats/out-tm-windows": {
+    "name": "认证窗口外报文数"
+  },
+  "/huawei-snmp:snmp/usm-stats/unknown-engine-ids": {
+    "name": "未知引擎ID报文数"
+  },
+  "/huawei-snmp:snmp/usm-stats/decryption-errs": {
+    "name": "解密失败报文数"
+  },
+  "/huawei-snmp:snmp/mpd-stats": {
+    "name": "消息处理和统计"
+  },
+  "/huawei-snmp:snmp/mpd-stats/unknown-sec-model": {
+    "name": "未知安全模型报文数"
+  },
+  "/huawei-snmp:snmp/mpd-stats/inval-msgs": {
+    "name": "非法报文数"
+  },
+  "/huawei-snmp:snmp/mpd-stats/unknown-pduhandle": {
+    "name": "未知PDU句柄报文数"
+  },
+  "/huawei-snmp:snmp/ntfcation-stats": {
+    "name": "通告日志状态"
+  },
+  "/huawei-snmp:snmp/ntfcation-stats/total-ntfs-logged": {
+    "name": "记录通告日志数"
+  },
+  "/huawei-snmp:snmp/ntfcation-stats/total-ntfs-bumped": {
+    "name": "通告日志数"
+  },
+  "/huawei-snmp:snmp/ntfcation-stats/total-log-entrs": {
+    "name": "当前通告日志数"
+  },
+  "/huawei-snmp:snmp/proxy": {
+    "name": "Proxy功能"
+  },
+  "/huawei-snmp:snmp/proxy/communitys": {
+    "name": "Proxy团体名列表"
+  },
+  "/huawei-snmp:snmp/proxy/communitys/community": {
+    "name": "Proxy团体名"
+  },
+  "/huawei-snmp:snmp/proxy/communitys/community/name": {
+    "name": "Proxy团体名"
+  },
+  "/huawei-snmp:snmp/proxy/communitys/community/engine-id": {
+    "name": "远端引擎ID"
+  },
+  "/huawei-snmp:snmp/proxy/communitys/community/acl": {
+    "name": "访问控制列表"
+  },
+  "/huawei-snmp:snmp/proxy/communitys/community/alias-name": {
+    "name": "别名"
+  },
+  "/huawei-snmp:snmp/proxy/standard-communitys": {
+    "name": "Proxy团体字列表"
+  },
+  "/huawei-snmp:snmp/proxy/standard-communitys/standard-community": {
+    "name": "Proxy团体名"
+  },
+  "/huawei-snmp:snmp/proxy/standard-communitys/standard-community/alias-name": {
+    "name": "别名"
+  },
+  "/huawei-snmp:snmp/proxy/standard-communitys/standard-community/name": {
+    "name": "Proxy团体名"
+  },
+  "/huawei-snmp:snmp/proxy/standard-communitys/standard-community/engine-id": {
+    "name": "远端引擎ID"
+  },
+  "/huawei-snmp:snmp/proxy/standard-communitys/standard-community/acl": {
+    "name": "访问控制列表"
+  },
+  "/huawei-snmp:snmp/proxy/target-hosts": {
+    "name": "Proxy告警主机地址列表"
+  },
+  "/huawei-snmp:snmp/proxy/target-hosts/target-host": {
+    "name": "Proxy告警主机"
+  },
+  "/huawei-snmp:snmp/proxy/target-hosts/target-host/name": {
+    "name": "网管标识"
+  },
+  "/huawei-snmp:snmp/proxy/target-hosts/target-host/domain": {
+    "name": "网管地址类型标识"
+  },
+  "/huawei-snmp:snmp/proxy/target-hosts/target-host/address": {
+    "name": "网管地址"
+  },
+  "/huawei-snmp:snmp/proxy/target-hosts/target-host/timeout": {
+    "name": "超时时间"
+  },
+  "/huawei-snmp:snmp/proxy/target-hosts/target-host/vpn": {
+    "name": "VPN实例名"
+  },
+  "/huawei-snmp:snmp/proxy/target-hosts/target-host/port-num": {
+    "name": "端口号"
+  },
+  "/huawei-snmp:snmp/proxy/target-hosts/target-host/params": {
+    "name": "Proxy 配置参数"
+  },
+  "/huawei-snmp:snmp/proxy/target-hosts/target-host/params/v1": {
+    "name": "V1安全模型"
+  },
+  "/huawei-snmp:snmp/proxy/target-hosts/target-host/params/v1/security-name-v1": {
+    "name": "安全名"
+  },
+  "/huawei-snmp:snmp/proxy/target-hosts/target-host/params/v2c": {
+    "name": "V2c安全模型"
+  },
+  "/huawei-snmp:snmp/proxy/target-hosts/target-host/params/v2c/security-name-v2c": {
+    "name": "V2c安全名"
+  },
+  "/huawei-snmp:snmp/proxy/target-hosts/target-host/params/usm": {
+    "name": "V3安全模型"
+  },
+  "/huawei-snmp:snmp/proxy/target-hosts/target-host/params/usm/usm-name": {
+    "name": "安全名V3"
+  },
+  "/huawei-snmp:snmp/proxy/target-hosts/target-host/params/usm/security-level": {
+    "name": "安全级别"
+  },
+  "/huawei-snmp:snmp/proxy/target-hosts/target-host/interface-name": {
+    "name": "发送接口"
+  },
+  "/huawei-snmp:snmp/proxy/target-hosts/target-host/public-net": {
+    "name": "公开netmanager"
+  },
+  "/huawei-snmp:snmp/proxy/rules": {
+    "name": "Proxy规则列表"
+  },
+  "/huawei-snmp:snmp/proxy/rules/rule": {
+    "name": "Proxy规则"
+  },
+  "/huawei-snmp:snmp/proxy/rules/rule/name": {
+    "name": "Proxy规则名称"
+  },
+  "/huawei-snmp:snmp/proxy/rules/rule/type": {
+    "name": "访问权限"
+  },
+  "/huawei-snmp:snmp/proxy/rules/rule/engine-id": {
+    "name": "远端引擎ID"
+  },
+  "/huawei-snmp:snmp/proxy/rules/rule/host-name": {
+    "name": "网管标识"
+  },
+  "/huawei-snmp:snmp/proxy/rules/rule/security-model": {
+    "name": "安全模式"
+  },
+  "/huawei-snmp:snmp/proxy/rules/rule/security-name": {
+    "name": "安全名"
+  },
+  "/huawei-snmp:snmp/proxy/rules/rule/security-v3-name": {
+    "name": "安全名V3"
+  },
+  "/huawei-snmp:snmp/proxy/rules/rule/security-level": {
+    "name": "安全级别"
+  },
+  "/huawei-snmp:snmp/proxy/usm-users": {
+    "name": "Proxy USM用户"
+  },
+  "/huawei-snmp:snmp/proxy/usm-users/engine-id": {
+    "name": "引擎ID"
+  },
+  "/huawei-snmp:snmp/proxy/usm-users/usm-user": {
+    "name": "Proxy USM用户列表"
+  },
+  "/huawei-snmp:snmp/proxy/usm-users/usm-user/user-name": {
+    "name": "SNMPv3协议用户名称"
+  },
+  "/huawei-snmp:snmp/proxy/usm-users/usm-user/group-name": {
+    "name": "组名称"
+  },
+  "/huawei-snmp:snmp/proxy/usm-users/usm-user/is-auth-localized": {
+    "name": "密文认证标记"
+  },
+  "/huawei-snmp:snmp/proxy/usm-users/usm-user/auth-protocol": {
+    "name": "认证协议"
+  },
+  "/huawei-snmp:snmp/proxy/usm-users/usm-user/auth-key": {
+    "name": "认证密码"
+  },
+  "/huawei-snmp:snmp/proxy/usm-users/usm-user/is-priv-localized": {
+    "name": "密文加密标记"
+  },
+  "/huawei-snmp:snmp/proxy/usm-users/usm-user/priv-protocol": {
+    "name": "加密协议"
+  },
+  "/huawei-snmp:snmp/proxy/usm-users/usm-user/priv-key": {
+    "name": "加密密码"
+  },
+  "/huawei-snmp:snmp/proxy/usm-users/usm-user/acl-number": {
+    "name": "访问控制列表"
+  },
+  "/huawei-snmp:snmp/proxy/usm-users/usm-user/active-status": {
+    "name": "状态"
+  },
+  "/huawei-snmp:snmp/proxy/usm-users/usm-user/left-lock-time": {
+    "name": "剩余锁定时间"
+  },
+  "/huawei-snmp:snmp/proxy/source-interfaces": {
+    "name": "Proxy源接口配置列表"
+  },
+  "/huawei-snmp:snmp/proxy/source-interfaces/source-interface": {
+    "name": "SNMP Proxy源接口"
+  },
+  "/huawei-snmp:snmp/proxy/source-interfaces/source-interface/interface-name": {
+    "name": "源接口名称"
+  },
+  "/huawei-snmp:snmp/proxy/ipv6-sources": {
+    "name": "SNMP Proxy IPv6列表"
+  },
+  "/huawei-snmp:snmp/proxy/ipv6-sources/ipv6-source": {
+    "name": "SNMP Proxy IPv6"
+  },
+  "/huawei-snmp:snmp/proxy/ipv6-sources/ipv6-source/src-ipv6-address": {
+    "name": "IPv6地址"
+  },
+  "/huawei-snmp:snmp/proxy/ipv6-sources/ipv6-source/vpn-name": {
+    "name": "VPN名称"
+  },
+  "/huawei-snmp:snmp/proxy/all-interface": {
+    "name": "代理设备侦听全部接口"
+  },
+  "/huawei-snmp:snmp/proxy/all-interface/all-ipv4-interface": {
+    "name": "侦听全部IPv4接口"
+  },
+  "/huawei-snmp:snmp/proxy/all-interface/all-ipv6-interface": {
+    "name": "侦听全部IPv6接口"
+  },
+  "/huawei-snmp:activate-users": {
+    "name": "激活用户"
+  },
+  "/huawei-snmp:activate-users/input/activate-users": {
+    "name": "激活用户列表"
+  },
+  "/huawei-snmp:activate-users/input/activate-users/activate-user": {
+    "name": "激活用户"
+  },
+  "/huawei-snmp:activate-users/input/activate-users/activate-user/name": {
+    "name": "USM用户名"
+  },
+  "/huawei-snmp:activate-users/input/activate-users/activate-user/engine-id": {
+    "name": "远端引擎ID"
+  },
+  "/rpcs/huawei-snmp:snmp/activate-users": {
+    "name": "激活用户"
+  }
+}

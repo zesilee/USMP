@@ -1,0 +1,530 @@
+{
+  "/huawei-ai-fabric:ai-fabric": {
+    "name": "智能无损网络"
+  },
+  "/huawei-ai-fabric:ai-fabric/ai-service": {
+    "name": "AI service功能"
+  },
+  "/huawei-ai-fabric:ai-fabric/ai-service/ai-ecn": {
+    "name": "进入AI ECN视图"
+  },
+  "/huawei-ai-fabric:ai-fabric/ai-service/ai-ecn/enable": {
+    "name": "使能无损队列的AI ECN门限功能"
+  },
+  "/huawei-ai-fabric:ai-fabric/ai-service/ai-ecn/queues": {
+    "name": "使能AI-ECN功能的无损队列"
+  },
+  "/huawei-ai-fabric:ai-fabric/ai-service/ai-ecn/queues/queue": {
+    "name": "使能AI-ECN功能的无损队列"
+  },
+  "/huawei-ai-fabric:ai-fabric/ai-service/ai-ecn/queues/queue/queue-id": {
+    "name": "使能队列ID"
+  },
+  "/huawei-ai-fabric:ai-fabric/ai-service/iqcn": {
+    "name": "进入iQCN视图"
+  },
+  "/huawei-ai-fabric:ai-fabric/ai-service/iqcn/enable": {
+    "name": "使能全局iQCN功能"
+  },
+  "/huawei-ai-fabric:ai-fabric/ai-service/iqcn/rpg-time-reset": {
+    "name": "时间计数器"
+  },
+  "/huawei-ai-fabric:ai-fabric/ai-service/iqcn/queues": {
+    "name": "使能iQCN队列"
+  },
+  "/huawei-ai-fabric:ai-fabric/ai-service/iqcn/queues/queue": {
+    "name": "使能iQCN工作队列"
+  },
+  "/huawei-ai-fabric:ai-fabric/ai-service/iqcn/queues/queue/queue-id": {
+    "name": "配置使能iQCN的ID"
+  },
+  "/huawei-ai-fabric:ai-fabric/ai-service/ilossless-nvme-over-fabric": {
+    "name": "使能iNOF视图"
+  },
+  "/huawei-ai-fabric:ai-fabric/ai-service/ilossless-nvme-over-fabric/role": {
+    "name": "局部角色"
+  },
+  "/huawei-ai-fabric:ai-fabric/ai-service/ilossless-nvme-over-fabric/local-address": {
+    "name": "配置本地IPv4地址和TCP端口"
+  },
+  "/huawei-ai-fabric:ai-fabric/ai-service/ilossless-nvme-over-fabric/local-address/service-address": {
+    "name": "本地IPv4地址"
+  },
+  "/huawei-ai-fabric:ai-fabric/ai-service/ilossless-nvme-over-fabric/local-address/service-port": {
+    "name": "TCP端口"
+  },
+  "/huawei-ai-fabric:ai-fabric/ai-service/ilossless-nvme-over-fabric/local-ipv6-address": {
+    "name": "配置本地IPv6地址和TCP端口"
+  },
+  "/huawei-ai-fabric:ai-fabric/ai-service/ilossless-nvme-over-fabric/local-ipv6-address/ipv6-service-address": {
+    "name": "本地IPv6地址"
+  },
+  "/huawei-ai-fabric:ai-fabric/ai-service/ilossless-nvme-over-fabric/local-ipv6-address/ipv6-service-port": {
+    "name": "TCP端口"
+  },
+  "/huawei-ai-fabric:ai-fabric/ai-service/ilossless-nvme-over-fabric/zones": {
+    "name": "分区列表"
+  },
+  "/huawei-ai-fabric:ai-fabric/ai-service/ilossless-nvme-over-fabric/zones/zone": {
+    "name": "区域相关参数"
+  },
+  "/huawei-ai-fabric:ai-fabric/ai-service/ilossless-nvme-over-fabric/zones/zone/name": {
+    "name": "区域名称"
+  },
+  "/huawei-ai-fabric:ai-fabric/ai-service/ilossless-nvme-over-fabric/zones/zone/host-ips": {
+    "name": "主机IP地址"
+  },
+  "/huawei-ai-fabric:ai-fabric/ai-service/ilossless-nvme-over-fabric/zones/zone/host-ips/host-ip": {
+    "name": "主机IP地址"
+  },
+  "/huawei-ai-fabric:ai-fabric/ai-service/ilossless-nvme-over-fabric/zones/zone/host-ips/host-ip/start-host-ip": {
+    "name": "起始主机IP地址"
+  },
+  "/huawei-ai-fabric:ai-fabric/ai-service/ilossless-nvme-over-fabric/zones/zone/host-ips/host-ip/end-host-ip": {
+    "name": "结束主机IP地址"
+  },
+  "/huawei-ai-fabric:ai-fabric/ecn-overlay": {
+    "name": "使能VXLAN网络中标记功能"
+  },
+  "/huawei-ai-fabric:ai-fabric/ecn-overlay/enable": {
+    "name": "使能VXLAN网络中的标记功能"
+  },
+  "/huawei-ai-fabric:ai-fabric/pfc-deadlock-free": {
+    "name": "PFC死锁预防"
+  },
+  "/huawei-ai-fabric:ai-fabric/pfc-deadlock-free/uplink-groups": {
+    "name": "PFC上联端口组列表"
+  },
+  "/huawei-ai-fabric:ai-fabric/pfc-deadlock-free/uplink-groups/uplink-group": {
+    "name": "配置PFC上联端口组"
+  },
+  "/huawei-ai-fabric:ai-fabric/pfc-deadlock-free/uplink-groups/uplink-group/name": {
+    "name": "端口组的名称"
+  },
+  "/huawei-ai-fabric:ai-fabric/pfc-deadlock-free/uplink-groups/uplink-group/members": {
+    "name": "PFC上联端口组成员列表"
+  },
+  "/huawei-ai-fabric:ai-fabric/pfc-deadlock-free/uplink-groups/uplink-group/members/member": {
+    "name": "PFC上联端口组成员"
+  },
+  "/huawei-ai-fabric:ai-fabric/pfc-deadlock-free/uplink-groups/uplink-group/members/member/if-name": {
+    "name": "接口名称"
+  },
+  "/huawei-ai-fabric:ai-fabric/pfc-deadlock-free/uplink-groups/uplink-group/adjusts": {
+    "name": "调整匹配PFC上联端口组的钩子流报文列表"
+  },
+  "/huawei-ai-fabric:ai-fabric/pfc-deadlock-free/uplink-groups/uplink-group/adjusts/adjust": {
+    "name": "Adjust调整"
+  },
+  "/huawei-ai-fabric:ai-fabric/pfc-deadlock-free/uplink-groups/uplink-group/adjusts/adjust/original-dscp": {
+    "name": "DSCP字段"
+  },
+  "/huawei-ai-fabric:ai-fabric/pfc-deadlock-free/uplink-groups/uplink-group/adjusts/adjust/priority": {
+    "name": "切换操作"
+  },
+  "/huawei-ai-fabric:ai-fabric/pfc-deadlock-free/uplink-groups/uplink-group/adjusts/adjust/dscp": {
+    "name": "配置新的DSCP"
+  },
+  "/huawei-ai-fabric:ai-fabric/ai-ecn-statistics": {
+    "name": "AI ECN计数列表"
+  },
+  "/huawei-ai-fabric:ai-fabric/ai-ecn-statistics/ai-ecn-statistic": {
+    "name": "AI ECN计数"
+  },
+  "/huawei-ai-fabric:ai-fabric/ai-ecn-statistics/ai-ecn-statistic/if-name": {
+    "name": "接口名称"
+  },
+  "/huawei-ai-fabric:ai-fabric/ai-ecn-statistics/ai-ecn-statistic/active-model": {
+    "name": "AI ECN"
+  },
+  "/huawei-ai-fabric:ai-fabric/ai-ecn-statistics/ai-ecn-statistic/model-version": {
+    "name": "活动模型版本"
+  },
+  "/huawei-ai-fabric:ai-fabric/ai-ecn-statistics/ai-ecn-statistic/activated-time": {
+    "name": "AI ECN的激活时间"
+  },
+  "/huawei-ai-fabric:ai-fabric/ai-ecn-statistics/ai-ecn-statistic/queue-id": {
+    "name": "工作队列"
+  },
+  "/huawei-ai-fabric:ai-fabric/ai-ecn-statistics/ai-ecn-statistic/low-limit": {
+    "name": "ECN阈值"
+  },
+  "/huawei-ai-fabric:ai-fabric/ai-ecn-statistics/ai-ecn-statistic/high-limit": {
+    "name": "ECN阈值"
+  },
+  "/huawei-ai-fabric:ai-fabric/ai-ecn-statistics/ai-ecn-statistic/max-mark-percentage": {
+    "name": "百分比"
+  },
+  "/huawei-ai-fabric:ai-fabric/ai-ecn-statistics/ai-ecn-statistic/calculate-mode": {
+    "name": "计算方式"
+  },
+  "/huawei-ai-fabric:ai-fabric/pfc-deadlock-free-statistics": {
+    "name": "PFC死锁预防功能的统计列表"
+  },
+  "/huawei-ai-fabric:ai-fabric/pfc-deadlock-free-statistics/pfc-deadlock-free-statistic": {
+    "name": "PFC死锁预防功能的统计"
+  },
+  "/huawei-ai-fabric:ai-fabric/pfc-deadlock-free-statistics/pfc-deadlock-free-statistic/slot-id": {
+    "name": "插槽ID"
+  },
+  "/huawei-ai-fabric:ai-fabric/pfc-deadlock-free-statistics/pfc-deadlock-free-statistic/chip-name": {
+    "name": "芯片名称"
+  },
+  "/huawei-ai-fabric:ai-fabric/iqcn-statistics": {
+    "name": "IQCN统计列表"
+  },
+  "/huawei-ai-fabric:ai-fabric/iqcn-statistics/iqcn-statistic": {
+    "name": "IQCN统计"
+  },
+  "/huawei-ai-fabric:ai-fabric/iqcn-statistics/iqcn-statistic/slot-id": {
+    "name": "插槽标识"
+  },
+  "/huawei-ai-fabric:ai-fabric/iqcn-statistics/iqcn-statistic/enable": {
+    "name": "IQCN使能"
+  },
+  "/huawei-ai-fabric:ai-fabric/iqcn-statistics/iqcn-statistic/working-queue": {
+    "name": "IQCN工作队列"
+  },
+  "/huawei-ai-fabric:ai-fabric/iqcn-statistics/iqcn-statistic/rpg-time-reset": {
+    "name": "网卡的rpg-time-reset"
+  },
+  "/huawei-ai-fabric:ai-fabric/iqcn-statistics/iqcn-statistic/tx-cnp-count": {
+    "name": "Tx CNP报文数"
+  },
+  "/huawei-ai-fabric:ai-fabric/iqcn-statistics/iqcn-statistic/tx-cnp-rate": {
+    "name": "Tx CNP报文速率"
+  },
+  "/huawei-ai-fabric:ai-fabric/iqcn-statistics/iqcn-statistic/members": {
+    "name": "接口列表"
+  },
+  "/huawei-ai-fabric:ai-fabric/iqcn-statistics/iqcn-statistic/members/member": {
+    "name": "端口组成员接口统计"
+  },
+  "/huawei-ai-fabric:ai-fabric/iqcn-statistics/iqcn-statistic/members/member/if-name": {
+    "name": "CNP报文"
+  },
+  "/huawei-ai-fabric:ai-fabric/iqcn-statistics/iqcn-statistic/members/member/rx-cnp-count": {
+    "name": "CNP报文"
+  },
+  "/huawei-ai-fabric:ai-fabric/iqcn-statistics/iqcn-statistic/members/member/rx-cnp-rate": {
+    "name": "CNP报文速率"
+  },
+  "/huawei-ai-fabric:ai-fabric/inof-info-hosts": {
+    "name": "当前iNOF网络中管理的主机信息列表"
+  },
+  "/huawei-ai-fabric:ai-fabric/inof-info-hosts/inof-info-host": {
+    "name": "当前iNOF网络中管理的主机信息"
+  },
+  "/huawei-ai-fabric:ai-fabric/inof-info-hosts/inof-info-host/host-ip": {
+    "name": "主机IP地址"
+  },
+  "/huawei-ai-fabric:ai-fabric/inof-info-hosts/inof-info-host/access-type": {
+    "name": "主机接入类型"
+  },
+  "/huawei-ai-fabric:ai-fabric/inof-info-hosts/inof-info-host/access-device-ip": {
+    "name": "接入设备IP"
+  },
+  "/huawei-ai-fabric:ai-fabric/inof-info-hosts/inof-info-host/access-interface": {
+    "name": "接入端口"
+  },
+  "/huawei-ai-fabric:ai-fabric/inof-info-hosts/inof-info-host/hard-zoning-state": {
+    "name": "当前iNOF域隔离功能生效状态"
+  },
+  "/huawei-ai-fabric:ai-fabric/inof-info-hosts/inof-info-host/host-role": {
+    "name": "主机角色"
+  },
+  "/huawei-ai-fabric:ai-fabric/inof-cfg-status": {
+    "name": "当前iNOF网络中的配置状态信息"
+  },
+  "/huawei-ai-fabric:ai-fabric/inof-cfg-status/default-zone": {
+    "name": "当前iNOF默认域配置状态"
+  },
+  "/huawei-ai-fabric:ai-fabric/inof-cfg-status/default-zone/reflector1-enable": {
+    "name": "反射器1使能状态"
+  },
+  "/huawei-ai-fabric:ai-fabric/inof-cfg-status/default-zone/reflector2-enable": {
+    "name": "反射器2使能状态"
+  },
+  "/huawei-ai-fabric:ai-fabric/inof-cfg-status/default-zone/inof-enable": {
+    "name": "使能状态"
+  },
+  "/huawei-ai-fabric:ai-fabric/inof-zones": {
+    "name": "设备上iNOF域的配置信息"
+  },
+  "/huawei-ai-fabric:ai-fabric/inof-zones/zone-num": {
+    "name": "当前iNOF组网内配置的域的总数"
+  },
+  "/huawei-ai-fabric:ai-fabric/inof-zones/default-zone-enable": {
+    "name": "默认域的使能状态"
+  },
+  "/huawei-ai-fabric:ai-fabric/inof-zones/zones": {
+    "name": "设备上iNOF域的配置信息列表"
+  },
+  "/huawei-ai-fabric:ai-fabric/inof-zones/zones/zone": {
+    "name": "设备上iNOF域的配置信息"
+  },
+  "/huawei-ai-fabric:ai-fabric/inof-zones/zones/zone/zone-name": {
+    "name": "域名称"
+  },
+  "/huawei-ai-fabric:ai-fabric/inof-zones/zones/zone/hosts": {
+    "name": "域内的主机信息列表"
+  },
+  "/huawei-ai-fabric:ai-fabric/inof-zones/zones/zone/hosts/host": {
+    "name": "域内主机的信息"
+  },
+  "/huawei-ai-fabric:ai-fabric/inof-zones/zones/zone/hosts/host/ip": {
+    "name": "主机IP地址"
+  },
+  "/huawei-ai-fabric:ai-fabric/inof-zones/zones/zone/hosts/host/learn-from": {
+    "name": "主机信息的来源"
+  },
+  "/huawei-ai-fabric:ai-fabric/inof-zones/zones/zone/hosts/host/inconsistent": {
+    "name": "只在一个反射器上配置的域信息"
+  },
+  "/huawei-ai-fabric:ai-fabric/rail-groups": {
+    "name": "Rail Group组列表"
+  },
+  "/huawei-ai-fabric:ai-fabric/rail-groups/rail-group": {
+    "name": "Rail Group组"
+  },
+  "/huawei-ai-fabric:ai-fabric/rail-groups/rail-group/group-name": {
+    "name": "Rail Group组名"
+  },
+  "/huawei-ai-fabric:ai-fabric/rail-groups/rail-group/mode": {
+    "name": "分配模式"
+  },
+  "/huawei-ai-fabric:ai-fabric/rail-groups/rail-group/members": {
+    "name": "Rail Group组成员列表"
+  },
+  "/huawei-ai-fabric:ai-fabric/rail-groups/rail-group/members/member": {
+    "name": "Rail Group端口组成员"
+  },
+  "/huawei-ai-fabric:ai-fabric/rail-groups/rail-group/members/member/interface-name": {
+    "name": "接口名称"
+  },
+  "/huawei-ai-fabric:ai-fabric/rail-groups/rail-group/members/member/index": {
+    "name": "接口索引"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix": {
+    "name": "配置Flow Matrix"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/flow-paths": {
+    "name": "流的路径列表"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/flow-paths/flow-path": {
+    "name": "流路径"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/flow-paths/flow-path/source-ip": {
+    "name": "源IP地址"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/flow-paths/flow-path/destination-ip": {
+    "name": "目的IP地址"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/flow-paths/flow-path/flow-rail": {
+    "name": "流映射轨道名称"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/flow-exact-paths": {
+    "name": "流的精细路径列表"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/flow-exact-paths/flow-exact-path": {
+    "name": "流的精细路径"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/flow-exact-paths/flow-exact-path/source-ip": {
+    "name": "源IP地址"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/flow-exact-paths/flow-exact-path/destination-ip": {
+    "name": "目的IP地址"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/flow-exact-paths/flow-exact-path/udp-source-port": {
+    "name": "流的UDP源端口号"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/flow-exact-paths/flow-exact-path/mask-length": {
+    "name": "流的UDP源端口号掩码长度"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/flow-exact-paths/flow-exact-path/ingress-port": {
+    "name": "流的入端口名"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/flow-exact-paths/flow-exact-path/flow-rail": {
+    "name": "流的出端口名"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/synergy-server": {
+    "name": "Flow Matrix协同功能"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/synergy-server/ssl-policy": {
+    "name": "Flow Matrix协同服务SSL策略"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/synergy-server/enable": {
+    "name": "Flow Matrix协同服务使能状态"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/synergy-server/service-address": {
+    "name": "Flow Matrix协同服务地址"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/synergy-server/service-port": {
+    "name": "Flow Matrix协同服务端口号"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-infos": {
+    "name": "通信域信息列表"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-infos/comm-info": {
+    "name": "通信域信息"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-infos/comm-info/task-id": {
+    "name": "任务ID"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-infos/comm-info/comm-name": {
+    "name": "通信域名称"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-infos/comm-info/comm-init-time": {
+    "name": "通信域初始化时间"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-infos/comm-info/packet-id": {
+    "name": "数据报文序号"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-infos/comm-info/packet-num": {
+    "name": "数据报文总数"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-infos/comm-info/msg-version": {
+    "name": "通告数据的版本号"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-infos/comm-info/payload": {
+    "name": "通告数据"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-infos/comm-info/time": {
+    "name": "通告数据的生成时间"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-op-infos": {
+    "name": "通信域算子信息列表"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-op-infos/comm-op-info": {
+    "name": "通信域算子信息"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-op-infos/comm-op-info/task-id": {
+    "name": "任务ID"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-op-infos/comm-op-info/comm-name": {
+    "name": "通信域名称"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-op-infos/comm-op-info/comm-init-time": {
+    "name": "通信域初始化时间"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-op-infos/comm-op-info/operator": {
+    "name": "算子类型"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-op-infos/comm-op-info/algorithm": {
+    "name": "算法类型"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-op-infos/comm-op-info/root-rank": {
+    "name": "根节点编号"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-op-infos/comm-op-info/traffic-cnt": {
+    "name": "通信量"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-op-infos/comm-op-info/source-port-id": {
+    "name": "通信的UDP源端口号"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-op-infos/comm-op-info/mask-len": {
+    "name": "通信的UDP源端口号掩码长度"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-op-infos/comm-op-info/time": {
+    "name": "通告数据的生成时间"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-adj-infos": {
+    "name": "通信域算法邻接信息列表"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-adj-infos/comm-adj-info": {
+    "name": "通信域算法邻接信息"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-adj-infos/comm-adj-info/task-id": {
+    "name": "任务ID"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-adj-infos/comm-adj-info/comm-name": {
+    "name": "通信域名称"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-adj-infos/comm-adj-info/comm-check-sum": {
+    "name": "通信域校验值"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-adj-infos/comm-adj-info/operator": {
+    "name": "算子类型"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-adj-infos/comm-adj-info/algorithm": {
+    "name": "算法类型"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-adj-infos/comm-adj-info/root-rank": {
+    "name": "根节点编号"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-adj-infos/comm-adj-info/packet-id": {
+    "name": "数据报文序号"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-adj-infos/comm-adj-info/packet-num": {
+    "name": "数据报文总数"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-adj-infos/comm-adj-info/msg-version": {
+    "name": "通告数据的版本号"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-adj-infos/comm-adj-info/payload": {
+    "name": "通告数据"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-adj-infos/comm-adj-info/time": {
+    "name": "通告数据的生成时间"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-rank-infos": {
+    "name": "通信域全局RANK信息列表"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-rank-infos/comm-rank-info": {
+    "name": "通信域全局RANK信息"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-rank-infos/comm-rank-info/task-id": {
+    "name": "任务ID"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-rank-infos/comm-rank-info/comm-name": {
+    "name": "通信域名称"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-rank-infos/comm-rank-info/comm-init-time": {
+    "name": "通信域初始化时间"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-rank-infos/comm-rank-info/packet-id": {
+    "name": "数据报文序号"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-rank-infos/comm-rank-info/packet-num": {
+    "name": "数据报文总数"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-rank-infos/comm-rank-info/msg-version": {
+    "name": "通告数据的版本号"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-rank-infos/comm-rank-info/payload": {
+    "name": "通告数据"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-rank-infos/comm-rank-info/time": {
+    "name": "通告数据的生成时间"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-rank-agg-infos": {
+    "name": "通信域全局RANK分布式信息列表"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-rank-agg-infos/comm-rank-agg-info": {
+    "name": "通信域全局RANK分布式信息"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-rank-agg-infos/comm-rank-agg-info/task-id": {
+    "name": "任务ID"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-rank-agg-infos/comm-rank-agg-info/comm-name": {
+    "name": "通信域名称"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-rank-agg-infos/comm-rank-agg-info/comm-init-time": {
+    "name": "通信域初始化时间"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-rank-agg-infos/comm-rank-agg-info/packet-id": {
+    "name": "数据报文序号"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-rank-agg-infos/comm-rank-agg-info/packet-num": {
+    "name": "数据报文总数"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-rank-agg-infos/comm-rank-agg-info/msg-version": {
+    "name": "通告数据的版本号"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-rank-agg-infos/comm-rank-agg-info/payload": {
+    "name": "通告数据"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-rank-agg-infos/comm-rank-agg-info/time": {
+    "name": "通告数据的生成时间"
+  }
+}

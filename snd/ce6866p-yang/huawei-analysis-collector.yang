@@ -1,0 +1,102 @@
+/*
+Copyright (C) 2020 Huawei Technologies Co., Ltd. All rights reserved.
+*/
+module huawei-analysis-collector {
+  yang-version 1;
+  namespace "urn:huawei:yang:huawei-analysis-collector";
+  prefix analysis-collector;
+  import ietf-inet-types {
+    prefix inet;
+  }
+  import huawei-extension {
+    prefix ext;
+  }
+  import huawei-network-instance {
+    prefix ni;
+  }
+  import huawei-l3vpn {
+    prefix l3vpn;
+  }
+  organization
+    "Huawei Technologies Co., Ltd.";
+  contact
+    "Huawei Industrial Base
+    Bantian, Longgang
+    Shenzhen 518129
+    People's Republic of China
+    Website: http://www.huawei.com
+    Email: support@huawei.com";
+  description
+    "Specifies the address of the analyzer to which the information collected by the device is sent";
+  revision 2020-03-27 {
+    description
+      "Initial revision.";
+    reference
+      "Huawei private.";
+  }
+  typedef flow-type {
+    type enumeration {
+      enum "tcp" {
+        value 1;
+        description
+          "TCP packet.";
+      }
+      enum "udp" {
+        value 2;
+        description
+          "UDP packet.";
+      }
+    }
+    description
+      "PktType:";
+  }
+  container analysis-collector {
+    description
+      "data collector information.";
+    container collectors {
+      description
+        "List of Data collector information.";
+      list collector {
+        key "id";
+        description
+          "Configure destination address of  collector.";
+        leaf id {
+          type uint32 {
+            range "1..5";
+          }
+          description
+            "Instance index, which is used to identify the collector information.";
+        }
+        leaf dst-port {
+          type uint32 {
+            range "1..65535";
+          }
+          description
+            "Collector Service Port.";
+        }
+        leaf src-address {
+          type inet:ip-address-no-zone;
+          mandatory true;
+          description
+            "Collector address.IPv4 or Ipv6.";
+        }
+        leaf host-address {
+          type inet:ip-address-no-zone;
+          mandatory true;
+          description
+            "Collector address,IPv4 or Ipv6.";
+        }
+        leaf vpn-name {
+          type leafref {
+            path "/ni:network-instance/ni:instances/ni:instance/ni:name";
+          }
+          must "/ni:network-instance/ni:instances/ni:instance[ni:name=current()]/l3vpn:afs/l3vpn:af[l3vpn:type='ipv4-unicast'] 
+            or /ni:network-instance/ni:instances/ni:instance[ni:name=current()]/l3vpn:afs/l3vpn:af[l3vpn:type='ipv6-unicast']";
+          description
+            "VPN instance name.";
+        }
+      }
+    }
+  }
+  ext:task-name "analysis-collector";
+}

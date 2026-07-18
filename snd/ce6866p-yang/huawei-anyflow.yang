@@ -1,0 +1,136 @@
+/*
+Copyright (C) 2020 Huawei Technologies Co., Ltd. All rights reserved.
+*/
+module huawei-anyflow {
+  yang-version 1;
+  namespace "urn:huawei:yang:huawei-anyflow";
+  prefix anyflow;
+  import huawei-analysis-collector {
+    prefix collector;
+  }
+  import huawei-extension {
+    prefix ext;
+  }
+  import huawei-qos {
+    prefix qos;
+  }
+  organization
+    "Huawei Technologies Co., Ltd.";
+  contact
+    "Huawei Industrial Base
+    Bantian, Longgang
+    Shenzhen 518129
+    People's Republic of China
+    Website: http://www.huawei.com
+    Email: support@huawei.com";
+  description
+    "Any flow.";
+  revision 2020-03-27 {
+    description
+      "Initial revision.";
+    reference
+      "Huawei private.";
+  }
+  container anyflow {
+    description
+      "any flow.";
+    container global {
+      presence "create anyflow view";
+      description
+        "Configure any flow global setting.";
+      leaf enable {
+        type boolean;
+        default "false";
+        description
+          "Enable/disable anyflow.";
+      }
+      leaf aging-time {
+        type uint32 {
+          range "5..500";
+        }
+        units "s";
+        default "30";
+        description
+          "Flow table agint time.";
+      }
+      leaf export-interval {
+        type uint32 {
+          range "10..1800";
+        }
+        units "s";
+        default "10";
+        description
+          "Export time interval.";
+      }
+      leaf hardware-aging-time {
+        type uint32{
+          range "2..300000";
+        }
+        default "10";
+        description
+          "Hardware flow table agint time.";
+      }
+      leaf hardware-export-interval {
+        type uint32{
+          range "5..100";
+        }
+        default "10";
+        description
+          "Hardware flowtable send to hareware analysis interval.";
+      }
+      leaf collect-id {
+        type leafref {
+          path "/collector:analysis-collector/collector:collectors/collector:collector/collector:id";
+        }
+        description
+          "The collect id.";
+      }
+      leaf flow-aggregation {
+        type boolean;
+        default "false";
+        description
+          "Enable/disable flow aggregation.";
+      }
+      leaf-list aggregation-service-port {
+        type string {
+          length "1..32";
+          pattern "\d+(\.\.\d+)?";
+        }
+        description
+          "Configure the range of Layer 4 port numbers. If the port numbers are the same and within the range, flow tables are combined.";
+      }
+      leaf aggregation-aging-time {
+        type uint32 {
+          range "5..500";
+        }
+        default "60";
+        description
+          "Flow table agint time.";
+      }
+      leaf aggregation-export-interval {
+        type uint32 {
+          range "10..1800";
+        }
+        units "s";
+        default "300";
+        description
+          "Export time interval.";
+      }
+    }
+  }
+  augment "/qos:qos/qos:classifier-template/qos:traffic-behaviors/qos:traffic-behavior" {
+    description
+      "Anyflow enable.";
+    container anyflow {
+      ext:hidden ui;
+      description
+        "Configure traffic analysis action.";
+      leaf enable-flag {
+        type empty;
+        description
+          "Enable/disable anyflow.";
+      }
+    }
+  }
+  ext:task-name "anyflow";
+}

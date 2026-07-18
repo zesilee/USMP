@@ -1,0 +1,176 @@
+{
+  "/huawei-multicast:mc": {
+    "name": "组播基础业务包"
+  },
+  "/huawei-multicast:multicast/global": {
+    "name": "组播全局配置列表"
+  },
+  "/huawei-multicast:multicast/global/ipv4": {
+    "name": "地址族"
+  },
+  "/huawei-multicast:multicast/global/ipv4/vlanif-extranet-enable": {
+    "name": "组播VLANIF Extranet使能"
+  },
+  "/huawei-multicast:multicast/global/ipv4/qinq-extranet-enable": {
+    "name": "组播QinQ Extranet使能"
+  },
+  "/huawei-multicast:multicast/global/ipv4/bas-igmp-extranet-enable": {
+    "name": "组播BAS IGMP Extranet使能"
+  },
+  "/huawei-multicast:multicast/global/ipv4/vbdif-extranet-enable": {
+    "name": "组播VBDIF Extranet使能"
+  },
+  "/huawei-multicast:multicast/invalid-packet-max-count": {
+    "name": "最大无效报文设置列表"
+  },
+  "/huawei-multicast:multicast/invalid-packet-max-count/ipv4": {
+    "name": "IPv4最大无效报文设置"
+  },
+  "/huawei-multicast:multicast/invalid-packet-max-count/ipv4/igmp-packets": {
+    "name": "无效Igmp报文最大值"
+  },
+  "/huawei-multicast:multicast/invalid-packet-max-count/ipv4/mvpn-packets": {
+    "name": "无效Mvpn报文最大值"
+  },
+  "/huawei-multicast:multicast/invalid-packet-max-count/ipv4/msdp-packets": {
+    "name": "无效Msdp报文最大值"
+  },
+  "/huawei-multicast:multicast/invalid-packet-max-count/ipv4/pim-packets": {
+    "name": "无效Pim报文最大值"
+  },
+  "/huawei-multicast:multicast/invalid-packet-max-count/ipv4/igmp-snooping-packets": {
+    "name": "无效的二层报文最大值"
+  },
+  "/huawei-multicast:multicast/invalid-packet-max-count/ipv6": {
+    "name": "IPv6最大无效报文设置"
+  },
+  "/huawei-multicast:multicast/invalid-packet-max-count/ipv6/mld-packets": {
+    "name": "无效Igmp报文最大值"
+  },
+  "/huawei-multicast:multicast/invalid-packet-max-count/ipv6/pim-packets": {
+    "name": "无效Pim报文最大值"
+  },
+  "/huawei-multicast:multicast/invalid-packet-max-count/ipv6/mld-snooping-packets": {
+    "name": "无效的二层报文最大值"
+  },
+  "/huawei-multicast:multicast/ssm-mapping-policys": {
+    "name": "策略规则配置列表"
+  },
+  "/huawei-multicast:multicast/ssm-mapping-policys/ssm-mapping-policy": {
+    "name": "SSM映射策略配置"
+  },
+  "/huawei-multicast:multicast/ssm-mapping-policys/ssm-mapping-policy/address-family": {
+    "name": "地址族"
+  },
+  "/huawei-multicast:multicast/ssm-mapping-policys/ssm-mapping-policy/policy-name": {
+    "name": "策略名称"
+  },
+  "/huawei-multicast:multicast/ssm-mapping-policys/ssm-mapping-policy/groups": {
+    "name": "策略规则配置列表"
+  },
+  "/huawei-multicast:multicast/ssm-mapping-policys/ssm-mapping-policy/groups/group": {
+    "name": "策略规则配置"
+  },
+  "/huawei-multicast:multicast/ssm-mapping-policys/ssm-mapping-policy/groups/group/group-address": {
+    "name": "组播组地址"
+  },
+  "/huawei-multicast:multicast/ssm-mapping-policys/ssm-mapping-policy/groups/group/mask-length": {
+    "name": "组地址掩码长度"
+  },
+  "/huawei-multicast:multicast/ssm-mapping-policys/ssm-mapping-policy/groups/group/source-address": {
+    "name": "源地址"
+  },
+  "/huawei-multicast:multicast/trap-parameter": {
+    "name": "组播告警配置"
+  },
+  "/huawei-multicast:multicast/trap-parameter/pim-notification-interval": {
+    "name": "组播告警配置"
+  },
+  "/huawei-multicast:multicast/trap-parameter/pim-notification-interval/interface-election-dr": {
+    "name": "DR选举发送间隔"
+  },
+  "/huawei-multicast:multicast/trap-parameter/pim-notification-interval/invalid-join-prune": {
+    "name": "无效JP消息发送间隔"
+  },
+  "/huawei-multicast:multicast/trap-parameter/pim-notification-interval/invalid-register": {
+    "name": "无效注册消息发送间隔"
+  },
+  "/huawei-multicast:multicast/trap-parameter/pim-notification-interval/neighbor-loss": {
+    "name": "邻居丢失发送间隔"
+  },
+  "/huawei-multicast:multicast/trap-parameter/pim-notification-interval/new-neighbor": {
+    "name": "邻居添加发送间隔"
+  },
+  "/huawei-multicast:multicast/trap-parameter/pim-notification-interval/rp-mapping-change": {
+    "name": "RP改变发送间隔"
+  },
+  "/huawei-multicast:multicast/global-outgoing-interface-limit-counts": {
+    "name": "组播出接口限制统计信息列表"
+  },
+  "/huawei-multicast:multicast/global-outgoing-interface-limit-counts/global-outgoing-interface-limit-count": {
+    "name": "组播出接口限制统计信息"
+  },
+  "/huawei-multicast:multicast/global-outgoing-interface-limit-counts/global-outgoing-interface-limit-count/address-family": {
+    "name": "地址族"
+  },
+  "/huawei-multicast:multicast/global-outgoing-interface-limit-counts/global-outgoing-interface-limit-count/limit-type": {
+    "name": "限制类型"
+  },
+  "/huawei-multicast:multicast/global-outgoing-interface-limit-counts/global-outgoing-interface-limit-count/limit-value": {
+    "name": "限制值"
+  },
+  "/huawei-multicast:multicast/global-outgoing-interface-limit-counts/global-outgoing-interface-limit-count/upper-threshold-value": {
+    "name": "上限值"
+  },
+  "/huawei-multicast:multicast/global-outgoing-interface-limit-counts/global-outgoing-interface-limit-count/lower-threshold-value": {
+    "name": "下限值"
+  },
+  "/huawei-multicast:multicast/global-outgoing-interface-limit-counts/global-outgoing-interface-limit-count/total-outgoing-interface-count": {
+    "name": "出接口个数总和"
+  },
+  "/huawei-multicast:multicast/global-outgoing-interface-limit-counts/global-outgoing-interface-limit-count/star-group-outgoing-interface-count": {
+    "name": "当前未指定源-组表项出接口总数"
+  },
+  "/huawei-multicast:multicast/global-outgoing-interface-limit-counts/global-outgoing-interface-limit-count/source-group-outgoing-interface-count": {
+    "name": "源-组表项出接口总数"
+  },
+  "/huawei-multicast:multicast/session-car": {
+    "name": "组播Session CAR功能"
+  },
+  "/huawei-multicast:multicast/session-car/pim": {
+    "name": "PIM IPv4 Session CAR功能"
+  },
+  "/huawei-multicast:multicast/session-car/pim/enable": {
+    "name": "使能PIM IPv4 Session CAR"
+  },
+  "/huawei-multicast:multicast/session-car/pim/cir-interval": {
+    "name": "CIR值"
+  },
+  "/huawei-multicast:multicast/session-car/pim/cbs-interval": {
+    "name": "CBS值"
+  },
+  "/huawei-multicast:multicast/session-car/pim/pir-interval": {
+    "name": "PIR值"
+  },
+  "/huawei-multicast:multicast/session-car/pim/pbs-interval": {
+    "name": "PBS值"
+  },
+  "/huawei-multicast:multicast/session-car/pim-ipv6": {
+    "name": "PIM IPv6 Session CAR功能"
+  },
+  "/huawei-multicast:multicast/session-car/pim-ipv6/enable": {
+    "name": "使能PIM IPv6 Session CAR"
+  },
+  "/huawei-multicast:multicast/session-car/pim-ipv6/cir-interval": {
+    "name": "CIR值"
+  },
+  "/huawei-multicast:multicast/session-car/pim-ipv6/cbs-interval": {
+    "name": "CBS值"
+  },
+  "/huawei-multicast:multicast/session-car/pim-ipv6/pir-interval": {
+    "name": "PIR值"
+  },
+  "/huawei-multicast:multicast/session-car/pim-ipv6/pbs-interval": {
+    "name": "PBS值"
+  }
+}

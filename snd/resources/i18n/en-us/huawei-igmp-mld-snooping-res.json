@@ -1,0 +1,473 @@
+{
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping": {
+    "name": "BD L2 Multicast Configuration"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/global": {
+    "name": "BD L2 Multicast Configuration"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/global/ssm-acl": {
+    "name": "SSM Policy"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/global/version": {
+    "name": "IGMP Version"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/global/ssm-mapping-enable": {
+    "name": "Enable SSM Mapping"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/global/ssm-mapping-policy": {
+    "name": "SSM Mapping Policy"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/global/enable": {
+    "name": "Enable IGMP Snooping"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/global/group-policy-acl": {
+    "name": "IGMP Group Policy"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/global/group-policy-version": {
+    "name": "IGMP Version of Group Policy"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/global/max-response-time": {
+    "name": "IGMP Max Response Interval"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/global/immediately-leave": {
+    "name": "IGMP Prompt-Leave"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/global/immediately-leave-acl": {
+    "name": "ACL of IGMP Prompt-Leave"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/global/proxy-enable": {
+    "name": "Enable IGMP Snooping Proxy"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/global/multicast-group-model": {
+    "name": "IGMP Group Join Mode"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/global/ip-policy-acl": {
+    "name": "IP Policy"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/global/query-ip-policy-acl": {
+    "name": "Querier IP Policy"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/global/querier-election": {
+    "name": "Enable IGMP Querier Election"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/global/proxy-router-protocol-pass": {
+    "name": "Transparent IGMP Report Transmit"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/global/querier-enable": {
+    "name": "Enable IGMP Querier"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/global/query-interval": {
+    "name": "IGMP General Query Tx Interval"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/global/require-router-alert": {
+    "name": "Check IGMP Router-Alert Option"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/global/send-router-alert": {
+    "name": "Enable Router-Alert"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/global/robustness": {
+    "name": "IGMP Robustness Count"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/global/router-aging-time": {
+    "name": "Router Port Aging Time"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/global/router-port-learning": {
+    "name": "Dynamic Router Port Learning"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/global/query-suppress-time": {
+    "name": "Configuring the Suppression Time of IGMP Messages"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/global/last-member-query-interval": {
+    "name": "Last-Member Query Interval"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/global/static-group-suppress-dynamic-join": {
+    "name": "Suppress Dynamic IGMP Messages"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/global/report-suppress": {
+    "name": "Enable Report Suppress"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/global/source-life-time": {
+    "name": "Entry Aging Time"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/global/designated-vlan": {
+    "name": "Designated VLAN"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/global/signal-smet-disable": {
+    "name": "Disable Signal-Smet"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/global/signal-synch-enable": {
+    "name": "Enable Signal-Synch"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/global/signal-ignore-df-enable": {
+    "name": "Enable Signal-Ignore-Df"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/global/evi-rts": {
+    "name": "EVI-RT List"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/global/evi-rts/evi-rt": {
+    "name": "EVI-RT"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/global/evi-rts/evi-rt/type": {
+    "name": "EVI-RT Type"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/global/evi-rts/evi-rt/value": {
+    "name": "EVI-RT"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/global/querier": {
+    "name": "IGMP Querier in a BD"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/global/querier/querier-state": {
+    "name": "Querier Status"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/global/querier/querier-address": {
+    "name": "Querier Address"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/interfaces": {
+    "name": "Sub-interface Configuration List"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/interfaces/interface": {
+    "name": "Sub-interface Configuration"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/interfaces/interface/name": {
+    "name": "Interface Name"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/interfaces/interface/group-policy-acl": {
+    "name": "IGMP Group Policy"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/interfaces/interface/group-policy-version": {
+    "name": "IGMP Version of Group Policy"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/interfaces/interface/learning": {
+    "name": "IGMP-Snooping Learning"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/interfaces/interface/proxy-uplink-port": {
+    "name": "IGMP Proxy Uplink Port"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/interfaces/interface/pe-vid": {
+    "name": "PE ID"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/interfaces/interface/ce-vid": {
+    "name": "CE ID"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/ssm-mapping-groups": {
+    "name": "List of SSM mapping configuration of a BD"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/ssm-mapping-groups/ssm-mapping-group": {
+    "name": "List of SSM mapping configuration of a BD"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/ssm-mapping-groups/ssm-mapping-group/group-address": {
+    "name": "Address of a multicast group"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/ssm-mapping-groups/ssm-mapping-group/mask-length": {
+    "name": "Mask length of a group address"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/ssm-mapping-groups/ssm-mapping-group/source-address": {
+    "name": "Multicast source IPv4 address"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/fast-channels": {
+    "name": "Configuring Prompt Join in a BD"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/fast-channels/fast-channel": {
+    "name": "List of Prompt Join Configurations for a BD"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/fast-channels/fast-channel/group-address": {
+    "name": "Multicast group address"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/fast-channels/fast-channel/group-mask-length": {
+    "name": "Mask length of a multicast group address"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/fast-channels/fast-channel/source-address": {
+    "name": "Multicast Source Address"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/fast-channels/fast-channel/source-mask-length": {
+    "name": "Mask length of a multicast source address"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/interface-static-groups": {
+    "name": "BD Sub-interface L2 Multicast Static-Groups"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/interface-static-groups/interface-static-group": {
+    "name": "L2 Multicast Static-Groups on a BD Sub-interface"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/interface-static-groups/interface-static-group/interface": {
+    "name": "BD L2 Multicast Static-Group Sub-Interface Name"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/interface-static-groups/interface-static-group/group-address": {
+    "name": "BD Sub-interface Static L2 Multicast Group Address"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/interface-static-groups/interface-static-group/source-address": {
+    "name": "Static L2 Multicast Group SA on a BD Sub-interface"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/static-router-ports": {
+    "name": "Static router port configuration of sub-interfaces"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/static-router-ports/static-router-port": {
+    "name": "List of tatic router port configuration"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/static-router-ports/static-router-port/interface": {
+    "name": "Interface name"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/group-ports": {
+    "name": "IMS entry information list"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/group-ports/group-port": {
+    "name": "IMS entry information"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/group-ports/group-port/group-address": {
+    "name": "Multicast group address"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/group-ports/group-port/source-address": {
+    "name": "Multicast Source Address"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/group-ports/group-port/source-up-time": {
+    "name": "Duration When a Multicast Source Stays Up"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/group-ports/group-port/group-up-time": {
+    "name": "Duration When a Multicast Group Stays Up"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/group-ports/group-port/entry-flag": {
+    "name": "Entry Flag"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/group-ports/group-port/source-flag": {
+    "name": "Multicast source identifier"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/group-ports/group-port/ports": {
+    "name": "IMS port information list"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/group-ports/group-port/ports/port": {
+    "name": "IMS port information"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/group-ports/group-port/ports/port/interface": {
+    "name": "Port name"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/group-ports/group-port/ports/port/up-time": {
+    "name": "Duration When a Multicast Group Member Port Is Up"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/group-ports/group-port/ports/port/expire-time": {
+    "name": "Remaining lifetime of a port"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/group-ports/group-port/ports/port/port-flag": {
+    "name": "Member Port ID"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/group-ports/group-port/ports/port/esi": {
+    "name": "Ethernet segment identifier"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/group-ports/group-port/ports/port/df-status": {
+    "name": "DF status"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/group-ports/group-port/ports/port/remote-flag": {
+    "name": "Source of port information"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/router-ports": {
+    "name": "Router Port List"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/router-ports/router-port": {
+    "name": "Router Port Information"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/router-ports/router-port/interface": {
+    "name": "Interface Name"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/router-ports/router-port/pe-vid": {
+    "name": "Outer VLAN ID"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/router-ports/router-port/ce-vid": {
+    "name": "CE ID"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/router-ports/router-port/up-time": {
+    "name": "Duration of a Router Port"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/router-ports/router-port/expire-time": {
+    "name": "Remaining Time of the Router Port"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/router-ports/router-port/flag": {
+    "name": "Router Port Flag"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/interface-groups": {
+    "name": "Multicast Group Information on the Local Interface"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/interface-groups/interface-group": {
+    "name": "List of Multicast Groups on the Local Interface"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/interface-groups/interface-group/interface": {
+    "name": "Interface Name"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/interface-groups/interface-group/port-type": {
+    "name": "Interface Type"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/interface-groups/interface-group/pe-vid": {
+    "name": "Outer VLAN ID"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/interface-groups/interface-group/ce-vid": {
+    "name": "CE ID"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/interface-groups/interface-group/groups": {
+    "name": "Multicast Group Information on the Local Interface"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/interface-groups/interface-group/groups/group": {
+    "name": "List of Multicast Groups on the Local Interface"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/interface-groups/interface-group/groups/group/group-address": {
+    "name": "Multicast group address"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/interface-groups/interface-group/groups/group/up-time": {
+    "name": "Time Since a Multicast Group Is Created"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/interface-groups/interface-group/groups/group/expire-time": {
+    "name": "Time at Which a Multicast Group Entry Expires"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/interface-groups/interface-group/groups/group/group-timer": {
+    "name": "Whether the Group Timer Exists"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/interface-groups/interface-group/groups/group/retran-count": {
+    "name": "Number of times Query Messages Are Retransmitted"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/interface-groups/interface-group/groups/group/last-member-query": {
+    "name": "Whether the Multicast Group Has Members"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/interface-groups/interface-group/groups/group/filter-mode": {
+    "name": "Multicast Group Filter Mode"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/interface-groups/interface-group/groups/group/compat-mode": {
+    "name": "Multicast Group Compatibility Mode"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/interface-groups/interface-group/groups/group/v1-host-timer": {
+    "name": "IGMPv1 Host Time"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/interface-groups/interface-group/groups/group/v2-host-timer": {
+    "name": "IGMPv2 Host Time"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/interface-groups/interface-group/groups/group/source-last-member-query": {
+    "name": "Whether to Send Query Messages to Members of the Source-specific Multicast Group"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/interface-groups/interface-group/groups/group/last-member-query-timer": {
+    "name": "Last Member Query Interval"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/interface-groups/interface-group/groups/group/sources": {
+    "name": "Source Address of the Multicast Group on the Local Interface"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/interface-groups/interface-group/groups/group/sources/source": {
+    "name": "List of Source Addresses of Multicast Groups on the Local Interface"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/interface-groups/interface-group/groups/group/sources/source/source-address": {
+    "name": "Multicast Source IP Address"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/interface-groups/interface-group/groups/group/sources/source/up-time": {
+    "name": "Time Since a Multicast Group Is Created"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/interface-groups/interface-group/groups/group/sources/source/expire-time": {
+    "name": "Multicast Group Expiry Time"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/interface-groups/interface-group/groups/group/sources/source/source-timer": {
+    "name": "Whether the Source Timer Exists"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/interface-groups/interface-group/groups/group/sources/source/retran-count": {
+    "name": "Number of times Query Messages Are Retransmitted"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/interface-groups/interface-group/groups/group/sources/source/last-member-query": {
+    "name": "Whether the Multicast Group Has Members"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/statistics": {
+    "name": "IGMP Snooping Statistics in a BD"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/statistics/send-source-group-query-count": {
+    "name": "Number of Group-and-Source-Specific Query Messages Sent by the IGMP Proxy"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/statistics/v1-report-count": {
+    "name": "Number of Received IGMPv1 Report Messages"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/statistics/v2-report-count": {
+    "name": "Number of Received IGMPv2 Report Messages"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/statistics/v3-report-count": {
+    "name": "Number of Received IGMPv3 Report Messages"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/statistics/v1-query-count": {
+    "name": "Number of Received IGMPv1 Query Messages"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/statistics/v2-query-count": {
+    "name": "Number of Received IGMPv2 Query Messages"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/statistics/v3-query-cnt": {
+    "name": "Number of Received IGMPv3 Query Messages"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/statistics/leave-count": {
+    "name": "Number of Received IGMP Leave Messages"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/statistics/hello-count": {
+    "name": "Number of Received PIM Hello Messages"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/statistics/s-flag-query-count": {
+    "name": "Number of Sent IGMP Query Messages with the Source Address Being 0"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/statistics/no-s-flag-query-count": {
+    "name": "Number of Sent IGMP Query Messages with the Source Addresses Not Being 0"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/statistics/send-general-query-count": {
+    "name": "Number of General Query Messages Sent by the Proxy"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/statistics/send-group-query-count": {
+    "name": "Number of Group-specific Query Messages Sent by the Proxy"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/invalid-packet": {
+    "name": "Invalid Packets in the Bridge Domain"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/invalid-packet/general-count": {
+    "name": "Total Number of Invalid Packets"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/invalid-packet/general-count/fault-length": {
+    "name": "Incorrect Packet Length"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/invalid-packet/general-count/invalid-type-count": {
+    "name": "Invalid Layer 2 Multicast Type"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/invalid-packet/general-count/bad-checksum": {
+    "name": "Incorrect Packet Checksum"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/invalid-packet/general-count/fault-router-alert": {
+    "name": "Invalid Router Alert"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/invalid-packet/invalid-query-count": {
+    "name": "Number of Invalid Query Messages"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/invalid-packet/invalid-query-count/invalid-multicast-source": {
+    "name": "Invalid Multicast Source"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/invalid-packet/invalid-query-count/invalid-multicast-group": {
+    "name": "Invalid Multicast Group"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/invalid-packet/invalid-report-count": {
+    "name": "Number of Invalid Report Messages"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/invalid-packet/invalid-report-count/invalid-multicast-group": {
+    "name": "Invalid Multicast Group"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/invalid-packet/invalid-report-count/invalid-version": {
+    "name": "Invalid Layer 2 Multicast Version"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/invalid-packet/invalid-report-count/invalid-multicast-source": {
+    "name": "Invalid Multicast Source"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/invalid-packet/invalid-hello-count": {
+    "name": "Number of Invalid Hello Messages"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/invalid-packet/invalid-hello-count/invalid-pim-version": {
+    "name": "Incorrect PIM Version"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/invalid-packet/invalid-hello-count/fault-length": {
+    "name": "Incorrect Packet Length"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/invalid-packet/invalid-hello-count/bad-holdtime-length": {
+    "name": "Incorrect Holdtime Length"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/invalid-packet/invalid-hello-count/bad-dr-priority-length": {
+    "name": "Incorrect DR Priority Length"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/invalid-packet/invalid-hello-count/bad-checksum": {
+    "name": "Incorrect Checksum"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/invalid-packet/invalid-hello-count/bad-generation-id-length": {
+    "name": "Incorrect GenID Length"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/invalid-packet/invalid-hello-count/bad-lan-prune-delay-length": {
+    "name": "Incorrect Prune Delay Length"
+  }
+}

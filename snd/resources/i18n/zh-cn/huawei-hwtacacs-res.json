@@ -1,0 +1,74 @@
+{
+  "/huawei-hwtacacs:hwtacacs": {
+    "name": "HWTACACS"
+  },
+  "/huawei-hwtacacs:hwtacacs/global": {
+    "name": "全局HWTACACS"
+  },
+  "/huawei-hwtacacs:hwtacacs/global/is-enable": {
+    "name": "使能"
+  },
+  "/huawei-hwtacacs:hwtacacs/global/service-name": {
+    "name": "服务名称"
+  },
+  "/huawei-hwtacacs:hwtacacs/global/default-remote-address": {
+    "name": "缺省远端地址"
+  },
+  "/huawei-hwtacacs:hwtacacs/global/acct-stop-packet-resend-times": {
+    "name": "停止报文重传的次数"
+  },
+  "/huawei-hwtacacs:hwtacacs/templates": {
+    "name": "HWTACACS模板列表"
+  },
+  "/huawei-hwtacacs:hwtacacs/templates/template": {
+    "name": "HWTACACS模板"
+  },
+  "/huawei-hwtacacs:hwtacacs/templates/template/name": {
+    "name": "名称"
+  },
+  "/huawei-hwtacacs:hwtacacs/templates/template/response-timeout": {
+    "name": "超时时间"
+  },
+  "/huawei-hwtacacs:hwtacacs/templates/template/quiet-time": {
+    "name": "静默时间"
+  },
+  "/huawei-hwtacacs:hwtacacs/templates/template/shared-key": {
+    "name": "共享密钥"
+  },
+  "/huawei-hwtacacs:hwtacacs/templates/template/source-address": {
+    "name": "源IP地址"
+  },
+  "/huawei-hwtacacs:hwtacacs/templates/template/source-address/ip": {
+    "name": "IP地址"
+  },
+  "/huawei-hwtacacs:hwtacacs/templates/template/source-address/ip/source-ip-address": {
+    "name": "源IP地址"
+  },
+  "/huawei-hwtacacs:hwtacacs/templates/template/source-address/interface": {
+    "name": "接口"
+  },
+  "/huawei-hwtacacs:hwtacacs/templates/template/source-address/interface/interface-name": {
+    "name": "接口名"
+  },
+  "/huawei-hwtacacs:hwtacacs/templates/template/source-ipv6-address": {
+    "name": "源IPv6地址"
+  },
+  "/huawei-hwtacacs:hwtacacs/templates/template/source-ipv6-address/ip": {
+    "name": "IP地址"
+  },
+  "/huawei-hwtacacs:hwtacacs/templates/template/source-ipv6-address/ip/ipv6-address": {
+    "name": "通信的源IPv6地址"
+  },
+  "/huawei-hwtacacs:hwtacacs/templates/template/source-ipv6-address/interface": {
+    "name": "接口"
+  },
+  "/huawei-hwtacacs:hwtacacs/templates/template/source-ipv6-address/interface/ipv6-interface-name": {
+    "name": "HWTACACSIPV6接口"
+  },
+  "/huawei-hwtacacs:hwtacacs/templates/template/domain-mode": {
+    "name": "域模式"
+  },
+  "/huawei-hwtacacs:hwtacacs/templates/template/traffic-unit": {
+    "name": "流量单位"
+  }
+}

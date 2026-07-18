@@ -30,12 +30,11 @@ func niWithPublicAfPolicy() *huawei.HuaweiNetworkInstance_NetworkInstance {
 		},
 	}
 	afs := ni.Instances.Instance["_public_"].Bgp.BaseProcess.Afs
-	af, _ := afs.NewAf(huawei.HuaweiBgp_AfType_ipv4uni)
+	af, _ := afs.NewAf(huawei.HuaweiBgp_AfTypeDeviations_ipv4uni)
 	af.Ipv4Unicast = &huawei.HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProcess_Afs_Af_Ipv4Unicast{
 		ImportFilterPolicy: &huawei.HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProcess_Afs_Af_Ipv4Unicast_ImportFilterPolicy{
-			AclNameOrNum:    ygot.String("G1"),
-			FilterName:      ygot.String("RF1"),
-			FilterParameter: ygot.String("P1"),
+			AclNameOrNum:     ygot.String("G1"),
+			Ipv4PrefixFilter: ygot.String("PF1"),
 		},
 	}
 	return ni
@@ -76,12 +75,12 @@ func TestReconciler_Integration_BgpAfPolicyConverges(t *testing.T) {
 		t.Fatalf("readback: %v", err)
 	}
 	ni := got.(*huawei.HuaweiNetworkInstance_NetworkInstance)
-	af := ni.Instances.Instance["_public_"].Bgp.BaseProcess.Afs.Af[huawei.HuaweiBgp_AfType_ipv4uni]
+	af := ni.Instances.Instance["_public_"].Bgp.BaseProcess.Afs.Af[huawei.HuaweiBgp_AfTypeDeviations_ipv4uni]
 	if af == nil || af.Ipv4Unicast == nil || af.Ipv4Unicast.ImportFilterPolicy == nil {
 		t.Fatalf("回读缺 AF import-filter-policy: %#v", af)
 	}
 	ifp := af.Ipv4Unicast.ImportFilterPolicy
-	if ifp.AclNameOrNum == nil || *ifp.AclNameOrNum != "G1" || ifp.FilterName == nil || *ifp.FilterName != "RF1" {
+	if ifp.AclNameOrNum == nil || *ifp.AclNameOrNum != "G1" || ifp.Ipv4PrefixFilter == nil || *ifp.Ipv4PrefixFilter != "PF1" {
 		t.Fatalf("回读 AF 策略属性真值缺失: %#v", ifp)
 	}
 

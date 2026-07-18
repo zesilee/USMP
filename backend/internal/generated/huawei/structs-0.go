@@ -15,7 +15,7 @@ using the following YANG input files:
   - huawei-network-instance
 
 Imported modules were sourced from:
-  - ../yang-models/network-router/8.20.10/ne40e-x8x16/...
+  - ../snd/ce6866p-yang/...
 */
 package huawei
 
@@ -354,43 +354,43 @@ func (*HuaweiAcl_Acl_Group6S_Group6_RuleAdvances) ΛBelongingModule() string {
 
 // HuaweiAcl_Acl_Group6S_Group6_RuleAdvances_RuleAdvance represents the /huawei-acl/acl/group6s/group6/rule-advances/rule-advance YANG schema element.
 type HuaweiAcl_Acl_Group6S_Group6_RuleAdvances_RuleAdvance struct {
-	Action           E_HuaweiAcl_RuleAction                                                 `path:"action" module:"huawei-acl"`
-	Description      *string                                                                `path:"description" module:"huawei-acl"`
-	DestIpaddr       *string                                                                `path:"dest-ipaddr" module:"huawei-acl"`
-	DestMaskLen      *uint32                                                                `path:"dest-mask-len" module:"huawei-acl"`
-	DestPortBegin    *uint16                                                                `path:"dest-port-begin" module:"huawei-acl"`
-	DestPortEnd      *uint16                                                                `path:"dest-port-end" module:"huawei-acl"`
-	DestPortValue    *uint16                                                                `path:"dest-port-value" module:"huawei-acl"`
-	DestWild         *string                                                                `path:"dest-wild" module:"huawei-acl"`
-	Dscp             *uint8                                                                 `path:"dscp" module:"huawei-acl"`
-	Established      YANGEmpty                                                              `path:"established" module:"huawei-acl"`
-	FragmentType     E_HuaweiAcl_FragmentIpv6Type                                           `path:"fragment-type" module:"huawei-acl"`
-	Hoport           YANGEmpty                                                              `path:"hoport" module:"huawei-acl"`
-	IcmpCode         *uint16                                                                `path:"icmp-code" module:"huawei-acl"`
-	IcmpType         *uint16                                                                `path:"icmp-type" module:"huawei-acl"`
-	IcmpTypeEnd      *uint16                                                                `path:"icmp-type-end" module:"huawei-acl"`
-	Id               *uint32                                                                `path:"id" module:"huawei-acl"`
-	LogEnable        *bool                                                                  `path:"log-enable" module:"huawei-acl"`
-	MatchStatistics  *HuaweiAcl_Acl_Group6S_Group6_RuleAdvances_RuleAdvance_MatchStatistics `path:"match-statistics" module:"huawei-acl"`
-	Name             *string                                                                `path:"name" module:"huawei-acl"`
-	Precedence       *uint8                                                                 `path:"precedence" module:"huawei-acl"`
-	Priority         *uint32                                                                `path:"priority" module:"huawei-acl"`
-	ProtoOptionCode  *uint8                                                                 `path:"proto-option-code" module:"huawei-acl"`
-	ProtoRoutingType *uint8                                                                 `path:"proto-routing-type" module:"huawei-acl"`
-	Protocol         *uint8                                                                 `path:"protocol" module:"huawei-acl"`
-	SourceIpaddr     *string                                                                `path:"source-ipaddr" module:"huawei-acl"`
-	SourceMaskLen    *uint32                                                                `path:"source-mask-len" module:"huawei-acl"`
-	SourcePool6Name  *string                                                                `path:"source-pool6-name" module:"huawei-acl"`
-	SourcePortBegin  *uint16                                                                `path:"source-port-begin" module:"huawei-acl"`
-	SourcePortEnd    *uint16                                                                `path:"source-port-end" module:"huawei-acl"`
-	SourcePortValue  *uint16                                                                `path:"source-port-value" module:"huawei-acl"`
-	SourceWild       *string                                                                `path:"source-wild" module:"huawei-acl"`
-	TcpFlagMask      *uint16                                                                `path:"tcp-flag-mask" module:"huawei-acl"`
-	TcpFlagValue     *uint16                                                                `path:"tcp-flag-value" module:"huawei-acl"`
-	TimeRangeName    *string                                                                `path:"time-range-name" module:"huawei-acl"`
-	Tos              *uint8                                                                 `path:"tos" module:"huawei-acl"`
-	VpnAny           YANGEmpty                                                              `path:"vpn-any" module:"huawei-acl"`
-	VpnName          *string                                                                `path:"vpn-name" module:"huawei-acl"`
+	Action          E_HuaweiAcl_RuleAction                                                 `path:"action" module:"huawei-acl"`
+	ActiveStatus    E_HuaweiAcl_RowStatus                                                  `path:"active-status" module:"huawei-acl"`
+	Description     *string                                                                `path:"description" module:"huawei-acl"`
+	DestIpaddr      *string                                                                `path:"dest-ipaddr" module:"huawei-acl"`
+	DestMaskLen     *uint32                                                                `path:"dest-mask-len" module:"huawei-acl"`
+	DestPortBegin   *uint16                                                                `path:"dest-port-begin" module:"huawei-acl"`
+	DestPortEnd     *uint16                                                                `path:"dest-port-end" module:"huawei-acl"`
+	DestPortValue   *uint16                                                                `path:"dest-port-value" module:"huawei-acl"`
+	DestWild        *string                                                                `path:"dest-wild" module:"huawei-acl"`
+	Dscp            *uint8                                                                 `path:"dscp" module:"huawei-acl"`
+	Established     YANGEmpty                                                              `path:"established" module:"huawei-acl"`
+	FragmentType    E_HuaweiAcl_FragmentIpv6Type                                           `path:"fragment-type" module:"huawei-acl"`
+	Hoport          YANGEmpty                                                              `path:"hoport" module:"huawei-acl"`
+	IcmpCode        *uint16                                                                `path:"icmp-code" module:"huawei-acl"`
+	IcmpType        *uint16                                                                `path:"icmp-type" module:"huawei-acl"`
+	IcmpTypeEnd     *uint16                                                                `path:"icmp-type-end" module:"huawei-acl"`
+	Id              *uint32                                                                `path:"id" module:"huawei-acl"`
+	LogEnable       *bool                                                                  `path:"log-enable" module:"huawei-acl"`
+	MatchStatistics *HuaweiAcl_Acl_Group6S_Group6_RuleAdvances_RuleAdvance_MatchStatistics `path:"match-statistics" module:"huawei-acl"`
+	Name            *string                                                                `path:"name" module:"huawei-acl"`
+	Precedence      *uint8                                                                 `path:"precedence" module:"huawei-acl"`
+	Priority        *uint32                                                                `path:"priority" module:"huawei-acl"`
+	Protocol        *uint8                                                                 `path:"protocol" module:"huawei-acl"`
+	SourceIpaddr    *string                                                                `path:"source-ipaddr" module:"huawei-acl"`
+	SourceMaskLen   *uint32                                                                `path:"source-mask-len" module:"huawei-acl"`
+	SourcePool6Name *string                                                                `path:"source-pool6-name" module:"huawei-acl"`
+	SourcePortBegin *uint16                                                                `path:"source-port-begin" module:"huawei-acl"`
+	SourcePortEnd   *uint16                                                                `path:"source-port-end" module:"huawei-acl"`
+	SourcePortValue *uint16                                                                `path:"source-port-value" module:"huawei-acl"`
+	SourceWild      *string                                                                `path:"source-wild" module:"huawei-acl"`
+	TcpFlagMask     *uint16                                                                `path:"tcp-flag-mask" module:"huawei-acl"`
+	TcpFlagValue    *uint16                                                                `path:"tcp-flag-value" module:"huawei-acl"`
+	TimeRangeName   *string                                                                `path:"time-range-name" module:"huawei-acl"`
+	Tos             *uint8                                                                 `path:"tos" module:"huawei-acl"`
+	Vni             *uint32                                                                `path:"vni" module:"huawei-acl"`
+	VpnAny          YANGEmpty                                                              `path:"vpn-any" module:"huawei-acl"`
+	VpnName         *string                                                                `path:"vpn-name" module:"huawei-acl"`
 }
 
 // IsYANGGoStruct ensures that HuaweiAcl_Acl_Group6S_Group6_RuleAdvances_RuleAdvance implements the yang.GoStruct
@@ -692,7 +692,7 @@ type HuaweiAcl_Acl_Group6S_Group6_RuleInterfaces_RuleInterface struct {
 	ActiveStatus    E_HuaweiAcl_RowStatus                                                      `path:"active-status" module:"huawei-acl"`
 	Description     *string                                                                    `path:"description" module:"huawei-acl"`
 	Id              *uint32                                                                    `path:"id" module:"huawei-acl"`
-	IfAny           YANGEmpty                                                                  `path:"if-any" module:"huawei-acl"`
+	IfAny           *bool                                                                      `path:"if-any" module:"huawei-acl"`
 	IfName          *string                                                                    `path:"if-name" module:"huawei-acl"`
 	MatchStatistics *HuaweiAcl_Acl_Group6S_Group6_RuleInterfaces_RuleInterface_MatchStatistics `path:"match-statistics" module:"huawei-acl"`
 	Name            *string                                                                    `path:"name" module:"huawei-acl"`
@@ -842,10 +842,12 @@ type HuaweiAcl_Acl_Groups_Group struct {
 	MatchOrder     E_HuaweiAcl_MatchOrder                     `path:"match-order" module:"huawei-acl"`
 	Number         *uint32                                    `path:"number" module:"huawei-acl"`
 	RuleAdvances   *HuaweiAcl_Acl_Groups_Group_RuleAdvances   `path:"rule-advances" module:"huawei-acl"`
+	RuleArps       *HuaweiAcl_Acl_Groups_Group_RuleArps       `path:"rule-arps" module:"huawei-acl"`
 	RuleBasics     *HuaweiAcl_Acl_Groups_Group_RuleBasics     `path:"rule-basics" module:"huawei-acl"`
 	RuleEthernets  *HuaweiAcl_Acl_Groups_Group_RuleEthernets  `path:"rule-ethernets" module:"huawei-acl"`
 	RuleInterfaces *HuaweiAcl_Acl_Groups_Group_RuleInterfaces `path:"rule-interfaces" module:"huawei-acl"`
 	RuleMplss      *HuaweiAcl_Acl_Groups_Group_RuleMplss      `path:"rule-mplss" module:"huawei-acl"`
+	RuleUsers      *HuaweiAcl_Acl_Groups_Group_RuleUsers      `path:"rule-users" module:"huawei-acl"`
 	Step           *uint32                                    `path:"step" module:"huawei-acl"`
 	Type           E_HuaweiAcl_Group4Type                     `path:"type" module:"huawei-acl"`
 }
@@ -953,48 +955,52 @@ func (*HuaweiAcl_Acl_Groups_Group_RuleAdvances) ΛBelongingModule() string {
 
 // HuaweiAcl_Acl_Groups_Group_RuleAdvances_RuleAdvance represents the /huawei-acl/acl/groups/group/rule-advances/rule-advance YANG schema element.
 type HuaweiAcl_Acl_Groups_Group_RuleAdvances_RuleAdvance struct {
-	Action          E_HuaweiAcl_RuleAction                                               `path:"action" module:"huawei-acl"`
-	ActiveStatus    E_HuaweiAcl_RowStatus                                                `path:"active-status" module:"huawei-acl"`
-	Description     *string                                                              `path:"description" module:"huawei-acl"`
-	DestIpaddr      *string                                                              `path:"dest-ipaddr" module:"huawei-acl"`
-	DestPoolName    *string                                                              `path:"dest-pool-name" module:"huawei-acl"`
-	DestPortBegin   *uint16                                                              `path:"dest-port-begin" module:"huawei-acl"`
-	DestPortEnd     *uint16                                                              `path:"dest-port-end" module:"huawei-acl"`
-	DestPortValue   *uint16                                                              `path:"dest-port-value" module:"huawei-acl"`
-	DestWild        *string                                                              `path:"dest-wild" module:"huawei-acl"`
-	Dscp            *uint8                                                               `path:"dscp" module:"huawei-acl"`
-	Established     YANGEmpty                                                            `path:"established" module:"huawei-acl"`
-	FragmentType    E_HuaweiAcl_FragmentType                                             `path:"fragment-type" module:"huawei-acl"`
-	IcmpCode        *uint16                                                              `path:"icmp-code" module:"huawei-acl"`
-	IcmpType        *uint16                                                              `path:"icmp-type" module:"huawei-acl"`
-	IcmpTypeEnd     *uint16                                                              `path:"icmp-type-end" module:"huawei-acl"`
-	Id              *uint32                                                              `path:"id" module:"huawei-acl"`
-	LogEnable       *bool                                                                `path:"log-enable" module:"huawei-acl"`
-	MatchStatistics *HuaweiAcl_Acl_Groups_Group_RuleAdvances_RuleAdvance_MatchStatistics `path:"match-statistics" module:"huawei-acl"`
-	Name            *string                                                              `path:"name" module:"huawei-acl"`
-	PacketLenBegin  *uint16                                                              `path:"packet-len-begin" module:"huawei-acl"`
-	PacketLenEnd    *uint16                                                              `path:"packet-len-end" module:"huawei-acl"`
-	PacketLenValue  *uint16                                                              `path:"packet-len-value" module:"huawei-acl"`
-	Precedence      *uint8                                                               `path:"precedence" module:"huawei-acl"`
-	Priority        *uint32                                                              `path:"priority" module:"huawei-acl"`
-	Protocol        *uint8                                                               `path:"protocol" module:"huawei-acl"`
-	ProtocolZero    YANGEmpty                                                            `path:"protocol-zero" module:"huawei-acl"`
-	SourceIpaddr    *string                                                              `path:"source-ipaddr" module:"huawei-acl"`
-	SourcePoolName  *string                                                              `path:"source-pool-name" module:"huawei-acl"`
-	SourcePortBegin *uint16                                                              `path:"source-port-begin" module:"huawei-acl"`
-	SourcePortEnd   *uint16                                                              `path:"source-port-end" module:"huawei-acl"`
-	SourcePortValue *uint16                                                              `path:"source-port-value" module:"huawei-acl"`
-	SourceWild      *string                                                              `path:"source-wild" module:"huawei-acl"`
-	TcpFlagMask     *uint16                                                              `path:"tcp-flag-mask" module:"huawei-acl"`
-	TcpFlagValue    *uint8                                                               `path:"tcp-flag-value" module:"huawei-acl"`
-	TimeRangeName   *string                                                              `path:"time-range-name" module:"huawei-acl"`
-	Tos             *uint8                                                               `path:"tos" module:"huawei-acl"`
-	TtlBegin        *uint8                                                               `path:"ttl-begin" module:"huawei-acl"`
-	TtlEnd          *uint8                                                               `path:"ttl-end" module:"huawei-acl"`
-	TtlValue        *uint8                                                               `path:"ttl-value" module:"huawei-acl"`
-	Vni             *uint32                                                              `path:"vni" module:"huawei-acl"`
-	VpnAny          YANGEmpty                                                            `path:"vpn-any" module:"huawei-acl"`
-	VpnName         *string                                                              `path:"vpn-name" module:"huawei-acl"`
+	Action           E_HuaweiAcl_RuleAction                                               `path:"action" module:"huawei-acl"`
+	ActiveStatus     E_HuaweiAcl_RowStatus                                                `path:"active-status" module:"huawei-acl"`
+	Description      *string                                                              `path:"description" module:"huawei-acl"`
+	DestIpaddr       *string                                                              `path:"dest-ipaddr" module:"huawei-acl"`
+	DestPoolName     *string                                                              `path:"dest-pool-name" module:"huawei-acl"`
+	DestPortBegin    *uint16                                                              `path:"dest-port-begin" module:"huawei-acl"`
+	DestPortEnd      *uint16                                                              `path:"dest-port-end" module:"huawei-acl"`
+	DestPortPoolName *string                                                              `path:"dest-port-pool-name" module:"huawei-acl"`
+	DestPortValue    *uint16                                                              `path:"dest-port-value" module:"huawei-acl"`
+	DestWild         *string                                                              `path:"dest-wild" module:"huawei-acl"`
+	Dscp             *uint8                                                               `path:"dscp" module:"huawei-acl"`
+	Established      YANGEmpty                                                            `path:"established" module:"huawei-acl"`
+	FragmentType     E_HuaweiAcl_FragmentType                                             `path:"fragment-type" module:"huawei-acl"`
+	IcmpCode         *uint16                                                              `path:"icmp-code" module:"huawei-acl"`
+	IcmpType         *uint16                                                              `path:"icmp-type" module:"huawei-acl"`
+	IcmpTypeEnd      *uint16                                                              `path:"icmp-type-end" module:"huawei-acl"`
+	Id               *uint32                                                              `path:"id" module:"huawei-acl"`
+	IgmpType         *uint16                                                              `path:"igmp-type" module:"huawei-acl"`
+	LogEnable        *bool                                                                `path:"log-enable" module:"huawei-acl"`
+	MatchStatistics  *HuaweiAcl_Acl_Groups_Group_RuleAdvances_RuleAdvance_MatchStatistics `path:"match-statistics" module:"huawei-acl"`
+	Name             *string                                                              `path:"name" module:"huawei-acl"`
+	PacketLenBegin   *uint16                                                              `path:"packet-len-begin" module:"huawei-acl"`
+	PacketLenEnd     *uint16                                                              `path:"packet-len-end" module:"huawei-acl"`
+	PacketLenValue   *uint16                                                              `path:"packet-len-value" module:"huawei-acl"`
+	Precedence       *uint8                                                               `path:"precedence" module:"huawei-acl"`
+	Priority         *uint32                                                              `path:"priority" module:"huawei-acl"`
+	Protocol         *uint8                                                               `path:"protocol" module:"huawei-acl"`
+	ProtocolZero     YANGEmpty                                                            `path:"protocol-zero" module:"huawei-acl"`
+	SourceIpaddr     *string                                                              `path:"source-ipaddr" module:"huawei-acl"`
+	SourcePoolName   *string                                                              `path:"source-pool-name" module:"huawei-acl"`
+	SourcePortBegin  *uint16                                                              `path:"source-port-begin" module:"huawei-acl"`
+	SourcePortEnd    *uint16                                                              `path:"source-port-end" module:"huawei-acl"`
+	SourcePortValue  *uint16                                                              `path:"source-port-value" module:"huawei-acl"`
+	SourceWild       *string                                                              `path:"source-wild" module:"huawei-acl"`
+	SrcPortPoolName  *string                                                              `path:"src-port-pool-name" module:"huawei-acl"`
+	TcpFlagMask      *uint16                                                              `path:"tcp-flag-mask" module:"huawei-acl"`
+	TcpFlagValue     *uint8                                                               `path:"tcp-flag-value" module:"huawei-acl"`
+	TimeRangeName    *string                                                              `path:"time-range-name" module:"huawei-acl"`
+	Tos              *uint8                                                               `path:"tos" module:"huawei-acl"`
+	TtlBegin         *uint8                                                               `path:"ttl-begin" module:"huawei-acl"`
+	TtlEnd           *uint8                                                               `path:"ttl-end" module:"huawei-acl"`
+	TtlExpired       *bool                                                                `path:"ttl-expired" module:"huawei-acl"`
+	TtlValue         *uint8                                                               `path:"ttl-value" module:"huawei-acl"`
+	Vni              *uint32                                                              `path:"vni" module:"huawei-acl"`
+	VpnAny           YANGEmpty                                                            `path:"vpn-any" module:"huawei-acl"`
+	VpnName          *string                                                              `path:"vpn-name" module:"huawei-acl"`
 }
 
 // IsYANGGoStruct ensures that HuaweiAcl_Acl_Groups_Group_RuleAdvances_RuleAdvance implements the yang.GoStruct
@@ -1073,6 +1079,164 @@ func (*HuaweiAcl_Acl_Groups_Group_RuleAdvances_RuleAdvance_MatchStatistics) ΛBe
 	return "huawei-acl"
 }
 
+// HuaweiAcl_Acl_Groups_Group_RuleArps represents the /huawei-acl/acl/groups/group/rule-arps YANG schema element.
+type HuaweiAcl_Acl_Groups_Group_RuleArps struct {
+	RuleArp map[string]*HuaweiAcl_Acl_Groups_Group_RuleArps_RuleArp `path:"rule-arp" module:"huawei-acl"`
+}
+
+// IsYANGGoStruct ensures that HuaweiAcl_Acl_Groups_Group_RuleArps implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiAcl_Acl_Groups_Group_RuleArps) IsYANGGoStruct() {}
+
+// NewRuleArp creates a new entry in the RuleArp list of the
+// HuaweiAcl_Acl_Groups_Group_RuleArps struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiAcl_Acl_Groups_Group_RuleArps) NewRuleArp(Name string) (*HuaweiAcl_Acl_Groups_Group_RuleArps_RuleArp, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.RuleArp == nil {
+		t.RuleArp = make(map[string]*HuaweiAcl_Acl_Groups_Group_RuleArps_RuleArp)
+	}
+
+	key := Name
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.RuleArp[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list RuleArp", key)
+	}
+
+	t.RuleArp[key] = &HuaweiAcl_Acl_Groups_Group_RuleArps_RuleArp{
+		Name: &Name,
+	}
+
+	return t.RuleArp[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiAcl_Acl_Groups_Group_RuleArps) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiAcl_Acl_Groups_Group_RuleArps"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiAcl_Acl_Groups_Group_RuleArps) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiAcl_Acl_Groups_Group_RuleArps) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiAcl_Acl_Groups_Group_RuleArps.
+func (*HuaweiAcl_Acl_Groups_Group_RuleArps) ΛBelongingModule() string {
+	return "huawei-acl"
+}
+
+// HuaweiAcl_Acl_Groups_Group_RuleArps_RuleArp represents the /huawei-acl/acl/groups/group/rule-arps/rule-arp YANG schema element.
+type HuaweiAcl_Acl_Groups_Group_RuleArps_RuleArp struct {
+	Action          E_HuaweiAcl_RuleAction                                       `path:"action" module:"huawei-acl"`
+	ActiveStatus    E_HuaweiAcl_RowStatus                                        `path:"active-status" module:"huawei-acl"`
+	Description     *string                                                      `path:"description" module:"huawei-acl"`
+	DestIpaddr      *string                                                      `path:"dest-ipaddr" module:"huawei-acl"`
+	DestMac         *string                                                      `path:"dest-mac" module:"huawei-acl"`
+	DestMacMask     *string                                                      `path:"dest-mac-mask" module:"huawei-acl"`
+	DestWild        *string                                                      `path:"dest-wild" module:"huawei-acl"`
+	Id              *uint32                                                      `path:"id" module:"huawei-acl"`
+	MatchStatistics *HuaweiAcl_Acl_Groups_Group_RuleArps_RuleArp_MatchStatistics `path:"match-statistics" module:"huawei-acl"`
+	Name            *string                                                      `path:"name" module:"huawei-acl"`
+	PacketMode      E_HuaweiAcl_PacketMode                                       `path:"packet-mode" module:"huawei-acl"`
+	SourceIpaddr    *string                                                      `path:"source-ipaddr" module:"huawei-acl"`
+	SourceMac       *string                                                      `path:"source-mac" module:"huawei-acl"`
+	SourceMacMask   *string                                                      `path:"source-mac-mask" module:"huawei-acl"`
+	SourceWild      *string                                                      `path:"source-wild" module:"huawei-acl"`
+	TimeRangeName   *string                                                      `path:"time-range-name" module:"huawei-acl"`
+}
+
+// IsYANGGoStruct ensures that HuaweiAcl_Acl_Groups_Group_RuleArps_RuleArp implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiAcl_Acl_Groups_Group_RuleArps_RuleArp) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiAcl_Acl_Groups_Group_RuleArps_RuleArp struct, which is a YANG list entry.
+func (t *HuaweiAcl_Acl_Groups_Group_RuleArps_RuleArp) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.Name == nil {
+		return nil, fmt.Errorf("nil value for key Name")
+	}
+
+	return map[string]interface{}{
+		"name": *t.Name,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiAcl_Acl_Groups_Group_RuleArps_RuleArp) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiAcl_Acl_Groups_Group_RuleArps_RuleArp"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiAcl_Acl_Groups_Group_RuleArps_RuleArp) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiAcl_Acl_Groups_Group_RuleArps_RuleArp) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiAcl_Acl_Groups_Group_RuleArps_RuleArp.
+func (*HuaweiAcl_Acl_Groups_Group_RuleArps_RuleArp) ΛBelongingModule() string {
+	return "huawei-acl"
+}
+
+// HuaweiAcl_Acl_Groups_Group_RuleArps_RuleArp_MatchStatistics represents the /huawei-acl/acl/groups/group/rule-arps/rule-arp/match-statistics YANG schema element.
+type HuaweiAcl_Acl_Groups_Group_RuleArps_RuleArp_MatchStatistics struct {
+	MatchCount *uint64 `path:"match-count" module:"huawei-acl"`
+}
+
+// IsYANGGoStruct ensures that HuaweiAcl_Acl_Groups_Group_RuleArps_RuleArp_MatchStatistics implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiAcl_Acl_Groups_Group_RuleArps_RuleArp_MatchStatistics) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiAcl_Acl_Groups_Group_RuleArps_RuleArp_MatchStatistics) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiAcl_Acl_Groups_Group_RuleArps_RuleArp_MatchStatistics"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiAcl_Acl_Groups_Group_RuleArps_RuleArp_MatchStatistics) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiAcl_Acl_Groups_Group_RuleArps_RuleArp_MatchStatistics) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiAcl_Acl_Groups_Group_RuleArps_RuleArp_MatchStatistics.
+func (*HuaweiAcl_Acl_Groups_Group_RuleArps_RuleArp_MatchStatistics) ΛBelongingModule() string {
+	return "huawei-acl"
+}
+
 // HuaweiAcl_Acl_Groups_Group_RuleBasics represents the /huawei-acl/acl/groups/group/rule-basics YANG schema element.
 type HuaweiAcl_Acl_Groups_Group_RuleBasics struct {
 	RuleBasic map[string]*HuaweiAcl_Acl_Groups_Group_RuleBasics_RuleBasic `path:"rule-basic" module:"huawei-acl"`
@@ -1142,6 +1306,7 @@ type HuaweiAcl_Acl_Groups_Group_RuleBasics_RuleBasic struct {
 	Description     *string                                                          `path:"description" module:"huawei-acl"`
 	FragmentType    E_HuaweiAcl_FragmentType                                         `path:"fragment-type" module:"huawei-acl"`
 	Id              *uint32                                                          `path:"id" module:"huawei-acl"`
+	LogEnable       *bool                                                            `path:"log-enable" module:"huawei-acl"`
 	MatchStatistics *HuaweiAcl_Acl_Groups_Group_RuleBasics_RuleBasic_MatchStatistics `path:"match-statistics" module:"huawei-acl"`
 	Name            *string                                                          `path:"name" module:"huawei-acl"`
 	Priority        *uint32                                                          `path:"priority" module:"huawei-acl"`
@@ -1294,10 +1459,14 @@ func (*HuaweiAcl_Acl_Groups_Group_RuleEthernets) ΛBelongingModule() string {
 type HuaweiAcl_Acl_Groups_Group_RuleEthernets_RuleEthernet struct {
 	Action            E_HuaweiAcl_RuleAction                                                 `path:"action" module:"huawei-acl"`
 	ActiveStatus      E_HuaweiAcl_RowStatus                                                  `path:"active-status" module:"huawei-acl"`
+	CeVlanId          *uint16                                                                `path:"ce-vlan-id" module:"huawei-acl"`
+	CeVlanIdMask      *string                                                                `path:"ce-vlan-id-mask" module:"huawei-acl"`
 	CeVlanValue_8021P *uint8                                                                 `path:"ce-vlan-value-8021p" module:"huawei-acl"`
 	Description       *string                                                                `path:"description" module:"huawei-acl"`
 	DestMac           *string                                                                `path:"dest-mac" module:"huawei-acl"`
 	DestMacMask       *string                                                                `path:"dest-mac-mask" module:"huawei-acl"`
+	DoubleTag         *bool                                                                  `path:"double-tag" module:"huawei-acl"`
+	EncapType         E_HuaweiAcl_EncapType                                                  `path:"encap-type" module:"huawei-acl"`
 	FrameMask         *string                                                                `path:"frame-mask" module:"huawei-acl"`
 	FrameType         *string                                                                `path:"frame-type" module:"huawei-acl"`
 	Id                *uint32                                                                `path:"id" module:"huawei-acl"`
@@ -1307,6 +1476,9 @@ type HuaweiAcl_Acl_Groups_Group_RuleEthernets_RuleEthernet struct {
 	SourceMac         *string                                                                `path:"source-mac" module:"huawei-acl"`
 	SourceMacMask     *string                                                                `path:"source-mac-mask" module:"huawei-acl"`
 	TimeRangeName     *string                                                                `path:"time-range-name" module:"huawei-acl"`
+	Value_8021P       *uint8                                                                 `path:"value-8021p" module:"huawei-acl"`
+	VlanId            *uint16                                                                `path:"vlan-id" module:"huawei-acl"`
+	VlanIdMask        *string                                                                `path:"vlan-id-mask" module:"huawei-acl"`
 }
 
 // IsYANGGoStruct ensures that HuaweiAcl_Acl_Groups_Group_RuleEthernets_RuleEthernet implements the yang.GoStruct
@@ -1600,12 +1772,13 @@ func (*HuaweiAcl_Acl_Groups_Group_RuleMplss) ΛBelongingModule() string {
 
 // HuaweiAcl_Acl_Groups_Group_RuleMplss_RuleMpls represents the /huawei-acl/acl/groups/group/rule-mplss/rule-mpls YANG schema element.
 type HuaweiAcl_Acl_Groups_Group_RuleMplss_RuleMpls struct {
-	Action      E_HuaweiAcl_RuleAction                                `path:"action" module:"huawei-acl"`
-	Description *string                                               `path:"description" module:"huawei-acl"`
-	Id          *uint32                                               `path:"id" module:"huawei-acl"`
-	Lables      *HuaweiAcl_Acl_Groups_Group_RuleMplss_RuleMpls_Lables `path:"lables" module:"huawei-acl"`
-	Name        *string                                               `path:"name" module:"huawei-acl"`
-	Priority    *uint32                                               `path:"priority" module:"huawei-acl"`
+	Action          E_HuaweiAcl_RuleAction                                         `path:"action" module:"huawei-acl"`
+	Description     *string                                                        `path:"description" module:"huawei-acl"`
+	Id              *uint32                                                        `path:"id" module:"huawei-acl"`
+	Lables          *HuaweiAcl_Acl_Groups_Group_RuleMplss_RuleMpls_Lables          `path:"lables" module:"huawei-acl"`
+	MatchStatistics *HuaweiAcl_Acl_Groups_Group_RuleMplss_RuleMpls_MatchStatistics `path:"match-statistics" module:"huawei-acl"`
+	Name            *string                                                        `path:"name" module:"huawei-acl"`
+	Priority        *uint32                                                        `path:"priority" module:"huawei-acl"`
 }
 
 // IsYANGGoStruct ensures that HuaweiAcl_Acl_Groups_Group_RuleMplss_RuleMpls implements the yang.GoStruct
@@ -1713,8 +1886,11 @@ func (*HuaweiAcl_Acl_Groups_Group_RuleMplss_RuleMpls_Lables) ΛBelongingModule()
 
 // HuaweiAcl_Acl_Groups_Group_RuleMplss_RuleMpls_Lables_Lable represents the /huawei-acl/acl/groups/group/rule-mplss/rule-mpls/lables/lable YANG schema element.
 type HuaweiAcl_Acl_Groups_Group_RuleMplss_RuleMpls_Lables_Lable struct {
-	ExpValue *uint8 `path:"exp-value" module:"huawei-acl"`
-	Sequence *uint8 `path:"sequence" module:"huawei-acl"`
+	ExpValue   *uint8  `path:"exp-value" module:"huawei-acl"`
+	LabelValue *uint32 `path:"label-value" module:"huawei-acl"`
+	Sequence   *uint8  `path:"sequence" module:"huawei-acl"`
+	TtlBegin   *uint16 `path:"ttl-begin" module:"huawei-acl"`
+	TtlEnd     *uint16 `path:"ttl-end" module:"huawei-acl"`
 }
 
 // IsYANGGoStruct ensures that HuaweiAcl_Acl_Groups_Group_RuleMplss_RuleMpls_Lables_Lable implements the yang.GoStruct
@@ -1755,6 +1931,215 @@ func (t *HuaweiAcl_Acl_Groups_Group_RuleMplss_RuleMpls_Lables_Lable) ΛEnumTypeM
 // ΛBelongingModule returns the name of the module that defines the namespace
 // of HuaweiAcl_Acl_Groups_Group_RuleMplss_RuleMpls_Lables_Lable.
 func (*HuaweiAcl_Acl_Groups_Group_RuleMplss_RuleMpls_Lables_Lable) ΛBelongingModule() string {
+	return "huawei-acl"
+}
+
+// HuaweiAcl_Acl_Groups_Group_RuleMplss_RuleMpls_MatchStatistics represents the /huawei-acl/acl/groups/group/rule-mplss/rule-mpls/match-statistics YANG schema element.
+type HuaweiAcl_Acl_Groups_Group_RuleMplss_RuleMpls_MatchStatistics struct {
+	MatchCount *uint64 `path:"match-count" module:"huawei-acl"`
+}
+
+// IsYANGGoStruct ensures that HuaweiAcl_Acl_Groups_Group_RuleMplss_RuleMpls_MatchStatistics implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiAcl_Acl_Groups_Group_RuleMplss_RuleMpls_MatchStatistics) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiAcl_Acl_Groups_Group_RuleMplss_RuleMpls_MatchStatistics) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiAcl_Acl_Groups_Group_RuleMplss_RuleMpls_MatchStatistics"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiAcl_Acl_Groups_Group_RuleMplss_RuleMpls_MatchStatistics) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiAcl_Acl_Groups_Group_RuleMplss_RuleMpls_MatchStatistics) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiAcl_Acl_Groups_Group_RuleMplss_RuleMpls_MatchStatistics.
+func (*HuaweiAcl_Acl_Groups_Group_RuleMplss_RuleMpls_MatchStatistics) ΛBelongingModule() string {
+	return "huawei-acl"
+}
+
+// HuaweiAcl_Acl_Groups_Group_RuleUsers represents the /huawei-acl/acl/groups/group/rule-users YANG schema element.
+type HuaweiAcl_Acl_Groups_Group_RuleUsers struct {
+	RuleUser map[string]*HuaweiAcl_Acl_Groups_Group_RuleUsers_RuleUser `path:"rule-user" module:"huawei-acl"`
+}
+
+// IsYANGGoStruct ensures that HuaweiAcl_Acl_Groups_Group_RuleUsers implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiAcl_Acl_Groups_Group_RuleUsers) IsYANGGoStruct() {}
+
+// NewRuleUser creates a new entry in the RuleUser list of the
+// HuaweiAcl_Acl_Groups_Group_RuleUsers struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiAcl_Acl_Groups_Group_RuleUsers) NewRuleUser(Name string) (*HuaweiAcl_Acl_Groups_Group_RuleUsers_RuleUser, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.RuleUser == nil {
+		t.RuleUser = make(map[string]*HuaweiAcl_Acl_Groups_Group_RuleUsers_RuleUser)
+	}
+
+	key := Name
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.RuleUser[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list RuleUser", key)
+	}
+
+	t.RuleUser[key] = &HuaweiAcl_Acl_Groups_Group_RuleUsers_RuleUser{
+		Name: &Name,
+	}
+
+	return t.RuleUser[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiAcl_Acl_Groups_Group_RuleUsers) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiAcl_Acl_Groups_Group_RuleUsers"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiAcl_Acl_Groups_Group_RuleUsers) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiAcl_Acl_Groups_Group_RuleUsers) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiAcl_Acl_Groups_Group_RuleUsers.
+func (*HuaweiAcl_Acl_Groups_Group_RuleUsers) ΛBelongingModule() string {
+	return "huawei-acl"
+}
+
+// HuaweiAcl_Acl_Groups_Group_RuleUsers_RuleUser represents the /huawei-acl/acl/groups/group/rule-users/rule-user YANG schema element.
+type HuaweiAcl_Acl_Groups_Group_RuleUsers_RuleUser struct {
+	Action          E_HuaweiAcl_RuleAction                                         `path:"action" module:"huawei-acl"`
+	ActiveStatus    E_HuaweiAcl_RowStatus                                          `path:"active-status" module:"huawei-acl"`
+	Description     *string                                                        `path:"description" module:"huawei-acl"`
+	Id              *uint32                                                        `path:"id" module:"huawei-acl"`
+	MatchStatistics *HuaweiAcl_Acl_Groups_Group_RuleUsers_RuleUser_MatchStatistics `path:"match-statistics" module:"huawei-acl"`
+	Name            *string                                                        `path:"name" module:"huawei-acl"`
+	OffsetBegin     E_HuaweiAcl_OffsetBegin                                        `path:"offset-begin" module:"huawei-acl"`
+	Offset1         *uint8                                                         `path:"offset1" module:"huawei-acl"`
+	Offset2         *uint8                                                         `path:"offset2" module:"huawei-acl"`
+	Offset3         *uint8                                                         `path:"offset3" module:"huawei-acl"`
+	Offset4         *uint8                                                         `path:"offset4" module:"huawei-acl"`
+	Offset5         *uint8                                                         `path:"offset5" module:"huawei-acl"`
+	Offset6         *uint8                                                         `path:"offset6" module:"huawei-acl"`
+	Offset7         *uint8                                                         `path:"offset7" module:"huawei-acl"`
+	Offset8         *uint8                                                         `path:"offset8" module:"huawei-acl"`
+	TimeRangeName   *string                                                        `path:"time-range-name" module:"huawei-acl"`
+	UserRule1       *string                                                        `path:"user-rule1" module:"huawei-acl"`
+	UserRule1Mask   *string                                                        `path:"user-rule1-mask" module:"huawei-acl"`
+	UserRule2       *string                                                        `path:"user-rule2" module:"huawei-acl"`
+	UserRule2Mask   *string                                                        `path:"user-rule2-mask" module:"huawei-acl"`
+	UserRule3       *string                                                        `path:"user-rule3" module:"huawei-acl"`
+	UserRule3Mask   *string                                                        `path:"user-rule3-mask" module:"huawei-acl"`
+	UserRule4       *string                                                        `path:"user-rule4" module:"huawei-acl"`
+	UserRule4Mask   *string                                                        `path:"user-rule4-mask" module:"huawei-acl"`
+	UserRule5       *string                                                        `path:"user-rule5" module:"huawei-acl"`
+	UserRule5Mask   *string                                                        `path:"user-rule5-mask" module:"huawei-acl"`
+	UserRule6       *string                                                        `path:"user-rule6" module:"huawei-acl"`
+	UserRule6Mask   *string                                                        `path:"user-rule6-mask" module:"huawei-acl"`
+	UserRule7       *string                                                        `path:"user-rule7" module:"huawei-acl"`
+	UserRule7Mask   *string                                                        `path:"user-rule7-mask" module:"huawei-acl"`
+	UserRule8       *string                                                        `path:"user-rule8" module:"huawei-acl"`
+	UserRule8Mask   *string                                                        `path:"user-rule8-mask" module:"huawei-acl"`
+}
+
+// IsYANGGoStruct ensures that HuaweiAcl_Acl_Groups_Group_RuleUsers_RuleUser implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiAcl_Acl_Groups_Group_RuleUsers_RuleUser) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiAcl_Acl_Groups_Group_RuleUsers_RuleUser struct, which is a YANG list entry.
+func (t *HuaweiAcl_Acl_Groups_Group_RuleUsers_RuleUser) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.Name == nil {
+		return nil, fmt.Errorf("nil value for key Name")
+	}
+
+	return map[string]interface{}{
+		"name": *t.Name,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiAcl_Acl_Groups_Group_RuleUsers_RuleUser) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiAcl_Acl_Groups_Group_RuleUsers_RuleUser"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiAcl_Acl_Groups_Group_RuleUsers_RuleUser) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiAcl_Acl_Groups_Group_RuleUsers_RuleUser) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiAcl_Acl_Groups_Group_RuleUsers_RuleUser.
+func (*HuaweiAcl_Acl_Groups_Group_RuleUsers_RuleUser) ΛBelongingModule() string {
+	return "huawei-acl"
+}
+
+// HuaweiAcl_Acl_Groups_Group_RuleUsers_RuleUser_MatchStatistics represents the /huawei-acl/acl/groups/group/rule-users/rule-user/match-statistics YANG schema element.
+type HuaweiAcl_Acl_Groups_Group_RuleUsers_RuleUser_MatchStatistics struct {
+	MatchCount *uint64 `path:"match-count" module:"huawei-acl"`
+}
+
+// IsYANGGoStruct ensures that HuaweiAcl_Acl_Groups_Group_RuleUsers_RuleUser_MatchStatistics implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiAcl_Acl_Groups_Group_RuleUsers_RuleUser_MatchStatistics) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiAcl_Acl_Groups_Group_RuleUsers_RuleUser_MatchStatistics) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiAcl_Acl_Groups_Group_RuleUsers_RuleUser_MatchStatistics"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiAcl_Acl_Groups_Group_RuleUsers_RuleUser_MatchStatistics) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiAcl_Acl_Groups_Group_RuleUsers_RuleUser_MatchStatistics) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiAcl_Acl_Groups_Group_RuleUsers_RuleUser_MatchStatistics.
+func (*HuaweiAcl_Acl_Groups_Group_RuleUsers_RuleUser_MatchStatistics) ΛBelongingModule() string {
 	return "huawei-acl"
 }
 
@@ -1820,7 +2205,10 @@ func (*HuaweiAcl_Acl_IpPool6S) ΛBelongingModule() string {
 
 // HuaweiAcl_Acl_IpPool6S_IpPool6 represents the /huawei-acl/acl/ip-pool6s/ip-pool6 YANG schema element.
 type HuaweiAcl_Acl_IpPool6S_IpPool6 struct {
-	Name *string `path:"name" module:"huawei-acl"`
+	ApplyBgpIpv6Peer *bool               `path:"apply-bgp-ipv6-peer" module:"huawei-acl"`
+	BgpPeerVpn       E_HuaweiAcl_VpnType `path:"bgp-peer-vpn" module:"huawei-acl"`
+	BgpPeerVpnName   *string             `path:"bgp-peer-vpn-name" module:"huawei-acl"`
+	Name             *string             `path:"name" module:"huawei-acl"`
 }
 
 // IsYANGGoStruct ensures that HuaweiAcl_Acl_IpPool6S_IpPool6 implements the yang.GoStruct
@@ -2467,61 +2855,59 @@ func (*HuaweiBfd_Bfd_AllSessions) ΛBelongingModule() string {
 
 // HuaweiBfd_Bfd_AllSessions_AllSession represents the /huawei-bfd/bfd/all-sessions/all-session YANG schema element.
 type HuaweiBfd_Bfd_AllSessions_AllSession struct {
-	AddressType          E_HuaweiBfd_BfdSmpBfdCap                         `path:"address-type" module:"huawei-bfd"`
-	BasicAclNum          *uint32                                          `path:"basic-acl-num" module:"huawei-bfd"`
-	BindApplication      *string                                          `path:"bind-application" module:"huawei-bfd"`
-	BundleMode           E_HuaweiBfd_BundleMode                           `path:"bundle-mode" module:"huawei-bfd"`
-	Color                *uint32                                          `path:"color" module:"huawei-bfd"`
-	ConfigPst            E_HuaweiBfd_CommonAbility                        `path:"config-pst" module:"huawei-bfd"`
-	CreateType           E_HuaweiBfd_CreateType                           `path:"create-type" module:"huawei-bfd"`
-	DemandEnable         *bool                                            `path:"demand-enable" module:"huawei-bfd"`
-	Description          *string                                          `path:"description" module:"huawei-bfd"`
-	DestinationAddress   *string                                          `path:"destination-address" module:"huawei-bfd"`
-	DetectMultiplier     *uint32                                          `path:"detect-multiplier" module:"huawei-bfd"`
-	Dot1QVid             *uint32                                          `path:"dot1q-vid" module:"huawei-bfd"`
-	EchoPassive          E_HuaweiBfd_CommonAbility                        `path:"echo-passive" module:"huawei-bfd"`
-	EncapType            E_HuaweiBfd_L2VpnEncapsulationType               `path:"encap-type" module:"huawei-bfd"`
-	FsmBoardSlot         *string                                          `path:"fsm-board-slot" module:"huawei-bfd"`
-	Lag                  *bool                                            `path:"lag" module:"huawei-bfd"`
-	LinkType             E_HuaweiBfd_LinkType                             `path:"link-type" module:"huawei-bfd"`
-	LocalDiscriminator   *uint32                                          `path:"local-discriminator" module:"huawei-bfd"`
-	LocalVcLabel         *uint32                                          `path:"local-vc-label" module:"huawei-bfd"`
-	LspToken             *uint32                                          `path:"lsp-token" module:"huawei-bfd"`
-	MainSubRole          E_HuaweiBfd_PerlinkRole                          `path:"main-sub-role" module:"huawei-bfd"`
-	MinEchoRxInt         *uint32                                          `path:"min-echo-rx-int" module:"huawei-bfd"`
-	MinRxInterval        *uint32                                          `path:"min-rx-interval" module:"huawei-bfd"`
-	MinTxInterval        *uint32                                          `path:"min-tx-interval" module:"huawei-bfd"`
-	MulticastOrUnicastIp E_HuaweiBfd_IpMode                               `path:"multicast-or-unicast-ip" module:"huawei-bfd"`
-	Name                 *string                                          `path:"name" module:"huawei-bfd"`
-	NextHop              *string                                          `path:"next-hop" module:"huawei-bfd"`
-	Node                 E_HuaweiBfd_VpwsNodeType                         `path:"node" module:"huawei-bfd"`
-	OutIfName            *string                                          `path:"out-if-name" module:"huawei-bfd"`
-	Pis                  E_HuaweiBfd_PisSate                              `path:"pis" module:"huawei-bfd"`
-	ProcessPst           E_HuaweiBfd_CommonAbility                        `path:"process-pst" module:"huawei-bfd"`
-	PwSecondary          E_HuaweiBfd_PwRole                               `path:"pw-secondary" module:"huawei-bfd"`
-	PwTtl                *uint32                                          `path:"pw-ttl" module:"huawei-bfd"`
-	PwTtlMode            E_HuaweiBfd_PwttlMode                            `path:"pw-ttl-mode" module:"huawei-bfd"`
-	QinqCeVid            *uint32                                          `path:"qinq-ce-vid" module:"huawei-bfd"`
-	QinqPeVid            *uint32                                          `path:"qinq-pe-vid" module:"huawei-bfd"`
-	RemoteDiscriminator  *uint32                                          `path:"remote-discriminator" module:"huawei-bfd"`
-	RemotePeer           *string                                          `path:"remote-peer" module:"huawei-bfd"`
-	RemoteVcLabel        *uint32                                          `path:"remote-vc-label" module:"huawei-bfd"`
-	Running              *HuaweiBfd_Bfd_AllSessions_AllSession_Running    `path:"running" module:"huawei-bfd"`
-	SegmentListId        *uint32                                          `path:"segment-list-id" module:"huawei-bfd"`
-	ShutDown             *bool                                            `path:"shut-down" module:"huawei-bfd"`
-	SourceAddress        *string                                          `path:"source-address" module:"huawei-bfd"`
-	Statistics           *HuaweiBfd_Bfd_AllSessions_AllSession_Statistics `path:"statistics" module:"huawei-bfd"`
-	SwapVcLabel          *uint32                                          `path:"swap-vc-label" module:"huawei-bfd"`
-	TeBackup             E_HuaweiBfd_TeBackupType                         `path:"te-backup" module:"huawei-bfd"`
-	TosExp               *uint32                                          `path:"tos-exp" module:"huawei-bfd"`
-	TrackInterface       *string                                          `path:"track-interface" module:"huawei-bfd"`
-	TunnelName           *string                                          `path:"tunnel-name" module:"huawei-bfd"`
-	Type                 E_HuaweiBfd_SessionType                          `path:"type" module:"huawei-bfd"`
-	VcId                 *uint32                                          `path:"vc-id" module:"huawei-bfd"`
-	VrfName              *string                                          `path:"vrf-name" module:"huawei-bfd"`
-	VsiName              *string                                          `path:"vsi-name" module:"huawei-bfd"`
-	VsiPeerAddress       *string                                          `path:"vsi-peer-address" module:"huawei-bfd"`
-	WtrTimerInt          *uint32                                          `path:"wtr-timer-int" module:"huawei-bfd"`
+	BasicAclNum         *uint32                                          `path:"basic-acl-num" module:"huawei-bfd"`
+	BindApplication     *string                                          `path:"bind-application" module:"huawei-bfd"`
+	BundleMode          E_HuaweiBfd_BundleMode                           `path:"bundle-mode" module:"huawei-bfd"`
+	Color               *uint32                                          `path:"color" module:"huawei-bfd"`
+	ConfigPst           E_HuaweiBfd_CommonAbility                        `path:"config-pst" module:"huawei-bfd"`
+	CreateType          E_HuaweiBfd_CreateType                           `path:"create-type" module:"huawei-bfd"`
+	DemandEnable        *bool                                            `path:"demand-enable" module:"huawei-bfd"`
+	Description         *string                                          `path:"description" module:"huawei-bfd"`
+	DestinationAddress  *string                                          `path:"destination-address" module:"huawei-bfd"`
+	DetectMultiplier    *uint32                                          `path:"detect-multiplier" module:"huawei-bfd"`
+	Dot1QVid            *uint32                                          `path:"dot1q-vid" module:"huawei-bfd"`
+	EchoPassive         E_HuaweiBfd_CommonAbility                        `path:"echo-passive" module:"huawei-bfd"`
+	EncapType           E_HuaweiBfd_L2VpnEncapsulationType               `path:"encap-type" module:"huawei-bfd"`
+	FsmBoardSlot        *string                                          `path:"fsm-board-slot" module:"huawei-bfd"`
+	Lag                 *bool                                            `path:"lag" module:"huawei-bfd"`
+	LinkType            E_HuaweiBfd_LinkType                             `path:"link-type" module:"huawei-bfd"`
+	LocalDiscriminator  *uint32                                          `path:"local-discriminator" module:"huawei-bfd"`
+	LocalVcLabel        *uint32                                          `path:"local-vc-label" module:"huawei-bfd"`
+	LspToken            *uint32                                          `path:"lsp-token" module:"huawei-bfd"`
+	MainSubRole         E_HuaweiBfd_PerlinkRole                          `path:"main-sub-role" module:"huawei-bfd"`
+	MinEchoRxInt        *uint32                                          `path:"min-echo-rx-int" module:"huawei-bfd"`
+	MinRxInterval       *uint32                                          `path:"min-rx-interval" module:"huawei-bfd"`
+	MinTxInterval       *uint32                                          `path:"min-tx-interval" module:"huawei-bfd"`
+	Name                *string                                          `path:"name" module:"huawei-bfd"`
+	NextHop             *string                                          `path:"next-hop" module:"huawei-bfd"`
+	Node                E_HuaweiBfd_VpwsNodeType                         `path:"node" module:"huawei-bfd"`
+	OutIfName           *string                                          `path:"out-if-name" module:"huawei-bfd"`
+	Pis                 E_HuaweiBfd_PisSate                              `path:"pis" module:"huawei-bfd"`
+	ProcessPst          E_HuaweiBfd_CommonAbility                        `path:"process-pst" module:"huawei-bfd"`
+	PwSecondary         E_HuaweiBfd_PwRole                               `path:"pw-secondary" module:"huawei-bfd"`
+	PwTtl               *uint32                                          `path:"pw-ttl" module:"huawei-bfd"`
+	PwTtlMode           E_HuaweiBfd_PwttlMode                            `path:"pw-ttl-mode" module:"huawei-bfd"`
+	QinqCeVid           *uint32                                          `path:"qinq-ce-vid" module:"huawei-bfd"`
+	QinqPeVid           *uint32                                          `path:"qinq-pe-vid" module:"huawei-bfd"`
+	RemoteDiscriminator *uint32                                          `path:"remote-discriminator" module:"huawei-bfd"`
+	RemotePeer          *string                                          `path:"remote-peer" module:"huawei-bfd"`
+	RemoteVcLabel       *uint32                                          `path:"remote-vc-label" module:"huawei-bfd"`
+	Running             *HuaweiBfd_Bfd_AllSessions_AllSession_Running    `path:"running" module:"huawei-bfd"`
+	SegmentListId       *uint32                                          `path:"segment-list-id" module:"huawei-bfd"`
+	ShutDown            *bool                                            `path:"shut-down" module:"huawei-bfd"`
+	SourceAddress       *string                                          `path:"source-address" module:"huawei-bfd"`
+	Statistics          *HuaweiBfd_Bfd_AllSessions_AllSession_Statistics `path:"statistics" module:"huawei-bfd"`
+	SwapVcLabel         *uint32                                          `path:"swap-vc-label" module:"huawei-bfd"`
+	TeBackup            E_HuaweiBfd_TeBackupType                         `path:"te-backup" module:"huawei-bfd"`
+	TosExp              *uint32                                          `path:"tos-exp" module:"huawei-bfd"`
+	TrackInterface      *string                                          `path:"track-interface" module:"huawei-bfd"`
+	TunnelName          *string                                          `path:"tunnel-name" module:"huawei-bfd"`
+	Type                E_HuaweiBfd_SessionType                          `path:"type" module:"huawei-bfd"`
+	VcId                *uint32                                          `path:"vc-id" module:"huawei-bfd"`
+	VrfName             *string                                          `path:"vrf-name" module:"huawei-bfd"`
+	VsiName             *string                                          `path:"vsi-name" module:"huawei-bfd"`
+	VsiPeerAddress      *string                                          `path:"vsi-peer-address" module:"huawei-bfd"`
+	WtrTimerInt         *uint32                                          `path:"wtr-timer-int" module:"huawei-bfd"`
 }
 
 // IsYANGGoStruct ensures that HuaweiBfd_Bfd_AllSessions_AllSession implements the yang.GoStruct
@@ -4973,38 +5359,37 @@ func (*HuaweiBfd_Bfd_Sessions_Session_Running) ΛBelongingModule() string {
 
 // HuaweiBfd_Bfd_Statistics represents the /huawei-bfd/bfd/statistics YANG schema element.
 type HuaweiBfd_Bfd_Statistics struct {
-	AutoSessionNum           *uint32                `path:"auto-session-num" module:"huawei-bfd"`
-	BgpTunnelSessionNum      *uint32                `path:"bgp-tunnel-session-num" module:"huawei-bfd"`
-	CurrentCrcSessionNum     *uint32                `path:"current-crc-session-num" module:"huawei-bfd"`
-	DynSessionNum            *uint32                `path:"dyn-session-num" module:"huawei-bfd"`
-	FlexAlgoTunnelSessionNum *uint32                `path:"flex-algo-tunnel-session-num" module:"huawei-bfd"`
-	InnerState               E_HuaweiBfd_InnerState `path:"inner-state" module:"huawei-bfd"`
-	IpSessionNum             *uint32                `path:"ip-session-num" module:"huawei-bfd"`
-	LdpLspSessionNum         *uint32                `path:"ldp-lsp-session-num" module:"huawei-bfd"`
-	LdpTunnelSessionNum      *uint32                `path:"ldp-tunnel-session-num" module:"huawei-bfd"`
-	MainSessionDownNum       *uint32                `path:"main-session-down-num" module:"huawei-bfd"`
-	MainSessionUpNum         *uint32                `path:"main-session-up-num" module:"huawei-bfd"`
-	MaxBfdResNum             *uint32                `path:"max-bfd-res-num" module:"huawei-bfd"`
-	MaxCrcSessionNum         *uint32                `path:"max-crc-session-num" module:"huawei-bfd"`
-	P2MpSessionNum           *uint32                `path:"p2mp-session-num" module:"huawei-bfd"`
-	PassiveSessionNum        *uint32                `path:"passive-session-num" module:"huawei-bfd"`
-	PwSessionNum             *uint32                `path:"pw-session-num" module:"huawei-bfd"`
-	SbfdRefSessionNum        *uint32                `path:"sbfd-ref-session-num" module:"huawei-bfd"`
-	SessionDownNum           *uint32                `path:"session-down-num" module:"huawei-bfd"`
-	SessionUpNum             *uint32                `path:"session-up-num" module:"huawei-bfd"`
-	SidListSessionNum        *uint32                `path:"sid-list-session-num" module:"huawei-bfd"`
-	SrbeTunnelSessionNum     *uint32                `path:"srbe-tunnel-session-num" module:"huawei-bfd"`
-	StaticLspSessionNum      *uint32                `path:"static-lsp-session-num" module:"huawei-bfd"`
-	StaticSessionNum         *uint32                `path:"static-session-num" module:"huawei-bfd"`
-	SubSessionDownNum        *uint32                `path:"sub-session-down-num" module:"huawei-bfd"`
-	SubSessionUpNum          *uint32                `path:"sub-session-up-num" module:"huawei-bfd"`
-	TeLspSessionNum          *uint32                `path:"te-lsp-session-num" module:"huawei-bfd"`
-	TeTunnelSessionNum       *uint32                `path:"te-tunnel-session-num" module:"huawei-bfd"`
-	TotalSessionNum          *uint32                `path:"total-session-num" module:"huawei-bfd"`
-	UsedBfdResNum            *uint32                `path:"used-bfd-res-num" module:"huawei-bfd"`
-	UsedDiscriminatorNum     *uint32                `path:"used-discriminator-num" module:"huawei-bfd"`
-	VsiPwSessionNum          *uint32                `path:"vsi-pw-session-num" module:"huawei-bfd"`
-	VxlanSessionNum          *uint32                `path:"vxlan-session-num" module:"huawei-bfd"`
+	AutoSessionNum       *uint32                `path:"auto-session-num" module:"huawei-bfd"`
+	BgpTunnelSessionNum  *uint32                `path:"bgp-tunnel-session-num" module:"huawei-bfd"`
+	CurrentCrcSessionNum *uint32                `path:"current-crc-session-num" module:"huawei-bfd"`
+	DynSessionNum        *uint32                `path:"dyn-session-num" module:"huawei-bfd"`
+	InnerState           E_HuaweiBfd_InnerState `path:"inner-state" module:"huawei-bfd"`
+	IpSessionNum         *uint32                `path:"ip-session-num" module:"huawei-bfd"`
+	LdpLspSessionNum     *uint32                `path:"ldp-lsp-session-num" module:"huawei-bfd"`
+	LdpTunnelSessionNum  *uint32                `path:"ldp-tunnel-session-num" module:"huawei-bfd"`
+	MainSessionDownNum   *uint32                `path:"main-session-down-num" module:"huawei-bfd"`
+	MainSessionUpNum     *uint32                `path:"main-session-up-num" module:"huawei-bfd"`
+	MaxBfdResNum         *uint32                `path:"max-bfd-res-num" module:"huawei-bfd"`
+	MaxCrcSessionNum     *uint32                `path:"max-crc-session-num" module:"huawei-bfd"`
+	P2MpSessionNum       *uint32                `path:"p2mp-session-num" module:"huawei-bfd"`
+	PassiveSessionNum    *uint32                `path:"passive-session-num" module:"huawei-bfd"`
+	PwSessionNum         *uint32                `path:"pw-session-num" module:"huawei-bfd"`
+	SbfdRefSessionNum    *uint32                `path:"sbfd-ref-session-num" module:"huawei-bfd"`
+	SessionDownNum       *uint32                `path:"session-down-num" module:"huawei-bfd"`
+	SessionUpNum         *uint32                `path:"session-up-num" module:"huawei-bfd"`
+	SidListSessionNum    *uint32                `path:"sid-list-session-num" module:"huawei-bfd"`
+	SrbeTunnelSessionNum *uint32                `path:"srbe-tunnel-session-num" module:"huawei-bfd"`
+	StaticLspSessionNum  *uint32                `path:"static-lsp-session-num" module:"huawei-bfd"`
+	StaticSessionNum     *uint32                `path:"static-session-num" module:"huawei-bfd"`
+	SubSessionDownNum    *uint32                `path:"sub-session-down-num" module:"huawei-bfd"`
+	SubSessionUpNum      *uint32                `path:"sub-session-up-num" module:"huawei-bfd"`
+	TeLspSessionNum      *uint32                `path:"te-lsp-session-num" module:"huawei-bfd"`
+	TeTunnelSessionNum   *uint32                `path:"te-tunnel-session-num" module:"huawei-bfd"`
+	TotalSessionNum      *uint32                `path:"total-session-num" module:"huawei-bfd"`
+	UsedBfdResNum        *uint32                `path:"used-bfd-res-num" module:"huawei-bfd"`
+	UsedDiscriminatorNum *uint32                `path:"used-discriminator-num" module:"huawei-bfd"`
+	VsiPwSessionNum      *uint32                `path:"vsi-pw-session-num" module:"huawei-bfd"`
+	VxlanSessionNum      *uint32                `path:"vxlan-session-num" module:"huawei-bfd"`
 }
 
 // IsYANGGoStruct ensures that HuaweiBfd_Bfd_Statistics implements the yang.GoStruct
@@ -5037,10 +5422,9 @@ func (*HuaweiBfd_Bfd_Statistics) ΛBelongingModule() string {
 
 // HuaweiBgp_Bgp represents the /huawei-bgp/bgp YANG schema element.
 type HuaweiBgp_Bgp struct {
-	BaseProcess      *HuaweiBgp_Bgp_BaseProcess      `path:"base-process" module:"huawei-bgp"`
-	Global           *HuaweiBgp_Bgp_Global           `path:"global" module:"huawei-bgp"`
-	InstanceProcesss *HuaweiBgp_Bgp_InstanceProcesss `path:"instance-processs" module:"huawei-bgp"`
-	PafControls      *HuaweiBgp_Bgp_PafControls      `path:"paf-controls" module:"huawei-bgp"`
+	BaseProcess *HuaweiBgp_Bgp_BaseProcess `path:"base-process" module:"huawei-bgp"`
+	Global      *HuaweiBgp_Bgp_Global      `path:"global" module:"huawei-bgp"`
+	PafControls *HuaweiBgp_Bgp_PafControls `path:"paf-controls" module:"huawei-bgp"`
 }
 
 // IsYANGGoStruct ensures that HuaweiBgp_Bgp implements the yang.GoStruct
@@ -5077,7 +5461,6 @@ type HuaweiBgp_Bgp_BaseProcess struct {
 	AsPathLimit               *uint16                                          `path:"as-path-limit" module:"huawei-bgp"`
 	CheckFirstAs              *bool                                            `path:"check-first-as" module:"huawei-bgp"`
 	Confederation             *HuaweiBgp_Bgp_BaseProcess_Confederation         `path:"confederation" module:"huawei-bgp"`
-	DefaultParameter          *HuaweiBgp_Bgp_BaseProcess_DefaultParameter      `path:"default-parameter" module:"huawei-bgp"`
 	DelayTime                 *uint32                                          `path:"delay-time" module:"huawei-bgp"`
 	DynamicSessionLimit       *uint32                                          `path:"dynamic-session-limit" module:"huawei-bgp"`
 	Enable                    *bool                                            `path:"enable" module:"huawei-bgp"`
@@ -5162,44 +5545,6 @@ func (*HuaweiBgp_Bgp_BaseProcess_Confederation) ΛBelongingModule() string {
 	return "huawei-bgp"
 }
 
-// HuaweiBgp_Bgp_BaseProcess_DefaultParameter represents the /huawei-bgp/bgp/base-process/default-parameter YANG schema element.
-type HuaweiBgp_Bgp_BaseProcess_DefaultParameter struct {
-	ConnectRetryTime *uint16 `path:"connect-retry-time" module:"huawei-bgp"`
-	HoldTime         *uint32 `path:"hold-time" module:"huawei-bgp"`
-	KeepaliveTime    *uint32 `path:"keepalive-time" module:"huawei-bgp"`
-	Version          *uint8  `path:"version" module:"huawei-bgp"`
-}
-
-// IsYANGGoStruct ensures that HuaweiBgp_Bgp_BaseProcess_DefaultParameter implements the yang.GoStruct
-// interface. This allows functions that need to handle this struct to
-// identify it as being generated by ygen.
-func (*HuaweiBgp_Bgp_BaseProcess_DefaultParameter) IsYANGGoStruct() {}
-
-// Validate validates s against the YANG schema corresponding to its type.
-func (t *HuaweiBgp_Bgp_BaseProcess_DefaultParameter) ΛValidate(opts ...ygot.ValidationOption) error {
-	if err := ytypes.Validate(SchemaTree["HuaweiBgp_Bgp_BaseProcess_DefaultParameter"], t, opts...); err != nil {
-		return err
-	}
-	return nil
-}
-
-// Validate validates s against the YANG schema corresponding to its type.
-func (t *HuaweiBgp_Bgp_BaseProcess_DefaultParameter) Validate(opts ...ygot.ValidationOption) error {
-	return t.ΛValidate(opts...)
-}
-
-// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
-// that are included in the generated code.
-func (t *HuaweiBgp_Bgp_BaseProcess_DefaultParameter) ΛEnumTypeMap() map[string][]reflect.Type {
-	return ΛEnumTypes
-}
-
-// ΛBelongingModule returns the name of the module that defines the namespace
-// of HuaweiBgp_Bgp_BaseProcess_DefaultParameter.
-func (*HuaweiBgp_Bgp_BaseProcess_DefaultParameter) ΛBelongingModule() string {
-	return "huawei-bgp"
-}
-
 // HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo represents the /huawei-bgp/bgp/base-process/error-discard-info YANG schema element.
 type HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo struct {
 	AdvertiseAsOverLimitCount *uint32                                         `path:"advertise-as-over-limit-count" module:"huawei-bgp"`
@@ -5241,813 +5586,5 @@ func (t *HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo) ΛEnumTypeMap() map[string]
 // ΛBelongingModule returns the name of the module that defines the namespace
 // of HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo.
 func (*HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo) ΛBelongingModule() string {
-	return "huawei-bgp"
-}
-
-// HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs represents the /huawei-bgp/bgp/base-process/error-discard-info/afs YANG schema element.
-type HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs struct {
-	Af map[E_HuaweiBgp_AfType]*HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af `path:"af" module:"huawei-bgp"`
-}
-
-// IsYANGGoStruct ensures that HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs implements the yang.GoStruct
-// interface. This allows functions that need to handle this struct to
-// identify it as being generated by ygen.
-func (*HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs) IsYANGGoStruct() {}
-
-// NewAf creates a new entry in the Af list of the
-// HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs struct. The keys of the list are populated from the input
-// arguments.
-func (t *HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs) NewAf(AddressFamily E_HuaweiBgp_AfType) (*HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af, error) {
-
-	// Initialise the list within the receiver struct if it has not already been
-	// created.
-	if t.Af == nil {
-		t.Af = make(map[E_HuaweiBgp_AfType]*HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af)
-	}
-
-	key := AddressFamily
-
-	// Ensure that this key has not already been used in the
-	// list. Keyed YANG lists do not allow duplicate keys to
-	// be created.
-	if _, ok := t.Af[key]; ok {
-		return nil, fmt.Errorf("duplicate key %v for list Af", key)
-	}
-
-	t.Af[key] = &HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af{
-		AddressFamily: AddressFamily,
-	}
-
-	return t.Af[key], nil
-}
-
-// Validate validates s against the YANG schema corresponding to its type.
-func (t *HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs) ΛValidate(opts ...ygot.ValidationOption) error {
-	if err := ytypes.Validate(SchemaTree["HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs"], t, opts...); err != nil {
-		return err
-	}
-	return nil
-}
-
-// Validate validates s against the YANG schema corresponding to its type.
-func (t *HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs) Validate(opts ...ygot.ValidationOption) error {
-	return t.ΛValidate(opts...)
-}
-
-// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
-// that are included in the generated code.
-func (t *HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs) ΛEnumTypeMap() map[string][]reflect.Type {
-	return ΛEnumTypes
-}
-
-// ΛBelongingModule returns the name of the module that defines the namespace
-// of HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs.
-func (*HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs) ΛBelongingModule() string {
-	return "huawei-bgp"
-}
-
-// HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af represents the /huawei-bgp/bgp/base-process/error-discard-info/afs/af YANG schema element.
-type HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af struct {
-	AddressFamily             E_HuaweiBgp_AfType                                       `path:"address-family" module:"huawei-bgp"`
-	AdvertiseAsOverLimitCount *uint32                                                  `path:"advertise-as-over-limit-count" module:"huawei-bgp"`
-	AsLoopCount               *uint32                                                  `path:"as-loop-count" module:"huawei-bgp"`
-	ClusterIdLoopCount        *uint32                                                  `path:"cluster-id-loop-count" module:"huawei-bgp"`
-	OriginatorIdLoopCount     *uint32                                                  `path:"originator-id-loop-count" module:"huawei-bgp"`
-	PathAttributeErrorCount   *uint32                                                  `path:"path-attribute-error-count" module:"huawei-bgp"`
-	PeerRecordCount           *uint32                                                  `path:"peer-record-count" module:"huawei-bgp"`
-	Peers                     *HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af_Peers `path:"peers" module:"huawei-bgp"`
-	ReceiveAsOverLimitCount   *uint32                                                  `path:"receive-as-over-limit-count" module:"huawei-bgp"`
-	ZeroRdCount               *uint32                                                  `path:"zero-rd-count" module:"huawei-bgp"`
-}
-
-// IsYANGGoStruct ensures that HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af implements the yang.GoStruct
-// interface. This allows functions that need to handle this struct to
-// identify it as being generated by ygen.
-func (*HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af) IsYANGGoStruct() {}
-
-// ΛListKeyMap returns the keys of the HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af struct, which is a YANG list entry.
-func (t *HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af) ΛListKeyMap() (map[string]interface{}, error) {
-
-	return map[string]interface{}{
-		"address-family": t.AddressFamily,
-	}, nil
-}
-
-// Validate validates s against the YANG schema corresponding to its type.
-func (t *HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af) ΛValidate(opts ...ygot.ValidationOption) error {
-	if err := ytypes.Validate(SchemaTree["HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af"], t, opts...); err != nil {
-		return err
-	}
-	return nil
-}
-
-// Validate validates s against the YANG schema corresponding to its type.
-func (t *HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af) Validate(opts ...ygot.ValidationOption) error {
-	return t.ΛValidate(opts...)
-}
-
-// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
-// that are included in the generated code.
-func (t *HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af) ΛEnumTypeMap() map[string][]reflect.Type {
-	return ΛEnumTypes
-}
-
-// ΛBelongingModule returns the name of the module that defines the namespace
-// of HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af.
-func (*HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af) ΛBelongingModule() string {
-	return "huawei-bgp"
-}
-
-// HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af_Peers represents the /huawei-bgp/bgp/base-process/error-discard-info/afs/af/peers YANG schema element.
-type HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af_Peers struct {
-	Peer map[HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af_Peers_Peer_Key]*HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af_Peers_Peer `path:"peer" module:"huawei-bgp"`
-}
-
-// IsYANGGoStruct ensures that HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af_Peers implements the yang.GoStruct
-// interface. This allows functions that need to handle this struct to
-// identify it as being generated by ygen.
-func (*HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af_Peers) IsYANGGoStruct() {}
-
-// HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af_Peers_Peer_Key represents the key for list Peer of element /huawei-bgp/bgp/base-process/error-discard-info/afs/af/peers.
-type HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af_Peers_Peer_Key struct {
-	VpnName string `path:"vpn-name"`
-	Address string `path:"address"`
-}
-
-// IsYANGGoKeyStruct ensures that HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af_Peers_Peer_Key partially implements the
-// yang.GoKeyStruct interface. This allows functions that need to
-// handle this key struct to identify it as being generated by gogen.
-func (HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af_Peers_Peer_Key) IsYANGGoKeyStruct() {}
-
-// ΛListKeyMap returns the values of the HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af_Peers_Peer_Key key struct.
-func (t HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af_Peers_Peer_Key) ΛListKeyMap() (map[string]interface{}, error) {
-	return map[string]interface{}{
-		"vpn-name": t.VpnName,
-		"address":  t.Address,
-	}, nil
-}
-
-// NewPeer creates a new entry in the Peer list of the
-// HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af_Peers struct. The keys of the list are populated from the input
-// arguments.
-func (t *HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af_Peers) NewPeer(VpnName string, Address string) (*HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af_Peers_Peer, error) {
-
-	// Initialise the list within the receiver struct if it has not already been
-	// created.
-	if t.Peer == nil {
-		t.Peer = make(map[HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af_Peers_Peer_Key]*HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af_Peers_Peer)
-	}
-
-	key := HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af_Peers_Peer_Key{
-		VpnName: VpnName,
-		Address: Address,
-	}
-
-	// Ensure that this key has not already been used in the
-	// list. Keyed YANG lists do not allow duplicate keys to
-	// be created.
-	if _, ok := t.Peer[key]; ok {
-		return nil, fmt.Errorf("duplicate key %v for list Peer", key)
-	}
-
-	t.Peer[key] = &HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af_Peers_Peer{
-		VpnName: &VpnName,
-		Address: &Address,
-	}
-
-	return t.Peer[key], nil
-}
-
-// Validate validates s against the YANG schema corresponding to its type.
-func (t *HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af_Peers) ΛValidate(opts ...ygot.ValidationOption) error {
-	if err := ytypes.Validate(SchemaTree["HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af_Peers"], t, opts...); err != nil {
-		return err
-	}
-	return nil
-}
-
-// Validate validates s against the YANG schema corresponding to its type.
-func (t *HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af_Peers) Validate(opts ...ygot.ValidationOption) error {
-	return t.ΛValidate(opts...)
-}
-
-// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
-// that are included in the generated code.
-func (t *HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af_Peers) ΛEnumTypeMap() map[string][]reflect.Type {
-	return ΛEnumTypes
-}
-
-// ΛBelongingModule returns the name of the module that defines the namespace
-// of HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af_Peers.
-func (*HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af_Peers) ΛBelongingModule() string {
-	return "huawei-bgp"
-}
-
-// HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af_Peers_Peer represents the /huawei-bgp/bgp/base-process/error-discard-info/afs/af/peers/peer YANG schema element.
-type HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af_Peers_Peer struct {
-	Address    *string `path:"address" module:"huawei-bgp"`
-	ErrorData  *string `path:"error-data" module:"huawei-bgp"`
-	Reason     *string `path:"reason" module:"huawei-bgp"`
-	RecordTime *string `path:"record-time" module:"huawei-bgp"`
-	VpnId      *uint32 `path:"vpn-id" module:"huawei-bgp"`
-	VpnName    *string `path:"vpn-name" module:"huawei-bgp"`
-}
-
-// IsYANGGoStruct ensures that HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af_Peers_Peer implements the yang.GoStruct
-// interface. This allows functions that need to handle this struct to
-// identify it as being generated by ygen.
-func (*HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af_Peers_Peer) IsYANGGoStruct() {}
-
-// ΛListKeyMap returns the keys of the HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af_Peers_Peer struct, which is a YANG list entry.
-func (t *HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af_Peers_Peer) ΛListKeyMap() (map[string]interface{}, error) {
-	if t.Address == nil {
-		return nil, fmt.Errorf("nil value for key Address")
-	}
-
-	if t.VpnName == nil {
-		return nil, fmt.Errorf("nil value for key VpnName")
-	}
-
-	return map[string]interface{}{
-		"address":  *t.Address,
-		"vpn-name": *t.VpnName,
-	}, nil
-}
-
-// Validate validates s against the YANG schema corresponding to its type.
-func (t *HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af_Peers_Peer) ΛValidate(opts ...ygot.ValidationOption) error {
-	if err := ytypes.Validate(SchemaTree["HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af_Peers_Peer"], t, opts...); err != nil {
-		return err
-	}
-	return nil
-}
-
-// Validate validates s against the YANG schema corresponding to its type.
-func (t *HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af_Peers_Peer) Validate(opts ...ygot.ValidationOption) error {
-	return t.ΛValidate(opts...)
-}
-
-// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
-// that are included in the generated code.
-func (t *HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af_Peers_Peer) ΛEnumTypeMap() map[string][]reflect.Type {
-	return ΛEnumTypes
-}
-
-// ΛBelongingModule returns the name of the module that defines the namespace
-// of HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af_Peers_Peer.
-func (*HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af_Peers_Peer) ΛBelongingModule() string {
-	return "huawei-bgp"
-}
-
-// HuaweiBgp_Bgp_BaseProcess_GracefulRestart represents the /huawei-bgp/bgp/base-process/graceful-restart YANG schema element.
-type HuaweiBgp_Bgp_BaseProcess_GracefulRestart struct {
-	Enable         *bool   `path:"enable" module:"huawei-bgp"`
-	PeerReset      *bool   `path:"peer-reset" module:"huawei-bgp"`
-	RestartTime    *uint16 `path:"restart-time" module:"huawei-bgp"`
-	TimeWaitForRib *uint32 `path:"time-wait-for-rib" module:"huawei-bgp"`
-}
-
-// IsYANGGoStruct ensures that HuaweiBgp_Bgp_BaseProcess_GracefulRestart implements the yang.GoStruct
-// interface. This allows functions that need to handle this struct to
-// identify it as being generated by ygen.
-func (*HuaweiBgp_Bgp_BaseProcess_GracefulRestart) IsYANGGoStruct() {}
-
-// Validate validates s against the YANG schema corresponding to its type.
-func (t *HuaweiBgp_Bgp_BaseProcess_GracefulRestart) ΛValidate(opts ...ygot.ValidationOption) error {
-	if err := ytypes.Validate(SchemaTree["HuaweiBgp_Bgp_BaseProcess_GracefulRestart"], t, opts...); err != nil {
-		return err
-	}
-	return nil
-}
-
-// Validate validates s against the YANG schema corresponding to its type.
-func (t *HuaweiBgp_Bgp_BaseProcess_GracefulRestart) Validate(opts ...ygot.ValidationOption) error {
-	return t.ΛValidate(opts...)
-}
-
-// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
-// that are included in the generated code.
-func (t *HuaweiBgp_Bgp_BaseProcess_GracefulRestart) ΛEnumTypeMap() map[string][]reflect.Type {
-	return ΛEnumTypes
-}
-
-// ΛBelongingModule returns the name of the module that defines the namespace
-// of HuaweiBgp_Bgp_BaseProcess_GracefulRestart.
-func (*HuaweiBgp_Bgp_BaseProcess_GracefulRestart) ΛBelongingModule() string {
-	return "huawei-bgp"
-}
-
-// HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus represents the /huawei-bgp/bgp/base-process/graceful-restart-status YANG schema element.
-type HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus struct {
-	Enable       *bool                                                  `path:"enable" module:"huawei-bgp"`
-	EorTimer     *uint32                                                `path:"eor-timer" module:"huawei-bgp"`
-	Peers        *HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus_Peers `path:"peers" module:"huawei-bgp"`
-	RestartTimer *uint32                                                `path:"restart-timer" module:"huawei-bgp"`
-}
-
-// IsYANGGoStruct ensures that HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus implements the yang.GoStruct
-// interface. This allows functions that need to handle this struct to
-// identify it as being generated by ygen.
-func (*HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus) IsYANGGoStruct() {}
-
-// Validate validates s against the YANG schema corresponding to its type.
-func (t *HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus) ΛValidate(opts ...ygot.ValidationOption) error {
-	if err := ytypes.Validate(SchemaTree["HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus"], t, opts...); err != nil {
-		return err
-	}
-	return nil
-}
-
-// Validate validates s against the YANG schema corresponding to its type.
-func (t *HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus) Validate(opts ...ygot.ValidationOption) error {
-	return t.ΛValidate(opts...)
-}
-
-// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
-// that are included in the generated code.
-func (t *HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus) ΛEnumTypeMap() map[string][]reflect.Type {
-	return ΛEnumTypes
-}
-
-// ΛBelongingModule returns the name of the module that defines the namespace
-// of HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus.
-func (*HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus) ΛBelongingModule() string {
-	return "huawei-bgp"
-}
-
-// HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus_Peers represents the /huawei-bgp/bgp/base-process/graceful-restart-status/peers YANG schema element.
-type HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus_Peers struct {
-	Peer map[HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus_Peers_Peer_Key]*HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus_Peers_Peer `path:"peer" module:"huawei-bgp"`
-}
-
-// IsYANGGoStruct ensures that HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus_Peers implements the yang.GoStruct
-// interface. This allows functions that need to handle this struct to
-// identify it as being generated by ygen.
-func (*HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus_Peers) IsYANGGoStruct() {}
-
-// HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus_Peers_Peer_Key represents the key for list Peer of element /huawei-bgp/bgp/base-process/graceful-restart-status/peers.
-type HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus_Peers_Peer_Key struct {
-	VpnName string `path:"vpn-name"`
-	Af      string `path:"af"`
-	Address string `path:"address"`
-}
-
-// IsYANGGoKeyStruct ensures that HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus_Peers_Peer_Key partially implements the
-// yang.GoKeyStruct interface. This allows functions that need to
-// handle this key struct to identify it as being generated by gogen.
-func (HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus_Peers_Peer_Key) IsYANGGoKeyStruct() {}
-
-// ΛListKeyMap returns the values of the HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus_Peers_Peer_Key key struct.
-func (t HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus_Peers_Peer_Key) ΛListKeyMap() (map[string]interface{}, error) {
-	return map[string]interface{}{
-		"vpn-name": t.VpnName,
-		"af":       t.Af,
-		"address":  t.Address,
-	}, nil
-}
-
-// NewPeer creates a new entry in the Peer list of the
-// HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus_Peers struct. The keys of the list are populated from the input
-// arguments.
-func (t *HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus_Peers) NewPeer(VpnName string, Af string, Address string) (*HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus_Peers_Peer, error) {
-
-	// Initialise the list within the receiver struct if it has not already been
-	// created.
-	if t.Peer == nil {
-		t.Peer = make(map[HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus_Peers_Peer_Key]*HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus_Peers_Peer)
-	}
-
-	key := HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus_Peers_Peer_Key{
-		VpnName: VpnName,
-		Af:      Af,
-		Address: Address,
-	}
-
-	// Ensure that this key has not already been used in the
-	// list. Keyed YANG lists do not allow duplicate keys to
-	// be created.
-	if _, ok := t.Peer[key]; ok {
-		return nil, fmt.Errorf("duplicate key %v for list Peer", key)
-	}
-
-	t.Peer[key] = &HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus_Peers_Peer{
-		VpnName: &VpnName,
-		Af:      &Af,
-		Address: &Address,
-	}
-
-	return t.Peer[key], nil
-}
-
-// Validate validates s against the YANG schema corresponding to its type.
-func (t *HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus_Peers) ΛValidate(opts ...ygot.ValidationOption) error {
-	if err := ytypes.Validate(SchemaTree["HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus_Peers"], t, opts...); err != nil {
-		return err
-	}
-	return nil
-}
-
-// Validate validates s against the YANG schema corresponding to its type.
-func (t *HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus_Peers) Validate(opts ...ygot.ValidationOption) error {
-	return t.ΛValidate(opts...)
-}
-
-// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
-// that are included in the generated code.
-func (t *HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus_Peers) ΛEnumTypeMap() map[string][]reflect.Type {
-	return ΛEnumTypes
-}
-
-// ΛBelongingModule returns the name of the module that defines the namespace
-// of HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus_Peers.
-func (*HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus_Peers) ΛBelongingModule() string {
-	return "huawei-bgp"
-}
-
-// HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus_Peers_Peer represents the /huawei-bgp/bgp/base-process/graceful-restart-status/peers/peer YANG schema element.
-type HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus_Peers_Peer struct {
-	Address            *string                   `path:"address" module:"huawei-bgp"`
-	Af                 *string                   `path:"af" module:"huawei-bgp"`
-	BgpPeerState       E_HuaweiBgp_PeerStateType `path:"bgp-peer-state" module:"huawei-bgp"`
-	EorSent            *bool                     `path:"eor-sent" module:"huawei-bgp"`
-	GrCapabilityEnable *bool                     `path:"gr-capability-enable" module:"huawei-bgp"`
-	GrState            *bool                     `path:"gr-state" module:"huawei-bgp"`
-	PeerCapability     *string                   `path:"peer-capability" module:"huawei-bgp"`
-	RestartLeftTimer   *uint32                   `path:"restart-left-timer" module:"huawei-bgp"`
-	StaleRouteNum      *uint32                   `path:"stale-route-num" module:"huawei-bgp"`
-	VpnName            *string                   `path:"vpn-name" module:"huawei-bgp"`
-}
-
-// IsYANGGoStruct ensures that HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus_Peers_Peer implements the yang.GoStruct
-// interface. This allows functions that need to handle this struct to
-// identify it as being generated by ygen.
-func (*HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus_Peers_Peer) IsYANGGoStruct() {}
-
-// ΛListKeyMap returns the keys of the HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus_Peers_Peer struct, which is a YANG list entry.
-func (t *HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus_Peers_Peer) ΛListKeyMap() (map[string]interface{}, error) {
-	if t.Address == nil {
-		return nil, fmt.Errorf("nil value for key Address")
-	}
-
-	if t.Af == nil {
-		return nil, fmt.Errorf("nil value for key Af")
-	}
-
-	if t.VpnName == nil {
-		return nil, fmt.Errorf("nil value for key VpnName")
-	}
-
-	return map[string]interface{}{
-		"address":  *t.Address,
-		"af":       *t.Af,
-		"vpn-name": *t.VpnName,
-	}, nil
-}
-
-// Validate validates s against the YANG schema corresponding to its type.
-func (t *HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus_Peers_Peer) ΛValidate(opts ...ygot.ValidationOption) error {
-	if err := ytypes.Validate(SchemaTree["HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus_Peers_Peer"], t, opts...); err != nil {
-		return err
-	}
-	return nil
-}
-
-// Validate validates s against the YANG schema corresponding to its type.
-func (t *HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus_Peers_Peer) Validate(opts ...ygot.ValidationOption) error {
-	return t.ΛValidate(opts...)
-}
-
-// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
-// that are included in the generated code.
-func (t *HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus_Peers_Peer) ΛEnumTypeMap() map[string][]reflect.Type {
-	return ΛEnumTypes
-}
-
-// ΛBelongingModule returns the name of the module that defines the namespace
-// of HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus_Peers_Peer.
-func (*HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus_Peers_Peer) ΛBelongingModule() string {
-	return "huawei-bgp"
-}
-
-// HuaweiBgp_Bgp_BaseProcess_ReferencePeriod represents the /huawei-bgp/bgp/base-process/reference-period YANG schema element.
-type HuaweiBgp_Bgp_BaseProcess_ReferencePeriod struct {
-	ClearInterval    *uint32 `path:"clear-interval" module:"huawei-bgp"`
-	HoldInterval     *uint32 `path:"hold-interval" module:"huawei-bgp"`
-	SuppressInterval *uint32 `path:"suppress-interval" module:"huawei-bgp"`
-}
-
-// IsYANGGoStruct ensures that HuaweiBgp_Bgp_BaseProcess_ReferencePeriod implements the yang.GoStruct
-// interface. This allows functions that need to handle this struct to
-// identify it as being generated by ygen.
-func (*HuaweiBgp_Bgp_BaseProcess_ReferencePeriod) IsYANGGoStruct() {}
-
-// Validate validates s against the YANG schema corresponding to its type.
-func (t *HuaweiBgp_Bgp_BaseProcess_ReferencePeriod) ΛValidate(opts ...ygot.ValidationOption) error {
-	if err := ytypes.Validate(SchemaTree["HuaweiBgp_Bgp_BaseProcess_ReferencePeriod"], t, opts...); err != nil {
-		return err
-	}
-	return nil
-}
-
-// Validate validates s against the YANG schema corresponding to its type.
-func (t *HuaweiBgp_Bgp_BaseProcess_ReferencePeriod) Validate(opts ...ygot.ValidationOption) error {
-	return t.ΛValidate(opts...)
-}
-
-// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
-// that are included in the generated code.
-func (t *HuaweiBgp_Bgp_BaseProcess_ReferencePeriod) ΛEnumTypeMap() map[string][]reflect.Type {
-	return ΛEnumTypes
-}
-
-// ΛBelongingModule returns the name of the module that defines the namespace
-// of HuaweiBgp_Bgp_BaseProcess_ReferencePeriod.
-func (*HuaweiBgp_Bgp_BaseProcess_ReferencePeriod) ΛBelongingModule() string {
-	return "huawei-bgp"
-}
-
-// HuaweiBgp_Bgp_BaseProcess_RemotePrefixSidStates represents the /huawei-bgp/bgp/base-process/remote-prefix-sid-states YANG schema element.
-type HuaweiBgp_Bgp_BaseProcess_RemotePrefixSidStates struct {
-	RemotePrefixSidState map[string]*HuaweiBgp_Bgp_BaseProcess_RemotePrefixSidStates_RemotePrefixSidState `path:"remote-prefix-sid-state" module:"huawei-bgp"`
-}
-
-// IsYANGGoStruct ensures that HuaweiBgp_Bgp_BaseProcess_RemotePrefixSidStates implements the yang.GoStruct
-// interface. This allows functions that need to handle this struct to
-// identify it as being generated by ygen.
-func (*HuaweiBgp_Bgp_BaseProcess_RemotePrefixSidStates) IsYANGGoStruct() {}
-
-// NewRemotePrefixSidState creates a new entry in the RemotePrefixSidState list of the
-// HuaweiBgp_Bgp_BaseProcess_RemotePrefixSidStates struct. The keys of the list are populated from the input
-// arguments.
-func (t *HuaweiBgp_Bgp_BaseProcess_RemotePrefixSidStates) NewRemotePrefixSidState(PrefixSid string) (*HuaweiBgp_Bgp_BaseProcess_RemotePrefixSidStates_RemotePrefixSidState, error) {
-
-	// Initialise the list within the receiver struct if it has not already been
-	// created.
-	if t.RemotePrefixSidState == nil {
-		t.RemotePrefixSidState = make(map[string]*HuaweiBgp_Bgp_BaseProcess_RemotePrefixSidStates_RemotePrefixSidState)
-	}
-
-	key := PrefixSid
-
-	// Ensure that this key has not already been used in the
-	// list. Keyed YANG lists do not allow duplicate keys to
-	// be created.
-	if _, ok := t.RemotePrefixSidState[key]; ok {
-		return nil, fmt.Errorf("duplicate key %v for list RemotePrefixSidState", key)
-	}
-
-	t.RemotePrefixSidState[key] = &HuaweiBgp_Bgp_BaseProcess_RemotePrefixSidStates_RemotePrefixSidState{
-		PrefixSid: &PrefixSid,
-	}
-
-	return t.RemotePrefixSidState[key], nil
-}
-
-// Validate validates s against the YANG schema corresponding to its type.
-func (t *HuaweiBgp_Bgp_BaseProcess_RemotePrefixSidStates) ΛValidate(opts ...ygot.ValidationOption) error {
-	if err := ytypes.Validate(SchemaTree["HuaweiBgp_Bgp_BaseProcess_RemotePrefixSidStates"], t, opts...); err != nil {
-		return err
-	}
-	return nil
-}
-
-// Validate validates s against the YANG schema corresponding to its type.
-func (t *HuaweiBgp_Bgp_BaseProcess_RemotePrefixSidStates) Validate(opts ...ygot.ValidationOption) error {
-	return t.ΛValidate(opts...)
-}
-
-// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
-// that are included in the generated code.
-func (t *HuaweiBgp_Bgp_BaseProcess_RemotePrefixSidStates) ΛEnumTypeMap() map[string][]reflect.Type {
-	return ΛEnumTypes
-}
-
-// ΛBelongingModule returns the name of the module that defines the namespace
-// of HuaweiBgp_Bgp_BaseProcess_RemotePrefixSidStates.
-func (*HuaweiBgp_Bgp_BaseProcess_RemotePrefixSidStates) ΛBelongingModule() string {
-	return "huawei-bgp"
-}
-
-// HuaweiBgp_Bgp_BaseProcess_RemotePrefixSidStates_RemotePrefixSidState represents the /huawei-bgp/bgp/base-process/remote-prefix-sid-states/remote-prefix-sid-state YANG schema element.
-type HuaweiBgp_Bgp_BaseProcess_RemotePrefixSidStates_RemotePrefixSidState struct {
-	LocatorMaskLength *uint8  `path:"locator-mask-length" module:"huawei-bgp"`
-	LocatorSid        *string `path:"locator-sid" module:"huawei-bgp"`
-	PrefixSid         *string `path:"prefix-sid" module:"huawei-bgp"`
-	VpnName           *string `path:"vpn-name" module:"huawei-bgp"`
-}
-
-// IsYANGGoStruct ensures that HuaweiBgp_Bgp_BaseProcess_RemotePrefixSidStates_RemotePrefixSidState implements the yang.GoStruct
-// interface. This allows functions that need to handle this struct to
-// identify it as being generated by ygen.
-func (*HuaweiBgp_Bgp_BaseProcess_RemotePrefixSidStates_RemotePrefixSidState) IsYANGGoStruct() {}
-
-// ΛListKeyMap returns the keys of the HuaweiBgp_Bgp_BaseProcess_RemotePrefixSidStates_RemotePrefixSidState struct, which is a YANG list entry.
-func (t *HuaweiBgp_Bgp_BaseProcess_RemotePrefixSidStates_RemotePrefixSidState) ΛListKeyMap() (map[string]interface{}, error) {
-	if t.PrefixSid == nil {
-		return nil, fmt.Errorf("nil value for key PrefixSid")
-	}
-
-	return map[string]interface{}{
-		"prefix-sid": *t.PrefixSid,
-	}, nil
-}
-
-// Validate validates s against the YANG schema corresponding to its type.
-func (t *HuaweiBgp_Bgp_BaseProcess_RemotePrefixSidStates_RemotePrefixSidState) ΛValidate(opts ...ygot.ValidationOption) error {
-	if err := ytypes.Validate(SchemaTree["HuaweiBgp_Bgp_BaseProcess_RemotePrefixSidStates_RemotePrefixSidState"], t, opts...); err != nil {
-		return err
-	}
-	return nil
-}
-
-// Validate validates s against the YANG schema corresponding to its type.
-func (t *HuaweiBgp_Bgp_BaseProcess_RemotePrefixSidStates_RemotePrefixSidState) Validate(opts ...ygot.ValidationOption) error {
-	return t.ΛValidate(opts...)
-}
-
-// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
-// that are included in the generated code.
-func (t *HuaweiBgp_Bgp_BaseProcess_RemotePrefixSidStates_RemotePrefixSidState) ΛEnumTypeMap() map[string][]reflect.Type {
-	return ΛEnumTypes
-}
-
-// ΛBelongingModule returns the name of the module that defines the namespace
-// of HuaweiBgp_Bgp_BaseProcess_RemotePrefixSidStates_RemotePrefixSidState.
-func (*HuaweiBgp_Bgp_BaseProcess_RemotePrefixSidStates_RemotePrefixSidState) ΛBelongingModule() string {
-	return "huawei-bgp"
-}
-
-// HuaweiBgp_Bgp_BaseProcess_Timer represents the /huawei-bgp/bgp/base-process/timer YANG schema element.
-type HuaweiBgp_Bgp_BaseProcess_Timer struct {
-	ConnectRetryTime *uint16 `path:"connect-retry-time" module:"huawei-bgp"`
-	HoldTime         *uint32 `path:"hold-time" module:"huawei-bgp"`
-	KeepAliveTime    *uint32 `path:"keep-alive-time" module:"huawei-bgp"`
-	MinHoldTime      *uint32 `path:"min-hold-time" module:"huawei-bgp"`
-}
-
-// IsYANGGoStruct ensures that HuaweiBgp_Bgp_BaseProcess_Timer implements the yang.GoStruct
-// interface. This allows functions that need to handle this struct to
-// identify it as being generated by ygen.
-func (*HuaweiBgp_Bgp_BaseProcess_Timer) IsYANGGoStruct() {}
-
-// Validate validates s against the YANG schema corresponding to its type.
-func (t *HuaweiBgp_Bgp_BaseProcess_Timer) ΛValidate(opts ...ygot.ValidationOption) error {
-	if err := ytypes.Validate(SchemaTree["HuaweiBgp_Bgp_BaseProcess_Timer"], t, opts...); err != nil {
-		return err
-	}
-	return nil
-}
-
-// Validate validates s against the YANG schema corresponding to its type.
-func (t *HuaweiBgp_Bgp_BaseProcess_Timer) Validate(opts ...ygot.ValidationOption) error {
-	return t.ΛValidate(opts...)
-}
-
-// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
-// that are included in the generated code.
-func (t *HuaweiBgp_Bgp_BaseProcess_Timer) ΛEnumTypeMap() map[string][]reflect.Type {
-	return ΛEnumTypes
-}
-
-// ΛBelongingModule returns the name of the module that defines the namespace
-// of HuaweiBgp_Bgp_BaseProcess_Timer.
-func (*HuaweiBgp_Bgp_BaseProcess_Timer) ΛBelongingModule() string {
-	return "huawei-bgp"
-}
-
-// HuaweiBgp_Bgp_BaseProcess_VpnBriefInfos represents the /huawei-bgp/bgp/base-process/vpn-brief-infos YANG schema element.
-type HuaweiBgp_Bgp_BaseProcess_VpnBriefInfos struct {
-	VpnBriefInfo map[HuaweiBgp_Bgp_BaseProcess_VpnBriefInfos_VpnBriefInfo_Key]*HuaweiBgp_Bgp_BaseProcess_VpnBriefInfos_VpnBriefInfo `path:"vpn-brief-info" module:"huawei-bgp"`
-}
-
-// IsYANGGoStruct ensures that HuaweiBgp_Bgp_BaseProcess_VpnBriefInfos implements the yang.GoStruct
-// interface. This allows functions that need to handle this struct to
-// identify it as being generated by ygen.
-func (*HuaweiBgp_Bgp_BaseProcess_VpnBriefInfos) IsYANGGoStruct() {}
-
-// HuaweiBgp_Bgp_BaseProcess_VpnBriefInfos_VpnBriefInfo_Key represents the key for list VpnBriefInfo of element /huawei-bgp/bgp/base-process/vpn-brief-infos.
-type HuaweiBgp_Bgp_BaseProcess_VpnBriefInfos_VpnBriefInfo_Key struct {
-	VpnName       string             `path:"vpn-name"`
-	AddressFamily E_HuaweiBgp_AfType `path:"address-family"`
-}
-
-// IsYANGGoKeyStruct ensures that HuaweiBgp_Bgp_BaseProcess_VpnBriefInfos_VpnBriefInfo_Key partially implements the
-// yang.GoKeyStruct interface. This allows functions that need to
-// handle this key struct to identify it as being generated by gogen.
-func (HuaweiBgp_Bgp_BaseProcess_VpnBriefInfos_VpnBriefInfo_Key) IsYANGGoKeyStruct() {}
-
-// ΛListKeyMap returns the values of the HuaweiBgp_Bgp_BaseProcess_VpnBriefInfos_VpnBriefInfo_Key key struct.
-func (t HuaweiBgp_Bgp_BaseProcess_VpnBriefInfos_VpnBriefInfo_Key) ΛListKeyMap() (map[string]interface{}, error) {
-	return map[string]interface{}{
-		"vpn-name":       t.VpnName,
-		"address-family": t.AddressFamily,
-	}, nil
-}
-
-// NewVpnBriefInfo creates a new entry in the VpnBriefInfo list of the
-// HuaweiBgp_Bgp_BaseProcess_VpnBriefInfos struct. The keys of the list are populated from the input
-// arguments.
-func (t *HuaweiBgp_Bgp_BaseProcess_VpnBriefInfos) NewVpnBriefInfo(VpnName string, AddressFamily E_HuaweiBgp_AfType) (*HuaweiBgp_Bgp_BaseProcess_VpnBriefInfos_VpnBriefInfo, error) {
-
-	// Initialise the list within the receiver struct if it has not already been
-	// created.
-	if t.VpnBriefInfo == nil {
-		t.VpnBriefInfo = make(map[HuaweiBgp_Bgp_BaseProcess_VpnBriefInfos_VpnBriefInfo_Key]*HuaweiBgp_Bgp_BaseProcess_VpnBriefInfos_VpnBriefInfo)
-	}
-
-	key := HuaweiBgp_Bgp_BaseProcess_VpnBriefInfos_VpnBriefInfo_Key{
-		VpnName:       VpnName,
-		AddressFamily: AddressFamily,
-	}
-
-	// Ensure that this key has not already been used in the
-	// list. Keyed YANG lists do not allow duplicate keys to
-	// be created.
-	if _, ok := t.VpnBriefInfo[key]; ok {
-		return nil, fmt.Errorf("duplicate key %v for list VpnBriefInfo", key)
-	}
-
-	t.VpnBriefInfo[key] = &HuaweiBgp_Bgp_BaseProcess_VpnBriefInfos_VpnBriefInfo{
-		VpnName:       &VpnName,
-		AddressFamily: AddressFamily,
-	}
-
-	return t.VpnBriefInfo[key], nil
-}
-
-// Validate validates s against the YANG schema corresponding to its type.
-func (t *HuaweiBgp_Bgp_BaseProcess_VpnBriefInfos) ΛValidate(opts ...ygot.ValidationOption) error {
-	if err := ytypes.Validate(SchemaTree["HuaweiBgp_Bgp_BaseProcess_VpnBriefInfos"], t, opts...); err != nil {
-		return err
-	}
-	return nil
-}
-
-// Validate validates s against the YANG schema corresponding to its type.
-func (t *HuaweiBgp_Bgp_BaseProcess_VpnBriefInfos) Validate(opts ...ygot.ValidationOption) error {
-	return t.ΛValidate(opts...)
-}
-
-// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
-// that are included in the generated code.
-func (t *HuaweiBgp_Bgp_BaseProcess_VpnBriefInfos) ΛEnumTypeMap() map[string][]reflect.Type {
-	return ΛEnumTypes
-}
-
-// ΛBelongingModule returns the name of the module that defines the namespace
-// of HuaweiBgp_Bgp_BaseProcess_VpnBriefInfos.
-func (*HuaweiBgp_Bgp_BaseProcess_VpnBriefInfos) ΛBelongingModule() string {
-	return "huawei-bgp"
-}
-
-// HuaweiBgp_Bgp_BaseProcess_VpnBriefInfos_VpnBriefInfo represents the /huawei-bgp/bgp/base-process/vpn-brief-infos/vpn-brief-info YANG schema element.
-type HuaweiBgp_Bgp_BaseProcess_VpnBriefInfos_VpnBriefInfo struct {
-	AddressFamily            E_HuaweiBgp_AfType `path:"address-family" module:"huawei-bgp"`
-	PeerNumber               *uint32            `path:"peer-number" module:"huawei-bgp"`
-	RouteDistinguisherNumber *uint32            `path:"route-distinguisher-number" module:"huawei-bgp"`
-	RouteNumber              *uint32            `path:"route-number" module:"huawei-bgp"`
-	VpnName                  *string            `path:"vpn-name" module:"huawei-bgp"`
-}
-
-// IsYANGGoStruct ensures that HuaweiBgp_Bgp_BaseProcess_VpnBriefInfos_VpnBriefInfo implements the yang.GoStruct
-// interface. This allows functions that need to handle this struct to
-// identify it as being generated by ygen.
-func (*HuaweiBgp_Bgp_BaseProcess_VpnBriefInfos_VpnBriefInfo) IsYANGGoStruct() {}
-
-// ΛListKeyMap returns the keys of the HuaweiBgp_Bgp_BaseProcess_VpnBriefInfos_VpnBriefInfo struct, which is a YANG list entry.
-func (t *HuaweiBgp_Bgp_BaseProcess_VpnBriefInfos_VpnBriefInfo) ΛListKeyMap() (map[string]interface{}, error) {
-
-	if t.VpnName == nil {
-		return nil, fmt.Errorf("nil value for key VpnName")
-	}
-
-	return map[string]interface{}{
-		"address-family": t.AddressFamily,
-		"vpn-name":       *t.VpnName,
-	}, nil
-}
-
-// Validate validates s against the YANG schema corresponding to its type.
-func (t *HuaweiBgp_Bgp_BaseProcess_VpnBriefInfos_VpnBriefInfo) ΛValidate(opts ...ygot.ValidationOption) error {
-	if err := ytypes.Validate(SchemaTree["HuaweiBgp_Bgp_BaseProcess_VpnBriefInfos_VpnBriefInfo"], t, opts...); err != nil {
-		return err
-	}
-	return nil
-}
-
-// Validate validates s against the YANG schema corresponding to its type.
-func (t *HuaweiBgp_Bgp_BaseProcess_VpnBriefInfos_VpnBriefInfo) Validate(opts ...ygot.ValidationOption) error {
-	return t.ΛValidate(opts...)
-}
-
-// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
-// that are included in the generated code.
-func (t *HuaweiBgp_Bgp_BaseProcess_VpnBriefInfos_VpnBriefInfo) ΛEnumTypeMap() map[string][]reflect.Type {
-	return ΛEnumTypes
-}
-
-// ΛBelongingModule returns the name of the module that defines the namespace
-// of HuaweiBgp_Bgp_BaseProcess_VpnBriefInfos_VpnBriefInfo.
-func (*HuaweiBgp_Bgp_BaseProcess_VpnBriefInfos_VpnBriefInfo) ΛBelongingModule() string {
 	return "huawei-bgp"
 }

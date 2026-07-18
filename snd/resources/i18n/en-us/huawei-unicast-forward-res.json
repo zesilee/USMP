@@ -1,0 +1,89 @@
+{
+  "/huawei-unicast-forward:unicast-forward": {
+    "name": "Unicast forward"
+  },
+  "/huawei-unicast-forward:unicast-forward/global-uc-attribute": {
+    "name": "Configure global atrributes"
+  },
+  "/huawei-unicast-forward:unicast-forward/global-uc-attribute/fib-miss": {
+    "name": "Configure fib miss function"
+  },
+  "/huawei-unicast-forward:unicast-forward/global-uc-attribute/icmp-reply-fast": {
+    "name": "Config icmp reply fast function"
+  },
+  "/huawei-unicast-forward:unicast-forward/global-uc-attribute/nexthop-spt": {
+    "name": "Config nexttop-spt function"
+  },
+  "/huawei-unicast-forward:unicast-forward/global-uc-attribute/ipv4-force-frag": {
+    "name": "Config ipv4-force-frag function"
+  },
+  "/huawei-unicast-forward:unicast-forward/global-uc-attribute/mtu-force-frag": {
+    "name": "Config IPv4 MTU force fragment function"
+  },
+  "/huawei-unicast-forward:unicast-forward/global-uc-attribute/indirect-nexthop": {
+    "name": "Config indirect-nexthop function"
+  },
+  "/huawei-unicast-forward:unicast-forward/global-uc-attribute/ignore-mac": {
+    "name": "Ignore the destination MAC address of packets"
+  },
+  "/huawei-unicast-forward:unicast-forward/global-uc-attribute/ttl-decrement": {
+    "name": "Decrease the packet ttl by 1"
+  },
+  "/huawei-unicast-forward:unicast-forward/global-uc-attribute/trunk-nd-mode": {
+    "name": "Config trunk-nd-mode function"
+  },
+  "/huawei-unicast-forward:unicast-forward/global-uc-attribute/trunk-arp-mode": {
+    "name": "Config trunk-arp-mode function"
+  },
+  "/huawei-unicast-forward:unicast-forward/global-uc-attribute/mpls-6pe-ttl-mode": {
+    "name": "Config mpls-6pe-ttl-mode function"
+  },
+  "/huawei-unicast-forward:unicast-forward/vxlan-forward-ospf": {
+    "name": "VXLAN forward OSPF"
+  },
+  "/huawei-unicast-forward:unicast-forward/vxlan-forward-ospf/ospf-behavior": {
+    "name": "VXLAN forward OSPF"
+  },
+  "/huawei-unicast-forward:unicast-forward/vxlan-forward-ospfv3": {
+    "name": "VXLAN forward OSPFv3"
+  },
+  "/huawei-unicast-forward:unicast-forward/vxlan-forward-ospfv3/ospfv3-behavior": {
+    "name": "VXLAN forward OSPFv3"
+  },
+  "/huawei-unicast-forward:unicast-forward/backup-groups": {
+    "name": "Backup group"
+  },
+  "/huawei-unicast-forward:unicast-forward/backup-groups/backup-group": {
+    "name": "Backup group"
+  },
+  "/huawei-unicast-forward:unicast-forward/backup-groups/backup-group/backup-group-name": {
+    "name": "Backup group name"
+  },
+  "/huawei-unicast-forward:unicast-forward/backup-groups/backup-group/if-name1": {
+    "name": "Interface name1"
+  },
+  "/huawei-unicast-forward:unicast-forward/backup-groups/backup-group/if-name2": {
+    "name": "Interface name2"
+  },
+  "/huawei-unicast-forward:unicast-forward/vxlan-anycast-gateway-extend": {
+    "name": "Distributed Gateway Extension"
+  },
+  "/huawei-unicast-forward:unicast-forward/vxlan-anycast-gateway-extend/enable": {
+    "name": "Enabling/Disabling Distributed Gateway Extension"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-unicast-forward:unicast-forward": {
+    "name": "Configure unicast forward"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-unicast-forward:unicast-forward/mtu-check-enable": {
+    "name": "MTU check for the GRE tunnel"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-unicast-forward:unicast-forward/mtu-check-enable/enable": {
+    "name": "MTU check for the GRE tunnel"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-unicast-forward:unicast-forward/tunnel-pipe-dscp": {
+    "name": "Set the diffserv mode to pipe on tunnel"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-unicast-forward:unicast-forward/tunnel-pipe-dscp/dscpvalue": {
+    "name": "Set the diffserv mode to pipe on tunnel"
+  }
+}

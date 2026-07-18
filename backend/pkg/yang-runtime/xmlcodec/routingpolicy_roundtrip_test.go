@@ -7,7 +7,6 @@ import (
 	"testing"
 
 	"github.com/openconfig/goyang/pkg/yang"
-	"github.com/openconfig/ygot/ygot"
 
 	"github.com/leezesi/usmp/backend/internal/generated/huawei"
 )
@@ -27,10 +26,10 @@ func rtpSpec() *Spec {
 }
 
 // policy-definition 直属 config-true 标量 leaf 计数（name + address-family-mismatch-deny）。
-const rtpPolicyDefScalarLeaves = 2
+const rtpPolicyDefScalarLeaves = 1
 
 // TestRoutingPolicy_PolicyDef_Shape：schema 驱动锁死接入形状——policy-definition 直属
-// config-true 标量恰好 2，深层 nodes 仍为推迟容器（防悄悄扩面）。
+// config-true 标量恰好 1（name，CE 基线 pd 级无其他标量叶），深层 nodes 仍为推迟容器（防悄悄扩面）。
 func TestRoutingPolicy_PolicyDef_Shape(t *testing.T) {
 	root := huawei.SchemaTree["HuaweiRoutingPolicy_RoutingPolicy"]
 	if root == nil {
@@ -65,7 +64,9 @@ func TestRoutingPolicy_PolicyDef_Roundtrip(t *testing.T) {
 	if err != nil {
 		t.Fatalf("NewPolicyDefinition: %v", err)
 	}
-	pd.AddressFamilyMismatchDeny = ygot.Bool(true)
+	pd.Nodes = &huawei.HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes{}
+	node, _ := pd.Nodes.NewNode(10)
+	node.MatchMode = huawei.HuaweiRoutingPolicy_MatchModeType_permit
 
 	xml, err := Encode(rtpSpec(), orig)
 	if err != nil {
@@ -97,7 +98,9 @@ func TestRoutingPolicy_Concurrent_EncodeDecode(t *testing.T) {
 		PolicyDefinitions: &huawei.HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions{},
 	}
 	pd, _ := orig.PolicyDefinitions.NewPolicyDefinition("RP1")
-	pd.AddressFamilyMismatchDeny = ygot.Bool(true)
+	pd.Nodes = &huawei.HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes{}
+	node, _ := pd.Nodes.NewNode(10)
+	node.MatchMode = huawei.HuaweiRoutingPolicy_MatchModeType_permit
 
 	var wg sync.WaitGroup
 	for i := 0; i < 16; i++ {

@@ -15,69 +15,13 @@ using the following YANG input files:
   - huawei-network-instance
 
 Imported modules were sourced from:
-  - ../yang-models/network-router/8.20.10/ne40e-x8x16/...
+  - ../snd/ce6866p-yang/...
 */
 package huawei
 
 import (
 	"fmt"
 )
-
-// HuaweiRoutingPolicy_RoutingPolicy_ExtCommunityFilters_ExtCommunityFilter_Name_Union is an interface that is implemented by valid types for the union
-// for the leaf /huawei-network-instance/network-instance/instances/instance/bgp/base-process/afs/af/ipv4-vpn/route-reflector-ext-community-filter within the YANG schema.
-type HuaweiRoutingPolicy_RoutingPolicy_ExtCommunityFilters_ExtCommunityFilter_Name_Union interface {
-	Is_HuaweiRoutingPolicy_RoutingPolicy_ExtCommunityFilters_ExtCommunityFilter_Name_Union()
-}
-
-// HuaweiRoutingPolicy_RoutingPolicy_ExtCommunityFilters_ExtCommunityFilter_Name_Union_String is used when /huawei-network-instance/network-instance/instances/instance/bgp/base-process/afs/af/ipv4-vpn/route-reflector-ext-community-filter
-// is to be set to a string value.
-type HuaweiRoutingPolicy_RoutingPolicy_ExtCommunityFilters_ExtCommunityFilter_Name_Union_String struct {
-	String string
-}
-
-// Is_HuaweiRoutingPolicy_RoutingPolicy_ExtCommunityFilters_ExtCommunityFilter_Name_Union ensures that HuaweiRoutingPolicy_RoutingPolicy_ExtCommunityFilters_ExtCommunityFilter_Name_Union_String
-// implements the HuaweiRoutingPolicy_RoutingPolicy_ExtCommunityFilters_ExtCommunityFilter_Name_Union interface.
-func (*HuaweiRoutingPolicy_RoutingPolicy_ExtCommunityFilters_ExtCommunityFilter_Name_Union_String) Is_HuaweiRoutingPolicy_RoutingPolicy_ExtCommunityFilters_ExtCommunityFilter_Name_Union() {
-}
-
-// HuaweiRoutingPolicy_RoutingPolicy_ExtCommunityFilters_ExtCommunityFilter_Name_Union_Uint16 is used when /huawei-network-instance/network-instance/instances/instance/bgp/base-process/afs/af/ipv4-vpn/route-reflector-ext-community-filter
-// is to be set to a uint16 value.
-type HuaweiRoutingPolicy_RoutingPolicy_ExtCommunityFilters_ExtCommunityFilter_Name_Union_Uint16 struct {
-	Uint16 uint16
-}
-
-// Is_HuaweiRoutingPolicy_RoutingPolicy_ExtCommunityFilters_ExtCommunityFilter_Name_Union ensures that HuaweiRoutingPolicy_RoutingPolicy_ExtCommunityFilters_ExtCommunityFilter_Name_Union_Uint16
-// implements the HuaweiRoutingPolicy_RoutingPolicy_ExtCommunityFilters_ExtCommunityFilter_Name_Union interface.
-func (*HuaweiRoutingPolicy_RoutingPolicy_ExtCommunityFilters_ExtCommunityFilter_Name_Union_Uint16) Is_HuaweiRoutingPolicy_RoutingPolicy_ExtCommunityFilters_ExtCommunityFilter_Name_Union() {
-}
-
-// To_HuaweiRoutingPolicy_RoutingPolicy_ExtCommunityFilters_ExtCommunityFilter_Name_Union takes an input interface{} and attempts to convert it to a struct
-// which implements the HuaweiRoutingPolicy_RoutingPolicy_ExtCommunityFilters_ExtCommunityFilter_Name_Union union. It returns an error if the interface{} supplied
-// cannot be converted to a type within the union.
-func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProcess_Afs_Af_Ipv4Vpn) To_HuaweiRoutingPolicy_RoutingPolicy_ExtCommunityFilters_ExtCommunityFilter_Name_Union(i interface{}) (HuaweiRoutingPolicy_RoutingPolicy_ExtCommunityFilters_ExtCommunityFilter_Name_Union, error) {
-	switch v := i.(type) {
-	case string:
-		return &HuaweiRoutingPolicy_RoutingPolicy_ExtCommunityFilters_ExtCommunityFilter_Name_Union_String{v}, nil
-	case uint16:
-		return &HuaweiRoutingPolicy_RoutingPolicy_ExtCommunityFilters_ExtCommunityFilter_Name_Union_Uint16{v}, nil
-	default:
-		return nil, fmt.Errorf("cannot convert %v to HuaweiRoutingPolicy_RoutingPolicy_ExtCommunityFilters_ExtCommunityFilter_Name_Union, unknown union type, got: %T, want any of [string, uint16]", i, i)
-	}
-}
-
-// To_HuaweiRoutingPolicy_RoutingPolicy_ExtCommunityFilters_ExtCommunityFilter_Name_Union takes an input interface{} and attempts to convert it to a struct
-// which implements the HuaweiRoutingPolicy_RoutingPolicy_ExtCommunityFilters_ExtCommunityFilter_Name_Union union. It returns an error if the interface{} supplied
-// cannot be converted to a type within the union.
-func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProcess_Afs_Af_Ipv6Vpn) To_HuaweiRoutingPolicy_RoutingPolicy_ExtCommunityFilters_ExtCommunityFilter_Name_Union(i interface{}) (HuaweiRoutingPolicy_RoutingPolicy_ExtCommunityFilters_ExtCommunityFilter_Name_Union, error) {
-	switch v := i.(type) {
-	case string:
-		return &HuaweiRoutingPolicy_RoutingPolicy_ExtCommunityFilters_ExtCommunityFilter_Name_Union_String{v}, nil
-	case uint16:
-		return &HuaweiRoutingPolicy_RoutingPolicy_ExtCommunityFilters_ExtCommunityFilter_Name_Union_Uint16{v}, nil
-	default:
-		return nil, fmt.Errorf("cannot convert %v to HuaweiRoutingPolicy_RoutingPolicy_ExtCommunityFilters_ExtCommunityFilter_Name_Union, unknown union type, got: %T, want any of [string, uint16]", i, i)
-	}
-}
 
 // HuaweiRoutingPolicy_RoutingPolicy_AsPathFilters_AsPathFilter_Name_Union is an interface that is implemented by valid types for the union
 // for the leaf /huawei-network-instance/network-instance/instances/instance/bgp/base-process/peer-groups/peer-group/afs/af/ipv4-labeluni/export-as-path-filter within the YANG schema.
@@ -275,20 +219,6 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProces
 	}
 }
 
-// To_HuaweiRoutingPolicy_RoutingPolicy_ExtCommunityFilters_ExtCommunityFilter_Name_Union takes an input interface{} and attempts to convert it to a struct
-// which implements the HuaweiRoutingPolicy_RoutingPolicy_ExtCommunityFilters_ExtCommunityFilter_Name_Union union. It returns an error if the interface{} supplied
-// cannot be converted to a type within the union.
-func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_InstanceProcesss_InstanceProcess_Afs_Af_Ipv4Vpn) To_HuaweiRoutingPolicy_RoutingPolicy_ExtCommunityFilters_ExtCommunityFilter_Name_Union(i interface{}) (HuaweiRoutingPolicy_RoutingPolicy_ExtCommunityFilters_ExtCommunityFilter_Name_Union, error) {
-	switch v := i.(type) {
-	case string:
-		return &HuaweiRoutingPolicy_RoutingPolicy_ExtCommunityFilters_ExtCommunityFilter_Name_Union_String{v}, nil
-	case uint16:
-		return &HuaweiRoutingPolicy_RoutingPolicy_ExtCommunityFilters_ExtCommunityFilter_Name_Union_Uint16{v}, nil
-	default:
-		return nil, fmt.Errorf("cannot convert %v to HuaweiRoutingPolicy_RoutingPolicy_ExtCommunityFilters_ExtCommunityFilter_Name_Union, unknown union type, got: %T, want any of [string, uint16]", i, i)
-	}
-}
-
 // To_HuaweiRoutingPolicy_RoutingPolicy_AsPathFilters_AsPathFilter_Name_Union takes an input interface{} and attempts to convert it to a struct
 // which implements the HuaweiRoutingPolicy_RoutingPolicy_AsPathFilters_AsPathFilter_Name_Union union. It returns an error if the interface{} supplied
 // cannot be converted to a type within the union.
@@ -453,6 +383,34 @@ func (t *HuaweiRoutingPolicy_RoutingPolicy_CommunityLists_CommunityList) To_Huaw
 	default:
 		return nil, fmt.Errorf("cannot convert %v to HuaweiRoutingPolicy_RoutingPolicy_CommunityLists_CommunityList_CommunityMember_Union, unknown union type, got: %T, want any of [E_HuaweiRoutingPolicy_WellKnownCommunityType_Enum, string, uint32]", i, i)
 	}
+}
+
+// HuaweiRoutingPolicy_RoutingPolicy_ExtCommunityFilters_ExtCommunityFilter_Name_Union is an interface that is implemented by valid types for the union
+// for the leaf /huawei-routing-policy/routing-policy/ext-community-filters/ext-community-filter/name within the YANG schema.
+type HuaweiRoutingPolicy_RoutingPolicy_ExtCommunityFilters_ExtCommunityFilter_Name_Union interface {
+	Is_HuaweiRoutingPolicy_RoutingPolicy_ExtCommunityFilters_ExtCommunityFilter_Name_Union()
+}
+
+// HuaweiRoutingPolicy_RoutingPolicy_ExtCommunityFilters_ExtCommunityFilter_Name_Union_String is used when /huawei-routing-policy/routing-policy/ext-community-filters/ext-community-filter/name
+// is to be set to a string value.
+type HuaweiRoutingPolicy_RoutingPolicy_ExtCommunityFilters_ExtCommunityFilter_Name_Union_String struct {
+	String string
+}
+
+// Is_HuaweiRoutingPolicy_RoutingPolicy_ExtCommunityFilters_ExtCommunityFilter_Name_Union ensures that HuaweiRoutingPolicy_RoutingPolicy_ExtCommunityFilters_ExtCommunityFilter_Name_Union_String
+// implements the HuaweiRoutingPolicy_RoutingPolicy_ExtCommunityFilters_ExtCommunityFilter_Name_Union interface.
+func (*HuaweiRoutingPolicy_RoutingPolicy_ExtCommunityFilters_ExtCommunityFilter_Name_Union_String) Is_HuaweiRoutingPolicy_RoutingPolicy_ExtCommunityFilters_ExtCommunityFilter_Name_Union() {
+}
+
+// HuaweiRoutingPolicy_RoutingPolicy_ExtCommunityFilters_ExtCommunityFilter_Name_Union_Uint16 is used when /huawei-routing-policy/routing-policy/ext-community-filters/ext-community-filter/name
+// is to be set to a uint16 value.
+type HuaweiRoutingPolicy_RoutingPolicy_ExtCommunityFilters_ExtCommunityFilter_Name_Union_Uint16 struct {
+	Uint16 uint16
+}
+
+// Is_HuaweiRoutingPolicy_RoutingPolicy_ExtCommunityFilters_ExtCommunityFilter_Name_Union ensures that HuaweiRoutingPolicy_RoutingPolicy_ExtCommunityFilters_ExtCommunityFilter_Name_Union_Uint16
+// implements the HuaweiRoutingPolicy_RoutingPolicy_ExtCommunityFilters_ExtCommunityFilter_Name_Union interface.
+func (*HuaweiRoutingPolicy_RoutingPolicy_ExtCommunityFilters_ExtCommunityFilter_Name_Union_Uint16) Is_HuaweiRoutingPolicy_RoutingPolicy_ExtCommunityFilters_ExtCommunityFilter_Name_Union() {
 }
 
 // To_HuaweiRoutingPolicy_RoutingPolicy_ExtCommunityFilters_ExtCommunityFilter_Name_Union takes an input interface{} and attempts to convert it to a struct

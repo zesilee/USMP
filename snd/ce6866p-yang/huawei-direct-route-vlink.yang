@@ -1,0 +1,235 @@
+/*
+Copyright (C) 2019 Huawei Technologies Co., Ltd. All rights reserved.
+*/
+module huawei-direct-route-vlink {
+  namespace "urn:huawei:yang:huawei-direct-route-vlink";
+    prefix directrtvlink;
+  
+  import huawei-extension {
+    prefix ext;
+  }
+  import huawei-ifm {
+    prefix ifm;
+  }
+  import huawei-network-instance {
+    prefix ni;
+  }
+  import huawei-routing-policy {
+    prefix rtp;
+  }
+  import ietf-inet-types {
+    prefix inet;
+  }
+  import huawei-ip {
+    prefix ip;
+  }
+  import huawei-ethernet {
+    prefix ethernet;
+  }
+  organization
+    "Huawei Technologies Co., Ltd.";
+  contact
+    "Huawei Industrial Base
+     Bantian, Longgang
+     Shenzhen 518129
+     People's Republic of China
+     Website: http://www.huawei.com
+     Email: support@huawei.com";
+  description
+    "This module contains a collection of YANG definitions for managing direct route VLINK.";
+
+  revision 2019-07-15 {
+    description
+      "Initial revision.";
+    reference
+      "Huawei private.";
+  }
+  typedef vlink-address-family {
+    type enumeration {
+      enum "ipv4uni" {
+      value 0;
+        description
+          "IPv4 unicast.";
+      }
+      enum "ipv6uni" {
+      value 1;
+        description
+          "IPv6 unicast.";
+      }
+    }
+    description
+      "The type of VLINK address family.";
+  }
+
+  ext:task-name "eum";
+  container direct-route-vlink {
+    description
+      "Configure VLINK routes in the system view.";
+    leaf ipv4-vlink-routes-enable {
+      type boolean;
+      default "false";
+      description
+        "Enable/disable IPv4 VLINK routes in the system view.";
+    }
+    leaf ipv6-vlink-routes-enable {
+      type boolean;
+      default "false";
+      description
+        "Enable/disable IPv6 VLINK routes in the system view.";
+    }
+  }
+
+  augment "/ifm:ifm/ifm:interfaces/ifm:interface" {
+    description "Extend interface attribute.";
+    container vlink-routes {
+      must "../ifm:type = 'Vlanif' or ../ifm:type = 'Vbdif' or ../ethernet:ethernet/ethernet:l3-sub-interface/ethernet:dot1q-termination";
+      description
+        "List of configuration VLINK routes.";
+      list vlink-route {
+        key "address-family";
+        description
+          "Configure VLINK routes.";
+        leaf address-family {
+          type vlink-address-family;
+          must "(../address-family = 'ipv4uni' and not(../../../ethernet:ethernet/ethernet:l3-sub-interface/ethernet:dot1q-termination)) or
+          (../address-family = 'ipv6uni' and ../../../ip:ipv6)";
+          description
+            "Address family: IPv4 or IPv6 unicast address family.";
+        }
+        leaf route-policy {
+          type leafref {
+              path "/rtp:routing-policy/rtp:policy-definitions/rtp:policy-definition/rtp:name";
+          }
+          description "Route policy.";
+        }
+        leaf route-policy-name {
+          type leafref {
+            path "/rtp:routing-policy/rtp:policy-definitions/rtp:policy-definition/rtp:name";
+          }
+          ext:hidden ui;
+          description
+            "Set the name of a VLINK route-policy.";
+        }
+        leaf probe-by-virtual-ipaddress-enable {
+          type boolean;
+          ext:hidden ui;
+          default "false";
+          description
+            "Enable/disable detection by virtual IP.";
+        }
+        leaf tag {
+          type uint32 {
+            range "0..4294967295";
+          }
+          ext:hidden ui;
+          default "0";
+          description
+            "Tag configured for VLINK routes on a specified interface.";
+        }
+        leaf preference {
+          type uint8 {
+            range "0..255";
+          }
+          ext:hidden ui;
+          mandatory true;
+          description
+            "Preference configured for VLINK routes on a specified interface.";
+        }
+      }
+    }
+    container vlink-extend-configuration {
+      ext:hidden ui;
+      description
+        "Configure VLINK routes on an interface.";
+        leaf link-local-advertise-enable {
+          type boolean;
+          default "true";
+          description
+            "Enable/disable link-local advertise flag configured for VLINK on a specified interface.";
+        }
+        leaf ipv6-delay-time {
+          type uint32 {
+            range "1..3600";
+          }
+          description
+            "IPv6 ND direct-route delay time on an interface.";
+        }
+        leaf ipv4-delay-time  {
+          type uint32 {
+            range "1..3600";
+          }
+          description
+            "IPv4 ARP direct-route delay time on an interface.";
+        }
+    }
+    container vlink-prefix-lengths {
+      ext:hidden ui;
+      description
+        "List of VLINK aggregation address prefix length configured for VLINK routes on an interface.";
+      list vlink-prefix-length {
+        key "ipv6-address";
+        description
+          "Configure VLINK aggregation address prefix length configured for VLINK routes on an interface.";
+        leaf ipv6-address {
+          type inet:ipv6-address-no-zone;
+          description
+            "IPv6 address on an interface.";
+        }
+        leaf prefix-length {
+          type uint8 {
+            range "1..128";
+          }
+          default "128";
+          description
+            "IPv6 address aggregation prefix length on an interface. This leaf does not support delete.";
+        }
+      }
+    }
+    container vlink-configuration {
+      description
+        "Configure direct route attributes.";
+      leaf preference {
+        type uint8 {
+          range "0..255";
+        }
+        description
+          "Preference value for VLINK routes.";
+      }
+    }
+  }
+  augment "/ni:network-instance/ni:instances/ni:instance" {
+    description "Extend VPN attribute.";
+    container vlink-vpns {
+      ext:hidden ui;
+      description
+        "List of configuration VLINK routes.";
+      list vlink-vpn {
+        key "address-family";
+        description
+          "Configure VLINK routes.";
+        leaf address-family {
+          type vlink-address-family;
+          description
+            "Address family: IPv4 or IPv6 unicast address family.";
+        }
+        leaf route-policy-name {
+          type leafref {
+            path "/rtp:routing-policy/rtp:policy-definitions/rtp:policy-definition/rtp:name";
+          }
+          description
+            "Set the name of a VLINK route-policy.";
+        }
+        leaf route-filter-name {
+          type string {
+            length "1..200";
+          }
+          must "not(../route-policy-name)";
+          description
+            "Set the name of a VLINK route-filter.";
+        }
+      }
+    }
+  }
+
+}
+

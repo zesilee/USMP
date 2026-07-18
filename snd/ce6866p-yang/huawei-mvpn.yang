@@ -1,0 +1,505 @@
+/*
+Copyright (C) 2019-2021 Huawei Technologies Co., Ltd. All rights reserved.
+*/
+module huawei-mvpn {
+  namespace "urn:huawei:yang:huawei-mvpn";
+  prefix mvpn;
+  import huawei-ifm {
+    prefix ifm;
+  }
+  import huawei-network-instance {
+    prefix ni;
+  }
+  import huawei-l3vpn {
+    prefix l3vpn;
+  }
+  import huawei-pub-type {
+    prefix pub-type;
+  }
+  import huawei-routing-policy {
+    prefix rtp;
+  }
+  import huawei-l3-multicast {
+    prefix l3mc;
+  }
+  import ietf-inet-types {
+    prefix inet;
+  }
+  import huawei-extension {
+    prefix ext;
+  }
+  import huawei-acl {
+    prefix acl;
+  }
+
+  organization
+    "Huawei Technologies Co., Ltd.";
+  contact
+    "Huawei Industrial Base
+     Bantian, Longgang
+     Shenzhen 518129
+     People's Republic of China
+     Website: http://www.huawei.com
+     Email: support@huawei.com";
+  description
+    "A model for Multicast Virtual Private Network (MVPN).";
+  revision 2021-12-16 {
+    description
+      "Modify some restriction for frr-acl-name. The must condition of frr-acl-name is modified.";
+    reference
+      "Huawei private.";
+  }
+  revision 2021-08-05 {
+    description
+      "Add signal-format leaf fot Src-dt. Add multicast-sid case for src-dt-sid. Add node rosen-global. Delete some nodes that not supported. Modify the design for switch-group.";
+    reference
+      "Huawei private.";
+  }
+  revision 2021-07-25 {
+    description
+      "Modify some restriction for bier-entropy-mode. The when condition of bier-entropy-mode is deleted.";
+    reference
+      "Huawei private.";
+  }
+  revision 2021-03-30 {
+    description
+      "Nodes related to NG MVPN over BIER6 are added. Modify the xpath of leafref for ad-import-policy-name. Modify the design of ipmsi-infos.";
+    reference
+      "Huawei private.";
+  }
+  revision 2021-01-16 {
+    description
+      "Added configurable nodes related to IPv6 NG MVPN FRR. A must clause was deleted for is-c-multicast-frr. Modify the type of frr-acl-name.";
+    reference
+      "Huawei private.";
+  }
+  revision 2020-12-17 {
+    description
+      "Modify some restriction for NG MVPN S-PMSI tunnel. The value range of spmsi-tnl-detect-delay is modified.";
+    reference
+      "Huawei private.";
+  }
+  revision 2020-02-21 {
+    description
+      "Modify bier leaf node type to leafref. Add units for some nodes. Modify some restriction for bier node. Modify description. Add dynamic default value for per-item-tunnel-limit.";
+    reference
+      "Huawei private.";
+  }
+  revision 2020-02-04 {
+    description
+      "Change rsvp-te-p2mp-template leaf node type to leafref.";
+    reference
+      "Huawei private.";
+  }
+  revision 2019-12-18 {
+    description
+      "Change relative node for bier tunnel.";
+    reference
+      "Huawei private.";
+  }
+  revision 2019-11-20 {
+    description
+      "Change container information to ipmsi-infos.";
+    reference
+      "Huawei private.";
+  }
+  revision 2019-05-06 {
+    description
+      "Initial revision.";
+    reference
+      "Huawei private.";
+  }
+  ext:task-name "mvpn";
+
+  typedef addr-family-type {
+    type enumeration {
+      enum "ipv4-unicast" {
+        value 1;
+        description
+          "IPv4 address family.";
+      }
+      enum "ipv6-unicast" {
+        value 2;
+        description
+          "IPv6 address family.";
+      }
+    }
+    description
+      "Address family.";
+  }
+  typedef signaling-mode {
+    type enumeration {
+      enum "invalid" {
+        value 0;
+        description
+          "Invalid signaling mode.";
+      }
+      enum "BGP" {
+        value 2;
+        description
+          "BGP signaling mode.";
+      }
+    }
+    description
+      "MVPN signal type.";
+  }
+  typedef tunnel-mode {
+    type enumeration {
+      enum "invalid" {
+        value 0;
+        description
+          "Invalid.";
+      }
+      enum "pim-sm" {
+        value 1;
+        description
+          "PIM-SM tunnel.";
+      }
+      enum "pim-ssm" {
+        value 2;
+        description
+          "PIM-SSM tunnel.";
+      }
+      enum "p2mp-te" {
+        value 3;
+        description
+          "P2MP TE tunnel.";
+      }
+      enum "p2mp-mldp" {
+        value 4;
+        description
+          "P2MP mLDP tunnel.";
+      }
+      enum "mp2mp-mldp" {
+        value 5;
+        description
+          "MP2MP mLDP tunnel.";
+      }
+      enum "vxlan-static" {
+        value 6;
+        description
+          "VXLAN static tunnel.";
+      }
+      enum "bier" {
+        value 7;
+        description
+          "BIER tunnel.";
+      }
+      enum "bier-ipv6" {
+        value 8;
+        description
+          "BIER IPv6 tunnel.";
+      }
+    }
+    description
+      "MVPN tunnel type.";
+  }
+
+  typedef rpt-spt-mode {
+    type enumeration {
+      enum "none" {
+        value 0;
+        description
+          "PIM SM shared tree is not supported.";
+      }
+      enum "spt-mode" {
+        value 1;
+        description
+          "SPT-only mode.";
+      }
+      enum "rpt-spt-mode" {
+        value 2;
+        description
+          "RPT-SPT mode.";
+      }
+    }
+    description
+      "The mode of PIM SM shared tree.";
+  }
+  typedef umh-type {
+    type enumeration {
+      enum "unicast" {
+        value 0;
+        description
+          "Unicast route preferred.";
+      }
+      enum "highest-ip" {
+        value 1;
+        description
+          "Highest IP address.";
+      }
+    }
+    description
+      "Select upstream multicast hop.";
+  }
+
+  typedef bier-entropy-mode {
+    type enumeration {
+      enum "invalid" {
+        value 0;
+        description
+          "Invalid entropy mode of MVPN BIER.";
+      }
+      enum "sg-hash" {
+        value 1;
+        description
+          "SG hash entropy mode of MVPN BIER.";
+      }
+    }
+    description
+      "MVPN BIER entropy mode.";
+  }
+
+  container mvpn {
+    description
+      "Configure global MVPN configurations.";
+    container globals {
+      description
+        "List of global MVPN configuration.";
+      list global {
+        key "address-family";
+        description
+          "Configure global MVPN.";
+        leaf address-family {
+          type addr-family-type;
+          description
+            "IPv4 or IPv6 address family.";
+        }
+        leaf mvpn-id {
+          type inet:ip-address-no-zone;
+          mandatory true;
+          description
+            "Specify MVPN ID, IP address mode.";
+        }
+        leaf enable-inter-area-segmented {
+          when "../address-family='ipv4-unicast'";
+          type boolean;
+          default "false";
+          description
+            "Enable/disable segmented tunnels globally on the ABR.";
+        }
+        leaf apply-explicit-null-label {
+          when "../address-family='ipv6-unicast'";
+          type boolean;
+          default "false";
+          description
+            "Enable/disable IPv6 explicit null to apply label.";
+        }
+      }
+    }
+    container ipv6-underlay-globals {
+      description
+        "List of IPv6 underlay global MVPN configuration.";
+      list ipv6-underlay-global {
+        key "address-family";
+        description
+          "Configure IPv6 underlay global MVPN.";
+        leaf address-family {
+          type addr-family-type;
+          description
+            "IPv4 or IPv6 address family.";
+        }
+        leaf mvpn-id {
+          type inet:ipv6-address-no-zone;
+          mandatory true;
+          description
+            "Specify IPv6 underlay MVPN ID, IPv6 address mode.";
+        }
+      }
+    }
+  }
+
+  augment "/ni:network-instance/ni:instances/ni:instance/l3vpn:afs/l3vpn:af" {
+    when "(./l3vpn:type='ipv4-unicast' and ../../l3mc:multicast/l3mc:ipv4) or (./l3vpn:type='ipv6-unicast' and ../../l3mc:multicast/l3mc:ipv6)";
+    description
+      "Add MVPN configuration to the L3VPN module.";
+    container mvpn {
+      description
+        "Configure MVPN in the instance.";
+      leaf mvpn-id {
+        when "../../../../ni:name!='_public_' and ../../l3vpn:type='ipv4-unicast'";
+        type inet:ip-address-no-zone;
+        description
+          "Specify MVPN ID, IP address mode.";
+      }
+      leaf local-admin-id {
+        when "../../l3vpn:type='ipv4-unicast'";
+        type uint16 {
+          range "1..65535";
+        }
+        description
+          "Specify a num uniquely identifies current VPN Instance.";
+      }
+      choice mvpn-type {
+        description
+          "MVPN type.";
+        case ng-mvpn {
+          description
+            "NG MVPN.";
+          container ng {
+            must "../../../../ni:name!='_public_' or /mvpn:mvpn/mvpn:ipv6-underlay-globals/mvpn:ipv6-underlay-global[mvpn:address-family=current()/../../l3vpn:type]/mvpn:mvpn-id";
+            must "(../../l3vpn:type='ipv4-unicast' and (../mvpn:mvpn-id or /mvpn:mvpn/mvpn:globals/mvpn:global[mvpn:address-family=current()/../../l3vpn:type]/mvpn:mvpn-id or /mvpn:mvpn/mvpn:ipv6-underlay-globals/mvpn:ipv6-underlay-global[mvpn:address-family=current()/../../l3vpn:type]/mvpn:mvpn-id)) or (../../l3vpn:type='ipv6-unicast' and (/mvpn:mvpn/mvpn:globals/mvpn:global[mvpn:address-family=current()/../../l3vpn:type]/mvpn:mvpn-id or /mvpn:mvpn/mvpn:ipv6-underlay-globals/mvpn:ipv6-underlay-global[mvpn:address-family=current()/../../l3vpn:type]/mvpn:mvpn-id))";
+            must "./is-inter-as='false' or ./inter-area-seg-enable='false'";
+            must "./is-ipv6-underlay='false' or ./inter-area-seg-enable='false'";
+            presence "mvpn enable";
+            description
+              "Enable/disable NG-MVPN in the instance.";
+            leaf signaling-mode {
+              type signaling-mode;
+              default "invalid";
+              description
+                "Signaling mode.";
+            }
+            leaf is-sender-site {
+              type boolean;
+              default "false";
+              description
+                "Enable/disable the function of specifying the current PE as a sender PE.";
+            }
+            leaf is-ipv6-underlay {
+              type boolean;
+              must "../is-ipv6-underlay='false' or /mvpn:mvpn/mvpn:ipv6-underlay-globals/mvpn:ipv6-underlay-global[mvpn:address-family=current()/../../../l3vpn:type]";
+              default "false";
+              description
+                "Enable/disable the IPv6 underlay of the MVPN.";
+            }
+            leaf rpt-spt-mode {
+              type rpt-spt-mode;
+              default "none";
+              description
+                "*G mode.";
+            }
+            leaf is-inter-as {
+              type boolean;
+              default "false";
+              description
+                "Enable/disable the function of specifying the current PE as a auto-discovery inter-as PE.";
+            }
+            leaf is-c-multicast-frr {
+              type boolean;
+              default "false";
+              description
+                "Enable/disable FRR.";
+            }
+            leaf frr-acl-name6 {
+              when "../../../l3vpn:type='ipv6-unicast' and ../is-c-multicast-frr='true'";
+              type leafref {
+                path "/acl:acl/acl:group6s/acl:group6/acl:identity";
+              }
+              must "/acl:acl/acl:group6s/acl:group6[acl:identity=current()]/acl:type='basic' or /acl:acl/acl:group6s/acl:group6[acl:identity=current()]/acl:type='advance'";
+              description
+                "Configure an IPv6 FRR policy. If no ACL is specified, all (S, G) entries take effect.";
+            }
+            leaf frr-acl-name {
+              when "../../../l3vpn:type='ipv4-unicast' and ../is-c-multicast-frr='true'";
+              type acl:acl4-identity;
+              must "(/acl:acl/acl:groups/acl:group[acl:number=number(current())]/acl:type='basic' or /acl:acl/acl:groups/acl:group[acl:number=number(current())]/acl:type='advance') or (/acl:acl/acl:groups/acl:group[acl:identity=current()]/acl:type='basic' or /acl:acl/acl:groups/acl:group[acl:identity=current()]/acl:type='advance')";
+              description
+                "Configure an IPv4 FRR policy. If no ACL is specified, all (S, G) entries take effect.";
+            }
+            leaf frr-flow-based-acl-name {
+              when "../../../l3vpn:type='ipv4-unicast' and ../is-c-multicast-frr='true'";
+              type leafref {
+                path "/acl:acl/acl:groups/acl:group/acl:identity";
+              }
+              must "/acl:acl/acl:groups/acl:group[acl:identity=current()]/acl:type='basic' or /acl:acl/acl:groups/acl:group[acl:identity=current()]/acl:type='advance'";
+              description
+                "Configure a flow-based IPv4 FRR policy. If no ACL is specified, all (S, G) entries do not take effect.";
+            }
+            leaf frr-flow-based-acl-name6 {
+              when "../../../l3vpn:type='ipv6-unicast' and ../is-c-multicast-frr='true'";
+              type leafref {
+                path "/acl:acl/acl:group6s/acl:group6/acl:identity";
+              }
+              must "/acl:acl/acl:group6s/acl:group6[acl:identity=current()]/acl:type='basic' or /acl:acl/acl:group6s/acl:group6[acl:identity=current()]/acl:type='advance'";
+              description
+                "Configure a flow-based IPv6 FRR policy. If no ACL is specified, all (S, G) entries do not take effect.";
+            }
+            leaf is-compatible-draft {
+              when "../../../../../ni:name!='_public_'";
+              type boolean;
+              default "false";
+              description
+                "Enable/disable a device to use the packet encapsulation format defined in the draft.";
+            }
+            leaf is-export-msdp {
+              when "../../../l3vpn:type='ipv4-unicast'";
+              type boolean;
+              default "false";
+              description
+                "Enable/disable a device to export source active to MSDP.";
+            }
+            leaf is-import-msdp {
+              when "../../../l3vpn:type='ipv4-unicast'";
+              type boolean;
+              default "false";
+              description
+                "Enable/disable a device to import source active from MSDP.";
+            }
+            leaf spmsi-tnl-detect-delay {
+              when "../../../../../ni:name!='_public_'";
+              type uint16 {
+                range "3..65535";
+              }
+              units "s";
+              default "5";
+              description
+                "The delay in tunnel detection.";
+            }
+            leaf rpt-prune-delay {
+              type uint16 {
+                range "0..1800";
+              }
+              units "s";
+              default "60";
+              description
+                "The delay of RPT pruning.";
+            }
+            leaf inter-area-seg-enable {
+              when "../../../../../ni:name!='_public_'";
+              type boolean;
+              must "(../inter-area-seg-enable='false' and ../../../l3vpn:type='ipv6-unicast') or ../../../l3vpn:type='ipv4-unicast'";
+              default "false";
+              description
+                "Enable/disable intra-area segmented tunnels.";
+            }
+            leaf umh-select-type {
+              when "../../../../../ni:name!='_public_'";
+              type umh-type;
+              default "unicast";
+              description
+                "Configure UMH select type.";
+            }
+            leaf bier-entropy-mode {
+              type bier-entropy-mode;
+              description
+                "Configure BIER entropy mode.";
+            }
+            leaf ipmsi-to-spmsi-switch-immediately {
+              type boolean;
+              default "false";
+              description
+                "Enable/disable ipmsi to spmsi switch immediately.";
+            }
+            container ipmsi-tunnel {
+              must "../../../../../ni:name!='_public_' or not(./tunnel-mode) or ./tunnel-mode='bier-ipv6'";
+              must "not(../spmsi-tunnels/spmsis/star-star) and not(../spmsi-tunnels/spmsis/star-grps/star-grp)";
+              must "not(./tunnel-mode) or ./tunnel-mode!='bier' or (./sub-domain-id and ./bsl)";
+              must "not(./tunnel-mode) or ./tunnel-mode!='bier-ipv6' or (./sub-domain-id-ipv6 and ./bsl-ipv6)";
+              must "not(./tunnel-mode) or (./tunnel-mode!='bier' and ./tunnel-mode!='p2mp-mldp' and ./tunnel-mode!='p2mp-te') or (../../mvpn:mvpn-id or /mvpn:mvpn/mvpn:globals/mvpn:global[mvpn:address-family=current()/../../../l3vpn:type]/mvpn:mvpn-id)";
+              must "not(./tunnel-mode) or ./tunnel-mode!='bier-ipv6' or ../srv6-locator";
+              presence "ipmsi-tunnel";
+              description
+                "Enable/disable I-PMSI in the instance. Default MDT or I-PMSI configuration and operational state information.";
+              leaf tunnel-mode {
+                type tunnel-mode;
+                description
+                  "Tunnel mode.";
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

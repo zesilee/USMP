@@ -82,12 +82,10 @@ func VlanFull() *huawei.HuaweiVlan_Vlan_Vlans {
 						"GE0/0/1": {
 							InterfaceName: ptr("GE0/0/1"),
 							AccessType:    huawei.E_HuaweiVlan_AccessType(1),
-							TagMode:       huawei.E_HuaweiVlan_TagMode(2),
 						},
 						"GE0/0/2": {
 							InterfaceName: ptr("GE0/0/2"),
 							AccessType:    huawei.E_HuaweiVlan_AccessType(2),
-							TagMode:       huawei.E_HuaweiVlan_TagMode(1),
 						},
 					},
 				},
@@ -147,7 +145,6 @@ func IfmFull() *huawei.HuaweiIfm_Ifm_Interfaces {
 				LinkProtocol:         huawei.E_HuaweiIfm_LinkProtocol(1),
 				EncapsulationType:    huawei.E_HuaweiIfm_EncapsulationType(1),
 				RouterType:           huawei.E_HuaweiIfm_RouterType(1),
-				NetworkLayerStatus:   huawei.E_HuaweiIfm_NetworkLayerState(1),
 				Index:                ptr(uint32(7)),
 				Number:               ptr("0/0/1"),
 				ParentName:           ptr("GE0/0"),
@@ -165,7 +162,6 @@ func IfmFull() *huawei.HuaweiIfm_Ifm_Interfaces {
 				StatisticMode:        huawei.E_HuaweiIfm_StatisticMode(1),
 				L2SwitchPortIndex:    ptr(uint32(3)),
 				DownDelayTime:        ptr(uint32(5)),
-				ProtocolUpDelayTime:  ptr(uint32(10)),
 				Damp: &huawei.HuaweiIfm_Ifm_Interfaces_Interface_Damp{
 					Auto: &huawei.HuaweiIfm_Ifm_Interfaces_Interface_Damp_Auto{
 						Level: huawei.E_HuaweiIfm_DampLevelType(1),

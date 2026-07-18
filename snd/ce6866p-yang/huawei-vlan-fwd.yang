@@ -1,0 +1,94 @@
+/*
+Copyright (C) 2019-2024 Huawei Technologies Co., Ltd. All rights reserved.
+*/
+module huawei-vlan-fwd {
+  namespace "urn:huawei:yang:huawei-vlan-fwd";
+  prefix vlan-fwd;
+  import huawei-pub-type {
+    prefix pub-type;
+  }
+  import huawei-extension {
+    prefix ext;
+  }
+  import huawei-ifm {
+    prefix ifm;
+  }
+  import huawei-ethernet {
+    prefix ethernet;
+  }
+  import huawei-vlan {
+    prefix vlan;
+  }
+
+  ext:task-name "vlan";
+
+  organization
+    "Huawei Technologies Co., Ltd.";
+  contact
+    "Huawei Industrial Base
+     Bantian, Longgang
+     Shenzhen 518129
+     People's Republic of China
+     Website: http://www.huawei.com
+     Email: support@huawei.com";
+  description
+    "Forwarding VLAN service.";
+  revision 2024-08-23 {
+    description
+      "Add container rewrite egress VLAN.";
+    reference
+      "Huawei private.";
+  }
+  revision 2024-05-22 {
+    description
+      "Change when/must condition of unknow-unicast-threshold.";
+    reference
+      "Huawei private.";
+  }
+  revision 2024-05-18 {
+    description
+      "Add container eth-trunk-unicast-time-delay-enhance and change description.";
+    reference
+      "Huawei private.";
+  }
+  revision 2024-02-26 {
+    description
+      "Change when/must condition.";
+    reference
+      "Huawei private.";
+  }
+  revision 2022-10-24 {
+    description
+      "Change when/must condition.";
+    reference
+      "Huawei private.";
+  }
+  revision 2020-03-06 {
+    description
+      "Change description.";
+    reference
+      "Huawei private.";
+  }
+  revision 2019-04-15 {
+    description
+      "Init revision.";
+    reference
+      "Huawei private.";
+  }
+  
+  augment "/vlan:vlan/vlan:vlans/vlan:vlan" {
+    description
+      "Add rewrite VLAN.";
+    container rewrite-egr-vlan {
+      presence "rewrite egr vlan";
+      description
+        "Configure of rewrite egress VLAN.";
+      leaf new-vlan {
+          type vlan:vlan-id;
+          mandatory true;
+          description
+            "Rewrite new VLAN in egress.";
+      }
+    }
+  }
+}

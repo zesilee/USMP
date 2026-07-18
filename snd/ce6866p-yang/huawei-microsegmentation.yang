@@ -1,0 +1,509 @@
+/*
+Copyright (C) 2022 Huawei Technologies Co., Ltd. All rights reserved.
+*/
+module huawei-microsegmentation {
+  yang-version 1;
+  namespace "urn:huawei:yang:huawei-microsegmentation";
+  prefix m-seg;
+  import ietf-inet-types {
+    prefix inet;
+  }
+  import huawei-extension {
+    prefix ext;
+  }
+  import huawei-network-instance {
+    prefix ni;
+  }
+  import huawei-l3vpn {
+    prefix l3vpn;
+  }
+  import huawei-devm {
+    prefix devm;
+  }
+  organization
+    "Huawei Technologies Co., Ltd.";
+  contact
+    "Huawei Industrial Base
+     Bantian, Longgang
+     Shenzhen 518129
+     People's Republic of China
+     Website: http://www.huawei.com
+     Email: support@huawei.com";
+  description
+    "This module contains a collection of YANG definitions M-SEG feature.";
+  reference
+    "Huawei private.";
+  revision 2022-11-02 {
+    description
+      "Delete pattern.";
+    reference
+      "Huawei private.";
+  }
+  revision 2022-09-29 {
+    description
+      "Model upgrade.";
+    reference
+      "Huawei private.";
+  }
+  revision 2022-09-10 {
+    description
+      "Modify node range.";
+    reference
+      "Huawei private.";
+  }
+  revision 2022-06-16 {
+    description
+      "Initial revision.";
+    reference
+      "Huawei private.";
+  }
+  typedef action-type {
+    type enumeration {
+      enum "deny" {
+        value 1;
+        description
+          "Deny.";
+      }
+      enum "permit" {
+        value 2;
+        description
+          "Permit.";
+      }
+    }
+    description
+      "EPG action type.";
+  }
+  typedef same-epg-action-type {
+    type enumeration {
+      enum "none" {
+        value 0;
+        description
+          "None.";
+      }
+      enum "deny" {
+        value 1;
+        description
+          "Deny.";
+      }
+      enum "permit" {
+        value 2;
+        description
+          "Permit.";
+      }
+    }
+    description
+      "Default action for members in the same EPG.";
+  }
+  typedef state-type {
+    type enumeration {
+      enum "success" {
+        value 0;
+        description
+          "Success.";
+      }
+      enum "fail" {
+        value 1;
+        description
+          "Fail.";
+      }
+      enum "roll-back" {
+        value 2;
+        description
+          "Update fail, rolled back to last state.";
+      }
+      enum "processing" {
+        value 3;
+        description
+          "Processing, please wait.";
+      }
+    }
+    description
+      "State of EPG members.";
+  }
+  typedef logging-type {
+    type enumeration {
+      enum "deny-logging" {
+        value 1;
+        description
+          "Deny packets logging.";
+      }
+      enum "permit-logging" {
+        value 2;
+        description
+          "Permit packets logging.";
+      }
+      enum "all-logging" {
+        value 3;
+        description
+          "All packets logging.";
+      }
+    }
+    description
+      "EPG logging type.";
+  }
+  container microsegmentation {
+    description
+      "Configuration for microsegmentation.";
+    container global {
+      description
+        "Configure microsegmentation global configurations.";
+      leaf enable {
+        type boolean;
+        default "false";
+        description
+          "Enable/disable M-SEG.";
+      }
+      leaf unknown-epg-action {
+        when '(../enable = "true")';
+        type action-type;
+        default "permit";
+        description
+          "Specify default access control policy for unknown EPG members.";
+      }
+      leaf default-epg-action {
+        when '(../enable = "true")';
+        type action-type;
+        default "deny";
+        description
+          "Specify default access control policy for EPG members.";
+      }
+      leaf same-epg-action {
+        when '(../enable = "true")';
+        type same-epg-action-type;
+        default "none";
+        description
+          "Specify default access control policy for members in the same EPG.";
+      }
+      leaf epg-logging {
+        when '(../enable = "true")';
+        type logging-type;
+        description
+          "Configure EPG logging type.";
+      }
+      leaf policy-statistics-enable {
+        type boolean;
+        default "false";
+        description
+          "Enable/disable EPG statistics.";
+      }
+    }
+    container endpoint-groups {
+      when '(../global/enable = "true")';
+      description
+        "List of endpoint groups.";
+      list endpoint-group {
+        key "segment-id";
+        unique segment-name;
+        max-elements 8192;
+        description
+          "Configure endpoint group.";
+        leaf segment-id {
+          type uint32 {
+            range "1..65535";
+          }
+          description
+            "Segment ID.";
+        }
+        leaf segment-name {
+          ext:support-filter "true";
+          type string {
+            length "1..31";
+          }
+          description
+            "Specifies the name of an EPG.";
+        }
+        leaf description {
+          type string {
+            length "1..256";
+          }
+          description
+            "Description of EPG.";
+        }
+        leaf intra-epg-behavior {
+          type same-epg-action-type;
+          default "none";
+          description
+            "Specify default access control policy for members in the same EPG.";
+        }
+        leaf statistics-enable {
+          type boolean;
+          default "false";
+          description
+            "Enable/disable statistics.";
+        }
+        container ip-members {
+          description
+            "List of IPv4 EPG members.";
+          list ip-member {
+            key "ip-address prefix-len vpn-name";
+            description
+              "Configure IPv4 EPG member. The IP member can belong to only one specified segment group.";
+            leaf ip-address {
+              type inet:ipv4-address-no-zone;
+              description
+                "IPv4 address. The value must equal to the and calculation result of address and prefix-len.";
+            }
+            leaf prefix-len {
+              type uint32 {
+                range "0..32";
+              }
+              description
+                "Prefix length.";
+            }
+            leaf vpn-name {
+              type leafref {
+                path "/ni:network-instance/ni:instances/ni:instance/ni:name";
+              }
+              must "/ni:network-instance/ni:instances/ni:instance[ni:name=current()]/l3vpn:afs/l3vpn:af[l3vpn:type='ipv4-unicast']";
+              description
+                "VPN instance name.";
+            }
+          }
+        }
+        container ipv6-members {
+          description
+            "List of IPv6 EPG members.";
+          list ipv6-member {
+            key "ipv6-address prefix-len vpn-name";
+            description
+              "Configure IPv6 EPG member. The IPv6 member can belong to only one specified segment group.";
+            leaf ipv6-address {
+              type inet:ipv6-address-no-zone;
+              description
+                "IPv6 address. The value must equal to the and calculation result of address and prefix-len.";
+            }
+            leaf prefix-len {
+              type uint32 {
+                range "0..128";
+              }
+              description
+                "Prefix length.";
+            }
+            leaf vpn-name {
+              type leafref {
+                path "/ni:network-instance/ni:instances/ni:instance/ni:name";
+              }
+              must "/ni:network-instance/ni:instances/ni:instance[ni:name=current()]/l3vpn:afs/l3vpn:af[l3vpn:type='ipv6-unicast']";
+              description
+                "VPN instance name.";
+            }
+          }
+        }
+        container any-member {
+          description
+            "Configuration for unknown EPG members.";
+            leaf ip-any {
+              type empty;
+              description
+                "IPv4 based unknown EPG members.";
+            }
+            leaf ipv6-any {
+              type empty;
+              description
+                "IPv6 based unknown EPG members.";
+            }
+        } // container any-members
+      }
+    }
+    container segment-classifiers {
+      when '(../global/enable = "true")';
+      description
+        "List of segment-classifiers.";
+      list segment-classifier {
+        key "classifier-name";
+        max-elements 2048;
+        description
+          "Configure segment-classifier.";
+        leaf classifier-name {
+          type string {
+            length "1..31";
+          }
+          description
+            "Specifies the name of classifier.";
+        }
+        container rules {
+          description
+            "List of segment classifier rules.";
+          list rule {
+            must "./source-segment-id or ./destination-segment-id";
+            key "priority";
+            max-elements 4096;
+            description
+              "Configure segment classifier rule. The matching conditions of a rule cannot be the same as other rules under the same classifier.";
+            leaf priority {
+              type uint32 {
+                range "0..4095";
+              }
+              description
+                "Rule priority.";
+            }
+            leaf source-segment-id {
+              type uint32 {
+                range "1..65535";
+              }
+              description
+                "Source segment ID.";
+            }
+            leaf destination-segment-id {
+              type uint32 {
+                range "1..65535";
+              }
+              description
+                "Destination segment ID.";
+            }
+            leaf action {
+              type action-type;
+              default "permit";
+              description
+                "Specify rule action.";
+            }
+            leaf protocol {
+              type uint32 {
+                range "0..255";
+              }
+              description
+                "Protocol type value(6: tcp; 17: udp).";
+            }
+            leaf source-port-begin {
+              type uint32 {
+                range "0..65535";
+              }
+              must "(../protocol=6 or ../protocol=17) and (../source-port-begin <= ../source-port-end) and not(../source-port-begin=0 and ../source-port-end=65535)";
+              description
+                "TCP or UDP source port range begin.";
+            }
+            leaf source-port-end {
+              type uint32 {
+                range "0..65535";
+              }
+              must "(../protocol=6 or ../protocol=17) and (../source-port-begin <= ../source-port-end) and not(../source-port-begin=0 and ../source-port-end=65535)";
+              description
+                "TCP or UDP source port range end.";
+            }
+            leaf destination-port-begin {
+              type uint32 {
+                range "0..65535";
+              }
+              must "(../protocol=6 or ../protocol=17) and (../destination-port-begin <= ../destination-port-end) and not(../destination-port-begin=0 and ../destination-port-end=65535)";
+              description
+                "TCP or UDP destination port begin.";
+            }
+            leaf destination-port-end {
+              type uint32 {
+                range "0..65535";
+              }
+              must "(../protocol=6 or ../protocol=17) and (../destination-port-begin <= ../destination-port-end) and not(../destination-port-begin=0 and ../destination-port-end=65535)";
+              description
+                "TCP or UDP destination port end.";
+            }
+            leaf logging-enable {
+              type boolean;
+              default "false";
+              description
+                "Enable/disable logging.";
+            }
+            leaf statistics-enable {
+              type boolean;
+              default "false";
+              description
+                "Enable/disable statistics.";
+            }
+          }
+        }
+      }
+    }
+    container segment-behaviors {
+      when '(../global/enable = "true")';
+      description
+        "List of segment-behaviors.";
+      list segment-behavior {
+        key "behavior-name";
+        max-elements 2048;
+        description
+          "Configure segment-behavior.";
+        leaf behavior-name {
+          type string {
+            length "1..31";
+          }
+          description
+            "Specifies the name of behavior.";
+        }
+        leaf statistics-enable {
+          type boolean;
+          default "false";
+          description
+            "Enable/disable GBP statistics.";
+        }
+      }
+    }
+    container segment-policys {
+      when '(../global/enable = "true")';
+      description
+        "List of segment-policys.";
+      list segment-policy {
+        key "policy-name";
+        description
+          "Configure group-based policy.";
+        leaf policy-name {
+          type string {
+            length "1..31";
+          }
+          description
+            "Specifies the name of group-based policy.";
+        }
+        container classifier-behavior-combinations {
+          description
+            "List of combinations of classifier and behavior.";
+          list classifier-behavior-combination {
+            key "classifier-name";
+            unique precedence;
+            max-elements 512;
+            description
+              "Configure combinations of classifier and behavior.";
+            leaf classifier-name {
+              type leafref {
+                path "/m-seg:microsegmentation/m-seg:segment-classifiers/m-seg:segment-classifier/m-seg:classifier-name";
+              }
+              description
+                "Specifies the name of classifier.";
+            }
+            leaf behavior-name {
+              type leafref {
+                path "/m-seg:microsegmentation/m-seg:segment-behaviors/m-seg:segment-behavior/m-seg:behavior-name";
+              }
+              mandatory true;
+              description
+                "Specifies the name of behavior.";
+            }
+            leaf precedence {
+              type uint32 {
+                range "0..511";
+              }
+              mandatory true;
+              description
+                "Precedence.";
+            }
+          }
+        }
+      }
+    }
+    container apply-global-policys {
+      description
+        "List of applied segment-policys.";
+      list apply-global-policy {
+        key "policy-name";
+        max-elements 1;
+        description
+          "Configure applied segment-policys.";
+        leaf policy-name {
+          type leafref {
+            path "/m-seg:microsegmentation/m-seg:segment-policys/m-seg:segment-policy/m-seg:policy-name";
+          }
+          description
+            "Specifies the name of group-based policy.";
+        }
+      }
+    }
+  }
+  ext:task-name "micro-segment";
+}

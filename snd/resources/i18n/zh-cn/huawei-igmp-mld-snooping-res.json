@@ -1,0 +1,473 @@
+{
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping": {
+    "name": "二层组播BD下配置"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/global": {
+    "name": "二层组播BD下配置"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/global/ssm-acl": {
+    "name": "配置SSM策略"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/global/version": {
+    "name": "配置IGMP版本号"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/global/ssm-mapping-enable": {
+    "name": "使能SSM 映射"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/global/ssm-mapping-policy": {
+    "name": "SSM 映射策略"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/global/enable": {
+    "name": "使能IGMP Snooping功能"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/global/group-policy-acl": {
+    "name": "配置IGMP组策略"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/global/group-policy-version": {
+    "name": "应用组策略的IGMP版本"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/global/max-response-time": {
+    "name": "配置IGMP最大响应时间"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/global/immediately-leave": {
+    "name": "配置IGMP立即离开"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/global/immediately-leave-acl": {
+    "name": "IGMP立即离开策略"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/global/proxy-enable": {
+    "name": "使能IGMP snooping代理"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/global/multicast-group-model": {
+    "name": "配置IGMP组加入模式"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/global/ip-policy-acl": {
+    "name": "配置IP过滤策略"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/global/query-ip-policy-acl": {
+    "name": "配置查询器IP过滤策略"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/global/querier-election": {
+    "name": "使能IGMP查询器选举"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/global/proxy-router-protocol-pass": {
+    "name": "配置终结路由协议报文"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/global/querier-enable": {
+    "name": "使能IGMP查询器"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/global/query-interval": {
+    "name": "配置IGMP通用查询间隔"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/global/require-router-alert": {
+    "name": "检查router alert"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/global/send-router-alert": {
+    "name": "携带router alert选项"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/global/robustness": {
+    "name": "配置IGMP健壮系数"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/global/router-aging-time": {
+    "name": "路由器端口老化时间"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/global/router-port-learning": {
+    "name": "使能路由器端口学习"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/global/query-suppress-time": {
+    "name": "配置IGMP报文抑制时间"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/global/last-member-query-interval": {
+    "name": "配置最后成员查询间隔"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/global/static-group-suppress-dynamic-join": {
+    "name": "使能抑制动态IGMP报文"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/global/report-suppress": {
+    "name": "使能报文抑制"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/global/source-life-time": {
+    "name": "表项老化时间"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/global/designated-vlan": {
+    "name": "组播指定VLAN"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/global/signal-smet-disable": {
+    "name": "去使能SMET信令"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/global/signal-synch-enable": {
+    "name": "使能IGMP加入退出信令同步"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/global/signal-ignore-df-enable": {
+    "name": "使能忽略DF状态发送信令"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/global/evi-rts": {
+    "name": "EVI-RT列表"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/global/evi-rts/evi-rt": {
+    "name": "EVI-RT"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/global/evi-rts/evi-rt/type": {
+    "name": "EVI-RT类型"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/global/evi-rts/evi-rt/value": {
+    "name": "EVI-RT值"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/global/querier": {
+    "name": "BD的IGMP查询器"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/global/querier/querier-state": {
+    "name": "查询器状态"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/global/querier/querier-address": {
+    "name": "查询器地址"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/interfaces": {
+    "name": "BD接口配置列表"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/interfaces/interface": {
+    "name": "BD接口配置列表"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/interfaces/interface/name": {
+    "name": "接口名称"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/interfaces/interface/group-policy-acl": {
+    "name": "配置IGMP组策略"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/interfaces/interface/group-policy-version": {
+    "name": "应用组策略的IGMP版本"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/interfaces/interface/learning": {
+    "name": "使能动态学习功能"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/interfaces/interface/proxy-uplink-port": {
+    "name": "配置IGMP代理上行接口"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/interfaces/interface/pe-vid": {
+    "name": "外层标签ID"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/interfaces/interface/ce-vid": {
+    "name": "内层标签ID"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/ssm-mapping-groups": {
+    "name": "BD的SSM映射配置列表"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/ssm-mapping-groups/ssm-mapping-group": {
+    "name": "BD的SSM映射配置列表"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/ssm-mapping-groups/ssm-mapping-group/group-address": {
+    "name": "组播组地址"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/ssm-mapping-groups/ssm-mapping-group/mask-length": {
+    "name": "组地址的掩码长度"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/ssm-mapping-groups/ssm-mapping-group/source-address": {
+    "name": "组播源IPv4地址"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/fast-channels": {
+    "name": "配置BD的组播成员快速加入配置"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/fast-channels/fast-channel": {
+    "name": "BD的组播成员快速加入配置列表"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/fast-channels/fast-channel/group-address": {
+    "name": "组播组地址"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/fast-channels/fast-channel/group-mask-length": {
+    "name": "组播组地址的掩码长度"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/fast-channels/fast-channel/source-address": {
+    "name": "组播源地址"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/fast-channels/fast-channel/source-mask-length": {
+    "name": "组播源地址掩码长度"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/interface-static-groups": {
+    "name": "BD子接口二层组播静态组配置列表"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/interface-static-groups/interface-static-group": {
+    "name": "BD子接口二层组播静态组配置"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/interface-static-groups/interface-static-group/interface": {
+    "name": "BD子接口二层组播静态组子接口名称"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/interface-static-groups/interface-static-group/group-address": {
+    "name": "BD子接口二层组播静态组播组的组地址"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/interface-static-groups/interface-static-group/source-address": {
+    "name": "BD子接口二层组播静态组源地址"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/static-router-ports": {
+    "name": "配置静态路由器端口"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/static-router-ports/static-router-port": {
+    "name": "配置静态路由器端口列表"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/static-router-ports/static-router-port/interface": {
+    "name": "接口名称"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/group-ports": {
+    "name": "IMS表项信息列表"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/group-ports/group-port": {
+    "name": "IMS表项信息"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/group-ports/group-port/group-address": {
+    "name": "组播组地址"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/group-ports/group-port/source-address": {
+    "name": "组播源地址"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/group-ports/group-port/source-up-time": {
+    "name": "组播源状态为UP的时长"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/group-ports/group-port/group-up-time": {
+    "name": "组播组状态为UP的时长"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/group-ports/group-port/entry-flag": {
+    "name": "入口标识"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/group-ports/group-port/source-flag": {
+    "name": "组播源标识"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/group-ports/group-port/ports": {
+    "name": "IMS端口信息列表"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/group-ports/group-port/ports/port": {
+    "name": "IMS端口信息"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/group-ports/group-port/ports/port/interface": {
+    "name": "端口名称"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/group-ports/group-port/ports/port/up-time": {
+    "name": "该组播组成员端口状态为UP的时长"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/group-ports/group-port/ports/port/expire-time": {
+    "name": "端口的剩余存活时间"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/group-ports/group-port/ports/port/port-flag": {
+    "name": "成员端口标识"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/group-ports/group-port/ports/port/esi": {
+    "name": "以太网段标识符"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/group-ports/group-port/ports/port/df-status": {
+    "name": "DF状态"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/group-ports/group-port/ports/port/remote-flag": {
+    "name": "端口信息的来源"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/router-ports": {
+    "name": "路由器端口信息列表"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/router-ports/router-port": {
+    "name": "路由器端口信息"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/router-ports/router-port/interface": {
+    "name": "接口名称"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/router-ports/router-port/pe-vid": {
+    "name": "外层标签ID"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/router-ports/router-port/ce-vid": {
+    "name": "内层标签ID"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/router-ports/router-port/up-time": {
+    "name": "路由器端口的持续时间"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/router-ports/router-port/expire-time": {
+    "name": "路由器端口的剩余时间"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/router-ports/router-port/flag": {
+    "name": "路由器端口标志"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/interface-groups": {
+    "name": "本地接口的组播组信息"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/interface-groups/interface-group": {
+    "name": "本地接口的组播组信息列表"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/interface-groups/interface-group/interface": {
+    "name": "接口名称"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/interface-groups/interface-group/port-type": {
+    "name": "接口类型"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/interface-groups/interface-group/pe-vid": {
+    "name": "外层标签ID"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/interface-groups/interface-group/ce-vid": {
+    "name": "内层标签ID"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/interface-groups/interface-group/groups": {
+    "name": "本地接口的组播组信息"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/interface-groups/interface-group/groups/group": {
+    "name": "本地接口的组播组信息列表"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/interface-groups/interface-group/groups/group/group-address": {
+    "name": "组播组地址"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/interface-groups/interface-group/groups/group/up-time": {
+    "name": "组播组已存在时间"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/interface-groups/interface-group/groups/group/expire-time": {
+    "name": "组播组老化时间"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/interface-groups/interface-group/groups/group/group-timer": {
+    "name": "组定时器是否存在"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/interface-groups/interface-group/groups/group/retran-count": {
+    "name": "组播组查询次数"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/interface-groups/interface-group/groups/group/last-member-query": {
+    "name": "组播组是否还有成员"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/interface-groups/interface-group/groups/group/filter-mode": {
+    "name": "组播组过滤模式"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/interface-groups/interface-group/groups/group/compat-mode": {
+    "name": "组播组兼容模式"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/interface-groups/interface-group/groups/group/v1-host-timer": {
+    "name": "IGMPv1主机时间"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/interface-groups/interface-group/groups/group/v2-host-timer": {
+    "name": "IGMPv2主机时间"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/interface-groups/interface-group/groups/group/source-last-member-query": {
+    "name": "是否在向指定源组播组成员发送查询报文"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/interface-groups/interface-group/groups/group/last-member-query-timer": {
+    "name": "最后组成员查询间隔"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/interface-groups/interface-group/groups/group/sources": {
+    "name": "本地接口的组播组源地址信息"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/interface-groups/interface-group/groups/group/sources/source": {
+    "name": "本地接口的组播组源地址信息列表"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/interface-groups/interface-group/groups/group/sources/source/source-address": {
+    "name": "组播源IP地址"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/interface-groups/interface-group/groups/group/sources/source/up-time": {
+    "name": "组播组已存在时间"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/interface-groups/interface-group/groups/group/sources/source/expire-time": {
+    "name": "组播组老化时间"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/interface-groups/interface-group/groups/group/sources/source/source-timer": {
+    "name": "源定时器是否存在"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/interface-groups/interface-group/groups/group/sources/source/retran-count": {
+    "name": "组播组查询次数"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/interface-groups/interface-group/groups/group/sources/source/last-member-query": {
+    "name": "组播组是否还有成员"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/statistics": {
+    "name": "BD的IGMP Snooping统计信息"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/statistics/send-source-group-query-count": {
+    "name": "Proxy发出的特定源组查询报文的个数"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/statistics/v1-report-count": {
+    "name": "收到IGMPv1成员报告消息的个数"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/statistics/v2-report-count": {
+    "name": "收到IGMPv2成员报告消息的个数"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/statistics/v3-report-count": {
+    "name": "收到IGMPv3成员报告消息的个数"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/statistics/v1-query-count": {
+    "name": "收到IGMPv1查询消息的个数"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/statistics/v2-query-count": {
+    "name": "收到IGMPv2查询消息的个数"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/statistics/v3-query-cnt": {
+    "name": "收到IGMPv3查询消息的个数"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/statistics/leave-count": {
+    "name": "收到IGMP离开组播组消息的个数"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/statistics/hello-count": {
+    "name": "收到PIM Hello报文的个数"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/statistics/s-flag-query-count": {
+    "name": "发送源地址为0的IGMP查询消息的个数"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/statistics/no-s-flag-query-count": {
+    "name": "发送源地址不为0的IGMP查询消息的个数"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/statistics/send-general-query-count": {
+    "name": "Proxy发出的通用查询报文的个数"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/statistics/send-group-query-count": {
+    "name": "Proxy发出的特定组的查询报文的个数"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/invalid-packet": {
+    "name": "桥域下无效报文"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/invalid-packet/general-count": {
+    "name": "总的无效报文计数"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/invalid-packet/general-count/fault-length": {
+    "name": "错误的报文长度"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/invalid-packet/general-count/invalid-type-count": {
+    "name": "无效的二层组播类型"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/invalid-packet/general-count/bad-checksum": {
+    "name": "错误报文校验和"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/invalid-packet/general-count/fault-router-alert": {
+    "name": "无效的Router Alert"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/invalid-packet/invalid-query-count": {
+    "name": "无效的查询报文计数"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/invalid-packet/invalid-query-count/invalid-multicast-source": {
+    "name": "无效的组播源"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/invalid-packet/invalid-query-count/invalid-multicast-group": {
+    "name": "无效的组播组"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/invalid-packet/invalid-report-count": {
+    "name": "无效的Report报文计数"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/invalid-packet/invalid-report-count/invalid-multicast-group": {
+    "name": "无效的组播组"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/invalid-packet/invalid-report-count/invalid-version": {
+    "name": "无效的二层组播版本"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/invalid-packet/invalid-report-count/invalid-multicast-source": {
+    "name": "无效的组播源"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/invalid-packet/invalid-hello-count": {
+    "name": "无效的HELLO报文计数"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/invalid-packet/invalid-hello-count/invalid-pim-version": {
+    "name": "无效的PIM版本"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/invalid-packet/invalid-hello-count/fault-length": {
+    "name": "错误的报文长度"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/invalid-packet/invalid-hello-count/bad-holdtime-length": {
+    "name": "错误的Holdtime长度"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/invalid-packet/invalid-hello-count/bad-dr-priority-length": {
+    "name": "错误的DR优先级长度"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/invalid-packet/invalid-hello-count/bad-checksum": {
+    "name": "错误的校验和"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/invalid-packet/invalid-hello-count/bad-generation-id-length": {
+    "name": "错误的GenID长度"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-igmp-mld-snooping:igmp-snooping/invalid-packet/invalid-hello-count/bad-lan-prune-delay-length": {
+    "name": "错误的剪枝延迟长度"
+  }
+}

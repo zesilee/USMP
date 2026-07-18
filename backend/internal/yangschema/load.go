@@ -39,7 +39,7 @@ func Load() (schema.Schema, error) {
 // task-name 任务域映射（BR-01 category）：模块级扩展不存活于内嵌运行期 schema
 //（全树扫描实证=0，ygot 生成丢弃模块级语句），构建期从与 ygot 生成集同源同版本的
 // 模型提取，生成物提交入库（运行期零 submodule 依赖）。升级模型版本时一并重跑。
-//go:generate go run ../../tools/tasknamegen -path=../../../yang-models/network-router/8.20.10/ne40e-x8x16 -modules=huawei-vlan,huawei-ifm,huawei-system -output=./taskname.gen.go -package=yangschema
+//go:generate go run ../../tools/tasknamegen -path=../../../snd/ce6866p-yang -modules=huawei-vlan,huawei-ifm,huawei-system -output=./taskname.gen.go -package=yangschema
 
 // 业务意图模型的 task-name 与厂商模型不同源（backend/internal/yang/models 入库
 // 模型，无 submodule 依赖），独立生成文件与变量避免冲突。

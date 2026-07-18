@@ -1,0 +1,446 @@
+{
+  "/huawei-license:lcs": {
+    "name": "License"
+  },
+  "/huawei-license:license/global-states": {
+    "name": "全局信息表"
+  },
+  "/huawei-license:license/global-states/global-state": {
+    "name": "全局信息"
+  },
+  "/huawei-license:license/global-states/global-state/chassis-id": {
+    "name": "设备ID"
+  },
+  "/huawei-license:license/global-states/global-state/active-filename": {
+    "name": "已激活文件名称"
+  },
+  "/huawei-license:license/global-states/global-state/active-state": {
+    "name": "License状态"
+  },
+  "/huawei-license:license/global-states/global-state/revoke-ticket": {
+    "name": "License失效码"
+  },
+  "/huawei-license:license/global-states/global-state/esn": {
+    "name": "License设备序列号"
+  },
+  "/huawei-license:license/global-states/global-state/license-mode": {
+    "name": "License模式"
+  },
+  "/huawei-license:license/license-items": {
+    "name": "License控制项列表"
+  },
+  "/huawei-license:license/license-items/license-item": {
+    "name": "License控制项"
+  },
+  "/huawei-license:license/license-items/license-item/name": {
+    "name": "控制项名称"
+  },
+  "/huawei-license:license/license-items/license-item/description": {
+    "name": "控制项描述"
+  },
+  "/huawei-license:license/license-items/license-item/default-value": {
+    "name": "缺省值"
+  },
+  "/huawei-license:license/license-items/license-item/maximum-value": {
+    "name": "最大值"
+  },
+  "/huawei-license:license/license-items/license-item/current-value": {
+    "name": "当前值"
+  },
+  "/huawei-license:license/license-items/license-item/used-value": {
+    "name": "使用量"
+  },
+  "/huawei-license:license/license-items/license-item/status": {
+    "name": "控制项状态"
+  },
+  "/huawei-license:license/license-items/license-item/expired-date": {
+    "name": "控制项过期时间"
+  },
+  "/huawei-license:license/license-items/license-item/type": {
+    "name": "控制项类型"
+  },
+  "/huawei-license:license/license-items/license-item/trial-state": {
+    "name": "控制项试用状态"
+  },
+  "/huawei-license:license/license-items/license-item/trial-remain-day": {
+    "name": "控制项试用剩余天数"
+  },
+  "/huawei-license:license/license-items/license-item/trial-remain-times": {
+    "name": "控制项试用剩余次数"
+  },
+  "/huawei-license:license/license-sale-items": {
+    "name": "License销售项列表"
+  },
+  "/huawei-license:license/license-sale-items/license-sale-item": {
+    "name": "License销售项"
+  },
+  "/huawei-license:license/license-sale-items/license-sale-item/name": {
+    "name": "License销售项名称"
+  },
+  "/huawei-license:license/license-sale-items/license-sale-item/description": {
+    "name": "License销售项描述"
+  },
+  "/huawei-license:license/license-sale-items/license-sale-item/sale-value": {
+    "name": "License销售项销售量"
+  },
+  "/huawei-license:license/license-sale-items/license-sale-item/license-items": {
+    "name": "License销售项下控制项列表"
+  },
+  "/huawei-license:license/license-sale-items/license-sale-item/license-items/license-item": {
+    "name": "License销售项下控制项"
+  },
+  "/huawei-license:license/license-sale-items/license-sale-item/license-items/license-item/name": {
+    "name": "License销售项下控制项名称"
+  },
+  "/huawei-license:license/license-sale-items/license-sale-item/license-items/license-item/description": {
+    "name": "License销售项下控制项描述"
+  },
+  "/huawei-license:license/license-sale-items/license-sale-item/license-items/license-item/default-value": {
+    "name": "License销售项下控制项默认值"
+  },
+  "/huawei-license:license/license-sale-items/license-sale-item/license-items/license-item/maximum-value": {
+    "name": "License销售项下控制项最大值"
+  },
+  "/huawei-license:license/license-sale-items/license-sale-item/license-items/license-item/current-value": {
+    "name": "License销售项下控制项激活值"
+  },
+  "/huawei-license:license/license-sale-items/license-sale-item/license-items/license-item/used-value": {
+    "name": "License销售项下控制项使用值"
+  },
+  "/huawei-license:license/license-sale-items/license-sale-item/license-items/license-item/status": {
+    "name": "License销售项下控制项状态"
+  },
+  "/huawei-license:license/license-sale-items/license-sale-item/license-items/license-item/expired-date": {
+    "name": "License销售项下控制项过期时间"
+  },
+  "/huawei-license:license/license-sale-items/license-sale-item/license-items/license-item/type": {
+    "name": "License销售项下控制项类型"
+  },
+  "/huawei-license:license/license-sale-items/license-sale-item/license-items/license-item/trial-state": {
+    "name": "License销售项下控制项试用状态"
+  },
+  "/huawei-license:license/license-sale-items/license-sale-item/license-items/license-item/trial-remain-day": {
+    "name": "License控制项试用剩余天数"
+  },
+  "/huawei-license:license/license-sale-items/license-sale-item/license-items/license-item/trial-remain-times": {
+    "name": "License控制项试用剩余次数"
+  },
+  "/huawei-license:license/stack-sale-items": {
+    "name": "多框设备License销售项列表"
+  },
+  "/huawei-license:license/stack-sale-items/stack-sale-item": {
+    "name": "多框设备License销售项"
+  },
+  "/huawei-license:license/stack-sale-items/stack-sale-item/chassis-id": {
+    "name": "设备ID"
+  },
+  "/huawei-license:license/stack-sale-items/stack-sale-item/license-sale-items": {
+    "name": "License销售项列表"
+  },
+  "/huawei-license:license/stack-sale-items/stack-sale-item/license-sale-items/license-sale-item": {
+    "name": "License销售项"
+  },
+  "/huawei-license:license/stack-sale-items/stack-sale-item/license-sale-items/license-sale-item/name": {
+    "name": "License销售项名称"
+  },
+  "/huawei-license:license/stack-sale-items/stack-sale-item/license-sale-items/license-sale-item/description": {
+    "name": "License销售项描述"
+  },
+  "/huawei-license:license/stack-sale-items/stack-sale-item/license-sale-items/license-sale-item/sale-value": {
+    "name": "License销售项数量"
+  },
+  "/huawei-license:license/stack-sale-items/stack-sale-item/license-sale-items/license-sale-item/license-items": {
+    "name": "License销售项列表"
+  },
+  "/huawei-license:license/stack-sale-items/stack-sale-item/license-sale-items/license-sale-item/license-items/license-item": {
+    "name": "License销售项"
+  },
+  "/huawei-license:license/stack-sale-items/stack-sale-item/license-sale-items/license-sale-item/license-items/license-item/name": {
+    "name": "License项名称"
+  },
+  "/huawei-license:license/stack-sale-items/stack-sale-item/license-sale-items/license-sale-item/license-items/license-item/description": {
+    "name": "License销售项描述"
+  },
+  "/huawei-license:license/stack-sale-items/stack-sale-item/license-sale-items/license-sale-item/license-items/license-item/default-value": {
+    "name": "License项默认值"
+  },
+  "/huawei-license:license/stack-sale-items/stack-sale-item/license-sale-items/license-sale-item/license-items/license-item/maximum-value": {
+    "name": "License项最大值"
+  },
+  "/huawei-license:license/stack-sale-items/stack-sale-item/license-sale-items/license-sale-item/license-items/license-item/current-value": {
+    "name": "当前值"
+  },
+  "/huawei-license:license/stack-sale-items/stack-sale-item/license-sale-items/license-sale-item/license-items/license-item/used-value": {
+    "name": "License项使用量"
+  },
+  "/huawei-license:license/stack-sale-items/stack-sale-item/license-sale-items/license-sale-item/license-items/license-item/status": {
+    "name": "License项状态"
+  },
+  "/huawei-license:license/stack-sale-items/stack-sale-item/license-sale-items/license-sale-item/license-items/license-item/expired-date": {
+    "name": "过期时间"
+  },
+  "/huawei-license:license/stack-sale-items/stack-sale-item/license-sale-items/license-sale-item/license-items/license-item/type": {
+    "name": "License项类型"
+  },
+  "/huawei-license:license/stack-sale-items/stack-sale-item/license-sale-items/license-sale-item/license-items/license-item/trial-state": {
+    "name": "控制项试用状态"
+  },
+  "/huawei-license:license/stack-sale-items/stack-sale-item/license-sale-items/license-sale-item/license-items/license-item/trial-remain-day": {
+    "name": "License控制项的试用剩余天数"
+  },
+  "/huawei-license:license/stack-sale-items/stack-sale-item/license-sale-items/license-sale-item/license-items/license-item/trial-remain-times": {
+    "name": "License控制项试用剩余次数"
+  },
+  "/huawei-license:license/spec-items": {
+    "name": "License规格项列表"
+  },
+  "/huawei-license:license/spec-items/spec-item": {
+    "name": "License规格项"
+  },
+  "/huawei-license:license/spec-items/spec-item/name": {
+    "name": "规格项名称"
+  },
+  "/huawei-license:license/spec-items/spec-item/description": {
+    "name": "规格项描述信息"
+  },
+  "/huawei-license:license/spec-items/spec-item/current-value": {
+    "name": "规格项值"
+  },
+  "/huawei-license:license/spec-items/spec-item/type": {
+    "name": "类型"
+  },
+  "/huawei-license:license/spec-items/spec-item/default-value": {
+    "name": "规格项默认值"
+  },
+  "/huawei-license:license/spec-items/spec-item/minimum-value": {
+    "name": "规格项最小值"
+  },
+  "/huawei-license:license/spec-items/spec-item/maximum-value": {
+    "name": "规格项最大值"
+  },
+  "/huawei-license:license/license-files": {
+    "name": "License文件列表"
+  },
+  "/huawei-license:license/license-files/license-file": {
+    "name": "License文件"
+  },
+  "/huawei-license:license/license-files/license-file/chassis-id": {
+    "name": "设备ID"
+  },
+  "/huawei-license:license/license-files/license-file/filename": {
+    "name": "文件名"
+  },
+  "/huawei-license:license/license-files/license-file/filesize": {
+    "name": "文件大小(Byte)"
+  },
+  "/huawei-license:license/license-files/license-file/general": {
+    "name": "概要信息"
+  },
+  "/huawei-license:license/license-files/license-file/general/serial-number": {
+    "name": "序列号"
+  },
+  "/huawei-license:license/license-files/license-file/general/creator": {
+    "name": "创建者"
+  },
+  "/huawei-license:license/license-files/license-file/general/created-time": {
+    "name": "创建时间"
+  },
+  "/huawei-license:license/license-files/license-file/general/country": {
+    "name": "所属国家"
+  },
+  "/huawei-license:license/license-files/license-file/general/customer": {
+    "name": "用户信息"
+  },
+  "/huawei-license:license/license-files/license-file/general/office": {
+    "name": "所属部门"
+  },
+  "/huawei-license:license/license-files/license-file/features": {
+    "name": "特性信息列表"
+  },
+  "/huawei-license:license/license-files/license-file/features/feature": {
+    "name": "特性信息"
+  },
+  "/huawei-license:license/license-files/license-file/features/feature/name": {
+    "name": "特性名"
+  },
+  "/huawei-license:license/license-files/license-file/features/feature/product": {
+    "name": "产品名称"
+  },
+  "/huawei-license:license/license-files/license-file/features/feature/esn": {
+    "name": "文件序列号"
+  },
+  "/huawei-license:license/license-files/license-file/features/feature/auth-type": {
+    "name": "授权方式"
+  },
+  "/huawei-license:license/license-files/license-file/features/feature/running-deadline": {
+    "name": "生效截止日期"
+  },
+  "/huawei-license:license/license-files/license-file/features/feature/trial-days": {
+    "name": "试用天数"
+  },
+  "/huawei-license:license/license-files/license-file/features/feature/software-deadline": {
+    "name": "软件维护截止日期"
+  },
+  "/huawei-license:license/license-files/license-file/features/feature/hardware-deadline": {
+    "name": "硬件维护截止日期"
+  },
+  "/huawei-license:license/license-files/license-file/features/feature/upgrate-deadline": {
+    "name": "软件升级截止日期"
+  },
+  "/huawei-license:license/license-files/license-file/features/feature/feature-items": {
+    "name": "控制项列表"
+  },
+  "/huawei-license:license/license-files/license-file/features/feature/feature-items/feature-item": {
+    "name": "控制项"
+  },
+  "/huawei-license:license/license-files/license-file/features/feature/feature-items/feature-item/name": {
+    "name": "名称"
+  },
+  "/huawei-license:license/license-files/license-file/features/feature/feature-items/feature-item/value": {
+    "name": "控制项值"
+  },
+  "/huawei-license:license/resource-usages": {
+    "name": "资源使用率列表"
+  },
+  "/huawei-license:license/resource-usages/resource-usage": {
+    "name": "资源使用率"
+  },
+  "/huawei-license:license/resource-usages/resource-usage/name": {
+    "name": "资源控制项名"
+  },
+  "/huawei-license:license/resource-usages/resource-usage/usage": {
+    "name": "资源控制项使用量"
+  },
+  "/huawei-license:license/resource-usages/resource-usage/active-value": {
+    "name": "资源控制项激活值"
+  },
+  "/huawei-license:license/resource-thresholds": {
+    "name": "资源使用率阈值列表"
+  },
+  "/huawei-license:license/resource-thresholds/resource-threshold": {
+    "name": "资源使用率阈值"
+  },
+  "/huawei-license:license/resource-thresholds/resource-threshold/name": {
+    "name": "资源控制项名"
+  },
+  "/huawei-license:license/resource-thresholds/resource-threshold/threshold": {
+    "name": "资源控制项使用率阈值"
+  },
+  "/huawei-license:license/resource-thresholds/resource-threshold/configurable-switch": {
+    "name": "资源控制项可配标志"
+  },
+  "/huawei-license:license/resource-thresholds/resource-threshold/description": {
+    "name": "资源控制项描述信息"
+  },
+  "/huawei-license:license/cloud-servers": {
+    "name": "云化license服务器表"
+  },
+  "/huawei-license:license/cloud-servers/cloud-server": {
+    "name": "云化license服务器"
+  },
+  "/huawei-license:license/cloud-servers/cloud-server/server-ip": {
+    "name": "IP地址"
+  },
+  "/huawei-license:license/cloud-servers/cloud-server/server-port": {
+    "name": "端口号"
+  },
+  "/huawei-license:license/cloud-servers/cloud-server/register-state": {
+    "name": "注册状态"
+  },
+  "/huawei-license:license-active": {
+    "name": "激活License"
+  },
+  "/huawei-license:license-active/input/filename": {
+    "name": "License文件名"
+  },
+  "/huawei-license:license-revoke": {
+    "name": "失效License"
+  },
+  "/huawei-license:license-verify": {
+    "name": "校验License"
+  },
+  "/huawei-license:license-verify/input/filename": {
+    "name": "License文件名"
+  },
+  "/huawei-license:license-revoke-chassis": {
+    "name": "指定设备ID失效License"
+  },
+  "/huawei-license:license-revoke-chassis/input/chassis-id": {
+    "name": "设备ID"
+  },
+  "/huawei-license:license-delete": {
+    "name": "删除License文件"
+  },
+  "/huawei-license:license-delete/input/filename": {
+    "name": "License文件名"
+  },
+  "/huawei-license:license-trial": {
+    "name": "打开/关闭控制项试用"
+  },
+  "/huawei-license:license-trial/input/trial-switch": {
+    "name": "控制项试用开关"
+  },
+  "/huawei-license:license-export": {
+    "name": "导出License"
+  },
+  "/huawei-license:license-export/input/filename": {
+    "name": "导出License文件名"
+  },
+  "/huawei-license:startup-paf": {
+    "name": "设置下次启动paf文件"
+  },
+  "/huawei-license:startup-paf/input/filename": {
+    "name": "Paf文件名"
+  },
+  "/huawei-license:license-emergency": {
+    "name": "激活License紧急模式"
+  },
+  "/huawei-license:license-assign": {
+    "name": "分配云化license"
+  },
+  "/huawei-license:license-assign/input/item-name": {
+    "name": "License销售项名称"
+  },
+  "/huawei-license:license-assign/input/item-num": {
+    "name": "License分配量"
+  },
+  "/huawei-license:license-switch-mode": {
+    "name": "License模式切换"
+  },
+  "/huawei-license:license-switch-mode/input/license-mode": {
+    "name": "License模式"
+  },
+  "/rpcs/huawei-license:lcs/license-active": {
+    "name": "激活License"
+  },
+  "/rpcs/huawei-license:lcs/license-revoke": {
+    "name": "失效License"
+  },
+  "/rpcs/huawei-license:lcs/license-verify": {
+    "name": "校验License"
+  },
+  "/rpcs/huawei-license:lcs/license-revoke-chassis": {
+    "name": "指定设备ID失效License"
+  },
+  "/rpcs/huawei-license:lcs/license-delete": {
+    "name": "删除License文件"
+  },
+  "/rpcs/huawei-license:lcs/license-trial": {
+    "name": "打开/关闭控制项试用"
+  },
+  "/rpcs/huawei-license:lcs/license-export": {
+    "name": "导出License"
+  },
+  "/rpcs/huawei-license:lcs/startup-paf": {
+    "name": "设置下次启动paf文件"
+  },
+  "/rpcs/huawei-license:lcs/license-emergency": {
+    "name": "激活License紧急模式"
+  },
+  "/rpcs/huawei-license:lcs/license-assign": {
+    "name": "分配云化license"
+  },
+  "/rpcs/huawei-license:lcs/license-switch-mode": {
+    "name": "License模式切换"
+  }
+}

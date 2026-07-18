@@ -1,0 +1,2363 @@
+/*
+Copyright (C) 2020 Huawei Technologies Co., Ltd. All rights reserved.
+*/
+submodule huawei-dhcp-server {
+  yang-version 1;
+  belongs-to huawei-dhcp {
+    prefix dhcp;
+  }
+  import huawei-network-instance {
+    prefix ni;
+  }
+  import huawei-pub-type {
+    prefix pub-type;
+  }
+  import huawei-ifm {
+    prefix ifm;
+  }
+  import huawei-l3vpn {
+    prefix l3vpn;
+  }
+  import ietf-inet-types {
+    prefix inet;
+  }
+  import ietf-yang-types {
+    prefix yang;
+  }
+  import huawei-extension {
+    prefix ext;
+  }
+  organization
+    "Huawei Technologies Co., Ltd.";
+  contact
+    "Huawei Industrial Base
+    Bantian, Longgang
+    Shenzhen 518129
+    People's Republic of China
+    Website: http://www.huawei.com
+    Email: support@huawei.com";
+  description
+    "This module contains a collection of YANG definitions for managing DHCP server.";
+  revision 2020-04-20 {
+    description
+       "Add must condition.";
+    reference
+      "Huawei private.";
+  }
+  revision 2020-04-17 {
+    description
+       "Add node.";
+    reference
+      "Huawei private.";
+  }
+  revision 2020-03-20 {
+    description
+       "Add must condition of renew-time.";
+    reference
+      "Huawei private.";
+  }
+  revision 2020-03-13 {
+    description
+      "Modify description.";
+    reference
+      "Huawei private.";
+  }
+  revision 2020-03-03 {
+    description
+      "Initial revision.";
+    reference
+      "Huawei private.";
+  }
+  typedef network-bios-type {
+    type enumeration {
+      enum "invalid" {
+        value 0;
+        description
+          "-.";
+      }
+      enum "b-node" {
+        value 1;
+        description
+          "B-node.";
+      }
+      enum "m-node" {
+        value 2;
+        description
+          "M-node.";
+      }
+      enum "p-node" {
+        value 3;
+        description
+          "P-node.";
+      }
+    }
+    description
+      "The type of network BIOS.";
+  }
+  typedef reply-type {
+    type enumeration {
+      enum "invalid" {
+        value 0;
+        description
+          "-.";
+      }
+      enum "broadcast-always" {
+        value 1;
+        description
+          "Always broadcast the reply.";
+      }
+      enum "unicast-always" {
+        value 2;
+        description
+          "Always unicast the reply.";
+      }
+    }
+    description
+      "DHCP reply type.";
+  }
+  typedef sip-mode {
+    type enumeration {
+      enum "invalid" {
+        value 0;
+        description
+          "-";
+      }
+      enum "ip-mode" {
+        value 1;
+        description
+          "SIP server IP mode.";
+      }
+      enum "list-mode" {
+        value 2;
+        description
+          "SIP server string mode.";
+      }
+    }
+    description
+      "The type of SIP mode.";
+  }
+  typedef address-status {
+    type enumeration {
+      enum "static-bind-used" {
+        value 0;
+        description
+          "Static bind used status.";
+      }
+      enum "static-bind" {
+        value 1;
+        description
+          "Static bind status.";
+      }
+      enum "used" {
+        value 2;
+        description
+          "Used status.";
+      }
+      enum "expired" {
+        value 3;
+        description
+          "Expired status.";
+      }
+      enum "conflict" {
+        value 4;
+        description
+          "Conflict status.";
+      }
+      enum "disable" {
+        value 5;
+        description
+          "Disable status.";
+      }
+      enum "idle" {
+        value 6;
+        description
+          "Idle status.";
+      }
+      enum "error" {
+        value 7;
+        description
+          "Error.";
+      }
+    }
+    description
+      "The type of address status.";
+  }
+  grouping dhcp-server-type {
+    description
+      "Configure DHCP server attributes.";
+    container common {
+      description
+        "Configure DHCP server common attributes.";
+      leaf ping-packet-nub {
+        type uint32 {
+          range "0..10";
+        }
+        units "pps";
+        default "2";
+        description
+          "Number of ping packets.";
+      }
+      leaf ping-packet-timeout {
+        type uint32 {
+          range "0..10000";
+        }
+        units "ms";
+        default "500";
+        description
+          "Timeout interval of ping reply.";
+      }
+      leaf trust-option82 {
+        type boolean;
+        default "true";
+        description
+          "Enable/disable the system to trust option82.";
+      }
+      leaf bootp-enable {
+        type boolean;
+        default "false";
+        description
+          "Enable/disable BOOTP.";
+      }
+      leaf bootp-auto-enable {
+        type boolean;
+        default "false";
+        description
+          "Enable/disable BOOTP automatic IP address assignment.";
+      }
+      leaf database-enable {
+        type boolean;
+        default "false";
+        description
+          "Enable/disable database.";
+      }
+      leaf database-recover {
+        type boolean;
+        default "false";
+        description
+          "Enable/disable database recover.";
+      }
+      leaf write-delay-interval {
+        type uint32 {
+          range "300..86400";
+        }
+        units "s";
+        default "300";
+        description
+          "Write delay interval, in the range of 300 to 86400, in seconds.";
+      }
+      leaf option60-enable {
+        type boolean;
+        default "false";
+        description
+          "Enable/disable to allocate IP address by option60.";
+      }
+      leaf dest-ip-enable {
+        type boolean;
+        default "false";
+        description
+          "Enable/disable to use destionation IP address of the request packet as server identifier option.";
+      }
+      leaf lease-items-path {
+        type string {
+          length "1..64";
+        }
+        config false;
+        description
+          "Lease items path.";
+      }
+      leaf conflict-items-path {
+        type string {
+          length "1..64";
+        }
+        config false;
+        description
+          "Conflict items path.";
+      }
+      leaf link-selection-enable {
+        type boolean;
+        default "false";
+        description
+          "Enable/disable DHCP server to assign IP addresses based on the link-selection value in option82.";
+      }
+      leaf server-id-override-enable {
+        type boolean;
+        default "false";
+        description
+          "Enable/disable DHCP server to encapsulate option54 into packet based on the server-id-override value in option82.";
+      }
+      leaf request-packet-all-interface-enable {
+        type boolean;
+        default "false";
+        description
+          "Enable/disable the function of DHCP server on all interfaces.";
+      }
+      leaf force-response {
+        type boolean;
+        default "false";
+        description
+          "Enable/disable to force a DHCP server to reply with a DHCP NAK message.";
+      }
+    }
+    container global-ip-pools {
+      description
+        "List of global ip pools.";
+      list global-ip-pool {
+        key "ip-pool-name";
+        description
+          "Configure a global ip pool.";
+        leaf ip-pool-name {
+          type string {
+            length "1..128";
+          }
+          description
+            "Pool name.";
+        }
+        leaf vpn-instance {
+          type leafref {
+            path "/ni:network-instance/ni:instances/ni:instance/ni:name";
+          }
+		  must "/ni:network-instance/ni:instances/ni:instance[ni:name=current()]/l3vpn:afs/l3vpn:af[l3vpn:type='ipv4-unicast']";
+          default "_public_";
+          description
+            "VPN instance.";
+        }
+        leaf locked-flag {
+          type boolean;
+          default "false";
+          description
+            "Enable/disable to lock.";
+        }
+        leaf option-router-disable {
+          type boolean;
+          default "false";
+          description
+            "Enable/disable reply router option.";
+        }
+        leaf client-option60-string {
+          type string {
+            length "1..255";
+          }
+          description
+            "The value of client option60 in the pool.";
+        }
+        leaf warning-exhaust-enable {
+          type boolean;
+          default "false";
+          description
+            "Enable/disable the warning-exhaust of the pool.";
+        }
+        leaf warning-threshold {
+          type uint8 {
+            range "0..100";
+          }
+          default "80";
+          description
+            "The warning threshold of the pool.";
+        }
+        leaf network-ipv4-address {
+          type inet:ipv4-address-no-zone;
+          description
+            "IP pool address.";
+        }
+        leaf network-mask {
+          when "not(not(../network-ipv4-address))";
+          type inet:ipv4-address-no-zone;
+          description
+            "IP pool mask.";
+        }
+        leaf domain-name {
+          type string {
+            length "1..63";
+          }
+          description
+            "Domain name.";
+        }
+        leaf network-bios-type {
+          type network-bios-type;
+          description
+            "NetBIOS type.";
+        }
+        leaf reply-packet-policy {
+          type reply-type;
+          description
+            "Reply packets policy.";
+        }
+        leaf next-server-ip {
+          type inet:ipv4-address-no-zone;
+          description
+            "Next server IP address.";
+        }
+        leaf profile-name {
+          type string {
+            length "1..128";
+          }
+          description
+            "Remote backup profile.";
+        }
+        leaf identifier-ip {
+          type inet:ipv4-address-no-zone;
+          description
+            "Server identify IP.";
+        }
+        leaf bootfile {
+          type string {
+            length "1..127";
+          }
+          description
+            "Configure the name of the startup configuration file for a DHCP client.";
+        }
+        leaf sname {
+          type string {
+            length "1..63";
+          }
+          description
+            "Configure the name of the server where the DHCP client obtains the startup configuration file.";
+        }
+        leaf dns-interface {
+          type leafref {
+            path "/ifm:ifm/ifm:interfaces/ifm:interface/ifm:name";
+          }
+          description
+            "Borrows the DNS server address obtained by the interface as the DNS server IP address.";
+        }
+        leaf reserved-ip {
+          type boolean;
+          default "false";
+          description
+            "Enable/disable the function of reserving IP address allocation records.";
+        }
+        leaf-list logging {
+          type enumeration {
+            enum "allocation-fail" {
+              value 1;
+              description
+                "Displays logs when address allocation fails.";
+            }
+            enum "allocation-success" {
+              value 2;
+              description
+                "Displays logs when address allocation succeeds.";
+            }
+            enum "release" {
+              value 3;
+              description
+                "Displays logs when addresses are released.";
+            }
+            enum "renew-fail" {
+              value 4;
+              description
+                "Displays logs when address lease renewal fails.";
+            }
+            enum "renew-success" {
+              value 5;
+              description
+                "Displays logs when address lease renewal succeeds.";
+            }
+            enum "detect-conflict" {
+              value 6;
+              description
+                "Displays logs when address conflict occurs.";
+            }
+            enum "recycle-conflict" {
+              value 7;
+              description
+                "Displays logs when conflicting addresses are reclaimed.";
+            }
+          }
+          max-elements 7;
+          description
+            "Configure the logging function during IP address allocation of the DHCP server in the interface view.";
+        }
+        leaf-list nbns-list {
+          type inet:ipv4-address-no-zone;
+          max-elements 8;
+          description
+            "Configure the NetBIOS server address for the DHCP client.";
+        }
+        leaf-list force-insert-option {
+          type uint8 {
+            range "1..254";
+          }
+          max-elements 254;
+          description
+            "Configure a DHCP server to forcibly insert an Option field specified in the global address pool to a DHCP Response packet that it sends to a DHCP client.";
+        }
+        container gateway-lists {
+          description
+            "List of gateway IPs.";
+          list gateway-list {
+            key "gateway-ip";
+            max-elements 8;
+            description
+              "Configure a gateway IP instance.";
+            leaf gateway-ip {
+              type inet:ipv4-address-no-zone;
+              description
+                "Gateway IP.";
+            }
+          }
+        }
+        container gateway {
+          must "../gateway or (not(../gateway) and not(../sections))";
+          description
+            "Configure the gateway information of the pool.";
+          leaf ip-address {
+            type inet:ipv4-address-no-zone;
+            description
+              "The gateway address of the pool.";
+          }
+          leaf mask {
+            when "../ip-address";
+            type inet:ipv4-address-no-zone;
+            mandatory true;
+            description
+              "The gateway mask of the pool.";
+          }
+        }
+        container conflict-recycle {
+          description
+            "Configure the conflict address auto recycle.";
+          leaf auto-recycle-enable {
+            type boolean;
+            default "true";
+            description
+              "Enable/disable auto recycle of the conflict address.";
+          }
+          leaf conflict-recycle-interval {
+            when "../auto-recycle-enable='true'";
+            type uint16 {
+              range "30..1440";
+            }
+            units "min";
+            default "30";
+            description
+              "The interval of the conflict address auto recycle.";
+          }
+        }
+        container lease-time {
+		  must "(day=0 and hour=0 and minute=0 and ../rebind-time/day=0 and ../rebind-time/hour=0 and ../rebind-time/minute=0) or (day>../rebind-time/day) or (day=../rebind-time/day and hour>../rebind-time/hour) or (day=../rebind-time/day and hour=../rebind-time/hour and minute>../rebind-time/minute)";
+          description
+            "Configure lease time.";
+          leaf day {
+            type uint16 {
+              range "0..999";
+            }
+			units "d";
+            default "3";
+            description
+              "The lease time day.";
+          }
+          leaf hour {
+            type uint16 {
+              range "0..23";
+            }
+			units "h";
+            default "0";
+            description
+              "The lease time hour.";
+          }
+          leaf minute {
+            type uint16 {
+              range "0..59";
+            }
+			units "min";
+            default "0";
+            description
+              "The lease time minute.";
+          }
+          leaf unlimited {
+            type boolean;
+            default "false";
+            description
+              "Enable/disable to unlimit lease time.";
+          }
+        }
+        container rebind-time {
+		  must "(day=0 and hour=0 and minute=0 and ../renew-time/day=0 and ../renew-time/hour=0 and ../renew-time/minute=0) or (day>../renew-time/day) or (day=../renew-time/day and hour>../renew-time/hour) or (day=../renew-time/day and hour=../renew-time/hour and minute>../renew-time/minute)";
+          description
+            "Configure the rebind time of the pool.";
+          leaf day {
+            type uint16 {
+              range "0..999";
+            }
+			units "d";
+            default "0";
+            description
+              "The rebinding time day.";
+          }
+          leaf hour {
+            type uint8 {
+              range "0..23";
+            }
+			units "h";
+            default "0";
+            description
+              "The rebinding time hour.";
+          }
+          leaf minute {
+            type uint8 {
+              range "0..59";
+            }
+			units "min";
+            default "0";
+            description
+              "The rebinding time minute.";
+          }
+        }
+        container renew-time {
+          must "(day = 0 and hour = 0 and minute = 0 and ../rebind-time/day = 0 and ../rebind-time/hour = 0 and ../rebind-time/minute = 0) or 
+                (day < ../rebind-time/day) or 
+                (day = ../rebind-time/day and hour < ../rebind-time/hour) or 
+                (day = ../rebind-time/day and hour = ../rebind-time/hour and minute < ../rebind-time/minute)";
+          description
+            "Configure the renew time of the pool.";
+          leaf day {
+            type uint16 {
+              range "0..999";
+            }
+			units "d";
+            default "0";
+            description
+              "The renew time day.";
+          }
+          leaf hour {
+            type uint8 {
+              range "0..23";
+            }
+			units "h";
+            default "0";
+            description
+              "The renew time hour.";
+          }
+          leaf minute {
+            type uint8 {
+              range "0..59";
+            }
+			units "min";
+            default "0";
+            description
+              "The renew time minute.";
+          }
+        }
+        container option184 {
+          description
+            "Configure an option184 of the pool.";
+          choice option184-format {
+            description
+              "Option184 format.";
+            case as-ip-form {
+              description
+                "Backup NCP IP address format.";
+              leaf as-ip {
+                type inet:ipv4-address-no-zone;
+                description
+                  "Backup NCP IP address.";
+              }
+            }
+            case failover-format {
+              description
+                "Failover format.";
+              leaf failover-ip {
+                type inet:ipv4-address-no-zone;
+                description
+                  "Failover IP.";
+              }
+              leaf dial-string {
+                when "not(not(../failover-ip))";
+                type string {
+                  length "1..64";
+                }
+                description
+                  "Dial string.";
+              }
+            }
+            case ncp-ip-format {
+              description
+                "NCP IP format.";
+              leaf ncp-ip {
+                type inet:ipv4-address-no-zone;
+                description
+                  "NCP IP.";
+              }
+            }
+            case voice-vlan-format {
+              description
+                "Voice VLAN format.";
+              leaf voice-vlan {
+                type uint16 {
+                  range "1..4094";
+                }
+                description
+                  "Voice VLAN.";
+              }
+            }
+          }
+        }
+        container option125 {
+          description
+            "Configure an option125 of the pool.";
+          leaf enterprise-code {
+            when "../option-string";
+            type uint32 {
+              range "0..4294967295";
+            }
+            default "2011";
+            description
+              "The enterprise information option code.";
+          }
+          leaf option-string {
+            type string {
+              length "1..32";
+            }
+            description
+              "The enterprise information option value.";
+          }
+        }
+        container sip-server {
+          description
+            "Configure the SIP server of the pool.";
+          leaf sip-server-mode {
+            type sip-mode;
+            must "(../sip-server-mode='ip-mode' and ../sip-server-ip1) or (../sip-server-mode='list-mode' and ../sip-server-name1) or (not (../sip-server-mode))";
+            description
+              "The mode of SIP server.";
+          }
+          choice sip-server-format {
+            description
+              "The format of SIP server.";
+            case ip-format {
+              description
+                "The IP of SIP server.";
+              leaf sip-server-ip1 {
+                when "../sip-server-mode='ip-mode'";
+                type inet:ipv4-address-no-zone;
+                mandatory true;
+                description
+                  "The first IP of SIP server.";
+              }
+              leaf sip-server-ip2 {
+                when "../sip-server-mode='ip-mode'";
+                type inet:ipv4-address-no-zone;
+                description
+                  "The second IP of SIP server.";
+              }
+            }
+            case string-format {
+              description
+                "The name of SIP server.";
+              leaf sip-server-name1 {
+                when "../sip-server-mode='list-mode'";
+                type string {
+                  length "1..63";
+                }
+                mandatory true;
+                description
+                  "The first name of SIP server.";
+              }
+              leaf sip-server-name2 {
+                when "../sip-server-mode='list-mode'";
+                type string {
+                  length "1..63";
+                }
+                description
+                  "The second name of SIP server.";
+              }
+            }
+          }
+        }
+        container sections {
+          description
+            "List of the sections of the pool.";
+          list section {
+            must "(../../gateway and ../section) or (not(../section))";
+            key "section-index";
+            max-elements 256;
+            description
+              "Configure the section of the pool.";
+            leaf section-index {
+              type uint32 {
+                range "0..255";
+              }
+              description
+                "The section index.";
+            }
+            leaf start-ip {
+              type inet:ipv4-address-no-zone;
+              mandatory true;
+              description
+                "The start IP address of the section.";
+            }
+            leaf end-ip {
+              type inet:ipv4-address-no-zone;
+              mandatory true;
+              description
+                "The end IP address of the section.";
+            }
+            container ip-pool-statistics {
+              config false;
+              description
+                "Statistics of IP pool sections.";
+              leaf used-ip-count {
+                type uint32;
+                config false;
+                description
+                  "Number of used IP addresses.";
+              }
+              leaf idle-ip-count {
+                type uint32;
+                config false;
+                description
+                  "Number of idle IP addresses.";
+              }
+              leaf conflict-ip-count {
+                type uint32;
+                config false;
+                description
+                  "Number of conflicted IP addresses.";
+              }
+              leaf disable-ip-count {
+                type uint32;
+                config false;
+                description
+                  "Number of disabled IP addresses.";
+              }
+              leaf total-ip-count {
+                type uint32;
+                config false;
+                description
+                  "Total number of IP addresses.";
+              }
+            }
+            container ip-pool-address-statuses {
+              config false;
+              description
+                "List of operational state of DHCP addresses.";
+              list ip-pool-address-status {
+                key "ip-address";
+                config false;
+                description
+                  "Operational state of a DHCP address.";
+                leaf ip-address {
+                  type inet:ipv4-address-no-zone;
+                  config false;
+                  description
+                    "IP address.";
+                }
+                leaf mac-address {
+                  type pub-type:mac-address;
+                  config false;
+                  description
+                    "MAC address.";
+                }
+                leaf user-id {
+                  type string {
+                    length "1..32";
+                  }
+                  config false;
+                  description
+                    "User ID.";
+                }
+                leaf lease-time {
+                  type yang:date-and-time;
+                  config false;
+                  description
+                    "Lease time.";
+                }
+                leaf status {
+                  type address-status;
+                  config false;
+                  description
+                    "Address status.";
+                }
+              }
+            }
+          }
+        }
+        container dns-lists {
+          description
+            "List of DNS IPs.";
+          list dns-list {
+            key "dns-ip";
+            max-elements 8;
+            description
+              "Configure a DNS IP instance.";
+            leaf dns-ip {
+              type inet:ipv4-address-no-zone;
+              description
+                "DNS IP.";
+            }
+          }
+        }
+        container network-bios-ip-addresses {
+          description
+            "List of NetBIOS IPs.";
+          list network-bios-ip-address {
+            key "network-bios-ip";
+            max-elements 8;
+            description
+              "Configure a NetBIOS IP instance.";
+            leaf network-bios-ip {
+              type inet:ipv4-address-no-zone;
+              description
+                "NetBIOS IP address.";
+            }
+          }
+        }
+        container excluded-ip-addresses {
+          description
+            "List of excluded IP addresses.";
+          list excluded-ip-address {
+            key "start-ip-address";
+            description
+              "Configure an excluded IP instance.";
+            leaf start-ip-address {
+              type inet:ipv4-address-no-zone;
+              description
+                "Excluded start IP address.";
+            }
+            leaf end-ip-address {
+              type inet:ipv4-address-no-zone;
+              description
+                "Excluded end IP address.";
+            }
+          }
+        }
+        container static-binds {
+          description
+            "List of static bind IPs.";
+          list static-bind {
+            key "static-bind-ip";
+            max-elements 4096;
+            description
+              "Configure a static bind IP instance.";
+            leaf static-bind-ip {
+              type inet:ipv4-address-no-zone;
+              description
+                "Static bind IP.";
+            }
+            leaf static-bind-mac {
+              type pub-type:mac-address {
+                length "0..255";
+              }
+              mandatory true;
+              description
+                "Static bind MAC.";
+            }
+            leaf option-template {
+              type string {
+                length "1..31";
+              }
+              description
+                "Specify the name of the DHCP Option template.";
+            }
+            leaf description {
+              type string {
+                length "1..256";
+              }
+              description
+                "Specify the user description.";
+            }
+          }
+        }
+        container options {
+          description
+            "List of option configurations.";
+          list option {
+            key "option-code";
+            max-elements 32;
+            description
+              "Configure option attributes.";
+            leaf option-code {
+              type uint32 {
+                range "1..254";
+              }
+              description
+                "Option code.";
+            }
+            choice option-format {
+              description
+                "The format of server option.";
+              case ip-format {
+                description
+                  "IP format.";
+                leaf-list ip-addresses {
+                  type inet:ip-address-no-zone;
+                  max-elements 8;
+                  description
+                    "Configure option IP lists.";
+                }
+              }
+              case ascii-format {
+                description
+                  "ASCII string format.";
+                leaf ascii-string {
+                  type string {
+                    length "1..255";
+                  }
+                  description
+                    "ASCII string.";
+                }
+              }
+              case hex-format {
+                description
+                  "Hex string format.";
+                leaf hex-string {
+                  type string {
+                    length "1..497";
+                  }
+                  description
+                    "Hex string.";
+                }
+              }
+              case cipher-format {
+                description
+                  "Cipher string format.";
+                leaf cipher-string {
+                  type pub-type:password-extend {
+                    length "1..432";
+                  }
+                  description
+                    "Cipher string.";
+                }
+              }
+              case sub-options-format {
+                description
+                  "Suboptions format.";
+                container sub-options {
+                  description
+                    "List of suboption configurations.";
+                  list sub-option {
+                    key "sub-option-code";
+                    max-elements 32;
+                    description
+                      "Configure a suboption instance.";
+                    leaf sub-option-code {
+                      type uint32 {
+                        range "1..254";
+                      }
+                      description
+                        "Suboption code.";
+                    }
+                    choice option-format {
+                      description
+                        "The format of server suboption.";
+                      case sub-ip-format {
+                        description
+                          "IP format.";
+                        leaf-list ip-addresses {
+                          type inet:ip-address-no-zone;
+                          max-elements 8;
+                          description
+                            "Configure suboption IPs.";
+                        }
+                      }
+                      case sub-ascii-format {
+                        description
+                          "ASCII string format.";
+                        leaf ascii-string {
+                          type string {
+                            length "1..253";
+                          }
+                          description
+                            "ASCII string.";
+                        }
+                      }
+                      case sub-hex-format {
+                        description
+                          "Hex string format.";
+                        leaf hex-string {
+                          type string {
+                            length "1..484";
+                          }
+                          description
+                            "Hex string.";
+                        }
+                      }
+                      case sub-cipher-format {
+                        description
+                          "Cipher string format.";
+                        leaf cipher-string {
+                          type pub-type:password-extend {
+                            length "1..432";
+                          }
+                          description
+                            "Cipher string.";
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+        container user-options {
+          description
+            "List of configuring the user define options of the pool.";
+          list user-option {
+            key "option-code";
+            max-elements 16;
+            description
+              "Configure a user define option of the pool.";
+            leaf option-code {
+              type uint32 {
+                range "1..254";
+              }
+              description
+                "The user define option code.";
+            }
+            choice option-format {
+              mandatory true;
+              description
+                "The format of server option.";
+              case ip-format {
+                description
+                  "IP format.";
+                leaf-list option-ip-addresses {
+                  type inet:ip-address-no-zone;
+                  max-elements 2;
+                  description
+                    "Configure the IP address.";
+                }
+              }
+              case ascii-format {
+                description
+                  "ASCII string format.";
+                leaf ascii-string {
+                  type string {
+                    length "1..255";
+                  }
+                  description
+                    "The ASCII string of the option.";
+                }
+              }
+              case hex-format {
+                description
+                  "Hex string format.";
+                leaf hex-string {
+                  type string {
+                    length "2..479";
+                  }
+                  description
+                    "Hex string.";
+                }
+              }
+              case cipher-format {
+                description
+                  "Cipher string format.";
+                leaf cipher-string {
+                  type pub-type:password-extend {
+                    length "1..432";
+                  }
+                  description
+                    "The cipher string of the option.";
+                }
+              }
+              case sub-option-format {
+                description
+                  "Suboptions format.";
+                container sub-user-options {
+                  description
+                    "List of the user define suboptions.";
+                  list sub-user-option {
+                    key "sub-option-code";
+                    max-elements 8;
+                    description
+                      "Configure the user define suboption.";
+                    leaf sub-option-code {
+                      type uint32 {
+                        range "1..254";
+                      }
+                      description
+                        "The user define suboption code.";
+                    }
+                    choice option-format {
+                      description
+                        "The format of server suboption.";
+                      case sub-ip-format {
+                        description
+                          "IP format.";
+                        leaf sub-option-ip {
+                          type inet:ip-address-no-zone;
+                          description
+                            "The IP address.";
+                        }
+                      }
+                      case sub-ascii-format {
+                        description
+                          "ASCII string format.";
+                        leaf ascii-string {
+                          type string {
+                            length "1..253";
+                          }
+                          description
+                            "ASCII string.";
+                        }
+                      }
+                      case sub-cipher-format {
+                        description
+                          "Cipher string format.";
+                        leaf cipher-string {
+                          type pub-type:password-extend {
+                            length "1..432";
+                          }
+                          description
+                            "The cipher string of the option.";
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+        container client-options {
+          description
+            "List of the specified client options of the pool.";
+          list client-option {
+            key "option-code cilent-string reply-code";
+            max-elements 16;
+            description
+              "Configure the specified client option of the pool.";
+            leaf option-code {
+              type uint8 {
+                range "60";
+              }
+              description
+                "The client option code.";
+            }
+            leaf cilent-string {
+              type string {
+                length "3..66";
+              }
+              description
+                "The client option value, the field must begin and end with double quotation marks.";
+            }
+            leaf reply-code {
+              type uint8 {
+                range "2..254";
+              }
+              description
+                "The specified reply option code.";
+            }
+            container client-sub-options {
+              description
+                "List of specified reply suboptions.";
+              list client-sub-option {
+                key "sub-option-code";
+                min-elements 1;
+                max-elements 16;
+                description
+                  "Configure the specified reply suboption.";
+                leaf sub-option-code {
+                  type uint32 {
+                    range "1..254";
+                  }
+                  description
+                    "The specified reply suboption code.";
+                }
+                choice option-format {
+                  description
+                    "The format of server suboption.";
+                  case sub-ip-format {
+                    description
+                      "IP format.";
+                    leaf sub-option-ip {
+                      type inet:ip-address-no-zone;
+                      description
+                        "Suboption IP.";
+                    }
+                  }
+                  case sub-ascii-format {
+                    description
+                      "ASCII string format.";
+                    leaf ascii-string {
+                      type string {
+                        length "1..128";
+                      }
+                      description
+                        "ASCII string.";
+                    }
+                  }
+                  case sub-hex-format {
+                    description
+                      "Hex string format.";
+                    leaf hex-string {
+                      type string {
+                        length "1..128";
+                      }
+                      description
+                        "Hex string.";
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+        container option121s {
+          description
+            "List of the option121 attributes.";
+          list option121 {
+            key "destination-ip mask gateway";
+            max-elements 8;
+            description
+              "Configure the option121 attributes.";
+            leaf destination-ip {
+              type inet:ipv4-address-no-zone;
+              description
+                "Destination IP address.";
+            }
+            leaf mask {
+              type uint32 {
+                range "0..32";
+              }
+              description
+                "IP mask.";
+            }
+            leaf gateway {
+              type inet:ipv4-address-no-zone;
+              description
+                "Gateway address.";
+            }
+          }
+        }
+        container option33s {
+          description
+            "List of the option33 attributes.";
+          list option33 {
+            key "destination-ip gateway";
+            max-elements 8;
+            description
+              "Configure the option33 attributes.";
+            leaf destination-ip {
+              type inet:ipv4-address-no-zone;
+              description
+                "Destionnation IP address.";
+            }
+            leaf gateway {
+              type inet:ipv4-address-no-zone;
+              description
+                "Gateway IP address.";
+            }
+          }
+        }
+        container domain-lists {
+          description
+            "List of the domain lists of the pool.";
+          list domain-list {
+            key "domain-name";
+            max-elements 4;
+            description
+              "Configure the domain list of the pool.";
+            leaf domain-name {
+              type string {
+                length "1..32";
+              }
+              description
+                "Domain name.";
+            }
+          }
+        }
+        container option-force-replys {
+          description
+            "List of the force reply options of the pool.";
+          list option-force-reply {
+            key "option-code";
+            max-elements 16;
+            description
+              "Configure the force reply option of the pool.";
+            leaf option-code {
+              type uint8 {
+                range "2..254";
+              }
+              description
+                "The force reply option code.";
+            }
+          }
+        }
+        container alarm-ip-used {
+          description
+            "Configure the percentage of the alarms indicating that the addresses in an address pool are used up, and the percentage of the clear alarms.";
+          leaf resum-percent {
+            type uint8 {
+              range "1..100";
+            }
+            default "50";
+            description
+              "Specify the percentage of the clear alarms.";
+          }
+          leaf alarm-percent {
+            type uint8 {
+              range "1..100";
+            }
+            default "100";
+            description
+              "Specify the percentage of the alarms indicating that the addresses in an address pool are used up.";
+          }
+        }
+        container auto-recycle {
+          description
+            "Configure automatic reclaim of conflicting IP addresses in the global address pool and configures the interval for the automatic reclaim.";
+          leaf day {
+            type uint16 {
+              range "0..999";
+            }
+            default "0";
+            description
+              "Specify the interval for the automatic reclaim, in days.";
+          }
+          leaf hour {
+            type uint8 {
+              range "0..23";
+            }
+            default "0";
+            description
+              "Specify the interval for the automatic reclaim, in hours.";
+          }
+          leaf minute {
+            type uint8 {
+              range "0..59";
+            }
+            default "0";
+            description
+              "Specify the interval for the automatic reclaim, in minutes.";
+          }
+        }
+        container ip-pool-statistics {
+          config false;
+          description
+            "Statistics of a IP pool.";
+          leaf used-ip-count {
+            type uint32;
+            config false;
+            description
+              "Number of used IP addresses.";
+          }
+          leaf idle-ip-count {
+            type uint32;
+            config false;
+            description
+              "Number of idle IP addresses.";
+          }
+          leaf expired-ip-count {
+            type uint32;
+            config false;
+            description
+              "Number of expired IP addresses.";
+          }
+          leaf conflict-ip-count {
+            type uint32;
+            config false;
+            description
+              "Number of conflicted IP addresses.";
+          }
+          leaf disable-ip-count {
+            type uint32;
+            config false;
+            description
+              "Number of disabled IP addresses.";
+          }
+          leaf total-ip-count {
+            type uint32;
+            config false;
+            description
+              "Total number of IP addresses.";
+          }
+          leaf start-ip {
+            type inet:ipv4-address-no-zone;
+            config false;
+            description
+              "Start IP address.";
+          }
+          leaf end-ip {
+            type inet:ipv4-address-no-zone;
+            config false;
+            description
+              "End IP address.";
+          }
+        }
+        container ip-pool-address-statuses {
+          config false;
+          description
+            "List of operational state of DHCP addresses.";
+          list ip-pool-address-status {
+            key "ip-address";
+            config false;
+            description
+              "Operational state of a DHCP address.";
+            leaf ip-address {
+              type inet:ipv4-address-no-zone;
+              config false;
+              description
+                "IP address.";
+            }
+            leaf ip-index {
+              type uint32;
+              config false;
+              description
+                "Index of IP addresses.";
+            }
+            leaf mac-address {
+              type pub-type:mac-address;
+              config false;
+              description
+                "MAC address.";
+            }
+            leaf lease-time {
+              type uint32;
+              config false;
+              description
+                "Lease time.";
+            }
+            leaf status {
+              ext:support-filter "true";
+              type address-status;
+              config false;
+              description
+                "Address status.";
+            }
+          }
+        }
+        container ip-pool-usage {
+          config false;
+          description
+            "Statistics of the usage of the pool.";
+          leaf pool-length {
+            type uint32;
+            config false;
+            description
+              "The length of the pool.";
+          }
+          leaf used-ip-count {
+            type uint32;
+            config false;
+            description
+              "The count of used IP address.";
+          }
+          leaf ratio {
+            type uint32;
+            config false;
+            description
+              "The ratio of the used IP address.";
+          }
+          leaf last-time {
+            type yang:date-and-time;
+            config false;
+            description
+              "The last time of allocating IP address.";
+          }
+        }
+        container ip-pool-max-usage {
+          config false;
+          description
+            "Statistics of the maximum use of IP pool in history.";
+          leaf pool-length {
+            type uint32;
+            config false;
+            description
+              "The length of the pool.";
+          }
+          leaf used-ip-count {
+            type uint32;
+            config false;
+            description
+              "The count of used IP address.";
+          }
+          leaf last-time {
+            type yang:date-and-time;
+            config false;
+            description
+              "The last time of allocating IP address.";
+          }
+        }
+      }
+    }
+    container option-templates {
+      description
+        "List of DHCP Option template and enters the DHCP Option template view.";
+      list option-template {
+        key "name";
+        description
+          "Configure DHCP Option template and enters the DHCP Option template view.";
+        leaf name {
+          type string {
+            length "1..31";
+          }
+          description
+            "Specify the name of the DHCP Option template.";
+        }
+        leaf next-server {
+          type inet:ipv4-address-no-zone;
+          description
+            "Configure the IP address of a server for the DHCP client after the client automatically obtains the IP address.";
+        }
+        leaf network-bios-type {
+          type network-bios-type;
+          description
+            "NetBIOS type.";
+        }
+        leaf domain-name {
+          type string {
+            length "1..63";
+          }
+          description
+            "Domain name.";
+        }
+        leaf bootfile {
+          type string {
+            length "1..127";
+          }
+          description
+            "Configure the name of the startup configuration file for a DHCP client.";
+        }
+        leaf sname {
+          type string {
+            length "1..63";
+          }
+          description
+            "Configure the name of the server where the DHCP client obtains the startup configuration file.";
+        }
+        leaf-list nbns-list {
+          type inet:ipv4-address-no-zone;
+          max-elements 8;
+          description
+            "Configure the NetBIOS server address for the DHCP client.";
+        }
+        leaf-list force-insert-option {
+          type uint8 {
+            range "1..254";
+          }
+          max-elements 254;
+          description
+            "Configure a DHCP server to forcibly insert an Option field specified in the global address pool to a DHCP Response packet that it sends to a DHCP client.";
+        }
+        container gateway-lists {
+          description
+            "List of gateway IPs.";
+          list gateway-list {
+            key "gateway-ip";
+            max-elements 8;
+            description
+              "Configure a gateway IP instance.";
+            leaf gateway-ip {
+              type inet:ipv4-address-no-zone;
+              description
+                "Gateway IP.";
+            }
+          }
+        }
+        container dns-lists {
+          description
+            "List of DNS IPs.";
+          list dns-list {
+            key "dns-ip";
+            max-elements 8;
+            description
+              "Configure a DNS IP instance.";
+            leaf dns-ip {
+              type inet:ipv4-address-no-zone;
+              description
+                "DNS IP.";
+            }
+          }
+        }
+        container option121s {
+          description
+            "List of a classless static route allocated by a DHCP server to a client.";
+          list option121 {
+            key "destination-ip mask gateway-address";
+            max-elements 8;
+            description
+              "Configure a classless static route allocated by a DHCP server to a client.";
+            leaf destination-ip {
+              type inet:ipv4-address-no-zone;
+              description
+                "Specify the destination IP address.";
+            }
+            leaf mask {
+              type uint8 {
+                range "0..32";
+              }
+              description
+                "Specify the mask length.";
+            }
+            leaf gateway-address {
+              type inet:ipv4-address-no-zone;
+              description
+                "Specify the gateway address of a route.";
+            }
+          }
+        }
+      }
+    }
+    container packet-statistics {
+      config false;
+      description
+        "Statistics of the packet.";
+      leaf client-request-count {
+        type uint32;
+        config false;
+        description
+          "Number of client request packets.";
+      }
+      leaf discover-count {
+        type uint32;
+        config false;
+        description
+          "Number of discover packets.";
+      }
+      leaf request-count {
+        type uint32;
+        config false;
+        description
+          "Number of request packets.";
+      }
+      leaf decline-count {
+        type uint32;
+        config false;
+        description
+          "Number of decline packets.";
+      }
+      leaf release-count {
+        type uint32;
+        config false;
+        description
+          "Number of release packets";
+      }
+      leaf inform-count {
+        type uint32;
+        config false;
+        description
+          "Number of inform packets.";
+      }
+      leaf server-reply-count {
+        type uint32;
+        config false;
+        description
+          "Number of reply packets from servers.";
+      }
+      leaf offer-count {
+        type uint32;
+        config false;
+        description
+          "Number of offer packets.";
+      }
+      leaf ack-count {
+        type uint32;
+        config false;
+        description
+          "Number of ACK packets.";
+      }
+      leaf nak-count {
+        type uint32;
+        config false;
+        description
+          "Number of NAK packets.";
+      }
+      leaf force-renew-count {
+        type uint32;
+        config false;
+        description
+          "Number of force renew packets.";
+      }
+      leaf bad-message-count {
+        type uint32;
+        config false;
+        description
+          "Number of error packets.";
+      }
+      leaf bootp-request-count {
+        type uint32;
+        config false;
+        description
+          "Number of bootp request packets.";
+      }
+      leaf bootp-reply-count {
+        type uint32;
+        config false;
+        description
+          "Number of bootp reply packets.";
+      }
+    }
+  }
+  augment /ifm:ifm/ifm:interfaces/ifm:interface {
+    description
+      "Extend interface attribute.";
+    container interface-ip-pool {
+      description
+        "Configure a interface ip pool.";
+      choice select-type {
+        description
+          "Choice of selecting interface or global.";
+        case global {
+          description
+            "Case global.";
+          leaf select-global {
+            type boolean;
+            default "false";
+            description
+              "Enable/disable an interface to use the global address pool.";
+          }
+        }
+        case interface {
+          ext:hidden ui;
+          description
+            "Case interface.";
+          leaf select-interface {
+            type boolean;
+            default "false";
+            description
+              "Enable/disable an interface to use the interface address pool.";
+          }
+          leaf arpbind {
+            type boolean;
+            default "false";
+            description
+              "Enable/disable authorized ARP.";
+          }
+          leaf bootfile {
+            type string {
+              length "1..127";
+            }
+            description
+              "Configure the name of the startup configuration file for a DHCP client.";
+          }
+          leaf sname {
+            type string {
+              length "1..63";
+            }
+            description
+              "Configure the name of the server where the DHCP client obtains the startup configuration file.";
+          }
+          leaf domain-name {
+            type string {
+              length "1..63";
+            }
+            description
+              "Configure a DNS domain name assigned to a DHCP client.";
+          }
+          leaf netbios-type {
+            type network-bios-type;
+            description
+              "Specify the NetBIOS node type for a DHCP client connecting to an interface.";
+          }
+          leaf next-server {
+            type inet:ipv4-address-no-zone;
+            description
+              "Specify a next server IP address for DHCP clients.";
+          }
+          leaf reserved-ip {
+            type boolean;
+            default "false";
+            description
+              "Enable/disable the function of reserving IP address allocation records.";
+          }
+          leaf-list logging {
+            type enumeration {
+              enum "allocation-fail" {
+                value 1;
+                description
+                  "Displays logs when address allocation fails.";
+              }
+              enum "allocation-success" {
+                value 2;
+                description
+                  "Displays logs when address allocation succeeds.";
+              }
+              enum "release" {
+                value 3;
+                description
+                  "Displays logs when addresses are released.";
+              }
+              enum "renew-fail" {
+                value 4;
+                description
+                  "Displays logs when address lease renewal fails.";
+              }
+              enum "renew-success" {
+                value 5;
+                description
+                  "Displays logs when address lease renewal succeeds.";
+              }
+              enum "detect-conflict" {
+                value 6;
+                description
+                  "Displays logs when address conflict occurs.";
+              }
+              enum "recycle-conflict" {
+                value 7;
+                description
+                  "Displays logs when conflicting addresses are reclaimed.";
+              }
+            }
+            max-elements 7;
+            description
+              "Configure the logging function during IP address allocation of the DHCP server in the IP address pool view.";
+          }
+          leaf-list nbns-list {
+            type inet:ipv4-address-no-zone;
+            max-elements 8;
+            description
+              "Configure Network Basic Input Output System (NetBIOS) server addresses for an interface address pool.";
+          }
+          leaf-list gateway-list {
+            type inet:ipv4-address-no-zone;
+            max-elements 8;
+            description
+              "Configure the default gateway IP address that a DHCP server pre-allocates to DHCP clients.";
+          }
+          leaf-list force-insert-option {
+            type uint8 {
+              range "1..254";
+            }
+            max-elements 254;
+            description
+              "Configure a DHCP server to forcibly insert an Option field specified in the interface address pool to a DHCP Response packet that it sends to a DHCP client.";
+          }
+          container mask {
+            description
+              "Configure the subnet mask of IP addresses that a DHCP server pre-allocates to DHCP clients.";
+            choice mask-type {
+              description
+                "Choice of mask type.";
+              case mask {
+                description
+                  "Case of mask.";
+                leaf mask {
+                  type inet:ipv4-address-no-zone;
+                  description
+                    "Specify a subnet mask.";
+                }
+              }
+              case masklen {
+                description
+                  "Case of mask length.";
+                leaf masklen {
+                  type uint8 {
+                    range "1..32";
+                  }
+                  description
+                    "Specify the length of the subnet.";
+                }
+              }
+            }
+          }
+          container lease {
+            description
+              "Configure the IP address lease for addresses in an interface address pool.";
+            choice time-type {
+              description
+                "Choice of time type.";
+              case limited {
+                description
+                  "Case of limited time.";
+                leaf day {
+                  type uint16 {
+                    range "0..999";
+                  }
+                  default "1";
+                  description
+                    "Specify the number of days in the IP address lease.";
+                }
+                leaf hour {
+                  type uint8 {
+                    range "0..23";
+                  }
+                  default "0";
+                  description
+                    "Specify the number of hours in the IP address lease.";
+                }
+                leaf minute {
+                  type uint8 {
+                    range "0..59";
+                  }
+                  default "0";
+                  description
+                    "Specify the number of minutes in the IP address lease.";
+                }
+              }
+              case unlimited {
+                description
+                  "Case of unlimited time.";
+                leaf unlimited {
+                  type boolean;
+                  default "false";
+                  description
+                    "Enable/disable that the IP address lease is unlimited.";
+                }
+              }
+            }
+          }
+          container dns-list {
+            description
+              "Configure DNS server addresses for an interface address pool.";
+            leaf interface-name {
+              ext:hidden ui;
+              type leafref {
+                path "/ifm:ifm/ifm:interfaces/ifm:interface/ifm:name";
+              }
+              description
+                "Borrow the DNS server address obtained by the interface as the DNS server IP address.";
+            }
+            leaf-list ip-address {
+              type inet:ipv4-address-no-zone;
+              max-elements 8;
+              description
+                "Specify the IP address of the DNS server.";
+            }
+          }
+          container ip-range {
+            description
+              "Configure the range of IP addresses that a DHCP server pre-allocates to DHCP clients.";
+            leaf start-ip-address {
+              type inet:ipv4-address-no-zone;
+              description
+                "Specify the start IP address.";
+            }
+            leaf end-ip-address {
+              type inet:ipv4-address-no-zone;
+              description
+                "Specify the end IP address.";
+            }
+          }
+          container sip-server {
+            description
+              "Configure the SIP server IP address assigned to a DHCP client on an interface address pool.";
+            choice sip-server-format {
+              description
+                "The format of SIP server.";
+              case ip-format {
+                description
+                  "The IP of SIP server.";
+                leaf sip-server-ip1 {
+                  type inet:ipv4-address-no-zone;
+                  mandatory true;
+                  description
+                    "The first IP of SIP server.";
+                }
+                leaf sip-server-ip2 {
+                  type inet:ipv4-address-no-zone;
+                  description
+                    "The second IP of SIP server.";
+                }
+              }
+              case string-format {
+                description
+                  "The name of SIP server.";
+                leaf sip-server-name1 {
+                  type string {
+                    length "1..63";
+                  }
+                  mandatory true;
+                  description
+                    "The first name of SIP server.";
+                }
+                leaf sip-server-name2 {
+                  type string {
+                    length "1..63";
+                  }
+                  description
+                    "The second name of SIP server.";
+                }
+              }
+            }
+          }
+          container alarm-ip-used {
+            description
+              "Configure the percentage of the alarms indicating that the addresses in an interface address pool are used up, and the percentage of the clear alarms.";
+            leaf alarm-resume-percentage {
+              type uint8 {
+                range "1..100";
+              }
+              default "50";
+              description
+                "Specify the percentage of the clear alarms.";
+            }
+            leaf alarm-percentage {
+              type uint8 {
+                range "1..100";
+              }
+              must "../alarm-percentage>=../alarm-resume-percentage";
+              default "100";
+              description
+                "Specify the percentage of the alarms indicating that the addresses in an address pool are used up.";
+            }
+          }
+          container excluded-ip-addresses {
+            description
+              "List of the range of IP addresses that cannot be automatically assigned to clients from an interface address pool.";
+            list excluded-ip-address {
+              key "start-ip-address";
+              description
+                "Configure the range of IP addresses that cannot be automatically assigned to clients from an interface address pool.";
+              leaf start-ip-address {
+                type inet:ipv4-address-no-zone;
+                description
+                  "Specify the start IP address of the IP address segment where addresses cannot be automatically assigned to clients.";
+              }
+              leaf end-ip-address {
+                type inet:ipv4-address-no-zone;
+                description
+                  "Specify the end IP address of the IP address segment where addresses cannot be automatically assigned to clients.";
+              }
+            }
+          }
+          container static-binds {
+            description
+              "List of static bind IPs.";
+            list static-bind {
+              key "static-bind-ip";
+              description
+                "Configure a static bind IP instance.";
+              leaf static-bind-ip {
+                type inet:ipv4-address-no-zone;
+                description
+                  "Specify the IP address to be bound.";
+              }
+              leaf static-bind-mac {
+                type pub-type:mac-address;
+                mandatory true;
+                description
+                  "Specify the user MAC address.";
+              }
+              leaf description {
+                type string {
+                  length "1..256";
+                }
+                description
+                  "Specify the user description.";
+              }
+            }
+          }
+          container options {
+            description
+              "List of option configurations.";
+            list option {
+              key "option-code";
+              max-elements 32;
+              description
+                "Configure option attributes.";
+              leaf option-code {
+                type uint32 {
+                  range "1..254";
+                }
+                description
+                  "Option code.";
+              }
+              choice option-format {
+                description
+                  "The format of server option.";
+                case ip-format {
+                  description
+                    "IP format.";
+                  leaf-list ip-addresses {
+                    type inet:ip-address-no-zone;
+                    max-elements 8;
+                    description
+                      "Configure option IP lists.";
+                  }
+                }
+                case ascii-format {
+                  description
+                    "ASCII string format.";
+                  leaf ascii-string {
+                    type string {
+                      length "1..255";
+                    }
+                    description
+                      "ASCII string.";
+                  }
+                }
+                case hex-format {
+                  description
+                    "Hex string format.";
+                  leaf hex-string {
+                    type string {
+                      length "1..497";
+                    }
+                    description
+                      "Hex string.";
+                  }
+                }
+                case cipher-format {
+                  description
+                    "Cipher string format.";
+                  leaf cipher-string {
+                    type pub-type:password-extend {
+                      length "1..432";
+                    }
+                    description
+                      "Cipher string.";
+                  }
+                }
+                case sub-options-format {
+                  description
+                    "Suboptions format.";
+                  container sub-options {
+                    description
+                      "List of suboption configurations.";
+                    list sub-option {
+                      key "sub-option-code";
+                      max-elements 32;
+                      description
+                        "Configure a suboption instance.";
+                      leaf sub-option-code {
+                        type uint32 {
+                          range "1..254";
+                        }
+                        description
+                          "Suboption code.";
+                      }
+                      choice option-format {
+                        description
+                          "The format of server suboption.";
+                        case sub-ip-format {
+                          description
+                            "IP format.";
+                          leaf-list ip-addresses {
+                            type inet:ip-address-no-zone;
+                            max-elements 8;
+                            description
+                              "Configure suboption IPs.";
+                          }
+                        }
+                        case sub-ascii-format {
+                          description
+                            "ASCII string format.";
+                          leaf ascii-string {
+                            type string {
+                              length "1..253";
+                            }
+                            description
+                              "ASCII string.";
+                          }
+                        }
+                        case sub-hex-format {
+                          description
+                            "Hex string format.";
+                          leaf hex-string {
+                            type string {
+                              length "1..484";
+                            }
+                            description
+                              "Hex string.";
+                          }
+                        }
+                        case sub-cipher-format {
+                          description
+                            "Cipher string format.";
+                          leaf cipher-string {
+                            type pub-type:password-extend {
+                              length "1..432";
+                            }
+                            description
+                              "Cipher string.";
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+          container option121s {
+            description
+              "List of a classless static route allocated by a DHCP server to a client.";
+            list option121 {
+              key "destination-ip mask gateway-address";
+              max-elements 8;
+              description
+                "Configure a classless static route allocated by a DHCP server to a client.";
+              leaf destination-ip {
+                type inet:ipv4-address-no-zone;
+                description
+                  "Specify the destination IP address.";
+              }
+              leaf mask {
+                type uint8 {
+                  range "0..32";
+                }
+                description
+                  "Specify the mask length.";
+              }
+              leaf gateway-address {
+                type inet:ipv4-address-no-zone;
+                description
+                  "Specify the gateway address of a route.";
+              }
+            }
+          }
+          container option184 {
+            description
+              "Configure an option184 of the pool.";
+            leaf as-ip {
+              type inet:ipv4-address-no-zone;
+              description
+                "Backup NCP IP address.";
+            }
+            leaf ncp-ip {
+              type inet:ipv4-address-no-zone;
+              description
+                "NCP IP.";
+            }
+            leaf voice-vlan {
+              type uint16 {
+                range "1..4094";
+              }
+              description
+                "Voice VLAN.";
+            }
+            container failover {
+              description
+                "Configure failover.";
+              leaf failover-ip {
+                type inet:ipv4-address-no-zone;
+                description
+                  "Failover IP.";
+              }
+              leaf dial-string {
+                when "not(not(../failover-ip))";
+                type string {
+                  length "1..64";
+                }
+                description
+                  "Dial string.";
+              }
+            }
+          }
+          container auto-recycle {
+            description
+              "Configure automatic reclaim of conflicting IP addresses in the interface address pool and configures the interval for the automatic reclaim.";
+            leaf day {
+              type uint16 {
+                range "0..999";
+              }
+              default "0";
+              description
+                "Specify the interval for the automatic reclaim, in days. ";
+            }
+            leaf hour {
+              type uint8 {
+                range "0..23";
+              }
+              default "0";
+              description
+                "Specify the interval for the automatic reclaim, in hours.";
+            }
+            leaf minute {
+              type uint8 {
+                range "0..59";
+              }
+              default "0";
+              description
+                "Specify the interval for the automatic reclaim, in minutes.";
+            }
+          }
+        }
+      }
+    }
+  }
+}

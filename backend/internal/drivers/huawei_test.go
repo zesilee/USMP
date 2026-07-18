@@ -340,15 +340,16 @@ func TestHuaweiDescriptors_XplEncodeDecodeRoundtrip(t *testing.T) {
 }
 
 // routing-policy 描述符全链路真值往返（RFC7951 写 → XML 编码下发 → XML 回读），覆盖容器根
-// 下 policy-definitions/policy-definition(name+address-family-mismatch-deny) 标量边界
-// （RTP-01/02）。BGP 2b import/export route-policy leafref 的目标实例经此路径可配。
+// 下 policy-definitions/policy-definition(name) + nodes/node(sequence+match-mode) 嵌套
+// list 标量/枚举边界（RTP-01/02，CE 基线 pd 级无标量叶）。BGP 2b import/export
+// route-policy leafref 的目标实例经此路径可配。
 func TestHuaweiDescriptors_RoutingPolicyEncodeDecodeRoundtrip(t *testing.T) {
 	enc, ok := driver.EncoderFor("/rtp:routing-policy")
 	if !ok {
 		t.Fatal("routing-policy 编码描述符应命中")
 	}
 	dest := enc.NewStruct()
-	if err := enc.Unmarshal([]byte(`{"policy-definitions":{"policy-definition":[{"name":"RP1","address-family-mismatch-deny":true}]}}`), dest); err != nil {
+	if err := enc.Unmarshal([]byte(`{"policy-definitions":{"policy-definition":[{"name":"RP1","nodes":{"node":[{"sequence":10,"match-mode":"permit"}]}}]}}`), dest); err != nil {
 		t.Fatalf("RFC7951 解码失败: %v", err)
 	}
 	rp, ok := dest.(*huawei.HuaweiRoutingPolicy_RoutingPolicy)
@@ -356,7 +357,7 @@ func TestHuaweiDescriptors_RoutingPolicyEncodeDecodeRoundtrip(t *testing.T) {
 		t.Fatalf("NewStruct/Unmarshal 装配错误: %#v", dest)
 	}
 	pd := rp.PolicyDefinitions.PolicyDefinition["RP1"]
-	if pd == nil || pd.AddressFamilyMismatchDeny == nil || !*pd.AddressFamilyMismatchDeny {
+	if pd == nil || pd.Nodes == nil || pd.Nodes.Node[10] == nil || pd.Nodes.Node[10].MatchMode != huawei.HuaweiRoutingPolicy_MatchModeType_permit {
 		t.Fatalf("policy-definition 未正确解码: %#v", rp.PolicyDefinitions)
 	}
 
@@ -369,7 +370,7 @@ func TestHuaweiDescriptors_RoutingPolicyEncodeDecodeRoundtrip(t *testing.T) {
 	}
 	for _, want := range []string{
 		`xmlns="urn:huawei:yang:huawei-routing-policy"`,
-		"<name>RP1</name>", "<address-family-mismatch-deny>true</address-family-mismatch-deny>",
+		"<name>RP1</name>", "<sequence>10</sequence>", "<match-mode>permit</match-mode>",
 	} {
 		if !strings.Contains(xml, want) {
 			t.Errorf("下发 XML 缺 %q\n实际: %s", want, xml)
@@ -386,7 +387,7 @@ func TestHuaweiDescriptors_RoutingPolicyEncodeDecodeRoundtrip(t *testing.T) {
 	}
 	rt := parsed.(*huawei.HuaweiRoutingPolicy_RoutingPolicy)
 	rpd := rt.PolicyDefinitions.PolicyDefinition["RP1"]
-	if rpd == nil || rpd.AddressFamilyMismatchDeny == nil || !*rpd.AddressFamilyMismatchDeny {
+	if rpd == nil || rpd.Nodes == nil || rpd.Nodes.Node[10] == nil || rpd.Nodes.Node[10].MatchMode != huawei.HuaweiRoutingPolicy_MatchModeType_permit {
 		t.Fatalf("回读嵌套 list 真值不等价: %#v", rt.PolicyDefinitions)
 	}
 }
@@ -453,8 +454,9 @@ func TestHuaweiDescriptors_AclEncodeDecodeRoundtrip(t *testing.T) {
 	}
 }
 
-// BGP 2b 波次⑤：AF import-filter-policy 策略属性（acl-name-or-num→acl、filter-name→xpl）
-// 经既有 network-instance 描述符编码——零新描述符，`<bgp>` 子树带 huawei-bgp namespace
+// BGP 2b 波次⑤：AF import-filter-policy 策略属性（acl-name-or-num→acl、
+// ipv4-prefix-filter→前缀列表；CE 基线无 filter-name/filter-parameter）经既有
+// network-instance 描述符编码——零新描述符，`<bgp>` 子树带 huawei-bgp namespace
 // （XC-06），leaf 值真值正确（AFPOL-01）。证明 2b 全链路：AF 策略属性→已集成目标模型。
 func TestHuaweiDescriptors_BgpAfImportFilterPolicyEncode(t *testing.T) {
 	// 复用 ni 描述符（谓词已覆盖 af 路径），零新描述符
@@ -469,7 +471,7 @@ func TestHuaweiDescriptors_BgpAfImportFilterPolicyEncode(t *testing.T) {
 	dest := enc.NewStruct()
 	j := `{"instances":{"instance":[{"name":"_public_","bgp":{"base-process":{"afs":{"af":[` +
 		`{"type":"ipv4uni","ipv4-unicast":{"import-filter-policy":` +
-		`{"acl-name-or-num":"G1","filter-name":"RF1","filter-parameter":"P1"}}}]}}}}]}}`
+		`{"acl-name-or-num":"G1","ipv4-prefix-filter":"PF1"}}}]}}}}]}}`
 	if err := enc.Unmarshal([]byte(j), dest); err != nil {
 		t.Fatalf("RFC7951 解码失败: %v", err)
 	}
@@ -481,8 +483,7 @@ func TestHuaweiDescriptors_BgpAfImportFilterPolicyEncode(t *testing.T) {
 		`<bgp xmlns="urn:huawei:yang:huawei-bgp">`,
 		"<import-filter-policy>",
 		"<acl-name-or-num>G1</acl-name-or-num>",
-		"<filter-name>RF1</filter-name>",
-		"<filter-parameter>P1</filter-parameter>",
+		"<ipv4-prefix-filter>PF1</ipv4-prefix-filter>",
 	} {
 		if !strings.Contains(xml, want) {
 			t.Errorf("AF 策略属性编码缺 %q\n实际: %s", want, xml)
@@ -495,9 +496,9 @@ func TestHuaweiDescriptors_BgpAfImportFilterPolicyEncode(t *testing.T) {
 		t.Fatalf("XML 解码失败: %v", err)
 	}
 	rt := parsed.(*huawei.HuaweiNetworkInstance_NetworkInstance)
-	af := rt.Instances.Instance["_public_"].Bgp.BaseProcess.Afs.Af[huawei.HuaweiBgp_AfType_ipv4uni]
+	af := rt.Instances.Instance["_public_"].Bgp.BaseProcess.Afs.Af[huawei.HuaweiBgp_AfTypeDeviations_ipv4uni]
 	ifp := af.Ipv4Unicast.ImportFilterPolicy
-	if ifp == nil || ifp.AclNameOrNum == nil || *ifp.AclNameOrNum != "G1" || ifp.FilterName == nil || *ifp.FilterName != "RF1" {
+	if ifp == nil || ifp.AclNameOrNum == nil || *ifp.AclNameOrNum != "G1" || ifp.Ipv4PrefixFilter == nil || *ifp.Ipv4PrefixFilter != "PF1" {
 		t.Fatalf("回读 AF 策略属性真值不等价: %#v", ifp)
 	}
 }

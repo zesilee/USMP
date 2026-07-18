@@ -1,0 +1,12 @@
+{
+  "?name": "模板唯一标识，SND,SSP,GND所有包不能重复",
+  "name": "ent-gnd-model-pkg-template",
+
+  "?type": "模板类型，SND和GND只有global类型，SSP包可以有global|sub",
+  "type": "global",
+
+  "?default": "是否是默认模板--default为true所在的目录下的配置文件生效",
+  "default": true,
+
+  "description": "PNF 统一GND单站配置左树配置"
+}

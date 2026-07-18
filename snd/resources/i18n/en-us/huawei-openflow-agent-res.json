@@ -1,0 +1,92 @@
+{
+  "/huawei-openflow-agent:openflow-agent": {
+    "name": "Configure OpenFlow agents"
+  },
+  "/huawei-openflow-agent:openflow-agent/sdnagent": {
+    "name": "Configure OpenFlow agent"
+  },
+  "/huawei-openflow-agent:openflow-agent/sdnagent/description": {
+    "name": "OpenFlow agent description"
+  },
+  "/huawei-openflow-agent:openflow-agent/sdnagent/source-ip": {
+    "name": "Configure source IPv4 address"
+  },
+  "/huawei-openflow-agent:openflow-agent/sdnagent/source-ip/source-address": {
+    "name": "Configure OpenFlow agent IPv4 address"
+  },
+  "/huawei-openflow-agent:openflow-agent/sdnagent/source-ipv6": {
+    "name": "Configure source IPv6 address"
+  },
+  "/huawei-openflow-agent:openflow-agent/sdnagent/source-ipv6/source-address": {
+    "name": "Configure OpenFlow agent IPv6 address"
+  },
+  "/huawei-openflow-agent:openflow-agent/sdnagent/controllers": {
+    "name": "List of controller configuration"
+  },
+  "/huawei-openflow-agent:openflow-agent/sdnagent/controllers/controller": {
+    "name": "Configure controller"
+  },
+  "/huawei-openflow-agent:openflow-agent/sdnagent/controllers/controller/controller-address": {
+    "name": "Controller IPv4 address"
+  },
+  "/huawei-openflow-agent:openflow-agent/sdnagent/controllers/controller/vpn-name": {
+    "name": "Controller vpn-instance name"
+  },
+  "/huawei-openflow-agent:openflow-agent/sdnagent/controllers/controller/openflow-attributes": {
+    "name": "Configure OpenFlow informations"
+  },
+  "/huawei-openflow-agent:openflow-agent/sdnagent/controllers/controller/openflow-attributes/echo-interval": {
+    "name": "Configure echo interval"
+  },
+  "/huawei-openflow-agent:openflow-agent/sdnagent/controllers/controller/openflow-attributes/keychain-name": {
+    "name": "Configure keychain name"
+  },
+  "/huawei-openflow-agent:openflow-agent/sdnagent/controllers/controller/openflow-attributes/agent-address": {
+    "name": "Configure OpenFlow agent IPv4 address"
+  },
+  "/huawei-openflow-agent:openflow-agent/sdnagent/controllers/controller/openflow-attributes/ssl-policy-name": {
+    "name": "Configure ssl policy name"
+  },
+  "/huawei-openflow-agent:openflow-agent/session-infos": {
+    "name": "List of OpenFlow session information"
+  },
+  "/huawei-openflow-agent:openflow-agent/session-infos/session-info": {
+    "name": "Operational state of OpenFlow session"
+  },
+  "/huawei-openflow-agent:openflow-agent/session-infos/session-info/controller-address": {
+    "name": "Controller IPv4 address"
+  },
+  "/huawei-openflow-agent:openflow-agent/session-infos/session-info/vpn-name": {
+    "name": "Controller vpn-instance name"
+  },
+  "/huawei-openflow-agent:openflow-agent/session-infos/session-info/agent-address": {
+    "name": "OpenFlow agent IPv4 address"
+  },
+  "/huawei-openflow-agent:openflow-agent/session-infos/session-info/up-time": {
+    "name": "Up Time"
+  },
+  "/huawei-openflow-agent:openflow-agent/session-infos/session-info/state": {
+    "name": "Session state"
+  },
+  "/huawei-openflow-agent:openflow-agent/session-infos/session-info/role": {
+    "name": "Session role"
+  },
+  "/huawei-openflow-agent:openflow-agent/priority": {
+    "name": "Configure OpenFlow priority"
+  },
+  "/huawei-openflow-agent:openflow-agent/priority/dscp": {
+    "name": "DSCP value"
+  },
+  "/huawei-openflow-agent:reset-all-sessions": {
+    "name": "Reset all OpenFlow sessions"
+  },
+  "/huawei-openflow-agent:reset-all-statistics": {
+    "name": "Reset all OpenFlow statistics"
+  },
+  "/rpcs/huawei-openflow-agent:openflow-agent/reset-all-sessions": {
+    "name": "Reset all OpenFlow sessions"
+  },
+  "/rpcs/huawei-openflow-agent:openflow-agent/reset-all-statistics": {
+    "name": "Reset all OpenFlow statistics"
+  }
+}
