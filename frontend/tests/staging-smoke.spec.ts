@@ -71,8 +71,8 @@ test.describe('部署冒烟 - 前端 SPA', () => {
     await page.getByRole('tab', { name: 'VLAN列表', exact: true }).click()
     await page.getByRole('button', { name: '新增' }).first().click()
 
-    // 抽屉里出现 schema 驱动的字段（admin-status 为 YANG 叶子名，动态渲染才会有）
-    await expect(page.getByText('admin-status', { exact: false }).first()).toBeVisible({ timeout: 15000 })
+    // 抽屉里出现 schema 驱动的字段（UI-03 后标签经 snd res 本地化）
+    await expect(page.getByText('VLAN管理状态', { exact: false }).first()).toBeVisible({ timeout: 15000 })
   })
 
   // 空表单提交应被前端校验拦截（§9）：缺主键 id 时「下发并对账」禁用。
@@ -81,7 +81,7 @@ test.describe('部署冒烟 - 前端 SPA', () => {
     await pickDevice(page)
     await page.getByRole('tab', { name: 'VLAN列表', exact: true }).click()
     await page.getByRole('button', { name: '新增' }).first().click()
-    await expect(page.getByText('admin-status', { exact: false }).first()).toBeVisible({ timeout: 15000 })
+    await expect(page.getByText('VLAN管理状态', { exact: false }).first()).toBeVisible({ timeout: 15000 })
 
     await expect(page.getByRole('button', { name: /下发并对账/ })).toBeDisabled()
   })
@@ -136,18 +136,18 @@ test.describe('部署冒烟 - 前端 SPA', () => {
     await page.getByRole('button', { name: '新增' }).first().click()
 
     const drawer = page.locator('.el-drawer')
-    await expect(drawer.getByText('class', { exact: false }).first()).toBeVisible({ timeout: 15000 })
-    await expect(drawer.locator('.el-form-item__label', { hasText: 'parent-name' })).toHaveCount(0)
+    await expect(drawer.getByText('接口类别', { exact: false }).first()).toBeVisible({ timeout: 15000 })
+    await expect(drawer.locator('.el-form-item__label', { hasText: '主接口名' })).toHaveCount(0)
 
-    // 精确定位 class 字段的下拉（抽屉首个 el-select 是字母序在前的 admin-status），
+    // 精确定位 class 字段的下拉（UI-03 后标签为「接口类别」），
     // 并只点“可见”的下拉项（teleport 的历史下拉会残留在 DOM 中）。
     const classItem = drawer.locator('.el-form-item', {
-      has: page.locator('.el-form-item__label', { hasText: /^class$/ }),
+      has: page.locator('.el-form-item__label', { hasText: /^接口类别$/ }),
     })
     await classItem.locator('.el-select').click()
     await page.locator('.el-select-dropdown__item:visible', { hasText: 'sub-interface' }).first().click()
 
-    await expect(drawer.getByText('parent-name', { exact: false }).first()).toBeVisible({ timeout: 15000 })
+    await expect(drawer.getByText('主接口名', { exact: false }).first()).toBeVisible({ timeout: 15000 })
   })
 
   // SPA 内从 VLAN 模块切到 IFM 模块应重载 schema（回归门禁：路由参数变化 → schema 重载）。
