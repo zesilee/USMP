@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 import { listYangModules, getLeftTree } from '../api'
+import { i18n } from '../i18n'
 
 // SND 左树节点（LT-03）：分组（children）或叶子（sourceModule；available/module 标注）。
 export interface LeftTreeNode {
@@ -61,7 +62,7 @@ export const useMenuStore = defineStore('menu', () => {
       const mods = (data.data || []).map((m: any) => ({
         name: m.name,
         title: m.description || m.title || m.name,
-        vendor: m.vendor || '其他',
+        vendor: m.vendor || i18n.global.t('nav.otherGroup'),
         category: m.category,
       }))
       if (!mods.length) throw new Error('empty modules')
@@ -70,8 +71,8 @@ export const useMenuStore = defineStore('menu', () => {
       console.warn('加载 YANG 模块列表失败，回退内置菜单:', e)
       // 回退项（R08）：与后端注册的模块根名一致（GetSchema/{name} 可直接命中）。
       nativeModules.value = [
-        { name: 'ifm', title: '接口管理', vendor: 'huawei' },
-        { name: 'vlan', title: 'VLAN 配置', vendor: 'huawei' },
+        { name: 'ifm', title: i18n.global.t('nav.fallbackInterface'), vendor: 'huawei' },
+        { name: 'vlan', title: i18n.global.t('nav.fallbackVlan'), vendor: 'huawei' },
       ]
     } finally {
       nativeLoaded.value = true

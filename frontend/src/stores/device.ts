@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 import { listDevices, getDeviceStatus } from '../api'
+import { i18n } from '../i18n'
 
 export interface Device {
   id: string
@@ -64,10 +65,10 @@ export const useDeviceStore = defineStore('device', () => {
       const res = await getDeviceStatus(ip)
       const connected = res.data.data?.connected === true
       return connected
-        ? { success: true, message: '连接正常' }
-        : { success: false, message: '设备未连接' }
+        ? { success: true, message: i18n.global.t('devices.connOk') }
+        : { success: false, message: i18n.global.t('devices.connNotConnected') }
     } catch (e) {
-      return { success: false, message: '连接测试失败' }
+      return { success: false, message: i18n.global.t('devices.connTestFailed') }
     }
   }
 

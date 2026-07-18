@@ -1,3 +1,5 @@
+import { i18n } from '../i18n'
+
 export interface CaseDef {
   name: string
   label: string
@@ -87,7 +89,7 @@ export function parseCRDSchemaToFields(schema: any): Field[] {
       minimum: prop.minimum,
       maximum: prop.maximum,
       options: prop.enum?.map(v => ({ label: String(v), value: v })),
-      group: prop['x-custom-group'] || '其他',
+      group: prop['x-custom-group'] || i18n.global.t('nav.otherGroup'),
       default: prop.default,
     }
 
@@ -151,7 +153,7 @@ export function groupFieldsByGroup(fields: Field[]): Map<string, Field[]> {
   const groups = new Map<string, Field[]>()
 
   for (const field of fields) {
-    const groupName = field.group || '其他'
+    const groupName = field.group || i18n.global.t('nav.otherGroup')
     if (!groups.has(groupName)) {
       groups.set(groupName, [])
     }

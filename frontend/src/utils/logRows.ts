@@ -1,5 +1,6 @@
 import type { LogEntry } from '../types/api'
 import { OUTCOME_TO_STATE, type DisplayState } from '../composables/useFleetOverview'
+import { i18n } from '../i18n'
 
 // 操作日志单行：审计事实 + 当前对账态（由 /logs 的 LogEntry 派生）。
 export interface LogRow {
@@ -16,11 +17,12 @@ export interface LogRow {
 // 从 YANG path 派生一个可读的操作类型标签。
 export function opLabelOf(path: string): string {
   const p = (path || '').toLowerCase()
-  if (p.includes('vlan')) return 'VLAN 配置'
-  if (p.includes('ifm') || p.includes('interface')) return '接口配置'
-  if (p.includes('system')) return '系统配置'
-  if (p.includes('route')) return '路由配置'
-  return '配置变更'
+  const t = i18n.global.t
+  if (p.includes('vlan')) return t('logs.opVlan')
+  if (p.includes('ifm') || p.includes('interface')) return t('logs.opInterface')
+  if (p.includes('system')) return t('logs.opSystem')
+  if (p.includes('route')) return t('logs.opRoute')
+  return t('logs.opGeneric')
 }
 
 // 纯函数：审计记录 → 日志行。保序（后端 newest-first）；缺失字段安全降级（R08）。

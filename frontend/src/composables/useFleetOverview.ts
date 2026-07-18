@@ -1,6 +1,7 @@
 import { ref } from 'vue'
 import { listDevices, getFleetReconcile } from '../api'
 import type { ReconcileOutcome } from '../types/api'
+import { i18n } from '../i18n'
 
 // 车队概览派生：把 /devices（在线态）与 /reconcile/status（对账四态聚合，PR-B1/B3 真数据）
 // 合成大盘所需的收敛率、四态分段、待对账台账、最近对账。
@@ -160,16 +161,17 @@ export function deriveOverview(devices: DeviceInput[], fleet: FleetInput): Overv
   const convergenceRate = total > 0 ? Math.round((counts.conv / total) * 100) : 0
   const pendingCount = counts.recon + counts.drift + counts.error
 
+  const t = i18n.global.t
   const segments: SegbarSegment[] = [
-    { key: 'conv', label: '已收敛', count: counts.conv, grow: counts.conv },
-    { key: 'recon', label: '收敛中', count: counts.recon, grow: counts.recon },
+    { key: 'conv', label: t('common.state.conv'), count: counts.conv, grow: counts.conv },
+    { key: 'recon', label: t('common.state.recon'), count: counts.recon, grow: counts.recon },
     {
       key: 'attention',
-      label: '需处理',
+      label: t('common.state.attention'),
       count: counts.drift + counts.error,
       grow: counts.drift + counts.error,
     },
-    { key: 'off', label: '离线', count: counts.off, grow: counts.off },
+    { key: 'off', label: t('common.state.off'), count: counts.off, grow: counts.off },
   ]
 
   return {
@@ -207,7 +209,7 @@ export function useFleetOverview() {
       }))
       overview.value = deriveOverview(devices, fleetRes.data?.data ?? {})
     } catch (e: any) {
-      error.value = e?.response?.data?.message || e?.message || '加载失败'
+      error.value = e?.response?.data?.message || e?.message || i18n.global.t('common.loadFailed')
       overview.value = EMPTY_OVERVIEW
     } finally {
       loading.value = false

@@ -1,6 +1,7 @@
 import { computed, toValue, type MaybeRefOrGetter } from 'vue'
 import type { Field } from '../utils/crdSchemaParser'
 import { evalPredicate } from '../utils/xpathEval'
+import { i18n } from '../i18n'
 
 // useConstraintEngine —— 通用约束引擎（FE-07）。把 schema 中每个字段的 YANG `when`
 // XPath 表达式对当前表单数据求值为响应式 `visible` 状态。100% 数据驱动、零厂商/
@@ -44,7 +45,7 @@ export function useConstraintEngine(
       for (const rule of f.must) {
         const r = evalPredicate(rule.expr, ctx)
         if ('value' in r && r.value === false) {
-          out.push({ path: f.path, label: f.label, message: rule.message || `${f.label}：不满足约束 ${rule.expr}` })
+          out.push({ path: f.path, label: f.label, message: rule.message || i18n.global.t('console.validation.must', { label: f.label, expr: rule.expr }) })
         }
       }
     }
