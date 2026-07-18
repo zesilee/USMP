@@ -52,10 +52,10 @@ for conf in "$GEN_DIR"/*/gen.conf; do
         exit 1
     fi
 
-    # 前置校验：YANG 模型目录必须存在且非空（yang-models 是仅构建期 submodule）
+    # 前置校验：YANG 模型目录必须存在且非空（模型源为入库目录，应随仓库存在）
     if [ ! -d "$ROOT/$yang_path" ] || [ -z "$(ls -A "$ROOT/$yang_path" 2>/dev/null)" ]; then
         echo "gen-yang: YANG 模型目录不存在或为空: $yang_path" >&2
-        echo "  若为 yang-models submodule，请先执行: git submodule update --init yang-models" >&2
+        echo "  模型源为入库目录（如 snd/ce6866p-yang），请检查 checkout 完整性" >&2
         exit 1
     fi
 

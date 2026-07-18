@@ -6,7 +6,7 @@ on:
     paths: &code-paths
       - 'backend/**'
       - 'scripts/gen-yang.sh'
-      - 'yang-models'
+      - 'snd/ce6866p-yang/**'
       - 'Makefile'
       - '.github/workflows/compliance.yml'
       - '.github/workflows/compliance-skip.yml'
@@ -86,14 +86,13 @@ jobs:
           # 生成物改动合法当且仅当可由管线复现：触及生成物/管线/模型指针时
           # 重跑 make gen-yang 并断言零漂移（取代旧的无条件冻结 generated/）
           git fetch --depth=1 origin main 2>/dev/null || true
-          CHANGED=$(git diff --name-only origin/main HEAD 2>/dev/null | grep -E '^(backend/internal/generated/|backend/internal/yang/models/|backend/tools/genfix/|backend/tools/crdgen/|deploy/crds/|scripts/gen-yang\.sh|yang-models)' || true)
+          CHANGED=$(git diff --name-only origin/main HEAD 2>/dev/null | grep -E '^(backend/internal/generated/|backend/internal/yang/models/|backend/tools/genfix/|backend/tools/crdgen/|deploy/crds/|scripts/gen-yang\.sh|snd/ce6866p-yang/)' || true)
           if [ -z "$CHANGED" ]; then
             echo "No generated-pipeline related changes, skipping regen check"
             exit 0
           fi
           echo "Regen-relevant changes detected:"
           echo "$CHANGED"
-          git submodule update --init --depth 1 yang-models
           make gen-yang
           if ! git diff --exit-code backend/internal/generated/; then
             echo "::error::[R04] Generated code drift: backend/internal/generated/ 与 make gen-yang 输出不一致（生成物勿手改，改 YANG/gen.conf 后重跑 make gen-yang 提交）"

@@ -26,7 +26,7 @@ make gen-yang VENDOR=huawei  # 单厂商包
 `backend/go.mod` 锁定）→ `backend/tools/genfix` 后处理（跨平台修复枚举
 标识符 `|` + 规范化生成头部机器路径）→ gofmt。
 
-前置：huawei 需要 yang-models submodule（`git submodule update --init yang-models`）。
+前置：无——huawei 模型源为入库目录 `snd/ce6866p-yang`，clone 即可生成。
 
 ## 新增厂商 / 新增模块
 
@@ -37,7 +37,7 @@ make gen-yang VENDOR=huawei  # 单厂商包
 `gen.conf` 键（`yang_path` 相对仓库根）：
 
 ```
-yang_path=yang-models/network-router/8.20.10/ne40e-x8x16
+yang_path=snd/ce6866p-yang
 modules=huawei-vlan huawei-ifm huawei-system huawei-pub-type huawei-extension
 generate_fakeroot=true
 compress_paths=false
