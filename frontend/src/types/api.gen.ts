@@ -733,6 +733,56 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/yang/left-tree": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** 获取 SND 左树（原生配置导航，含可用性标注） */
+        get: {
+            parameters: {
+                query?: {
+                    /** @description 按设备 hello 能力叠加 supported 标注 */
+                    device?: string;
+                };
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description 左树 */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["api.Response"] & {
+                            data?: components["schemas"]["api.LeftTreeNodeDTO"][];
+                        };
+                    };
+                };
+                /** @description device 未注册（信封） */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["api.Response"];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/yang/modules": {
         parameters: {
             query?: never;
@@ -968,6 +1018,19 @@ export interface components {
             summary?: {
                 [key: string]: number;
             };
+        };
+        "api.LeftTreeNodeDTO": {
+            /** @description Available 标记叶子模块是否已接入（根容器已加载）；仅叶子携带。 */
+            available?: boolean;
+            children?: components["schemas"]["api.LeftTreeNodeDTO"][];
+            en?: string;
+            /** @description Module 是首个已加载根容器名（前端路由 /module/<module>）；不可用叶省略。 */
+            module?: string;
+            /** @description SourceModule 是叶子的 SND 源模块名（如 huawei-vlan）；分组为空。 */
+            sourceModule?: string;
+            /** @description Supported 标记该设备 hello 能力是否覆盖此模块；仅 ?device= 且协商可得时携带。 */
+            supported?: boolean;
+            zh?: string;
         };
         "api.LogEntry": {
             actor?: string;

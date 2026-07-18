@@ -84,6 +84,7 @@ func (s *Server) setupRoutes() {
 		{
 			yangHandler := NewYangHandler(s.manager)
 			yangGroup.GET("/modules", yangHandler.ListModules)
+			yangGroup.GET("/left-tree", yangHandler.LeftTree)
 			yangGroup.GET("/schema/:module", yangHandler.GetSchema)
 		}
 	}

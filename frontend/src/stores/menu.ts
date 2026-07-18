@@ -1,6 +1,17 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
-import { listYangModules } from '../api'
+import { listYangModules, getLeftTree } from '../api'
+
+// SND 左树节点（LT-03）：分组（children）或叶子（sourceModule；available/module 标注）。
+export interface LeftTreeNode {
+  zh: string
+  en: string
+  sourceModule?: string
+  available?: boolean
+  module?: string
+  supported?: boolean
+  children?: LeftTreeNode[]
+}
 
 interface NativeModel {
   name: string
@@ -19,6 +30,26 @@ export const useMenuStore = defineStore('menu', () => {
   // 原生配置下发），方向见 openspec/tasks/business-network-config.md。
   const nativeModules = ref<NativeModel[]>([])
   const nativeLoaded = ref(false)
+
+  // ===== SND 左树（LT-03）：/yang/left-tree 驱动 14 组/3 层导航；失败回退
+  // category 分组（leftTree 为空即回退态，R08 导航不消失）。 =====
+  const leftTree = ref<LeftTreeNode[]>([])
+  const leftTreeLoaded = ref(false)
+
+  async function loadLeftTree() {
+    if (leftTreeLoaded.value) return
+    try {
+      const res = await getLeftTree()
+      const tree = res.data.data || []
+      if (!tree.length) throw new Error('empty left tree')
+      leftTree.value = tree
+    } catch (e) {
+      console.warn('加载 SND 左树失败，回退任务域分组导航:', e)
+      leftTree.value = []
+    } finally {
+      leftTreeLoaded.value = true
+    }
+  }
 
   async function loadNativeModules() {
     if (nativeLoaded.value) return
@@ -79,6 +110,9 @@ export const useMenuStore = defineStore('menu', () => {
 
   return {
     isCollapsed,
+    leftTree,
+    leftTreeLoaded,
+    loadLeftTree,
     nativeModules,
     nativeGroups,
     businessModules,
