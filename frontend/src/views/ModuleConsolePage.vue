@@ -43,6 +43,9 @@ import { ref, computed, watch, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { getYangSchema, getOwnership } from '../api'
+import { localizeFields } from '../composables/useFieldLabels'
+import { useLocaleStore } from '../stores/locale'
+import { useMenuStore } from '../stores/menu'
 import { useDeviceStore } from '../stores/device'
 import type { Field } from '../utils/crdSchemaParser'
 import { deriveTabs, type ConsoleTab } from '../utils/moduleConsole'
@@ -50,6 +53,8 @@ import ModuleListTab from '../components/config/ModuleListTab.vue'
 import ModuleFormTab from '../components/config/ModuleFormTab.vue'
 
 const route = useRoute()
+const localeStore = useLocaleStore()
+const menuStore = useMenuStore()
 const { t } = useI18n()
 const store = useDeviceStore()
 
@@ -83,23 +88,38 @@ const tabs = computed<ConsoleTab[]>(() => deriveTabs(schemaFields.value))
 const activeTab = ref('')
 const activeTabLabel = computed(() => tabs.value.find((t) => t.name === activeTab.value)?.label || '')
 
+// 原始 schema（YANG 节点名标签）；展示层按语言经 res 查表重标（UI-03）。
+let rawFields: any[] = []
+
+async function relabelFields() {
+  // 查不到/缺文件回退原始标签（R08）；locale 切换即时重查。res 懒加载为异步，
+  // 首帧先渲染原始标签（不阻塞 Tab 派生），就绪后原位替换。
+  const root = rootName.value
+  const localized = await localizeFields(rawFields, root, localeStore.locale, menuStore.leftTree)
+  if (rootName.value === root) schemaFields.value = localized
+}
+
 async function loadSchema() {
   schemaError.value = ''
   schemaFields.value = []
   try {
     const res = await getYangSchema(moduleName.value, 'nested')
     const data = res.data?.data
-    schemaFields.value = data?.fields ?? []
+    rawFields = data?.fields ?? []
     title.value = data?.title || moduleName.value
     vendor.value = data?.vendor || ''
     // 运行时配置路径的根段 = 模块根容器名（schema title 即 root.Name()）。
     rootName.value = data?.title || moduleName.value
+    schemaFields.value = rawFields
     activeTab.value = tabs.value[0]?.name || ''
+    void relabelFields()
   } catch (e: any) {
     // schema 拉取失败降级：页面不崩，明确报错（R08/§9）。
     schemaError.value = e?.response?.data?.message || e?.message || t('console.schemaLoadFailed')
   }
 }
+
+watch(() => localeStore.locale, relabelFields)
 
 watch(moduleName, loadSchema)
 watch([selectedDevice, moduleName], loadOwnership)
