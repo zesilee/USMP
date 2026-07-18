@@ -12,7 +12,6 @@ import (
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/controller"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/device"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/driver"
-	"github.com/leezesi/usmp/backend/pkg/yang-runtime/plugin"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/predicate"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/reconcile"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/schema"
@@ -113,10 +112,6 @@ type Manager interface {
 	GetReconcileStatus() status.Reader
 	// GetAuditStore returns the operation-audit log (config-delivery records)
 	GetAuditStore() audit.Store
-	// GetPluginManager returns the plugin manager
-	GetPluginManager() *plugin.Manager
-	// AddPlugin adds a plugin
-	AddPlugin(p plugin.Plugin)
 	// TriggerReconcile triggers immediate reconciliation for a device and path
 	// Returns true if a matching controller was found and triggered
 	TriggerReconcile(deviceID, path string) bool
@@ -137,7 +132,6 @@ type DefaultManager struct {
 	auditStore      audit.Store
 	deviceStore     device.Store
 	controllers     []controller.Controller
-	pluginManager   *plugin.Manager
 	started         bool
 	ctx             context.Context
 	cancel          context.CancelFunc
@@ -184,10 +178,9 @@ func New(opts ...Option) *DefaultManager {
 		reconcileStatus: status.NewStore(),
 		// 操作审计日志（OA-02）：集群模式经 WithAuditStore 注入 CRD 后端，
 		// 缺省内存实现（AuditFile 已退役，仅弃用警告）。
-		auditStore:    options.AuditStore,
-		deviceStore:   options.DeviceStore,
-		controllers:   make([]controller.Controller, 0),
-		pluginManager: plugin.NewManager(),
+		auditStore:  options.AuditStore,
+		deviceStore: options.DeviceStore,
+		controllers: make([]controller.Controller, 0),
 	}
 
 	return m
@@ -294,25 +287,6 @@ func (m *DefaultManager) GetClientPool() client.ClientPool {
 // GetConfigStore implements Manager interface
 func (m *DefaultManager) GetConfigStore() reconcile.ConfigStore {
 	return m.configStore
-}
-
-// GetPluginManager implements Manager interface
-func (m *DefaultManager) GetPluginManager() *plugin.Manager {
-	return m.pluginManager
-}
-
-// AddPlugin implements Manager interface
-func (m *DefaultManager) AddPlugin(p plugin.Plugin) {
-	switch pl := p.(type) {
-	case plugin.ValidationPlugin:
-		m.pluginManager.AddValidationPlugin(pl)
-	case plugin.MutationPlugin:
-		m.pluginManager.AddMutationPlugin(pl)
-	case plugin.NotificationPlugin:
-		m.pluginManager.AddNotificationPlugin(pl)
-	case plugin.ReconciliationHookPlugin:
-		m.pluginManager.AddReconciliationHook(pl)
-	}
 }
 
 // Controllers returns the list of registered controllers
