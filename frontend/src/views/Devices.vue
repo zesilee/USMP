@@ -28,6 +28,12 @@
       <el-table-column label="厂商 / 型号" min-width="150">
         <template #default="{ row }"><span class="dim">{{ row.vendorModel || '—' }}</span></template>
       </el-table-column>
+      <el-table-column label="角色" width="100">
+        <template #default="{ row }">
+          <el-tag v-if="row.role" size="small" type="info" data-test="device-role">{{ row.role }}</el-tag>
+          <span v-else class="dim">—</span>
+        </template>
+      </el-table-column>
       <el-table-column label="会话" width="120">
         <template #default="{ row }">
           <span class="chip" :class="row.session === 'connected' ? 'conv' : 'off'">

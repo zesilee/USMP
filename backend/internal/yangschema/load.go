@@ -41,6 +41,9 @@ func Load() (schema.Schema, error) {
 // 模型提取，生成物提交入库（运行期零 submodule 依赖）。升级模型版本时一并重跑。
 //go:generate go run ../../tools/tasknamegen -path=../../../snd/ce6866p-yang -modules=huawei-vlan,huawei-ifm,huawei-system -output=./taskname.gen.go -package=yangschema
 
+// SND blacklist（CN-03）：构建期 revision 匹配后生成模块名集合，运行期零 snd 文件依赖。
+//go:generate go run ../../tools/blacklistgen -blacklist=../../../snd/ce6866p-yang/blacklist.xml -path=../../../snd/ce6866p-yang -output=./blacklist.gen.go -package=yangschema
+
 // 业务意图模型的 task-name 与厂商模型不同源（backend/internal/yang/models 入库
 // 模型，无 submodule 依赖），独立生成文件与变量避免冲突。
 //go:generate go run ../../tools/tasknamegen -path=../yang/models -modules=usmp-business-vlan -output=./taskname_business.gen.go -package=yangschema -var=BusinessTaskNames
@@ -54,4 +57,10 @@ func Category(module string) string {
 		return c
 	}
 	return BusinessTaskNames[module]
+}
+
+// Blacklisted reports whether the module (keyed by root container name, the
+// same key Load exposes as the module name) is SND-blacklisted（CN-03 注解语义）。
+func Blacklisted(module string) bool {
+	return BlacklistedModules[module]
 }

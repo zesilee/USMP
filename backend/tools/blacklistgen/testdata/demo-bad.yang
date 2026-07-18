@@ -1,0 +1,9 @@
+module demo-bad {
+  namespace "urn:demo:bad";
+  prefix db;
+  revision 2020-01-01 { description "r"; }
+  container badroot {
+    leaf x { type string; }
+  }
+  rpc reset-bad { }
+}

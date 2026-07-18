@@ -26,6 +26,8 @@ type DeviceInfo struct {
 	Password string `json:"password"`
 	// Vendor 厂商标识（SND 驱动选择，缺省 huawei）
 	Vendor string `json:"vendor,omitempty"`
+	// Role 网络角色标签（DCGW/EOR/TOR/BORDER 等；展示/策略用途，BR-14）
+	Role string `json:"role,omitempty"`
 }
 
 // DeviceHandler handles device-related API requests. Device connection info
@@ -84,6 +86,22 @@ func parseSeedDevice(raw string) (DeviceInfo, bool) {
 	return DeviceInfo{IP: host, Port: port, Username: user, Password: pass, Vendor: vendor}, true
 }
 
+// validRole reports whether a role label satisfies BR-14 (≤32 chars,
+// [A-Za-z0-9_-] only; empty = unset, valid). 与 Device CRD 校验 marker 同则。
+func validRole(role string) bool {
+	if len(role) > 32 {
+		return false
+	}
+	for _, r := range role {
+		switch {
+		case r >= 'A' && r <= 'Z', r >= 'a' && r <= 'z', r >= '0' && r <= '9', r == '-', r == '_':
+		default:
+			return false
+		}
+	}
+	return true
+}
+
 // toConnInfo maps a DeviceInfo to the shared store's connection-info type,
 // defaulting Protocol to AUTO (port-based NETCONF/gNMI selection) and Vendor
 // to huawei (DS-01 零值缺省语义).
@@ -99,12 +117,13 @@ func toConnInfo(d DeviceInfo) client.DeviceConnectionInfo {
 		Password: d.Password,
 		Protocol: client.ProtocolAUTO,
 		Vendor:   vendor,
+		Role:     d.Role,
 	}
 }
 
 // deviceInfoFromConn is the inverse of toConnInfo for API responses.
 func deviceInfoFromConn(info client.DeviceConnectionInfo) DeviceInfo {
-	return DeviceInfo{IP: info.IP, Port: info.Port, Username: info.Username, Password: info.Password, Vendor: info.Vendor}
+	return DeviceInfo{IP: info.IP, Port: info.Port, Username: info.Username, Password: info.Password, Vendor: info.Vendor, Role: info.Role}
 }
 
 // putStore registers a device in the shared DeviceStore (no-op if the manager
@@ -153,6 +172,8 @@ type AddDeviceRequest struct {
 	Password string `json:"password" binding:"required"`
 	// Vendor 可选厂商标识：缺省 huawei；无已注册驱动的厂商将被拒绝（400）
 	Vendor string `json:"vendor,omitempty"`
+	// Role 可选网络角色标签：≤32 字符且仅 [A-Za-z0-9_-]，非法 400（BR-14）
+	Role string `json:"role,omitempty"`
 }
 
 // DeviceStatus is a device plus its live online status (Stack B REST替代
@@ -255,12 +276,19 @@ func (h *DeviceHandler) AddDevice(c *gin.Context) {
 		return
 	}
 
+	// Role 校验（BR-14）：自由标签但限长度与字符集（与 CRD marker 单点同则）。
+	if !validRole(req.Role) {
+		Error(c, 400, "Invalid request: role must be ≤32 chars of [A-Za-z0-9_-]")
+		return
+	}
+
 	added := DeviceInfo{
 		IP:       req.IP,
 		Port:     req.Port,
 		Username: req.Username,
 		Password: req.Password,
 		Vendor:   req.Vendor,
+		Role:     req.Role,
 	}
 	// BR-13: 持久化失败（apiserver 不可达等）必须可见，不假装成功。
 	if err := h.putStore(added); err != nil {
