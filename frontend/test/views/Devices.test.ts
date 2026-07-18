@@ -14,7 +14,7 @@ const devicesEnvelope = {
     success: true,
     data: {
       devices: [
-        { ip: '192.168.1.1', port: 830, online: true },
+        { ip: '192.168.1.1', port: 830, online: true, role: 'DCGW' },
         { ip: '192.168.1.2', port: 830, online: true },
         { ip: '192.168.1.3', port: 830, online: false },
       ],
@@ -75,6 +75,14 @@ describe('Devices View · 设备管理列表', () => {
     await flushPromises()
     const chips = w.findAllComponents(ReconcileChip)
     expect(chips.length).toBe(3)
+  })
+
+  it('role 列：有值渲染标签、缺省显占位（BR-14 展示）', async () => {
+    const w = mountView()
+    await flushPromises()
+    const tags = w.findAll('[data-test="device-role"]')
+    expect(tags.length).toBe(1)
+    expect(tags[0].text()).toBe('DCGW')
   })
 
   it('会话 chip 文案随在线态', async () => {
