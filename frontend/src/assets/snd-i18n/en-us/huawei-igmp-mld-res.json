@@ -1,0 +1,1349 @@
+{
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp": {
+    "name": "MGMD Configure List"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/global": {
+    "name": "MGMD Configure"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/global/query-interval": {
+    "name": "General Query Interval"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/global/query-response-interval": {
+    "name": "Max Response Time"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/global/robustness": {
+    "name": "Robust Count"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/global/last-member-query-interval": {
+    "name": "Group-Query Interval"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/global/require-router-alert": {
+    "name": "Require Router-Alert"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/global/send-router-alert": {
+    "name": "Send With Router-Alert"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/global/other-querier-present-time": {
+    "name": "Other Querier KA Time"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/global/ssm-mapping-dns-domain": {
+    "name": "DNS Suffix"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/global/ssm-mapping-query-dns": {
+    "name": "DNS-based SSM Mapping or Not"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/global/ssm-mapping-query-dns-policy": {
+    "name": "ACL Name"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/global/ssm-mappings": {
+    "name": "SSM-Mapping Rule List"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/global/ssm-mappings/ssm-mapping": {
+    "name": "SSM-Mapping Rule"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/global/ssm-mappings/ssm-mapping/group-address": {
+    "name": "Group Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/global/ssm-mappings/ssm-mapping/mask-length": {
+    "name": "Group Address Mask Length"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/global/ssm-mappings/ssm-mapping/source-address": {
+    "name": "Source IP Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces": {
+    "name": "Interface MGMD Config List"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface": {
+    "name": "Interface MGMD Configuration"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/name": {
+    "name": "Interface Name"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/enable": {
+    "name": "Enabling a Protocol"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/ip-source-policy-enable": {
+    "name": "IP Source Policy"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/ip-source-policy-name": {
+    "name": "IP Source Policy"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/query-interval": {
+    "name": "General Query Interval"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/query-response-interval": {
+    "name": "Max Response Time"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/robustness": {
+    "name": "Robust Count"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/version": {
+    "name": "Protocol Version"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/last-member-query-interval": {
+    "name": "Group-Query Interval"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/require-router-alert": {
+    "name": "Require Router-Alert"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/send-router-alert": {
+    "name": "Sending with Router-Alert"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/other-querier-present-time": {
+    "name": "Other Querier KA Time"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/immediately-leave": {
+    "name": "Prompt Leave"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/immediately-leave-policy": {
+    "name": "Prompt-Leave Policy"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/on-demand-enable": {
+    "name": "On-Demand"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/entry-limit": {
+    "name": "Maximum Number of Entries"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/entry-limit-acl-name": {
+    "name": "ACL for No-Limit Group"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/ssm-mapping-enable": {
+    "name": "SSM-Mapping Enable"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/ssm-mapping-policy": {
+    "name": "Policy Name"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/group-acl-name": {
+    "name": "Group Policy"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/group-acl-version": {
+    "name": "Forbidden Protocol Version"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/query-acl-name": {
+    "name": "Query IP Source Policy"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/status": {
+    "name": "Interface Info"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/status/address": {
+    "name": "Interface Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/status/state": {
+    "name": "Interface Status"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/status/negotiate-query-interval": {
+    "name": "Negotiated Query Interval"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/status/other-querier-timeout": {
+    "name": "Other Querier KA Time"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/status/maximum-response-time": {
+    "name": "Max Query Response Time"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/status/last-member-query-time": {
+    "name": "LMQT"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/status/startup-query-interval": {
+    "name": "Startup Query Interval"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/status/startup-query-count": {
+    "name": "Startup Query Count"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/status/querier-address": {
+    "name": "Querier"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/status/is-local-querier": {
+    "name": "Local Query or Not"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/status/joins": {
+    "name": "Groups an Interface Joins"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/status/leaves": {
+    "name": "Groups an Interface Leaves"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/status/negotiated-robustness": {
+    "name": "Robustness (Negotiated)"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/status/startup-query-timer-state": {
+    "name": "Startup-Query-Timer State"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/status/other-querier-present-timer-state": {
+    "name": "Other Present-Timer Status"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/status/total-group-reported": {
+    "name": "Total Group Number"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/status/remote-backup-state": {
+    "name": "Remote backup state"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message": {
+    "name": "Number of IGMP Messages on an Interface"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/address": {
+    "name": "Interface Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/general-query-sent": {
+    "name": "Sent General Query Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/general-query-valid": {
+    "name": "Valid General Query Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/general-query-invalid": {
+    "name": "Invalid General Query Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/general-query-ignore": {
+    "name": "Ignored General Query Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/group-query-sent": {
+    "name": "Sent Group Query Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/group-query-valid": {
+    "name": "Valid Group Query Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/group-query-invalid": {
+    "name": "Invalid Group Query Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/group-query-ignore": {
+    "name": "Ignored Group Query Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/source-group-sent": {
+    "name": "Sent Group-and-Source-Specific Query Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/source-group-valid": {
+    "name": "Valid Group-and-Source-Specific Query Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/source-group-invalid": {
+    "name": "Invalid Group-and-Source-Specific Query Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/source-group-ignore": {
+    "name": "Ignored Group-and-Source-Specific Query Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/v1v2-report-asm-sent": {
+    "name": "Sent ASM-v1v2-Report Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/v1v2-report-asm-valid": {
+    "name": "Valid ASM-v1v2-Report Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/v1v2-report-asm-invalid": {
+    "name": "Invalid ASM-v1v2-Report Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/v1v2-report-asm-ignore": {
+    "name": "Ignored ASM-v1v2-Report Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/v1v2-report-ssm-sent": {
+    "name": "Sent SSM-v1v2-Report Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/v1v2-report-ssm-valid": {
+    "name": "Valid SSM-v1v2-Report Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/v1v2-report-ssm-invalid": {
+    "name": "Invalid SSM-v1v2-Report Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/v1v2-report-ssm-ignore": {
+    "name": "Ignored SSM-v1v2-Report Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/leave-asm-sent": {
+    "name": "Sent ASM-Leave Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/leave-asm-valid": {
+    "name": "Valid ASM-Leave Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/leave-asm-invalid": {
+    "name": "Invalid ASM-Leave Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/leave-asm-ignore": {
+    "name": "Ignored ASM-Leave Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/leave-ssm-sent": {
+    "name": "Sent SSM-Leave Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/leave-ssm-valid": {
+    "name": "Valid SSM-Leave Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/leave-ssm-invalid": {
+    "name": "Invalid SSM-Leave Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/leave-ssm-ignore": {
+    "name": "Ignored SSM-Leave Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/v3-isin-report-sent": {
+    "name": "Sent ISIN-Report Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/v3-isin-report-valid": {
+    "name": "Valid ISIN-Report Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/v3-isin-report-invalid": {
+    "name": "Invalid ISIN-Report Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/v3-isin-report-ignore": {
+    "name": "Ignored ISIN-Report Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/v3-isex-report-sent": {
+    "name": "Sent ISEX-Report Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/v3-isex-report-valid": {
+    "name": "Valid ISEX-Report Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/v3-isex-report-invalid": {
+    "name": "Invalid ISEX-Report Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/v3-isex-report-ignore": {
+    "name": "Ignored ISEX-Report Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/v3-toin-report-sent": {
+    "name": "Sent TOIN-Report Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/v3-toin-report-valid": {
+    "name": "Valid TOIN-Report Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/v3-toin-report-invalid": {
+    "name": "Invalid TOIN-Report Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/v3-toin-report-ignore": {
+    "name": "Ignored TOIN-Report Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/v3-toex-report-sent": {
+    "name": "Sent TOEX-Report Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/v3-toex-report-valid": {
+    "name": "Valid TOEX-Report Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/v3-toex-report-invalid": {
+    "name": "Invalid TOEX-Report Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/v3-toex-report-ignore": {
+    "name": "Ignored TOEX-Report Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/v3-allow-report-sent": {
+    "name": "Sent Allow-Report Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/v3-allow-report-valid": {
+    "name": "Valid Allow-Report Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/v3-allow-report-invalid": {
+    "name": "Invalid Allow-Report Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/v3-allow-report-ignore": {
+    "name": "Ignored Allow-Report Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/v3-block-report-sent": {
+    "name": "Sent Block-Report Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/v3-block-report-valid": {
+    "name": "Valid Block-Report Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/v3-block-report-invalid": {
+    "name": "Invalid Block-Report Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/v3-block-report-ignore": {
+    "name": "Ignored Block-Report Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/source-sent": {
+    "name": "Sent Source-Records-Total Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/source-valid": {
+    "name": "Valid Source-Records-Total Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/source-invalid": {
+    "name": "Invalid Source-Records-Total Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/source-ignore": {
+    "name": "Ignored Source-Records-Total Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/unknown-invalid": {
+    "name": "Invalid Messages of Unknown Type"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/unknown-ignore": {
+    "name": "Ignored Messages of Unknown Types"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/invalid-packet": {
+    "name": "Interface-based Invalid IGMP Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/invalid-packet/query": {
+    "name": "Number of Invalid Query Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/invalid-packet/query/unwanted-source-list": {
+    "name": "Invalid Source Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/invalid-packet/query/zero-max-resp-code": {
+    "name": "Max Resp Code of 0"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/invalid-packet/query/fault-length": {
+    "name": "Invalid Packet Length"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/invalid-packet/query/invalid-multicast-group": {
+    "name": "Invalid Multicast Group"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/invalid-packet/query/bad-checksum": {
+    "name": "Invalid Checksum"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/invalid-packet/report": {
+    "name": "Number of Invalid Report Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/invalid-packet/report/fault-length": {
+    "name": "Invalid Packet Length"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/invalid-packet/report/invalid-multicast-group": {
+    "name": "Invalid Multicast Group"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/invalid-packet/report/invalid-multicast-source": {
+    "name": "Invalid Source Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/invalid-packet/report/bad-checksum": {
+    "name": "Invalid Checksum"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/invalid-packet/report/illegal": {
+    "name": "Invalid Report Message Type"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/invalid-packet/leave": {
+    "name": "Invalid Leave Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/invalid-packet/leave/invalid-multicast-group": {
+    "name": "Invalid Multicast Group"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/invalid-packet/leave/bad-checksum": {
+    "name": "Invalid Checksum"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/static-groups": {
+    "name": "Static Group Configure List"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/static-groups/static-group": {
+    "name": "Static Group Configure"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/static-groups/static-group/interface": {
+    "name": "Interface Name"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/static-groups/static-group/group-address": {
+    "name": "Static Group Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/static-groups/static-group/is-source-address": {
+    "name": "Set Source Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/static-groups/static-group/source-address": {
+    "name": "Source IP Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/static-groups/static-group/is-inc-step-group-mask": {
+    "name": "Set Incremental Mask"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/static-groups/static-group/inc-step-group-mask": {
+    "name": "Incremental Mask"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/static-groups/static-group/is-source-dns-ssm-mapping": {
+    "name": "DNS-based SSM Mapping"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/static-groups/static-group/group-number": {
+    "name": "Group Address Number"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/dot1q-static-groups": {
+    "name": "DOT1Q Static Group Configure List"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/dot1q-static-groups/dot1q-static-group": {
+    "name": "QinQ Static Group Configure"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/dot1q-static-groups/dot1q-static-group/interface": {
+    "name": "Interface Name"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/dot1q-static-groups/dot1q-static-group/group-address": {
+    "name": "Static Group Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/dot1q-static-groups/dot1q-static-group/is-source-address": {
+    "name": "Set Source Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/dot1q-static-groups/dot1q-static-group/source-address": {
+    "name": "Source IP Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/dot1q-static-groups/dot1q-static-group/is-inc-step-group-mask": {
+    "name": "Set Incremental Mask"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/dot1q-static-groups/dot1q-static-group/inc-step-group-mask": {
+    "name": "Incremental Mask"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/dot1q-static-groups/dot1q-static-group/begin-vid": {
+    "name": "DOT1Q Tag Begin ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/dot1q-static-groups/dot1q-static-group/end-vid": {
+    "name": "DOT1Q Tag End ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/dot1q-static-groups/dot1q-static-group/group-number": {
+    "name": "Group Address Number"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-static-groups": {
+    "name": "QinQ Static Group Configure List"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-static-groups/qinq-static-group": {
+    "name": "QinQ Static Group Configure"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-static-groups/qinq-static-group/interface": {
+    "name": "Interface Name"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-static-groups/qinq-static-group/group-address": {
+    "name": "Static Group Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-static-groups/qinq-static-group/is-source-address": {
+    "name": "Set Source Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-static-groups/qinq-static-group/source-address": {
+    "name": "Source IP Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-static-groups/qinq-static-group/is-inc-step-group-mask": {
+    "name": "Set Incremental Mask"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-static-groups/qinq-static-group/inc-step-group-mask": {
+    "name": "Incremental Mask"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-static-groups/qinq-static-group/pe-vid": {
+    "name": "QINQ PE ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-static-groups/qinq-static-group/ce-begin-vid": {
+    "name": "QINQ CE Begin ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-static-groups/qinq-static-group/ce-end-vid": {
+    "name": "QINQ CE End ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-static-groups/qinq-static-group/group-number": {
+    "name": "Group Address Number"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/display-static-groups": {
+    "name": "Static Group Info List"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/display-static-groups/display-static-group": {
+    "name": "Static Group Info"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/display-static-groups/display-static-group/interface": {
+    "name": "Interface Name"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/display-static-groups/display-static-group/group-address": {
+    "name": "Group Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/display-static-groups/display-static-group/source-address": {
+    "name": "Source IP Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/display-static-groups/display-static-group/is-configured-boundary": {
+    "name": "Multicast Boundary"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/groups": {
+    "name": "Group Info List"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/groups/group": {
+    "name": "Group Info"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/groups/group/interface": {
+    "name": "Interface Name"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/groups/group/group-address": {
+    "name": "Group Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/groups/group/last-report-address": {
+    "name": "Last Reporter"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/groups/group/up-time": {
+    "name": "Up Time Of Group"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/groups/group/expire-time": {
+    "name": "Expire Time"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/groups/group/last-member-query-counter": {
+    "name": "Last Member Query Count"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/groups/group/last-member-query-timer": {
+    "name": "Last member query timer"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/groups/group/source-filter-mode": {
+    "name": "Group Mode"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/groups/group/v1-host-timer": {
+    "name": "Timeout Period of IGMPv1 Host"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/groups/group/v2-host-timer": {
+    "name": "Timeout Period of IGMPv2 Host"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/groups/group/is-ssm-mapping": {
+    "name": "Is Group of SSM Mapping"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/groups/group/sources": {
+    "name": "Source Info List"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/groups/group/sources/source": {
+    "name": "Source Info"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/groups/group/sources/source/source-address": {
+    "name": "Source IP Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/groups/group/sources/source/up-time": {
+    "name": "Up Time Of Source"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/groups/group/sources/source/expire-time": {
+    "name": "Expire Time"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/groups/group/sources/source/last-member-query-counter": {
+    "name": "Last Member Query Count"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/groups/group/sources/source/last-member-query-timer": {
+    "name": "Last member query timer"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-groups": {
+    "name": "List of QinQ Dynamic Groups"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-groups/qinq-group": {
+    "name": "QinQ Dynamic Group Information"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-groups/qinq-group/interface": {
+    "name": "Interface Name"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-groups/qinq-group/pe-vid": {
+    "name": "ID of the Outer Label"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-groups/qinq-group/ce-vid": {
+    "name": "ID of the Inner Label"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-groups/qinq-group/group-address": {
+    "name": "Group Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-groups/qinq-group/up-time": {
+    "name": "Group Duration (s)"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-groups/qinq-group/expire-time": {
+    "name": "Remaining Time of the Group (in Seconds)"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-groups/qinq-group/group-timer": {
+    "name": "Group Timer"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-groups/qinq-group/retran-count": {
+    "name": "Last Member Query Count"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-groups/qinq-group/last-member-query": {
+    "name": "Sending Group-and-Source-Specific Query Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-groups/qinq-group/group-mode": {
+    "name": "Group Filter Mode"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-groups/qinq-group/compat-mode": {
+    "name": "Group Compatibility Mode"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-groups/qinq-group/v1-host-timer": {
+    "name": "IGMPv1 Host Present Timer"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-groups/qinq-group/v2-host-timer": {
+    "name": "IGMPv2 Host Present Timer"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-groups/qinq-group/source-last-member-query": {
+    "name": "Sending Group-and-Source-Specific Query Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-groups/qinq-group/last-member-query-timer": {
+    "name": "Timeout Period of Group Member Query"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-groups/qinq-group/sources": {
+    "name": "Source Information List of the QinQ Dynamic Group"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-groups/qinq-group/sources/source": {
+    "name": "Source Information of a Dynamic QinQ Multicast Group"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-groups/qinq-group/sources/source/source-address": {
+    "name": "Source IP Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-groups/qinq-group/sources/source/up-time": {
+    "name": "Up Time Of Source"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-groups/qinq-group/sources/source/expire-time": {
+    "name": "Expire Time"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-groups/qinq-group/sources/source/source-timer": {
+    "name": "Source Timer"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-groups/qinq-group/sources/source/retran-count": {
+    "name": "Last Member Query Count"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-groups/qinq-group/sources/source/last-member-query": {
+    "name": "Sending Group-and-Source-Specific Query Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-ports": {
+    "name": "List of QinQ Outbound Interfaces"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-ports/qinq-port": {
+    "name": "QinQ Outbound Interface Information"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-ports/qinq-port/interface": {
+    "name": "Interface Name"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-ports/qinq-port/group-address": {
+    "name": "Group Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-ports/qinq-port/source-address": {
+    "name": "Source IP Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-ports/qinq-port/outbound-port-lists": {
+    "name": "QinQ Outbound Interface Detail List"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-ports/qinq-port/outbound-port-lists/outbound-port-list": {
+    "name": "Detailed QinQ Outbound Interface"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-ports/qinq-port/outbound-port-lists/outbound-port-list/pe-vid": {
+    "name": "ID of the Outer Label"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-ports/qinq-port/outbound-port-lists/outbound-port-list/ce-vid": {
+    "name": "ID of the Inner Label"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-ports/qinq-port/outbound-port-lists/outbound-port-list/live-time": {
+    "name": "Port Duration"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-ports/qinq-port/outbound-port-lists/outbound-port-list/group-mode": {
+    "name": "Group Mode"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-ports/qinq-port/outbound-port-lists/outbound-port-list/entry-flag": {
+    "name": "Flag of an Interface"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/invalid-packet": {
+    "name": "Invalid IGMP Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/invalid-packet/query": {
+    "name": "Number of Invalid Query Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/invalid-packet/query/unwanted-source-list": {
+    "name": "Invalid Source Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/invalid-packet/query/zero-max-resp-code": {
+    "name": "Max Resp Code of 0"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/invalid-packet/query/fault-length": {
+    "name": "Invalid Packet Length"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/invalid-packet/query/invalid-multicast-group": {
+    "name": "Invalid Multicast Group"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/invalid-packet/query/bad-checksum": {
+    "name": "Invalid Checksum"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/invalid-packet/report": {
+    "name": "Number of Invalid Report Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/invalid-packet/report/fault-length": {
+    "name": "Invalid Packet Length"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/invalid-packet/report/invalid-multicast-group": {
+    "name": "Invalid Multicast Group"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/invalid-packet/report/invalid-multicast-source": {
+    "name": "Invalid Source Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/invalid-packet/report/bad-checksum": {
+    "name": "Invalid Checksum"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/invalid-packet/report/illegal": {
+    "name": "Invalid Report Message Type"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/invalid-packet/leave": {
+    "name": "Invalid Leave Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/invalid-packet/leave/invalid-multicast-group": {
+    "name": "Invalid Multicast Group"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/invalid-packet/leave/bad-checksum": {
+    "name": "Invalid Checksum"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld": {
+    "name": "MLD configurations"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/global": {
+    "name": "MGMD Configure"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/global/query-interval": {
+    "name": "General Query Interval"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/global/query-response-interval": {
+    "name": "Max Response Time"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/global/robustness": {
+    "name": "Robust Count"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/global/last-member-query-interval": {
+    "name": "Group-Query Interval"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/global/require-router-alert": {
+    "name": "Require Router-Alert"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/global/send-router-alert": {
+    "name": "Send With Router-Alert"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/global/other-querier-present-time": {
+    "name": "Other Querier KA Time"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/global/ssm-mappings": {
+    "name": "SSM-Mapping Rule List"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/global/ssm-mappings/ssm-mapping": {
+    "name": "SSM-Mapping Rule"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/global/ssm-mappings/ssm-mapping/group-address": {
+    "name": "Group Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/global/ssm-mappings/ssm-mapping/mask-length": {
+    "name": "Group Address Mask Length"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/global/ssm-mappings/ssm-mapping/source-address": {
+    "name": "Source IP Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces": {
+    "name": "Interface MLD Config List"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface": {
+    "name": "Interface MLD Configuration"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/name": {
+    "name": "Interface Name"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/enable": {
+    "name": "Enabling a Protocol"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/ip-source-policy-enable": {
+    "name": "IP Source Policy"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/ip-source-policy-name": {
+    "name": "IP Source Policy"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/query-interval": {
+    "name": "General Query Interval"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/query-response-interval": {
+    "name": "Max Response Time"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/robustness": {
+    "name": "Robust Count"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/version": {
+    "name": "Protocol Version"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/last-member-query-interval": {
+    "name": "Group-Query Interval"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/require-router-alert": {
+    "name": "Require Router-Alert"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/send-router-alert": {
+    "name": "Sending with Router-Alert"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/other-querier-present-time": {
+    "name": "Other Querier KA Time"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/immediately-leave": {
+    "name": "Prompt Leave"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/immediately-leave-policy": {
+    "name": "Prompt-Leave Policy"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/on-demand-enable": {
+    "name": "On-Demand"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/entry-limit": {
+    "name": "Maximum Number of Entries"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/entry-limit-acl-name": {
+    "name": "ACL for No-Limit Group"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/ssm-mapping-enable": {
+    "name": "SSM-Mapping Enable"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/group-acl-name": {
+    "name": "Group Policy"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/group-acl-version": {
+    "name": "Forbidden Protocol Version"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/query-acl-name": {
+    "name": "Query IP Source Policy"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/status": {
+    "name": "Interface Info"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/status/address": {
+    "name": "Interface Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/status/state": {
+    "name": "Interface Status"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/status/negotiate-query-interval": {
+    "name": "Negotiated Query Interval"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/status/other-querier-timeout": {
+    "name": "Other Querier KA Time"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/status/maximum-response-time": {
+    "name": "Max Query Response Time"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/status/last-member-query-time": {
+    "name": "LMQT"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/status/startup-query-interval": {
+    "name": "Startup Query Interval"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/status/startup-query-count": {
+    "name": "Startup Query Count"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/status/querier-address": {
+    "name": "Querier"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/status/is-local-querier": {
+    "name": "Local Query or Not"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/status/joins": {
+    "name": "Groups an Interface Joins"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/status/leaves": {
+    "name": "Groups an Interface Leaves"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/status/negotiated-robustness": {
+    "name": "Robustness (Negotiated)"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/status/startup-query-timer-state": {
+    "name": "Startup-Query-Timer State"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/status/other-querier-present-timer-state": {
+    "name": "Other Present-Timer Status"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/status/total-group-reported": {
+    "name": "Total Group Number"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/status/remote-backup-state": {
+    "name": "Remote backup state"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/control-message": {
+    "name": "Number of MLD Messages on an Interface"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/control-message/address": {
+    "name": "Interface Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/control-message/general-query-sent": {
+    "name": "Sent General Query Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/control-message/general-query-valid": {
+    "name": "Valid General Query Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/control-message/general-query-invalid": {
+    "name": "Invalid General Query Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/control-message/general-query-ignore": {
+    "name": "Ignored General Query Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/control-message/group-query-sent": {
+    "name": "Sent Group Query Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/control-message/group-query-valid": {
+    "name": "Valid Group Query Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/control-message/group-query-invalid": {
+    "name": "Invalid Group Query Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/control-message/group-query-ignore": {
+    "name": "Ignored Group Query Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/control-message/source-group-sent": {
+    "name": "Sent Group-and-Source-Specific Query Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/control-message/source-group-valid": {
+    "name": "Valid Group-and-Source-Specific Query Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/control-message/source-group-invalid": {
+    "name": "Invalid Group-and-Source-Specific Query Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/control-message/source-group-ignore": {
+    "name": "Ignored Group-and-Source-Specific Query Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/control-message/source-sent": {
+    "name": "Sent Source-Records-Total Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/control-message/source-valid": {
+    "name": "Valid Source-Records-Total Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/control-message/source-invalid": {
+    "name": "Invalid Source-Records-Total Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/control-message/source-ignore": {
+    "name": "Ignored Source-Records-Total Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/control-message/unknown-invalid": {
+    "name": "Invalid Messages of Unknown Type"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/control-message/unknown-ignore": {
+    "name": "Ignored Messages of Unknown Types"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/invalid-packet": {
+    "name": "Interface-based Invalid MLD Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/invalid-packet/query": {
+    "name": "Number of Invalid Query Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/invalid-packet/query/unwanted-source-list": {
+    "name": "Invalid Source Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/invalid-packet/query/zero-max-resp-code": {
+    "name": "Max Resp Code of 0"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/invalid-packet/query/fault-length": {
+    "name": "Invalid Packet Length"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/invalid-packet/query/invalid-multicast-group": {
+    "name": "Invalid Multicast Group"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/invalid-packet/query/bad-checksum": {
+    "name": "Invalid Checksum"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/invalid-packet/report": {
+    "name": "Number of Invalid Report Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/invalid-packet/report/fault-length": {
+    "name": "Invalid Packet Length"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/invalid-packet/report/invalid-multicast-group": {
+    "name": "Invalid Multicast Group"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/invalid-packet/report/invalid-multicast-source": {
+    "name": "Invalid Source Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/invalid-packet/report/bad-checksum": {
+    "name": "Invalid Checksum"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/invalid-packet/report/illegal": {
+    "name": "Invalid Report Message Type"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/invalid-packet/leave": {
+    "name": "Invalid Leave Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/invalid-packet/leave/invalid-multicast-group": {
+    "name": "Invalid Multicast Group"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/invalid-packet/leave/bad-checksum": {
+    "name": "Invalid Checksum"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/static-groups": {
+    "name": "Static Group Configure List"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/static-groups/static-group": {
+    "name": "Static Group Configure"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/static-groups/static-group/interface": {
+    "name": "Interface Name"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/static-groups/static-group/group-address": {
+    "name": "Static Group Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/static-groups/static-group/is-source-address": {
+    "name": "Set Source Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/static-groups/static-group/source-address": {
+    "name": "Source IP Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/static-groups/static-group/is-mask-length": {
+    "name": "Set Incremental Mask Length"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/static-groups/static-group/mask-length": {
+    "name": "Incremental Mask Length"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/static-groups/static-group/total-number": {
+    "name": "Group Address Number"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/dot1q-static-groups": {
+    "name": "DOT1Q Static Group Configure List"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/dot1q-static-groups/dot1q-static-group": {
+    "name": "DOT1Q Static Group Configure"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/dot1q-static-groups/dot1q-static-group/interface": {
+    "name": "Interface Name"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/dot1q-static-groups/dot1q-static-group/group-address": {
+    "name": "Static Group Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/dot1q-static-groups/dot1q-static-group/is-source-address": {
+    "name": "Set Source Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/dot1q-static-groups/dot1q-static-group/source-address": {
+    "name": "Source IP Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/dot1q-static-groups/dot1q-static-group/is-mask-length": {
+    "name": "Set Incremental Mask Length"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/dot1q-static-groups/dot1q-static-group/mask-length": {
+    "name": "Incremental Mask Length"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/dot1q-static-groups/dot1q-static-group/begin-vid": {
+    "name": "DOT1Q Tag Begin ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/dot1q-static-groups/dot1q-static-group/end-vid": {
+    "name": "DOT1Q Tag End ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/dot1q-static-groups/dot1q-static-group/group-number": {
+    "name": "Group Address Number"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-static-groups": {
+    "name": "QinQ Static Group Configure List"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-static-groups/qinq-static-group": {
+    "name": "QinQ Static Group Configure"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-static-groups/qinq-static-group/interface": {
+    "name": "Interface Name"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-static-groups/qinq-static-group/group-address": {
+    "name": "Static Group Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-static-groups/qinq-static-group/is-source-address": {
+    "name": "Set Source Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-static-groups/qinq-static-group/source-address": {
+    "name": "Source IP Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-static-groups/qinq-static-group/is-mask-length": {
+    "name": "Set Incremental Mask Length"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-static-groups/qinq-static-group/mask-length": {
+    "name": "Incremental Mask Length"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-static-groups/qinq-static-group/pe-vid": {
+    "name": "QINQ PE ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-static-groups/qinq-static-group/ce-begin-vid": {
+    "name": "QINQ CE Begin ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-static-groups/qinq-static-group/ce-end-vid": {
+    "name": "QINQ CE End ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-static-groups/qinq-static-group/group-number": {
+    "name": "Group Address Number"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/display-static-groups": {
+    "name": "Static Group Info List"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/display-static-groups/display-static-group": {
+    "name": "Static Group Info"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/display-static-groups/display-static-group/interface": {
+    "name": "Interface Name"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/display-static-groups/display-static-group/group-address": {
+    "name": "Group Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/display-static-groups/display-static-group/source-address": {
+    "name": "Source IP Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/display-static-groups/display-static-group/is-configured-boundary": {
+    "name": "Multicast Boundary"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/groups": {
+    "name": "Group Info List"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/groups/group": {
+    "name": "Group Info"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/groups/group/interface": {
+    "name": "Interface Name"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/groups/group/group-address": {
+    "name": "Group Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/groups/group/last-report-address": {
+    "name": "Last Reporter"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/groups/group/up-time": {
+    "name": "Up Time Of Group"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/groups/group/expire-time": {
+    "name": "Expire Time"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/groups/group/last-member-query-counter": {
+    "name": "Last Member Query Count"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/groups/group/last-member-query-timer": {
+    "name": "Last member query timer"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/groups/group/source-filter-mode": {
+    "name": "Group Mode"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/groups/group/v1-host-timer": {
+    "name": "Timeout Period of IGMPv1 Host"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/groups/group/v2-host-timer": {
+    "name": "Timeout Period of IGMPv2 Host"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/groups/group/is-ssm-mapping": {
+    "name": "Is Group of SSM Mapping"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/groups/group/sources": {
+    "name": "Source Info List"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/groups/group/sources/source": {
+    "name": "Source Info"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/groups/group/sources/source/source-address": {
+    "name": "Source IP Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/groups/group/sources/source/up-time": {
+    "name": "Up Time Of Source"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/groups/group/sources/source/expire-time": {
+    "name": "Expire Time"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/groups/group/sources/source/last-member-query-counter": {
+    "name": "Last Member Query Count"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/groups/group/sources/source/last-member-query-timer": {
+    "name": "Last member query timer"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-groups": {
+    "name": "List of QinQ Dynamic Groups"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-groups/qinq-group": {
+    "name": "QinQ Dynamic Group Information"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-groups/qinq-group/interface": {
+    "name": "Interface Name"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-groups/qinq-group/pe-vid": {
+    "name": "ID of the Outer Label"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-groups/qinq-group/ce-vid": {
+    "name": "ID of the Inner Label"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-groups/qinq-group/group-address": {
+    "name": "Group Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-groups/qinq-group/up-time": {
+    "name": "Group Duration (s)"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-groups/qinq-group/expire-time": {
+    "name": "Remaining Time of the Group (in Seconds)"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-groups/qinq-group/group-timer": {
+    "name": "Group Timer"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-groups/qinq-group/retran-count": {
+    "name": "Last Member Query Count"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-groups/qinq-group/last-member-query": {
+    "name": "Sending Group-and-Source-Specific Query Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-groups/qinq-group/group-mode": {
+    "name": "Group Filter Mode"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-groups/qinq-group/compat-mode": {
+    "name": "Group Compatibility Mode"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-groups/qinq-group/v1-host-timer": {
+    "name": "IGMPv1 Host Present Timer"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-groups/qinq-group/v2-host-timer": {
+    "name": "IGMPv2 Host Present Timer"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-groups/qinq-group/source-last-member-query": {
+    "name": "Sending Group-and-Source-Specific Query Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-groups/qinq-group/last-member-query-timer": {
+    "name": "Timeout Period of Group Member Query"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-groups/qinq-group/sources": {
+    "name": "Source Information List of the QinQ Dynamic Group"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-groups/qinq-group/sources/source": {
+    "name": "Source of a Dynamic QinQ Multicast Group"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-groups/qinq-group/sources/source/source-address": {
+    "name": "Source IP Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-groups/qinq-group/sources/source/up-time": {
+    "name": "Up Time Of Source"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-groups/qinq-group/sources/source/expire-time": {
+    "name": "Expire Time"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-groups/qinq-group/sources/source/source-timer": {
+    "name": "Source Timer"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-groups/qinq-group/sources/source/retran-count": {
+    "name": "Last Member Query Count"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-groups/qinq-group/sources/source/last-member-query": {
+    "name": "Sending Group-and-Source-Specific Query Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-ports": {
+    "name": "List of QinQ Outbound Interfaces"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-ports/qinq-port": {
+    "name": "QinQ Outbound Interface Information"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-ports/qinq-port/interface": {
+    "name": "Interface Name"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-ports/qinq-port/group-address": {
+    "name": "Group Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-ports/qinq-port/source-address": {
+    "name": "Source IP Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-ports/qinq-port/outbound-port-lists": {
+    "name": "QinQ Outbound Interface Detail List"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-ports/qinq-port/outbound-port-lists/outbound-port-list": {
+    "name": "Detailed QinQ Outbound Interface"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-ports/qinq-port/outbound-port-lists/outbound-port-list/pe-vid": {
+    "name": "ID of the Outer Label"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-ports/qinq-port/outbound-port-lists/outbound-port-list/ce-vid": {
+    "name": "ID of the Inner Label"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-ports/qinq-port/outbound-port-lists/outbound-port-list/live-time": {
+    "name": "Port Duration"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-ports/qinq-port/outbound-port-lists/outbound-port-list/group-mode": {
+    "name": "Group Mode"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-ports/qinq-port/outbound-port-lists/outbound-port-list/entry-flag": {
+    "name": "Flag of an Interface"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/invalid-packet": {
+    "name": "Invalid MLD Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/invalid-packet/query": {
+    "name": "Number of Invalid Query Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/invalid-packet/query/unwanted-source-list": {
+    "name": "Invalid Source Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/invalid-packet/query/zero-max-resp-code": {
+    "name": "Max Resp Code of 0"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/invalid-packet/query/fault-length": {
+    "name": "Invalid Packet Length"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/invalid-packet/query/invalid-multicast-group": {
+    "name": "Invalid Multicast Group"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/invalid-packet/query/bad-checksum": {
+    "name": "Invalid Checksum"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/invalid-packet/report": {
+    "name": "Number of Invalid Report Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/invalid-packet/report/fault-length": {
+    "name": "Invalid Packet Length"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/invalid-packet/report/invalid-multicast-group": {
+    "name": "Invalid Multicast Group"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/invalid-packet/report/invalid-multicast-source": {
+    "name": "Invalid Source Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/invalid-packet/report/bad-checksum": {
+    "name": "Invalid Checksum"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/invalid-packet/report/illegal": {
+    "name": "Invalid Report Message Type"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/invalid-packet/leave": {
+    "name": "Invalid Leave Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/invalid-packet/leave/invalid-multicast-group": {
+    "name": "Invalid Multicast Group"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/invalid-packet/leave/bad-checksum": {
+    "name": "Invalid Checksum"
+  }
+}

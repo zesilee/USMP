@@ -1,0 +1,200 @@
+{
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/huawei-pbr:pbr": {
+    "name": "Pbr"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/huawei-pbr:pbr/redirect-to-cpu": {
+    "name": "Redirect-to-cpu"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/huawei-pbr:pbr/redirect-to-cpu/to-cpu": {
+    "name": "To-cpu"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/huawei-pbr:pbr/redirect-backup-nexthop": {
+    "name": "Redirect packets to backup nexthop of the flow"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/huawei-pbr:pbr/redirect-backup-nexthop/next-hop-ip": {
+    "name": "Next-hop-ip"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/huawei-pbr:pbr/redirect-backup-nexthop/vpn-instance": {
+    "name": "VPN-instance"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/huawei-pbr:pbr/redirect-backup-nexthop/nexthop-extend": {
+    "name": "Nexthop extend"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/huawei-pbr:pbr/redirect-backup-nexthop/nexthop-extend/nqa": {
+    "name": "NQA"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/huawei-pbr:pbr/redirect-backup-nexthop/nexthop-extend/nqa/admin-name": {
+    "name": "Admin-name"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/huawei-pbr:pbr/redirect-backup-nexthop/nexthop-extend/nqa/test-name": {
+    "name": "Test-name"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/huawei-pbr:pbr/redirect-backup-nexthop/nexthop-extend/interface": {
+    "name": "Track-interface"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/huawei-pbr:pbr/redirect-backup-nexthop/nexthop-extend/interface/interface": {
+    "name": "Track-interface"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/huawei-pbr:pbr/pbr-ipv4": {
+    "name": "Pbr-ipv4"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/huawei-pbr:pbr/pbr-ipv4/pbr-ipv4": {
+    "name": "Pbr-ipv4"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/huawei-pbr:pbr/pbr-ipv4/pbr-ipv4/redirect-to-interface": {
+    "name": "Redirect-to-interface"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/huawei-pbr:pbr/pbr-ipv4/pbr-ipv4/redirect-to-interface/redirect-to-interface": {
+    "name": "Redirect-to-interface"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/huawei-pbr:pbr/pbr-ipv4/pbr-ipv4/redirect-to-interface/redirect-to-interface/if-name": {
+    "name": "If-name"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/huawei-pbr:pbr/pbr-ipv4/pbr-ipv4/ipv4-nexthops": {
+    "name": "Ipv4-nexthops"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/huawei-pbr:pbr/pbr-ipv4/pbr-ipv4/ipv4-nexthops/ipv4-nexthops": {
+    "name": "Ipv4-nexthops"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/huawei-pbr:pbr/pbr-ipv4/pbr-ipv4/ipv4-nexthops/ipv4-nexthops/remote": {
+    "name": "Remote"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/huawei-pbr:pbr/pbr-ipv4/pbr-ipv4/ipv4-nexthops/ipv4-nexthops/load-balance": {
+    "name": "Load-balance"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/huawei-pbr:pbr/pbr-ipv4/pbr-ipv4/ipv4-nexthops/ipv4-nexthops/vpn-instance": {
+    "name": "Vpn-instance"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/huawei-pbr:pbr/pbr-ipv4/pbr-ipv4/ipv4-nexthops/ipv4-nexthops/deny": {
+    "name": "Deny"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/huawei-pbr:pbr/pbr-ipv4/pbr-ipv4/ipv4-nexthops/ipv4-nexthops/exact": {
+    "name": "Exact"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/huawei-pbr:pbr/pbr-ipv4/pbr-ipv4/ipv4-nexthops/ipv4-nexthops/nexthop-addresss": {
+    "name": "Nexthop-addresss"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/huawei-pbr:pbr/pbr-ipv4/pbr-ipv4/ipv4-nexthops/ipv4-nexthops/nexthop-addresss/nexthop-address": {
+    "name": "Nexthop-address"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/huawei-pbr:pbr/pbr-ipv4/pbr-ipv4/ipv4-nexthops/ipv4-nexthops/nexthop-addresss/nexthop-address/ip-address": {
+    "name": "Ip-address"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/huawei-pbr:pbr/pbr-ipv4/pbr-ipv4/ipv4-nexthops/ipv4-nexthops/nexthop-addresss/nexthop-address/reaction-probe-failtimes": {
+    "name": "Reaction-probe-failtimes"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/huawei-pbr:pbr/pbr-ipv4/pbr-ipv4/ipv4-nexthops/ipv4-nexthops/nexthop-addresss/nexthop-address/track": {
+    "name": "Track"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/huawei-pbr:pbr/pbr-ipv4/pbr-ipv4/ipv4-nexthops/ipv4-nexthops/nexthop-addresss/nexthop-address/track/ip-route": {
+    "name": "Ip-route"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/huawei-pbr:pbr/pbr-ipv4/pbr-ipv4/ipv4-nexthops/ipv4-nexthops/nexthop-addresss/nexthop-address/track/ip-route/ip-route": {
+    "name": "Ip-route"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/huawei-pbr:pbr/pbr-ipv4/pbr-ipv4/ipv4-nexthops/ipv4-nexthops/nexthop-addresss/nexthop-address/track/ip-route/ip-route/ip": {
+    "name": "Ip"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/huawei-pbr:pbr/pbr-ipv4/pbr-ipv4/ipv4-nexthops/ipv4-nexthops/nexthop-addresss/nexthop-address/track/ip-route/ip-route/mask-length": {
+    "name": "Mask-length"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/huawei-pbr:pbr/pbr-ipv4/pbr-ipv4/ipv4-nexthops/ipv4-nexthops/nexthop-addresss/nexthop-address/track/interface": {
+    "name": "Interface"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/huawei-pbr:pbr/pbr-ipv4/pbr-ipv4/ipv4-nexthops/ipv4-nexthops/nexthop-addresss/nexthop-address/track/interface/interface": {
+    "name": "Interface"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/huawei-pbr:pbr/pbr-ipv4/pbr-ipv4/ipv4-nexthops/ipv4-nexthops/nexthop-addresss/nexthop-address/track/interface/interface/interface": {
+    "name": "Interface"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/huawei-pbr:pbr/pbr-ipv4/pbr-ipv4/ipv4-nexthops/ipv4-nexthops/nexthop-addresss/nexthop-address/track/nqa": {
+    "name": "Nqa"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/huawei-pbr:pbr/pbr-ipv4/pbr-ipv4/ipv4-nexthops/ipv4-nexthops/nexthop-addresss/nexthop-address/track/nqa/nqa": {
+    "name": "Nqa"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/huawei-pbr:pbr/pbr-ipv4/pbr-ipv4/ipv4-nexthops/ipv4-nexthops/nexthop-addresss/nexthop-address/track/nqa/nqa/nqa-admin-name": {
+    "name": "Nqa-admin-name"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/huawei-pbr:pbr/pbr-ipv4/pbr-ipv4/ipv4-nexthops/ipv4-nexthops/nexthop-addresss/nexthop-address/track/nqa/nqa/nqa-instance": {
+    "name": "Nqa-instance"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/huawei-pbr:pbr/pbr-ipv4/pbr-ipv4/ipv4-nexthops/ipv4-nexthops/nexthop-addresss/nexthop-address/track/track-vrrp": {
+    "name": "Track-vrrp"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/huawei-pbr:pbr/pbr-ipv4/pbr-ipv4/ipv4-nexthops/ipv4-nexthops/nexthop-addresss/nexthop-address/track/track-vrrp/track-vrrp": {
+    "name": "Track-vrrp"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/huawei-pbr:pbr/pbr-ipv4/pbr-ipv4/ipv4-nexthops/ipv4-nexthops/nexthop-addresss/nexthop-address/track/track-vrrp/track-vrrp/vrid": {
+    "name": "Vrid"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/huawei-pbr:pbr/pbr-ipv4/pbr-ipv4/ipv4-nexthops/ipv4-nexthops/nexthop-addresss/nexthop-address/track/track-vrrp/track-vrrp/interface": {
+    "name": "Interface"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/huawei-pbr:pbr/pbr-ipv6": {
+    "name": "Pbr-ipv6"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/huawei-pbr:pbr/pbr-ipv6/pbr-ipv6": {
+    "name": "Pbr-ipv6"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/huawei-pbr:pbr/pbr-ipv6/pbr-ipv6/ipv6-nexthops": {
+    "name": "Ipv6-nexthops"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/huawei-pbr:pbr/pbr-ipv6/pbr-ipv6/ipv6-nexthops/ipv6-nexthops": {
+    "name": "Ipv6-nexthops"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/huawei-pbr:pbr/pbr-ipv6/pbr-ipv6/ipv6-nexthops/ipv6-nexthops/remote": {
+    "name": "Remote"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/huawei-pbr:pbr/pbr-ipv6/pbr-ipv6/ipv6-nexthops/ipv6-nexthops/load-balance": {
+    "name": "Load-balance"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/huawei-pbr:pbr/pbr-ipv6/pbr-ipv6/ipv6-nexthops/ipv6-nexthops/vpn-instance": {
+    "name": "Vpn-instance"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/huawei-pbr:pbr/pbr-ipv6/pbr-ipv6/ipv6-nexthops/ipv6-nexthops/deny": {
+    "name": "Deny"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/huawei-pbr:pbr/pbr-ipv6/pbr-ipv6/ipv6-nexthops/ipv6-nexthops/exact": {
+    "name": "Exact"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/huawei-pbr:pbr/pbr-ipv6/pbr-ipv6/ipv6-nexthops/ipv6-nexthops/nexthop-addresss": {
+    "name": "Nexthop-address"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/huawei-pbr:pbr/pbr-ipv6/pbr-ipv6/ipv6-nexthops/ipv6-nexthops/nexthop-addresss/nexthop-address": {
+    "name": "Nexthop-address"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/huawei-pbr:pbr/pbr-ipv6/pbr-ipv6/ipv6-nexthops/ipv6-nexthops/nexthop-addresss/nexthop-address/ipv6-address": {
+    "name": "Ipv6-address"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/huawei-pbr:pbr/pbr-ipv6/pbr-ipv6/ipv6-nexthops/ipv6-nexthops/nexthop-addresss/nexthop-address/reaction-probe-failtimes": {
+    "name": "Reaction-probe-failtimes"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/huawei-pbr:pbr/pbr-ipv6/pbr-ipv6/ipv6-nexthops/ipv6-nexthops/nexthop-addresss/nexthop-address/track": {
+    "name": "Track"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/huawei-pbr:pbr/pbr-ipv6/pbr-ipv6/ipv6-nexthops/ipv6-nexthops/nexthop-addresss/nexthop-address/track/nqa": {
+    "name": "Nqa"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/huawei-pbr:pbr/pbr-ipv6/pbr-ipv6/ipv6-nexthops/ipv6-nexthops/nexthop-addresss/nexthop-address/track/nqa/nqa": {
+    "name": "Nqa"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/huawei-pbr:pbr/pbr-ipv6/pbr-ipv6/ipv6-nexthops/ipv6-nexthops/nexthop-addresss/nexthop-address/track/nqa/nqa/nqa-admin-name": {
+    "name": "NQA admin name"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/huawei-pbr:pbr/pbr-ipv6/pbr-ipv6/ipv6-nexthops/ipv6-nexthops/nexthop-addresss/nexthop-address/track/nqa/nqa/nqa-instance": {
+    "name": "Nqa-instance"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/huawei-pbr:pbr/pbr-ipv6/pbr-ipv6/ipv6-nexthops/ipv6-nexthops/nexthop-addresss/nexthop-address/track/ipv6-route": {
+    "name": "Ipv6-route"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/huawei-pbr:pbr/pbr-ipv6/pbr-ipv6/ipv6-nexthops/ipv6-nexthops/nexthop-addresss/nexthop-address/track/ipv6-route/ipv6-route": {
+    "name": "Ipv6-route"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/huawei-pbr:pbr/pbr-ipv6/pbr-ipv6/ipv6-nexthops/ipv6-nexthops/nexthop-addresss/nexthop-address/track/ipv6-route/ipv6-route/ipv6-address": {
+    "name": "Ipv6-address"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/huawei-pbr:pbr/pbr-ipv6/pbr-ipv6/ipv6-nexthops/ipv6-nexthops/nexthop-addresss/nexthop-address/track/ipv6-route/ipv6-route/mask-length": {
+    "name": "Mask-length"
+  }
+}

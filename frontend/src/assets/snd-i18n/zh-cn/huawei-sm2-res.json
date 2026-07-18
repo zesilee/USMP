@@ -1,0 +1,32 @@
+{
+  "/huawei-sm2:sm2": {
+    "name": "SM2对端密钥表"
+  },
+  "/huawei-sm2:sm2/sm2-peer-keys": {
+    "name": "SM2对端密钥表"
+  },
+  "/huawei-sm2:sm2/sm2-peer-keys/sm2-peer-key": {
+    "name": "SM2对端密钥"
+  },
+  "/huawei-sm2:sm2/sm2-peer-keys/sm2-peer-key/key-name": {
+    "name": "SM2密钥名称"
+  },
+  "/huawei-sm2:sm2/sm2-peer-keys/sm2-peer-key/key-code": {
+    "name": "SM2密钥代码"
+  },
+  "/huawei-sm2:sm2/sm2-key-pairs": {
+    "name": "SM2密钥对"
+  },
+  "/huawei-sm2:sm2/sm2-key-pairs/sm2-key-pair": {
+    "name": "SM2密钥对"
+  },
+  "/huawei-sm2:sm2/sm2-key-pairs/sm2-key-pair/key-pair-label": {
+    "name": "SM2密钥对标签名称"
+  },
+  "/huawei-sm2:sm2/sm2-key-pairs/sm2-key-pair/key-size": {
+    "name": "SM2密钥对大小"
+  },
+  "/huawei-sm2:sm2/sm2-key-pairs/sm2-key-pair/host-key-code": {
+    "name": "SM2主机密钥"
+  }
+}

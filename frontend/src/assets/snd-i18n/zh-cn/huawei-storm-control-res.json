@@ -1,0 +1,134 @@
+{
+  "/huawei-ifm:ifm/interfaces/interface/huawei-storm-control:storm-control": {
+    "name": "风暴控制"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-storm-control:storm-control/storm-rates": {
+    "name": "风暴速率"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-storm-control:storm-control/storm-rates/storm-rate": {
+    "name": "风暴控制速率"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-storm-control:storm-control/storm-rates/storm-rate/packet-type": {
+    "name": "报文类型"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-storm-control:storm-control/storm-rates/storm-rate/rate-type": {
+    "name": "速率类型"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-storm-control:storm-control/storm-rates/storm-rate/rate-type/packet": {
+    "name": "包模式"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-storm-control:storm-control/storm-rates/storm-rate/rate-type/packet/pps-min-rate": {
+    "name": "最小包速率"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-storm-control:storm-control/storm-rates/storm-rate/rate-type/packet/pps-max-rate": {
+    "name": "最大包速率"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-storm-control:storm-control/storm-rates/storm-rate/rate-type/cir": {
+    "name": "承诺信息速率"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-storm-control:storm-control/storm-rates/storm-rate/rate-type/cir/cir-min-rate": {
+    "name": "最小承诺信息速率"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-storm-control:storm-control/storm-rates/storm-rate/rate-type/cir/cir-max-rate": {
+    "name": "最大承诺信息速率"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-storm-control:storm-control/storm-rates/storm-rate/rate-type/percent": {
+    "name": "百分比模式"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-storm-control:storm-control/storm-rates/storm-rate/rate-type/percent/per-min-rate": {
+    "name": "最小百分比速率"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-storm-control:storm-control/storm-rates/storm-rate/rate-type/percent/per-max-rate": {
+    "name": "最大百分比速率"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-storm-control:storm-control/storm-control-action": {
+    "name": "风暴控制动作"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-storm-control:storm-control/storm-control-action/action": {
+    "name": "风暴控制动作"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-storm-control:storm-control/storm-control-action/log": {
+    "name": "风暴控制日志"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-storm-control:storm-control/storm-control-action/trap": {
+    "name": "风暴控制告警上报"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-storm-control:storm-control/storm-control-action/interval": {
+    "name": "风暴控制间隔"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-storm-control:storm-control/storm-control-state": {
+    "name": "风暴控制状态"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-storm-control:storm-control/storm-control-state/packet-type": {
+    "name": "报文类型"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-storm-control:storm-control/storm-control-state/punish": {
+    "name": "惩罚动作"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-storm-control:storm-control/storm-control-state/last-punish-time": {
+    "name": "最后惩罚时间"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-storm-control:storm-control/storm-control-state/mode": {
+    "name": "风暴控制模式"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-storm-control:storm-suppress": {
+    "name": "流量抑制"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-storm-control:storm-suppress/storm-rates": {
+    "name": "流量抑制速率"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-storm-control:storm-suppress/storm-rates/storm-rate": {
+    "name": "流量抑制速率"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-storm-control:storm-suppress/storm-rates/storm-rate/packet-type": {
+    "name": "报文类型"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-storm-control:storm-suppress/storm-rates/storm-rate/rate-type": {
+    "name": "流量抑制速率类型"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-storm-control:storm-suppress/storm-rates/storm-rate/rate-type/packet": {
+    "name": "流量抑制包模式"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-storm-control:storm-suppress/storm-rates/storm-rate/rate-type/packet/pps": {
+    "name": "流量抑制包速率"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-storm-control:storm-suppress/storm-rates/storm-rate/rate-type/rate": {
+    "name": "流量抑制速率"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-storm-control:storm-suppress/storm-rates/storm-rate/rate-type/rate/cir": {
+    "name": "流量抑制承诺信息速率"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-storm-control:storm-suppress/storm-rates/storm-rate/rate-type/rate/cbs": {
+    "name": "流量抑制承诺突发尺寸"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-storm-control:storm-suppress/storm-rates/storm-rate/rate-type/percent": {
+    "name": "流量抑制百分比模式"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-storm-control:storm-suppress/storm-rates/storm-rate/rate-type/percent/percent": {
+    "name": "流量抑制百分比模式"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-storm-control:storm-suppress": {
+    "name": "流量抑制"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-storm-control:storm-suppress/storm-rates": {
+    "name": "流量抑制速率"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-storm-control:storm-suppress/storm-rates/storm-rate": {
+    "name": "流量抑制速率"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-storm-control:storm-suppress/storm-rates/storm-rate/packet-type": {
+    "name": "报文类型"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-storm-control:storm-suppress/storm-rates/storm-rate/rate-type": {
+    "name": "速率类型"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-storm-control:storm-suppress/storm-rates/storm-rate/rate-type/rate": {
+    "name": "流量抑制速率"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-storm-control:storm-suppress/storm-rates/storm-rate/rate-type/rate/cir": {
+    "name": "承诺信息速率"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-storm-control:storm-suppress/storm-rates/storm-rate/rate-type/rate/cbs": {
+    "name": "承诺突发尺寸"
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "/huawei-packetevent:packetevent": {
+    "name": "包事件"
+  },
+  "/huawei-packetevent:packetevent/global": {
+    "name": "全局包事件"
+  },
+  "/huawei-packetevent:packetevent/global/export-interval": {
+    "name": "分析器周期"
+  },
+  "/huawei-packetevent:packetevent/global/collect-id": {
+    "name": "分析器"
+  },
+  "/huawei-packetevent:packetevent/global/drop-event": {
+    "name": "丢包事件"
+  },
+  "/huawei-packetevent:packetevent/global/drop-event/aging-time": {
+    "name": "丢包可视的流表老化周期"
+  },
+  "/huawei-packetevent:packetevent/global/drop-event/forward-exception": {
+    "name": "异常丢包"
+  },
+  "/huawei-packetevent:packetevent/global/drop-event/forward-normal": {
+    "name": "正常丢包"
+  },
+  "/huawei-packetevent:packetevent/global/drop-event/buffer-overflow": {
+    "name": "缓冲区溢出丢包"
+  },
+  "/huawei-packetevent:packetevent/global/drop-event/acl-deny": {
+    "name": "ACL丢包"
+  },
+  "/huawei-packetevent:packetevent/global/latency-event": {
+    "name": "时延事件"
+  },
+  "/huawei-packetevent:packetevent/global/latency-event/latency-threshold": {
+    "name": "时延阈值"
+  },
+  "/huawei-packetevent:packetevent/global/latency-event/aging-time": {
+    "name": "超时延可视流表老化时间"
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "/huawei-anyflow:anyflow": {
+    "name": "进入Any-Flow视图"
+  },
+  "/huawei-anyflow:anyflow/global": {
+    "name": "配置全流分析"
+  },
+  "/huawei-anyflow:anyflow/global/enable": {
+    "name": "使能或者去使能anyflow"
+  },
+  "/huawei-anyflow:anyflow/global/aging-time": {
+    "name": "流表老化时间"
+  },
+  "/huawei-anyflow:anyflow/global/export-interval": {
+    "name": "输出间隔时间"
+  },
+  "/huawei-anyflow:anyflow/global/hardware-aging-time": {
+    "name": "硬件流表老化时间"
+  },
+  "/huawei-anyflow:anyflow/global/hardware-export-interval": {
+    "name": "硬件流表输出间隔时间"
+  },
+  "/huawei-anyflow:anyflow/global/collect-id": {
+    "name": "分析器ID"
+  },
+  "/huawei-anyflow:anyflow/global/flow-aggregation": {
+    "name": "使能或去使能全流分析聚合流"
+  },
+  "/huawei-anyflow:anyflow/global/aggregation-service-port": {
+    "name": "聚合端口"
+  },
+  "/huawei-anyflow:anyflow/global/aggregation-aging-time": {
+    "name": "聚合流表的老化时间"
+  },
+  "/huawei-anyflow:anyflow/global/aggregation-export-interval": {
+    "name": "聚合流表的输出间隔时间"
+  }
+}

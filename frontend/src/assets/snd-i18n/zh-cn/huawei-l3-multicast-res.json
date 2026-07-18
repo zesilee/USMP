@@ -1,0 +1,236 @@
+{
+  "/huawei-l3-multicast:l3mc": {
+    "name": "三层组播配置列表"
+  },
+  "/huawei-l3-multicast:l3-multicast/ipv4": {
+    "name": "配置IPv4"
+  },
+  "/huawei-l3-multicast:l3-multicast/ipv4/limits": {
+    "name": "全局PIM表项数目限制配置"
+  },
+  "/huawei-l3-multicast:l3-multicast/ipv4/limits/limit": {
+    "name": "全局PIM表项数目限制配置列表"
+  },
+  "/huawei-l3-multicast:l3-multicast/ipv4/limits/limit/type": {
+    "name": "限制类型"
+  },
+  "/huawei-l3-multicast:l3-multicast/ipv4/limits/limit/value": {
+    "name": "配置的表项限制值"
+  },
+  "/huawei-l3-multicast:l3-multicast/ipv4/limits/limit/upper-threshold": {
+    "name": "触发阈值告警的上限值"
+  },
+  "/huawei-l3-multicast:l3-multicast/ipv4/limits/limit/lower-threshold": {
+    "name": "触发阈值告警恢复的下限值"
+  },
+  "/huawei-l3-multicast:l3-multicast/ipv4/limits/limit/current-count": {
+    "name": "当前已创建的表项数"
+  },
+  "/huawei-l3-multicast:l3-multicast/ipv6": {
+    "name": "配置IPv6"
+  },
+  "/huawei-l3-multicast:l3-multicast/ipv6/limits": {
+    "name": "IPv6全局PIM表项数目限制配置"
+  },
+  "/huawei-l3-multicast:l3-multicast/ipv6/limits/limit": {
+    "name": "IPv6全局PIM表项数目限制配置列表"
+  },
+  "/huawei-l3-multicast:l3-multicast/ipv6/limits/limit/type": {
+    "name": "限制类型"
+  },
+  "/huawei-l3-multicast:l3-multicast/ipv6/limits/limit/value": {
+    "name": "配置的表项限制值"
+  },
+  "/huawei-l3-multicast:l3-multicast/ipv6/limits/limit/upper-threshold": {
+    "name": "触发阈值告警的上限值"
+  },
+  "/huawei-l3-multicast:l3-multicast/ipv6/limits/limit/lower-threshold": {
+    "name": "触发阈值告警恢复的下限值"
+  },
+  "/huawei-l3-multicast:l3-multicast/ipv6/limits/limit/current-count": {
+    "name": "当前已创建的表项数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast": {
+    "name": "组播配置列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv4": {
+    "name": "IPv4组播配置列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv4/global": {
+    "name": "组播配置"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv4/global/longest-match": {
+    "name": "最长匹配优先"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv4/global/load-splitting": {
+    "name": "负载分担使能"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv4/global/cpu-fwd-disable": {
+    "name": "软转发去使能"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv4/global/recursive-lookup-local-mt-enable": {
+    "name": "允许组播迭代查找local mt"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv4/interface-min-ttls": {
+    "name": "接口上配置合适的转发组播报文的最小TTL值"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv4/interface-min-ttls/interface-min-ttl": {
+    "name": "接口上配置转发组播报文的最小TTL值列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv4/interface-min-ttls/interface-min-ttl/name": {
+    "name": "接口名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv4/interface-min-ttls/interface-min-ttl/minimum-ttl": {
+    "name": "指定接口上转发组播报文的最小TTL值"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv4/interface-track-vrrps": {
+    "name": "组播绑定VRRP配置列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv4/interface-track-vrrps/interface-track-vrrp": {
+    "name": "组播绑定VRRP配置"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv4/interface-track-vrrps/interface-track-vrrp/name": {
+    "name": "接口名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv4/interface-track-vrrps/interface-track-vrrp/vrrp-id": {
+    "name": "虚拟路由器号值"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv4/interface-track-vrrps/interface-track-vrrp/is-admin": {
+    "name": "VRRP管理组的配置信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv4/interface-track-vrrps/interface-track-vrrp/track-interface": {
+    "name": "管理VRRP绑定的接口名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv4/interface-boundarys": {
+    "name": "配置单一管理范围的组播转发边界"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv4/interface-boundarys/interface-boundary": {
+    "name": "配置单一管理范围的组播转发边界列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv4/interface-boundarys/interface-boundary/name": {
+    "name": "接口名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv4/interface-boundarys/interface-boundary/group-address": {
+    "name": "指定组播组地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv4/interface-boundarys/interface-boundary/mask-length": {
+    "name": "指定组播组地址掩码长度"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv4/rpf-multi-topology": {
+    "name": "组播多拓扑使能"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv4/rpf-multi-topology/topology-rule-list": {
+    "name": "配置使用单播拓扑实例"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv4/rpf-multi-topology/topology-rule-list/name": {
+    "name": "拓扑名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv4/limits": {
+    "name": "VPN实例IPv4地址族表项数目限制值配置"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv4/limits/limit": {
+    "name": "表项数目限制值及对应的预警阈值配置清单"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv4/limits/limit/type": {
+    "name": "限制类型"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv4/limits/limit/value": {
+    "name": "配置的表项限制值"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv4/limits/limit/upper-threshold": {
+    "name": "触发阈值告警的上限值"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv4/limits/limit/lower-threshold": {
+    "name": "触发阈值告警恢复的下限值"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv4/limits/limit/current-count": {
+    "name": "当前已创建的表项数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv6": {
+    "name": "IPv6组播配置列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv6/global": {
+    "name": "组播配置"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv6/global/load-splitting": {
+    "name": "负载分担使能"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv6/global/cpu-fwd-disable": {
+    "name": "软转发去使能"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv6/interface-min-ttls": {
+    "name": "配置接口上转发IPv6组播报文的最小TTL值"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv6/interface-min-ttls/interface-min-ttl": {
+    "name": "配置接口上转发IPv6组播报文最小TTL值列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv6/interface-min-ttls/interface-min-ttl/name": {
+    "name": "接口名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv6/interface-min-ttls/interface-min-ttl/minimum-ttl": {
+    "name": "指定接口上转发IPv6组播报文的最小TTL值"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv6/interface-track-vrrps": {
+    "name": "组播绑定VRRP6配置列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv6/interface-track-vrrps/interface-track-vrrp": {
+    "name": "组播绑定VRRP6配置"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv6/interface-track-vrrps/interface-track-vrrp/name": {
+    "name": "接口名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv6/interface-track-vrrps/interface-track-vrrp/vrrp-id": {
+    "name": "虚拟路由器号值"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv6/interface-track-vrrps/interface-track-vrrp/is-admin": {
+    "name": "VRRP6管理组的配置信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv6/interface-track-vrrps/interface-track-vrrp/track-interface": {
+    "name": "管理VRRP6绑定的接口名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv6/interface-boundarys": {
+    "name": "配置单一管理范围的IPv6组播转发边界"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv6/interface-boundarys/interface-boundary": {
+    "name": "配置单一管理范围的IPv6组播转发边界列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv6/interface-boundarys/interface-boundary/name": {
+    "name": "接口名字"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv6/interface-boundarys/interface-boundary/group-address": {
+    "name": "指定组播组地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv6/interface-boundarys/interface-boundary/mask-length": {
+    "name": "指定组播组地址掩码长度"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv6/rpf-multi-topology": {
+    "name": "组播多拓扑使能"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv6/rpf-multi-topology/topology-rule-list": {
+    "name": "配置使用单播拓扑实例"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv6/rpf-multi-topology/topology-rule-list/name": {
+    "name": "单播拓扑实例的名字"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv6/limits": {
+    "name": "VPN IPv6实例下PIM表项数目限制配置"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv6/limits/limit": {
+    "name": "VPN IPv6实例下PIM表项数目限制配置列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv6/limits/limit/type": {
+    "name": "限制类型"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv6/limits/limit/value": {
+    "name": "配置的表项限制值"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv6/limits/limit/upper-threshold": {
+    "name": "触发阈值告警的上限值"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv6/limits/limit/lower-threshold": {
+    "name": "触发阈值告警恢复的下限值"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv6/limits/limit/current-count": {
+    "name": "当前已创建的表项数"
+  }
+}

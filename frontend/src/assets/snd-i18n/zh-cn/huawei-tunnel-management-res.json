@@ -1,0 +1,182 @@
+{
+  "/huawei-tunnel-management:tnlm": {
+    "name": "隧道管理"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-policys": {
+    "name": "隧道策略列表"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-policys/tunnel-policy": {
+    "name": "隧道策略"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-policys/tunnel-policy/name": {
+    "name": "隧道策略名"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-policys/tunnel-policy/description": {
+    "name": "描述信息"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-policys/tunnel-policy/ipv4-set": {
+    "name": "IPv4隧道策略配置"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-policys/tunnel-policy/ipv4-set/policy-type": {
+    "name": "隧道策略类型"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-policys/tunnel-policy/ipv4-set/policy-type/select-sequences": {
+    "name": "隧道类型序列"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-policys/tunnel-policy/ipv4-set/policy-type/select-sequences/select-sequence": {
+    "name": "隧道类型序列"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-policys/tunnel-policy/ipv4-set/policy-type/select-sequences/select-sequence/loadbalance": {
+    "name": "隧道负载分担"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-policys/tunnel-policy/ipv4-set/policy-type/select-sequences/select-sequence/unmix": {
+    "name": "不混选"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-policys/tunnel-policy/ipv4-set/policy-type/select-sequences/select-sequence/select-tunnel-types": {
+    "name": "隧道类型选择列表"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-policys/tunnel-policy/ipv4-set/policy-type/select-sequences/select-sequence/select-tunnel-types/select-tunnel-type": {
+    "name": "隧道类型选择"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-policys/tunnel-policy/ipv4-set/policy-type/select-sequences/select-sequence/select-tunnel-types/select-tunnel-type/type": {
+    "name": "隧道类型序列参数"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-policys/tunnel-policy/ipv4-set/policy-type/binding": {
+    "name": "隧道绑定"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-policys/tunnel-policy/ipv4-set/policy-type/binding/nexthops": {
+    "name": "隧道绑定列表"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-policys/tunnel-policy/ipv4-set/policy-type/binding/nexthops/nexthop": {
+    "name": "隧道绑定"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-policys/tunnel-policy/ipv4-set/policy-type/binding/nexthops/nexthop/address": {
+    "name": "绑定目的地址"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-policys/tunnel-policy/ipv4-set/policy-type/binding/nexthops/nexthop/down-switch": {
+    "name": "使能隧道切换"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-policys/tunnel-policy/ipv4-set/policy-type/binding/nexthops/nexthop/ignore-destination-check": {
+    "name": "忽略目的地址检查"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-policys/tunnel-policy/ipv4-set/policy-type/binding/nexthops/nexthop/include-ldp": {
+    "name": "是否与LDP形成负载分担"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-policys/tunnel-policy/ipv4-set/policy-type/binding/nexthops/nexthop/bind-type": {
+    "name": "绑定隧道类型"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-policys/tunnel-policy/ipv4-set/policy-type/binding/nexthops/nexthop/tunnel-names": {
+    "name": "隧道列表"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-policys/tunnel-policy/ipv4-set/policy-type/binding/nexthops/nexthop/tunnel-names/tunnel-name": {
+    "name": "隧道"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-policys/tunnel-policy/ipv4-set/policy-type/binding/nexthops/nexthop/tunnel-names/tunnel-name/name": {
+    "name": "Tunnel名称"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-policys/tunnel-policy/ipv4-set/policy-type/binding/nexthops/nexthop/auto-names": {
+    "name": "自动隧道"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-policys/tunnel-policy/ipv4-set/policy-type/binding/nexthops/nexthop/auto-names/auto-name": {
+    "name": "自动隧道列表"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-policys/tunnel-policy/ipv4-set/policy-type/binding/nexthops/nexthop/auto-names/auto-name/name": {
+    "name": "自动隧道名字"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-policys/tunnel-policy/ipv6-set": {
+    "name": "IPv6隧道策略配置"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-policys/tunnel-policy/ipv6-set/policy-type": {
+    "name": "隧道策略类型"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-policys/tunnel-policy/ipv6-set/policy-type/select-sequences": {
+    "name": "隧道类型序列"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-policys/tunnel-policy/ipv6-set/policy-type/select-sequences/select-sequence": {
+    "name": "隧道类型序列"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-policys/tunnel-policy/ipv6-set/policy-type/select-sequences/select-sequence/loadbalance": {
+    "name": "隧道负载分担"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-policys/tunnel-policy/ipv6-set/policy-type/select-sequences/select-sequence/unmix": {
+    "name": "不混选"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-policys/tunnel-policy/ipv6-set/policy-type/select-sequences/select-sequence/select-tunnel-types": {
+    "name": "隧道类型选择列表"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-policys/tunnel-policy/ipv6-set/policy-type/select-sequences/select-sequence/select-tunnel-types/select-tunnel-type": {
+    "name": "隧道类型选择"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-policys/tunnel-policy/ipv6-set/policy-type/select-sequences/select-sequence/select-tunnel-types/select-tunnel-type/type": {
+    "name": "隧道类型参数"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-down-switch": {
+    "name": "默认迭代策略开关"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-down-switch/enable": {
+    "name": "默认迭代策略开关"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-infos": {
+    "name": "隧道信息列表"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-infos/tunnel-info": {
+    "name": "隧道信息"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-infos/tunnel-info/id": {
+    "name": "隧道ID"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-infos/tunnel-info/name": {
+    "name": "Tunnel名称"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-infos/tunnel-info/type": {
+    "name": "隧道类型"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-infos/tunnel-info/destination": {
+    "name": "隧道目的地址"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-infos/tunnel-info/status": {
+    "name": "隧道状态"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-infos/tunnel-info/cost": {
+    "name": "隧道Cost"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-infos/tunnel-info/sr-te-policy-color": {
+    "name": "隧道染色值"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-infos/tunnel-info/sr-te-policy-group": {
+    "name": "段路由流量工程策略组ID"
+  },
+  "/huawei-tunnel-management:tunnel-management/subscribe-tunnel-policys": {
+    "name": "订阅的隧道策略列表"
+  },
+  "/huawei-tunnel-management:tunnel-management/subscribe-tunnel-policys/subscribe-tunnel-policy": {
+    "name": "订阅的隧道策略"
+  },
+  "/huawei-tunnel-management:tunnel-management/subscribe-tunnel-policys/subscribe-tunnel-policy/policy-name": {
+    "name": "隧道策略名"
+  },
+  "/huawei-tunnel-management:tunnel-management/subscribe-tunnel-policys/subscribe-tunnel-policy/policy-exist": {
+    "name": "策略是否存在"
+  },
+  "/huawei-tunnel-management:tunnel-management/subscribe-tunnel-policys/subscribe-tunnel-policy/count": {
+    "name": "策略被引用次数"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-statisticss": {
+    "name": "隧道统计信息列表"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-statisticss/tunnel-statistics": {
+    "name": "隧道统计信息"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-statisticss/tunnel-statistics/type": {
+    "name": "隧道类型"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-statisticss/tunnel-statistics/number": {
+    "name": "隧道个数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol": {
+    "name": "隧道协议配置"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/type": {
+    "name": "选择隧道协议类型"
+  }
+}

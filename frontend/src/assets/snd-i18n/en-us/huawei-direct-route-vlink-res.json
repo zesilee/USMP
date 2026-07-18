@@ -1,0 +1,20 @@
+{
+  "/huawei-ifm:ifm/interfaces/interface/huawei-direct-route-vlink:vlink-routes": {
+    "name": "List of configuration VLINK routes"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-direct-route-vlink:vlink-routes/vlink-route": {
+    "name": "Configure VLINK routes"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-direct-route-vlink:vlink-routes/vlink-route/address-family": {
+    "name": "Address family"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-direct-route-vlink:vlink-routes/vlink-route/route-policy": {
+    "name": "Routing Policies"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-direct-route-vlink:vlink-configuration": {
+    "name": "Configure direct route attributes"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-direct-route-vlink:vlink-configuration/preference": {
+    "name": "Preference value for VLINK routes"
+  }
+}

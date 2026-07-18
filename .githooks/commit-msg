@@ -53,7 +53,7 @@ fi
 # ──────────────────────────────────────────────
 # 体积只算「手写代码」，排除生成物/锁文件（lockfile、*.gen.ts、go.sum、openapi 中间产物、
 # ygot 生成物目录——与 pr-size.yml 同口径，该目录由 R04 regen-and-diff 门禁守护）
-STAT_LINE=$(git diff --cached --stat -- . ':(exclude)**/package-lock.json' ':(exclude)**/*.gen.ts' ':(exclude)**/go.sum' ':(exclude)backend/docs/openapi/**' ':(exclude)backend/internal/generated/**' ':(exclude)snd/**' ':(exclude)**/*.gen.go' 2>/dev/null | tail -1 || true)
+STAT_LINE=$(git diff --cached --stat -- . ':(exclude)**/package-lock.json' ':(exclude)**/*.gen.ts' ':(exclude)**/go.sum' ':(exclude)backend/docs/openapi/**' ':(exclude)backend/internal/generated/**' ':(exclude)snd/**' ':(exclude)**/*.gen.go' ':(exclude)frontend/src/assets/snd-i18n/**' 2>/dev/null | tail -1 || true)
 if [ -n "$STAT_LINE" ]; then
   INSERTIONS=$(echo "$STAT_LINE" | grep -oE '[0-9]+ insertion' | grep -oE '[0-9]+' || echo "0")
   DELETIONS=$(echo "$STAT_LINE" | grep -oE '[0-9]+ deletion' | grep -oE '[0-9]+' || echo "0")

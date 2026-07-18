@@ -1,0 +1,26 @@
+{
+  "/huawei-analysis-collector:analysis-collector": {
+    "name": "Data collector information"
+  },
+  "/huawei-analysis-collector:analysis-collector/collectors": {
+    "name": "List of Data collector information"
+  },
+  "/huawei-analysis-collector:analysis-collector/collectors/collector": {
+    "name": "Configure destination address of collector"
+  },
+  "/huawei-analysis-collector:analysis-collector/collectors/collector/id": {
+    "name": "Instance index"
+  },
+  "/huawei-analysis-collector:analysis-collector/collectors/collector/dst-port": {
+    "name": "Collector Service Port"
+  },
+  "/huawei-analysis-collector:analysis-collector/collectors/collector/src-address": {
+    "name": "Collector address"
+  },
+  "/huawei-analysis-collector:analysis-collector/collectors/collector/host-address": {
+    "name": "Collector address"
+  },
+  "/huawei-analysis-collector:analysis-collector/collectors/collector/vpn-name": {
+    "name": "VPN instance name"
+  }
+}

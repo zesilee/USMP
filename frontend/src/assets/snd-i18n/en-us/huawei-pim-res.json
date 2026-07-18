@@ -1,0 +1,1865 @@
+{
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim": {
+    "name": "PIM"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp": {
+    "name": "C-BSR Group Range"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/c-bsr-vpns": {
+    "name": "BSR Configuration List"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/c-bsr-vpns/c-bsr-vpn": {
+    "name": "BSR Configuration"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/c-bsr-vpns/c-bsr-vpn/type": {
+    "name": "Address Family"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/c-bsr-vpns/c-bsr-vpn/if-name": {
+    "name": "Interface Name"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/c-bsr-vpns/c-bsr-vpn/if-addr": {
+    "name": "IPv6 Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/c-bsr-vpns/c-bsr-vpn/hold-time": {
+    "name": "Timeout"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/c-bsr-vpns/c-bsr-vpn/interval": {
+    "name": "Bootstrap Message Tx Interval"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/c-bsr-vpns/c-bsr-vpn/hash-len": {
+    "name": "C-BSR Hash Mask Length"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/c-bsr-vpns/c-bsr-vpn/priority": {
+    "name": "Candidate BSR Priority"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/c-bsr-vpns/c-bsr-vpn/policy-name": {
+    "name": "IPv4 BSR Source Filtering Policy"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/c-bsr-vpns/c-bsr-vpn/policy-name6": {
+    "name": "IPv6 BSR Source Filtering Policy"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/c-bsr-vpns/c-bsr-vpn/admin-scope": {
+    "name": "Enable Administrative Domain"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/c-bsr-vpns/c-bsr-vpn/global-enable": {
+    "name": "C-BSR in Global Domain"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/c-bsr-vpns/c-bsr-vpn/global-hash-len": {
+    "name": "Global C-BSR Hash Mask Length"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/c-bsr-vpns/c-bsr-vpn/global-priority": {
+    "name": "Global C-BSR Priority"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/c-bsr-vpns/c-bsr-vpn/c-rp-hold-time": {
+    "name": "C-RP Timeout Period"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/c-bsr-vpns/c-bsr-vpn/c-rp-priority": {
+    "name": "C-RP Priority"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/c-bsr-vpns/c-bsr-vpn/c-rp-ad-interval": {
+    "name": "Advertisement Tx Interval"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/c-bsr-vpns/c-bsr-vpn/c-rp-policy": {
+    "name": "IPv4 C-RP Policy"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/c-bsr-vpns/c-bsr-vpn/c-rp-policy6": {
+    "name": "IPv6 C-RP Policy"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/c-bsr-vpns/c-bsr-vpn/is-fragable": {
+    "name": "C-BSR Message Fragmentation"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/ipv4-c-bsr-groups": {
+    "name": "C-BSR Group Range List"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/ipv4-c-bsr-groups/ipv4-c-bsr-group": {
+    "name": "C-BSR Group Range"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/ipv4-c-bsr-groups/ipv4-c-bsr-group/group-addr": {
+    "name": "Group Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/ipv4-c-bsr-groups/ipv4-c-bsr-group/group-mask": {
+    "name": "Group Address Mask"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/ipv4-c-bsr-groups/ipv4-c-bsr-group/hash-length": {
+    "name": "Hash Length"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/ipv4-c-bsr-groups/ipv4-c-bsr-group/priority": {
+    "name": "C-BSR Priority in Admin Domain"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/ipv4-c-rp-ifs": {
+    "name": "C-RP IPv4 Configuration List"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/ipv4-c-rp-ifs/ipv4-c-rp-if": {
+    "name": "C-RP IPv4 Configuration"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/ipv4-c-rp-ifs/ipv4-c-rp-if/if-name": {
+    "name": "C-RP Interface Name"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/ipv4-c-rp-ifs/ipv4-c-rp-if/group-policy": {
+    "name": "Group Filter Policy"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/ipv4-c-rp-ifs/ipv4-c-rp-if/priority": {
+    "name": "C-RP Priority"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/ipv4-c-rp-ifs/ipv4-c-rp-if/hold-time": {
+    "name": "Advertisement Holdtime"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/ipv4-c-rp-ifs/ipv4-c-rp-if/ad-interval": {
+    "name": "Advertisement Tx Interval"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/ipv6-c-rps": {
+    "name": "C-RP IPV6 Configuration List"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/ipv6-c-rps/ipv6-c-rp": {
+    "name": "C-RP IPV6 Configuration"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/ipv6-c-rps/ipv6-c-rp/address": {
+    "name": "C-RP Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/ipv6-c-rps/ipv6-c-rp/holdtime": {
+    "name": "C-RP Timeout Period"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/ipv6-c-rps/ipv6-c-rp/priority": {
+    "name": "C-RP Priority"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/ipv6-c-rps/ipv6-c-rp/ad-interval": {
+    "name": "Advertisement Tx Interval"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/ipv6-c-rps/ipv6-c-rp/group-policy": {
+    "name": "Group Filter Policy"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/auto-rps": {
+    "name": "Auto-RP Configuration"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/static-rps": {
+    "name": "Static RP List"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/static-rps/static-rp": {
+    "name": "Static RP"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/static-rps/static-rp/type": {
+    "name": "Address Family"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/static-rps/static-rp/address": {
+    "name": "Static RP Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/static-rps/static-rp/policy": {
+    "name": "Static RP Policy"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/static-rps/static-rp/policy-ipv6": {
+    "name": "Static RP Policy of IPv6"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/static-rps/static-rp/preference": {
+    "name": "Static RP Preferred"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/elected-bsrs": {
+    "name": "E-BSR List"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/elected-bsrs/elected-bsr": {
+    "name": "E-BSR"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/elected-bsrs/elected-bsr/type": {
+    "name": "Address Family"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/elected-bsrs/elected-bsr/address": {
+    "name": "E-BSR Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/elected-bsrs/elected-bsr/scope": {
+    "name": "BSR in an Administrative Domain"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/elected-bsrs/elected-bsr/group-addr": {
+    "name": "Group Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/elected-bsrs/elected-bsr/group-mask-length": {
+    "name": "Group Address Mask Length"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/elected-bsrs/elected-bsr/priority": {
+    "name": "E-BSR Priority"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/elected-bsrs/elected-bsr/hash-lenth": {
+    "name": "Hash Length"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/elected-bsrs/elected-bsr/fsm-state": {
+    "name": "E-BSR Status"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/elected-bsrs/elected-bsr/up-time": {
+    "name": "Up Time"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/elected-bsrs/elected-bsr/expire-time": {
+    "name": "Timeout Period"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/elected-bsrs/elected-bsr/candidate-count": {
+    "name": "C-RP Count"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/c-bsrs": {
+    "name": "C-BSR List"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/c-bsrs/c-bsr": {
+    "name": "C-BSR Information"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/c-bsrs/c-bsr/type": {
+    "name": "Address Family"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/c-bsrs/c-bsr/address": {
+    "name": "C-BSR Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/c-bsrs/c-bsr/scope": {
+    "name": "BSR in an Administrative Domain"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/c-bsrs/c-bsr/group-addr": {
+    "name": "Group Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/c-bsrs/c-bsr/group-mask-length": {
+    "name": "Hash Length"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/c-bsrs/c-bsr/priority": {
+    "name": "C-BSR Priority"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/c-bsrs/c-bsr/hash-lenth": {
+    "name": "Mask Length"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/c-bsrs/c-bsr/fsm-state": {
+    "name": "C-BSR Status"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/c-bsrs/c-bsr/valid-flag": {
+    "name": "Valid Flag"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/elected-bsr-rps": {
+    "name": "RP Information List of E-BSRs"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/elected-bsr-rps/elected-bsr-rp": {
+    "name": "RP Information of E-BSRs"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/elected-bsr-rps/elected-bsr-rp/type": {
+    "name": "Address Family"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/elected-bsr-rps/elected-bsr-rp/rp-addr": {
+    "name": "RP Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/elected-bsr-rps/elected-bsr-rp/is-local-addr": {
+    "name": "RP Being Local Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/elected-bsr-rps/elected-bsr-rp/group-addr": {
+    "name": "Group Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/elected-bsr-rps/elected-bsr-rp/group-mask-length": {
+    "name": "Mask Length"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/elected-bsr-rps/elected-bsr-rp/priority": {
+    "name": "RP Priority"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/elected-bsr-rps/elected-bsr-rp/up-time": {
+    "name": "Up Time"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/elected-bsr-rps/elected-bsr-rp/expiry-time": {
+    "name": "Expiration Time"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/rp/elected-bsr-rps/elected-bsr-rp/bidir-enable": {
+    "name": "Enabling Bidir-PIM"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol": {
+    "name": "PIM"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances": {
+    "name": "PIM Configuration List"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance": {
+    "name": "PIM Configuration"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/type": {
+    "name": "Address Family"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/assert-holdtime": {
+    "name": "Holdtime for Assert Status"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/jp-holdtime": {
+    "name": "JP Message Hold Time"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/probe-interval": {
+    "name": "Probe Message Tx Interval"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/jp-timer-interval": {
+    "name": "Join/Prune Message Tx Interval"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/dr-priority": {
+    "name": "DR Priority"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/hello-holdtime": {
+    "name": "Neighbor Timeout Period"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/hello-landelay": {
+    "name": "Prune Delay (ms)"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/hello-interval": {
+    "name": "Hello Transmit Interval (s)"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/hello-override": {
+    "name": "Prune Override Interval"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/reg-checksum": {
+    "name": "Register Checksum Calculation"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/reg-suppress-interval": {
+    "name": "Register Suppress Timeout"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/embedded-rp": {
+    "name": "Enable Embedded RP"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/nbr-check-when-recv": {
+    "name": "Neighbor Check When Receive"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/nbr-check-when-send": {
+    "name": "Neighbor Check When Send"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/reg-policy-name": {
+    "name": "Register Filter Policy"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/reg-policy-name6": {
+    "name": "Register Filter Policy of IPv6"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/ssm-policy-name": {
+    "name": "SSM Group Range Policy"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/ssm-policy-name6": {
+    "name": "SSM Group Range Policy of IPv6"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/src-policy-name": {
+    "name": "Source Filter Policy"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/src-policy-name6": {
+    "name": "Source Filter Policy of IPv6"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/embedded-rp-policy-name": {
+    "name": "Embedded RP Policy"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/source-life-time": {
+    "name": "Source Lifetime"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/spt-switch-check-interval": {
+    "name": "SPT Switchover Check Timer"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/packaging-jp-disable": {
+    "name": "Disable Join/Prune message packaging"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/ipsec-name": {
+    "name": "IPsec SA Name"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/ipsec-type": {
+    "name": "IPsec Type"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/unicast-ipsec-name": {
+    "name": "Unicast IPsec SA Name"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/register-source-interface": {
+    "name": "Register Source Interface"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/register-source-addr": {
+    "name": "Register Source Address of IPv6"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/state-refresh-interval": {
+    "name": "State-Refresh Message Interval"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/state-refresh-rate-limit": {
+    "name": "The Next PIM State-Refresh Message"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/state-refresh-ttl": {
+    "name": "The TTL for sending PIM State-Refresh"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/fast-reroute": {
+    "name": "PIM FRR"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/fast-reroute-policy": {
+    "name": "PIM FRR Policy"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/register-with-probe": {
+    "name": "S-DR Sends a Probe Message to the RP to Register"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/hello-join-attr-enable": {
+    "name": "Enable the Join Attribute"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/clone-inherit-enable": {
+    "name": "Inherit Outbound Interfaces"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/clone-inherit-policy": {
+    "name": "Inherit Outbound Interface Policies"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/gen-id-chang-enable": {
+    "name": "Enable hello nsr genid-change"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/rpf-prune-holdtime": {
+    "name": "Delay of Prune Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/rpf-prune-policy-ipv4": {
+    "name": "Matching Policy for RPF Prune"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/backup-rpf-switch-holdtime": {
+    "name": "Specify Delay Expires"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/is-backup-rpf-switch-flow-based": {
+    "name": "Allow backup upstream generate forwarding entries"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/backup-rpf-switch-policy-ipv4": {
+    "name": "Indicate a matching policy for multicast entries"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/spt-switchs": {
+    "name": "SPT Switchover Configuration List"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/spt-switchs/spt-switch-no-acl": {
+    "name": "SPT Switching Configuration Without ACL Policy"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/spt-switchs/spt-switch-no-acl/spt-threshold-no-acl": {
+    "name": "Traffic Rate Threshold"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/spt-switchs/spt-switch": {
+    "name": "SPT Switchover Config"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/spt-switchs/spt-switch/group-policy": {
+    "name": "Group Policy"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/spt-switchs/spt-switch/spt-threshold": {
+    "name": "Traffic Rate Threshold"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/ipv6-spt-switchs": {
+    "name": "SPT6 Switchover Configuration List"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/ipv6-spt-switchs/spt-switch-no-acl": {
+    "name": "SPT6 Switchover Config Without ACL"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/ipv6-spt-switchs/spt-switch-no-acl/spt-threshold-no-acl": {
+    "name": "Traffic Rate Threshold"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/ipv6-spt-switchs/ipv6-spt-switch": {
+    "name": "SPT6 Switchover Config"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/ipv6-spt-switchs/ipv6-spt-switch/group-policy": {
+    "name": "Group Policy"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/ipv6-spt-switchs/ipv6-spt-switch/spt-threshold": {
+    "name": "Traffic Rate Threshold"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/anycast-rps": {
+    "name": "Anycast RP List"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/anycast-rps/anycast-rp": {
+    "name": "Anycast-RP"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/anycast-rps/anycast-rp/rp-addr": {
+    "name": "Anycast-RP Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/anycast-rps/anycast-rp/local-addr": {
+    "name": "Anycast RP Local Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/anycast-rps/anycast-rp/rp-peers": {
+    "name": "Anycast-RP Peer List"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/anycast-rps/anycast-rp/rp-peers/rp-peer": {
+    "name": "Anycast-RP Peer"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/anycast-rps/anycast-rp/rp-peers/rp-peer/peer-ip-addr": {
+    "name": "Peer IP Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/anycast-rps/anycast-rp/rp-peers/rp-peer/forward-sa-msg": {
+    "name": "Forward SA Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/anycast-rps/anycast-rp/rp-peers/rp-peer/forward-policy": {
+    "name": "Forward Policy"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/p2mp": {
+    "name": "P2MP Configuration"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/p2mp/rpf-disable": {
+    "name": "Disable RPF Check"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/p2mp/rpf-disable-policy": {
+    "name": "RPF Check Disable Policy"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/p2mp/source-proxy-enable": {
+    "name": "Enable Source Proxy"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/p2mp/source-proxy-policy": {
+    "name": "Source Proxy Policy"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/p2mp/rpf-ecm-enable": {
+    "name": "Enabling ECMP Non-revertive Switchover"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/vector": {
+    "name": "Vector Configuration"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/vector/compatible-standard-enable": {
+    "name": "RPF Vector Compatible Standard"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/p2mp-tunnels": {
+    "name": "Relation of P2MP Tunnel and VPN Configuration List"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/p2mp-tunnels/p2mp-tunnel": {
+    "name": "Relation of P2MP Tunnel and VPN Config"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/p2mp-tunnels/p2mp-tunnel/p2mp-root-ip": {
+    "name": "P2MP Tunnel Root Ipaddress"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/p2mp-tunnels/p2mp-tunnel/tunnel-id": {
+    "name": "P2MP Tunnel ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/destination-addr-paths": {
+    "name": "The List of Paths to Destination Addresses"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/destination-addr-paths/destination-addr-path": {
+    "name": "Configure Paths to Destination Addresses"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/destination-addr-paths/destination-addr-path/destination-addr": {
+    "name": "Multicast Source Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/destination-addr-paths/destination-addr-path/path-name": {
+    "name": "Path Name"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/instances/instance/destination-addr-paths/destination-addr-path/mask-len": {
+    "name": "Mask Length"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces": {
+    "name": "Interface Configuration List"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface": {
+    "name": "Interface Configuration"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/type": {
+    "name": "Address Family"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/if-name": {
+    "name": "Interface Name"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/sm-enable": {
+    "name": "Enable PIM"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/dr-priority": {
+    "name": "DR Priority"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/hello-interval": {
+    "name": "Hello Message Tx Interval"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/hello-holdtime": {
+    "name": "Neighbor Timeout Period"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/hello-override": {
+    "name": "Hello Override Interval"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/hello-lan-delay": {
+    "name": "Prune Delay"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/jp-timer-interval": {
+    "name": "Join/Prune Message Tx Interval"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/jp-holdtime": {
+    "name": "Join/Prune Message Holdtime"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/jp-policy": {
+    "name": "Join/Prune Filter Policy"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/jp-policy-ipv6": {
+    "name": "Join/Prune Filter Policy of IPv6"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/jp-asm-policy": {
+    "name": "ASM Join/Prune Filter Policy"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/jp-asm-policy-ipv6": {
+    "name": "ASM Join/Prune Filter Policy of IPv6"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/jp-ssm-policy": {
+    "name": "SSM Join/Prune Filter Policy"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/jp-ssm-policy-ipv6": {
+    "name": "SSM Join/Prune Filter Policy of IPv6"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/nbr-policy": {
+    "name": "Neighbor Filter Policy"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/nbr-policy-ipv6": {
+    "name": "Neighbor Filter Policy of IPv6"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/assert-holdtime": {
+    "name": "Holdtime for Assert Status"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/require-gen-id": {
+    "name": "Generation ID Check"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/bsr-boundary": {
+    "name": "Domain Boundary"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/bfd-enable": {
+    "name": "Enable BFD"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/bfd-min-tx": {
+    "name": "Min BFD Message Tx Interval"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/bfd-min-rx": {
+    "name": "Min BFD Message Rx Interval"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/bfd-multiplier": {
+    "name": "Detect Multiplier"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/is-silent": {
+    "name": "PIM Silent"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/dr-swt-delay-enable": {
+    "name": "Enable DR Switchover Delay"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/dr-swt-delay-interval": {
+    "name": "DR Switchover Delay"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/ipsec-name": {
+    "name": "IPsec SA Name"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/ipsec-type": {
+    "name": "IPsec Type"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/mode": {
+    "name": "PIM Mode"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/state-refresh-capable": {
+    "name": "State-Refresh Enable"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/graft-retry": {
+    "name": "Graft Message Interval"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/ignore-dr": {
+    "name": "PIM Ignore Dr-state"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/ignore-assert": {
+    "name": "PIM Ignore Assert-state"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/single-tag-fwd-enable": {
+    "name": "Enable PIM Single-Tag Forwarding"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/if-infos": {
+    "name": "Interface Information"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/if-infos/pim-version": {
+    "name": "PIM Version"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/if-infos/state": {
+    "name": "Interface Status"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/if-infos/nbr-count": {
+    "name": "Neighbor Count"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/if-infos/dr-priority": {
+    "name": "DR Priority"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/if-infos/dr-addr": {
+    "name": "DR Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/if-infos/hello-interval": {
+    "name": "Hello Message Tx Interval"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/if-infos/hello-holdtime": {
+    "name": "Neighbor Timeout Period"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/if-infos/assert-holdtime": {
+    "name": "Holdtime for Assert Status"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/if-infos/jp-interval": {
+    "name": "Join/Prune Tx Interval"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/if-infos/jp-holdtime": {
+    "name": "Join/Prune Message Holdtime"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/if-infos/negotiated-msg-delay": {
+    "name": "Negotiated Message Delay"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/if-infos/negotiated-override-interval": {
+    "name": "Negotiated Override Interval"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/if-infos/gen-id": {
+    "name": "Generation ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/if-infos/non-dr-nbr-count": {
+    "name": "Non-DR NBR Count"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/if-infos/non-landelay-nbr-count": {
+    "name": "Non-LanDelay NBR Count"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/if-infos/non-join-attribute-nbr-sount": {
+    "name": "Non-JoinAttribute NBR Count"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/if-infos/join-attribute": {
+    "name": "Negotiated Join Attribute"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/if-infos/offer-interval": {
+    "name": "Interval for Sending Offer Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/if-infos/election-robust-count": {
+    "name": "DF Election Robustness Variable"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/if-infos/backoff-interval": {
+    "name": "Interval for Sending Backoff Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/if-infos/ipsec-name": {
+    "name": "IPsec SA Name"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/if-infos/ipsec-type": {
+    "name": "IPsec Type"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/if-infos/pim-mode": {
+    "name": "PIM Mode"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/if-infos/state-refresh-enable": {
+    "name": "State-Refresh Enable"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/if-infos/state-refresh-interval": {
+    "name": "State-Refresh Message Interval"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/if-infos/graft-retry": {
+    "name": "Graft-Retry Message Interval"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/if-infos/negotiated-state-refresh": {
+    "name": "Negotiation State-Refresh Capability"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/if-infos/ignore-dr-state": {
+    "name": "Ignore Dr-state"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/if-infos/ignore-assert": {
+    "name": "Ignore Assert-state"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/if-infos/snooping-enable": {
+    "name": "PIM Snooping Enable Status"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/nbrs": {
+    "name": "NBR Information List"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/nbrs/nbr": {
+    "name": "NBR Information"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/nbrs/nbr/nbr-addr": {
+    "name": "Neighbor Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/nbrs/nbr/up-time": {
+    "name": "Up Time"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/nbrs/nbr/expire-time": {
+    "name": "Expiration Time"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/nbrs/nbr/dr-priority-existence": {
+    "name": "DR Priority Existence"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/nbrs/nbr/dr-priority": {
+    "name": "DR Priority"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/nbrs/nbr/gen-id-existence": {
+    "name": "Generation ID Existence"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/nbrs/nbr/gen-id": {
+    "name": "Generation ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/nbrs/nbr/holdtime": {
+    "name": "TTL"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/nbrs/nbr/lan-delay-existence": {
+    "name": "LAN Delay Existence"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/nbrs/nbr/lan-delay": {
+    "name": "LAN Delay"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/nbrs/nbr/override-interval": {
+    "name": "Overriding Interval"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/nbrs/nbr/join-attribute": {
+    "name": "Join Attribute"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/nbrs/nbr/bidir-enable": {
+    "name": "Enabling Bidir-PIM"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/nbrs/nbr/state-refresh-interval": {
+    "name": "State-Refresh Message Interval"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/nbrs/nbr/second-addrs": {
+    "name": "Secondary Address Info List"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/nbrs/nbr/second-addrs/second-addr": {
+    "name": "Secondary Address Information"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/nbrs/nbr/second-addrs/second-addr/address": {
+    "name": "Secondary Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/bfd-sessions": {
+    "name": "PIM BFD Session Info Collection"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/bfd-sessions/bfd-session": {
+    "name": "PIM BFD Session"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/bfd-sessions/bfd-session/nbr-addr": {
+    "name": "Neighbor Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/bfd-sessions/bfd-session/actual-minimum-tx-interval": {
+    "name": "Actual Minimum Tx Interval"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/bfd-sessions/bfd-session/actual-minimum-rx-interval": {
+    "name": "Actual Minimum Rx Interval"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/bfd-sessions/bfd-session/actual-multiplier": {
+    "name": "Actual Multiplier"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/bfd-sessions/bfd-session/local-port": {
+    "name": "Local Discriminator"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/bfd-sessions/bfd-session/remote-port": {
+    "name": "Remote Discriminator"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/bfd-sessions/bfd-session/bfd-status": {
+    "name": "BFD Session State"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages": {
+    "name": "PIM Invalid Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-assert-cnt": {
+    "name": "PIM Assert Invalid Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-assert-cnt/destination-addr": {
+    "name": "Invalid Dest Addr"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-assert-cnt/ip-source-addr": {
+    "name": "Invalid IP Source Addr"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-assert-cnt/multicast-source": {
+    "name": "Invalid Multicast Source"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-assert-cnt/multicast-group": {
+    "name": "Invalid Multicast Group"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-assert-cnt/fault-length": {
+    "name": "Fault Length"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-bsr-cnt": {
+    "name": "PIM BSR Invalid Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-bsr-cnt/bad-payload": {
+    "name": "Bad Payload"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-bsr-cnt/fault-length": {
+    "name": "Fault Length"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-bsr-cnt/invalid-scope-mask": {
+    "name": "Bad Scope Mask"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-bsr-cnt/invalid-multicast-group": {
+    "name": "Invalid Multicast Group"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-bsr-cnt/recv-by-non-c-bsr": {
+    "name": "Not CBSR But BSR"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-bsr-cnt/invalid-bsr-addr": {
+    "name": "Invalid BSR Addr"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-bsr-cnt/fault-hash-length": {
+    "name": "Fault Hash Length"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-bsr-cnt/invalid-ip-source-addr": {
+    "name": "Invalid IP Source Addr"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-hello-cnt": {
+    "name": "PIM Hello Invalid Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-hello-cnt/invalid-addr-list": {
+    "name": "Invalid Addr List"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-hello-cnt/invalid-length": {
+    "name": "Fault Length"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-hello-cnt/invalid-holdtime-length": {
+    "name": "Bad Holdtime Length"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-hello-cnt/invalid-lan-prune-delay-length": {
+    "name": "Bad LanPruneDelay Length"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-hello-cnt/invalid-dr-priority-length": {
+    "name": "Bad DrPriority Length"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-hello-cnt/invalid-gen-id-length": {
+    "name": "Bad GenID Length"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-hello-cnt/invalid-destination-addr": {
+    "name": "Invalid Dest Addr"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-hello-cnt/invalid-ip-source-addr": {
+    "name": "Invalid IP Source Addr"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-join-prune-cnt": {
+    "name": "PIM Join/Prune Invalid Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-join-prune-cnt/invalid-multicast-source": {
+    "name": "Invalid Multicast Source"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-join-prune-cnt/invalid-multicast-group": {
+    "name": "Invalid Multicast Group"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-join-prune-cnt/invalid-upstream-nbr": {
+    "name": "Invalid Up Neighbor"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-join-prune-cnt/invalid-ip-source-addr": {
+    "name": "Invalid IP Source Addr"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-join-prune-cnt/invalid-destination-addr": {
+    "name": "Invalid Dest Addr"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-join-prune-cnt/fault-length": {
+    "name": "Fault Length"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-graft-cnt": {
+    "name": "PIM Graft Invalid Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-graft-cnt/invalid-multicast-source": {
+    "name": "Invalid Multicast Source"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-graft-cnt/invalid-multicast-group": {
+    "name": "Invalid Multicast Group"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-graft-cnt/invalid-up-nbr": {
+    "name": "Invalid Up Neighbor"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-graft-cnt/invalid-ip-source-addr": {
+    "name": "Invalid IP Source Addr"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-graft-cnt/fault-length": {
+    "name": "Fault Length"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-graft-ack-cnt": {
+    "name": "PIM Graft-Ack Invalid Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-graft-ack-cnt/invalid-multicast-source": {
+    "name": "Invalid Multicast Source"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-graft-ack-cnt/invalid-multicast-group": {
+    "name": "Invalid Multicast Group"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-graft-ack-cnt/invalid-up-nbr": {
+    "name": "Invalid Up Neighbor"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-graft-ack-cnt/invalid-ip-source-addr": {
+    "name": "Invalid IP Source Addr"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-graft-ack-cnt/fault-length": {
+    "name": "Fault Length"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-state-refresh-cnt": {
+    "name": "PIM State Refresh Invalid Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-state-refresh-cnt/invalid-multicast-source": {
+    "name": "Invalid Multicast Source"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-state-refresh-cnt/invalid-multicast-group": {
+    "name": "Invalid Multicast Group"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-state-refresh-cnt/invalid-originator": {
+    "name": "Invalid Originator Addr"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-state-refresh-cnt/fault-length": {
+    "name": "Fault Length"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-auto-rp-announce-cnt": {
+    "name": "PIM Auto-RP Announcement Invalid Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-auto-rp-announce-cnt/invalid-destination-addr": {
+    "name": "Invalid Dest Addr"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-auto-rp-announce-cnt/invalid-ip-source-addr": {
+    "name": "Invalid IP Source Addr"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-auto-rp-announce-cnt/invalid-ttl": {
+    "name": "Invalid TTL"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-auto-rp-announce-cnt/invalid-source-port": {
+    "name": "Invalid Source Port"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-auto-rp-discovery-cnt": {
+    "name": "PIM Auto-RP Discovery Invalid Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-auto-rp-discovery-cnt/invalid-length": {
+    "name": "Fault Length"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-auto-rp-discovery-cnt/invalid-rp": {
+    "name": "Invalid RP Addr"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-auto-rp-discovery-cnt/invalid-ip-source-addr": {
+    "name": "Invalid IP Source Addr"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-auto-rp-discovery-cnt/invalid-group": {
+    "name": "Invalid Multicast Group"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-auto-rp-discovery-cnt/invalid-ttl": {
+    "name": "Invalid TTL"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/interfaces/interface/invalid-messages/invalid-auto-rp-discovery-cnt/invalid-source-port": {
+    "name": "Invalid Source Port"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics": {
+    "name": "Message Statistics List for VPN"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic": {
+    "name": "Message Statistics"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/type": {
+    "name": "Address Family"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/register-recv-num": {
+    "name": "Received Register Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/register-send-num": {
+    "name": "Sent Register Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/invalid-register-num": {
+    "name": "Invalid Register Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/filtered-register-num": {
+    "name": "Filtered Register Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/register-stop-recv-num": {
+    "name": "Received Register-Stop Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/register-stop-send-num": {
+    "name": "Sent Register-Stop Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/invalid-register-stop-num": {
+    "name": "Invalid Register-Stop Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/filtered-register-stop-num": {
+    "name": "Filtered Register-Stop Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/probe-recv-num": {
+    "name": "Received Null Register Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/probe-send-num": {
+    "name": "Sent Null Register Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/invalid-probe-num": {
+    "name": "Invalid Null Register Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/filtered-probe-num": {
+    "name": "Filtered Null Register Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/c-rp-recv-num": {
+    "name": "Received C-RP Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/c-rp-send-num": {
+    "name": "Sent C-RP Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/invalid-c-rp-num": {
+    "name": "Invalid C-RP Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/filtered-c-rp-num": {
+    "name": "Filtered C-RP Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/anycast-rp-register-recv-num": {
+    "name": "Received Anycast-RP Register Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/anycast-rp-register-send-num": {
+    "name": "Sent Anycast-RP Register Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/invalid-anycast-rp-register-num": {
+    "name": "Invalid Anycast-RP Register Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/filtered-anycast-rp-register-num": {
+    "name": "Filtered Anycast-RP Register Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/anycast-rp-probe-recv-num": {
+    "name": "Received Anycast-RP Null Register Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/anycast-rp-probe-send-num": {
+    "name": "Sent Anycast-RP Null Register Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/invalid-anycast-rp-probe-num": {
+    "name": "Invalid Anycast-RP Null Register Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/filtered-anycast-rp-probe-num": {
+    "name": "Filtered Anycast-RP Null Register Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics": {
+    "name": "Message Statistics List for Interface"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic": {
+    "name": "Message Statistics"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/if-name": {
+    "name": "Interface Name"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/assert-recv-num": {
+    "name": "Received Assert Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/assert-send-num": {
+    "name": "Sent Assert Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/invalid-assert-num": {
+    "name": "Invalid Assert Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/filtered-assert-num": {
+    "name": "Filtered Assert Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/hello-recv-num": {
+    "name": "Received Hello Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/hello-send-num": {
+    "name": "Sent Hello Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/invalid-hello-num": {
+    "name": "Invalid Hello Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/filtered-hello-num": {
+    "name": "Filtered Hello Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/jp-recv-num": {
+    "name": "Received Join/Prune Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/jp-send-num": {
+    "name": "Sent Join/Prune Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/invalid-jp-num": {
+    "name": "Invalid Join/Prune Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/filtered-jp-num": {
+    "name": "Filtered Join/Prune Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/bsr-recv-num": {
+    "name": "Received BSR Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/bsr-send-num": {
+    "name": "Sent BSR Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/invalid-bsr-num": {
+    "name": "Invalid BSR Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/filtered-bsr-num": {
+    "name": "Filtered BSR Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/offer-recv-num": {
+    "name": "Number of received Offer packets"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/offer-send-num": {
+    "name": "Number of sent Offer packets"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/invalid-offer-num": {
+    "name": "Number of invalid Offer messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/filtered-offer-num": {
+    "name": "Number of filtered Offer packets"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/backoff-recv-num": {
+    "name": "Number of received Backoff packets"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/backoff-send-num": {
+    "name": "Number of sent Backoff packets"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/invalid-backoff-num": {
+    "name": "Number of invalid Backoff messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/filtered-backoff-num": {
+    "name": "Number of Filtered Backoff Packets"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/win-recv-num": {
+    "name": "Number of received Win packets"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/win-send-num": {
+    "name": "Number of sent Win packets"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/invalid-win-num": {
+    "name": "Number of invalid Win packets"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/filtered-win-num": {
+    "name": "Number of filtered Win packets"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/pass-recv-num": {
+    "name": "Number of received Pass packets"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/pass-send-num": {
+    "name": "Number of sent Pass packets"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/invalid-pass-num": {
+    "name": "Number of invalid Pass packets"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/filtered-pass-num": {
+    "name": "Number of filtered Pass packets"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/graft-recv-num": {
+    "name": "Received Graft Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/graft-send-num": {
+    "name": "Sent Graft Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/invalid-graft-num": {
+    "name": "Invalid Graft Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/filtered-graft-num": {
+    "name": "Filtered Graft Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/graft-ack-recv-num": {
+    "name": "Received GraftAck Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/graft-ack-send-num": {
+    "name": "Sent GraftAck Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/invalid-graft-ack-num": {
+    "name": "Invalid GraftAck Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/filtered-graft-ack-num": {
+    "name": "Filtered GraftAck Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/state-refresh-recv-num": {
+    "name": "Received State-Refresh Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/state-refresh-send-num": {
+    "name": "Send State-Refresh Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/invalid-state-refresh-num": {
+    "name": "Invalid State-Refresh Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/filtered-state-refresh-num": {
+    "name": "Filtered State-Refresh Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/announce-recv-num": {
+    "name": "Received Auto-RP Announcement Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/announce-send-num": {
+    "name": "Sent Auto-RP Announcement Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/invalid-announce-num": {
+    "name": "Invalid Auto-RP Announcement Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/filtered-announce-num": {
+    "name": "Filtered Auto-RP Announcement Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/discovery-recv-num": {
+    "name": "Received Auto-RP Discovery Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/discovery-send-num": {
+    "name": "Sent Auto-RP Discovery Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/invalid-discovery-num": {
+    "name": "Invalid Auto-RP Discovery Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/message-statistics/message-statistic/if-message-statistics/if-message-statistic/filtered-discovery-num": {
+    "name": "Filtered Auto-RP Discovery Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings": {
+    "name": "PIM Routing Information List"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing": {
+    "name": "PIM Routing Information"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/type": {
+    "name": "Address Family"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/src-addr": {
+    "name": "Source Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/grp-addr": {
+    "name": "Group Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/protocol": {
+    "name": "Protocol"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/rp-mode-type": {
+    "name": "RP Type"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/rp-addr": {
+    "name": "RP Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/rp-is-local-addr": {
+    "name": "RP Being Local Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/dg-flag": {
+    "name": "Flag"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/sg-uptime": {
+    "name": "Up Time"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/inbound-interface": {
+    "name": "Inbound interface"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/src-vrf-name": {
+    "name": "RPF Source VPN Instance"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/rpf-vector-rd": {
+    "name": "RPF Vector RD"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/rpf-vector-addr": {
+    "name": "RPF Vector Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/elected-vector-rd": {
+    "name": "Elected Vector RD"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/elected-vector-addr": {
+    "name": "Elected Vector Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/up-nbr-addr": {
+    "name": "Neighbor Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/rpf-addr": {
+    "name": "RPF Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/reference-addr": {
+    "name": "Reference Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/rpf-mask-len": {
+    "name": "RPF Route Mask Length"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/rpf-metric": {
+    "name": "RPF Route Metric"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/rpf-metric-priority": {
+    "name": "RPF Route Priority"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/backup-inbound-if": {
+    "name": "Backup Inbound Interface"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/backup-nbr-addr": {
+    "name": "Backup Neighbor Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/backup-rpf-addr": {
+    "name": "Backup RPF Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/up-status": {
+    "name": "Up Status"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/upstream-expiration-time": {
+    "name": "Upstream Expiration Time"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/rpt-status": {
+    "name": "RPT Status"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/rpt-timeout-period": {
+    "name": "RPT Timeout Period"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/registration-status": {
+    "name": "Registration Status"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/registration-stop-time": {
+    "name": "Registration Stop Time"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/graft-retry-expiration-time": {
+    "name": "Graft Retry Expiration Time"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/prune-limit-expiration-time": {
+    "name": "Prune Limit Expiration Time"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/override-expiration-time": {
+    "name": "Override Expiration Time"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/backup-upstream-expiration-time": {
+    "name": "Backup Upstream Expiration Time"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/user-id": {
+    "name": "User ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/original-src-addr": {
+    "name": "Original Source Information"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/downstreams": {
+    "name": "Downstream Information List"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/downstreams/downstream": {
+    "name": "Downstream Information"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/downstreams/downstream/if-name": {
+    "name": "Interface Name"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/downstreams/downstream/protocol-type": {
+    "name": "Address Family"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/downstreams/downstream/up-time": {
+    "name": "Downstream Status"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/downstreams/downstream/timeout-period": {
+    "name": "Timeout Period"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/downstreams/downstream/dr-status": {
+    "name": "DR Status"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/downstreams/downstream/downstream": {
+    "name": "Downstream Information"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/downstreams/downstream/downstream-ppt": {
+    "name": "Downstream PPT"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/downstreams/downstream/assert-state-machine": {
+    "name": "Assert State Machine"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/downstreams/downstream/assert-timeout-period": {
+    "name": "Assert Timeout Period"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/downstreams/downstream/assert-winner-addr": {
+    "name": "Assert Winner Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/downstreams/downstream/assert-winner-metric": {
+    "name": "Assert Winner Metric"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/downstreams/downstream/assert-winner-metric-priority": {
+    "name": "Assert Winner Metric Priority"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/downstreams/downstream/local-receiver-exist": {
+    "name": "Local Receiver Exist"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/downstreams/downstream/rpt-status": {
+    "name": "RPT Status"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/downstreams/downstream/rpt-state-machine-ppt": {
+    "name": "RPT State Machine PPT"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/downstreams/downstream/rpt-timeout-period": {
+    "name": "RPT Timeout Period"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/downstreams/downstream/vector-attribute-status": {
+    "name": "Downstream Vector Attribute State"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/downstreams/downstream/elected-vector": {
+    "name": "Elected Downstream Vector"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/downstreams/downstream/elected-vector-nbr": {
+    "name": "Elected Downstream Vector Neighbor Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/downstreams/downstream/vector-num": {
+    "name": "Vector number"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/downstreams/downstream/ignore-dr-status": {
+    "name": "Ignore DR Status"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/downstreams/downstream/vectors": {
+    "name": "Vector Information List"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/downstreams/downstream/vectors/vector": {
+    "name": "Vector Information"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/downstreams/downstream/vectors/vector/nbr-addr": {
+    "name": "Neighbor Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/downstreams/downstream/vectors/vector/vector-addr": {
+    "name": "Vector Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/downstreams/downstream/vectors/vector/vector-rd": {
+    "name": "Vector RD"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/downstreams/downstream/vectors/vector/timeout-period": {
+    "name": "Up Time"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/downstreams/downstream/vectors/vector/vector-hop-addrs": {
+    "name": "Display the List of Hop Addresses of Vectors"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/downstreams/downstream/vectors/vector/vector-hop-addrs/vector-hop-addr": {
+    "name": "Display Hop Addresses of Vectors"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/downstreams/downstream/vectors/vector/vector-hop-addrs/vector-hop-addr/vector-addr": {
+    "name": "Hop IP Addresses"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/downstreams/downstream/vectors/vector/vector-hop-addrs/vector-hop-addr/sequence-num": {
+    "name": "Number"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/recv-vrfs": {
+    "name": "Receiver VPN instance Information List"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/recv-vrfs/recv-vrf": {
+    "name": "Receiver VPN instance Information"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/routings/routing/recv-vrfs/recv-vrf/vrf-name": {
+    "name": "Receiver VPN instance"
+  },
+  "/huawei-multicast:multicast/huawei-pim:rpf-vector-paths": {
+    "name": "Configure the List of Paths to Multicast Sources"
+  },
+  "/huawei-multicast:multicast/huawei-pim:rpf-vector-paths/rpf-vector-path": {
+    "name": "Configure Paths to Multicast Sources"
+  },
+  "/huawei-multicast:multicast/huawei-pim:rpf-vector-paths/rpf-vector-path/path-name": {
+    "name": "Path Name"
+  },
+  "/huawei-multicast:multicast/huawei-pim:rpf-vector-paths/rpf-vector-path/path-type": {
+    "name": "Path Type"
+  },
+  "/huawei-multicast:multicast/huawei-pim:rpf-vector-paths/rpf-vector-path/hops": {
+    "name": "List of IP Addresses of Hops on Paths"
+  },
+  "/huawei-multicast:multicast/huawei-pim:rpf-vector-paths/rpf-vector-path/hops/hop": {
+    "name": "IP Addresses of Hops on Paths"
+  },
+  "/huawei-multicast:multicast/huawei-pim:rpf-vector-paths/rpf-vector-path/hops/hop/index": {
+    "name": "Address Index"
+  },
+  "/huawei-multicast:multicast/huawei-pim:rpf-vector-paths/rpf-vector-path/hops/hop/ip-addr": {
+    "name": "IP Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/claim-routings": {
+    "name": "Claim Routing Information List"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/claim-routings/claim-routing": {
+    "name": "Claim Routing Information"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/claim-routings/claim-routing/type": {
+    "name": "Address Family"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/claim-routings/claim-routing/destination-addr": {
+    "name": "Destination Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/claim-routings/claim-routing/if-name": {
+    "name": "RPF Interface Name"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/claim-routings/claim-routing/rpf-neighbour": {
+    "name": "RPF Neighbor"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/claim-routings/claim-routing/referenced-route": {
+    "name": "Referenced Route"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/claim-routings/claim-routing/referenced-route-mask": {
+    "name": "Referenced Route Mask"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/claim-routings/claim-routing/referenced-route-type": {
+    "name": "Referenced Route Type"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/claim-routings/claim-routing/global-administrator": {
+    "name": "Global Administrator field"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/claim-routings/claim-routing/local-administrator": {
+    "name": "Local Administrator field"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/claim-routings/claim-routing/as-number": {
+    "name": "As number"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/claim-routings/claim-routing/backup-rpf-nbr": {
+    "name": "Back RPF neighbor"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/claim-routings/claim-routing/backup-global-administrator": {
+    "name": "Back Global Administrator field"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/claim-routings/claim-routing/backup-local-administrator": {
+    "name": "Back Local Administrator field"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/claim-routings/claim-routing/backup-as-number": {
+    "name": "Back as number"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/claim-routings/claim-routing/claim-routing-entrys": {
+    "name": "Claim Routing Entry List"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/claim-routings/claim-routing/claim-routing-entrys/claim-routing-entry": {
+    "name": "Claim Routing Entry"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/claim-routings/claim-routing/claim-routing-entrys/claim-routing-entry/src-addr": {
+    "name": "Source Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/claim-routings/claim-routing/claim-routing-entrys/claim-routing-entry/grp-addr": {
+    "name": "Group Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages": {
+    "name": "PIM Invalid Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/general-cnts": {
+    "name": "PIM General Invalid Messages List"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/general-cnts/general-cnt": {
+    "name": "PIM General Invalid Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/general-cnts/general-cnt/type": {
+    "name": "Address Family"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/general-cnts/general-cnt/invalid-version": {
+    "name": "Invalid Version"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/general-cnts/general-cnt/invalid-type": {
+    "name": "Invalid PIM Type"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/general-cnts/general-cnt/fault-length": {
+    "name": "Fault Length"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/general-cnts/general-cnt/bad-checksum": {
+    "name": "Bad Checksum"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-register-cnts": {
+    "name": "PIM Register Invalid Messages List"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-register-cnts/invalid-register-cnt": {
+    "name": "PIM Register Invalid Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-register-cnts/invalid-register-cnt/type": {
+    "name": "Address Family"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-register-cnts/invalid-register-cnt/invalid-multicast-source": {
+    "name": "Invalid Multicast Source"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-register-cnts/invalid-register-cnt/invalid-multicast-group": {
+    "name": "Invalid Multicast Group"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-register-cnts/invalid-register-cnt/invalid-destination-addr": {
+    "name": "Invalid Dest Addr"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-register-stop-cnts": {
+    "name": "PIM Register-Stop Invalid Messages List"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-register-stop-cnts/invalid-register-stop-cnt": {
+    "name": "PIM Register-Stop Invalid Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-register-stop-cnts/invalid-register-stop-cnt/type": {
+    "name": "Address Family"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-register-stop-cnts/invalid-register-stop-cnt/invalid-multicast-source": {
+    "name": "Invalid Multicast Source"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-register-stop-cnts/invalid-register-stop-cnt/invalid-multicast-group": {
+    "name": "Invalid Multicast Group"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-register-stop-cnts/invalid-register-stop-cnt/invalid-destination-sddr": {
+    "name": "Invalid Dest Addr"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-register-stop-cnts/invalid-register-stop-cnt/source-addr-not-rp": {
+    "name": "IP Source not RP"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-c-rp-cnts": {
+    "name": "PIM CRP Invalid Messages List"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-c-rp-cnts/invalid-c-rp-cnt": {
+    "name": "PIM CRP Invalid Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-c-rp-cnts/invalid-c-rp-cnt/type": {
+    "name": "Address Family"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-c-rp-cnts/invalid-c-rp-cnt/invalid-destination-addr": {
+    "name": "Invalid Dest Addr"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-c-rp-cnts/invalid-c-rp-cnt/invalid-group-address": {
+    "name": "Invalid CRP Addr"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-c-rp-cnts/invalid-c-rp-cnt/fault-length": {
+    "name": "Fault Length"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-c-rp-cnts/invalid-c-rp-cnt/adv-fault-length": {
+    "name": "CRP Adv Fault Length"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-c-rp-cnts/invalid-c-rp-cnt/invalid-multicast-group": {
+    "name": "Invalid Multicast Group"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-assert-cnts": {
+    "name": "PIM Assert Invalid Messages List"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-assert-cnts/invalid-assert-cnt": {
+    "name": "PIM Assert Invalid Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-assert-cnts/invalid-assert-cnt/type": {
+    "name": "Address Family"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-assert-cnts/invalid-assert-cnt/invalid-destination-addr": {
+    "name": "Invalid Dest Addr"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-assert-cnts/invalid-assert-cnt/invalid-ip-source-addr": {
+    "name": "Invalid IP Source Addr"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-assert-cnts/invalid-assert-cnt/invalid-multicast-source": {
+    "name": "Invalid Multicast Source"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-assert-cnts/invalid-assert-cnt/invalid-multicast-group": {
+    "name": "Invalid Multicast Group"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-assert-cnts/invalid-assert-cnt/fault-length": {
+    "name": "Fault Length"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-bsr-cnts": {
+    "name": "PIM BSR Invalid Messages List"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-bsr-cnts/invalid-bsr-cnt": {
+    "name": "PIM BSR Invalid Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-bsr-cnts/invalid-bsr-cnt/type": {
+    "name": "Address Family"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-bsr-cnts/invalid-bsr-cnt/bad-payload": {
+    "name": "Bad Payload"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-bsr-cnts/invalid-bsr-cnt/fault-length": {
+    "name": "Fault Length"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-bsr-cnts/invalid-bsr-cnt/invalid-scope-mask": {
+    "name": "Bad Scope Mask"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-bsr-cnts/invalid-bsr-cnt/invalid-multicast-group": {
+    "name": "Invalid Multicast Group"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-bsr-cnts/invalid-bsr-cnt/recv-by-non-c-bsr": {
+    "name": "Not CBSR But BSR"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-bsr-cnts/invalid-bsr-cnt/invalid-bsr-addr": {
+    "name": "Invalid BSR Addr"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-bsr-cnts/invalid-bsr-cnt/fault-hash-length": {
+    "name": "Fault Hash Length"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-bsr-cnts/invalid-bsr-cnt/invalid-ip-source-addr": {
+    "name": "Invalid IP Source Addr"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-hello-cnts": {
+    "name": "PIM Hello Invalid Messages List"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-hello-cnts/invalid-hello-cnt": {
+    "name": "PIM Hello Invalid Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-hello-cnts/invalid-hello-cnt/type": {
+    "name": "Address Family"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-hello-cnts/invalid-hello-cnt/invalid-addr-list": {
+    "name": "Invalid Addr List"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-hello-cnts/invalid-hello-cnt/invalid-length": {
+    "name": "Fault Length"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-hello-cnts/invalid-hello-cnt/invalid-holdtime-length": {
+    "name": "Bad Holdtime Length"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-hello-cnts/invalid-hello-cnt/invalid-lan-prune-delay-length": {
+    "name": "Bad LanPruneDelay Length"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-hello-cnts/invalid-hello-cnt/invalid-dr-priority-length": {
+    "name": "Bad DrPriority Length"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-hello-cnts/invalid-hello-cnt/invalid-gen-id-length": {
+    "name": "Bad GenID Length"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-hello-cnts/invalid-hello-cnt/invalid-destination-addr": {
+    "name": "Invalid Dest Addr"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-hello-cnts/invalid-hello-cnt/invalid-ip-source-addr": {
+    "name": "Invalid IP Source Addr"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-join-prune-cnts": {
+    "name": "PIM Join/Prune Invalid Messages List"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-join-prune-cnts/invalid-join-prune-cnt": {
+    "name": "PIM Join/Prune Invalid Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-join-prune-cnts/invalid-join-prune-cnt/type": {
+    "name": "Address Family"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-join-prune-cnts/invalid-join-prune-cnt/invalid-multicast-source": {
+    "name": "Invalid Multicast Source"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-join-prune-cnts/invalid-join-prune-cnt/invalid-multicast-group": {
+    "name": "Invalid Multicast Group"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-join-prune-cnts/invalid-join-prune-cnt/invalid-upstream-nbr": {
+    "name": "Invalid Up Neighbor"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-join-prune-cnts/invalid-join-prune-cnt/invalid-ip-source-addr": {
+    "name": "Invalid IP Source Addr"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-join-prune-cnts/invalid-join-prune-cnt/invalid-destination-addr": {
+    "name": "Invalid Dest Addr"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-join-prune-cnts/invalid-join-prune-cnt/fault-length": {
+    "name": "Fault Length"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-graft-cnts": {
+    "name": "PIM Graft Invalid Messages List"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-graft-cnts/invalid-graft-cnt": {
+    "name": "PIM Graft Invalid Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-graft-cnts/invalid-graft-cnt/type": {
+    "name": "Address Family"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-graft-cnts/invalid-graft-cnt/invalid-multicast-source": {
+    "name": "Invalid Multicast Source"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-graft-cnts/invalid-graft-cnt/invalid-multicast-group": {
+    "name": "Invalid Multicast Group"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-graft-cnts/invalid-graft-cnt/invalid-up-nbr": {
+    "name": "Invalid Up Neighbor"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-graft-cnts/invalid-graft-cnt/invalid-ip-source-addr": {
+    "name": "Invalid IP Source Addr"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-graft-cnts/invalid-graft-cnt/fault-length": {
+    "name": "Fault Length"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-graft-ack-cnts": {
+    "name": "PIM Graft-Ack Invalid Messages List"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-graft-ack-cnts/invalid-graft-ack-cnt": {
+    "name": "PIM Graft-Ack Invalid Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-graft-ack-cnts/invalid-graft-ack-cnt/type": {
+    "name": "Address Family"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-graft-ack-cnts/invalid-graft-ack-cnt/invalid-multicast-source": {
+    "name": "Invalid Multicast Source"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-graft-ack-cnts/invalid-graft-ack-cnt/invalid-multicast-group": {
+    "name": "Invalid Multicast Group"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-graft-ack-cnts/invalid-graft-ack-cnt/invalid-up-nbr": {
+    "name": "Invalid Up Neighbor"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-graft-ack-cnts/invalid-graft-ack-cnt/invalid-ip-source-addr": {
+    "name": "Invalid IP Source Addr"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-graft-ack-cnts/invalid-graft-ack-cnt/fault-length": {
+    "name": "Fault Length"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-state-refresh-cnts": {
+    "name": "PIM State Refresh Invalid Messages List"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-state-refresh-cnts/invalid-state-refresh-cnt": {
+    "name": "PIM State Refresh Invalid Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-state-refresh-cnts/invalid-state-refresh-cnt/type": {
+    "name": "Address Family"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-state-refresh-cnts/invalid-state-refresh-cnt/invalid-multicast-source": {
+    "name": "Invalid Multicast Source"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-state-refresh-cnts/invalid-state-refresh-cnt/invalid-multicast-group": {
+    "name": "Invalid Multicast Group"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-state-refresh-cnts/invalid-state-refresh-cnt/invalid-originator": {
+    "name": "Invalid Originator Addr"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-state-refresh-cnts/invalid-state-refresh-cnt/fault-length": {
+    "name": "Fault Length"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-auto-rp-announce-cnts": {
+    "name": "PIM Auto-RP Announcement Invalid Messages List"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-auto-rp-announce-cnts/invalid-auto-rp-announce-cnt": {
+    "name": "PIM Auto-RP Announcement Invalid Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-auto-rp-announce-cnts/invalid-auto-rp-announce-cnt/type": {
+    "name": "Address Family"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-auto-rp-announce-cnts/invalid-auto-rp-announce-cnt/invalid-destination-addr": {
+    "name": "Invalid Dest Addr"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-auto-rp-announce-cnts/invalid-auto-rp-announce-cnt/invalid-ip-source-addr": {
+    "name": "Invalid IP Source Addr"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-auto-rp-announce-cnts/invalid-auto-rp-announce-cnt/invalid-ttl": {
+    "name": "Invalid TTL"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-auto-rp-announce-cnts/invalid-auto-rp-announce-cnt/invalid-source-port": {
+    "name": "Invalid Source Port"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-auto-rp-discovery-cnts": {
+    "name": "PIM Auto-RP Discovery Invalid Messages List"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-auto-rp-discovery-cnts/invalid-auto-rp-discovery-cnt": {
+    "name": "PIM Auto-RP Discovery Invalid Messages"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-auto-rp-discovery-cnts/invalid-auto-rp-discovery-cnt/type": {
+    "name": "Address Family"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-auto-rp-discovery-cnts/invalid-auto-rp-discovery-cnt/invalid-length": {
+    "name": "Fault Length"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-auto-rp-discovery-cnts/invalid-auto-rp-discovery-cnt/invalid-rp": {
+    "name": "Invalid RP Addr"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-auto-rp-discovery-cnts/invalid-auto-rp-discovery-cnt/invalid-ip-source-addr": {
+    "name": "Invalid IP Source Addr"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-auto-rp-discovery-cnts/invalid-auto-rp-discovery-cnt/invalid-group": {
+    "name": "Invalid Multicast Group"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-auto-rp-discovery-cnts/invalid-auto-rp-discovery-cnt/invalid-ttl": {
+    "name": "Invalid TTL"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-pim:pim/protocol/invalid-messages/invalid-auto-rp-discovery-cnts/invalid-auto-rp-discovery-cnt/invalid-source-port": {
+    "name": "Invalid Source Port"
+  }
+}

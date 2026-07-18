@@ -1,0 +1,8 @@
+{
+  "/huawei-vlan:vlan/vlans/vlan/huawei-vlan-fwd:rewrite-egr-vlan": {
+    "name": "重写出方向VLAN"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-vlan-fwd:rewrite-egr-vlan/new-vlan": {
+    "name": "新VLAN"
+  }
+}

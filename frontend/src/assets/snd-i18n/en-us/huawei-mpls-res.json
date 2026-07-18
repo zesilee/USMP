@@ -1,0 +1,35 @@
+{
+  "/huawei-network-instance:network-instance/instances/instance/huawei-mpls:mpls": {
+    "name": "MPLS Instance Configuration"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-mpls:mpls/common": {
+    "name": "Global MPLS Configuration"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-mpls:mpls/common/mpls-interfaces": {
+    "name": "MPLS Interface List"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-mpls:mpls/common/mpls-interfaces/mpls-interface": {
+    "name": "MPLS Interface"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-mpls:mpls/common/mpls-interfaces/mpls-interface/name": {
+    "name": "MPLS Interface Name"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-mpls:mpls/common/mpls-interfaces/mpls-interface/mtu-value": {
+    "name": "MTU"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-mpls:mpls/common/mpls-interfaces/mpls-interface/ldp-enable": {
+    "name": "LDP"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-mpls:mpls/common/mpls-interfaces/mpls-interface/te-enable": {
+    "name": "MPLS TE Capability"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-mpls:mpls/common/mpls-interfaces/mpls-interface/rsvp-te-enable": {
+    "name": "RSVP TE Capability"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-mpls:mpls/common/mpls-interfaces/mpls-interface/statistics": {
+    "name": "MPLS interface statistics informations"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-mpls:mpls/common/mpls-interfaces/mpls-interface/statistics/fragmented-packet-count": {
+    "name": "MPLS Packet Fragment Statistics"
+  }
+}

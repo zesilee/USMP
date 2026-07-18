@@ -16,12 +16,12 @@
     >
       <el-menu-item index="/">
         <el-icon><DataLine /></el-icon>
-        <template #title>概览</template>
+        <template #title>{{ t('nav.overview') }}</template>
       </el-menu-item>
 
       <el-menu-item index="/devices">
         <el-icon><Monitor /></el-icon>
-        <template #title>设备管理</template>
+        <template #title>{{ t('nav.devices') }}</template>
       </el-menu-item>
 
       <!-- 原生配置菜单（LT-03）：SND 左树驱动 14 组/3 层导航（已接入可点、未接入
@@ -29,7 +29,7 @@
       <el-sub-menu index="native-config">
         <template #title>
           <el-icon><Connection /></el-icon>
-          <span>原生配置</span>
+          <span>{{ t('nav.nativeConfig') }}</span>
         </template>
         <template v-if="leftTreeReady">
           <LeftTreeMenu :nodes="leftTree" index-prefix="lt" />
@@ -40,7 +40,7 @@
           <el-menu-item-group
             v-for="g in nativeGroups"
             :key="g.category || '__default__'"
-            :title="g.category || '其他'"
+            :title="g.category || t('nav.otherGroup')"
           >
             <el-menu-item
               v-for="m in g.modules"
@@ -70,7 +70,7 @@
       <el-sub-menu v-if="businessModules.length" index="business-config" data-test="business-group">
         <template #title>
           <el-icon><Share /></el-icon>
-          <span>业务网络配置</span>
+          <span>{{ t('nav.businessConfig') }}</span>
         </template>
         <el-menu-item
           v-for="m in businessModules"
@@ -84,18 +84,18 @@
 
       <el-menu-item index="/logs">
         <el-icon><Document /></el-icon>
-        <template #title>操作日志</template>
+        <template #title>{{ t('nav.logs') }}</template>
       </el-menu-item>
 
       <el-menu-item index="/settings">
         <el-icon><Tools /></el-icon>
-        <template #title>系统设置</template>
+        <template #title>{{ t('nav.settings') }}</template>
       </el-menu-item>
     </el-menu>
 
     <div v-if="!isCollapsed" class="side-foot">
       <span class="pulse-dot" aria-hidden="true"></span>
-      <span>无数据库 · TTL 缓存</span>
+      <span>{{ t('nav.sideFoot') }}</span>
     </div>
 
     <div class="collapse-btn" @click="toggleCollapse">
@@ -108,12 +108,14 @@
 <script setup lang="ts">
 import { computed, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 import { useMenuStore } from '../../stores/menu'
 import LeftTreeMenu from './LeftTreeMenu.vue'
 import { DataLine, Monitor, Connection, Document, Tools, Fold, Expand, Share } from '@element-plus/icons-vue'
 
 const route = useRoute()
 const menuStore = useMenuStore()
+const { t } = useI18n()
 
 const activeMenu = computed(() => route.path)
 const isCollapsed = computed(() => menuStore.isCollapsed)

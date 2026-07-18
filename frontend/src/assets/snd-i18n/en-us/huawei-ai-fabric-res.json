@@ -1,0 +1,530 @@
+{
+  "/huawei-ai-fabric:ai-fabric": {
+    "name": "Intelligent Lossless Network"
+  },
+  "/huawei-ai-fabric:ai-fabric/ai-service": {
+    "name": "Ai service function"
+  },
+  "/huawei-ai-fabric:ai-fabric/ai-service/ai-ecn": {
+    "name": "Configure AI ECN"
+  },
+  "/huawei-ai-fabric:ai-fabric/ai-service/ai-ecn/enable": {
+    "name": "Enable AI ECN"
+  },
+  "/huawei-ai-fabric:ai-fabric/ai-service/ai-ecn/queues": {
+    "name": "Queues for AI ECN"
+  },
+  "/huawei-ai-fabric:ai-fabric/ai-service/ai-ecn/queues/queue": {
+    "name": "Configure the working queue for AI ECN"
+  },
+  "/huawei-ai-fabric:ai-fabric/ai-service/ai-ecn/queues/queue/queue-id": {
+    "name": "Queue ID"
+  },
+  "/huawei-ai-fabric:ai-fabric/ai-service/iqcn": {
+    "name": "Configure iQCN function"
+  },
+  "/huawei-ai-fabric:ai-fabric/ai-service/iqcn/enable": {
+    "name": "Enable iQCN"
+  },
+  "/huawei-ai-fabric:ai-fabric/ai-service/iqcn/rpg-time-reset": {
+    "name": "Counter of NIC"
+  },
+  "/huawei-ai-fabric:ai-fabric/ai-service/iqcn/queues": {
+    "name": "Queues for iQCN"
+  },
+  "/huawei-ai-fabric:ai-fabric/ai-service/iqcn/queues/queue": {
+    "name": "Configure the working queue for iQCN"
+  },
+  "/huawei-ai-fabric:ai-fabric/ai-service/iqcn/queues/queue/queue-id": {
+    "name": "Configure the working queue for iQCN"
+  },
+  "/huawei-ai-fabric:ai-fabric/ai-service/ilossless-nvme-over-fabric": {
+    "name": "Configure iNOF View"
+  },
+  "/huawei-ai-fabric:ai-fabric/ai-service/ilossless-nvme-over-fabric/role": {
+    "name": "Local role"
+  },
+  "/huawei-ai-fabric:ai-fabric/ai-service/ilossless-nvme-over-fabric/local-address": {
+    "name": "Configure local IPv4 address and TCP port"
+  },
+  "/huawei-ai-fabric:ai-fabric/ai-service/ilossless-nvme-over-fabric/local-address/service-address": {
+    "name": "Local IPv4 address"
+  },
+  "/huawei-ai-fabric:ai-fabric/ai-service/ilossless-nvme-over-fabric/local-address/service-port": {
+    "name": "TCP port"
+  },
+  "/huawei-ai-fabric:ai-fabric/ai-service/ilossless-nvme-over-fabric/local-ipv6-address": {
+    "name": "Configure local IPv6 address and TCP port"
+  },
+  "/huawei-ai-fabric:ai-fabric/ai-service/ilossless-nvme-over-fabric/local-ipv6-address/ipv6-service-address": {
+    "name": "Local IPv6 address"
+  },
+  "/huawei-ai-fabric:ai-fabric/ai-service/ilossless-nvme-over-fabric/local-ipv6-address/ipv6-service-port": {
+    "name": "TCP port"
+  },
+  "/huawei-ai-fabric:ai-fabric/ai-service/ilossless-nvme-over-fabric/zones": {
+    "name": "List of zones"
+  },
+  "/huawei-ai-fabric:ai-fabric/ai-service/ilossless-nvme-over-fabric/zones/zone": {
+    "name": "Zone related parameter"
+  },
+  "/huawei-ai-fabric:ai-fabric/ai-service/ilossless-nvme-over-fabric/zones/zone/name": {
+    "name": "Zone name"
+  },
+  "/huawei-ai-fabric:ai-fabric/ai-service/ilossless-nvme-over-fabric/zones/zone/host-ips": {
+    "name": "List of host IP"
+  },
+  "/huawei-ai-fabric:ai-fabric/ai-service/ilossless-nvme-over-fabric/zones/zone/host-ips/host-ip": {
+    "name": "Host IP address"
+  },
+  "/huawei-ai-fabric:ai-fabric/ai-service/ilossless-nvme-over-fabric/zones/zone/host-ips/host-ip/start-host-ip": {
+    "name": "Start host IP address"
+  },
+  "/huawei-ai-fabric:ai-fabric/ai-service/ilossless-nvme-over-fabric/zones/zone/host-ips/host-ip/end-host-ip": {
+    "name": "End host IP address"
+  },
+  "/huawei-ai-fabric:ai-fabric/ecn-overlay": {
+    "name": "Mapping the outer ECN to the inner ECN for VXLAN"
+  },
+  "/huawei-ai-fabric:ai-fabric/ecn-overlay/enable": {
+    "name": "ECN mapping for VXLAN decapsulation"
+  },
+  "/huawei-ai-fabric:ai-fabric/pfc-deadlock-free": {
+    "name": "Pfc Deadlock Free"
+  },
+  "/huawei-ai-fabric:ai-fabric/pfc-deadlock-free/uplink-groups": {
+    "name": "List of PFC deadlock-free uplink port group"
+  },
+  "/huawei-ai-fabric:ai-fabric/pfc-deadlock-free/uplink-groups/uplink-group": {
+    "name": "Configure a deadlock-free uplink port group"
+  },
+  "/huawei-ai-fabric:ai-fabric/pfc-deadlock-free/uplink-groups/uplink-group/name": {
+    "name": "Name of a deadlock-fre"
+  },
+  "/huawei-ai-fabric:ai-fabric/pfc-deadlock-free/uplink-groups/uplink-group/members": {
+    "name": "List of a deadlock-free uplink port group"
+  },
+  "/huawei-ai-fabric:ai-fabric/pfc-deadlock-free/uplink-groups/uplink-group/members/member": {
+    "name": "Member interfaces"
+  },
+  "/huawei-ai-fabric:ai-fabric/pfc-deadlock-free/uplink-groups/uplink-group/members/member/if-name": {
+    "name": "Interface name"
+  },
+  "/huawei-ai-fabric:ai-fabric/pfc-deadlock-free/uplink-groups/uplink-group/adjusts": {
+    "name": "List of a deadlock-free actions"
+  },
+  "/huawei-ai-fabric:ai-fabric/pfc-deadlock-free/uplink-groups/uplink-group/adjusts/adjust": {
+    "name": "Adjust"
+  },
+  "/huawei-ai-fabric:ai-fabric/pfc-deadlock-free/uplink-groups/uplink-group/adjusts/adjust/original-dscp": {
+    "name": "DSCP field"
+  },
+  "/huawei-ai-fabric:ai-fabric/pfc-deadlock-free/uplink-groups/uplink-group/adjusts/adjust/priority": {
+    "name": "Switching action"
+  },
+  "/huawei-ai-fabric:ai-fabric/pfc-deadlock-free/uplink-groups/uplink-group/adjusts/adjust/dscp": {
+    "name": "Configure a new DSCP"
+  },
+  "/huawei-ai-fabric:ai-fabric/ai-ecn-statistics": {
+    "name": "Ai-ecn-statistics"
+  },
+  "/huawei-ai-fabric:ai-fabric/ai-ecn-statistics/ai-ecn-statistic": {
+    "name": "Ai Ecn Statistic"
+  },
+  "/huawei-ai-fabric:ai-fabric/ai-ecn-statistics/ai-ecn-statistic/if-name": {
+    "name": "Interface name"
+  },
+  "/huawei-ai-fabric:ai-fabric/ai-ecn-statistics/ai-ecn-statistic/active-model": {
+    "name": "AI ECN"
+  },
+  "/huawei-ai-fabric:ai-fabric/ai-ecn-statistics/ai-ecn-statistic/model-version": {
+    "name": "AI ECN active model version"
+  },
+  "/huawei-ai-fabric:ai-fabric/ai-ecn-statistics/ai-ecn-statistic/activated-time": {
+    "name": "Activated time of AI ECN"
+  },
+  "/huawei-ai-fabric:ai-fabric/ai-ecn-statistics/ai-ecn-statistic/queue-id": {
+    "name": "Working queue"
+  },
+  "/huawei-ai-fabric:ai-fabric/ai-ecn-statistics/ai-ecn-statistic/low-limit": {
+    "name": "ECN Threshold"
+  },
+  "/huawei-ai-fabric:ai-fabric/ai-ecn-statistics/ai-ecn-statistic/high-limit": {
+    "name": "ECN Threshold"
+  },
+  "/huawei-ai-fabric:ai-fabric/ai-ecn-statistics/ai-ecn-statistic/max-mark-percentage": {
+    "name": "Percentage"
+  },
+  "/huawei-ai-fabric:ai-fabric/ai-ecn-statistics/ai-ecn-statistic/calculate-mode": {
+    "name": "Calculate-mode"
+  },
+  "/huawei-ai-fabric:ai-fabric/pfc-deadlock-free-statistics": {
+    "name": "Pfc-deadlock-free-statistics"
+  },
+  "/huawei-ai-fabric:ai-fabric/pfc-deadlock-free-statistics/pfc-deadlock-free-statistic": {
+    "name": "Pfc-deadlock-free-statistic"
+  },
+  "/huawei-ai-fabric:ai-fabric/pfc-deadlock-free-statistics/pfc-deadlock-free-statistic/slot-id": {
+    "name": "Slot id"
+  },
+  "/huawei-ai-fabric:ai-fabric/pfc-deadlock-free-statistics/pfc-deadlock-free-statistic/chip-name": {
+    "name": "Chip name"
+  },
+  "/huawei-ai-fabric:ai-fabric/iqcn-statistics": {
+    "name": "Iqcn-statistics"
+  },
+  "/huawei-ai-fabric:ai-fabric/iqcn-statistics/iqcn-statistic": {
+    "name": "Iqcn-statistic"
+  },
+  "/huawei-ai-fabric:ai-fabric/iqcn-statistics/iqcn-statistic/slot-id": {
+    "name": "Slot id"
+  },
+  "/huawei-ai-fabric:ai-fabric/iqcn-statistics/iqcn-statistic/enable": {
+    "name": "IQCN Enable"
+  },
+  "/huawei-ai-fabric:ai-fabric/iqcn-statistics/iqcn-statistic/working-queue": {
+    "name": "Working queue of iQCN"
+  },
+  "/huawei-ai-fabric:ai-fabric/iqcn-statistics/iqcn-statistic/rpg-time-reset": {
+    "name": "Rpg-time-reset of NIC"
+  },
+  "/huawei-ai-fabric:ai-fabric/iqcn-statistics/iqcn-statistic/tx-cnp-count": {
+    "name": "Number of Tx CNP packets"
+  },
+  "/huawei-ai-fabric:ai-fabric/iqcn-statistics/iqcn-statistic/tx-cnp-rate": {
+    "name": "Rate of Tx CNP packets"
+  },
+  "/huawei-ai-fabric:ai-fabric/iqcn-statistics/iqcn-statistic/members": {
+    "name": "List of the interfaces"
+  },
+  "/huawei-ai-fabric:ai-fabric/iqcn-statistics/iqcn-statistic/members/member": {
+    "name": "Statistics of group member interfaces"
+  },
+  "/huawei-ai-fabric:ai-fabric/iqcn-statistics/iqcn-statistic/members/member/if-name": {
+    "name": "CNP packets"
+  },
+  "/huawei-ai-fabric:ai-fabric/iqcn-statistics/iqcn-statistic/members/member/rx-cnp-count": {
+    "name": "CNP packets"
+  },
+  "/huawei-ai-fabric:ai-fabric/iqcn-statistics/iqcn-statistic/members/member/rx-cnp-rate": {
+    "name": "CNP packets"
+  },
+  "/huawei-ai-fabric:ai-fabric/inof-info-hosts": {
+    "name": "List of hosts"
+  },
+  "/huawei-ai-fabric:ai-fabric/inof-info-hosts/inof-info-host": {
+    "name": "Operational data of hosts on the iNOF network"
+  },
+  "/huawei-ai-fabric:ai-fabric/inof-info-hosts/inof-info-host/host-ip": {
+    "name": "Host IP address"
+  },
+  "/huawei-ai-fabric:ai-fabric/inof-info-hosts/inof-info-host/access-type": {
+    "name": "Access type of a host"
+  },
+  "/huawei-ai-fabric:ai-fabric/inof-info-hosts/inof-info-host/access-device-ip": {
+    "name": "Access device IP address"
+  },
+  "/huawei-ai-fabric:ai-fabric/inof-info-hosts/inof-info-host/access-interface": {
+    "name": "Access interface"
+  },
+  "/huawei-ai-fabric:ai-fabric/inof-info-hosts/inof-info-host/hard-zoning-state": {
+    "name": "Work state of iNOF zone isolation"
+  },
+  "/huawei-ai-fabric:ai-fabric/inof-info-hosts/inof-info-host/host-role": {
+    "name": "The role of the host"
+  },
+  "/huawei-ai-fabric:ai-fabric/inof-cfg-status": {
+    "name": "INOF configuration status"
+  },
+  "/huawei-ai-fabric:ai-fabric/inof-cfg-status/default-zone": {
+    "name": "Default-zone configuration status"
+  },
+  "/huawei-ai-fabric:ai-fabric/inof-cfg-status/default-zone/reflector1-enable": {
+    "name": "Reflector 1 enable/disable status"
+  },
+  "/huawei-ai-fabric:ai-fabric/inof-cfg-status/default-zone/reflector2-enable": {
+    "name": "Reflector 2 enable/disable status"
+  },
+  "/huawei-ai-fabric:ai-fabric/inof-cfg-status/default-zone/inof-enable": {
+    "name": "Indicates the enabling status."
+  },
+  "/huawei-ai-fabric:ai-fabric/inof-zones": {
+    "name": "Operational state of zone configuration"
+  },
+  "/huawei-ai-fabric:ai-fabric/inof-zones/zone-num": {
+    "name": "The total zone number"
+  },
+  "/huawei-ai-fabric:ai-fabric/inof-zones/default-zone-enable": {
+    "name": "Default-zone status"
+  },
+  "/huawei-ai-fabric:ai-fabric/inof-zones/zones": {
+    "name": "List of iNOF zone configurations"
+  },
+  "/huawei-ai-fabric:ai-fabric/inof-zones/zones/zone": {
+    "name": "Operational data of iNOF zone configurations"
+  },
+  "/huawei-ai-fabric:ai-fabric/inof-zones/zones/zone/zone-name": {
+    "name": "Zone name"
+  },
+  "/huawei-ai-fabric:ai-fabric/inof-zones/zones/zone/hosts": {
+    "name": "List of hosts in the zone configurations"
+  },
+  "/huawei-ai-fabric:ai-fabric/inof-zones/zones/zone/hosts/host": {
+    "name": "Operational data of host in the zone"
+  },
+  "/huawei-ai-fabric:ai-fabric/inof-zones/zones/zone/hosts/host/ip": {
+    "name": "Host IP address"
+  },
+  "/huawei-ai-fabric:ai-fabric/inof-zones/zones/zone/hosts/host/learn-from": {
+    "name": "Learn-from"
+  },
+  "/huawei-ai-fabric:ai-fabric/inof-zones/zones/zone/hosts/host/inconsistent": {
+    "name": "Inconsistent information"
+  },
+  "/huawei-ai-fabric:ai-fabric/rail-groups": {
+    "name": "List of rail-groups"
+  },
+  "/huawei-ai-fabric:ai-fabric/rail-groups/rail-group": {
+    "name": "Rail Group configuration"
+  },
+  "/huawei-ai-fabric:ai-fabric/rail-groups/rail-group/group-name": {
+    "name": "Name of a rail-group port group"
+  },
+  "/huawei-ai-fabric:ai-fabric/rail-groups/rail-group/mode": {
+    "name": "Allocation mode"
+  },
+  "/huawei-ai-fabric:ai-fabric/rail-groups/rail-group/members": {
+    "name": "List of a rail-group port group member interfaces"
+  },
+  "/huawei-ai-fabric:ai-fabric/rail-groups/rail-group/members/member": {
+    "name": "Rail Group Port Group Member"
+  },
+  "/huawei-ai-fabric:ai-fabric/rail-groups/rail-group/members/member/interface-name": {
+    "name": "Interface name"
+  },
+  "/huawei-ai-fabric:ai-fabric/rail-groups/rail-group/members/member/index": {
+    "name": "Interface index"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix": {
+    "name": "Configure flow-matrix"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/flow-paths": {
+    "name": "List of flow-paths"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/flow-paths/flow-path": {
+    "name": "Flow-path"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/flow-paths/flow-path/source-ip": {
+    "name": "Source IP address"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/flow-paths/flow-path/destination-ip": {
+    "name": "Destination IP address"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/flow-paths/flow-path/flow-rail": {
+    "name": "Flow Rail Name"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/flow-exact-paths": {
+    "name": "List of Refined Paths of Flows"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/flow-exact-paths/flow-exact-path": {
+    "name": "Refined Path of a Flow"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/flow-exact-paths/flow-exact-path/source-ip": {
+    "name": "Source IP Address"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/flow-exact-paths/flow-exact-path/destination-ip": {
+    "name": "Destination IP Address"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/flow-exact-paths/flow-exact-path/udp-source-port": {
+    "name": "Source UDP Port Number of a Flow"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/flow-exact-paths/flow-exact-path/mask-length": {
+    "name": "Mask Length of the Source UDP Port of a Flow"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/flow-exact-paths/flow-exact-path/ingress-port": {
+    "name": "Name of the Inbound Interface of a Flow"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/flow-exact-paths/flow-exact-path/flow-rail": {
+    "name": "Outbound Interface Name of a Flow"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/synergy-server": {
+    "name": "Flow Matrix Synergy"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/synergy-server/ssl-policy": {
+    "name": "SSL Policy for the Flow Matrix Synergy Service"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/synergy-server/enable": {
+    "name": "Enabling Status of the Flow Matrix Synergy Service"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/synergy-server/service-address": {
+    "name": "Flow Matrix Synergy Service Address"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/synergy-server/service-port": {
+    "name": "Port Number of the Flow Matrix Synergy Service"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-infos": {
+    "name": "Communication Domain Information List"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-infos/comm-info": {
+    "name": "Communication Domain Information"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-infos/comm-info/task-id": {
+    "name": "Task ID"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-infos/comm-info/comm-name": {
+    "name": "Communication Domain Name"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-infos/comm-info/comm-init-time": {
+    "name": "Communication Domain Initialization Time"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-infos/comm-info/packet-id": {
+    "name": "Data Packet Sequence Number"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-infos/comm-info/packet-num": {
+    "name": "Total Number of Data Packets"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-infos/comm-info/msg-version": {
+    "name": "Notification Data Version Number"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-infos/comm-info/payload": {
+    "name": "Notification Data"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-infos/comm-info/time": {
+    "name": "Notification Data Generation Time"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-op-infos": {
+    "name": "Communication Domain Operator Information List"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-op-infos/comm-op-info": {
+    "name": "Communication Domain Operator Information"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-op-infos/comm-op-info/task-id": {
+    "name": "Task ID"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-op-infos/comm-op-info/comm-name": {
+    "name": "Communication Domain Name"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-op-infos/comm-op-info/comm-init-time": {
+    "name": "Communication Domain Initialization Time"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-op-infos/comm-op-info/operator": {
+    "name": "Operator Type"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-op-infos/comm-op-info/algorithm": {
+    "name": "Algorithm Type"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-op-infos/comm-op-info/root-rank": {
+    "name": "Root Node ID"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-op-infos/comm-op-info/traffic-cnt": {
+    "name": "Traffic Count"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-op-infos/comm-op-info/source-port-id": {
+    "name": "Source UDP Port Number for Communication"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-op-infos/comm-op-info/mask-len": {
+    "name": "Mask Length of Source UDP Port for Communication"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-op-infos/comm-op-info/time": {
+    "name": "Notification Data Generation Time"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-adj-infos": {
+    "name": "Communication Domain Algorithm Adjacency Info List"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-adj-infos/comm-adj-info": {
+    "name": "Communication Domain Algorithm Adjacency Info"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-adj-infos/comm-adj-info/task-id": {
+    "name": "Task ID"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-adj-infos/comm-adj-info/comm-name": {
+    "name": "Communication Domain Name"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-adj-infos/comm-adj-info/comm-check-sum": {
+    "name": "Communication Domain Check Value"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-adj-infos/comm-adj-info/operator": {
+    "name": "Operator Type"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-adj-infos/comm-adj-info/algorithm": {
+    "name": "Algorithm Type"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-adj-infos/comm-adj-info/root-rank": {
+    "name": "Root Node ID"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-adj-infos/comm-adj-info/packet-id": {
+    "name": "Data Packet Sequence Number"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-adj-infos/comm-adj-info/packet-num": {
+    "name": "Total Number of Data Packets"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-adj-infos/comm-adj-info/msg-version": {
+    "name": "Notification Data Version Number"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-adj-infos/comm-adj-info/payload": {
+    "name": "Notification Data"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-adj-infos/comm-adj-info/time": {
+    "name": "Notification Data Generation Time"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-rank-infos": {
+    "name": "Communication Domain Global Rank Info List"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-rank-infos/comm-rank-info": {
+    "name": "Communication Domain Global Rank Info"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-rank-infos/comm-rank-info/task-id": {
+    "name": "Task ID"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-rank-infos/comm-rank-info/comm-name": {
+    "name": "Communication Domain Name"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-rank-infos/comm-rank-info/comm-init-time": {
+    "name": "Communication Domain Initialization Time"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-rank-infos/comm-rank-info/packet-id": {
+    "name": "Data Packet Sequence Number"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-rank-infos/comm-rank-info/packet-num": {
+    "name": "Total Number of Data Packets"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-rank-infos/comm-rank-info/msg-version": {
+    "name": "Notification Data Version Number"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-rank-infos/comm-rank-info/payload": {
+    "name": "Notification Data"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-rank-infos/comm-rank-info/time": {
+    "name": "Notification Data Generation Time"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-rank-agg-infos": {
+    "name": "Communication Domain Global Rank Distribution List"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-rank-agg-infos/comm-rank-agg-info": {
+    "name": "Global Rank Distribution in a Communication Domain"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-rank-agg-infos/comm-rank-agg-info/task-id": {
+    "name": "Task ID"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-rank-agg-infos/comm-rank-agg-info/comm-name": {
+    "name": "Communication Domain Name"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-rank-agg-infos/comm-rank-agg-info/comm-init-time": {
+    "name": "Communication Domain Initialization Time"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-rank-agg-infos/comm-rank-agg-info/packet-id": {
+    "name": "Data Packet Sequence Number"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-rank-agg-infos/comm-rank-agg-info/packet-num": {
+    "name": "Total Number of Data Packets"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-rank-agg-infos/comm-rank-agg-info/msg-version": {
+    "name": "Notification Data Version Number"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-rank-agg-infos/comm-rank-agg-info/payload": {
+    "name": "Notification Data"
+  },
+  "/huawei-ai-fabric:ai-fabric/flow-matrix/comm-rank-agg-infos/comm-rank-agg-info/time": {
+    "name": "Notification Data Generation Time"
+  }
+}

@@ -1,0 +1,440 @@
+{
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-client-if": {
+    "name": "DHCP client attributes"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-client-if/address-allocation": {
+    "name": "Dhcp alloc"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-client-if/option60": {
+    "name": "Configure Option60"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-client-if/client-id": {
+    "name": "Client-id"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-client-if/host-name": {
+    "name": "Specifying the Host Name of a DHCP/BOOTP Client"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-client-if/request-option": {
+    "name": "Request option"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-relay-attribute": {
+    "name": "Dhcp relay attribute"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-relay-attribute/enable": {
+    "name": "Enable"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-relay-attribute/gateway-enable": {
+    "name": "DHCP relay gateway switching"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-relay-attribute/server-group-name": {
+    "name": "DHCP server group name"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-relay-attribute/giaddr-out-address": {
+    "name": "Giaddr-out-address"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-relay-attribute/source-port": {
+    "name": "Source interface"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-relay-attribute/information": {
+    "name": "Enable the Option 82 for the DHCP relay agent"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-relay-attribute/information-strategy": {
+    "name": "Processing Option 82 information in DHCP"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-relay-attribute/option82": {
+    "name": "Option82"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-relay-attribute/option82/vss-control-enable": {
+    "name": "Insert VSS information"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-relay-attribute/option82/link-selection-enable": {
+    "name": "Insert link selection information"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-relay-attribute/option82/link-selection-address": {
+    "name": "Link selection sub-option IP address"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-relay-attribute/option82/server-id-override-enable": {
+    "name": "Server ID override"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-relay-attribute/option82/vendor-specific-enable": {
+    "name": "Server ID override"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-relay-attribute/server-addresses": {
+    "name": "Server addresses"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-relay-attribute/server-addresses/server-address": {
+    "name": "Server address"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-relay-attribute/server-addresses/server-address/address": {
+    "name": "Address"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-relay-attribute/server-addresses/server-address/vendor": {
+    "name": "Enable to carry a vendor identifier"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-relay-attribute/server-addresses/server-address/option-code": {
+    "name": "Option code"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-relay-attribute/server-addresses/server-address/vendor-class": {
+    "name": "Vendor identifier"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-relay-attribute/gateway-addresses": {
+    "name": "List of configuring a gateway address list"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-relay-attribute/gateway-addresses/gateway-address": {
+    "name": "Configure a gateway address instance"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-relay-attribute/gateway-addresses/gateway-address/vendor": {
+    "name": "Enable/disable to carry vendor identifier"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-relay-attribute/gateway-addresses/gateway-address/option-code": {
+    "name": "Option code 0 means NULL"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-relay-attribute/gateway-addresses/gateway-address/vendor-class": {
+    "name": "Vendor identifier"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-relay-attribute/gateway-addresses/gateway-address/ip-address": {
+    "name": "Gateway address"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-relay-attribute/vpn-server-addresses": {
+    "name": "Server addresses"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-relay-attribute/vpn-server-addresses/vpn-server-address": {
+    "name": "Server address"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-relay-attribute/vpn-server-addresses/vpn-server-address/address": {
+    "name": "Server address"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-relay-attribute/vpn-server-addresses/vpn-server-address/vpn-name": {
+    "name": "VPN name"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-relay-attribute/relay-source-address": {
+    "name": "Configure DHCP relay source address"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-relay-attribute/relay-source-address/vpn-name": {
+    "name": "VPN-NAME"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-relay-attribute/relay-source-address/source-address": {
+    "name": "Source address"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-relay-attribute/opt82-vendor-specifics": {
+    "name": "Option82 vendor specifics"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-relay-attribute/opt82-vendor-specifics/opt82-vendor-specific": {
+    "name": "Option82 vendor specific"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-relay-attribute/opt82-vendor-specifics/opt82-vendor-specific/sub-option-number": {
+    "name": "Suboption of option82"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-relay-attribute/opt82-vendor-specifics/opt82-vendor-specific/sub-option-format": {
+    "name": "Suboption format"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-relay-attribute/opt82-vendor-specifics/opt82-vendor-specific/ip-address": {
+    "name": "IPv4 address"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:interface-ip-pool": {
+    "name": "Interface IP Pool"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:interface-ip-pool/select-type": {
+    "name": "Select type"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:interface-ip-pool/select-type/global": {
+    "name": "Select Global"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:interface-ip-pool/select-type/global/select-global": {
+    "name": "Select Global"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-if": {
+    "name": "Configure DHCP attributes"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-if/option82-formats": {
+    "name": "List of DHCP option82 formats"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-if/option82-formats/option82-format": {
+    "name": "Configure a DHCP option82 format"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-if/option82-formats/option82-format/sub-option-type": {
+    "name": "DHCP option82 sub-option type"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-if/option82-formats/option82-format/option82-format": {
+    "name": "DHCP option82 format"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-if/option82-formats/option82-format/user-define-text": {
+    "name": "DHCP option82 user-defined string"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-if/option82-vlan-formats": {
+    "name": "List of DHCP option82 formats with VLAN"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-if/option82-vlan-formats/option82-vlan-format": {
+    "name": "Configure a DHCP option82 format with VLAN"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-if/option82-vlan-formats/option82-vlan-format/vlan-id": {
+    "name": "Indicate an outer VLAN ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-if/option82-vlan-formats/option82-vlan-format/cevlan-id": {
+    "name": "Indicates an inner VLAN ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-if/option82-vlan-formats/option82-vlan-format/sub-option-type": {
+    "name": "DHCP option82 sub-option type"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-if/option82-vlan-formats/option82-vlan-format/option82-format": {
+    "name": "DHCP option82 format"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-if/option82-vlan-formats/option82-vlan-format/user-define-text": {
+    "name": "DHCP option82 user-defined string"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-if/option82-insert-setting": {
+    "name": "Configure interfaces to insert DHCP option82"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-if/option82-insert-setting/option82-insert-format": {
+    "name": "Specify DHCP option82 insertion format"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-if/option82-insert-setting/option82-insert-format/insert-format": {
+    "name": "Configure interfaces to insert DHCP option82"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-if/option82-insert-setting/option82-insert-format/insert-format/insert": {
+    "name": "Insert DHCP option82"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-if/option82-insert-setting/option82-insert-format/rebuild-format": {
+    "name": "Configure to forcibly insert DHCP option82"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-if/option82-insert-setting/option82-insert-format/rebuild-format/rebuild": {
+    "name": "Forcibly insert DHCP option82"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-if/append-vendor-specific": {
+    "name": "Insert the Sub9 suboption"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-if/append-vendor-specific/enble": {
+    "name": "Insert the Sub9 suboption into Option 82"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-if/encapsulation": {
+    "name": "Suboptions in the DHCP Option 82 field"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-if/encapsulation/suboption": {
+    "name": "Suboptions in the DHCP Option 82 field"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-if/subscriber-id": {
+    "name": "Sub6 in the DHCP Option 82 field"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-if/subscriber-id/ascii-text": {
+    "name": "DHCP option82 ascii-type format"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-if/subscriber-id/hex-text": {
+    "name": "DHCP option82 hex-type format"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-snooping-if": {
+    "name": "Configure DHCP snooping interface attributes"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-snooping-if/basic-attribute": {
+    "name": "Configure basic DHCP snooping attribute"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-snooping-if/basic-attribute/enable": {
+    "name": "Enable/disable DHCP snooping on an interface"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-snooping-if/basic-attribute/trust-enable": {
+    "name": "Enable/disable trusted interfaces"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-snooping-if/basic-attribute/rate-limit": {
+    "name": "The DHCP rate limit on interface"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-snooping-if/basic-attribute/check-rate-enable": {
+    "name": "Enable DHCP packet rate limit"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-snooping-if/basic-attribute/alarm-reply-enable": {
+    "name": "Enabling/Disabling the Packet Alarm Function"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-snooping-if/basic-attribute/alarm-reply-threshold": {
+    "name": "Alarm threshold for untrusted packets"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-snooping-if/basic-attribute/check-mac-enable": {
+    "name": "Enable/disable consistency check on MAC addresses"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-snooping-if/basic-attribute/alarm-mac-enable": {
+    "name": "Enable/disable consistency check on MAC addresses"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-snooping-if/basic-attribute/alarm-mac-threshold": {
+    "name": "Alarm threshold for MAC address check"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-snooping-if/basic-attribute/check-user-bind-enable": {
+    "name": "Enable the check on DHCP snooping binding table"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-snooping-if/basic-attribute/alarm-user-bind-enable": {
+    "name": "Enable the DHCP snooping alarm function"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-snooping-if/basic-attribute/alarm-user-bind-threshold": {
+    "name": "Configuring the Alarm Threshold for DHCP Snooping"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-snooping-if/basic-attribute/max-user-number": {
+    "name": "Maximum number of users allowed on a interface"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-dhcp:dhcp-bd": {
+    "name": "Configure DHCP attributes in BDs"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-dhcp:dhcp-bd/option82-insert-setting": {
+    "name": "Configure all interfaces in a BD"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-dhcp:dhcp-bd/option82-insert-setting/option82-insert-format": {
+    "name": "Specify DHCP option82 insertion format"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-dhcp:dhcp-bd/option82-insert-setting/option82-insert-format/insert-format": {
+    "name": "Configure to insert DHCP option82"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-dhcp:dhcp-bd/option82-insert-setting/option82-insert-format/insert-format/insert": {
+    "name": "Insert DHCP option82"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-dhcp:dhcp-bd/option82-insert-setting/option82-insert-format/rebuild-format": {
+    "name": "Configure to forcibly insert DHCP option82"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-dhcp:dhcp-bd/option82-insert-setting/option82-insert-format/rebuild-format/rebuild": {
+    "name": "Forcibly insert DHCP option82"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-dhcp:dhcp-bd/encapsulation": {
+    "name": "Configuring the DHCP Option 82 Suboption Insertion"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-dhcp:dhcp-bd/encapsulation/suboption": {
+    "name": "Configuring the DHCP Option 82 Suboption Insertion"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-dhcp:dhcp-snooping-bd": {
+    "name": "Configuring DHCP snooping"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-dhcp:dhcp-snooping-bd/basic-attribute": {
+    "name": "Configure basic attributes of DHCP snooping"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-dhcp:dhcp-snooping-bd/basic-attribute/enable": {
+    "name": "Enable/Disable DHCP snooping in BD"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-dhcp:dhcp-snooping-bd/basic-attribute/nni-trust-enable": {
+    "name": "Enable/disable trusted network node interface"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-dhcp:dhcp-snooping-bd/basic-attribute/alarm-reply-enable": {
+    "name": "Enable/disable alarm of dropping untrusted packet"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-dhcp:dhcp-snooping-bd/basic-attribute/alarm-reply-threshold": {
+    "name": "Threshold of dropping untrusted packet alarm"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-dhcp:dhcp-snooping-bd/basic-attribute/check-mac-enable": {
+    "name": "Enable/disable MAC check"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-dhcp:dhcp-snooping-bd/basic-attribute/alarm-mac-enable": {
+    "name": "Enable consistency check alarm on MAC addresses"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-dhcp:dhcp-snooping-bd/basic-attribute/alarm-mac-threshold": {
+    "name": "Consistency check alarm threshold on MAC addresses"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-dhcp:dhcp-snooping-bd/basic-attribute/check-request-enable": {
+    "name": "Enable/disable the user binding table check"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-dhcp:dhcp-snooping-bd/basic-attribute/alarm-request-enable": {
+    "name": "Enable the user binding table alarm function"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-dhcp:dhcp-snooping-bd/basic-attribute/alarm-request-threshold": {
+    "name": "User bind table alarm threshold"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-dhcp:dhcp-vlan": {
+    "name": "Configure DHCP attributes in a VLAN"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-dhcp:dhcp-vlan/interface-option82-insert-settings": {
+    "name": "Interface Option82 insert settings"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-dhcp:dhcp-vlan/interface-option82-insert-settings/interface-option82-insert-setting": {
+    "name": "Configure all interfaces in the VLAN"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-dhcp:dhcp-vlan/interface-option82-insert-settings/interface-option82-insert-setting/if-name": {
+    "name": "Interface name"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-dhcp:dhcp-vlan/interface-option82-insert-settings/interface-option82-insert-setting/option82-insert-format": {
+    "name": "Specify DHCP option82 insertion format"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-dhcp:dhcp-vlan/interface-option82-insert-settings/interface-option82-insert-setting/option82-insert-format/insert-format": {
+    "name": "Configure to insert DHCP Option82"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-dhcp:dhcp-vlan/interface-option82-insert-settings/interface-option82-insert-setting/option82-insert-format/insert-format/insert": {
+    "name": "Insert DHCP Option82"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-dhcp:dhcp-vlan/interface-option82-insert-settings/interface-option82-insert-setting/option82-insert-format/rebuild-format": {
+    "name": "Configure to forcibly insert DHCP Option82"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-dhcp:dhcp-vlan/interface-option82-insert-settings/interface-option82-insert-setting/option82-insert-format/rebuild-format/rebuild": {
+    "name": "Forcibly insert DHCP Option82"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-dhcp:dhcp-vlan/option82-insert-setting": {
+    "name": "Insert or forcibly insert DHCP option82"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-dhcp:dhcp-vlan/option82-insert-setting/option82-insert-format": {
+    "name": "Specify DHCP option82 insertion format"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-dhcp:dhcp-vlan/option82-insert-setting/option82-insert-format/insert-format": {
+    "name": "Configure to insert DHCP option82"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-dhcp:dhcp-vlan/option82-insert-setting/option82-insert-format/insert-format/insert": {
+    "name": "Insert DHCP Option82"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-dhcp:dhcp-vlan/option82-insert-setting/option82-insert-format/rebuild-format": {
+    "name": "Configure to forcibly insert DHCP option82"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-dhcp:dhcp-vlan/option82-insert-setting/option82-insert-format/rebuild-format/rebuild": {
+    "name": "Forcibly insert DHCP option82"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-dhcp:dhcp-vlan/append-vendor-specific": {
+    "name": "Insert Sub9 suboption into Option 82"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-dhcp:dhcp-vlan/append-vendor-specific/enble": {
+    "name": "Enable inserting the Sub9 suboption into Option 82"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-dhcp:dhcp-vlan/encapsulation": {
+    "name": "Configuring the DHCP Option 82 Suboption Insertion"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-dhcp:dhcp-vlan/encapsulation/suboption": {
+    "name": "Configuring the DHCP Option 82 Suboption Insertion"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-dhcp:dhcp-snooping-vlan": {
+    "name": "Configure DHCP snooping VLAN attributes"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-dhcp:dhcp-snooping-vlan/basic-attribute": {
+    "name": "Configure basic attributes of DHCP snooping"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-dhcp:dhcp-snooping-vlan/basic-attribute/enable": {
+    "name": "Enable/disable DHCP snooping in a VLAN"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-dhcp:dhcp-snooping-vlan/basic-attribute/check-rate-enable": {
+    "name": "Enable rate limit of DHCP packets"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-dhcp:dhcp-snooping-vlan/basic-attribute/vlan-rate": {
+    "name": "The DHCP rate limit in a VLAN"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-dhcp:dhcp-snooping-vlan/basic-attribute/alarm-reply-enable": {
+    "name": "Enabling/Disabling the Alarm Function"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-dhcp:dhcp-snooping-vlan/basic-attribute/alarm-reply-threshold": {
+    "name": "Untrusted packet discarding alarm threshold"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-dhcp:dhcp-snooping-vlan/basic-attribute/check-mac-enable": {
+    "name": "Enable/disable consistency check on MAC address"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-dhcp:dhcp-snooping-vlan/basic-attribute/alarm-mac-enable": {
+    "name": "Enable the consistency check alarm on MAC address"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-dhcp:dhcp-snooping-vlan/basic-attribute/alarm-mac-threshold": {
+    "name": "Consistency check alarm threshold on MAC address"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-dhcp:dhcp-snooping-vlan/basic-attribute/check-user-bind-enable": {
+    "name": "Enable the check on DHCP snooping binding table"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-dhcp:dhcp-snooping-vlan/basic-attribute/alarm-user-bind-enable": {
+    "name": "Enable/disable the user binding table alarm"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-dhcp:dhcp-snooping-vlan/basic-attribute/alarm-user-bind-threshold": {
+    "name": "User binding table alarm threshold"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-dhcp:dhcp-snooping-vlan/basic-attribute/max-user-number": {
+    "name": "Maximum number of users allowed on interfaces"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-dhcp:dhcp-snooping-vlan/vlan-trusts": {
+    "name": "Configuring informations of trusted interfaces"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-dhcp:dhcp-snooping-vlan/vlan-trusts/vlan-trust": {
+    "name": "Configuring VLAN Trusted Interfaces"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-dhcp:dhcp-snooping-vlan/vlan-trusts/vlan-trust/if-name": {
+    "name": "Names of trusted interface"
+  }
+}

@@ -2,7 +2,7 @@
 # 用法: make <target>
 
 .PHONY: setup bootstrap test lint compliance hook-install hook-verify help \
-	staging-up staging-down staging-logs staging-ps e2e-local gen-contract gen-yang gen-crd dev
+	staging-up staging-down staging-logs staging-ps e2e-local gen-contract gen-yang gen-crd sync-snd-i18n dev
 
 # 默认目标
 help: ## 显示所有可用目标
@@ -78,6 +78,12 @@ staging-logs: ## 跟随 staging 日志
 
 dev: ## 本地全栈热循环（免 docker）：go run 后端(:8080) + vite dev 前端(:3000, HMR)
 	@bash scripts/dev.sh
+
+sync-snd-i18n: ## 同步 SND i18n res 到前端入库副本（前端镜像上下文读不到 snd/，UI-03）
+	@rm -rf frontend/src/assets/snd-i18n && mkdir -p frontend/src/assets/snd-i18n
+	@cp -r snd/resources/i18n/zh-cn frontend/src/assets/snd-i18n/zh-cn
+	@cp -r snd/resources/i18n/en-us frontend/src/assets/snd-i18n/en-us
+	@echo "✅ sync-snd-i18n 完成（vendored 副本勿手改，升级 snd 包后重跑）"
 
 gen-contract: ## 生成 API 契约类型：Go 注解 → OpenAPI → 前端 TS（后端为唯一真源）
 	cd backend && go tool swag init -g main.go -o docs/openapi \

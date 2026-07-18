@@ -1,0 +1,140 @@
+{
+  "/huawei-gre:reset-keep-alive": {
+    "name": "Clear Keepalive packet statistics"
+  },
+  "/huawei-gre:reset-keep-alive/input/tnl-name": {
+    "name": "Tunnel name"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-gre:gre": {
+    "name": "Configure Generic Routing Encapsulation"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-gre:gre/bind-src-interface-names": {
+    "name": "Specify the interface bound to a GRE tunnel"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/type/huawei-gre:gre": {
+    "name": "GRE tunnel"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/type/huawei-gre:gre/gre-tunnel": {
+    "name": "GRE Tunnel"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/type/huawei-gre:gre/gre-tunnel/source": {
+    "name": "Source interface"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/type/huawei-gre:gre/gre-tunnel/source/ip-info": {
+    "name": "Source IPv4 address"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/type/huawei-gre:gre/gre-tunnel/source/ip-info/address": {
+    "name": "Source IPv4 Address"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/type/huawei-gre:gre/gre-tunnel/source/if-info": {
+    "name": "Source interface name"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/type/huawei-gre:gre/gre-tunnel/source/if-info/if-name": {
+    "name": "Source Interface Name"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/type/huawei-gre:gre/gre-tunnel/destination": {
+    "name": "Configure Destination Address"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/type/huawei-gre:gre/gre-tunnel/destination/vpn-name": {
+    "name": "Destination VPN name"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/type/huawei-gre:gre/gre-tunnel/destination/address": {
+    "name": "Destination IPv4 Address"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/type/huawei-gre:gre/gre-tunnel/key": {
+    "name": "GRE tunnel key"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/type/huawei-gre:gre/gre-tunnel/keep-alive-enable": {
+    "name": "GRE keep alive"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/type/huawei-gre:gre/gre-tunnel/keep-alive-enable/period": {
+    "name": "Interval at which Keepalive packets are sent"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/type/huawei-gre:gre/gre-tunnel/keep-alive-enable/retry-cnt": {
+    "name": "Number of retry times for Keepalive packets"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/type/huawei-gre:gre/gre-tunnel/path-mtu-enable": {
+    "name": "Tunnel path MTU learning"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/type/huawei-gre:gre/gre-tunnel/statistic-enable": {
+    "name": "GRE tunnel statistic"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/type/huawei-gre:gre/gre-tunnel/checksum-enable": {
+    "name": "GRE tunnel checksum"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/type/huawei-gre:gre/gre-tunnel/mtu-check-enable": {
+    "name": "Enabling/Disabling MTU Authentication for GRE Tunnel"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/type/huawei-gre:gre/gre-tunnel/keep-alive": {
+    "name": "Statistics of Keepalive packets"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/type/huawei-gre:gre/gre-tunnel/keep-alive/send-req-cnt": {
+    "name": "Number of sent Keepalive packets"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/type/huawei-gre:gre/gre-tunnel/keep-alive/recv-rsp-cnt": {
+    "name": "Number of received Keepalive response packets"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/type/huawei-gre:gre/gre-tunnel/keep-alive/recv-req-cnt": {
+    "name": "Number of received Keepalive packets"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/type/huawei-gre:gre/gre-tunnel/keep-alive/send-rsp-cnt": {
+    "name": "Number of sent Keepalive response packets"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/type/huawei-gre:gre6": {
+    "name": "GRE IPv6 Tunnel"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/type/huawei-gre:gre6/gre6-tunnel": {
+    "name": "Configuring GRE IPv6 Tunnel"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/type/huawei-gre:gre6/gre6-tunnel/source": {
+    "name": "Source IP Address"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/type/huawei-gre:gre6/gre6-tunnel/source/ip-info": {
+    "name": "IPv6 Source Address"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/type/huawei-gre:gre6/gre6-tunnel/source/ip-info/address": {
+    "name": "Source Interface IPv6 Address"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/type/huawei-gre:gre6/gre6-tunnel/source/if-info": {
+    "name": "Source Interface"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/type/huawei-gre:gre6/gre6-tunnel/source/if-info/if-name": {
+    "name": "Source Interface Name"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/type/huawei-gre:gre6/gre6-tunnel/destination": {
+    "name": "Configure GRE IPv6 Tunnel DA"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/type/huawei-gre:gre6/gre6-tunnel/destination/vpn-name": {
+    "name": "Configure Related VPN for Destination Address"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/type/huawei-gre:gre6/gre6-tunnel/destination/address": {
+    "name": "Configure Destination IPv6 Address"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/type/huawei-gre:p2mp-gre": {
+    "name": "MGRE"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/type/huawei-gre:p2mp-gre/mgre-tunnel": {
+    "name": "Configuring mGRE Tunnel"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/type/huawei-gre:p2mp-gre/mgre-tunnel/source": {
+    "name": "Tunnel Source Information"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/type/huawei-gre:p2mp-gre/mgre-tunnel/source/ip-info": {
+    "name": "IP Address Information"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/type/huawei-gre:p2mp-gre/mgre-tunnel/source/ip-info/address": {
+    "name": "Configure Source Interface IPv4 Address"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/type/huawei-gre:p2mp-gre/mgre-tunnel/source/if-info": {
+    "name": "Interface Info"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/type/huawei-gre:p2mp-gre/mgre-tunnel/source/if-info/if-name": {
+    "name": "Configure Source Interface Name"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/type/huawei-gre:p2mp-gre/mgre-tunnel/key": {
+    "name": "GRE Tunnel Session ID"
+  },
+  "/rpcs/huawei-gre:gre/reset-keep-alive": {
+    "name": "Clear Keepalive packet statistics"
+  }
+}

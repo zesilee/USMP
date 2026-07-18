@@ -1,0 +1,2705 @@
+{
+  "/huawei-ospfv2:ospfv2": {
+    "name": "全局属性"
+  },
+  "/huawei-ospfv2:ospfv2/check-rt-id": {
+    "name": "是否使能Router ID冲突自恢复"
+  },
+  "/huawei-ospfv2:ospfv2/check-rt-id/conflict-flag": {
+    "name": "是否使能Router ID冲突自恢复"
+  },
+  "/huawei-ospfv2:ospfv2/advertise-max-cost": {
+    "name": "是否使能OSPF LSA发布最大COST"
+  },
+  "/huawei-ospfv2:ospfv2/advertise-max-cost/enable": {
+    "name": "是否使能OSPF LSA发布最大COST"
+  },
+  "/huawei-ospfv2:ospfv2/session-car": {
+    "name": "OSPF Session CAR功能"
+  },
+  "/huawei-ospfv2:ospfv2/session-car/enable": {
+    "name": "使能OSPF Session car"
+  },
+  "/huawei-ospfv2:ospfv2/session-car/cir-interval": {
+    "name": "CIR值"
+  },
+  "/huawei-ospfv2:ospfv2/session-car/cbs-interval": {
+    "name": "CBS值"
+  },
+  "/huawei-ospfv2:ospfv2/session-car/pir-interval": {
+    "name": "PIR值"
+  },
+  "/huawei-ospfv2:ospfv2/session-car/pbs-interval": {
+    "name": "PBS值"
+  },
+  "/huawei-ospfv2:ospfv2/maxage-lsa-protect": {
+    "name": "OSPF异常清除LSA自动保护"
+  },
+  "/huawei-ospfv2:ospfv2/maxage-lsa-protect/disable": {
+    "name": "禁止OSPF异常清除LSA自动保护"
+  },
+  "/huawei-ospfv2:ospfv2/suppress-flap-intf": {
+    "name": "OSPF接口震荡抑制"
+  },
+  "/huawei-ospfv2:ospfv2/suppress-flap-intf/disable": {
+    "name": "去使能OSPF接口震荡抑制"
+  },
+  "/huawei-ospfv2:ospfv2/mib-binding": {
+    "name": "OSPF进程绑定到SNMP"
+  },
+  "/huawei-ospfv2:ospfv2/mib-binding/process-id": {
+    "name": "OSPF进程ID"
+  },
+  "/huawei-ospfv2:ospfv2/flush-source-trace": {
+    "name": "OSPF Flush溯源"
+  },
+  "/huawei-ospfv2:ospfv2/flush-source-trace/enable": {
+    "name": "使能OSPF Flush溯源"
+  },
+  "/huawei-ospfv2:ospfv2/flush-source-trace/vlink-enable": {
+    "name": "使能OSPF虚连接Flush溯源"
+  },
+  "/huawei-ospfv2:ospfv2/flush-source-trace/port": {
+    "name": "UDP端口号"
+  },
+  "/huawei-ospfv2:ospfv2/flush-source-trace/vlink-port": {
+    "name": "虚连接UDP端口号"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-ospfv2:ospf-import-rts": {
+    "name": "OSPF公私网互引"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-ospfv2:ospf-import-rts/ospf-import-rt": {
+    "name": "OSPF公私网互引"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-ospfv2:ospf-import-rts/ospf-import-rt/src-vrf": {
+    "name": "源VPN实例"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-ospfv2:ospf-import-rts/ospf-import-rt/process-id": {
+    "name": "进程号"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-ospfv2:ospf-import-rts/ospf-import-rt/valid-route": {
+    "name": "有效路由"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-ospfv2:ospf-import-rts/ospf-import-rt/policy-type": {
+    "name": "策略类型"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-ospfv2:ospf-import-rts/ospf-import-rt/policy-type/route-policy": {
+    "name": "路由策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-ospfv2:ospf-import-rts/ospf-import-rt/policy-type/route-policy/route-policy": {
+    "name": "路由策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-ospfv2:ospf-import-rts/ospf-import-rt/policy-type/route-filter": {
+    "name": "路由过滤器"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-ospfv2:ospf-import-rts/ospf-import-rt/policy-type/route-filter/route-filter": {
+    "name": "过滤策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2": {
+    "name": "OSPF协议"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/gtsm": {
+    "name": "OSPF GTSM能力"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/gtsm/hops": {
+    "name": "TTL值"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/gtsm/nonstandard-multicast": {
+    "name": "发送/接收的组播报文TTL是255"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites": {
+    "name": "OSPF进程"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site": {
+    "name": "OSPF进程"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/process-id": {
+    "name": "进程号"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/description": {
+    "name": "描述信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/router-id": {
+    "name": "路由器ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/opaque": {
+    "name": "Opaque-LSA能力"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/rfc1583-compatible": {
+    "name": "兼容RFC1583"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/silent-all-interface": {
+    "name": "抑制收发报文"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/retransmission-limit": {
+    "name": "使能上限数目"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/retransmission-limit-value": {
+    "name": "最大重传限制数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/safe-sync": {
+    "name": "安全同步"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/traffic-adj": {
+    "name": "流量调节信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/traffic-adv": {
+    "name": "流量调节发布"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/local-mt": {
+    "name": "使能本地MT"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/advertise-mpls-lsr-id": {
+    "name": "使能mpls"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/advertise-mpls-lsr-id-cost": {
+    "name": "MPLS-LSR-ID开销"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/suppress-reachability": {
+    "name": "使能可达性抑制"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/lsa-refresh": {
+    "name": "过大LSA age刷新功能"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/lsdb-overflow-limit": {
+    "name": "使能LSDB Overflow"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/peer-flapping-suppress": {
+    "name": "邻居震荡抑制能力"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/shutdown": {
+    "name": "关闭OSPF服务"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/sham-hello": {
+    "name": "伪hello"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/max-link-cost": {
+    "name": "配置最大的link-cost值"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/maxage-lsa": {
+    "name": "路由计算延时间隔"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/private-net": {
+    "name": "OSPF私网"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/private-net/eca-route": {
+    "name": "使能ECA路由类型"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/private-net/route-tag": {
+    "name": "设置路由Tag值"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/private-net/route-tag/disable": {
+    "name": "去使能使用Tag进行环路检测"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/private-net/route-tag/disable/disable": {
+    "name": "禁止使用tag检测环路"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/private-net/route-tag/value": {
+    "name": "设置Tag值"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/private-net/route-tag/value/value": {
+    "name": "配置VPN引入路由的tag值"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/private-net/vpn-capability": {
+    "name": "去使能VPN路由环路检测"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/private-net/domain-id": {
+    "name": "域标识符"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/private-net/domain-id/domain-id": {
+    "name": "域标识符"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/private-net/domain-id/type": {
+    "name": "域标识符的类型"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/private-net/domain-id/value": {
+    "name": "域标识符类型的值"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/private-net/domain-id-secondarys": {
+    "name": "次级域标识符"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/private-net/domain-id-secondarys/domain-id-secondary": {
+    "name": "次级域标识符"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/private-net/domain-id-secondarys/domain-id-secondary/domain-id": {
+    "name": "域标识符"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/private-net/domain-id-secondarys/domain-id-secondary/type": {
+    "name": "域标识符的类型"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/private-net/domain-id-secondarys/domain-id-secondary/value": {
+    "name": "域标识符类型的值"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/host-name": {
+    "name": "主机名"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/host-name/enable": {
+    "name": "使能主机名"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/host-name/value": {
+    "name": "主机名"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/bandwidth": {
+    "name": "计算链路开销参考值"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/bandwidth/config-bw-enable": {
+    "name": "使能bandwidth-config"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/bandwidth/reference-value": {
+    "name": "计算链路开销参考值"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/timer": {
+    "name": "进程timer配置"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/timer/lsa-arrival": {
+    "name": "LSA接收的时间间隔"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/timer/lsa-arrival/timer-type": {
+    "name": "计时器设置"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/timer/lsa-arrival/timer-type/timer": {
+    "name": "接收LSA的间隔计时器"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/timer/lsa-arrival/timer-type/timer/interval": {
+    "name": "接收时间间隔"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/timer/lsa-arrival/timer-type/intelligent-timer": {
+    "name": "指定智能定时器"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/timer/lsa-arrival/timer-type/intelligent-timer/max-interval": {
+    "name": "接收最长间隔时间(毫秒)"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/timer/lsa-arrival/timer-type/intelligent-timer/start-interval": {
+    "name": "接收初始间隔时间(毫秒)"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/timer/lsa-arrival/timer-type/intelligent-timer/hold-interval": {
+    "name": "接收基数间隔时间(毫秒)"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/timer/lsa-arr-supp-flap": {
+    "name": "LSA接收震荡抑制"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/timer/lsa-arr-supp-flap/interval": {
+    "name": "抑制时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/timer/lsa-arr-supp-flap/threshold-count": {
+    "name": "抑制门限值"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/timer/lsa-originate": {
+    "name": "LSA的更新时间间隔"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/timer/lsa-originate/other-type-interval": {
+    "name": "更新时间间隔"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/timer/lsa-originate/timer-type": {
+    "name": "定时器设置"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/timer/lsa-originate/timer-type/intelligent-timer": {
+    "name": "定时器设置"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/timer/lsa-originate/timer-type/intelligent-timer/max-interval": {
+    "name": "更新最长间隔时间(毫秒)"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/timer/lsa-originate/timer-type/intelligent-timer/start-interval": {
+    "name": "更新初始间隔时间(毫秒)"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/timer/lsa-originate/timer-type/intelligent-timer/hold-interval": {
+    "name": "更新基数间隔时间(毫秒)"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/timer/lsa-org-supp-flap": {
+    "name": "LSA产生震荡抑制"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/timer/lsa-org-supp-flap/interval": {
+    "name": "抑制时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/timer/lsa-org-supp-flap/threshold-count": {
+    "name": "抑制门限值"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/timer/spf-schedule": {
+    "name": "OSPF路由计算时间间隔"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/timer/spf-schedule/schedule-type": {
+    "name": "SPF调度间隔"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/timer/spf-schedule/schedule-type/timer": {
+    "name": "定时器设置"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/timer/spf-schedule/schedule-type/timer/interval": {
+    "name": "SPF计算间隔时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/timer/spf-schedule/schedule-type/intelligent-timer": {
+    "name": "指定智能计时器"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/timer/spf-schedule/schedule-type/intelligent-timer/max-interval": {
+    "name": "SPF计算最长间隔时间(毫秒)"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/timer/spf-schedule/schedule-type/intelligent-timer/start-interval": {
+    "name": "SPF计算初始间隔时间(毫秒)"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/timer/spf-schedule/schedule-type/intelligent-timer/hold-interval": {
+    "name": "SPF计算基数间隔时间(毫秒)"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/timer/spf-schedule/schedule-type/intelligent-timer/conserv-flag": {
+    "name": "SPF保守标志"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/timer/spf-schedule/schedule-type/millisecond": {
+    "name": "设置间隔"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/timer/spf-schedule/schedule-type/millisecond/millisecond": {
+    "name": "SPF计算间隔时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/bfd": {
+    "name": "进程BFD配置"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/bfd/enable": {
+    "name": "使能BFD特性"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/bfd/min-rx": {
+    "name": "BFD最小接收间隔(毫秒)"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/bfd/min-tx": {
+    "name": "BFD最小发送间隔(毫秒)"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/bfd/detect-multiplier": {
+    "name": "本地检测倍数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/bfd/incr-cost": {
+    "name": "BFD联动cost"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/bfd/frr-binding": {
+    "name": "FRR配置BFD绑定链路状态"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/metric-delay": {
+    "name": "时延"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/metric-delay/adv-enable": {
+    "name": "使能发布时延"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/metric-delay/suppress-timer": {
+    "name": "抑制定时器"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/metric-delay/suppress-percent": {
+    "name": "抑制百分比阈值"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/metric-delay/suppress-absolute": {
+    "name": "抑制绝对值阈值"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/bier": {
+    "name": "OSPF的BIER命令"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/bier/enable": {
+    "name": "启用BIER"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/stub-router": {
+    "name": "配置Stub设备"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/stub-router/flag": {
+    "name": "Stub路由器"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/stub-router/interval": {
+    "name": "On-startup时间间隔"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/stub-router/include-stub": {
+    "name": "Router-LSA stub link设置"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/stub-router/external-lsa": {
+    "name": "External-LSA设置"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/stub-router/external-cost": {
+    "name": "External-LSA开销"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/stub-router/summary-lsa": {
+    "name": "Summary-LSA设置"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/stub-router/summary-cost": {
+    "name": "Summary-LSA开销"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/bgp-ls": {
+    "name": "OSPF拓扑发布功能"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/bgp-ls/enable": {
+    "name": "使能BGP-LS"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/bgp-ls/identifier": {
+    "name": "拓扑标识"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/import-limit": {
+    "name": "引入路由限制"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/import-limit/max-number": {
+    "name": "使能引入路由限制"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/import-limit/threshold-upper": {
+    "name": "引入路由数量上限阈值"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/import-limit/threshold-lower": {
+    "name": "引入路由数量下限阈值"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/spf-control": {
+    "name": "SPF算法控制"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/spf-control/max-load-balancing": {
+    "name": "等价路由最大数量"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/default-para": {
+    "name": "缺省参数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/default-para/cost": {
+    "name": "缺省度量值"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/default-para/cost/cost-value": {
+    "name": "缺省度量值"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/default-para/cost/cost-value/cost-value": {
+    "name": "缺省度量值"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/default-para/cost/cost-inherit-metric": {
+    "name": "引入路由的开销值为路由自带的cost值"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/default-para/cost/cost-inherit-metric/cost-inherit-metric": {
+    "name": "引入路由的开销值为路由自带的cost值"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/default-para/tag": {
+    "name": "外部路由的标记"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/default-para/type": {
+    "name": "外部路由类型"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/avoid-micro-loop": {
+    "name": "设置OSPF防微环"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/avoid-micro-loop/frr-enable": {
+    "name": "设置OSPF防微环使能功能"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/avoid-micro-loop/frr-rib-update-delay": {
+    "name": "设置OSPF防微环功能路由延时下发时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/avoid-micro-loop/te-tunnel-enable": {
+    "name": "使能TE Tunnel延迟收敛功能"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/avoid-micro-loop/te-tunnel-rib-update-delay": {
+    "name": "TE Tunnel延迟收敛时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/asbr-summary-prefixs": {
+    "name": "ASBR路由聚合"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/asbr-summary-prefixs/asbr-summary-prefix": {
+    "name": "ASBR路由聚合"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/asbr-summary-prefixs/asbr-summary-prefix/prefix": {
+    "name": "IP地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/asbr-summary-prefixs/asbr-summary-prefix/network-mask": {
+    "name": "掩码"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/asbr-summary-prefixs/asbr-summary-prefix/cost": {
+    "name": "设置聚合路由的开销"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/asbr-summary-prefixs/asbr-summary-prefix/distribute-delay": {
+    "name": "延迟发布聚合路由的时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/asbr-summary-prefixs/asbr-summary-prefix/tag": {
+    "name": "用于通过路由策略控制路由发布"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/asbr-summary-prefixs/asbr-summary-prefix/advertise": {
+    "name": "发布路由"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/asbr-summary-prefixs/asbr-summary-prefix/generate-null-zero": {
+    "name": "黑洞路由"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/default-route": {
+    "name": "缺省路由发布"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/default-route/summary": {
+    "name": "配置参数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/default-route/summary/summary": {
+    "name": "配置参数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/default-route/summary/summary/cost": {
+    "name": "度量值"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/default-route/no-summary": {
+    "name": "No summary"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/default-route/no-summary/no-summary": {
+    "name": "缺省路由发布"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/default-route/no-summary/no-summary/enable": {
+    "name": "缺省路由使能"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/default-route/no-summary/no-summary/cost": {
+    "name": "度量值"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/default-route/no-summary/no-summary/type": {
+    "name": "类型"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/default-route/no-summary/no-summary/distribute-delay": {
+    "name": "发布延迟"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/default-route/no-summary/no-summary/mode": {
+    "name": "默认路由模式"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/default-route/no-summary/no-summary/mode/permit-calculate-other": {
+    "name": "计算缺省路由"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/default-route/no-summary/no-summary/mode/permit-calculate-other/permit-calculate-other": {
+    "name": "计算缺省路由"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/default-route/no-summary/no-summary/mode/permit-calculate-other/permit-ibgp": {
+    "name": "匹配IBGP默认路由"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/default-route/no-summary/no-summary/mode/always": {
+    "name": "配置参数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/default-route/no-summary/no-summary/mode/always/always": {
+    "name": "配置参数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/default-route/no-summary/no-summary/policy-type": {
+    "name": "默认路由使用的策略模式"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/default-route/no-summary/no-summary/policy-type/route-policy-name": {
+    "name": "设置默认路由使用的策略模式名字"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/default-route/no-summary/no-summary/policy-type/route-policy-name/route-policy-name": {
+    "name": "路由策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/default-route/no-summary/no-summary/policy-type/route-filter-name": {
+    "name": "设置路由过滤名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/default-route/no-summary/no-summary/policy-type/route-filter-name/route-filter-name": {
+    "name": "路由过滤名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/route-preferences": {
+    "name": "协议路由优先级"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/route-preferences/route-preference": {
+    "name": "协议路由优先级"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/route-preferences/route-preference/route-type": {
+    "name": "路由类型"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/route-preferences/route-preference/preference": {
+    "name": "优先级"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/route-preferences/route-preference/policy-type": {
+    "name": "过滤规则的类型"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/route-preferences/route-preference/policy-type/route-policy-name": {
+    "name": "路由策略名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/route-preferences/route-preference/policy-type/route-policy-name/route-policy-name": {
+    "name": "路由策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/route-preferences/route-preference/policy-type/route-filter-name": {
+    "name": "路由过滤器名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/route-preferences/route-preference/policy-type/route-filter-name/route-filter-name": {
+    "name": "路由过滤名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/nexthop-weights": {
+    "name": "等价路由优先级"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/nexthop-weights/nexthop-weight": {
+    "name": "下一跳的权值"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/nexthop-weights/nexthop-weight/ip-address": {
+    "name": "IP地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/nexthop-weights/nexthop-weight/weight": {
+    "name": "下一跳的权值"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/prefix-prioritys": {
+    "name": "收敛优先级"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/prefix-prioritys/prefix-priority": {
+    "name": "收敛优先级"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/prefix-prioritys/prefix-priority/priority": {
+    "name": "优先级"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/prefix-prioritys/prefix-priority/ip-prefix": {
+    "name": "IP前缀过滤策略名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/ecmp-prefer": {
+    "name": "负载分担优选"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/ecmp-prefer/te-tunnel": {
+    "name": "流量工程隧道"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/ecmp-prefer/intact": {
+    "name": "IGP原始下一跳"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/frr": {
+    "name": "快速重路由"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/frr/enable": {
+    "name": "使能FRR"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/frr/lfa-enable": {
+    "name": "使能LOOP free"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/frr/rlfa-enable": {
+    "name": "使能Remote LFA"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/frr/rlfa-max-cost": {
+    "name": "远端结点的最大可达开销"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/frr/tilfa-enable": {
+    "name": "使能TI-LFA"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/frr/tiebreaker": {
+    "name": "备份下一跳优选规则"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/frr/tiebreaker/node-protect": {
+    "name": "配置节点保护优先级值"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/frr/tiebreaker/lowest-cost": {
+    "name": "配置最小开销值保护优先级值"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/frr/tiebreaker/ldp-sync": {
+    "name": "LDP联动功能链路"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/frr/route-policy": {
+    "name": "快速重路由策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/frr/route-policy/policy-type": {
+    "name": "策略类型"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/frr/route-policy/policy-type/route-policy-name": {
+    "name": "路由策略的名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/frr/route-policy/policy-type/route-policy-name/route-policy-name": {
+    "name": "快速重路由策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/frr/route-policy/policy-type/route-filter-name": {
+    "name": "路由过滤器的名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/frr/route-policy/policy-type/route-filter-name/route-filter-name": {
+    "name": "路由过滤名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/frr/rlfa-tunnel": {
+    "name": "Remote LFA"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/frr/rlfa-tunnel/policy-type": {
+    "name": "策略类型"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/frr/rlfa-tunnel/policy-type/ip-prefix-name": {
+    "name": "IP前缀名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/frr/rlfa-tunnel/policy-type/ip-prefix-name/ip-prefix-name": {
+    "name": "Remote LFA 策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/local-mt-filter": {
+    "name": "Local MT过滤策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/local-mt-filter/filter-policy": {
+    "name": "筛选器策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/local-mt-filter/filter-policy/acl-name-or-num": {
+    "name": "ACL名称或者编号"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/local-mt-filter/filter-policy/acl-name-or-num/acl-name-or-num": {
+    "name": "ACL号或名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/local-mt-filter/filter-policy/ip-prefix": {
+    "name": "IP前缀"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/local-mt-filter/filter-policy/ip-prefix/ip-prefix": {
+    "name": "IP前缀过滤策略名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/local-mt-filter/filter-policy/route-policy-name": {
+    "name": "路由策略的名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/local-mt-filter/filter-policy/route-policy-name/route-policy-name": {
+    "name": "路由策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/local-mt-filter/filter-policy/route-filter-name": {
+    "name": "路由筛选器的名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/local-mt-filter/filter-policy/route-filter-name/route-filter-name": {
+    "name": "路由过滤名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/peers": {
+    "name": "NBMA相邻路由器"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/peers/peer": {
+    "name": "NBMA相邻路由器"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/peers/peer/ip-address": {
+    "name": "相邻路由器标识"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/peers/peer/priority": {
+    "name": "网络邻居的优先级"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/filter-lsa-outs": {
+    "name": "LSA过滤策略列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/filter-lsa-outs/filter-lsa-out": {
+    "name": "配置LSA过滤策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/filter-lsa-outs/filter-lsa-out/peer-ip-addr": {
+    "name": "对端IP地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/filter-lsa-outs/filter-lsa-out/type": {
+    "name": "过滤LSA输出类型"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/filter-lsa-outs/filter-lsa-out/type/total": {
+    "name": "所有类型的LSA"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/filter-lsa-outs/filter-lsa-out/type/total/all-flag": {
+    "name": "过滤所有类型LSA"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/filter-lsa-outs/filter-lsa-out/type/other": {
+    "name": "其他类型的LSA"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/filter-lsa-outs/filter-lsa-out/type/other/sum-flag": {
+    "name": "过滤三类LSA"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/filter-lsa-outs/filter-lsa-out/type/other/sum-filter": {
+    "name": "过滤器总和"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/filter-lsa-outs/filter-lsa-out/type/other/sum-filter/sum-acl-name": {
+    "name": "所有ACL名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/filter-lsa-outs/filter-lsa-out/type/other/sum-filter/sum-acl-name/sum-acl-name": {
+    "name": "SUM过滤名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/filter-lsa-outs/filter-lsa-out/type/other/ase-flag": {
+    "name": "过滤五类LSA"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/filter-lsa-outs/filter-lsa-out/type/other/ase-filter": {
+    "name": "ASE过滤器"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/filter-lsa-outs/filter-lsa-out/type/other/ase-filter/ase-acl-name": {
+    "name": "ASE-ACL名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/filter-lsa-outs/filter-lsa-out/type/other/ase-filter/ase-acl-name/ase-acl-name": {
+    "name": "ASE过滤名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/filter-lsa-outs/filter-lsa-out/type/other/nssa-flag": {
+    "name": "过滤七类LSA"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/filter-lsa-outs/filter-lsa-out/type/other/nssa-filter": {
+    "name": "NSSA-过滤"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/filter-lsa-outs/filter-lsa-out/type/other/nssa-filter/nssa-acl-name": {
+    "name": "NSSA-ACL名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/filter-lsa-outs/filter-lsa-out/type/other/nssa-filter/nssa-acl-name/nssa-acl-name": {
+    "name": "NSSA过滤名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/graceful-restart": {
+    "name": "平滑重启"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/graceful-restart/gr-ietf": {
+    "name": "OSPF IETF GR 信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/graceful-restart/gr-ietf/gr-ietf": {
+    "name": "IETF模式"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/graceful-restart/gr-ietf/gr-ietf/helper-role-mode": {
+    "name": "OSPF IETF GR的Helper角色信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/graceful-restart/gr-ietf/gr-ietf/helper-role-mode/never": {
+    "name": "禁止支持使能模式"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/graceful-restart/gr-ietf/gr-ietf/helper-role-mode/never/never": {
+    "name": "禁止支持使能模式"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/graceful-restart/gr-ietf/gr-ietf/helper-role-mode/work-mode": {
+    "name": "工作模式"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/graceful-restart/gr-ietf/gr-ietf/helper-role-mode/work-mode/planned-only": {
+    "name": "只支持计划GR"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/graceful-restart/gr-ietf/gr-ietf/helper-role-mode/work-mode/ignore-external-lsa": {
+    "name": "不检查Type-5和Type-7类的LSA"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/graceful-restart/gr-ietf/gr-ietf/helper-role-mode/work-mode/match-mode": {
+    "name": "路由策略名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/graceful-restart/gr-ietf/gr-ietf/helper-role-mode/work-mode/match-mode/acl-name-or-num": {
+    "name": "设置3类LSA过滤策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/graceful-restart/gr-ietf/gr-ietf/helper-role-mode/work-mode/match-mode/acl-name-or-num/acl-name-or-num": {
+    "name": "三类LSA过滤规则"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/graceful-restart/gr-ietf/gr-ietf/helper-role-mode/work-mode/match-mode/ip-prefix-name": {
+    "name": "IP前缀过滤策略名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/graceful-restart/gr-ietf/gr-ietf/helper-role-mode/work-mode/match-mode/ip-prefix-name/ip-prefix-name": {
+    "name": "IP前缀过滤策略名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/graceful-restart/gr-non-ietf": {
+    "name": "平滑重启的非标准模式"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/graceful-restart/gr-non-ietf/gr-non-ietf": {
+    "name": "NON-IETF模式"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/flood-control": {
+    "name": "泛洪控制功能"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/flood-control/number": {
+    "name": "泛洪报文发送数量"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/flood-control/interval": {
+    "name": "泛洪报文发送时间间隔"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/dn-bit": {
+    "name": "VPN选项A"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/dn-bit/set-ase": {
+    "name": "禁止设置ASE LSA的DN位"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/dn-bit/set-nssa": {
+    "name": "禁止设置NSSA LSA的DN位"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/dn-bit/set-summary": {
+    "name": "禁止设置Summary LSA的DN位"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/dn-bit/check-ase": {
+    "name": "禁止检查ASE LSA的DN位"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/dn-bit/check-nssa": {
+    "name": "禁止检查NSSA LSA的DN位"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/dn-bit/check-summary": {
+    "name": "禁止检查Summary LSA的DN位"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/dn-bit/summary-router-ids": {
+    "name": "路由器"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/dn-bit/summary-router-ids/summary-router-id": {
+    "name": "路由器"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/dn-bit/summary-router-ids/summary-router-id/router-id": {
+    "name": "路由器ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/filter-import": {
+    "name": "OSPF向IP路由表下发路由的策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/filter-import/policy-type": {
+    "name": "策略类型"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/filter-import/policy-type/basic-acl": {
+    "name": "基本的ACL"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/filter-import/policy-type/basic-acl/name-or-num": {
+    "name": "ACL号或名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/filter-import/policy-type/ip-prefix": {
+    "name": "IP前缀"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/filter-import/policy-type/ip-prefix/ip-prefix": {
+    "name": "IP前缀过滤策略名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/filter-import/policy-type/route-policy": {
+    "name": "路由策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/filter-import/policy-type/route-policy/route-policy": {
+    "name": "路由策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/filter-import/policy-type/route-filter": {
+    "name": "路由过滤器"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/filter-import/policy-type/route-filter/route-filter": {
+    "name": "路由过滤名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/filter-import/secondary": {
+    "name": "次优路由标识符"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/filter-exports": {
+    "name": "OSPF从IP路由表引入路由的策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/filter-exports/filter-export": {
+    "name": "过滤策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/filter-exports/filter-export/protocol": {
+    "name": "发布路由信息的协议"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/filter-exports/filter-export/protocol-id": {
+    "name": "发布路由协议的进程号"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/filter-exports/filter-export/policy-type": {
+    "name": "策略类型"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/filter-exports/filter-export/policy-type/basic-acl": {
+    "name": "基本的ACL"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/filter-exports/filter-export/policy-type/basic-acl/name-or-num": {
+    "name": "ACL号或名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/filter-exports/filter-export/policy-type/ip-prefix": {
+    "name": "IP前缀"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/filter-exports/filter-export/policy-type/ip-prefix/ip-prefix": {
+    "name": "IP前缀过滤策略名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/filter-exports/filter-export/policy-type/route-policy": {
+    "name": "路由策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/filter-exports/filter-export/policy-type/route-policy/route-policy": {
+    "name": "路由策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/import-routes": {
+    "name": "路由引入"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/import-routes/import-route": {
+    "name": "路由引入"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/import-routes/import-route/protocol": {
+    "name": "源路由协议"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/import-routes/import-route/process-id": {
+    "name": "源路由协议进程号"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/import-routes/import-route/cost": {
+    "name": "路由开销值"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/import-routes/import-route/tag": {
+    "name": "外部LSA中的标记"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/import-routes/import-route/type": {
+    "name": "度量值类型"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/import-routes/import-route/permit-ibgp": {
+    "name": "允许IBGP"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/import-routes/import-route/policy-type": {
+    "name": "过滤规则类型"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/import-routes/import-route/policy-type/route-policy-name": {
+    "name": "路由策略名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/import-routes/import-route/policy-type/route-policy-name/route-policy-name": {
+    "name": "路由策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/silent-interfaces": {
+    "name": "抑制接口收发OSPF报文"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/silent-interfaces/silent-interface": {
+    "name": "抑制接口收发OSPF报文"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/silent-interfaces/silent-interface/if-name": {
+    "name": "接口名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/undo-silent-interfaces": {
+    "name": "使能接收和发送数据包"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/undo-silent-interfaces/undo-silent-interface": {
+    "name": "使能接收和发送数据包"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/undo-silent-interfaces/undo-silent-interface/if-name": {
+    "name": "接口名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/cost-bindings": {
+    "name": "指定路由源来的路由Cost绑定接口"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/cost-bindings/cost-binding": {
+    "name": "指定路由源来的路由Cost绑定接口"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/cost-bindings/cost-binding/router-id": {
+    "name": "路由源ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/cost-bindings/cost-binding/if-name": {
+    "name": "接口名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas": {
+    "name": "区域"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area": {
+    "name": "区域"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/area-id": {
+    "name": "区域标识"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/area-type": {
+    "name": "区域类型"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/description": {
+    "name": "区域描述"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/networks": {
+    "name": "网络"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/networks/network": {
+    "name": "网络"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/networks/network/ip-address": {
+    "name": "网段地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/networks/network/mask": {
+    "name": "反掩码"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/networks/network/description": {
+    "name": "描述信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/stub": {
+    "name": "STUB区域"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/stub/backbone-peer-ignore": {
+    "name": "STUB忽略检查骨干区域邻居"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/stub/no-summary": {
+    "name": "禁止ABR向Stub区域内发送Summary LSA"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/stub/default-cost": {
+    "name": "缺省路由开销"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/nssa": {
+    "name": "NSSA区域"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/nssa/no-summary": {
+    "name": "禁止ABR向Stub区域内发送Summary LSA"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/nssa/translator-always": {
+    "name": "转换路由器"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/nssa/default-route-advertise": {
+    "name": "产生缺省LSA"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/nssa/backbone-peer-ignore": {
+    "name": "NSSA忽略检查骨干区域邻居"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/nssa/no-import-route": {
+    "name": "不引入外部路由"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/nssa/set-n-bit": {
+    "name": "设置N-bit位"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/nssa/suppress-fa": {
+    "name": "抑制FA"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/nssa/zero-address-forwarding": {
+    "name": "设置FA为0.0.0.0"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/nssa/translator-interval": {
+    "name": "失效时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/nssa/default-cost": {
+    "name": "缺省路由开销"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/ldp-sync": {
+    "name": "LDP同步"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/ldp-sync/enable": {
+    "name": "LDP同步"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/ldp-sync/hold-cost-max": {
+    "name": "Hold间隔设置"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/ldp-sync/hold-cost-max/timer": {
+    "name": "定时器设置"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/ldp-sync/hold-cost-max/timer/timer": {
+    "name": "Hold最大时钟"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/ldp-sync/hold-cost-max/infinite": {
+    "name": "设置最大hold cost"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/ldp-sync/hold-cost-max/infinite/infinite": {
+    "name": "Hold无限间隔"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/mpls-te": {
+    "name": "OSPFTE区域"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/mpls-te/enable": {
+    "name": "TE能力"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/mpls-te/standard-complying": {
+    "name": "接受标准格式TE LSA"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/authentication": {
+    "name": "区域认证"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/authentication/mode": {
+    "name": "认证类型"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/authentication/auth-text-simple": {
+    "name": "简单认证密码"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/authentication/key-id": {
+    "name": "密钥的标识符"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/authentication/auth-text-md5": {
+    "name": "MD5/HMAC-MD5/HMAC-SHA256认证密码"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/authentication/key-chain-name": {
+    "name": "Keychain名"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/abr-summary-prefixs": {
+    "name": "ABR路由聚合"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/abr-summary-prefixs/abr-summary-prefix": {
+    "name": "ABR路由聚合"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/abr-summary-prefixs/abr-summary-prefix/prefix": {
+    "name": "IP地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/abr-summary-prefixs/abr-summary-prefix/network-mask": {
+    "name": "IP地址的掩码"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/abr-summary-prefixs/abr-summary-prefix/cost": {
+    "name": "Cost值"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/abr-summary-prefixs/abr-summary-prefix/cost/cost-value": {
+    "name": "路由开销"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/abr-summary-prefixs/abr-summary-prefix/cost/cost-value/cost-value": {
+    "name": "设置聚合路由的开销"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/abr-summary-prefixs/abr-summary-prefix/cost/cost-inherit-min": {
+    "name": "继承最小cost"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/abr-summary-prefixs/abr-summary-prefix/cost/cost-inherit-min/cost-inherit-min": {
+    "name": "继承最小cost"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/abr-summary-prefixs/abr-summary-prefix/hold-max-cost": {
+    "name": "HoldMaxCost维持时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/abr-summary-prefixs/abr-summary-prefix/advertise": {
+    "name": "发布路由标识"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/abr-summary-prefixs/abr-summary-prefix/generate-null-zero": {
+    "name": "黑洞路由"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/vlink-peers": {
+    "name": "虚连接配置"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/vlink-peers/vlink-peer": {
+    "name": "虚连接配置"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/vlink-peers/vlink-peer/router-id": {
+    "name": "邻居路由器ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/vlink-peers/vlink-peer/retransmit-interval": {
+    "name": "重传间隔"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/vlink-peers/vlink-peer/smart-discover": {
+    "name": "Smart-discover特性"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/vlink-peers/vlink-peer/timer": {
+    "name": "Timer配置"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/vlink-peers/vlink-peer/timer/hello-interval": {
+    "name": "Hello报文间隔"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/vlink-peers/vlink-peer/timer/dead-interval": {
+    "name": "Dead报文间隔"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/vlink-peers/vlink-peer/timer/trans-delay-interval": {
+    "name": "传输延迟间隔"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/vlink-peers/vlink-peer/authentication": {
+    "name": "认证"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/vlink-peers/vlink-peer/authentication/mode": {
+    "name": "认证类型"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/vlink-peers/vlink-peer/authentication/auth-text-simple": {
+    "name": "简单认证密码"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/vlink-peers/vlink-peer/authentication/key-id": {
+    "name": "密钥的标识符"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/vlink-peers/vlink-peer/authentication/auth-text-md5": {
+    "name": "MD5/HMAC-MD5/HMAC-SHA256认证密码"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/vlink-peers/vlink-peer/authentication/key-chain-name": {
+    "name": "Keychain名"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/sham-links": {
+    "name": "伪连接配置"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/sham-links/sham-link": {
+    "name": "伪连接配置"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/sham-links/sham-link/src-addr": {
+    "name": "源地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/sham-links/sham-link/dest-addr": {
+    "name": "目的地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/sham-links/sham-link/cost": {
+    "name": "接口链路的开销"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/sham-links/sham-link/retransmit-interval": {
+    "name": "传输延迟间隔"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/sham-links/sham-link/smart-discover": {
+    "name": "Smart-discover特性"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/sham-links/sham-link/timer": {
+    "name": "Timer配置"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/sham-links/sham-link/timer/hello-interval": {
+    "name": "Hello报文间隔"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/sham-links/sham-link/timer/dead-interval": {
+    "name": "Dead报文间隔"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/sham-links/sham-link/timer/trans-delay-interval": {
+    "name": "传输延迟间隔"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/sham-links/sham-link/authentication": {
+    "name": "认证"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/sham-links/sham-link/authentication/mode": {
+    "name": "认证类型"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/sham-links/sham-link/authentication/auth-text-simple": {
+    "name": "简单认证密码"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/sham-links/sham-link/authentication/key-id": {
+    "name": "密钥的标识符"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/sham-links/sham-link/authentication/auth-text-md5": {
+    "name": "MD5/HMAC-MD5/HMAC-SHA256认证密码"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/sham-links/sham-link/authentication/key-chain-name": {
+    "name": "Keychain名"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/filters": {
+    "name": "过滤LSA"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/filters/filter": {
+    "name": "过滤LSA"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/filters/filter/mode": {
+    "name": "过滤方向"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/filters/filter/policy-type": {
+    "name": "策略类型"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/filters/filter/policy-type/basic-acl": {
+    "name": "ACL名称或者编号"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/filters/filter/policy-type/basic-acl/name-or-num": {
+    "name": "ACL号或名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/filters/filter/policy-type/ip-prefix": {
+    "name": "IP前缀列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/filters/filter/policy-type/ip-prefix/ip-prefix": {
+    "name": "IP前缀过滤策略名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/filters/filter/policy-type/route-policy": {
+    "name": "路由策略的名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/filters/filter/policy-type/route-policy/route-policy": {
+    "name": "路由策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/filters/filter/policy-type/route-filter": {
+    "name": "路由过滤器的名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/filters/filter/policy-type/route-filter/route-filter": {
+    "name": "路由过滤名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/filters/filter/include-abr-summary": {
+    "name": "包括Abr Summary Lsa"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces": {
+    "name": "接口"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface": {
+    "name": "接口"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/name": {
+    "name": "接口名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/network-type": {
+    "name": "接口网络类型"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/transmit-delay": {
+    "name": "接口对LSA的传输延迟时间(秒)"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/mtu-enable": {
+    "name": "发送DD报文时填MTU值"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/dr-priority": {
+    "name": "选举优先级"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/cost": {
+    "name": "开销"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/smart-discover": {
+    "name": "Smart-discover功能"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/p2mp-mask-ignore": {
+    "name": "P2MP网络上忽略对网络掩码的检查"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/ldp-sync-block": {
+    "name": "阻塞LDP同步"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/ldp-sync-enable": {
+    "name": "LDP同步功能"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/link-cost": {
+    "name": "配置最大的link-cost值"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/suppress-reachability": {
+    "name": "可达的Suppression"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/mpls-ldp-auto-flag": {
+    "name": "LDP自动配置"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/dcn-opq-blk-enable": {
+    "name": "滤波器类型10 DCN不透明的LSAs"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/peer-hold-max-timer": {
+    "name": "邻居保持最大开销值的时间间隔"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/fallback-cost": {
+    "name": "Fallback开销值"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/fallback-bw": {
+    "name": "Fallback带宽阈值"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/source-sub-ip-address": {
+    "name": "指定从IP地址为源地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/frr": {
+    "name": "设置frr参数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/frr/frr-disable": {
+    "name": "阻塞FRR"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/frr/rlfa-disable": {
+    "name": "去使能remote LFA 保护"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/frr/ti-lfa": {
+    "name": "TI-LFA计算"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/frr/ti-lfa/disable": {
+    "name": "去使能接口拓扑无关的无环备份路由"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/timer": {
+    "name": "接口timer配置"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/timer/hello-interval": {
+    "name": "发送Hello报文的时间间隔(秒)"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/timer/hello-conser": {
+    "name": "去使能补偿机制"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/timer/dead-interval": {
+    "name": "邻居失效的时间(秒)"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/timer/wait-interval": {
+    "name": "等待时间(秒)"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/timer/poll-interval": {
+    "name": "发送轮询Hello报文的时间间隔(秒)"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/timer/retransmit-interval": {
+    "name": "接口重传LSA的时间间隔(秒)"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/ldp-sync": {
+    "name": "接口LDP同步"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/ldp-sync/hold-down-timer": {
+    "name": "Hold断开间隔"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/ldp-sync/hold-cost-max": {
+    "name": "Hold cost设置"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/ldp-sync/hold-cost-max/timer": {
+    "name": "定时器设置"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/ldp-sync/hold-cost-max/timer/timer": {
+    "name": "Hold最大时钟"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/ldp-sync/hold-cost-max/infinite": {
+    "name": "Hold无限间隔"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/ldp-sync/hold-cost-max/infinite/infinite": {
+    "name": "Hold无限间隔"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/bfd": {
+    "name": "接口bfd配置"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/bfd/enable": {
+    "name": "BFD功能"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/bfd/block": {
+    "name": "阻塞接口动态创建BFD特性"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/bfd/detect-multiplier": {
+    "name": "本地检测倍数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/bfd/min-tx": {
+    "name": "发送BFD报文的最小发送间隔"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/bfd/min-rx": {
+    "name": "接收BFD报文的最小接收间隔"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/bfd/frr-binding": {
+    "name": "FRR配置BFD绑定链路状态"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/bfd/incr-cost": {
+    "name": "BFD联动cost设置"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/bfd/incr-cost/incr-cost-block": {
+    "name": "抑制接口BFD联动cost"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/bfd/incr-cost/incr-cost-block/incr-cost-block": {
+    "name": "抑制接口BFD联动cost"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/bfd/incr-cost/incr-cost-value": {
+    "name": "接口BFD联动接口cost"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/bfd/incr-cost/incr-cost-value/incr-cost-value": {
+    "name": "接口BFD联动cost"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/bfd/per-link-flag": {
+    "name": "使能基于每条链路检测的BFD会话"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/bfd/one-arm-echo-flag": {
+    "name": "使能BFD环回检测模式"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/authentication": {
+    "name": "接口认证"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/authentication/mode": {
+    "name": "认证类型"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/authentication/auth-text-simple": {
+    "name": "简单认证密码"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/authentication/key-id": {
+    "name": "密钥的标识符"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/authentication/auth-text-md5": {
+    "name": "MD5/HMAC-MD5/HMAC-SHA256认证密码"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/authentication/key-chain-name": {
+    "name": "Keychain名"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/filter-lsa-out": {
+    "name": "LSA过滤"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/filter-lsa-out/type": {
+    "name": "设置过滤LSA类型"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/filter-lsa-out/type/total": {
+    "name": "过滤所有LSA类型"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/filter-lsa-out/type/total/all-flag": {
+    "name": "过滤所有类型LSA"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/filter-lsa-out/type/other": {
+    "name": "设置过滤其它类型LSA"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/filter-lsa-out/type/other/sum-flag": {
+    "name": "过滤三类LSA"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/filter-lsa-out/type/other/sum-filter": {
+    "name": "Sum过滤名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/filter-lsa-out/type/other/sum-filter/acl": {
+    "name": "基础类型的ACL名称或者ACL数值"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/filter-lsa-out/type/other/sum-filter/acl/sum-name": {
+    "name": "SUM过滤名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/filter-lsa-out/type/other/ase-flag": {
+    "name": "过滤五类LSA"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/filter-lsa-out/type/other/ase-filter": {
+    "name": "设置过滤规则"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/filter-lsa-out/type/other/ase-filter/acl": {
+    "name": "ACL配置信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/filter-lsa-out/type/other/ase-filter/acl/ase-name": {
+    "name": "5类LSA过滤规则"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/filter-lsa-out/type/other/nssa-flag": {
+    "name": "过滤七类LSA"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/filter-lsa-out/type/other/nssa-filter": {
+    "name": "NSSA过滤设置"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/filter-lsa-out/type/other/nssa-filter/acl": {
+    "name": "ACL配置信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/filter-lsa-out/type/other/nssa-filter/acl/nssa-name": {
+    "name": "过滤七类LSA"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/suppress-flapping": {
+    "name": "抑制功能"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/suppress-flapping/peer": {
+    "name": "邻居震荡抑制"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/suppress-flapping/peer/enable": {
+    "name": "接口邻居震荡抑制"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/suppress-flapping/peer/detect-interval": {
+    "name": "检测间隔"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/suppress-flapping/peer/threshold": {
+    "name": "检测门限"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/suppress-flapping/peer/resume-interval": {
+    "name": "恢复间隔"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/suppress-flapping/peer/hold-down-interval": {
+    "name": "路由震荡抑制"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/suppress-flapping/peer/hold-max-cost": {
+    "name": "Hold-max开销"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/flush-source-trace": {
+    "name": "接口OSPF Flush溯源"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/flush-source-trace/block": {
+    "name": "去使能接口OSPF Flush溯源"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/mpls-te-peers": {
+    "name": "OSPF被动邻居"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/mpls-te-peers/mpls-te-peer": {
+    "name": "OSPF被动邻居"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/mpls-te-peers/mpls-te-peer/id": {
+    "name": "邻居ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/mpls-te-peers/mpls-te-peer/router-id": {
+    "name": "路由器ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/mpls-te-peers/mpls-te-peer/intf-ip": {
+    "name": "接口IP地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/mpls-te-peers/mpls-te-peer/procs": {
+    "name": "OSPF进程信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/mpls-te-peers/mpls-te-peer/procs/proc": {
+    "name": "OSPF进程信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/mpls-te-peers/mpls-te-peer/procs/proc/pid": {
+    "name": "进程ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/mpls-te-peers/mpls-te-peer/procs/proc/aid": {
+    "name": "区域ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/mpls-te-peers/mpls-te-peer/procs/proc/cost": {
+    "name": "开销"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/multi-areas": {
+    "name": "使能接口多区域功能"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/multi-areas/multi-area": {
+    "name": "接口多区域信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/multi-areas/multi-area/area-id": {
+    "name": "区域标识"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/multi-areas/multi-area/transmit-delay": {
+    "name": "接口对LSA的传输延迟时间(秒)"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/multi-areas/multi-area/mtu-enable": {
+    "name": "发送DD报文时填MTU值"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/multi-areas/multi-area/cost": {
+    "name": "配置接口开销"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/multi-areas/multi-area/smart-discover": {
+    "name": "Smart-discover功能"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/multi-areas/multi-area/ldp-sync-block": {
+    "name": "阻塞LDP同步"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/multi-areas/multi-area/ldp-sync-enable": {
+    "name": "LDP同步功能"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/multi-areas/multi-area/fallback-cost": {
+    "name": "Fallback开销值"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/multi-areas/multi-area/fallback-bw": {
+    "name": "Fallback带宽阈值"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/multi-areas/multi-area/frr": {
+    "name": "阻塞FRR"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/multi-areas/multi-area/frr/frr-disable": {
+    "name": "阻塞FRR"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/multi-areas/multi-area/frr/rlfa-disable": {
+    "name": "去使能remote LFA 保护"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/multi-areas/multi-area/frr/ti-lfa-disable": {
+    "name": "多区域去使能接口拓扑无关的无环备份路由"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/multi-areas/multi-area/timer": {
+    "name": "多区域接口定时器"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/multi-areas/multi-area/timer/hello-interval": {
+    "name": "发送Hello报文的时间间隔(秒)"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/multi-areas/multi-area/timer/dead-interval": {
+    "name": "邻居失效的时间(秒)"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/multi-areas/multi-area/timer/retransmit-interval": {
+    "name": "接口重传LSA的时间间隔(秒)"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/multi-areas/multi-area/ldp-sync": {
+    "name": "LDP同步设置"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/multi-areas/multi-area/ldp-sync/hold-down-timer": {
+    "name": "Hold断开间隔"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/multi-areas/multi-area/ldp-sync/hold-cost-max": {
+    "name": "设置最大Cost"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/multi-areas/multi-area/ldp-sync/hold-cost-max/timer": {
+    "name": "Hold最大时钟"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/multi-areas/multi-area/ldp-sync/hold-cost-max/timer/timer": {
+    "name": "Hold最大时钟"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/multi-areas/multi-area/ldp-sync/hold-cost-max/infinite": {
+    "name": "Hold无限间隔"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/multi-areas/multi-area/ldp-sync/hold-cost-max/infinite/infinite": {
+    "name": "Hold无限间隔"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/multi-areas/multi-area/bfd": {
+    "name": "配置BFD"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/multi-areas/multi-area/bfd/block": {
+    "name": "阻塞接口动态创建BFD特性"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/multi-areas/multi-area/authentication": {
+    "name": "认证类型"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/multi-areas/multi-area/authentication/mode": {
+    "name": "认证类型"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/multi-areas/multi-area/authentication/auth-text-simple": {
+    "name": "简单认证密码"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/multi-areas/multi-area/authentication/key-id": {
+    "name": "密钥的标识符"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/multi-areas/multi-area/authentication/auth-text-md5": {
+    "name": "MD5/HMAC-MD5/HMAC-SHA256认证密码"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/multi-areas/multi-area/authentication/key-chain-name": {
+    "name": "Keychain名"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/multi-areas/multi-area/filter-lsa-out": {
+    "name": "过滤LSA"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/multi-areas/multi-area/filter-lsa-out/type": {
+    "name": "过滤LSA输出类型"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/multi-areas/multi-area/filter-lsa-out/type/total": {
+    "name": "所有类型的LSA"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/multi-areas/multi-area/filter-lsa-out/type/total/all-flag": {
+    "name": "过滤所有类型LSA"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/multi-areas/multi-area/filter-lsa-out/type/other": {
+    "name": "其他类型的LSA"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/multi-areas/multi-area/filter-lsa-out/type/other/sum-flag": {
+    "name": "过滤三类LSA"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/multi-areas/multi-area/filter-lsa-out/type/other/sum-filter": {
+    "name": "过滤规则的总和"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/multi-areas/multi-area/filter-lsa-out/type/other/sum-filter/acl": {
+    "name": "ACL名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/multi-areas/multi-area/filter-lsa-out/type/other/sum-filter/acl/sum-name": {
+    "name": "SUM过滤名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/multi-areas/multi-area/filter-lsa-out/type/other/ase-flag": {
+    "name": "过滤五类LSA"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/multi-areas/multi-area/filter-lsa-out/type/other/ase-filter": {
+    "name": "ASE过滤器"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/multi-areas/multi-area/filter-lsa-out/type/other/ase-filter/acl": {
+    "name": "ACL名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/multi-areas/multi-area/filter-lsa-out/type/other/ase-filter/acl/ase-name": {
+    "name": "ASE过滤名称或者数量"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/multi-areas/multi-area/filter-lsa-out/type/other/nssa-flag": {
+    "name": "过滤七类LSA"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/multi-areas/multi-area/filter-lsa-out/type/other/nssa-filter": {
+    "name": "NSSA-过滤器"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/multi-areas/multi-area/filter-lsa-out/type/other/nssa-filter/acl": {
+    "name": "ACL名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/multi-areas/multi-area/filter-lsa-out/type/other/nssa-filter/acl/nssa-name": {
+    "name": "ASE过滤名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/multi-areas/multi-area/suppress-flapping": {
+    "name": "接口邻居震荡抑制"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/multi-areas/multi-area/suppress-flapping/peer": {
+    "name": "接口邻居震荡抑制"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/multi-areas/multi-area/suppress-flapping/peer/enable": {
+    "name": "接口邻居震荡抑制"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/multi-areas/multi-area/suppress-flapping/peer/detect-interval": {
+    "name": "检测间隔"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/multi-areas/multi-area/suppress-flapping/peer/threshold": {
+    "name": "检测门限"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/multi-areas/multi-area/suppress-flapping/peer/resume-interval": {
+    "name": "恢复间隔"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/multi-areas/multi-area/suppress-flapping/peer/hold-down-interval": {
+    "name": "Hold-down时长"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/multi-areas/multi-area/suppress-flapping/peer/hold-max-cost": {
+    "name": "Hold-max-cost时长"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/disp-data": {
+    "name": "OSPF接口数据"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/disp-data/suppress-reach-block": {
+    "name": "不抑制路由发布"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/disp-data/silent-enable": {
+    "name": "抑制接口收发OSPF报文"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/disp-data/dr": {
+    "name": "指定路由器"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/disp-data/bdr": {
+    "name": "备份指定路由器"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/disp-data/state": {
+    "name": "状态"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/disp-data/mtu": {
+    "name": "MTU值"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/disp-data/ip": {
+    "name": "IP地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/disp-data/cost": {
+    "name": "开销"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/disp-data/gr-state": {
+    "name": "GR的状态"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/disp-data/previous-state": {
+    "name": "以前的状态的接口"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/disp-data/opaque-id": {
+    "name": "接口不透明的ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/disp-data/mpls-te-link": {
+    "name": "是否使能MPLS TE链路状态"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/disp-data/peer-flap-status": {
+    "name": "邻居震荡抑制状态"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/disp-data/peer-flap-count": {
+    "name": "邻居震荡事件次数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/disp-data/peer-flap-threshold": {
+    "name": "邻居震荡抑制门限"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/disp-data/peer-flap-remain-timer": {
+    "name": "邻居震荡抑制剩余时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/disp-data/bandwidth": {
+    "name": "当前接口的带宽"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/nbr-statistics": {
+    "name": "邻居信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/nbr-statistics/nbr-statistic": {
+    "name": "邻居信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/nbr-statistics/nbr-statistic/router-id": {
+    "name": "邻居路由器ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/nbr-statistics/nbr-statistic/ip": {
+    "name": "邻居接口地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/nbr-statistics/nbr-statistic/intf-ip": {
+    "name": "接口IP地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/nbr-statistics/nbr-statistic/gr-state": {
+    "name": "GR状态"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/nbr-statistics/nbr-statistic/state": {
+    "name": "邻居状态"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/nbr-statistics/nbr-statistic/mode": {
+    "name": "邻居模式"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/nbr-statistics/nbr-statistic/priority": {
+    "name": "邻居路由器的优先值"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/nbr-statistics/nbr-statistic/dr": {
+    "name": "指定路由器"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/nbr-statistics/nbr-statistic/bdr": {
+    "name": "备份指定路由器"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/nbr-statistics/nbr-statistic/intf-mtu": {
+    "name": "邻居MTU的值"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/nbr-statistics/nbr-statistic/dead-due-timer": {
+    "name": "邻居Dead间隔"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/nbr-statistics/nbr-statistic/retran-intv": {
+    "name": "邻居重传间隔"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/nbr-statistics/nbr-statistic/up-time": {
+    "name": "邻居UP的时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/nbr-statistics/nbr-statistic/up-time-stamp": {
+    "name": "邻居UP的时间戳"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/nbr-statistics/nbr-statistic/auth-sequence": {
+    "name": "邻居认证序列号"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/nbr-statistics/nbr-statistic/adj-sid": {
+    "name": "邻接SID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/nbr-statistics/nbr-statistic/adj-weight": {
+    "name": "邻接权重"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/nbr-statistics/nbr-statistic/adj-flags": {
+    "name": "邻接标志"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/error-data": {
+    "name": "错误数据"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/error-data/router-id": {
+    "name": "路由器ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/error-data/same-ip-pkt-cnt": {
+    "name": "相同IP地址数据包计数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/error-data/bad-pkt-cnt": {
+    "name": "错误包"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/error-data/bad-ver-cnt": {
+    "name": "错误版本号"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/error-data/bad-chksum-pkt-cnt": {
+    "name": "错误校验和"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/error-data/bad-area-pkt-cnt": {
+    "name": "错误区域ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/error-data/pkt-rcv-unnumber": {
+    "name": "无编号接口丢包"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/error-data/bad-virt-link-cnt": {
+    "name": "错误虚拟连接"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/error-data/auth-type-fail-cnt": {
+    "name": "错误验证类型"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/error-data/auth-key-fail-cnt": {
+    "name": "错误验证值"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/error-data/short-pkt-cnt": {
+    "name": "数据包过小"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/error-data/long-pkt-cnt": {
+    "name": "数据包过大"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/error-data/tx-err-cnt": {
+    "name": "传输错误"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/error-data/if-down-cnt": {
+    "name": "接口down"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/error-data/no-nbr": {
+    "name": "未知邻居"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/error-data/mis-netmask-cnt": {
+    "name": "掩码不匹配"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/error-data/mis-hello-intl-cnt": {
+    "name": "HelloInterval不匹配"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/error-data/mis-dead-intl-cnt": {
+    "name": "DeadInterval不匹配"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/error-data/mis-ext-cnt": {
+    "name": "外部option选项不匹配"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/error-data/router-id-confusion": {
+    "name": "HELLO报文路由器ID冲突"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/error-data/vlink-nbr-mis-cnt": {
+    "name": "虚连接邻居未知"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/error-data/nbma-nbr-err-cnt": {
+    "name": "NBMA邻居未知"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/error-data/inval-src-hello-cnt": {
+    "name": "无效源"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/error-data/dd-nbr-low-cnt": {
+    "name": "邻居状态低不能接收DD报文"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/error-data/dd-rtrid-cnt": {
+    "name": "DD报文路由器ID冲突"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/error-data/dd-opt-mismatch-cnt": {
+    "name": "可选项不匹配"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/error-data/dd-unknwn-lsa-cnt": {
+    "name": "DD报文LSA类型未知"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/error-data/dd-mtu-mismatch-cnt": {
+    "name": "MTU值不匹配"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/error-data/ack-nbr-low-cnt": {
+    "name": "邻居状态低不能接收LS ACK报文"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/error-data/ack-bad-cnt": {
+    "name": "错误确认"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/error-data/ack-duplicate-cnt": {
+    "name": "重复确认"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/error-data/ack-unknwn-lsa-cnt": {
+    "name": "LSAck包LSA类型未知"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/error-data/req-nbr-low-cnt": {
+    "name": "邻居状态低不能接收LS REQ报文"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/error-data/req-empty-cnt": {
+    "name": "空请求"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/error-data/req-bad-cnt": {
+    "name": "错误请求"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/error-data/upd-nbr-low-cnt": {
+    "name": "邻居状态低不能接收LS UPD报文"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/error-data/upd-self-newr-cnt": {
+    "name": "新收到自生成LSA"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/error-data/upd-min-lsarr-cnt": {
+    "name": "最小LSA接收间隔"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/error-data/upd-ls-chksum-cnt": {
+    "name": "LSA校验和错误"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/error-data/upd-les-recent-cnt": {
+    "name": "收到超时LSA"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/error-data/upd-unknw-lsa-cnt": {
+    "name": "LSU包LSA类型错误"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/error-data/opq9-flood-cnt": {
+    "name": "9类LSA越界"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/error-data/opq10-flood-cnt": {
+    "name": "10类LSA越界"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/error-data/opq11-flood-cnt": {
+    "name": "11类LSA越界"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/error-data/rxmt-dd-err-cnt": {
+    "name": "DD数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/error-data/rxmt-req-err-cnt": {
+    "name": "LSR数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/error-data/rxmt-upd-err-cnt": {
+    "name": "LSU数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/error-data/gr-invalid-lsa-cnt": {
+    "name": "无效LSA数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/error-data/gr-invalid-pol-cnt": {
+    "name": "策略过滤LSA数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/error-data/gr-invalid-prd-cnt": {
+    "name": "时限无效LSA数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/error-data/tunnel-cost-cnt": {
+    "name": "隧道开销值错误"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/error-data/peer-net-type-cnt": {
+    "name": "邻居接口类型不匹配"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/error-data/hello-dr-mis-cnt": {
+    "name": "DR与BDR不匹配"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/disp-data": {
+    "name": "OSPF区域数据"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/disp-data/spf-schedule-times": {
+    "name": "SPF计算的次数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/disp-data/interface-count": {
+    "name": "接口数量"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/disp-data/exchange-and-loading-nbr": {
+    "name": "Exchange/Loading邻居数量"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/disp-data/router-id-conflict": {
+    "name": "路由ID冲突状态"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/disp-data/import-limit-status": {
+    "name": "引入路由限制状态"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/disp-data/self-nssa-lsa-count": {
+    "name": "自己生成的Nssa Lsa数量"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/disp-data/nssa-trans-state": {
+    "name": "转换路由器状态"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/disp-data/nssa-trans-role": {
+    "name": "转换路由器角色"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/disp-data/nssa-trans-stab-intv": {
+    "name": "转换稳定时间间隔"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/disp-data": {
+    "name": "OSPF进程数据"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/disp-data/effective-router-id": {
+    "name": "生效路由器ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/disp-data/border-router": {
+    "name": "边界路由器"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/disp-data/ietf-mode": {
+    "name": "IETF模式"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/disp-data/spf-count": {
+    "name": "SPF计算"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/disp-data/area-count": {
+    "name": "区域数量"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/disp-data/nssa-count": {
+    "name": "NSSA区域数量"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/disp-data/exchange-and-loading-nbr": {
+    "name": "处于exchange/loading的邻居"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/disp-data/lsdb-overflow-status": {
+    "name": "LSDB Overflow状态"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/disp-data/non-default-ase-lsa-count": {
+    "name": "非默认路由Ase Lsa数量"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/disp-data/lsdb-overflow-remain": {
+    "name": "Overflow状态剩余时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/disp-data/import-limit-status": {
+    "name": "引入路由限制状态"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/disp-data/self-ase-lsa-count": {
+    "name": "自己生成的Ase Lsa数量"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/migp-routings": {
+    "name": "MIGP路由表的信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/migp-routings/migp-routing": {
+    "name": "MIGP路由表的信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/migp-routings/migp-routing/dest-ip": {
+    "name": "目的IP地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/migp-routings/migp-routing/mask-length": {
+    "name": "指定掩码长度"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/migp-routings/migp-routing/cost": {
+    "name": "开销"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/migp-routings/migp-routing/prefix-priority": {
+    "name": "前缀优先级"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/migp-routings/migp-routing/path-type": {
+    "name": "路由类型"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/migp-routings/migp-routing/nexthop-datas": {
+    "name": "下一跳数据内容"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/migp-routings/migp-routing/nexthop-datas/nexthop-data": {
+    "name": "下一跳数据内容"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/migp-routings/migp-routing/nexthop-datas/nexthop-data/ip-addr": {
+    "name": "下一跳IP地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/migp-routings/migp-routing/nexthop-datas/nexthop-data/adv-router-id": {
+    "name": "通告路由器标识"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/migp-routings/migp-routing/nexthop-datas/nexthop-data/area-id": {
+    "name": "区域ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/migp-routings/migp-routing/nexthop-datas/nexthop-data/flags-disp": {
+    "name": "下一跳标志"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/migp-routings/migp-routing/nexthop-datas/nexthop-data/tag": {
+    "name": "标签"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/migp-routings/migp-routing/nexthop-datas/nexthop-data/if-name": {
+    "name": "接口名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/abr-asbr-statistics": {
+    "name": "ABR和ASBR信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/abr-asbr-statistics/abr-asbr-statistic": {
+    "name": "ABR和ASBR信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/abr-asbr-statistics/abr-asbr-statistic/if-index": {
+    "name": "接口索引"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/abr-asbr-statistics/abr-asbr-statistic/nexthop-ip": {
+    "name": "发送报文到ABR或ASBR的下一跳IP地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/abr-asbr-statistics/abr-asbr-statistic/area-id": {
+    "name": "区域号"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/abr-asbr-statistics/abr-asbr-statistic/destination-id": {
+    "name": "显示ABR或ASBR的Router-ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/abr-asbr-statistics/abr-asbr-statistic/if-name": {
+    "name": "接口名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/abr-asbr-statistics/abr-asbr-statistic/router-id": {
+    "name": "本地路由器ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/abr-asbr-statistics/abr-asbr-statistic/path-type": {
+    "name": "ABR或ASBR"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/abr-asbr-statistics/abr-asbr-statistic/cost": {
+    "name": "从路由器到达ABR或ASBR的开销"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/abr-asbr-statistics/abr-asbr-statistic/router-type": {
+    "name": "路由器类型"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/nexthop-paras": {
+    "name": "下一跳信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/nexthop-paras/nexthop-para": {
+    "name": "下一跳信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/nexthop-paras/nexthop-para/addr": {
+    "name": "下一跳信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/nexthop-paras/nexthop-para/rt-source-type": {
+    "name": "类型"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/nexthop-paras/nexthop-para/if-addr": {
+    "name": "接口地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/nexthop-paras/nexthop-para/if-name": {
+    "name": "接口名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/nexthop-paras/nexthop-para/referece-count": {
+    "name": "引用数量"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/nexthop-paras/nexthop-para/router-id": {
+    "name": "本地路由器ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/lsdb-statistics": {
+    "name": "LSDB信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/lsdb-statistics/lsdb-statistic": {
+    "name": "LSDB信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/lsdb-statistics/lsdb-statistic/area-id": {
+    "name": "区域号"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/lsdb-statistics/lsdb-statistic/lsa-type": {
+    "name": "LSA类型"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/lsdb-statistics/lsdb-statistic/link-state-id": {
+    "name": "LSA报头中的链路状态ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/lsdb-statistics/lsdb-statistic/adv-router-id": {
+    "name": "发布或产生LSA的路由器"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/lsdb-statistics/lsdb-statistic/lsa-age": {
+    "name": "LSA的老化时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/lsdb-statistics/lsdb-statistic/lsa-sequence-num": {
+    "name": "LSA序列号"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/lsdb-statistics/lsdb-statistic/check-sum": {
+    "name": "校验和"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/lsdb-statistics/lsdb-statistic/lsa-length": {
+    "name": "LSA的长度"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/lsdb-statistics/lsdb-statistic/options": {
+    "name": "LSA选项"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/lsdb-statistics/lsdb-statistic/option-flag": {
+    "name": "LSA选项标志"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/lsdb-statistics/lsdb-statistic/link-count": {
+    "name": "链路数量"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/lsdb-statistics/lsdb-statistic/network-mask": {
+    "name": "网络掩码"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/lsdb-statistics/lsdb-statistic/host-name": {
+    "name": "主机名"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/lsdb-statistics/lsdb-statistic/lsabodys": {
+    "name": "LSA体"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/lsdb-statistics/lsdb-statistic/lsabodys/lsabody": {
+    "name": "LSA体"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/lsdb-statistics/lsdb-statistic/lsabodys/lsabody/link-id": {
+    "name": "链路ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/lsdb-statistics/lsdb-statistic/lsabodys/lsabody/link-data": {
+    "name": "链路数据"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/lsdb-statistics/lsdb-statistic/lsabodys/lsabody/link-type": {
+    "name": "链路类型"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/lsdb-statistics/lsdb-statistic/lsabodys/lsabody/attach-router": {
+    "name": "与网络连接的路由器"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/lsdb-statistics/lsdb-statistic/lsabodys/lsabody/forward-ip": {
+    "name": "转发IP地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/lsdb-statistics/lsdb-statistic/lsabodys/lsabody/tos-id": {
+    "name": "服务类型ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/lsdb-statistics/lsdb-statistic/lsabodys/lsabody/tos-metric": {
+    "name": "服务类型度量"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/lsdb-statistics/lsdb-statistic/lsabodys/lsabody/route-tag": {
+    "name": "路由标识"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/lsdb-statistics/lsdb-statistic/lsabodys/lsabody/opaque-type": {
+    "name": "Opaque类型"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/lsdb-statistics/lsdb-statistic/lsabodys/lsabody/opaque-id": {
+    "name": "Opaque ID号"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/lsdb-statistics/lsdb-statistic/lsabodys/lsabody/ext-metric-type": {
+    "name": "E类型"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/lsdb-statistics/lsdb-statistic/rilsa": {
+    "name": "LSA TLV信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/lsdb-statistics/lsdb-statistic/rilsa/host-name": {
+    "name": "动态主机名TLV"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/lsdb-statistics/lsdb-statistic/rilsa/algorithm": {
+    "name": "SR-算法TLV"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/lsdb-briefs": {
+    "name": "LSDB统计信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/lsdb-briefs/lsdb-brief": {
+    "name": "LSDB统计信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/lsdb-briefs/lsdb-brief/area-id": {
+    "name": "区域ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/lsdb-briefs/lsdb-brief/router-id": {
+    "name": "本地路由器ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/lsdb-briefs/lsdb-brief/stub": {
+    "name": "Stub数量"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/lsdb-briefs/lsdb-brief/router": {
+    "name": "Router数量"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/lsdb-briefs/lsdb-brief/network": {
+    "name": "Network数量"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/lsdb-briefs/lsdb-brief/summary-net": {
+    "name": "Summary net数量"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/lsdb-briefs/lsdb-brief/asbr": {
+    "name": "Asbr数量"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/lsdb-briefs/lsdb-brief/type7": {
+    "name": "Type7数量"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/lsdb-briefs/lsdb-brief/opaque9": {
+    "name": "Opaque9数量"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/lsdb-briefs/lsdb-brief/opaque10": {
+    "name": "Opaque10数量"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/lsdb-briefs/lsdb-brief/sub-total": {
+    "name": "子类型总数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/last-down-nbrs": {
+    "name": "最近Down掉的邻居的信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/last-down-nbrs/last-down-nbr": {
+    "name": "最近Down掉的邻居的信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/last-down-nbrs/last-down-nbr/list-index": {
+    "name": "邻居序号"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/last-down-nbrs/last-down-nbr/area-id": {
+    "name": "邻居所属的区域"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/last-down-nbrs/last-down-nbr/ip-addr": {
+    "name": "邻居接口地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/last-down-nbrs/last-down-nbr/router-id": {
+    "name": "邻居路由器ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/last-down-nbrs/last-down-nbr/if-name": {
+    "name": "接口名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/last-down-nbrs/last-down-nbr/primary-reason": {
+    "name": "邻居Down掉的根本原因"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/last-down-nbrs/last-down-nbr/time": {
+    "name": "邻居Down掉的时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/last-down-nbrs/last-down-nbr/local-router-id": {
+    "name": "本地路由器ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/last-down-nbrs/last-down-nbr/type": {
+    "name": "邻居类型"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/disp-graceful-restart": {
+    "name": "GR信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/disp-graceful-restart/capability": {
+    "name": "优雅重启"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/disp-graceful-restart/help-role": {
+    "name": "Helper策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/disp-graceful-restart/current-state": {
+    "name": "当前GR状态"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/disp-graceful-restart/on-helper": {
+    "name": "退出GR的原因"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/disp-graceful-restart/nbr-num": {
+    "name": "重启邻居个数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/error-process-data": {
+    "name": "错误数据"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/error-process-data/router-id": {
+    "name": "路由器ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/error-process-data/same-ip-pkt-cnt": {
+    "name": "相同IP地址数据包计数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/error-process-data/bad-pkt-cnt": {
+    "name": "错误包"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/error-process-data/bad-ver-cnt": {
+    "name": "错误版本号"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/error-process-data/bad-chk-sum-pkt-cnt": {
+    "name": "错误校验和"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/error-process-data/bad-area-pkt-cnt": {
+    "name": "错误区域ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/error-process-data/pkt-rcv-unnumber": {
+    "name": "无编号接口丢包"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/error-process-data/bad-virt-link-cnt": {
+    "name": "错误虚拟连接"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/error-process-data/auth-type-fail-cnt": {
+    "name": "错误验证类型"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/error-process-data/auth-key-fail-cnt": {
+    "name": "错误验证值"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/error-process-data/short-pkt-cnt": {
+    "name": "数据包过小"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/error-process-data/long-pkt-cnt": {
+    "name": "数据包过大"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/error-process-data/tx-err-cnt": {
+    "name": "传输错误"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/error-process-data/if-down-cnt": {
+    "name": "接口down"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/error-process-data/no-nbr": {
+    "name": "未知邻居"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/error-process-data/mis-netmask-cnt": {
+    "name": "掩码不匹配"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/error-process-data/mis-hello-intl-cnt": {
+    "name": "HelloInterval不匹配"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/error-process-data/mis-dead-intl-cnt": {
+    "name": "DeadInterval不匹配"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/error-process-data/mis-ext-rou-cap-cnt": {
+    "name": "外部option选项不匹配"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/error-process-data/router-id-confusion": {
+    "name": "HELLO报文路由器ID冲突"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/error-process-data/vlink-nbr-mis-cnt": {
+    "name": "虚连接邻居未知"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/error-process-data/nbma-nbr-err-cnt": {
+    "name": "NBMA邻居未知"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/error-process-data/inval-src-helo-cnt": {
+    "name": "无效源"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/error-process-data/dd-nbr-low-cnt": {
+    "name": "邻居状态低不能接收DD报文"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/error-process-data/dd-router-id-cnt": {
+    "name": "DD报文路由器ID冲突"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/error-process-data/dd-opt-mismatch-cnt": {
+    "name": "可选项不匹配"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/error-process-data/dd-unknwn-lsa-cnt": {
+    "name": "DD报文LSA类型未知"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/error-process-data/dd-mtu-mismatch-cnt": {
+    "name": "MTU值不匹配"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/error-process-data/ack-nbr-low-cnt": {
+    "name": "邻居状态低不能接收LS ACK报文"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/error-process-data/ack-bad-cnt": {
+    "name": "错误确认"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/error-process-data/ack-duplicate-cnt": {
+    "name": "重复确认"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/error-process-data/ack-unknown-lsa-cnt": {
+    "name": "LSAck包LSA类型未知"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/error-process-data/req-nbr-low-cnt": {
+    "name": "邻居状态低不能接收LS REQ报文"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/error-process-data/req-empty-cnt": {
+    "name": "空请求"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/error-process-data/req-bad-cnt": {
+    "name": "错误请求"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/error-process-data/upd-nbr-low-cnt": {
+    "name": "邻居状态低不能接收LS UPD报文"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/error-process-data/upd-self-newr-cnt": {
+    "name": "新收到自生成LSA"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/error-process-data/upd-min-lsa-lsarr-cnt": {
+    "name": "最小LSA接收间隔"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/error-process-data/upd-ls-checksum-cnt": {
+    "name": "LSA校验和错误"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/error-process-data/upd-les-recent-cnt": {
+    "name": "收到超时LSA"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/error-process-data/upd-unknow-lsa-cnt": {
+    "name": "LSU包LSA类型错误"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/error-process-data/opq9-flood-cnt": {
+    "name": "9类LSA越界"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/error-process-data/opq10-flood-cnt": {
+    "name": "10类LSA越界"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/error-process-data/opq11-flood-cnt": {
+    "name": "11类LSA越界"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/error-process-data/unknown-tlv": {
+    "name": "未知的TLV类型"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/error-process-data/rxmt-dd-err-cnt": {
+    "name": "DD数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/error-process-data/rxmt-req-err-cnt": {
+    "name": "LSR数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/error-process-data/rxmt-upd-err-cnt": {
+    "name": "LSU数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/error-process-data/gr-invalid-lsa-cnt": {
+    "name": "无效LSA数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/error-process-data/gr-invalid-pol-cnt": {
+    "name": "策略过滤LSA数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/error-process-data/gr-invalid-prd-cnt": {
+    "name": "时限无效LSA数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/error-process-data/tunnel-cost-cnt": {
+    "name": "隧道开销值错误"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/error-process-data/peer-net-type-cnt": {
+    "name": "邻居接口类型不匹配"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/error-process-data/hello-dr-mis-cnt": {
+    "name": "DR与BDR不匹配"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/as-lsdb-brief": {
+    "name": "AS LSDB统计信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/as-lsdb-brief/router-id": {
+    "name": "本地路由器ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/as-lsdb-brief/opaque11": {
+    "name": "Opaque11数量"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/as-lsdb-brief/ase": {
+    "name": "Ase数量"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/as-lsdb-brief/sub-total": {
+    "name": "子类型总数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/neighbors": {
+    "name": "邻居"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/neighbors/neighbor": {
+    "name": "邻居"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/neighbors/neighbor/area-id": {
+    "name": "区域ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/neighbors/neighbor/if-name": {
+    "name": "接口名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/neighbors/neighbor/router-id": {
+    "name": "邻居标识"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/neighbors/neighbor/ip-addr": {
+    "name": "邻居IP地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/neighbors/neighbor/multi-area-flag": {
+    "name": "多区域邻接标志"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/neighbors/neighbor/state": {
+    "name": "邻居状态"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/neighbors/neighbor/host-name": {
+    "name": "主机名"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/neighbors/neighbor/datas": {
+    "name": "邻居数据"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/neighbors/neighbor/datas/data": {
+    "name": "邻居数据"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/neighbors/neighbor/datas/data/if-ip": {
+    "name": "接口IP地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/neighbors/neighbor/datas/data/gr-state": {
+    "name": "GR状态"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/neighbors/neighbor/datas/data/mode": {
+    "name": "邻居模式"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/neighbors/neighbor/datas/data/priority": {
+    "name": "邻居优先级"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/neighbors/neighbor/datas/data/dr": {
+    "name": "指定路由器"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/neighbors/neighbor/datas/data/bdr": {
+    "name": "备份指定路由器"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/neighbors/neighbor/datas/data/if-mtu": {
+    "name": "邻居接口MTU"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/neighbors/neighbor/datas/data/dead-due-timer": {
+    "name": "邻居Dead间隔"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/neighbors/neighbor/datas/data/retran-interval": {
+    "name": "邻居重传间隔"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/neighbors/neighbor/datas/data/up-time": {
+    "name": "邻居UP的时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/neighbors/neighbor/datas/data/up-time-stamp": {
+    "name": "邻居UP的时间戳"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/neighbors/neighbor/datas/data/auth-sequence": {
+    "name": "邻居验证序列"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/routings": {
+    "name": "路由表的信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/routings/routing": {
+    "name": "路由表的信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/routings/routing/dest-ip": {
+    "name": "目的IP地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/routings/routing/mask-length": {
+    "name": "指定掩码长度"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/routings/routing/path-type": {
+    "name": "路由类型"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/routings/routing/cost": {
+    "name": "开销"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/routings/routing/prefix-priority": {
+    "name": "前缀优先级"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/routings/routing/nexthop-datas": {
+    "name": "下一跳数据内容"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/routings/routing/nexthop-datas/nexthop-data": {
+    "name": "下一跳数据内容"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/routings/routing/nexthop-datas/nexthop-data/ip-addr": {
+    "name": "下一跳IP地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/routings/routing/nexthop-datas/nexthop-data/adv-router-id": {
+    "name": "通告路由器标识"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/routings/routing/nexthop-datas/nexthop-data/area-id": {
+    "name": "区域ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/routings/routing/nexthop-datas/nexthop-data/if-name": {
+    "name": "接口名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/routings/routing/nexthop-datas/nexthop-data/flags-disp": {
+    "name": "下一跳标志"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/routings/routing/nexthop-datas/nexthop-data/tag": {
+    "name": "标签"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/routings/routing/nexthop-datas/nexthop-data/bak-if-name": {
+    "name": "备份接口名"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/routings/routing/nexthop-datas/nexthop-data/bak-next-ip": {
+    "name": "备份下一跳地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/routings/routing/nexthop-datas/nexthop-data/backup-type": {
+    "name": "备份类型"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/routings/routing/nexthop-datas/nexthop-data/tunnel-dest": {
+    "name": "隧道目的地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/routings/routing/nexthop-datas/nexthop-data/tunnel-type": {
+    "name": "隧道类型"
+  }
+}

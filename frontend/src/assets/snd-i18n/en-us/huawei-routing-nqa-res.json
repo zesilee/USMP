@@ -1,0 +1,23 @@
+{
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/unicast-routes/unicast-route/track-setting/huawei-routing-nqa:nqa": {
+    "name": "Track NQA"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/unicast-routes/unicast-route/track-setting/huawei-routing-nqa:nqa/admin-name": {
+    "name": "NQA Test Administrator Name"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/unicast-routes/unicast-route/track-setting/huawei-routing-nqa:nqa/test-name": {
+    "name": "NQA Test Instance Name"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-routes/ipv4-route/huawei-routing-nqa:nqa-admin-name": {
+    "name": "NQA Test Administrator Name"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-routes/ipv4-route/huawei-routing-nqa:nqa-test-name": {
+    "name": "NQA Test Instance Name"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv6-routes/ipv6-route/huawei-routing-nqa:nqa-admin-name": {
+    "name": "NQA Test Administrator Name"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv6-routes/ipv6-route/huawei-routing-nqa:nqa-test-name": {
+    "name": "NQA Test Instance Name"
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "/huawei-arp:arp/huawei-fwm-resource:forward-table-resources": {
+    "name": "Forward table resources"
+  },
+  "/huawei-arp:arp/huawei-fwm-resource:forward-table-resources/forward-table-resource": {
+    "name": "Forward-table-resource"
+  },
+  "/huawei-arp:arp/huawei-fwm-resource:forward-table-resources/forward-table-resource/slot-id": {
+    "name": "Slot-id"
+  },
+  "/huawei-arp:arp/huawei-fwm-resource:forward-table-resources/forward-table-resource/arp-total": {
+    "name": "Arp-total"
+  },
+  "/huawei-arp:arp/huawei-fwm-resource:forward-table-resources/forward-table-resource/arp-used": {
+    "name": "Arp-used"
+  },
+  "/huawei-arp:arp/huawei-fwm-resource:soft-table-resources": {
+    "name": "Soft-table-resources"
+  },
+  "/huawei-arp:arp/huawei-fwm-resource:soft-table-resources/soft-table-resource": {
+    "name": "Soft-table-resource"
+  },
+  "/huawei-arp:arp/huawei-fwm-resource:soft-table-resources/soft-table-resource/slot-id": {
+    "name": "Slot-id"
+  },
+  "/huawei-arp:arp/huawei-fwm-resource:soft-table-resources/soft-table-resource/arp-total": {
+    "name": "Arp-total"
+  },
+  "/huawei-arp:arp/huawei-fwm-resource:soft-table-resources/soft-table-resource/arp-used": {
+    "name": "Arp-used"
+  },
+  "/huawei-fib:fib/huawei-fwm-resource:forward-table-resources": {
+    "name": "Forward table resources"
+  },
+  "/huawei-fib:fib/huawei-fwm-resource:forward-table-resources/forward-table-resource": {
+    "name": "Forward table resource"
+  },
+  "/huawei-fib:fib/huawei-fwm-resource:forward-table-resources/forward-table-resource/slot-id": {
+    "name": "Slot ID"
+  },
+  "/huawei-fib:fib/huawei-fwm-resource:forward-table-resources/forward-table-resource/fib4-total": {
+    "name": "Fib4 total"
+  },
+  "/huawei-fib:fib/huawei-fwm-resource:forward-table-resources/forward-table-resource/fib4-used": {
+    "name": "FIB4 used number"
+  },
+  "/huawei-fib:fib/huawei-fwm-resource:forward-table-resources/forward-table-resource/fib6-total": {
+    "name": "FIB6 total number"
+  },
+  "/huawei-fib:fib/huawei-fwm-resource:forward-table-resources/forward-table-resource/fib6-used": {
+    "name": "FIB6 used number"
+  },
+  "/huawei-fib:fib/huawei-fwm-resource:soft-table-resources": {
+    "name": "Soft table resources"
+  },
+  "/huawei-fib:fib/huawei-fwm-resource:soft-table-resources/soft-table-resource": {
+    "name": "Soft table resource"
+  },
+  "/huawei-fib:fib/huawei-fwm-resource:soft-table-resources/soft-table-resource/slot-id": {
+    "name": "Slot ID"
+  },
+  "/huawei-fib:fib/huawei-fwm-resource:soft-table-resources/soft-table-resource/fib4-total": {
+    "name": "Fib4 total"
+  },
+  "/huawei-fib:fib/huawei-fwm-resource:soft-table-resources/soft-table-resource/fib4-used": {
+    "name": "Fib4 used"
+  },
+  "/huawei-fib:fib/huawei-fwm-resource:soft-table-resources/soft-table-resource/fib6-total": {
+    "name": "Fib6 total"
+  },
+  "/huawei-fib:fib/huawei-fwm-resource:soft-table-resources/soft-table-resource/fib6-used": {
+    "name": "Fib6 used"
+  }
+}

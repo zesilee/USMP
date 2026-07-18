@@ -1,0 +1,59 @@
+{
+  "/huawei-monitor-link:mtlk": {
+    "name": "Monitor link"
+  },
+  "/huawei-monitor-link:monitor-link/monitor-link-groups": {
+    "name": "Monitor link groups"
+  },
+  "/huawei-monitor-link:monitor-link/monitor-link-groups/monitor-link-group": {
+    "name": "Configure monitor link group"
+  },
+  "/huawei-monitor-link:monitor-link/monitor-link-groups/monitor-link-group/id": {
+    "name": "ID"
+  },
+  "/huawei-monitor-link:monitor-link/monitor-link-groups/monitor-link-group/enable": {
+    "name": "Enable/disable"
+  },
+  "/huawei-monitor-link:monitor-link/monitor-link-groups/monitor-link-group/recover-time": {
+    "name": "Switchback time"
+  },
+  "/huawei-monitor-link:monitor-link/monitor-link-groups/monitor-link-group/uplink-interfaces": {
+    "name": "Uplink interfaces"
+  },
+  "/huawei-monitor-link:monitor-link/monitor-link-groups/monitor-link-group/uplink-interfaces/uplink-interface": {
+    "name": "Configure uplink interface"
+  },
+  "/huawei-monitor-link:monitor-link/monitor-link-groups/monitor-link-group/uplink-interfaces/uplink-interface/if-name": {
+    "name": "Interface"
+  },
+  "/huawei-monitor-link:monitor-link/monitor-link-groups/monitor-link-group/uplink-interfaces/uplink-interface/port-state": {
+    "name": "State"
+  },
+  "/huawei-monitor-link:monitor-link/monitor-link-groups/monitor-link-group/uplink-interfaces/uplink-interface/last-up-time": {
+    "name": "Up time"
+  },
+  "/huawei-monitor-link:monitor-link/monitor-link-groups/monitor-link-group/uplink-interfaces/uplink-interface/last-down-time": {
+    "name": "Down time"
+  },
+  "/huawei-monitor-link:monitor-link/monitor-link-groups/monitor-link-group/downlink-interfaces": {
+    "name": "Downlink interfaces"
+  },
+  "/huawei-monitor-link:monitor-link/monitor-link-groups/monitor-link-group/downlink-interfaces/downlink-interface": {
+    "name": "Configure downlink interface"
+  },
+  "/huawei-monitor-link:monitor-link/monitor-link-groups/monitor-link-group/downlink-interfaces/downlink-interface/if-name": {
+    "name": "Specifies interface"
+  },
+  "/huawei-monitor-link:monitor-link/monitor-link-groups/monitor-link-group/downlink-interfaces/downlink-interface/id": {
+    "name": "Specifies a ID of interface"
+  },
+  "/huawei-monitor-link:monitor-link/monitor-link-groups/monitor-link-group/downlink-interfaces/downlink-interface/port-state": {
+    "name": "State"
+  },
+  "/huawei-monitor-link:monitor-link/monitor-link-groups/monitor-link-group/downlink-interfaces/downlink-interface/last-up-time": {
+    "name": "Up time"
+  },
+  "/huawei-monitor-link:monitor-link/monitor-link-groups/monitor-link-group/downlink-interfaces/downlink-interface/last-down-time": {
+    "name": "Down time"
+  }
+}

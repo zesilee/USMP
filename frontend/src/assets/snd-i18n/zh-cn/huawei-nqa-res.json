@@ -1,0 +1,1196 @@
+{
+  "/huawei-nqa:nqa": {
+    "name": "NQA业务"
+  },
+  "/huawei-nqa:nqa/global": {
+    "name": "全局属性表"
+  },
+  "/huawei-nqa:nqa/global/fec-validation-ldp-enable": {
+    "name": "LDP FEC免校验"
+  },
+  "/huawei-nqa:nqa/global/fec-validation-sr-prefix-enable": {
+    "name": "SR前缀FEC免校验"
+  },
+  "/huawei-nqa:nqa/global/lspv-cpu-limit": {
+    "name": "NQA LSP-PING CPU防护门限"
+  },
+  "/huawei-nqa:nqa/global/trunk-member-inspect-enable": {
+    "name": "三层Trunk成员口检测使能"
+  },
+  "/huawei-nqa:nqa/global/test-max-flow-id": {
+    "name": "NQA测试流的最大ID"
+  },
+  "/huawei-nqa:nqa/global/reflector-max-id": {
+    "name": "最大NQA反射端ID"
+  },
+  "/huawei-nqa:nqa/global/jitter-tag-version": {
+    "name": "Jitter的版本号"
+  },
+  "/huawei-nqa:nqa/global/lbm-receive-enable": {
+    "name": "LBM响应端使能"
+  },
+  "/huawei-nqa:nqa/global/ltm-receive-enable": {
+    "name": "LTM响应端使能"
+  },
+  "/huawei-nqa:nqa/global/gmac-ltm-receive-enable": {
+    "name": "GMAC-LTM响应端使能"
+  },
+  "/huawei-nqa:nqa/global/lspv-enable": {
+    "name": "LSPV响应端使能"
+  },
+  "/huawei-nqa:nqa/global/lspv-ipv6-enable": {
+    "name": "LSPV IPv6响应端使能"
+  },
+  "/huawei-nqa:nqa/global/lspv-fec-compitable-enable": {
+    "name": "LSPV报文的响应兼容功能"
+  },
+  "/huawei-nqa:nqa/global/gmac-ping-enable": {
+    "name": "通用MAC Ping功能"
+  },
+  "/huawei-nqa:nqa/global/gmac-trace-enable": {
+    "name": "通用MAC Trace功能"
+  },
+  "/huawei-nqa:nqa/global/vxlan-echo-v4": {
+    "name": "NQA VXLANECHO使能"
+  },
+  "/huawei-nqa:nqa/global/vxlan-echo-v4/port": {
+    "name": "NQA VXLANECHO服务器端口号"
+  },
+  "/huawei-nqa:nqa/global/vxlan-echo-v4/source-ip-if-name": {
+    "name": "NQA VXLANECHO源IP地址接口"
+  },
+  "/huawei-nqa:nqa/global/vxlan-echo-v6": {
+    "name": "NQA IPv6 VXLANECHO使能"
+  },
+  "/huawei-nqa:nqa/global/vxlan-echo-v6/port": {
+    "name": "NQA IPv6 VXLANECHO服务器端口号"
+  },
+  "/huawei-nqa:nqa/global/vxlan-echo-v6/source-ip-if-name": {
+    "name": "NQA IPv6 VXLANECHO源IP地址接口"
+  },
+  "/huawei-nqa:nqa/server": {
+    "name": "NQA服务器列表"
+  },
+  "/huawei-nqa:nqa/server/icmp-servers": {
+    "name": "NQA ICMP服务器列表"
+  },
+  "/huawei-nqa:nqa/server/icmp-servers/icmp-server": {
+    "name": "NQA ICMP服务器"
+  },
+  "/huawei-nqa:nqa/server/icmp-servers/icmp-server/server-address": {
+    "name": "NQA ICMP服务器IP地址"
+  },
+  "/huawei-nqa:nqa/server/icmp-servers/icmp-server/ni-name": {
+    "name": "NQA ICMP服务器所属VPN名称"
+  },
+  "/huawei-nqa:nqa/server/udp-servers": {
+    "name": "NQA UDP服务器列表"
+  },
+  "/huawei-nqa:nqa/server/udp-servers/udp-server": {
+    "name": "NQA UDP服务器"
+  },
+  "/huawei-nqa:nqa/server/udp-servers/udp-server/server-address": {
+    "name": "NQA UDP服务器IP地址"
+  },
+  "/huawei-nqa:nqa/server/udp-servers/udp-server/server-port": {
+    "name": "NQA UDP服务器端口号"
+  },
+  "/huawei-nqa:nqa/server/udp-servers/udp-server/ni-name": {
+    "name": "NQA UDP服务器所属VPN名称"
+  },
+  "/huawei-nqa:nqa/server/tcp-servers": {
+    "name": "NQA TCP服务器列表"
+  },
+  "/huawei-nqa:nqa/server/tcp-servers/tcp-server": {
+    "name": "NQA TCP服务器"
+  },
+  "/huawei-nqa:nqa/server/tcp-servers/tcp-server/server-address": {
+    "name": "NQA TCP服务器IP地址"
+  },
+  "/huawei-nqa:nqa/server/tcp-servers/tcp-server/server-port": {
+    "name": "NQA TCP服务器端口号"
+  },
+  "/huawei-nqa:nqa/server/tcp-servers/tcp-server/ni-name": {
+    "name": "NQA TCP服务器所属VPN名称"
+  },
+  "/huawei-nqa:nqa/instances": {
+    "name": "NQA测试例集"
+  },
+  "/huawei-nqa:nqa/instances/instance": {
+    "name": "NQA测试例"
+  },
+  "/huawei-nqa:nqa/instances/instance/admin-name": {
+    "name": "管理名称"
+  },
+  "/huawei-nqa:nqa/instances/instance/test-name": {
+    "name": "测试名称"
+  },
+  "/huawei-nqa:nqa/instances/instance/type": {
+    "name": "测试例类型"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/icmp": {
+    "name": "ICMP测试例"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/icmp/icmp-input": {
+    "name": "ICMP测试例"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/icmp/icmp-input/address": {
+    "name": "地址信息"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/icmp/icmp-input/address/ipv4-address": {
+    "name": "IPv4地址"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/icmp/icmp-input/address/ipv4-address/ipv4-dest-address": {
+    "name": "目的IP地址"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/icmp/icmp-input/address/ipv4-address/ipv4-source-address": {
+    "name": "源IP地址"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/icmp/icmp-input/address/ipv4-address/ipv4-next-hop": {
+    "name": "下一跳IP地址"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/icmp/icmp-input/address/ipv6-address": {
+    "name": "IPv6地址"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/icmp/icmp-input/address/ipv6-address/ipv6-dest-address": {
+    "name": "目的IPv6地址"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/icmp/icmp-input/address/ipv6-address/ipv6-source-address": {
+    "name": "源IPv6地址"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/icmp/icmp-input/address/ipv6-address/ipv6-next-hop": {
+    "name": "IPv6下一跳地址"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/icmp/icmp-input/ni-name": {
+    "name": "VPN实例名称"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/icmp/icmp-input/out-if-name": {
+    "name": "出接口名称"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/icmp/icmp-input/fwd-if-name": {
+    "name": "模拟入接口名称"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/icmp/icmp-input/interval": {
+    "name": "报文发送间隔"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/icmp/icmp-input/probe-count": {
+    "name": "报文发送个数"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/icmp/icmp-input/timeout": {
+    "name": "超时时间"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/icmp/icmp-input/frequency": {
+    "name": "测试例循环调度周期"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/icmp/icmp-input/fail-percent": {
+    "name": "丢包率"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/icmp/icmp-input/data-size": {
+    "name": "报文大小"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/icmp/icmp-input/data-fill": {
+    "name": "报文有效载荷字符串"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/icmp/icmp-input/ttl": {
+    "name": "TTL字段"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/icmp/icmp-input/pass-route": {
+    "name": "绕过路由发包"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/icmp/icmp-input/probe-fails": {
+    "name": "报文失败个数阈值"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/icmp/icmp-input/test-fails": {
+    "name": "测试例失败次数阈值"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/icmp/icmp-input/send-trap-bits": {
+    "name": "主机上报告警/事件开关"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/icmp/icmp-input/compatibility": {
+    "name": "兼容开关"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/icmp/icmp-input/result-num": {
+    "name": "测试例探测结果最多个数"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/icmp/icmp-input/history-num": {
+    "name": "测试例探测历史结果最多个数"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/icmp/icmp-input/description": {
+    "name": "测试例描述信息"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/icmp/icmp-input/age-time": {
+    "name": "测试例老化时间"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/icmp/icmp-input/path-type": {
+    "name": "路径类型"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/icmp/icmp-input/threshold-rtd": {
+    "name": "测试环路时延阈值"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/trace": {
+    "name": "Trace测试例"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/trace/trace-input": {
+    "name": "Trace测试例"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/trace/trace-input/dest-address": {
+    "name": "目的IP地址"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/trace/trace-input/source-address": {
+    "name": "源IP地址"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/trace/trace-input/dest-port": {
+    "name": "TRACE目的端口号"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/trace/trace-input/timeout": {
+    "name": "超时时间"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/trace/trace-input/first-ttl": {
+    "name": "报文起始TTL"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/trace/trace-input/max-ttl": {
+    "name": "报文最大TTL"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/trace/trace-input/probe-count": {
+    "name": "报文发送个数"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/trace/trace-input/data-size": {
+    "name": "报文大小"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/trace/trace-input/data-fill": {
+    "name": "报文有效载荷字符串"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/trace/trace-input/pass-route": {
+    "name": "绕过路由发包"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/trace/trace-input/ni-name": {
+    "name": "VPN实例名称"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/trace/trace-input/tos": {
+    "name": "ToS优先级"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/trace/trace-input/out-if-name": {
+    "name": "出接口名称"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/trace/trace-input/hop-fail-times": {
+    "name": "最大连续失败的次数"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/trace/trace-input/non-fragment": {
+    "name": "报文不分片标志"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/trace/trace-input/test-fail-times": {
+    "name": "测试例失败次数阈值"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/trace/trace-input/threshold-rtd": {
+    "name": "测试环路时延阈值"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/trace/trace-input/send-trap-bits": {
+    "name": "主机上报告警/事件开关"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/trace/trace-input/result-num": {
+    "name": "测试例探测结果最多个数"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/trace/trace-input/history-num": {
+    "name": "测试例探测历史结果最多个数"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/trace/trace-input/description": {
+    "name": "测试例描述信息"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/trace/trace-input/age-time": {
+    "name": "测试例老化时间"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/trace/trace-input/frequency": {
+    "name": "测试例执行周期"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/tcp": {
+    "name": "TCP测试例"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/tcp/tcp-input": {
+    "name": "NQA TCP测试例"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/tcp/tcp-input/dest-address": {
+    "name": "目的IP地址"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/tcp/tcp-input/source-address": {
+    "name": "源IP地址"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/tcp/tcp-input/interval": {
+    "name": "报文发送间隔"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/tcp/tcp-input/timeout": {
+    "name": "超时时间"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/tcp/tcp-input/ttl": {
+    "name": "TTL值"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/tcp/tcp-input/probe-count": {
+    "name": "报文发送个数"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/tcp/tcp-input/tos": {
+    "name": "ToS优先级"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/tcp/tcp-input/dest-port": {
+    "name": "目的端口"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/tcp/tcp-input/source-port": {
+    "name": "TCP源端口号"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/tcp/tcp-input/pass-route": {
+    "name": "绕过路由发包"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/tcp/tcp-input/ni-name": {
+    "name": "VPN实例名称"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/tcp/tcp-input/threshold-rtd": {
+    "name": "测试环路时延阈值"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/tcp/tcp-input/probe-fails": {
+    "name": "报文失败个数阈值"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/tcp/tcp-input/fail-percent": {
+    "name": "丢包率"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/tcp/tcp-input/test-fail-times": {
+    "name": "测试例失败次数阈值"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/tcp/tcp-input/send-trap-bits": {
+    "name": "主机上报告警/事件开关"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/tcp/tcp-input/result-num": {
+    "name": "测试例探测结果最多个数"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/tcp/tcp-input/history-num": {
+    "name": "测试例探测历史结果最多个数"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/tcp/tcp-input/description": {
+    "name": "测试例描述信息"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/tcp/tcp-input/age-time": {
+    "name": "测试例老化时间"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/tcp/tcp-input/frequency": {
+    "name": "测试例循环调度周期"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/dns": {
+    "name": "DNS测试例"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/dns/dns-input": {
+    "name": "使能/去使能DNS测试例"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/dns/dns-input/url-address": {
+    "name": "URL地址"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/dns/dns-input/source-address": {
+    "name": "源地址"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/dns/dns-input/dns-server-address": {
+    "name": "DNS服务器地址"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/dns/dns-input/timeout": {
+    "name": "超时时间"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/dns/dns-input/probe-failtimes": {
+    "name": "报文失败个数阈值"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/dns/dns-input/test-failtimes": {
+    "name": "测试例失败次数阈值"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/dns/dns-input/ni-name": {
+    "name": "VPN实例名称"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/dns/dns-input/threshold-rtd": {
+    "name": "测试环路时延阈值"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/dns/dns-input/send-trap-bits": {
+    "name": "主机上报告警/事件开关"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/dns/dns-input/result-num": {
+    "name": "测试例探测结果个数"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/dns/dns-input/history-num": {
+    "name": "测试例探测历史结果最多个数"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/dns/dns-input/description": {
+    "name": "测试例描述信息"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/dns/dns-input/age-time": {
+    "name": "测试例老化时间"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/dns/dns-input/frequency": {
+    "name": "测试例循环调度周期"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/jitter": {
+    "name": "NQA UDP Jitter测试例"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/jitter/jitter-input": {
+    "name": "NQA Jitter测试例"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/jitter/jitter-input/address": {
+    "name": "IP地址配置"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/jitter/jitter-input/address/ipv4-address": {
+    "name": "IPv4地址"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/jitter/jitter-input/address/ipv4-address/ipv4-dest-address": {
+    "name": "目的IP地址"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/jitter/jitter-input/address/ipv4-address/ipv4-source-address": {
+    "name": "源IP地址"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/jitter/jitter-input/address/ipv6-address": {
+    "name": "IPv6地址"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/jitter/jitter-input/address/ipv6-address/ipv6-dest-address": {
+    "name": "目的IPv6地址"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/jitter/jitter-input/address/ipv6-address/ipv6-source-address": {
+    "name": "源IPv6地址"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/jitter/jitter-input/dest-port": {
+    "name": "UDP目的端口号"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/jitter/jitter-input/source-port": {
+    "name": "UDP源端口号"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/jitter/jitter-input/ttl": {
+    "name": "TTL字段"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/jitter/jitter-input/hardware-enable": {
+    "name": "硬件发包"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/jitter/jitter-input/interval": {
+    "name": "报文发送间隔"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/jitter/jitter-input/probe-count": {
+    "name": "报文探测轮次"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/jitter/jitter-input/jitter-packet-num": {
+    "name": "报文发送个数"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/jitter/jitter-input/data-size": {
+    "name": "报文大小"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/jitter/jitter-input/data-fill": {
+    "name": "报文有效载荷字符串"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/jitter/jitter-input/pass-route": {
+    "name": "绕过路由发包"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/jitter/jitter-input/tos": {
+    "name": "ToS优先级"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/jitter/jitter-input/ni-name": {
+    "name": "VPN实例名称"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/jitter/jitter-input/code-type": {
+    "name": "编码类型"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/jitter/jitter-input/adv-factor": {
+    "name": "补偿因子"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/jitter/jitter-input/threshold-owd-ds": {
+    "name": "目的到源单向时延阈值"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/jitter/jitter-input/threshold-owd-sd": {
+    "name": "源到目的单向时延阈值"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/jitter/jitter-input/threshold-rtd": {
+    "name": "测试环路时延阈值"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/jitter/jitter-input/send-trap-bits": {
+    "name": "主机上报告警/事件开关"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/jitter/jitter-input/fail-percent": {
+    "name": "丢包率"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/jitter/jitter-input/test-failtimes": {
+    "name": "测试例失败次数阈值"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/jitter/jitter-input/timestamp": {
+    "name": "时间戳单位"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/jitter/jitter-input/out-if-name": {
+    "name": "出接口名称"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/jitter/jitter-input/timeout": {
+    "name": "超时时间"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/jitter/jitter-input/result-num": {
+    "name": "测试例探测结果最多个数"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/jitter/jitter-input/history-num": {
+    "name": "测试例探测历史结果最多个数"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/jitter/jitter-input/description": {
+    "name": "测试例描述信息"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/jitter/jitter-input/age-time": {
+    "name": "测试例老化时间"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/jitter/jitter-input/frequency": {
+    "name": "测试例循环调度周期"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/icmp-jitter": {
+    "name": "NQA ICMP Jitter测试例"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/icmp-jitter/icmp-jitter-input": {
+    "name": "NQA ICMP Jitter测试例"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/icmp-jitter/icmp-jitter-input/address": {
+    "name": "地址信息"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/icmp-jitter/icmp-jitter-input/address/ipv4-address": {
+    "name": "IPv4地址"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/icmp-jitter/icmp-jitter-input/address/ipv4-address/ipv4-dest-address": {
+    "name": "目的IP地址"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/icmp-jitter/icmp-jitter-input/address/ipv4-address/ipv4-source-address": {
+    "name": "源IP地址"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/icmp-jitter/icmp-jitter-input/address/ipv6-address": {
+    "name": "IPv6地址"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/icmp-jitter/icmp-jitter-input/address/ipv6-address/ipv6-dest-address": {
+    "name": "目的IPv6地址"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/icmp-jitter/icmp-jitter-input/address/ipv6-address/ipv6-source-address": {
+    "name": "源IPv6地址"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/icmp-jitter/icmp-jitter-input/ttl": {
+    "name": "TTL字段"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/icmp-jitter/icmp-jitter-input/probe-count": {
+    "name": "报文探测轮次"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/icmp-jitter/icmp-jitter-input/hardware-enable": {
+    "name": "硬件发包"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/icmp-jitter/icmp-jitter-input/jitter-packet-num": {
+    "name": "报文发送个数"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/icmp-jitter/icmp-jitter-input/data-size": {
+    "name": "报文大小"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/icmp-jitter/icmp-jitter-input/data-fill": {
+    "name": "报文有效载荷字符串"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/icmp-jitter/icmp-jitter-input/tos": {
+    "name": "ToS优先级"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/icmp-jitter/icmp-jitter-input/ni-name": {
+    "name": "VPN实例名称"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/icmp-jitter/icmp-jitter-input/jitter-mode": {
+    "name": "报文格式"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/icmp-jitter/icmp-jitter-input/interval": {
+    "name": "报文发送间隔"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/icmp-jitter/icmp-jitter-input/timestamp": {
+    "name": "发起端时间戳单位"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/icmp-jitter/icmp-jitter-input/out-if-name": {
+    "name": "出接口名称"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/icmp-jitter/icmp-jitter-input/timeout": {
+    "name": "超时时间"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/icmp-jitter/icmp-jitter-input/receive-timeunit": {
+    "name": "响应端时间戳单位"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/icmp-jitter/icmp-jitter-input/fail-percent": {
+    "name": "丢包率"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/icmp-jitter/icmp-jitter-input/result-num": {
+    "name": "测试例探测结果最多个数"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/icmp-jitter/icmp-jitter-input/history-num": {
+    "name": "测试例探测历史结果最多个数"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/icmp-jitter/icmp-jitter-input/description": {
+    "name": "测试例描述信息"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/icmp-jitter/icmp-jitter-input/age-time": {
+    "name": "测试例老化时间"
+  },
+  "/huawei-nqa:nqa/instances/instance/type/icmp-jitter/icmp-jitter-input/frequency": {
+    "name": "测试例循环调度周期"
+  },
+  "/huawei-nqa:nqa/instances/instance/execution-policy": {
+    "name": "测试例执行策略"
+  },
+  "/huawei-nqa:nqa/instances/instance/execution-policy/execution-policy": {
+    "name": "测试例启动策略"
+  },
+  "/huawei-nqa:nqa/instances/instance/execution-policy/execution-policy/start": {
+    "name": "启动测试例"
+  },
+  "/huawei-nqa:nqa/instances/instance/execution-policy/execution-policy/start/start-type": {
+    "name": "测试例启动类型"
+  },
+  "/huawei-nqa:nqa/instances/instance/execution-policy/execution-policy/start/start-type/start-now": {
+    "name": "立即启动"
+  },
+  "/huawei-nqa:nqa/instances/instance/execution-policy/execution-policy/start/start-type/start-now/start-now": {
+    "name": "立即启动"
+  },
+  "/huawei-nqa:nqa/instances/instance/execution-policy/execution-policy/start/start-type/start-now/start-now-end-type": {
+    "name": "测试例结束类型"
+  },
+  "/huawei-nqa:nqa/instances/instance/execution-policy/execution-policy/start/start-type/start-now/start-now-end-type/at": {
+    "name": "在指定时间停止测试"
+  },
+  "/huawei-nqa:nqa/instances/instance/execution-policy/execution-policy/start/start-type/start-now/start-now-end-type/at/start-now-end-date-time": {
+    "name": "测试结束的日期时间"
+  },
+  "/huawei-nqa:nqa/instances/instance/execution-policy/execution-policy/start/start-type/start-now/start-now-end-type/delay": {
+    "name": "等待指定的延迟时间后停止测试"
+  },
+  "/huawei-nqa:nqa/instances/instance/execution-policy/execution-policy/start/start-type/start-now/start-now-end-type/delay/start-now-end-delay-seconds": {
+    "name": "延迟结束测试例执行的秒数"
+  },
+  "/huawei-nqa:nqa/instances/instance/execution-policy/execution-policy/start/start-type/start-now/start-now-end-type/lifetime": {
+    "name": "在指定的生存时间后停止测试"
+  },
+  "/huawei-nqa:nqa/instances/instance/execution-policy/execution-policy/start/start-type/start-now/start-now-end-type/lifetime/start-now-end-lifetime-seconds": {
+    "name": "测试例启动之后的持续执行的秒数"
+  },
+  "/huawei-nqa:nqa/instances/instance/execution-policy/execution-policy/start/start-type/start-at": {
+    "name": "在指定时间执行"
+  },
+  "/huawei-nqa:nqa/instances/instance/execution-policy/execution-policy/start/start-type/start-at/start-date-time": {
+    "name": "测试启动的日期时间"
+  },
+  "/huawei-nqa:nqa/instances/instance/execution-policy/execution-policy/start/start-type/start-at/start-at-end-type": {
+    "name": "测试例结束类型"
+  },
+  "/huawei-nqa:nqa/instances/instance/execution-policy/execution-policy/start/start-type/start-at/start-at-end-type/at": {
+    "name": "定时停止测试"
+  },
+  "/huawei-nqa:nqa/instances/instance/execution-policy/execution-policy/start/start-type/start-at/start-at-end-type/at/start-at-end-date-time": {
+    "name": "测试结束的日期时间"
+  },
+  "/huawei-nqa:nqa/instances/instance/execution-policy/execution-policy/start/start-type/start-at/start-at-end-type/delay": {
+    "name": "延迟时间后停止测试"
+  },
+  "/huawei-nqa:nqa/instances/instance/execution-policy/execution-policy/start/start-type/start-at/start-at-end-type/delay/start-at-end-delay-seconds": {
+    "name": "延迟结束测试例执行的秒数"
+  },
+  "/huawei-nqa:nqa/instances/instance/execution-policy/execution-policy/start/start-type/start-at/start-at-end-type/lifetime": {
+    "name": "在指定的生存时间后停止测试"
+  },
+  "/huawei-nqa:nqa/instances/instance/execution-policy/execution-policy/start/start-type/start-at/start-at-end-type/lifetime/start-at-end-lifetime-seconds": {
+    "name": "测试例启动之后的持续执行的秒数"
+  },
+  "/huawei-nqa:nqa/instances/instance/execution-policy/execution-policy/start/start-type/start-delay": {
+    "name": "延迟一段时间然后执行测试用例"
+  },
+  "/huawei-nqa:nqa/instances/instance/execution-policy/execution-policy/start/start-type/start-delay/start-delay-seconds": {
+    "name": "延迟启动测试例的秒数"
+  },
+  "/huawei-nqa:nqa/instances/instance/execution-policy/execution-policy/start/start-type/start-delay/start-delay-end-type": {
+    "name": "测试例结束类型"
+  },
+  "/huawei-nqa:nqa/instances/instance/execution-policy/execution-policy/start/start-type/start-delay/start-delay-end-type/at": {
+    "name": "定时停止测试"
+  },
+  "/huawei-nqa:nqa/instances/instance/execution-policy/execution-policy/start/start-type/start-delay/start-delay-end-type/at/start-delay-end-date-time": {
+    "name": "测试结束的日期时间"
+  },
+  "/huawei-nqa:nqa/instances/instance/execution-policy/execution-policy/start/start-type/start-delay/start-delay-end-type/delay": {
+    "name": "延迟时间后停止测试"
+  },
+  "/huawei-nqa:nqa/instances/instance/execution-policy/execution-policy/start/start-type/start-delay/start-delay-end-type/delay/start-delay-end-delay-seconds": {
+    "name": "延迟结束测试例执行的秒数"
+  },
+  "/huawei-nqa:nqa/instances/instance/execution-policy/execution-policy/start/start-type/start-delay/start-delay-end-type/lifetime": {
+    "name": "在指定的生存时间后停止测试"
+  },
+  "/huawei-nqa:nqa/instances/instance/execution-policy/execution-policy/start/start-type/start-delay/start-delay-end-type/lifetime/start-delay-end-lifetime-seconds": {
+    "name": "测试例启动之后的持续执行的秒数"
+  },
+  "/huawei-nqa:nqa/instances/instance/execution-policy/execution-policy/start/start-type/start-daily": {
+    "name": "每天执行测试例"
+  },
+  "/huawei-nqa:nqa/instances/instance/execution-policy/execution-policy/start/start-type/start-daily/daily-start-time": {
+    "name": "测试例每日启动的时间"
+  },
+  "/huawei-nqa:nqa/instances/instance/execution-policy/execution-policy/start/start-type/start-daily/daily-start-date": {
+    "name": "测试例每日启动的日期"
+  },
+  "/huawei-nqa:nqa/instances/instance/execution-policy/execution-policy/start/start-type/start-daily/daily-end-time": {
+    "name": "测试例每日结束的时间"
+  },
+  "/huawei-nqa:nqa/instances/instance/execution-policy/execution-policy/start/start-type/start-daily/daily-end-date": {
+    "name": "测试例结束运行的日期"
+  },
+  "/huawei-nqa:nqa/instances/instance/execution-policy/execution-policy/stop": {
+    "name": "停止测试"
+  },
+  "/huawei-nqa:nqa/instances/instance/execution-policy/execution-policy/stop/stop": {
+    "name": "停止测试"
+  },
+  "/huawei-nqa:nqa/groups": {
+    "name": "NQA测试组"
+  },
+  "/huawei-nqa:nqa/groups/group": {
+    "name": "NQA测试组"
+  },
+  "/huawei-nqa:nqa/groups/group/group-name": {
+    "name": "测试组名"
+  },
+  "/huawei-nqa:nqa/record": {
+    "name": "NQA测试例记录"
+  },
+  "/huawei-nqa:nqa/record/results": {
+    "name": "NQA测试例结果记录表"
+  },
+  "/huawei-nqa:nqa/record/results/result": {
+    "name": "NQA测试例结果记录表"
+  },
+  "/huawei-nqa:nqa/record/results/result/admin-name": {
+    "name": "管理者名称"
+  },
+  "/huawei-nqa:nqa/record/results/result/test-name": {
+    "name": "测试例名称"
+  },
+  "/huawei-nqa:nqa/record/results/result/running-index": {
+    "name": "运行索引"
+  },
+  "/huawei-nqa:nqa/record/results/result/status": {
+    "name": "测试例状态"
+  },
+  "/huawei-nqa:nqa/record/results/result/completions": {
+    "name": "执行结果"
+  },
+  "/huawei-nqa:nqa/record/results/result/sent-probes": {
+    "name": "发包数"
+  },
+  "/huawei-nqa:nqa/record/results/result/response-probes": {
+    "name": "收包数"
+  },
+  "/huawei-nqa:nqa/record/results/result/rtd-thresholds": {
+    "name": "超过双向延时阈值的次数"
+  },
+  "/huawei-nqa:nqa/record/results/result/test-attempts": {
+    "name": "探测次数"
+  },
+  "/huawei-nqa:nqa/record/results/result/drops": {
+    "name": "丢包数"
+  },
+  "/huawei-nqa:nqa/record/results/result/disconnects": {
+    "name": "断开连接数"
+  },
+  "/huawei-nqa:nqa/record/results/result/timeouts": {
+    "name": "超时数"
+  },
+  "/huawei-nqa:nqa/record/results/result/busies": {
+    "name": "系统繁忙计数"
+  },
+  "/huawei-nqa:nqa/record/results/result/no-connections": {
+    "name": "连接失败数"
+  },
+  "/huawei-nqa:nqa/record/results/result/sequence-errors": {
+    "name": "报文序列号错误数"
+  },
+  "/huawei-nqa:nqa/record/results/result/rtt-status-errors": {
+    "name": "RTT统计失败次数"
+  },
+  "/huawei-nqa:nqa/record/results/result/dest-address": {
+    "name": "目的IP地址"
+  },
+  "/huawei-nqa:nqa/record/results/result/rtt-min": {
+    "name": "最小RTT"
+  },
+  "/huawei-nqa:nqa/record/results/result/rtt-average": {
+    "name": "平均RTT"
+  },
+  "/huawei-nqa:nqa/record/results/result/rtt-max": {
+    "name": "最大RTT"
+  },
+  "/huawei-nqa:nqa/record/results/result/rtt-sum": {
+    "name": "RTT总和"
+  },
+  "/huawei-nqa:nqa/record/results/result/rtt-sum-square": {
+    "name": "RTT平方和"
+  },
+  "/huawei-nqa:nqa/record/results/result/packet-loss-ratio": {
+    "name": "丢包率"
+  },
+  "/huawei-nqa:nqa/record/results/result/last-probe-time": {
+    "name": "最后一次回报文的时间"
+  },
+  "/huawei-nqa:nqa/record/trace-results": {
+    "name": "NQA trace测试例结果记录表"
+  },
+  "/huawei-nqa:nqa/record/trace-results/trace-result": {
+    "name": "NQA trace测试例结果记录表"
+  },
+  "/huawei-nqa:nqa/record/trace-results/trace-result/admin-name": {
+    "name": "管理者名称"
+  },
+  "/huawei-nqa:nqa/record/trace-results/trace-result/test-name": {
+    "name": "测试例名称"
+  },
+  "/huawei-nqa:nqa/record/trace-results/trace-result/running-index": {
+    "name": "运行索引"
+  },
+  "/huawei-nqa:nqa/record/trace-results/trace-result/status": {
+    "name": "测试例完成状态"
+  },
+  "/huawei-nqa:nqa/record/trace-results/trace-result/completions": {
+    "name": "执行结果"
+  },
+  "/huawei-nqa:nqa/record/trace-results/trace-result/disconnects": {
+    "name": "开始时间"
+  },
+  "/huawei-nqa:nqa/record/trace-results/trace-result/test-attempts": {
+    "name": "结束时间"
+  },
+  "/huawei-nqa:nqa/record/trace-results/trace-result/timeouts": {
+    "name": "超时数"
+  },
+  "/huawei-nqa:nqa/record/trace-results/trace-result/busies": {
+    "name": "系统繁忙计数"
+  },
+  "/huawei-nqa:nqa/record/trace-results/trace-result/no-connections": {
+    "name": "连接失败数"
+  },
+  "/huawei-nqa:nqa/record/trace-results/trace-result/sequence-errors": {
+    "name": "报文序列号错误数"
+  },
+  "/huawei-nqa:nqa/record/trace-results/trace-result/rtt-status-errors": {
+    "name": "Rtt统计失败次数"
+  },
+  "/huawei-nqa:nqa/record/trace-results/trace-result/drops": {
+    "name": "丢包数"
+  },
+  "/huawei-nqa:nqa/record/trace-results/trace-result/hops": {
+    "name": "测试例每一跳的结果表"
+  },
+  "/huawei-nqa:nqa/record/trace-results/trace-result/hops/hop": {
+    "name": "测试例每一跳的结果表"
+  },
+  "/huawei-nqa:nqa/record/trace-results/trace-result/hops/hop/index": {
+    "name": "Hop索引"
+  },
+  "/huawei-nqa:nqa/record/trace-results/trace-result/hops/hop/sent-probes": {
+    "name": "发包数"
+  },
+  "/huawei-nqa:nqa/record/trace-results/trace-result/hops/hop/response-probes": {
+    "name": "收包数"
+  },
+  "/huawei-nqa:nqa/record/trace-results/trace-result/hops/hop/rtt-min": {
+    "name": "最小RTT"
+  },
+  "/huawei-nqa:nqa/record/trace-results/trace-result/hops/hop/rtt-average": {
+    "name": "平均RTT"
+  },
+  "/huawei-nqa:nqa/record/trace-results/trace-result/hops/hop/rtt-max": {
+    "name": "最大RTT"
+  },
+  "/huawei-nqa:nqa/record/trace-results/trace-result/hops/hop/rtt-sum": {
+    "name": "RTT总和"
+  },
+  "/huawei-nqa:nqa/record/trace-results/trace-result/hops/hop/rtt-sum-square": {
+    "name": "平方RTT"
+  },
+  "/huawei-nqa:nqa/record/trace-results/trace-result/hops/hop/rtd-thresholds": {
+    "name": "超过双向延时阈值的次数"
+  },
+  "/huawei-nqa:nqa/record/trace-results/trace-result/hops/hop/last-probe-time": {
+    "name": "最后一次回报文的时间"
+  },
+  "/huawei-nqa:nqa/record/trace-results/trace-result/hops/hop/dest-address": {
+    "name": "目的IP地址"
+  },
+  "/huawei-nqa:nqa/record/trace-results/trace-result/hops/hop/packet-loss-ratio": {
+    "name": "丢包率"
+  },
+  "/huawei-nqa:nqa/record/jitter-results": {
+    "name": "NQA测试例jitter类结果记录列表"
+  },
+  "/huawei-nqa:nqa/record/jitter-results/jitter-result": {
+    "name": "NQA测试例jitter类结果记录表"
+  },
+  "/huawei-nqa:nqa/record/jitter-results/jitter-result/admin-name": {
+    "name": "管理者名称"
+  },
+  "/huawei-nqa:nqa/record/jitter-results/jitter-result/test-name": {
+    "name": "测试例名称"
+  },
+  "/huawei-nqa:nqa/record/jitter-results/jitter-result/running-index": {
+    "name": "运行索引"
+  },
+  "/huawei-nqa:nqa/record/jitter-results/jitter-result/status": {
+    "name": "测试例状态"
+  },
+  "/huawei-nqa:nqa/record/jitter-results/jitter-result/sent-probes": {
+    "name": "发包数"
+  },
+  "/huawei-nqa:nqa/record/jitter-results/jitter-result/response-probes": {
+    "name": "收包数"
+  },
+  "/huawei-nqa:nqa/record/jitter-results/jitter-result/completions": {
+    "name": "执行结果"
+  },
+  "/huawei-nqa:nqa/record/jitter-results/jitter-result/rtt-min": {
+    "name": "最小RTT"
+  },
+  "/huawei-nqa:nqa/record/jitter-results/jitter-result/rtt-average": {
+    "name": "平均RTT"
+  },
+  "/huawei-nqa:nqa/record/jitter-results/jitter-result/rtt-max": {
+    "name": "最大RTT"
+  },
+  "/huawei-nqa:nqa/record/jitter-results/jitter-result/rtt-sum": {
+    "name": "RTT总和"
+  },
+  "/huawei-nqa:nqa/record/jitter-results/jitter-result/num-of-rtt": {
+    "name": "RTT个数"
+  },
+  "/huawei-nqa:nqa/record/jitter-results/jitter-result/average-jitter": {
+    "name": "抖动平均值"
+  },
+  "/huawei-nqa:nqa/record/jitter-results/jitter-result/num-of-owd": {
+    "name": "单向时延个数"
+  },
+  "/huawei-nqa:nqa/record/jitter-results/jitter-result/packet-loss-ratio": {
+    "name": "丢包率"
+  },
+  "/huawei-nqa:nqa/record/jitter-results/jitter-result/icpif": {
+    "name": "计算的计划障碍因子损失/延迟忙碌阈值"
+  },
+  "/huawei-nqa:nqa/record/jitter-results/jitter-result/mos-cq": {
+    "name": "VoIP性能的平均评价分数"
+  },
+  "/huawei-nqa:nqa/record/jitter-results/jitter-result/time-unit": {
+    "name": "时间戳单位"
+  },
+  "/huawei-nqa:test-instance-execution": {
+    "name": "NQA测试例执行策略"
+  },
+  "/huawei-nqa:test-instance-execution/input/admin-name": {
+    "name": "管理名称"
+  },
+  "/huawei-nqa:test-instance-execution/input/test-name": {
+    "name": "测试名称"
+  },
+  "/huawei-nqa:test-instance-execution/input/execution-policy": {
+    "name": "测试实例启动策略"
+  },
+  "/huawei-nqa:test-instance-execution/input/execution-policy/start": {
+    "name": "启动测试"
+  },
+  "/huawei-nqa:test-instance-execution/input/execution-policy/start/start-type": {
+    "name": "测试例启动类型"
+  },
+  "/huawei-nqa:test-instance-execution/input/execution-policy/start/start-type/start-now": {
+    "name": "立即启动"
+  },
+  "/huawei-nqa:test-instance-execution/input/execution-policy/start/start-type/start-now/start-now": {
+    "name": "立即启动"
+  },
+  "/huawei-nqa:test-instance-execution/input/execution-policy/start/start-type/start-now/start-now-end-type": {
+    "name": "测试例结束类型"
+  },
+  "/huawei-nqa:test-instance-execution/input/execution-policy/start/start-type/start-now/start-now-end-type/at": {
+    "name": "定时停止测试"
+  },
+  "/huawei-nqa:test-instance-execution/input/execution-policy/start/start-type/start-now/start-now-end-type/at/start-now-end-time": {
+    "name": "测试结束的时间"
+  },
+  "/huawei-nqa:test-instance-execution/input/execution-policy/start/start-type/start-now/start-now-end-type/at/start-now-end-date": {
+    "name": "测试结束的日期"
+  },
+  "/huawei-nqa:test-instance-execution/input/execution-policy/start/start-type/start-now/start-now-end-type/delay": {
+    "name": "等待指定的延迟时间后停止测试"
+  },
+  "/huawei-nqa:test-instance-execution/input/execution-policy/start/start-type/start-now/start-now-end-type/delay/start-now-end-delay-type": {
+    "name": "测试例结束延迟类型"
+  },
+  "/huawei-nqa:test-instance-execution/input/execution-policy/start/start-type/start-now/start-now-end-type/delay/start-now-end-delay-type/end-delay-time": {
+    "name": "测试例结束延迟时间"
+  },
+  "/huawei-nqa:test-instance-execution/input/execution-policy/start/start-type/start-now/start-now-end-type/delay/start-now-end-delay-type/end-delay-time/start-now-end-delay-time": {
+    "name": "延迟结束测试例执行的时间"
+  },
+  "/huawei-nqa:test-instance-execution/input/execution-policy/start/start-type/start-now/start-now-end-type/delay/start-now-end-delay-type/end-delay-seconds": {
+    "name": "延迟停止测试例的秒数"
+  },
+  "/huawei-nqa:test-instance-execution/input/execution-policy/start/start-type/start-now/start-now-end-type/delay/start-now-end-delay-type/end-delay-seconds/start-now-end-delay-seconds": {
+    "name": "延迟结束测试例执行的秒数"
+  },
+  "/huawei-nqa:test-instance-execution/input/execution-policy/start/start-type/start-now/start-now-end-type/lifetime": {
+    "name": "在指定的生存时间后停止测试"
+  },
+  "/huawei-nqa:test-instance-execution/input/execution-policy/start/start-type/start-now/start-now-end-type/lifetime/start-now-end-lifetime-type": {
+    "name": "测试例终止生存类型"
+  },
+  "/huawei-nqa:test-instance-execution/input/execution-policy/start/start-type/start-now/start-now-end-type/lifetime/start-now-end-lifetime-type/lifetime-time": {
+    "name": "测试例终止生存时间"
+  },
+  "/huawei-nqa:test-instance-execution/input/execution-policy/start/start-type/start-now/start-now-end-type/lifetime/start-now-end-lifetime-type/lifetime-time/start-now-end-lifetime-time": {
+    "name": "测试例启动之后的持续执行的时间"
+  },
+  "/huawei-nqa:test-instance-execution/input/execution-policy/start/start-type/start-now/start-now-end-type/lifetime/start-now-end-lifetime-type/lifetime-seconds": {
+    "name": "延迟停止测试例的秒数"
+  },
+  "/huawei-nqa:test-instance-execution/input/execution-policy/start/start-type/start-now/start-now-end-type/lifetime/start-now-end-lifetime-type/lifetime-seconds/start-now-end-lifetime-seconds": {
+    "name": "测试例启动之后的持续执行的秒数"
+  },
+  "/huawei-nqa:test-instance-execution/input/execution-policy/start/start-type/start-at": {
+    "name": "指定时间执行"
+  },
+  "/huawei-nqa:test-instance-execution/input/execution-policy/start/start-type/start-at/start-time": {
+    "name": "测试启动的时间"
+  },
+  "/huawei-nqa:test-instance-execution/input/execution-policy/start/start-type/start-at/start-date": {
+    "name": "测试启动的日期"
+  },
+  "/huawei-nqa:test-instance-execution/input/execution-policy/start/start-type/start-at/start-at-end-type": {
+    "name": "测试结束类型"
+  },
+  "/huawei-nqa:test-instance-execution/input/execution-policy/start/start-type/start-at/start-at-end-type/at": {
+    "name": "定时停止测试"
+  },
+  "/huawei-nqa:test-instance-execution/input/execution-policy/start/start-type/start-at/start-at-end-type/at/start-at-end-time": {
+    "name": "测试结束的日期"
+  },
+  "/huawei-nqa:test-instance-execution/input/execution-policy/start/start-type/start-at/start-at-end-type/at/start-at-end-date": {
+    "name": "测试结束的时间"
+  },
+  "/huawei-nqa:test-instance-execution/input/execution-policy/start/start-type/start-at/start-at-end-type/delay": {
+    "name": "延迟时间后停止测试"
+  },
+  "/huawei-nqa:test-instance-execution/input/execution-policy/start/start-type/start-at/start-at-end-type/delay/start-at-end-delay-type": {
+    "name": "测试例结束延迟类型"
+  },
+  "/huawei-nqa:test-instance-execution/input/execution-policy/start/start-type/start-at/start-at-end-type/delay/start-at-end-delay-type/end-delay-time": {
+    "name": "测试例结束延迟时间"
+  },
+  "/huawei-nqa:test-instance-execution/input/execution-policy/start/start-type/start-at/start-at-end-type/delay/start-at-end-delay-type/end-delay-time/start-at-end-delay-time": {
+    "name": "延迟结束测试例执行的时间"
+  },
+  "/huawei-nqa:test-instance-execution/input/execution-policy/start/start-type/start-at/start-at-end-type/delay/start-at-end-delay-type/end-delay-seconds": {
+    "name": "延迟停止测试例的秒数"
+  },
+  "/huawei-nqa:test-instance-execution/input/execution-policy/start/start-type/start-at/start-at-end-type/delay/start-at-end-delay-type/end-delay-seconds/start-at-end-delay-seconds": {
+    "name": "延迟结束测试例执行的秒数"
+  },
+  "/huawei-nqa:test-instance-execution/input/execution-policy/start/start-type/start-at/start-at-end-type/lifetime": {
+    "name": "在指定的生存时间后停止测试"
+  },
+  "/huawei-nqa:test-instance-execution/input/execution-policy/start/start-type/start-at/start-at-end-type/lifetime/start-at-end-lifetime-type": {
+    "name": "测试例终止生存类型"
+  },
+  "/huawei-nqa:test-instance-execution/input/execution-policy/start/start-type/start-at/start-at-end-type/lifetime/start-at-end-lifetime-type/lifetime-time": {
+    "name": "测试例终止生存时间"
+  },
+  "/huawei-nqa:test-instance-execution/input/execution-policy/start/start-type/start-at/start-at-end-type/lifetime/start-at-end-lifetime-type/lifetime-time/start-at-end-lifetime-time": {
+    "name": "测试例启动之后的持续执行的时间"
+  },
+  "/huawei-nqa:test-instance-execution/input/execution-policy/start/start-type/start-at/start-at-end-type/lifetime/start-at-end-lifetime-type/lifetime-seconds": {
+    "name": "延迟停止测试例的秒数"
+  },
+  "/huawei-nqa:test-instance-execution/input/execution-policy/start/start-type/start-at/start-at-end-type/lifetime/start-at-end-lifetime-type/lifetime-seconds/start-at-end-lifetime-seconds": {
+    "name": "测试例启动之后的持续执行的秒数"
+  },
+  "/huawei-nqa:test-instance-execution/input/execution-policy/start/start-type/start-delay": {
+    "name": "延迟一段时间后执行测试用例"
+  },
+  "/huawei-nqa:test-instance-execution/input/execution-policy/start/start-type/start-delay/start-delay-type": {
+    "name": "测试例启动延迟类型"
+  },
+  "/huawei-nqa:test-instance-execution/input/execution-policy/start/start-type/start-delay/start-delay-type/start-delay-time": {
+    "name": "测试例启动延迟时间"
+  },
+  "/huawei-nqa:test-instance-execution/input/execution-policy/start/start-type/start-delay/start-delay-type/start-delay-time/start-delay-time": {
+    "name": "延迟启动测试例的时间"
+  },
+  "/huawei-nqa:test-instance-execution/input/execution-policy/start/start-type/start-delay/start-delay-type/start-delay-seconds": {
+    "name": "测试实例启动延时秒数"
+  },
+  "/huawei-nqa:test-instance-execution/input/execution-policy/start/start-type/start-delay/start-delay-type/start-delay-seconds/start-delay-seconds": {
+    "name": "延迟启动测试例的秒数"
+  },
+  "/huawei-nqa:test-instance-execution/input/execution-policy/start/start-type/start-delay/start-delay-end-type": {
+    "name": "测试结束类型"
+  },
+  "/huawei-nqa:test-instance-execution/input/execution-policy/start/start-type/start-delay/start-delay-end-type/at": {
+    "name": "定时停止测试"
+  },
+  "/huawei-nqa:test-instance-execution/input/execution-policy/start/start-type/start-delay/start-delay-end-type/at/start-delay-end-time": {
+    "name": "测试结束的时间"
+  },
+  "/huawei-nqa:test-instance-execution/input/execution-policy/start/start-type/start-delay/start-delay-end-type/at/start-delay-end-date": {
+    "name": "测试结束的日期"
+  },
+  "/huawei-nqa:test-instance-execution/input/execution-policy/start/start-type/start-delay/start-delay-end-type/delay": {
+    "name": "延迟时间后停止测试"
+  },
+  "/huawei-nqa:test-instance-execution/input/execution-policy/start/start-type/start-delay/start-delay-end-type/delay/start-delay-end-delay-type": {
+    "name": "测试例结束延迟类型"
+  },
+  "/huawei-nqa:test-instance-execution/input/execution-policy/start/start-type/start-delay/start-delay-end-type/delay/start-delay-end-delay-type/end-delay-time": {
+    "name": "测试例结束延迟时间"
+  },
+  "/huawei-nqa:test-instance-execution/input/execution-policy/start/start-type/start-delay/start-delay-end-type/delay/start-delay-end-delay-type/end-delay-time/start-delay-end-delay-time": {
+    "name": "延迟结束测试例执行的时间"
+  },
+  "/huawei-nqa:test-instance-execution/input/execution-policy/start/start-type/start-delay/start-delay-end-type/delay/start-delay-end-delay-type/end-delay-seconds": {
+    "name": "测试例结束延迟秒数"
+  },
+  "/huawei-nqa:test-instance-execution/input/execution-policy/start/start-type/start-delay/start-delay-end-type/delay/start-delay-end-delay-type/end-delay-seconds/start-delay-end-delay-seconds": {
+    "name": "延迟结束测试例执行的秒数"
+  },
+  "/huawei-nqa:test-instance-execution/input/execution-policy/start/start-type/start-delay/start-delay-end-type/lifetime": {
+    "name": "在指定的生存时间后停止测试"
+  },
+  "/huawei-nqa:test-instance-execution/input/execution-policy/start/start-type/start-delay/start-delay-end-type/lifetime/start-delay-end-lifetime-type": {
+    "name": "测试例终止生存类型"
+  },
+  "/huawei-nqa:test-instance-execution/input/execution-policy/start/start-type/start-delay/start-delay-end-type/lifetime/start-delay-end-lifetime-type/lifetime-time": {
+    "name": "测试例终止生存时间"
+  },
+  "/huawei-nqa:test-instance-execution/input/execution-policy/start/start-type/start-delay/start-delay-end-type/lifetime/start-delay-end-lifetime-type/lifetime-time/start-delay-end-lifetime-time": {
+    "name": "测试例启动之后的持续执行的时间"
+  },
+  "/huawei-nqa:test-instance-execution/input/execution-policy/start/start-type/start-delay/start-delay-end-type/lifetime/start-delay-end-lifetime-type/lifetime-seconds": {
+    "name": "延迟停止测试例的秒数"
+  },
+  "/huawei-nqa:test-instance-execution/input/execution-policy/start/start-type/start-delay/start-delay-end-type/lifetime/start-delay-end-lifetime-type/lifetime-seconds/start-delay-end-lifetime-seconds": {
+    "name": "测试例启动之后的持续执行的秒数"
+  },
+  "/huawei-nqa:test-instance-execution/input/execution-policy/start/start-type/start-daily": {
+    "name": "每天执行测试实例"
+  },
+  "/huawei-nqa:test-instance-execution/input/execution-policy/start/start-type/start-daily/daily-start-time": {
+    "name": "测试例每日启动的时间"
+  },
+  "/huawei-nqa:test-instance-execution/input/execution-policy/start/start-type/start-daily/daily-start-date": {
+    "name": "测试例开始启动的日期"
+  },
+  "/huawei-nqa:test-instance-execution/input/execution-policy/start/start-type/start-daily/daily-end-time": {
+    "name": "测试例每日结束的时间"
+  },
+  "/huawei-nqa:test-instance-execution/input/execution-policy/start/start-type/start-daily/daily-end-date": {
+    "name": "测试例结束运行的日期"
+  },
+  "/huawei-nqa:test-instance-execution/input/execution-policy/stop": {
+    "name": "停止测试"
+  },
+  "/huawei-nqa:test-instance-execution/input/execution-policy/stop/stop": {
+    "name": "停止测试"
+  },
+  "/huawei-nqa:test-instance-execution/input/execution-policy/restart": {
+    "name": "重启测试"
+  },
+  "/huawei-nqa:test-instance-execution/input/execution-policy/restart/restart": {
+    "name": "重启测试"
+  },
+  "/rpcs/huawei-nqa:nqa/test-instance-execution": {
+    "name": "NQA测试例执行策略"
+  }
+}

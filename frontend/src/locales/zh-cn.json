@@ -1,0 +1,28 @@
+{
+  "nav": {
+    "overview": "概览",
+    "devices": "设备管理",
+    "nativeConfig": "原生配置",
+    "businessConfig": "业务网络配置",
+    "logs": "操作日志",
+    "settings": "系统设置",
+    "notOnboarded": "未接入",
+    "otherGroup": "其他",
+    "brandSub": "Switch Mgmt",
+    "sideFoot": "无数据库 · TTL 缓存"
+  },
+  "common": {
+    "language": "语言",
+    "search": "搜索",
+    "add": "新增",
+    "edit": "编辑",
+    "delete": "删除",
+    "confirm": "确定",
+    "cancel": "取消",
+    "refresh": "刷新",
+    "loading": "加载中",
+    "empty": "暂无数据",
+    "all": "全部",
+    "actions": "操作"
+  }
+}

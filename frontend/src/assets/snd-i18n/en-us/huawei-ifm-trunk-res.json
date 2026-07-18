@@ -1,0 +1,110 @@
+{
+  "/huawei-ifm-trunk:ifm-trunk": {
+    "name": "Trunk Interface"
+  },
+  "/huawei-ifm-trunk:ifm-trunk/global": {
+    "name": "Trunk Global Attributes"
+  },
+  "/huawei-ifm-trunk:ifm-trunk/global/trunk-member-trap-enable": {
+    "name": "Trunk Global Attributes"
+  },
+  "/huawei-ifm-trunk:trunk-switch": {
+    "name": "Trunk Switch"
+  },
+  "/huawei-ifm-trunk:trunk-switch/input/if-name": {
+    "name": "Interface Name"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk": {
+    "name": "Trunk Interface Information"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/min-up-num": {
+    "name": "Lower Limit of Up Links"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/min-up-bandwidth": {
+    "name": "Lower Limit Bandwidth of Up Links"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/max-up-num": {
+    "name": "Max Bandwidth Affecting Links"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/type": {
+    "name": "Trunk Interface Type"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/hash-type": {
+    "name": "Hash Mode"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/work-mode": {
+    "name": "Working Mode"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/smart-link-flush-vlan": {
+    "name": "Smart-link Flush Packet VLAN"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/inactive-port-shutdown": {
+    "name": "Laser Shutdown"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/preempt-enable": {
+    "name": "Enable Delay Switchback"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/preempt-delay-minutes": {
+    "name": "WTR Time (Minutes)"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/preempt-delay-seconds": {
+    "name": "WTR Time (s)"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/preempt-delay-milliseconds": {
+    "name": "WTR Time (ms)"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/up-member-num": {
+    "name": "Up Member Interfaces"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/online-member-num": {
+    "name": "Online Member Interfaces"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/member-num": {
+    "name": "Member Interfaces"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/max-bandwidth": {
+    "name": "Maximum Bandwidth (bit/s)"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/members": {
+    "name": "Trunk Member Interface List"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/members/member": {
+    "name": "Trunk Member Interfaces"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/members/member/name": {
+    "name": "Trunk Member Interface Name"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/members/member/weight": {
+    "name": "Member Interface Weight"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/members/member/status": {
+    "name": "Member Interface Status"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/members/member/is-master": {
+    "name": "Configure Master Interface"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/members/member/role": {
+    "name": "Member Interface Role"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/members/member/lacp-negotiation-mode": {
+    "name": "LACP negotiation mode"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/forwardings": {
+    "name": "Trunk Forwarding Table List"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/forwardings/forwarding": {
+    "name": "Trunk Forwarding Table"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/forwardings/forwarding/id": {
+    "name": "Record ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/forwardings/forwarding/master-port": {
+    "name": "Master Interface Name"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/forwardings/forwarding/slave-port": {
+    "name": "Slave Interface Name"
+  },
+  "/rpcs/huawei-ifm-trunk:ifm-trunk/trunk-switch": {
+    "name": "Trunk Switch"
+  }
+}

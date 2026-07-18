@@ -1,0 +1,272 @@
+{
+  "/openconfig-telemetry:oc-telemetry": {
+    "name": "Telemetry"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups": {
+    "name": "采样传感器组"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group": {
+    "name": "采样传感器组列表"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/sensor-group-id": {
+    "name": "采样传感器组名称"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/config": {
+    "name": "配置节点"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/config/sensor-group-id": {
+    "name": "采样传感器组名称"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/state": {
+    "name": "状态节点"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/state/sensor-group-id": {
+    "name": "采样传感器组名称"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/sensor-paths": {
+    "name": "采样路径"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/sensor-paths/sensor-path": {
+    "name": "采样路径列表"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/sensor-paths/sensor-path/path": {
+    "name": "采样路径名称"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/sensor-paths/sensor-path/config": {
+    "name": "配置节点"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/sensor-paths/sensor-path/config/path": {
+    "name": "采样路径名称"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/sensor-paths/sensor-path/config/exclude-filter": {
+    "name": "排除过滤器"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/sensor-paths/sensor-path/state": {
+    "name": "状态节点"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/sensor-paths/sensor-path/state/path": {
+    "name": "采样路径名称"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/sensor-paths/sensor-path/state/exclude-filter": {
+    "name": "排除过滤器"
+  },
+  "/openconfig-telemetry:telemetry-system/destination-groups": {
+    "name": "目标组"
+  },
+  "/openconfig-telemetry:telemetry-system/destination-groups/destination-group": {
+    "name": "目标组列表"
+  },
+  "/openconfig-telemetry:telemetry-system/destination-groups/destination-group/group-id": {
+    "name": "目标组名称"
+  },
+  "/openconfig-telemetry:telemetry-system/destination-groups/destination-group/config": {
+    "name": "配置节点"
+  },
+  "/openconfig-telemetry:telemetry-system/destination-groups/destination-group/config/group-id": {
+    "name": "目标组名称"
+  },
+  "/openconfig-telemetry:telemetry-system/destination-groups/destination-group/state": {
+    "name": "状态节点"
+  },
+  "/openconfig-telemetry:telemetry-system/destination-groups/destination-group/state/group-id": {
+    "name": "目标组名称"
+  },
+  "/openconfig-telemetry:telemetry-system/destination-groups/destination-group/destinations": {
+    "name": "目标采集器组"
+  },
+  "/openconfig-telemetry:telemetry-system/destination-groups/destination-group/destinations/destination": {
+    "name": "目标采集器列表"
+  },
+  "/openconfig-telemetry:telemetry-system/destination-groups/destination-group/destinations/destination/destination-address": {
+    "name": "上送目标的IP地址"
+  },
+  "/openconfig-telemetry:telemetry-system/destination-groups/destination-group/destinations/destination/destination-port": {
+    "name": "上送目标的端口号"
+  },
+  "/openconfig-telemetry:telemetry-system/destination-groups/destination-group/destinations/destination/config": {
+    "name": "配置节点"
+  },
+  "/openconfig-telemetry:telemetry-system/destination-groups/destination-group/destinations/destination/config/destination-address": {
+    "name": "上送目标的IP地址"
+  },
+  "/openconfig-telemetry:telemetry-system/destination-groups/destination-group/destinations/destination/config/destination-port": {
+    "name": "上送目标的端口号"
+  },
+  "/openconfig-telemetry:telemetry-system/destination-groups/destination-group/destinations/destination/state": {
+    "name": "状态节点"
+  },
+  "/openconfig-telemetry:telemetry-system/destination-groups/destination-group/destinations/destination/state/destination-address": {
+    "name": "上送目标的IP地址"
+  },
+  "/openconfig-telemetry:telemetry-system/destination-groups/destination-group/destinations/destination/state/destination-port": {
+    "name": "上送目标的端口号"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions": {
+    "name": "订阅组"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/persistent": {
+    "name": "静态订阅"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/persistent/subscription": {
+    "name": "静态订阅列表"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/persistent/subscription/subscription-name": {
+    "name": "订阅名称"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/persistent/subscription/config": {
+    "name": "配置节点"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/persistent/subscription/config/subscription-name": {
+    "name": "订阅名称"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/persistent/subscription/config/local-source-address": {
+    "name": "源IP地址"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/persistent/subscription/config/originated-qos-marking": {
+    "name": "上送数据报文的DSCP值"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/persistent/subscription/config/protocol": {
+    "name": "数据上报协议"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/persistent/subscription/config/encoding": {
+    "name": "编码方式"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/persistent/subscription/state": {
+    "name": "状态节点"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/persistent/subscription/state/subscription-name": {
+    "name": "订阅名称"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/persistent/subscription/state/subscription-id": {
+    "name": "系统分配给每个订阅的ID"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/persistent/subscription/state/local-source-address": {
+    "name": "源IP地址"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/persistent/subscription/state/originated-qos-marking": {
+    "name": "上送数据报文的DSCP值"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/persistent/subscription/state/protocol": {
+    "name": "数据上报协议"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/persistent/subscription/state/encoding": {
+    "name": "编码方式"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/persistent/subscription/sensor-profiles": {
+    "name": "关联的传感器组"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/persistent/subscription/sensor-profiles/sensor-profile": {
+    "name": "关联的传感器组列表"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/persistent/subscription/sensor-profiles/sensor-profile/sensor-group": {
+    "name": "采样传感器组名称"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/persistent/subscription/sensor-profiles/sensor-profile/config": {
+    "name": "配置节点"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/persistent/subscription/sensor-profiles/sensor-profile/config/sensor-group": {
+    "name": "采样传感器组名称"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/persistent/subscription/sensor-profiles/sensor-profile/config/sample-interval": {
+    "name": "采样时间间隔"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/persistent/subscription/sensor-profiles/sensor-profile/config/heartbeat-interval": {
+    "name": "心跳间隔"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/persistent/subscription/sensor-profiles/sensor-profile/config/suppress-redundant": {
+    "name": "进行冗余抑制"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/persistent/subscription/sensor-profiles/sensor-profile/state": {
+    "name": "状态节点"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/persistent/subscription/sensor-profiles/sensor-profile/state/sensor-group": {
+    "name": "采样传感器组名称"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/persistent/subscription/sensor-profiles/sensor-profile/state/sample-interval": {
+    "name": "采样时间间隔"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/persistent/subscription/sensor-profiles/sensor-profile/state/heartbeat-interval": {
+    "name": "心跳间隔"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/persistent/subscription/sensor-profiles/sensor-profile/state/suppress-redundant": {
+    "name": "进行冗余抑制"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/persistent/subscription/destination-groups": {
+    "name": "关联的目标组"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/persistent/subscription/destination-groups/destination-group": {
+    "name": "关联的目标组列表"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/persistent/subscription/destination-groups/destination-group/group-id": {
+    "name": "目标组名称"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/persistent/subscription/destination-groups/destination-group/config": {
+    "name": "配置节点"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/persistent/subscription/destination-groups/destination-group/config/group-id": {
+    "name": "目标组名称"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/persistent/subscription/destination-groups/destination-group/state": {
+    "name": "状态节点"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/persistent/subscription/destination-groups/destination-group/state/group-id": {
+    "name": "目标组名称"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/dynamic": {
+    "name": "动态订阅"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/dynamic/subscription": {
+    "name": "动态订阅列表"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/dynamic/subscription/subscription-id": {
+    "name": "订阅ID"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/dynamic/subscription/state": {
+    "name": "状态节点"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/dynamic/subscription/state/subscription-id": {
+    "name": "订阅ID"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/dynamic/subscription/state/destination-address": {
+    "name": "上送目标的IP地址"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/dynamic/subscription/state/destination-port": {
+    "name": "上送目标的端口号"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/dynamic/subscription/state/sample-interval": {
+    "name": "采样时间间隔"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/dynamic/subscription/state/heartbeat-interval": {
+    "name": "心跳间隔"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/dynamic/subscription/state/suppress-redundant": {
+    "name": "进行冗余抑制"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/dynamic/subscription/state/originated-qos-marking": {
+    "name": "上送数据报文的DSCP值"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/dynamic/subscription/state/protocol": {
+    "name": "数据上报协议"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/dynamic/subscription/state/encoding": {
+    "name": "编码方式"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/dynamic/subscription/sensor-paths": {
+    "name": "采样路径"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/dynamic/subscription/sensor-paths/sensor-path": {
+    "name": "采样路径列表"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/dynamic/subscription/sensor-paths/sensor-path/path": {
+    "name": "采样路径名称"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/dynamic/subscription/sensor-paths/sensor-path/state": {
+    "name": "状态节点"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/dynamic/subscription/sensor-paths/sensor-path/state/path": {
+    "name": "采样路径名称"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/dynamic/subscription/sensor-paths/sensor-path/state/exclude-filter": {
+    "name": "排除过滤器"
+  }
+}

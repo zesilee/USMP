@@ -1,0 +1,242 @@
+{
+  "/huawei-vrrp:vrrp": {
+    "name": "VRRP"
+  },
+  "/huawei-vrrp:vrrp/global": {
+    "name": "全局配置"
+  },
+  "/huawei-vrrp:vrrp/global/gratuitous-arp-enable": {
+    "name": "免费ARP报文定时发送"
+  },
+  "/huawei-vrrp:vrrp/global/gratuitous-timeout": {
+    "name": "免费ARP超时时间"
+  },
+  "/huawei-vrrp:vrrp/global/adv-time-learn": {
+    "name": "学习报文时间间隔"
+  },
+  "/huawei-vrrp:vrrp/global/ping-enable": {
+    "name": "允许ping通虚IP"
+  },
+  "/huawei-vrrp:vrrp/global/recover-delay": {
+    "name": "故障恢复延迟时间"
+  },
+  "/huawei-vrrp:vrrp/global/version": {
+    "name": "VRRP版本"
+  },
+  "/huawei-vrrp:vrrp/global/virtual-iproute-enable": {
+    "name": "允许发布虚IP动态路由"
+  },
+  "/huawei-vrrp:vrrp/global/virtual-ospf-enable": {
+    "name": "允许OSPF发布虚IP动态路由"
+  },
+  "/huawei-vrrp:vrrp/global/virtual-isis-enable": {
+    "name": "允许ISIS发布虚IP动态路由"
+  },
+  "/huawei-vrrp:vrrp/global/virtual-rip-enable": {
+    "name": "允许RIP发布虚IP动态路由"
+  },
+  "/huawei-vrrp:vrrp/global/v6-cks-mode": {
+    "name": "VRRP6校验和模式"
+  },
+  "/huawei-vrrp:vrrp/global/smooth-switch-time": {
+    "name": "平滑倒换时间(秒)"
+  },
+  "/huawei-vrrp:vrrp/global/unicast-port": {
+    "name": "单播VRRP端口号"
+  },
+  "/huawei-vrrp:vrrp/global/gratuitous-enhance-enable": {
+    "name": "免费ARP报文发送增强"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp": {
+    "name": "VRRP"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups": {
+    "name": "VRRP备份组列表"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group": {
+    "name": "VRRP备份组"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/id": {
+    "name": "备份组ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/priority": {
+    "name": "配置优先级"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/preempt": {
+    "name": "抢占配置"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/preempt/preempt-enable": {
+    "name": "抢占模式"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/preempt/delay-time": {
+    "name": "抢占延迟时间"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/adver-interval": {
+    "name": "配置报文发送间隔"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/link-bfddown-num": {
+    "name": "Link BFD Down个数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/hold-multiper": {
+    "name": "运行报文发送间隔倍数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/fast-resume": {
+    "name": "快切模式"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/v3-sendmode": {
+    "name": "发包模式"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/vrrp-type": {
+    "name": "VRRP类型"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/vrrp-type/member-vrrp": {
+    "name": "成员VRRP"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/vrrp-type/member-vrrp/admin-id": {
+    "name": "绑定的管理VRRP ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/vrrp-type/member-vrrp/admin-if-name": {
+    "name": "绑定的管理VRRP接口名"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/vrrp-type/member-vrrp/unflowdown": {
+    "name": "去使能Flowdown"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/vrrp-type/admin-vrrp": {
+    "name": "管理VRRP"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/vrrp-type/admin-vrrp/admin-flag": {
+    "name": "管理VRRP"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/vrrp-type/admin-vrrp/admin-ignore-ifdown": {
+    "name": "忽略接口Down"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/vrrp-type/admin-vrrp/init-state-holdtime": {
+    "name": "Init状态保持时间"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/type": {
+    "name": "VRRP备份组类型"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/state": {
+    "name": "状态"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/create-time": {
+    "name": "VRRP创建时间"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/last-change-time": {
+    "name": "最近一次状态变化时间"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/virtual-ips": {
+    "name": "虚IP列表"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/virtual-ips/virtual-ip": {
+    "name": "虚IP配置"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/virtual-ips/virtual-ip/address": {
+    "name": "虚IP地址"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/track-bfds": {
+    "name": "监视BFD会话配置列表"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/track-bfds/track-bfd": {
+    "name": "监视BFD会话配置"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/track-bfds/track-bfd/session-name": {
+    "name": "被监视的BFD会话名称"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/track-bfds/track-bfd/session-type": {
+    "name": "被监视的BFD会话类型"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/track-bfds/track-bfd/priority-change": {
+    "name": "增加或降低的优先级数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/track-bfds/track-bfd/track-mode": {
+    "name": "监视BFD会话的模式"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/track-bfds/track-bfd/session-id": {
+    "name": "被监视的BFD会话ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/track-bfds/track-bfd/session-state": {
+    "name": "被监视的BFD会话状态"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/track-mtgrps": {
+    "name": "监视接口监控组配置列表"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/track-mtgrps/track-mtgrp": {
+    "name": "监视接口监控组配置"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/track-mtgrps/track-mtgrp/monitor-group-name": {
+    "name": "被监视的Monitor-group名称"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/track-mtgrps/track-mtgrp/failure-ratio": {
+    "name": "故障率"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/track-mtgrps/track-mtgrp/priority-change": {
+    "name": "降低的优先级数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/track-mtgrps/track-mtgrp/track-mode": {
+    "name": "监视模式"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/track-ip-routes": {
+    "name": "VRRP监视指定路由"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/track-ip-routes/track-ip-route": {
+    "name": "VRRP监视指定路由"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/track-ip-routes/track-ip-route/vpn-name": {
+    "name": "VPN"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/track-ip-routes/track-ip-route/ip-address": {
+    "name": "IP地址"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/track-ip-routes/track-ip-route/mask-length": {
+    "name": "掩码长度"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/track-ip-routes/track-ip-route/priority-change": {
+    "name": "优先级值"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-vrrp:vrrp/groups/group/track-ip-routes/track-ip-route/track-mode": {
+    "name": "监视模式"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-vrrp:vrrp": {
+    "name": "VRRP"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-vrrp:vrrp/backup-groups": {
+    "name": "VRRP接口配置"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-vrrp:vrrp/backup-groups/ttlcheck-flag": {
+    "name": "检查TTL"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-vrrp:vrrp/backup-groups/recover-delay": {
+    "name": "故障恢复延迟时间(秒)"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-vrrp:vrrp/backup-groups/arpsend-simple": {
+    "name": "免费ARP数据包的简单发送模式"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-vrrp:vrrp/backup-groups/advertise-send-mode": {
+    "name": "VRRP备份组报文发送模式"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-vrrp:vrrp/backup-groups/advertise-send-mode/all-subvlans": {
+    "name": "数据包在超级VLAN的所有子VLAN中发送"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-vrrp:vrrp/backup-groups/advertise-send-mode/all-subvlans/sendmode-all": {
+    "name": "所有子VLAN中发包"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-vrrp:vrrp/backup-groups/advertise-send-mode/one-subvlan": {
+    "name": "报文在超级VLAN的一个子VLAN中发送"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-vrrp:vrrp/backup-groups/advertise-send-mode/one-subvlan/send-subvlanid": {
+    "name": "免费ARP简单发送模式"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-vrrp:vrrp/track-admins": {
+    "name": "业务接口列表"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-vrrp:vrrp/track-admins/track-admin": {
+    "name": "业务接口"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-vrrp:vrrp/track-admins/track-admin/id": {
+    "name": "绑定的管理VRRP ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-vrrp:vrrp/track-admins/track-admin/if-name": {
+    "name": "绑定的管理VRRP接口名"
+  }
+}

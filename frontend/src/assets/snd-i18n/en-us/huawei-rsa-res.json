@@ -1,0 +1,68 @@
+{
+  "/huawei-rsa:rsa": {
+    "name": "RSA"
+  },
+  "/huawei-rsa:rsa/local-key": {
+    "name": "Local Key"
+  },
+  "/huawei-rsa:rsa/local-key/key-size": {
+    "name": "Key Size"
+  },
+  "/huawei-rsa:rsa/local-key/host-key-name": {
+    "name": "Host Key Name"
+  },
+  "/huawei-rsa:rsa/local-key/host-key-code": {
+    "name": "Host Key Code"
+  },
+  "/huawei-rsa:rsa/local-key/host-key-ssh1": {
+    "name": "Host Key SSH1"
+  },
+  "/huawei-rsa:rsa/local-key/host-key-pem": {
+    "name": "Host Key PEM"
+  },
+  "/huawei-rsa:rsa/local-key/host-key-openssh": {
+    "name": "Host Key OpenSSH"
+  },
+  "/huawei-rsa:rsa/local-key/server-key-name": {
+    "name": "Server Key Name"
+  },
+  "/huawei-rsa:rsa/local-key/server-key-code": {
+    "name": "Server Key Code"
+  },
+  "/huawei-rsa:rsa/peer-keys": {
+    "name": "Peer Key Table"
+  },
+  "/huawei-rsa:rsa/peer-keys/peer-key": {
+    "name": "Peer Key Table"
+  },
+  "/huawei-rsa:rsa/peer-keys/peer-key/key-name": {
+    "name": "Key Name"
+  },
+  "/huawei-rsa:rsa/peer-keys/peer-key/key-code": {
+    "name": "Key Code"
+  },
+  "/huawei-rsa:rsa/peer-keys/peer-key/encode-type": {
+    "name": "Encode Type"
+  },
+  "/huawei-rsa:rsa/key-pairs": {
+    "name": "RSA Keypair Label"
+  },
+  "/huawei-rsa:rsa/key-pairs/key-pair": {
+    "name": "RSA Keypair"
+  },
+  "/huawei-rsa:rsa/key-pairs/key-pair/key-pair-label": {
+    "name": "Keypair Label Name"
+  },
+  "/huawei-rsa:rsa/key-pairs/key-pair/key-size": {
+    "name": "Keypair Size"
+  },
+  "/huawei-rsa:rsa/key-pairs/key-pair/host-key-code": {
+    "name": "Hostkey"
+  },
+  "/huawei-rsa:rsa/rsa-global": {
+    "name": "Global Configuration"
+  },
+  "/huawei-rsa:rsa/rsa-global/max-key-pair": {
+    "name": "Max Keypair"
+  }
+}

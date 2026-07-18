@@ -1,0 +1,83 @@
+{
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ipv4-destination/huawei-routing-policy-acl:acl": {
+    "name": "指定按ACL匹配IPv4目的地址"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ipv4-destination/huawei-routing-policy-acl:acl/match-acl": {
+    "name": "按ACL匹配IPv4目的地址"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ipv4-destination/huawei-routing-policy-acl:acl/match-acl/acl-ref": {
+    "name": "ACL过滤器名"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ipv6-destination/huawei-routing-policy-acl:acl6": {
+    "name": "指定按ACL匹配IPv6目的地址"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ipv6-destination/huawei-routing-policy-acl:acl6/match-acl6": {
+    "name": "按ACL匹配IPv6目的地址列表"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ipv6-destination/huawei-routing-policy-acl:acl6/match-acl6/acl6-ref": {
+    "name": "ACL过滤器名"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ipv4-nexthop/huawei-routing-policy-acl:acl": {
+    "name": "指定按ACL匹配IPv4下一跳"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ipv4-nexthop/huawei-routing-policy-acl:acl/match-nexthop-acl": {
+    "name": "按ACL匹配IPv4下一跳"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ipv4-nexthop/huawei-routing-policy-acl:acl/match-nexthop-acl/acl-ref": {
+    "name": "ACL过滤器名"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ipv6-nexthop/huawei-routing-policy-acl:acl6": {
+    "name": "指定按ACL匹配IPv6下一跳"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ipv6-nexthop/huawei-routing-policy-acl:acl6/match-nexthop-acl6": {
+    "name": "按ACL匹配IPv6下一跳"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ipv6-nexthop/huawei-routing-policy-acl:acl6/match-nexthop-acl6/acl6-ref": {
+    "name": "ACL过滤器名"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ipv4-route-source/huawei-routing-policy-acl:acl": {
+    "name": "指定按ACL匹配IPv4路由源"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ipv4-route-source/huawei-routing-policy-acl:acl/match-route-source-acl": {
+    "name": "按ACL匹配IPv4路由源"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ipv4-route-source/huawei-routing-policy-acl:acl/match-route-source-acl/acl-ref": {
+    "name": "ACL过滤器名"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ipv6-route-source/huawei-routing-policy-acl:acl6": {
+    "name": "指定按ACL匹配IPv6路由源"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ipv6-route-source/huawei-routing-policy-acl:acl6/match-route-source-acl6": {
+    "name": "按ACL匹配IPv6路由源"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ipv6-route-source/huawei-routing-policy-acl:acl6/match-route-source-acl6/acl6-ref": {
+    "name": "ACL过滤器名"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-route-originator/huawei-routing-policy-acl:acl": {
+    "name": "指定按ACL匹配IPv4路由源"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-route-originator/huawei-routing-policy-acl:acl/match-originator-acl": {
+    "name": "按ACL过滤器匹配"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-route-originator/huawei-routing-policy-acl:acl/match-originator-acl/acl-ref": {
+    "name": "ACL过滤器名"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-group-address/huawei-routing-policy-acl:acl": {
+    "name": "指定按ACL匹配IPv4目的地址"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-group-address/huawei-routing-policy-acl:acl/match-group-address-acl": {
+    "name": "匹配组播组地址"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-group-address/huawei-routing-policy-acl:acl/match-group-address-acl/acl-ref": {
+    "name": "ACL过滤器名"
+  },
+  "/huawei-routing-policy:routing-policy/tunnel-selectors/tunnel-selector/nodes/node/conditions/match-ipv4-nexthop/huawei-routing-policy-acl:acl": {
+    "name": "指定按ACL匹配IPv4下一跳"
+  },
+  "/huawei-routing-policy:routing-policy/tunnel-selectors/tunnel-selector/nodes/node/conditions/match-ipv4-nexthop/huawei-routing-policy-acl:acl/match-nexthop-acl": {
+    "name": "按ACL匹配IPv4下一跳"
+  },
+  "/huawei-routing-policy:routing-policy/tunnel-selectors/tunnel-selector/nodes/node/conditions/match-ipv4-nexthop/huawei-routing-policy-acl:acl/match-nexthop-acl/acl-ref": {
+    "name": "ACL过滤器名"
+  }
+}

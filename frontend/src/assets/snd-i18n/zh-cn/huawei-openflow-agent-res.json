@@ -1,0 +1,92 @@
+{
+  "/huawei-openflow-agent:openflow-agent": {
+    "name": "配置OpenFlow agents"
+  },
+  "/huawei-openflow-agent:openflow-agent/sdnagent": {
+    "name": "配置OpenFlow agent"
+  },
+  "/huawei-openflow-agent:openflow-agent/sdnagent/description": {
+    "name": "OpenFlow agent描述"
+  },
+  "/huawei-openflow-agent:openflow-agent/sdnagent/source-ip": {
+    "name": "配置源IPv4地址"
+  },
+  "/huawei-openflow-agent:openflow-agent/sdnagent/source-ip/source-address": {
+    "name": "配置OpenFlow agent IPv4地址"
+  },
+  "/huawei-openflow-agent:openflow-agent/sdnagent/source-ipv6": {
+    "name": "配置源IPv6地址"
+  },
+  "/huawei-openflow-agent:openflow-agent/sdnagent/source-ipv6/source-address": {
+    "name": "配置OpenFlow agent IPv6地址"
+  },
+  "/huawei-openflow-agent:openflow-agent/sdnagent/controllers": {
+    "name": "控制器配置列表"
+  },
+  "/huawei-openflow-agent:openflow-agent/sdnagent/controllers/controller": {
+    "name": "配置控制器"
+  },
+  "/huawei-openflow-agent:openflow-agent/sdnagent/controllers/controller/controller-address": {
+    "name": "控制器IPv4地址"
+  },
+  "/huawei-openflow-agent:openflow-agent/sdnagent/controllers/controller/vpn-name": {
+    "name": "控制器VPN实例名"
+  },
+  "/huawei-openflow-agent:openflow-agent/sdnagent/controllers/controller/openflow-attributes": {
+    "name": "配置OpenFlow信息"
+  },
+  "/huawei-openflow-agent:openflow-agent/sdnagent/controllers/controller/openflow-attributes/echo-interval": {
+    "name": "配置echo间隔"
+  },
+  "/huawei-openflow-agent:openflow-agent/sdnagent/controllers/controller/openflow-attributes/keychain-name": {
+    "name": "配置keychain名字"
+  },
+  "/huawei-openflow-agent:openflow-agent/sdnagent/controllers/controller/openflow-attributes/agent-address": {
+    "name": "配置OpenFlow agent IPv4地址"
+  },
+  "/huawei-openflow-agent:openflow-agent/sdnagent/controllers/controller/openflow-attributes/ssl-policy-name": {
+    "name": "配置ssl策略名称"
+  },
+  "/huawei-openflow-agent:openflow-agent/session-infos": {
+    "name": "OpenFlow会话信息列表"
+  },
+  "/huawei-openflow-agent:openflow-agent/session-infos/session-info": {
+    "name": "OpenFlow会话状态"
+  },
+  "/huawei-openflow-agent:openflow-agent/session-infos/session-info/controller-address": {
+    "name": "控制器IPv4地址"
+  },
+  "/huawei-openflow-agent:openflow-agent/session-infos/session-info/vpn-name": {
+    "name": "控制器VPN实例名"
+  },
+  "/huawei-openflow-agent:openflow-agent/session-infos/session-info/agent-address": {
+    "name": "OpenFlow agent IPv4地址"
+  },
+  "/huawei-openflow-agent:openflow-agent/session-infos/session-info/up-time": {
+    "name": "Up时间"
+  },
+  "/huawei-openflow-agent:openflow-agent/session-infos/session-info/state": {
+    "name": "会话状态"
+  },
+  "/huawei-openflow-agent:openflow-agent/session-infos/session-info/role": {
+    "name": "会话角色"
+  },
+  "/huawei-openflow-agent:openflow-agent/priority": {
+    "name": "配置OpenFlow优先级"
+  },
+  "/huawei-openflow-agent:openflow-agent/priority/dscp": {
+    "name": "DSCP值"
+  },
+  "/huawei-openflow-agent:reset-all-sessions": {
+    "name": "重置所有OpenFlow会话"
+  },
+  "/huawei-openflow-agent:reset-all-statistics": {
+    "name": "重置所有OpenFlow统计"
+  },
+  "/rpcs/huawei-openflow-agent:openflow-agent/reset-all-sessions": {
+    "name": "重置所有OpenFlow会话"
+  },
+  "/rpcs/huawei-openflow-agent:openflow-agent/reset-all-statistics": {
+    "name": "重置所有OpenFlow统计"
+  }
+}

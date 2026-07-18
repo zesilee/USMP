@@ -1,0 +1,1070 @@
+{
+  "/huawei-acl:acl": {
+    "name": "ACL"
+  },
+  "/huawei-acl:acl/groups": {
+    "name": "List of ACL Rule Groups"
+  },
+  "/huawei-acl:acl/groups/group": {
+    "name": "ACL Rule Group"
+  },
+  "/huawei-acl:acl/groups/group/identity": {
+    "name": "ACL Identifier"
+  },
+  "/huawei-acl:acl/groups/group/type": {
+    "name": "Type"
+  },
+  "/huawei-acl:acl/groups/group/match-order": {
+    "name": "Matching Order"
+  },
+  "/huawei-acl:acl/groups/group/step": {
+    "name": "Step"
+  },
+  "/huawei-acl:acl/groups/group/description": {
+    "name": "Description"
+  },
+  "/huawei-acl:acl/groups/group/number": {
+    "name": "ACL Number"
+  },
+  "/huawei-acl:acl/groups/group/rule-basics": {
+    "name": "List of Basic ACL Rules"
+  },
+  "/huawei-acl:acl/groups/group/rule-basics/rule-basic": {
+    "name": "Basic ACL Rule"
+  },
+  "/huawei-acl:acl/groups/group/rule-basics/rule-basic/name": {
+    "name": "Rule Name"
+  },
+  "/huawei-acl:acl/groups/group/rule-basics/rule-basic/id": {
+    "name": "Rule ID"
+  },
+  "/huawei-acl:acl/groups/group/rule-basics/rule-basic/action": {
+    "name": "Rule Action"
+  },
+  "/huawei-acl:acl/groups/group/rule-basics/rule-basic/active-status": {
+    "name": "Rule Valid Flag"
+  },
+  "/huawei-acl:acl/groups/group/rule-basics/rule-basic/source-ipaddr": {
+    "name": "Source IP Address"
+  },
+  "/huawei-acl:acl/groups/group/rule-basics/rule-basic/source-wild": {
+    "name": "Source IP Address Wildcard mask"
+  },
+  "/huawei-acl:acl/groups/group/rule-basics/rule-basic/fragment-type": {
+    "name": "Fragmentation Type"
+  },
+  "/huawei-acl:acl/groups/group/rule-basics/rule-basic/vpn": {
+    "name": "VPN Configuration"
+  },
+  "/huawei-acl:acl/groups/group/rule-basics/rule-basic/vpn/vpn-instance": {
+    "name": "VPN Instance Name"
+  },
+  "/huawei-acl:acl/groups/group/rule-basics/rule-basic/vpn/vpn-instance/vpn-name": {
+    "name": "VPN Instance Name"
+  },
+  "/huawei-acl:acl/groups/group/rule-basics/rule-basic/vpn/vpn-any": {
+    "name": "Any VPN Instance"
+  },
+  "/huawei-acl:acl/groups/group/rule-basics/rule-basic/vpn/vpn-any/vpn-any": {
+    "name": "Any VPN Instance"
+  },
+  "/huawei-acl:acl/groups/group/rule-basics/rule-basic/time-range-name": {
+    "name": "Time Range"
+  },
+  "/huawei-acl:acl/groups/group/rule-basics/rule-basic/description": {
+    "name": "Rule Description"
+  },
+  "/huawei-acl:acl/groups/group/rule-basics/rule-basic/match-statistics": {
+    "name": "Matched Times"
+  },
+  "/huawei-acl:acl/groups/group/rule-basics/rule-basic/match-statistics/match-count": {
+    "name": "Matched Times"
+  },
+  "/huawei-acl:acl/groups/group/rule-basics/rule-basic/priority": {
+    "name": "Rule priority"
+  },
+  "/huawei-acl:acl/groups/group/rule-basics/rule-basic/log-enable": {
+    "name": "Log Matching"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances": {
+    "name": "Advanced ACL Rule List"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance": {
+    "name": "Advanced ACL Rule"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/name": {
+    "name": "Rule Name"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/id": {
+    "name": "Rule ID"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/action": {
+    "name": "Rule Action"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/active-status": {
+    "name": "Rule Valid Flag"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/protocol-type": {
+    "name": "Protocol Type"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/protocol-type/single": {
+    "name": "Protocol Number"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/protocol-type/single/protocol": {
+    "name": "Protocol Value"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/protocol-type/zero": {
+    "name": "Match zero protocol packet"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/protocol-type/zero/protocol-zero": {
+    "name": "Match zero protocol packet"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/source": {
+    "name": "Source Parameters"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/source/ip": {
+    "name": "Source IP And Mask"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/source/ip/source-ipaddr": {
+    "name": "Source IP Address"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/source/ip/source-wild": {
+    "name": "Source IP Address Wildcard Mask"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/source/ip-pool": {
+    "name": "Source IP Pool"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/source/ip-pool/source-pool-name": {
+    "name": "Source Pool Name"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/dest": {
+    "name": "Destination Parameters"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/dest/ip": {
+    "name": "Destination IP And Mask"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/dest/ip/dest-ipaddr": {
+    "name": "Destination IP Address"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/dest/ip/dest-wild": {
+    "name": "Destination IP Address Wildcard Mask"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/dest/ip-pool": {
+    "name": "Destination IP pool"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/dest/ip-pool/dest-pool-name": {
+    "name": "Destination Pool Name"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/packets-priority": {
+    "name": "Packets Priority"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/packets-priority/tos": {
+    "name": "Packets Priority"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/packets-priority/tos/precedence": {
+    "name": "Data Packets Priority"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/packets-priority/tos/tos": {
+    "name": "Data Packet ToS"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/packets-priority/dscp": {
+    "name": "Differentiated Services Code Point"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/packets-priority/dscp/dscp": {
+    "name": "DSCP"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/vpn": {
+    "name": "VPN Configuration"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/vpn/vpn-instance": {
+    "name": "VPN Instance Name"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/vpn/vpn-instance/vpn-name": {
+    "name": "VPN Instance Name"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/vpn/vpn-any": {
+    "name": "Any VPN Instance"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/vpn/vpn-any/vpn-any": {
+    "name": "Any VPN Instance"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/tcp-flag": {
+    "name": "TCP-FLAG Configuration"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/tcp-flag/mask": {
+    "name": "Tcp Flag and Mask"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/tcp-flag/mask/tcp-flag-value": {
+    "name": "TCP Flag"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/tcp-flag/mask/tcp-flag-mask": {
+    "name": "TCP Flag Mask"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/tcp-flag/established": {
+    "name": "TCP Established"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/tcp-flag/established/established": {
+    "name": "Established"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/source-port": {
+    "name": "Source Port"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/source-port/range": {
+    "name": "Source Port Number Range"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/source-port/range/source-port-begin": {
+    "name": "Start Port Number"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/source-port/range/source-port-end": {
+    "name": "End Port Number"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/source-port/not-equal": {
+    "name": "Source Port Number By Not Equal"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/source-port/not-equal/source-port-value": {
+    "name": "Source Port Number"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/source-port/port-pool": {
+    "name": "Source Port Pool"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/source-port/port-pool/src-port-pool-name": {
+    "name": "Source Port Pool Name"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/dest-port": {
+    "name": "Destinatione Port"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/dest-port/range": {
+    "name": "Destinatione Port Number Range"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/dest-port/range/dest-port-begin": {
+    "name": "Start Port Number"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/dest-port/range/dest-port-end": {
+    "name": "End Port Number"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/dest-port/not-equal": {
+    "name": "DestinationPort Number By Not Equal"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/dest-port/not-equal/dest-port-value": {
+    "name": "Dest Port Number"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/dest-port/port-pool": {
+    "name": "Destination Port Pool"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/dest-port/port-pool/dest-port-pool-name": {
+    "name": "Destination Port Pool Name"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/ttl": {
+    "name": "TTL value"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/ttl/range": {
+    "name": "TTL Value Range"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/ttl/range/ttl-begin": {
+    "name": "Start TTL Value"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/ttl/range/ttl-end": {
+    "name": "End TTL Value"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/ttl/not-equal": {
+    "name": "TTL Value By Not Equal"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/ttl/not-equal/ttl-value": {
+    "name": "TTL Value"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/description": {
+    "name": "Rule Description"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/fragment-type": {
+    "name": "Source Port Number Range"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/packet-length": {
+    "name": "Packet Length Value Range"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/packet-length/range": {
+    "name": "Range of packet length"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/packet-length/range/packet-len-begin": {
+    "name": "Start packet length value"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/packet-length/range/packet-len-end": {
+    "name": "End packet length value"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/packet-length/not-equal": {
+    "name": "Packet Length Value by Not Equal"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/packet-length/not-equal/packet-len-value": {
+    "name": "Start packet length value"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/icmp-type": {
+    "name": "ICMP Type"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/icmp-type-end": {
+    "name": "ICMP Type End"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/icmp-code": {
+    "name": "ICMP Message Code"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/vni": {
+    "name": "VNI"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/priority": {
+    "name": "Rule priority"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/time-range-name": {
+    "name": "Time Range"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/match-statistics": {
+    "name": "Matched Times"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/match-statistics/match-count": {
+    "name": "Matched Times"
+  },
+  "/huawei-acl:acl/groups/group/rule-advances/rule-advance/log-enable": {
+    "name": "Logging enable"
+  },
+  "/huawei-acl:acl/groups/group/rule-ethernets": {
+    "name": "List of Ethernet Frame Header-based ACL Rules"
+  },
+  "/huawei-acl:acl/groups/group/rule-ethernets/rule-ethernet": {
+    "name": "Ethernet Frame Header-based ACL Rule"
+  },
+  "/huawei-acl:acl/groups/group/rule-ethernets/rule-ethernet/name": {
+    "name": "Rule Name"
+  },
+  "/huawei-acl:acl/groups/group/rule-ethernets/rule-ethernet/id": {
+    "name": "Rule ID"
+  },
+  "/huawei-acl:acl/groups/group/rule-ethernets/rule-ethernet/action": {
+    "name": "Rule Action"
+  },
+  "/huawei-acl:acl/groups/group/rule-ethernets/rule-ethernet/active-status": {
+    "name": "Rule Valid Flag"
+  },
+  "/huawei-acl:acl/groups/group/rule-ethernets/rule-ethernet/frame-type": {
+    "name": "Ethernet Frame Header Protocol Type"
+  },
+  "/huawei-acl:acl/groups/group/rule-ethernets/rule-ethernet/frame-mask": {
+    "name": "Ethernet Frame Header Protocol Type Mask"
+  },
+  "/huawei-acl:acl/groups/group/rule-ethernets/rule-ethernet/source-mac": {
+    "name": "Source MAC Address"
+  },
+  "/huawei-acl:acl/groups/group/rule-ethernets/rule-ethernet/source-mac-mask": {
+    "name": "Source MAC Address Mask"
+  },
+  "/huawei-acl:acl/groups/group/rule-ethernets/rule-ethernet/dest-mac": {
+    "name": "Destination MAC Address"
+  },
+  "/huawei-acl:acl/groups/group/rule-ethernets/rule-ethernet/dest-mac-mask": {
+    "name": "Destination MAC Address Mask"
+  },
+  "/huawei-acl:acl/groups/group/rule-ethernets/rule-ethernet/vlan-id": {
+    "name": "VLAN"
+  },
+  "/huawei-acl:acl/groups/group/rule-ethernets/rule-ethernet/vlan-id-mask": {
+    "name": "VLAN Mask"
+  },
+  "/huawei-acl:acl/groups/group/rule-ethernets/rule-ethernet/value-8021p": {
+    "name": "Priority of 802.1p"
+  },
+  "/huawei-acl:acl/groups/group/rule-ethernets/rule-ethernet/ce-vlan-id": {
+    "name": "CE-VLAN"
+  },
+  "/huawei-acl:acl/groups/group/rule-ethernets/rule-ethernet/ce-vlan-id-mask": {
+    "name": "Mask of an Inner VLAN ID"
+  },
+  "/huawei-acl:acl/groups/group/rule-ethernets/rule-ethernet/ce-vlan-value-8021p": {
+    "name": "802.1p Priority In CE-VLAN"
+  },
+  "/huawei-acl:acl/groups/group/rule-ethernets/rule-ethernet/time-range-name": {
+    "name": "Time Range"
+  },
+  "/huawei-acl:acl/groups/group/rule-ethernets/rule-ethernet/description": {
+    "name": "Rule Description"
+  },
+  "/huawei-acl:acl/groups/group/rule-ethernets/rule-ethernet/priority": {
+    "name": "Rule priority"
+  },
+  "/huawei-acl:acl/groups/group/rule-ethernets/rule-ethernet/match-statistics": {
+    "name": "Matched Times"
+  },
+  "/huawei-acl:acl/groups/group/rule-ethernets/rule-ethernet/match-statistics/match-count": {
+    "name": "Matched Times"
+  },
+  "/huawei-acl:acl/groups/group/rule-interfaces": {
+    "name": "Interface-based ACL Groups"
+  },
+  "/huawei-acl:acl/groups/group/rule-interfaces/rule-interface": {
+    "name": "Interface-based ACL Group"
+  },
+  "/huawei-acl:acl/groups/group/rule-interfaces/rule-interface/name": {
+    "name": "ACL Rule Name"
+  },
+  "/huawei-acl:acl/groups/group/rule-interfaces/rule-interface/id": {
+    "name": "Rule ID"
+  },
+  "/huawei-acl:acl/groups/group/rule-interfaces/rule-interface/action": {
+    "name": "Matching Mode"
+  },
+  "/huawei-acl:acl/groups/group/rule-interfaces/rule-interface/interface": {
+    "name": "Interface Parameter"
+  },
+  "/huawei-acl:acl/groups/group/rule-interfaces/rule-interface/interface/interface-any": {
+    "name": "Any Interface"
+  },
+  "/huawei-acl:acl/groups/group/rule-interfaces/rule-interface/interface/interface-any/if-any": {
+    "name": "Any Interface"
+  },
+  "/huawei-acl:acl/groups/group/rule-interfaces/rule-interface/interface/interface-name": {
+    "name": "Interface Name"
+  },
+  "/huawei-acl:acl/groups/group/rule-interfaces/rule-interface/interface/interface-name/if-name": {
+    "name": "Interface Name"
+  },
+  "/huawei-acl:acl/groups/group/rule-interfaces/rule-interface/time-range-name": {
+    "name": "Name of a time range"
+  },
+  "/huawei-acl:acl/groups/group/rule-interfaces/rule-interface/active-status": {
+    "name": "Valid Status"
+  },
+  "/huawei-acl:acl/groups/group/rule-interfaces/rule-interface/description": {
+    "name": "ACL Description"
+  },
+  "/huawei-acl:acl/groups/group/rule-interfaces/rule-interface/match-statistics": {
+    "name": "Number of matched times"
+  },
+  "/huawei-acl:acl/groups/group/rule-interfaces/rule-interface/match-statistics/match-count": {
+    "name": "Number of matched times"
+  },
+  "/huawei-acl:acl/groups/group/rule-mplss": {
+    "name": "MPLS ACL Rule List"
+  },
+  "/huawei-acl:acl/groups/group/rule-mplss/rule-mpls": {
+    "name": "MPLS ACL Rule"
+  },
+  "/huawei-acl:acl/groups/group/rule-mplss/rule-mpls/name": {
+    "name": "Rule Name"
+  },
+  "/huawei-acl:acl/groups/group/rule-mplss/rule-mpls/id": {
+    "name": "Rule ID"
+  },
+  "/huawei-acl:acl/groups/group/rule-mplss/rule-mpls/action": {
+    "name": "Rule Action"
+  },
+  "/huawei-acl:acl/groups/group/rule-mplss/rule-mpls/description": {
+    "name": "Rule Description"
+  },
+  "/huawei-acl:acl/groups/group/rule-mplss/rule-mpls/priority": {
+    "name": "Priority"
+  },
+  "/huawei-acl:acl/groups/group/rule-mplss/rule-mpls/lables": {
+    "name": "Rule Lable List"
+  },
+  "/huawei-acl:acl/groups/group/rule-mplss/rule-mpls/lables/lable": {
+    "name": "Rule Lable"
+  },
+  "/huawei-acl:acl/groups/group/rule-mplss/rule-mpls/lables/lable/sequence": {
+    "name": "Sequence Number"
+  },
+  "/huawei-acl:acl/groups/group/rule-mplss/rule-mpls/lables/lable/exp-value": {
+    "name": "EXP Value"
+  },
+  "/huawei-acl:acl/groups/group/rule-mplss/rule-mpls/lables/lable/label-value": {
+    "name": "Label value"
+  },
+  "/huawei-acl:acl/groups/group/rule-mplss/rule-mpls/lables/lable/ttl-begin": {
+    "name": "Begin TTL value"
+  },
+  "/huawei-acl:acl/groups/group/rule-mplss/rule-mpls/lables/lable/ttl-end": {
+    "name": "End TTL value"
+  },
+  "/huawei-acl:acl/groups/group/rule-users": {
+    "name": "User ACL Rule List"
+  },
+  "/huawei-acl:acl/groups/group/rule-users/rule-user": {
+    "name": "User ACL Rule"
+  },
+  "/huawei-acl:acl/groups/group/rule-users/rule-user/name": {
+    "name": "User ACL Rule Name"
+  },
+  "/huawei-acl:acl/groups/group/rule-users/rule-user/id": {
+    "name": "User ACL Rule ID"
+  },
+  "/huawei-acl:acl/groups/group/rule-users/rule-user/action": {
+    "name": "User ACL Rule Matching Mode"
+  },
+  "/huawei-acl:acl/groups/group/rule-users/rule-user/time-range-name": {
+    "name": "Effective Time Range of an ACL Rule"
+  },
+  "/huawei-acl:acl/groups/group/rule-users/rule-user/offset-begin": {
+    "name": "Start Offset Position"
+  },
+  "/huawei-acl:acl/groups/group/rule-users/rule-user/user-rule1": {
+    "name": "Value of the First Matching Field"
+  },
+  "/huawei-acl:acl/groups/group/rule-users/rule-user/user-rule1-mask": {
+    "name": "Mask of the First Matching Field"
+  },
+  "/huawei-acl:acl/groups/group/rule-users/rule-user/offset1": {
+    "name": "Offset of the First Matching Field"
+  },
+  "/huawei-acl:acl/groups/group/rule-users/rule-user/user-rule2": {
+    "name": "Value of the Second Matching Field"
+  },
+  "/huawei-acl:acl/groups/group/rule-users/rule-user/user-rule2-mask": {
+    "name": "Mask of the Second Matching Field"
+  },
+  "/huawei-acl:acl/groups/group/rule-users/rule-user/offset2": {
+    "name": "Offset of the Second Matching Field"
+  },
+  "/huawei-acl:acl/groups/group/rule-users/rule-user/user-rule3": {
+    "name": "Value of the Third Matching Field"
+  },
+  "/huawei-acl:acl/groups/group/rule-users/rule-user/user-rule3-mask": {
+    "name": "Mask of the Third Matching Field"
+  },
+  "/huawei-acl:acl/groups/group/rule-users/rule-user/offset3": {
+    "name": "Offset of the Third Matching Field"
+  },
+  "/huawei-acl:acl/groups/group/rule-users/rule-user/user-rule4": {
+    "name": "Value of the Fourth Matching Field"
+  },
+  "/huawei-acl:acl/groups/group/rule-users/rule-user/user-rule4-mask": {
+    "name": "Mask of the Fourth Matching Field"
+  },
+  "/huawei-acl:acl/groups/group/rule-users/rule-user/offset4": {
+    "name": "Offset of the Fourth Matching Field"
+  },
+  "/huawei-acl:acl/groups/group/rule-users/rule-user/user-rule5": {
+    "name": "Value of the Fifth Matching Field"
+  },
+  "/huawei-acl:acl/groups/group/rule-users/rule-user/user-rule5-mask": {
+    "name": "Mask of the Fifth Matching Field"
+  },
+  "/huawei-acl:acl/groups/group/rule-users/rule-user/offset5": {
+    "name": "Offset of the Fifth Matching Field"
+  },
+  "/huawei-acl:acl/groups/group/rule-users/rule-user/user-rule6": {
+    "name": "Value of the Sixth Matching Field"
+  },
+  "/huawei-acl:acl/groups/group/rule-users/rule-user/user-rule6-mask": {
+    "name": "Mask of the Sixth Matching Field"
+  },
+  "/huawei-acl:acl/groups/group/rule-users/rule-user/offset6": {
+    "name": "Offset of the Sixth Matching Field"
+  },
+  "/huawei-acl:acl/groups/group/rule-users/rule-user/user-rule7": {
+    "name": "Value of the Seventh Matching Field"
+  },
+  "/huawei-acl:acl/groups/group/rule-users/rule-user/user-rule7-mask": {
+    "name": "Mask of the Seventh Matching Field"
+  },
+  "/huawei-acl:acl/groups/group/rule-users/rule-user/offset7": {
+    "name": "Offset of the Seventh Matching Field"
+  },
+  "/huawei-acl:acl/groups/group/rule-users/rule-user/user-rule8": {
+    "name": "Value of the Eighth Matching Field"
+  },
+  "/huawei-acl:acl/groups/group/rule-users/rule-user/user-rule8-mask": {
+    "name": "Mask of the Eighth Matching Field"
+  },
+  "/huawei-acl:acl/groups/group/rule-users/rule-user/offset8": {
+    "name": "Offset of the Eighth Matching Field"
+  },
+  "/huawei-acl:acl/groups/group/rule-users/rule-user/active-status": {
+    "name": "Rule Valid Flag"
+  },
+  "/huawei-acl:acl/groups/group/rule-users/rule-user/description": {
+    "name": "Description of an ACL Rule"
+  },
+  "/huawei-acl:acl/groups/group/rule-users/rule-user/match-statistics": {
+    "name": "User ACL Rule Match Statistics"
+  },
+  "/huawei-acl:acl/groups/group/rule-users/rule-user/match-statistics/match-count": {
+    "name": "User ACL Rule Match Count"
+  },
+  "/huawei-acl:acl/groups/group/rule-arps": {
+    "name": "ARP ACL Rule List"
+  },
+  "/huawei-acl:acl/groups/group/rule-arps/rule-arp": {
+    "name": "ARP ACL Rule"
+  },
+  "/huawei-acl:acl/groups/group/rule-arps/rule-arp/name": {
+    "name": "Rule Name"
+  },
+  "/huawei-acl:acl/groups/group/rule-arps/rule-arp/id": {
+    "name": "Rule ID"
+  },
+  "/huawei-acl:acl/groups/group/rule-arps/rule-arp/action": {
+    "name": "Rule Action"
+  },
+  "/huawei-acl:acl/groups/group/rule-arps/rule-arp/time-range-name": {
+    "name": "Name Of A Period"
+  },
+  "/huawei-acl:acl/groups/group/rule-arps/rule-arp/packet-mode": {
+    "name": "Packet Type"
+  },
+  "/huawei-acl:acl/groups/group/rule-arps/rule-arp/source-ipaddr": {
+    "name": "Source IP Address"
+  },
+  "/huawei-acl:acl/groups/group/rule-arps/rule-arp/source-wild": {
+    "name": "Source IP Address Wildcard Mask"
+  },
+  "/huawei-acl:acl/groups/group/rule-arps/rule-arp/dest-ipaddr": {
+    "name": "Destination IP Address"
+  },
+  "/huawei-acl:acl/groups/group/rule-arps/rule-arp/dest-wild": {
+    "name": "Destination IP Address Wildcard Mask"
+  },
+  "/huawei-acl:acl/groups/group/rule-arps/rule-arp/source-mac": {
+    "name": "Source MAC Address"
+  },
+  "/huawei-acl:acl/groups/group/rule-arps/rule-arp/source-mac-mask": {
+    "name": "Source MAC Address Mask"
+  },
+  "/huawei-acl:acl/groups/group/rule-arps/rule-arp/dest-mac": {
+    "name": "Destination MAC Address"
+  },
+  "/huawei-acl:acl/groups/group/rule-arps/rule-arp/dest-mac-mask": {
+    "name": "Destination MAC Address Mask"
+  },
+  "/huawei-acl:acl/groups/group/rule-arps/rule-arp/active-status": {
+    "name": "Rule Active Status"
+  },
+  "/huawei-acl:acl/groups/group/rule-arps/rule-arp/description": {
+    "name": "Rule Description"
+  },
+  "/huawei-acl:acl/groups/group/rule-arps/rule-arp/match-statistics": {
+    "name": "Rule Matched Count List"
+  },
+  "/huawei-acl:acl/groups/group/rule-arps/rule-arp/match-statistics/match-count": {
+    "name": "Rule Match Count"
+  },
+  "/huawei-acl:acl/group6s": {
+    "name": "ACL6 Rule Group List"
+  },
+  "/huawei-acl:acl/group6s/group6": {
+    "name": "ACL6 Rule Group"
+  },
+  "/huawei-acl:acl/group6s/group6/identity": {
+    "name": "ACL6 Identifier"
+  },
+  "/huawei-acl:acl/group6s/group6/type": {
+    "name": "Type"
+  },
+  "/huawei-acl:acl/group6s/group6/match-order": {
+    "name": "Matching Order"
+  },
+  "/huawei-acl:acl/group6s/group6/step": {
+    "name": "Step"
+  },
+  "/huawei-acl:acl/group6s/group6/description": {
+    "name": "Description"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-basics": {
+    "name": "Basic ACL6 Groups"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-basics/rule-basic": {
+    "name": "Basic ACL6 Rule"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-basics/rule-basic/name": {
+    "name": "Name of an ACL6 Rule"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-basics/rule-basic/id": {
+    "name": "Rule ID"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-basics/rule-basic/action": {
+    "name": "Matching mode"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-basics/rule-basic/active-status": {
+    "name": "Valid Status"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-basics/rule-basic/source-ipaddr": {
+    "name": "Source Address"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-basics/rule-basic/source-ip-mask": {
+    "name": "Source Mask"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-basics/rule-basic/source-ip-mask/positive-mask-len": {
+    "name": "Source Address Mask"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-basics/rule-basic/source-ip-mask/positive-mask-len/source-mask-len": {
+    "name": "Source Address Mask"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-basics/rule-basic/source-ip-mask/negative-mask": {
+    "name": "Wildcard Mask"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-basics/rule-basic/source-ip-mask/negative-mask/source-wild": {
+    "name": "Wildcard Mask"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-basics/rule-basic/fragment-type": {
+    "name": "Packet Fragmentation Type"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-basics/rule-basic/vpn": {
+    "name": "VPN Instance"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-basics/rule-basic/vpn/vpn-instance": {
+    "name": "VPN Instance"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-basics/rule-basic/vpn/vpn-instance/vpn-name": {
+    "name": "VPN Instance"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-basics/rule-basic/vpn/vpn-any": {
+    "name": "Any VPN Instance"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-basics/rule-basic/vpn/vpn-any/vpn-any": {
+    "name": "Any VPN Instance"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-basics/rule-basic/time-range-name": {
+    "name": "Time Range Name"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-basics/rule-basic/description": {
+    "name": "Rule Description"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-basics/rule-basic/match-statistics": {
+    "name": "Matched Cou"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-basics/rule-basic/match-statistics/match-count": {
+    "name": "Matched Count"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances": {
+    "name": "Advanced ACL6 Rule List"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance": {
+    "name": "Advance ACL6 Rule"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/name": {
+    "name": "Rule Name"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/id": {
+    "name": "Rule ID"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/action": {
+    "name": "Rule Action"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/active-status": {
+    "name": "Valid Status"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/protocol-type": {
+    "name": "Protocol Value"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/protocol-type/single": {
+    "name": "Protocol Value"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/protocol-type/single/protocol": {
+    "name": "Protocol Value"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/protocol-type/zero": {
+    "name": "Match zero protocol packet"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/protocol-type/zero/hoport": {
+    "name": "Match zero protocol packet"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/source": {
+    "name": "Specify Source Parameters"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/source/ip": {
+    "name": "Source IP and Mask"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/source/ip/source-ipaddr": {
+    "name": "Source IPv6 Address"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/source/ip/source-ipaddr-mask": {
+    "name": "Source IP Mask"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/source/ip/source-ipaddr-mask/positive-mask-len": {
+    "name": "Source IPv6 Address Mask Mode"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/source/ip/source-ipaddr-mask/positive-mask-len/source-mask-len": {
+    "name": "Source IP Address Mask"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/source/ip/source-ipaddr-mask/negative-mask": {
+    "name": "Wildcard mask"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/source/ip/source-ipaddr-mask/negative-mask/source-wild": {
+    "name": "Wildcard mask"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/source/ip-pool": {
+    "name": "Source IP pool"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/source/ip-pool/source-pool6-name": {
+    "name": "Name of a source IPv6 pool"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/dest": {
+    "name": "Destination Parameters"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/dest/ip": {
+    "name": "Destination IPv6 Address"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/dest/ip/dest-ipaddr": {
+    "name": "Destination IPV6 Address"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/dest/ip/dest-ipaddr-mask": {
+    "name": "Destination Mask"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/dest/ip/dest-ipaddr-mask/positive-mask-len": {
+    "name": "Destination IPv6 Address Mask Mode"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/dest/ip/dest-ipaddr-mask/positive-mask-len/dest-mask-len": {
+    "name": "Destination IP Address Mask"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/dest/ip/dest-ipaddr-mask/negative-mask": {
+    "name": "Wildcard mask"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/dest/ip/dest-ipaddr-mask/negative-mask/dest-wild": {
+    "name": "Wildcard mask"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/packets-priority": {
+    "name": "Packets priority"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/packets-priority/tos": {
+    "name": "Specify packets priority"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/packets-priority/tos/precedence": {
+    "name": "Priority"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/packets-priority/tos/tos": {
+    "name": "ToS value"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/packets-priority/dscp": {
+    "name": "Differentiated services code point"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/packets-priority/dscp/dscp": {
+    "name": "Differentiated services code point"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/icmp-type": {
+    "name": "ICMP type"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/icmp-type-end": {
+    "name": "ICMP type end"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/icmp-code": {
+    "name": "ICMP message code"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/vpn": {
+    "name": "VPN Instance"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/vpn/vpn-instance": {
+    "name": "VPN Instance"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/vpn/vpn-instance/vpn-name": {
+    "name": "VPN Instance Name"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/vpn/vpn-any": {
+    "name": "Any VPN Instance"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/vpn/vpn-any/vpn-any": {
+    "name": "Any VPN Instance"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/tcp-flag": {
+    "name": "Tcp Flag"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/tcp-flag/mask": {
+    "name": "Tcp flag and mask"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/tcp-flag/mask/tcp-flag-value": {
+    "name": "TCP flag value"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/tcp-flag/mask/tcp-flag-mask": {
+    "name": "TCP flag mask"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/tcp-flag/established": {
+    "name": "Established"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/tcp-flag/established/established": {
+    "name": "Established"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/source-port": {
+    "name": "Source port"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/source-port/range": {
+    "name": "Source port"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/source-port/range/source-port-begin": {
+    "name": "Start port number"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/source-port/range/source-port-end": {
+    "name": "End port number"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/source-port/not-equal": {
+    "name": "Specify source port number by not equal"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/source-port/not-equal/source-port-value": {
+    "name": "Port number of the source port"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/dest-port": {
+    "name": "Destination Port"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/dest-port/range": {
+    "name": "Range of Destination Port"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/dest-port/range/dest-port-begin": {
+    "name": "Start Port Number"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/dest-port/range/dest-port-end": {
+    "name": "End Port Number"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/dest-port/not-equal": {
+    "name": "Specify destination port"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/dest-port/not-equal/dest-port-value": {
+    "name": "Port number of the source port"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/time-range-name": {
+    "name": "Time range"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/description": {
+    "name": "Rule Description"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/fragment-type": {
+    "name": "Fragment Type"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/priority": {
+    "name": "Priority of an advanced ACL rule"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/log-enable": {
+    "name": "Logging matched data packets"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/match-statistics": {
+    "name": "State of times rules are matched"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-advances/rule-advance/match-statistics/match-count": {
+    "name": "Rule matched count"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-interfaces": {
+    "name": "Interface-based ACL6 Groups"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-interfaces/rule-interface": {
+    "name": "Interface-based ACL6 Group"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-interfaces/rule-interface/name": {
+    "name": "ACL6 Rule Name"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-interfaces/rule-interface/id": {
+    "name": "Rule ID"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-interfaces/rule-interface/action": {
+    "name": "Matching Mode"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-interfaces/rule-interface/interface": {
+    "name": "Interface Parameter"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-interfaces/rule-interface/interface/interface-any": {
+    "name": "Any Interface"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-interfaces/rule-interface/interface/interface-any/if-any": {
+    "name": "Any Interface"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-interfaces/rule-interface/interface/interface-name": {
+    "name": "Interface Name"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-interfaces/rule-interface/interface/interface-name/if-name": {
+    "name": "Interface Name"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-interfaces/rule-interface/active-status": {
+    "name": "Valid Status"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-interfaces/rule-interface/time-range-name": {
+    "name": "Name of a time range"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-interfaces/rule-interface/description": {
+    "name": "ACL Description"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-interfaces/rule-interface/match-statistics": {
+    "name": "Number of matched times"
+  },
+  "/huawei-acl:acl/group6s/group6/rule-interfaces/rule-interface/match-statistics/match-count": {
+    "name": "Number of matched times"
+  },
+  "/huawei-acl:acl/ip-pools": {
+    "name": "List of ACL Pools"
+  },
+  "/huawei-acl:acl/ip-pools/ip-pool": {
+    "name": "ACL Pool"
+  },
+  "/huawei-acl:acl/ip-pools/ip-pool/name": {
+    "name": "Pool Name"
+  },
+  "/huawei-acl:acl/ip-pools/ip-pool/apply-bgp-ipv4-peer": {
+    "name": "Apply interface type"
+  },
+  "/huawei-acl:acl/ip-pools/ip-pool/bgp-peer-vpn": {
+    "name": "Apply interface VPN type"
+  },
+  "/huawei-acl:acl/ip-pools/ip-pool/bgp-peer-vpn-name": {
+    "name": "Apply interface VPN name"
+  },
+  "/huawei-acl:acl/ip-pools/ip-pool/ipaddrs": {
+    "name": "List of all IP addresses"
+  },
+  "/huawei-acl:acl/ip-pools/ip-pool/ipaddrs/ipaddr": {
+    "name": "Configure IP addresses"
+  },
+  "/huawei-acl:acl/ip-pools/ip-pool/ipaddrs/ipaddr/address": {
+    "name": "IP address"
+  },
+  "/huawei-acl:acl/ip-pools/ip-pool/ipaddrs/ipaddr/mask": {
+    "name": "IP address wildcard mask"
+  },
+  "/huawei-acl:acl/ip-pool6s": {
+    "name": "List of ACL IPv6 Pools"
+  },
+  "/huawei-acl:acl/ip-pool6s/ip-pool6": {
+    "name": "ACL IPv6 Pool"
+  },
+  "/huawei-acl:acl/ip-pool6s/ip-pool6/name": {
+    "name": "Pool Name"
+  },
+  "/huawei-acl:acl/ip-pool6s/ip-pool6/apply-bgp-ipv6-peer": {
+    "name": "Apply interface type"
+  },
+  "/huawei-acl:acl/ip-pool6s/ip-pool6/bgp-peer-vpn": {
+    "name": "Apply BGP IPv6 peer VPN type"
+  },
+  "/huawei-acl:acl/ip-pool6s/ip-pool6/bgp-peer-vpn-name": {
+    "name": "Apply BGP IPv6 peer VPN name"
+  },
+  "/huawei-acl:acl/port-pools": {
+    "name": "ACL Port Pools"
+  },
+  "/huawei-acl:acl/port-pools/port-pool": {
+    "name": "ACL Port Pool"
+  },
+  "/huawei-acl:acl/port-pools/port-pool/name": {
+    "name": "Port Pool Name"
+  },
+  "/huawei-acl:acl/port-pools/port-pool/ports": {
+    "name": "List of Port"
+  },
+  "/huawei-acl:acl/port-pools/port-pool/ports/port": {
+    "name": "Configure Port Pool"
+  },
+  "/huawei-acl:acl/port-pools/port-pool/ports/port/operation": {
+    "name": "Range Type"
+  },
+  "/huawei-acl:acl/port-pools/port-pool/ports/port/number-begin": {
+    "name": "Begin Number"
+  },
+  "/huawei-acl:acl/port-pools/port-pool/ports/port/number-end": {
+    "name": "End Number"
+  },
+  "/huawei-acl:reset-count": {
+    "name": "Resetting the ACL Matching Count"
+  },
+  "/huawei-acl:reset-count/input/identify": {
+    "name": "ACL Identifier"
+  },
+  "/huawei-acl:reset-count6": {
+    "name": "Resetting the ACL6 Matching Count"
+  },
+  "/huawei-acl:reset-count6/input/identify": {
+    "name": "ACL Identifier"
+  },
+  "/rpcs/huawei-acl:acl/reset-count": {
+    "name": "Resetting the ACL Matching Count"
+  },
+  "/rpcs/huawei-acl:acl/reset-count6": {
+    "name": "Resetting the ACL6 Matching Count"
+  }
+}

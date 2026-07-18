@@ -1,0 +1,2477 @@
+{
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route": {
+    "name": "BGP路由信息"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast": {
+    "name": "BGP的IPv4单播地址族路由信息"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes": {
+    "name": "路由信息列表"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route": {
+    "name": "路由信息"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/vpn-name": {
+    "name": "BGP VPN实例名"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/route-distinguisher": {
+    "name": "路由标识ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/prefix": {
+    "name": "网络地址"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/mask-length": {
+    "name": "前缀掩码"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/route-type": {
+    "name": "路由类型"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/im-table-id": {
+    "name": "路由引入表ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/from": {
+    "name": "源对等体"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/path-id": {
+    "name": "接收pathID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/remote-nexthop-tunnel-address": {
+    "name": "远端下一跳的隧道地址"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/remote-nexthop-mac-address": {
+    "name": "远端下一跳的mac"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/nexthop": {
+    "name": "下一跳地址"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/local-preference": {
+    "name": "本地优先级"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/preferred-value": {
+    "name": "协议首选值"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/preference": {
+    "name": "BGP路由优先级"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/path-as": {
+    "name": "AS路径列表"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/origin": {
+    "name": "路由来源"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/med": {
+    "name": "路由度量值"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/flag-string": {
+    "name": "路由标志"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/worse-reason": {
+    "name": "路由未优选原因"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/sending-peers": {
+    "name": "发送对等体"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/time": {
+    "name": "时间戳"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/community": {
+    "name": "团体属性"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/large-community": {
+    "name": "增强团体属性信息"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/ext-community": {
+    "name": "扩展团体属性"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/interface-name": {
+    "name": "出接口名"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/originator": {
+    "name": "源路由器ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/cluster-list": {
+    "name": "簇ID列表"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/remote-route-id": {
+    "name": "对等体路由器ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/relay-nexthop": {
+    "name": "迭代下一跳"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/relay-tunnel-name": {
+    "name": "迭代隧道名"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/atomic-aggregate": {
+    "name": "原子聚合"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/aggregator-as": {
+    "name": "聚合者AS号"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/aggregator-id": {
+    "name": "聚合者标识"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/in-label": {
+    "name": "入标签"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/out-label": {
+    "name": "出标签"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/iterated-vpn": {
+    "name": "迭代VRF"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/remote-nexthop-vni": {
+    "name": "远端下一跳的vni"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/advertise-nexthop": {
+    "name": "发布下一跳"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/prefix-sid": {
+    "name": "路由prefixSid属性"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/aigp": {
+    "name": "路由AIGP属性"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/attribute-set": {
+    "name": "属性集合"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/gateway-ip": {
+    "name": "网关地址"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/routes/route/entropy-label-padding": {
+    "name": "熵标签属性值"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes": {
+    "name": "发布路由信息列表"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route": {
+    "name": "发布路由信息"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/vpn-name": {
+    "name": "BGP VPN实例名"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/remote-peer-address": {
+    "name": "对等体地址"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/route-distinguisher": {
+    "name": "路由标识ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/prefix": {
+    "name": "网络地址"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/mask-length": {
+    "name": "前缀掩码"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/route-type": {
+    "name": "路由类型"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/im-table-id": {
+    "name": "路由引入表ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/from": {
+    "name": "源对等体"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/path-id": {
+    "name": "接收pathID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/remote-nexthop-tunnel-address": {
+    "name": "远端下一跳的隧道地址"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/remote-nexthop-mac-address": {
+    "name": "远端下一跳的mac"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/nexthop": {
+    "name": "下一跳地址"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/local-preference": {
+    "name": "本地优先级"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/preferred-value": {
+    "name": "协议首选值"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/preference": {
+    "name": "BGP路由优先级"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/path-as": {
+    "name": "AS路径列表"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/origin": {
+    "name": "路由来源"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/med": {
+    "name": "路由度量值"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/flag-string": {
+    "name": "路由标志"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/worse-reason": {
+    "name": "路由未优选原因"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/sending-peers": {
+    "name": "发送对等体"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/time": {
+    "name": "时间戳"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/community": {
+    "name": "团体属性"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/large-community": {
+    "name": "增强团体属性信息"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/ext-community": {
+    "name": "扩展团体属性"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/interface-name": {
+    "name": "出接口名"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/originator": {
+    "name": "源路由器ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/cluster-list": {
+    "name": "簇ID列表"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/remote-route-id": {
+    "name": "对等体路由器ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/relay-nexthop": {
+    "name": "迭代下一跳"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/relay-tunnel-name": {
+    "name": "迭代隧道名"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/atomic-aggregate": {
+    "name": "原子聚合"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/aggregator-as": {
+    "name": "聚合者AS号"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/aggregator-id": {
+    "name": "聚合者标识"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/in-label": {
+    "name": "入标签"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/out-label": {
+    "name": "出标签"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/iterated-vpn": {
+    "name": "迭代VRF"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/remote-nexthop-vni": {
+    "name": "远端下一跳的vni"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/advertise-nexthop": {
+    "name": "发布下一跳"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/prefix-sid": {
+    "name": "路由prefixSid属性"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/aigp": {
+    "name": "路由AIGP属性"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/attribute-set": {
+    "name": "属性集合"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/gateway-ip": {
+    "name": "网关地址"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route/entropy-label-padding": {
+    "name": "熵标签属性值"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes": {
+    "name": "接收路由信息列表"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route": {
+    "name": "接收路由信息"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/vpn-name": {
+    "name": "BGP VPN实例名"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/remote-peer-address": {
+    "name": "对等体地址"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/route-distinguisher": {
+    "name": "路由标识ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/prefix": {
+    "name": "网络地址"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/mask-length": {
+    "name": "前缀掩码"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/route-type": {
+    "name": "路由类型"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/im-table-id": {
+    "name": "路由引入表ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/from": {
+    "name": "源对等体"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/path-id": {
+    "name": "接收pathID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/remote-nexthop-tunnel-address": {
+    "name": "远端下一跳的隧道地址"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/remote-nexthop-mac-address": {
+    "name": "远端下一跳的mac"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/nexthop": {
+    "name": "下一跳地址"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/local-preference": {
+    "name": "本地优先级"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/preferred-value": {
+    "name": "协议首选值"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/preference": {
+    "name": "BGP路由优先级"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/path-as": {
+    "name": "AS路径列表"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/origin": {
+    "name": "路由来源"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/med": {
+    "name": "路由度量值"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/flag-string": {
+    "name": "路由标志"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/worse-reason": {
+    "name": "路由未优选原因"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/sending-peers": {
+    "name": "发送对等体"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/time": {
+    "name": "时间戳"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/community": {
+    "name": "团体属性"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/large-community": {
+    "name": "增强团体属性信息"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/ext-community": {
+    "name": "扩展团体属性"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/interface-name": {
+    "name": "出接口名"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/originator": {
+    "name": "源路由器ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/cluster-list": {
+    "name": "簇ID列表"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/remote-route-id": {
+    "name": "对等体路由器ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/relay-nexthop": {
+    "name": "迭代下一跳"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/relay-tunnel-name": {
+    "name": "迭代隧道名"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/atomic-aggregate": {
+    "name": "原子聚合"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/aggregator-as": {
+    "name": "聚合者AS号"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/aggregator-id": {
+    "name": "聚合者标识"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/in-label": {
+    "name": "入标签"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/out-label": {
+    "name": "出标签"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/iterated-vpn": {
+    "name": "迭代VRF"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/remote-nexthop-vni": {
+    "name": "远端下一跳的vni"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/advertise-nexthop": {
+    "name": "发布下一跳"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/prefix-sid": {
+    "name": "路由prefixSid属性"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/aigp": {
+    "name": "路由AIGP属性"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/attribute-set": {
+    "name": "属性集合"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/gateway-ip": {
+    "name": "网关地址"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route/entropy-label-padding": {
+    "name": "熵标签属性值"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes": {
+    "name": "BGP对等体接收的活跃路由信息"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route": {
+    "name": "接收活跃路由信息"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/vpn-name": {
+    "name": "VPN名称"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/remote-peer-address": {
+    "name": "邻居地址"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/route-distinguisher": {
+    "name": "路由标识ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/prefix": {
+    "name": "网络地址"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/mask-length": {
+    "name": "前缀掩码"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/route-type": {
+    "name": "路由类型"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/im-table-id": {
+    "name": "路由引入表ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/from": {
+    "name": "源对等体"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/path-id": {
+    "name": "接收pathID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/remote-nexthop-tunnel-address": {
+    "name": "远端下一跳的隧道地址"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/remote-nexthop-mac-address": {
+    "name": "远端下一跳的MAC"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/nexthop": {
+    "name": "下一跳地址"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/local-preference": {
+    "name": "本地优先级"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/preferred-value": {
+    "name": "协议首选值"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/preference": {
+    "name": "BGP路由优先级"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/path-as": {
+    "name": "AS路径列表"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/origin": {
+    "name": "路由来源"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/med": {
+    "name": "路由度量值"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/flag-string": {
+    "name": "路由标志"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/worse-reason": {
+    "name": "路由未优选原因"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/sending-peers": {
+    "name": "发送对等体"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/time": {
+    "name": "时间戳"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/community": {
+    "name": "团体属性"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/large-community": {
+    "name": "增强团体属性信息"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/ext-community": {
+    "name": "扩展团体属性"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/interface-name": {
+    "name": "出接口名"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/originator": {
+    "name": "源路由器ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/cluster-list": {
+    "name": "Cluster-List属性"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/remote-route-id": {
+    "name": "对等体路由器ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/relay-nexthop": {
+    "name": "迭代下一跳"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/relay-tunnel-name": {
+    "name": "迭代隧道名"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/atomic-aggregate": {
+    "name": "原子聚合"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/aggregator-as": {
+    "name": "聚合者AS号"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/aggregator-id": {
+    "name": "聚合者标识"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/in-label": {
+    "name": "入标签"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/out-label": {
+    "name": "出标签"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/iterated-vpn": {
+    "name": "BGP VPN实例名"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/remote-nexthop-vni": {
+    "name": "远端下一跳的VNI"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/advertise-nexthop": {
+    "name": "发布下一跳"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/prefix-sid": {
+    "name": "路由prefixSid属性"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/aigp": {
+    "name": "路由AIGP属性"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/attribute-set": {
+    "name": "属性集合"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route/gateway-ip": {
+    "name": "网关地址"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/statistics": {
+    "name": "路由统计计数列表"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/statistics/statistic": {
+    "name": "路由统计计数"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/statistics/statistic/vpn-name": {
+    "name": "VPN名称"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/statistics/statistic/total-number": {
+    "name": "路由总数"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/statistics/statistic/advertise-rm-total-number": {
+    "name": "RM下发路由总数"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/statistics/statistic/active-route-number": {
+    "name": "活跃路由数量"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/statistics/statistic/best-route-number": {
+    "name": "最优路由数量"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/statistics/statistic/add-path-route-number": {
+    "name": "Add-path路由数量"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/statistics/statistic/best-external-route-number": {
+    "name": "最优扩展路由"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/statistics/statistic/cidr-route-number": {
+    "name": "Cidr路由数量"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/statistics/statistic/community-route-number": {
+    "name": "BGP团体的路由数量"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/statistics/statistic/different-origin-as-route-number": {
+    "name": "不同源AS号的路由数量"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-unicast/statistics/statistic/dampened-route-number": {
+    "name": "衰减路由的数量"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast": {
+    "name": "BGP的IPv6单播地址族路由信息"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes": {
+    "name": "路由信息列表"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route": {
+    "name": "路由信息"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route/vpn-name": {
+    "name": "BGP VPN实例名"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route/route-distinguisher": {
+    "name": "路由标识ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route/prefix": {
+    "name": "网络地址"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route/mask-length": {
+    "name": "前缀掩码"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route/route-type": {
+    "name": "路由类型"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route/im-table-id": {
+    "name": "路由引入表ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route/from": {
+    "name": "源对等体"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route/path-id": {
+    "name": "接收pathID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route/remote-nexthop-tunnel-address": {
+    "name": "远端下一跳的隧道地址"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route/remote-nexthop-mac-address": {
+    "name": "远端下一跳的mac"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route/nexthop": {
+    "name": "下一跳地址"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route/local-preference": {
+    "name": "本地优先级"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route/preferred-value": {
+    "name": "协议首选值"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route/preference": {
+    "name": "BGP路由优先级"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route/path-as": {
+    "name": "AS路径列表"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route/origin": {
+    "name": "路由来源"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route/med": {
+    "name": "路由度量值"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route/flag-string": {
+    "name": "路由标志"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route/worse-reason": {
+    "name": "路由未优选原因"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route/sending-peers": {
+    "name": "发送对等体"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route/time": {
+    "name": "时间戳"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route/community": {
+    "name": "团体属性"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route/large-community": {
+    "name": "增强团体属性信息"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route/ext-community": {
+    "name": "扩展团体属性"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route/interface-name": {
+    "name": "出接口名"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route/originator": {
+    "name": "源路由器ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route/cluster-list": {
+    "name": "簇ID列表"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route/remote-route-id": {
+    "name": "对等体路由器ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route/relay-nexthop": {
+    "name": "迭代下一跳"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route/relay-tunnel-name": {
+    "name": "迭代隧道名"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route/atomic-aggregate": {
+    "name": "原子聚合"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route/aggregator-as": {
+    "name": "聚合者AS号"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route/aggregator-id": {
+    "name": "聚合者标识"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route/in-label": {
+    "name": "入标签"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route/out-label": {
+    "name": "出标签"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route/iterated-vpn": {
+    "name": "迭代VRF"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route/remote-nexthop-vni": {
+    "name": "远端下一跳的vni"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route/advertise-nexthop": {
+    "name": "发布下一跳"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route/prefix-sid": {
+    "name": "路由prefixSid属性"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route/aigp": {
+    "name": "路由AIGP属性"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route/attribute-set": {
+    "name": "属性集合"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/routes/route/gateway-ip": {
+    "name": "网关地址"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes": {
+    "name": "发布路由信息列表"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route": {
+    "name": "发布路由信息"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/vpn-name": {
+    "name": "BGP VPN实例名"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/remote-peer-address": {
+    "name": "对等体地址"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/route-distinguisher": {
+    "name": "路由标识ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/prefix": {
+    "name": "网络地址"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/mask-length": {
+    "name": "前缀掩码"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/route-type": {
+    "name": "路由类型"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/im-table-id": {
+    "name": "路由引入表ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/from": {
+    "name": "源对等体"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/path-id": {
+    "name": "接收pathID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/remote-nexthop-tunnel-address": {
+    "name": "远端下一跳的隧道地址"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/remote-nexthop-mac-address": {
+    "name": "远端下一跳的mac"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/nexthop": {
+    "name": "下一跳地址"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/local-preference": {
+    "name": "本地优先级"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/preferred-value": {
+    "name": "协议首选值"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/preference": {
+    "name": "BGP路由优先级"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/path-as": {
+    "name": "AS路径列表"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/origin": {
+    "name": "路由来源"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/med": {
+    "name": "路由度量值"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/flag-string": {
+    "name": "路由标志"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/worse-reason": {
+    "name": "路由未优选原因"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/sending-peers": {
+    "name": "发送对等体"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/time": {
+    "name": "时间戳"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/community": {
+    "name": "团体属性"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/large-community": {
+    "name": "增强团体属性信息"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/ext-community": {
+    "name": "扩展团体属性"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/interface-name": {
+    "name": "出接口名"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/originator": {
+    "name": "源路由器ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/cluster-list": {
+    "name": "簇ID列表"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/remote-route-id": {
+    "name": "对等体路由器ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/relay-nexthop": {
+    "name": "迭代下一跳"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/relay-tunnel-name": {
+    "name": "迭代隧道名"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/atomic-aggregate": {
+    "name": "原子聚合"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/aggregator-as": {
+    "name": "聚合者AS号"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/aggregator-id": {
+    "name": "聚合者标识"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/in-label": {
+    "name": "入标签"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/out-label": {
+    "name": "出标签"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/iterated-vpn": {
+    "name": "迭代VRF"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/remote-nexthop-vni": {
+    "name": "远端下一跳的vni"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/advertise-nexthop": {
+    "name": "发布下一跳"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/prefix-sid": {
+    "name": "路由prefixSid属性"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/aigp": {
+    "name": "路由AIGP属性"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/attribute-set": {
+    "name": "属性集合"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route/gateway-ip": {
+    "name": "网关地址"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes": {
+    "name": "接收路由信息列表"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route": {
+    "name": "接收路由信息"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/vpn-name": {
+    "name": "BGP VPN实例名"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/remote-peer-address": {
+    "name": "对等体地址"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/route-distinguisher": {
+    "name": "路由标识ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/prefix": {
+    "name": "网络地址"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/mask-length": {
+    "name": "前缀掩码"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/route-type": {
+    "name": "路由类型"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/im-table-id": {
+    "name": "路由引入表ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/from": {
+    "name": "源对等体"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/path-id": {
+    "name": "接收pathID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/remote-nexthop-tunnel-address": {
+    "name": "远端下一跳的隧道地址"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/remote-nexthop-mac-address": {
+    "name": "远端下一跳的mac"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/nexthop": {
+    "name": "下一跳地址"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/local-preference": {
+    "name": "本地优先级"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/preferred-value": {
+    "name": "协议首选值"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/preference": {
+    "name": "BGP路由优先级"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/path-as": {
+    "name": "AS路径列表"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/origin": {
+    "name": "路由来源"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/med": {
+    "name": "路由度量值"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/flag-string": {
+    "name": "路由标志"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/worse-reason": {
+    "name": "路由未优选原因"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/sending-peers": {
+    "name": "发送对等体"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/time": {
+    "name": "时间戳"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/community": {
+    "name": "团体属性"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/large-community": {
+    "name": "增强团体属性信息"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/ext-community": {
+    "name": "扩展团体属性"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/interface-name": {
+    "name": "出接口名"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/originator": {
+    "name": "源路由器ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/cluster-list": {
+    "name": "簇ID列表"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/remote-route-id": {
+    "name": "对等体路由器ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/relay-nexthop": {
+    "name": "迭代下一跳"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/relay-tunnel-name": {
+    "name": "迭代隧道名"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/atomic-aggregate": {
+    "name": "原子聚合"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/aggregator-as": {
+    "name": "聚合者AS号"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/aggregator-id": {
+    "name": "聚合者标识"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/in-label": {
+    "name": "入标签"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/out-label": {
+    "name": "出标签"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/iterated-vpn": {
+    "name": "迭代VRF"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/remote-nexthop-vni": {
+    "name": "远端下一跳的vni"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/advertise-nexthop": {
+    "name": "发布下一跳"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/prefix-sid": {
+    "name": "路由prefixSid属性"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/aigp": {
+    "name": "路由AIGP属性"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/attribute-set": {
+    "name": "属性集合"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route/gateway-ip": {
+    "name": "网关地址"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes": {
+    "name": "BGP对等体接收的活跃路由信息"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route": {
+    "name": "接收活跃路由信息"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/vpn-name": {
+    "name": "VPN名称"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/remote-peer-address": {
+    "name": "邻居地址"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/route-distinguisher": {
+    "name": "路由标识ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/prefix": {
+    "name": "网络地址"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/mask-length": {
+    "name": "前缀掩码"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/route-type": {
+    "name": "路由类型"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/im-table-id": {
+    "name": "路由引入表ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/from": {
+    "name": "源对等体"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/path-id": {
+    "name": "接收pathID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/remote-nexthop-tunnel-address": {
+    "name": "远端下一跳的隧道地址"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/remote-nexthop-mac-address": {
+    "name": "远端下一跳的MAC"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/nexthop": {
+    "name": "下一跳地址"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/local-preference": {
+    "name": "本地优先级"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/preferred-value": {
+    "name": "协议首选值"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/preference": {
+    "name": "BGP路由优先级"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/path-as": {
+    "name": "AS路径列表"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/origin": {
+    "name": "路由来源"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/med": {
+    "name": "路由度量值"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/flag-string": {
+    "name": "路由标志"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/worse-reason": {
+    "name": "路由未优选原因"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/sending-peers": {
+    "name": "发送对等体"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/time": {
+    "name": "时间戳"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/community": {
+    "name": "团体属性"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/large-community": {
+    "name": "增强团体属性信息"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/ext-community": {
+    "name": "扩展团体属性"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/interface-name": {
+    "name": "出接口名"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/originator": {
+    "name": "源路由器ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/cluster-list": {
+    "name": "Cluster-List属性"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/remote-route-id": {
+    "name": "对等体路由器ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/relay-nexthop": {
+    "name": "迭代下一跳"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/relay-tunnel-name": {
+    "name": "迭代隧道名"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/atomic-aggregate": {
+    "name": "原子聚合"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/aggregator-as": {
+    "name": "聚合者AS号"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/aggregator-id": {
+    "name": "聚合者标识"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/in-label": {
+    "name": "入标签"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/out-label": {
+    "name": "出标签"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/iterated-vpn": {
+    "name": "BGP VPN实例名"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/remote-nexthop-vni": {
+    "name": "远端下一跳的VNI"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/advertise-nexthop": {
+    "name": "发布下一跳"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/prefix-sid": {
+    "name": "路由prefixSid属性"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/aigp": {
+    "name": "路由AIGP属性"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/attribute-set": {
+    "name": "属性集合"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route/gateway-ip": {
+    "name": "网关地址"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/statistics": {
+    "name": "路由统计计数列表"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/statistics/statistic": {
+    "name": "路由统计计数"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/statistics/statistic/vpn-name": {
+    "name": "VPN名称"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/statistics/statistic/total-number": {
+    "name": "路由总数"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/statistics/statistic/advertise-rm-total-number": {
+    "name": "RM下发路由总数"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/statistics/statistic/active-route-number": {
+    "name": "活跃路由数量"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/statistics/statistic/best-route-number": {
+    "name": "最优路由数量"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/statistics/statistic/add-path-route-number": {
+    "name": "Add-path路由数量"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/statistics/statistic/best-external-route-number": {
+    "name": "最优扩展路由"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/statistics/statistic/community-route-number": {
+    "name": "BGP团体的路由数量"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-unicast/statistics/statistic/dampened-route-number": {
+    "name": "衰减路由的数量"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn": {
+    "name": "BGP的VPNv4地址族路由信息"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes": {
+    "name": "路由信息列表"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route": {
+    "name": "路由信息"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route/vpn-name": {
+    "name": "BGP VPN实例名"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route/route-distinguisher": {
+    "name": "路由标识ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route/prefix": {
+    "name": "网络地址"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route/mask-length": {
+    "name": "前缀掩码"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route/route-type": {
+    "name": "路由类型"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route/im-table-id": {
+    "name": "路由引入表ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route/from": {
+    "name": "源对等体"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route/path-id": {
+    "name": "接收pathID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route/remote-nexthop-tunnel-address": {
+    "name": "远端下一跳的隧道地址"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route/remote-nexthop-mac-address": {
+    "name": "远端下一跳的mac"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route/nexthop": {
+    "name": "下一跳地址"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route/local-preference": {
+    "name": "本地优先级"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route/preferred-value": {
+    "name": "协议首选值"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route/preference": {
+    "name": "BGP路由优先级"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route/path-as": {
+    "name": "AS路径列表"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route/origin": {
+    "name": "路由来源"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route/med": {
+    "name": "路由度量值"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route/flag-string": {
+    "name": "路由标志"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route/worse-reason": {
+    "name": "路由未优选原因"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route/sending-peers": {
+    "name": "发送对等体"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route/time": {
+    "name": "时间戳"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route/community": {
+    "name": "团体属性"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route/large-community": {
+    "name": "增强团体属性信息"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route/ext-community": {
+    "name": "扩展团体属性"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route/interface-name": {
+    "name": "出接口名"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route/originator": {
+    "name": "源路由器ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route/cluster-list": {
+    "name": "簇ID列表"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route/remote-route-id": {
+    "name": "对等体路由器ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route/relay-nexthop": {
+    "name": "迭代下一跳"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route/relay-tunnel-name": {
+    "name": "迭代隧道名"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route/atomic-aggregate": {
+    "name": "原子聚合"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route/aggregator-as": {
+    "name": "聚合者AS号"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route/aggregator-id": {
+    "name": "聚合者标识"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route/in-label": {
+    "name": "入标签"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route/out-label": {
+    "name": "出标签"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route/iterated-vpn": {
+    "name": "迭代VRF"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route/remote-nexthop-vni": {
+    "name": "远端下一跳的vni"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route/advertise-nexthop": {
+    "name": "发布下一跳"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route/prefix-sid": {
+    "name": "路由prefixSid属性"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route/aigp": {
+    "name": "路由AIGP属性"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route/attribute-set": {
+    "name": "属性集合"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/routes/route/gateway-ip": {
+    "name": "网关地址"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes": {
+    "name": "发布路由信息列表"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route": {
+    "name": "发布路由信息"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/vpn-name": {
+    "name": "BGP VPN实例名"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/remote-peer-address": {
+    "name": "对等体地址"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/route-distinguisher": {
+    "name": "路由标识ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/prefix": {
+    "name": "网络地址"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/mask-length": {
+    "name": "前缀掩码"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/route-type": {
+    "name": "路由类型"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/im-table-id": {
+    "name": "路由引入表ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/from": {
+    "name": "源对等体"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/path-id": {
+    "name": "接收pathID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/remote-nexthop-tunnel-address": {
+    "name": "远端下一跳的隧道地址"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/remote-nexthop-mac-address": {
+    "name": "远端下一跳的mac"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/nexthop": {
+    "name": "下一跳地址"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/local-preference": {
+    "name": "本地优先级"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/preferred-value": {
+    "name": "协议首选值"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/preference": {
+    "name": "BGP路由优先级"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/path-as": {
+    "name": "AS路径列表"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/origin": {
+    "name": "路由来源"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/med": {
+    "name": "路由度量值"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/flag-string": {
+    "name": "路由标志"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/worse-reason": {
+    "name": "路由未优选原因"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/sending-peers": {
+    "name": "发送对等体"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/time": {
+    "name": "时间戳"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/community": {
+    "name": "团体属性"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/large-community": {
+    "name": "增强团体属性信息"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/ext-community": {
+    "name": "扩展团体属性"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/interface-name": {
+    "name": "出接口名"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/originator": {
+    "name": "源路由器ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/cluster-list": {
+    "name": "簇ID列表"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/remote-route-id": {
+    "name": "对等体路由器ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/relay-nexthop": {
+    "name": "迭代下一跳"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/relay-tunnel-name": {
+    "name": "迭代隧道名"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/atomic-aggregate": {
+    "name": "原子聚合"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/aggregator-as": {
+    "name": "聚合者AS号"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/aggregator-id": {
+    "name": "聚合者标识"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/in-label": {
+    "name": "入标签"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/out-label": {
+    "name": "出标签"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/iterated-vpn": {
+    "name": "迭代VRF"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/remote-nexthop-vni": {
+    "name": "远端下一跳的vni"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/advertise-nexthop": {
+    "name": "发布下一跳"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/prefix-sid": {
+    "name": "路由prefixSid属性"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/aigp": {
+    "name": "路由AIGP属性"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/attribute-set": {
+    "name": "属性集合"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route/gateway-ip": {
+    "name": "网关地址"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes": {
+    "name": "接收路由信息列表"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route": {
+    "name": "接收路由信息"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/vpn-name": {
+    "name": "BGP VPN实例名"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/remote-peer-address": {
+    "name": "对等体地址"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/route-distinguisher": {
+    "name": "路由标识ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/prefix": {
+    "name": "网络地址"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/mask-length": {
+    "name": "前缀掩码"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/route-type": {
+    "name": "路由类型"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/im-table-id": {
+    "name": "路由引入表ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/from": {
+    "name": "源对等体"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/path-id": {
+    "name": "接收pathID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/remote-nexthop-tunnel-address": {
+    "name": "远端下一跳的隧道地址"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/remote-nexthop-mac-address": {
+    "name": "远端下一跳的mac"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/nexthop": {
+    "name": "下一跳地址"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/local-preference": {
+    "name": "本地优先级"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/preferred-value": {
+    "name": "协议首选值"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/preference": {
+    "name": "BGP路由优先级"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/path-as": {
+    "name": "AS路径列表"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/origin": {
+    "name": "路由来源"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/med": {
+    "name": "路由度量值"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/flag-string": {
+    "name": "路由标志"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/worse-reason": {
+    "name": "路由未优选原因"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/sending-peers": {
+    "name": "发送对等体"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/time": {
+    "name": "时间戳"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/community": {
+    "name": "团体属性"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/large-community": {
+    "name": "增强团体属性信息"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/ext-community": {
+    "name": "扩展团体属性"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/interface-name": {
+    "name": "出接口名"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/originator": {
+    "name": "源路由器ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/cluster-list": {
+    "name": "簇ID列表"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/remote-route-id": {
+    "name": "对等体路由器ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/relay-nexthop": {
+    "name": "迭代下一跳"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/relay-tunnel-name": {
+    "name": "迭代隧道名"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/atomic-aggregate": {
+    "name": "原子聚合"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/aggregator-as": {
+    "name": "聚合者AS号"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/aggregator-id": {
+    "name": "聚合者标识"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/in-label": {
+    "name": "入标签"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/out-label": {
+    "name": "出标签"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/iterated-vpn": {
+    "name": "迭代VRF"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/remote-nexthop-vni": {
+    "name": "远端下一跳的vni"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/advertise-nexthop": {
+    "name": "发布下一跳"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/prefix-sid": {
+    "name": "路由prefixSid属性"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/aigp": {
+    "name": "路由AIGP属性"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/attribute-set": {
+    "name": "属性集合"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route/gateway-ip": {
+    "name": "网关地址"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes": {
+    "name": "BGP对等体接收的活跃路由信息"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route": {
+    "name": "接收活跃路由信息"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/vpn-name": {
+    "name": "VPN名称"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/remote-peer-address": {
+    "name": "邻居地址"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/route-distinguisher": {
+    "name": "路由标识ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/prefix": {
+    "name": "网络地址"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/mask-length": {
+    "name": "前缀掩码"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/route-type": {
+    "name": "路由类型"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/im-table-id": {
+    "name": "路由引入表ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/from": {
+    "name": "源对等体"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/path-id": {
+    "name": "接收pathID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/remote-nexthop-tunnel-address": {
+    "name": "远端下一跳的隧道地址"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/remote-nexthop-mac-address": {
+    "name": "远端下一跳的MAC"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/nexthop": {
+    "name": "下一跳地址"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/local-preference": {
+    "name": "本地优先级"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/preferred-value": {
+    "name": "协议首选值"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/preference": {
+    "name": "BGP路由优先级"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/path-as": {
+    "name": "AS路径列表"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/origin": {
+    "name": "路由来源"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/med": {
+    "name": "路由度量值"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/flag-string": {
+    "name": "路由标志"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/worse-reason": {
+    "name": "路由未优选原因"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/sending-peers": {
+    "name": "发送对等体"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/time": {
+    "name": "时间戳"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/community": {
+    "name": "团体属性"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/large-community": {
+    "name": "增强团体属性信息"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/ext-community": {
+    "name": "扩展团体属性"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/interface-name": {
+    "name": "出接口名"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/originator": {
+    "name": "源路由器ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/cluster-list": {
+    "name": "Cluster-List属性"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/remote-route-id": {
+    "name": "对等体路由器ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/relay-nexthop": {
+    "name": "迭代下一跳"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/relay-tunnel-name": {
+    "name": "迭代隧道名"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/atomic-aggregate": {
+    "name": "原子聚合"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/aggregator-as": {
+    "name": "聚合者AS号"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/aggregator-id": {
+    "name": "聚合者标识"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/in-label": {
+    "name": "入标签"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/out-label": {
+    "name": "出标签"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/iterated-vpn": {
+    "name": "BGP VPN实例名"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/remote-nexthop-vni": {
+    "name": "远端下一跳的VNI"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/advertise-nexthop": {
+    "name": "发布下一跳"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/prefix-sid": {
+    "name": "路由prefixSid属性"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/aigp": {
+    "name": "路由AIGP属性"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/attribute-set": {
+    "name": "属性集合"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route/gateway-ip": {
+    "name": "网关地址"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/statistic": {
+    "name": "路由统计计数"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/statistic/total-number": {
+    "name": "路由总数"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/statistic/active-route-number": {
+    "name": "活跃路由数量"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/statistic/best-route-number": {
+    "name": "最优路由数量"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/statistic/add-path-route-number": {
+    "name": "Add-path路由数量"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/statistic/best-external-route-number": {
+    "name": "最优扩展路由"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/statistic/cidr-route-number": {
+    "name": "Cidr路由数量"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/statistic/community-route-number": {
+    "name": "BGP团体的路由数量"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/statistic/different-origin-as-route-number": {
+    "name": "不同源AS号的路由数量"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-vpn/statistic/dampened-route-number": {
+    "name": "衰减路由的数量"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn": {
+    "name": "BGP的VPNv6地址族路由信息"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes": {
+    "name": "路由信息列表"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route": {
+    "name": "路由信息"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route/vpn-name": {
+    "name": "BGP VPN实例名"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route/route-distinguisher": {
+    "name": "路由标识ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route/prefix": {
+    "name": "网络地址"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route/mask-length": {
+    "name": "前缀掩码"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route/route-type": {
+    "name": "路由类型"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route/im-table-id": {
+    "name": "路由引入表ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route/from": {
+    "name": "源对等体"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route/path-id": {
+    "name": "接收pathID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route/remote-nexthop-tunnel-address": {
+    "name": "远端下一跳的隧道地址"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route/remote-nexthop-mac-address": {
+    "name": "远端下一跳的mac"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route/nexthop": {
+    "name": "下一跳地址"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route/local-preference": {
+    "name": "本地优先级"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route/preferred-value": {
+    "name": "协议首选值"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route/preference": {
+    "name": "BGP路由优先级"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route/path-as": {
+    "name": "AS路径列表"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route/origin": {
+    "name": "路由来源"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route/med": {
+    "name": "路由度量值"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route/flag-string": {
+    "name": "路由标志"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route/worse-reason": {
+    "name": "路由未优选原因"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route/sending-peers": {
+    "name": "发送对等体"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route/time": {
+    "name": "时间戳"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route/community": {
+    "name": "团体属性"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route/large-community": {
+    "name": "增强团体属性信息"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route/ext-community": {
+    "name": "扩展团体属性"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route/interface-name": {
+    "name": "出接口名"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route/originator": {
+    "name": "源路由器ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route/cluster-list": {
+    "name": "簇ID列表"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route/remote-route-id": {
+    "name": "对等体路由器ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route/relay-nexthop": {
+    "name": "迭代下一跳"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route/relay-tunnel-name": {
+    "name": "迭代隧道名"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route/atomic-aggregate": {
+    "name": "原子聚合"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route/aggregator-as": {
+    "name": "聚合者AS号"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route/aggregator-id": {
+    "name": "聚合者标识"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route/in-label": {
+    "name": "入标签"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route/out-label": {
+    "name": "出标签"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route/iterated-vpn": {
+    "name": "迭代VRF"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route/remote-nexthop-vni": {
+    "name": "远端下一跳的vni"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route/advertise-nexthop": {
+    "name": "发布下一跳"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route/prefix-sid": {
+    "name": "路由prefixSid属性"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route/aigp": {
+    "name": "路由AIGP属性"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route/attribute-set": {
+    "name": "属性集合"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/routes/route/gateway-ip": {
+    "name": "网关地址"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes": {
+    "name": "发布路由信息列表"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route": {
+    "name": "发布路由信息"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/vpn-name": {
+    "name": "BGP VPN实例名"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/remote-peer-address": {
+    "name": "对等体地址"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/route-distinguisher": {
+    "name": "路由标识ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/prefix": {
+    "name": "网络地址"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/mask-length": {
+    "name": "前缀掩码"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/route-type": {
+    "name": "路由类型"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/im-table-id": {
+    "name": "路由引入表ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/from": {
+    "name": "源对等体"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/path-id": {
+    "name": "接收pathID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/remote-nexthop-tunnel-address": {
+    "name": "远端下一跳的隧道地址"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/remote-nexthop-mac-address": {
+    "name": "远端下一跳的mac"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/nexthop": {
+    "name": "下一跳地址"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/local-preference": {
+    "name": "本地优先级"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/preferred-value": {
+    "name": "协议首选值"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/preference": {
+    "name": "BGP路由优先级"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/path-as": {
+    "name": "AS路径列表"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/origin": {
+    "name": "路由来源"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/med": {
+    "name": "路由度量值"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/flag-string": {
+    "name": "路由标志"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/worse-reason": {
+    "name": "路由未优选原因"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/sending-peers": {
+    "name": "发送对等体"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/time": {
+    "name": "时间戳"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/community": {
+    "name": "团体属性"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/large-community": {
+    "name": "增强团体属性信息"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/ext-community": {
+    "name": "扩展团体属性"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/interface-name": {
+    "name": "出接口名"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/originator": {
+    "name": "源路由器ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/cluster-list": {
+    "name": "簇ID列表"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/remote-route-id": {
+    "name": "对等体路由器ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/relay-nexthop": {
+    "name": "迭代下一跳"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/relay-tunnel-name": {
+    "name": "迭代隧道名"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/atomic-aggregate": {
+    "name": "原子聚合"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/aggregator-as": {
+    "name": "聚合者AS号"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/aggregator-id": {
+    "name": "聚合者标识"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/in-label": {
+    "name": "入标签"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/out-label": {
+    "name": "出标签"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/iterated-vpn": {
+    "name": "迭代VRF"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/remote-nexthop-vni": {
+    "name": "远端下一跳的vni"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/advertise-nexthop": {
+    "name": "发布下一跳"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/prefix-sid": {
+    "name": "路由prefixSid属性"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/aigp": {
+    "name": "路由AIGP属性"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/attribute-set": {
+    "name": "属性集合"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route/gateway-ip": {
+    "name": "网关地址"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes": {
+    "name": "接收路由信息列表"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route": {
+    "name": "接收路由信息"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/vpn-name": {
+    "name": "BGP VPN实例名"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/remote-peer-address": {
+    "name": "对等体地址"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/route-distinguisher": {
+    "name": "路由标识ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/prefix": {
+    "name": "网络地址"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/mask-length": {
+    "name": "前缀掩码"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/route-type": {
+    "name": "路由类型"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/im-table-id": {
+    "name": "路由引入表ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/from": {
+    "name": "源对等体"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/path-id": {
+    "name": "接收pathID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/remote-nexthop-tunnel-address": {
+    "name": "远端下一跳的隧道地址"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/remote-nexthop-mac-address": {
+    "name": "远端下一跳的mac"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/nexthop": {
+    "name": "下一跳地址"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/local-preference": {
+    "name": "本地优先级"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/preferred-value": {
+    "name": "协议首选值"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/preference": {
+    "name": "BGP路由优先级"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/path-as": {
+    "name": "AS路径列表"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/origin": {
+    "name": "路由来源"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/med": {
+    "name": "路由度量值"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/flag-string": {
+    "name": "路由标志"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/worse-reason": {
+    "name": "路由未优选原因"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/sending-peers": {
+    "name": "发送对等体"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/time": {
+    "name": "时间戳"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/community": {
+    "name": "团体属性"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/large-community": {
+    "name": "增强团体属性信息"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/ext-community": {
+    "name": "扩展团体属性"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/interface-name": {
+    "name": "出接口名"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/originator": {
+    "name": "源路由器ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/cluster-list": {
+    "name": "簇ID列表"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/remote-route-id": {
+    "name": "对等体路由器ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/relay-nexthop": {
+    "name": "迭代下一跳"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/relay-tunnel-name": {
+    "name": "迭代隧道名"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/atomic-aggregate": {
+    "name": "原子聚合"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/aggregator-as": {
+    "name": "聚合者AS号"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/aggregator-id": {
+    "name": "聚合者标识"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/in-label": {
+    "name": "入标签"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/out-label": {
+    "name": "出标签"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/iterated-vpn": {
+    "name": "迭代VRF"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/remote-nexthop-vni": {
+    "name": "远端下一跳的vni"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/advertise-nexthop": {
+    "name": "发布下一跳"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/prefix-sid": {
+    "name": "路由prefixSid属性"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/aigp": {
+    "name": "路由AIGP属性"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/attribute-set": {
+    "name": "属性集合"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route/gateway-ip": {
+    "name": "网关地址"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes": {
+    "name": "BGP对等体接收的活跃路由信息"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route": {
+    "name": "接收活跃路由信息"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/vpn-name": {
+    "name": "VPN名称"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/remote-peer-address": {
+    "name": "邻居地址"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/route-distinguisher": {
+    "name": "路由标识ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/prefix": {
+    "name": "网络地址"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/mask-length": {
+    "name": "前缀掩码"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/route-type": {
+    "name": "路由类型"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/im-table-id": {
+    "name": "路由引入表ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/from": {
+    "name": "源对等体"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/path-id": {
+    "name": "接收pathID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/remote-nexthop-tunnel-address": {
+    "name": "远端下一跳的隧道地址"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/remote-nexthop-mac-address": {
+    "name": "远端下一跳的MAC"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/nexthop": {
+    "name": "下一跳地址"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/local-preference": {
+    "name": "本地优先级"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/preferred-value": {
+    "name": "协议首选值"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/preference": {
+    "name": "BGP路由优先级"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/path-as": {
+    "name": "AS路径列表"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/origin": {
+    "name": "路由来源"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/med": {
+    "name": "路由度量值"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/flag-string": {
+    "name": "路由标志"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/worse-reason": {
+    "name": "路由未优选原因"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/sending-peers": {
+    "name": "发送对等体"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/time": {
+    "name": "时间戳"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/community": {
+    "name": "团体属性"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/large-community": {
+    "name": "增强团体属性信息"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/ext-community": {
+    "name": "扩展团体属性"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/interface-name": {
+    "name": "出接口名"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/originator": {
+    "name": "源路由器ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/cluster-list": {
+    "name": "Cluster-List属性"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/remote-route-id": {
+    "name": "对等体路由器ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/relay-nexthop": {
+    "name": "迭代下一跳"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/relay-tunnel-name": {
+    "name": "迭代隧道名"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/atomic-aggregate": {
+    "name": "原子聚合"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/aggregator-as": {
+    "name": "聚合者AS号"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/aggregator-id": {
+    "name": "聚合者标识"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/in-label": {
+    "name": "入标签"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/out-label": {
+    "name": "出标签"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/iterated-vpn": {
+    "name": "BGP VPN实例名"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/remote-nexthop-vni": {
+    "name": "远端下一跳的VNI"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/advertise-nexthop": {
+    "name": "发布下一跳"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/prefix-sid": {
+    "name": "路由prefixSid属性"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/aigp": {
+    "name": "路由AIGP属性"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/attribute-set": {
+    "name": "属性集合"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route/gateway-ip": {
+    "name": "网关地址"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/statistic": {
+    "name": "路由统计计数"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/statistic/total-number": {
+    "name": "路由总数"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/statistic/active-route-number": {
+    "name": "活跃路由数量"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/statistic/best-route-number": {
+    "name": "最优路由数量"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/statistic/add-path-route-number": {
+    "name": "Add-path路由数量"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/statistic/best-external-route-number": {
+    "name": "最优扩展路由"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/statistic/community-route-number": {
+    "name": "BGP团体的路由数量"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv6-vpn/statistic/different-origin-as-route-number": {
+    "name": "不同源AS号的路由数量"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-labeluni": {
+    "name": "IPv4-label地址族路由信息"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-labeluni/statistics": {
+    "name": "路由统计计数列表"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-labeluni/statistics/statistic": {
+    "name": "路由统计计数"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-labeluni/statistics/statistic/vpn-name": {
+    "name": "VPN名称"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-labeluni/statistics/statistic/total-number": {
+    "name": "路由总数"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-labeluni/statistics/statistic/advertise-rm-total-number": {
+    "name": "RM下发路由总数"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-labeluni/statistics/statistic/active-route-number": {
+    "name": "活跃路由数量"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-labeluni/statistics/statistic/best-route-number": {
+    "name": "最优路由数量"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-labeluni/statistics/statistic/add-path-route-number": {
+    "name": "Add-path路由数量"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-labeluni/statistics/statistic/best-external-route-number": {
+    "name": "最优扩展路由"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-labeluni/statistics/statistic/cidr-route-number": {
+    "name": "Cidr路由数量"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-labeluni/statistics/statistic/community-route-number": {
+    "name": "BGP团体的路由数量"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-labeluni/statistics/statistic/different-origin-as-route-number": {
+    "name": "不同源AS号的路由数量"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-labeluni/statistics/statistic/dampened-route-number": {
+    "name": "衰减路由的数量"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast": {
+    "name": "BGP的IPv4组播地址族路由信息"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes": {
+    "name": "路由信息列表"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route": {
+    "name": "路由信息"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route/vpn-name": {
+    "name": "BGP VPN实例名"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route/route-distinguisher": {
+    "name": "路由标识ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route/prefix": {
+    "name": "网络地址"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route/mask-length": {
+    "name": "前缀掩码"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route/route-type": {
+    "name": "路由类型"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route/im-table-id": {
+    "name": "路由引入表ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route/from": {
+    "name": "源对等体"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route/path-id": {
+    "name": "接收pathID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route/remote-nexthop-tunnel-address": {
+    "name": "远端下一跳的隧道地址"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route/remote-nexthop-mac-address": {
+    "name": "远端下一跳的mac"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route/nexthop": {
+    "name": "下一跳地址"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route/local-preference": {
+    "name": "本地优先级"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route/preferred-value": {
+    "name": "协议首选值"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route/preference": {
+    "name": "BGP路由优先级"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route/path-as": {
+    "name": "AS路径列表"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route/origin": {
+    "name": "路由来源"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route/med": {
+    "name": "路由度量值"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route/flag-string": {
+    "name": "路由标志"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route/worse-reason": {
+    "name": "路由未优选原因"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route/sending-peers": {
+    "name": "发送对等体"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route/time": {
+    "name": "时间戳"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route/community": {
+    "name": "团体属性"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route/large-community": {
+    "name": "增强团体属性信息"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route/ext-community": {
+    "name": "扩展团体属性"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route/interface-name": {
+    "name": "出接口名"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route/originator": {
+    "name": "源路由器ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route/cluster-list": {
+    "name": "Cluster-List属性"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route/remote-route-id": {
+    "name": "对等体路由器ID"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route/relay-nexthop": {
+    "name": "迭代下一跳"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route/relay-tunnel-name": {
+    "name": "迭代隧道名"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route/atomic-aggregate": {
+    "name": "原子聚合"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route/aggregator-as": {
+    "name": "聚合者AS号"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route/aggregator-id": {
+    "name": "聚合者标识"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route/in-label": {
+    "name": "入标签"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route/out-label": {
+    "name": "出标签"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route/iterated-vpn": {
+    "name": "迭代VRF"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route/remote-nexthop-vni": {
+    "name": "远端下一跳的VNI"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route/advertise-nexthop": {
+    "name": "发布下一跳"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route/prefix-sid": {
+    "name": "路由prefixSid属性"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route/aigp": {
+    "name": "路由AIGP属性"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route/attribute-set": {
+    "name": "属性集合"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/ipv4-multicast/routes/route/gateway-ip": {
+    "name": "网关地址"
+  }
+}

@@ -1,0 +1,155 @@
+{
+  "/huawei-bd:bd": {
+    "name": "Bridge domain configuration"
+  },
+  "/huawei-bd:bd/instances": {
+    "name": "List of Bridge Domain"
+  },
+  "/huawei-bd:bd/instances/instance": {
+    "name": "Configure BD Instance"
+  },
+  "/huawei-bd:bd/instances/instance/id": {
+    "name": "BD ID"
+  },
+  "/huawei-bd:bd/instances/instance/description": {
+    "name": "BD Description"
+  },
+  "/huawei-bd:bd/instances/instance/admin-status": {
+    "name": "BD Administrative Status"
+  },
+  "/huawei-bd:bd/instances/instance/status": {
+    "name": "BD Status"
+  },
+  "/huawei-bd:bd/instances/instance/statistic-enable": {
+    "name": "BD Statistic Enable"
+  },
+  "/huawei-bd:bd/instances/instance/statistic-discard": {
+    "name": "Statistic Discard Enable"
+  },
+  "/huawei-bd:bd/instances/instance/broadcast-discard": {
+    "name": "Broadcast Discard"
+  },
+  "/huawei-bd:bd/instances/instance/unknown-multicast-discard": {
+    "name": "Unkown Multicast Discard"
+  },
+  "/huawei-bd:bd/instances/instance/unknown-unicast-discard": {
+    "name": "Unkown Unicast Discard"
+  },
+  "/huawei-bd:bd/instances/instance/mac-learning": {
+    "name": "Enable MAC Address Learning"
+  },
+  "/huawei-bd:bd/instances/instance/mac-aging-time": {
+    "name": "MAC Address Aging Time"
+  },
+  "/huawei-bd:bd/instances/instance/split-horizon": {
+    "name": "Enable Split Horizon"
+  },
+  "/huawei-bd:bd/instances/instance/encapsulation": {
+    "name": "Encapsulation Type"
+  },
+  "/huawei-bd:bd/instances/instance/bind-vlan": {
+    "name": "Configure VLANs Bound By BD"
+  },
+  "/huawei-bd:bd/instances/instance/bind-vlan/vlan-list": {
+    "name": "VLAN List"
+  },
+  "/huawei-bd:bd/instances/instance/service-points": {
+    "name": "List of EVC Service Points"
+  },
+  "/huawei-bd:bd/instances/instance/service-points/service-point": {
+    "name": "Configure EVC Service Information"
+  },
+  "/huawei-bd:bd/instances/instance/service-points/service-point/interface-name": {
+    "name": "Interface Name"
+  },
+  "/huawei-bd:bd/instances/instance/service-points/service-point/split-horizon": {
+    "name": "Enable Split Horizon"
+  },
+  "/huawei-bd:bd/instances/instance/statistics": {
+    "name": "Statistics Of BD Information"
+  },
+  "/huawei-bd:bd/instances/instance/statistics/inbound-packets": {
+    "name": "Number Of Inbound Packets"
+  },
+  "/huawei-bd:bd/instances/instance/statistics/inbound-bytes": {
+    "name": "Number Of Inbound Bytes"
+  },
+  "/huawei-bd:bd/instances/instance/statistics/outbound-packets": {
+    "name": "Number Of Outbound Packets"
+  },
+  "/huawei-bd:bd/instances/instance/statistics/outbound-bytes": {
+    "name": "Number Of Outbound Bytes"
+  },
+  "/huawei-bd:bd/instances/instance/statistics/inbound-pps": {
+    "name": "Rate of Inbound Packets"
+  },
+  "/huawei-bd:bd/instances/instance/statistics/inbound-bps": {
+    "name": "Rate of Inbound Bytes"
+  },
+  "/huawei-bd:bd/instances/instance/statistics/inbound-unicasts": {
+    "name": "Number Of Inbound Unicasts"
+  },
+  "/huawei-bd:bd/instances/instance/statistics/inbound-multicasts": {
+    "name": "Number Of Inbound Multicasts"
+  },
+  "/huawei-bd:bd/instances/instance/statistics/inbound-broadcasts": {
+    "name": "Number Of Inbound Broadcasts"
+  },
+  "/huawei-bd:bd/instances/instance/statistics/inbound-unknown-unicast-drops": {
+    "name": "Inbound Unknown Unicast Drops"
+  },
+  "/huawei-bd:bd/instances/instance/statistics/inbound-unknown-multicast-drops": {
+    "name": "Inbound Unknown Multicast Drops"
+  },
+  "/huawei-bd:bd/instances/instance/statistics/inbound-broadcast-drops": {
+    "name": "Inbound Broadcast Drops"
+  },
+  "/huawei-bd:bd/instances/instance/statistics/outbound-unicasts": {
+    "name": "Number Of Outbound Unicasts"
+  },
+  "/huawei-bd:bd/instances/instance/statistics/outbound-multicasts": {
+    "name": "Number Of Outbound Multicasts"
+  },
+  "/huawei-bd:bd/instances/instance/statistics/outbound-broadcasts": {
+    "name": "Number Of Outbound Broadcasts"
+  },
+  "/huawei-bd:bd/instances/instance/statistics/outbound-pps": {
+    "name": "Rate of Outbound Packets"
+  },
+  "/huawei-bd:bd/instances/instance/statistics/outbound-bps": {
+    "name": "Rate of Outbound Bytes"
+  },
+  "/huawei-bd:bd/instances/instance/bind-service": {
+    "name": "Statistics of BD binding Information"
+  },
+  "/huawei-bd:bd/instances/instance/bind-service/vsi-name": {
+    "name": "VSI Name"
+  },
+  "/huawei-bd:bd/instances/instance/bind-service/evpn-name": {
+    "name": "EVPN Name"
+  },
+  "/huawei-bd:bd/instances/instance/bind-service/vni": {
+    "name": "VNI ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-bd:bdif-attribute": {
+    "name": "BDIF"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-bd:bdif-attribute/band-width-type": {
+    "name": "BDIF interface bandwidth"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-bd:bdif-attribute/band-width-type/band-width-mbps": {
+    "name": "BDIF interface bandwidth (Mbit/s)"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-bd:bdif-attribute/band-width-type/band-width-mbps/band-width": {
+    "name": "BDIF interface bandwidth (Mbit/s)"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-bd:bdif-attribute/band-width-type/band-width-kbps": {
+    "name": "BDIF interface bandwidth (kbit/s)"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-bd:bdif-attribute/band-width-type/band-width-kbps/band-width-kbps": {
+    "name": "BDIF interface bandwidth (kbit/s)"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-bd:bdif-attribute/damping-time": {
+    "name": "Damping Time (s)"
+  }
+}

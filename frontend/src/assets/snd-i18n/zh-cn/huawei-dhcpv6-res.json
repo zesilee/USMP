@@ -1,0 +1,152 @@
+{
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-client-if": {
+    "name": "DHCPv6客户端接口"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-client-if/enable": {
+    "name": "使能DHCPv6客户端"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-client-if/client-type": {
+    "name": "DHCPv6客户端类型"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-client-if/client-type/inform": {
+    "name": "DHCPv6客户端请求信息"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-client-if/client-type/inform/inform-request": {
+    "name": "启用/禁用通知请求"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-client-if/client-type/address-and-prefix": {
+    "name": "DHCPv6客户端请求IPv6地址或IPv6前缀"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-client-if/client-type/address-and-prefix/address-request": {
+    "name": "启用/禁用IPv6地址请求"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-client-if/client-type/address-and-prefix/hint-address": {
+    "name": "IPv6地址请求的期望地址"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-client-if/client-type/address-and-prefix/prefix-request": {
+    "name": "启用/禁用IPv6地址前缀请求"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-client-if/client-type/address-and-prefix/prefix-name": {
+    "name": "前缀名称"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-client-if/client-type/address-and-prefix/hint-prefix": {
+    "name": "IPv6地址前缀请求的期望前缀"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-client-if/client-type/address-and-prefix/rapid-commit": {
+    "name": "启用/禁用快速提交标志"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-client-if/client-type/address-and-prefix/unicast": {
+    "name": "使能/去使能单播标志"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-client-if/client-type/address-and-prefix/union-mode": {
+    "name": "同时请求IPv6地址和前缀的标志"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-server-if": {
+    "name": "配置DHCPv6服务器接口"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-server-if/pool-name": {
+    "name": "地址池名称"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-server-if/is-allow-hint": {
+    "name": "允许期望地址"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-server-if/preference": {
+    "name": "优先级"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-server-if/is-rapid": {
+    "name": "允许两步交互"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-server-if/is-unicast": {
+    "name": "支持单播"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-if": {
+    "name": "在接口上配置DHCPv6属性"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-if/is-enable": {
+    "name": "在接口上使能DHCPv6中继"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-if/option": {
+    "name": "DHCPv6选项属性"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-if/option/insert-interface-id": {
+    "name": "使能插入interface-id选项"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-if/option/insert-remote-id": {
+    "name": "使能插入remote-id选项"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-if/option/insert-option79": {
+    "name": "使能插入Option79字段"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-if/option/insert-vss": {
+    "name": "使能插入OPTION-VSS标志"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-if/option/insert-client-lla": {
+    "name": "使能插入客户端链路层地址"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-relay-attribute": {
+    "name": "接口上DHCPv6中继属性"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-relay-attribute/source-address": {
+    "name": "源地址"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-relay-attribute/link-address": {
+    "name": "链路地址"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-relay-attribute/strict-check": {
+    "name": "使能接口严格检查"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-relay-attribute/server-group-name": {
+    "name": "DHCPv6中继服务器组名称"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-relay-attribute/source-interface": {
+    "name": "IPv6地址作为源IPv6地址的接口"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-relay-attribute/pd-route": {
+    "name": "使能转发DHCPv6 Relay PD路由"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-relay-attribute/destination-addresses": {
+    "name": "DHCPv6中继目的地址列表"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-relay-attribute/destination-addresses/destination-address": {
+    "name": "DHCPv6中继目的地址"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-relay-attribute/destination-addresses/destination-address/ipv6-address": {
+    "name": "目的地址"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-relay-attribute/destination-addresses/destination-address/net-type": {
+    "name": "选择vpn或公共网络"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-relay-attribute/destination-addresses/destination-address/net-type/vpn-instance": {
+    "name": "选项vpn实例"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-relay-attribute/destination-addresses/destination-address/net-type/vpn-instance/vpn-instance": {
+    "name": "VPN实例名称"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-relay-attribute/destination-addresses/destination-address/net-type/public-net": {
+    "name": "选项公网"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-relay-attribute/destination-addresses/destination-address/net-type/public-net/public-net": {
+    "name": "公网VPN实例"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-relay-attribute/destination-ifs": {
+    "name": "DHCPv6中继目的接口列表"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-relay-attribute/destination-ifs/destination-if": {
+    "name": "配置DHCPv6中继目的接口"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-relay-attribute/destination-ifs/destination-if/if-name": {
+    "name": "目的接口名称"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-relay-attribute/destination-vpn-addresses": {
+    "name": "DHCPv6中继服务器属性列表"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-relay-attribute/destination-vpn-addresses/destination-vpn-address": {
+    "name": "DHCPv6 Relay VPN实例"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-relay-attribute/destination-vpn-addresses/destination-vpn-address/address": {
+    "name": "DHCPv6 relay目的地址"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-relay-attribute/destination-vpn-addresses/destination-vpn-address/vpn-name": {
+    "name": "DHCPv6 relay VPN实例名称"
+  }
+}

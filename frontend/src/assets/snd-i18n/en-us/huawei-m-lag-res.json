@@ -1,0 +1,263 @@
+{
+  "/huawei-m-lag:m-lag": {
+    "name": "M-LAG configuration and states"
+  },
+  "/huawei-m-lag:m-lag/dfs-groups": {
+    "name": "List of DFS group"
+  },
+  "/huawei-m-lag:m-lag/dfs-groups/dfs-group": {
+    "name": "Dfs-group"
+  },
+  "/huawei-m-lag:m-lag/dfs-groups/dfs-group/group-id": {
+    "name": "Dynamic Fabric Service Group ID"
+  },
+  "/huawei-m-lag:m-lag/dfs-groups/dfs-group/priority": {
+    "name": "Priority"
+  },
+  "/huawei-m-lag:m-lag/dfs-groups/dfs-group/mac-address-remain": {
+    "name": "Configure peer-link mac-address to be remained"
+  },
+  "/huawei-m-lag:m-lag/dfs-groups/dfs-group/mac-address-remain/paired-port": {
+    "name": "Disable MAC address remained on the peer-link"
+  },
+  "/huawei-m-lag:m-lag/dfs-groups/dfs-group/mac-address-remain/unpaired-port": {
+    "name": "Unpaired-port"
+  },
+  "/huawei-m-lag:m-lag/dfs-groups/dfs-group/authentication": {
+    "name": "Configure authentication mode and password"
+  },
+  "/huawei-m-lag:m-lag/dfs-groups/dfs-group/authentication/mode": {
+    "name": "Define authentication mode for DFS"
+  },
+  "/huawei-m-lag:m-lag/dfs-groups/dfs-group/authentication/password": {
+    "name": "Password"
+  },
+  "/huawei-m-lag:m-lag/dfs-groups/dfs-group/up-delay": {
+    "name": "Automatic recovery interval timer"
+  },
+  "/huawei-m-lag:m-lag/dfs-groups/dfs-group/up-delay/up-delay-timer": {
+    "name": "M-LAG UP-Delay time"
+  },
+  "/huawei-m-lag:m-lag/dfs-groups/dfs-group/up-delay/auto-recovery-interval": {
+    "name": "M-LAG UP-Delay automatic recovery interval time"
+  },
+  "/huawei-m-lag:m-lag/dfs-groups/dfs-group/lacp-switch-delay": {
+    "name": "Configure LACP system ID switch delay mode"
+  },
+  "/huawei-m-lag:m-lag/dfs-groups/dfs-group/lacp-switch-delay/system-id-switch-mode": {
+    "name": "System-id-switch-mode"
+  },
+  "/huawei-m-lag:m-lag/dfs-groups/dfs-group/lacp-switch-delay/system-id-switch-mode/immediately": {
+    "name": "Lacp system-id change immediately"
+  },
+  "/huawei-m-lag:m-lag/dfs-groups/dfs-group/lacp-switch-delay/system-id-switch-mode/immediately/immediately": {
+    "name": "Lacp system-id change immediately"
+  },
+  "/huawei-m-lag:m-lag/dfs-groups/dfs-group/lacp-switch-delay/system-id-switch-mode/no-switch": {
+    "name": "Lacp system-id does not change"
+  },
+  "/huawei-m-lag:m-lag/dfs-groups/dfs-group/lacp-switch-delay/system-id-switch-mode/no-switch/no-switch": {
+    "name": "Lacp system-id does not change"
+  },
+  "/huawei-m-lag:m-lag/dfs-groups/dfs-group/lacp-switch-delay/system-id-switch-mode/switch-delay": {
+    "name": "Set Lacp switch delay timer"
+  },
+  "/huawei-m-lag:m-lag/dfs-groups/dfs-group/lacp-switch-delay/system-id-switch-mode/switch-delay/delay-timer": {
+    "name": "Delay timer"
+  },
+  "/huawei-m-lag:m-lag/dfs-groups/dfs-group/sessions": {
+    "name": "List of DFS protocol session parameters"
+  },
+  "/huawei-m-lag:m-lag/dfs-groups/dfs-group/sessions/session": {
+    "name": "Configure each DFS protocol session parameter"
+  },
+  "/huawei-m-lag:m-lag/dfs-groups/dfs-group/sessions/session/dfs-proto-type": {
+    "name": "Define DFS protocol"
+  },
+  "/huawei-m-lag:m-lag/dfs-groups/dfs-group/sessions/session/source-ip": {
+    "name": "DFS source ip address"
+  },
+  "/huawei-m-lag:m-lag/dfs-groups/dfs-group/sessions/session/peer-ip": {
+    "name": "DFS peer ip address"
+  },
+  "/huawei-m-lag:m-lag/dfs-groups/dfs-group/sessions/session/socket-type": {
+    "name": "Define DFS socket type"
+  },
+  "/huawei-m-lag:m-lag/dfs-groups/dfs-group/sessions/session/peer-port": {
+    "name": "DFS peer port number"
+  },
+  "/huawei-m-lag:m-lag/dfs-groups/dfs-group/sessions/session/vpn-name": {
+    "name": "Name of the VPN"
+  },
+  "/huawei-m-lag:m-lag/dfs-groups/dfs-group/sessions/session/timeout": {
+    "name": "Keepalive timeout value"
+  },
+  "/huawei-m-lag:m-lag/dfs-groups/dfs-group/dad-error-down": {
+    "name": "Configure Dual active detection error down"
+  },
+  "/huawei-m-lag:m-lag/dfs-groups/dfs-group/dad-error-down/enable": {
+    "name": "Enable/disable error down"
+  },
+  "/huawei-m-lag:m-lag/dfs-groups/dfs-group/dad-error-down/delay": {
+    "name": "Error-down delay time"
+  },
+  "/huawei-m-lag:m-lag/dfs-groups/dfs-group/dad-error-down/error-down-mode": {
+    "name": "Define error down mode"
+  },
+  "/huawei-m-lag:m-lag/dfs-groups/dfs-group/consistency-check": {
+    "name": "Configure consistency check parameters"
+  },
+  "/huawei-m-lag:m-lag/dfs-groups/dfs-group/consistency-check/mode": {
+    "name": "Specify consistency-check mode"
+  },
+  "/huawei-m-lag:m-lag/negotiation-states": {
+    "name": "Negotiation parameters and state"
+  },
+  "/huawei-m-lag:m-lag/negotiation-states/negotiation-state": {
+    "name": "Negotiation parameters and states"
+  },
+  "/huawei-m-lag:m-lag/negotiation-states/negotiation-state/dfs-role": {
+    "name": "Define DFS role of local or peer"
+  },
+  "/huawei-m-lag:m-lag/negotiation-states/negotiation-state/heart-beat-state": {
+    "name": "Define heart beat state of OK or Lost"
+  },
+  "/huawei-m-lag:m-lag/negotiation-states/negotiation-state/dfs-group-states": {
+    "name": "M-LAG configuration and state for all DFS group"
+  },
+  "/huawei-m-lag:m-lag/negotiation-states/negotiation-state/dfs-group-states/dfs-group-state": {
+    "name": "Operational state of M-LAG configuration and state"
+  },
+  "/huawei-m-lag:m-lag/negotiation-states/negotiation-state/dfs-group-states/dfs-group-state/group-id": {
+    "name": "Dynamic Fabric Service Group ID"
+  },
+  "/huawei-m-lag:m-lag/negotiation-states/negotiation-state/dfs-group-states/dfs-group-state/priority": {
+    "name": "Priority of the Dynamic Fabric Service Group"
+  },
+  "/huawei-m-lag:m-lag/negotiation-states/negotiation-state/dfs-group-states/dfs-group-state/udp-port": {
+    "name": "DFS UDP port"
+  },
+  "/huawei-m-lag:m-lag/negotiation-states/negotiation-state/dfs-group-states/dfs-group-state/ip-address": {
+    "name": "DFS source ip address"
+  },
+  "/huawei-m-lag:m-lag/negotiation-states/negotiation-state/dfs-group-states/dfs-group-state/vpn-name": {
+    "name": "Name of the VPN source ip address"
+  },
+  "/huawei-m-lag:m-lag/negotiation-states/negotiation-state/dfs-group-states/dfs-group-state/system-id": {
+    "name": "System ID"
+  },
+  "/huawei-m-lag:m-lag/negotiation-states/negotiation-state/dfs-group-states/dfs-group-state/system-name": {
+    "name": "System name"
+  },
+  "/huawei-m-lag:m-lag/negotiation-states/negotiation-state/dfs-group-states/dfs-group-state/state": {
+    "name": "M-LAG negotiated state"
+  },
+  "/huawei-m-lag:m-lag/negotiation-states/negotiation-state/dfs-group-states/dfs-group-state/causation": {
+    "name": "Negotiation failed cause"
+  },
+  "/huawei-m-lag:m-lag/negotiation-states/negotiation-state/dfs-group-states/dfs-group-state/consistency-check": {
+    "name": "Configuration consistency check result"
+  },
+  "/huawei-m-lag:m-lag/negotiation-states/negotiation-state/dfs-group-states/dfs-group-state/version": {
+    "name": "Device version"
+  },
+  "/huawei-m-lag:m-lag/negotiation-states/negotiation-state/dfs-group-states/dfs-group-state/device-type": {
+    "name": "Device series"
+  },
+  "/huawei-m-lag:m-lag/negotiation-states/negotiation-state/dfs-group-states/m-lags": {
+    "name": "Configuration and state in one DFS group"
+  },
+  "/huawei-m-lag:m-lag/negotiation-states/negotiation-state/dfs-group-states/m-lags/m-lag": {
+    "name": "Operational state of the local or remote state"
+  },
+  "/huawei-m-lag:m-lag/negotiation-states/negotiation-state/dfs-group-states/m-lags/m-lag/id": {
+    "name": "M-LAG ID"
+  },
+  "/huawei-m-lag:m-lag/negotiation-states/negotiation-state/dfs-group-states/m-lags/m-lag/group-id": {
+    "name": "Dynamic Fabric Service Group ID"
+  },
+  "/huawei-m-lag:m-lag/negotiation-states/negotiation-state/dfs-group-states/m-lags/m-lag/interface-name": {
+    "name": "Interface name"
+  },
+  "/huawei-m-lag:m-lag/negotiation-states/negotiation-state/dfs-group-states/m-lags/m-lag/port-state": {
+    "name": "Interface state"
+  },
+  "/huawei-m-lag:m-lag/negotiation-states/negotiation-state/dfs-group-states/m-lags/m-lag/port-status": {
+    "name": "Interface status for the M-LAG"
+  },
+  "/huawei-m-lag:m-lag/negotiation-states/negotiation-state/dfs-group-states/m-lags/m-lag/port-role": {
+    "name": "Interface role for the M-LAG"
+  },
+  "/huawei-m-lag:m-lag/negotiation-states/negotiation-state/dfs-group-states/m-lags/m-lag/consistency-check": {
+    "name": "Consistency check result for the M-LAG"
+  },
+  "/huawei-m-lag:m-lag/negotiation-states/negotiation-state/dfs-group-states/m-lags/m-lag/causation": {
+    "name": "M-LAG Negotiation Failure Cause with Smallest SN"
+  },
+  "/huawei-m-lag:m-lag/negotiation-states/negotiation-state/dfs-group-states/peer-link-states": {
+    "name": "List of peer-link configuration and state"
+  },
+  "/huawei-m-lag:m-lag/negotiation-states/negotiation-state/dfs-group-states/peer-link-states/peer-link-state": {
+    "name": "Operational state of peer-link configuration"
+  },
+  "/huawei-m-lag:m-lag/negotiation-states/negotiation-state/dfs-group-states/peer-link-states/peer-link-state/group-id": {
+    "name": "Dynamic Fabric Service Group ID"
+  },
+  "/huawei-m-lag:m-lag/negotiation-states/negotiation-state/dfs-group-states/peer-link-states/peer-link-state/link-id": {
+    "name": "Define the ETH-Trunk as Peer Link"
+  },
+  "/huawei-m-lag:m-lag/negotiation-states/negotiation-state/dfs-group-states/peer-link-states/peer-link-state/interface-name": {
+    "name": "Interface name for the peer-link"
+  },
+  "/huawei-m-lag:m-lag/negotiation-states/negotiation-state/dfs-group-states/peer-link-states/peer-link-state/port-state": {
+    "name": "Corresponding local ETH-Trunk interface state"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-m-lag:m-lag": {
+    "name": "Configure interface related M-LAG configuration"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-m-lag:m-lag/dfs-groups": {
+    "name": "List of DFS group and M-LAG ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-m-lag:m-lag/dfs-groups/dfs-group": {
+    "name": "Configure the M-LAG configuration"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-m-lag:m-lag/dfs-groups/dfs-group/group-id": {
+    "name": "Dynamic Fabric Service Group ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-m-lag:m-lag/dfs-groups/dfs-group/m-lag-id": {
+    "name": "Define M-LAG ID on one ETH-Trunk interface"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-m-lag:m-lag/peer-link": {
+    "name": "Configure peer link configuration"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-m-lag:m-lag/peer-link/peer-link-id": {
+    "name": "Define the Eth-Trunk as peer-link"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-m-lag:m-lag/peer-link/exclude-vlan": {
+    "name": "Configure port exclude vlan range"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-m-lag:m-lag/peer-link/peer-link-type": {
+    "name": "Peer-link type"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-m-lag:m-lag/error-down-port": {
+    "name": "Configure suspend port configuration"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-m-lag:m-lag/error-down-port/port": {
+    "name": "Define the error down port"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-m-lag:m-lag/routing-addr": {
+    "name": "Run the routing protocol of OSPF or BGP over M-LAG"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-m-lag:m-lag/routing-addr/routing-ipv4-addr": {
+    "name": "IPv4 address for OSPF and BGPv4 peering"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-m-lag:m-lag/routing-addr/ipv4-wild": {
+    "name": "Wildcard mask of routing IPv4 address"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-m-lag:m-lag/routing-addr/routing-ipv6-addr": {
+    "name": "IPv6 global address for BGPv6 peering"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-m-lag:m-lag/routing-addr/routing-addr-linklocal": {
+    "name": "Configure link-local on the Vbdif or Vlanif"
+  }
+}

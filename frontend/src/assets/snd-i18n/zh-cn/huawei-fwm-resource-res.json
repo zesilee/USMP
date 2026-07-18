@@ -1,0 +1,74 @@
+{
+  "/huawei-fib:fib/huawei-fwm-resource:forward-table-resources": {
+    "name": "转发表资源"
+  },
+  "/huawei-fib:fib/huawei-fwm-resource:forward-table-resources/forward-table-resource": {
+    "name": "转发表资源"
+  },
+  "/huawei-fib:fib/huawei-fwm-resource:forward-table-resources/forward-table-resource/slot-id": {
+    "name": "槽位号"
+  },
+  "/huawei-fib:fib/huawei-fwm-resource:forward-table-resources/forward-table-resource/fib4-total": {
+    "name": "FIB ipv4总数"
+  },
+  "/huawei-fib:fib/huawei-fwm-resource:forward-table-resources/forward-table-resource/fib4-used": {
+    "name": "FIB ipv4使用数目"
+  },
+  "/huawei-fib:fib/huawei-fwm-resource:forward-table-resources/forward-table-resource/fib6-total": {
+    "name": "FIB6 总数"
+  },
+  "/huawei-fib:fib/huawei-fwm-resource:forward-table-resources/forward-table-resource/fib6-used": {
+    "name": "FIB6已用数目"
+  },
+  "/huawei-fib:fib/huawei-fwm-resource:soft-table-resources": {
+    "name": "软表资源"
+  },
+  "/huawei-fib:fib/huawei-fwm-resource:soft-table-resources/soft-table-resource": {
+    "name": "软表资源"
+  },
+  "/huawei-fib:fib/huawei-fwm-resource:soft-table-resources/soft-table-resource/slot-id": {
+    "name": "槽位号"
+  },
+  "/huawei-fib:fib/huawei-fwm-resource:soft-table-resources/soft-table-resource/fib4-total": {
+    "name": "FIB4总数"
+  },
+  "/huawei-fib:fib/huawei-fwm-resource:soft-table-resources/soft-table-resource/fib4-used": {
+    "name": "FIB4已用数目"
+  },
+  "/huawei-fib:fib/huawei-fwm-resource:soft-table-resources/soft-table-resource/fib6-total": {
+    "name": "FIB6总数"
+  },
+  "/huawei-fib:fib/huawei-fwm-resource:soft-table-resources/soft-table-resource/fib6-used": {
+    "name": "FIB6已用总数"
+  },
+  "/huawei-arp:arp/huawei-fwm-resource:forward-table-resources": {
+    "name": "转发表资源"
+  },
+  "/huawei-arp:arp/huawei-fwm-resource:forward-table-resources/forward-table-resource": {
+    "name": "转发表资源"
+  },
+  "/huawei-arp:arp/huawei-fwm-resource:forward-table-resources/forward-table-resource/slot-id": {
+    "name": "槽位号"
+  },
+  "/huawei-arp:arp/huawei-fwm-resource:forward-table-resources/forward-table-resource/arp-total": {
+    "name": "ARP总数"
+  },
+  "/huawei-arp:arp/huawei-fwm-resource:forward-table-resources/forward-table-resource/arp-used": {
+    "name": "ARP已用数目"
+  },
+  "/huawei-arp:arp/huawei-fwm-resource:soft-table-resources": {
+    "name": "软表资源"
+  },
+  "/huawei-arp:arp/huawei-fwm-resource:soft-table-resources/soft-table-resource": {
+    "name": "软表资源"
+  },
+  "/huawei-arp:arp/huawei-fwm-resource:soft-table-resources/soft-table-resource/slot-id": {
+    "name": "槽位号"
+  },
+  "/huawei-arp:arp/huawei-fwm-resource:soft-table-resources/soft-table-resource/arp-total": {
+    "name": "ARP总数"
+  },
+  "/huawei-arp:arp/huawei-fwm-resource:soft-table-resources/soft-table-resource/arp-used": {
+    "name": "ARP已用数目"
+  }
+}

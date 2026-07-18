@@ -1,0 +1,155 @@
+{
+  "/huawei-bd:bd": {
+    "name": "桥域配置"
+  },
+  "/huawei-bd:bd/instances": {
+    "name": "桥域列表"
+  },
+  "/huawei-bd:bd/instances/instance": {
+    "name": "配置BD实例"
+  },
+  "/huawei-bd:bd/instances/instance/id": {
+    "name": "BD标识"
+  },
+  "/huawei-bd:bd/instances/instance/description": {
+    "name": "BD描述"
+  },
+  "/huawei-bd:bd/instances/instance/admin-status": {
+    "name": "BD管理状态"
+  },
+  "/huawei-bd:bd/instances/instance/status": {
+    "name": "BD状态"
+  },
+  "/huawei-bd:bd/instances/instance/statistic-enable": {
+    "name": "BD流量统计使能"
+  },
+  "/huawei-bd:bd/instances/instance/statistic-discard": {
+    "name": "丢弃统计使能"
+  },
+  "/huawei-bd:bd/instances/instance/broadcast-discard": {
+    "name": "丢弃广播报文"
+  },
+  "/huawei-bd:bd/instances/instance/unknown-multicast-discard": {
+    "name": "丢弃未知组播报文"
+  },
+  "/huawei-bd:bd/instances/instance/unknown-unicast-discard": {
+    "name": "丢弃未知单播报文"
+  },
+  "/huawei-bd:bd/instances/instance/mac-learning": {
+    "name": "使能MAC地址学习功能"
+  },
+  "/huawei-bd:bd/instances/instance/mac-aging-time": {
+    "name": "MAC老化时间"
+  },
+  "/huawei-bd:bd/instances/instance/split-horizon": {
+    "name": "使能水平分割功能"
+  },
+  "/huawei-bd:bd/instances/instance/encapsulation": {
+    "name": "封装类型"
+  },
+  "/huawei-bd:bd/instances/instance/bind-vlan": {
+    "name": "配置BD绑定的VLAN"
+  },
+  "/huawei-bd:bd/instances/instance/bind-vlan/vlan-list": {
+    "name": "VLAN列表"
+  },
+  "/huawei-bd:bd/instances/instance/service-points": {
+    "name": "EVC业务点列表"
+  },
+  "/huawei-bd:bd/instances/instance/service-points/service-point": {
+    "name": "配置EVC业务信息"
+  },
+  "/huawei-bd:bd/instances/instance/service-points/service-point/interface-name": {
+    "name": "接口名"
+  },
+  "/huawei-bd:bd/instances/instance/service-points/service-point/split-horizon": {
+    "name": "使能水平分割功能"
+  },
+  "/huawei-bd:bd/instances/instance/statistics": {
+    "name": "BD流量统计信息"
+  },
+  "/huawei-bd:bd/instances/instance/statistics/inbound-packets": {
+    "name": "上行报文数"
+  },
+  "/huawei-bd:bd/instances/instance/statistics/inbound-bytes": {
+    "name": "上行字节数"
+  },
+  "/huawei-bd:bd/instances/instance/statistics/outbound-packets": {
+    "name": "下行报文数"
+  },
+  "/huawei-bd:bd/instances/instance/statistics/outbound-bytes": {
+    "name": "下行字节数"
+  },
+  "/huawei-bd:bd/instances/instance/statistics/inbound-pps": {
+    "name": "上行报文速率"
+  },
+  "/huawei-bd:bd/instances/instance/statistics/inbound-bps": {
+    "name": "上行字节速率"
+  },
+  "/huawei-bd:bd/instances/instance/statistics/inbound-unicasts": {
+    "name": "上行单播报文个数"
+  },
+  "/huawei-bd:bd/instances/instance/statistics/inbound-multicasts": {
+    "name": "上行多播报文个数"
+  },
+  "/huawei-bd:bd/instances/instance/statistics/inbound-broadcasts": {
+    "name": "上行广播报文个数"
+  },
+  "/huawei-bd:bd/instances/instance/statistics/inbound-unknown-unicast-drops": {
+    "name": "上行未知单播丢弃报文个数"
+  },
+  "/huawei-bd:bd/instances/instance/statistics/inbound-unknown-multicast-drops": {
+    "name": "上行未知多播丢弃报文个数"
+  },
+  "/huawei-bd:bd/instances/instance/statistics/inbound-broadcast-drops": {
+    "name": "上行广播丢弃报文个数"
+  },
+  "/huawei-bd:bd/instances/instance/statistics/outbound-unicasts": {
+    "name": "下行单播报文个数"
+  },
+  "/huawei-bd:bd/instances/instance/statistics/outbound-multicasts": {
+    "name": "下行多播报文个数"
+  },
+  "/huawei-bd:bd/instances/instance/statistics/outbound-broadcasts": {
+    "name": "下行广播报文个数"
+  },
+  "/huawei-bd:bd/instances/instance/statistics/outbound-pps": {
+    "name": "下行报文速率"
+  },
+  "/huawei-bd:bd/instances/instance/statistics/outbound-bps": {
+    "name": "下行字节速率"
+  },
+  "/huawei-bd:bd/instances/instance/bind-service": {
+    "name": "BD绑定信息统计"
+  },
+  "/huawei-bd:bd/instances/instance/bind-service/vsi-name": {
+    "name": "VSI名称"
+  },
+  "/huawei-bd:bd/instances/instance/bind-service/evpn-name": {
+    "name": "EVPN名称"
+  },
+  "/huawei-bd:bd/instances/instance/bind-service/vni": {
+    "name": "VNI标识"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-bd:bdif-attribute": {
+    "name": "BDIF"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-bd:bdif-attribute/band-width-type": {
+    "name": "BDIF带宽"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-bd:bdif-attribute/band-width-type/band-width-mbps": {
+    "name": "BDIF带宽(兆比特/秒)"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-bd:bdif-attribute/band-width-type/band-width-mbps/band-width": {
+    "name": "BDIF带宽(兆比特/秒)"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-bd:bdif-attribute/band-width-type/band-width-kbps": {
+    "name": "BDIF带宽(千比特/秒)"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-bd:bdif-attribute/band-width-type/band-width-kbps/band-width-kbps": {
+    "name": "BDIF带宽(千比特/秒)"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-bd:bdif-attribute/damping-time": {
+    "name": "BDIF延时DOWN(秒)"
+  }
+}

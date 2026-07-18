@@ -1,0 +1,29 @@
+{
+  "/huawei-ifm:ifm/interfaces/interface/huawei-l2vpn:track-pw-state": {
+    "name": "Track PW State"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-l2vpn:l3ve-delay-up": {
+    "name": "L3VE Delay Up"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-l2vpn:l3ve-delay-up/time": {
+    "name": "Delay Up Time"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-l2vpn:arp-sending": {
+    "name": "ARP Sending Mode"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-l2vpn:arp-sending/type": {
+    "name": "ARP Sending Type"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-l2vpn:arp-sending/expire-time": {
+    "name": "Expire Time"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-l2vpn:nd-sending": {
+    "name": "ND Sending Mode"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-l2vpn:nd-sending/type": {
+    "name": "ND Sending Type"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-l2vpn:nd-sending/expire-time": {
+    "name": "Expire Time"
+  }
+}

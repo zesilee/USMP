@@ -1,0 +1,26 @@
+{
+  "/huawei-system-resources-usage:system-resources-usage": {
+    "name": "Resource usage"
+  },
+  "/huawei-system-resources-usage:system-resources-usage/resources": {
+    "name": "Resource usage"
+  },
+  "/huawei-system-resources-usage:system-resources-usage/resources/resource": {
+    "name": "Resource information"
+  },
+  "/huawei-system-resources-usage:system-resources-usage/resources/resource/slot": {
+    "name": "Slot ID"
+  },
+  "/huawei-system-resources-usage:system-resources-usage/resources/resource/resource-name": {
+    "name": "Resource Name"
+  },
+  "/huawei-system-resources-usage:system-resources-usage/resources/resource/total": {
+    "name": "Total resource count"
+  },
+  "/huawei-system-resources-usage:system-resources-usage/resources/resource/allocated": {
+    "name": "Allocated resource count"
+  },
+  "/huawei-system-resources-usage:system-resources-usage/resources/resource/free": {
+    "name": "Free resource count"
+  }
+}

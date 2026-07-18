@@ -1,0 +1,44 @@
+{
+  "/huawei-time-range:timerange": {
+    "name": "时间范围"
+  },
+  "/huawei-time-range:time-range/time-range-instances": {
+    "name": "时间范围列表"
+  },
+  "/huawei-time-range:time-range/time-range-instances/time-range-instance": {
+    "name": "时间范围实例"
+  },
+  "/huawei-time-range:time-range/time-range-instances/time-range-instance/name": {
+    "name": "时间段名称"
+  },
+  "/huawei-time-range:time-range/time-range-instances/time-range-instance/status": {
+    "name": "时间段的状态"
+  },
+  "/huawei-time-range:time-range/time-range-instances/time-range-instance/absolute-ranges": {
+    "name": "绝对时间列表"
+  },
+  "/huawei-time-range:time-range/time-range-instances/time-range-instance/absolute-ranges/absolute-range": {
+    "name": "绝对时间段"
+  },
+  "/huawei-time-range:time-range/time-range-instances/time-range-instance/absolute-ranges/absolute-range/start-time": {
+    "name": "开始时间"
+  },
+  "/huawei-time-range:time-range/time-range-instances/time-range-instance/absolute-ranges/absolute-range/end-time": {
+    "name": "结束时间"
+  },
+  "/huawei-time-range:time-range/time-range-instances/time-range-instance/period-ranges": {
+    "name": "周期时间列表"
+  },
+  "/huawei-time-range:time-range/time-range-instances/time-range-instance/period-ranges/period-range": {
+    "name": "周期时间段"
+  },
+  "/huawei-time-range:time-range/time-range-instances/time-range-instance/period-ranges/period-range/day-of-week": {
+    "name": "每周的星期几"
+  },
+  "/huawei-time-range:time-range/time-range-instances/time-range-instance/period-ranges/period-range/start-time": {
+    "name": "开始时间"
+  },
+  "/huawei-time-range:time-range/time-range-instances/time-range-instance/period-ranges/period-range/end-time": {
+    "name": "结束时间"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv6-routes/ipv6-route/huawei-routing-nqa:nqa-admin-name": {
+    "name": "IPv6静态路由NQA测试例管理者名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv6-routes/ipv6-route/huawei-routing-nqa:nqa-test-name": {
+    "name": "IPv6静态路由NQA测试例名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/unicast-routes/unicast-route/track-setting/huawei-routing-nqa:nqa": {
+    "name": "联动NQA"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/unicast-routes/unicast-route/track-setting/huawei-routing-nqa:nqa/admin-name": {
+    "name": "NQA测试例管理者名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/unicast-routes/unicast-route/track-setting/huawei-routing-nqa:nqa/test-name": {
+    "name": "NQA测试例名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-routes/ipv4-route/huawei-routing-nqa:nqa-admin-name": {
+    "name": "IPv4静态路由NQA测试例管理者名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-routes/ipv4-route/huawei-routing-nqa:nqa-test-name": {
+    "name": "IPv4静态路由NQA测试例名称"
+  }
+}

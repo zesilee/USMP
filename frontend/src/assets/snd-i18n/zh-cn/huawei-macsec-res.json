@@ -1,0 +1,65 @@
+{
+  "/huawei-macsec:macsec": {
+    "name": "MACsec"
+  },
+  "/huawei-macsec:macsec/macsec-profiles": {
+    "name": "MACsec模板列表"
+  },
+  "/huawei-macsec:macsec/macsec-profiles/macsec-profile": {
+    "name": "MACsec模板"
+  },
+  "/huawei-macsec:macsec/macsec-profiles/macsec-profile/name": {
+    "name": "MACsec模板名"
+  },
+  "/huawei-macsec:macsec/macsec-profiles/macsec-profile/policy": {
+    "name": "MACsec策略功能"
+  },
+  "/huawei-macsec:macsec/macsec-profiles/macsec-profile/replay-window": {
+    "name": "重播保护窗口"
+  },
+  "/huawei-macsec:macsec/macsec-profiles/macsec-profile/include-sci": {
+    "name": "帧头包含SCI"
+  },
+  "/huawei-macsec:macsec/macsec-profiles/macsec-profile/sak-life": {
+    "name": "SAK超时时间"
+  },
+  "/huawei-macsec:macsec/macsec-profiles/macsec-profile/mka-life": {
+    "name": "MKA会话超时时间"
+  },
+  "/huawei-macsec:macsec/macsec-profiles/macsec-profile/keyserver-priority": {
+    "name": "MKA密钥服务器的优先级"
+  },
+  "/huawei-macsec:macsec/macsec-profiles/macsec-profile/cryptographic-algorithm": {
+    "name": "MKA密钥生成算法"
+  },
+  "/huawei-macsec:macsec/macsec-profiles/macsec-profile/confident-offset": {
+    "name": "MACsec加密偏移量"
+  },
+  "/huawei-macsec:macsec/macsec-profiles/macsec-profile/mode": {
+    "name": "MACsec的加密模式"
+  },
+  "/huawei-macsec:macsec/macsec-profiles/macsec-profile/cipher-suite": {
+    "name": "MACsec数据报文加密算法"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-macsec:macsec": {
+    "name": "MACsec应用配置"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-macsec:macsec/macsec-profile": {
+    "name": "MACsec模板"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-macsec:macsec/macsec-profile/name": {
+    "name": "MACsec模板名"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-macsec:macsec/ckn-caks": {
+    "name": "静态CKN和CAK列表"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-macsec:macsec/ckn-caks/ckn-cak": {
+    "name": "密钥名称-密钥"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-macsec:macsec/ckn-caks/ckn-cak/ckn": {
+    "name": "密钥名称"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-macsec:macsec/ckn-caks/ckn-cak/cak": {
+    "name": "密钥"
+  }
+}

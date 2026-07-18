@@ -1,0 +1,41 @@
+{
+  "/huawei-vxlan-ext:vxlan-ext": {
+    "name": "VXLAN扩展功能"
+  },
+  "/huawei-vxlan-ext:vxlan-ext/force-redirects": {
+    "name": "强制解封装配置列表"
+  },
+  "/huawei-vxlan-ext:vxlan-ext/force-redirects/force-redirect": {
+    "name": "配置强制解封装的VNI"
+  },
+  "/huawei-vxlan-ext:vxlan-ext/force-redirects/force-redirect/vni-begin": {
+    "name": "强制解封装起始VNI"
+  },
+  "/huawei-vxlan-ext:vxlan-ext/force-redirects/force-redirect/vni-end": {
+    "name": "强制解封装结束VNI"
+  },
+  "/huawei-vxlan-ext:vxlan-ext/force-redirects/force-redirect/if-name": {
+    "name": "接口名称"
+  },
+  "/huawei-vxlan-ext:vxlan-ext/bridge-domain-bind-vlan-enhanced": {
+    "name": "BD绑定VLAN增强功能"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-vxlan-ext:force-decapsulation": {
+    "name": "强制解封装"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-vxlan-ext:force-decapsulation/enable": {
+    "name": "使能"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-vxlan-ext:l2subif-dot1q-egr-vids": {
+    "name": "配置二层子接口出VLAN"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-vxlan-ext:l2subif-dot1q-egr-vids/vid": {
+    "name": "出VLAN ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-vxlan-ext:flood-proxy": {
+    "name": "泛洪代理"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-vxlan-ext:flood-proxy/proxy-ip": {
+    "name": "代理IP"
+  }
+}

@@ -6,6 +6,7 @@ export default defineConfig({
   plugins: [vue()],
   test: {
     environment: 'happy-dom',
+    setupFiles: ['./test/setup.ts'],
     globals: true,
     include: ['src/**/*.{test,spec}.{js,ts,jsx,tsx}', 'test/**/*.{test,spec}.{js,ts,jsx,tsx}'],
     // test/browser/** 属浏览器模式套件（vitest.browser.config.ts），不在 happy-dom 下跑

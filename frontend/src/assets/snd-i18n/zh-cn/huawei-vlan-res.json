@@ -1,0 +1,197 @@
+{
+  "/huawei-vlan:vlan": {
+    "name": "VLAN"
+  },
+  "/huawei-vlan:vlan/vlans": {
+    "name": "VLAN列表"
+  },
+  "/huawei-vlan:vlan/vlans/vlan": {
+    "name": "VLAN信息"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/id": {
+    "name": "VLAN标识"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/name": {
+    "name": "VLAN名称"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/description": {
+    "name": "VLAN描述"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/type": {
+    "name": "VLAN类型"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/admin-status": {
+    "name": "VLAN管理状态"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/broadcast-discard": {
+    "name": "广播使能标记"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/unknown-multicast-discard": {
+    "name": "VLAN未知组播丢弃"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/mac-learning": {
+    "name": "MAC学习标记"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/statistic-enable": {
+    "name": "VLAN统计使能"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/statistic-discard": {
+    "name": "BUM丢弃统计使能"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/mac-aging-time": {
+    "name": "MAC老化时间"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/super-vlan": {
+    "name": "聚合VLAN标识"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/suppression": {
+    "name": "流量抑制"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/suppression/inbound": {
+    "name": "入方向抑制"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/suppression/outbound": {
+    "name": "出方向抑制"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/ip-subnet-vlans": {
+    "name": "基于IP子网划分VLAN"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/ip-subnet-vlans/ip-subnet-vlan": {
+    "name": "基于IP子网划分VLAN"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/ip-subnet-vlans/ip-subnet-vlan/index": {
+    "name": "子网序号"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/ip-subnet-vlans/ip-subnet-vlan/ip-prefix": {
+    "name": "IP前缀"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/ip-subnet-vlans/ip-subnet-vlan/priority": {
+    "name": "优先级"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/member-ports": {
+    "name": "VLAN包含的端口列表"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/member-ports/member-port": {
+    "name": "VLAN包含的端口"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/member-ports/member-port/interface-name": {
+    "name": "端口名称"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/member-ports/member-port/access-type": {
+    "name": "端口接入类型"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/member-ports/member-port/state": {
+    "name": "端口VLAN 状态"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/statistics": {
+    "name": "VLAN状态"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/statistics/inbound-packets": {
+    "name": "入方向报文数"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/statistics/inbound-bytes": {
+    "name": "入方向字节数"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/statistics/outbound-packets": {
+    "name": "出方向报文数"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/statistics/outbound-bytes": {
+    "name": "出方向字节数"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/statistics/inbound-unicasts": {
+    "name": "入方向单播数"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/statistics/inbound-multicasts": {
+    "name": "入方向组播数"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/statistics/inbound-broadcasts": {
+    "name": "出站广播的数量"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/statistics/inbound-unknown-unicast-drops": {
+    "name": "入方向未知单播丢弃次数"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/statistics/inbound-unknown-multicast-drops": {
+    "name": "入站未知组播丢弃数"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/statistics/inbound-broadcast-drops": {
+    "name": "入站广播丢弃数"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/statistics/outbound-unicasts": {
+    "name": "出站单播数量"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/statistics/outbound-multicasts": {
+    "name": "出站组播的数量"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/statistics/outbound-broadcasts": {
+    "name": "出站广播的数量"
+  },
+  "/huawei-vlan:vlan/instances": {
+    "name": "实例"
+  },
+  "/huawei-vlan:vlan/instances/instance": {
+    "name": "实例"
+  },
+  "/huawei-vlan:vlan/instances/instance/id": {
+    "name": "实例ID"
+  },
+  "/huawei-vlan:vlan/instances/instance/vlan-list": {
+    "name": "VLAN列表"
+  },
+  "/huawei-vlan:vlan/default-instance": {
+    "name": "默认实例"
+  },
+  "/huawei-vlan:vlan/default-instance/vlan-list": {
+    "name": "VLAN列表"
+  },
+  "/huawei-vlan:vlan/dynamic-vlans": {
+    "name": "动态VLAN列表"
+  },
+  "/huawei-vlan:vlan/dynamic-vlans/dynamic-vlan": {
+    "name": "动态VLAN信息"
+  },
+  "/huawei-vlan:vlan/dynamic-vlans/dynamic-vlan/id": {
+    "name": "动态VLAN标识"
+  },
+  "/huawei-vlan:vlan/dynamic-vlans/dynamic-vlan/description": {
+    "name": "动态VLAN描述"
+  },
+  "/huawei-vlan:vlan/dynamic-vlans/dynamic-vlan/status": {
+    "name": "动态VLAN管理状态"
+  },
+  "/huawei-vlan:vlan/dynamic-vlans/dynamic-vlan/active-ports": {
+    "name": "动态VLAN包含的端口列表"
+  },
+  "/huawei-vlan:vlan/dynamic-vlans/dynamic-vlan/active-ports/active-port": {
+    "name": "动态VLAN包含的端口"
+  },
+  "/huawei-vlan:vlan/dynamic-vlans/dynamic-vlan/active-ports/active-port/interface-name": {
+    "name": "端口名称"
+  },
+  "/huawei-vlan:vlan/dynamic-vlans/dynamic-vlan/active-ports/active-port/access-type": {
+    "name": "端口接入类型"
+  },
+  "/huawei-vlan:vlan/dynamic-vlans/dynamic-vlan/active-ports/active-port/tag-mode": {
+    "name": "Tag模式"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-vlan:vlanif-attribute": {
+    "name": "VLANIF接口"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-vlan:vlanif-attribute/band-width-type": {
+    "name": "VLANIF带宽"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-vlan:vlanif-attribute/band-width-type/band-width-mbps": {
+    "name": "VLANIF带宽(兆比特/秒)"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-vlan:vlanif-attribute/band-width-type/band-width-mbps/band-width": {
+    "name": "VLANIF带宽(兆比特/秒)"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-vlan:vlanif-attribute/band-width-type/band-width-kbps": {
+    "name": "VLANIF带宽(千比特/秒)"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-vlan:vlanif-attribute/band-width-type/band-width-kbps/band-width-kbps": {
+    "name": "VLANIF带宽(千比特/秒)"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-vlan:vlanif-attribute/damping-time": {
+    "name": "VLANIF延时DOWN(秒)"
+  }
+}

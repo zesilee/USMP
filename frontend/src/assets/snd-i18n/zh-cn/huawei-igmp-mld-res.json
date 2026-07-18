@@ -1,0 +1,1349 @@
+{
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp": {
+    "name": "MGMD全局配置列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/global": {
+    "name": "MGMD全局配置"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/global/query-interval": {
+    "name": "普遍查询时间间隔"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/global/query-response-interval": {
+    "name": "最大响应时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/global/robustness": {
+    "name": "健壮系数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/global/last-member-query-interval": {
+    "name": "指定组查询时间间隔"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/global/require-router-alert": {
+    "name": "检查Router-Alert"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/global/send-router-alert": {
+    "name": "发送时携带Router-Alert"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/global/other-querier-present-time": {
+    "name": "其他查询器存活时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/global/ssm-mapping-dns-domain": {
+    "name": "DNS后缀名"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/global/ssm-mapping-query-dns": {
+    "name": "基于DNS的SSM-Mapping"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/global/ssm-mapping-query-dns-policy": {
+    "name": "配置ACL名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/global/ssm-mappings": {
+    "name": "SSM映射规则配置列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/global/ssm-mappings/ssm-mapping": {
+    "name": "SSM映射规则配置"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/global/ssm-mappings/ssm-mapping/group-address": {
+    "name": "组地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/global/ssm-mappings/ssm-mapping/mask-length": {
+    "name": "组地址掩码长度"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/global/ssm-mappings/ssm-mapping/source-address": {
+    "name": "源地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces": {
+    "name": "MGMD接口配置列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface": {
+    "name": "MGMD接口配置"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/name": {
+    "name": "接口名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/enable": {
+    "name": "使能协议"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/ip-source-policy-enable": {
+    "name": "过滤Report报文的主机地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/ip-source-policy-name": {
+    "name": "过滤Report报文的主机地址策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/query-interval": {
+    "name": "普遍查询时间间隔"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/query-response-interval": {
+    "name": "最大响应时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/robustness": {
+    "name": "健壮系数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/version": {
+    "name": "协议版本号"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/last-member-query-interval": {
+    "name": "指定组查询时间间隔"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/require-router-alert": {
+    "name": "检查Router-Alert"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/send-router-alert": {
+    "name": "发送时携带Router-Alert"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/other-querier-present-time": {
+    "name": "其他查询器存活时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/immediately-leave": {
+    "name": "立刻离开"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/immediately-leave-policy": {
+    "name": "立刻离开策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/on-demand-enable": {
+    "name": "设置组记录永不超时"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/entry-limit": {
+    "name": "表项最大值"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/entry-limit-acl-name": {
+    "name": "不受限组范围策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/ssm-mapping-enable": {
+    "name": "使能SSM-Mapping"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/ssm-mapping-policy": {
+    "name": "策略名字"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/group-acl-name": {
+    "name": "组策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/group-acl-version": {
+    "name": "限制的协议版本号"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/query-acl-name": {
+    "name": "过滤Query报文的主机地址策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/status": {
+    "name": "接口信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/status/address": {
+    "name": "接口地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/status/state": {
+    "name": "接口状态"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/status/negotiate-query-interval": {
+    "name": "查询时间协商值"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/status/other-querier-timeout": {
+    "name": "其他查询器存活时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/status/maximum-response-time": {
+    "name": "最大响应时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/status/last-member-query-time": {
+    "name": "最后成员超时时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/status/startup-query-interval": {
+    "name": "启动时查询间隔"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/status/startup-query-count": {
+    "name": "启动时查询次数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/status/querier-address": {
+    "name": "查询器"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/status/is-local-querier": {
+    "name": "是本地查询器"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/status/joins": {
+    "name": "加入过的组个数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/status/leaves": {
+    "name": "离开的组个数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/status/negotiated-robustness": {
+    "name": "健壮系数(协商)"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/status/startup-query-timer-state": {
+    "name": "启动时查询状态"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/status/other-querier-present-timer-state": {
+    "name": "非查询器存在状态"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/status/total-group-reported": {
+    "name": "动态加入的组个数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/status/remote-backup-state": {
+    "name": "远程备份状态"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message": {
+    "name": "接口IGMP消息统计数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/address": {
+    "name": "接口地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/general-query-sent": {
+    "name": "发送的常规查询"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/general-query-valid": {
+    "name": "有效的通用查询"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/general-query-invalid": {
+    "name": "无效的通用查询"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/general-query-ignore": {
+    "name": "忽略的通用查询"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/group-query-sent": {
+    "name": "发送的组查询消息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/group-query-valid": {
+    "name": "有效的组查询"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/group-query-invalid": {
+    "name": "无效的组查询"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/group-query-ignore": {
+    "name": "忽略的组查询"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/source-group-sent": {
+    "name": "发送的源组查询"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/source-group-valid": {
+    "name": "有效的源组查询"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/source-group-invalid": {
+    "name": "无效的源组查询"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/source-group-ignore": {
+    "name": "忽略的源组查询"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/v1v2-report-asm-sent": {
+    "name": "发送的asm-v1v2-report消息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/v1v2-report-asm-valid": {
+    "name": "有效的asm-v1v2-report消息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/v1v2-report-asm-invalid": {
+    "name": "无效的asm-v1v2-report消息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/v1v2-report-asm-ignore": {
+    "name": "忽略的asm-v1v2-report消息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/v1v2-report-ssm-sent": {
+    "name": "发送的ssm-v1v2-report消息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/v1v2-report-ssm-valid": {
+    "name": "有效的ssm-v1v2-report消息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/v1v2-report-ssm-invalid": {
+    "name": "无效的ssm-v1v2-report消息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/v1v2-report-ssm-ignore": {
+    "name": "忽略的ssm-v1v2-report消息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/leave-asm-sent": {
+    "name": "发送的asm-leave消息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/leave-asm-valid": {
+    "name": "有效的asm-leave消息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/leave-asm-invalid": {
+    "name": "无效的asm-leave消息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/leave-asm-ignore": {
+    "name": "忽略的asm-leave消息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/leave-ssm-sent": {
+    "name": "发送的ssm-leave消息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/leave-ssm-valid": {
+    "name": "有效的ssm-leave消息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/leave-ssm-invalid": {
+    "name": "无效的ssm-leave消息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/leave-ssm-ignore": {
+    "name": "忽略的ssm-leave消息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/v3-isin-report-sent": {
+    "name": "发送的isin-report消息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/v3-isin-report-valid": {
+    "name": "有效的isin-report消息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/v3-isin-report-invalid": {
+    "name": "无效的isin-report消息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/v3-isin-report-ignore": {
+    "name": "忽略的isin-report消息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/v3-isex-report-sent": {
+    "name": "发送的isex-report消息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/v3-isex-report-valid": {
+    "name": "有效的isex-report消息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/v3-isex-report-invalid": {
+    "name": "无效的isex-report消息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/v3-isex-report-ignore": {
+    "name": "忽略的isex-report消息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/v3-toin-report-sent": {
+    "name": "发送的toin-report消息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/v3-toin-report-valid": {
+    "name": "有效的toin-report消息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/v3-toin-report-invalid": {
+    "name": "无效的toin-report消息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/v3-toin-report-ignore": {
+    "name": "忽略的toin-report消息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/v3-toex-report-sent": {
+    "name": "发送的toex-report消息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/v3-toex-report-valid": {
+    "name": "有效的toex-report消息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/v3-toex-report-invalid": {
+    "name": "无效的toex-report消息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/v3-toex-report-ignore": {
+    "name": "忽略的toex-report消息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/v3-allow-report-sent": {
+    "name": "发送的allow-report消息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/v3-allow-report-valid": {
+    "name": "有效的allow-report消息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/v3-allow-report-invalid": {
+    "name": "无效的allow-report消息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/v3-allow-report-ignore": {
+    "name": "忽略的allow-report消息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/v3-block-report-sent": {
+    "name": "发送的block-report消息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/v3-block-report-valid": {
+    "name": "有效的block-report消息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/v3-block-report-invalid": {
+    "name": "无效的block-report消息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/v3-block-report-ignore": {
+    "name": "忽略的block-report消息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/source-sent": {
+    "name": "发送的source-Records-total消息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/source-valid": {
+    "name": "有效的source-Records-total消息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/source-invalid": {
+    "name": "无效的source-Records-total消息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/source-ignore": {
+    "name": "忽略的source-Records-total消息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/unknown-invalid": {
+    "name": "无效的未知类型消息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/control-message/unknown-ignore": {
+    "name": "忽略的未知类型消息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/invalid-packet": {
+    "name": "基于接口IGMP无效报文"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/invalid-packet/query": {
+    "name": "无效的Query报文计数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/invalid-packet/query/unwanted-source-list": {
+    "name": "无效的源地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/invalid-packet/query/zero-max-resp-code": {
+    "name": "报文中Max Resp Code字段为0"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/invalid-packet/query/fault-length": {
+    "name": "无效报文长度"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/invalid-packet/query/invalid-multicast-group": {
+    "name": "无效组播组地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/invalid-packet/query/bad-checksum": {
+    "name": "校验和无效"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/invalid-packet/report": {
+    "name": "无效Report报文计数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/invalid-packet/report/fault-length": {
+    "name": "无效报文长度"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/invalid-packet/report/invalid-multicast-group": {
+    "name": "无效组播组地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/invalid-packet/report/invalid-multicast-source": {
+    "name": "无效的源地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/invalid-packet/report/bad-checksum": {
+    "name": "校验和无效"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/invalid-packet/report/illegal": {
+    "name": "非法Report报文类型"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/invalid-packet/leave": {
+    "name": "无效Leave报文"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/invalid-packet/leave/invalid-multicast-group": {
+    "name": "无效组播组地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/interfaces/interface/invalid-packet/leave/bad-checksum": {
+    "name": "校验和无效"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/static-groups": {
+    "name": "静态组播组配置列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/static-groups/static-group": {
+    "name": "静态组播组配置"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/static-groups/static-group/interface": {
+    "name": "接口名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/static-groups/static-group/group-address": {
+    "name": "静态组地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/static-groups/static-group/is-source-address": {
+    "name": "设置源地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/static-groups/static-group/source-address": {
+    "name": "源地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/static-groups/static-group/is-inc-step-group-mask": {
+    "name": "设置组地址递增掩码"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/static-groups/static-group/inc-step-group-mask": {
+    "name": "组地址递增掩码"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/static-groups/static-group/is-source-dns-ssm-mapping": {
+    "name": "是基于DNS的SSM源组映射"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/static-groups/static-group/group-number": {
+    "name": "组地址个数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/dot1q-static-groups": {
+    "name": "DOT1Q静态组播组配置列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/dot1q-static-groups/dot1q-static-group": {
+    "name": "QINQ静态组播组配置"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/dot1q-static-groups/dot1q-static-group/interface": {
+    "name": "接口名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/dot1q-static-groups/dot1q-static-group/group-address": {
+    "name": "静态组地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/dot1q-static-groups/dot1q-static-group/is-source-address": {
+    "name": "设置源地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/dot1q-static-groups/dot1q-static-group/source-address": {
+    "name": "源地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/dot1q-static-groups/dot1q-static-group/is-inc-step-group-mask": {
+    "name": "设置组地址递增掩码"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/dot1q-static-groups/dot1q-static-group/inc-step-group-mask": {
+    "name": "组地址递增掩码"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/dot1q-static-groups/dot1q-static-group/begin-vid": {
+    "name": "DOT1Q标签起始值ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/dot1q-static-groups/dot1q-static-group/end-vid": {
+    "name": "DOT1Q标签结束值ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/dot1q-static-groups/dot1q-static-group/group-number": {
+    "name": "组地址个数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-static-groups": {
+    "name": "QINQ静态组播组配置列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-static-groups/qinq-static-group": {
+    "name": "QINQ静态组播组配置"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-static-groups/qinq-static-group/interface": {
+    "name": "接口名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-static-groups/qinq-static-group/group-address": {
+    "name": "静态组地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-static-groups/qinq-static-group/is-source-address": {
+    "name": "设置源地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-static-groups/qinq-static-group/source-address": {
+    "name": "源地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-static-groups/qinq-static-group/is-inc-step-group-mask": {
+    "name": "设置组地址递增掩码"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-static-groups/qinq-static-group/inc-step-group-mask": {
+    "name": "组地址递增掩码"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-static-groups/qinq-static-group/pe-vid": {
+    "name": "QINQ外层标签的ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-static-groups/qinq-static-group/ce-begin-vid": {
+    "name": "QINQ内层标签起始值ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-static-groups/qinq-static-group/ce-end-vid": {
+    "name": "QINQ内层标签结束值ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-static-groups/qinq-static-group/group-number": {
+    "name": "组地址个数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/display-static-groups": {
+    "name": "静态组信息列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/display-static-groups/display-static-group": {
+    "name": "静态组信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/display-static-groups/display-static-group/interface": {
+    "name": "接口名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/display-static-groups/display-static-group/group-address": {
+    "name": "组地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/display-static-groups/display-static-group/source-address": {
+    "name": "源地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/display-static-groups/display-static-group/is-configured-boundary": {
+    "name": "组播转发边界"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/groups": {
+    "name": "动态组信息列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/groups/group": {
+    "name": "动态组信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/groups/group/interface": {
+    "name": "接口名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/groups/group/group-address": {
+    "name": "组地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/groups/group/last-report-address": {
+    "name": "最后发报告的主机"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/groups/group/up-time": {
+    "name": "组的持续时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/groups/group/expire-time": {
+    "name": "组的剩余时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/groups/group/last-member-query-counter": {
+    "name": "查询最后成员的次数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/groups/group/last-member-query-timer": {
+    "name": "最后成员超时时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/groups/group/source-filter-mode": {
+    "name": "组模式"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/groups/group/v1-host-timer": {
+    "name": "V1主机超时时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/groups/group/v2-host-timer": {
+    "name": "V2主机超时时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/groups/group/is-ssm-mapping": {
+    "name": "是SSMMap的组"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/groups/group/sources": {
+    "name": "动态源信息列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/groups/group/sources/source": {
+    "name": "动态源信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/groups/group/sources/source/source-address": {
+    "name": "源地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/groups/group/sources/source/up-time": {
+    "name": "源的持续时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/groups/group/sources/source/expire-time": {
+    "name": "源的剩余时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/groups/group/sources/source/last-member-query-counter": {
+    "name": "查询最后成员的次数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/groups/group/sources/source/last-member-query-timer": {
+    "name": "最后成员超时时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-groups": {
+    "name": "QINQ动态组信息列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-groups/qinq-group": {
+    "name": "QINQ动态组信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-groups/qinq-group/interface": {
+    "name": "接口名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-groups/qinq-group/pe-vid": {
+    "name": "外层标签的ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-groups/qinq-group/ce-vid": {
+    "name": "内层标签的ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-groups/qinq-group/group-address": {
+    "name": "组地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-groups/qinq-group/up-time": {
+    "name": "组的持续时间(秒)"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-groups/qinq-group/expire-time": {
+    "name": "组的剩余时间(秒)"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-groups/qinq-group/group-timer": {
+    "name": "组定时器"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-groups/qinq-group/retran-count": {
+    "name": "查询最后成员的次数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-groups/qinq-group/last-member-query": {
+    "name": "发送特定源组查询"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-groups/qinq-group/group-mode": {
+    "name": "组过滤模式"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-groups/qinq-group/compat-mode": {
+    "name": "组兼容模式"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-groups/qinq-group/v1-host-timer": {
+    "name": "IGMPv1主机存在定时器"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-groups/qinq-group/v2-host-timer": {
+    "name": "IGMPv2主机存在定时器"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-groups/qinq-group/source-last-member-query": {
+    "name": "发送特定源组查询"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-groups/qinq-group/last-member-query-timer": {
+    "name": "组成员查询超时时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-groups/qinq-group/sources": {
+    "name": "QINQ动态组源信息列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-groups/qinq-group/sources/source": {
+    "name": "QINQ动态组源信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-groups/qinq-group/sources/source/source-address": {
+    "name": "源地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-groups/qinq-group/sources/source/up-time": {
+    "name": "源的持续时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-groups/qinq-group/sources/source/expire-time": {
+    "name": "源的剩余时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-groups/qinq-group/sources/source/source-timer": {
+    "name": "源定时器"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-groups/qinq-group/sources/source/retran-count": {
+    "name": "查询最后成员的次数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-groups/qinq-group/sources/source/last-member-query": {
+    "name": "发送特定源组查询"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-ports": {
+    "name": "QINQ出接口信息列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-ports/qinq-port": {
+    "name": "QINQ出接口信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-ports/qinq-port/interface": {
+    "name": "接口名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-ports/qinq-port/group-address": {
+    "name": "组地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-ports/qinq-port/source-address": {
+    "name": "源地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-ports/qinq-port/outbound-port-lists": {
+    "name": "QINQ出接口详细信息列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-ports/qinq-port/outbound-port-lists/outbound-port-list": {
+    "name": "QINQ出接口详细信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-ports/qinq-port/outbound-port-lists/outbound-port-list/pe-vid": {
+    "name": "外层标签的ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-ports/qinq-port/outbound-port-lists/outbound-port-list/ce-vid": {
+    "name": "内层标签的ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-ports/qinq-port/outbound-port-lists/outbound-port-list/live-time": {
+    "name": "端口的持续时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-ports/qinq-port/outbound-port-lists/outbound-port-list/group-mode": {
+    "name": "组模式"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/qinq-ports/qinq-port/outbound-port-lists/outbound-port-list/entry-flag": {
+    "name": "端口标志"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/invalid-packet": {
+    "name": "IGMP无效报文"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/invalid-packet/query": {
+    "name": "无效的Query报文计数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/invalid-packet/query/unwanted-source-list": {
+    "name": "无效的源地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/invalid-packet/query/zero-max-resp-code": {
+    "name": "报文中Max Resp Code字段为0"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/invalid-packet/query/fault-length": {
+    "name": "无效报文长度"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/invalid-packet/query/invalid-multicast-group": {
+    "name": "无效组播组地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/invalid-packet/query/bad-checksum": {
+    "name": "校验和无效"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/invalid-packet/report": {
+    "name": "无效Report报文计数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/invalid-packet/report/fault-length": {
+    "name": "无效报文长度"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/invalid-packet/report/invalid-multicast-group": {
+    "name": "无效组播组地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/invalid-packet/report/invalid-multicast-source": {
+    "name": "无效的源地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/invalid-packet/report/bad-checksum": {
+    "name": "校验和无效"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/invalid-packet/report/illegal": {
+    "name": "非法Report报文类型"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/invalid-packet/leave": {
+    "name": "无效Leave报文"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/invalid-packet/leave/invalid-multicast-group": {
+    "name": "无效组播组地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:igmp/invalid-packet/leave/bad-checksum": {
+    "name": "校验和无效"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld": {
+    "name": "MLD配置"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/global": {
+    "name": "MGMD全局配置"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/global/query-interval": {
+    "name": "普遍查询时间间隔"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/global/query-response-interval": {
+    "name": "最大响应时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/global/robustness": {
+    "name": "健壮系数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/global/last-member-query-interval": {
+    "name": "指定组查询时间间隔"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/global/require-router-alert": {
+    "name": "检查Router-Alert"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/global/send-router-alert": {
+    "name": "发送时携带Router-Alert"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/global/other-querier-present-time": {
+    "name": "其他查询器存活时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/global/ssm-mappings": {
+    "name": "SSM映射规则配置列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/global/ssm-mappings/ssm-mapping": {
+    "name": "SSM映射规则配置"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/global/ssm-mappings/ssm-mapping/group-address": {
+    "name": "组地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/global/ssm-mappings/ssm-mapping/mask-length": {
+    "name": "组地址掩码长度"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/global/ssm-mappings/ssm-mapping/source-address": {
+    "name": "源地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces": {
+    "name": "MLD接口配置列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface": {
+    "name": "MLD接口配置"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/name": {
+    "name": "接口名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/enable": {
+    "name": "使能协议"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/ip-source-policy-enable": {
+    "name": "过滤Report报文的主机地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/ip-source-policy-name": {
+    "name": "过滤Report报文的主机地址策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/query-interval": {
+    "name": "普遍查询时间间隔"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/query-response-interval": {
+    "name": "最大响应时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/robustness": {
+    "name": "健壮系数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/version": {
+    "name": "协议版本号"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/last-member-query-interval": {
+    "name": "指定组查询时间间隔"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/require-router-alert": {
+    "name": "检查Router-Alert"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/send-router-alert": {
+    "name": "发送时携带Router-Alert"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/other-querier-present-time": {
+    "name": "其他查询器存活时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/immediately-leave": {
+    "name": "立刻离开"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/immediately-leave-policy": {
+    "name": "立刻离开策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/on-demand-enable": {
+    "name": "设置组记录永不超时"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/entry-limit": {
+    "name": "表项最大值"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/entry-limit-acl-name": {
+    "name": "不受限组范围策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/ssm-mapping-enable": {
+    "name": "使能SSM-Mapping"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/group-acl-name": {
+    "name": "组策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/group-acl-version": {
+    "name": "限制的协议版本号"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/query-acl-name": {
+    "name": "过滤Query报文的主机地址策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/status": {
+    "name": "接口信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/status/address": {
+    "name": "接口地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/status/state": {
+    "name": "接口状态"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/status/negotiate-query-interval": {
+    "name": "查询时间协商值"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/status/other-querier-timeout": {
+    "name": "其他查询器存活时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/status/maximum-response-time": {
+    "name": "最大响应时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/status/last-member-query-time": {
+    "name": "最后成员超时时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/status/startup-query-interval": {
+    "name": "启动时查询间隔"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/status/startup-query-count": {
+    "name": "启动时查询次数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/status/querier-address": {
+    "name": "查询器"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/status/is-local-querier": {
+    "name": "是本地查询器"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/status/joins": {
+    "name": "加入过的组个数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/status/leaves": {
+    "name": "离开的组个数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/status/negotiated-robustness": {
+    "name": "健壮系数(协商)"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/status/startup-query-timer-state": {
+    "name": "启动时查询状态"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/status/other-querier-present-timer-state": {
+    "name": "非查询器存在状态"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/status/total-group-reported": {
+    "name": "动态加入的组个数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/status/remote-backup-state": {
+    "name": "远程备份状态"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/control-message": {
+    "name": "接口MLD消息统计数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/control-message/address": {
+    "name": "接口地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/control-message/general-query-sent": {
+    "name": "发送的常规查询"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/control-message/general-query-valid": {
+    "name": "有效的通用查询"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/control-message/general-query-invalid": {
+    "name": "无效的通用查询"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/control-message/general-query-ignore": {
+    "name": "忽略的通用查询"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/control-message/group-query-sent": {
+    "name": "发送的组查询消息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/control-message/group-query-valid": {
+    "name": "有效的组查询"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/control-message/group-query-invalid": {
+    "name": "无效的组查询"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/control-message/group-query-ignore": {
+    "name": "忽略的组查询"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/control-message/source-group-sent": {
+    "name": "发送的源组查询"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/control-message/source-group-valid": {
+    "name": "有效的源组查询"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/control-message/source-group-invalid": {
+    "name": "无效的源组查询"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/control-message/source-group-ignore": {
+    "name": "忽略的源组查询"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/control-message/source-sent": {
+    "name": "发送的source-Records-total消息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/control-message/source-valid": {
+    "name": "有效的source-Records-total消息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/control-message/source-invalid": {
+    "name": "无效的source-Records-total消息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/control-message/source-ignore": {
+    "name": "忽略的source-Records-total消息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/control-message/unknown-invalid": {
+    "name": "无效的未知类型消息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/control-message/unknown-ignore": {
+    "name": "忽略的未知类型消息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/invalid-packet": {
+    "name": "基于接口MLD无效报文"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/invalid-packet/query": {
+    "name": "无效的Query报文计数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/invalid-packet/query/unwanted-source-list": {
+    "name": "无效的源地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/invalid-packet/query/zero-max-resp-code": {
+    "name": "报文中Max Resp Code字段为0"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/invalid-packet/query/fault-length": {
+    "name": "无效报文长度"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/invalid-packet/query/invalid-multicast-group": {
+    "name": "无效组播组地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/invalid-packet/query/bad-checksum": {
+    "name": "校验和无效"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/invalid-packet/report": {
+    "name": "无效Report报文计数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/invalid-packet/report/fault-length": {
+    "name": "无效报文长度"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/invalid-packet/report/invalid-multicast-group": {
+    "name": "无效组播组地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/invalid-packet/report/invalid-multicast-source": {
+    "name": "无效的源地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/invalid-packet/report/bad-checksum": {
+    "name": "校验和无效"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/invalid-packet/report/illegal": {
+    "name": "非法Report报文类型"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/invalid-packet/leave": {
+    "name": "无效Leave报文"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/invalid-packet/leave/invalid-multicast-group": {
+    "name": "无效组播组地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/interfaces/interface/invalid-packet/leave/bad-checksum": {
+    "name": "校验和无效"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/static-groups": {
+    "name": "静态组播组配置列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/static-groups/static-group": {
+    "name": "静态组播组配置"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/static-groups/static-group/interface": {
+    "name": "接口名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/static-groups/static-group/group-address": {
+    "name": "静态组地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/static-groups/static-group/is-source-address": {
+    "name": "设置源地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/static-groups/static-group/source-address": {
+    "name": "源地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/static-groups/static-group/is-mask-length": {
+    "name": "设置递增掩码长度"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/static-groups/static-group/mask-length": {
+    "name": "组地址递增掩码长度"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/static-groups/static-group/total-number": {
+    "name": "组地址个数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/dot1q-static-groups": {
+    "name": "DOT1Q静态组播组配置列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/dot1q-static-groups/dot1q-static-group": {
+    "name": "DOT1Q静态组播组配置"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/dot1q-static-groups/dot1q-static-group/interface": {
+    "name": "接口名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/dot1q-static-groups/dot1q-static-group/group-address": {
+    "name": "静态组地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/dot1q-static-groups/dot1q-static-group/is-source-address": {
+    "name": "设置源地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/dot1q-static-groups/dot1q-static-group/source-address": {
+    "name": "源地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/dot1q-static-groups/dot1q-static-group/is-mask-length": {
+    "name": "设置递增掩码长度"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/dot1q-static-groups/dot1q-static-group/mask-length": {
+    "name": "组地址递增掩码长度"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/dot1q-static-groups/dot1q-static-group/begin-vid": {
+    "name": "DOT1Q标签起始值ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/dot1q-static-groups/dot1q-static-group/end-vid": {
+    "name": "DOT1Q标签结束值ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/dot1q-static-groups/dot1q-static-group/group-number": {
+    "name": "组地址个数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-static-groups": {
+    "name": "QINQ静态组播组配置列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-static-groups/qinq-static-group": {
+    "name": "QINQ静态组播组配置"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-static-groups/qinq-static-group/interface": {
+    "name": "接口名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-static-groups/qinq-static-group/group-address": {
+    "name": "静态组地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-static-groups/qinq-static-group/is-source-address": {
+    "name": "设置源地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-static-groups/qinq-static-group/source-address": {
+    "name": "源地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-static-groups/qinq-static-group/is-mask-length": {
+    "name": "设置递增掩码长度"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-static-groups/qinq-static-group/mask-length": {
+    "name": "组地址递增掩码长度"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-static-groups/qinq-static-group/pe-vid": {
+    "name": "QINQ外层标签的ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-static-groups/qinq-static-group/ce-begin-vid": {
+    "name": "QINQ内层标签起始值ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-static-groups/qinq-static-group/ce-end-vid": {
+    "name": "QINQ内层标签结束值ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-static-groups/qinq-static-group/group-number": {
+    "name": "组地址个数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/display-static-groups": {
+    "name": "静态组信息列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/display-static-groups/display-static-group": {
+    "name": "静态组信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/display-static-groups/display-static-group/interface": {
+    "name": "接口名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/display-static-groups/display-static-group/group-address": {
+    "name": "组地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/display-static-groups/display-static-group/source-address": {
+    "name": "源地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/display-static-groups/display-static-group/is-configured-boundary": {
+    "name": "组播转发边界"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/groups": {
+    "name": "动态组信息列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/groups/group": {
+    "name": "动态组信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/groups/group/interface": {
+    "name": "接口名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/groups/group/group-address": {
+    "name": "组地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/groups/group/last-report-address": {
+    "name": "最后发报告的主机"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/groups/group/up-time": {
+    "name": "组的持续时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/groups/group/expire-time": {
+    "name": "组的剩余时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/groups/group/last-member-query-counter": {
+    "name": "查询最后成员的次数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/groups/group/last-member-query-timer": {
+    "name": "最后成员超时时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/groups/group/source-filter-mode": {
+    "name": "组模式"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/groups/group/v1-host-timer": {
+    "name": "V1主机超时时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/groups/group/v2-host-timer": {
+    "name": "V2主机超时时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/groups/group/is-ssm-mapping": {
+    "name": "是SSMMap的组"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/groups/group/sources": {
+    "name": "动态源信息列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/groups/group/sources/source": {
+    "name": "动态源信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/groups/group/sources/source/source-address": {
+    "name": "源地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/groups/group/sources/source/up-time": {
+    "name": "源的持续时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/groups/group/sources/source/expire-time": {
+    "name": "源的剩余时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/groups/group/sources/source/last-member-query-counter": {
+    "name": "查询最后成员的次数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/groups/group/sources/source/last-member-query-timer": {
+    "name": "最后成员超时时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-groups": {
+    "name": "QINQ动态组信息列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-groups/qinq-group": {
+    "name": "QINQ动态组信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-groups/qinq-group/interface": {
+    "name": "接口名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-groups/qinq-group/pe-vid": {
+    "name": "外层标签的ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-groups/qinq-group/ce-vid": {
+    "name": "内层标签的ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-groups/qinq-group/group-address": {
+    "name": "组地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-groups/qinq-group/up-time": {
+    "name": "组的持续时间(秒)"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-groups/qinq-group/expire-time": {
+    "name": "组的剩余时间(秒)"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-groups/qinq-group/group-timer": {
+    "name": "组定时器"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-groups/qinq-group/retran-count": {
+    "name": "查询最后成员的次数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-groups/qinq-group/last-member-query": {
+    "name": "发送特定源组查询"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-groups/qinq-group/group-mode": {
+    "name": "组过滤模式"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-groups/qinq-group/compat-mode": {
+    "name": "组兼容模式"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-groups/qinq-group/v1-host-timer": {
+    "name": "IGMPv1主机存在定时器"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-groups/qinq-group/v2-host-timer": {
+    "name": "IGMPv2主机存在定时器"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-groups/qinq-group/source-last-member-query": {
+    "name": "发送特定源组查询"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-groups/qinq-group/last-member-query-timer": {
+    "name": "组成员查询超时时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-groups/qinq-group/sources": {
+    "name": "QINQ动态组源信息列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-groups/qinq-group/sources/source": {
+    "name": "QINQ动态组源信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-groups/qinq-group/sources/source/source-address": {
+    "name": "源地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-groups/qinq-group/sources/source/up-time": {
+    "name": "源的持续时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-groups/qinq-group/sources/source/expire-time": {
+    "name": "源的剩余时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-groups/qinq-group/sources/source/source-timer": {
+    "name": "源定时器"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-groups/qinq-group/sources/source/retran-count": {
+    "name": "查询最后成员的次数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-groups/qinq-group/sources/source/last-member-query": {
+    "name": "发送特定源组查询"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-ports": {
+    "name": "QINQ出接口信息列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-ports/qinq-port": {
+    "name": "QINQ出接口信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-ports/qinq-port/interface": {
+    "name": "接口名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-ports/qinq-port/group-address": {
+    "name": "组地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-ports/qinq-port/source-address": {
+    "name": "源地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-ports/qinq-port/outbound-port-lists": {
+    "name": "QINQ出接口详细信息列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-ports/qinq-port/outbound-port-lists/outbound-port-list": {
+    "name": "QINQ出接口详细信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-ports/qinq-port/outbound-port-lists/outbound-port-list/pe-vid": {
+    "name": "外层标签的ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-ports/qinq-port/outbound-port-lists/outbound-port-list/ce-vid": {
+    "name": "内层标签的ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-ports/qinq-port/outbound-port-lists/outbound-port-list/live-time": {
+    "name": "端口的持续时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-ports/qinq-port/outbound-port-lists/outbound-port-list/group-mode": {
+    "name": "组模式"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/qinq-ports/qinq-port/outbound-port-lists/outbound-port-list/entry-flag": {
+    "name": "端口标志"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/invalid-packet": {
+    "name": "MLD无效报文"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/invalid-packet/query": {
+    "name": "无效的Query报文计数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/invalid-packet/query/unwanted-source-list": {
+    "name": "无效的源地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/invalid-packet/query/zero-max-resp-code": {
+    "name": "报文中Max Resp Code字段为0"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/invalid-packet/query/fault-length": {
+    "name": "无效报文长度"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/invalid-packet/query/invalid-multicast-group": {
+    "name": "无效组播组地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/invalid-packet/query/bad-checksum": {
+    "name": "校验和无效"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/invalid-packet/report": {
+    "name": "无效Report报文计数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/invalid-packet/report/fault-length": {
+    "name": "无效报文长度"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/invalid-packet/report/invalid-multicast-group": {
+    "name": "无效组播组地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/invalid-packet/report/invalid-multicast-source": {
+    "name": "无效的源地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/invalid-packet/report/bad-checksum": {
+    "name": "校验和无效"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/invalid-packet/report/illegal": {
+    "name": "非法Report报文类型"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/invalid-packet/leave": {
+    "name": "无效Leave报文"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/invalid-packet/leave/invalid-multicast-group": {
+    "name": "无效组播组地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-igmp-mld:mld/invalid-packet/leave/bad-checksum": {
+    "name": "校验和无效"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "nav": {
+    "overview": "Overview",
+    "devices": "Devices",
+    "nativeConfig": "Native Configuration",
+    "businessConfig": "Business Network",
+    "logs": "Audit Logs",
+    "settings": "Settings",
+    "notOnboarded": "Not onboarded",
+    "otherGroup": "Others",
+    "brandSub": "Switch Mgmt",
+    "sideFoot": "No DB · TTL cache"
+  },
+  "common": {
+    "language": "Language",
+    "search": "Search",
+    "add": "Add",
+    "edit": "Edit",
+    "delete": "Delete",
+    "confirm": "OK",
+    "cancel": "Cancel",
+    "refresh": "Refresh",
+    "loading": "Loading",
+    "empty": "No data",
+    "all": "All",
+    "actions": "Actions"
+  }
+}
