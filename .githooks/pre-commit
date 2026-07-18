@@ -35,7 +35,7 @@ GENERATED=$(echo "$STAGED_FILES" | grep -E '^backend/internal/generated/' | grep
 if [ -n "$GENERATED" ]; then
   echo -e "${YELLOW}[pre-commit] 检测到生成物/manifest 变更 → regen-and-diff 验证 (R04)...${NC}"
   if ! make gen-yang >/dev/null 2>&1; then
-    echo -e "${RED}[R04] 拒绝: make gen-yang 执行失败（yang-models submodule 已初始化？）${NC}"
+    echo -e "${RED}[R04] 拒绝: make gen-yang 执行失败（模型源目录 snd/ce6866p-yang 完整？）${NC}"
     FAILED=1
   elif ! git diff --quiet backend/internal/generated/; then
     echo -e "${RED}[R04] 拒绝: 生成物与 make gen-yang 输出不一致（生成物勿手改，改 YANG/gen.conf 后重跑）${NC}"

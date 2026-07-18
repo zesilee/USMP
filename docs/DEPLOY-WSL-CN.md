@@ -12,7 +12,7 @@
 
 - WSL2 里可用的 Docker（原生 Engine + systemd，或 Docker Desktop WSL 集成）。
 - 已 `git clone` 本仓库（如为私有仓库，用 `gh auth login` 或 PAT 鉴权）。
-- 构建**不需要** `yang-models` 子模块（ygot 生成物已提交），**不需要** `.env`。
+- 构建**无 submodule 依赖**（YANG 模型源 `snd/ce6866p-yang` 已入库，ygot 生成物已提交），**不需要** `.env`。
 - 记下你的 WSL eth0 IP 和本地代理端口：
   ```bash
   ip addr show eth0 | grep 'inet '     # 记下 eth0 的 IPv4

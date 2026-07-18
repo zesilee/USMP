@@ -15,8 +15,8 @@ To add a module: append it to modules= in gen.conf, then run
 
 	make gen-yang VENDOR=huawei
 
-Regeneration requires the yang-models submodule
-(git submodule update --init yang-models). CI verifies the generated
+Regeneration reads the in-repo snd/ce6866p-yang model source
+(no submodule required). CI verifies the generated
 output is reproducible via regen-and-diff; see
 backend/internal/generated/README.md.
 */
