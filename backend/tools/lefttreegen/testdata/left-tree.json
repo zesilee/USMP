@@ -1,0 +1,20 @@
+{
+  "left-tree": [
+    {
+      "type": "group",
+      "zh-cn": "基础配置",
+      "en-us": "Basic Configuration",
+      "children": [
+        {
+          "type": "group",
+          "zh-cn": "二级组",
+          "en-us": "Sub Group",
+          "children": [
+            { "type": "group", "zh-cn": "demo-good", "en-us": "demo-good", "xpath": "/demo-good" }
+          ]
+        },
+        { "type": "group", "zh-cn": "demo-missing", "en-us": "demo-missing", "xpath": "/demo-missing" }
+      ]
+    }
+  ]
+}

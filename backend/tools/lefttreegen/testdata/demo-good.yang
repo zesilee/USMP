@@ -1,0 +1,11 @@
+module demo-good {
+  namespace "urn:demo:good";
+  prefix dg;
+  container goodroot {
+    leaf x { type string; }
+  }
+  container secondroot {
+    leaf y { type string; }
+  }
+  rpc do-thing { }
+}

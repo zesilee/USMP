@@ -44,6 +44,9 @@ func Load() (schema.Schema, error) {
 // SND blacklist（CN-03）：构建期 revision 匹配后生成模块名集合，运行期零 snd 文件依赖。
 //go:generate go run ../../tools/blacklistgen -blacklist=../../../snd/ce6866p-yang/blacklist.xml -path=../../../snd/ce6866p-yang -output=./blacklist.gen.go -package=yangschema
 
+// SND left-tree（LT-01）：构建期生成分组树 + 叶子根容器映射，运行期零 snd 文件依赖。
+//go:generate go run ../../tools/lefttreegen -tree=../../../snd/webui/template/left-tree.json -path=../../../snd/ce6866p-yang -output=./lefttree.gen.go -package=yangschema
+
 // 业务意图模型的 task-name 与厂商模型不同源（backend/internal/yang/models 入库
 // 模型，无 submodule 依赖），独立生成文件与变量避免冲突。
 //go:generate go run ../../tools/tasknamegen -path=../yang/models -modules=usmp-business-vlan -output=./taskname_business.gen.go -package=yangschema -var=BusinessTaskNames
