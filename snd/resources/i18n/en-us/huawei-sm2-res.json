@@ -1,0 +1,32 @@
+{
+  "/huawei-sm2:sm2": {
+    "name": "SM2 peer key table"
+  },
+  "/huawei-sm2:sm2/sm2-peer-keys": {
+    "name": "SM2 peer key table"
+  },
+  "/huawei-sm2:sm2/sm2-peer-keys/sm2-peer-key": {
+    "name": "SM2 peer key"
+  },
+  "/huawei-sm2:sm2/sm2-peer-keys/sm2-peer-key/key-name": {
+    "name": "SM2 key name"
+  },
+  "/huawei-sm2:sm2/sm2-peer-keys/sm2-peer-key/key-code": {
+    "name": "SM2 key code"
+  },
+  "/huawei-sm2:sm2/sm2-key-pairs": {
+    "name": "SM2 keypair"
+  },
+  "/huawei-sm2:sm2/sm2-key-pairs/sm2-key-pair": {
+    "name": "SM2 keypair"
+  },
+  "/huawei-sm2:sm2/sm2-key-pairs/sm2-key-pair/key-pair-label": {
+    "name": "SM2 keypair label name"
+  },
+  "/huawei-sm2:sm2/sm2-key-pairs/sm2-key-pair/key-size": {
+    "name": "SM2 keypair Size"
+  },
+  "/huawei-sm2:sm2/sm2-key-pairs/sm2-key-pair/host-key-code": {
+    "name": "SM2 hostkey"
+  }
+}

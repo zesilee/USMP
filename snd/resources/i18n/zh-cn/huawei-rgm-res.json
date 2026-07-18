@@ -1,0 +1,47 @@
+{
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-rgm:rgm": {
+    "name": "直连路由绑定业务"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-rgm:rgm/rgm-track": {
+    "name": "直连路由绑定业务"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-rgm:rgm/rgm-track/track-vrrp": {
+    "name": "直连路由绑定VRRP"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-rgm:rgm/rgm-track/track-vrrp/track-vrrp": {
+    "name": "直连路由绑定VRRP"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-rgm:rgm/rgm-track/track-vrrp/track-vrrp/vrrp-id": {
+    "name": "备份组ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-rgm:rgm/rgm-track/track-vrrp/track-vrrp/cost-change": {
+    "name": "直连路由COST变化值"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-rgm:rgm/rgm-track/track-pw": {
+    "name": "直连路由绑定PW"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-rgm:rgm/rgm-track/track-pw/track-pw": {
+    "name": "直连路由绑定PW"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-rgm:rgm/rgm-track/track-pw/track-pw/cost-change": {
+    "name": "直连路由COST变化值"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-rgm:rgm6": {
+    "name": "直连路由绑定业务"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-rgm:rgm6/rgm6-track": {
+    "name": "直连路由绑定业务"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-rgm:rgm6/rgm6-track/advertise-delay": {
+    "name": "IPv6直连路由的开销延迟恢复功能"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-rgm:rgm6/rgm6-track/advertise-delay/advertise-delay": {
+    "name": "IPv6直连路由的开销延迟恢复功能"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-rgm:rgm6/rgm6-track/advertise-delay/advertise-delay/cost-change": {
+    "name": "减低优先级"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-rgm:rgm6/rgm6-track/advertise-delay/advertise-delay/time-delay": {
+    "name": "延迟时间"
+  }
+}

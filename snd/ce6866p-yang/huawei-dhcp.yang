@@ -1,0 +1,2125 @@
+/*
+Copyright (C) 2020 Huawei Technologies Co., Ltd. All rights reserved.
+*/
+module huawei-dhcp {
+  namespace "urn:huawei:yang:huawei-dhcp";
+  prefix dhcp;
+  import huawei-pub-type {
+    prefix pub-type;
+  }
+  import huawei-ifm {
+    prefix ifm;
+  }
+  import huawei-vlan {
+    prefix vlan;
+  }
+  import huawei-bd {
+    prefix bd;
+  }
+  import huawei-ifm-trunk {
+    prefix ifm-trunk;
+  }  
+  import huawei-extension {
+    prefix ext;
+  }
+  import ietf-inet-types {
+    prefix inet;
+  }
+  import huawei-ethernet {
+    prefix ethernet;
+  }
+  include huawei-dhcp-relay;
+  include huawei-dhcp-server;
+  include huawei-dhcp-snooping;
+  include huawei-dhcp-client;
+  organization
+    "Huawei Technologies Co., Ltd.";
+  contact
+    "Huawei Industrial Base
+     Bantian, Longgang
+     Shenzhen 518129
+     People's Republic of China
+     Website: http://www.huawei.com
+     Email: support@huawei.com";
+  description
+    "Dynamic Host Configuration Protocol.";
+  revision 2020-04-29 {
+    description
+      "Add node.";
+    reference
+      "Huawei private.";
+  }
+  revision 2020-04-10 {
+    description
+      "Add session-car.";
+    reference
+      "Huawei private.";
+  }
+  revision 2020-03-03 {
+    description
+      "Initial revision.";
+    reference
+      "Huawei private.";
+  }
+  ext:task-name "dhcp";
+  typedef option82-sub-option-type {
+    type enumeration {
+      enum "circuit-id" {
+        value 1;
+        description
+          "DHCP option82 sub-option circuit-ID.";
+      }
+      enum "remote-id" {
+        value 2;
+        description
+          "DHCP option82 sub-option remote-ID.";
+      }
+      enum "circuit-remote" {
+        value 3;
+        description
+          "DHCP option82 sub-option circuit-ID and sub-option remote-ID.";
+      }
+    }
+    description
+      "The type of option82 sub-option.";
+  }
+  typedef option82-format {
+    type enumeration {
+      enum "common" {
+        value 1;
+        description
+          "DHCP option82 common format.";
+      }
+      enum "extend" {
+        value 2;
+        description
+          "DHCP option82 extend format.";
+      }
+      enum "user-defined" {
+        value 3;
+        description
+          "DHCP option82 user-defined format.";
+      }
+      enum "default" {
+        value 4;
+        description
+          "DHCP option82 default format.";
+      }
+      enum "type1" {
+        value 5;
+        description
+          "DHCP option82 type1 format.";
+      }
+      enum "type2" {
+        value 6;
+        description
+          "DHCP option82 type2 format.";
+      }
+      enum "self-define" {
+        value 7;
+        description
+          "DHCP option82 self-define format.";
+      }
+      enum "default-extra" {
+        value 8;
+        description
+          "DHCP option82 extra default format.";
+      }
+      enum "cn-telecom" {
+        value 9;
+        description
+          "DHCP option82 cn-telecom format.";
+      }
+      enum "self-define-extra" {
+        value 10;
+        description
+          "DHCP option82 extra self-define format.";
+      }
+
+      enum "intracom-vxlan" {
+        value 11;
+        description
+          "DHCP option82 Intracom-VXLAN format.";
+      }
+    }
+    description
+      "The type of DHCP option82 format.";
+  }
+  typedef option82-vendor-sub-option-format {
+    type enumeration {
+      enum "ascii" {
+        value 1;
+        description
+          "DHCP option82 ascii-type format.";
+      }
+      enum "hex" {
+        value 2;
+        description
+          "DHCP option82 hex-type format.";
+      }
+      enum "ip-address" {
+        value 3;
+        description
+          "DHCP option82 sub9 IP-address.";
+      }
+      enum "sysname" {
+        value 4;
+        description
+          "System name.";
+      }
+    }
+    description
+      "The type of DHCP option82 vendor sub-option format.";
+  }
+  typedef server-enable-state {
+    type enumeration {
+      enum "enable" {
+        value 1;
+        description
+          "Enable the function of DHCP server on an interface.";
+      }
+      enum "disable" {
+        value 2;
+        description
+          "Disable the function of DHCP server on an interface.";
+      }
+    }
+    description
+      "The state of DHCP server flag.";
+  }
+  typedef option82-encapsulation-sub-option {
+    type enumeration {
+      enum "circuit-id" {
+        value 1;
+        description
+          "Inserts the circuit-id suboption.";
+      }
+      enum "remote-id" {
+        value 2;
+        description
+          "Inserts the remote-id suboption.";
+      }
+      enum "subscriber-id" {
+        value 3;
+        description
+          "Inserts the subscriber-id (SID) suboption.";
+      }
+      enum "vendor-specific-id" {
+        value 4;
+        description
+          "Inserts the vendor-specific suboption in the Sub9 field.";
+      }
+    }
+    description
+      "Configure suboptions inserted into the DHCP Option 82 field.";
+  }
+  container dhcp {
+    description
+      "Configure Dynamic Host Configuration Protocol.";
+    container common {
+      description
+        "Configure basic DHCP.";
+      container global {
+        description
+          "Configure globally configured attributes.";
+        leaf enable {
+          type boolean;
+          default "false";
+          description
+            "Enable/disable DHCP globally.";
+        }
+        leaf ignore-hostname {
+          type boolean;
+          default "false";
+          description
+            "Enable/disable DHCP ignore hostname.";
+        }
+        leaf rate-limit-enable {
+          type boolean;
+          default "true";
+          description
+            "Enable/disable DHCP packets rate limit.";
+        }
+        leaf rate-limit {
+          type uint32 {
+            range "1..4000";
+          }
+          units "pps";
+          default "800";
+          description
+            "DHCP packets rate limit value.";
+        }
+        leaf aging-time {
+          type uint32 {
+            range "1..1440";
+          }
+          units "min";
+          default "30";
+          description
+            "DHCP session CAR aging time.";
+        }
+        leaf check-magic-cookie {
+          type boolean;
+          default "false";
+          description
+            "Enable/disable the function of checking the magic-cookie field in a DHCP packet and discarding a DHCP packet with an incorrect value in the magic-cookie field.";
+        }
+        leaf check-udp-checksum {
+          type boolean;
+          default "true";
+          description
+            "Enable/disable the function of checking the UDP header checksum in a DHCP packet and discarding a DHCP packet with an incorrect checksum.";
+        }
+        leaf udp-checksum {
+          type boolean;
+          default "false";
+          description
+            "Enable/disable a device to add the UDP header checksum to DHCP packets to be sent.";
+        }
+        leaf broadcast-suppress {
+          type boolean;
+          default "false";
+          description
+            "Enable/disable the DHCP broadcast suppression function.";
+        }
+      }
+      container session-car {
+        must "pir-value >= cir-value and pbs-value >= cbs-value";
+        description
+          "Configure session CAR.";
+        leaf enable {
+          type boolean;
+          default "true";
+          description
+            "Enable/disable session CAR.";
+        }
+        leaf cir-value {
+          type uint32 {
+            range "0..1000000";
+          }
+          units "kbit/s";
+          default "512";
+          description
+            "Specify the session CAR CIR value.";
+        }
+        leaf cbs-value {
+          type uint32 {
+            range "0..9000000";
+          }
+          units "Byte";
+          default "64000";
+          description
+            "Specify the session CAR CBS value.";
+        }
+        leaf pir-value {
+          type uint32 {
+            range "0..1000000";
+          }
+          units "kbit/s";
+          default "1200";
+          description
+          "Specify the session CAR PIR value.";
+        }
+        leaf pbs-value {
+          type uint32 {
+            range "0..9000000";
+          }
+          units "Byte";
+          default "150000";
+          description
+          "Specify the session CAR PBS value.";
+        }
+      }
+      container option82 {
+        description
+          "Configure DHCP option82 attributes.";
+        container global-formats {
+          description
+            "List of DHCP Option82 formats globally.";
+          list global-format {
+            key "sub-option-type";
+            description
+              "Configure a DHCP Option82 global format.";
+            leaf sub-option-type {
+              type option82-sub-option-type;
+              description
+                "DHCP option82 global sub-option type.";
+            }
+            leaf option82-format {
+              type option82-format;
+              mandatory true;
+              description
+                "DHCP option82 sub-option format type.";
+            }
+            leaf user-defind-text {
+              when "../option82-format='user-defined'";
+              type string {
+                length "0..255";
+                pattern '([^\t]{0,})';
+              }
+              description
+                "The format string of DHCP option82 defined by user. The keywords include: sysname, portname, porttype, iftype, mac, slot, subslot, port, svlan, cvlan, and length. You can configure like this: '%portname:%svlan.%cvlan %sysname/0/0/0/0/0' or 0 %length %svlan %5slot %3subslot %8port and so on. Please refer to user command manual for more information.";
+            }
+          }
+        }
+        container global-vlan-formats {
+          description
+            "List of DHCP Option82 formats with VLAN globally.";
+          list global-vlan-format {
+            key "vlan-id cevlan-id sub-option-type";
+            description
+              "Configure a DHCP Option82 global format with VLAN.";
+            leaf vlan-id {
+              type uint16 {
+                range "0..4094";
+              }
+              description
+                "Indicate an outer VLAN ID. Value 0 Indicates no VLAN.";
+            }
+            leaf cevlan-id {
+              type uint16 {
+                range "0..4094";
+              }
+              description
+                "Indicates an inner VLAN ID. Value 0 Indicates no VLAN.";
+            }
+            leaf sub-option-type {
+              type option82-sub-option-type;
+              description
+                "DHCP option82 global sub-option type.";
+            }
+            leaf option82-format {
+              type option82-format;
+              mandatory true;
+              description
+                "DHCP option82 sub-option format type.";
+            }
+            leaf user-defind-text {
+              when "../option82-format='user-defined'";
+              type string {
+                length "0..255";
+                pattern '([^\t]{0,})';
+              }
+              description
+                "The format string of DHCP option82 defined by user. The keywords include: sysname, portname, porttype, iftype, mac, slot, subslot, port, svlan, cvlan, and length. You can configure like this: '%portname:%svlan.%cvlan %sysname/0/0/0/0/0' or 0 %length %svlan %5slot %3subslot %8port and so on. Please refer to user command manual for more information.";
+            }
+          }
+        }
+        container vendor-sub-options {
+          description
+            "List of DHCP option82 sub-option9 formats.";
+          list vendor-sub-option {
+            key "sub-option-num";
+            description
+              "Configure DHCP option82 sub-option9 format.";
+            leaf sub-option-num {
+              type uint32 {
+                range "1..255";
+              }
+              description
+                "DHCP option82 sub-option number.";
+            }
+            leaf sub-option-format {
+              type option82-vendor-sub-option-format;
+              mandatory true;
+              description
+                "DHCP option82 sub-option format.";
+            }
+            leaf user-define-text {
+              type string {
+                length "0..511";
+                pattern '([^\t]{0,})';
+              }
+              mandatory true;
+              description
+                "DHCP option82 sub-option user-defined string. The value can be an ASCII string with less than 129 characters or a hexadecimal string with less than 257 characters, spaces not supported. The hexadecimal string can contain digits and letters A to F or a to f, and its length must be even.";
+            }
+            leaf-list ip-addresses {
+              type inet:ip-address-no-zone;
+              max-elements 8;
+              description
+                "Configure the IP address.";
+            }
+          }
+        }
+        container encapsulation {
+          description
+            "Configure suboptions inserted into the DHCP Option 82 field.";
+          leaf suboption {
+            type option82-encapsulation-sub-option;
+            default "circuit-id remote-id subscriber-id vendor-specific-id";
+            description
+              "Configure suboptions inserted into the DHCP Option 82 field.";
+          }
+        }
+        container subscriber-id {
+          description
+            "Configure the Sub6 suboption into the DHCP Option 82 field of DHCP messages and configures the format of the Sub6 suboption.";
+          leaf ascii-text {
+            type string {
+              length "1..129";
+            }
+            description
+              "DHCP option82 ascii-type format.";
+          }
+          leaf hex-text {
+            type string {
+              length "1..257";
+            }
+            description
+              "DHCP option82 hex-type format.";
+          }
+        }
+      }
+      container openflow {
+        description
+          "Configure DHCP openflow.";
+        leaf openflow-enable {
+          type boolean;
+          default "false";
+          description
+            "Enable/disable DHCP packet copy to SDN controller.";
+        }
+      }
+      container anti-attack-option {
+        description
+          "Configure the device to check and discard DHCP messages with duplicate options.";
+        leaf enable {
+          type boolean;
+          default "false";
+          description
+            "Enable/disable the device to check and discard DHCP messages with duplicate options.";
+        }
+        container options {
+          must "../enable='true'";
+          description
+            "List of the function to check and discard DHCP messages with duplicate options.";
+          list option {
+            key "option-start";
+            max-elements 254;
+            description
+              "Configure the option value.";
+            leaf option-start {
+              type uint8 {
+                range "1..254";
+              }
+              description
+                "Specify the start value of an option in a DHCP packet.";
+            }
+            leaf option-end {
+              type uint8 {
+                range "1..254";
+              }
+              must "../option-start<=../option-end";
+              description
+                "Specify the end value of an option in a DHCP packet.";
+            }
+          }
+        }
+      }
+      container global-packet-statistics {
+        config false;
+        description
+          "Statistics of DHCP global packets.";
+        leaf total-packets-receive {
+          type uint32;
+          config false;
+          description
+            "Total received count of  packets.";
+        }
+        leaf discarded-packets-receive {
+          type uint32;
+          config false;
+          description
+            "Total discarded count of received packets.";
+        }
+        leaf bootp-request-packets-receive {
+          type uint32;
+          config false;
+          description
+            "Count of received bootp request packets.";
+        }
+        leaf bootp-reply-packets-receive {
+          type uint32;
+          config false;
+          description
+            "Count of received bootp reply packets.";
+        }
+        leaf discover-packets-receive {
+          type uint32;
+          config false;
+          description
+            "Count of received DHCP discover packets.";
+        }
+        leaf offer-packets-receive {
+          type uint32;
+          config false;
+          description
+            "Count of received DHCP offer packets.";
+        }
+        leaf request-packets-receive {
+          type uint32;
+          config false;
+          description
+            "Count of received DHCP request packets.";
+        }
+        leaf ack-packets-receive {
+          type uint32;
+          config false;
+          description
+            "Count of received DHCP ACK packets.";
+        }
+        leaf release-packets-receive {
+          type uint32;
+          config false;
+          description
+            "Count of received DHCP release packets.";
+        }
+        leaf nak-packets-receive {
+          type uint32;
+          config false;
+          description
+            "Count of received DHCP NAK packets.";
+        }
+        leaf decline-packets-receive {
+          type uint32;
+          config false;
+          description
+            "Count of received DHCP decline packets.";
+        }
+        leaf inform-packets-receive {
+          type uint32;
+          config false;
+          description
+            "Count of received DHCP inform packets.";
+        }
+        leaf total-packets-send {
+          type uint32;
+          config false;
+          description
+            "Total sent count of packets.";
+        }
+        leaf total-discarded-packets {
+          type uint32;
+          config false;
+          description
+            "Total discarded count of sent packets.";
+        }
+        leaf memory-exhaust-discarded-packets {
+          type uint32;
+          config false;
+          description
+            "Discarded count of packets due to memory exhausted.";
+        }
+        leaf rate-limit-discarded-packets {
+          type uint32;
+          config false;
+          description
+            "Discarded count of packets due to rate limit.";
+        }
+        leaf bad-packet-length-discarded-packets {
+          type uint32;
+          config false;
+          description
+            "Discarded count of packets due to bad packet length.";
+        }
+        leaf hops-exceed-length-discarded-packets {
+          type uint32;
+          config false;
+          description
+            "Discarded count of packets due to hops exceeded.";
+        }
+        leaf bad-magic-cookie-discarded-packets {
+          type uint32;
+          config false;
+          description
+            "Discarded count of packets due to bad magic cookie.";
+        }
+        leaf duplicate-option-discarded-packets {
+          type uint32;
+          config false;
+          description
+            "Discarded count of packets due to duplicate option.";
+        }
+        leaf bad-option-length-discarded-packets {
+          type uint32;
+          config false;
+          description
+            "Discarded count of packets due to bad option length.";
+        }
+        leaf bad-chaddr-discarded-packets {
+          type uint32;
+          config false;
+          description
+            "Discarded count of packets due to bad chaddr.";
+        }
+        leaf bad-request-discarded-packets {
+          type uint32;
+          config false;
+          description
+            "Discarded count of packets due to bad request.";
+        }
+        leaf bad-reply-discarded-packets {
+          type uint32;
+          config false;
+          description
+            "Discarded count of packets due to bad reply.";
+        }
+        leaf unknown-type-discarded-packets {
+          type uint32;
+          config false;
+          description
+            "Discarded count of packets due to unknown DHCP message.";
+        }
+        leaf bad-broadcast-flag-discarded-packets {
+          type uint32;
+          config false;
+          description
+            "Discarded count of packets due to bad broadcast flag.";
+        }
+        leaf bad-mac-type-discarded-packets {
+          type uint32;
+          config false;
+          description
+            "Discarded count of packets due to bad MAC type.";
+        }
+        leaf bad-mac-length-discarded-packets {
+          type uint32;
+          config false;
+          description
+            "Discarded count of packets due to bad MAC length.";
+        }
+        leaf bad-source-mac-discarded-packets {
+          type uint32;
+          config false;
+          description
+            "Discarded count of packets due to bad source MAC.";
+        }
+        leaf invalid-option82-discarded-packets {
+          type uint32;
+          config false;
+          description
+            "Discarded count of packets due to invalid option82.";
+        }
+        leaf getting-info-failed-discarded-packets {
+          type uint32;
+          config false;
+          description
+            "Discarded count of packets due to getting common info failed.";
+        }
+        leaf bad-info-discarded-packets {
+          type uint32;
+          config false;
+          description
+            "Discarded count of packets due to bad common info.";
+        }
+        leaf other-error-discarded-packets {
+          type uint32;
+          config false;
+          description
+            "Discarded count of packets due to other error.";
+        }
+        leaf unknown-message-type-discarded-packets {
+          type uint32;
+          config false;
+          description
+            "Discarded count of packets due to unknown message type.";
+        }
+        leaf max-user-limit-discarded-packets {
+          type uint32;
+          config false;
+          description
+            "Discarded count of packets due to max-user limit.";
+        }
+        leaf add-binding-table-failed-discarded-packets {
+          type uint32;
+          config false;
+          description
+            "Discarded count of packets due to add binding table failed.";
+        }
+        leaf client-transfered-discarded-packets {
+          type uint32;
+          config false;
+          description
+            "Discarded count of packets due to client transfered.";
+        }
+        leaf destination-port-equals-source-port-discarded-packets {
+          type uint32;
+          config false;
+          description
+            "Discarded count of packets due to destination port equals source port.";
+        }
+        leaf lease-query-discarded-packets {
+          type uint32;
+          config false;
+          description
+            "Discarded count of packets due to lease query.";
+        }
+        leaf same-mac-discarded-packets {
+          type uint32;
+          config false;
+          description
+            "Discarded count of packets due to the user with same MAC.";
+        }
+      }
+    }
+    container relay {
+      description
+        "Configure DHCP relay on an interface.";
+      uses dhcp:dhcp-relay-type;
+    }
+    container server {
+      description
+        "Configure DHCP server.";
+      uses dhcp:dhcp-server-type;
+    }
+    container snooping {
+      description
+        "Configure DHCP snooping.";
+      uses dhcp:dhcp-snooping-type;
+    }
+    container client {
+      description
+        "Configure DHCP client.";
+      uses dhcp:dhcp-client-type;
+    }
+  }
+  augment "/ifm:ifm/ifm:interfaces/ifm:interface" {
+    description "Extend interface attribute.";
+    container dhcp-if {
+      must "(not(../ifm-trunk:trunk/ifm-trunk:members/ifm-trunk:member[ifm-trunk:name=current()/../ifm:name])) and
+            (not((../ifm:type = 'Virtual-Ethernet' or ../ifm:type = 'Global-VE') and (../ifm:class = 'main-interface')))";
+      description
+        "Configure DHCP attributes on an interface.";
+      container dhcp-packet-setting {
+        ext:hidden ui;
+        must "(not(../../ethernet:ethernet/ethernet:main-interface/ethernet:l2-attribute)) and
+              (not(../../ethernet:ethernet/ethernet:l2-sub-interface))";
+        description
+          "Configure DHCP packets.";
+        leaf ip-ttl {
+          type uint8 {
+            range "1..255";
+          }
+		  must "not(../../../dhcp-client-if)";
+          description
+            "IP time to live.";
+        }
+        leaf dscp-outbound {
+          type uint8 {
+            range "0..63";
+          }
+		  must "not(../../../dhcp-client-if)";
+          description
+            "DSCP outbound.";
+        }
+        leaf server-enable {
+          type server-enable-state;
+          description
+            "Enable/disable the function of DHCP server on an interface.";
+        }
+      }
+      container option82-formats {
+        description
+          "List of DHCP option82 formats.";
+        list option82-format {
+          key "sub-option-type";
+          description
+            "Configure a DHCP option82 format.";
+          leaf sub-option-type {
+            type option82-sub-option-type;
+            must "(../sub-option-type = 'circuit-remote' 
+                     and not(/ifm:ifm/ifm:interfaces/ifm:interface[ifm:name = current()/../../../../ifm:name]/dhcp:dhcp-if/dhcp:option82-formats/dhcp:option82-format[dhcp:sub-option-type='circuit-id']) 
+                     and not(/ifm:ifm/ifm:interfaces/ifm:interface[ifm:name = current()/../../../../ifm:name]/dhcp:dhcp-if/dhcp:option82-formats/dhcp:option82-format[dhcp:sub-option-type='remote-id']))
+                   or ((../sub-option-type = 'circuit-id' or ../sub-option-type = 'remote-id') 
+                     and not(/ifm:ifm/ifm:interfaces/ifm:interface[ifm:name = current()/../../../../ifm:name]/dhcp:dhcp-if/dhcp:option82-formats/dhcp:option82-format[dhcp:sub-option-type='circuit-remote']))";
+            description
+              "DHCP option82 sub-option type.";
+          }
+          leaf option82-format {
+            type option82-format;
+            must "(((../sub-option-type != 'circuit-remote') and (../option82-format = 'self-define' and ../user-define-text)) or ((../sub-option-type = 'circuit-remote') and (../option82-format = 'type1' or ../option82-format = 'type2' or ../option82-format = 'cn-telecom' or (../option82-format = 'self-define' and ../user-define-text))))";
+            mandatory true;
+            description
+              "DHCP option82 format.";
+          }
+          leaf user-define-text {
+            when "../option82-format = 'self-define'";
+            type string {
+              length "1..255";
+              pattern '([^\t]{0,})';
+            }
+            mandatory true;
+            description
+              "DHCP option82 user-defined string.";
+          }
+        }
+      }
+      container option82-vlan-formats {
+        description
+          "List of DHCP option82 formats with VALN.";
+        list option82-vlan-format {
+          key "vlan-id cevlan-id sub-option-type";
+          description
+            "Configure a DHCP option82 format with VLAN.";
+          leaf vlan-id {
+            type uint16 {
+              range "0..4094";
+            }
+            description
+              "Indicate an outer VLAN ID. Value 0 Indicates no VLAN.";
+          }
+          leaf cevlan-id {
+            type uint16 {
+              range "0..4094";
+            }
+            description
+              "Indicates an inner VLAN ID. Value 0 Indicates no VLAN.";
+          }
+          leaf sub-option-type {
+            type option82-sub-option-type;
+            must "(../sub-option-type = 'circuit-remote' 
+                     and not(/ifm:ifm/ifm:interfaces/ifm:interface[ifm:name = current()/../../../../ifm:name]/dhcp:dhcp-if/dhcp:option82-formats/dhcp:option82-format[dhcp:sub-option-type='circuit-id']) 
+                     and not(/ifm:ifm/ifm:interfaces/ifm:interface[ifm:name = current()/../../../../ifm:name]/dhcp:dhcp-if/dhcp:option82-formats/dhcp:option82-format[dhcp:sub-option-type='remote-id']))
+                   or ((../sub-option-type = 'circuit-id' or ../sub-option-type = 'remote-id') 
+                     and not(/ifm:ifm/ifm:interfaces/ifm:interface[ifm:name = current()/../../../../ifm:name]/dhcp:dhcp-if/dhcp:option82-formats/dhcp:option82-format[dhcp:sub-option-type='circuit-remote']))";
+            description
+              "DHCP option82 sub-option type.";
+          }
+          leaf option82-format {
+            type option82-format;
+            must "(((../sub-option-type != 'circuit-remote') and (../option82-format = 'self-define' and ../user-define-text)) or ((../sub-option-type = 'circuit-remote') and (../option82-format = 'type1' or ../option82-format = 'type2' or ../option82-format = 'cn-telecom' or (../option82-format = 'self-define' and ../user-define-text))))";
+            mandatory true;
+            description
+              "DHCP option82 format.";
+          }
+          leaf user-define-text {
+            when "../option82-format = 'self-define'";
+            type string {
+              length "1..255";
+              pattern '([^\t]{0,})';
+            }
+            mandatory true;
+            description
+              "DHCP option82 user-defined string.";
+          }
+        }
+      }
+      container option82-insert-setting {
+        description
+          "Configure all interfaces to insert or forcibly insert DHCP option82 to DHCP packets.";
+        choice option82-insert-format {
+          description
+            "Specify DHCP option82 insertion format.";
+          case insert-format {
+            description
+              "Configure all interfaces to insert DHCP option82 to DHCP packets.";
+            leaf insert {
+              type empty;
+              description
+                "Configure all interfaces to insert DHCP option82 to DHCP packets.";
+            }
+          }
+          case rebuild-format {
+            description
+            "Configure all interfaces to forcibly insert DHCP option82 to DHCP packets.";
+            leaf rebuild {
+              type empty;
+              description
+                "Configure all interfaces to forcibly insert DHCP option82 to DHCP packets.";
+            }
+          }
+        }
+      }
+      container append-vendor-specific {
+        description
+          "Configure to insert the Sub9 suboption into Option 82.";
+        leaf enble {
+          type boolean;
+          default "false";
+          description
+            "Enable/disable inserting the Sub9 suboption into Option 82.";
+        }
+      }
+      container encapsulation {
+        description
+          "Configure suboptions inserted into the DHCP Option 82 field.";
+        leaf suboption {
+          type option82-encapsulation-sub-option;
+	  default "circuit-id remote-id subscriber-id vendor-specific-id";
+          description
+            "Configure suboptions inserted into the DHCP Option 82 field.";
+        }
+      }
+      container subscriber-id {
+        description
+          "Configure the Sub6 suboption into the DHCP Option 82 field of DHCP messages and configures the format of the Sub6 suboption.";
+        leaf ascii-text {
+          type string {
+            length "1..129";
+          }
+          description
+            "DHCP option82 ascii-type format.";
+        }
+        leaf hex-text {
+          type string {
+            length "1..257";
+          }
+          description
+            "DHCP option82 hex-type format.";
+        }
+      }
+      container anti-attack-check {
+        ext:hidden ui;
+        description
+          "Configure anti-attack check function.";
+        leaf magic-cookie {
+          type boolean;
+          default "false";
+          description
+            "Enable/disable the function of checking the magic-cookie field in a DHCP packet and discarding a DHCP packet with an incorrect value in the magic-cookie field.";
+        }
+        leaf udp-checksum {
+          type boolean;
+          default "true";
+          description
+            "Enable/disable the function of checking the UDP header checksum in a DHCP packet and discarding a DHCP packet with an incorrect checksum.";
+        }
+      }
+    }
+    container dhcp-snooping-if {
+      must "(not(../ifm-trunk:trunk/ifm-trunk:members/ifm-trunk:member[ifm-trunk:name=current()/../ifm:name])) and
+            (not((../ifm:type = 'Virtual-Ethernet' or ../ifm:type = 'Global-VE') and (../ifm:class = 'main-interface'))) and
+            (not (../ifm:type = 'PW-VE')) and
+            (not(../ethernet:ethernet/ethernet:main-interface/ethernet:l2-attribute)) and
+            (not (../dhcp:dhcp-client-if))";
+      description
+        "Configure DHCP snooping interface attributes.";
+      container basic-attribute {
+        when "/dhcp:dhcp/dhcp:snooping/dhcp:global/dhcp:enable='true'";
+        description
+          "Configure basic DHCP snooping attribute on the interface.";
+        leaf enable {
+          type boolean;
+          must "(../../../ifm:l2-mode-enable!='true') or (/bd:bd/bd:instances/bd:instance/bd:service-points/bd:service-point[bd:interface-name = current()/../../../ifm:name])";
+          default "false";
+          description
+            "Enable/disable DHCP snooping on an interface, DHCP snooping cannot be enabled on both a VLANIF interface and a VLAN, DHCP snooping cannot be enabled both on a VBDIF interface and in a BD, DHCP snooping cannot be enabled on both a VBDIF interface and a Layer 2 sub-interface.";
+        }
+        leaf trust-enable {
+          type boolean;
+          default "false";
+          description
+            "Enable/disable trusted interfaces.";
+        }
+        leaf rate-limit {
+          type uint16 {
+            range "1..1000";
+          }
+          description
+            "The rate limit on interface.";
+        }
+        leaf check-rate-enable {
+          type boolean;
+          description
+            "Enable/disable the rate limit function.";
+        }
+        leaf alarm-rate-enable {
+          type boolean;
+          ext:hidden ui;
+          description
+            "Enable/disable the rate limit alarm function.";
+        }
+        leaf alarm-rate-threshold {
+          type uint16 {
+            range "1..1000";
+          }
+          ext:hidden ui;
+          description
+            "The alarm threshold for the DHCP packet rate on interfaces.";
+        }
+        leaf check-arp-enable {
+          type boolean;
+          ext:hidden ui;
+          default "false";
+          description
+            "Enable/disable ARP check.";
+        }
+        leaf alarm-arp-enable {
+          type boolean;
+          ext:hidden ui;
+          default "false";
+          description
+            "Enable/disable the ARP alarm function.";
+        }
+        leaf alarm-arp-threshold {
+          type uint16 {
+            range "1..1000";
+          }
+          ext:hidden ui;
+          description
+            "ARP alarm threshold.";
+        }
+        leaf check-ip-enable {
+          type boolean;
+          ext:hidden ui;
+          default "false";
+          description
+            "Enable/disable IP check.";
+        }
+        leaf alarm-ip-enable {
+          type boolean;
+          ext:hidden ui;
+          default "false";
+          description
+            "Enable/disable the IP alarm function.";
+        }
+        leaf alarm-ip-threshold {
+          type uint16 {
+            range "1..1000";
+          }
+          ext:hidden ui;
+          description
+            "IP alarm threshold.";
+        }
+        leaf alarm-reply-enable {
+          type boolean;
+          default "false";
+          description
+            "Enable/disable the alarm function for discarded untrusted packets.";
+        }
+        leaf alarm-reply-threshold {
+          type uint16 {
+            range "1..1000";
+          }
+          description
+            "The alarm threshold is configured for discarded untrusted packets.";
+        }
+        leaf check-mac-enable {
+          type boolean;
+          default "false";
+          description
+            "Enable/disable consistency check on MAC addresses.";
+        }
+        leaf alarm-mac-enable {
+          type boolean;
+          default "false";
+          description
+            "Enable/disable consistency check on MAC addresses.";
+        }
+        leaf alarm-mac-threshold {
+          type uint16 {
+            range "1..1000";
+          }
+          description
+            "The alarm threshold for the consistency check on MAC addresses.";
+        }
+        leaf check-user-bind-enable {
+          type boolean;
+          default "false";
+          description
+            "Enable/disable the check on DHCP snooping binding table.";
+        }
+        leaf alarm-user-bind-enable {
+          type boolean;
+          default "false";
+          description
+            "Enable/disable the alarm function for discarded packets that do not match entries in the DHCP snooping binding table.";
+        }
+        leaf alarm-user-bind-threshold {
+          type uint16 {
+            range "1..1000";
+          }
+          description
+            "The alarm threshold is configured for the DHCP snooping binding table.";
+        }
+        leaf max-user-number {
+          type uint32 {
+            range "1..16384";
+          }
+          default 9216;
+          description
+            "Maximum number of users allowed on a DHCP snooping-enabled interface.";
+        }
+        leaf alarm-user-limit-enable {
+          type boolean;
+          ext:hidden ui;
+          default "false";
+          description
+            "Enable/disable the alarm function for the maximum number of users.";
+        }
+        leaf alarm-user-limit-threshold {
+          type uint16 {
+            range "1..100";
+          }
+          ext:hidden ui;
+          default "100";
+          description
+            "Alarm threshold for the maximum number of users.";
+        }
+        leaf sticky-mac-enable {
+          type boolean;
+          ext:hidden ui;
+          description
+            "Enable/disable sticky MAC on a DHCP snooping-enabled interface.";
+        }
+      }
+      container static-binds {
+        ext:hidden ui;
+        description
+          "List of static binding table on an interface.";
+        list static-bind {
+          key "ip-address vlan-id cevlan-id";
+          description
+            "Configure static binding table on an interface.";
+          leaf ip-address {
+            type inet:ipv4-address-no-zone;
+            description
+              "IP address.";
+          }
+          leaf vlan-id {
+            type uint16 {
+              range "0..4094";
+            }
+            must "(../../../../ifm:class='main-interface' and ../vlan-id=0) or 
+                  (../../../../ethernet:ethernet/ethernet:l3-sub-interface/ethernet:dot1q-termination/ethernet:dot1q-vlans/ethernet:dot1q-vlans/ethernet:vlan-list and ../vlan-id!=0) or
+                  (../../../../ethernet:ethernet/ethernet:l3-sub-interface/ethernet:qinq-termination/ethernet:qinq-vids/ethernet:qinq-vid and ../vlan-id!=0) or
+                  (../../../../ethernet:ethernet/ethernet:l3-sub-interface/ethernet:vlan-type-dot1q and ../vlan-id=0)";
+            description
+              "VLAN ID, 0 means NULL.";
+          }
+          leaf cevlan-id {
+            type uint16 {
+              range "0..4094";
+            }
+            must "(../../../../ifm:class='main-interface' and ../cevlan-id=0) or 
+                  (../../../../ethernet:ethernet/ethernet:l3-sub-interface/ethernet:dot1q-termination/ethernet:dot1q-vlans/ethernet:dot1q-vlans/ethernet:vlan-list and ../cevlan-id=0) or
+                  (../../../../ethernet:ethernet/ethernet:l3-sub-interface/ethernet:qinq-termination/ethernet:qinq-vids/ethernet:qinq-vid and ../cevlan-id!=0) or
+                  (../../../../ethernet:ethernet/ethernet:l3-sub-interface/ethernet:vlan-type-dot1q and ../cevlan-id=0)";
+            description
+              "CE VLAN ID, 0 means NULL.";
+          }
+          leaf mac-address {
+            type pub-type:mac-address {
+              length "0..255";
+            }
+            description
+              "MAC address.";
+          }
+        }
+      }
+      container committed-access-rate {
+        ext:hidden ui;
+        description
+          "Configure informations of DHCP snooping CAR in a VLAN.";
+        leaf car-cir {
+          type uint32 {
+            range "1..100000000";
+          }
+          description
+            "CAR CIR value.";
+        }
+        leaf car-cbs {
+          type uint32 {
+            range "1..536870912";
+          }
+          description
+            "CAR CBS value.";
+        }
+      }
+      container packets-discarded-statistics {
+        ext:hidden ui;
+        config false;
+        description
+          "Statistics of DHCP snooping discarded packets.";
+        leaf drop-arp-packets-count {
+          type uint32;
+          config false;
+          description
+            "Number of ARP packets discarded because they do not match entries in the DHCP snooping binding table.";
+        }
+        leaf drop-ip-packets-count {
+          type uint32;
+          config false;
+          description
+            "Number of IP packets discarded because they do not match entries in the DHCP snooping binding table.";
+        }
+        leaf packet-drop-by-user-bind {
+          type uint32;
+          config false;
+          description
+            "Number of packets discarded because they do not match entries in the DHCP snooping binding table.";
+        }
+        leaf packet-drop-by-mac {
+          type uint32;
+          config false;
+          description
+            "Number of packets discarded on an interface due to MAC address inconsistency.";
+        }
+        leaf packet-drop-by-untrust-reply {
+          type uint32;
+          config false;
+          description
+            "Number of packets discarded because they are untrusted.";
+        }
+        leaf packet-drop-by-rate {
+          type uint32;
+          config false;
+          description
+            "Number of packets discarded on an interface after the packet rate limit is reached.";
+        }
+      }
+    }
+  }
+  augment "/vlan:vlan/vlan:vlans/vlan:vlan" {
+    description "Extend VLAN attribute.";
+    container dhcp-vlan {
+      description
+        "Configure DHCP attributes in a VLAN.";
+      container interface-option82-formats {
+        ext:hidden ui;
+        description
+          "List of configuring the format of the Option 82 field for an interface in the specified VLAN.";
+        list interface-option82-format {
+          key "if-name";
+          description
+            "Configure the format of the Option 82 field for an interface in the specified VLAN.";
+          leaf if-name {
+            type leafref {
+              path "/ifm:ifm/ifm:interfaces/ifm:interface/ifm:name";
+            }
+            must "(/ifm:ifm/ifm:interfaces/ifm:interface[ifm:name = current()]/ethernet:ethernet/ethernet:main-interface/ethernet:l2-attribute)";
+            description
+              "Interface name.";
+          }
+          leaf option82-format {
+            type option82-format;
+            mandatory true;
+            description
+              "DHCP option82 format.";
+          }
+          leaf user-define-text {
+            when "../option82-format='self-define'";
+            type string {
+              length "1..255";
+              pattern '([^\t]{0,})';
+            }
+            mandatory true;
+            description
+              "DHCP option82 user-defined string.";
+          }
+        }
+      }
+      container interface-option82-insert-settings {
+        description
+          "List of configuring all interfaces in a VLAN to insert or forcibly insert DHCP Option82 to DHCP packets.";
+        list interface-option82-insert-setting {
+          key "if-name";
+          description
+            "Configure all interfaces in a VLAN to insert or forcibly insert DHCP Option82 to DHCP packets.";
+          leaf if-name {
+            type leafref {
+              path "/ifm:ifm/ifm:interfaces/ifm:interface/ifm:name";
+            }
+            description
+              "Interface name. The interface must be the member interface of this VLAN.";
+          }
+          leaf to-if-name {
+            ext:hidden ui;
+            type leafref {
+              path "/ifm:ifm/ifm:interfaces/ifm:interface/ifm:name";
+            }
+            description
+              "Interface name. The interface must be the member interface of this VLAN.";
+          }
+          choice option82-insert-format {
+            mandatory true;
+            description
+              "Specify DHCP option82 insertion format.";
+            case insert-format {
+              description
+                "Configure all interfaces in a VLAN to insert DHCP Option82 to DHCP packets.";
+              leaf insert {
+                type empty;
+                description
+                  "Configure all interfaces in a VLAN to insert DHCP Option82 to DHCP packets.";
+              }
+            }
+            case rebuild-format {
+              description
+              "Configure all interfaces in a VLAN to forcibly insert DHCP Option82 to DHCP packets.";
+              leaf rebuild {
+                type empty;
+                description
+                  "Configure all interfaces in a VLAN to forcibly insert DHCP Option82 to DHCP packets.";
+              }
+            }
+          }
+        }
+      }
+      container option82-insert-setting {
+        description
+          "Configure all interfaces in a VLAN to insert or forcibly insert DHCP option82 to DHCP packets.";
+        choice option82-insert-format {
+          description
+            "Specify DHCP option82 insertion format.";
+          case insert-format {
+            description
+              "Configure all interfaces in a VLAN to insert DHCP option82 to DHCP packets.";
+            leaf insert {
+              type empty;
+              description
+                "Configure all interfaces in a VLAN to insert DHCP option82 to DHCP packets.";
+            }
+          }
+          case rebuild-format {
+            description
+              "Configure all interfaces in a VLAN to forcibly insert DHCP option82 to DHCP packets.";
+            leaf rebuild {
+              type empty;
+              description
+                "Configure all interfaces in a VLAN to forcibly insert DHCP option82 to DHCP packets.";
+            }
+          }
+        }
+      }
+      container append-vendor-specific {
+        description
+          "Configure to insert the Sub9 suboption into Option 82.";
+        leaf enble {
+          type boolean;
+          default "false";
+          description
+            "Enable/disable inserting the Sub9 suboption into Option 82.";
+        }
+      }
+      container encapsulation {
+        description
+          "Configure suboptions inserted into the DHCP Option 82 field.";
+        leaf suboption {
+          type option82-encapsulation-sub-option;
+	  default "circuit-id remote-id subscriber-id vendor-specific-id";
+          description
+            "Configure suboptions inserted into the DHCP Option 82 field.";
+        }
+      }
+      container anti-attack-check {
+        ext:hidden ui;
+        description
+          "Configure anti-attack check function.";
+        leaf magic-cookie {
+          type boolean;
+          default "false";
+          description
+            "Enable/disable the function of checking the magic-cookie field in a DHCP packet and discarding a DHCP packet with an incorrect value in the magic-cookie field.";
+        }
+        leaf udp-checksum {
+          type boolean;
+          default "true";
+          description
+            "Enable/disable the function of checking the UDP header checksum in a DHCP packet and discarding a DHCP packet with an incorrect checksum.";
+        }
+      }
+    }
+    container dhcp-snooping-vlan {
+      when "/dhcp:dhcp/dhcp:snooping/dhcp:global/dhcp:enable='true'";
+      description
+        "Configure DHCP snooping VLAN attributes.";
+      container basic-attribute {
+        description
+          "Configure basic attributes of DHCP snooping on a VLAN.";
+        leaf enable {
+          type boolean;
+          default "false";
+          description
+            "Enable/disable DHCP snooping in a VLAN, DHCP snooping cannot be enabled on both a VLANIF interface and a VLAN, DHCP snooping cannot be enabled both on a VBDIF interface and in a BD, DHCP snooping cannot be enabled on both a VBDIF interface and a Layer 2 sub-interface.";
+        }
+        leaf check-rate-enable {
+          default "false";
+          type boolean;
+          description
+            "Enable/disable rate limit of DHCP packets.";
+        }
+        leaf vlan-rate {
+          type uint32 {
+            range "1..1000";
+          }
+          description
+            "The rate limit in a VLAN.";
+        }
+        leaf trust-enable {
+          type boolean;
+          ext:hidden ui;
+          default "false";
+          description
+            "Enable/disable configuration information of a trusted VLAN.";
+        }
+        leaf check-arp-enable {
+          type boolean;
+          ext:hidden ui;
+          default "false";
+          description
+            "Enable/disable ARP check.";
+        }
+        leaf alarm-arp-enable {
+          type boolean;
+          ext:hidden ui;
+          default "false";
+          description
+            "Enable/disable the ARP alarm function.";
+        }
+        leaf alarm-arp-threshold {
+          type uint16 {
+            range "1..1000";
+          }
+          ext:hidden ui;
+          description
+            "ARP alarm threshold.";
+        }
+        leaf check-ip-enable {
+          type boolean;
+          ext:hidden ui;
+          default "false";
+          description
+            "Enable/disable IP check.";
+        }
+        leaf alarm-ip-enable {
+          type boolean;
+          ext:hidden ui;
+          default "false";
+          description
+            "Enable/disable the IP alarm function.";
+        }
+        leaf alarm-ip-threshold {
+          type uint16 {
+            range "1..1000";
+          }
+          ext:hidden ui;
+          description
+            "IP alarm threshold.";
+        }
+        leaf alarm-reply-enable {
+          type boolean;
+          default "false";
+          description
+            "Enable/disable the alarm function when the number of discarded untrusted packets reaches the configured threshold.";
+        }
+        leaf alarm-reply-threshold {
+          type uint16 {
+            range "1..1000";
+          }
+          description
+            "Untrusted packet discarding alarm threshold.";
+        }
+        leaf check-mac-enable {
+          type boolean;
+          default "false";
+          description
+            "Enable/disable consistency check on MAC address.";
+        }
+        leaf alarm-mac-enable {
+          type boolean;
+          default "false";
+          description
+            "Enable/disable the consistency check alarm on MAC address.";
+        }
+        leaf alarm-mac-threshold {
+          type uint16 {
+            range "1..1000";
+          }
+          description
+            "Consistency check alarm threshold on MAC address.";
+        }
+        leaf check-user-bind-enable {
+          type boolean;
+          default "false";
+          description
+            "Enable/disable the check on DHCP snooping binding table.";
+        }
+        leaf alarm-user-bind-enable {
+          type boolean;
+          default "false";
+          description
+            "Enable/disable the user binding table alarm.";
+        }
+        leaf alarm-user-bind-threshold {
+          type uint16 {
+            range "1..1000";
+          }
+          description
+            "User binding table alarm threshold.";
+        }
+        leaf max-user-number {
+          ext:dynamic-default;
+          type uint16 {
+            range "1..32768";
+          }
+          description
+            "Maximum number of users allowed on all DHCP snooping-enabled interfaces in a VLAN.";
+        }
+        leaf alarm-user-limit-enable {
+          type boolean;
+          ext:hidden ui;
+          default "false";
+          description
+            "Enable/disable the user limit alarm.";
+        }
+        leaf alarm-user-limit-threshold {
+          type uint16 {
+            range "1..100";
+          }
+          ext:hidden ui;
+          default "100";
+          description
+            "User limit alarm threshold.";
+        }
+      }
+      container vlan-trusts {
+        description
+          "List of configuring informations of trusted interfaces.";
+        list vlan-trust {
+          key "if-name";
+          description
+            "Configure a trusted interface in the specified VLAN.";
+          leaf if-name {
+            type leafref {
+              path "/ifm:ifm/ifm:interfaces/ifm:interface/ifm:name";
+            }
+            must "(/ifm:ifm/ifm:interfaces/ifm:interface[ifm:name = current()]/ethernet:ethernet/ethernet:main-interface/ethernet:l2-attribute)";
+            description
+              "Names of trusted interface.";
+          }
+        }
+      }
+      container static-binds {
+        ext:hidden ui;
+        description
+          "List of static binding tables in a VLAN.";
+        list static-bind {
+          key "ip-address cevlan-id";
+          description
+            "Configure a static binding table in a VLAN.";
+          leaf ip-address {
+            type inet:ip-address-no-zone;
+            description
+              "IP address.";
+          }
+          leaf cevlan-id {
+            type uint16 {
+              range "0..4094";
+            }
+            description
+              "CE VLAN ID.";
+          }
+          leaf mac-address {
+            type pub-type:mac-address {
+              length "0..255";
+            }
+            description
+              "MAC address.";
+          }
+          leaf if-name {
+            type leafref {
+              path "/ifm:ifm/ifm:interfaces/ifm:interface/ifm:name";
+            }
+            description
+              "Interface name.";
+          }
+        }
+      }
+      container vlan-interfaces {
+        ext:hidden ui;
+        description
+          "List of configuring DHCP snooping-enabled interfaces in a VLAN.";
+        list vlan-interface {
+          key "if-name";
+          description
+            "Configure a DHCP snooping-enabled interface in a VLAN.";
+          leaf if-name {
+            type leafref {
+              path "/ifm:ifm/ifm:interfaces/ifm:interface/ifm:name";
+            }
+            description
+              "Interface name.";
+          }
+          leaf enable {
+            type boolean;
+            default "false";
+            description
+              "Enable/disable DHCP snooping on an interface in a VLAN.";
+          }
+          leaf trust-flag {
+            type boolean;
+            default "false";
+            description
+              "Enable/disable DHCP snooping VLAN interface trust.";
+          }
+          leaf check-arp-enable {
+            type boolean;
+            default "false";
+            description
+              "Enable/disable ARP check.";
+          }
+          leaf alarm-arp-enable {
+            type boolean;
+            default "false";
+            description
+              "Enable/disable the ARP alarm function.";
+          }
+          leaf alarm-arp-threshold {
+            type uint32 {
+              range "1..1000";
+            }
+            description
+              "ARP alarm threshold.";
+          }
+          leaf check-ip-enable {
+            type boolean;
+            default "false";
+            description
+              "Enable/disable IP check.";
+          }
+          leaf alarm-ip-enable {
+            type boolean;
+            default "false";
+            description
+              "Enable/disable the IP alarm function.";
+          }
+          leaf alarm-ip-threshold {
+            type uint32 {
+              range "1..1000";
+            }
+            description
+              "IP alarm threshold.";
+          }
+          leaf alarm-reply-enable {
+            type boolean;
+            default "false";
+            description
+              "Enable/disable alarm of dropping untrusted packet.";
+          }
+          leaf alarm-reply-threshold {
+            type uint32 {
+              range "1..1000";
+            }
+            description
+              "Threshold of dropping untrusted packet alarm.";
+          }
+          leaf check-mac-address-enable {
+            type boolean;
+            default "false";
+            description
+              "Enable/disable consistency check on MAC addresses.";
+          }
+          leaf alarm-mac-address-enable {
+            type boolean;
+            default "false";
+            description
+              "Enable/disable the consistency check alarm for MAC addresses.";
+          }
+          leaf alarm-mac-address-threshold {
+            type uint32 {
+              range "1..1000";
+            }
+            description
+              "Consistency check alarm threshold for MAC address.";
+          }
+          leaf check-request-enable {
+            type boolean;
+            default "false";
+            description
+              "Enable/disable DHCP user binding table check.";
+          }
+          leaf alarm-request-enable {
+            type boolean;
+            default "false";
+            description
+              "Enable/disable DHCP userbind table alarm.";
+          }
+          leaf alarm-request-threshold {
+            type uint32 {
+              range "1..1000";
+            }
+            description
+              "DHCP userbind table alarm threshold.";
+          }
+          leaf max-user-number {
+            type uint32 {
+              range "1..16384";
+            }
+            description
+              "Maximum number of users allowed on a DHCP snooping-enabled interface in a VLAN.";
+          }
+          leaf alarm-user-limit-enable {
+            type boolean;
+            default "false";
+            description
+              "Enable/disable the user limit alarm.";
+          }
+          leaf alarm-user-limit-threshold {
+            type uint32 {
+              range "1..100";
+            }
+            default "100";
+            description
+              "User limit alarm threshold.";
+          }
+          container packets-discarded-statistics {
+            config false;
+            description
+              "Statistics of DHCP snooping discarded packets.";
+            leaf drop-arp-packets-count {
+              type uint32;
+              config false;
+              description
+                "Number of discarded ARP packets that do not match entries in the DHCP snooping binding table.";
+            }
+            leaf drop-ip-packets-count {
+              type uint32;
+              config false;
+              description
+                "Number of discarded IP packets that do not match entries in the DHCP snooping binding table.";
+            }
+            leaf drop-dhcp-request-conut-by-bind {
+              type uint32;
+              config false;
+              description
+                "Number of discarded DHCP request packets that do not match entries in the DHCP snooping binding table.";
+            }
+            leaf drop-dhcp-request-conut-by-mac-check {
+              type uint32;
+              config false;
+              description
+                "Number of discarded DHCP request packets that do not match entries in the MAC table.";
+            }
+            leaf drop-dhcp-reply-count {
+              type uint32;
+              config false;
+              description
+                "Number of discarded DHCP reply packets by untrusted port.";
+            }
+          }
+        }
+      }
+      container packet-discarded-statistics {
+        ext:hidden ui;
+        config false;
+        description
+          "Statistics of DHCP snooping discarded packets.";
+        leaf drop-arp-packets-count {
+          type uint32;
+          config false;
+          description
+            "Number of discarded ARP packets that do not match entries in the DHCP snooping binding table.";
+        }
+        leaf drop-ip-packets-count {
+          type uint32;
+          config false;
+          description
+            "Number of discarded IP packets that do not match entries in the DHCP snooping binding table.";
+        }
+        leaf drop-dhcp-request-count-by-bind {
+          type uint32;
+          config false;
+          description
+            "Number of discarded DHCP request packets that do not match entries in the DHCP snooping binding table.";
+        }
+        leaf drop-dhcp-request-count-by-mac-check {
+          type uint32;
+          config false;
+          description
+            "Number of discarded DHCP request packets that do not match entries in the MAC table.";
+        }
+        leaf drop-dhcp-reply-count {
+          type uint32;
+          config false;
+          description
+            "Number of DHCP reply packets discarded because they are sent from untrusted interfaces.";
+        }
+      }
+    }
+  }
+  augment "/bd:bd/bd:instances/bd:instance" {
+    description "Extend BD attribute.";
+    container dhcp-bd {
+      description 
+        "Configure DHCP attributes in BDs.";
+      container option82-formats {
+        ext:hidden ui;
+        description
+          "List of configuring DHCP option82 formats.";
+        list option82-format {
+          key "sub-option-type";
+          description
+            "Configure a DHCP option82 format.";
+          leaf sub-option-type {
+            type option82-sub-option-type;
+            description
+              "DHCP option82 sub-option type.";
+          }
+          leaf option82-format {
+            type option82-format;
+            mandatory true;
+            description
+              "DHCP option82 format.";
+          }
+        }
+      }
+      container option82-insert-setting {
+        description
+          "Configure all interfaces in a BD to insert or forcibly insert DHCP option82 to DHCP packets.";
+        choice option82-insert-format {
+          description
+            "Specify DHCP option82 insertion format.";
+          case insert-format {
+            description
+              "Configure all interfaces in a BD to insert DHCP option82 to DHCP packets.";
+            leaf insert {
+              type empty;
+              description
+                "Configure all interfaces in a BD to insert DHCP option82 to DHCP packets.";
+            }
+          }
+          case rebuild-format {
+            description
+              "Configure all interfaces in a BD to forcibly insert DHCP option82 to DHCP packets.";
+            leaf rebuild {
+              type empty;
+              description
+                "Configure all interfaces in a BD to forcibly insert DHCP option82 to DHCP packets.";
+            }
+          }
+        }
+      }
+      container encapsulation {
+        description
+          "Configure suboptions inserted into the DHCP Option 82 field.";
+        leaf-list suboption {
+          type option82-encapsulation-sub-option;
+          description
+            "Configure suboptions inserted into the DHCP Option 82 field.";
+        }
+      }
+    }
+    container dhcp-snooping-bd {
+      description
+        "Configure information of DHCP snooping on a bridge-domain.";
+      container basic-attribute {
+        when "/dhcp:dhcp/dhcp:snooping/dhcp:global/dhcp:enable='true'";
+        description
+          "Configure basic attributes of DHCP snooping on bridge-domain.";
+        leaf enable {
+          type boolean;
+          default "false";
+          description
+            "Enable/disable DHCP snooping in a BD, DHCP snooping cannot be enabled on both a VLANIF interface and a VLAN, DHCP snooping cannot be enabled both on a VBDIF interface and in a BD, DHCP snooping cannot be enabled on both a VBDIF interface and a Layer 2 sub-interface.";
+        }
+        leaf trust-enable {
+          type boolean;
+          ext:hidden ui;
+          default "false";
+          description
+            "Enable/disable trusted informations on a BD.";
+        }
+        leaf nni-trust-enable {
+          type boolean;
+          default "false";
+          description
+            "Enable/disable trusted network node interface.";
+        }
+        leaf check-arp-enable {
+          type boolean;
+          ext:hidden ui;
+          default "false";
+          description
+            "Enable/disable ARP check.";
+        }
+        leaf alarm-arp-enable {
+          type boolean;
+          ext:hidden ui;
+          default "false";
+          description
+            "Enable/disable the ARP alarm function.";
+        }
+        leaf alarm-arp-threshold {
+          type uint32 {
+            range "1..1000";
+          }
+          ext:hidden ui;
+          description
+            "ARP alarm threshold.";
+        }
+        leaf check-ip-enable {
+          type boolean;
+          ext:hidden ui;
+          default "false";
+          description
+            "Enable/disable IP check.";
+        }
+        leaf alarm-ip-enable {
+          type boolean;
+          ext:hidden ui;
+          default "false";
+          description
+            "Enable/disable the IP alarm function.";
+        }
+        leaf alarm-ip-threshold {
+          type uint32 {
+            range "1..1000";
+          }
+          ext:hidden ui;
+          description
+            "IP alarm threshold.";
+        }
+        leaf alarm-reply-enable {
+          type boolean;
+          default "false";
+          description
+            "Enable/disable alarm of dropping untrusted packet.";
+        }
+        leaf alarm-reply-threshold {
+          type uint32 {
+            range "1..1000";
+          }
+          description
+            "Threshold of dropping untrusted packet alarm.";
+        }
+        leaf check-mac-enable {
+          type boolean;
+          default "false";
+          description
+            "Enable/disable MAC check.";
+        }
+        leaf alarm-mac-enable {
+          type boolean;
+          default "false";
+          description
+            "Enable/disable consistency check alarm on MAC addresses.";
+        }
+        leaf alarm-mac-threshold {
+          type uint32 {
+            range "1..1000";
+          }
+          description
+            "Consistency check alarm threshold on MAC addresses.";
+        }
+        leaf check-request-enable {
+          type boolean;
+          default "false";
+          description
+            "Enable/disable the user binding table check.";
+        }
+        leaf alarm-request-enable {
+          type boolean;
+          default "false";
+          description
+            "Enable/disable the user binding table alarm function.";
+        }
+        leaf alarm-request-threshold {
+          type uint32 {
+            range "1..1000";
+          }
+          description
+            "User bind table alarm threshold.";
+        }
+        leaf max-user-number {
+          type uint32 {
+            range "1..16384";
+          }
+          ext:hidden ui;
+          description
+            "Maximum number of DHCP snooping users in a BD.";
+        }
+        leaf alarm-user-limit-enable {
+          type boolean;
+          ext:hidden ui;
+          default "false";
+          description
+            "Enable/disable the user limit alarm.";
+        }
+        leaf alarm-user-limit-threshold {
+          type uint32 {
+            range "1..100";
+          }
+          ext:hidden ui;
+          default "100";
+          description
+            "User limit alarm threshold.";
+        }
+      }
+      container static-binds {
+        description
+          "List of static binding tables on BDs.";
+        ext:hidden ui;
+        list static-bind {
+          must "(ce-vlan!=0 and pe-vlan!=0) or (ce-vlan=0)";
+          key "ip-address pe-vlan ce-vlan";
+          description
+            "Configure a static binding table of a BD.";
+          leaf ip-address {
+            type inet:ipv4-address-no-zone;
+            description
+              "IP address.";
+          }
+          leaf pe-vlan {
+            type uint16 {
+              range "0..4094";
+            }
+            description
+              "PE VLAN ID, 0 means NULL.";
+          }
+          leaf ce-vlan {
+            type uint16 {
+              range "0..4094";
+            }
+            description
+              "CE VLAN ID, 0 means NULL.";
+          }
+          leaf mac-address {
+            type pub-type:mac-address {
+              length "0..255";
+            }
+            description
+              "MAC address.";
+          }
+        }
+      }
+      container packets-discarded-statistics {
+        config false;
+        ext:hidden ui;
+        description
+          "Statistics of DHCP snooping discarded packets.";
+        leaf drop-arp-packets-count {
+          type uint32;
+          config false;
+          description
+            "Number of discarded ARP packets that do not match entries in the DHCP snooping binding table.";
+        }
+        leaf drop-ip-packets-count {
+          type uint32;
+          config false;
+          description
+            "Number of discarded IP packets that do not match entries in the DHCP snooping binding table.";
+        }
+        leaf drop-dhcp-request-count-by-bind {
+          type uint32;
+          config false;
+          description
+            "Number of discarded DHCP request packets that do not match entries in the DHCP snooping binding table.";
+        }
+        leaf drop-dhcp-request-count-by-mac-check {
+          type uint32;
+          config false;
+          description
+            "Number of discarded DHCP request packets that do not match entries in the MAC table.";
+        }
+        leaf drop-dhcp-reply-count {
+          type uint32;
+          config false;
+          description
+            "Number of DHCP reply packets discarded because they are sent from untrusted interfaces.";
+        }
+      }
+    }
+  }
+}

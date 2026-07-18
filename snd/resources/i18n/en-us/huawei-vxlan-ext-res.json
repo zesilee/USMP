@@ -1,0 +1,41 @@
+{
+  "/huawei-vxlan-ext:vxlan-ext": {
+    "name": "VXLAN extension functions"
+  },
+  "/huawei-vxlan-ext:vxlan-ext/force-redirects": {
+    "name": "List of configure force-redirects"
+  },
+  "/huawei-vxlan-ext:vxlan-ext/force-redirects/force-redirect": {
+    "name": "Configure force decapsulation vni"
+  },
+  "/huawei-vxlan-ext:vxlan-ext/force-redirects/force-redirect/vni-begin": {
+    "name": "Force decapsulation begin vni"
+  },
+  "/huawei-vxlan-ext:vxlan-ext/force-redirects/force-redirect/vni-end": {
+    "name": "Force decapsulation end vni"
+  },
+  "/huawei-vxlan-ext:vxlan-ext/force-redirects/force-redirect/if-name": {
+    "name": "Port name"
+  },
+  "/huawei-vxlan-ext:vxlan-ext/bridge-domain-bind-vlan-enhanced": {
+    "name": "BD-VLAN Binding Enhancement"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-vxlan-ext:force-decapsulation": {
+    "name": "Force-decapsulation"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-vxlan-ext:force-decapsulation/enable": {
+    "name": "Enable"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-vxlan-ext:l2subif-dot1q-egr-vids": {
+    "name": "Configure l2subif egress vlan id"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-vxlan-ext:l2subif-dot1q-egr-vids/vid": {
+    "name": "Egress vlan id"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-vxlan-ext:flood-proxy": {
+    "name": "Flood-proxy"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-vxlan-ext:flood-proxy/proxy-ip": {
+    "name": "Proxy-ip"
+  }
+}

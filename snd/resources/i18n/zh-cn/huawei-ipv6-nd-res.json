@@ -1,0 +1,152 @@
+{
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection": {
+    "name": "ND接口属性列表"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/if-property": {
+    "name": "接口下的ND配置"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/if-property/retrans-timer": {
+    "name": "路由设备的重传计时器"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/if-property/nud-reach-time": {
+    "name": "邻居可达时间"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/if-property/attempts-value": {
+    "name": "重复地址探测次数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/if-property/ns-mcast-flag": {
+    "name": "组播使能标识"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/if-property/max-dyn-nb-num": {
+    "name": "动态邻居表项的上限"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/if-property/dad-timeout": {
+    "name": "DAD探测超时时间"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/if-property/nud-attempts": {
+    "name": "ND表项的探测次数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/if-property/na-glean": {
+    "name": "根据NA报文生成表项标记"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/if-property/ma-flag": {
+    "name": "使用有状态地址配置技术"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/if-property/o-flag": {
+    "name": "有非地址信息需要有状态协议配置"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/if-property/ra-halt-flag": {
+    "name": "抑制RA报文的发布"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/if-property/max-interval": {
+    "name": "最大间隔时间"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/if-property/ra-lifetime": {
+    "name": "路由器生存期"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/if-property/ra-preference": {
+    "name": "RA报文路由器优先级"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/if-property/ra-prefix-flag": {
+    "name": "RA报文携带地址生成的默认前缀"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/if-property/ra-mtu-flag": {
+    "name": "RA报文携带MTU选项标识"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/if-property/strict-flag": {
+    "name": "严格安全"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/if-property/ts-fuzz-factor": {
+    "name": "时间戳选项的模糊因子"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/if-property/ts-clock-drift": {
+    "name": "时间戳选项的漂移量"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/if-property/ts-delta": {
+    "name": "时间戳选项的增量"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/if-property/rsa-min-key-len": {
+    "name": "可接收的最小RSA密钥长度"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/if-property/rsa-max-key-len": {
+    "name": "可接收的最大RSA密钥长度"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/if-property/stale-time": {
+    "name": "Stale状态的老化时间(s)"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/if-property/collect-host-flag": {
+    "name": "收集主机信息标志"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/if-property/generate-rd-enable": {
+    "name": "生成重定向ND表项标志"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/if-property/nud-interval": {
+    "name": "ND表项的NUD探测间隔(ms)"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/proxys": {
+    "name": "ND代理列表"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/proxys/route-proxy": {
+    "name": "路由式代理"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/proxys/inner-vlan-proxy": {
+    "name": "VLAN内代理"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/proxys/inter-vlan-proxy": {
+    "name": "VLAN间代理"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/proxys/anyway-proxy": {
+    "name": "任意代理"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/anti-attack": {
+    "name": "配置接口防攻击"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/anti-attack/receive-rate-limits": {
+    "name": "ND报文速率限制列表"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/anti-attack/receive-rate-limits/receive-rate-limit": {
+    "name": "配置ND报文或ND miss速率限制"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/anti-attack/receive-rate-limits/receive-rate-limit/type": {
+    "name": "ND报文类型或ND miss"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/anti-attack/receive-rate-limits/receive-rate-limit/value": {
+    "name": "ND报文或ND miss速率限制值"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/anti-attack/source-ip-receive": {
+    "name": "配置基于报文源IP的防攻击"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/anti-attack/source-ip-receive/ip-rate-limits": {
+    "name": "基于指定报文源IP的速率限制列表"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/anti-attack/source-ip-receive/ip-rate-limits/ip-rate-limit": {
+    "name": "配置基于指定报文源IP的速率限制"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/anti-attack/source-ip-receive/ip-rate-limits/ip-rate-limit/packet-type": {
+    "name": "ND报文类型"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/anti-attack/source-ip-receive/ip-rate-limits/ip-rate-limit/ipv6-addr": {
+    "name": "源IPv6地址"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/anti-attack/source-ip-receive/ip-rate-limits/ip-rate-limit/value": {
+    "name": "ND报文速率限制值"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/packet-policys": {
+    "name": "ND指定NS报文的转发策略列表"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/packet-policys/packet-policy": {
+    "name": "ND配置指定ND报文的转发策略"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/packet-policys/packet-policy/packet-type": {
+    "name": "ND报文类型"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/packet-policys/packet-policy/ipv6-type": {
+    "name": "IPv6地址类型"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/packet-policys/packet-policy/ipv6-addr": {
+    "name": "转发策略目标IPv6地址"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/packet-policys/packet-policy/operation": {
+    "name": "策略动作类型"
+  }
+}

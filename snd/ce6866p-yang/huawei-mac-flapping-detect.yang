@@ -1,0 +1,237 @@
+/*
+Copyright (C) 2020-2022 Huawei Technologies Co., Ltd. All rights reserved.
+*/
+module huawei-mac-flapping-detect {
+  namespace "urn:huawei:yang:huawei-mac-flapping-detect";
+  prefix mac-flapping-detect;
+
+  import huawei-extension {
+    prefix ext;
+  }
+  import huawei-pub-type {
+    prefix pub-type;
+  }
+  import huawei-ifm {
+    prefix ifm;
+  }
+  import huawei-ethernet {
+    prefix ethernet;
+  }
+  organization
+    "Huawei Technologies Co., Ltd.";
+  contact
+    "Huawei Industrial Base
+     Bantian, Longgang
+     Shenzhen 518129
+     People's Republic of China
+     Website: http://www.huawei.com
+     Email: support@huawei.com";
+  description
+    "MAC address flapping detection.";
+  revision 2022-06-26 {
+    description
+      "Add MAC flapping trigger error-down node.";
+    reference
+      "Huawei private.";
+  }
+  revision 2022-01-19 {
+    description
+      "Add MAC flapping detection security threshold.";
+    reference
+      "Huawei private.";
+  }
+  revision 2020-04-24 {
+    description
+      "Initial revision.";
+    reference
+      "Huawei private.";
+  }
+  ext:task-name "mac";
+  typedef mac-flapping-enable-status {
+    type enumeration {
+      enum "disable" {
+        value 0;
+        description
+          "Disable type.";
+      }
+      enum "enable" {
+        value 1;
+        description
+          "Enable type.";
+      }
+    }
+    description
+      "MAC enable type.";
+  }
+  
+  typedef mac-flapping-secuity-level {
+    type enumeration {
+      enum "middle" {
+        value 0;
+        description
+          "Middle level.";
+      }
+      enum "low" {
+        value 1;
+        description
+          "Low level.";
+      }
+      enum "high" {
+        value 2;
+        description
+          "High level.";
+      }
+    }
+    description
+      "Security level.";
+  }
+  grouping mac-address-flapping {
+    description
+      "Configuration of MAC address flapping.";
+    container mac-address-flapping{
+      description
+      "Configure MAC address flapping.";
+      leaf error-down {
+          type boolean;
+          default "false";
+          description
+          "Enable/disable error-down on an interface where MAC address flapping occurs.";
+      }
+    }
+  }
+  container mac-flapping-detect {
+    description
+      "MAC address flapping detection.";
+    container global-attribute {
+      description
+        "Configure MAC flapping global attribute.";
+      leaf detect-enable {
+        type mac-flapping-enable-status;
+        default "enable";
+        description
+          "Whether MAC flapping detection is enabled.";
+      }
+      choice detect-type {
+        default "level";
+        description
+          "MAC flapping detection type.";
+        case level {
+          description
+            "MAC flapping detection security level.";
+          leaf detect-level {
+            when "../detect-enable='enable'";
+            type mac-flapping-secuity-level;
+            default "middle";
+            description
+              "MAC flapping detection security level.";
+          }
+        }
+        case threshold {
+          description
+            "MAC flapping detection security threshold.";
+          leaf detect-threshold {
+            when "../detect-enable='enable'";
+            type uint16 {
+              range "3..10000";
+            }
+          description
+            "MAC flapping detection security threshold.";
+          }
+        }
+      }
+      leaf aging-time {
+        type uint32 {
+          range "60..900";
+        }
+        ext:hidden ui;
+        units s;
+        default "300";
+        description
+          "MAC flapping aging time.";
+      }
+      leaf trap-enable {
+        type mac-flapping-enable-status;
+        default "disable";
+        description
+          "Whether MAC flapping periodical trap is enabled.";
+      }
+      leaf trap-interval {
+        when "../trap-enable='enable'";
+        ext:hidden ui;
+        type uint32 {
+          range "2..30";
+        }
+        units min;
+        default "2";
+        description
+          "MAC flapping periodical trap interval.";
+      }
+    }
+    container exclude-mac-addresses {
+      ext:hidden ui;
+      description
+        "List of MAC flapping detection exclude MAC address.";
+      list exclude-mac-address {
+        key "address mask";
+        description
+          "Configure MAC flapping detection exclude MAC address.";
+        leaf address {
+          type pub-type:mac-address;
+          description
+            "MAC address.";
+        }
+        leaf mask {
+          type uint16 {
+            range "24..48";
+          }
+          description
+            "MAC address mask.";
+        }
+      }
+    }
+    container exclude-bds {
+      ext:hidden ui;
+      description
+        "List of MAC flapping detection exclude BD.";
+      list exclude-bd {
+        must "bd-begin <= bd-end";
+        key "bd-begin bd-end";
+        description
+          "Configure MAC flapping detection exclude BD.";
+        leaf bd-begin {
+          type uint32 {
+            range "1..16777215";
+          }
+          description
+            "Start BD ID.";
+        }
+        leaf bd-end {
+          type uint32 {
+            range "1..16777215";
+          }
+          description
+            "End BD ID.";
+        }
+      }
+    }
+    container exclude-vlan {
+      description
+        "Configure MAC flapping detection exclude VLAN.";
+      leaf vlan-list {
+        type pub-type:vlan-range;
+        description
+          "VLAN ID list.";
+      }
+    }
+  }
+  augment "/ifm:ifm/ifm:interfaces/ifm:interface/ethernet:ethernet/ethernet:main-interface/ethernet:l2-attribute" {
+    description
+      "MAC-flapping attribute of layer 2 main interface.";
+    uses mac-address-flapping;
+  }
+  augment "/ifm:ifm/ifm:interfaces/ifm:interface/ethernet:ethernet/ethernet:l2-sub-interface" {
+    description
+      "MAC-flapping attribute of layer 2 sub interface.";
+    uses mac-address-flapping;
+  }
+}

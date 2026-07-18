@@ -1,0 +1,692 @@
+{
+  "/huawei-ifm:ifm": {
+    "name": "通用接口"
+  },
+  "/huawei-ifm:ifm/global": {
+    "name": "全局配置属性"
+  },
+  "/huawei-ifm:ifm/global/statistic-interval": {
+    "name": "全局流量统计间隔"
+  },
+  "/huawei-ifm:ifm/global/ipv4-ignore-primary-sub": {
+    "name": "忽略IPv4主从地址类型"
+  },
+  "/huawei-ifm:ifm/global/ipv4-conflict-enable": {
+    "name": "IPv4地址冲突检测"
+  },
+  "/huawei-ifm:ifm/global/ipv4-conflict-enable/preempt-enable": {
+    "name": "IPv4地址冲突抢占"
+  },
+  "/huawei-ifm:ifm/global/ipv6-conflict-enable": {
+    "name": "IPv6地址冲突检测"
+  },
+  "/huawei-ifm:ifm/global/ipv6-conflict-enable/preempt-enable": {
+    "name": "IPv6地址冲突抢占"
+  },
+  "/huawei-ifm:ifm/damp": {
+    "name": "接口物理状态振荡抑制使能"
+  },
+  "/huawei-ifm:ifm/damp/tx-off": {
+    "name": "进入抑制状态关光"
+  },
+  "/huawei-ifm:ifm/damp/level": {
+    "name": "接口物理状态振荡抑制级别"
+  },
+  "/huawei-ifm:ifm/damp/level/auto": {
+    "name": "自动抑制接口物理状态振荡抑制级别"
+  },
+  "/huawei-ifm:ifm/damp/level/auto/auto": {
+    "name": "自动抑制接口物理状态振荡抑制级别"
+  },
+  "/huawei-ifm:ifm/damp/level/auto/auto/level": {
+    "name": "自动抑制接口物理状态振荡抑制级别"
+  },
+  "/huawei-ifm:ifm/damp/level/manual": {
+    "name": "手动抑制接口物理状态振荡抑制级别"
+  },
+  "/huawei-ifm:ifm/damp/level/manual/manual": {
+    "name": "手动抑制接口物理状态振荡抑制级别"
+  },
+  "/huawei-ifm:ifm/damp/level/manual/manual/suppress": {
+    "name": "抑制门限的1000倍"
+  },
+  "/huawei-ifm:ifm/damp/level/manual/manual/reuse": {
+    "name": "重用门限的1000倍"
+  },
+  "/huawei-ifm:ifm/damp/level/manual/manual/max-suppress-time": {
+    "name": "最大抑制时间"
+  },
+  "/huawei-ifm:ifm/damp/level/manual/manual/half-life-period": {
+    "name": "半衰期"
+  },
+  "/huawei-ifm:ifm/auto-recovery-times": {
+    "name": "自动恢复时间列表"
+  },
+  "/huawei-ifm:ifm/auto-recovery-times/auto-recovery-time": {
+    "name": "自动恢复时间"
+  },
+  "/huawei-ifm:ifm/auto-recovery-times/auto-recovery-time/error-down-type": {
+    "name": "Error-down类型"
+  },
+  "/huawei-ifm:ifm/auto-recovery-times/auto-recovery-time/time-value": {
+    "name": "接口状态自动恢复为Up的时间"
+  },
+  "/huawei-ifm:ifm/interfaces": {
+    "name": "接口列表"
+  },
+  "/huawei-ifm:ifm/interfaces/interface": {
+    "name": "接口"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/name": {
+    "name": "接口名"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/class": {
+    "name": "接口类别"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/type": {
+    "name": "接口类型"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/parent-name": {
+    "name": "主接口名"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/number": {
+    "name": "接口号"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/description": {
+    "name": "接口描述"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/admin-status": {
+    "name": "管理状态"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/link-protocol": {
+    "name": "链路协议"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/router-type": {
+    "name": "路由属性"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/clear-ip-df": {
+    "name": "清除接口不分片"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/link-up-down-trap-enable": {
+    "name": "接口Trap使能"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/statistic-enable": {
+    "name": "接口统计使能"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/statistic-mode": {
+    "name": "流量统计模式"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/bandwidth-type": {
+    "name": "配置带宽"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/bandwidth-type/bandwidth-mbps": {
+    "name": "配置带宽(兆比特/秒)"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/bandwidth-type/bandwidth-mbps/bandwidth": {
+    "name": "配置带宽(兆比特/秒)"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/bandwidth-type/bandwidth-kbps": {
+    "name": "配置带宽(千比特/秒)"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/bandwidth-type/bandwidth-kbps/bandwidth-kbps": {
+    "name": "配置带宽(千比特/秒)"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/mtu": {
+    "name": "MTU"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/spread-mtu-flag": {
+    "name": "使能扩散MTU"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/statistic-interval": {
+    "name": "接口流量统计间隔"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/vrf-name": {
+    "name": "VPN实例名"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/l2-mode-enable": {
+    "name": "是否二层子接口"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/down-delay-time": {
+    "name": "接口状态Down延迟时间"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/mac-address": {
+    "name": "配置MAC地址"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/index": {
+    "name": "接口索引"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/position": {
+    "name": "接口位置"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/aggregation-name": {
+    "name": "Trunk接口名"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/is-l2-switch": {
+    "name": "二层交换端口"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/vs-name": {
+    "name": "VS名"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/l2-switch-port-index": {
+    "name": "二层交换端口索引"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/service-type": {
+    "name": "成员口类型"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/encapsulation-type": {
+    "name": "封装类型"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/control-flap": {
+    "name": "接口状态抑制"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/control-flap/suppress": {
+    "name": "Damping抑制门限"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/control-flap/reuse": {
+    "name": "重用门限值"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/control-flap/ceiling": {
+    "name": "Up状态半衰期"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/control-flap/decay-ok": {
+    "name": "Down状态半衰期"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/control-flap/decay-ng": {
+    "name": "Damping最高限值"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/control-flap/control-flap-count": {
+    "name": "接口状态抑制次数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/trap-threshold": {
+    "name": "Trap阈值"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/trap-threshold/input-rising-rate": {
+    "name": "入方向带宽利用率的阈值"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/trap-threshold/input-resume-rate": {
+    "name": "恢复告警的入方向带宽利用率阈值"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/trap-threshold/output-rising-rate": {
+    "name": "出方向带宽利用率的阈值"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/trap-threshold/output-resume-rate": {
+    "name": "恢复告警的出方向带宽利用率阈值"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/damping": {
+    "name": "接口抑制功能"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/damping/ignore-damp": {
+    "name": "忽略全局接口震荡抑制功能"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/damping/ignore-damp/ignore-damp": {
+    "name": "忽略全局接口震荡抑制功能"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/damping/ignore-damp/ignore-damp/ignore-global-damp": {
+    "name": "忽略全局接口震荡抑制功能"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/damping/damp": {
+    "name": "接口物理状态振荡抑制使能"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/damping/damp/damp": {
+    "name": "接口物理状态振荡抑制使能"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/damping/damp/damp/tx-off": {
+    "name": "进入抑制状态关光"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/damping/damp/damp/level": {
+    "name": "接口物理状态振荡抑制级别"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/damping/damp/damp/level/auto": {
+    "name": "自动抑制接口物理状态振荡抑制级别"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/damping/damp/damp/level/auto/auto": {
+    "name": "自动抑制接口物理状态振荡抑制级别"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/damping/damp/damp/level/auto/auto/level": {
+    "name": "自动抑制接口物理状态振荡抑制级别"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/damping/damp/damp/level/manual": {
+    "name": "手动抑制接口物理状态振荡抑制级别"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/damping/damp/damp/level/manual/manual": {
+    "name": "手动抑制接口物理状态振荡抑制级别"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/damping/damp/damp/level/manual/manual/suppress": {
+    "name": "抑制门限的1000倍"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/damping/damp/damp/level/manual/manual/reuse": {
+    "name": "重用门限的1000倍"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/damping/damp/damp/level/manual/manual/max-suppress-time": {
+    "name": "最大抑制时间"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/damping/damp/damp/level/manual/manual/half-life-period": {
+    "name": "半衰期"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/damp-state": {
+    "name": "接口物理状态振荡抑制信息"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/damp-state/suppress-status": {
+    "name": "接口抑制状态"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/damp-state/suppress": {
+    "name": "抑制门限的1000倍"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/damp-state/reuse": {
+    "name": "重用门限的1000倍"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/damp-state/max-suppress-time": {
+    "name": "最大抑制时间"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/damp-state/half-life-period": {
+    "name": "半衰期"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/damp-state/damp-reuse-time": {
+    "name": "抑制重用时间"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/damp-state/current-penalty": {
+    "name": "当前惩罚值的1000倍"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/damp-state/max-penalty": {
+    "name": "最大惩罚值的1000倍"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/dynamic": {
+    "name": "接口动态信息"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/dynamic/oper-status": {
+    "name": "运行状态"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/dynamic/physical-status": {
+    "name": "物理状态"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/dynamic/link-status": {
+    "name": "链路状态"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/dynamic/mtu": {
+    "name": "接口动态MTU"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/dynamic/bandwidth": {
+    "name": "带宽"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/dynamic/ipv4-status": {
+    "name": "IPv4协议状态"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/dynamic/ipv6-status": {
+    "name": "IPv6协议状态"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/dynamic/is-control-flap-damp": {
+    "name": "接口状态抑制"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/dynamic/mac-address": {
+    "name": "生效MAC地址"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/dynamic/line-protocol-up-time": {
+    "name": "链路协议状态Up时间"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/dynamic/is-offline": {
+    "name": "接口是否离线"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/dynamic/link-quality-grade": {
+    "name": "接口链路质量等级"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/dynamic/sub-if-counts": {
+    "name": "子接口计数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/mib-statistics": {
+    "name": "接口Mib统计信息"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/mib-statistics/receive-byte": {
+    "name": "接收字节总数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/mib-statistics/send-byte": {
+    "name": "发送字节总数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/mib-statistics/receive-packet": {
+    "name": "接收报文总数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/mib-statistics/send-packet": {
+    "name": "发送报文总数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/mib-statistics/receive-unicast-packet": {
+    "name": "接收单播报文总数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/mib-statistics/receive-multicast-packet": {
+    "name": "接收组播报文总数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/mib-statistics/receive-broad-packet": {
+    "name": "接收广播报文总数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/mib-statistics/send-unicast-packet": {
+    "name": "发送单播报文总数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/mib-statistics/send-multicast-packet": {
+    "name": "发送组播报文总数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/mib-statistics/send-broad-packet": {
+    "name": "发送广播报文总数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/mib-statistics/receive-error-packet": {
+    "name": "接收错误报文总数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/mib-statistics/receive-drop-packet": {
+    "name": "接收丢弃报文总数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/mib-statistics/send-error-packet": {
+    "name": "发送错误报文总数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/mib-statistics/send-drop-packet": {
+    "name": "发送丢弃报文总数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/common-statistics": {
+    "name": "接口可清零流量统计"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/common-statistics/stati-interval": {
+    "name": "接口当前流量统计间隔"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/common-statistics/in-byte-rate": {
+    "name": "接收字节速率"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/common-statistics/in-bit-rate": {
+    "name": "接收比特速率"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/common-statistics/in-packet-rate": {
+    "name": "接收报文速率"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/common-statistics/in-use-rate": {
+    "name": "接收方向带宽利用率"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/common-statistics/out-byte-rate": {
+    "name": "发送字节速率"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/common-statistics/out-bit-rate": {
+    "name": "发送比特速率"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/common-statistics/out-packet-rate": {
+    "name": "发送报文速率"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/common-statistics/out-use-rate": {
+    "name": "发送方向带宽利用率"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/common-statistics/receive-byte": {
+    "name": "可清零接收字节总数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/common-statistics/send-byte": {
+    "name": "可清零发送字节总数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/common-statistics/receive-packet": {
+    "name": "可清零接收报文总数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/common-statistics/send-packet": {
+    "name": "可清零发送报文总数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/common-statistics/receive-unicast-packet": {
+    "name": "可清零接收单播报文总数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/common-statistics/receive-multicast-packet": {
+    "name": "可清零接收组播报文总数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/common-statistics/receive-broad-packet": {
+    "name": "可清零接收广播报文总数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/common-statistics/send-unicast-packet": {
+    "name": "可清零发送单播报文总数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/common-statistics/send-multicast-packet": {
+    "name": "可清零发送组播报文总数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/common-statistics/send-broad-packet": {
+    "name": "可清零发送广播报文总数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/common-statistics/receive-error-packet": {
+    "name": "可清零接收错误报文总数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/common-statistics/receive-drop-packet": {
+    "name": "可清零接收丢弃报文总数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/common-statistics/send-error-packet": {
+    "name": "可清零发送错误报文总数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/common-statistics/send-drop-packet": {
+    "name": "可清零发送丢弃报文总数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/common-statistics/send-unicast-bit": {
+    "name": "发送单播比特数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/common-statistics/receive-unicast-bit": {
+    "name": "接收单播比特数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/common-statistics/send-multicast-bit": {
+    "name": "发送组播比特数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/common-statistics/receive-multicast-bit": {
+    "name": "接收组播比特数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/common-statistics/send-broad-bit": {
+    "name": "发送广播比特数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/common-statistics/receive-broad-bit": {
+    "name": "接收广播比特数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/common-statistics/send-unicast-bit-rate": {
+    "name": "发送单播比特速率"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/common-statistics/receive-unicast-bit-rate": {
+    "name": "接收单播比特速率"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/common-statistics/send-multicast-bit-rate": {
+    "name": "发送组播比特速率"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/common-statistics/receive-multicast-bit-rate": {
+    "name": "接收组播比特速率"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/common-statistics/send-broad-bit-rate": {
+    "name": "发送广播比特速率"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/common-statistics/receive-broad-bit-rate": {
+    "name": "接收广播比特速率"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/common-statistics/send-unicast-packet-rate": {
+    "name": "发送单播包速率"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/common-statistics/receive-unicast-packet-rate": {
+    "name": "接收单播包速率"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/common-statistics/send-multicast-packet-rate": {
+    "name": "发送组播包速率"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/common-statistics/receive-multicast-packet-rate": {
+    "name": "接收组播包速率"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/common-statistics/send-broadcast-packet-rate": {
+    "name": "发送广播包速率"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/common-statistics/receive-broadcast-packet-rate": {
+    "name": "接收广播包速率"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/error-down": {
+    "name": "接口error-down信息"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/error-down/cause": {
+    "name": "Error-down类型"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/error-down/recovery-time": {
+    "name": "配置接口状态恢复为Up的时间"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/error-down/remainder-time": {
+    "name": "状态恢复为Up的剩余时间"
+  },
+  "/huawei-ifm:ifm/static-dimension-ranges": {
+    "name": "接口维度范围列表"
+  },
+  "/huawei-ifm:ifm/static-dimension-ranges/static-dimension-range": {
+    "name": "接口维度范围"
+  },
+  "/huawei-ifm:ifm/static-dimension-ranges/static-dimension-range/type": {
+    "name": "接口类型"
+  },
+  "/huawei-ifm:ifm/static-dimension-ranges/static-dimension-range/chassis-range": {
+    "name": "框号范围"
+  },
+  "/huawei-ifm:ifm/static-dimension-ranges/static-dimension-range/slot-range": {
+    "name": "槽号范围"
+  },
+  "/huawei-ifm:ifm/static-dimension-ranges/static-dimension-range/card-range": {
+    "name": "卡号范围"
+  },
+  "/huawei-ifm:ifm/static-dimension-ranges/static-dimension-range/port-range": {
+    "name": "端口号范围"
+  },
+  "/huawei-ifm:ifm/ipv4-interface-count": {
+    "name": "支持配置IPv4的接口计数查询"
+  },
+  "/huawei-ifm:ifm/ipv4-interface-count/physical-up-count": {
+    "name": "物理UP的IPv4接口个数"
+  },
+  "/huawei-ifm:ifm/ipv4-interface-count/physical-down-count": {
+    "name": "物理Down的IPv4接口个数"
+  },
+  "/huawei-ifm:ifm/ipv4-interface-count/protocol-up-count": {
+    "name": "协议UP的IPv4接口个数"
+  },
+  "/huawei-ifm:ifm/ipv4-interface-count/protocol-down-count": {
+    "name": "协议Down的IPv4接口个数"
+  },
+  "/huawei-ifm:ifm/remote-interfaces": {
+    "name": "远端口信息"
+  },
+  "/huawei-ifm:ifm/remote-interfaces/remote-interface": {
+    "name": "远端口列表"
+  },
+  "/huawei-ifm:ifm/remote-interfaces/remote-interface/name": {
+    "name": "接口名"
+  },
+  "/huawei-ifm:ifm/remote-interfaces/remote-interface/index": {
+    "name": "接口索引"
+  },
+  "/huawei-ifm:ifm/remote-interfaces/remote-interface/remote-statistics-state": {
+    "name": "查询远端接口统计值"
+  },
+  "/huawei-ifm:ifm/remote-interfaces/remote-interface/remote-statistics-state/last-cleared-time": {
+    "name": "最后一次清计数的时间"
+  },
+  "/huawei-ifm:ifm/remote-interfaces/remote-interface/remote-statistics-state/in-bit-rate": {
+    "name": "收到Bit速率"
+  },
+  "/huawei-ifm:ifm/remote-interfaces/remote-interface/remote-statistics-state/in-packet-rate": {
+    "name": "收到包速率"
+  },
+  "/huawei-ifm:ifm/remote-interfaces/remote-interface/remote-statistics-state/in-peak-bit-rate": {
+    "name": "收到Bit速率峰值"
+  },
+  "/huawei-ifm:ifm/remote-interfaces/remote-interface/remote-statistics-state/in-peak-bit-rate-record-time": {
+    "name": "收到Bit速率达到峰值时的记录时间"
+  },
+  "/huawei-ifm:ifm/remote-interfaces/remote-interface/remote-statistics-state/out-bit-rate": {
+    "name": "发送Bit速率"
+  },
+  "/huawei-ifm:ifm/remote-interfaces/remote-interface/remote-statistics-state/out-packet-rate": {
+    "name": "发送包速率"
+  },
+  "/huawei-ifm:ifm/remote-interfaces/remote-interface/remote-statistics-state/out-peak-bit-rate": {
+    "name": "发送Bit速率峰值"
+  },
+  "/huawei-ifm:ifm/remote-interfaces/remote-interface/remote-statistics-state/out-peak-bit-rate-record-time": {
+    "name": "发送Bit速率达到峰值时的记录时间"
+  },
+  "/huawei-ifm:ifm/remote-interfaces/remote-interface/remote-statistics-state/in-use-rate": {
+    "name": "收到的带宽利用率"
+  },
+  "/huawei-ifm:ifm/remote-interfaces/remote-interface/remote-statistics-state/out-use-rate": {
+    "name": "发送的带宽利用率"
+  },
+  "/huawei-ifm:reset-if-counters-by-name": {
+    "name": "按接口名清除统计"
+  },
+  "/huawei-ifm:reset-if-counters-by-name/input/if-name": {
+    "name": "按接口名清除统计"
+  },
+  "/huawei-ifm:reset-if-counters-by-type": {
+    "name": "按接口类型清除统计"
+  },
+  "/huawei-ifm:reset-if-counters-by-type/input/if-type": {
+    "name": "按接口类型清除统计"
+  },
+  "/huawei-ifm:reset-if-counters-all": {
+    "name": "清除所有接口统计"
+  },
+  "/huawei-ifm:reset-if-counters-all/input/all-if": {
+    "name": "清除所有接口统计"
+  },
+  "/huawei-ifm:reset-if-mib-counters-by-name": {
+    "name": "按接口名清除mib终端统计"
+  },
+  "/huawei-ifm:reset-if-mib-counters-by-name/input/if-name": {
+    "name": "接口名"
+  },
+  "/huawei-ifm:reset-if-mib-counters-by-type": {
+    "name": "按接口类型清除mib终端统计"
+  },
+  "/huawei-ifm:reset-if-mib-counters-by-type/input/if-type": {
+    "name": "接口类型"
+  },
+  "/huawei-ifm:reset-if-mib-counters-all": {
+    "name": "清除所有接口mib终端统计"
+  },
+  "/huawei-ifm:reset-if-mib-counters-all/input/all-if": {
+    "name": "清除所有接口统计标记"
+  },
+  "/huawei-ifm:reset-if-control-flap-penalty": {
+    "name": "清除惩罚值"
+  },
+  "/huawei-ifm:reset-if-control-flap-penalty/input/if-name": {
+    "name": "接口名"
+  },
+  "/huawei-ifm:reset-if-control-flap-counts": {
+    "name": "清除振荡抑制次数"
+  },
+  "/huawei-ifm:reset-if-control-flap-counts/input/if-name": {
+    "name": "接口名"
+  },
+  "/huawei-ifm:reset-remote-if-counters": {
+    "name": "按照接口名清除远端接口统计"
+  },
+  "/huawei-ifm:reset-remote-if-counters/input/if-name": {
+    "name": "接口名"
+  },
+  "/huawei-ifm:restart-if": {
+    "name": "重启接口"
+  },
+  "/huawei-ifm:restart-if/input/if-name": {
+    "name": "重启接口名"
+  },
+  "/rpcs/huawei-ifm:ifm/reset-if-counters-by-name": {
+    "name": "按接口名清除统计"
+  },
+  "/rpcs/huawei-ifm:ifm/reset-if-counters-by-type": {
+    "name": "按接口类型清除统计"
+  },
+  "/rpcs/huawei-ifm:ifm/reset-if-counters-all": {
+    "name": "清除所有接口统计"
+  },
+  "/rpcs/huawei-ifm:ifm/reset-if-mib-counters-by-name": {
+    "name": "按接口名清除mib终端统计"
+  },
+  "/rpcs/huawei-ifm:ifm/reset-if-mib-counters-by-type": {
+    "name": "按接口类型清除mib终端统计"
+  },
+  "/rpcs/huawei-ifm:ifm/reset-if-mib-counters-all": {
+    "name": "清除所有接口mib终端统计"
+  },
+  "/rpcs/huawei-ifm:ifm/reset-if-control-flap-penalty": {
+    "name": "清除惩罚值"
+  },
+  "/rpcs/huawei-ifm:ifm/reset-if-control-flap-counts": {
+    "name": "清除振荡抑制次数"
+  },
+  "/rpcs/huawei-ifm:ifm/reset-remote-if-counters": {
+    "name": "按照接口名清除远端接口统计"
+  },
+  "/rpcs/huawei-ifm:ifm/restart-if": {
+    "name": "重启接口"
+  }
+}

@@ -1,0 +1,467 @@
+{
+  "/huawei-lldp:lldp": {
+    "name": "全局LLDP状态"
+  },
+  "/huawei-lldp:lldp/global-attribute": {
+    "name": "LLDP全局配置信息"
+  },
+  "/huawei-lldp:lldp/global-attribute/message-transmission-interval": {
+    "name": "LLDP报文发送周期"
+  },
+  "/huawei-lldp:lldp/global-attribute/message-transmission-delay": {
+    "name": "LLDP报文发送时延"
+  },
+  "/huawei-lldp:lldp/global-attribute/message-transmission-hold-multiplier": {
+    "name": "LLDP报文发送保持倍数"
+  },
+  "/huawei-lldp:lldp/global-attribute/restart-delay": {
+    "name": "LLDP重新初始化时延"
+  },
+  "/huawei-lldp:lldp/global-attribute/trap-interval": {
+    "name": "LLDP邻居变化告警抑制"
+  },
+  "/huawei-lldp:lldp/global-attribute/fast-count": {
+    "name": "LLDP快速发包个数"
+  },
+  "/huawei-lldp:lldp/global-attribute/management-address-mode": {
+    "name": "管理口地址配置模式"
+  },
+  "/huawei-lldp:lldp/global-attribute/management-address-mode/global-mode": {
+    "name": "管理地址管全局模式"
+  },
+  "/huawei-lldp:lldp/global-attribute/management-address-mode/global-mode/managment-address": {
+    "name": "用户配置管理地址"
+  },
+  "/huawei-lldp:lldp/global-attribute/management-address-mode/global-mode/management-address-ipv4-bind-if": {
+    "name": "管理IP地址和接口绑定"
+  },
+  "/huawei-lldp:lldp/global-attribute/management-address-mode/interface-mode": {
+    "name": "管理地址接口模式"
+  },
+  "/huawei-lldp:lldp/global-attribute/management-address-mode/interface-mode/management-address-if-mode": {
+    "name": "管理地址接口模式"
+  },
+  "/huawei-lldp:lldp/global-attribute/mdn-status": {
+    "name": "MDN状态"
+  },
+  "/huawei-lldp:lldp/global-attribute/trap-enable": {
+    "name": "使能LLDP邻居变化告警"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:lldp": {
+    "name": "LLDP端口"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:lldp/session": {
+    "name": "LLDP端口信息"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:lldp/session/admin-status": {
+    "name": "端口LLDP使能"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:lldp/session/port-mode": {
+    "name": "LLDP端口模式"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:lldp/session/tlv-enable": {
+    "name": "TLV携带能力"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:lldp/session/tlv-enable/management-address": {
+    "name": "管理地址TLV"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:lldp/session/tlv-enable/port-description": {
+    "name": "端口描述TLV"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:lldp/session/tlv-enable/system-capability": {
+    "name": "系统能力TLV"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:lldp/session/tlv-enable/system-description": {
+    "name": "系统描述TLV"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:lldp/session/tlv-enable/system-name": {
+    "name": "系统名称TLV"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:lldp/session/tlv-enable/port-vlan-id": {
+    "name": "PVID TLV"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:lldp/session/tlv-enable/protocol-vlan-id-enable": {
+    "name": "协议VLAN TLV"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:lldp/session/tlv-enable/protocol-vlan-id": {
+    "name": "协议VLAN的VLAN ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:lldp/session/tlv-enable/vlan-name-enable": {
+    "name": "VLAN Name TLV"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:lldp/session/tlv-enable/vlan-name-id": {
+    "name": "VLAN Name的VLAN ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:lldp/session/tlv-enable/protocol-identity": {
+    "name": "Protocol Identity TLV"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:lldp/session/tlv-enable/mac-physic": {
+    "name": "MAC/PHY配置和状态TLV"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:lldp/session/tlv-enable/link-aggregation": {
+    "name": "链路聚合TLV"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:lldp/session/tlv-enable/max-frame-size": {
+    "name": "最大帧长度TLV"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:lldp/session/tlv-enable/ddp": {
+    "name": "DDP TLV"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:lldp/session/tlv-enable/identity": {
+    "name": "Identity TLV"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:lldp/session/neighbors": {
+    "name": "端口LLDP邻居信息"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:lldp/session/neighbors/neighbor": {
+    "name": "端口LLDP邻居信息"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:lldp/session/neighbors/neighbor/index": {
+    "name": "邻居索引"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:lldp/session/neighbors/neighbor/chassis-id-sub-type": {
+    "name": "邻居设备ID类型"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:lldp/session/neighbors/neighbor/chassis-id": {
+    "name": "邻居设备ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:lldp/session/neighbors/neighbor/port-id-sub-type": {
+    "name": "端口ID子类型"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:lldp/session/neighbors/neighbor/port-id": {
+    "name": "端口ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:lldp/session/neighbors/neighbor/port-description": {
+    "name": "端口描述"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:lldp/session/neighbors/neighbor/system-name": {
+    "name": "系统名称"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:lldp/session/neighbors/neighbor/system-description": {
+    "name": "系统描述"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:lldp/session/neighbors/neighbor/system-capabilities-enabled": {
+    "name": "系统使能的能力"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:lldp/session/neighbors/neighbor/system-capabilities-supported": {
+    "name": "系统支持的能力"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:lldp/session/neighbors/neighbor/expired-time": {
+    "name": "老化时间(秒)"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:lldp/session/neighbors/neighbor/port-vlan-id": {
+    "name": "端口缺省虚拟局域网ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:lldp/session/neighbors/neighbor/protocol-identity": {
+    "name": "设备支持协议"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:lldp/session/neighbors/neighbor/auto-negotiation-supported": {
+    "name": "端口支持自协商"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:lldp/session/neighbors/neighbor/auto-negotiation-enabled": {
+    "name": "端口使能自协商"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:lldp/session/neighbors/neighbor/auto-negotiation-capability": {
+    "name": "端口自协商能力"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:lldp/session/neighbors/neighbor/oper-mau-type": {
+    "name": "MAU类型"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:lldp/session/neighbors/neighbor/link-aggregation-supported": {
+    "name": "端口支持链路聚合"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:lldp/session/neighbors/neighbor/link-aggregation-enabled": {
+    "name": "端口使能链路聚合"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:lldp/session/neighbors/neighbor/aggregation-port-id": {
+    "name": "聚合端口的端口ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:lldp/session/neighbors/neighbor/maximum-frame-size": {
+    "name": "端口支持的最大帧长度"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:lldp/session/neighbors/neighbor/discovered-time": {
+    "name": "邻居被发现时间"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:lldp/session/neighbors/neighbor/management-addresss": {
+    "name": "LLDP邻居管理地址"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:lldp/session/neighbors/neighbor/management-addresss/management-address": {
+    "name": "LLDP邻居管理地址"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:lldp/session/neighbors/neighbor/management-addresss/management-address/type": {
+    "name": "管理地址类型"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:lldp/session/neighbors/neighbor/management-addresss/management-address/value": {
+    "name": "管理地址"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:lldp/session/neighbors/neighbor/management-addresss/management-address/length": {
+    "name": "管理地址长度"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:lldp/session/neighbors/neighbor/management-addresss/management-address/if-sub-type": {
+    "name": "管理地址端口类型"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:lldp/session/neighbors/neighbor/management-addresss/management-address/if-id": {
+    "name": "管理地址端口ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:lldp/session/neighbors/neighbor/management-addresss/management-address/oid": {
+    "name": "管理地址OID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:lldp/session/neighbors/neighbor/protocol-vlans": {
+    "name": "LLDP邻居协议VLAN类型"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:lldp/session/neighbors/neighbor/protocol-vlans/protocol-vlan": {
+    "name": "LLDP邻居协议VLAN"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:lldp/session/neighbors/neighbor/protocol-vlans/protocol-vlan/id": {
+    "name": "协议VLAN ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:lldp/session/neighbors/neighbor/protocol-vlans/protocol-vlan/supported": {
+    "name": "端口支持协议VLAN"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:lldp/session/neighbors/neighbor/protocol-vlans/protocol-vlan/enabled": {
+    "name": "端口使能协议VLAN"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:lldp/session/neighbors/neighbor/vlan-names": {
+    "name": "LLDP邻居的VLAN名称类型"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:lldp/session/neighbors/neighbor/vlan-names/vlan-name": {
+    "name": "LLDP邻居的VLAN名称"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:lldp/session/neighbors/neighbor/vlan-names/vlan-name/id": {
+    "name": "VLAN ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:lldp/session/neighbors/neighbor/vlan-names/vlan-name/value": {
+    "name": "VLAN名称"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:lldp/session/neighbors/neighbor/unknown-tlvs": {
+    "name": "不可识别基础TLV"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:lldp/session/neighbors/neighbor/unknown-tlvs/unknown-tlv": {
+    "name": "不可识别基础TLV"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:lldp/session/neighbors/neighbor/unknown-tlvs/unknown-tlv/type": {
+    "name": "TLV类型"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:lldp/session/neighbors/neighbor/unknown-tlvs/unknown-tlv/info": {
+    "name": "TLV信息"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:lldp/session/neighbors/neighbor/unknown-organizationally-defined-tlvs": {
+    "name": "不可识别组织定义TLV信息"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:lldp/session/neighbors/neighbor/unknown-organizationally-defined-tlvs/unknown-organizationally-defined-tlv": {
+    "name": "不可识别的组织定义TLV"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:lldp/session/neighbors/neighbor/unknown-organizationally-defined-tlvs/unknown-organizationally-defined-tlv/oui": {
+    "name": "TLV OUI"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:lldp/session/neighbors/neighbor/unknown-organizationally-defined-tlvs/unknown-organizationally-defined-tlv/sub-type": {
+    "name": "TLV子类型"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:lldp/session/neighbors/neighbor/unknown-organizationally-defined-tlvs/unknown-organizationally-defined-tlv/index": {
+    "name": "索引"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:lldp/session/neighbors/neighbor/unknown-organizationally-defined-tlvs/unknown-organizationally-defined-tlv/info": {
+    "name": "TLV信息"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:lldp/session/neighbors/neighbor/ddp-tlv": {
+    "name": "邻居DDP TLV"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:lldp/session/neighbors/neighbor/ddp-tlv/serial-number": {
+    "name": "邻居设备序列号"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:lldp/session/neighbors/neighbor/ddp-tlv/if-index": {
+    "name": "邻居使能DDP的端口索引"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:lldp/session/neighbors/neighbor/ddp-tlv/ipv4-address": {
+    "name": "邻居设备IP"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:lldp/session/neighbors/neighbor/ddp-tlv/mac-address": {
+    "name": "邻居系统MAC"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:lldp/session/neighbors/neighbor/identity-tlv": {
+    "name": "邻居Identity TLV信息"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:lldp/session/neighbors/neighbor/identity-tlv/identity": {
+    "name": "邻居身份信息"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:sub-interface-lldp": {
+    "name": "LLDP子接口"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:sub-interface-lldp/session": {
+    "name": "LLDP子接口信息"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:sub-interface-lldp/session/admin-status": {
+    "name": "端口LLDP使能"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:sub-interface-lldp/session/tlv-enable": {
+    "name": "TLV携带能力"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:sub-interface-lldp/session/tlv-enable/management-address": {
+    "name": "管理地址TLV"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:sub-interface-lldp/session/tlv-enable/port-description": {
+    "name": "端口描述TLV"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:sub-interface-lldp/session/tlv-enable/system-capability": {
+    "name": "系统能力TLV"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:sub-interface-lldp/session/tlv-enable/system-description": {
+    "name": "系统描述TLV"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:sub-interface-lldp/session/tlv-enable/system-name": {
+    "name": "系统名称TLV"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:sub-interface-lldp/session/neighbors": {
+    "name": "子接口LLDP邻居信息"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:sub-interface-lldp/session/neighbors/neighbor": {
+    "name": "子接口LLDP邻居信息"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:sub-interface-lldp/session/neighbors/neighbor/index": {
+    "name": "邻居索引"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:sub-interface-lldp/session/neighbors/neighbor/chassis-id-sub-type": {
+    "name": "邻居设备ID类型"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:sub-interface-lldp/session/neighbors/neighbor/chassis-id": {
+    "name": "邻居设备ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:sub-interface-lldp/session/neighbors/neighbor/port-id-sub-type": {
+    "name": "端口ID子类型"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:sub-interface-lldp/session/neighbors/neighbor/port-id": {
+    "name": "端口ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:sub-interface-lldp/session/neighbors/neighbor/port-description": {
+    "name": "端口描述"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:sub-interface-lldp/session/neighbors/neighbor/system-name": {
+    "name": "系统名称"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:sub-interface-lldp/session/neighbors/neighbor/system-description": {
+    "name": "系统描述"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:sub-interface-lldp/session/neighbors/neighbor/system-capabilities-enabled": {
+    "name": "系统使能的能力"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:sub-interface-lldp/session/neighbors/neighbor/system-capabilities-supported": {
+    "name": "系统支持的能力"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:sub-interface-lldp/session/neighbors/neighbor/expired-time": {
+    "name": "老化时间"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:sub-interface-lldp/session/neighbors/neighbor/port-vlan-id": {
+    "name": "端口缺省虚拟局域网ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:sub-interface-lldp/session/neighbors/neighbor/protocol-identity": {
+    "name": "设备支持协议"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:sub-interface-lldp/session/neighbors/neighbor/auto-negotiation-supported": {
+    "name": "端口支持自协商"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:sub-interface-lldp/session/neighbors/neighbor/auto-negotiation-enabled": {
+    "name": "端口使能自协商"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:sub-interface-lldp/session/neighbors/neighbor/auto-negotiation-capability": {
+    "name": "端口自协商能力"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:sub-interface-lldp/session/neighbors/neighbor/oper-mau-type": {
+    "name": "MAU类型"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:sub-interface-lldp/session/neighbors/neighbor/link-aggregation-supported": {
+    "name": "端口支持链路聚合"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:sub-interface-lldp/session/neighbors/neighbor/link-aggregation-enabled": {
+    "name": "端口使能链路聚合"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:sub-interface-lldp/session/neighbors/neighbor/aggregation-port-id": {
+    "name": "聚合端口的端口ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:sub-interface-lldp/session/neighbors/neighbor/maximum-frame-size": {
+    "name": "端口支持的最大帧长度"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:sub-interface-lldp/session/neighbors/neighbor/discovered-time": {
+    "name": "邻居被发现时间"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:sub-interface-lldp/session/neighbors/neighbor/management-addresss": {
+    "name": "LLDP邻居管理地址"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:sub-interface-lldp/session/neighbors/neighbor/management-addresss/management-address": {
+    "name": "LLDP邻居管理地址"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:sub-interface-lldp/session/neighbors/neighbor/management-addresss/management-address/type": {
+    "name": "管理地址类型"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:sub-interface-lldp/session/neighbors/neighbor/management-addresss/management-address/value": {
+    "name": "管理地址"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:sub-interface-lldp/session/neighbors/neighbor/management-addresss/management-address/length": {
+    "name": "管理地址长度"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:sub-interface-lldp/session/neighbors/neighbor/management-addresss/management-address/if-sub-type": {
+    "name": "管理地址端口类型"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:sub-interface-lldp/session/neighbors/neighbor/management-addresss/management-address/if-id": {
+    "name": "管理地址端口ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:sub-interface-lldp/session/neighbors/neighbor/management-addresss/management-address/oid": {
+    "name": "管理地址OID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:sub-interface-lldp/session/neighbors/neighbor/protocol-vlans": {
+    "name": "LLDP邻居协议VLAN类型"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:sub-interface-lldp/session/neighbors/neighbor/protocol-vlans/protocol-vlan": {
+    "name": "LLDP邻居协议VLAN"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:sub-interface-lldp/session/neighbors/neighbor/protocol-vlans/protocol-vlan/id": {
+    "name": "协议VLAN ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:sub-interface-lldp/session/neighbors/neighbor/protocol-vlans/protocol-vlan/supported": {
+    "name": "端口支持协议VLAN"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:sub-interface-lldp/session/neighbors/neighbor/protocol-vlans/protocol-vlan/enabled": {
+    "name": "端口使能协议VLAN"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:sub-interface-lldp/session/neighbors/neighbor/vlan-names": {
+    "name": "LLDP邻居的VLAN名称类型"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:sub-interface-lldp/session/neighbors/neighbor/vlan-names/vlan-name": {
+    "name": "LLDP邻居的VLAN名称"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:sub-interface-lldp/session/neighbors/neighbor/vlan-names/vlan-name/id": {
+    "name": "VLAN ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:sub-interface-lldp/session/neighbors/neighbor/vlan-names/vlan-name/value": {
+    "name": "VLAN名称"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:sub-interface-lldp/session/neighbors/neighbor/unknown-tlvs": {
+    "name": "不可识别基础TLV"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:sub-interface-lldp/session/neighbors/neighbor/unknown-tlvs/unknown-tlv": {
+    "name": "不可识别基础TLV"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:sub-interface-lldp/session/neighbors/neighbor/unknown-tlvs/unknown-tlv/type": {
+    "name": "TLV类型"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:sub-interface-lldp/session/neighbors/neighbor/unknown-tlvs/unknown-tlv/info": {
+    "name": "TLV信息"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:sub-interface-lldp/session/neighbors/neighbor/unknown-organizationally-defined-tlvs": {
+    "name": "不可识别组织定义TLV信息"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:sub-interface-lldp/session/neighbors/neighbor/unknown-organizationally-defined-tlvs/unknown-organizationally-defined-tlv": {
+    "name": "不可识别的组织定义TLV"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:sub-interface-lldp/session/neighbors/neighbor/unknown-organizationally-defined-tlvs/unknown-organizationally-defined-tlv/oui": {
+    "name": "TLV OUI"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:sub-interface-lldp/session/neighbors/neighbor/unknown-organizationally-defined-tlvs/unknown-organizationally-defined-tlv/sub-type": {
+    "name": "TLV子类型"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:sub-interface-lldp/session/neighbors/neighbor/unknown-organizationally-defined-tlvs/unknown-organizationally-defined-tlv/index": {
+    "name": "索引"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-lldp:sub-interface-lldp/session/neighbors/neighbor/unknown-organizationally-defined-tlvs/unknown-organizationally-defined-tlv/info": {
+    "name": "TLV信息"
+  }
+}

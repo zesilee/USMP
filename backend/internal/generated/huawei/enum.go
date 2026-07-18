@@ -15,12 +15,43 @@ using the following YANG input files:
   - huawei-network-instance
 
 Imported modules were sourced from:
-  - ../yang-models/network-router/8.20.10/ne40e-x8x16/...
+  - ../snd/ce6866p-yang/...
 */
 package huawei
 
 import (
 	"github.com/openconfig/ygot/ygot"
+)
+
+// E_HuaweiAcl_EncapType is a derived int64 type which is used to represent
+// the enumerated node HuaweiAcl_EncapType. An additional value named
+// HuaweiAcl_EncapType_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_HuaweiAcl_EncapType int64
+
+// IsYANGGoEnum ensures that HuaweiAcl_EncapType implements the yang.GoEnum
+// interface. This ensures that HuaweiAcl_EncapType can be identified as a
+// mapped type for a YANG enumeration.
+func (E_HuaweiAcl_EncapType) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  HuaweiAcl_EncapType.
+func (E_HuaweiAcl_EncapType) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_HuaweiAcl_EncapType.
+func (e E_HuaweiAcl_EncapType) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_HuaweiAcl_EncapType")
+}
+
+const (
+	// HuaweiAcl_EncapType_UNSET corresponds to the value UNSET of HuaweiAcl_EncapType
+	HuaweiAcl_EncapType_UNSET E_HuaweiAcl_EncapType = 0
+	// HuaweiAcl_EncapType_ether_ii corresponds to the value ether_ii of HuaweiAcl_EncapType
+	HuaweiAcl_EncapType_ether_ii E_HuaweiAcl_EncapType = 2
+	// HuaweiAcl_EncapType_802_3 corresponds to the value 802_3 of HuaweiAcl_EncapType
+	HuaweiAcl_EncapType_802_3 E_HuaweiAcl_EncapType = 3
+	// HuaweiAcl_EncapType_snap corresponds to the value snap of HuaweiAcl_EncapType
+	HuaweiAcl_EncapType_snap E_HuaweiAcl_EncapType = 4
 )
 
 // E_HuaweiAcl_FragmentIpv6Type is a derived int64 type which is used to represent
@@ -188,6 +219,68 @@ const (
 	HuaweiAcl_MatchOrder_auto E_HuaweiAcl_MatchOrder = 2
 )
 
+// E_HuaweiAcl_OffsetBegin is a derived int64 type which is used to represent
+// the enumerated node HuaweiAcl_OffsetBegin. An additional value named
+// HuaweiAcl_OffsetBegin_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_HuaweiAcl_OffsetBegin int64
+
+// IsYANGGoEnum ensures that HuaweiAcl_OffsetBegin implements the yang.GoEnum
+// interface. This ensures that HuaweiAcl_OffsetBegin can be identified as a
+// mapped type for a YANG enumeration.
+func (E_HuaweiAcl_OffsetBegin) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  HuaweiAcl_OffsetBegin.
+func (E_HuaweiAcl_OffsetBegin) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_HuaweiAcl_OffsetBegin.
+func (e E_HuaweiAcl_OffsetBegin) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_HuaweiAcl_OffsetBegin")
+}
+
+const (
+	// HuaweiAcl_OffsetBegin_UNSET corresponds to the value UNSET of HuaweiAcl_OffsetBegin
+	HuaweiAcl_OffsetBegin_UNSET E_HuaweiAcl_OffsetBegin = 0
+	// HuaweiAcl_OffsetBegin_l2_head corresponds to the value l2_head of HuaweiAcl_OffsetBegin
+	HuaweiAcl_OffsetBegin_l2_head E_HuaweiAcl_OffsetBegin = 2
+	// HuaweiAcl_OffsetBegin_ipv4_head corresponds to the value ipv4_head of HuaweiAcl_OffsetBegin
+	HuaweiAcl_OffsetBegin_ipv4_head E_HuaweiAcl_OffsetBegin = 3
+	// HuaweiAcl_OffsetBegin_l4_head corresponds to the value l4_head of HuaweiAcl_OffsetBegin
+	HuaweiAcl_OffsetBegin_l4_head E_HuaweiAcl_OffsetBegin = 4
+	// HuaweiAcl_OffsetBegin_inner_ipv4_head corresponds to the value inner_ipv4_head of HuaweiAcl_OffsetBegin
+	HuaweiAcl_OffsetBegin_inner_ipv4_head E_HuaweiAcl_OffsetBegin = 6
+)
+
+// E_HuaweiAcl_PacketMode is a derived int64 type which is used to represent
+// the enumerated node HuaweiAcl_PacketMode. An additional value named
+// HuaweiAcl_PacketMode_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_HuaweiAcl_PacketMode int64
+
+// IsYANGGoEnum ensures that HuaweiAcl_PacketMode implements the yang.GoEnum
+// interface. This ensures that HuaweiAcl_PacketMode can be identified as a
+// mapped type for a YANG enumeration.
+func (E_HuaweiAcl_PacketMode) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  HuaweiAcl_PacketMode.
+func (E_HuaweiAcl_PacketMode) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_HuaweiAcl_PacketMode.
+func (e E_HuaweiAcl_PacketMode) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_HuaweiAcl_PacketMode")
+}
+
+const (
+	// HuaweiAcl_PacketMode_UNSET corresponds to the value UNSET of HuaweiAcl_PacketMode
+	HuaweiAcl_PacketMode_UNSET E_HuaweiAcl_PacketMode = 0
+	// HuaweiAcl_PacketMode_request corresponds to the value request of HuaweiAcl_PacketMode
+	HuaweiAcl_PacketMode_request E_HuaweiAcl_PacketMode = 1
+	// HuaweiAcl_PacketMode_reply corresponds to the value reply of HuaweiAcl_PacketMode
+	HuaweiAcl_PacketMode_reply E_HuaweiAcl_PacketMode = 2
+)
+
 // E_HuaweiAcl_RangeType is a derived int64 type which is used to represent
 // the enumerated node HuaweiAcl_RangeType. An additional value named
 // HuaweiAcl_RangeType_UNSET is added to the enumeration which is used as
@@ -211,6 +304,12 @@ func (e E_HuaweiAcl_RangeType) String() string {
 const (
 	// HuaweiAcl_RangeType_UNSET corresponds to the value UNSET of HuaweiAcl_RangeType
 	HuaweiAcl_RangeType_UNSET E_HuaweiAcl_RangeType = 0
+	// HuaweiAcl_RangeType_lt corresponds to the value lt of HuaweiAcl_RangeType
+	HuaweiAcl_RangeType_lt E_HuaweiAcl_RangeType = 2
+	// HuaweiAcl_RangeType_eq corresponds to the value eq of HuaweiAcl_RangeType
+	HuaweiAcl_RangeType_eq E_HuaweiAcl_RangeType = 3
+	// HuaweiAcl_RangeType_gt corresponds to the value gt of HuaweiAcl_RangeType
+	HuaweiAcl_RangeType_gt E_HuaweiAcl_RangeType = 4
 	// HuaweiAcl_RangeType_neq corresponds to the value neq of HuaweiAcl_RangeType
 	HuaweiAcl_RangeType_neq E_HuaweiAcl_RangeType = 5
 	// HuaweiAcl_RangeType_range corresponds to the value range of HuaweiAcl_RangeType
@@ -372,35 +471,6 @@ const (
 	HuaweiBfd_AuthenticationMode_met_sha1 E_HuaweiBfd_AuthenticationMode = 2
 )
 
-// E_HuaweiBfd_BfdSmpBfdCap is a derived int64 type which is used to represent
-// the enumerated node HuaweiBfd_BfdSmpBfdCap. An additional value named
-// HuaweiBfd_BfdSmpBfdCap_UNSET is added to the enumeration which is used as
-// the nil value, indicating that the enumeration was not explicitly set by
-// the program importing the generated structures.
-type E_HuaweiBfd_BfdSmpBfdCap int64
-
-// IsYANGGoEnum ensures that HuaweiBfd_BfdSmpBfdCap implements the yang.GoEnum
-// interface. This ensures that HuaweiBfd_BfdSmpBfdCap can be identified as a
-// mapped type for a YANG enumeration.
-func (E_HuaweiBfd_BfdSmpBfdCap) IsYANGGoEnum() {}
-
-// ΛMap returns the value lookup map associated with  HuaweiBfd_BfdSmpBfdCap.
-func (E_HuaweiBfd_BfdSmpBfdCap) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
-
-// String returns a logging-friendly string for E_HuaweiBfd_BfdSmpBfdCap.
-func (e E_HuaweiBfd_BfdSmpBfdCap) String() string {
-	return ygot.EnumLogString(e, int64(e), "E_HuaweiBfd_BfdSmpBfdCap")
-}
-
-const (
-	// HuaweiBfd_BfdSmpBfdCap_UNSET corresponds to the value UNSET of HuaweiBfd_BfdSmpBfdCap
-	HuaweiBfd_BfdSmpBfdCap_UNSET E_HuaweiBfd_BfdSmpBfdCap = 0
-	// HuaweiBfd_BfdSmpBfdCap_ipv4 corresponds to the value ipv4 of HuaweiBfd_BfdSmpBfdCap
-	HuaweiBfd_BfdSmpBfdCap_ipv4 E_HuaweiBfd_BfdSmpBfdCap = 1
-	// HuaweiBfd_BfdSmpBfdCap_ipv6 corresponds to the value ipv6 of HuaweiBfd_BfdSmpBfdCap
-	HuaweiBfd_BfdSmpBfdCap_ipv6 E_HuaweiBfd_BfdSmpBfdCap = 2
-)
-
 // E_HuaweiBfd_BundleMode is a derived int64 type which is used to represent
 // the enumerated node HuaweiBfd_BundleMode. An additional value named
 // HuaweiBfd_BundleMode_UNSET is added to the enumeration which is used as
@@ -430,6 +500,10 @@ const (
 	HuaweiBfd_BundleMode_bundle_standard E_HuaweiBfd_BundleMode = 2
 	// HuaweiBfd_BundleMode_bundle_compatible corresponds to the value bundle_compatible of HuaweiBfd_BundleMode
 	HuaweiBfd_BundleMode_bundle_compatible E_HuaweiBfd_BundleMode = 3
+	// HuaweiBfd_BundleMode_cfg_remote_ap corresponds to the value cfg_remote_ap of HuaweiBfd_BundleMode
+	HuaweiBfd_BundleMode_cfg_remote_ap E_HuaweiBfd_BundleMode = 4
+	// HuaweiBfd_BundleMode_cfg_from_master corresponds to the value cfg_from_master of HuaweiBfd_BundleMode
+	HuaweiBfd_BundleMode_cfg_from_master E_HuaweiBfd_BundleMode = 5
 	// HuaweiBfd_BundleMode_bundle_std_unshare corresponds to the value bundle_std_unshare of HuaweiBfd_BundleMode
 	HuaweiBfd_BundleMode_bundle_std_unshare E_HuaweiBfd_BundleMode = 6
 	// HuaweiBfd_BundleMode_bundle_com_unshare corresponds to the value bundle_com_unshare of HuaweiBfd_BundleMode
@@ -714,35 +788,6 @@ const (
 	HuaweiBfd_IpCrcFaultType_local_interface_fault_and_remote_interface_fault E_HuaweiBfd_IpCrcFaultType = 3
 )
 
-// E_HuaweiBfd_IpMode is a derived int64 type which is used to represent
-// the enumerated node HuaweiBfd_IpMode. An additional value named
-// HuaweiBfd_IpMode_UNSET is added to the enumeration which is used as
-// the nil value, indicating that the enumeration was not explicitly set by
-// the program importing the generated structures.
-type E_HuaweiBfd_IpMode int64
-
-// IsYANGGoEnum ensures that HuaweiBfd_IpMode implements the yang.GoEnum
-// interface. This ensures that HuaweiBfd_IpMode can be identified as a
-// mapped type for a YANG enumeration.
-func (E_HuaweiBfd_IpMode) IsYANGGoEnum() {}
-
-// ΛMap returns the value lookup map associated with  HuaweiBfd_IpMode.
-func (E_HuaweiBfd_IpMode) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
-
-// String returns a logging-friendly string for E_HuaweiBfd_IpMode.
-func (e E_HuaweiBfd_IpMode) String() string {
-	return ygot.EnumLogString(e, int64(e), "E_HuaweiBfd_IpMode")
-}
-
-const (
-	// HuaweiBfd_IpMode_UNSET corresponds to the value UNSET of HuaweiBfd_IpMode
-	HuaweiBfd_IpMode_UNSET E_HuaweiBfd_IpMode = 0
-	// HuaweiBfd_IpMode_multicast corresponds to the value multicast of HuaweiBfd_IpMode
-	HuaweiBfd_IpMode_multicast E_HuaweiBfd_IpMode = 1
-	// HuaweiBfd_IpMode_unicast corresponds to the value unicast of HuaweiBfd_IpMode
-	HuaweiBfd_IpMode_unicast E_HuaweiBfd_IpMode = 2
-)
-
 // E_HuaweiBfd_L2VpnEncapsulationType is a derived int64 type which is used to represent
 // the enumerated node HuaweiBfd_L2VpnEncapsulationType. An additional value named
 // HuaweiBfd_L2VpnEncapsulationType_UNSET is added to the enumeration which is used as
@@ -875,8 +920,8 @@ const (
 	HuaweiBfd_LinkType_sr_be_tunnel E_HuaweiBfd_LinkType = 13
 	// HuaweiBfd_LinkType_sid_list corresponds to the value sid_list of HuaweiBfd_LinkType
 	HuaweiBfd_LinkType_sid_list E_HuaweiBfd_LinkType = 14
-	// HuaweiBfd_LinkType_flex_algo_tunnel corresponds to the value flex_algo_tunnel of HuaweiBfd_LinkType
-	HuaweiBfd_LinkType_flex_algo_tunnel E_HuaweiBfd_LinkType = 15
+	// HuaweiBfd_LinkType_other corresponds to the value other of HuaweiBfd_LinkType
+	HuaweiBfd_LinkType_other E_HuaweiBfd_LinkType = 15
 )
 
 // E_HuaweiBfd_LspCrcFaultType is a derived int64 type which is used to represent
@@ -1392,8 +1437,6 @@ const (
 	HuaweiBfd_SessionType_sr_be_tnl E_HuaweiBfd_SessionType = 14
 	// HuaweiBfd_SessionType_sid_list corresponds to the value sid_list of HuaweiBfd_SessionType
 	HuaweiBfd_SessionType_sid_list E_HuaweiBfd_SessionType = 15
-	// HuaweiBfd_SessionType_flex_algo_tnl corresponds to the value flex_algo_tnl of HuaweiBfd_SessionType
-	HuaweiBfd_SessionType_flex_algo_tnl E_HuaweiBfd_SessionType = 16
 )
 
 // E_HuaweiBfd_SubSessionType is a derived int64 type which is used to represent
@@ -1585,8 +1628,41 @@ const (
 	HuaweiBgp_AfType_ipv4srpolicy E_HuaweiBgp_AfType = 21
 	// HuaweiBgp_AfType_ipv6srpolicy corresponds to the value ipv6srpolicy of HuaweiBgp_AfType
 	HuaweiBgp_AfType_ipv6srpolicy E_HuaweiBgp_AfType = 22
-	// HuaweiBgp_AfType_ipv4sdwan corresponds to the value ipv4sdwan of HuaweiBgp_AfType
-	HuaweiBgp_AfType_ipv4sdwan E_HuaweiBgp_AfType = 23
+)
+
+// E_HuaweiBgp_AfTypeDeviations is a derived int64 type which is used to represent
+// the enumerated node HuaweiBgp_AfTypeDeviations. An additional value named
+// HuaweiBgp_AfTypeDeviations_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_HuaweiBgp_AfTypeDeviations int64
+
+// IsYANGGoEnum ensures that HuaweiBgp_AfTypeDeviations implements the yang.GoEnum
+// interface. This ensures that HuaweiBgp_AfTypeDeviations can be identified as a
+// mapped type for a YANG enumeration.
+func (E_HuaweiBgp_AfTypeDeviations) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  HuaweiBgp_AfTypeDeviations.
+func (E_HuaweiBgp_AfTypeDeviations) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_HuaweiBgp_AfTypeDeviations.
+func (e E_HuaweiBgp_AfTypeDeviations) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_HuaweiBgp_AfTypeDeviations")
+}
+
+const (
+	// HuaweiBgp_AfTypeDeviations_UNSET corresponds to the value UNSET of HuaweiBgp_AfTypeDeviations
+	HuaweiBgp_AfTypeDeviations_UNSET E_HuaweiBgp_AfTypeDeviations = 0
+	// HuaweiBgp_AfTypeDeviations_ipv4uni corresponds to the value ipv4uni of HuaweiBgp_AfTypeDeviations
+	HuaweiBgp_AfTypeDeviations_ipv4uni E_HuaweiBgp_AfTypeDeviations = 2
+	// HuaweiBgp_AfTypeDeviations_ipv6uni corresponds to the value ipv6uni of HuaweiBgp_AfTypeDeviations
+	HuaweiBgp_AfTypeDeviations_ipv6uni E_HuaweiBgp_AfTypeDeviations = 6
+	// HuaweiBgp_AfTypeDeviations_evpn corresponds to the value evpn of HuaweiBgp_AfTypeDeviations
+	HuaweiBgp_AfTypeDeviations_evpn E_HuaweiBgp_AfTypeDeviations = 10
+	// HuaweiBgp_AfTypeDeviations_mvpn corresponds to the value mvpn of HuaweiBgp_AfTypeDeviations
+	HuaweiBgp_AfTypeDeviations_mvpn E_HuaweiBgp_AfTypeDeviations = 11
+	// HuaweiBgp_AfTypeDeviations_vpntarget corresponds to the value vpntarget of HuaweiBgp_AfTypeDeviations
+	HuaweiBgp_AfTypeDeviations_vpntarget E_HuaweiBgp_AfTypeDeviations = 12
 )
 
 // E_HuaweiBgp_ApplyLabelType is a derived int64 type which is used to represent
@@ -1616,35 +1692,6 @@ const (
 	HuaweiBgp_ApplyLabelType_per_route E_HuaweiBgp_ApplyLabelType = 1
 	// HuaweiBgp_ApplyLabelType_per_nexthop corresponds to the value per_nexthop of HuaweiBgp_ApplyLabelType
 	HuaweiBgp_ApplyLabelType_per_nexthop E_HuaweiBgp_ApplyLabelType = 2
-)
-
-// E_HuaweiBgp_AsNumberType is a derived int64 type which is used to represent
-// the enumerated node HuaweiBgp_AsNumberType. An additional value named
-// HuaweiBgp_AsNumberType_UNSET is added to the enumeration which is used as
-// the nil value, indicating that the enumeration was not explicitly set by
-// the program importing the generated structures.
-type E_HuaweiBgp_AsNumberType int64
-
-// IsYANGGoEnum ensures that HuaweiBgp_AsNumberType implements the yang.GoEnum
-// interface. This ensures that HuaweiBgp_AsNumberType can be identified as a
-// mapped type for a YANG enumeration.
-func (E_HuaweiBgp_AsNumberType) IsYANGGoEnum() {}
-
-// ΛMap returns the value lookup map associated with  HuaweiBgp_AsNumberType.
-func (E_HuaweiBgp_AsNumberType) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
-
-// String returns a logging-friendly string for E_HuaweiBgp_AsNumberType.
-func (e E_HuaweiBgp_AsNumberType) String() string {
-	return ygot.EnumLogString(e, int64(e), "E_HuaweiBgp_AsNumberType")
-}
-
-const (
-	// HuaweiBgp_AsNumberType_UNSET corresponds to the value UNSET of HuaweiBgp_AsNumberType
-	HuaweiBgp_AsNumberType_UNSET E_HuaweiBgp_AsNumberType = 0
-	// HuaweiBgp_AsNumberType_dynamic_neighbor corresponds to the value dynamic_neighbor of HuaweiBgp_AsNumberType
-	HuaweiBgp_AsNumberType_dynamic_neighbor E_HuaweiBgp_AsNumberType = 2
-	// HuaweiBgp_AsNumberType_confederation corresponds to the value confederation of HuaweiBgp_AsNumberType
-	HuaweiBgp_AsNumberType_confederation E_HuaweiBgp_AsNumberType = 3
 )
 
 // E_HuaweiBgp_AttributeSetType is a derived int64 type which is used to represent
@@ -1707,39 +1754,6 @@ const (
 	HuaweiBgp_BfdState_down E_HuaweiBgp_BfdState = 3
 	// HuaweiBgp_BfdState_unknown corresponds to the value unknown of HuaweiBgp_BfdState
 	HuaweiBgp_BfdState_unknown E_HuaweiBgp_BfdState = 4
-)
-
-// E_HuaweiBgp_BgpAdvertiseRouteMode is a derived int64 type which is used to represent
-// the enumerated node HuaweiBgp_BgpAdvertiseRouteMode. An additional value named
-// HuaweiBgp_BgpAdvertiseRouteMode_UNSET is added to the enumeration which is used as
-// the nil value, indicating that the enumeration was not explicitly set by
-// the program importing the generated structures.
-type E_HuaweiBgp_BgpAdvertiseRouteMode int64
-
-// IsYANGGoEnum ensures that HuaweiBgp_BgpAdvertiseRouteMode implements the yang.GoEnum
-// interface. This ensures that HuaweiBgp_BgpAdvertiseRouteMode can be identified as a
-// mapped type for a YANG enumeration.
-func (E_HuaweiBgp_BgpAdvertiseRouteMode) IsYANGGoEnum() {}
-
-// ΛMap returns the value lookup map associated with  HuaweiBgp_BgpAdvertiseRouteMode.
-func (E_HuaweiBgp_BgpAdvertiseRouteMode) ΛMap() map[string]map[int64]ygot.EnumDefinition {
-	return ΛEnum
-}
-
-// String returns a logging-friendly string for E_HuaweiBgp_BgpAdvertiseRouteMode.
-func (e E_HuaweiBgp_BgpAdvertiseRouteMode) String() string {
-	return ygot.EnumLogString(e, int64(e), "E_HuaweiBgp_BgpAdvertiseRouteMode")
-}
-
-const (
-	// HuaweiBgp_BgpAdvertiseRouteMode_UNSET corresponds to the value UNSET of HuaweiBgp_BgpAdvertiseRouteMode
-	HuaweiBgp_BgpAdvertiseRouteMode_UNSET E_HuaweiBgp_BgpAdvertiseRouteMode = 0
-	// HuaweiBgp_BgpAdvertiseRouteMode_all corresponds to the value all of HuaweiBgp_BgpAdvertiseRouteMode
-	HuaweiBgp_BgpAdvertiseRouteMode_all E_HuaweiBgp_BgpAdvertiseRouteMode = 1
-	// HuaweiBgp_BgpAdvertiseRouteMode_best corresponds to the value best of HuaweiBgp_BgpAdvertiseRouteMode
-	HuaweiBgp_BgpAdvertiseRouteMode_best E_HuaweiBgp_BgpAdvertiseRouteMode = 2
-	// HuaweiBgp_BgpAdvertiseRouteMode_valid corresponds to the value valid of HuaweiBgp_BgpAdvertiseRouteMode
-	HuaweiBgp_BgpAdvertiseRouteMode_valid E_HuaweiBgp_BgpAdvertiseRouteMode = 3
 )
 
 // E_HuaweiBgp_BgpOrfModeType is a derived int64 type which is used to represent
@@ -1928,39 +1942,6 @@ const (
 	HuaweiBgp_DampeningRoutePeerType_ebgp E_HuaweiBgp_DampeningRoutePeerType = 1
 )
 
-// E_HuaweiBgp_DependentPrefixFilterType is a derived int64 type which is used to represent
-// the enumerated node HuaweiBgp_DependentPrefixFilterType. An additional value named
-// HuaweiBgp_DependentPrefixFilterType_UNSET is added to the enumeration which is used as
-// the nil value, indicating that the enumeration was not explicitly set by
-// the program importing the generated structures.
-type E_HuaweiBgp_DependentPrefixFilterType int64
-
-// IsYANGGoEnum ensures that HuaweiBgp_DependentPrefixFilterType implements the yang.GoEnum
-// interface. This ensures that HuaweiBgp_DependentPrefixFilterType can be identified as a
-// mapped type for a YANG enumeration.
-func (E_HuaweiBgp_DependentPrefixFilterType) IsYANGGoEnum() {}
-
-// ΛMap returns the value lookup map associated with  HuaweiBgp_DependentPrefixFilterType.
-func (E_HuaweiBgp_DependentPrefixFilterType) ΛMap() map[string]map[int64]ygot.EnumDefinition {
-	return ΛEnum
-}
-
-// String returns a logging-friendly string for E_HuaweiBgp_DependentPrefixFilterType.
-func (e E_HuaweiBgp_DependentPrefixFilterType) String() string {
-	return ygot.EnumLogString(e, int64(e), "E_HuaweiBgp_DependentPrefixFilterType")
-}
-
-const (
-	// HuaweiBgp_DependentPrefixFilterType_UNSET corresponds to the value UNSET of HuaweiBgp_DependentPrefixFilterType
-	HuaweiBgp_DependentPrefixFilterType_UNSET E_HuaweiBgp_DependentPrefixFilterType = 0
-	// HuaweiBgp_DependentPrefixFilterType_match_all corresponds to the value match_all of HuaweiBgp_DependentPrefixFilterType
-	HuaweiBgp_DependentPrefixFilterType_match_all E_HuaweiBgp_DependentPrefixFilterType = 2
-	// HuaweiBgp_DependentPrefixFilterType_match_one corresponds to the value match_one of HuaweiBgp_DependentPrefixFilterType
-	HuaweiBgp_DependentPrefixFilterType_match_one E_HuaweiBgp_DependentPrefixFilterType = 3
-	// HuaweiBgp_DependentPrefixFilterType_match_none corresponds to the value match_none of HuaweiBgp_DependentPrefixFilterType
-	HuaweiBgp_DependentPrefixFilterType_match_none E_HuaweiBgp_DependentPrefixFilterType = 4
-)
-
 // E_HuaweiBgp_EntropyLabelAttributeType is a derived int64 type which is used to represent
 // the enumerated node HuaweiBgp_EntropyLabelAttributeType. An additional value named
 // HuaweiBgp_EntropyLabelAttributeType_UNSET is added to the enumeration which is used as
@@ -2130,8 +2111,6 @@ const (
 	HuaweiBgp_GroupAfType_mdt E_HuaweiBgp_GroupAfType = 15
 	// HuaweiBgp_GroupAfType_mvpnv6 corresponds to the value mvpnv6 of HuaweiBgp_GroupAfType
 	HuaweiBgp_GroupAfType_mvpnv6 E_HuaweiBgp_GroupAfType = 17
-	// HuaweiBgp_GroupAfType_ipv4sdwan corresponds to the value ipv4sdwan of HuaweiBgp_GroupAfType
-	HuaweiBgp_GroupAfType_ipv4sdwan E_HuaweiBgp_GroupAfType = 23
 )
 
 // E_HuaweiBgp_GroupType is a derived int64 type which is used to represent
@@ -2223,31 +2202,37 @@ const (
 	HuaweiBgp_ImportRibIpv6SafiType_ipv6uni E_HuaweiBgp_ImportRibIpv6SafiType = 6
 )
 
-// E_HuaweiBgp_InstanceAfType is a derived int64 type which is used to represent
-// the enumerated node HuaweiBgp_InstanceAfType. An additional value named
-// HuaweiBgp_InstanceAfType_UNSET is added to the enumeration which is used as
+// E_HuaweiBgp_InstPeerEstablishMode is a derived int64 type which is used to represent
+// the enumerated node HuaweiBgp_InstPeerEstablishMode. An additional value named
+// HuaweiBgp_InstPeerEstablishMode_UNSET is added to the enumeration which is used as
 // the nil value, indicating that the enumeration was not explicitly set by
 // the program importing the generated structures.
-type E_HuaweiBgp_InstanceAfType int64
+type E_HuaweiBgp_InstPeerEstablishMode int64
 
-// IsYANGGoEnum ensures that HuaweiBgp_InstanceAfType implements the yang.GoEnum
-// interface. This ensures that HuaweiBgp_InstanceAfType can be identified as a
+// IsYANGGoEnum ensures that HuaweiBgp_InstPeerEstablishMode implements the yang.GoEnum
+// interface. This ensures that HuaweiBgp_InstPeerEstablishMode can be identified as a
 // mapped type for a YANG enumeration.
-func (E_HuaweiBgp_InstanceAfType) IsYANGGoEnum() {}
+func (E_HuaweiBgp_InstPeerEstablishMode) IsYANGGoEnum() {}
 
-// ΛMap returns the value lookup map associated with  HuaweiBgp_InstanceAfType.
-func (E_HuaweiBgp_InstanceAfType) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+// ΛMap returns the value lookup map associated with  HuaweiBgp_InstPeerEstablishMode.
+func (E_HuaweiBgp_InstPeerEstablishMode) ΛMap() map[string]map[int64]ygot.EnumDefinition {
+	return ΛEnum
+}
 
-// String returns a logging-friendly string for E_HuaweiBgp_InstanceAfType.
-func (e E_HuaweiBgp_InstanceAfType) String() string {
-	return ygot.EnumLogString(e, int64(e), "E_HuaweiBgp_InstanceAfType")
+// String returns a logging-friendly string for E_HuaweiBgp_InstPeerEstablishMode.
+func (e E_HuaweiBgp_InstPeerEstablishMode) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_HuaweiBgp_InstPeerEstablishMode")
 }
 
 const (
-	// HuaweiBgp_InstanceAfType_UNSET corresponds to the value UNSET of HuaweiBgp_InstanceAfType
-	HuaweiBgp_InstanceAfType_UNSET E_HuaweiBgp_InstanceAfType = 0
-	// HuaweiBgp_InstanceAfType_ipv4vpn corresponds to the value ipv4vpn of HuaweiBgp_InstanceAfType
-	HuaweiBgp_InstanceAfType_ipv4vpn E_HuaweiBgp_InstanceAfType = 4
+	// HuaweiBgp_InstPeerEstablishMode_UNSET corresponds to the value UNSET of HuaweiBgp_InstPeerEstablishMode
+	HuaweiBgp_InstPeerEstablishMode_UNSET E_HuaweiBgp_InstPeerEstablishMode = 0
+	// HuaweiBgp_InstPeerEstablishMode_static corresponds to the value static of HuaweiBgp_InstPeerEstablishMode
+	HuaweiBgp_InstPeerEstablishMode_static E_HuaweiBgp_InstPeerEstablishMode = 2
+	// HuaweiBgp_InstPeerEstablishMode_dynamic corresponds to the value dynamic of HuaweiBgp_InstPeerEstablishMode
+	HuaweiBgp_InstPeerEstablishMode_dynamic E_HuaweiBgp_InstPeerEstablishMode = 3
+	// HuaweiBgp_InstPeerEstablishMode_dynamic_ipv6 corresponds to the value dynamic_ipv6 of HuaweiBgp_InstPeerEstablishMode
+	HuaweiBgp_InstPeerEstablishMode_dynamic_ipv6 E_HuaweiBgp_InstPeerEstablishMode = 5
 )
 
 // E_HuaweiBgp_Ipv4ExportFilterProtocolType is a derived int64 type which is used to represent
@@ -2451,35 +2436,6 @@ const (
 	HuaweiBgp_Ipv6ImportRouteProtocolType_unr E_HuaweiBgp_Ipv6ImportRouteProtocolType = 12
 )
 
-// E_HuaweiBgp_LspOperationType is a derived int64 type which is used to represent
-// the enumerated node HuaweiBgp_LspOperationType. An additional value named
-// HuaweiBgp_LspOperationType_UNSET is added to the enumeration which is used as
-// the nil value, indicating that the enumeration was not explicitly set by
-// the program importing the generated structures.
-type E_HuaweiBgp_LspOperationType int64
-
-// IsYANGGoEnum ensures that HuaweiBgp_LspOperationType implements the yang.GoEnum
-// interface. This ensures that HuaweiBgp_LspOperationType can be identified as a
-// mapped type for a YANG enumeration.
-func (E_HuaweiBgp_LspOperationType) IsYANGGoEnum() {}
-
-// ΛMap returns the value lookup map associated with  HuaweiBgp_LspOperationType.
-func (E_HuaweiBgp_LspOperationType) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
-
-// String returns a logging-friendly string for E_HuaweiBgp_LspOperationType.
-func (e E_HuaweiBgp_LspOperationType) String() string {
-	return ygot.EnumLogString(e, int64(e), "E_HuaweiBgp_LspOperationType")
-}
-
-const (
-	// HuaweiBgp_LspOperationType_UNSET corresponds to the value UNSET of HuaweiBgp_LspOperationType
-	HuaweiBgp_LspOperationType_UNSET E_HuaweiBgp_LspOperationType = 0
-	// HuaweiBgp_LspOperationType_pop corresponds to the value pop of HuaweiBgp_LspOperationType
-	HuaweiBgp_LspOperationType_pop E_HuaweiBgp_LspOperationType = 1
-	// HuaweiBgp_LspOperationType_pop_go corresponds to the value pop_go of HuaweiBgp_LspOperationType
-	HuaweiBgp_LspOperationType_pop_go E_HuaweiBgp_LspOperationType = 2
-)
-
 // E_HuaweiBgp_MemoryPriority is a derived int64 type which is used to represent
 // the enumerated node HuaweiBgp_MemoryPriority. An additional value named
 // HuaweiBgp_MemoryPriority_UNSET is added to the enumeration which is used as
@@ -2660,35 +2616,6 @@ const (
 	HuaweiBgp_PathAttrTreatType_normal E_HuaweiBgp_PathAttrTreatType = 1
 )
 
-// E_HuaweiBgp_PeerAttrEnableType is a derived int64 type which is used to represent
-// the enumerated node HuaweiBgp_PeerAttrEnableType. An additional value named
-// HuaweiBgp_PeerAttrEnableType_UNSET is added to the enumeration which is used as
-// the nil value, indicating that the enumeration was not explicitly set by
-// the program importing the generated structures.
-type E_HuaweiBgp_PeerAttrEnableType int64
-
-// IsYANGGoEnum ensures that HuaweiBgp_PeerAttrEnableType implements the yang.GoEnum
-// interface. This ensures that HuaweiBgp_PeerAttrEnableType can be identified as a
-// mapped type for a YANG enumeration.
-func (E_HuaweiBgp_PeerAttrEnableType) IsYANGGoEnum() {}
-
-// ΛMap returns the value lookup map associated with  HuaweiBgp_PeerAttrEnableType.
-func (E_HuaweiBgp_PeerAttrEnableType) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
-
-// String returns a logging-friendly string for E_HuaweiBgp_PeerAttrEnableType.
-func (e E_HuaweiBgp_PeerAttrEnableType) String() string {
-	return ygot.EnumLogString(e, int64(e), "E_HuaweiBgp_PeerAttrEnableType")
-}
-
-const (
-	// HuaweiBgp_PeerAttrEnableType_UNSET corresponds to the value UNSET of HuaweiBgp_PeerAttrEnableType
-	HuaweiBgp_PeerAttrEnableType_UNSET E_HuaweiBgp_PeerAttrEnableType = 0
-	// HuaweiBgp_PeerAttrEnableType_disable corresponds to the value disable of HuaweiBgp_PeerAttrEnableType
-	HuaweiBgp_PeerAttrEnableType_disable E_HuaweiBgp_PeerAttrEnableType = 1
-	// HuaweiBgp_PeerAttrEnableType_enable corresponds to the value enable of HuaweiBgp_PeerAttrEnableType
-	HuaweiBgp_PeerAttrEnableType_enable E_HuaweiBgp_PeerAttrEnableType = 2
-)
-
 // E_HuaweiBgp_PeerCapConfigState is a derived int64 type which is used to represent
 // the enumerated node HuaweiBgp_PeerCapConfigState. An additional value named
 // HuaweiBgp_PeerCapConfigState_UNSET is added to the enumeration which is used as
@@ -2809,6 +2736,10 @@ const (
 	HuaweiBgp_PeerEstablishMode_static E_HuaweiBgp_PeerEstablishMode = 2
 	// HuaweiBgp_PeerEstablishMode_dynamic corresponds to the value dynamic of HuaweiBgp_PeerEstablishMode
 	HuaweiBgp_PeerEstablishMode_dynamic E_HuaweiBgp_PeerEstablishMode = 3
+	// HuaweiBgp_PeerEstablishMode_unnumbered corresponds to the value unnumbered of HuaweiBgp_PeerEstablishMode
+	HuaweiBgp_PeerEstablishMode_unnumbered E_HuaweiBgp_PeerEstablishMode = 4
+	// HuaweiBgp_PeerEstablishMode_dynamic_ipv6 corresponds to the value dynamic_ipv6 of HuaweiBgp_PeerEstablishMode
+	HuaweiBgp_PeerEstablishMode_dynamic_ipv6 E_HuaweiBgp_PeerEstablishMode = 5
 )
 
 // E_HuaweiBgp_PeerMemoryPriority is a derived int64 type which is used to represent
@@ -3058,39 +2989,6 @@ const (
 	HuaweiBgp_SelectDependType_depend_ip E_HuaweiBgp_SelectDependType = 3
 )
 
-// E_HuaweiBgp_SelectDependTypeExt is a derived int64 type which is used to represent
-// the enumerated node HuaweiBgp_SelectDependTypeExt. An additional value named
-// HuaweiBgp_SelectDependTypeExt_UNSET is added to the enumeration which is used as
-// the nil value, indicating that the enumeration was not explicitly set by
-// the program importing the generated structures.
-type E_HuaweiBgp_SelectDependTypeExt int64
-
-// IsYANGGoEnum ensures that HuaweiBgp_SelectDependTypeExt implements the yang.GoEnum
-// interface. This ensures that HuaweiBgp_SelectDependTypeExt can be identified as a
-// mapped type for a YANG enumeration.
-func (E_HuaweiBgp_SelectDependTypeExt) IsYANGGoEnum() {}
-
-// ΛMap returns the value lookup map associated with  HuaweiBgp_SelectDependTypeExt.
-func (E_HuaweiBgp_SelectDependTypeExt) ΛMap() map[string]map[int64]ygot.EnumDefinition {
-	return ΛEnum
-}
-
-// String returns a logging-friendly string for E_HuaweiBgp_SelectDependTypeExt.
-func (e E_HuaweiBgp_SelectDependTypeExt) String() string {
-	return ygot.EnumLogString(e, int64(e), "E_HuaweiBgp_SelectDependTypeExt")
-}
-
-const (
-	// HuaweiBgp_SelectDependTypeExt_UNSET corresponds to the value UNSET of HuaweiBgp_SelectDependTypeExt
-	HuaweiBgp_SelectDependTypeExt_UNSET E_HuaweiBgp_SelectDependTypeExt = 0
-	// HuaweiBgp_SelectDependTypeExt_depend_tunnel corresponds to the value depend_tunnel of HuaweiBgp_SelectDependTypeExt
-	HuaweiBgp_SelectDependTypeExt_depend_tunnel E_HuaweiBgp_SelectDependTypeExt = 2
-	// HuaweiBgp_SelectDependTypeExt_depend_ip corresponds to the value depend_ip of HuaweiBgp_SelectDependTypeExt
-	HuaweiBgp_SelectDependTypeExt_depend_ip E_HuaweiBgp_SelectDependTypeExt = 3
-	// HuaweiBgp_SelectDependTypeExt_depend_none corresponds to the value depend_none of HuaweiBgp_SelectDependTypeExt
-	HuaweiBgp_SelectDependTypeExt_depend_none E_HuaweiBgp_SelectDependTypeExt = 4
-)
-
 // E_HuaweiEthernet_ActionType is a derived int64 type which is used to represent
 // the enumerated node HuaweiEthernet_ActionType. An additional value named
 // HuaweiEthernet_ActionType_UNSET is added to the enumeration which is used as
@@ -3252,10 +3150,10 @@ func (e E_HuaweiEthernet_PolicyType) String() string {
 const (
 	// HuaweiEthernet_PolicyType_UNSET corresponds to the value UNSET of HuaweiEthernet_PolicyType
 	HuaweiEthernet_PolicyType_UNSET E_HuaweiEthernet_PolicyType = 0
-	// HuaweiEthernet_PolicyType_8021p corresponds to the value 8021p of HuaweiEthernet_PolicyType
-	HuaweiEthernet_PolicyType_8021p E_HuaweiEthernet_PolicyType = 2
 	// HuaweiEthernet_PolicyType_dscp corresponds to the value dscp of HuaweiEthernet_PolicyType
-	HuaweiEthernet_PolicyType_dscp E_HuaweiEthernet_PolicyType = 3
+	HuaweiEthernet_PolicyType_dscp E_HuaweiEthernet_PolicyType = 2
+	// HuaweiEthernet_PolicyType_8021p corresponds to the value 8021p of HuaweiEthernet_PolicyType
+	HuaweiEthernet_PolicyType_8021p E_HuaweiEthernet_PolicyType = 3
 	// HuaweiEthernet_PolicyType_pppoe corresponds to the value pppoe of HuaweiEthernet_PolicyType
 	HuaweiEthernet_PolicyType_pppoe E_HuaweiEthernet_PolicyType = 4
 	// HuaweiEthernet_PolicyType_default corresponds to the value default of HuaweiEthernet_PolicyType
@@ -3633,8 +3531,6 @@ const (
 	HuaweiIfm_ErrorDownType_fabric_link_failure E_HuaweiIfm_ErrorDownType = 88
 	// HuaweiIfm_ErrorDownType_m_lag_consistency_check corresponds to the value m_lag_consistency_check of HuaweiIfm_ErrorDownType
 	HuaweiIfm_ErrorDownType_m_lag_consistency_check E_HuaweiIfm_ErrorDownType = 89
-	// HuaweiIfm_ErrorDownType_pfc_deadlock corresponds to the value pfc_deadlock of HuaweiIfm_ErrorDownType
-	HuaweiIfm_ErrorDownType_pfc_deadlock E_HuaweiIfm_ErrorDownType = 90
 )
 
 // E_HuaweiIfm_LinkProtocol is a derived int64 type which is used to represent
@@ -3707,35 +3603,6 @@ const (
 	HuaweiIfm_LinkQualityGradeType_middle E_HuaweiIfm_LinkQualityGradeType = 3
 	// HuaweiIfm_LinkQualityGradeType_low corresponds to the value low of HuaweiIfm_LinkQualityGradeType
 	HuaweiIfm_LinkQualityGradeType_low E_HuaweiIfm_LinkQualityGradeType = 5
-)
-
-// E_HuaweiIfm_NetworkLayerState is a derived int64 type which is used to represent
-// the enumerated node HuaweiIfm_NetworkLayerState. An additional value named
-// HuaweiIfm_NetworkLayerState_UNSET is added to the enumeration which is used as
-// the nil value, indicating that the enumeration was not explicitly set by
-// the program importing the generated structures.
-type E_HuaweiIfm_NetworkLayerState int64
-
-// IsYANGGoEnum ensures that HuaweiIfm_NetworkLayerState implements the yang.GoEnum
-// interface. This ensures that HuaweiIfm_NetworkLayerState can be identified as a
-// mapped type for a YANG enumeration.
-func (E_HuaweiIfm_NetworkLayerState) IsYANGGoEnum() {}
-
-// ΛMap returns the value lookup map associated with  HuaweiIfm_NetworkLayerState.
-func (E_HuaweiIfm_NetworkLayerState) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
-
-// String returns a logging-friendly string for E_HuaweiIfm_NetworkLayerState.
-func (e E_HuaweiIfm_NetworkLayerState) String() string {
-	return ygot.EnumLogString(e, int64(e), "E_HuaweiIfm_NetworkLayerState")
-}
-
-const (
-	// HuaweiIfm_NetworkLayerState_UNSET corresponds to the value UNSET of HuaweiIfm_NetworkLayerState
-	HuaweiIfm_NetworkLayerState_UNSET E_HuaweiIfm_NetworkLayerState = 0
-	// HuaweiIfm_NetworkLayerState_ipv4_ipv6_up corresponds to the value ipv4_ipv6_up of HuaweiIfm_NetworkLayerState
-	HuaweiIfm_NetworkLayerState_ipv4_ipv6_up E_HuaweiIfm_NetworkLayerState = 1
-	// HuaweiIfm_NetworkLayerState_ipv4_ipv6_down corresponds to the value ipv4_ipv6_down of HuaweiIfm_NetworkLayerState
-	HuaweiIfm_NetworkLayerState_ipv4_ipv6_down E_HuaweiIfm_NetworkLayerState = 196609
 )
 
 // E_HuaweiIfm_PortStatus is a derived int64 type which is used to represent
@@ -3940,12 +3807,8 @@ const (
 	HuaweiIfm_PortType_400GE E_HuaweiIfm_PortType = 109
 	// HuaweiIfm_PortType_HPGE corresponds to the value HPGE of HuaweiIfm_PortType
 	HuaweiIfm_PortType_HPGE E_HuaweiIfm_PortType = 115
-	// HuaweiIfm_PortType_FlexE_400G corresponds to the value FlexE_400G of HuaweiIfm_PortType
-	HuaweiIfm_PortType_FlexE_400G E_HuaweiIfm_PortType = 116
 	// HuaweiIfm_PortType_Virtual_if corresponds to the value Virtual_if of HuaweiIfm_PortType
 	HuaweiIfm_PortType_Virtual_if E_HuaweiIfm_PortType = 117
-	// HuaweiIfm_PortType_Cellular corresponds to the value Cellular of HuaweiIfm_PortType
-	HuaweiIfm_PortType_Cellular E_HuaweiIfm_PortType = 118
 )
 
 // E_HuaweiIfm_RouterType is a derived int64 type which is used to represent
@@ -4063,237 +3926,6 @@ const (
 	HuaweiIfm_StatisticMode_interface_based E_HuaweiIfm_StatisticMode = 2
 	// HuaweiIfm_StatisticMode_vlan_group_based corresponds to the value vlan_group_based of HuaweiIfm_StatisticMode
 	HuaweiIfm_StatisticMode_vlan_group_based E_HuaweiIfm_StatisticMode = 3
-)
-
-// E_HuaweiIp_Ipv4AddressConfigType is a derived int64 type which is used to represent
-// the enumerated node HuaweiIp_Ipv4AddressConfigType. An additional value named
-// HuaweiIp_Ipv4AddressConfigType_UNSET is added to the enumeration which is used as
-// the nil value, indicating that the enumeration was not explicitly set by
-// the program importing the generated structures.
-type E_HuaweiIp_Ipv4AddressConfigType int64
-
-// IsYANGGoEnum ensures that HuaweiIp_Ipv4AddressConfigType implements the yang.GoEnum
-// interface. This ensures that HuaweiIp_Ipv4AddressConfigType can be identified as a
-// mapped type for a YANG enumeration.
-func (E_HuaweiIp_Ipv4AddressConfigType) IsYANGGoEnum() {}
-
-// ΛMap returns the value lookup map associated with  HuaweiIp_Ipv4AddressConfigType.
-func (E_HuaweiIp_Ipv4AddressConfigType) ΛMap() map[string]map[int64]ygot.EnumDefinition {
-	return ΛEnum
-}
-
-// String returns a logging-friendly string for E_HuaweiIp_Ipv4AddressConfigType.
-func (e E_HuaweiIp_Ipv4AddressConfigType) String() string {
-	return ygot.EnumLogString(e, int64(e), "E_HuaweiIp_Ipv4AddressConfigType")
-}
-
-const (
-	// HuaweiIp_Ipv4AddressConfigType_UNSET corresponds to the value UNSET of HuaweiIp_Ipv4AddressConfigType
-	HuaweiIp_Ipv4AddressConfigType_UNSET E_HuaweiIp_Ipv4AddressConfigType = 0
-	// HuaweiIp_Ipv4AddressConfigType_main corresponds to the value main of HuaweiIp_Ipv4AddressConfigType
-	HuaweiIp_Ipv4AddressConfigType_main E_HuaweiIp_Ipv4AddressConfigType = 2
-	// HuaweiIp_Ipv4AddressConfigType_sub corresponds to the value sub of HuaweiIp_Ipv4AddressConfigType
-	HuaweiIp_Ipv4AddressConfigType_sub E_HuaweiIp_Ipv4AddressConfigType = 33
-)
-
-// E_HuaweiIp_Ipv4AddressStateType is a derived int64 type which is used to represent
-// the enumerated node HuaweiIp_Ipv4AddressStateType. An additional value named
-// HuaweiIp_Ipv4AddressStateType_UNSET is added to the enumeration which is used as
-// the nil value, indicating that the enumeration was not explicitly set by
-// the program importing the generated structures.
-type E_HuaweiIp_Ipv4AddressStateType int64
-
-// IsYANGGoEnum ensures that HuaweiIp_Ipv4AddressStateType implements the yang.GoEnum
-// interface. This ensures that HuaweiIp_Ipv4AddressStateType can be identified as a
-// mapped type for a YANG enumeration.
-func (E_HuaweiIp_Ipv4AddressStateType) IsYANGGoEnum() {}
-
-// ΛMap returns the value lookup map associated with  HuaweiIp_Ipv4AddressStateType.
-func (E_HuaweiIp_Ipv4AddressStateType) ΛMap() map[string]map[int64]ygot.EnumDefinition {
-	return ΛEnum
-}
-
-// String returns a logging-friendly string for E_HuaweiIp_Ipv4AddressStateType.
-func (e E_HuaweiIp_Ipv4AddressStateType) String() string {
-	return ygot.EnumLogString(e, int64(e), "E_HuaweiIp_Ipv4AddressStateType")
-}
-
-const (
-	// HuaweiIp_Ipv4AddressStateType_UNSET corresponds to the value UNSET of HuaweiIp_Ipv4AddressStateType
-	HuaweiIp_Ipv4AddressStateType_UNSET E_HuaweiIp_Ipv4AddressStateType = 0
-	// HuaweiIp_Ipv4AddressStateType_main corresponds to the value main of HuaweiIp_Ipv4AddressStateType
-	HuaweiIp_Ipv4AddressStateType_main E_HuaweiIp_Ipv4AddressStateType = 2
-	// HuaweiIp_Ipv4AddressStateType_unnumber corresponds to the value unnumber of HuaweiIp_Ipv4AddressStateType
-	HuaweiIp_Ipv4AddressStateType_unnumber E_HuaweiIp_Ipv4AddressStateType = 3
-	// HuaweiIp_Ipv4AddressStateType_neg corresponds to the value neg of HuaweiIp_Ipv4AddressStateType
-	HuaweiIp_Ipv4AddressStateType_neg E_HuaweiIp_Ipv4AddressStateType = 5
-	// HuaweiIp_Ipv4AddressStateType_sub corresponds to the value sub of HuaweiIp_Ipv4AddressStateType
-	HuaweiIp_Ipv4AddressStateType_sub E_HuaweiIp_Ipv4AddressStateType = 33
-	// HuaweiIp_Ipv4AddressStateType_dhcp corresponds to the value dhcp of HuaweiIp_Ipv4AddressStateType
-	HuaweiIp_Ipv4AddressStateType_dhcp E_HuaweiIp_Ipv4AddressStateType = 257
-)
-
-// E_HuaweiIp_Ipv6AddressAlgorithmType is a derived int64 type which is used to represent
-// the enumerated node HuaweiIp_Ipv6AddressAlgorithmType. An additional value named
-// HuaweiIp_Ipv6AddressAlgorithmType_UNSET is added to the enumeration which is used as
-// the nil value, indicating that the enumeration was not explicitly set by
-// the program importing the generated structures.
-type E_HuaweiIp_Ipv6AddressAlgorithmType int64
-
-// IsYANGGoEnum ensures that HuaweiIp_Ipv6AddressAlgorithmType implements the yang.GoEnum
-// interface. This ensures that HuaweiIp_Ipv6AddressAlgorithmType can be identified as a
-// mapped type for a YANG enumeration.
-func (E_HuaweiIp_Ipv6AddressAlgorithmType) IsYANGGoEnum() {}
-
-// ΛMap returns the value lookup map associated with  HuaweiIp_Ipv6AddressAlgorithmType.
-func (E_HuaweiIp_Ipv6AddressAlgorithmType) ΛMap() map[string]map[int64]ygot.EnumDefinition {
-	return ΛEnum
-}
-
-// String returns a logging-friendly string for E_HuaweiIp_Ipv6AddressAlgorithmType.
-func (e E_HuaweiIp_Ipv6AddressAlgorithmType) String() string {
-	return ygot.EnumLogString(e, int64(e), "E_HuaweiIp_Ipv6AddressAlgorithmType")
-}
-
-const (
-	// HuaweiIp_Ipv6AddressAlgorithmType_UNSET corresponds to the value UNSET of HuaweiIp_Ipv6AddressAlgorithmType
-	HuaweiIp_Ipv6AddressAlgorithmType_UNSET E_HuaweiIp_Ipv6AddressAlgorithmType = 0
-	// HuaweiIp_Ipv6AddressAlgorithmType_none corresponds to the value none of HuaweiIp_Ipv6AddressAlgorithmType
-	HuaweiIp_Ipv6AddressAlgorithmType_none E_HuaweiIp_Ipv6AddressAlgorithmType = 1
-	// HuaweiIp_Ipv6AddressAlgorithmType_cga corresponds to the value cga of HuaweiIp_Ipv6AddressAlgorithmType
-	HuaweiIp_Ipv6AddressAlgorithmType_cga E_HuaweiIp_Ipv6AddressAlgorithmType = 2
-	// HuaweiIp_Ipv6AddressAlgorithmType_eui64 corresponds to the value eui64 of HuaweiIp_Ipv6AddressAlgorithmType
-	HuaweiIp_Ipv6AddressAlgorithmType_eui64 E_HuaweiIp_Ipv6AddressAlgorithmType = 3
-)
-
-// E_HuaweiIp_Ipv6AddressConfigType is a derived int64 type which is used to represent
-// the enumerated node HuaweiIp_Ipv6AddressConfigType. An additional value named
-// HuaweiIp_Ipv6AddressConfigType_UNSET is added to the enumeration which is used as
-// the nil value, indicating that the enumeration was not explicitly set by
-// the program importing the generated structures.
-type E_HuaweiIp_Ipv6AddressConfigType int64
-
-// IsYANGGoEnum ensures that HuaweiIp_Ipv6AddressConfigType implements the yang.GoEnum
-// interface. This ensures that HuaweiIp_Ipv6AddressConfigType can be identified as a
-// mapped type for a YANG enumeration.
-func (E_HuaweiIp_Ipv6AddressConfigType) IsYANGGoEnum() {}
-
-// ΛMap returns the value lookup map associated with  HuaweiIp_Ipv6AddressConfigType.
-func (E_HuaweiIp_Ipv6AddressConfigType) ΛMap() map[string]map[int64]ygot.EnumDefinition {
-	return ΛEnum
-}
-
-// String returns a logging-friendly string for E_HuaweiIp_Ipv6AddressConfigType.
-func (e E_HuaweiIp_Ipv6AddressConfigType) String() string {
-	return ygot.EnumLogString(e, int64(e), "E_HuaweiIp_Ipv6AddressConfigType")
-}
-
-const (
-	// HuaweiIp_Ipv6AddressConfigType_UNSET corresponds to the value UNSET of HuaweiIp_Ipv6AddressConfigType
-	HuaweiIp_Ipv6AddressConfigType_UNSET E_HuaweiIp_Ipv6AddressConfigType = 0
-	// HuaweiIp_Ipv6AddressConfigType_global corresponds to the value global of HuaweiIp_Ipv6AddressConfigType
-	HuaweiIp_Ipv6AddressConfigType_global E_HuaweiIp_Ipv6AddressConfigType = 2
-	// HuaweiIp_Ipv6AddressConfigType_link_local corresponds to the value link_local of HuaweiIp_Ipv6AddressConfigType
-	HuaweiIp_Ipv6AddressConfigType_link_local E_HuaweiIp_Ipv6AddressConfigType = 3
-	// HuaweiIp_Ipv6AddressConfigType_anycast corresponds to the value anycast of HuaweiIp_Ipv6AddressConfigType
-	HuaweiIp_Ipv6AddressConfigType_anycast E_HuaweiIp_Ipv6AddressConfigType = 7
-)
-
-// E_HuaweiIp_Ipv6AddressStateType is a derived int64 type which is used to represent
-// the enumerated node HuaweiIp_Ipv6AddressStateType. An additional value named
-// HuaweiIp_Ipv6AddressStateType_UNSET is added to the enumeration which is used as
-// the nil value, indicating that the enumeration was not explicitly set by
-// the program importing the generated structures.
-type E_HuaweiIp_Ipv6AddressStateType int64
-
-// IsYANGGoEnum ensures that HuaweiIp_Ipv6AddressStateType implements the yang.GoEnum
-// interface. This ensures that HuaweiIp_Ipv6AddressStateType can be identified as a
-// mapped type for a YANG enumeration.
-func (E_HuaweiIp_Ipv6AddressStateType) IsYANGGoEnum() {}
-
-// ΛMap returns the value lookup map associated with  HuaweiIp_Ipv6AddressStateType.
-func (E_HuaweiIp_Ipv6AddressStateType) ΛMap() map[string]map[int64]ygot.EnumDefinition {
-	return ΛEnum
-}
-
-// String returns a logging-friendly string for E_HuaweiIp_Ipv6AddressStateType.
-func (e E_HuaweiIp_Ipv6AddressStateType) String() string {
-	return ygot.EnumLogString(e, int64(e), "E_HuaweiIp_Ipv6AddressStateType")
-}
-
-const (
-	// HuaweiIp_Ipv6AddressStateType_UNSET corresponds to the value UNSET of HuaweiIp_Ipv6AddressStateType
-	HuaweiIp_Ipv6AddressStateType_UNSET E_HuaweiIp_Ipv6AddressStateType = 0
-	// HuaweiIp_Ipv6AddressStateType_global corresponds to the value global of HuaweiIp_Ipv6AddressStateType
-	HuaweiIp_Ipv6AddressStateType_global E_HuaweiIp_Ipv6AddressStateType = 2
-	// HuaweiIp_Ipv6AddressStateType_link_local corresponds to the value link_local of HuaweiIp_Ipv6AddressStateType
-	HuaweiIp_Ipv6AddressStateType_link_local E_HuaweiIp_Ipv6AddressStateType = 3
-	// HuaweiIp_Ipv6AddressStateType_auto_link_local corresponds to the value auto_link_local of HuaweiIp_Ipv6AddressStateType
-	HuaweiIp_Ipv6AddressStateType_auto_link_local E_HuaweiIp_Ipv6AddressStateType = 4
-	// HuaweiIp_Ipv6AddressStateType_anycast corresponds to the value anycast of HuaweiIp_Ipv6AddressStateType
-	HuaweiIp_Ipv6AddressStateType_anycast E_HuaweiIp_Ipv6AddressStateType = 7
-)
-
-// E_HuaweiIp_Ipv6StatusType is a derived int64 type which is used to represent
-// the enumerated node HuaweiIp_Ipv6StatusType. An additional value named
-// HuaweiIp_Ipv6StatusType_UNSET is added to the enumeration which is used as
-// the nil value, indicating that the enumeration was not explicitly set by
-// the program importing the generated structures.
-type E_HuaweiIp_Ipv6StatusType int64
-
-// IsYANGGoEnum ensures that HuaweiIp_Ipv6StatusType implements the yang.GoEnum
-// interface. This ensures that HuaweiIp_Ipv6StatusType can be identified as a
-// mapped type for a YANG enumeration.
-func (E_HuaweiIp_Ipv6StatusType) IsYANGGoEnum() {}
-
-// ΛMap returns the value lookup map associated with  HuaweiIp_Ipv6StatusType.
-func (E_HuaweiIp_Ipv6StatusType) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
-
-// String returns a logging-friendly string for E_HuaweiIp_Ipv6StatusType.
-func (e E_HuaweiIp_Ipv6StatusType) String() string {
-	return ygot.EnumLogString(e, int64(e), "E_HuaweiIp_Ipv6StatusType")
-}
-
-const (
-	// HuaweiIp_Ipv6StatusType_UNSET corresponds to the value UNSET of HuaweiIp_Ipv6StatusType
-	HuaweiIp_Ipv6StatusType_UNSET E_HuaweiIp_Ipv6StatusType = 0
-	// HuaweiIp_Ipv6StatusType_preferred corresponds to the value preferred of HuaweiIp_Ipv6StatusType
-	HuaweiIp_Ipv6StatusType_preferred E_HuaweiIp_Ipv6StatusType = 2
-	// HuaweiIp_Ipv6StatusType_inaccessible corresponds to the value inaccessible of HuaweiIp_Ipv6StatusType
-	HuaweiIp_Ipv6StatusType_inaccessible E_HuaweiIp_Ipv6StatusType = 5
-	// HuaweiIp_Ipv6StatusType_unknown corresponds to the value unknown of HuaweiIp_Ipv6StatusType
-	HuaweiIp_Ipv6StatusType_unknown E_HuaweiIp_Ipv6StatusType = 6
-	// HuaweiIp_Ipv6StatusType_tentative corresponds to the value tentative of HuaweiIp_Ipv6StatusType
-	HuaweiIp_Ipv6StatusType_tentative E_HuaweiIp_Ipv6StatusType = 7
-	// HuaweiIp_Ipv6StatusType_duplicate corresponds to the value duplicate of HuaweiIp_Ipv6StatusType
-	HuaweiIp_Ipv6StatusType_duplicate E_HuaweiIp_Ipv6StatusType = 8
-)
-
-// E_HuaweiIp_NegotiationType is a derived int64 type which is used to represent
-// the enumerated node HuaweiIp_NegotiationType. An additional value named
-// HuaweiIp_NegotiationType_UNSET is added to the enumeration which is used as
-// the nil value, indicating that the enumeration was not explicitly set by
-// the program importing the generated structures.
-type E_HuaweiIp_NegotiationType int64
-
-// IsYANGGoEnum ensures that HuaweiIp_NegotiationType implements the yang.GoEnum
-// interface. This ensures that HuaweiIp_NegotiationType can be identified as a
-// mapped type for a YANG enumeration.
-func (E_HuaweiIp_NegotiationType) IsYANGGoEnum() {}
-
-// ΛMap returns the value lookup map associated with  HuaweiIp_NegotiationType.
-func (E_HuaweiIp_NegotiationType) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
-
-// String returns a logging-friendly string for E_HuaweiIp_NegotiationType.
-func (e E_HuaweiIp_NegotiationType) String() string {
-	return ygot.EnumLogString(e, int64(e), "E_HuaweiIp_NegotiationType")
-}
-
-const (
-	// HuaweiIp_NegotiationType_UNSET corresponds to the value UNSET of HuaweiIp_NegotiationType
-	HuaweiIp_NegotiationType_UNSET E_HuaweiIp_NegotiationType = 0
-	// HuaweiIp_NegotiationType_ppp_negotiate corresponds to the value ppp_negotiate of HuaweiIp_NegotiationType
-	HuaweiIp_NegotiationType_ppp_negotiate E_HuaweiIp_NegotiationType = 1
 )
 
 // E_HuaweiL3Vpn_AfType is a derived int64 type which is used to represent
@@ -4470,12 +4102,8 @@ const (
 	HuaweiL3Vpn_TunnelType_srv6_te_policy E_HuaweiL3Vpn_TunnelType = 53
 	// HuaweiL3Vpn_TunnelType_srv6_te_policy_group corresponds to the value srv6_te_policy_group of HuaweiL3Vpn_TunnelType
 	HuaweiL3Vpn_TunnelType_srv6_te_policy_group E_HuaweiL3Vpn_TunnelType = 56
-	// HuaweiL3Vpn_TunnelType_sd_wan corresponds to the value sd_wan of HuaweiL3Vpn_TunnelType
-	HuaweiL3Vpn_TunnelType_sd_wan E_HuaweiL3Vpn_TunnelType = 57
 	// HuaweiL3Vpn_TunnelType_p2mp_gre corresponds to the value p2mp_gre of HuaweiL3Vpn_TunnelType
 	HuaweiL3Vpn_TunnelType_p2mp_gre E_HuaweiL3Vpn_TunnelType = 65
-	// HuaweiL3Vpn_TunnelType_flex_algo_lsp corresponds to the value flex_algo_lsp of HuaweiL3Vpn_TunnelType
-	HuaweiL3Vpn_TunnelType_flex_algo_lsp E_HuaweiL3Vpn_TunnelType = 148
 	// HuaweiL3Vpn_TunnelType_ldp_lsp corresponds to the value ldp_lsp of HuaweiL3Vpn_TunnelType
 	HuaweiL3Vpn_TunnelType_ldp_lsp E_HuaweiL3Vpn_TunnelType = 256
 )
@@ -4600,38 +4228,6 @@ const (
 	HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProcess_Afs_Af_Ipv4Unicast_AdvertiseRouteToEvpns_AdvertiseRouteToEvpn_Protocol_UNSET E_HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProcess_Afs_Af_Ipv4Unicast_AdvertiseRouteToEvpns_AdvertiseRouteToEvpn_Protocol = 0
 	// HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProcess_Afs_Af_Ipv4Unicast_AdvertiseRouteToEvpns_AdvertiseRouteToEvpn_Protocol_all corresponds to the value all of HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProcess_Afs_Af_Ipv4Unicast_AdvertiseRouteToEvpns_AdvertiseRouteToEvpn_Protocol
 	HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProcess_Afs_Af_Ipv4Unicast_AdvertiseRouteToEvpns_AdvertiseRouteToEvpn_Protocol_all E_HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProcess_Afs_Af_Ipv4Unicast_AdvertiseRouteToEvpns_AdvertiseRouteToEvpn_Protocol = 1
-)
-
-// E_HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProcess_Peers_Peer_BfdParameter_ValidTtlHopsOperation is a derived int64 type which is used to represent
-// the enumerated node HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProcess_Peers_Peer_BfdParameter_ValidTtlHopsOperation. An additional value named
-// HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProcess_Peers_Peer_BfdParameter_ValidTtlHopsOperation_UNSET is added to the enumeration which is used as
-// the nil value, indicating that the enumeration was not explicitly set by
-// the program importing the generated structures.
-type E_HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProcess_Peers_Peer_BfdParameter_ValidTtlHopsOperation int64
-
-// IsYANGGoEnum ensures that HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProcess_Peers_Peer_BfdParameter_ValidTtlHopsOperation implements the yang.GoEnum
-// interface. This ensures that HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProcess_Peers_Peer_BfdParameter_ValidTtlHopsOperation can be identified as a
-// mapped type for a YANG enumeration.
-func (E_HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProcess_Peers_Peer_BfdParameter_ValidTtlHopsOperation) IsYANGGoEnum() {
-}
-
-// ΛMap returns the value lookup map associated with  HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProcess_Peers_Peer_BfdParameter_ValidTtlHopsOperation.
-func (E_HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProcess_Peers_Peer_BfdParameter_ValidTtlHopsOperation) ΛMap() map[string]map[int64]ygot.EnumDefinition {
-	return ΛEnum
-}
-
-// String returns a logging-friendly string for E_HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProcess_Peers_Peer_BfdParameter_ValidTtlHopsOperation.
-func (e E_HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProcess_Peers_Peer_BfdParameter_ValidTtlHopsOperation) String() string {
-	return ygot.EnumLogString(e, int64(e), "E_HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProcess_Peers_Peer_BfdParameter_ValidTtlHopsOperation")
-}
-
-const (
-	// HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProcess_Peers_Peer_BfdParameter_ValidTtlHopsOperation_UNSET corresponds to the value UNSET of HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProcess_Peers_Peer_BfdParameter_ValidTtlHopsOperation
-	HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProcess_Peers_Peer_BfdParameter_ValidTtlHopsOperation_UNSET E_HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProcess_Peers_Peer_BfdParameter_ValidTtlHopsOperation = 0
-	// HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProcess_Peers_Peer_BfdParameter_ValidTtlHopsOperation_enable corresponds to the value enable of HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProcess_Peers_Peer_BfdParameter_ValidTtlHopsOperation
-	HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProcess_Peers_Peer_BfdParameter_ValidTtlHopsOperation_enable E_HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProcess_Peers_Peer_BfdParameter_ValidTtlHopsOperation = 2
-	// HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProcess_Peers_Peer_BfdParameter_ValidTtlHopsOperation_disable corresponds to the value disable of HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProcess_Peers_Peer_BfdParameter_ValidTtlHopsOperation
-	HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProcess_Peers_Peer_BfdParameter_ValidTtlHopsOperation_disable E_HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProcess_Peers_Peer_BfdParameter_ValidTtlHopsOperation = 3
 )
 
 // E_HuaweiRoutingPolicy_CommunityFilterType is a derived int64 type which is used to represent
@@ -4995,38 +4591,6 @@ const (
 	HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Actions_ApplyCost_Operation_inherit E_HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Actions_ApplyCost_Operation = 5
 )
 
-// E_HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Actions_ApplyExtCommunityPriorityColor_Operation is a derived int64 type which is used to represent
-// the enumerated node HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Actions_ApplyExtCommunityPriorityColor_Operation. An additional value named
-// HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Actions_ApplyExtCommunityPriorityColor_Operation_UNSET is added to the enumeration which is used as
-// the nil value, indicating that the enumeration was not explicitly set by
-// the program importing the generated structures.
-type E_HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Actions_ApplyExtCommunityPriorityColor_Operation int64
-
-// IsYANGGoEnum ensures that HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Actions_ApplyExtCommunityPriorityColor_Operation implements the yang.GoEnum
-// interface. This ensures that HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Actions_ApplyExtCommunityPriorityColor_Operation can be identified as a
-// mapped type for a YANG enumeration.
-func (E_HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Actions_ApplyExtCommunityPriorityColor_Operation) IsYANGGoEnum() {
-}
-
-// ΛMap returns the value lookup map associated with  HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Actions_ApplyExtCommunityPriorityColor_Operation.
-func (E_HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Actions_ApplyExtCommunityPriorityColor_Operation) ΛMap() map[string]map[int64]ygot.EnumDefinition {
-	return ΛEnum
-}
-
-// String returns a logging-friendly string for E_HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Actions_ApplyExtCommunityPriorityColor_Operation.
-func (e E_HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Actions_ApplyExtCommunityPriorityColor_Operation) String() string {
-	return ygot.EnumLogString(e, int64(e), "E_HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Actions_ApplyExtCommunityPriorityColor_Operation")
-}
-
-const (
-	// HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Actions_ApplyExtCommunityPriorityColor_Operation_UNSET corresponds to the value UNSET of HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Actions_ApplyExtCommunityPriorityColor_Operation
-	HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Actions_ApplyExtCommunityPriorityColor_Operation_UNSET E_HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Actions_ApplyExtCommunityPriorityColor_Operation = 0
-	// HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Actions_ApplyExtCommunityPriorityColor_Operation_replace corresponds to the value replace of HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Actions_ApplyExtCommunityPriorityColor_Operation
-	HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Actions_ApplyExtCommunityPriorityColor_Operation_replace E_HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Actions_ApplyExtCommunityPriorityColor_Operation = 2
-	// HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Actions_ApplyExtCommunityPriorityColor_Operation_add corresponds to the value add of HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Actions_ApplyExtCommunityPriorityColor_Operation
-	HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Actions_ApplyExtCommunityPriorityColor_Operation_add E_HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Actions_ApplyExtCommunityPriorityColor_Operation = 3
-)
-
 // E_HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Actions_ApplyExtCommunitySoo_Operation is a derived int64 type which is used to represent
 // the enumerated node HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Actions_ApplyExtCommunitySoo_Operation. An additional value named
 // HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Actions_ApplyExtCommunitySoo_Operation_UNSET is added to the enumeration which is used as
@@ -5083,6 +4647,8 @@ func (e E_HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_N
 const (
 	// HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Actions_ApplyExtCommunity_Operation_UNSET corresponds to the value UNSET of HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Actions_ApplyExtCommunity_Operation
 	HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Actions_ApplyExtCommunity_Operation_UNSET E_HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Actions_ApplyExtCommunity_Operation = 0
+	// HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Actions_ApplyExtCommunity_Operation_delete corresponds to the value delete of HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Actions_ApplyExtCommunity_Operation
+	HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Actions_ApplyExtCommunity_Operation_delete E_HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Actions_ApplyExtCommunity_Operation = 1
 	// HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Actions_ApplyExtCommunity_Operation_replace corresponds to the value replace of HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Actions_ApplyExtCommunity_Operation
 	HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Actions_ApplyExtCommunity_Operation_replace E_HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Actions_ApplyExtCommunity_Operation = 2
 	// HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Actions_ApplyExtCommunity_Operation_add corresponds to the value add of HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Actions_ApplyExtCommunity_Operation
@@ -5361,6 +4927,40 @@ const (
 	HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Conditions_MatchL3VniFilter_MatchType_match_special E_HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Conditions_MatchL3VniFilter_MatchType = 1
 	// HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Conditions_MatchL3VniFilter_MatchType_match_all corresponds to the value match_all of HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Conditions_MatchL3VniFilter_MatchType
 	HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Conditions_MatchL3VniFilter_MatchType_match_all E_HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Conditions_MatchL3VniFilter_MatchType = 2
+)
+
+// E_HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Conditions_MatchRpki_OriginAsValidation is a derived int64 type which is used to represent
+// the enumerated node HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Conditions_MatchRpki_OriginAsValidation. An additional value named
+// HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Conditions_MatchRpki_OriginAsValidation_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Conditions_MatchRpki_OriginAsValidation int64
+
+// IsYANGGoEnum ensures that HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Conditions_MatchRpki_OriginAsValidation implements the yang.GoEnum
+// interface. This ensures that HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Conditions_MatchRpki_OriginAsValidation can be identified as a
+// mapped type for a YANG enumeration.
+func (E_HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Conditions_MatchRpki_OriginAsValidation) IsYANGGoEnum() {
+}
+
+// ΛMap returns the value lookup map associated with  HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Conditions_MatchRpki_OriginAsValidation.
+func (E_HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Conditions_MatchRpki_OriginAsValidation) ΛMap() map[string]map[int64]ygot.EnumDefinition {
+	return ΛEnum
+}
+
+// String returns a logging-friendly string for E_HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Conditions_MatchRpki_OriginAsValidation.
+func (e E_HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Conditions_MatchRpki_OriginAsValidation) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Conditions_MatchRpki_OriginAsValidation")
+}
+
+const (
+	// HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Conditions_MatchRpki_OriginAsValidation_UNSET corresponds to the value UNSET of HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Conditions_MatchRpki_OriginAsValidation
+	HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Conditions_MatchRpki_OriginAsValidation_UNSET E_HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Conditions_MatchRpki_OriginAsValidation = 0
+	// HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Conditions_MatchRpki_OriginAsValidation_valid corresponds to the value valid of HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Conditions_MatchRpki_OriginAsValidation
+	HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Conditions_MatchRpki_OriginAsValidation_valid E_HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Conditions_MatchRpki_OriginAsValidation = 2
+	// HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Conditions_MatchRpki_OriginAsValidation_invalid corresponds to the value invalid of HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Conditions_MatchRpki_OriginAsValidation
+	HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Conditions_MatchRpki_OriginAsValidation_invalid E_HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Conditions_MatchRpki_OriginAsValidation = 3
+	// HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Conditions_MatchRpki_OriginAsValidation_not_found corresponds to the value not_found of HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Conditions_MatchRpki_OriginAsValidation
+	HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Conditions_MatchRpki_OriginAsValidation_not_found E_HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Conditions_MatchRpki_OriginAsValidation = 4
 )
 
 // E_HuaweiRoutingPolicy_WellKnownCommunityType_Enum is a derived int64 type which is used to represent
@@ -5958,78 +5558,10 @@ const (
 	HuaweiRouting_TunnelType_srv6_te_policy E_HuaweiRouting_TunnelType = 53
 	// HuaweiRouting_TunnelType_srv6_te_policy_group corresponds to the value srv6_te_policy_group of HuaweiRouting_TunnelType
 	HuaweiRouting_TunnelType_srv6_te_policy_group E_HuaweiRouting_TunnelType = 56
-	// HuaweiRouting_TunnelType_sd_wan corresponds to the value sd_wan of HuaweiRouting_TunnelType
-	HuaweiRouting_TunnelType_sd_wan E_HuaweiRouting_TunnelType = 57
 	// HuaweiRouting_TunnelType_p2mp_gre corresponds to the value p2mp_gre of HuaweiRouting_TunnelType
 	HuaweiRouting_TunnelType_p2mp_gre E_HuaweiRouting_TunnelType = 65
-	// HuaweiRouting_TunnelType_flex_algo_lsp corresponds to the value flex_algo_lsp of HuaweiRouting_TunnelType
-	HuaweiRouting_TunnelType_flex_algo_lsp E_HuaweiRouting_TunnelType = 148
 	// HuaweiRouting_TunnelType_ldp_lsp corresponds to the value ldp_lsp of HuaweiRouting_TunnelType
 	HuaweiRouting_TunnelType_ldp_lsp E_HuaweiRouting_TunnelType = 256
-)
-
-// E_HuaweiSystem_RiskLevelType is a derived int64 type which is used to represent
-// the enumerated node HuaweiSystem_RiskLevelType. An additional value named
-// HuaweiSystem_RiskLevelType_UNSET is added to the enumeration which is used as
-// the nil value, indicating that the enumeration was not explicitly set by
-// the program importing the generated structures.
-type E_HuaweiSystem_RiskLevelType int64
-
-// IsYANGGoEnum ensures that HuaweiSystem_RiskLevelType implements the yang.GoEnum
-// interface. This ensures that HuaweiSystem_RiskLevelType can be identified as a
-// mapped type for a YANG enumeration.
-func (E_HuaweiSystem_RiskLevelType) IsYANGGoEnum() {}
-
-// ΛMap returns the value lookup map associated with  HuaweiSystem_RiskLevelType.
-func (E_HuaweiSystem_RiskLevelType) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
-
-// String returns a logging-friendly string for E_HuaweiSystem_RiskLevelType.
-func (e E_HuaweiSystem_RiskLevelType) String() string {
-	return ygot.EnumLogString(e, int64(e), "E_HuaweiSystem_RiskLevelType")
-}
-
-const (
-	// HuaweiSystem_RiskLevelType_UNSET corresponds to the value UNSET of HuaweiSystem_RiskLevelType
-	HuaweiSystem_RiskLevelType_UNSET E_HuaweiSystem_RiskLevelType = 0
-	// HuaweiSystem_RiskLevelType_high corresponds to the value high of HuaweiSystem_RiskLevelType
-	HuaweiSystem_RiskLevelType_high E_HuaweiSystem_RiskLevelType = 1
-	// HuaweiSystem_RiskLevelType_medium corresponds to the value medium of HuaweiSystem_RiskLevelType
-	HuaweiSystem_RiskLevelType_medium E_HuaweiSystem_RiskLevelType = 2
-	// HuaweiSystem_RiskLevelType_low corresponds to the value low of HuaweiSystem_RiskLevelType
-	HuaweiSystem_RiskLevelType_low E_HuaweiSystem_RiskLevelType = 3
-)
-
-// E_HuaweiSystem_SecurityRiskType is a derived int64 type which is used to represent
-// the enumerated node HuaweiSystem_SecurityRiskType. An additional value named
-// HuaweiSystem_SecurityRiskType_UNSET is added to the enumeration which is used as
-// the nil value, indicating that the enumeration was not explicitly set by
-// the program importing the generated structures.
-type E_HuaweiSystem_SecurityRiskType int64
-
-// IsYANGGoEnum ensures that HuaweiSystem_SecurityRiskType implements the yang.GoEnum
-// interface. This ensures that HuaweiSystem_SecurityRiskType can be identified as a
-// mapped type for a YANG enumeration.
-func (E_HuaweiSystem_SecurityRiskType) IsYANGGoEnum() {}
-
-// ΛMap returns the value lookup map associated with  HuaweiSystem_SecurityRiskType.
-func (E_HuaweiSystem_SecurityRiskType) ΛMap() map[string]map[int64]ygot.EnumDefinition {
-	return ΛEnum
-}
-
-// String returns a logging-friendly string for E_HuaweiSystem_SecurityRiskType.
-func (e E_HuaweiSystem_SecurityRiskType) String() string {
-	return ygot.EnumLogString(e, int64(e), "E_HuaweiSystem_SecurityRiskType")
-}
-
-const (
-	// HuaweiSystem_SecurityRiskType_UNSET corresponds to the value UNSET of HuaweiSystem_SecurityRiskType
-	HuaweiSystem_SecurityRiskType_UNSET E_HuaweiSystem_SecurityRiskType = 0
-	// HuaweiSystem_SecurityRiskType_insecure_algorithm corresponds to the value insecure_algorithm of HuaweiSystem_SecurityRiskType
-	HuaweiSystem_SecurityRiskType_insecure_algorithm E_HuaweiSystem_SecurityRiskType = 1
-	// HuaweiSystem_SecurityRiskType_insecure_protocol corresponds to the value insecure_protocol of HuaweiSystem_SecurityRiskType
-	HuaweiSystem_SecurityRiskType_insecure_protocol E_HuaweiSystem_SecurityRiskType = 2
-	// HuaweiSystem_SecurityRiskType_insecure_configuration corresponds to the value insecure_configuration of HuaweiSystem_SecurityRiskType
-	HuaweiSystem_SecurityRiskType_insecure_configuration E_HuaweiSystem_SecurityRiskType = 3
 )
 
 // E_HuaweiTimeRange_RowStatus is a derived int64 type which is used to represent
@@ -6135,8 +5667,6 @@ const (
 	HuaweiTunnelManagement_SelSeqTunnelType_sr_te E_HuaweiTunnelManagement_SelSeqTunnelType = 48
 	// HuaweiTunnelManagement_SelSeqTunnelType_sr_te_policy corresponds to the value sr_te_policy of HuaweiTunnelManagement_SelSeqTunnelType
 	HuaweiTunnelManagement_SelSeqTunnelType_sr_te_policy E_HuaweiTunnelManagement_SelSeqTunnelType = 51
-	// HuaweiTunnelManagement_SelSeqTunnelType_flex_algo_lsp corresponds to the value flex_algo_lsp of HuaweiTunnelManagement_SelSeqTunnelType
-	HuaweiTunnelManagement_SelSeqTunnelType_flex_algo_lsp E_HuaweiTunnelManagement_SelSeqTunnelType = 148
 	// HuaweiTunnelManagement_SelSeqTunnelType_ldp corresponds to the value ldp of HuaweiTunnelManagement_SelSeqTunnelType
 	HuaweiTunnelManagement_SelSeqTunnelType_ldp E_HuaweiTunnelManagement_SelSeqTunnelType = 256
 )
@@ -6325,12 +5855,8 @@ const (
 	HuaweiTunnelManagement_TunnelType_srv6_te_policy E_HuaweiTunnelManagement_TunnelType = 53
 	// HuaweiTunnelManagement_TunnelType_srv6_te_policy_group corresponds to the value srv6_te_policy_group of HuaweiTunnelManagement_TunnelType
 	HuaweiTunnelManagement_TunnelType_srv6_te_policy_group E_HuaweiTunnelManagement_TunnelType = 56
-	// HuaweiTunnelManagement_TunnelType_sd_wan corresponds to the value sd_wan of HuaweiTunnelManagement_TunnelType
-	HuaweiTunnelManagement_TunnelType_sd_wan E_HuaweiTunnelManagement_TunnelType = 57
 	// HuaweiTunnelManagement_TunnelType_p2mp_gre corresponds to the value p2mp_gre of HuaweiTunnelManagement_TunnelType
 	HuaweiTunnelManagement_TunnelType_p2mp_gre E_HuaweiTunnelManagement_TunnelType = 65
-	// HuaweiTunnelManagement_TunnelType_flex_algo_lsp corresponds to the value flex_algo_lsp of HuaweiTunnelManagement_TunnelType
-	HuaweiTunnelManagement_TunnelType_flex_algo_lsp E_HuaweiTunnelManagement_TunnelType = 148
 	// HuaweiTunnelManagement_TunnelType_ldp_lsp corresponds to the value ldp_lsp of HuaweiTunnelManagement_TunnelType
 	HuaweiTunnelManagement_TunnelType_ldp_lsp E_HuaweiTunnelManagement_TunnelType = 256
 )

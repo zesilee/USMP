@@ -1,0 +1,1232 @@
+/*
+Copyright (C) 2019-2020 Huawei Technologies Co., Ltd. All rights reserved.
+*/
+submodule huawei-dhcp-relay {
+  belongs-to huawei-dhcp {
+    prefix dhcp;
+  }
+  import huawei-ifm {
+    prefix ifm;
+  }
+  import huawei-ifm-trunk {
+    prefix ifm-trunk;
+  }
+  import ietf-inet-types {
+    prefix inet;
+  }
+  import huawei-network-instance {
+    prefix ni;
+  }
+  import huawei-pub-type {
+    prefix pub-type;
+  }
+  import ietf-yang-types {
+    prefix yang;
+  }
+  import huawei-l3vpn {
+    prefix l3vpn;
+  }
+  import huawei-ethernet {
+    prefix ethernet;
+  }
+  import huawei-extension {
+    prefix ext;
+  }
+  organization
+    "Huawei Technologies Co., Ltd.";
+  contact
+    "Huawei Industrial Base
+     Bantian, Longgang
+     Shenzhen 518129
+     People's Republic of China
+     Website: http://www.huawei.com
+     Email: support@huawei.com";
+    description
+    "This module contains a collection of YANG definitions for managing DHCP relay.";
+  revision 2020-04-17 {
+    description
+      "Add node.";
+    reference
+      "Huawei private.";
+  }
+  revision 2020-03-20 {
+    description
+      "Add must condition of vpn-name.";
+    reference
+      "Huawei private.";
+  }
+  revision 2020-03-15 {
+    description
+      "Modify description.";
+    reference
+      "Huawei private.";
+  }
+  revision 2020-02-25 {
+    description
+      "Add the node of link-selection-address.";
+    reference
+      "Huawei private.";
+  }
+  revision 2019-12-25 {
+    description
+      "Initial revision.";
+    reference
+      "Huawei private.";
+  }
+  typedef dhcp-relay-reply-type {
+    type enumeration {
+      enum "broadcast-always" {
+        value 1;
+        description
+          "Always broadcast the reply.";
+      }
+    }
+    description
+      "The type of relay reply.";
+  }
+  typedef dhcp-opt82-sub6-format {
+    type enumeration {
+      enum "self-define" {
+        value 1;
+        description
+          "DHCP option82 self-define format.";
+      }
+    }
+    description
+      "The type of DHCP option82 suboption6 format.";
+  }
+  typedef dhcp-relay-server-policy {
+    type enumeration {
+      enum "load-balance" {
+        value 0;
+        description
+          "Load balancing policy.";
+      }
+      enum "broadcast" {
+        value 1;
+        description
+          "Broadcast policy.";
+      }
+    }
+    description
+      "The type of relay server policy.";
+  }
+  typedef dhcp-opt82-vendor-sub-option-format {
+    type enumeration {
+      enum "source-ip-address" {
+        value 0;
+        description
+          "Source IP address.";
+      }
+    }
+    description
+      "The type of DHCP option82 vendor suboption format.";
+  }
+  typedef client-status {
+    type enumeration {
+      enum "success" {
+        value 0;
+        description
+          "Success status.";
+      }
+      enum "wait-offer" {
+        value 1;
+        description
+          "Wait offer status.";
+      }
+      enum "wait-request" {
+        value 2;
+        description
+          "Wait request status.";
+      }
+      enum "wait-ack" {
+        value 3;
+        description
+          "Wait Ack status.";
+      }
+      enum "invalid" {
+        value 4;
+        description
+          "Invalid status.";
+      }
+    }
+    description
+      "The type of dhcp relay client status";
+  }
+  grouping dhcp-relay-type {
+    description
+      "DHCP relay.";
+    container global {
+      description
+        "Configure DHCP relay global attributes.";
+      leaf user-detect-interval {
+        type uint16 {
+          range "0..60";
+        }
+        units min;
+        default "20";
+        description
+          "DHCP relay ARP user-detect interval.";
+      }
+      leaf user-autosave-flag {
+        type boolean;
+        default "false";
+        description
+          "Enable/disable a DHCP relay agent to store user entries.";
+      }
+      leaf user-store-interval {
+        type uint32 {
+          range "300..86400";
+        }
+        units s;
+        default "300";
+        description
+          "DHCP relay unnumbered table write-delay.";
+      }
+      leaf distribute-flag {
+        type boolean;
+        default "false";
+        description
+          "Enable/disable DHCP relay distribute flag.";
+      }
+      leaf opt82-inner-vlan-insert-flag {
+        type boolean;
+        default "false";
+        description
+          "Enable/disable DHCP option82 inner-VLAN change flag.";
+      }
+      leaf trust-option82 {
+        type boolean;
+        default "true";
+        description
+          "Enable/disable Option 82 on the DHCP relay agent.";
+      }
+      leaf address-cycle {
+        type boolean;
+        default "false";
+        description
+          "Enable/disable the DHCP server polling function on a DHCP relay agent.";
+      }
+      leaf set-ttl-type {
+        type enumeration {
+          enum "unvaried" {
+            value 1;
+            description
+              "Indicates that the TTL value of DHCP Discovery messages remains unchanged after the messages are forwarded by the DHCP relay agent at Layer 3.";
+          }
+          enum "ttl" {
+            value 2;
+            description
+              "Specify a fixed TTL value for DHCP Discovery messages after they are forwarded by the DHCP relay agent at Layer 3.";
+          }
+          enum "minus-one" {
+            value 3;
+            description
+              "The TTL value of DHCP Discovery messages decreases by 1 after they are forwarded by the DHCP relay agent at Layer 3.";
+          }
+        }
+        default "minus-one";
+        description
+          "Configure the TTL value for DHCP Discover messages after they are forwarded by the DHCP relay agent at Layer 3.";
+      }
+      leaf ttl-value {
+        type uint8 {
+          range "1..255";
+        }
+        must "../set-ttl-type='ttl'";
+        description
+          "Specify a fixed TTL value for DHCP Discovery messages after they are forwarded by the DHCP relay agent at Layer 3.";
+      }
+      leaf reply-forward-all {
+        type boolean;
+        default "false";
+        description
+          "Enable/disable a DHCP relay agent to forward all DHCP ACK messages.";
+      }
+      leaf request-server-match {
+        type boolean;
+        default "true";
+        description
+          "Enable/disable a DHCP relay agent to check the DHCP server identifier (Option54) in a DHCP Request message to be forwarded.";
+      }
+      container option {
+        description
+          "Configure the information instance of DHCP packet option code.";
+        leaf option-code {
+          type uint8 {
+            range "1..255";
+          }
+          description
+            "Option code.";
+        }
+        leaf sub-option {
+          when "../option-code";
+          type uint8 {
+            range "1..255";
+          }
+          description
+            "Sub-option code.";
+        }
+      }
+      container source-ip {
+        description
+          "Configure DHCP relay global source IP attributes.";
+        leaf source-ip-address {
+          type inet:ipv4-address-no-zone;
+          description
+            "Relay source address.";
+        }
+        leaf vpn-name {
+          when "../source-ip-address";
+          type leafref {
+            path "/ni:network-instance/ni:instances/ni:instance/ni:name";
+          }
+          must "/ni:network-instance/ni:instances/ni:instance[ni:name=current()]/l3vpn:afs/l3vpn:af[l3vpn:type='ipv4-unicast']";
+          default "_public_";
+          description
+            "VPN name.";
+        }
+      }
+    }
+    container server-groups {
+      description
+        "List of configuring DHCP server groups.";
+      list server-group {
+        key "server-group-name";
+        description
+          "Configure a DHCP server group.";
+        leaf server-group-name {
+          type string {
+            length "0..32";
+            pattern '([^\t]{0,})';
+          }
+          description
+            "DHCP server group name.";
+        }
+        leaf gateway {
+          type inet:ipv4-address-no-zone;
+          description
+            "Gateway address.";
+        }
+        leaf undo-gateway {
+          type boolean;
+          default "true";
+          description
+            "Enable/disable to delete a gateway address.";
+        }
+        leaf vpn-name {
+          type leafref {
+            path "/ni:network-instance/ni:instances/ni:instance/ni:name";
+          }
+          description
+            "VPN name.";
+        }
+        container server-addresses {
+          description
+            "List of configuring IP addresses for servers in a server group.";
+          list server-address {
+            key "server-address";
+            max-elements "20";
+            description
+              "Configure an IP address for a server in a server group.";
+            leaf server-address {
+              type inet:ipv4-address-no-zone;
+              description
+                "Server IP address.";
+            }
+            leaf server-index {
+              type uint8 {
+                range "0..19";
+              }
+              description
+                "Server IP address index.";
+            }
+          }
+        }
+        container server-group-statistics {
+          config false;
+          description
+            "List of statistics of DHCP server groups.";
+          list server-group-statistic {
+            key "server-address";
+            config false;
+            description
+              "Statistics of a DHCP server group.";
+            leaf server-address {
+              type inet:ipv4-address-no-zone;
+              config false;
+              description
+                "Server address.";
+            }
+            leaf bad-packets-receive {
+              type uint32;
+              config false;
+              mandatory true;
+              description
+                "Number of error packets received.";
+            }
+            leaf packets-receive-from-client {
+              type uint32;
+              config false;
+              mandatory true;
+              description
+                "Number of packets received from clients.";
+            }
+            leaf discover-packets-receive {
+              type uint32;
+              config false;
+              description
+                "Number of DHCP discover packets received.";
+            }
+            leaf request-packets-receive {
+              type uint32;
+              config false;
+              description
+                "Number of DHCP request packets received.";
+            }
+            leaf release-packets-receive {
+              type uint32;
+              config false;
+              description
+                "Number of DHCP release packets received.";
+            }
+            leaf inform-packets-receive {
+              type uint32;
+              config false;
+              mandatory true;
+              description
+                "Number of DHCP inform packets received.";
+            }
+            leaf decline-packets-receive {
+              type uint32;
+              config false;
+              mandatory true;
+              description
+                "Number of DHCP decline packets received.";
+            }
+            leaf packets-receive-from-servers {
+              type uint32;
+              config false;
+              mandatory true;
+              description
+                "Number of packets received from servers.";
+            }
+            leaf offer-packets-receive {
+              type uint32;
+              config false;
+              mandatory true;
+              description
+                "Number of DHCP offer packets received.";
+            }
+            leaf ack-packets-receive {
+              type uint32;
+              config false;
+              mandatory true;
+              description
+                "Number of DHCP ACK packets received.";
+            }
+            leaf nak-packets-receive {
+              type uint32;
+              config false;
+              mandatory true;
+              description
+                "Number of DHCP NAK packets received.";
+            }
+            leaf packets-sent-to-servers {
+              type uint32;
+              config false;
+              mandatory true;
+              description
+                "Number of packets sent to servers.";
+            }
+            leaf packets-sent-to-clients {
+              type uint32;
+              config false;
+              mandatory true;
+              description
+                "Number of packets sent to clients.";
+            }
+            leaf unicast-packets-sent-to-clients {
+              type uint32;
+              config false;
+              mandatory true;
+              description
+                "Number of unicast packets sent to clients.";
+            }
+            leaf broadcast-packets-sent-to-clients {
+              type uint32;
+              config false;
+              mandatory true;
+              description
+                "Number of broadcast packets sent to clients.";
+            }
+          }
+        }
+      }
+    }
+    container client-records {
+      config false;
+      description
+        "List of statistics of lists of DHCP packet relay.";
+      list client-record {
+        key "if-name pevlan-id cevlan-id mac-address option-value";
+        config false;
+        description
+          "Statistics of instance of DHCP packet relay.";
+        leaf if-name {
+          type leafref {
+            path "/ifm:ifm/ifm:interfaces/ifm:interface/ifm:name";
+          }
+          config false;
+          description
+            "Interface name.";
+        }
+        leaf pevlan-id {
+          type uint16 {
+            range "1..4094";
+          }
+          config false;
+          description
+            "PE VLAN ID.";
+        }
+        leaf cevlan-id {
+          type uint16 {
+            range "1..4094";
+          }
+          config false;
+          description
+            "CE VLAN ID.";
+        }
+        leaf mac-address {
+          type pub-type:mac-address {
+            length "0..255";
+          }
+          config false;
+          description
+            "MAC address.";
+        }
+        leaf option-value {
+          type string {
+            length "0..768";
+            pattern '([^\t]{0,})';
+          }
+          config false;
+          description
+            "The content of option code or sub-option code.";
+        }
+        leaf table-index {
+          type uint32 {
+            range "1..4094";
+          }
+          config false;
+          description
+            "Table index.";
+        }
+        leaf table-create-time {
+          type yang:date-and-time;
+          config false;
+          description
+            "Table create time.";
+        }
+        leaf table-status {
+          type client-status;
+          config false;
+          description
+            "Table Status.";
+        }
+      }
+    }
+    container relay-statistics {
+      config false;
+      description
+        "Statistics of DHCP relay.";
+      leaf bad-packets-receive {
+        type uint32;
+        config false;
+        description
+          "Number of error packets received.";
+      }
+      leaf packets-receive-from-client {
+        type uint32;
+        config false;
+        description
+          "Number of packets received from clients.";
+      }
+      leaf discover-packets-receive {
+        type uint32;
+        config false;
+        description
+          "Number of DHCP discover packets received.";
+      }
+      leaf request-packets-receive {
+        type uint32;
+        config false;
+        description
+          "Number of DHCP request packets received.";
+      }
+      leaf inform-packets-receive {
+        type uint32;
+        config false;
+        description
+          "Number of DHCP inform packets received.";
+      }
+      leaf decline-packets-receive {
+        type uint32;
+        config false;
+        description
+          "Number of DHCP decline packets received.";
+      }
+      leaf release-packets-receive {
+        type uint32;
+        config false;
+        description
+          "Number of release packets received.";
+      }
+      leaf packets-receive-from-servers {
+        type uint32;
+        config false;
+        description
+          "Number of packets received from servers.";
+      }
+      leaf offer-packets-receive {
+        type uint32;
+        config false;
+        description
+          "Number of DHCP offer packets received.";
+      }
+      leaf ack-packets-receive {
+        type uint32;
+        config false;
+        description
+          "Number of DHCP ACK packets received.";
+      }
+      leaf nak-packets-receive {
+        type uint32;
+        config false;
+        description
+          "Number of DHCP NAK packets received.";
+      }
+      leaf packets-sent-to-servers {
+        type uint32;
+        config false;
+        description
+          "Number of packets sent to servers.";
+      }
+      leaf packets-sent-to-clients {
+        type uint32;
+        config false;
+        description
+          "Number of packets sent to clients.";
+      }
+      leaf unicast-packets-sent-to-clients {
+        type uint32;
+        config false;
+        description
+          "Number of unicast packets sent to clients.";
+      }
+      leaf broadcast-packets-sent-to-clients {
+        type uint32;
+        config false;
+        description
+          "Number of broadcast packets sent to clients.";
+      }
+      leaf release-packets-sent-to-servers {
+        type uint32;
+        config false;
+        description
+          "Number of dhcp release packets sent to servers.";
+      }
+      leaf send-forcerenew-packets {
+        type uint32;
+        config false;
+        description
+          "Number of forcerenew packets sent.";
+      }
+      leaf send-esn-forcerenew-packets {
+        type uint32;
+        config false;
+        description
+          "Number of forcerenew packets with esn sent success.";
+      }
+      leaf send-noesn-forcerenew-packet {
+        type uint32;
+        config false;
+        description
+          "Number of forcerenew packets without esn sent success.";
+      }
+      leaf send-esn-forcerenew-packets-error {
+        type uint32;
+        config false;
+        description
+          "Number of forcerenew packets with esn sent fail.";
+      }
+      leaf send-noesn-forcerenew-packet-error {
+        type uint32;
+        config false;
+        description
+          "Number of Forcerenew packets without esn sent fail.";
+      }
+      leaf authenticate-packets-receive {
+        type uint32;
+        config false;
+        description
+          "Number of authenticate packets that PNP received.";
+      }
+      leaf authenticate-packets-receive-time {
+        type uint32;
+        config false;
+        description
+          "Number of expired packets PNP received.";
+      }
+      leaf bad-authenticate-packets-receive {
+        type uint32;
+        config false;
+        description
+          "Number of bad packets PNP received.";
+      }
+      leaf authenticate-packets-send {
+        type uint32;
+        config false;
+        description
+          "Number of authenticate packets that PNP replied.";
+      }
+    }
+  }
+  augment "/ifm:ifm/ifm:interfaces/ifm:interface" {
+    description
+      "Extend interface attribute.";
+    container dhcp-relay-attribute {
+        must "(not(../ethernet:ethernet/ethernet:main-interface/ethernet:l2-attribute)) and
+              (not(../ethernet:ethernet/ethernet:l2-sub-interface)) and
+              (not(../ifm-trunk:trunk/ifm-trunk:members/ifm-trunk:member[ifm-trunk:name=current()/../ifm:name])) and
+              (not((../ifm:type = 'Virtual-Ethernet' or ../ifm:type = 'Global-VE' or ../ifm:type = 'PW-VE') and (../ifm:class = 'main-interface'))) and
+              (not(relay-source-address and relay-source-option-addresses))";
+      description
+        "Configure DHCP relay attributes on an interface.";
+      leaf enable {
+        type boolean;
+        default "false";
+        description
+          "Enable/disable DHCP relay.";
+      }
+      leaf gateway-enable {
+        type boolean;
+        default "false";
+        description
+          "Enable/disable DHCP relay gateway switching.";
+      }
+      leaf server-group-name {
+        when "(../undo-server-select='false')";
+        type string {
+          length "0..32";
+          pattern '([^\t]{0,})';
+        }
+        description
+          "DHCP server group name.";
+      }
+      leaf undo-server-select {
+        type boolean;
+        ext:hidden ui;
+        default "true";
+        description
+          "Enable/disable server group.";
+      }
+      leaf vlan-broadcast-flag {
+        type boolean;
+        ext:hidden ui;
+        description
+          "Enable/disable VLAN broadcast.";
+      }
+      leaf giaddr-out-address {
+        type boolean;
+        default "false";
+        description
+          "Enable/disable to set outgoing-interface-address as giaddr.";
+      }
+      leaf reply-packet-policy {
+        type dhcp-relay-reply-type;
+        ext:hidden ui;
+        description
+          "Reply packets policy.";
+      }
+      leaf source-port {
+        type leafref {
+          path "/ifm:ifm/ifm:interfaces/ifm:interface/ifm:name";
+        }
+        description
+          "Source interface.";
+      }
+      leaf information {
+        type boolean;
+        default "false";
+        description
+          "Enable/disable the Option 82 function for the DHCP relay agent.";
+      }
+      leaf information-strategy {
+        type enumeration {
+          enum "drop" {
+            value 1;
+            description
+              "Configure the DHCP relay agent to drop Option 82 information. ";
+          }
+          enum "keep" {
+            value 2;
+            description
+              "Configure the DHCP relay agent to keep Option 82 information.";
+          }
+          enum "replace" {
+            value 3;
+            description
+              "Configure the DHCP relay agent to replace Option 82 information. ";
+          }
+        }
+        default "replace";
+        description
+          "Configure the strategies used by a DHCP relay agent to process Option 82 information.";
+      }
+      leaf gateway-re-route {
+        type boolean;
+        ext:hidden ui;
+        default "false";
+        description
+          "Enable/disable the re-routing function for the DHCP relay agent on a distributed gateway.";
+      }
+      container option82 {
+        must "(subscriber-id-enable='true' and subscriber-id-mode='self-define' and subscriber-id-self-define-text) or (subscriber-id-enable='false')";
+        description
+          "Configure DHCP relay option82 on an interface.";
+        leaf vss-control-enable {
+          type boolean;
+          default "false";
+          description
+            "Enable/disable to insert VSS information.";
+        }
+        leaf link-selection-enable {
+          type boolean;
+          default "false";
+          description
+            "Enable/disable to insert link selection information.";
+        }
+        leaf link-selection-address {
+          type inet:ipv4-address-no-zone;
+          description
+            "Link selection sub-option IP address.";
+        }
+        leaf server-id-override-enable {
+          type boolean;
+          default "false";
+          description
+            "Enable/disable Server ID override.";
+        }
+        leaf vendor-specific-enable {
+          when "../../../ifm:type='Vbdif'";
+          type boolean;
+          default "false";
+          description
+            "Enable/disable to insert suboption9 of option82.";
+        }
+        leaf subscriber-id-enable {
+          type boolean;
+          ext:hidden ui;
+          default "false";
+          description
+            "Enable/disable to insert subscriber ID.";
+        }
+        leaf subscriber-id-mode {
+          when "../subscriber-id-enable='true'";
+          ext:hidden ui;
+          type dhcp-opt82-sub6-format;
+          default "self-define";
+          description
+            "Subscriber ID mode.";
+        }
+        leaf subscriber-id-self-define-text {
+          when "../subscriber-id-enable='true' and ../subscriber-id-mode='self-define'";
+          ext:hidden ui;
+          type string {
+            length "1..251";
+            pattern '([^\t]{0,})';
+          }
+          description
+            "Configure a DHCP option82 self-defined string for subscriber ID.";
+        }
+      }
+      container server-addresses {
+        description
+          "List of configuring server addresses on interfaces.";
+        list server-address {
+          must "(vendor='false' and vendor-class='-') or (vendor='true' and option-code=60)";
+          key "address vendor option-code vendor-class";
+          description
+            "Configure a server address on an interface.";
+          leaf address {
+            type inet:ipv4-address-no-zone;
+            description
+              "Server address.";
+          }
+          leaf vendor {
+            type boolean;
+            description
+              "Enable/disable to carry a vendor identifier.";
+          }
+          leaf option-code {
+            type uint8 {
+              range "0..254";
+            }
+            description
+              "Option code, 0 means NULL.";
+          }
+          leaf vendor-class {
+            type string {
+              length "1..128";
+              pattern '([^\t]{0,})';
+            }
+            description
+              "Vendor identifier.";
+          }
+        }
+      }
+      container gateway-addresses {
+        description
+          "List of configuring a gateway address list on an interface.";
+        list gateway-address {
+          must "(vendor='false' and vendor-class='-') or (vendor='true' and option-code=60)";
+          key "vendor option-code vendor-class";
+          description
+            "Configure a gateway address instance on an interface.";
+          leaf vendor {
+            type boolean;
+            description
+              "Enable/disable to carry vendor identifier.";
+          }
+          leaf option-code {
+            type uint8 {
+              range "0..254";
+            }
+            description
+              "Option code, 0 means NULL.";
+          }
+          leaf vendor-class {
+            type string {
+              length "1..128";
+              pattern '([^\t]{0,})';
+            }
+            description
+              "Vendor identifier.";
+          }
+          leaf ip-address {
+            type inet:ipv4-address-no-zone;
+            mandatory true;
+            description
+              "Gateway address.";
+          }
+        }
+      }
+      container destination-addresses {
+        ext:hidden ui;
+        description
+          "List of configuring server addresses on interfaces.";
+        list destination-address {
+          key "ip-address";
+          max-elements "20";
+          description
+            "Configure a server address on an interface.";
+          leaf ip-address {
+            type inet:ipv4-address-no-zone;
+            description
+              "Server address.";
+          }
+        }
+      }
+      container vpn-server-addresses {
+        description
+          "List of Configuring server addresses on interfaces in VPN.";
+        list vpn-server-address {
+          key "address vpn-name";
+          max-elements "20";
+          description
+            "Configure a server address on an interface in VPN.";
+          leaf address {
+            type inet:ipv4-address-no-zone;
+            description
+              "Server address.";
+          }
+          leaf vpn-name {
+            type leafref {
+              path "/ni:network-instance/ni:instances/ni:instance/ni:name";
+            }
+            description
+              "VPN name specified in the server address of a relay interface.";
+          }
+        }
+      }
+      container gateway-ip-addresses {
+        ext:hidden ui;
+        description
+          "List of Configuring a gateway address list on an interface.";
+        list gateway-ip-address {
+          key "ip-address";
+          description
+            "Configure a gateway address for an interface.";
+          leaf ip-address {
+            type inet:ipv4-address-no-zone;
+            description
+              "Gateway address.";
+          }
+        }
+      }
+      container relay-source-address {
+        must "(vpn-name and source-address) or (not(vpn-name) and not(source-address))";
+        description
+          "Configure DHCP relay source address.";
+        leaf vpn-name {
+          type leafref {
+            path "/ni:network-instance/ni:instances/ni:instance/ni:name";
+          }
+          must "/ni:network-instance/ni:instances/ni:instance[ni:name=current()]/l3vpn:afs/l3vpn:af[l3vpn:type='ipv4-unicast']";
+          description
+            "VPN name specified in the source address of a relay interface, the '_public_' of vpn-name means public network.";
+        }
+        leaf source-address {
+          type inet:ipv4-address-no-zone;
+          description
+            "Source address.";
+        }
+      }
+      container relay-source-option-addresses {
+        ext:hidden ui;
+        description
+          "List of configuring source IP addresses based on option.";
+        list relay-source-option-address {
+          must "(vendor='false' and vendor-class='-') or (vendor='true' and option-code=60)";
+          key "vendor option-code vendor-class";
+          description
+            "Configure a source IP address based on option.";
+          leaf vendor {
+            type boolean;
+            description
+              "Enable/disable to carry a vendor identifier.";
+          }
+          leaf option-code {
+            type uint8 {
+              range "0..254";
+            }
+            description
+              "Option code, 0 means NULL.";
+          }
+          leaf vendor-class {
+            type string {
+              length "1..128";
+              pattern '([^\t]{0,})';
+            }
+            description
+              "Vendor identifier.";
+          }
+          leaf source-address {
+            type inet:ipv4-address-no-zone;
+            mandatory true;
+            description
+              "Source address.";
+          }
+        }
+      }
+      container opt82-vendor-specifics {
+        when "../../ifm:type='Vbdif'";
+        description
+          "List of option82 vendor-specific instance.";
+        list opt82-vendor-specific {
+          key "sub-option-number";
+          max-elements "1";
+          description
+            "Configure an option82 vendor-specific instance. Only one record can be configured.";
+          leaf sub-option-number {
+            type uint32 {
+              range "1..255";
+            }
+            description
+              "Suboption of option82.";
+          }
+          leaf sub-option-format {
+            type dhcp-opt82-vendor-sub-option-format;
+            mandatory true;
+            description
+              "Suboption format.";
+          }
+          leaf ip-address {
+            type inet:ipv4-address-no-zone;
+            mandatory true;
+            description
+              "Source IPv4 address of forward package.";
+          }
+        }
+      }
+    }
+    container dhcp-relay-if {
+        must "(not(../ethernet:ethernet/ethernet:main-interface/ethernet:l2-attribute)) and
+              (not(../ethernet:ethernet/ethernet:l2-sub-interface)) and
+              (not(../ifm-trunk:trunk/ifm-trunk:members/ifm-trunk:member[ifm-trunk:name=current()/../ifm:name])) and
+              (not((../ifm:type = 'Virtual-Ethernet' or ../ifm:type = 'Global-VE' or ../ifm:type = 'PW-VE') and (../ifm:class = 'main-interface')))";
+      presence "Enable/disable DHCP relay functions on an interface.";
+      status deprecated;
+      ext:hidden ui;
+      description
+        "Configure DHCP relay attributes on an interface, it was replaced by a container named dhcp-relay-attribute.";
+      leaf is-enable {
+        type boolean;
+        default "false";
+        status deprecated;
+        description
+          "Enable/disable DHCP relay on an interface.";
+      }
+      leaf reply-packet-policy {
+        type dhcp-relay-reply-type;
+        must "../reply-packet-policy='broadcast-always'";
+        status deprecated;
+        description
+          "Reply packets policy.";
+      }
+      container option82 {
+        must "(subscriber-id-enable='true' and subscriber-id-mode='self-define' and subscriber-id-self-define-text) or (subscriber-id-enable='false')";
+        presence "Enable/disable DHCP relay option82 functions on an interface.";
+        status deprecated;
+        description
+          "Configure DHCP relay option82 on an interface.";
+        leaf subscriber-id-enable {
+          type boolean;
+          default "false";
+          status deprecated;
+          description
+            "Enable/disable to insert a subscriber ID.";
+        }
+        leaf subscriber-id-mode {
+          when "../subscriber-id-enable='true'";
+          type dhcp-opt82-sub6-format;
+          default "self-define";
+          status deprecated;
+          description
+            "Subscriber ID mode.";
+        }
+        leaf subscriber-id-self-define-text {
+          when "../subscriber-id-enable='true' and ../subscriber-id-mode='self-define'";
+          type string {
+            length "1..251";
+            pattern '([^\t]{0,})';
+          }
+          status deprecated;
+          description
+            "Configure a DHCP option82 self-defined string for subscriber ID.";
+        }
+      }
+      container server-addresses {
+        status deprecated;
+        description
+          "List of configuring server addresses on interfaces.";
+        list server-address {
+          must "(is-vendor='false' and vendor-class='-') or (is-vendor='true' and option-code=60)";
+          key "address is-vendor option-code vendor-class";
+          status deprecated;
+          description
+            "Configure a server address on an interface.";
+          leaf address {
+            type inet:ipv4-address-no-zone;
+            status deprecated;
+            description
+              "Server address.";
+          }
+          leaf is-vendor {
+            type boolean;
+            status deprecated;
+            description
+              "Enable/disable to carry a vendor identifier.";
+          }
+          leaf option-code {
+            type uint8 {
+              range "0..254";
+            }
+            status deprecated;
+            description
+              "Option code.";
+          }
+          leaf vendor-class {
+            type string {
+              length "1..128";
+              pattern '([^\t]{0,})';
+            }
+            status deprecated;
+            description
+              "Vendor identifier.";
+          }
+        }
+      }
+    }
+  }
+  augment "/ni:network-instance/ni:instances/ni:instance" {  
+    description
+      "Extend interface attribute.";
+    container dhcp-relay-vpn {
+      ext:hidden ui;
+      description
+        "Configure DHCP relay attributes on a VPN.";
+      leaf enable {
+        type boolean;
+        default "false";
+        description
+          "Enable/disable DHCP relay.";
+      }
+      leaf hop-limit {
+        type uint32 {
+          range "1..16";
+        }
+        default "16";
+        description
+          "Maximum number of DHCP relay hops.";
+      }
+      leaf server-policy {
+        type dhcp-relay-server-policy;
+        default "broadcast";
+        description
+          "Server policy.";
+      }
+      container server-addresses {
+        description
+          "List of configuring server addresses on a VPN.";
+        list server-address {
+          key "server-ip";
+          max-elements "20";
+          description
+            "Configure a server address on a VPN.";
+          leaf server-ip {
+            type inet:ipv4-address-no-zone;
+            description
+              "Server address.";
+          }
+        }
+      }
+      container route-isolation-vpns {
+        config false;
+        description
+          "List of statistics of route isolation VPN instances.";
+        list route-isolation-vpn {
+          key "source-address";
+          config false;
+          description
+            "Statistics of a route isolation VPN instance.";
+          leaf source-address {
+            type inet:ipv4-address-no-zone;
+            config false;
+            description
+              "Route isolation VPN instance source address.";
+          }
+          leaf if-name {
+            type leafref {
+              path "/ifm:ifm/ifm:interfaces/ifm:interface/ifm:name";
+            }
+            config false;
+            description
+              "Route isolation VPN instance interface name.";
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,152 @@
+{
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection": {
+    "name": "List of ND Management"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/if-property": {
+    "name": "ND interface configurations"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/if-property/retrans-timer": {
+    "name": "Retrans Timer"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/if-property/nud-reach-time": {
+    "name": "Reachable Timer"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/if-property/attempts-value": {
+    "name": "Set the Number of Sent NS Messages During DAD"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/if-property/ns-mcast-flag": {
+    "name": "Flag of Enabling Multicast"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/if-property/max-dyn-nb-num": {
+    "name": "The maximum of limitation of dynamic neighbor"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/if-property/dad-timeout": {
+    "name": "Timeout of DAD"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/if-property/nud-attempts": {
+    "name": "ND entries NUD attempts"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/if-property/na-glean": {
+    "name": "Flag of Generate NB when receiving NA packet"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/if-property/ma-flag": {
+    "name": "Flag of Using State-based Address Configuration"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/if-property/o-flag": {
+    "name": "Set State-based Auto Configuration"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/if-property/ra-halt-flag": {
+    "name": "Suppress RA Packet Advertisement"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/if-property/max-interval": {
+    "name": "Maximum Interval"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/if-property/ra-lifetime": {
+    "name": "Router Lifetime"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/if-property/ra-preference": {
+    "name": "RA Router Preference"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/if-property/ra-prefix-flag": {
+    "name": "Flag of RA Packet Carry Prefix Information"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/if-property/ra-mtu-flag": {
+    "name": "Flag of RA Packet Carry MTU Option"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/if-property/strict-flag": {
+    "name": "Strict"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/if-property/ts-fuzz-factor": {
+    "name": "Fuzz Factor"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/if-property/ts-clock-drift": {
+    "name": "Drift"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/if-property/ts-delta": {
+    "name": "Delta"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/if-property/rsa-min-key-len": {
+    "name": "Minimum Length"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/if-property/rsa-max-key-len": {
+    "name": "Maximum Length"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/if-property/stale-time": {
+    "name": "Stale State Aging Time(s)"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/if-property/collect-host-flag": {
+    "name": "Flag of Collect Host Information"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/if-property/generate-rd-enable": {
+    "name": "Flag of Generate redirect ND table"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/if-property/nud-interval": {
+    "name": "ND entries NUD interval"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/proxys": {
+    "name": "List of ND Proxy"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/proxys/route-proxy": {
+    "name": "Router Proxy"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/proxys/inner-vlan-proxy": {
+    "name": "InnerVlan Proxy"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/proxys/inter-vlan-proxy": {
+    "name": "InterVlan Proxy"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/proxys/anyway-proxy": {
+    "name": "Anyway Proxy"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/anti-attack": {
+    "name": "Configure ND Anti-Attack for Interface"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/anti-attack/receive-rate-limits": {
+    "name": "List of Rate Limits for Receiving ND Packets"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/anti-attack/receive-rate-limits/receive-rate-limit": {
+    "name": "Set the Rate Limit for ND Packet or ND Miss"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/anti-attack/receive-rate-limits/receive-rate-limit/type": {
+    "name": "ND Packet Type or ND Miss"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/anti-attack/receive-rate-limits/receive-rate-limit/value": {
+    "name": "Rate Limit of Receiving ND Packet or ND Miss"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/anti-attack/source-ip-receive": {
+    "name": "Set ND Anti-Attack Based on Source IP Address"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/anti-attack/source-ip-receive/ip-rate-limits": {
+    "name": "Rate Limit for Receiving ND By Specified Source IP"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/anti-attack/source-ip-receive/ip-rate-limits/ip-rate-limit": {
+    "name": "Rate Limit for Receiving ND By Specified Source IP"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/anti-attack/source-ip-receive/ip-rate-limits/ip-rate-limit/packet-type": {
+    "name": "ND Packet Type"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/anti-attack/source-ip-receive/ip-rate-limits/ip-rate-limit/ipv6-addr": {
+    "name": "Source IPv6 Address"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/anti-attack/source-ip-receive/ip-rate-limits/ip-rate-limit/value": {
+    "name": "Rate limit of Receiving ND Packet"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/packet-policys": {
+    "name": "List of Forwarding Policies for NS Packets Specified by ND"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/packet-policys/packet-policy": {
+    "name": "Forwarding Policy for ND Packets Specified by ND"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/packet-policys/packet-policy/packet-type": {
+    "name": "ND Packet Type"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/packet-policys/packet-policy/ipv6-type": {
+    "name": "IPv6 Address Type"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/packet-policys/packet-policy/ipv6-addr": {
+    "name": "Target IPv6 Address of the Forwarding Policy"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-ipv6-nd:nd-collection/packet-policys/packet-policy/operation": {
+    "name": "Policy Action Type"
+  }
+}

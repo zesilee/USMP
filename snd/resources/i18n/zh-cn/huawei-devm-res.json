@@ -1,0 +1,767 @@
+{
+  "/huawei-devm:devm": {
+    "name": "全局配置"
+  },
+  "/huawei-devm:devm/physical-entitys": {
+    "name": "物理实体"
+  },
+  "/huawei-devm:devm/physical-entitys/physical-entity": {
+    "name": "物理实体"
+  },
+  "/huawei-devm:devm/physical-entitys/physical-entity/class": {
+    "name": "类别"
+  },
+  "/huawei-devm:devm/physical-entitys/physical-entity/position": {
+    "name": "位置"
+  },
+  "/huawei-devm:devm/physical-entitys/physical-entity/serial-number": {
+    "name": "编号"
+  },
+  "/huawei-devm:devm/physical-entitys/physical-entity/index": {
+    "name": "索引号"
+  },
+  "/huawei-devm:devm/physical-entitys/physical-entity/chassis-index": {
+    "name": "框索引号"
+  },
+  "/huawei-devm:devm/physical-entitys/physical-entity/board-index": {
+    "name": "板索引号"
+  },
+  "/huawei-devm:devm/physical-entitys/physical-entity/name": {
+    "name": "名称"
+  },
+  "/huawei-devm:devm/physical-entitys/physical-entity/entity-description": {
+    "name": "描述"
+  },
+  "/huawei-devm:devm/physical-entitys/physical-entity/alias": {
+    "name": "别名"
+  },
+  "/huawei-devm:devm/physical-entitys/physical-entity/vendor-type": {
+    "name": "硬件类型"
+  },
+  "/huawei-devm:devm/physical-entitys/physical-entity/contained-index": {
+    "name": "父索引号"
+  },
+  "/huawei-devm:devm/physical-entitys/physical-entity/parent-relative-position": {
+    "name": "相对位置"
+  },
+  "/huawei-devm:devm/physical-entitys/physical-entity/hardware-version": {
+    "name": "硬件版本"
+  },
+  "/huawei-devm:devm/physical-entitys/physical-entity/firmware-version": {
+    "name": "固件版本"
+  },
+  "/huawei-devm:devm/physical-entitys/physical-entity/software-version": {
+    "name": "软件版本"
+  },
+  "/huawei-devm:devm/physical-entitys/physical-entity/module-name": {
+    "name": "模块名称"
+  },
+  "/huawei-devm:devm/physical-entitys/physical-entity/is-fru": {
+    "name": "可更换单元标识"
+  },
+  "/huawei-devm:devm/physical-entitys/physical-entity/admin-state": {
+    "name": "管理状态"
+  },
+  "/huawei-devm:devm/physical-entitys/physical-entity/running-state": {
+    "name": "运行状态"
+  },
+  "/huawei-devm:devm/physical-entitys/physical-entity/standby-state": {
+    "name": "主备状态"
+  },
+  "/huawei-devm:devm/physical-entitys/physical-entity/system-oid": {
+    "name": "设备OID"
+  },
+  "/huawei-devm:devm/physical-entitys/physical-entity/ls-name": {
+    "name": "LS名称"
+  },
+  "/huawei-devm:devm/logic-entitys": {
+    "name": "逻辑实体"
+  },
+  "/huawei-devm:devm/logic-entitys/logic-entity": {
+    "name": "逻辑实体"
+  },
+  "/huawei-devm:devm/logic-entitys/logic-entity/class": {
+    "name": "级别"
+  },
+  "/huawei-devm:devm/logic-entitys/logic-entity/position": {
+    "name": "位置"
+  },
+  "/huawei-devm:devm/logic-entitys/logic-entity/serial-number": {
+    "name": "编号"
+  },
+  "/huawei-devm:devm/logic-entitys/logic-entity/vendor-type": {
+    "name": "厂商类型"
+  },
+  "/huawei-devm:devm/logic-entitys/logic-entity/name": {
+    "name": "名称"
+  },
+  "/huawei-devm:devm/logic-entitys/logic-entity/entity-description": {
+    "name": "实体描述"
+  },
+  "/huawei-devm:devm/logic-entitys/logic-entity/index": {
+    "name": "索引"
+  },
+  "/huawei-devm:devm/logic-entitys/logic-entity/parent-index": {
+    "name": "父索引"
+  },
+  "/huawei-devm:devm/logic-entitys/logic-entity/parent-relative-position": {
+    "name": "父索引相关索引位置"
+  },
+  "/huawei-devm:devm/chassiss": {
+    "name": "机框"
+  },
+  "/huawei-devm:devm/chassiss/chassis": {
+    "name": "机框"
+  },
+  "/huawei-devm:devm/chassiss/chassis/position": {
+    "name": "位置"
+  },
+  "/huawei-devm:devm/chassiss/chassis/index": {
+    "name": "索引号"
+  },
+  "/huawei-devm:devm/chassiss/chassis/type": {
+    "name": "框类型"
+  },
+  "/huawei-devm:devm/chassiss/chassis/service-type": {
+    "name": "业务类型"
+  },
+  "/huawei-devm:devm/chassiss/chassis/slot-num": {
+    "name": "槽位数量"
+  },
+  "/huawei-devm:devm/chassiss/chassis/board-num": {
+    "name": "单板数量"
+  },
+  "/huawei-devm:devm/chassiss/chassis/fan-num": {
+    "name": "风扇数量"
+  },
+  "/huawei-devm:devm/chassiss/chassis/power-num": {
+    "name": "电源数量"
+  },
+  "/huawei-devm:devm/chassiss/chassis/up-time": {
+    "name": "运行时间"
+  },
+  "/huawei-devm:devm/chassiss/chassis/status-last-change": {
+    "name": "实体运行状态变化时间"
+  },
+  "/huawei-devm:devm/chassiss/chassis/entity-last-change": {
+    "name": "实体变化时间"
+  },
+  "/huawei-devm:devm/chassiss/chassis/dust-clean-cycle": {
+    "name": "除尘周期"
+  },
+  "/huawei-devm:devm/chassiss/chassis/last-clean-date": {
+    "name": "上次除尘的日期"
+  },
+  "/huawei-devm:devm/chassiss/chassis/up-to-last-clean": {
+    "name": "距上次除尘的天数"
+  },
+  "/huawei-devm:devm/chassiss/chassis/alarm-exist-days": {
+    "name": "告警存在天数"
+  },
+  "/huawei-devm:devm/chassiss/chassis/monitor-board-changes": {
+    "name": "监控单板变化"
+  },
+  "/huawei-devm:devm/chassiss/chassis/monitor-board-changes/monitor-board-change": {
+    "name": "监控单板变化"
+  },
+  "/huawei-devm:devm/chassiss/chassis/monitor-board-changes/monitor-board-change/board-index": {
+    "name": "板索引号"
+  },
+  "/huawei-devm:devm/chassiss/chassis/monitor-board-changes/monitor-board-change/status-last-change": {
+    "name": "单板运行状态变化时间"
+  },
+  "/huawei-devm:devm/chassiss/chassis/monitor-board-changes/monitor-board-change/entity-last-change": {
+    "name": "单板实体变化时间"
+  },
+  "/huawei-devm:devm/logic-containers": {
+    "name": "逻辑槽位"
+  },
+  "/huawei-devm:devm/logic-containers/logic-container": {
+    "name": "逻辑槽位"
+  },
+  "/huawei-devm:devm/logic-containers/logic-container/position": {
+    "name": "位置"
+  },
+  "/huawei-devm:devm/logic-containers/logic-container/index": {
+    "name": "索引号"
+  },
+  "/huawei-devm:devm/logic-containers/logic-container/container-type": {
+    "name": "类别"
+  },
+  "/huawei-devm:devm/logic-containers/logic-container/equiped-entity-type": {
+    "name": "安装硬件类型"
+  },
+  "/huawei-devm:devm/logic-containers/logic-container/supported-entity-types": {
+    "name": "容器支持的子实体类型列表"
+  },
+  "/huawei-devm:devm/logic-containers/logic-container/supported-entity-types/supported-entity-type": {
+    "name": "容器支持的子实体类型列表"
+  },
+  "/huawei-devm:devm/logic-containers/logic-container/supported-entity-types/supported-entity-type/entity-type": {
+    "name": "实体类型"
+  },
+  "/huawei-devm:devm/containers": {
+    "name": "槽位"
+  },
+  "/huawei-devm:devm/containers/container": {
+    "name": "槽位"
+  },
+  "/huawei-devm:devm/containers/container/position": {
+    "name": "位置"
+  },
+  "/huawei-devm:devm/containers/container/index": {
+    "name": "索引号"
+  },
+  "/huawei-devm:devm/containers/container/type": {
+    "name": "类别"
+  },
+  "/huawei-devm:devm/containers/container/equiped-entity-type": {
+    "name": "安装硬件类型"
+  },
+  "/huawei-devm:devm/containers/container/supported-entity-types": {
+    "name": "支持的实体类型列表"
+  },
+  "/huawei-devm:devm/containers/container/supported-entity-types/supported-entity-type": {
+    "name": "支持的实体类型统计信息"
+  },
+  "/huawei-devm:devm/containers/container/supported-entity-types/supported-entity-type/entity-type": {
+    "name": "实体类型"
+  },
+  "/huawei-devm:devm/mpu-boards": {
+    "name": "主控板"
+  },
+  "/huawei-devm:devm/mpu-boards/mpu-board": {
+    "name": "主控板"
+  },
+  "/huawei-devm:devm/mpu-boards/mpu-board/position": {
+    "name": "位置"
+  },
+  "/huawei-devm:devm/mpu-boards/mpu-board/index": {
+    "name": "索引号"
+  },
+  "/huawei-devm:devm/mpu-boards/mpu-board/board-type": {
+    "name": "单板类型"
+  },
+  "/huawei-devm:devm/mpu-boards/mpu-board/up-time": {
+    "name": "运行时间"
+  },
+  "/huawei-devm:devm/mpu-boards/mpu-board/sdram-size": {
+    "name": "SDRAM存储容量(MB)"
+  },
+  "/huawei-devm:devm/mpu-boards/mpu-board/nvram-size": {
+    "name": "NVRAM存储容量(KB)"
+  },
+  "/huawei-devm:devm/mpu-boards/mpu-board/flash-size": {
+    "name": "Flash存储容量(MB)"
+  },
+  "/huawei-devm:devm/mpu-boards/mpu-board/ls-role": {
+    "name": "角色"
+  },
+  "/huawei-devm:devm/mpu-boards/mpu-board/last-reset-time": {
+    "name": "上次复位时间"
+  },
+  "/huawei-devm:devm/mpu-boards/mpu-board/last-reset-reason": {
+    "name": "上次复位原因"
+  },
+  "/huawei-devm:devm/mpu-boards/mpu-board/register-time": {
+    "name": "注册时间"
+  },
+  "/huawei-devm:devm/mpu-boards/mpu-board/is-register": {
+    "name": "是否注册"
+  },
+  "/huawei-devm:devm/mpu-boards/mpu-board/cfcard-size": {
+    "name": "CF卡存储容量"
+  },
+  "/huawei-devm:devm/mpu-boards/mpu-board/cfcard2-size": {
+    "name": "CF卡2存储容量"
+  },
+  "/huawei-devm:devm/lpu-boards": {
+    "name": "接口板"
+  },
+  "/huawei-devm:devm/lpu-boards/lpu-board": {
+    "name": "接口板"
+  },
+  "/huawei-devm:devm/lpu-boards/lpu-board/position": {
+    "name": "位置"
+  },
+  "/huawei-devm:devm/lpu-boards/lpu-board/index": {
+    "name": "索引号"
+  },
+  "/huawei-devm:devm/lpu-boards/lpu-board/board-type": {
+    "name": "单板类型"
+  },
+  "/huawei-devm:devm/lpu-boards/lpu-board/sdram-size": {
+    "name": "SDRAM存储容量(MB)"
+  },
+  "/huawei-devm:devm/lpu-boards/lpu-board/flash-size": {
+    "name": "Flash存储容量(MB)"
+  },
+  "/huawei-devm:devm/lpu-boards/lpu-board/up-time": {
+    "name": "运行时间"
+  },
+  "/huawei-devm:devm/lpu-boards/lpu-board/np-rdram-size": {
+    "name": "NP外挂RDRAM存储容量(MB)"
+  },
+  "/huawei-devm:devm/lpu-boards/lpu-board/np-sram-size": {
+    "name": "NP外挂SRAM存储容量(MB)"
+  },
+  "/huawei-devm:devm/lpu-boards/lpu-board/service-type": {
+    "name": "业务类型"
+  },
+  "/huawei-devm:devm/lpu-boards/lpu-board/next-service-type": {
+    "name": "下一次启动业务板类型"
+  },
+  "/huawei-devm:devm/lpu-boards/lpu-board/pic-num": {
+    "name": "子卡个数"
+  },
+  "/huawei-devm:devm/lpu-boards/lpu-board/sub-slot-num": {
+    "name": "子卡槽位个数"
+  },
+  "/huawei-devm:devm/lpu-boards/lpu-board/clock-8k-port": {
+    "name": "8K时钟端口"
+  },
+  "/huawei-devm:devm/lpu-boards/lpu-board/current-l3-clk": {
+    "name": "三级时钟源"
+  },
+  "/huawei-devm:devm/lpu-boards/lpu-board/register-time": {
+    "name": "注册时间"
+  },
+  "/huawei-devm:devm/lpu-boards/lpu-board/is-register": {
+    "name": "是否注册"
+  },
+  "/huawei-devm:devm/sfu-boards": {
+    "name": "交换网板"
+  },
+  "/huawei-devm:devm/sfu-boards/sfu-board": {
+    "name": "交换网板"
+  },
+  "/huawei-devm:devm/sfu-boards/sfu-board/position": {
+    "name": "位置"
+  },
+  "/huawei-devm:devm/sfu-boards/sfu-board/index": {
+    "name": "索引号"
+  },
+  "/huawei-devm:devm/sfu-boards/sfu-board/board-type": {
+    "name": "单板类型"
+  },
+  "/huawei-devm:devm/sfu-boards/sfu-board/sdram-size": {
+    "name": "SDRAM存储容量(MB)"
+  },
+  "/huawei-devm:devm/sfu-boards/sfu-board/flash-size": {
+    "name": "Flash存储容量(MB)"
+  },
+  "/huawei-devm:devm/sfu-boards/sfu-board/up-time": {
+    "name": "运行时间"
+  },
+  "/huawei-devm:devm/sfu-boards/sfu-board/register-time": {
+    "name": "注册时间"
+  },
+  "/huawei-devm:devm/sfu-boards/sfu-board/is-register": {
+    "name": "是否注册"
+  },
+  "/huawei-devm:devm/cards": {
+    "name": "子卡"
+  },
+  "/huawei-devm:devm/cards/card": {
+    "name": "子卡"
+  },
+  "/huawei-devm:devm/cards/card/position": {
+    "name": "位置"
+  },
+  "/huawei-devm:devm/cards/card/index": {
+    "name": "索引"
+  },
+  "/huawei-devm:devm/cards/card/type": {
+    "name": "类型"
+  },
+  "/huawei-devm:devm/cards/card/hard-type": {
+    "name": "硬件类型"
+  },
+  "/huawei-devm:devm/cards/card/port-num": {
+    "name": "端口号"
+  },
+  "/huawei-devm:devm/cards/card/init-status": {
+    "name": "初始化状态"
+  },
+  "/huawei-devm:devm/cards/card/register-status": {
+    "name": "注册状态"
+  },
+  "/huawei-devm:devm/cards/card/pic": {
+    "name": "子卡"
+  },
+  "/huawei-devm:devm/cards/card/pic/logic-status": {
+    "name": "逻辑状态"
+  },
+  "/huawei-devm:devm/cards/card/pic/up-time": {
+    "name": "Up时间"
+  },
+  "/huawei-devm:devm/cf-cards": {
+    "name": "CF卡"
+  },
+  "/huawei-devm:devm/cf-cards/cf-card": {
+    "name": "CF卡"
+  },
+  "/huawei-devm:devm/cf-cards/cf-card/position": {
+    "name": "位置"
+  },
+  "/huawei-devm:devm/cf-cards/cf-card/serial-number": {
+    "name": "编号"
+  },
+  "/huawei-devm:devm/cf-cards/cf-card/index": {
+    "name": "索引号"
+  },
+  "/huawei-devm:devm/cf-cards/cf-card/card-type": {
+    "name": "硬件类型"
+  },
+  "/huawei-devm:devm/cf-cards/cf-card/memory-size": {
+    "name": "存储容量(KB)"
+  },
+  "/huawei-devm:devm/cf-cards/cf-card/memory-used": {
+    "name": "已用空间(KB)"
+  },
+  "/huawei-devm:devm/cf-cards/cf-card/memory-free": {
+    "name": "可用空间(KB)"
+  },
+  "/huawei-devm:devm/ports": {
+    "name": "端口"
+  },
+  "/huawei-devm:devm/ports/port": {
+    "name": "端口"
+  },
+  "/huawei-devm:devm/ports/port/position": {
+    "name": "位置"
+  },
+  "/huawei-devm:devm/ports/port/index": {
+    "name": "索引号"
+  },
+  "/huawei-devm:devm/ports/port/admin-state": {
+    "name": "管理状态"
+  },
+  "/huawei-devm:devm/ports/port/type": {
+    "name": "端口类型"
+  },
+  "/huawei-devm:devm/ports/port/hard-type": {
+    "name": "端口硬件类型"
+  },
+  "/huawei-devm:devm/ports/port/loopback-mode": {
+    "name": "环回模式"
+  },
+  "/huawei-devm:devm/ports/port/enable-transmission-delay": {
+    "name": "发送延时"
+  },
+  "/huawei-devm:devm/ports/port/last-up-time": {
+    "name": "最近一次启动时间"
+  },
+  "/huawei-devm:devm/ports/port/last-down-time": {
+    "name": "最近一次down时间"
+  },
+  "/huawei-devm:devm/ports/port/medium-type": {
+    "name": "传输介质类型"
+  },
+  "/huawei-devm:devm/ports/port/optical-equipped": {
+    "name": "光模块是否在位"
+  },
+  "/huawei-devm:devm/ports/port/physical-bandwidth": {
+    "name": "端口物理带宽"
+  },
+  "/huawei-devm:devm/logic-ports": {
+    "name": "逻辑端口"
+  },
+  "/huawei-devm:devm/logic-ports/logic-port": {
+    "name": "逻辑端口"
+  },
+  "/huawei-devm:devm/logic-ports/logic-port/position": {
+    "name": "位置"
+  },
+  "/huawei-devm:devm/logic-ports/logic-port/serial-number": {
+    "name": "编号"
+  },
+  "/huawei-devm:devm/logic-ports/logic-port/port-type": {
+    "name": "端口类型"
+  },
+  "/huawei-devm:devm/logic-ports/logic-port/index": {
+    "name": "索引号"
+  },
+  "/huawei-devm:devm/logic-ports/logic-port/admin-state": {
+    "name": "管理状态"
+  },
+  "/huawei-devm:devm/logic-ports/logic-port/hard-type": {
+    "name": "端口硬件类型"
+  },
+  "/huawei-devm:devm/logic-ports/logic-port/enable-transmission-delay": {
+    "name": "发送延时(ms)"
+  },
+  "/huawei-devm:devm/logic-ports/logic-port/level": {
+    "name": "端口速率级别"
+  },
+  "/huawei-devm:devm/entity-classes": {
+    "name": "实体能力"
+  },
+  "/huawei-devm:devm/entity-classes/entity-class": {
+    "name": "实体能力"
+  },
+  "/huawei-devm:devm/entity-classes/entity-class/class-name": {
+    "name": "类型"
+  },
+  "/huawei-devm:devm/entity-classes/entity-class/is-resetable": {
+    "name": "复位能力"
+  },
+  "/huawei-devm:devm/entity-classes/entity-class/is-switchoverable": {
+    "name": "倒换能力"
+  },
+  "/huawei-devm:devm/inconsistent-entitys": {
+    "name": "不兼容实体信息"
+  },
+  "/huawei-devm:devm/inconsistent-entitys/inconsistent-entity": {
+    "name": "不兼容实体信息"
+  },
+  "/huawei-devm:devm/inconsistent-entitys/inconsistent-entity/class": {
+    "name": "类别"
+  },
+  "/huawei-devm:devm/inconsistent-entitys/inconsistent-entity/position": {
+    "name": "位置"
+  },
+  "/huawei-devm:devm/inconsistent-entitys/inconsistent-entity/serial-number": {
+    "name": "编号"
+  },
+  "/huawei-devm:devm/inconsistent-entitys/inconsistent-entity/logical-type": {
+    "name": "逻辑类型"
+  },
+  "/huawei-devm:devm/inconsistent-entitys/inconsistent-entity/physical-type": {
+    "name": "物理类型"
+  },
+  "/huawei-devm:devm/inconsistent-entitys/inconsistent-entity/oper-state": {
+    "name": "运行状态"
+  },
+  "/huawei-devm:devm/offlines": {
+    "name": "离线配置"
+  },
+  "/huawei-devm:devm/offlines/offline": {
+    "name": "离线配置"
+  },
+  "/huawei-devm:devm/offlines/offline/class": {
+    "name": "类型"
+  },
+  "/huawei-devm:devm/offlines/offline/position": {
+    "name": "位置"
+  },
+  "/huawei-devm:devm/schedule-reboot": {
+    "name": "定时重启"
+  },
+  "/huawei-devm:devm/schedule-reboot/datetime": {
+    "name": "日期时间"
+  },
+  "/huawei-devm:devm/schedule-reboot/delay-time": {
+    "name": "延迟时间"
+  },
+  "/huawei-devm:reset-board": {
+    "name": "复位单板"
+  },
+  "/huawei-devm:reset-board/input/board-position": {
+    "name": "单板位置"
+  },
+  "/huawei-devm:reset-mpu-board": {
+    "name": "复位主控板"
+  },
+  "/huawei-devm:reset-mpu-board/input/board-position": {
+    "name": "单板位置"
+  },
+  "/huawei-devm:reset-lpu-board": {
+    "name": "复位接口板"
+  },
+  "/huawei-devm:reset-lpu-board/input/board-position": {
+    "name": "单板位置"
+  },
+  "/huawei-devm:reset-sfu-board": {
+    "name": "复位交换网板"
+  },
+  "/huawei-devm:reset-sfu-board/input/board-position": {
+    "name": "单板位置"
+  },
+  "/huawei-devm:reset-card": {
+    "name": "重启子卡"
+  },
+  "/huawei-devm:reset-card/input/card-position": {
+    "name": "子卡位置"
+  },
+  "/huawei-devm:reboot": {
+    "name": "整机复位"
+  },
+  "/huawei-devm:reboot/input/save-flag": {
+    "name": "保存配置标识"
+  },
+  "/huawei-devm:transfer-pnpp": {
+    "name": "传输pnpp文件"
+  },
+  "/huawei-devm:transfer-pnpp/input/server-ip-address": {
+    "name": "FTP服务器IP地址"
+  },
+  "/huawei-devm:transfer-pnpp/input/server-port": {
+    "name": "FTP服务器端口号"
+  },
+  "/huawei-devm:transfer-pnpp/input/vpn-instance-name": {
+    "name": "VPN实例名"
+  },
+  "/huawei-devm:transfer-pnpp/input/source-ipv4-address": {
+    "name": "源IPV4地址"
+  },
+  "/huawei-devm:transfer-pnpp/input/source-interface-name": {
+    "name": "源接口名"
+  },
+  "/huawei-devm:transfer-pnpp/input/server-type": {
+    "name": "服务类型"
+  },
+  "/huawei-devm:transfer-pnpp/input/command-type": {
+    "name": "命令类型"
+  },
+  "/huawei-devm:transfer-pnpp/input/user-name": {
+    "name": "用户名"
+  },
+  "/huawei-devm:transfer-pnpp/input/password": {
+    "name": "密码"
+  },
+  "/huawei-devm:transfer-pnpp/input/local-file-name": {
+    "name": "本地文件名"
+  },
+  "/huawei-devm:transfer-pnpp/input/remote-file-name": {
+    "name": "远端文件名"
+  },
+  "/huawei-devm:transfer-pnpp/input/remote-extension": {
+    "name": "远端文件扩展名"
+  },
+  "/huawei-devm:transfer-pnpp/input/secure-transfer-options": {
+    "name": "安全传输选项"
+  },
+  "/huawei-devm:transfer-pnpp/input/secure-transfer-options/prefer-kex": {
+    "name": "密钥交换首选算法"
+  },
+  "/huawei-devm:transfer-pnpp/input/secure-transfer-options/prefer-stoc-cipher": {
+    "name": "服务器端到客户端的首选加密算法"
+  },
+  "/huawei-devm:transfer-pnpp/input/secure-transfer-options/prefer-ctos-cipher": {
+    "name": "客户端到服务器端的首选加密算法"
+  },
+  "/huawei-devm:transfer-pnpp/input/secure-transfer-options/prefer-stoc-hmac": {
+    "name": "服务器端到客户端的首选HMAC算法"
+  },
+  "/huawei-devm:transfer-pnpp/input/secure-transfer-options/prefer-ctos-hmac": {
+    "name": "客户端到服务器端的首选HMAC算法"
+  },
+  "/huawei-devm:transfer-pnpp/input/secure-transfer-options/keep-alive-interval": {
+    "name": "Keepalive报文的间隔时间"
+  },
+  "/huawei-devm:transfer-pnpp/input/secure-transfer-options/keep-alive-count": {
+    "name": "Keepalive报文的无应答限制次数"
+  },
+  "/huawei-devm:reset-offline-config": {
+    "name": "清离线配置"
+  },
+  "/huawei-devm:reset-offline-config/input/board-position": {
+    "name": "单板位置"
+  },
+  "/huawei-devm:clear-inactive-config": {
+    "name": "清除离线配置"
+  },
+  "/huawei-devm:clear-inactive-config/input/entity-class": {
+    "name": "离线配置类型"
+  },
+  "/huawei-devm:clear-inactive-config/input/position": {
+    "name": "离线配置位置"
+  },
+  "/huawei-devm:cold-reset-lpu": {
+    "name": "硬复位接口板"
+  },
+  "/huawei-devm:cold-reset-lpu/input/board-position": {
+    "name": "单板位置"
+  },
+  "/huawei-devm:warm-reset-lpu": {
+    "name": "软复位接口板"
+  },
+  "/huawei-devm:warm-reset-lpu/input/board-position": {
+    "name": "单板位置"
+  },
+  "/huawei-devm:cold-reset-mpu": {
+    "name": "硬复位主控板"
+  },
+  "/huawei-devm:cold-reset-mpu/input/board-position": {
+    "name": "单板位置"
+  },
+  "/huawei-devm:warm-reset-mpu": {
+    "name": "软复位主控板"
+  },
+  "/huawei-devm:warm-reset-mpu/input/board-position": {
+    "name": "单板位置"
+  },
+  "/huawei-devm:schedule-reboot-at-time": {
+    "name": "定时重启的时间"
+  },
+  "/huawei-devm:schedule-reboot-at-time/input/schedule-date": {
+    "name": "定时重启日期"
+  },
+  "/huawei-devm:schedule-reboot-at-time/input/schedule-datetime": {
+    "name": "定时重启时间"
+  },
+  "/huawei-devm:schedule-reboot-at-time/input/save-flag": {
+    "name": "保存标志位"
+  },
+  "/huawei-devm:schedule-reboot-delay-time": {
+    "name": "定时重启延迟时间"
+  },
+  "/huawei-devm:schedule-reboot-delay-time/input/delay-time": {
+    "name": "延迟时间"
+  },
+  "/huawei-devm:schedule-reboot-delay-time/input/save-flag": {
+    "name": "保存配置"
+  },
+  "/huawei-devm:undo-schedule-reboot": {
+    "name": "取消定时重启"
+  },
+  "/rpcs/huawei-devm:devm/reset-board": {
+    "name": "复位单板"
+  },
+  "/rpcs/huawei-devm:devm/reset-mpu-board": {
+    "name": "复位主控板"
+  },
+  "/rpcs/huawei-devm:devm/reset-lpu-board": {
+    "name": "复位接口板"
+  },
+  "/rpcs/huawei-devm:devm/reset-sfu-board": {
+    "name": "复位交换网板"
+  },
+  "/rpcs/huawei-devm:devm/reset-card": {
+    "name": "重启子卡"
+  },
+  "/rpcs/huawei-devm:devm/reboot": {
+    "name": "整机复位"
+  },
+  "/rpcs/huawei-devm:devm/transfer-pnpp": {
+    "name": "传输pnpp文件"
+  },
+  "/rpcs/huawei-devm:devm/reset-offline-config": {
+    "name": "清离线配置"
+  },
+  "/rpcs/huawei-devm:devm/clear-inactive-config": {
+    "name": "清除离线配置"
+  },
+  "/rpcs/huawei-devm:devm/cold-reset-lpu": {
+    "name": "硬复位接口板"
+  },
+  "/rpcs/huawei-devm:devm/warm-reset-lpu": {
+    "name": "软复位接口板"
+  },
+  "/rpcs/huawei-devm:devm/cold-reset-mpu": {
+    "name": "硬复位主控板"
+  },
+  "/rpcs/huawei-devm:devm/warm-reset-mpu": {
+    "name": "软复位主控板"
+  },
+  "/rpcs/huawei-devm:devm/schedule-reboot-at-time": {
+    "name": "定时重启的时间"
+  },
+  "/rpcs/huawei-devm:devm/schedule-reboot-delay-time": {
+    "name": "定时重启延迟时间"
+  },
+  "/rpcs/huawei-devm:devm/undo-schedule-reboot": {
+    "name": "取消定时重启"
+  }
+}

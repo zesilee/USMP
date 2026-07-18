@@ -1,0 +1,35 @@
+{
+  "/huawei-network-instance:network-instance/instances/instance/huawei-mpls:mpls": {
+    "name": "MPLS实例配置"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-mpls:mpls/common": {
+    "name": "MPLS全局配置"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-mpls:mpls/common/mpls-interfaces": {
+    "name": "MPLS接口列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-mpls:mpls/common/mpls-interfaces/mpls-interface": {
+    "name": "MPLS接口"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-mpls:mpls/common/mpls-interfaces/mpls-interface/name": {
+    "name": "MPLS接口名"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-mpls:mpls/common/mpls-interfaces/mpls-interface/mtu-value": {
+    "name": "最大传输单元"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-mpls:mpls/common/mpls-interfaces/mpls-interface/ldp-enable": {
+    "name": "LDP能力"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-mpls:mpls/common/mpls-interfaces/mpls-interface/te-enable": {
+    "name": "MPLS TE能力"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-mpls:mpls/common/mpls-interfaces/mpls-interface/rsvp-te-enable": {
+    "name": "RSVP TE能力"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-mpls:mpls/common/mpls-interfaces/mpls-interface/statistics": {
+    "name": "MPLS接口统计数据信息查询"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-mpls:mpls/common/mpls-interfaces/mpls-interface/statistics/fragmented-packet-count": {
+    "name": "MPLS转发报文分片计数统计"
+  }
+}

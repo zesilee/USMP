@@ -1,0 +1,446 @@
+{
+  "/huawei-license:lcs": {
+    "name": "License"
+  },
+  "/huawei-license:license/global-states": {
+    "name": "Global Informations"
+  },
+  "/huawei-license:license/global-states/global-state": {
+    "name": "Global Information"
+  },
+  "/huawei-license:license/global-states/global-state/chassis-id": {
+    "name": "Device ID"
+  },
+  "/huawei-license:license/global-states/global-state/active-filename": {
+    "name": "File Name"
+  },
+  "/huawei-license:license/global-states/global-state/active-state": {
+    "name": "File State"
+  },
+  "/huawei-license:license/global-states/global-state/revoke-ticket": {
+    "name": "License Revoke-ticket"
+  },
+  "/huawei-license:license/global-states/global-state/esn": {
+    "name": "License ESN"
+  },
+  "/huawei-license:license/global-states/global-state/license-mode": {
+    "name": "Licnese Mode"
+  },
+  "/huawei-license:license/license-items": {
+    "name": "All Items"
+  },
+  "/huawei-license:license/license-items/license-item": {
+    "name": "Item"
+  },
+  "/huawei-license:license/license-items/license-item/name": {
+    "name": "Item Name"
+  },
+  "/huawei-license:license/license-items/license-item/description": {
+    "name": "Item Description"
+  },
+  "/huawei-license:license/license-items/license-item/default-value": {
+    "name": "Item Default Value"
+  },
+  "/huawei-license:license/license-items/license-item/maximum-value": {
+    "name": "Item Max Value"
+  },
+  "/huawei-license:license/license-items/license-item/current-value": {
+    "name": "Item Current Value"
+  },
+  "/huawei-license:license/license-items/license-item/used-value": {
+    "name": "Item Usage Value"
+  },
+  "/huawei-license:license/license-items/license-item/status": {
+    "name": "Item Status"
+  },
+  "/huawei-license:license/license-items/license-item/expired-date": {
+    "name": "Item Expired Date"
+  },
+  "/huawei-license:license/license-items/license-item/type": {
+    "name": "Item Type"
+  },
+  "/huawei-license:license/license-items/license-item/trial-state": {
+    "name": "Trial Status of a Control Item"
+  },
+  "/huawei-license:license/license-items/license-item/trial-remain-day": {
+    "name": "Remaining Trial Days of a Control Item"
+  },
+  "/huawei-license:license/license-items/license-item/trial-remain-times": {
+    "name": "Remaining Trial Times of a Control Item"
+  },
+  "/huawei-license:license/license-sale-items": {
+    "name": "All SaleItems"
+  },
+  "/huawei-license:license/license-sale-items/license-sale-item": {
+    "name": "SaleItem"
+  },
+  "/huawei-license:license/license-sale-items/license-sale-item/name": {
+    "name": "SaleItem Name"
+  },
+  "/huawei-license:license/license-sale-items/license-sale-item/description": {
+    "name": "SaleItem Description"
+  },
+  "/huawei-license:license/license-sale-items/license-sale-item/sale-value": {
+    "name": "SaleItem Value"
+  },
+  "/huawei-license:license/license-sale-items/license-sale-item/license-items": {
+    "name": "All Items Of Sale Item"
+  },
+  "/huawei-license:license/license-sale-items/license-sale-item/license-items/license-item": {
+    "name": "Item From Sale Item"
+  },
+  "/huawei-license:license/license-sale-items/license-sale-item/license-items/license-item/name": {
+    "name": "Item Name From Sale Item"
+  },
+  "/huawei-license:license/license-sale-items/license-sale-item/license-items/license-item/description": {
+    "name": "Item Description From Sale Item"
+  },
+  "/huawei-license:license/license-sale-items/license-sale-item/license-items/license-item/default-value": {
+    "name": "Item Default Value From Sale Item"
+  },
+  "/huawei-license:license/license-sale-items/license-sale-item/license-items/license-item/maximum-value": {
+    "name": "Item Max Value From Sale Item"
+  },
+  "/huawei-license:license/license-sale-items/license-sale-item/license-items/license-item/current-value": {
+    "name": "Item Current Value From Sale Item"
+  },
+  "/huawei-license:license/license-sale-items/license-sale-item/license-items/license-item/used-value": {
+    "name": "Item Usage Value From Sale Item"
+  },
+  "/huawei-license:license/license-sale-items/license-sale-item/license-items/license-item/status": {
+    "name": "Item Status From Sale Item"
+  },
+  "/huawei-license:license/license-sale-items/license-sale-item/license-items/license-item/expired-date": {
+    "name": "Item Expired Date From Sale Item"
+  },
+  "/huawei-license:license/license-sale-items/license-sale-item/license-items/license-item/type": {
+    "name": "Item Type From Sale Item"
+  },
+  "/huawei-license:license/license-sale-items/license-sale-item/license-items/license-item/trial-state": {
+    "name": "Trial Status of a Control Item From Sale Item"
+  },
+  "/huawei-license:license/license-sale-items/license-sale-item/license-items/license-item/trial-remain-day": {
+    "name": "Remaining Trial Days of a Control Item"
+  },
+  "/huawei-license:license/license-sale-items/license-sale-item/license-items/license-item/trial-remain-times": {
+    "name": "Remaining Trial Times of a Control Item"
+  },
+  "/huawei-license:license/stack-sale-items": {
+    "name": "List of all license sale items"
+  },
+  "/huawei-license:license/stack-sale-items/stack-sale-item": {
+    "name": "Operational state of license sale item"
+  },
+  "/huawei-license:license/stack-sale-items/stack-sale-item/chassis-id": {
+    "name": "Chassis ID"
+  },
+  "/huawei-license:license/stack-sale-items/stack-sale-item/license-sale-items": {
+    "name": "List of all license saleitems"
+  },
+  "/huawei-license:license/stack-sale-items/stack-sale-item/license-sale-items/license-sale-item": {
+    "name": "Operational state of license saleitem"
+  },
+  "/huawei-license:license/stack-sale-items/stack-sale-item/license-sale-items/license-sale-item/name": {
+    "name": "License saleitem name"
+  },
+  "/huawei-license:license/stack-sale-items/stack-sale-item/license-sale-items/license-sale-item/description": {
+    "name": "The description of a license saleitem"
+  },
+  "/huawei-license:license/stack-sale-items/stack-sale-item/license-sale-items/license-sale-item/sale-value": {
+    "name": "The sales value of a license saleitem"
+  },
+  "/huawei-license:license/stack-sale-items/stack-sale-item/license-sale-items/license-sale-item/license-items": {
+    "name": "List of all license items"
+  },
+  "/huawei-license:license/stack-sale-items/stack-sale-item/license-sale-items/license-sale-item/license-items/license-item": {
+    "name": "Operational state of license item"
+  },
+  "/huawei-license:license/stack-sale-items/stack-sale-item/license-sale-items/license-sale-item/license-items/license-item/name": {
+    "name": "License Item Name"
+  },
+  "/huawei-license:license/stack-sale-items/stack-sale-item/license-sale-items/license-sale-item/license-items/license-item/description": {
+    "name": "License Item Description"
+  },
+  "/huawei-license:license/stack-sale-items/stack-sale-item/license-sale-items/license-sale-item/license-items/license-item/default-value": {
+    "name": "Item Default Value From Sale Item"
+  },
+  "/huawei-license:license/stack-sale-items/stack-sale-item/license-sale-items/license-sale-item/license-items/license-item/maximum-value": {
+    "name": "Maximum Value Of License Item"
+  },
+  "/huawei-license:license/stack-sale-items/stack-sale-item/license-sale-items/license-sale-item/license-items/license-item/current-value": {
+    "name": "Current Value"
+  },
+  "/huawei-license:license/stack-sale-items/stack-sale-item/license-sale-items/license-sale-item/license-items/license-item/used-value": {
+    "name": "Usage Value Of License Item"
+  },
+  "/huawei-license:license/stack-sale-items/stack-sale-item/license-sale-items/license-sale-item/license-items/license-item/status": {
+    "name": "Item Status"
+  },
+  "/huawei-license:license/stack-sale-items/stack-sale-item/license-sale-items/license-sale-item/license-items/license-item/expired-date": {
+    "name": "Expired Date"
+  },
+  "/huawei-license:license/stack-sale-items/stack-sale-item/license-sale-items/license-sale-item/license-items/license-item/type": {
+    "name": "License Item Type"
+  },
+  "/huawei-license:license/stack-sale-items/stack-sale-item/license-sale-items/license-sale-item/license-items/license-item/trial-state": {
+    "name": "Trial Status of a Control Item"
+  },
+  "/huawei-license:license/stack-sale-items/stack-sale-item/license-sale-items/license-sale-item/license-items/license-item/trial-remain-day": {
+    "name": "Remaining Trial Days Of License Control Item"
+  },
+  "/huawei-license:license/stack-sale-items/stack-sale-item/license-sale-items/license-sale-item/license-items/license-item/trial-remain-times": {
+    "name": "Remaining Trial Times Of License Control Item"
+  },
+  "/huawei-license:license/spec-items": {
+    "name": "All Specific Items"
+  },
+  "/huawei-license:license/spec-items/spec-item": {
+    "name": "Specific Item"
+  },
+  "/huawei-license:license/spec-items/spec-item/name": {
+    "name": "Specific Item Name"
+  },
+  "/huawei-license:license/spec-items/spec-item/description": {
+    "name": "Specific Item Description"
+  },
+  "/huawei-license:license/spec-items/spec-item/current-value": {
+    "name": "Specific Item Value"
+  },
+  "/huawei-license:license/spec-items/spec-item/type": {
+    "name": "Specific Item Type"
+  },
+  "/huawei-license:license/spec-items/spec-item/default-value": {
+    "name": "Specific Item Default Value"
+  },
+  "/huawei-license:license/spec-items/spec-item/minimum-value": {
+    "name": "Specific Item Min Value"
+  },
+  "/huawei-license:license/spec-items/spec-item/maximum-value": {
+    "name": "Specific Item Max Value"
+  },
+  "/huawei-license:license/license-files": {
+    "name": "All Information Of File"
+  },
+  "/huawei-license:license/license-files/license-file": {
+    "name": "File Information"
+  },
+  "/huawei-license:license/license-files/license-file/chassis-id": {
+    "name": "Device ID"
+  },
+  "/huawei-license:license/license-files/license-file/filename": {
+    "name": "File Name"
+  },
+  "/huawei-license:license/license-files/license-file/filesize": {
+    "name": "File Size"
+  },
+  "/huawei-license:license/license-files/license-file/general": {
+    "name": "General File Information"
+  },
+  "/huawei-license:license/license-files/license-file/general/serial-number": {
+    "name": "File Serial Number"
+  },
+  "/huawei-license:license/license-files/license-file/general/creator": {
+    "name": "File Creator"
+  },
+  "/huawei-license:license/license-files/license-file/general/created-time": {
+    "name": "File Created Time"
+  },
+  "/huawei-license:license/license-files/license-file/general/country": {
+    "name": "File Country Information"
+  },
+  "/huawei-license:license/license-files/license-file/general/customer": {
+    "name": "File Custom Information"
+  },
+  "/huawei-license:license/license-files/license-file/general/office": {
+    "name": "File Office Information"
+  },
+  "/huawei-license:license/license-files/license-file/features": {
+    "name": "All Feature Information Of File"
+  },
+  "/huawei-license:license/license-files/license-file/features/feature": {
+    "name": "File Feature Information"
+  },
+  "/huawei-license:license/license-files/license-file/features/feature/name": {
+    "name": "File Feature Name"
+  },
+  "/huawei-license:license/license-files/license-file/features/feature/product": {
+    "name": "File Product Information"
+  },
+  "/huawei-license:license/license-files/license-file/features/feature/esn": {
+    "name": "License File Serial Number"
+  },
+  "/huawei-license:license/license-files/license-file/features/feature/auth-type": {
+    "name": "File Authorizing Type"
+  },
+  "/huawei-license:license/license-files/license-file/features/feature/running-deadline": {
+    "name": "File Run Deadline"
+  },
+  "/huawei-license:license/license-files/license-file/features/feature/trial-days": {
+    "name": "File Trial Days"
+  },
+  "/huawei-license:license/license-files/license-file/features/feature/software-deadline": {
+    "name": "File Software Deadline"
+  },
+  "/huawei-license:license/license-files/license-file/features/feature/hardware-deadline": {
+    "name": "File Hardware Deadline"
+  },
+  "/huawei-license:license/license-files/license-file/features/feature/upgrate-deadline": {
+    "name": "File Upgrate Deadline"
+  },
+  "/huawei-license:license/license-files/license-file/features/feature/feature-items": {
+    "name": "All Feature Items Of File"
+  },
+  "/huawei-license:license/license-files/license-file/features/feature/feature-items/feature-item": {
+    "name": "File Feature Item"
+  },
+  "/huawei-license:license/license-files/license-file/features/feature/feature-items/feature-item/name": {
+    "name": "File Feature Item Name"
+  },
+  "/huawei-license:license/license-files/license-file/features/feature/feature-items/feature-item/value": {
+    "name": "File Feature Item Value"
+  },
+  "/huawei-license:license/resource-usages": {
+    "name": "All Resource Usages"
+  },
+  "/huawei-license:license/resource-usages/resource-usage": {
+    "name": "Resource Usage"
+  },
+  "/huawei-license:license/resource-usages/resource-usage/name": {
+    "name": "Resource Item Name"
+  },
+  "/huawei-license:license/resource-usages/resource-usage/usage": {
+    "name": "Resource Item Usage"
+  },
+  "/huawei-license:license/resource-usages/resource-usage/active-value": {
+    "name": "Resource Item Active Value"
+  },
+  "/huawei-license:license/resource-thresholds": {
+    "name": "List of Resource Usage Thresholds"
+  },
+  "/huawei-license:license/resource-thresholds/resource-threshold": {
+    "name": "Resource Usage Threshold"
+  },
+  "/huawei-license:license/resource-thresholds/resource-threshold/name": {
+    "name": "Resource Control Item Name"
+  },
+  "/huawei-license:license/resource-thresholds/resource-threshold/threshold": {
+    "name": "Resource Control Item Usage Threshold"
+  },
+  "/huawei-license:license/resource-thresholds/resource-threshold/configurable-switch": {
+    "name": "Resource Control Item Configurable Flag"
+  },
+  "/huawei-license:license/resource-thresholds/resource-threshold/description": {
+    "name": "Resource Control Item Description"
+  },
+  "/huawei-license:license/cloud-servers": {
+    "name": "List of cloud license servers"
+  },
+  "/huawei-license:license/cloud-servers/cloud-server": {
+    "name": "Configure cloud license server"
+  },
+  "/huawei-license:license/cloud-servers/cloud-server/server-ip": {
+    "name": "Ip Address"
+  },
+  "/huawei-license:license/cloud-servers/cloud-server/server-port": {
+    "name": "Port"
+  },
+  "/huawei-license:license/cloud-servers/cloud-server/register-state": {
+    "name": "Register State"
+  },
+  "/huawei-license:license-active": {
+    "name": "Active License File"
+  },
+  "/huawei-license:license-active/input/filename": {
+    "name": "File Name"
+  },
+  "/huawei-license:license-revoke": {
+    "name": "Revoke License File"
+  },
+  "/huawei-license:license-verify": {
+    "name": "Verify License File"
+  },
+  "/huawei-license:license-verify/input/filename": {
+    "name": "File Name"
+  },
+  "/huawei-license:license-revoke-chassis": {
+    "name": "Revoke License File By Device ID"
+  },
+  "/huawei-license:license-revoke-chassis/input/chassis-id": {
+    "name": "Device ID"
+  },
+  "/huawei-license:license-delete": {
+    "name": "Delete License File"
+  },
+  "/huawei-license:license-delete/input/filename": {
+    "name": "File Name"
+  },
+  "/huawei-license:license-trial": {
+    "name": "Enabling or Disabling Control Item Trial"
+  },
+  "/huawei-license:license-trial/input/trial-switch": {
+    "name": "Trial Function of a Control Item"
+  },
+  "/huawei-license:license-export": {
+    "name": "Exporting a License File"
+  },
+  "/huawei-license:license-export/input/filename": {
+    "name": "Exported License File Name"
+  },
+  "/huawei-license:startup-paf": {
+    "name": "Specifying a PAF File for a Next Startup"
+  },
+  "/huawei-license:startup-paf/input/filename": {
+    "name": "PAF File Name"
+  },
+  "/huawei-license:license-emergency": {
+    "name": "Active License Emergency State"
+  },
+  "/huawei-license:license-assign": {
+    "name": "Assign Cloud License"
+  },
+  "/huawei-license:license-assign/input/item-name": {
+    "name": "License Sale Item"
+  },
+  "/huawei-license:license-assign/input/item-num": {
+    "name": "License Number"
+  },
+  "/huawei-license:license-switch-mode": {
+    "name": "Switch license mode"
+  },
+  "/huawei-license:license-switch-mode/input/license-mode": {
+    "name": "Licnese Mode"
+  },
+  "/rpcs/huawei-license:lcs/license-active": {
+    "name": "Active License File"
+  },
+  "/rpcs/huawei-license:lcs/license-revoke": {
+    "name": "Revoke License File"
+  },
+  "/rpcs/huawei-license:lcs/license-verify": {
+    "name": "Verify License File"
+  },
+  "/rpcs/huawei-license:lcs/license-revoke-chassis": {
+    "name": "Revoke License File By Device ID"
+  },
+  "/rpcs/huawei-license:lcs/license-delete": {
+    "name": "Delete License File"
+  },
+  "/rpcs/huawei-license:lcs/license-trial": {
+    "name": "Enabling or Disabling Control Item Trial"
+  },
+  "/rpcs/huawei-license:lcs/license-export": {
+    "name": "Exporting a License File"
+  },
+  "/rpcs/huawei-license:lcs/startup-paf": {
+    "name": "Specifying a PAF File for a Next Startup"
+  },
+  "/rpcs/huawei-license:lcs/license-emergency": {
+    "name": "Active License Emergency State"
+  },
+  "/rpcs/huawei-license:lcs/license-assign": {
+    "name": "Assign Cloud License"
+  },
+  "/rpcs/huawei-license:lcs/license-switch-mode": {
+    "name": "Switch license mode"
+  }
+}

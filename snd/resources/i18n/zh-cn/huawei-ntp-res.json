@@ -1,0 +1,59 @@
+{
+  "/huawei-ntp:ntp": {
+    "name": "NTP"
+  },
+  "/huawei-ntp:ntp/disables": {
+    "name": "NTP服务去使能"
+  },
+  "/huawei-ntp:ntp/disables/disable": {
+    "name": "NTP服务去使能配置"
+  },
+  "/huawei-ntp:ntp/disables/disable/addr-family": {
+    "name": "地址族"
+  },
+  "/huawei-ntp:ntp/unicasts": {
+    "name": "NTP单播"
+  },
+  "/huawei-ntp:ntp/unicasts/unicast": {
+    "name": "NTP单播配置"
+  },
+  "/huawei-ntp:ntp/unicasts/unicast/ip-address": {
+    "name": "IP地址"
+  },
+  "/huawei-ntp:ntp/unicasts/unicast/type": {
+    "name": "类型"
+  },
+  "/huawei-ntp:ntp/unicasts/unicast/vpn-name": {
+    "name": "VPN实例名"
+  },
+  "/huawei-ntp:ntp/unicasts/unicast/version": {
+    "name": "版本"
+  },
+  "/huawei-ntp:ntp/unicasts/unicast/is-preferred": {
+    "name": "优先使能"
+  },
+  "/huawei-ntp:ntp/unicasts/unicast/ifname": {
+    "name": "接口名"
+  },
+  "/huawei-ntp:ntp/unicasts/unicast/key-id": {
+    "name": "密钥ID"
+  },
+  "/huawei-ntp:ntp/unicasts/unicast/max-poll-interval": {
+    "name": "最大轮询间隔"
+  },
+  "/huawei-ntp:ntp/unicasts/unicast/min-poll-interval": {
+    "name": "最小轮询间隔"
+  },
+  "/huawei-ntp:ntp/unicasts/unicast/is-preempt": {
+    "name": "使能抢占"
+  },
+  "/huawei-ntp:ntp/unicasts/unicast/is-burst": {
+    "name": "使能Burst"
+  },
+  "/huawei-ntp:ntp/unicasts/unicast/is-iburst": {
+    "name": "使能iBurst"
+  },
+  "/huawei-ntp:ntp/unicasts/unicast/port-number": {
+    "name": "端口号"
+  }
+}

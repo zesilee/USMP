@@ -1,0 +1,11 @@
+{
+  "/huawei-bgp:bgp/huawei-bgp-maintenance:rt-advertised-low-prioritys": {
+    "name": "List of Lowest Route Priority Configurations"
+  },
+  "/huawei-bgp:bgp/huawei-bgp-maintenance:rt-advertised-low-prioritys/rt-advertised-low-priority": {
+    "name": "Lowest Route Priority Configuration"
+  },
+  "/huawei-bgp:bgp/huawei-bgp-maintenance:rt-advertised-low-prioritys/rt-advertised-low-priority/address-family": {
+    "name": "Address Family"
+  }
+}

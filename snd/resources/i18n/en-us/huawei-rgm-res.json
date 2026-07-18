@@ -1,0 +1,47 @@
+{
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-rgm:rgm": {
+    "name": "Direct-route Track Service"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-rgm:rgm/rgm-track": {
+    "name": "Direct-route Track Service"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-rgm:rgm/rgm-track/track-vrrp": {
+    "name": "Direct-route Track VRRP"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-rgm:rgm/rgm-track/track-vrrp/track-vrrp": {
+    "name": "Direct-route Track VRRP"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-rgm:rgm/rgm-track/track-vrrp/track-vrrp/vrrp-id": {
+    "name": "VRRP ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-rgm:rgm/rgm-track/track-vrrp/track-vrrp/cost-change": {
+    "name": "Direct-route Cost Change"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-rgm:rgm/rgm-track/track-pw": {
+    "name": "Direct-route Track PW"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-rgm:rgm/rgm-track/track-pw/track-pw": {
+    "name": "Direct-route Track PW"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-rgm:rgm/rgm-track/track-pw/track-pw/cost-change": {
+    "name": "Direct-route Cost Change"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-rgm:rgm6": {
+    "name": "Direct-route Track Service"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-rgm:rgm6/rgm6-track": {
+    "name": "Direct-route Track Service"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-rgm:rgm6/rgm6-track/advertise-delay": {
+    "name": "DirectRt IPv6 cost delay"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-rgm:rgm6/rgm6-track/advertise-delay/advertise-delay": {
+    "name": "DirectRt IPv6 cost delay"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-rgm:rgm6/rgm6-track/advertise-delay/advertise-delay/cost-change": {
+    "name": "Degrade cost"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/huawei-rgm:rgm6/rgm6-track/advertise-delay/advertise-delay/time-delay": {
+    "name": "Delay time"
+  }
+}

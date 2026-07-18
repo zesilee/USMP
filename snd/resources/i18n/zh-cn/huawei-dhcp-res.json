@@ -1,0 +1,440 @@
+{
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-client-if": {
+    "name": "DHCP客户端属性"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-client-if/address-allocation": {
+    "name": "开启DHCP Client功能"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-client-if/option60": {
+    "name": "配置Option60"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-client-if/client-id": {
+    "name": "客户端标识"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-client-if/host-name": {
+    "name": "指定DHCP/BOOTP客户端主机名"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-client-if/request-option": {
+    "name": "默认选项外的请求选项列表"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-relay-attribute": {
+    "name": "DHCP中继属性"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-relay-attribute/enable": {
+    "name": "使能中继功能"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-relay-attribute/gateway-enable": {
+    "name": "DHCP中继网关切换"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-relay-attribute/server-group-name": {
+    "name": "DHCP服务器组名称"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-relay-attribute/giaddr-out-address": {
+    "name": "出接口地址为中继代理ip地址"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-relay-attribute/source-port": {
+    "name": "源接口"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-relay-attribute/information": {
+    "name": "使能DHCP中继的Option 82"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-relay-attribute/information-strategy": {
+    "name": "DHCP中处理Option 82信息"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-relay-attribute/option82": {
+    "name": "Option82选项"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-relay-attribute/option82/vss-control-enable": {
+    "name": "插入VSS信息"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-relay-attribute/option82/link-selection-enable": {
+    "name": "插入链接选择信息"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-relay-attribute/option82/link-selection-address": {
+    "name": "链路选择子选项IP地址"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-relay-attribute/option82/server-id-override-enable": {
+    "name": "服务器ID覆盖"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-relay-attribute/option82/vendor-specific-enable": {
+    "name": "服务器标识符覆盖选项"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-relay-attribute/server-addresses": {
+    "name": "服务器地址"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-relay-attribute/server-addresses/server-address": {
+    "name": "服务器地址"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-relay-attribute/server-addresses/server-address/address": {
+    "name": "服务器地址"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-relay-attribute/server-addresses/server-address/vendor": {
+    "name": "使能携带厂商标识符"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-relay-attribute/server-addresses/server-address/option-code": {
+    "name": "选项编码"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-relay-attribute/server-addresses/server-address/vendor-class": {
+    "name": "厂商标识符"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-relay-attribute/gateway-addresses": {
+    "name": "配置网关地址列表"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-relay-attribute/gateway-addresses/gateway-address": {
+    "name": "配置网关地址实例"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-relay-attribute/gateway-addresses/gateway-address/vendor": {
+    "name": "启用/禁用携带供应商标识符"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-relay-attribute/gateway-addresses/gateway-address/option-code": {
+    "name": "选项代码0表示NULL"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-relay-attribute/gateway-addresses/gateway-address/vendor-class": {
+    "name": "供应商标识符"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-relay-attribute/gateway-addresses/gateway-address/ip-address": {
+    "name": "网关地址"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-relay-attribute/vpn-server-addresses": {
+    "name": "服务器地址列表"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-relay-attribute/vpn-server-addresses/vpn-server-address": {
+    "name": "服务器地址"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-relay-attribute/vpn-server-addresses/vpn-server-address/address": {
+    "name": "服务器地址"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-relay-attribute/vpn-server-addresses/vpn-server-address/vpn-name": {
+    "name": "VPN名"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-relay-attribute/relay-source-address": {
+    "name": "配置DHCP中继源地址"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-relay-attribute/relay-source-address/vpn-name": {
+    "name": "VPN-NAME"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-relay-attribute/relay-source-address/source-address": {
+    "name": "源地址"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-relay-attribute/opt82-vendor-specifics": {
+    "name": "Option82厂商自定义选项列表"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-relay-attribute/opt82-vendor-specifics/opt82-vendor-specific": {
+    "name": "Option82厂商自定义选项"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-relay-attribute/opt82-vendor-specifics/opt82-vendor-specific/sub-option-number": {
+    "name": "Option82子选项"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-relay-attribute/opt82-vendor-specifics/opt82-vendor-specific/sub-option-format": {
+    "name": "子选项格式"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-relay-attribute/opt82-vendor-specifics/opt82-vendor-specific/ip-address": {
+    "name": "IPv4地址"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:interface-ip-pool": {
+    "name": "接口地址池"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:interface-ip-pool/select-type": {
+    "name": "选择类型"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:interface-ip-pool/select-type/global": {
+    "name": "全局地址池"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:interface-ip-pool/select-type/global/select-global": {
+    "name": "使能全局地址池"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-if": {
+    "name": "配置DHCP属性"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-if/option82-formats": {
+    "name": "DHCP option82格式列表"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-if/option82-formats/option82-format": {
+    "name": "配置DHCP option82格式"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-if/option82-formats/option82-format/sub-option-type": {
+    "name": "DHCP选项82子选项类型"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-if/option82-formats/option82-format/option82-format": {
+    "name": "DHCP option82格式"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-if/option82-formats/option82-format/user-define-text": {
+    "name": "DHCP option82用户自定义字符串"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-if/option82-vlan-formats": {
+    "name": "带VLAN的DHCP option82格式列表"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-if/option82-vlan-formats/option82-vlan-format": {
+    "name": "配置带有VLAN的DHCP option82格式"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-if/option82-vlan-formats/option82-vlan-format/vlan-id": {
+    "name": "外层VLAN ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-if/option82-vlan-formats/option82-vlan-format/cevlan-id": {
+    "name": "内层VLAN ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-if/option82-vlan-formats/option82-vlan-format/sub-option-type": {
+    "name": "DHCP选项82子选项类型"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-if/option82-vlan-formats/option82-vlan-format/option82-format": {
+    "name": "DHCP option82格式"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-if/option82-vlan-formats/option82-vlan-format/user-define-text": {
+    "name": "DHCP option82用户自定义字符串"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-if/option82-insert-setting": {
+    "name": "配置接口插入DHCP option82"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-if/option82-insert-setting/option82-insert-format": {
+    "name": "指定DHCP option82插入格式"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-if/option82-insert-setting/option82-insert-format/insert-format": {
+    "name": "配置接口插入DHCP option82"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-if/option82-insert-setting/option82-insert-format/insert-format/insert": {
+    "name": "插入DHCP option82"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-if/option82-insert-setting/option82-insert-format/rebuild-format": {
+    "name": "配置强制插入DHCP option82"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-if/option82-insert-setting/option82-insert-format/rebuild-format/rebuild": {
+    "name": "强制插入DHCP option82"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-if/append-vendor-specific": {
+    "name": "插入Sub9子选项"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-if/append-vendor-specific/enble": {
+    "name": "Option82中插入Sub9子选项"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-if/encapsulation": {
+    "name": "DHCP Option 82字段中的子选项"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-if/encapsulation/suboption": {
+    "name": "DHCP Option 82字段中的子选项"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-if/subscriber-id": {
+    "name": "DHCP Option 82字段中Sub6子选项"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-if/subscriber-id/ascii-text": {
+    "name": "DHCP选项82 ascii类型格式"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-if/subscriber-id/hex-text": {
+    "name": "DHCP选项82十六进制格式"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-snooping-if": {
+    "name": "配置DHCP snooping接口属性"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-snooping-if/basic-attribute": {
+    "name": "配置DHCP snooping基本属性"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-snooping-if/basic-attribute/enable": {
+    "name": "在接口上启用/禁用DHCP snooping"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-snooping-if/basic-attribute/trust-enable": {
+    "name": "启用/禁用受信任接口"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-snooping-if/basic-attribute/rate-limit": {
+    "name": "DHCP报文的最大允许速率"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-snooping-if/basic-attribute/check-rate-enable": {
+    "name": "使能DHCP报文处理速率检查功能"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-snooping-if/basic-attribute/alarm-reply-enable": {
+    "name": "使能/去使能报文告警功能"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-snooping-if/basic-attribute/alarm-reply-threshold": {
+    "name": "非信任报文的告警阈值"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-snooping-if/basic-attribute/check-mac-enable": {
+    "name": "启用/禁用MAC地址一致性检查"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-snooping-if/basic-attribute/alarm-mac-enable": {
+    "name": "启用/禁用MAC地址一致性检查"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-snooping-if/basic-attribute/alarm-mac-threshold": {
+    "name": "MAC地址检查的告警阈值"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-snooping-if/basic-attribute/check-user-bind-enable": {
+    "name": "使能DHCP snooping绑定表检查功能"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-snooping-if/basic-attribute/alarm-user-bind-enable": {
+    "name": "使能DHCP snooping告警功能"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-snooping-if/basic-attribute/alarm-user-bind-threshold": {
+    "name": "配置DHCP snooping告警阈值"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcp:dhcp-snooping-if/basic-attribute/max-user-number": {
+    "name": "接口上允许的最大用户数"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-dhcp:dhcp-bd": {
+    "name": "在BD中配置DHCP属性"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-dhcp:dhcp-bd/option82-insert-setting": {
+    "name": "配置BD中的所有接口"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-dhcp:dhcp-bd/option82-insert-setting/option82-insert-format": {
+    "name": "指定DHCP option82插入格式"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-dhcp:dhcp-bd/option82-insert-setting/option82-insert-format/insert-format": {
+    "name": "配置插入DHCP option82"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-dhcp:dhcp-bd/option82-insert-setting/option82-insert-format/insert-format/insert": {
+    "name": "插入DHCP option82"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-dhcp:dhcp-bd/option82-insert-setting/option82-insert-format/rebuild-format": {
+    "name": "配置强制插入DHCP option82"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-dhcp:dhcp-bd/option82-insert-setting/option82-insert-format/rebuild-format/rebuild": {
+    "name": "强制插入DHCP option82"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-dhcp:dhcp-bd/encapsulation": {
+    "name": "配置插入DHCP Option 82子选项"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-dhcp:dhcp-bd/encapsulation/suboption": {
+    "name": "配置插入DHCP Option 82子选项"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-dhcp:dhcp-snooping-bd": {
+    "name": "配置DHCP snooping信息"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-dhcp:dhcp-snooping-bd/basic-attribute": {
+    "name": "配置DHCP snooping的基本属性"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-dhcp:dhcp-snooping-bd/basic-attribute/enable": {
+    "name": "在BD中启用/禁用DHCP snooping"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-dhcp:dhcp-snooping-bd/basic-attribute/nni-trust-enable": {
+    "name": "启用/禁用受信任网络节点接口"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-dhcp:dhcp-snooping-bd/basic-attribute/alarm-reply-enable": {
+    "name": "使能/去使能丢弃不可信报文的告警"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-dhcp:dhcp-snooping-bd/basic-attribute/alarm-reply-threshold": {
+    "name": "丢弃不可信报文告警的阈值"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-dhcp:dhcp-snooping-bd/basic-attribute/check-mac-enable": {
+    "name": "启用/禁用MAC检查"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-dhcp:dhcp-snooping-bd/basic-attribute/alarm-mac-enable": {
+    "name": "使能MAC地址一致性检查告警"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-dhcp:dhcp-snooping-bd/basic-attribute/alarm-mac-threshold": {
+    "name": "MAC地址一致性检查告警阈值"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-dhcp:dhcp-snooping-bd/basic-attribute/check-request-enable": {
+    "name": "启用/禁用用户绑定表检查"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-dhcp:dhcp-snooping-bd/basic-attribute/alarm-request-enable": {
+    "name": "启用用户绑定表告警功能"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-dhcp:dhcp-snooping-bd/basic-attribute/alarm-request-threshold": {
+    "name": "用户绑定表告警阈值"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-dhcp:dhcp-vlan": {
+    "name": "配置VLAN下的DHCP属性"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-dhcp:dhcp-vlan/interface-option82-insert-settings": {
+    "name": "接口Option82插入设置"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-dhcp:dhcp-vlan/interface-option82-insert-settings/interface-option82-insert-setting": {
+    "name": "配置VLAN内的所有接口"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-dhcp:dhcp-vlan/interface-option82-insert-settings/interface-option82-insert-setting/if-name": {
+    "name": "接口名称"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-dhcp:dhcp-vlan/interface-option82-insert-settings/interface-option82-insert-setting/option82-insert-format": {
+    "name": "指定DHCP option82插入格式"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-dhcp:dhcp-vlan/interface-option82-insert-settings/interface-option82-insert-setting/option82-insert-format/insert-format": {
+    "name": "配置插入DHCP Option82"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-dhcp:dhcp-vlan/interface-option82-insert-settings/interface-option82-insert-setting/option82-insert-format/insert-format/insert": {
+    "name": "插入DHCP Option82"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-dhcp:dhcp-vlan/interface-option82-insert-settings/interface-option82-insert-setting/option82-insert-format/rebuild-format": {
+    "name": "配置强制插入DHCP Option82"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-dhcp:dhcp-vlan/interface-option82-insert-settings/interface-option82-insert-setting/option82-insert-format/rebuild-format/rebuild": {
+    "name": "强制插入DHCP Option82"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-dhcp:dhcp-vlan/option82-insert-setting": {
+    "name": "插入或强制插入DHCP option82"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-dhcp:dhcp-vlan/option82-insert-setting/option82-insert-format": {
+    "name": "指定DHCP option82插入格式"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-dhcp:dhcp-vlan/option82-insert-setting/option82-insert-format/insert-format": {
+    "name": "配置插入DHCP option82"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-dhcp:dhcp-vlan/option82-insert-setting/option82-insert-format/insert-format/insert": {
+    "name": "插入DHCP option82"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-dhcp:dhcp-vlan/option82-insert-setting/option82-insert-format/rebuild-format": {
+    "name": "配置强制插入DHCP option82"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-dhcp:dhcp-vlan/option82-insert-setting/option82-insert-format/rebuild-format/rebuild": {
+    "name": "强制插入DHCP option82"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-dhcp:dhcp-vlan/append-vendor-specific": {
+    "name": "将Sub9子选项插入到Option 82中"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-dhcp:dhcp-vlan/append-vendor-specific/enble": {
+    "name": "启用将Sub9子选项插入选项82"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-dhcp:dhcp-vlan/encapsulation": {
+    "name": "配置插入DHCP Option 82子选项"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-dhcp:dhcp-vlan/encapsulation/suboption": {
+    "name": "配置插入DHCP Option 82子选项"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-dhcp:dhcp-snooping-vlan": {
+    "name": "配置DHCP snooping VLAN属性"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-dhcp:dhcp-snooping-vlan/basic-attribute": {
+    "name": "配置DHCP snooping的基本属性"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-dhcp:dhcp-snooping-vlan/basic-attribute/enable": {
+    "name": "在VLAN中启用/禁用DHCP snooping"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-dhcp:dhcp-snooping-vlan/basic-attribute/check-rate-enable": {
+    "name": "使能DHCP报文处理速率检查功能"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-dhcp:dhcp-snooping-vlan/basic-attribute/vlan-rate": {
+    "name": "DHCP报文的最大允许速率"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-dhcp:dhcp-snooping-vlan/basic-attribute/alarm-reply-enable": {
+    "name": "使能/去使能告警功能"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-dhcp:dhcp-snooping-vlan/basic-attribute/alarm-reply-threshold": {
+    "name": "非信任报文丢弃告警阈值"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-dhcp:dhcp-snooping-vlan/basic-attribute/check-mac-enable": {
+    "name": "启用/禁用MAC地址一致性检查"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-dhcp:dhcp-snooping-vlan/basic-attribute/alarm-mac-enable": {
+    "name": "使能MAC地址一致性检查告警"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-dhcp:dhcp-snooping-vlan/basic-attribute/alarm-mac-threshold": {
+    "name": "MAC地址一致性检查告警阈值"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-dhcp:dhcp-snooping-vlan/basic-attribute/check-user-bind-enable": {
+    "name": "使能DHCP snooping绑定表检查功能"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-dhcp:dhcp-snooping-vlan/basic-attribute/alarm-user-bind-enable": {
+    "name": "启用/禁用用户绑定表告警"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-dhcp:dhcp-snooping-vlan/basic-attribute/alarm-user-bind-threshold": {
+    "name": "用户绑定表告警阈值"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-dhcp:dhcp-snooping-vlan/basic-attribute/max-user-number": {
+    "name": "接口上允许的最大用户数"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-dhcp:dhcp-snooping-vlan/vlan-trusts": {
+    "name": "信任接口配置信息"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-dhcp:dhcp-snooping-vlan/vlan-trusts/vlan-trust": {
+    "name": "配置VLAN信任接口"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-dhcp:dhcp-snooping-vlan/vlan-trusts/vlan-trust/if-name": {
+    "name": "受信任接口的名称"
+  }
+}

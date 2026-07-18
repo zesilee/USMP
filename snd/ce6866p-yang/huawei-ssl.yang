@@ -1,0 +1,672 @@
+/*
+Copyright (C) 2020 Huawei Technologies Co., Ltd. All rights reserved.
+*/
+module huawei-ssl {
+  namespace "urn:huawei:yang:huawei-ssl";
+  prefix ssl;
+
+  import huawei-extension {
+    prefix ext;
+  }
+  import huawei-pub-type {
+    prefix pub-type;
+  }
+  import ietf-yang-types {
+    prefix yang;
+  }
+  organization
+    "Huawei Technologies Co., Ltd.";
+  contact
+    "Huawei Industrial Base
+     Bantian, Longgang
+     Shenzhen 518129
+     People's Republic of China
+     Website: http://www.huawei.com
+     Email: support@huawei.com";
+  description
+    "Secure Socket Layer (SSL)";
+
+  revision 2020-03-19 {
+    description
+      "Initial revision.";
+    reference
+      "Huawei private.";
+  }
+  typedef ssl-password-type {
+    type pub-type:password-extend {
+    }
+    description
+      "SSL password type";
+  }
+  typedef ssl-cert-type {
+    type enumeration {
+      enum "asn1-cert" {
+        value 1;
+        description
+          "certype_asn1";
+      }
+      enum "pem-cert" {
+        value 2;
+        description
+          "certype_pem";
+      }
+      enum "pfx-cert" {
+        value 3;
+        description
+          "certype_pfx";
+      }
+      enum "pem-chain" {
+        value 4;
+        description
+          "certype_pem-chain";
+      }
+    }
+    description
+      "SSL certification type list";
+  }
+  typedef ssl-key-type {
+    type enumeration {
+      enum "rsa" {
+        value 1;
+        description
+          "keytype_rsa";
+      }
+      enum "dsa" {
+        value 2;
+        description
+          "keytype_dsa";
+      }
+    }
+    description
+      "SSL public key encryption type list";
+  }
+  typedef ssl-crl-type {
+    type enumeration {
+      enum "asn1-crl" {
+        value 1;
+        description
+          "crltype_asn1";
+      }
+      enum "pem-crl" {
+        value 2;
+        description
+          "crltype_pem";
+      }
+    }
+    description
+      "Certification revocation type list";
+  }
+  typedef ssl-ca-type {
+    type enumeration {
+      enum "asn1-ca" {
+        value 1;
+        description
+          "catype_asn1-ca";
+      }
+      enum "pem-ca" {
+        value 2;
+        description
+          "catype_pem-ca";
+      }
+      enum "pfx-ca" {
+        value 3;
+        description
+          "catype_pfx-ca";
+      }
+    }
+    description
+      "Certificate authority type list";
+  }
+  typedef ssl-version {
+    type enumeration {
+      enum "tls1.2" {
+        value 4;
+        description
+          "SSL version tls1.2.";
+      }
+      enum "tls1.3" {
+        value 5;
+        description
+          "SSL version tls1.3.";
+      }
+    }
+    description
+      "SSL version type list";
+  }
+  typedef encrypted {
+    type enumeration {
+      enum "isencrypted" {
+        value 0;
+        description
+          "IS ENCRYPTED";
+      }
+      enum "notencrytep" {
+        value 1;
+        description
+          "NOT ENCRYPTED";
+      }
+    }
+    description
+      "SSL encrypted flag list";
+  }
+  typedef ssl-bool {
+    type enumeration {
+      enum "enable" {
+        value 1;
+        description
+          "Service Enable.";
+      }
+      enum "disable" {
+        value 2;
+        description
+          "Service Disable.";
+      }
+    }
+    description
+      "Certificate Verify bool switch";
+  }
+  typedef ssl-cipher-type {
+    type enumeration {
+      enum "dhe-rsa-with-aes-256-sha" {
+        value 3;
+        description
+          "DHE-RSA-WITH-AES-256-SHA cipher suite.";
+      }
+      enum "dhe-dss-with-aes-256-sha" {
+        value 4;
+        description
+          "DHE-DSS-WITH-AES-256-SHA cipher suite.";
+      }
+      enum "dhe-rsa-with-aes-128-sha" {
+        value 5;
+        description
+          "DHE-RSA-WITH-AES-128-SHA cipher suite.";
+      }
+      enum "dhe-dss-with-aes-128-sha" {
+        value 6;
+        description
+          "DHE-DSS-WITH-AES-128-SHA cipher suite.";
+      }
+      enum "dhe-rsa-with-aes-128-gcm-sha256" {
+        value 21;
+        description
+          "DHE-RSA-WITH-AES-128-GCM-SHA256 cipher suite.";
+      }
+      enum "dhe-rsa-with-aes-256-gcm-sha384" {
+        value 22;
+        description
+          "DHE-RSA-WITH-AES-256-GCM-SHA384 cipher suite.";
+      }
+      enum "dhe-dss-with-aes-128-gcm-sha256" {
+        value 23;
+        description
+          "DHE-DSS-WITH-AES-128-GCM-SHA256 cipher suite.";
+      }
+      enum "dhe-dss-with-aes-256-gcm-sha384" {
+        value 24;
+        description
+          "DHE-DSS-WITH-AES-256-GCM-SHA384 cipher suite";
+      }
+      enum "ecdhe-rsa-with-aes-128-gcm-sha256" {
+        value 25;
+        description
+          "ECDHE-RSA-WITH-AES-128-GCM-SHA256 cipher suite.";
+      }
+      enum "ecdhe-rsa-with-aes-256-gcm-sha384" {
+        value 26;
+        description
+          "ECDHE-RSA-WITH-AES-256-GCM-SHA384 cipher suite.";
+      }
+      enum "aes-128-gcm-sha256" {
+        value 27;
+        description
+          "AES-128-GCM-SHA256 cipher suite.";
+      }
+      enum "aes-256-gcm-sha384" {
+        value 28;
+        description
+          "AES_256_GCM_SHA384 cipher suite.";
+      }
+      enum "chacha20-poly1305-sha256" {
+        value 29;
+        description
+          "CHACHA20_POLY1305_SHA256 cipher suite.";
+      }
+      enum "aes-128-ccm-sha256" {
+        value 30;
+        description
+          "AES_128_CCM_SHA256 cipher suite.";
+      }
+    }
+    description
+      "Enumeration of ssl cipher type.";
+  }
+  typedef ssl-cert-state {
+    type enumeration {
+      enum "normal" {
+        value 1;
+        description
+          "Normal.";
+      }
+      enum "about-to-expire" {
+        value 2;
+        description
+          "About to expire.";
+      }
+      enum "expired" {
+        value 3;
+        description
+          "Expired already.";
+      }
+    }
+    description
+      "Enumeration of ssl certificate state.";
+  }
+  typedef ssl-cert-file-type {
+    type enumeration {
+      enum "certificate" {
+        value 1;
+        description
+          "Certificate.";
+      }
+      enum "crl" {
+        value 2;
+        description
+          "Certificate revocation list.";
+      }
+      enum "trusted-ca" {
+        value 3;
+        description
+          "Trusted CA(certificate authority).";
+      }
+    }
+    description
+      "Enumeration of ssl certificate file type.";
+  }
+  ext:task-name "ssl";
+  container ssl {
+    description
+      "Secure Socket Layer (SSL)";
+    container ssl-policys {
+      description
+        "List of all SSL policys.";
+      list ssl-policy {
+        key "policy-name";
+        max-elements  "4";
+        description
+          "Configure SSL policy, which is a collection of certificate and certification agency's. Other features can use the SSL policy by referring to the SSL policy name.";
+        leaf policy-name {
+          type string {
+            length "1..23";
+            pattern '[a-z0-9_]*';
+          }
+          description
+            "Name for identifying an SSL policy, the ranging from 1 to 23. You can only use underline, letter and digit. The letter does not differentiate the capital, and will transforms to the small letter.";
+        }
+        leaf pki-realm {
+          type string {
+            length "1..64";
+          }
+          description
+            "PKI domain.";
+        }
+        leaf mini-version {
+          type ssl-version;
+          default "tls1.2";
+          ext:support-filter "true";
+          description
+            "Set SSL version,surport tls1.1 and tls1.2,the defult value is tls1.2.";
+        }
+        leaf cert-ver3-enable {
+          type ssl-bool;
+          default "disable";
+          ext:support-filter "true";
+          description
+            "Whether to enable X509v3 verification for certificates.";
+        }
+        leaf crl-ver2-enable {
+          type ssl-bool;
+          default "disable";
+          ext:support-filter "true";
+          description
+            "Whether to enable X509v2 verification for CRLs.";
+        }
+        leaf basic-const-enable {
+          type ssl-bool;
+          default "disable";
+          ext:support-filter "true";
+          description
+            "Whether to enable Basic Constraints Field verification for certificates.";
+        }
+        leaf mini-path-len {
+          type uint32 {
+            range "1..1024";
+          }
+          default "1";
+          ext:support-filter "true";
+          description
+            "Whether to enable minimum path length verification for certificates.";
+        }
+        leaf key-usage-enable {
+          type ssl-bool;
+          default "disable";
+          ext:support-filter "true";
+          description
+            "Whether to enable Key Usage Field verification for certificates. ";
+        }
+		container cert-loads {
+		  when "not(/ssl:ssl/ssl:ssl-policys/ssl:ssl-policy/ssl:policy-name)";
+		  description
+			"List of all SSL certificate file loaded by SSL policy.";
+		  list cert-load {
+			key "cert-file";
+			description
+			  "Configure SSL certificate file loaded by SSL policy.";
+			leaf cert-file {
+			  type string {
+				length "1..64";
+			  }
+			  description
+				"cert file";
+			}
+			leaf cert-type {
+			  type ssl-cert-type;
+			  mandatory true;
+			  ext:support-filter "true";
+			  description
+				"certType";
+			}
+			leaf auth-code-crt {
+			  when "not(../cert-type='asn1-cert') or ../cert-type!='asn1-cert' and ../cert-type!='pfx-cert' or ../cert-type='pfx-cert' and ../is-mac=0 or ../cert-type='pfx-cert' and ../is-mac=1 or ../cert-type='pfx-cert'";
+			  type ssl-password-type {
+				length "1..168";
+			  }
+			  ext:support-filter "true";
+			  description
+				"authCode";
+			}
+			leaf is-mac {
+			  when "not(../cert-type!='asn1-cert' and ../cert-type!='pfx-cert' or ../cert-type='asn1-cert') or ../cert-type='pfx-cert'";
+			  type uint32 {
+				range "0..1";
+			  }
+			  ext:support-filter "true";
+			  description
+				"Mark for using MAC.";
+			}
+			leaf key-type {
+			  when "../cert-type!='asn1-cert' and ../cert-type!='pfx-cert' or ../cert-type='asn1-cert' or ../cert-type='pfx-cert' and ../is-mac=0 or ../cert-type='pfx-cert' and ../is-mac=1 or ../cert-type='pfx-cert'";
+			  type ssl-key-type;
+			  mandatory true;
+			  ext:support-filter "true";
+			  description
+				"keyType";
+			}
+			leaf auth-code-mac {
+			  when "not(../cert-type!='asn1-cert' and ../cert-type!='pfx-cert' or ../cert-type='asn1-cert' or ../cert-type='pfx-cert' and ../is-mac=0) or ../cert-type='pfx-cert' and ../is-mac=1 or ../cert-type='pfx-cert'";
+			  type ssl-password-type {
+				length "1..168";
+			  }
+			  ext:support-filter "true";
+			  description
+				"authCodeMac";
+			}
+			leaf key-file {
+			  when "not(../cert-type='pfx-cert' and ../is-mac=1) or ../cert-type!='asn1-cert' and ../cert-type!='pfx-cert' or ../cert-type='asn1-cert' or ../cert-type='pfx-cert' and ../is-mac=0 or ../cert-type='pfx-cert'";
+			  type string {
+				length "1..64";
+			  }
+			  ext:support-filter "true";
+			  description
+				"keyFile";
+			}
+			leaf issuer-name {
+			  when "not(not(../cert-file)) or not(../cert-file)";
+			  type string {
+				length "1..255";
+			  }
+			  config false;
+			  ext:support-filter "true";
+			  description
+				"Issuer name";
+			}
+			leaf valid-not-before {
+			  when "not(not(../cert-file)) or not(../cert-file)";
+			  type string {
+				length "1..255";
+			  }
+			  config false;
+			  ext:support-filter "true";
+			  description
+				"Validity Not Before";
+			}
+			leaf valid-not-after {
+			  when "not(not(../cert-file)) or not(../cert-file)";
+			  type string {
+				length "1..255";
+			  }
+			  config false;
+			  ext:support-filter "true";
+			  description
+				"Validity Not After";
+			}
+			leaf is-cert-file-encrypted {
+			  type encrypted;
+			  config false;
+			  ext:support-filter "true";
+			  description
+				"Is cert-file Encrypted";
+			}
+		  }
+		}
+		container crl-loads {
+		  when "not(/ssl:ssl/ssl:ssl-policys/ssl:ssl-policy/ssl:policy-name)";
+		  description
+			"List of sslCrlLoad.";
+		  list crl-load {
+			key "crl-file";
+			max-elements  "2";
+			description
+			  "Configure sslCrlLoad.";
+			leaf crl-file {
+			  type string {
+				length "1..64";
+			  }
+			  description
+				"crlFile";
+			}
+			leaf crl-type {
+			  type ssl-crl-type;
+			  mandatory true;
+			  ext:support-filter "true";
+			  description
+				"crlType";
+			}
+		  }
+		}
+        leaf cipher-suite-name {
+          type string {
+            length "1..32";
+          }
+          description
+            "Name for identifying a cipher suite name.";
+        }
+        leaf exclude-rsa-kex {
+          type ssl-bool;
+          default "enable";
+          description
+            "Whether to exclude RSA key exchange algorithm.";
+        }
+        leaf exclude-hmac-sha1 {
+          type ssl-bool;
+          default "enable";
+          description
+            "Whether to exclude HMAC-SHA1 algorithm.";
+        }
+        leaf exclude-ciphermode-cbc {
+          type ssl-bool;
+          default "enable";
+          description
+            "Whether to exclude CBC encryption mode algorithm.";
+        }
+        leaf-list feature-name {
+          type string {
+            length "1..50";
+          }
+          config false;
+          description
+            "Name statistics for features which have binded this SSL policy.";
+        }
+		container trust-ca-loads {
+		  when "not(/ssl:ssl/ssl:ssl-policys/ssl:ssl-policy/ssl:policy-name)";
+		  description
+			"List of sslTrustCALoads.";
+		  list trust-ca-load {
+			key "ca-file";
+			max-elements  "4";
+			description
+			  "Configure sslTrustCALoad.";
+			leaf ca-file {
+			  type string {
+				length "1..64";
+			  }
+			  description
+				"caFile";
+			}
+			leaf ca-type {
+			  type ssl-ca-type;
+			  mandatory true;
+			  ext:support-filter "true";
+			  description
+				"caType";
+			}
+			leaf auth-code {
+			  when "not(../ca-type!='pfx-ca')";
+			  type ssl-password-type {
+				length "1..168";
+			  }
+			  ext:support-filter "true";
+			  description
+				"authCode";
+			}
+		  }
+		}
+        container certificate-files {
+          config false;
+          description "List of ssl certificate file.";
+          list certificate-file {
+            key "file-name file-type";
+            description "Operational data of ssl certificate file.";
+            leaf file-name {
+              type string {
+                length "1..64";
+              }
+              description "The file name of the certificate.";
+            }
+            leaf file-type {
+              type ssl-cert-file-type;
+              description
+              "The file type of the certificate.";
+            }
+            container certificates {
+              description "List of ssl certificate information.";
+              list certificate {
+                key "serial-number";
+                description "Operational data of ssl certificate.";
+                leaf serial-number {
+                  type string {
+                    length "1..63";
+                  }
+                  description "The serial number of the certificate.";
+                }
+                leaf version {
+                  type string {
+                    length "1..63";
+                  }
+                  description "The version of the certificate.";
+                }
+                leaf issuer {
+                  type string {
+                    length "1..1023";
+                  }
+                  description "The issuer of the certificate.";
+                }
+                leaf subject {
+                  type string {
+                    length "1..1023";
+                  }
+                  description "The subject name of the certificate.";
+                }
+                leaf cert-state {
+                  type ssl-cert-state;
+                    description "The state of the certificate.";
+                }
+                leaf start-time {
+                  type yang:date-and-time;
+                  description "The validity start time of the certificate.";
+                }
+                leaf end-time {
+                  type yang:date-and-time;
+                  description "The validity end time of the certificate.";
+                }
+                leaf signature-algorithm {
+                  type string {
+                    length "1..63";
+                  }
+                  description "The signature algorithm of the certificate.";
+                }
+                leaf public-key-algorithm {
+                  type string {
+                    length "1..63";
+                  }
+                  description "The public key algorithm of the certificate.";
+                }
+                leaf key-usage {
+                  type string {
+                    length "1..255";
+                  }
+                  description "The key usage of the certificate.";
+                }
+                leaf subject-alternative-name {
+                  type string {
+                    length "1..255";
+                  }
+                  description "The subject alternative name of the certificate.";
+                }
+                leaf common-name {
+                  type string {
+                    length "1..255";
+                  }
+                  description "The common name of the certificate.";
+                }
+                }
+              }
+            }
+          }
+        }
+	  }
+    container ssl-cipher-suites {
+      description
+        "List of SSL cipher suite.";
+      list ssl-cipher-suite {
+        key "cipher-suite-name";
+        description
+          "Configure SSL cipher suite.";
+        leaf cipher-suite-name {
+          type string {
+            length "1..32";
+          }
+          description
+            "Name of cipher suite.";
+	  }
+        leaf-list ssl-ciphers {
+          type ssl-cipher-type;
+          min-elements 1;
+          max-elements 4096;
+          description
+            "Configure SSL ciphers.";
+	}
+      }
+    }
+   }
+}

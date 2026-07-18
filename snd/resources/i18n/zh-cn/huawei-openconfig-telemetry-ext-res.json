@@ -1,0 +1,290 @@
+{
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/sensor-paths/sensor-path/config/huawei-openconfig-telemetry-ext:reset-when-start": {
+    "name": "初始配置时清零采样路径"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/sensor-paths/sensor-path/config/huawei-openconfig-telemetry-ext:depth": {
+    "name": "采样深度"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/sensor-paths/sensor-path/state/huawei-openconfig-telemetry-ext:reset-when-start": {
+    "name": "初始配置时清零采样路径"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/sensor-paths/sensor-path/state/huawei-openconfig-telemetry-ext:depth": {
+    "name": "采样深度"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/sensor-paths/sensor-path/huawei-openconfig-telemetry-ext:filters": {
+    "name": "过滤器组"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/sensor-paths/sensor-path/huawei-openconfig-telemetry-ext:filters/filter": {
+    "name": "过滤器列表"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/sensor-paths/sensor-path/huawei-openconfig-telemetry-ext:filters/filter/name": {
+    "name": "过滤器名称"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/sensor-paths/sensor-path/huawei-openconfig-telemetry-ext:filters/filter/config": {
+    "name": "配置节点"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/sensor-paths/sensor-path/huawei-openconfig-telemetry-ext:filters/filter/config/name": {
+    "name": "过滤器名称"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/sensor-paths/sensor-path/huawei-openconfig-telemetry-ext:filters/filter/config/condition-relation": {
+    "name": "过滤条件间的逻辑运算方式"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/sensor-paths/sensor-path/huawei-openconfig-telemetry-ext:filters/filter/state": {
+    "name": "状态节点"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/sensor-paths/sensor-path/huawei-openconfig-telemetry-ext:filters/filter/state/name": {
+    "name": "过滤器名称"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/sensor-paths/sensor-path/huawei-openconfig-telemetry-ext:filters/filter/state/condition-relation": {
+    "name": "过滤条件间的逻辑运算方式"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/sensor-paths/sensor-path/huawei-openconfig-telemetry-ext:filters/filter/conditions": {
+    "name": "过滤条件"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/sensor-paths/sensor-path/huawei-openconfig-telemetry-ext:filters/filter/conditions/condition": {
+    "name": "过滤条件列表"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/sensor-paths/sensor-path/huawei-openconfig-telemetry-ext:filters/filter/conditions/condition/op-field": {
+    "name": "过滤条件指标"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/sensor-paths/sensor-path/huawei-openconfig-telemetry-ext:filters/filter/conditions/condition/op-type": {
+    "name": "运算符"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/sensor-paths/sensor-path/huawei-openconfig-telemetry-ext:filters/filter/conditions/condition/op-value": {
+    "name": "参与运算的数值"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/sensor-paths/sensor-path/huawei-openconfig-telemetry-ext:filters/filter/conditions/condition/config": {
+    "name": "配置节点"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/sensor-paths/sensor-path/huawei-openconfig-telemetry-ext:filters/filter/conditions/condition/config/op-field": {
+    "name": "过滤条件指标"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/sensor-paths/sensor-path/huawei-openconfig-telemetry-ext:filters/filter/conditions/condition/config/op-type": {
+    "name": "运算符"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/sensor-paths/sensor-path/huawei-openconfig-telemetry-ext:filters/filter/conditions/condition/config/op-value": {
+    "name": "参与运算的数值"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/sensor-paths/sensor-path/huawei-openconfig-telemetry-ext:filters/filter/conditions/condition/state": {
+    "name": "状态节点"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/sensor-paths/sensor-path/huawei-openconfig-telemetry-ext:filters/filter/conditions/condition/state/op-field": {
+    "name": "过滤条件指标"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/sensor-paths/sensor-path/huawei-openconfig-telemetry-ext:filters/filter/conditions/condition/state/op-type": {
+    "name": "运算符"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/sensor-paths/sensor-path/huawei-openconfig-telemetry-ext:filters/filter/conditions/condition/state/op-value": {
+    "name": "参与运算的数值"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/huawei-openconfig-telemetry-ext:sensor-paths-self-define-event": {
+    "name": "自定义事件组"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/huawei-openconfig-telemetry-ext:sensor-paths-self-define-event/sensor-path": {
+    "name": "自定义事件列表"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/huawei-openconfig-telemetry-ext:sensor-paths-self-define-event/sensor-path/path": {
+    "name": "采样路径名称"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/huawei-openconfig-telemetry-ext:sensor-paths-self-define-event/sensor-path/config": {
+    "name": "配置节点"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/huawei-openconfig-telemetry-ext:sensor-paths-self-define-event/sensor-path/config/path": {
+    "name": "采样路径名称"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/huawei-openconfig-telemetry-ext:sensor-paths-self-define-event/sensor-path/config/description": {
+    "name": "描述信息"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/huawei-openconfig-telemetry-ext:sensor-paths-self-define-event/sensor-path/config/level": {
+    "name": "级别"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/huawei-openconfig-telemetry-ext:sensor-paths-self-define-event/sensor-path/config/suppress-period": {
+    "name": "抑制周期"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/huawei-openconfig-telemetry-ext:sensor-paths-self-define-event/sensor-path/config/depth": {
+    "name": "采样深度"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/huawei-openconfig-telemetry-ext:sensor-paths-self-define-event/sensor-path/state": {
+    "name": "状态节点"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/huawei-openconfig-telemetry-ext:sensor-paths-self-define-event/sensor-path/state/path": {
+    "name": "采样路径名称"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/huawei-openconfig-telemetry-ext:sensor-paths-self-define-event/sensor-path/state/description": {
+    "name": "描述信息"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/huawei-openconfig-telemetry-ext:sensor-paths-self-define-event/sensor-path/state/level": {
+    "name": "级别"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/huawei-openconfig-telemetry-ext:sensor-paths-self-define-event/sensor-path/state/suppress-period": {
+    "name": "抑制周期"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/huawei-openconfig-telemetry-ext:sensor-paths-self-define-event/sensor-path/state/depth": {
+    "name": "采样深度"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/huawei-openconfig-telemetry-ext:sensor-paths-self-define-event/sensor-path/filters": {
+    "name": "过滤器组"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/huawei-openconfig-telemetry-ext:sensor-paths-self-define-event/sensor-path/filters/filter": {
+    "name": "过滤器列表"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/huawei-openconfig-telemetry-ext:sensor-paths-self-define-event/sensor-path/filters/filter/name": {
+    "name": "过滤器名称"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/huawei-openconfig-telemetry-ext:sensor-paths-self-define-event/sensor-path/filters/filter/config": {
+    "name": "配置节点"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/huawei-openconfig-telemetry-ext:sensor-paths-self-define-event/sensor-path/filters/filter/config/name": {
+    "name": "过滤器名称"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/huawei-openconfig-telemetry-ext:sensor-paths-self-define-event/sensor-path/filters/filter/config/condition-relation": {
+    "name": "过滤条件间的逻辑运算方式"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/huawei-openconfig-telemetry-ext:sensor-paths-self-define-event/sensor-path/filters/filter/state": {
+    "name": "状态节点"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/huawei-openconfig-telemetry-ext:sensor-paths-self-define-event/sensor-path/filters/filter/state/name": {
+    "name": "过滤器名称"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/huawei-openconfig-telemetry-ext:sensor-paths-self-define-event/sensor-path/filters/filter/state/condition-relation": {
+    "name": "过滤条件间的逻辑运算方式"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/huawei-openconfig-telemetry-ext:sensor-paths-self-define-event/sensor-path/filters/filter/conditions": {
+    "name": "过滤条件"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/huawei-openconfig-telemetry-ext:sensor-paths-self-define-event/sensor-path/filters/filter/conditions/condition": {
+    "name": "过滤条件列表"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/huawei-openconfig-telemetry-ext:sensor-paths-self-define-event/sensor-path/filters/filter/conditions/condition/op-field": {
+    "name": "过滤条件指标"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/huawei-openconfig-telemetry-ext:sensor-paths-self-define-event/sensor-path/filters/filter/conditions/condition/op-type": {
+    "name": "运算符"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/huawei-openconfig-telemetry-ext:sensor-paths-self-define-event/sensor-path/filters/filter/conditions/condition/op-value": {
+    "name": "参与运算的数值"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/huawei-openconfig-telemetry-ext:sensor-paths-self-define-event/sensor-path/filters/filter/conditions/condition/config": {
+    "name": "配置节点"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/huawei-openconfig-telemetry-ext:sensor-paths-self-define-event/sensor-path/filters/filter/conditions/condition/config/op-field": {
+    "name": "过滤条件指标"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/huawei-openconfig-telemetry-ext:sensor-paths-self-define-event/sensor-path/filters/filter/conditions/condition/config/op-type": {
+    "name": "运算符"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/huawei-openconfig-telemetry-ext:sensor-paths-self-define-event/sensor-path/filters/filter/conditions/condition/config/op-value": {
+    "name": "参与运算的数值"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/huawei-openconfig-telemetry-ext:sensor-paths-self-define-event/sensor-path/filters/filter/conditions/condition/state": {
+    "name": "状态节点"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/huawei-openconfig-telemetry-ext:sensor-paths-self-define-event/sensor-path/filters/filter/conditions/condition/state/op-field": {
+    "name": "过滤条件指标"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/huawei-openconfig-telemetry-ext:sensor-paths-self-define-event/sensor-path/filters/filter/conditions/condition/state/op-type": {
+    "name": "运算符"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/huawei-openconfig-telemetry-ext:sensor-paths-self-define-event/sensor-path/filters/filter/conditions/condition/state/op-value": {
+    "name": "参与运算的数值"
+  },
+  "/openconfig-telemetry:telemetry-system/destination-groups/destination-group/destinations/destination/config/huawei-openconfig-telemetry-ext:protocol": {
+    "name": "数据上报协议"
+  },
+  "/openconfig-telemetry:telemetry-system/destination-groups/destination-group/destinations/destination/config/huawei-openconfig-telemetry-ext:tls": {
+    "name": "允许传输层加密"
+  },
+  "/openconfig-telemetry:telemetry-system/destination-groups/destination-group/destinations/destination/state/huawei-openconfig-telemetry-ext:protocol": {
+    "name": "数据上报协议"
+  },
+  "/openconfig-telemetry:telemetry-system/destination-groups/destination-group/destinations/destination/state/huawei-openconfig-telemetry-ext:tls": {
+    "name": "允许传输层加密"
+  },
+  "/openconfig-telemetry:telemetry-system/destination-groups/destination-group/huawei-openconfig-telemetry-ext:destinations-with-vpn": {
+    "name": "带VPN的目标采集器组"
+  },
+  "/openconfig-telemetry:telemetry-system/destination-groups/destination-group/huawei-openconfig-telemetry-ext:destinations-with-vpn/destination-with-vpn": {
+    "name": "带VPN的目标采集器列表"
+  },
+  "/openconfig-telemetry:telemetry-system/destination-groups/destination-group/huawei-openconfig-telemetry-ext:destinations-with-vpn/destination-with-vpn/destination-address": {
+    "name": "上送目标的IP地址"
+  },
+  "/openconfig-telemetry:telemetry-system/destination-groups/destination-group/huawei-openconfig-telemetry-ext:destinations-with-vpn/destination-with-vpn/destination-port": {
+    "name": "上送目标的端口号"
+  },
+  "/openconfig-telemetry:telemetry-system/destination-groups/destination-group/huawei-openconfig-telemetry-ext:destinations-with-vpn/destination-with-vpn/vpn-instance": {
+    "name": "上送目标的VPN实例名"
+  },
+  "/openconfig-telemetry:telemetry-system/destination-groups/destination-group/huawei-openconfig-telemetry-ext:destinations-with-vpn/destination-with-vpn/config": {
+    "name": "配置节点"
+  },
+  "/openconfig-telemetry:telemetry-system/destination-groups/destination-group/huawei-openconfig-telemetry-ext:destinations-with-vpn/destination-with-vpn/config/destination-address": {
+    "name": "上送目标的IP地址"
+  },
+  "/openconfig-telemetry:telemetry-system/destination-groups/destination-group/huawei-openconfig-telemetry-ext:destinations-with-vpn/destination-with-vpn/config/destination-port": {
+    "name": "上送目标的端口号"
+  },
+  "/openconfig-telemetry:telemetry-system/destination-groups/destination-group/huawei-openconfig-telemetry-ext:destinations-with-vpn/destination-with-vpn/config/vpn-instance": {
+    "name": "上送目标的VPN实例名"
+  },
+  "/openconfig-telemetry:telemetry-system/destination-groups/destination-group/huawei-openconfig-telemetry-ext:destinations-with-vpn/destination-with-vpn/config/protocol": {
+    "name": "数据上报协议"
+  },
+  "/openconfig-telemetry:telemetry-system/destination-groups/destination-group/huawei-openconfig-telemetry-ext:destinations-with-vpn/destination-with-vpn/config/tls": {
+    "name": "允许传输层加密"
+  },
+  "/openconfig-telemetry:telemetry-system/destination-groups/destination-group/huawei-openconfig-telemetry-ext:destinations-with-vpn/destination-with-vpn/state": {
+    "name": "状态节点"
+  },
+  "/openconfig-telemetry:telemetry-system/destination-groups/destination-group/huawei-openconfig-telemetry-ext:destinations-with-vpn/destination-with-vpn/state/destination-address": {
+    "name": "上送目标的IP地址"
+  },
+  "/openconfig-telemetry:telemetry-system/destination-groups/destination-group/huawei-openconfig-telemetry-ext:destinations-with-vpn/destination-with-vpn/state/destination-port": {
+    "name": "上送目标的端口号"
+  },
+  "/openconfig-telemetry:telemetry-system/destination-groups/destination-group/huawei-openconfig-telemetry-ext:destinations-with-vpn/destination-with-vpn/state/vpn-instance": {
+    "name": "上送目标的VPN实例名"
+  },
+  "/openconfig-telemetry:telemetry-system/destination-groups/destination-group/huawei-openconfig-telemetry-ext:destinations-with-vpn/destination-with-vpn/state/protocol": {
+    "name": "数据上报协议"
+  },
+  "/openconfig-telemetry:telemetry-system/destination-groups/destination-group/huawei-openconfig-telemetry-ext:destinations-with-vpn/destination-with-vpn/state/tls": {
+    "name": "允许传输层加密"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/persistent/subscription/config/huawei-openconfig-telemetry-ext:local-source-port": {
+    "name": "源端口号"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/persistent/subscription/config/huawei-openconfig-telemetry-ext:tls": {
+    "name": "允许传输层加密"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/persistent/subscription/config/huawei-openconfig-telemetry-ext:resync-interval": {
+    "name": "OnChange采样定期全量同步间隔"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/persistent/subscription/state/huawei-openconfig-telemetry-ext:local-source-port": {
+    "name": "源端口号"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/persistent/subscription/state/huawei-openconfig-telemetry-ext:tls": {
+    "name": "允许传输层加密"
+  },
+  "/openconfig-telemetry:telemetry-system/huawei-openconfig-telemetry-ext:global": {
+    "name": "全局属性"
+  },
+  "/openconfig-telemetry:telemetry-system/huawei-openconfig-telemetry-ext:global/config": {
+    "name": "配置节点"
+  },
+  "/openconfig-telemetry:telemetry-system/huawei-openconfig-telemetry-ext:global/config/json-only-content": {
+    "name": "仅对Content做JSON编码"
+  },
+  "/openconfig-telemetry:telemetry-system/huawei-openconfig-telemetry-ext:global/config/cpu-max-usage": {
+    "name": "CPU最大占用率"
+  },
+  "/openconfig-telemetry:telemetry-system/huawei-openconfig-telemetry-ext:global/state": {
+    "name": "状态节点"
+  },
+  "/openconfig-telemetry:telemetry-system/huawei-openconfig-telemetry-ext:global/state/json-only-content": {
+    "name": "仅对Content做JSON编码"
+  },
+  "/openconfig-telemetry:telemetry-system/huawei-openconfig-telemetry-ext:global/state/cpu-max-usage": {
+    "name": "CPU最大占用率"
+  }
+}

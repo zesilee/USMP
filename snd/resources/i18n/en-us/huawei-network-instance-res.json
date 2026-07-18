@@ -1,0 +1,35 @@
+{
+  "/huawei-network-instance:ni": {
+    "name": "Universal L3VPN Configurations"
+  },
+  "/huawei-network-instance:network-instance/global": {
+    "name": "L3VPN Global Configuration"
+  },
+  "/huawei-network-instance:network-instance/global/cfg-router-id": {
+    "name": "Router ID"
+  },
+  "/huawei-network-instance:network-instance/global/as-notation-plain": {
+    "name": "Set Display Format of 4-Byte AS Numbers to Integer"
+  },
+  "/huawei-network-instance:network-instance/global/route-distinguisher-auto-ip": {
+    "name": "Enable automatic RD allocation"
+  },
+  "/huawei-network-instance:network-instance/instances": {
+    "name": "VPN Instance List"
+  },
+  "/huawei-network-instance:network-instance/instances/instance": {
+    "name": "VPN Instance"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/name": {
+    "name": "VPN Name"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/description": {
+    "name": "Description"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/sys-router-id": {
+    "name": "Effective Router ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/vrf-id": {
+    "name": "Vpn Instances ID"
+  }
+}

@@ -1,0 +1,2200 @@
+/*
+Copyright (C) 2019-2020 Huawei Technologies Co., Ltd. All rights reserved.
+*/
+module huawei-igmp-mld-snooping {
+  namespace "urn:huawei:yang:huawei-igmp-mld-snooping";
+  prefix ims;
+  import huawei-ifm {
+    prefix ifm;
+  }
+  import huawei-pub-type {
+    prefix pub-type;
+  }
+  import huawei-vlan {
+    prefix vlan;
+  }
+  import ietf-inet-types {
+    prefix inet;
+  }
+  import huawei-extension {
+    prefix ext;
+  }
+  import huawei-acl {
+    prefix acl;
+  }  
+  import huawei-multicast {
+    prefix mc;
+  }
+  import huawei-bd {
+    prefix bd;
+  }  
+  import huawei-evpn {
+    prefix evpn;
+  }
+  import huawei-ethernet {
+    prefix ethernet;
+  }
+  import ietf-yang-types {
+    prefix yang;
+  }
+  organization
+    "Huawei Technologies Co., Ltd.";
+  contact
+    "Huawei Industrial Base
+     Bantian, Longgang
+     Shenzhen 518129
+     People's Republic of China
+     Website: http://www.huawei.com
+     Email: support@huawei.com";
+  description
+    "The module defines a collection of YANG definitions common for all Internet Group Management Protocol (IGMP) and Multicast Listener Discovery (MLD) Snooping devices.";
+  revision 2020-05-21 {
+    description
+      "Add a when condition for IGMP snooping of VPLS. Modify the type of except-acl. Add a when condition for mld-snooping. Modify the type and the must conditions of some nodes that reference ACL. Add the must conditions for limit-max-entry. Add node port-fast-control. Modify design for multicast VLAN.";
+    reference
+      "Huawei private.";
+  }
+  revision 2020-03-04 {
+    description
+      "Modify units.";
+    reference
+      "Huawei private.";
+  }
+  revision 2020-01-21 {
+    description
+      "Modify the type of remote-peer from IPv4IPv6 to IPv4.";
+    reference
+      "Huawei private.";
+  }
+  revision 2019-12-12 {
+    description
+      "Add new leaves; Modify units of some leaves; Modify ssm-mapping-policy type from leafref to string, Leafref should be used together with require-instance When version 1.1 is supported.";
+    reference
+      "Huawei private.";
+  }
+  revision 2019-03-30 {
+    description
+      "Initial revision.";
+    reference
+      "Huawei private.";
+  }
+  ext:task-name "l2mc"; 
+
+  typedef instance-type {
+    type enumeration {
+      enum "VSI" {
+        value 0;
+        description
+          "Virtual Switching Instance.";
+      }
+      enum "VLAN" {
+        value 1;
+        description
+          "Virtual LAN.";
+      }
+      enum "BD" {
+        value 2;
+        description
+          "Bridge domain.";
+      }
+     enum "ALL" {
+	    value 3;
+		description
+		  "All support instance types.";
+	  }
+    }
+    description
+      "Instance type.";
+  }
+  typedef snooping-table-type {
+    type enumeration {
+      enum port-info {
+        value 1;
+        description
+          "Igmp-snooping port-info.";
+      }
+      enum route-port {
+        value 2;
+        description
+          "Igmp-snooping router-port.";
+      }
+      enum static {
+        value 3;
+        description
+          "Igmp-snooping statistic info.";
+      }
+      enum all {
+        value 4;
+        description
+          "Igmp-snooping all info.";
+      }
+    }
+    description
+      "The table type of igmp-snooping.";
+  }
+  
+  typedef filter-mode {
+    type enumeration {
+      enum "exclude" {
+        value 0;
+        description
+          "Exclude filter mode.";
+      }
+      enum "include" {
+        value 1;
+        description
+          "Include filter mode.";
+      }
+      enum "invalid" {
+        value 2;
+        description
+          "Invalid filter mode.";
+      }
+    }
+    description
+      "Filter mode.";
+  }
+
+  typedef compat-mode {
+    type enumeration {
+      enum "V1" {
+        value 1;
+        description
+          "Layer 2 multicast version 1.";
+      }
+      enum "V2" {
+        value 2;
+        description
+          "Layer 2 multicast version 2.";
+      }
+      enum "V3" {
+        value 3;
+        description
+          "Layer 2 multicast version 3.";
+      }
+      enum "invalid" {
+        value 255;
+        description
+          "Invalid compatible mode.";
+      }
+    }
+    description
+      "Group compatible mode.";
+  }
+
+  typedef limit-type {
+    type enumeration {
+      enum "global-entry" {
+        value 0;
+        description
+          "Global.";
+      }
+      enum "listened-user-per-slot" {
+        value 1;
+        description
+          "Per slot.";
+      }
+      enum "listened-user-per-group" {
+        value 2;
+        description
+          "Per group.";
+      }
+    }
+    description
+      "Limit type.";
+  }
+
+  typedef snooping-mode {
+    type enumeration {
+      enum "asm-ssm" {
+        value 1;
+        description
+          "A device learns multicast entries with group addresses in the ASM and SSM address ranges.";
+      }
+      enum "asm-only" {
+        value 2;
+        description
+          "A device only learns multicast entries with group addresses in the ASM address range.";
+      }
+      enum "ssm-only" {
+        value 3;
+        description
+          "A device only learns multicast entries with group addresses in the SSM address range.";
+      }
+    }
+    description
+      "Snooping mode.";
+  }
+
+  typedef copy-mode {
+    type enumeration {
+      enum "invalid" {
+        value 0;
+        description
+          "Invalid value, do not copy.";
+      }
+      enum "by-vlan" {
+        value 1;
+        description
+          "By VLAN.";
+      }
+      enum "by-unicast-mac" {
+        value 2;
+        description
+          "By unicast MAC.";
+      }
+    }
+    description
+      "Multicast copy mode.";
+  }
+
+  typedef pw-type {
+    type enumeration {
+      enum "invalid" {
+        value 0;
+        description
+          "Default.";
+      }
+      enum "vlan" {
+        value 1;
+        description
+          "ID of a virtual local area network.";
+      }
+      enum "ethernet" {
+        value 2;
+        description
+          "Ethernet.";
+      }
+    }
+    description
+      "PW type.";
+  }
+
+  typedef channel-mode {
+    type enumeration {
+      enum "asm" {
+        value 0;
+        description
+          "Channel-Name-Mode ASM.";
+      }
+      enum "ssm" {
+        value 1;
+        description
+          "Channel-Name-Mode SSM.";
+      }
+    }
+    description
+      "L2mc Channel Mode.";
+  }
+
+  typedef port-type {
+    type enumeration {
+      enum "invalid" {
+        value 0;
+        description
+          "Invalid interface.";
+      }
+      enum "pw-interface" {
+        value 1;
+        description
+          "PW interface.";
+      }
+      enum "l2-interface" {
+        value 2;
+        description
+          "Layer 2 interface.";
+      }
+      enum "encapsulation-sub-interface" {
+        value 3;
+        description
+          "Encapsulation sub-interface.";
+      }
+      enum "termination-sub-interface" {
+        value 4;
+        description
+          "Termination sub-interface.";
+      }
+      enum "interface-board" {
+        value 5;
+        description
+          "Interface board.";
+      }
+      enum "vlanif-port" {
+        value 6;
+        description
+          "VLAN interface.";
+      }
+      enum "vxlan-tunnel" {
+        value 7;
+        description
+          "VXLAN tunnel.";
+      }
+      enum "stacking-port" {
+        value 8;
+        description
+          "Qinq-Stacking (multicast by VLAN).";
+      }
+      enum "mapping-port" {
+        value 9;
+        description
+          "Qinq-Mapping (multicast by VLAN).";
+      }
+      enum "stacking-mac-port" {
+        value 10;
+        description
+          "Qinq-Stacking (multicast By MAC).";
+      }
+      enum "mapping-mac-port" {
+        value 11;
+        description
+          "Qinq-Mapping (multicast By MAC).";
+      }
+    }
+    description
+      "Port type.";
+  }
+
+  typedef pw-signal-mode {
+    type enumeration {
+      enum "BGPAD" {
+        value 0;
+        description
+          "Appoint BGPAD PW signal mode.";
+      }
+      enum "LDP" {
+        value 1;
+        description
+          "Appoint LDP PW signal mode.";
+      }
+    }
+    description
+      "PW signal mode.";
+  }
+
+  typedef df-status-type {
+    type enumeration {
+      enum "df" {
+        value 1;
+        description
+          "The PE is DF.";
+      }
+      enum "non-df" {
+        value 2;
+        description
+          "The PE is non-DF.";
+      }
+    }
+    description
+      "DF status type.";
+  }
+
+  typedef remote-flag-type {
+    type enumeration {
+      enum "local" {
+        value 1;
+        description
+          "Local.";
+      }
+      enum "remote" {
+        value 2;
+        description
+          "Remote.";
+      }
+      enum "local-remote" {
+        value 3;
+        description
+          "Local Remote.";
+      }
+    }
+    description
+      "Remote flag type.";
+  }
+
+  typedef port-flag-type {
+    type enumeration {
+      enum "static" {
+        value 0;
+        description
+          "Static.";
+      }
+      enum "dynamic" {
+        value 1;
+        description
+          "Dynamic.";
+      }
+      enum "mapping" {
+        value 2;
+        description
+          "SSM mapping.";
+      }
+      enum "static-dynamic" {
+        value 3;
+        description
+          "Both static and dynamic.";
+      }
+      enum "static-mapping" {
+        value 4;
+        description
+          "Both static and SSM mapping joined groups exist.";
+      }
+      enum "dynamic-mapping" {
+        value 5;
+        description
+          "Both dynamic and SSM mapping joined groups exist.";
+      }
+      enum "static-dynamic-mapping" {
+        value 6;
+        description
+          "Both static dynamic and SSM mapping joined groups exist.";
+      }
+    }
+    description
+      "Port flag type.";
+  }
+
+  typedef entry-flag-type {
+    type enumeration {
+      enum "none" {
+        value 0;
+        description
+          "None.";
+      }
+      enum "protocol" {
+        value 1;
+        description
+          "Entry generated through protocol packets or static configuration.";
+      }
+      enum "active" {
+        value 2;
+        description
+          "Entry generated through multicast data flows.";
+      }
+      enum "protocol-active" {
+        value 3;
+        description
+          "Both protocol and active.";
+      }
+      enum "fastchannel" {
+        value 4;
+        description
+          "Entry generated through fast channel configuration.";
+      }
+      enum "protocol-fastchannel" {
+        value 5;
+        description
+          "Both protocol and fast-channel.";
+      }
+      enum "active-fastchannel" {
+        value 6;
+        description
+          "Both active and fast-channel.";
+      }
+      enum "protocol-active-fastchannel" {
+        value 7;
+        description
+          "Both protocol, active and fast-channel.";
+      }  
+    }
+    description
+      "Entry flag type.";
+  }
+
+  typedef source-flag-type {
+    type enumeration {
+      enum "unknown" {
+        value 0;
+        description
+          "Unknown.";
+      }
+      enum "igmp" {
+        value 1;
+        description
+          "IGMP.";
+      }
+      enum "active" {
+        value 2;
+        description
+          "Active.";
+      }
+      enum "igmp-active" {
+        value 3;
+        description
+          "IGMP Active.";
+      }
+      enum "fastchannel" {
+        value 4;
+        description
+          "Fast-Channel.";
+      }
+      enum "igmp-fastchannel" {
+        value 5;
+        description
+          "IGMP Fast-Channel.";
+      }
+      enum "active-fastchannel" {
+        value 6;
+        description
+          "Active Fast-Channel.";
+      }
+      enum "igmp-active-fastchannel" {
+        value 7;
+        description
+          "IGMP Active Fast-Channel.";
+      }
+      enum "mld" {
+        value 9;
+        description
+          "MLD.";
+      }
+      enum "active6" {
+        value 10;
+        description
+          "Active.";
+      }
+      enum "mld-active6" {
+        value 11;
+        description
+          "MLD Active6.";
+      }
+      enum "fastchannel6" {
+        value 12;
+        description
+          "Fast-Channel.";
+      }
+      enum "mld-fastchannel6" {
+        value 13;
+        description
+          "MLD Fast-Channel.";
+      }
+      enum "active6-fastchannel6" {
+        value 14;
+        description
+          "Active Fast-Channel.";
+      }
+      enum "mld-active6-fastchannel6" {
+        value 15;
+        description
+          "MLD Active Fast-Channel.";
+      }
+      enum "trill" {
+        value 16;
+        description
+          "Trill.";
+      }
+      enum "igmp-trill" {
+        value 17;
+        description
+          "IGMP Trill.";
+      }
+      enum "active-trill" {
+        value 18;
+        description
+          "Active Trill.";
+      }
+      enum "igmp-active-trill" {
+        value 19;
+        description
+          "IGMP Active Trill.";
+      }
+    }
+    description
+      "Source flag type.";
+  }
+  
+  typedef vsi-port-type {
+    type enumeration {
+      enum "AC" {
+        value 0;
+        description
+          "AC Port type.";
+      }
+      enum "PW" {
+        value 1;
+        description
+          "PW Port type.";
+      }
+    }
+    description
+      "VSI port type.";
+  }
+
+  typedef evi-rt-type {
+    type enumeration {
+      enum "export-extcommunity" {
+        value 2;
+        description
+          "Export-extcommunity.";
+      }
+      enum "import-extcommunity" {
+        value 3;
+        description
+          "Import-extcommunity.";
+      }
+    }
+    description
+      "EVI RT type.";
+  }
+
+  typedef l2mc-esi {
+    type string {
+      length "0..24";
+      pattern '(^ *(00([0-9a-fA-F]){2}\.(([0-9a-fA-F]){4}\.){3}(([0-9a-fA-F]){4}))? *$)';
+    }
+    description
+      "ESI is begin with a-f or A-f or 0-9.";
+  }
+
+  typedef forward-mode {
+    type enumeration {
+      enum "ip" {
+        value 0;
+        description
+          "Forwarding based on IP addresses.";
+      }
+      enum "mac" {
+        value 1;
+        description
+          "Forwarding based on MAC addresses.";
+      }
+    }
+    description
+      "Forwarding mode.";
+  }
+
+  typedef exit-or-not {
+    type enumeration {
+      enum "not-exist" {
+        value 0;
+        description
+          "Not exist.";
+      }
+      enum "exist" {
+        value 1;
+        description
+          "Exist.";
+      }
+    }
+    description
+      "Exist or not-exist.";
+  }
+
+  grouping display-group-info {
+    description
+      "List of layer 2 multicast group information.";
+    container groups {
+      config false;
+      description
+        "List of layer 2 multicast group information.";
+      list group {
+        key "group-address";
+        description
+          "Statistics of dynamically joined multicast groups.";
+        leaf group-address {
+          type inet:ip-address-no-zone;
+          description
+            "Address of a multicast group. In IPv4, the value ranges from 224.0.1.0 to 239.255.255.255, in dotted decimal notation; In IPv6, in hexadecimal notation.";
+        }
+        leaf up-time {
+          type pub-type:time-tick;
+          units "s";
+          description
+            "Time since a multicast group was discovered.";
+        }
+        leaf expire-time {
+          type pub-type:time-tick;
+          units "s";
+          description
+            "Time after which a group will be deleted from the group record table.";
+        }
+        leaf group-timer {
+          type exit-or-not;
+          description
+            "Group timer.";
+        }
+        leaf retran-count {
+          type uint32;
+          description
+            "Number of times that the last-member query message is transmitted.";
+        }
+        leaf last-member-query {
+          type boolean;
+          description
+            "Whether source-specific query messages are being sent.";
+        }
+        leaf filter-mode {
+          type filter-mode;
+          description
+            "Group filter mode.";
+        }
+        leaf compat-mode {
+          type compat-mode;
+          description
+            "Group compatible mode.";
+        }
+        leaf v1-host-timer {
+          type exit-or-not;
+          description
+            "Timeout period of a layer 2 multicastv1 host.";
+        }
+        leaf v2-host-timer {
+          type exit-or-not;
+          description
+            "Timeout period of a layer 2 multicastv2 host.";
+        }
+        leaf source-last-member-query {
+          type boolean;
+          description
+            "Whether source-specific query messages are being sent.";
+        }
+        leaf last-member-query-timer {
+          type exit-or-not;
+          description
+            "Expire time of a last-member query message.";
+        }
+        container sources {
+          description
+            "List of source state.";
+          list source {
+            key "source-address";
+            description
+              "Source state.";
+            leaf source-address {
+              type inet:ip-address-no-zone;
+              description
+                "Multicast source address, In IPv4, in dotted decimal notation; In IPv6, in hexadecimal notation.";
+            }
+            leaf up-time {
+              type pub-type:time-tick;
+              description
+                "Time since a multicast source was discovered.";
+            }
+            leaf expire-time {
+              type pub-type:time-tick;
+              units "s";
+              description
+                "Time after which a source will be deleted from the source record table.";
+            }
+            leaf source-timer {
+              type exit-or-not;
+              description
+                "Multicast source timer.";
+            }
+            leaf retran-count {
+              type uint32;
+              description
+                "Number of times that the last-member query message is transmitted.";
+            }
+            leaf last-member-query {
+              type boolean;
+              description
+                "Whether source-specific query messages are being sent.";
+            }
+          }
+        }
+      }
+    }
+  }
+
+  grouping fast-channel-cfg {
+    description
+      "List of groups for which a device can immediately forward multicast data after receiving layer 2 multicast report messages.";
+    container fast-channels {
+      description
+        "List of groups for which a device can immediately forward multicast data after receiving layer 2 multicast report messages.";
+      list fast-channel {
+        key "group-address group-mask-length source-address source-mask-length";
+        description
+          "Configure groups for which a device can immediately forward multicast data after receiving layer 2 multicast report messages.";
+        leaf group-address {
+          type inet:ip-address-no-zone;
+          description
+            "Address of a multicast group. In IPv4, the value ranges from 224.0.1.0 to 239.255.255.255, in dotted decimal notation; In IPv6, in hexadecimal notation.";
+        }
+        leaf group-mask-length {
+          type uint32 {
+            range "16..128";
+          }
+          description
+            "Mask length of a group address. The value is an integer. In IPv4, the value ranges from 16 to 32; In IPv6, the value ranges from 64 to 128.";
+        }
+        leaf source-address {
+          type inet:ip-address-no-zone;
+          description
+            "Multicast source address. In IPv4: 0.0.0.0 means that no multicast source address is specified; In IPv6: :: means that no multicast source address is specified.";
+        }
+        leaf source-mask-length {
+          type uint32 {
+            range "16..128";
+          }
+          description
+            "Mask length of a group address. The value is an integer. In IPv4, the value ranges from 16 to 32; In IPv6, the value ranges from 64 to 128.";
+        }
+      }
+    }
+  }
+
+  grouping display-statistics-basic {
+    description
+      "Statistics information of a VLAN.";
+    leaf send-source-group-query-count {
+      type uint32;
+      description
+        "Number of sent source- and group-specific Query messages.";
+    }
+    leaf v1-report-count {
+      type uint32;
+      description
+        "Number of received IGMPv1/MLDv1 report messages.";
+    }
+    leaf v2-report-count {
+      type uint32;
+      description
+        "Number of received IGMPv2/MLDv2 report messages.";
+    }
+    leaf v3-report-count {
+      type uint32;
+      description
+        "Number of received IGMPv3 report messages.";
+    }
+    leaf v1-query-count {
+      type uint32;
+      description
+        "Number of received IGMPv1/MLDv1 Query messages.";
+    }
+    leaf v2-query-count {
+      type uint32;
+      description
+        "Number of received IGMPv2/MLDv2 Query messages.";
+    }
+    leaf v3-query-cnt {
+      type uint32;
+      description
+        "Number of received IGMPv3 Query messages.";
+    }
+    leaf leave-count {
+      type uint32;
+      description
+        "Number of received IMGP/MLD leave messages.";
+    }
+    leaf hello-count {
+      type uint32;
+      description
+        "Number of Received PIM hello messages.";
+    }
+    leaf s-flag-query-count {
+      type uint32;
+      description
+        "Number of received queries in which the S flag is specified.";
+    }
+    leaf no-s-flag-query-count {
+      type uint32;
+      description
+        "Number of received queries in which the S flag is not specified.";
+    }
+    leaf send-general-query-count {
+      type uint32;
+      description
+        "Number of sent General Query messages.";
+    }
+    leaf send-group-query-count {
+      type uint32;
+      description
+        "Number of sent Group-specific Query messages.";
+    }
+  }
+
+  grouping display-vlan-statistics {
+    description
+      "Statistics of a VLAN.";
+    container statistics {
+      config false;
+      description
+        "Statistics of a VLAN.";
+      uses display-statistics-basic;
+    }
+  }
+
+  grouping display-vlan-port-info {
+    description
+      "List of layer 2 multicast port information of a VLAN.";
+    container group-ports {
+      config false;
+      description
+        "List of layer 2 multicast port information.";
+      list group-port {
+        key "group-address source-address";
+        description
+          "Layer 2 multicast port state.";
+        leaf group-address {
+          type inet:ip-address-no-zone;
+          description
+            "Address of a multicast group.";
+        }
+        leaf source-address {
+          type inet:ip-address-no-zone;
+          description
+            "Multicast source address.";
+        }
+        leaf up-time {
+          type pub-type:time-tick;
+          units "s";
+          description
+            "Time since a router port was discovered.";
+        }
+        leaf entry-flag {
+          type entry-flag-type;
+          description
+            "Entity flag.";
+        }
+        leaf source-flag {
+          type source-flag-type;
+          description
+            "Source flag.";
+        }
+        container ports {
+          description
+            "List of port state.";
+          list port {
+            key "interface";
+            description
+              "Port state.";
+            leaf interface {
+              type leafref {
+                path "/ifm:ifm/ifm:interfaces/ifm:interface/ifm:name";
+              }
+              description
+                "Interface name.";
+            }
+            leaf up-time {
+              type pub-type:time-tick;
+              description
+                "Time since a router port was discovered.";
+            }
+            leaf expire-time {
+                type pub-type:time-tick {
+                  ext:value-meaning {
+                    ext:item "1879048190" {
+                      ext:meaning "--";
+                    }
+                  }
+                }
+              description
+                "Time after which a port will be deleted from the router port record table.";
+            }
+            leaf port-flag {
+              type string {
+                length "0..64";
+              }
+              description
+                "Port flag. S: static; D: dynamic; M: SSM-mapping.";
+            }
+          }
+        }
+      }
+    }
+  }
+
+  grouping display-bd-statistics {
+    description
+      "Statistics information of a VLAN.";
+    container statistics {
+      config false;
+      description
+        "Operational data of PWs.";
+      uses display-statistics-basic;
+      leaf mld-v1-report-count {
+        type uint32;
+        ext:hidden ui;
+        description
+          "Number of received MLDv1 report messages.";
+      }
+      leaf mld-v2-report-count {
+        type uint32;
+        ext:hidden ui;
+        description
+          "Number of received MLD2 report messages.";
+      }
+      leaf mld-v1-query-count {
+        type uint32;
+        ext:hidden ui;
+        description
+          "Number of received MLDv1 query messages.";
+      }
+      leaf mld-v2-query-count {
+        type uint32;
+        ext:hidden ui;
+        description
+          "Number of received MLD2 query messages.";
+      }
+      leaf mld-done-count {
+        type uint32;
+        ext:hidden ui;
+        description
+          "Statistics of MLD done messages.";
+      }
+    }
+  }
+
+  grouping display-vsi-statistics {
+    description
+      "Statistics of a VSI.";
+    container statistics {
+      config false;
+      description
+        "Statistics of a VSI.";
+      uses display-statistics-basic;
+      leaf invalid-count {
+        type uint32;
+        description
+          "Number of received invalid messages.";
+      }
+      leaf ignored-count {
+        type uint32;
+        description
+          "Number of received ignored messages.";
+      }
+      leaf forwarded-report-count {
+        type uint32;
+        description
+          "Number of forwarded report messages.";
+      }
+      leaf forwarded-leave-count {
+        type uint32;
+        description
+          "Number of forwarded leave messages.";
+      }
+      leaf forwarded-query-count {
+        type uint32;
+        description
+          "Number of forwarded query messages.";
+      }
+    }
+  }
+
+  grouping display-vsi-listened-user-count {
+    description
+      "Display statistics of multicast users.";
+    leaf statistic-start-time {
+      type pub-type:time-tick;
+      description
+        "The beginning of the statistics.";
+    }
+    leaf limit-count {
+      type uint32;
+      description
+        "Maximum number of users supported by a board.";
+    }
+    leaf current-count {
+      type uint32;
+      description
+        "Current number of users.";
+    }
+    leaf last-5min-max-count {
+      type uint32;
+      description
+        "The maximum for the last 5 minutes.";
+    }
+    leaf last-5min-min-count {
+      type uint32;
+      description
+        "The minimum for the last 5 minutes.";
+    }
+    leaf last-5min-average-count {
+      type uint32;
+      description
+        "The last 5 minutes average.";
+    }
+    leaf last-15min-max-count {
+      type uint32;
+      description
+        "The maximum for the last 15 minutes.";
+    }
+    leaf last-15min-min-count {
+      type uint32;
+      description
+        "The minimum for the last 15 minutes.";
+    }
+    leaf last-15min-average-count {
+      type uint32;
+      description
+        "The last 15 minutes average.";
+    }
+    leaf last-24h-max-count {
+      type uint32;
+      description
+        "The maximum for the last 24 hours.";
+    }
+    leaf last-24h-min-count {
+      type uint32;
+      description
+        "The last 24 hours minimum.";
+    }
+    leaf last-24h-average-count {
+      type uint32;
+      description
+        "The last 24 hours average.";
+    }
+  }
+
+  grouping display-vsi-if-packet-statistics {
+    description
+      "Display statistics of IGMP/MLD snooping packets.";
+    leaf received-v1-report {
+      type uint32;
+      description
+        "Number of received IGMPv1 report messages.";
+    }
+    leaf received-v2-report {
+      type uint32;
+      description
+        "Number of received IGMPv2 report messages.";
+    }
+    leaf received-v3-report {
+      type uint32;
+      description
+        "Number of received IGMPv3 report messages.";
+    }
+    leaf received-v1-query {
+      type uint32;
+      description
+        "Number of received IGMPv1 query messages.";
+    }
+    leaf received-v2-query {
+      type uint32;
+      description
+        "Number of received IGMPv2 query messages.";
+    }
+    leaf received-v3-query {
+      type uint32;
+      description
+        "Number of received IGMPv3 query messages.";
+    }
+    leaf received-leave {
+      type uint32;
+      description
+        "Number of received IGMP leave messages.";
+    }
+    leaf received-unknown {
+      type uint32;
+      description
+        "Number of unknown messages.";
+    }
+    leaf discard {
+      type uint32;
+      description
+        "Number of discard messages.";
+    }
+  }
+
+  grouping display-invalid-packet-statistics {
+    description
+      "Display statistics of IGMP/MLD snooping invalid packets.";
+    container invalid-packet {
+      config false;
+      description
+        "Statistics of IGMP/MLD snooping invalid packets.";
+      container general-count {
+        description
+          "Statistics of invalid general packets.";
+        leaf fault-length {
+          type uint32 {
+            range "0..4294967295";
+          }
+          description
+            "Number of general packets with invalid packet lengths.";
+        }
+        leaf invalid-type-count {
+          type uint32 {
+            range "0..4294967295";
+          }
+          description
+            "Number of general packets with invalid layer 2 multicast types.";
+        }
+        leaf bad-checksum {
+          type uint32 {
+            range "0..4294967295";
+          }
+          description
+            "Number of general packets with invalid checksum.";
+        }
+        leaf fault-router-alert {
+          type uint32 {
+            range "0..4294967295";
+          }
+          description
+            "Number of general packets with invalid Router-Alert fields.";
+        }
+      }
+      container invalid-query-count {
+        description
+          "Statistics of invalid query packets.";
+        leaf invalid-multicast-source {
+          type uint32 {
+            range "0..4294967295";
+          }
+          description
+            "Number of query packets with invalid multicast source addresses.";
+        }
+        leaf invalid-multicast-group {
+          type uint32 {
+            range "0..4294967295";
+          }
+          description
+            "Number of query packets with invalid multicast group addresses.";
+        }
+      }
+      container invalid-report-count {
+        description
+          "Statistics of invalid report packets.";
+        leaf invalid-multicast-group {
+          type uint32 {
+            range "0..4294967295";
+          }
+          description
+            "Number of report packets with invalid multicast group addresses.";
+        }
+        leaf invalid-version {
+          type uint32 {
+            range "0..4294967295";
+          }
+          description
+            "Number of report packets with invalid layer 2 multicast version information.";
+        }
+        leaf invalid-multicast-source {
+          type uint32 {
+            range "0..4294967295";
+          }
+          description
+            "Number of report packets with invalid layer 2 multicast source information.";
+        }
+      }
+      container invalic-leave-count {
+        ext:hidden ui;
+        description
+          "Statistics of invalid leave or done packets.";
+        leaf invalid-multicast-group {
+          type uint32 {
+            range "0..4294967295";
+          }
+          description
+            "Number of leave packets with invalid multicast group addresses.";
+        }
+        leaf invalid-version {
+          type uint32 {
+            range "0..4294967295";
+          }
+          description
+            "Number of leave packets with invalid layer 2 multicast version information.";
+        }
+      }
+      container invalid-hello-count {
+        description
+          "Statistics of invalid hello packets.";
+        leaf invalid-pim-version {
+          type uint32 {
+            range "0..4294967295";
+          }
+          description
+            "Number of hello packets with invalid PIM version information.";
+        }
+        leaf fault-length {
+          type uint32 {
+            range "0..4294967295";
+          }
+          description
+            "Number of hello packets with invalid packet length.";
+        }
+        leaf bad-holdtime-length {
+          type uint32 {
+            range "0..4294967295";
+          }
+          description
+            "Number of hello packets with invalid holdtime length.";
+        }
+        leaf bad-dr-priority-length {
+          type uint32 {
+            range "0..4294967295";
+          }
+          description
+            "Number of hello packets with invalid DR priority length.";
+        }
+        leaf bad-checksum {
+          type uint32 {
+            range "0..4294967295";
+          }
+          description
+            "Number of hello packets with invalid checksum.";
+        }
+        leaf bad-generation-id-length {
+          type uint32 {
+            range "0..4294967295";
+          }
+          description
+            "Number of hello packets with invalid generation ID length.";
+        }
+        leaf bad-lan-prune-delay-length {
+          type uint32 {
+            range "0..4294967295";
+          }
+          description
+            "Number of hello packets with invalid LAN prune delay length.";
+        }
+      }
+    }
+  }
+
+  grouping invalid-packet-verbose {
+    description
+      "List of detailed invalid MGMD packet information.";
+    container invalid-packets {
+      config false;
+      description
+        "List of detailed invalid MGMD packet information.";
+      list invalid-packet {
+        key "packet-index";
+        description
+          "Statistics of invalid MGMD packet state.";
+        leaf packet-index {
+          type uint32 {
+            range "0..4294967295";
+          }
+          description
+            "Packet index.";
+        }
+        leaf instance-type {
+          type instance-type;
+          description
+            "Instance type (VSI or VLAN or BD).";
+        }
+        leaf instance-id-or-name {
+          type string {
+            length "0..64";
+          }
+          description
+            "Instance ID or name.";
+        }
+        leaf time {
+          type yang:date-and-time;
+          description
+            "Time when invalid packet was received.";
+        }
+        leaf message-length {
+          type uint32 {
+            range "0..4294967295";
+          }
+          description
+            "Message length.";
+        }
+        leaf invalid-type {
+          type string {
+            length "0..63";
+          }
+          description
+            "Invalid type.";
+        }
+        leaf packet-content {
+          type string {
+            length "0..2559";
+          }
+          description
+            "Packet content.";
+        }
+      }
+    }
+  }
+  rpc get-igmp-snooping-data {
+    description
+      "This is a function that show igmp-snooping port info.";
+    input {
+      container table-detail {
+        description
+          "The igmp-snooping route port, port info and statistic info.";
+        leaf table-type {
+          type snooping-table-type;
+          description
+            "Igmp-snooping operation type.";
+        }
+        leaf dimension {
+          type instance-type;
+          description
+            "The operation dimension.";
+        }
+		leaf instance-id {
+		  type uint32;
+		  description
+		    "VLAN id or BD id.";
+		}
+		leaf seqnum {
+		  type uint32;
+		  description
+		    "The operation sequence number.";
+		}
+      }
+    }
+    output {
+      leaf result {
+        type string {
+          length "1..64";
+         }
+        description
+          "OK or ERROR.";
+      }
+	  leaf error-code {
+	  	type uint32;
+		description
+		  "The return error code.";
+	  }
+    }
+  }
+  
+  rpc reset-igmp-statistic {
+    description
+      "This is a function that reset igmp-snoop statistic info.";
+    input {
+      container statistic-detail {
+        description
+          "The igmp-snooping statistic reset info.";
+        leaf instance-id {
+         type uint32;
+          description
+           "VLAN id or BD id.";
+        }
+        leaf dimension {
+          type instance-type;
+          description
+            "The operation dimension.";
+        }
+      }
+    }
+    output {
+      leaf result {
+        type string {
+          length "1..64";
+         }
+        description
+          "Yes or No.";
+      }
+	  leaf error-code {
+	  	type uint32;
+		description
+		  "The return error code.";
+	  }
+    }
+  }
+  
+
+
+
+  augment "/bd:bd/bd:instances/bd:instance" {
+    when "/mc:multicast/ims:igmp-snooping/ims:global-enable";
+    description "Adds configuration to the bd module.";
+    container igmp-snooping {
+      description
+        "Configure IGMP snooping in the BD.";
+      container global {
+        description
+          "Configure IGMP snooping in the BD.";
+        leaf ssm-acl {
+          type acl:acl4-identity;
+          must "(/acl:acl/acl:groups/acl:group[acl:number=number(current())] and (/acl:acl/acl:groups/acl:group[acl:number=number(current())]/acl:type='basic')) or (/acl:acl/acl:groups/acl:group[acl:identity=current()] and (/acl:acl/acl:groups/acl:group[acl:identity=current()]/acl:type='basic'))";
+          description
+            "SSM group range policy.";
+        }
+        leaf version {
+          type uint32 {
+            range "1..3";
+          }
+          default "2";
+          description
+            "IGMP version on an interface.";
+        }
+        leaf ssm-mapping-enable {
+          type boolean;
+          default "false";
+          description
+            "Enable/disable SSM mapping.";
+        }
+        leaf ssm-mapping-policy {
+          when "../ssm-mapping-enable='true'";
+          type string {
+            length "1..31";
+          }
+          description
+            "Configure a policy for SSM Mapping.";
+        }
+        leaf enable {
+          type boolean;
+          default "false";
+          description
+            "Enable/disable IGMP snooping in the bridge domain.";
+        }
+        leaf group-policy-acl {
+          type acl:acl4-identity;
+          must "(/acl:acl/acl:groups/acl:group[acl:number=number(current())] and (/acl:acl/acl:groups/acl:group[acl:number=number(current())]/acl:type='basic' or /acl:acl/acl:groups/acl:group[acl:number=number(current())]/acl:type='advance')) or (/acl:acl/acl:groups/acl:group[acl:identity=current()] and (/acl:acl/acl:groups/acl:group[acl:identity=current()]/acl:type='basic' or /acl:acl/acl:groups/acl:group[acl:identity=current()]/acl:type='advance'))";
+          description
+            "IGMP group policy.";
+        }
+        leaf group-policy-version {
+          when "../group-policy-acl";
+          type uint32 {
+            range "1..3";
+          }
+          description
+            "A group policy applies only to a specified IGMP version.";
+        }
+        leaf max-response-time {
+          type uint32 {
+            range "1..25";
+          }
+          units "s";
+          default "10";
+          description
+            "Maximum response time for an IGMP Query message. This time is used to control the deadline for user hosts to send Report messages.";
+        }
+        leaf immediately-leave {
+          type boolean;
+          default "false";
+          description
+            "Enable/disable prompt-leave. Prompt-Leave allows an interface to immediately delete a group record after receiving a Leave message for this group, without sending a last-member query message.";
+        }
+        leaf immediately-leave-acl {
+          when "../immediately-leave='true'";
+          type acl:acl4-identity;
+          must "(/acl:acl/acl:groups/acl:group[acl:number=number(current())] and (/acl:acl/acl:groups/acl:group[acl:number=number(current())]/acl:type='basic' or /acl:acl/acl:groups/acl:group[acl:number=number(current())]/acl:type='advance')) or (/acl:acl/acl:groups/acl:group[acl:identity=current()] and (/acl:acl/acl:groups/acl:group[acl:identity=current()]/acl:type='basic' or /acl:acl/acl:groups/acl:group[acl:identity=current()]/acl:type='advance'))";
+          description
+            "ACL used to control the applicable range of IGMP prompt-leave.";
+        }
+        leaf proxy-enable {
+          type boolean;
+          must "../proxy-enable='false' or (../report-suppress='false' and ../querier-enable='false')";
+          default "false";
+          description
+            "Enable/disable IGMP snooping proxy.";
+        }
+        leaf multicast-group-model {
+          type snooping-mode;
+          default "asm-ssm";
+          description
+            "IGMP group join mode.";
+        }
+        leaf ip-policy-acl {
+          type acl:acl4-identity;
+          must "(/acl:acl/acl:groups/acl:group[acl:number=number(current())] and (/acl:acl/acl:groups/acl:group[acl:number=number(current())]/acl:type='basic' or /acl:acl/acl:groups/acl:group[acl:number=number(current())]/acl:type='advance')) or (/acl:acl/acl:groups/acl:group[acl:identity=current()] and (/acl:acl/acl:groups/acl:group[acl:identity=current()]/acl:type='basic' or /acl:acl/acl:groups/acl:group[acl:identity=current()]/acl:type='advance'))";
+          description
+            "IP filter policy.";
+        }
+        leaf query-ip-policy-acl {
+          type acl:acl4-identity;
+          must "(/acl:acl/acl:groups/acl:group[acl:number=number(current())] and (/acl:acl/acl:groups/acl:group[acl:number=number(current())]/acl:type='basic' or /acl:acl/acl:groups/acl:group[acl:number=number(current())]/acl:type='advance')) or (/acl:acl/acl:groups/acl:group[acl:identity=current()] and (/acl:acl/acl:groups/acl:group[acl:identity=current()]/acl:type='basic' or /acl:acl/acl:groups/acl:group[acl:identity=current()]/acl:type='advance'))";
+          description
+            "Querier IP policy.";
+        }
+        leaf querier-election {
+          type boolean;
+          default "false";
+          description
+            "Enable/disable IGMP querier election.";
+        }
+        leaf proxy-router-protocol-pass {
+          type boolean;
+          default "false";
+          description
+            "Enable/disable an IGMP snooping proxy-enabled device to transparently transmit IGMP Report messages.";
+        }
+        leaf querier-enable {
+          type boolean;
+          must "(../proxy-enable='false' and not (../../../evpn:evpn/evpn:name)) or (../querier-enable='false')";
+          default "false";
+          description
+            "Enable/disable an IGMP querier.";
+        }
+        leaf query-interval {
+          type uint32 {
+            range "1..65535";
+          }
+          units "s";
+          default "60";
+          description
+            "Interval at which a device sends General Query messages.";
+        }
+        leaf require-router-alert {
+          type boolean;
+          default "false";
+          description
+            "Enable/disable a device to permit only IGMP messages that contain the Router-Alert option in the IP header. By default, IGMP messages that do not carry the Router-Alert option are also permitted.";
+        }
+        leaf send-router-alert {
+          type boolean;
+          default "true";
+          description
+            "Enable/disable a device to send IGMP messages that contain the Router-Alert option in the IP header.";
+        }
+        leaf robustness {
+          type uint32 {
+            range "2..5";
+          }
+          default "2";
+          description
+            "Number of times for retransmitting a message to avoid packet loss.";
+        }
+        leaf router-aging-time {
+          type uint32 {
+            range "1..1000";
+          }
+          units "s";
+          default "180";
+          description
+            "Aging time of dynamic router ports. By default, the aging time of a dynamic router port is 180 seconds or equals the holdtime value contained in a PIM Hello packet.";
+        }
+        leaf router-port-learning {
+          type boolean;
+          default "true";
+          description
+            "Enable/disable dynamic router port learning.";
+        }
+        leaf query-suppress-time {
+          type uint32 {
+            range "0..300";
+          }
+          units "s";
+          default "10";
+          description
+            "Time during which IGMP Report messages are suppressed.";
+        }
+        leaf last-member-query-interval {
+          type uint32 {
+            range "1..5";
+          }
+          units "s";
+          default "1";
+          description
+            "Interval at which a last-member query message is sent.";
+        }
+        leaf static-group-suppress-dynamic-join {
+          type boolean;
+          default "false";
+          description
+            "Enable/disable a Layer 2 device from sending IGMP Report and Leave messages of a group that has been configured as a static group on the upstream device.";
+        }
+        leaf report-suppress {
+          type boolean;
+          must "(../proxy-enable='false' and not (../../../evpn:evpn/evpn:name)) or (../report-suppress='false')";
+          default "false";
+          description
+            "Enable/disable the function of suppressing IGMP Report messages.";
+        }
+        leaf source-life-time {
+          type uint32 {
+            range "60..1000";
+          }
+          units "s";
+          default "210";
+          description
+            "Aging time for entries triggered by multicast flows.";
+        }
+        leaf designated-vlan {
+          type uint32 {
+            range "1..4094";
+          }
+          must "(not (../../../evpn:evpn/evpn:name)) or (not (../designated-vlan))";
+          description
+            "Specify the IGMP snooping VLAN in which multicast messages and data are transparently transmitted.";
+        }
+        leaf signal-smet-disable {
+          type boolean;
+          must "(../../../evpn:evpn/evpn:name) or ../signal-smet-disable='false'";
+          default "false";
+          description
+            "Enable/disable the function of signal-smet.";
+        }
+        leaf signal-synch-enable {
+          type boolean;
+          default "false";
+          description
+            "Enable/disable the function of signal-synch. Configuration prerequisite for the leaf: The BD instance is associated with an EVPN instance, and IGMP snooping proxy is enabled for the BD or IGMP is enabled on the VBDIF interface of the BD.";
+        }
+        leaf signal-ignore-df-enable {
+          type boolean;
+          default "false";
+          description
+            "Enable/disable the function of signal-ignore-df. Configuration prerequisite for the leaf: The BD instance is associated with an EVPN instance, and IGMP snooping proxy is enabled for the BD or IGMP is enabled on the VBDIF interface of the BD.";
+        }
+        container evi-rts {
+          when "../signal-synch-enable='true'";
+          description
+            "List of EVI-RT extended community.";
+          list evi-rt {
+            key "type";
+            description
+              "Configure EVI-RT extended community.";
+            leaf type {
+              type evi-rt-type;
+              description
+                "Specify the VPN target type. Export-extcommunity: specifies the extended community attributes carried in routing information to be sent. Import-extcommunity: receives routing information carrying specified extended community attributes.";
+            }
+            leaf value {
+              type string {
+                length "3..21";
+                pattern '(((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}):(6553[0-5]|655[0-2]\d|65[0-4]\d{2}|6[0-4]\d{3}|[1-5]\d{4}|[1-9]\d{0,3}|0))|((6553[0-5]|655[0-2]\d|65[0-4]\d{2}|6[0-4]\d{3}|[1-5]\d{4}|[1-9]\d{0,3}|0):(429496729[0-5]|42949672[0-8]\d|4294967[0-1]\d{2}|429496[0-6]\d{3}|42949[0-5]\d{4}|4294[0-8]\d{5}|429[0-3]\d{6}|42[0-8]\d{7}|4[0-1]\d{8}|[1-3]\d{9}|[1-9]\d{0,8}))|((6553[0-5]|655[0-2]\d|65[0-4]\d{2}|6[0-4]\d{3}|[1-5]\d{4}|[1-9]\d{0,3}):0)|((429496729[0-5]|42949672[0-8]\d|4294967[0-1]\d{2}|429496[0-6]\d{3}|42949[0-5]\d{4}|4294[0-8]\d{5}|429[0-3]\d{6}|42[0-8]\d{7}|4[0-1]\d{8}|[1-3]\d{9}|[1-9]\d{5,8}|[7-9]\d{4}|6[6-9]\d{3}|65[6-9]\d{2}|655[4-9]\d|6553[6-9]):(6553[0-5]|655[0-2]\d|65[0-4]\d{2}|6[0-4]\d{3}|[1-5]\d{4}|[1-9]\d{0,3}|0))|((6553[0-5]|655[0-2]\d|65[0-4]\d{2}|6[0-4]\d{3}|[1-5]\d{4}|[1-9]\d{0,3})\.(6553[0-5]|655[0-2]\d|65[0-4]\d{2}|6[0-4]\d{3}|[1-5]\d{4}|[1-9]\d{0,3}|0):(6553[0-5]|655[0-2]\d|65[0-4]\d{2}|6[0-4]\d{3}|[1-5]\d{4}|[1-9]\d{0,3}|0))|(0\.(6553[0-5]|655[0-2]\d|65[0-4]\d{2}|6[0-4]\d{3}|[1-5]\d{4}|[1-9]\d{0,3}):(6553[0-5]|655[0-2]\d|65[0-4]\d{2}|6[0-4]\d{3}|[1-5]\d{4}|[1-9]\d{0,3}|0))|(0\.0:(6553[0-5]|655[0-2]\d|65[0-4]\d{2}|6[0-4]\d{3}|[1-5]\d{4}|[1-9]\d{0,3}))';
+              }
+              mandatory true;
+              description
+                "Vpn-target: adds VPN target extended community attribute to the export or import VPN target extended community list. The vpn-target can be expressed in either of the following formats: (1)16-bit AS number:32-bit user-defined number. For example, 1:3. The AS number ranges from 0 to 65535. The user-defined number ranges from 0 to 4294967295. The AS number and the user-defined number cannot be 0s at the same time. That is, a VPN target cannot be 0:0. (2)32-bit IP address:16-bit user-defined number. For example, 192.168.122.15:1. The IP address ranges from 0.0.0.0 to 255.255.255.255. The user-defined number ranges from 0 to 65535. (3)32-bit AS number:16-bit user-defined number. For example, 65537:3. The AS number ranges from 65536 to 4294967295. The user-defined number ranges from 0 to 65535. (4)32-bit AS number in dotted notation:16-bit user-defined number. For example, 0.0:3 or 0.1:0. The 32-bit AS number in dotted notation is in the format of x.y, where x and y are integers that both range from 0 to 65535. The user-defined number ranges from 0 to 65535. The AS number and user-defined number cannot both be 0s. Specifically, a VPN target cannot be 0:0.0.";
+            }
+          }
+        }
+        container querier {
+          config false;
+          description
+            "Operational state of IGMP querier.";
+          leaf querier-state {
+            type boolean;
+            description
+              "IGMP querier state.";
+          }
+          leaf querier-address {
+            type inet:ip-address-no-zone;
+            description
+              "IGMP querier address.";
+          }
+        }
+      }
+      container interfaces {
+        description
+          "List of sub-interface configuration.";
+        list interface {
+          key "name";
+          description
+            "Configure sub-interface configuration.";
+          leaf name {
+            type leafref {
+              path "/ifm:ifm/ifm:interfaces/ifm:interface/ifm:name";
+            }
+            description
+              "Interface name.";
+          }
+          leaf group-policy-acl {
+            type leafref {
+              path "/acl:acl/acl:groups/acl:group/acl:identity";
+            }
+            must "/acl:acl/acl:groups/acl:group[acl:identity=current()]/acl:type='basic' or /acl:acl/acl:groups/acl:group[acl:identity=current()]/acl:type='advance'";
+            description
+              "Configure a policy for filtering multicast groups on an interface to control the range of multicast groups that hosts can join.";
+          }
+          leaf group-policy-version {
+            when "../group-policy-acl";
+            type uint32 {
+              range "1..3";
+            }
+            description
+              "A group policy applies only to a specified IGMP version.";
+          }
+          leaf learning {
+            type boolean;
+            default "true";
+            description
+              "Enable/disable IGMP-snooping learning function.";
+          }
+          leaf proxy-uplink-port {
+            type boolean;
+            default "false";
+            description
+              "Enable/disable IGMP proxy uplink port.";
+          }
+          leaf pe-vid {
+            when "../proxy-uplink-port='true'";
+            type uint32 {
+              range "1..4094";
+            }
+            description
+              "Outer VLAN ID.";
+          }
+          leaf ce-vid {
+            when "../proxy-uplink-port='true'";
+            type uint32 {
+              range "1..4094";
+            }
+            description
+              "Inner VLAN ID.";
+          }
+        }
+      }
+      container ssm-mapping-groups {
+        description
+          "List of SSM mapping configuration of a BD.";
+        list ssm-mapping-group {
+          key "group-address mask-length source-address";
+          description
+            "Configure SSM mapping configuration of a BD.";
+          leaf group-address {
+            type inet:ip-address-no-zone;
+            description
+              "Address of a multicast group. In IPv4, the value ranges from 224.0.1.0 to 239.255.255.255, in dotted decimal notation.";
+          }
+          leaf mask-length {
+            type uint32 {
+              range "4..32";
+            }
+            description
+              "Mask length of a group address.";
+          }
+          leaf source-address {
+            type inet:ip-address-no-zone;
+            description
+              "Multicast source address.";
+          }
+        }
+      }
+      uses fast-channel-cfg;
+      container interface-static-groups {
+        description
+          "List of static group join configuration of sub-interfaces.";
+        list interface-static-group {
+          key "interface pe-vid ce-vid group-address source-address";
+          description
+            "Configure Static group join configuration of sub-interfaces.";
+          leaf interface {
+            type leafref {
+              path "/ifm:ifm/ifm:interfaces/ifm:interface/ifm:name";
+            }
+            description
+              "Interface name.";
+          }
+          leaf pe-vid {
+            ext:hidden ui;
+            type uint32 {
+              range "0..4094";
+              ext:value-meaning {
+                ext:item "0" {
+                  ext:meaning "NULL";
+                }
+              }
+            }
+            description
+              "Outer VLAN ID.";
+          }
+          leaf ce-vid {
+            ext:hidden ui;
+            type uint32 {
+              range "0..4094";
+              ext:value-meaning {
+                ext:item "0" {
+                  ext:meaning "NULL";
+                }
+              }
+            }
+            description
+              "Inner VLAN ID.";
+          }
+          leaf group-address {
+            type inet:ip-address-no-zone;
+            description
+              "Address of a multicast group. In IPv4, the value ranges from 224.0.1.0 to 239.255.255.255, in dotted decimal notation.";
+          }
+          leaf source-address {
+            type inet:ip-address-no-zone;
+            description
+              "Multicast source address.";
+          }
+        }
+      }
+      container static-router-ports {
+        description
+          "List of static router port configuration of sub-interfaces.";
+        list static-router-port {
+          key "interface pe-vid ce-vid";
+          description
+            "Configure static router port configuration of sub-interfaces.";
+          leaf interface {
+            type leafref {
+              path "/ifm:ifm/ifm:interfaces/ifm:interface/ifm:name";
+            }
+            description
+              "Interface name.";
+          }
+          leaf pe-vid {
+            ext:hidden ui;
+            type uint32 {
+              range "0..4094";
+              ext:value-meaning {
+                ext:item "0" {
+                  ext:meaning "NULL";
+                }
+              }
+            }
+            description
+              "Outer VLAN ID.";
+          }
+          leaf ce-vid {
+            ext:hidden ui;
+            type uint32 {
+              range "0..4094";
+              ext:value-meaning {
+                ext:item "0" {
+                  ext:meaning "NULL";
+                }
+              }
+            }
+            description
+              "Inner VLAN ID.";
+          }
+        }
+      }
+      container group-ports {
+        config false;
+        description
+          "List of layer 2 multicast port information.";
+        list group-port {
+          key "group-address source-address";
+          description
+            "Layer 2 multicast port state.";
+          leaf group-address {
+            type inet:ip-address-no-zone;
+            description
+              "Address of a multicast group. In IPv4, the value ranges from 224.0.1.0 to 239.255.255.255, in dotted decimal notation.";
+          }
+          leaf source-address {
+            type inet:ip-address-no-zone;
+            description
+              "Multicast source address.";
+          }
+          leaf source-up-time {
+            type pub-type:time-tick;
+            description
+              "Time since a multicast source was discovered.";
+          }
+          leaf group-up-time {
+            type pub-type:time-tick;
+            description
+              "Time since a multicast group was discovered.";
+          }
+          leaf entry-flag {
+            type entry-flag-type;
+            description
+              "Entity flag.";
+          }
+          leaf source-flag {
+            type source-flag-type;
+            description
+              "Source flag.";
+          }
+          container ports {
+            description
+              "List of port state.";
+            list port {
+              key "interface";
+              description
+                "Port state.";
+              leaf interface {
+                type leafref {
+                  path "/ifm:ifm/ifm:interfaces/ifm:interface/ifm:name";
+                }
+                description
+                  "Interface name.";
+              }
+              leaf up-time {
+                type pub-type:time-tick;
+                description
+                  "Time since a router port was discovered.";
+              }
+              leaf expire-time {
+                type pub-type:time-tick {
+                  ext:value-meaning {
+                    ext:item "1879048190" {
+                      ext:meaning "--";
+                    }
+                  }
+                }
+                description
+                  "Time after which a port will be deleted from the router port record table.";
+              }
+              leaf port-flag {
+                type string {
+                  length "0..50";
+                }
+                description
+                  "Port flag. S: static; D: dynamic; M: SSM-mapping.";
+              }
+              leaf esi {
+                type l2mc-esi;
+                description
+                  "Ethernet Segment Identifier.";
+              }
+              leaf df-status {
+                type df-status-type;
+                description
+                  "One of the PEs may be either DF or non-DF In a redundancy mode.";
+              }
+              leaf remote-flag {
+                type remote-flag-type;
+                description
+                  "The source of the port information. Remote: passed from other devices; local: locally generated; local remote: both.";
+              }
+            }
+          }
+          container p2mp-tunnel-ports {
+            ext:hidden ui;
+            description
+              "List of P2MP state.";
+            list p2mp-tunnel-port {
+              key "tunnel-name";
+              description
+                "P2MP state.";
+              leaf tunnel-name {
+                type string {
+                  length "0..50";
+                }
+                description
+                  "Port information.";
+              }
+              leaf port-up-time {
+                type pub-type:time-tick;
+                description
+                  "Time since a router port was discovered.";
+              }
+              leaf port-flag {
+                type string {
+                  length "0..50";
+                }
+                description
+                  "Port flag. S: static; D: dynamic; M: SSM-mapping.";
+              }
+            }
+          }
+        }
+      }
+      container router-ports {
+        config false;
+        description
+          "List of router port state.";
+        list router-port {
+          key "interface pe-vid ce-vid";
+          description
+            "Router port state.";
+          leaf interface {
+            type leafref {
+              path "/ifm:ifm/ifm:interfaces/ifm:interface/ifm:name";
+            }
+            description
+              "Interface name.";
+          }
+          leaf pe-vid {
+            type uint32 {
+              range "0..4094";
+              ext:value-meaning {
+                ext:item "0" {
+                  ext:meaning "NULL";
+                }
+              }
+            }
+            description
+              "Outer VLAN ID.";
+          }
+          leaf ce-vid {
+            type uint32 {
+              range "0..4094";
+              ext:value-meaning {
+                ext:item "0" {
+                  ext:meaning "NULL";
+                }
+              }
+            }
+            description
+              "Inner VLAN ID.";
+          }
+          leaf up-time {
+            type pub-type:time-tick;
+            description
+              "Time since a router port was discovered.";
+          }
+          leaf expire-time {
+            type pub-type:time-tick {
+              ext:value-meaning {
+                ext:item "1879048190" {
+                  ext:meaning "--";
+                }
+              }
+            }
+            description
+              "Time after which a port will be deleted from the router port record table.";
+          }
+          leaf port-number {
+            type uint32;
+            ext:hidden ui;
+            description
+              "Number of router ports.";
+          }
+          leaf flag {
+            type port-flag-type;
+            description
+              "Type of a router port: static or dynamic.";
+          }
+        }
+      }
+      container interface-groups {
+        config false;
+        description
+          "List of bridge domain port state.";
+        list interface-group {
+          key "interface port-type pe-vid ce-vid";
+          description
+            "Bridge domain port state.";
+          leaf interface {
+            type leafref {
+              path "/ifm:ifm/ifm:interfaces/ifm:interface/ifm:name";
+            }
+            description
+              "Interface name.";
+          }
+          leaf port-type {
+            type port-type;
+            description
+              "Interface type.";
+          }
+          leaf pe-vid {
+            type uint32 {
+              ext:value-meaning {
+                ext:item "0" {
+                  ext:meaning "NULL";
+                }
+              }
+            }
+            description
+              "Outer VLAN ID.";
+          }
+          leaf ce-vid {
+            type uint32 {
+              ext:value-meaning {
+                ext:item "0" {
+                  ext:meaning "NULL";
+                }
+              }
+            }
+            description
+              "Inner VLAN ID.";
+          }
+          uses display-group-info;
+        }
+      }
+      container tunnel-groups {
+        config false;
+        ext:hidden ui;
+        description
+          "List of IGMP group information of PWs.";
+        list tunnel-group {
+          key "peer-address";
+          description
+            "Statistics of IGMP group on a PW.";
+          leaf peer-address {
+            type inet:ip-address-no-zone;
+            description
+              "Peer IP Address.";
+          }
+          uses display-group-info;
+        }
+      }
+      uses display-bd-statistics;
+      uses display-invalid-packet-statistics;
+    }
+  }
+}

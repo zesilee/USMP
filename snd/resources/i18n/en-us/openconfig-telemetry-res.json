@@ -1,0 +1,272 @@
+{
+  "/openconfig-telemetry:oc-telemetry": {
+    "name": "Telemetry"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups": {
+    "name": "Sampling Sensor Group"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group": {
+    "name": "Sampling Sensor Group List"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/sensor-group-id": {
+    "name": "Sampling Sensor Group Name"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/config": {
+    "name": "Configuration Node"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/config/sensor-group-id": {
+    "name": "Sampling Sensor Group Name"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/state": {
+    "name": "State Node"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/state/sensor-group-id": {
+    "name": "Sampling Sensor Group Name"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/sensor-paths": {
+    "name": "Sampling Path"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/sensor-paths/sensor-path": {
+    "name": "Sampling Path List"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/sensor-paths/sensor-path/path": {
+    "name": "Sampling Path Name"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/sensor-paths/sensor-path/config": {
+    "name": "Configuration Node"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/sensor-paths/sensor-path/config/path": {
+    "name": "Sampling Path Name"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/sensor-paths/sensor-path/config/exclude-filter": {
+    "name": "Exclude Filter"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/sensor-paths/sensor-path/state": {
+    "name": "State Node"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/sensor-paths/sensor-path/state/path": {
+    "name": "Sampling Path Name"
+  },
+  "/openconfig-telemetry:telemetry-system/sensor-groups/sensor-group/sensor-paths/sensor-path/state/exclude-filter": {
+    "name": "Exclude Filter"
+  },
+  "/openconfig-telemetry:telemetry-system/destination-groups": {
+    "name": "Destination Group"
+  },
+  "/openconfig-telemetry:telemetry-system/destination-groups/destination-group": {
+    "name": "Destination Group List"
+  },
+  "/openconfig-telemetry:telemetry-system/destination-groups/destination-group/group-id": {
+    "name": "Destination Group Name"
+  },
+  "/openconfig-telemetry:telemetry-system/destination-groups/destination-group/config": {
+    "name": "Configuration Node"
+  },
+  "/openconfig-telemetry:telemetry-system/destination-groups/destination-group/config/group-id": {
+    "name": "Destination Group Name"
+  },
+  "/openconfig-telemetry:telemetry-system/destination-groups/destination-group/state": {
+    "name": "State Node"
+  },
+  "/openconfig-telemetry:telemetry-system/destination-groups/destination-group/state/group-id": {
+    "name": "Destination Group Name"
+  },
+  "/openconfig-telemetry:telemetry-system/destination-groups/destination-group/destinations": {
+    "name": "Destination Collector Group"
+  },
+  "/openconfig-telemetry:telemetry-system/destination-groups/destination-group/destinations/destination": {
+    "name": "Destination Collector List"
+  },
+  "/openconfig-telemetry:telemetry-system/destination-groups/destination-group/destinations/destination/destination-address": {
+    "name": "Destination Group IP Address"
+  },
+  "/openconfig-telemetry:telemetry-system/destination-groups/destination-group/destinations/destination/destination-port": {
+    "name": "Destination Group Port Number"
+  },
+  "/openconfig-telemetry:telemetry-system/destination-groups/destination-group/destinations/destination/config": {
+    "name": "Configuration Node"
+  },
+  "/openconfig-telemetry:telemetry-system/destination-groups/destination-group/destinations/destination/config/destination-address": {
+    "name": "Destination Group IP Address"
+  },
+  "/openconfig-telemetry:telemetry-system/destination-groups/destination-group/destinations/destination/config/destination-port": {
+    "name": "Destination Group Port Number"
+  },
+  "/openconfig-telemetry:telemetry-system/destination-groups/destination-group/destinations/destination/state": {
+    "name": "State Node"
+  },
+  "/openconfig-telemetry:telemetry-system/destination-groups/destination-group/destinations/destination/state/destination-address": {
+    "name": "Destination Group IP Address"
+  },
+  "/openconfig-telemetry:telemetry-system/destination-groups/destination-group/destinations/destination/state/destination-port": {
+    "name": "Destination Group Port Number"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions": {
+    "name": "Subscription Group"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/persistent": {
+    "name": "Static Subscription"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/persistent/subscription": {
+    "name": "List of Static Subscriptions"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/persistent/subscription/subscription-name": {
+    "name": "Subscription Name"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/persistent/subscription/config": {
+    "name": "Configuration Node"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/persistent/subscription/config/subscription-name": {
+    "name": "Subscription Name"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/persistent/subscription/config/local-source-address": {
+    "name": "Source IP Address"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/persistent/subscription/config/originated-qos-marking": {
+    "name": "DSCP Value of Packets to Be Sent to Collector"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/persistent/subscription/config/protocol": {
+    "name": "Protocol Used to Send Data to Collector"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/persistent/subscription/config/encoding": {
+    "name": "Encoding Format"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/persistent/subscription/state": {
+    "name": "State Node"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/persistent/subscription/state/subscription-name": {
+    "name": "Subscription Name"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/persistent/subscription/state/subscription-id": {
+    "name": "ID Allocated to Subscription"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/persistent/subscription/state/local-source-address": {
+    "name": "Source IP Address"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/persistent/subscription/state/originated-qos-marking": {
+    "name": "DSCP Value of Packets to Be Sent to Collector"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/persistent/subscription/state/protocol": {
+    "name": "Protocol Used to Send Data to Collector"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/persistent/subscription/state/encoding": {
+    "name": "Encoding Format"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/persistent/subscription/sensor-profiles": {
+    "name": "Associated Sensor Group"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/persistent/subscription/sensor-profiles/sensor-profile": {
+    "name": "List of Associated Sensor Groups"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/persistent/subscription/sensor-profiles/sensor-profile/sensor-group": {
+    "name": "Sampling Sensor Group Name"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/persistent/subscription/sensor-profiles/sensor-profile/config": {
+    "name": "Configuration Node"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/persistent/subscription/sensor-profiles/sensor-profile/config/sensor-group": {
+    "name": "Sampling Sensor Group Name"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/persistent/subscription/sensor-profiles/sensor-profile/config/sample-interval": {
+    "name": "Sampling Interval"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/persistent/subscription/sensor-profiles/sensor-profile/config/heartbeat-interval": {
+    "name": "Heartbeat Interval"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/persistent/subscription/sensor-profiles/sensor-profile/config/suppress-redundant": {
+    "name": "Redundancy Suppression"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/persistent/subscription/sensor-profiles/sensor-profile/state": {
+    "name": "State Node"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/persistent/subscription/sensor-profiles/sensor-profile/state/sensor-group": {
+    "name": "Sampling Sensor Group Name"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/persistent/subscription/sensor-profiles/sensor-profile/state/sample-interval": {
+    "name": "Sampling Interval"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/persistent/subscription/sensor-profiles/sensor-profile/state/heartbeat-interval": {
+    "name": "Heartbeat Interval"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/persistent/subscription/sensor-profiles/sensor-profile/state/suppress-redundant": {
+    "name": "Redundancy Suppression"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/persistent/subscription/destination-groups": {
+    "name": "Associated Destination Group"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/persistent/subscription/destination-groups/destination-group": {
+    "name": "List of Associated Destination Groups"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/persistent/subscription/destination-groups/destination-group/group-id": {
+    "name": "Destination Group Name"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/persistent/subscription/destination-groups/destination-group/config": {
+    "name": "Configuration Node"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/persistent/subscription/destination-groups/destination-group/config/group-id": {
+    "name": "Destination Group Name"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/persistent/subscription/destination-groups/destination-group/state": {
+    "name": "State Node"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/persistent/subscription/destination-groups/destination-group/state/group-id": {
+    "name": "Destination Group Name"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/dynamic": {
+    "name": "Dynamic Subscription"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/dynamic/subscription": {
+    "name": "List of Dynamic Subscriptions"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/dynamic/subscription/subscription-id": {
+    "name": "Subscription ID"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/dynamic/subscription/state": {
+    "name": "State Node"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/dynamic/subscription/state/subscription-id": {
+    "name": "Subscription ID"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/dynamic/subscription/state/destination-address": {
+    "name": "Destination Group IP Address"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/dynamic/subscription/state/destination-port": {
+    "name": "Destination Group Port Number"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/dynamic/subscription/state/sample-interval": {
+    "name": "Sampling Interval"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/dynamic/subscription/state/heartbeat-interval": {
+    "name": "Heartbeat Interval"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/dynamic/subscription/state/suppress-redundant": {
+    "name": "Redundancy Suppression"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/dynamic/subscription/state/originated-qos-marking": {
+    "name": "DSCP Value of Packets to Be Sent to Collector"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/dynamic/subscription/state/protocol": {
+    "name": "Protocol Used to Send Data to Collector"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/dynamic/subscription/state/encoding": {
+    "name": "Encoding Format"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/dynamic/subscription/sensor-paths": {
+    "name": "Sampling Path"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/dynamic/subscription/sensor-paths/sensor-path": {
+    "name": "Sampling Path List"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/dynamic/subscription/sensor-paths/sensor-path/path": {
+    "name": "Sampling Path Name"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/dynamic/subscription/sensor-paths/sensor-path/state": {
+    "name": "State Node"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/dynamic/subscription/sensor-paths/sensor-path/state/path": {
+    "name": "Sampling Path Name"
+  },
+  "/openconfig-telemetry:telemetry-system/subscriptions/dynamic/subscription/sensor-paths/sensor-path/state/exclude-filter": {
+    "name": "Exclude Filter"
+  }
+}

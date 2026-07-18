@@ -1,0 +1,11 @@
+{
+  "/huawei-ifm:ifm/interfaces/interface/huawei-monitor-group:track-monitor-group": {
+    "name": "监控接口"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-monitor-group:track-monitor-group/name": {
+    "name": "接口监控组名称"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-monitor-group:track-monitor-group/down-weight": {
+    "name": "Down权重"
+  }
+}

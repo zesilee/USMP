@@ -1,0 +1,122 @@
+{
+  "/huawei-l3vpn:l3vpn": {
+    "name": "L3VPN"
+  },
+  "/huawei-l3vpn:l3vpn/statistics": {
+    "name": "VPN统计信息"
+  },
+  "/huawei-l3vpn:l3vpn/statistics/vpn-total-number": {
+    "name": "VPN数量"
+  },
+  "/huawei-l3vpn:l3vpn/statistics/ipv4-vpn-number": {
+    "name": "IPv4 VPN数量"
+  },
+  "/huawei-l3vpn:l3vpn/statistics/ipv6-vpn-number": {
+    "name": "IPv6 VPN数量"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:traffic-statistic-enable": {
+    "name": "使能L3VPN流量统计"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs": {
+    "name": "VPN地址族列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af": {
+    "name": "VPN地址族"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/type": {
+    "name": "地址族类型"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/route-distinguisher": {
+    "name": "路由标识(RD)"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/effect-route-distinguisher": {
+    "name": "生效的路由标识(RD)"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/import-policy-type": {
+    "name": "导入路由策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/import-policy-type/rtp-ref": {
+    "name": "路由策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/import-policy-type/rtp-ref/import-policy": {
+    "name": "导入路由策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/export-policy-type": {
+    "name": "导出路由策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/export-policy-type/rtp-ref": {
+    "name": "路由策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/export-policy-type/rtp-ref/export-policy": {
+    "name": "导出路由策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/export-policy-add-ert-first": {
+    "name": "首先添加ERT"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/label-mode": {
+    "name": "标签分配方式"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/vpn-frr": {
+    "name": "路由快速切换"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/tunnel-policy": {
+    "name": "隧道策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/transit-vpn": {
+    "name": "保持VPN实例up"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/lsp-operation": {
+    "name": "标签操作方式"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/default-color": {
+    "name": "默认颜色"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/vpn-targets": {
+    "name": "RT列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/vpn-targets/vpn-target": {
+    "name": "RT"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/vpn-targets/vpn-target/value": {
+    "name": "RT值"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/vpn-targets/vpn-target/type": {
+    "name": "RT类型"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/state": {
+    "name": "VPN地址族详细信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/state/create-time": {
+    "name": "使能时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/state/up-time": {
+    "name": "可用状态持续时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/state/label": {
+    "name": "标签值"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/state/status": {
+    "name": "VPN实例状态"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/tunnel-infos": {
+    "name": "隧道列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/tunnel-infos/tunnel-info": {
+    "name": "隧道信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/tunnel-infos/tunnel-info/type": {
+    "name": "隧道类型"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/tunnel-infos/tunnel-info/peer-ip": {
+    "name": "下一跳地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/tunnel-infos/tunnel-info/id": {
+    "name": "隧道标识"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/tunnel-infos/tunnel-info/color": {
+    "name": "颜色"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/tunnel-infos/tunnel-info/name": {
+    "name": "隧道名称"
+  }
+}

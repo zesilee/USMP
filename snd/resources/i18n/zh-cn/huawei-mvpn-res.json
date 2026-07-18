@@ -1,0 +1,116 @@
+{
+  "/huawei-mvpn:mvpn": {
+    "name": "组播VPN"
+  },
+  "/huawei-mvpn:mvpn/globals": {
+    "name": "MVPN全局配置列表"
+  },
+  "/huawei-mvpn:mvpn/globals/global": {
+    "name": "MVPN全局配置"
+  },
+  "/huawei-mvpn:mvpn/globals/global/address-family": {
+    "name": "地址族"
+  },
+  "/huawei-mvpn:mvpn/globals/global/mvpn-id": {
+    "name": "MVPN ID"
+  },
+  "/huawei-mvpn:mvpn/globals/global/enable-inter-area-segmented": {
+    "name": "ABR节点上全局使能分段隧道"
+  },
+  "/huawei-mvpn:mvpn/globals/global/apply-explicit-null-label": {
+    "name": "使能IPv6 Explicit NULL Label加封"
+  },
+  "/huawei-mvpn:mvpn/ipv6-underlay-globals": {
+    "name": "MVPN IPv6 ID全局配置列表"
+  },
+  "/huawei-mvpn:mvpn/ipv6-underlay-globals/ipv6-underlay-global": {
+    "name": "MVPN IPv6 ID全局配置"
+  },
+  "/huawei-mvpn:mvpn/ipv6-underlay-globals/ipv6-underlay-global/address-family": {
+    "name": "地址族"
+  },
+  "/huawei-mvpn:mvpn/ipv6-underlay-globals/ipv6-underlay-global/mvpn-id": {
+    "name": "MVPN IPv6 ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-mvpn:mvpn": {
+    "name": "组播VPN ID配置列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-mvpn:mvpn/mvpn-id": {
+    "name": "MVPN ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-mvpn:mvpn/local-admin-id": {
+    "name": "本地VPN实例标识"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-mvpn:mvpn/mvpn-type": {
+    "name": "MVPN类型"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-mvpn:mvpn/mvpn-type/ng-mvpn": {
+    "name": "NG类型MVPN"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-mvpn:mvpn/mvpn-type/ng-mvpn/ng": {
+    "name": "组播VPN属性"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-mvpn:mvpn/mvpn-type/ng-mvpn/ng/signaling-mode": {
+    "name": "信令模式"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-mvpn:mvpn/mvpn-type/ng-mvpn/ng/is-sender-site": {
+    "name": "将PE配置成Sender PE"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-mvpn:mvpn/mvpn-type/ng-mvpn/ng/is-ipv6-underlay": {
+    "name": "IPv6 underlay能力配置"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-mvpn:mvpn/mvpn-type/ng-mvpn/ng/rpt-spt-mode": {
+    "name": "共享树建立方式"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-mvpn:mvpn/mvpn-type/ng-mvpn/ng/is-inter-as": {
+    "name": "配置跨域自动发现"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-mvpn:mvpn/mvpn-type/ng-mvpn/ng/is-c-multicast-frr": {
+    "name": "配置FRR"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-mvpn:mvpn/mvpn-type/ng-mvpn/ng/frr-acl-name6": {
+    "name": "配置IPv6 FRR生效范围策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-mvpn:mvpn/mvpn-type/ng-mvpn/ng/frr-acl-name": {
+    "name": "配置IPv4 FRR生效范围策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-mvpn:mvpn/mvpn-type/ng-mvpn/ng/frr-flow-based-acl-name": {
+    "name": "配置基于流量检测的IPv4 FRR生效范围策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-mvpn:mvpn/mvpn-type/ng-mvpn/ng/frr-flow-based-acl-name6": {
+    "name": "配置基于流量检测的IPv6 FRR策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-mvpn:mvpn/mvpn-type/ng-mvpn/ng/is-compatible-draft": {
+    "name": "配置compatible draft"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-mvpn:mvpn/mvpn-type/ng-mvpn/ng/is-export-msdp": {
+    "name": "通过MSDP接收Source Active消息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-mvpn:mvpn/mvpn-type/ng-mvpn/ng/is-import-msdp": {
+    "name": "通过MSDP发送Source Active消息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-mvpn:mvpn/mvpn-type/ng-mvpn/ng/spmsi-tnl-detect-delay": {
+    "name": "隧道检测延迟时间 (s)"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-mvpn:mvpn/mvpn-type/ng-mvpn/ng/rpt-prune-delay": {
+    "name": "RPT 剪枝时间(s)"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-mvpn:mvpn/mvpn-type/ng-mvpn/ng/inter-area-seg-enable": {
+    "name": "使能域内分段隧道功能"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-mvpn:mvpn/mvpn-type/ng-mvpn/ng/umh-select-type": {
+    "name": "UMH选择类型"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-mvpn:mvpn/mvpn-type/ng-mvpn/ng/bier-entropy-mode": {
+    "name": "MVPN BIER负载均衡熵计算模式"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-mvpn:mvpn/mvpn-type/ng-mvpn/ng/ipmsi-to-spmsi-switch-immediately": {
+    "name": "I-PMSI隧道到S-PMSI隧道快速切换"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-mvpn:mvpn/mvpn-type/ng-mvpn/ng/ipmsi-tunnel": {
+    "name": "P2MP 隧道属性列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-mvpn:mvpn/mvpn-type/ng-mvpn/ng/ipmsi-tunnel/tunnel-mode": {
+    "name": "MVPN IPMSI隧道模式"
+  }
+}

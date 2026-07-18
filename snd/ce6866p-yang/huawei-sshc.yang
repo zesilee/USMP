@@ -1,0 +1,376 @@
+/*
+Copyright (C) 2022 Huawei Technologies Co., Ltd. All rights reserved.
+*/
+module huawei-sshc {
+  namespace "urn:huawei:yang:huawei-sshc";
+  prefix sshc;
+  import huawei-extension {
+    prefix ext;
+  }
+  import ietf-inet-types {
+    prefix inet;
+  }
+  import huawei-sm2 {
+    prefix sm2;
+  }
+  import huawei-pub-type {
+    prefix pub-type;
+  }
+  organization
+    "Huawei Technologies Co., Ltd.";
+  contact
+    "Huawei Industrial Base
+     Bantian, Longgang
+     Shenzhen 518129
+     People's Republic of China
+     Website: http://www.huawei.com
+     Email: support@huawei.com";
+  description
+    "SSH client.";
+  revision 2022-07-28 {
+    description
+      "Modify the type of the SSH server address.";
+    reference
+      "Huawei private.";
+  }
+  revision 2022-03-31 {
+    description
+      "Initial revision.";
+    reference
+      "Huawei private.";
+  }
+  typedef sshc-enable-flag {
+    type enumeration {
+      enum "enable" {
+        value 1;
+        description
+          "Accept connection request from unknown or unauthentic clients.";
+      }
+      enum "disable" {
+        value 2;
+        description
+          "Do not accept connection request from unknown or unauthentic clients.";
+      }
+    }
+    description
+      "SSH client bool switch.";
+  }
+  typedef trans-cmd-type {
+    type enumeration {
+      enum "get" {
+        value 2;
+        description
+          "File get operation.";
+      }
+      enum "put" {
+        value 3;
+        description
+          "File put operation.";
+      }
+    }
+    description
+      "SSH client transmission command type.";
+  }
+  ext:task-name "ssh-client";
+  container sshc {
+    description
+      "SSH client.";
+    container client {
+      description
+        "Configure SSH client.";
+      leaf keep-alive-time {
+        type int32 {
+          range "0..3600";
+        }
+        default "0";
+        description
+          "If client does not receive any data from server for keepalive interval time, it sends first keepalive message to server. Further keepalive messages are sent after every expiry of keepalive interval only for max number of times configured. If client does not get any response from server still, client disconnects the current connection. 0 seconds means do not send keepalive message to server.";
+      }
+      leaf keep-alive-count {
+        type int32 {
+          range "1..30";
+        }
+        default "3";
+        description
+          "If client does not receive any data from server for keepalive interval time, it sends first keepalive message to server. Further keepalive messages are sent after every expiry of keepalive interval only for max number of times configured. If client does not get any response from server still, client disconnects the current connection.";
+      }
+      leaf first-time-enable {
+        type sshc-enable-flag;
+        default "disable";
+        description
+          "If enabled, then RSA public key check for SSH server will be skipped for any new incoming connection.";
+      }
+      leaf src-interface {
+        type pub-type:if-name;
+        description
+          "The specified source interface must exist and an IP address must be configured on the interface.";
+      }
+      leaf src-ipv4-addr {
+        when "not(../src-interface)";
+        type inet:ipv4-address-no-zone;
+        description
+          "SFTP IPv4 source ip address.";
+      }
+      leaf vpn-instance-name {
+        when "../src-ipv4-addr";
+        type string {
+          length "1..31";
+        }
+        description
+          "The specified VPN instance must exist and IPv4-family must be enabled in the VPN instance.";
+      }
+      leaf scp-src-interface {
+        type pub-type:if-name;
+        description
+          "The specified source interface must exist and an IP address must be configured on the interface.";
+      }
+      leaf scp-src-ipv4-addr {
+        when "not(../scp-src-interface)";
+        type inet:ipv4-address-no-zone;
+        description
+          "SCP IPv4 source ip address.";
+        
+      }
+      leaf scp-vpn-instance-name {
+        when "../scp-src-ipv4-addr";
+        type string {
+          length "1..31";
+        }
+        description
+          "The specified VPN instance must exist and IPv4-family must be enabled in the VPN instance.";
+      }
+      leaf sftp-src-ipv6-addr {
+        type inet:ipv6-address-no-zone;
+        description
+          "Specify the SFTP source IPv6 address.";
+      }
+      leaf sftp-ipv6-vpn-instance-name {
+        when "../sftp-src-ipv6-addr";
+        type string {
+          length "1..31";
+        }
+        description
+          "The specified SFTP VPN instance must exist and IPv6-family must be enabled in the VPN instance.";
+      }
+      leaf scp-src-ipv6-addr {
+        type inet:ipv6-address-no-zone;
+        description
+          "Specify the SCP source IPv6 address.";
+      }
+      leaf scp-ipv6-vpn-instance-name {
+        when "../scp-src-ipv6-addr";
+        type string {
+          length "1..31";
+        }
+        description
+          "The specified SCP VPN instance must exist and IPv6-family must be enabled in the VPN instance.";
+      }
+      leaf packet-dscp {
+        type uint32 {
+          range "0..63";
+        }
+        default "48";
+        description
+          "Config DSCP value.";
+      }
+      leaf sm2-host-key {
+          type leafref {
+            path "/sm2:sm2/sm2:sm2-key-pairs/sm2:sm2-key-pair/sm2:key-pair-label";
+          }
+        description
+          "User can assign the sm2 host key for sm2 connection.";
+      }
+      leaf pki-domain {
+        type string {
+          length "1..64";
+        }
+        description
+          "PKI domain.";
+      }
+    }
+	
+    container transfer-results{
+      config false;
+      description
+        "List of SFTP transfer file result.";
+      list transfer-result{
+        key "command-type host-addr server-port vpn-name local-file-name remote-file-name";
+        max-elements  "30";
+        description
+            "SFTP transfer file result state.";
+        leaf command-type {
+          type trans-cmd-type;
+          description
+            "Specify the type of operation need to be performed (get/put).";
+        }
+        leaf host-addr {
+          type string {
+            length "1..255";
+          }
+          description
+            "Specify the IP address of remote system (SFTP server).";
+        }
+        leaf server-port {
+          type uint32 {
+            range "1..65535";
+          }
+          description
+          "Specify the port number.";
+        }
+        leaf vpn-name {
+          type string {
+            length "1..31";
+          }
+          description
+            "Specify the VPN instance name.";
+        }
+        leaf local-file-name {
+            type string {
+                length "1..256";
+            }
+            description      
+                "Specify the local file name.";
+        }
+        leaf remote-file-name {
+            type string {
+                length "1..256";    
+            }
+            description      
+                "Specify the remote file name.";
+        }
+        leaf status {
+          type string {
+                length "0..50";    
+            }  
+          description      
+              "Indicates that the transfer status.";
+        }
+        leaf percentage {
+            type uint32 {
+                range "0..100";    
+            }
+            description      
+                "Show the transfer percentage.";
+        }
+        leaf error-tag {
+            type string {
+                length "0..100";    
+            } 
+            description      
+                "Show the error code when ssh transfer failed.";
+        }
+      }
+    }
+  }
+  rpc ssh-transfer-file {
+    description
+      "SFTP file transfer.";
+    input {
+      leaf source-ipv4-address {
+        type inet:ipv4-address-no-zone;
+        must "../host-addr-ipv4";
+        description
+          "Specify the source IPv4 address.";
+      }
+      leaf source-ipv6-address {
+        type inet:ipv6-address-no-zone;
+        must "../host-addr-ipv6";
+        description
+          "Specify the source IPv6 address.";
+      }
+      leaf server-port {
+        type uint32 {
+          range "1..65535";
+        }
+        default "22";
+        description
+          "Specify the port number.";
+      }
+      leaf host-addr-ipv4 {
+        type string {
+          length "1..255";
+        }
+        must "not(../host-addr-ipv6)";
+        description
+          "Specify the IPv4 address of remote system (SFTP server).";
+      }
+      leaf host-addr-ipv6 {
+        type string {
+          length "1..255";
+        }
+        description
+          "Specify the IPv6 address of remote system (SFTP server).";
+      }
+      leaf command-type {
+        type trans-cmd-type;
+        description
+          "Specify the type of operation need to be performed (get/put).";
+      }
+      leaf user-name {
+        type string {
+          length "1..255";
+        }
+        mandatory true;
+        description
+          "Specify the user name to authenticate the connection before file transfer.";
+      }
+      leaf password {
+        type pub-type:password;
+        mandatory true;
+        description
+          "Specify the password to authenticate the connection before file transfer.";
+      }
+      leaf local-file-name {
+        type string {
+          length "1..256";
+        }
+        description
+          "Specify the local file name.";
+      }
+      leaf remote-file-name {
+        type string {
+          length "1..256";
+        }
+        description
+          "Specify the remote file name.";
+      }
+      leaf vpn-name {
+        type string {
+          length "1..31";
+        }
+        must "(../host-addr-ipv4) and not(../public-net) and not(../source-interface-name)";
+        description
+          "Specify the VPN instance name.";
+      }
+      leaf ipv6-vpn-name {
+        type string {
+          length "1..31";
+        }
+        must "(../host-addr-ipv6) and not(../public-net) and not(../source-interface-name)";
+        description
+          "Specify the IPv6 VPN instance name.";
+      }
+      leaf public-net {
+        type boolean;
+        description
+          "Using public net or not.";
+      }
+      leaf source-interface-name {
+        type pub-type:if-name;
+        must "not(../public-net)";
+        description
+          "Specify the source interface name.";
+      }
+      leaf async {
+        type boolean;
+        description          
+            "Specify the transfer type.";
+      }
+      leaf cancel {
+        type boolean;
+        description          
+            "Cancel the transfer.";
+      }
+    }
+  }
+}

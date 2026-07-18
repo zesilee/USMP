@@ -1,0 +1,14 @@
+{
+  "/huawei-bfd:bfd/huawei-bfd-fwm:forwarding-match": {
+    "name": "BFD forwarding match information"
+  },
+  "/huawei-bfd:bfd/huawei-bfd-fwm:forwarding-match/remote-discriminator-values": {
+    "name": "Remote discriminator value"
+  },
+  "/huawei-bfd:bfd/huawei-bfd-fwm:forwarding-samediscr": {
+    "name": "BFD forwarding same discriminator"
+  },
+  "/huawei-bfd:bfd/huawei-bfd-fwm:forwarding-samediscr/same-discriminator-disable": {
+    "name": "Same discriminator disable"
+  }
+}

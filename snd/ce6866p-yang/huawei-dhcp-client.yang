@@ -1,0 +1,636 @@
+/*
+Copyright (C) 2019-2020 Huawei Technologies Co., Ltd. All rights reserved.
+*/
+submodule huawei-dhcp-client {
+  belongs-to huawei-dhcp {
+    prefix dhcp;
+  }
+  import huawei-ifm {
+    prefix ifm;
+  }
+  import huawei-pub-type {
+    prefix pub-type;
+  }
+  import ietf-inet-types {
+    prefix inet;
+  }
+  import ietf-yang-types {
+    prefix yang;
+  }
+  import huawei-extension {
+    prefix ext;
+  }
+  organization
+    "Huawei Technologies Co., Ltd.";
+  contact
+    "Huawei Industrial Base
+     Bantian, Longgang
+     Shenzhen 518129
+     People's Republic of China
+     Website: http://www.huawei.com
+     Email: support@huawei.com";
+  description
+    "This module contains a collection of YANG definitions for managing DHCP client.";
+  revision 2020-04-17 {
+    description
+      "Add node.";
+    reference
+      "Huawei private.";
+  }
+  revision 2019-12-22 {
+    description
+      "Initial revision.";
+    reference
+      "Huawei private.";
+  }
+  
+  typedef client-state {
+    type enumeration {
+      enum "init" {
+        value 0;
+        description
+          "Init state.";
+      }
+      enum "selecting" {
+        value 1;
+        description
+          "Selecting state.";
+      }
+      enum "requesting" {
+        value 2;
+        description
+          "Requesting state.";
+      }
+      enum "bound" {
+        value 3;
+        description
+          "Bound state.";
+      }
+      enum "renewing" {
+        value 4;
+        description
+          "Renewing state.";
+      }
+      enum "rebinding" {
+        value 5;
+        description
+          "Rebinding state.";
+      }
+    }
+    description
+      "The type of client-state.";
+  }
+  grouping dhcp-client-type {
+    description
+      "Configure DHCP client attributes.";
+    container excluded-servers {
+      description
+        "List of configuring DHCP client excluded servers.";
+      list excluded-server {
+        key "server-address";
+        description
+          "Configure a DHCP client excluded server.";
+        leaf server-address {
+          type inet:ipv4-address-no-zone;
+          description
+            "Server address.";
+        }
+      }
+    }
+    container global {
+      description
+        "Configure DHCP client global attributes.";
+      leaf option60 {
+        type string {
+          length "1..128";
+          pattern '([^\t]{0,})';
+        }
+        description
+          "The value of DHCP client global option60.";
+      }
+      leaf unicast-flag {
+        type empty;
+        description
+          "DHCP client unicast flag.";
+      }
+      container ip-routes {
+        description
+          "List of a routing entry delivered by the DHCP server to a DHCP client.";
+        list ip-route {
+          key "ip-address";
+          description
+            "Configure a routing entry delivered by the DHCP server to a DHCP client.";
+          leaf ip-address {
+            type inet:ipv4-address-no-zone;
+            description
+              "Specify the destination IP address.";
+          }
+          leaf mask {
+            type inet:ipv4-address-no-zone;
+            description
+              "Specify the mask of the IP address.";
+          }
+          leaf mask-length {
+            type uint8 {
+              range "0..32";
+            }
+            description
+              "Specify the mask length.";
+          }
+          leaf interface-name {
+            type leafref {
+              path "/ifm:ifm/ifm:interfaces/ifm:interface/ifm:name";
+            }
+            description
+              "Specify the type and number of the interface that forwards packets.";
+          }
+          leaf preference-value {
+            type uint8 {
+              range "1..255";
+            }
+            description
+              "Specify the priority of the routing protocol.";
+          }
+        }
+      }
+    }
+    container client-querys {
+      config false;
+      description
+        "List of statistics of the dynamic data obtained by the DHCP client.";
+      list client-query {
+        key "interface-name";
+        description
+          "Statistics of the dynamic data obtained by the DHCP client.";
+        leaf interface-name {
+          type leafref {
+            path "/ifm:ifm/ifm:interfaces/ifm:interface/ifm:name";
+          }
+          description
+            "DHCP client lease information on a specified interface.";
+        }
+        leaf ip-address {
+          type inet:ip-address-no-zone;
+          description
+            "Device IP address.";
+        }
+        leaf mask {
+          type inet:ipv4-address-no-zone;
+          description
+            "Specify a subnet mask.";
+        }
+        leaf-list gateway {
+          type inet:ipv4-address-no-zone;
+          description
+            "Statistics of a gateway address.";
+        }
+        leaf-list dns-server-ip {
+          type inet:ipv4-address-no-zone;
+          description
+            "Statistics of the IP address of a DNS server.";
+        }
+        leaf-list log-server-ip {
+          type inet:ipv4-address-no-zone;
+          description
+            "Statistics of a log server.";
+        }
+        leaf tftp-server-name {
+          type string {
+            length "1..256";
+          }
+          description
+            "Specify a TFTP server name allocated to DHCP clients.";
+        }
+        leaf tftp-server-ip {
+          type inet:ipv4-address-no-zone;
+          description
+            "Specify a TFTP server ip allocated to DHCP clients.";
+        }
+        leaf startup-file-name {
+          type string {
+            length "1..256";
+          }
+          description
+            "Specify a startup file name allocated to DHCP clients.";
+        }
+        leaf option148 {
+          type string {
+            length "1..256";
+          }
+          description
+            "Specify option148 allocated to DHCP clients.";
+        }
+        leaf client-state {
+          type string {
+            length "1..20";
+          }
+          description
+            "Current machine state.";
+        }
+      }
+    }
+  }
+  augment "/ifm:ifm/ifm:interfaces/ifm:interface" {
+    description "Extend interface attribute.";
+    container dhcp-client-if {
+      description
+        "Configure DHCP client attributes on an interface.";
+      leaf address-allocation {
+        type empty;
+        description
+          "DHCP client allocate IP.";
+      }
+      leaf expected-lease {
+        type uint32 {
+          range "60..864000";
+        }
+        ext:hidden ui;
+        units s;
+        description
+          "DHCP client expected lease.";
+      }
+      leaf option60 {
+        type string {
+          length "1..128";
+          pattern '([^\t]{0,})';
+        }
+        description
+          "The value of DHCP client option60 on an interface.";
+      }
+      leaf default-route-preference {
+        type uint8 {
+          range "1..255";
+        }
+        ext:hidden ui;
+        default "60";
+        description
+          "Configure the default route preference that a DHCP server delivers to a DHCP client.";
+      }
+      leaf client-id {
+        type string {
+          length "2..64";
+        }
+        description
+          "Configure an identifier for a DHCP client.";
+      }
+      leaf host-name {
+        type string {
+          length "1..64";
+        }
+        description
+          "Configure a host name for a DHCP/BOOTP client.";
+      }
+      leaf-list request-option {
+        type enumeration {
+          enum "option1" {
+            value 1;
+            description
+              "The value is of enumerated type and can be 1.";
+          }
+          enum "option4" {
+            value 4;
+            description
+              "The value is of enumerated type and can be 4.";
+          }
+          enum "option7" {
+            value 7;
+            description
+              "The value is of enumerated type and can be 7.";
+          }
+          enum "option17" {
+            value 17;
+            description
+              "The value is of enumerated type and can be 17.";
+          }
+          enum "option42" {
+            value 42;
+            description
+              "The value is of enumerated type and can be 42.";
+          }
+          enum "option43" {
+            value 43;
+            description
+              "The value is of enumerated type and can be 43.";
+          }
+          enum "option66" {
+            value 66;
+            description
+              "The value is of enumerated type and can be 66.";
+          }
+          enum "option67" {
+            value 67;
+            description
+              "The value is of enumerated type and can be 67.";
+          }
+          enum "option120" {
+            value 120;
+            description
+              "The value is of enumerated type and can be 120.";
+          }
+          enum "option129" {
+            value 129;
+            description
+              "The value is of enumerated type and can be 129.";
+          }
+          enum "option143" {
+            value 143;
+            description
+              "The value is of enumerated type and can be 143.";
+          }
+          enum "option145" {
+            value 145;
+            description
+              "The value is of enumerated type and can be 145.";
+          }
+          enum "option146" {
+            value 146;
+            description
+              "The value is of enumerated type and can be 146.";
+          }
+          enum "option148" {
+            value 148;
+            description
+              "The value is of enumerated type and can be 148.";
+          }
+          enum "option150" {
+            value 150;
+            description
+              "The value is of enumerated type and can be 150.";
+          }
+        }
+        max-elements 12;
+        description
+          "Configure a list of request options that the Option55 field in DHCP Request packets carries besides the default options.";
+      }
+      leaf-list request-option-exclude {
+        ext:hidden ui;
+        type enumeration {
+          enum "option3" {
+            value 3;
+            description
+              "The value is of enumerated type and can be 3.";
+          }
+          enum "option6" {
+            value 6;
+            description
+              "The value is of enumerated type and can be 6.";
+          }
+          enum "option15" {
+            value 15;
+            description
+              "The value is of enumerated type and can be 15.";
+          }
+          enum "option28" {
+            value 28;
+            description
+              "The value is of enumerated type and can be 28.";
+          }
+          enum "option33" {
+            value 33;
+            description
+              "The value is of enumerated type and can be 33.";
+          }
+          enum "option44" {
+            value 44;
+            description
+              "The value is of enumerated type and can be 44.";
+          }
+          enum "option121" {
+            value 121;
+            description
+              "The value is of enumerated type and can be 121.";
+          }
+          enum "option184" {
+            value 184;
+            description
+              "The value is of enumerated type and can be 184.";
+          }
+        }
+        max-elements 8;
+        description
+          "Configure a list of default request options that are not carried in the Option55 field of DHCP Request messages.";
+      }
+      container bootp-alloc {
+        ext:hidden ui;
+        description
+          "Configure the BOOTP client function on an interface.";
+        leaf enable {
+          type boolean;
+          default "false";
+          description
+            "Enable/disable the BOOTP client function on an interface.";
+        }
+        leaf unicast {
+          type boolean;
+          default "false";
+          description
+            "Enable/disable the client requests the server to unicast response packets to the client.";
+        }
+      }
+      container client-track {
+        ext:hidden ui;
+        description
+          "Configure the track function between DHCP client and BFD and IP link.";
+        choice track-type {
+          default "bfd-session";
+          description
+            "Choice track type.";
+          case bfd-session {
+            description
+              "Case bfd session.";
+            leaf bfd-session {
+              type string {
+                length "1..15";
+              }
+              description
+                "BFD session name.";
+            }
+          }
+          case ip-link {
+            description
+              "Case ip link.";
+            leaf ip-link {
+              type string {
+                length "1..31";
+              }
+              description
+                "IP link name.";
+            }
+          }
+        }
+      }
+      container gateway-detect {
+        ext:hidden ui;
+        description
+          "Configure gateway detection on a DHCP client.";
+        leaf period {
+          type uint32 {
+            range "1..86400";
+          }
+          units "s";
+          description
+            "Specify an interval for gateway detection on a DHCP client.";
+        }
+        leaf retransmit {
+          type uint8 {
+            range "1..10";
+          }
+          description
+            "Specify the retransmission count of gateway detection on a DHCP client.";
+        }
+        leaf timeout {
+          type uint16 {
+            range "300..2000";
+          }
+          units "ms";
+          description
+            "Specify the timeout period of gateway detection on a DHCP client.";
+        }
+      }
+      container client-status {
+        config false;
+        ext:hidden ui;
+        description
+          "Operational state of DHCP client.";
+        leaf fsm-state {
+          type client-state;
+          config false;
+          description
+            "DHCP client status.";
+        }
+        leaf mac-address {
+          type pub-type:mac-address;
+          config false;
+          description
+            "User MAC address.";
+        }
+        leaf ip-address {
+          type inet:ipv4-address-no-zone;
+          config false;
+          description
+            "IP address.";
+        }
+        leaf ip-mask {
+          type inet:ipv4-address-no-zone;
+          config false;
+          description
+            "IP mask.";
+        }
+        leaf server-address {
+          type inet:ipv4-address-no-zone;
+          config false;
+          description
+            "Server IP address.";
+        }
+        leaf lease-obtained-time {
+          type yang:date-and-time;
+          config false;
+          description
+            "Lease obtained time.";
+        }
+        leaf lease-expire-time {
+          type yang:date-and-time;
+          config false;
+          description
+            "Lease expires time.";
+        }
+        leaf lease-renew-time {
+          type yang:date-and-time;
+          config false;
+          description
+            "Lease renews time.";
+        }
+        leaf lease-rebind-time {
+          type yang:date-and-time;
+          config false;
+          description
+            "Lease rebinds time.";
+        }
+      }
+      container client-statistics {
+        config false;
+        ext:hidden ui;
+        description
+          "Statistics of DHCP client.";
+        leaf total-packets-received {
+          type uint32;
+          config false;
+          description
+            "The number of totol packets received.";
+        }
+        leaf offer-packets-received {
+          type uint32;
+          config false;
+          description
+            "The number of offer packets received.";
+        }
+        leaf ack-packets-received {
+          type uint32;
+          config false;
+          description
+            "The number of ACK packets received.";
+        }
+        leaf nak-packets-received {
+          type uint32;
+          config false;
+          description
+            "The number of NAK packets received.";
+        }
+        leaf total-packets-send {
+          type uint32;
+          config false;
+          description
+            "The number of totol packets send.";
+        }
+        leaf discovery-packets-send {
+          type uint32;
+          config false;
+          description
+            "The number of discover packets send.";
+        }
+        leaf request-packets-send {
+          type uint32;
+          config false;
+          description
+            "The number of request packets send.";
+        }
+        leaf reboot-request-packets-send {
+          type uint32;
+          config false;
+          description
+            "The number of reboot request packets send.";
+        }
+        leaf select-request-packets-send {
+          type uint32;
+          config false;
+          description
+            "The number of select request packets send.";
+        }
+        leaf renew-request-packets-send {
+          type uint32;
+          config false;
+          description
+            "The number of renew request packets send.";
+        }
+        leaf rebind-request-packets-send {
+          type uint32;
+          config false;
+          description
+            "The number of rebind request packets send.";
+        }
+        leaf decline-packets-send {
+          type uint32;
+          config false;
+          description
+            "The number of decline packets send.";
+        }
+        leaf release-packets-send {
+          type uint32;
+          config false;
+          description
+            "The number of release packets send.";
+        }
+      }
+    }
+  }
+}

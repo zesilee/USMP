@@ -1,0 +1,989 @@
+{
+  "/huawei-ospfv3:ospfv3": {
+    "name": "OSPFv3 global"
+  },
+  "/huawei-ospfv3:ospfv3/check-rt-id": {
+    "name": "OSPFv3 Router ID Auto Recovery"
+  },
+  "/huawei-ospfv3:ospfv3/check-rt-id/conflict-flag": {
+    "name": "OSPFv3 Router ID Auto Recovery"
+  },
+  "/huawei-ospfv3:ospfv3/advertise-max-cost": {
+    "name": "OSPFv3 LSA advertise maxcost globally"
+  },
+  "/huawei-ospfv3:ospfv3/advertise-max-cost/enable": {
+    "name": "OSPFv3 LSA advertise maxcost globally"
+  },
+  "/huawei-ospfv3:ospfv3/session-car": {
+    "name": "OSPFv3 Session car"
+  },
+  "/huawei-ospfv3:ospfv3/session-car/enable": {
+    "name": "Enable"
+  },
+  "/huawei-ospfv3:ospfv3/session-car/cir-interval": {
+    "name": "CIR interval"
+  },
+  "/huawei-ospfv3:ospfv3/session-car/cbs-interval": {
+    "name": "CBS interval"
+  },
+  "/huawei-ospfv3:ospfv3/session-car/pir-interval": {
+    "name": "PIR interval"
+  },
+  "/huawei-ospfv3:ospfv3/session-car/pbs-interval": {
+    "name": "PBS interval"
+  },
+  "/huawei-ospfv3:ospfv3/flush-source-trace": {
+    "name": "Flush source trace"
+  },
+  "/huawei-ospfv3:ospfv3/flush-source-trace/enable": {
+    "name": "Enable"
+  },
+  "/huawei-ospfv3:ospfv3/flush-source-trace/port": {
+    "name": "Port"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3": {
+    "name": "OSPFv3"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/gtsm": {
+    "name": "GTSM"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/gtsm/hops": {
+    "name": "Hops"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites": {
+    "name": "Process"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site": {
+    "name": "OSPFv3 instance"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/process-id": {
+    "name": "Process ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/router-id": {
+    "name": "Router ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/fa-mode": {
+    "name": "Forwarding address mode"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/description": {
+    "name": "Description"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/rfc1583-compatible": {
+    "name": "Compatible with RFC 1583"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/silent-all-interface": {
+    "name": "Suppress All Interfaces"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/retransmission-limit": {
+    "name": "Enabling the Maximum Number of Retransmissions"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/retransmission-limit-value": {
+    "name": "Enable maximum retransmission"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/lsa-refresh": {
+    "name": "Refresh the age of LSA with greater lsa-age"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/peer-flapping-suppress": {
+    "name": "Neighbor Flapping Suppression Capability"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/qppb-enable": {
+    "name": "Enable QPPB"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/sham-hello": {
+    "name": "Pseudo Hello"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/max-link-cost": {
+    "name": "Set the max value of link-cost"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/maxage-lsa": {
+    "name": "Route Calculation Delay"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/private-net": {
+    "name": "Configure private network configuration"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/private-net/route-tag": {
+    "name": "Route tag value"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/private-net/route-tag/value": {
+    "name": "Tag of an imported VPN route"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/private-net/route-tag/value/value": {
+    "name": "Enable Route Tag"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/private-net/vpn-capability": {
+    "name": "VPN Instance Capability Simple"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/private-net/domain-id": {
+    "name": "Domain ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/private-net/domain-id/domain-id": {
+    "name": "Domain ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/private-net/domain-id/type": {
+    "name": "Domain ID Type"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/private-net/domain-id/value": {
+    "name": "Domain ID Type Value"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/private-net/domain-id-secondarys": {
+    "name": "Domain ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/private-net/domain-id-secondarys/domain-id-secondary": {
+    "name": "Domain ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/private-net/domain-id-secondarys/domain-id-secondary/domain-id": {
+    "name": "Domain ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/private-net/domain-id-secondarys/domain-id-secondary/type": {
+    "name": "Domain ID Type"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/private-net/domain-id-secondarys/domain-id-secondary/value": {
+    "name": "Domain ID Type Value"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/bandwidth": {
+    "name": "Bandwidth Reference"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/bandwidth/reference-value": {
+    "name": "Bandwidth Reference"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/timer": {
+    "name": "Timer Configuration for Processes"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/timer/lsa-arrival": {
+    "name": "LSA Receiving Interval"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/timer/lsa-arrival/timer-type": {
+    "name": "Type of timer"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/timer/lsa-arrival/timer-type/timer": {
+    "name": "Common timer"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/timer/lsa-arrival/timer-type/timer/interval": {
+    "name": "LSA Originate Interval For Other Type"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/timer/lsa-arrival/timer-type/intelligent-timer": {
+    "name": "Intelligent Timer"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/timer/lsa-arrival/timer-type/intelligent-timer/max-interval": {
+    "name": "LSA Originate Maximum Interval"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/timer/lsa-arrival/timer-type/intelligent-timer/start-interval": {
+    "name": "LSA Originate Start Interval"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/timer/lsa-arrival/timer-type/intelligent-timer/hold-interval": {
+    "name": "LSA Arrival Hold Interval"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/timer/lsa-arr-supp-flap": {
+    "name": "Lsa arrival suppress flapping"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/timer/lsa-arr-supp-flap/interval": {
+    "name": "Suppression Time"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/timer/lsa-arr-supp-flap/threshold-count": {
+    "name": "Threshold"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/timer/lsa-originate": {
+    "name": "LSA Update Interval"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/timer/lsa-originate/other-type-interval": {
+    "name": "LSA Originate Interval For Other Type"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/timer/lsa-originate/timer-type": {
+    "name": "Type of timer"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/timer/lsa-originate/timer-type/interval": {
+    "name": "Interval Value"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/timer/lsa-originate/timer-type/interval/max-interval": {
+    "name": "LSA Originate Maximum Interval"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/timer/lsa-originate/timer-type/interval/start-interval": {
+    "name": "LSA Originate Start Interval"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/timer/lsa-originate/timer-type/interval/hold-interval": {
+    "name": "LSA Originate Hold Interval"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/timer/lsa-org-supp-flap": {
+    "name": "Lsa originate suppress flapping"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/timer/lsa-org-supp-flap/interval": {
+    "name": "Suppression Time"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/timer/lsa-org-supp-flap/threshold-count": {
+    "name": "Threshold"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/timer/spf-schedule": {
+    "name": "OSPF Route Calculation Interval"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/timer/spf-schedule/schedule-type": {
+    "name": "Schedule type"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/timer/spf-schedule/schedule-type/timer": {
+    "name": "Configuration of the timer"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/timer/spf-schedule/schedule-type/timer/type": {
+    "name": "SPF timer type"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/timer/spf-schedule/schedule-type/timer/delay-interval": {
+    "name": "SPF Delay Interval"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/timer/spf-schedule/schedule-type/timer/hold-interval-timer": {
+    "name": "SPF Hold Interval"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/timer/spf-schedule/schedule-type/intelligent-timer": {
+    "name": "Configuration of the intelligent timer"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/timer/spf-schedule/schedule-type/intelligent-timer/max-interval": {
+    "name": "SPF Schedule Maximum Interval"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/timer/spf-schedule/schedule-type/intelligent-timer/start-interval": {
+    "name": "SPF Schedule Start Interval"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/timer/spf-schedule/schedule-type/intelligent-timer/hold-interval": {
+    "name": "SPF Schedule Hold Interval"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/timer/spf-schedule/schedule-type/millisecond": {
+    "name": "SPF Calculation Interval"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/timer/spf-schedule/schedule-type/millisecond/millisecond": {
+    "name": "SPF Calculation Interval"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/bfd": {
+    "name": "BFD Configuration of Processes"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/bfd/enable": {
+    "name": "Enable BFD"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/bfd/min-rx": {
+    "name": "BFD Min-Rx-Interval Flag"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/bfd/min-tx": {
+    "name": "BFD Min-Tx-Interval Flag"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/bfd/detect-multiplier": {
+    "name": "Local Detection Multiplier"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/bfd/incr-cost": {
+    "name": "Cost Adjustment Based on the BFD Status"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/bfd/frr-binding": {
+    "name": "Enable BFD FRR Binding"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/stub-router": {
+    "name": "Stub Router"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/stub-router/flag": {
+    "name": "Stub Router"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/stub-router/interval": {
+    "name": "On-Startup Interval"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/stub-router/include-stub": {
+    "name": "Intra-area-prefix-lsa Settings"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/stub-router/external-lsa": {
+    "name": "External-LSA Setting"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/stub-router/external-cost": {
+    "name": "External-LSA Cost"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/stub-router/summary-lsa": {
+    "name": "Inter-area-prefix-LSA Settings"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/stub-router/summary-cost": {
+    "name": "Inter-area-prefix-LSA Cost"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/import-limit": {
+    "name": "Import Limit"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/import-limit/max-number": {
+    "name": "Maximum Number of External Routes Imported to OSPF"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/import-limit/threshold-upper": {
+    "name": "Upper Threshold for the Number of Imported Routes"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/import-limit/threshold-lower": {
+    "name": "Lower Threshold for the Number of Imported Routes"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/spf-control": {
+    "name": "Maximum Equal-cost Routes"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/spf-control/max-load-balancing": {
+    "name": "Maximum Equal-cost Routes"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/default-para": {
+    "name": "NA"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/default-para/cost": {
+    "name": "Default Metric"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/default-para/tag": {
+    "name": "External Route Tag"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/default-para/type": {
+    "name": "External Route Type"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/asbr-summary-prefixs": {
+    "name": "ASBR Route Summarization"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/asbr-summary-prefixs/asbr-summary-prefix": {
+    "name": "ASBR Route Summarization"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/asbr-summary-prefixs/asbr-summary-prefix/prefix": {
+    "name": "IP Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/asbr-summary-prefixs/asbr-summary-prefix/network-mask": {
+    "name": "Mask"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/asbr-summary-prefixs/asbr-summary-prefix/cost": {
+    "name": "Cost Setting for Summary Routes"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/asbr-summary-prefixs/asbr-summary-prefix/tag": {
+    "name": "Tag"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/asbr-summary-prefixs/asbr-summary-prefix/distribute-delay": {
+    "name": "Distribute Delay Interval"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/asbr-summary-prefixs/asbr-summary-prefix/advertise": {
+    "name": "Route advertisement"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/default-route": {
+    "name": "Default Route Advertisement"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/default-route/cost": {
+    "name": "Cost"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/default-route/tag": {
+    "name": "Tag for Default Imported Routes"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/default-route/type": {
+    "name": "Metric type of an ASE LSA for the default routes"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/default-route/distribute-delay": {
+    "name": "Distribute delay time"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/default-route/mode": {
+    "name": "Mode"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/default-route/mode/permit-calculate-other": {
+    "name": "Permit-calculate-other"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/default-route/mode/permit-calculate-other/permit-calculate-other": {
+    "name": "Calculate Default Route"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/default-route/mode/always": {
+    "name": "Always"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/default-route/mode/always/always": {
+    "name": "Configuration Parameters"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/default-route/policy-type": {
+    "name": "Policy Type"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/default-route/policy-type/route-policy-name": {
+    "name": "Route-Policy Name"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/default-route/policy-type/route-policy-name/route-policy-name": {
+    "name": "Routing Policies"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/default-route/policy-type/route-filter-name": {
+    "name": "XPL Route-filter Name"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/default-route/policy-type/route-filter-name/route-filter-name": {
+    "name": "Route-Filter Name"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/route-preferences": {
+    "name": "Protocol Route Preference"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/route-preferences/route-preference": {
+    "name": "Protocol Route Preference"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/route-preferences/route-preference/route-type": {
+    "name": "Route Type"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/route-preferences/route-preference/preference": {
+    "name": "Priority"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/route-preferences/route-preference/policy-type": {
+    "name": "Policy Type"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/route-preferences/route-preference/policy-type/route-policy-name": {
+    "name": "Route-Policy Name"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/route-preferences/route-preference/policy-type/route-policy-name/route-policy-name": {
+    "name": "Routing Policies"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/route-preferences/route-preference/policy-type/route-filter-name": {
+    "name": "Route-filter"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/route-preferences/route-preference/policy-type/route-filter-name/route-filter-name": {
+    "name": "Route-Filter Name"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/nexthop-weights": {
+    "name": "Equal-cost Route Preference"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/nexthop-weights/nexthop-weight": {
+    "name": "Configure Preference of an Equal Cost Route"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/nexthop-weights/nexthop-weight/ip-address": {
+    "name": "The Router ID of the Next Hop"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/nexthop-weights/nexthop-weight/if-name": {
+    "name": "Next Hop Interface Name"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/nexthop-weights/nexthop-weight/weight": {
+    "name": "Next Hop Weight"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/prefix-prioritys": {
+    "name": "Convergence Priority"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/prefix-prioritys/prefix-priority": {
+    "name": "Convergence Priority"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/prefix-prioritys/prefix-priority/priority": {
+    "name": "Priority"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/prefix-prioritys/prefix-priority/ip-prefix": {
+    "name": "IPv6 Prefix List"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/authentication": {
+    "name": "Process Authentication"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/authentication/mode": {
+    "name": "Authentication Type"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/authentication/key-id": {
+    "name": "Key ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/authentication/text": {
+    "name": "Authentication Password"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/helper-role": {
+    "name": "Enable Helper Mode"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/helper-role/planned-only": {
+    "name": "Supporting Only Planned GR"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/helper-role/ignore-external-lsa": {
+    "name": "Disable LSA Check"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/helper-role/period": {
+    "name": "Maximum Grace Period"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/helper-role/filter-type": {
+    "name": "Filter Type"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/helper-role/filter-type/acl-name-or-num": {
+    "name": "ACL Name or Number"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/helper-role/filter-type/acl-name-or-num/acl-name-or-num": {
+    "name": "Helper Filter ACL"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/helper-role/filter-type/ip-prefix-name": {
+    "name": "IP Prefix Name"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/helper-role/filter-type/ip-prefix-name/ip-prefix-name": {
+    "name": "Helper Filter IP-Prefix"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/filter-import": {
+    "name": "Filter import route"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/filter-import/policy-type": {
+    "name": "Policy Type"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/filter-import/policy-type/basic-acl6": {
+    "name": "Basic-acl6"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/filter-import/policy-type/basic-acl6/name-or-num": {
+    "name": "ACL6 name or number"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/filter-import/policy-type/ip-prefix6": {
+    "name": "IP-prefix6"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/filter-import/policy-type/ip-prefix6/ip-prefix6": {
+    "name": "IPv6 prefix name"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/filter-import/policy-type/route-policy": {
+    "name": "Route-Policy Name"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/filter-import/policy-type/route-policy/route-policy": {
+    "name": "Routing Policies"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/filter-import/policy-type/route-filter": {
+    "name": "Route-filter"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/filter-import/policy-type/route-filter/route-filter": {
+    "name": "Filtering Policy"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/filter-exports": {
+    "name": "Filtering Redistributed Routes"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/filter-exports/filter-export": {
+    "name": "Filtering Redistributed Routes"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/filter-exports/filter-export/protocol": {
+    "name": "Protocol Type"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/filter-exports/filter-export/protocol-id": {
+    "name": "Protocol Process ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/filter-exports/filter-export/policy-type": {
+    "name": "Policy Type"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/filter-exports/filter-export/policy-type/basic-acl6": {
+    "name": "Basic-acl6"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/filter-exports/filter-export/policy-type/basic-acl6/name-or-num": {
+    "name": "ACL6 name or number"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/filter-exports/filter-export/policy-type/ip-prefix6": {
+    "name": "IP-prefix6"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/filter-exports/filter-export/policy-type/ip-prefix6/ip-prefix6": {
+    "name": "IPv6 prefix name"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/import-routes": {
+    "name": "Import Route"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/import-routes/import-route": {
+    "name": "Import Route"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/import-routes/import-route/protocol": {
+    "name": "Imported Routing Protocol"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/import-routes/import-route/process-id": {
+    "name": "Process ID of the Imported Routing Protocol"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/import-routes/import-route/tag": {
+    "name": "Tag in an External LSA"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/import-routes/import-route/type": {
+    "name": "Interface Reachability Suppression"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/import-routes/import-route/permit-ibgp": {
+    "name": "Permit ibgp"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/import-routes/import-route/cost": {
+    "name": "Route cost"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/import-routes/import-route/cost/inherit-cost": {
+    "name": "Enable Inherit-cost"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/import-routes/import-route/cost/inherit-cost/inherit-cost": {
+    "name": "Enable Inherit-cost"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/import-routes/import-route/cost/cost-value": {
+    "name": "Enable Cost"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/import-routes/import-route/cost/cost-value/cost-value": {
+    "name": "Enable Cost"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/import-routes/import-route/policy-type": {
+    "name": "Type of a filtering rule"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/import-routes/import-route/policy-type/route-policy-name": {
+    "name": "Name of a routing Filter"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/import-routes/import-route/policy-type/route-policy-name/route-policy-name": {
+    "name": "Name of a routing Filter"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/import-routes/import-route/policy-type/route-filter-name": {
+    "name": "Name of a routing Filter"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/import-routes/import-route/policy-type/route-filter-name/route-filter-name": {
+    "name": "Name of a routing Filter"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/frr": {
+    "name": "Fast Re-Routing"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/frr/enable": {
+    "name": "Enable FRR"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/frr/lfa-enable": {
+    "name": "Enable Loop Free Alternate"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/frr/tiebreaker": {
+    "name": "Tiebreaker for multiple backups"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/frr/tiebreaker/node-protect": {
+    "name": "Set Node Protect Prefer Value"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/frr/tiebreaker/lowest-cost": {
+    "name": "Set Lowcost Prefer Value"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/frr/route-policy": {
+    "name": "FRR Route Policy"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/frr/route-policy/policy-type": {
+    "name": "Policy-type"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/frr/route-policy/policy-type/route-policy-name": {
+    "name": "Route-policy-name"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/frr/route-policy/policy-type/route-policy-name/route-policy-name": {
+    "name": "Route Policy Name"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/frr/route-policy/policy-type/route-filter-name": {
+    "name": "Route-filter-name"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/frr/route-policy/policy-type/route-filter-name/route-filter-name": {
+    "name": "Routing Filter Name"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/silent-interfaces": {
+    "name": "Silent Interface"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/silent-interfaces/silent-interface": {
+    "name": "Silent Interface"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/silent-interfaces/silent-interface/if-name": {
+    "name": "Interface Name"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/undo-silent-interfaces": {
+    "name": "Enable Receiving and Sending Packet"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/undo-silent-interfaces/undo-silent-interface": {
+    "name": "Enable Receiving and Sending Packet"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/undo-silent-interfaces/undo-silent-interface/if-name": {
+    "name": "Interface name"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/host-name": {
+    "name": "Host Name"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/host-name/enable": {
+    "name": "Enable Host Name"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/host-name/name": {
+    "name": "Host Name"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/cost-bindings": {
+    "name": "Router Cost Binding Interface"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/cost-bindings/cost-binding": {
+    "name": "Router Cost Binding Interface"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/cost-bindings/cost-binding/router-id": {
+    "name": "Source router ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/cost-bindings/cost-binding/if-name": {
+    "name": "Interface name"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas": {
+    "name": "Area"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area": {
+    "name": "Area"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/area-id": {
+    "name": "Area ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/area-type": {
+    "name": "Area Type"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/description": {
+    "name": "Area Description"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/stub": {
+    "name": "STUB area"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/stub/backbone-peer-ignore": {
+    "name": "Ignore Checking Backbone Area Peers"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/stub/no-summary": {
+    "name": "Configure Stub Area Attributes"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/stub/default-cost": {
+    "name": "Cost Value"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/nssa": {
+    "name": "NSSA area"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/nssa/no-summary": {
+    "name": "Configure NSSA Area Attributes"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/nssa/translator-always": {
+    "name": "NSSA Translator Always"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/nssa/default-route-advertise": {
+    "name": "Originate Type7 default into NSSA area"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/nssa/backbone-peer-ignore": {
+    "name": "Ignore backbone peer for Nssa area"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/nssa/no-import-route": {
+    "name": "No Redistribution into this NSSA area"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/nssa/set-n-bit": {
+    "name": "Set n bit in DD packet in NSSA area"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/nssa/suppress-fa": {
+    "name": "Disable FA"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/nssa/translator-interval": {
+    "name": "Translator interval"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/nssa/default-cost": {
+    "name": "Cost Value"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/authentication": {
+    "name": "Area Authentication"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/authentication/mode": {
+    "name": "Authentication Type"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/authentication/key-id": {
+    "name": "Key identifier"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/authentication/auth-text": {
+    "name": "Authentication Password"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/abr-summary-prefixs": {
+    "name": "ABR Summarys"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/abr-summary-prefixs/abr-summary-prefix": {
+    "name": "ABR Summary"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/abr-summary-prefixs/abr-summary-prefix/prefix": {
+    "name": "IP Address to Summarize"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/abr-summary-prefixs/abr-summary-prefix/network-mask": {
+    "name": "Address Mask"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/abr-summary-prefixs/abr-summary-prefix/cost": {
+    "name": "Cost"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/abr-summary-prefixs/abr-summary-prefix/cost/cost-value": {
+    "name": "Cost-value"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/abr-summary-prefixs/abr-summary-prefix/cost/cost-value/cost-value": {
+    "name": "Cost Setting for Aggregated Routes"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/abr-summary-prefixs/abr-summary-prefix/hold-max-cost": {
+    "name": "HoldMaxCost Duration"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/abr-summary-prefixs/abr-summary-prefix/advertise": {
+    "name": "Advertise"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/filters": {
+    "name": "Filtering LSA"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/filters/filter": {
+    "name": "Filtering LSA"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/filters/filter/mode": {
+    "name": "Mode"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/filters/filter/policy-type": {
+    "name": "Policy-type"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/filters/filter/policy-type/basic-acl": {
+    "name": "Basic-acl"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/filters/filter/policy-type/basic-acl/name-or-num": {
+    "name": "ACL6 Name or num"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/filters/filter/policy-type/ipv6-prefix": {
+    "name": "IPv6-prefix"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/filters/filter/policy-type/ipv6-prefix/ipv6-prefix": {
+    "name": "IPv6 Prefix List"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/filters/filter/policy-type/route-policy": {
+    "name": "Route-policy"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/filters/filter/policy-type/route-policy/route-policy": {
+    "name": "Routing Policy"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/filters/filter/policy-type/route-filter": {
+    "name": "Route-filter"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/filters/filter/policy-type/route-filter/route-filter": {
+    "name": "Routing Filter Name"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/interfaces": {
+    "name": "Interface"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/interfaces/interface": {
+    "name": "Interface"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/interfaces/interface/name": {
+    "name": "Interface Name"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/interfaces/interface/instance-id": {
+    "name": "Interface Instance ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/interfaces/interface/network-type": {
+    "name": "Interface Network Type"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/interfaces/interface/transmit-delay": {
+    "name": "Delay for Transmitting LSAs on an Interface"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/interfaces/interface/mtu-enable": {
+    "name": "Ignore checking MTU on DD packets"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/interfaces/interface/dr-priority": {
+    "name": "Election Priority"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/interfaces/interface/peer-hold-max-timer": {
+    "name": "LSA Arrival Non-Intelligent Timer Flag"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/interfaces/interface/cost": {
+    "name": "Set Interface Cost"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/interfaces/interface/link-cost": {
+    "name": "Set the value of link-cost"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/interfaces/interface/frr": {
+    "name": "Interface FRR"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/interfaces/interface/frr/frr-disable": {
+    "name": "Block FRR"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/interfaces/interface/timer": {
+    "name": "Timer set"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/interfaces/interface/timer/hello-interval": {
+    "name": "Interval for Sending Hello Packets"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/interfaces/interface/timer/hello-conser": {
+    "name": "TimerConserFlag"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/interfaces/interface/timer/dead-interval": {
+    "name": "Neighbor Dead Interval"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/interfaces/interface/timer/wait-interval": {
+    "name": "Wait Time"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/interfaces/interface/timer/poll-interval": {
+    "name": "Poll Interval for Sending Hello Packets"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/interfaces/interface/timer/retransmit-interval": {
+    "name": "Interval for Retransmitting LSAs on an Interface"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/interfaces/interface/bfd": {
+    "name": "BFD function"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/interfaces/interface/bfd/enable": {
+    "name": "Enable BFD"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/interfaces/interface/bfd/block": {
+    "name": "Prevent Dynamic Establishment of BFD Session"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/interfaces/interface/bfd/detect-multiplier": {
+    "name": "Local Detection Multiplier"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/interfaces/interface/bfd/min-tx": {
+    "name": "Minimum Interval for Sending BFD Packets"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/interfaces/interface/bfd/min-rx": {
+    "name": "Minimum Interval for Receiving BFD Packets"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/interfaces/interface/bfd/frr-binding": {
+    "name": "Enable BFD FRR Binding"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/interfaces/interface/bfd/incr-cost": {
+    "name": "Incr-cost"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/interfaces/interface/bfd/incr-cost/incr-cost-block": {
+    "name": "Incr-cost-block"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/interfaces/interface/bfd/incr-cost/incr-cost-block/incr-cost-block": {
+    "name": "Intf BFD Sync Cost Block"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/interfaces/interface/bfd/incr-cost/incr-cost-value": {
+    "name": "Incr-cost-value"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/interfaces/interface/bfd/incr-cost/incr-cost-value/incr-cost-value": {
+    "name": "Intf BFD Sync Cost"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/interfaces/interface/bfd/per-link-flag": {
+    "name": "BFD Per Link Flag"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/interfaces/interface/bfd/one-arm-echo-flag": {
+    "name": "BFD One Arm Echo Flag"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/interfaces/interface/authentication": {
+    "name": "Interface Authentication"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/interfaces/interface/authentication/mode": {
+    "name": "Authentication Type"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/interfaces/interface/authentication/key-id": {
+    "name": "Key identifier"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/interfaces/interface/authentication/auth-text": {
+    "name": "Authentication Password"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/interfaces/interface/suppress-flapping": {
+    "name": "Neighbor Flapping Suppression Capability"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/interfaces/interface/suppress-flapping/peer": {
+    "name": "Interface Peer-Flapping-Suppress"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/interfaces/interface/suppress-flapping/peer/enable": {
+    "name": "Interface Peer-Flapping-Suppress"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/interfaces/interface/suppress-flapping/peer/detect-interval": {
+    "name": "Detecting-interval"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/interfaces/interface/suppress-flapping/peer/threshold": {
+    "name": "Threshold"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/interfaces/interface/suppress-flapping/peer/resume-interval": {
+    "name": "Resume-interval"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/interfaces/interface/suppress-flapping/peer/hold-down-interval": {
+    "name": "Hold-down-interval"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/interfaces/interface/suppress-flapping/peer/hold-max-cost": {
+    "name": "Hold-max-cost"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/interfaces/interface/peers": {
+    "name": "NBMA Neighbor Router"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/interfaces/interface/peers/peer": {
+    "name": "NBMA Neighbor Router"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/interfaces/interface/peers/peer/nbr-router-id": {
+    "name": "Neighbor Router ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/interfaces/interface/peers/peer/nbr-link-local-addr": {
+    "name": "Neighbor Router Link Local Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/interfaces/interface/peers/peer/cost": {
+    "name": "Cost"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/interfaces/interface/peers/peer/dr-eligible": {
+    "name": "Neighbor DR Eligibility"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/interfaces/interface/peers/peer/poll": {
+    "name": "NBMA Neighbor Poll Interval"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/interfaces/interface/flush-source-trace": {
+    "name": "Flush source trace"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/interfaces/interface/flush-source-trace/block": {
+    "name": "Block"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/interfaces/interface/neighbors": {
+    "name": "Neighbors"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/interfaces/interface/neighbors/neighbor": {
+    "name": "Neighbor"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/interfaces/interface/neighbors/neighbor/router-id": {
+    "name": "Neighbor Router ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/interfaces/interface/neighbors/neighbor/interface-address": {
+    "name": "Neighbor IP Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/interfaces/interface/neighbors/neighbor/host-name": {
+    "name": "Host Name"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/interfaces/interface/neighbors/neighbor/priority": {
+    "name": "Neighbor Priority"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/interfaces/interface/neighbors/neighbor/state": {
+    "name": "Neighbor State"
+  }
+}

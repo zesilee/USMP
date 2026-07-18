@@ -1,0 +1,113 @@
+/*
+Copyright (C) 2020 Huawei Technologies Co., Ltd. All rights reserved.
+*/
+module huawei-packetevent {
+  yang-version 1;
+  namespace "urn:huawei:yang:huawei-packetevent";
+  prefix packetevent;
+  import huawei-extension {
+    prefix ext;
+  }
+  import huawei-analysis-collector {
+    prefix collector;
+  }
+  organization
+    "Huawei Technologies Co., Ltd.";
+  contact
+    "Huawei Industrial Base
+    Bantian, Longgang
+    Shenzhen 518129
+    People's Republic of China
+    Website: http://www.huawei.com
+    Email: support@huawei.com";
+  description
+    "When packets are forwarded inside the chip, if the packets are discarded or the delay is long, this function can be configured to monitor the packets.";
+  revision 2020-03-27 {
+    description
+      "Initial revision.";
+    reference
+      "Huawei private.";
+  }
+  container packetevent {
+    description
+      "packet event.";
+    container global {
+      presence "create packet event";
+      description
+        "Configure packetevent global setting.";
+      leaf export-interval {
+        type uint32 {
+          range "1..1800";
+        }
+        units "s";
+        default "10";
+        description
+          "Export time interval.";
+      }
+      leaf collect-id {
+        type leafref {
+          path "/collector:analysis-collector/collector:collectors/collector:collector/collector:id";
+        }
+        description
+          "The collect id.";
+      }
+      container drop-event {
+        presence "create drop event";
+        description
+          "Configure packet drop setting.";
+        leaf aging-time {
+          type uint32 {
+            range "0..3600";
+          }
+          units "s";
+          default "30";
+          description
+            "Flow table agint time";
+        }
+        leaf forward-exception {
+          type boolean;
+          description
+            "Enable/disable forward exception drop.";
+        }
+        leaf forward-normal {
+          type boolean;
+          description
+            "Enable/disable forward normal drop.";
+        }
+        leaf buffer-overflow {
+          type boolean;
+          description
+            "Enable/disable buffer overflow drop.";
+        }
+        leaf acl-deny {
+          type boolean;
+          description
+            "Enable/disable acl deny drop.";
+        }
+      }
+      container latency-event {
+        presence "create latency event";
+        description
+          "Configure packet latency setting.";
+        leaf latency-threshold {
+            type uint32 {
+            range "768..1000000";
+          }
+          units "ns";
+          description
+            "Latency threshold conifg.";
+        }
+        leaf aging-time {
+          type uint32 {
+            range "0..3600";
+          }
+          units "s";
+          default "30";
+          description
+            "Flow table aging time";
+        }
+      }
+    }
+  }
+  ext:task-name "packetevent";
+}

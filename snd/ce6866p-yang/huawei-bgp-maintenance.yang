@@ -1,0 +1,86 @@
+/*
+Copyright (C) 2020 Huawei Technologies Co., Ltd. All rights reserved.
+*/
+module huawei-bgp-maintenance {
+  yang-version 1;
+  namespace "urn:huawei:yang:huawei-bgp-maintenance";
+  prefix bgp-maintenance;
+  import huawei-extension {
+    prefix ext;
+  }
+  import huawei-bgp {
+    prefix bgp;
+  }
+  organization
+    "Huawei Technologies Co., Ltd.";
+  contact
+    "Huawei Industrial Base
+    Bantian, Longgang
+    Shenzhen 518129
+    People's Republic of China
+    Website: http://www.huawei.com
+    Email: support@huawei.com";
+  description
+    "Inter-AS routing protocol that exchanges network layer reachability information (NLRI) with other BGP systems.";
+  revision 2020-11-12 {
+    description
+      "Initial revision.";
+    reference
+      "Huawei private.";
+  }
+  typedef low-priority-af-type {
+    type enumeration {
+      enum "ipv4uni" {
+        value 1;
+        description
+          "IPv4 unicast address family.";
+      }
+      enum "ipv4vpn" {
+        value 3;
+        description
+          "IPv4 VPN address family.";
+      }
+      enum "ipv6uni" {
+        value 5;
+        description
+          "IPv6 unicast address family.";
+      }
+      enum "ipv6vpn" {
+        value 6;
+        description
+          "IPv6 VPN address family.";
+      }
+      enum "evpn" {
+        value 9;
+        description
+          "EVPN address family.";
+      }
+    }
+    description
+      "The address family type of rt-advertised-low-priority.";
+  }
+  grouping rt-advertised-low-prioritys-option {
+    description
+      "BGP low priority configuration.";
+    container rt-advertised-low-prioritys {
+      description
+        "List of condition BGP low priority.";
+      list rt-advertised-low-priority {
+        key "address-family";
+        description
+          "Configure BGP advertising route low priority.";
+        leaf address-family {
+          type low-priority-af-type;
+          description
+            "Configure address-family type.";
+        }
+      }
+    }
+  }
+  augment /bgp:bgp {
+    description
+      "MPLS BGP global configuration.";
+    uses rt-advertised-low-prioritys-option;
+  }
+  ext:task-name "bgp";
+}

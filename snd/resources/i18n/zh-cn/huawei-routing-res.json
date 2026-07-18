@@ -1,0 +1,920 @@
+{
+  "/huawei-routing:rt": {
+    "name": "路由"
+  },
+  "/huawei-routing:routing/routing-manage": {
+    "name": "路由管理"
+  },
+  "/huawei-routing:routing/routing-manage/relay-tunnel": {
+    "name": "迭代隧道"
+  },
+  "/huawei-routing:routing/routing-manage/relay-tunnel/enable": {
+    "name": "使能迭代隧道"
+  },
+  "/huawei-routing:routing/routing-manage/relay-tunnel/ipv4-prefix-ref": {
+    "name": "IPv4前缀过滤器名"
+  },
+  "/huawei-routing:routing/routing-manage/relay-tunnel/tunnel-policy-ref": {
+    "name": "隧道策略名"
+  },
+  "/huawei-routing:routing/routing-manage/relay-label": {
+    "name": "全局使能迭代远端私网路由"
+  },
+  "/huawei-routing:routing/routing-manage/relay-label/ipv4-set": {
+    "name": "IPv4单播迭代远端私网路由"
+  },
+  "/huawei-routing:routing/routing-manage/relay-label/ipv6-set": {
+    "name": "IPv6单播迭代远端私网路由"
+  },
+  "/huawei-routing:routing/routing-manage/ipv4-threshold": {
+    "name": "IPv4前缀阈值"
+  },
+  "/huawei-routing:routing/routing-manage/ipv4-threshold/upper-percent": {
+    "name": "IPv4前缀阈值上限"
+  },
+  "/huawei-routing:routing/routing-manage/ipv4-threshold/lower-percent": {
+    "name": "IPv4前缀阈值下限"
+  },
+  "/huawei-routing:routing/routing-manage/ipv6-threshold": {
+    "name": "IPv6前缀阈值"
+  },
+  "/huawei-routing:routing/routing-manage/ipv6-threshold/upper-percent": {
+    "name": "IPv6前缀阈值上限"
+  },
+  "/huawei-routing:routing/routing-manage/ipv6-threshold/lower-percent": {
+    "name": "IPv6前缀阈值下限"
+  },
+  "/huawei-routing:routing/routing-manage/iterative-restrain": {
+    "name": "迭代抑制"
+  },
+  "/huawei-routing:routing/routing-manage/iterative-restrain/enable": {
+    "name": "使能迭代抑制"
+  },
+  "/huawei-routing:routing/routing-manage/iterative-restrain/start-time": {
+    "name": "首次抑制时间"
+  },
+  "/huawei-routing:routing/routing-manage/iterative-restrain/increase-time": {
+    "name": "抑制间隔基数"
+  },
+  "/huawei-routing:routing/routing-manage/iterative-restrain/max-time": {
+    "name": "抑制最长时间"
+  },
+  "/huawei-routing:routing/routing-manage/relay-default-routes": {
+    "name": "全局使能迭代缺省路由列表"
+  },
+  "/huawei-routing:routing/routing-manage/relay-default-routes/relay-default-route": {
+    "name": "全局使能迭代缺省路由"
+  },
+  "/huawei-routing:routing/routing-manage/relay-default-routes/relay-default-route/address-family": {
+    "name": "地址族类型"
+  },
+  "/huawei-routing:routing/routing-manage/relay-default-routes/relay-default-route/protocol-type": {
+    "name": "协议类型"
+  },
+  "/huawei-routing:routing/routing-manage/ipv4-vpn-route-statisticss": {
+    "name": "所有VPN IPv4路由统计"
+  },
+  "/huawei-routing:routing/routing-manage/ipv4-vpn-route-statisticss/ipv4-vpn-route-statistics": {
+    "name": "所有VPN IPv4路由统计"
+  },
+  "/huawei-routing:routing/routing-manage/ipv4-vpn-route-statisticss/ipv4-vpn-route-statistics/protocol-type": {
+    "name": "协议类型"
+  },
+  "/huawei-routing:routing/routing-manage/ipv4-vpn-route-statisticss/ipv4-vpn-route-statistics/total-num": {
+    "name": "总路由数量"
+  },
+  "/huawei-routing:routing/routing-manage/ipv4-vpn-route-statisticss/ipv4-vpn-route-statistics/active-num": {
+    "name": "活跃路由总数量"
+  },
+  "/huawei-routing:routing/routing-manage/ipv4-vpn-route-statisticss/ipv4-vpn-route-statistics/added-num": {
+    "name": "增加路由数量"
+  },
+  "/huawei-routing:routing/routing-manage/ipv4-vpn-route-statisticss/ipv4-vpn-route-statistics/deleted-num": {
+    "name": "删除路由数量"
+  },
+  "/huawei-routing:routing/routing-manage/ipv4-vpn-route-statisticss/ipv4-vpn-route-statistics/freed-num": {
+    "name": "释放路由数量"
+  },
+  "/huawei-routing:routing/routing-manage/ipv6-vpn-route-statisticss": {
+    "name": "所有VPN IPv6路由统计"
+  },
+  "/huawei-routing:routing/routing-manage/ipv6-vpn-route-statisticss/ipv6-vpn-route-statistics": {
+    "name": "所有VPN IPv6路由统计"
+  },
+  "/huawei-routing:routing/routing-manage/ipv6-vpn-route-statisticss/ipv6-vpn-route-statistics/protocol-type": {
+    "name": "协议类型"
+  },
+  "/huawei-routing:routing/routing-manage/ipv6-vpn-route-statisticss/ipv6-vpn-route-statistics/total-num": {
+    "name": "总路由数量"
+  },
+  "/huawei-routing:routing/routing-manage/ipv6-vpn-route-statisticss/ipv6-vpn-route-statistics/active-num": {
+    "name": "活跃路由总数量"
+  },
+  "/huawei-routing:routing/routing-manage/ipv6-vpn-route-statisticss/ipv6-vpn-route-statistics/added-num": {
+    "name": "增加路由数量"
+  },
+  "/huawei-routing:routing/routing-manage/ipv6-vpn-route-statisticss/ipv6-vpn-route-statistics/deleted-num": {
+    "name": "删除路由数量"
+  },
+  "/huawei-routing:routing/routing-manage/ipv6-vpn-route-statisticss/ipv6-vpn-route-statistics/freed-num": {
+    "name": "释放路由数量"
+  },
+  "/huawei-routing:routing/static-routing": {
+    "name": "静态路由基本业务包"
+  },
+  "/huawei-routing:routing/static-routing/ipv4-site": {
+    "name": "IPv4静态路由参数配置"
+  },
+  "/huawei-routing:routing/static-routing/ipv4-site/preference": {
+    "name": "IPv4优先级"
+  },
+  "/huawei-routing:routing/static-routing/ipv4-site/relay-switch": {
+    "name": "按迭代深度优选"
+  },
+  "/huawei-routing:routing/static-routing/ipv4-site/min-tx-interval": {
+    "name": "IPv4 BFD最小发送间隔"
+  },
+  "/huawei-routing:routing/static-routing/ipv4-site/min-rx-interval": {
+    "name": "IPv4 BFD最小接收间隔"
+  },
+  "/huawei-routing:routing/static-routing/ipv4-site/multiplier": {
+    "name": "IPv4 BFD本地检测倍数"
+  },
+  "/huawei-routing:routing/static-routing/ipv4-site/relay-remote": {
+    "name": "IPv4单播迭代远端私网路由"
+  },
+  "/huawei-routing:routing/static-routing/ipv4-site/relay-arp-vlink": {
+    "name": "IPv4单播迭代arp vlink路由"
+  },
+  "/huawei-routing:routing/static-routing/ipv4-site/inherit-cost-switch": {
+    "name": "选路时比较继承cost值"
+  },
+  "/huawei-routing:routing/static-routing/ipv4-site/current-route-num": {
+    "name": "已配置IPv4静态路由数"
+  },
+  "/huawei-routing:routing/static-routing/ipv4-site/max-route-num": {
+    "name": "最大IPv4静态路由数"
+  },
+  "/huawei-routing:routing/static-routing/ipv4-relay-tunnel": {
+    "name": "迭代隧道"
+  },
+  "/huawei-routing:routing/static-routing/ipv4-relay-tunnel/enable": {
+    "name": "使能迭代隧道"
+  },
+  "/huawei-routing:routing/static-routing/ipv4-relay-tunnel/ipv4-prefix-ref": {
+    "name": "IPv4前缀过滤器名"
+  },
+  "/huawei-routing:routing/static-routing/ipv4-relay-tunnel/tunnel-policy-ref": {
+    "name": "隧道策略名"
+  },
+  "/huawei-routing:routing/static-routing/ipv6-site": {
+    "name": "IPv6静态路由参数配置"
+  },
+  "/huawei-routing:routing/static-routing/ipv6-site/preference": {
+    "name": "IPv6优先级"
+  },
+  "/huawei-routing:routing/static-routing/ipv6-site/min-tx-interval": {
+    "name": "IPv6 BFD最小发送间隔"
+  },
+  "/huawei-routing:routing/static-routing/ipv6-site/min-rx-interval": {
+    "name": "IPv6 BFD最小接收间隔"
+  },
+  "/huawei-routing:routing/static-routing/ipv6-site/multiplier": {
+    "name": "IPv6 BFD本地检测倍数"
+  },
+  "/huawei-routing:routing/static-routing/ipv6-site/relay-arp-vlink6": {
+    "name": "IPv6单播迭代arp Vlink路由"
+  },
+  "/huawei-routing:routing/static-routing/ipv6-site/current-route-num": {
+    "name": "已配置IPV6静态路由数"
+  },
+  "/huawei-routing:routing/static-routing/ipv6-site/max-route-num": {
+    "name": "最大IPV6静态路由数"
+  },
+  "/huawei-routing:routing/static-routing/max-route-number": {
+    "name": "最大静态路由数"
+  },
+  "/huawei-routing:routing/static-routing/max-route-number/num": {
+    "name": "最大静态路由数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-routing:routing": {
+    "name": "静态路由"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-routing:routing/static-routing": {
+    "name": "静态路由"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing": {
+    "name": "路由管理"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage": {
+    "name": "路由管理基本业务包"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/option": {
+    "name": "路由管理选项"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/option/frr-enable": {
+    "name": "使能协议间FRR"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/option/prefix-limit-number": {
+    "name": "路由前缀容量限制"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/option/prefix-alert-type": {
+    "name": "设置前缀限制"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/option/prefix-alert-type/percent": {
+    "name": "百分比"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/option/prefix-alert-type/percent/prefix-alert-percent": {
+    "name": "告警阈值(百分比)"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/option/prefix-alert-type/percent/route-unchanged": {
+    "name": "不改变路由"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/option/prefix-alert-type/alert": {
+    "name": "告警"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/option/prefix-alert-type/alert/prefix-simply-alert": {
+    "name": "仅输出告警"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/option/route-limit-number": {
+    "name": "路由容量限制"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/option/route-alert-type": {
+    "name": "设置路由限制"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/option/route-alert-type/percent": {
+    "name": "百分比"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/option/route-alert-type/percent/route-alert-percent": {
+    "name": "路由限制告警阈值(百分比)"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/option/route-alert-type/alert": {
+    "name": "告警"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/option/route-alert-type/alert/route-simply-alert": {
+    "name": "路由超限仅输出告警"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys": {
+    "name": "拓扑列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology": {
+    "name": "拓扑"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/name": {
+    "name": "拓扑名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes": {
+    "name": "路由表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-unicast-routes": {
+    "name": "IPv4基本路由表列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-unicast-routes/ipv4-unicast-route": {
+    "name": "IPv4基本路由表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-unicast-routes/ipv4-unicast-route/prefix": {
+    "name": "目的IP地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-unicast-routes/ipv4-unicast-route/mask-length": {
+    "name": "掩码长度"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-unicast-routes/ipv4-unicast-route/protocol-type": {
+    "name": "协议类型"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-unicast-routes/ipv4-unicast-route/interface-name": {
+    "name": "出接口"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-unicast-routes/ipv4-unicast-route/process-id": {
+    "name": "进程号"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-unicast-routes/ipv4-unicast-route/direct-nexthop": {
+    "name": "直连下一跳"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-unicast-routes/ipv4-unicast-route/nexthop": {
+    "name": "下一跳"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-unicast-routes/ipv4-unicast-route/frr-type": {
+    "name": "FRR类型"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-unicast-routes/ipv4-unicast-route/preference": {
+    "name": "优先级"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-unicast-routes/ipv4-unicast-route/cost": {
+    "name": "开销"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-unicast-routes/ipv4-unicast-route/flag": {
+    "name": "标志"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-unicast-routes/ipv4-unicast-route/qos-id": {
+    "name": "QoS Info"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-unicast-routes/ipv4-unicast-route/active": {
+    "name": "活跃标志"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-unicast-routes/ipv4-unicast-route/tag": {
+    "name": "标记"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-unicast-routes/ipv4-unicast-route/priority": {
+    "name": "收敛优先级"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-unicast-routes/ipv4-unicast-route/label": {
+    "name": "标签"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-unicast-routes/ipv4-unicast-route/indirect-id": {
+    "name": "IID索引"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-unicast-routes/ipv4-unicast-route/state": {
+    "name": "状态"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-unicast-routes/ipv4-unicast-route/neighbour": {
+    "name": "邻居"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-unicast-routes/ipv4-unicast-route/age": {
+    "name": "存活时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-unicast-routes/ipv4-unicast-route/sub-protocol-type": {
+    "name": "子协议类型"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-unicast-routes/ipv4-unicast-route/tunnel-type": {
+    "name": "隧道类型"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-unicast-routes/ipv4-unicast-route/tunnel-types": {
+    "name": "隧道类型"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-unicast-routes/ipv4-unicast-route/tunnel-types/mpls-tunnel": {
+    "name": "MPLS隧道信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-unicast-routes/ipv4-unicast-route/tunnel-types/mpls-tunnel/out-label": {
+    "name": "出标签"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-unicast-routes/ipv4-unicast-route/tunnel-types/mpls-tunnel/label-stack": {
+    "name": "标签栈"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-unicast-routes/ipv4-unicast-route/tunnel-types/sr-policy": {
+    "name": "SR-MPLS TE Policy隧道信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-unicast-routes/ipv4-unicast-route/tunnel-types/sr-policy/group-id": {
+    "name": "隧道策略组ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-unicast-routes/ipv4-unicast-route/tunnel-types/sr-policy/endpoint": {
+    "name": "隧道目的地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-unicast-routes/ipv4-unicast-route/tunnel-types/sr-policy/color": {
+    "name": "隧道染色值"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-unicast-routes/ipv4-unicast-route/tunnel-types/sr-policy/policy-name": {
+    "name": "隧道策略名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-unicast-routes/ipv4-unicast-route/tunnel-types/vxlan": {
+    "name": "VXLAN隧道信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-unicast-routes/ipv4-unicast-route/tunnel-types/vxlan/vni": {
+    "name": "VXLAN隧道网络标识符"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv6-unicast-routes": {
+    "name": "IPv6基本路由表列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv6-unicast-routes/ipv6-unicast-route": {
+    "name": "IPv6基本路由表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv6-unicast-routes/ipv6-unicast-route/prefix": {
+    "name": "目的IP地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv6-unicast-routes/ipv6-unicast-route/mask-length": {
+    "name": "掩码长度"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv6-unicast-routes/ipv6-unicast-route/protocol-type": {
+    "name": "协议类型"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv6-unicast-routes/ipv6-unicast-route/interface-name": {
+    "name": "出接口"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv6-unicast-routes/ipv6-unicast-route/process-id": {
+    "name": "进程号"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv6-unicast-routes/ipv6-unicast-route/direct-nexthop": {
+    "name": "直连下一跳"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv6-unicast-routes/ipv6-unicast-route/nexthop": {
+    "name": "下一跳"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv6-unicast-routes/ipv6-unicast-route/frr-type": {
+    "name": "FRR类型"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv6-unicast-routes/ipv6-unicast-route/preference": {
+    "name": "优先级"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv6-unicast-routes/ipv6-unicast-route/cost": {
+    "name": "开销"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv6-unicast-routes/ipv6-unicast-route/flag": {
+    "name": "标志"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv6-unicast-routes/ipv6-unicast-route/qos-id": {
+    "name": "QoS信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv6-unicast-routes/ipv6-unicast-route/active": {
+    "name": "活跃标志"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv6-unicast-routes/ipv6-unicast-route/tag": {
+    "name": "标记"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv6-unicast-routes/ipv6-unicast-route/priority": {
+    "name": "收敛优先级"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv6-unicast-routes/ipv6-unicast-route/label": {
+    "name": "标签"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv6-unicast-routes/ipv6-unicast-route/indirect-id": {
+    "name": "IID索引"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv6-unicast-routes/ipv6-unicast-route/state": {
+    "name": "状态"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv6-unicast-routes/ipv6-unicast-route/neighbour": {
+    "name": "邻居"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv6-unicast-routes/ipv6-unicast-route/age": {
+    "name": "存活时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv6-unicast-routes/ipv6-unicast-route/sub-protocol-type": {
+    "name": "子协议类型"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-route-statistics": {
+    "name": "IPv4基本路由表统计信息列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-route-statistics/ipv4-route-statistic": {
+    "name": "IPv4基本路由表统计信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-route-statistics/ipv4-route-statistic/protocol-type": {
+    "name": "协议类型"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-route-statistics/ipv4-route-statistic/total-num": {
+    "name": "总路由数量"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-route-statistics/ipv4-route-statistic/active-num": {
+    "name": "活跃路由总数量"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-route-statistics/ipv4-route-statistic/added-num": {
+    "name": "增加路由数量"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-route-statistics/ipv4-route-statistic/deleted-num": {
+    "name": "删除路由数量"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-route-statistics/ipv4-route-statistic/freed-num": {
+    "name": "释放路由数量"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv6-route-statistics": {
+    "name": "IPv6基本路由表统计信息列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv6-route-statistics/ipv6-route-statistic": {
+    "name": "IPv6基本路由表统计信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv6-route-statistics/ipv6-route-statistic/protocol-type": {
+    "name": "协议类型"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv6-route-statistics/ipv6-route-statistic/total-num": {
+    "name": "总路由数量"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv6-route-statistics/ipv6-route-statistic/active-num": {
+    "name": "活跃路由总数量"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv6-route-statistics/ipv6-route-statistic/added-num": {
+    "name": "增加路由数量"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv6-route-statistics/ipv6-route-statistic/deleted-num": {
+    "name": "删除路由数量"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv6-route-statistics/ipv6-route-statistic/freed-num": {
+    "name": "释放路由数量"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/direct-routing": {
+    "name": "直连路由"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/direct-routing/import-ribs": {
+    "name": "公私网实例路由引入列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/direct-routing/import-ribs/import-rib": {
+    "name": "公私网实例路由引入"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/direct-routing/import-ribs/import-rib/source-vpn": {
+    "name": "引入源VPN名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/direct-routing/import-ribs/import-rib/policy-type": {
+    "name": "选择策略类型"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/direct-routing/import-ribs/import-rib/policy-type/rtp-ref": {
+    "name": "指定路由策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/direct-routing/import-ribs/import-rib/policy-type/rtp-ref/policy-name": {
+    "name": "引入路由过滤策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/direct-routing/import-ribs/import-rib/policy-type/xpl-ref": {
+    "name": "指定引入路由XPL策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/direct-routing/import-ribs/import-rib/policy-type/xpl-ref/filter-name": {
+    "name": "引入路由XPL策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/direct-routing/import-ribs/import-rib/policy-type/xpl-ref/filter-parameter": {
+    "name": "引入路由XPL策略参数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/direct-routing/interfaces": {
+    "name": "接口配置列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/direct-routing/interfaces/interface": {
+    "name": "接口配置"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/direct-routing/interfaces/interface/name": {
+    "name": "接口名"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/direct-routing/interfaces/interface/cost": {
+    "name": "COST值"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/direct-routing/interfaces/interface/binding-topologys": {
+    "name": "接口绑定拓扑配置列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/direct-routing/interfaces/interface/binding-topologys/binding-topology": {
+    "name": "接口绑定拓扑配置"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/direct-routing/interfaces/interface/binding-topologys/binding-topology/topology-name": {
+    "name": "拓扑名"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing": {
+    "name": "静态路由"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/import-ribs": {
+    "name": "公私网实例路由引入列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/import-ribs/import-rib": {
+    "name": "公私网实例路由引入"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/import-ribs/import-rib/source-vpn": {
+    "name": "引入源VPN名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/import-ribs/import-rib/valid-route": {
+    "name": "引入valid路由"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/import-ribs/import-rib/policy-type": {
+    "name": "选择策略类型"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/import-ribs/import-rib/policy-type/rtp-ref": {
+    "name": "指定路由策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/import-ribs/import-rib/policy-type/rtp-ref/policy-name": {
+    "name": "引入路由过滤策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/import-ribs/import-rib/policy-type/xpl-ref": {
+    "name": "指定引入路由XPL策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/import-ribs/import-rib/policy-type/xpl-ref/filter-name": {
+    "name": "引入路由XPL策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/import-ribs/import-rib/policy-type/xpl-ref/filter-parameter": {
+    "name": "引入路由XPL策略参数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/unicast-routes": {
+    "name": "静态路由配置列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/unicast-routes/unicast-route": {
+    "name": "静态路由配置"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/unicast-routes/unicast-route/topology-name": {
+    "name": "拓扑名"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/unicast-routes/unicast-route/prefix": {
+    "name": "目的IP地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/unicast-routes/unicast-route/mask-length": {
+    "name": "掩码长度"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/unicast-routes/unicast-route/interface-name": {
+    "name": "出接口"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/unicast-routes/unicast-route/vpn-destination-name": {
+    "name": "目标VPN实例名"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/unicast-routes/unicast-route/next-hop": {
+    "name": "下一跳IP地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/unicast-routes/unicast-route/preference": {
+    "name": "优先级"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/unicast-routes/unicast-route/description": {
+    "name": "描述信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/unicast-routes/unicast-route/tag": {
+    "name": "TAG属性"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/unicast-routes/unicast-route/cost": {
+    "name": "开销值"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/unicast-routes/unicast-route/inherit-cost": {
+    "name": "继承迭代路由cost"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/unicast-routes/unicast-route/permanent": {
+    "name": "是否永久发布"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/unicast-routes/unicast-route/no-advertise": {
+    "name": "是否不发布"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/unicast-routes/unicast-route/no-install": {
+    "name": "是否不下发转发表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/unicast-routes/unicast-route/relay-host-route": {
+    "name": "是否迭代主机路由"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/unicast-routes/unicast-route/dhcp-enable": {
+    "name": "使能DHCP"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/unicast-routes/unicast-route/ldp-sync": {
+    "name": "是否使能联动LDP"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/unicast-routes/unicast-route/inter-protocol-ecmp": {
+    "name": "使能协议间负载分担"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/unicast-routes/unicast-route/bfd-enable": {
+    "name": "使能动态BFD"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/unicast-routes/unicast-route/relay-arp-vlink-route": {
+    "name": "迭代ARP VLINK路由"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/unicast-routes/unicast-route/track-setting": {
+    "name": "设置联动"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/unicast-routes/unicast-route/track-setting/bfd": {
+    "name": "联动静态BFD会话"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/unicast-routes/unicast-route/track-setting/bfd/session-name": {
+    "name": "静态BFD会话名"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/unicast-routes/unicast-route/track-setting/efm": {
+    "name": "EFM接口名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/unicast-routes/unicast-route/track-setting/efm/name": {
+    "name": "EFM接口名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-multicast-routes": {
+    "name": "组播静态路由配置列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-multicast-routes/ipv4-multicast-route": {
+    "name": "组播静态路由配置"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-multicast-routes/ipv4-multicast-route/prefix": {
+    "name": "目的IP地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-multicast-routes/ipv4-multicast-route/mask-length": {
+    "name": "掩码长度"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-multicast-routes/ipv4-multicast-route/next-hop": {
+    "name": "下一跳IP地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-multicast-routes/ipv4-multicast-route/interface-name": {
+    "name": "出接口"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-multicast-routes/ipv4-multicast-route/preference": {
+    "name": "优先级"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-multicast-routes/ipv4-multicast-route/interface-state": {
+    "name": "接口状态"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-multicast-routes/ipv4-multicast-route/bfd-detect": {
+    "name": "BFD检测结果"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-multicast-routes/ipv4-multicast-route/state": {
+    "name": "选路结果"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-multicast-routes/ipv4-multicast-route/indirect-id": {
+    "name": "下一跳分离ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-multicast-routes/ipv4-multicast-route/local-address": {
+    "name": "本地IP"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-multicast-routes/ipv4-multicast-route/remote-ip": {
+    "name": "远端IP"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-multicast-routes/ipv4-multicast-route/relay-nexthop": {
+    "name": "迭代下一跳"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-multicast-routes/ipv4-multicast-route/relay-interface": {
+    "name": "迭代出接口"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-multicast-routes/ipv4-multicast-route/tunnel-id": {
+    "name": "隧道ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/bfd-templates": {
+    "name": "BFD模板配置列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/bfd-templates/bfd-template": {
+    "name": "BFD模板配置"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/bfd-templates/bfd-template/interface-name": {
+    "name": "出接口"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/bfd-templates/bfd-template/nexthop": {
+    "name": "下一跳"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/bfd-templates/bfd-template/local-address": {
+    "name": "本地地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/bfd-templates/bfd-template/min-tx-interval": {
+    "name": "最小发送间隔"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/bfd-templates/bfd-template/min-rx-interval": {
+    "name": "最小接收间隔"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/bfd-templates/bfd-template/multiplier": {
+    "name": "本地检测倍数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/bfd-templates/bfd-template/dhcp-enable": {
+    "name": "使能DHCP"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/route-frr-set": {
+    "name": "FRR设置"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/route-frr-set/unicast-route-frr-enable": {
+    "name": "使能FRR"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/route-frr-set/multicast-route-frr-enable": {
+    "name": "使能组播静态路由FRR"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-routes": {
+    "name": "IPv4静态路由表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-routes/ipv4-route": {
+    "name": "IPv4静态路由表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-routes/ipv4-route/topology-name": {
+    "name": "拓扑名"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-routes/ipv4-route/prefix": {
+    "name": "目的IP地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-routes/ipv4-route/mask-length": {
+    "name": "掩码长度"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-routes/ipv4-route/interface-name": {
+    "name": "出接口"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-routes/ipv4-route/vpn-destination-name": {
+    "name": "目标VPN实例名"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-routes/ipv4-route/next-hop": {
+    "name": "下一跳IP地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-routes/ipv4-route/relay-next-hop": {
+    "name": "迭代下一跳"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-routes/ipv4-route/relay-interface-name": {
+    "name": "迭代出接口"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-routes/ipv4-route/tunnel-id": {
+    "name": "隧道ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-routes/ipv4-route/preference": {
+    "name": "优先级"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-routes/ipv4-route/cost": {
+    "name": "开销值"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-routes/ipv4-route/tag": {
+    "name": "TAG属性"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-routes/ipv4-route/interface-state": {
+    "name": "接口状态"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-routes/ipv4-route/state": {
+    "name": "选路结果"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-routes/ipv4-route/indirect-id": {
+    "name": "下一跳分离ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-routes/ipv4-route/local-address": {
+    "name": "本地IP"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-routes/ipv4-route/remote-ip": {
+    "name": "远端IP"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-routes/ipv4-route/inherit-cost": {
+    "name": "继承迭代路由cost"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-routes/ipv4-route/label": {
+    "name": "标签"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-routes/ipv4-route/permanent": {
+    "name": "是否永久发布"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-routes/ipv4-route/no-advertise": {
+    "name": "是否不发布"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-routes/ipv4-route/no-install": {
+    "name": "是否不下发转发表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-routes/ipv4-route/bfd-type": {
+    "name": "BFD类型"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-routes/ipv4-route/bfd-session-name": {
+    "name": "静态BFD会话名"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-routes/ipv4-route/bfd-detect": {
+    "name": "BFD检测结果"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-routes/ipv4-route/efm-interface-name": {
+    "name": "EFM接口名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-routes/ipv4-route/efm-detect": {
+    "name": "EFM探测结果"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-routes/ipv4-route/nqa-detect": {
+    "name": "NQA检测结果"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv6-routes": {
+    "name": "IPv6静态路由表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv6-routes/ipv6-route": {
+    "name": "IPv6静态路由表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv6-routes/ipv6-route/topology-name": {
+    "name": "拓扑名"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv6-routes/ipv6-route/prefix": {
+    "name": "目的IP地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv6-routes/ipv6-route/mask-length": {
+    "name": "掩码长度"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv6-routes/ipv6-route/interface-name": {
+    "name": "出接口"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv6-routes/ipv6-route/vpn-destination-name": {
+    "name": "目标VPN实例名"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv6-routes/ipv6-route/next-hop": {
+    "name": "下一跳IP地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv6-routes/ipv6-route/relay-next-hop": {
+    "name": "迭代下一跳"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv6-routes/ipv6-route/relay-interface-name": {
+    "name": "迭代出接口"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv6-routes/ipv6-route/tunnel-id": {
+    "name": "隧道ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv6-routes/ipv6-route/preference": {
+    "name": "优先级"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv6-routes/ipv6-route/cost": {
+    "name": "开销值"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv6-routes/ipv6-route/tag": {
+    "name": "TAG属性"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv6-routes/ipv6-route/interface-state": {
+    "name": "接口状态"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv6-routes/ipv6-route/state": {
+    "name": "选路结果"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv6-routes/ipv6-route/indirect-id": {
+    "name": "下一跳分离ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv6-routes/ipv6-route/local-address": {
+    "name": "本地IP"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv6-routes/ipv6-route/remote-ip": {
+    "name": "远端IP"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv6-routes/ipv6-route/inherit-cost": {
+    "name": "继承迭代路由cost"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv6-routes/ipv6-route/label": {
+    "name": "标签"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv6-routes/ipv6-route/permanent": {
+    "name": "是否永久发布"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv6-routes/ipv6-route/no-advertise": {
+    "name": "是否不发布"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv6-routes/ipv6-route/no-install": {
+    "name": "是否不下发转发表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv6-routes/ipv6-route/bfd-type": {
+    "name": "BFD类型"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv6-routes/ipv6-route/bfd-session-name": {
+    "name": "静态BFD会话名"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv6-routes/ipv6-route/bfd-detect": {
+    "name": "BFD检测结果"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv6-routes/ipv6-route/efm-interface-name": {
+    "name": "EFM接口名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv6-routes/ipv6-route/efm-detect": {
+    "name": "EFM探测结果"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv6-routes/ipv6-route/nqa-detect": {
+    "name": "NQA检测结果"
+  }
+}

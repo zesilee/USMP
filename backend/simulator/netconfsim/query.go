@@ -163,7 +163,6 @@ func (s *Simulator) RunningHuaweiVLANsFull() map[uint16]*HuaweiVlanTestData {
 					d.MemberPorts = append(d.MemberPorts, HuaweiVlanMemberPort{
 						InterfaceName: c.leaf("interface-name", "interfacename"),
 						AccessType:    enumInt(c.leaf("access-type", "accesstype"), huawei.HuaweiVlan_AccessType_UNSET),
-						TagMode:       enumInt(c.leaf("tag-mode", "tagmode"), huawei.HuaweiVlan_TagMode_UNSET),
 					})
 				}
 			}
@@ -208,7 +207,6 @@ func (s *Simulator) RunningHuaweiInterfaces() map[string]*HuaweiInterfaceTestDat
 			VsName:               e.leaf("vs-name", "vsname"),
 			AggregationName:      e.leaf("aggregation-name", "aggregationname"),
 			DownDelayTime:        toU32(e.leaf("down-delay-time", "downdelaytime")),
-			ProtocolUpDelayTime:  toU32(e.leaf("protocol-up-delay-time", "protocolupdelaytime")),
 			ClearIpDf:            toBool(e.leaf("clear-ip-df", "clearipdf")),
 			IsL2Switch:           toBool(e.leaf("is-l2-switch", "isl2switch")),
 			L2ModeEnable:         toBool(e.leaf("l2-mode-enable", "l2modeenable")),
@@ -353,7 +351,6 @@ type HuaweiVlanTestData struct {
 type HuaweiVlanMemberPort struct {
 	InterfaceName string
 	AccessType    int
-	TagMode       int
 }
 
 // HuaweiInterfaceTestData represents interface test data from Huawei IFM model.
@@ -378,7 +375,6 @@ type HuaweiInterfaceTestData struct {
 	VsName               string
 	AggregationName      string
 	DownDelayTime        uint32
-	ProtocolUpDelayTime  uint32
 	ClearIpDf            bool
 	IsL2Switch           bool
 	L2ModeEnable         bool

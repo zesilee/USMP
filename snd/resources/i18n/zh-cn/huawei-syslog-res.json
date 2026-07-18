@@ -1,0 +1,413 @@
+{
+  "/huawei-syslog:syslog": {
+    "name": "SYSLOG"
+  },
+  "/huawei-syslog:syslog/servers": {
+    "name": "日志服务器列表"
+  },
+  "/huawei-syslog:syslog/servers/server": {
+    "name": "日志服务器"
+  },
+  "/huawei-syslog:syslog/servers/server/ip-type": {
+    "name": "服务器地址类型"
+  },
+  "/huawei-syslog:syslog/servers/server/ipaddress": {
+    "name": "日志主机IP地址"
+  },
+  "/huawei-syslog:syslog/servers/server/is-default-vpn": {
+    "name": "是否使用默认VPN"
+  },
+  "/huawei-syslog:syslog/servers/server/vrf-name": {
+    "name": "服务器VPN名"
+  },
+  "/huawei-syslog:syslog/servers/server/host-name": {
+    "name": "主机名称"
+  },
+  "/huawei-syslog:syslog/servers/server/is-activated": {
+    "name": "激活日志主机"
+  },
+  "/huawei-syslog:syslog/servers/server/level": {
+    "name": "服务器日志级别"
+  },
+  "/huawei-syslog:syslog/servers/server/port": {
+    "name": "端口号"
+  },
+  "/huawei-syslog:syslog/servers/server/facility": {
+    "name": "日志记录工具"
+  },
+  "/huawei-syslog:syslog/servers/server/channel-id": {
+    "name": "通道编号"
+  },
+  "/huawei-syslog:syslog/servers/server/channel-name": {
+    "name": "通道名称"
+  },
+  "/huawei-syslog:syslog/servers/server/timestamp": {
+    "name": "时间戳"
+  },
+  "/huawei-syslog:syslog/servers/server/transport-mode": {
+    "name": "传输模式"
+  },
+  "/huawei-syslog:syslog/servers/server/ssl-policy-name": {
+    "name": "SSL认证策略名"
+  },
+  "/huawei-syslog:syslog/servers/server/source-ip": {
+    "name": "日志主机源IP地址"
+  },
+  "/huawei-syslog:syslog/servers/server/dns-identifier-name": {
+    "name": "DNS服务器认证名称"
+  },
+  "/huawei-syslog:syslog/servers/server/is-security-only": {
+    "name": "日志主机支持安全日志上报"
+  },
+  "/huawei-syslog:syslog/servers/server/facility-mask": {
+    "name": "配置日志记录工具"
+  },
+  "/huawei-syslog:syslog/servers/server/severity-mask": {
+    "name": "配置日志服务器接收到的日志级别"
+  },
+  "/huawei-syslog:syslog/servers/server/is-brief-format": {
+    "name": "日志使用精简模式上报"
+  },
+  "/huawei-syslog:syslog/global-parameter": {
+    "name": "全局属性"
+  },
+  "/huawei-syslog:syslog/global-parameter/info-center-enable": {
+    "name": "信息输出总开关"
+  },
+  "/huawei-syslog:syslog/global-parameter/buffer-size": {
+    "name": "日志缓冲区大小"
+  },
+  "/huawei-syslog:syslog/global-parameter/suppress-enable": {
+    "name": "连续重复日志统计输出使能开关"
+  },
+  "/huawei-syslog:syslog/global-parameter/log-timestamp": {
+    "name": "日志时间戳格式"
+  },
+  "/huawei-syslog:syslog/global-parameter/trap-timestamp": {
+    "name": "Trap时间戳格式"
+  },
+  "/huawei-syslog:syslog/global-parameter/debug-timestamp": {
+    "name": "调试时间戳格式"
+  },
+  "/huawei-syslog:syslog/global-parameter/interface-name": {
+    "name": "日志主机源接口"
+  },
+  "/huawei-syslog:syslog/global-parameter/logbuffer-enable": {
+    "name": "日志缓冲区输出开关"
+  },
+  "/huawei-syslog:syslog/global-parameter/trapbuffer-enable": {
+    "name": "Trap缓冲区输出开关"
+  },
+  "/huawei-syslog:syslog/global-parameter/trapbuffer-size": {
+    "name": "Trap缓冲区大小"
+  },
+  "/huawei-syslog:syslog/global-parameter/packet-priority": {
+    "name": "日志代理功能开关"
+  },
+  "/huawei-syslog:syslog/global-parameter/source-port": {
+    "name": "日志主机源端口"
+  },
+  "/huawei-syslog:syslog/global-parameter/log-none-timezone": {
+    "name": "日志时间戳不包含时区信息"
+  },
+  "/huawei-syslog:syslog/global-parameter/trap-none-timezone": {
+    "name": "Trap时间戳不包含时区信息"
+  },
+  "/huawei-syslog:syslog/global-parameter/debug-none-timezone": {
+    "name": "调试时间戳不包含时区信息"
+  },
+  "/huawei-syslog:syslog/global-parameter/delay-suppress-enable": {
+    "name": "事件抖动抑制开关"
+  },
+  "/huawei-syslog:syslog/global-parameter/event-logging-all": {
+    "name": "全局记录事件日志标志"
+  },
+  "/huawei-syslog:syslog/info-center-channels": {
+    "name": "通道列表"
+  },
+  "/huawei-syslog:syslog/info-center-channels/info-center-channel": {
+    "name": "信息中心通道"
+  },
+  "/huawei-syslog:syslog/info-center-channels/info-center-channel/channel-id": {
+    "name": "通道编号"
+  },
+  "/huawei-syslog:syslog/info-center-channels/info-center-channel/channel-default-name": {
+    "name": "通道缺省名称"
+  },
+  "/huawei-syslog:syslog/info-center-channels/info-center-channel/channel-name": {
+    "name": "通道配置名称"
+  },
+  "/huawei-syslog:syslog/info-center-sources": {
+    "name": "信息中心过滤规则列表"
+  },
+  "/huawei-syslog:syslog/info-center-sources/info-center-source": {
+    "name": "信息中心过滤规则"
+  },
+  "/huawei-syslog:syslog/info-center-sources/info-center-source/module-name": {
+    "name": "模块名称"
+  },
+  "/huawei-syslog:syslog/info-center-sources/info-center-source/channel-id": {
+    "name": "通道编号"
+  },
+  "/huawei-syslog:syslog/info-center-sources/info-center-source/channel-name": {
+    "name": "通道名称"
+  },
+  "/huawei-syslog:syslog/info-center-sources/info-center-source/enable-log": {
+    "name": "日志开关"
+  },
+  "/huawei-syslog:syslog/info-center-sources/info-center-source/enable-log-level": {
+    "name": "日志级别"
+  },
+  "/huawei-syslog:syslog/info-center-sources/info-center-source/enable-trap": {
+    "name": "Trap开关"
+  },
+  "/huawei-syslog:syslog/info-center-sources/info-center-source/enable-trap-level": {
+    "name": "Trap级别"
+  },
+  "/huawei-syslog:syslog/info-center-sources/info-center-source/enable-debug": {
+    "name": "调试信息开关"
+  },
+  "/huawei-syslog:syslog/info-center-sources/info-center-source/enable-debug-level": {
+    "name": "调试信息级别"
+  },
+  "/huawei-syslog:syslog/log-switch-list": {
+    "name": "日志名称信息表"
+  },
+  "/huawei-syslog:syslog/log-switch-list/log-switch": {
+    "name": "日志名称信息"
+  },
+  "/huawei-syslog:syslog/log-switch-list/log-switch/feature-name": {
+    "name": "日志特性名"
+  },
+  "/huawei-syslog:syslog/log-switch-list/log-switch/log-name": {
+    "name": "日志名称"
+  },
+  "/huawei-syslog:syslog/log-switch-list/log-switch/log-level": {
+    "name": "日志级别"
+  },
+  "/huawei-syslog:syslog/log-switch-list/log-switch/security-log-flag": {
+    "name": "是否安全日志"
+  },
+  "/huawei-syslog:syslog/log-switch-list/log-switch/log-type": {
+    "name": "日志类型"
+  },
+  "/huawei-syslog:syslog/info-center-filters": {
+    "name": "日志过滤表"
+  },
+  "/huawei-syslog:syslog/info-center-filters/info-center-filter": {
+    "name": "日志过滤"
+  },
+  "/huawei-syslog:syslog/info-center-filters/info-center-filter/feature-name": {
+    "name": "过滤日志特性名"
+  },
+  "/huawei-syslog:syslog/info-center-filters/info-center-filter/filter-log-name": {
+    "name": "过滤日志名称"
+  },
+  "/huawei-syslog:syslog/domain-servers": {
+    "name": "域名日志服务器列表"
+  },
+  "/huawei-syslog:syslog/domain-servers/domain-server": {
+    "name": "域名日志服务器"
+  },
+  "/huawei-syslog:syslog/domain-servers/domain-server/server-domain": {
+    "name": "服务器域名"
+  },
+  "/huawei-syslog:syslog/domain-servers/domain-server/is-default-vpn": {
+    "name": "是否使用默认VPN"
+  },
+  "/huawei-syslog:syslog/domain-servers/domain-server/vrf-name": {
+    "name": "服务器VPN名"
+  },
+  "/huawei-syslog:syslog/domain-servers/domain-server/level": {
+    "name": "服务器日志级别"
+  },
+  "/huawei-syslog:syslog/domain-servers/domain-server/server-port": {
+    "name": "端口号"
+  },
+  "/huawei-syslog:syslog/domain-servers/domain-server/facility": {
+    "name": "日志记录工具"
+  },
+  "/huawei-syslog:syslog/domain-servers/domain-server/channel-id": {
+    "name": "通道编号"
+  },
+  "/huawei-syslog:syslog/domain-servers/domain-server/channel-name": {
+    "name": "通道名称"
+  },
+  "/huawei-syslog:syslog/domain-servers/domain-server/timestamp": {
+    "name": "时间戳"
+  },
+  "/huawei-syslog:syslog/domain-servers/domain-server/transport-mode": {
+    "name": "传输模式"
+  },
+  "/huawei-syslog:syslog/domain-servers/domain-server/ssl-policy-name": {
+    "name": "SSL认证策略名"
+  },
+  "/huawei-syslog:syslog/domain-servers/domain-server/is-brief-format": {
+    "name": "日志使用精简模式上报"
+  },
+  "/huawei-syslog:syslog/domain-servers/domain-server/is-security-only": {
+    "name": "日志主机支持安全日志上报"
+  },
+  "/huawei-syslog:syslog/logfiles": {
+    "name": "日志文件信息表"
+  },
+  "/huawei-syslog:syslog/logfiles/logfile": {
+    "name": "日志文件信息"
+  },
+  "/huawei-syslog:syslog/logfiles/logfile/logfile-type": {
+    "name": "日志文件类型"
+  },
+  "/huawei-syslog:syslog/logfiles/logfile/max-file-num": {
+    "name": "单类日志文件最大个数"
+  },
+  "/huawei-syslog:syslog/logfiles/logfile/max-file-size": {
+    "name": "单个日志文件最大值(MB)"
+  },
+  "/huawei-syslog:syslog/direction-channels": {
+    "name": "输出方向和通道绑定关系列表"
+  },
+  "/huawei-syslog:syslog/direction-channels/direction-channel": {
+    "name": "输出方向和通道绑定"
+  },
+  "/huawei-syslog:syslog/direction-channels/direction-channel/output-direction": {
+    "name": "信息输出方向"
+  },
+  "/huawei-syslog:syslog/direction-channels/direction-channel/default-channel-id": {
+    "name": "缺省通道编号"
+  },
+  "/huawei-syslog:syslog/direction-channels/direction-channel/channel-id": {
+    "name": "配置通道编号"
+  },
+  "/huawei-syslog:syslog/direction-channels/direction-channel/channel-name": {
+    "name": "配置通道名称"
+  },
+  "/huawei-syslog:syslog/info-center-statistics": {
+    "name": "日志统计表"
+  },
+  "/huawei-syslog:syslog/info-center-statistics/info-center-statistic": {
+    "name": "日志统计"
+  },
+  "/huawei-syslog:syslog/info-center-statistics/info-center-statistic/module-name": {
+    "name": "模块名称"
+  },
+  "/huawei-syslog:syslog/info-center-statistics/info-center-statistic/receive-log": {
+    "name": "日志接收"
+  },
+  "/huawei-syslog:syslog/info-center-statistics/info-center-statistic/drop-log": {
+    "name": "日志丢弃"
+  },
+  "/huawei-syslog:syslog/info-center-statistics/info-center-statistic/receive-diaglog": {
+    "name": "诊断接收"
+  },
+  "/huawei-syslog:syslog/info-center-statistics/info-center-statistic/drop-diaglog": {
+    "name": "诊断丢弃"
+  },
+  "/huawei-syslog:syslog/info-center-statistics/info-center-statistic/receive-eventtrap": {
+    "name": "事件Trap接收"
+  },
+  "/huawei-syslog:syslog/info-center-statistics/info-center-statistic/drop-eventtrap": {
+    "name": "事件Trap丢弃"
+  },
+  "/huawei-syslog:syslog/info-center-statistics/info-center-statistic/receive-debug": {
+    "name": "调试接收"
+  },
+  "/huawei-syslog:syslog/info-center-statistics/info-center-statistic/drop-debug": {
+    "name": "调试丢弃"
+  },
+  "/huawei-syslog:syslog/info-center-buffers": {
+    "name": "缓冲区统计数据表"
+  },
+  "/huawei-syslog:syslog/info-center-buffers/info-center-buffer": {
+    "name": "缓冲区统计"
+  },
+  "/huawei-syslog:syslog/info-center-buffers/info-center-buffer/buffer-name": {
+    "name": "缓冲区名称"
+  },
+  "/huawei-syslog:syslog/info-center-buffers/info-center-buffer/enable-flag": {
+    "name": "使能状态"
+  },
+  "/huawei-syslog:syslog/info-center-buffers/info-center-buffer/max-buffer-size": {
+    "name": "最大可配置大小"
+  },
+  "/huawei-syslog:syslog/info-center-buffers/info-center-buffer/cur-buffer-size": {
+    "name": "当前配置大小"
+  },
+  "/huawei-syslog:syslog/info-center-buffers/info-center-buffer/current-message": {
+    "name": "当前消息数量"
+  },
+  "/huawei-syslog:syslog/info-center-buffers/info-center-buffer/dropped-message": {
+    "name": "丢弃消息数量"
+  },
+  "/huawei-syslog:syslog/info-center-buffers/info-center-buffer/overwrite-message": {
+    "name": "覆盖消息数量"
+  },
+  "/huawei-syslog:syslog/info-center-buffers/info-center-buffer/channel-id": {
+    "name": "通道编号"
+  },
+  "/huawei-syslog:syslog/info-center-buffers/info-center-buffer/channel-name": {
+    "name": "通道名称"
+  },
+  "/huawei-syslog:syslog/modules": {
+    "name": "模块名称信息表"
+  },
+  "/huawei-syslog:syslog/modules/module": {
+    "name": "模块名称信息"
+  },
+  "/huawei-syslog:syslog/modules/module/module-name": {
+    "name": "模块名称"
+  },
+  "/huawei-syslog:syslog/logbuffers": {
+    "name": "日志缓冲区表"
+  },
+  "/huawei-syslog:syslog/logbuffers/logbuffer": {
+    "name": "日志缓冲区"
+  },
+  "/huawei-syslog:syslog/logbuffers/logbuffer/sequence": {
+    "name": "序号"
+  },
+  "/huawei-syslog:syslog/logbuffers/logbuffer/starttime": {
+    "name": "查询开始时间"
+  },
+  "/huawei-syslog:syslog/logbuffers/logbuffer/endtime": {
+    "name": "查询结束时间"
+  },
+  "/huawei-syslog:syslog/logbuffers/logbuffer/level": {
+    "name": "查询日志级别"
+  },
+  "/huawei-syslog:syslog/logbuffers/logbuffer/log-content": {
+    "name": "日志内容"
+  },
+  "/huawei-syslog:syslog/trapbuffers": {
+    "name": "告警缓冲区表"
+  },
+  "/huawei-syslog:syslog/trapbuffers/trapbuffer": {
+    "name": "Trap缓冲区"
+  },
+  "/huawei-syslog:syslog/trapbuffers/trapbuffer/sequence": {
+    "name": "序号"
+  },
+  "/huawei-syslog:syslog/trapbuffers/trapbuffer/trap-content": {
+    "name": "Trap内容"
+  },
+  "/huawei-syslog:syslog/securitybuffers": {
+    "name": "日志缓冲区表中的安全日志"
+  },
+  "/huawei-syslog:syslog/securitybuffers/securitybuffer": {
+    "name": "日志缓冲区中的安全日志"
+  },
+  "/huawei-syslog:syslog/securitybuffers/securitybuffer/sequence": {
+    "name": "序号"
+  },
+  "/huawei-syslog:syslog/securitybuffers/securitybuffer/starttime": {
+    "name": "查询开始时间"
+  },
+  "/huawei-syslog:syslog/securitybuffers/securitybuffer/endtime": {
+    "name": "查询结束时间"
+  },
+  "/huawei-syslog:syslog/securitybuffers/securitybuffer/level": {
+    "name": "查询日志级别"
+  },
+  "/huawei-syslog:syslog/securitybuffers/securitybuffer/log-content": {
+    "name": "日志内容"
+  }
+}

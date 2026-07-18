@@ -1,0 +1,71 @@
+/*
+Copyright (C) 2020 Huawei Technologies Co., Ltd. All rights reserved.
+*/
+module huawei-bfd-fwm {
+  yang-version 1;
+  namespace "urn:huawei:yang:huawei-bfd-fwm";
+  prefix bfd-fwm;
+  import huawei-bfd {
+    prefix bfd;
+  }
+  import huawei-extension {
+    prefix ext;
+  }
+  organization
+    "Huawei Technologies Co., Ltd.";
+  contact
+    "Huawei Industrial Base
+     Bantian, Longgang
+     Shenzhen 518129
+     People's Republic of China
+     Website: http://www.huawei.com
+     Email: support@huawei.com";
+  description
+    "Forwarding management augment to BFD.";
+  revision 2020-11-17 {
+    description
+      "Modify node.";
+    reference
+      "Huawei private.";
+  }
+  revision 2020-11-10 {
+    description
+      "Modify node.";
+    reference
+      "Huawei private.";
+  }
+  revision 2020-06-18 {
+    description
+      "Initial revision.";
+    reference
+      "Huawei private.";
+  }
+
+  augment /bfd:bfd {
+    description
+      "Augument forwarding-match to BFD.";
+    container forwarding-match {
+      description
+        "Configure BFD forwarding match.";
+        leaf-list remote-discriminator-values {
+          type uint16 {
+            range "1..16384";
+          }
+          max-elements "1024";
+          description
+            "Specify remote discriminator values.";
+        }
+    }
+    container forwarding-samediscr {
+      description
+        "Configure the device not to use the same local and remote discriminators of multicast BFD.";
+        leaf same-discriminator-disable {
+          type boolean;
+          default "false";
+          description
+            "Enable/disable same discriminator.";
+        }
+    }
+  }
+  ext:task-name "forwarding";
+}

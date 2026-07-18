@@ -1,0 +1,3039 @@
+/*
+Copyright (C) 2019 Huawei Technologies Co., Ltd. All rights reserved.
+*/
+submodule huawei-nqa-record {
+  yang-version 1;
+  belongs-to huawei-nqa {
+    prefix nqa;
+  }
+
+  import ietf-inet-types {
+    prefix inet;
+  }
+  import ietf-yang-types {
+    prefix yang;
+  }
+  import huawei-extension {
+    prefix ext;
+  }
+
+  organization
+    "Huawei Technologies Co., Ltd.";
+  contact
+    "Huawei Industrial Base
+     Bantian, Longgang
+     Shenzhen 518129
+     People's Republic of China
+     Website: http://www.huawei.com
+     Email: support@huawei.com";
+  description
+    "Description of submodule nqa-record.";
+
+  revision 2019-10-30 {
+    description
+      "Initial revision.";
+    reference
+      "Huawei private.";
+  }
+
+  typedef test-finsh-status-type {
+    type enumeration {
+      enum finished {
+        value 1;
+        description
+          "Finished.";
+      }
+      enum running {
+        value 0;
+        description
+          "Running.";
+      }
+    }
+    description
+      "description of test-finsh-status-type";
+  }
+
+  typedef test-step-type {
+    type enumeration {
+      enum simple-cir {
+        value 0;
+        description
+          "Simple CIR.";
+      }
+      enum percent-25-cir {
+        value 1;
+        description
+          "Step 25% CIR.";
+      }
+      enum percent-50-cir {
+        value 2;
+        description
+          "Step 50% CIR.";
+      }
+      enum percent-75-cir {
+        value 3;
+        description
+          "Step 75% CIR.";
+      }
+      enum percent-100-cir {
+        value 4;
+        description
+          "Step 100% CIR.";
+      }
+      enum color-blind-eir {
+        value 5;
+        description
+          "Color-blind EIR.";
+      }
+      enum color-aware-eir {
+        value 6;
+        description
+          "Color-aware EIR.";
+      }
+      enum color-blind-traffic-policing {
+        value 7;
+        description
+          "Color-blind traffic policing.";
+      }
+      enum color-aware-traffic-policing {
+        value 8;
+        description
+          "Color-aware traffic policing.";
+      }
+      enum performance {
+        value 9;
+        description
+          "Performance.";
+      }
+      enum green-eir {
+        value 10;
+        description
+          "EIR green packet test.";
+      }
+      enum yellow-eir {
+        value 11;
+        description
+          "EIR yellow packet test.";
+      }
+      enum total-eir {
+        value 12;
+        description
+          "Total EIR test.";
+      }
+      enum green-traffic-policing {
+        value 13;
+        description
+          "Traffic policing green packet test.";
+      }
+      enum yellow-traffic-policing {
+        value 14;
+        description
+          "Traffic policing yellow packet test.";
+      }
+      enum total-traffic-policing {
+        value 15;
+        description
+          "Total traffic policing test.";
+      }
+      enum init {
+        value 16;
+        description
+          "Init status.";
+      }
+    }
+    description
+      "description of test-step-type";
+  }
+
+  typedef result-status-type {
+    type enumeration {
+      enum success {
+        value 0;
+        description
+          "Success.";
+      }
+      enum failed {
+        value 1;
+        description
+          "Failed.";
+      }
+      enum no-result {
+        value 2;
+        description
+          "Init status.";
+      }
+      enum negotiate-failed {
+        value 3;
+        description
+          "Negotiate failed.";
+      }
+    }
+    description
+      "description of result-status-type";
+  }
+
+  typedef test-result-type {
+    type enumeration {
+      enum pass {
+        value 0;
+        description
+          "Pass.";
+      }
+      enum failed {
+        value 1;
+        description
+          "Failed.";
+      }
+      enum abort {
+        value 2;
+        description
+          "Abort.";
+      }
+      enum abnormal {
+        value 3;
+        description
+          "Abnormal.";
+      }
+      enum nil {
+        value 4;
+        description
+          "--";
+      }
+    }
+    description
+      "description of test-result-type";
+  }
+
+  typedef test-mode-type {
+    type enumeration {
+      enum round-trip {
+        value 0;
+        description
+          "Round-trip.";
+      }
+    }
+    description
+      "description of test-mode-type";
+  }
+
+  typedef test-last-step-type {
+    type enumeration {
+      enum simple-cir {
+        value 0;
+        description
+          "Simple CIR.";
+      }
+      enum percent-25-cir {
+        value 1;
+        description
+          "Step 25% CIR.";
+      }
+      enum percent-50-cir {
+        value 2;
+        description
+          "Step 50% CIR.";
+      }
+      enum percent-75-cir {
+        value 3;
+        description
+          "Step 75% CIR.";
+      }
+      enum percent-100-cir {
+        value 4;
+        description
+          "Step 100% CIR.";
+      }
+      enum color-blind-eir {
+        value 5;
+        description
+          "Color-blind EIR.";
+      }
+      enum color-aware-eir {
+        value 6;
+        description
+          "Color-aware EIR.";
+      }
+      enum color-blind-traffic-policing {
+        value 7;
+        description
+          "Color-blind traffic policing.";
+      }
+      enum color-aware-traffic-policing {
+        value 8;
+        description
+          "Color-aware traffic policing.";
+      }
+      enum performance {
+        value 9;
+        description
+          "Performance.";
+      }
+      enum green-eir {
+        value 10;
+        description
+          "CIR/EIR Test.";
+      }
+      enum yellow-eir {
+        value 11;
+        description
+          "CIR/EIR Test.";
+      }
+      enum total-eir {
+        value 12;
+        description
+          "CIR/EIR Test.";
+      }
+      enum green-traffic-policing {
+        value 13;
+        description
+          "Traffic Policing Test.";
+      }
+      enum yellow-traffic-policing {
+        value 14;
+        description
+          "Traffic Policing Test.";
+      }
+      enum total-traffic-policing {
+        value 15;
+        description
+          "Traffic Policing Test.";
+      }
+      enum init {
+        value 16;
+        description
+          "Init status.";
+      }
+    }
+    description
+      "description of test-last-step-type";
+  }
+
+  typedef test-stage-type {
+    type enumeration {
+      enum configuration-test {
+        value 0;
+        description
+          "Configuration test.";
+      }
+      enum performance-test {
+        value 1;
+        description
+          "Performance test.";
+      }
+    }
+    description
+      "description of test-stage-type";
+  }
+
+  typedef result-path-jitter-status-type {
+    type enumeration {
+      enum initial {
+        value 0;
+        description
+          "PatchJitter test status initial.";
+      }
+      enum trace-start {
+        value 1;
+        description
+          "PatchJitter test status trace start.";
+      }
+      enum trace-end {
+        value 2;
+        description
+          "PatchJitter test status trace end.";
+      }
+      enum jitter-start {
+        value 3;
+        description
+          "PatchJitter test status jitter start.";
+      }
+      enum jitter-end {
+        value 4;
+        description
+          "PatchJitter test status jitter end.";
+      }
+      enum close {
+        value 5;
+        description
+          "PatchJitter test status close.";
+      }
+    }
+    description
+      "description of result-path-jitter-status-type";
+  }
+
+  typedef finish-status-type {
+    type enumeration {
+      enum running {
+        value 0;
+        description
+          "Running.";
+      }
+      enum finished {
+        value 1;
+        description
+          "Finished.";
+      }
+    }
+    description
+      "description of finish-status-type";
+  }
+
+  typedef test-record-measure-type {
+    type enumeration {
+      enum delay {
+        value 1;
+        description
+          "Delay Test.";
+      }
+      enum loss {
+        value 2;
+        description
+          "Loss Test.";
+      }
+      enum throughput {
+        value 3;
+        description
+          "Throughput Test.";
+      }
+    }
+    description
+      "description of test-record-measure-type";
+  }
+
+  typedef test-record-rate-type {
+    type enumeration {
+      enum information-rate {
+        value 2;
+        description
+          "Information rate.";
+      }
+      enum utilized-line-rate {
+        value 1;
+        description
+          "Utilized line rate.";
+      }
+    }
+    description
+      "description of test-record-rate-type";
+  }
+
+  typedef lsp-sr-policy-path {
+    type enumeration {
+      enum main-path {
+        value 1;
+        description
+          "MAIN-PATH.";
+      }
+      enum backup-path {
+        value 0;
+        description
+          "BACK-PATH.";
+      }
+      enum unknown {
+        value 255;
+        description
+          "UNKNOWN.";
+      }
+    }
+    description
+      "description of lsp-sr-policy-path";
+  }
+
+  typedef lsp-protocol-origin {
+    type enumeration {
+      enum pecp {
+        value 10;
+        description
+          "PECP.";
+      }
+      enum bgp {
+        value 20;
+        description
+          "BGP.";
+      }
+      enum local {
+        value 30;
+        description
+          "LOCAL.";
+      }
+      enum unknown {
+        value 255;
+        description
+          "UNKNOWN.";
+      }
+    }
+    description
+      "description of lsp-protocol-origin";
+  }
+
+  typedef gflow-result-status {
+    type enumeration {
+      enum no-result {
+        value 0;
+        description
+          "no result.";
+      }
+      enum success {
+        value 1;
+        description
+          "success.";
+      }
+      enum failed {
+        value 2;
+        description
+          "failed.";
+      }
+      enum finished {
+        value 3;
+        description
+          "finished.";
+      }
+    }
+    description
+      "description of gflow-result-status";
+  }
+
+  grouping record-type {
+    description
+      "NQA test instance test result.";
+    container results {
+      config false;
+      description
+        "List of NQA test instance test result record table.";
+      list result {
+        key "admin-name test-name running-index";
+        config false;
+        description
+          "Statistics of NQA test instance test result record table.";
+        leaf admin-name {
+          type string {
+            length "1..32";
+          }
+          config false;
+          description
+            "Administrator name.";
+        }
+        leaf test-name {
+          type string {
+            length "1..32";
+          }
+          config false;
+          description
+            "Test instance name.";
+        }
+        leaf running-index {
+          type uint32 {
+            range "0..100000";
+          }
+          config false;
+          description
+            "Running index.";
+        }
+        leaf status {
+          type test-finsh-status-type;
+          config false;
+          description
+            "Test finished status (finished or running).";
+        }
+        leaf completions {
+          type result-status-type;
+          config false;
+          description
+            "Running results.";
+        }
+        leaf sent-probes {
+          type uint32 {
+            range "0..65535";
+          }
+          config false;
+          description
+            "Total number of sent packets.";
+        }
+        leaf response-probes {
+          type uint32 {
+            range "0..65535";
+          }
+          config false;
+          description
+            "Total number of received packets.";
+        }
+        leaf rtd-thresholds {
+          type uint32 {
+            range "0..65535";
+          }
+          config false;
+          description
+            "Counts of RTD over Threshold.";
+        }
+        leaf test-attempts {
+          type uint32 {
+            range "1..100000";
+          }
+          config false;
+          description
+            "Attempts times(the value is 1).";
+        }
+        leaf drops {
+          type uint32 {
+            range "0..65535";
+          }
+          config false;
+          description
+            "Number of packets lost.";
+        }
+        leaf disconnects {
+          type uint32 {
+            range "0..65535";
+          }
+          config false;
+          description
+            "Number of consecutive failures.";
+        }
+        leaf timeouts {
+          type uint32 {
+            range "0..65535";
+          }
+          units "s";
+          config false;
+          description
+            "Timeout period.";
+        }
+        leaf busies {
+          type uint32 {
+            range "0..65535";
+          }
+          config false;
+          description
+            "Number of times that system is busy.";
+        }
+        leaf no-connections {
+          type uint32 {
+            range "0..65535";
+          }
+          config false;
+          description
+            "Number of connection errors.";
+        }
+        leaf sequence-errors {
+          type uint32 {
+            range "0..65535";
+          }
+          config false;
+          description
+            "Number of packets index errors.";
+        }
+        leaf rtt-status-errors {
+          type uint32 {
+            range "0..65535";
+          }
+          config false;
+          description
+            "Number of Rtt statistical failures.";
+        }
+        leaf dest-address {
+          type inet:ip-address-no-zone;
+          config false;
+          description
+            "Destination IP address.";
+        }
+        leaf rtt-min {
+          type uint32 {
+            range "0..65535";
+          }
+          config false;
+          description
+            "Minimum RTT of all test packets, expressed in milliseconds. ";
+        }
+        leaf rtt-average {
+          type uint32 {
+            range "0..65535";
+          }
+          config false;
+          description
+            "Average RTT of all test packets, expressed in milliseconds. ";
+        }
+        leaf rtt-max {
+          type uint32 {
+            range "0..65535";
+          }
+          config false;
+          description
+            "Maximum RTT of all test packets, expressed in milliseconds. ";
+        }
+        leaf rtt-sum {
+          type uint32 {
+            range "0..65535";
+          }
+          config false;
+          description
+            "Sum of all test packets'RTT, expressed in milliseconds. ";
+        }
+        leaf rtt-sum-square {
+          type uint64;
+          config false;
+          description
+            "Sum of RTT square.";
+        }
+        leaf packet-loss-ratio {
+          type uint8 {
+            range "0..100";
+          }
+          units "%";
+          config false;
+          description
+            "Packet loss ratio.";
+        }
+        leaf last-probe-time {
+          type yang:date-and-time;
+          config false;
+          description
+            " Last good probe time.";
+        }
+      }
+    }
+    container trace-results {
+      description
+        "List of NQA test instance test trace result record table.";
+      list trace-result {
+        key "admin-name test-name running-index";
+        config false;
+        description
+          "Statistics of NQA test instance test trace result record table.";
+        leaf admin-name {
+          type string {
+            length "1..32";
+          }
+          description
+            "Administrator name.";
+        }
+        leaf test-name {
+          type string {
+            length "1..32";
+          }
+          description
+            "Test instance name.";
+        }
+        leaf running-index {
+          type uint32 {
+            range "0..100000";
+          }
+          description
+            "Running index.";
+        }
+        leaf status {
+          type test-finsh-status-type;
+          description
+            "Test finished status ";
+        }
+        leaf completions {
+          type result-status-type;
+          description
+            "Running results.";
+        }
+        leaf disconnects {
+          type uint32 {
+            range "0..65535";
+          }
+          description
+            "Number of consecutive failures.";
+        }
+        leaf test-attempts {
+          type uint32 {
+            range "1..100000";
+          }
+          description
+            "Attempts times(the value is 1).";
+        }
+        leaf timeouts {
+          type uint32 {
+            range "0..65535";
+          }
+          units "s";
+          description
+            "Timeout period.";
+        }
+        leaf busies {
+          type uint32 {
+            range "0..65535";
+          }
+          description
+            "Number of times that system is busy.";
+        }
+        leaf no-connections {
+          type uint32 {
+            range "0..65535";
+          }
+          description
+            "Number of connection errors.";
+        }
+        leaf sequence-errors {
+          type uint32 {
+            range "0..65535";
+          }
+          description
+            "Number of packets index errors.";
+        }
+        leaf rtt-status-errors {
+          type uint32 {
+            range "0..65535";
+          }
+          description
+            "Number of Rtt statistical failures.";
+        }
+        leaf drops {
+          type uint32 {
+            range "0..65535";
+          }
+          description
+            "Number of packets lost.";
+        }
+        container hops {
+          description
+            "List of result records of a single hop.";
+          list hop {
+            key "index";
+            description
+              "Statistics of result records of a single hop.";
+            leaf index {
+              type uint32 {
+                range "1..1000000";
+              }
+              description
+                "Hop index.";
+            }
+            leaf sent-probes {
+              type uint32 {
+                range "0..65535";
+              }
+              description
+                "Total number of sent packets.";
+            }
+            leaf response-probes {
+              type uint32 {
+                range "0..65535";
+              }
+              description
+                "Total number of received packets.";
+            }
+            leaf rtt-min {
+              type uint32 {
+                range "0..65535";
+              }
+              description
+                "Minimum RTT of all test packets, expressed in milliseconds. ";
+            }
+            leaf rtt-average {
+              type uint32 {
+                range "0..65535";
+              }
+              description
+                "Average RTT of all test packets, expressed in milliseconds. ";
+            }
+            leaf rtt-max {
+              type uint32 {
+                range "0..65535";
+              }
+              description
+                "Maximum RTT of all test packets, expressed in milliseconds. ";
+            }
+            leaf rtt-sum {
+              type uint32 {
+                range "0..65535";
+              }
+              description
+                "Sum of all test packets'RTT, expressed in milliseconds. ";
+            }
+            leaf rtt-sum-square {
+              type uint64;
+    
+              description
+                "Sum of RTT square.";
+            }
+            leaf rtd-thresholds {
+              type uint32 {
+                range "0..65535";
+              }
+              description
+                "Counts of RTD over Threshold.";
+            }
+            leaf last-probe-time {
+              type yang:date-and-time;
+    
+              description
+                " Last good probe time.";
+            }
+            leaf dest-address {
+              type inet:ip-address-no-zone;
+    
+              description
+                "Destination IP address.";
+            }
+            leaf packet-loss-ratio {
+              type uint8 {
+                range "0..100";
+              }
+              units "%";
+              description
+                "Packet loss ratio.";
+            }
+          }
+        }
+      }
+    }
+    container jitter-results {
+      config false;
+      description
+        "List of NQA jitter test instance test result record table.";
+      list jitter-result {
+        key "admin-name test-name running-index";
+        config false;
+        description
+          "Statistics of NQA jitter test instance test result record table.";
+        leaf admin-name {
+          type string {
+            length "1..32";
+          }
+          config false;
+          description
+            "Administrator name.";
+        }
+        leaf test-name {
+          type string {
+            length "1..32";
+          }
+          config false;
+          description
+            "Test instance name.";
+        }
+        leaf running-index {
+          type uint32 {
+            range "0..100000";
+          }
+          config false;
+          description
+            "Running index.";
+        }
+        leaf status {
+          type test-finsh-status-type;
+          config false;
+          description
+            "Test finished status (finished or running).";
+        }
+        leaf sent-probes {
+          type uint32;
+          config false;
+          description
+            "Number of packet send.";
+        }
+        leaf response-probes {
+          type uint32;
+          config false;
+          description
+            "Number of packet response.";
+        }
+        leaf completions {
+          type result-status-type;
+          config false;
+          description
+            "Running results.";
+        }
+        leaf rtd-thresholds {
+          ext:hidden ui;
+          type uint32;
+          config false;
+          description
+            "Number of RTT threshold.";
+        }
+        leaf owd-thresholds-sd {
+          type uint32;
+          ext:hidden ui;
+          config false;
+          description
+            "Number of RTT threshold from source to destination.";
+        }
+        leaf owd-thresholds-ds {
+          type uint32;
+          ext:hidden ui;
+          config false;
+          description
+            "Number of RTT threshold from destination to source.";
+        }
+        leaf rtt-min {
+          type uint32;
+          config false;
+          description
+            "Minimum RTT.";
+        }
+        leaf rtt-average {
+          type uint32;
+          config false;
+          description
+            "Average RTT.";
+        }
+        leaf rtt-max {
+          type uint32;
+          config false;
+          description
+            "Maximum RTT.";
+        }
+        leaf rtt-sum {
+          type uint32;
+          config false;
+          description
+            "Sum of RTT.";
+        }
+        leaf rtt-sum-square {
+          type uint64;
+          ext:hidden ui;
+          config false;
+          description
+            "Sum of RTT square.";
+        }
+        leaf num-of-rtt {
+          type uint32;
+          config false;
+          description
+            "Number of RTT.";
+        }
+        leaf drops {
+          ext:hidden ui;
+          type uint32;
+          config false;
+          description
+            "Number of packet drop.";
+        }
+        leaf sequence-errors {
+          type uint32;
+          ext:hidden ui;
+          config false;
+          description
+            "Number of sequence errors.";
+        }
+        leaf rtt-status-errors {
+          type uint32;
+          ext:hidden ui;
+          config false;
+          description
+            "Number of Rtt statistical failures.";
+        }
+        leaf busies {
+          type uint32;
+          ext:hidden ui;
+          config false;
+          description
+            "Number of busy errors.";
+        }
+        leaf timeouts {
+          type uint32;
+          ext:hidden ui;
+          config false;
+          description
+            "Number of timeout.";
+        }
+        leaf min-jitter-psd {
+          type uint32;
+          ext:hidden ui;
+          config false;
+          description
+            "Minimum positive jitter from source to destination.";
+        }
+        leaf max-jitter-psd {
+          type uint32;
+          ext:hidden ui;
+          config false;
+          description
+            "Maximum positive jitter from source to destination.";
+        }
+        leaf num-jitter-psd {
+          type uint32;
+          ext:hidden ui;
+          config false;
+          description
+            "Number of positive jitter from source to destination.";
+        }
+        leaf sum-jitter-psd {
+          type uint32;
+          ext:hidden ui;
+          config false;
+          description
+            "Sum of positive jitter from source to destination.";
+        }
+        leaf square-sum-jitter-psd {
+          type uint64;
+          ext:hidden ui;
+          config false;
+          description
+            "Square sum of positive jitter from source to destination.";
+        }
+        leaf min-jitter-nsd {
+          type uint32;
+          ext:hidden ui;
+          config false;
+          description
+            "Minimum negative jitter from source to destination.";
+        }
+        leaf max-jitter-nsd {
+          type uint32;
+          ext:hidden ui;
+          config false;
+          description
+            "Maximum negative jitter from source to destination.";
+        }
+        leaf num-jitter-nsd {
+          type uint32;
+          ext:hidden ui;
+          config false;
+          description
+            "Number of negative jitter from source to destination.";
+        }
+        leaf sum-jitter-nsd {
+          type uint32;
+          ext:hidden ui;
+          config false;
+          description
+            "Sum of negative jitter from source to destination.";
+        }
+        leaf square-sum-jitter-nsd {
+          type uint64;
+          ext:hidden ui;
+          config false;
+          description
+            "Square sum of negative jitter from source to destination.";
+        }
+        leaf min-jitter-pds {
+          type uint32;
+          ext:hidden ui;
+          config false;
+          description
+            "Minimum positive jitter from destination to source.";
+        }
+        leaf max-jitter-pds {
+          type uint32;
+          ext:hidden ui;
+          config false;
+          description
+            "Maximum positive jitter from destination to source.";
+        }
+        leaf num-jitter-pds {
+          type uint32;
+          ext:hidden ui;
+          config false;
+          description
+            "Number of positive jitter from destination to source.";
+        }
+        leaf sum-jitter-pds {
+          type uint32;
+          ext:hidden ui;
+          config false;
+          description
+            "Sum of positive jitter from destination to source.";
+        }
+        leaf square-sum-jitter-pds {
+          type uint32;
+          ext:hidden ui;
+          config false;
+          description
+            "Square sum of positive jitter from destination to source.";
+        }
+        leaf min-jitter-nds {
+          type uint32;
+          ext:hidden ui;
+          config false;
+          description
+            "Minimum negative jitter from destination to source.";
+        }
+        leaf max-jitter-nds {
+          type uint32;
+          ext:hidden ui;
+          config false;
+          description
+            "Maximum negative jitter from destination to source.";
+        }
+        leaf num-jitter-nds {
+          type uint32;
+          ext:hidden ui;
+          config false;
+          description
+            "Number of negative jitter from destination to source.";
+        }
+        leaf sum-jitter-nds {
+          type uint32;
+          ext:hidden ui;
+          config false;
+          description
+            "Sum of negative jitter from destination to source.";
+        }
+        leaf square-sum-jitter-nds {
+          type uint32;
+          ext:hidden ui;
+          config false;
+          description
+            "Square sum of negative jitter from destination to source.";
+        }
+        leaf min-delay-sd {
+          type uint32;
+          ext:hidden ui;
+          config false;
+          description
+            "Minimum delay from source to destination.";
+        }
+        leaf avg-delay-sd {
+          type uint32;
+          ext:hidden ui;
+          config false;
+          description
+            "Average delay from source to destination.";
+        }
+        leaf max-delay-sd {
+          type uint32;
+          ext:hidden ui;
+          config false;
+          description
+            "Maximum delay from source to destination.";
+        }
+        leaf square-sum-delay-sd {
+          type uint64;
+          ext:hidden ui;
+          config false;
+          description
+            "Square sum of delay from source to destination.";
+        }
+        leaf min-delay-ds {
+          type uint32;
+          ext:hidden ui;
+          config false;
+          description
+            "Minimum delay from destination to source.";
+        }
+        leaf avg-delay-ds {
+          type uint32;
+          ext:hidden ui;
+          config false;
+          description
+            "Average delay from destination to source.";
+        }
+        leaf max-delay-ds {
+          type uint32;
+          ext:hidden ui;
+          config false;
+          description
+            "Maximum delay from destination to source.";
+        }
+        leaf square-sum-delay {
+          type uint32;
+          ext:hidden ui;
+          config false;
+          description
+            "Square sum of delay from destination to source.";
+        }
+        leaf packet-loss-sd {
+          type uint32;
+          ext:hidden ui;
+          config false;
+          description
+            "Number of Loss packet from source to destination.";
+        }
+        leaf packet-loss-ds {
+          type uint32;
+          ext:hidden ui;
+          config false;
+          description
+            "Number of Loss packet from destination to source.";
+        }
+        leaf packet-loss-unknown {
+          type uint32;
+          ext:hidden ui;
+          config false;
+          description
+            "Number of unknown packet.";
+        }
+        leaf average-jitter {
+          type uint32;
+          config false;
+          description
+            "Average jitter.";
+        }
+        leaf average-jitter-sd {
+          type uint32;
+          ext:hidden ui;
+          config false;
+          description
+            "Average jitter from source to destination.";
+        }
+        leaf average-jitter-ds {
+          type uint32;
+          ext:hidden ui;
+          config false;
+          description
+            "Average jitter from destination to source.";
+        }
+        leaf jitter-out {
+          type string {
+            length "0..11";
+          }
+          ext:hidden ui;
+          config false;
+          description
+            "Jitter of send packet.";
+        }
+        leaf jitter-in {
+          type string {
+            length "0..11";
+          }
+          ext:hidden ui;
+          config false;
+          description
+            "Jitter of receive packet.";
+        }
+        leaf num-of-owd {
+          type uint32;
+          config false;
+          description
+            "Number of OWD.";
+        }
+        leaf packet-loss-ratio {
+          type uint32;
+          config false;
+          description
+            "Packet loss ratio.";
+        }
+        leaf owd-sum-sd {
+          type uint32;
+          ext:hidden ui;
+          config false;
+          description
+            "Sum of delay from source to destination.";
+        }
+        leaf owd-sum-ds {
+          type uint32;
+          ext:hidden ui;
+          config false;
+          description
+            "Sum of delay from destination to source.";
+        }
+        leaf icpif {
+          type uint32;
+          config false;
+          description
+            "ICPIF value.";
+        }
+        leaf mos-cq {
+          type uint32;
+          config false;
+          description
+            "MOS value.";
+        }
+        leaf time-unit {
+          type uint8;
+          config false;
+          description
+            "Timestamp unit(0:millisecond, 1:microsecond).";
+        }
+      }
+    }
+    container path-jitter-results {
+      config false;
+      ext:hidden ui;
+      description
+        "List of NQA path jitter test instance test result record table.";
+      list path-jitter-result {
+        key "admin-name test-name running-index";
+        config false;
+        description
+          "Statistics of NQA path jitter test instance test result record table.";
+        leaf admin-name {
+          type string {
+            length "1..32";
+          }
+          config false;
+          description
+            "Administrator name.";
+        }
+        leaf test-name {
+          type string {
+            length "1..32";
+          }
+          config false;
+          description
+            "Test instance name.";
+        }
+        leaf running-index {
+          type uint32 {
+            range "0..100000";
+          }
+          config false;
+          description
+            "Running index.";
+        }
+        leaf path-status {
+          type result-path-jitter-status-type;
+          config false;
+          description
+            "Test instance status.";
+        }
+        leaf status {
+          type test-finsh-status-type;
+          config false;
+          description
+            "Test finished status (finished or running).";
+        }
+        leaf trace-completions {
+          type result-status-type;
+          config false;
+          description
+            "Running results.";
+        }
+        container path-jitter-hops {
+          config false;
+          description
+            "List of result records of a single hop.";
+          list path-jitter-hop {
+            key "index";
+            config false;
+            description
+              "Statistics of result records of a single hop.";
+            leaf index {
+              type uint32 {
+                range "1..1000000";
+              }
+              config false;
+              description
+                "Hop index.";
+            }
+            leaf dest-address {
+              type inet:ipv4-address-no-zone;
+              config false;
+              description
+                "Destination IP address.";
+            }
+            leaf jitter-completions {
+              type result-status-type;
+              config false;
+              description
+                "Running results.";
+            }
+            leaf jitter-status {
+              type test-finsh-status-type;
+              config false;
+              description
+                "Test finished status (finished or running).";
+            }
+            leaf sent-probes {
+              type uint32;
+              config false;
+              description
+                "Number of packet send.";
+            }
+            leaf response-probes {
+              type uint32;
+              config false;
+              description
+                "Number of packet response.";
+            }
+            leaf rtt-min {
+              type uint32;
+              config false;
+              description
+                "Minimum RTT.";
+            }
+            leaf rtt-max {
+              type uint32;
+              config false;
+              description
+                "Maximum RTT.";
+            }
+            leaf rtt-average {
+              type uint32;
+              config false;
+              description
+                "Average RTT.";
+            }
+            leaf rtt-sum {
+              type uint32;
+              config false;
+              description
+                "Sum of RTT.";
+            }
+            leaf rtt-sum-square {
+              type uint64;
+              config false;
+              description
+                "Sum of RTT square.";
+            }
+            leaf num-of-rtt {
+              type uint32;
+              config false;
+              description
+                "Number of RTT.";
+            }
+            leaf drops {
+              type uint32;
+              config false;
+              description
+                "Number of packet drop.";
+            }
+            leaf sequence-errors {
+              type uint32;
+              config false;
+              description
+                "Number of sequence errors.";
+            }
+            leaf rtt-status-errors {
+              type uint32;
+              config false;
+              description
+                "Number of other errors.";
+            }
+            leaf busies {
+              type uint32;
+              config false;
+              description
+                "Number of busy errors.";
+            }
+            leaf timeouts {
+              type uint32;
+              config false;
+              description
+                "Number of timeout.";
+            }
+            leaf min-jitter-psd {
+              type uint32;
+              config false;
+              description
+                "Minimum positive jitter from source to destination.";
+            }
+            leaf max-jitter-psd {
+              type uint32;
+              config false;
+              description
+                "Maximum positive jitter from source to destination.";
+            }
+            leaf num-jitter-psd {
+              type uint32;
+              config false;
+              description
+                "Number of positive jitter from source to destination.";
+            }
+            leaf sum-jitter-psd {
+              type uint32;
+              config false;
+              description
+                "Sum of positive jitter from source to destination.";
+            }
+            leaf square-sum-jitter-psd {
+              type uint64;
+              config false;
+              description
+                "Square sum of positive jitter from source to destination.";
+            }
+            leaf min-jitter-nsd {
+              type uint32;
+              config false;
+              description
+                "Minimum negative jitter from source to destination.";
+            }
+            leaf max-jitter-nsd {
+              type uint32;
+              config false;
+              description
+                "Maximum negative jitter from source to destination.";
+            }
+            leaf num-jitter-nsd {
+              type uint32;
+              config false;
+              description
+                "Number of negative jitter from source to destination.";
+            }
+            leaf sum-jitter-nsd {
+              type uint32;
+              config false;
+              description
+                "Sum of negative jitter from source to destination.";
+            }
+            leaf square-sum-jitter-nsd {
+              type uint64;
+              config false;
+              description
+                "Square sum of negative jitter from source to destination.";
+            }
+            leaf min-jitter-pds {
+              type uint32;
+              config false;
+              description
+                "Minimum positive jitter from destination to source.";
+            }
+            leaf max-jitter-pds {
+              type uint32;
+              config false;
+              description
+                "Maximum positive jitter from destination to source.";
+            }
+            leaf num-jitter-pds {
+              type uint32;
+              config false;
+              description
+                "Number of positive jitter from destination to source.";
+            }
+            leaf sum-jitter-pds {
+              type uint32;
+              config false;
+              description
+                "Sum of positive jitter from destination to source.";
+            }
+            leaf square-sum-jitter-pds {
+              type uint64;
+              config false;
+              description
+                "Square sum of positive jitter from destination to source.";
+            }
+            leaf min-jitter-nds {
+              type uint32;
+              config false;
+              description
+                "Minimum negative jitter from destination to source.";
+            }
+            leaf max-jitter-nds {
+              type uint32;
+              config false;
+              description
+                "Maximum negative jitter from destination to source.";
+            }
+            leaf num-jitter-nds {
+              type uint32;
+              config false;
+              description
+                "Number of negative jitter from destination to source.";
+            }
+            leaf sum-jitter-nds {
+              type uint32;
+              config false;
+              description
+                "Sum of negative jitter from destination to source.";
+            }
+            leaf square-sum-jitter-nds {
+              type uint64;
+              config false;
+              description
+                "Square sum of negative jitter from destination to source.";
+            }
+            leaf max-delay-sd {
+              type uint32;
+              config false;
+              description
+                "Maximum delay from source to destination.";
+            }
+            leaf max-delay-ds {
+              type uint32;
+              config false;
+              description
+                "Maximum delay from destination to source.";
+            }
+            leaf average-jitter {
+              type uint32;
+              config false;
+              description
+                "Average jitter.";
+            }
+            leaf average-jitter-sd {
+              type uint32;
+              config false;
+              description
+                "Average jitter from source to destination.";
+            }
+            leaf average-jitter-ds {
+              type uint32;
+              config false;
+              description
+                "Average jitter from destination to source.";
+            }
+            leaf num-of-owd {
+              type uint32;
+              config false;
+              description
+                "Number of OWD.";
+            }
+            leaf owd-sum-sd {
+              type uint32;
+              config false;
+              description
+                "Sum of delay from source to destination.";
+            }
+            leaf owd-sum-ds {
+              type uint32;
+              config false;
+              description
+                "Sum of delay from destination to source.";
+            }
+            leaf jitter-out {
+              type string {
+                length "0..11";
+              }
+              config false;
+              description
+                "Jitter of send packet.";
+            }
+            leaf jitter-in {
+              type string {
+                length "0..11";
+              }
+              config false;
+              description
+                "Jitter of receive packet.";
+            }
+          }
+        }
+      }
+    }
+    container path-mtu-results {
+      config false;
+      ext:hidden ui;
+      description
+        "List of NQA path mtu test instance test result record table.";
+      list path-mtu-result {
+        key "admin-name test-name running-index";
+        config false;
+        description
+          "Statistics of NQA path mtutest instance test result record table.";
+        leaf admin-name {
+          type string {
+            length "1..32";
+          }
+          config false;
+          description
+            "Administrator name.";
+        }
+        leaf test-name {
+          type string {
+            length "1..32";
+          }
+          config false;
+          description
+            "Test instance name.";
+        }
+        leaf running-index {
+          type uint32 {
+            range "0..100000";
+          }
+          config false;
+          description
+            "Running index.";
+        }
+        leaf status {
+          type test-finsh-status-type;
+          config false;
+          description
+            "Running results.";
+        }
+        leaf completions {
+          type result-status-type;
+          config false;
+          description
+            "Running results.";
+        }
+        leaf dest-address {
+          type inet:ipv4-address-no-zone;
+          config false;
+          description
+            "Destination IP address.";
+        }
+        leaf mtu-min {
+          type uint16 {
+            range "48..9198";
+          }
+          config false;
+          description
+            "The minimum value of the path MTU test.";
+        }
+        leaf mtu-max {
+          type uint16 {
+            range "48..9198";
+          }
+          config false;
+          description
+            "The maximum value of the path MTU test.";
+        }
+        leaf mtu {
+          type uint16 {
+            range "48..9198";
+          }
+          config false;
+          description
+            "Mtu.";
+        }
+        leaf step {
+          type uint16 {
+            range "1..512";
+          }
+          config false;
+          description
+            "Test step.";
+        }
+        leaf sent-probes {
+          type uint32 {
+            range "0..65535";
+          }
+          config false;
+          description
+            "Total number of sent packets.";
+        }
+        leaf response-probes {
+          type uint32 {
+            range "0..65535";
+          }
+          config false;
+          description
+            "Total number of received packets.";
+        }
+        leaf busies {
+          type uint32 {
+            range "0..65535";
+          }
+          config false;
+          description
+            "Number of busy errors.";
+        }
+        leaf drops {
+          type uint32 {
+            range "0..65535";
+          }
+          config false;
+          description
+            "Number of packet drop.";
+        }
+        leaf timeouts {
+          type uint32 {
+            range "0..65535";
+          }
+          config false;
+          description
+            "Number of timeout.";
+        }
+      }
+    }
+    container lsp-jitter-results {
+      config false;
+      ext:hidden ui;
+      description
+        "List of NQA lsp jitter test instance test result record table.";
+      list lsp-jitter-result {
+        key "admin-name test-name running-index";
+        config false;
+        description
+          "Statistics of NQA lsp jitter test instance test result record table.";
+        leaf admin-name {
+          type string {
+            length "1..32";
+          }
+          config false;
+          description
+            "Administrator name.";
+        }
+        leaf test-name {
+          type string {
+            length "1..32";
+          }
+          config false;
+          description
+            "Test instance name.";
+        }
+        leaf running-index {
+          type uint32 {
+            range "0..100000";
+          }
+          config false;
+          description
+            "Running index.";
+        }
+        leaf status {
+          type test-finsh-status-type;
+          config false;
+          description
+            "Running results.";
+        }
+        leaf completions {
+          type result-status-type;
+          config false;
+          description
+            "Running results.";
+        }
+        leaf sent-probes {
+          type uint32;
+          config false;
+          description
+            "Number of packet send.";
+        }
+        leaf probe-responses {
+          type uint32;
+          config false;
+          description
+            "Number of packet response.";
+        }
+        leaf rtd-thresholds {
+          type uint32;
+          config false;
+          description
+            "Number of RTT threshold.";
+        }
+        leaf rtt-min {
+          type uint32;
+          config false;
+          description
+            "Minimum RTT.";
+        }
+        leaf rtt-max {
+          type uint32;
+          config false;
+          description
+            "Maximum RTT.";
+        }
+        leaf rtt-average {
+          type uint32;
+          config false;
+          description
+            "Average RTT.";
+        }
+        leaf rtt-sum {
+          type uint32;
+          config false;
+          description
+            "Sum of RTT.";
+        }
+        leaf rtt-sum-square {
+          type uint64;
+          config false;
+          description
+            "Square sum of RTT.";
+        }
+        leaf num-of-rtt {
+          type uint32;
+          config false;
+          description
+            "Number of RTT.";
+        }
+        leaf sequence-errors {
+          type uint32;
+          config false;
+          description
+            "Number of sequence errors.";
+        }
+        leaf rtt-status-errors {
+          type uint32;
+          config false;
+          description
+            "Number of other errors.";
+        }
+        leaf busies {
+          type uint32;
+          config false;
+          description
+            "Number of busy errors.";
+        }
+        leaf timeouts {
+          type uint32;
+          config false;
+          description
+            "Number of timeout.";
+        }
+        leaf drops {
+          type uint32;
+          config false;
+          description
+            "Number of packet drop.";
+        }
+        leaf min-jitter-psd {
+          type uint32;
+          config false;
+          description
+            "Minimum positive jitter from source to destination.";
+        }
+        leaf max-jitter-psd {
+          type uint32;
+          config false;
+          description
+            "Maximum positive jitter from source to destination.";
+        }
+        leaf num-jitter-psd {
+          type uint32;
+          config false;
+          description
+            "Number of positive jitter from source to destination.";
+        }
+        leaf sum-jitter-psd {
+          type uint32;
+          config false;
+          description
+            "Sum of positive jitter from source to destination.";
+        }
+        leaf square-sum-jitter-psd {
+          type uint64;
+          config false;
+          description
+            "Square sum of positive jitter from source to destination.";
+        }
+        leaf min-jitter-nsd {
+          type uint32;
+          config false;
+          description
+            "Minimum negative jitter from source to destination.";
+        }
+        leaf max-jitter-nsd {
+          type uint32;
+          config false;
+          description
+            "Maximum negative jitter from source to destination.";
+        }
+        leaf num-jitter-nsd {
+          type uint32;
+          config false;
+          description
+            "Number of negative jitter from source to destination.";
+        }
+        leaf sum-jitter-nsd {
+          type uint32;
+          config false;
+          description
+            "Sum of negative jitter from source to destination.";
+        }
+        leaf square-sum-jitter-nsd {
+          type uint64;
+          config false;
+          description
+            "Square sum of negative jitter from source to destination.";
+        }
+        leaf average-jitter-sd {
+          type uint32;
+          config false;
+          description
+            "Average jitter from source to destination.";
+        }
+        leaf packet-loss-unknown {
+          type uint32;
+          config false;
+          description
+            "Number of unknown packet.";
+        }
+        leaf jitter-out {
+          type string {
+            length "0..11";
+          }
+          config false;
+          description
+            "Jitter of send packet.";
+        }
+        leaf packet-loss-ratio {
+          type uint32;
+          config false;
+          description
+            "Packet loss ratio.";
+        }
+      }
+    }
+    container general-flow-results {
+      config false;
+      ext:hidden ui;
+      description
+        "List of NQA generalflow service test result.";
+      list general-flow-result {
+        key "admin-name test-name running-index";
+        config false;
+        description
+          "Statistics of NQA generalflow service test result.";
+        leaf admin-name {
+          type string {
+            length "1..32";
+          }
+          config false;
+          description
+            "Administrator name.";
+        }
+        leaf test-name {
+          type string {
+            length "1..32";
+          }
+          config false;
+          description
+            "Test name.";
+        }
+        leaf running-index {
+          type uint32 {
+            range "0..4294967295";
+          }
+          config false;
+          description
+            "Test instance running index.";
+        }
+        leaf status {
+          type test-finsh-status-type;
+          config false;
+          description
+            "Test finished status (finished or running).";
+        }
+        leaf measure {
+          type test-record-measure-type;
+          config false;
+          description
+            "Test mode.";
+        }
+        leaf rate-class {
+          type test-record-rate-type;
+          config false;
+          description
+            "Rate class.";
+        }
+        leaf total-time {
+          type uint32 {
+            range "0..4294967295";
+          }
+          config false;
+          description
+            "Test total time.";
+        }
+        leaf path-learning-time {
+          type uint32 {
+            range "0..4294967295";
+          }
+          config false;
+          description
+            "Path learning time.";
+        }
+        leaf test-time {
+          type uint32 {
+            range "0..4294967295";
+          }
+          config false;
+          description
+            "Test Time.";
+        }
+        leaf estimate-remain-time {
+          type uint32 {
+            range "0..4294967295";
+          }
+          config false;
+          description
+            "Estimated test time.";
+        }
+        leaf start-test-time {
+          type yang:date-and-time;
+          config false;
+          description
+            "Start test time of a Test.";
+        }
+        leaf end-test-time {
+          type yang:date-and-time;
+          config false;
+          description
+            "End test time of a Test.";
+        }
+        container gflow-details {
+          config false;
+          description
+            "List of NQA generalflow service test detail result.";
+          list gflow-detail {
+            key "index";
+            config false;
+            description
+              "Statistics of NQA generalflow service test detail result.";
+            leaf index {
+              type uint16 {
+                range "1..65535";
+              }
+              config false;
+              description
+                "Index of the test detail result table.";
+            }
+            leaf completions {
+              type gflow-result-status;
+              config false;
+              description
+                "Running results.";
+            }
+            leaf packet-size {
+              type uint32 {
+                range "0..4294967295";
+              }
+              config false;
+              description
+                "Packet size.";
+            }
+            leaf throughput {
+              type uint32 {
+                range "0..4294967295";
+              }
+              config false;
+              description
+                "Throughput.";
+            }
+            leaf precision {
+              type uint32 {
+                range "0..4294967295";
+              }
+              config false;
+              description
+                "Throughput Test Precision.";
+            }
+            leaf loss-ratio {
+              type string {
+                length "0..14";
+              }
+              config false;
+              description
+                "Packet loss ratio (%).";
+            }
+            leaf rtt-min {
+              type uint32 {
+                range "0..4294967295";
+              }
+              config false;
+              description
+                "Minimum RTT of all test packets, expressed in microseconds. ";
+            }
+            leaf rtt-max {
+              type uint32 {
+                range "0..4294967295";
+              }
+              config false;
+              description
+                "Maximum RTT of all test packets, expressed in microseconds. ";
+            }
+            leaf rtt-average {
+              type uint32 {
+                range "0..4294967295";
+              }
+              config false;
+              description
+                "Average RTT of all test packets, expressed in microseconds. ";
+            }
+            leaf jitter-min {
+              type uint32 {
+                range "0..4294967295";
+              }
+              config false;
+              description
+                "Minimum JITTER of all test packets. ";
+            }
+            leaf jitter-max {
+              type uint32 {
+                range "0..4294967295";
+              }
+              config false;
+              description
+                "Maximum JITTER of all test packets. ";
+            }
+            leaf jitter-average {
+              type uint32 {
+                range "0..4294967295";
+              }
+              config false;
+              description
+                "Average JITTER of all test packets. ";
+            }
+            leaf send-rate {
+              type uint32 {
+                range "0..4294967295";
+              }
+              config false;
+              description
+                "Send Rate (kbit/s).";
+            }
+            leaf receive-rate {
+              type uint32 {
+                range "0..4294967295";
+              }
+              config false;
+              description
+                "Receive Rate (kbit/s).";
+            }
+            leaf send-conut {
+              type uint64;
+              config false;
+              description
+                "Total number of sent packets.";
+            }
+            leaf receive-conut {
+              type uint64;
+              config false;
+              description
+                "Total number of received packets.";
+            }
+          }
+        }
+      }
+    }
+    container ethernet-service-results {
+      config false;
+      ext:hidden ui;
+      description
+        "List of NQA Ethernet service test result.";
+      list ethernet-service-result {
+        key "admin-name test-name running-index";
+        config false;
+        description
+          "Statistics of NQA Ethernet service test result.";
+        leaf admin-name {
+          type string {
+            length "1..32";
+          }
+          config false;
+          description
+            "Administrator name.";
+        }
+        leaf test-name {
+          type string {
+            length "1..32";
+          }
+          config false;
+          description
+            "Test name.";
+        }
+        leaf running-index {
+          type uint32 {
+            range "0..4294967295";
+          }
+          config false;
+          description
+            "Test instance running index.";
+        }
+        leaf real-test-time {
+          type uint32 {
+            range "0..4294967295";
+          }
+          config false;
+          description
+            "Real test time.";
+        }
+        leaf estimate-test-time {
+          type uint32 {
+            range "0..4294967295";
+          }
+          config false;
+          description
+            "Estimated test time.";
+        }
+        leaf test-result-index {
+          type uint32 {
+            range "0..4294967295";
+          }
+          config false;
+          description
+            "Test instance result index.";
+        }
+        leaf test-finish-status {
+          type test-finsh-status-type;
+          config false;
+          description
+            "Test finished status (finished or running).";
+        }
+        container flow-step-fins {
+          config false;
+          description
+            "List of test step status list.";
+          list flow-step-fin {
+            key "flow-id test-step";
+            config false;
+            description
+              "Statistics of test step status table.";
+            leaf flow-id {
+              type uint16 {
+                range "1..65535";
+              }
+              config false;
+              description
+                "Test flow ID.";
+            }
+            leaf test-step {
+              type test-step-type;
+              config false;
+              description
+                "Test step.";
+            }
+            leaf fin-status {
+              type test-finsh-status-type;
+              config false;
+              description
+                "Test step finished status (finished or running).";
+            }
+          }
+        }
+        leaf test-result {
+          type test-result-type;
+          config false;
+          description
+            "Test result status (pass, failed, abort, or abnormal).";
+        }
+        leaf flow-num {
+          type uint8 {
+            range "1..16";
+          }
+          config false;
+          description
+            "Test flow number banded by a test instance.";
+        }
+        leaf mode {
+          type test-mode-type;
+          config false;
+          description
+            "Test mode (The round-trip mode is only supported).";
+        }
+        leaf last-step {
+          type test-last-step-type;
+          config false;
+          description
+            "Last test step.";
+        }
+        container test-unit-steps {
+          config false;
+          description
+            "List of test step list.";
+          list test-unit-step {
+            key "flow-id test-step";
+            config false;
+            description
+              "Statistics of test step table.";
+            leaf flow-id {
+              type uint16 {
+                range "1..65535";
+              }
+              config false;
+              description
+                "Test flow ID.";
+            }
+            leaf test-step {
+              type test-step-type;
+              config false;
+              description
+                "Test step.";
+            }
+            leaf test-stage {
+              type test-stage-type;
+              config false;
+              description
+                "Test stage (configuration or performance stage).";
+            }
+            leaf begin-time {
+              type yang:date-and-time;
+              config false;
+              description
+                "Start test time of a Test Unit.";
+            }
+            leaf end-time {
+              type yang:date-and-time;
+              config false;
+              description
+                "End test time of a Test Unit.";
+            }
+            leaf test-result {
+              type test-result-type;
+              config false;
+              description
+                "Test result status (pass, failed, abort, or abnormal).";
+            }
+            leaf min-information-rate {
+              type uint32 {
+                range "0..4294967295";
+              }
+              config false;
+              description
+                "Minimum information rate (kbit/s).";
+            }
+            leaf max-information-rate {
+              type uint32 {
+                range "0..4294967295";
+              }
+              config false;
+              description
+                "Maximum information rate (kbit/s).";
+            }
+            leaf mean-information-rate {
+              type uint32 {
+                range "0..4294967295";
+              }
+              config false;
+              description
+                "Mean information rate (kbit/s).";
+            }
+            leaf min-frame-trans-delay {
+              type uint32 {
+                range "0..4294967295";
+              }
+              config false;
+              description
+                "Minimum frame transmission delay (us).";
+            }
+            leaf max-frame-trans-delay {
+              type uint32 {
+                range "0..4294967295";
+              }
+              config false;
+              description
+                "Maximum frame transmission delay (us).";
+            }
+            leaf mean-frame-trans-delay {
+              type uint32 {
+                range "0..4294967295";
+              }
+              config false;
+              description
+                "Mean frame transmission delay (us).";
+            }
+            leaf min-frame-delay-vari {
+              type uint32 {
+                range "0..4294967295";
+              }
+              config false;
+              description
+                "Minimum frame delay variation (us).";
+            }
+            leaf max-frame-delay-vari {
+              type uint32 {
+                range "0..4294967295";
+              }
+              config false;
+              description
+                "Maximum frame delay variation (us).";
+            }
+            leaf mean-frame-delay-vari {
+              type uint32 {
+                range "0..4294967295";
+              }
+              config false;
+              description
+                "Mean frame delay variation (us).";
+            }
+            leaf frame-loss-count {
+              type uint64;
+              config false;
+              description
+                "Frame loss count.";
+            }
+            leaf frame-packet-loss-ratio {
+              type string {
+                length "0..49";
+              }
+              config false;
+              description
+                "Frame loss ratio (0.001%).";
+            }
+            leaf unavail-count {
+              type uint32;
+              config false;
+              description
+                "Unavailable seconds count.";
+            }
+            leaf avail-ratio {
+              type string {
+                length "0..49";
+              }
+              config false;
+              description
+                "Available seconds Ratio (0.001%).";
+            }
+          }
+        }
+      }
+    }
+    container multi-path-results {
+      config false;
+      ext:hidden ui;
+      description
+        "List of NQA test instance multi path test result record list.";
+      list multi-path-result {
+        key "admin-name test-name running-index path-index";
+        config false;
+        description
+          "Statistics of NQA test instance test result record table.";
+        leaf admin-name {
+          type string {
+            length "1..32";
+          }
+          config false;
+          description
+            "Administrator name.";
+        }
+        leaf test-name {
+          type string {
+            length "1..32";
+          }
+          config false;
+          description
+            "Test instance name.";
+        }
+        leaf running-index {
+          type uint32 {
+            range "0..100000";
+          }
+          config false;
+          description
+            "Running index.";
+        }
+        leaf path-index {
+          type uint32;
+          config false;
+          description
+            "Lsp index.";
+        }
+        leaf preference {
+          type uint32;
+          config false;
+          description
+            "Path preference.";
+        }
+        leaf path-type {
+          type lsp-sr-policy-path;
+          config false;
+          description
+            "PathType.";
+        }
+        leaf protocol-origin {
+          type lsp-protocol-origin;
+          config false;
+          description
+            "Protocol Origin.";
+        }
+        leaf node-address {
+          type inet:ipv4-address-no-zone;
+          config false;
+          description
+            "Endpoint IP address.";
+        }
+        leaf discriminator {
+          type uint32;
+          config false;
+          description
+            "Discriminator.";
+        }
+        leaf segment-list-id {
+          type uint32;
+          config false;
+          description
+            "Segment-list ID.";
+        }
+        leaf xc-index {
+          type uint32;
+          config false;
+          description
+            "XC index.";
+        }
+        leaf status {
+          type test-finsh-status-type;
+          config false;
+          description
+            "Test finished status (finished or running).";
+        }
+        leaf completions {
+          type result-status-type;
+          config false;
+          description
+            "Running results.";
+        }
+        leaf sent-probes {
+          type uint32 {
+            range "0..65535";
+          }
+          config false;
+          description
+            "Total number of sent packets.";
+        }
+        leaf response-probes {
+          type uint32 {
+            range "0..65535";
+          }
+          config false;
+          description
+            "Total number of received packets.";
+        }
+        leaf rtd-thresholds {
+          type uint32 {
+            range "0..65535";
+          }
+          config false;
+          description
+            "Counts of RTD over Threshold.";
+        }
+        leaf test-attempts {
+          type uint32 {
+            range "1..100000";
+          }
+          config false;
+          description
+            "Attempts times(the value is 1).";
+        }
+        leaf drops {
+          type uint32 {
+            range "0..65535";
+          }
+          config false;
+          description
+            "Number of packets lost.";
+        }
+        leaf disconnects {
+          type uint32 {
+            range "0..65535";
+          }
+          config false;
+          description
+            "Number of consecutive failures.";
+        }
+        leaf timeouts {
+          type uint32 {
+            range "0..65535";
+          }
+          config false;
+          description
+            "Timeout period (s).";
+        }
+        leaf busies {
+          type uint32 {
+            range "0..65535";
+          }
+          config false;
+          description
+            "Number of times that system is busy.";
+        }
+        leaf no-connections {
+          type uint32 {
+            range "0..65535";
+          }
+          config false;
+          description
+            "Number of connection errors.";
+        }
+        leaf sequence-errors {
+          type uint32 {
+            range "0..65535";
+          }
+          config false;
+          description
+            "Number of packets index errors.";
+        }
+        leaf rtt-status-errors {
+          type uint32 {
+            range "0..65535";
+          }
+          config false;
+          description
+            "Number of Rtt statistical failures.";
+        }
+        leaf dest-address {
+          type inet:ip-address-no-zone;
+          config false;
+          description
+            "Destination IP address.";
+        }
+        leaf rtt-min {
+          type uint32 {
+            range "0..65535";
+          }
+          config false;
+          description
+            "Minimum RTT of all test packets, expressed in milliseconds. ";
+        }
+        leaf rtt-average {
+          type uint32 {
+            range "0..65535";
+          }
+          config false;
+          description
+            "Average RTT of all test packets, expressed in milliseconds. ";
+        }
+        leaf rtt-max {
+          type uint32 {
+            range "0..65535";
+          }
+          config false;
+          description
+            "Maximum RTT of all test packets, expressed in milliseconds. ";
+        }
+        leaf rtt-sum {
+          type uint32 {
+            range "0..65535";
+          }
+          config false;
+          description
+            "Sum of all test packets'RTT, expressed in milliseconds. ";
+        }
+        leaf rtt-sum-square {
+          type uint64;
+          config false;
+          description
+            "Sum of RTT square.";
+        }
+        leaf packet-loss-ratio {
+          type uint8 {
+            range "0..100";
+          }
+          config false;
+          description
+            "Packet loss ratio (%).";
+        }
+        leaf last-probe-time {
+          type yang:date-and-time;
+          config false;
+          description
+            " Last good probe time.";
+        }
+      }
+    }
+    container trace-multi-path-results {
+      config false;
+      ext:hidden ui;
+      description
+        "List of NQA test instance multi path test trace result record table.";
+      list trace-multi-path-result {
+        key "admin-name test-name running-index path-index";
+        config false;
+        description
+          "Statistics of NQA test instance test trace result record table.";
+        leaf admin-name {
+          type string {
+            length "1..32";
+          }
+          config false;
+          description
+            "Administrator name.";
+        }
+        leaf test-name {
+          type string {
+            length "1..32";
+          }
+          config false;
+          description
+            "Test instance name.";
+        }
+        leaf running-index {
+          type uint32 {
+            range "0..100000";
+          }
+          config false;
+          description
+            "Running index.";
+        }
+        leaf path-index {
+          type uint32;
+          config false;
+          description
+            "Lsp index.";
+        }
+        leaf preference {
+          type uint32;
+          config false;
+          description
+            "Path preference.";
+        }
+        leaf path-type {
+          type lsp-sr-policy-path;
+          config false;
+          description
+            "PathType.";
+        }
+        leaf protocol-origin {
+          type lsp-protocol-origin;
+          config false;
+          description
+            "Protocol Origin.";
+        }
+        leaf node-address {
+          type inet:ipv4-address-no-zone;
+          config false;
+          description
+            "Endpoint IP address.";
+        }
+        leaf discriminator {
+          type uint32;
+          config false;
+          description
+            "Discriminator.";
+        }
+        leaf segment-list-id {
+          type uint32;
+          config false;
+          description
+            "Segment-list ID.";
+        }
+        leaf xc-index {
+          type uint32;
+          config false;
+          description
+            "XC index.";
+        }
+        leaf status {
+          type test-finsh-status-type;
+          config false;
+          description
+            "Test finished status (finished or running).";
+        }
+        leaf completions {
+          type result-status-type;
+          config false;
+          description
+            "Running results.";
+        }
+        leaf disconnects {
+          type uint32 {
+            range "0..65535";
+          }
+          config false;
+          description
+            "Number of consecutive failures.";
+        }
+        leaf test-attempts {
+          type uint32 {
+            range "1..100000";
+          }
+          config false;
+          description
+            "Attempts times(the value is 1).";
+        }
+        leaf timeouts {
+          type uint32 {
+            range "0..65535";
+          }
+          config false;
+          description
+            "Timeout period (s).";
+        }
+        leaf busies {
+          type uint32 {
+            range "0..65535";
+          }
+          config false;
+          description
+            "Number of times that system is busy.";
+        }
+        leaf no-connections {
+          type uint32 {
+            range "0..65535";
+          }
+          config false;
+          description
+            "Number of connection errors.";
+        }
+        leaf sequence-errors {
+          type uint32 {
+            range "0..65535";
+          }
+          config false;
+          description
+            "Number of packets index errors.";
+        }
+        leaf rtt-status-errors {
+          type uint32 {
+            range "0..65535";
+          }
+          config false;
+          description
+            "Number of Rtt statistical failures.";
+        }
+        leaf drops {
+          type uint32 {
+            range "0..65535";
+          }
+          config false;
+          description
+            "Number of packets lost.";
+        }
+        container hops {
+          config false;
+          description
+            "List of result records of a single hop.";
+          list hop {
+            key "index";
+            config false;
+            description
+              "Statistics of result records of a single hop.";
+            leaf index {
+              type uint32 {
+                range "1..1000000";
+              }
+              config false;
+              description
+                "Hop index.";
+            }
+            leaf sent-probes {
+              type uint32 {
+                range "0..65535";
+              }
+              config false;
+              description
+                "Total number of sent packets.";
+            }
+            leaf response-probes {
+              type uint32 {
+                range "0..65535";
+              }
+              config false;
+              description
+                "Total number of received packets.";
+            }
+            leaf rtt-min {
+              type uint32 {
+                range "0..65535";
+              }
+              config false;
+              description
+                "Minimum RTT of all test packets, expressed in milliseconds. ";
+            }
+            leaf rtt-average {
+              type uint32 {
+                range "0..65535";
+              }
+              config false;
+              description
+                "Average RTT of all test packets, expressed in milliseconds. ";
+            }
+            leaf rtt-max {
+              type uint32 {
+                range "0..65535";
+              }
+              config false;
+              description
+                "Maximum RTT of all test packets, expressed in milliseconds. ";
+            }
+            leaf rtt-sum {
+              type uint32 {
+                range "0..65535";
+              }
+              config false;
+              description
+                "Sum of all test packets'RTT, expressed in milliseconds. ";
+            }
+            leaf rtt-sum-square {
+              type uint64;
+              config false;
+              description
+                "Sum of RTT square.";
+            }
+            leaf rtd-thresholds {
+              type uint32 {
+                range "0..65535";
+              }
+              config false;
+              description
+                "Counts of RTD over Threshold.";
+            }
+            leaf last-probe-time {
+              type yang:date-and-time;
+              config false;
+              description
+                " Last good probe time.";
+            }
+            leaf dest-address {
+              type inet:ip-address-no-zone;
+              config false;
+              description
+                "Destination IP address.";
+            }
+            leaf packet-loss-ratio {
+              type uint8 {
+                range "0..100";
+              }
+              config false;
+              description
+                "Packet loss ratio (%).";
+            }
+          }
+        }
+      }
+    }
+  }
+}

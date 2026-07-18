@@ -1,0 +1,20 @@
+{
+  "/huawei-ifm:ifm/interfaces/interface/huawei-direct-route-vlink:vlink-routes": {
+    "name": "VLINK路由配置表"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-direct-route-vlink:vlink-routes/vlink-route": {
+    "name": "配置VLINK路由"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-direct-route-vlink:vlink-routes/vlink-route/address-family": {
+    "name": "地址族"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-direct-route-vlink:vlink-routes/vlink-route/route-policy": {
+    "name": "路由策略"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-direct-route-vlink:vlink-configuration": {
+    "name": "配置直连路由属性"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-direct-route-vlink:vlink-configuration/preference": {
+    "name": "VLINK 路由的优先级值"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "/huawei-vlan:vlan/vlans/vlan/huawei-vlan-fwd:rewrite-egr-vlan": {
+    "name": "Rewrite Outbound VLAN"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-vlan-fwd:rewrite-egr-vlan/new-vlan": {
+    "name": "New VLAN"
+  }
+}

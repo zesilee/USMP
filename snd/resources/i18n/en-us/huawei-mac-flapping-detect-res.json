@@ -1,0 +1,47 @@
+{
+  "/huawei-mac-flapping-detect:mac-flapping-detect": {
+    "name": "MAC address flapping detection"
+  },
+  "/huawei-mac-flapping-detect:mac-flapping-detect/global-attribute": {
+    "name": "MFLP detection global attribute"
+  },
+  "/huawei-mac-flapping-detect:mac-flapping-detect/global-attribute/detect-enable": {
+    "name": "MFLP detection status"
+  },
+  "/huawei-mac-flapping-detect:mac-flapping-detect/global-attribute/detect-type": {
+    "name": "MAC Address Flapping Detection Type"
+  },
+  "/huawei-mac-flapping-detect:mac-flapping-detect/global-attribute/detect-type/level": {
+    "name": "Security Level of MAC Address Flapping Detection"
+  },
+  "/huawei-mac-flapping-detect:mac-flapping-detect/global-attribute/detect-type/level/detect-level": {
+    "name": "Security level of MAC address flapping detection"
+  },
+  "/huawei-mac-flapping-detect:mac-flapping-detect/global-attribute/detect-type/threshold": {
+    "name": "Security Threshold for MAC Address Flapping Detection"
+  },
+  "/huawei-mac-flapping-detect:mac-flapping-detect/global-attribute/detect-type/threshold/detect-threshold": {
+    "name": "Security threshold for MAC address flapping detection"
+  },
+  "/huawei-mac-flapping-detect:mac-flapping-detect/global-attribute/trap-enable": {
+    "name": "MFLP periodical trap status"
+  },
+  "/huawei-mac-flapping-detect:mac-flapping-detect/exclude-vlan": {
+    "name": "Whitelist for MAC Address Flapping Detection"
+  },
+  "/huawei-mac-flapping-detect:mac-flapping-detect/exclude-vlan/vlan-list": {
+    "name": "VLAN Whitelist for MAC Address Flapping Detection"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/main-interface/l2-attribute/huawei-mac-flapping-detect:mac-address-flapping": {
+    "name": "Configure MAC Address Flapping"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/main-interface/l2-attribute/huawei-mac-flapping-detect:mac-address-flapping/error-down": {
+    "name": "Enable/Disable error-down"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l2-sub-interface/huawei-mac-flapping-detect:mac-address-flapping": {
+    "name": "Configure MAC Address Flapping"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l2-sub-interface/huawei-mac-flapping-detect:mac-address-flapping/error-down": {
+    "name": "Enable/Disable error-down"
+  }
+}

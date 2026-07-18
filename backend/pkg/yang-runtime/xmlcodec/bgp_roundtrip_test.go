@@ -12,14 +12,14 @@ import (
 )
 
 // 反射 + schema 驱动的完备性测试：对 /bgp:bgp 下**每一个** config-true 标量 leaf
-// 自动赋值（不可能漏字段），编码→解码→整体 DeepEqual，并断言恰好 29 个（模型加字段
+// 自动赋值（不可能漏字段），编码→解码→整体 DeepEqual，并断言恰好 28 个（模型加字段
 // 会使计数变化而触发复审）。这是防「全属性可配声称但某字段静默丢」的核心防线——
 // VLAN 交付时同类矩阵暴露过真机高危 bug。config-false 子树与 list 本期不入配置面，
 // 按 schema config 继承跳过。
 
 // 本期 config-true 标量 leaf 计数（global 2 + base-process 直属 13 + confederation 3
 // + graceful-restart 4 + reference-period 3 + timer 4）。模型变更须同步复审此常量。
-const bgpConfigTrueScalarLeaves = 29
+const bgpConfigTrueScalarLeaves = 28 // CE 基线（NE 29：global 少 memory-overload-exception-discard-route）
 
 // 本期不入配置面的 config-false 状态容器（按 schema config 继承判定，非人工挑选）。
 var bgpConfigFalseContainers = []string{

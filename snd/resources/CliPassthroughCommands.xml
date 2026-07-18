@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (c) Huawei Technologies Co., Ltd. 2023-2023. All rights reserved.
+  -->
+
+<passthrough-commands xmlns="http://huawei.com/nce/cli-driver">
+    <passthrough-command>.+</passthrough-command>
+</passthrough-commands>

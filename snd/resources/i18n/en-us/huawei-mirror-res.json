@@ -1,0 +1,149 @@
+{
+  "/huawei-mirror:mirror": {
+    "name": "Mirror"
+  },
+  "/huawei-mirror:mirror/global-observers": {
+    "name": "Observing Ports"
+  },
+  "/huawei-mirror:mirror/global-observers/global-observer": {
+    "name": "Observing Port"
+  },
+  "/huawei-mirror:mirror/global-observers/global-observer/observe-index": {
+    "name": "Observe-index"
+  },
+  "/huawei-mirror:mirror/global-observers/global-observer/interface-name": {
+    "name": "Interface-name"
+  },
+  "/huawei-mirror:mirror/global-observers/global-observer/vlan-id": {
+    "name": "Vlan-id"
+  },
+  "/huawei-mirror:mirror/global-observers/global-observer/dst-ip": {
+    "name": "Dst-ip"
+  },
+  "/huawei-mirror:mirror/global-observers/global-observer/src-ip": {
+    "name": "Src-ip"
+  },
+  "/huawei-mirror:mirror/global-observers/global-observer/enhance-mode": {
+    "name": "Enhance-mode"
+  },
+  "/huawei-mirror:mirror/global-observers/global-observer/dscp": {
+    "name": "Dscp"
+  },
+  "/huawei-mirror:mirror/global-observers/global-observer/erspan-type": {
+    "name": "Mirror"
+  },
+  "/huawei-mirror:mirror/global-observers/global-observer/erspan-id": {
+    "name": "Erspan-id"
+  },
+  "/huawei-mirror:mirror/global-observers/global-observer/cir": {
+    "name": "Cir"
+  },
+  "/huawei-mirror:mirror/global-observers/global-observer/cir-unit": {
+    "name": "Cir-unit"
+  },
+  "/huawei-mirror:mirror/global-observers/global-observer/length": {
+    "name": "Length"
+  },
+  "/huawei-mirror:mirror/global-observe-groups": {
+    "name": "Global-observe-groups"
+  },
+  "/huawei-mirror:mirror/global-observe-groups/global-observe-group": {
+    "name": "Global-observe-group"
+  },
+  "/huawei-mirror:mirror/global-observe-groups/global-observe-group/group-id": {
+    "name": "Group-id"
+  },
+  "/huawei-mirror:mirror/global-observe-groups/global-observe-group/interface-name": {
+    "name": "Interface-name"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-mirror:mirror": {
+    "name": "Port Mirroring"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-mirror:mirror/observe-ports": {
+    "name": "Mirror Traffic to an Observing Port"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-mirror:mirror/observe-ports/observe-port": {
+    "name": "Mirror Traffic to an Observing Port"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-mirror:mirror/observe-ports/observe-port/observe-index": {
+    "name": "Observe-index"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-mirror:mirror/observe-ports/observe-port/direction": {
+    "name": "Direction"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-mirror:mirror/observe-groups": {
+    "name": "Mirror Traffic to an Observing Port Group"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-mirror:mirror/observe-groups/observe-group": {
+    "name": "Mirror Traffic to an Observing Port Group"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-mirror:mirror/observe-groups/observe-group/group-id": {
+    "name": "Group-id"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-mirror:mirror/observe-groups/observe-group/direction": {
+    "name": "Direction"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/huawei-mirror:mirror": {
+    "name": "Configure Flow Mirroring"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/huawei-mirror:mirror/mirror-to-observe": {
+    "name": "Configure Flow Mirroring"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/huawei-mirror:mirror/mirror-to-observe/observe-parameters": {
+    "name": "Observe-parameters"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/huawei-mirror:mirror/mirror-to-observe/observe-parameters/observe-port": {
+    "name": "Observe-port"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/huawei-mirror:mirror/mirror-to-observe/observe-parameters/observe-port/port-indexs": {
+    "name": "Mirror Traffic to an Observing Port"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/huawei-mirror:mirror/mirror-to-observe/observe-parameters/observe-port/port-indexs/port-index": {
+    "name": "Mirror Traffic to an Observing Port"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/huawei-mirror:mirror/mirror-to-observe/observe-parameters/observe-port/port-indexs/port-index/index": {
+    "name": "Index"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/huawei-mirror:mirror/mirror-to-observe/observe-parameters/observe-group": {
+    "name": "Observe-group"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/huawei-mirror:mirror/mirror-to-observe/observe-parameters/observe-group/group-id": {
+    "name": "Group-id"
+  },
+  "/huawei-qos:qos/global-config/huawei-mirror:mirror": {
+    "name": "Configure Flow Mirroring"
+  },
+  "/huawei-qos:qos/global-config/huawei-mirror:mirror/to-observe": {
+    "name": "Configure Flow Mirroring"
+  },
+  "/huawei-qos:qos/global-config/huawei-mirror:mirror/to-observe/index": {
+    "name": "Index"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-mirror:mirror": {
+    "name": "VLAN Mirroring"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-mirror:mirror/observe-ports": {
+    "name": "Mirror Traffic to an Observing Port"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-mirror:mirror/observe-ports/observe-port": {
+    "name": "Mirror Traffic to an Observing Port"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-mirror:mirror/observe-ports/observe-port/observe-index": {
+    "name": "Observe-index"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-mirror:mirror/observe-ports/observe-port/direction": {
+    "name": "Direction"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-mirror:mirror/observe-groups": {
+    "name": "Mirror Traffic to an Observing Port Group"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-mirror:mirror/observe-groups/observe-group": {
+    "name": "Mirror Traffic to an Observing Port Group"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-mirror:mirror/observe-groups/observe-group/group-id": {
+    "name": "Group-id"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-mirror:mirror/observe-groups/observe-group/direction": {
+    "name": "Direction"
+  }
+}

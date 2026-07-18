@@ -1,0 +1,41 @@
+{
+  "/huawei-packetevent:packetevent": {
+    "name": "Packet event"
+  },
+  "/huawei-packetevent:packetevent/global": {
+    "name": "Global packet event"
+  },
+  "/huawei-packetevent:packetevent/global/export-interval": {
+    "name": "Analyzer cycle"
+  },
+  "/huawei-packetevent:packetevent/global/collect-id": {
+    "name": "Analyzer"
+  },
+  "/huawei-packetevent:packetevent/global/drop-event": {
+    "name": "Drop packet event"
+  },
+  "/huawei-packetevent:packetevent/global/drop-event/aging-time": {
+    "name": "Flow table aging period for packet loss visibility"
+  },
+  "/huawei-packetevent:packetevent/global/drop-event/forward-exception": {
+    "name": "Forward exception drop"
+  },
+  "/huawei-packetevent:packetevent/global/drop-event/forward-normal": {
+    "name": "Forward normal drop"
+  },
+  "/huawei-packetevent:packetevent/global/drop-event/buffer-overflow": {
+    "name": "Buffer overflow drop"
+  },
+  "/huawei-packetevent:packetevent/global/drop-event/acl-deny": {
+    "name": "Acl deny drop"
+  },
+  "/huawei-packetevent:packetevent/global/latency-event": {
+    "name": "Latency event"
+  },
+  "/huawei-packetevent:packetevent/global/latency-event/latency-threshold": {
+    "name": "Latency threshold"
+  },
+  "/huawei-packetevent:packetevent/global/latency-event/aging-time": {
+    "name": "Aging time of the latency visualized flow table"
+  }
+}

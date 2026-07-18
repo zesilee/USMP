@@ -1,0 +1,59 @@
+{
+  "/huawei-vxlan-path-detect:vxlan-path-detect": {
+    "name": "VXLAN-path-detect"
+  },
+  "/huawei-vxlan-path-detect:vxlan-path-detect/ipv4-dscp-path-detect": {
+    "name": "Configure IPv4 DSCP path detect"
+  },
+  "/huawei-vxlan-path-detect:vxlan-path-detect/ipv4-dscp-path-detect/dscp-value": {
+    "name": "DSCP value"
+  },
+  "/huawei-vxlan-path-detect:vxlan-path-detect/ipv6-dscp-path-detect": {
+    "name": "Configure IPv6 DSCP path detect"
+  },
+  "/huawei-vxlan-path-detect:vxlan-path-detect/ipv6-dscp-path-detect/dscp-value": {
+    "name": "DSCP value"
+  },
+  "/huawei-vxlan-path-detect:vxlan-path-detect/ip-ping-detects": {
+    "name": "List of IP ping detect"
+  },
+  "/huawei-vxlan-path-detect:vxlan-path-detect/ip-ping-detects/ip-ping-detect": {
+    "name": "Configure IP ping detect"
+  },
+  "/huawei-vxlan-path-detect:vxlan-path-detect/ip-ping-detects/ip-ping-detect/src-ip": {
+    "name": "Source IPv4 address"
+  },
+  "/huawei-vxlan-path-detect:vxlan-path-detect/ip-ping-detects/ip-ping-detect/dst-ip": {
+    "name": "Destination IPv4 address"
+  },
+  "/huawei-vxlan-path-detect:vxlan-path-detect/mac-ping-detects": {
+    "name": "List of MAC ping detect"
+  },
+  "/huawei-vxlan-path-detect:vxlan-path-detect/mac-ping-detects/mac-ping-detect": {
+    "name": "Configure MAC ping detect"
+  },
+  "/huawei-vxlan-path-detect:vxlan-path-detect/mac-ping-detects/mac-ping-detect/src-ip": {
+    "name": "Source IPv4 address"
+  },
+  "/huawei-vxlan-path-detect:vxlan-path-detect/mac-ping-detects/mac-ping-detect/dst-ip": {
+    "name": "Destination IPv4 address"
+  },
+  "/huawei-vxlan-path-detect:vxlan-path-detect/mac-ping-detects/mac-ping-detect/src-mac": {
+    "name": "Source MAC address"
+  },
+  "/huawei-vxlan-path-detect:vxlan-path-detect/mac-ping-detects/mac-ping-detect/dst-mac": {
+    "name": "Destination MAC address"
+  },
+  "/huawei-vxlan-path-detect:vxlan-path-detect/ipv6-ping-detects": {
+    "name": "List of IPv6 ping detect"
+  },
+  "/huawei-vxlan-path-detect:vxlan-path-detect/ipv6-ping-detects/ipv6-ping-detect": {
+    "name": "Configure IPv6 ping detect"
+  },
+  "/huawei-vxlan-path-detect:vxlan-path-detect/ipv6-ping-detects/ipv6-ping-detect/src-ipv6": {
+    "name": "Source IPv6 address"
+  },
+  "/huawei-vxlan-path-detect:vxlan-path-detect/ipv6-ping-detects/ipv6-ping-detect/dst-ipv6": {
+    "name": "Destination IPv6 address"
+  }
+}

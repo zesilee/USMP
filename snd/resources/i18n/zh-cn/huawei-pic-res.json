@@ -1,0 +1,482 @@
+{
+  "/huawei-pic:pic": {
+    "name": "子卡属性"
+  },
+  "/huawei-pic:pic/panel-split-ports": {
+    "name": "面板拆分端口"
+  },
+  "/huawei-pic:pic/panel-split-ports/panel-split-port": {
+    "name": "面板拆分端口"
+  },
+  "/huawei-pic:pic/panel-split-ports/panel-split-port/position": {
+    "name": "位置"
+  },
+  "/huawei-pic:pic/panel-split-ports/panel-split-port/split-type": {
+    "name": "拆分类型"
+  },
+  "/huawei-pic:pic/panel-split-ports/panel-split-port/split-ports": {
+    "name": "拆分端口"
+  },
+  "/huawei-pic:pic/panel-split-ports/panel-split-port/split-ports/port": {
+    "name": "端口"
+  },
+  "/huawei-pic:pic/panel-split-ports/panel-split-port/split-ports/port/split-position": {
+    "name": "拆分位置"
+  },
+  "/huawei-pic:pic/panel-split-ports/panel-split-port/split-ports/port/port-name": {
+    "name": "端口名"
+  },
+  "/huawei-pic:laser-turn": {
+    "name": "激光器开关"
+  },
+  "/huawei-pic:laser-turn/input/port-position": {
+    "name": "端口位置"
+  },
+  "/huawei-pic:port-prbs-check-start": {
+    "name": "PRBS检查开始"
+  },
+  "/huawei-pic:port-prbs-check-start/input/prbs-infos": {
+    "name": "PRBS信息"
+  },
+  "/huawei-pic:port-prbs-check-start/input/prbs-infos/prbs-info": {
+    "name": "PRBS信息"
+  },
+  "/huawei-pic:port-prbs-check-start/input/prbs-infos/prbs-info/port-name": {
+    "name": "接口名"
+  },
+  "/huawei-pic:port-prbs-check-start/input/prbs-infos/prbs-info/direction": {
+    "name": "码流方向"
+  },
+  "/huawei-pic:port-prbs-check-start/input/prbs-infos/prbs-info/action": {
+    "name": "动作"
+  },
+  "/huawei-pic:port-prbs-check-start/input/prbs-infos/prbs-info/prbs-type": {
+    "name": "PRBS码流类型"
+  },
+  "/huawei-pic:port-prbs-check-start/input/prbs-infos/prbs-info/timeout": {
+    "name": "超时停止时间"
+  },
+  "/huawei-pic:port-prbs-check-stop": {
+    "name": "PRBS检查停止"
+  },
+  "/huawei-pic:port-prbs-check-stop/input/prbs-infos": {
+    "name": "PRBS信息"
+  },
+  "/huawei-pic:port-prbs-check-stop/input/prbs-infos/prbs-info": {
+    "name": "PRBS信息"
+  },
+  "/huawei-pic:port-prbs-check-stop/input/prbs-infos/prbs-info/port-name": {
+    "name": "接口名"
+  },
+  "/huawei-pic:port-prbs-check-stop/input/prbs-infos/prbs-info/direction": {
+    "name": "压测方向"
+  },
+  "/huawei-pic:port-prbs-check-stop/input/prbs-infos/prbs-info/action": {
+    "name": "动作"
+  },
+  "/huawei-pic:port-prbs-check-result-get": {
+    "name": "获取PRBS检查结果"
+  },
+  "/huawei-pic:port-prbs-check-result-get/input/port-name": {
+    "name": "接口名"
+  },
+  "/huawei-pic:port-prbs-check-result-get/output/check-result-infos": {
+    "name": "检查结果信息"
+  },
+  "/huawei-pic:port-prbs-check-result-get/output/check-result-infos/check-result-info": {
+    "name": "检查结果信息"
+  },
+  "/huawei-pic:port-prbs-check-result-get/output/check-result-infos/check-result-info/port-name": {
+    "name": "接口名"
+  },
+  "/huawei-pic:port-prbs-check-result-get/output/check-result-infos/check-result-info/media-generator": {
+    "name": "码流生成器"
+  },
+  "/huawei-pic:port-prbs-check-result-get/output/check-result-infos/check-result-info/media-generator-time-left": {
+    "name": "生成码流剩余时间"
+  },
+  "/huawei-pic:port-prbs-check-result-get/output/check-result-infos/check-result-info/media-checker": {
+    "name": "码流检测器"
+  },
+  "/huawei-pic:port-prbs-check-result-get/output/check-result-infos/check-result-info/media-checker-time-left": {
+    "name": "码流检查剩余时间"
+  },
+  "/huawei-pic:port-prbs-check-result-get/output/check-result-infos/check-result-info/media-side-check-result-infos": {
+    "name": "介质检测结果信息"
+  },
+  "/huawei-pic:port-prbs-check-result-get/output/check-result-infos/check-result-info/media-side-check-result-infos/media-side-check-result-info": {
+    "name": "介质检测结果信息"
+  },
+  "/huawei-pic:port-prbs-check-result-get/output/check-result-infos/check-result-info/media-side-check-result-infos/media-side-check-result-info/lane-num": {
+    "name": "Lane编号"
+  },
+  "/huawei-pic:port-prbs-check-result-get/output/check-result-infos/check-result-info/media-side-check-result-infos/media-side-check-result-info/ber": {
+    "name": "比特误码率"
+  },
+  "/huawei-pic:port-prbs-check-result-get/output/check-result-infos/check-result-info/media-side-check-result-infos/media-side-check-result-info/error-counters": {
+    "name": "错误计数器"
+  },
+  "/huawei-pic:port-prbs-check-result-get/output/check-result-infos/check-result-info/media-side-check-result-infos/media-side-check-result-info/lol": {
+    "name": "失锁"
+  },
+  "/huawei-pic:upgrade-optical-module": {
+    "name": "光模块升级"
+  },
+  "/huawei-pic:upgrade-optical-module/input/board-position": {
+    "name": "单板位置"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/mib-statistics/huawei-pic:eth-port-err-sts": {
+    "name": "以太主接口错包统计"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/mib-statistics/huawei-pic:eth-port-err-sts/rx-pause": {
+    "name": "接收pause报文"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/mib-statistics/huawei-pic:eth-port-err-sts/rx-jumbo-octets": {
+    "name": "报文长度大于1518字节"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/mib-statistics/huawei-pic:eth-port-err-sts/rx-crc": {
+    "name": "CRC错包"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/mib-statistics/huawei-pic:eth-port-err-sts/rx-symbol": {
+    "name": "非法symbol报文"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/mib-statistics/huawei-pic:eth-port-err-sts/rx-over-run": {
+    "name": "入方向fifo溢出报文"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/mib-statistics/huawei-pic:eth-port-err-sts/rx-inrange-len": {
+    "name": "长度不匹配包"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/mib-statistics/huawei-pic:eth-port-err-sts/rx-long": {
+    "name": "超长包"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/mib-statistics/huawei-pic:eth-port-err-sts/rx-jabber": {
+    "name": "长度大于1518字节的CRC错报"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/mib-statistics/huawei-pic:eth-port-err-sts/rx-alignment": {
+    "name": "长度不是8bit整数的报文"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/mib-statistics/huawei-pic:eth-port-err-sts/rx-fragment": {
+    "name": "长度小于64字节报文CRC报文"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/mib-statistics/huawei-pic:eth-port-err-sts/rx-undersize": {
+    "name": "长度小于64字节报文"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/mib-statistics/huawei-pic:eth-port-err-sts/tx-pause": {
+    "name": "发送pause报文"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/mib-statistics/huawei-pic:eth-port-err-sts/tx-jumbo-octets": {
+    "name": "发送报文长度大于1518字节"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/mib-statistics/huawei-pic:eth-port-err-sts/tx-over-run": {
+    "name": "发送方向溢出统计"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/mib-statistics/huawei-pic:eth-port-err-sts/tx-under-run": {
+    "name": "发送方向下溢统计"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/mib-statistics/huawei-pic:eth-port-err-sts/tx-system": {
+    "name": "无EOP/SOP报文"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/mib-statistics/huawei-pic:eth-port-err-sts/tx-lost": {
+    "name": "发送方向丢弃的报文"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/huawei-pic:jumbo-frame": {
+    "name": "在Eth-Trunk接口上配置jumbo帧"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/huawei-pic:jumbo-frame/max-jumbo-frame": {
+    "name": "Jumbo帧最大值"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/huawei-pic:jumbo-frame/max-non-jumbo-frame": {
+    "name": "非jumbo帧的最大值"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:ethernet": {
+    "name": "以太端口"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:ethernet/speed": {
+    "name": "以太端口速率(Mb/s)"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:ethernet/duplex": {
+    "name": "双工类型"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:ethernet/duplex-auto": {
+    "name": "双工自协商模式"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:ethernet/negotiation": {
+    "name": "以太端口自协商"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:ethernet/negotiation-mode": {
+    "name": "协商模式"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:ethernet/down-hold-time": {
+    "name": "Down状态的保持时间"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:ethernet/up-hold-time": {
+    "name": "Up状态的保持时间"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:ethernet/trans-mode": {
+    "name": "端口传输模式"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:ethernet/fec-mode": {
+    "name": "FEC模式"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:ethernet/jumbo-frame": {
+    "name": "超大帧"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:ethernet/flowctl": {
+    "name": "流控方式"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:ethernet/mac-itf-mode": {
+    "name": "以太网口工作模式"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:ethernet/combo-mode": {
+    "name": "组合口模式"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:ethernet/peer-identity": {
+    "name": "对端身份标识"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:ethernet/fault-detect": {
+    "name": "故障检测"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:ethernet/inter-frame-gap": {
+    "name": "帧间隙"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:ethernet/statistics-include-interframe": {
+    "name": "统计数据是否包括帧间隙数据"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:ethernet/link-flap-protection": {
+    "name": "链路震荡保护"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:ethernet/link-flap-interval": {
+    "name": "链路震荡间隔周期"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:ethernet/link-flap-threshold": {
+    "name": "链路震荡阈值"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:ethernet/up-delay": {
+    "name": "Up延迟"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:ethernet/flow-change-alarm-interval": {
+    "name": "端口统计流量突变告警的间隔时长"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:ethernet/flow-change-alarm-rx-threshold": {
+    "name": "端口触发入方向接口流量突变告警的比例阈值"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:ethernet/flow-change-alarm-tx-threshold": {
+    "name": "端口触发出方向接口流量突变告警的比例阈值"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:ethernet/flow-change-alarm-start-bandwidth": {
+    "name": "开始检测流量突变告警的流量比例"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:ethernet/auto-downgrade": {
+    "name": "光模块自适应降lane"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:laser": {
+    "name": "激光器"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:laser/auto-shut-enable": {
+    "name": "自动关断使能"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:laser/open-time": {
+    "name": "开光时间"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:laser/close-time": {
+    "name": "关光时间"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:laser/status": {
+    "name": "状态"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:optical-module": {
+    "name": "光模块信息"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:optical-module/wavelength-channel-number": {
+    "name": "可调波长波道号"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:optical-module/tunable-wavelength": {
+    "name": "可调波长"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:optical-module/tunable-frequency": {
+    "name": "可调频率"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:optical-module/power-low-protection": {
+    "name": "是否转换低功率保护的枚举值"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:optical-module/single-fiber": {
+    "name": "单光纤的枚举值"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:optical-module/single-fiber-rx": {
+    "name": "单光纤接收的枚举值"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:optical-module/vendor-name": {
+    "name": "光模块名称"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:optical-module/vendor-pn": {
+    "name": "光模块型号"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:optical-module/app-firmware-version": {
+    "name": "光模块APP版本号信息"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:optical-module/trans-bw": {
+    "name": "光模块带宽(MB/s)"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:optical-module/trans-mode": {
+    "name": "光模块传输模式"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:optical-module/hot-plug": {
+    "name": "热插拔"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:optical-module/type": {
+    "name": "光模块类型"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:optical-module/fiber-type": {
+    "name": "光模块光纤类型"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:optical-module/wavelength": {
+    "name": "波长"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:optical-module/transmission-distance": {
+    "name": "传输距离(米)"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:optical-module/rx-high-warn-power": {
+    "name": "接收光功率上限警告阈值"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:optical-module/rx-low-warn-power": {
+    "name": "接收光功率下限警告阈值"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:optical-module/tx-high-warn-power": {
+    "name": "发送光功率上限警告阈值"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:optical-module/tx-low-warn-power": {
+    "name": "发送光功率下限警告阈值"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:optical-module/rx-high-alarm-power": {
+    "name": "接收光功率上限告警阈值"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:optical-module/rx-low-alarm-power": {
+    "name": "接收光功率下限告警阈值"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:optical-module/tx-high-alarm-power": {
+    "name": "发送光功率上限告警阈值"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:optical-module/tx-low-alarm-power": {
+    "name": "发送光功率下限告警阈值"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:optical-module/manufacture-date": {
+    "name": "光模块生产日期"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:optical-module/transceiver-medium-type": {
+    "name": "光模块传输介质类型"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:optical-module/voltage-float": {
+    "name": "光模块电压"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:optical-module/temperature-float": {
+    "name": "光模块温度"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:optical-module/serial-number": {
+    "name": "序列号"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:optical-module/channels": {
+    "name": "光模块各通道信息"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:optical-module/channels/channel": {
+    "name": "光模块各通道信息"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:optical-module/channels/channel/number": {
+    "name": "通道号"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:optical-module/channels/channel/tx-power": {
+    "name": "发送光功率(dBm)"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:optical-module/channels/channel/rx-power": {
+    "name": "接收光功率(dBm)"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:optical-module/channels/channel/bias": {
+    "name": "光模块电流(mA)"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:optical-module/wave-mapping": {
+    "name": "光波匹配"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:optical-module/wave-mapping/wave-map": {
+    "name": "光波匹配"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:optical-module/wave-mapping/wave-map/index": {
+    "name": "索引"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:optical-module/wave-mapping/wave-map/frequency": {
+    "name": "频率"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:optical-module/wave-mapping/wave-map/wavelength": {
+    "name": "波长"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:port-alarm": {
+    "name": "端口告警"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:port-alarm/alarm-type": {
+    "name": "告警类型"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:port-alarm/alarm-type/crc-error-threshold": {
+    "name": "CRC错误阈值"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:port-alarm/alarm-type/crc-error-threshold/crc-error-threshold": {
+    "name": "CRC错误阈值"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:port-alarm/alarm-type/crc-error-threshold/crc-error-threshold/crc-error": {
+    "name": "CRC错误"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:port-alarm/alarm-type/crc-error-threshold/crc-error-threshold/crc-error-interval": {
+    "name": "CRC错误间隔周期"
+  },
+  "/huawei-devm:devm/ports/port/huawei-pic:port-alarm/alarm-type/crc-error-threshold/crc-error-threshold/crc-shutdown-en": {
+    "name": "CRCshutdown使能与否"
+  },
+  "/huawei-driver:driver/global-attribute/huawei-pic:global": {
+    "name": "全局"
+  },
+  "/huawei-driver:driver/global-attribute/huawei-pic:global/up-hold-time": {
+    "name": "Up状态的保持时间"
+  },
+  "/huawei-driver:driver/global-attribute/huawei-pic:global/down-hold-time": {
+    "name": "Down状态的保持时间"
+  },
+  "/huawei-driver:driver/global-attribute/huawei-pic:global/non-certified-optical-status-alarm": {
+    "name": "未确定光模块状态的告警"
+  },
+  "/huawei-driver:driver/global-attribute/huawei-pic:global/link-flap-protection": {
+    "name": "链路震荡保护"
+  },
+  "/huawei-license:license/huawei-pic:activated-license-ports": {
+    "name": "激活license的端口"
+  },
+  "/huawei-license:license/huawei-pic:activated-license-ports/activated-license-port": {
+    "name": "激活license的端口"
+  },
+  "/huawei-license:license/huawei-pic:activated-license-ports/activated-license-port/start-port-name": {
+    "name": "开始端口"
+  },
+  "/huawei-license:license/huawei-pic:activated-license-ports/activated-license-port/end-port-name": {
+    "name": "结束端口"
+  },
+  "/huawei-license:license/huawei-pic:activated-license-ports/activated-license-port/activated-licenses": {
+    "name": "已激活的licenses"
+  },
+  "/huawei-license:license/huawei-pic:activated-license-ports/activated-license-port/activated-licenses/activated-license": {
+    "name": "已激活的license"
+  },
+  "/huawei-license:license/huawei-pic:activated-license-ports/activated-license-port/activated-licenses/activated-license/license-type": {
+    "name": "License类型"
+  },
+  "/rpcs/huawei-pic:pic/laser-turn": {
+    "name": "激光器开关"
+  },
+  "/rpcs/huawei-pic:pic/port-prbs-check-start": {
+    "name": "PRBS检查开始"
+  },
+  "/rpcs/huawei-pic:pic/port-prbs-check-stop": {
+    "name": "PRBS检查停止"
+  },
+  "/rpcs/huawei-pic:pic/port-prbs-check-result-get": {
+    "name": "获取PRBS检查结果"
+  },
+  "/rpcs/huawei-pic:pic/upgrade-optical-module": {
+    "name": "光模块升级"
+  }
+}

@@ -1,0 +1,300 @@
+/*
+Copyright (C) 2020 Huawei Technologies Co., Ltd. All rights reserved.
+*/
+module huawei-fwm-resource {
+  yang-version 1;
+  namespace "urn:huawei:yang:huawei-fwm-resource";
+  prefix fwm-resource;
+  import huawei-extension {
+    prefix ext;
+  }
+  import huawei-fib {
+    prefix fib;
+  }
+  import huawei-arp {
+    prefix arp;
+  }
+  import huawei-ipv6-nd {
+    prefix ipv6-nd;
+  }
+
+  organization
+    "Huawei Technologies Co., Ltd.";
+  contact
+    "Huawei Industrial Base
+    Bantian, Longgang
+    Shenzhen 518129
+    People's Republic of China
+    Website: http://www.huawei.com
+    Email: support@huawei.com";
+  description
+    "FWM resource statistics.";
+  revision 2020-09-01 {
+    description
+      "List of resource mode is added.";
+    reference
+      "Huawei private.";
+  }
+  revision 2020-06-02 {
+    description
+      "Initial revision.";
+    reference
+      "Huawei private.";
+  }
+  typedef resource-mode-type {
+    type enumeration {
+      enum "standard" {
+        value 1;
+        description
+          "Standard resource mode.";
+      }
+      enum "large-mac" {
+        value 2;
+        description
+          "Big MAC mode.";
+      }
+      enum "large-route" {
+        value 3;
+        description
+          "Big route mode.";
+      }
+      enum "user-defined" {
+        value 4;
+        description
+          "User defined mode.";
+      }
+    }
+    description
+      "Enumerations of resource mode.";
+  }
+  container fwm-resource {
+    description
+      "FWM resource management.";
+    container resource-modes {
+      ext:hidden ui;
+      description
+        "List of resource mode's configurations.";
+      list resource-mode {
+        must "(./mode='user-defined' and (./mac-num>=32 and ./mac-num <= 65535)) or (./mode!='user-defined')";
+        key "slot-id";
+        description
+          "Configure resource mode.";
+        leaf slot-id {
+          type string {
+            length "0..15";
+          }
+          description
+            "Board slot ID.";
+        }
+        leaf mode {
+          type resource-mode-type;
+          description
+            "Resource mode.";
+        }
+        leaf mac-num {
+          when "../mode='user-defined'";
+          type uint32 {
+            range "32..65535";
+          }
+          description
+            "User defined MAC number.";
+        }
+      }
+    }
+  }
+  augment /fib:fib {
+    description
+      "FIB resource statistics.";
+    container forward-table-resources {
+      config false;
+      description
+        "List of table resource statistics.";
+      list forward-table-resource {
+        key "slot-id";
+        description
+          "List of table resource statistics.";
+        leaf slot-id {
+          type string {
+            length "0..32";
+          }
+          description
+            "Slot ID.";
+        }
+        leaf fib4-total {
+          type uint32;
+          description
+            "FIB4 total number.";
+        }
+        leaf fib4-used {
+          type uint32;
+          description
+            "FIB4 used number.";
+        }
+        leaf fib6-total {
+          type uint32;
+          description
+            "FIB6 total number.";
+        }
+        leaf fib6-used {
+          type uint32;
+          description
+            "FIB6 used number.";
+        }
+      }
+    }
+    container soft-table-resources {
+      config false;
+      description
+        "List of soft table resource statistics.";
+      list soft-table-resource {
+        key "slot-id";
+        description
+          "List of soft table resource statistics.";
+        leaf slot-id {
+          type string {
+            length "0..32";
+          }
+          description
+            "Slot ID.";
+        }
+        leaf fib4-total {
+          type uint32;
+          description
+            "FIB4 total number.";
+        }
+        leaf fib4-used {
+          type uint32;
+          description
+            "FIB4 used number.";
+        }
+        leaf fib6-total {
+          type uint32;
+          description
+            "FIB6 total number.";
+        }
+        leaf fib6-used {
+          type uint32;
+          description
+            "FIB6 used number.";
+        }
+      }
+    }
+  }
+  augment /arp:arp {
+    description
+      "ARP resource statistics.";
+    container forward-table-resources {
+      config false;
+      description
+        "List of table resource statistics.";
+      list forward-table-resource {
+        key "slot-id";
+        description
+          "List of table resource statistics.";
+        leaf slot-id {
+          type string {
+            length "0..32";
+          }
+          description
+            "Slot ID.";
+        }
+        leaf arp-total {
+          type uint32;
+          description
+            "ARP total number.";
+        }
+        leaf arp-used {
+          type uint32;
+          description
+            "ARP used number.";
+        }
+      }
+    }
+    container soft-table-resources {
+      config false;
+      description
+        "List of soft table resource statistics.";
+      list soft-table-resource {
+        key "slot-id";
+        description
+          "List of soft table resource statistics.";
+        leaf slot-id {
+          type string {
+            length "0..32";
+          }
+          description
+            "Slot ID.";
+        }
+        leaf arp-total {
+          type uint32;
+          description
+            "ARP total number.";
+        }
+        leaf arp-used {
+          type uint32;
+          description
+            "ARP used number.";
+        }
+      }
+    }
+  }
+  augment /ipv6-nd:ipv6-nd {
+    description
+      "ND resource statistics.";
+    container forward-table-resources {
+      config false;
+      description
+        "List of table resource statistics.";
+      list forward-table-resource {
+        key "slot-id";
+        description
+          "List of table resource statistics.";
+        leaf slot-id {
+          type string {
+            length "0..32";
+          }
+          description
+            "Slot ID.";
+        }
+        leaf nd-total {
+          type uint32;
+          description
+            "ND total number.";
+        }
+        leaf nd-used {
+          type uint32;
+          description
+            "ND used number.";
+        }
+      }
+    }
+    container soft-table-resources {
+      config false;
+      description
+        "List of soft table resource statistics.";
+      list soft-table-resource {
+        key "slot-id";
+        description
+          "List of soft table resource statistics.";
+        leaf slot-id {
+          type string {
+            length "0..32";
+          }
+          description
+            "Slot ID.";
+        }
+        leaf nd-total {
+          type uint32;
+          description
+            "ND total number.";
+        }
+        leaf nd-used {
+          type uint32;
+          description
+            "ND used number.";
+        }
+      }
+    }
+  }
+  ext:task-name "fwm-resource";
+}

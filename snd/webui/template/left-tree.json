@@ -1,0 +1,835 @@
+{
+  "left-tree": [
+    {
+      "type": "group",
+      "zh-cn": "基础配置",
+      "en-us": "Basic Configuration",
+      "children": [
+        {
+          "type": "group",
+          "zh-cn": "登录设备命令行界面",
+          "en-us": "CLI-based Device Login",
+          "children": [
+            {
+              "type": "group",
+              "zh-cn": "huawei-dsa",
+              "en-us": "huawei-dsa",
+              "xpath": "/huawei-dsa"
+            },
+            {
+              "type": "group",
+              "zh-cn": "huawei-ecc",
+              "en-us": "huawei-ecc",
+              "xpath": "/huawei-ecc"
+            },
+            {
+              "type": "group",
+              "zh-cn": "huawei-rsa",
+              "en-us": "huawei-rsa",
+              "xpath": "/huawei-rsa"
+            },
+            {
+              "type": "group",
+              "zh-cn": "huawei-vty",
+              "en-us": "huawei-vty",
+              "xpath": "/huawei-vty"
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "zh-cn": "文件系统管理",
+          "en-us": "File System Management",
+          "children": [
+            {
+              "type": "group",
+              "zh-cn": "huawei-ftpc",
+              "en-us": "huawei-ftpc",
+              "xpath": "/huawei-ftpc"
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "zh-cn": "配置文件管理",
+          "en-us": "Configuration File Management",
+          "children": [
+            {
+              "type": "group",
+              "zh-cn": "huawei-cfg",
+              "en-us": "huawei-cfg",
+              "xpath": "/huawei-cfg"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "group",
+      "zh-cn": "以太网交换",
+      "en-us": "Ethernet Switching",
+      "children": [
+        {
+          "type": "group",
+          "zh-cn": "VLAN",
+          "en-us": "VLAN",
+          "children": [
+            {
+              "type": "group",
+              "zh-cn": "huawei-vlan",
+              "en-us": "huawei-vlan",
+              "xpath": "/huawei-vlan"
+            },
+            {
+              "type": "group",
+              "zh-cn": "huawei-ethernet",
+              "en-us": "huawei-ethernet",
+              "xpath": "/huawei-ethernet"
+            },
+            {
+              "type": "group",
+              "zh-cn": "huawei-bd",
+              "en-us": "huawei-bd",
+              "xpath": "/huawei-bd"
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "zh-cn": "MAC",
+          "en-us": "MAC",
+          "children": [
+            {
+              "type": "group",
+              "zh-cn": "huawei-mac-flapping-detect",
+              "en-us": "huawei-mac-flapping-detect",
+              "xpath": "/huawei-mac-flapping-detect"
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "zh-cn": "Eth-Trunk",
+          "en-us": "Eth-Trunk",
+          "children": [
+            {
+              "type": "group",
+              "zh-cn": "huawei-ifm-trunk",
+              "en-us": "huawei-ifm-trunk",
+              "xpath": "/huawei-ifm-trunk"
+            },
+            {
+              "type": "group",
+              "zh-cn": "huawei-lacp",
+              "en-us": "huawei-lacp",
+              "xpath": "/huawei-lacp"
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "zh-cn": "STP_RSTP_MSTP",
+          "en-us": "STP_RSTP_MSTP",
+          "children": [
+            {
+              "type": "group",
+              "zh-cn": "huawei-mstp",
+              "en-us": "huawei-mstp",
+              "xpath": "/huawei-mstp"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "group",
+      "zh-cn": "可靠性",
+      "en-us": "High Availability",
+      "children": [
+        {
+          "type": "group",
+          "zh-cn": "BFD",
+          "en-us": "BFD",
+          "children": [
+            {
+              "type": "group",
+              "zh-cn": "huawei-bfd",
+              "en-us": "huawei-bfd",
+              "xpath": "/huawei-bfd"
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "zh-cn": "M-LAG",
+          "en-us": "M-LAG",
+          "children": [
+            {
+              "type": "group",
+              "zh-cn": "huawei-m-lag",
+              "en-us": "huawei-m-lag",
+              "xpath": "/huawei-m-lag"
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "zh-cn": "VRRP",
+          "en-us": "VRRP",
+          "children": [
+            {
+              "type": "group",
+              "zh-cn": "huawei-vrrp",
+              "en-us": "huawei-vrrp",
+              "xpath": "/huawei-vrrp"
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "zh-cn": "Monitor Link",
+          "en-us": "Monitor Link",
+          "children": [
+            {
+              "type": "group",
+              "zh-cn": "huawei-monitor-link",
+              "en-us": "huawei-monitor-link",
+              "xpath": "/huawei-monitor-link"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "group",
+      "zh-cn": "系统监控",
+      "en-us": "System Monitor",
+      "children": [
+        {
+          "type": "group",
+          "zh-cn": "NQA",
+          "en-us": "NQA",
+          "children": [
+            {
+              "type": "group",
+              "zh-cn": "huawei-nqa",
+              "en-us": "huawei-nqa",
+              "xpath": "/huawei-nqa"
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "zh-cn": "镜像",
+          "en-us": "Mirroring",
+          "children": [
+            {
+              "type": "group",
+              "zh-cn": "huawei-mirror",
+              "en-us": "huawei-mirror",
+              "xpath": "/huawei-mirror"
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "zh-cn": "路径/连通性探测",
+          "en-us": "Path and Connectivity Detection",
+          "children": [
+            {
+              "type": "group",
+              "zh-cn": "huawei-vxlan-path-detect",
+              "en-us": "huawei-vxlan-path-detect",
+              "xpath": "/huawei-vxlan-path-detect"
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "zh-cn": "gRPC",
+          "en-us": "gRPC",
+          "children": [
+            {
+              "type": "group",
+              "zh-cn": "huawei-grpc",
+              "en-us": "huawei-grpc",
+              "xpath": "/huawei-grpc"
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "zh-cn": "全流分析",
+          "en-us": "AnyFlow",
+          "children": [
+            {
+              "type": "group",
+              "zh-cn": "huawei-anyflow",
+              "en-us": "huawei-anyflow",
+              "xpath": "/huawei-anyflow"
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "zh-cn": "智能流量分析",
+          "en-us": "Intelligent Traffic Analysis",
+          "children": [
+            {
+              "type": "group",
+              "zh-cn": "huawei-analysis-collector",
+              "en-us": "huawei-analysis-collector",
+              "xpath": "/huawei-analysis-collector"
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "zh-cn": "Packet Event",
+          "en-us": "Packet Event",
+          "children": [
+            {
+              "type": "group",
+              "zh-cn": "huawei-packetevent",
+              "en-us": "huawei-packetevent",
+              "xpath": "/huawei-packetevent"
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "zh-cn": "sFlow",
+          "en-us": "sFlow",
+          "children": [
+            {
+              "type": "group",
+              "zh-cn": "huawei-sflow",
+              "en-us": "huawei-sflow",
+              "xpath": "/huawei-sflow"
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "zh-cn": "Telemetry",
+          "en-us": "Telemetry",
+          "children": [
+            {
+              "type": "group",
+              "zh-cn": "openconfig-telemetry",
+              "en-us": "openconfig-telemetry",
+              "xpath": "/openconfig-telemetry"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "group",
+      "zh-cn": "IP路由",
+      "en-us": "IP Routing",
+      "children": [
+        {
+          "type": "group",
+          "zh-cn": "OSPF",
+          "en-us": "OSPF",
+          "children": [
+            {
+              "type": "group",
+              "zh-cn": "huawei-ospfv2",
+              "en-us": "huawei-ospfv2",
+              "xpath": "/huawei-ospfv2"
+            },
+            {
+              "type": "group",
+              "zh-cn": "huawei-ospfv3",
+              "en-us": "huawei-ospfv3",
+              "xpath": "/huawei-ospfv3"
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "zh-cn": "路由管理",
+          "en-us": "Route Management",
+          "children": [
+            {
+              "type": "group",
+              "zh-cn": "huawei-fib",
+              "en-us": "huawei-fib",
+              "xpath": "/huawei-fib"
+            },
+            {
+              "type": "group",
+              "zh-cn": "huawei-routing",
+              "en-us": "huawei-routing",
+              "xpath": "/huawei-routing"
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "zh-cn": "BGP",
+          "en-us": "BGP",
+          "children": [
+            {
+              "type": "group",
+              "zh-cn": "huawei-bgp",
+              "en-us": "huawei-bgp",
+              "xpath": "/huawei-bgp"
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "zh-cn": "路由策略",
+          "en-us": "Routing Policy",
+          "children": [
+            {
+              "type": "group",
+              "zh-cn": "huawei-routing-policy",
+              "en-us": "huawei-routing-policy",
+              "xpath": "/huawei-routing-policy"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "group",
+      "zh-cn": "接口管理",
+      "en-us": "Interface Management",
+      "children": [
+        {
+          "type": "group",
+          "zh-cn": "接口基础",
+          "en-us": "Interface Basic",
+          "children": [
+            {
+              "type": "group",
+              "zh-cn": "huawei-ifm",
+              "en-us": "huawei-ifm",
+              "xpath": "/huawei-ifm"
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "zh-cn": "以太网接口",
+          "en-us": "Ethernet Interface",
+          "children": [
+            {
+              "type": "group",
+              "zh-cn": "huawei-pic",
+              "en-us": "huawei-pic",
+              "xpath": "/huawei-pic"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "group",
+      "zh-cn": "系统管理",
+      "en-us": "System Management",
+      "children": [
+        {
+          "type": "group",
+          "zh-cn": "硬件管理",
+          "en-us": "Hardware Management",
+          "children": [
+            {
+              "type": "group",
+              "zh-cn": "huawei-devm",
+              "en-us": "huawei-devm",
+              "xpath": "/huawei-devm"
+            },
+            {
+              "type": "group",
+              "zh-cn": "huawei-driver",
+              "en-us": "huawei-driver",
+              "xpath": "/huawei-driver"
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "zh-cn": "信息管理",
+          "en-us": "Information Management",
+          "children": [
+            {
+              "type": "group",
+              "zh-cn": "huawei-syslog",
+              "en-us": "huawei-syslog",
+              "xpath": "/huawei-syslog"
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "zh-cn": "NTP",
+          "en-us": "NTP",
+          "children": [
+            {
+              "type": "group",
+              "zh-cn": "huawei-ntp",
+              "en-us": "huawei-ntp",
+              "xpath": "/huawei-ntp"
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "zh-cn": "LLDP",
+          "en-us": "LLDP",
+          "children": [
+            {
+              "type": "group",
+              "zh-cn": "huawei-lldp",
+              "en-us": "huawei-lldp",
+              "xpath": "/huawei-lldp"
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "zh-cn": "SNMP",
+          "en-us": "SNMP",
+          "children": [
+            {
+              "type": "group",
+              "zh-cn": "huawei-snmp",
+              "en-us": "huawei-snmp",
+              "xpath": "/huawei-snmp"
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "zh-cn": "OpenFlow",
+          "en-us": "OpenFlow",
+          "children": [
+            {
+              "type": "group",
+              "zh-cn": "huawei-openflow-agent",
+              "en-us": "huawei-openflow-agent",
+              "xpath": "/huawei-openflow-agent"
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "zh-cn": "升级维护",
+          "en-us": "Upgrade Maintenance",
+          "children": [
+            {
+              "type": "group",
+              "zh-cn": "huawei-license",
+              "en-us": "huawei-license",
+              "xpath": "/huawei-license"
+            },
+            {
+              "type": "group",
+              "zh-cn": "huawei-system-resources-usage",
+              "en-us": "huawei-system-resources-usage",
+              "xpath": "/huawei-system-resources-usage"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "group",
+      "zh-cn": "安全",
+      "en-us": "Security",
+      "children": [
+        {
+          "type": "group",
+          "zh-cn": "MACsec",
+          "en-us": "MACsec",
+          "children": [
+            {
+              "type": "group",
+              "zh-cn": "huawei-macsec",
+              "en-us": "huawei-macsec",
+              "xpath": "/huawei-macsec"
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "zh-cn": "SSH",
+          "en-us": "SSH",
+          "children": [
+            {
+              "type": "group",
+              "zh-cn": "huawei-sm2",
+              "en-us": "huawei-sm2",
+              "xpath": "/huawei-sm2"
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "zh-cn": "微分段",
+          "en-us": "Microsegmentation",
+          "children": [
+            {
+              "type": "group",
+              "zh-cn": "huawei-microsegmentation",
+              "en-us": "huawei-microsegmentation",
+              "xpath": "/huawei-microsegmentation"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "group",
+      "zh-cn": "IP地址与服务",
+      "en-us": "IP Addresses and Services",
+      "children": [
+        {
+          "type": "group",
+          "zh-cn": "IPv4基础",
+          "en-us": "IPv4 Basic",
+          "children": [
+            {
+              "type": "group",
+              "zh-cn": "huawei-unicast-forward",
+              "en-us": "huawei-unicast-forward",
+              "xpath": "/huawei-unicast-forward"
+            },
+            {
+              "type": "group",
+              "zh-cn": "huawei-ip",
+              "en-us": "huawei-ip",
+              "xpath": "/huawei-ip"
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "zh-cn": "负载分担",
+          "en-us": "Load Balancing",
+          "children": [
+            {
+              "type": "group",
+              "zh-cn": "huawei-loadbalance",
+              "en-us": "huawei-loadbalance",
+              "xpath": "/huawei-loadbalance"
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "zh-cn": "ARP",
+          "en-us": "ARP",
+          "children": [
+            {
+              "type": "group",
+              "zh-cn": "huawei-arp",
+              "en-us": "huawei-arp",
+              "xpath": "/huawei-arp"
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "zh-cn": "ACL",
+          "en-us": "ACL",
+          "children": [
+            {
+              "type": "group",
+              "zh-cn": "huawei-acl",
+              "en-us": "huawei-acl",
+              "xpath": "/huawei-acl"
+            },
+            {
+              "type": "group",
+              "zh-cn": "huawei-time-range",
+              "en-us": "huawei-time-range",
+              "xpath": "/huawei-time-range"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "group",
+      "zh-cn": "IP组播",
+      "en-us": "IP Multicast",
+      "children": [
+        {
+          "type": "group",
+          "zh-cn": "IPv4组播路由管理",
+          "en-us": "IPv4 Multicast Route Management",
+          "children": [
+            {
+              "type": "group",
+              "zh-cn": "huawei-l3-multicast",
+              "en-us": "huawei-l3-multicast",
+              "xpath": "/huawei-l3-multicast"
+            },
+            {
+              "type": "group",
+              "zh-cn": "huawei-multicast",
+              "en-us": "huawei-multicast",
+              "xpath": "/huawei-multicast"
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "zh-cn": "IPv4三层组播Over VXLAN",
+          "en-us": "IPv4 Layer 3 Multicast over VXLAN",
+          "children": [
+            {
+              "type": "group",
+              "zh-cn": "huawei-mvpn",
+              "en-us": "huawei-mvpn",
+              "xpath": "/huawei-mvpn"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "group",
+      "zh-cn": "VPN",
+      "en-us": "VPN",
+      "children": [
+        {
+          "type": "group",
+          "zh-cn": "GRE",
+          "en-us": "GRE",
+          "children": [
+            {
+              "type": "group",
+              "zh-cn": "huawei-gre",
+              "en-us": "huawei-gre",
+              "xpath": "/huawei-gre"
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "zh-cn": "IPv4 L3VPN",
+          "en-us": "IPv4 L3VPN",
+          "children": [
+            {
+              "type": "group",
+              "zh-cn": "huawei-l3vpn",
+              "en-us": "huawei-l3vpn",
+              "xpath": "/huawei-l3vpn"
+            },
+            {
+              "type": "group",
+              "zh-cn": "huawei-network-instance",
+              "en-us": "huawei-network-instance",
+              "xpath": "/huawei-network-instance"
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "zh-cn": "隧道管理",
+          "en-us": "Tunnel Management",
+          "children": [
+            {
+              "type": "group",
+              "zh-cn": "huawei-tunnel-management",
+              "en-us": "huawei-tunnel-management",
+              "xpath": "/huawei-tunnel-management"
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "zh-cn": "EVPN",
+          "en-us": "EVPN",
+          "children": [
+            {
+              "type": "group",
+              "zh-cn": "huawei-evpn",
+              "en-us": "huawei-evpn",
+              "xpath": "/huawei-evpn"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "group",
+      "zh-cn": "VXLAN",
+      "en-us": "VXLAN",
+      "children": [
+        {
+          "type": "group",
+          "zh-cn": "VXLAN",
+          "en-us": "VXLAN",
+          "children": [
+            {
+              "type": "group",
+              "zh-cn": "huawei-vxlan-ext",
+              "en-us": "huawei-vxlan-ext",
+              "xpath": "/huawei-vxlan-ext"
+            },
+            {
+              "type": "group",
+              "zh-cn": "huawei-nvo3",
+              "en-us": "huawei-nvo3",
+              "xpath": "/huawei-nvo3"
+            },
+            {
+              "type": "group",
+              "zh-cn": "huawei-nvo3-statistics",
+              "en-us": "huawei-nvo3-statistics",
+              "xpath": "/huawei-nvo3-statistics"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "group",
+      "zh-cn": "用户接入与认证",
+      "en-us": "User Access and Authentication",
+      "children": [
+        {
+          "type": "group",
+          "zh-cn": "AAA",
+          "en-us": "AAA",
+          "children": [
+            {
+              "type": "group",
+              "zh-cn": "huawei-hwtacacs",
+              "en-us": "huawei-hwtacacs",
+              "xpath": "/huawei-hwtacacs"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "group",
+      "zh-cn": "QOS",
+      "en-us": "QOS",
+      "children": [
+        {
+          "type": "group",
+          "zh-cn": "QOS",
+          "en-us": "QOS",
+          "children": [
+            {
+              "type": "group",
+              "zh-cn": "huawei-qos",
+              "en-us": "huawei-qos",
+              "xpath": "/huawei-qos"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

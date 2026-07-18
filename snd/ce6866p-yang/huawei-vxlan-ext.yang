@@ -1,0 +1,193 @@
+/*
+Copyright (C) 2020 Huawei Technologies Co., Ltd. All rights reserved.
+*/
+module huawei-vxlan-ext {
+  yang-version 1;
+  namespace "urn:huawei:yang:huawei-vxlan-ext";
+  prefix vxlan-ext;
+  import ietf-inet-types {
+    prefix inet;
+  }
+  import huawei-ifm {
+    prefix ifm;
+  }
+  import huawei-bd {
+    prefix bd;
+  }
+  import huawei-extension {
+    prefix ext;
+  }
+  organization
+    "Huawei Technologies Co., Ltd.";
+  contact
+    "Huawei Industrial Base
+     Bantian, Longgang
+     Shenzhen 518129
+     People's Republic of China
+     Website: http://www.huawei.com
+     Email: support@huawei.com";
+  description
+    "Vxlan extension";
+  reference
+    "Huawei private.";
+  revision 2020-06-19 {
+    description
+      "Add the flood-proxy and m-lag-reserved containers.";
+    reference
+      "Huawei private.";
+  }  
+  revision 2020-01-21 {
+    description
+      "Initial revision.";
+    reference
+      "Huawei private.";
+  }
+ ext:task-name "vxlan";
+   typedef ospf-type {
+    type enumeration {
+      enum "ospf" {
+        value 1;
+        description
+          "Configure OSPF message type.";
+      }
+      enum "ospfv3" {
+        value 2;
+        description
+          "Configure OSPFv3 message type.";
+      }
+    }
+    description
+      "OSPF message type.";
+  }
+  container vxlan-ext {
+    description
+      "Vxlan extension functions";
+    container force-redirects {
+        description
+        "List of configure force-redirects.";
+        list force-redirect {
+	      must "vni-begin<=vni-end";
+          key "vni-begin vni-end if-name";
+          description
+            "Configure force decapsulation vni.";
+          leaf vni-begin {
+            type uint32 {
+              range "1..16777215";
+            }
+            mandatory true;
+            description
+              "Force decapsulation begin vni";
+          }
+          leaf vni-end {
+            type uint32 {
+              range "1..16777215";
+            }
+            description
+              "Force decapsulation end vni";
+          }
+          leaf if-name {
+            type leafref {
+            path "/ifm:ifm/ifm:interfaces/ifm:interface/ifm:name";
+           }
+          description
+            "Port name";
+          }
+        }
+      
+    }
+    container ospf-disable {
+      ext:hidden ui;
+        description
+        "Configure vxlan tunnel to establish OSPF / OSPFv3 neighbor.";
+        leaf ospf {
+          type ospf-type;
+          description
+            "Configure ospf message type.";
+        }
+        leaf disable {
+          type boolean;
+          default "false";
+          description
+            "Enable/disable vxlan tunnel to establish OSPF / OSPFv3 neighbor.";
+        }
+    }
+    container ospf-discard {
+      ext:hidden ui;
+        description
+        "Configure vxlan tunnel to discard OSPF / OSPFv3 message.";
+        leaf ospf {
+          type ospf-type;
+          description
+            "Configure ospf type.";
+        }
+        leaf discard {
+          type boolean;
+          default "false";
+          description
+            "Enable/disable vxlan tunnel to discard OSPF / OSPFv3 message.";
+        }
+    }
+    container bridge-domain-bind-vlan-enhanced {
+      presence "Configure bridge-domain bind VLAN mode as enhanced mode.";
+      description
+        "Enable/disable bridge-domain bind VLAN mode as enhanced mode.";
+    }
+  }
+  augment /ifm:ifm/ifm:interfaces/ifm:interface {
+    description
+      "Traffic from this interface will be force decapsulated.";
+    container force-decapsulation {
+      description
+        "Configure force decapsulation.";
+      leaf enable {
+        type boolean;
+        default "false";
+        description
+          "Enable/disable force decapsulation.";
+      }
+    }
+  }
+  augment /ifm:ifm/ifm:interfaces/ifm:interface {
+    description
+      "Rewrite l2subif egress vlan.";
+    container l2subif-dot1q-egr-vids {
+      description
+        "Configure l2subif egress vlan id.";
+      leaf vid {
+        type uint32 {
+          range "1..4094";
+        }
+        description
+          "Egress vlan id";
+      }
+    }
+  }
+  augment /ifm:ifm/ifm:interfaces/ifm:interface {
+    description
+      "Configure flood proxy under nve interface.";
+    container flood-proxy {
+      description
+        "Configure flood proxy.";
+      leaf proxy-ip {
+        type inet:ipv4-address-no-zone;
+        description
+          "flood proxy ip address";
+      }
+    }
+  }
+  augment /bd:bd/bd:instances/bd:instance {
+    description
+      "Configure reservation for m-lag under bridge-domain.";
+    container m-lag-reserved {
+      description
+        "Configure reservation for m-lag.";
+      ext:hidden ui;
+      leaf enable {
+        type boolean;
+        default "false";
+        description
+          "Enable/disable reservation for m-lag.";
+      }
+    }
+  }
+}

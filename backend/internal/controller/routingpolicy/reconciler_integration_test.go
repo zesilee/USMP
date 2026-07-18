@@ -6,7 +6,6 @@ import (
 	"testing"
 	"time"
 
-	"github.com/openconfig/ygot/ygot"
 	"github.com/stretchr/testify/assert"
 
 	"github.com/leezesi/usmp/backend/internal/cache"
@@ -27,14 +26,17 @@ func simStore(sim *netsim.Simulator) (device.Store, string) {
 	return ds, id
 }
 
-// rtpDesired：policy-definitions/policy-definition(name+address-family-mismatch-deny)
-// 标量边界。BGP 2b import/export route-policy leafref 引用的目标实例。
+// rtpDesired：policy-definitions/policy-definition(name) + nodes/node(sequence+
+// match-mode) 嵌套 list 标量边界（CE 基线 pd 级无标量叶，示范标量在 node 级）。
+// BGP 2b import/export route-policy leafref 引用的目标实例。
 func rtpDesired() *huawei.HuaweiRoutingPolicy_RoutingPolicy {
 	rp := &huawei.HuaweiRoutingPolicy_RoutingPolicy{
 		PolicyDefinitions: &huawei.HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions{},
 	}
 	pd, _ := rp.PolicyDefinitions.NewPolicyDefinition("RP-A")
-	pd.AddressFamilyMismatchDeny = ygot.Bool(true)
+	pd.Nodes = &huawei.HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes{}
+	node, _ := pd.Nodes.NewNode(10)
+	node.MatchMode = huawei.HuaweiRoutingPolicy_MatchModeType_permit
 	return rp
 }
 
@@ -84,8 +86,9 @@ func TestReconciler_Integration_RoutingPolicyConvergesAndReadable(t *testing.T) 
 	if rp.PolicyDefinitions == nil || rp.PolicyDefinitions.PolicyDefinition["RP-A"] == nil {
 		t.Fatalf("回读缺 policy-definition 实例: %#v", rp.PolicyDefinitions)
 	}
-	if pd := rp.PolicyDefinitions.PolicyDefinition["RP-A"]; pd.AddressFamilyMismatchDeny == nil || !*pd.AddressFamilyMismatchDeny {
-		t.Fatalf("回读缺 policy-definition 标量: %#v", pd)
+	pd := rp.PolicyDefinitions.PolicyDefinition["RP-A"]
+	if pd.Nodes == nil || pd.Nodes.Node[10] == nil || pd.Nodes.Node[10].MatchMode != huawei.HuaweiRoutingPolicy_MatchModeType_permit {
+		t.Fatalf("回读缺 nodes/node 嵌套标量: %#v", pd)
 	}
 
 	// 第二轮：desired==actual → 必须收敛

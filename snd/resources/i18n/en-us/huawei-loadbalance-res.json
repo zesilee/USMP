@@ -1,0 +1,236 @@
+{
+  "/huawei-loadbalance:loadbalance": {
+    "name": "Loadbalance"
+  },
+  "/huawei-loadbalance:loadbalance/global-attribute": {
+    "name": "Global attribute"
+  },
+  "/huawei-loadbalance:loadbalance/global-attribute/dynamic-enable": {
+    "name": "Dynamic Load Balancing"
+  },
+  "/huawei-loadbalance:loadbalance/global-attribute/rail-group-enable": {
+    "name": "Enable Rail Group Algorithm"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile": {
+    "name": "Loadbalance ECMP"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/ecmp-attribute": {
+    "name": "ECMP Attritube"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/ecmp-attribute/gtp-teid": {
+    "name": "GTP TEID"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/ip-hash": {
+    "name": "IP hash"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/ip-hash/sip": {
+    "name": "Source IP"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/ip-hash/dip": {
+    "name": "Destination IP"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/ip-hash/vlan": {
+    "name": "VLAN"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/ip-hash/l4sport": {
+    "name": "Source port"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/ip-hash/l4dport": {
+    "name": "Destination port"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/ip-hash/protocol": {
+    "name": "Protocol number"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/ip-hash/src-interface": {
+    "name": "Source interface"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/ip-hash/flowlabel": {
+    "name": "Flow label"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/ip-hash/dscp": {
+    "name": "DSCP"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/ip-tunnel-hash": {
+    "name": "IP tunnel hash"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/ip-tunnel-hash/inner-src-ip": {
+    "name": "Inner source IP"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/ip-tunnel-hash/inner-dst-ip": {
+    "name": "Inner destination IP"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/ip-tunnel-hash/inner-l4-dport": {
+    "name": "Inner transport-layer destination port"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/ip-tunnel-hash/inner-l4-sport": {
+    "name": "Inner transport-layer source port"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/ip-tunnel-hash/inner-protocol": {
+    "name": "Inner transport-layer protocol"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/ip-tunnel-hash/src-interface": {
+    "name": "Source interface"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/ip-tunnel-hash/src-mac": {
+    "name": "Source MAC"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/ip-tunnel-hash/dst-mac": {
+    "name": "Destination Mac"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/ip-tunnel-hash/include-erspan": {
+    "name": "Include ERSPAN"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/vxlan-hash": {
+    "name": "Vxlan hash"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/vxlan-hash/inner-src-ip": {
+    "name": "Inner source IP"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/vxlan-hash/inner-dst-ip": {
+    "name": "Inner destination IP"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/vxlan-hash/inner-l4-dport": {
+    "name": "Destination L4 Port"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/vxlan-hash/inner-l4-sport": {
+    "name": "Source L4 Port"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/vxlan-hash/inner-protocol": {
+    "name": "IPV4 protocol"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/vxlan-hash/src-interface": {
+    "name": "Source interface"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/vxlan-hash/vni": {
+    "name": "VNI"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/load-balance-ecmp-hashmode": {
+    "name": "ECMP hash mode"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/load-balance-ecmp-hashmode/hash-mode": {
+    "name": "Hash mode"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/load-balance-ecmp-hashmode/overlay-hash-mode": {
+    "name": "Overlay hash mode"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/load-balance-ecmp-hashmode/underlay-hash-mode": {
+    "name": "Underlay hash mode"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/load-balance-ecmp-universal": {
+    "name": "Hash Algorithm Offset for Load Balancing"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/load-balance-ecmp-universal/universal-id": {
+    "name": "Hash Offset for Load Balancing"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/load-balance-ecmp-universal/underlay-universal-id": {
+    "name": "Hash Offset for Underlay Load Balancing"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/load-balance-ecmp-universal/overlay-universal-id": {
+    "name": "Hash Offset for Overlay Load Balancing"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/load-balance-ecmp-seed": {
+    "name": "ECMP hash seed"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/load-balance-ecmp-seed/seed-data": {
+    "name": "Seed data"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/load-balance-ecmp-seed/underlay-seed-data": {
+    "name": "Underlay seed data"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/load-balance-ecmp-seed/overlay-seed-data": {
+    "name": "Overlay seed data"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/ecmp-local-preference": {
+    "name": "Ecmp local preference"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/ecmp-local-preference/enable": {
+    "name": "Ecmp local preference"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/dynamic-ecmp-mode": {
+    "name": "ECMP dynamic load balancing mode"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/dynamic-ecmp-mode/mode": {
+    "name": "ECMP dynamic mode"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/dynamic-ecmp-mode/flowlet-gap-time": {
+    "name": "ECMP dynamic load balancing default mode"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/local-preference-enhanced": {
+    "name": "Local preference enhanced"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/local-preference-enhanced/enable": {
+    "name": "Local preference enhanced"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/vxlan-overlay-local-preference": {
+    "name": "VXLAN overlay local preference"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/vxlan-overlay-local-preference/local-preference-mode": {
+    "name": "Local preference mode"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/ecmp-symmetry": {
+    "name": "Ecmp-symmetry"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-profile/ecmp-symmetry/enable": {
+    "name": "The same source and destination addresses"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-enable": {
+    "name": "ECMP enable"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-enable/is-enable": {
+    "name": "ECMP stateful enable"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-stateful-enhanced": {
+    "name": "ECMP stateful enhanced function"
+  },
+  "/huawei-loadbalance:loadbalance/load-balance-ecmp-stateful-enhanced/is-enable": {
+    "name": "ECMP stateful enhanced function"
+  },
+  "/huawei-loadbalance:loadbalance/ip-load-balance": {
+    "name": "IP load balance"
+  },
+  "/huawei-loadbalance:loadbalance/ip-load-balance/mode": {
+    "name": "Mode"
+  },
+  "/huawei-loadbalance:loadbalance/ip-load-balance/src-ip": {
+    "name": "Source IP"
+  },
+  "/huawei-loadbalance:loadbalance/ip-load-balance/dst-ip": {
+    "name": "Destination IP"
+  },
+  "/huawei-loadbalance:loadbalance/ip-load-balance/src-port": {
+    "name": "Source Port"
+  },
+  "/huawei-loadbalance:loadbalance/ip-load-balance/dst-port": {
+    "name": "Destination Port"
+  },
+  "/huawei-loadbalance:loadbalance/ipv6-load-balance": {
+    "name": "IPv6 load balance"
+  },
+  "/huawei-loadbalance:loadbalance/ipv6-load-balance/mode": {
+    "name": "Mode"
+  },
+  "/huawei-loadbalance:loadbalance/ipv6-load-balance/src-ip": {
+    "name": "Source IP"
+  },
+  "/huawei-loadbalance:loadbalance/ipv6-load-balance/dst-ip": {
+    "name": "Destination IP"
+  },
+  "/huawei-loadbalance:loadbalance/ipv6-load-balance/src-port": {
+    "name": "Source Port"
+  },
+  "/huawei-loadbalance:loadbalance/ipv6-load-balance/dst-port": {
+    "name": "Destination Port"
+  },
+  "/huawei-loadbalance:loadbalance/ip-load-balance-reverse-route-enable": {
+    "name": "IP load balance reverse route enable"
+  },
+  "/huawei-loadbalance:loadbalance/ip-load-balance-reverse-route-enable/enable": {
+    "name": "Enable load balancing for IP reverse routes"
+  },
+  "/huawei-loadbalance:loadbalance/ipv6-load-balance-reverse-route-enable": {
+    "name": "IPv6 load balance reverse route enable"
+  },
+  "/huawei-loadbalance:loadbalance/ipv6-load-balance-reverse-route-enable/enable": {
+    "name": "Enable"
+  }
+}

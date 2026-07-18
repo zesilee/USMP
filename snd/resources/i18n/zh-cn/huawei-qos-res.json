@@ -1,0 +1,2030 @@
+{
+  "/huawei-qos:qos": {
+    "name": "QOS"
+  },
+  "/huawei-qos:qos/wred-template": {
+    "name": "Wred模板"
+  },
+  "/huawei-qos:qos/wred-template/port-wreds": {
+    "name": "PORT-WREDS"
+  },
+  "/huawei-qos:qos/wred-template/port-wreds/port-wred": {
+    "name": "WRED端口"
+  },
+  "/huawei-qos:qos/wred-template/port-wreds/port-wred/wred-color-states": {
+    "name": "WRED颜色状态"
+  },
+  "/huawei-qos:qos/wred-template/port-wreds/port-wred/wred-color-states/wred-color-state": {
+    "name": "WRED颜色状态"
+  },
+  "/huawei-qos:qos/wred-template/port-wreds/port-wred/wred-color-states/wred-color-state/color": {
+    "name": "颜色"
+  },
+  "/huawei-qos:qos/wred-template/port-wreds/port-wred/wred-color-states/wred-color-state/low-limit-percentage": {
+    "name": "下限百分比"
+  },
+  "/huawei-qos:qos/wred-template/port-wreds/port-wred/wred-color-states/wred-color-state/high-limit-percentage": {
+    "name": "上限百分比"
+  },
+  "/huawei-qos:qos/wred-template/port-wreds/port-wred/wred-color-states/wred-color-state/discard-percentage": {
+    "name": "丢弃百分比"
+  },
+  "/huawei-qos:qos/wred-template/wreds": {
+    "name": "WREDS"
+  },
+  "/huawei-qos:qos/wred-template/wreds/wred": {
+    "name": "WRED"
+  },
+  "/huawei-qos:qos/wred-template/wreds/wred/name": {
+    "name": "名称"
+  },
+  "/huawei-qos:qos/wred-template/wreds/wred/colors": {
+    "name": "颜色"
+  },
+  "/huawei-qos:qos/wred-template/wreds/wred/colors/color": {
+    "name": "颜色"
+  },
+  "/huawei-qos:qos/wred-template/wreds/wred/colors/color/color": {
+    "name": "颜色"
+  },
+  "/huawei-qos:qos/wred-template/wreds/wred/colors/color/low-limit-percentage": {
+    "name": "百分比下限"
+  },
+  "/huawei-qos:qos/wred-template/wreds/wred/colors/color/high-limit-percentage": {
+    "name": "百分比上限"
+  },
+  "/huawei-qos:qos/wred-template/wreds/wred/colors/color/discard-percentage": {
+    "name": "丢弃百分比"
+  },
+  "/huawei-qos:qos/wred-template/wreds/wred/ecn": {
+    "name": "ECN"
+  },
+  "/huawei-qos:qos/wred-template/wreds/wred/ecn/discard-threshold": {
+    "name": "放弃阈值选择"
+  },
+  "/huawei-qos:qos/wred-template/wreds/wred/ecn/discard-threshold/absolute-value": {
+    "name": "绝对值"
+  },
+  "/huawei-qos:qos/wred-template/wreds/wred/ecn/discard-threshold/absolute-value/absolute-flag": {
+    "name": "绝对标志"
+  },
+  "/huawei-qos:qos/wred-template/wreds/wred/ecn/discard-threshold/absolute-value/lowlimitaslt": {
+    "name": "下限"
+  },
+  "/huawei-qos:qos/wred-template/wreds/wred/ecn/discard-threshold/absolute-value/highlimitaslt": {
+    "name": "上限"
+  },
+  "/huawei-qos:qos/wred-template/wreds/wred/ecn/discard-threshold/absolute-value/cell-flag": {
+    "name": "单元格标志"
+  },
+  "/huawei-qos:qos/wred-template/wreds/wred/ecn/discard-threshold/absolute-value/lowlimitcell": {
+    "name": "下限单元"
+  },
+  "/huawei-qos:qos/wred-template/wreds/wred/ecn/discard-threshold/absolute-value/highlimitcell": {
+    "name": "上限单元"
+  },
+  "/huawei-qos:qos/wred-template/wreds/wred/ecn/discard-threshold/percentage-value": {
+    "name": "百分比值"
+  },
+  "/huawei-qos:qos/wred-template/wreds/wred/ecn/discard-threshold/percentage-value/low-limit": {
+    "name": "下限"
+  },
+  "/huawei-qos:qos/wred-template/wreds/wred/ecn/discard-threshold/percentage-value/high-limit": {
+    "name": "上限"
+  },
+  "/huawei-qos:qos/wred-template/wreds/wred/ecn/maximum-probability": {
+    "name": "最大概率"
+  },
+  "/huawei-qos:qos/queue-scheduler-template": {
+    "name": "队列调度模板"
+  },
+  "/huawei-qos:qos/queue-scheduler-template/flow-queues": {
+    "name": "流队列"
+  },
+  "/huawei-qos:qos/queue-scheduler-template/flow-queues/flow-queue": {
+    "name": "流队列"
+  },
+  "/huawei-qos:qos/queue-scheduler-template/flow-queues/flow-queue/name": {
+    "name": "名称"
+  },
+  "/huawei-qos:qos/queue-scheduler-template/flow-queues/flow-queue/mode": {
+    "name": "模式"
+  },
+  "/huawei-qos:qos/queue-scheduler-template/flow-queues/flow-queue/normal-mode-queues": {
+    "name": "NORMAL-MODE-QUEUES"
+  },
+  "/huawei-qos:qos/queue-scheduler-template/flow-queues/flow-queue/normal-mode-queues/normal-mode-queue": {
+    "name": "NORMAL-MODE-QUEUES"
+  },
+  "/huawei-qos:qos/queue-scheduler-template/flow-queues/flow-queue/normal-mode-queues/normal-mode-queue/service-class": {
+    "name": "SERVICE-CLASS"
+  },
+  "/huawei-qos:qos/queue-scheduler-template/flow-queues/flow-queue/normal-mode-queues/normal-mode-queue/flow-wred-name": {
+    "name": "FLOW-WRED-NAME"
+  },
+  "/huawei-qos:qos/classifier-template": {
+    "name": "流分类模板"
+  },
+  "/huawei-qos:qos/classifier-template/diffserv-domains": {
+    "name": "Diffserv域"
+  },
+  "/huawei-qos:qos/classifier-template/diffserv-domains/diffserv-domain": {
+    "name": "差异服务域"
+  },
+  "/huawei-qos:qos/classifier-template/diffserv-domains/diffserv-domain/name": {
+    "name": "名称"
+  },
+  "/huawei-qos:qos/classifier-template/diffserv-domains/diffserv-domain/behavior-aggregations": {
+    "name": "流行为汇总"
+  },
+  "/huawei-qos:qos/classifier-template/diffserv-domains/diffserv-domain/behavior-aggregations/behavior-aggregation": {
+    "name": "行为汇总"
+  },
+  "/huawei-qos:qos/classifier-template/diffserv-domains/diffserv-domain/behavior-aggregations/behavior-aggregation/type": {
+    "name": "类型"
+  },
+  "/huawei-qos:qos/classifier-template/diffserv-domains/diffserv-domain/behavior-aggregations/behavior-aggregation/value": {
+    "name": "值"
+  },
+  "/huawei-qos:qos/classifier-template/diffserv-domains/diffserv-domain/behavior-aggregations/behavior-aggregation/service-class": {
+    "name": "服务等级"
+  },
+  "/huawei-qos:qos/classifier-template/diffserv-domains/diffserv-domain/behavior-aggregations/behavior-aggregation/color": {
+    "name": "颜色"
+  },
+  "/huawei-qos:qos/classifier-template/diffserv-domains/diffserv-domain/per-hop-behaviors": {
+    "name": "每跳行为"
+  },
+  "/huawei-qos:qos/classifier-template/diffserv-domains/diffserv-domain/per-hop-behaviors/per-hop-behavior": {
+    "name": "每跳行为"
+  },
+  "/huawei-qos:qos/classifier-template/diffserv-domains/diffserv-domain/per-hop-behaviors/per-hop-behavior/type": {
+    "name": "类型"
+  },
+  "/huawei-qos:qos/classifier-template/diffserv-domains/diffserv-domain/per-hop-behaviors/per-hop-behavior/service-class": {
+    "name": "服务等级"
+  },
+  "/huawei-qos:qos/classifier-template/diffserv-domains/diffserv-domain/per-hop-behaviors/per-hop-behavior/color": {
+    "name": "颜色"
+  },
+  "/huawei-qos:qos/classifier-template/diffserv-domains/diffserv-domain/per-hop-behaviors/per-hop-behavior/value": {
+    "name": "值"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers": {
+    "name": "流分类"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier": {
+    "name": "流分类"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/name": {
+    "name": "名称"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/operator": {
+    "name": "操作码"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/tcp-flag": {
+    "name": "TCP标志值"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/tcp-flag/tcp-flag-value": {
+    "name": "TCP标志位值"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-acls": {
+    "name": "ACL规则"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-acls/rule-acl": {
+    "name": "ACL规则"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-acls/rule-acl/acl-name": {
+    "name": "ACL名称"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-acl-ipv6s": {
+    "name": "Acl-ipv6规则"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-acl-ipv6s/rule-acl-ipv6": {
+    "name": "Acl-ipv6规则"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-acl-ipv6s/rule-acl-ipv6/acl-name": {
+    "name": "ACL名称"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-acl-ipv6s/rule-acl-ipv6/loose-mode": {
+    "name": "松散模式"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-prioritys": {
+    "name": "规则优先级"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-prioritys/rule-priority": {
+    "name": "规则优先级"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-prioritys/rule-priority/type": {
+    "name": "类型"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-prioritys/rule-priority/value": {
+    "name": "值"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/local-ids": {
+    "name": "本地编号"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/local-ids/local-id": {
+    "name": "本地编号"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/local-ids/local-id/value": {
+    "name": "值"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-eth-types": {
+    "name": "规则类型"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-eth-types/rule-eth-type": {
+    "name": "规则类型值"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-eth-types/rule-eth-type/value": {
+    "name": "值"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-mac-and-masks": {
+    "name": "MAC规则和掩码"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-mac-and-masks/rule-mac-and-mask": {
+    "name": "MAC规则和掩码"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-mac-and-masks/rule-mac-and-mask/mac-type": {
+    "name": "MAC类型"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-mac-and-masks/rule-mac-and-mask/mac-address": {
+    "name": "MAC地址"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-mac-and-masks/rule-mac-and-mask/mac-address-mask": {
+    "name": "MAC地址掩码"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-pevlans": {
+    "name": "外层VLAN规则"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-pevlans/rule-pevlan": {
+    "name": "外层VLAN规则"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-pevlans/rule-pevlan/start-vlan-id": {
+    "name": "VLAN ID起始值"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-pevlans/rule-pevlan/end-vlan-id": {
+    "name": "VLAN ID结束值"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-cevlans": {
+    "name": "内层VLAN规则"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-cevlans/rule-cevlan": {
+    "name": "内层VLAN规则"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-cevlans/rule-cevlan/start-vlan-id": {
+    "name": "VLAN ID起始值"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-cevlans/rule-cevlan/end-vlan-id": {
+    "name": "VLAN ID结束值"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-pe-cevlans": {
+    "name": "PE CEVLAN规则"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-pe-cevlans/rule-pe-cevlan": {
+    "name": "PE CEVLAN规则"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-pe-cevlans/rule-pe-cevlan/rule-start-pevlan-id": {
+    "name": "PEVLAN ID规则起始值"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-pe-cevlans/rule-pe-cevlan/rule-end-pevlan-id": {
+    "name": "PEVLAN ID规则起始值"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-pe-cevlans/rule-pe-cevlan/rule-start-cevlan-id": {
+    "name": "CEVLAN ID起始值"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-pe-cevlans/rule-pe-cevlan/rule-end-cevlan-id": {
+    "name": "CEVLAN ID起始值"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-any-packets": {
+    "name": "任意报文规则"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-any-packets/rule-any-packet": {
+    "name": "任意规则数据包"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-interfaces": {
+    "name": "接口规则"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-interfaces/rule-interface": {
+    "name": "接口规则"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-interfaces/rule-interface/direction": {
+    "name": "报文方向"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-interfaces/rule-interface/interface": {
+    "name": "接口"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-double-tags": {
+    "name": "双重标签规则"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-double-tags/double-tag": {
+    "name": "双重标签"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-discards": {
+    "name": "丢弃规则"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-discards/rule-discard-label": {
+    "name": "规则丢弃标签"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-ip-identifications": {
+    "name": "IP识别规则"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-ip-identifications/rule-ip-identification": {
+    "name": "IP识别规则"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-ip-identifications/rule-ip-identification/identification-id": {
+    "name": "ID标识"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-ip-identifications/rule-ip-identification/identification-mask": {
+    "name": "掩码标识"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-nexthops": {
+    "name": "Nexthop规则"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-nexthops/rule-nexthop": {
+    "name": "Nexthop规则"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-nexthops/rule-nexthop/ip-address": {
+    "name": "IP地址"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-nexthops/rule-nexthop/interface": {
+    "name": "接口"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-nexthop-ipv6s": {
+    "name": "Nexthop ipv6规则"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-nexthop-ipv6s/rule-nexthop-ipv6": {
+    "name": "Nexthop ipv6规则"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-nexthop-ipv6s/rule-nexthop-ipv6/ipv6-address": {
+    "name": "IPV6地址"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-nexthop-ipv6s/rule-nexthop-ipv6/interface": {
+    "name": "接口"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-packet-types": {
+    "name": "报文类型规则"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-packet-types/rule-packet-type": {
+    "name": "规则数据包类型"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-gre-inner": {
+    "name": "GRE隧道内层报文规则"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-gre-inner/source-port-num": {
+    "name": "源端口号"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-gre-inner/dest-port-num": {
+    "name": "目的端口号"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-gre-inner/source-ip": {
+    "name": "源IP地址"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-gre-inner/source-ip-mask": {
+    "name": "源IP掩码长度"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-gre-inner/destination-ip": {
+    "name": "目的IP地址"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-gre-inner/destination-ip-mask": {
+    "name": "目的IP掩码长度"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-gre-inner/protocol": {
+    "name": "报文协议号"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-vxlan-acls": {
+    "name": "Vxlan acl规则"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-vxlan-acls/rule-vxlan-acl": {
+    "name": "Vxlan acl规则"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-vxlan-acls/rule-vxlan-acl/vxlan-acl": {
+    "name": "VXLAN-acl"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-vxlan-acls/rule-vxlan-acl/tag-format": {
+    "name": "格式化标签"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-vxlan-acls/rule-vxlan-acl/transit": {
+    "name": "过渡"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-vxlan-infos": {
+    "name": "Vxlan头规则"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-vxlan-infos/rule-vxlan-info": {
+    "name": "Vxlan头规则"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-vxlan-infos/rule-vxlan-info/vxlan-field-type": {
+    "name": "Vxlan字段类型"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-vxlan-infos/rule-vxlan-info/field-value": {
+    "name": "字段值"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-vxlan-infos/rule-vxlan-info/transit": {
+    "name": "过路报文"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-rocev2": {
+    "name": "Rocev2规则"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-rocev2/ip-family": {
+    "name": "Ip类型"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-rocev2/opcode": {
+    "name": "Opcode"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-rocev2/qpair": {
+    "name": "Qpair"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-rocev2/nack": {
+    "name": "Nack"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-rocev2/udf-l4-head-offs": {
+    "name": "用户自定义偏移"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-rocev2/udf-l4-head-offs/udf-l4-head-off": {
+    "name": "用户自定义偏移"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-rocev2/udf-l4-head-offs/udf-l4-head-off/rule-string": {
+    "name": "规则取值"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-rocev2/udf-l4-head-offs/udf-l4-head-off/rule-mask": {
+    "name": "规则掩码"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-rocev2/udf-l4-head-offs/udf-l4-head-off/offset": {
+    "name": "偏移量"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-vxlan-ipv6acls": {
+    "name": "Vxlan ipv6规则"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-vxlan-ipv6acls/rule-vxlan-ipv6acl": {
+    "name": "Vxlan ipv6规则"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-vxlan-ipv6acls/rule-vxlan-ipv6acl/vxlan-ipv6acl": {
+    "name": "Vxlan ipv6地址"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-classifiers/traffic-classifier/rule-vxlan-ipv6acls/rule-vxlan-ipv6acl/ipv6-rule-mode": {
+    "name": "Ipv6匹配方式"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors": {
+    "name": "流行为模板"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior": {
+    "name": "流行为"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/name": {
+    "name": "流行为名"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/filter-action": {
+    "name": "过滤动作"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/filter-action/filter": {
+    "name": "过滤"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/car-actions": {
+    "name": "CAR操作"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/car-actions/car-action": {
+    "name": "CAR操作"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/car-actions/car-action/action-type": {
+    "name": "操作类型"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/car-actions/car-action/cbs": {
+    "name": "CBS"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/car-actions/car-action/pbs": {
+    "name": "PBS"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/car-actions/car-action/green-action": {
+    "name": "绿色报文动作"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/car-actions/car-action/green-action-parameters": {
+    "name": "绿色报文监管参数"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/car-actions/car-action/green-action-parameters/green-service-class": {
+    "name": "绿色报文服务等级"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/car-actions/car-action/green-action-parameters/green-service-class/green-service-class": {
+    "name": "绿色报文服务等级"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/car-actions/car-action/green-action-parameters/green-service-class/green-color": {
+    "name": "绿色报文"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/car-actions/car-action/green-action-parameters/green-remark-dscp": {
+    "name": "重标记绿包dscp的值"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/car-actions/car-action/green-action-parameters/green-remark-dscp/green-remark-dscp": {
+    "name": "重标记绿包dscp的值"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/car-actions/car-action/yellow-action": {
+    "name": "黄色报文动作"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/car-actions/car-action/yellow-action-parameters": {
+    "name": "黄色报文监管参数"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/car-actions/car-action/yellow-action-parameters/yellow-service-class": {
+    "name": "黄色报文服务等级"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/car-actions/car-action/yellow-action-parameters/yellow-service-class/yellow-service-class": {
+    "name": "黄色报文服务等级"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/car-actions/car-action/yellow-action-parameters/yellow-service-class/yellow-color": {
+    "name": "黄色报文"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/car-actions/car-action/yellow-action-parameters/yellow-remark-dscp": {
+    "name": "重标记黄包dscp的值"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/car-actions/car-action/yellow-action-parameters/yellow-remark-dscp/yellow-remark-dscp": {
+    "name": "重标记黄包dscp的值"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/car-actions/car-action/red-action": {
+    "name": "红色报文动作"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/car-actions/car-action/red-action-parameters": {
+    "name": "红色报文动作参数"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/car-actions/car-action/red-action-parameters/red-service-class": {
+    "name": "红色报文服务等级"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/car-actions/car-action/red-action-parameters/red-service-class/red-service-class": {
+    "name": "红色报文服务等级"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/car-actions/car-action/red-action-parameters/red-service-class/red-color": {
+    "name": "红色报文"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/car-actions/car-action/red-action-parameters/red-remark-dscp": {
+    "name": "重标记红包dscp的值"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/car-actions/car-action/red-action-parameters/red-remark-dscp/red-remark-dscp": {
+    "name": "重标记红包dscp的值"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/car-actions/car-action/color-aware": {
+    "name": "色敏模式"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/car-actions/car-action/share-mode": {
+    "name": "共享模式"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/car-actions/car-action/cir-unit": {
+    "name": "CIR单位"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/car-actions/car-action/pir-unit": {
+    "name": "PIR单位"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/car-actions/car-action/cbs-unit": {
+    "name": "CBS单位"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/car-actions/car-action/pbs-unit": {
+    "name": "PBS单位"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/car-shares": {
+    "name": "共享car"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/car-shares/car-name-share": {
+    "name": "共享car名称"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/policy-actions": {
+    "name": "子策略"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/policy-actions/policy-action": {
+    "name": "子策略"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/policy-actions/policy-action/policy-name": {
+    "name": "子策略"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/urpf-action": {
+    "name": "单播反向路由转发"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/urpf-action/check-type": {
+    "name": "检查类型"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/urpf-action/allow-default": {
+    "name": "允许标识"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/urpf-action/ignore-default": {
+    "name": "忽略标识"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/vlan-oper-actions": {
+    "name": "VLAN动作"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/vlan-oper-actions/vlan-oper": {
+    "name": "VALN操作"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/vlan-oper-actions/vlan-oper/vlan-mapping": {
+    "name": "VLAN映射"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/vlan-oper-actions/vlan-oper/vlan-mapping/outer-vlanid": {
+    "name": "外层VLAN ID"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/vlan-oper-actions/vlan-oper/vlan-mapping/inner-vlanid": {
+    "name": "内层VLAN ID"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/vlan-oper-actions/vlan-oper/vlan-stacking": {
+    "name": "VLAN堆叠"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/vlan-oper-actions/vlan-oper/vlan-stacking/vlanid": {
+    "name": "VLAN ID"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/mac-learning-disable": {
+    "name": "去使能MAC地址学习"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/mac-learning-disable/mac-learning-disable": {
+    "name": "去使能MAC地址学习"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/statistic-action": {
+    "name": "统计行为"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/statistic-action/statistic-enable": {
+    "name": "使能统计"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/remark-action-colors": {
+    "name": "重标记COLOR行为"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/remark-action-colors/remark-action-color": {
+    "name": "重标记COLOR行为"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/remark-action-colors/remark-action-color/remark-type": {
+    "name": "重标记类型"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/remark-action-colors/remark-action-color/remark-value": {
+    "name": "重标记值"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/remark-action-colors/remark-action-color/color": {
+    "name": "COLOR"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/global-config": {
+    "name": "全局配置"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/global-config/anyflow-enable": {
+    "name": "任何流量启用"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-behaviors/traffic-behavior/global-config/traffic-analysis-enable": {
+    "name": "启用流量分析"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-policys": {
+    "name": "流策略"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-policys/traffic-policy": {
+    "name": "流策略"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-policys/traffic-policy/name": {
+    "name": "名称"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-policys/traffic-policy/description": {
+    "name": "描述"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-policys/traffic-policy/policy-nodes": {
+    "name": "流策略节点"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-policys/traffic-policy/policy-nodes/policy-node": {
+    "name": "流策略节点"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-policys/traffic-policy/policy-nodes/policy-node/classifier-name": {
+    "name": "流分类名称"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-policys/traffic-policy/policy-nodes/policy-node/behavior-name": {
+    "name": "流行为名称"
+  },
+  "/huawei-qos:qos/classifier-template/traffic-policys/traffic-policy/policy-nodes/policy-node/priority": {
+    "name": "优先级"
+  },
+  "/huawei-qos:qos/classifier-template/qos-groups": {
+    "name": "端口组"
+  },
+  "/huawei-qos:qos/classifier-template/qos-groups/qos-group": {
+    "name": "端口组"
+  },
+  "/huawei-qos:qos/classifier-template/qos-groups/qos-group/group-name": {
+    "name": "端口组名"
+  },
+  "/huawei-qos:qos/classifier-template/qos-groups/qos-group/group-interfaces": {
+    "name": "端口组接口"
+  },
+  "/huawei-qos:qos/classifier-template/qos-groups/qos-group/group-interfaces/group-interface": {
+    "name": "端口组接口"
+  },
+  "/huawei-qos:qos/classifier-template/qos-groups/qos-group/group-interfaces/group-interface/interface": {
+    "name": "接口"
+  },
+  "/huawei-qos:qos/classifier-template/qos-groups/qos-group/group-vlans": {
+    "name": "Group-vlans"
+  },
+  "/huawei-qos:qos/classifier-template/qos-groups/qos-group/group-vlans/group-vlan": {
+    "name": "Group-vlan"
+  },
+  "/huawei-qos:qos/classifier-template/qos-groups/qos-group/group-vlans/group-vlan/begin-vlan": {
+    "name": "VLAN起始值"
+  },
+  "/huawei-qos:qos/classifier-template/qos-groups/qos-group/group-vlans/group-vlan/end-vlan": {
+    "name": "VLAN结束值"
+  },
+  "/huawei-qos:qos/classifier-template/qos-groups/qos-group/group-ips": {
+    "name": "IP组"
+  },
+  "/huawei-qos:qos/classifier-template/qos-groups/qos-group/group-ips/group-ip": {
+    "name": "IP组"
+  },
+  "/huawei-qos:qos/classifier-template/qos-groups/qos-group/group-ips/group-ip/source-ipv4": {
+    "name": "源IP地址"
+  },
+  "/huawei-qos:qos/classifier-template/qos-groups/qos-group/group-ips/group-ip/source-ip-mask": {
+    "name": "源IP掩码"
+  },
+  "/huawei-qos:qos/classifier-template/qos-groups/qos-group/group-policy-applys": {
+    "name": "流策略应用"
+  },
+  "/huawei-qos:qos/classifier-template/qos-groups/qos-group/group-policy-applys/group-policy-apply": {
+    "name": "流策略应用"
+  },
+  "/huawei-qos:qos/classifier-template/qos-groups/qos-group/group-policy-applys/group-policy-apply/policy-name": {
+    "name": "流策略名"
+  },
+  "/huawei-qos:qos/classifier-template/qos-groups/qos-group/group-policy-applys/group-policy-apply/direction": {
+    "name": "方向"
+  },
+  "/huawei-qos:qos/car-template": {
+    "name": "Car模板"
+  },
+  "/huawei-qos:qos/car-template/templates": {
+    "name": "模板"
+  },
+  "/huawei-qos:qos/car-template/templates/template": {
+    "name": "模板"
+  },
+  "/huawei-qos:qos/car-template/templates/template/name": {
+    "name": "名字"
+  },
+  "/huawei-qos:qos/car-template/templates/template/cir-parameters": {
+    "name": "Cir参数"
+  },
+  "/huawei-qos:qos/car-template/templates/template/cir-parameters/cir": {
+    "name": "CIR"
+  },
+  "/huawei-qos:qos/car-template/templates/template/cir-parameters/cir/cir-value": {
+    "name": "Cir值"
+  },
+  "/huawei-qos:qos/car-template/templates/template/cir-parameters/cir/pir-value": {
+    "name": "Pir值"
+  },
+  "/huawei-qos:qos/car-template/templates/template/cir-parameters/cir/cbs-value": {
+    "name": "Cbs值"
+  },
+  "/huawei-qos:qos/car-template/templates/template/cir-parameters/cir/pbs-value": {
+    "name": "Pbs值"
+  },
+  "/huawei-qos:qos/car-template/templates/template/cir-parameters/cir/cir-unit": {
+    "name": "Cir单位"
+  },
+  "/huawei-qos:qos/car-template/templates/template/cir-parameters/cir/pir-unit": {
+    "name": "Pir单位"
+  },
+  "/huawei-qos:qos/car-template/templates/template/cir-parameters/cir/cbs-unit": {
+    "name": "Cbs单位"
+  },
+  "/huawei-qos:qos/car-template/templates/template/cir-parameters/cir/pbs-unit": {
+    "name": "Pbs单位"
+  },
+  "/huawei-qos:qos/car-template/templates/template/cir-parameters/cir-percentage": {
+    "name": "CIR百分率"
+  },
+  "/huawei-qos:qos/car-template/templates/template/cir-parameters/cir-percentage/cir-percent": {
+    "name": "Cir百分比"
+  },
+  "/huawei-qos:qos/global-config": {
+    "name": "全局配置"
+  },
+  "/huawei-qos:qos/global-config/traffic-policys": {
+    "name": "流策略"
+  },
+  "/huawei-qos:qos/global-config/traffic-policys/traffic-policy": {
+    "name": "流策略"
+  },
+  "/huawei-qos:qos/global-config/traffic-policys/traffic-policy/direction": {
+    "name": "方向"
+  },
+  "/huawei-qos:qos/global-config/traffic-policys/traffic-policy/policy-name": {
+    "name": "流策略名"
+  },
+  "/huawei-qos:qos/global-config/traffic-policys/traffic-policy/slot-id": {
+    "name": "槽位号"
+  },
+  "/huawei-qos:qos/global-config/burst-modes": {
+    "name": "突发模式"
+  },
+  "/huawei-qos:qos/global-config/burst-modes/burst-mode": {
+    "name": "突发模式"
+  },
+  "/huawei-qos:qos/global-config/burst-modes/burst-mode/slot-id": {
+    "name": "插槽编号"
+  },
+  "/huawei-qos:qos/global-config/burst-modes/burst-mode/mode": {
+    "name": "模式"
+  },
+  "/huawei-qos:qos/global-config/traffic-class": {
+    "name": "发送等级"
+  },
+  "/huawei-qos:qos/global-config/traffic-class/priority": {
+    "name": "优先级"
+  },
+  "/huawei-qos:qos/global-config/queue-buffer-alarms-enable": {
+    "name": "启用队列缓冲区警报"
+  },
+  "/huawei-qos:qos/global-config/queue-buffer-alarms-enable/enable": {
+    "name": "启用"
+  },
+  "/huawei-qos:qos/global-config/queue-buffer-overrun-threshold": {
+    "name": "队列缓冲区溢出阈值"
+  },
+  "/huawei-qos:qos/global-config/queue-buffer-overrun-threshold/overrun-limit": {
+    "name": "超限"
+  },
+  "/huawei-qos:qos/global-config/car-ifg": {
+    "name": "QOS CAR模板"
+  },
+  "/huawei-qos:qos/global-config/car-ifg/mode": {
+    "name": "模式"
+  },
+  "/huawei-qos:qos/global-query": {
+    "name": "全局查询"
+  },
+  "/huawei-qos:qos/global-query/interface-classifier-statisticss": {
+    "name": "接口流分类统计"
+  },
+  "/huawei-qos:qos/global-query/interface-classifier-statisticss/interface-classifier-statistics": {
+    "name": "接口流分类统计"
+  },
+  "/huawei-qos:qos/global-query/interface-classifier-statisticss/interface-classifier-statistics/interface-name": {
+    "name": "接口名称"
+  },
+  "/huawei-qos:qos/global-query/interface-classifier-statisticss/interface-classifier-statistics/classifier-name": {
+    "name": "流分类名称"
+  },
+  "/huawei-qos:qos/global-query/interface-classifier-statisticss/interface-classifier-statistics/policy-name": {
+    "name": "流策略名称"
+  },
+  "/huawei-qos:qos/global-query/interface-classifier-statisticss/interface-classifier-statistics/direction": {
+    "name": "方向"
+  },
+  "/huawei-qos:qos/global-query/interface-classifier-statisticss/interface-classifier-statistics/slot-id": {
+    "name": "槽位号"
+  },
+  "/huawei-qos:qos/global-query/interface-classifier-statisticss/interface-classifier-statistics/match-packets": {
+    "name": "匹配报文"
+  },
+  "/huawei-qos:qos/global-query/interface-classifier-statisticss/interface-classifier-statistics/match-bytes": {
+    "name": "匹配字节"
+  },
+  "/huawei-qos:qos/global-query/interface-classifier-statisticss/interface-classifier-statistics/match-packet-rate": {
+    "name": "匹配报文率"
+  },
+  "/huawei-qos:qos/global-query/interface-classifier-statisticss/interface-classifier-statistics/match-byte-rate": {
+    "name": "匹配字节率"
+  },
+  "/huawei-qos:qos/global-query/interface-classifier-statisticss/interface-classifier-statistics/match-pass-packets": {
+    "name": "匹配通过报文"
+  },
+  "/huawei-qos:qos/global-query/interface-classifier-statisticss/interface-classifier-statistics/match-pass-bytes": {
+    "name": "匹配通过字节数"
+  },
+  "/huawei-qos:qos/global-query/interface-classifier-statisticss/interface-classifier-statistics/match-pass-packet-rate": {
+    "name": "匹配通过报文率"
+  },
+  "/huawei-qos:qos/global-query/interface-classifier-statisticss/interface-classifier-statistics/match-pass-byte-rate": {
+    "name": "匹配通过字节率"
+  },
+  "/huawei-qos:qos/global-query/interface-classifier-statisticss/interface-classifier-statistics/match-drop-packets": {
+    "name": "匹配丢包"
+  },
+  "/huawei-qos:qos/global-query/interface-classifier-statisticss/interface-classifier-statistics/match-drop-bytes": {
+    "name": "匹配丢弃字节"
+  },
+  "/huawei-qos:qos/global-query/interface-classifier-statisticss/interface-classifier-statistics/match-drop-packet-rate": {
+    "name": "匹配丢弃报文率"
+  },
+  "/huawei-qos:qos/global-query/interface-classifier-statisticss/interface-classifier-statistics/match-drop-byte-rate": {
+    "name": "匹配丢弃字节率"
+  },
+  "/huawei-qos:qos/global-query/interface-classifier-statisticss/interface-classifier-statistics/car-drop-packets": {
+    "name": "CAR丢弃报文"
+  },
+  "/huawei-qos:qos/global-query/interface-classifier-statisticss/interface-classifier-statistics/car-drop-bytes": {
+    "name": "CAR丢弃字节"
+  },
+  "/huawei-qos:qos/global-query/interface-classifier-statisticss/interface-classifier-statistics/car-drop-packet-rate": {
+    "name": "CAR丢弃报文率"
+  },
+  "/huawei-qos:qos/global-query/interface-classifier-statisticss/interface-classifier-statistics/car-drop-byte-rate": {
+    "name": "CAR丢弃字节率"
+  },
+  "/huawei-qos:qos/global-query/interface-classifier-statisticss/interface-classifier-statistics/filter-packets": {
+    "name": "过滤包"
+  },
+  "/huawei-qos:qos/global-query/interface-classifier-statisticss/interface-classifier-statistics/filter-bytes": {
+    "name": "过滤字节"
+  },
+  "/huawei-qos:qos/global-query/interface-classifier-statisticss/interface-classifier-statistics/filter-packet-rate": {
+    "name": "过滤报文率"
+  },
+  "/huawei-qos:qos/global-query/interface-classifier-statisticss/interface-classifier-statistics/filter-byte-rate": {
+    "name": "过滤字节率"
+  },
+  "/huawei-qos:qos/global-query/vlan-classifier-statisticss": {
+    "name": "VLAN流分类统计"
+  },
+  "/huawei-qos:qos/global-query/vlan-classifier-statisticss/vlan-classifier-statistics": {
+    "name": "VLAN流分类统计"
+  },
+  "/huawei-qos:qos/global-query/vlan-classifier-statisticss/vlan-classifier-statistics/vlan-id": {
+    "name": "VLAN ID"
+  },
+  "/huawei-qos:qos/global-query/vlan-classifier-statisticss/vlan-classifier-statistics/direction": {
+    "name": "方向"
+  },
+  "/huawei-qos:qos/global-query/vlan-classifier-statisticss/vlan-classifier-statistics/classifier-name": {
+    "name": "流分类名称"
+  },
+  "/huawei-qos:qos/global-query/vlan-classifier-statisticss/vlan-classifier-statistics/policy-name": {
+    "name": "流策略名称"
+  },
+  "/huawei-qos:qos/global-query/vlan-classifier-statisticss/vlan-classifier-statistics/slot-id": {
+    "name": "槽位号"
+  },
+  "/huawei-qos:qos/global-query/vlan-classifier-statisticss/vlan-classifier-statistics/match-packets": {
+    "name": "匹配报文"
+  },
+  "/huawei-qos:qos/global-query/vlan-classifier-statisticss/vlan-classifier-statistics/match-bytes": {
+    "name": "匹配字节"
+  },
+  "/huawei-qos:qos/global-query/vlan-classifier-statisticss/vlan-classifier-statistics/match-packet-rate": {
+    "name": "匹配报文率"
+  },
+  "/huawei-qos:qos/global-query/vlan-classifier-statisticss/vlan-classifier-statistics/match-byte-rate": {
+    "name": "匹配字节率"
+  },
+  "/huawei-qos:qos/global-query/vlan-classifier-statisticss/vlan-classifier-statistics/match-pass-packets": {
+    "name": "匹配通过报文"
+  },
+  "/huawei-qos:qos/global-query/vlan-classifier-statisticss/vlan-classifier-statistics/match-pass-bytes": {
+    "name": "匹配通过字节"
+  },
+  "/huawei-qos:qos/global-query/vlan-classifier-statisticss/vlan-classifier-statistics/match-pass-packet-rate": {
+    "name": "匹配通过报文率"
+  },
+  "/huawei-qos:qos/global-query/vlan-classifier-statisticss/vlan-classifier-statistics/match-pass-byte-rate": {
+    "name": "匹配通过字节率"
+  },
+  "/huawei-qos:qos/global-query/vlan-classifier-statisticss/vlan-classifier-statistics/match-drop-packets": {
+    "name": "匹配丢失报文"
+  },
+  "/huawei-qos:qos/global-query/vlan-classifier-statisticss/vlan-classifier-statistics/match-drop-bytes": {
+    "name": "匹配丢失字节"
+  },
+  "/huawei-qos:qos/global-query/vlan-classifier-statisticss/vlan-classifier-statistics/match-drop-packet-rate": {
+    "name": "匹配丢失报文率"
+  },
+  "/huawei-qos:qos/global-query/vlan-classifier-statisticss/vlan-classifier-statistics/match-drop-byte-rate": {
+    "name": "匹配丢失字节率"
+  },
+  "/huawei-qos:qos/global-query/vlan-classifier-statisticss/vlan-classifier-statistics/car-drop-packets": {
+    "name": "CAR丢失报文"
+  },
+  "/huawei-qos:qos/global-query/vlan-classifier-statisticss/vlan-classifier-statistics/car-drop-bytes": {
+    "name": "CAR丢失字节"
+  },
+  "/huawei-qos:qos/global-query/vlan-classifier-statisticss/vlan-classifier-statistics/car-drop-packet-rate": {
+    "name": "CAR丢失报文率"
+  },
+  "/huawei-qos:qos/global-query/vlan-classifier-statisticss/vlan-classifier-statistics/car-drop-byte-rate": {
+    "name": "CAR丢失字节率"
+  },
+  "/huawei-qos:qos/global-query/vlan-classifier-statisticss/vlan-classifier-statistics/filter-packets": {
+    "name": "过滤报文"
+  },
+  "/huawei-qos:qos/global-query/vlan-classifier-statisticss/vlan-classifier-statistics/filter-bytes": {
+    "name": "过滤字节"
+  },
+  "/huawei-qos:qos/global-query/vlan-classifier-statisticss/vlan-classifier-statistics/filter-packet-rate": {
+    "name": "过滤报文率"
+  },
+  "/huawei-qos:qos/global-query/vlan-classifier-statisticss/vlan-classifier-statistics/filter-byte-rate": {
+    "name": "过滤字节率"
+  },
+  "/huawei-qos:qos/global-query/vpn-classifier-statisticss": {
+    "name": "VPN流分类统计"
+  },
+  "/huawei-qos:qos/global-query/vpn-classifier-statisticss/vpn-classifier-statistics": {
+    "name": "VLAN流分类统计"
+  },
+  "/huawei-qos:qos/global-query/vpn-classifier-statisticss/vpn-classifier-statistics/vpn-instance": {
+    "name": "VPN实例"
+  },
+  "/huawei-qos:qos/global-query/vpn-classifier-statisticss/vpn-classifier-statistics/classifier-name": {
+    "name": "流分类名称"
+  },
+  "/huawei-qos:qos/global-query/vpn-classifier-statisticss/vpn-classifier-statistics/policy-name": {
+    "name": "流策略名称"
+  },
+  "/huawei-qos:qos/global-query/vpn-classifier-statisticss/vpn-classifier-statistics/direction": {
+    "name": "方向"
+  },
+  "/huawei-qos:qos/global-query/vpn-classifier-statisticss/vpn-classifier-statistics/slot-id": {
+    "name": "槽位号"
+  },
+  "/huawei-qos:qos/global-query/vpn-classifier-statisticss/vpn-classifier-statistics/match-packets": {
+    "name": "匹配报文"
+  },
+  "/huawei-qos:qos/global-query/vpn-classifier-statisticss/vpn-classifier-statistics/match-bytes": {
+    "name": "匹配字节"
+  },
+  "/huawei-qos:qos/global-query/vpn-classifier-statisticss/vpn-classifier-statistics/match-packet-rate": {
+    "name": "匹配报文率"
+  },
+  "/huawei-qos:qos/global-query/vpn-classifier-statisticss/vpn-classifier-statistics/match-byte-rate": {
+    "name": "匹配字节率"
+  },
+  "/huawei-qos:qos/global-query/vpn-classifier-statisticss/vpn-classifier-statistics/match-pass-packets": {
+    "name": "匹配通过报文"
+  },
+  "/huawei-qos:qos/global-query/vpn-classifier-statisticss/vpn-classifier-statistics/match-pass-bytes": {
+    "name": "匹配通过字节"
+  },
+  "/huawei-qos:qos/global-query/vpn-classifier-statisticss/vpn-classifier-statistics/match-pass-packet-rate": {
+    "name": "匹配通过报文率"
+  },
+  "/huawei-qos:qos/global-query/vpn-classifier-statisticss/vpn-classifier-statistics/match-pass-byte-rate": {
+    "name": "匹配通过字节速率"
+  },
+  "/huawei-qos:qos/global-query/vpn-classifier-statisticss/vpn-classifier-statistics/match-drop-packets": {
+    "name": "匹配丢失报文"
+  },
+  "/huawei-qos:qos/global-query/vpn-classifier-statisticss/vpn-classifier-statistics/match-drop-bytes": {
+    "name": "匹配丢失字节"
+  },
+  "/huawei-qos:qos/global-query/vpn-classifier-statisticss/vpn-classifier-statistics/match-drop-packet-rate": {
+    "name": "匹配丢失报文率"
+  },
+  "/huawei-qos:qos/global-query/vpn-classifier-statisticss/vpn-classifier-statistics/match-drop-byte-rate": {
+    "name": "匹配丢失字节率"
+  },
+  "/huawei-qos:qos/global-query/vpn-classifier-statisticss/vpn-classifier-statistics/car-drop-packets": {
+    "name": "CAR丢弃报文"
+  },
+  "/huawei-qos:qos/global-query/vpn-classifier-statisticss/vpn-classifier-statistics/car-drop-bytes": {
+    "name": "CAR丢弃字节"
+  },
+  "/huawei-qos:qos/global-query/vpn-classifier-statisticss/vpn-classifier-statistics/car-drop-packet-rate": {
+    "name": "CAR丢弃报文率"
+  },
+  "/huawei-qos:qos/global-query/vpn-classifier-statisticss/vpn-classifier-statistics/car-drop-byte-rate": {
+    "name": "CAR丢弃字节率"
+  },
+  "/huawei-qos:qos/global-query/vpn-classifier-statisticss/vpn-classifier-statistics/filter-packets": {
+    "name": "过滤报文"
+  },
+  "/huawei-qos:qos/global-query/vpn-classifier-statisticss/vpn-classifier-statistics/filter-bytes": {
+    "name": "过滤字节"
+  },
+  "/huawei-qos:qos/global-query/vpn-classifier-statisticss/vpn-classifier-statistics/filter-packet-rate": {
+    "name": "过滤报文率"
+  },
+  "/huawei-qos:qos/global-query/vpn-classifier-statisticss/vpn-classifier-statistics/filter-byte-rate": {
+    "name": "过滤字节率"
+  },
+  "/huawei-qos:qos/global-query/global-classifier-statisticss": {
+    "name": "全局流分类统计"
+  },
+  "/huawei-qos:qos/global-query/global-classifier-statisticss/global-classifier-statistics": {
+    "name": "全局分类器统计"
+  },
+  "/huawei-qos:qos/global-query/global-classifier-statisticss/global-classifier-statistics/classifier-name": {
+    "name": "流分类名称"
+  },
+  "/huawei-qos:qos/global-query/global-classifier-statisticss/global-classifier-statistics/policy-name": {
+    "name": "流策略名称"
+  },
+  "/huawei-qos:qos/global-query/global-classifier-statisticss/global-classifier-statistics/direction": {
+    "name": "方向"
+  },
+  "/huawei-qos:qos/global-query/global-classifier-statisticss/global-classifier-statistics/slot-id": {
+    "name": "槽位号"
+  },
+  "/huawei-qos:qos/global-query/global-classifier-statisticss/global-classifier-statistics/match-packets": {
+    "name": "匹配报文"
+  },
+  "/huawei-qos:qos/global-query/global-classifier-statisticss/global-classifier-statistics/match-bytes": {
+    "name": "匹配字节"
+  },
+  "/huawei-qos:qos/global-query/global-classifier-statisticss/global-classifier-statistics/match-packet-rate": {
+    "name": "匹配报文率"
+  },
+  "/huawei-qos:qos/global-query/global-classifier-statisticss/global-classifier-statistics/match-byte-rate": {
+    "name": "匹配字节率"
+  },
+  "/huawei-qos:qos/global-query/global-classifier-statisticss/global-classifier-statistics/match-pass-packets": {
+    "name": "匹配通过报文"
+  },
+  "/huawei-qos:qos/global-query/global-classifier-statisticss/global-classifier-statistics/match-pass-bytes": {
+    "name": "匹配通过字节"
+  },
+  "/huawei-qos:qos/global-query/global-classifier-statisticss/global-classifier-statistics/match-pass-packet-rate": {
+    "name": "匹配通过报文率"
+  },
+  "/huawei-qos:qos/global-query/global-classifier-statisticss/global-classifier-statistics/match-pass-byte-rate": {
+    "name": "匹配通过字节率"
+  },
+  "/huawei-qos:qos/global-query/global-classifier-statisticss/global-classifier-statistics/match-drop-packets": {
+    "name": "匹配丢失报文"
+  },
+  "/huawei-qos:qos/global-query/global-classifier-statisticss/global-classifier-statistics/match-drop-bytes": {
+    "name": "匹配丢弃字节"
+  },
+  "/huawei-qos:qos/global-query/global-classifier-statisticss/global-classifier-statistics/match-drop-packet-rate": {
+    "name": "匹配丢弃报文率"
+  },
+  "/huawei-qos:qos/global-query/global-classifier-statisticss/global-classifier-statistics/match-drop-byte-rate": {
+    "name": "匹配丢弃字节率"
+  },
+  "/huawei-qos:qos/global-query/global-classifier-statisticss/global-classifier-statistics/car-drop-packets": {
+    "name": "CAR丢弃报文"
+  },
+  "/huawei-qos:qos/global-query/global-classifier-statisticss/global-classifier-statistics/car-drop-bytes": {
+    "name": "CAR丢弃字节"
+  },
+  "/huawei-qos:qos/global-query/global-classifier-statisticss/global-classifier-statistics/car-drop-packet-rate": {
+    "name": "CAR丢弃报文率"
+  },
+  "/huawei-qos:qos/global-query/global-classifier-statisticss/global-classifier-statistics/car-drop-byte-rate": {
+    "name": "CAR丢弃字节率"
+  },
+  "/huawei-qos:qos/global-query/global-classifier-statisticss/global-classifier-statistics/filter-packets": {
+    "name": "过滤报文"
+  },
+  "/huawei-qos:qos/global-query/global-classifier-statisticss/global-classifier-statistics/filter-bytes": {
+    "name": "过滤字节"
+  },
+  "/huawei-qos:qos/global-query/global-classifier-statisticss/global-classifier-statistics/filter-packet-rate": {
+    "name": "过滤报文率"
+  },
+  "/huawei-qos:qos/global-query/global-classifier-statisticss/global-classifier-statistics/filter-byte-rate": {
+    "name": "过滤字节率"
+  },
+  "/huawei-qos:qos/global-query/group-classifier-statisticss": {
+    "name": "组流分类统计"
+  },
+  "/huawei-qos:qos/global-query/group-classifier-statisticss/group-classifier-statistics": {
+    "name": "组流分类统计"
+  },
+  "/huawei-qos:qos/global-query/group-classifier-statisticss/group-classifier-statistics/group-name": {
+    "name": "组名称"
+  },
+  "/huawei-qos:qos/global-query/group-classifier-statisticss/group-classifier-statistics/classifier-name": {
+    "name": "流分类名称"
+  },
+  "/huawei-qos:qos/global-query/group-classifier-statisticss/group-classifier-statistics/policy-name": {
+    "name": "流策略名称"
+  },
+  "/huawei-qos:qos/global-query/group-classifier-statisticss/group-classifier-statistics/direction": {
+    "name": "方向"
+  },
+  "/huawei-qos:qos/global-query/group-classifier-statisticss/group-classifier-statistics/slot-id": {
+    "name": "槽位号"
+  },
+  "/huawei-qos:qos/global-query/group-classifier-statisticss/group-classifier-statistics/match-packets": {
+    "name": "匹配报文"
+  },
+  "/huawei-qos:qos/global-query/group-classifier-statisticss/group-classifier-statistics/match-bytes": {
+    "name": "匹配字节"
+  },
+  "/huawei-qos:qos/global-query/group-classifier-statisticss/group-classifier-statistics/match-packet-rate": {
+    "name": "匹配报文率"
+  },
+  "/huawei-qos:qos/global-query/group-classifier-statisticss/group-classifier-statistics/match-byte-rate": {
+    "name": "匹配字节率"
+  },
+  "/huawei-qos:qos/global-query/group-classifier-statisticss/group-classifier-statistics/match-pass-packets": {
+    "name": "匹配通过报文"
+  },
+  "/huawei-qos:qos/global-query/group-classifier-statisticss/group-classifier-statistics/match-pass-bytes": {
+    "name": "匹配通过字节"
+  },
+  "/huawei-qos:qos/global-query/group-classifier-statisticss/group-classifier-statistics/match-pass-packet-rate": {
+    "name": "匹配通过报文率"
+  },
+  "/huawei-qos:qos/global-query/group-classifier-statisticss/group-classifier-statistics/match-pass-byte-rate": {
+    "name": "匹配通过字节率"
+  },
+  "/huawei-qos:qos/global-query/group-classifier-statisticss/group-classifier-statistics/match-drop-packets": {
+    "name": "匹配丢弃报文"
+  },
+  "/huawei-qos:qos/global-query/group-classifier-statisticss/group-classifier-statistics/match-drop-bytes": {
+    "name": "匹配丢弃字节"
+  },
+  "/huawei-qos:qos/global-query/group-classifier-statisticss/group-classifier-statistics/match-drop-packet-rate": {
+    "name": "匹配丢弃报文率"
+  },
+  "/huawei-qos:qos/global-query/group-classifier-statisticss/group-classifier-statistics/match-drop-byte-rate": {
+    "name": "匹配丢弃字节率"
+  },
+  "/huawei-qos:qos/global-query/group-classifier-statisticss/group-classifier-statistics/car-drop-packets": {
+    "name": "CAR丢弃报文"
+  },
+  "/huawei-qos:qos/global-query/group-classifier-statisticss/group-classifier-statistics/car-drop-bytes": {
+    "name": "CAR丢弃字节"
+  },
+  "/huawei-qos:qos/global-query/group-classifier-statisticss/group-classifier-statistics/car-drop-packet-rate": {
+    "name": "CAR丢弃报文率"
+  },
+  "/huawei-qos:qos/global-query/group-classifier-statisticss/group-classifier-statistics/car-drop-byte-rate": {
+    "name": "CAR丢弃字节率"
+  },
+  "/huawei-qos:qos/global-query/group-classifier-statisticss/group-classifier-statistics/filter-packets": {
+    "name": "过滤报文"
+  },
+  "/huawei-qos:qos/global-query/group-classifier-statisticss/group-classifier-statistics/filter-bytes": {
+    "name": "过滤字节"
+  },
+  "/huawei-qos:qos/global-query/group-classifier-statisticss/group-classifier-statistics/filter-packet-rate": {
+    "name": "过滤报文率"
+  },
+  "/huawei-qos:qos/global-query/group-classifier-statisticss/group-classifier-statistics/filter-byte-rate": {
+    "name": "过滤字节率"
+  },
+  "/huawei-qos:qos/global-query/traffic-policy-states": {
+    "name": "流策略状态"
+  },
+  "/huawei-qos:qos/global-query/traffic-policy-states/interface-applys": {
+    "name": "接口应用"
+  },
+  "/huawei-qos:qos/global-query/traffic-policy-states/interface-applys/interface-apply": {
+    "name": "接口应用"
+  },
+  "/huawei-qos:qos/global-query/traffic-policy-states/interface-applys/interface-apply/interface-name": {
+    "name": "接口名"
+  },
+  "/huawei-qos:qos/global-query/traffic-policy-states/interface-applys/interface-apply/direction": {
+    "name": "方向"
+  },
+  "/huawei-qos:qos/global-query/traffic-policy-states/interface-applys/interface-apply/slot-id": {
+    "name": "槽位号"
+  },
+  "/huawei-qos:qos/global-query/traffic-policy-states/interface-applys/interface-apply/policy-name": {
+    "name": "流策略"
+  },
+  "/huawei-qos:qos/global-query/traffic-policy-states/interface-applys/interface-apply/result": {
+    "name": "应用结果"
+  },
+  "/huawei-qos:qos/global-query/traffic-policy-states/group-applys": {
+    "name": "Qos组应用"
+  },
+  "/huawei-qos:qos/global-query/traffic-policy-states/group-applys/group-apply": {
+    "name": "Qos组应用"
+  },
+  "/huawei-qos:qos/global-query/traffic-policy-states/group-applys/group-apply/group-name": {
+    "name": "组名"
+  },
+  "/huawei-qos:qos/global-query/traffic-policy-states/group-applys/group-apply/direction": {
+    "name": "方向"
+  },
+  "/huawei-qos:qos/global-query/traffic-policy-states/group-applys/group-apply/slot-id": {
+    "name": "槽位号"
+  },
+  "/huawei-qos:qos/global-query/traffic-policy-states/group-applys/group-apply/policy-name": {
+    "name": "流策略"
+  },
+  "/huawei-qos:qos/global-query/traffic-policy-states/group-applys/group-apply/result": {
+    "name": "应用结果"
+  },
+  "/huawei-qos:qos/global-query/traffic-policy-states/vpn-applys": {
+    "name": "VPN应用"
+  },
+  "/huawei-qos:qos/global-query/traffic-policy-states/vpn-applys/vpn-apply": {
+    "name": "VPN应用"
+  },
+  "/huawei-qos:qos/global-query/traffic-policy-states/vpn-applys/vpn-apply/vpn-instance": {
+    "name": "VPN名"
+  },
+  "/huawei-qos:qos/global-query/traffic-policy-states/vpn-applys/vpn-apply/direction": {
+    "name": "方向"
+  },
+  "/huawei-qos:qos/global-query/traffic-policy-states/vpn-applys/vpn-apply/slot-id": {
+    "name": "槽位号"
+  },
+  "/huawei-qos:qos/global-query/traffic-policy-states/vpn-applys/vpn-apply/policy-name": {
+    "name": "流策略"
+  },
+  "/huawei-qos:qos/global-query/traffic-policy-states/vpn-applys/vpn-apply/result": {
+    "name": "应用结果"
+  },
+  "/huawei-qos:qos/global-query/traffic-policy-states/vlan-applys": {
+    "name": "VLAN应用"
+  },
+  "/huawei-qos:qos/global-query/traffic-policy-states/vlan-applys/vlan-apply": {
+    "name": "VLAN应用"
+  },
+  "/huawei-qos:qos/global-query/traffic-policy-states/vlan-applys/vlan-apply/vlan-id": {
+    "name": "VLAN ID"
+  },
+  "/huawei-qos:qos/global-query/traffic-policy-states/vlan-applys/vlan-apply/direction": {
+    "name": "方向"
+  },
+  "/huawei-qos:qos/global-query/traffic-policy-states/vlan-applys/vlan-apply/slot-id": {
+    "name": "槽位号"
+  },
+  "/huawei-qos:qos/global-query/traffic-policy-states/vlan-applys/vlan-apply/policy-name": {
+    "name": "流策略"
+  },
+  "/huawei-qos:qos/global-query/traffic-policy-states/vlan-applys/vlan-apply/result": {
+    "name": "应用结果"
+  },
+  "/huawei-qos:qos/global-query/traffic-policy-states/bd-applys": {
+    "name": "BD应用"
+  },
+  "/huawei-qos:qos/global-query/traffic-policy-states/bd-applys/bd-apply": {
+    "name": "BD应用"
+  },
+  "/huawei-qos:qos/global-query/traffic-policy-states/bd-applys/bd-apply/bd-id": {
+    "name": "BD值"
+  },
+  "/huawei-qos:qos/global-query/traffic-policy-states/bd-applys/bd-apply/direction": {
+    "name": "方向"
+  },
+  "/huawei-qos:qos/global-query/traffic-policy-states/bd-applys/bd-apply/slot-id": {
+    "name": "槽位号"
+  },
+  "/huawei-qos:qos/global-query/traffic-policy-states/bd-applys/bd-apply/policy-name": {
+    "name": "流策略"
+  },
+  "/huawei-qos:qos/global-query/traffic-policy-states/bd-applys/bd-apply/result": {
+    "name": "应用结果"
+  },
+  "/huawei-qos:qos/global-query/traffic-policy-states/global-applys": {
+    "name": "全局应用"
+  },
+  "/huawei-qos:qos/global-query/traffic-policy-states/global-applys/global-apply": {
+    "name": "全局应用"
+  },
+  "/huawei-qos:qos/global-query/traffic-policy-states/global-applys/global-apply/direction": {
+    "name": "方向"
+  },
+  "/huawei-qos:qos/global-query/traffic-policy-states/global-applys/global-apply/slot-id": {
+    "name": "槽位号"
+  },
+  "/huawei-qos:qos/global-query/traffic-policy-states/global-applys/global-apply/policy-name": {
+    "name": "流策略"
+  },
+  "/huawei-qos:qos/global-query/traffic-policy-states/global-applys/global-apply/result": {
+    "name": "应用结果"
+  },
+  "/huawei-qos:qos/global-query/queue-statisticss": {
+    "name": "队列流量统计"
+  },
+  "/huawei-qos:qos/global-query/queue-statisticss/queue-statistics": {
+    "name": "队列流量统计"
+  },
+  "/huawei-qos:qos/global-query/queue-statisticss/queue-statistics/interface-name": {
+    "name": "接口名"
+  },
+  "/huawei-qos:qos/global-query/queue-statisticss/queue-statistics/service-class": {
+    "name": "服务等级"
+  },
+  "/huawei-qos:qos/global-query/queue-statisticss/queue-statistics/pass-packets": {
+    "name": "通过报文"
+  },
+  "/huawei-qos:qos/global-query/queue-statisticss/queue-statistics/pass-bytes": {
+    "name": "通过字节"
+  },
+  "/huawei-qos:qos/global-query/queue-statisticss/queue-statistics/pass-packet-rate": {
+    "name": "报文通过率"
+  },
+  "/huawei-qos:qos/global-query/queue-statisticss/queue-statistics/pass-byte-rate": {
+    "name": "字节通过率"
+  },
+  "/huawei-qos:qos/global-query/queue-statisticss/queue-statistics/discard-packets": {
+    "name": "丢弃报文"
+  },
+  "/huawei-qos:qos/global-query/queue-statisticss/queue-statistics/discard-bytes": {
+    "name": "丢弃字节"
+  },
+  "/huawei-qos:qos/global-query/queue-statisticss/queue-statistics/discard-packet-rate": {
+    "name": "丢弃报文率"
+  },
+  "/huawei-qos:qos/global-query/queue-statisticss/queue-statistics/discard-byte-rate": {
+    "name": "丢弃字节率"
+  },
+  "/huawei-qos:qos/global-query/port-buffer-usage-statisticss": {
+    "name": "端口缓冲使用统计"
+  },
+  "/huawei-qos:qos/global-query/port-buffer-usage-statisticss/port-buffer-usage-statistics": {
+    "name": "端口缓冲使用统计"
+  },
+  "/huawei-qos:qos/global-query/port-buffer-usage-statisticss/port-buffer-usage-statistics/slot-id": {
+    "name": "槽位号"
+  },
+  "/huawei-qos:qos/global-query/port-buffer-usage-statisticss/port-buffer-usage-statistics/interface-name": {
+    "name": "接口名称"
+  },
+  "/huawei-qos:qos/global-query/port-buffer-usage-statisticss/port-buffer-usage-statistics/total-buffer": {
+    "name": "总缓冲"
+  },
+  "/huawei-qos:qos/global-query/port-buffer-usage-statisticss/port-buffer-usage-statistics/current-used": {
+    "name": "目前使用"
+  },
+  "/huawei-qos:qos/global-query/port-buffer-usage-statisticss/port-buffer-usage-statistics/remained": {
+    "name": "剩余"
+  },
+  "/huawei-qos:qos/global-query/port-buffer-usage-statisticss/port-buffer-usage-statistics/peak-used": {
+    "name": "峰值使用"
+  },
+  "/huawei-qos:qos/global-query/port-buffer-usage-statisticss/port-buffer-usage-statistics/average-used": {
+    "name": "平均使用"
+  },
+  "/huawei-qos:qos/global-query/queue-buffer-usage-statisticss": {
+    "name": "队列缓冲使用统计"
+  },
+  "/huawei-qos:qos/global-query/queue-buffer-usage-statisticss/queue-buffer-usage-statistics": {
+    "name": "队列缓冲使用统计"
+  },
+  "/huawei-qos:qos/global-query/queue-buffer-usage-statisticss/queue-buffer-usage-statistics/slot-id": {
+    "name": "槽位号"
+  },
+  "/huawei-qos:qos/global-query/queue-buffer-usage-statisticss/queue-buffer-usage-statistics/interface-name": {
+    "name": "接口名称"
+  },
+  "/huawei-qos:qos/global-query/queue-buffer-usage-statisticss/queue-buffer-usage-statistics/queue-id": {
+    "name": "队列ID"
+  },
+  "/huawei-qos:qos/global-query/queue-buffer-usage-statisticss/queue-buffer-usage-statistics/current-used": {
+    "name": "目前使用"
+  },
+  "/huawei-qos:qos/global-query/queue-buffer-usage-statisticss/queue-buffer-usage-statistics/peak-used": {
+    "name": "巅峰使用"
+  },
+  "/huawei-qos:qos/global-query/queue-buffer-usage-statisticss/queue-buffer-usage-statistics/average-used": {
+    "name": "平均使用"
+  },
+  "/huawei-qos:qos/global-query/queue-drop-statisticss": {
+    "name": "队列丢失统计"
+  },
+  "/huawei-qos:qos/global-query/queue-drop-statisticss/queue-drop-statistics": {
+    "name": "队列丢失统计"
+  },
+  "/huawei-qos:qos/global-query/queue-drop-statisticss/queue-drop-statistics/interface-name": {
+    "name": "接口名称"
+  },
+  "/huawei-qos:qos/global-query/queue-drop-statisticss/queue-drop-statistics/queue0-drop-bytes": {
+    "name": "队列0丢失字节"
+  },
+  "/huawei-qos:qos/global-query/queue-drop-statisticss/queue-drop-statistics/queue0-drop-packets": {
+    "name": "队列0丢失报文"
+  },
+  "/huawei-qos:qos/global-query/queue-drop-statisticss/queue-drop-statistics/queue1-drop-bytes": {
+    "name": "队列1丢弃字节"
+  },
+  "/huawei-qos:qos/global-query/queue-drop-statisticss/queue-drop-statistics/queue1-drop-packets": {
+    "name": "队列1丢弃报文"
+  },
+  "/huawei-qos:qos/global-query/queue-drop-statisticss/queue-drop-statistics/queue2-drop-bytes": {
+    "name": "队列2丢弃字节"
+  },
+  "/huawei-qos:qos/global-query/queue-drop-statisticss/queue-drop-statistics/queue2-drop-packets": {
+    "name": "队列2丢弃报文"
+  },
+  "/huawei-qos:qos/global-query/queue-drop-statisticss/queue-drop-statistics/queue3-drop-bytes": {
+    "name": "队列3丢弃字节"
+  },
+  "/huawei-qos:qos/global-query/queue-drop-statisticss/queue-drop-statistics/queue3-drop-packets": {
+    "name": "队列3丢弃报文"
+  },
+  "/huawei-qos:qos/global-query/queue-drop-statisticss/queue-drop-statistics/queue4-drop-bytes": {
+    "name": "队列4丢弃字节"
+  },
+  "/huawei-qos:qos/global-query/queue-drop-statisticss/queue-drop-statistics/queue4-drop-packets": {
+    "name": "队列4丢弃报文"
+  },
+  "/huawei-qos:qos/global-query/queue-drop-statisticss/queue-drop-statistics/queue5-drop-bytes": {
+    "name": "队列5丢弃字节"
+  },
+  "/huawei-qos:qos/global-query/queue-drop-statisticss/queue-drop-statistics/queue5-drop-packets": {
+    "name": "队列5丢弃报文"
+  },
+  "/huawei-qos:qos/global-query/queue-drop-statisticss/queue-drop-statistics/queue6-drop-bytes": {
+    "name": "队列6丢弃字节"
+  },
+  "/huawei-qos:qos/global-query/queue-drop-statisticss/queue-drop-statistics/queue6-drop-packets": {
+    "name": "队列6丢弃报文"
+  },
+  "/huawei-qos:qos/global-query/queue-drop-statisticss/queue-drop-statistics/queue7-drop-bytes": {
+    "name": "队列7丢弃字节"
+  },
+  "/huawei-qos:qos/global-query/queue-drop-statisticss/queue-drop-statistics/queue7-drop-packets": {
+    "name": "队列7丢弃报文"
+  },
+  "/huawei-qos:qos/global-query/ing-port-drop-statisticss": {
+    "name": "ING端口丢弃统计"
+  },
+  "/huawei-qos:qos/global-query/ing-port-drop-statisticss/ing-port-drop-statistics": {
+    "name": "ING端口丢弃统计"
+  },
+  "/huawei-qos:qos/global-query/ing-port-drop-statisticss/ing-port-drop-statistics/interface-name": {
+    "name": "接口名称"
+  },
+  "/huawei-qos:qos/global-query/ing-port-drop-statisticss/ing-port-drop-statistics/drop-bytes": {
+    "name": "丢弃字节"
+  },
+  "/huawei-qos:qos/global-query/ing-port-drop-statisticss/ing-port-drop-statistics/drop-packets": {
+    "name": "丢弃报文"
+  },
+  "/huawei-qos:qos/global-query/port-ecn-statisticss": {
+    "name": "ECN端口统计"
+  },
+  "/huawei-qos:qos/global-query/port-ecn-statisticss/port-ecn-statistics": {
+    "name": "ECN端口统计"
+  },
+  "/huawei-qos:qos/global-query/port-ecn-statisticss/port-ecn-statistics/interface-name": {
+    "name": "接口名称"
+  },
+  "/huawei-qos:qos/global-query/port-ecn-statisticss/port-ecn-statistics/packets": {
+    "name": "报文"
+  },
+  "/huawei-qos:qos/global-query/acl-resource-usages": {
+    "name": "ACL资源使用"
+  },
+  "/huawei-qos:qos/global-query/acl-resource-usages/acl-resource-usage": {
+    "name": "ACL资源使用"
+  },
+  "/huawei-qos:qos/global-query/acl-resource-usages/acl-resource-usage/slot-id": {
+    "name": "槽位号"
+  },
+  "/huawei-qos:qos/global-query/acl-resource-usages/acl-resource-usage/chip-id": {
+    "name": "芯片编号"
+  },
+  "/huawei-qos:qos/global-query/acl-resource-usages/acl-resource-usage/resource-name": {
+    "name": "资源名称"
+  },
+  "/huawei-qos:qos/global-query/acl-resource-usages/acl-resource-usage/acl-total": {
+    "name": "ACL总量"
+  },
+  "/huawei-qos:qos/global-query/acl-resource-usages/acl-resource-usage/acl-used": {
+    "name": "ACL已使用"
+  },
+  "/huawei-qos:qos/global-query/acl-bank-resource-usages": {
+    "name": "ACL扇区资源使用情况"
+  },
+  "/huawei-qos:qos/global-query/acl-bank-resource-usages/acl-bank-resource-usage": {
+    "name": "ACL扇区资源使用情况"
+  },
+  "/huawei-qos:qos/global-query/acl-bank-resource-usages/acl-bank-resource-usage/slot-id": {
+    "name": "槽位号"
+  },
+  "/huawei-qos:qos/global-query/acl-bank-resource-usages/acl-bank-resource-usage/chip-id": {
+    "name": "芯片ID"
+  },
+  "/huawei-qos:qos/global-query/acl-bank-resource-usages/acl-bank-resource-usage/entry-used-list": {
+    "name": "进入使用列表"
+  },
+  "/huawei-qos:qos/global-query/acl-bank-resource-usages/acl-bank-resource-usage/entry-free": {
+    "name": "进入未使用"
+  },
+  "/huawei-qos:qos/global-query/acl-bank-resource-usages/acl-bank-resource-usage/bankid-list": {
+    "name": "扇区ID列表"
+  },
+  "/huawei-qos:qos/global-query/acl-bank-resource-usages/acl-bank-resource-usage/direction": {
+    "name": "方向"
+  },
+  "/huawei-qos:qos/global-query/acl-bank-resource-usages/acl-bank-resource-usage/service-name": {
+    "name": "服务名称"
+  },
+  "/huawei-qos:qos/global-query/acl-bank-resource-usages/acl-bank-resource-usage/service-type": {
+    "name": "服务类型"
+  },
+  "/huawei-qos:qos/global-query/acl-bank-resource-usages/acl-bank-resource-usage/group-id": {
+    "name": "组ID"
+  },
+  "/huawei-qos:qos/global-query/interface-ecn-thresholds": {
+    "name": "接口ecn阈值"
+  },
+  "/huawei-qos:qos/global-query/interface-ecn-thresholds/interface-ecn-threshold": {
+    "name": "接口ecn阈值"
+  },
+  "/huawei-qos:qos/global-query/interface-ecn-thresholds/interface-ecn-threshold/interface-name": {
+    "name": "接口名称"
+  },
+  "/huawei-qos:qos/global-query/interface-ecn-thresholds/interface-ecn-threshold/queue-id": {
+    "name": "队列编号"
+  },
+  "/huawei-qos:qos/global-query/interface-ecn-thresholds/interface-ecn-threshold/ecn-min": {
+    "name": "ECN最小值"
+  },
+  "/huawei-qos:qos/global-query/interface-ecn-thresholds/interface-ecn-threshold/ecn-max": {
+    "name": "ECN最大值"
+  },
+  "/huawei-qos:qos/global-query/interface-ecn-thresholds/interface-ecn-threshold/probability": {
+    "name": "可能性"
+  },
+  "/huawei-qos:qos/global-query/interface-ecn-thresholds/interface-ecn-threshold/queue-size": {
+    "name": "队列大小"
+  },
+  "/huawei-qos:qos/global-query/slot-forward-modes": {
+    "name": "插槽前转模式"
+  },
+  "/huawei-qos:qos/global-query/slot-forward-modes/slot-forward-mode": {
+    "name": "插槽前转模式"
+  },
+  "/huawei-qos:qos/global-query/slot-forward-modes/slot-forward-mode/slot-id": {
+    "name": "插槽编号"
+  },
+  "/huawei-qos:qos/global-query/slot-forward-modes/slot-forward-mode/config-mode": {
+    "name": "配置模式"
+  },
+  "/huawei-qos:qos/global-query/slot-forward-modes/slot-forward-mode/current-mode": {
+    "name": "当前模式"
+  },
+  "/huawei-qos:qos/global-query/interface-monitoring-results": {
+    "name": "接口监控结果"
+  },
+  "/huawei-qos:qos/global-query/interface-monitoring-results/interface-monitoring-result": {
+    "name": "接口监控结果"
+  },
+  "/huawei-qos:qos/global-query/interface-monitoring-results/interface-monitoring-result/interface-name": {
+    "name": "接口名称"
+  },
+  "/huawei-qos:qos/global-query/interface-monitoring-results/interface-monitoring-result/queue-id": {
+    "name": "队列编号"
+  },
+  "/huawei-qos:qos/global-query/interface-monitoring-results/interface-monitoring-result/record-number": {
+    "name": "记录编号"
+  },
+  "/huawei-qos:qos/global-query/interface-monitoring-results/interface-monitoring-result/query-type": {
+    "name": "查询类型"
+  },
+  "/huawei-qos:qos/global-query/interface-monitoring-results/interface-monitoring-result/time": {
+    "name": "时间"
+  },
+  "/huawei-qos:qos/global-query/interface-monitoring-results/interface-monitoring-result/buffer-usage": {
+    "name": "缓冲使用"
+  },
+  "/huawei-qos:qos/global-query/interface-monitoring-results/interface-monitoring-result/percent": {
+    "name": "百分率"
+  },
+  "/huawei-qos:reset-interface-traffic-policy-statistics": {
+    "name": "重置接口流策略统计"
+  },
+  "/huawei-qos:reset-interface-traffic-policy-statistics/input/interface-name": {
+    "name": "接口名"
+  },
+  "/huawei-qos:reset-interface-traffic-policy-statistics/input/direction": {
+    "name": "方向"
+  },
+  "/huawei-qos:reset-interface-traffic-policy-statistics/input/pe-vlan-id": {
+    "name": "外层VLAN ID"
+  },
+  "/huawei-qos:reset-interface-traffic-policy-statistics/input/vlan-id": {
+    "name": "VLAN ID"
+  },
+  "/huawei-qos:reset-global-policy-statistics": {
+    "name": "重置全局策略统计"
+  },
+  "/huawei-qos:reset-global-policy-statistics/input/direction": {
+    "name": "方向"
+  },
+  "/huawei-qos:reset-global-policy-statistics/input/slot-id": {
+    "name": "槽位号"
+  },
+  "/huawei-qos:reset-global-policy-statistics/input/policy-name": {
+    "name": "政策名称"
+  },
+  "/huawei-qos:reset-vlan-traffic-policy-statistics": {
+    "name": "复位VLAN流策略统计"
+  },
+  "/huawei-qos:reset-vlan-traffic-policy-statistics/input/policy-name": {
+    "name": "政策名称"
+  },
+  "/huawei-qos:reset-vlan-traffic-policy-statistics/input/direction": {
+    "name": "方向"
+  },
+  "/huawei-qos:reset-vlan-traffic-policy-statistics/input/vlan-id": {
+    "name": "VLAN ID"
+  },
+  "/huawei-qos:reset-vpn-traffic-policy-statistics": {
+    "name": "复位VPN流策略统计"
+  },
+  "/huawei-qos:reset-vpn-traffic-policy-statistics/input/vpn-instance": {
+    "name": "VPN实例"
+  },
+  "/huawei-qos:reset-vpn-traffic-policy-statistics/input/policy-name": {
+    "name": "政策名称"
+  },
+  "/huawei-qos:reset-vpn-traffic-policy-statistics/input/direction": {
+    "name": "方向"
+  },
+  "/huawei-qos:reset-interface-car-statistics": {
+    "name": "重置CAR接口统计"
+  },
+  "/huawei-qos:reset-interface-car-statistics/input/interface-name": {
+    "name": "接口名称"
+  },
+  "/huawei-qos:reset-interface-car-statistics/input/direction": {
+    "name": "方向"
+  },
+  "/huawei-qos:reset-queue-statistics": {
+    "name": "重置队列统计"
+  },
+  "/huawei-qos:reset-queue-statistics/input/interface-name": {
+    "name": "接口名称"
+  },
+  "/huawei-qos:reset-queue-statistics/input/slot-id": {
+    "name": "插槽编号"
+  },
+  "/huawei-qos:reset-interface-ecn-statistics": {
+    "name": "重置接口ecn统计信息"
+  },
+  "/huawei-qos:reset-interface-ecn-statistics/input/interface-name": {
+    "name": "接口名称"
+  },
+  "/huawei-qos:reset-interface-buffer-usage-statistics": {
+    "name": "重置接口缓冲区使用情况统计"
+  },
+  "/huawei-qos:reset-interface-buffer-usage-statistics/input/interface-name": {
+    "name": "接口名称"
+  },
+  "/huawei-qos:reset-interface-buffer-usage-statistics/input/slot-id": {
+    "name": "插槽编号"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos": {
+    "name": "Qos应用"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/traffic-policys": {
+    "name": "流策略"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/traffic-policys/traffic-policy": {
+    "name": "流策略"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/traffic-policys/traffic-policy/policy-name": {
+    "name": "流策略名"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/traffic-policys/traffic-policy/direction": {
+    "name": "方向"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/port-queues": {
+    "name": "端口队列"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/port-queues/port-queue": {
+    "name": "端口队列"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/port-queues/port-queue/service-class": {
+    "name": "服务等级"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/port-queues/port-queue/port-wred-name": {
+    "name": "端口名称"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/drop-eligible-indicator": {
+    "name": "DEI"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/drop-eligible-indicator/enable": {
+    "name": "使能"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/qos-lr": {
+    "name": "Qos-lr"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/qos-lr/cir-parameters": {
+    "name": "Cir参数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/qos-lr/cir-parameters/cir": {
+    "name": "Cir"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/qos-lr/cir-parameters/cir/cir-value": {
+    "name": "Cir值"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/qos-lr/cir-parameters/cir-percent": {
+    "name": "Cir百分比"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/qos-lr/cir-parameters/cir-percent/cir-percent-value": {
+    "name": "Cir百分比值"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/qos-lr/pps": {
+    "name": "PPS"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/qos-lr/pps/packets": {
+    "name": "包"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/qos-lr-outbound": {
+    "name": "QOS LR发送"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/qos-lr-outbound/cir": {
+    "name": "CIR"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/qos-lr-outbound/cir-unit": {
+    "name": "CIR单位"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/qos-lr-outbound/cbs": {
+    "name": "CBS"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/qos-lr-outbound/cbs-unit": {
+    "name": "CBS单位"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/queue-buffer-monitors": {
+    "name": "队列拥塞监控"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/queue-buffer-monitors/queue-buffer-monitor": {
+    "name": "队列拥塞监控"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/queue-buffer-monitors/queue-buffer-monitor/service-class": {
+    "name": "服务等级"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/queue-buffer-monitors/queue-buffer-monitor/enable": {
+    "name": "使能"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/queue-buffer-monitors/queue-buffer-monitor-threds": {
+    "name": "队列拥塞监控线程"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/queue-buffer-monitors/queue-buffer-monitor-threds/queue-buffer-monitor-thred": {
+    "name": "队列拥塞监控线程"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/queue-buffer-monitors/queue-buffer-monitor-threds/queue-buffer-monitor-thred/service-class": {
+    "name": "服务等级"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/queue-buffer-monitors/queue-buffer-monitor-threds/queue-buffer-monitor-thred/low-limit-percentage": {
+    "name": "下限百分比"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/queue-buffer-monitors/queue-buffer-monitor-threds/queue-buffer-monitor-thred/high-limit-percentage": {
+    "name": "上限百分比"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/port-priority": {
+    "name": "端口优先级"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/port-priority/priority": {
+    "name": "优先级"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/port-phb-trusts": {
+    "name": "Phb信任"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/port-phb-trusts/port-phb-trust": {
+    "name": "Phb信任"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/port-phb-trusts/port-phb-trust/type": {
+    "name": "类型"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/port-phb-trusts/port-phb-trust/dscp-phb-enable": {
+    "name": "Dscp phb启用"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/queue-schedules": {
+    "name": "队列调度"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/queue-schedules/queue-schedule": {
+    "name": "队列调度"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/queue-schedules/queue-schedule/queue-index": {
+    "name": "队列索引"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/queue-schedules/queue-schedule/schedule-mode": {
+    "name": "调度模式"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/queue-schedules/queue-schedule/weight": {
+    "name": "权值"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/burst-mode": {
+    "name": "突发模式"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/burst-mode/mode": {
+    "name": "模式"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/trust-upstream": {
+    "name": "上行信任"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/trust-upstream/diffserv-domain-name": {
+    "name": "区分服务域名"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/trust-8021p-dscp": {
+    "name": "信任-8021p-dscp"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/trust-8021p-dscp/type": {
+    "name": "类型"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/queue-buffers": {
+    "name": "队列缓冲区"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/queue-buffers/queue-buffer": {
+    "name": "队列缓冲区"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/queue-buffers/queue-buffer/queue-index": {
+    "name": "队列索引"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/queue-buffers/queue-buffer/config-mode": {
+    "name": "配置模式"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/queue-buffers/queue-buffer/shaping-parameters": {
+    "name": "整形参数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/queue-buffers/queue-buffer/shaping-parameters/shaping-percent": {
+    "name": "整型百分比"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/queue-buffers/queue-buffer/shaping-parameters/shaping-percent/cir-percent": {
+    "name": "CIR百分比"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/queue-buffers/queue-buffer/shaping-parameters/shaping-percent/pir-percent": {
+    "name": "PIR百分比"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/queue-buffers/queue-buffer/shaping-parameters/shaping-absolute": {
+    "name": "绝对整型"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/queue-buffers/queue-buffer/shaping-parameters/shaping-absolute/cir-value": {
+    "name": "CIR值"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/queue-buffers/queue-buffer/shaping-parameters/shaping-absolute/cir-unit": {
+    "name": "CIR单元"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/queue-buffers/queue-buffer/shaping-parameters/shaping-absolute/cbs-value": {
+    "name": "CBS单元"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/queue-buffers/queue-buffer/shaping-parameters/shaping-absolute/cbs-unit": {
+    "name": "CBS单元"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/queue-buffers/queue-buffer/shaping-parameters/shaping-absolute/pir-value": {
+    "name": "PIR值"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/queue-buffers/queue-buffer/shaping-parameters/shaping-absolute/pir-unit": {
+    "name": "PIR单位"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/queue-buffers/queue-buffer/shaping-parameters/shaping-absolute/pbs-value": {
+    "name": "PBS值"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/queue-buffers/queue-buffer/shaping-parameters/shaping-absolute/pbs-unit": {
+    "name": "PBS单位"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/queue-buffers/queue-buffer/queue-buffer-type": {
+    "name": "缓冲队列类型"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/queue-buffers/queue-buffer/queue-buffer-type/static": {
+    "name": "静态"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/queue-buffers/queue-buffer/queue-buffer-type/static/static-value": {
+    "name": "静态值"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/queue-buffers/queue-buffer/queue-buffer-type/static/static-unit": {
+    "name": "静态单元"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/queue-buffers/queue-buffer/queue-buffer-type/dynamic": {
+    "name": "动态"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/queue-buffers/queue-buffer/queue-buffer-type/dynamic/dynamic-value": {
+    "name": "动态值"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/car-templates": {
+    "name": "Car模板"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/car-templates/car-template": {
+    "name": "Car模板"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/car-templates/car-template/direction": {
+    "name": "方向"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/car-templates/car-template/name": {
+    "name": "名字"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/queue-ecns": {
+    "name": "队列ECN"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/queue-ecns/queue-ecn": {
+    "name": "队列ECN"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/queue-ecns/queue-ecn/service-class": {
+    "name": "服务等级"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-qos:qos/queue-ecns/queue-ecn/enable": {
+    "name": "使能"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-qos:traffic-policy-applys": {
+    "name": "流策略应用"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-qos:traffic-policy-applys/traffic-policy-apply": {
+    "name": "流策略应用"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-qos:traffic-policy-applys/traffic-policy-apply/policy-name": {
+    "name": "流策略名"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-qos:traffic-policy-applys/traffic-policy-apply/direction": {
+    "name": "方向"
+  },
+  "/rpcs/huawei-qos:qos/reset-interface-traffic-policy-statistics": {
+    "name": "重置接口流策略统计"
+  },
+  "/rpcs/huawei-qos:qos/reset-global-policy-statistics": {
+    "name": "重置全局策略统计"
+  },
+  "/rpcs/huawei-qos:qos/reset-vlan-traffic-policy-statistics": {
+    "name": "复位VLAN流策略统计"
+  },
+  "/rpcs/huawei-qos:qos/reset-vpn-traffic-policy-statistics": {
+    "name": "复位VPN流策略统计"
+  },
+  "/rpcs/huawei-qos:qos/reset-interface-car-statistics": {
+    "name": "重置CAR接口统计"
+  },
+  "/rpcs/huawei-qos:qos/reset-queue-statistics": {
+    "name": "重置队列统计"
+  },
+  "/rpcs/huawei-qos:qos/reset-interface-ecn-statistics": {
+    "name": "重置接口ecn统计信息"
+  },
+  "/rpcs/huawei-qos:qos/reset-interface-buffer-usage-statistics": {
+    "name": "重置接口缓冲区使用情况统计"
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "/huawei-vty:vty": {
+    "name": "VTY"
+  },
+  "/huawei-vty:vty/lines": {
+    "name": "VTY Configuration List"
+  },
+  "/huawei-vty:vty/lines/line": {
+    "name": "VTY Configuration"
+  },
+  "/huawei-vty:vty/lines/line/index": {
+    "name": "Line Index"
+  },
+  "/huawei-vty:vty/lines/line/idle-timeout-min": {
+    "name": "Idle Timeout (minutes)"
+  },
+  "/huawei-vty:vty/lines/line/idle-timeout-sec": {
+    "name": "Idle Timeout (seconds)"
+  },
+  "/huawei-vty:vty/lines/line/auth-mode": {
+    "name": "Authentication Mode"
+  },
+  "/huawei-vty:vty/lines/line/auth-password": {
+    "name": "Password"
+  },
+  "/huawei-vty:vty/lines/line/privilege-level": {
+    "name": "User Privilege Level"
+  },
+  "/huawei-vty:vty/lines/line/history-cmd-size": {
+    "name": "History Command Buffer Size"
+  },
+  "/huawei-vty:vty/lines/line/screen-length": {
+    "name": "Screen Length (Lines/Rows)"
+  },
+  "/huawei-vty:vty/lines/line/shell-enable": {
+    "name": "Shell Enable"
+  },
+  "/huawei-vty:vty/lines/line/acl4-inbound": {
+    "name": "ACL (IPv4) Inbound Name"
+  },
+  "/huawei-vty:vty/lines/line/acl4-outbound": {
+    "name": "ACL (IPv4) Outbound Name"
+  },
+  "/huawei-vty:vty/lines/line/acl6-inbound": {
+    "name": "ACL (IPv6) Inbound Name"
+  },
+  "/huawei-vty:vty/lines/line/acl6-outbound": {
+    "name": "ACL (IPv6) Outbound Name"
+  },
+  "/huawei-vty:vty/lines/line/acl4-inbound-num": {
+    "name": "ACL (IPv4) Inbound Number"
+  },
+  "/huawei-vty:vty/lines/line/acl4-outbound-num": {
+    "name": "ACL (IPv4) Outbound Number"
+  },
+  "/huawei-vty:vty/lines/line/acl6-inbound-num": {
+    "name": "ACL (IPv6) Inbound Number"
+  },
+  "/huawei-vty:vty/lines/line/acl6-outbound-num": {
+    "name": "ACL (IPv6) Outbound Number"
+  },
+  "/huawei-vty:vty/lines/line/proto-inbound": {
+    "name": "Protocol Inbound"
+  },
+  "/huawei-vty:vty/line-global": {
+    "name": "VTY Global Configuration"
+  },
+  "/huawei-vty:vty/line-global/max-users": {
+    "name": "Maximum VTY"
+  },
+  "/huawei-vty:vty/line-global/password-lock": {
+    "name": "VTY IP Block"
+  },
+  "/huawei-vty:vty/line-global/security-policy": {
+    "name": "VTY Security Policy"
+  }
+}

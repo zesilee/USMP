@@ -1,0 +1,26 @@
+{
+  "/huawei-analysis-collector:analysis-collector": {
+    "name": "数据采集器信息"
+  },
+  "/huawei-analysis-collector:analysis-collector/collectors": {
+    "name": "数据采集器信息列表"
+  },
+  "/huawei-analysis-collector:analysis-collector/collectors/collector": {
+    "name": "配置采集器的目的地址"
+  },
+  "/huawei-analysis-collector:analysis-collector/collectors/collector/id": {
+    "name": "实例索引"
+  },
+  "/huawei-analysis-collector:analysis-collector/collectors/collector/dst-port": {
+    "name": "采集器服务端口"
+  },
+  "/huawei-analysis-collector:analysis-collector/collectors/collector/src-address": {
+    "name": "采集器源地址"
+  },
+  "/huawei-analysis-collector:analysis-collector/collectors/collector/host-address": {
+    "name": "采集器地址"
+  },
+  "/huawei-analysis-collector:analysis-collector/collectors/collector/vpn-name": {
+    "name": "VPN实例名称"
+  }
+}

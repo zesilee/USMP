@@ -66,8 +66,8 @@ func TestVlanConfig_Integration_MemberPortsToDevice(t *testing.T) {
 			"name": "with-ports",
 			"member-ports": map[string]interface{}{
 				"member-port": []interface{}{
-					map[string]interface{}{"interface-name": "GigabitEthernet0/0/1", "access-type": "access", "tag-mode": "untag"},
-					map[string]interface{}{"interface-name": "GigabitEthernet0/0/2", "access-type": "trunk", "tag-mode": "tag"},
+					map[string]interface{}{"interface-name": "GigabitEthernet0/0/1", "access-type": "access"},
+					map[string]interface{}{"interface-name": "GigabitEthernet0/0/2", "access-type": "trunk"},
 				},
 			},
 		},
@@ -75,9 +75,9 @@ func TestVlanConfig_Integration_MemberPortsToDevice(t *testing.T) {
 
 	testsupport.AssertHuaweiVlanExists(t, sim, 100)
 	testsupport.AssertHuaweiVlanMemberPort(t, sim, 100, "GigabitEthernet0/0/1",
-		int(huawei.HuaweiVlan_AccessType_access), int(huawei.HuaweiVlan_TagMode_untag))
+		int(huawei.HuaweiVlan_AccessType_access))
 	testsupport.AssertHuaweiVlanMemberPort(t, sim, 100, "GigabitEthernet0/0/2",
-		int(huawei.HuaweiVlan_AccessType_trunk), int(huawei.HuaweiVlan_TagMode_tag))
+		int(huawei.HuaweiVlan_AccessType_trunk))
 }
 
 // P0：分两次下发不同 VLAN（真实前端行为——每次只发单个 VLAN），先前的 VLAN 不应被抹除。

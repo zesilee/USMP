@@ -15,7 +15,7 @@ using the following YANG input files:
   - huawei-network-instance
 
 Imported modules were sourced from:
-  - ../yang-models/network-router/8.20.10/ne40e-x8x16/...
+  - ../snd/ce6866p-yang/...
 */
 package huawei
 
@@ -31,6 +31,11 @@ import (
 // in the YANG schema. The map is named ΛEnum in order to avoid clash with any
 // valid YANG identifier.
 var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
+	"E_HuaweiAcl_EncapType": {
+		2: {Name: "ether-ii"},
+		3: {Name: "802.3"},
+		4: {Name: "snap"},
+	},
 	"E_HuaweiAcl_FragmentIpv6Type": {
 		2: {Name: "fragment"},
 	},
@@ -61,7 +66,20 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		1: {Name: "config"},
 		2: {Name: "auto"},
 	},
+	"E_HuaweiAcl_OffsetBegin": {
+		2: {Name: "l2-head"},
+		3: {Name: "ipv4-head"},
+		4: {Name: "l4-head"},
+		6: {Name: "inner-ipv4-head"},
+	},
+	"E_HuaweiAcl_PacketMode": {
+		1: {Name: "request"},
+		2: {Name: "reply"},
+	},
 	"E_HuaweiAcl_RangeType": {
+		2: {Name: "lt"},
+		3: {Name: "eq"},
+		4: {Name: "gt"},
 		5: {Name: "neq"},
 		6: {Name: "range"},
 	},
@@ -89,14 +107,12 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		1: {Name: "none"},
 		2: {Name: "met-sha1"},
 	},
-	"E_HuaweiBfd_BfdSmpBfdCap": {
-		1: {Name: "ipv4"},
-		2: {Name: "ipv6"},
-	},
 	"E_HuaweiBfd_BundleMode": {
 		1: {Name: "none"},
 		2: {Name: "bundle-standard"},
 		3: {Name: "bundle-compatible"},
+		4: {Name: "cfg-remote-ap"},
+		5: {Name: "cfg-from-master"},
 		6: {Name: "bundle-std-unshare"},
 		7: {Name: "bundle-com-unshare"},
 	},
@@ -155,10 +171,6 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		2: {Name: "remote-interface-fault"},
 		3: {Name: "local-interface-fault-and-remote-interface-fault"},
 	},
-	"E_HuaweiBfd_IpMode": {
-		1: {Name: "multicast"},
-		2: {Name: "unicast"},
-	},
 	"E_HuaweiBfd_L2VpnEncapsulationType": {
 		2:   {Name: "fr"},
 		3:   {Name: "atm-aal5-sdu"},
@@ -203,7 +215,7 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		12: {Name: "vxlan"},
 		13: {Name: "sr-be-tunnel"},
 		14: {Name: "sid-list"},
-		15: {Name: "flex-algo-tunnel"},
+		15: {Name: "other"},
 	},
 	"E_HuaweiBfd_LspCrcFaultType": {
 		1: {Name: "interface-fault"},
@@ -299,7 +311,6 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		13: {Name: "vxlan"},
 		14: {Name: "sr-be-tnl"},
 		15: {Name: "sid-list"},
-		16: {Name: "flex-algo-tnl"},
 	},
 	"E_HuaweiBfd_SubSessionType": {
 		2: {Name: "link-bundle"},
@@ -343,15 +354,17 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		20: {Name: "rpd"},
 		21: {Name: "ipv4srpolicy"},
 		22: {Name: "ipv6srpolicy"},
-		23: {Name: "ipv4sdwan"},
+	},
+	"E_HuaweiBgp_AfTypeDeviations": {
+		2:  {Name: "ipv4uni"},
+		6:  {Name: "ipv6uni"},
+		10: {Name: "evpn"},
+		11: {Name: "mvpn"},
+		12: {Name: "vpntarget"},
 	},
 	"E_HuaweiBgp_ApplyLabelType": {
 		1: {Name: "per-route"},
 		2: {Name: "per-nexthop"},
-	},
-	"E_HuaweiBgp_AsNumberType": {
-		2: {Name: "dynamic-neighbor"},
-		3: {Name: "confederation"},
 	},
 	"E_HuaweiBgp_AttributeSetType": {
 		2: {Name: "receive"},
@@ -362,11 +375,6 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		2: {Name: "up"},
 		3: {Name: "down"},
 		4: {Name: "unknown"},
-	},
-	"E_HuaweiBgp_BgpAdvertiseRouteMode": {
-		1: {Name: "all"},
-		2: {Name: "best"},
-		3: {Name: "valid"},
 	},
 	"E_HuaweiBgp_BgpOrfModeType": {
 		1: {Name: "null"},
@@ -395,11 +403,6 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 	},
 	"E_HuaweiBgp_DampeningRoutePeerType": {
 		1: {Name: "ebgp"},
-	},
-	"E_HuaweiBgp_DependentPrefixFilterType": {
-		2: {Name: "match-all"},
-		3: {Name: "match-one"},
-		4: {Name: "match-none"},
 	},
 	"E_HuaweiBgp_EntropyLabelAttributeType": {
 		2: {Name: "elc"},
@@ -432,7 +435,6 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		14: {Name: "ls"},
 		15: {Name: "mdt"},
 		17: {Name: "mvpnv6"},
-		23: {Name: "ipv4sdwan"},
 	},
 	"E_HuaweiBgp_GroupType": {
 		2: {Name: "ebgp"},
@@ -445,8 +447,10 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 	"E_HuaweiBgp_ImportRibIpv6SafiType": {
 		6: {Name: "ipv6uni"},
 	},
-	"E_HuaweiBgp_InstanceAfType": {
-		4: {Name: "ipv4vpn"},
+	"E_HuaweiBgp_InstPeerEstablishMode": {
+		2: {Name: "static"},
+		3: {Name: "dynamic"},
+		5: {Name: "dynamic-ipv6"},
 	},
 	"E_HuaweiBgp_Ipv4ExportFilterProtocolType": {
 		1:  {Name: "noprotocol"},
@@ -491,10 +495,6 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		9:  {Name: "ripng"},
 		12: {Name: "unr"},
 	},
-	"E_HuaweiBgp_LspOperationType": {
-		1: {Name: "pop"},
-		2: {Name: "pop-go"},
-	},
 	"E_HuaweiBgp_MemoryPriority": {
 		1: {Name: "low"},
 		2: {Name: "medium"},
@@ -519,10 +519,6 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 	"E_HuaweiBgp_PathAttrTreatType": {
 		1: {Name: "normal"},
 	},
-	"E_HuaweiBgp_PeerAttrEnableType": {
-		1: {Name: "disable"},
-		2: {Name: "enable"},
-	},
 	"E_HuaweiBgp_PeerCapConfigState": {
 		1: {Name: "default"},
 		2: {Name: "enable"},
@@ -540,6 +536,8 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 	"E_HuaweiBgp_PeerEstablishMode": {
 		2: {Name: "static"},
 		3: {Name: "dynamic"},
+		4: {Name: "unnumbered"},
+		5: {Name: "dynamic-ipv6"},
 	},
 	"E_HuaweiBgp_PeerMemoryPriority": {
 		1: {Name: "low"},
@@ -591,11 +589,6 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		2: {Name: "depend-tunnel"},
 		3: {Name: "depend-ip"},
 	},
-	"E_HuaweiBgp_SelectDependTypeExt": {
-		2: {Name: "depend-tunnel"},
-		3: {Name: "depend-ip"},
-		4: {Name: "depend-none"},
-	},
 	"E_HuaweiEthernet_ActionType": {
 		1:  {Name: "pop-outer"},
 		2:  {Name: "push1-layer"},
@@ -624,8 +617,8 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		5: {Name: "dot1qtunnel"},
 	},
 	"E_HuaweiEthernet_PolicyType": {
-		2: {Name: "8021p"},
-		3: {Name: "dscp"},
+		2: {Name: "dscp"},
+		3: {Name: "8021p"},
 		4: {Name: "pppoe"},
 		5: {Name: "default"},
 	},
@@ -720,7 +713,6 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		87: {Name: "forward-engine-interface-failed"},
 		88: {Name: "fabric-link-failure"},
 		89: {Name: "m-lag-consistency-check"},
-		90: {Name: "pfc-deadlock"},
 	},
 	"E_HuaweiIfm_LinkProtocol": {
 		1: {Name: "ethernet"},
@@ -735,10 +727,6 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		2: {Name: "high"},
 		3: {Name: "middle"},
 		5: {Name: "low"},
-	},
-	"E_HuaweiIfm_NetworkLayerState": {
-		1:      {Name: "ipv4-ipv6-up"},
-		196609: {Name: "ipv4-ipv6-down"},
 	},
 	"E_HuaweiIfm_PortStatus": {
 		1: {Name: "down"},
@@ -820,9 +808,7 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		108: {Name: "Virtual-Serial"},
 		109: {Name: "400GE"},
 		115: {Name: "HPGE"},
-		116: {Name: "FlexE-400G"},
 		117: {Name: "Virtual-if"},
-		118: {Name: "Cellular"},
 	},
 	"E_HuaweiIfm_RouterType": {
 		1:   {Name: "PtoP"},
@@ -850,43 +836,6 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 	"E_HuaweiIfm_StatisticMode": {
 		2: {Name: "interface-based"},
 		3: {Name: "vlan-group-based"},
-	},
-	"E_HuaweiIp_Ipv4AddressConfigType": {
-		2:  {Name: "main"},
-		33: {Name: "sub"},
-	},
-	"E_HuaweiIp_Ipv4AddressStateType": {
-		2:   {Name: "main"},
-		3:   {Name: "unnumber"},
-		5:   {Name: "neg"},
-		33:  {Name: "sub"},
-		257: {Name: "dhcp"},
-	},
-	"E_HuaweiIp_Ipv6AddressAlgorithmType": {
-		1: {Name: "none"},
-		2: {Name: "cga"},
-		3: {Name: "eui64"},
-	},
-	"E_HuaweiIp_Ipv6AddressConfigType": {
-		2: {Name: "global"},
-		3: {Name: "link-local"},
-		7: {Name: "anycast"},
-	},
-	"E_HuaweiIp_Ipv6AddressStateType": {
-		2: {Name: "global"},
-		3: {Name: "link-local"},
-		4: {Name: "auto-link-local"},
-		7: {Name: "anycast"},
-	},
-	"E_HuaweiIp_Ipv6StatusType": {
-		2: {Name: "preferred"},
-		5: {Name: "inaccessible"},
-		6: {Name: "unknown"},
-		7: {Name: "tentative"},
-		8: {Name: "duplicate"},
-	},
-	"E_HuaweiIp_NegotiationType": {
-		1: {Name: "ppp-negotiate"},
 	},
 	"E_HuaweiL3Vpn_AfType": {
 		2: {Name: "ipv4-unicast"},
@@ -933,9 +882,7 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		52:  {Name: "sr-te-policy-group"},
 		53:  {Name: "srv6-te-policy"},
 		56:  {Name: "srv6-te-policy-group"},
-		57:  {Name: "sd-wan"},
 		65:  {Name: "p2mp-gre"},
-		148: {Name: "flex-algo-lsp"},
 		256: {Name: "ldp-lsp"},
 	},
 	"E_HuaweiL3Vpn_VpnStatusType": {
@@ -953,10 +900,6 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 	},
 	"E_HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProcess_Afs_Af_Ipv4Unicast_AdvertiseRouteToEvpns_AdvertiseRouteToEvpn_Protocol": {
 		1: {Name: "all"},
-	},
-	"E_HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProcess_Peers_Peer_BfdParameter_ValidTtlHopsOperation": {
-		2: {Name: "enable"},
-		3: {Name: "disable"},
 	},
 	"E_HuaweiRoutingPolicy_CommunityFilterType": {
 		2: {Name: "basic"},
@@ -1034,14 +977,11 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		4: {Name: "none"},
 		5: {Name: "inherit"},
 	},
-	"E_HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Actions_ApplyExtCommunityPriorityColor_Operation": {
-		2: {Name: "replace"},
-		3: {Name: "add"},
-	},
 	"E_HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Actions_ApplyExtCommunitySoo_Operation": {
 		3: {Name: "add"},
 	},
 	"E_HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Actions_ApplyExtCommunity_Operation": {
+		1: {Name: "delete"},
 		2: {Name: "replace"},
 		3: {Name: "add"},
 	},
@@ -1085,6 +1025,11 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 	"E_HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Conditions_MatchL3VniFilter_MatchType": {
 		1: {Name: "match-special"},
 		2: {Name: "match-all"},
+	},
+	"E_HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Conditions_MatchRpki_OriginAsValidation": {
+		2: {Name: "valid"},
+		3: {Name: "invalid"},
+		4: {Name: "not-found"},
 	},
 	"E_HuaweiRoutingPolicy_WellKnownCommunityType_Enum": {
 		1: {Name: "internet"},
@@ -1239,20 +1184,8 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		52:  {Name: "sr-te-policy-group"},
 		53:  {Name: "srv6-te-policy"},
 		56:  {Name: "srv6-te-policy-group"},
-		57:  {Name: "sd-wan"},
 		65:  {Name: "p2mp-gre"},
-		148: {Name: "flex-algo-lsp"},
 		256: {Name: "ldp-lsp"},
-	},
-	"E_HuaweiSystem_RiskLevelType": {
-		1: {Name: "high"},
-		2: {Name: "medium"},
-		3: {Name: "low"},
-	},
-	"E_HuaweiSystem_SecurityRiskType": {
-		1: {Name: "insecure-algorithm"},
-		2: {Name: "insecure-protocol"},
-		3: {Name: "insecure-configuration"},
 	},
 	"E_HuaweiTimeRange_RowStatus": {
 		1: {Name: "active"},
@@ -1272,7 +1205,6 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		42:  {Name: "srbe-lsp"},
 		48:  {Name: "sr-te"},
 		51:  {Name: "sr-te-policy"},
-		148: {Name: "flex-algo-lsp"},
 		256: {Name: "ldp"},
 	},
 	"E_HuaweiTunnelManagement_TunnelManagement_SubscribeTunnelPolicys_SubscribeTunnelPolicy_PolicyExist": {
@@ -1320,9 +1252,7 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		52:  {Name: "sr-te-policy-group"},
 		53:  {Name: "srv6-te-policy"},
 		56:  {Name: "srv6-te-policy-group"},
-		57:  {Name: "sd-wan"},
 		65:  {Name: "p2mp-gre"},
-		148: {Name: "flex-algo-lsp"},
 		256: {Name: "ldp-lsp"},
 	},
 	"E_HuaweiVlan_AccessType": {
@@ -1365,6 +1295,9 @@ func initΛEnumTypes() {
 		"/acl/group6s/group6/rule-advances/rule-advance/action": []reflect.Type{
 			reflect.TypeOf((E_HuaweiAcl_RuleAction)(0)),
 		},
+		"/acl/group6s/group6/rule-advances/rule-advance/active-status": []reflect.Type{
+			reflect.TypeOf((E_HuaweiAcl_RowStatus)(0)),
+		},
 		"/acl/group6s/group6/rule-advances/rule-advance/fragment-type": []reflect.Type{
 			reflect.TypeOf((E_HuaweiAcl_FragmentIpv6Type)(0)),
 		},
@@ -1398,6 +1331,15 @@ func initΛEnumTypes() {
 		"/acl/groups/group/rule-advances/rule-advance/fragment-type": []reflect.Type{
 			reflect.TypeOf((E_HuaweiAcl_FragmentType)(0)),
 		},
+		"/acl/groups/group/rule-arps/rule-arp/action": []reflect.Type{
+			reflect.TypeOf((E_HuaweiAcl_RuleAction)(0)),
+		},
+		"/acl/groups/group/rule-arps/rule-arp/active-status": []reflect.Type{
+			reflect.TypeOf((E_HuaweiAcl_RowStatus)(0)),
+		},
+		"/acl/groups/group/rule-arps/rule-arp/packet-mode": []reflect.Type{
+			reflect.TypeOf((E_HuaweiAcl_PacketMode)(0)),
+		},
 		"/acl/groups/group/rule-basics/rule-basic/action": []reflect.Type{
 			reflect.TypeOf((E_HuaweiAcl_RuleAction)(0)),
 		},
@@ -1413,6 +1355,9 @@ func initΛEnumTypes() {
 		"/acl/groups/group/rule-ethernets/rule-ethernet/active-status": []reflect.Type{
 			reflect.TypeOf((E_HuaweiAcl_RowStatus)(0)),
 		},
+		"/acl/groups/group/rule-ethernets/rule-ethernet/encap-type": []reflect.Type{
+			reflect.TypeOf((E_HuaweiAcl_EncapType)(0)),
+		},
 		"/acl/groups/group/rule-interfaces/rule-interface/action": []reflect.Type{
 			reflect.TypeOf((E_HuaweiAcl_RuleAction)(0)),
 		},
@@ -1422,17 +1367,26 @@ func initΛEnumTypes() {
 		"/acl/groups/group/rule-mplss/rule-mpls/action": []reflect.Type{
 			reflect.TypeOf((E_HuaweiAcl_RuleAction)(0)),
 		},
+		"/acl/groups/group/rule-users/rule-user/action": []reflect.Type{
+			reflect.TypeOf((E_HuaweiAcl_RuleAction)(0)),
+		},
+		"/acl/groups/group/rule-users/rule-user/active-status": []reflect.Type{
+			reflect.TypeOf((E_HuaweiAcl_RowStatus)(0)),
+		},
+		"/acl/groups/group/rule-users/rule-user/offset-begin": []reflect.Type{
+			reflect.TypeOf((E_HuaweiAcl_OffsetBegin)(0)),
+		},
 		"/acl/groups/group/type": []reflect.Type{
 			reflect.TypeOf((E_HuaweiAcl_Group4Type)(0)),
+		},
+		"/acl/ip-pool6s/ip-pool6/bgp-peer-vpn": []reflect.Type{
+			reflect.TypeOf((E_HuaweiAcl_VpnType)(0)),
 		},
 		"/acl/ip-pools/ip-pool/bgp-peer-vpn": []reflect.Type{
 			reflect.TypeOf((E_HuaweiAcl_VpnType)(0)),
 		},
 		"/acl/port-pools/port-pool/ports/port/operation": []reflect.Type{
 			reflect.TypeOf((E_HuaweiAcl_RangeType)(0)),
-		},
-		"/bfd/all-sessions/all-session/address-type": []reflect.Type{
-			reflect.TypeOf((E_HuaweiBfd_BfdSmpBfdCap)(0)),
 		},
 		"/bfd/all-sessions/all-session/bundle-mode": []reflect.Type{
 			reflect.TypeOf((E_HuaweiBfd_BundleMode)(0)),
@@ -1454,9 +1408,6 @@ func initΛEnumTypes() {
 		},
 		"/bfd/all-sessions/all-session/main-sub-role": []reflect.Type{
 			reflect.TypeOf((E_HuaweiBfd_PerlinkRole)(0)),
-		},
-		"/bfd/all-sessions/all-session/multicast-or-unicast-ip": []reflect.Type{
-			reflect.TypeOf((E_HuaweiBfd_IpMode)(0)),
 		},
 		"/bfd/all-sessions/all-session/node": []reflect.Type{
 			reflect.TypeOf((E_HuaweiBfd_VpwsNodeType)(0)),
@@ -1662,11 +1613,14 @@ func initΛEnumTypes() {
 		"/ifm/interfaces/interface/ethernet/l2-sub-interface/local-switch": []reflect.Type{
 			reflect.TypeOf((E_HuaweiEthernet_EnableType)(0)),
 		},
-		"/ifm/interfaces/interface/ethernet/l3-sub-interface/dot1q-termination/dot1q-vlans-policy/policy-vlan-groups/policy-vlan-group/policy-type": []reflect.Type{
+		"/ifm/interfaces/interface/ethernet/l3-sub-interface/dot1q-termination-policys/dot1q-vlans/policy-vlan-groups/policy-vlan-group/policy-type": []reflect.Type{
 			reflect.TypeOf((E_HuaweiEthernet_PolicyType)(0)),
 		},
-		"/ifm/interfaces/interface/ethernet/l3-sub-interface/dot1q-termination/dot1q-vlans-policy/policy-vlans/policy-vlan/policy-type": []reflect.Type{
+		"/ifm/interfaces/interface/ethernet/l3-sub-interface/dot1q-termination-policys/dot1q-vlans/policy-vlans/policy-vlan/policy-type": []reflect.Type{
 			reflect.TypeOf((E_HuaweiEthernet_PolicyType)(0)),
+		},
+		"/ifm/interfaces/interface/ethernet/l3-sub-interface/dot1q-termination-policys/tag": []reflect.Type{
+			reflect.TypeOf((E_HuaweiEthernet_TagType)(0)),
 		},
 		"/ifm/interfaces/interface/ethernet/l3-sub-interface/dot1q-termination/pwtag/tag-8021p-mode": []reflect.Type{
 			reflect.TypeOf((E_HuaweiEthernet_PwTagMode)(0)),
@@ -1676,6 +1630,18 @@ func initΛEnumTypes() {
 		},
 		"/ifm/interfaces/interface/ethernet/l3-sub-interface/dot1q-termination/tag": []reflect.Type{
 			reflect.TypeOf((E_HuaweiEthernet_TagType)(0)),
+		},
+		"/ifm/interfaces/interface/ethernet/l3-sub-interface/qinq-mapping/pwtag/tag-8021p-mode": []reflect.Type{
+			reflect.TypeOf((E_HuaweiEthernet_PwTagMode)(0)),
+		},
+		"/ifm/interfaces/interface/ethernet/l3-sub-interface/qinq-mapping/pwtag/tag-vid-mode": []reflect.Type{
+			reflect.TypeOf((E_HuaweiEthernet_PwTagMode)(0)),
+		},
+		"/ifm/interfaces/interface/ethernet/l3-sub-interface/qinq-stacking/pwtag/tag-8021p-mode": []reflect.Type{
+			reflect.TypeOf((E_HuaweiEthernet_PwTagMode)(0)),
+		},
+		"/ifm/interfaces/interface/ethernet/l3-sub-interface/qinq-stacking/pwtag/tag-vid-mode": []reflect.Type{
+			reflect.TypeOf((E_HuaweiEthernet_PwTagMode)(0)),
 		},
 		"/ifm/interfaces/interface/ethernet/l3-sub-interface/qinq-termination/pwtag/tag-8021p-mode": []reflect.Type{
 			reflect.TypeOf((E_HuaweiEthernet_PwTagMode)(0)),
@@ -1695,13 +1661,16 @@ func initΛEnumTypes() {
 		"/ifm/interfaces/interface/ethernet/l3-sub-interface/qinq-termination/tag": []reflect.Type{
 			reflect.TypeOf((E_HuaweiEthernet_TagType)(0)),
 		},
-		"/ifm/interfaces/interface/ethernet/l3-sub-interface/untag-policy/policy-type": []reflect.Type{
+		"/ifm/interfaces/interface/ethernet/l3-sub-interface/stacking-policy/policy-vlan-groups/policy-vlan-group/policy-type": []reflect.Type{
+			reflect.TypeOf((E_HuaweiEthernet_PolicyType)(0)),
+		},
+		"/ifm/interfaces/interface/ethernet/l3-sub-interface/stacking-policy/policy-vlans/policy-vlan/policy-type": []reflect.Type{
 			reflect.TypeOf((E_HuaweiEthernet_PolicyType)(0)),
 		},
 		"/ifm/interfaces/interface/ethernet/l3-sub-interface/vlan-groups/vlan-group/mode": []reflect.Type{
 			reflect.TypeOf((E_HuaweiEthernet_GroupModeType)(0)),
 		},
-		"/ifm/interfaces/interface/ethernet/l3-sub-interface/vlan-type-policy/policy-type": []reflect.Type{
+		"/ifm/interfaces/interface/ethernet/l3-sub-interface/vlan-type-policy/policy-vlans/policy-vlan/policy-type": []reflect.Type{
 			reflect.TypeOf((E_HuaweiEthernet_PolicyType)(0)),
 		},
 		"/ifm/interfaces/interface/ethernet/main-interface/l2-attribute/link-type": []reflect.Type{
@@ -1710,35 +1679,8 @@ func initΛEnumTypes() {
 		"/ifm/interfaces/interface/ethernet/main-interface/vlan-swap": []reflect.Type{
 			reflect.TypeOf((E_HuaweiEthernet_EnableType)(0)),
 		},
-		"/ifm/interfaces/interface/ipv4/addresses/address/type": []reflect.Type{
-			reflect.TypeOf((E_HuaweiIp_Ipv4AddressConfigType)(0)),
-		},
-		"/ifm/interfaces/interface/ipv4/negotiation-address/negotiation-type": []reflect.Type{
-			reflect.TypeOf((E_HuaweiIp_NegotiationType)(0)),
-		},
-		"/ifm/interfaces/interface/ipv4/state/addresses/address/type": []reflect.Type{
-			reflect.TypeOf((E_HuaweiIp_Ipv4AddressStateType)(0)),
-		},
-		"/ifm/interfaces/interface/ipv6/addresses/address/algorithm-type": []reflect.Type{
-			reflect.TypeOf((E_HuaweiIp_Ipv6AddressAlgorithmType)(0)),
-		},
-		"/ifm/interfaces/interface/ipv6/addresses/address/type": []reflect.Type{
-			reflect.TypeOf((E_HuaweiIp_Ipv6AddressConfigType)(0)),
-		},
-		"/ifm/interfaces/interface/ipv6/state/addresses/address/algorithm-type": []reflect.Type{
-			reflect.TypeOf((E_HuaweiIp_Ipv6AddressAlgorithmType)(0)),
-		},
-		"/ifm/interfaces/interface/ipv6/state/addresses/address/status": []reflect.Type{
-			reflect.TypeOf((E_HuaweiIp_Ipv6StatusType)(0)),
-		},
-		"/ifm/interfaces/interface/ipv6/state/addresses/address/type": []reflect.Type{
-			reflect.TypeOf((E_HuaweiIp_Ipv6AddressStateType)(0)),
-		},
 		"/ifm/interfaces/interface/link-protocol": []reflect.Type{
 			reflect.TypeOf((E_HuaweiIfm_LinkProtocol)(0)),
-		},
-		"/ifm/interfaces/interface/network-layer-status": []reflect.Type{
-			reflect.TypeOf((E_HuaweiIfm_NetworkLayerState)(0)),
 		},
 		"/ifm/interfaces/interface/router-type": []reflect.Type{
 			reflect.TypeOf((E_HuaweiIfm_RouterType)(0)),
@@ -1806,9 +1748,6 @@ func initΛEnumTypes() {
 		"/network-instance/instances/instance/afs/af/routing/routing-manage/topologys/topology/routes/ipv6-unicast-routes/ipv6-unicast-route/sub-protocol-type": []reflect.Type{
 			reflect.TypeOf((E_HuaweiRouting_SubProtocolType)(0)),
 		},
-		"/network-instance/instances/instance/afs/af/routing/routing-manage/topologys/topology/routes/ipv6-unicast-routes/ipv6-unicast-route/tunnel-type": []reflect.Type{
-			reflect.TypeOf((E_HuaweiRouting_TunnelType)(0)),
-		},
 		"/network-instance/instances/instance/afs/af/state/status": []reflect.Type{
 			reflect.TypeOf((E_HuaweiL3Vpn_VpnStatusType)(0)),
 		},
@@ -1833,9 +1772,6 @@ func initΛEnumTypes() {
 		"/network-instance/instances/instance/bgp/base-process/afs/af/ipv4-labeluni/import-routes/import-route/protocol": []reflect.Type{
 			reflect.TypeOf((E_HuaweiBgp_Ipv4ImportRouteProtocolType)(0)),
 		},
-		"/network-instance/instances/instance/bgp/base-process/afs/af/ipv4-labeluni/lsp-options/lsp-operation": []reflect.Type{
-			reflect.TypeOf((E_HuaweiBgp_LspOperationType)(0)),
-		},
 		"/network-instance/instances/instance/bgp/base-process/afs/af/ipv4-multicast/dampening-routes/dampening-route/peer-type": []reflect.Type{
 			reflect.TypeOf((E_HuaweiBgp_DampeningRoutePeerType)(0)),
 		},
@@ -1850,9 +1786,6 @@ func initΛEnumTypes() {
 		},
 		"/network-instance/instances/instance/bgp/base-process/afs/af/ipv4-unicast/advertise-route-to-evpns/advertise-route-to-evpn/protocol": []reflect.Type{
 			reflect.TypeOf((E_HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProcess_Afs_Af_Ipv4Unicast_AdvertiseRouteToEvpns_AdvertiseRouteToEvpn_Protocol)(0)),
-		},
-		"/network-instance/instances/instance/bgp/base-process/afs/af/ipv4-unicast/common/advertise-route-mode": []reflect.Type{
-			reflect.TypeOf((E_HuaweiBgp_BgpAdvertiseRouteMode)(0)),
 		},
 		"/network-instance/instances/instance/bgp/base-process/afs/af/ipv4-unicast/common/attribute-set-mode": []reflect.Type{
 			reflect.TypeOf((E_HuaweiBgp_AttributeSetType)(0)),
@@ -1875,9 +1808,6 @@ func initΛEnumTypes() {
 		"/network-instance/instances/instance/bgp/base-process/afs/af/ipv4-unicast/import-routes/import-route/protocol": []reflect.Type{
 			reflect.TypeOf((E_HuaweiBgp_Ipv4ImportRouteProtocolType)(0)),
 		},
-		"/network-instance/instances/instance/bgp/base-process/afs/af/ipv4-unicast/lsp-options/lsp-operation": []reflect.Type{
-			reflect.TypeOf((E_HuaweiBgp_LspOperationType)(0)),
-		},
 		"/network-instance/instances/instance/bgp/base-process/afs/af/ipv4-vpn/apply-label-mode": []reflect.Type{
 			reflect.TypeOf((E_HuaweiBgp_ApplyLabelType)(0)),
 		},
@@ -1885,7 +1815,7 @@ func initΛEnumTypes() {
 			reflect.TypeOf((E_HuaweiBgp_DampeningRouteExtPeerType)(0)),
 		},
 		"/network-instance/instances/instance/bgp/base-process/afs/af/ipv4-vpn/nexthop-select-depend-type": []reflect.Type{
-			reflect.TypeOf((E_HuaweiBgp_SelectDependTypeExt)(0)),
+			reflect.TypeOf((E_HuaweiBgp_SelectDependType)(0)),
 		},
 		"/network-instance/instances/instance/bgp/base-process/afs/af/ipv6-unicast/advertise-route-to-evpns/advertise-route-to-evpn/advertise-route-mode": []reflect.Type{
 			reflect.TypeOf((E_HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProcess_Afs_Af_Ipv4Unicast_AdvertiseRouteToEvpns_AdvertiseRouteToEvpn_AdvertiseRouteMode)(0)),
@@ -1893,14 +1823,8 @@ func initΛEnumTypes() {
 		"/network-instance/instances/instance/bgp/base-process/afs/af/ipv6-unicast/advertise-route-to-evpns/advertise-route-to-evpn/protocol": []reflect.Type{
 			reflect.TypeOf((E_HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProcess_Afs_Af_Ipv4Unicast_AdvertiseRouteToEvpns_AdvertiseRouteToEvpn_Protocol)(0)),
 		},
-		"/network-instance/instances/instance/bgp/base-process/afs/af/ipv6-unicast/common/advertise-route-mode": []reflect.Type{
-			reflect.TypeOf((E_HuaweiBgp_BgpAdvertiseRouteMode)(0)),
-		},
 		"/network-instance/instances/instance/bgp/base-process/afs/af/ipv6-unicast/common/attribute-set-mode": []reflect.Type{
 			reflect.TypeOf((E_HuaweiBgp_AttributeSetType)(0)),
-		},
-		"/network-instance/instances/instance/bgp/base-process/afs/af/ipv6-unicast/common/lsp-operation": []reflect.Type{
-			reflect.TypeOf((E_HuaweiBgp_LspOperationType)(0)),
 		},
 		"/network-instance/instances/instance/bgp/base-process/afs/af/ipv6-unicast/common/nexthop-priority": []reflect.Type{
 			reflect.TypeOf((E_HuaweiBgp_NexthopPriorityAddressType)(0)),
@@ -1923,14 +1847,11 @@ func initΛEnumTypes() {
 		"/network-instance/instances/instance/bgp/base-process/afs/af/ipv6-vpn/apply-label-mode": []reflect.Type{
 			reflect.TypeOf((E_HuaweiBgp_ApplyLabelType)(0)),
 		},
-		"/network-instance/instances/instance/bgp/base-process/afs/af/ipv6-vpn/dampening-routes/dampening-route/peer-type": []reflect.Type{
-			reflect.TypeOf((E_HuaweiBgp_DampeningRouteExtPeerType)(0)),
-		},
 		"/network-instance/instances/instance/bgp/base-process/afs/af/ipv6-vpn/nexthop-select-depend-type": []reflect.Type{
-			reflect.TypeOf((E_HuaweiBgp_SelectDependTypeExt)(0)),
+			reflect.TypeOf((E_HuaweiBgp_SelectDependType)(0)),
 		},
 		"/network-instance/instances/instance/bgp/base-process/afs/af/type": []reflect.Type{
-			reflect.TypeOf((E_HuaweiBgp_AfType)(0)),
+			reflect.TypeOf((E_HuaweiBgp_AfTypeDeviations)(0)),
 		},
 		"/network-instance/instances/instance/bgp/base-process/peer-bfd-session-states/peer-bfd-session-state/status": []reflect.Type{
 			reflect.TypeOf((E_HuaweiBgp_BfdState)(0)),
@@ -1940,9 +1861,6 @@ func initΛEnumTypes() {
 		},
 		"/network-instance/instances/instance/bgp/base-process/peer-groups/peer-group/afs/af/ipv4-labeluni/entropy-label-parameter/attribute-type": []reflect.Type{
 			reflect.TypeOf((E_HuaweiBgp_EntropyLabelAttributeType)(0)),
-		},
-		"/network-instance/instances/instance/bgp/base-process/peer-groups/peer-group/afs/af/ipv4-labeluni/exp-mode": []reflect.Type{
-			reflect.TypeOf((E_HuaweiBgp_ExpModeType)(0)),
 		},
 		"/network-instance/instances/instance/bgp/base-process/peer-groups/peer-group/afs/af/ipv4-labeluni/nexthop-configure": []reflect.Type{
 			reflect.TypeOf((E_HuaweiBgp_NexthopConfigurationType)(0)),
@@ -1958,9 +1876,6 @@ func initΛEnumTypes() {
 		},
 		"/network-instance/instances/instance/bgp/base-process/peer-groups/peer-group/afs/af/ipv4-unicast/add-path-mode": []reflect.Type{
 			reflect.TypeOf((E_HuaweiBgp_AddPathCapType)(0)),
-		},
-		"/network-instance/instances/instance/bgp/base-process/peer-groups/peer-group/afs/af/ipv4-unicast/advertise-dependent-filter/dependent-filter-type": []reflect.Type{
-			reflect.TypeOf((E_HuaweiBgp_DependentPrefixFilterType)(0)),
 		},
 		"/network-instance/instances/instance/bgp/base-process/peer-groups/peer-group/afs/af/ipv4-unicast/default-route-match-mode": []reflect.Type{
 			reflect.TypeOf((E_HuaweiBgp_CraMatchMode)(0)),
@@ -1995,9 +1910,6 @@ func initΛEnumTypes() {
 		"/network-instance/instances/instance/bgp/base-process/peer-groups/peer-group/afs/af/ipv6-unicast/add-path-mode": []reflect.Type{
 			reflect.TypeOf((E_HuaweiBgp_AddPathCapType)(0)),
 		},
-		"/network-instance/instances/instance/bgp/base-process/peer-groups/peer-group/afs/af/ipv6-unicast/advertise-dependent-filter6/dependent-filter-type": []reflect.Type{
-			reflect.TypeOf((E_HuaweiBgp_DependentPrefixFilterType)(0)),
-		},
 		"/network-instance/instances/instance/bgp/base-process/peer-groups/peer-group/afs/af/ipv6-unicast/default-route-match-mode": []reflect.Type{
 			reflect.TypeOf((E_HuaweiBgp_CraMatchMode)(0)),
 		},
@@ -2019,9 +1931,6 @@ func initΛEnumTypes() {
 		"/network-instance/instances/instance/bgp/base-process/peer-groups/peer-group/afs/af/type": []reflect.Type{
 			reflect.TypeOf((E_HuaweiBgp_GroupAfType)(0)),
 		},
-		"/network-instance/instances/instance/bgp/base-process/peer-groups/peer-group/as-number-type": []reflect.Type{
-			reflect.TypeOf((E_HuaweiBgp_AsNumberType)(0)),
-		},
 		"/network-instance/instances/instance/bgp/base-process/peer-groups/peer-group/check-first-as": []reflect.Type{
 			reflect.TypeOf((E_HuaweiBgp_PeerCapConfigState)(0)),
 		},
@@ -2035,10 +1944,25 @@ func initΛEnumTypes() {
 			reflect.TypeOf((E_HuaweiBgp_PasswordType)(0)),
 		},
 		"/network-instance/instances/instance/bgp/base-process/peer-groups/peer-group/peer-establish-mode": []reflect.Type{
-			reflect.TypeOf((E_HuaweiBgp_PeerEstablishMode)(0)),
+			reflect.TypeOf((E_HuaweiBgp_InstPeerEstablishMode)(0)),
 		},
 		"/network-instance/instances/instance/bgp/base-process/peer-groups/peer-group/type": []reflect.Type{
 			reflect.TypeOf((E_HuaweiBgp_GroupType)(0)),
+		},
+		"/network-instance/instances/instance/bgp/base-process/peer-states/peer-state/af-type": []reflect.Type{
+			reflect.TypeOf((E_HuaweiBgp_AfType)(0)),
+		},
+		"/network-instance/instances/instance/bgp/base-process/peer-states/peer-state/current-state": []reflect.Type{
+			reflect.TypeOf((E_HuaweiBgp_PeerState)(0)),
+		},
+		"/network-instance/instances/instance/bgp/base-process/peer-states/peer-state/establish-mode": []reflect.Type{
+			reflect.TypeOf((E_HuaweiBgp_PeerEstablishMode)(0)),
+		},
+		"/network-instance/instances/instance/bgp/base-process/peer-states/peer-state/last-state": []reflect.Type{
+			reflect.TypeOf((E_HuaweiBgp_PeerState)(0)),
+		},
+		"/network-instance/instances/instance/bgp/base-process/peer-states/peer-state/type": []reflect.Type{
+			reflect.TypeOf((E_HuaweiBgp_PeerTypeInfo)(0)),
 		},
 		"/network-instance/instances/instance/bgp/base-process/peers/peer/afs/af/ipv4-labeluni/add-path-mode": []reflect.Type{
 			reflect.TypeOf((E_HuaweiBgp_AddPathCapType)(0)),
@@ -2058,23 +1982,14 @@ func initΛEnumTypes() {
 		"/network-instance/instances/instance/bgp/base-process/peers/peer/afs/af/ipv4-labeluni/entropy-label-parameter/entropy-label": []reflect.Type{
 			reflect.TypeOf((E_HuaweiBgp_PeerCommConfigType)(0)),
 		},
-		"/network-instance/instances/instance/bgp/base-process/peers/peer/afs/af/ipv4-labeluni/exp-mode": []reflect.Type{
-			reflect.TypeOf((E_HuaweiBgp_ExpModeType)(0)),
-		},
 		"/network-instance/instances/instance/bgp/base-process/peers/peer/afs/af/ipv4-labeluni/nexthop-configure": []reflect.Type{
 			reflect.TypeOf((E_HuaweiBgp_NexthopConfigurationType)(0)),
 		},
 		"/network-instance/instances/instance/bgp/base-process/peers/peer/afs/af/ipv4-labeluni/path-attribute-treats/path-attribute-treat/treat-type": []reflect.Type{
 			reflect.TypeOf((E_HuaweiBgp_PathAttrTreatType)(0)),
 		},
-		"/network-instance/instances/instance/bgp/base-process/peers/peer/afs/af/ipv4-labeluni/public-as-only-import/enable": []reflect.Type{
-			reflect.TypeOf((E_HuaweiBgp_PeerCommConfigType)(0)),
-		},
 		"/network-instance/instances/instance/bgp/base-process/peers/peer/afs/af/ipv4-labeluni/route-limit/type": []reflect.Type{
 			reflect.TypeOf((E_HuaweiBgp_RouteLimitType)(0)),
-		},
-		"/network-instance/instances/instance/bgp/base-process/peers/peer/afs/af/ipv4-labeluni/update-group-independent": []reflect.Type{
-			reflect.TypeOf((E_HuaweiBgp_PeerCommConfigType)(0)),
 		},
 		"/network-instance/instances/instance/bgp/base-process/peers/peer/afs/af/ipv4-multicast/advertise-large-community": []reflect.Type{
 			reflect.TypeOf((E_HuaweiBgp_PeerCommConfigType)(0)),
@@ -2085,26 +2000,11 @@ func initΛEnumTypes() {
 		"/network-instance/instances/instance/bgp/base-process/peers/peer/afs/af/ipv4-multicast/path-attribute-treats/path-attribute-treat/treat-type": []reflect.Type{
 			reflect.TypeOf((E_HuaweiBgp_PathAttrTreatType)(0)),
 		},
-		"/network-instance/instances/instance/bgp/base-process/peers/peer/afs/af/ipv4-multicast/public-as-only-import/enable": []reflect.Type{
-			reflect.TypeOf((E_HuaweiBgp_PeerCommConfigType)(0)),
-		},
 		"/network-instance/instances/instance/bgp/base-process/peers/peer/afs/af/ipv4-multicast/route-limit/type": []reflect.Type{
 			reflect.TypeOf((E_HuaweiBgp_RouteLimitType)(0)),
 		},
-		"/network-instance/instances/instance/bgp/base-process/peers/peer/afs/af/ipv4-multicast/update-group-independent": []reflect.Type{
-			reflect.TypeOf((E_HuaweiBgp_PeerCommConfigType)(0)),
-		},
 		"/network-instance/instances/instance/bgp/base-process/peers/peer/afs/af/ipv4-unicast/add-path-mode": []reflect.Type{
 			reflect.TypeOf((E_HuaweiBgp_AddPathCapType)(0)),
-		},
-		"/network-instance/instances/instance/bgp/base-process/peers/peer/afs/af/ipv4-unicast/advertise-dependent-filter-state/dependent-filter-type": []reflect.Type{
-			reflect.TypeOf((E_HuaweiBgp_DependentPrefixFilterType)(0)),
-		},
-		"/network-instance/instances/instance/bgp/base-process/peers/peer/afs/af/ipv4-unicast/advertise-dependent-filter/dependent-filter-switch": []reflect.Type{
-			reflect.TypeOf((E_HuaweiBgp_PeerAttrEnableType)(0)),
-		},
-		"/network-instance/instances/instance/bgp/base-process/peers/peer/afs/af/ipv4-unicast/advertise-dependent-filter/dependent-filter-type": []reflect.Type{
-			reflect.TypeOf((E_HuaweiBgp_DependentPrefixFilterType)(0)),
 		},
 		"/network-instance/instances/instance/bgp/base-process/peers/peer/afs/af/ipv4-unicast/advertise-large-community": []reflect.Type{
 			reflect.TypeOf((E_HuaweiBgp_PeerCommConfigType)(0)),
@@ -2142,17 +2042,8 @@ func initΛEnumTypes() {
 		"/network-instance/instances/instance/bgp/base-process/peers/peer/afs/af/ipv4-unicast/prefix-sid": []reflect.Type{
 			reflect.TypeOf((E_HuaweiBgp_PeerCommConfigType)(0)),
 		},
-		"/network-instance/instances/instance/bgp/base-process/peers/peer/afs/af/ipv4-unicast/public-as-only-import/enable": []reflect.Type{
-			reflect.TypeOf((E_HuaweiBgp_PeerCommConfigType)(0)),
-		},
 		"/network-instance/instances/instance/bgp/base-process/peers/peer/afs/af/ipv4-unicast/route-limit/type": []reflect.Type{
 			reflect.TypeOf((E_HuaweiBgp_RouteLimitType)(0)),
-		},
-		"/network-instance/instances/instance/bgp/base-process/peers/peer/afs/af/ipv4-unicast/rpd-policy-export": []reflect.Type{
-			reflect.TypeOf((E_HuaweiBgp_PeerEnableConfigType)(0)),
-		},
-		"/network-instance/instances/instance/bgp/base-process/peers/peer/afs/af/ipv4-unicast/update-group-independent": []reflect.Type{
-			reflect.TypeOf((E_HuaweiBgp_PeerCommConfigType)(0)),
 		},
 		"/network-instance/instances/instance/bgp/base-process/peers/peer/afs/af/ipv4-vpn/add-path-mode": []reflect.Type{
 			reflect.TypeOf((E_HuaweiBgp_AddPathCapType)(0)),
@@ -2172,26 +2063,11 @@ func initΛEnumTypes() {
 		"/network-instance/instances/instance/bgp/base-process/peers/peer/afs/af/ipv4-vpn/prefix-sid": []reflect.Type{
 			reflect.TypeOf((E_HuaweiBgp_PeerEnableConfigType)(0)),
 		},
-		"/network-instance/instances/instance/bgp/base-process/peers/peer/afs/af/ipv4-vpn/public-as-only-import/enable": []reflect.Type{
-			reflect.TypeOf((E_HuaweiBgp_PeerCommConfigType)(0)),
-		},
 		"/network-instance/instances/instance/bgp/base-process/peers/peer/afs/af/ipv4-vpn/route-limit/type": []reflect.Type{
 			reflect.TypeOf((E_HuaweiBgp_RouteLimitType)(0)),
 		},
-		"/network-instance/instances/instance/bgp/base-process/peers/peer/afs/af/ipv4-vpn/update-group-independent": []reflect.Type{
-			reflect.TypeOf((E_HuaweiBgp_PeerCommConfigType)(0)),
-		},
 		"/network-instance/instances/instance/bgp/base-process/peers/peer/afs/af/ipv6-unicast/add-path-mode": []reflect.Type{
 			reflect.TypeOf((E_HuaweiBgp_AddPathCapType)(0)),
-		},
-		"/network-instance/instances/instance/bgp/base-process/peers/peer/afs/af/ipv6-unicast/advertise-dependent-filter6-state/dependent-filter-type": []reflect.Type{
-			reflect.TypeOf((E_HuaweiBgp_DependentPrefixFilterType)(0)),
-		},
-		"/network-instance/instances/instance/bgp/base-process/peers/peer/afs/af/ipv6-unicast/advertise-dependent-filter6/dependent-filter-switch": []reflect.Type{
-			reflect.TypeOf((E_HuaweiBgp_PeerAttrEnableType)(0)),
-		},
-		"/network-instance/instances/instance/bgp/base-process/peers/peer/afs/af/ipv6-unicast/advertise-dependent-filter6/dependent-filter-type": []reflect.Type{
-			reflect.TypeOf((E_HuaweiBgp_DependentPrefixFilterType)(0)),
 		},
 		"/network-instance/instances/instance/bgp/base-process/peers/peer/afs/af/ipv6-unicast/advertise-large-community": []reflect.Type{
 			reflect.TypeOf((E_HuaweiBgp_PeerCommConfigType)(0)),
@@ -2208,14 +2084,8 @@ func initΛEnumTypes() {
 		"/network-instance/instances/instance/bgp/base-process/peers/peer/afs/af/ipv6-unicast/prefix-sid": []reflect.Type{
 			reflect.TypeOf((E_HuaweiBgp_PeerCommConfigType)(0)),
 		},
-		"/network-instance/instances/instance/bgp/base-process/peers/peer/afs/af/ipv6-unicast/public-as-only-import/enable": []reflect.Type{
-			reflect.TypeOf((E_HuaweiBgp_PeerCommConfigType)(0)),
-		},
 		"/network-instance/instances/instance/bgp/base-process/peers/peer/afs/af/ipv6-unicast/route-limit/type": []reflect.Type{
 			reflect.TypeOf((E_HuaweiBgp_RouteLimitType)(0)),
-		},
-		"/network-instance/instances/instance/bgp/base-process/peers/peer/afs/af/ipv6-unicast/update-group-independent": []reflect.Type{
-			reflect.TypeOf((E_HuaweiBgp_PeerCommConfigType)(0)),
 		},
 		"/network-instance/instances/instance/bgp/base-process/peers/peer/afs/af/ipv6-vpn/add-path-mode": []reflect.Type{
 			reflect.TypeOf((E_HuaweiBgp_AddPathCapType)(0)),
@@ -2229,14 +2099,8 @@ func initΛEnumTypes() {
 		"/network-instance/instances/instance/bgp/base-process/peers/peer/afs/af/ipv6-vpn/path-attribute-treats/path-attribute-treat/treat-type": []reflect.Type{
 			reflect.TypeOf((E_HuaweiBgp_PathAttrTreatType)(0)),
 		},
-		"/network-instance/instances/instance/bgp/base-process/peers/peer/afs/af/ipv6-vpn/public-as-only-import/enable": []reflect.Type{
-			reflect.TypeOf((E_HuaweiBgp_PeerCommConfigType)(0)),
-		},
 		"/network-instance/instances/instance/bgp/base-process/peers/peer/afs/af/ipv6-vpn/route-limit/type": []reflect.Type{
 			reflect.TypeOf((E_HuaweiBgp_RouteLimitType)(0)),
-		},
-		"/network-instance/instances/instance/bgp/base-process/peers/peer/afs/af/ipv6-vpn/update-group-independent": []reflect.Type{
-			reflect.TypeOf((E_HuaweiBgp_PeerCommConfigType)(0)),
 		},
 		"/network-instance/instances/instance/bgp/base-process/peers/peer/afs/af/state/check-first-as": []reflect.Type{
 			reflect.TypeOf((E_HuaweiBgp_FirstAsState)(0)),
@@ -2265,9 +2129,6 @@ func initΛEnumTypes() {
 		"/network-instance/instances/instance/bgp/base-process/peers/peer/afs/af/type": []reflect.Type{
 			reflect.TypeOf((E_HuaweiBgp_AfType)(0)),
 		},
-		"/network-instance/instances/instance/bgp/base-process/peers/peer/bfd-parameter/valid-ttl-hops-operation": []reflect.Type{
-			reflect.TypeOf((E_HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProcess_Peers_Peer_BfdParameter_ValidTtlHopsOperation)(0)),
-		},
 		"/network-instance/instances/instance/bgp/base-process/peers/peer/check-first-as": []reflect.Type{
 			reflect.TypeOf((E_HuaweiBgp_PeerCapConfigState)(0)),
 		},
@@ -2277,38 +2138,14 @@ func initΛEnumTypes() {
 		"/network-instance/instances/instance/bgp/base-process/peers/peer/egress-engineer": []reflect.Type{
 			reflect.TypeOf((E_HuaweiBgp_EpeState)(0)),
 		},
-		"/network-instance/instances/instance/bgp/base-process/peers/peer/graceful-restart/enable": []reflect.Type{
-			reflect.TypeOf((E_HuaweiBgp_PeerCommConfigType)(0)),
-		},
-		"/network-instance/instances/instance/bgp/base-process/peers/peer/graceful-restart/peer-reset": []reflect.Type{
-			reflect.TypeOf((E_HuaweiBgp_PeerCommConfigType)(0)),
-		},
-		"/network-instance/instances/instance/bgp/base-process/peers/peer/local-graceful-restart/enable": []reflect.Type{
-			reflect.TypeOf((E_HuaweiBgp_PeerCommConfigType)(0)),
-		},
 		"/network-instance/instances/instance/bgp/base-process/peers/peer/memory-priority": []reflect.Type{
 			reflect.TypeOf((E_HuaweiBgp_PeerMemoryPriority)(0)),
 		},
 		"/network-instance/instances/instance/bgp/base-process/peers/peer/memory-priority-capability": []reflect.Type{
 			reflect.TypeOf((E_HuaweiBgp_MemoryPriority)(0)),
 		},
-		"/network-instance/instances/instance/bgp/base-process/peers/peer/oscillation-dampening": []reflect.Type{
-			reflect.TypeOf((E_HuaweiBgp_PeerAttrEnableType)(0)),
-		},
 		"/network-instance/instances/instance/bgp/base-process/peers/peer/password-type": []reflect.Type{
 			reflect.TypeOf((E_HuaweiBgp_PasswordType)(0)),
-		},
-		"/network-instance/instances/instance/bgp/instance-processs/instance-process/afs/af/ipv4-vpn/apply-label-mode": []reflect.Type{
-			reflect.TypeOf((E_HuaweiBgp_ApplyLabelType)(0)),
-		},
-		"/network-instance/instances/instance/bgp/instance-processs/instance-process/afs/af/ipv4-vpn/dampening-routes/dampening-route/peer-type": []reflect.Type{
-			reflect.TypeOf((E_HuaweiBgp_DampeningRouteExtPeerType)(0)),
-		},
-		"/network-instance/instances/instance/bgp/instance-processs/instance-process/afs/af/ipv4-vpn/nexthop-select-depend-type": []reflect.Type{
-			reflect.TypeOf((E_HuaweiBgp_SelectDependTypeExt)(0)),
-		},
-		"/network-instance/instances/instance/bgp/instance-processs/instance-process/afs/af/type": []reflect.Type{
-			reflect.TypeOf((E_HuaweiBgp_InstanceAfType)(0)),
 		},
 		"/routing-policy/as-path-filters/as-path-filter/nodes/node/match-mode": []reflect.Type{
 			reflect.TypeOf((E_HuaweiRoutingPolicy_MatchModeType)(0)),
@@ -2328,6 +2165,15 @@ func initΛEnumTypes() {
 		"/routing-policy/community-lists/community-list/community-member": []reflect.Type{
 			reflect.TypeOf((E_HuaweiRoutingPolicy_WellKnownCommunityType_Enum)(0)),
 		},
+		"/routing-policy/ext-community-encapsulation-filters/ext-community-encapsulation-filter/advanced-nodes/advanced-node/match-mode": []reflect.Type{
+			reflect.TypeOf((E_HuaweiRoutingPolicy_MatchModeType)(0)),
+		},
+		"/routing-policy/ext-community-encapsulation-filters/ext-community-encapsulation-filter/basic-nodes/basic-node/match-mode": []reflect.Type{
+			reflect.TypeOf((E_HuaweiRoutingPolicy_MatchModeType)(0)),
+		},
+		"/routing-policy/ext-community-encapsulation-filters/ext-community-encapsulation-filter/filter-type": []reflect.Type{
+			reflect.TypeOf((E_HuaweiRoutingPolicy_CommunityFilterType)(0)),
+		},
 		"/routing-policy/ext-community-filters/ext-community-filter/advanced-nodes/advanced-node/match-mode": []reflect.Type{
 			reflect.TypeOf((E_HuaweiRoutingPolicy_MatchModeType)(0)),
 		},
@@ -2336,12 +2182,6 @@ func initΛEnumTypes() {
 		},
 		"/routing-policy/ext-community-filters/ext-community-filter/filter-type": []reflect.Type{
 			reflect.TypeOf((E_HuaweiRoutingPolicy_CommunityFilterType)(0)),
-		},
-		"/routing-policy/ext-community-priority-color-filters/ext-community-priority-color-filter/advanced-nodes/advanced-node/match-mode": []reflect.Type{
-			reflect.TypeOf((E_HuaweiRoutingPolicy_MatchModeType)(0)),
-		},
-		"/routing-policy/ext-community-priority-color-filters/ext-community-priority-color-filter/basic-nodes/basic-node/match-mode": []reflect.Type{
-			reflect.TypeOf((E_HuaweiRoutingPolicy_MatchModeType)(0)),
 		},
 		"/routing-policy/ext-community-segmented-nexthop-filters/ext-community-segmented-nexthop-filter/advanced-nodes/advanced-node/match-mode": []reflect.Type{
 			reflect.TypeOf((E_HuaweiRoutingPolicy_MatchModeType)(0)),
@@ -2394,9 +2234,6 @@ func initΛEnumTypes() {
 		"/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-cost/operation": []reflect.Type{
 			reflect.TypeOf((E_HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Actions_ApplyCost_Operation)(0)),
 		},
-		"/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ext-community-priority-color/operation": []reflect.Type{
-			reflect.TypeOf((E_HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Actions_ApplyExtCommunityPriorityColor_Operation)(0)),
-		},
 		"/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ext-community-soo/operation": []reflect.Type{
 			reflect.TypeOf((E_HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Actions_ApplyExtCommunitySoo_Operation)(0)),
 		},
@@ -2433,6 +2270,9 @@ func initΛEnumTypes() {
 		"/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-route-types/match-route-type/route-type": []reflect.Type{
 			reflect.TypeOf((E_HuaweiRoutingPolicy_RouteType)(0)),
 		},
+		"/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-rpki/origin-as-validation": []reflect.Type{
+			reflect.TypeOf((E_HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Conditions_MatchRpki_OriginAsValidation)(0)),
+		},
 		"/routing-policy/policy-definitions/policy-definition/nodes/node/match-mode": []reflect.Type{
 			reflect.TypeOf((E_HuaweiRoutingPolicy_MatchModeType)(0)),
 		},
@@ -2453,12 +2293,6 @@ func initΛEnumTypes() {
 		},
 		"/routing/routing-manage/relay-default-routes/relay-default-route/protocol-type": []reflect.Type{
 			reflect.TypeOf((E_HuaweiRouting_Routing_RoutingManage_RelayDefaultRoutes_RelayDefaultRoute_ProtocolType)(0)),
-		},
-		"/system/security-risks/security-risk/level": []reflect.Type{
-			reflect.TypeOf((E_HuaweiSystem_RiskLevelType)(0)),
-		},
-		"/system/security-risks/security-risk/type": []reflect.Type{
-			reflect.TypeOf((E_HuaweiSystem_SecurityRiskType)(0)),
 		},
 		"/time-range/time-range-instances/time-range-instance/status": []reflect.Type{
 			reflect.TypeOf((E_HuaweiTimeRange_RowStatus)(0)),
@@ -2481,6 +2315,18 @@ func initΛEnumTypes() {
 		"/tunnel-management/tunnel-policys/tunnel-policy/ipv6-set/select-sequence/select-tunnel-types/select-tunnel-type/type": []reflect.Type{
 			reflect.TypeOf((E_HuaweiTunnelManagement_SelSeqTunnelIpv6Type)(0)),
 		},
+		"/tunnel-management/tunnel-statisticss/tunnel-statistics/type": []reflect.Type{
+			reflect.TypeOf((E_HuaweiTunnelManagement_TunnelType)(0)),
+		},
+		"/vlan/dynamic-vlans/dynamic-vlan/active-ports/active-port/access-type": []reflect.Type{
+			reflect.TypeOf((E_HuaweiVlan_AccessType)(0)),
+		},
+		"/vlan/dynamic-vlans/dynamic-vlan/active-ports/active-port/tag-mode": []reflect.Type{
+			reflect.TypeOf((E_HuaweiVlan_TagMode)(0)),
+		},
+		"/vlan/dynamic-vlans/dynamic-vlan/status": []reflect.Type{
+			reflect.TypeOf((E_HuaweiVlan_OperStatus)(0)),
+		},
 		"/vlan/vlans/vlan/admin-status": []reflect.Type{
 			reflect.TypeOf((E_HuaweiVlan_AdminStatus)(0)),
 		},
@@ -2495,9 +2341,6 @@ func initΛEnumTypes() {
 		},
 		"/vlan/vlans/vlan/member-ports/member-port/state": []reflect.Type{
 			reflect.TypeOf((E_HuaweiVlan_OperStatus)(0)),
-		},
-		"/vlan/vlans/vlan/member-ports/member-port/tag-mode": []reflect.Type{
-			reflect.TypeOf((E_HuaweiVlan_TagMode)(0)),
 		},
 		"/vlan/vlans/vlan/statistic-discard": []reflect.Type{
 			reflect.TypeOf((E_HuaweiVlan_EnableStatus)(0)),
@@ -2515,6 +2358,12 @@ func initΛEnumTypes() {
 			reflect.TypeOf((E_HuaweiVlan_VlanType)(0)),
 		},
 		"/vlan/vlans/vlan/unknown-multicast-discard": []reflect.Type{
+			reflect.TypeOf((E_HuaweiVlan_EnableStatus)(0)),
+		},
+		"/vlan/vlans/vlan/unknown-unicast-discard/discard": []reflect.Type{
+			reflect.TypeOf((E_HuaweiVlan_EnableStatus)(0)),
+		},
+		"/vlan/vlans/vlan/unknown-unicast-discard/mac-learning-enable": []reflect.Type{
 			reflect.TypeOf((E_HuaweiVlan_EnableStatus)(0)),
 		},
 		"/vlan/vlans/vlan/unkown-unicast-discard/discard": []reflect.Type{

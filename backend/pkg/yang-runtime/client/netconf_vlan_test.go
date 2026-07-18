@@ -99,7 +99,6 @@ func TestBuildHuaweiVlanVlansXML_WithMemberPorts(t *testing.T) {
 	vlans.Vlan[vlanID].MemberPorts.MemberPort[ifName] = &huawei.HuaweiVlan_Vlan_Vlans_Vlan_MemberPorts_MemberPort{
 		InterfaceName: &ifName,
 		AccessType:    huawei.E_HuaweiVlan_AccessType(1), // tagged
-		TagMode:       huawei.E_HuaweiVlan_TagMode(1),    // untagged
 	}
 
 	result, err := buildHuaweiVlanVlansXML(vlans)
@@ -109,7 +108,6 @@ func TestBuildHuaweiVlanVlansXML_WithMemberPorts(t *testing.T) {
 	assert.Contains(t, result, `<member-port>`)
 	assert.Contains(t, result, `<interface-name>GigabitEthernet0/0/1</interface-name>`)
 	assert.Contains(t, result, `<access-type>1</access-type>`)
-	assert.Contains(t, result, `<tag-mode>untag</tag-mode>`)
 	assert.Contains(t, result, `</member-port>`)
 	assert.Contains(t, result, `</member-ports>`)
 }

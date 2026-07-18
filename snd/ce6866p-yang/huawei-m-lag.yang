@@ -1,0 +1,960 @@
+/*
+Copyright (C) 2020 Huawei Technologies Co., Ltd. All rights reserved.
+module: huawei-m-lag
+  +--rw m-lag
+     +--rw dfs-groups
+     |  +--rw dfs-group* [group-id]
+     |     +--rw group-id              uint8
+     |     +--rw priority?             uint8
+     |     +--rw mac-address-remain
+     |     |  +--rw paired-port?     boolean
+     |     |  +--rw unpaired-port?   boolean
+     |     +--rw authentication!
+     |     |  +--rw mode        authentication-mode
+     |     |  +--rw password    pub-type:password-extend
+     |     +--rw up-delay
+     |     |  +--rw up-delay-timer?           uint16
+     |     |  +--rw auto-recovery-interval?   uint8
+     |     +--rw lacp-switch-delay
+     |     |  +--rw (system-id-switch-mode)?
+     |     |     +--:(immediately)
+     |     |     |  +--rw immediately?   empty
+     |     |     +--:(no-switch)
+     |     |     |  +--rw no-switch?     empty
+     |     |     +--:(switch-delay)
+     |     |        +--rw delay-timer?   uint16
+     |     +--rw sessions
+     |     |  +--rw session* [dfs-proto-type]
+     |     |     +--rw dfs-proto-type    dfs-proto-type
+     |     |     +--rw source-ip         inet:ip-address-no-zone
+     |     |     +--rw peer-ip?          inet:ip-address-no-zone
+     |     |     +--rw socket-type?      socket-type
+     |     |     +--rw peer-port?        inet:port-number
+     |     |     +--rw vpn-name?         -> /ni:network-instance/instances/instance/name
+     |     |     +--rw timeout?          uint8
+     |     +--rw dad-error-down
+     |     |  +--rw enable?            boolean
+     |     |  +--rw delay?             uint16
+     |     |  +--rw error-down-mode?   error-down-mode
+     |     +--rw consistency-check
+     |        +--rw enable?   boolean
+     |        +--rw mode?     consistency-check-mode
+     +--ro negotiation-states
+        +--ro negotiation-state* [dfs-role]
+           +--ro dfs-role            dfs-role-type
+           +--ro heart-beat-state?   heart-beat-state
+           +--ro dfs-group-states
+              +--ro dfs-group-state* [group-id]
+              |  +--ro group-id             uint8
+              |  +--ro priority?            uint8
+              |  +--ro udp-port?            inet:port-number
+              |  +--ro ip-address?          inet:ip-address-no-zone
+              |  +--ro vpn-name?            -> /ni:network-instance/instances/instance/name
+              |  +--ro system-id?           pub-type:mac-address
+              |  +--ro system-name?         string
+              |  +--ro state?               m-lag-state
+              |  +--ro causation?           causation
+              |  +--ro consistency-check?   consist-check-result
+              |  +--ro version?             string
+              |  +--ro device-type?         string
+              +--ro m-lags
+              |  +--ro m-lag* [id]
+              |     +--ro id                   uint16
+              |     +--ro group-id?            uint8
+              |     +--ro interface-name?      pub-type:if-name
+              |     +--ro port-state?          port-state
+              |     +--ro port-status?         port-status
+              |     +--ro port-role?           port-role
+              |     +--ro consistency-check?   consist-check-result
+              |     +--ro causation?           m-lag-check-causation
+              +--ro peer-link-states
+                 +--ro peer-link-state* [group-id]
+                    +--ro group-id          uint8
+                    +--ro link-id?          uint8
+                    +--ro interface-name?   pub-type:if-name
+                    +--ro port-state?       port-state
+
+  augment /ifm:ifm/ifm:interfaces/ifm:interface:
+    +--rw m-lag
+       +--rw dfs-groups
+       |  +--rw dfs-group* [group-id]
+       |     +--rw group-id    -> /m-lag/dfs-groups/dfs-group/group-id
+       |     +--rw m-lag-id?   uint16
+       +--rw peer-link
+       |  +--rw peer-link-id?   uint8
+       |  +--rw exclude-vlan?   pub-type:vlan-range
+       |  +--rw peer-link-type?   peer-link-typeq
+       +--rw error-down-port
+       |  +--rw port?   error-down-port
+       +--rw routing-addr
+          +--rw routing-ipv4-addr?        inet:ipv4-address-no-zone
+          +--rw ipv4-wild?                inet:ipv4-address-no-zone
+          +--rw routing-ipv6-addr?        inet:ipv6-address-no-zone
+          +--rw routing-addr-linklocal?   inet:ipv6-address-no-zone
+*/
+
+module huawei-m-lag {
+  namespace "urn:huawei:yang:huawei-m-lag";
+  prefix m-lag;
+  import huawei-extension {
+    prefix ext;
+  }
+  import huawei-pub-type {
+    prefix pub-type;
+  }
+  import ietf-inet-types {
+    prefix inet;
+  }
+  import huawei-network-instance {
+    prefix ni;
+  }
+  import huawei-ifm {
+    prefix ifm;
+  }
+  organization
+    "Huawei Technologies Co., Ltd.";
+  contact
+    "Huawei Industrial Base
+    Bantian, Longgang
+    Shenzhen 518129
+    People's Republic of China
+    Website: http://www.huawei.com
+    Email: support@huawei.com";
+  description
+    "This module contains a collection of YANG definitions for M-LAG service.";
+  revision 2020-06-02 {
+    description
+      "Add peer-link state.";
+    reference 
+      "Huawei private.";
+  }
+  revision 2020-03-26 {
+    description
+      "Add port exclude VLAN, keepalive timeout, routing-address ip mask, and delete virtual link.";
+    reference 
+      "Huawei private.";
+  }
+  revision 2020-01-15 {
+    description
+      "Init revision.";
+    reference
+      "Huawei private.";
+  }
+  ext:task-name "m-lag";
+  typedef socket-type {
+    type enumeration {
+      enum "UDP" {
+        value 1;
+        description
+          "Transport layer is UDP";
+      }
+    }
+    description
+      "Specify DFS transport layer socket type.";
+  }
+  typedef dfs-proto-type {
+    type enumeration {
+      enum "keepalive" {
+        value 1;
+        description
+          "Keepalive is for M-lag member switch node dual active detection.";
+      }
+    }
+    description
+      "Specify DFS protocol type, keepalive is over udp.";
+  }
+  typedef error-down-mode {
+    type enumeration {
+      enum "routing-switch" {
+        value 1;
+        description
+          "Error down M-LAG access port and logical port like VLANIF and BDIF.";
+      }
+    }
+    description
+      "Specify error down mode.";
+  }
+  typedef consistency-check-mode {
+    type enumeration {
+      enum "loose" {
+        value 1;
+        description
+          "loose consistency-check.";
+      }
+      enum "strict" {
+        value 2;
+        description
+          "strict consistency-check.";
+      }
+      enum "disable" {
+        value 3;
+        description
+          "Disable consistency-check.";
+      }
+    }
+    description
+      "Define configuration consistency check mode between two M-LAG member switches.";
+  }
+  typedef consist-check-result {
+    type enumeration {
+      enum "success" {
+        value 1;
+        description
+          "Configuration consistency check success.";
+      }
+      enum "failed" {
+        value 2;
+        description
+          "Configuration consistency check failed.";
+      }
+    }
+    description
+      "Define configuration consistency check result between two M-LAG member switches.";
+  }
+  typedef authentication-mode {
+    type enumeration {
+      enum "hmac-sha256" {
+        value 1;
+        description
+          "Authentication is hmac-sha256.";
+      }
+    }
+    description
+      "Define authentication mode.";
+  }
+  typedef m-lag-state {
+    type enumeration {
+      enum "master" {
+        value 1;
+        description
+          "M-LAG master.";
+      }
+      enum "slave" {
+        value 2;
+        description
+          "M-LAG slave.";
+      }
+    }
+    description
+      "Define M-LAG negotiated state between two member switches.";
+  }
+  
+  typedef dfs-role-type {
+    type enumeration {
+      enum "local" {
+        value 1;
+        description
+          "Local DFS.";
+      }
+      enum "peer" {
+        value 2;
+        description
+          "Peer DFS.";
+      }
+    }
+    description
+      "Define M-LAG local or peer role.";
+  }
+  
+  typedef port-state {
+    type enumeration {
+      enum "UP" {
+        value 1;
+        description
+          "Port physical state is UP.";
+      }
+      enum "DOWN" {
+        value 2;
+        description
+          "Port physical state is DOWN.";
+      }
+    }
+    description
+      "Define M-LAG member port physical state.";
+  }
+  
+  typedef port-status {
+    type enumeration {
+      enum "active" {
+        value 1;
+        description
+          "Member port is active.";
+      }
+      enum "inactive" {
+        value 2;
+        description
+          "Member port is inactive.";
+      }
+    }
+    description
+      "Define M-LAG member port status.";
+  }
+  
+  typedef port-role {
+    type enumeration {
+      enum "master" {
+        value 1;
+        description
+          "Member port is Master.";
+      }
+      enum "backup" {
+        value 2;
+        description
+          "Member port is Backup.";
+      }
+        enum "invalid" {
+        value 3;
+        description
+          "Member port is Invalid.";
+      }
+    }
+    description
+      "Define M-LAG member port negotiated role.";
+  }
+  
+  typedef causation {
+    type enumeration {
+      enum "NOPEERLINK" {
+        value 1;
+        description
+          "Not configured peerlink.";
+      }
+      enum "NOADDRESS" {
+        value 2;
+        description
+          "Not bind IP address.";
+      }
+      enum "SAMEMAC" {
+        value 3;
+        description
+          "Both ends protocol have same source MAC.";
+      }
+      enum "TYPEMISMATCH" {
+        value 4;
+        description
+          "IP address type not match.";
+      }
+      enum "TIMEOUT" {
+        value 5;
+        description
+          "Protocol timer out.";
+      }
+      enum "PEERLINKDOWN" {
+        value 6;
+        description
+          "Peer link down.";
+      }
+      enum "DETECT" {
+        value 7;
+        description
+          "Hello is OK, exchange information is not correct.";
+      }
+      enum "AUTHENTICATION-FAILED" {
+        value 8;
+        description
+          "Peer authentication failed.";
+      }
+      enum "VERSIONMISMATCH" {
+        value 9;
+        description
+          "The software version is incompatible.";
+      }
+      enum "NOAUTHENTICATION" {
+        value 10;
+        description
+          "Not configured authentication.";
+      }
+    }
+    description
+      "Define M-LAG negotiation failed cause.";
+  }
+  typedef m-lag-check-causation {
+    type enumeration {
+      enum "PORTVLANINCONSISTENT" {
+        value 1;
+        description
+          "Relationship between vlan and port is inconsistent.";
+      }
+      enum "STPINCONSISTENT" {
+        value 2;
+        description
+          "STP configuration under the port is inconsistent.";
+      }
+      enum "STPPRIORITYINCONSISTENT" {
+        value 3;
+        description
+          "STP port priority configuration is inconsistent.";
+      }
+      enum "LACPINCONSISTENT" {
+        value 4;
+        description
+          "LACP mode of M-LAG is inconsistent.";
+      }
+      enum "MLAGINCONSISTENT" {
+        value 5;
+        description
+          "M-LAG configuration is inconsistent.";
+      }
+      enum "MLAGMEMBERINCONSISTENT" {
+        value 6;
+        description
+          "The number of M-LAG members is inconsistent.";
+      }
+    }
+    description
+      "Define M-LAG member consistency-check failed cause.";
+  }
+  typedef error-down-port {
+    type enumeration {
+      enum "reserved" {
+        value 1;
+        description
+          "Reserve this port when m-lag dual-active.";
+      }
+      enum "suspend" {
+        value 2;
+        description
+          "Suspend this port when m-lag dual-active.";
+      }
+    }
+    description
+      "Set the port error down enable or disable, the config can't be set on M-LAG or peerlink port.";
+  }
+  typedef heart-beat-state {
+    type enumeration {
+      enum "ok" {
+        value 1;
+        description
+          "M-LAG heart beat is OK.";
+      }
+      enum "lost" {
+        value 2;
+        description
+          "M-LAG heart beat is lost.";
+      }
+    }
+    description
+      "Define M-LAG negotiation state between two member switches.";
+  }
+  typedef peer-link-type {
+    type enumeration {
+      enum "physical" {
+        value 0;
+        description
+          "The type of peer-link is physical link.";
+      }
+      enum "virtual" {
+        value 1;
+        description
+          "The type of peer-link is virtual link.";
+      }
+    }
+    description
+      "Specify peer-link interface type.";
+  }
+  container m-lag {
+    description
+       "M-LAG configuration and states";
+    container dfs-groups {
+      description
+        "List of DFS group.";
+      list dfs-group {
+        key "group-id";
+        max-elements 1;
+        description
+          "Configure DFS parameter for each DFS group.";
+        leaf group-id {
+          type uint8 {
+            range "1";
+          }
+          description
+            "Dynamic Fabric Service Group ID.";
+        }
+        leaf priority {
+          type uint8 {
+            range "1..254";
+          }
+          default "100";
+          description
+            "Larger number has higher priority, when two M-LAG member switches have same priority, will compare System MAC, then the switch with smaller System MAC will become Master.";
+        }
+        container mac-address-remain {
+          description
+            "Configure peer-link mac-address to be remained.";
+          leaf paired-port {
+            type boolean;
+            default "true";
+            description
+              "Enable/disable MAC address remained on the peer-link when the status of the paired-port changes.";
+          }
+          leaf unpaired-port {
+            type boolean;
+            default "true";
+            description
+              "Enable/disable MAC address remained on the peer-link when the status of the unpaired-port changes.";
+          }
+        }
+        container authentication {
+          presence "Enable authentication";
+          description
+            "Configure authentication mode and password.";
+          leaf mode {
+            type authentication-mode;
+            mandatory true;
+            description
+              "Define authentication mode for DFS.";
+          }
+          leaf password {
+            type pub-type:password-extend {
+              length "6..432";
+            }
+            mandatory true;
+            description
+              "The password is a string ranging from 6 to 16 characters for a plain text password and 20 to 432 characters for a cipher text password.";
+          }
+        }
+        container up-delay {
+          description
+            "Configure M-LAG up delay timer and member port automatic recovery interval timer.";
+          leaf up-delay-timer {
+            type uint16 {
+              range "0..3600";
+            }
+            units "s";
+            default "240";
+            description
+              "M-LAG UP-Delay time.";
+          }
+          leaf auto-recovery-interval {
+            type uint8 {
+              range "0..180";
+            }
+            units "s";
+            default "0";
+            description
+              "M-LAG UP-Delay automatic recovery interval time.";
+          }
+        }
+        container lacp-switch-delay {
+          description
+            "Configure LACP system ID switch delay mode.";
+          choice system-id-switch-mode {
+            default "no-switch";
+            description
+              "Define LACP system ID switch delay mode.";
+            case immediately {
+              description
+                "Lacp system-id change immediately.";
+              leaf immediately {
+                type empty;
+                description
+                  "Lacp system-id change immediately.";
+              }
+            }
+            case no-switch {
+              description
+                "Lacp system-id doesn't change.";
+              leaf no-switch {
+                type empty;
+                description
+                  "Lacp system-id doesn't change.";
+              }
+            }
+            case switch-delay {
+              description
+                "Set Lacp switch delay timer.";
+              leaf delay-timer {
+                type uint16 {
+                  range "1..3600";
+                }
+                units "s";
+                description
+                  "Set Lacp switch delay timer.";
+              }
+            }
+          }
+        }
+        container sessions {
+          description
+            "List of DFS protocol session parameters.";
+          list session {
+            key "dfs-proto-type";
+            description
+              "Configure each DFS protocol session parameter.";
+            leaf dfs-proto-type {
+              type dfs-proto-type;
+              description
+                "Define DFS protocol, it can be used as the keepalive for M-LAG member switches dual active detection.";
+            }
+            leaf source-ip {
+              type inet:ip-address-no-zone;
+              mandatory true;
+              description
+                "DFS source ip address.";
+            }
+            leaf peer-ip {
+              type inet:ip-address-no-zone;
+              must "(../peer-ip != ../source-ip)";
+              description
+                "DFS peer ip address.";
+            }
+            leaf socket-type {
+              type socket-type;
+              must "(../peer-ip and ../socket-type) or (not (../peer-ip) and not (../socket-type))";
+              description
+                "Define DFS socket type, keepalive is over udp.";
+            }
+            leaf peer-port {
+              type inet:port-number {
+                range "1025..2048";
+              }
+              must "(../peer-ip and ../peer-port) or (not (../peer-ip) and not (../peer-port))";
+              default "1025";
+              description
+                "DFS peer port number.";
+            }
+            leaf vpn-name {
+              type leafref {
+                path "/ni:network-instance/ni:instances/ni:instance/ni:name";
+              }
+              description
+                "Name of the VPN instance bound to source ip address.";
+            }
+            leaf timeout {
+              when "../dfs-proto-type ='keepalive'";
+              type uint8 {
+                range "3..60";
+              }
+              units "s";
+              default "45";
+              description
+                "Keepalive timeout value.";
+            }
+          }
+        }
+        container dad-error-down {
+          description
+            "Configure Dual active detection error down.";
+          leaf enable {
+            type boolean;
+            default "true";
+            description
+              "Enable/disable error down.";
+          }
+          leaf delay {
+            when "../enable ='true'";
+            type uint16 {
+              range "0..7200";
+            }
+            units s;
+            default "0";
+            description
+              "Error-down delay time.";
+          }
+          leaf error-down-mode {
+            type error-down-mode;
+            description
+              "Define error down mode.";
+          }
+        }
+        container consistency-check {
+          description
+            "Configure consistency check parameters between two M-LAG switches.";
+          leaf mode {
+            type consistency-check-mode;
+            default "disable";
+            description
+              "Specify consistency-check mode.";
+          }
+        }
+      }
+    }
+    container negotiation-states {
+      config false;
+      description
+        "List of M-LAG negotiation parameters and states on local and peer switch.";
+      list negotiation-state {
+        key "dfs-role";
+        description
+          "Operational state of M-LAG negotiation parameters and states on local or peer switch.";
+        leaf dfs-role {
+          type dfs-role-type;
+          description
+            "Define DFS role of local or peer.";
+        }
+        leaf heart-beat-state {
+          type heart-beat-state;
+          description
+            "Define heart beat state of OK or Lost.";
+        }
+        container dfs-group-states {
+          description
+            "List of M-LAG configuration and state for all DFS groups, only one group is currently supported.";
+          list dfs-group-state {
+            key "group-id";
+            description
+              "Operational state of M-LAG configuration and state for each DFS group.";
+            leaf group-id {
+              type uint8 {
+                range "1";
+              }
+              description
+                "Dynamic Fabric Service Group ID.";
+            }
+            leaf priority {
+              type uint8 {
+                range "1..254";
+              }
+              default "100";
+              description
+                "Priority of the Dynamic Fabric Service Group.";
+            }
+            leaf udp-port {
+              type inet:port-number {
+                range "1025..2048";
+              }
+              description
+                "DFS UDP port.";
+            }
+            leaf ip-address {
+              type inet:ip-address-no-zone;
+              description
+                "DFS source ip address.";
+            }
+            leaf vpn-name {
+              type leafref {
+                path "/ni:network-instance/ni:instances/ni:instance/ni:name";
+              }
+              description
+                "Name of the VPN instance bound to source ip address.";
+            }
+            leaf system-id {
+              type pub-type:mac-address;
+              description
+                "System ID.";
+            }
+            leaf system-name {
+              type string {
+                length "1..246";
+              }
+              description
+                "System name.";
+            }
+            leaf state {
+              type m-lag-state;
+              description
+                "M-LAG negotiated state.";
+            }
+            leaf causation {
+              type causation;
+              description
+                "Negotiation failed cause.";
+            }
+            leaf consistency-check {
+              type consist-check-result;
+              description
+                "Configuration consistency check result.";
+            }
+            leaf version {
+              type string {
+                length "1..31";
+              }
+              description
+                "Device version.";
+            }
+            leaf device-type {
+              type string {
+                length "1..50";
+              }
+              description
+                "Device type.";
+            }
+          }
+          container m-lags {
+            description
+               "List of M-LAG configuration and state in one DFS group.";
+            list m-lag {
+              key "id";
+              description
+                "Operational state of the local or remote state for one M-LAG.";
+              leaf id {
+                type uint16 {
+                  range "1..2048";
+                }
+                description
+                  "M-LAG ID.";
+              }
+              leaf group-id {
+                type uint8 {
+                  range "1";
+                }
+                description
+                  "Dynamic Fabric Service Group ID.";
+              }
+              leaf interface-name {
+                type pub-type:if-name;
+                description
+                  "Corresponding local or remote ETH-Trunk interface name for the M-LAG.";
+              }
+              leaf port-state {
+                type port-state;
+                description
+                  "Corresponding local or remote ETH-Trunk interface state for the M-LAG.";
+              }
+              leaf port-status {
+                type port-status;
+                description
+                  "Corresponding local or remote ETH-Trunk interface status for the M-LAG.";
+              }
+              leaf port-role {
+                type port-role;
+                description
+                  "Corresponding local or remote ETH-Trunk interface role for the M-LAG.";
+              }
+              leaf consistency-check {
+                type consist-check-result;
+                description
+                  "Consistency check result for the M-LAG.";
+              }
+              leaf causation {
+                type m-lag-check-causation;
+                description
+                  "Negotiation failed cause for the M-LAG.";
+              }
+            }
+          }
+          container peer-link-states {
+            description
+               "List of peer-link configuration and state.";
+            list peer-link-state {
+              key "group-id";
+              description
+                "Operational state of peer-link configuration and state for each DFS group.";
+              leaf group-id {
+                type uint8 {
+                  range "1";
+                }
+                description
+                  "Dynamic Fabric Service Group ID.";
+              }
+              leaf link-id {
+                type uint8 {
+                  range "1";
+                }
+                description
+                  "Define the ETH-Trunk as Peer Link between M-LAG member switches.";
+              }
+              leaf interface-name {
+                type pub-type:if-name;
+                description
+                  "Corresponding local ETH-Trunk interface name for the peer-link.";
+              }
+              leaf port-state {
+                type port-state;
+                description
+                  "Corresponding local ETH-Trunk interface state for the peer-link.";
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  augment /ifm:ifm/ifm:interfaces/ifm:interface {
+    description
+      "Define interface related M-LAG configuration.";
+    container m-lag {
+      description
+        "Configure interface related M-LAG configuration.";
+      container dfs-groups {
+        when "../../ifm:type='Eth-Trunk'";
+        must "not(../peer-link/peer-link-id)  and not(../error-down-port)";
+        description
+          "List of DFS group and M-LAG ID on each ETH-Trunk interface.";
+        list dfs-group {
+          key "group-id";
+          description
+            "Configure the M-LAG configuration on Eth-Trunk interface.";
+          leaf group-id {
+            type leafref {
+               path "/m-lag/dfs-groups/dfs-group/group-id";
+            }
+            description
+              "Dynamic Fabric Service Group ID.";
+          }
+          leaf m-lag-id {
+            type uint16 {
+              range "1..2048";
+            }
+            description
+              "Define M-LAG ID on one ETH-Trunk interface. Each ETH-Trunk interface has 1:1 mapping with M-LAG ID.";
+          }
+        }
+      }
+      container peer-link {
+        when "../../ifm:type='Eth-Trunk'";
+        must "not(../dfs-groups/dfs-group) and not(../error-down-port)";
+        description
+          "Configure peer link configuration.";
+        leaf peer-link-id {
+          type uint8 {
+            range "1";
+        }
+        description
+          "Define the ETH-Trunk as Peer Link between M-LAG member switches.";
+        }
+        leaf exclude-vlan {
+          type pub-type:vlan-range;
+          description  
+            "Configure port exclude vlan range.";
+        }
+        leaf peer-link-type {
+          type peer-link-type;
+          must "../peer-link-id";
+          default "physical";
+          description
+            "Define peer-link interface type.";
+        }
+      }
+      container error-down-port {
+        must "not(../dfs-groups/dfs-group) and not(../peer-link/peer-link-id)";
+        description
+          "Configure error-down reserved or suspend port configuration.";
+        leaf port {
+          type error-down-port;
+          description
+            "Define the error down port.";
+        }
+      }
+      container routing-addr {
+        when "../../ifm:type='Vbdif' or ../../ifm:type='Vlanif'";
+        description
+          "Configure IPv4 or IPv6 address on Vbdif or Vlanif to run the routing protocol of OSPF or BGP over M-LAG.";
+        leaf routing-ipv4-addr {
+          type inet:ipv4-address-no-zone;
+          must "(../routing-ipv4-addr and ../ipv4-wild) or (not (../routing-ipv4-addr) and not (../ipv4-wild))";
+          description
+            "IPv4 address for OSPF and BGPv4 peering.";
+        }
+        leaf ipv4-wild {
+          type inet:ipv4-address-no-zone;
+          must "(../routing-ipv4-addr and ../ipv4-wild) or (not (../routing-ipv4-addr) and not (../ipv4-wild))";
+          description
+            "Wildcard mask of routing IPv4 address.";
+          ext:support-filter "true";
+        }
+        leaf routing-ipv6-addr {
+          type inet:ipv6-address-no-zone;
+          description
+            "IPv6 global address for BGPv6 peering.";
+        }
+        leaf routing-addr-linklocal {
+          type inet:ipv6-address-no-zone;
+          description
+            "For OSPFv3 peering which uses link-local IPv6 address configured on the Vbdif or Vlanif.";
+        }
+      }
+    }
+  }
+}

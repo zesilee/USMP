@@ -1,0 +1,352 @@
+/*
+Copyright (C) 2020 Huawei Technologies Co., Ltd. All rights reserved.
+*/
+module huawei-pic-notification {
+  yang-version 1;
+  namespace "urn:huawei:yang:huawei-pic-notification";
+  prefix pic-notification;
+  import huawei-extension {
+    prefix ext;
+  }
+  import huawei-devm {
+    prefix devm;
+  }
+  organization
+    "Huawei Technologies Co., Ltd.";
+  contact
+    "Huawei Industrial Base
+    Bantian, Longgang
+    Shenzhen 518129
+    People's Republic of China
+    Website: http://www.huawei.com
+    Email: support@huawei.com";
+  description
+    "notification of sub-card module.";
+  revision 2020-05-08 {
+    description
+      "Add four notification alarms.";
+    reference
+      "Huawei private.";
+  }
+  revision 2020-03-20 {
+    description
+      "Initial revision.";
+    reference
+      "Huawei private.";
+  }
+  ext:task-name  "device-mgr";
+  notification optical-remove {
+    description
+      "Optical module has been removed.";
+    leaf entity-index {
+      type uint32;
+      description
+        "Indicates the index of an entity.";
+    }
+    leaf entity-name {
+      type string {
+        length "0..255";
+      }
+      description
+        "Indicates the name of an entity.";
+    }
+    leaf fault-id {
+      type devm:notification-probable-cause-type;
+      description
+        "Indicates the error code.";
+    }
+  }  
+  notification optical-insert {
+    description
+      "Optical module has been inserted.";
+    leaf entity-index {
+      type uint32;
+      description
+        "Indicates the index of an entity.";
+    }
+    leaf entity-name {
+      type string {
+        length "0..255";
+      }
+      description
+        "Indicates the name of an entity.";
+    }
+    leaf fault-id {
+      type devm:notification-probable-cause-type;
+      description
+        "Indicates the error code.";
+    }
+  }
+  notification optical-unauthorized {
+    description
+      "The optical module was not certified by Huawei Ethernet Switch.";
+    leaf entity-index {
+      type uint32;
+      description
+        "Indicates the index of an entity.";
+    }
+    leaf entity-name {
+      type string {
+        length "0..255";
+      }
+      description
+        "Indicates the name of an entity.";
+    }
+    leaf fault-id {
+      type devm:notification-probable-cause-type;
+      description
+        "Indicates the error code.";
+    }
+  }
+  notification optical-unauthorized-resume {
+    description
+      "The alarm on optical module not certified by Huawei Ethernet Switch was clearned.";
+    leaf entity-index {
+      type uint32;
+      description
+        "Indicates the index of an entity.";
+    }
+    leaf entity-name {
+      type string {
+        length "0..255";
+      }
+      description
+        "Indicates the name of an entity.";
+    }
+    leaf fault-id {
+      type devm:notification-probable-cause-type;
+      description
+        "Indicates the error code.";
+    }
+  }
+  notification optical-invalid {
+    description
+      "Optical module is invalid.";
+    leaf entity-index {
+      type uint32;
+      description
+        "Indicates the index of an entity.";
+    }
+    leaf entity-name {
+      type string {
+        length "0..255";
+      }
+      description
+        "Indicates the name of an entity.";
+    }
+    leaf fault-id {
+      type devm:notification-probable-cause-type;
+      description
+        "Indicates the error code.";
+    }
+  }
+  notification optical-invalid-resume {
+    description
+      "Optical module resume from invalid situation.";
+    leaf entity-index {
+      type uint32;
+      description
+        "Indicates the index of an entity.";
+    }
+    leaf entity-name {
+      type string {
+        length "0..255";
+      }
+      description
+        "Indicates the name of an entity.";
+    }
+    leaf fault-id {
+      type devm:notification-probable-cause-type;
+      description
+        "Indicates the error code.";
+    }
+  }
+  notification card-remove {
+    description
+      "The card was removed.";
+    leaf entity-index {
+      type uint32;
+      description
+        "Indicates the index of an entity.";
+    }
+    leaf entity-name {
+      type string {
+        length "0..255";
+      }
+      description
+        "Indicates the name of an entity.";
+    }
+    leaf entity-type {
+      type devm:notification-entity-type;
+      description
+        "Type of the notification entity. The value can be one of the following: - 1: MPU - 2: LPU - 3: SFU - 4: PIC - 5: CF card - 6: OFC";
+    }
+    leaf fault-id {
+      type devm:notification-probable-cause-type;
+      description
+        "To describe the fault id of trap";
+    }
+  }
+  notification card-insert {
+    description
+      "The card was inserted.";
+    leaf entity-index {
+      type uint32;
+      description
+        "Indicates the index of an entity.";
+    }
+    leaf entity-name {
+      type string {
+        length "0..255";
+      }
+      description
+        "Indicates the name of an entity.";
+    }
+    leaf entity-type {
+      type devm:notification-entity-type;
+      description
+        "Type of the notification entity. The value can be one of the following: - 1: MPU - 2: LPU - 3: SFU - 4: PIC - 5: CF card - 6: OFC";
+    }
+    leaf fault-id {
+      type devm:notification-probable-cause-type;
+      description
+        "To describe the fault id of trap";
+    }
+  }
+  notification card-invalid {
+    description
+      "The card unavailable.";
+    leaf entity-index {
+      type uint32;
+      description
+        "Indicates the index of an entity.";
+    }
+    leaf entity-name {
+      type string {
+        length "0..255";
+      }
+      description
+        "Indicates the name of an entity.";
+    }
+    leaf entity-type {
+      type devm:notification-entity-type;
+      description
+        "Type of the notification entity. The value can be one of the following: - 1: MPU - 2: LPU - 3: SFU - 4: PIC - 5: CF card - 6: OFC";
+    }
+    leaf fault-id {
+      type devm:notification-probable-cause-type;
+      description
+        "Indicates the error code.";
+    }
+  }
+  notification card-invalid-resume {
+    description
+      "The card resumed from unavailable.";
+    leaf entity-index {
+      type uint32;
+      description
+        "Indicates the index of an entity.";
+    }
+    leaf entity-name {
+      type string {
+        length "0..255";
+      }
+      description
+        "Indicates the name of an entity.";
+    }
+    leaf entity-type {
+      type devm:notification-entity-type;
+      description
+        "Type of the notification entity. The value can be one of the following: - 1: MPU - 2: LPU - 3: SFU - 4: PIC - 5: CF card - 6: OFC";
+    }
+    leaf fault-id {
+      type devm:notification-probable-cause-type;
+      description
+        "Indicates the error code.";
+    }
+  }
+  notification card-fail {
+    description
+      "The card partially failed.";
+    leaf entity-index {
+      type uint32;
+      description
+        "Indicates the index of an entity.";
+    }
+    leaf entity-name {
+      type string {
+        length "0..255";
+      }
+      description
+        "Indicates the name of an entity.";
+    }
+    leaf entity-type {
+      type devm:notification-entity-type;
+      description
+        "Type of the notification entity. The value can be one of the following: - 1: MPU - 2: LPU - 3: SFU - 4: PIC - 5: CF card - 6: OFC";
+    }
+    leaf fault-id {
+      type devm:notification-probable-cause-type;
+      description
+        "Indicates the error code.";
+    }
+  }
+  notification card-fail-resume {
+    description
+      "The card resumed from partial failure.";
+    leaf entity-index {
+      type uint32;
+      description
+        "Indicates the index of an entity.";
+    }
+    leaf entity-name {
+      type string {
+        length "0..255";
+      }
+      description
+        "Indicates the name of an entity.";
+    }
+    leaf entity-type {
+      type devm:notification-entity-type;
+      description
+        "Type of the notification entity. The value can be one of the following: - 1: MPU - 2: LPU - 3: SFU - 4: PIC - 5: CF card - 6: OFC";
+    }
+    leaf fault-id {
+      type devm:notification-probable-cause-type;
+      description
+        "Indicates the error code.";
+    }
+  }
+  notification flow-control-pause-frame-abnormal {
+    description
+      "The port continuously received a large number of pause frames when it did not forward packets.";
+    leaf entity-index {
+      type uint32;
+      description
+        "Indicates the index of an entity.";
+    }
+    leaf entity-name {
+      type string {
+        length "0..255";
+      }
+      description
+        "Indicates the name of an entity.";
+    }
+  }
+  notification flow-control-pause-frame-abnormal-resume {
+    description
+      "The port recovered and did not receive pause frames.";
+    leaf entity-index {
+      type uint32;
+      description
+        "Indicates the index of an entity.";
+    }
+    leaf entity-name {
+      type string {
+        length "0..255";
+      }
+      description
+        "Indicates the name of an entity.";
+    }
+  } 
+}

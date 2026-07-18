@@ -1,0 +1,692 @@
+{
+  "/huawei-ifm:ifm": {
+    "name": "Common Interface"
+  },
+  "/huawei-ifm:ifm/global": {
+    "name": "Globally Attributes"
+  },
+  "/huawei-ifm:ifm/global/statistic-interval": {
+    "name": "Global Statistics Interval"
+  },
+  "/huawei-ifm:ifm/global/ipv4-ignore-primary-sub": {
+    "name": "Ignore primary/secondary of IPv4 address type"
+  },
+  "/huawei-ifm:ifm/global/ipv4-conflict-enable": {
+    "name": "IPv4 address conflict detection"
+  },
+  "/huawei-ifm:ifm/global/ipv4-conflict-enable/preempt-enable": {
+    "name": "IPv4 address conflict preemption"
+  },
+  "/huawei-ifm:ifm/global/ipv6-conflict-enable": {
+    "name": "IPv6 address conflict detection"
+  },
+  "/huawei-ifm:ifm/global/ipv6-conflict-enable/preempt-enable": {
+    "name": "IPv6 address conflict preemption"
+  },
+  "/huawei-ifm:ifm/damp": {
+    "name": "Interface physical status damping enable"
+  },
+  "/huawei-ifm:ifm/damp/tx-off": {
+    "name": "Shutdown transmission when damping suppressed"
+  },
+  "/huawei-ifm:ifm/damp/level": {
+    "name": "Interface physical status damping level"
+  },
+  "/huawei-ifm:ifm/damp/level/auto": {
+    "name": "Auto damping level"
+  },
+  "/huawei-ifm:ifm/damp/level/auto/auto": {
+    "name": "Auto damping level"
+  },
+  "/huawei-ifm:ifm/damp/level/auto/auto/level": {
+    "name": "Auto damping level"
+  },
+  "/huawei-ifm:ifm/damp/level/manual": {
+    "name": "Manual damping level"
+  },
+  "/huawei-ifm:ifm/damp/level/manual/manual": {
+    "name": "Manual damping level"
+  },
+  "/huawei-ifm:ifm/damp/level/manual/manual/suppress": {
+    "name": "1000 times of suppress threshold"
+  },
+  "/huawei-ifm:ifm/damp/level/manual/manual/reuse": {
+    "name": "1000 times of reuse threshold"
+  },
+  "/huawei-ifm:ifm/damp/level/manual/manual/max-suppress-time": {
+    "name": "Max suppress time(seconds)"
+  },
+  "/huawei-ifm:ifm/damp/level/manual/manual/half-life-period": {
+    "name": "Half life time(seconds)"
+  },
+  "/huawei-ifm:ifm/auto-recovery-times": {
+    "name": "Auto Recovery Time List"
+  },
+  "/huawei-ifm:ifm/auto-recovery-times/auto-recovery-time": {
+    "name": "Auto Recovery Time"
+  },
+  "/huawei-ifm:ifm/auto-recovery-times/auto-recovery-time/error-down-type": {
+    "name": "Error-Down Type"
+  },
+  "/huawei-ifm:ifm/auto-recovery-times/auto-recovery-time/time-value": {
+    "name": "Auto Recovery Time"
+  },
+  "/huawei-ifm:ifm/interfaces": {
+    "name": "Interface List"
+  },
+  "/huawei-ifm:ifm/interfaces/interface": {
+    "name": "Interface"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/name": {
+    "name": "Interface Name"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/class": {
+    "name": "Interface Class"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/type": {
+    "name": "Interface Type"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/parent-name": {
+    "name": "Main Interface Name"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/number": {
+    "name": "Interface Number"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/description": {
+    "name": "Interface Description"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/admin-status": {
+    "name": "Administrative Status"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/link-protocol": {
+    "name": "Link Protocol"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/router-type": {
+    "name": "Route Attribute"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/clear-ip-df": {
+    "name": "Clear IP DF on Interface"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/link-up-down-trap-enable": {
+    "name": "Enable Trap on Interface"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/statistic-enable": {
+    "name": "Enable Statistics on Interface"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/statistic-mode": {
+    "name": "Statistics Collection Mode"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/bandwidth-type": {
+    "name": "Bandwidth"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/bandwidth-type/bandwidth-mbps": {
+    "name": "Configured Bandwidth (Mbit/s)"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/bandwidth-type/bandwidth-mbps/bandwidth": {
+    "name": "Configured Bandwidth (Mbit/s)"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/bandwidth-type/bandwidth-kbps": {
+    "name": "Configured Bandwidth (kbit/s)"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/bandwidth-type/bandwidth-kbps/bandwidth-kbps": {
+    "name": "Configured Bandwidth (kbit/s)"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/mtu": {
+    "name": "MTU"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/spread-mtu-flag": {
+    "name": "Enable the spread of MTU"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/statistic-interval": {
+    "name": "Interface Statistics Interval"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/vrf-name": {
+    "name": "VPN Instance Name"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/l2-mode-enable": {
+    "name": "L2 Sub-interface"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/down-delay-time": {
+    "name": "Interface Status Down Delay Time"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/mac-address": {
+    "name": "Config MAC Address"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/index": {
+    "name": "Interface Index"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/position": {
+    "name": "Interface Position"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/aggregation-name": {
+    "name": "Trunk Interface Name"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/is-l2-switch": {
+    "name": "L2 Switch Port"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/vs-name": {
+    "name": "VS Name"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/l2-switch-port-index": {
+    "name": "L2 Switch Port Index"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/service-type": {
+    "name": "Interface Member Type"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/encapsulation-type": {
+    "name": "Encapsulation Type"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/control-flap": {
+    "name": "Interface Status Suppression"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/control-flap/suppress": {
+    "name": "Suppression Threshold"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/control-flap/reuse": {
+    "name": "Reusing Threshold"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/control-flap/ceiling": {
+    "name": "Half-Life of Up Interface"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/control-flap/decay-ok": {
+    "name": "Half-Life of Down Interface"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/control-flap/decay-ng": {
+    "name": "Suppression Upper Limit"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/control-flap/control-flap-count": {
+    "name": "Interface Suppression Count"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/trap-threshold": {
+    "name": "Trap Threshold"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/trap-threshold/input-rising-rate": {
+    "name": "Input Bandwidth Usage Trap Threshold"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/trap-threshold/input-resume-rate": {
+    "name": "Input Bandwidth Usage Resume Threshold"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/trap-threshold/output-rising-rate": {
+    "name": "Output Bandwidth Usage Trap Threshold"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/trap-threshold/output-resume-rate": {
+    "name": "Output Bandwidth Usage Resume Threshold"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/damping": {
+    "name": "Damp function for single interface"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/damping/ignore-damp": {
+    "name": "Ignore Global Damp Function"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/damping/ignore-damp/ignore-damp": {
+    "name": "Ignore Global Damp Function"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/damping/ignore-damp/ignore-damp/ignore-global-damp": {
+    "name": "Ignore Global Damp Function"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/damping/damp": {
+    "name": "Interface physical status damping"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/damping/damp/damp": {
+    "name": "Interface physical status damping"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/damping/damp/damp/tx-off": {
+    "name": "Shutdown transmission when damping suppressed"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/damping/damp/damp/level": {
+    "name": "Interface physical status damping level"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/damping/damp/damp/level/auto": {
+    "name": "Auto damping level"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/damping/damp/damp/level/auto/auto": {
+    "name": "Auto damping level"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/damping/damp/damp/level/auto/auto/level": {
+    "name": "Auto damping level"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/damping/damp/damp/level/manual": {
+    "name": "Manual damping level"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/damping/damp/damp/level/manual/manual": {
+    "name": "Manual damping level"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/damping/damp/damp/level/manual/manual/suppress": {
+    "name": "1000 times of suppress threshold"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/damping/damp/damp/level/manual/manual/reuse": {
+    "name": "1000 times of reuse threshold"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/damping/damp/damp/level/manual/manual/max-suppress-time": {
+    "name": "Max suppress time(seconds)"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/damping/damp/damp/level/manual/manual/half-life-period": {
+    "name": "Half life time(seconds)"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/damp-state": {
+    "name": "Interface Status Suppression Information"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/damp-state/suppress-status": {
+    "name": "Interface Status Suppression State"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/damp-state/suppress": {
+    "name": "1000 times of suppress threshold"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/damp-state/reuse": {
+    "name": "1000 times of reuse threshold"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/damp-state/max-suppress-time": {
+    "name": "Max Suppress Time"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/damp-state/half-life-period": {
+    "name": "Half Life Time"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/damp-state/damp-reuse-time": {
+    "name": "Damping Reuse Time"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/damp-state/current-penalty": {
+    "name": "1000 times of current penalty"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/damp-state/max-penalty": {
+    "name": "1000 times of max penalty"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/dynamic": {
+    "name": "Dynamic Interface Information"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/dynamic/oper-status": {
+    "name": "Running Status"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/dynamic/physical-status": {
+    "name": "Physical Status of Interface"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/dynamic/link-status": {
+    "name": "Link Status of Interface"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/dynamic/mtu": {
+    "name": "Interface Dynamic MTU"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/dynamic/bandwidth": {
+    "name": "Interface Bandwidth"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/dynamic/ipv4-status": {
+    "name": "IPv4 Protocol Status"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/dynamic/ipv6-status": {
+    "name": "IPv6 Protocol Status"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/dynamic/is-control-flap-damp": {
+    "name": "Interface Status Suppression"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/dynamic/mac-address": {
+    "name": "Effective MAC Address"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/dynamic/line-protocol-up-time": {
+    "name": "Line Protocol Up Time"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/dynamic/is-offline": {
+    "name": "Interface Offline or Not"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/dynamic/link-quality-grade": {
+    "name": "Interface Link Quality Grade"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/dynamic/sub-if-counts": {
+    "name": "Subinterface Count"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/mib-statistics": {
+    "name": "Interface Mib Statistics"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/mib-statistics/receive-byte": {
+    "name": "Received Bytes"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/mib-statistics/send-byte": {
+    "name": "Sent Bytes"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/mib-statistics/receive-packet": {
+    "name": "Received Packets"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/mib-statistics/send-packet": {
+    "name": "Sent Packets"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/mib-statistics/receive-unicast-packet": {
+    "name": "Received Unicast Packets"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/mib-statistics/receive-multicast-packet": {
+    "name": "Received Multicast Packets"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/mib-statistics/receive-broad-packet": {
+    "name": "Received Broadcast Packets"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/mib-statistics/send-unicast-packet": {
+    "name": "Sent Unicast Packets"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/mib-statistics/send-multicast-packet": {
+    "name": "Sent Multicast Packets"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/mib-statistics/send-broad-packet": {
+    "name": "Sent Broadcast Packets"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/mib-statistics/receive-error-packet": {
+    "name": "Received Error Packets"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/mib-statistics/receive-drop-packet": {
+    "name": "Received Discarded Packets"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/mib-statistics/send-error-packet": {
+    "name": "Sent Error Packets"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/mib-statistics/send-drop-packet": {
+    "name": "Sent Discarded Packets"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/common-statistics": {
+    "name": "Resettable Statistics"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/common-statistics/stati-interval": {
+    "name": "Current Interface Statistics Interval"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/common-statistics/in-byte-rate": {
+    "name": "Rate of Bytes Received"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/common-statistics/in-bit-rate": {
+    "name": "Received Bit Rate"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/common-statistics/in-packet-rate": {
+    "name": "Rate of Packets Received"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/common-statistics/in-use-rate": {
+    "name": "Input Bandwidth Usage"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/common-statistics/out-byte-rate": {
+    "name": "Rate of Bytes Sent"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/common-statistics/out-bit-rate": {
+    "name": "Sent Bit Rate"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/common-statistics/out-packet-rate": {
+    "name": "Rate of Packets Sent"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/common-statistics/out-use-rate": {
+    "name": "Output Bandwidth Usage"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/common-statistics/receive-byte": {
+    "name": "Resettable Received Bytes"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/common-statistics/send-byte": {
+    "name": "Resettable Sent Bytes"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/common-statistics/receive-packet": {
+    "name": "Resettable Received Packets"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/common-statistics/send-packet": {
+    "name": "Resettable Sent Packets"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/common-statistics/receive-unicast-packet": {
+    "name": "Resettable Received Unicast"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/common-statistics/receive-multicast-packet": {
+    "name": "Resettable Received Multicast"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/common-statistics/receive-broad-packet": {
+    "name": "Resettable Received Broadcast"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/common-statistics/send-unicast-packet": {
+    "name": "Resettable Sent Unicast"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/common-statistics/send-multicast-packet": {
+    "name": "Resettable Sent Multicast"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/common-statistics/send-broad-packet": {
+    "name": "Resettable Sent Broadcast"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/common-statistics/receive-error-packet": {
+    "name": "Resettable Received Error"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/common-statistics/receive-drop-packet": {
+    "name": "Resettable Received Discarded Packets"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/common-statistics/send-error-packet": {
+    "name": "Resettable Sent Error Packets"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/common-statistics/send-drop-packet": {
+    "name": "Resettable Sent Discarded Packets"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/common-statistics/send-unicast-bit": {
+    "name": "Sent Unicast Bits"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/common-statistics/receive-unicast-bit": {
+    "name": "Received Unicast Bits"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/common-statistics/send-multicast-bit": {
+    "name": "Sent Multicast Bits"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/common-statistics/receive-multicast-bit": {
+    "name": "Received Multicast Bits"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/common-statistics/send-broad-bit": {
+    "name": "Sent Broadcast Bits"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/common-statistics/receive-broad-bit": {
+    "name": "Received Broadcast Bits"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/common-statistics/send-unicast-bit-rate": {
+    "name": "Sent Unicast Bit Rate"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/common-statistics/receive-unicast-bit-rate": {
+    "name": "Received Unicast Bit Rate"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/common-statistics/send-multicast-bit-rate": {
+    "name": "Sent Multicast Bit Rate"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/common-statistics/receive-multicast-bit-rate": {
+    "name": "Received Multicast Bit Rate"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/common-statistics/send-broad-bit-rate": {
+    "name": "Sent Broadcast Bit Rate"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/common-statistics/receive-broad-bit-rate": {
+    "name": "Received Broadcast Bit Rate"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/common-statistics/send-unicast-packet-rate": {
+    "name": "Sent Unicast Packet Rate"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/common-statistics/receive-unicast-packet-rate": {
+    "name": "Received Unicast Packet Rate"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/common-statistics/send-multicast-packet-rate": {
+    "name": "Sent Multicast Packet Rate"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/common-statistics/receive-multicast-packet-rate": {
+    "name": "Received Multicast Packet Rate"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/common-statistics/send-broadcast-packet-rate": {
+    "name": "Sent Broadcast Packet Rate"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/common-statistics/receive-broadcast-packet-rate": {
+    "name": "Received Broadcast Packet Rate"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/error-down": {
+    "name": "Interface Error-Down Information"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/error-down/cause": {
+    "name": "Error-Down Type"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/error-down/recovery-time": {
+    "name": "Delay from Down to Up"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/error-down/remainder-time": {
+    "name": "Remaining Time for Up"
+  },
+  "/huawei-ifm:ifm/static-dimension-ranges": {
+    "name": "Interface Dimensionality List"
+  },
+  "/huawei-ifm:ifm/static-dimension-ranges/static-dimension-range": {
+    "name": "Interface Dimensionality"
+  },
+  "/huawei-ifm:ifm/static-dimension-ranges/static-dimension-range/type": {
+    "name": "Interface Type"
+  },
+  "/huawei-ifm:ifm/static-dimension-ranges/static-dimension-range/chassis-range": {
+    "name": "Chassis Range"
+  },
+  "/huawei-ifm:ifm/static-dimension-ranges/static-dimension-range/slot-range": {
+    "name": "Slot Range"
+  },
+  "/huawei-ifm:ifm/static-dimension-ranges/static-dimension-range/card-range": {
+    "name": "Card Range"
+  },
+  "/huawei-ifm:ifm/static-dimension-ranges/static-dimension-range/port-range": {
+    "name": "Port Range"
+  },
+  "/huawei-ifm:ifm/ipv4-interface-count": {
+    "name": "Number Of Interfaces IPv4 Address Configuration"
+  },
+  "/huawei-ifm:ifm/ipv4-interface-count/physical-up-count": {
+    "name": "Number of IPv4 Interfaces in Physical Up State"
+  },
+  "/huawei-ifm:ifm/ipv4-interface-count/physical-down-count": {
+    "name": "Number of IPv4 Interfaces in Physical Down State"
+  },
+  "/huawei-ifm:ifm/ipv4-interface-count/protocol-up-count": {
+    "name": "Number of IPv4 Interfaces in Protocol Up State"
+  },
+  "/huawei-ifm:ifm/ipv4-interface-count/protocol-down-count": {
+    "name": "Number of IPv4 Interfaces in Protocol Down State"
+  },
+  "/huawei-ifm:ifm/remote-interfaces": {
+    "name": "Remote Interface Information"
+  },
+  "/huawei-ifm:ifm/remote-interfaces/remote-interface": {
+    "name": "Remote Interface List"
+  },
+  "/huawei-ifm:ifm/remote-interfaces/remote-interface/name": {
+    "name": "Remote Interface Name"
+  },
+  "/huawei-ifm:ifm/remote-interfaces/remote-interface/index": {
+    "name": "Remote Interface Index"
+  },
+  "/huawei-ifm:ifm/remote-interfaces/remote-interface/remote-statistics-state": {
+    "name": "Remote Interface Statistics"
+  },
+  "/huawei-ifm:ifm/remote-interfaces/remote-interface/remote-statistics-state/last-cleared-time": {
+    "name": "Last Statistics Clearance Time"
+  },
+  "/huawei-ifm:ifm/remote-interfaces/remote-interface/remote-statistics-state/in-bit-rate": {
+    "name": "Bit Receive Rate"
+  },
+  "/huawei-ifm:ifm/remote-interfaces/remote-interface/remote-statistics-state/in-packet-rate": {
+    "name": "Packet Receive Rate"
+  },
+  "/huawei-ifm:ifm/remote-interfaces/remote-interface/remote-statistics-state/in-peak-bit-rate": {
+    "name": "Peak Bit Receive Rate"
+  },
+  "/huawei-ifm:ifm/remote-interfaces/remote-interface/remote-statistics-state/in-peak-bit-rate-record-time": {
+    "name": "Time of Peak Bit Receive Rate"
+  },
+  "/huawei-ifm:ifm/remote-interfaces/remote-interface/remote-statistics-state/out-bit-rate": {
+    "name": "Bit Send Rate"
+  },
+  "/huawei-ifm:ifm/remote-interfaces/remote-interface/remote-statistics-state/out-packet-rate": {
+    "name": "Packet Send Rate"
+  },
+  "/huawei-ifm:ifm/remote-interfaces/remote-interface/remote-statistics-state/out-peak-bit-rate": {
+    "name": "Peak Bit Send Rate"
+  },
+  "/huawei-ifm:ifm/remote-interfaces/remote-interface/remote-statistics-state/out-peak-bit-rate-record-time": {
+    "name": "Time of Peak Bit Send Rate"
+  },
+  "/huawei-ifm:ifm/remote-interfaces/remote-interface/remote-statistics-state/in-use-rate": {
+    "name": "Received Bandwidth Usage"
+  },
+  "/huawei-ifm:ifm/remote-interfaces/remote-interface/remote-statistics-state/out-use-rate": {
+    "name": "Sent Bandwidth Usage"
+  },
+  "/huawei-ifm:reset-if-counters-by-name": {
+    "name": "Clear Statistics By Interface Name"
+  },
+  "/huawei-ifm:reset-if-counters-by-name/input/if-name": {
+    "name": "Clear Statistics By Interface Name"
+  },
+  "/huawei-ifm:reset-if-counters-by-type": {
+    "name": "Clear Statistics By Interface Type"
+  },
+  "/huawei-ifm:reset-if-counters-by-type/input/if-type": {
+    "name": "Clear Statistics By Interface Type"
+  },
+  "/huawei-ifm:reset-if-counters-all": {
+    "name": "Clear All Interface Statistics"
+  },
+  "/huawei-ifm:reset-if-counters-all/input/all-if": {
+    "name": "Clear All Interface Statistics"
+  },
+  "/huawei-ifm:reset-if-mib-counters-by-name": {
+    "name": "Clear MIB Statistics by Interface Name"
+  },
+  "/huawei-ifm:reset-if-mib-counters-by-name/input/if-name": {
+    "name": "Interface Name"
+  },
+  "/huawei-ifm:reset-if-mib-counters-by-type": {
+    "name": "Clear MIB Statistics by Interface Type"
+  },
+  "/huawei-ifm:reset-if-mib-counters-by-type/input/if-type": {
+    "name": "Interface Type"
+  },
+  "/huawei-ifm:reset-if-mib-counters-all": {
+    "name": "Clear MIB Statistics About All Interfaces"
+  },
+  "/huawei-ifm:reset-if-mib-counters-all/input/all-if": {
+    "name": "Clear Statistics About All Interfaces"
+  },
+  "/huawei-ifm:reset-if-control-flap-penalty": {
+    "name": "Clear Penalty Value"
+  },
+  "/huawei-ifm:reset-if-control-flap-penalty/input/if-name": {
+    "name": "Interface Name"
+  },
+  "/huawei-ifm:reset-if-control-flap-counts": {
+    "name": "Clear Flapping Control Times"
+  },
+  "/huawei-ifm:reset-if-control-flap-counts/input/if-name": {
+    "name": "Interface Name"
+  },
+  "/huawei-ifm:reset-remote-if-counters": {
+    "name": "Clear Remote Interface Statistics"
+  },
+  "/huawei-ifm:reset-remote-if-counters/input/if-name": {
+    "name": "Remote Interface Name"
+  },
+  "/huawei-ifm:restart-if": {
+    "name": "Restart interface"
+  },
+  "/huawei-ifm:restart-if/input/if-name": {
+    "name": "Interface name of the Restart interface"
+  },
+  "/rpcs/huawei-ifm:ifm/reset-if-counters-by-name": {
+    "name": "Clear Statistics By Interface Name"
+  },
+  "/rpcs/huawei-ifm:ifm/reset-if-counters-by-type": {
+    "name": "Clear Statistics By Interface Type"
+  },
+  "/rpcs/huawei-ifm:ifm/reset-if-counters-all": {
+    "name": "Clear All Interface Statistics"
+  },
+  "/rpcs/huawei-ifm:ifm/reset-if-mib-counters-by-name": {
+    "name": "Clear MIB Statistics by Interface Name"
+  },
+  "/rpcs/huawei-ifm:ifm/reset-if-mib-counters-by-type": {
+    "name": "Clear MIB Statistics by Interface Type"
+  },
+  "/rpcs/huawei-ifm:ifm/reset-if-mib-counters-all": {
+    "name": "Clear MIB Statistics About All Interfaces"
+  },
+  "/rpcs/huawei-ifm:ifm/reset-if-control-flap-penalty": {
+    "name": "Clear Penalty Value"
+  },
+  "/rpcs/huawei-ifm:ifm/reset-if-control-flap-counts": {
+    "name": "Clear Flapping Control Times"
+  },
+  "/rpcs/huawei-ifm:ifm/reset-remote-if-counters": {
+    "name": "Clear Remote Interface Statistics"
+  },
+  "/rpcs/huawei-ifm:ifm/restart-if": {
+    "name": "Restart interface"
+  }
+}

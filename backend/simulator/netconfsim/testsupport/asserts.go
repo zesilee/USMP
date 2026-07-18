@@ -106,8 +106,8 @@ func AssertHuaweiVlanMacAgingTime(t *testing.T, sim *netconfsim.Simulator, vlanI
 }
 
 // AssertHuaweiVlanMemberPort asserts a VLAN's member port exists with the given
-// access-type and tag-mode (VLAN 端口成员端到端断言).
-func AssertHuaweiVlanMemberPort(t *testing.T, sim *netconfsim.Simulator, vlanID uint16, ifName string, accessType, tagMode int) {
+// access-type (VLAN 端口成员端到端断言；CE 基线无 tag-mode).
+func AssertHuaweiVlanMemberPort(t *testing.T, sim *netconfsim.Simulator, vlanID uint16, ifName string, accessType int) {
 	t.Helper()
 	vlans := sim.RunningHuaweiVLANsFull()
 	vlan, ok := vlans[vlanID]
@@ -115,7 +115,6 @@ func AssertHuaweiVlanMemberPort(t *testing.T, sim *netconfsim.Simulator, vlanID 
 	for _, p := range vlan.MemberPorts {
 		if p.InterfaceName == ifName {
 			assert.Equal(t, accessType, p.AccessType, "VLAN %d port %s access-type", vlanID, ifName)
-			assert.Equal(t, tagMode, p.TagMode, "VLAN %d port %s tag-mode", vlanID, ifName)
 			return
 		}
 	}
@@ -236,13 +235,12 @@ func AssertHuaweiInterfaceDampManual(t *testing.T, sim *netconfsim.Simulator, if
 }
 
 // AssertHuaweiInterfaceTimers asserts interface timer configurations.
-func AssertHuaweiInterfaceTimers(t *testing.T, sim *netconfsim.Simulator, ifaceName string, downDelay uint32, upDelay uint32) {
+func AssertHuaweiInterfaceTimers(t *testing.T, sim *netconfsim.Simulator, ifaceName string, downDelay uint32) {
 	t.Helper()
 	ifaces := sim.RunningHuaweiInterfaces()
 	iface, ok := ifaces[ifaceName]
 	assert.True(t, ok, "Interface %s not found", ifaceName)
 	assert.Equal(t, downDelay, iface.DownDelayTime, "Interface %s down-delay-time mismatch", ifaceName)
-	assert.Equal(t, upDelay, iface.ProtocolUpDelayTime, "Interface %s protocol-up-delay-time mismatch", ifaceName)
 }
 
 // AssertHuaweiInterfaceFlags asserts interface boolean flag configurations.

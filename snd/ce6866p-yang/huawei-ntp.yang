@@ -1,0 +1,160 @@
+/*
+Copyright (C) 2019-2021 Huawei Technologies Co., Ltd. All rights reserved.
+*/
+module huawei-ntp {
+  namespace "urn:huawei:yang:huawei-ntp";
+  prefix ntp;
+  import huawei-ifm {
+    prefix ifm;
+  }
+  import huawei-network-instance {
+    prefix ni;
+  }
+  import ietf-inet-types {
+    prefix inet;
+  }
+  import huawei-extension {
+    prefix ext;
+  }
+  include huawei-ntp-type;
+  
+  organization
+    "Huawei Technologies Co., Ltd.";
+  contact
+    "Huawei Industrial Base
+     Bantian, Longgang
+     Shenzhen 518129
+     People's Republic of China
+     Website: http://www.huawei.com
+     Email: support@huawei.com";
+  description
+    "NTP component.";
+  revision 2021-12-14 {
+    description
+      "Add must condition to server source interface and edit authentication description.";
+    reference
+      "Huawei private.";
+  }
+  ext:task-name "ntp";
+  container ntp {
+    description
+      "NTP component.";
+    container disables {
+      description
+        "List of NTP to be disabled.";
+      list disable {
+        key "addr-family";
+        description
+          "Configure the NTP service. The 'get' operation is performed to query the disabling status of the NTP service. The 'create' and 'merge' operations are performed to disable the NTP service. The 'delete' operation is performed to enable the NTP service.";
+        leaf addr-family {
+          type addr-family-type;
+          description
+            "IP address family type.";
+        }
+      }
+    }
+    container unicasts {
+      description
+        "List of NTP unicast configurations.";
+      list unicast {
+        key "ip-address type vpn-name";
+        description
+          "Configure NTP unicast.";
+        leaf ip-address {
+          type inet:host; 
+          description
+            "IP address of the remote peer. The IP address must be a host address and cannot be the loopback, broadcast, multicast, or reference clock address.";
+        }
+        leaf type {
+          type peer-mode;
+          description
+            "Indicates a peer or a server configuration.";
+        }
+        leaf vpn-name {
+          type leafref {
+            path "/ni:network-instance/ni:instances/ni:instance/ni:name";
+          }
+          description
+            "Name of a VPN instance. If the entered IP address is an IPv4 address, first enable the IPv4 address family of the VPN instance. If the entered IP address is an IPv6 address, first enable the IPv6 address family of the VPN instance.";
+        }
+        leaf version {
+          type uint8 {
+            range "1..4";
+          }
+          default "3";
+          description
+            "NTP version number.";
+        }
+        leaf is-preferred {
+          type boolean;
+          default "false";
+          description
+            "Enable/disable the peer or server as a preferred source.";
+        }
+        leaf ifname {
+          type leafref {
+            path "/ifm:ifm/ifm:interfaces/ifm:interface/ifm:name";
+          }
+          must "/ifm:ifm/ifm:interfaces/ifm:interface[ifm:name=current()]/ifm:vrf-name = ../vpn-name";
+          description
+            "Interface name to be used for communicating with the server/peer.";
+        }
+        /*
+        leaf key-id {
+          type leafref {
+            path "../../../authentications/authentication/key-id";
+          }
+          description
+            "Specifies the key number used when transmitting messages to the remote peer.";
+        }
+        */
+        leaf max-poll-interval {
+          type uint8 {
+            range "10..17";
+          }
+          units s;
+          default "10";
+          description
+            "Maximum polling interval at which packets are sent. The units is second as power of 2.";
+        }
+        leaf min-poll-interval {
+          type uint8 {
+            range "3..6";
+          }
+          units s;
+          default "6";
+          description
+            "Minimum polling interval at which packets are sent. The units is second as power of 2.";
+        }
+        leaf is-preempt {
+          type boolean;
+          default "false";
+          description
+            "Enable/disable the peer or server as preemptive.";
+        }
+        leaf is-burst {
+          when "../type!='Peer'";
+          type boolean;
+          default "false";
+          description
+            "Enable/disable the server and send a burst of packets when the server is reachable.";
+        }
+        leaf is-iburst {
+          when "../type!='Peer'";
+          type boolean;
+          default "false";
+          description
+            "Enable/disable the server and send a burst of packets when the server is unreachable.";
+        }
+        leaf port-number {
+          type uint16 {
+            range "123|1025..65535";
+          }
+          default "123";
+          description
+            "Port number.";
+        }
+      }
+    }
+  }
+}

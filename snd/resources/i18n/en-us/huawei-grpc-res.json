@@ -1,0 +1,89 @@
+{
+  "/huawei-grpc:hw-grpc": {
+    "name": "GRPC"
+  },
+  "/huawei-grpc:grpc/service": {
+    "name": "GRPC Server"
+  },
+  "/huawei-grpc:grpc/service/server-enable": {
+    "name": "Enable gRPC"
+  },
+  "/huawei-grpc:grpc/service/source-address": {
+    "name": "Source IP Address"
+  },
+  "/huawei-grpc:grpc/service/vpn-name": {
+    "name": "VPN Name"
+  },
+  "/huawei-grpc:grpc/service/server-port": {
+    "name": "Listening Port Number"
+  },
+  "/huawei-grpc:grpc/service/idle-timeout": {
+    "name": "Idle Timeout Time"
+  },
+  "/huawei-grpc:grpc/service/acl-number-or-name": {
+    "name": "ACL Name"
+  },
+  "/huawei-grpc:grpc/service/ssl-policy": {
+    "name": "SSL Policy Name"
+  },
+  "/huawei-grpc:grpc/service/ssl-policy-peer": {
+    "name": "SSL Verification for Server"
+  },
+  "/huawei-grpc:grpc/service-ipv6": {
+    "name": "IPv6 gRPC Server"
+  },
+  "/huawei-grpc:grpc/service-ipv6/server-enable": {
+    "name": "Enable IPv6 gRPC"
+  },
+  "/huawei-grpc:grpc/service-ipv6/source-address": {
+    "name": "Source IP Address"
+  },
+  "/huawei-grpc:grpc/service-ipv6/vpn-name": {
+    "name": "VPN Name"
+  },
+  "/huawei-grpc:grpc/service-ipv6/server-port": {
+    "name": "Listening Port Number"
+  },
+  "/huawei-grpc:grpc/service-ipv6/idle-timeout": {
+    "name": "Idle Timeout Time"
+  },
+  "/huawei-grpc:grpc/service-ipv6/acl-number-or-name": {
+    "name": "ACL6 Name"
+  },
+  "/huawei-grpc:grpc/service-ipv6/ssl-policy": {
+    "name": "SSL Policy Name"
+  },
+  "/huawei-grpc:grpc/service-ipv6/ssl-policy-peer": {
+    "name": "SSL Verification for Server"
+  },
+  "/huawei-grpc:grpc/client": {
+    "name": "GRPC Client"
+  },
+  "/huawei-grpc:grpc/client/ssl-policy": {
+    "name": "SSL Policy Name"
+  },
+  "/huawei-grpc:grpc/client/ssl-verify-cn-name": {
+    "name": "SSL Policy CommonName"
+  },
+  "/huawei-grpc:grpc/client/ssl-policy-peer": {
+    "name": "SSL Verification for Server"
+  },
+  "/huawei-grpc:grpc/session-car": {
+    "name": "Session-car"
+  },
+  "/huawei-grpc:grpc/session-car/enable": {
+    "name": "Enable"
+  },
+  "/huawei-grpc:grpc/session-car/cir-interval": {
+    "name": "Commited information rate"
+  },
+  "/huawei-grpc:grpc/session-car/cbs-interval": {
+    "name": "Committed burst size"
+  },
+  "/huawei-grpc:grpc/session-car/pir-interval": {
+    "name": "Peak information rate"
+  },
+  "/huawei-grpc:grpc/session-car/pbs-interval": {
+    "name": "Committed peak size"
+  }
+}

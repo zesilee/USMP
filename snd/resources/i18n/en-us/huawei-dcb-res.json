@@ -1,0 +1,482 @@
+{
+  "/huawei-dcb:dcb": {
+    "name": "Data center bridge"
+  },
+  "/huawei-dcb:dcb/global": {
+    "name": "Configure dcb global configuration"
+  },
+  "/huawei-dcb:dcb/global/pfc-enable": {
+    "name": "Enable/disable all pfc function"
+  },
+  "/huawei-dcb:dcb/global/deadlock-interval": {
+    "name": "Detection interval and recovery interval"
+  },
+  "/huawei-dcb:dcb/global/detect-time": {
+    "name": "Deadlock detect time"
+  },
+  "/huawei-dcb:dcb/global/recovery-time": {
+    "name": "Deadlock recovery time"
+  },
+  "/huawei-dcb:dcb/pfc-profiles": {
+    "name": "List of priority-based flow control profiles"
+  },
+  "/huawei-dcb:dcb/pfc-profiles/pfc-profile": {
+    "name": "Configure priority-based flow control profile list"
+  },
+  "/huawei-dcb:dcb/pfc-profiles/pfc-profile/name": {
+    "name": "Name of Priority-based flow control profile"
+  },
+  "/huawei-dcb:dcb/pfc-profiles/pfc-profile/pfc-prioritys": {
+    "name": "List of PFC priority"
+  },
+  "/huawei-dcb:dcb/pfc-profiles/pfc-profile/pfc-prioritys/pfc-priority": {
+    "name": "Configure PFC priority and deadlock parameters"
+  },
+  "/huawei-dcb:dcb/pfc-profiles/pfc-profile/pfc-prioritys/pfc-priority/priority": {
+    "name": "Specify priorities of the PFC"
+  },
+  "/huawei-dcb:dcb/pfc-profiles/pfc-profile/pfc-prioritys/pfc-priority/turn-off-threshold": {
+    "name": "Deadlock turnoff pfc threshold"
+  },
+  "/huawei-dcb:dcb/pfc-profiles/pfc-profile/pfc-prioritys/pfc-priority/error-down-threshold": {
+    "name": "Deadlock error-down PFC threshold"
+  },
+  "/huawei-dcb:dcb/pfc-profiles/pfc-profile/pfc-prioritys/pfc-priority/detect-times": {
+    "name": "Deadlock detect times"
+  },
+  "/huawei-dcb:dcb/pfc-profiles/pfc-profile/pfc-prioritys/pfc-priority/recovery-times": {
+    "name": "Deadlock recovery times"
+  },
+  "/huawei-dcb:dcb/pfc-profiles/pfc-profile/pfc": {
+    "name": "Configure pfc priority"
+  },
+  "/huawei-dcb:dcb/pfc-profiles/pfc-profile/pfc/priority": {
+    "name": "Specify priorities of the pfc"
+  },
+  "/huawei-dcb:dcb/pfc-profiles/pfc-profile/deadlocks": {
+    "name": "List of deadlock"
+  },
+  "/huawei-dcb:dcb/pfc-profiles/pfc-profile/deadlocks/deadlock": {
+    "name": "Configure pfc deadlock parameters for the priority"
+  },
+  "/huawei-dcb:dcb/pfc-profiles/pfc-profile/deadlocks/deadlock/priority": {
+    "name": "Specifies the priority for pfc"
+  },
+  "/huawei-dcb:dcb/pfc-profiles/pfc-profile/deadlocks/deadlock/threshold": {
+    "name": "Deadlock turnoff pfc threshold"
+  },
+  "/huawei-dcb:dcb/pfc-profiles/pfc-profile/deadlocks/deadlock/error-down-threshold": {
+    "name": "Deadlock error-down PFC threshold"
+  },
+  "/huawei-dcb:dcb/ets-profiles": {
+    "name": "List of enhanced transmission selection profiles"
+  },
+  "/huawei-dcb:dcb/ets-profiles/ets-profile": {
+    "name": "Configure enhanced transmission selection profile"
+  },
+  "/huawei-dcb:dcb/ets-profiles/ets-profile/name": {
+    "name": "Name of enhanced transmission selection profile"
+  },
+  "/huawei-dcb:dcb/ets-profiles/ets-profile/prioritys": {
+    "name": "Configure priority scheduling"
+  },
+  "/huawei-dcb:dcb/ets-profiles/ets-profile/prioritys/schedules": {
+    "name": "List of priority scheduling information"
+  },
+  "/huawei-dcb:dcb/ets-profiles/ets-profile/prioritys/schedules/schedule": {
+    "name": "Configure priority"
+  },
+  "/huawei-dcb:dcb/ets-profiles/ets-profile/prioritys/schedules/schedule/priority": {
+    "name": "Priority"
+  },
+  "/huawei-dcb:dcb/ets-profiles/ets-profile/prioritys/schedules/schedule/mode": {
+    "name": "Queue schedule mode"
+  },
+  "/huawei-dcb:dcb/ets-profiles/ets-profile/prioritys/schedules/schedule/weight": {
+    "name": "Weight of drr scheduling strategy"
+  },
+  "/huawei-dcb:dcb/ets-profiles/ets-profile/prioritys/shapers": {
+    "name": "List of priority shaping information"
+  },
+  "/huawei-dcb:dcb/ets-profiles/ets-profile/prioritys/shapers/shaper": {
+    "name": "Configure priority shaping information"
+  },
+  "/huawei-dcb:dcb/ets-profiles/ets-profile/prioritys/shapers/shaper/priority": {
+    "name": "Priority"
+  },
+  "/huawei-dcb:dcb/ets-profiles/ets-profile/prioritys/shapers/shaper/cir": {
+    "name": "Committed information rate"
+  },
+  "/huawei-dcb:dcb/ets-profiles/ets-profile/prioritys/shapers/shaper/pir": {
+    "name": "Peak information rate"
+  },
+  "/huawei-dcb:dcb/ets-profiles/ets-profile/prioritys/shapers/shaper/cbs": {
+    "name": "Committed burst size"
+  },
+  "/huawei-dcb:dcb/ets-profiles/ets-profile/prioritys/shapers/shaper/pbs": {
+    "name": "Peak burst size"
+  },
+  "/huawei-dcb:dcb/ets-profiles/ets-profile/priority-groups": {
+    "name": "List of priority groups configuration"
+  },
+  "/huawei-dcb:dcb/ets-profiles/ets-profile/priority-groups/priority-group": {
+    "name": "Configure priority group"
+  },
+  "/huawei-dcb:dcb/ets-profiles/ets-profile/priority-groups/priority-group/group-number": {
+    "name": "Group number"
+  },
+  "/huawei-dcb:dcb/ets-profiles/ets-profile/priority-groups/priority-group/renumber": {
+    "name": "Configure priority group renumber value"
+  },
+  "/huawei-dcb:dcb/ets-profiles/ets-profile/priority-groups/priority-group/priority": {
+    "name": "The priorities of the current priority group"
+  },
+  "/huawei-dcb:dcb/ets-profiles/ets-profile/priority-groups/priority-group/schedule": {
+    "name": "Configure priority group scheduling information"
+  },
+  "/huawei-dcb:dcb/ets-profiles/ets-profile/priority-groups/priority-group/schedule/mode": {
+    "name": "Group schedule mode"
+  },
+  "/huawei-dcb:dcb/ets-profiles/ets-profile/priority-groups/priority-group/schedule/weight": {
+    "name": "Weight of drr scheduling strategy"
+  },
+  "/huawei-dcb:dcb/ets-profiles/ets-profile/priority-groups/priority-group/shaper": {
+    "name": "Configure priority group shaping information"
+  },
+  "/huawei-dcb:dcb/ets-profiles/ets-profile/priority-groups/priority-group/shaper/cir": {
+    "name": "Committed information rate"
+  },
+  "/huawei-dcb:dcb/ets-profiles/ets-profile/priority-groups/priority-group/shaper/pir": {
+    "name": "Peak information rate"
+  },
+  "/huawei-dcb:dcb/ets-profiles/ets-profile/priority-groups/priority-group/shaper/cbs": {
+    "name": "Committed burst size"
+  },
+  "/huawei-dcb:dcb/ets-profiles/ets-profile/priority-groups/priority-group/shaper/pbs": {
+    "name": "Peak burst size"
+  },
+  "/huawei-dcb:dcb/app-profiles": {
+    "name": "List of application profiles"
+  },
+  "/huawei-dcb:dcb/app-profiles/app-profile": {
+    "name": "Configure application profile"
+  },
+  "/huawei-dcb:dcb/app-profiles/app-profile/name": {
+    "name": "Name of application profile"
+  },
+  "/huawei-dcb:dcb/app-profiles/app-profile/storage-apps": {
+    "name": "List of storage application"
+  },
+  "/huawei-dcb:dcb/app-profiles/app-profile/storage-apps/storage-app": {
+    "name": "Configure storage application"
+  },
+  "/huawei-dcb:dcb/app-profiles/app-profile/storage-apps/storage-app/app-name": {
+    "name": "Application name"
+  },
+  "/huawei-dcb:dcb/app-profiles/app-profile/storage-apps/storage-app/priority": {
+    "name": "Priority"
+  },
+  "/huawei-dcb:dcb/app-profiles/app-profile/layer2-apps": {
+    "name": "List of layer2 application"
+  },
+  "/huawei-dcb:dcb/app-profiles/app-profile/layer2-apps/layer2-app": {
+    "name": "Configure layer2 application"
+  },
+  "/huawei-dcb:dcb/app-profiles/app-profile/layer2-apps/layer2-app/ethtype": {
+    "name": "Set ethernet hex value"
+  },
+  "/huawei-dcb:dcb/app-profiles/app-profile/layer2-apps/layer2-app/priority": {
+    "name": "Priority"
+  },
+  "/huawei-dcb:dcb/app-profiles/app-profile/layer3-apps": {
+    "name": "List of ports"
+  },
+  "/huawei-dcb:dcb/app-profiles/app-profile/layer3-apps/layer3-app": {
+    "name": "Configure tcp or udp port value"
+  },
+  "/huawei-dcb:dcb/app-profiles/app-profile/layer3-apps/layer3-app/app-name": {
+    "name": "Layer3 application name"
+  },
+  "/huawei-dcb:dcb/app-profiles/app-profile/layer3-apps/layer3-app/port": {
+    "name": "Tcp or Udp port"
+  },
+  "/huawei-dcb:dcb/app-profiles/app-profile/layer3-apps/layer3-app/priority": {
+    "name": "Priority"
+  },
+  "/huawei-dcb:reset-pfc-statistics": {
+    "name": "To clear dcb pfc statistics"
+  },
+  "/huawei-dcb:reset-pfc-statistics/input/interface-name": {
+    "name": "Interface name"
+  },
+  "/huawei-dcb:reset-fail-reasons": {
+    "name": "To clear dcb failed reasons"
+  },
+  "/huawei-dcb:reset-fail-reasons/input/interface-name": {
+    "name": "Interface name"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb": {
+    "name": "IFM interface model"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/pfc": {
+    "name": "Configure pfc on the interface"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/pfc/pfc-enable": {
+    "name": "Configure PFC-enable on the interface"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/pfc/pfc-enable/profile-name": {
+    "name": "Name of PFC profile"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/pfc/pfc-enable/mode": {
+    "name": "PFC mode"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/pfc/profile-name": {
+    "name": "Name of pfc profile"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/pfc/mode": {
+    "name": "Pfc mode"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/pfc/thresholds": {
+    "name": "List of the pfc threshold on the interface"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/pfc/thresholds/threshold": {
+    "name": "Pfc threshold"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/pfc/thresholds/threshold/priority": {
+    "name": "Priority"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/pfc/thresholds/threshold/guaranteed": {
+    "name": "Guaranteed Buffer"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/pfc/thresholds/threshold/hdrm": {
+    "name": "Headroom buffer"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/pfc/thresholds/threshold/on-off-modes": {
+    "name": "Specify xon/xoff parameters"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/pfc/thresholds/threshold/on-off-modes/static": {
+    "name": "Static threshold"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/pfc/thresholds/threshold/on-off-modes/static/xon": {
+    "name": "Specify xon value"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/pfc/thresholds/threshold/on-off-modes/static/xoff": {
+    "name": "Specify xoff value"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/pfc/thresholds/threshold/on-off-modes/dynamic": {
+    "name": "Dynamic value"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/pfc/thresholds/threshold/on-off-modes/dynamic/xon-alpha": {
+    "name": "Specify xon alpha value"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/pfc/thresholds/threshold/on-off-modes/dynamic/xoff-alpha": {
+    "name": "Specify xoff alpha value"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/pfc/statisticss": {
+    "name": "List of pfc statisticss"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/pfc/statisticss/statistics": {
+    "name": "Pfc statistics"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/pfc/statisticss/statistics/priority": {
+    "name": "Priority"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/pfc/statisticss/statistics/received-pause-pkts": {
+    "name": "Received pause packets"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/pfc/statisticss/statistics/transmitted-pause-pkts": {
+    "name": "Transmitted pause packets"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/pfc/statisticss/statistics/received-rate": {
+    "name": "Rate at Which PFC Frames Are Received"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/pfc/statisticss/statistics/transmitted-rate": {
+    "name": "Rate at Which PFC Frames Are Sent"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/pfc/statisticss/statistics/deadlock-detect-count": {
+    "name": "Deadlock detect count"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/pfc/statisticss/statistics/deadlock-recovery-count": {
+    "name": "Deadlock recovery count"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/pfc/pfc-parameters": {
+    "name": "PFC Parameter Configuration"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/pfc/pfc-parameters/pfc-parameter": {
+    "name": "PFC Parameter Configuration"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/pfc/pfc-parameters/pfc-parameter/priority": {
+    "name": "Priority Queue"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/pfc/pfc-parameters/pfc-parameter/guaranteed": {
+    "name": "Guaranteed Buffer"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/pfc/pfc-parameters/pfc-parameter/hdrm": {
+    "name": "Headroom Buffer"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/pfc/pfc-parameters/pfc-parameter/xoff": {
+    "name": "Static Threshold for Triggering PFC Frames"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/pfc/pfc-parameters/pfc-parameter/xoff-alpha": {
+    "name": "Dynamic Threshold for Triggering PFC Frames"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/pfc/pfc-parameters/pfc-parameter/xon-offset": {
+    "name": "Offset Between the Xon Value and the Xoff Value"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/pfc/pfc-parameters/pfc-parameter/xon-lowest": {
+    "name": "Xon Protection Value"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/pfc/pfc-parameters/pfc-parameter/xon": {
+    "name": "Static Threshold for Stopping PFC Frames"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/pfc/pfc-parameters/pfc-parameter/xon-alpha": {
+    "name": "Dynamic Threshold for Stopping PFC Frames"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/ets": {
+    "name": "Configure the dcb ets"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/ets/profile-name": {
+    "name": "Name of ets profile"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/app": {
+    "name": "Configure the dcb application"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/app/profile-name": {
+    "name": "Name of application profile"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/app/enable": {
+    "name": "Enable"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/version": {
+    "name": "Dcb version"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/version/version": {
+    "name": "Set DCB version"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/negotiation-status": {
+    "name": "Dcb negotiation state"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/negotiation-status/pfc-profile-name": {
+    "name": "Pfc profile name"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/negotiation-status/pfc-status": {
+    "name": "Pfc negotiation status"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/negotiation-status/ets-profile-name": {
+    "name": "Ets profile name"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/negotiation-status/ets-status": {
+    "name": "Ets negotiation status"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/negotiation-status/app-profile-name": {
+    "name": "Application profile name"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/failed-reasons": {
+    "name": "List of dcb failed reasons"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/failed-reasons/failed-reason": {
+    "name": "Dcb failed reason"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/failed-reasons/failed-reason/reason-index": {
+    "name": "Reason index"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/failed-reasons/failed-reason/reason": {
+    "name": "Failed reason"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/local-peer-record": {
+    "name": "Dcb local and peer record"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/local-peer-record/pfc-record": {
+    "name": "Pfc record"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/local-peer-record/pfc-record/local-pfc": {
+    "name": "Local pfc"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/local-peer-record/pfc-record/remote-pfc": {
+    "name": "Remote pfc"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/local-peer-record/ets-records": {
+    "name": "List of dcb ets local and peer record"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/local-peer-record/ets-records/ets-record": {
+    "name": "Operational data of dcb ets local and peer record"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/local-peer-record/ets-records/ets-record/priority-group-number": {
+    "name": "Priority group number"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/local-peer-record/ets-records/ets-record/local-priority": {
+    "name": "Local priority group priority list"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/local-peer-record/ets-records/ets-record/remote-priority": {
+    "name": "Remote priority-group priority list"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/local-peer-record/ets-records/ets-record/local-weight": {
+    "name": "Local priority-group weight"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/local-peer-record/ets-records/ets-record/remote-weight": {
+    "name": "Remote priority-group weight"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/local-peer-record/app-records": {
+    "name": "List of dcb application local and peer records"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/local-peer-record/app-records/app-record": {
+    "name": "Operational data of DCB app local and peer record"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/local-peer-record/app-records/app-record/app-name": {
+    "name": "Application name"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/local-peer-record/app-records/app-record/local-priority": {
+    "name": "Local priority of application"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dcb:dcb/local-peer-record/app-records/app-record/remote-priority": {
+    "name": "Remote priority of application"
+  },
+  "/huawei-devm:devm/mpu-boards/mpu-board/huawei-dcb:dcb": {
+    "name": "DCB parameter model"
+  },
+  "/huawei-devm:devm/mpu-boards/mpu-board/huawei-dcb:dcb/headroom-pool": {
+    "name": "Configure headroom pool size"
+  },
+  "/huawei-devm:devm/mpu-boards/mpu-board/huawei-dcb:dcb/headroom-pool/pool": {
+    "name": "Headroom pool size"
+  },
+  "/huawei-devm:devm/mpu-boards/mpu-board/huawei-dcb:dcb/deadlock-recovery-behavior": {
+    "name": "Configure the recovery behavior"
+  },
+  "/huawei-devm:devm/mpu-boards/mpu-board/huawei-dcb:dcb/deadlock-recovery-behavior/behavior": {
+    "name": "Behavior type"
+  },
+  "/huawei-devm:devm/mpu-boards/mpu-board/huawei-dcb:dcb/pfc-mapping-type": {
+    "name": "Configure the pfc backpressure mapping type"
+  },
+  "/huawei-devm:devm/mpu-boards/mpu-board/huawei-dcb:dcb/pfc-mapping-type/type": {
+    "name": "Set whether the pfc backpressure"
+  },
+  "/huawei-devm:devm/lpu-boards/lpu-board/huawei-dcb:dcb": {
+    "name": "DCB parameter model"
+  },
+  "/huawei-devm:devm/lpu-boards/lpu-board/huawei-dcb:dcb/headroom-pool": {
+    "name": "Configure headroom pool size"
+  },
+  "/huawei-devm:devm/lpu-boards/lpu-board/huawei-dcb:dcb/headroom-pool/pool": {
+    "name": "Headroom pool size"
+  },
+  "/huawei-devm:devm/lpu-boards/lpu-board/huawei-dcb:dcb/deadlock-recovery-behavior": {
+    "name": "Configure the recovery behavior"
+  },
+  "/huawei-devm:devm/lpu-boards/lpu-board/huawei-dcb:dcb/deadlock-recovery-behavior/behavior": {
+    "name": "Behavior type"
+  },
+  "/huawei-devm:devm/lpu-boards/lpu-board/huawei-dcb:dcb/pfc-mapping-type": {
+    "name": "Configure the pfc backpressure mapping type"
+  },
+  "/huawei-devm:devm/lpu-boards/lpu-board/huawei-dcb:dcb/pfc-mapping-type/type": {
+    "name": "Set whether the pfc backpressure"
+  },
+  "/rpcs/huawei-dcb:dcb/reset-pfc-statistics": {
+    "name": "To clear dcb pfc statistics"
+  },
+  "/rpcs/huawei-dcb:dcb/reset-fail-reasons": {
+    "name": "To clear dcb failed reasons"
+  }
+}

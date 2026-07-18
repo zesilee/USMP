@@ -1,0 +1,101 @@
+/*
+Copyright (C) 2019 Huawei Technologies Co., Ltd. All rights reserved.
+*/
+submodule huawei-dhcpv6-client {
+  belongs-to huawei-dhcpv6 {
+    prefix dhcpv6;
+  }
+  import ietf-inet-types {
+    prefix inet;
+  }
+  import huawei-ifm {
+    prefix ifm;
+  }
+  organization
+    "Huawei Technologies Co., Ltd.";
+  contact
+    "Huawei Industrial Base
+     Bantian, Longgang
+     Shenzhen 518129
+     People's Republic of China
+     Website: http://www.huawei.com
+     Email: support@huawei.com";
+  description
+    "This module contains a collection of YANG definitions for managing DHCPv6 client.";
+  revision 2019-07-16 {
+    description
+      "Init revision.";
+    reference
+      "Huawei private.";
+  }
+  augment "/ifm:ifm/ifm:interfaces/ifm:interface" {
+    description "Extend interface attribute.";
+    container dhcpv6-client-if {
+      description
+        "Configure DHCPv6 client interface configuration.";
+      leaf enable {
+        type boolean;
+        default "false";
+        description
+          "Enable/disable DHCPv6 client.";
+      }
+      choice client-type{
+        description "DHCPv6 client type.";
+        case inform {
+          description "DHCPv6 client only request information";
+          leaf inform-request {
+            type boolean;
+            description
+              "Enable/disable inform request.";
+          }
+        }
+        case address-and-prefix {
+          description "DHCPv6 client request ipv6 address or ipv6 prefix or both";
+          leaf address-request {
+            type boolean;
+            description
+              "Enable/disable IPv6 address request.";
+          }
+          leaf hint-address {
+            type inet:ipv6-address;
+            description
+              "Hint address of ipv6 address request.";
+          }
+          leaf prefix-request {
+            type boolean;
+            description
+              "Enable/disable IPv6 address prefix request.";
+          }
+          leaf prefix-name {
+            type string {
+              length "0..255";
+              pattern '([^\t]{0,})';
+            }
+            description
+              "Prefix name used for address prefix request from dhcpv6 server.";
+          }
+          leaf hint-prefix {
+            type inet:ipv6-prefix;
+            description
+              "Hint prefix of ipv6 address prefix request.";
+          }
+          leaf rapid-commit {
+            type boolean;
+            description
+              "Enable/disable rapid commit flag.";
+          }
+          leaf unicast {
+            type boolean;
+            description
+              "Enable/disable unicast flag.";
+          }
+          leaf union-mode {
+            type boolean;
+            description
+              "Enable/disable the flag which set client request both IPv6 address and prefix in one packet or two packets.";
+          }
+        }
+      }
+    }
+  }
+}

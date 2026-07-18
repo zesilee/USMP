@@ -1,0 +1,122 @@
+{
+  "/huawei-l3vpn:l3vpn": {
+    "name": "L3VPN"
+  },
+  "/huawei-l3vpn:l3vpn/statistics": {
+    "name": "L3VPN Statistics Information"
+  },
+  "/huawei-l3vpn:l3vpn/statistics/vpn-total-number": {
+    "name": "VPN number"
+  },
+  "/huawei-l3vpn:l3vpn/statistics/ipv4-vpn-number": {
+    "name": "IPv4 VPN number"
+  },
+  "/huawei-l3vpn:l3vpn/statistics/ipv6-vpn-number": {
+    "name": "IPv6 VPN number"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:traffic-statistic-enable": {
+    "name": "Enable L3VPN traffic statistics"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs": {
+    "name": "VPN Address Family List"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af": {
+    "name": "VPN Address Family"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/type": {
+    "name": "Address Family Type"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/route-distinguisher": {
+    "name": "RD"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/effect-route-distinguisher": {
+    "name": "Effective RD"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/import-policy-type": {
+    "name": "Import Routing Policy"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/import-policy-type/rtp-ref": {
+    "name": "Route Policy"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/import-policy-type/rtp-ref/import-policy": {
+    "name": "Import Routing Policy"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/export-policy-type": {
+    "name": "Export Routing Policy"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/export-policy-type/rtp-ref": {
+    "name": "Route Policy"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/export-policy-type/rtp-ref/export-policy": {
+    "name": "Export Routing Policy"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/export-policy-add-ert-first": {
+    "name": "Add ERT First"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/label-mode": {
+    "name": "Label Distribution Mode"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/vpn-frr": {
+    "name": "VPN FRR"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/tunnel-policy": {
+    "name": "Tunnel Policy"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/transit-vpn": {
+    "name": "Transit VPN"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/lsp-operation": {
+    "name": "Label Operation Mode"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/default-color": {
+    "name": "Default color"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/vpn-targets": {
+    "name": "RT List"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/vpn-targets/vpn-target": {
+    "name": "RT"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/vpn-targets/vpn-target/value": {
+    "name": "RT"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/vpn-targets/vpn-target/type": {
+    "name": "RT Type"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/state": {
+    "name": "Detailed VPN Address Family Information"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/state/create-time": {
+    "name": "Creation Time"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/state/up-time": {
+    "name": "Up Time"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/state/label": {
+    "name": "Label"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/state/status": {
+    "name": "VPN Instance Status"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/tunnel-infos": {
+    "name": "List of Tunnel Infomations"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/tunnel-infos/tunnel-info": {
+    "name": "Tunnel Information"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/tunnel-infos/tunnel-info/type": {
+    "name": "Tunnel Type"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/tunnel-infos/tunnel-info/peer-ip": {
+    "name": "Next Hop Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/tunnel-infos/tunnel-info/id": {
+    "name": "Tunnel ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/tunnel-infos/tunnel-info/color": {
+    "name": "Color"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/tunnel-infos/tunnel-info/name": {
+    "name": "Tunnel Name"
+  }
+}

@@ -1,0 +1,920 @@
+{
+  "/huawei-routing:rt": {
+    "name": "Routing"
+  },
+  "/huawei-routing:routing/routing-manage": {
+    "name": "Routing management"
+  },
+  "/huawei-routing:routing/routing-manage/relay-tunnel": {
+    "name": "Iteration Tunnel"
+  },
+  "/huawei-routing:routing/routing-manage/relay-tunnel/enable": {
+    "name": "Enable Tunnel Iteration"
+  },
+  "/huawei-routing:routing/routing-manage/relay-tunnel/ipv4-prefix-ref": {
+    "name": "IPv4 Prefix List Name"
+  },
+  "/huawei-routing:routing/routing-manage/relay-tunnel/tunnel-policy-ref": {
+    "name": "Tunnel Policy Name"
+  },
+  "/huawei-routing:routing/routing-manage/relay-label": {
+    "name": "Enable Route Iteration to VPN Remote Routes"
+  },
+  "/huawei-routing:routing/routing-manage/relay-label/ipv4-set": {
+    "name": "Iterate IPv4 Unicast Routes to VPN Remote Routes"
+  },
+  "/huawei-routing:routing/routing-manage/relay-label/ipv6-set": {
+    "name": "Iterate IPv6 Unicast Routes to VPN Remote Routes"
+  },
+  "/huawei-routing:routing/routing-manage/ipv4-threshold": {
+    "name": "IPv4 Prefix Thresholds"
+  },
+  "/huawei-routing:routing/routing-manage/ipv4-threshold/upper-percent": {
+    "name": "Upper Limit Percent"
+  },
+  "/huawei-routing:routing/routing-manage/ipv4-threshold/lower-percent": {
+    "name": "Lower Limit Percent"
+  },
+  "/huawei-routing:routing/routing-manage/ipv6-threshold": {
+    "name": "IPv6 Prefix Thresholds"
+  },
+  "/huawei-routing:routing/routing-manage/ipv6-threshold/upper-percent": {
+    "name": "Upper Limit Percent"
+  },
+  "/huawei-routing:routing/routing-manage/ipv6-threshold/lower-percent": {
+    "name": "Lower Limit Percent"
+  },
+  "/huawei-routing:routing/routing-manage/iterative-restrain": {
+    "name": "Iteration Suppression"
+  },
+  "/huawei-routing:routing/routing-manage/iterative-restrain/enable": {
+    "name": "Enable iteration suppression"
+  },
+  "/huawei-routing:routing/routing-manage/iterative-restrain/start-time": {
+    "name": "Time of the First Suppression"
+  },
+  "/huawei-routing:routing/routing-manage/iterative-restrain/increase-time": {
+    "name": "Incremental Suppression Duration"
+  },
+  "/huawei-routing:routing/routing-manage/iterative-restrain/max-time": {
+    "name": "Maximum Suppression Duration"
+  },
+  "/huawei-routing:routing/routing-manage/relay-default-routes": {
+    "name": "Enable Route Iteration to Default Routes List"
+  },
+  "/huawei-routing:routing/routing-manage/relay-default-routes/relay-default-route": {
+    "name": "Enable Route Iteration to Default Routes"
+  },
+  "/huawei-routing:routing/routing-manage/relay-default-routes/relay-default-route/address-family": {
+    "name": "Address Family Type"
+  },
+  "/huawei-routing:routing/routing-manage/relay-default-routes/relay-default-route/protocol-type": {
+    "name": "Protocol Type"
+  },
+  "/huawei-routing:routing/routing-manage/ipv4-vpn-route-statisticss": {
+    "name": "All VPN IPv4 Routes"
+  },
+  "/huawei-routing:routing/routing-manage/ipv4-vpn-route-statisticss/ipv4-vpn-route-statistics": {
+    "name": "All VPN IPv4 Routes"
+  },
+  "/huawei-routing:routing/routing-manage/ipv4-vpn-route-statisticss/ipv4-vpn-route-statistics/protocol-type": {
+    "name": "Protocol Type"
+  },
+  "/huawei-routing:routing/routing-manage/ipv4-vpn-route-statisticss/ipv4-vpn-route-statistics/total-num": {
+    "name": "Total Route Number"
+  },
+  "/huawei-routing:routing/routing-manage/ipv4-vpn-route-statisticss/ipv4-vpn-route-statistics/active-num": {
+    "name": "Active Route Number"
+  },
+  "/huawei-routing:routing/routing-manage/ipv4-vpn-route-statisticss/ipv4-vpn-route-statistics/added-num": {
+    "name": "Added Route Number"
+  },
+  "/huawei-routing:routing/routing-manage/ipv4-vpn-route-statisticss/ipv4-vpn-route-statistics/deleted-num": {
+    "name": "Deleted Route Number"
+  },
+  "/huawei-routing:routing/routing-manage/ipv4-vpn-route-statisticss/ipv4-vpn-route-statistics/freed-num": {
+    "name": "Freed Route Number"
+  },
+  "/huawei-routing:routing/routing-manage/ipv6-vpn-route-statisticss": {
+    "name": "All VPN IPv6 Routes"
+  },
+  "/huawei-routing:routing/routing-manage/ipv6-vpn-route-statisticss/ipv6-vpn-route-statistics": {
+    "name": "All VPN IPv6 Routes"
+  },
+  "/huawei-routing:routing/routing-manage/ipv6-vpn-route-statisticss/ipv6-vpn-route-statistics/protocol-type": {
+    "name": "Protocol Type"
+  },
+  "/huawei-routing:routing/routing-manage/ipv6-vpn-route-statisticss/ipv6-vpn-route-statistics/total-num": {
+    "name": "Total Route Number"
+  },
+  "/huawei-routing:routing/routing-manage/ipv6-vpn-route-statisticss/ipv6-vpn-route-statistics/active-num": {
+    "name": "Active Route Number"
+  },
+  "/huawei-routing:routing/routing-manage/ipv6-vpn-route-statisticss/ipv6-vpn-route-statistics/added-num": {
+    "name": "Added Route Number"
+  },
+  "/huawei-routing:routing/routing-manage/ipv6-vpn-route-statisticss/ipv6-vpn-route-statistics/deleted-num": {
+    "name": "Deleted Route Number"
+  },
+  "/huawei-routing:routing/routing-manage/ipv6-vpn-route-statisticss/ipv6-vpn-route-statistics/freed-num": {
+    "name": "Freed Route Number"
+  },
+  "/huawei-routing:routing/static-routing": {
+    "name": "Basic Service Package"
+  },
+  "/huawei-routing:routing/static-routing/ipv4-site": {
+    "name": "IPv4 Static Route Parameters"
+  },
+  "/huawei-routing:routing/static-routing/ipv4-site/preference": {
+    "name": "IPv4 Priority"
+  },
+  "/huawei-routing:routing/static-routing/ipv4-site/relay-switch": {
+    "name": "Depth-based Route Selection"
+  },
+  "/huawei-routing:routing/static-routing/ipv4-site/min-tx-interval": {
+    "name": "Min IPv4 BFD Packet Tx Interval"
+  },
+  "/huawei-routing:routing/static-routing/ipv4-site/min-rx-interval": {
+    "name": "Min IPv4 BFD Packet Rx Interval"
+  },
+  "/huawei-routing:routing/static-routing/ipv4-site/multiplier": {
+    "name": "IPv4 Local Detection Multiplier"
+  },
+  "/huawei-routing:routing/static-routing/ipv4-site/relay-remote": {
+    "name": "Iteration to Remote VPN Routes"
+  },
+  "/huawei-routing:routing/static-routing/ipv4-site/relay-arp-vlink": {
+    "name": "Iteration to ARP Vlink Routes"
+  },
+  "/huawei-routing:routing/static-routing/ipv4-site/inherit-cost-switch": {
+    "name": "Compare inherit cost"
+  },
+  "/huawei-routing:routing/static-routing/ipv4-site/current-route-num": {
+    "name": "Configured IPv4 Routes"
+  },
+  "/huawei-routing:routing/static-routing/ipv4-site/max-route-num": {
+    "name": "Max IPv4 Static Routes"
+  },
+  "/huawei-routing:routing/static-routing/ipv4-relay-tunnel": {
+    "name": "Iteration Tunnel"
+  },
+  "/huawei-routing:routing/static-routing/ipv4-relay-tunnel/enable": {
+    "name": "Enable Tunnel Iteration"
+  },
+  "/huawei-routing:routing/static-routing/ipv4-relay-tunnel/ipv4-prefix-ref": {
+    "name": "IPv4 Prefix List Name"
+  },
+  "/huawei-routing:routing/static-routing/ipv4-relay-tunnel/tunnel-policy-ref": {
+    "name": "Tunnel Policy Name"
+  },
+  "/huawei-routing:routing/static-routing/ipv6-site": {
+    "name": "IPv6 Static Route Parameters"
+  },
+  "/huawei-routing:routing/static-routing/ipv6-site/preference": {
+    "name": "IPv6 Priority"
+  },
+  "/huawei-routing:routing/static-routing/ipv6-site/min-tx-interval": {
+    "name": "Min IPv6 BFD Packet Tx Interval"
+  },
+  "/huawei-routing:routing/static-routing/ipv6-site/min-rx-interval": {
+    "name": "Min IPv6 BFD Packet Rx Interval"
+  },
+  "/huawei-routing:routing/static-routing/ipv6-site/multiplier": {
+    "name": "IPv6 Local Detection Multiplier"
+  },
+  "/huawei-routing:routing/static-routing/ipv6-site/relay-arp-vlink6": {
+    "name": "Iteration to ARP Vlink Routes"
+  },
+  "/huawei-routing:routing/static-routing/ipv6-site/current-route-num": {
+    "name": "Configured IPv6 Routes"
+  },
+  "/huawei-routing:routing/static-routing/ipv6-site/max-route-num": {
+    "name": "Max IPv6 Static Routes"
+  },
+  "/huawei-routing:routing/static-routing/max-route-number": {
+    "name": "Maximum Number of Static Routes"
+  },
+  "/huawei-routing:routing/static-routing/max-route-number/num": {
+    "name": "Maximum Number of Static Routes"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-routing:routing": {
+    "name": "Static Route"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-routing:routing/static-routing": {
+    "name": "Static Route"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing": {
+    "name": "Routing management"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage": {
+    "name": "RM Basic Service Package"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/option": {
+    "name": "Route manage option"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/option/frr-enable": {
+    "name": "Enable FRR"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/option/prefix-limit-number": {
+    "name": "Prefix Limit Number"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/option/prefix-alert-type": {
+    "name": "Set Prefix Limit"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/option/prefix-alert-type/percent": {
+    "name": "Percent"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/option/prefix-alert-type/percent/prefix-alert-percent": {
+    "name": "Alarm Percent"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/option/prefix-alert-type/percent/route-unchanged": {
+    "name": "Route Unchanged"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/option/prefix-alert-type/alert": {
+    "name": "Alert"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/option/prefix-alert-type/alert/prefix-simply-alert": {
+    "name": "Alarm Only"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/option/route-limit-number": {
+    "name": "Route Limit Number"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/option/route-alert-type": {
+    "name": "Set Routing-table Limit"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/option/route-alert-type/percent": {
+    "name": "Percent"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/option/route-alert-type/percent/route-alert-percent": {
+    "name": "Route Limit Alarm Percent"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/option/route-alert-type/alert": {
+    "name": "Alert"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/option/route-alert-type/alert/route-simply-alert": {
+    "name": "Route Limit Alarm Only"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys": {
+    "name": "Topology List"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology": {
+    "name": "Topology"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/name": {
+    "name": "Topology name"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes": {
+    "name": "Routing table"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-unicast-routes": {
+    "name": "IPv4 Base Route List"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-unicast-routes/ipv4-unicast-route": {
+    "name": "IPv4 Base Route"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-unicast-routes/ipv4-unicast-route/prefix": {
+    "name": "Destination IP Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-unicast-routes/ipv4-unicast-route/mask-length": {
+    "name": "Mask Length"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-unicast-routes/ipv4-unicast-route/protocol-type": {
+    "name": "Protocol Type"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-unicast-routes/ipv4-unicast-route/interface-name": {
+    "name": "Outbound Interface"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-unicast-routes/ipv4-unicast-route/process-id": {
+    "name": "Process ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-unicast-routes/ipv4-unicast-route/direct-nexthop": {
+    "name": "Direct Next Hop"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-unicast-routes/ipv4-unicast-route/nexthop": {
+    "name": "Next Hop"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-unicast-routes/ipv4-unicast-route/frr-type": {
+    "name": "FRR Type"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-unicast-routes/ipv4-unicast-route/preference": {
+    "name": "Priority"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-unicast-routes/ipv4-unicast-route/cost": {
+    "name": "Cost"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-unicast-routes/ipv4-unicast-route/flag": {
+    "name": "Flags"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-unicast-routes/ipv4-unicast-route/qos-id": {
+    "name": "QoS Info"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-unicast-routes/ipv4-unicast-route/active": {
+    "name": "Active Flag"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-unicast-routes/ipv4-unicast-route/tag": {
+    "name": "Flag"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-unicast-routes/ipv4-unicast-route/priority": {
+    "name": "Convergence Priority"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-unicast-routes/ipv4-unicast-route/label": {
+    "name": "Label"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-unicast-routes/ipv4-unicast-route/indirect-id": {
+    "name": "IID Index"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-unicast-routes/ipv4-unicast-route/state": {
+    "name": "State"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-unicast-routes/ipv4-unicast-route/neighbour": {
+    "name": "Peer"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-unicast-routes/ipv4-unicast-route/age": {
+    "name": "Age"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-unicast-routes/ipv4-unicast-route/sub-protocol-type": {
+    "name": "Sub protocol type"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-unicast-routes/ipv4-unicast-route/tunnel-type": {
+    "name": "Tunnel type"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-unicast-routes/ipv4-unicast-route/tunnel-types": {
+    "name": "Tunnel type"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-unicast-routes/ipv4-unicast-route/tunnel-types/mpls-tunnel": {
+    "name": "MPLS tunnel information"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-unicast-routes/ipv4-unicast-route/tunnel-types/mpls-tunnel/out-label": {
+    "name": "Outgoing Label"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-unicast-routes/ipv4-unicast-route/tunnel-types/mpls-tunnel/label-stack": {
+    "name": "Label Stack"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-unicast-routes/ipv4-unicast-route/tunnel-types/sr-policy": {
+    "name": "SR-MPLS TE Policy tunnel information"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-unicast-routes/ipv4-unicast-route/tunnel-types/sr-policy/group-id": {
+    "name": "Tunnel policy group ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-unicast-routes/ipv4-unicast-route/tunnel-types/sr-policy/endpoint": {
+    "name": "Tunnel Destination"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-unicast-routes/ipv4-unicast-route/tunnel-types/sr-policy/color": {
+    "name": "Tunnel Color"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-unicast-routes/ipv4-unicast-route/tunnel-types/sr-policy/policy-name": {
+    "name": "Tunnel policy name"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-unicast-routes/ipv4-unicast-route/tunnel-types/vxlan": {
+    "name": "VXLAN Tunnel"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-unicast-routes/ipv4-unicast-route/tunnel-types/vxlan/vni": {
+    "name": "VXLAN network identifier"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv6-unicast-routes": {
+    "name": "IPv6 Base Route List"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv6-unicast-routes/ipv6-unicast-route": {
+    "name": "IPv6 Base Route"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv6-unicast-routes/ipv6-unicast-route/prefix": {
+    "name": "Destination IP Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv6-unicast-routes/ipv6-unicast-route/mask-length": {
+    "name": "Mask Length"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv6-unicast-routes/ipv6-unicast-route/protocol-type": {
+    "name": "Protocol Type"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv6-unicast-routes/ipv6-unicast-route/interface-name": {
+    "name": "Outbound Interface"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv6-unicast-routes/ipv6-unicast-route/process-id": {
+    "name": "Process ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv6-unicast-routes/ipv6-unicast-route/direct-nexthop": {
+    "name": "Direct Next Hop"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv6-unicast-routes/ipv6-unicast-route/nexthop": {
+    "name": "Next Hop"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv6-unicast-routes/ipv6-unicast-route/frr-type": {
+    "name": "FRR Type"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv6-unicast-routes/ipv6-unicast-route/preference": {
+    "name": "Priority"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv6-unicast-routes/ipv6-unicast-route/cost": {
+    "name": "Cost"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv6-unicast-routes/ipv6-unicast-route/flag": {
+    "name": "Flags"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv6-unicast-routes/ipv6-unicast-route/qos-id": {
+    "name": "QoS Information"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv6-unicast-routes/ipv6-unicast-route/active": {
+    "name": "Active Flag"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv6-unicast-routes/ipv6-unicast-route/tag": {
+    "name": "Flag"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv6-unicast-routes/ipv6-unicast-route/priority": {
+    "name": "Convergence Priority"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv6-unicast-routes/ipv6-unicast-route/label": {
+    "name": "Label"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv6-unicast-routes/ipv6-unicast-route/indirect-id": {
+    "name": "IID Index"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv6-unicast-routes/ipv6-unicast-route/state": {
+    "name": "State"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv6-unicast-routes/ipv6-unicast-route/neighbour": {
+    "name": "Peer"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv6-unicast-routes/ipv6-unicast-route/age": {
+    "name": "Age"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv6-unicast-routes/ipv6-unicast-route/sub-protocol-type": {
+    "name": "Sub-protocol type"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-route-statistics": {
+    "name": "IPv4 Base Route Statistics List"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-route-statistics/ipv4-route-statistic": {
+    "name": "IPv4 Base Route Statistics"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-route-statistics/ipv4-route-statistic/protocol-type": {
+    "name": "Protocol Type"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-route-statistics/ipv4-route-statistic/total-num": {
+    "name": "Total Number of Routes"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-route-statistics/ipv4-route-statistic/active-num": {
+    "name": "Number of Active Routes"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-route-statistics/ipv4-route-statistic/added-num": {
+    "name": "Number of Added Routes"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-route-statistics/ipv4-route-statistic/deleted-num": {
+    "name": "Number of Deleted Routes"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv4-route-statistics/ipv4-route-statistic/freed-num": {
+    "name": "Number of Released Routes"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv6-route-statistics": {
+    "name": "IPv6 Base Route Statistics List"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv6-route-statistics/ipv6-route-statistic": {
+    "name": "IPv6 Base Route Statistics"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv6-route-statistics/ipv6-route-statistic/protocol-type": {
+    "name": "Protocol Type"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv6-route-statistics/ipv6-route-statistic/total-num": {
+    "name": "Total Number of Routes"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv6-route-statistics/ipv6-route-statistic/active-num": {
+    "name": "Number of Active Routes"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv6-route-statistics/ipv6-route-statistic/added-num": {
+    "name": "Number of Added Routes"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv6-route-statistics/ipv6-route-statistic/deleted-num": {
+    "name": "Number of Deleted Routes"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/routing-manage/topologys/topology/routes/ipv6-route-statistics/ipv6-route-statistic/freed-num": {
+    "name": "Number of Released Routes"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/direct-routing": {
+    "name": "Direct Route"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/direct-routing/import-ribs": {
+    "name": "VPN-Public Network Instances Imported Routes"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/direct-routing/import-ribs/import-rib": {
+    "name": "Route Import Between Public and VPN Instances"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/direct-routing/import-ribs/import-rib/source-vpn": {
+    "name": "Import Source VPN Name"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/direct-routing/import-ribs/import-rib/policy-type": {
+    "name": "Selecting a Policy Type"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/direct-routing/import-ribs/import-rib/policy-type/rtp-ref": {
+    "name": "Specify a Routing Policy"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/direct-routing/import-ribs/import-rib/policy-type/rtp-ref/policy-name": {
+    "name": "Filtering Policy for Imported Routes"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/direct-routing/import-ribs/import-rib/policy-type/xpl-ref": {
+    "name": "Case Import Route-Filter"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/direct-routing/import-ribs/import-rib/policy-type/xpl-ref/filter-name": {
+    "name": "Import Route XPL Filter"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/direct-routing/import-ribs/import-rib/policy-type/xpl-ref/filter-parameter": {
+    "name": "XPL Filter Parameters for Route Import"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/direct-routing/interfaces": {
+    "name": "Interfaces Configuration"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/direct-routing/interfaces/interface": {
+    "name": "Interface Configuration"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/direct-routing/interfaces/interface/name": {
+    "name": "Interface Name"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/direct-routing/interfaces/interface/cost": {
+    "name": "Cost on a specified interface"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/direct-routing/interfaces/interface/binding-topologys": {
+    "name": "Bound Interfaces"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/direct-routing/interfaces/interface/binding-topologys/binding-topology": {
+    "name": "Bound Interface"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/direct-routing/interfaces/interface/binding-topologys/binding-topology/topology-name": {
+    "name": "Topology Name"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing": {
+    "name": "Static Route"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/import-ribs": {
+    "name": "VPN-Public Network Instances Imported Routes"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/import-ribs/import-rib": {
+    "name": "Route Import Between Public and VPN Instances"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/import-ribs/import-rib/source-vpn": {
+    "name": "Import Source VPN Name"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/import-ribs/import-rib/valid-route": {
+    "name": "Import Valid Routes"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/import-ribs/import-rib/policy-type": {
+    "name": "Selecting a Policy Type"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/import-ribs/import-rib/policy-type/rtp-ref": {
+    "name": "Specify a Routing Policy"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/import-ribs/import-rib/policy-type/rtp-ref/policy-name": {
+    "name": "Filtering Policy for Imported Routes"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/import-ribs/import-rib/policy-type/xpl-ref": {
+    "name": "Case Import Route-Filter"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/import-ribs/import-rib/policy-type/xpl-ref/filter-name": {
+    "name": "Import Route XPL Filter"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/import-ribs/import-rib/policy-type/xpl-ref/filter-parameter": {
+    "name": "XPL Filter Parameters for Route Import"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/unicast-routes": {
+    "name": "Static Route Configuration List"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/unicast-routes/unicast-route": {
+    "name": "Configure Static Routes"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/unicast-routes/unicast-route/topology-name": {
+    "name": "Topology Name"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/unicast-routes/unicast-route/prefix": {
+    "name": "Destination IP Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/unicast-routes/unicast-route/mask-length": {
+    "name": "Mask Length"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/unicast-routes/unicast-route/interface-name": {
+    "name": "Outbound Interface"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/unicast-routes/unicast-route/vpn-destination-name": {
+    "name": "Target VPN Instance Name"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/unicast-routes/unicast-route/next-hop": {
+    "name": "Next Hop IP Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/unicast-routes/unicast-route/preference": {
+    "name": "Priority"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/unicast-routes/unicast-route/description": {
+    "name": "Description"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/unicast-routes/unicast-route/tag": {
+    "name": "Tag Attribute"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/unicast-routes/unicast-route/cost": {
+    "name": "Cost"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/unicast-routes/unicast-route/inherit-cost": {
+    "name": "Inherit Cost"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/unicast-routes/unicast-route/permanent": {
+    "name": "Permanent"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/unicast-routes/unicast-route/no-advertise": {
+    "name": "Whether Not to Be Advertised"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/unicast-routes/unicast-route/no-install": {
+    "name": "Whether Not to Be Delivered to the FIB"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/unicast-routes/unicast-route/relay-host-route": {
+    "name": "Whether Allowed to Recurse to Host Routes"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/unicast-routes/unicast-route/dhcp-enable": {
+    "name": "Enable DHCP"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/unicast-routes/unicast-route/ldp-sync": {
+    "name": "Whether to enable LDP"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/unicast-routes/unicast-route/inter-protocol-ecmp": {
+    "name": "Enable Inter-protocol route load balancing"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/unicast-routes/unicast-route/bfd-enable": {
+    "name": "Enabling Dynamic BFD"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/unicast-routes/unicast-route/relay-arp-vlink-route": {
+    "name": "Can Be Iterated Only To ARP Vlink Routes"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/unicast-routes/unicast-route/track-setting": {
+    "name": "Track Set"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/unicast-routes/unicast-route/track-setting/bfd": {
+    "name": "Static BFD Session Association"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/unicast-routes/unicast-route/track-setting/bfd/session-name": {
+    "name": "Static BFD Session Name"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/unicast-routes/unicast-route/track-setting/efm": {
+    "name": "EFM interface name"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/unicast-routes/unicast-route/track-setting/efm/name": {
+    "name": "Track EFM interface name"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-multicast-routes": {
+    "name": "List of Multicast Static Routes"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-multicast-routes/ipv4-multicast-route": {
+    "name": "Multicast Static Route"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-multicast-routes/ipv4-multicast-route/prefix": {
+    "name": "Destination IP Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-multicast-routes/ipv4-multicast-route/mask-length": {
+    "name": "Mask Length"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-multicast-routes/ipv4-multicast-route/next-hop": {
+    "name": "Next Hop IP Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-multicast-routes/ipv4-multicast-route/interface-name": {
+    "name": "Outbound Interface"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-multicast-routes/ipv4-multicast-route/preference": {
+    "name": "Priority"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-multicast-routes/ipv4-multicast-route/interface-state": {
+    "name": "Interface Status"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-multicast-routes/ipv4-multicast-route/bfd-detect": {
+    "name": "BFD Detection Result"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-multicast-routes/ipv4-multicast-route/state": {
+    "name": "Route Selection Result"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-multicast-routes/ipv4-multicast-route/indirect-id": {
+    "name": "Indirect Next Hop"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-multicast-routes/ipv4-multicast-route/local-address": {
+    "name": "Local IP Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-multicast-routes/ipv4-multicast-route/remote-ip": {
+    "name": "Peer IP"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-multicast-routes/ipv4-multicast-route/relay-nexthop": {
+    "name": "Recursive Next Hop"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-multicast-routes/ipv4-multicast-route/relay-interface": {
+    "name": "Iteration Outbound Interface"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-multicast-routes/ipv4-multicast-route/tunnel-id": {
+    "name": "Tunnel ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/bfd-templates": {
+    "name": "BFD Template List"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/bfd-templates/bfd-template": {
+    "name": "BFD Template"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/bfd-templates/bfd-template/interface-name": {
+    "name": "Outbound Interface"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/bfd-templates/bfd-template/nexthop": {
+    "name": "Next Hop"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/bfd-templates/bfd-template/local-address": {
+    "name": "Local Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/bfd-templates/bfd-template/min-tx-interval": {
+    "name": "Minimum Sending Interval"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/bfd-templates/bfd-template/min-rx-interval": {
+    "name": "Minimum Receiving Interval"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/bfd-templates/bfd-template/multiplier": {
+    "name": "Local Detection Multiplier"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/bfd-templates/bfd-template/dhcp-enable": {
+    "name": "Enable DHCP"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/route-frr-set": {
+    "name": "FRR set"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/route-frr-set/unicast-route-frr-enable": {
+    "name": "Enabling FRR"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/route-frr-set/multicast-route-frr-enable": {
+    "name": "Enable Rpf Route FRR"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-routes": {
+    "name": "IPv4 Static Routing Table"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-routes/ipv4-route": {
+    "name": "IPv4 Static Routing Table"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-routes/ipv4-route/topology-name": {
+    "name": "Topology Name"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-routes/ipv4-route/prefix": {
+    "name": "Destination IP Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-routes/ipv4-route/mask-length": {
+    "name": "Mask Length"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-routes/ipv4-route/interface-name": {
+    "name": "Outbound Interface"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-routes/ipv4-route/vpn-destination-name": {
+    "name": "Target VPN Instance Name"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-routes/ipv4-route/next-hop": {
+    "name": "Next Hop IP Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-routes/ipv4-route/relay-next-hop": {
+    "name": "Recursive Next Hop"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-routes/ipv4-route/relay-interface-name": {
+    "name": "Iteration Outbound Interface"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-routes/ipv4-route/tunnel-id": {
+    "name": "Tunnel ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-routes/ipv4-route/preference": {
+    "name": "Priority"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-routes/ipv4-route/cost": {
+    "name": "Cost"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-routes/ipv4-route/tag": {
+    "name": "Tag Attribute"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-routes/ipv4-route/interface-state": {
+    "name": "Interface Status"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-routes/ipv4-route/state": {
+    "name": "Route Selection Result"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-routes/ipv4-route/indirect-id": {
+    "name": "Indirect Next Hop"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-routes/ipv4-route/local-address": {
+    "name": "Local IP Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-routes/ipv4-route/remote-ip": {
+    "name": "Peer IP"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-routes/ipv4-route/inherit-cost": {
+    "name": "Inherit Cost"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-routes/ipv4-route/label": {
+    "name": "Label"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-routes/ipv4-route/permanent": {
+    "name": "Permanent advertisement"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-routes/ipv4-route/no-advertise": {
+    "name": "Whether Not to Be Advertised"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-routes/ipv4-route/no-install": {
+    "name": "Whether Not to Be Delivered to the FIB"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-routes/ipv4-route/bfd-type": {
+    "name": "BFD Type"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-routes/ipv4-route/bfd-session-name": {
+    "name": "Static BFD Session Name"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-routes/ipv4-route/bfd-detect": {
+    "name": "BFD Detection Result"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-routes/ipv4-route/efm-interface-name": {
+    "name": "EFM interface name"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-routes/ipv4-route/efm-detect": {
+    "name": "EFM Detection Result"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv4-routes/ipv4-route/nqa-detect": {
+    "name": "NQA Detection Result"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv6-routes": {
+    "name": "IPv6 Static Routing Table"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv6-routes/ipv6-route": {
+    "name": "IPv6 Static Routing Table"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv6-routes/ipv6-route/topology-name": {
+    "name": "Topology Name"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv6-routes/ipv6-route/prefix": {
+    "name": "Destination IP Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv6-routes/ipv6-route/mask-length": {
+    "name": "Mask Length"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv6-routes/ipv6-route/interface-name": {
+    "name": "Outbound Interface"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv6-routes/ipv6-route/vpn-destination-name": {
+    "name": "Target VPN Instance Name"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv6-routes/ipv6-route/next-hop": {
+    "name": "Next Hop IP Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv6-routes/ipv6-route/relay-next-hop": {
+    "name": "Recursive Next Hop"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv6-routes/ipv6-route/relay-interface-name": {
+    "name": "Iteration Outbound Interface"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv6-routes/ipv6-route/tunnel-id": {
+    "name": "Tunnel ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv6-routes/ipv6-route/preference": {
+    "name": "Priority"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv6-routes/ipv6-route/cost": {
+    "name": "Cost"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv6-routes/ipv6-route/tag": {
+    "name": "Tag Attribute"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv6-routes/ipv6-route/interface-state": {
+    "name": "Interface Status"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv6-routes/ipv6-route/state": {
+    "name": "Route Selection Result"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv6-routes/ipv6-route/indirect-id": {
+    "name": "Indirect Next Hop"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv6-routes/ipv6-route/local-address": {
+    "name": "Local IP Address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv6-routes/ipv6-route/remote-ip": {
+    "name": "Peer IP"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv6-routes/ipv6-route/inherit-cost": {
+    "name": "Inherit Cost"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv6-routes/ipv6-route/label": {
+    "name": "Label"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv6-routes/ipv6-route/permanent": {
+    "name": "Permanent advertisement"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv6-routes/ipv6-route/no-advertise": {
+    "name": "Whether Not to Be Advertised"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv6-routes/ipv6-route/no-install": {
+    "name": "Whether Not to Be Delivered to the FIB"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv6-routes/ipv6-route/bfd-type": {
+    "name": "BFD Type"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv6-routes/ipv6-route/bfd-session-name": {
+    "name": "Static BFD Session Name"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv6-routes/ipv6-route/bfd-detect": {
+    "name": "BFD Detection Result"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv6-routes/ipv6-route/efm-interface-name": {
+    "name": "EFM interface name"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv6-routes/ipv6-route/efm-detect": {
+    "name": "EFM Detection Result"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-routing:routing/static-routing/ipv6-routes/ipv6-route/nqa-detect": {
+    "name": "NQA Detection Result"
+  }
+}

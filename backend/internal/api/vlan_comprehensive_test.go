@@ -119,8 +119,8 @@ func TestVlanConfig_Integration_MemberPortsReplace(t *testing.T) {
 		}},
 	}
 	applyVlan(t, cs, pool, ds, deviceID, []interface{}{twoPorts})
-	testsupport.AssertHuaweiVlanMemberPort(t, sim, 70, "GE0/0/1", int(huawei.HuaweiVlan_AccessType_access), 0)
-	testsupport.AssertHuaweiVlanMemberPort(t, sim, 70, "GE0/0/2", int(huawei.HuaweiVlan_AccessType_trunk), 0)
+	testsupport.AssertHuaweiVlanMemberPort(t, sim, 70, "GE0/0/1", int(huawei.HuaweiVlan_AccessType_access))
+	testsupport.AssertHuaweiVlanMemberPort(t, sim, 70, "GE0/0/2", int(huawei.HuaweiVlan_AccessType_trunk))
 
 	// 改为单端口（回填完整条目，仅保留 GE0/0/1）
 	applyVlan(t, cs, pool, ds, deviceID, []interface{}{
@@ -129,7 +129,7 @@ func TestVlanConfig_Integration_MemberPortsReplace(t *testing.T) {
 				map[string]interface{}{"interface-name": "GE0/0/1", "access-type": "access"},
 			}}},
 	})
-	testsupport.AssertHuaweiVlanMemberPort(t, sim, 70, "GE0/0/1", int(huawei.HuaweiVlan_AccessType_access), 0)
+	testsupport.AssertHuaweiVlanMemberPort(t, sim, 70, "GE0/0/1", int(huawei.HuaweiVlan_AccessType_access))
 }
 
 // P2：读回——配置后设备运行配置可读回且一致（GET 路径）。

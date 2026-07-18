@@ -1,0 +1,1199 @@
+/*
+Copyright (C) 2020 Huawei Technologies Co., Ltd. All rights reserved.
+*/
+module huawei-dcb {
+  namespace "urn:huawei:yang:huawei-dcb";
+  prefix dcb;
+  import huawei-pub-type {
+    prefix pub-type;
+  }
+  import huawei-extension {
+    prefix ext;
+  }
+  import huawei-ifm {
+    prefix ifm;
+  }
+  import huawei-devm {
+    prefix devm;
+  }
+ 
+  organization
+    "Huawei Technologies Co., Ltd.";
+  contact
+    "Huawei Industrial Base
+     Bantian, Longgang
+     Shenzhen 518129
+     People's Republic of China
+     Website: http://www.huawei.com
+     Email: support@huawei.com";
+  description
+    "Data center bridge.";
+  revision 2020-01-21 {
+    description
+      "Init revision.";
+    reference
+      "Huawei private.";
+  }
+  ext:task-name "dcb";
+  typedef dcb-schedule-mode {
+    type enumeration {
+      enum "pq" {
+        value 0; 
+        description
+          "Priority queue.";
+      }
+      enum "drr" {
+        value 1; 
+        description
+          "Deficit Round Robin.";
+      }
+      enum "lpq" {
+        value 2; 
+        description
+          "Low Priority queue.";
+      }
+    }
+    description
+      "Schedule mode.";
+  }
+  typedef dcb-mapping-type {
+    type enumeration {
+      enum "8021p" {
+        value 0; 
+        description
+          "8021p.";
+      }
+      enum "dscp" {
+        value 1; 
+        description
+          "Dscp.";
+      }
+    }
+    description
+      "DCB mapping tpye.";
+  }
+  typedef pfc-mode {
+    type enumeration {
+      enum "manual" {
+        value 0; 
+        description
+          "Manual.";
+      }
+      enum "auto" {
+        value 1; 
+        description
+          "Auto.";
+      }
+    }
+    description
+      "PFC enable mode.";
+  }
+  typedef dcb-version-type {
+    type enumeration {
+      enum "ieee" {
+        value 0; 
+        description
+          "IEEE.";
+      }
+      enum "intel" {
+        value 1; 
+        description
+          "INTEL.";
+      }
+    }
+    description
+      "DCB vesion type.";
+  }
+  typedef dcb-recovery-type {
+    type enumeration {
+      enum "forwarding" {
+        value 0; 
+        description
+          "Forwarding.";
+      }
+      enum "discard" {
+        value 1; 
+        description
+          "Discard.";
+      }
+    }
+    description
+      "DCB recovery type.";
+  }
+  typedef dcb-status {
+    type enumeration {
+      enum "unconfig" {
+        value 0; 
+        description
+          "UNCONFIG.";
+      }
+      enum "succeed" {
+        value 1; 
+        description
+          "SUCCEED.";
+      }
+      enum "failed" {
+        value 2; 
+        description
+          "FAILED.";
+      }
+      enum "manual" {
+        value 3; 
+        description
+          "MANUAL.";
+      }
+    }
+    description
+      "DCB negotiation status.";
+  }
+  typedef dcb-application {
+    type enumeration {
+      enum "fcoe" {
+        value 0; 
+        description
+          "FCOE.";
+      }
+      enum "fip" {
+        value 1; 
+        description
+          "FIP.";
+      }
+      enum "iscsi" {
+        value 2; 
+        description
+          "ISCSI.";
+      }
+    }
+    description
+      "Dcb application type.";
+  }
+  typedef dcb-layer3-application {
+    type enumeration {
+      enum "tcp" {
+        value 0; 
+        description
+          "TCP.";
+      }
+      enum "udp" {
+        value 1; 
+        description
+          "UDP.";
+      }
+      enum "port" {
+        value 2; 
+        description
+          "PORT.";
+      }
+    }
+    description
+      "Dcb layer3 application type.";
+  }
+  container dcb {
+    description
+      "Data center bridge.";
+    container global {
+      description
+        "Configure dcb global configuration.";
+      leaf pfc-enable {
+        type boolean;
+        default "true";
+        description
+          "Enable/disable all pfc function.";
+      }
+      leaf deadlock-enable {
+        type boolean;
+        ext:hidden ui;
+        default "true";
+        description
+          "Enable/disable all PFC deadlock detection function.";
+      }
+      leaf deadlock-interval {
+        type uint32 {
+          range "10 | 100 | 500 | 1000";
+        }
+        units "ms";
+        default "10";
+        description
+          "Configure PFC deadlock detection interval and recovery interval.";
+      }
+      leaf detect-time {
+        type uint32 {
+          range "10..1500";
+        }
+        units "ms";
+        default "100";
+        description
+          "Deadlock detect time. If the PFC backpressure state persists within the detection time, the pfc deadlock occurs.";
+      }
+      leaf recovery-time {
+        type uint32 {
+          range "10..1500";
+        }
+        units "ms";
+        default "100";
+        description
+          "Deadlock recovery time. Within the recovery time, the PFC frame is ignored and the traffic is forwarded or discarded according to the configured recovery type";
+      }
+    }
+    container pfc-profiles {
+      description
+        "List of priority-based flow control profiles.";
+      list pfc-profile {
+        key "name";
+        max-elements "3";
+        description
+          "Configure priority-based flow control profile list.";
+        ext:generated-by system {
+          description "The instances whose pfc profile name is 'default' are generated automatically.";
+          ext:filter "name = 'default'";
+        }
+        leaf name {
+          type string {
+            length "1..31";
+          }
+          description
+            "Name of Priority-based flow control profile.";
+        }
+        container pfc-prioritys {
+          description
+          "List of PFC priority.";
+          list pfc-priority {
+            key "priority";
+            max-elements "8";
+            ext:generated-by system {
+              when "../../name";
+              ext:filter "priority=3";
+              description
+                "The instances whose priority is 3 are generated automatically when pfc-profile is created.";
+            }
+            description
+            "Configure PFC priority and deadlock parameters for the priority.";
+            leaf priority {
+              type uint8 {
+                range "0..7";
+              }
+              description
+                "Specify priorities of the PFC, These priorities support response and triggering of PFC backpressure.
+                 The default priority is 3, which can be deleted using a command instead of YANG.
+                 If priority 3 has been deleted using a command, it cannot be queried.";
+            }
+            leaf turn-off-threshold {
+              type uint32 {
+                range "1..300";
+              }
+              default "30";
+              description
+                "Deadlock turnoff PFC threshold, If the number of deadlocks exceeds this turnoff threshold, the PFC function of the corresponding priority is disabled.";
+            }
+            leaf error-down-threshold {
+              type uint32 {
+                range "1..300";
+              }
+              default "30";
+              description
+                "Deadlock error-down PFC threshold, If the number of deadlocks exceeds this error-down threshold, the port is error down.";
+            }
+            leaf detect-times {
+              type uint32 {
+                range "1..15";
+              }
+              default "10";
+              description
+                "Deadlock detect times. If the PFC backpressure state persists within the detection time, the PFC deadlock occurs.";
+            }
+            leaf recovery-times {
+              type uint32 {
+                range "0..31";
+              }
+              default "10";
+              description
+                "Deadlock recovery times. Within the recovery time, the PFC frame is ignored and the traffic is forwarded or discarded according to the configured recovery type.";
+            }
+          }
+        }
+        container pfc {
+          description
+            "Configure pfc priority.";
+          leaf priority {
+            type string {
+              length "1..31";
+              pattern '([0-5])(:[0-5]){0,5}';
+            }
+            default "3";
+            description
+              "Specify priorities of the pfc. These priorities support response and triggering of pfc backpressure.";
+          }
+        }
+        container deadlocks {
+          description
+            "List of deadlock.";        
+          list deadlock {
+            key "priority";
+            max-elements "6";
+            description
+              "Configure pfc deadlock parameters for the priority.";
+            leaf priority {
+              type leafref {
+                path "/dcb:dcb/dcb:pfc-profiles/dcb:pfc-profile/dcb:pfc/dcb:priority";
+              }
+              description
+                "Specifies the priority for pfc deadlock detection and recovery.";
+            }
+            leaf threshold {
+              type uint16 {
+                range "1..300";
+              }
+              default "30";
+              description
+                "Deadlock turnoff pfc threshold. If the number of deadlocks exceeds this turnoff threshold, the pfc function of the corresponding priority is disabled.";
+            }
+            leaf error-down-threshold {
+              type uint16 {
+                range "1..300";
+              }
+              default "30";
+              status deprecated;
+              description
+                "Deadlock error-down PFC threshold.";
+            }
+          }
+        }                
+      }
+    }//pfc-profiles
+    container ets-profiles {
+      description
+        "List of enhanced transmission selection profiles.";
+      list ets-profile {
+        key "name";
+        max-elements "8";
+        description
+          "Configure enhanced transmission selection profile.";
+        leaf name {
+          type string {
+            length "1..31";
+          }
+          description
+            "Name of enhanced transmission selection profile.";
+        }
+        container prioritys {
+          description
+            "Configure priority scheduling and shaping information.";
+          container schedules {
+            description
+              "List of priority scheduling information.";
+            list schedule {
+              key "priority";
+              max-elements "8";
+              description
+                "Configure priority.";
+              leaf priority {
+                type uint8 {
+                  range "0..7";
+                }
+                description
+                  "Priority.";
+              }
+              leaf mode {
+                type dcb-schedule-mode;
+                must "(../mode='drr' and ../weight) or (../mode!='drr' and not(../weight))";
+                default "pq";
+                description
+                  "Queue schedule mode.";
+              }
+              leaf weight {
+                when "../mode='drr'";
+                type uint8 {
+                  range "1..100";
+                }
+                description
+                  "Weight of drr scheduling strategy.";
+              }
+            }  
+          }            
+          container shapers {
+            description
+              "List of priority shaping information.";
+            list shaper {
+              must "./cir and ./pir";
+              key "priority";
+              max-elements "8";
+              description
+                "Configure priority shaping information.";
+              leaf priority {
+                type uint8 {
+                  range "0..7";
+                }
+                description
+                  "Priority.";
+              }
+              leaf cir {
+                type uint32 {
+                  range "1000..400000000";
+                }
+                units "kbit/s";
+                must "../pir>=../cir";
+                description
+                  "Committed information rate.";
+              }
+              leaf pir {
+                type uint32 {
+                  range "1000..400000000";
+                }
+                units "kbit/s";
+                must "../pir>=../cir";
+                description
+                  "Peak information rate.";
+              }
+              leaf cbs {
+                type uint32 {
+                  range "1..524288";
+                }
+                units "kB";
+                must "not(../pbs) or ../pbs>=../cbs";
+                description
+                  "Committed burst size.";
+              }
+              leaf pbs {
+                type uint32 {
+                  range "1..524288";
+                }
+                units "kB";
+                must "not(../cbs) or ../pbs>=../cbs";
+                description
+                  "Peak burst size.";
+              }
+            }
+          }
+        }                
+        container priority-groups {
+          description
+            "List of priority groups configuration.";
+          list priority-group {
+            key "group-number";
+            max-elements "16";
+            description
+              "Configure priority group.";
+            leaf group-number {
+              type uint8 {
+                range "0..7 | 15";
+              }
+              description
+                "Group number.";
+            }
+            leaf renumber {
+              type uint8 {
+                range "0..7";
+              }
+              description
+                "Configure priority group renumber value.";
+            }
+            leaf-list priority {
+              type uint8 {
+                range "0..7";
+              }
+              max-elements 8;
+              description
+                "Configure the priorities of the current priority group. These priorities share the bandwidth of this priority group.";
+            }
+            container schedule {
+              description
+                "Configure priority group scheduling information.";
+              leaf mode {
+                type dcb-schedule-mode;
+                must "(../mode='pq' and not(../weight) and ../../group-number='15') or (../mode='drr' and ../weight and ../../group-number!='15')";
+                default "pq";
+                description
+                  "Group schedule mode.";
+              }
+              leaf weight {
+                when "../mode='drr'";
+                type uint8 {
+                  range "1..100";
+                }
+                description
+                  "Weight of drr scheduling strategy.";
+              }
+            }
+            container shaper {
+              must "./cir and ./pir";
+              description
+                "Configure priority group shaping information.";
+              leaf cir {
+                type uint32 {
+                  range "1000..400000000";
+                }
+                units "kbit/s";
+                must "../pir>=../cir";
+                description
+                  "Committed information rate.";
+              }
+              leaf pir {
+                type uint32 {
+                  range "1000..400000000";
+                }
+                units "kbit/s";
+                must "../pir>=../cir";
+                description
+                  "Peak information rate.";
+              }
+              leaf cbs {
+                type uint32 {
+                  range "1..524288";
+                }
+                units "kB";
+                must "not(../pbs) or ../pbs>=../cbs";
+                description
+                  "Committed burst size.";
+              }
+              leaf pbs {
+                type uint32 {
+                  range "1..524288";
+                }
+                units "kB";
+                must "not(../cbs) or ../pbs>=../cbs";
+                description
+                  "Peak burst size.";
+              }
+            }
+          }
+        }     
+      }
+    }//ets-profile
+    container app-profiles {
+      description
+        "List of application profiles.";
+      list app-profile {
+        key "name";
+        max-elements "8";
+        description
+          "Configure application profile.";
+        leaf name {
+          type string {
+            length "1..31";
+          }
+          description
+            "Name of application profile.";
+        }
+        container storage-apps {
+          description
+            "List of storage application, include fcoe, fip, iscsi.";
+          list storage-app {
+            key "app-name";
+            description
+              "Configure storage application.";
+            leaf app-name {
+                type dcb-application;
+                description
+                    "Application name.";
+            }
+            leaf priority {
+              type uint8 {
+                range "0..7";
+              }
+              default "3";
+              description
+                "Priority.";
+            }
+          }
+        }
+        container layer2-apps {
+          description
+            "List of layer2 application.";
+          list layer2-app {
+            key "ethtype";
+            description
+              "Configure layer2 application.";
+            leaf ethtype {
+              type pub-type:hex-binary;
+              description
+                "Set ethernet hex value, for example:'0806'.";
+            }
+            leaf priority {
+              type uint8 {
+                range "0..7";
+              }
+              default "3";
+              description
+                "Priority.";
+            }
+          }
+        }
+        container layer3-apps {
+          description
+            "List of ports.";
+          list layer3-app {
+            key "app-name port";
+            description
+              "Configure tcp or udp port value.";
+            leaf app-name {
+                type dcb-layer3-application;
+                description
+                    "Layer3 application name.";
+            }
+            leaf port {
+              type uint16 {
+                range "0..65535";
+              }
+              description
+                "Tcp or Udp port.";
+            }
+            leaf priority {
+              type uint8 {
+                range "0..7";
+              }
+              default "3";
+              description
+                "Priority.";
+            }
+          }
+        }
+      }
+    }//app-profile
+  }//dcb
+  rpc reset-pfc-statistics {
+    description
+      "To clear dcb pfc statistics.";
+    ext:node-ref "/ifm:ifm/ifm:interfaces/ifm:interface/dcb:dcb/dcb:pfc/dcb:statisticss";
+    input {
+      leaf interface-name {
+        type leafref {
+            path "/ifm:ifm/ifm:interfaces/ifm:interface/ifm:name";
+        }
+        mandatory true;
+        description
+          "Interface name.";
+      }
+    }
+  }//rpc reset-pfc-statistics
+  rpc reset-fail-reasons {
+    description
+      "To clear dcb failed reasons.";
+    ext:node-ref "/ifm:ifm/ifm:interfaces/ifm:interface/dcb:dcb/dcb:failed-reasons";
+    input {
+      leaf interface-name {
+        type leafref {
+            path "/ifm:ifm/ifm:interfaces/ifm:interface/ifm:name";
+        }
+        mandatory true;
+        description
+          "Interface name.";
+      }
+    }
+  }//rpc reset-fail-records
+  augment "/devm:devm/devm:mpu-boards/devm:mpu-board" {
+    description
+      "Adds dcb configuration to devm model.";
+    container dcb {
+      description
+        "Configure dcb configuration to devm model.";
+      container headroom-pool {
+        description
+          "Configure headroom pool size.";
+        leaf pool {
+          type uint32 {
+            range "1..30720";
+          }
+          units "kB";
+          description
+            "Headroom pool size. When the total headroom buffer usage of all queues exceeds the value of this parameter, traffic is discarded.";
+        }
+      }
+      container deadlock-recovery-behavior {
+        description
+          "Configure the recovery behavior during the deadlock recovery period.";
+        leaf behavior {
+          type dcb-recovery-type;
+          default "forwarding";
+          description
+            "Behavior type. Set the device to forward or discard traffic during the deadlock recovery period.";
+        }
+      }
+      container pfc-mapping-type {
+        description
+          "Configure the pfc backpressure mapping type.";
+        leaf type {
+          type dcb-mapping-type;
+          default "8021p";
+          description
+            "Set whether the pfc backpressure is performed based on the DSCP or 8021p priority.";
+        }
+      }
+    }
+  }
+  augment "/devm:devm/devm:lpu-boards/devm:lpu-board" {
+    description
+      "Adds dcb configuration to devm model.";
+    container dcb {
+      description
+        "Configure dcb configuration to devm model.";
+      container headroom-pool {
+        description
+          "Configure headroom pool size.";
+        leaf pool {
+          type uint32 {
+            range "1..2097152";
+          }
+          units "kB";
+          description
+            "Headroom pool size. When the total headroom buffer usage of all queues exceeds the value of this parameter, traffic is discarded.";
+        }
+      }
+      container deadlock-recovery-behavior {
+        description
+          "Configure the recovery behavior during the deadlock recovery period.";
+        leaf behavior {
+          type dcb-recovery-type;
+          default "forwarding";
+          description
+            "Behavior type. Set the device to forward or discard traffic during the deadlock recovery period.";
+        }
+      }
+      container pfc-mapping-type {
+        description
+          "Configure the pfc backpressure mapping type.";
+        leaf type {
+          type dcb-mapping-type;
+          default "8021p";
+          description
+            "Set whether the pfc backpressure is performed based on the DSCP or 8021p priority.";
+        }
+      }
+    }
+  }
+  augment "/ifm:ifm/ifm:interfaces/ifm:interface" {
+    description
+      "Adds dcb configuration to ifm interface model.";
+    container dcb {
+      description
+        "Configure dcb configuration to ifm interface model.";
+      container pfc {
+        description
+          "Configure PFC on the interface.";
+        container pfc-enable {
+          presence "Enable pfc";
+          description "Configure PFC-enable on the interface.
+                      After PFC is disabled globally, PFC cannot be enabled on new interfaces.
+                      PFC and flow control or Antilocking PFC cannot be both configured on an interface.";
+          leaf profile-name {
+            type leafref {
+              path "/dcb:dcb/dcb:pfc-profiles/dcb:pfc-profile/dcb:name";
+            }
+            mandatory true;
+            description
+              "Name of PFC profile.";
+          }
+          leaf mode {
+            type pfc-mode;
+            default "manual";
+            description
+              "PFC mode, manual or auto, The default mode is manual.";
+          }
+        }
+        leaf profile-name {
+          type leafref {
+            path "/dcb:dcb/dcb:pfc-profiles/dcb:pfc-profile/dcb:name";
+          }
+          status deprecated;
+          description
+            "Name of PFC profile.
+             This node is not recommended. Advised to use the leaf '../dcb:pfc-enable/dcb:profile-name'.";
+        }
+        leaf mode {
+          type pfc-mode;
+          default "manual";
+          status deprecated;
+          description
+            "PFC mode, manual or auto.
+             This node is not recommended. Advised to use the leaf '../dcb:pfc-enable/dcb:mode'.";
+        }
+        container thresholds {
+          description
+            "List of the pfc threshold on the interface.";
+          list threshold {
+            key "priority";
+            description
+              "Configure the pfc threshold.";
+            leaf priority {
+              type uint8 {
+                range "0..5";
+              }
+              description
+                "Priority.";
+            }
+            leaf guaranteed {
+              type uint32 {
+                range "640..25600";
+              }
+              units "B";
+              description
+                "Guaranteed buffer.";
+            }
+            leaf hdrm {
+              type uint32 {
+                range "1..2097152";
+              }
+              units "kB";
+              description
+                "Headroom buffer.";
+            }
+            choice on-off-modes {
+              description
+                "Specify xon/xoff parameters.";
+              case static {
+                description
+                  "Specify xon/xoff parameters choice case as static value.";
+                leaf xon {
+                  type uint32 {
+                    range "1..6144";
+                  }
+                  units "kB";
+                  must "not(../xoff) or ../xoff>=../xon";
+                  description
+                    "Specify xon value. When the buffer usage is less than the value of this parameter, the PFC backpressure is canceled.";
+                }
+                leaf xoff {
+                  type uint32 {
+                    range "1..6144";
+                  }
+                  units "kB";
+                  must "not(../xon) or ../xoff>=../xon";
+                  description
+                    "Specify xoff value. When the buffer usage is greater than the value of this parameter, PFC backpressure is triggered.";
+                }
+              }        
+              case dynamic {
+                description
+                  "Specify xon/xoff parameters choice case as dynamic value.";
+                leaf xon-alpha {
+                  type uint32 {
+                    range "0..12";
+                  }
+                  must "not(../xoff-alpha) or ../xoff-alpha>=../xon-alpha";
+                  description
+                    "Specify xon alpha value. When the buffer usage is less than the value of this parameter, the PFC backpressure is canceled.";
+                }
+                leaf xoff-alpha {
+                  type uint32 {
+                    range "0..12";
+                  }
+                  must "not(../xon-alpha) or ../xoff-alpha>=../xon-alpha";
+                  description
+                    "Specify xoff alpha value. When the buffer usage is greater than the value of this parameter, PFC backpressure is triggered.";
+                }
+              }                        
+            }
+          }
+        }
+        container statisticss {
+          config false;
+          description
+            "List of pfc statisticss.";
+          list statistics {
+            key "priority";
+            description
+              "Pfc statistics.";
+            leaf priority {
+              type uint8 {
+                range "0..5";
+              }
+              description
+                "Priority.";
+            }
+            leaf received-pause-pkts {
+              type uint64;
+              units "packet";
+              description
+                "Received pause packets.";
+            }
+            leaf transmitted-pause-pkts {
+              type uint64;
+              units "packet";
+              description
+                "Transmitted pause packets.";
+            }
+            leaf received-rate {
+              type uint32;
+              units "pps";
+              description
+                "Received rate.";
+            }
+            leaf transmitted-rate {
+              type uint32;
+              units "pps";
+              description
+                "Transmitted rate.";
+            }
+            leaf deadlock-detect-count {
+              type uint64;
+              description
+                "Deadlock detect count.";
+            }
+            leaf deadlock-recovery-count {
+              type uint64;
+              description
+                "Deadlock recovery count.";
+            }
+          }
+        }
+        container pfc-parameters {
+           config false;
+           description
+             "List of PFC parameters.";
+           list pfc-parameter {
+             key "priority";
+             description
+               "PFC parameter statistics.";
+             leaf priority {
+               type uint8 {
+                 range "0..7";
+               }
+               description
+                 "Priority.";
+             }
+             leaf guaranteed {
+               type uint32;
+               units "B";
+               description
+                 "Guaranteed buffer threshold.";
+             }
+             leaf hdrm {
+               type uint32;
+               units "kB";
+               description
+                 "Headroom buffer threshold.";
+             }
+             leaf xoff {
+               type uint32;
+               units "kB";
+               description
+                 "Static value. Threshold for triggering PFC frames.";
+             }
+             leaf xoff-alpha {
+               type uint32;
+               description
+                 "Dynamic value. Threshold for triggering PFC frames.";
+             }
+             leaf xon-offset {
+               type uint32;
+               units "kB";
+               description
+                 "Offset between the Xon value and the Xoff value.";
+             }
+             leaf xon-lowest {
+               type uint32;
+               units "B";
+               description
+                 "Xon protection value.";
+             }
+             leaf xon {
+               type uint32;
+               units "kB";
+               description
+                 "Static value. Threshold for stopping PFC frames.";
+             }
+             leaf xon-alpha {
+               type uint32;
+               description
+                 "Dynamic value. Threshold for stopping PFC frames.";
+             }
+           }
+         }
+      }
+      container ets {
+        description
+          "Configure the dcb ets.";
+        leaf profile-name {
+          type leafref {
+            path "/dcb:dcb/dcb:ets-profiles/dcb:ets-profile/dcb:name";
+          }
+          description
+            "Name of ets profile.";
+        }
+      }
+      container app {
+        description
+          "Configure the dcb application.";
+        leaf profile-name {
+          type leafref {
+            path "/dcb:dcb/dcb:app-profiles/dcb:app-profile/dcb:name";
+          }
+          description
+            "Name of application profile.";
+        }
+        leaf enable {
+          type boolean;
+          default "false";          
+          description
+            "Enable/disable DCBX packets to carry application TLVs.";
+        }
+      }
+      container version {
+        description
+          "Configure the dcb version.";
+        leaf version {
+          type dcb-version-type;
+          default "ieee";
+          description
+            "Set DCB version, used for dcbx.";
+        }
+      }
+      container negotiation-status {
+        config false;
+        description
+          "Operational state of dcb negotiation state.";
+        leaf pfc-profile-name {
+          type leafref {
+            path "/dcb:dcb/dcb:pfc-profiles/dcb:pfc-profile/dcb:name";
+          }
+          description
+          "Pfc profile name.";
+        }
+        leaf pfc-status {
+          type dcb-status;
+          description
+            "Pfc negotiation status.";
+        }
+        leaf ets-profile-name {
+          type leafref {
+            path "/dcb:dcb/dcb:ets-profiles/dcb:ets-profile/dcb:name";
+          }
+          description
+            "Ets profile name.";
+        }
+        leaf ets-status {
+          type dcb-status;
+          description
+            "Ets negotiation status.";
+        }
+        leaf app-profile-name {
+          type leafref {
+            path "/dcb:dcb/dcb:app-profiles/dcb:app-profile/dcb:name";
+          }
+          description
+            "Application profile name.";
+        }
+      }
+      container failed-reasons {
+        config false;
+        description
+          "List of dcb failed reasons.";
+        list failed-reason {
+          key "reason-index";
+          description
+            "Operational data of dcb failed reason.";
+          leaf reason-index {
+            type uint8 {
+              range "0..4";
+            }
+            description
+              "Reason index.";
+          }
+          leaf reason {
+            type string {
+              length "1..63";
+            }
+            description
+              "Failed reason.";
+          }
+        }
+      }
+      container local-peer-record {
+        config false;
+        description
+          "Operational data of dcb local and peer record.";
+        container pfc-record {
+          description
+            "Operational data of pfc local and peer record.";
+          leaf local-pfc {
+            type string {
+              length "1..23";
+            }
+            description
+              "Local pfc.";
+          }
+          leaf remote-pfc {
+            type string {
+              length "1..23";
+            }
+            description
+              "Remote pfc.";
+          }
+        }
+        container ets-records {
+          description
+            "List of dcb ets local and peer records.";
+          list ets-record {
+            key "priority-group-number";
+            description
+              "Operational data of dcb ets local and peer record.";
+            leaf priority-group-number {
+              type uint8 {
+                range "0..7 | 15";
+              }
+              description
+                "Priority group number.";
+            }
+            leaf local-priority {
+              type string {
+                length "1..23";
+              }
+              description
+                "local priority-group priority list.";
+            }
+            leaf remote-priority {
+              type string {
+                length "1..23";
+              }
+              description
+                "remote priority-group priority list.";
+            }
+            leaf local-weight {
+              type uint8 {
+                range "1..100";
+              }
+              description
+                "Local priority-group weight of drr scheduling strategy.";
+            }
+            leaf remote-weight {
+              type uint8 {
+                range "1..100";
+              }
+              description
+                "Remote priority-group weight of drr scheduling strategy.";
+            }
+          }
+        }
+        container app-records {
+          description
+            "List of dcb application local and peer records.";
+          list app-record {
+            key "app-name";
+            description
+              "Operational data of DCB app local and peer record.";
+            leaf app-name {
+             type string {
+                length "1..31";
+              }
+              description
+                "Application name.";
+            }
+            leaf local-priority {
+              type uint8 {
+                range "0..7";
+              }
+              description
+                "Local priority of application.";
+            }
+            leaf remote-priority {
+              type uint8 {
+                range "0..7";
+              }
+              description
+                "Remote priority of application.";
+            }
+          }
+        }          
+      }
+    }//augment ifm:interface/ifm:dcb
+  }//augment ifm:interface
+}//huawei-dcb

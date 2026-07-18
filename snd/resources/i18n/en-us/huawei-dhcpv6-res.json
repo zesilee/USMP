@@ -1,0 +1,152 @@
+{
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-client-if": {
+    "name": "DHCPv6 client interface"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-client-if/enable": {
+    "name": "Enable DHCPv6 client"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-client-if/client-type": {
+    "name": "DHCPv6 client type"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-client-if/client-type/inform": {
+    "name": "DHCPv6 client only request information"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-client-if/client-type/inform/inform-request": {
+    "name": "Enable/disable inform request"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-client-if/client-type/address-and-prefix": {
+    "name": "DHCPv6 client request IPv6 address or IPv6 prefix"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-client-if/client-type/address-and-prefix/address-request": {
+    "name": "Enable/disable IPv6 address request"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-client-if/client-type/address-and-prefix/hint-address": {
+    "name": "Hint address of IPv6 address request"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-client-if/client-type/address-and-prefix/prefix-request": {
+    "name": "Enable/disable IPv6 address prefix request"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-client-if/client-type/address-and-prefix/prefix-name": {
+    "name": "Prefix name"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-client-if/client-type/address-and-prefix/hint-prefix": {
+    "name": "Hint prefix of IPv6 address prefix request"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-client-if/client-type/address-and-prefix/rapid-commit": {
+    "name": "Enable/disable rapid commit flag"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-client-if/client-type/address-and-prefix/unicast": {
+    "name": "Enable/disable unicast flag"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-client-if/client-type/address-and-prefix/union-mode": {
+    "name": "Flag for requesting both IPv6 address and prefix"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-server-if": {
+    "name": "Configure DHCPv6 server interface"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-server-if/pool-name": {
+    "name": "Pool name"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-server-if/is-allow-hint": {
+    "name": "Allow expect addresses"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-server-if/preference": {
+    "name": "The server priority"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-server-if/is-rapid": {
+    "name": "Allow rapid commit"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-server-if/is-unicast": {
+    "name": "Unicast"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-if": {
+    "name": "DHCPv6 attributes on an interface"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-if/is-enable": {
+    "name": "Enable DHCPv6 relay on an interface"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-if/option": {
+    "name": "DHCPv6 option attributes"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-if/option/insert-interface-id": {
+    "name": "Enable to insert the interface-id option"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-if/option/insert-remote-id": {
+    "name": "Enable to insert the remote-id option"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-if/option/insert-option79": {
+    "name": "Enable to insert the Option79 field"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-if/option/insert-vss": {
+    "name": "Enable to insert the OPTION-VSS flag"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-if/option/insert-client-lla": {
+    "name": "Enable to insert client link-layer address"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-relay-attribute": {
+    "name": "DHCPv6 relay attributes on an interface"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-relay-attribute/source-address": {
+    "name": "Source address"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-relay-attribute/link-address": {
+    "name": "Link address"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-relay-attribute/strict-check": {
+    "name": "Enable strict check on interfaces"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-relay-attribute/server-group-name": {
+    "name": "DHCPv6 relay server group name"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-relay-attribute/source-interface": {
+    "name": "Interface as the source IPv6 address"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-relay-attribute/pd-route": {
+    "name": "Enable to forward DHCPv6 Relay PD Routes"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-relay-attribute/destination-addresses": {
+    "name": "List of DHCPv6 relay destination addresses"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-relay-attribute/destination-addresses/destination-address": {
+    "name": "DHCPv6 relay destination address"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-relay-attribute/destination-addresses/destination-address/ipv6-address": {
+    "name": "Destination address"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-relay-attribute/destination-addresses/destination-address/net-type": {
+    "name": "Choice of vpn or public net"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-relay-attribute/destination-addresses/destination-address/net-type/vpn-instance": {
+    "name": "Case vpn instance"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-relay-attribute/destination-addresses/destination-address/net-type/vpn-instance/vpn-instance": {
+    "name": "VPN instance name"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-relay-attribute/destination-addresses/destination-address/net-type/public-net": {
+    "name": "Case public net"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-relay-attribute/destination-addresses/destination-address/net-type/public-net/public-net": {
+    "name": "Public VPN instance"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-relay-attribute/destination-ifs": {
+    "name": "List of DHCPv6 relay destination interfaces"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-relay-attribute/destination-ifs/destination-if": {
+    "name": "Configure DHCPv6 relay destination interface"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-relay-attribute/destination-ifs/destination-if/if-name": {
+    "name": "Destination interface name"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-relay-attribute/destination-vpn-addresses": {
+    "name": "List of DHCPv6 relay server attributes"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-relay-attribute/destination-vpn-addresses/destination-vpn-address": {
+    "name": "DHCPv6 Relay VPN"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-relay-attribute/destination-vpn-addresses/destination-vpn-address/address": {
+    "name": "DHCPv6 relay destination address"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-dhcpv6:dhcpv6-relay-attribute/destination-vpn-addresses/destination-vpn-address/vpn-name": {
+    "name": "DHCPv6 relay VPN name"
+  }
+}

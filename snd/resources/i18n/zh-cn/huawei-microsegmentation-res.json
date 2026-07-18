@@ -1,0 +1,179 @@
+{
+  "/huawei-microsegmentation:m-seg": {
+    "name": "微分段"
+  },
+  "/huawei-microsegmentation:microsegmentation/global": {
+    "name": "微分段全局配置"
+  },
+  "/huawei-microsegmentation:microsegmentation/global/enable": {
+    "name": "微分段全局使能"
+  },
+  "/huawei-microsegmentation:microsegmentation/global/unknown-epg-action": {
+    "name": "未知分组访问默认行为"
+  },
+  "/huawei-microsegmentation:microsegmentation/global/default-epg-action": {
+    "name": "EPG分组成员互访默认行为"
+  },
+  "/huawei-microsegmentation:microsegmentation/global/same-epg-action": {
+    "name": "EPG组内互访默认行为"
+  },
+  "/huawei-microsegmentation:microsegmentation/global/epg-logging": {
+    "name": "EPG全局记录日志功能"
+  },
+  "/huawei-microsegmentation:microsegmentation/global/policy-statistics-enable": {
+    "name": "微分段全局策略统计使能"
+  },
+  "/huawei-microsegmentation:microsegmentation/endpoint-groups": {
+    "name": "微分段分组列表"
+  },
+  "/huawei-microsegmentation:microsegmentation/endpoint-groups/endpoint-group": {
+    "name": "微分段分组"
+  },
+  "/huawei-microsegmentation:microsegmentation/endpoint-groups/endpoint-group/segment-id": {
+    "name": "微分段分组ID"
+  },
+  "/huawei-microsegmentation:microsegmentation/endpoint-groups/endpoint-group/segment-name": {
+    "name": "微分段分组名称"
+  },
+  "/huawei-microsegmentation:microsegmentation/endpoint-groups/endpoint-group/description": {
+    "name": "微分段分组描述信息"
+  },
+  "/huawei-microsegmentation:microsegmentation/endpoint-groups/endpoint-group/intra-epg-behavior": {
+    "name": "基于分组的微分段组内行为"
+  },
+  "/huawei-microsegmentation:microsegmentation/endpoint-groups/endpoint-group/statistics-enable": {
+    "name": "分组统计使能"
+  },
+  "/huawei-microsegmentation:microsegmentation/endpoint-groups/endpoint-group/ip-members": {
+    "name": "IPv4成员列表"
+  },
+  "/huawei-microsegmentation:microsegmentation/endpoint-groups/endpoint-group/ip-members/ip-member": {
+    "name": "IPv4分组成员"
+  },
+  "/huawei-microsegmentation:microsegmentation/endpoint-groups/endpoint-group/ip-members/ip-member/ip-address": {
+    "name": "IPv4地址"
+  },
+  "/huawei-microsegmentation:microsegmentation/endpoint-groups/endpoint-group/ip-members/ip-member/prefix-len": {
+    "name": "前缀长度"
+  },
+  "/huawei-microsegmentation:microsegmentation/endpoint-groups/endpoint-group/ip-members/ip-member/vpn-name": {
+    "name": "VPN实例名称"
+  },
+  "/huawei-microsegmentation:microsegmentation/endpoint-groups/endpoint-group/ipv6-members": {
+    "name": "IPv6成员列表"
+  },
+  "/huawei-microsegmentation:microsegmentation/endpoint-groups/endpoint-group/ipv6-members/ipv6-member": {
+    "name": "IPv6分组成员"
+  },
+  "/huawei-microsegmentation:microsegmentation/endpoint-groups/endpoint-group/ipv6-members/ipv6-member/ipv6-address": {
+    "name": "IPv6地址"
+  },
+  "/huawei-microsegmentation:microsegmentation/endpoint-groups/endpoint-group/ipv6-members/ipv6-member/prefix-len": {
+    "name": "前缀长度"
+  },
+  "/huawei-microsegmentation:microsegmentation/endpoint-groups/endpoint-group/ipv6-members/ipv6-member/vpn-name": {
+    "name": "VPN实例名称"
+  },
+  "/huawei-microsegmentation:microsegmentation/endpoint-groups/endpoint-group/any-member": {
+    "name": "任意成员列表"
+  },
+  "/huawei-microsegmentation:microsegmentation/endpoint-groups/endpoint-group/any-member/ip-any": {
+    "name": "任意ipv4成员列表"
+  },
+  "/huawei-microsegmentation:microsegmentation/endpoint-groups/endpoint-group/any-member/ipv6-any": {
+    "name": "任意ipv6成员列表"
+  },
+  "/huawei-microsegmentation:microsegmentation/segment-classifiers": {
+    "name": "分类器列表"
+  },
+  "/huawei-microsegmentation:microsegmentation/segment-classifiers/segment-classifier": {
+    "name": "分类器"
+  },
+  "/huawei-microsegmentation:microsegmentation/segment-classifiers/segment-classifier/classifier-name": {
+    "name": "分类器名称"
+  },
+  "/huawei-microsegmentation:microsegmentation/segment-classifiers/segment-classifier/rules": {
+    "name": "分类器规则列表"
+  },
+  "/huawei-microsegmentation:microsegmentation/segment-classifiers/segment-classifier/rules/rule": {
+    "name": "分类器规则"
+  },
+  "/huawei-microsegmentation:microsegmentation/segment-classifiers/segment-classifier/rules/rule/priority": {
+    "name": "规则优先级"
+  },
+  "/huawei-microsegmentation:microsegmentation/segment-classifiers/segment-classifier/rules/rule/source-segment-id": {
+    "name": "源分组ID"
+  },
+  "/huawei-microsegmentation:microsegmentation/segment-classifiers/segment-classifier/rules/rule/destination-segment-id": {
+    "name": "目的分组ID"
+  },
+  "/huawei-microsegmentation:microsegmentation/segment-classifiers/segment-classifier/rules/rule/action": {
+    "name": "规则动作"
+  },
+  "/huawei-microsegmentation:microsegmentation/segment-classifiers/segment-classifier/rules/rule/protocol": {
+    "name": "协议号"
+  },
+  "/huawei-microsegmentation:microsegmentation/segment-classifiers/segment-classifier/rules/rule/source-port-begin": {
+    "name": "源端口号范围起点"
+  },
+  "/huawei-microsegmentation:microsegmentation/segment-classifiers/segment-classifier/rules/rule/source-port-end": {
+    "name": "源端口号范围终点"
+  },
+  "/huawei-microsegmentation:microsegmentation/segment-classifiers/segment-classifier/rules/rule/destination-port-begin": {
+    "name": "目的端口号范围起点"
+  },
+  "/huawei-microsegmentation:microsegmentation/segment-classifiers/segment-classifier/rules/rule/destination-port-end": {
+    "name": "目的端口号范围终点"
+  },
+  "/huawei-microsegmentation:microsegmentation/segment-classifiers/segment-classifier/rules/rule/logging-enable": {
+    "name": "Rule策略规则记录日志功能"
+  },
+  "/huawei-microsegmentation:microsegmentation/segment-classifiers/segment-classifier/rules/rule/statistics-enable": {
+    "name": "Rule策略规则统计使能"
+  },
+  "/huawei-microsegmentation:microsegmentation/segment-behaviors": {
+    "name": "微分段行为模板列表"
+  },
+  "/huawei-microsegmentation:microsegmentation/segment-behaviors/segment-behavior": {
+    "name": "微分段行为模板"
+  },
+  "/huawei-microsegmentation:microsegmentation/segment-behaviors/segment-behavior/behavior-name": {
+    "name": "行为名称"
+  },
+  "/huawei-microsegmentation:microsegmentation/segment-behaviors/segment-behavior/statistics-enable": {
+    "name": "微分段策略统计使能"
+  },
+  "/huawei-microsegmentation:microsegmentation/segment-policys": {
+    "name": "微分段分组策略列表"
+  },
+  "/huawei-microsegmentation:microsegmentation/segment-policys/segment-policy": {
+    "name": "微分段分组策略"
+  },
+  "/huawei-microsegmentation:microsegmentation/segment-policys/segment-policy/policy-name": {
+    "name": "策略名称"
+  },
+  "/huawei-microsegmentation:microsegmentation/segment-policys/segment-policy/classifier-behavior-combinations": {
+    "name": "微分段分类器和行为模板组合列表"
+  },
+  "/huawei-microsegmentation:microsegmentation/segment-policys/segment-policy/classifier-behavior-combinations/classifier-behavior-combination": {
+    "name": "微分段分类器和行为模板组合"
+  },
+  "/huawei-microsegmentation:microsegmentation/segment-policys/segment-policy/classifier-behavior-combinations/classifier-behavior-combination/classifier-name": {
+    "name": "分类器名称"
+  },
+  "/huawei-microsegmentation:microsegmentation/segment-policys/segment-policy/classifier-behavior-combinations/classifier-behavior-combination/behavior-name": {
+    "name": "行为模板名称"
+  },
+  "/huawei-microsegmentation:microsegmentation/segment-policys/segment-policy/classifier-behavior-combinations/classifier-behavior-combination/precedence": {
+    "name": "优先级"
+  },
+  "/huawei-microsegmentation:microsegmentation/apply-global-policys": {
+    "name": "全局应用微分段策略列表"
+  },
+  "/huawei-microsegmentation:microsegmentation/apply-global-policys/apply-global-policy": {
+    "name": "全局应用微分段分组策略"
+  },
+  "/huawei-microsegmentation:microsegmentation/apply-global-policys/apply-global-policy/policy-name": {
+    "name": "微分段分组策略名称"
+  }
+}

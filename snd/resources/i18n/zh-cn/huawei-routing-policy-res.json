@@ -1,0 +1,1265 @@
+{
+  "/huawei-routing-policy:rtp": {
+    "name": "路由策略"
+  },
+  "/huawei-routing-policy:routing-policy/ext-community-soo-filters": {
+    "name": "扩展团体属性SoO过滤器列表"
+  },
+  "/huawei-routing-policy:routing-policy/ext-community-soo-filters/ext-community-soo-filter": {
+    "name": "扩展团体属性SoO过滤器"
+  },
+  "/huawei-routing-policy:routing-policy/ext-community-soo-filters/ext-community-soo-filter/name": {
+    "name": "过滤器名"
+  },
+  "/huawei-routing-policy:routing-policy/ext-community-soo-filters/ext-community-soo-filter/filter-type": {
+    "name": "过滤器类型"
+  },
+  "/huawei-routing-policy:routing-policy/ext-community-soo-filters/ext-community-soo-filter/basic-nodes": {
+    "name": "基本扩展团体SoO过滤器节点列表"
+  },
+  "/huawei-routing-policy:routing-policy/ext-community-soo-filters/ext-community-soo-filter/basic-nodes/basic-node": {
+    "name": "基本扩展团体SoO过滤器节点"
+  },
+  "/huawei-routing-policy:routing-policy/ext-community-soo-filters/ext-community-soo-filter/basic-nodes/basic-node/sequence": {
+    "name": "节点序列号"
+  },
+  "/huawei-routing-policy:routing-policy/ext-community-soo-filters/ext-community-soo-filter/basic-nodes/basic-node/match-mode": {
+    "name": "匹配模式"
+  },
+  "/huawei-routing-policy:routing-policy/ext-community-soo-filters/ext-community-soo-filter/basic-nodes/basic-node/community-member": {
+    "name": "属性值"
+  },
+  "/huawei-routing-policy:routing-policy/ext-community-soo-filters/ext-community-soo-filter/advanced-nodes": {
+    "name": "高级扩展团体SoO过滤器节点列表"
+  },
+  "/huawei-routing-policy:routing-policy/ext-community-soo-filters/ext-community-soo-filter/advanced-nodes/advanced-node": {
+    "name": "高级扩展团体SoO过滤器节点"
+  },
+  "/huawei-routing-policy:routing-policy/ext-community-soo-filters/ext-community-soo-filter/advanced-nodes/advanced-node/sequence": {
+    "name": "节点序列号"
+  },
+  "/huawei-routing-policy:routing-policy/ext-community-soo-filters/ext-community-soo-filter/advanced-nodes/advanced-node/match-mode": {
+    "name": "匹配模式"
+  },
+  "/huawei-routing-policy:routing-policy/ext-community-soo-filters/ext-community-soo-filter/advanced-nodes/advanced-node/regular": {
+    "name": "正则表达式"
+  },
+  "/huawei-routing-policy:routing-policy/community-filters": {
+    "name": "团体属性过滤器列表"
+  },
+  "/huawei-routing-policy:routing-policy/community-filters/community-filter": {
+    "name": "团体属性过滤器"
+  },
+  "/huawei-routing-policy:routing-policy/community-filters/community-filter/name": {
+    "name": "团体过滤器标识"
+  },
+  "/huawei-routing-policy:routing-policy/community-filters/community-filter/filter-type": {
+    "name": "团体过滤器类型"
+  },
+  "/huawei-routing-policy:routing-policy/community-filters/community-filter/basic-nodes": {
+    "name": "基本团体过滤器节点列表"
+  },
+  "/huawei-routing-policy:routing-policy/community-filters/community-filter/basic-nodes/basic-node": {
+    "name": "基本团体过滤器节点"
+  },
+  "/huawei-routing-policy:routing-policy/community-filters/community-filter/basic-nodes/basic-node/sequence": {
+    "name": "节点序列号"
+  },
+  "/huawei-routing-policy:routing-policy/community-filters/community-filter/basic-nodes/basic-node/match-mode": {
+    "name": "匹配模式"
+  },
+  "/huawei-routing-policy:routing-policy/community-filters/community-filter/basic-nodes/basic-node/community-members": {
+    "name": "团体属性列表"
+  },
+  "/huawei-routing-policy:routing-policy/community-filters/community-filter/basic-nodes/basic-node/community-members/community-member": {
+    "name": "团体属性"
+  },
+  "/huawei-routing-policy:routing-policy/community-filters/community-filter/basic-nodes/basic-node/community-members/community-member/value": {
+    "name": "属性值"
+  },
+  "/huawei-routing-policy:routing-policy/community-filters/community-filter/basic-nodes/basic-node/community-members/community-member/internet-strict-match": {
+    "name": "严格匹配internet"
+  },
+  "/huawei-routing-policy:routing-policy/community-filters/community-filter/advanced-nodes": {
+    "name": "高级团体过滤器节点列表"
+  },
+  "/huawei-routing-policy:routing-policy/community-filters/community-filter/advanced-nodes/advanced-node": {
+    "name": "高级团体过滤器节点"
+  },
+  "/huawei-routing-policy:routing-policy/community-filters/community-filter/advanced-nodes/advanced-node/sequence": {
+    "name": "节点序列号"
+  },
+  "/huawei-routing-policy:routing-policy/community-filters/community-filter/advanced-nodes/advanced-node/match-mode": {
+    "name": "匹配模式"
+  },
+  "/huawei-routing-policy:routing-policy/community-filters/community-filter/advanced-nodes/advanced-node/regular": {
+    "name": "正则表达式"
+  },
+  "/huawei-routing-policy:routing-policy/ext-community-filters": {
+    "name": "扩展团体属性过滤器列表"
+  },
+  "/huawei-routing-policy:routing-policy/ext-community-filters/ext-community-filter": {
+    "name": "扩展团体属性过滤器"
+  },
+  "/huawei-routing-policy:routing-policy/ext-community-filters/ext-community-filter/name": {
+    "name": "扩展团体过滤器标识"
+  },
+  "/huawei-routing-policy:routing-policy/ext-community-filters/ext-community-filter/filter-type": {
+    "name": "扩展团体过滤器类型"
+  },
+  "/huawei-routing-policy:routing-policy/ext-community-filters/ext-community-filter/basic-nodes": {
+    "name": "扩展团体属性节点列表"
+  },
+  "/huawei-routing-policy:routing-policy/ext-community-filters/ext-community-filter/basic-nodes/basic-node": {
+    "name": "扩展团体节点"
+  },
+  "/huawei-routing-policy:routing-policy/ext-community-filters/ext-community-filter/basic-nodes/basic-node/sequence": {
+    "name": "节点序列号"
+  },
+  "/huawei-routing-policy:routing-policy/ext-community-filters/ext-community-filter/basic-nodes/basic-node/match-mode": {
+    "name": "匹配模式"
+  },
+  "/huawei-routing-policy:routing-policy/ext-community-filters/ext-community-filter/basic-nodes/basic-node/ext-community-members": {
+    "name": "扩展团体节点列表"
+  },
+  "/huawei-routing-policy:routing-policy/ext-community-filters/ext-community-filter/basic-nodes/basic-node/ext-community-members/ext-community-member": {
+    "name": "扩展团体节点"
+  },
+  "/huawei-routing-policy:routing-policy/ext-community-filters/ext-community-filter/basic-nodes/basic-node/ext-community-members/ext-community-member/value": {
+    "name": "属性值"
+  },
+  "/huawei-routing-policy:routing-policy/ext-community-filters/ext-community-filter/advanced-nodes": {
+    "name": "高级扩展团体过滤器节点列表"
+  },
+  "/huawei-routing-policy:routing-policy/ext-community-filters/ext-community-filter/advanced-nodes/advanced-node": {
+    "name": "高级扩展团体过滤器节点"
+  },
+  "/huawei-routing-policy:routing-policy/ext-community-filters/ext-community-filter/advanced-nodes/advanced-node/sequence": {
+    "name": "节点序列号"
+  },
+  "/huawei-routing-policy:routing-policy/ext-community-filters/ext-community-filter/advanced-nodes/advanced-node/match-mode": {
+    "name": "匹配模式"
+  },
+  "/huawei-routing-policy:routing-policy/ext-community-filters/ext-community-filter/advanced-nodes/advanced-node/regular": {
+    "name": "正则表达式"
+  },
+  "/huawei-routing-policy:routing-policy/ipv4-prefix-filters": {
+    "name": "IPv4前缀过滤器列表"
+  },
+  "/huawei-routing-policy:routing-policy/ipv4-prefix-filters/ipv4-prefix-filter": {
+    "name": "IPv4前缀过滤器"
+  },
+  "/huawei-routing-policy:routing-policy/ipv4-prefix-filters/ipv4-prefix-filter/name": {
+    "name": "过滤器名"
+  },
+  "/huawei-routing-policy:routing-policy/ipv4-prefix-filters/ipv4-prefix-filter/description": {
+    "name": "过滤器描述"
+  },
+  "/huawei-routing-policy:routing-policy/ipv4-prefix-filters/ipv4-prefix-filter/permit-count": {
+    "name": "通过匹配的路由数"
+  },
+  "/huawei-routing-policy:routing-policy/ipv4-prefix-filters/ipv4-prefix-filter/deny-count": {
+    "name": "没有通过匹配的路由数"
+  },
+  "/huawei-routing-policy:routing-policy/ipv4-prefix-filters/ipv4-prefix-filter/nodes": {
+    "name": "IPv4前缀过滤器节点列表"
+  },
+  "/huawei-routing-policy:routing-policy/ipv4-prefix-filters/ipv4-prefix-filter/nodes/node": {
+    "name": "IPv4前缀过滤器节点"
+  },
+  "/huawei-routing-policy:routing-policy/ipv4-prefix-filters/ipv4-prefix-filter/nodes/node/sequence": {
+    "name": "节点序列号"
+  },
+  "/huawei-routing-policy:routing-policy/ipv4-prefix-filters/ipv4-prefix-filter/nodes/node/match-mode": {
+    "name": "匹配模式"
+  },
+  "/huawei-routing-policy:routing-policy/ipv4-prefix-filters/ipv4-prefix-filter/nodes/node/ip-address": {
+    "name": "IPv4地址"
+  },
+  "/huawei-routing-policy:routing-policy/ipv4-prefix-filters/ipv4-prefix-filter/nodes/node/masklength": {
+    "name": "掩码长度"
+  },
+  "/huawei-routing-policy:routing-policy/ipv4-prefix-filters/ipv4-prefix-filter/nodes/node/match-network": {
+    "name": "匹配网段地址"
+  },
+  "/huawei-routing-policy:routing-policy/ipv4-prefix-filters/ipv4-prefix-filter/nodes/node/masklength-lower": {
+    "name": "最小掩码长度"
+  },
+  "/huawei-routing-policy:routing-policy/ipv4-prefix-filters/ipv4-prefix-filter/nodes/node/masklength-upper": {
+    "name": "最大掩码长度"
+  },
+  "/huawei-routing-policy:routing-policy/ipv6-prefix-filters": {
+    "name": "IPv6前缀过滤器列表"
+  },
+  "/huawei-routing-policy:routing-policy/ipv6-prefix-filters/ipv6-prefix-filter": {
+    "name": "IPv6前缀过滤器"
+  },
+  "/huawei-routing-policy:routing-policy/ipv6-prefix-filters/ipv6-prefix-filter/name": {
+    "name": "过滤器名"
+  },
+  "/huawei-routing-policy:routing-policy/ipv6-prefix-filters/ipv6-prefix-filter/description": {
+    "name": "过滤器描述"
+  },
+  "/huawei-routing-policy:routing-policy/ipv6-prefix-filters/ipv6-prefix-filter/permit-count": {
+    "name": "通过匹配的路由数"
+  },
+  "/huawei-routing-policy:routing-policy/ipv6-prefix-filters/ipv6-prefix-filter/deny-count": {
+    "name": "没有通过匹配的路由数"
+  },
+  "/huawei-routing-policy:routing-policy/ipv6-prefix-filters/ipv6-prefix-filter/nodes": {
+    "name": "IPv6前缀过滤器节点列表"
+  },
+  "/huawei-routing-policy:routing-policy/ipv6-prefix-filters/ipv6-prefix-filter/nodes/node": {
+    "name": "IPv6前缀过滤器节点"
+  },
+  "/huawei-routing-policy:routing-policy/ipv6-prefix-filters/ipv6-prefix-filter/nodes/node/sequence": {
+    "name": "节点序列号"
+  },
+  "/huawei-routing-policy:routing-policy/ipv6-prefix-filters/ipv6-prefix-filter/nodes/node/match-mode": {
+    "name": "匹配模式"
+  },
+  "/huawei-routing-policy:routing-policy/ipv6-prefix-filters/ipv6-prefix-filter/nodes/node/ipv6-address": {
+    "name": "IPv6地址"
+  },
+  "/huawei-routing-policy:routing-policy/ipv6-prefix-filters/ipv6-prefix-filter/nodes/node/masklength": {
+    "name": "掩码长度"
+  },
+  "/huawei-routing-policy:routing-policy/ipv6-prefix-filters/ipv6-prefix-filter/nodes/node/match-network": {
+    "name": "匹配网段地址"
+  },
+  "/huawei-routing-policy:routing-policy/ipv6-prefix-filters/ipv6-prefix-filter/nodes/node/masklength-lower": {
+    "name": "最小掩码长度"
+  },
+  "/huawei-routing-policy:routing-policy/ipv6-prefix-filters/ipv6-prefix-filter/nodes/node/masklength-upper": {
+    "name": "最大掩码长度"
+  },
+  "/huawei-routing-policy:routing-policy/ext-community-segmented-nexthop-filters": {
+    "name": "分段下一跳扩展团体属性过滤器列表"
+  },
+  "/huawei-routing-policy:routing-policy/ext-community-segmented-nexthop-filters/ext-community-segmented-nexthop-filter": {
+    "name": "分段下一跳扩展团体属性过滤器"
+  },
+  "/huawei-routing-policy:routing-policy/ext-community-segmented-nexthop-filters/ext-community-segmented-nexthop-filter/name": {
+    "name": "分段下一跳扩展团体过滤器索引名"
+  },
+  "/huawei-routing-policy:routing-policy/ext-community-segmented-nexthop-filters/ext-community-segmented-nexthop-filter/filter-type": {
+    "name": "过滤器类型"
+  },
+  "/huawei-routing-policy:routing-policy/ext-community-segmented-nexthop-filters/ext-community-segmented-nexthop-filter/basic-nodes": {
+    "name": "基本分段下一跳扩展团体属性过滤器节点列表"
+  },
+  "/huawei-routing-policy:routing-policy/ext-community-segmented-nexthop-filters/ext-community-segmented-nexthop-filter/basic-nodes/basic-node": {
+    "name": "基本分段下一跳扩展团体属性过滤器节点"
+  },
+  "/huawei-routing-policy:routing-policy/ext-community-segmented-nexthop-filters/ext-community-segmented-nexthop-filter/basic-nodes/basic-node/sequence": {
+    "name": "节点序列号"
+  },
+  "/huawei-routing-policy:routing-policy/ext-community-segmented-nexthop-filters/ext-community-segmented-nexthop-filter/basic-nodes/basic-node/match-mode": {
+    "name": "匹配模式"
+  },
+  "/huawei-routing-policy:routing-policy/ext-community-segmented-nexthop-filters/ext-community-segmented-nexthop-filter/basic-nodes/basic-node/ext-community-segmented-nexthop-members": {
+    "name": "分段下一跳拓展团体属性值列表"
+  },
+  "/huawei-routing-policy:routing-policy/ext-community-segmented-nexthop-filters/ext-community-segmented-nexthop-filter/basic-nodes/basic-node/ext-community-segmented-nexthop-members/ext-community-segmented-nexthop-member": {
+    "name": "分段下一跳拓展团体属性值"
+  },
+  "/huawei-routing-policy:routing-policy/ext-community-segmented-nexthop-filters/ext-community-segmented-nexthop-filter/basic-nodes/basic-node/ext-community-segmented-nexthop-members/ext-community-segmented-nexthop-member/value": {
+    "name": "拓展团体属性值"
+  },
+  "/huawei-routing-policy:routing-policy/ext-community-segmented-nexthop-filters/ext-community-segmented-nexthop-filter/advanced-nodes": {
+    "name": "高级分段下一跳扩展团体过滤器节点列表"
+  },
+  "/huawei-routing-policy:routing-policy/ext-community-segmented-nexthop-filters/ext-community-segmented-nexthop-filter/advanced-nodes/advanced-node": {
+    "name": "高级分段下一跳扩展团体过滤器节点"
+  },
+  "/huawei-routing-policy:routing-policy/ext-community-segmented-nexthop-filters/ext-community-segmented-nexthop-filter/advanced-nodes/advanced-node/sequence": {
+    "name": "节点序列号"
+  },
+  "/huawei-routing-policy:routing-policy/ext-community-segmented-nexthop-filters/ext-community-segmented-nexthop-filter/advanced-nodes/advanced-node/match-mode": {
+    "name": "匹配模式"
+  },
+  "/huawei-routing-policy:routing-policy/ext-community-segmented-nexthop-filters/ext-community-segmented-nexthop-filter/advanced-nodes/advanced-node/regular": {
+    "name": "正则表达式"
+  },
+  "/huawei-routing-policy:routing-policy/as-path-filters": {
+    "name": "AS路径过滤器列表"
+  },
+  "/huawei-routing-policy:routing-policy/as-path-filters/as-path-filter": {
+    "name": "AS路径过滤器"
+  },
+  "/huawei-routing-policy:routing-policy/as-path-filters/as-path-filter/name": {
+    "name": "过滤器标识"
+  },
+  "/huawei-routing-policy:routing-policy/as-path-filters/as-path-filter/nodes": {
+    "name": "过滤器节点列表"
+  },
+  "/huawei-routing-policy:routing-policy/as-path-filters/as-path-filter/nodes/node": {
+    "name": "过滤器节点"
+  },
+  "/huawei-routing-policy:routing-policy/as-path-filters/as-path-filter/nodes/node/sequence": {
+    "name": "节点序列号"
+  },
+  "/huawei-routing-policy:routing-policy/as-path-filters/as-path-filter/nodes/node/match-mode": {
+    "name": "匹配模式"
+  },
+  "/huawei-routing-policy:routing-policy/as-path-filters/as-path-filter/nodes/node/regular": {
+    "name": "正则表达式"
+  },
+  "/huawei-routing-policy:routing-policy/community-lists": {
+    "name": "团体属性列表"
+  },
+  "/huawei-routing-policy:routing-policy/community-lists/community-list": {
+    "name": "团体属性列表"
+  },
+  "/huawei-routing-policy:routing-policy/community-lists/community-list/name": {
+    "name": "团体属性列表名称"
+  },
+  "/huawei-routing-policy:routing-policy/community-lists/community-list/community-member": {
+    "name": "团体属性值"
+  },
+  "/huawei-routing-policy:routing-policy/rd-filters": {
+    "name": "RD过滤器列表"
+  },
+  "/huawei-routing-policy:routing-policy/rd-filters/rd-filter": {
+    "name": "RD过滤器"
+  },
+  "/huawei-routing-policy:routing-policy/rd-filters/rd-filter/name": {
+    "name": "过滤器名字"
+  },
+  "/huawei-routing-policy:routing-policy/rd-filters/rd-filter/nodes": {
+    "name": "RD过滤器节点列表"
+  },
+  "/huawei-routing-policy:routing-policy/rd-filters/rd-filter/nodes/node": {
+    "name": "RD过滤器节点"
+  },
+  "/huawei-routing-policy:routing-policy/rd-filters/rd-filter/nodes/node/sequence": {
+    "name": "节点序列号"
+  },
+  "/huawei-routing-policy:routing-policy/rd-filters/rd-filter/nodes/node/match-mode": {
+    "name": "匹配模式"
+  },
+  "/huawei-routing-policy:routing-policy/rd-filters/rd-filter/nodes/node/rd-strings": {
+    "name": "RD属性值列表"
+  },
+  "/huawei-routing-policy:routing-policy/rd-filters/rd-filter/nodes/node/rd-strings/rd-string": {
+    "name": "RD属性值"
+  },
+  "/huawei-routing-policy:routing-policy/rd-filters/rd-filter/nodes/node/rd-strings/rd-string/value": {
+    "name": "属性值"
+  },
+  "/huawei-routing-policy:routing-policy/vni-filters": {
+    "name": "VXLAN网络标识列表"
+  },
+  "/huawei-routing-policy:routing-policy/vni-filters/vni-filter": {
+    "name": "VXLAN网络标识列表"
+  },
+  "/huawei-routing-policy:routing-policy/vni-filters/vni-filter/name": {
+    "name": "VXLAN网络标识列表名"
+  },
+  "/huawei-routing-policy:routing-policy/vni-filters/vni-filter/vni-members": {
+    "name": "VXLAN网络标识集合"
+  },
+  "/huawei-routing-policy:routing-policy/vni-filters/vni-filter/vni-members/vni-member": {
+    "name": "VXLAN网络标识"
+  },
+  "/huawei-routing-policy:routing-policy/vni-filters/vni-filter/vni-members/vni-member/value": {
+    "name": "VXLAN网络标识值"
+  },
+  "/huawei-routing-policy:routing-policy/mac-filters": {
+    "name": "MAC列表"
+  },
+  "/huawei-routing-policy:routing-policy/mac-filters/mac-filter": {
+    "name": "MAC列表"
+  },
+  "/huawei-routing-policy:routing-policy/mac-filters/mac-filter/name": {
+    "name": "MAC列表名"
+  },
+  "/huawei-routing-policy:routing-policy/mac-filters/mac-filter/mac-members": {
+    "name": "MAC集合"
+  },
+  "/huawei-routing-policy:routing-policy/mac-filters/mac-filter/mac-members/mac-member": {
+    "name": "MAC"
+  },
+  "/huawei-routing-policy:routing-policy/mac-filters/mac-filter/mac-members/mac-member/value": {
+    "name": "MAC值"
+  },
+  "/huawei-routing-policy:routing-policy/eth-tag-filters": {
+    "name": "以太网标签ID列表"
+  },
+  "/huawei-routing-policy:routing-policy/eth-tag-filters/eth-tag-filter": {
+    "name": "以太网标签ID列表"
+  },
+  "/huawei-routing-policy:routing-policy/eth-tag-filters/eth-tag-filter/name": {
+    "name": "以太网标签ID列表名"
+  },
+  "/huawei-routing-policy:routing-policy/eth-tag-filters/eth-tag-filter/eth-tag-members": {
+    "name": "以太网标签ID集合"
+  },
+  "/huawei-routing-policy:routing-policy/eth-tag-filters/eth-tag-filter/eth-tag-members/eth-tag-member": {
+    "name": "以太网标签ID"
+  },
+  "/huawei-routing-policy:routing-policy/eth-tag-filters/eth-tag-filter/eth-tag-members/eth-tag-member/value": {
+    "name": "以太网标签ID值"
+  },
+  "/huawei-routing-policy:routing-policy/large-community-filters": {
+    "name": "增强团体属性过滤器列表"
+  },
+  "/huawei-routing-policy:routing-policy/large-community-filters/large-community-filter": {
+    "name": "增强团体属性过滤器"
+  },
+  "/huawei-routing-policy:routing-policy/large-community-filters/large-community-filter/name": {
+    "name": "增强团体过滤器标识"
+  },
+  "/huawei-routing-policy:routing-policy/large-community-filters/large-community-filter/filter-type": {
+    "name": "增强团体过滤器类型"
+  },
+  "/huawei-routing-policy:routing-policy/large-community-filters/large-community-filter/basic-nodes": {
+    "name": "基本增强团体过滤器节点列表"
+  },
+  "/huawei-routing-policy:routing-policy/large-community-filters/large-community-filter/basic-nodes/basic-node": {
+    "name": "基本增强团体过滤器节点"
+  },
+  "/huawei-routing-policy:routing-policy/large-community-filters/large-community-filter/basic-nodes/basic-node/sequence": {
+    "name": "节点序列号"
+  },
+  "/huawei-routing-policy:routing-policy/large-community-filters/large-community-filter/basic-nodes/basic-node/match-mode": {
+    "name": "匹配模式"
+  },
+  "/huawei-routing-policy:routing-policy/large-community-filters/large-community-filter/basic-nodes/basic-node/large-community-members": {
+    "name": "增强团体属性值列表"
+  },
+  "/huawei-routing-policy:routing-policy/large-community-filters/large-community-filter/basic-nodes/basic-node/large-community-members/large-community-member": {
+    "name": "增强团体属性值"
+  },
+  "/huawei-routing-policy:routing-policy/large-community-filters/large-community-filter/basic-nodes/basic-node/large-community-members/large-community-member/value": {
+    "name": "增强团体属性值"
+  },
+  "/huawei-routing-policy:routing-policy/large-community-filters/large-community-filter/advanced-nodes": {
+    "name": "高级增强团体过滤器节点列表"
+  },
+  "/huawei-routing-policy:routing-policy/large-community-filters/large-community-filter/advanced-nodes/advanced-node": {
+    "name": "高级增强团体过滤器节点"
+  },
+  "/huawei-routing-policy:routing-policy/large-community-filters/large-community-filter/advanced-nodes/advanced-node/sequence": {
+    "name": "节点序列号"
+  },
+  "/huawei-routing-policy:routing-policy/large-community-filters/large-community-filter/advanced-nodes/advanced-node/match-mode": {
+    "name": "匹配模式"
+  },
+  "/huawei-routing-policy:routing-policy/large-community-filters/large-community-filter/advanced-nodes/advanced-node/regular": {
+    "name": "正则表达式"
+  },
+  "/huawei-routing-policy:routing-policy/ext-community-encapsulation-filters": {
+    "name": "封装扩展团体属性过滤器列表"
+  },
+  "/huawei-routing-policy:routing-policy/ext-community-encapsulation-filters/ext-community-encapsulation-filter": {
+    "name": "配置封装扩展团体过滤器"
+  },
+  "/huawei-routing-policy:routing-policy/ext-community-encapsulation-filters/ext-community-encapsulation-filter/name": {
+    "name": "封装扩展团体属性过滤器名称"
+  },
+  "/huawei-routing-policy:routing-policy/ext-community-encapsulation-filters/ext-community-encapsulation-filter/filter-type": {
+    "name": "过滤器类型"
+  },
+  "/huawei-routing-policy:routing-policy/ext-community-encapsulation-filters/ext-community-encapsulation-filter/basic-nodes": {
+    "name": "基本封装扩展团体属性过滤器"
+  },
+  "/huawei-routing-policy:routing-policy/ext-community-encapsulation-filters/ext-community-encapsulation-filter/basic-nodes/basic-node": {
+    "name": "基本封装扩展团体属性过滤器"
+  },
+  "/huawei-routing-policy:routing-policy/ext-community-encapsulation-filters/ext-community-encapsulation-filter/basic-nodes/basic-node/sequence": {
+    "name": "节点序列号"
+  },
+  "/huawei-routing-policy:routing-policy/ext-community-encapsulation-filters/ext-community-encapsulation-filter/basic-nodes/basic-node/match-mode": {
+    "name": "匹配模式"
+  },
+  "/huawei-routing-policy:routing-policy/large-community-lists": {
+    "name": "增强团体属性列表"
+  },
+  "/huawei-routing-policy:routing-policy/large-community-lists/large-community-list": {
+    "name": "增强团体属性列表"
+  },
+  "/huawei-routing-policy:routing-policy/large-community-lists/large-community-list/name": {
+    "name": "增强团体属性列表名称"
+  },
+  "/huawei-routing-policy:routing-policy/large-community-lists/large-community-list/large-community-members": {
+    "name": "增强团体属性集合"
+  },
+  "/huawei-routing-policy:routing-policy/large-community-lists/large-community-list/large-community-members/large-community-member": {
+    "name": "增强团体属性"
+  },
+  "/huawei-routing-policy:routing-policy/large-community-lists/large-community-list/large-community-members/large-community-member/value": {
+    "name": "增强团体属性值"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions": {
+    "name": "路由策略列表"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition": {
+    "name": "路由策略配置"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/name": {
+    "name": "策略名"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes": {
+    "name": "路由策略节点列表"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node": {
+    "name": "路由策略节点"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/sequence": {
+    "name": "节点序列号"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/match-mode": {
+    "name": "匹配模式"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/description": {
+    "name": "描述信息"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/match-count": {
+    "name": "匹配计数"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions": {
+    "name": "匹配类型列表"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-tag": {
+    "name": "匹配路由tag值"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-tag/value": {
+    "name": "路由tag值"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ext-community-soo": {
+    "name": "匹配扩展团体SoO过滤器"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ext-community-soo/ext-community-soo-filter-ref": {
+    "name": "扩展团体SoO过滤器索引"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ext-community-filters": {
+    "name": "匹配扩展团体过滤器列表"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ext-community-filters/match-ext-community-filter": {
+    "name": "匹配扩展团体过滤器"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ext-community-filters/match-ext-community-filter/ext-community-filter-ref": {
+    "name": "扩展团体过滤器索引"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-community-filters": {
+    "name": "匹配团体过滤器列表"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-community-filters/match-community-filter": {
+    "name": "匹配团体过滤器"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-community-filters/match-community-filter/community-filter-ref": {
+    "name": "团体过滤器标识"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-community-filters/match-community-filter/match-type": {
+    "name": "匹配类型"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-community-filters/match-community-filter/match-type/whole-match": {
+    "name": "指定完全匹配"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-community-filters/match-community-filter/match-type/whole-match/whole-match": {
+    "name": "完全匹配"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-community-filters/match-community-filter/match-type/sort-match": {
+    "name": "指定顺序整体匹配"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-community-filters/match-community-filter/match-type/sort-match/sort-match": {
+    "name": "顺序整体匹配"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-as-path-filters": {
+    "name": "匹配AS路径过滤器列表"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-as-path-filters/match-as-path-filter": {
+    "name": "匹配AS路径过滤器"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-as-path-filters/match-as-path-filter/filter-name": {
+    "name": "AS过滤器标识"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-protocols": {
+    "name": "匹配路由协议类型"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-protocols/match-protocol": {
+    "name": "匹配路由协议类型"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-protocols/match-protocol/protocol": {
+    "name": "路由协议类型"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-cost": {
+    "name": "匹配路由开销值列表"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-cost/cost-set": {
+    "name": "匹配开销值"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-cost/cost-set/value": {
+    "name": "开销值"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-cost/cost-set/value/value": {
+    "name": "路由开销值"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-cost/cost-set/range": {
+    "name": "范围"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-cost/cost-set/range/lower": {
+    "name": "最小路由开销值"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-cost/cost-set/range/upper": {
+    "name": "最大路由开销值"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-preference": {
+    "name": "匹配协议优先级"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-preference/value": {
+    "name": "协议优先级值"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ext-community-segmented-nexthop-filter": {
+    "name": "匹配分段下一跳扩展团体过滤器"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ext-community-segmented-nexthop-filter/ext-community-segmented-nexthop-filter-ref": {
+    "name": "分段下一跳扩展团体过滤器索引名"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-interfaces": {
+    "name": "匹配出接口列表"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-interfaces/match-interface": {
+    "name": "匹配出接口"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-interfaces/match-interface/interface-name": {
+    "name": "出接口"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-route-types": {
+    "name": "匹配路由类型列表"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-route-types/match-route-type": {
+    "name": "匹配路由类型"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-route-types/match-route-type/route-type": {
+    "name": "路由类型"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-mpls-label": {
+    "name": "匹配MPLS标签列表"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-mpls-label/mpls-label": {
+    "name": "MPLS标签"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-mpls-label/mpls-label2": {
+    "name": "MPLS标签2"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-rd-filter": {
+    "name": "匹配RD过滤器"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-rd-filter/rd-filter-ref": {
+    "name": "RD过滤器名字"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-mac-filter": {
+    "name": "按MAC列表匹配MAC"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-mac-filter/mac-filter-ref": {
+    "name": "MAC列表名"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-l3vni-filter": {
+    "name": "匹配三层VXLAN网络标识"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-l3vni-filter/match-type": {
+    "name": "匹配三层VXLAN网络标识列表的方式"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-l3vni-filter/l3vni-filter-ref": {
+    "name": "三层VXLAN网络标识列表名"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-l2vni-filter": {
+    "name": "匹配二层VXLAN网络标识"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-l2vni-filter/match-type": {
+    "name": "匹配二层VXLAN网络标识列表的方式"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-l2vni-filter/l2vni-filter-ref": {
+    "name": "二层VXLAN网络标识列表名"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-eth-tag-filter": {
+    "name": "匹配以太网标签ID"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-eth-tag-filter/eth-tag-filter-ref": {
+    "name": "以太网标签ID列表名"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-large-community-filters": {
+    "name": "匹配增强团体过滤器列表"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-large-community-filters/match-large-community-filter": {
+    "name": "匹配增强团体过滤器"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-large-community-filters/match-large-community-filter/community-filter-ref": {
+    "name": "团体过滤器标识"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-large-community-filters/match-large-community-filter/match-type": {
+    "name": "匹配模式"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-large-community-filters/match-large-community-filter/match-type/whole-match": {
+    "name": "指定完全匹配"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-large-community-filters/match-large-community-filter/match-type/whole-match/whole-match": {
+    "name": "完全匹配"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-as-path-length": {
+    "name": "匹配AS-PATH长度列表"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-as-path-length/as-path-length-set": {
+    "name": "AS-PATH长度"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-as-path-length/as-path-length-set/value": {
+    "name": "AS-PATH值"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-as-path-length/as-path-length-set/value/value": {
+    "name": "AS-PATH长度值"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-as-path-length/as-path-length-set/range": {
+    "name": "范围"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-as-path-length/as-path-length-set/range/lower": {
+    "name": "最小AS-PATH长度值"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-as-path-length/as-path-length-set/range/upper": {
+    "name": "最大AS-PATH长度值"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-prefix-mod": {
+    "name": "匹配前缀取模"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-prefix-mod/mod-value": {
+    "name": "前缀模值"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-prefix-mod/mod-result": {
+    "name": "取模结果"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ext-community-encapsulation-filter": {
+    "name": "匹配封装扩展团体属性过滤器"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ext-community-encapsulation-filter/ext-community-encapsulation-list-ref": {
+    "name": "封装扩展团体过滤器索引"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ipv4-destination": {
+    "name": "选择匹配目的地址"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ipv4-destination/ipv4-prefix": {
+    "name": "匹配目的前缀地址过滤器"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ipv4-destination/ipv4-prefix/match-ipv4-prefix": {
+    "name": "按IPv4前缀过滤器匹配IPv4目的地址"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ipv4-destination/ipv4-prefix/match-ipv4-prefix/prefix-filter-ref": {
+    "name": "IPv4前缀过滤器名"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ipv6-destination": {
+    "name": "选择匹配IPv6目的"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ipv6-destination/ipv6-prefix": {
+    "name": "指定IPv6前缀过滤器名"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ipv6-destination/ipv6-prefix/match-ipv6-prefix": {
+    "name": "匹配IPv6目的地址"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ipv6-destination/ipv6-prefix/match-ipv6-prefix/prefix-filter-ref": {
+    "name": "IPv6前缀过滤器名"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ipv4-nexthop": {
+    "name": "按IPv4前缀过滤器匹配IPv4下一跳列表"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ipv4-nexthop/ipv4-prefix": {
+    "name": "匹配目的前缀地址过滤器"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ipv4-nexthop/ipv4-prefix/match-nexthop-ipv4-prefix": {
+    "name": "按IPv4前缀过滤器匹配IPv4下一跳"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ipv4-nexthop/ipv4-prefix/match-nexthop-ipv4-prefix/prefix-filter-ref": {
+    "name": "IPv4前缀过滤器名"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ipv6-nexthop": {
+    "name": "按IPv6前缀过滤器匹配IPv6下一跳列表"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ipv6-nexthop/ipv6-prefix": {
+    "name": "指定IPv6前缀过滤器名"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ipv6-nexthop/ipv6-prefix/match-nexthop-ipv6-prefix": {
+    "name": "匹配IPv6下一跳"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ipv6-nexthop/ipv6-prefix/match-nexthop-ipv6-prefix/prefix-filter-ref": {
+    "name": "IPv6前缀过滤器名"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ipv4-route-source": {
+    "name": "匹配路由源"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ipv4-route-source/ipv4-prefix": {
+    "name": "匹配目的前缀地址过滤器"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ipv4-route-source/ipv4-prefix/match-route-source-ipv4-prefix": {
+    "name": "按IPv4前缀过滤器匹配IPv4源地址列表"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ipv4-route-source/ipv4-prefix/match-route-source-ipv4-prefix/prefix-filter-ref": {
+    "name": "IPv4前缀过滤器名"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ipv6-route-source": {
+    "name": "匹配路由源"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ipv6-route-source/ipv6-prefix": {
+    "name": "指定IPv6前缀过滤器名"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ipv6-route-source/ipv6-prefix/match-route-source-ipv6-prefix": {
+    "name": "匹配IPv6路由源"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ipv6-route-source/ipv6-prefix/match-route-source-ipv6-prefix/prefix-filter-ref": {
+    "name": "IPv6前缀过滤器名"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-route-originator": {
+    "name": "匹配路由发布者IP列表"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-route-originator/ipv4-prefix": {
+    "name": "匹配前缀地址过滤器"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-route-originator/ipv4-prefix/match-originator-ipv4-prefix": {
+    "name": "按前缀过滤器匹配"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-route-originator/ipv4-prefix/match-originator-ipv4-prefix/prefix-filter-ref": {
+    "name": "按前缀过滤器匹配"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-group-address": {
+    "name": "匹配组播组地址列表"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-group-address/ipv4-prefix": {
+    "name": "匹配目的前缀地址过滤器"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-group-address/ipv4-prefix/match-group-address-ipv4-prefix": {
+    "name": "匹配组播组地址"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-group-address/ipv4-prefix/match-group-address-ipv4-prefix/prefix-filter-ref": {
+    "name": "IPv4前缀过滤器名"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions": {
+    "name": "设置类型列表"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-local-preference": {
+    "name": "设置本地优先级列表"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-local-preference/operation": {
+    "name": "设置本地优先级的方式"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-local-preference/value": {
+    "name": "本地优先级值"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-cost": {
+    "name": "设置路由开销值列表"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-cost/operation": {
+    "name": "设置开销值的方式"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-cost/value": {
+    "name": "路由开销值"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-community": {
+    "name": "设置团体值"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-community/operation": {
+    "name": "应用方式"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-community/set-community": {
+    "name": "设置团体值"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-community/set-community/inline": {
+    "name": "设置团体值属性"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-community/set-community/inline/communities": {
+    "name": "团体属性值"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-community/set-community/inline-string": {
+    "name": "设置团体属性值"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-community/set-community/inline-string/value": {
+    "name": "团体属性值"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-community/set-community/reference": {
+    "name": "引用团体属性列表名"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-community/set-community/reference/community-list-ref": {
+    "name": "团体属性列表名称"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ext-community-soo": {
+    "name": "设置SoO扩展团体值列表"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ext-community-soo/operation": {
+    "name": "应用方式"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ext-community-soo/communities": {
+    "name": "属性值"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-mpls-label": {
+    "name": "设置MPLS标签"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-mpls-label/mpls-label": {
+    "name": "MPLS标签"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-preferred": {
+    "name": "设置BGP首选值"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-preferred/value": {
+    "name": "BGP首选值"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-aigp": {
+    "name": "设置AIGP属性值"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-aigp/operation": {
+    "name": "设置AIGP属性值的方式"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-aigp/value": {
+    "name": "AIGP属性值"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-tag": {
+    "name": "设置tag值"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-tag/value": {
+    "name": "路由tag值"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ipv4-nexthop": {
+    "name": "设置IPv4下一跳"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ipv4-nexthop/ipv4-nexthop-set": {
+    "name": "设置下一跳"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ipv4-nexthop/ipv4-nexthop-set/nexthop": {
+    "name": "下一跳"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ipv4-nexthop/ipv4-nexthop-set/nexthop/nexthop": {
+    "name": "下一跳地址"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ipv4-nexthop/ipv4-nexthop-set/peer-address": {
+    "name": "邻居地址"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ipv4-nexthop/ipv4-nexthop-set/peer-address/peer-address": {
+    "name": "BGP对等体地址"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ipv4-nexthop/ipv4-nexthop-set/blackhole": {
+    "name": "黑洞"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ipv4-nexthop/ipv4-nexthop-set/blackhole/blackhole": {
+    "name": "应用黑洞标记"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ipv6-nexthop": {
+    "name": "设置IPv6下一跳"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ipv6-nexthop/ipv6-nexthop-set": {
+    "name": "设置IPv6下一跳"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ipv6-nexthop/ipv6-nexthop-set/ipv6-nexthop": {
+    "name": "IPv6下一跳"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ipv6-nexthop/ipv6-nexthop-set/ipv6-nexthop/ipv6-nexthop": {
+    "name": "下一跳地址"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ipv6-nexthop/ipv6-nexthop-set/peer-address": {
+    "name": "邻居地址"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ipv6-nexthop/ipv6-nexthop-set/peer-address/peer-address": {
+    "name": "BGP对等体地址"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ipv6-nexthop/ipv6-nexthop-set/blackhole": {
+    "name": "黑洞"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ipv6-nexthop/ipv6-nexthop-set/blackhole/blackhole": {
+    "name": "应用IPv6黑洞标记"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-cost-type": {
+    "name": "设置路由开销类型"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-cost-type/value": {
+    "name": "开销类型"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-origin": {
+    "name": "设置路由信息源"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-origin/origin-type": {
+    "name": "路由信息源方式"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-origin/value": {
+    "name": "AS路径值"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-preference": {
+    "name": "设置协议优先级列表"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-preference/value": {
+    "name": "协议优先级值"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-route-type": {
+    "name": "设置路由类型"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-route-type/value": {
+    "name": "路由类型"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-traffic": {
+    "name": "设置BGP流量统计索引"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-traffic/value": {
+    "name": "BGP流量统计索引"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-priority": {
+    "name": "设置引入路由优先级列表"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-priority/value": {
+    "name": "引入路由优先级值"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ipv4-gateway": {
+    "name": "设置GWIP"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ipv4-gateway/gateway-type": {
+    "name": "设置GWIP的方式"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ipv4-gateway/address": {
+    "name": "使用指定地址"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ipv6-gateway": {
+    "name": "设置IPv6 GWIP"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ipv6-gateway/gateway-type": {
+    "name": "设置GWIP的方式"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ipv6-gateway/address": {
+    "name": "设置指定IPv6地址"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ext-community": {
+    "name": "设置扩展团体值"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ext-community/operation": {
+    "name": "应用方式"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ext-community/ext-community-members": {
+    "name": "扩展团体属性值列表"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ext-community/ext-community-members/ext-community-member": {
+    "name": "扩展团体属性值"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ext-community/ext-community-members/ext-community-member/value": {
+    "name": "扩展团体属性值"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-community-filter-delete": {
+    "name": "删除团体属性值"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-community-filter-delete/name": {
+    "name": "团体过滤器标识"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-dampening": {
+    "name": "设置路由惩罚参数"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-dampening/half-life-value": {
+    "name": "半衰期"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-dampening/reuse-value": {
+    "name": "解除抑制状态阈值"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-dampening/suppress-value": {
+    "name": "进入抑制状态阈值"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-dampening/ceiling-value": {
+    "name": "惩罚上限值"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-qos-parameter": {
+    "name": "设置QoS参数"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-qos-parameter/set-qos-parameter": {
+    "name": "设置QoS参数"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-qos-parameter/set-qos-parameter/local-id-ip-precedence": {
+    "name": "设置本地标识与IP优先级值"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-qos-parameter/set-qos-parameter/local-id-ip-precedence/qos-local-id": {
+    "name": "本地标识"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-qos-parameter/set-qos-parameter/local-id-ip-precedence/ip-precedence": {
+    "name": "IP优先级值"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-as-path": {
+    "name": "设置AS值"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-as-path/operation": {
+    "name": "应用方式"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-as-path/as-path-string": {
+    "name": "AS属性值"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-as-path/as-path-string/as-string": {
+    "name": "AS属性值"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-as-path/as-path-string/as-string/value": {
+    "name": "AS属性值"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ext-community-redirect-ip": {
+    "name": "设置重定向到IP扩展团体属性"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ext-community-redirect-ip/value": {
+    "name": "扩展团体属性值"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ext-community-redirect-vpn": {
+    "name": "设置重定向到VPN扩展团体属性"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ext-community-redirect-vpn/value": {
+    "name": "扩展团体属性值"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ext-community-color": {
+    "name": "设置染色扩展团体属性列表"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ext-community-color/value": {
+    "name": "扩展团体属性值"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-entropy-label-none": {
+    "name": "丢弃熵标签"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-entropy-label-none/entropy-label-none": {
+    "name": "使能丢弃熵标签"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-peer-id": {
+    "name": "设置邻居组ID"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-peer-id/value": {
+    "name": "邻居组ID"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-large-community": {
+    "name": "设置增强团体值列表"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-large-community/operation": {
+    "name": "应用方式"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-large-community/set-large-community": {
+    "name": "设置增强团体值"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-large-community/set-large-community/inline": {
+    "name": "设置增强团体值属性"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-large-community/set-large-community/inline/large-community-members": {
+    "name": "增强团体属性值列表"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-large-community/set-large-community/inline/large-community-members/large-community-member": {
+    "name": "增强团体属性值"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-large-community/set-large-community/inline/large-community-members/large-community-member/value": {
+    "name": "增强团体属性值"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-large-community/set-large-community/reference": {
+    "name": "引用增强团体属性列表名"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-large-community/set-large-community/reference/large-community-list-ref": {
+    "name": "增强团体属性列表名称"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/next-node-choice": {
+    "name": "设置继续下一节点匹配"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/next-node-choice/is-goto-next-node": {
+    "name": "继续匹配"
+  },
+  "/huawei-routing-policy:routing-policy/policy-definitions/policy-definition/nodes/node/next-node-choice/next-node-sequence": {
+    "name": "匹配节点序列号"
+  },
+  "/huawei-routing-policy:routing-policy/tunnel-selectors": {
+    "name": "隧道选择器列表"
+  },
+  "/huawei-routing-policy:routing-policy/tunnel-selectors/tunnel-selector": {
+    "name": "隧道选择器"
+  },
+  "/huawei-routing-policy:routing-policy/tunnel-selectors/tunnel-selector/name": {
+    "name": "隧道选择器名"
+  },
+  "/huawei-routing-policy:routing-policy/tunnel-selectors/tunnel-selector/nodes": {
+    "name": "隧道选择器节点列表"
+  },
+  "/huawei-routing-policy:routing-policy/tunnel-selectors/tunnel-selector/nodes/node": {
+    "name": "隧道选择器节点"
+  },
+  "/huawei-routing-policy:routing-policy/tunnel-selectors/tunnel-selector/nodes/node/sequence": {
+    "name": "节点序列号"
+  },
+  "/huawei-routing-policy:routing-policy/tunnel-selectors/tunnel-selector/nodes/node/match-mode": {
+    "name": "匹配模式"
+  },
+  "/huawei-routing-policy:routing-policy/tunnel-selectors/tunnel-selector/nodes/node/conditions": {
+    "name": "匹配类型列表"
+  },
+  "/huawei-routing-policy:routing-policy/tunnel-selectors/tunnel-selector/nodes/node/conditions/match-rd-filter": {
+    "name": "匹配RD过滤器"
+  },
+  "/huawei-routing-policy:routing-policy/tunnel-selectors/tunnel-selector/nodes/node/conditions/match-rd-filter/rd-filter-ref": {
+    "name": "RD过滤器索引"
+  },
+  "/huawei-routing-policy:routing-policy/tunnel-selectors/tunnel-selector/nodes/node/conditions/match-community-filters": {
+    "name": "匹配团体过滤器列表"
+  },
+  "/huawei-routing-policy:routing-policy/tunnel-selectors/tunnel-selector/nodes/node/conditions/match-community-filters/match-community-filter": {
+    "name": "匹配团体过滤器"
+  },
+  "/huawei-routing-policy:routing-policy/tunnel-selectors/tunnel-selector/nodes/node/conditions/match-community-filters/match-community-filter/community-filter-ref": {
+    "name": "团体过滤器标识"
+  },
+  "/huawei-routing-policy:routing-policy/tunnel-selectors/tunnel-selector/nodes/node/conditions/match-community-filters/match-community-filter/match-type": {
+    "name": "匹配类型"
+  },
+  "/huawei-routing-policy:routing-policy/tunnel-selectors/tunnel-selector/nodes/node/conditions/match-community-filters/match-community-filter/match-type/whole-match": {
+    "name": "指定完全匹配"
+  },
+  "/huawei-routing-policy:routing-policy/tunnel-selectors/tunnel-selector/nodes/node/conditions/match-community-filters/match-community-filter/match-type/whole-match/whole-match": {
+    "name": "完全匹配"
+  },
+  "/huawei-routing-policy:routing-policy/tunnel-selectors/tunnel-selector/nodes/node/conditions/match-community-filters/match-community-filter/match-type/sort-match": {
+    "name": "指定顺序整体匹配"
+  },
+  "/huawei-routing-policy:routing-policy/tunnel-selectors/tunnel-selector/nodes/node/conditions/match-community-filters/match-community-filter/match-type/sort-match/sort-match": {
+    "name": "顺序整体匹配"
+  },
+  "/huawei-routing-policy:routing-policy/tunnel-selectors/tunnel-selector/nodes/node/conditions/match-ipv4-destination": {
+    "name": "按IPv4前缀过滤器匹配IPv4目的地址列表"
+  },
+  "/huawei-routing-policy:routing-policy/tunnel-selectors/tunnel-selector/nodes/node/conditions/match-ipv4-destination/ipv4-prefix": {
+    "name": "匹配目的前缀地址过滤器"
+  },
+  "/huawei-routing-policy:routing-policy/tunnel-selectors/tunnel-selector/nodes/node/conditions/match-ipv4-destination/ipv4-prefix/match-ipv4-prefix": {
+    "name": "按IPv4前缀过滤器匹配IPv4目的地址"
+  },
+  "/huawei-routing-policy:routing-policy/tunnel-selectors/tunnel-selector/nodes/node/conditions/match-ipv4-destination/ipv4-prefix/match-ipv4-prefix/prefix-filter-ref": {
+    "name": "IPv4前缀过滤器名"
+  },
+  "/huawei-routing-policy:routing-policy/tunnel-selectors/tunnel-selector/nodes/node/conditions/match-ipv4-nexthop": {
+    "name": "匹配IPv4下一跳列表"
+  },
+  "/huawei-routing-policy:routing-policy/tunnel-selectors/tunnel-selector/nodes/node/conditions/match-ipv4-nexthop/ipv4-prefix": {
+    "name": "匹配目的前缀地址过滤器"
+  },
+  "/huawei-routing-policy:routing-policy/tunnel-selectors/tunnel-selector/nodes/node/conditions/match-ipv4-nexthop/ipv4-prefix/match-nexthop-ipv4-prefix": {
+    "name": "匹配IPv4下一跳"
+  },
+  "/huawei-routing-policy:routing-policy/tunnel-selectors/tunnel-selector/nodes/node/conditions/match-ipv4-nexthop/ipv4-prefix/match-nexthop-ipv4-prefix/prefix-filter-ref": {
+    "name": "IPv4前缀过滤器名"
+  },
+  "/huawei-routing-policy:routing-policy/tunnel-selectors/tunnel-selector/nodes/node/conditions/match-ipv6-nexthop": {
+    "name": "匹配IPv6下一跳列表"
+  },
+  "/huawei-routing-policy:routing-policy/tunnel-selectors/tunnel-selector/nodes/node/conditions/match-ipv6-nexthop/ipv6-prefix": {
+    "name": "匹配目的前缀地址过滤器"
+  },
+  "/huawei-routing-policy:routing-policy/tunnel-selectors/tunnel-selector/nodes/node/conditions/match-ipv6-nexthop/ipv6-prefix/match-nexthop-ipv6-prefix": {
+    "name": "匹配IPv6下一跳"
+  },
+  "/huawei-routing-policy:routing-policy/tunnel-selectors/tunnel-selector/nodes/node/conditions/match-ipv6-nexthop/ipv6-prefix/match-nexthop-ipv6-prefix/prefix-filter-ref": {
+    "name": "IPv6前缀过滤器名"
+  },
+  "/huawei-routing-policy:routing-policy/tunnel-selectors/tunnel-selector/nodes/node/conditions/match-ipv4-route-source": {
+    "name": "匹配路由源"
+  },
+  "/huawei-routing-policy:routing-policy/tunnel-selectors/tunnel-selector/nodes/node/conditions/match-ipv4-route-source/ipv4-prefix": {
+    "name": "匹配目的前缀地址过滤器"
+  },
+  "/huawei-routing-policy:routing-policy/tunnel-selectors/tunnel-selector/nodes/node/conditions/match-ipv4-route-source/ipv4-prefix/match-route-source-ipv4-prefix": {
+    "name": "按IPv4前缀过滤器匹配IPv4源地址列表"
+  },
+  "/huawei-routing-policy:routing-policy/tunnel-selectors/tunnel-selector/nodes/node/conditions/match-ipv4-route-source/ipv4-prefix/match-route-source-ipv4-prefix/prefix-filter-ref": {
+    "name": "IPv4前缀过滤器名"
+  },
+  "/huawei-routing-policy:routing-policy/tunnel-selectors/tunnel-selector/nodes/node/actions": {
+    "name": "设置类型列表"
+  },
+  "/huawei-routing-policy:routing-policy/tunnel-selectors/tunnel-selector/nodes/node/actions/apply-tunnel-policy": {
+    "name": "设置隧道策略"
+  },
+  "/huawei-routing-policy:routing-policy/tunnel-selectors/tunnel-selector/nodes/node/actions/apply-tunnel-policy/tunnel-policy-ref": {
+    "name": "隧道策略名"
+  }
+}

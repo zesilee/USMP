@@ -1,0 +1,488 @@
+{
+  "/huawei-arp:arp": {
+    "name": "ARP管理"
+  },
+  "/huawei-arp:arp/global": {
+    "name": "使能ARP系统配置"
+  },
+  "/huawei-arp:arp/global/strict-learn-enable": {
+    "name": "使能ARP系统严格学习"
+  },
+  "/huawei-arp:arp/global/l2topo-detect-enable": {
+    "name": "使能L2拓扑探测"
+  },
+  "/huawei-arp:arp/global/rate-trap-interval": {
+    "name": "ARP速率抑制日志告警时间间隔(秒)"
+  },
+  "/huawei-arp:arp/global/passive-learn-enable": {
+    "name": "使能VRRP备设备学习ARP表项功能"
+  },
+  "/huawei-arp:arp/global/topo-detect-disable": {
+    "name": "使能拓扑变化不感知"
+  },
+  "/huawei-arp:arp/global/expire-time": {
+    "name": "动态ARP表项老化时间"
+  },
+  "/huawei-arp:arp/global/gateway-dup-enable": {
+    "name": "使能ARP防网关冲突攻击功能"
+  },
+  "/huawei-arp:arp/global/con-send-enable": {
+    "name": "使能匀速发送ARP报文"
+  },
+  "/huawei-arp:arp/global/con-send-maxnum": {
+    "name": "匀速发送ARP报文最大值"
+  },
+  "/huawei-arp:arp/global/gratuitous-drop": {
+    "name": "丢弃免费ARP报文"
+  },
+  "/huawei-arp:arp/global/ipconflict-detect-enable": {
+    "name": "冲突检测"
+  },
+  "/huawei-arp:arp/global/vlanif-expiretime": {
+    "name": "VLANIF老化时间(秒)"
+  },
+  "/huawei-arp:arp/global/host-conflict-period": {
+    "name": "主机冲突告警检测周期(秒)"
+  },
+  "/huawei-arp:arp/global/host-conflict-threshold": {
+    "name": "主机冲突告警冲突次数阈值"
+  },
+  "/huawei-arp:arp/global/broadcast-max-num": {
+    "name": "广播报文最大值"
+  },
+  "/huawei-arp:arp/global/dfs-backup-rate": {
+    "name": "ARP备份限速值"
+  },
+  "/huawei-arp:arp/speed-limits": {
+    "name": "抑制ARP速率列表"
+  },
+  "/huawei-arp:arp/speed-limits/speed-limit": {
+    "name": "ARP速率抑制"
+  },
+  "/huawei-arp:arp/speed-limits/speed-limit/slot-id": {
+    "name": "槽位号"
+  },
+  "/huawei-arp:arp/speed-limits/speed-limit/suppress-type": {
+    "name": "抑制类型"
+  },
+  "/huawei-arp:arp/speed-limits/speed-limit/ip-type": {
+    "name": "抑制IP类型"
+  },
+  "/huawei-arp:arp/speed-limits/speed-limit/suppress-value": {
+    "name": "抑制速率(个/秒)"
+  },
+  "/huawei-arp:arp/current-speed-limits": {
+    "name": "接口板ARP速率抑制"
+  },
+  "/huawei-arp:arp/current-speed-limits/current-speed-limit": {
+    "name": "接口板ARP速率抑制"
+  },
+  "/huawei-arp:arp/current-speed-limits/current-speed-limit/slot-id": {
+    "name": "Slot ID"
+  },
+  "/huawei-arp:arp/current-speed-limits/current-speed-limit/suppress-type": {
+    "name": "抑制类型"
+  },
+  "/huawei-arp:arp/current-speed-limits/current-speed-limit/ip-type": {
+    "name": "基于IP地址的抑制类型"
+  },
+  "/huawei-arp:arp/current-speed-limits/current-speed-limit/suppress-value": {
+    "name": "接口在指定时间内可以处理的消息的数量"
+  },
+  "/huawei-arp:arp/static-arps": {
+    "name": "静态ARP配置列表"
+  },
+  "/huawei-arp:arp/static-arps/static-arp": {
+    "name": "静态ARP配置"
+  },
+  "/huawei-arp:arp/static-arps/static-arp/ip-addr": {
+    "name": "IP地址"
+  },
+  "/huawei-arp:arp/static-arps/static-arp/ni-name": {
+    "name": "VPN实例名称"
+  },
+  "/huawei-arp:arp/static-arps/static-arp/mac-addr": {
+    "name": "MAC地址"
+  },
+  "/huawei-arp:arp/static-arps/static-arp/vlan-id": {
+    "name": "VLAN ID"
+  },
+  "/huawei-arp:arp/static-arps/static-arp/vxlan-id": {
+    "name": "VNI ID"
+  },
+  "/huawei-arp:arp/static-arps/static-arp/tunnel-ip": {
+    "name": "VXLAN隧道IP地址"
+  },
+  "/huawei-arp:arp/static-arps/static-arp/tunnel-ip/ipv4-ip": {
+    "name": "VXLAN隧道的IP地址"
+  },
+  "/huawei-arp:arp/static-arps/static-arp/tunnel-ip/ipv4-ip/source-addr": {
+    "name": "VXLAN隧道的源IP地址"
+  },
+  "/huawei-arp:arp/static-arps/static-arp/tunnel-ip/ipv4-ip/peer-addr": {
+    "name": "VXLAN隧道的目的IP地址"
+  },
+  "/huawei-arp:arp/static-arps/static-arp/tunnel-ip/ipv6-ip": {
+    "name": "VXLAN隧道的IPv6地址"
+  },
+  "/huawei-arp:arp/static-arps/static-arp/tunnel-ip/ipv6-ip/source-ipv6-addr": {
+    "name": "VXLAN隧道的源IPv6地址"
+  },
+  "/huawei-arp:arp/static-arps/static-arp/tunnel-ip/ipv6-ip/peer-ipv6-addr": {
+    "name": "VXLAN隧道的目的IPv6地址"
+  },
+  "/huawei-arp:arp/query-entries": {
+    "name": "ARP表项查询列表"
+  },
+  "/huawei-arp:arp/query-entries/query-entry": {
+    "name": "ARP表项查询"
+  },
+  "/huawei-arp:arp/query-entries/query-entry/ni-name": {
+    "name": "VPN实例名称"
+  },
+  "/huawei-arp:arp/query-entries/query-entry/ip-addr": {
+    "name": "IP地址"
+  },
+  "/huawei-arp:arp/query-entries/query-entry/mac-addr": {
+    "name": "MAC地址"
+  },
+  "/huawei-arp:arp/query-entries/query-entry/expire-time": {
+    "name": "老化时间(分钟)"
+  },
+  "/huawei-arp:arp/query-entries/query-entry/style-type": {
+    "name": "ARP类型"
+  },
+  "/huawei-arp:arp/query-entries/query-entry/if-name": {
+    "name": "端口"
+  },
+  "/huawei-arp:arp/query-entries/query-entry/slot-id": {
+    "name": "槽位号"
+  },
+  "/huawei-arp:arp/query-entries/query-entry/pe-vlan": {
+    "name": "外层VLAN"
+  },
+  "/huawei-arp:arp/query-entries/query-entry/ce-vlan": {
+    "name": "内层VLAN"
+  },
+  "/huawei-arp:arp/query-entries/query-entry/pvc": {
+    "name": "虚拟电路标识"
+  },
+  "/huawei-arp:arp/query-entries/query-entry/vni": {
+    "name": "VXLAN标识"
+  },
+  "/huawei-arp:arp/query-entries/query-entry/source-addr": {
+    "name": "隧道源IP"
+  },
+  "/huawei-arp:arp/query-entries/query-entry/peer-addr": {
+    "name": "隧道目的IP"
+  },
+  "/huawei-arp:arp/query-entries/query-entry/work-if-name": {
+    "name": "实际工作接口"
+  },
+  "/huawei-arp:arp/bd-tracks": {
+    "name": "ARP表项出接口变化记录查询"
+  },
+  "/huawei-arp:arp/bd-tracks/bd-track": {
+    "name": "ARP表项出接口变化记录查询列表"
+  },
+  "/huawei-arp:arp/bd-tracks/bd-track/op-code": {
+    "name": "操作类型"
+  },
+  "/huawei-arp:arp/bd-tracks/bd-track/ip-addr": {
+    "name": "IP地址"
+  },
+  "/huawei-arp:arp/bd-tracks/bd-track/old-ifname": {
+    "name": "原接口名"
+  },
+  "/huawei-arp:arp/bd-tracks/bd-track/new-ifname": {
+    "name": "新接口名"
+  },
+  "/huawei-arp:arp/bd-tracks/bd-track/sys-time": {
+    "name": "系统时间"
+  },
+  "/huawei-arp:arp/bd-tracks/bd-track/bd-id": {
+    "name": "BD ID"
+  },
+  "/huawei-arp:arp/bd-tracks/bd-track/mac-addr": {
+    "name": "MAC地址"
+  },
+  "/huawei-arp:arp/anti-attack-records": {
+    "name": "ARP报文丢弃信息查询"
+  },
+  "/huawei-arp:arp/anti-attack-records/anti-attack-record": {
+    "name": "ARP报文丢弃信息查询列表"
+  },
+  "/huawei-arp:arp/anti-attack-records/anti-attack-record/supp-type": {
+    "name": "ARP报文类型"
+  },
+  "/huawei-arp:arp/anti-attack-records/anti-attack-record/src-ip-addr": {
+    "name": "源IP地址"
+  },
+  "/huawei-arp:arp/anti-attack-records/anti-attack-record/dest-ip-addr": {
+    "name": "目的IP地址"
+  },
+  "/huawei-arp:arp/anti-attack-records/anti-attack-record/interface": {
+    "name": "接口名"
+  },
+  "/huawei-arp:arp/anti-attack-records/anti-attack-record/attack-time": {
+    "name": "攻击时间"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-arp:arp-entry": {
+    "name": "ARP接口配置"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-arp:arp-entry/expire-time": {
+    "name": "老化时间(秒)"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-arp:arp-entry/probe-interval": {
+    "name": "探测间隔(秒)"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-arp:arp-entry/probe-times": {
+    "name": "探测次数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-arp:arp-entry/arp-learn-disable": {
+    "name": "关闭ARP学习"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-arp:arp-entry/arp-learn-strict": {
+    "name": "ARP严格学习"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-arp:arp-entry/route-proxy-enable": {
+    "name": "网段间ARP代理"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-arp:arp-entry/inner-proxy-enable": {
+    "name": "VLAN内ARP代理"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-arp:arp-entry/inter-proxy-enable": {
+    "name": "VLAN间ARP代理"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-arp:arp-entry/local-proxy-enable": {
+    "name": "本地代理"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-arp:arp-entry/fake-expire-time": {
+    "name": "假表项老化时间(秒)"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-arp:arp-entry/probe-unicast": {
+    "name": "单播探测"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-arp:arp-entry/dest-mac-check": {
+    "name": "目的MAC一致性检查"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-arp:arp-entry/src-mac-check": {
+    "name": "源MAC一致性检查"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-arp:arp-entry/distribute-enable": {
+    "name": "分布式网关使能"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-arp:arp-entry/gratuitous-send": {
+    "name": "接口发送免费ARP"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-arp:arp-entry/host-collect-enable": {
+    "name": "网络侧发布表项使能"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-arp:arp-entry/anyway-proxy-enable": {
+    "name": "任意代理"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-arp:arp-entry/link-down-delete": {
+    "name": "链路Down时ARP表项快速删除使能"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-arp:arp-entry/generate-rdtbl-enable": {
+    "name": "生成重定向表项"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-arp:arp-entry/broadcast-detect-interval": {
+    "name": "广播探测间隔"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-arp:arp-entry/broadcast-detect-times": {
+    "name": "广播探测次数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-arp:arp-entry/broadcast-detect-enable": {
+    "name": "广播探测使能"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-arp:arp-entry/fake-penalty-time": {
+    "name": "假表项老化惩罚时间(秒)"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-arp:arp-entry/gratuitous-arp-drop": {
+    "name": "接口丢弃免费ARP报文"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-arp:arp-entry/broadcast-max-num": {
+    "name": "ARP广播报文发送最大值"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-arp:arp-entry/smart-discover-enable": {
+    "name": "ARP主动探测"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-arp:arp-limits": {
+    "name": "最大ARP动态表项数目配置"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-arp:arp-limits/arp-limit": {
+    "name": "最大ARP动态表项数目配置列表"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-arp:arp-limits/arp-limit/vlan-id": {
+    "name": "VLAN ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-arp:arp-limits/arp-limit/limit-num": {
+    "name": "最大ARP动态表项数目"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-arp:arp-status-detect": {
+    "name": "匀速发送ARP报文最大值"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-arp:arp-status-detect/ip-addr": {
+    "name": "探测IP"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-arp:arp-status-detect/mode": {
+    "name": "是否松散模式"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-arp:arp-status-detect/times": {
+    "name": "探测次数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-arp:arp-status-detect/interval": {
+    "name": "探测周期(毫秒)"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-arp:arp-port-security": {
+    "name": "ARP端口安全配置"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-arp:arp-port-security/l2-sub-interface": {
+    "name": "ARP二层接口安全配置"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-arp:arp-port-security/l2-sub-interface/l2proxy-dyn-learn": {
+    "name": "是否开启ARP二层代答表项学习功能"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-arp:arp-port-security/l2-sub-interface/l2proxy-max-num": {
+    "name": "接口下二层代答表项最大数目"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-arp:packet-policys": {
+    "name": "ARP指定ARP请求报文的转发策略列表"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-arp:packet-policys/packet-policy": {
+    "name": "ARP报文的IP地址配置报文处理策略"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-arp:packet-policys/packet-policy/packet-type": {
+    "name": "ARP报文类型"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-arp:packet-policys/packet-policy/ip-type": {
+    "name": "IP地址类型"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-arp:packet-policys/packet-policy/ip-addr": {
+    "name": "转发策略目标IP地址"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-arp:packet-policys/packet-policy/operation": {
+    "name": "策略动作类型"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-arp:arp-statistics": {
+    "name": "基于接口的ARP报文统计"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-arp:arp-statistics/recv-req-packets": {
+    "name": "接收到的ARP请求报文的数量"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-arp:arp-statistics/recv-reply-packets": {
+    "name": "接收到的ARP应答报文的数量"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-arp:arp-statistics/recv-gratis-packets": {
+    "name": "接收到的免费ARP报文的数量"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-arp:arp-statistics/send-req-packets": {
+    "name": "发送的ARP请求报文的数量"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-arp:arp-statistics/send-reply-packets": {
+    "name": "发送的ARP应答报文的数量"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-arp:arp-statistics/send-gratis-packets": {
+    "name": "发送的免费ARP报文的数量"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-arp:static-arps": {
+    "name": "ARP静态表项"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-arp:static-arps/static-arp": {
+    "name": "静态ARP表"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-arp:static-arps/static-arp/ip-addr": {
+    "name": "IP地址"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-arp:static-arps/static-arp/mac-addr": {
+    "name": "MAC地址"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-arp:static-arps/static-arp/pevid": {
+    "name": "外部VLAN ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/huawei-arp:static-arps/static-arp/cevid": {
+    "name": "内部VLAN ID"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-arp:arp-list": {
+    "name": "ARP桥域配置列表"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-arp:arp-list/l2proxy-enable": {
+    "name": "ARP二层代答"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-arp:arp-list/broadcast-suppress": {
+    "name": "广播抑制"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-arp:arp-list/broadcast-suppress/enable": {
+    "name": "广播抑制"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-arp:arp-list/broadcast-suppress/enable/broadcast-suppress-enable": {
+    "name": "广播抑制"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-arp:arp-list/broadcast-suppress/mismatch-discard-enable": {
+    "name": "抑制丢弃"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-arp:arp-list/broadcast-suppress/mismatch-discard-enable/broadcast-suppress-discard": {
+    "name": "广播抑制丢弃"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-arp:arp-list/l2proxy-gw-enable": {
+    "name": "代理网管mac"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-arp:arp-list/l2proxy-expire-time": {
+    "name": "指定ARP Snooping表项的老化时间"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-arp:arp-list/collect-host-enable": {
+    "name": "主机信息搜集"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-arp:arp-statistics": {
+    "name": "指定BD内ARP报文的统计信息查询"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-arp:arp-statistics/receive-req-packets": {
+    "name": "接收到的ARP请求报文的数量"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-arp:arp-statistics/receive-gratis-packets": {
+    "name": "接收到的免费ARP报文的数量"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-arp:arp-statistics/receive-proxy-packets": {
+    "name": "收到的网关代答报文统计计数"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-arp:arp-statistics/receive-reply": {
+    "name": "收到的报文应答统计计数"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-arp:arp-statistics/miss-discard": {
+    "name": "因为广播抑制未命中丢弃的报文统计计数"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-arp:arp-statistics/discard-other": {
+    "name": "因为其他原因丢弃的报文统计计数"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-arp:arp-statistics/receive-total-packets": {
+    "name": "ARP接收报文总计数"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-arp:arp-statistics/send-unicast-packets": {
+    "name": "发送的单播报文统计计数"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-arp:arp-statistics/send-broadcast-packets": {
+    "name": "发送的广播报文统计计数"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-arp:arp-statistics/send-gratis-packets": {
+    "name": "发送的免费ARP报文统计计数"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-arp:arp-statistics/send-proxy-packets": {
+    "name": "发送的网关代答报文统计计数"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-arp:arp-statistics/l2proxy-reply": {
+    "name": "BD/VBDIF接口下发送的代答报文统计计数"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-arp:arp-statistics/send-total-packets": {
+    "name": "BD域下发送的ARP报文总计数"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-arp:arp-ip-pool": {
+    "name": "Sub-VLAN下IP地址池配置列表"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-arp:arp-ip-pool/ip-begin": {
+    "name": "起始IP地址"
+  },
+  "/huawei-vlan:vlan/vlans/vlan/huawei-arp:arp-ip-pool/ip-end": {
+    "name": "结束IP地址"
+  }
+}

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<security-node>
+<path>/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peers/peer/password-text</path>
+<path encrypt="false">/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peers/peer/password-type</path>
+<path>/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peer-groups/peer-group/password-text</path>
+<path encrypt="false">/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peer-groups/peer-group/password-type</path>
+<path>/huawei-bfd:bfd/authentication-keys/authentication-key/cipher-string</path>
+<path>/huawei-cfg:cfg/backup-servers/backup-server/password</path>
+<path>/huawei-hwtacacs:hwtacacs/templates/template/shared-key</path>
+<path>/huawei-hwtacacs:hwtacacs/templates/template/servers/server/shared-key</path>
+<path>/huawei-hwtacacs:hwtacacs/templates/template/ipv4-servers/ipv4-server/shared-key</path>
+<path>/huawei-hwtacacs:hwtacacs/templates/template/ipv6-servers/ipv6-server/shared-key</path>
+<path>/huawei-m-lag:m-lag/dfs-groups/dfs-group/authentication/password</path>
+<path>/huawei-ifm:ifm/interfaces/interface/huawei-macsec:macsec/ckn-caks/ckn-cak/cak</path>
+<path>/huawei-nqa:nqa/upload/intances/intance/pass-word</path>
+<path encrypt="false">/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/authentication/mode</path>
+<path>/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/authentication/auth-text-simple</path>
+<path>/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/authentication/auth-text-md5</path>
+<path encrypt="false">/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/vlink-peers/vlink-peer/authentication/mode</path>
+<path>/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/vlink-peers/vlink-peer/authentication/auth-text-simple</path>
+<path>/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/vlink-peers/vlink-peer/authentication/auth-text-md5</path>
+<path encrypt="false">/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/sham-links/sham-link/authentication/mode</path>
+<path>/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/sham-links/sham-link/authentication/auth-text-simple</path>
+<path>/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/sham-links/sham-link/authentication/auth-text-md5</path>
+<path encrypt="false">/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/authentication/mode</path>
+<path encrypt="false">/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/authentication/key-id</path>
+<path>/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/authentication/auth-text-simple</path>
+<path>/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/authentication/auth-text-md5</path>
+<path encrypt="false">/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/multi-areas/multi-area/authentication/mode</path>
+<path>/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/multi-areas/multi-area/authentication/auth-text-simple</path>
+<path>/huawei-network-instance:network-instance/instances/instance/huawei-ospfv2:ospfv2/sites/site/areas/area/interfaces/interface/multi-areas/multi-area/authentication/auth-text-md5</path>
+<path encrypt="false">/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/authentication/mode</path>
+<path>/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/authentication/text</path>
+<path encrypt="false">/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/authentication/mode</path>
+<path>/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/authentication/auth-text</path>
+<path encrypt="false">/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/interfaces/interface/authentication/mode</path>
+<path encrypt="false">/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/interfaces/interface/authentication/key-id</path>
+<path>/huawei-network-instance:network-instance/instances/instance/huawei-ospfv3:ospfv3/sites/site/areas/area/interfaces/interface/authentication/auth-text</path>
+<path>/huawei-snmp:snmp/usm-users/usm-user/auth-key</path>
+<path>/huawei-snmp:snmp/usm-users/usm-user/priv-key</path>
+<path>/huawei-snmp:snmp/local-users/local-user/auth-key</path>
+<path>/huawei-snmp:snmp/local-users/local-user/priv-key</path>
+<path>/huawei-snmp:snmp/communitys/community/name</path>
+<path>/huawei-snmp:snmp/standard-communitys/standard-community/name</path>
+<path>/huawei-snmp:snmp/proxy/communitys/community/name</path>
+<path>/huawei-snmp:snmp/proxy/standard-communitys/standard-community/name</path>
+<path>/huawei-snmp:snmp/proxy/rules/rule/security-name</path>
+<path>/huawei-snmp:snmp/proxy/usm-users/usm-user/auth-key</path>
+<path>/huawei-snmp:snmp/proxy/usm-users/usm-user/priv-key</path>
+<path>/huawei-ssl:ssl/ssl-policys/ssl-policy/cert-loads/cert-load/auth-code-crt</path>
+<path>/huawei-ssl:ssl/ssl-policys/ssl-policy/cert-loads/cert-load/auth-code-mac</path>
+<path>/huawei-ssl:ssl/ssl-policys/ssl-policy/trust-ca-loads/trust-ca-load/auth-code</path>
+<path>/huawei-vty:vty/lines/line/auth-password</path>
+<path>/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/md5-password</path>
+<path encrypt="false">/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/md5-simple-flag</path>
+<path>/huawei-bfd:bfd/sessions/session/cipher-string-multicast-ipv4</path>
+<path>/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/huawei-gre:gre-tunnel/key</path>
+<path>/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/huawei-gre:mgre-tunnel/key</path>
+<path>/huawei-snmp:snmp/target-hosts/target-host/security-name-v1</path>
+<path>/huawei-snmp:snmp/target-hosts/target-host/security-name-v2c</path>
+<path>/huawei-pki:pki/cmp-sessions/cmp-session/authentication-code/secret-value</path>
+<!--配置为敏感字段，实现不参与差异发现-->
+<path encrypt="false">/huawei-sshs:sshs/netconf/max-sessions</path>
+</security-node>
+

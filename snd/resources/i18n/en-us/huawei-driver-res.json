@@ -1,0 +1,482 @@
+{
+  "/huawei-driver:driver": {
+    "name": "Driver Configuration"
+  },
+  "/huawei-driver:driver/global-attribute": {
+    "name": "Global Attribute"
+  },
+  "/huawei-driver:driver/global-attribute/energy-mode": {
+    "name": "Energy Mode"
+  },
+  "/huawei-driver:driver/global-attribute/sampling-period": {
+    "name": "Sampling Period"
+  },
+  "/huawei-driver:driver/global-attribute/system-mac-address": {
+    "name": "The system MAC address"
+  },
+  "/huawei-driver:driver/global-attribute/system-mac-number": {
+    "name": "The number of system MAC address"
+  },
+  "/huawei-driver:driver/global-attribute/cur-system-work-mode": {
+    "name": "Current system work mode"
+  },
+  "/huawei-driver:driver/global-attribute/next-system-work-mode": {
+    "name": "Next system work mode"
+  },
+  "/huawei-driver:driver/temperature2s": {
+    "name": "List of temperature information"
+  },
+  "/huawei-driver:driver/temperature2s/temperature2": {
+    "name": "Temperature information"
+  },
+  "/huawei-driver:driver/temperature2s/temperature2/position": {
+    "name": "Position"
+  },
+  "/huawei-driver:driver/temperature2s/temperature2/sensor-id": {
+    "name": "Sensor ID"
+  },
+  "/huawei-driver:driver/temperature2s/temperature2/minor-threshold-percent": {
+    "name": "Minor high temperature alarm threshold"
+  },
+  "/huawei-driver:driver/temperature2s/temperature2/major-threshold-percent": {
+    "name": "Major high temperature alarm threshold"
+  },
+  "/huawei-driver:driver/temperature2s/temperature2/fatal-threshold-percent": {
+    "name": "Fatal high temperature alarm threshold"
+  },
+  "/huawei-driver:driver/temperature2s/temperature2/fan-adjust-high-temperature": {
+    "name": "Upper threshold for fan speed"
+  },
+  "/huawei-driver:driver/temperature2s/temperature2/fan-adjust-low-temperature": {
+    "name": "Lower threshold for fan speed"
+  },
+  "/huawei-driver:driver/temperature2s/temperature2/pcb-name": {
+    "name": "Component name"
+  },
+  "/huawei-driver:driver/temperature2s/temperature2/sensor-name": {
+    "name": "Name of a sensor"
+  },
+  "/huawei-driver:driver/temperature2s/temperature2/state": {
+    "name": "Status of a sensor"
+  },
+  "/huawei-driver:driver/temperature2s/temperature2/current-temperature": {
+    "name": "Current temperature"
+  },
+  "/huawei-driver:driver/temperature2s/temperature2/minor-threshold": {
+    "name": "Lower temperature threshold"
+  },
+  "/huawei-driver:driver/temperature2s/temperature2/major-threshold": {
+    "name": "Upper temperature threshold"
+  },
+  "/huawei-driver:driver/temperature2s/temperature2/fatal-threshold": {
+    "name": "Upper limit of the temperature"
+  },
+  "/huawei-driver:driver/voltages": {
+    "name": "List of voltage information"
+  },
+  "/huawei-driver:driver/voltages/voltage": {
+    "name": "Voltage information"
+  },
+  "/huawei-driver:driver/voltages/voltage/position": {
+    "name": "Position"
+  },
+  "/huawei-driver:driver/voltages/voltage/sensor-id": {
+    "name": "Sensor ID"
+  },
+  "/huawei-driver:driver/voltages/voltage/major-low-threshold-percent": {
+    "name": "Major undervoltage threshold"
+  },
+  "/huawei-driver:driver/voltages/voltage/fatal-low-threshold-percent": {
+    "name": "Fatal undervoltage threshold"
+  },
+  "/huawei-driver:driver/voltages/voltage/major-high-threshold-percent": {
+    "name": "Major overvoltage threshold"
+  },
+  "/huawei-driver:driver/voltages/voltage/fatal-high-threshold-percent": {
+    "name": "Fatal voltage threshold"
+  },
+  "/huawei-driver:driver/voltages/voltage/pcb-name": {
+    "name": "Component name"
+  },
+  "/huawei-driver:driver/voltages/voltage/sensor-name": {
+    "name": "Name of a sensor"
+  },
+  "/huawei-driver:driver/voltages/voltage/state": {
+    "name": "Status of a sensor"
+  },
+  "/huawei-driver:driver/voltages/voltage/current-voltage": {
+    "name": "Current voltage"
+  },
+  "/huawei-driver:driver/voltages/voltage/required-voltage": {
+    "name": "Basic voltage required"
+  },
+  "/huawei-driver:driver/voltages/voltage/major-low-threshold": {
+    "name": "Major lower threshold"
+  },
+  "/huawei-driver:driver/voltages/voltage/fatal-low-threshold": {
+    "name": "Fatal lower threshold of the voltage"
+  },
+  "/huawei-driver:driver/voltages/voltage/major-high-threshold": {
+    "name": "High upper threshold of the voltage"
+  },
+  "/huawei-driver:driver/voltages/voltage/fatal-high-threshold": {
+    "name": "Fatal upper threshold of the voltage"
+  },
+  "/huawei-driver:driver/voltages/voltage/ratio": {
+    "name": "Voltage division Ratio"
+  },
+  "/huawei-driver:driver/area-energyinfos": {
+    "name": "List of Area Energy"
+  },
+  "/huawei-driver:driver/area-energyinfos/area-energyinfo": {
+    "name": "Statistics of Area Energy"
+  },
+  "/huawei-driver:driver/area-energyinfos/area-energyinfo/chassis-position": {
+    "name": "Chassis Position"
+  },
+  "/huawei-driver:driver/area-energyinfos/area-energyinfo/area-id": {
+    "name": "Area ID"
+  },
+  "/huawei-driver:driver/area-energyinfos/area-energyinfo/area-rated-power": {
+    "name": "Area Rated Power"
+  },
+  "/huawei-driver:driver/area-energyinfos/area-energyinfo/area-assigned-power": {
+    "name": "Area assigned Power"
+  },
+  "/huawei-driver:driver/area-energyinfos/area-energyinfo/area-used-power": {
+    "name": "Area Used Power"
+  },
+  "/huawei-driver:driver/area-energyinfos/area-energyinfo/area-left-power": {
+    "name": "Area Left Power"
+  },
+  "/huawei-driver:driver/area-energyinfos/area-energyinfo/board-energys": {
+    "name": "List of energy information about a board"
+  },
+  "/huawei-driver:driver/area-energyinfos/area-energyinfo/board-energys/board-energy": {
+    "name": "Statistics of energy information about a board"
+  },
+  "/huawei-driver:driver/area-energyinfos/area-energyinfo/board-energys/board-energy/position": {
+    "name": "Board position"
+  },
+  "/huawei-driver:driver/area-energyinfos/area-energyinfo/board-energys/board-energy/entity-index": {
+    "name": "Board index"
+  },
+  "/huawei-driver:driver/area-energyinfos/area-energyinfo/board-energys/board-energy/pcb-name": {
+    "name": "Board type"
+  },
+  "/huawei-driver:driver/area-energyinfos/area-energyinfo/board-energys/board-energy/voltage-value": {
+    "name": "Current voltage value"
+  },
+  "/huawei-driver:driver/area-energyinfos/area-energyinfo/board-energys/board-energy/electrical-value": {
+    "name": "Current electrical value"
+  },
+  "/huawei-driver:driver/area-energyinfos/area-energyinfo/board-energys/board-energy/current-power": {
+    "name": "Current power value"
+  },
+  "/huawei-driver:driver/area-energyinfos/area-energyinfo/board-energys/board-energy/rated-power": {
+    "name": "Rated power value"
+  },
+  "/huawei-driver:driver/area-energyinfos/area-energyinfo/board-energys/board-energy/power-threshold": {
+    "name": "Power threshold value"
+  },
+  "/huawei-driver:driver/area-energyinfos/area-energyinfo/board-energys/board-energy/efficiency": {
+    "name": "Efficiency value"
+  },
+  "/huawei-driver:driver/electronic-labels": {
+    "name": "Electronic labels"
+  },
+  "/huawei-driver:driver/electronic-labels/electronic-label": {
+    "name": "Electronic label"
+  },
+  "/huawei-driver:driver/electronic-labels/electronic-label/entity-class": {
+    "name": "Entity class"
+  },
+  "/huawei-driver:driver/electronic-labels/electronic-label/position": {
+    "name": "Position"
+  },
+  "/huawei-driver:driver/electronic-labels/electronic-label/entity-serial-number": {
+    "name": "Entity serial number"
+  },
+  "/huawei-driver:driver/electronic-labels/electronic-label/entity-index": {
+    "name": "Entity index"
+  },
+  "/huawei-driver:driver/electronic-labels/electronic-label/entity-bomid": {
+    "name": "BOM ID"
+  },
+  "/huawei-driver:power-on-mpu": {
+    "name": "Power On Mpu"
+  },
+  "/huawei-driver:power-on-mpu/input/board-position": {
+    "name": "Board Position"
+  },
+  "/huawei-driver:power-off-mpu": {
+    "name": "Power Off Mpu"
+  },
+  "/huawei-driver:power-off-mpu/input/board-position": {
+    "name": "Board Position"
+  },
+  "/huawei-driver:power-off-mpu/input/auto-power-on": {
+    "name": "Auto power on"
+  },
+  "/huawei-driver:power-on-lpu": {
+    "name": "Power On Lpu"
+  },
+  "/huawei-driver:power-on-lpu/input/board-position": {
+    "name": "Board Position"
+  },
+  "/huawei-driver:power-off-lpu": {
+    "name": "Power Off Lpu"
+  },
+  "/huawei-driver:power-off-lpu/input/board-position": {
+    "name": "Board Position"
+  },
+  "/huawei-driver:power-off-lpu/input/auto-power-on": {
+    "name": "Auto power on"
+  },
+  "/huawei-driver:power-on-sfu": {
+    "name": "Power On Sfu"
+  },
+  "/huawei-driver:power-on-sfu/input/board-position": {
+    "name": "Board Position"
+  },
+  "/huawei-driver:power-off-sfu": {
+    "name": "Power Off Sfu"
+  },
+  "/huawei-driver:power-off-sfu/input/board-position": {
+    "name": "Board Position"
+  },
+  "/huawei-driver:power-off-sfu/input/auto-power-on": {
+    "name": "Auto power on"
+  },
+  "/huawei-driver:power-on-card": {
+    "name": "Power on card"
+  },
+  "/huawei-driver:power-on-card/input/card-position": {
+    "name": "Card position"
+  },
+  "/huawei-driver:power-off-card": {
+    "name": "Power off card"
+  },
+  "/huawei-driver:power-off-card/input/card-position": {
+    "name": "Card position"
+  },
+  "/huawei-driver:power-off-card/input/auto-power-on": {
+    "name": "Auto power on"
+  },
+  "/huawei-driver:set-boot-password": {
+    "name": "Set Boot Password"
+  },
+  "/huawei-driver:set-boot-password/input/slot-id": {
+    "name": "SlotId"
+  },
+  "/huawei-driver:set-boot-password/input/old-password": {
+    "name": "Old password"
+  },
+  "/huawei-driver:set-boot-password/input/new-password": {
+    "name": "New password"
+  },
+  "/huawei-devm:devm/chassiss/chassis/huawei-driver:fan-attribute": {
+    "name": "Fan attribute"
+  },
+  "/huawei-devm:devm/chassiss/chassis/huawei-driver:fan-attribute/workmode": {
+    "name": "Fan working mode"
+  },
+  "/huawei-devm:devm/chassiss/chassis/huawei-driver:fan-attribute/speed": {
+    "name": "Fan speed"
+  },
+  "/huawei-devm:devm/chassiss/chassis/huawei-driver:power-supply-attribute": {
+    "name": "Power supply information"
+  },
+  "/huawei-devm:devm/chassiss/chassis/huawei-driver:power-supply-attribute/pm-output-limit": {
+    "name": "PM output limited value"
+  },
+  "/huawei-devm:devm/chassiss/chassis/huawei-driver:power-supply-attribute/pm-input-voltage-110": {
+    "name": "Power input voltage"
+  },
+  "/huawei-devm:devm/chassiss/chassis/huawei-driver:power-supply-attribute/power-supply-mode": {
+    "name": "Power supply mode"
+  },
+  "/huawei-devm:devm/chassiss/chassis/huawei-driver:power-supply-attribute/power-supply-input": {
+    "name": "Power supply input power"
+  },
+  "/huawei-devm:devm/chassiss/chassis/huawei-driver:power-supply-attribute/power-supply-temp": {
+    "name": "Chassis Working Temperature"
+  },
+  "/huawei-devm:devm/chassiss/chassis/huawei-driver:power-supply-attribute/power-supply-limit": {
+    "name": "Limit Power"
+  },
+  "/huawei-devm:devm/chassiss/chassis/huawei-driver:power-supply-attribute/power-supply-alarm-limit": {
+    "name": "Alarm Limit Power"
+  },
+  "/huawei-devm:devm/chassiss/chassis/huawei-driver:power-supply-attribute/power-supply-assigned": {
+    "name": "Assigned Power"
+  },
+  "/huawei-devm:devm/chassiss/chassis/huawei-driver:power-supply-attribute/power-supply-assigned-utility": {
+    "name": "Assigned Power Utility"
+  },
+  "/huawei-devm:devm/chassiss/chassis/huawei-driver:power-supply-attribute/power-supply-left": {
+    "name": "Left Power"
+  },
+  "/huawei-devm:devm/chassiss/chassis/huawei-driver:power-supply-attribute/power-supply-real": {
+    "name": "Real Power"
+  },
+  "/huawei-devm:devm/chassiss/chassis/huawei-driver:power-supply-attribute/power-supply-real-utility": {
+    "name": "Real Power Utility"
+  },
+  "/huawei-devm:devm/huawei-driver:driver": {
+    "name": "Driver information"
+  },
+  "/huawei-devm:devm/huawei-driver:driver/pms": {
+    "name": "PM List"
+  },
+  "/huawei-devm:devm/huawei-driver:driver/pms/pm": {
+    "name": "PM"
+  },
+  "/huawei-devm:devm/huawei-driver:driver/pms/pm/position": {
+    "name": "Location"
+  },
+  "/huawei-devm:devm/huawei-driver:driver/pms/pm/serial-number": {
+    "name": "Number"
+  },
+  "/huawei-devm:devm/huawei-driver:driver/pms/pm/input-power-value": {
+    "name": "Input Power (W)"
+  },
+  "/huawei-devm:devm/huawei-driver:driver/pms/pm/output-voltage-value": {
+    "name": "Output Voltage (V)"
+  },
+  "/huawei-devm:devm/huawei-driver:driver/pms/pm/output-electrical-value": {
+    "name": "Output Current (A)"
+  },
+  "/huawei-devm:devm/huawei-driver:driver/pms/pm/output-power-value": {
+    "name": "Output Power (W)"
+  },
+  "/huawei-devm:devm/huawei-driver:driver/pms/pm/pm-status": {
+    "name": "PM Status"
+  },
+  "/huawei-devm:devm/huawei-driver:driver/fans": {
+    "name": "Fan information"
+  },
+  "/huawei-devm:devm/huawei-driver:driver/fans/fan": {
+    "name": "Fan information"
+  },
+  "/huawei-devm:devm/huawei-driver:driver/fans/fan/position": {
+    "name": "Position"
+  },
+  "/huawei-devm:devm/huawei-driver:driver/fans/fan/entity-index": {
+    "name": "Physical index"
+  },
+  "/huawei-devm:devm/huawei-driver:driver/fans/fan/board-type": {
+    "name": "Type of a fan board"
+  },
+  "/huawei-devm:devm/huawei-driver:driver/fans/fan/work-mode": {
+    "name": "Working mode of a fan"
+  },
+  "/huawei-devm:devm/huawei-driver:driver/fans/fan/speed": {
+    "name": "Fan speed"
+  },
+  "/huawei-devm:devm/huawei-driver:driver/fans/fan/fan-rate": {
+    "name": "Rated rotational speed"
+  },
+  "/huawei-devm:devm/huawei-driver:driver/fans/fan/monitor-cable-state": {
+    "name": "Monitors the fan status"
+  },
+  "/huawei-devm:devm/huawei-driver:driver/fans/fan/register": {
+    "name": "Fan register"
+  },
+  "/huawei-devm:devm/huawei-driver:driver/fans/fan/present": {
+    "name": "Fan is in position"
+  },
+  "/huawei-devm:devm/huawei-driver:driver/fans/fan/fan-number": {
+    "name": "Number of fans"
+  },
+  "/huawei-devm:devm/huawei-driver:driver/fans/fan/global-speed": {
+    "name": "Fan speed percentage"
+  },
+  "/huawei-devm:devm/huawei-driver:driver/power-supplys": {
+    "name": "Power supplies information"
+  },
+  "/huawei-devm:devm/huawei-driver:driver/power-supplys/power-supply": {
+    "name": "Power supply information"
+  },
+  "/huawei-devm:devm/huawei-driver:driver/power-supplys/power-supply/position": {
+    "name": "Position of the power supply"
+  },
+  "/huawei-devm:devm/huawei-driver:driver/power-supplys/power-supply/entity-index": {
+    "name": "Index of the power supply"
+  },
+  "/huawei-devm:devm/huawei-driver:driver/power-supplys/power-supply/board-type": {
+    "name": "Hardware type of the power supply"
+  },
+  "/huawei-devm:devm/huawei-driver:driver/power-supplys/power-supply/work-mode": {
+    "name": "Working mode"
+  },
+  "/huawei-devm:devm/huawei-driver:driver/power-supplys/power-supply/monitor-cable-state": {
+    "name": "Status of the power monitoring point"
+  },
+  "/huawei-devm:devm/huawei-driver:driver/power-supplys/power-supply/power-state": {
+    "name": "Power state"
+  },
+  "/huawei-devm:devm/huawei-driver:driver/power-supplys/power-supply/abnormal-number": {
+    "name": "Abnormal number"
+  },
+  "/huawei-devm:devm/huawei-driver:driver/power-supplys/power-supply/normal-number": {
+    "name": "Normal number"
+  },
+  "/huawei-devm:devm/huawei-driver:driver/power-supplys/power-supply/power-environments": {
+    "name": "Power supply environment"
+  },
+  "/huawei-devm:devm/huawei-driver:driver/power-supplys/power-supply/power-environments/power-environment": {
+    "name": "Power supply environment"
+  },
+  "/huawei-devm:devm/huawei-driver:driver/power-supplys/power-supply/power-environments/power-environment/pem-index": {
+    "name": "Index of the power supply"
+  },
+  "/huawei-devm:devm/huawei-driver:driver/power-supplys/power-supply/power-environments/power-environment/voltage-value": {
+    "name": "Voltage value"
+  },
+  "/huawei-devm:devm/huawei-driver:driver/power-supplys/power-supply/power-environments/power-environment/electrical-value": {
+    "name": "Current value"
+  },
+  "/huawei-devm:devm/huawei-driver:driver/power-supplys/power-supply/power-environments/power-environment/temperature-value": {
+    "name": "Temperature value"
+  },
+  "/huawei-devm:devm/huawei-driver:driver/power-supplys/power-supply/power-environments/power-environment/power-value": {
+    "name": "Current power value"
+  },
+  "/huawei-devm:devm/huawei-driver:driver/power-supplys/power-supply/power-environments/power-environment/out-voltage-value": {
+    "name": "Output voltage value"
+  },
+  "/huawei-devm:devm/huawei-driver:driver/power-supplys/power-supply/power-environments/power-environment/out-electrical-value": {
+    "name": "Current output electrical value"
+  },
+  "/huawei-devm:devm/huawei-driver:driver/power-supplys/power-supply/power-environments/power-environment/out-power-value": {
+    "name": "Current output power value"
+  },
+  "/rpcs/huawei-driver:driver/power-on-mpu": {
+    "name": "Power On Mpu"
+  },
+  "/rpcs/huawei-driver:driver/power-off-mpu": {
+    "name": "Power Off Mpu"
+  },
+  "/rpcs/huawei-driver:driver/power-on-lpu": {
+    "name": "Power On Lpu"
+  },
+  "/rpcs/huawei-driver:driver/power-off-lpu": {
+    "name": "Power Off Lpu"
+  },
+  "/rpcs/huawei-driver:driver/power-on-sfu": {
+    "name": "Power On Sfu"
+  },
+  "/rpcs/huawei-driver:driver/power-off-sfu": {
+    "name": "Power Off Sfu"
+  },
+  "/rpcs/huawei-driver:driver/power-on-card": {
+    "name": "Power on card"
+  },
+  "/rpcs/huawei-driver:driver/power-off-card": {
+    "name": "Power off card"
+  },
+  "/rpcs/huawei-driver:driver/set-boot-password": {
+    "name": "Set Boot Password"
+  }
+}
