@@ -32,5 +32,5 @@
 ## 5. 收口
 
 - [x] 5.1 后端全量 `go test ./...`（含 -race）+ 覆盖率棘轮不降；前端套件全绿（零前端代码改动）
-- [ ] 5.2 code review + What/Why/How 提交 + PR + CI 全绿
-- [ ] 5.3 `/opsx:sync` 三 delta → 主 spec；`/opsx:archive`；memory 更新
+- [x] 5.2 code review + What/Why/How 提交 + PR + CI 全绿
+- [x] 5.3 `/opsx:sync` 三 delta → 主 spec；`/opsx:archive`；memory 更新
