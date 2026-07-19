@@ -23,7 +23,7 @@
 备选：provide/inject（作用域不跨路由）、路由 query 全程携带（每次导航都要改写 URL，左树 `:index` 静态路径不可行）——store 最小且已存在。
 
 **D2 入页初始化优先级：query > store**
-`?device=` 存在 → 写入 store（深链/「查看配置」语义：显式指定覆盖旧上下文）；不存在 → 沿用 store 现值。「查看配置」跳转同时写 store 并带 query（URL 可分享，双写幂等）。
+`?device=` 存在 → 写入 store（深链/「查看配置」语义：显式指定覆盖旧上下文）；不存在 → 沿用 store 现值。「查看配置」跳转同时写 store 并带 query（URL 可分享，双写幂等）。实现为 `watch(route.query.device)` 而非仅 setup 一次性执行——组件在 `/module/:module` 间复用，前进/后退到携带 query 的历史条目也须生效；重复 query 参数取首个（数组 String 化会产出 `'a,b'` 垃圾值污染全局上下文）。已知取舍：页内手动换设备不回写 URL（query 表达入口意图而非实时选中）。
 
 **D3 未选设备空态：Tab 区域整体替换为引导 `el-empty`**
 页头（面包屑 + 设备下拉）保持可用，schema 照常加载（Tab 派生不依赖设备，选中后即时呈现）。仅内容区按「未选设备」分支渲染引导，提示到页头下拉选择。

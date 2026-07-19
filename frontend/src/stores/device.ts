@@ -34,7 +34,9 @@ function normalizeDevice(d: any): Device {
 
 export const useDeviceStore = defineStore('device', () => {
   const devices = ref<Device[]>([])
-  const selectedDevice = ref<Device | null>(null)
+  // 全局设备上下文（FE-10）：设备作用域配置页共享的唯一选中态，IP 口径
+  //（id 即 ip，与控制台下拉 value / 配置 API 设备标识一致）。
+  const selectedDeviceIp = ref('')
   const isLoading = ref(false)
 
   const onlineCount = computed(() => devices.value.filter(d => d.status === 'online').length)
@@ -72,17 +74,17 @@ export const useDeviceStore = defineStore('device', () => {
     }
   }
 
-  function selectDevice(device: Device) {
-    selectedDevice.value = device
+  function selectDevice(ip: string) {
+    selectedDeviceIp.value = ip
   }
 
   function clearSelection() {
-    selectedDevice.value = null
+    selectedDeviceIp.value = ''
   }
 
   return {
     devices,
-    selectedDevice,
+    selectedDeviceIp,
     isLoading,
     onlineCount,
     offlineCount,

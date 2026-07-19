@@ -139,6 +139,9 @@ function handleRefresh() {
 function goToConfig(row: DeviceRow) {
   // 旧配置页路由（name:'interface'）已随 FE-13 退役，跳通用模块控制台；
   // device 传 IP，与控制台设备下拉的 value 口径一致。
+  // 同步写全局设备上下文（FE-10）：选一次设备，后续模块切换沿用；
+  // query 仍携带以保证 URL 可分享（双写幂等）。
+  store.selectDevice(row.ip)
   router.push({ name: 'module-console', params: { module: 'ifm' }, query: { device: row.ip } })
 }
 

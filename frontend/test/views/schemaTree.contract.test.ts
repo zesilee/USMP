@@ -1,9 +1,10 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { mount, flushPromises } from '@vue/test-utils'
-import { createPinia } from 'pinia'
+import { createPinia, setActivePinia } from 'pinia'
 import ElementPlus from 'element-plus'
 import router from '../../src/router'
 import App from '../../src/App.vue'
+import { useDeviceStore } from '../../src/stores/device'
 import { getYangSchema } from '../../src/api'
 
 vi.mock('../../src/api')
@@ -39,7 +40,11 @@ describe('旧配置路由重定向到通用模块控制台（真路由挂载）'
   })
 
   it('/config/vlan → /module/vlan，schema 派生出 vlans 列表 Tab', async () => {
-    const wrapper = mount(App, { global: { plugins: [createPinia(), ElementPlus, router] } })
+    const pinia = createPinia()
+    setActivePinia(pinia)
+    // 全局设备上下文：控制台内容区以已选设备为前提（未选走引导空态）。
+    useDeviceStore().selectDevice('192.168.1.1')
+    const wrapper = mount(App, { global: { plugins: [pinia, ElementPlus, router] } })
     await router.push('/config/vlan')
     await flushPromises()
 
