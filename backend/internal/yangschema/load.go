@@ -7,6 +7,8 @@
 package yangschema
 
 import (
+	"sync"
+
 	"fmt"
 
 	"github.com/leezesi/usmp/backend/internal/generated/business"
@@ -16,7 +18,22 @@ import (
 
 // Load builds a Schema containing the huawei and usmp business intent modules
 // from their generated ygot schemas.
+//
+// 结果记忆化（full-yang-onboarding）：生成闭包扩到 67 根容器后，单次 gzip
+// schema 解包成本显著；schema 构建是纯函数、产物只读（DefaultSchema 并发安全），
+// 进程内共享一份。生产启动本就单次调用，收益主要在测试面（每包数十次 Load）。
 func Load() (schema.Schema, error) {
+	loadOnce.Do(func() { loadedSchema, loadErr = loadUncached() })
+	return loadedSchema, loadErr
+}
+
+var (
+	loadOnce     sync.Once
+	loadedSchema schema.Schema
+	loadErr      error
+)
+
+func loadUncached() (schema.Schema, error) {
 	ds := schema.NewSchema()
 
 	hs, err := huawei.Schema()

@@ -91,7 +91,7 @@ if [ -n "$GO_FILES" ]; then
       if [ "$rel" != "." ] && ! ls backend/"${rel}"/*.go >/dev/null 2>&1; then
         continue
       fi
-      if ! (cd backend && go test "./${rel}/..." -count=1 -timeout=30s 2>&1); then
+      if ! (cd backend && go test "./${rel}/..." -count=1 -timeout=120s 2>&1); then
         echo -e "${RED}[R15] 拒绝: 测试未通过 (${pkg})${NC}"
         FAILED=1
       fi

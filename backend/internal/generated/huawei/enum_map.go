@@ -64,6 +64,9 @@ using the following YANG input files:
   - huawei-vxlan-path-detect
   - openconfig-telemetry
   - usmp-deviations
+  - huawei-ethernet
+  - huawei-gre
+  - huawei-nvo3-statistics
 
 Imported modules were sourced from:
   - ../snd/ce6866p-yang/...
@@ -6400,6 +6403,16 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		2: {Name: "Peer"},
 		3: {Name: "Server"},
 	},
+	"E_HuaweiNvo3Statistics_StatisticsDirection": {
+		1: {Name: "inbound"},
+		2: {Name: "outbound"},
+		3: {Name: "bidirection"},
+	},
+	"E_HuaweiNvo3Statistics_VxlanMode": {
+		1: {Name: "l2"},
+		2: {Name: "l3"},
+		3: {Name: "both"},
+	},
 	"E_HuaweiNvo3_NqaStateType": {
 		1: {Name: "unknown"},
 		2: {Name: "down"},
@@ -9731,6 +9744,18 @@ func initΛEnumTypes() {
 		},
 		"/ifm/interfaces/interface/nd-sending/type": []reflect.Type{
 			reflect.TypeOf((E_HuaweiL2Vpn_L2VpnNdSendType)(0)),
+		},
+		"/ifm/interfaces/interface/nvo3-ipv6-vtep-statistics/nvo3-ipv6-vtep-statistic/direction": []reflect.Type{
+			reflect.TypeOf((E_HuaweiNvo3Statistics_StatisticsDirection)(0)),
+		},
+		"/ifm/interfaces/interface/nvo3-ipv6-vtep-statistics/nvo3-ipv6-vtep-statistic/mode": []reflect.Type{
+			reflect.TypeOf((E_HuaweiNvo3Statistics_VxlanMode)(0)),
+		},
+		"/ifm/interfaces/interface/nvo3-vtep-statistics/nvo3-vtep-statistic/direction": []reflect.Type{
+			reflect.TypeOf((E_HuaweiNvo3Statistics_StatisticsDirection)(0)),
+		},
+		"/ifm/interfaces/interface/nvo3-vtep-statistics/nvo3-vtep-statistic/mode": []reflect.Type{
+			reflect.TypeOf((E_HuaweiNvo3Statistics_VxlanMode)(0)),
 		},
 		"/ifm/interfaces/interface/packet-policys/packet-policy/ip-type": []reflect.Type{
 			reflect.TypeOf((E_HuaweiArp_ArpIpType)(0)),

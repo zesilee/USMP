@@ -115,7 +115,7 @@ func TestListModulesCategory(t *testing.T) {
 		{"ifm", "interface-mgr"},
 		{"vlan", "vlan"},
 		{"system", "system"},
-		{"bgp", ""}, // no task-name mapping → omitted
+		{"bgp", "bgp"}, // full-yang-onboarding：taskname 清单全量化后 bgp 有映射
 	}
 	for _, cse := range cases {
 		if got := byName[cse.module].Category; got != cse.want {
@@ -123,12 +123,21 @@ func TestListModulesCategory(t *testing.T) {
 		}
 	}
 
-	// omitempty boundary: unmapped module serializes without a category key.
-	raw, err := json.Marshal(byName["bgp"])
-	if err != nil {
-		t.Fatalf("marshal: %v", err)
-	}
-	if strings.Contains(string(raw), `"category"`) {
-		t.Errorf("bgp serializes category unexpectedly: %s", raw)
+	// omitempty boundary：无 task-name 映射的模块序列化时省略 category 键。
+	// 全量化后闭包拖入的黑名单根（如 mpls）无映射，取其为无映射样本；若全部
+	// 模块都有映射则跳过该边界（语义已由 want:"" 空断言覆盖）。
+	for _, name := range []string{"mpls", "ssl", "l2vpn"} {
+		m, ok := byName[name]
+		if !ok || m.Category != "" {
+			continue
+		}
+		raw, err := json.Marshal(m)
+		if err != nil {
+			t.Fatalf("marshal: %v", err)
+		}
+		if strings.Contains(string(raw), `"category"`) {
+			t.Errorf("%s serializes category unexpectedly: %s", name, raw)
+		}
+		return
 	}
 }

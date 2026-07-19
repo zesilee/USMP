@@ -64,6 +64,9 @@ using the following YANG input files:
   - huawei-vxlan-path-detect
   - openconfig-telemetry
   - usmp-deviations
+  - huawei-ethernet
+  - huawei-gre
+  - huawei-nvo3-statistics
 
 Imported modules were sourced from:
   - ../snd/ce6866p-yang/...
@@ -23379,6 +23382,72 @@ const (
 	HuaweiNtp_PeerMode_Peer E_HuaweiNtp_PeerMode = 2
 	// HuaweiNtp_PeerMode_Server corresponds to the value Server of HuaweiNtp_PeerMode
 	HuaweiNtp_PeerMode_Server E_HuaweiNtp_PeerMode = 3
+)
+
+// E_HuaweiNvo3Statistics_StatisticsDirection is a derived int64 type which is used to represent
+// the enumerated node HuaweiNvo3Statistics_StatisticsDirection. An additional value named
+// HuaweiNvo3Statistics_StatisticsDirection_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_HuaweiNvo3Statistics_StatisticsDirection int64
+
+// IsYANGGoEnum ensures that HuaweiNvo3Statistics_StatisticsDirection implements the yang.GoEnum
+// interface. This ensures that HuaweiNvo3Statistics_StatisticsDirection can be identified as a
+// mapped type for a YANG enumeration.
+func (E_HuaweiNvo3Statistics_StatisticsDirection) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  HuaweiNvo3Statistics_StatisticsDirection.
+func (E_HuaweiNvo3Statistics_StatisticsDirection) ΛMap() map[string]map[int64]ygot.EnumDefinition {
+	return ΛEnum
+}
+
+// String returns a logging-friendly string for E_HuaweiNvo3Statistics_StatisticsDirection.
+func (e E_HuaweiNvo3Statistics_StatisticsDirection) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_HuaweiNvo3Statistics_StatisticsDirection")
+}
+
+const (
+	// HuaweiNvo3Statistics_StatisticsDirection_UNSET corresponds to the value UNSET of HuaweiNvo3Statistics_StatisticsDirection
+	HuaweiNvo3Statistics_StatisticsDirection_UNSET E_HuaweiNvo3Statistics_StatisticsDirection = 0
+	// HuaweiNvo3Statistics_StatisticsDirection_inbound corresponds to the value inbound of HuaweiNvo3Statistics_StatisticsDirection
+	HuaweiNvo3Statistics_StatisticsDirection_inbound E_HuaweiNvo3Statistics_StatisticsDirection = 1
+	// HuaweiNvo3Statistics_StatisticsDirection_outbound corresponds to the value outbound of HuaweiNvo3Statistics_StatisticsDirection
+	HuaweiNvo3Statistics_StatisticsDirection_outbound E_HuaweiNvo3Statistics_StatisticsDirection = 2
+	// HuaweiNvo3Statistics_StatisticsDirection_bidirection corresponds to the value bidirection of HuaweiNvo3Statistics_StatisticsDirection
+	HuaweiNvo3Statistics_StatisticsDirection_bidirection E_HuaweiNvo3Statistics_StatisticsDirection = 3
+)
+
+// E_HuaweiNvo3Statistics_VxlanMode is a derived int64 type which is used to represent
+// the enumerated node HuaweiNvo3Statistics_VxlanMode. An additional value named
+// HuaweiNvo3Statistics_VxlanMode_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_HuaweiNvo3Statistics_VxlanMode int64
+
+// IsYANGGoEnum ensures that HuaweiNvo3Statistics_VxlanMode implements the yang.GoEnum
+// interface. This ensures that HuaweiNvo3Statistics_VxlanMode can be identified as a
+// mapped type for a YANG enumeration.
+func (E_HuaweiNvo3Statistics_VxlanMode) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  HuaweiNvo3Statistics_VxlanMode.
+func (E_HuaweiNvo3Statistics_VxlanMode) ΛMap() map[string]map[int64]ygot.EnumDefinition {
+	return ΛEnum
+}
+
+// String returns a logging-friendly string for E_HuaweiNvo3Statistics_VxlanMode.
+func (e E_HuaweiNvo3Statistics_VxlanMode) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_HuaweiNvo3Statistics_VxlanMode")
+}
+
+const (
+	// HuaweiNvo3Statistics_VxlanMode_UNSET corresponds to the value UNSET of HuaweiNvo3Statistics_VxlanMode
+	HuaweiNvo3Statistics_VxlanMode_UNSET E_HuaweiNvo3Statistics_VxlanMode = 0
+	// HuaweiNvo3Statistics_VxlanMode_l2 corresponds to the value l2 of HuaweiNvo3Statistics_VxlanMode
+	HuaweiNvo3Statistics_VxlanMode_l2 E_HuaweiNvo3Statistics_VxlanMode = 1
+	// HuaweiNvo3Statistics_VxlanMode_l3 corresponds to the value l3 of HuaweiNvo3Statistics_VxlanMode
+	HuaweiNvo3Statistics_VxlanMode_l3 E_HuaweiNvo3Statistics_VxlanMode = 2
+	// HuaweiNvo3Statistics_VxlanMode_both corresponds to the value both of HuaweiNvo3Statistics_VxlanMode
+	HuaweiNvo3Statistics_VxlanMode_both E_HuaweiNvo3Statistics_VxlanMode = 3
 )
 
 // E_HuaweiNvo3_NqaStateType is a derived int64 type which is used to represent

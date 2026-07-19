@@ -64,6 +64,9 @@ using the following YANG input files:
   - huawei-vxlan-path-detect
   - openconfig-telemetry
   - usmp-deviations
+  - huawei-ethernet
+  - huawei-gre
+  - huawei-nvo3-statistics
 
 Imported modules were sourced from:
   - ../snd/ce6866p-yang/...
