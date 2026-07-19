@@ -59,7 +59,8 @@ const { t } = useI18n()
 const store = useDeviceStore()
 
 const moduleName = computed(() => String(route.params.module || ''))
-const selectedDevice = ref('')
+// 设备管理「查看配置」入口携带 ?device=<ip>：进入即预选该设备。
+const selectedDevice = ref(String(route.query?.device || ''))
 const schemaError = ref('')
 const title = ref('')
 const vendor = ref('')

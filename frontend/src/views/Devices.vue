@@ -137,7 +137,9 @@ function handleRefresh() {
 }
 
 function goToConfig(row: DeviceRow) {
-  router.push({ name: 'interface', query: { device: row.id } })
+  // 旧配置页路由（name:'interface'）已随 FE-13 退役，跳通用模块控制台；
+  // device 传 IP，与控制台设备下拉的 value 口径一致。
+  router.push({ name: 'module-console', params: { module: 'ifm' }, query: { device: row.ip } })
 }
 
 async function handleTestConnection(row: DeviceRow) {

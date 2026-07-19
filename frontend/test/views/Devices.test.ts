@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { mount, flushPromises } from '@vue/test-utils'
 import { createPinia, setActivePinia } from 'pinia'
-import { createRouter, createMemoryHistory } from 'vue-router'
+import router from '../../src/router'
 import Devices from '../../src/views/Devices.vue'
 import ReconcileChip from '../../src/components/dashboard/ReconcileChip.vue'
 import ElementPlus from 'element-plus'
@@ -34,11 +34,8 @@ const fleetEnvelope = {
   },
 }
 
-const router = createRouter({
-  history: createMemoryHistory(),
-  routes: [{ path: '/', name: 'dashboard', component: {} }, { path: '/config/interface', name: 'interface', component: {} }],
-})
-
+// 用真实路由表挂载：桩路由曾自带已删除的 name:'interface' 路由，把「查看配置」
+// 跳转失效（路由不存在）掩盖成绿灯——导航目标必须以 src/router 为唯一事实源。
 function mountView() {
   return mount(Devices, { global: { plugins: [ElementPlus, createPinia(), router] } })
 }
@@ -119,6 +116,17 @@ describe('Devices View · 设备管理列表', () => {
     vm.statusFilter = 'online'
     await flushPromises()
     expect(vm.currentPage).toBe(1)
+  })
+
+  it('查看配置：跳转真实存在的模块控制台路由并携带设备 IP（回归：点击无反应）', async () => {
+    const w = mountView()
+    await flushPromises()
+    const viewBtn = w.findAll('.el-button').find((b) => b.text() === '查看配置')
+    expect(viewBtn).toBeTruthy()
+    await viewBtn!.trigger('click')
+    // 目标路由组件懒加载，导航跨事件循环 tick 落定，轮询等待而非 flushPromises
+    await vi.waitFor(() => expect(router.currentRoute.value.path).toBe('/module/ifm'))
+    expect(router.currentRoute.value.query.device).toBe('192.168.1.1')
   })
 
   it('对账聚合拉取失败不阻断设备表（收敛态降级）', async () => {
