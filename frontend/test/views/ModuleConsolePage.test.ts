@@ -1,8 +1,9 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { mount, flushPromises } from '@vue/test-utils'
-import { createPinia } from 'pinia'
+import { createPinia, setActivePinia } from 'pinia'
 import ElementPlus from 'element-plus'
 import ModuleConsolePage from '../../src/views/ModuleConsolePage.vue'
+import { useDeviceStore } from '../../src/stores/device'
 import { getYangSchema, getConfig } from '../../src/api'
 import { ifmNestedSchema } from './moduleConsole.fixture'
 
@@ -13,14 +14,19 @@ vi.mock('vue-router', () => ({
   useRoute: () => ({ params: { module: 'ifm' } }),
 }))
 
+let pinia: ReturnType<typeof createPinia>
 function mountPage() {
   return mount(ModuleConsolePage, {
-    global: { plugins: [createPinia(), ElementPlus] },
+    global: { plugins: [pinia, ElementPlus] },
   })
 }
 
 beforeEach(() => {
   vi.clearAllMocks()
+  // 全局设备上下文：Tab 内容区以已选设备为前提（未选走引导空态，另测）。
+  pinia = createPinia()
+  setActivePinia(pinia)
+  useDeviceStore().selectDevice('192.168.1.1')
   vi.mocked(getYangSchema).mockResolvedValue({ data: { success: true, data: ifmNestedSchema } } as any)
   vi.mocked(getConfig).mockResolvedValue({ data: { data: { data: {} } } } as any)
 })

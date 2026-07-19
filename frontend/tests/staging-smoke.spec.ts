@@ -10,6 +10,12 @@ import { test, expect } from '@playwright/test'
 // 设备树里的 192.168.1.1 表格数据），与 CRD 驱动的真实应用脱节，需应用级改造，另立 OpenSpec change。
 // 这里只断言「真实可稳定通过」的东西，保证门禁诚实为绿。
 
+// 选设备（页头首个 el-select）：模块控制台/业务切换用例共用。
+async function pickDevice(page: import('@playwright/test').Page) {
+  await page.locator('.el-select').first().click()
+  await page.locator('.el-select-dropdown__item', { hasText: '192.168.1.1' }).first().click()
+}
+
 test.describe('部署冒烟 - 前端 SPA', () => {
   test('SPA 应被服务且成功挂载', async ({ page }) => {
     const consoleErrors: string[] = []
@@ -56,12 +62,6 @@ test.describe('部署冒烟 - 前端 SPA', () => {
   // 旧 /config/vlan、/config/interface 重定向到 /module/:module；页面 Tab/列/表单
   // 全部由 schema 派生。以下把原「表单动态渲染/when 显隐/校验拦截/SPA 切换」回归
   // 断言迁移到控制台，并新增「种子行/高级搜索」断言。
-
-  // 选设备（页头首个 el-select）。
-  async function pickDevice(page: import('@playwright/test').Page) {
-    await page.locator('.el-select').first().click()
-    await page.locator('.el-select-dropdown__item', { hasText: '192.168.1.1' }).first().click()
-  }
 
   test('VLAN 旧路由重定向到控制台，新增表单动态渲染出 YANG 字段', async ({ page }) => {
     await page.goto('/config/vlan', { waitUntil: 'networkidle' })
@@ -154,6 +154,8 @@ test.describe('部署冒烟 - 前端 SPA', () => {
   // SPA 内从 VLAN 模块切到 IFM 模块应重载 schema（回归门禁：路由参数变化 → schema 重载）。
   test('SPA 内从 VLAN 切换到接口模块应加载接口模型（非沿用 VLAN）', async ({ page }) => {
     await page.goto('/module/vlan', { waitUntil: 'networkidle' })
+    // 全局设备上下文（FE-10）：Tab 内容区以已选设备为前提
+    await pickDevice(page)
     await expect(page.getByRole('tab', { name: 'VLAN列表', exact: true })).toBeVisible({ timeout: 15000 })
 
     // 侧栏 SND 左树（LT-03）内点 ifm 叶 —— 需展开 接口管理→接口基础 分组。
@@ -162,12 +164,41 @@ test.describe('部署冒烟 - 前端 SPA', () => {
     await page.locator('[data-test="lefttree-leaf-huawei-ifm"]').click()
     await expect(page).toHaveURL(/module\/ifm/)
 
-    await pickDevice(page)
+    // 设备上下文跨模块保持：无需重新选设备
     await page.getByRole('tab', { name: '接口列表', exact: true }).click()
     await page.getByRole('button', { name: '新增' }).first().click()
 
     // 接口独有字段 mtu 应出现（若仍沿用 VLAN schema 则不会有）
     await expect(page.getByText('mtu', { exact: false }).first()).toBeVisible({ timeout: 15000 })
+  })
+
+  // ===== 全局设备上下文（device-first-config-context，FE-10）=====
+
+  // 先选设备、后做配置管理：设备管理「查看配置」写入全局上下文，跨模块切换保持。
+  test('查看配置进入控制台后切换模块，设备选中保持不丢', async ({ page }) => {
+    await page.goto('/devices', { waitUntil: 'networkidle' })
+    const row = page.locator('.el-table__row', { hasText: '192.168.1.1' }).first()
+    await row.getByRole('button', { name: '查看配置' }).click()
+    await expect(page).toHaveURL(/module\/ifm/)
+
+    // 入口已写上下文：无需选设备，Tab 直接可用
+    await expect(page.getByRole('tab', { name: '接口列表', exact: true })).toBeVisible({ timeout: 15000 })
+    await expect(page.locator('[data-test="select-device-empty"]')).toHaveCount(0)
+
+    // 左树切到 VLAN 模块：设备上下文沿用，Tab 直接渲染（未选设备时只会显示引导空态）
+    await page.locator('[data-test="lefttree-group-以太网交换"] .el-sub-menu__title').first().click()
+    await page.locator('[data-test="lefttree-group-VLAN"] .el-sub-menu__title').first().click()
+    await page.locator('[data-test="lefttree-leaf-huawei-vlan"]').click()
+    await expect(page).toHaveURL(/module\/vlan/)
+    await expect(page.getByRole('tab', { name: 'VLAN列表', exact: true })).toBeVisible({ timeout: 15000 })
+    await expect(page.locator('[data-test="select-device-empty"]')).toHaveCount(0)
+  })
+
+  // 未选设备：引导空态而非静默空数据。
+  test('直开控制台且无设备上下文时展示引导空态', async ({ page }) => {
+    await page.goto('/module/vlan', { waitUntil: 'networkidle' })
+    await expect(page.locator('[data-test="select-device-empty"]')).toBeVisible({ timeout: 15000 })
+    await expect(page.getByRole('tab', { name: 'VLAN列表', exact: true })).toHaveCount(0)
   })
 })
 
@@ -216,6 +247,8 @@ test.describe('部署冒烟 - 业务网络配置', () => {
     await page.locator('[data-test="lefttree-group-VLAN"] .el-sub-menu__title').first().click()
     await page.locator('[data-test="lefttree-leaf-huawei-vlan"]').click()
     await expect(page).toHaveURL(/module\/vlan/)
+    // 全局设备上下文（FE-10）：业务侧进入无设备选中，先选设备再断言 Tab
+    await pickDevice(page)
     await expect(page.getByRole('tab', { name: 'VLAN列表', exact: true })).toBeVisible({ timeout: 15000 })
   })
 })

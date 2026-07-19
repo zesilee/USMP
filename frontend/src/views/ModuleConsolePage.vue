@@ -18,7 +18,8 @@
             {{ t('console.ownedBadge', { n: ownershipIntents.length }) }}
           </el-tag>
         </el-tooltip>
-        <el-select v-model="selectedDevice" :placeholder="t('console.selectDevicePlaceholder')" style="width: 220px">
+        <!-- 全局设备上下文（FE-10）：下拉直绑 store，选一次跨模块保持。 -->
+        <el-select v-model="store.selectedDeviceIp" :placeholder="t('console.selectDevicePlaceholder')" style="width: 220px">
           <el-option v-for="d in store.devices" :key="d.id" :label="d.ip" :value="d.ip" />
         </el-select>
       </div>
@@ -26,12 +27,19 @@
 
     <el-alert v-if="schemaError" :title="schemaError" type="error" :closable="false" show-icon />
 
+    <!-- 未选设备：引导先选设备（FE-10），不静默渲染空数据。
+         schema 失败时让位给错误告警（此时选设备无济于事，引导反而误导）。 -->
+    <el-empty
+      v-if="!schemaError && !store.selectedDeviceIp"
+      data-test="select-device-empty"
+      :description="t('console.selectDeviceFirst')"
+    />
     <!-- 一级 Tab：模块根顶层子节点派生（list→列表页、group/choice→表单页，FE-10）。
          Tab 组件常驻（不销毁），切换保留各 Tab 表单/搜索状态。 -->
-    <el-tabs v-if="tabs.length" v-model="activeTab" class="console-tabs">
+    <el-tabs v-else-if="tabs.length" v-model="activeTab" class="console-tabs">
       <el-tab-pane v-for="tab in tabs" :key="tab.name" :label="tab.label" :name="tab.name">
-        <ModuleListTab v-if="tab.kind === 'list'" :tab="tab" :root-name="rootName" :device="selectedDevice" />
-        <ModuleFormTab v-else :tab="tab" :root-name="rootName" :device="selectedDevice" />
+        <ModuleListTab v-if="tab.kind === 'list'" :tab="tab" :root-name="rootName" :device="store.selectedDeviceIp" />
+        <ModuleFormTab v-else :tab="tab" :root-name="rootName" :device="store.selectedDeviceIp" />
       </el-tab-pane>
     </el-tabs>
     <el-empty v-else-if="!schemaError" :description="t('console.schemaLoading')" />
@@ -59,8 +67,17 @@ const { t } = useI18n()
 const store = useDeviceStore()
 
 const moduleName = computed(() => String(route.params.module || ''))
-// 设备管理「查看配置」入口携带 ?device=<ip>：进入即预选该设备。
-const selectedDevice = ref(String(route.query?.device || ''))
+// 入页优先级 query > store：深链/「查看配置」显式指定则覆盖全局上下文，
+// 无 query 时沿用既有选中（跨模块保持）。用 watch 而非仅 setup 一次性执行：
+// 组件在 /module/:module 间复用，前进/后退到携带 ?device= 的历史条目也须生效。
+// 重复 query 参数取首个（数组经 String 会拼出 'a,b' 垃圾值污染全局上下文）。
+function applyDeviceQuery() {
+  const q = route.query?.device
+  const ip = Array.isArray(q) ? q[0] : q
+  if (ip) store.selectDevice(String(ip))
+}
+applyDeviceQuery()
+watch(() => route.query?.device, applyDeviceQuery)
 const schemaError = ref('')
 const title = ref('')
 const vendor = ref('')
@@ -71,9 +88,9 @@ const schemaFields = ref<Field[]>([])
 const ownershipIntents = ref<string[]>([])
 async function loadOwnership() {
   ownershipIntents.value = []
-  if (!selectedDevice.value || !moduleName.value) return
+  if (!store.selectedDeviceIp || !moduleName.value) return
   try {
-    const res = await getOwnership(selectedDevice.value)
+    const res = await getOwnership(store.selectedDeviceIp)
     const claims: any[] = res.data?.data?.claims || []
     const intents = new Set<string>()
     for (const c of claims) {
@@ -123,7 +140,9 @@ async function loadSchema() {
 watch(() => localeStore.locale, relabelFields)
 
 watch(moduleName, loadSchema)
-watch([selectedDevice, moduleName], loadOwnership)
+// immediate：全局上下文使「挂载时设备已选中」成为主流程（查看配置入口/跨页返回），
+// 仅靠变化触发会漏掉首帧归属查询（FE-18 徽标静默缺失）。
+watch([() => store.selectedDeviceIp, moduleName], loadOwnership, { immediate: true })
 
 onMounted(async () => {
   await Promise.allSettled([store.fetchDevices(), loadSchema()])

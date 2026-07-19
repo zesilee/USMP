@@ -6,6 +6,7 @@ import Devices from '../../src/views/Devices.vue'
 import ReconcileChip from '../../src/components/dashboard/ReconcileChip.vue'
 import ElementPlus from 'element-plus'
 import { listDevices, getFleetReconcile, getDeviceStatus } from '../../src/api'
+import { useDeviceStore } from '../../src/stores/device'
 
 vi.mock('../../src/api')
 
@@ -36,13 +37,15 @@ const fleetEnvelope = {
 
 // 用真实路由表挂载：桩路由曾自带已删除的 name:'interface' 路由，把「查看配置」
 // 跳转失效（路由不存在）掩盖成绿灯——导航目标必须以 src/router 为唯一事实源。
+let pinia: ReturnType<typeof createPinia>
 function mountView() {
-  return mount(Devices, { global: { plugins: [ElementPlus, createPinia(), router] } })
+  return mount(Devices, { global: { plugins: [ElementPlus, pinia, router] } })
 }
 
 describe('Devices View · 设备管理列表', () => {
   beforeEach(() => {
-    setActivePinia(createPinia())
+    pinia = createPinia()
+    setActivePinia(pinia)
     vi.clearAllMocks()
     vi.mocked(listDevices).mockResolvedValue(devicesEnvelope as any)
     vi.mocked(getFleetReconcile).mockResolvedValue(fleetEnvelope as any)
@@ -127,6 +130,8 @@ describe('Devices View · 设备管理列表', () => {
     // 目标路由组件懒加载，导航跨事件循环 tick 落定，轮询等待而非 flushPromises
     await vi.waitFor(() => expect(router.currentRoute.value.path).toBe('/module/ifm'))
     expect(router.currentRoute.value.query.device).toBe('192.168.1.1')
+    // 全局设备上下文：入口即写 store，后续模块切换沿用该选中（FE-10）。
+    expect(useDeviceStore().selectedDeviceIp).toBe('192.168.1.1')
   })
 
   it('对账聚合拉取失败不阻断设备表（收敛态降级）', async () => {

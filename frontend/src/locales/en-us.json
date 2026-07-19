@@ -214,6 +214,7 @@
   "console": {
     "breadcrumbConfig": "Configuration",
     "selectDevicePlaceholder": "Select device",
+    "selectDeviceFirst": "Select a device first to manage its configuration",
     "ownedBadge": "Managed by business config ({n})",
     "ownedTooltip": "Managed by business config: {intents} (intent reconciliation overrides manual changes)",
     "schemaLoading": "Loading module schema…",

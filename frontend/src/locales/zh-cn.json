@@ -214,6 +214,7 @@
   "console": {
     "breadcrumbConfig": "配置",
     "selectDevicePlaceholder": "选择设备",
+    "selectDeviceFirst": "请先选择设备，再进行配置管理",
     "ownedBadge": "由业务配置管理 ({n})",
     "ownedTooltip": "由业务配置管理：{intents}（意图收敛会覆盖手工修改）",
     "schemaLoading": "模块 schema 加载中…",
