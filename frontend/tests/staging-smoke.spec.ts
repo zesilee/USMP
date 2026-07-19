@@ -172,6 +172,41 @@ test.describe('部署冒烟 - 前端 SPA', () => {
     await expect(page.getByText('mtu', { exact: false }).first()).toBeVisible({ timeout: 15000 })
   })
 
+  // ===== 全量 YANG 模型接入（full-yang-onboarding，LT-04）=====
+
+  // 左树全量可用基线（部署面）：可用叶 = 全部叶 − 5 例外（pic 延期 + 4 个
+  // augment-only）。与后端 LT-04 单测同口径，这里验证的是「已部署容器」。
+  test('左树全量可用：60/65 叶 available 且带 module', async ({ request }) => {
+    // 后端直连（staging nginx 不代理 /api，相对路径会命中 SPA fallback 返回 HTML）；
+    // 地址口径与前端 api 客户端一致（VITE_API_URL 缺省 localhost:8080）。
+    const apiBase = process.env.USMP_API_URL || 'http://localhost:8080/api/v1'
+    const res = await request.get(`${apiBase}/yang/left-tree`)
+    expect(res.ok()).toBeTruthy()
+    const body = await res.json()
+    const leaves: any[] = []
+    const walk = (nodes: any[]) => {
+      for (const n of nodes || []) {
+        if (n.children?.length) walk(n.children)
+        else leaves.push(n)
+      }
+    }
+    walk(body.data)
+    const available = leaves.filter((l) => l.available)
+    // 相对不变式（与后端 LT-04 同口径）：可用 = 全部 − 5 例外
+    //（pic 延期 + 4 augment-only），加模块不需要改这里的字面量
+    expect(leaves.length).toBeGreaterThanOrEqual(65)
+    expect(available.length).toBe(leaves.length - 5)
+    for (const l of available) expect(l.module, l.sourceModule).toBeTruthy()
+  })
+
+  // 新接入模块控制台冒烟：ntp（全量接入前不可用）schema 驱动渲染出 Tab。
+  test('新模块（ntp）控制台 schema 驱动渲染', async ({ page }) => {
+    await page.goto('/module/ntp', { waitUntil: 'networkidle' })
+    await pickDevice(page)
+    await expect(page.locator('.el-tabs__item').first()).toBeVisible({ timeout: 15000 })
+    await expect(page.locator('[data-test="select-device-empty"]')).toHaveCount(0)
+  })
+
   // ===== 全局设备上下文（device-first-config-context，FE-10）=====
 
   // 先选设备、后做配置管理：设备管理「查看配置」写入全局上下文，跨模块切换保持。

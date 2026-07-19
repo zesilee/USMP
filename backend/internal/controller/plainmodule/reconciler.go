@@ -7,6 +7,7 @@ package plainmodule
 import (
 	"context"
 	"fmt"
+	"reflect"
 
 	_ "github.com/leezesi/usmp/backend/internal/drivers" // 描述符注册（回读解码经注册表）
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/client"
@@ -93,17 +94,25 @@ func (d *deviceClient) Get(ctx context.Context, deviceID string) (interface{}, e
 		return nil, fmt.Errorf("no XML decoder registered for %s", d.anchor)
 	}
 	if raw, isRaw := result.Data.([]byte); isRaw {
-		if len(raw) > 0 && raw[0] == '<' {
+		if len(raw) == 0 {
+			// 空回读 = 设备该模块无配置：空容器为合法初态
+			return dec.NewStruct(), nil
+		}
+		if raw[0] == '<' {
 			return dec.DecodeXML(raw)
 		}
-		// 空回读 = 设备该模块无配置：空容器为合法初态
+		// 非 XML 字节（如 gNMI JSON，规划能力）：显式报错而非静默空容器——
+		// 静默空会让 diff 永远全量漂移、每周期整树重发（R08 要求诚实透出）。
+		return nil, fmt.Errorf("unexpected non-XML readback for %s (len=%d)", d.anchor, len(raw))
+	}
+	if result.Data == nil {
 		return dec.NewStruct(), nil
 	}
-	// 已解码（如 sim/测试注入）：类型匹配直接透传
-	if result.Data != nil {
+	// 已解码（如 sim/测试注入）：仅接受本模块容器类型，异型显式报错
+	if reflect.TypeOf(result.Data) == reflect.TypeOf(dec.NewStruct()) {
 		return result.Data, nil
 	}
-	return dec.NewStruct(), nil
+	return nil, fmt.Errorf("unknown readback data format for %s: %T", d.anchor, result.Data)
 }
 
 // Set applies the computed changes to the device (candidate→commit).

@@ -136,7 +136,7 @@ func main() {
 			continue
 		}
 		anchor := d.EncodeAnchor
-		plainCtrl := controller.ControllerManagedBy("huawei-" + d.Module).
+		plainCtrl := controller.ControllerManagedBy(d.Vendor + "-" + d.ControllerToken).
 			WithReconciler(plainmodule.New(cs, clientPool, mgr.GetDeviceStore(), anchor)).
 			WithSource(nativeGate.Wrap(source.NewPeriodicSourceWithLister(5*time.Minute, mgr.GetDeviceStore(), anchor))).
 			WithPredicate(predicate.Prefix(anchor)).

@@ -76,11 +76,11 @@ func init() {
 	})
 	driver.Register(driver.Descriptor{
 		Vendor: "huawei", Module: "vlan",
-		// 原 manager.go: vlan: 或 vlans
-		MatchRoute:      func(p string) bool { return strings.Contains(p, "vlan:") || strings.Contains(p, "vlans") },
+		// 根名前缀锚（DR-06）：原 Contains "vlan:"/"vlans" 会误吞新模块深路径
+		//（qos/lldp 子树含 vlans 段）；真实调用方均以 /vlan:vlan 开头。
+		MatchRoute:      func(p string) bool { return strings.HasPrefix(p, "/vlan:vlan") },
 		ControllerToken: "vlan",
-		// 原 decodeRunningConfig: vlan:vlans
-		MatchDecode: func(p string) bool { return strings.Contains(p, "vlan:vlans") },
+		MatchDecode:     func(p string) bool { return strings.HasPrefix(p, "/vlan:vlan") },
 		DecodeXML: func(raw []byte) (ygot.GoStruct, error) {
 			v := &huawei.HuaweiVlan_Vlan_Vlans{}
 			if err := xmlcodec.Decode(vlanXML, raw, v); err != nil {
@@ -88,8 +88,7 @@ func init() {
 			}
 			return v, nil
 		},
-		// 原 ygotRegistry: vlan: 且 vlan
-		MatchEncode:  func(p string) bool { return strings.Contains(p, "vlan:") && strings.Contains(p, "vlan") },
+		MatchEncode:  func(p string) bool { return strings.HasPrefix(p, "/vlan:vlan") },
 		NewStruct:    func() ygot.GoStruct { return &huawei.HuaweiVlan_Vlan_Vlans{} },
 		EncodeAnchor: "/vlan:vlan/vlan:vlans",
 		Unmarshal:    huawei.Unmarshal,
@@ -97,11 +96,12 @@ func init() {
 	})
 	driver.Register(driver.Descriptor{
 		Vendor: "huawei", Module: "ifm",
-		// 原 manager.go: ifm: 或 interfaces
-		MatchRoute:      func(p string) bool { return strings.Contains(p, "ifm:") || strings.Contains(p, "interfaces") },
+		// 根名前缀锚（DR-06）：原 Contains "ifm:"/"interfaces" 会误吞新模块深路径
+		//（ospfv2/ospfv3/bfd 等子树含 interfaces 段、/ifm-trunk: 含 "ifm-trunk:"）；
+		// 真实调用方均以 /ifm:ifm 开头。
+		MatchRoute:      func(p string) bool { return strings.HasPrefix(p, "/ifm:ifm") },
 		ControllerToken: "ifm",
-		// 原 decodeRunningConfig: ifm:interfaces
-		MatchDecode: func(p string) bool { return strings.Contains(p, "ifm:interfaces") },
+		MatchDecode:     func(p string) bool { return strings.HasPrefix(p, "/ifm:ifm") },
 		DecodeXML: func(raw []byte) (ygot.GoStruct, error) {
 			v := &huawei.HuaweiIfm_Ifm_Interfaces{}
 			if err := xmlcodec.Decode(ifmXML, raw, v); err != nil {
@@ -109,8 +109,7 @@ func init() {
 			}
 			return v, nil
 		},
-		// 原 ygotRegistry: ifm:ifm 且 interfaces
-		MatchEncode:  func(p string) bool { return strings.Contains(p, "ifm:ifm") && strings.Contains(p, "interfaces") },
+		MatchEncode:  func(p string) bool { return strings.HasPrefix(p, "/ifm:ifm") },
 		NewStruct:    func() ygot.GoStruct { return &huawei.HuaweiIfm_Ifm_Interfaces{} },
 		EncodeAnchor: "/ifm:ifm/ifm:interfaces",
 		Unmarshal:    huawei.Unmarshal,

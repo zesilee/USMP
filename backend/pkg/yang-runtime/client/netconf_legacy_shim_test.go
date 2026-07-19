@@ -14,7 +14,7 @@ import (
 // 即为新旧路径等价的持续证明。生产代码不得引用本文件符号。
 
 func ParseHuaweiVlanVlansXML(data []byte) (*huawei.HuaweiVlan_Vlan_Vlans, error) {
-	d, ok := yangdriver.DecoderFor("vlan:vlans")
+	d, ok := yangdriver.DecoderFor("/vlan:vlan/vlan:vlans")
 	if !ok {
 		return nil, fmt.Errorf("shim: vlan decoder not registered")
 	}
@@ -26,7 +26,7 @@ func ParseHuaweiVlanVlansXML(data []byte) (*huawei.HuaweiVlan_Vlan_Vlans, error)
 }
 
 func ParseHuaweiIfmInterfacesXML(data []byte) (*huawei.HuaweiIfm_Ifm_Interfaces, error) {
-	d, ok := yangdriver.DecoderFor("ifm:interfaces")
+	d, ok := yangdriver.DecoderFor("/ifm:ifm/ifm:interfaces")
 	if !ok {
 		return nil, fmt.Errorf("shim: ifm decoder not registered")
 	}

@@ -303,6 +303,12 @@ func (m *DefaultManager) TriggerReconcile(deviceID, path string) bool {
 	if !ok {
 		return false
 	}
+	// desired 以描述符锚点为 key 存储（DR-05）：深路径触发（如子路径 DELETE）
+	// 须归一到锚点入队，否则 reconcile 以原路径查 desired 落空、静默 no-op。
+	enqueuePath := path
+	if d.EncodeAnchor != "" {
+		enqueuePath = d.EncodeAnchor
+	}
 	for _, ctrl := range m.controllers {
 		// 精确名匹配（DR-02/full-yang-onboarding）：控制器命名约定 <vendor>-<token>。
 		// 子串匹配在全量模块下必撞（routing⊂routing-policy、ifm⊂ifm-trunk 等）。
@@ -310,7 +316,7 @@ func (m *DefaultManager) TriggerReconcile(deviceID, path string) bool {
 			ctrl.Enqueue(predicate.Event{
 				Type:     predicate.UpdateEvent,
 				DeviceID: deviceID,
-				Path:     path,
+				Path:     enqueuePath,
 			})
 			return true
 		}

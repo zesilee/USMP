@@ -22,9 +22,10 @@ var dispatchEquivalence = []struct {
 	{"/vlan:vlan/vlan:vlans", "vlan", "vlan", "vlan"},
 	{"/ifm:ifm/ifm:interfaces", "ifm", "ifm", "ifm"},
 	{"/system:system", "system", "", "system"},
-	// 别名形态（原 manager 额外接受的裸词）
-	{"/foo/vlans", "vlan", "", ""},
-	{"/foo/interfaces", "ifm", "", ""},
+	// DR-06 根名前缀锚：原 manager 裸词别名（/foo/vlans→vlan）已废除——
+	// 全量模块下裸词必误吞他模块深路径（ospfv2 interfaces、qos vlans 等）
+	{"/foo/vlans", "", "", ""},
+	{"/foo/interfaces", "", "", ""},
 	// BGP 公网根：三处均命中 bgp（HasPrefix "/bgp:bgp"）
 	{"/bgp:bgp", "bgp", "bgp", "bgp"},
 	{"/bgp:bgp/base-process", "bgp", "bgp", "bgp"},

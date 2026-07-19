@@ -74,8 +74,9 @@ func TestConvertConfigAllModuleAnchors(t *testing.T) {
 			t.Errorf("convertConfig(%q) 编包失败: %v", d.EncodeAnchor, err)
 		}
 	}
-	if n < 57 {
-		t.Fatalf("华为 XML 模块描述符 %d 个, want ≥57（表缩水）", n)
+	// 57 表行 + 4 个带 XML 的手写块（vlan/ifm/bgp/network-instance；system 无 XML）
+	if n < 61 {
+		t.Fatalf("华为 XML 模块描述符 %d 个, want ≥61（表/手写块缩水）", n)
 	}
 	if _, err := convertConfig("/no-such:module", map[string]interface{}{}); err == nil {
 		t.Error("未注册路径应显式报错")
