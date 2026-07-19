@@ -1,0 +1,62 @@
+module usmp-deviations {
+  namespace "urn:usmp:yang:usmp-deviations";
+  prefix usmp-dev;
+
+  import huawei-syslog {
+    prefix syslog;
+  }
+  import huawei-cfg {
+    prefix cfg;
+  }
+  import huawei-lldp {
+    prefix lldp;
+  }
+  import huawei-qos {
+    prefix qos;
+  }
+
+  organization
+    "USMP";
+  description
+    "USMP 本地 deviation：豁免 ygot 生成器不支持的个别节点（bits 类型默认值、
+     anydata、穿 choice/case augment 的 leafref），使对应模块整体可生成。
+     每条 deviation 必须注明豁免原因与影响面；模块本体零改动（snd 子模块只读）。";
+
+  revision 2026-07-19 {
+    description
+      "首版：全量 YANG 模型接入（full-yang-onboarding）所需最小豁免集。";
+  }
+
+  // ygot: bits 类型的 default 值转换不支持（default conversion: unsupported type
+  // bits）。删默认值保留叶本身——线上 XML 编码不受影响，仅失去缺省提示。
+  deviation "/syslog:syslog/syslog:servers/syslog:server/syslog:facility-mask" {
+    deviate delete {
+      default "local0 local1 local2 local3 local4 local5 local6 local7";
+    }
+  }
+  deviation "/syslog:syslog/syslog:servers/syslog:server/syslog:severity-mask" {
+    deviate delete {
+      default "emergency alert critical error warning notice informational debug";
+    }
+  }
+
+  // ygot: anydata 节点无法映射 Go 类型（unknown entity type ... Kind: anydata）。
+  // 回滚结果为只读诊断数据，剔除不影响配置面。
+  deviation "/cfg:cfg/cfg:config-rollback-result/cfg:result" {
+    deviate not-supported;
+  }
+
+  // ygot: leafref 目标穿 choice/case（huawei-ip augment 的 ipv4 地址树）解析失败。
+  // 替换为底层 string 类型：线格式不变，仅失去引用完整性校验（前端仍按约束引擎渲染）。
+  deviation "/lldp:lldp/lldp:global-attribute/lldp:management-address-mode/lldp:global-mode/lldp:managment-address" {
+    deviate replace {
+      type string;
+    }
+  }
+
+  // ygot: list 的 binary 类型 key 不支持（has a binary key -- this is unsupported）。
+  // global-query 为查询态子树（config false 面），剔除不影响配置面。
+  deviation "/qos:qos/qos:global-query/qos:traffic-policy-states/qos:vlan-applys/qos:vlan-apply" {
+    deviate not-supported;
+  }
+}

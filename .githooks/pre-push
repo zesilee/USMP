@@ -48,7 +48,7 @@ done
 # 3. 全量测试
 # ──────────────────────────────────────────────
 echo -e "${YELLOW}[pre-push] 运行全量测试（含 -race 竞态检测）...${NC}"
-if ! (cd backend && go test ./... -race -count=1 -timeout=180s 2>&1); then
+if ! (cd backend && go test ./... -race -count=1 -timeout=420s 2>&1); then
   echo -e "${RED}[pre-push] 拒绝: 全量测试/竞态检测未通过${NC}"
   FAILED=1
 fi

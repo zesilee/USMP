@@ -32,19 +32,6 @@ const (
 	// HuaweiNetworkInstanceNS 取 8.20.10 huawei-network-instance.yang 声明的 module
 	// namespace（BGP peering 的唯一硬前置，peers/afs/peer-groups 均 augment 于此根下）。
 	HuaweiNetworkInstanceNS = "urn:huawei:yang:huawei-network-instance"
-	// HuaweiTunnelManagementNS 取 8.20.10 huawei-tunnel-management.yang 声明的 module
-	// namespace（BGP 2b tunnel-policy leafref 目标，越序禁令要求先接成可配模型）。
-	HuaweiTunnelManagementNS = "urn:huawei:yang:huawei-tunnel-management"
-	// HuaweiXplNS 取 8.20.10 huawei-xpl.yang 声明的 module namespace（BGP 2b route-filter
-	// leafref 目标 /xpl:xpl/route-filters/route-filter，越序禁令要求先接成可配模型）。
-	HuaweiXplNS = "urn:huawei:yang:huawei-xpl"
-	// HuaweiRoutingPolicyNS 取 8.20.10 huawei-routing-policy.yang 声明的 module namespace
-	// （BGP 2b import/export route-policy leafref 目标
-	// /rtp:routing-policy/policy-definitions/policy-definition，越序禁令要求先接成可配模型）。
-	HuaweiRoutingPolicyNS = "urn:huawei:yang:huawei-routing-policy"
-	// HuaweiAclNS 取 8.20.10 huawei-acl.yang 声明的 module namespace（BGP 2b ACL group
-	// leafref 目标 /acl:acl/groups/group 与 /acl:acl/group6s/group6，越序禁令要求先接成可配模型）。
-	HuaweiAclNS = "urn:huawei:yang:huawei-acl"
 )
 
 func init() {
@@ -71,44 +58,29 @@ func init() {
 			"huawei-bgp":              HuaweiBgpNS,
 		},
 	}
-	tnlmXML := &xmlcodec.Spec{
-		Namespace: HuaweiTunnelManagementNS,
-		Schema:    func() *yang.Entry { return huawei.SchemaTree["HuaweiTunnelManagement_TunnelManagement"] },
-	}
-	xplXML := &xmlcodec.Spec{
-		Namespace: HuaweiXplNS,
-		Schema:    func() *yang.Entry { return huawei.SchemaTree["HuaweiXpl_Xpl"] },
-	}
-	rtpXML := &xmlcodec.Spec{
-		Namespace: HuaweiRoutingPolicyNS,
-		Schema:    func() *yang.Entry { return huawei.SchemaTree["HuaweiRoutingPolicy_RoutingPolicy"] },
-	}
-	aclXML := &xmlcodec.Spec{
-		Namespace: HuaweiAclNS,
-		Schema:    func() *yang.Entry { return huawei.SchemaTree["HuaweiAcl_Acl"] },
-	}
 
 	// 注册序 = 原 manager if-链检查序（system → vlan → ifm），先注册先匹配。
 	driver.Register(driver.Descriptor{
 		Vendor: "huawei", Module: "system",
-		// 原 manager.go: strings.Contains(path, "system:")
-		MatchRoute:      func(p string) bool { return strings.Contains(p, "system:") },
+		// 根名前缀锚（DR-06）：原 Contains "system:" 会误吞 /telemetry-system: 等
+		// 含 "-system:" 的新模块路径；真实调用方（controller/source/前端派生）均为
+		// /system:system 前缀。
+		MatchRoute:      func(p string) bool { return strings.HasPrefix(p, "/system:system") },
 		ControllerToken: "system",
 		// system 无 XML 回读解码（原 decodeRunningConfig 不含 system 分支），
 		// 亦无 XML 下发通道 → XML 数据缺省 nil，调用方走既有降级（XC-04）。
-		// 原 ygotRegistry: strings.Contains(p, "system:")
-		MatchEncode:  func(p string) bool { return strings.Contains(p, "system:") },
+		MatchEncode:  func(p string) bool { return strings.HasPrefix(p, "/system:system") },
 		NewStruct:    func() ygot.GoStruct { return &huawei.HuaweiSystem_System{} },
 		EncodeAnchor: "/system:system",
 		Unmarshal:    huawei.Unmarshal,
 	})
 	driver.Register(driver.Descriptor{
 		Vendor: "huawei", Module: "vlan",
-		// 原 manager.go: vlan: 或 vlans
-		MatchRoute:      func(p string) bool { return strings.Contains(p, "vlan:") || strings.Contains(p, "vlans") },
+		// 根名前缀锚（DR-06）：原 Contains "vlan:"/"vlans" 会误吞新模块深路径
+		//（qos/lldp 子树含 vlans 段）；真实调用方均以 /vlan:vlan 开头。
+		MatchRoute:      func(p string) bool { return strings.HasPrefix(p, "/vlan:vlan") },
 		ControllerToken: "vlan",
-		// 原 decodeRunningConfig: vlan:vlans
-		MatchDecode: func(p string) bool { return strings.Contains(p, "vlan:vlans") },
+		MatchDecode:     func(p string) bool { return strings.HasPrefix(p, "/vlan:vlan") },
 		DecodeXML: func(raw []byte) (ygot.GoStruct, error) {
 			v := &huawei.HuaweiVlan_Vlan_Vlans{}
 			if err := xmlcodec.Decode(vlanXML, raw, v); err != nil {
@@ -116,8 +88,7 @@ func init() {
 			}
 			return v, nil
 		},
-		// 原 ygotRegistry: vlan: 且 vlan
-		MatchEncode:  func(p string) bool { return strings.Contains(p, "vlan:") && strings.Contains(p, "vlan") },
+		MatchEncode:  func(p string) bool { return strings.HasPrefix(p, "/vlan:vlan") },
 		NewStruct:    func() ygot.GoStruct { return &huawei.HuaweiVlan_Vlan_Vlans{} },
 		EncodeAnchor: "/vlan:vlan/vlan:vlans",
 		Unmarshal:    huawei.Unmarshal,
@@ -125,11 +96,12 @@ func init() {
 	})
 	driver.Register(driver.Descriptor{
 		Vendor: "huawei", Module: "ifm",
-		// 原 manager.go: ifm: 或 interfaces
-		MatchRoute:      func(p string) bool { return strings.Contains(p, "ifm:") || strings.Contains(p, "interfaces") },
+		// 根名前缀锚（DR-06）：原 Contains "ifm:"/"interfaces" 会误吞新模块深路径
+		//（ospfv2/ospfv3/bfd 等子树含 interfaces 段、/ifm-trunk: 含 "ifm-trunk:"）；
+		// 真实调用方均以 /ifm:ifm 开头。
+		MatchRoute:      func(p string) bool { return strings.HasPrefix(p, "/ifm:ifm") },
 		ControllerToken: "ifm",
-		// 原 decodeRunningConfig: ifm:interfaces
-		MatchDecode: func(p string) bool { return strings.Contains(p, "ifm:interfaces") },
+		MatchDecode:     func(p string) bool { return strings.HasPrefix(p, "/ifm:ifm") },
 		DecodeXML: func(raw []byte) (ygot.GoStruct, error) {
 			v := &huawei.HuaweiIfm_Ifm_Interfaces{}
 			if err := xmlcodec.Decode(ifmXML, raw, v); err != nil {
@@ -137,8 +109,7 @@ func init() {
 			}
 			return v, nil
 		},
-		// 原 ygotRegistry: ifm:ifm 且 interfaces
-		MatchEncode:  func(p string) bool { return strings.Contains(p, "ifm:ifm") && strings.Contains(p, "interfaces") },
+		MatchEncode:  func(p string) bool { return strings.HasPrefix(p, "/ifm:ifm") },
 		NewStruct:    func() ygot.GoStruct { return &huawei.HuaweiIfm_Ifm_Interfaces{} },
 		EncodeAnchor: "/ifm:ifm/ifm:interfaces",
 		Unmarshal:    huawei.Unmarshal,
@@ -167,13 +138,18 @@ func init() {
 	})
 	// network-instance（/ni:network-instance）——BGP 二期 peering 唯一硬前置（NI-03）。
 	// 单描述符覆盖整棵子树：因 augment 合并，peers（huawei-bgp）/afs（huawei-l3vpn）结构
-	// 上同属此根，未来 peering 分期扩展本描述符驱动面、不另立描述符（design D1）。谓词用
-	// HasPrefix "/ni:network-instance" 精确锚定，避免裸子串误命中。
+	// 上同属此根，未来 peering 分期扩展本描述符驱动面、不另立描述符（design D1）。
+	// 双口径谓词（DR-06）：业务意图编排层以 /ni: 调用（历史口径），控制台前端按根名派生
+	// /network-instance:network-instance——两者都必须命中；编排层迁根名口径后可收敛。
+	niMatch := func(p string) bool {
+		return strings.HasPrefix(p, "/ni:network-instance") ||
+			strings.HasPrefix(p, "/network-instance:network-instance")
+	}
 	driver.Register(driver.Descriptor{
 		Vendor: "huawei", Module: "network-instance",
-		MatchRoute:      func(p string) bool { return strings.HasPrefix(p, "/ni:network-instance") },
+		MatchRoute:      niMatch,
 		ControllerToken: "network-instance",
-		MatchDecode:     func(p string) bool { return strings.HasPrefix(p, "/ni:network-instance") },
+		MatchDecode:     niMatch,
 		DecodeXML: func(raw []byte) (ygot.GoStruct, error) {
 			v := &huawei.HuaweiNetworkInstance_NetworkInstance{}
 			if err := xmlcodec.Decode(niXML, raw, v); err != nil {
@@ -181,98 +157,10 @@ func init() {
 			}
 			return v, nil
 		},
-		MatchEncode:  func(p string) bool { return strings.HasPrefix(p, "/ni:network-instance") },
+		MatchEncode:  niMatch,
 		NewStruct:    func() ygot.GoStruct { return &huawei.HuaweiNetworkInstance_NetworkInstance{} },
 		EncodeAnchor: "/ni:network-instance",
 		Unmarshal:    huawei.Unmarshal,
 		XML:          niXML,
-	})
-	// tunnel-management（/tnlm:tunnel-management）——BGP 2b tunnel-policy leafref 前置
-	// （越序禁令：目标模型须先可配，TNLM-01/03）。容器根模块（非 list 根），与 /bgp:bgp
-	// 同构，走通用引擎 plain-container（XC-05）。谓词用 HasPrefix "/tnlm:tunnel-management"
-	// 精确锚定：tnlm-ext 数据 augment 入本树不独立成根，裸前缀不误命中其他模块。
-	driver.Register(driver.Descriptor{
-		Vendor: "huawei", Module: "tunnel-management",
-		MatchRoute:      func(p string) bool { return strings.HasPrefix(p, "/tnlm:tunnel-management") },
-		ControllerToken: "tunnel-management",
-		MatchDecode:     func(p string) bool { return strings.HasPrefix(p, "/tnlm:tunnel-management") },
-		DecodeXML: func(raw []byte) (ygot.GoStruct, error) {
-			v := &huawei.HuaweiTunnelManagement_TunnelManagement{}
-			if err := xmlcodec.Decode(tnlmXML, raw, v); err != nil {
-				return nil, err
-			}
-			return v, nil
-		},
-		MatchEncode:  func(p string) bool { return strings.HasPrefix(p, "/tnlm:tunnel-management") },
-		NewStruct:    func() ygot.GoStruct { return &huawei.HuaweiTunnelManagement_TunnelManagement{} },
-		EncodeAnchor: "/tnlm:tunnel-management",
-		Unmarshal:    huawei.Unmarshal,
-		XML:          tnlmXML,
-	})
-	// xpl（/xpl:xpl）——BGP 2b route-filter leafref 前置（越序禁令：目标模型须先可配，
-	// XPL-01/03）。容器根模块（非 list 根），与 /bgp:bgp、/tnlm:tunnel-management 同构，
-	// 走通用引擎 plain-container（XC-05）。谓词 HasPrefix "/xpl:xpl" 精确锚定。本波次功能
-	// 面仅 route-filters/route-filter；xpl 其他策略 list 仍 generated-but-not-integrated。
-	driver.Register(driver.Descriptor{
-		Vendor: "huawei", Module: "xpl",
-		MatchRoute:      func(p string) bool { return strings.HasPrefix(p, "/xpl:xpl") },
-		ControllerToken: "xpl",
-		MatchDecode:     func(p string) bool { return strings.HasPrefix(p, "/xpl:xpl") },
-		DecodeXML: func(raw []byte) (ygot.GoStruct, error) {
-			v := &huawei.HuaweiXpl_Xpl{}
-			if err := xmlcodec.Decode(xplXML, raw, v); err != nil {
-				return nil, err
-			}
-			return v, nil
-		},
-		MatchEncode:  func(p string) bool { return strings.HasPrefix(p, "/xpl:xpl") },
-		NewStruct:    func() ygot.GoStruct { return &huawei.HuaweiXpl_Xpl{} },
-		EncodeAnchor: "/xpl:xpl",
-		Unmarshal:    huawei.Unmarshal,
-		XML:          xplXML,
-	})
-	// routing-policy（/rtp:routing-policy）——BGP 2b import/export route-policy leafref 前置
-	// （越序禁令：目标模型须先可配，RTP-01/03）。容器根模块，与 /bgp:bgp 等同构，走通用引擎
-	// plain-container（XC-05）。谓词 HasPrefix "/rtp:routing-policy" 精确锚定。本波次功能面仅
-	// policy-definitions/policy-definition 标量边界；深层 nodes 与其他 rtp filter 仍未集成。
-	driver.Register(driver.Descriptor{
-		Vendor: "huawei", Module: "routing-policy",
-		MatchRoute:      func(p string) bool { return strings.HasPrefix(p, "/rtp:routing-policy") },
-		ControllerToken: "routing-policy",
-		MatchDecode:     func(p string) bool { return strings.HasPrefix(p, "/rtp:routing-policy") },
-		DecodeXML: func(raw []byte) (ygot.GoStruct, error) {
-			v := &huawei.HuaweiRoutingPolicy_RoutingPolicy{}
-			if err := xmlcodec.Decode(rtpXML, raw, v); err != nil {
-				return nil, err
-			}
-			return v, nil
-		},
-		MatchEncode:  func(p string) bool { return strings.HasPrefix(p, "/rtp:routing-policy") },
-		NewStruct:    func() ygot.GoStruct { return &huawei.HuaweiRoutingPolicy_RoutingPolicy{} },
-		EncodeAnchor: "/rtp:routing-policy",
-		Unmarshal:    huawei.Unmarshal,
-		XML:          rtpXML,
-	})
-	// acl（/acl:acl）——BGP 2b ACL group leafref 前置（越序禁令：目标模型须先可配，
-	// ACL-01/03）。容器根模块，与 /bgp:bgp 等同构，走通用引擎 plain-container（XC-05）。
-	// 谓词 HasPrefix "/acl:acl" 精确锚定。本波次功能面仅 groups/group + group6s/group6
-	// 标量/枚举边界；深层 rule-* 与 ip-pools/port-pools 仍 generated-but-not-integrated。
-	driver.Register(driver.Descriptor{
-		Vendor: "huawei", Module: "acl",
-		MatchRoute:      func(p string) bool { return strings.HasPrefix(p, "/acl:acl") },
-		ControllerToken: "acl",
-		MatchDecode:     func(p string) bool { return strings.HasPrefix(p, "/acl:acl") },
-		DecodeXML: func(raw []byte) (ygot.GoStruct, error) {
-			v := &huawei.HuaweiAcl_Acl{}
-			if err := xmlcodec.Decode(aclXML, raw, v); err != nil {
-				return nil, err
-			}
-			return v, nil
-		},
-		MatchEncode:  func(p string) bool { return strings.HasPrefix(p, "/acl:acl") },
-		NewStruct:    func() ygot.GoStruct { return &huawei.HuaweiAcl_Acl{} },
-		EncodeAnchor: "/acl:acl",
-		Unmarshal:    huawei.Unmarshal,
-		XML:          aclXML,
 	})
 }

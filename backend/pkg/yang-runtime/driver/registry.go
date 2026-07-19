@@ -142,6 +142,15 @@ func (r *Registry) VendorSupported(vendor string) bool {
 	return ok
 }
 
+// All returns a copy of the registered descriptors in registration order.
+func (r *Registry) All() []Descriptor {
+	r.mu.RLock()
+	defer r.mu.RUnlock()
+	out := make([]Descriptor, len(r.descriptors))
+	copy(out, r.descriptors)
+	return out
+}
+
 func (r *Registry) lookup(pred func(Descriptor) bool) (Descriptor, bool) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
@@ -176,3 +185,7 @@ func XMLEncoderForValue(v interface{}) (Descriptor, bool) {
 // VendorSupported reports whether the default registry has any driver
 // descriptor for the vendor (case-insensitive, DR-04).
 func VendorSupported(vendor string) bool { return defaultRegistry.VendorSupported(vendor) }
+
+// All returns a snapshot of all registered descriptors in registration order
+// （full-yang-onboarding D4：main 按注册表循环装配 plain-container 控制器）。
+func All() []Descriptor { return defaultRegistry.All() }

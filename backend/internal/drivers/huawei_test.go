@@ -22,9 +22,10 @@ var dispatchEquivalence = []struct {
 	{"/vlan:vlan/vlan:vlans", "vlan", "vlan", "vlan"},
 	{"/ifm:ifm/ifm:interfaces", "ifm", "ifm", "ifm"},
 	{"/system:system", "system", "", "system"},
-	// 别名形态（原 manager 额外接受的裸词）
-	{"/foo/vlans", "vlan", "", ""},
-	{"/foo/interfaces", "ifm", "", ""},
+	// DR-06 根名前缀锚：原 manager 裸词别名（/foo/vlans→vlan）已废除——
+	// 全量模块下裸词必误吞他模块深路径（ospfv2 interfaces、qos vlans 等）
+	{"/foo/vlans", "", "", ""},
+	{"/foo/interfaces", "", "", ""},
 	// BGP 公网根：三处均命中 bgp（HasPrefix "/bgp:bgp"）
 	{"/bgp:bgp", "bgp", "bgp", "bgp"},
 	{"/bgp:bgp/base-process", "bgp", "bgp", "bgp"},
@@ -40,10 +41,10 @@ var dispatchEquivalence = []struct {
 	// network-instance 负路径：前缀含 "network-instance" 但非 "/ni:network-instance" 起头
 	{"/ni-feature:network-instance-x", "", "", ""},
 	// tunnel-management 根（BGP 2b tunnel-policy leafref 前置，TNLM-03）：三处均命中
-	{"/tnlm:tunnel-management", "tunnel-management", "tunnel-management", "tunnel-management"},
-	{"/tnlm:tunnel-management/tunnel-policys/tunnel-policy", "tunnel-management", "tunnel-management", "tunnel-management"},
+	{"/tunnel-management:tunnel-management", "tunnel-management", "tunnel-management", "tunnel-management"},
+	{"/tunnel-management:tunnel-management/tunnel-policys/tunnel-policy", "tunnel-management", "tunnel-management", "tunnel-management"},
 	// tunnel-management 负路径：ext 模块（tnlm-ext）数据 augment 入 tnlm 树、不独立成根，
-	// 裸前缀不得误命中（谓词精确锚定 "/tnlm:tunnel-management"）
+	// 裸前缀不得误命中（谓词精确锚定 "/tunnel-management:tunnel-management"）
 	{"/tnlm-ext:foo", "", "", ""},
 	// xpl 根（BGP 2b route-filter leafref 前置，XPL-03）：三处均命中
 	{"/xpl:xpl", "xpl", "xpl", "xpl"},
@@ -51,9 +52,9 @@ var dispatchEquivalence = []struct {
 	// xpl 负路径：前缀含 "xpl" 但非 "/xpl:xpl" 起头，谓词精确锚定不误命中
 	{"/xpl-x:y", "", "", ""},
 	// routing-policy 根（BGP 2b import/export route-policy leafref 前置，RTP-03）：三处均命中
-	{"/rtp:routing-policy", "routing-policy", "routing-policy", "routing-policy"},
-	{"/rtp:routing-policy/policy-definitions/policy-definition", "routing-policy", "routing-policy", "routing-policy"},
-	// routing-policy 负路径：前缀含 "routing" 但非 "/rtp:routing-policy" 起头
+	{"/routing-policy:routing-policy", "routing-policy", "routing-policy", "routing-policy"},
+	{"/routing-policy:routing-policy/policy-definitions/policy-definition", "routing-policy", "routing-policy", "routing-policy"},
+	// routing-policy 负路径：前缀含 "routing" 但非 "/routing-policy:routing-policy" 起头
 	{"/route:routing-x", "", "", ""},
 	// acl 根（BGP 2b ACL group leafref 前置，ACL-03）：三处均命中
 	{"/acl:acl", "acl", "acl", "acl"},
@@ -233,7 +234,7 @@ func TestHuaweiDescriptors_VlanDecodeSmoke(t *testing.T) {
 // 覆盖容器根标量边界：tunnel-policy(name+description) 嵌套 list + tunnel-down-switch
 // enable 标量（TNLM-01/02）。BGP 2b tunnel-policy leafref 的目标实例经此路径可配。
 func TestHuaweiDescriptors_TunnelManagementEncodeDecodeRoundtrip(t *testing.T) {
-	enc, ok := driver.EncoderFor("/tnlm:tunnel-management")
+	enc, ok := driver.EncoderFor("/tunnel-management:tunnel-management")
 	if !ok {
 		t.Fatal("tunnel-management 编码描述符应命中")
 	}
@@ -269,7 +270,7 @@ func TestHuaweiDescriptors_TunnelManagementEncodeDecodeRoundtrip(t *testing.T) {
 		}
 	}
 
-	dec, ok := driver.DecoderFor("/tnlm:tunnel-management")
+	dec, ok := driver.DecoderFor("/tunnel-management:tunnel-management")
 	if !ok {
 		t.Fatal("tunnel-management 解码描述符应命中")
 	}
@@ -344,7 +345,7 @@ func TestHuaweiDescriptors_XplEncodeDecodeRoundtrip(t *testing.T) {
 // list 标量/枚举边界（RTP-01/02，CE 基线 pd 级无标量叶）。BGP 2b import/export
 // route-policy leafref 的目标实例经此路径可配。
 func TestHuaweiDescriptors_RoutingPolicyEncodeDecodeRoundtrip(t *testing.T) {
-	enc, ok := driver.EncoderFor("/rtp:routing-policy")
+	enc, ok := driver.EncoderFor("/routing-policy:routing-policy")
 	if !ok {
 		t.Fatal("routing-policy 编码描述符应命中")
 	}
@@ -377,7 +378,7 @@ func TestHuaweiDescriptors_RoutingPolicyEncodeDecodeRoundtrip(t *testing.T) {
 		}
 	}
 
-	dec, ok := driver.DecoderFor("/rtp:routing-policy")
+	dec, ok := driver.DecoderFor("/routing-policy:routing-policy")
 	if !ok {
 		t.Fatal("routing-policy 解码描述符应命中")
 	}

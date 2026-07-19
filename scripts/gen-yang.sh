@@ -52,12 +52,14 @@ for conf in "$GEN_DIR"/*/gen.conf; do
         exit 1
     fi
 
-    # 前置校验：YANG 模型目录必须存在且非空（模型源为入库目录，应随仓库存在）
-    if [ ! -d "$ROOT/$yang_path" ] || [ -z "$(ls -A "$ROOT/$yang_path" 2>/dev/null)" ]; then
-        echo "gen-yang: YANG 模型目录不存在或为空: $yang_path" >&2
-        echo "  模型源为入库目录（如 snd/ce6866p-yang），请检查 checkout 完整性" >&2
-        exit 1
-    fi
+    # 前置校验：YANG 模型目录（逗号分隔多目录）必须存在且非空（模型源为入库目录）
+    for dir in $(echo "$yang_path" | tr ',' ' '); do
+        if [ ! -d "$ROOT/$dir" ] || [ -z "$(ls -A "$ROOT/$dir" 2>/dev/null)" ]; then
+            echo "gen-yang: YANG 模型目录不存在或为空: $dir" >&2
+            echo "  模型源为入库目录（如 snd/ce6866p-yang），请检查 checkout 完整性" >&2
+            exit 1
+        fi
+    done
 
     if [ -n "$split_count" ]; then
         case "$split_count" in
@@ -78,12 +80,13 @@ for conf in "$GEN_DIR"/*/gen.conf; do
                     "internal/generated/$pkg/union.go" \
                     "internal/generated/$pkg/schema.go" &&
                 go run github.com/openconfig/ygot/generator \
-                    -path="../$yang_path" \
+                    -path="$(echo "$yang_path" | awk -F, '{ for (i=1;i<=NF;i++) printf "%s../%s", (i>1?",":""), $i }')" \
                     -output_dir="internal/generated/$pkg" \
                     -structs_split_files_count="$split_count" \
                     -package_name="$pkg" \
                     -generate_fakeroot="$generate_fakeroot" \
                     -compress_paths="$compress_paths" \
+                    -ignore_unsupported=true \
                     $modules &&
                 go run ./tools/genfix "internal/generated/$pkg"/*.go &&
                 go tool goimports -w "internal/generated/$pkg"
@@ -94,7 +97,7 @@ for conf in "$GEN_DIR"/*/gen.conf; do
         (
             cd "$ROOT/backend" &&
                 go run github.com/openconfig/ygot/generator \
-                    -path="../$yang_path" \
+                    -path="$(echo "$yang_path" | awk -F, '{ for (i=1;i<=NF;i++) printf "%s../%s", (i>1?",":""), $i }')" \
                     -output_file="internal/generated/$pkg/all.gen.go" \
                     -package_name="$pkg" \
                     -generate_fakeroot="$generate_fakeroot" \

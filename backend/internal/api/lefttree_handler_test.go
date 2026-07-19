@@ -83,12 +83,17 @@ func TestLeftTreeShape(t *testing.T) {
 	if vlan == nil || vlan.Available == nil || !*vlan.Available || vlan.Module != "vlan" {
 		t.Fatalf("huawei-vlan 叶应 available:true module:vlan, got %+v", vlan)
 	}
+	// full-yang-onboarding：dsa 已随全量接入可用；pic 为唯一延期叶（CG-04）。
 	dsa := findLeaf(tree, "huawei-dsa")
-	if dsa == nil || dsa.Available == nil || *dsa.Available {
-		t.Fatalf("huawei-dsa（未生成）应 available:false 且在树中, got %+v", dsa)
+	if dsa == nil || dsa.Available == nil || !*dsa.Available || dsa.Module != "dsa" {
+		t.Fatalf("huawei-dsa（已接入）应 available:true module:dsa, got %+v", dsa)
 	}
-	if dsa.Module != "" {
-		t.Errorf("不可用叶不应携带 module, got %q", dsa.Module)
+	pic := findLeaf(tree, "huawei-pic")
+	if pic == nil || pic.Available == nil || *pic.Available {
+		t.Fatalf("huawei-pic（延期）应 available:false 且在树中, got %+v", pic)
+	}
+	if pic.Module != "" {
+		t.Errorf("不可用叶不应携带 module, got %q", pic.Module)
 	}
 	// 双语字段存在
 	if tree[0].Zh == "" || tree[0].En == "" {

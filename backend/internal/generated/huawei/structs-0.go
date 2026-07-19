@@ -13,9 +13,64 @@ using the following YANG input files:
   - huawei-extension
   - huawei-bgp
   - huawei-network-instance
+  - huawei-analysis-collector
+  - huawei-anyflow
+  - huawei-arp
+  - huawei-bd
+  - huawei-cfg
+  - huawei-devm
+  - huawei-driver
+  - huawei-dsa
+  - huawei-ecc
+  - huawei-evpn
+  - huawei-fib
+  - huawei-ftpc
+  - huawei-grpc
+  - huawei-hwtacacs
+  - huawei-ifm-trunk
+  - huawei-ip
+  - huawei-l3-multicast
+  - huawei-lacp
+  - huawei-license
+  - huawei-lldp
+  - huawei-loadbalance
+  - huawei-m-lag
+  - huawei-mac-flapping-detect
+  - huawei-macsec
+  - huawei-microsegmentation
+  - huawei-mirror
+  - huawei-monitor-link
+  - huawei-mstp
+  - huawei-multicast
+  - huawei-mvpn
+  - huawei-nqa
+  - huawei-ntp
+  - huawei-nvo3
+  - huawei-openflow-agent
+  - huawei-ospfv2
+  - huawei-ospfv3
+  - huawei-packetevent
+  - huawei-qos
+  - huawei-rsa
+  - huawei-sflow
+  - huawei-sm2
+  - huawei-snmp
+  - huawei-syslog
+  - huawei-system-resources-usage
+  - huawei-unicast-forward
+  - huawei-vrrp
+  - huawei-vty
+  - huawei-vxlan-ext
+  - huawei-vxlan-path-detect
+  - openconfig-telemetry
+  - usmp-deviations
+  - huawei-ethernet
+  - huawei-gre
+  - huawei-nvo3-statistics
 
 Imported modules were sourced from:
   - ../snd/ce6866p-yang/...
+  - ../backend/internal/yang/deviations/...
 */
 package huawei
 
@@ -99,19 +154,73 @@ func Unmarshal(data []byte, destStruct ygot.GoStruct, opts ...ytypes.UnmarshalOp
 
 // Device represents the /device YANG schema element.
 type Device struct {
-	Acl              *HuaweiAcl_Acl                           `path:"acl" module:"huawei-acl"`
-	Bfd              *HuaweiBfd_Bfd                           `path:"bfd" module:"huawei-bfd"`
-	Bgp              *HuaweiBgp_Bgp                           `path:"bgp" module:"huawei-bgp"`
-	Ifm              *HuaweiIfm_Ifm                           `path:"ifm" module:"huawei-ifm"`
-	L3Vpn            *HuaweiL3Vpn_L3Vpn                       `path:"l3vpn" module:"huawei-l3vpn"`
-	NetworkInstance  *HuaweiNetworkInstance_NetworkInstance   `path:"network-instance" module:"huawei-network-instance"`
-	Routing          *HuaweiRouting_Routing                   `path:"routing" module:"huawei-routing"`
-	RoutingPolicy    *HuaweiRoutingPolicy_RoutingPolicy       `path:"routing-policy" module:"huawei-routing-policy"`
-	System           *HuaweiSystem_System                     `path:"system" module:"huawei-system"`
-	TimeRange        *HuaweiTimeRange_TimeRange               `path:"time-range" module:"huawei-time-range"`
-	TunnelManagement *HuaweiTunnelManagement_TunnelManagement `path:"tunnel-management" module:"huawei-tunnel-management"`
-	Vlan             *HuaweiVlan_Vlan                         `path:"vlan" module:"huawei-vlan"`
-	Xpl              *HuaweiXpl_Xpl                           `path:"xpl" module:"huawei-xpl"`
+	Acl                  *HuaweiAcl_Acl                                   `path:"acl" module:"huawei-acl"`
+	AnalysisCollector    *HuaweiAnalysisCollector_AnalysisCollector       `path:"analysis-collector" module:"huawei-analysis-collector"`
+	Anyflow              *HuaweiAnyflow_Anyflow                           `path:"anyflow" module:"huawei-anyflow"`
+	Arp                  *HuaweiArp_Arp                                   `path:"arp" module:"huawei-arp"`
+	Bd                   *HuaweiBd_Bd                                     `path:"bd" module:"huawei-bd"`
+	Bfd                  *HuaweiBfd_Bfd                                   `path:"bfd" module:"huawei-bfd"`
+	Bgp                  *HuaweiBgp_Bgp                                   `path:"bgp" module:"huawei-bgp"`
+	Cfg                  *HuaweiCfg_Cfg                                   `path:"cfg" module:"huawei-cfg"`
+	Devm                 *HuaweiDevm_Devm                                 `path:"devm" module:"huawei-devm"`
+	Driver               *HuaweiDriver_Driver                             `path:"driver" module:"huawei-driver"`
+	Dsa                  *HuaweiDsa_Dsa                                   `path:"dsa" module:"huawei-dsa"`
+	Ecc                  *HuaweiEcc_Ecc                                   `path:"ecc" module:"huawei-ecc"`
+	Evpl                 *HuaweiEvpl_Evpl                                 `path:"evpl" module:"huawei-evpl"`
+	Evpn                 *HuaweiEvpn_Evpn                                 `path:"evpn" module:"huawei-evpn"`
+	Fib                  *HuaweiFib_Fib                                   `path:"fib" module:"huawei-fib"`
+	Ftpc                 *HuaweiFtpc_Ftpc                                 `path:"ftpc" module:"huawei-ftpc"`
+	Grpc                 *HuaweiGrpc_Grpc                                 `path:"grpc" module:"huawei-grpc"`
+	Hwtacacs             *HuaweiHwtacacs_Hwtacacs                         `path:"hwtacacs" module:"huawei-hwtacacs"`
+	Ifm                  *HuaweiIfm_Ifm                                   `path:"ifm" module:"huawei-ifm"`
+	IfmTrunk             *HuaweiIfmTrunk_IfmTrunk                         `path:"ifm-trunk" module:"huawei-ifm-trunk"`
+	L2Vpn                *HuaweiL2Vpn_L2Vpn                               `path:"l2vpn" module:"huawei-l2vpn"`
+	L3Multicast          *HuaweiL3Multicast_L3Multicast                   `path:"l3-multicast" module:"huawei-l3-multicast"`
+	L3Vpn                *HuaweiL3Vpn_L3Vpn                               `path:"l3vpn" module:"huawei-l3vpn"`
+	Lacp                 *HuaweiLacp_Lacp                                 `path:"lacp" module:"huawei-lacp"`
+	License              *HuaweiLicense_License                           `path:"license" module:"huawei-license"`
+	Lldp                 *HuaweiLldp_Lldp                                 `path:"lldp" module:"huawei-lldp"`
+	Loadbalance          *HuaweiLoadbalance_Loadbalance                   `path:"loadbalance" module:"huawei-loadbalance"`
+	MLag                 *HuaweiMLag_MLag                                 `path:"m-lag" module:"huawei-m-lag"`
+	MacFlappingDetect    *HuaweiMacFlappingDetect_MacFlappingDetect       `path:"mac-flapping-detect" module:"huawei-mac-flapping-detect"`
+	Macsec               *HuaweiMacsec_Macsec                             `path:"macsec" module:"huawei-macsec"`
+	Microsegmentation    *HuaweiMicrosegmentation_Microsegmentation       `path:"microsegmentation" module:"huawei-microsegmentation"`
+	Mirror               *HuaweiMirror_Mirror                             `path:"mirror" module:"huawei-mirror"`
+	MonitorGroup         *HuaweiMonitorGroup_MonitorGroup                 `path:"monitor-group" module:"huawei-monitor-group"`
+	MonitorLink          *HuaweiMonitorLink_MonitorLink                   `path:"monitor-link" module:"huawei-monitor-link"`
+	Mpls                 *HuaweiMpls_Mpls                                 `path:"mpls" module:"huawei-mpls"`
+	Mstp                 *HuaweiMstp_Mstp                                 `path:"mstp" module:"huawei-mstp"`
+	Multicast            *HuaweiMulticast_Multicast                       `path:"multicast" module:"huawei-multicast"`
+	Mvpn                 *HuaweiMvpn_Mvpn                                 `path:"mvpn" module:"huawei-mvpn"`
+	NetworkInstance      *HuaweiNetworkInstance_NetworkInstance           `path:"network-instance" module:"huawei-network-instance"`
+	Nqa                  *HuaweiNqa_Nqa                                   `path:"nqa" module:"huawei-nqa"`
+	Ntp                  *HuaweiNtp_Ntp                                   `path:"ntp" module:"huawei-ntp"`
+	Nvo3                 *HuaweiNvo3_Nvo3                                 `path:"nvo3" module:"huawei-nvo3"`
+	OpenflowAgent        *HuaweiOpenflowAgent_OpenflowAgent               `path:"openflow-agent" module:"huawei-openflow-agent"`
+	Ospfv2               *HuaweiOspfv2_Ospfv2                             `path:"ospfv2" module:"huawei-ospfv2"`
+	Ospfv3               *HuaweiOspfv3_Ospfv3                             `path:"ospfv3" module:"huawei-ospfv3"`
+	Packetevent          *HuaweiPacketevent_Packetevent                   `path:"packetevent" module:"huawei-packetevent"`
+	Qos                  *HuaweiQos_Qos                                   `path:"qos" module:"huawei-qos"`
+	Routing              *HuaweiRouting_Routing                           `path:"routing" module:"huawei-routing"`
+	RoutingPolicy        *HuaweiRoutingPolicy_RoutingPolicy               `path:"routing-policy" module:"huawei-routing-policy"`
+	Rsa                  *HuaweiRsa_Rsa                                   `path:"rsa" module:"huawei-rsa"`
+	Sflow                *HuaweiSflow_Sflow                               `path:"sflow" module:"huawei-sflow"`
+	Sm2                  *HuaweiSm2_Sm2                                   `path:"sm2" module:"huawei-sm2"`
+	Snmp                 *HuaweiSnmp_Snmp                                 `path:"snmp" module:"huawei-snmp"`
+	Ssl                  *HuaweiSsl_Ssl                                   `path:"ssl" module:"huawei-ssl"`
+	Syslog               *HuaweiSyslog_Syslog                             `path:"syslog" module:"huawei-syslog"`
+	System               *HuaweiSystem_System                             `path:"system" module:"huawei-system"`
+	SystemResourcesUsage *HuaweiSystemResourcesUsage_SystemResourcesUsage `path:"system-resources-usage" module:"huawei-system-resources-usage"`
+	TelemetrySystem      *OpenconfigTelemetry_TelemetrySystem             `path:"telemetry-system" module:"openconfig-telemetry"`
+	TimeRange            *HuaweiTimeRange_TimeRange                       `path:"time-range" module:"huawei-time-range"`
+	TunnelManagement     *HuaweiTunnelManagement_TunnelManagement         `path:"tunnel-management" module:"huawei-tunnel-management"`
+	UnicastForward       *HuaweiUnicastForward_UnicastForward             `path:"unicast-forward" module:"huawei-unicast-forward"`
+	Vlan                 *HuaweiVlan_Vlan                                 `path:"vlan" module:"huawei-vlan"`
+	Vrrp                 *HuaweiVrrp_Vrrp                                 `path:"vrrp" module:"huawei-vrrp"`
+	Vty                  *HuaweiVty_Vty                                   `path:"vty" module:"huawei-vty"`
+	VxlanExt             *HuaweiVxlanExt_VxlanExt                         `path:"vxlan-ext" module:"huawei-vxlan-ext"`
+	VxlanPathDetect      *HuaweiVxlanPathDetect_VxlanPathDetect           `path:"vxlan-path-detect" module:"huawei-vxlan-path-detect"`
+	Xpl                  *HuaweiXpl_Xpl                                   `path:"xpl" module:"huawei-xpl"`
 }
 
 // IsYANGGoStruct ensures that Device implements the yang.GoStruct
@@ -2745,6 +2854,3677 @@ func (t *HuaweiAcl_Acl_PortPools_PortPool_Ports_Port) ΛEnumTypeMap() map[string
 // of HuaweiAcl_Acl_PortPools_PortPool_Ports_Port.
 func (*HuaweiAcl_Acl_PortPools_PortPool_Ports_Port) ΛBelongingModule() string {
 	return "huawei-acl"
+}
+
+// HuaweiAnalysisCollector_AnalysisCollector represents the /huawei-analysis-collector/analysis-collector YANG schema element.
+type HuaweiAnalysisCollector_AnalysisCollector struct {
+	Collectors *HuaweiAnalysisCollector_AnalysisCollector_Collectors `path:"collectors" module:"huawei-analysis-collector"`
+}
+
+// IsYANGGoStruct ensures that HuaweiAnalysisCollector_AnalysisCollector implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiAnalysisCollector_AnalysisCollector) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiAnalysisCollector_AnalysisCollector) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiAnalysisCollector_AnalysisCollector"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiAnalysisCollector_AnalysisCollector) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiAnalysisCollector_AnalysisCollector) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiAnalysisCollector_AnalysisCollector.
+func (*HuaweiAnalysisCollector_AnalysisCollector) ΛBelongingModule() string {
+	return "huawei-analysis-collector"
+}
+
+// HuaweiAnalysisCollector_AnalysisCollector_Collectors represents the /huawei-analysis-collector/analysis-collector/collectors YANG schema element.
+type HuaweiAnalysisCollector_AnalysisCollector_Collectors struct {
+	Collector map[uint32]*HuaweiAnalysisCollector_AnalysisCollector_Collectors_Collector `path:"collector" module:"huawei-analysis-collector"`
+}
+
+// IsYANGGoStruct ensures that HuaweiAnalysisCollector_AnalysisCollector_Collectors implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiAnalysisCollector_AnalysisCollector_Collectors) IsYANGGoStruct() {}
+
+// NewCollector creates a new entry in the Collector list of the
+// HuaweiAnalysisCollector_AnalysisCollector_Collectors struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiAnalysisCollector_AnalysisCollector_Collectors) NewCollector(Id uint32) (*HuaweiAnalysisCollector_AnalysisCollector_Collectors_Collector, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.Collector == nil {
+		t.Collector = make(map[uint32]*HuaweiAnalysisCollector_AnalysisCollector_Collectors_Collector)
+	}
+
+	key := Id
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.Collector[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Collector", key)
+	}
+
+	t.Collector[key] = &HuaweiAnalysisCollector_AnalysisCollector_Collectors_Collector{
+		Id: &Id,
+	}
+
+	return t.Collector[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiAnalysisCollector_AnalysisCollector_Collectors) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiAnalysisCollector_AnalysisCollector_Collectors"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiAnalysisCollector_AnalysisCollector_Collectors) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiAnalysisCollector_AnalysisCollector_Collectors) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiAnalysisCollector_AnalysisCollector_Collectors.
+func (*HuaweiAnalysisCollector_AnalysisCollector_Collectors) ΛBelongingModule() string {
+	return "huawei-analysis-collector"
+}
+
+// HuaweiAnalysisCollector_AnalysisCollector_Collectors_Collector represents the /huawei-analysis-collector/analysis-collector/collectors/collector YANG schema element.
+type HuaweiAnalysisCollector_AnalysisCollector_Collectors_Collector struct {
+	DstPort     *uint32 `path:"dst-port" module:"huawei-analysis-collector"`
+	HostAddress *string `path:"host-address" module:"huawei-analysis-collector"`
+	Id          *uint32 `path:"id" module:"huawei-analysis-collector"`
+	SrcAddress  *string `path:"src-address" module:"huawei-analysis-collector"`
+	VpnName     *string `path:"vpn-name" module:"huawei-analysis-collector"`
+}
+
+// IsYANGGoStruct ensures that HuaweiAnalysisCollector_AnalysisCollector_Collectors_Collector implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiAnalysisCollector_AnalysisCollector_Collectors_Collector) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiAnalysisCollector_AnalysisCollector_Collectors_Collector struct, which is a YANG list entry.
+func (t *HuaweiAnalysisCollector_AnalysisCollector_Collectors_Collector) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.Id == nil {
+		return nil, fmt.Errorf("nil value for key Id")
+	}
+
+	return map[string]interface{}{
+		"id": *t.Id,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiAnalysisCollector_AnalysisCollector_Collectors_Collector) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiAnalysisCollector_AnalysisCollector_Collectors_Collector"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiAnalysisCollector_AnalysisCollector_Collectors_Collector) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiAnalysisCollector_AnalysisCollector_Collectors_Collector) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiAnalysisCollector_AnalysisCollector_Collectors_Collector.
+func (*HuaweiAnalysisCollector_AnalysisCollector_Collectors_Collector) ΛBelongingModule() string {
+	return "huawei-analysis-collector"
+}
+
+// HuaweiAnyflow_Anyflow represents the /huawei-anyflow/anyflow YANG schema element.
+type HuaweiAnyflow_Anyflow struct {
+	Global *HuaweiAnyflow_Anyflow_Global `path:"global" module:"huawei-anyflow"`
+}
+
+// IsYANGGoStruct ensures that HuaweiAnyflow_Anyflow implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiAnyflow_Anyflow) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiAnyflow_Anyflow) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiAnyflow_Anyflow"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiAnyflow_Anyflow) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiAnyflow_Anyflow) ΛEnumTypeMap() map[string][]reflect.Type { return ΛEnumTypes }
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiAnyflow_Anyflow.
+func (*HuaweiAnyflow_Anyflow) ΛBelongingModule() string {
+	return "huawei-anyflow"
+}
+
+// HuaweiAnyflow_Anyflow_Global represents the /huawei-anyflow/anyflow/global YANG schema element.
+type HuaweiAnyflow_Anyflow_Global struct {
+	AggregationAgingTime      *uint32  `path:"aggregation-aging-time" module:"huawei-anyflow"`
+	AggregationExportInterval *uint32  `path:"aggregation-export-interval" module:"huawei-anyflow"`
+	AggregationServicePort    []string `path:"aggregation-service-port" module:"huawei-anyflow"`
+	AgingTime                 *uint32  `path:"aging-time" module:"huawei-anyflow"`
+	CollectId                 *uint32  `path:"collect-id" module:"huawei-anyflow"`
+	Enable                    *bool    `path:"enable" module:"huawei-anyflow"`
+	ExportInterval            *uint32  `path:"export-interval" module:"huawei-anyflow"`
+	FlowAggregation           *bool    `path:"flow-aggregation" module:"huawei-anyflow"`
+	HardwareAgingTime         *uint32  `path:"hardware-aging-time" module:"huawei-anyflow"`
+	HardwareExportInterval    *uint32  `path:"hardware-export-interval" module:"huawei-anyflow"`
+}
+
+// IsYANGGoStruct ensures that HuaweiAnyflow_Anyflow_Global implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiAnyflow_Anyflow_Global) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiAnyflow_Anyflow_Global) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiAnyflow_Anyflow_Global"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiAnyflow_Anyflow_Global) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiAnyflow_Anyflow_Global) ΛEnumTypeMap() map[string][]reflect.Type { return ΛEnumTypes }
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiAnyflow_Anyflow_Global.
+func (*HuaweiAnyflow_Anyflow_Global) ΛBelongingModule() string {
+	return "huawei-anyflow"
+}
+
+// HuaweiArp_Arp represents the /huawei-arp/arp YANG schema element.
+type HuaweiArp_Arp struct {
+	AntiAttackRecords  *HuaweiArp_Arp_AntiAttackRecords  `path:"anti-attack-records" module:"huawei-arp"`
+	BdTracks           *HuaweiArp_Arp_BdTracks           `path:"bd-tracks" module:"huawei-arp"`
+	CachedStatistics   *HuaweiArp_Arp_CachedStatistics   `path:"cached-statistics" module:"huawei-arp"`
+	CurrentSpeedLimits *HuaweiArp_Arp_CurrentSpeedLimits `path:"current-speed-limits" module:"huawei-arp"`
+	DuplicateItems     *HuaweiArp_Arp_DuplicateItems     `path:"duplicate-items" module:"huawei-arp"`
+	EntryStatistics    *HuaweiArp_Arp_EntryStatistics    `path:"entry-statistics" module:"huawei-arp"`
+	ErrorPackets       *HuaweiArp_Arp_ErrorPackets       `path:"error-packets" module:"huawei-arp"`
+	Global             *HuaweiArp_Arp_Global             `path:"global" module:"huawei-arp"`
+	GlobalSpeedLimits  *HuaweiArp_Arp_GlobalSpeedLimits  `path:"global-speed-limits" module:"huawei-arp"`
+	IpConflicts        *HuaweiArp_Arp_IpConflicts        `path:"ip-conflicts" module:"huawei-arp"`
+	OpenflowTbls       *HuaweiArp_Arp_OpenflowTbls       `path:"openflow-tbls" module:"huawei-arp"`
+	QueryEntries       *HuaweiArp_Arp_QueryEntries       `path:"query-entries" module:"huawei-arp"`
+	SpeedLimits        *HuaweiArp_Arp_SpeedLimits        `path:"speed-limits" module:"huawei-arp"`
+	StaticArps         *HuaweiArp_Arp_StaticArps         `path:"static-arps" module:"huawei-arp"`
+	Statisticss        *HuaweiArp_Arp_Statisticss        `path:"statisticss" module:"huawei-arp"`
+	TrackStatistics    *HuaweiArp_Arp_TrackStatistics    `path:"track-statistics" module:"huawei-arp"`
+}
+
+// IsYANGGoStruct ensures that HuaweiArp_Arp implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiArp_Arp) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiArp_Arp) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiArp_Arp"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiArp_Arp) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiArp_Arp) ΛEnumTypeMap() map[string][]reflect.Type { return ΛEnumTypes }
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiArp_Arp.
+func (*HuaweiArp_Arp) ΛBelongingModule() string {
+	return "huawei-arp"
+}
+
+// HuaweiArp_Arp_AntiAttackRecords represents the /huawei-arp/arp/anti-attack-records YANG schema element.
+type HuaweiArp_Arp_AntiAttackRecords struct {
+	AntiAttackRecord map[HuaweiArp_Arp_AntiAttackRecords_AntiAttackRecord_Key]*HuaweiArp_Arp_AntiAttackRecords_AntiAttackRecord `path:"anti-attack-record" module:"huawei-arp"`
+}
+
+// IsYANGGoStruct ensures that HuaweiArp_Arp_AntiAttackRecords implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiArp_Arp_AntiAttackRecords) IsYANGGoStruct() {}
+
+// HuaweiArp_Arp_AntiAttackRecords_AntiAttackRecord_Key represents the key for list AntiAttackRecord of element /huawei-arp/arp/anti-attack-records.
+type HuaweiArp_Arp_AntiAttackRecords_AntiAttackRecord_Key struct {
+	SuppType   E_HuaweiArp_SuppressType `path:"supp-type"`
+	SrcIpAddr  string                   `path:"src-ip-addr"`
+	DestIpAddr string                   `path:"dest-ip-addr"`
+	Interface  string                   `path:"interface"`
+	AttackTime string                   `path:"attack-time"`
+}
+
+// IsYANGGoKeyStruct ensures that HuaweiArp_Arp_AntiAttackRecords_AntiAttackRecord_Key partially implements the
+// yang.GoKeyStruct interface. This allows functions that need to
+// handle this key struct to identify it as being generated by gogen.
+func (HuaweiArp_Arp_AntiAttackRecords_AntiAttackRecord_Key) IsYANGGoKeyStruct() {}
+
+// ΛListKeyMap returns the values of the HuaweiArp_Arp_AntiAttackRecords_AntiAttackRecord_Key key struct.
+func (t HuaweiArp_Arp_AntiAttackRecords_AntiAttackRecord_Key) ΛListKeyMap() (map[string]interface{}, error) {
+	return map[string]interface{}{
+		"supp-type":    t.SuppType,
+		"src-ip-addr":  t.SrcIpAddr,
+		"dest-ip-addr": t.DestIpAddr,
+		"interface":    t.Interface,
+		"attack-time":  t.AttackTime,
+	}, nil
+}
+
+// NewAntiAttackRecord creates a new entry in the AntiAttackRecord list of the
+// HuaweiArp_Arp_AntiAttackRecords struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiArp_Arp_AntiAttackRecords) NewAntiAttackRecord(SuppType E_HuaweiArp_SuppressType, SrcIpAddr string, DestIpAddr string, Interface string, AttackTime string) (*HuaweiArp_Arp_AntiAttackRecords_AntiAttackRecord, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.AntiAttackRecord == nil {
+		t.AntiAttackRecord = make(map[HuaweiArp_Arp_AntiAttackRecords_AntiAttackRecord_Key]*HuaweiArp_Arp_AntiAttackRecords_AntiAttackRecord)
+	}
+
+	key := HuaweiArp_Arp_AntiAttackRecords_AntiAttackRecord_Key{
+		SuppType:   SuppType,
+		SrcIpAddr:  SrcIpAddr,
+		DestIpAddr: DestIpAddr,
+		Interface:  Interface,
+		AttackTime: AttackTime,
+	}
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.AntiAttackRecord[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list AntiAttackRecord", key)
+	}
+
+	t.AntiAttackRecord[key] = &HuaweiArp_Arp_AntiAttackRecords_AntiAttackRecord{
+		SuppType:   SuppType,
+		SrcIpAddr:  &SrcIpAddr,
+		DestIpAddr: &DestIpAddr,
+		Interface:  &Interface,
+		AttackTime: &AttackTime,
+	}
+
+	return t.AntiAttackRecord[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiArp_Arp_AntiAttackRecords) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiArp_Arp_AntiAttackRecords"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiArp_Arp_AntiAttackRecords) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiArp_Arp_AntiAttackRecords) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiArp_Arp_AntiAttackRecords.
+func (*HuaweiArp_Arp_AntiAttackRecords) ΛBelongingModule() string {
+	return "huawei-arp"
+}
+
+// HuaweiArp_Arp_AntiAttackRecords_AntiAttackRecord represents the /huawei-arp/arp/anti-attack-records/anti-attack-record YANG schema element.
+type HuaweiArp_Arp_AntiAttackRecords_AntiAttackRecord struct {
+	AttackTime *string                  `path:"attack-time" module:"huawei-arp"`
+	DestIpAddr *string                  `path:"dest-ip-addr" module:"huawei-arp"`
+	Interface  *string                  `path:"interface" module:"huawei-arp"`
+	SrcIpAddr  *string                  `path:"src-ip-addr" module:"huawei-arp"`
+	SuppType   E_HuaweiArp_SuppressType `path:"supp-type" module:"huawei-arp"`
+}
+
+// IsYANGGoStruct ensures that HuaweiArp_Arp_AntiAttackRecords_AntiAttackRecord implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiArp_Arp_AntiAttackRecords_AntiAttackRecord) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiArp_Arp_AntiAttackRecords_AntiAttackRecord struct, which is a YANG list entry.
+func (t *HuaweiArp_Arp_AntiAttackRecords_AntiAttackRecord) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.AttackTime == nil {
+		return nil, fmt.Errorf("nil value for key AttackTime")
+	}
+
+	if t.DestIpAddr == nil {
+		return nil, fmt.Errorf("nil value for key DestIpAddr")
+	}
+
+	if t.Interface == nil {
+		return nil, fmt.Errorf("nil value for key Interface")
+	}
+
+	if t.SrcIpAddr == nil {
+		return nil, fmt.Errorf("nil value for key SrcIpAddr")
+	}
+
+	return map[string]interface{}{
+		"attack-time":  *t.AttackTime,
+		"dest-ip-addr": *t.DestIpAddr,
+		"interface":    *t.Interface,
+		"src-ip-addr":  *t.SrcIpAddr,
+		"supp-type":    t.SuppType,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiArp_Arp_AntiAttackRecords_AntiAttackRecord) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiArp_Arp_AntiAttackRecords_AntiAttackRecord"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiArp_Arp_AntiAttackRecords_AntiAttackRecord) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiArp_Arp_AntiAttackRecords_AntiAttackRecord) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiArp_Arp_AntiAttackRecords_AntiAttackRecord.
+func (*HuaweiArp_Arp_AntiAttackRecords_AntiAttackRecord) ΛBelongingModule() string {
+	return "huawei-arp"
+}
+
+// HuaweiArp_Arp_BdTracks represents the /huawei-arp/arp/bd-tracks YANG schema element.
+type HuaweiArp_Arp_BdTracks struct {
+	BdTrack map[HuaweiArp_Arp_BdTracks_BdTrack_Key]*HuaweiArp_Arp_BdTracks_BdTrack `path:"bd-track" module:"huawei-arp"`
+}
+
+// IsYANGGoStruct ensures that HuaweiArp_Arp_BdTracks implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiArp_Arp_BdTracks) IsYANGGoStruct() {}
+
+// HuaweiArp_Arp_BdTracks_BdTrack_Key represents the key for list BdTrack of element /huawei-arp/arp/bd-tracks.
+type HuaweiArp_Arp_BdTracks_BdTrack_Key struct {
+	OpCode    E_HuaweiArp_TrackOpcodeType `path:"op-code"`
+	IpAddr    string                      `path:"ip-addr"`
+	OldIfname string                      `path:"old-ifname"`
+	NewIfname string                      `path:"new-ifname"`
+	SysTime   string                      `path:"sys-time"`
+}
+
+// IsYANGGoKeyStruct ensures that HuaweiArp_Arp_BdTracks_BdTrack_Key partially implements the
+// yang.GoKeyStruct interface. This allows functions that need to
+// handle this key struct to identify it as being generated by gogen.
+func (HuaweiArp_Arp_BdTracks_BdTrack_Key) IsYANGGoKeyStruct() {}
+
+// ΛListKeyMap returns the values of the HuaweiArp_Arp_BdTracks_BdTrack_Key key struct.
+func (t HuaweiArp_Arp_BdTracks_BdTrack_Key) ΛListKeyMap() (map[string]interface{}, error) {
+	return map[string]interface{}{
+		"op-code":    t.OpCode,
+		"ip-addr":    t.IpAddr,
+		"old-ifname": t.OldIfname,
+		"new-ifname": t.NewIfname,
+		"sys-time":   t.SysTime,
+	}, nil
+}
+
+// NewBdTrack creates a new entry in the BdTrack list of the
+// HuaweiArp_Arp_BdTracks struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiArp_Arp_BdTracks) NewBdTrack(OpCode E_HuaweiArp_TrackOpcodeType, IpAddr string, OldIfname string, NewIfname string, SysTime string) (*HuaweiArp_Arp_BdTracks_BdTrack, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.BdTrack == nil {
+		t.BdTrack = make(map[HuaweiArp_Arp_BdTracks_BdTrack_Key]*HuaweiArp_Arp_BdTracks_BdTrack)
+	}
+
+	key := HuaweiArp_Arp_BdTracks_BdTrack_Key{
+		OpCode:    OpCode,
+		IpAddr:    IpAddr,
+		OldIfname: OldIfname,
+		NewIfname: NewIfname,
+		SysTime:   SysTime,
+	}
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.BdTrack[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list BdTrack", key)
+	}
+
+	t.BdTrack[key] = &HuaweiArp_Arp_BdTracks_BdTrack{
+		OpCode:    OpCode,
+		IpAddr:    &IpAddr,
+		OldIfname: &OldIfname,
+		NewIfname: &NewIfname,
+		SysTime:   &SysTime,
+	}
+
+	return t.BdTrack[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiArp_Arp_BdTracks) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiArp_Arp_BdTracks"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiArp_Arp_BdTracks) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiArp_Arp_BdTracks) ΛEnumTypeMap() map[string][]reflect.Type { return ΛEnumTypes }
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiArp_Arp_BdTracks.
+func (*HuaweiArp_Arp_BdTracks) ΛBelongingModule() string {
+	return "huawei-arp"
+}
+
+// HuaweiArp_Arp_BdTracks_BdTrack represents the /huawei-arp/arp/bd-tracks/bd-track YANG schema element.
+type HuaweiArp_Arp_BdTracks_BdTrack struct {
+	BdId      *uint32                     `path:"bd-id" module:"huawei-arp"`
+	IpAddr    *string                     `path:"ip-addr" module:"huawei-arp"`
+	MacAddr   *string                     `path:"mac-addr" module:"huawei-arp"`
+	NewIfname *string                     `path:"new-ifname" module:"huawei-arp"`
+	OldIfname *string                     `path:"old-ifname" module:"huawei-arp"`
+	OpCode    E_HuaweiArp_TrackOpcodeType `path:"op-code" module:"huawei-arp"`
+	SysTime   *string                     `path:"sys-time" module:"huawei-arp"`
+}
+
+// IsYANGGoStruct ensures that HuaweiArp_Arp_BdTracks_BdTrack implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiArp_Arp_BdTracks_BdTrack) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiArp_Arp_BdTracks_BdTrack struct, which is a YANG list entry.
+func (t *HuaweiArp_Arp_BdTracks_BdTrack) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.IpAddr == nil {
+		return nil, fmt.Errorf("nil value for key IpAddr")
+	}
+
+	if t.NewIfname == nil {
+		return nil, fmt.Errorf("nil value for key NewIfname")
+	}
+
+	if t.OldIfname == nil {
+		return nil, fmt.Errorf("nil value for key OldIfname")
+	}
+
+	if t.SysTime == nil {
+		return nil, fmt.Errorf("nil value for key SysTime")
+	}
+
+	return map[string]interface{}{
+		"ip-addr":    *t.IpAddr,
+		"new-ifname": *t.NewIfname,
+		"old-ifname": *t.OldIfname,
+		"op-code":    t.OpCode,
+		"sys-time":   *t.SysTime,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiArp_Arp_BdTracks_BdTrack) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiArp_Arp_BdTracks_BdTrack"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiArp_Arp_BdTracks_BdTrack) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiArp_Arp_BdTracks_BdTrack) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiArp_Arp_BdTracks_BdTrack.
+func (*HuaweiArp_Arp_BdTracks_BdTrack) ΛBelongingModule() string {
+	return "huawei-arp"
+}
+
+// HuaweiArp_Arp_CachedStatistics represents the /huawei-arp/arp/cached-statistics YANG schema element.
+type HuaweiArp_Arp_CachedStatistics struct {
+	CachedStatistic map[HuaweiArp_Arp_CachedStatistics_CachedStatistic_Key]*HuaweiArp_Arp_CachedStatistics_CachedStatistic `path:"cached-statistic" module:"huawei-arp"`
+}
+
+// IsYANGGoStruct ensures that HuaweiArp_Arp_CachedStatistics implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiArp_Arp_CachedStatistics) IsYANGGoStruct() {}
+
+// HuaweiArp_Arp_CachedStatistics_CachedStatistic_Key represents the key for list CachedStatistic of element /huawei-arp/arp/cached-statistics.
+type HuaweiArp_Arp_CachedStatistics_CachedStatistic_Key struct {
+	EvnName string `path:"evn-name"`
+	VlanId  uint16 `path:"vlan-id"`
+	IpAddr  string `path:"ip-addr"`
+}
+
+// IsYANGGoKeyStruct ensures that HuaweiArp_Arp_CachedStatistics_CachedStatistic_Key partially implements the
+// yang.GoKeyStruct interface. This allows functions that need to
+// handle this key struct to identify it as being generated by gogen.
+func (HuaweiArp_Arp_CachedStatistics_CachedStatistic_Key) IsYANGGoKeyStruct() {}
+
+// ΛListKeyMap returns the values of the HuaweiArp_Arp_CachedStatistics_CachedStatistic_Key key struct.
+func (t HuaweiArp_Arp_CachedStatistics_CachedStatistic_Key) ΛListKeyMap() (map[string]interface{}, error) {
+	return map[string]interface{}{
+		"evn-name": t.EvnName,
+		"vlan-id":  t.VlanId,
+		"ip-addr":  t.IpAddr,
+	}, nil
+}
+
+// NewCachedStatistic creates a new entry in the CachedStatistic list of the
+// HuaweiArp_Arp_CachedStatistics struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiArp_Arp_CachedStatistics) NewCachedStatistic(EvnName string, VlanId uint16, IpAddr string) (*HuaweiArp_Arp_CachedStatistics_CachedStatistic, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.CachedStatistic == nil {
+		t.CachedStatistic = make(map[HuaweiArp_Arp_CachedStatistics_CachedStatistic_Key]*HuaweiArp_Arp_CachedStatistics_CachedStatistic)
+	}
+
+	key := HuaweiArp_Arp_CachedStatistics_CachedStatistic_Key{
+		EvnName: EvnName,
+		VlanId:  VlanId,
+		IpAddr:  IpAddr,
+	}
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.CachedStatistic[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list CachedStatistic", key)
+	}
+
+	t.CachedStatistic[key] = &HuaweiArp_Arp_CachedStatistics_CachedStatistic{
+		EvnName: &EvnName,
+		VlanId:  &VlanId,
+		IpAddr:  &IpAddr,
+	}
+
+	return t.CachedStatistic[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiArp_Arp_CachedStatistics) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiArp_Arp_CachedStatistics"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiArp_Arp_CachedStatistics) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiArp_Arp_CachedStatistics) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiArp_Arp_CachedStatistics.
+func (*HuaweiArp_Arp_CachedStatistics) ΛBelongingModule() string {
+	return "huawei-arp"
+}
+
+// HuaweiArp_Arp_CachedStatistics_CachedStatistic represents the /huawei-arp/arp/cached-statistics/cached-statistic YANG schema element.
+type HuaweiArp_Arp_CachedStatistics_CachedStatistic struct {
+	AgingTime *uint32 `path:"aging-time" module:"huawei-arp"`
+	EvnName   *string `path:"evn-name" module:"huawei-arp"`
+	IfName    *string `path:"if-name" module:"huawei-arp"`
+	IpAddr    *string `path:"ip-addr" module:"huawei-arp"`
+	MacAddr   *string `path:"mac-addr" module:"huawei-arp"`
+	VlanId    *uint16 `path:"vlan-id" module:"huawei-arp"`
+}
+
+// IsYANGGoStruct ensures that HuaweiArp_Arp_CachedStatistics_CachedStatistic implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiArp_Arp_CachedStatistics_CachedStatistic) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiArp_Arp_CachedStatistics_CachedStatistic struct, which is a YANG list entry.
+func (t *HuaweiArp_Arp_CachedStatistics_CachedStatistic) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.EvnName == nil {
+		return nil, fmt.Errorf("nil value for key EvnName")
+	}
+
+	if t.IpAddr == nil {
+		return nil, fmt.Errorf("nil value for key IpAddr")
+	}
+
+	if t.VlanId == nil {
+		return nil, fmt.Errorf("nil value for key VlanId")
+	}
+
+	return map[string]interface{}{
+		"evn-name": *t.EvnName,
+		"ip-addr":  *t.IpAddr,
+		"vlan-id":  *t.VlanId,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiArp_Arp_CachedStatistics_CachedStatistic) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiArp_Arp_CachedStatistics_CachedStatistic"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiArp_Arp_CachedStatistics_CachedStatistic) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiArp_Arp_CachedStatistics_CachedStatistic) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiArp_Arp_CachedStatistics_CachedStatistic.
+func (*HuaweiArp_Arp_CachedStatistics_CachedStatistic) ΛBelongingModule() string {
+	return "huawei-arp"
+}
+
+// HuaweiArp_Arp_CurrentSpeedLimits represents the /huawei-arp/arp/current-speed-limits YANG schema element.
+type HuaweiArp_Arp_CurrentSpeedLimits struct {
+	CurrentSpeedLimit map[HuaweiArp_Arp_CurrentSpeedLimits_CurrentSpeedLimit_Key]*HuaweiArp_Arp_CurrentSpeedLimits_CurrentSpeedLimit `path:"current-speed-limit" module:"huawei-arp"`
+}
+
+// IsYANGGoStruct ensures that HuaweiArp_Arp_CurrentSpeedLimits implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiArp_Arp_CurrentSpeedLimits) IsYANGGoStruct() {}
+
+// HuaweiArp_Arp_CurrentSpeedLimits_CurrentSpeedLimit_Key represents the key for list CurrentSpeedLimit of element /huawei-arp/arp/current-speed-limits.
+type HuaweiArp_Arp_CurrentSpeedLimits_CurrentSpeedLimit_Key struct {
+	SlotId       string                     `path:"slot-id"`
+	SuppressType E_HuaweiArp_SuppressType   `path:"suppress-type"`
+	IpType       E_HuaweiArp_SuppressIpType `path:"ip-type"`
+}
+
+// IsYANGGoKeyStruct ensures that HuaweiArp_Arp_CurrentSpeedLimits_CurrentSpeedLimit_Key partially implements the
+// yang.GoKeyStruct interface. This allows functions that need to
+// handle this key struct to identify it as being generated by gogen.
+func (HuaweiArp_Arp_CurrentSpeedLimits_CurrentSpeedLimit_Key) IsYANGGoKeyStruct() {}
+
+// ΛListKeyMap returns the values of the HuaweiArp_Arp_CurrentSpeedLimits_CurrentSpeedLimit_Key key struct.
+func (t HuaweiArp_Arp_CurrentSpeedLimits_CurrentSpeedLimit_Key) ΛListKeyMap() (map[string]interface{}, error) {
+	return map[string]interface{}{
+		"slot-id":       t.SlotId,
+		"suppress-type": t.SuppressType,
+		"ip-type":       t.IpType,
+	}, nil
+}
+
+// NewCurrentSpeedLimit creates a new entry in the CurrentSpeedLimit list of the
+// HuaweiArp_Arp_CurrentSpeedLimits struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiArp_Arp_CurrentSpeedLimits) NewCurrentSpeedLimit(SlotId string, SuppressType E_HuaweiArp_SuppressType, IpType E_HuaweiArp_SuppressIpType) (*HuaweiArp_Arp_CurrentSpeedLimits_CurrentSpeedLimit, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.CurrentSpeedLimit == nil {
+		t.CurrentSpeedLimit = make(map[HuaweiArp_Arp_CurrentSpeedLimits_CurrentSpeedLimit_Key]*HuaweiArp_Arp_CurrentSpeedLimits_CurrentSpeedLimit)
+	}
+
+	key := HuaweiArp_Arp_CurrentSpeedLimits_CurrentSpeedLimit_Key{
+		SlotId:       SlotId,
+		SuppressType: SuppressType,
+		IpType:       IpType,
+	}
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.CurrentSpeedLimit[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list CurrentSpeedLimit", key)
+	}
+
+	t.CurrentSpeedLimit[key] = &HuaweiArp_Arp_CurrentSpeedLimits_CurrentSpeedLimit{
+		SlotId:       &SlotId,
+		SuppressType: SuppressType,
+		IpType:       IpType,
+	}
+
+	return t.CurrentSpeedLimit[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiArp_Arp_CurrentSpeedLimits) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiArp_Arp_CurrentSpeedLimits"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiArp_Arp_CurrentSpeedLimits) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiArp_Arp_CurrentSpeedLimits) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiArp_Arp_CurrentSpeedLimits.
+func (*HuaweiArp_Arp_CurrentSpeedLimits) ΛBelongingModule() string {
+	return "huawei-arp"
+}
+
+// HuaweiArp_Arp_CurrentSpeedLimits_CurrentSpeedLimit represents the /huawei-arp/arp/current-speed-limits/current-speed-limit YANG schema element.
+type HuaweiArp_Arp_CurrentSpeedLimits_CurrentSpeedLimit struct {
+	IpType        E_HuaweiArp_SuppressIpType `path:"ip-type" module:"huawei-arp"`
+	SlotId        *string                    `path:"slot-id" module:"huawei-arp"`
+	SuppressType  E_HuaweiArp_SuppressType   `path:"suppress-type" module:"huawei-arp"`
+	SuppressValue *uint32                    `path:"suppress-value" module:"huawei-arp"`
+}
+
+// IsYANGGoStruct ensures that HuaweiArp_Arp_CurrentSpeedLimits_CurrentSpeedLimit implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiArp_Arp_CurrentSpeedLimits_CurrentSpeedLimit) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiArp_Arp_CurrentSpeedLimits_CurrentSpeedLimit struct, which is a YANG list entry.
+func (t *HuaweiArp_Arp_CurrentSpeedLimits_CurrentSpeedLimit) ΛListKeyMap() (map[string]interface{}, error) {
+
+	if t.SlotId == nil {
+		return nil, fmt.Errorf("nil value for key SlotId")
+	}
+
+	return map[string]interface{}{
+		"ip-type":       t.IpType,
+		"slot-id":       *t.SlotId,
+		"suppress-type": t.SuppressType,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiArp_Arp_CurrentSpeedLimits_CurrentSpeedLimit) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiArp_Arp_CurrentSpeedLimits_CurrentSpeedLimit"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiArp_Arp_CurrentSpeedLimits_CurrentSpeedLimit) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiArp_Arp_CurrentSpeedLimits_CurrentSpeedLimit) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiArp_Arp_CurrentSpeedLimits_CurrentSpeedLimit.
+func (*HuaweiArp_Arp_CurrentSpeedLimits_CurrentSpeedLimit) ΛBelongingModule() string {
+	return "huawei-arp"
+}
+
+// HuaweiArp_Arp_DuplicateItems represents the /huawei-arp/arp/duplicate-items YANG schema element.
+type HuaweiArp_Arp_DuplicateItems struct {
+	DuplicateItem map[HuaweiArp_Arp_DuplicateItems_DuplicateItem_Key]*HuaweiArp_Arp_DuplicateItems_DuplicateItem `path:"duplicate-item" module:"huawei-arp"`
+}
+
+// IsYANGGoStruct ensures that HuaweiArp_Arp_DuplicateItems implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiArp_Arp_DuplicateItems) IsYANGGoStruct() {}
+
+// HuaweiArp_Arp_DuplicateItems_DuplicateItem_Key represents the key for list DuplicateItem of element /huawei-arp/arp/duplicate-items.
+type HuaweiArp_Arp_DuplicateItems_DuplicateItem_Key struct {
+	MacAddr    string                 `path:"mac-addr"`
+	BridgeType E_HuaweiArp_BridgeType `path:"bridge-type"`
+	BridgeId   uint32                 `path:"bridge-id"`
+}
+
+// IsYANGGoKeyStruct ensures that HuaweiArp_Arp_DuplicateItems_DuplicateItem_Key partially implements the
+// yang.GoKeyStruct interface. This allows functions that need to
+// handle this key struct to identify it as being generated by gogen.
+func (HuaweiArp_Arp_DuplicateItems_DuplicateItem_Key) IsYANGGoKeyStruct() {}
+
+// ΛListKeyMap returns the values of the HuaweiArp_Arp_DuplicateItems_DuplicateItem_Key key struct.
+func (t HuaweiArp_Arp_DuplicateItems_DuplicateItem_Key) ΛListKeyMap() (map[string]interface{}, error) {
+	return map[string]interface{}{
+		"mac-addr":    t.MacAddr,
+		"bridge-type": t.BridgeType,
+		"bridge-id":   t.BridgeId,
+	}, nil
+}
+
+// NewDuplicateItem creates a new entry in the DuplicateItem list of the
+// HuaweiArp_Arp_DuplicateItems struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiArp_Arp_DuplicateItems) NewDuplicateItem(MacAddr string, BridgeType E_HuaweiArp_BridgeType, BridgeId uint32) (*HuaweiArp_Arp_DuplicateItems_DuplicateItem, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.DuplicateItem == nil {
+		t.DuplicateItem = make(map[HuaweiArp_Arp_DuplicateItems_DuplicateItem_Key]*HuaweiArp_Arp_DuplicateItems_DuplicateItem)
+	}
+
+	key := HuaweiArp_Arp_DuplicateItems_DuplicateItem_Key{
+		MacAddr:    MacAddr,
+		BridgeType: BridgeType,
+		BridgeId:   BridgeId,
+	}
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.DuplicateItem[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list DuplicateItem", key)
+	}
+
+	t.DuplicateItem[key] = &HuaweiArp_Arp_DuplicateItems_DuplicateItem{
+		MacAddr:    &MacAddr,
+		BridgeType: BridgeType,
+		BridgeId:   &BridgeId,
+	}
+
+	return t.DuplicateItem[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiArp_Arp_DuplicateItems) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiArp_Arp_DuplicateItems"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiArp_Arp_DuplicateItems) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiArp_Arp_DuplicateItems) ΛEnumTypeMap() map[string][]reflect.Type { return ΛEnumTypes }
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiArp_Arp_DuplicateItems.
+func (*HuaweiArp_Arp_DuplicateItems) ΛBelongingModule() string {
+	return "huawei-arp"
+}
+
+// HuaweiArp_Arp_DuplicateItems_DuplicateItem represents the /huawei-arp/arp/duplicate-items/duplicate-item YANG schema element.
+type HuaweiArp_Arp_DuplicateItems_DuplicateItem struct {
+	AgingTime  *uint32                `path:"aging-time" module:"huawei-arp"`
+	BridgeId   *uint32                `path:"bridge-id" module:"huawei-arp"`
+	BridgeType E_HuaweiArp_BridgeType `path:"bridge-type" module:"huawei-arp"`
+	IfName     *string                `path:"if-name" module:"huawei-arp"`
+	IpAddr     *string                `path:"ip-addr" module:"huawei-arp"`
+	MacAddr    *string                `path:"mac-addr" module:"huawei-arp"`
+	PeerAddr   *string                `path:"peer-addr" module:"huawei-arp"`
+	SourceAddr *string                `path:"source-addr" module:"huawei-arp"`
+	Vni        *uint32                `path:"vni" module:"huawei-arp"`
+}
+
+// IsYANGGoStruct ensures that HuaweiArp_Arp_DuplicateItems_DuplicateItem implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiArp_Arp_DuplicateItems_DuplicateItem) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiArp_Arp_DuplicateItems_DuplicateItem struct, which is a YANG list entry.
+func (t *HuaweiArp_Arp_DuplicateItems_DuplicateItem) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.BridgeId == nil {
+		return nil, fmt.Errorf("nil value for key BridgeId")
+	}
+
+	if t.MacAddr == nil {
+		return nil, fmt.Errorf("nil value for key MacAddr")
+	}
+
+	return map[string]interface{}{
+		"bridge-id":   *t.BridgeId,
+		"bridge-type": t.BridgeType,
+		"mac-addr":    *t.MacAddr,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiArp_Arp_DuplicateItems_DuplicateItem) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiArp_Arp_DuplicateItems_DuplicateItem"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiArp_Arp_DuplicateItems_DuplicateItem) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiArp_Arp_DuplicateItems_DuplicateItem) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiArp_Arp_DuplicateItems_DuplicateItem.
+func (*HuaweiArp_Arp_DuplicateItems_DuplicateItem) ΛBelongingModule() string {
+	return "huawei-arp"
+}
+
+// HuaweiArp_Arp_EntryStatistics represents the /huawei-arp/arp/entry-statistics YANG schema element.
+type HuaweiArp_Arp_EntryStatistics struct {
+	EntryStatistic map[string]*HuaweiArp_Arp_EntryStatistics_EntryStatistic `path:"entry-statistic" module:"huawei-arp"`
+}
+
+// IsYANGGoStruct ensures that HuaweiArp_Arp_EntryStatistics implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiArp_Arp_EntryStatistics) IsYANGGoStruct() {}
+
+// NewEntryStatistic creates a new entry in the EntryStatistic list of the
+// HuaweiArp_Arp_EntryStatistics struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiArp_Arp_EntryStatistics) NewEntryStatistic(SlotId string) (*HuaweiArp_Arp_EntryStatistics_EntryStatistic, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.EntryStatistic == nil {
+		t.EntryStatistic = make(map[string]*HuaweiArp_Arp_EntryStatistics_EntryStatistic)
+	}
+
+	key := SlotId
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.EntryStatistic[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list EntryStatistic", key)
+	}
+
+	t.EntryStatistic[key] = &HuaweiArp_Arp_EntryStatistics_EntryStatistic{
+		SlotId: &SlotId,
+	}
+
+	return t.EntryStatistic[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiArp_Arp_EntryStatistics) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiArp_Arp_EntryStatistics"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiArp_Arp_EntryStatistics) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiArp_Arp_EntryStatistics) ΛEnumTypeMap() map[string][]reflect.Type { return ΛEnumTypes }
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiArp_Arp_EntryStatistics.
+func (*HuaweiArp_Arp_EntryStatistics) ΛBelongingModule() string {
+	return "huawei-arp"
+}
+
+// HuaweiArp_Arp_EntryStatistics_EntryStatistic represents the /huawei-arp/arp/entry-statistics/entry-statistic YANG schema element.
+type HuaweiArp_Arp_EntryStatistics_EntryStatistic struct {
+	DynamicNum  *uint32 `path:"dynamic-num" module:"huawei-arp"`
+	ExceedFlag  *bool   `path:"exceed-flag" module:"huawei-arp"`
+	RedirectNum *uint32 `path:"redirect-num" module:"huawei-arp"`
+	RemoteNum   *uint32 `path:"remote-num" module:"huawei-arp"`
+	SlotId      *string `path:"slot-id" module:"huawei-arp"`
+	StaticNum   *uint32 `path:"static-num" module:"huawei-arp"`
+}
+
+// IsYANGGoStruct ensures that HuaweiArp_Arp_EntryStatistics_EntryStatistic implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiArp_Arp_EntryStatistics_EntryStatistic) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiArp_Arp_EntryStatistics_EntryStatistic struct, which is a YANG list entry.
+func (t *HuaweiArp_Arp_EntryStatistics_EntryStatistic) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.SlotId == nil {
+		return nil, fmt.Errorf("nil value for key SlotId")
+	}
+
+	return map[string]interface{}{
+		"slot-id": *t.SlotId,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiArp_Arp_EntryStatistics_EntryStatistic) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiArp_Arp_EntryStatistics_EntryStatistic"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiArp_Arp_EntryStatistics_EntryStatistic) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiArp_Arp_EntryStatistics_EntryStatistic) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiArp_Arp_EntryStatistics_EntryStatistic.
+func (*HuaweiArp_Arp_EntryStatistics_EntryStatistic) ΛBelongingModule() string {
+	return "huawei-arp"
+}
+
+// HuaweiArp_Arp_ErrorPackets represents the /huawei-arp/arp/error-packets YANG schema element.
+type HuaweiArp_Arp_ErrorPackets struct {
+	ErrorPacket map[HuaweiArp_Arp_ErrorPackets_ErrorPacket_Key]*HuaweiArp_Arp_ErrorPackets_ErrorPacket `path:"error-packet" module:"huawei-arp"`
+}
+
+// IsYANGGoStruct ensures that HuaweiArp_Arp_ErrorPackets implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiArp_Arp_ErrorPackets) IsYANGGoStruct() {}
+
+// HuaweiArp_Arp_ErrorPackets_ErrorPacket_Key represents the key for list ErrorPacket of element /huawei-arp/arp/error-packets.
+type HuaweiArp_Arp_ErrorPackets_ErrorPacket_Key struct {
+	SlotId   string `path:"slot-id"`
+	Sequence uint32 `path:"sequence"`
+}
+
+// IsYANGGoKeyStruct ensures that HuaweiArp_Arp_ErrorPackets_ErrorPacket_Key partially implements the
+// yang.GoKeyStruct interface. This allows functions that need to
+// handle this key struct to identify it as being generated by gogen.
+func (HuaweiArp_Arp_ErrorPackets_ErrorPacket_Key) IsYANGGoKeyStruct() {}
+
+// ΛListKeyMap returns the values of the HuaweiArp_Arp_ErrorPackets_ErrorPacket_Key key struct.
+func (t HuaweiArp_Arp_ErrorPackets_ErrorPacket_Key) ΛListKeyMap() (map[string]interface{}, error) {
+	return map[string]interface{}{
+		"slot-id":  t.SlotId,
+		"sequence": t.Sequence,
+	}, nil
+}
+
+// NewErrorPacket creates a new entry in the ErrorPacket list of the
+// HuaweiArp_Arp_ErrorPackets struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiArp_Arp_ErrorPackets) NewErrorPacket(SlotId string, Sequence uint32) (*HuaweiArp_Arp_ErrorPackets_ErrorPacket, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.ErrorPacket == nil {
+		t.ErrorPacket = make(map[HuaweiArp_Arp_ErrorPackets_ErrorPacket_Key]*HuaweiArp_Arp_ErrorPackets_ErrorPacket)
+	}
+
+	key := HuaweiArp_Arp_ErrorPackets_ErrorPacket_Key{
+		SlotId:   SlotId,
+		Sequence: Sequence,
+	}
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.ErrorPacket[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list ErrorPacket", key)
+	}
+
+	t.ErrorPacket[key] = &HuaweiArp_Arp_ErrorPackets_ErrorPacket{
+		SlotId:   &SlotId,
+		Sequence: &Sequence,
+	}
+
+	return t.ErrorPacket[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiArp_Arp_ErrorPackets) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiArp_Arp_ErrorPackets"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiArp_Arp_ErrorPackets) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiArp_Arp_ErrorPackets) ΛEnumTypeMap() map[string][]reflect.Type { return ΛEnumTypes }
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiArp_Arp_ErrorPackets.
+func (*HuaweiArp_Arp_ErrorPackets) ΛBelongingModule() string {
+	return "huawei-arp"
+}
+
+// HuaweiArp_Arp_ErrorPackets_ErrorPacket represents the /huawei-arp/arp/error-packets/error-packet YANG schema element.
+type HuaweiArp_Arp_ErrorPackets_ErrorPacket struct {
+	IfName         *string `path:"if-name" module:"huawei-arp"`
+	ReceiveContent *string `path:"receive-content" module:"huawei-arp"`
+	ReceiveTime    *string `path:"receive-time" module:"huawei-arp"`
+	Sequence       *uint32 `path:"sequence" module:"huawei-arp"`
+	SlotId         *string `path:"slot-id" module:"huawei-arp"`
+}
+
+// IsYANGGoStruct ensures that HuaweiArp_Arp_ErrorPackets_ErrorPacket implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiArp_Arp_ErrorPackets_ErrorPacket) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiArp_Arp_ErrorPackets_ErrorPacket struct, which is a YANG list entry.
+func (t *HuaweiArp_Arp_ErrorPackets_ErrorPacket) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.Sequence == nil {
+		return nil, fmt.Errorf("nil value for key Sequence")
+	}
+
+	if t.SlotId == nil {
+		return nil, fmt.Errorf("nil value for key SlotId")
+	}
+
+	return map[string]interface{}{
+		"sequence": *t.Sequence,
+		"slot-id":  *t.SlotId,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiArp_Arp_ErrorPackets_ErrorPacket) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiArp_Arp_ErrorPackets_ErrorPacket"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiArp_Arp_ErrorPackets_ErrorPacket) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiArp_Arp_ErrorPackets_ErrorPacket) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiArp_Arp_ErrorPackets_ErrorPacket.
+func (*HuaweiArp_Arp_ErrorPackets_ErrorPacket) ΛBelongingModule() string {
+	return "huawei-arp"
+}
+
+// HuaweiArp_Arp_Global represents the /huawei-arp/arp/global YANG schema element.
+type HuaweiArp_Arp_Global struct {
+	ArpFastReply            *bool                        `path:"arp-fast-reply" module:"huawei-arp"`
+	BroadcastMaxNum         *uint16                      `path:"broadcast-max-num" module:"huawei-arp"`
+	CheckType               E_HuaweiArp_ArpfixType       `path:"check-type" module:"huawei-arp"`
+	ConSendEnable           *bool                        `path:"con-send-enable" module:"huawei-arp"`
+	ConSendMaxnum           *uint16                      `path:"con-send-maxnum" module:"huawei-arp"`
+	DfsBackupRate           *uint32                      `path:"dfs-backup-rate" module:"huawei-arp"`
+	DiffLearnDisable        *bool                        `path:"diff-learn-disable" module:"huawei-arp"`
+	Evncfg                  *HuaweiArp_Arp_Global_Evncfg `path:"evncfg" module:"huawei-arp"`
+	ExpireTime              *uint32                      `path:"expire-time" module:"huawei-arp"`
+	GatewayDupEnable        *bool                        `path:"gateway-dup-enable" module:"huawei-arp"`
+	GmffEnable              *bool                        `path:"gmff-enable" module:"huawei-arp"`
+	GratuitousDrop          *bool                        `path:"gratuitous-drop" module:"huawei-arp"`
+	GratuitousInterval      *uint32                      `path:"gratuitous-interval" module:"huawei-arp"`
+	GratuitousSend          *bool                        `path:"gratuitous-send" module:"huawei-arp"`
+	HostConflictPeriod      *uint16                      `path:"host-conflict-period" module:"huawei-arp"`
+	HostConflictThreshold   *uint16                      `path:"host-conflict-threshold" module:"huawei-arp"`
+	IpconflictDetectEnable  *bool                        `path:"ipconflict-detect-enable" module:"huawei-arp"`
+	L2TopoDetectEnable      *bool                        `path:"l2topo-detect-enable" module:"huawei-arp"`
+	MaxStaticNum            *uint32                      `path:"max-static-num" module:"huawei-arp"`
+	MulticastLearningEnable *bool                        `path:"multicast-learning-enable" module:"huawei-arp"`
+	PassiveLearnEnable      *bool                        `path:"passive-learn-enable" module:"huawei-arp"`
+	ProbeTimes              *uint8                       `path:"probe-times" module:"huawei-arp"`
+	RateTrapInterval        *uint32                      `path:"rate-trap-interval" module:"huawei-arp"`
+	SnoopingEnable          *bool                        `path:"snooping-enable" module:"huawei-arp"`
+	SrcMacCheck             *bool                        `path:"src-mac-check" module:"huawei-arp"`
+	StrictLearnEnable       *bool                        `path:"strict-learn-enable" module:"huawei-arp"`
+	TimeoutEnable           *bool                        `path:"timeout-enable" module:"huawei-arp"`
+	TopoDetectDisable       *bool                        `path:"topo-detect-disable" module:"huawei-arp"`
+	VlanifExpiretime        *uint32                      `path:"vlanif-expiretime" module:"huawei-arp"`
+}
+
+// IsYANGGoStruct ensures that HuaweiArp_Arp_Global implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiArp_Arp_Global) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiArp_Arp_Global) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiArp_Arp_Global"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiArp_Arp_Global) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiArp_Arp_Global) ΛEnumTypeMap() map[string][]reflect.Type { return ΛEnumTypes }
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiArp_Arp_Global.
+func (*HuaweiArp_Arp_Global) ΛBelongingModule() string {
+	return "huawei-arp"
+}
+
+// HuaweiArp_Arp_GlobalSpeedLimits represents the /huawei-arp/arp/global-speed-limits YANG schema element.
+type HuaweiArp_Arp_GlobalSpeedLimits struct {
+	GlobalSpeedLimit map[HuaweiArp_Arp_GlobalSpeedLimits_GlobalSpeedLimit_Key]*HuaweiArp_Arp_GlobalSpeedLimits_GlobalSpeedLimit `path:"global-speed-limit" module:"huawei-arp"`
+}
+
+// IsYANGGoStruct ensures that HuaweiArp_Arp_GlobalSpeedLimits implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiArp_Arp_GlobalSpeedLimits) IsYANGGoStruct() {}
+
+// HuaweiArp_Arp_GlobalSpeedLimits_GlobalSpeedLimit_Key represents the key for list GlobalSpeedLimit of element /huawei-arp/arp/global-speed-limits.
+type HuaweiArp_Arp_GlobalSpeedLimits_GlobalSpeedLimit_Key struct {
+	SuppressType E_HuaweiArp_SuppressType   `path:"suppress-type"`
+	IpType       E_HuaweiArp_SuppressIpType `path:"ip-type"`
+}
+
+// IsYANGGoKeyStruct ensures that HuaweiArp_Arp_GlobalSpeedLimits_GlobalSpeedLimit_Key partially implements the
+// yang.GoKeyStruct interface. This allows functions that need to
+// handle this key struct to identify it as being generated by gogen.
+func (HuaweiArp_Arp_GlobalSpeedLimits_GlobalSpeedLimit_Key) IsYANGGoKeyStruct() {}
+
+// ΛListKeyMap returns the values of the HuaweiArp_Arp_GlobalSpeedLimits_GlobalSpeedLimit_Key key struct.
+func (t HuaweiArp_Arp_GlobalSpeedLimits_GlobalSpeedLimit_Key) ΛListKeyMap() (map[string]interface{}, error) {
+	return map[string]interface{}{
+		"suppress-type": t.SuppressType,
+		"ip-type":       t.IpType,
+	}, nil
+}
+
+// NewGlobalSpeedLimit creates a new entry in the GlobalSpeedLimit list of the
+// HuaweiArp_Arp_GlobalSpeedLimits struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiArp_Arp_GlobalSpeedLimits) NewGlobalSpeedLimit(SuppressType E_HuaweiArp_SuppressType, IpType E_HuaweiArp_SuppressIpType) (*HuaweiArp_Arp_GlobalSpeedLimits_GlobalSpeedLimit, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.GlobalSpeedLimit == nil {
+		t.GlobalSpeedLimit = make(map[HuaweiArp_Arp_GlobalSpeedLimits_GlobalSpeedLimit_Key]*HuaweiArp_Arp_GlobalSpeedLimits_GlobalSpeedLimit)
+	}
+
+	key := HuaweiArp_Arp_GlobalSpeedLimits_GlobalSpeedLimit_Key{
+		SuppressType: SuppressType,
+		IpType:       IpType,
+	}
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.GlobalSpeedLimit[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list GlobalSpeedLimit", key)
+	}
+
+	t.GlobalSpeedLimit[key] = &HuaweiArp_Arp_GlobalSpeedLimits_GlobalSpeedLimit{
+		SuppressType: SuppressType,
+		IpType:       IpType,
+	}
+
+	return t.GlobalSpeedLimit[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiArp_Arp_GlobalSpeedLimits) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiArp_Arp_GlobalSpeedLimits"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiArp_Arp_GlobalSpeedLimits) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiArp_Arp_GlobalSpeedLimits) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiArp_Arp_GlobalSpeedLimits.
+func (*HuaweiArp_Arp_GlobalSpeedLimits) ΛBelongingModule() string {
+	return "huawei-arp"
+}
+
+// HuaweiArp_Arp_GlobalSpeedLimits_GlobalSpeedLimit represents the /huawei-arp/arp/global-speed-limits/global-speed-limit YANG schema element.
+type HuaweiArp_Arp_GlobalSpeedLimits_GlobalSpeedLimit struct {
+	IpType        E_HuaweiArp_SuppressIpType   `path:"ip-type" module:"huawei-arp"`
+	PortType      E_HuaweiArp_SuppressPortType `path:"port-type" module:"huawei-arp"`
+	SuppressType  E_HuaweiArp_SuppressType     `path:"suppress-type" module:"huawei-arp"`
+	SuppressValue *uint32                      `path:"suppress-value" module:"huawei-arp"`
+}
+
+// IsYANGGoStruct ensures that HuaweiArp_Arp_GlobalSpeedLimits_GlobalSpeedLimit implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiArp_Arp_GlobalSpeedLimits_GlobalSpeedLimit) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiArp_Arp_GlobalSpeedLimits_GlobalSpeedLimit struct, which is a YANG list entry.
+func (t *HuaweiArp_Arp_GlobalSpeedLimits_GlobalSpeedLimit) ΛListKeyMap() (map[string]interface{}, error) {
+
+	return map[string]interface{}{
+		"ip-type":       t.IpType,
+		"suppress-type": t.SuppressType,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiArp_Arp_GlobalSpeedLimits_GlobalSpeedLimit) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiArp_Arp_GlobalSpeedLimits_GlobalSpeedLimit"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiArp_Arp_GlobalSpeedLimits_GlobalSpeedLimit) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiArp_Arp_GlobalSpeedLimits_GlobalSpeedLimit) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiArp_Arp_GlobalSpeedLimits_GlobalSpeedLimit.
+func (*HuaweiArp_Arp_GlobalSpeedLimits_GlobalSpeedLimit) ΛBelongingModule() string {
+	return "huawei-arp"
+}
+
+// HuaweiArp_Arp_Global_Evncfg represents the /huawei-arp/arp/global/evncfg YANG schema element.
+type HuaweiArp_Arp_Global_Evncfg struct {
+	CacheEnable  *bool   `path:"cache-enable" module:"huawei-arp"`
+	CacheTimeout *uint32 `path:"cache-timeout" module:"huawei-arp"`
+}
+
+// IsYANGGoStruct ensures that HuaweiArp_Arp_Global_Evncfg implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiArp_Arp_Global_Evncfg) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiArp_Arp_Global_Evncfg) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiArp_Arp_Global_Evncfg"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiArp_Arp_Global_Evncfg) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiArp_Arp_Global_Evncfg) ΛEnumTypeMap() map[string][]reflect.Type { return ΛEnumTypes }
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiArp_Arp_Global_Evncfg.
+func (*HuaweiArp_Arp_Global_Evncfg) ΛBelongingModule() string {
+	return "huawei-arp"
+}
+
+// HuaweiArp_Arp_IpConflicts represents the /huawei-arp/arp/ip-conflicts YANG schema element.
+type HuaweiArp_Arp_IpConflicts struct {
+	IpConflict map[HuaweiArp_Arp_IpConflicts_IpConflict_Key]*HuaweiArp_Arp_IpConflicts_IpConflict `path:"ip-conflict" module:"huawei-arp"`
+}
+
+// IsYANGGoStruct ensures that HuaweiArp_Arp_IpConflicts implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiArp_Arp_IpConflicts) IsYANGGoStruct() {}
+
+// HuaweiArp_Arp_IpConflicts_IpConflict_Key represents the key for list IpConflict of element /huawei-arp/arp/ip-conflicts.
+type HuaweiArp_Arp_IpConflicts_IpConflict_Key struct {
+	IpAddr        string                     `path:"ip-addr"`
+	ConflictType  E_HuaweiArp_IpconflictType `path:"conflict-type"`
+	SysTime       string                     `path:"sys-time"`
+	ConflictCount uint32                     `path:"conflict-count"`
+	LocalIfname   string                     `path:"local-ifname"`
+}
+
+// IsYANGGoKeyStruct ensures that HuaweiArp_Arp_IpConflicts_IpConflict_Key partially implements the
+// yang.GoKeyStruct interface. This allows functions that need to
+// handle this key struct to identify it as being generated by gogen.
+func (HuaweiArp_Arp_IpConflicts_IpConflict_Key) IsYANGGoKeyStruct() {}
+
+// ΛListKeyMap returns the values of the HuaweiArp_Arp_IpConflicts_IpConflict_Key key struct.
+func (t HuaweiArp_Arp_IpConflicts_IpConflict_Key) ΛListKeyMap() (map[string]interface{}, error) {
+	return map[string]interface{}{
+		"ip-addr":        t.IpAddr,
+		"conflict-type":  t.ConflictType,
+		"sys-time":       t.SysTime,
+		"conflict-count": t.ConflictCount,
+		"local-ifname":   t.LocalIfname,
+	}, nil
+}
+
+// NewIpConflict creates a new entry in the IpConflict list of the
+// HuaweiArp_Arp_IpConflicts struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiArp_Arp_IpConflicts) NewIpConflict(IpAddr string, ConflictType E_HuaweiArp_IpconflictType, SysTime string, ConflictCount uint32, LocalIfname string) (*HuaweiArp_Arp_IpConflicts_IpConflict, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.IpConflict == nil {
+		t.IpConflict = make(map[HuaweiArp_Arp_IpConflicts_IpConflict_Key]*HuaweiArp_Arp_IpConflicts_IpConflict)
+	}
+
+	key := HuaweiArp_Arp_IpConflicts_IpConflict_Key{
+		IpAddr:        IpAddr,
+		ConflictType:  ConflictType,
+		SysTime:       SysTime,
+		ConflictCount: ConflictCount,
+		LocalIfname:   LocalIfname,
+	}
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.IpConflict[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list IpConflict", key)
+	}
+
+	t.IpConflict[key] = &HuaweiArp_Arp_IpConflicts_IpConflict{
+		IpAddr:        &IpAddr,
+		ConflictType:  ConflictType,
+		SysTime:       &SysTime,
+		ConflictCount: &ConflictCount,
+		LocalIfname:   &LocalIfname,
+	}
+
+	return t.IpConflict[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiArp_Arp_IpConflicts) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiArp_Arp_IpConflicts"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiArp_Arp_IpConflicts) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiArp_Arp_IpConflicts) ΛEnumTypeMap() map[string][]reflect.Type { return ΛEnumTypes }
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiArp_Arp_IpConflicts.
+func (*HuaweiArp_Arp_IpConflicts) ΛBelongingModule() string {
+	return "huawei-arp"
+}
+
+// HuaweiArp_Arp_IpConflicts_IpConflict represents the /huawei-arp/arp/ip-conflicts/ip-conflict YANG schema element.
+type HuaweiArp_Arp_IpConflicts_IpConflict struct {
+	ConflictCount *uint32                    `path:"conflict-count" module:"huawei-arp"`
+	ConflictType  E_HuaweiArp_IpconflictType `path:"conflict-type" module:"huawei-arp"`
+	HeaderDstMac  *string                    `path:"header-dst-mac" module:"huawei-arp"`
+	HeaderSrcMac  *string                    `path:"header-src-mac" module:"huawei-arp"`
+	IpAddr        *string                    `path:"ip-addr" module:"huawei-arp"`
+	LocalCevlan   *uint16                    `path:"local-cevlan" module:"huawei-arp"`
+	LocalIfname   *string                    `path:"local-ifname" module:"huawei-arp"`
+	LocalMac      *string                    `path:"local-mac" module:"huawei-arp"`
+	LocalVlan     *uint16                    `path:"local-vlan" module:"huawei-arp"`
+	ReceiveCevlan *uint16                    `path:"receive-cevlan" module:"huawei-arp"`
+	ReceiveIfname *string                    `path:"receive-ifname" module:"huawei-arp"`
+	ReceiveMac    *string                    `path:"receive-mac" module:"huawei-arp"`
+	ReceiveVlan   *uint16                    `path:"receive-vlan" module:"huawei-arp"`
+	SlotId        *string                    `path:"slot-id" module:"huawei-arp"`
+	SuppressCount *uint32                    `path:"suppress-count" module:"huawei-arp"`
+	SysTime       *string                    `path:"sys-time" module:"huawei-arp"`
+}
+
+// IsYANGGoStruct ensures that HuaweiArp_Arp_IpConflicts_IpConflict implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiArp_Arp_IpConflicts_IpConflict) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiArp_Arp_IpConflicts_IpConflict struct, which is a YANG list entry.
+func (t *HuaweiArp_Arp_IpConflicts_IpConflict) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.ConflictCount == nil {
+		return nil, fmt.Errorf("nil value for key ConflictCount")
+	}
+
+	if t.IpAddr == nil {
+		return nil, fmt.Errorf("nil value for key IpAddr")
+	}
+
+	if t.LocalIfname == nil {
+		return nil, fmt.Errorf("nil value for key LocalIfname")
+	}
+
+	if t.SysTime == nil {
+		return nil, fmt.Errorf("nil value for key SysTime")
+	}
+
+	return map[string]interface{}{
+		"conflict-count": *t.ConflictCount,
+		"conflict-type":  t.ConflictType,
+		"ip-addr":        *t.IpAddr,
+		"local-ifname":   *t.LocalIfname,
+		"sys-time":       *t.SysTime,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiArp_Arp_IpConflicts_IpConflict) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiArp_Arp_IpConflicts_IpConflict"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiArp_Arp_IpConflicts_IpConflict) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiArp_Arp_IpConflicts_IpConflict) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiArp_Arp_IpConflicts_IpConflict.
+func (*HuaweiArp_Arp_IpConflicts_IpConflict) ΛBelongingModule() string {
+	return "huawei-arp"
+}
+
+// HuaweiArp_Arp_OpenflowTbls represents the /huawei-arp/arp/openflow-tbls YANG schema element.
+type HuaweiArp_Arp_OpenflowTbls struct {
+	OpenflowTbl map[HuaweiArp_Arp_OpenflowTbls_OpenflowTbl_Key]*HuaweiArp_Arp_OpenflowTbls_OpenflowTbl `path:"openflow-tbl" module:"huawei-arp"`
+}
+
+// IsYANGGoStruct ensures that HuaweiArp_Arp_OpenflowTbls implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiArp_Arp_OpenflowTbls) IsYANGGoStruct() {}
+
+// HuaweiArp_Arp_OpenflowTbls_OpenflowTbl_Key represents the key for list OpenflowTbl of element /huawei-arp/arp/openflow-tbls.
+type HuaweiArp_Arp_OpenflowTbls_OpenflowTbl_Key struct {
+	Vni    uint32 `path:"vni"`
+	IpAddr string `path:"ip-addr"`
+}
+
+// IsYANGGoKeyStruct ensures that HuaweiArp_Arp_OpenflowTbls_OpenflowTbl_Key partially implements the
+// yang.GoKeyStruct interface. This allows functions that need to
+// handle this key struct to identify it as being generated by gogen.
+func (HuaweiArp_Arp_OpenflowTbls_OpenflowTbl_Key) IsYANGGoKeyStruct() {}
+
+// ΛListKeyMap returns the values of the HuaweiArp_Arp_OpenflowTbls_OpenflowTbl_Key key struct.
+func (t HuaweiArp_Arp_OpenflowTbls_OpenflowTbl_Key) ΛListKeyMap() (map[string]interface{}, error) {
+	return map[string]interface{}{
+		"vni":     t.Vni,
+		"ip-addr": t.IpAddr,
+	}, nil
+}
+
+// NewOpenflowTbl creates a new entry in the OpenflowTbl list of the
+// HuaweiArp_Arp_OpenflowTbls struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiArp_Arp_OpenflowTbls) NewOpenflowTbl(Vni uint32, IpAddr string) (*HuaweiArp_Arp_OpenflowTbls_OpenflowTbl, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.OpenflowTbl == nil {
+		t.OpenflowTbl = make(map[HuaweiArp_Arp_OpenflowTbls_OpenflowTbl_Key]*HuaweiArp_Arp_OpenflowTbls_OpenflowTbl)
+	}
+
+	key := HuaweiArp_Arp_OpenflowTbls_OpenflowTbl_Key{
+		Vni:    Vni,
+		IpAddr: IpAddr,
+	}
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.OpenflowTbl[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list OpenflowTbl", key)
+	}
+
+	t.OpenflowTbl[key] = &HuaweiArp_Arp_OpenflowTbls_OpenflowTbl{
+		Vni:    &Vni,
+		IpAddr: &IpAddr,
+	}
+
+	return t.OpenflowTbl[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiArp_Arp_OpenflowTbls) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiArp_Arp_OpenflowTbls"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiArp_Arp_OpenflowTbls) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiArp_Arp_OpenflowTbls) ΛEnumTypeMap() map[string][]reflect.Type { return ΛEnumTypes }
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiArp_Arp_OpenflowTbls.
+func (*HuaweiArp_Arp_OpenflowTbls) ΛBelongingModule() string {
+	return "huawei-arp"
+}
+
+// HuaweiArp_Arp_OpenflowTbls_OpenflowTbl represents the /huawei-arp/arp/openflow-tbls/openflow-tbl YANG schema element.
+type HuaweiArp_Arp_OpenflowTbls_OpenflowTbl struct {
+	IpAddr  *string `path:"ip-addr" module:"huawei-arp"`
+	MacAddr *string `path:"mac-addr" module:"huawei-arp"`
+	Vni     *uint32 `path:"vni" module:"huawei-arp"`
+	VtepIp  *string `path:"vtep-ip" module:"huawei-arp"`
+}
+
+// IsYANGGoStruct ensures that HuaweiArp_Arp_OpenflowTbls_OpenflowTbl implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiArp_Arp_OpenflowTbls_OpenflowTbl) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiArp_Arp_OpenflowTbls_OpenflowTbl struct, which is a YANG list entry.
+func (t *HuaweiArp_Arp_OpenflowTbls_OpenflowTbl) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.IpAddr == nil {
+		return nil, fmt.Errorf("nil value for key IpAddr")
+	}
+
+	if t.Vni == nil {
+		return nil, fmt.Errorf("nil value for key Vni")
+	}
+
+	return map[string]interface{}{
+		"ip-addr": *t.IpAddr,
+		"vni":     *t.Vni,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiArp_Arp_OpenflowTbls_OpenflowTbl) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiArp_Arp_OpenflowTbls_OpenflowTbl"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiArp_Arp_OpenflowTbls_OpenflowTbl) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiArp_Arp_OpenflowTbls_OpenflowTbl) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiArp_Arp_OpenflowTbls_OpenflowTbl.
+func (*HuaweiArp_Arp_OpenflowTbls_OpenflowTbl) ΛBelongingModule() string {
+	return "huawei-arp"
+}
+
+// HuaweiArp_Arp_QueryEntries represents the /huawei-arp/arp/query-entries YANG schema element.
+type HuaweiArp_Arp_QueryEntries struct {
+	QueryEntry map[HuaweiArp_Arp_QueryEntries_QueryEntry_Key]*HuaweiArp_Arp_QueryEntries_QueryEntry `path:"query-entry" module:"huawei-arp"`
+}
+
+// IsYANGGoStruct ensures that HuaweiArp_Arp_QueryEntries implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiArp_Arp_QueryEntries) IsYANGGoStruct() {}
+
+// HuaweiArp_Arp_QueryEntries_QueryEntry_Key represents the key for list QueryEntry of element /huawei-arp/arp/query-entries.
+type HuaweiArp_Arp_QueryEntries_QueryEntry_Key struct {
+	NiName string `path:"ni-name"`
+	IpAddr string `path:"ip-addr"`
+}
+
+// IsYANGGoKeyStruct ensures that HuaweiArp_Arp_QueryEntries_QueryEntry_Key partially implements the
+// yang.GoKeyStruct interface. This allows functions that need to
+// handle this key struct to identify it as being generated by gogen.
+func (HuaweiArp_Arp_QueryEntries_QueryEntry_Key) IsYANGGoKeyStruct() {}
+
+// ΛListKeyMap returns the values of the HuaweiArp_Arp_QueryEntries_QueryEntry_Key key struct.
+func (t HuaweiArp_Arp_QueryEntries_QueryEntry_Key) ΛListKeyMap() (map[string]interface{}, error) {
+	return map[string]interface{}{
+		"ni-name": t.NiName,
+		"ip-addr": t.IpAddr,
+	}, nil
+}
+
+// NewQueryEntry creates a new entry in the QueryEntry list of the
+// HuaweiArp_Arp_QueryEntries struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiArp_Arp_QueryEntries) NewQueryEntry(NiName string, IpAddr string) (*HuaweiArp_Arp_QueryEntries_QueryEntry, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.QueryEntry == nil {
+		t.QueryEntry = make(map[HuaweiArp_Arp_QueryEntries_QueryEntry_Key]*HuaweiArp_Arp_QueryEntries_QueryEntry)
+	}
+
+	key := HuaweiArp_Arp_QueryEntries_QueryEntry_Key{
+		NiName: NiName,
+		IpAddr: IpAddr,
+	}
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.QueryEntry[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list QueryEntry", key)
+	}
+
+	t.QueryEntry[key] = &HuaweiArp_Arp_QueryEntries_QueryEntry{
+		NiName: &NiName,
+		IpAddr: &IpAddr,
+	}
+
+	return t.QueryEntry[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiArp_Arp_QueryEntries) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiArp_Arp_QueryEntries"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiArp_Arp_QueryEntries) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiArp_Arp_QueryEntries) ΛEnumTypeMap() map[string][]reflect.Type { return ΛEnumTypes }
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiArp_Arp_QueryEntries.
+func (*HuaweiArp_Arp_QueryEntries) ΛBelongingModule() string {
+	return "huawei-arp"
+}
+
+// HuaweiArp_Arp_QueryEntries_QueryEntry represents the /huawei-arp/arp/query-entries/query-entry YANG schema element.
+type HuaweiArp_Arp_QueryEntries_QueryEntry struct {
+	CeVlan     *uint16                  `path:"ce-vlan" module:"huawei-arp"`
+	ExpireTime *uint32                  `path:"expire-time" module:"huawei-arp"`
+	IfName     *string                  `path:"if-name" module:"huawei-arp"`
+	IpAddr     *string                  `path:"ip-addr" module:"huawei-arp"`
+	MacAddr    *string                  `path:"mac-addr" module:"huawei-arp"`
+	NiName     *string                  `path:"ni-name" module:"huawei-arp"`
+	PeVlan     *uint16                  `path:"pe-vlan" module:"huawei-arp"`
+	PeerAddr   *string                  `path:"peer-addr" module:"huawei-arp"`
+	Pvc        *uint32                  `path:"pvc" module:"huawei-arp"`
+	SlotId     *string                  `path:"slot-id" module:"huawei-arp"`
+	SourceAddr *string                  `path:"source-addr" module:"huawei-arp"`
+	StyleType  E_HuaweiArp_ArpstyleType `path:"style-type" module:"huawei-arp"`
+	Vni        *uint32                  `path:"vni" module:"huawei-arp"`
+	WorkIfName *string                  `path:"work-if-name" module:"huawei-arp"`
+}
+
+// IsYANGGoStruct ensures that HuaweiArp_Arp_QueryEntries_QueryEntry implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiArp_Arp_QueryEntries_QueryEntry) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiArp_Arp_QueryEntries_QueryEntry struct, which is a YANG list entry.
+func (t *HuaweiArp_Arp_QueryEntries_QueryEntry) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.IpAddr == nil {
+		return nil, fmt.Errorf("nil value for key IpAddr")
+	}
+
+	if t.NiName == nil {
+		return nil, fmt.Errorf("nil value for key NiName")
+	}
+
+	return map[string]interface{}{
+		"ip-addr": *t.IpAddr,
+		"ni-name": *t.NiName,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiArp_Arp_QueryEntries_QueryEntry) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiArp_Arp_QueryEntries_QueryEntry"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiArp_Arp_QueryEntries_QueryEntry) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiArp_Arp_QueryEntries_QueryEntry) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiArp_Arp_QueryEntries_QueryEntry.
+func (*HuaweiArp_Arp_QueryEntries_QueryEntry) ΛBelongingModule() string {
+	return "huawei-arp"
+}
+
+// HuaweiArp_Arp_SpeedLimits represents the /huawei-arp/arp/speed-limits YANG schema element.
+type HuaweiArp_Arp_SpeedLimits struct {
+	SpeedLimit map[HuaweiArp_Arp_SpeedLimits_SpeedLimit_Key]*HuaweiArp_Arp_SpeedLimits_SpeedLimit `path:"speed-limit" module:"huawei-arp"`
+}
+
+// IsYANGGoStruct ensures that HuaweiArp_Arp_SpeedLimits implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiArp_Arp_SpeedLimits) IsYANGGoStruct() {}
+
+// HuaweiArp_Arp_SpeedLimits_SpeedLimit_Key represents the key for list SpeedLimit of element /huawei-arp/arp/speed-limits.
+type HuaweiArp_Arp_SpeedLimits_SpeedLimit_Key struct {
+	SlotId       string                     `path:"slot-id"`
+	SuppressType E_HuaweiArp_SuppressType   `path:"suppress-type"`
+	IpType       E_HuaweiArp_SuppressIpType `path:"ip-type"`
+}
+
+// IsYANGGoKeyStruct ensures that HuaweiArp_Arp_SpeedLimits_SpeedLimit_Key partially implements the
+// yang.GoKeyStruct interface. This allows functions that need to
+// handle this key struct to identify it as being generated by gogen.
+func (HuaweiArp_Arp_SpeedLimits_SpeedLimit_Key) IsYANGGoKeyStruct() {}
+
+// ΛListKeyMap returns the values of the HuaweiArp_Arp_SpeedLimits_SpeedLimit_Key key struct.
+func (t HuaweiArp_Arp_SpeedLimits_SpeedLimit_Key) ΛListKeyMap() (map[string]interface{}, error) {
+	return map[string]interface{}{
+		"slot-id":       t.SlotId,
+		"suppress-type": t.SuppressType,
+		"ip-type":       t.IpType,
+	}, nil
+}
+
+// NewSpeedLimit creates a new entry in the SpeedLimit list of the
+// HuaweiArp_Arp_SpeedLimits struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiArp_Arp_SpeedLimits) NewSpeedLimit(SlotId string, SuppressType E_HuaweiArp_SuppressType, IpType E_HuaweiArp_SuppressIpType) (*HuaweiArp_Arp_SpeedLimits_SpeedLimit, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.SpeedLimit == nil {
+		t.SpeedLimit = make(map[HuaweiArp_Arp_SpeedLimits_SpeedLimit_Key]*HuaweiArp_Arp_SpeedLimits_SpeedLimit)
+	}
+
+	key := HuaweiArp_Arp_SpeedLimits_SpeedLimit_Key{
+		SlotId:       SlotId,
+		SuppressType: SuppressType,
+		IpType:       IpType,
+	}
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.SpeedLimit[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list SpeedLimit", key)
+	}
+
+	t.SpeedLimit[key] = &HuaweiArp_Arp_SpeedLimits_SpeedLimit{
+		SlotId:       &SlotId,
+		SuppressType: SuppressType,
+		IpType:       IpType,
+	}
+
+	return t.SpeedLimit[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiArp_Arp_SpeedLimits) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiArp_Arp_SpeedLimits"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiArp_Arp_SpeedLimits) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiArp_Arp_SpeedLimits) ΛEnumTypeMap() map[string][]reflect.Type { return ΛEnumTypes }
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiArp_Arp_SpeedLimits.
+func (*HuaweiArp_Arp_SpeedLimits) ΛBelongingModule() string {
+	return "huawei-arp"
+}
+
+// HuaweiArp_Arp_SpeedLimits_SpeedLimit represents the /huawei-arp/arp/speed-limits/speed-limit YANG schema element.
+type HuaweiArp_Arp_SpeedLimits_SpeedLimit struct {
+	IpType        E_HuaweiArp_SuppressIpType `path:"ip-type" module:"huawei-arp"`
+	SlotId        *string                    `path:"slot-id" module:"huawei-arp"`
+	SuppressType  E_HuaweiArp_SuppressType   `path:"suppress-type" module:"huawei-arp"`
+	SuppressValue *uint32                    `path:"suppress-value" module:"huawei-arp"`
+}
+
+// IsYANGGoStruct ensures that HuaweiArp_Arp_SpeedLimits_SpeedLimit implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiArp_Arp_SpeedLimits_SpeedLimit) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiArp_Arp_SpeedLimits_SpeedLimit struct, which is a YANG list entry.
+func (t *HuaweiArp_Arp_SpeedLimits_SpeedLimit) ΛListKeyMap() (map[string]interface{}, error) {
+
+	if t.SlotId == nil {
+		return nil, fmt.Errorf("nil value for key SlotId")
+	}
+
+	return map[string]interface{}{
+		"ip-type":       t.IpType,
+		"slot-id":       *t.SlotId,
+		"suppress-type": t.SuppressType,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiArp_Arp_SpeedLimits_SpeedLimit) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiArp_Arp_SpeedLimits_SpeedLimit"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiArp_Arp_SpeedLimits_SpeedLimit) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiArp_Arp_SpeedLimits_SpeedLimit) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiArp_Arp_SpeedLimits_SpeedLimit.
+func (*HuaweiArp_Arp_SpeedLimits_SpeedLimit) ΛBelongingModule() string {
+	return "huawei-arp"
+}
+
+// HuaweiArp_Arp_StaticArps represents the /huawei-arp/arp/static-arps YANG schema element.
+type HuaweiArp_Arp_StaticArps struct {
+	StaticArp map[HuaweiArp_Arp_StaticArps_StaticArp_Key]*HuaweiArp_Arp_StaticArps_StaticArp `path:"static-arp" module:"huawei-arp"`
+}
+
+// IsYANGGoStruct ensures that HuaweiArp_Arp_StaticArps implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiArp_Arp_StaticArps) IsYANGGoStruct() {}
+
+// HuaweiArp_Arp_StaticArps_StaticArp_Key represents the key for list StaticArp of element /huawei-arp/arp/static-arps.
+type HuaweiArp_Arp_StaticArps_StaticArp_Key struct {
+	IpAddr string `path:"ip-addr"`
+	NiName string `path:"ni-name"`
+}
+
+// IsYANGGoKeyStruct ensures that HuaweiArp_Arp_StaticArps_StaticArp_Key partially implements the
+// yang.GoKeyStruct interface. This allows functions that need to
+// handle this key struct to identify it as being generated by gogen.
+func (HuaweiArp_Arp_StaticArps_StaticArp_Key) IsYANGGoKeyStruct() {}
+
+// ΛListKeyMap returns the values of the HuaweiArp_Arp_StaticArps_StaticArp_Key key struct.
+func (t HuaweiArp_Arp_StaticArps_StaticArp_Key) ΛListKeyMap() (map[string]interface{}, error) {
+	return map[string]interface{}{
+		"ip-addr": t.IpAddr,
+		"ni-name": t.NiName,
+	}, nil
+}
+
+// NewStaticArp creates a new entry in the StaticArp list of the
+// HuaweiArp_Arp_StaticArps struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiArp_Arp_StaticArps) NewStaticArp(IpAddr string, NiName string) (*HuaweiArp_Arp_StaticArps_StaticArp, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.StaticArp == nil {
+		t.StaticArp = make(map[HuaweiArp_Arp_StaticArps_StaticArp_Key]*HuaweiArp_Arp_StaticArps_StaticArp)
+	}
+
+	key := HuaweiArp_Arp_StaticArps_StaticArp_Key{
+		IpAddr: IpAddr,
+		NiName: NiName,
+	}
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.StaticArp[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list StaticArp", key)
+	}
+
+	t.StaticArp[key] = &HuaweiArp_Arp_StaticArps_StaticArp{
+		IpAddr: &IpAddr,
+		NiName: &NiName,
+	}
+
+	return t.StaticArp[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiArp_Arp_StaticArps) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiArp_Arp_StaticArps"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiArp_Arp_StaticArps) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiArp_Arp_StaticArps) ΛEnumTypeMap() map[string][]reflect.Type { return ΛEnumTypes }
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiArp_Arp_StaticArps.
+func (*HuaweiArp_Arp_StaticArps) ΛBelongingModule() string {
+	return "huawei-arp"
+}
+
+// HuaweiArp_Arp_StaticArps_StaticArp represents the /huawei-arp/arp/static-arps/static-arp YANG schema element.
+type HuaweiArp_Arp_StaticArps_StaticArp struct {
+	IpAddr         *string `path:"ip-addr" module:"huawei-arp"`
+	MacAddr        *string `path:"mac-addr" module:"huawei-arp"`
+	NiName         *string `path:"ni-name" module:"huawei-arp"`
+	PeerAddr       *string `path:"peer-addr" module:"huawei-arp"`
+	PeerIpv6Addr   *string `path:"peer-ipv6-addr" module:"huawei-arp"`
+	SourceAddr     *string `path:"source-addr" module:"huawei-arp"`
+	SourceIpv6Addr *string `path:"source-ipv6-addr" module:"huawei-arp"`
+	VlanId         *uint16 `path:"vlan-id" module:"huawei-arp"`
+	VxlanId        *uint32 `path:"vxlan-id" module:"huawei-arp"`
+}
+
+// IsYANGGoStruct ensures that HuaweiArp_Arp_StaticArps_StaticArp implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiArp_Arp_StaticArps_StaticArp) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiArp_Arp_StaticArps_StaticArp struct, which is a YANG list entry.
+func (t *HuaweiArp_Arp_StaticArps_StaticArp) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.IpAddr == nil {
+		return nil, fmt.Errorf("nil value for key IpAddr")
+	}
+
+	if t.NiName == nil {
+		return nil, fmt.Errorf("nil value for key NiName")
+	}
+
+	return map[string]interface{}{
+		"ip-addr": *t.IpAddr,
+		"ni-name": *t.NiName,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiArp_Arp_StaticArps_StaticArp) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiArp_Arp_StaticArps_StaticArp"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiArp_Arp_StaticArps_StaticArp) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiArp_Arp_StaticArps_StaticArp) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiArp_Arp_StaticArps_StaticArp.
+func (*HuaweiArp_Arp_StaticArps_StaticArp) ΛBelongingModule() string {
+	return "huawei-arp"
+}
+
+// HuaweiArp_Arp_Statisticss represents the /huawei-arp/arp/statisticss YANG schema element.
+type HuaweiArp_Arp_Statisticss struct {
+	Statistics map[string]*HuaweiArp_Arp_Statisticss_Statistics `path:"statistics" module:"huawei-arp"`
+}
+
+// IsYANGGoStruct ensures that HuaweiArp_Arp_Statisticss implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiArp_Arp_Statisticss) IsYANGGoStruct() {}
+
+// NewStatistics creates a new entry in the Statistics list of the
+// HuaweiArp_Arp_Statisticss struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiArp_Arp_Statisticss) NewStatistics(SlotId string) (*HuaweiArp_Arp_Statisticss_Statistics, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.Statistics == nil {
+		t.Statistics = make(map[string]*HuaweiArp_Arp_Statisticss_Statistics)
+	}
+
+	key := SlotId
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.Statistics[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Statistics", key)
+	}
+
+	t.Statistics[key] = &HuaweiArp_Arp_Statisticss_Statistics{
+		SlotId: &SlotId,
+	}
+
+	return t.Statistics[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiArp_Arp_Statisticss) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiArp_Arp_Statisticss"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiArp_Arp_Statisticss) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiArp_Arp_Statisticss) ΛEnumTypeMap() map[string][]reflect.Type { return ΛEnumTypes }
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiArp_Arp_Statisticss.
+func (*HuaweiArp_Arp_Statisticss) ΛBelongingModule() string {
+	return "huawei-arp"
+}
+
+// HuaweiArp_Arp_Statisticss_Statistics represents the /huawei-arp/arp/statisticss/statistics YANG schema element.
+type HuaweiArp_Arp_Statisticss_Statistics struct {
+	LearnCount          *uint32 `path:"learn-count" module:"huawei-arp"`
+	MissDropLimit       *uint32 `path:"miss-drop-limit" module:"huawei-arp"`
+	MissDropOther       *uint32 `path:"miss-drop-other" module:"huawei-arp"`
+	MissReceived        *uint32 `path:"miss-received" module:"huawei-arp"`
+	PacketsDropLimit    *uint32 `path:"packets-drop-limit" module:"huawei-arp"`
+	PacketsDropOther    *uint32 `path:"packets-drop-other" module:"huawei-arp"`
+	PacketsDropSpeedlmt *uint32 `path:"packets-drop-speedlmt" module:"huawei-arp"`
+	PacketsProxySupp    *uint32 `path:"packets-proxy-supp" module:"huawei-arp"`
+	PacketsReceived     *uint32 `path:"packets-received" module:"huawei-arp"`
+	SlotId              *string `path:"slot-id" module:"huawei-arp"`
+}
+
+// IsYANGGoStruct ensures that HuaweiArp_Arp_Statisticss_Statistics implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiArp_Arp_Statisticss_Statistics) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiArp_Arp_Statisticss_Statistics struct, which is a YANG list entry.
+func (t *HuaweiArp_Arp_Statisticss_Statistics) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.SlotId == nil {
+		return nil, fmt.Errorf("nil value for key SlotId")
+	}
+
+	return map[string]interface{}{
+		"slot-id": *t.SlotId,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiArp_Arp_Statisticss_Statistics) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiArp_Arp_Statisticss_Statistics"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiArp_Arp_Statisticss_Statistics) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiArp_Arp_Statisticss_Statistics) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiArp_Arp_Statisticss_Statistics.
+func (*HuaweiArp_Arp_Statisticss_Statistics) ΛBelongingModule() string {
+	return "huawei-arp"
+}
+
+// HuaweiArp_Arp_TrackStatistics represents the /huawei-arp/arp/track-statistics YANG schema element.
+type HuaweiArp_Arp_TrackStatistics struct {
+	TrackStatistic map[HuaweiArp_Arp_TrackStatistics_TrackStatistic_Key]*HuaweiArp_Arp_TrackStatistics_TrackStatistic `path:"track-statistic" module:"huawei-arp"`
+}
+
+// IsYANGGoStruct ensures that HuaweiArp_Arp_TrackStatistics implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiArp_Arp_TrackStatistics) IsYANGGoStruct() {}
+
+// HuaweiArp_Arp_TrackStatistics_TrackStatistic_Key represents the key for list TrackStatistic of element /huawei-arp/arp/track-statistics.
+type HuaweiArp_Arp_TrackStatistics_TrackStatistic_Key struct {
+	OpCode    E_HuaweiArp_TrackOpcodeType `path:"op-code"`
+	IpAddr    string                      `path:"ip-addr"`
+	VlanId    uint16                      `path:"vlan-id"`
+	OldIfname string                      `path:"old-ifname"`
+	NewIfname string                      `path:"new-ifname"`
+	SysTime   string                      `path:"sys-time"`
+}
+
+// IsYANGGoKeyStruct ensures that HuaweiArp_Arp_TrackStatistics_TrackStatistic_Key partially implements the
+// yang.GoKeyStruct interface. This allows functions that need to
+// handle this key struct to identify it as being generated by gogen.
+func (HuaweiArp_Arp_TrackStatistics_TrackStatistic_Key) IsYANGGoKeyStruct() {}
+
+// ΛListKeyMap returns the values of the HuaweiArp_Arp_TrackStatistics_TrackStatistic_Key key struct.
+func (t HuaweiArp_Arp_TrackStatistics_TrackStatistic_Key) ΛListKeyMap() (map[string]interface{}, error) {
+	return map[string]interface{}{
+		"op-code":    t.OpCode,
+		"ip-addr":    t.IpAddr,
+		"vlan-id":    t.VlanId,
+		"old-ifname": t.OldIfname,
+		"new-ifname": t.NewIfname,
+		"sys-time":   t.SysTime,
+	}, nil
+}
+
+// NewTrackStatistic creates a new entry in the TrackStatistic list of the
+// HuaweiArp_Arp_TrackStatistics struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiArp_Arp_TrackStatistics) NewTrackStatistic(OpCode E_HuaweiArp_TrackOpcodeType, IpAddr string, VlanId uint16, OldIfname string, NewIfname string, SysTime string) (*HuaweiArp_Arp_TrackStatistics_TrackStatistic, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.TrackStatistic == nil {
+		t.TrackStatistic = make(map[HuaweiArp_Arp_TrackStatistics_TrackStatistic_Key]*HuaweiArp_Arp_TrackStatistics_TrackStatistic)
+	}
+
+	key := HuaweiArp_Arp_TrackStatistics_TrackStatistic_Key{
+		OpCode:    OpCode,
+		IpAddr:    IpAddr,
+		VlanId:    VlanId,
+		OldIfname: OldIfname,
+		NewIfname: NewIfname,
+		SysTime:   SysTime,
+	}
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.TrackStatistic[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list TrackStatistic", key)
+	}
+
+	t.TrackStatistic[key] = &HuaweiArp_Arp_TrackStatistics_TrackStatistic{
+		OpCode:    OpCode,
+		IpAddr:    &IpAddr,
+		VlanId:    &VlanId,
+		OldIfname: &OldIfname,
+		NewIfname: &NewIfname,
+		SysTime:   &SysTime,
+	}
+
+	return t.TrackStatistic[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiArp_Arp_TrackStatistics) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiArp_Arp_TrackStatistics"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiArp_Arp_TrackStatistics) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiArp_Arp_TrackStatistics) ΛEnumTypeMap() map[string][]reflect.Type { return ΛEnumTypes }
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiArp_Arp_TrackStatistics.
+func (*HuaweiArp_Arp_TrackStatistics) ΛBelongingModule() string {
+	return "huawei-arp"
+}
+
+// HuaweiArp_Arp_TrackStatistics_TrackStatistic represents the /huawei-arp/arp/track-statistics/track-statistic YANG schema element.
+type HuaweiArp_Arp_TrackStatistics_TrackStatistic struct {
+	IpAddr    *string                     `path:"ip-addr" module:"huawei-arp"`
+	MacAddr   *string                     `path:"mac-addr" module:"huawei-arp"`
+	NewIfname *string                     `path:"new-ifname" module:"huawei-arp"`
+	OldIfname *string                     `path:"old-ifname" module:"huawei-arp"`
+	OpCode    E_HuaweiArp_TrackOpcodeType `path:"op-code" module:"huawei-arp"`
+	SysTime   *string                     `path:"sys-time" module:"huawei-arp"`
+	VlanId    *uint16                     `path:"vlan-id" module:"huawei-arp"`
+}
+
+// IsYANGGoStruct ensures that HuaweiArp_Arp_TrackStatistics_TrackStatistic implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiArp_Arp_TrackStatistics_TrackStatistic) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiArp_Arp_TrackStatistics_TrackStatistic struct, which is a YANG list entry.
+func (t *HuaweiArp_Arp_TrackStatistics_TrackStatistic) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.IpAddr == nil {
+		return nil, fmt.Errorf("nil value for key IpAddr")
+	}
+
+	if t.NewIfname == nil {
+		return nil, fmt.Errorf("nil value for key NewIfname")
+	}
+
+	if t.OldIfname == nil {
+		return nil, fmt.Errorf("nil value for key OldIfname")
+	}
+
+	if t.SysTime == nil {
+		return nil, fmt.Errorf("nil value for key SysTime")
+	}
+
+	if t.VlanId == nil {
+		return nil, fmt.Errorf("nil value for key VlanId")
+	}
+
+	return map[string]interface{}{
+		"ip-addr":    *t.IpAddr,
+		"new-ifname": *t.NewIfname,
+		"old-ifname": *t.OldIfname,
+		"op-code":    t.OpCode,
+		"sys-time":   *t.SysTime,
+		"vlan-id":    *t.VlanId,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiArp_Arp_TrackStatistics_TrackStatistic) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiArp_Arp_TrackStatistics_TrackStatistic"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiArp_Arp_TrackStatistics_TrackStatistic) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiArp_Arp_TrackStatistics_TrackStatistic) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiArp_Arp_TrackStatistics_TrackStatistic.
+func (*HuaweiArp_Arp_TrackStatistics_TrackStatistic) ΛBelongingModule() string {
+	return "huawei-arp"
+}
+
+// HuaweiBd_Bd represents the /huawei-bd/bd YANG schema element.
+type HuaweiBd_Bd struct {
+	Instances *HuaweiBd_Bd_Instances `path:"instances" module:"huawei-bd"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBd_Bd implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBd_Bd) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBd_Bd) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBd_Bd"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBd_Bd) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBd_Bd) ΛEnumTypeMap() map[string][]reflect.Type { return ΛEnumTypes }
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBd_Bd.
+func (*HuaweiBd_Bd) ΛBelongingModule() string {
+	return "huawei-bd"
+}
+
+// HuaweiBd_Bd_Instances represents the /huawei-bd/bd/instances YANG schema element.
+type HuaweiBd_Bd_Instances struct {
+	Instance map[uint32]*HuaweiBd_Bd_Instances_Instance `path:"instance" module:"huawei-bd"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBd_Bd_Instances implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBd_Bd_Instances) IsYANGGoStruct() {}
+
+// NewInstance creates a new entry in the Instance list of the
+// HuaweiBd_Bd_Instances struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiBd_Bd_Instances) NewInstance(Id uint32) (*HuaweiBd_Bd_Instances_Instance, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.Instance == nil {
+		t.Instance = make(map[uint32]*HuaweiBd_Bd_Instances_Instance)
+	}
+
+	key := Id
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.Instance[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Instance", key)
+	}
+
+	t.Instance[key] = &HuaweiBd_Bd_Instances_Instance{
+		Id: &Id,
+	}
+
+	return t.Instance[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBd_Bd_Instances) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBd_Bd_Instances"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBd_Bd_Instances) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBd_Bd_Instances) ΛEnumTypeMap() map[string][]reflect.Type { return ΛEnumTypes }
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBd_Bd_Instances.
+func (*HuaweiBd_Bd_Instances) ΛBelongingModule() string {
+	return "huawei-bd"
+}
+
+// HuaweiBd_Bd_Instances_Instance represents the /huawei-bd/bd/instances/instance YANG schema element.
+type HuaweiBd_Bd_Instances_Instance struct {
+	AdminStatus             E_HuaweiBd_AdminStatus                         `path:"admin-status" module:"huawei-bd"`
+	ArpList                 *HuaweiBd_Bd_Instances_Instance_ArpList        `path:"arp-list" module:"huawei-arp"`
+	ArpStatistics           *HuaweiBd_Bd_Instances_Instance_ArpStatistics  `path:"arp-statistics" module:"huawei-arp"`
+	ArpUserEntry            *HuaweiBd_Bd_Instances_Instance_ArpUserEntry   `path:"arp-user-entry" module:"huawei-arp"`
+	BindService             *HuaweiBd_Bd_Instances_Instance_BindService    `path:"bind-service" module:"huawei-bd"`
+	BindVlan                *HuaweiBd_Bd_Instances_Instance_BindVlan       `path:"bind-vlan" module:"huawei-bd"`
+	BroadcastDiscard        E_HuaweiBd_EnableStatus                        `path:"broadcast-discard" module:"huawei-bd"`
+	Description             *string                                        `path:"description" module:"huawei-bd"`
+	Encapsulation           E_HuaweiBd_Bd_Instances_Instance_Encapsulation `path:"encapsulation" module:"huawei-bd"`
+	Evpn                    *HuaweiBd_Bd_Instances_Instance_Evpn           `path:"evpn" module:"huawei-evpn"`
+	Id                      *uint32                                        `path:"id" module:"huawei-bd"`
+	MLagReserved            *HuaweiBd_Bd_Instances_Instance_MLagReserved   `path:"m-lag-reserved" module:"huawei-vxlan-ext"`
+	MacAgingTime            *uint32                                        `path:"mac-aging-time" module:"huawei-bd"`
+	MacLearning             E_HuaweiBd_EnableStatus                        `path:"mac-learning" module:"huawei-bd"`
+	Mirror                  *HuaweiBd_Bd_Instances_Instance_Mirror         `path:"mirror" module:"huawei-mirror"`
+	Nvo3                    *HuaweiBd_Bd_Instances_Instance_Nvo3           `path:"nvo3" module:"huawei-nvo3"`
+	ServicePoints           *HuaweiBd_Bd_Instances_Instance_ServicePoints  `path:"service-points" module:"huawei-bd"`
+	SplitHorizon            E_HuaweiBd_EnableStatus                        `path:"split-horizon" module:"huawei-bd"`
+	StatisticDiscard        E_HuaweiBd_EnableStatus                        `path:"statistic-discard" module:"huawei-bd"`
+	StatisticEnable         E_HuaweiBd_EnableStatus                        `path:"statistic-enable" module:"huawei-bd"`
+	Statistics              *HuaweiBd_Bd_Instances_Instance_Statistics     `path:"statistics" module:"huawei-bd"`
+	Status                  E_HuaweiBd_OperStatus                          `path:"status" module:"huawei-bd"`
+	UnknownMulticastDiscard E_HuaweiBd_EnableStatus                        `path:"unknown-multicast-discard" module:"huawei-bd"`
+	UnknownUnicastDiscard   E_HuaweiBd_EnableStatus                        `path:"unknown-unicast-discard" module:"huawei-bd"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBd_Bd_Instances_Instance implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBd_Bd_Instances_Instance) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiBd_Bd_Instances_Instance struct, which is a YANG list entry.
+func (t *HuaweiBd_Bd_Instances_Instance) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.Id == nil {
+		return nil, fmt.Errorf("nil value for key Id")
+	}
+
+	return map[string]interface{}{
+		"id": *t.Id,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBd_Bd_Instances_Instance) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBd_Bd_Instances_Instance"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBd_Bd_Instances_Instance) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBd_Bd_Instances_Instance) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBd_Bd_Instances_Instance.
+func (*HuaweiBd_Bd_Instances_Instance) ΛBelongingModule() string {
+	return "huawei-bd"
+}
+
+// HuaweiBd_Bd_Instances_Instance_ArpList represents the /huawei-bd/bd/instances/instance/arp-list YANG schema element.
+type HuaweiBd_Bd_Instances_Instance_ArpList struct {
+	BroadcastSuppressDiscard YANGEmpty                                         `path:"broadcast-suppress-discard" module:"huawei-arp"`
+	BroadcastSuppressEnable  YANGEmpty                                         `path:"broadcast-suppress-enable" module:"huawei-arp"`
+	CheckItem                *HuaweiBd_Bd_Instances_Instance_ArpList_CheckItem `path:"check-item" module:"huawei-arp"`
+	CollectHostEnable        *bool                                             `path:"collect-host-enable" module:"huawei-arp"`
+	DynamicEnable            *bool                                             `path:"dynamic-enable" module:"huawei-arp"`
+	L2ProxyEnable            *bool                                             `path:"l2proxy-enable" module:"huawei-arp"`
+	L2ProxyExpireTime        *uint32                                           `path:"l2proxy-expire-time" module:"huawei-arp"`
+	L2ProxyGwEnable          *bool                                             `path:"l2proxy-gw-enable" module:"huawei-arp"`
+	RateLimit                *uint32                                           `path:"rate-limit" module:"huawei-arp"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBd_Bd_Instances_Instance_ArpList implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBd_Bd_Instances_Instance_ArpList) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBd_Bd_Instances_Instance_ArpList) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBd_Bd_Instances_Instance_ArpList"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBd_Bd_Instances_Instance_ArpList) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBd_Bd_Instances_Instance_ArpList) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBd_Bd_Instances_Instance_ArpList.
+func (*HuaweiBd_Bd_Instances_Instance_ArpList) ΛBelongingModule() string {
+	return "huawei-arp"
+}
+
+// HuaweiBd_Bd_Instances_Instance_ArpList_CheckItem represents the /huawei-bd/bd/instances/instance/arp-list/check-item YANG schema element.
+type HuaweiBd_Bd_Instances_Instance_ArpList_CheckItem struct {
+	IpCheck     *bool `path:"ip-check" module:"huawei-arp"`
+	MacCheck    *bool `path:"mac-check" module:"huawei-arp"`
+	VxlanTunnel *bool `path:"vxlan-tunnel" module:"huawei-arp"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBd_Bd_Instances_Instance_ArpList_CheckItem implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBd_Bd_Instances_Instance_ArpList_CheckItem) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBd_Bd_Instances_Instance_ArpList_CheckItem) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBd_Bd_Instances_Instance_ArpList_CheckItem"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBd_Bd_Instances_Instance_ArpList_CheckItem) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBd_Bd_Instances_Instance_ArpList_CheckItem) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBd_Bd_Instances_Instance_ArpList_CheckItem.
+func (*HuaweiBd_Bd_Instances_Instance_ArpList_CheckItem) ΛBelongingModule() string {
+	return "huawei-arp"
+}
+
+// HuaweiBd_Bd_Instances_Instance_ArpStatistics represents the /huawei-bd/bd/instances/instance/arp-statistics YANG schema element.
+type HuaweiBd_Bd_Instances_Instance_ArpStatistics struct {
+	DiscardOther         *uint32 `path:"discard-other" module:"huawei-arp"`
+	L2ProxyReply         *uint32 `path:"l2proxy-reply" module:"huawei-arp"`
+	MissDiscard          *uint32 `path:"miss-discard" module:"huawei-arp"`
+	ReceiveGratisPackets *uint32 `path:"receive-gratis-packets" module:"huawei-arp"`
+	ReceiveProxyPackets  *uint32 `path:"receive-proxy-packets" module:"huawei-arp"`
+	ReceiveReply         *uint32 `path:"receive-reply" module:"huawei-arp"`
+	ReceiveReqPackets    *uint32 `path:"receive-req-packets" module:"huawei-arp"`
+	ReceiveTotalPackets  *uint32 `path:"receive-total-packets" module:"huawei-arp"`
+	SendBroadcastPackets *uint32 `path:"send-broadcast-packets" module:"huawei-arp"`
+	SendGratisPackets    *uint32 `path:"send-gratis-packets" module:"huawei-arp"`
+	SendProxyPackets     *uint32 `path:"send-proxy-packets" module:"huawei-arp"`
+	SendTotalPackets     *uint32 `path:"send-total-packets" module:"huawei-arp"`
+	SendUnicastPackets   *uint32 `path:"send-unicast-packets" module:"huawei-arp"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBd_Bd_Instances_Instance_ArpStatistics implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBd_Bd_Instances_Instance_ArpStatistics) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBd_Bd_Instances_Instance_ArpStatistics) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBd_Bd_Instances_Instance_ArpStatistics"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBd_Bd_Instances_Instance_ArpStatistics) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBd_Bd_Instances_Instance_ArpStatistics) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBd_Bd_Instances_Instance_ArpStatistics.
+func (*HuaweiBd_Bd_Instances_Instance_ArpStatistics) ΛBelongingModule() string {
+	return "huawei-arp"
+}
+
+// HuaweiBd_Bd_Instances_Instance_ArpUserEntry represents the /huawei-bd/bd/instances/instance/arp-user-entry YANG schema element.
+type HuaweiBd_Bd_Instances_Instance_ArpUserEntry struct {
+	Flag    *string `path:"flag" module:"huawei-arp"`
+	IpAddr  *string `path:"ip-addr" module:"huawei-arp"`
+	MacAddr *string `path:"mac-addr" module:"huawei-arp"`
+	Vtep    *string `path:"vtep" module:"huawei-arp"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBd_Bd_Instances_Instance_ArpUserEntry implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBd_Bd_Instances_Instance_ArpUserEntry) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBd_Bd_Instances_Instance_ArpUserEntry) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBd_Bd_Instances_Instance_ArpUserEntry"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBd_Bd_Instances_Instance_ArpUserEntry) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBd_Bd_Instances_Instance_ArpUserEntry) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBd_Bd_Instances_Instance_ArpUserEntry.
+func (*HuaweiBd_Bd_Instances_Instance_ArpUserEntry) ΛBelongingModule() string {
+	return "huawei-arp"
+}
+
+// HuaweiBd_Bd_Instances_Instance_BindService represents the /huawei-bd/bd/instances/instance/bind-service YANG schema element.
+type HuaweiBd_Bd_Instances_Instance_BindService struct {
+	EvpnName *string `path:"evpn-name" module:"huawei-bd"`
+	Vni      *uint32 `path:"vni" module:"huawei-bd"`
+	VsiName  *string `path:"vsi-name" module:"huawei-bd"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBd_Bd_Instances_Instance_BindService implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBd_Bd_Instances_Instance_BindService) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBd_Bd_Instances_Instance_BindService) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBd_Bd_Instances_Instance_BindService"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBd_Bd_Instances_Instance_BindService) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBd_Bd_Instances_Instance_BindService) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBd_Bd_Instances_Instance_BindService.
+func (*HuaweiBd_Bd_Instances_Instance_BindService) ΛBelongingModule() string {
+	return "huawei-bd"
+}
+
+// HuaweiBd_Bd_Instances_Instance_BindVlan represents the /huawei-bd/bd/instances/instance/bind-vlan YANG schema element.
+type HuaweiBd_Bd_Instances_Instance_BindVlan struct {
+	VlanList *string `path:"vlan-list" module:"huawei-bd"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBd_Bd_Instances_Instance_BindVlan implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBd_Bd_Instances_Instance_BindVlan) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBd_Bd_Instances_Instance_BindVlan) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBd_Bd_Instances_Instance_BindVlan"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBd_Bd_Instances_Instance_BindVlan) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBd_Bd_Instances_Instance_BindVlan) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBd_Bd_Instances_Instance_BindVlan.
+func (*HuaweiBd_Bd_Instances_Instance_BindVlan) ΛBelongingModule() string {
+	return "huawei-bd"
+}
+
+// HuaweiBd_Bd_Instances_Instance_Evpn represents the /huawei-bd/bd/instances/instance/evpn YANG schema element.
+type HuaweiBd_Bd_Instances_Instance_Evpn struct {
+	Esi                 *string                                                  `path:"esi" module:"huawei-evpn"`
+	InterfaceTrackPeers *HuaweiBd_Bd_Instances_Instance_Evpn_InterfaceTrackPeers `path:"interface-track-peers" module:"huawei-evpn"`
+	Name                *string                                                  `path:"name" module:"huawei-evpn"`
+	Tag                 *uint16                                                  `path:"tag" module:"huawei-evpn"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBd_Bd_Instances_Instance_Evpn implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBd_Bd_Instances_Instance_Evpn) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBd_Bd_Instances_Instance_Evpn) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBd_Bd_Instances_Instance_Evpn"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBd_Bd_Instances_Instance_Evpn) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBd_Bd_Instances_Instance_Evpn) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBd_Bd_Instances_Instance_Evpn.
+func (*HuaweiBd_Bd_Instances_Instance_Evpn) ΛBelongingModule() string {
+	return "huawei-evpn"
+}
+
+// HuaweiBd_Bd_Instances_Instance_Evpn_InterfaceTrackPeers represents the /huawei-bd/bd/instances/instance/evpn/interface-track-peers YANG schema element.
+type HuaweiBd_Bd_Instances_Instance_Evpn_InterfaceTrackPeers struct {
+	InterfaceTrackPeer map[string]*HuaweiBd_Bd_Instances_Instance_Evpn_InterfaceTrackPeers_InterfaceTrackPeer `path:"interface-track-peer" module:"huawei-evpn"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBd_Bd_Instances_Instance_Evpn_InterfaceTrackPeers implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBd_Bd_Instances_Instance_Evpn_InterfaceTrackPeers) IsYANGGoStruct() {}
+
+// NewInterfaceTrackPeer creates a new entry in the InterfaceTrackPeer list of the
+// HuaweiBd_Bd_Instances_Instance_Evpn_InterfaceTrackPeers struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiBd_Bd_Instances_Instance_Evpn_InterfaceTrackPeers) NewInterfaceTrackPeer(EsTrackAddress string) (*HuaweiBd_Bd_Instances_Instance_Evpn_InterfaceTrackPeers_InterfaceTrackPeer, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.InterfaceTrackPeer == nil {
+		t.InterfaceTrackPeer = make(map[string]*HuaweiBd_Bd_Instances_Instance_Evpn_InterfaceTrackPeers_InterfaceTrackPeer)
+	}
+
+	key := EsTrackAddress
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.InterfaceTrackPeer[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list InterfaceTrackPeer", key)
+	}
+
+	t.InterfaceTrackPeer[key] = &HuaweiBd_Bd_Instances_Instance_Evpn_InterfaceTrackPeers_InterfaceTrackPeer{
+		EsTrackAddress: &EsTrackAddress,
+	}
+
+	return t.InterfaceTrackPeer[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBd_Bd_Instances_Instance_Evpn_InterfaceTrackPeers) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBd_Bd_Instances_Instance_Evpn_InterfaceTrackPeers"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBd_Bd_Instances_Instance_Evpn_InterfaceTrackPeers) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBd_Bd_Instances_Instance_Evpn_InterfaceTrackPeers) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBd_Bd_Instances_Instance_Evpn_InterfaceTrackPeers.
+func (*HuaweiBd_Bd_Instances_Instance_Evpn_InterfaceTrackPeers) ΛBelongingModule() string {
+	return "huawei-evpn"
+}
+
+// HuaweiBd_Bd_Instances_Instance_Evpn_InterfaceTrackPeers_InterfaceTrackPeer represents the /huawei-bd/bd/instances/instance/evpn/interface-track-peers/interface-track-peer YANG schema element.
+type HuaweiBd_Bd_Instances_Instance_Evpn_InterfaceTrackPeers_InterfaceTrackPeer struct {
+	EsTrackAddress *string `path:"es-track-address" module:"huawei-evpn"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBd_Bd_Instances_Instance_Evpn_InterfaceTrackPeers_InterfaceTrackPeer implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBd_Bd_Instances_Instance_Evpn_InterfaceTrackPeers_InterfaceTrackPeer) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiBd_Bd_Instances_Instance_Evpn_InterfaceTrackPeers_InterfaceTrackPeer struct, which is a YANG list entry.
+func (t *HuaweiBd_Bd_Instances_Instance_Evpn_InterfaceTrackPeers_InterfaceTrackPeer) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.EsTrackAddress == nil {
+		return nil, fmt.Errorf("nil value for key EsTrackAddress")
+	}
+
+	return map[string]interface{}{
+		"es-track-address": *t.EsTrackAddress,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBd_Bd_Instances_Instance_Evpn_InterfaceTrackPeers_InterfaceTrackPeer) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBd_Bd_Instances_Instance_Evpn_InterfaceTrackPeers_InterfaceTrackPeer"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBd_Bd_Instances_Instance_Evpn_InterfaceTrackPeers_InterfaceTrackPeer) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBd_Bd_Instances_Instance_Evpn_InterfaceTrackPeers_InterfaceTrackPeer) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBd_Bd_Instances_Instance_Evpn_InterfaceTrackPeers_InterfaceTrackPeer.
+func (*HuaweiBd_Bd_Instances_Instance_Evpn_InterfaceTrackPeers_InterfaceTrackPeer) ΛBelongingModule() string {
+	return "huawei-evpn"
+}
+
+// HuaweiBd_Bd_Instances_Instance_MLagReserved represents the /huawei-bd/bd/instances/instance/m-lag-reserved YANG schema element.
+type HuaweiBd_Bd_Instances_Instance_MLagReserved struct {
+	Enable *bool `path:"enable" module:"huawei-vxlan-ext"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBd_Bd_Instances_Instance_MLagReserved implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBd_Bd_Instances_Instance_MLagReserved) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBd_Bd_Instances_Instance_MLagReserved) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBd_Bd_Instances_Instance_MLagReserved"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBd_Bd_Instances_Instance_MLagReserved) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBd_Bd_Instances_Instance_MLagReserved) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBd_Bd_Instances_Instance_MLagReserved.
+func (*HuaweiBd_Bd_Instances_Instance_MLagReserved) ΛBelongingModule() string {
+	return "huawei-vxlan-ext"
+}
+
+// HuaweiBd_Bd_Instances_Instance_Mirror represents the /huawei-bd/bd/instances/instance/mirror YANG schema element.
+type HuaweiBd_Bd_Instances_Instance_Mirror struct {
+	BdPortMirrors *HuaweiBd_Bd_Instances_Instance_Mirror_BdPortMirrors `path:"bd-port-mirrors" module:"huawei-mirror"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBd_Bd_Instances_Instance_Mirror implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBd_Bd_Instances_Instance_Mirror) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBd_Bd_Instances_Instance_Mirror) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBd_Bd_Instances_Instance_Mirror"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBd_Bd_Instances_Instance_Mirror) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBd_Bd_Instances_Instance_Mirror) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBd_Bd_Instances_Instance_Mirror.
+func (*HuaweiBd_Bd_Instances_Instance_Mirror) ΛBelongingModule() string {
+	return "huawei-mirror"
+}
+
+// HuaweiBd_Bd_Instances_Instance_Mirror_BdPortMirrors represents the /huawei-bd/bd/instances/instance/mirror/bd-port-mirrors YANG schema element.
+type HuaweiBd_Bd_Instances_Instance_Mirror_BdPortMirrors struct {
+	BdPortMirror map[E_HuaweiMirror_DirectionType]*HuaweiBd_Bd_Instances_Instance_Mirror_BdPortMirrors_BdPortMirror `path:"bd-port-mirror" module:"huawei-mirror"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBd_Bd_Instances_Instance_Mirror_BdPortMirrors implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBd_Bd_Instances_Instance_Mirror_BdPortMirrors) IsYANGGoStruct() {}
+
+// NewBdPortMirror creates a new entry in the BdPortMirror list of the
+// HuaweiBd_Bd_Instances_Instance_Mirror_BdPortMirrors struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiBd_Bd_Instances_Instance_Mirror_BdPortMirrors) NewBdPortMirror(Direction E_HuaweiMirror_DirectionType) (*HuaweiBd_Bd_Instances_Instance_Mirror_BdPortMirrors_BdPortMirror, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.BdPortMirror == nil {
+		t.BdPortMirror = make(map[E_HuaweiMirror_DirectionType]*HuaweiBd_Bd_Instances_Instance_Mirror_BdPortMirrors_BdPortMirror)
+	}
+
+	key := Direction
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.BdPortMirror[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list BdPortMirror", key)
+	}
+
+	t.BdPortMirror[key] = &HuaweiBd_Bd_Instances_Instance_Mirror_BdPortMirrors_BdPortMirror{
+		Direction: Direction,
+	}
+
+	return t.BdPortMirror[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBd_Bd_Instances_Instance_Mirror_BdPortMirrors) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBd_Bd_Instances_Instance_Mirror_BdPortMirrors"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBd_Bd_Instances_Instance_Mirror_BdPortMirrors) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBd_Bd_Instances_Instance_Mirror_BdPortMirrors) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBd_Bd_Instances_Instance_Mirror_BdPortMirrors.
+func (*HuaweiBd_Bd_Instances_Instance_Mirror_BdPortMirrors) ΛBelongingModule() string {
+	return "huawei-mirror"
+}
+
+// HuaweiBd_Bd_Instances_Instance_Mirror_BdPortMirrors_BdPortMirror represents the /huawei-bd/bd/instances/instance/mirror/bd-port-mirrors/bd-port-mirror YANG schema element.
+type HuaweiBd_Bd_Instances_Instance_Mirror_BdPortMirrors_BdPortMirror struct {
+	Direction    E_HuaweiMirror_DirectionType `path:"direction" module:"huawei-mirror"`
+	GroupName    *string                      `path:"group-name" module:"huawei-mirror"`
+	InstanceName *string                      `path:"instance-name" module:"huawei-mirror"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBd_Bd_Instances_Instance_Mirror_BdPortMirrors_BdPortMirror implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBd_Bd_Instances_Instance_Mirror_BdPortMirrors_BdPortMirror) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiBd_Bd_Instances_Instance_Mirror_BdPortMirrors_BdPortMirror struct, which is a YANG list entry.
+func (t *HuaweiBd_Bd_Instances_Instance_Mirror_BdPortMirrors_BdPortMirror) ΛListKeyMap() (map[string]interface{}, error) {
+
+	return map[string]interface{}{
+		"direction": t.Direction,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBd_Bd_Instances_Instance_Mirror_BdPortMirrors_BdPortMirror) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBd_Bd_Instances_Instance_Mirror_BdPortMirrors_BdPortMirror"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBd_Bd_Instances_Instance_Mirror_BdPortMirrors_BdPortMirror) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBd_Bd_Instances_Instance_Mirror_BdPortMirrors_BdPortMirror) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBd_Bd_Instances_Instance_Mirror_BdPortMirrors_BdPortMirror.
+func (*HuaweiBd_Bd_Instances_Instance_Mirror_BdPortMirrors_BdPortMirror) ΛBelongingModule() string {
+	return "huawei-mirror"
+}
+
+// HuaweiBd_Bd_Instances_Instance_Nvo3 represents the /huawei-bd/bd/instances/instance/nvo3 YANG schema element.
+type HuaweiBd_Bd_Instances_Instance_Nvo3 struct {
+	MapVnis *HuaweiBd_Bd_Instances_Instance_Nvo3_MapVnis            `path:"map-vnis" module:"huawei-nvo3"`
+	VniList map[uint32]*HuaweiBd_Bd_Instances_Instance_Nvo3_VniList `path:"vni-list" module:"huawei-nvo3"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBd_Bd_Instances_Instance_Nvo3 implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBd_Bd_Instances_Instance_Nvo3) IsYANGGoStruct() {}
+
+// NewVniList creates a new entry in the VniList list of the
+// HuaweiBd_Bd_Instances_Instance_Nvo3 struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiBd_Bd_Instances_Instance_Nvo3) NewVniList(Vni uint32) (*HuaweiBd_Bd_Instances_Instance_Nvo3_VniList, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.VniList == nil {
+		t.VniList = make(map[uint32]*HuaweiBd_Bd_Instances_Instance_Nvo3_VniList)
+	}
+
+	key := Vni
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.VniList[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list VniList", key)
+	}
+
+	t.VniList[key] = &HuaweiBd_Bd_Instances_Instance_Nvo3_VniList{
+		Vni: &Vni,
+	}
+
+	return t.VniList[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBd_Bd_Instances_Instance_Nvo3) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBd_Bd_Instances_Instance_Nvo3"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBd_Bd_Instances_Instance_Nvo3) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBd_Bd_Instances_Instance_Nvo3) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBd_Bd_Instances_Instance_Nvo3.
+func (*HuaweiBd_Bd_Instances_Instance_Nvo3) ΛBelongingModule() string {
+	return "huawei-nvo3"
+}
+
+// HuaweiBd_Bd_Instances_Instance_Nvo3_MapVnis represents the /huawei-bd/bd/instances/instance/nvo3/map-vnis YANG schema element.
+type HuaweiBd_Bd_Instances_Instance_Nvo3_MapVnis struct {
+	MapVni map[uint32]*HuaweiBd_Bd_Instances_Instance_Nvo3_MapVnis_MapVni `path:"map-vni" module:"huawei-nvo3"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBd_Bd_Instances_Instance_Nvo3_MapVnis implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBd_Bd_Instances_Instance_Nvo3_MapVnis) IsYANGGoStruct() {}
+
+// NewMapVni creates a new entry in the MapVni list of the
+// HuaweiBd_Bd_Instances_Instance_Nvo3_MapVnis struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiBd_Bd_Instances_Instance_Nvo3_MapVnis) NewMapVni(Vni uint32) (*HuaweiBd_Bd_Instances_Instance_Nvo3_MapVnis_MapVni, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.MapVni == nil {
+		t.MapVni = make(map[uint32]*HuaweiBd_Bd_Instances_Instance_Nvo3_MapVnis_MapVni)
+	}
+
+	key := Vni
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.MapVni[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list MapVni", key)
+	}
+
+	t.MapVni[key] = &HuaweiBd_Bd_Instances_Instance_Nvo3_MapVnis_MapVni{
+		Vni: &Vni,
+	}
+
+	return t.MapVni[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBd_Bd_Instances_Instance_Nvo3_MapVnis) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBd_Bd_Instances_Instance_Nvo3_MapVnis"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBd_Bd_Instances_Instance_Nvo3_MapVnis) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBd_Bd_Instances_Instance_Nvo3_MapVnis) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBd_Bd_Instances_Instance_Nvo3_MapVnis.
+func (*HuaweiBd_Bd_Instances_Instance_Nvo3_MapVnis) ΛBelongingModule() string {
+	return "huawei-nvo3"
+}
+
+// HuaweiBd_Bd_Instances_Instance_Nvo3_MapVnis_MapVni represents the /huawei-bd/bd/instances/instance/nvo3/map-vnis/map-vni YANG schema element.
+type HuaweiBd_Bd_Instances_Instance_Nvo3_MapVnis_MapVni struct {
+	SplitGroup *string `path:"split-group" module:"huawei-nvo3"`
+	Vni        *uint32 `path:"vni" module:"huawei-nvo3"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBd_Bd_Instances_Instance_Nvo3_MapVnis_MapVni implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBd_Bd_Instances_Instance_Nvo3_MapVnis_MapVni) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiBd_Bd_Instances_Instance_Nvo3_MapVnis_MapVni struct, which is a YANG list entry.
+func (t *HuaweiBd_Bd_Instances_Instance_Nvo3_MapVnis_MapVni) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.Vni == nil {
+		return nil, fmt.Errorf("nil value for key Vni")
+	}
+
+	return map[string]interface{}{
+		"vni": *t.Vni,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBd_Bd_Instances_Instance_Nvo3_MapVnis_MapVni) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBd_Bd_Instances_Instance_Nvo3_MapVnis_MapVni"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBd_Bd_Instances_Instance_Nvo3_MapVnis_MapVni) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBd_Bd_Instances_Instance_Nvo3_MapVnis_MapVni) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBd_Bd_Instances_Instance_Nvo3_MapVnis_MapVni.
+func (*HuaweiBd_Bd_Instances_Instance_Nvo3_MapVnis_MapVni) ΛBelongingModule() string {
+	return "huawei-nvo3"
+}
+
+// HuaweiBd_Bd_Instances_Instance_Nvo3_VniList represents the /huawei-bd/bd/instances/instance/nvo3/vni-list YANG schema element.
+type HuaweiBd_Bd_Instances_Instance_Nvo3_VniList struct {
+	SplitHorizon *bool   `path:"split-horizon" module:"huawei-nvo3"`
+	Vni          *uint32 `path:"vni" module:"huawei-nvo3"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBd_Bd_Instances_Instance_Nvo3_VniList implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBd_Bd_Instances_Instance_Nvo3_VniList) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiBd_Bd_Instances_Instance_Nvo3_VniList struct, which is a YANG list entry.
+func (t *HuaweiBd_Bd_Instances_Instance_Nvo3_VniList) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.Vni == nil {
+		return nil, fmt.Errorf("nil value for key Vni")
+	}
+
+	return map[string]interface{}{
+		"vni": *t.Vni,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBd_Bd_Instances_Instance_Nvo3_VniList) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBd_Bd_Instances_Instance_Nvo3_VniList"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBd_Bd_Instances_Instance_Nvo3_VniList) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBd_Bd_Instances_Instance_Nvo3_VniList) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBd_Bd_Instances_Instance_Nvo3_VniList.
+func (*HuaweiBd_Bd_Instances_Instance_Nvo3_VniList) ΛBelongingModule() string {
+	return "huawei-nvo3"
+}
+
+// HuaweiBd_Bd_Instances_Instance_ServicePoints represents the /huawei-bd/bd/instances/instance/service-points YANG schema element.
+type HuaweiBd_Bd_Instances_Instance_ServicePoints struct {
+	ServicePoint map[string]*HuaweiBd_Bd_Instances_Instance_ServicePoints_ServicePoint `path:"service-point" module:"huawei-bd"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBd_Bd_Instances_Instance_ServicePoints implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBd_Bd_Instances_Instance_ServicePoints) IsYANGGoStruct() {}
+
+// NewServicePoint creates a new entry in the ServicePoint list of the
+// HuaweiBd_Bd_Instances_Instance_ServicePoints struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiBd_Bd_Instances_Instance_ServicePoints) NewServicePoint(InterfaceName string) (*HuaweiBd_Bd_Instances_Instance_ServicePoints_ServicePoint, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.ServicePoint == nil {
+		t.ServicePoint = make(map[string]*HuaweiBd_Bd_Instances_Instance_ServicePoints_ServicePoint)
+	}
+
+	key := InterfaceName
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.ServicePoint[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list ServicePoint", key)
+	}
+
+	t.ServicePoint[key] = &HuaweiBd_Bd_Instances_Instance_ServicePoints_ServicePoint{
+		InterfaceName: &InterfaceName,
+	}
+
+	return t.ServicePoint[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBd_Bd_Instances_Instance_ServicePoints) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBd_Bd_Instances_Instance_ServicePoints"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBd_Bd_Instances_Instance_ServicePoints) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBd_Bd_Instances_Instance_ServicePoints) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBd_Bd_Instances_Instance_ServicePoints.
+func (*HuaweiBd_Bd_Instances_Instance_ServicePoints) ΛBelongingModule() string {
+	return "huawei-bd"
+}
+
+// HuaweiBd_Bd_Instances_Instance_ServicePoints_ServicePoint represents the /huawei-bd/bd/instances/instance/service-points/service-point YANG schema element.
+type HuaweiBd_Bd_Instances_Instance_ServicePoints_ServicePoint struct {
+	Evpn          *HuaweiBd_Bd_Instances_Instance_ServicePoints_ServicePoint_Evpn `path:"evpn" module:"huawei-evpn"`
+	InterfaceName *string                                                         `path:"interface-name" module:"huawei-bd"`
+	SplitHorizon  E_HuaweiBd_EnableStatus                                         `path:"split-horizon" module:"huawei-bd"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBd_Bd_Instances_Instance_ServicePoints_ServicePoint implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBd_Bd_Instances_Instance_ServicePoints_ServicePoint) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiBd_Bd_Instances_Instance_ServicePoints_ServicePoint struct, which is a YANG list entry.
+func (t *HuaweiBd_Bd_Instances_Instance_ServicePoints_ServicePoint) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.InterfaceName == nil {
+		return nil, fmt.Errorf("nil value for key InterfaceName")
+	}
+
+	return map[string]interface{}{
+		"interface-name": *t.InterfaceName,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBd_Bd_Instances_Instance_ServicePoints_ServicePoint) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBd_Bd_Instances_Instance_ServicePoints_ServicePoint"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBd_Bd_Instances_Instance_ServicePoints_ServicePoint) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBd_Bd_Instances_Instance_ServicePoints_ServicePoint) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBd_Bd_Instances_Instance_ServicePoints_ServicePoint.
+func (*HuaweiBd_Bd_Instances_Instance_ServicePoints_ServicePoint) ΛBelongingModule() string {
+	return "huawei-bd"
+}
+
+// HuaweiBd_Bd_Instances_Instance_ServicePoints_ServicePoint_Evpn represents the /huawei-bd/bd/instances/instance/service-points/service-point/evpn YANG schema element.
+type HuaweiBd_Bd_Instances_Instance_ServicePoints_ServicePoint_Evpn struct {
+	ETreeLeaf *bool `path:"e-tree-leaf" module:"huawei-evpn"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBd_Bd_Instances_Instance_ServicePoints_ServicePoint_Evpn implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBd_Bd_Instances_Instance_ServicePoints_ServicePoint_Evpn) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBd_Bd_Instances_Instance_ServicePoints_ServicePoint_Evpn) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBd_Bd_Instances_Instance_ServicePoints_ServicePoint_Evpn"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBd_Bd_Instances_Instance_ServicePoints_ServicePoint_Evpn) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBd_Bd_Instances_Instance_ServicePoints_ServicePoint_Evpn) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBd_Bd_Instances_Instance_ServicePoints_ServicePoint_Evpn.
+func (*HuaweiBd_Bd_Instances_Instance_ServicePoints_ServicePoint_Evpn) ΛBelongingModule() string {
+	return "huawei-evpn"
+}
+
+// HuaweiBd_Bd_Instances_Instance_Statistics represents the /huawei-bd/bd/instances/instance/statistics YANG schema element.
+type HuaweiBd_Bd_Instances_Instance_Statistics struct {
+	InboundBps                   *uint64 `path:"inbound-bps" module:"huawei-bd"`
+	InboundBroadcastDrops        *uint64 `path:"inbound-broadcast-drops" module:"huawei-bd"`
+	InboundBroadcasts            *uint64 `path:"inbound-broadcasts" module:"huawei-bd"`
+	InboundBytes                 *uint64 `path:"inbound-bytes" module:"huawei-bd"`
+	InboundMulticasts            *uint64 `path:"inbound-multicasts" module:"huawei-bd"`
+	InboundPackets               *uint64 `path:"inbound-packets" module:"huawei-bd"`
+	InboundPps                   *uint64 `path:"inbound-pps" module:"huawei-bd"`
+	InboundUnicasts              *uint64 `path:"inbound-unicasts" module:"huawei-bd"`
+	InboundUnknownMulticastDrops *uint64 `path:"inbound-unknown-multicast-drops" module:"huawei-bd"`
+	InboundUnknownUnicastDrops   *uint64 `path:"inbound-unknown-unicast-drops" module:"huawei-bd"`
+	OutboundBps                  *uint64 `path:"outbound-bps" module:"huawei-bd"`
+	OutboundBroadcasts           *uint64 `path:"outbound-broadcasts" module:"huawei-bd"`
+	OutboundBytes                *uint64 `path:"outbound-bytes" module:"huawei-bd"`
+	OutboundMulticasts           *uint64 `path:"outbound-multicasts" module:"huawei-bd"`
+	OutboundPackets              *uint64 `path:"outbound-packets" module:"huawei-bd"`
+	OutboundPps                  *uint64 `path:"outbound-pps" module:"huawei-bd"`
+	OutboundUnicasts             *uint64 `path:"outbound-unicasts" module:"huawei-bd"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBd_Bd_Instances_Instance_Statistics implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBd_Bd_Instances_Instance_Statistics) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBd_Bd_Instances_Instance_Statistics) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBd_Bd_Instances_Instance_Statistics"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBd_Bd_Instances_Instance_Statistics) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBd_Bd_Instances_Instance_Statistics) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBd_Bd_Instances_Instance_Statistics.
+func (*HuaweiBd_Bd_Instances_Instance_Statistics) ΛBelongingModule() string {
+	return "huawei-bd"
 }
 
 // HuaweiBfd_Bfd represents the /huawei-bfd/bfd YANG schema element.
@@ -5459,6 +9239,7 @@ func (*HuaweiBgp_Bgp) ΛBelongingModule() string {
 type HuaweiBgp_Bgp_BaseProcess struct {
 	As                        *string                                          `path:"as" module:"huawei-bgp"`
 	AsPathLimit               *uint16                                          `path:"as-path-limit" module:"huawei-bgp"`
+	BgpRoute                  *HuaweiBgp_Bgp_BaseProcess_BgpRoute              `path:"bgp-route" module:"huawei-bgp-routing-table"`
 	CheckFirstAs              *bool                                            `path:"check-first-as" module:"huawei-bgp"`
 	Confederation             *HuaweiBgp_Bgp_BaseProcess_Confederation         `path:"confederation" module:"huawei-bgp"`
 	DelayTime                 *uint32                                          `path:"delay-time" module:"huawei-bgp"`
@@ -5506,6 +9287,4884 @@ func (t *HuaweiBgp_Bgp_BaseProcess) ΛEnumTypeMap() map[string][]reflect.Type { 
 // of HuaweiBgp_Bgp_BaseProcess.
 func (*HuaweiBgp_Bgp_BaseProcess) ΛBelongingModule() string {
 	return "huawei-bgp"
+}
+
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute represents the /huawei-bgp/bgp/base-process/bgp-route YANG schema element.
+type HuaweiBgp_Bgp_BaseProcess_BgpRoute struct {
+	Ipv4Labeluni  *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Labeluni  `path:"ipv4-labeluni" module:"huawei-bgp-routing-table"`
+	Ipv4Multicast *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Multicast `path:"ipv4-multicast" module:"huawei-bgp-routing-table"`
+	Ipv4Unicast   *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast   `path:"ipv4-unicast" module:"huawei-bgp-routing-table"`
+	Ipv4Vpn       *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn       `path:"ipv4-vpn" module:"huawei-bgp-routing-table"`
+	Ipv6Unicast   *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast   `path:"ipv6-unicast" module:"huawei-bgp-routing-table"`
+	Ipv6Vpn       *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn       `path:"ipv6-vpn" module:"huawei-bgp-routing-table"`
+	L2VpnEvpn     *HuaweiBgp_Bgp_BaseProcess_BgpRoute_L2VpnEvpn     `path:"l2vpn-evpn" module:"huawei-bgp-evpn"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBgp_Bgp_BaseProcess_BgpRoute implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBgp_Bgp_BaseProcess_BgpRoute"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBgp_Bgp_BaseProcess_BgpRoute.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute) ΛBelongingModule() string {
+	return "huawei-bgp-routing-table"
+}
+
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Labeluni represents the /huawei-bgp/bgp/base-process/bgp-route/ipv4-labeluni YANG schema element.
+type HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Labeluni struct {
+	Statistics *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Labeluni_Statistics `path:"statistics" module:"huawei-bgp-routing-table"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Labeluni implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Labeluni) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Labeluni) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Labeluni"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Labeluni) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Labeluni) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Labeluni.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Labeluni) ΛBelongingModule() string {
+	return "huawei-bgp-routing-table"
+}
+
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Labeluni_Statistics represents the /huawei-bgp/bgp/base-process/bgp-route/ipv4-labeluni/statistics YANG schema element.
+type HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Labeluni_Statistics struct {
+	Statistic map[string]*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Labeluni_Statistics_Statistic `path:"statistic" module:"huawei-bgp-routing-table"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Labeluni_Statistics implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Labeluni_Statistics) IsYANGGoStruct() {}
+
+// NewStatistic creates a new entry in the Statistic list of the
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Labeluni_Statistics struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Labeluni_Statistics) NewStatistic(VpnName string) (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Labeluni_Statistics_Statistic, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.Statistic == nil {
+		t.Statistic = make(map[string]*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Labeluni_Statistics_Statistic)
+	}
+
+	key := VpnName
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.Statistic[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Statistic", key)
+	}
+
+	t.Statistic[key] = &HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Labeluni_Statistics_Statistic{
+		VpnName: &VpnName,
+	}
+
+	return t.Statistic[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Labeluni_Statistics) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Labeluni_Statistics"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Labeluni_Statistics) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Labeluni_Statistics) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Labeluni_Statistics.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Labeluni_Statistics) ΛBelongingModule() string {
+	return "huawei-bgp-routing-table"
+}
+
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Labeluni_Statistics_Statistic represents the /huawei-bgp/bgp/base-process/bgp-route/ipv4-labeluni/statistics/statistic YANG schema element.
+type HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Labeluni_Statistics_Statistic struct {
+	ActiveRouteNumber            *uint32 `path:"active-route-number" module:"huawei-bgp-routing-table"`
+	AddPathRouteNumber           *uint32 `path:"add-path-route-number" module:"huawei-bgp-routing-table"`
+	AdvertiseRmTotalNumber       *uint32 `path:"advertise-rm-total-number" module:"huawei-bgp-routing-table"`
+	BestExternalRouteNumber      *uint32 `path:"best-external-route-number" module:"huawei-bgp-routing-table"`
+	BestRouteNumber              *uint32 `path:"best-route-number" module:"huawei-bgp-routing-table"`
+	CidrRouteNumber              *uint32 `path:"cidr-route-number" module:"huawei-bgp-routing-table"`
+	CommunityRouteNumber         *uint32 `path:"community-route-number" module:"huawei-bgp-routing-table"`
+	DampenedRouteNumber          *uint32 `path:"dampened-route-number" module:"huawei-bgp-routing-table"`
+	DifferentOriginAsRouteNumber *uint32 `path:"different-origin-as-route-number" module:"huawei-bgp-routing-table"`
+	TotalNumber                  *uint32 `path:"total-number" module:"huawei-bgp-routing-table"`
+	VpnName                      *string `path:"vpn-name" module:"huawei-bgp-routing-table"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Labeluni_Statistics_Statistic implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Labeluni_Statistics_Statistic) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Labeluni_Statistics_Statistic struct, which is a YANG list entry.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Labeluni_Statistics_Statistic) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.VpnName == nil {
+		return nil, fmt.Errorf("nil value for key VpnName")
+	}
+
+	return map[string]interface{}{
+		"vpn-name": *t.VpnName,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Labeluni_Statistics_Statistic) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Labeluni_Statistics_Statistic"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Labeluni_Statistics_Statistic) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Labeluni_Statistics_Statistic) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Labeluni_Statistics_Statistic.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Labeluni_Statistics_Statistic) ΛBelongingModule() string {
+	return "huawei-bgp-routing-table"
+}
+
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Multicast represents the /huawei-bgp/bgp/base-process/bgp-route/ipv4-multicast YANG schema element.
+type HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Multicast struct {
+	Routes *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Multicast_Routes `path:"routes" module:"huawei-bgp-routing-table"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Multicast implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Multicast) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Multicast) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Multicast"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Multicast) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Multicast) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Multicast.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Multicast) ΛBelongingModule() string {
+	return "huawei-bgp-routing-table"
+}
+
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Multicast_Routes represents the /huawei-bgp/bgp/base-process/bgp-route/ipv4-multicast/routes YANG schema element.
+type HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Multicast_Routes struct {
+	Route map[HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Multicast_Routes_Route_Key]*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Multicast_Routes_Route `path:"route" module:"huawei-bgp-routing-table"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Multicast_Routes implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Multicast_Routes) IsYANGGoStruct() {}
+
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Multicast_Routes_Route_Key represents the key for list Route of element /huawei-bgp/bgp/base-process/bgp-route/ipv4-multicast/routes.
+type HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Multicast_Routes_Route_Key struct {
+	VpnName            string      `path:"vpn-name"`
+	RouteDistinguisher string      `path:"route-distinguisher"`
+	Prefix             string      `path:"prefix"`
+	MaskLength         uint8       `path:"mask-length"`
+	RouteType          interface{} `path:"route-type"`
+	ImTableId          uint32      `path:"im-table-id"`
+	From               string      `path:"from"`
+	PathId             string      `path:"path-id"`
+}
+
+// IsYANGGoKeyStruct ensures that HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Multicast_Routes_Route_Key partially implements the
+// yang.GoKeyStruct interface. This allows functions that need to
+// handle this key struct to identify it as being generated by gogen.
+func (HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Multicast_Routes_Route_Key) IsYANGGoKeyStruct() {}
+
+// ΛListKeyMap returns the values of the HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Multicast_Routes_Route_Key key struct.
+func (t HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Multicast_Routes_Route_Key) ΛListKeyMap() (map[string]interface{}, error) {
+	return map[string]interface{}{
+		"vpn-name":            t.VpnName,
+		"route-distinguisher": t.RouteDistinguisher,
+		"prefix":              t.Prefix,
+		"mask-length":         t.MaskLength,
+		"route-type":          t.RouteType,
+		"im-table-id":         t.ImTableId,
+		"from":                t.From,
+		"path-id":             t.PathId,
+	}, nil
+}
+
+// NewRoute creates a new entry in the Route list of the
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Multicast_Routes struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Multicast_Routes) NewRoute(VpnName string, RouteDistinguisher string, Prefix string, MaskLength uint8, RouteType interface{}, ImTableId uint32, From string, PathId string) (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Multicast_Routes_Route, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.Route == nil {
+		t.Route = make(map[HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Multicast_Routes_Route_Key]*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Multicast_Routes_Route)
+	}
+
+	key := HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Multicast_Routes_Route_Key{
+		VpnName:            VpnName,
+		RouteDistinguisher: RouteDistinguisher,
+		Prefix:             Prefix,
+		MaskLength:         MaskLength,
+		RouteType:          RouteType,
+		ImTableId:          ImTableId,
+		From:               From,
+		PathId:             PathId,
+	}
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.Route[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Route", key)
+	}
+
+	t.Route[key] = &HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Multicast_Routes_Route{
+		VpnName:            &VpnName,
+		RouteDistinguisher: &RouteDistinguisher,
+		Prefix:             &Prefix,
+		MaskLength:         &MaskLength,
+		RouteType:          RouteType,
+		ImTableId:          &ImTableId,
+		From:               &From,
+		PathId:             &PathId,
+	}
+
+	return t.Route[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Multicast_Routes) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Multicast_Routes"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Multicast_Routes) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Multicast_Routes) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Multicast_Routes.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Multicast_Routes) ΛBelongingModule() string {
+	return "huawei-bgp-routing-table"
+}
+
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Multicast_Routes_Route represents the /huawei-bgp/bgp/base-process/bgp-route/ipv4-multicast/routes/route YANG schema element.
+type HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Multicast_Routes_Route struct {
+	AdvertiseNexthop           *string                               `path:"advertise-nexthop" module:"huawei-bgp-routing-table"`
+	AggregatorAs               *string                               `path:"aggregator-as" module:"huawei-bgp-routing-table"`
+	AggregatorId               *string                               `path:"aggregator-id" module:"huawei-bgp-routing-table"`
+	Aigp                       *uint64                               `path:"aigp" module:"huawei-bgp-routing-table"`
+	AtomicAggregate            *bool                                 `path:"atomic-aggregate" module:"huawei-bgp-routing-table"`
+	AttributeSet               *string                               `path:"attribute-set" module:"huawei-bgp-routing-table"`
+	ClusterList                *string                               `path:"cluster-list" module:"huawei-bgp-routing-table"`
+	Community                  *string                               `path:"community" module:"huawei-bgp-routing-table"`
+	ExtCommunity               *string                               `path:"ext-community" module:"huawei-bgp-routing-table"`
+	ExternalFlags              interface{}                           `path:"external-flags" module:"huawei-bgp-routing-table"`
+	FlagString                 *string                               `path:"flag-string" module:"huawei-bgp-routing-table"`
+	From                       *string                               `path:"from" module:"huawei-bgp-routing-table"`
+	GatewayIp                  *string                               `path:"gateway-ip" module:"huawei-bgp-routing-table"`
+	ImTableId                  *uint32                               `path:"im-table-id" module:"huawei-bgp-routing-table"`
+	InLabel                    *uint32                               `path:"in-label" module:"huawei-bgp-routing-table"`
+	InterfaceName              *string                               `path:"interface-name" module:"huawei-bgp-routing-table"`
+	IteratedVpn                *string                               `path:"iterated-vpn" module:"huawei-bgp-routing-table"`
+	LargeCommunity             *string                               `path:"large-community" module:"huawei-bgp-routing-table"`
+	LocalPreference            *uint32                               `path:"local-preference" module:"huawei-bgp-routing-table"`
+	MaskLength                 *uint8                                `path:"mask-length" module:"huawei-bgp-routing-table"`
+	Med                        *uint32                               `path:"med" module:"huawei-bgp-routing-table"`
+	Nexthop                    *string                               `path:"nexthop" module:"huawei-bgp-routing-table"`
+	Origin                     E_HuaweiBgpRoutingTable_BgpOriginType `path:"origin" module:"huawei-bgp-routing-table"`
+	Originator                 *string                               `path:"originator" module:"huawei-bgp-routing-table"`
+	OutLabel                   *uint32                               `path:"out-label" module:"huawei-bgp-routing-table"`
+	PathAs                     *string                               `path:"path-as" module:"huawei-bgp-routing-table"`
+	PathId                     *string                               `path:"path-id" module:"huawei-bgp-routing-table"`
+	Preference                 *uint8                                `path:"preference" module:"huawei-bgp-routing-table"`
+	PreferredValue             *uint32                               `path:"preferred-value" module:"huawei-bgp-routing-table"`
+	Prefix                     *string                               `path:"prefix" module:"huawei-bgp-routing-table"`
+	PrefixSid                  *string                               `path:"prefix-sid" module:"huawei-bgp-routing-table"`
+	RelayNexthop               *string                               `path:"relay-nexthop" module:"huawei-bgp-routing-table"`
+	RelayTunnelName            *string                               `path:"relay-tunnel-name" module:"huawei-bgp-routing-table"`
+	RemoteNexthopMacAddress    *string                               `path:"remote-nexthop-mac-address" module:"huawei-bgp-routing-table"`
+	RemoteNexthopTunnelAddress *string                               `path:"remote-nexthop-tunnel-address" module:"huawei-bgp-routing-table"`
+	RemoteNexthopVni           *uint32                               `path:"remote-nexthop-vni" module:"huawei-bgp-routing-table"`
+	RemoteRouteId              *string                               `path:"remote-route-id" module:"huawei-bgp-routing-table"`
+	RouteDistinguisher         *string                               `path:"route-distinguisher" module:"huawei-bgp-routing-table"`
+	RouteType                  interface{}                           `path:"route-type" module:"huawei-bgp-routing-table"`
+	SendingPeers               *string                               `path:"sending-peers" module:"huawei-bgp-routing-table"`
+	Time                       *uint32                               `path:"time" module:"huawei-bgp-routing-table"`
+	VpnName                    *string                               `path:"vpn-name" module:"huawei-bgp-routing-table"`
+	WorseReason                *string                               `path:"worse-reason" module:"huawei-bgp-routing-table"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Multicast_Routes_Route implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Multicast_Routes_Route) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Multicast_Routes_Route struct, which is a YANG list entry.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Multicast_Routes_Route) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.From == nil {
+		return nil, fmt.Errorf("nil value for key From")
+	}
+
+	if t.ImTableId == nil {
+		return nil, fmt.Errorf("nil value for key ImTableId")
+	}
+
+	if t.MaskLength == nil {
+		return nil, fmt.Errorf("nil value for key MaskLength")
+	}
+
+	if t.PathId == nil {
+		return nil, fmt.Errorf("nil value for key PathId")
+	}
+
+	if t.Prefix == nil {
+		return nil, fmt.Errorf("nil value for key Prefix")
+	}
+
+	if t.RouteDistinguisher == nil {
+		return nil, fmt.Errorf("nil value for key RouteDistinguisher")
+	}
+
+	if t.VpnName == nil {
+		return nil, fmt.Errorf("nil value for key VpnName")
+	}
+
+	return map[string]interface{}{
+		"from":                *t.From,
+		"im-table-id":         *t.ImTableId,
+		"mask-length":         *t.MaskLength,
+		"path-id":             *t.PathId,
+		"prefix":              *t.Prefix,
+		"route-distinguisher": *t.RouteDistinguisher,
+		"route-type":          t.RouteType,
+		"vpn-name":            *t.VpnName,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Multicast_Routes_Route) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Multicast_Routes_Route"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Multicast_Routes_Route) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Multicast_Routes_Route) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Multicast_Routes_Route.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Multicast_Routes_Route) ΛBelongingModule() string {
+	return "huawei-bgp-routing-table"
+}
+
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast represents the /huawei-bgp/bgp/base-process/bgp-route/ipv4-unicast YANG schema element.
+type HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast struct {
+	PeerAdvertiseRoutes     *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerAdvertiseRoutes     `path:"peer-advertise-routes" module:"huawei-bgp-routing-table"`
+	PeerReceiveActiveRoutes *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerReceiveActiveRoutes `path:"peer-receive-active-routes" module:"huawei-bgp-routing-table"`
+	PeerReceiveRoutes       *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerReceiveRoutes       `path:"peer-receive-routes" module:"huawei-bgp-routing-table"`
+	Routes                  *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_Routes                  `path:"routes" module:"huawei-bgp-routing-table"`
+	Statistics              *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_Statistics              `path:"statistics" module:"huawei-bgp-routing-table"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast) ΛBelongingModule() string {
+	return "huawei-bgp-routing-table"
+}
+
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerAdvertiseRoutes represents the /huawei-bgp/bgp/base-process/bgp-route/ipv4-unicast/peer-advertise-routes YANG schema element.
+type HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerAdvertiseRoutes struct {
+	PeerAdvertiseRoute map[HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerAdvertiseRoutes_PeerAdvertiseRoute_Key]*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerAdvertiseRoutes_PeerAdvertiseRoute `path:"peer-advertise-route" module:"huawei-bgp-routing-table"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerAdvertiseRoutes implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerAdvertiseRoutes) IsYANGGoStruct() {}
+
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerAdvertiseRoutes_PeerAdvertiseRoute_Key represents the key for list PeerAdvertiseRoute of element /huawei-bgp/bgp/base-process/bgp-route/ipv4-unicast/peer-advertise-routes.
+type HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerAdvertiseRoutes_PeerAdvertiseRoute_Key struct {
+	VpnName            string      `path:"vpn-name"`
+	RemotePeerAddress  string      `path:"remote-peer-address"`
+	RouteDistinguisher string      `path:"route-distinguisher"`
+	Prefix             string      `path:"prefix"`
+	MaskLength         uint8       `path:"mask-length"`
+	RouteType          interface{} `path:"route-type"`
+	ImTableId          uint32      `path:"im-table-id"`
+	From               string      `path:"from"`
+	PathId             string      `path:"path-id"`
+}
+
+// IsYANGGoKeyStruct ensures that HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerAdvertiseRoutes_PeerAdvertiseRoute_Key partially implements the
+// yang.GoKeyStruct interface. This allows functions that need to
+// handle this key struct to identify it as being generated by gogen.
+func (HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerAdvertiseRoutes_PeerAdvertiseRoute_Key) IsYANGGoKeyStruct() {
+}
+
+// ΛListKeyMap returns the values of the HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerAdvertiseRoutes_PeerAdvertiseRoute_Key key struct.
+func (t HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerAdvertiseRoutes_PeerAdvertiseRoute_Key) ΛListKeyMap() (map[string]interface{}, error) {
+	return map[string]interface{}{
+		"vpn-name":            t.VpnName,
+		"remote-peer-address": t.RemotePeerAddress,
+		"route-distinguisher": t.RouteDistinguisher,
+		"prefix":              t.Prefix,
+		"mask-length":         t.MaskLength,
+		"route-type":          t.RouteType,
+		"im-table-id":         t.ImTableId,
+		"from":                t.From,
+		"path-id":             t.PathId,
+	}, nil
+}
+
+// NewPeerAdvertiseRoute creates a new entry in the PeerAdvertiseRoute list of the
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerAdvertiseRoutes struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerAdvertiseRoutes) NewPeerAdvertiseRoute(VpnName string, RemotePeerAddress string, RouteDistinguisher string, Prefix string, MaskLength uint8, RouteType interface{}, ImTableId uint32, From string, PathId string) (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerAdvertiseRoutes_PeerAdvertiseRoute, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.PeerAdvertiseRoute == nil {
+		t.PeerAdvertiseRoute = make(map[HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerAdvertiseRoutes_PeerAdvertiseRoute_Key]*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerAdvertiseRoutes_PeerAdvertiseRoute)
+	}
+
+	key := HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerAdvertiseRoutes_PeerAdvertiseRoute_Key{
+		VpnName:            VpnName,
+		RemotePeerAddress:  RemotePeerAddress,
+		RouteDistinguisher: RouteDistinguisher,
+		Prefix:             Prefix,
+		MaskLength:         MaskLength,
+		RouteType:          RouteType,
+		ImTableId:          ImTableId,
+		From:               From,
+		PathId:             PathId,
+	}
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.PeerAdvertiseRoute[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list PeerAdvertiseRoute", key)
+	}
+
+	t.PeerAdvertiseRoute[key] = &HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerAdvertiseRoutes_PeerAdvertiseRoute{
+		VpnName:            &VpnName,
+		RemotePeerAddress:  &RemotePeerAddress,
+		RouteDistinguisher: &RouteDistinguisher,
+		Prefix:             &Prefix,
+		MaskLength:         &MaskLength,
+		RouteType:          RouteType,
+		ImTableId:          &ImTableId,
+		From:               &From,
+		PathId:             &PathId,
+	}
+
+	return t.PeerAdvertiseRoute[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerAdvertiseRoutes) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerAdvertiseRoutes"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerAdvertiseRoutes) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerAdvertiseRoutes) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerAdvertiseRoutes.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerAdvertiseRoutes) ΛBelongingModule() string {
+	return "huawei-bgp-routing-table"
+}
+
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerAdvertiseRoutes_PeerAdvertiseRoute represents the /huawei-bgp/bgp/base-process/bgp-route/ipv4-unicast/peer-advertise-routes/peer-advertise-route YANG schema element.
+type HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerAdvertiseRoutes_PeerAdvertiseRoute struct {
+	AdvertiseNexthop           *string                               `path:"advertise-nexthop" module:"huawei-bgp-routing-table"`
+	AggregatorAs               *string                               `path:"aggregator-as" module:"huawei-bgp-routing-table"`
+	AggregatorId               *string                               `path:"aggregator-id" module:"huawei-bgp-routing-table"`
+	Aigp                       *uint64                               `path:"aigp" module:"huawei-bgp-routing-table"`
+	AtomicAggregate            *bool                                 `path:"atomic-aggregate" module:"huawei-bgp-routing-table"`
+	AttributeSet               *string                               `path:"attribute-set" module:"huawei-bgp-routing-table"`
+	ClusterList                *string                               `path:"cluster-list" module:"huawei-bgp-routing-table"`
+	Community                  *string                               `path:"community" module:"huawei-bgp-routing-table"`
+	EntropyLabelPadding        *string                               `path:"entropy-label-padding" module:"huawei-bgp-routing-table"`
+	ExtCommunity               *string                               `path:"ext-community" module:"huawei-bgp-routing-table"`
+	ExternalFlags              interface{}                           `path:"external-flags" module:"huawei-bgp-routing-table"`
+	FlagString                 *string                               `path:"flag-string" module:"huawei-bgp-routing-table"`
+	From                       *string                               `path:"from" module:"huawei-bgp-routing-table"`
+	GatewayIp                  *string                               `path:"gateway-ip" module:"huawei-bgp-routing-table"`
+	ImTableId                  *uint32                               `path:"im-table-id" module:"huawei-bgp-routing-table"`
+	InLabel                    *uint32                               `path:"in-label" module:"huawei-bgp-routing-table"`
+	InterfaceName              *string                               `path:"interface-name" module:"huawei-bgp-routing-table"`
+	IteratedVpn                *string                               `path:"iterated-vpn" module:"huawei-bgp-routing-table"`
+	LargeCommunity             *string                               `path:"large-community" module:"huawei-bgp-routing-table"`
+	LocalPreference            *uint32                               `path:"local-preference" module:"huawei-bgp-routing-table"`
+	MaskLength                 *uint8                                `path:"mask-length" module:"huawei-bgp-routing-table"`
+	Med                        *uint32                               `path:"med" module:"huawei-bgp-routing-table"`
+	Nexthop                    *string                               `path:"nexthop" module:"huawei-bgp-routing-table"`
+	Origin                     E_HuaweiBgpRoutingTable_BgpOriginType `path:"origin" module:"huawei-bgp-routing-table"`
+	Originator                 *string                               `path:"originator" module:"huawei-bgp-routing-table"`
+	OutLabel                   *uint32                               `path:"out-label" module:"huawei-bgp-routing-table"`
+	PathAs                     *string                               `path:"path-as" module:"huawei-bgp-routing-table"`
+	PathId                     *string                               `path:"path-id" module:"huawei-bgp-routing-table"`
+	Preference                 *uint8                                `path:"preference" module:"huawei-bgp-routing-table"`
+	PreferredValue             *uint32                               `path:"preferred-value" module:"huawei-bgp-routing-table"`
+	Prefix                     *string                               `path:"prefix" module:"huawei-bgp-routing-table"`
+	PrefixSid                  *string                               `path:"prefix-sid" module:"huawei-bgp-routing-table"`
+	RelayNexthop               *string                               `path:"relay-nexthop" module:"huawei-bgp-routing-table"`
+	RelayTunnelName            *string                               `path:"relay-tunnel-name" module:"huawei-bgp-routing-table"`
+	RemoteNexthopMacAddress    *string                               `path:"remote-nexthop-mac-address" module:"huawei-bgp-routing-table"`
+	RemoteNexthopTunnelAddress *string                               `path:"remote-nexthop-tunnel-address" module:"huawei-bgp-routing-table"`
+	RemoteNexthopVni           *uint32                               `path:"remote-nexthop-vni" module:"huawei-bgp-routing-table"`
+	RemotePeerAddress          *string                               `path:"remote-peer-address" module:"huawei-bgp-routing-table"`
+	RemoteRouteId              *string                               `path:"remote-route-id" module:"huawei-bgp-routing-table"`
+	RouteDistinguisher         *string                               `path:"route-distinguisher" module:"huawei-bgp-routing-table"`
+	RouteType                  interface{}                           `path:"route-type" module:"huawei-bgp-routing-table"`
+	SendingPeers               *string                               `path:"sending-peers" module:"huawei-bgp-routing-table"`
+	Time                       *uint32                               `path:"time" module:"huawei-bgp-routing-table"`
+	VpnName                    *string                               `path:"vpn-name" module:"huawei-bgp-routing-table"`
+	WorseReason                *string                               `path:"worse-reason" module:"huawei-bgp-routing-table"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerAdvertiseRoutes_PeerAdvertiseRoute implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerAdvertiseRoutes_PeerAdvertiseRoute) IsYANGGoStruct() {
+}
+
+// ΛListKeyMap returns the keys of the HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerAdvertiseRoutes_PeerAdvertiseRoute struct, which is a YANG list entry.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerAdvertiseRoutes_PeerAdvertiseRoute) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.From == nil {
+		return nil, fmt.Errorf("nil value for key From")
+	}
+
+	if t.ImTableId == nil {
+		return nil, fmt.Errorf("nil value for key ImTableId")
+	}
+
+	if t.MaskLength == nil {
+		return nil, fmt.Errorf("nil value for key MaskLength")
+	}
+
+	if t.PathId == nil {
+		return nil, fmt.Errorf("nil value for key PathId")
+	}
+
+	if t.Prefix == nil {
+		return nil, fmt.Errorf("nil value for key Prefix")
+	}
+
+	if t.RemotePeerAddress == nil {
+		return nil, fmt.Errorf("nil value for key RemotePeerAddress")
+	}
+
+	if t.RouteDistinguisher == nil {
+		return nil, fmt.Errorf("nil value for key RouteDistinguisher")
+	}
+
+	if t.VpnName == nil {
+		return nil, fmt.Errorf("nil value for key VpnName")
+	}
+
+	return map[string]interface{}{
+		"from":                *t.From,
+		"im-table-id":         *t.ImTableId,
+		"mask-length":         *t.MaskLength,
+		"path-id":             *t.PathId,
+		"prefix":              *t.Prefix,
+		"remote-peer-address": *t.RemotePeerAddress,
+		"route-distinguisher": *t.RouteDistinguisher,
+		"route-type":          t.RouteType,
+		"vpn-name":            *t.VpnName,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerAdvertiseRoutes_PeerAdvertiseRoute) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerAdvertiseRoutes_PeerAdvertiseRoute"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerAdvertiseRoutes_PeerAdvertiseRoute) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerAdvertiseRoutes_PeerAdvertiseRoute) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerAdvertiseRoutes_PeerAdvertiseRoute.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerAdvertiseRoutes_PeerAdvertiseRoute) ΛBelongingModule() string {
+	return "huawei-bgp-routing-table"
+}
+
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerReceiveActiveRoutes represents the /huawei-bgp/bgp/base-process/bgp-route/ipv4-unicast/peer-receive-active-routes YANG schema element.
+type HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerReceiveActiveRoutes struct {
+	PeerReceiveActiveRoute map[HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerReceiveActiveRoutes_PeerReceiveActiveRoute_Key]*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerReceiveActiveRoutes_PeerReceiveActiveRoute `path:"peer-receive-active-route" module:"huawei-bgp-routing-table"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerReceiveActiveRoutes implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerReceiveActiveRoutes) IsYANGGoStruct() {}
+
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerReceiveActiveRoutes_PeerReceiveActiveRoute_Key represents the key for list PeerReceiveActiveRoute of element /huawei-bgp/bgp/base-process/bgp-route/ipv4-unicast/peer-receive-active-routes.
+type HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerReceiveActiveRoutes_PeerReceiveActiveRoute_Key struct {
+	VpnName            string      `path:"vpn-name"`
+	RemotePeerAddress  string      `path:"remote-peer-address"`
+	RouteDistinguisher string      `path:"route-distinguisher"`
+	Prefix             string      `path:"prefix"`
+	MaskLength         uint8       `path:"mask-length"`
+	RouteType          interface{} `path:"route-type"`
+	ImTableId          uint32      `path:"im-table-id"`
+	From               string      `path:"from"`
+	PathId             string      `path:"path-id"`
+}
+
+// IsYANGGoKeyStruct ensures that HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerReceiveActiveRoutes_PeerReceiveActiveRoute_Key partially implements the
+// yang.GoKeyStruct interface. This allows functions that need to
+// handle this key struct to identify it as being generated by gogen.
+func (HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerReceiveActiveRoutes_PeerReceiveActiveRoute_Key) IsYANGGoKeyStruct() {
+}
+
+// ΛListKeyMap returns the values of the HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerReceiveActiveRoutes_PeerReceiveActiveRoute_Key key struct.
+func (t HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerReceiveActiveRoutes_PeerReceiveActiveRoute_Key) ΛListKeyMap() (map[string]interface{}, error) {
+	return map[string]interface{}{
+		"vpn-name":            t.VpnName,
+		"remote-peer-address": t.RemotePeerAddress,
+		"route-distinguisher": t.RouteDistinguisher,
+		"prefix":              t.Prefix,
+		"mask-length":         t.MaskLength,
+		"route-type":          t.RouteType,
+		"im-table-id":         t.ImTableId,
+		"from":                t.From,
+		"path-id":             t.PathId,
+	}, nil
+}
+
+// NewPeerReceiveActiveRoute creates a new entry in the PeerReceiveActiveRoute list of the
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerReceiveActiveRoutes struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerReceiveActiveRoutes) NewPeerReceiveActiveRoute(VpnName string, RemotePeerAddress string, RouteDistinguisher string, Prefix string, MaskLength uint8, RouteType interface{}, ImTableId uint32, From string, PathId string) (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerReceiveActiveRoutes_PeerReceiveActiveRoute, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.PeerReceiveActiveRoute == nil {
+		t.PeerReceiveActiveRoute = make(map[HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerReceiveActiveRoutes_PeerReceiveActiveRoute_Key]*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerReceiveActiveRoutes_PeerReceiveActiveRoute)
+	}
+
+	key := HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerReceiveActiveRoutes_PeerReceiveActiveRoute_Key{
+		VpnName:            VpnName,
+		RemotePeerAddress:  RemotePeerAddress,
+		RouteDistinguisher: RouteDistinguisher,
+		Prefix:             Prefix,
+		MaskLength:         MaskLength,
+		RouteType:          RouteType,
+		ImTableId:          ImTableId,
+		From:               From,
+		PathId:             PathId,
+	}
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.PeerReceiveActiveRoute[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list PeerReceiveActiveRoute", key)
+	}
+
+	t.PeerReceiveActiveRoute[key] = &HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerReceiveActiveRoutes_PeerReceiveActiveRoute{
+		VpnName:            &VpnName,
+		RemotePeerAddress:  &RemotePeerAddress,
+		RouteDistinguisher: &RouteDistinguisher,
+		Prefix:             &Prefix,
+		MaskLength:         &MaskLength,
+		RouteType:          RouteType,
+		ImTableId:          &ImTableId,
+		From:               &From,
+		PathId:             &PathId,
+	}
+
+	return t.PeerReceiveActiveRoute[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerReceiveActiveRoutes) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerReceiveActiveRoutes"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerReceiveActiveRoutes) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerReceiveActiveRoutes) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerReceiveActiveRoutes.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerReceiveActiveRoutes) ΛBelongingModule() string {
+	return "huawei-bgp-routing-table"
+}
+
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerReceiveActiveRoutes_PeerReceiveActiveRoute represents the /huawei-bgp/bgp/base-process/bgp-route/ipv4-unicast/peer-receive-active-routes/peer-receive-active-route YANG schema element.
+type HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerReceiveActiveRoutes_PeerReceiveActiveRoute struct {
+	AdvertiseNexthop           *string                               `path:"advertise-nexthop" module:"huawei-bgp-routing-table"`
+	AggregatorAs               *string                               `path:"aggregator-as" module:"huawei-bgp-routing-table"`
+	AggregatorId               *string                               `path:"aggregator-id" module:"huawei-bgp-routing-table"`
+	Aigp                       *uint64                               `path:"aigp" module:"huawei-bgp-routing-table"`
+	AtomicAggregate            *bool                                 `path:"atomic-aggregate" module:"huawei-bgp-routing-table"`
+	AttributeSet               *string                               `path:"attribute-set" module:"huawei-bgp-routing-table"`
+	ClusterList                *string                               `path:"cluster-list" module:"huawei-bgp-routing-table"`
+	Community                  *string                               `path:"community" module:"huawei-bgp-routing-table"`
+	ExtCommunity               *string                               `path:"ext-community" module:"huawei-bgp-routing-table"`
+	ExternalFlags              interface{}                           `path:"external-flags" module:"huawei-bgp-routing-table"`
+	FlagString                 *string                               `path:"flag-string" module:"huawei-bgp-routing-table"`
+	From                       *string                               `path:"from" module:"huawei-bgp-routing-table"`
+	GatewayIp                  *string                               `path:"gateway-ip" module:"huawei-bgp-routing-table"`
+	ImTableId                  *uint32                               `path:"im-table-id" module:"huawei-bgp-routing-table"`
+	InLabel                    *uint32                               `path:"in-label" module:"huawei-bgp-routing-table"`
+	InterfaceName              *string                               `path:"interface-name" module:"huawei-bgp-routing-table"`
+	IteratedVpn                *string                               `path:"iterated-vpn" module:"huawei-bgp-routing-table"`
+	LargeCommunity             *string                               `path:"large-community" module:"huawei-bgp-routing-table"`
+	LocalPreference            *uint32                               `path:"local-preference" module:"huawei-bgp-routing-table"`
+	MaskLength                 *uint8                                `path:"mask-length" module:"huawei-bgp-routing-table"`
+	Med                        *uint32                               `path:"med" module:"huawei-bgp-routing-table"`
+	Nexthop                    *string                               `path:"nexthop" module:"huawei-bgp-routing-table"`
+	Origin                     E_HuaweiBgpRoutingTable_BgpOriginType `path:"origin" module:"huawei-bgp-routing-table"`
+	Originator                 *string                               `path:"originator" module:"huawei-bgp-routing-table"`
+	OutLabel                   *uint32                               `path:"out-label" module:"huawei-bgp-routing-table"`
+	PathAs                     *string                               `path:"path-as" module:"huawei-bgp-routing-table"`
+	PathId                     *string                               `path:"path-id" module:"huawei-bgp-routing-table"`
+	Preference                 *uint8                                `path:"preference" module:"huawei-bgp-routing-table"`
+	PreferredValue             *uint32                               `path:"preferred-value" module:"huawei-bgp-routing-table"`
+	Prefix                     *string                               `path:"prefix" module:"huawei-bgp-routing-table"`
+	PrefixSid                  *string                               `path:"prefix-sid" module:"huawei-bgp-routing-table"`
+	RelayNexthop               *string                               `path:"relay-nexthop" module:"huawei-bgp-routing-table"`
+	RelayTunnelName            *string                               `path:"relay-tunnel-name" module:"huawei-bgp-routing-table"`
+	RemoteNexthopMacAddress    *string                               `path:"remote-nexthop-mac-address" module:"huawei-bgp-routing-table"`
+	RemoteNexthopTunnelAddress *string                               `path:"remote-nexthop-tunnel-address" module:"huawei-bgp-routing-table"`
+	RemoteNexthopVni           *uint32                               `path:"remote-nexthop-vni" module:"huawei-bgp-routing-table"`
+	RemotePeerAddress          *string                               `path:"remote-peer-address" module:"huawei-bgp-routing-table"`
+	RemoteRouteId              *string                               `path:"remote-route-id" module:"huawei-bgp-routing-table"`
+	RouteDistinguisher         *string                               `path:"route-distinguisher" module:"huawei-bgp-routing-table"`
+	RouteType                  interface{}                           `path:"route-type" module:"huawei-bgp-routing-table"`
+	SendingPeers               *string                               `path:"sending-peers" module:"huawei-bgp-routing-table"`
+	Time                       *uint32                               `path:"time" module:"huawei-bgp-routing-table"`
+	VpnName                    *string                               `path:"vpn-name" module:"huawei-bgp-routing-table"`
+	WorseReason                *string                               `path:"worse-reason" module:"huawei-bgp-routing-table"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerReceiveActiveRoutes_PeerReceiveActiveRoute implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerReceiveActiveRoutes_PeerReceiveActiveRoute) IsYANGGoStruct() {
+}
+
+// ΛListKeyMap returns the keys of the HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerReceiveActiveRoutes_PeerReceiveActiveRoute struct, which is a YANG list entry.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerReceiveActiveRoutes_PeerReceiveActiveRoute) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.From == nil {
+		return nil, fmt.Errorf("nil value for key From")
+	}
+
+	if t.ImTableId == nil {
+		return nil, fmt.Errorf("nil value for key ImTableId")
+	}
+
+	if t.MaskLength == nil {
+		return nil, fmt.Errorf("nil value for key MaskLength")
+	}
+
+	if t.PathId == nil {
+		return nil, fmt.Errorf("nil value for key PathId")
+	}
+
+	if t.Prefix == nil {
+		return nil, fmt.Errorf("nil value for key Prefix")
+	}
+
+	if t.RemotePeerAddress == nil {
+		return nil, fmt.Errorf("nil value for key RemotePeerAddress")
+	}
+
+	if t.RouteDistinguisher == nil {
+		return nil, fmt.Errorf("nil value for key RouteDistinguisher")
+	}
+
+	if t.VpnName == nil {
+		return nil, fmt.Errorf("nil value for key VpnName")
+	}
+
+	return map[string]interface{}{
+		"from":                *t.From,
+		"im-table-id":         *t.ImTableId,
+		"mask-length":         *t.MaskLength,
+		"path-id":             *t.PathId,
+		"prefix":              *t.Prefix,
+		"remote-peer-address": *t.RemotePeerAddress,
+		"route-distinguisher": *t.RouteDistinguisher,
+		"route-type":          t.RouteType,
+		"vpn-name":            *t.VpnName,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerReceiveActiveRoutes_PeerReceiveActiveRoute) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerReceiveActiveRoutes_PeerReceiveActiveRoute"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerReceiveActiveRoutes_PeerReceiveActiveRoute) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerReceiveActiveRoutes_PeerReceiveActiveRoute) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerReceiveActiveRoutes_PeerReceiveActiveRoute.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerReceiveActiveRoutes_PeerReceiveActiveRoute) ΛBelongingModule() string {
+	return "huawei-bgp-routing-table"
+}
+
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerReceiveRoutes represents the /huawei-bgp/bgp/base-process/bgp-route/ipv4-unicast/peer-receive-routes YANG schema element.
+type HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerReceiveRoutes struct {
+	PeerReceiveRoute map[HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerReceiveRoutes_PeerReceiveRoute_Key]*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerReceiveRoutes_PeerReceiveRoute `path:"peer-receive-route" module:"huawei-bgp-routing-table"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerReceiveRoutes implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerReceiveRoutes) IsYANGGoStruct() {}
+
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerReceiveRoutes_PeerReceiveRoute_Key represents the key for list PeerReceiveRoute of element /huawei-bgp/bgp/base-process/bgp-route/ipv4-unicast/peer-receive-routes.
+type HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerReceiveRoutes_PeerReceiveRoute_Key struct {
+	VpnName            string      `path:"vpn-name"`
+	RemotePeerAddress  string      `path:"remote-peer-address"`
+	RouteDistinguisher string      `path:"route-distinguisher"`
+	Prefix             string      `path:"prefix"`
+	MaskLength         uint8       `path:"mask-length"`
+	RouteType          interface{} `path:"route-type"`
+	ImTableId          uint32      `path:"im-table-id"`
+	From               string      `path:"from"`
+	PathId             string      `path:"path-id"`
+}
+
+// IsYANGGoKeyStruct ensures that HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerReceiveRoutes_PeerReceiveRoute_Key partially implements the
+// yang.GoKeyStruct interface. This allows functions that need to
+// handle this key struct to identify it as being generated by gogen.
+func (HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerReceiveRoutes_PeerReceiveRoute_Key) IsYANGGoKeyStruct() {
+}
+
+// ΛListKeyMap returns the values of the HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerReceiveRoutes_PeerReceiveRoute_Key key struct.
+func (t HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerReceiveRoutes_PeerReceiveRoute_Key) ΛListKeyMap() (map[string]interface{}, error) {
+	return map[string]interface{}{
+		"vpn-name":            t.VpnName,
+		"remote-peer-address": t.RemotePeerAddress,
+		"route-distinguisher": t.RouteDistinguisher,
+		"prefix":              t.Prefix,
+		"mask-length":         t.MaskLength,
+		"route-type":          t.RouteType,
+		"im-table-id":         t.ImTableId,
+		"from":                t.From,
+		"path-id":             t.PathId,
+	}, nil
+}
+
+// NewPeerReceiveRoute creates a new entry in the PeerReceiveRoute list of the
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerReceiveRoutes struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerReceiveRoutes) NewPeerReceiveRoute(VpnName string, RemotePeerAddress string, RouteDistinguisher string, Prefix string, MaskLength uint8, RouteType interface{}, ImTableId uint32, From string, PathId string) (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerReceiveRoutes_PeerReceiveRoute, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.PeerReceiveRoute == nil {
+		t.PeerReceiveRoute = make(map[HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerReceiveRoutes_PeerReceiveRoute_Key]*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerReceiveRoutes_PeerReceiveRoute)
+	}
+
+	key := HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerReceiveRoutes_PeerReceiveRoute_Key{
+		VpnName:            VpnName,
+		RemotePeerAddress:  RemotePeerAddress,
+		RouteDistinguisher: RouteDistinguisher,
+		Prefix:             Prefix,
+		MaskLength:         MaskLength,
+		RouteType:          RouteType,
+		ImTableId:          ImTableId,
+		From:               From,
+		PathId:             PathId,
+	}
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.PeerReceiveRoute[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list PeerReceiveRoute", key)
+	}
+
+	t.PeerReceiveRoute[key] = &HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerReceiveRoutes_PeerReceiveRoute{
+		VpnName:            &VpnName,
+		RemotePeerAddress:  &RemotePeerAddress,
+		RouteDistinguisher: &RouteDistinguisher,
+		Prefix:             &Prefix,
+		MaskLength:         &MaskLength,
+		RouteType:          RouteType,
+		ImTableId:          &ImTableId,
+		From:               &From,
+		PathId:             &PathId,
+	}
+
+	return t.PeerReceiveRoute[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerReceiveRoutes) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerReceiveRoutes"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerReceiveRoutes) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerReceiveRoutes) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerReceiveRoutes.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerReceiveRoutes) ΛBelongingModule() string {
+	return "huawei-bgp-routing-table"
+}
+
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerReceiveRoutes_PeerReceiveRoute represents the /huawei-bgp/bgp/base-process/bgp-route/ipv4-unicast/peer-receive-routes/peer-receive-route YANG schema element.
+type HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerReceiveRoutes_PeerReceiveRoute struct {
+	AdvertiseNexthop           *string                               `path:"advertise-nexthop" module:"huawei-bgp-routing-table"`
+	AggregatorAs               *string                               `path:"aggregator-as" module:"huawei-bgp-routing-table"`
+	AggregatorId               *string                               `path:"aggregator-id" module:"huawei-bgp-routing-table"`
+	Aigp                       *uint64                               `path:"aigp" module:"huawei-bgp-routing-table"`
+	AtomicAggregate            *bool                                 `path:"atomic-aggregate" module:"huawei-bgp-routing-table"`
+	AttributeSet               *string                               `path:"attribute-set" module:"huawei-bgp-routing-table"`
+	ClusterList                *string                               `path:"cluster-list" module:"huawei-bgp-routing-table"`
+	Community                  *string                               `path:"community" module:"huawei-bgp-routing-table"`
+	EntropyLabelPadding        *string                               `path:"entropy-label-padding" module:"huawei-bgp-routing-table"`
+	ExtCommunity               *string                               `path:"ext-community" module:"huawei-bgp-routing-table"`
+	ExternalFlags              interface{}                           `path:"external-flags" module:"huawei-bgp-routing-table"`
+	FlagString                 *string                               `path:"flag-string" module:"huawei-bgp-routing-table"`
+	From                       *string                               `path:"from" module:"huawei-bgp-routing-table"`
+	GatewayIp                  *string                               `path:"gateway-ip" module:"huawei-bgp-routing-table"`
+	ImTableId                  *uint32                               `path:"im-table-id" module:"huawei-bgp-routing-table"`
+	InLabel                    *uint32                               `path:"in-label" module:"huawei-bgp-routing-table"`
+	InterfaceName              *string                               `path:"interface-name" module:"huawei-bgp-routing-table"`
+	IteratedVpn                *string                               `path:"iterated-vpn" module:"huawei-bgp-routing-table"`
+	LargeCommunity             *string                               `path:"large-community" module:"huawei-bgp-routing-table"`
+	LocalPreference            *uint32                               `path:"local-preference" module:"huawei-bgp-routing-table"`
+	MaskLength                 *uint8                                `path:"mask-length" module:"huawei-bgp-routing-table"`
+	Med                        *uint32                               `path:"med" module:"huawei-bgp-routing-table"`
+	Nexthop                    *string                               `path:"nexthop" module:"huawei-bgp-routing-table"`
+	Origin                     E_HuaweiBgpRoutingTable_BgpOriginType `path:"origin" module:"huawei-bgp-routing-table"`
+	Originator                 *string                               `path:"originator" module:"huawei-bgp-routing-table"`
+	OutLabel                   *uint32                               `path:"out-label" module:"huawei-bgp-routing-table"`
+	PathAs                     *string                               `path:"path-as" module:"huawei-bgp-routing-table"`
+	PathId                     *string                               `path:"path-id" module:"huawei-bgp-routing-table"`
+	Preference                 *uint8                                `path:"preference" module:"huawei-bgp-routing-table"`
+	PreferredValue             *uint32                               `path:"preferred-value" module:"huawei-bgp-routing-table"`
+	Prefix                     *string                               `path:"prefix" module:"huawei-bgp-routing-table"`
+	PrefixSid                  *string                               `path:"prefix-sid" module:"huawei-bgp-routing-table"`
+	RelayNexthop               *string                               `path:"relay-nexthop" module:"huawei-bgp-routing-table"`
+	RelayTunnelName            *string                               `path:"relay-tunnel-name" module:"huawei-bgp-routing-table"`
+	RemoteNexthopMacAddress    *string                               `path:"remote-nexthop-mac-address" module:"huawei-bgp-routing-table"`
+	RemoteNexthopTunnelAddress *string                               `path:"remote-nexthop-tunnel-address" module:"huawei-bgp-routing-table"`
+	RemoteNexthopVni           *uint32                               `path:"remote-nexthop-vni" module:"huawei-bgp-routing-table"`
+	RemotePeerAddress          *string                               `path:"remote-peer-address" module:"huawei-bgp-routing-table"`
+	RemoteRouteId              *string                               `path:"remote-route-id" module:"huawei-bgp-routing-table"`
+	RouteDistinguisher         *string                               `path:"route-distinguisher" module:"huawei-bgp-routing-table"`
+	RouteType                  interface{}                           `path:"route-type" module:"huawei-bgp-routing-table"`
+	SendingPeers               *string                               `path:"sending-peers" module:"huawei-bgp-routing-table"`
+	Time                       *uint32                               `path:"time" module:"huawei-bgp-routing-table"`
+	VpnName                    *string                               `path:"vpn-name" module:"huawei-bgp-routing-table"`
+	WorseReason                *string                               `path:"worse-reason" module:"huawei-bgp-routing-table"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerReceiveRoutes_PeerReceiveRoute implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerReceiveRoutes_PeerReceiveRoute) IsYANGGoStruct() {
+}
+
+// ΛListKeyMap returns the keys of the HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerReceiveRoutes_PeerReceiveRoute struct, which is a YANG list entry.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerReceiveRoutes_PeerReceiveRoute) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.From == nil {
+		return nil, fmt.Errorf("nil value for key From")
+	}
+
+	if t.ImTableId == nil {
+		return nil, fmt.Errorf("nil value for key ImTableId")
+	}
+
+	if t.MaskLength == nil {
+		return nil, fmt.Errorf("nil value for key MaskLength")
+	}
+
+	if t.PathId == nil {
+		return nil, fmt.Errorf("nil value for key PathId")
+	}
+
+	if t.Prefix == nil {
+		return nil, fmt.Errorf("nil value for key Prefix")
+	}
+
+	if t.RemotePeerAddress == nil {
+		return nil, fmt.Errorf("nil value for key RemotePeerAddress")
+	}
+
+	if t.RouteDistinguisher == nil {
+		return nil, fmt.Errorf("nil value for key RouteDistinguisher")
+	}
+
+	if t.VpnName == nil {
+		return nil, fmt.Errorf("nil value for key VpnName")
+	}
+
+	return map[string]interface{}{
+		"from":                *t.From,
+		"im-table-id":         *t.ImTableId,
+		"mask-length":         *t.MaskLength,
+		"path-id":             *t.PathId,
+		"prefix":              *t.Prefix,
+		"remote-peer-address": *t.RemotePeerAddress,
+		"route-distinguisher": *t.RouteDistinguisher,
+		"route-type":          t.RouteType,
+		"vpn-name":            *t.VpnName,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerReceiveRoutes_PeerReceiveRoute) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerReceiveRoutes_PeerReceiveRoute"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerReceiveRoutes_PeerReceiveRoute) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerReceiveRoutes_PeerReceiveRoute) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerReceiveRoutes_PeerReceiveRoute.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_PeerReceiveRoutes_PeerReceiveRoute) ΛBelongingModule() string {
+	return "huawei-bgp-routing-table"
+}
+
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_Routes represents the /huawei-bgp/bgp/base-process/bgp-route/ipv4-unicast/routes YANG schema element.
+type HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_Routes struct {
+	Route map[HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_Routes_Route_Key]*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_Routes_Route `path:"route" module:"huawei-bgp-routing-table"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_Routes implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_Routes) IsYANGGoStruct() {}
+
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_Routes_Route_Key represents the key for list Route of element /huawei-bgp/bgp/base-process/bgp-route/ipv4-unicast/routes.
+type HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_Routes_Route_Key struct {
+	VpnName            string      `path:"vpn-name"`
+	RouteDistinguisher string      `path:"route-distinguisher"`
+	Prefix             string      `path:"prefix"`
+	MaskLength         uint8       `path:"mask-length"`
+	RouteType          interface{} `path:"route-type"`
+	ImTableId          uint32      `path:"im-table-id"`
+	From               string      `path:"from"`
+	PathId             string      `path:"path-id"`
+}
+
+// IsYANGGoKeyStruct ensures that HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_Routes_Route_Key partially implements the
+// yang.GoKeyStruct interface. This allows functions that need to
+// handle this key struct to identify it as being generated by gogen.
+func (HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_Routes_Route_Key) IsYANGGoKeyStruct() {}
+
+// ΛListKeyMap returns the values of the HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_Routes_Route_Key key struct.
+func (t HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_Routes_Route_Key) ΛListKeyMap() (map[string]interface{}, error) {
+	return map[string]interface{}{
+		"vpn-name":            t.VpnName,
+		"route-distinguisher": t.RouteDistinguisher,
+		"prefix":              t.Prefix,
+		"mask-length":         t.MaskLength,
+		"route-type":          t.RouteType,
+		"im-table-id":         t.ImTableId,
+		"from":                t.From,
+		"path-id":             t.PathId,
+	}, nil
+}
+
+// NewRoute creates a new entry in the Route list of the
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_Routes struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_Routes) NewRoute(VpnName string, RouteDistinguisher string, Prefix string, MaskLength uint8, RouteType interface{}, ImTableId uint32, From string, PathId string) (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_Routes_Route, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.Route == nil {
+		t.Route = make(map[HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_Routes_Route_Key]*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_Routes_Route)
+	}
+
+	key := HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_Routes_Route_Key{
+		VpnName:            VpnName,
+		RouteDistinguisher: RouteDistinguisher,
+		Prefix:             Prefix,
+		MaskLength:         MaskLength,
+		RouteType:          RouteType,
+		ImTableId:          ImTableId,
+		From:               From,
+		PathId:             PathId,
+	}
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.Route[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Route", key)
+	}
+
+	t.Route[key] = &HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_Routes_Route{
+		VpnName:            &VpnName,
+		RouteDistinguisher: &RouteDistinguisher,
+		Prefix:             &Prefix,
+		MaskLength:         &MaskLength,
+		RouteType:          RouteType,
+		ImTableId:          &ImTableId,
+		From:               &From,
+		PathId:             &PathId,
+	}
+
+	return t.Route[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_Routes) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_Routes"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_Routes) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_Routes) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_Routes.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_Routes) ΛBelongingModule() string {
+	return "huawei-bgp-routing-table"
+}
+
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_Routes_Route represents the /huawei-bgp/bgp/base-process/bgp-route/ipv4-unicast/routes/route YANG schema element.
+type HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_Routes_Route struct {
+	AdvertiseNexthop           *string                               `path:"advertise-nexthop" module:"huawei-bgp-routing-table"`
+	AggregatorAs               *string                               `path:"aggregator-as" module:"huawei-bgp-routing-table"`
+	AggregatorId               *string                               `path:"aggregator-id" module:"huawei-bgp-routing-table"`
+	Aigp                       *uint64                               `path:"aigp" module:"huawei-bgp-routing-table"`
+	AtomicAggregate            *bool                                 `path:"atomic-aggregate" module:"huawei-bgp-routing-table"`
+	AttributeSet               *string                               `path:"attribute-set" module:"huawei-bgp-routing-table"`
+	ClusterList                *string                               `path:"cluster-list" module:"huawei-bgp-routing-table"`
+	Community                  *string                               `path:"community" module:"huawei-bgp-routing-table"`
+	EntropyLabelPadding        *string                               `path:"entropy-label-padding" module:"huawei-bgp-routing-table"`
+	ExtCommunity               *string                               `path:"ext-community" module:"huawei-bgp-routing-table"`
+	ExternalFlags              interface{}                           `path:"external-flags" module:"huawei-bgp-routing-table"`
+	FlagString                 *string                               `path:"flag-string" module:"huawei-bgp-routing-table"`
+	From                       *string                               `path:"from" module:"huawei-bgp-routing-table"`
+	GatewayIp                  *string                               `path:"gateway-ip" module:"huawei-bgp-routing-table"`
+	ImTableId                  *uint32                               `path:"im-table-id" module:"huawei-bgp-routing-table"`
+	InLabel                    *uint32                               `path:"in-label" module:"huawei-bgp-routing-table"`
+	InterfaceName              *string                               `path:"interface-name" module:"huawei-bgp-routing-table"`
+	IteratedVpn                *string                               `path:"iterated-vpn" module:"huawei-bgp-routing-table"`
+	LargeCommunity             *string                               `path:"large-community" module:"huawei-bgp-routing-table"`
+	LocalPreference            *uint32                               `path:"local-preference" module:"huawei-bgp-routing-table"`
+	MaskLength                 *uint8                                `path:"mask-length" module:"huawei-bgp-routing-table"`
+	Med                        *uint32                               `path:"med" module:"huawei-bgp-routing-table"`
+	Nexthop                    *string                               `path:"nexthop" module:"huawei-bgp-routing-table"`
+	Origin                     E_HuaweiBgpRoutingTable_BgpOriginType `path:"origin" module:"huawei-bgp-routing-table"`
+	Originator                 *string                               `path:"originator" module:"huawei-bgp-routing-table"`
+	OutLabel                   *uint32                               `path:"out-label" module:"huawei-bgp-routing-table"`
+	PathAs                     *string                               `path:"path-as" module:"huawei-bgp-routing-table"`
+	PathId                     *string                               `path:"path-id" module:"huawei-bgp-routing-table"`
+	Preference                 *uint8                                `path:"preference" module:"huawei-bgp-routing-table"`
+	PreferredValue             *uint32                               `path:"preferred-value" module:"huawei-bgp-routing-table"`
+	Prefix                     *string                               `path:"prefix" module:"huawei-bgp-routing-table"`
+	PrefixSid                  *string                               `path:"prefix-sid" module:"huawei-bgp-routing-table"`
+	RelayNexthop               *string                               `path:"relay-nexthop" module:"huawei-bgp-routing-table"`
+	RelayTunnelName            *string                               `path:"relay-tunnel-name" module:"huawei-bgp-routing-table"`
+	RemoteNexthopMacAddress    *string                               `path:"remote-nexthop-mac-address" module:"huawei-bgp-routing-table"`
+	RemoteNexthopTunnelAddress *string                               `path:"remote-nexthop-tunnel-address" module:"huawei-bgp-routing-table"`
+	RemoteNexthopVni           *uint32                               `path:"remote-nexthop-vni" module:"huawei-bgp-routing-table"`
+	RemoteRouteId              *string                               `path:"remote-route-id" module:"huawei-bgp-routing-table"`
+	RouteDistinguisher         *string                               `path:"route-distinguisher" module:"huawei-bgp-routing-table"`
+	RouteType                  interface{}                           `path:"route-type" module:"huawei-bgp-routing-table"`
+	SendingPeers               *string                               `path:"sending-peers" module:"huawei-bgp-routing-table"`
+	Time                       *uint32                               `path:"time" module:"huawei-bgp-routing-table"`
+	VpnName                    *string                               `path:"vpn-name" module:"huawei-bgp-routing-table"`
+	WorseReason                *string                               `path:"worse-reason" module:"huawei-bgp-routing-table"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_Routes_Route implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_Routes_Route) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_Routes_Route struct, which is a YANG list entry.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_Routes_Route) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.From == nil {
+		return nil, fmt.Errorf("nil value for key From")
+	}
+
+	if t.ImTableId == nil {
+		return nil, fmt.Errorf("nil value for key ImTableId")
+	}
+
+	if t.MaskLength == nil {
+		return nil, fmt.Errorf("nil value for key MaskLength")
+	}
+
+	if t.PathId == nil {
+		return nil, fmt.Errorf("nil value for key PathId")
+	}
+
+	if t.Prefix == nil {
+		return nil, fmt.Errorf("nil value for key Prefix")
+	}
+
+	if t.RouteDistinguisher == nil {
+		return nil, fmt.Errorf("nil value for key RouteDistinguisher")
+	}
+
+	if t.VpnName == nil {
+		return nil, fmt.Errorf("nil value for key VpnName")
+	}
+
+	return map[string]interface{}{
+		"from":                *t.From,
+		"im-table-id":         *t.ImTableId,
+		"mask-length":         *t.MaskLength,
+		"path-id":             *t.PathId,
+		"prefix":              *t.Prefix,
+		"route-distinguisher": *t.RouteDistinguisher,
+		"route-type":          t.RouteType,
+		"vpn-name":            *t.VpnName,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_Routes_Route) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_Routes_Route"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_Routes_Route) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_Routes_Route) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_Routes_Route.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_Routes_Route) ΛBelongingModule() string {
+	return "huawei-bgp-routing-table"
+}
+
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_Statistics represents the /huawei-bgp/bgp/base-process/bgp-route/ipv4-unicast/statistics YANG schema element.
+type HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_Statistics struct {
+	Statistic map[string]*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_Statistics_Statistic `path:"statistic" module:"huawei-bgp-routing-table"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_Statistics implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_Statistics) IsYANGGoStruct() {}
+
+// NewStatistic creates a new entry in the Statistic list of the
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_Statistics struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_Statistics) NewStatistic(VpnName string) (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_Statistics_Statistic, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.Statistic == nil {
+		t.Statistic = make(map[string]*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_Statistics_Statistic)
+	}
+
+	key := VpnName
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.Statistic[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Statistic", key)
+	}
+
+	t.Statistic[key] = &HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_Statistics_Statistic{
+		VpnName: &VpnName,
+	}
+
+	return t.Statistic[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_Statistics) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_Statistics"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_Statistics) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_Statistics) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_Statistics.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_Statistics) ΛBelongingModule() string {
+	return "huawei-bgp-routing-table"
+}
+
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_Statistics_Statistic represents the /huawei-bgp/bgp/base-process/bgp-route/ipv4-unicast/statistics/statistic YANG schema element.
+type HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_Statistics_Statistic struct {
+	ActiveRouteNumber            *uint32 `path:"active-route-number" module:"huawei-bgp-routing-table"`
+	AddPathRouteNumber           *uint32 `path:"add-path-route-number" module:"huawei-bgp-routing-table"`
+	AdvertiseRmTotalNumber       *uint32 `path:"advertise-rm-total-number" module:"huawei-bgp-routing-table"`
+	BestExternalRouteNumber      *uint32 `path:"best-external-route-number" module:"huawei-bgp-routing-table"`
+	BestRouteNumber              *uint32 `path:"best-route-number" module:"huawei-bgp-routing-table"`
+	CidrRouteNumber              *uint32 `path:"cidr-route-number" module:"huawei-bgp-routing-table"`
+	CommunityRouteNumber         *uint32 `path:"community-route-number" module:"huawei-bgp-routing-table"`
+	DampenedRouteNumber          *uint32 `path:"dampened-route-number" module:"huawei-bgp-routing-table"`
+	DifferentOriginAsRouteNumber *uint32 `path:"different-origin-as-route-number" module:"huawei-bgp-routing-table"`
+	TotalNumber                  *uint32 `path:"total-number" module:"huawei-bgp-routing-table"`
+	VpnName                      *string `path:"vpn-name" module:"huawei-bgp-routing-table"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_Statistics_Statistic implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_Statistics_Statistic) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_Statistics_Statistic struct, which is a YANG list entry.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_Statistics_Statistic) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.VpnName == nil {
+		return nil, fmt.Errorf("nil value for key VpnName")
+	}
+
+	return map[string]interface{}{
+		"vpn-name": *t.VpnName,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_Statistics_Statistic) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_Statistics_Statistic"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_Statistics_Statistic) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_Statistics_Statistic) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_Statistics_Statistic.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast_Statistics_Statistic) ΛBelongingModule() string {
+	return "huawei-bgp-routing-table"
+}
+
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn represents the /huawei-bgp/bgp/base-process/bgp-route/ipv4-vpn YANG schema element.
+type HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn struct {
+	PeerAdvertiseRoutes     *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerAdvertiseRoutes     `path:"peer-advertise-routes" module:"huawei-bgp-routing-table"`
+	PeerReceiveActiveRoutes *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerReceiveActiveRoutes `path:"peer-receive-active-routes" module:"huawei-bgp-routing-table"`
+	PeerReceiveRoutes       *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerReceiveRoutes       `path:"peer-receive-routes" module:"huawei-bgp-routing-table"`
+	Routes                  *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_Routes                  `path:"routes" module:"huawei-bgp-routing-table"`
+	Statistic               *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_Statistic               `path:"statistic" module:"huawei-bgp-routing-table"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn) ΛBelongingModule() string {
+	return "huawei-bgp-routing-table"
+}
+
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerAdvertiseRoutes represents the /huawei-bgp/bgp/base-process/bgp-route/ipv4-vpn/peer-advertise-routes YANG schema element.
+type HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerAdvertiseRoutes struct {
+	PeerAdvertiseRoute map[HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerAdvertiseRoutes_PeerAdvertiseRoute_Key]*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerAdvertiseRoutes_PeerAdvertiseRoute `path:"peer-advertise-route" module:"huawei-bgp-routing-table"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerAdvertiseRoutes implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerAdvertiseRoutes) IsYANGGoStruct() {}
+
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerAdvertiseRoutes_PeerAdvertiseRoute_Key represents the key for list PeerAdvertiseRoute of element /huawei-bgp/bgp/base-process/bgp-route/ipv4-vpn/peer-advertise-routes.
+type HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerAdvertiseRoutes_PeerAdvertiseRoute_Key struct {
+	VpnName            string      `path:"vpn-name"`
+	RemotePeerAddress  string      `path:"remote-peer-address"`
+	RouteDistinguisher string      `path:"route-distinguisher"`
+	Prefix             string      `path:"prefix"`
+	MaskLength         uint8       `path:"mask-length"`
+	RouteType          interface{} `path:"route-type"`
+	ImTableId          uint32      `path:"im-table-id"`
+	From               string      `path:"from"`
+	PathId             string      `path:"path-id"`
+}
+
+// IsYANGGoKeyStruct ensures that HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerAdvertiseRoutes_PeerAdvertiseRoute_Key partially implements the
+// yang.GoKeyStruct interface. This allows functions that need to
+// handle this key struct to identify it as being generated by gogen.
+func (HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerAdvertiseRoutes_PeerAdvertiseRoute_Key) IsYANGGoKeyStruct() {
+}
+
+// ΛListKeyMap returns the values of the HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerAdvertiseRoutes_PeerAdvertiseRoute_Key key struct.
+func (t HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerAdvertiseRoutes_PeerAdvertiseRoute_Key) ΛListKeyMap() (map[string]interface{}, error) {
+	return map[string]interface{}{
+		"vpn-name":            t.VpnName,
+		"remote-peer-address": t.RemotePeerAddress,
+		"route-distinguisher": t.RouteDistinguisher,
+		"prefix":              t.Prefix,
+		"mask-length":         t.MaskLength,
+		"route-type":          t.RouteType,
+		"im-table-id":         t.ImTableId,
+		"from":                t.From,
+		"path-id":             t.PathId,
+	}, nil
+}
+
+// NewPeerAdvertiseRoute creates a new entry in the PeerAdvertiseRoute list of the
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerAdvertiseRoutes struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerAdvertiseRoutes) NewPeerAdvertiseRoute(VpnName string, RemotePeerAddress string, RouteDistinguisher string, Prefix string, MaskLength uint8, RouteType interface{}, ImTableId uint32, From string, PathId string) (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerAdvertiseRoutes_PeerAdvertiseRoute, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.PeerAdvertiseRoute == nil {
+		t.PeerAdvertiseRoute = make(map[HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerAdvertiseRoutes_PeerAdvertiseRoute_Key]*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerAdvertiseRoutes_PeerAdvertiseRoute)
+	}
+
+	key := HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerAdvertiseRoutes_PeerAdvertiseRoute_Key{
+		VpnName:            VpnName,
+		RemotePeerAddress:  RemotePeerAddress,
+		RouteDistinguisher: RouteDistinguisher,
+		Prefix:             Prefix,
+		MaskLength:         MaskLength,
+		RouteType:          RouteType,
+		ImTableId:          ImTableId,
+		From:               From,
+		PathId:             PathId,
+	}
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.PeerAdvertiseRoute[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list PeerAdvertiseRoute", key)
+	}
+
+	t.PeerAdvertiseRoute[key] = &HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerAdvertiseRoutes_PeerAdvertiseRoute{
+		VpnName:            &VpnName,
+		RemotePeerAddress:  &RemotePeerAddress,
+		RouteDistinguisher: &RouteDistinguisher,
+		Prefix:             &Prefix,
+		MaskLength:         &MaskLength,
+		RouteType:          RouteType,
+		ImTableId:          &ImTableId,
+		From:               &From,
+		PathId:             &PathId,
+	}
+
+	return t.PeerAdvertiseRoute[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerAdvertiseRoutes) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerAdvertiseRoutes"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerAdvertiseRoutes) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerAdvertiseRoutes) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerAdvertiseRoutes.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerAdvertiseRoutes) ΛBelongingModule() string {
+	return "huawei-bgp-routing-table"
+}
+
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerAdvertiseRoutes_PeerAdvertiseRoute represents the /huawei-bgp/bgp/base-process/bgp-route/ipv4-vpn/peer-advertise-routes/peer-advertise-route YANG schema element.
+type HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerAdvertiseRoutes_PeerAdvertiseRoute struct {
+	AdvertiseNexthop           *string                               `path:"advertise-nexthop" module:"huawei-bgp-routing-table"`
+	AggregatorAs               *string                               `path:"aggregator-as" module:"huawei-bgp-routing-table"`
+	AggregatorId               *string                               `path:"aggregator-id" module:"huawei-bgp-routing-table"`
+	Aigp                       *uint64                               `path:"aigp" module:"huawei-bgp-routing-table"`
+	AtomicAggregate            *bool                                 `path:"atomic-aggregate" module:"huawei-bgp-routing-table"`
+	AttributeSet               *string                               `path:"attribute-set" module:"huawei-bgp-routing-table"`
+	ClusterList                *string                               `path:"cluster-list" module:"huawei-bgp-routing-table"`
+	Community                  *string                               `path:"community" module:"huawei-bgp-routing-table"`
+	ExtCommunity               *string                               `path:"ext-community" module:"huawei-bgp-routing-table"`
+	ExternalFlags              interface{}                           `path:"external-flags" module:"huawei-bgp-routing-table"`
+	FlagString                 *string                               `path:"flag-string" module:"huawei-bgp-routing-table"`
+	From                       *string                               `path:"from" module:"huawei-bgp-routing-table"`
+	GatewayIp                  *string                               `path:"gateway-ip" module:"huawei-bgp-routing-table"`
+	ImTableId                  *uint32                               `path:"im-table-id" module:"huawei-bgp-routing-table"`
+	InLabel                    *uint32                               `path:"in-label" module:"huawei-bgp-routing-table"`
+	InterfaceName              *string                               `path:"interface-name" module:"huawei-bgp-routing-table"`
+	IteratedVpn                *string                               `path:"iterated-vpn" module:"huawei-bgp-routing-table"`
+	LargeCommunity             *string                               `path:"large-community" module:"huawei-bgp-routing-table"`
+	LocalPreference            *uint32                               `path:"local-preference" module:"huawei-bgp-routing-table"`
+	MaskLength                 *uint8                                `path:"mask-length" module:"huawei-bgp-routing-table"`
+	Med                        *uint32                               `path:"med" module:"huawei-bgp-routing-table"`
+	Nexthop                    *string                               `path:"nexthop" module:"huawei-bgp-routing-table"`
+	Origin                     E_HuaweiBgpRoutingTable_BgpOriginType `path:"origin" module:"huawei-bgp-routing-table"`
+	Originator                 *string                               `path:"originator" module:"huawei-bgp-routing-table"`
+	OutLabel                   *uint32                               `path:"out-label" module:"huawei-bgp-routing-table"`
+	PathAs                     *string                               `path:"path-as" module:"huawei-bgp-routing-table"`
+	PathId                     *string                               `path:"path-id" module:"huawei-bgp-routing-table"`
+	Preference                 *uint8                                `path:"preference" module:"huawei-bgp-routing-table"`
+	PreferredValue             *uint32                               `path:"preferred-value" module:"huawei-bgp-routing-table"`
+	Prefix                     *string                               `path:"prefix" module:"huawei-bgp-routing-table"`
+	PrefixSid                  *string                               `path:"prefix-sid" module:"huawei-bgp-routing-table"`
+	RelayNexthop               *string                               `path:"relay-nexthop" module:"huawei-bgp-routing-table"`
+	RelayTunnelName            *string                               `path:"relay-tunnel-name" module:"huawei-bgp-routing-table"`
+	RemoteNexthopMacAddress    *string                               `path:"remote-nexthop-mac-address" module:"huawei-bgp-routing-table"`
+	RemoteNexthopTunnelAddress *string                               `path:"remote-nexthop-tunnel-address" module:"huawei-bgp-routing-table"`
+	RemoteNexthopVni           *uint32                               `path:"remote-nexthop-vni" module:"huawei-bgp-routing-table"`
+	RemotePeerAddress          *string                               `path:"remote-peer-address" module:"huawei-bgp-routing-table"`
+	RemoteRouteId              *string                               `path:"remote-route-id" module:"huawei-bgp-routing-table"`
+	RouteDistinguisher         *string                               `path:"route-distinguisher" module:"huawei-bgp-routing-table"`
+	RouteType                  interface{}                           `path:"route-type" module:"huawei-bgp-routing-table"`
+	SendingPeers               *string                               `path:"sending-peers" module:"huawei-bgp-routing-table"`
+	Time                       *uint32                               `path:"time" module:"huawei-bgp-routing-table"`
+	VpnName                    *string                               `path:"vpn-name" module:"huawei-bgp-routing-table"`
+	WorseReason                *string                               `path:"worse-reason" module:"huawei-bgp-routing-table"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerAdvertiseRoutes_PeerAdvertiseRoute implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerAdvertiseRoutes_PeerAdvertiseRoute) IsYANGGoStruct() {
+}
+
+// ΛListKeyMap returns the keys of the HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerAdvertiseRoutes_PeerAdvertiseRoute struct, which is a YANG list entry.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerAdvertiseRoutes_PeerAdvertiseRoute) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.From == nil {
+		return nil, fmt.Errorf("nil value for key From")
+	}
+
+	if t.ImTableId == nil {
+		return nil, fmt.Errorf("nil value for key ImTableId")
+	}
+
+	if t.MaskLength == nil {
+		return nil, fmt.Errorf("nil value for key MaskLength")
+	}
+
+	if t.PathId == nil {
+		return nil, fmt.Errorf("nil value for key PathId")
+	}
+
+	if t.Prefix == nil {
+		return nil, fmt.Errorf("nil value for key Prefix")
+	}
+
+	if t.RemotePeerAddress == nil {
+		return nil, fmt.Errorf("nil value for key RemotePeerAddress")
+	}
+
+	if t.RouteDistinguisher == nil {
+		return nil, fmt.Errorf("nil value for key RouteDistinguisher")
+	}
+
+	if t.VpnName == nil {
+		return nil, fmt.Errorf("nil value for key VpnName")
+	}
+
+	return map[string]interface{}{
+		"from":                *t.From,
+		"im-table-id":         *t.ImTableId,
+		"mask-length":         *t.MaskLength,
+		"path-id":             *t.PathId,
+		"prefix":              *t.Prefix,
+		"remote-peer-address": *t.RemotePeerAddress,
+		"route-distinguisher": *t.RouteDistinguisher,
+		"route-type":          t.RouteType,
+		"vpn-name":            *t.VpnName,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerAdvertiseRoutes_PeerAdvertiseRoute) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerAdvertiseRoutes_PeerAdvertiseRoute"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerAdvertiseRoutes_PeerAdvertiseRoute) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerAdvertiseRoutes_PeerAdvertiseRoute) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerAdvertiseRoutes_PeerAdvertiseRoute.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerAdvertiseRoutes_PeerAdvertiseRoute) ΛBelongingModule() string {
+	return "huawei-bgp-routing-table"
+}
+
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerReceiveActiveRoutes represents the /huawei-bgp/bgp/base-process/bgp-route/ipv4-vpn/peer-receive-active-routes YANG schema element.
+type HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerReceiveActiveRoutes struct {
+	PeerReceiveActiveRoute map[HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerReceiveActiveRoutes_PeerReceiveActiveRoute_Key]*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerReceiveActiveRoutes_PeerReceiveActiveRoute `path:"peer-receive-active-route" module:"huawei-bgp-routing-table"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerReceiveActiveRoutes implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerReceiveActiveRoutes) IsYANGGoStruct() {}
+
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerReceiveActiveRoutes_PeerReceiveActiveRoute_Key represents the key for list PeerReceiveActiveRoute of element /huawei-bgp/bgp/base-process/bgp-route/ipv4-vpn/peer-receive-active-routes.
+type HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerReceiveActiveRoutes_PeerReceiveActiveRoute_Key struct {
+	VpnName            string      `path:"vpn-name"`
+	RemotePeerAddress  string      `path:"remote-peer-address"`
+	RouteDistinguisher string      `path:"route-distinguisher"`
+	Prefix             string      `path:"prefix"`
+	MaskLength         uint8       `path:"mask-length"`
+	RouteType          interface{} `path:"route-type"`
+	ImTableId          uint32      `path:"im-table-id"`
+	From               string      `path:"from"`
+	PathId             string      `path:"path-id"`
+}
+
+// IsYANGGoKeyStruct ensures that HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerReceiveActiveRoutes_PeerReceiveActiveRoute_Key partially implements the
+// yang.GoKeyStruct interface. This allows functions that need to
+// handle this key struct to identify it as being generated by gogen.
+func (HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerReceiveActiveRoutes_PeerReceiveActiveRoute_Key) IsYANGGoKeyStruct() {
+}
+
+// ΛListKeyMap returns the values of the HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerReceiveActiveRoutes_PeerReceiveActiveRoute_Key key struct.
+func (t HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerReceiveActiveRoutes_PeerReceiveActiveRoute_Key) ΛListKeyMap() (map[string]interface{}, error) {
+	return map[string]interface{}{
+		"vpn-name":            t.VpnName,
+		"remote-peer-address": t.RemotePeerAddress,
+		"route-distinguisher": t.RouteDistinguisher,
+		"prefix":              t.Prefix,
+		"mask-length":         t.MaskLength,
+		"route-type":          t.RouteType,
+		"im-table-id":         t.ImTableId,
+		"from":                t.From,
+		"path-id":             t.PathId,
+	}, nil
+}
+
+// NewPeerReceiveActiveRoute creates a new entry in the PeerReceiveActiveRoute list of the
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerReceiveActiveRoutes struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerReceiveActiveRoutes) NewPeerReceiveActiveRoute(VpnName string, RemotePeerAddress string, RouteDistinguisher string, Prefix string, MaskLength uint8, RouteType interface{}, ImTableId uint32, From string, PathId string) (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerReceiveActiveRoutes_PeerReceiveActiveRoute, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.PeerReceiveActiveRoute == nil {
+		t.PeerReceiveActiveRoute = make(map[HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerReceiveActiveRoutes_PeerReceiveActiveRoute_Key]*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerReceiveActiveRoutes_PeerReceiveActiveRoute)
+	}
+
+	key := HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerReceiveActiveRoutes_PeerReceiveActiveRoute_Key{
+		VpnName:            VpnName,
+		RemotePeerAddress:  RemotePeerAddress,
+		RouteDistinguisher: RouteDistinguisher,
+		Prefix:             Prefix,
+		MaskLength:         MaskLength,
+		RouteType:          RouteType,
+		ImTableId:          ImTableId,
+		From:               From,
+		PathId:             PathId,
+	}
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.PeerReceiveActiveRoute[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list PeerReceiveActiveRoute", key)
+	}
+
+	t.PeerReceiveActiveRoute[key] = &HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerReceiveActiveRoutes_PeerReceiveActiveRoute{
+		VpnName:            &VpnName,
+		RemotePeerAddress:  &RemotePeerAddress,
+		RouteDistinguisher: &RouteDistinguisher,
+		Prefix:             &Prefix,
+		MaskLength:         &MaskLength,
+		RouteType:          RouteType,
+		ImTableId:          &ImTableId,
+		From:               &From,
+		PathId:             &PathId,
+	}
+
+	return t.PeerReceiveActiveRoute[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerReceiveActiveRoutes) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerReceiveActiveRoutes"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerReceiveActiveRoutes) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerReceiveActiveRoutes) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerReceiveActiveRoutes.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerReceiveActiveRoutes) ΛBelongingModule() string {
+	return "huawei-bgp-routing-table"
+}
+
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerReceiveActiveRoutes_PeerReceiveActiveRoute represents the /huawei-bgp/bgp/base-process/bgp-route/ipv4-vpn/peer-receive-active-routes/peer-receive-active-route YANG schema element.
+type HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerReceiveActiveRoutes_PeerReceiveActiveRoute struct {
+	AdvertiseNexthop           *string                               `path:"advertise-nexthop" module:"huawei-bgp-routing-table"`
+	AggregatorAs               *string                               `path:"aggregator-as" module:"huawei-bgp-routing-table"`
+	AggregatorId               *string                               `path:"aggregator-id" module:"huawei-bgp-routing-table"`
+	Aigp                       *uint64                               `path:"aigp" module:"huawei-bgp-routing-table"`
+	AtomicAggregate            *bool                                 `path:"atomic-aggregate" module:"huawei-bgp-routing-table"`
+	AttributeSet               *string                               `path:"attribute-set" module:"huawei-bgp-routing-table"`
+	ClusterList                *string                               `path:"cluster-list" module:"huawei-bgp-routing-table"`
+	Community                  *string                               `path:"community" module:"huawei-bgp-routing-table"`
+	ExtCommunity               *string                               `path:"ext-community" module:"huawei-bgp-routing-table"`
+	ExternalFlags              interface{}                           `path:"external-flags" module:"huawei-bgp-routing-table"`
+	FlagString                 *string                               `path:"flag-string" module:"huawei-bgp-routing-table"`
+	From                       *string                               `path:"from" module:"huawei-bgp-routing-table"`
+	GatewayIp                  *string                               `path:"gateway-ip" module:"huawei-bgp-routing-table"`
+	ImTableId                  *uint32                               `path:"im-table-id" module:"huawei-bgp-routing-table"`
+	InLabel                    *uint32                               `path:"in-label" module:"huawei-bgp-routing-table"`
+	InterfaceName              *string                               `path:"interface-name" module:"huawei-bgp-routing-table"`
+	IteratedVpn                *string                               `path:"iterated-vpn" module:"huawei-bgp-routing-table"`
+	LargeCommunity             *string                               `path:"large-community" module:"huawei-bgp-routing-table"`
+	LocalPreference            *uint32                               `path:"local-preference" module:"huawei-bgp-routing-table"`
+	MaskLength                 *uint8                                `path:"mask-length" module:"huawei-bgp-routing-table"`
+	Med                        *uint32                               `path:"med" module:"huawei-bgp-routing-table"`
+	Nexthop                    *string                               `path:"nexthop" module:"huawei-bgp-routing-table"`
+	Origin                     E_HuaweiBgpRoutingTable_BgpOriginType `path:"origin" module:"huawei-bgp-routing-table"`
+	Originator                 *string                               `path:"originator" module:"huawei-bgp-routing-table"`
+	OutLabel                   *uint32                               `path:"out-label" module:"huawei-bgp-routing-table"`
+	PathAs                     *string                               `path:"path-as" module:"huawei-bgp-routing-table"`
+	PathId                     *string                               `path:"path-id" module:"huawei-bgp-routing-table"`
+	Preference                 *uint8                                `path:"preference" module:"huawei-bgp-routing-table"`
+	PreferredValue             *uint32                               `path:"preferred-value" module:"huawei-bgp-routing-table"`
+	Prefix                     *string                               `path:"prefix" module:"huawei-bgp-routing-table"`
+	PrefixSid                  *string                               `path:"prefix-sid" module:"huawei-bgp-routing-table"`
+	RelayNexthop               *string                               `path:"relay-nexthop" module:"huawei-bgp-routing-table"`
+	RelayTunnelName            *string                               `path:"relay-tunnel-name" module:"huawei-bgp-routing-table"`
+	RemoteNexthopMacAddress    *string                               `path:"remote-nexthop-mac-address" module:"huawei-bgp-routing-table"`
+	RemoteNexthopTunnelAddress *string                               `path:"remote-nexthop-tunnel-address" module:"huawei-bgp-routing-table"`
+	RemoteNexthopVni           *uint32                               `path:"remote-nexthop-vni" module:"huawei-bgp-routing-table"`
+	RemotePeerAddress          *string                               `path:"remote-peer-address" module:"huawei-bgp-routing-table"`
+	RemoteRouteId              *string                               `path:"remote-route-id" module:"huawei-bgp-routing-table"`
+	RouteDistinguisher         *string                               `path:"route-distinguisher" module:"huawei-bgp-routing-table"`
+	RouteType                  interface{}                           `path:"route-type" module:"huawei-bgp-routing-table"`
+	SendingPeers               *string                               `path:"sending-peers" module:"huawei-bgp-routing-table"`
+	Time                       *uint32                               `path:"time" module:"huawei-bgp-routing-table"`
+	VpnName                    *string                               `path:"vpn-name" module:"huawei-bgp-routing-table"`
+	WorseReason                *string                               `path:"worse-reason" module:"huawei-bgp-routing-table"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerReceiveActiveRoutes_PeerReceiveActiveRoute implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerReceiveActiveRoutes_PeerReceiveActiveRoute) IsYANGGoStruct() {
+}
+
+// ΛListKeyMap returns the keys of the HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerReceiveActiveRoutes_PeerReceiveActiveRoute struct, which is a YANG list entry.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerReceiveActiveRoutes_PeerReceiveActiveRoute) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.From == nil {
+		return nil, fmt.Errorf("nil value for key From")
+	}
+
+	if t.ImTableId == nil {
+		return nil, fmt.Errorf("nil value for key ImTableId")
+	}
+
+	if t.MaskLength == nil {
+		return nil, fmt.Errorf("nil value for key MaskLength")
+	}
+
+	if t.PathId == nil {
+		return nil, fmt.Errorf("nil value for key PathId")
+	}
+
+	if t.Prefix == nil {
+		return nil, fmt.Errorf("nil value for key Prefix")
+	}
+
+	if t.RemotePeerAddress == nil {
+		return nil, fmt.Errorf("nil value for key RemotePeerAddress")
+	}
+
+	if t.RouteDistinguisher == nil {
+		return nil, fmt.Errorf("nil value for key RouteDistinguisher")
+	}
+
+	if t.VpnName == nil {
+		return nil, fmt.Errorf("nil value for key VpnName")
+	}
+
+	return map[string]interface{}{
+		"from":                *t.From,
+		"im-table-id":         *t.ImTableId,
+		"mask-length":         *t.MaskLength,
+		"path-id":             *t.PathId,
+		"prefix":              *t.Prefix,
+		"remote-peer-address": *t.RemotePeerAddress,
+		"route-distinguisher": *t.RouteDistinguisher,
+		"route-type":          t.RouteType,
+		"vpn-name":            *t.VpnName,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerReceiveActiveRoutes_PeerReceiveActiveRoute) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerReceiveActiveRoutes_PeerReceiveActiveRoute"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerReceiveActiveRoutes_PeerReceiveActiveRoute) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerReceiveActiveRoutes_PeerReceiveActiveRoute) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerReceiveActiveRoutes_PeerReceiveActiveRoute.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerReceiveActiveRoutes_PeerReceiveActiveRoute) ΛBelongingModule() string {
+	return "huawei-bgp-routing-table"
+}
+
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerReceiveRoutes represents the /huawei-bgp/bgp/base-process/bgp-route/ipv4-vpn/peer-receive-routes YANG schema element.
+type HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerReceiveRoutes struct {
+	PeerReceiveRoute map[HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerReceiveRoutes_PeerReceiveRoute_Key]*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerReceiveRoutes_PeerReceiveRoute `path:"peer-receive-route" module:"huawei-bgp-routing-table"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerReceiveRoutes implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerReceiveRoutes) IsYANGGoStruct() {}
+
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerReceiveRoutes_PeerReceiveRoute_Key represents the key for list PeerReceiveRoute of element /huawei-bgp/bgp/base-process/bgp-route/ipv4-vpn/peer-receive-routes.
+type HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerReceiveRoutes_PeerReceiveRoute_Key struct {
+	VpnName            string      `path:"vpn-name"`
+	RemotePeerAddress  string      `path:"remote-peer-address"`
+	RouteDistinguisher string      `path:"route-distinguisher"`
+	Prefix             string      `path:"prefix"`
+	MaskLength         uint8       `path:"mask-length"`
+	RouteType          interface{} `path:"route-type"`
+	ImTableId          uint32      `path:"im-table-id"`
+	From               string      `path:"from"`
+	PathId             string      `path:"path-id"`
+}
+
+// IsYANGGoKeyStruct ensures that HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerReceiveRoutes_PeerReceiveRoute_Key partially implements the
+// yang.GoKeyStruct interface. This allows functions that need to
+// handle this key struct to identify it as being generated by gogen.
+func (HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerReceiveRoutes_PeerReceiveRoute_Key) IsYANGGoKeyStruct() {
+}
+
+// ΛListKeyMap returns the values of the HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerReceiveRoutes_PeerReceiveRoute_Key key struct.
+func (t HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerReceiveRoutes_PeerReceiveRoute_Key) ΛListKeyMap() (map[string]interface{}, error) {
+	return map[string]interface{}{
+		"vpn-name":            t.VpnName,
+		"remote-peer-address": t.RemotePeerAddress,
+		"route-distinguisher": t.RouteDistinguisher,
+		"prefix":              t.Prefix,
+		"mask-length":         t.MaskLength,
+		"route-type":          t.RouteType,
+		"im-table-id":         t.ImTableId,
+		"from":                t.From,
+		"path-id":             t.PathId,
+	}, nil
+}
+
+// NewPeerReceiveRoute creates a new entry in the PeerReceiveRoute list of the
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerReceiveRoutes struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerReceiveRoutes) NewPeerReceiveRoute(VpnName string, RemotePeerAddress string, RouteDistinguisher string, Prefix string, MaskLength uint8, RouteType interface{}, ImTableId uint32, From string, PathId string) (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerReceiveRoutes_PeerReceiveRoute, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.PeerReceiveRoute == nil {
+		t.PeerReceiveRoute = make(map[HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerReceiveRoutes_PeerReceiveRoute_Key]*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerReceiveRoutes_PeerReceiveRoute)
+	}
+
+	key := HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerReceiveRoutes_PeerReceiveRoute_Key{
+		VpnName:            VpnName,
+		RemotePeerAddress:  RemotePeerAddress,
+		RouteDistinguisher: RouteDistinguisher,
+		Prefix:             Prefix,
+		MaskLength:         MaskLength,
+		RouteType:          RouteType,
+		ImTableId:          ImTableId,
+		From:               From,
+		PathId:             PathId,
+	}
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.PeerReceiveRoute[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list PeerReceiveRoute", key)
+	}
+
+	t.PeerReceiveRoute[key] = &HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerReceiveRoutes_PeerReceiveRoute{
+		VpnName:            &VpnName,
+		RemotePeerAddress:  &RemotePeerAddress,
+		RouteDistinguisher: &RouteDistinguisher,
+		Prefix:             &Prefix,
+		MaskLength:         &MaskLength,
+		RouteType:          RouteType,
+		ImTableId:          &ImTableId,
+		From:               &From,
+		PathId:             &PathId,
+	}
+
+	return t.PeerReceiveRoute[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerReceiveRoutes) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerReceiveRoutes"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerReceiveRoutes) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerReceiveRoutes) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerReceiveRoutes.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerReceiveRoutes) ΛBelongingModule() string {
+	return "huawei-bgp-routing-table"
+}
+
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerReceiveRoutes_PeerReceiveRoute represents the /huawei-bgp/bgp/base-process/bgp-route/ipv4-vpn/peer-receive-routes/peer-receive-route YANG schema element.
+type HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerReceiveRoutes_PeerReceiveRoute struct {
+	AdvertiseNexthop           *string                               `path:"advertise-nexthop" module:"huawei-bgp-routing-table"`
+	AggregatorAs               *string                               `path:"aggregator-as" module:"huawei-bgp-routing-table"`
+	AggregatorId               *string                               `path:"aggregator-id" module:"huawei-bgp-routing-table"`
+	Aigp                       *uint64                               `path:"aigp" module:"huawei-bgp-routing-table"`
+	AtomicAggregate            *bool                                 `path:"atomic-aggregate" module:"huawei-bgp-routing-table"`
+	AttributeSet               *string                               `path:"attribute-set" module:"huawei-bgp-routing-table"`
+	ClusterList                *string                               `path:"cluster-list" module:"huawei-bgp-routing-table"`
+	Community                  *string                               `path:"community" module:"huawei-bgp-routing-table"`
+	ExtCommunity               *string                               `path:"ext-community" module:"huawei-bgp-routing-table"`
+	ExternalFlags              interface{}                           `path:"external-flags" module:"huawei-bgp-routing-table"`
+	FlagString                 *string                               `path:"flag-string" module:"huawei-bgp-routing-table"`
+	From                       *string                               `path:"from" module:"huawei-bgp-routing-table"`
+	GatewayIp                  *string                               `path:"gateway-ip" module:"huawei-bgp-routing-table"`
+	ImTableId                  *uint32                               `path:"im-table-id" module:"huawei-bgp-routing-table"`
+	InLabel                    *uint32                               `path:"in-label" module:"huawei-bgp-routing-table"`
+	InterfaceName              *string                               `path:"interface-name" module:"huawei-bgp-routing-table"`
+	IteratedVpn                *string                               `path:"iterated-vpn" module:"huawei-bgp-routing-table"`
+	LargeCommunity             *string                               `path:"large-community" module:"huawei-bgp-routing-table"`
+	LocalPreference            *uint32                               `path:"local-preference" module:"huawei-bgp-routing-table"`
+	MaskLength                 *uint8                                `path:"mask-length" module:"huawei-bgp-routing-table"`
+	Med                        *uint32                               `path:"med" module:"huawei-bgp-routing-table"`
+	Nexthop                    *string                               `path:"nexthop" module:"huawei-bgp-routing-table"`
+	Origin                     E_HuaweiBgpRoutingTable_BgpOriginType `path:"origin" module:"huawei-bgp-routing-table"`
+	Originator                 *string                               `path:"originator" module:"huawei-bgp-routing-table"`
+	OutLabel                   *uint32                               `path:"out-label" module:"huawei-bgp-routing-table"`
+	PathAs                     *string                               `path:"path-as" module:"huawei-bgp-routing-table"`
+	PathId                     *string                               `path:"path-id" module:"huawei-bgp-routing-table"`
+	Preference                 *uint8                                `path:"preference" module:"huawei-bgp-routing-table"`
+	PreferredValue             *uint32                               `path:"preferred-value" module:"huawei-bgp-routing-table"`
+	Prefix                     *string                               `path:"prefix" module:"huawei-bgp-routing-table"`
+	PrefixSid                  *string                               `path:"prefix-sid" module:"huawei-bgp-routing-table"`
+	RelayNexthop               *string                               `path:"relay-nexthop" module:"huawei-bgp-routing-table"`
+	RelayTunnelName            *string                               `path:"relay-tunnel-name" module:"huawei-bgp-routing-table"`
+	RemoteNexthopMacAddress    *string                               `path:"remote-nexthop-mac-address" module:"huawei-bgp-routing-table"`
+	RemoteNexthopTunnelAddress *string                               `path:"remote-nexthop-tunnel-address" module:"huawei-bgp-routing-table"`
+	RemoteNexthopVni           *uint32                               `path:"remote-nexthop-vni" module:"huawei-bgp-routing-table"`
+	RemotePeerAddress          *string                               `path:"remote-peer-address" module:"huawei-bgp-routing-table"`
+	RemoteRouteId              *string                               `path:"remote-route-id" module:"huawei-bgp-routing-table"`
+	RouteDistinguisher         *string                               `path:"route-distinguisher" module:"huawei-bgp-routing-table"`
+	RouteType                  interface{}                           `path:"route-type" module:"huawei-bgp-routing-table"`
+	SendingPeers               *string                               `path:"sending-peers" module:"huawei-bgp-routing-table"`
+	Time                       *uint32                               `path:"time" module:"huawei-bgp-routing-table"`
+	VpnName                    *string                               `path:"vpn-name" module:"huawei-bgp-routing-table"`
+	WorseReason                *string                               `path:"worse-reason" module:"huawei-bgp-routing-table"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerReceiveRoutes_PeerReceiveRoute implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerReceiveRoutes_PeerReceiveRoute) IsYANGGoStruct() {
+}
+
+// ΛListKeyMap returns the keys of the HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerReceiveRoutes_PeerReceiveRoute struct, which is a YANG list entry.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerReceiveRoutes_PeerReceiveRoute) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.From == nil {
+		return nil, fmt.Errorf("nil value for key From")
+	}
+
+	if t.ImTableId == nil {
+		return nil, fmt.Errorf("nil value for key ImTableId")
+	}
+
+	if t.MaskLength == nil {
+		return nil, fmt.Errorf("nil value for key MaskLength")
+	}
+
+	if t.PathId == nil {
+		return nil, fmt.Errorf("nil value for key PathId")
+	}
+
+	if t.Prefix == nil {
+		return nil, fmt.Errorf("nil value for key Prefix")
+	}
+
+	if t.RemotePeerAddress == nil {
+		return nil, fmt.Errorf("nil value for key RemotePeerAddress")
+	}
+
+	if t.RouteDistinguisher == nil {
+		return nil, fmt.Errorf("nil value for key RouteDistinguisher")
+	}
+
+	if t.VpnName == nil {
+		return nil, fmt.Errorf("nil value for key VpnName")
+	}
+
+	return map[string]interface{}{
+		"from":                *t.From,
+		"im-table-id":         *t.ImTableId,
+		"mask-length":         *t.MaskLength,
+		"path-id":             *t.PathId,
+		"prefix":              *t.Prefix,
+		"remote-peer-address": *t.RemotePeerAddress,
+		"route-distinguisher": *t.RouteDistinguisher,
+		"route-type":          t.RouteType,
+		"vpn-name":            *t.VpnName,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerReceiveRoutes_PeerReceiveRoute) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerReceiveRoutes_PeerReceiveRoute"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerReceiveRoutes_PeerReceiveRoute) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerReceiveRoutes_PeerReceiveRoute) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerReceiveRoutes_PeerReceiveRoute.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_PeerReceiveRoutes_PeerReceiveRoute) ΛBelongingModule() string {
+	return "huawei-bgp-routing-table"
+}
+
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_Routes represents the /huawei-bgp/bgp/base-process/bgp-route/ipv4-vpn/routes YANG schema element.
+type HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_Routes struct {
+	Route map[HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_Routes_Route_Key]*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_Routes_Route `path:"route" module:"huawei-bgp-routing-table"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_Routes implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_Routes) IsYANGGoStruct() {}
+
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_Routes_Route_Key represents the key for list Route of element /huawei-bgp/bgp/base-process/bgp-route/ipv4-vpn/routes.
+type HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_Routes_Route_Key struct {
+	VpnName            string      `path:"vpn-name"`
+	RouteDistinguisher string      `path:"route-distinguisher"`
+	Prefix             string      `path:"prefix"`
+	MaskLength         uint8       `path:"mask-length"`
+	RouteType          interface{} `path:"route-type"`
+	ImTableId          uint32      `path:"im-table-id"`
+	From               string      `path:"from"`
+	PathId             string      `path:"path-id"`
+}
+
+// IsYANGGoKeyStruct ensures that HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_Routes_Route_Key partially implements the
+// yang.GoKeyStruct interface. This allows functions that need to
+// handle this key struct to identify it as being generated by gogen.
+func (HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_Routes_Route_Key) IsYANGGoKeyStruct() {}
+
+// ΛListKeyMap returns the values of the HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_Routes_Route_Key key struct.
+func (t HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_Routes_Route_Key) ΛListKeyMap() (map[string]interface{}, error) {
+	return map[string]interface{}{
+		"vpn-name":            t.VpnName,
+		"route-distinguisher": t.RouteDistinguisher,
+		"prefix":              t.Prefix,
+		"mask-length":         t.MaskLength,
+		"route-type":          t.RouteType,
+		"im-table-id":         t.ImTableId,
+		"from":                t.From,
+		"path-id":             t.PathId,
+	}, nil
+}
+
+// NewRoute creates a new entry in the Route list of the
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_Routes struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_Routes) NewRoute(VpnName string, RouteDistinguisher string, Prefix string, MaskLength uint8, RouteType interface{}, ImTableId uint32, From string, PathId string) (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_Routes_Route, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.Route == nil {
+		t.Route = make(map[HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_Routes_Route_Key]*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_Routes_Route)
+	}
+
+	key := HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_Routes_Route_Key{
+		VpnName:            VpnName,
+		RouteDistinguisher: RouteDistinguisher,
+		Prefix:             Prefix,
+		MaskLength:         MaskLength,
+		RouteType:          RouteType,
+		ImTableId:          ImTableId,
+		From:               From,
+		PathId:             PathId,
+	}
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.Route[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Route", key)
+	}
+
+	t.Route[key] = &HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_Routes_Route{
+		VpnName:            &VpnName,
+		RouteDistinguisher: &RouteDistinguisher,
+		Prefix:             &Prefix,
+		MaskLength:         &MaskLength,
+		RouteType:          RouteType,
+		ImTableId:          &ImTableId,
+		From:               &From,
+		PathId:             &PathId,
+	}
+
+	return t.Route[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_Routes) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_Routes"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_Routes) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_Routes) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_Routes.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_Routes) ΛBelongingModule() string {
+	return "huawei-bgp-routing-table"
+}
+
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_Routes_Route represents the /huawei-bgp/bgp/base-process/bgp-route/ipv4-vpn/routes/route YANG schema element.
+type HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_Routes_Route struct {
+	AdvertiseNexthop           *string                               `path:"advertise-nexthop" module:"huawei-bgp-routing-table"`
+	AggregatorAs               *string                               `path:"aggregator-as" module:"huawei-bgp-routing-table"`
+	AggregatorId               *string                               `path:"aggregator-id" module:"huawei-bgp-routing-table"`
+	Aigp                       *uint64                               `path:"aigp" module:"huawei-bgp-routing-table"`
+	AtomicAggregate            *bool                                 `path:"atomic-aggregate" module:"huawei-bgp-routing-table"`
+	AttributeSet               *string                               `path:"attribute-set" module:"huawei-bgp-routing-table"`
+	ClusterList                *string                               `path:"cluster-list" module:"huawei-bgp-routing-table"`
+	Community                  *string                               `path:"community" module:"huawei-bgp-routing-table"`
+	ExtCommunity               *string                               `path:"ext-community" module:"huawei-bgp-routing-table"`
+	ExternalFlags              interface{}                           `path:"external-flags" module:"huawei-bgp-routing-table"`
+	FlagString                 *string                               `path:"flag-string" module:"huawei-bgp-routing-table"`
+	From                       *string                               `path:"from" module:"huawei-bgp-routing-table"`
+	GatewayIp                  *string                               `path:"gateway-ip" module:"huawei-bgp-routing-table"`
+	ImTableId                  *uint32                               `path:"im-table-id" module:"huawei-bgp-routing-table"`
+	InLabel                    *uint32                               `path:"in-label" module:"huawei-bgp-routing-table"`
+	InterfaceName              *string                               `path:"interface-name" module:"huawei-bgp-routing-table"`
+	IteratedVpn                *string                               `path:"iterated-vpn" module:"huawei-bgp-routing-table"`
+	LargeCommunity             *string                               `path:"large-community" module:"huawei-bgp-routing-table"`
+	LocalPreference            *uint32                               `path:"local-preference" module:"huawei-bgp-routing-table"`
+	MaskLength                 *uint8                                `path:"mask-length" module:"huawei-bgp-routing-table"`
+	Med                        *uint32                               `path:"med" module:"huawei-bgp-routing-table"`
+	Nexthop                    *string                               `path:"nexthop" module:"huawei-bgp-routing-table"`
+	Origin                     E_HuaweiBgpRoutingTable_BgpOriginType `path:"origin" module:"huawei-bgp-routing-table"`
+	Originator                 *string                               `path:"originator" module:"huawei-bgp-routing-table"`
+	OutLabel                   *uint32                               `path:"out-label" module:"huawei-bgp-routing-table"`
+	PathAs                     *string                               `path:"path-as" module:"huawei-bgp-routing-table"`
+	PathId                     *string                               `path:"path-id" module:"huawei-bgp-routing-table"`
+	Preference                 *uint8                                `path:"preference" module:"huawei-bgp-routing-table"`
+	PreferredValue             *uint32                               `path:"preferred-value" module:"huawei-bgp-routing-table"`
+	Prefix                     *string                               `path:"prefix" module:"huawei-bgp-routing-table"`
+	PrefixSid                  *string                               `path:"prefix-sid" module:"huawei-bgp-routing-table"`
+	RelayNexthop               *string                               `path:"relay-nexthop" module:"huawei-bgp-routing-table"`
+	RelayTunnelName            *string                               `path:"relay-tunnel-name" module:"huawei-bgp-routing-table"`
+	RemoteNexthopMacAddress    *string                               `path:"remote-nexthop-mac-address" module:"huawei-bgp-routing-table"`
+	RemoteNexthopTunnelAddress *string                               `path:"remote-nexthop-tunnel-address" module:"huawei-bgp-routing-table"`
+	RemoteNexthopVni           *uint32                               `path:"remote-nexthop-vni" module:"huawei-bgp-routing-table"`
+	RemoteRouteId              *string                               `path:"remote-route-id" module:"huawei-bgp-routing-table"`
+	RouteDistinguisher         *string                               `path:"route-distinguisher" module:"huawei-bgp-routing-table"`
+	RouteType                  interface{}                           `path:"route-type" module:"huawei-bgp-routing-table"`
+	SendingPeers               *string                               `path:"sending-peers" module:"huawei-bgp-routing-table"`
+	Time                       *uint32                               `path:"time" module:"huawei-bgp-routing-table"`
+	VpnName                    *string                               `path:"vpn-name" module:"huawei-bgp-routing-table"`
+	WorseReason                *string                               `path:"worse-reason" module:"huawei-bgp-routing-table"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_Routes_Route implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_Routes_Route) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_Routes_Route struct, which is a YANG list entry.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_Routes_Route) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.From == nil {
+		return nil, fmt.Errorf("nil value for key From")
+	}
+
+	if t.ImTableId == nil {
+		return nil, fmt.Errorf("nil value for key ImTableId")
+	}
+
+	if t.MaskLength == nil {
+		return nil, fmt.Errorf("nil value for key MaskLength")
+	}
+
+	if t.PathId == nil {
+		return nil, fmt.Errorf("nil value for key PathId")
+	}
+
+	if t.Prefix == nil {
+		return nil, fmt.Errorf("nil value for key Prefix")
+	}
+
+	if t.RouteDistinguisher == nil {
+		return nil, fmt.Errorf("nil value for key RouteDistinguisher")
+	}
+
+	if t.VpnName == nil {
+		return nil, fmt.Errorf("nil value for key VpnName")
+	}
+
+	return map[string]interface{}{
+		"from":                *t.From,
+		"im-table-id":         *t.ImTableId,
+		"mask-length":         *t.MaskLength,
+		"path-id":             *t.PathId,
+		"prefix":              *t.Prefix,
+		"route-distinguisher": *t.RouteDistinguisher,
+		"route-type":          t.RouteType,
+		"vpn-name":            *t.VpnName,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_Routes_Route) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_Routes_Route"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_Routes_Route) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_Routes_Route) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_Routes_Route.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_Routes_Route) ΛBelongingModule() string {
+	return "huawei-bgp-routing-table"
+}
+
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_Statistic represents the /huawei-bgp/bgp/base-process/bgp-route/ipv4-vpn/statistic YANG schema element.
+type HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_Statistic struct {
+	ActiveRouteNumber            *uint32 `path:"active-route-number" module:"huawei-bgp-routing-table"`
+	AddPathRouteNumber           *uint32 `path:"add-path-route-number" module:"huawei-bgp-routing-table"`
+	BestExternalRouteNumber      *uint32 `path:"best-external-route-number" module:"huawei-bgp-routing-table"`
+	BestRouteNumber              *uint32 `path:"best-route-number" module:"huawei-bgp-routing-table"`
+	CidrRouteNumber              *uint32 `path:"cidr-route-number" module:"huawei-bgp-routing-table"`
+	CommunityRouteNumber         *uint32 `path:"community-route-number" module:"huawei-bgp-routing-table"`
+	DampenedRouteNumber          *uint32 `path:"dampened-route-number" module:"huawei-bgp-routing-table"`
+	DifferentOriginAsRouteNumber *uint32 `path:"different-origin-as-route-number" module:"huawei-bgp-routing-table"`
+	TotalNumber                  *uint32 `path:"total-number" module:"huawei-bgp-routing-table"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_Statistic implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_Statistic) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_Statistic) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_Statistic"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_Statistic) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_Statistic) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_Statistic.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn_Statistic) ΛBelongingModule() string {
+	return "huawei-bgp-routing-table"
+}
+
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast represents the /huawei-bgp/bgp/base-process/bgp-route/ipv6-unicast YANG schema element.
+type HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast struct {
+	PeerAdvertiseRoutes     *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerAdvertiseRoutes     `path:"peer-advertise-routes" module:"huawei-bgp-routing-table"`
+	PeerReceiveActiveRoutes *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerReceiveActiveRoutes `path:"peer-receive-active-routes" module:"huawei-bgp-routing-table"`
+	PeerReceiveRoutes       *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerReceiveRoutes       `path:"peer-receive-routes" module:"huawei-bgp-routing-table"`
+	Routes                  *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_Routes                  `path:"routes" module:"huawei-bgp-routing-table"`
+	Statistics              *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_Statistics              `path:"statistics" module:"huawei-bgp-routing-table"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast) ΛBelongingModule() string {
+	return "huawei-bgp-routing-table"
+}
+
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerAdvertiseRoutes represents the /huawei-bgp/bgp/base-process/bgp-route/ipv6-unicast/peer-advertise-routes YANG schema element.
+type HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerAdvertiseRoutes struct {
+	PeerAdvertiseRoute map[HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerAdvertiseRoutes_PeerAdvertiseRoute_Key]*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerAdvertiseRoutes_PeerAdvertiseRoute `path:"peer-advertise-route" module:"huawei-bgp-routing-table"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerAdvertiseRoutes implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerAdvertiseRoutes) IsYANGGoStruct() {}
+
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerAdvertiseRoutes_PeerAdvertiseRoute_Key represents the key for list PeerAdvertiseRoute of element /huawei-bgp/bgp/base-process/bgp-route/ipv6-unicast/peer-advertise-routes.
+type HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerAdvertiseRoutes_PeerAdvertiseRoute_Key struct {
+	VpnName            string      `path:"vpn-name"`
+	RemotePeerAddress  string      `path:"remote-peer-address"`
+	RouteDistinguisher string      `path:"route-distinguisher"`
+	Prefix             string      `path:"prefix"`
+	MaskLength         uint8       `path:"mask-length"`
+	RouteType          interface{} `path:"route-type"`
+	ImTableId          uint32      `path:"im-table-id"`
+	From               string      `path:"from"`
+	PathId             string      `path:"path-id"`
+}
+
+// IsYANGGoKeyStruct ensures that HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerAdvertiseRoutes_PeerAdvertiseRoute_Key partially implements the
+// yang.GoKeyStruct interface. This allows functions that need to
+// handle this key struct to identify it as being generated by gogen.
+func (HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerAdvertiseRoutes_PeerAdvertiseRoute_Key) IsYANGGoKeyStruct() {
+}
+
+// ΛListKeyMap returns the values of the HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerAdvertiseRoutes_PeerAdvertiseRoute_Key key struct.
+func (t HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerAdvertiseRoutes_PeerAdvertiseRoute_Key) ΛListKeyMap() (map[string]interface{}, error) {
+	return map[string]interface{}{
+		"vpn-name":            t.VpnName,
+		"remote-peer-address": t.RemotePeerAddress,
+		"route-distinguisher": t.RouteDistinguisher,
+		"prefix":              t.Prefix,
+		"mask-length":         t.MaskLength,
+		"route-type":          t.RouteType,
+		"im-table-id":         t.ImTableId,
+		"from":                t.From,
+		"path-id":             t.PathId,
+	}, nil
+}
+
+// NewPeerAdvertiseRoute creates a new entry in the PeerAdvertiseRoute list of the
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerAdvertiseRoutes struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerAdvertiseRoutes) NewPeerAdvertiseRoute(VpnName string, RemotePeerAddress string, RouteDistinguisher string, Prefix string, MaskLength uint8, RouteType interface{}, ImTableId uint32, From string, PathId string) (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerAdvertiseRoutes_PeerAdvertiseRoute, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.PeerAdvertiseRoute == nil {
+		t.PeerAdvertiseRoute = make(map[HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerAdvertiseRoutes_PeerAdvertiseRoute_Key]*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerAdvertiseRoutes_PeerAdvertiseRoute)
+	}
+
+	key := HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerAdvertiseRoutes_PeerAdvertiseRoute_Key{
+		VpnName:            VpnName,
+		RemotePeerAddress:  RemotePeerAddress,
+		RouteDistinguisher: RouteDistinguisher,
+		Prefix:             Prefix,
+		MaskLength:         MaskLength,
+		RouteType:          RouteType,
+		ImTableId:          ImTableId,
+		From:               From,
+		PathId:             PathId,
+	}
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.PeerAdvertiseRoute[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list PeerAdvertiseRoute", key)
+	}
+
+	t.PeerAdvertiseRoute[key] = &HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerAdvertiseRoutes_PeerAdvertiseRoute{
+		VpnName:            &VpnName,
+		RemotePeerAddress:  &RemotePeerAddress,
+		RouteDistinguisher: &RouteDistinguisher,
+		Prefix:             &Prefix,
+		MaskLength:         &MaskLength,
+		RouteType:          RouteType,
+		ImTableId:          &ImTableId,
+		From:               &From,
+		PathId:             &PathId,
+	}
+
+	return t.PeerAdvertiseRoute[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerAdvertiseRoutes) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerAdvertiseRoutes"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerAdvertiseRoutes) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerAdvertiseRoutes) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerAdvertiseRoutes.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerAdvertiseRoutes) ΛBelongingModule() string {
+	return "huawei-bgp-routing-table"
+}
+
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerAdvertiseRoutes_PeerAdvertiseRoute represents the /huawei-bgp/bgp/base-process/bgp-route/ipv6-unicast/peer-advertise-routes/peer-advertise-route YANG schema element.
+type HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerAdvertiseRoutes_PeerAdvertiseRoute struct {
+	AdvertiseNexthop           *string                               `path:"advertise-nexthop" module:"huawei-bgp-routing-table"`
+	AggregatorAs               *string                               `path:"aggregator-as" module:"huawei-bgp-routing-table"`
+	AggregatorId               *string                               `path:"aggregator-id" module:"huawei-bgp-routing-table"`
+	Aigp                       *uint64                               `path:"aigp" module:"huawei-bgp-routing-table"`
+	AtomicAggregate            *bool                                 `path:"atomic-aggregate" module:"huawei-bgp-routing-table"`
+	AttributeSet               *string                               `path:"attribute-set" module:"huawei-bgp-routing-table"`
+	ClusterList                *string                               `path:"cluster-list" module:"huawei-bgp-routing-table"`
+	Community                  *string                               `path:"community" module:"huawei-bgp-routing-table"`
+	ExtCommunity               *string                               `path:"ext-community" module:"huawei-bgp-routing-table"`
+	ExternalFlags              interface{}                           `path:"external-flags" module:"huawei-bgp-routing-table"`
+	FlagString                 *string                               `path:"flag-string" module:"huawei-bgp-routing-table"`
+	From                       *string                               `path:"from" module:"huawei-bgp-routing-table"`
+	GatewayIp                  *string                               `path:"gateway-ip" module:"huawei-bgp-routing-table"`
+	ImTableId                  *uint32                               `path:"im-table-id" module:"huawei-bgp-routing-table"`
+	InLabel                    *uint32                               `path:"in-label" module:"huawei-bgp-routing-table"`
+	InterfaceName              *string                               `path:"interface-name" module:"huawei-bgp-routing-table"`
+	IteratedVpn                *string                               `path:"iterated-vpn" module:"huawei-bgp-routing-table"`
+	LargeCommunity             *string                               `path:"large-community" module:"huawei-bgp-routing-table"`
+	LocalPreference            *uint32                               `path:"local-preference" module:"huawei-bgp-routing-table"`
+	MaskLength                 *uint8                                `path:"mask-length" module:"huawei-bgp-routing-table"`
+	Med                        *uint32                               `path:"med" module:"huawei-bgp-routing-table"`
+	Nexthop                    *string                               `path:"nexthop" module:"huawei-bgp-routing-table"`
+	Origin                     E_HuaweiBgpRoutingTable_BgpOriginType `path:"origin" module:"huawei-bgp-routing-table"`
+	Originator                 *string                               `path:"originator" module:"huawei-bgp-routing-table"`
+	OutLabel                   *uint32                               `path:"out-label" module:"huawei-bgp-routing-table"`
+	PathAs                     *string                               `path:"path-as" module:"huawei-bgp-routing-table"`
+	PathId                     *string                               `path:"path-id" module:"huawei-bgp-routing-table"`
+	Preference                 *uint8                                `path:"preference" module:"huawei-bgp-routing-table"`
+	PreferredValue             *uint32                               `path:"preferred-value" module:"huawei-bgp-routing-table"`
+	Prefix                     *string                               `path:"prefix" module:"huawei-bgp-routing-table"`
+	PrefixSid                  *string                               `path:"prefix-sid" module:"huawei-bgp-routing-table"`
+	RelayNexthop               *string                               `path:"relay-nexthop" module:"huawei-bgp-routing-table"`
+	RelayTunnelName            *string                               `path:"relay-tunnel-name" module:"huawei-bgp-routing-table"`
+	RemoteNexthopMacAddress    *string                               `path:"remote-nexthop-mac-address" module:"huawei-bgp-routing-table"`
+	RemoteNexthopTunnelAddress *string                               `path:"remote-nexthop-tunnel-address" module:"huawei-bgp-routing-table"`
+	RemoteNexthopVni           *uint32                               `path:"remote-nexthop-vni" module:"huawei-bgp-routing-table"`
+	RemotePeerAddress          *string                               `path:"remote-peer-address" module:"huawei-bgp-routing-table"`
+	RemoteRouteId              *string                               `path:"remote-route-id" module:"huawei-bgp-routing-table"`
+	RouteDistinguisher         *string                               `path:"route-distinguisher" module:"huawei-bgp-routing-table"`
+	RouteType                  interface{}                           `path:"route-type" module:"huawei-bgp-routing-table"`
+	SendingPeers               *string                               `path:"sending-peers" module:"huawei-bgp-routing-table"`
+	Time                       *uint32                               `path:"time" module:"huawei-bgp-routing-table"`
+	VpnName                    *string                               `path:"vpn-name" module:"huawei-bgp-routing-table"`
+	WorseReason                *string                               `path:"worse-reason" module:"huawei-bgp-routing-table"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerAdvertiseRoutes_PeerAdvertiseRoute implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerAdvertiseRoutes_PeerAdvertiseRoute) IsYANGGoStruct() {
+}
+
+// ΛListKeyMap returns the keys of the HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerAdvertiseRoutes_PeerAdvertiseRoute struct, which is a YANG list entry.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerAdvertiseRoutes_PeerAdvertiseRoute) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.From == nil {
+		return nil, fmt.Errorf("nil value for key From")
+	}
+
+	if t.ImTableId == nil {
+		return nil, fmt.Errorf("nil value for key ImTableId")
+	}
+
+	if t.MaskLength == nil {
+		return nil, fmt.Errorf("nil value for key MaskLength")
+	}
+
+	if t.PathId == nil {
+		return nil, fmt.Errorf("nil value for key PathId")
+	}
+
+	if t.Prefix == nil {
+		return nil, fmt.Errorf("nil value for key Prefix")
+	}
+
+	if t.RemotePeerAddress == nil {
+		return nil, fmt.Errorf("nil value for key RemotePeerAddress")
+	}
+
+	if t.RouteDistinguisher == nil {
+		return nil, fmt.Errorf("nil value for key RouteDistinguisher")
+	}
+
+	if t.VpnName == nil {
+		return nil, fmt.Errorf("nil value for key VpnName")
+	}
+
+	return map[string]interface{}{
+		"from":                *t.From,
+		"im-table-id":         *t.ImTableId,
+		"mask-length":         *t.MaskLength,
+		"path-id":             *t.PathId,
+		"prefix":              *t.Prefix,
+		"remote-peer-address": *t.RemotePeerAddress,
+		"route-distinguisher": *t.RouteDistinguisher,
+		"route-type":          t.RouteType,
+		"vpn-name":            *t.VpnName,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerAdvertiseRoutes_PeerAdvertiseRoute) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerAdvertiseRoutes_PeerAdvertiseRoute"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerAdvertiseRoutes_PeerAdvertiseRoute) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerAdvertiseRoutes_PeerAdvertiseRoute) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerAdvertiseRoutes_PeerAdvertiseRoute.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerAdvertiseRoutes_PeerAdvertiseRoute) ΛBelongingModule() string {
+	return "huawei-bgp-routing-table"
+}
+
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerReceiveActiveRoutes represents the /huawei-bgp/bgp/base-process/bgp-route/ipv6-unicast/peer-receive-active-routes YANG schema element.
+type HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerReceiveActiveRoutes struct {
+	PeerReceiveActiveRoute map[HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerReceiveActiveRoutes_PeerReceiveActiveRoute_Key]*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerReceiveActiveRoutes_PeerReceiveActiveRoute `path:"peer-receive-active-route" module:"huawei-bgp-routing-table"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerReceiveActiveRoutes implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerReceiveActiveRoutes) IsYANGGoStruct() {}
+
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerReceiveActiveRoutes_PeerReceiveActiveRoute_Key represents the key for list PeerReceiveActiveRoute of element /huawei-bgp/bgp/base-process/bgp-route/ipv6-unicast/peer-receive-active-routes.
+type HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerReceiveActiveRoutes_PeerReceiveActiveRoute_Key struct {
+	VpnName            string      `path:"vpn-name"`
+	RemotePeerAddress  string      `path:"remote-peer-address"`
+	RouteDistinguisher string      `path:"route-distinguisher"`
+	Prefix             string      `path:"prefix"`
+	MaskLength         uint8       `path:"mask-length"`
+	RouteType          interface{} `path:"route-type"`
+	ImTableId          uint32      `path:"im-table-id"`
+	From               string      `path:"from"`
+	PathId             string      `path:"path-id"`
+}
+
+// IsYANGGoKeyStruct ensures that HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerReceiveActiveRoutes_PeerReceiveActiveRoute_Key partially implements the
+// yang.GoKeyStruct interface. This allows functions that need to
+// handle this key struct to identify it as being generated by gogen.
+func (HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerReceiveActiveRoutes_PeerReceiveActiveRoute_Key) IsYANGGoKeyStruct() {
+}
+
+// ΛListKeyMap returns the values of the HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerReceiveActiveRoutes_PeerReceiveActiveRoute_Key key struct.
+func (t HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerReceiveActiveRoutes_PeerReceiveActiveRoute_Key) ΛListKeyMap() (map[string]interface{}, error) {
+	return map[string]interface{}{
+		"vpn-name":            t.VpnName,
+		"remote-peer-address": t.RemotePeerAddress,
+		"route-distinguisher": t.RouteDistinguisher,
+		"prefix":              t.Prefix,
+		"mask-length":         t.MaskLength,
+		"route-type":          t.RouteType,
+		"im-table-id":         t.ImTableId,
+		"from":                t.From,
+		"path-id":             t.PathId,
+	}, nil
+}
+
+// NewPeerReceiveActiveRoute creates a new entry in the PeerReceiveActiveRoute list of the
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerReceiveActiveRoutes struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerReceiveActiveRoutes) NewPeerReceiveActiveRoute(VpnName string, RemotePeerAddress string, RouteDistinguisher string, Prefix string, MaskLength uint8, RouteType interface{}, ImTableId uint32, From string, PathId string) (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerReceiveActiveRoutes_PeerReceiveActiveRoute, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.PeerReceiveActiveRoute == nil {
+		t.PeerReceiveActiveRoute = make(map[HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerReceiveActiveRoutes_PeerReceiveActiveRoute_Key]*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerReceiveActiveRoutes_PeerReceiveActiveRoute)
+	}
+
+	key := HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerReceiveActiveRoutes_PeerReceiveActiveRoute_Key{
+		VpnName:            VpnName,
+		RemotePeerAddress:  RemotePeerAddress,
+		RouteDistinguisher: RouteDistinguisher,
+		Prefix:             Prefix,
+		MaskLength:         MaskLength,
+		RouteType:          RouteType,
+		ImTableId:          ImTableId,
+		From:               From,
+		PathId:             PathId,
+	}
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.PeerReceiveActiveRoute[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list PeerReceiveActiveRoute", key)
+	}
+
+	t.PeerReceiveActiveRoute[key] = &HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerReceiveActiveRoutes_PeerReceiveActiveRoute{
+		VpnName:            &VpnName,
+		RemotePeerAddress:  &RemotePeerAddress,
+		RouteDistinguisher: &RouteDistinguisher,
+		Prefix:             &Prefix,
+		MaskLength:         &MaskLength,
+		RouteType:          RouteType,
+		ImTableId:          &ImTableId,
+		From:               &From,
+		PathId:             &PathId,
+	}
+
+	return t.PeerReceiveActiveRoute[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerReceiveActiveRoutes) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerReceiveActiveRoutes"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerReceiveActiveRoutes) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerReceiveActiveRoutes) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerReceiveActiveRoutes.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerReceiveActiveRoutes) ΛBelongingModule() string {
+	return "huawei-bgp-routing-table"
+}
+
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerReceiveActiveRoutes_PeerReceiveActiveRoute represents the /huawei-bgp/bgp/base-process/bgp-route/ipv6-unicast/peer-receive-active-routes/peer-receive-active-route YANG schema element.
+type HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerReceiveActiveRoutes_PeerReceiveActiveRoute struct {
+	AdvertiseNexthop           *string                               `path:"advertise-nexthop" module:"huawei-bgp-routing-table"`
+	AggregatorAs               *string                               `path:"aggregator-as" module:"huawei-bgp-routing-table"`
+	AggregatorId               *string                               `path:"aggregator-id" module:"huawei-bgp-routing-table"`
+	Aigp                       *uint64                               `path:"aigp" module:"huawei-bgp-routing-table"`
+	AtomicAggregate            *bool                                 `path:"atomic-aggregate" module:"huawei-bgp-routing-table"`
+	AttributeSet               *string                               `path:"attribute-set" module:"huawei-bgp-routing-table"`
+	ClusterList                *string                               `path:"cluster-list" module:"huawei-bgp-routing-table"`
+	Community                  *string                               `path:"community" module:"huawei-bgp-routing-table"`
+	ExtCommunity               *string                               `path:"ext-community" module:"huawei-bgp-routing-table"`
+	ExternalFlags              interface{}                           `path:"external-flags" module:"huawei-bgp-routing-table"`
+	FlagString                 *string                               `path:"flag-string" module:"huawei-bgp-routing-table"`
+	From                       *string                               `path:"from" module:"huawei-bgp-routing-table"`
+	GatewayIp                  *string                               `path:"gateway-ip" module:"huawei-bgp-routing-table"`
+	ImTableId                  *uint32                               `path:"im-table-id" module:"huawei-bgp-routing-table"`
+	InLabel                    *uint32                               `path:"in-label" module:"huawei-bgp-routing-table"`
+	InterfaceName              *string                               `path:"interface-name" module:"huawei-bgp-routing-table"`
+	IteratedVpn                *string                               `path:"iterated-vpn" module:"huawei-bgp-routing-table"`
+	LargeCommunity             *string                               `path:"large-community" module:"huawei-bgp-routing-table"`
+	LocalPreference            *uint32                               `path:"local-preference" module:"huawei-bgp-routing-table"`
+	MaskLength                 *uint8                                `path:"mask-length" module:"huawei-bgp-routing-table"`
+	Med                        *uint32                               `path:"med" module:"huawei-bgp-routing-table"`
+	Nexthop                    *string                               `path:"nexthop" module:"huawei-bgp-routing-table"`
+	Origin                     E_HuaweiBgpRoutingTable_BgpOriginType `path:"origin" module:"huawei-bgp-routing-table"`
+	Originator                 *string                               `path:"originator" module:"huawei-bgp-routing-table"`
+	OutLabel                   *uint32                               `path:"out-label" module:"huawei-bgp-routing-table"`
+	PathAs                     *string                               `path:"path-as" module:"huawei-bgp-routing-table"`
+	PathId                     *string                               `path:"path-id" module:"huawei-bgp-routing-table"`
+	Preference                 *uint8                                `path:"preference" module:"huawei-bgp-routing-table"`
+	PreferredValue             *uint32                               `path:"preferred-value" module:"huawei-bgp-routing-table"`
+	Prefix                     *string                               `path:"prefix" module:"huawei-bgp-routing-table"`
+	PrefixSid                  *string                               `path:"prefix-sid" module:"huawei-bgp-routing-table"`
+	RelayNexthop               *string                               `path:"relay-nexthop" module:"huawei-bgp-routing-table"`
+	RelayTunnelName            *string                               `path:"relay-tunnel-name" module:"huawei-bgp-routing-table"`
+	RemoteNexthopMacAddress    *string                               `path:"remote-nexthop-mac-address" module:"huawei-bgp-routing-table"`
+	RemoteNexthopTunnelAddress *string                               `path:"remote-nexthop-tunnel-address" module:"huawei-bgp-routing-table"`
+	RemoteNexthopVni           *uint32                               `path:"remote-nexthop-vni" module:"huawei-bgp-routing-table"`
+	RemotePeerAddress          *string                               `path:"remote-peer-address" module:"huawei-bgp-routing-table"`
+	RemoteRouteId              *string                               `path:"remote-route-id" module:"huawei-bgp-routing-table"`
+	RouteDistinguisher         *string                               `path:"route-distinguisher" module:"huawei-bgp-routing-table"`
+	RouteType                  interface{}                           `path:"route-type" module:"huawei-bgp-routing-table"`
+	SendingPeers               *string                               `path:"sending-peers" module:"huawei-bgp-routing-table"`
+	Time                       *uint32                               `path:"time" module:"huawei-bgp-routing-table"`
+	VpnName                    *string                               `path:"vpn-name" module:"huawei-bgp-routing-table"`
+	WorseReason                *string                               `path:"worse-reason" module:"huawei-bgp-routing-table"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerReceiveActiveRoutes_PeerReceiveActiveRoute implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerReceiveActiveRoutes_PeerReceiveActiveRoute) IsYANGGoStruct() {
+}
+
+// ΛListKeyMap returns the keys of the HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerReceiveActiveRoutes_PeerReceiveActiveRoute struct, which is a YANG list entry.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerReceiveActiveRoutes_PeerReceiveActiveRoute) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.From == nil {
+		return nil, fmt.Errorf("nil value for key From")
+	}
+
+	if t.ImTableId == nil {
+		return nil, fmt.Errorf("nil value for key ImTableId")
+	}
+
+	if t.MaskLength == nil {
+		return nil, fmt.Errorf("nil value for key MaskLength")
+	}
+
+	if t.PathId == nil {
+		return nil, fmt.Errorf("nil value for key PathId")
+	}
+
+	if t.Prefix == nil {
+		return nil, fmt.Errorf("nil value for key Prefix")
+	}
+
+	if t.RemotePeerAddress == nil {
+		return nil, fmt.Errorf("nil value for key RemotePeerAddress")
+	}
+
+	if t.RouteDistinguisher == nil {
+		return nil, fmt.Errorf("nil value for key RouteDistinguisher")
+	}
+
+	if t.VpnName == nil {
+		return nil, fmt.Errorf("nil value for key VpnName")
+	}
+
+	return map[string]interface{}{
+		"from":                *t.From,
+		"im-table-id":         *t.ImTableId,
+		"mask-length":         *t.MaskLength,
+		"path-id":             *t.PathId,
+		"prefix":              *t.Prefix,
+		"remote-peer-address": *t.RemotePeerAddress,
+		"route-distinguisher": *t.RouteDistinguisher,
+		"route-type":          t.RouteType,
+		"vpn-name":            *t.VpnName,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerReceiveActiveRoutes_PeerReceiveActiveRoute) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerReceiveActiveRoutes_PeerReceiveActiveRoute"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerReceiveActiveRoutes_PeerReceiveActiveRoute) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerReceiveActiveRoutes_PeerReceiveActiveRoute) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerReceiveActiveRoutes_PeerReceiveActiveRoute.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerReceiveActiveRoutes_PeerReceiveActiveRoute) ΛBelongingModule() string {
+	return "huawei-bgp-routing-table"
+}
+
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerReceiveRoutes represents the /huawei-bgp/bgp/base-process/bgp-route/ipv6-unicast/peer-receive-routes YANG schema element.
+type HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerReceiveRoutes struct {
+	PeerReceiveRoute map[HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerReceiveRoutes_PeerReceiveRoute_Key]*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerReceiveRoutes_PeerReceiveRoute `path:"peer-receive-route" module:"huawei-bgp-routing-table"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerReceiveRoutes implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerReceiveRoutes) IsYANGGoStruct() {}
+
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerReceiveRoutes_PeerReceiveRoute_Key represents the key for list PeerReceiveRoute of element /huawei-bgp/bgp/base-process/bgp-route/ipv6-unicast/peer-receive-routes.
+type HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerReceiveRoutes_PeerReceiveRoute_Key struct {
+	VpnName            string      `path:"vpn-name"`
+	RemotePeerAddress  string      `path:"remote-peer-address"`
+	RouteDistinguisher string      `path:"route-distinguisher"`
+	Prefix             string      `path:"prefix"`
+	MaskLength         uint8       `path:"mask-length"`
+	RouteType          interface{} `path:"route-type"`
+	ImTableId          uint32      `path:"im-table-id"`
+	From               string      `path:"from"`
+	PathId             string      `path:"path-id"`
+}
+
+// IsYANGGoKeyStruct ensures that HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerReceiveRoutes_PeerReceiveRoute_Key partially implements the
+// yang.GoKeyStruct interface. This allows functions that need to
+// handle this key struct to identify it as being generated by gogen.
+func (HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerReceiveRoutes_PeerReceiveRoute_Key) IsYANGGoKeyStruct() {
+}
+
+// ΛListKeyMap returns the values of the HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerReceiveRoutes_PeerReceiveRoute_Key key struct.
+func (t HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerReceiveRoutes_PeerReceiveRoute_Key) ΛListKeyMap() (map[string]interface{}, error) {
+	return map[string]interface{}{
+		"vpn-name":            t.VpnName,
+		"remote-peer-address": t.RemotePeerAddress,
+		"route-distinguisher": t.RouteDistinguisher,
+		"prefix":              t.Prefix,
+		"mask-length":         t.MaskLength,
+		"route-type":          t.RouteType,
+		"im-table-id":         t.ImTableId,
+		"from":                t.From,
+		"path-id":             t.PathId,
+	}, nil
+}
+
+// NewPeerReceiveRoute creates a new entry in the PeerReceiveRoute list of the
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerReceiveRoutes struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerReceiveRoutes) NewPeerReceiveRoute(VpnName string, RemotePeerAddress string, RouteDistinguisher string, Prefix string, MaskLength uint8, RouteType interface{}, ImTableId uint32, From string, PathId string) (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerReceiveRoutes_PeerReceiveRoute, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.PeerReceiveRoute == nil {
+		t.PeerReceiveRoute = make(map[HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerReceiveRoutes_PeerReceiveRoute_Key]*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerReceiveRoutes_PeerReceiveRoute)
+	}
+
+	key := HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerReceiveRoutes_PeerReceiveRoute_Key{
+		VpnName:            VpnName,
+		RemotePeerAddress:  RemotePeerAddress,
+		RouteDistinguisher: RouteDistinguisher,
+		Prefix:             Prefix,
+		MaskLength:         MaskLength,
+		RouteType:          RouteType,
+		ImTableId:          ImTableId,
+		From:               From,
+		PathId:             PathId,
+	}
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.PeerReceiveRoute[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list PeerReceiveRoute", key)
+	}
+
+	t.PeerReceiveRoute[key] = &HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerReceiveRoutes_PeerReceiveRoute{
+		VpnName:            &VpnName,
+		RemotePeerAddress:  &RemotePeerAddress,
+		RouteDistinguisher: &RouteDistinguisher,
+		Prefix:             &Prefix,
+		MaskLength:         &MaskLength,
+		RouteType:          RouteType,
+		ImTableId:          &ImTableId,
+		From:               &From,
+		PathId:             &PathId,
+	}
+
+	return t.PeerReceiveRoute[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerReceiveRoutes) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerReceiveRoutes"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerReceiveRoutes) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerReceiveRoutes) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerReceiveRoutes.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerReceiveRoutes) ΛBelongingModule() string {
+	return "huawei-bgp-routing-table"
+}
+
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerReceiveRoutes_PeerReceiveRoute represents the /huawei-bgp/bgp/base-process/bgp-route/ipv6-unicast/peer-receive-routes/peer-receive-route YANG schema element.
+type HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerReceiveRoutes_PeerReceiveRoute struct {
+	AdvertiseNexthop           *string                               `path:"advertise-nexthop" module:"huawei-bgp-routing-table"`
+	AggregatorAs               *string                               `path:"aggregator-as" module:"huawei-bgp-routing-table"`
+	AggregatorId               *string                               `path:"aggregator-id" module:"huawei-bgp-routing-table"`
+	Aigp                       *uint64                               `path:"aigp" module:"huawei-bgp-routing-table"`
+	AtomicAggregate            *bool                                 `path:"atomic-aggregate" module:"huawei-bgp-routing-table"`
+	AttributeSet               *string                               `path:"attribute-set" module:"huawei-bgp-routing-table"`
+	ClusterList                *string                               `path:"cluster-list" module:"huawei-bgp-routing-table"`
+	Community                  *string                               `path:"community" module:"huawei-bgp-routing-table"`
+	ExtCommunity               *string                               `path:"ext-community" module:"huawei-bgp-routing-table"`
+	ExternalFlags              interface{}                           `path:"external-flags" module:"huawei-bgp-routing-table"`
+	FlagString                 *string                               `path:"flag-string" module:"huawei-bgp-routing-table"`
+	From                       *string                               `path:"from" module:"huawei-bgp-routing-table"`
+	GatewayIp                  *string                               `path:"gateway-ip" module:"huawei-bgp-routing-table"`
+	ImTableId                  *uint32                               `path:"im-table-id" module:"huawei-bgp-routing-table"`
+	InLabel                    *uint32                               `path:"in-label" module:"huawei-bgp-routing-table"`
+	InterfaceName              *string                               `path:"interface-name" module:"huawei-bgp-routing-table"`
+	IteratedVpn                *string                               `path:"iterated-vpn" module:"huawei-bgp-routing-table"`
+	LargeCommunity             *string                               `path:"large-community" module:"huawei-bgp-routing-table"`
+	LocalPreference            *uint32                               `path:"local-preference" module:"huawei-bgp-routing-table"`
+	MaskLength                 *uint8                                `path:"mask-length" module:"huawei-bgp-routing-table"`
+	Med                        *uint32                               `path:"med" module:"huawei-bgp-routing-table"`
+	Nexthop                    *string                               `path:"nexthop" module:"huawei-bgp-routing-table"`
+	Origin                     E_HuaweiBgpRoutingTable_BgpOriginType `path:"origin" module:"huawei-bgp-routing-table"`
+	Originator                 *string                               `path:"originator" module:"huawei-bgp-routing-table"`
+	OutLabel                   *uint32                               `path:"out-label" module:"huawei-bgp-routing-table"`
+	PathAs                     *string                               `path:"path-as" module:"huawei-bgp-routing-table"`
+	PathId                     *string                               `path:"path-id" module:"huawei-bgp-routing-table"`
+	Preference                 *uint8                                `path:"preference" module:"huawei-bgp-routing-table"`
+	PreferredValue             *uint32                               `path:"preferred-value" module:"huawei-bgp-routing-table"`
+	Prefix                     *string                               `path:"prefix" module:"huawei-bgp-routing-table"`
+	PrefixSid                  *string                               `path:"prefix-sid" module:"huawei-bgp-routing-table"`
+	RelayNexthop               *string                               `path:"relay-nexthop" module:"huawei-bgp-routing-table"`
+	RelayTunnelName            *string                               `path:"relay-tunnel-name" module:"huawei-bgp-routing-table"`
+	RemoteNexthopMacAddress    *string                               `path:"remote-nexthop-mac-address" module:"huawei-bgp-routing-table"`
+	RemoteNexthopTunnelAddress *string                               `path:"remote-nexthop-tunnel-address" module:"huawei-bgp-routing-table"`
+	RemoteNexthopVni           *uint32                               `path:"remote-nexthop-vni" module:"huawei-bgp-routing-table"`
+	RemotePeerAddress          *string                               `path:"remote-peer-address" module:"huawei-bgp-routing-table"`
+	RemoteRouteId              *string                               `path:"remote-route-id" module:"huawei-bgp-routing-table"`
+	RouteDistinguisher         *string                               `path:"route-distinguisher" module:"huawei-bgp-routing-table"`
+	RouteType                  interface{}                           `path:"route-type" module:"huawei-bgp-routing-table"`
+	SendingPeers               *string                               `path:"sending-peers" module:"huawei-bgp-routing-table"`
+	Time                       *uint32                               `path:"time" module:"huawei-bgp-routing-table"`
+	VpnName                    *string                               `path:"vpn-name" module:"huawei-bgp-routing-table"`
+	WorseReason                *string                               `path:"worse-reason" module:"huawei-bgp-routing-table"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerReceiveRoutes_PeerReceiveRoute implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerReceiveRoutes_PeerReceiveRoute) IsYANGGoStruct() {
+}
+
+// ΛListKeyMap returns the keys of the HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerReceiveRoutes_PeerReceiveRoute struct, which is a YANG list entry.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerReceiveRoutes_PeerReceiveRoute) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.From == nil {
+		return nil, fmt.Errorf("nil value for key From")
+	}
+
+	if t.ImTableId == nil {
+		return nil, fmt.Errorf("nil value for key ImTableId")
+	}
+
+	if t.MaskLength == nil {
+		return nil, fmt.Errorf("nil value for key MaskLength")
+	}
+
+	if t.PathId == nil {
+		return nil, fmt.Errorf("nil value for key PathId")
+	}
+
+	if t.Prefix == nil {
+		return nil, fmt.Errorf("nil value for key Prefix")
+	}
+
+	if t.RemotePeerAddress == nil {
+		return nil, fmt.Errorf("nil value for key RemotePeerAddress")
+	}
+
+	if t.RouteDistinguisher == nil {
+		return nil, fmt.Errorf("nil value for key RouteDistinguisher")
+	}
+
+	if t.VpnName == nil {
+		return nil, fmt.Errorf("nil value for key VpnName")
+	}
+
+	return map[string]interface{}{
+		"from":                *t.From,
+		"im-table-id":         *t.ImTableId,
+		"mask-length":         *t.MaskLength,
+		"path-id":             *t.PathId,
+		"prefix":              *t.Prefix,
+		"remote-peer-address": *t.RemotePeerAddress,
+		"route-distinguisher": *t.RouteDistinguisher,
+		"route-type":          t.RouteType,
+		"vpn-name":            *t.VpnName,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerReceiveRoutes_PeerReceiveRoute) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerReceiveRoutes_PeerReceiveRoute"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerReceiveRoutes_PeerReceiveRoute) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerReceiveRoutes_PeerReceiveRoute) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerReceiveRoutes_PeerReceiveRoute.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_PeerReceiveRoutes_PeerReceiveRoute) ΛBelongingModule() string {
+	return "huawei-bgp-routing-table"
+}
+
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_Routes represents the /huawei-bgp/bgp/base-process/bgp-route/ipv6-unicast/routes YANG schema element.
+type HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_Routes struct {
+	Route map[HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_Routes_Route_Key]*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_Routes_Route `path:"route" module:"huawei-bgp-routing-table"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_Routes implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_Routes) IsYANGGoStruct() {}
+
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_Routes_Route_Key represents the key for list Route of element /huawei-bgp/bgp/base-process/bgp-route/ipv6-unicast/routes.
+type HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_Routes_Route_Key struct {
+	VpnName            string      `path:"vpn-name"`
+	RouteDistinguisher string      `path:"route-distinguisher"`
+	Prefix             string      `path:"prefix"`
+	MaskLength         uint8       `path:"mask-length"`
+	RouteType          interface{} `path:"route-type"`
+	ImTableId          uint32      `path:"im-table-id"`
+	From               string      `path:"from"`
+	PathId             string      `path:"path-id"`
+}
+
+// IsYANGGoKeyStruct ensures that HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_Routes_Route_Key partially implements the
+// yang.GoKeyStruct interface. This allows functions that need to
+// handle this key struct to identify it as being generated by gogen.
+func (HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_Routes_Route_Key) IsYANGGoKeyStruct() {}
+
+// ΛListKeyMap returns the values of the HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_Routes_Route_Key key struct.
+func (t HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_Routes_Route_Key) ΛListKeyMap() (map[string]interface{}, error) {
+	return map[string]interface{}{
+		"vpn-name":            t.VpnName,
+		"route-distinguisher": t.RouteDistinguisher,
+		"prefix":              t.Prefix,
+		"mask-length":         t.MaskLength,
+		"route-type":          t.RouteType,
+		"im-table-id":         t.ImTableId,
+		"from":                t.From,
+		"path-id":             t.PathId,
+	}, nil
+}
+
+// NewRoute creates a new entry in the Route list of the
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_Routes struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_Routes) NewRoute(VpnName string, RouteDistinguisher string, Prefix string, MaskLength uint8, RouteType interface{}, ImTableId uint32, From string, PathId string) (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_Routes_Route, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.Route == nil {
+		t.Route = make(map[HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_Routes_Route_Key]*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_Routes_Route)
+	}
+
+	key := HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_Routes_Route_Key{
+		VpnName:            VpnName,
+		RouteDistinguisher: RouteDistinguisher,
+		Prefix:             Prefix,
+		MaskLength:         MaskLength,
+		RouteType:          RouteType,
+		ImTableId:          ImTableId,
+		From:               From,
+		PathId:             PathId,
+	}
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.Route[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Route", key)
+	}
+
+	t.Route[key] = &HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_Routes_Route{
+		VpnName:            &VpnName,
+		RouteDistinguisher: &RouteDistinguisher,
+		Prefix:             &Prefix,
+		MaskLength:         &MaskLength,
+		RouteType:          RouteType,
+		ImTableId:          &ImTableId,
+		From:               &From,
+		PathId:             &PathId,
+	}
+
+	return t.Route[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_Routes) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_Routes"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_Routes) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_Routes) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_Routes.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_Routes) ΛBelongingModule() string {
+	return "huawei-bgp-routing-table"
+}
+
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_Routes_Route represents the /huawei-bgp/bgp/base-process/bgp-route/ipv6-unicast/routes/route YANG schema element.
+type HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_Routes_Route struct {
+	AdvertiseNexthop           *string                               `path:"advertise-nexthop" module:"huawei-bgp-routing-table"`
+	AggregatorAs               *string                               `path:"aggregator-as" module:"huawei-bgp-routing-table"`
+	AggregatorId               *string                               `path:"aggregator-id" module:"huawei-bgp-routing-table"`
+	Aigp                       *uint64                               `path:"aigp" module:"huawei-bgp-routing-table"`
+	AtomicAggregate            *bool                                 `path:"atomic-aggregate" module:"huawei-bgp-routing-table"`
+	AttributeSet               *string                               `path:"attribute-set" module:"huawei-bgp-routing-table"`
+	ClusterList                *string                               `path:"cluster-list" module:"huawei-bgp-routing-table"`
+	Community                  *string                               `path:"community" module:"huawei-bgp-routing-table"`
+	ExtCommunity               *string                               `path:"ext-community" module:"huawei-bgp-routing-table"`
+	ExternalFlags              interface{}                           `path:"external-flags" module:"huawei-bgp-routing-table"`
+	FlagString                 *string                               `path:"flag-string" module:"huawei-bgp-routing-table"`
+	From                       *string                               `path:"from" module:"huawei-bgp-routing-table"`
+	GatewayIp                  *string                               `path:"gateway-ip" module:"huawei-bgp-routing-table"`
+	ImTableId                  *uint32                               `path:"im-table-id" module:"huawei-bgp-routing-table"`
+	InLabel                    *uint32                               `path:"in-label" module:"huawei-bgp-routing-table"`
+	InterfaceName              *string                               `path:"interface-name" module:"huawei-bgp-routing-table"`
+	IteratedVpn                *string                               `path:"iterated-vpn" module:"huawei-bgp-routing-table"`
+	LargeCommunity             *string                               `path:"large-community" module:"huawei-bgp-routing-table"`
+	LocalPreference            *uint32                               `path:"local-preference" module:"huawei-bgp-routing-table"`
+	MaskLength                 *uint8                                `path:"mask-length" module:"huawei-bgp-routing-table"`
+	Med                        *uint32                               `path:"med" module:"huawei-bgp-routing-table"`
+	Nexthop                    *string                               `path:"nexthop" module:"huawei-bgp-routing-table"`
+	Origin                     E_HuaweiBgpRoutingTable_BgpOriginType `path:"origin" module:"huawei-bgp-routing-table"`
+	Originator                 *string                               `path:"originator" module:"huawei-bgp-routing-table"`
+	OutLabel                   *uint32                               `path:"out-label" module:"huawei-bgp-routing-table"`
+	PathAs                     *string                               `path:"path-as" module:"huawei-bgp-routing-table"`
+	PathId                     *string                               `path:"path-id" module:"huawei-bgp-routing-table"`
+	Preference                 *uint8                                `path:"preference" module:"huawei-bgp-routing-table"`
+	PreferredValue             *uint32                               `path:"preferred-value" module:"huawei-bgp-routing-table"`
+	Prefix                     *string                               `path:"prefix" module:"huawei-bgp-routing-table"`
+	PrefixSid                  *string                               `path:"prefix-sid" module:"huawei-bgp-routing-table"`
+	RelayNexthop               *string                               `path:"relay-nexthop" module:"huawei-bgp-routing-table"`
+	RelayTunnelName            *string                               `path:"relay-tunnel-name" module:"huawei-bgp-routing-table"`
+	RemoteNexthopMacAddress    *string                               `path:"remote-nexthop-mac-address" module:"huawei-bgp-routing-table"`
+	RemoteNexthopTunnelAddress *string                               `path:"remote-nexthop-tunnel-address" module:"huawei-bgp-routing-table"`
+	RemoteNexthopVni           *uint32                               `path:"remote-nexthop-vni" module:"huawei-bgp-routing-table"`
+	RemoteRouteId              *string                               `path:"remote-route-id" module:"huawei-bgp-routing-table"`
+	RouteDistinguisher         *string                               `path:"route-distinguisher" module:"huawei-bgp-routing-table"`
+	RouteType                  interface{}                           `path:"route-type" module:"huawei-bgp-routing-table"`
+	SendingPeers               *string                               `path:"sending-peers" module:"huawei-bgp-routing-table"`
+	Time                       *uint32                               `path:"time" module:"huawei-bgp-routing-table"`
+	VpnName                    *string                               `path:"vpn-name" module:"huawei-bgp-routing-table"`
+	WorseReason                *string                               `path:"worse-reason" module:"huawei-bgp-routing-table"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_Routes_Route implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_Routes_Route) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_Routes_Route struct, which is a YANG list entry.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_Routes_Route) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.From == nil {
+		return nil, fmt.Errorf("nil value for key From")
+	}
+
+	if t.ImTableId == nil {
+		return nil, fmt.Errorf("nil value for key ImTableId")
+	}
+
+	if t.MaskLength == nil {
+		return nil, fmt.Errorf("nil value for key MaskLength")
+	}
+
+	if t.PathId == nil {
+		return nil, fmt.Errorf("nil value for key PathId")
+	}
+
+	if t.Prefix == nil {
+		return nil, fmt.Errorf("nil value for key Prefix")
+	}
+
+	if t.RouteDistinguisher == nil {
+		return nil, fmt.Errorf("nil value for key RouteDistinguisher")
+	}
+
+	if t.VpnName == nil {
+		return nil, fmt.Errorf("nil value for key VpnName")
+	}
+
+	return map[string]interface{}{
+		"from":                *t.From,
+		"im-table-id":         *t.ImTableId,
+		"mask-length":         *t.MaskLength,
+		"path-id":             *t.PathId,
+		"prefix":              *t.Prefix,
+		"route-distinguisher": *t.RouteDistinguisher,
+		"route-type":          t.RouteType,
+		"vpn-name":            *t.VpnName,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_Routes_Route) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_Routes_Route"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_Routes_Route) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_Routes_Route) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_Routes_Route.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_Routes_Route) ΛBelongingModule() string {
+	return "huawei-bgp-routing-table"
+}
+
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_Statistics represents the /huawei-bgp/bgp/base-process/bgp-route/ipv6-unicast/statistics YANG schema element.
+type HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_Statistics struct {
+	Statistic map[string]*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_Statistics_Statistic `path:"statistic" module:"huawei-bgp-routing-table"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_Statistics implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_Statistics) IsYANGGoStruct() {}
+
+// NewStatistic creates a new entry in the Statistic list of the
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_Statistics struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_Statistics) NewStatistic(VpnName string) (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_Statistics_Statistic, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.Statistic == nil {
+		t.Statistic = make(map[string]*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_Statistics_Statistic)
+	}
+
+	key := VpnName
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.Statistic[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Statistic", key)
+	}
+
+	t.Statistic[key] = &HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_Statistics_Statistic{
+		VpnName: &VpnName,
+	}
+
+	return t.Statistic[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_Statistics) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_Statistics"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_Statistics) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_Statistics) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_Statistics.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_Statistics) ΛBelongingModule() string {
+	return "huawei-bgp-routing-table"
+}
+
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_Statistics_Statistic represents the /huawei-bgp/bgp/base-process/bgp-route/ipv6-unicast/statistics/statistic YANG schema element.
+type HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_Statistics_Statistic struct {
+	ActiveRouteNumber       *uint32 `path:"active-route-number" module:"huawei-bgp-routing-table"`
+	AddPathRouteNumber      *uint32 `path:"add-path-route-number" module:"huawei-bgp-routing-table"`
+	AdvertiseRmTotalNumber  *uint32 `path:"advertise-rm-total-number" module:"huawei-bgp-routing-table"`
+	BestExternalRouteNumber *uint32 `path:"best-external-route-number" module:"huawei-bgp-routing-table"`
+	BestRouteNumber         *uint32 `path:"best-route-number" module:"huawei-bgp-routing-table"`
+	CommunityRouteNumber    *uint32 `path:"community-route-number" module:"huawei-bgp-routing-table"`
+	DampenedRouteNumber     *uint32 `path:"dampened-route-number" module:"huawei-bgp-routing-table"`
+	TotalNumber             *uint32 `path:"total-number" module:"huawei-bgp-routing-table"`
+	VpnName                 *string `path:"vpn-name" module:"huawei-bgp-routing-table"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_Statistics_Statistic implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_Statistics_Statistic) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_Statistics_Statistic struct, which is a YANG list entry.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_Statistics_Statistic) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.VpnName == nil {
+		return nil, fmt.Errorf("nil value for key VpnName")
+	}
+
+	return map[string]interface{}{
+		"vpn-name": *t.VpnName,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_Statistics_Statistic) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_Statistics_Statistic"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_Statistics_Statistic) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_Statistics_Statistic) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_Statistics_Statistic.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast_Statistics_Statistic) ΛBelongingModule() string {
+	return "huawei-bgp-routing-table"
+}
+
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn represents the /huawei-bgp/bgp/base-process/bgp-route/ipv6-vpn YANG schema element.
+type HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn struct {
+	PeerAdvertiseRoutes     *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerAdvertiseRoutes     `path:"peer-advertise-routes" module:"huawei-bgp-routing-table"`
+	PeerReceiveActiveRoutes *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerReceiveActiveRoutes `path:"peer-receive-active-routes" module:"huawei-bgp-routing-table"`
+	PeerReceiveRoutes       *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerReceiveRoutes       `path:"peer-receive-routes" module:"huawei-bgp-routing-table"`
+	Routes                  *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_Routes                  `path:"routes" module:"huawei-bgp-routing-table"`
+	Statistic               *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_Statistic               `path:"statistic" module:"huawei-bgp-routing-table"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn) ΛBelongingModule() string {
+	return "huawei-bgp-routing-table"
+}
+
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerAdvertiseRoutes represents the /huawei-bgp/bgp/base-process/bgp-route/ipv6-vpn/peer-advertise-routes YANG schema element.
+type HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerAdvertiseRoutes struct {
+	PeerAdvertiseRoute map[HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerAdvertiseRoutes_PeerAdvertiseRoute_Key]*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerAdvertiseRoutes_PeerAdvertiseRoute `path:"peer-advertise-route" module:"huawei-bgp-routing-table"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerAdvertiseRoutes implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerAdvertiseRoutes) IsYANGGoStruct() {}
+
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerAdvertiseRoutes_PeerAdvertiseRoute_Key represents the key for list PeerAdvertiseRoute of element /huawei-bgp/bgp/base-process/bgp-route/ipv6-vpn/peer-advertise-routes.
+type HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerAdvertiseRoutes_PeerAdvertiseRoute_Key struct {
+	VpnName            string      `path:"vpn-name"`
+	RemotePeerAddress  string      `path:"remote-peer-address"`
+	RouteDistinguisher string      `path:"route-distinguisher"`
+	Prefix             string      `path:"prefix"`
+	MaskLength         uint8       `path:"mask-length"`
+	RouteType          interface{} `path:"route-type"`
+	ImTableId          uint32      `path:"im-table-id"`
+	From               string      `path:"from"`
+	PathId             string      `path:"path-id"`
+}
+
+// IsYANGGoKeyStruct ensures that HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerAdvertiseRoutes_PeerAdvertiseRoute_Key partially implements the
+// yang.GoKeyStruct interface. This allows functions that need to
+// handle this key struct to identify it as being generated by gogen.
+func (HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerAdvertiseRoutes_PeerAdvertiseRoute_Key) IsYANGGoKeyStruct() {
+}
+
+// ΛListKeyMap returns the values of the HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerAdvertiseRoutes_PeerAdvertiseRoute_Key key struct.
+func (t HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerAdvertiseRoutes_PeerAdvertiseRoute_Key) ΛListKeyMap() (map[string]interface{}, error) {
+	return map[string]interface{}{
+		"vpn-name":            t.VpnName,
+		"remote-peer-address": t.RemotePeerAddress,
+		"route-distinguisher": t.RouteDistinguisher,
+		"prefix":              t.Prefix,
+		"mask-length":         t.MaskLength,
+		"route-type":          t.RouteType,
+		"im-table-id":         t.ImTableId,
+		"from":                t.From,
+		"path-id":             t.PathId,
+	}, nil
+}
+
+// NewPeerAdvertiseRoute creates a new entry in the PeerAdvertiseRoute list of the
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerAdvertiseRoutes struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerAdvertiseRoutes) NewPeerAdvertiseRoute(VpnName string, RemotePeerAddress string, RouteDistinguisher string, Prefix string, MaskLength uint8, RouteType interface{}, ImTableId uint32, From string, PathId string) (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerAdvertiseRoutes_PeerAdvertiseRoute, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.PeerAdvertiseRoute == nil {
+		t.PeerAdvertiseRoute = make(map[HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerAdvertiseRoutes_PeerAdvertiseRoute_Key]*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerAdvertiseRoutes_PeerAdvertiseRoute)
+	}
+
+	key := HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerAdvertiseRoutes_PeerAdvertiseRoute_Key{
+		VpnName:            VpnName,
+		RemotePeerAddress:  RemotePeerAddress,
+		RouteDistinguisher: RouteDistinguisher,
+		Prefix:             Prefix,
+		MaskLength:         MaskLength,
+		RouteType:          RouteType,
+		ImTableId:          ImTableId,
+		From:               From,
+		PathId:             PathId,
+	}
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.PeerAdvertiseRoute[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list PeerAdvertiseRoute", key)
+	}
+
+	t.PeerAdvertiseRoute[key] = &HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerAdvertiseRoutes_PeerAdvertiseRoute{
+		VpnName:            &VpnName,
+		RemotePeerAddress:  &RemotePeerAddress,
+		RouteDistinguisher: &RouteDistinguisher,
+		Prefix:             &Prefix,
+		MaskLength:         &MaskLength,
+		RouteType:          RouteType,
+		ImTableId:          &ImTableId,
+		From:               &From,
+		PathId:             &PathId,
+	}
+
+	return t.PeerAdvertiseRoute[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerAdvertiseRoutes) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerAdvertiseRoutes"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerAdvertiseRoutes) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerAdvertiseRoutes) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerAdvertiseRoutes.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerAdvertiseRoutes) ΛBelongingModule() string {
+	return "huawei-bgp-routing-table"
+}
+
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerAdvertiseRoutes_PeerAdvertiseRoute represents the /huawei-bgp/bgp/base-process/bgp-route/ipv6-vpn/peer-advertise-routes/peer-advertise-route YANG schema element.
+type HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerAdvertiseRoutes_PeerAdvertiseRoute struct {
+	AdvertiseNexthop           *string                               `path:"advertise-nexthop" module:"huawei-bgp-routing-table"`
+	AggregatorAs               *string                               `path:"aggregator-as" module:"huawei-bgp-routing-table"`
+	AggregatorId               *string                               `path:"aggregator-id" module:"huawei-bgp-routing-table"`
+	Aigp                       *uint64                               `path:"aigp" module:"huawei-bgp-routing-table"`
+	AtomicAggregate            *bool                                 `path:"atomic-aggregate" module:"huawei-bgp-routing-table"`
+	AttributeSet               *string                               `path:"attribute-set" module:"huawei-bgp-routing-table"`
+	ClusterList                *string                               `path:"cluster-list" module:"huawei-bgp-routing-table"`
+	Community                  *string                               `path:"community" module:"huawei-bgp-routing-table"`
+	ExtCommunity               *string                               `path:"ext-community" module:"huawei-bgp-routing-table"`
+	ExternalFlags              interface{}                           `path:"external-flags" module:"huawei-bgp-routing-table"`
+	FlagString                 *string                               `path:"flag-string" module:"huawei-bgp-routing-table"`
+	From                       *string                               `path:"from" module:"huawei-bgp-routing-table"`
+	GatewayIp                  *string                               `path:"gateway-ip" module:"huawei-bgp-routing-table"`
+	ImTableId                  *uint32                               `path:"im-table-id" module:"huawei-bgp-routing-table"`
+	InLabel                    *uint32                               `path:"in-label" module:"huawei-bgp-routing-table"`
+	InterfaceName              *string                               `path:"interface-name" module:"huawei-bgp-routing-table"`
+	IteratedVpn                *string                               `path:"iterated-vpn" module:"huawei-bgp-routing-table"`
+	LargeCommunity             *string                               `path:"large-community" module:"huawei-bgp-routing-table"`
+	LocalPreference            *uint32                               `path:"local-preference" module:"huawei-bgp-routing-table"`
+	MaskLength                 *uint8                                `path:"mask-length" module:"huawei-bgp-routing-table"`
+	Med                        *uint32                               `path:"med" module:"huawei-bgp-routing-table"`
+	Nexthop                    *string                               `path:"nexthop" module:"huawei-bgp-routing-table"`
+	Origin                     E_HuaweiBgpRoutingTable_BgpOriginType `path:"origin" module:"huawei-bgp-routing-table"`
+	Originator                 *string                               `path:"originator" module:"huawei-bgp-routing-table"`
+	OutLabel                   *uint32                               `path:"out-label" module:"huawei-bgp-routing-table"`
+	PathAs                     *string                               `path:"path-as" module:"huawei-bgp-routing-table"`
+	PathId                     *string                               `path:"path-id" module:"huawei-bgp-routing-table"`
+	Preference                 *uint8                                `path:"preference" module:"huawei-bgp-routing-table"`
+	PreferredValue             *uint32                               `path:"preferred-value" module:"huawei-bgp-routing-table"`
+	Prefix                     *string                               `path:"prefix" module:"huawei-bgp-routing-table"`
+	PrefixSid                  *string                               `path:"prefix-sid" module:"huawei-bgp-routing-table"`
+	RelayNexthop               *string                               `path:"relay-nexthop" module:"huawei-bgp-routing-table"`
+	RelayTunnelName            *string                               `path:"relay-tunnel-name" module:"huawei-bgp-routing-table"`
+	RemoteNexthopMacAddress    *string                               `path:"remote-nexthop-mac-address" module:"huawei-bgp-routing-table"`
+	RemoteNexthopTunnelAddress *string                               `path:"remote-nexthop-tunnel-address" module:"huawei-bgp-routing-table"`
+	RemoteNexthopVni           *uint32                               `path:"remote-nexthop-vni" module:"huawei-bgp-routing-table"`
+	RemotePeerAddress          *string                               `path:"remote-peer-address" module:"huawei-bgp-routing-table"`
+	RemoteRouteId              *string                               `path:"remote-route-id" module:"huawei-bgp-routing-table"`
+	RouteDistinguisher         *string                               `path:"route-distinguisher" module:"huawei-bgp-routing-table"`
+	RouteType                  interface{}                           `path:"route-type" module:"huawei-bgp-routing-table"`
+	SendingPeers               *string                               `path:"sending-peers" module:"huawei-bgp-routing-table"`
+	Time                       *uint32                               `path:"time" module:"huawei-bgp-routing-table"`
+	VpnName                    *string                               `path:"vpn-name" module:"huawei-bgp-routing-table"`
+	WorseReason                *string                               `path:"worse-reason" module:"huawei-bgp-routing-table"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerAdvertiseRoutes_PeerAdvertiseRoute implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerAdvertiseRoutes_PeerAdvertiseRoute) IsYANGGoStruct() {
+}
+
+// ΛListKeyMap returns the keys of the HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerAdvertiseRoutes_PeerAdvertiseRoute struct, which is a YANG list entry.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerAdvertiseRoutes_PeerAdvertiseRoute) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.From == nil {
+		return nil, fmt.Errorf("nil value for key From")
+	}
+
+	if t.ImTableId == nil {
+		return nil, fmt.Errorf("nil value for key ImTableId")
+	}
+
+	if t.MaskLength == nil {
+		return nil, fmt.Errorf("nil value for key MaskLength")
+	}
+
+	if t.PathId == nil {
+		return nil, fmt.Errorf("nil value for key PathId")
+	}
+
+	if t.Prefix == nil {
+		return nil, fmt.Errorf("nil value for key Prefix")
+	}
+
+	if t.RemotePeerAddress == nil {
+		return nil, fmt.Errorf("nil value for key RemotePeerAddress")
+	}
+
+	if t.RouteDistinguisher == nil {
+		return nil, fmt.Errorf("nil value for key RouteDistinguisher")
+	}
+
+	if t.VpnName == nil {
+		return nil, fmt.Errorf("nil value for key VpnName")
+	}
+
+	return map[string]interface{}{
+		"from":                *t.From,
+		"im-table-id":         *t.ImTableId,
+		"mask-length":         *t.MaskLength,
+		"path-id":             *t.PathId,
+		"prefix":              *t.Prefix,
+		"remote-peer-address": *t.RemotePeerAddress,
+		"route-distinguisher": *t.RouteDistinguisher,
+		"route-type":          t.RouteType,
+		"vpn-name":            *t.VpnName,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerAdvertiseRoutes_PeerAdvertiseRoute) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerAdvertiseRoutes_PeerAdvertiseRoute"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerAdvertiseRoutes_PeerAdvertiseRoute) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerAdvertiseRoutes_PeerAdvertiseRoute) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerAdvertiseRoutes_PeerAdvertiseRoute.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerAdvertiseRoutes_PeerAdvertiseRoute) ΛBelongingModule() string {
+	return "huawei-bgp-routing-table"
+}
+
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerReceiveActiveRoutes represents the /huawei-bgp/bgp/base-process/bgp-route/ipv6-vpn/peer-receive-active-routes YANG schema element.
+type HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerReceiveActiveRoutes struct {
+	PeerReceiveActiveRoute map[HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerReceiveActiveRoutes_PeerReceiveActiveRoute_Key]*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerReceiveActiveRoutes_PeerReceiveActiveRoute `path:"peer-receive-active-route" module:"huawei-bgp-routing-table"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerReceiveActiveRoutes implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerReceiveActiveRoutes) IsYANGGoStruct() {}
+
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerReceiveActiveRoutes_PeerReceiveActiveRoute_Key represents the key for list PeerReceiveActiveRoute of element /huawei-bgp/bgp/base-process/bgp-route/ipv6-vpn/peer-receive-active-routes.
+type HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerReceiveActiveRoutes_PeerReceiveActiveRoute_Key struct {
+	VpnName            string      `path:"vpn-name"`
+	RemotePeerAddress  string      `path:"remote-peer-address"`
+	RouteDistinguisher string      `path:"route-distinguisher"`
+	Prefix             string      `path:"prefix"`
+	MaskLength         uint8       `path:"mask-length"`
+	RouteType          interface{} `path:"route-type"`
+	ImTableId          uint32      `path:"im-table-id"`
+	From               string      `path:"from"`
+	PathId             string      `path:"path-id"`
+}
+
+// IsYANGGoKeyStruct ensures that HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerReceiveActiveRoutes_PeerReceiveActiveRoute_Key partially implements the
+// yang.GoKeyStruct interface. This allows functions that need to
+// handle this key struct to identify it as being generated by gogen.
+func (HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerReceiveActiveRoutes_PeerReceiveActiveRoute_Key) IsYANGGoKeyStruct() {
+}
+
+// ΛListKeyMap returns the values of the HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerReceiveActiveRoutes_PeerReceiveActiveRoute_Key key struct.
+func (t HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerReceiveActiveRoutes_PeerReceiveActiveRoute_Key) ΛListKeyMap() (map[string]interface{}, error) {
+	return map[string]interface{}{
+		"vpn-name":            t.VpnName,
+		"remote-peer-address": t.RemotePeerAddress,
+		"route-distinguisher": t.RouteDistinguisher,
+		"prefix":              t.Prefix,
+		"mask-length":         t.MaskLength,
+		"route-type":          t.RouteType,
+		"im-table-id":         t.ImTableId,
+		"from":                t.From,
+		"path-id":             t.PathId,
+	}, nil
+}
+
+// NewPeerReceiveActiveRoute creates a new entry in the PeerReceiveActiveRoute list of the
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerReceiveActiveRoutes struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerReceiveActiveRoutes) NewPeerReceiveActiveRoute(VpnName string, RemotePeerAddress string, RouteDistinguisher string, Prefix string, MaskLength uint8, RouteType interface{}, ImTableId uint32, From string, PathId string) (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerReceiveActiveRoutes_PeerReceiveActiveRoute, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.PeerReceiveActiveRoute == nil {
+		t.PeerReceiveActiveRoute = make(map[HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerReceiveActiveRoutes_PeerReceiveActiveRoute_Key]*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerReceiveActiveRoutes_PeerReceiveActiveRoute)
+	}
+
+	key := HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerReceiveActiveRoutes_PeerReceiveActiveRoute_Key{
+		VpnName:            VpnName,
+		RemotePeerAddress:  RemotePeerAddress,
+		RouteDistinguisher: RouteDistinguisher,
+		Prefix:             Prefix,
+		MaskLength:         MaskLength,
+		RouteType:          RouteType,
+		ImTableId:          ImTableId,
+		From:               From,
+		PathId:             PathId,
+	}
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.PeerReceiveActiveRoute[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list PeerReceiveActiveRoute", key)
+	}
+
+	t.PeerReceiveActiveRoute[key] = &HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerReceiveActiveRoutes_PeerReceiveActiveRoute{
+		VpnName:            &VpnName,
+		RemotePeerAddress:  &RemotePeerAddress,
+		RouteDistinguisher: &RouteDistinguisher,
+		Prefix:             &Prefix,
+		MaskLength:         &MaskLength,
+		RouteType:          RouteType,
+		ImTableId:          &ImTableId,
+		From:               &From,
+		PathId:             &PathId,
+	}
+
+	return t.PeerReceiveActiveRoute[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerReceiveActiveRoutes) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerReceiveActiveRoutes"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerReceiveActiveRoutes) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerReceiveActiveRoutes) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerReceiveActiveRoutes.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerReceiveActiveRoutes) ΛBelongingModule() string {
+	return "huawei-bgp-routing-table"
+}
+
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerReceiveActiveRoutes_PeerReceiveActiveRoute represents the /huawei-bgp/bgp/base-process/bgp-route/ipv6-vpn/peer-receive-active-routes/peer-receive-active-route YANG schema element.
+type HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerReceiveActiveRoutes_PeerReceiveActiveRoute struct {
+	AdvertiseNexthop           *string                               `path:"advertise-nexthop" module:"huawei-bgp-routing-table"`
+	AggregatorAs               *string                               `path:"aggregator-as" module:"huawei-bgp-routing-table"`
+	AggregatorId               *string                               `path:"aggregator-id" module:"huawei-bgp-routing-table"`
+	Aigp                       *uint64                               `path:"aigp" module:"huawei-bgp-routing-table"`
+	AtomicAggregate            *bool                                 `path:"atomic-aggregate" module:"huawei-bgp-routing-table"`
+	AttributeSet               *string                               `path:"attribute-set" module:"huawei-bgp-routing-table"`
+	ClusterList                *string                               `path:"cluster-list" module:"huawei-bgp-routing-table"`
+	Community                  *string                               `path:"community" module:"huawei-bgp-routing-table"`
+	ExtCommunity               *string                               `path:"ext-community" module:"huawei-bgp-routing-table"`
+	ExternalFlags              interface{}                           `path:"external-flags" module:"huawei-bgp-routing-table"`
+	FlagString                 *string                               `path:"flag-string" module:"huawei-bgp-routing-table"`
+	From                       *string                               `path:"from" module:"huawei-bgp-routing-table"`
+	GatewayIp                  *string                               `path:"gateway-ip" module:"huawei-bgp-routing-table"`
+	ImTableId                  *uint32                               `path:"im-table-id" module:"huawei-bgp-routing-table"`
+	InLabel                    *uint32                               `path:"in-label" module:"huawei-bgp-routing-table"`
+	InterfaceName              *string                               `path:"interface-name" module:"huawei-bgp-routing-table"`
+	IteratedVpn                *string                               `path:"iterated-vpn" module:"huawei-bgp-routing-table"`
+	LargeCommunity             *string                               `path:"large-community" module:"huawei-bgp-routing-table"`
+	LocalPreference            *uint32                               `path:"local-preference" module:"huawei-bgp-routing-table"`
+	MaskLength                 *uint8                                `path:"mask-length" module:"huawei-bgp-routing-table"`
+	Med                        *uint32                               `path:"med" module:"huawei-bgp-routing-table"`
+	Nexthop                    *string                               `path:"nexthop" module:"huawei-bgp-routing-table"`
+	Origin                     E_HuaweiBgpRoutingTable_BgpOriginType `path:"origin" module:"huawei-bgp-routing-table"`
+	Originator                 *string                               `path:"originator" module:"huawei-bgp-routing-table"`
+	OutLabel                   *uint32                               `path:"out-label" module:"huawei-bgp-routing-table"`
+	PathAs                     *string                               `path:"path-as" module:"huawei-bgp-routing-table"`
+	PathId                     *string                               `path:"path-id" module:"huawei-bgp-routing-table"`
+	Preference                 *uint8                                `path:"preference" module:"huawei-bgp-routing-table"`
+	PreferredValue             *uint32                               `path:"preferred-value" module:"huawei-bgp-routing-table"`
+	Prefix                     *string                               `path:"prefix" module:"huawei-bgp-routing-table"`
+	PrefixSid                  *string                               `path:"prefix-sid" module:"huawei-bgp-routing-table"`
+	RelayNexthop               *string                               `path:"relay-nexthop" module:"huawei-bgp-routing-table"`
+	RelayTunnelName            *string                               `path:"relay-tunnel-name" module:"huawei-bgp-routing-table"`
+	RemoteNexthopMacAddress    *string                               `path:"remote-nexthop-mac-address" module:"huawei-bgp-routing-table"`
+	RemoteNexthopTunnelAddress *string                               `path:"remote-nexthop-tunnel-address" module:"huawei-bgp-routing-table"`
+	RemoteNexthopVni           *uint32                               `path:"remote-nexthop-vni" module:"huawei-bgp-routing-table"`
+	RemotePeerAddress          *string                               `path:"remote-peer-address" module:"huawei-bgp-routing-table"`
+	RemoteRouteId              *string                               `path:"remote-route-id" module:"huawei-bgp-routing-table"`
+	RouteDistinguisher         *string                               `path:"route-distinguisher" module:"huawei-bgp-routing-table"`
+	RouteType                  interface{}                           `path:"route-type" module:"huawei-bgp-routing-table"`
+	SendingPeers               *string                               `path:"sending-peers" module:"huawei-bgp-routing-table"`
+	Time                       *uint32                               `path:"time" module:"huawei-bgp-routing-table"`
+	VpnName                    *string                               `path:"vpn-name" module:"huawei-bgp-routing-table"`
+	WorseReason                *string                               `path:"worse-reason" module:"huawei-bgp-routing-table"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerReceiveActiveRoutes_PeerReceiveActiveRoute implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerReceiveActiveRoutes_PeerReceiveActiveRoute) IsYANGGoStruct() {
+}
+
+// ΛListKeyMap returns the keys of the HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerReceiveActiveRoutes_PeerReceiveActiveRoute struct, which is a YANG list entry.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerReceiveActiveRoutes_PeerReceiveActiveRoute) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.From == nil {
+		return nil, fmt.Errorf("nil value for key From")
+	}
+
+	if t.ImTableId == nil {
+		return nil, fmt.Errorf("nil value for key ImTableId")
+	}
+
+	if t.MaskLength == nil {
+		return nil, fmt.Errorf("nil value for key MaskLength")
+	}
+
+	if t.PathId == nil {
+		return nil, fmt.Errorf("nil value for key PathId")
+	}
+
+	if t.Prefix == nil {
+		return nil, fmt.Errorf("nil value for key Prefix")
+	}
+
+	if t.RemotePeerAddress == nil {
+		return nil, fmt.Errorf("nil value for key RemotePeerAddress")
+	}
+
+	if t.RouteDistinguisher == nil {
+		return nil, fmt.Errorf("nil value for key RouteDistinguisher")
+	}
+
+	if t.VpnName == nil {
+		return nil, fmt.Errorf("nil value for key VpnName")
+	}
+
+	return map[string]interface{}{
+		"from":                *t.From,
+		"im-table-id":         *t.ImTableId,
+		"mask-length":         *t.MaskLength,
+		"path-id":             *t.PathId,
+		"prefix":              *t.Prefix,
+		"remote-peer-address": *t.RemotePeerAddress,
+		"route-distinguisher": *t.RouteDistinguisher,
+		"route-type":          t.RouteType,
+		"vpn-name":            *t.VpnName,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerReceiveActiveRoutes_PeerReceiveActiveRoute) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerReceiveActiveRoutes_PeerReceiveActiveRoute"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerReceiveActiveRoutes_PeerReceiveActiveRoute) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerReceiveActiveRoutes_PeerReceiveActiveRoute) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerReceiveActiveRoutes_PeerReceiveActiveRoute.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerReceiveActiveRoutes_PeerReceiveActiveRoute) ΛBelongingModule() string {
+	return "huawei-bgp-routing-table"
+}
+
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerReceiveRoutes represents the /huawei-bgp/bgp/base-process/bgp-route/ipv6-vpn/peer-receive-routes YANG schema element.
+type HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerReceiveRoutes struct {
+	PeerReceiveRoute map[HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerReceiveRoutes_PeerReceiveRoute_Key]*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerReceiveRoutes_PeerReceiveRoute `path:"peer-receive-route" module:"huawei-bgp-routing-table"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerReceiveRoutes implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerReceiveRoutes) IsYANGGoStruct() {}
+
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerReceiveRoutes_PeerReceiveRoute_Key represents the key for list PeerReceiveRoute of element /huawei-bgp/bgp/base-process/bgp-route/ipv6-vpn/peer-receive-routes.
+type HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerReceiveRoutes_PeerReceiveRoute_Key struct {
+	VpnName            string      `path:"vpn-name"`
+	RemotePeerAddress  string      `path:"remote-peer-address"`
+	RouteDistinguisher string      `path:"route-distinguisher"`
+	Prefix             string      `path:"prefix"`
+	MaskLength         uint8       `path:"mask-length"`
+	RouteType          interface{} `path:"route-type"`
+	ImTableId          uint32      `path:"im-table-id"`
+	From               string      `path:"from"`
+	PathId             string      `path:"path-id"`
+}
+
+// IsYANGGoKeyStruct ensures that HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerReceiveRoutes_PeerReceiveRoute_Key partially implements the
+// yang.GoKeyStruct interface. This allows functions that need to
+// handle this key struct to identify it as being generated by gogen.
+func (HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerReceiveRoutes_PeerReceiveRoute_Key) IsYANGGoKeyStruct() {
+}
+
+// ΛListKeyMap returns the values of the HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerReceiveRoutes_PeerReceiveRoute_Key key struct.
+func (t HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerReceiveRoutes_PeerReceiveRoute_Key) ΛListKeyMap() (map[string]interface{}, error) {
+	return map[string]interface{}{
+		"vpn-name":            t.VpnName,
+		"remote-peer-address": t.RemotePeerAddress,
+		"route-distinguisher": t.RouteDistinguisher,
+		"prefix":              t.Prefix,
+		"mask-length":         t.MaskLength,
+		"route-type":          t.RouteType,
+		"im-table-id":         t.ImTableId,
+		"from":                t.From,
+		"path-id":             t.PathId,
+	}, nil
+}
+
+// NewPeerReceiveRoute creates a new entry in the PeerReceiveRoute list of the
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerReceiveRoutes struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerReceiveRoutes) NewPeerReceiveRoute(VpnName string, RemotePeerAddress string, RouteDistinguisher string, Prefix string, MaskLength uint8, RouteType interface{}, ImTableId uint32, From string, PathId string) (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerReceiveRoutes_PeerReceiveRoute, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.PeerReceiveRoute == nil {
+		t.PeerReceiveRoute = make(map[HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerReceiveRoutes_PeerReceiveRoute_Key]*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerReceiveRoutes_PeerReceiveRoute)
+	}
+
+	key := HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerReceiveRoutes_PeerReceiveRoute_Key{
+		VpnName:            VpnName,
+		RemotePeerAddress:  RemotePeerAddress,
+		RouteDistinguisher: RouteDistinguisher,
+		Prefix:             Prefix,
+		MaskLength:         MaskLength,
+		RouteType:          RouteType,
+		ImTableId:          ImTableId,
+		From:               From,
+		PathId:             PathId,
+	}
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.PeerReceiveRoute[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list PeerReceiveRoute", key)
+	}
+
+	t.PeerReceiveRoute[key] = &HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerReceiveRoutes_PeerReceiveRoute{
+		VpnName:            &VpnName,
+		RemotePeerAddress:  &RemotePeerAddress,
+		RouteDistinguisher: &RouteDistinguisher,
+		Prefix:             &Prefix,
+		MaskLength:         &MaskLength,
+		RouteType:          RouteType,
+		ImTableId:          &ImTableId,
+		From:               &From,
+		PathId:             &PathId,
+	}
+
+	return t.PeerReceiveRoute[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerReceiveRoutes) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerReceiveRoutes"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerReceiveRoutes) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerReceiveRoutes) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerReceiveRoutes.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerReceiveRoutes) ΛBelongingModule() string {
+	return "huawei-bgp-routing-table"
+}
+
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerReceiveRoutes_PeerReceiveRoute represents the /huawei-bgp/bgp/base-process/bgp-route/ipv6-vpn/peer-receive-routes/peer-receive-route YANG schema element.
+type HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerReceiveRoutes_PeerReceiveRoute struct {
+	AdvertiseNexthop           *string                               `path:"advertise-nexthop" module:"huawei-bgp-routing-table"`
+	AggregatorAs               *string                               `path:"aggregator-as" module:"huawei-bgp-routing-table"`
+	AggregatorId               *string                               `path:"aggregator-id" module:"huawei-bgp-routing-table"`
+	Aigp                       *uint64                               `path:"aigp" module:"huawei-bgp-routing-table"`
+	AtomicAggregate            *bool                                 `path:"atomic-aggregate" module:"huawei-bgp-routing-table"`
+	AttributeSet               *string                               `path:"attribute-set" module:"huawei-bgp-routing-table"`
+	ClusterList                *string                               `path:"cluster-list" module:"huawei-bgp-routing-table"`
+	Community                  *string                               `path:"community" module:"huawei-bgp-routing-table"`
+	ExtCommunity               *string                               `path:"ext-community" module:"huawei-bgp-routing-table"`
+	ExternalFlags              interface{}                           `path:"external-flags" module:"huawei-bgp-routing-table"`
+	FlagString                 *string                               `path:"flag-string" module:"huawei-bgp-routing-table"`
+	From                       *string                               `path:"from" module:"huawei-bgp-routing-table"`
+	GatewayIp                  *string                               `path:"gateway-ip" module:"huawei-bgp-routing-table"`
+	ImTableId                  *uint32                               `path:"im-table-id" module:"huawei-bgp-routing-table"`
+	InLabel                    *uint32                               `path:"in-label" module:"huawei-bgp-routing-table"`
+	InterfaceName              *string                               `path:"interface-name" module:"huawei-bgp-routing-table"`
+	IteratedVpn                *string                               `path:"iterated-vpn" module:"huawei-bgp-routing-table"`
+	LargeCommunity             *string                               `path:"large-community" module:"huawei-bgp-routing-table"`
+	LocalPreference            *uint32                               `path:"local-preference" module:"huawei-bgp-routing-table"`
+	MaskLength                 *uint8                                `path:"mask-length" module:"huawei-bgp-routing-table"`
+	Med                        *uint32                               `path:"med" module:"huawei-bgp-routing-table"`
+	Nexthop                    *string                               `path:"nexthop" module:"huawei-bgp-routing-table"`
+	Origin                     E_HuaweiBgpRoutingTable_BgpOriginType `path:"origin" module:"huawei-bgp-routing-table"`
+	Originator                 *string                               `path:"originator" module:"huawei-bgp-routing-table"`
+	OutLabel                   *uint32                               `path:"out-label" module:"huawei-bgp-routing-table"`
+	PathAs                     *string                               `path:"path-as" module:"huawei-bgp-routing-table"`
+	PathId                     *string                               `path:"path-id" module:"huawei-bgp-routing-table"`
+	Preference                 *uint8                                `path:"preference" module:"huawei-bgp-routing-table"`
+	PreferredValue             *uint32                               `path:"preferred-value" module:"huawei-bgp-routing-table"`
+	Prefix                     *string                               `path:"prefix" module:"huawei-bgp-routing-table"`
+	PrefixSid                  *string                               `path:"prefix-sid" module:"huawei-bgp-routing-table"`
+	RelayNexthop               *string                               `path:"relay-nexthop" module:"huawei-bgp-routing-table"`
+	RelayTunnelName            *string                               `path:"relay-tunnel-name" module:"huawei-bgp-routing-table"`
+	RemoteNexthopMacAddress    *string                               `path:"remote-nexthop-mac-address" module:"huawei-bgp-routing-table"`
+	RemoteNexthopTunnelAddress *string                               `path:"remote-nexthop-tunnel-address" module:"huawei-bgp-routing-table"`
+	RemoteNexthopVni           *uint32                               `path:"remote-nexthop-vni" module:"huawei-bgp-routing-table"`
+	RemotePeerAddress          *string                               `path:"remote-peer-address" module:"huawei-bgp-routing-table"`
+	RemoteRouteId              *string                               `path:"remote-route-id" module:"huawei-bgp-routing-table"`
+	RouteDistinguisher         *string                               `path:"route-distinguisher" module:"huawei-bgp-routing-table"`
+	RouteType                  interface{}                           `path:"route-type" module:"huawei-bgp-routing-table"`
+	SendingPeers               *string                               `path:"sending-peers" module:"huawei-bgp-routing-table"`
+	Time                       *uint32                               `path:"time" module:"huawei-bgp-routing-table"`
+	VpnName                    *string                               `path:"vpn-name" module:"huawei-bgp-routing-table"`
+	WorseReason                *string                               `path:"worse-reason" module:"huawei-bgp-routing-table"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerReceiveRoutes_PeerReceiveRoute implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerReceiveRoutes_PeerReceiveRoute) IsYANGGoStruct() {
+}
+
+// ΛListKeyMap returns the keys of the HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerReceiveRoutes_PeerReceiveRoute struct, which is a YANG list entry.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerReceiveRoutes_PeerReceiveRoute) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.From == nil {
+		return nil, fmt.Errorf("nil value for key From")
+	}
+
+	if t.ImTableId == nil {
+		return nil, fmt.Errorf("nil value for key ImTableId")
+	}
+
+	if t.MaskLength == nil {
+		return nil, fmt.Errorf("nil value for key MaskLength")
+	}
+
+	if t.PathId == nil {
+		return nil, fmt.Errorf("nil value for key PathId")
+	}
+
+	if t.Prefix == nil {
+		return nil, fmt.Errorf("nil value for key Prefix")
+	}
+
+	if t.RemotePeerAddress == nil {
+		return nil, fmt.Errorf("nil value for key RemotePeerAddress")
+	}
+
+	if t.RouteDistinguisher == nil {
+		return nil, fmt.Errorf("nil value for key RouteDistinguisher")
+	}
+
+	if t.VpnName == nil {
+		return nil, fmt.Errorf("nil value for key VpnName")
+	}
+
+	return map[string]interface{}{
+		"from":                *t.From,
+		"im-table-id":         *t.ImTableId,
+		"mask-length":         *t.MaskLength,
+		"path-id":             *t.PathId,
+		"prefix":              *t.Prefix,
+		"remote-peer-address": *t.RemotePeerAddress,
+		"route-distinguisher": *t.RouteDistinguisher,
+		"route-type":          t.RouteType,
+		"vpn-name":            *t.VpnName,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerReceiveRoutes_PeerReceiveRoute) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerReceiveRoutes_PeerReceiveRoute"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerReceiveRoutes_PeerReceiveRoute) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerReceiveRoutes_PeerReceiveRoute) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerReceiveRoutes_PeerReceiveRoute.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_PeerReceiveRoutes_PeerReceiveRoute) ΛBelongingModule() string {
+	return "huawei-bgp-routing-table"
+}
+
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_Routes represents the /huawei-bgp/bgp/base-process/bgp-route/ipv6-vpn/routes YANG schema element.
+type HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_Routes struct {
+	Route map[HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_Routes_Route_Key]*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_Routes_Route `path:"route" module:"huawei-bgp-routing-table"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_Routes implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_Routes) IsYANGGoStruct() {}
+
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_Routes_Route_Key represents the key for list Route of element /huawei-bgp/bgp/base-process/bgp-route/ipv6-vpn/routes.
+type HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_Routes_Route_Key struct {
+	VpnName            string      `path:"vpn-name"`
+	RouteDistinguisher string      `path:"route-distinguisher"`
+	Prefix             string      `path:"prefix"`
+	MaskLength         uint8       `path:"mask-length"`
+	RouteType          interface{} `path:"route-type"`
+	ImTableId          uint32      `path:"im-table-id"`
+	From               string      `path:"from"`
+	PathId             string      `path:"path-id"`
+}
+
+// IsYANGGoKeyStruct ensures that HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_Routes_Route_Key partially implements the
+// yang.GoKeyStruct interface. This allows functions that need to
+// handle this key struct to identify it as being generated by gogen.
+func (HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_Routes_Route_Key) IsYANGGoKeyStruct() {}
+
+// ΛListKeyMap returns the values of the HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_Routes_Route_Key key struct.
+func (t HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_Routes_Route_Key) ΛListKeyMap() (map[string]interface{}, error) {
+	return map[string]interface{}{
+		"vpn-name":            t.VpnName,
+		"route-distinguisher": t.RouteDistinguisher,
+		"prefix":              t.Prefix,
+		"mask-length":         t.MaskLength,
+		"route-type":          t.RouteType,
+		"im-table-id":         t.ImTableId,
+		"from":                t.From,
+		"path-id":             t.PathId,
+	}, nil
+}
+
+// NewRoute creates a new entry in the Route list of the
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_Routes struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_Routes) NewRoute(VpnName string, RouteDistinguisher string, Prefix string, MaskLength uint8, RouteType interface{}, ImTableId uint32, From string, PathId string) (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_Routes_Route, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.Route == nil {
+		t.Route = make(map[HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_Routes_Route_Key]*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_Routes_Route)
+	}
+
+	key := HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_Routes_Route_Key{
+		VpnName:            VpnName,
+		RouteDistinguisher: RouteDistinguisher,
+		Prefix:             Prefix,
+		MaskLength:         MaskLength,
+		RouteType:          RouteType,
+		ImTableId:          ImTableId,
+		From:               From,
+		PathId:             PathId,
+	}
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.Route[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Route", key)
+	}
+
+	t.Route[key] = &HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_Routes_Route{
+		VpnName:            &VpnName,
+		RouteDistinguisher: &RouteDistinguisher,
+		Prefix:             &Prefix,
+		MaskLength:         &MaskLength,
+		RouteType:          RouteType,
+		ImTableId:          &ImTableId,
+		From:               &From,
+		PathId:             &PathId,
+	}
+
+	return t.Route[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_Routes) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_Routes"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_Routes) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_Routes) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_Routes.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_Routes) ΛBelongingModule() string {
+	return "huawei-bgp-routing-table"
+}
+
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_Routes_Route represents the /huawei-bgp/bgp/base-process/bgp-route/ipv6-vpn/routes/route YANG schema element.
+type HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_Routes_Route struct {
+	AdvertiseNexthop           *string                               `path:"advertise-nexthop" module:"huawei-bgp-routing-table"`
+	AggregatorAs               *string                               `path:"aggregator-as" module:"huawei-bgp-routing-table"`
+	AggregatorId               *string                               `path:"aggregator-id" module:"huawei-bgp-routing-table"`
+	Aigp                       *uint64                               `path:"aigp" module:"huawei-bgp-routing-table"`
+	AtomicAggregate            *bool                                 `path:"atomic-aggregate" module:"huawei-bgp-routing-table"`
+	AttributeSet               *string                               `path:"attribute-set" module:"huawei-bgp-routing-table"`
+	ClusterList                *string                               `path:"cluster-list" module:"huawei-bgp-routing-table"`
+	Community                  *string                               `path:"community" module:"huawei-bgp-routing-table"`
+	ExtCommunity               *string                               `path:"ext-community" module:"huawei-bgp-routing-table"`
+	ExternalFlags              interface{}                           `path:"external-flags" module:"huawei-bgp-routing-table"`
+	FlagString                 *string                               `path:"flag-string" module:"huawei-bgp-routing-table"`
+	From                       *string                               `path:"from" module:"huawei-bgp-routing-table"`
+	GatewayIp                  *string                               `path:"gateway-ip" module:"huawei-bgp-routing-table"`
+	ImTableId                  *uint32                               `path:"im-table-id" module:"huawei-bgp-routing-table"`
+	InLabel                    *uint32                               `path:"in-label" module:"huawei-bgp-routing-table"`
+	InterfaceName              *string                               `path:"interface-name" module:"huawei-bgp-routing-table"`
+	IteratedVpn                *string                               `path:"iterated-vpn" module:"huawei-bgp-routing-table"`
+	LargeCommunity             *string                               `path:"large-community" module:"huawei-bgp-routing-table"`
+	LocalPreference            *uint32                               `path:"local-preference" module:"huawei-bgp-routing-table"`
+	MaskLength                 *uint8                                `path:"mask-length" module:"huawei-bgp-routing-table"`
+	Med                        *uint32                               `path:"med" module:"huawei-bgp-routing-table"`
+	Nexthop                    *string                               `path:"nexthop" module:"huawei-bgp-routing-table"`
+	Origin                     E_HuaweiBgpRoutingTable_BgpOriginType `path:"origin" module:"huawei-bgp-routing-table"`
+	Originator                 *string                               `path:"originator" module:"huawei-bgp-routing-table"`
+	OutLabel                   *uint32                               `path:"out-label" module:"huawei-bgp-routing-table"`
+	PathAs                     *string                               `path:"path-as" module:"huawei-bgp-routing-table"`
+	PathId                     *string                               `path:"path-id" module:"huawei-bgp-routing-table"`
+	Preference                 *uint8                                `path:"preference" module:"huawei-bgp-routing-table"`
+	PreferredValue             *uint32                               `path:"preferred-value" module:"huawei-bgp-routing-table"`
+	Prefix                     *string                               `path:"prefix" module:"huawei-bgp-routing-table"`
+	PrefixSid                  *string                               `path:"prefix-sid" module:"huawei-bgp-routing-table"`
+	RelayNexthop               *string                               `path:"relay-nexthop" module:"huawei-bgp-routing-table"`
+	RelayTunnelName            *string                               `path:"relay-tunnel-name" module:"huawei-bgp-routing-table"`
+	RemoteNexthopMacAddress    *string                               `path:"remote-nexthop-mac-address" module:"huawei-bgp-routing-table"`
+	RemoteNexthopTunnelAddress *string                               `path:"remote-nexthop-tunnel-address" module:"huawei-bgp-routing-table"`
+	RemoteNexthopVni           *uint32                               `path:"remote-nexthop-vni" module:"huawei-bgp-routing-table"`
+	RemoteRouteId              *string                               `path:"remote-route-id" module:"huawei-bgp-routing-table"`
+	RouteDistinguisher         *string                               `path:"route-distinguisher" module:"huawei-bgp-routing-table"`
+	RouteType                  interface{}                           `path:"route-type" module:"huawei-bgp-routing-table"`
+	SendingPeers               *string                               `path:"sending-peers" module:"huawei-bgp-routing-table"`
+	Time                       *uint32                               `path:"time" module:"huawei-bgp-routing-table"`
+	VpnName                    *string                               `path:"vpn-name" module:"huawei-bgp-routing-table"`
+	WorseReason                *string                               `path:"worse-reason" module:"huawei-bgp-routing-table"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_Routes_Route implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_Routes_Route) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_Routes_Route struct, which is a YANG list entry.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_Routes_Route) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.From == nil {
+		return nil, fmt.Errorf("nil value for key From")
+	}
+
+	if t.ImTableId == nil {
+		return nil, fmt.Errorf("nil value for key ImTableId")
+	}
+
+	if t.MaskLength == nil {
+		return nil, fmt.Errorf("nil value for key MaskLength")
+	}
+
+	if t.PathId == nil {
+		return nil, fmt.Errorf("nil value for key PathId")
+	}
+
+	if t.Prefix == nil {
+		return nil, fmt.Errorf("nil value for key Prefix")
+	}
+
+	if t.RouteDistinguisher == nil {
+		return nil, fmt.Errorf("nil value for key RouteDistinguisher")
+	}
+
+	if t.VpnName == nil {
+		return nil, fmt.Errorf("nil value for key VpnName")
+	}
+
+	return map[string]interface{}{
+		"from":                *t.From,
+		"im-table-id":         *t.ImTableId,
+		"mask-length":         *t.MaskLength,
+		"path-id":             *t.PathId,
+		"prefix":              *t.Prefix,
+		"route-distinguisher": *t.RouteDistinguisher,
+		"route-type":          t.RouteType,
+		"vpn-name":            *t.VpnName,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_Routes_Route) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_Routes_Route"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_Routes_Route) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_Routes_Route) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_Routes_Route.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_Routes_Route) ΛBelongingModule() string {
+	return "huawei-bgp-routing-table"
+}
+
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_Statistic represents the /huawei-bgp/bgp/base-process/bgp-route/ipv6-vpn/statistic YANG schema element.
+type HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_Statistic struct {
+	ActiveRouteNumber            *uint32 `path:"active-route-number" module:"huawei-bgp-routing-table"`
+	AddPathRouteNumber           *uint32 `path:"add-path-route-number" module:"huawei-bgp-routing-table"`
+	BestExternalRouteNumber      *uint32 `path:"best-external-route-number" module:"huawei-bgp-routing-table"`
+	BestRouteNumber              *uint32 `path:"best-route-number" module:"huawei-bgp-routing-table"`
+	CommunityRouteNumber         *uint32 `path:"community-route-number" module:"huawei-bgp-routing-table"`
+	DifferentOriginAsRouteNumber *uint32 `path:"different-origin-as-route-number" module:"huawei-bgp-routing-table"`
+	TotalNumber                  *uint32 `path:"total-number" module:"huawei-bgp-routing-table"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_Statistic implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_Statistic) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_Statistic) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_Statistic"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_Statistic) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_Statistic) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_Statistic.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn_Statistic) ΛBelongingModule() string {
+	return "huawei-bgp-routing-table"
+}
+
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_L2VpnEvpn represents the /huawei-bgp/bgp/base-process/bgp-route/l2vpn-evpn YANG schema element.
+type HuaweiBgp_Bgp_BaseProcess_BgpRoute_L2VpnEvpn struct {
+	Statistics *HuaweiBgp_Bgp_BaseProcess_BgpRoute_L2VpnEvpn_Statistics `path:"statistics" module:"huawei-bgp-evpn"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBgp_Bgp_BaseProcess_BgpRoute_L2VpnEvpn implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_L2VpnEvpn) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_L2VpnEvpn) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBgp_Bgp_BaseProcess_BgpRoute_L2VpnEvpn"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_L2VpnEvpn) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_L2VpnEvpn) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBgp_Bgp_BaseProcess_BgpRoute_L2VpnEvpn.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_L2VpnEvpn) ΛBelongingModule() string {
+	return "huawei-bgp-evpn"
+}
+
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_L2VpnEvpn_Statistics represents the /huawei-bgp/bgp/base-process/bgp-route/l2vpn-evpn/statistics YANG schema element.
+type HuaweiBgp_Bgp_BaseProcess_BgpRoute_L2VpnEvpn_Statistics struct {
+	Statistic map[string]*HuaweiBgp_Bgp_BaseProcess_BgpRoute_L2VpnEvpn_Statistics_Statistic `path:"statistic" module:"huawei-bgp-evpn"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBgp_Bgp_BaseProcess_BgpRoute_L2VpnEvpn_Statistics implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_L2VpnEvpn_Statistics) IsYANGGoStruct() {}
+
+// NewStatistic creates a new entry in the Statistic list of the
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_L2VpnEvpn_Statistics struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_L2VpnEvpn_Statistics) NewStatistic(VpnName string) (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_L2VpnEvpn_Statistics_Statistic, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.Statistic == nil {
+		t.Statistic = make(map[string]*HuaweiBgp_Bgp_BaseProcess_BgpRoute_L2VpnEvpn_Statistics_Statistic)
+	}
+
+	key := VpnName
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.Statistic[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Statistic", key)
+	}
+
+	t.Statistic[key] = &HuaweiBgp_Bgp_BaseProcess_BgpRoute_L2VpnEvpn_Statistics_Statistic{
+		VpnName: &VpnName,
+	}
+
+	return t.Statistic[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_L2VpnEvpn_Statistics) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBgp_Bgp_BaseProcess_BgpRoute_L2VpnEvpn_Statistics"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_L2VpnEvpn_Statistics) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_L2VpnEvpn_Statistics) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBgp_Bgp_BaseProcess_BgpRoute_L2VpnEvpn_Statistics.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_L2VpnEvpn_Statistics) ΛBelongingModule() string {
+	return "huawei-bgp-evpn"
+}
+
+// HuaweiBgp_Bgp_BaseProcess_BgpRoute_L2VpnEvpn_Statistics_Statistic represents the /huawei-bgp/bgp/base-process/bgp-route/l2vpn-evpn/statistics/statistic YANG schema element.
+type HuaweiBgp_Bgp_BaseProcess_BgpRoute_L2VpnEvpn_Statistics_Statistic struct {
+	AdRouteNumber        *uint32 `path:"ad-route-number" module:"huawei-bgp-evpn"`
+	EsRouteNumber        *uint32 `path:"es-route-number" module:"huawei-bgp-evpn"`
+	IgmpJoinRouteNumber  *uint32 `path:"igmp-join-route-number" module:"huawei-bgp-evpn"`
+	IgmpLeaveRouteNumber *uint32 `path:"igmp-leave-route-number" module:"huawei-bgp-evpn"`
+	IncludeRouteNumber   *uint32 `path:"include-route-number" module:"huawei-bgp-evpn"`
+	IpPrefixRouteNumber  *uint32 `path:"ip-prefix-route-number" module:"huawei-bgp-evpn"`
+	MacRouteNumber       *uint32 `path:"mac-route-number" module:"huawei-bgp-evpn"`
+	SmetRouteNumber      *uint32 `path:"smet-route-number" module:"huawei-bgp-evpn"`
+	TotalRouteNumber     *uint32 `path:"total-route-number" module:"huawei-bgp-evpn"`
+	VpnName              *string `path:"vpn-name" module:"huawei-bgp-evpn"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBgp_Bgp_BaseProcess_BgpRoute_L2VpnEvpn_Statistics_Statistic implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_L2VpnEvpn_Statistics_Statistic) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiBgp_Bgp_BaseProcess_BgpRoute_L2VpnEvpn_Statistics_Statistic struct, which is a YANG list entry.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_L2VpnEvpn_Statistics_Statistic) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.VpnName == nil {
+		return nil, fmt.Errorf("nil value for key VpnName")
+	}
+
+	return map[string]interface{}{
+		"vpn-name": *t.VpnName,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_L2VpnEvpn_Statistics_Statistic) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBgp_Bgp_BaseProcess_BgpRoute_L2VpnEvpn_Statistics_Statistic"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_L2VpnEvpn_Statistics_Statistic) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_L2VpnEvpn_Statistics_Statistic) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBgp_Bgp_BaseProcess_BgpRoute_L2VpnEvpn_Statistics_Statistic.
+func (*HuaweiBgp_Bgp_BaseProcess_BgpRoute_L2VpnEvpn_Statistics_Statistic) ΛBelongingModule() string {
+	return "huawei-bgp-evpn"
 }
 
 // HuaweiBgp_Bgp_BaseProcess_Confederation represents the /huawei-bgp/bgp/base-process/confederation YANG schema element.
@@ -5587,4 +14246,9102 @@ func (t *HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo) ΛEnumTypeMap() map[string]
 // of HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo.
 func (*HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo) ΛBelongingModule() string {
 	return "huawei-bgp"
+}
+
+// HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs represents the /huawei-bgp/bgp/base-process/error-discard-info/afs YANG schema element.
+type HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs struct {
+	Af map[E_HuaweiBgp_AfType]*HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af `path:"af" module:"huawei-bgp"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs) IsYANGGoStruct() {}
+
+// NewAf creates a new entry in the Af list of the
+// HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs) NewAf(AddressFamily E_HuaweiBgp_AfType) (*HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.Af == nil {
+		t.Af = make(map[E_HuaweiBgp_AfType]*HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af)
+	}
+
+	key := AddressFamily
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.Af[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Af", key)
+	}
+
+	t.Af[key] = &HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af{
+		AddressFamily: AddressFamily,
+	}
+
+	return t.Af[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs.
+func (*HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs) ΛBelongingModule() string {
+	return "huawei-bgp"
+}
+
+// HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af represents the /huawei-bgp/bgp/base-process/error-discard-info/afs/af YANG schema element.
+type HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af struct {
+	AddressFamily             E_HuaweiBgp_AfType                                       `path:"address-family" module:"huawei-bgp"`
+	AdvertiseAsOverLimitCount *uint32                                                  `path:"advertise-as-over-limit-count" module:"huawei-bgp"`
+	AsLoopCount               *uint32                                                  `path:"as-loop-count" module:"huawei-bgp"`
+	ClusterIdLoopCount        *uint32                                                  `path:"cluster-id-loop-count" module:"huawei-bgp"`
+	OriginatorIdLoopCount     *uint32                                                  `path:"originator-id-loop-count" module:"huawei-bgp"`
+	PathAttributeErrorCount   *uint32                                                  `path:"path-attribute-error-count" module:"huawei-bgp"`
+	PeerRecordCount           *uint32                                                  `path:"peer-record-count" module:"huawei-bgp"`
+	Peers                     *HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af_Peers `path:"peers" module:"huawei-bgp"`
+	ReceiveAsOverLimitCount   *uint32                                                  `path:"receive-as-over-limit-count" module:"huawei-bgp"`
+	ZeroRdCount               *uint32                                                  `path:"zero-rd-count" module:"huawei-bgp"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af struct, which is a YANG list entry.
+func (t *HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af) ΛListKeyMap() (map[string]interface{}, error) {
+
+	return map[string]interface{}{
+		"address-family": t.AddressFamily,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af.
+func (*HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af) ΛBelongingModule() string {
+	return "huawei-bgp"
+}
+
+// HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af_Peers represents the /huawei-bgp/bgp/base-process/error-discard-info/afs/af/peers YANG schema element.
+type HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af_Peers struct {
+	Peer map[HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af_Peers_Peer_Key]*HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af_Peers_Peer `path:"peer" module:"huawei-bgp"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af_Peers implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af_Peers) IsYANGGoStruct() {}
+
+// HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af_Peers_Peer_Key represents the key for list Peer of element /huawei-bgp/bgp/base-process/error-discard-info/afs/af/peers.
+type HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af_Peers_Peer_Key struct {
+	VpnName string `path:"vpn-name"`
+	Address string `path:"address"`
+}
+
+// IsYANGGoKeyStruct ensures that HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af_Peers_Peer_Key partially implements the
+// yang.GoKeyStruct interface. This allows functions that need to
+// handle this key struct to identify it as being generated by gogen.
+func (HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af_Peers_Peer_Key) IsYANGGoKeyStruct() {}
+
+// ΛListKeyMap returns the values of the HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af_Peers_Peer_Key key struct.
+func (t HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af_Peers_Peer_Key) ΛListKeyMap() (map[string]interface{}, error) {
+	return map[string]interface{}{
+		"vpn-name": t.VpnName,
+		"address":  t.Address,
+	}, nil
+}
+
+// NewPeer creates a new entry in the Peer list of the
+// HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af_Peers struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af_Peers) NewPeer(VpnName string, Address string) (*HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af_Peers_Peer, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.Peer == nil {
+		t.Peer = make(map[HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af_Peers_Peer_Key]*HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af_Peers_Peer)
+	}
+
+	key := HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af_Peers_Peer_Key{
+		VpnName: VpnName,
+		Address: Address,
+	}
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.Peer[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Peer", key)
+	}
+
+	t.Peer[key] = &HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af_Peers_Peer{
+		VpnName: &VpnName,
+		Address: &Address,
+	}
+
+	return t.Peer[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af_Peers) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af_Peers"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af_Peers) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af_Peers) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af_Peers.
+func (*HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af_Peers) ΛBelongingModule() string {
+	return "huawei-bgp"
+}
+
+// HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af_Peers_Peer represents the /huawei-bgp/bgp/base-process/error-discard-info/afs/af/peers/peer YANG schema element.
+type HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af_Peers_Peer struct {
+	Address    *string `path:"address" module:"huawei-bgp"`
+	ErrorData  *string `path:"error-data" module:"huawei-bgp"`
+	Reason     *string `path:"reason" module:"huawei-bgp"`
+	RecordTime *string `path:"record-time" module:"huawei-bgp"`
+	VpnId      *uint32 `path:"vpn-id" module:"huawei-bgp"`
+	VpnName    *string `path:"vpn-name" module:"huawei-bgp"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af_Peers_Peer implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af_Peers_Peer) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af_Peers_Peer struct, which is a YANG list entry.
+func (t *HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af_Peers_Peer) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.Address == nil {
+		return nil, fmt.Errorf("nil value for key Address")
+	}
+
+	if t.VpnName == nil {
+		return nil, fmt.Errorf("nil value for key VpnName")
+	}
+
+	return map[string]interface{}{
+		"address":  *t.Address,
+		"vpn-name": *t.VpnName,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af_Peers_Peer) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af_Peers_Peer"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af_Peers_Peer) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af_Peers_Peer) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af_Peers_Peer.
+func (*HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af_Peers_Peer) ΛBelongingModule() string {
+	return "huawei-bgp"
+}
+
+// HuaweiBgp_Bgp_BaseProcess_GracefulRestart represents the /huawei-bgp/bgp/base-process/graceful-restart YANG schema element.
+type HuaweiBgp_Bgp_BaseProcess_GracefulRestart struct {
+	Enable         *bool   `path:"enable" module:"huawei-bgp"`
+	PeerReset      *bool   `path:"peer-reset" module:"huawei-bgp"`
+	RestartTime    *uint16 `path:"restart-time" module:"huawei-bgp"`
+	TimeWaitForRib *uint32 `path:"time-wait-for-rib" module:"huawei-bgp"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBgp_Bgp_BaseProcess_GracefulRestart implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBgp_Bgp_BaseProcess_GracefulRestart) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_GracefulRestart) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBgp_Bgp_BaseProcess_GracefulRestart"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_GracefulRestart) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBgp_Bgp_BaseProcess_GracefulRestart) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBgp_Bgp_BaseProcess_GracefulRestart.
+func (*HuaweiBgp_Bgp_BaseProcess_GracefulRestart) ΛBelongingModule() string {
+	return "huawei-bgp"
+}
+
+// HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus represents the /huawei-bgp/bgp/base-process/graceful-restart-status YANG schema element.
+type HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus struct {
+	Enable       *bool                                                  `path:"enable" module:"huawei-bgp"`
+	EorTimer     *uint32                                                `path:"eor-timer" module:"huawei-bgp"`
+	Peers        *HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus_Peers `path:"peers" module:"huawei-bgp"`
+	RestartTimer *uint32                                                `path:"restart-timer" module:"huawei-bgp"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus.
+func (*HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus) ΛBelongingModule() string {
+	return "huawei-bgp"
+}
+
+// HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus_Peers represents the /huawei-bgp/bgp/base-process/graceful-restart-status/peers YANG schema element.
+type HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus_Peers struct {
+	Peer map[HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus_Peers_Peer_Key]*HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus_Peers_Peer `path:"peer" module:"huawei-bgp"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus_Peers implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus_Peers) IsYANGGoStruct() {}
+
+// HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus_Peers_Peer_Key represents the key for list Peer of element /huawei-bgp/bgp/base-process/graceful-restart-status/peers.
+type HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus_Peers_Peer_Key struct {
+	VpnName string `path:"vpn-name"`
+	Af      string `path:"af"`
+	Address string `path:"address"`
+}
+
+// IsYANGGoKeyStruct ensures that HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus_Peers_Peer_Key partially implements the
+// yang.GoKeyStruct interface. This allows functions that need to
+// handle this key struct to identify it as being generated by gogen.
+func (HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus_Peers_Peer_Key) IsYANGGoKeyStruct() {}
+
+// ΛListKeyMap returns the values of the HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus_Peers_Peer_Key key struct.
+func (t HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus_Peers_Peer_Key) ΛListKeyMap() (map[string]interface{}, error) {
+	return map[string]interface{}{
+		"vpn-name": t.VpnName,
+		"af":       t.Af,
+		"address":  t.Address,
+	}, nil
+}
+
+// NewPeer creates a new entry in the Peer list of the
+// HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus_Peers struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus_Peers) NewPeer(VpnName string, Af string, Address string) (*HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus_Peers_Peer, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.Peer == nil {
+		t.Peer = make(map[HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus_Peers_Peer_Key]*HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus_Peers_Peer)
+	}
+
+	key := HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus_Peers_Peer_Key{
+		VpnName: VpnName,
+		Af:      Af,
+		Address: Address,
+	}
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.Peer[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Peer", key)
+	}
+
+	t.Peer[key] = &HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus_Peers_Peer{
+		VpnName: &VpnName,
+		Af:      &Af,
+		Address: &Address,
+	}
+
+	return t.Peer[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus_Peers) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus_Peers"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus_Peers) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus_Peers) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus_Peers.
+func (*HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus_Peers) ΛBelongingModule() string {
+	return "huawei-bgp"
+}
+
+// HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus_Peers_Peer represents the /huawei-bgp/bgp/base-process/graceful-restart-status/peers/peer YANG schema element.
+type HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus_Peers_Peer struct {
+	Address            *string                   `path:"address" module:"huawei-bgp"`
+	Af                 *string                   `path:"af" module:"huawei-bgp"`
+	BgpPeerState       E_HuaweiBgp_PeerStateType `path:"bgp-peer-state" module:"huawei-bgp"`
+	EorSent            *bool                     `path:"eor-sent" module:"huawei-bgp"`
+	GrCapabilityEnable *bool                     `path:"gr-capability-enable" module:"huawei-bgp"`
+	GrState            *bool                     `path:"gr-state" module:"huawei-bgp"`
+	PeerCapability     *string                   `path:"peer-capability" module:"huawei-bgp"`
+	RestartLeftTimer   *uint32                   `path:"restart-left-timer" module:"huawei-bgp"`
+	StaleRouteNum      *uint32                   `path:"stale-route-num" module:"huawei-bgp"`
+	VpnName            *string                   `path:"vpn-name" module:"huawei-bgp"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus_Peers_Peer implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus_Peers_Peer) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus_Peers_Peer struct, which is a YANG list entry.
+func (t *HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus_Peers_Peer) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.Address == nil {
+		return nil, fmt.Errorf("nil value for key Address")
+	}
+
+	if t.Af == nil {
+		return nil, fmt.Errorf("nil value for key Af")
+	}
+
+	if t.VpnName == nil {
+		return nil, fmt.Errorf("nil value for key VpnName")
+	}
+
+	return map[string]interface{}{
+		"address":  *t.Address,
+		"af":       *t.Af,
+		"vpn-name": *t.VpnName,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus_Peers_Peer) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus_Peers_Peer"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus_Peers_Peer) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus_Peers_Peer) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus_Peers_Peer.
+func (*HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus_Peers_Peer) ΛBelongingModule() string {
+	return "huawei-bgp"
+}
+
+// HuaweiBgp_Bgp_BaseProcess_ReferencePeriod represents the /huawei-bgp/bgp/base-process/reference-period YANG schema element.
+type HuaweiBgp_Bgp_BaseProcess_ReferencePeriod struct {
+	ClearInterval    *uint32 `path:"clear-interval" module:"huawei-bgp"`
+	HoldInterval     *uint32 `path:"hold-interval" module:"huawei-bgp"`
+	SuppressInterval *uint32 `path:"suppress-interval" module:"huawei-bgp"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBgp_Bgp_BaseProcess_ReferencePeriod implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBgp_Bgp_BaseProcess_ReferencePeriod) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_ReferencePeriod) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBgp_Bgp_BaseProcess_ReferencePeriod"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_ReferencePeriod) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBgp_Bgp_BaseProcess_ReferencePeriod) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBgp_Bgp_BaseProcess_ReferencePeriod.
+func (*HuaweiBgp_Bgp_BaseProcess_ReferencePeriod) ΛBelongingModule() string {
+	return "huawei-bgp"
+}
+
+// HuaweiBgp_Bgp_BaseProcess_RemotePrefixSidStates represents the /huawei-bgp/bgp/base-process/remote-prefix-sid-states YANG schema element.
+type HuaweiBgp_Bgp_BaseProcess_RemotePrefixSidStates struct {
+	RemotePrefixSidState map[string]*HuaweiBgp_Bgp_BaseProcess_RemotePrefixSidStates_RemotePrefixSidState `path:"remote-prefix-sid-state" module:"huawei-bgp"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBgp_Bgp_BaseProcess_RemotePrefixSidStates implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBgp_Bgp_BaseProcess_RemotePrefixSidStates) IsYANGGoStruct() {}
+
+// NewRemotePrefixSidState creates a new entry in the RemotePrefixSidState list of the
+// HuaweiBgp_Bgp_BaseProcess_RemotePrefixSidStates struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiBgp_Bgp_BaseProcess_RemotePrefixSidStates) NewRemotePrefixSidState(PrefixSid string) (*HuaweiBgp_Bgp_BaseProcess_RemotePrefixSidStates_RemotePrefixSidState, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.RemotePrefixSidState == nil {
+		t.RemotePrefixSidState = make(map[string]*HuaweiBgp_Bgp_BaseProcess_RemotePrefixSidStates_RemotePrefixSidState)
+	}
+
+	key := PrefixSid
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.RemotePrefixSidState[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list RemotePrefixSidState", key)
+	}
+
+	t.RemotePrefixSidState[key] = &HuaweiBgp_Bgp_BaseProcess_RemotePrefixSidStates_RemotePrefixSidState{
+		PrefixSid: &PrefixSid,
+	}
+
+	return t.RemotePrefixSidState[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_RemotePrefixSidStates) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBgp_Bgp_BaseProcess_RemotePrefixSidStates"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_RemotePrefixSidStates) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBgp_Bgp_BaseProcess_RemotePrefixSidStates) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBgp_Bgp_BaseProcess_RemotePrefixSidStates.
+func (*HuaweiBgp_Bgp_BaseProcess_RemotePrefixSidStates) ΛBelongingModule() string {
+	return "huawei-bgp"
+}
+
+// HuaweiBgp_Bgp_BaseProcess_RemotePrefixSidStates_RemotePrefixSidState represents the /huawei-bgp/bgp/base-process/remote-prefix-sid-states/remote-prefix-sid-state YANG schema element.
+type HuaweiBgp_Bgp_BaseProcess_RemotePrefixSidStates_RemotePrefixSidState struct {
+	LocatorMaskLength *uint8  `path:"locator-mask-length" module:"huawei-bgp"`
+	LocatorSid        *string `path:"locator-sid" module:"huawei-bgp"`
+	PrefixSid         *string `path:"prefix-sid" module:"huawei-bgp"`
+	VpnName           *string `path:"vpn-name" module:"huawei-bgp"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBgp_Bgp_BaseProcess_RemotePrefixSidStates_RemotePrefixSidState implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBgp_Bgp_BaseProcess_RemotePrefixSidStates_RemotePrefixSidState) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiBgp_Bgp_BaseProcess_RemotePrefixSidStates_RemotePrefixSidState struct, which is a YANG list entry.
+func (t *HuaweiBgp_Bgp_BaseProcess_RemotePrefixSidStates_RemotePrefixSidState) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.PrefixSid == nil {
+		return nil, fmt.Errorf("nil value for key PrefixSid")
+	}
+
+	return map[string]interface{}{
+		"prefix-sid": *t.PrefixSid,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_RemotePrefixSidStates_RemotePrefixSidState) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBgp_Bgp_BaseProcess_RemotePrefixSidStates_RemotePrefixSidState"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_RemotePrefixSidStates_RemotePrefixSidState) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBgp_Bgp_BaseProcess_RemotePrefixSidStates_RemotePrefixSidState) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBgp_Bgp_BaseProcess_RemotePrefixSidStates_RemotePrefixSidState.
+func (*HuaweiBgp_Bgp_BaseProcess_RemotePrefixSidStates_RemotePrefixSidState) ΛBelongingModule() string {
+	return "huawei-bgp"
+}
+
+// HuaweiBgp_Bgp_BaseProcess_Timer represents the /huawei-bgp/bgp/base-process/timer YANG schema element.
+type HuaweiBgp_Bgp_BaseProcess_Timer struct {
+	ConnectRetryTime *uint16 `path:"connect-retry-time" module:"huawei-bgp"`
+	HoldTime         *uint32 `path:"hold-time" module:"huawei-bgp"`
+	KeepAliveTime    *uint32 `path:"keep-alive-time" module:"huawei-bgp"`
+	MinHoldTime      *uint32 `path:"min-hold-time" module:"huawei-bgp"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBgp_Bgp_BaseProcess_Timer implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBgp_Bgp_BaseProcess_Timer) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_Timer) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBgp_Bgp_BaseProcess_Timer"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_Timer) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBgp_Bgp_BaseProcess_Timer) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBgp_Bgp_BaseProcess_Timer.
+func (*HuaweiBgp_Bgp_BaseProcess_Timer) ΛBelongingModule() string {
+	return "huawei-bgp"
+}
+
+// HuaweiBgp_Bgp_BaseProcess_VpnBriefInfos represents the /huawei-bgp/bgp/base-process/vpn-brief-infos YANG schema element.
+type HuaweiBgp_Bgp_BaseProcess_VpnBriefInfos struct {
+	VpnBriefInfo map[HuaweiBgp_Bgp_BaseProcess_VpnBriefInfos_VpnBriefInfo_Key]*HuaweiBgp_Bgp_BaseProcess_VpnBriefInfos_VpnBriefInfo `path:"vpn-brief-info" module:"huawei-bgp"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBgp_Bgp_BaseProcess_VpnBriefInfos implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBgp_Bgp_BaseProcess_VpnBriefInfos) IsYANGGoStruct() {}
+
+// HuaweiBgp_Bgp_BaseProcess_VpnBriefInfos_VpnBriefInfo_Key represents the key for list VpnBriefInfo of element /huawei-bgp/bgp/base-process/vpn-brief-infos.
+type HuaweiBgp_Bgp_BaseProcess_VpnBriefInfos_VpnBriefInfo_Key struct {
+	VpnName       string             `path:"vpn-name"`
+	AddressFamily E_HuaweiBgp_AfType `path:"address-family"`
+}
+
+// IsYANGGoKeyStruct ensures that HuaweiBgp_Bgp_BaseProcess_VpnBriefInfos_VpnBriefInfo_Key partially implements the
+// yang.GoKeyStruct interface. This allows functions that need to
+// handle this key struct to identify it as being generated by gogen.
+func (HuaweiBgp_Bgp_BaseProcess_VpnBriefInfos_VpnBriefInfo_Key) IsYANGGoKeyStruct() {}
+
+// ΛListKeyMap returns the values of the HuaweiBgp_Bgp_BaseProcess_VpnBriefInfos_VpnBriefInfo_Key key struct.
+func (t HuaweiBgp_Bgp_BaseProcess_VpnBriefInfos_VpnBriefInfo_Key) ΛListKeyMap() (map[string]interface{}, error) {
+	return map[string]interface{}{
+		"vpn-name":       t.VpnName,
+		"address-family": t.AddressFamily,
+	}, nil
+}
+
+// NewVpnBriefInfo creates a new entry in the VpnBriefInfo list of the
+// HuaweiBgp_Bgp_BaseProcess_VpnBriefInfos struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiBgp_Bgp_BaseProcess_VpnBriefInfos) NewVpnBriefInfo(VpnName string, AddressFamily E_HuaweiBgp_AfType) (*HuaweiBgp_Bgp_BaseProcess_VpnBriefInfos_VpnBriefInfo, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.VpnBriefInfo == nil {
+		t.VpnBriefInfo = make(map[HuaweiBgp_Bgp_BaseProcess_VpnBriefInfos_VpnBriefInfo_Key]*HuaweiBgp_Bgp_BaseProcess_VpnBriefInfos_VpnBriefInfo)
+	}
+
+	key := HuaweiBgp_Bgp_BaseProcess_VpnBriefInfos_VpnBriefInfo_Key{
+		VpnName:       VpnName,
+		AddressFamily: AddressFamily,
+	}
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.VpnBriefInfo[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list VpnBriefInfo", key)
+	}
+
+	t.VpnBriefInfo[key] = &HuaweiBgp_Bgp_BaseProcess_VpnBriefInfos_VpnBriefInfo{
+		VpnName:       &VpnName,
+		AddressFamily: AddressFamily,
+	}
+
+	return t.VpnBriefInfo[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_VpnBriefInfos) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBgp_Bgp_BaseProcess_VpnBriefInfos"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_VpnBriefInfos) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBgp_Bgp_BaseProcess_VpnBriefInfos) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBgp_Bgp_BaseProcess_VpnBriefInfos.
+func (*HuaweiBgp_Bgp_BaseProcess_VpnBriefInfos) ΛBelongingModule() string {
+	return "huawei-bgp"
+}
+
+// HuaweiBgp_Bgp_BaseProcess_VpnBriefInfos_VpnBriefInfo represents the /huawei-bgp/bgp/base-process/vpn-brief-infos/vpn-brief-info YANG schema element.
+type HuaweiBgp_Bgp_BaseProcess_VpnBriefInfos_VpnBriefInfo struct {
+	AddressFamily            E_HuaweiBgp_AfType `path:"address-family" module:"huawei-bgp"`
+	PeerNumber               *uint32            `path:"peer-number" module:"huawei-bgp"`
+	RouteDistinguisherNumber *uint32            `path:"route-distinguisher-number" module:"huawei-bgp"`
+	RouteNumber              *uint32            `path:"route-number" module:"huawei-bgp"`
+	VpnName                  *string            `path:"vpn-name" module:"huawei-bgp"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBgp_Bgp_BaseProcess_VpnBriefInfos_VpnBriefInfo implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBgp_Bgp_BaseProcess_VpnBriefInfos_VpnBriefInfo) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiBgp_Bgp_BaseProcess_VpnBriefInfos_VpnBriefInfo struct, which is a YANG list entry.
+func (t *HuaweiBgp_Bgp_BaseProcess_VpnBriefInfos_VpnBriefInfo) ΛListKeyMap() (map[string]interface{}, error) {
+
+	if t.VpnName == nil {
+		return nil, fmt.Errorf("nil value for key VpnName")
+	}
+
+	return map[string]interface{}{
+		"address-family": t.AddressFamily,
+		"vpn-name":       *t.VpnName,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_VpnBriefInfos_VpnBriefInfo) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBgp_Bgp_BaseProcess_VpnBriefInfos_VpnBriefInfo"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_BaseProcess_VpnBriefInfos_VpnBriefInfo) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBgp_Bgp_BaseProcess_VpnBriefInfos_VpnBriefInfo) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBgp_Bgp_BaseProcess_VpnBriefInfos_VpnBriefInfo.
+func (*HuaweiBgp_Bgp_BaseProcess_VpnBriefInfos_VpnBriefInfo) ΛBelongingModule() string {
+	return "huawei-bgp"
+}
+
+// HuaweiBgp_Bgp_Global represents the /huawei-bgp/bgp/global YANG schema element.
+type HuaweiBgp_Bgp_Global struct {
+	YangEnable *bool `path:"yang-enable" module:"huawei-bgp"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBgp_Bgp_Global implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBgp_Bgp_Global) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_Global) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBgp_Bgp_Global"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_Global) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBgp_Bgp_Global) ΛEnumTypeMap() map[string][]reflect.Type { return ΛEnumTypes }
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBgp_Bgp_Global.
+func (*HuaweiBgp_Bgp_Global) ΛBelongingModule() string {
+	return "huawei-bgp"
+}
+
+// HuaweiBgp_Bgp_PafControls represents the /huawei-bgp/bgp/paf-controls YANG schema element.
+type HuaweiBgp_Bgp_PafControls struct {
+	PafControl map[E_HuaweiBgp_PafControlFeatureType]*HuaweiBgp_Bgp_PafControls_PafControl `path:"paf-control" module:"huawei-bgp"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBgp_Bgp_PafControls implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBgp_Bgp_PafControls) IsYANGGoStruct() {}
+
+// NewPafControl creates a new entry in the PafControl list of the
+// HuaweiBgp_Bgp_PafControls struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiBgp_Bgp_PafControls) NewPafControl(FeatureName E_HuaweiBgp_PafControlFeatureType) (*HuaweiBgp_Bgp_PafControls_PafControl, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.PafControl == nil {
+		t.PafControl = make(map[E_HuaweiBgp_PafControlFeatureType]*HuaweiBgp_Bgp_PafControls_PafControl)
+	}
+
+	key := FeatureName
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.PafControl[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list PafControl", key)
+	}
+
+	t.PafControl[key] = &HuaweiBgp_Bgp_PafControls_PafControl{
+		FeatureName: FeatureName,
+	}
+
+	return t.PafControl[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_PafControls) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBgp_Bgp_PafControls"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_PafControls) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBgp_Bgp_PafControls) ΛEnumTypeMap() map[string][]reflect.Type { return ΛEnumTypes }
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBgp_Bgp_PafControls.
+func (*HuaweiBgp_Bgp_PafControls) ΛBelongingModule() string {
+	return "huawei-bgp"
+}
+
+// HuaweiBgp_Bgp_PafControls_PafControl represents the /huawei-bgp/bgp/paf-controls/paf-control YANG schema element.
+type HuaweiBgp_Bgp_PafControls_PafControl struct {
+	FeatureName E_HuaweiBgp_PafControlFeatureType `path:"feature-name" module:"huawei-bgp"`
+}
+
+// IsYANGGoStruct ensures that HuaweiBgp_Bgp_PafControls_PafControl implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiBgp_Bgp_PafControls_PafControl) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiBgp_Bgp_PafControls_PafControl struct, which is a YANG list entry.
+func (t *HuaweiBgp_Bgp_PafControls_PafControl) ΛListKeyMap() (map[string]interface{}, error) {
+
+	return map[string]interface{}{
+		"feature-name": t.FeatureName,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_PafControls_PafControl) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiBgp_Bgp_PafControls_PafControl"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiBgp_Bgp_PafControls_PafControl) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiBgp_Bgp_PafControls_PafControl) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiBgp_Bgp_PafControls_PafControl.
+func (*HuaweiBgp_Bgp_PafControls_PafControl) ΛBelongingModule() string {
+	return "huawei-bgp"
+}
+
+// HuaweiCfg_Cfg represents the /huawei-cfg/cfg YANG schema element.
+type HuaweiCfg_Cfg struct {
+	AutoBackup                     *HuaweiCfg_Cfg_AutoBackup                     `path:"auto-backup" module:"huawei-cfg"`
+	Autosave                       *HuaweiCfg_Cfg_Autosave                       `path:"autosave" module:"huawei-cfg"`
+	AutosaveCheckpoint             *HuaweiCfg_Cfg_AutosaveCheckpoint             `path:"autosave-checkpoint" module:"huawei-cfg"`
+	BackupAndRecoveryStates        *HuaweiCfg_Cfg_BackupAndRecoveryStates        `path:"backup-and-recovery-states" module:"huawei-cfg"`
+	BackupServers                  *HuaweiCfg_Cfg_BackupServers                  `path:"backup-servers" module:"huawei-cfg"`
+	CfgFiles                       *HuaweiCfg_Cfg_CfgFiles                       `path:"cfg-files" module:"huawei-cfg"`
+	Checkpoints                    *HuaweiCfg_Cfg_Checkpoints                    `path:"checkpoints" module:"huawei-cfg"`
+	ClearInterfaceResults          *HuaweiCfg_Cfg_ClearInterfaceResults          `path:"clear-interface-results" module:"huawei-cfg"`
+	ConfigAutoBackupFiles          *HuaweiCfg_Cfg_ConfigAutoBackupFiles          `path:"config-auto-backup-files" module:"huawei-cfg"`
+	ConfigChangeFlowid             *HuaweiCfg_Cfg_ConfigChangeFlowid             `path:"config-change-flowid" module:"huawei-cfg"`
+	ConfigRecoverResults           *HuaweiCfg_Cfg_ConfigRecoverResults           `path:"config-recover-results" module:"huawei-cfg"`
+	ConfigRollbackResult           *HuaweiCfg_Cfg_ConfigRollbackResult           `path:"config-rollback-result" module:"huawei-cfg"`
+	ConfigSessions                 *HuaweiCfg_Cfg_ConfigSessions                 `path:"config-sessions" module:"huawei-cfg"`
+	ConfigurationOperationCpuLimit *HuaweiCfg_Cfg_ConfigurationOperationCpuLimit `path:"configuration-operation-cpu-limit" module:"huawei-cfg"`
+	GlobalSwitch                   *HuaweiCfg_Cfg_GlobalSwitch                   `path:"global-switch" module:"huawei-cfg"`
+	LastSaveInfo                   *HuaweiCfg_Cfg_LastSaveInfo                   `path:"last-save-info" module:"huawei-cfg"`
+	LockByUsername                 *HuaweiCfg_Cfg_LockByUsername                 `path:"lock-by-username" module:"huawei-cfg"`
+	LockByUsers                    *HuaweiCfg_Cfg_LockByUsers                    `path:"lock-by-users" module:"huawei-cfg"`
+	SavedConfigurationTime         *HuaweiCfg_Cfg_SavedConfigurationTime         `path:"saved-configuration-time" module:"huawei-cfg"`
+	StartupInfos                   *HuaweiCfg_Cfg_StartupInfos                   `path:"startup-infos" module:"huawei-cfg"`
+	StartupLock                    *HuaweiCfg_Cfg_StartupLock                    `path:"startup-lock" module:"huawei-cfg"`
+	TrialStatus                    *HuaweiCfg_Cfg_TrialStatus                    `path:"trial-status" module:"huawei-cfg"`
+	UserLock                       *HuaweiCfg_Cfg_UserLock                       `path:"user-lock" module:"huawei-cfg"`
+}
+
+// IsYANGGoStruct ensures that HuaweiCfg_Cfg implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiCfg_Cfg) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiCfg_Cfg) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiCfg_Cfg"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiCfg_Cfg) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiCfg_Cfg) ΛEnumTypeMap() map[string][]reflect.Type { return ΛEnumTypes }
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiCfg_Cfg.
+func (*HuaweiCfg_Cfg) ΛBelongingModule() string {
+	return "huawei-cfg"
+}
+
+// HuaweiCfg_Cfg_AutoBackup represents the /huawei-cfg/cfg/auto-backup YANG schema element.
+type HuaweiCfg_Cfg_AutoBackup struct {
+	IntervalTime *uint32 `path:"interval-time" module:"huawei-cfg"`
+	StartTime    *string `path:"start-time" module:"huawei-cfg"`
+}
+
+// IsYANGGoStruct ensures that HuaweiCfg_Cfg_AutoBackup implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiCfg_Cfg_AutoBackup) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiCfg_Cfg_AutoBackup) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiCfg_Cfg_AutoBackup"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiCfg_Cfg_AutoBackup) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiCfg_Cfg_AutoBackup) ΛEnumTypeMap() map[string][]reflect.Type { return ΛEnumTypes }
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiCfg_Cfg_AutoBackup.
+func (*HuaweiCfg_Cfg_AutoBackup) ΛBelongingModule() string {
+	return "huawei-cfg"
+}
+
+// HuaweiCfg_Cfg_Autosave represents the /huawei-cfg/cfg/autosave YANG schema element.
+type HuaweiCfg_Cfg_Autosave struct {
+	CpuLimit     *uint32 `path:"cpu-limit" module:"huawei-cfg"`
+	DelayTime    *uint32 `path:"delay-time" module:"huawei-cfg"`
+	IntervalTime *uint32 `path:"interval-time" module:"huawei-cfg"`
+}
+
+// IsYANGGoStruct ensures that HuaweiCfg_Cfg_Autosave implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiCfg_Cfg_Autosave) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiCfg_Cfg_Autosave) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiCfg_Cfg_Autosave"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiCfg_Cfg_Autosave) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiCfg_Cfg_Autosave) ΛEnumTypeMap() map[string][]reflect.Type { return ΛEnumTypes }
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiCfg_Cfg_Autosave.
+func (*HuaweiCfg_Cfg_Autosave) ΛBelongingModule() string {
+	return "huawei-cfg"
+}
+
+// HuaweiCfg_Cfg_AutosaveCheckpoint represents the /huawei-cfg/cfg/autosave-checkpoint YANG schema element.
+type HuaweiCfg_Cfg_AutosaveCheckpoint struct {
+	StartTime *string `path:"start-time" module:"huawei-cfg"`
+}
+
+// IsYANGGoStruct ensures that HuaweiCfg_Cfg_AutosaveCheckpoint implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiCfg_Cfg_AutosaveCheckpoint) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiCfg_Cfg_AutosaveCheckpoint) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiCfg_Cfg_AutosaveCheckpoint"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiCfg_Cfg_AutosaveCheckpoint) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiCfg_Cfg_AutosaveCheckpoint) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiCfg_Cfg_AutosaveCheckpoint.
+func (*HuaweiCfg_Cfg_AutosaveCheckpoint) ΛBelongingModule() string {
+	return "huawei-cfg"
+}
+
+// HuaweiCfg_Cfg_BackupAndRecoveryStates represents the /huawei-cfg/cfg/backup-and-recovery-states YANG schema element.
+type HuaweiCfg_Cfg_BackupAndRecoveryStates struct {
+	BackupAndRecoveryState map[uint32]*HuaweiCfg_Cfg_BackupAndRecoveryStates_BackupAndRecoveryState `path:"backup-and-recovery-state" module:"huawei-cfg"`
+}
+
+// IsYANGGoStruct ensures that HuaweiCfg_Cfg_BackupAndRecoveryStates implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiCfg_Cfg_BackupAndRecoveryStates) IsYANGGoStruct() {}
+
+// NewBackupAndRecoveryState creates a new entry in the BackupAndRecoveryState list of the
+// HuaweiCfg_Cfg_BackupAndRecoveryStates struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiCfg_Cfg_BackupAndRecoveryStates) NewBackupAndRecoveryState(Index uint32) (*HuaweiCfg_Cfg_BackupAndRecoveryStates_BackupAndRecoveryState, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.BackupAndRecoveryState == nil {
+		t.BackupAndRecoveryState = make(map[uint32]*HuaweiCfg_Cfg_BackupAndRecoveryStates_BackupAndRecoveryState)
+	}
+
+	key := Index
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.BackupAndRecoveryState[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list BackupAndRecoveryState", key)
+	}
+
+	t.BackupAndRecoveryState[key] = &HuaweiCfg_Cfg_BackupAndRecoveryStates_BackupAndRecoveryState{
+		Index: &Index,
+	}
+
+	return t.BackupAndRecoveryState[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiCfg_Cfg_BackupAndRecoveryStates) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiCfg_Cfg_BackupAndRecoveryStates"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiCfg_Cfg_BackupAndRecoveryStates) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiCfg_Cfg_BackupAndRecoveryStates) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiCfg_Cfg_BackupAndRecoveryStates.
+func (*HuaweiCfg_Cfg_BackupAndRecoveryStates) ΛBelongingModule() string {
+	return "huawei-cfg"
+}
+
+// HuaweiCfg_Cfg_BackupAndRecoveryStates_BackupAndRecoveryState represents the /huawei-cfg/cfg/backup-and-recovery-states/backup-and-recovery-state YANG schema element.
+type HuaweiCfg_Cfg_BackupAndRecoveryStates_BackupAndRecoveryState struct {
+	Filename        *string                          `path:"filename" module:"huawei-cfg"`
+	Index           *uint32                          `path:"index" module:"huawei-cfg"`
+	LastTime        *uint32                          `path:"last-time" module:"huawei-cfg"`
+	OperateProgress *uint32                          `path:"operate-progress" module:"huawei-cfg"`
+	OperationType   E_HuaweiCfg_CfgHwcmOperationType `path:"operation-type" module:"huawei-cfg"`
+	ServiceType     E_HuaweiCfg_CfgServiceType       `path:"service-type" module:"huawei-cfg"`
+	StartTime       *string                          `path:"start-time" module:"huawei-cfg"`
+	State           E_HuaweiCfg_CfgOperationState    `path:"state" module:"huawei-cfg"`
+}
+
+// IsYANGGoStruct ensures that HuaweiCfg_Cfg_BackupAndRecoveryStates_BackupAndRecoveryState implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiCfg_Cfg_BackupAndRecoveryStates_BackupAndRecoveryState) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiCfg_Cfg_BackupAndRecoveryStates_BackupAndRecoveryState struct, which is a YANG list entry.
+func (t *HuaweiCfg_Cfg_BackupAndRecoveryStates_BackupAndRecoveryState) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.Index == nil {
+		return nil, fmt.Errorf("nil value for key Index")
+	}
+
+	return map[string]interface{}{
+		"index": *t.Index,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiCfg_Cfg_BackupAndRecoveryStates_BackupAndRecoveryState) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiCfg_Cfg_BackupAndRecoveryStates_BackupAndRecoveryState"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiCfg_Cfg_BackupAndRecoveryStates_BackupAndRecoveryState) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiCfg_Cfg_BackupAndRecoveryStates_BackupAndRecoveryState) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiCfg_Cfg_BackupAndRecoveryStates_BackupAndRecoveryState.
+func (*HuaweiCfg_Cfg_BackupAndRecoveryStates_BackupAndRecoveryState) ΛBelongingModule() string {
+	return "huawei-cfg"
+}
+
+// HuaweiCfg_Cfg_BackupServers represents the /huawei-cfg/cfg/backup-servers YANG schema element.
+type HuaweiCfg_Cfg_BackupServers struct {
+	BackupServer map[HuaweiCfg_Cfg_BackupServers_BackupServer_Key]*HuaweiCfg_Cfg_BackupServers_BackupServer `path:"backup-server" module:"huawei-cfg"`
+}
+
+// IsYANGGoStruct ensures that HuaweiCfg_Cfg_BackupServers implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiCfg_Cfg_BackupServers) IsYANGGoStruct() {}
+
+// HuaweiCfg_Cfg_BackupServers_BackupServer_Key represents the key for list BackupServer of element /huawei-cfg/cfg/backup-servers.
+type HuaweiCfg_Cfg_BackupServers_BackupServer_Key struct {
+	ServerIp    string `path:"server-ip"`
+	VpnInstance string `path:"vpn-instance"`
+}
+
+// IsYANGGoKeyStruct ensures that HuaweiCfg_Cfg_BackupServers_BackupServer_Key partially implements the
+// yang.GoKeyStruct interface. This allows functions that need to
+// handle this key struct to identify it as being generated by gogen.
+func (HuaweiCfg_Cfg_BackupServers_BackupServer_Key) IsYANGGoKeyStruct() {}
+
+// ΛListKeyMap returns the values of the HuaweiCfg_Cfg_BackupServers_BackupServer_Key key struct.
+func (t HuaweiCfg_Cfg_BackupServers_BackupServer_Key) ΛListKeyMap() (map[string]interface{}, error) {
+	return map[string]interface{}{
+		"server-ip":    t.ServerIp,
+		"vpn-instance": t.VpnInstance,
+	}, nil
+}
+
+// NewBackupServer creates a new entry in the BackupServer list of the
+// HuaweiCfg_Cfg_BackupServers struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiCfg_Cfg_BackupServers) NewBackupServer(ServerIp string, VpnInstance string) (*HuaweiCfg_Cfg_BackupServers_BackupServer, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.BackupServer == nil {
+		t.BackupServer = make(map[HuaweiCfg_Cfg_BackupServers_BackupServer_Key]*HuaweiCfg_Cfg_BackupServers_BackupServer)
+	}
+
+	key := HuaweiCfg_Cfg_BackupServers_BackupServer_Key{
+		ServerIp:    ServerIp,
+		VpnInstance: VpnInstance,
+	}
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.BackupServer[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list BackupServer", key)
+	}
+
+	t.BackupServer[key] = &HuaweiCfg_Cfg_BackupServers_BackupServer{
+		ServerIp:    &ServerIp,
+		VpnInstance: &VpnInstance,
+	}
+
+	return t.BackupServer[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiCfg_Cfg_BackupServers) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiCfg_Cfg_BackupServers"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiCfg_Cfg_BackupServers) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiCfg_Cfg_BackupServers) ΛEnumTypeMap() map[string][]reflect.Type { return ΛEnumTypes }
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiCfg_Cfg_BackupServers.
+func (*HuaweiCfg_Cfg_BackupServers) ΛBelongingModule() string {
+	return "huawei-cfg"
+}
+
+// HuaweiCfg_Cfg_BackupServers_BackupServer represents the /huawei-cfg/cfg/backup-servers/backup-server YANG schema element.
+type HuaweiCfg_Cfg_BackupServers_BackupServer struct {
+	Password      *string                   `path:"password" module:"huawei-cfg"`
+	Path          *string                   `path:"path" module:"huawei-cfg"`
+	Port          *uint16                   `path:"port" module:"huawei-cfg"`
+	ServerIp      *string                   `path:"server-ip" module:"huawei-cfg"`
+	TransportType E_HuaweiCfg_CfgServerType `path:"transport-type" module:"huawei-cfg"`
+	Username      *string                   `path:"username" module:"huawei-cfg"`
+	VpnInstance   *string                   `path:"vpn-instance" module:"huawei-cfg"`
+}
+
+// IsYANGGoStruct ensures that HuaweiCfg_Cfg_BackupServers_BackupServer implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiCfg_Cfg_BackupServers_BackupServer) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiCfg_Cfg_BackupServers_BackupServer struct, which is a YANG list entry.
+func (t *HuaweiCfg_Cfg_BackupServers_BackupServer) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.ServerIp == nil {
+		return nil, fmt.Errorf("nil value for key ServerIp")
+	}
+
+	if t.VpnInstance == nil {
+		return nil, fmt.Errorf("nil value for key VpnInstance")
+	}
+
+	return map[string]interface{}{
+		"server-ip":    *t.ServerIp,
+		"vpn-instance": *t.VpnInstance,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiCfg_Cfg_BackupServers_BackupServer) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiCfg_Cfg_BackupServers_BackupServer"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiCfg_Cfg_BackupServers_BackupServer) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiCfg_Cfg_BackupServers_BackupServer) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiCfg_Cfg_BackupServers_BackupServer.
+func (*HuaweiCfg_Cfg_BackupServers_BackupServer) ΛBelongingModule() string {
+	return "huawei-cfg"
+}
+
+// HuaweiCfg_Cfg_CfgFiles represents the /huawei-cfg/cfg/cfg-files YANG schema element.
+type HuaweiCfg_Cfg_CfgFiles struct {
+	CfgFile map[string]*HuaweiCfg_Cfg_CfgFiles_CfgFile `path:"cfg-file" module:"huawei-cfg"`
+}
+
+// IsYANGGoStruct ensures that HuaweiCfg_Cfg_CfgFiles implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiCfg_Cfg_CfgFiles) IsYANGGoStruct() {}
+
+// NewCfgFile creates a new entry in the CfgFile list of the
+// HuaweiCfg_Cfg_CfgFiles struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiCfg_Cfg_CfgFiles) NewCfgFile(Filename string) (*HuaweiCfg_Cfg_CfgFiles_CfgFile, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.CfgFile == nil {
+		t.CfgFile = make(map[string]*HuaweiCfg_Cfg_CfgFiles_CfgFile)
+	}
+
+	key := Filename
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.CfgFile[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list CfgFile", key)
+	}
+
+	t.CfgFile[key] = &HuaweiCfg_Cfg_CfgFiles_CfgFile{
+		Filename: &Filename,
+	}
+
+	return t.CfgFile[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiCfg_Cfg_CfgFiles) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiCfg_Cfg_CfgFiles"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiCfg_Cfg_CfgFiles) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiCfg_Cfg_CfgFiles) ΛEnumTypeMap() map[string][]reflect.Type { return ΛEnumTypes }
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiCfg_Cfg_CfgFiles.
+func (*HuaweiCfg_Cfg_CfgFiles) ΛBelongingModule() string {
+	return "huawei-cfg"
+}
+
+// HuaweiCfg_Cfg_CfgFiles_CfgFile represents the /huawei-cfg/cfg/cfg-files/cfg-file YANG schema element.
+type HuaweiCfg_Cfg_CfgFiles_CfgFile struct {
+	CreateTime         *string                                            `path:"create-time" module:"huawei-cfg"`
+	FileCurrentChanges *HuaweiCfg_Cfg_CfgFiles_CfgFile_FileCurrentChanges `path:"file-current-changes" module:"huawei-cfg"`
+	Filename           *string                                            `path:"filename" module:"huawei-cfg"`
+	Size               *uint32                                            `path:"size" module:"huawei-cfg"`
+}
+
+// IsYANGGoStruct ensures that HuaweiCfg_Cfg_CfgFiles_CfgFile implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiCfg_Cfg_CfgFiles_CfgFile) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiCfg_Cfg_CfgFiles_CfgFile struct, which is a YANG list entry.
+func (t *HuaweiCfg_Cfg_CfgFiles_CfgFile) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.Filename == nil {
+		return nil, fmt.Errorf("nil value for key Filename")
+	}
+
+	return map[string]interface{}{
+		"filename": *t.Filename,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiCfg_Cfg_CfgFiles_CfgFile) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiCfg_Cfg_CfgFiles_CfgFile"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiCfg_Cfg_CfgFiles_CfgFile) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiCfg_Cfg_CfgFiles_CfgFile) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiCfg_Cfg_CfgFiles_CfgFile.
+func (*HuaweiCfg_Cfg_CfgFiles_CfgFile) ΛBelongingModule() string {
+	return "huawei-cfg"
+}
+
+// HuaweiCfg_Cfg_CfgFiles_CfgFile_FileCurrentChanges represents the /huawei-cfg/cfg/cfg-files/cfg-file/file-current-changes YANG schema element.
+type HuaweiCfg_Cfg_CfgFiles_CfgFile_FileCurrentChanges struct {
+	FileCurrentChange map[uint32]*HuaweiCfg_Cfg_CfgFiles_CfgFile_FileCurrentChanges_FileCurrentChange `path:"file-current-change" module:"huawei-cfg"`
+}
+
+// IsYANGGoStruct ensures that HuaweiCfg_Cfg_CfgFiles_CfgFile_FileCurrentChanges implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiCfg_Cfg_CfgFiles_CfgFile_FileCurrentChanges) IsYANGGoStruct() {}
+
+// NewFileCurrentChange creates a new entry in the FileCurrentChange list of the
+// HuaweiCfg_Cfg_CfgFiles_CfgFile_FileCurrentChanges struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiCfg_Cfg_CfgFiles_CfgFile_FileCurrentChanges) NewFileCurrentChange(Index uint32) (*HuaweiCfg_Cfg_CfgFiles_CfgFile_FileCurrentChanges_FileCurrentChange, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.FileCurrentChange == nil {
+		t.FileCurrentChange = make(map[uint32]*HuaweiCfg_Cfg_CfgFiles_CfgFile_FileCurrentChanges_FileCurrentChange)
+	}
+
+	key := Index
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.FileCurrentChange[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list FileCurrentChange", key)
+	}
+
+	t.FileCurrentChange[key] = &HuaweiCfg_Cfg_CfgFiles_CfgFile_FileCurrentChanges_FileCurrentChange{
+		Index: &Index,
+	}
+
+	return t.FileCurrentChange[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiCfg_Cfg_CfgFiles_CfgFile_FileCurrentChanges) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiCfg_Cfg_CfgFiles_CfgFile_FileCurrentChanges"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiCfg_Cfg_CfgFiles_CfgFile_FileCurrentChanges) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiCfg_Cfg_CfgFiles_CfgFile_FileCurrentChanges) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiCfg_Cfg_CfgFiles_CfgFile_FileCurrentChanges.
+func (*HuaweiCfg_Cfg_CfgFiles_CfgFile_FileCurrentChanges) ΛBelongingModule() string {
+	return "huawei-cfg"
+}
+
+// HuaweiCfg_Cfg_CfgFiles_CfgFile_FileCurrentChanges_FileCurrentChange represents the /huawei-cfg/cfg/cfg-files/cfg-file/file-current-changes/file-current-change YANG schema element.
+type HuaweiCfg_Cfg_CfgFiles_CfgFile_FileCurrentChanges_FileCurrentChange struct {
+	ConfigChange *string `path:"config-change" module:"huawei-cfg"`
+	Index        *uint32 `path:"index" module:"huawei-cfg"`
+}
+
+// IsYANGGoStruct ensures that HuaweiCfg_Cfg_CfgFiles_CfgFile_FileCurrentChanges_FileCurrentChange implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiCfg_Cfg_CfgFiles_CfgFile_FileCurrentChanges_FileCurrentChange) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiCfg_Cfg_CfgFiles_CfgFile_FileCurrentChanges_FileCurrentChange struct, which is a YANG list entry.
+func (t *HuaweiCfg_Cfg_CfgFiles_CfgFile_FileCurrentChanges_FileCurrentChange) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.Index == nil {
+		return nil, fmt.Errorf("nil value for key Index")
+	}
+
+	return map[string]interface{}{
+		"index": *t.Index,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiCfg_Cfg_CfgFiles_CfgFile_FileCurrentChanges_FileCurrentChange) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiCfg_Cfg_CfgFiles_CfgFile_FileCurrentChanges_FileCurrentChange"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiCfg_Cfg_CfgFiles_CfgFile_FileCurrentChanges_FileCurrentChange) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiCfg_Cfg_CfgFiles_CfgFile_FileCurrentChanges_FileCurrentChange) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiCfg_Cfg_CfgFiles_CfgFile_FileCurrentChanges_FileCurrentChange.
+func (*HuaweiCfg_Cfg_CfgFiles_CfgFile_FileCurrentChanges_FileCurrentChange) ΛBelongingModule() string {
+	return "huawei-cfg"
+}
+
+// HuaweiCfg_Cfg_Checkpoints represents the /huawei-cfg/cfg/checkpoints YANG schema element.
+type HuaweiCfg_Cfg_Checkpoints struct {
+	Checkpoint map[string]*HuaweiCfg_Cfg_Checkpoints_Checkpoint `path:"checkpoint" module:"huawei-cfg"`
+}
+
+// IsYANGGoStruct ensures that HuaweiCfg_Cfg_Checkpoints implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiCfg_Cfg_Checkpoints) IsYANGGoStruct() {}
+
+// NewCheckpoint creates a new entry in the Checkpoint list of the
+// HuaweiCfg_Cfg_Checkpoints struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiCfg_Cfg_Checkpoints) NewCheckpoint(CommitId string) (*HuaweiCfg_Cfg_Checkpoints_Checkpoint, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.Checkpoint == nil {
+		t.Checkpoint = make(map[string]*HuaweiCfg_Cfg_Checkpoints_Checkpoint)
+	}
+
+	key := CommitId
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.Checkpoint[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Checkpoint", key)
+	}
+
+	t.Checkpoint[key] = &HuaweiCfg_Cfg_Checkpoints_Checkpoint{
+		CommitId: &CommitId,
+	}
+
+	return t.Checkpoint[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiCfg_Cfg_Checkpoints) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiCfg_Cfg_Checkpoints"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiCfg_Cfg_Checkpoints) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiCfg_Cfg_Checkpoints) ΛEnumTypeMap() map[string][]reflect.Type { return ΛEnumTypes }
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiCfg_Cfg_Checkpoints.
+func (*HuaweiCfg_Cfg_Checkpoints) ΛBelongingModule() string {
+	return "huawei-cfg"
+}
+
+// HuaweiCfg_Cfg_Checkpoints_Checkpoint represents the /huawei-cfg/cfg/checkpoints/checkpoint YANG schema element.
+type HuaweiCfg_Cfg_Checkpoints_Checkpoint struct {
+	Client              E_HuaweiCfg_ConfigCheckpointClient                        `path:"client" module:"huawei-cfg"`
+	CommitId            *string                                                   `path:"commit-id" module:"huawei-cfg"`
+	CurrentPointChanges *HuaweiCfg_Cfg_Checkpoints_Checkpoint_CurrentPointChanges `path:"current-point-changes" module:"huawei-cfg"`
+	Description         *string                                                   `path:"description" module:"huawei-cfg"`
+	Line                *string                                                   `path:"line" module:"huawei-cfg"`
+	SincePointChanges   *HuaweiCfg_Cfg_Checkpoints_Checkpoint_SincePointChanges   `path:"since-point-changes" module:"huawei-cfg"`
+	Timestamp           *string                                                   `path:"timestamp" module:"huawei-cfg"`
+	UserLabel           *string                                                   `path:"user-label" module:"huawei-cfg"`
+	Username            *string                                                   `path:"username" module:"huawei-cfg"`
+}
+
+// IsYANGGoStruct ensures that HuaweiCfg_Cfg_Checkpoints_Checkpoint implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiCfg_Cfg_Checkpoints_Checkpoint) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiCfg_Cfg_Checkpoints_Checkpoint struct, which is a YANG list entry.
+func (t *HuaweiCfg_Cfg_Checkpoints_Checkpoint) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.CommitId == nil {
+		return nil, fmt.Errorf("nil value for key CommitId")
+	}
+
+	return map[string]interface{}{
+		"commit-id": *t.CommitId,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiCfg_Cfg_Checkpoints_Checkpoint) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiCfg_Cfg_Checkpoints_Checkpoint"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiCfg_Cfg_Checkpoints_Checkpoint) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiCfg_Cfg_Checkpoints_Checkpoint) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiCfg_Cfg_Checkpoints_Checkpoint.
+func (*HuaweiCfg_Cfg_Checkpoints_Checkpoint) ΛBelongingModule() string {
+	return "huawei-cfg"
+}
+
+// HuaweiCfg_Cfg_Checkpoints_Checkpoint_CurrentPointChanges represents the /huawei-cfg/cfg/checkpoints/checkpoint/current-point-changes YANG schema element.
+type HuaweiCfg_Cfg_Checkpoints_Checkpoint_CurrentPointChanges struct {
+	CurrentPointChange map[uint32]*HuaweiCfg_Cfg_Checkpoints_Checkpoint_CurrentPointChanges_CurrentPointChange `path:"current-point-change" module:"huawei-cfg"`
+}
+
+// IsYANGGoStruct ensures that HuaweiCfg_Cfg_Checkpoints_Checkpoint_CurrentPointChanges implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiCfg_Cfg_Checkpoints_Checkpoint_CurrentPointChanges) IsYANGGoStruct() {}
+
+// NewCurrentPointChange creates a new entry in the CurrentPointChange list of the
+// HuaweiCfg_Cfg_Checkpoints_Checkpoint_CurrentPointChanges struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiCfg_Cfg_Checkpoints_Checkpoint_CurrentPointChanges) NewCurrentPointChange(Index uint32) (*HuaweiCfg_Cfg_Checkpoints_Checkpoint_CurrentPointChanges_CurrentPointChange, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.CurrentPointChange == nil {
+		t.CurrentPointChange = make(map[uint32]*HuaweiCfg_Cfg_Checkpoints_Checkpoint_CurrentPointChanges_CurrentPointChange)
+	}
+
+	key := Index
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.CurrentPointChange[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list CurrentPointChange", key)
+	}
+
+	t.CurrentPointChange[key] = &HuaweiCfg_Cfg_Checkpoints_Checkpoint_CurrentPointChanges_CurrentPointChange{
+		Index: &Index,
+	}
+
+	return t.CurrentPointChange[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiCfg_Cfg_Checkpoints_Checkpoint_CurrentPointChanges) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiCfg_Cfg_Checkpoints_Checkpoint_CurrentPointChanges"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiCfg_Cfg_Checkpoints_Checkpoint_CurrentPointChanges) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiCfg_Cfg_Checkpoints_Checkpoint_CurrentPointChanges) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiCfg_Cfg_Checkpoints_Checkpoint_CurrentPointChanges.
+func (*HuaweiCfg_Cfg_Checkpoints_Checkpoint_CurrentPointChanges) ΛBelongingModule() string {
+	return "huawei-cfg"
+}
+
+// HuaweiCfg_Cfg_Checkpoints_Checkpoint_CurrentPointChanges_CurrentPointChange represents the /huawei-cfg/cfg/checkpoints/checkpoint/current-point-changes/current-point-change YANG schema element.
+type HuaweiCfg_Cfg_Checkpoints_Checkpoint_CurrentPointChanges_CurrentPointChange struct {
+	ConfigChange *string `path:"config-change" module:"huawei-cfg"`
+	Index        *uint32 `path:"index" module:"huawei-cfg"`
+}
+
+// IsYANGGoStruct ensures that HuaweiCfg_Cfg_Checkpoints_Checkpoint_CurrentPointChanges_CurrentPointChange implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiCfg_Cfg_Checkpoints_Checkpoint_CurrentPointChanges_CurrentPointChange) IsYANGGoStruct() {
+}
+
+// ΛListKeyMap returns the keys of the HuaweiCfg_Cfg_Checkpoints_Checkpoint_CurrentPointChanges_CurrentPointChange struct, which is a YANG list entry.
+func (t *HuaweiCfg_Cfg_Checkpoints_Checkpoint_CurrentPointChanges_CurrentPointChange) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.Index == nil {
+		return nil, fmt.Errorf("nil value for key Index")
+	}
+
+	return map[string]interface{}{
+		"index": *t.Index,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiCfg_Cfg_Checkpoints_Checkpoint_CurrentPointChanges_CurrentPointChange) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiCfg_Cfg_Checkpoints_Checkpoint_CurrentPointChanges_CurrentPointChange"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiCfg_Cfg_Checkpoints_Checkpoint_CurrentPointChanges_CurrentPointChange) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiCfg_Cfg_Checkpoints_Checkpoint_CurrentPointChanges_CurrentPointChange) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiCfg_Cfg_Checkpoints_Checkpoint_CurrentPointChanges_CurrentPointChange.
+func (*HuaweiCfg_Cfg_Checkpoints_Checkpoint_CurrentPointChanges_CurrentPointChange) ΛBelongingModule() string {
+	return "huawei-cfg"
+}
+
+// HuaweiCfg_Cfg_Checkpoints_Checkpoint_SincePointChanges represents the /huawei-cfg/cfg/checkpoints/checkpoint/since-point-changes YANG schema element.
+type HuaweiCfg_Cfg_Checkpoints_Checkpoint_SincePointChanges struct {
+	SincePointChange map[uint32]*HuaweiCfg_Cfg_Checkpoints_Checkpoint_SincePointChanges_SincePointChange `path:"since-point-change" module:"huawei-cfg"`
+}
+
+// IsYANGGoStruct ensures that HuaweiCfg_Cfg_Checkpoints_Checkpoint_SincePointChanges implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiCfg_Cfg_Checkpoints_Checkpoint_SincePointChanges) IsYANGGoStruct() {}
+
+// NewSincePointChange creates a new entry in the SincePointChange list of the
+// HuaweiCfg_Cfg_Checkpoints_Checkpoint_SincePointChanges struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiCfg_Cfg_Checkpoints_Checkpoint_SincePointChanges) NewSincePointChange(Index uint32) (*HuaweiCfg_Cfg_Checkpoints_Checkpoint_SincePointChanges_SincePointChange, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.SincePointChange == nil {
+		t.SincePointChange = make(map[uint32]*HuaweiCfg_Cfg_Checkpoints_Checkpoint_SincePointChanges_SincePointChange)
+	}
+
+	key := Index
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.SincePointChange[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list SincePointChange", key)
+	}
+
+	t.SincePointChange[key] = &HuaweiCfg_Cfg_Checkpoints_Checkpoint_SincePointChanges_SincePointChange{
+		Index: &Index,
+	}
+
+	return t.SincePointChange[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiCfg_Cfg_Checkpoints_Checkpoint_SincePointChanges) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiCfg_Cfg_Checkpoints_Checkpoint_SincePointChanges"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiCfg_Cfg_Checkpoints_Checkpoint_SincePointChanges) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiCfg_Cfg_Checkpoints_Checkpoint_SincePointChanges) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiCfg_Cfg_Checkpoints_Checkpoint_SincePointChanges.
+func (*HuaweiCfg_Cfg_Checkpoints_Checkpoint_SincePointChanges) ΛBelongingModule() string {
+	return "huawei-cfg"
+}
+
+// HuaweiCfg_Cfg_Checkpoints_Checkpoint_SincePointChanges_SincePointChange represents the /huawei-cfg/cfg/checkpoints/checkpoint/since-point-changes/since-point-change YANG schema element.
+type HuaweiCfg_Cfg_Checkpoints_Checkpoint_SincePointChanges_SincePointChange struct {
+	ConfigChange *string `path:"config-change" module:"huawei-cfg"`
+	Index        *uint32 `path:"index" module:"huawei-cfg"`
+}
+
+// IsYANGGoStruct ensures that HuaweiCfg_Cfg_Checkpoints_Checkpoint_SincePointChanges_SincePointChange implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiCfg_Cfg_Checkpoints_Checkpoint_SincePointChanges_SincePointChange) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiCfg_Cfg_Checkpoints_Checkpoint_SincePointChanges_SincePointChange struct, which is a YANG list entry.
+func (t *HuaweiCfg_Cfg_Checkpoints_Checkpoint_SincePointChanges_SincePointChange) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.Index == nil {
+		return nil, fmt.Errorf("nil value for key Index")
+	}
+
+	return map[string]interface{}{
+		"index": *t.Index,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiCfg_Cfg_Checkpoints_Checkpoint_SincePointChanges_SincePointChange) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiCfg_Cfg_Checkpoints_Checkpoint_SincePointChanges_SincePointChange"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiCfg_Cfg_Checkpoints_Checkpoint_SincePointChanges_SincePointChange) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiCfg_Cfg_Checkpoints_Checkpoint_SincePointChanges_SincePointChange) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiCfg_Cfg_Checkpoints_Checkpoint_SincePointChanges_SincePointChange.
+func (*HuaweiCfg_Cfg_Checkpoints_Checkpoint_SincePointChanges_SincePointChange) ΛBelongingModule() string {
+	return "huawei-cfg"
+}
+
+// HuaweiCfg_Cfg_ClearInterfaceResults represents the /huawei-cfg/cfg/clear-interface-results YANG schema element.
+type HuaweiCfg_Cfg_ClearInterfaceResults struct {
+	ClearInterfaceResult map[string]*HuaweiCfg_Cfg_ClearInterfaceResults_ClearInterfaceResult `path:"clear-interface-result" module:"huawei-cfg"`
+}
+
+// IsYANGGoStruct ensures that HuaweiCfg_Cfg_ClearInterfaceResults implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiCfg_Cfg_ClearInterfaceResults) IsYANGGoStruct() {}
+
+// NewClearInterfaceResult creates a new entry in the ClearInterfaceResult list of the
+// HuaweiCfg_Cfg_ClearInterfaceResults struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiCfg_Cfg_ClearInterfaceResults) NewClearInterfaceResult(InterfaceName string) (*HuaweiCfg_Cfg_ClearInterfaceResults_ClearInterfaceResult, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.ClearInterfaceResult == nil {
+		t.ClearInterfaceResult = make(map[string]*HuaweiCfg_Cfg_ClearInterfaceResults_ClearInterfaceResult)
+	}
+
+	key := InterfaceName
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.ClearInterfaceResult[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list ClearInterfaceResult", key)
+	}
+
+	t.ClearInterfaceResult[key] = &HuaweiCfg_Cfg_ClearInterfaceResults_ClearInterfaceResult{
+		InterfaceName: &InterfaceName,
+	}
+
+	return t.ClearInterfaceResult[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiCfg_Cfg_ClearInterfaceResults) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiCfg_Cfg_ClearInterfaceResults"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiCfg_Cfg_ClearInterfaceResults) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiCfg_Cfg_ClearInterfaceResults) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiCfg_Cfg_ClearInterfaceResults.
+func (*HuaweiCfg_Cfg_ClearInterfaceResults) ΛBelongingModule() string {
+	return "huawei-cfg"
+}
+
+// HuaweiCfg_Cfg_ClearInterfaceResults_ClearInterfaceResult represents the /huawei-cfg/cfg/clear-interface-results/clear-interface-result YANG schema element.
+type HuaweiCfg_Cfg_ClearInterfaceResults_ClearInterfaceResult struct {
+	InterfaceName *string `path:"interface-name" module:"huawei-cfg"`
+	Result        *string `path:"result" module:"huawei-cfg"`
+}
+
+// IsYANGGoStruct ensures that HuaweiCfg_Cfg_ClearInterfaceResults_ClearInterfaceResult implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiCfg_Cfg_ClearInterfaceResults_ClearInterfaceResult) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiCfg_Cfg_ClearInterfaceResults_ClearInterfaceResult struct, which is a YANG list entry.
+func (t *HuaweiCfg_Cfg_ClearInterfaceResults_ClearInterfaceResult) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.InterfaceName == nil {
+		return nil, fmt.Errorf("nil value for key InterfaceName")
+	}
+
+	return map[string]interface{}{
+		"interface-name": *t.InterfaceName,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiCfg_Cfg_ClearInterfaceResults_ClearInterfaceResult) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiCfg_Cfg_ClearInterfaceResults_ClearInterfaceResult"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiCfg_Cfg_ClearInterfaceResults_ClearInterfaceResult) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiCfg_Cfg_ClearInterfaceResults_ClearInterfaceResult) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiCfg_Cfg_ClearInterfaceResults_ClearInterfaceResult.
+func (*HuaweiCfg_Cfg_ClearInterfaceResults_ClearInterfaceResult) ΛBelongingModule() string {
+	return "huawei-cfg"
+}
+
+// HuaweiCfg_Cfg_ConfigAutoBackupFiles represents the /huawei-cfg/cfg/config-auto-backup-files YANG schema element.
+type HuaweiCfg_Cfg_ConfigAutoBackupFiles struct {
+	ConfigAutoBackupFile map[string]*HuaweiCfg_Cfg_ConfigAutoBackupFiles_ConfigAutoBackupFile `path:"config-auto-backup-file" module:"huawei-cfg"`
+}
+
+// IsYANGGoStruct ensures that HuaweiCfg_Cfg_ConfigAutoBackupFiles implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiCfg_Cfg_ConfigAutoBackupFiles) IsYANGGoStruct() {}
+
+// NewConfigAutoBackupFile creates a new entry in the ConfigAutoBackupFile list of the
+// HuaweiCfg_Cfg_ConfigAutoBackupFiles struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiCfg_Cfg_ConfigAutoBackupFiles) NewConfigAutoBackupFile(AutoBackupTime string) (*HuaweiCfg_Cfg_ConfigAutoBackupFiles_ConfigAutoBackupFile, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.ConfigAutoBackupFile == nil {
+		t.ConfigAutoBackupFile = make(map[string]*HuaweiCfg_Cfg_ConfigAutoBackupFiles_ConfigAutoBackupFile)
+	}
+
+	key := AutoBackupTime
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.ConfigAutoBackupFile[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list ConfigAutoBackupFile", key)
+	}
+
+	t.ConfigAutoBackupFile[key] = &HuaweiCfg_Cfg_ConfigAutoBackupFiles_ConfigAutoBackupFile{
+		AutoBackupTime: &AutoBackupTime,
+	}
+
+	return t.ConfigAutoBackupFile[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiCfg_Cfg_ConfigAutoBackupFiles) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiCfg_Cfg_ConfigAutoBackupFiles"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiCfg_Cfg_ConfigAutoBackupFiles) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiCfg_Cfg_ConfigAutoBackupFiles) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiCfg_Cfg_ConfigAutoBackupFiles.
+func (*HuaweiCfg_Cfg_ConfigAutoBackupFiles) ΛBelongingModule() string {
+	return "huawei-cfg"
+}
+
+// HuaweiCfg_Cfg_ConfigAutoBackupFiles_ConfigAutoBackupFile represents the /huawei-cfg/cfg/config-auto-backup-files/config-auto-backup-file YANG schema element.
+type HuaweiCfg_Cfg_ConfigAutoBackupFiles_ConfigAutoBackupFile struct {
+	AutoBackupTime *string `path:"auto-backup-time" module:"huawei-cfg"`
+}
+
+// IsYANGGoStruct ensures that HuaweiCfg_Cfg_ConfigAutoBackupFiles_ConfigAutoBackupFile implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiCfg_Cfg_ConfigAutoBackupFiles_ConfigAutoBackupFile) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiCfg_Cfg_ConfigAutoBackupFiles_ConfigAutoBackupFile struct, which is a YANG list entry.
+func (t *HuaweiCfg_Cfg_ConfigAutoBackupFiles_ConfigAutoBackupFile) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.AutoBackupTime == nil {
+		return nil, fmt.Errorf("nil value for key AutoBackupTime")
+	}
+
+	return map[string]interface{}{
+		"auto-backup-time": *t.AutoBackupTime,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiCfg_Cfg_ConfigAutoBackupFiles_ConfigAutoBackupFile) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiCfg_Cfg_ConfigAutoBackupFiles_ConfigAutoBackupFile"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiCfg_Cfg_ConfigAutoBackupFiles_ConfigAutoBackupFile) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiCfg_Cfg_ConfigAutoBackupFiles_ConfigAutoBackupFile) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiCfg_Cfg_ConfigAutoBackupFiles_ConfigAutoBackupFile.
+func (*HuaweiCfg_Cfg_ConfigAutoBackupFiles_ConfigAutoBackupFile) ΛBelongingModule() string {
+	return "huawei-cfg"
+}
+
+// HuaweiCfg_Cfg_ConfigChangeFlowid represents the /huawei-cfg/cfg/config-change-flowid YANG schema element.
+type HuaweiCfg_Cfg_ConfigChangeFlowid struct {
+	ConfigBaselineTime *string `path:"config-baseline-time" module:"huawei-cfg"`
+	ConfigChangeFlowid *uint32 `path:"config-change-flowid" module:"huawei-cfg"`
+}
+
+// IsYANGGoStruct ensures that HuaweiCfg_Cfg_ConfigChangeFlowid implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiCfg_Cfg_ConfigChangeFlowid) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiCfg_Cfg_ConfigChangeFlowid) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiCfg_Cfg_ConfigChangeFlowid"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiCfg_Cfg_ConfigChangeFlowid) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiCfg_Cfg_ConfigChangeFlowid) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiCfg_Cfg_ConfigChangeFlowid.
+func (*HuaweiCfg_Cfg_ConfigChangeFlowid) ΛBelongingModule() string {
+	return "huawei-cfg"
+}
+
+// HuaweiCfg_Cfg_ConfigRecoverResults represents the /huawei-cfg/cfg/config-recover-results YANG schema element.
+type HuaweiCfg_Cfg_ConfigRecoverResults struct {
+	ConfigRecoverResult map[uint32]*HuaweiCfg_Cfg_ConfigRecoverResults_ConfigRecoverResult `path:"config-recover-result" module:"huawei-cfg"`
+}
+
+// IsYANGGoStruct ensures that HuaweiCfg_Cfg_ConfigRecoverResults implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiCfg_Cfg_ConfigRecoverResults) IsYANGGoStruct() {}
+
+// NewConfigRecoverResult creates a new entry in the ConfigRecoverResult list of the
+// HuaweiCfg_Cfg_ConfigRecoverResults struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiCfg_Cfg_ConfigRecoverResults) NewConfigRecoverResult(Index uint32) (*HuaweiCfg_Cfg_ConfigRecoverResults_ConfigRecoverResult, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.ConfigRecoverResult == nil {
+		t.ConfigRecoverResult = make(map[uint32]*HuaweiCfg_Cfg_ConfigRecoverResults_ConfigRecoverResult)
+	}
+
+	key := Index
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.ConfigRecoverResult[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list ConfigRecoverResult", key)
+	}
+
+	t.ConfigRecoverResult[key] = &HuaweiCfg_Cfg_ConfigRecoverResults_ConfigRecoverResult{
+		Index: &Index,
+	}
+
+	return t.ConfigRecoverResult[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiCfg_Cfg_ConfigRecoverResults) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiCfg_Cfg_ConfigRecoverResults"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiCfg_Cfg_ConfigRecoverResults) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiCfg_Cfg_ConfigRecoverResults) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiCfg_Cfg_ConfigRecoverResults.
+func (*HuaweiCfg_Cfg_ConfigRecoverResults) ΛBelongingModule() string {
+	return "huawei-cfg"
+}
+
+// HuaweiCfg_Cfg_ConfigRecoverResults_ConfigRecoverResult represents the /huawei-cfg/cfg/config-recover-results/config-recover-result YANG schema element.
+type HuaweiCfg_Cfg_ConfigRecoverResults_ConfigRecoverResult struct {
+	Command *string                   `path:"command" module:"huawei-cfg"`
+	Index   *uint32                   `path:"index" module:"huawei-cfg"`
+	Line    *uint32                   `path:"line" module:"huawei-cfg"`
+	Reason  E_HuaweiCfg_CommandResult `path:"reason" module:"huawei-cfg"`
+	Time    *string                   `path:"time" module:"huawei-cfg"`
+	View    *string                   `path:"view" module:"huawei-cfg"`
+}
+
+// IsYANGGoStruct ensures that HuaweiCfg_Cfg_ConfigRecoverResults_ConfigRecoverResult implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiCfg_Cfg_ConfigRecoverResults_ConfigRecoverResult) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiCfg_Cfg_ConfigRecoverResults_ConfigRecoverResult struct, which is a YANG list entry.
+func (t *HuaweiCfg_Cfg_ConfigRecoverResults_ConfigRecoverResult) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.Index == nil {
+		return nil, fmt.Errorf("nil value for key Index")
+	}
+
+	return map[string]interface{}{
+		"index": *t.Index,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiCfg_Cfg_ConfigRecoverResults_ConfigRecoverResult) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiCfg_Cfg_ConfigRecoverResults_ConfigRecoverResult"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiCfg_Cfg_ConfigRecoverResults_ConfigRecoverResult) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiCfg_Cfg_ConfigRecoverResults_ConfigRecoverResult) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiCfg_Cfg_ConfigRecoverResults_ConfigRecoverResult.
+func (*HuaweiCfg_Cfg_ConfigRecoverResults_ConfigRecoverResult) ΛBelongingModule() string {
+	return "huawei-cfg"
+}
+
+// HuaweiCfg_Cfg_ConfigRollbackResult represents the /huawei-cfg/cfg/config-rollback-result YANG schema element.
+type HuaweiCfg_Cfg_ConfigRollbackResult struct {
+}
+
+// IsYANGGoStruct ensures that HuaweiCfg_Cfg_ConfigRollbackResult implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiCfg_Cfg_ConfigRollbackResult) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiCfg_Cfg_ConfigRollbackResult) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiCfg_Cfg_ConfigRollbackResult"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiCfg_Cfg_ConfigRollbackResult) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiCfg_Cfg_ConfigRollbackResult) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiCfg_Cfg_ConfigRollbackResult.
+func (*HuaweiCfg_Cfg_ConfigRollbackResult) ΛBelongingModule() string {
+	return "huawei-cfg"
+}
+
+// HuaweiCfg_Cfg_ConfigSessions represents the /huawei-cfg/cfg/config-sessions YANG schema element.
+type HuaweiCfg_Cfg_ConfigSessions struct {
+	ConfigSession map[uint16]*HuaweiCfg_Cfg_ConfigSessions_ConfigSession `path:"config-session" module:"huawei-cfg"`
+}
+
+// IsYANGGoStruct ensures that HuaweiCfg_Cfg_ConfigSessions implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiCfg_Cfg_ConfigSessions) IsYANGGoStruct() {}
+
+// NewConfigSession creates a new entry in the ConfigSession list of the
+// HuaweiCfg_Cfg_ConfigSessions struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiCfg_Cfg_ConfigSessions) NewConfigSession(Sessionid uint16) (*HuaweiCfg_Cfg_ConfigSessions_ConfigSession, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.ConfigSession == nil {
+		t.ConfigSession = make(map[uint16]*HuaweiCfg_Cfg_ConfigSessions_ConfigSession)
+	}
+
+	key := Sessionid
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.ConfigSession[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list ConfigSession", key)
+	}
+
+	t.ConfigSession[key] = &HuaweiCfg_Cfg_ConfigSessions_ConfigSession{
+		Sessionid: &Sessionid,
+	}
+
+	return t.ConfigSession[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiCfg_Cfg_ConfigSessions) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiCfg_Cfg_ConfigSessions"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiCfg_Cfg_ConfigSessions) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiCfg_Cfg_ConfigSessions) ΛEnumTypeMap() map[string][]reflect.Type { return ΛEnumTypes }
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiCfg_Cfg_ConfigSessions.
+func (*HuaweiCfg_Cfg_ConfigSessions) ΛBelongingModule() string {
+	return "huawei-cfg"
+}
+
+// HuaweiCfg_Cfg_ConfigSessions_ConfigSession represents the /huawei-cfg/cfg/config-sessions/config-session YANG schema element.
+type HuaweiCfg_Cfg_ConfigSessions_ConfigSession struct {
+	Client     E_HuaweiCfg_ConfigCheckpointClient `path:"client" module:"huawei-cfg"`
+	CreateTime *string                            `path:"create-time" module:"huawei-cfg"`
+	Line       *string                            `path:"line" module:"huawei-cfg"`
+	LockReason *string                            `path:"lock-reason" module:"huawei-cfg"`
+	Sessionid  *uint16                            `path:"sessionid" module:"huawei-cfg"`
+	Username   *string                            `path:"username" module:"huawei-cfg"`
+}
+
+// IsYANGGoStruct ensures that HuaweiCfg_Cfg_ConfigSessions_ConfigSession implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiCfg_Cfg_ConfigSessions_ConfigSession) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiCfg_Cfg_ConfigSessions_ConfigSession struct, which is a YANG list entry.
+func (t *HuaweiCfg_Cfg_ConfigSessions_ConfigSession) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.Sessionid == nil {
+		return nil, fmt.Errorf("nil value for key Sessionid")
+	}
+
+	return map[string]interface{}{
+		"sessionid": *t.Sessionid,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiCfg_Cfg_ConfigSessions_ConfigSession) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiCfg_Cfg_ConfigSessions_ConfigSession"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiCfg_Cfg_ConfigSessions_ConfigSession) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiCfg_Cfg_ConfigSessions_ConfigSession) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiCfg_Cfg_ConfigSessions_ConfigSession.
+func (*HuaweiCfg_Cfg_ConfigSessions_ConfigSession) ΛBelongingModule() string {
+	return "huawei-cfg"
+}
+
+// HuaweiCfg_Cfg_ConfigurationOperationCpuLimit represents the /huawei-cfg/cfg/configuration-operation-cpu-limit YANG schema element.
+type HuaweiCfg_Cfg_ConfigurationOperationCpuLimit struct {
+	NetconfCpuLimit *uint32 `path:"netconf-cpu-limit" module:"huawei-cfg"`
+	NetconfSwitch   *bool   `path:"netconf-switch" module:"huawei-cfg"`
+	SnmpCpuLimit    *uint32 `path:"snmp-cpu-limit" module:"huawei-cfg"`
+	SnmpSwitch      *bool   `path:"snmp-switch" module:"huawei-cfg"`
+}
+
+// IsYANGGoStruct ensures that HuaweiCfg_Cfg_ConfigurationOperationCpuLimit implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiCfg_Cfg_ConfigurationOperationCpuLimit) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiCfg_Cfg_ConfigurationOperationCpuLimit) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiCfg_Cfg_ConfigurationOperationCpuLimit"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiCfg_Cfg_ConfigurationOperationCpuLimit) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiCfg_Cfg_ConfigurationOperationCpuLimit) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiCfg_Cfg_ConfigurationOperationCpuLimit.
+func (*HuaweiCfg_Cfg_ConfigurationOperationCpuLimit) ΛBelongingModule() string {
+	return "huawei-cfg"
+}
+
+// HuaweiCfg_Cfg_GlobalSwitch represents the /huawei-cfg/cfg/global-switch YANG schema element.
+type HuaweiCfg_Cfg_GlobalSwitch struct {
+	AppdataDetectSwitch            *bool `path:"appdata-detect-switch" module:"huawei-cfg"`
+	CheckpointSwitch               *bool `path:"checkpoint-switch" module:"huawei-cfg"`
+	ConfigurationSlaveDetectSwitch *bool `path:"configuration-slave-detect-switch" module:"huawei-cfg"`
+}
+
+// IsYANGGoStruct ensures that HuaweiCfg_Cfg_GlobalSwitch implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiCfg_Cfg_GlobalSwitch) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiCfg_Cfg_GlobalSwitch) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiCfg_Cfg_GlobalSwitch"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiCfg_Cfg_GlobalSwitch) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiCfg_Cfg_GlobalSwitch) ΛEnumTypeMap() map[string][]reflect.Type { return ΛEnumTypes }
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiCfg_Cfg_GlobalSwitch.
+func (*HuaweiCfg_Cfg_GlobalSwitch) ΛBelongingModule() string {
+	return "huawei-cfg"
+}
+
+// HuaweiCfg_Cfg_LastSaveInfo represents the /huawei-cfg/cfg/last-save-info YANG schema element.
+type HuaweiCfg_Cfg_LastSaveInfo struct {
+	SaveMethod E_HuaweiCfg_Cfg_LastSaveInfo_SaveMethod `path:"save-method" module:"huawei-cfg"`
+	SaveResult E_HuaweiCfg_Cfg_LastSaveInfo_SaveResult `path:"save-result" module:"huawei-cfg"`
+	SaveTime   *string                                 `path:"save-time" module:"huawei-cfg"`
+}
+
+// IsYANGGoStruct ensures that HuaweiCfg_Cfg_LastSaveInfo implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiCfg_Cfg_LastSaveInfo) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiCfg_Cfg_LastSaveInfo) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiCfg_Cfg_LastSaveInfo"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiCfg_Cfg_LastSaveInfo) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiCfg_Cfg_LastSaveInfo) ΛEnumTypeMap() map[string][]reflect.Type { return ΛEnumTypes }
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiCfg_Cfg_LastSaveInfo.
+func (*HuaweiCfg_Cfg_LastSaveInfo) ΛBelongingModule() string {
+	return "huawei-cfg"
+}
+
+// HuaweiCfg_Cfg_LockByUsername represents the /huawei-cfg/cfg/lock-by-username YANG schema element.
+type HuaweiCfg_Cfg_LockByUsername struct {
+	Identifier     *uint32 `path:"identifier" module:"huawei-cfg"`
+	LockTime       *string `path:"lock-time" module:"huawei-cfg"`
+	LockUsername   *string `path:"lock-username" module:"huawei-cfg"`
+	UnlockTime     *string `path:"unlock-time" module:"huawei-cfg"`
+	UnlockUsername *string `path:"unlock-username" module:"huawei-cfg"`
+}
+
+// IsYANGGoStruct ensures that HuaweiCfg_Cfg_LockByUsername implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiCfg_Cfg_LockByUsername) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiCfg_Cfg_LockByUsername) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiCfg_Cfg_LockByUsername"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiCfg_Cfg_LockByUsername) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiCfg_Cfg_LockByUsername) ΛEnumTypeMap() map[string][]reflect.Type { return ΛEnumTypes }
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiCfg_Cfg_LockByUsername.
+func (*HuaweiCfg_Cfg_LockByUsername) ΛBelongingModule() string {
+	return "huawei-cfg"
+}
+
+// HuaweiCfg_Cfg_LockByUsers represents the /huawei-cfg/cfg/lock-by-users YANG schema element.
+type HuaweiCfg_Cfg_LockByUsers struct {
+	LockByUser map[string]*HuaweiCfg_Cfg_LockByUsers_LockByUser `path:"lock-by-user" module:"huawei-cfg"`
+}
+
+// IsYANGGoStruct ensures that HuaweiCfg_Cfg_LockByUsers implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiCfg_Cfg_LockByUsers) IsYANGGoStruct() {}
+
+// NewLockByUser creates a new entry in the LockByUser list of the
+// HuaweiCfg_Cfg_LockByUsers struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiCfg_Cfg_LockByUsers) NewLockByUser(LockUsername string) (*HuaweiCfg_Cfg_LockByUsers_LockByUser, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.LockByUser == nil {
+		t.LockByUser = make(map[string]*HuaweiCfg_Cfg_LockByUsers_LockByUser)
+	}
+
+	key := LockUsername
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.LockByUser[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list LockByUser", key)
+	}
+
+	t.LockByUser[key] = &HuaweiCfg_Cfg_LockByUsers_LockByUser{
+		LockUsername: &LockUsername,
+	}
+
+	return t.LockByUser[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiCfg_Cfg_LockByUsers) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiCfg_Cfg_LockByUsers"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiCfg_Cfg_LockByUsers) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiCfg_Cfg_LockByUsers) ΛEnumTypeMap() map[string][]reflect.Type { return ΛEnumTypes }
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiCfg_Cfg_LockByUsers.
+func (*HuaweiCfg_Cfg_LockByUsers) ΛBelongingModule() string {
+	return "huawei-cfg"
+}
+
+// HuaweiCfg_Cfg_LockByUsers_LockByUser represents the /huawei-cfg/cfg/lock-by-users/lock-by-user YANG schema element.
+type HuaweiCfg_Cfg_LockByUsers_LockByUser struct {
+	Identifier     *uint32 `path:"identifier" module:"huawei-cfg"`
+	LockTime       *string `path:"lock-time" module:"huawei-cfg"`
+	LockUsername   *string `path:"lock-username" module:"huawei-cfg"`
+	UnlockTime     *string `path:"unlock-time" module:"huawei-cfg"`
+	UnlockUsername *string `path:"unlock-username" module:"huawei-cfg"`
+}
+
+// IsYANGGoStruct ensures that HuaweiCfg_Cfg_LockByUsers_LockByUser implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiCfg_Cfg_LockByUsers_LockByUser) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiCfg_Cfg_LockByUsers_LockByUser struct, which is a YANG list entry.
+func (t *HuaweiCfg_Cfg_LockByUsers_LockByUser) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.LockUsername == nil {
+		return nil, fmt.Errorf("nil value for key LockUsername")
+	}
+
+	return map[string]interface{}{
+		"lock-username": *t.LockUsername,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiCfg_Cfg_LockByUsers_LockByUser) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiCfg_Cfg_LockByUsers_LockByUser"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiCfg_Cfg_LockByUsers_LockByUser) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiCfg_Cfg_LockByUsers_LockByUser) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiCfg_Cfg_LockByUsers_LockByUser.
+func (*HuaweiCfg_Cfg_LockByUsers_LockByUser) ΛBelongingModule() string {
+	return "huawei-cfg"
+}
+
+// HuaweiCfg_Cfg_SavedConfigurationTime represents the /huawei-cfg/cfg/saved-configuration-time YANG schema element.
+type HuaweiCfg_Cfg_SavedConfigurationTime struct {
+	AutoSaveTime   *string `path:"auto-save-time" module:"huawei-cfg"`
+	ManualSaveTime *string `path:"manual-save-time" module:"huawei-cfg"`
+}
+
+// IsYANGGoStruct ensures that HuaweiCfg_Cfg_SavedConfigurationTime implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiCfg_Cfg_SavedConfigurationTime) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiCfg_Cfg_SavedConfigurationTime) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiCfg_Cfg_SavedConfigurationTime"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiCfg_Cfg_SavedConfigurationTime) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiCfg_Cfg_SavedConfigurationTime) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiCfg_Cfg_SavedConfigurationTime.
+func (*HuaweiCfg_Cfg_SavedConfigurationTime) ΛBelongingModule() string {
+	return "huawei-cfg"
+}
+
+// HuaweiCfg_Cfg_StartupInfos represents the /huawei-cfg/cfg/startup-infos YANG schema element.
+type HuaweiCfg_Cfg_StartupInfos struct {
+	StartupInfo map[string]*HuaweiCfg_Cfg_StartupInfos_StartupInfo `path:"startup-info" module:"huawei-cfg"`
+}
+
+// IsYANGGoStruct ensures that HuaweiCfg_Cfg_StartupInfos implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiCfg_Cfg_StartupInfos) IsYANGGoStruct() {}
+
+// NewStartupInfo creates a new entry in the StartupInfo list of the
+// HuaweiCfg_Cfg_StartupInfos struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiCfg_Cfg_StartupInfos) NewStartupInfo(Position string) (*HuaweiCfg_Cfg_StartupInfos_StartupInfo, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.StartupInfo == nil {
+		t.StartupInfo = make(map[string]*HuaweiCfg_Cfg_StartupInfos_StartupInfo)
+	}
+
+	key := Position
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.StartupInfo[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list StartupInfo", key)
+	}
+
+	t.StartupInfo[key] = &HuaweiCfg_Cfg_StartupInfos_StartupInfo{
+		Position: &Position,
+	}
+
+	return t.StartupInfo[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiCfg_Cfg_StartupInfos) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiCfg_Cfg_StartupInfos"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiCfg_Cfg_StartupInfos) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiCfg_Cfg_StartupInfos) ΛEnumTypeMap() map[string][]reflect.Type { return ΛEnumTypes }
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiCfg_Cfg_StartupInfos.
+func (*HuaweiCfg_Cfg_StartupInfos) ΛBelongingModule() string {
+	return "huawei-cfg"
+}
+
+// HuaweiCfg_Cfg_StartupInfos_StartupInfo represents the /huawei-cfg/cfg/startup-infos/startup-info YANG schema element.
+type HuaweiCfg_Cfg_StartupInfos_StartupInfo struct {
+	ConfigedSystemSoftware *string `path:"configed-system-software" module:"huawei-cfg"`
+	CurrentCfgFile         *string `path:"current-cfg-file" module:"huawei-cfg"`
+	CurrentPatchFile       *string `path:"current-patch-file" module:"huawei-cfg"`
+	CurrentSystemSoftware  *string `path:"current-system-software" module:"huawei-cfg"`
+	NextCfgFile            *string `path:"next-cfg-file" module:"huawei-cfg"`
+	NextPatchFile          *string `path:"next-patch-file" module:"huawei-cfg"`
+	NextSystemSoftware     *string `path:"next-system-software" module:"huawei-cfg"`
+	Position               *string `path:"position" module:"huawei-cfg"`
+}
+
+// IsYANGGoStruct ensures that HuaweiCfg_Cfg_StartupInfos_StartupInfo implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiCfg_Cfg_StartupInfos_StartupInfo) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiCfg_Cfg_StartupInfos_StartupInfo struct, which is a YANG list entry.
+func (t *HuaweiCfg_Cfg_StartupInfos_StartupInfo) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.Position == nil {
+		return nil, fmt.Errorf("nil value for key Position")
+	}
+
+	return map[string]interface{}{
+		"position": *t.Position,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiCfg_Cfg_StartupInfos_StartupInfo) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiCfg_Cfg_StartupInfos_StartupInfo"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiCfg_Cfg_StartupInfos_StartupInfo) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiCfg_Cfg_StartupInfos_StartupInfo) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiCfg_Cfg_StartupInfos_StartupInfo.
+func (*HuaweiCfg_Cfg_StartupInfos_StartupInfo) ΛBelongingModule() string {
+	return "huawei-cfg"
+}
+
+// HuaweiCfg_Cfg_StartupLock represents the /huawei-cfg/cfg/startup-lock YANG schema element.
+type HuaweiCfg_Cfg_StartupLock struct {
+	LockTime    *string `path:"lock-time" module:"huawei-cfg"`
+	SessionName *string `path:"session-name" module:"huawei-cfg"`
+	UserIndex   *uint32 `path:"user-index" module:"huawei-cfg"`
+	UserIp      *string `path:"user-ip" module:"huawei-cfg"`
+	Username    *string `path:"username" module:"huawei-cfg"`
+}
+
+// IsYANGGoStruct ensures that HuaweiCfg_Cfg_StartupLock implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiCfg_Cfg_StartupLock) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiCfg_Cfg_StartupLock) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiCfg_Cfg_StartupLock"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiCfg_Cfg_StartupLock) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiCfg_Cfg_StartupLock) ΛEnumTypeMap() map[string][]reflect.Type { return ΛEnumTypes }
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiCfg_Cfg_StartupLock.
+func (*HuaweiCfg_Cfg_StartupLock) ΛBelongingModule() string {
+	return "huawei-cfg"
+}
+
+// HuaweiCfg_Cfg_TrialStatus represents the /huawei-cfg/cfg/trial-status YANG schema element.
+type HuaweiCfg_Cfg_TrialStatus struct {
+	Status   E_HuaweiCfg_CfgTrialStatus `path:"status" module:"huawei-cfg"`
+	TimeLeft *uint32                    `path:"time-left" module:"huawei-cfg"`
+}
+
+// IsYANGGoStruct ensures that HuaweiCfg_Cfg_TrialStatus implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiCfg_Cfg_TrialStatus) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiCfg_Cfg_TrialStatus) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiCfg_Cfg_TrialStatus"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiCfg_Cfg_TrialStatus) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiCfg_Cfg_TrialStatus) ΛEnumTypeMap() map[string][]reflect.Type { return ΛEnumTypes }
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiCfg_Cfg_TrialStatus.
+func (*HuaweiCfg_Cfg_TrialStatus) ΛBelongingModule() string {
+	return "huawei-cfg"
+}
+
+// HuaweiCfg_Cfg_UserLock represents the /huawei-cfg/cfg/user-lock YANG schema element.
+type HuaweiCfg_Cfg_UserLock struct {
+	LastConfigTime      *string `path:"last-config-time" module:"huawei-cfg"`
+	LockTime            *string `path:"lock-time" module:"huawei-cfg"`
+	SessionName         *string `path:"session-name" module:"huawei-cfg"`
+	UserIndex           *uint32 `path:"user-index" module:"huawei-cfg"`
+	UserIp              *string `path:"user-ip" module:"huawei-cfg"`
+	UserLockTimeoutTime *uint32 `path:"user-lock-timeout-time" module:"huawei-cfg"`
+	Username            *string `path:"username" module:"huawei-cfg"`
+}
+
+// IsYANGGoStruct ensures that HuaweiCfg_Cfg_UserLock implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiCfg_Cfg_UserLock) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiCfg_Cfg_UserLock) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiCfg_Cfg_UserLock"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiCfg_Cfg_UserLock) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiCfg_Cfg_UserLock) ΛEnumTypeMap() map[string][]reflect.Type { return ΛEnumTypes }
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiCfg_Cfg_UserLock.
+func (*HuaweiCfg_Cfg_UserLock) ΛBelongingModule() string {
+	return "huawei-cfg"
+}
+
+// HuaweiDevm_Devm represents the /huawei-devm/devm YANG schema element.
+type HuaweiDevm_Devm struct {
+	Cards               *HuaweiDevm_Devm_Cards               `path:"cards" module:"huawei-devm"`
+	CfCards             *HuaweiDevm_Devm_CfCards             `path:"cf-cards" module:"huawei-devm"`
+	Chassiss            *HuaweiDevm_Devm_Chassiss            `path:"chassiss" module:"huawei-devm"`
+	Containers          *HuaweiDevm_Devm_Containers          `path:"containers" module:"huawei-devm"`
+	Driver              *HuaweiDevm_Devm_Driver              `path:"driver" module:"huawei-driver"`
+	EntityClasses       *HuaweiDevm_Devm_EntityClasses       `path:"entity-classes" module:"huawei-devm"`
+	InconsistentEntitys *HuaweiDevm_Devm_InconsistentEntitys `path:"inconsistent-entitys" module:"huawei-devm"`
+	LogicContainers     *HuaweiDevm_Devm_LogicContainers     `path:"logic-containers" module:"huawei-devm"`
+	LogicEntitys        *HuaweiDevm_Devm_LogicEntitys        `path:"logic-entitys" module:"huawei-devm"`
+	LogicPorts          *HuaweiDevm_Devm_LogicPorts          `path:"logic-ports" module:"huawei-devm"`
+	LpuBoards           *HuaweiDevm_Devm_LpuBoards           `path:"lpu-boards" module:"huawei-devm"`
+	MpuBoards           *HuaweiDevm_Devm_MpuBoards           `path:"mpu-boards" module:"huawei-devm"`
+	Offlines            *HuaweiDevm_Devm_Offlines            `path:"offlines" module:"huawei-devm"`
+	PhysicalEntitys     *HuaweiDevm_Devm_PhysicalEntitys     `path:"physical-entitys" module:"huawei-devm"`
+	Ports               *HuaweiDevm_Devm_Ports               `path:"ports" module:"huawei-devm"`
+	ScheduleReboot      *HuaweiDevm_Devm_ScheduleReboot      `path:"schedule-reboot" module:"huawei-devm"`
+	SfuBoards           *HuaweiDevm_Devm_SfuBoards           `path:"sfu-boards" module:"huawei-devm"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm) ΛEnumTypeMap() map[string][]reflect.Type { return ΛEnumTypes }
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm.
+func (*HuaweiDevm_Devm) ΛBelongingModule() string {
+	return "huawei-devm"
+}
+
+// HuaweiDevm_Devm_Cards represents the /huawei-devm/devm/cards YANG schema element.
+type HuaweiDevm_Devm_Cards struct {
+	Card map[HuaweiDevm_Devm_Cards_Card_Key]*HuaweiDevm_Devm_Cards_Card `path:"card" module:"huawei-devm"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_Cards implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_Cards) IsYANGGoStruct() {}
+
+// HuaweiDevm_Devm_Cards_Card_Key represents the key for list Card of element /huawei-devm/devm/cards.
+type HuaweiDevm_Devm_Cards_Card_Key struct {
+	Position string `path:"position"`
+	Index    uint32 `path:"index"`
+}
+
+// IsYANGGoKeyStruct ensures that HuaweiDevm_Devm_Cards_Card_Key partially implements the
+// yang.GoKeyStruct interface. This allows functions that need to
+// handle this key struct to identify it as being generated by gogen.
+func (HuaweiDevm_Devm_Cards_Card_Key) IsYANGGoKeyStruct() {}
+
+// ΛListKeyMap returns the values of the HuaweiDevm_Devm_Cards_Card_Key key struct.
+func (t HuaweiDevm_Devm_Cards_Card_Key) ΛListKeyMap() (map[string]interface{}, error) {
+	return map[string]interface{}{
+		"position": t.Position,
+		"index":    t.Index,
+	}, nil
+}
+
+// NewCard creates a new entry in the Card list of the
+// HuaweiDevm_Devm_Cards struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiDevm_Devm_Cards) NewCard(Position string, Index uint32) (*HuaweiDevm_Devm_Cards_Card, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.Card == nil {
+		t.Card = make(map[HuaweiDevm_Devm_Cards_Card_Key]*HuaweiDevm_Devm_Cards_Card)
+	}
+
+	key := HuaweiDevm_Devm_Cards_Card_Key{
+		Position: Position,
+		Index:    Index,
+	}
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.Card[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Card", key)
+	}
+
+	t.Card[key] = &HuaweiDevm_Devm_Cards_Card{
+		Position: &Position,
+		Index:    &Index,
+	}
+
+	return t.Card[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Cards) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_Cards"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Cards) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_Cards) ΛEnumTypeMap() map[string][]reflect.Type { return ΛEnumTypes }
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_Cards.
+func (*HuaweiDevm_Devm_Cards) ΛBelongingModule() string {
+	return "huawei-devm"
+}
+
+// HuaweiDevm_Devm_Cards_Card represents the /huawei-devm/devm/cards/card YANG schema element.
+type HuaweiDevm_Devm_Cards_Card struct {
+	HardType       *string                         `path:"hard-type" module:"huawei-devm"`
+	Index          *uint32                         `path:"index" module:"huawei-devm"`
+	InitStatus     E_HuaweiDevm_InitStatusType     `path:"init-status" module:"huawei-devm"`
+	Pic            *HuaweiDevm_Devm_Cards_Card_Pic `path:"pic" module:"huawei-devm"`
+	PortNum        *uint32                         `path:"port-num" module:"huawei-devm"`
+	Position       *string                         `path:"position" module:"huawei-devm"`
+	RegisterStatus E_HuaweiDevm_RegisterStatusType `path:"register-status" module:"huawei-devm"`
+	Type           *string                         `path:"type" module:"huawei-devm"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_Cards_Card implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_Cards_Card) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiDevm_Devm_Cards_Card struct, which is a YANG list entry.
+func (t *HuaweiDevm_Devm_Cards_Card) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.Index == nil {
+		return nil, fmt.Errorf("nil value for key Index")
+	}
+
+	if t.Position == nil {
+		return nil, fmt.Errorf("nil value for key Position")
+	}
+
+	return map[string]interface{}{
+		"index":    *t.Index,
+		"position": *t.Position,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Cards_Card) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_Cards_Card"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Cards_Card) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_Cards_Card) ΛEnumTypeMap() map[string][]reflect.Type { return ΛEnumTypes }
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_Cards_Card.
+func (*HuaweiDevm_Devm_Cards_Card) ΛBelongingModule() string {
+	return "huawei-devm"
+}
+
+// HuaweiDevm_Devm_Cards_Card_Pic represents the /huawei-devm/devm/cards/card/pic YANG schema element.
+type HuaweiDevm_Devm_Cards_Card_Pic struct {
+	LogicStatus E_HuaweiDevm_LogicStatusType `path:"logic-status" module:"huawei-devm"`
+	UpTime      *string                      `path:"up-time" module:"huawei-devm"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_Cards_Card_Pic implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_Cards_Card_Pic) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Cards_Card_Pic) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_Cards_Card_Pic"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Cards_Card_Pic) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_Cards_Card_Pic) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_Cards_Card_Pic.
+func (*HuaweiDevm_Devm_Cards_Card_Pic) ΛBelongingModule() string {
+	return "huawei-devm"
+}
+
+// HuaweiDevm_Devm_CfCards represents the /huawei-devm/devm/cf-cards YANG schema element.
+type HuaweiDevm_Devm_CfCards struct {
+	CfCard map[HuaweiDevm_Devm_CfCards_CfCard_Key]*HuaweiDevm_Devm_CfCards_CfCard `path:"cf-card" module:"huawei-devm"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_CfCards implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_CfCards) IsYANGGoStruct() {}
+
+// HuaweiDevm_Devm_CfCards_CfCard_Key represents the key for list CfCard of element /huawei-devm/devm/cf-cards.
+type HuaweiDevm_Devm_CfCards_CfCard_Key struct {
+	Position     string `path:"position"`
+	SerialNumber string `path:"serial-number"`
+}
+
+// IsYANGGoKeyStruct ensures that HuaweiDevm_Devm_CfCards_CfCard_Key partially implements the
+// yang.GoKeyStruct interface. This allows functions that need to
+// handle this key struct to identify it as being generated by gogen.
+func (HuaweiDevm_Devm_CfCards_CfCard_Key) IsYANGGoKeyStruct() {}
+
+// ΛListKeyMap returns the values of the HuaweiDevm_Devm_CfCards_CfCard_Key key struct.
+func (t HuaweiDevm_Devm_CfCards_CfCard_Key) ΛListKeyMap() (map[string]interface{}, error) {
+	return map[string]interface{}{
+		"position":      t.Position,
+		"serial-number": t.SerialNumber,
+	}, nil
+}
+
+// NewCfCard creates a new entry in the CfCard list of the
+// HuaweiDevm_Devm_CfCards struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiDevm_Devm_CfCards) NewCfCard(Position string, SerialNumber string) (*HuaweiDevm_Devm_CfCards_CfCard, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.CfCard == nil {
+		t.CfCard = make(map[HuaweiDevm_Devm_CfCards_CfCard_Key]*HuaweiDevm_Devm_CfCards_CfCard)
+	}
+
+	key := HuaweiDevm_Devm_CfCards_CfCard_Key{
+		Position:     Position,
+		SerialNumber: SerialNumber,
+	}
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.CfCard[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list CfCard", key)
+	}
+
+	t.CfCard[key] = &HuaweiDevm_Devm_CfCards_CfCard{
+		Position:     &Position,
+		SerialNumber: &SerialNumber,
+	}
+
+	return t.CfCard[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_CfCards) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_CfCards"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_CfCards) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_CfCards) ΛEnumTypeMap() map[string][]reflect.Type { return ΛEnumTypes }
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_CfCards.
+func (*HuaweiDevm_Devm_CfCards) ΛBelongingModule() string {
+	return "huawei-devm"
+}
+
+// HuaweiDevm_Devm_CfCards_CfCard represents the /huawei-devm/devm/cf-cards/cf-card YANG schema element.
+type HuaweiDevm_Devm_CfCards_CfCard struct {
+	CardType     *string `path:"card-type" module:"huawei-devm"`
+	Index        *uint32 `path:"index" module:"huawei-devm"`
+	MemoryFree   *uint32 `path:"memory-free" module:"huawei-devm"`
+	MemorySize   *uint32 `path:"memory-size" module:"huawei-devm"`
+	MemoryUsed   *uint32 `path:"memory-used" module:"huawei-devm"`
+	Position     *string `path:"position" module:"huawei-devm"`
+	SerialNumber *string `path:"serial-number" module:"huawei-devm"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_CfCards_CfCard implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_CfCards_CfCard) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiDevm_Devm_CfCards_CfCard struct, which is a YANG list entry.
+func (t *HuaweiDevm_Devm_CfCards_CfCard) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.Position == nil {
+		return nil, fmt.Errorf("nil value for key Position")
+	}
+
+	if t.SerialNumber == nil {
+		return nil, fmt.Errorf("nil value for key SerialNumber")
+	}
+
+	return map[string]interface{}{
+		"position":      *t.Position,
+		"serial-number": *t.SerialNumber,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_CfCards_CfCard) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_CfCards_CfCard"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_CfCards_CfCard) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_CfCards_CfCard) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_CfCards_CfCard.
+func (*HuaweiDevm_Devm_CfCards_CfCard) ΛBelongingModule() string {
+	return "huawei-devm"
+}
+
+// HuaweiDevm_Devm_Chassiss represents the /huawei-devm/devm/chassiss YANG schema element.
+type HuaweiDevm_Devm_Chassiss struct {
+	Chassis map[string]*HuaweiDevm_Devm_Chassiss_Chassis `path:"chassis" module:"huawei-devm"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_Chassiss implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_Chassiss) IsYANGGoStruct() {}
+
+// NewChassis creates a new entry in the Chassis list of the
+// HuaweiDevm_Devm_Chassiss struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiDevm_Devm_Chassiss) NewChassis(Position string) (*HuaweiDevm_Devm_Chassiss_Chassis, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.Chassis == nil {
+		t.Chassis = make(map[string]*HuaweiDevm_Devm_Chassiss_Chassis)
+	}
+
+	key := Position
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.Chassis[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Chassis", key)
+	}
+
+	t.Chassis[key] = &HuaweiDevm_Devm_Chassiss_Chassis{
+		Position: &Position,
+	}
+
+	return t.Chassis[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Chassiss) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_Chassiss"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Chassiss) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_Chassiss) ΛEnumTypeMap() map[string][]reflect.Type { return ΛEnumTypes }
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_Chassiss.
+func (*HuaweiDevm_Devm_Chassiss) ΛBelongingModule() string {
+	return "huawei-devm"
+}
+
+// HuaweiDevm_Devm_Chassiss_Chassis represents the /huawei-devm/devm/chassiss/chassis YANG schema element.
+type HuaweiDevm_Devm_Chassiss_Chassis struct {
+	AlarmExistDays       *uint32                                                `path:"alarm-exist-days" module:"huawei-devm"`
+	BoardNum             *uint32                                                `path:"board-num" module:"huawei-devm"`
+	CurrentId            *uint32                                                `path:"current-id" module:"huawei-devm"`
+	CurrentRunMode       E_HuaweiDevm_ProductType                               `path:"current-run-mode" module:"huawei-devm"`
+	DustCleanCycle       *uint32                                                `path:"dust-clean-cycle" module:"huawei-devm"`
+	DustproofAttribute   *HuaweiDevm_Devm_Chassiss_Chassis_DustproofAttribute   `path:"dustproof-attribute" module:"huawei-driver"`
+	EntityLastChange     *uint32                                                `path:"entity-last-change" module:"huawei-devm"`
+	FanAttribute         *HuaweiDevm_Devm_Chassiss_Chassis_FanAttribute         `path:"fan-attribute" module:"huawei-driver"`
+	FanNum               *uint32                                                `path:"fan-num" module:"huawei-devm"`
+	Index                *uint32                                                `path:"index" module:"huawei-devm"`
+	LastCleanDate        *string                                                `path:"last-clean-date" module:"huawei-devm"`
+	MonitorBoardChanges  *HuaweiDevm_Devm_Chassiss_Chassis_MonitorBoardChanges  `path:"monitor-board-changes" module:"huawei-devm"`
+	NextId               *uint32                                                `path:"next-id" module:"huawei-devm"`
+	NextRunMode          E_HuaweiDevm_ProductType                               `path:"next-run-mode" module:"huawei-devm"`
+	Position             *string                                                `path:"position" module:"huawei-devm"`
+	PowerNum             *uint32                                                `path:"power-num" module:"huawei-devm"`
+	PowerSupplyAttribute *HuaweiDevm_Devm_Chassiss_Chassis_PowerSupplyAttribute `path:"power-supply-attribute" module:"huawei-driver"`
+	ServiceType          *string                                                `path:"service-type" module:"huawei-devm"`
+	SlotNum              *uint32                                                `path:"slot-num" module:"huawei-devm"`
+	StatusLastChange     *uint32                                                `path:"status-last-change" module:"huawei-devm"`
+	Type                 *string                                                `path:"type" module:"huawei-devm"`
+	UpTime               *uint32                                                `path:"up-time" module:"huawei-devm"`
+	UpToLastClean        *uint32                                                `path:"up-to-last-clean" module:"huawei-devm"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_Chassiss_Chassis implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_Chassiss_Chassis) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiDevm_Devm_Chassiss_Chassis struct, which is a YANG list entry.
+func (t *HuaweiDevm_Devm_Chassiss_Chassis) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.Position == nil {
+		return nil, fmt.Errorf("nil value for key Position")
+	}
+
+	return map[string]interface{}{
+		"position": *t.Position,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Chassiss_Chassis) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_Chassiss_Chassis"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Chassiss_Chassis) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_Chassiss_Chassis) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_Chassiss_Chassis.
+func (*HuaweiDevm_Devm_Chassiss_Chassis) ΛBelongingModule() string {
+	return "huawei-devm"
+}
+
+// HuaweiDevm_Devm_Chassiss_Chassis_DustproofAttribute represents the /huawei-devm/devm/chassiss/chassis/dustproof-attribute YANG schema element.
+type HuaweiDevm_Devm_Chassiss_Chassis_DustproofAttribute struct {
+	DustproofDelayTime *uint32                           `path:"dustproof-delay-time" module:"huawei-driver"`
+	Dustproofcheck     E_HuaweiDriver_DustproofGateState `path:"dustproofcheck" module:"huawei-driver"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_Chassiss_Chassis_DustproofAttribute implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_Chassiss_Chassis_DustproofAttribute) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Chassiss_Chassis_DustproofAttribute) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_Chassiss_Chassis_DustproofAttribute"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Chassiss_Chassis_DustproofAttribute) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_Chassiss_Chassis_DustproofAttribute) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_Chassiss_Chassis_DustproofAttribute.
+func (*HuaweiDevm_Devm_Chassiss_Chassis_DustproofAttribute) ΛBelongingModule() string {
+	return "huawei-driver"
+}
+
+// HuaweiDevm_Devm_Chassiss_Chassis_FanAttribute represents the /huawei-devm/devm/chassiss/chassis/fan-attribute YANG schema element.
+type HuaweiDevm_Devm_Chassiss_Chassis_FanAttribute struct {
+	Speed    *uint32                    `path:"speed" module:"huawei-driver"`
+	Workmode E_HuaweiDriver_FanWorkmode `path:"workmode" module:"huawei-driver"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_Chassiss_Chassis_FanAttribute implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_Chassiss_Chassis_FanAttribute) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Chassiss_Chassis_FanAttribute) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_Chassiss_Chassis_FanAttribute"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Chassiss_Chassis_FanAttribute) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_Chassiss_Chassis_FanAttribute) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_Chassiss_Chassis_FanAttribute.
+func (*HuaweiDevm_Devm_Chassiss_Chassis_FanAttribute) ΛBelongingModule() string {
+	return "huawei-driver"
+}
+
+// HuaweiDevm_Devm_Chassiss_Chassis_MonitorBoardChanges represents the /huawei-devm/devm/chassiss/chassis/monitor-board-changes YANG schema element.
+type HuaweiDevm_Devm_Chassiss_Chassis_MonitorBoardChanges struct {
+	MonitorBoardChange map[uint32]*HuaweiDevm_Devm_Chassiss_Chassis_MonitorBoardChanges_MonitorBoardChange `path:"monitor-board-change" module:"huawei-devm"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_Chassiss_Chassis_MonitorBoardChanges implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_Chassiss_Chassis_MonitorBoardChanges) IsYANGGoStruct() {}
+
+// NewMonitorBoardChange creates a new entry in the MonitorBoardChange list of the
+// HuaweiDevm_Devm_Chassiss_Chassis_MonitorBoardChanges struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiDevm_Devm_Chassiss_Chassis_MonitorBoardChanges) NewMonitorBoardChange(BoardIndex uint32) (*HuaweiDevm_Devm_Chassiss_Chassis_MonitorBoardChanges_MonitorBoardChange, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.MonitorBoardChange == nil {
+		t.MonitorBoardChange = make(map[uint32]*HuaweiDevm_Devm_Chassiss_Chassis_MonitorBoardChanges_MonitorBoardChange)
+	}
+
+	key := BoardIndex
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.MonitorBoardChange[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list MonitorBoardChange", key)
+	}
+
+	t.MonitorBoardChange[key] = &HuaweiDevm_Devm_Chassiss_Chassis_MonitorBoardChanges_MonitorBoardChange{
+		BoardIndex: &BoardIndex,
+	}
+
+	return t.MonitorBoardChange[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Chassiss_Chassis_MonitorBoardChanges) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_Chassiss_Chassis_MonitorBoardChanges"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Chassiss_Chassis_MonitorBoardChanges) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_Chassiss_Chassis_MonitorBoardChanges) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_Chassiss_Chassis_MonitorBoardChanges.
+func (*HuaweiDevm_Devm_Chassiss_Chassis_MonitorBoardChanges) ΛBelongingModule() string {
+	return "huawei-devm"
+}
+
+// HuaweiDevm_Devm_Chassiss_Chassis_MonitorBoardChanges_MonitorBoardChange represents the /huawei-devm/devm/chassiss/chassis/monitor-board-changes/monitor-board-change YANG schema element.
+type HuaweiDevm_Devm_Chassiss_Chassis_MonitorBoardChanges_MonitorBoardChange struct {
+	BoardIndex       *uint32 `path:"board-index" module:"huawei-devm"`
+	EntityLastChange *uint32 `path:"entity-last-change" module:"huawei-devm"`
+	StatusLastChange *uint32 `path:"status-last-change" module:"huawei-devm"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_Chassiss_Chassis_MonitorBoardChanges_MonitorBoardChange implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_Chassiss_Chassis_MonitorBoardChanges_MonitorBoardChange) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiDevm_Devm_Chassiss_Chassis_MonitorBoardChanges_MonitorBoardChange struct, which is a YANG list entry.
+func (t *HuaweiDevm_Devm_Chassiss_Chassis_MonitorBoardChanges_MonitorBoardChange) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.BoardIndex == nil {
+		return nil, fmt.Errorf("nil value for key BoardIndex")
+	}
+
+	return map[string]interface{}{
+		"board-index": *t.BoardIndex,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Chassiss_Chassis_MonitorBoardChanges_MonitorBoardChange) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_Chassiss_Chassis_MonitorBoardChanges_MonitorBoardChange"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Chassiss_Chassis_MonitorBoardChanges_MonitorBoardChange) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_Chassiss_Chassis_MonitorBoardChanges_MonitorBoardChange) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_Chassiss_Chassis_MonitorBoardChanges_MonitorBoardChange.
+func (*HuaweiDevm_Devm_Chassiss_Chassis_MonitorBoardChanges_MonitorBoardChange) ΛBelongingModule() string {
+	return "huawei-devm"
+}
+
+// HuaweiDevm_Devm_Chassiss_Chassis_PowerSupplyAttribute represents the /huawei-devm/devm/chassiss/chassis/power-supply-attribute YANG schema element.
+type HuaweiDevm_Devm_Chassiss_Chassis_PowerSupplyAttribute struct {
+	PmInputVoltage_110         E_HuaweiDriver_DriverBool        `path:"pm-input-voltage-110" module:"huawei-driver"`
+	PmOutputLimit              *uint32                          `path:"pm-output-limit" module:"huawei-driver"`
+	PowerSupplyAlarmLimit      *uint32                          `path:"power-supply-alarm-limit" module:"huawei-driver"`
+	PowerSupplyAssigned        *uint32                          `path:"power-supply-assigned" module:"huawei-driver"`
+	PowerSupplyAssignedUtility *string                          `path:"power-supply-assigned-utility" module:"huawei-driver"`
+	PowerSupplyInput           *uint32                          `path:"power-supply-input" module:"huawei-driver"`
+	PowerSupplyLeft            *int32                           `path:"power-supply-left" module:"huawei-driver"`
+	PowerSupplyLimit           *uint32                          `path:"power-supply-limit" module:"huawei-driver"`
+	PowerSupplyMode            E_HuaweiDriver_PwrSupplyModeType `path:"power-supply-mode" module:"huawei-driver"`
+	PowerSupplyReal            *uint32                          `path:"power-supply-real" module:"huawei-driver"`
+	PowerSupplyRealUtility     *string                          `path:"power-supply-real-utility" module:"huawei-driver"`
+	PowerSupplyTemp            E_HuaweiDriver_PwrSupplyTempType `path:"power-supply-temp" module:"huawei-driver"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_Chassiss_Chassis_PowerSupplyAttribute implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_Chassiss_Chassis_PowerSupplyAttribute) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Chassiss_Chassis_PowerSupplyAttribute) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_Chassiss_Chassis_PowerSupplyAttribute"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Chassiss_Chassis_PowerSupplyAttribute) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_Chassiss_Chassis_PowerSupplyAttribute) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_Chassiss_Chassis_PowerSupplyAttribute.
+func (*HuaweiDevm_Devm_Chassiss_Chassis_PowerSupplyAttribute) ΛBelongingModule() string {
+	return "huawei-driver"
+}
+
+// HuaweiDevm_Devm_Containers represents the /huawei-devm/devm/containers YANG schema element.
+type HuaweiDevm_Devm_Containers struct {
+	Container map[string]*HuaweiDevm_Devm_Containers_Container `path:"container" module:"huawei-devm"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_Containers implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_Containers) IsYANGGoStruct() {}
+
+// NewContainer creates a new entry in the Container list of the
+// HuaweiDevm_Devm_Containers struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiDevm_Devm_Containers) NewContainer(Position string) (*HuaweiDevm_Devm_Containers_Container, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.Container == nil {
+		t.Container = make(map[string]*HuaweiDevm_Devm_Containers_Container)
+	}
+
+	key := Position
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.Container[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Container", key)
+	}
+
+	t.Container[key] = &HuaweiDevm_Devm_Containers_Container{
+		Position: &Position,
+	}
+
+	return t.Container[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Containers) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_Containers"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Containers) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_Containers) ΛEnumTypeMap() map[string][]reflect.Type { return ΛEnumTypes }
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_Containers.
+func (*HuaweiDevm_Devm_Containers) ΛBelongingModule() string {
+	return "huawei-devm"
+}
+
+// HuaweiDevm_Devm_Containers_Container represents the /huawei-devm/devm/containers/container YANG schema element.
+type HuaweiDevm_Devm_Containers_Container struct {
+	EquipedEntityType    *string                                                    `path:"equiped-entity-type" module:"huawei-devm"`
+	Index                *uint32                                                    `path:"index" module:"huawei-devm"`
+	Position             *string                                                    `path:"position" module:"huawei-devm"`
+	SupportedEntityTypes *HuaweiDevm_Devm_Containers_Container_SupportedEntityTypes `path:"supported-entity-types" module:"huawei-devm"`
+	Type                 *string                                                    `path:"type" module:"huawei-devm"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_Containers_Container implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_Containers_Container) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiDevm_Devm_Containers_Container struct, which is a YANG list entry.
+func (t *HuaweiDevm_Devm_Containers_Container) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.Position == nil {
+		return nil, fmt.Errorf("nil value for key Position")
+	}
+
+	return map[string]interface{}{
+		"position": *t.Position,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Containers_Container) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_Containers_Container"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Containers_Container) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_Containers_Container) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_Containers_Container.
+func (*HuaweiDevm_Devm_Containers_Container) ΛBelongingModule() string {
+	return "huawei-devm"
+}
+
+// HuaweiDevm_Devm_Containers_Container_SupportedEntityTypes represents the /huawei-devm/devm/containers/container/supported-entity-types YANG schema element.
+type HuaweiDevm_Devm_Containers_Container_SupportedEntityTypes struct {
+	SupportedEntityType map[string]*HuaweiDevm_Devm_Containers_Container_SupportedEntityTypes_SupportedEntityType `path:"supported-entity-type" module:"huawei-devm"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_Containers_Container_SupportedEntityTypes implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_Containers_Container_SupportedEntityTypes) IsYANGGoStruct() {}
+
+// NewSupportedEntityType creates a new entry in the SupportedEntityType list of the
+// HuaweiDevm_Devm_Containers_Container_SupportedEntityTypes struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiDevm_Devm_Containers_Container_SupportedEntityTypes) NewSupportedEntityType(EntityType string) (*HuaweiDevm_Devm_Containers_Container_SupportedEntityTypes_SupportedEntityType, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.SupportedEntityType == nil {
+		t.SupportedEntityType = make(map[string]*HuaweiDevm_Devm_Containers_Container_SupportedEntityTypes_SupportedEntityType)
+	}
+
+	key := EntityType
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.SupportedEntityType[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list SupportedEntityType", key)
+	}
+
+	t.SupportedEntityType[key] = &HuaweiDevm_Devm_Containers_Container_SupportedEntityTypes_SupportedEntityType{
+		EntityType: &EntityType,
+	}
+
+	return t.SupportedEntityType[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Containers_Container_SupportedEntityTypes) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_Containers_Container_SupportedEntityTypes"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Containers_Container_SupportedEntityTypes) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_Containers_Container_SupportedEntityTypes) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_Containers_Container_SupportedEntityTypes.
+func (*HuaweiDevm_Devm_Containers_Container_SupportedEntityTypes) ΛBelongingModule() string {
+	return "huawei-devm"
+}
+
+// HuaweiDevm_Devm_Containers_Container_SupportedEntityTypes_SupportedEntityType represents the /huawei-devm/devm/containers/container/supported-entity-types/supported-entity-type YANG schema element.
+type HuaweiDevm_Devm_Containers_Container_SupportedEntityTypes_SupportedEntityType struct {
+	EntityType *string `path:"entity-type" module:"huawei-devm"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_Containers_Container_SupportedEntityTypes_SupportedEntityType implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_Containers_Container_SupportedEntityTypes_SupportedEntityType) IsYANGGoStruct() {
+}
+
+// ΛListKeyMap returns the keys of the HuaweiDevm_Devm_Containers_Container_SupportedEntityTypes_SupportedEntityType struct, which is a YANG list entry.
+func (t *HuaweiDevm_Devm_Containers_Container_SupportedEntityTypes_SupportedEntityType) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.EntityType == nil {
+		return nil, fmt.Errorf("nil value for key EntityType")
+	}
+
+	return map[string]interface{}{
+		"entity-type": *t.EntityType,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Containers_Container_SupportedEntityTypes_SupportedEntityType) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_Containers_Container_SupportedEntityTypes_SupportedEntityType"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Containers_Container_SupportedEntityTypes_SupportedEntityType) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_Containers_Container_SupportedEntityTypes_SupportedEntityType) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_Containers_Container_SupportedEntityTypes_SupportedEntityType.
+func (*HuaweiDevm_Devm_Containers_Container_SupportedEntityTypes_SupportedEntityType) ΛBelongingModule() string {
+	return "huawei-devm"
+}
+
+// HuaweiDevm_Devm_Driver represents the /huawei-devm/devm/driver YANG schema element.
+type HuaweiDevm_Devm_Driver struct {
+	Ccus         *HuaweiDevm_Devm_Driver_Ccus         `path:"ccus" module:"huawei-driver"`
+	Cmus         *HuaweiDevm_Devm_Driver_Cmus         `path:"cmus" module:"huawei-driver"`
+	Dacss        *HuaweiDevm_Devm_Driver_Dacss        `path:"dacss" module:"huawei-driver"`
+	Dmus         *HuaweiDevm_Devm_Driver_Dmus         `path:"dmus" module:"huawei-driver"`
+	Ecus         *HuaweiDevm_Devm_Driver_Ecus         `path:"ecus" module:"huawei-driver"`
+	Fans         *HuaweiDevm_Devm_Driver_Fans         `path:"fans" module:"huawei-driver"`
+	Icus         *HuaweiDevm_Devm_Driver_Icus         `path:"icus" module:"huawei-driver"`
+	Lcds         *HuaweiDevm_Devm_Driver_Lcds         `path:"lcds" module:"huawei-driver"`
+	Pdus         *HuaweiDevm_Devm_Driver_Pdus         `path:"pdus" module:"huawei-driver"`
+	Pms          *HuaweiDevm_Devm_Driver_Pms          `path:"pms" module:"huawei-driver"`
+	Pmus         *HuaweiDevm_Devm_Driver_Pmus         `path:"pmus" module:"huawei-driver"`
+	PowerSupplys *HuaweiDevm_Devm_Driver_PowerSupplys `path:"power-supplys" module:"huawei-driver"`
+	Vsus         *HuaweiDevm_Devm_Driver_Vsus         `path:"vsus" module:"huawei-driver"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_Driver implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_Driver) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Driver) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_Driver"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Driver) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_Driver) ΛEnumTypeMap() map[string][]reflect.Type { return ΛEnumTypes }
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_Driver.
+func (*HuaweiDevm_Devm_Driver) ΛBelongingModule() string {
+	return "huawei-driver"
+}
+
+// HuaweiDevm_Devm_Driver_Ccus represents the /huawei-devm/devm/driver/ccus YANG schema element.
+type HuaweiDevm_Devm_Driver_Ccus struct {
+	Ccu *HuaweiDevm_Devm_Driver_Ccus_Ccu `path:"ccu" module:"huawei-driver"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_Driver_Ccus implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_Driver_Ccus) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Driver_Ccus) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_Driver_Ccus"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Driver_Ccus) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_Driver_Ccus) ΛEnumTypeMap() map[string][]reflect.Type { return ΛEnumTypes }
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_Driver_Ccus.
+func (*HuaweiDevm_Devm_Driver_Ccus) ΛBelongingModule() string {
+	return "huawei-driver"
+}
+
+// HuaweiDevm_Devm_Driver_Ccus_Ccu represents the /huawei-devm/devm/driver/ccus/ccu YANG schema element.
+type HuaweiDevm_Devm_Driver_Ccus_Ccu struct {
+	SoftwareVersion *string `path:"software-version" module:"huawei-driver"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_Driver_Ccus_Ccu implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_Driver_Ccus_Ccu) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Driver_Ccus_Ccu) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_Driver_Ccus_Ccu"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Driver_Ccus_Ccu) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_Driver_Ccus_Ccu) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_Driver_Ccus_Ccu.
+func (*HuaweiDevm_Devm_Driver_Ccus_Ccu) ΛBelongingModule() string {
+	return "huawei-driver"
+}
+
+// HuaweiDevm_Devm_Driver_Cmus represents the /huawei-devm/devm/driver/cmus YANG schema element.
+type HuaweiDevm_Devm_Driver_Cmus struct {
+	Cmu map[string]*HuaweiDevm_Devm_Driver_Cmus_Cmu `path:"cmu" module:"huawei-driver"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_Driver_Cmus implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_Driver_Cmus) IsYANGGoStruct() {}
+
+// NewCmu creates a new entry in the Cmu list of the
+// HuaweiDevm_Devm_Driver_Cmus struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiDevm_Devm_Driver_Cmus) NewCmu(Position string) (*HuaweiDevm_Devm_Driver_Cmus_Cmu, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.Cmu == nil {
+		t.Cmu = make(map[string]*HuaweiDevm_Devm_Driver_Cmus_Cmu)
+	}
+
+	key := Position
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.Cmu[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Cmu", key)
+	}
+
+	t.Cmu[key] = &HuaweiDevm_Devm_Driver_Cmus_Cmu{
+		Position: &Position,
+	}
+
+	return t.Cmu[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Driver_Cmus) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_Driver_Cmus"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Driver_Cmus) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_Driver_Cmus) ΛEnumTypeMap() map[string][]reflect.Type { return ΛEnumTypes }
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_Driver_Cmus.
+func (*HuaweiDevm_Devm_Driver_Cmus) ΛBelongingModule() string {
+	return "huawei-driver"
+}
+
+// HuaweiDevm_Devm_Driver_Cmus_Cmu represents the /huawei-devm/devm/driver/cmus/cmu YANG schema element.
+type HuaweiDevm_Devm_Driver_Cmus_Cmu struct {
+	BoardType   E_HuaweiDriver_HardwareHardType             `path:"board-type" module:"huawei-driver"`
+	CmuAlarms   *HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuAlarms  `path:"cmu-alarms" module:"huawei-driver"`
+	CmuAnalogs  *HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuAnalogs `path:"cmu-analogs" module:"huawei-driver"`
+	CmuRelays   *HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuRelays  `path:"cmu-relays" module:"huawei-driver"`
+	CmuSwitchs  *HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuSwitchs `path:"cmu-switchs" module:"huawei-driver"`
+	EntityIndex *uint32                                     `path:"entity-index" module:"huawei-driver"`
+	FlashSize   *uint32                                     `path:"flash-size" module:"huawei-driver"`
+	Position    *string                                     `path:"position" module:"huawei-driver"`
+	Role        E_HuaweiDriver_DriverCmuRole                `path:"role" module:"huawei-driver"`
+	SdramSize   *uint32                                     `path:"sdram-size" module:"huawei-driver"`
+	UpTime      *uint32                                     `path:"up-time" module:"huawei-driver"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_Driver_Cmus_Cmu implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_Driver_Cmus_Cmu) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiDevm_Devm_Driver_Cmus_Cmu struct, which is a YANG list entry.
+func (t *HuaweiDevm_Devm_Driver_Cmus_Cmu) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.Position == nil {
+		return nil, fmt.Errorf("nil value for key Position")
+	}
+
+	return map[string]interface{}{
+		"position": *t.Position,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Driver_Cmus_Cmu) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_Driver_Cmus_Cmu"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Driver_Cmus_Cmu) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_Driver_Cmus_Cmu) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_Driver_Cmus_Cmu.
+func (*HuaweiDevm_Devm_Driver_Cmus_Cmu) ΛBelongingModule() string {
+	return "huawei-driver"
+}
+
+// HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuAlarms represents the /huawei-devm/devm/driver/cmus/cmu/cmu-alarms YANG schema element.
+type HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuAlarms struct {
+	CmuAlarm map[uint32]*HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuAlarms_CmuAlarm `path:"cmu-alarm" module:"huawei-driver"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuAlarms implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuAlarms) IsYANGGoStruct() {}
+
+// NewCmuAlarm creates a new entry in the CmuAlarm list of the
+// HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuAlarms struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuAlarms) NewCmuAlarm(AlarmId uint32) (*HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuAlarms_CmuAlarm, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.CmuAlarm == nil {
+		t.CmuAlarm = make(map[uint32]*HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuAlarms_CmuAlarm)
+	}
+
+	key := AlarmId
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.CmuAlarm[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list CmuAlarm", key)
+	}
+
+	t.CmuAlarm[key] = &HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuAlarms_CmuAlarm{
+		AlarmId: &AlarmId,
+	}
+
+	return t.CmuAlarm[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuAlarms) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuAlarms"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuAlarms) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuAlarms) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuAlarms.
+func (*HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuAlarms) ΛBelongingModule() string {
+	return "huawei-driver"
+}
+
+// HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuAlarms_CmuAlarm represents the /huawei-devm/devm/driver/cmus/cmu/cmu-alarms/cmu-alarm YANG schema element.
+type HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuAlarms_CmuAlarm struct {
+	AlarmId    *uint32                           `path:"alarm-id" module:"huawei-driver"`
+	AlarmLevel E_HuaweiDriver_DriverCmuAlarmMode `path:"alarm-level" module:"huawei-driver"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuAlarms_CmuAlarm implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuAlarms_CmuAlarm) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuAlarms_CmuAlarm struct, which is a YANG list entry.
+func (t *HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuAlarms_CmuAlarm) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.AlarmId == nil {
+		return nil, fmt.Errorf("nil value for key AlarmId")
+	}
+
+	return map[string]interface{}{
+		"alarm-id": *t.AlarmId,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuAlarms_CmuAlarm) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuAlarms_CmuAlarm"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuAlarms_CmuAlarm) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuAlarms_CmuAlarm) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuAlarms_CmuAlarm.
+func (*HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuAlarms_CmuAlarm) ΛBelongingModule() string {
+	return "huawei-driver"
+}
+
+// HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuAnalogs represents the /huawei-devm/devm/driver/cmus/cmu/cmu-analogs YANG schema element.
+type HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuAnalogs struct {
+	CmuAnalog map[uint32]*HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuAnalogs_CmuAnalog `path:"cmu-analog" module:"huawei-driver"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuAnalogs implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuAnalogs) IsYANGGoStruct() {}
+
+// NewCmuAnalog creates a new entry in the CmuAnalog list of the
+// HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuAnalogs struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuAnalogs) NewCmuAnalog(AnalogId uint32) (*HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuAnalogs_CmuAnalog, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.CmuAnalog == nil {
+		t.CmuAnalog = make(map[uint32]*HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuAnalogs_CmuAnalog)
+	}
+
+	key := AnalogId
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.CmuAnalog[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list CmuAnalog", key)
+	}
+
+	t.CmuAnalog[key] = &HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuAnalogs_CmuAnalog{
+		AnalogId: &AnalogId,
+	}
+
+	return t.CmuAnalog[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuAnalogs) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuAnalogs"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuAnalogs) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuAnalogs) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuAnalogs.
+func (*HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuAnalogs) ΛBelongingModule() string {
+	return "huawei-driver"
+}
+
+// HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuAnalogs_CmuAnalog represents the /huawei-devm/devm/driver/cmus/cmu/cmu-analogs/cmu-analog YANG schema element.
+type HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuAnalogs_CmuAnalog struct {
+	AlarmHigh    *int32                                `path:"alarm-high" module:"huawei-driver"`
+	AlarmLow     *int32                                `path:"alarm-low" module:"huawei-driver"`
+	AnalogId     *uint32                               `path:"analog-id" module:"huawei-driver"`
+	AnalogName   *string                               `path:"analog-name" module:"huawei-driver"`
+	AnalogObject E_HuaweiDriver_DriverAnalogObjectType `path:"analog-object" module:"huawei-driver"`
+	AnalogType   E_HuaweiDriver_DriverAnalogType       `path:"analog-type" module:"huawei-driver"`
+	Wanted       *int32                                `path:"wanted" module:"huawei-driver"`
+	WorkHigh     *int32                                `path:"work-high" module:"huawei-driver"`
+	WorkLow      *int32                                `path:"work-low" module:"huawei-driver"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuAnalogs_CmuAnalog implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuAnalogs_CmuAnalog) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuAnalogs_CmuAnalog struct, which is a YANG list entry.
+func (t *HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuAnalogs_CmuAnalog) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.AnalogId == nil {
+		return nil, fmt.Errorf("nil value for key AnalogId")
+	}
+
+	return map[string]interface{}{
+		"analog-id": *t.AnalogId,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuAnalogs_CmuAnalog) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuAnalogs_CmuAnalog"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuAnalogs_CmuAnalog) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuAnalogs_CmuAnalog) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuAnalogs_CmuAnalog.
+func (*HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuAnalogs_CmuAnalog) ΛBelongingModule() string {
+	return "huawei-driver"
+}
+
+// HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuRelays represents the /huawei-devm/devm/driver/cmus/cmu/cmu-relays YANG schema element.
+type HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuRelays struct {
+	CmuRelay map[uint32]*HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuRelays_CmuRelay `path:"cmu-relay" module:"huawei-driver"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuRelays implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuRelays) IsYANGGoStruct() {}
+
+// NewCmuRelay creates a new entry in the CmuRelay list of the
+// HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuRelays struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuRelays) NewCmuRelay(RelayId uint32) (*HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuRelays_CmuRelay, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.CmuRelay == nil {
+		t.CmuRelay = make(map[uint32]*HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuRelays_CmuRelay)
+	}
+
+	key := RelayId
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.CmuRelay[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list CmuRelay", key)
+	}
+
+	t.CmuRelay[key] = &HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuRelays_CmuRelay{
+		RelayId: &RelayId,
+	}
+
+	return t.CmuRelay[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuRelays) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuRelays"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuRelays) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuRelays) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuRelays.
+func (*HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuRelays) ΛBelongingModule() string {
+	return "huawei-driver"
+}
+
+// HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuRelays_CmuRelay represents the /huawei-devm/devm/driver/cmus/cmu/cmu-relays/cmu-relay YANG schema element.
+type HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuRelays_CmuRelay struct {
+	RelayAlarmMode E_HuaweiDriver_DriverCmuAlarmMode `path:"relay-alarm-mode" module:"huawei-driver"`
+	RelayId        *uint32                           `path:"relay-id" module:"huawei-driver"`
+	RelayName      *string                           `path:"relay-name" module:"huawei-driver"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuRelays_CmuRelay implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuRelays_CmuRelay) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuRelays_CmuRelay struct, which is a YANG list entry.
+func (t *HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuRelays_CmuRelay) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.RelayId == nil {
+		return nil, fmt.Errorf("nil value for key RelayId")
+	}
+
+	return map[string]interface{}{
+		"relay-id": *t.RelayId,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuRelays_CmuRelay) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuRelays_CmuRelay"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuRelays_CmuRelay) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuRelays_CmuRelay) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuRelays_CmuRelay.
+func (*HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuRelays_CmuRelay) ΛBelongingModule() string {
+	return "huawei-driver"
+}
+
+// HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuSwitchs represents the /huawei-devm/devm/driver/cmus/cmu/cmu-switchs YANG schema element.
+type HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuSwitchs struct {
+	CmuSwitch map[uint32]*HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuSwitchs_CmuSwitch `path:"cmu-switch" module:"huawei-driver"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuSwitchs implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuSwitchs) IsYANGGoStruct() {}
+
+// NewCmuSwitch creates a new entry in the CmuSwitch list of the
+// HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuSwitchs struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuSwitchs) NewCmuSwitch(SwitchId uint32) (*HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuSwitchs_CmuSwitch, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.CmuSwitch == nil {
+		t.CmuSwitch = make(map[uint32]*HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuSwitchs_CmuSwitch)
+	}
+
+	key := SwitchId
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.CmuSwitch[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list CmuSwitch", key)
+	}
+
+	t.CmuSwitch[key] = &HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuSwitchs_CmuSwitch{
+		SwitchId: &SwitchId,
+	}
+
+	return t.CmuSwitch[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuSwitchs) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuSwitchs"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuSwitchs) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuSwitchs) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuSwitchs.
+func (*HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuSwitchs) ΛBelongingModule() string {
+	return "huawei-driver"
+}
+
+// HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuSwitchs_CmuSwitch represents the /huawei-devm/devm/driver/cmus/cmu/cmu-switchs/cmu-switch YANG schema element.
+type HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuSwitchs_CmuSwitch struct {
+	AlarmMode  E_HuaweiDriver_DriverCmuAlarmMode `path:"alarm-mode" module:"huawei-driver"`
+	SwitchFog  E_HuaweiDriver_DriverCmuSwitchFog `path:"switch-fog" module:"huawei-driver"`
+	SwitchId   *uint32                           `path:"switch-id" module:"huawei-driver"`
+	SwitchName *string                           `path:"switch-name" module:"huawei-driver"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuSwitchs_CmuSwitch implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuSwitchs_CmuSwitch) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuSwitchs_CmuSwitch struct, which is a YANG list entry.
+func (t *HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuSwitchs_CmuSwitch) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.SwitchId == nil {
+		return nil, fmt.Errorf("nil value for key SwitchId")
+	}
+
+	return map[string]interface{}{
+		"switch-id": *t.SwitchId,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuSwitchs_CmuSwitch) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuSwitchs_CmuSwitch"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuSwitchs_CmuSwitch) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuSwitchs_CmuSwitch) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuSwitchs_CmuSwitch.
+func (*HuaweiDevm_Devm_Driver_Cmus_Cmu_CmuSwitchs_CmuSwitch) ΛBelongingModule() string {
+	return "huawei-driver"
+}
+
+// HuaweiDevm_Devm_Driver_Dacss represents the /huawei-devm/devm/driver/dacss YANG schema element.
+type HuaweiDevm_Devm_Driver_Dacss struct {
+	Dacs map[HuaweiDevm_Devm_Driver_Dacss_Dacs_Key]*HuaweiDevm_Devm_Driver_Dacss_Dacs `path:"dacs" module:"huawei-driver"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_Driver_Dacss implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_Driver_Dacss) IsYANGGoStruct() {}
+
+// HuaweiDevm_Devm_Driver_Dacss_Dacs_Key represents the key for list Dacs of element /huawei-devm/devm/driver/dacss.
+type HuaweiDevm_Devm_Driver_Dacss_Dacs_Key struct {
+	Position     string `path:"position"`
+	SerialNumber uint32 `path:"serial-number"`
+}
+
+// IsYANGGoKeyStruct ensures that HuaweiDevm_Devm_Driver_Dacss_Dacs_Key partially implements the
+// yang.GoKeyStruct interface. This allows functions that need to
+// handle this key struct to identify it as being generated by gogen.
+func (HuaweiDevm_Devm_Driver_Dacss_Dacs_Key) IsYANGGoKeyStruct() {}
+
+// ΛListKeyMap returns the values of the HuaweiDevm_Devm_Driver_Dacss_Dacs_Key key struct.
+func (t HuaweiDevm_Devm_Driver_Dacss_Dacs_Key) ΛListKeyMap() (map[string]interface{}, error) {
+	return map[string]interface{}{
+		"position":      t.Position,
+		"serial-number": t.SerialNumber,
+	}, nil
+}
+
+// NewDacs creates a new entry in the Dacs list of the
+// HuaweiDevm_Devm_Driver_Dacss struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiDevm_Devm_Driver_Dacss) NewDacs(Position string, SerialNumber uint32) (*HuaweiDevm_Devm_Driver_Dacss_Dacs, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.Dacs == nil {
+		t.Dacs = make(map[HuaweiDevm_Devm_Driver_Dacss_Dacs_Key]*HuaweiDevm_Devm_Driver_Dacss_Dacs)
+	}
+
+	key := HuaweiDevm_Devm_Driver_Dacss_Dacs_Key{
+		Position:     Position,
+		SerialNumber: SerialNumber,
+	}
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.Dacs[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Dacs", key)
+	}
+
+	t.Dacs[key] = &HuaweiDevm_Devm_Driver_Dacss_Dacs{
+		Position:     &Position,
+		SerialNumber: &SerialNumber,
+	}
+
+	return t.Dacs[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Driver_Dacss) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_Driver_Dacss"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Driver_Dacss) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_Driver_Dacss) ΛEnumTypeMap() map[string][]reflect.Type { return ΛEnumTypes }
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_Driver_Dacss.
+func (*HuaweiDevm_Devm_Driver_Dacss) ΛBelongingModule() string {
+	return "huawei-driver"
+}
+
+// HuaweiDevm_Devm_Driver_Dacss_Dacs represents the /huawei-devm/devm/driver/dacss/dacs YANG schema element.
+type HuaweiDevm_Devm_Driver_Dacss_Dacs struct {
+	BoardType             E_HuaweiDriver_HardwareBoardType `path:"board-type" module:"huawei-driver"`
+	DacsArea              *string                          `path:"dacs-area" module:"huawei-driver"`
+	EntityIndex           *uint32                          `path:"entity-index" module:"huawei-driver"`
+	InsourcePlane         *string                          `path:"insource-plane" module:"huawei-driver"`
+	InsourcePlaneA        *string                          `path:"insource-plane-a" module:"huawei-driver"`
+	InsourcePlaneB        *string                          `path:"insource-plane-b" module:"huawei-driver"`
+	OutputElectricalValue *string                          `path:"output-electrical-value" module:"huawei-driver"`
+	OutputStatus          *string                          `path:"output-status" module:"huawei-driver"`
+	OutputVoltageValue    *string                          `path:"output-voltage-value" module:"huawei-driver"`
+	Position              *string                          `path:"position" module:"huawei-driver"`
+	SerialNumber          *uint32                          `path:"serial-number" module:"huawei-driver"`
+	Status                E_HuaweiDriver_DriverDacsStatus  `path:"status" module:"huawei-driver"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_Driver_Dacss_Dacs implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_Driver_Dacss_Dacs) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiDevm_Devm_Driver_Dacss_Dacs struct, which is a YANG list entry.
+func (t *HuaweiDevm_Devm_Driver_Dacss_Dacs) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.Position == nil {
+		return nil, fmt.Errorf("nil value for key Position")
+	}
+
+	if t.SerialNumber == nil {
+		return nil, fmt.Errorf("nil value for key SerialNumber")
+	}
+
+	return map[string]interface{}{
+		"position":      *t.Position,
+		"serial-number": *t.SerialNumber,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Driver_Dacss_Dacs) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_Driver_Dacss_Dacs"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Driver_Dacss_Dacs) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_Driver_Dacss_Dacs) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_Driver_Dacss_Dacs.
+func (*HuaweiDevm_Devm_Driver_Dacss_Dacs) ΛBelongingModule() string {
+	return "huawei-driver"
+}
+
+// HuaweiDevm_Devm_Driver_Dmus represents the /huawei-devm/devm/driver/dmus YANG schema element.
+type HuaweiDevm_Devm_Driver_Dmus struct {
+	Dmu map[string]*HuaweiDevm_Devm_Driver_Dmus_Dmu `path:"dmu" module:"huawei-driver"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_Driver_Dmus implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_Driver_Dmus) IsYANGGoStruct() {}
+
+// NewDmu creates a new entry in the Dmu list of the
+// HuaweiDevm_Devm_Driver_Dmus struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiDevm_Devm_Driver_Dmus) NewDmu(Position string) (*HuaweiDevm_Devm_Driver_Dmus_Dmu, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.Dmu == nil {
+		t.Dmu = make(map[string]*HuaweiDevm_Devm_Driver_Dmus_Dmu)
+	}
+
+	key := Position
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.Dmu[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Dmu", key)
+	}
+
+	t.Dmu[key] = &HuaweiDevm_Devm_Driver_Dmus_Dmu{
+		Position: &Position,
+	}
+
+	return t.Dmu[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Driver_Dmus) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_Driver_Dmus"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Driver_Dmus) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_Driver_Dmus) ΛEnumTypeMap() map[string][]reflect.Type { return ΛEnumTypes }
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_Driver_Dmus.
+func (*HuaweiDevm_Devm_Driver_Dmus) ΛBelongingModule() string {
+	return "huawei-driver"
+}
+
+// HuaweiDevm_Devm_Driver_Dmus_Dmu represents the /huawei-devm/devm/driver/dmus/dmu YANG schema element.
+type HuaweiDevm_Devm_Driver_Dmus_Dmu struct {
+	BoardType   E_HuaweiDriver_HardwareBoardType `path:"board-type" module:"huawei-driver"`
+	EntityIndex *uint32                          `path:"entity-index" module:"huawei-driver"`
+	Position    *string                          `path:"position" module:"huawei-driver"`
+	Present     *string                          `path:"present" module:"huawei-driver"`
+	Register    *string                          `path:"register" module:"huawei-driver"`
+	Work        *string                          `path:"work" module:"huawei-driver"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_Driver_Dmus_Dmu implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_Driver_Dmus_Dmu) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiDevm_Devm_Driver_Dmus_Dmu struct, which is a YANG list entry.
+func (t *HuaweiDevm_Devm_Driver_Dmus_Dmu) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.Position == nil {
+		return nil, fmt.Errorf("nil value for key Position")
+	}
+
+	return map[string]interface{}{
+		"position": *t.Position,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Driver_Dmus_Dmu) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_Driver_Dmus_Dmu"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Driver_Dmus_Dmu) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_Driver_Dmus_Dmu) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_Driver_Dmus_Dmu.
+func (*HuaweiDevm_Devm_Driver_Dmus_Dmu) ΛBelongingModule() string {
+	return "huawei-driver"
+}
+
+// HuaweiDevm_Devm_Driver_Ecus represents the /huawei-devm/devm/driver/ecus YANG schema element.
+type HuaweiDevm_Devm_Driver_Ecus struct {
+	Ecu map[string]*HuaweiDevm_Devm_Driver_Ecus_Ecu `path:"ecu" module:"huawei-driver"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_Driver_Ecus implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_Driver_Ecus) IsYANGGoStruct() {}
+
+// NewEcu creates a new entry in the Ecu list of the
+// HuaweiDevm_Devm_Driver_Ecus struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiDevm_Devm_Driver_Ecus) NewEcu(Position string) (*HuaweiDevm_Devm_Driver_Ecus_Ecu, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.Ecu == nil {
+		t.Ecu = make(map[string]*HuaweiDevm_Devm_Driver_Ecus_Ecu)
+	}
+
+	key := Position
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.Ecu[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Ecu", key)
+	}
+
+	t.Ecu[key] = &HuaweiDevm_Devm_Driver_Ecus_Ecu{
+		Position: &Position,
+	}
+
+	return t.Ecu[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Driver_Ecus) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_Driver_Ecus"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Driver_Ecus) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_Driver_Ecus) ΛEnumTypeMap() map[string][]reflect.Type { return ΛEnumTypes }
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_Driver_Ecus.
+func (*HuaweiDevm_Devm_Driver_Ecus) ΛBelongingModule() string {
+	return "huawei-driver"
+}
+
+// HuaweiDevm_Devm_Driver_Ecus_Ecu represents the /huawei-devm/devm/driver/ecus/ecu YANG schema element.
+type HuaweiDevm_Devm_Driver_Ecus_Ecu struct {
+	BoardType         E_HuaweiDriver_HardwareBoardType `path:"board-type" module:"huawei-driver"`
+	EntityIndex       *uint32                          `path:"entity-index" module:"huawei-driver"`
+	FlashSize         *uint32                          `path:"flash-size" module:"huawei-driver"`
+	OfcCardNumber     *uint32                          `path:"ofc-card-number" module:"huawei-driver"`
+	Position          *string                          `path:"position" module:"huawei-driver"`
+	SdramSize         *uint32                          `path:"sdram-size" module:"huawei-driver"`
+	SubcardSlotNumber *uint32                          `path:"subcard-slot-number" module:"huawei-driver"`
+	UpTime            *uint32                          `path:"up-time" module:"huawei-driver"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_Driver_Ecus_Ecu implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_Driver_Ecus_Ecu) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiDevm_Devm_Driver_Ecus_Ecu struct, which is a YANG list entry.
+func (t *HuaweiDevm_Devm_Driver_Ecus_Ecu) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.Position == nil {
+		return nil, fmt.Errorf("nil value for key Position")
+	}
+
+	return map[string]interface{}{
+		"position": *t.Position,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Driver_Ecus_Ecu) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_Driver_Ecus_Ecu"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Driver_Ecus_Ecu) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_Driver_Ecus_Ecu) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_Driver_Ecus_Ecu.
+func (*HuaweiDevm_Devm_Driver_Ecus_Ecu) ΛBelongingModule() string {
+	return "huawei-driver"
+}
+
+// HuaweiDevm_Devm_Driver_Fans represents the /huawei-devm/devm/driver/fans YANG schema element.
+type HuaweiDevm_Devm_Driver_Fans struct {
+	Fan map[string]*HuaweiDevm_Devm_Driver_Fans_Fan `path:"fan" module:"huawei-driver"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_Driver_Fans implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_Driver_Fans) IsYANGGoStruct() {}
+
+// NewFan creates a new entry in the Fan list of the
+// HuaweiDevm_Devm_Driver_Fans struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiDevm_Devm_Driver_Fans) NewFan(Position string) (*HuaweiDevm_Devm_Driver_Fans_Fan, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.Fan == nil {
+		t.Fan = make(map[string]*HuaweiDevm_Devm_Driver_Fans_Fan)
+	}
+
+	key := Position
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.Fan[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Fan", key)
+	}
+
+	t.Fan[key] = &HuaweiDevm_Devm_Driver_Fans_Fan{
+		Position: &Position,
+	}
+
+	return t.Fan[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Driver_Fans) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_Driver_Fans"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Driver_Fans) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_Driver_Fans) ΛEnumTypeMap() map[string][]reflect.Type { return ΛEnumTypes }
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_Driver_Fans.
+func (*HuaweiDevm_Devm_Driver_Fans) ΛBelongingModule() string {
+	return "huawei-driver"
+}
+
+// HuaweiDevm_Devm_Driver_Fans_Fan represents the /huawei-devm/devm/driver/fans/fan YANG schema element.
+type HuaweiDevm_Devm_Driver_Fans_Fan struct {
+	BoardType         E_HuaweiDriver_HardwareBoardType `path:"board-type" module:"huawei-driver"`
+	EntityIndex       *uint32                          `path:"entity-index" module:"huawei-driver"`
+	FanNumber         *uint32                          `path:"fan-number" module:"huawei-driver"`
+	FanRate           *uint32                          `path:"fan-rate" module:"huawei-driver"`
+	GlobalSpeed       *string                          `path:"global-speed" module:"huawei-driver"`
+	MonitorCableState E_HuaweiDriver_DriverCableState  `path:"monitor-cable-state" module:"huawei-driver"`
+	Position          *string                          `path:"position" module:"huawei-driver"`
+	Present           E_HuaweiDriver_DriverBool        `path:"present" module:"huawei-driver"`
+	Register          E_HuaweiDriver_DriverBool        `path:"register" module:"huawei-driver"`
+	Speed             *uint32                          `path:"speed" module:"huawei-driver"`
+	WorkMode          E_HuaweiDriver_FanWorkmode       `path:"work-mode" module:"huawei-driver"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_Driver_Fans_Fan implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_Driver_Fans_Fan) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiDevm_Devm_Driver_Fans_Fan struct, which is a YANG list entry.
+func (t *HuaweiDevm_Devm_Driver_Fans_Fan) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.Position == nil {
+		return nil, fmt.Errorf("nil value for key Position")
+	}
+
+	return map[string]interface{}{
+		"position": *t.Position,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Driver_Fans_Fan) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_Driver_Fans_Fan"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Driver_Fans_Fan) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_Driver_Fans_Fan) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_Driver_Fans_Fan.
+func (*HuaweiDevm_Devm_Driver_Fans_Fan) ΛBelongingModule() string {
+	return "huawei-driver"
+}
+
+// HuaweiDevm_Devm_Driver_Icus represents the /huawei-devm/devm/driver/icus YANG schema element.
+type HuaweiDevm_Devm_Driver_Icus struct {
+	Icu map[string]*HuaweiDevm_Devm_Driver_Icus_Icu `path:"icu" module:"huawei-driver"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_Driver_Icus implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_Driver_Icus) IsYANGGoStruct() {}
+
+// NewIcu creates a new entry in the Icu list of the
+// HuaweiDevm_Devm_Driver_Icus struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiDevm_Devm_Driver_Icus) NewIcu(Position string) (*HuaweiDevm_Devm_Driver_Icus_Icu, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.Icu == nil {
+		t.Icu = make(map[string]*HuaweiDevm_Devm_Driver_Icus_Icu)
+	}
+
+	key := Position
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.Icu[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Icu", key)
+	}
+
+	t.Icu[key] = &HuaweiDevm_Devm_Driver_Icus_Icu{
+		Position: &Position,
+	}
+
+	return t.Icu[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Driver_Icus) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_Driver_Icus"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Driver_Icus) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_Driver_Icus) ΛEnumTypeMap() map[string][]reflect.Type { return ΛEnumTypes }
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_Driver_Icus.
+func (*HuaweiDevm_Devm_Driver_Icus) ΛBelongingModule() string {
+	return "huawei-driver"
+}
+
+// HuaweiDevm_Devm_Driver_Icus_Icu represents the /huawei-devm/devm/driver/icus/icu YANG schema element.
+type HuaweiDevm_Devm_Driver_Icus_Icu struct {
+	BoardType   E_HuaweiDriver_HardwareBoardType `path:"board-type" module:"huawei-driver"`
+	EntityIndex *uint32                          `path:"entity-index" module:"huawei-driver"`
+	FlashSize   *uint32                          `path:"flash-size" module:"huawei-driver"`
+	Position    *string                          `path:"position" module:"huawei-driver"`
+	SdramSize   *uint32                          `path:"sdram-size" module:"huawei-driver"`
+	UpTime      *uint32                          `path:"up-time" module:"huawei-driver"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_Driver_Icus_Icu implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_Driver_Icus_Icu) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiDevm_Devm_Driver_Icus_Icu struct, which is a YANG list entry.
+func (t *HuaweiDevm_Devm_Driver_Icus_Icu) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.Position == nil {
+		return nil, fmt.Errorf("nil value for key Position")
+	}
+
+	return map[string]interface{}{
+		"position": *t.Position,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Driver_Icus_Icu) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_Driver_Icus_Icu"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Driver_Icus_Icu) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_Driver_Icus_Icu) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_Driver_Icus_Icu.
+func (*HuaweiDevm_Devm_Driver_Icus_Icu) ΛBelongingModule() string {
+	return "huawei-driver"
+}
+
+// HuaweiDevm_Devm_Driver_Lcds represents the /huawei-devm/devm/driver/lcds YANG schema element.
+type HuaweiDevm_Devm_Driver_Lcds struct {
+	Lcd map[string]*HuaweiDevm_Devm_Driver_Lcds_Lcd `path:"lcd" module:"huawei-driver"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_Driver_Lcds implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_Driver_Lcds) IsYANGGoStruct() {}
+
+// NewLcd creates a new entry in the Lcd list of the
+// HuaweiDevm_Devm_Driver_Lcds struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiDevm_Devm_Driver_Lcds) NewLcd(Position string) (*HuaweiDevm_Devm_Driver_Lcds_Lcd, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.Lcd == nil {
+		t.Lcd = make(map[string]*HuaweiDevm_Devm_Driver_Lcds_Lcd)
+	}
+
+	key := Position
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.Lcd[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Lcd", key)
+	}
+
+	t.Lcd[key] = &HuaweiDevm_Devm_Driver_Lcds_Lcd{
+		Position: &Position,
+	}
+
+	return t.Lcd[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Driver_Lcds) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_Driver_Lcds"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Driver_Lcds) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_Driver_Lcds) ΛEnumTypeMap() map[string][]reflect.Type { return ΛEnumTypes }
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_Driver_Lcds.
+func (*HuaweiDevm_Devm_Driver_Lcds) ΛBelongingModule() string {
+	return "huawei-driver"
+}
+
+// HuaweiDevm_Devm_Driver_Lcds_Lcd represents the /huawei-devm/devm/driver/lcds/lcd YANG schema element.
+type HuaweiDevm_Devm_Driver_Lcds_Lcd struct {
+	BoardType   E_HuaweiDriver_HardwareBoardType `path:"board-type" module:"huawei-driver"`
+	EntityIndex *uint32                          `path:"entity-index" module:"huawei-driver"`
+	Position    *string                          `path:"position" module:"huawei-driver"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_Driver_Lcds_Lcd implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_Driver_Lcds_Lcd) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiDevm_Devm_Driver_Lcds_Lcd struct, which is a YANG list entry.
+func (t *HuaweiDevm_Devm_Driver_Lcds_Lcd) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.Position == nil {
+		return nil, fmt.Errorf("nil value for key Position")
+	}
+
+	return map[string]interface{}{
+		"position": *t.Position,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Driver_Lcds_Lcd) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_Driver_Lcds_Lcd"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Driver_Lcds_Lcd) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_Driver_Lcds_Lcd) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_Driver_Lcds_Lcd.
+func (*HuaweiDevm_Devm_Driver_Lcds_Lcd) ΛBelongingModule() string {
+	return "huawei-driver"
+}
+
+// HuaweiDevm_Devm_Driver_Pdus represents the /huawei-devm/devm/driver/pdus YANG schema element.
+type HuaweiDevm_Devm_Driver_Pdus struct {
+	Pdu map[string]*HuaweiDevm_Devm_Driver_Pdus_Pdu `path:"pdu" module:"huawei-driver"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_Driver_Pdus implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_Driver_Pdus) IsYANGGoStruct() {}
+
+// NewPdu creates a new entry in the Pdu list of the
+// HuaweiDevm_Devm_Driver_Pdus struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiDevm_Devm_Driver_Pdus) NewPdu(Position string) (*HuaweiDevm_Devm_Driver_Pdus_Pdu, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.Pdu == nil {
+		t.Pdu = make(map[string]*HuaweiDevm_Devm_Driver_Pdus_Pdu)
+	}
+
+	key := Position
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.Pdu[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Pdu", key)
+	}
+
+	t.Pdu[key] = &HuaweiDevm_Devm_Driver_Pdus_Pdu{
+		Position: &Position,
+	}
+
+	return t.Pdu[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Driver_Pdus) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_Driver_Pdus"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Driver_Pdus) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_Driver_Pdus) ΛEnumTypeMap() map[string][]reflect.Type { return ΛEnumTypes }
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_Driver_Pdus.
+func (*HuaweiDevm_Devm_Driver_Pdus) ΛBelongingModule() string {
+	return "huawei-driver"
+}
+
+// HuaweiDevm_Devm_Driver_Pdus_Pdu represents the /huawei-devm/devm/driver/pdus/pdu YANG schema element.
+type HuaweiDevm_Devm_Driver_Pdus_Pdu struct {
+	AbnormalNumber *string                            `path:"abnormal-number" module:"huawei-driver"`
+	BoardType      E_HuaweiDriver_HardwareBoardType   `path:"board-type" module:"huawei-driver"`
+	EntityIndex    *uint32                            `path:"entity-index" module:"huawei-driver"`
+	NormalNumber   *string                            `path:"normal-number" module:"huawei-driver"`
+	Position       *string                            `path:"position" module:"huawei-driver"`
+	PowerState     *string                            `path:"power-state" module:"huawei-driver"`
+	WorkMode       E_HuaweiDriver_DriverPowerWorkMode `path:"work-mode" module:"huawei-driver"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_Driver_Pdus_Pdu implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_Driver_Pdus_Pdu) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiDevm_Devm_Driver_Pdus_Pdu struct, which is a YANG list entry.
+func (t *HuaweiDevm_Devm_Driver_Pdus_Pdu) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.Position == nil {
+		return nil, fmt.Errorf("nil value for key Position")
+	}
+
+	return map[string]interface{}{
+		"position": *t.Position,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Driver_Pdus_Pdu) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_Driver_Pdus_Pdu"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Driver_Pdus_Pdu) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_Driver_Pdus_Pdu) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_Driver_Pdus_Pdu.
+func (*HuaweiDevm_Devm_Driver_Pdus_Pdu) ΛBelongingModule() string {
+	return "huawei-driver"
+}
+
+// HuaweiDevm_Devm_Driver_Pms represents the /huawei-devm/devm/driver/pms YANG schema element.
+type HuaweiDevm_Devm_Driver_Pms struct {
+	Pm map[HuaweiDevm_Devm_Driver_Pms_Pm_Key]*HuaweiDevm_Devm_Driver_Pms_Pm `path:"pm" module:"huawei-driver"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_Driver_Pms implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_Driver_Pms) IsYANGGoStruct() {}
+
+// HuaweiDevm_Devm_Driver_Pms_Pm_Key represents the key for list Pm of element /huawei-devm/devm/driver/pms.
+type HuaweiDevm_Devm_Driver_Pms_Pm_Key struct {
+	Position     string `path:"position"`
+	SerialNumber uint32 `path:"serial-number"`
+}
+
+// IsYANGGoKeyStruct ensures that HuaweiDevm_Devm_Driver_Pms_Pm_Key partially implements the
+// yang.GoKeyStruct interface. This allows functions that need to
+// handle this key struct to identify it as being generated by gogen.
+func (HuaweiDevm_Devm_Driver_Pms_Pm_Key) IsYANGGoKeyStruct() {}
+
+// ΛListKeyMap returns the values of the HuaweiDevm_Devm_Driver_Pms_Pm_Key key struct.
+func (t HuaweiDevm_Devm_Driver_Pms_Pm_Key) ΛListKeyMap() (map[string]interface{}, error) {
+	return map[string]interface{}{
+		"position":      t.Position,
+		"serial-number": t.SerialNumber,
+	}, nil
+}
+
+// NewPm creates a new entry in the Pm list of the
+// HuaweiDevm_Devm_Driver_Pms struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiDevm_Devm_Driver_Pms) NewPm(Position string, SerialNumber uint32) (*HuaweiDevm_Devm_Driver_Pms_Pm, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.Pm == nil {
+		t.Pm = make(map[HuaweiDevm_Devm_Driver_Pms_Pm_Key]*HuaweiDevm_Devm_Driver_Pms_Pm)
+	}
+
+	key := HuaweiDevm_Devm_Driver_Pms_Pm_Key{
+		Position:     Position,
+		SerialNumber: SerialNumber,
+	}
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.Pm[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Pm", key)
+	}
+
+	t.Pm[key] = &HuaweiDevm_Devm_Driver_Pms_Pm{
+		Position:     &Position,
+		SerialNumber: &SerialNumber,
+	}
+
+	return t.Pm[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Driver_Pms) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_Driver_Pms"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Driver_Pms) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_Driver_Pms) ΛEnumTypeMap() map[string][]reflect.Type { return ΛEnumTypes }
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_Driver_Pms.
+func (*HuaweiDevm_Devm_Driver_Pms) ΛBelongingModule() string {
+	return "huawei-driver"
+}
+
+// HuaweiDevm_Devm_Driver_Pms_Pm represents the /huawei-devm/devm/driver/pms/pm YANG schema element.
+type HuaweiDevm_Devm_Driver_Pms_Pm struct {
+	BoardType             E_HuaweiDriver_HardwareBoardType     `path:"board-type" module:"huawei-driver"`
+	EntityIndex           *uint32                              `path:"entity-index" module:"huawei-driver"`
+	InputElectricalValue  *string                              `path:"input-electrical-value" module:"huawei-driver"`
+	InputPowerValue       *string                              `path:"input-power-value" module:"huawei-driver"`
+	InputVoltageValue     *string                              `path:"input-voltage-value" module:"huawei-driver"`
+	MonitorCableState     E_HuaweiDriver_DriverCableState      `path:"monitor-cable-state" module:"huawei-driver"`
+	OutputElectricalValue *string                              `path:"output-electrical-value" module:"huawei-driver"`
+	OutputPowerValue      *string                              `path:"output-power-value" module:"huawei-driver"`
+	OutputVoltageValue    *string                              `path:"output-voltage-value" module:"huawei-driver"`
+	PmArea                *string                              `path:"pm-area" module:"huawei-driver"`
+	PmStatus              E_HuaweiDriver_DriverPmStatus        `path:"pm-status" module:"huawei-driver"`
+	Position              *string                              `path:"position" module:"huawei-driver"`
+	SerialNumber          *uint32                              `path:"serial-number" module:"huawei-driver"`
+	SingleInput           E_HuaweiDriver_DriverSingleInputType `path:"single-input" module:"huawei-driver"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_Driver_Pms_Pm implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_Driver_Pms_Pm) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiDevm_Devm_Driver_Pms_Pm struct, which is a YANG list entry.
+func (t *HuaweiDevm_Devm_Driver_Pms_Pm) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.Position == nil {
+		return nil, fmt.Errorf("nil value for key Position")
+	}
+
+	if t.SerialNumber == nil {
+		return nil, fmt.Errorf("nil value for key SerialNumber")
+	}
+
+	return map[string]interface{}{
+		"position":      *t.Position,
+		"serial-number": *t.SerialNumber,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Driver_Pms_Pm) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_Driver_Pms_Pm"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Driver_Pms_Pm) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_Driver_Pms_Pm) ΛEnumTypeMap() map[string][]reflect.Type { return ΛEnumTypes }
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_Driver_Pms_Pm.
+func (*HuaweiDevm_Devm_Driver_Pms_Pm) ΛBelongingModule() string {
+	return "huawei-driver"
+}
+
+// HuaweiDevm_Devm_Driver_Pmus represents the /huawei-devm/devm/driver/pmus YANG schema element.
+type HuaweiDevm_Devm_Driver_Pmus struct {
+	Pmu map[string]*HuaweiDevm_Devm_Driver_Pmus_Pmu `path:"pmu" module:"huawei-driver"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_Driver_Pmus implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_Driver_Pmus) IsYANGGoStruct() {}
+
+// NewPmu creates a new entry in the Pmu list of the
+// HuaweiDevm_Devm_Driver_Pmus struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiDevm_Devm_Driver_Pmus) NewPmu(Position string) (*HuaweiDevm_Devm_Driver_Pmus_Pmu, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.Pmu == nil {
+		t.Pmu = make(map[string]*HuaweiDevm_Devm_Driver_Pmus_Pmu)
+	}
+
+	key := Position
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.Pmu[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Pmu", key)
+	}
+
+	t.Pmu[key] = &HuaweiDevm_Devm_Driver_Pmus_Pmu{
+		Position: &Position,
+	}
+
+	return t.Pmu[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Driver_Pmus) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_Driver_Pmus"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Driver_Pmus) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_Driver_Pmus) ΛEnumTypeMap() map[string][]reflect.Type { return ΛEnumTypes }
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_Driver_Pmus.
+func (*HuaweiDevm_Devm_Driver_Pmus) ΛBelongingModule() string {
+	return "huawei-driver"
+}
+
+// HuaweiDevm_Devm_Driver_Pmus_Pmu represents the /huawei-devm/devm/driver/pmus/pmu YANG schema element.
+type HuaweiDevm_Devm_Driver_Pmus_Pmu struct {
+	BoardType   E_HuaweiDriver_HardwareBoardType `path:"board-type" module:"huawei-driver"`
+	EntityIndex *uint32                          `path:"entity-index" module:"huawei-driver"`
+	HaStatus    *string                          `path:"ha-status" module:"huawei-driver"`
+	Position    *string                          `path:"position" module:"huawei-driver"`
+	Present     *string                          `path:"present" module:"huawei-driver"`
+	Register    *string                          `path:"register" module:"huawei-driver"`
+	Work        *string                          `path:"work" module:"huawei-driver"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_Driver_Pmus_Pmu implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_Driver_Pmus_Pmu) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiDevm_Devm_Driver_Pmus_Pmu struct, which is a YANG list entry.
+func (t *HuaweiDevm_Devm_Driver_Pmus_Pmu) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.Position == nil {
+		return nil, fmt.Errorf("nil value for key Position")
+	}
+
+	return map[string]interface{}{
+		"position": *t.Position,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Driver_Pmus_Pmu) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_Driver_Pmus_Pmu"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Driver_Pmus_Pmu) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_Driver_Pmus_Pmu) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_Driver_Pmus_Pmu.
+func (*HuaweiDevm_Devm_Driver_Pmus_Pmu) ΛBelongingModule() string {
+	return "huawei-driver"
+}
+
+// HuaweiDevm_Devm_Driver_PowerSupplys represents the /huawei-devm/devm/driver/power-supplys YANG schema element.
+type HuaweiDevm_Devm_Driver_PowerSupplys struct {
+	PowerSupply map[string]*HuaweiDevm_Devm_Driver_PowerSupplys_PowerSupply `path:"power-supply" module:"huawei-driver"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_Driver_PowerSupplys implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_Driver_PowerSupplys) IsYANGGoStruct() {}
+
+// NewPowerSupply creates a new entry in the PowerSupply list of the
+// HuaweiDevm_Devm_Driver_PowerSupplys struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiDevm_Devm_Driver_PowerSupplys) NewPowerSupply(Position string) (*HuaweiDevm_Devm_Driver_PowerSupplys_PowerSupply, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.PowerSupply == nil {
+		t.PowerSupply = make(map[string]*HuaweiDevm_Devm_Driver_PowerSupplys_PowerSupply)
+	}
+
+	key := Position
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.PowerSupply[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list PowerSupply", key)
+	}
+
+	t.PowerSupply[key] = &HuaweiDevm_Devm_Driver_PowerSupplys_PowerSupply{
+		Position: &Position,
+	}
+
+	return t.PowerSupply[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Driver_PowerSupplys) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_Driver_PowerSupplys"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Driver_PowerSupplys) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_Driver_PowerSupplys) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_Driver_PowerSupplys.
+func (*HuaweiDevm_Devm_Driver_PowerSupplys) ΛBelongingModule() string {
+	return "huawei-driver"
+}
+
+// HuaweiDevm_Devm_Driver_PowerSupplys_PowerSupply represents the /huawei-devm/devm/driver/power-supplys/power-supply YANG schema element.
+type HuaweiDevm_Devm_Driver_PowerSupplys_PowerSupply struct {
+	AbnormalNumber    *uint32                                                            `path:"abnormal-number" module:"huawei-driver"`
+	BoardType         E_HuaweiDriver_HardwareBoardType                                   `path:"board-type" module:"huawei-driver"`
+	EntityIndex       *uint32                                                            `path:"entity-index" module:"huawei-driver"`
+	MonitorCableState E_HuaweiDriver_DriverCableState                                    `path:"monitor-cable-state" module:"huawei-driver"`
+	NormalNumber      *uint32                                                            `path:"normal-number" module:"huawei-driver"`
+	Position          *string                                                            `path:"position" module:"huawei-driver"`
+	PowerEnvironments *HuaweiDevm_Devm_Driver_PowerSupplys_PowerSupply_PowerEnvironments `path:"power-environments" module:"huawei-driver"`
+	PowerState        *string                                                            `path:"power-state" module:"huawei-driver"`
+	WorkMode          E_HuaweiDriver_DriverPowerWorkMode                                 `path:"work-mode" module:"huawei-driver"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_Driver_PowerSupplys_PowerSupply implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_Driver_PowerSupplys_PowerSupply) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiDevm_Devm_Driver_PowerSupplys_PowerSupply struct, which is a YANG list entry.
+func (t *HuaweiDevm_Devm_Driver_PowerSupplys_PowerSupply) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.Position == nil {
+		return nil, fmt.Errorf("nil value for key Position")
+	}
+
+	return map[string]interface{}{
+		"position": *t.Position,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Driver_PowerSupplys_PowerSupply) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_Driver_PowerSupplys_PowerSupply"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Driver_PowerSupplys_PowerSupply) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_Driver_PowerSupplys_PowerSupply) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_Driver_PowerSupplys_PowerSupply.
+func (*HuaweiDevm_Devm_Driver_PowerSupplys_PowerSupply) ΛBelongingModule() string {
+	return "huawei-driver"
+}
+
+// HuaweiDevm_Devm_Driver_PowerSupplys_PowerSupply_PowerEnvironments represents the /huawei-devm/devm/driver/power-supplys/power-supply/power-environments YANG schema element.
+type HuaweiDevm_Devm_Driver_PowerSupplys_PowerSupply_PowerEnvironments struct {
+	PowerEnvironment map[uint32]*HuaweiDevm_Devm_Driver_PowerSupplys_PowerSupply_PowerEnvironments_PowerEnvironment `path:"power-environment" module:"huawei-driver"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_Driver_PowerSupplys_PowerSupply_PowerEnvironments implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_Driver_PowerSupplys_PowerSupply_PowerEnvironments) IsYANGGoStruct() {}
+
+// NewPowerEnvironment creates a new entry in the PowerEnvironment list of the
+// HuaweiDevm_Devm_Driver_PowerSupplys_PowerSupply_PowerEnvironments struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiDevm_Devm_Driver_PowerSupplys_PowerSupply_PowerEnvironments) NewPowerEnvironment(PemIndex uint32) (*HuaweiDevm_Devm_Driver_PowerSupplys_PowerSupply_PowerEnvironments_PowerEnvironment, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.PowerEnvironment == nil {
+		t.PowerEnvironment = make(map[uint32]*HuaweiDevm_Devm_Driver_PowerSupplys_PowerSupply_PowerEnvironments_PowerEnvironment)
+	}
+
+	key := PemIndex
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.PowerEnvironment[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list PowerEnvironment", key)
+	}
+
+	t.PowerEnvironment[key] = &HuaweiDevm_Devm_Driver_PowerSupplys_PowerSupply_PowerEnvironments_PowerEnvironment{
+		PemIndex: &PemIndex,
+	}
+
+	return t.PowerEnvironment[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Driver_PowerSupplys_PowerSupply_PowerEnvironments) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_Driver_PowerSupplys_PowerSupply_PowerEnvironments"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Driver_PowerSupplys_PowerSupply_PowerEnvironments) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_Driver_PowerSupplys_PowerSupply_PowerEnvironments) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_Driver_PowerSupplys_PowerSupply_PowerEnvironments.
+func (*HuaweiDevm_Devm_Driver_PowerSupplys_PowerSupply_PowerEnvironments) ΛBelongingModule() string {
+	return "huawei-driver"
+}
+
+// HuaweiDevm_Devm_Driver_PowerSupplys_PowerSupply_PowerEnvironments_PowerEnvironment represents the /huawei-devm/devm/driver/power-supplys/power-supply/power-environments/power-environment YANG schema element.
+type HuaweiDevm_Devm_Driver_PowerSupplys_PowerSupply_PowerEnvironments_PowerEnvironment struct {
+	ElectricalValue    *string `path:"electrical-value" module:"huawei-driver"`
+	OutElectricalValue *string `path:"out-electrical-value" module:"huawei-driver"`
+	OutPowerValue      *string `path:"out-power-value" module:"huawei-driver"`
+	OutVoltageValue    *string `path:"out-voltage-value" module:"huawei-driver"`
+	PemIndex           *uint32 `path:"pem-index" module:"huawei-driver"`
+	PowerValue         *string `path:"power-value" module:"huawei-driver"`
+	TemperatureValue   *string `path:"temperature-value" module:"huawei-driver"`
+	VoltageValue       *string `path:"voltage-value" module:"huawei-driver"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_Driver_PowerSupplys_PowerSupply_PowerEnvironments_PowerEnvironment implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_Driver_PowerSupplys_PowerSupply_PowerEnvironments_PowerEnvironment) IsYANGGoStruct() {
+}
+
+// ΛListKeyMap returns the keys of the HuaweiDevm_Devm_Driver_PowerSupplys_PowerSupply_PowerEnvironments_PowerEnvironment struct, which is a YANG list entry.
+func (t *HuaweiDevm_Devm_Driver_PowerSupplys_PowerSupply_PowerEnvironments_PowerEnvironment) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.PemIndex == nil {
+		return nil, fmt.Errorf("nil value for key PemIndex")
+	}
+
+	return map[string]interface{}{
+		"pem-index": *t.PemIndex,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Driver_PowerSupplys_PowerSupply_PowerEnvironments_PowerEnvironment) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_Driver_PowerSupplys_PowerSupply_PowerEnvironments_PowerEnvironment"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Driver_PowerSupplys_PowerSupply_PowerEnvironments_PowerEnvironment) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_Driver_PowerSupplys_PowerSupply_PowerEnvironments_PowerEnvironment) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_Driver_PowerSupplys_PowerSupply_PowerEnvironments_PowerEnvironment.
+func (*HuaweiDevm_Devm_Driver_PowerSupplys_PowerSupply_PowerEnvironments_PowerEnvironment) ΛBelongingModule() string {
+	return "huawei-driver"
+}
+
+// HuaweiDevm_Devm_Driver_Vsus represents the /huawei-devm/devm/driver/vsus YANG schema element.
+type HuaweiDevm_Devm_Driver_Vsus struct {
+	Vsu map[string]*HuaweiDevm_Devm_Driver_Vsus_Vsu `path:"vsu" module:"huawei-driver"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_Driver_Vsus implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_Driver_Vsus) IsYANGGoStruct() {}
+
+// NewVsu creates a new entry in the Vsu list of the
+// HuaweiDevm_Devm_Driver_Vsus struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiDevm_Devm_Driver_Vsus) NewVsu(Position string) (*HuaweiDevm_Devm_Driver_Vsus_Vsu, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.Vsu == nil {
+		t.Vsu = make(map[string]*HuaweiDevm_Devm_Driver_Vsus_Vsu)
+	}
+
+	key := Position
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.Vsu[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Vsu", key)
+	}
+
+	t.Vsu[key] = &HuaweiDevm_Devm_Driver_Vsus_Vsu{
+		Position: &Position,
+	}
+
+	return t.Vsu[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Driver_Vsus) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_Driver_Vsus"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Driver_Vsus) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_Driver_Vsus) ΛEnumTypeMap() map[string][]reflect.Type { return ΛEnumTypes }
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_Driver_Vsus.
+func (*HuaweiDevm_Devm_Driver_Vsus) ΛBelongingModule() string {
+	return "huawei-driver"
+}
+
+// HuaweiDevm_Devm_Driver_Vsus_Vsu represents the /huawei-devm/devm/driver/vsus/vsu YANG schema element.
+type HuaweiDevm_Devm_Driver_Vsus_Vsu struct {
+	Position    *string                             `path:"position" module:"huawei-driver"`
+	ServiceType E_HuaweiDriver_DriverVsuServiceType `path:"service-type" module:"huawei-driver"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_Driver_Vsus_Vsu implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_Driver_Vsus_Vsu) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiDevm_Devm_Driver_Vsus_Vsu struct, which is a YANG list entry.
+func (t *HuaweiDevm_Devm_Driver_Vsus_Vsu) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.Position == nil {
+		return nil, fmt.Errorf("nil value for key Position")
+	}
+
+	return map[string]interface{}{
+		"position": *t.Position,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Driver_Vsus_Vsu) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_Driver_Vsus_Vsu"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Driver_Vsus_Vsu) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_Driver_Vsus_Vsu) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_Driver_Vsus_Vsu.
+func (*HuaweiDevm_Devm_Driver_Vsus_Vsu) ΛBelongingModule() string {
+	return "huawei-driver"
+}
+
+// HuaweiDevm_Devm_EntityClasses represents the /huawei-devm/devm/entity-classes YANG schema element.
+type HuaweiDevm_Devm_EntityClasses struct {
+	EntityClass map[E_HuaweiDevm_EntityClassType]*HuaweiDevm_Devm_EntityClasses_EntityClass `path:"entity-class" module:"huawei-devm"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_EntityClasses implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_EntityClasses) IsYANGGoStruct() {}
+
+// NewEntityClass creates a new entry in the EntityClass list of the
+// HuaweiDevm_Devm_EntityClasses struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiDevm_Devm_EntityClasses) NewEntityClass(ClassName E_HuaweiDevm_EntityClassType) (*HuaweiDevm_Devm_EntityClasses_EntityClass, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.EntityClass == nil {
+		t.EntityClass = make(map[E_HuaweiDevm_EntityClassType]*HuaweiDevm_Devm_EntityClasses_EntityClass)
+	}
+
+	key := ClassName
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.EntityClass[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list EntityClass", key)
+	}
+
+	t.EntityClass[key] = &HuaweiDevm_Devm_EntityClasses_EntityClass{
+		ClassName: ClassName,
+	}
+
+	return t.EntityClass[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_EntityClasses) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_EntityClasses"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_EntityClasses) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_EntityClasses) ΛEnumTypeMap() map[string][]reflect.Type { return ΛEnumTypes }
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_EntityClasses.
+func (*HuaweiDevm_Devm_EntityClasses) ΛBelongingModule() string {
+	return "huawei-devm"
+}
+
+// HuaweiDevm_Devm_EntityClasses_EntityClass represents the /huawei-devm/devm/entity-classes/entity-class YANG schema element.
+type HuaweiDevm_Devm_EntityClasses_EntityClass struct {
+	ClassName        E_HuaweiDevm_EntityClassType `path:"class-name" module:"huawei-devm"`
+	IsResetable      *bool                        `path:"is-resetable" module:"huawei-devm"`
+	IsSwitchoverable *bool                        `path:"is-switchoverable" module:"huawei-devm"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_EntityClasses_EntityClass implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_EntityClasses_EntityClass) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiDevm_Devm_EntityClasses_EntityClass struct, which is a YANG list entry.
+func (t *HuaweiDevm_Devm_EntityClasses_EntityClass) ΛListKeyMap() (map[string]interface{}, error) {
+
+	return map[string]interface{}{
+		"class-name": t.ClassName,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_EntityClasses_EntityClass) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_EntityClasses_EntityClass"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_EntityClasses_EntityClass) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_EntityClasses_EntityClass) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_EntityClasses_EntityClass.
+func (*HuaweiDevm_Devm_EntityClasses_EntityClass) ΛBelongingModule() string {
+	return "huawei-devm"
+}
+
+// HuaweiDevm_Devm_InconsistentEntitys represents the /huawei-devm/devm/inconsistent-entitys YANG schema element.
+type HuaweiDevm_Devm_InconsistentEntitys struct {
+	InconsistentEntity map[HuaweiDevm_Devm_InconsistentEntitys_InconsistentEntity_Key]*HuaweiDevm_Devm_InconsistentEntitys_InconsistentEntity `path:"inconsistent-entity" module:"huawei-devm"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_InconsistentEntitys implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_InconsistentEntitys) IsYANGGoStruct() {}
+
+// HuaweiDevm_Devm_InconsistentEntitys_InconsistentEntity_Key represents the key for list InconsistentEntity of element /huawei-devm/devm/inconsistent-entitys.
+type HuaweiDevm_Devm_InconsistentEntitys_InconsistentEntity_Key struct {
+	Class        E_HuaweiDevm_EntityClassType `path:"class"`
+	Position     string                       `path:"position"`
+	SerialNumber string                       `path:"serial-number"`
+}
+
+// IsYANGGoKeyStruct ensures that HuaweiDevm_Devm_InconsistentEntitys_InconsistentEntity_Key partially implements the
+// yang.GoKeyStruct interface. This allows functions that need to
+// handle this key struct to identify it as being generated by gogen.
+func (HuaweiDevm_Devm_InconsistentEntitys_InconsistentEntity_Key) IsYANGGoKeyStruct() {}
+
+// ΛListKeyMap returns the values of the HuaweiDevm_Devm_InconsistentEntitys_InconsistentEntity_Key key struct.
+func (t HuaweiDevm_Devm_InconsistentEntitys_InconsistentEntity_Key) ΛListKeyMap() (map[string]interface{}, error) {
+	return map[string]interface{}{
+		"class":         t.Class,
+		"position":      t.Position,
+		"serial-number": t.SerialNumber,
+	}, nil
+}
+
+// NewInconsistentEntity creates a new entry in the InconsistentEntity list of the
+// HuaweiDevm_Devm_InconsistentEntitys struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiDevm_Devm_InconsistentEntitys) NewInconsistentEntity(Class E_HuaweiDevm_EntityClassType, Position string, SerialNumber string) (*HuaweiDevm_Devm_InconsistentEntitys_InconsistentEntity, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.InconsistentEntity == nil {
+		t.InconsistentEntity = make(map[HuaweiDevm_Devm_InconsistentEntitys_InconsistentEntity_Key]*HuaweiDevm_Devm_InconsistentEntitys_InconsistentEntity)
+	}
+
+	key := HuaweiDevm_Devm_InconsistentEntitys_InconsistentEntity_Key{
+		Class:        Class,
+		Position:     Position,
+		SerialNumber: SerialNumber,
+	}
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.InconsistentEntity[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list InconsistentEntity", key)
+	}
+
+	t.InconsistentEntity[key] = &HuaweiDevm_Devm_InconsistentEntitys_InconsistentEntity{
+		Class:        Class,
+		Position:     &Position,
+		SerialNumber: &SerialNumber,
+	}
+
+	return t.InconsistentEntity[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_InconsistentEntitys) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_InconsistentEntitys"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_InconsistentEntitys) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_InconsistentEntitys) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_InconsistentEntitys.
+func (*HuaweiDevm_Devm_InconsistentEntitys) ΛBelongingModule() string {
+	return "huawei-devm"
+}
+
+// HuaweiDevm_Devm_InconsistentEntitys_InconsistentEntity represents the /huawei-devm/devm/inconsistent-entitys/inconsistent-entity YANG schema element.
+type HuaweiDevm_Devm_InconsistentEntitys_InconsistentEntity struct {
+	Class        E_HuaweiDevm_EntityClassType     `path:"class" module:"huawei-devm"`
+	LogicalType  E_HuaweiDevm_HardwareType        `path:"logical-type" module:"huawei-devm"`
+	OperState    E_HuaweiDevm_EntityOperStateType `path:"oper-state" module:"huawei-devm"`
+	PhysicalType E_HuaweiDevm_HardwareType        `path:"physical-type" module:"huawei-devm"`
+	Position     *string                          `path:"position" module:"huawei-devm"`
+	SerialNumber *string                          `path:"serial-number" module:"huawei-devm"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_InconsistentEntitys_InconsistentEntity implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_InconsistentEntitys_InconsistentEntity) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiDevm_Devm_InconsistentEntitys_InconsistentEntity struct, which is a YANG list entry.
+func (t *HuaweiDevm_Devm_InconsistentEntitys_InconsistentEntity) ΛListKeyMap() (map[string]interface{}, error) {
+
+	if t.Position == nil {
+		return nil, fmt.Errorf("nil value for key Position")
+	}
+
+	if t.SerialNumber == nil {
+		return nil, fmt.Errorf("nil value for key SerialNumber")
+	}
+
+	return map[string]interface{}{
+		"class":         t.Class,
+		"position":      *t.Position,
+		"serial-number": *t.SerialNumber,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_InconsistentEntitys_InconsistentEntity) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_InconsistentEntitys_InconsistentEntity"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_InconsistentEntitys_InconsistentEntity) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_InconsistentEntitys_InconsistentEntity) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_InconsistentEntitys_InconsistentEntity.
+func (*HuaweiDevm_Devm_InconsistentEntitys_InconsistentEntity) ΛBelongingModule() string {
+	return "huawei-devm"
+}
+
+// HuaweiDevm_Devm_LogicContainers represents the /huawei-devm/devm/logic-containers YANG schema element.
+type HuaweiDevm_Devm_LogicContainers struct {
+	LogicContainer map[string]*HuaweiDevm_Devm_LogicContainers_LogicContainer `path:"logic-container" module:"huawei-devm"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_LogicContainers implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_LogicContainers) IsYANGGoStruct() {}
+
+// NewLogicContainer creates a new entry in the LogicContainer list of the
+// HuaweiDevm_Devm_LogicContainers struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiDevm_Devm_LogicContainers) NewLogicContainer(Position string) (*HuaweiDevm_Devm_LogicContainers_LogicContainer, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.LogicContainer == nil {
+		t.LogicContainer = make(map[string]*HuaweiDevm_Devm_LogicContainers_LogicContainer)
+	}
+
+	key := Position
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.LogicContainer[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list LogicContainer", key)
+	}
+
+	t.LogicContainer[key] = &HuaweiDevm_Devm_LogicContainers_LogicContainer{
+		Position: &Position,
+	}
+
+	return t.LogicContainer[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_LogicContainers) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_LogicContainers"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_LogicContainers) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_LogicContainers) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_LogicContainers.
+func (*HuaweiDevm_Devm_LogicContainers) ΛBelongingModule() string {
+	return "huawei-devm"
+}
+
+// HuaweiDevm_Devm_LogicContainers_LogicContainer represents the /huawei-devm/devm/logic-containers/logic-container YANG schema element.
+type HuaweiDevm_Devm_LogicContainers_LogicContainer struct {
+	ContainerType        E_HuaweiDevm_ContainerClassType                                      `path:"container-type" module:"huawei-devm"`
+	EquipedEntityType    E_HuaweiDevm_HardwareType                                            `path:"equiped-entity-type" module:"huawei-devm"`
+	Index                *uint32                                                              `path:"index" module:"huawei-devm"`
+	Position             *string                                                              `path:"position" module:"huawei-devm"`
+	SupportedEntityTypes *HuaweiDevm_Devm_LogicContainers_LogicContainer_SupportedEntityTypes `path:"supported-entity-types" module:"huawei-devm"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_LogicContainers_LogicContainer implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_LogicContainers_LogicContainer) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiDevm_Devm_LogicContainers_LogicContainer struct, which is a YANG list entry.
+func (t *HuaweiDevm_Devm_LogicContainers_LogicContainer) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.Position == nil {
+		return nil, fmt.Errorf("nil value for key Position")
+	}
+
+	return map[string]interface{}{
+		"position": *t.Position,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_LogicContainers_LogicContainer) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_LogicContainers_LogicContainer"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_LogicContainers_LogicContainer) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_LogicContainers_LogicContainer) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_LogicContainers_LogicContainer.
+func (*HuaweiDevm_Devm_LogicContainers_LogicContainer) ΛBelongingModule() string {
+	return "huawei-devm"
+}
+
+// HuaweiDevm_Devm_LogicContainers_LogicContainer_SupportedEntityTypes represents the /huawei-devm/devm/logic-containers/logic-container/supported-entity-types YANG schema element.
+type HuaweiDevm_Devm_LogicContainers_LogicContainer_SupportedEntityTypes struct {
+	SupportedEntityType map[E_HuaweiDevm_HardwareType]*HuaweiDevm_Devm_LogicContainers_LogicContainer_SupportedEntityTypes_SupportedEntityType `path:"supported-entity-type" module:"huawei-devm"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_LogicContainers_LogicContainer_SupportedEntityTypes implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_LogicContainers_LogicContainer_SupportedEntityTypes) IsYANGGoStruct() {}
+
+// NewSupportedEntityType creates a new entry in the SupportedEntityType list of the
+// HuaweiDevm_Devm_LogicContainers_LogicContainer_SupportedEntityTypes struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiDevm_Devm_LogicContainers_LogicContainer_SupportedEntityTypes) NewSupportedEntityType(EntityType E_HuaweiDevm_HardwareType) (*HuaweiDevm_Devm_LogicContainers_LogicContainer_SupportedEntityTypes_SupportedEntityType, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.SupportedEntityType == nil {
+		t.SupportedEntityType = make(map[E_HuaweiDevm_HardwareType]*HuaweiDevm_Devm_LogicContainers_LogicContainer_SupportedEntityTypes_SupportedEntityType)
+	}
+
+	key := EntityType
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.SupportedEntityType[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list SupportedEntityType", key)
+	}
+
+	t.SupportedEntityType[key] = &HuaweiDevm_Devm_LogicContainers_LogicContainer_SupportedEntityTypes_SupportedEntityType{
+		EntityType: EntityType,
+	}
+
+	return t.SupportedEntityType[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_LogicContainers_LogicContainer_SupportedEntityTypes) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_LogicContainers_LogicContainer_SupportedEntityTypes"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_LogicContainers_LogicContainer_SupportedEntityTypes) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_LogicContainers_LogicContainer_SupportedEntityTypes) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_LogicContainers_LogicContainer_SupportedEntityTypes.
+func (*HuaweiDevm_Devm_LogicContainers_LogicContainer_SupportedEntityTypes) ΛBelongingModule() string {
+	return "huawei-devm"
+}
+
+// HuaweiDevm_Devm_LogicContainers_LogicContainer_SupportedEntityTypes_SupportedEntityType represents the /huawei-devm/devm/logic-containers/logic-container/supported-entity-types/supported-entity-type YANG schema element.
+type HuaweiDevm_Devm_LogicContainers_LogicContainer_SupportedEntityTypes_SupportedEntityType struct {
+	EntityType E_HuaweiDevm_HardwareType `path:"entity-type" module:"huawei-devm"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_LogicContainers_LogicContainer_SupportedEntityTypes_SupportedEntityType implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_LogicContainers_LogicContainer_SupportedEntityTypes_SupportedEntityType) IsYANGGoStruct() {
+}
+
+// ΛListKeyMap returns the keys of the HuaweiDevm_Devm_LogicContainers_LogicContainer_SupportedEntityTypes_SupportedEntityType struct, which is a YANG list entry.
+func (t *HuaweiDevm_Devm_LogicContainers_LogicContainer_SupportedEntityTypes_SupportedEntityType) ΛListKeyMap() (map[string]interface{}, error) {
+
+	return map[string]interface{}{
+		"entity-type": t.EntityType,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_LogicContainers_LogicContainer_SupportedEntityTypes_SupportedEntityType) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_LogicContainers_LogicContainer_SupportedEntityTypes_SupportedEntityType"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_LogicContainers_LogicContainer_SupportedEntityTypes_SupportedEntityType) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_LogicContainers_LogicContainer_SupportedEntityTypes_SupportedEntityType) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_LogicContainers_LogicContainer_SupportedEntityTypes_SupportedEntityType.
+func (*HuaweiDevm_Devm_LogicContainers_LogicContainer_SupportedEntityTypes_SupportedEntityType) ΛBelongingModule() string {
+	return "huawei-devm"
+}
+
+// HuaweiDevm_Devm_LogicEntitys represents the /huawei-devm/devm/logic-entitys YANG schema element.
+type HuaweiDevm_Devm_LogicEntitys struct {
+	LogicEntity map[HuaweiDevm_Devm_LogicEntitys_LogicEntity_Key]*HuaweiDevm_Devm_LogicEntitys_LogicEntity `path:"logic-entity" module:"huawei-devm"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_LogicEntitys implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_LogicEntitys) IsYANGGoStruct() {}
+
+// HuaweiDevm_Devm_LogicEntitys_LogicEntity_Key represents the key for list LogicEntity of element /huawei-devm/devm/logic-entitys.
+type HuaweiDevm_Devm_LogicEntitys_LogicEntity_Key struct {
+	Class        E_HuaweiDevm_EntityClassType `path:"class"`
+	Position     string                       `path:"position"`
+	SerialNumber string                       `path:"serial-number"`
+}
+
+// IsYANGGoKeyStruct ensures that HuaweiDevm_Devm_LogicEntitys_LogicEntity_Key partially implements the
+// yang.GoKeyStruct interface. This allows functions that need to
+// handle this key struct to identify it as being generated by gogen.
+func (HuaweiDevm_Devm_LogicEntitys_LogicEntity_Key) IsYANGGoKeyStruct() {}
+
+// ΛListKeyMap returns the values of the HuaweiDevm_Devm_LogicEntitys_LogicEntity_Key key struct.
+func (t HuaweiDevm_Devm_LogicEntitys_LogicEntity_Key) ΛListKeyMap() (map[string]interface{}, error) {
+	return map[string]interface{}{
+		"class":         t.Class,
+		"position":      t.Position,
+		"serial-number": t.SerialNumber,
+	}, nil
+}
+
+// NewLogicEntity creates a new entry in the LogicEntity list of the
+// HuaweiDevm_Devm_LogicEntitys struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiDevm_Devm_LogicEntitys) NewLogicEntity(Class E_HuaweiDevm_EntityClassType, Position string, SerialNumber string) (*HuaweiDevm_Devm_LogicEntitys_LogicEntity, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.LogicEntity == nil {
+		t.LogicEntity = make(map[HuaweiDevm_Devm_LogicEntitys_LogicEntity_Key]*HuaweiDevm_Devm_LogicEntitys_LogicEntity)
+	}
+
+	key := HuaweiDevm_Devm_LogicEntitys_LogicEntity_Key{
+		Class:        Class,
+		Position:     Position,
+		SerialNumber: SerialNumber,
+	}
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.LogicEntity[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list LogicEntity", key)
+	}
+
+	t.LogicEntity[key] = &HuaweiDevm_Devm_LogicEntitys_LogicEntity{
+		Class:        Class,
+		Position:     &Position,
+		SerialNumber: &SerialNumber,
+	}
+
+	return t.LogicEntity[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_LogicEntitys) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_LogicEntitys"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_LogicEntitys) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_LogicEntitys) ΛEnumTypeMap() map[string][]reflect.Type { return ΛEnumTypes }
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_LogicEntitys.
+func (*HuaweiDevm_Devm_LogicEntitys) ΛBelongingModule() string {
+	return "huawei-devm"
+}
+
+// HuaweiDevm_Devm_LogicEntitys_LogicEntity represents the /huawei-devm/devm/logic-entitys/logic-entity YANG schema element.
+type HuaweiDevm_Devm_LogicEntitys_LogicEntity struct {
+	Class                  E_HuaweiDevm_EntityClassType     `path:"class" module:"huawei-devm"`
+	EntityDescription      *string                          `path:"entity-description" module:"huawei-devm"`
+	Index                  *uint32                          `path:"index" module:"huawei-devm"`
+	Memo                   *string                          `path:"memo" module:"huawei-devm"`
+	Name                   *string                          `path:"name" module:"huawei-devm"`
+	OperState              E_HuaweiDevm_EntityOperStateType `path:"oper-state" module:"huawei-devm"`
+	ParentIndex            *uint32                          `path:"parent-index" module:"huawei-devm"`
+	ParentRelativePosition *uint32                          `path:"parent-relative-position" module:"huawei-devm"`
+	Position               *string                          `path:"position" module:"huawei-devm"`
+	SerialNumber           *string                          `path:"serial-number" module:"huawei-devm"`
+	VendorType             E_HuaweiDevm_HardwareType        `path:"vendor-type" module:"huawei-devm"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_LogicEntitys_LogicEntity implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_LogicEntitys_LogicEntity) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiDevm_Devm_LogicEntitys_LogicEntity struct, which is a YANG list entry.
+func (t *HuaweiDevm_Devm_LogicEntitys_LogicEntity) ΛListKeyMap() (map[string]interface{}, error) {
+
+	if t.Position == nil {
+		return nil, fmt.Errorf("nil value for key Position")
+	}
+
+	if t.SerialNumber == nil {
+		return nil, fmt.Errorf("nil value for key SerialNumber")
+	}
+
+	return map[string]interface{}{
+		"class":         t.Class,
+		"position":      *t.Position,
+		"serial-number": *t.SerialNumber,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_LogicEntitys_LogicEntity) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_LogicEntitys_LogicEntity"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_LogicEntitys_LogicEntity) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_LogicEntitys_LogicEntity) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_LogicEntitys_LogicEntity.
+func (*HuaweiDevm_Devm_LogicEntitys_LogicEntity) ΛBelongingModule() string {
+	return "huawei-devm"
+}
+
+// HuaweiDevm_Devm_LogicPorts represents the /huawei-devm/devm/logic-ports YANG schema element.
+type HuaweiDevm_Devm_LogicPorts struct {
+	LogicPort map[HuaweiDevm_Devm_LogicPorts_LogicPort_Key]*HuaweiDevm_Devm_LogicPorts_LogicPort `path:"logic-port" module:"huawei-devm"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_LogicPorts implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_LogicPorts) IsYANGGoStruct() {}
+
+// HuaweiDevm_Devm_LogicPorts_LogicPort_Key represents the key for list LogicPort of element /huawei-devm/devm/logic-ports.
+type HuaweiDevm_Devm_LogicPorts_LogicPort_Key struct {
+	Position     string                     `path:"position"`
+	SerialNumber string                     `path:"serial-number"`
+	PortType     E_HuaweiDevm_PortClassType `path:"port-type"`
+}
+
+// IsYANGGoKeyStruct ensures that HuaweiDevm_Devm_LogicPorts_LogicPort_Key partially implements the
+// yang.GoKeyStruct interface. This allows functions that need to
+// handle this key struct to identify it as being generated by gogen.
+func (HuaweiDevm_Devm_LogicPorts_LogicPort_Key) IsYANGGoKeyStruct() {}
+
+// ΛListKeyMap returns the values of the HuaweiDevm_Devm_LogicPorts_LogicPort_Key key struct.
+func (t HuaweiDevm_Devm_LogicPorts_LogicPort_Key) ΛListKeyMap() (map[string]interface{}, error) {
+	return map[string]interface{}{
+		"position":      t.Position,
+		"serial-number": t.SerialNumber,
+		"port-type":     t.PortType,
+	}, nil
+}
+
+// NewLogicPort creates a new entry in the LogicPort list of the
+// HuaweiDevm_Devm_LogicPorts struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiDevm_Devm_LogicPorts) NewLogicPort(Position string, SerialNumber string, PortType E_HuaweiDevm_PortClassType) (*HuaweiDevm_Devm_LogicPorts_LogicPort, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.LogicPort == nil {
+		t.LogicPort = make(map[HuaweiDevm_Devm_LogicPorts_LogicPort_Key]*HuaweiDevm_Devm_LogicPorts_LogicPort)
+	}
+
+	key := HuaweiDevm_Devm_LogicPorts_LogicPort_Key{
+		Position:     Position,
+		SerialNumber: SerialNumber,
+		PortType:     PortType,
+	}
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.LogicPort[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list LogicPort", key)
+	}
+
+	t.LogicPort[key] = &HuaweiDevm_Devm_LogicPorts_LogicPort{
+		Position:     &Position,
+		SerialNumber: &SerialNumber,
+		PortType:     PortType,
+	}
+
+	return t.LogicPort[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_LogicPorts) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_LogicPorts"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_LogicPorts) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_LogicPorts) ΛEnumTypeMap() map[string][]reflect.Type { return ΛEnumTypes }
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_LogicPorts.
+func (*HuaweiDevm_Devm_LogicPorts) ΛBelongingModule() string {
+	return "huawei-devm"
+}
+
+// HuaweiDevm_Devm_LogicPorts_LogicPort represents the /huawei-devm/devm/logic-ports/logic-port YANG schema element.
+type HuaweiDevm_Devm_LogicPorts_LogicPort struct {
+	AdminState              E_HuaweiDevm_EntityAdminState `path:"admin-state" module:"huawei-devm"`
+	EnableTransmissionDelay *uint32                       `path:"enable-transmission-delay" module:"huawei-devm"`
+	HardType                E_HuaweiDevm_PortHardwareType `path:"hard-type" module:"huawei-devm"`
+	Index                   *uint32                       `path:"index" module:"huawei-devm"`
+	Level                   E_HuaweiDevm_PortLevelType    `path:"level" module:"huawei-devm"`
+	PortType                E_HuaweiDevm_PortClassType    `path:"port-type" module:"huawei-devm"`
+	Position                *string                       `path:"position" module:"huawei-devm"`
+	SerialNumber            *string                       `path:"serial-number" module:"huawei-devm"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_LogicPorts_LogicPort implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_LogicPorts_LogicPort) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiDevm_Devm_LogicPorts_LogicPort struct, which is a YANG list entry.
+func (t *HuaweiDevm_Devm_LogicPorts_LogicPort) ΛListKeyMap() (map[string]interface{}, error) {
+
+	if t.Position == nil {
+		return nil, fmt.Errorf("nil value for key Position")
+	}
+
+	if t.SerialNumber == nil {
+		return nil, fmt.Errorf("nil value for key SerialNumber")
+	}
+
+	return map[string]interface{}{
+		"port-type":     t.PortType,
+		"position":      *t.Position,
+		"serial-number": *t.SerialNumber,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_LogicPorts_LogicPort) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_LogicPorts_LogicPort"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_LogicPorts_LogicPort) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_LogicPorts_LogicPort) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_LogicPorts_LogicPort.
+func (*HuaweiDevm_Devm_LogicPorts_LogicPort) ΛBelongingModule() string {
+	return "huawei-devm"
+}
+
+// HuaweiDevm_Devm_LpuBoards represents the /huawei-devm/devm/lpu-boards YANG schema element.
+type HuaweiDevm_Devm_LpuBoards struct {
+	LpuBoard map[string]*HuaweiDevm_Devm_LpuBoards_LpuBoard `path:"lpu-board" module:"huawei-devm"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_LpuBoards implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_LpuBoards) IsYANGGoStruct() {}
+
+// NewLpuBoard creates a new entry in the LpuBoard list of the
+// HuaweiDevm_Devm_LpuBoards struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiDevm_Devm_LpuBoards) NewLpuBoard(Position string) (*HuaweiDevm_Devm_LpuBoards_LpuBoard, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.LpuBoard == nil {
+		t.LpuBoard = make(map[string]*HuaweiDevm_Devm_LpuBoards_LpuBoard)
+	}
+
+	key := Position
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.LpuBoard[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list LpuBoard", key)
+	}
+
+	t.LpuBoard[key] = &HuaweiDevm_Devm_LpuBoards_LpuBoard{
+		Position: &Position,
+	}
+
+	return t.LpuBoard[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_LpuBoards) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_LpuBoards"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_LpuBoards) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_LpuBoards) ΛEnumTypeMap() map[string][]reflect.Type { return ΛEnumTypes }
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_LpuBoards.
+func (*HuaweiDevm_Devm_LpuBoards) ΛBelongingModule() string {
+	return "huawei-devm"
+}
+
+// HuaweiDevm_Devm_LpuBoards_LpuBoard represents the /huawei-devm/devm/lpu-boards/lpu-board YANG schema element.
+type HuaweiDevm_Devm_LpuBoards_LpuBoard struct {
+	BoardType       *string                                            `path:"board-type" module:"huawei-devm"`
+	Clock_8KPort    *string                                            `path:"clock-8k-port" module:"huawei-devm"`
+	CurrentL3Clk    *uint32                                            `path:"current-l3-clk" module:"huawei-devm"`
+	Driver          *HuaweiDevm_Devm_LpuBoards_LpuBoard_Driver         `path:"driver" module:"huawei-driver"`
+	FlashSize       *uint32                                            `path:"flash-size" module:"huawei-devm"`
+	Index           *uint32                                            `path:"index" module:"huawei-devm"`
+	IsRegister      *bool                                              `path:"is-register" module:"huawei-devm"`
+	Loadbalance     *HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance    `path:"loadbalance" module:"huawei-loadbalance"`
+	Mirror          *HuaweiDevm_Devm_LpuBoards_LpuBoard_Mirror         `path:"mirror" module:"huawei-mirror"`
+	NextServiceType E_HuaweiDevm_LpuServiceType                        `path:"next-service-type" module:"huawei-devm"`
+	NpRdramSize     *uint32                                            `path:"np-rdram-size" module:"huawei-devm"`
+	NpSramSize      *uint32                                            `path:"np-sram-size" module:"huawei-devm"`
+	PicNum          *uint32                                            `path:"pic-num" module:"huawei-devm"`
+	Position        *string                                            `path:"position" module:"huawei-devm"`
+	RegisterTime    *string                                            `path:"register-time" module:"huawei-devm"`
+	SdramSize       *uint32                                            `path:"sdram-size" module:"huawei-devm"`
+	ServiceType     E_HuaweiDevm_LpuServiceType                        `path:"service-type" module:"huawei-devm"`
+	Sflow           *HuaweiDevm_Devm_LpuBoards_LpuBoard_Sflow          `path:"sflow" module:"huawei-sflow"`
+	SubSlotNum      *uint32                                            `path:"sub-slot-num" module:"huawei-devm"`
+	UnicastForward  *HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward `path:"unicast-forward" module:"huawei-unicast-forward"`
+	UpTime          *uint32                                            `path:"up-time" module:"huawei-devm"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_LpuBoards_LpuBoard implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_LpuBoards_LpuBoard) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiDevm_Devm_LpuBoards_LpuBoard struct, which is a YANG list entry.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.Position == nil {
+		return nil, fmt.Errorf("nil value for key Position")
+	}
+
+	return map[string]interface{}{
+		"position": *t.Position,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_LpuBoards_LpuBoard"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_LpuBoards_LpuBoard.
+func (*HuaweiDevm_Devm_LpuBoards_LpuBoard) ΛBelongingModule() string {
+	return "huawei-devm"
+}
+
+// HuaweiDevm_Devm_LpuBoards_LpuBoard_Driver represents the /huawei-devm/devm/lpu-boards/lpu-board/driver YANG schema element.
+type HuaweiDevm_Devm_LpuBoards_LpuBoard_Driver struct {
+	L3Clocks *HuaweiDevm_Devm_LpuBoards_LpuBoard_Driver_L3Clocks `path:"l3-clocks" module:"huawei-driver"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_LpuBoards_LpuBoard_Driver implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_LpuBoards_LpuBoard_Driver) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_Driver) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_LpuBoards_LpuBoard_Driver"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_Driver) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_Driver) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_LpuBoards_LpuBoard_Driver.
+func (*HuaweiDevm_Devm_LpuBoards_LpuBoard_Driver) ΛBelongingModule() string {
+	return "huawei-driver"
+}
+
+// HuaweiDevm_Devm_LpuBoards_LpuBoard_Driver_L3Clocks represents the /huawei-devm/devm/lpu-boards/lpu-board/driver/l3-clocks YANG schema element.
+type HuaweiDevm_Devm_LpuBoards_LpuBoard_Driver_L3Clocks struct {
+	L3Clock map[string]*HuaweiDevm_Devm_LpuBoards_LpuBoard_Driver_L3Clocks_L3Clock `path:"l3-clock" module:"huawei-driver"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_LpuBoards_LpuBoard_Driver_L3Clocks implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_LpuBoards_LpuBoard_Driver_L3Clocks) IsYANGGoStruct() {}
+
+// NewL3Clock creates a new entry in the L3Clock list of the
+// HuaweiDevm_Devm_LpuBoards_LpuBoard_Driver_L3Clocks struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_Driver_L3Clocks) NewL3Clock(ClockId string) (*HuaweiDevm_Devm_LpuBoards_LpuBoard_Driver_L3Clocks_L3Clock, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.L3Clock == nil {
+		t.L3Clock = make(map[string]*HuaweiDevm_Devm_LpuBoards_LpuBoard_Driver_L3Clocks_L3Clock)
+	}
+
+	key := ClockId
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.L3Clock[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list L3Clock", key)
+	}
+
+	t.L3Clock[key] = &HuaweiDevm_Devm_LpuBoards_LpuBoard_Driver_L3Clocks_L3Clock{
+		ClockId: &ClockId,
+	}
+
+	return t.L3Clock[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_Driver_L3Clocks) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_LpuBoards_LpuBoard_Driver_L3Clocks"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_Driver_L3Clocks) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_Driver_L3Clocks) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_LpuBoards_LpuBoard_Driver_L3Clocks.
+func (*HuaweiDevm_Devm_LpuBoards_LpuBoard_Driver_L3Clocks) ΛBelongingModule() string {
+	return "huawei-driver"
+}
+
+// HuaweiDevm_Devm_LpuBoards_LpuBoard_Driver_L3Clocks_L3Clock represents the /huawei-devm/devm/lpu-boards/lpu-board/driver/l3-clocks/l3-clock YANG schema element.
+type HuaweiDevm_Devm_LpuBoards_LpuBoard_Driver_L3Clocks_L3Clock struct {
+	ClockId      *string                          `path:"clock-id" module:"huawei-driver"`
+	L3ClockState E_HuaweiDriver_DriverClockStatus `path:"l3-clock-state" module:"huawei-driver"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_LpuBoards_LpuBoard_Driver_L3Clocks_L3Clock implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_LpuBoards_LpuBoard_Driver_L3Clocks_L3Clock) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiDevm_Devm_LpuBoards_LpuBoard_Driver_L3Clocks_L3Clock struct, which is a YANG list entry.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_Driver_L3Clocks_L3Clock) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.ClockId == nil {
+		return nil, fmt.Errorf("nil value for key ClockId")
+	}
+
+	return map[string]interface{}{
+		"clock-id": *t.ClockId,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_Driver_L3Clocks_L3Clock) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_LpuBoards_LpuBoard_Driver_L3Clocks_L3Clock"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_Driver_L3Clocks_L3Clock) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_Driver_L3Clocks_L3Clock) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_LpuBoards_LpuBoard_Driver_L3Clocks_L3Clock.
+func (*HuaweiDevm_Devm_LpuBoards_LpuBoard_Driver_L3Clocks_L3Clock) ΛBelongingModule() string {
+	return "huawei-driver"
+}
+
+// HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance represents the /huawei-devm/devm/lpu-boards/lpu-board/loadbalance YANG schema element.
+type HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance struct {
+	DynamicAdjust  *HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_DynamicAdjust  `path:"dynamic-adjust" module:"huawei-loadbalance"`
+	HashArithmetic *HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_HashArithmetic `path:"hash-arithmetic" module:"huawei-loadbalance"`
+	HashFields     *HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_HashFields     `path:"hash-fields" module:"huawei-loadbalance"`
+	HashMultipe    *HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_HashMultipe    `path:"hash-multipe" module:"huawei-loadbalance"`
+	HashSeed       *HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_HashSeed       `path:"hash-seed" module:"huawei-loadbalance"`
+	Hashs          *HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_Hashs          `path:"hashs" module:"huawei-loadbalance"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance.
+func (*HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance) ΛBelongingModule() string {
+	return "huawei-loadbalance"
+}
+
+// HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_DynamicAdjust represents the /huawei-devm/devm/lpu-boards/lpu-board/loadbalance/dynamic-adjust YANG schema element.
+type HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_DynamicAdjust struct {
+	Enable *bool `path:"enable" module:"huawei-loadbalance"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_DynamicAdjust implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_DynamicAdjust) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_DynamicAdjust) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_DynamicAdjust"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_DynamicAdjust) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_DynamicAdjust) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_DynamicAdjust.
+func (*HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_DynamicAdjust) ΛBelongingModule() string {
+	return "huawei-loadbalance"
+}
+
+// HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_HashArithmetic represents the /huawei-devm/devm/lpu-boards/lpu-board/loadbalance/hash-arithmetic YANG schema element.
+type HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_HashArithmetic struct {
+	Arithmetic     E_HuaweiLoadbalance_CxHashArithmetic `path:"arithmetic" module:"huawei-loadbalance"`
+	SecondHashFlag *bool                                `path:"second-hash-flag" module:"huawei-loadbalance"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_HashArithmetic implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_HashArithmetic) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_HashArithmetic) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_HashArithmetic"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_HashArithmetic) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_HashArithmetic) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_HashArithmetic.
+func (*HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_HashArithmetic) ΛBelongingModule() string {
+	return "huawei-loadbalance"
+}
+
+// HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_HashFields represents the /huawei-devm/devm/lpu-boards/lpu-board/loadbalance/hash-fields YANG schema element.
+type HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_HashFields struct {
+	HashField map[E_HuaweiLoadbalance_CxTrunkEcmp]*HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_HashFields_HashField `path:"hash-field" module:"huawei-loadbalance"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_HashFields implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_HashFields) IsYANGGoStruct() {}
+
+// NewHashField creates a new entry in the HashField list of the
+// HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_HashFields struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_HashFields) NewHashField(TrunkEcmp E_HuaweiLoadbalance_CxTrunkEcmp) (*HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_HashFields_HashField, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.HashField == nil {
+		t.HashField = make(map[E_HuaweiLoadbalance_CxTrunkEcmp]*HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_HashFields_HashField)
+	}
+
+	key := TrunkEcmp
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.HashField[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list HashField", key)
+	}
+
+	t.HashField[key] = &HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_HashFields_HashField{
+		TrunkEcmp: TrunkEcmp,
+	}
+
+	return t.HashField[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_HashFields) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_HashFields"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_HashFields) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_HashFields) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_HashFields.
+func (*HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_HashFields) ΛBelongingModule() string {
+	return "huawei-loadbalance"
+}
+
+// HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_HashFields_HashField represents the /huawei-devm/devm/lpu-boards/lpu-board/loadbalance/hash-fields/hash-field YANG schema element.
+type HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_HashFields_HashField struct {
+	Material  E_HuaweiLoadbalance_CxHashMaterial `path:"material" module:"huawei-loadbalance"`
+	TrunkEcmp E_HuaweiLoadbalance_CxTrunkEcmp    `path:"trunk-ecmp" module:"huawei-loadbalance"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_HashFields_HashField implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_HashFields_HashField) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_HashFields_HashField struct, which is a YANG list entry.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_HashFields_HashField) ΛListKeyMap() (map[string]interface{}, error) {
+
+	return map[string]interface{}{
+		"trunk-ecmp": t.TrunkEcmp,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_HashFields_HashField) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_HashFields_HashField"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_HashFields_HashField) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_HashFields_HashField) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_HashFields_HashField.
+func (*HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_HashFields_HashField) ΛBelongingModule() string {
+	return "huawei-loadbalance"
+}
+
+// HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_HashMultipe represents the /huawei-devm/devm/lpu-boards/lpu-board/loadbalance/hash-multipe YANG schema element.
+type HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_HashMultipe struct {
+	MultipeFlag E_HuaweiLoadbalance_CxMulpeFlag `path:"multipe-flag" module:"huawei-loadbalance"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_HashMultipe implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_HashMultipe) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_HashMultipe) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_HashMultipe"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_HashMultipe) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_HashMultipe) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_HashMultipe.
+func (*HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_HashMultipe) ΛBelongingModule() string {
+	return "huawei-loadbalance"
+}
+
+// HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_HashSeed represents the /huawei-devm/devm/lpu-boards/lpu-board/loadbalance/hash-seed YANG schema element.
+type HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_HashSeed struct {
+	CustomSeed *string `path:"custom-seed" module:"huawei-loadbalance"`
+	RandomFlag *bool   `path:"random-flag" module:"huawei-loadbalance"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_HashSeed implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_HashSeed) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_HashSeed) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_HashSeed"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_HashSeed) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_HashSeed) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_HashSeed.
+func (*HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_HashSeed) ΛBelongingModule() string {
+	return "huawei-loadbalance"
+}
+
+// HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_Hashs represents the /huawei-devm/devm/lpu-boards/lpu-board/loadbalance/hashs YANG schema element.
+type HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_Hashs struct {
+	Hash map[HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_Hashs_Hash_Key]*HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_Hashs_Hash `path:"hash" module:"huawei-loadbalance"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_Hashs implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_Hashs) IsYANGGoStruct() {}
+
+// HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_Hashs_Hash_Key represents the key for list Hash of element /huawei-devm/devm/lpu-boards/lpu-board/loadbalance/hashs.
+type HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_Hashs_Hash_Key struct {
+	Type      E_HuaweiLoadbalance_HashType  `path:"type"`
+	TrunkEcmp E_HuaweiLoadbalance_TrunkEcmp `path:"trunk-ecmp"`
+}
+
+// IsYANGGoKeyStruct ensures that HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_Hashs_Hash_Key partially implements the
+// yang.GoKeyStruct interface. This allows functions that need to
+// handle this key struct to identify it as being generated by gogen.
+func (HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_Hashs_Hash_Key) IsYANGGoKeyStruct() {}
+
+// ΛListKeyMap returns the values of the HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_Hashs_Hash_Key key struct.
+func (t HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_Hashs_Hash_Key) ΛListKeyMap() (map[string]interface{}, error) {
+	return map[string]interface{}{
+		"type":       t.Type,
+		"trunk-ecmp": t.TrunkEcmp,
+	}, nil
+}
+
+// NewHash creates a new entry in the Hash list of the
+// HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_Hashs struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_Hashs) NewHash(Type E_HuaweiLoadbalance_HashType, TrunkEcmp E_HuaweiLoadbalance_TrunkEcmp) (*HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_Hashs_Hash, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.Hash == nil {
+		t.Hash = make(map[HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_Hashs_Hash_Key]*HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_Hashs_Hash)
+	}
+
+	key := HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_Hashs_Hash_Key{
+		Type:      Type,
+		TrunkEcmp: TrunkEcmp,
+	}
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.Hash[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Hash", key)
+	}
+
+	t.Hash[key] = &HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_Hashs_Hash{
+		Type:      Type,
+		TrunkEcmp: TrunkEcmp,
+	}
+
+	return t.Hash[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_Hashs) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_Hashs"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_Hashs) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_Hashs) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_Hashs.
+func (*HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_Hashs) ΛBelongingModule() string {
+	return "huawei-loadbalance"
+}
+
+// HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_Hashs_Hash represents the /huawei-devm/devm/lpu-boards/lpu-board/loadbalance/hashs/hash YANG schema element.
+type HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_Hashs_Hash struct {
+	Arithmetic E_HuaweiLoadbalance_HashArithmetic `path:"arithmetic" module:"huawei-loadbalance"`
+	Box1       *string                            `path:"box1" module:"huawei-loadbalance"`
+	Box2       *string                            `path:"box2" module:"huawei-loadbalance"`
+	CustomSeed *string                            `path:"custom-seed" module:"huawei-loadbalance"`
+	Material   E_HuaweiLoadbalance_HashMaterial   `path:"material" module:"huawei-loadbalance"`
+	RandomFlag *bool                              `path:"random-flag" module:"huawei-loadbalance"`
+	TrunkEcmp  E_HuaweiLoadbalance_TrunkEcmp      `path:"trunk-ecmp" module:"huawei-loadbalance"`
+	Type       E_HuaweiLoadbalance_HashType       `path:"type" module:"huawei-loadbalance"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_Hashs_Hash implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_Hashs_Hash) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_Hashs_Hash struct, which is a YANG list entry.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_Hashs_Hash) ΛListKeyMap() (map[string]interface{}, error) {
+
+	return map[string]interface{}{
+		"trunk-ecmp": t.TrunkEcmp,
+		"type":       t.Type,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_Hashs_Hash) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_Hashs_Hash"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_Hashs_Hash) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_Hashs_Hash) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_Hashs_Hash.
+func (*HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance_Hashs_Hash) ΛBelongingModule() string {
+	return "huawei-loadbalance"
+}
+
+// HuaweiDevm_Devm_LpuBoards_LpuBoard_Mirror represents the /huawei-devm/devm/lpu-boards/lpu-board/mirror YANG schema element.
+type HuaweiDevm_Devm_LpuBoards_LpuBoard_Mirror struct {
+	ObserveFilters   *HuaweiDevm_Devm_LpuBoards_LpuBoard_Mirror_ObserveFilters   `path:"observe-filters" module:"huawei-mirror"`
+	RateLimitPercent *HuaweiDevm_Devm_LpuBoards_LpuBoard_Mirror_RateLimitPercent `path:"rate-limit-percent" module:"huawei-mirror"`
+	SlotObserve      *HuaweiDevm_Devm_LpuBoards_LpuBoard_Mirror_SlotObserve      `path:"slot-observe" module:"huawei-mirror"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_LpuBoards_LpuBoard_Mirror implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_LpuBoards_LpuBoard_Mirror) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_Mirror) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_LpuBoards_LpuBoard_Mirror"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_Mirror) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_Mirror) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_LpuBoards_LpuBoard_Mirror.
+func (*HuaweiDevm_Devm_LpuBoards_LpuBoard_Mirror) ΛBelongingModule() string {
+	return "huawei-mirror"
+}
+
+// HuaweiDevm_Devm_LpuBoards_LpuBoard_Mirror_ObserveFilters represents the /huawei-devm/devm/lpu-boards/lpu-board/mirror/observe-filters YANG schema element.
+type HuaweiDevm_Devm_LpuBoards_LpuBoard_Mirror_ObserveFilters struct {
+	ObserveFilter map[uint8]*HuaweiDevm_Devm_LpuBoards_LpuBoard_Mirror_ObserveFilters_ObserveFilter `path:"observe-filter" module:"huawei-mirror"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_LpuBoards_LpuBoard_Mirror_ObserveFilters implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_LpuBoards_LpuBoard_Mirror_ObserveFilters) IsYANGGoStruct() {}
+
+// NewObserveFilter creates a new entry in the ObserveFilter list of the
+// HuaweiDevm_Devm_LpuBoards_LpuBoard_Mirror_ObserveFilters struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_Mirror_ObserveFilters) NewObserveFilter(FilterId uint8) (*HuaweiDevm_Devm_LpuBoards_LpuBoard_Mirror_ObserveFilters_ObserveFilter, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.ObserveFilter == nil {
+		t.ObserveFilter = make(map[uint8]*HuaweiDevm_Devm_LpuBoards_LpuBoard_Mirror_ObserveFilters_ObserveFilter)
+	}
+
+	key := FilterId
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.ObserveFilter[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list ObserveFilter", key)
+	}
+
+	t.ObserveFilter[key] = &HuaweiDevm_Devm_LpuBoards_LpuBoard_Mirror_ObserveFilters_ObserveFilter{
+		FilterId: &FilterId,
+	}
+
+	return t.ObserveFilter[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_Mirror_ObserveFilters) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_LpuBoards_LpuBoard_Mirror_ObserveFilters"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_Mirror_ObserveFilters) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_Mirror_ObserveFilters) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_LpuBoards_LpuBoard_Mirror_ObserveFilters.
+func (*HuaweiDevm_Devm_LpuBoards_LpuBoard_Mirror_ObserveFilters) ΛBelongingModule() string {
+	return "huawei-mirror"
+}
+
+// HuaweiDevm_Devm_LpuBoards_LpuBoard_Mirror_ObserveFilters_ObserveFilter represents the /huawei-devm/devm/lpu-boards/lpu-board/mirror/observe-filters/observe-filter YANG schema element.
+type HuaweiDevm_Devm_LpuBoards_LpuBoard_Mirror_ObserveFilters_ObserveFilter struct {
+	DstIpaddr      *string `path:"dst-ipaddr" module:"huawei-mirror"`
+	DstIpaddrMask  *string `path:"dst-ipaddr-mask" module:"huawei-mirror"`
+	DstMacaddr     *string `path:"dst-macaddr" module:"huawei-mirror"`
+	DstPort        *uint16 `path:"dst-port" module:"huawei-mirror"`
+	EthType        *string `path:"eth-type" module:"huawei-mirror"`
+	FilterId       *uint8  `path:"filter-id" module:"huawei-mirror"`
+	IpProtocol     *uint32 `path:"ip-protocol" module:"huawei-mirror"`
+	PppProtocol    *string `path:"ppp-protocol" module:"huawei-mirror"`
+	PppoeSessionId *uint16 `path:"pppoe-session-id" module:"huawei-mirror"`
+	SrcIpaddr      *string `path:"src-ipaddr" module:"huawei-mirror"`
+	SrcIpaddrMask  *string `path:"src-ipaddr-mask" module:"huawei-mirror"`
+	SrcMacaddr     *string `path:"src-macaddr" module:"huawei-mirror"`
+	SrcPort        *uint16 `path:"src-port" module:"huawei-mirror"`
+	Vlan           *uint16 `path:"vlan" module:"huawei-mirror"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_LpuBoards_LpuBoard_Mirror_ObserveFilters_ObserveFilter implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_LpuBoards_LpuBoard_Mirror_ObserveFilters_ObserveFilter) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiDevm_Devm_LpuBoards_LpuBoard_Mirror_ObserveFilters_ObserveFilter struct, which is a YANG list entry.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_Mirror_ObserveFilters_ObserveFilter) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.FilterId == nil {
+		return nil, fmt.Errorf("nil value for key FilterId")
+	}
+
+	return map[string]interface{}{
+		"filter-id": *t.FilterId,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_Mirror_ObserveFilters_ObserveFilter) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_LpuBoards_LpuBoard_Mirror_ObserveFilters_ObserveFilter"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_Mirror_ObserveFilters_ObserveFilter) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_Mirror_ObserveFilters_ObserveFilter) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_LpuBoards_LpuBoard_Mirror_ObserveFilters_ObserveFilter.
+func (*HuaweiDevm_Devm_LpuBoards_LpuBoard_Mirror_ObserveFilters_ObserveFilter) ΛBelongingModule() string {
+	return "huawei-mirror"
+}
+
+// HuaweiDevm_Devm_LpuBoards_LpuBoard_Mirror_RateLimitPercent represents the /huawei-devm/devm/lpu-boards/lpu-board/mirror/rate-limit-percent YANG schema element.
+type HuaweiDevm_Devm_LpuBoards_LpuBoard_Mirror_RateLimitPercent struct {
+	RateValue *uint8 `path:"rate-value" module:"huawei-mirror"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_LpuBoards_LpuBoard_Mirror_RateLimitPercent implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_LpuBoards_LpuBoard_Mirror_RateLimitPercent) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_Mirror_RateLimitPercent) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_LpuBoards_LpuBoard_Mirror_RateLimitPercent"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_Mirror_RateLimitPercent) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_Mirror_RateLimitPercent) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_LpuBoards_LpuBoard_Mirror_RateLimitPercent.
+func (*HuaweiDevm_Devm_LpuBoards_LpuBoard_Mirror_RateLimitPercent) ΛBelongingModule() string {
+	return "huawei-mirror"
+}
+
+// HuaweiDevm_Devm_LpuBoards_LpuBoard_Mirror_SlotObserve represents the /huawei-devm/devm/lpu-boards/lpu-board/mirror/slot-observe YANG schema element.
+type HuaweiDevm_Devm_LpuBoards_LpuBoard_Mirror_SlotObserve struct {
+	ObserveIndex *uint8 `path:"observe-index" module:"huawei-mirror"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_LpuBoards_LpuBoard_Mirror_SlotObserve implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_LpuBoards_LpuBoard_Mirror_SlotObserve) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_Mirror_SlotObserve) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_LpuBoards_LpuBoard_Mirror_SlotObserve"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_Mirror_SlotObserve) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_Mirror_SlotObserve) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_LpuBoards_LpuBoard_Mirror_SlotObserve.
+func (*HuaweiDevm_Devm_LpuBoards_LpuBoard_Mirror_SlotObserve) ΛBelongingModule() string {
+	return "huawei-mirror"
+}
+
+// HuaweiDevm_Devm_LpuBoards_LpuBoard_Sflow represents the /huawei-devm/devm/lpu-boards/lpu-board/sflow YANG schema element.
+type HuaweiDevm_Devm_LpuBoards_LpuBoard_Sflow struct {
+	SlotSampling *HuaweiDevm_Devm_LpuBoards_LpuBoard_Sflow_SlotSampling `path:"slot-sampling" module:"huawei-sflow"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_LpuBoards_LpuBoard_Sflow implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_LpuBoards_LpuBoard_Sflow) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_Sflow) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_LpuBoards_LpuBoard_Sflow"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_Sflow) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_Sflow) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_LpuBoards_LpuBoard_Sflow.
+func (*HuaweiDevm_Devm_LpuBoards_LpuBoard_Sflow) ΛBelongingModule() string {
+	return "huawei-sflow"
+}
+
+// HuaweiDevm_Devm_LpuBoards_LpuBoard_Sflow_SlotSampling represents the /huawei-devm/devm/lpu-boards/lpu-board/sflow/slot-sampling YANG schema element.
+type HuaweiDevm_Devm_LpuBoards_LpuBoard_Sflow_SlotSampling struct {
+	Enable *bool `path:"enable" module:"huawei-sflow"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_LpuBoards_LpuBoard_Sflow_SlotSampling implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_LpuBoards_LpuBoard_Sflow_SlotSampling) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_Sflow_SlotSampling) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_LpuBoards_LpuBoard_Sflow_SlotSampling"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_Sflow_SlotSampling) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_Sflow_SlotSampling) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_LpuBoards_LpuBoard_Sflow_SlotSampling.
+func (*HuaweiDevm_Devm_LpuBoards_LpuBoard_Sflow_SlotSampling) ΛBelongingModule() string {
+	return "huawei-sflow"
+}
+
+// HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward represents the /huawei-devm/devm/lpu-boards/lpu-board/unicast-forward YANG schema element.
+type HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward struct {
+	ArpFastReply   *HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_ArpFastReply   `path:"arp-fast-reply" module:"huawei-unicast-forward"`
+	GreTtlMode     *HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_GreTtlMode     `path:"gre-ttl-mode" module:"huawei-unicast-forward"`
+	Ipv4Uc         *HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_Ipv4Uc         `path:"ipv4-uc" module:"huawei-unicast-forward"`
+	L3LcsCapacitys *HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_L3LcsCapacitys `path:"l3-lcs-capacitys" module:"huawei-unicast-forward"`
+	NdFastReply    *HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_NdFastReply    `path:"nd-fast-reply" module:"huawei-unicast-forward"`
+	VxlanRdrTrunks *HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_VxlanRdrTrunks `path:"vxlan-rdr-trunks" module:"huawei-unicast-forward"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward.
+func (*HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward) ΛBelongingModule() string {
+	return "huawei-unicast-forward"
+}
+
+// HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_ArpFastReply represents the /huawei-devm/devm/lpu-boards/lpu-board/unicast-forward/arp-fast-reply YANG schema element.
+type HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_ArpFastReply struct {
+	Enable *bool `path:"enable" module:"huawei-unicast-forward"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_ArpFastReply implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_ArpFastReply) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_ArpFastReply) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_ArpFastReply"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_ArpFastReply) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_ArpFastReply) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_ArpFastReply.
+func (*HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_ArpFastReply) ΛBelongingModule() string {
+	return "huawei-unicast-forward"
+}
+
+// HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_GreTtlMode represents the /huawei-devm/devm/lpu-boards/lpu-board/unicast-forward/gre-ttl-mode YANG schema element.
+type HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_GreTtlMode struct {
+	TtlMode E_HuaweiUnicastForward_TtlModeType `path:"ttl-mode" module:"huawei-unicast-forward"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_GreTtlMode implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_GreTtlMode) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_GreTtlMode) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_GreTtlMode"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_GreTtlMode) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_GreTtlMode) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_GreTtlMode.
+func (*HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_GreTtlMode) ΛBelongingModule() string {
+	return "huawei-unicast-forward"
+}
+
+// HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_Ipv4Uc represents the /huawei-devm/devm/lpu-boards/lpu-board/unicast-forward/ipv4-uc YANG schema element.
+type HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_Ipv4Uc struct {
+	ForceFrag     *bool `path:"force-frag" module:"huawei-unicast-forward"`
+	IcmpReplyFast *bool `path:"icmp-reply-fast" module:"huawei-unicast-forward"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_Ipv4Uc implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_Ipv4Uc) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_Ipv4Uc) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_Ipv4Uc"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_Ipv4Uc) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_Ipv4Uc) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_Ipv4Uc.
+func (*HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_Ipv4Uc) ΛBelongingModule() string {
+	return "huawei-unicast-forward"
+}
+
+// HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_L3LcsCapacitys represents the /huawei-devm/devm/lpu-boards/lpu-board/unicast-forward/l3-lcs-capacitys YANG schema element.
+type HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_L3LcsCapacitys struct {
+	SlotL3LcsCapacity map[E_HuaweiUnicastForward_L3LcsServiceType]*HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_L3LcsCapacitys_SlotL3LcsCapacity `path:"slot-l3-lcs-capacity" module:"huawei-unicast-forward"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_L3LcsCapacitys implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_L3LcsCapacitys) IsYANGGoStruct() {}
+
+// NewSlotL3LcsCapacity creates a new entry in the SlotL3LcsCapacity list of the
+// HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_L3LcsCapacitys struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_L3LcsCapacitys) NewSlotL3LcsCapacity(ServiceType E_HuaweiUnicastForward_L3LcsServiceType) (*HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_L3LcsCapacitys_SlotL3LcsCapacity, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.SlotL3LcsCapacity == nil {
+		t.SlotL3LcsCapacity = make(map[E_HuaweiUnicastForward_L3LcsServiceType]*HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_L3LcsCapacitys_SlotL3LcsCapacity)
+	}
+
+	key := ServiceType
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.SlotL3LcsCapacity[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list SlotL3LcsCapacity", key)
+	}
+
+	t.SlotL3LcsCapacity[key] = &HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_L3LcsCapacitys_SlotL3LcsCapacity{
+		ServiceType: ServiceType,
+	}
+
+	return t.SlotL3LcsCapacity[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_L3LcsCapacitys) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_L3LcsCapacitys"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_L3LcsCapacitys) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_L3LcsCapacitys) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_L3LcsCapacitys.
+func (*HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_L3LcsCapacitys) ΛBelongingModule() string {
+	return "huawei-unicast-forward"
+}
+
+// HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_L3LcsCapacitys_SlotL3LcsCapacity represents the /huawei-devm/devm/lpu-boards/lpu-board/unicast-forward/l3-lcs-capacitys/slot-l3-lcs-capacity YANG schema element.
+type HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_L3LcsCapacitys_SlotL3LcsCapacity struct {
+	CapacityEnable *bool                                   `path:"capacity-enable" module:"huawei-unicast-forward"`
+	ServiceType    E_HuaweiUnicastForward_L3LcsServiceType `path:"service-type" module:"huawei-unicast-forward"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_L3LcsCapacitys_SlotL3LcsCapacity implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_L3LcsCapacitys_SlotL3LcsCapacity) IsYANGGoStruct() {
+}
+
+// ΛListKeyMap returns the keys of the HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_L3LcsCapacitys_SlotL3LcsCapacity struct, which is a YANG list entry.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_L3LcsCapacitys_SlotL3LcsCapacity) ΛListKeyMap() (map[string]interface{}, error) {
+
+	return map[string]interface{}{
+		"service-type": t.ServiceType,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_L3LcsCapacitys_SlotL3LcsCapacity) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_L3LcsCapacitys_SlotL3LcsCapacity"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_L3LcsCapacitys_SlotL3LcsCapacity) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_L3LcsCapacitys_SlotL3LcsCapacity) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_L3LcsCapacitys_SlotL3LcsCapacity.
+func (*HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_L3LcsCapacitys_SlotL3LcsCapacity) ΛBelongingModule() string {
+	return "huawei-unicast-forward"
+}
+
+// HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_NdFastReply represents the /huawei-devm/devm/lpu-boards/lpu-board/unicast-forward/nd-fast-reply YANG schema element.
+type HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_NdFastReply struct {
+	Enable *bool `path:"enable" module:"huawei-unicast-forward"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_NdFastReply implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_NdFastReply) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_NdFastReply) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_NdFastReply"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_NdFastReply) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_NdFastReply) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_NdFastReply.
+func (*HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_NdFastReply) ΛBelongingModule() string {
+	return "huawei-unicast-forward"
+}
+
+// HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_VxlanRdrTrunks represents the /huawei-devm/devm/lpu-boards/lpu-board/unicast-forward/vxlan-rdr-trunks YANG schema element.
+type HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_VxlanRdrTrunks struct {
+	VxlanRdrTrunk map[E_HuaweiUnicastForward_VxlanRedirectType]*HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_VxlanRdrTrunks_VxlanRdrTrunk `path:"vxlan-rdr-trunk" module:"huawei-unicast-forward"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_VxlanRdrTrunks implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_VxlanRdrTrunks) IsYANGGoStruct() {}
+
+// NewVxlanRdrTrunk creates a new entry in the VxlanRdrTrunk list of the
+// HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_VxlanRdrTrunks struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_VxlanRdrTrunks) NewVxlanRdrTrunk(RedirectType E_HuaweiUnicastForward_VxlanRedirectType) (*HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_VxlanRdrTrunks_VxlanRdrTrunk, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.VxlanRdrTrunk == nil {
+		t.VxlanRdrTrunk = make(map[E_HuaweiUnicastForward_VxlanRedirectType]*HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_VxlanRdrTrunks_VxlanRdrTrunk)
+	}
+
+	key := RedirectType
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.VxlanRdrTrunk[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list VxlanRdrTrunk", key)
+	}
+
+	t.VxlanRdrTrunk[key] = &HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_VxlanRdrTrunks_VxlanRdrTrunk{
+		RedirectType: RedirectType,
+	}
+
+	return t.VxlanRdrTrunk[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_VxlanRdrTrunks) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_VxlanRdrTrunks"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_VxlanRdrTrunks) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_VxlanRdrTrunks) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_VxlanRdrTrunks.
+func (*HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_VxlanRdrTrunks) ΛBelongingModule() string {
+	return "huawei-unicast-forward"
+}
+
+// HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_VxlanRdrTrunks_VxlanRdrTrunk represents the /huawei-devm/devm/lpu-boards/lpu-board/unicast-forward/vxlan-rdr-trunks/vxlan-rdr-trunk YANG schema element.
+type HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_VxlanRdrTrunks_VxlanRdrTrunk struct {
+	DestSlotId1  *string                                  `path:"dest-slot-id1" module:"huawei-unicast-forward"`
+	DestSlotId2  *string                                  `path:"dest-slot-id2" module:"huawei-unicast-forward"`
+	RedirectType E_HuaweiUnicastForward_VxlanRedirectType `path:"redirect-type" module:"huawei-unicast-forward"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_VxlanRdrTrunks_VxlanRdrTrunk implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_VxlanRdrTrunks_VxlanRdrTrunk) IsYANGGoStruct() {
+}
+
+// ΛListKeyMap returns the keys of the HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_VxlanRdrTrunks_VxlanRdrTrunk struct, which is a YANG list entry.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_VxlanRdrTrunks_VxlanRdrTrunk) ΛListKeyMap() (map[string]interface{}, error) {
+
+	return map[string]interface{}{
+		"redirect-type": t.RedirectType,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_VxlanRdrTrunks_VxlanRdrTrunk) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_VxlanRdrTrunks_VxlanRdrTrunk"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_VxlanRdrTrunks_VxlanRdrTrunk) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_VxlanRdrTrunks_VxlanRdrTrunk) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_VxlanRdrTrunks_VxlanRdrTrunk.
+func (*HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward_VxlanRdrTrunks_VxlanRdrTrunk) ΛBelongingModule() string {
+	return "huawei-unicast-forward"
+}
+
+// HuaweiDevm_Devm_MpuBoards represents the /huawei-devm/devm/mpu-boards YANG schema element.
+type HuaweiDevm_Devm_MpuBoards struct {
+	MpuBoard map[string]*HuaweiDevm_Devm_MpuBoards_MpuBoard `path:"mpu-board" module:"huawei-devm"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_MpuBoards implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_MpuBoards) IsYANGGoStruct() {}
+
+// NewMpuBoard creates a new entry in the MpuBoard list of the
+// HuaweiDevm_Devm_MpuBoards struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiDevm_Devm_MpuBoards) NewMpuBoard(Position string) (*HuaweiDevm_Devm_MpuBoards_MpuBoard, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.MpuBoard == nil {
+		t.MpuBoard = make(map[string]*HuaweiDevm_Devm_MpuBoards_MpuBoard)
+	}
+
+	key := Position
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.MpuBoard[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list MpuBoard", key)
+	}
+
+	t.MpuBoard[key] = &HuaweiDevm_Devm_MpuBoards_MpuBoard{
+		Position: &Position,
+	}
+
+	return t.MpuBoard[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_MpuBoards) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_MpuBoards"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_MpuBoards) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_MpuBoards) ΛEnumTypeMap() map[string][]reflect.Type { return ΛEnumTypes }
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_MpuBoards.
+func (*HuaweiDevm_Devm_MpuBoards) ΛBelongingModule() string {
+	return "huawei-devm"
+}
+
+// HuaweiDevm_Devm_MpuBoards_MpuBoard represents the /huawei-devm/devm/mpu-boards/mpu-board YANG schema element.
+type HuaweiDevm_Devm_MpuBoards_MpuBoard struct {
+	BoardType       *string                                            `path:"board-type" module:"huawei-devm"`
+	CfcardSize      *uint32                                            `path:"cfcard-size" module:"huawei-devm"`
+	Cfcard2Size     *uint32                                            `path:"cfcard2-size" module:"huawei-devm"`
+	FlashSize       *uint32                                            `path:"flash-size" module:"huawei-devm"`
+	Index           *uint32                                            `path:"index" module:"huawei-devm"`
+	IsRegister      *bool                                              `path:"is-register" module:"huawei-devm"`
+	LastResetReason *string                                            `path:"last-reset-reason" module:"huawei-devm"`
+	LastResetTime   *string                                            `path:"last-reset-time" module:"huawei-devm"`
+	Loadbalance     *HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance    `path:"loadbalance" module:"huawei-loadbalance"`
+	LsRole          E_HuaweiDevm_BoardRoleType                         `path:"ls-role" module:"huawei-devm"`
+	Mirror          *HuaweiDevm_Devm_MpuBoards_MpuBoard_Mirror         `path:"mirror" module:"huawei-mirror"`
+	NvramSize       *uint32                                            `path:"nvram-size" module:"huawei-devm"`
+	Position        *string                                            `path:"position" module:"huawei-devm"`
+	RegisterTime    *string                                            `path:"register-time" module:"huawei-devm"`
+	SdramSize       *uint32                                            `path:"sdram-size" module:"huawei-devm"`
+	Sflow           *HuaweiDevm_Devm_MpuBoards_MpuBoard_Sflow          `path:"sflow" module:"huawei-sflow"`
+	UnicastForward  *HuaweiDevm_Devm_MpuBoards_MpuBoard_UnicastForward `path:"unicast-forward" module:"huawei-unicast-forward"`
+	UpTime          *uint32                                            `path:"up-time" module:"huawei-devm"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_MpuBoards_MpuBoard implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_MpuBoards_MpuBoard) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiDevm_Devm_MpuBoards_MpuBoard struct, which is a YANG list entry.
+func (t *HuaweiDevm_Devm_MpuBoards_MpuBoard) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.Position == nil {
+		return nil, fmt.Errorf("nil value for key Position")
+	}
+
+	return map[string]interface{}{
+		"position": *t.Position,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_MpuBoards_MpuBoard) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_MpuBoards_MpuBoard"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_MpuBoards_MpuBoard) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_MpuBoards_MpuBoard) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_MpuBoards_MpuBoard.
+func (*HuaweiDevm_Devm_MpuBoards_MpuBoard) ΛBelongingModule() string {
+	return "huawei-devm"
+}
+
+// HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance represents the /huawei-devm/devm/mpu-boards/mpu-board/loadbalance YANG schema element.
+type HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance struct {
+	DynamicAdjust  *HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance_DynamicAdjust  `path:"dynamic-adjust" module:"huawei-loadbalance"`
+	HashArithmetic *HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance_HashArithmetic `path:"hash-arithmetic" module:"huawei-loadbalance"`
+	HashFields     *HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance_HashFields     `path:"hash-fields" module:"huawei-loadbalance"`
+	HashMultipe    *HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance_HashMultipe    `path:"hash-multipe" module:"huawei-loadbalance"`
+	HashSeed       *HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance_HashSeed       `path:"hash-seed" module:"huawei-loadbalance"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance.
+func (*HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance) ΛBelongingModule() string {
+	return "huawei-loadbalance"
+}
+
+// HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance_DynamicAdjust represents the /huawei-devm/devm/mpu-boards/mpu-board/loadbalance/dynamic-adjust YANG schema element.
+type HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance_DynamicAdjust struct {
+	Enable *bool `path:"enable" module:"huawei-loadbalance"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance_DynamicAdjust implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance_DynamicAdjust) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance_DynamicAdjust) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance_DynamicAdjust"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance_DynamicAdjust) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance_DynamicAdjust) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance_DynamicAdjust.
+func (*HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance_DynamicAdjust) ΛBelongingModule() string {
+	return "huawei-loadbalance"
+}
+
+// HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance_HashArithmetic represents the /huawei-devm/devm/mpu-boards/mpu-board/loadbalance/hash-arithmetic YANG schema element.
+type HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance_HashArithmetic struct {
+	Arithmetic     E_HuaweiLoadbalance_CxHashArithmetic `path:"arithmetic" module:"huawei-loadbalance"`
+	SecondHashFlag *bool                                `path:"second-hash-flag" module:"huawei-loadbalance"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance_HashArithmetic implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance_HashArithmetic) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance_HashArithmetic) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance_HashArithmetic"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance_HashArithmetic) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance_HashArithmetic) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance_HashArithmetic.
+func (*HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance_HashArithmetic) ΛBelongingModule() string {
+	return "huawei-loadbalance"
+}
+
+// HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance_HashFields represents the /huawei-devm/devm/mpu-boards/mpu-board/loadbalance/hash-fields YANG schema element.
+type HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance_HashFields struct {
+	HashField map[E_HuaweiLoadbalance_CxTrunkEcmp]*HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance_HashFields_HashField `path:"hash-field" module:"huawei-loadbalance"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance_HashFields implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance_HashFields) IsYANGGoStruct() {}
+
+// NewHashField creates a new entry in the HashField list of the
+// HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance_HashFields struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance_HashFields) NewHashField(TrunkEcmp E_HuaweiLoadbalance_CxTrunkEcmp) (*HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance_HashFields_HashField, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.HashField == nil {
+		t.HashField = make(map[E_HuaweiLoadbalance_CxTrunkEcmp]*HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance_HashFields_HashField)
+	}
+
+	key := TrunkEcmp
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.HashField[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list HashField", key)
+	}
+
+	t.HashField[key] = &HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance_HashFields_HashField{
+		TrunkEcmp: TrunkEcmp,
+	}
+
+	return t.HashField[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance_HashFields) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance_HashFields"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance_HashFields) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance_HashFields) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance_HashFields.
+func (*HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance_HashFields) ΛBelongingModule() string {
+	return "huawei-loadbalance"
+}
+
+// HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance_HashFields_HashField represents the /huawei-devm/devm/mpu-boards/mpu-board/loadbalance/hash-fields/hash-field YANG schema element.
+type HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance_HashFields_HashField struct {
+	Material  E_HuaweiLoadbalance_CxHashMaterial `path:"material" module:"huawei-loadbalance"`
+	TrunkEcmp E_HuaweiLoadbalance_CxTrunkEcmp    `path:"trunk-ecmp" module:"huawei-loadbalance"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance_HashFields_HashField implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance_HashFields_HashField) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance_HashFields_HashField struct, which is a YANG list entry.
+func (t *HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance_HashFields_HashField) ΛListKeyMap() (map[string]interface{}, error) {
+
+	return map[string]interface{}{
+		"trunk-ecmp": t.TrunkEcmp,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance_HashFields_HashField) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance_HashFields_HashField"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance_HashFields_HashField) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance_HashFields_HashField) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance_HashFields_HashField.
+func (*HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance_HashFields_HashField) ΛBelongingModule() string {
+	return "huawei-loadbalance"
+}
+
+// HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance_HashMultipe represents the /huawei-devm/devm/mpu-boards/mpu-board/loadbalance/hash-multipe YANG schema element.
+type HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance_HashMultipe struct {
+	MultipeFlag E_HuaweiLoadbalance_CxMulpeFlag `path:"multipe-flag" module:"huawei-loadbalance"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance_HashMultipe implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance_HashMultipe) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance_HashMultipe) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance_HashMultipe"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance_HashMultipe) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance_HashMultipe) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance_HashMultipe.
+func (*HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance_HashMultipe) ΛBelongingModule() string {
+	return "huawei-loadbalance"
+}
+
+// HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance_HashSeed represents the /huawei-devm/devm/mpu-boards/mpu-board/loadbalance/hash-seed YANG schema element.
+type HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance_HashSeed struct {
+	CustomSeed *string `path:"custom-seed" module:"huawei-loadbalance"`
+	RandomFlag *bool   `path:"random-flag" module:"huawei-loadbalance"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance_HashSeed implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance_HashSeed) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance_HashSeed) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance_HashSeed"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance_HashSeed) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance_HashSeed) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance_HashSeed.
+func (*HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance_HashSeed) ΛBelongingModule() string {
+	return "huawei-loadbalance"
+}
+
+// HuaweiDevm_Devm_MpuBoards_MpuBoard_Mirror represents the /huawei-devm/devm/mpu-boards/mpu-board/mirror YANG schema element.
+type HuaweiDevm_Devm_MpuBoards_MpuBoard_Mirror struct {
+	ObserveFilters *HuaweiDevm_Devm_MpuBoards_MpuBoard_Mirror_ObserveFilters `path:"observe-filters" module:"huawei-mirror"`
+	SlotObserve    *HuaweiDevm_Devm_MpuBoards_MpuBoard_Mirror_SlotObserve    `path:"slot-observe" module:"huawei-mirror"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_MpuBoards_MpuBoard_Mirror implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_MpuBoards_MpuBoard_Mirror) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_MpuBoards_MpuBoard_Mirror) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_MpuBoards_MpuBoard_Mirror"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_MpuBoards_MpuBoard_Mirror) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_MpuBoards_MpuBoard_Mirror) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_MpuBoards_MpuBoard_Mirror.
+func (*HuaweiDevm_Devm_MpuBoards_MpuBoard_Mirror) ΛBelongingModule() string {
+	return "huawei-mirror"
+}
+
+// HuaweiDevm_Devm_MpuBoards_MpuBoard_Mirror_ObserveFilters represents the /huawei-devm/devm/mpu-boards/mpu-board/mirror/observe-filters YANG schema element.
+type HuaweiDevm_Devm_MpuBoards_MpuBoard_Mirror_ObserveFilters struct {
+	ObserveFilter map[uint8]*HuaweiDevm_Devm_MpuBoards_MpuBoard_Mirror_ObserveFilters_ObserveFilter `path:"observe-filter" module:"huawei-mirror"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_MpuBoards_MpuBoard_Mirror_ObserveFilters implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_MpuBoards_MpuBoard_Mirror_ObserveFilters) IsYANGGoStruct() {}
+
+// NewObserveFilter creates a new entry in the ObserveFilter list of the
+// HuaweiDevm_Devm_MpuBoards_MpuBoard_Mirror_ObserveFilters struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiDevm_Devm_MpuBoards_MpuBoard_Mirror_ObserveFilters) NewObserveFilter(FilterId uint8) (*HuaweiDevm_Devm_MpuBoards_MpuBoard_Mirror_ObserveFilters_ObserveFilter, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.ObserveFilter == nil {
+		t.ObserveFilter = make(map[uint8]*HuaweiDevm_Devm_MpuBoards_MpuBoard_Mirror_ObserveFilters_ObserveFilter)
+	}
+
+	key := FilterId
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.ObserveFilter[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list ObserveFilter", key)
+	}
+
+	t.ObserveFilter[key] = &HuaweiDevm_Devm_MpuBoards_MpuBoard_Mirror_ObserveFilters_ObserveFilter{
+		FilterId: &FilterId,
+	}
+
+	return t.ObserveFilter[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_MpuBoards_MpuBoard_Mirror_ObserveFilters) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_MpuBoards_MpuBoard_Mirror_ObserveFilters"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_MpuBoards_MpuBoard_Mirror_ObserveFilters) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_MpuBoards_MpuBoard_Mirror_ObserveFilters) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_MpuBoards_MpuBoard_Mirror_ObserveFilters.
+func (*HuaweiDevm_Devm_MpuBoards_MpuBoard_Mirror_ObserveFilters) ΛBelongingModule() string {
+	return "huawei-mirror"
+}
+
+// HuaweiDevm_Devm_MpuBoards_MpuBoard_Mirror_ObserveFilters_ObserveFilter represents the /huawei-devm/devm/mpu-boards/mpu-board/mirror/observe-filters/observe-filter YANG schema element.
+type HuaweiDevm_Devm_MpuBoards_MpuBoard_Mirror_ObserveFilters_ObserveFilter struct {
+	DstIpaddr      *string `path:"dst-ipaddr" module:"huawei-mirror"`
+	DstIpaddrMask  *string `path:"dst-ipaddr-mask" module:"huawei-mirror"`
+	DstMacaddr     *string `path:"dst-macaddr" module:"huawei-mirror"`
+	DstPort        *uint16 `path:"dst-port" module:"huawei-mirror"`
+	EthType        *string `path:"eth-type" module:"huawei-mirror"`
+	FilterId       *uint8  `path:"filter-id" module:"huawei-mirror"`
+	IpProtocol     *uint32 `path:"ip-protocol" module:"huawei-mirror"`
+	PppProtocol    *string `path:"ppp-protocol" module:"huawei-mirror"`
+	PppoeSessionId *uint16 `path:"pppoe-session-id" module:"huawei-mirror"`
+	SrcIpaddr      *string `path:"src-ipaddr" module:"huawei-mirror"`
+	SrcIpaddrMask  *string `path:"src-ipaddr-mask" module:"huawei-mirror"`
+	SrcMacaddr     *string `path:"src-macaddr" module:"huawei-mirror"`
+	SrcPort        *uint16 `path:"src-port" module:"huawei-mirror"`
+	Vlan           *uint16 `path:"vlan" module:"huawei-mirror"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_MpuBoards_MpuBoard_Mirror_ObserveFilters_ObserveFilter implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_MpuBoards_MpuBoard_Mirror_ObserveFilters_ObserveFilter) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiDevm_Devm_MpuBoards_MpuBoard_Mirror_ObserveFilters_ObserveFilter struct, which is a YANG list entry.
+func (t *HuaweiDevm_Devm_MpuBoards_MpuBoard_Mirror_ObserveFilters_ObserveFilter) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.FilterId == nil {
+		return nil, fmt.Errorf("nil value for key FilterId")
+	}
+
+	return map[string]interface{}{
+		"filter-id": *t.FilterId,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_MpuBoards_MpuBoard_Mirror_ObserveFilters_ObserveFilter) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_MpuBoards_MpuBoard_Mirror_ObserveFilters_ObserveFilter"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_MpuBoards_MpuBoard_Mirror_ObserveFilters_ObserveFilter) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_MpuBoards_MpuBoard_Mirror_ObserveFilters_ObserveFilter) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_MpuBoards_MpuBoard_Mirror_ObserveFilters_ObserveFilter.
+func (*HuaweiDevm_Devm_MpuBoards_MpuBoard_Mirror_ObserveFilters_ObserveFilter) ΛBelongingModule() string {
+	return "huawei-mirror"
+}
+
+// HuaweiDevm_Devm_MpuBoards_MpuBoard_Mirror_SlotObserve represents the /huawei-devm/devm/mpu-boards/mpu-board/mirror/slot-observe YANG schema element.
+type HuaweiDevm_Devm_MpuBoards_MpuBoard_Mirror_SlotObserve struct {
+	ObserveIndex *uint8 `path:"observe-index" module:"huawei-mirror"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_MpuBoards_MpuBoard_Mirror_SlotObserve implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_MpuBoards_MpuBoard_Mirror_SlotObserve) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_MpuBoards_MpuBoard_Mirror_SlotObserve) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_MpuBoards_MpuBoard_Mirror_SlotObserve"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_MpuBoards_MpuBoard_Mirror_SlotObserve) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_MpuBoards_MpuBoard_Mirror_SlotObserve) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_MpuBoards_MpuBoard_Mirror_SlotObserve.
+func (*HuaweiDevm_Devm_MpuBoards_MpuBoard_Mirror_SlotObserve) ΛBelongingModule() string {
+	return "huawei-mirror"
+}
+
+// HuaweiDevm_Devm_MpuBoards_MpuBoard_Sflow represents the /huawei-devm/devm/mpu-boards/mpu-board/sflow YANG schema element.
+type HuaweiDevm_Devm_MpuBoards_MpuBoard_Sflow struct {
+	SlotSampling *HuaweiDevm_Devm_MpuBoards_MpuBoard_Sflow_SlotSampling `path:"slot-sampling" module:"huawei-sflow"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_MpuBoards_MpuBoard_Sflow implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_MpuBoards_MpuBoard_Sflow) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_MpuBoards_MpuBoard_Sflow) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_MpuBoards_MpuBoard_Sflow"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_MpuBoards_MpuBoard_Sflow) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_MpuBoards_MpuBoard_Sflow) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_MpuBoards_MpuBoard_Sflow.
+func (*HuaweiDevm_Devm_MpuBoards_MpuBoard_Sflow) ΛBelongingModule() string {
+	return "huawei-sflow"
+}
+
+// HuaweiDevm_Devm_MpuBoards_MpuBoard_Sflow_SlotSampling represents the /huawei-devm/devm/mpu-boards/mpu-board/sflow/slot-sampling YANG schema element.
+type HuaweiDevm_Devm_MpuBoards_MpuBoard_Sflow_SlotSampling struct {
+	Enable *bool `path:"enable" module:"huawei-sflow"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_MpuBoards_MpuBoard_Sflow_SlotSampling implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_MpuBoards_MpuBoard_Sflow_SlotSampling) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_MpuBoards_MpuBoard_Sflow_SlotSampling) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_MpuBoards_MpuBoard_Sflow_SlotSampling"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_MpuBoards_MpuBoard_Sflow_SlotSampling) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_MpuBoards_MpuBoard_Sflow_SlotSampling) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_MpuBoards_MpuBoard_Sflow_SlotSampling.
+func (*HuaweiDevm_Devm_MpuBoards_MpuBoard_Sflow_SlotSampling) ΛBelongingModule() string {
+	return "huawei-sflow"
+}
+
+// HuaweiDevm_Devm_MpuBoards_MpuBoard_UnicastForward represents the /huawei-devm/devm/mpu-boards/mpu-board/unicast-forward YANG schema element.
+type HuaweiDevm_Devm_MpuBoards_MpuBoard_UnicastForward struct {
+	ArpFastReply *HuaweiDevm_Devm_MpuBoards_MpuBoard_UnicastForward_ArpFastReply `path:"arp-fast-reply" module:"huawei-unicast-forward"`
+	GreTtlMode   *HuaweiDevm_Devm_MpuBoards_MpuBoard_UnicastForward_GreTtlMode   `path:"gre-ttl-mode" module:"huawei-unicast-forward"`
+	Ipv4Uc       *HuaweiDevm_Devm_MpuBoards_MpuBoard_UnicastForward_Ipv4Uc       `path:"ipv4-uc" module:"huawei-unicast-forward"`
+	NdFastReply  *HuaweiDevm_Devm_MpuBoards_MpuBoard_UnicastForward_NdFastReply  `path:"nd-fast-reply" module:"huawei-unicast-forward"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_MpuBoards_MpuBoard_UnicastForward implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_MpuBoards_MpuBoard_UnicastForward) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_MpuBoards_MpuBoard_UnicastForward) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_MpuBoards_MpuBoard_UnicastForward"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_MpuBoards_MpuBoard_UnicastForward) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_MpuBoards_MpuBoard_UnicastForward) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_MpuBoards_MpuBoard_UnicastForward.
+func (*HuaweiDevm_Devm_MpuBoards_MpuBoard_UnicastForward) ΛBelongingModule() string {
+	return "huawei-unicast-forward"
+}
+
+// HuaweiDevm_Devm_MpuBoards_MpuBoard_UnicastForward_ArpFastReply represents the /huawei-devm/devm/mpu-boards/mpu-board/unicast-forward/arp-fast-reply YANG schema element.
+type HuaweiDevm_Devm_MpuBoards_MpuBoard_UnicastForward_ArpFastReply struct {
+	Enable *bool `path:"enable" module:"huawei-unicast-forward"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_MpuBoards_MpuBoard_UnicastForward_ArpFastReply implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_MpuBoards_MpuBoard_UnicastForward_ArpFastReply) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_MpuBoards_MpuBoard_UnicastForward_ArpFastReply) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_MpuBoards_MpuBoard_UnicastForward_ArpFastReply"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_MpuBoards_MpuBoard_UnicastForward_ArpFastReply) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_MpuBoards_MpuBoard_UnicastForward_ArpFastReply) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_MpuBoards_MpuBoard_UnicastForward_ArpFastReply.
+func (*HuaweiDevm_Devm_MpuBoards_MpuBoard_UnicastForward_ArpFastReply) ΛBelongingModule() string {
+	return "huawei-unicast-forward"
+}
+
+// HuaweiDevm_Devm_MpuBoards_MpuBoard_UnicastForward_GreTtlMode represents the /huawei-devm/devm/mpu-boards/mpu-board/unicast-forward/gre-ttl-mode YANG schema element.
+type HuaweiDevm_Devm_MpuBoards_MpuBoard_UnicastForward_GreTtlMode struct {
+	TtlMode E_HuaweiUnicastForward_TtlModeType `path:"ttl-mode" module:"huawei-unicast-forward"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_MpuBoards_MpuBoard_UnicastForward_GreTtlMode implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_MpuBoards_MpuBoard_UnicastForward_GreTtlMode) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_MpuBoards_MpuBoard_UnicastForward_GreTtlMode) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_MpuBoards_MpuBoard_UnicastForward_GreTtlMode"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_MpuBoards_MpuBoard_UnicastForward_GreTtlMode) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_MpuBoards_MpuBoard_UnicastForward_GreTtlMode) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_MpuBoards_MpuBoard_UnicastForward_GreTtlMode.
+func (*HuaweiDevm_Devm_MpuBoards_MpuBoard_UnicastForward_GreTtlMode) ΛBelongingModule() string {
+	return "huawei-unicast-forward"
+}
+
+// HuaweiDevm_Devm_MpuBoards_MpuBoard_UnicastForward_Ipv4Uc represents the /huawei-devm/devm/mpu-boards/mpu-board/unicast-forward/ipv4-uc YANG schema element.
+type HuaweiDevm_Devm_MpuBoards_MpuBoard_UnicastForward_Ipv4Uc struct {
+	ForceFrag     *bool `path:"force-frag" module:"huawei-unicast-forward"`
+	IcmpReplyFast *bool `path:"icmp-reply-fast" module:"huawei-unicast-forward"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_MpuBoards_MpuBoard_UnicastForward_Ipv4Uc implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_MpuBoards_MpuBoard_UnicastForward_Ipv4Uc) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_MpuBoards_MpuBoard_UnicastForward_Ipv4Uc) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_MpuBoards_MpuBoard_UnicastForward_Ipv4Uc"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_MpuBoards_MpuBoard_UnicastForward_Ipv4Uc) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_MpuBoards_MpuBoard_UnicastForward_Ipv4Uc) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_MpuBoards_MpuBoard_UnicastForward_Ipv4Uc.
+func (*HuaweiDevm_Devm_MpuBoards_MpuBoard_UnicastForward_Ipv4Uc) ΛBelongingModule() string {
+	return "huawei-unicast-forward"
+}
+
+// HuaweiDevm_Devm_MpuBoards_MpuBoard_UnicastForward_NdFastReply represents the /huawei-devm/devm/mpu-boards/mpu-board/unicast-forward/nd-fast-reply YANG schema element.
+type HuaweiDevm_Devm_MpuBoards_MpuBoard_UnicastForward_NdFastReply struct {
+	Enable *bool `path:"enable" module:"huawei-unicast-forward"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_MpuBoards_MpuBoard_UnicastForward_NdFastReply implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_MpuBoards_MpuBoard_UnicastForward_NdFastReply) IsYANGGoStruct() {}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_MpuBoards_MpuBoard_UnicastForward_NdFastReply) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_MpuBoards_MpuBoard_UnicastForward_NdFastReply"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_MpuBoards_MpuBoard_UnicastForward_NdFastReply) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_MpuBoards_MpuBoard_UnicastForward_NdFastReply) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_MpuBoards_MpuBoard_UnicastForward_NdFastReply.
+func (*HuaweiDevm_Devm_MpuBoards_MpuBoard_UnicastForward_NdFastReply) ΛBelongingModule() string {
+	return "huawei-unicast-forward"
+}
+
+// HuaweiDevm_Devm_Offlines represents the /huawei-devm/devm/offlines YANG schema element.
+type HuaweiDevm_Devm_Offlines struct {
+	Offline map[HuaweiDevm_Devm_Offlines_Offline_Key]*HuaweiDevm_Devm_Offlines_Offline `path:"offline" module:"huawei-devm"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_Offlines implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_Offlines) IsYANGGoStruct() {}
+
+// HuaweiDevm_Devm_Offlines_Offline_Key represents the key for list Offline of element /huawei-devm/devm/offlines.
+type HuaweiDevm_Devm_Offlines_Offline_Key struct {
+	Class    E_HuaweiDevm_OfflineClassType `path:"class"`
+	Position string                        `path:"position"`
+}
+
+// IsYANGGoKeyStruct ensures that HuaweiDevm_Devm_Offlines_Offline_Key partially implements the
+// yang.GoKeyStruct interface. This allows functions that need to
+// handle this key struct to identify it as being generated by gogen.
+func (HuaweiDevm_Devm_Offlines_Offline_Key) IsYANGGoKeyStruct() {}
+
+// ΛListKeyMap returns the values of the HuaweiDevm_Devm_Offlines_Offline_Key key struct.
+func (t HuaweiDevm_Devm_Offlines_Offline_Key) ΛListKeyMap() (map[string]interface{}, error) {
+	return map[string]interface{}{
+		"class":    t.Class,
+		"position": t.Position,
+	}, nil
+}
+
+// NewOffline creates a new entry in the Offline list of the
+// HuaweiDevm_Devm_Offlines struct. The keys of the list are populated from the input
+// arguments.
+func (t *HuaweiDevm_Devm_Offlines) NewOffline(Class E_HuaweiDevm_OfflineClassType, Position string) (*HuaweiDevm_Devm_Offlines_Offline, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.Offline == nil {
+		t.Offline = make(map[HuaweiDevm_Devm_Offlines_Offline_Key]*HuaweiDevm_Devm_Offlines_Offline)
+	}
+
+	key := HuaweiDevm_Devm_Offlines_Offline_Key{
+		Class:    Class,
+		Position: Position,
+	}
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.Offline[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Offline", key)
+	}
+
+	t.Offline[key] = &HuaweiDevm_Devm_Offlines_Offline{
+		Class:    Class,
+		Position: &Position,
+	}
+
+	return t.Offline[key], nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Offlines) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_Offlines"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Offlines) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_Offlines) ΛEnumTypeMap() map[string][]reflect.Type { return ΛEnumTypes }
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_Offlines.
+func (*HuaweiDevm_Devm_Offlines) ΛBelongingModule() string {
+	return "huawei-devm"
+}
+
+// HuaweiDevm_Devm_Offlines_Offline represents the /huawei-devm/devm/offlines/offline YANG schema element.
+type HuaweiDevm_Devm_Offlines_Offline struct {
+	Class    E_HuaweiDevm_OfflineClassType `path:"class" module:"huawei-devm"`
+	Position *string                       `path:"position" module:"huawei-devm"`
+}
+
+// IsYANGGoStruct ensures that HuaweiDevm_Devm_Offlines_Offline implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*HuaweiDevm_Devm_Offlines_Offline) IsYANGGoStruct() {}
+
+// ΛListKeyMap returns the keys of the HuaweiDevm_Devm_Offlines_Offline struct, which is a YANG list entry.
+func (t *HuaweiDevm_Devm_Offlines_Offline) ΛListKeyMap() (map[string]interface{}, error) {
+
+	if t.Position == nil {
+		return nil, fmt.Errorf("nil value for key Position")
+	}
+
+	return map[string]interface{}{
+		"class":    t.Class,
+		"position": *t.Position,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Offlines_Offline) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["HuaweiDevm_Devm_Offlines_Offline"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *HuaweiDevm_Devm_Offlines_Offline) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *HuaweiDevm_Devm_Offlines_Offline) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of HuaweiDevm_Devm_Offlines_Offline.
+func (*HuaweiDevm_Devm_Offlines_Offline) ΛBelongingModule() string {
+	return "huawei-devm"
 }
