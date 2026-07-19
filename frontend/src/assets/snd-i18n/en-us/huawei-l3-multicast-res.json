@@ -1,0 +1,236 @@
+{
+  "/huawei-l3-multicast:l3mc": {
+    "name": "Layer 3 multicast configuration list"
+  },
+  "/huawei-l3-multicast:l3-multicast/ipv4": {
+    "name": "Configure IPv4"
+  },
+  "/huawei-l3-multicast:l3-multicast/ipv4/limits": {
+    "name": "Global limit on the number of PIM entries"
+  },
+  "/huawei-l3-multicast:l3-multicast/ipv4/limits/limit": {
+    "name": "Global limit on the number of PIM entries List"
+  },
+  "/huawei-l3-multicast:l3-multicast/ipv4/limits/limit/type": {
+    "name": "Limit type"
+  },
+  "/huawei-l3-multicast:l3-multicast/ipv4/limits/limit/value": {
+    "name": "Configured entry limit"
+  },
+  "/huawei-l3-multicast:l3-multicast/ipv4/limits/limit/upper-threshold": {
+    "name": "Upper threshold for triggering a threshold alarm"
+  },
+  "/huawei-l3-multicast:l3-multicast/ipv4/limits/limit/lower-threshold": {
+    "name": "Lower threshold for triggering alarm clearance"
+  },
+  "/huawei-l3-multicast:l3-multicast/ipv4/limits/limit/current-count": {
+    "name": "Number of created PIM entries"
+  },
+  "/huawei-l3-multicast:l3-multicast/ipv6": {
+    "name": "Configure IPv6"
+  },
+  "/huawei-l3-multicast:l3-multicast/ipv6/limits": {
+    "name": "Limit on the number of global IPv6 PIM entries"
+  },
+  "/huawei-l3-multicast:l3-multicast/ipv6/limits/limit": {
+    "name": "Limit on the number of global IPv6 PIM entries"
+  },
+  "/huawei-l3-multicast:l3-multicast/ipv6/limits/limit/type": {
+    "name": "Limit type"
+  },
+  "/huawei-l3-multicast:l3-multicast/ipv6/limits/limit/value": {
+    "name": "Configured entry limit"
+  },
+  "/huawei-l3-multicast:l3-multicast/ipv6/limits/limit/upper-threshold": {
+    "name": "Upper threshold for triggering a threshold alarm"
+  },
+  "/huawei-l3-multicast:l3-multicast/ipv6/limits/limit/lower-threshold": {
+    "name": "Lower threshold for triggering alarm clearance"
+  },
+  "/huawei-l3-multicast:l3-multicast/ipv6/limits/limit/current-count": {
+    "name": "Number of created PIM entries"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast": {
+    "name": "Multicast Configuration List"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv4": {
+    "name": "IPv4 Multicast Configuration List"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv4/global": {
+    "name": "Multicast Configuration"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv4/global/longest-match": {
+    "name": "Longest Match"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv4/global/load-splitting": {
+    "name": "Load Splitting"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv4/global/cpu-fwd-disable": {
+    "name": "CPU Forwarding"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv4/global/recursive-lookup-local-mt-enable": {
+    "name": "Enable multicast recursive lookup local mt"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv4/interface-min-ttls": {
+    "name": "List of multicast interface minimum TTL"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv4/interface-min-ttls/interface-min-ttl": {
+    "name": "Configure multicast interface minimum TTL List"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv4/interface-min-ttls/interface-min-ttl/name": {
+    "name": "Name of an interface"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv4/interface-min-ttls/interface-min-ttl/minimum-ttl": {
+    "name": "Minimum TTL value for multicast packets"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv4/interface-track-vrrps": {
+    "name": "Configuration List of Binding Multicast to VRRP"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv4/interface-track-vrrps/interface-track-vrrp": {
+    "name": "Multicast-VRRP Binding Configuration"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv4/interface-track-vrrps/interface-track-vrrp/name": {
+    "name": "Name of an interface"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv4/interface-track-vrrps/interface-track-vrrp/vrrp-id": {
+    "name": "Virtual router identifier"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv4/interface-track-vrrps/interface-track-vrrp/is-admin": {
+    "name": "Configuration information of administrator VRRP"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv4/interface-track-vrrps/interface-track-vrrp/track-interface": {
+    "name": "Name of the Interface Bound to the mVRRP"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv4/interface-boundarys": {
+    "name": "Configure multicast boundaries"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv4/interface-boundarys/interface-boundary": {
+    "name": "Configure multicast boundaries List"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv4/interface-boundarys/interface-boundary/name": {
+    "name": "Name of an interface"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv4/interface-boundarys/interface-boundary/group-address": {
+    "name": "Specifies a multicast group address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv4/interface-boundarys/interface-boundary/mask-length": {
+    "name": "Mask length of multicast group address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv4/rpf-multi-topology": {
+    "name": "Enable Multicast MT"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv4/rpf-multi-topology/topology-rule-list": {
+    "name": "Use the unicast topology instance"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv4/rpf-multi-topology/topology-rule-list/name": {
+    "name": "Specify the name of an advanced or base topology"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv4/limits": {
+    "name": "List of multicast vrf route limit"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv4/limits/limit": {
+    "name": "Configure multicast vrf route limit List"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv4/limits/limit/type": {
+    "name": "Limit type"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv4/limits/limit/value": {
+    "name": "Configured entry limit"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv4/limits/limit/upper-threshold": {
+    "name": "Upper threshold for triggering a threshold alarm"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv4/limits/limit/lower-threshold": {
+    "name": "Lower threshold for triggering alarm clearance"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv4/limits/limit/current-count": {
+    "name": "Number of created PIM entries"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv6": {
+    "name": "IPv6 Multicast Configuration List"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv6/global": {
+    "name": "Multicast Configuration"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv6/global/load-splitting": {
+    "name": "Load Splitting"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv6/global/cpu-fwd-disable": {
+    "name": "CPU Forwarding"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv6/interface-min-ttls": {
+    "name": "List of multicast IPv6 interface minimum TTL"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv6/interface-min-ttls/interface-min-ttl": {
+    "name": "Configure multicast IPv6 interface minimum TTL"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv6/interface-min-ttls/interface-min-ttl/name": {
+    "name": "Name of an interface"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv6/interface-min-ttls/interface-min-ttl/minimum-ttl": {
+    "name": "Minimum TTL value for IPv6 multicast packets"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv6/interface-track-vrrps": {
+    "name": "Configuration List of Binding Multicast to VRRP6"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv6/interface-track-vrrps/interface-track-vrrp": {
+    "name": "Binding Multicast to a VRRP6 Configuration"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv6/interface-track-vrrps/interface-track-vrrp/name": {
+    "name": "Interface Name"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv6/interface-track-vrrps/interface-track-vrrp/vrrp-id": {
+    "name": "ID of a Virtual Router"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv6/interface-track-vrrps/interface-track-vrrp/is-admin": {
+    "name": "Configuration of the VRRP6 Management Group"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv6/interface-track-vrrps/interface-track-vrrp/track-interface": {
+    "name": "Name of the Interface Bound to the mVRRP6 Group"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv6/interface-boundarys": {
+    "name": "Configure multicast IPv6 boundaries"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv6/interface-boundarys/interface-boundary": {
+    "name": "Configure multicast IPv6 boundaries List"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv6/interface-boundarys/interface-boundary/name": {
+    "name": "Name of an interface"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv6/interface-boundarys/interface-boundary/group-address": {
+    "name": "Specifies an IPv6 multicast group address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv6/interface-boundarys/interface-boundary/mask-length": {
+    "name": "Mask length of an IPv6 multicast group address"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv6/rpf-multi-topology": {
+    "name": "Enable Multicast MT"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv6/rpf-multi-topology/topology-rule-list": {
+    "name": "Use the unicast topology instance"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv6/rpf-multi-topology/topology-rule-list/name": {
+    "name": "Specifies the name of a unicast topology instance"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv6/limits": {
+    "name": "List of multicast vrf route limit"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv6/limits/limit": {
+    "name": "Configure multicast vrf route limit List"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv6/limits/limit/type": {
+    "name": "Limit type"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv6/limits/limit/value": {
+    "name": "Configured entry limit"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv6/limits/limit/upper-threshold": {
+    "name": "Upper threshold for triggering a threshold alarm"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv6/limits/limit/lower-threshold": {
+    "name": "Lower threshold for triggering alarm clearance"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3-multicast:multicast/ipv6/limits/limit/current-count": {
+    "name": "Current entry count"
+  }
+}

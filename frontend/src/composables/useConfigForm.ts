@@ -1,5 +1,6 @@
 import { reactive, ref, computed, type Ref, type ComputedRef } from 'vue'
 import type { FormRules } from 'element-plus'
+import { i18n } from '../i18n'
 import { useConstraintEngine } from './useConstraintEngine'
 import { computeDiff, missingRequired } from '../utils/configDiff'
 import type { Field } from '../utils/crdSchemaParser'
@@ -99,10 +100,10 @@ export function useConfigForm(fields: Ref<Field[]> | ComputedRef<Field[]>, keyFi
       const list: any[] = []
       // dynamicDefault 豁免必填（FE-15）：空值=系统自动分配；keyField 恒必填。
       if ((f.required && !f.dynamicDefault) || (keyField && key === keyField.value)) {
-        list.push({ required: true, message: `${f.label} 必填`, trigger: ['change', 'blur'] })
+        list.push({ required: true, message: i18n.global.t('console.validation.required', { label: f.label }), trigger: ['change', 'blur'] })
       }
       if (f.type === 'number' && (f.minimum != null || f.maximum != null)) {
-        list.push({ type: 'number', min: f.minimum, max: f.maximum, message: `${f.label} 超出范围`, trigger: ['change', 'blur'] })
+        list.push({ type: 'number', min: f.minimum, max: f.maximum, message: i18n.global.t('console.validation.outOfRange', { label: f.label }), trigger: ['change', 'blur'] })
       }
       if (f.must?.length) {
         list.push({
@@ -115,7 +116,7 @@ export function useConfigForm(fields: Ref<Field[]> | ComputedRef<Field[]>, keyFi
       }
       const re = compilePattern(f.pattern)
       if (re) {
-        list.push({ pattern: re, message: `${f.label} 格式不符合约束`, trigger: ['change', 'blur'] })
+        list.push({ pattern: re, message: i18n.global.t('console.validation.pattern', { label: f.label }), trigger: ['change', 'blur'] })
       }
       if (list.length) r[key] = list
     }

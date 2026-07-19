@@ -1,0 +1,203 @@
+{
+  "/huawei-lacp:lacp": {
+    "name": "LACP属性"
+  },
+  "/huawei-lacp:lacp/global": {
+    "name": "全局属性"
+  },
+  "/huawei-lacp:lacp/global/sys-priority": {
+    "name": "系统LACP优先级"
+  },
+  "/huawei-lacp:lacp/global/m-lag": {
+    "name": "M-LAG属性"
+  },
+  "/huawei-lacp:lacp/global/m-lag/sys-priority": {
+    "name": "系统优先级"
+  },
+  "/huawei-lacp:lacp/global/m-lag/sys-mac": {
+    "name": "系统MAC"
+  },
+  "/huawei-lacp:lacp/global/adminkey-change2lagid": {
+    "name": "配置admin-key为lag-id的值"
+  },
+  "/huawei-lacp:lacp/global/ignore-aggregation": {
+    "name": "忽略聚合延迟"
+  },
+  "/huawei-lacp:lacp/global/force-down": {
+    "name": "强制加入M-LAG的Eth-Trunk接口Down"
+  },
+  "/huawei-lacp:lacp/trouble-shoots": {
+    "name": "故障列表"
+  },
+  "/huawei-lacp:lacp/trouble-shoots/trouble-shoot": {
+    "name": "故障统计信息"
+  },
+  "/huawei-lacp:lacp/trouble-shoots/trouble-shoot/index": {
+    "name": "索引"
+  },
+  "/huawei-lacp:lacp/trouble-shoots/trouble-shoot/time": {
+    "name": "故障时间"
+  },
+  "/huawei-lacp:lacp/trouble-shoots/trouble-shoot/description": {
+    "name": "描述信息"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/members/member/huawei-lacp:lacp": {
+    "name": "Eth-Trunk成员口下的LACP属性"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/members/member/huawei-lacp:lacp/port-attributes": {
+    "name": "接口LACP配置属性"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/members/member/huawei-lacp:lacp/port-attributes/priority": {
+    "name": "接口LACP优先级"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/members/member/huawei-lacp:lacp/port-attributes/role": {
+    "name": "接口LACP角色"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/members/member/huawei-lacp:lacp/port-negotiate-parameter": {
+    "name": "接口LACP属性"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/members/member/huawei-lacp:lacp/port-negotiate-parameter/status": {
+    "name": "接口LACP选择状态"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/members/member/huawei-lacp:lacp/port-negotiate-parameter/port-type": {
+    "name": "LACP接口类型"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/members/member/huawei-lacp:lacp/port-negotiate-parameter/actor-state": {
+    "name": "本端选举状态"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/members/member/huawei-lacp:lacp/port-negotiate-parameter/actor-portkey": {
+    "name": "本端接口识别关键字"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/members/member/huawei-lacp:lacp/port-negotiate-parameter/actor-sysid": {
+    "name": "本端系统ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/members/member/huawei-lacp:lacp/port-negotiate-parameter/actor-portno": {
+    "name": "本端端口号"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/members/member/huawei-lacp:lacp/port-negotiate-parameter/partner-sysprimac": {
+    "name": "对端系统ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/members/member/huawei-lacp:lacp/port-negotiate-parameter/partner-syspri": {
+    "name": "对端系统优先级"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/members/member/huawei-lacp:lacp/port-negotiate-parameter/partner-sysid": {
+    "name": "对端系统标识"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/members/member/huawei-lacp:lacp/port-negotiate-parameter/partner-portpri": {
+    "name": "对端接口优先级"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/members/member/huawei-lacp:lacp/port-negotiate-parameter/partner-id": {
+    "name": "对端接口编号"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/members/member/huawei-lacp:lacp/port-negotiate-parameter/partner-portkey": {
+    "name": "对端接口识别关键字"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/members/member/huawei-lacp:lacp/port-negotiate-parameter/partner-state": {
+    "name": "对端选举状态"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/members/member/huawei-lacp:lacp/port-negotiate-parameter/reference-port": {
+    "name": "LACP参考端口"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/members/member/huawei-lacp:lacp/pdu-statistic": {
+    "name": "LACP报文信息"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/members/member/huawei-lacp:lacp/pdu-statistic/recv-pdunum": {
+    "name": "接收的LACP报文数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/members/member/huawei-lacp:lacp/pdu-statistic/recv-err-pdunum": {
+    "name": "接收的错误LACP报文数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/members/member/huawei-lacp:lacp/pdu-statistic/send-pdunum": {
+    "name": "发送的LACP报文数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/members/member/huawei-lacp:lacp/pdu-statistic/recv-marker-pdunum": {
+    "name": "接收的Marker报文数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/members/member/huawei-lacp:lacp/pdu-statistic/recv-err-makernum": {
+    "name": "接收的错误Marker报文数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/members/member/huawei-lacp:lacp/pdu-statistic/send-makernum": {
+    "name": "发送的Marker报文数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/huawei-lacp:lacp": {
+    "name": "Eth-Trunk口下LACP属性"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/huawei-lacp:lacp/receive-timeout-type": {
+    "name": "报文超时类型"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/huawei-lacp:lacp/fast-timeout-value": {
+    "name": "超时时间(秒)"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/huawei-lacp:lacp/support-preempt": {
+    "name": "支持抢占标识"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/huawei-lacp:lacp/preempt-delay": {
+    "name": "抢占延时时间(秒)"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/huawei-lacp:lacp/select-port-std": {
+    "name": "接口选举方式"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/huawei-lacp:lacp/max-active-num": {
+    "name": "链路UP上限阈值"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/huawei-lacp:lacp/collect-max-delay": {
+    "name": "最大聚合延迟时间(微秒)"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/huawei-lacp:lacp/mix-rate-enable": {
+    "name": "支持混合带宽"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/huawei-lacp:lacp/backup-enable": {
+    "name": "支持主备角色协商"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/huawei-lacp:lacp/damp-state-enable": {
+    "name": "状态震荡抑制"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/huawei-lacp:lacp/damp-mac-enable": {
+    "name": "非法MAC报文抑制"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/huawei-lacp:lacp/sys-mac": {
+    "name": "接口LACP系统ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/huawei-lacp:lacp/sys-priority": {
+    "name": "接口的LACP系统优先级"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/huawei-lacp:lacp/m-lag": {
+    "name": "接口M-LAG"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/huawei-lacp:lacp/m-lag/sys-priority": {
+    "name": "系统优先级"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/huawei-lacp:lacp/m-lag/sys-mac": {
+    "name": "系统MAC"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/huawei-lacp:lacp/track-vrrp": {
+    "name": "Eth-Trunk接口联动VRRP"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/huawei-lacp:lacp/track-vrrp/vrrp-id": {
+    "name": "VRRP ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/huawei-lacp:lacp/track-vrrp/if-name": {
+    "name": "指定接口"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/huawei-lacp:lacp/track-vrrp/sys-priority": {
+    "name": "绑定VRRP的Eth-Trunk接口的LACP系统优先级"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/huawei-lacp:lacp/track-vrrp/id-ext": {
+    "name": "LACP端口号扩展使能"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/huawei-lacp:lacp/portup-num": {
+    "name": "LACP协议UP接口数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/huawei-lacp:lacp/oper-syspri": {
+    "name": "接口运行的优先级"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/huawei-lacp:lacp/oper-sysmac": {
+    "name": "接口运行的MAC"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/huawei-lacp:lacp/sysmac-source": {
+    "name": "接口运行的MAC来源"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/huawei-lacp:lacp/portkey": {
+    "name": "接口配置的LACP PortKey"
+  }
+}

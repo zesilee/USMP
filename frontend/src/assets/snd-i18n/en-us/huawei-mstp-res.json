@@ -1,0 +1,245 @@
+{
+  "/huawei-mstp:mstp": {
+    "name": "MSTP"
+  },
+  "/huawei-mstp:mstp/global": {
+    "name": "Global Configuration"
+  },
+  "/huawei-mstp:mstp/global/bpdu-filter": {
+    "name": "BPDU Filter Default"
+  },
+  "/huawei-mstp:mstp/global/edge-port": {
+    "name": "Edge Port Default"
+  },
+  "/huawei-mstp:mstp/global/bridge-address": {
+    "name": "Bridge MAC Address"
+  },
+  "/huawei-mstp:mstp/global/transmit-limit": {
+    "name": "Global BPDU Max Number"
+  },
+  "/huawei-mstp:mstp/global/vstp-enable": {
+    "name": "V-STP Enable"
+  },
+  "/huawei-mstp:mstp/default-process": {
+    "name": "Default MSTP Process"
+  },
+  "/huawei-mstp:mstp/default-process/mode": {
+    "name": "MSTP Mode"
+  },
+  "/huawei-mstp:mstp/default-process/enable": {
+    "name": "Process Enable Status"
+  },
+  "/huawei-mstp:mstp/default-process/bpdu-protection": {
+    "name": "BPDU Protection"
+  },
+  "/huawei-mstp:mstp/default-process/max-hops": {
+    "name": "Max Hops"
+  },
+  "/huawei-mstp:mstp/default-process/path-cost-standard": {
+    "name": "Path Cost Standard"
+  },
+  "/huawei-mstp:mstp/default-process/tc-protection": {
+    "name": "TC Protection"
+  },
+  "/huawei-mstp:mstp/default-process/tc-protection-threshold": {
+    "name": "TC Protection Threshold"
+  },
+  "/huawei-mstp:mstp/default-process/tc-protection-interval": {
+    "name": "TC Protection Interval"
+  },
+  "/huawei-mstp:mstp/default-process/timer-factor": {
+    "name": "Hello Timer Multiplier"
+  },
+  "/huawei-mstp:mstp/default-process/region-name": {
+    "name": "Region Name"
+  },
+  "/huawei-mstp:mstp/default-process/revision-level": {
+    "name": "Revision Level"
+  },
+  "/huawei-mstp:mstp/default-process/forward-delay": {
+    "name": "Forward Delay"
+  },
+  "/huawei-mstp:mstp/default-process/hello-time": {
+    "name": "Hello Time"
+  },
+  "/huawei-mstp:mstp/default-process/max-age": {
+    "name": "Max Age"
+  },
+  "/huawei-mstp:mstp/default-process/default-instance": {
+    "name": "Default Process Instance Configuration"
+  },
+  "/huawei-mstp:mstp/default-process/default-instance/priority": {
+    "name": "Priority"
+  },
+  "/huawei-mstp:mstp/default-process/default-instance/root-type": {
+    "name": "Root"
+  },
+  "/huawei-mstp:mstp/default-process/default-instance/vlan-mapping": {
+    "name": "VLAN List"
+  },
+  "/huawei-mstp:mstp/default-process/instances": {
+    "name": "Process Instance Configurations"
+  },
+  "/huawei-mstp:mstp/default-process/instances/instance": {
+    "name": "Process Instance Configuration"
+  },
+  "/huawei-mstp:mstp/default-process/instances/instance/id": {
+    "name": "Instance ID"
+  },
+  "/huawei-mstp:mstp/default-process/instances/instance/priority": {
+    "name": "Priority"
+  },
+  "/huawei-mstp:mstp/default-process/instances/instance/root-type": {
+    "name": "Root"
+  },
+  "/huawei-mstp:mstp/default-process/instances/instance/vlan-mapping": {
+    "name": "VLAN List"
+  },
+  "/huawei-mstp:mstp/processs": {
+    "name": "MSTP Processes"
+  },
+  "/huawei-mstp:mstp/processs/process": {
+    "name": "MSTP Process"
+  },
+  "/huawei-mstp:mstp/processs/process/id": {
+    "name": "Process ID"
+  },
+  "/huawei-mstp:mstp/processs/process/mode": {
+    "name": "MSTP Mode"
+  },
+  "/huawei-mstp:mstp/processs/process/enable": {
+    "name": "Process Enable Status"
+  },
+  "/huawei-mstp:mstp/processs/process/bpdu-protection": {
+    "name": "BPDU Protection"
+  },
+  "/huawei-mstp:mstp/processs/process/max-hops": {
+    "name": "Max Hops"
+  },
+  "/huawei-mstp:mstp/processs/process/path-cost-standard": {
+    "name": "Path Cost Standard"
+  },
+  "/huawei-mstp:mstp/processs/process/tc-protection": {
+    "name": "TC Protection"
+  },
+  "/huawei-mstp:mstp/processs/process/tc-protection-threshold": {
+    "name": "TC Protection Threshold"
+  },
+  "/huawei-mstp:mstp/processs/process/tc-protection-interval": {
+    "name": "TC Protection Interval"
+  },
+  "/huawei-mstp:mstp/processs/process/timer-factor": {
+    "name": "Hello Timer Multiplier"
+  },
+  "/huawei-mstp:mstp/processs/process/region-name": {
+    "name": "Region Name"
+  },
+  "/huawei-mstp:mstp/processs/process/revision-level": {
+    "name": "Revision Level"
+  },
+  "/huawei-mstp:mstp/processs/process/forward-delay": {
+    "name": "Forward Delay"
+  },
+  "/huawei-mstp:mstp/processs/process/hello-time": {
+    "name": "Hello Time"
+  },
+  "/huawei-mstp:mstp/processs/process/max-age": {
+    "name": "Max Age"
+  },
+  "/huawei-mstp:mstp/processs/process/default-instance": {
+    "name": "Default Process Instance Configuration"
+  },
+  "/huawei-mstp:mstp/processs/process/default-instance/priority": {
+    "name": "Priority"
+  },
+  "/huawei-mstp:mstp/processs/process/default-instance/root-type": {
+    "name": "Root"
+  },
+  "/huawei-mstp:mstp/processs/process/default-instance/vlan-mapping": {
+    "name": "VLAN List"
+  },
+  "/huawei-mstp:mstp/processs/process/instances": {
+    "name": "Process Instance Configurations"
+  },
+  "/huawei-mstp:mstp/processs/process/instances/instance": {
+    "name": "Process Instance Configuration"
+  },
+  "/huawei-mstp:mstp/processs/process/instances/instance/id": {
+    "name": "Instance ID"
+  },
+  "/huawei-mstp:mstp/processs/process/instances/instance/priority": {
+    "name": "Priority"
+  },
+  "/huawei-mstp:mstp/processs/process/instances/instance/root-type": {
+    "name": "Root"
+  },
+  "/huawei-mstp:mstp/processs/process/instances/instance/vlan-mapping": {
+    "name": "VLAN List"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/main-interface/l2-attribute/huawei-mstp:mstp-attribute": {
+    "name": "Configuring MSTP Attributes for Layer 2 Ports"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/main-interface/l2-attribute/huawei-mstp:mstp-attribute/enable": {
+    "name": "Port Enable Status"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/main-interface/l2-attribute/huawei-mstp:mstp-attribute/loop-protection": {
+    "name": "Loop Protection"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/main-interface/l2-attribute/huawei-mstp:mstp-attribute/no-agreement-check": {
+    "name": "Interface Fast Transition"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/main-interface/l2-attribute/huawei-mstp:mstp-attribute/point-to-point": {
+    "name": "Point-to-Point"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/main-interface/l2-attribute/huawei-mstp:mstp-attribute/root-protection": {
+    "name": "Root Bridge Protection"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/main-interface/l2-attribute/huawei-mstp:mstp-attribute/transmit-limit": {
+    "name": "BPDUs Max Num Sent"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/main-interface/l2-attribute/huawei-mstp:mstp-attribute/tc-restriction": {
+    "name": "TC/TCN Packet Suppression"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/main-interface/l2-attribute/huawei-mstp:mstp-attribute/bpdu-filter": {
+    "name": "BPDU Filter"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/main-interface/l2-attribute/huawei-mstp:mstp-attribute/edge-port": {
+    "name": "Edge Port"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/main-interface/l2-attribute/huawei-mstp:mstp-attribute/vpls-sub-interface": {
+    "name": "VPLS Sub-Interface TC Notify"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/main-interface/huawei-mstp:mstp-attribute": {
+    "name": "Configuring MSTP Attributes for Layer 3 Ports"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/main-interface/huawei-mstp:mstp-attribute/enable": {
+    "name": "Port Enable Status"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/main-interface/huawei-mstp:mstp-attribute/loop-protection": {
+    "name": "Loop Protection"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/main-interface/huawei-mstp:mstp-attribute/no-agreement-check": {
+    "name": "Interface Fast Transition"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/main-interface/huawei-mstp:mstp-attribute/point-to-point": {
+    "name": "Point-to-Point"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/main-interface/huawei-mstp:mstp-attribute/root-protection": {
+    "name": "Root Bridge Protection"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/main-interface/huawei-mstp:mstp-attribute/transmit-limit": {
+    "name": "BPDUs Max Num Sent"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/main-interface/huawei-mstp:mstp-attribute/tc-restriction": {
+    "name": "TC/TCN Packet Suppression"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/main-interface/huawei-mstp:mstp-attribute/bpdu-filter": {
+    "name": "BPDU Filter"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/main-interface/huawei-mstp:mstp-attribute/edge-port": {
+    "name": "Edge Port"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/main-interface/huawei-mstp:mstp-attribute/vpls-sub-interface": {
+    "name": "VPLS Sub-Interface TC Notify"
+  }
+}

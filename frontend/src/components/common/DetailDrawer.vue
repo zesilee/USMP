@@ -8,9 +8,9 @@
     <slot />
     <template #footer>
       <div class="drawer-footer">
-        <el-button @click="handleClose">取消</el-button>
+        <el-button @click="handleClose">{{ t('common.cancel') }}</el-button>
         <el-button type="primary" @click="handleConfirm" :loading="loading">
-          确认
+          {{ t('common.confirm') }}
         </el-button>
       </div>
     </template>
@@ -19,6 +19,9 @@
 
 <script setup lang="ts">
 import { ref, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 const props = defineProps<{
   modelValue: boolean

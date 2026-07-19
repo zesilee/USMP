@@ -1,0 +1,182 @@
+{
+  "/huawei-tunnel-management:tnlm": {
+    "name": "Tunnel Management"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-policys": {
+    "name": "Tunnel Policy List"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-policys/tunnel-policy": {
+    "name": "Tunnel Policy"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-policys/tunnel-policy/name": {
+    "name": "Tunnel Policy Name"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-policys/tunnel-policy/description": {
+    "name": "Description"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-policys/tunnel-policy/ipv4-set": {
+    "name": "IPv4 Tunnel Policy Configuration"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-policys/tunnel-policy/ipv4-set/policy-type": {
+    "name": "Tunnel Policy Type"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-policys/tunnel-policy/ipv4-set/policy-type/select-sequences": {
+    "name": "Tunnel Selection Sequence"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-policys/tunnel-policy/ipv4-set/policy-type/select-sequences/select-sequence": {
+    "name": "Tunnel Selection Sequence"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-policys/tunnel-policy/ipv4-set/policy-type/select-sequences/select-sequence/loadbalance": {
+    "name": "Load Balancing Number"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-policys/tunnel-policy/ipv4-set/policy-type/select-sequences/select-sequence/unmix": {
+    "name": "Unmix"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-policys/tunnel-policy/ipv4-set/policy-type/select-sequences/select-sequence/select-tunnel-types": {
+    "name": "Tunnel Type Selection List"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-policys/tunnel-policy/ipv4-set/policy-type/select-sequences/select-sequence/select-tunnel-types/select-tunnel-type": {
+    "name": "Tunnel type selection"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-policys/tunnel-policy/ipv4-set/policy-type/select-sequences/select-sequence/select-tunnel-types/select-tunnel-type/type": {
+    "name": "Tunnel Selection Sequence"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-policys/tunnel-policy/ipv4-set/policy-type/binding": {
+    "name": "Tunnel Binding"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-policys/tunnel-policy/ipv4-set/policy-type/binding/nexthops": {
+    "name": "Tunnel Binding List"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-policys/tunnel-policy/ipv4-set/policy-type/binding/nexthops/nexthop": {
+    "name": "Tunnel Binding"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-policys/tunnel-policy/ipv4-set/policy-type/binding/nexthops/nexthop/address": {
+    "name": "Bound Destination Address"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-policys/tunnel-policy/ipv4-set/policy-type/binding/nexthops/nexthop/down-switch": {
+    "name": "Enable Tunnel Switching"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-policys/tunnel-policy/ipv4-set/policy-type/binding/nexthops/nexthop/ignore-destination-check": {
+    "name": "Ignore Destination Check"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-policys/tunnel-policy/ipv4-set/policy-type/binding/nexthops/nexthop/include-ldp": {
+    "name": "Is Loadbalance With LDP"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-policys/tunnel-policy/ipv4-set/policy-type/binding/nexthops/nexthop/bind-type": {
+    "name": "Bing type"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-policys/tunnel-policy/ipv4-set/policy-type/binding/nexthops/nexthop/tunnel-names": {
+    "name": "Tunnel List"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-policys/tunnel-policy/ipv4-set/policy-type/binding/nexthops/nexthop/tunnel-names/tunnel-name": {
+    "name": "Tunnel"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-policys/tunnel-policy/ipv4-set/policy-type/binding/nexthops/nexthop/tunnel-names/tunnel-name/name": {
+    "name": "Tunnel Name"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-policys/tunnel-policy/ipv4-set/policy-type/binding/nexthops/nexthop/auto-names": {
+    "name": "Auto Tunnel list"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-policys/tunnel-policy/ipv4-set/policy-type/binding/nexthops/nexthop/auto-names/auto-name": {
+    "name": "Auto Tunnel"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-policys/tunnel-policy/ipv4-set/policy-type/binding/nexthops/nexthop/auto-names/auto-name/name": {
+    "name": "Auto Tunnel Name"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-policys/tunnel-policy/ipv6-set": {
+    "name": "IPv6 Tunnel Policy Configuration"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-policys/tunnel-policy/ipv6-set/policy-type": {
+    "name": "Tunnel Policy Type"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-policys/tunnel-policy/ipv6-set/policy-type/select-sequences": {
+    "name": "Tunnel Selection Sequence"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-policys/tunnel-policy/ipv6-set/policy-type/select-sequences/select-sequence": {
+    "name": "Tunnel Selection Sequence"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-policys/tunnel-policy/ipv6-set/policy-type/select-sequences/select-sequence/loadbalance": {
+    "name": "Load Balancing Number"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-policys/tunnel-policy/ipv6-set/policy-type/select-sequences/select-sequence/unmix": {
+    "name": "Unmix"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-policys/tunnel-policy/ipv6-set/policy-type/select-sequences/select-sequence/select-tunnel-types": {
+    "name": "Tunnel Selection Sequence"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-policys/tunnel-policy/ipv6-set/policy-type/select-sequences/select-sequence/select-tunnel-types/select-tunnel-type": {
+    "name": "Tunnel Selection Sequence"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-policys/tunnel-policy/ipv6-set/policy-type/select-sequences/select-sequence/select-tunnel-types/select-tunnel-type/type": {
+    "name": "Tunnel Selection Sequence"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-down-switch": {
+    "name": "Default Binding Switch"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-down-switch/enable": {
+    "name": "Down-switch"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-infos": {
+    "name": "Tunnel Information List"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-infos/tunnel-info": {
+    "name": "Tunnel Information"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-infos/tunnel-info/id": {
+    "name": "Tunnel ID"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-infos/tunnel-info/name": {
+    "name": "Tunnel Name"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-infos/tunnel-info/type": {
+    "name": "Tunnel Type"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-infos/tunnel-info/destination": {
+    "name": "Destination Address"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-infos/tunnel-info/status": {
+    "name": "Tunnel Status"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-infos/tunnel-info/cost": {
+    "name": "Tunnel Cost"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-infos/tunnel-info/sr-te-policy-color": {
+    "name": "Tunnel Color"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-infos/tunnel-info/sr-te-policy-group": {
+    "name": "SR TE Policy Group ID"
+  },
+  "/huawei-tunnel-management:tunnel-management/subscribe-tunnel-policys": {
+    "name": "Tunnel Policy Reference List"
+  },
+  "/huawei-tunnel-management:tunnel-management/subscribe-tunnel-policys/subscribe-tunnel-policy": {
+    "name": "Tunnel Policy Reference Times"
+  },
+  "/huawei-tunnel-management:tunnel-management/subscribe-tunnel-policys/subscribe-tunnel-policy/policy-name": {
+    "name": "Tunnel Policy Name"
+  },
+  "/huawei-tunnel-management:tunnel-management/subscribe-tunnel-policys/subscribe-tunnel-policy/policy-exist": {
+    "name": "Tunnel Policy Exist"
+  },
+  "/huawei-tunnel-management:tunnel-management/subscribe-tunnel-policys/subscribe-tunnel-policy/count": {
+    "name": "Tunnel Policy Reference Times"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-statisticss": {
+    "name": "List of Tunnel Statistics"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-statisticss/tunnel-statistics": {
+    "name": "Tunnel Statistics"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-statisticss/tunnel-statistics/type": {
+    "name": "Tunnel type"
+  },
+  "/huawei-tunnel-management:tunnel-management/tunnel-statisticss/tunnel-statistics/number": {
+    "name": "Tunnel Number"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol": {
+    "name": "Tunnel Protocol Configuration"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-tunnel-management:tunnel-protocol/type": {
+    "name": "Choice Tunnel Protocol Type"
+  }
+}

@@ -1,0 +1,203 @@
+{
+  "/huawei-lacp:lacp": {
+    "name": "LACP Attributes"
+  },
+  "/huawei-lacp:lacp/global": {
+    "name": "Global Attributes"
+  },
+  "/huawei-lacp:lacp/global/sys-priority": {
+    "name": "System LACP Priority"
+  },
+  "/huawei-lacp:lacp/global/m-lag": {
+    "name": "M-LAG Attributes"
+  },
+  "/huawei-lacp:lacp/global/m-lag/sys-priority": {
+    "name": "System Priority"
+  },
+  "/huawei-lacp:lacp/global/m-lag/sys-mac": {
+    "name": "System MAC"
+  },
+  "/huawei-lacp:lacp/global/adminkey-change2lagid": {
+    "name": "Configure admin-key to lag-id"
+  },
+  "/huawei-lacp:lacp/global/ignore-aggregation": {
+    "name": "Ignore Aggregation Delay"
+  },
+  "/huawei-lacp:lacp/global/force-down": {
+    "name": "Force Eth-Trunk interfaces to down"
+  },
+  "/huawei-lacp:lacp/trouble-shoots": {
+    "name": "Trouble shootings"
+  },
+  "/huawei-lacp:lacp/trouble-shoots/trouble-shoot": {
+    "name": "Trouble shooting"
+  },
+  "/huawei-lacp:lacp/trouble-shoots/trouble-shoot/index": {
+    "name": "Index"
+  },
+  "/huawei-lacp:lacp/trouble-shoots/trouble-shoot/time": {
+    "name": "Time"
+  },
+  "/huawei-lacp:lacp/trouble-shoots/trouble-shoot/description": {
+    "name": "Description"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/members/member/huawei-lacp:lacp": {
+    "name": "LACP Attribute On Eth-Trunk member"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/members/member/huawei-lacp:lacp/port-attributes": {
+    "name": "Interface LACP Configuration Attribute"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/members/member/huawei-lacp:lacp/port-attributes/priority": {
+    "name": "Interface LACP Priority"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/members/member/huawei-lacp:lacp/port-attributes/role": {
+    "name": "Interface LACP Role"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/members/member/huawei-lacp:lacp/port-negotiate-parameter": {
+    "name": "Interface LACP Attribute"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/members/member/huawei-lacp:lacp/port-negotiate-parameter/status": {
+    "name": "Interface Selected Status"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/members/member/huawei-lacp:lacp/port-negotiate-parameter/port-type": {
+    "name": "LACP Interface Type"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/members/member/huawei-lacp:lacp/port-negotiate-parameter/actor-state": {
+    "name": "Actor Select State"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/members/member/huawei-lacp:lacp/port-negotiate-parameter/actor-portkey": {
+    "name": "Actor Interface Keyword"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/members/member/huawei-lacp:lacp/port-negotiate-parameter/actor-sysid": {
+    "name": "Actor System ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/members/member/huawei-lacp:lacp/port-negotiate-parameter/actor-portno": {
+    "name": "Actor Interface Number"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/members/member/huawei-lacp:lacp/port-negotiate-parameter/partner-sysprimac": {
+    "name": "Partner System ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/members/member/huawei-lacp:lacp/port-negotiate-parameter/partner-syspri": {
+    "name": "Partner System Priority"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/members/member/huawei-lacp:lacp/port-negotiate-parameter/partner-sysid": {
+    "name": "Partner System ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/members/member/huawei-lacp:lacp/port-negotiate-parameter/partner-portpri": {
+    "name": "Partner Interface Priority"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/members/member/huawei-lacp:lacp/port-negotiate-parameter/partner-id": {
+    "name": "Partner Interface ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/members/member/huawei-lacp:lacp/port-negotiate-parameter/partner-portkey": {
+    "name": "Partner Interface Keyword"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/members/member/huawei-lacp:lacp/port-negotiate-parameter/partner-state": {
+    "name": "Partner Select State"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/members/member/huawei-lacp:lacp/port-negotiate-parameter/reference-port": {
+    "name": "LACP Reference Interface"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/members/member/huawei-lacp:lacp/pdu-statistic": {
+    "name": "LACP PDU Information"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/members/member/huawei-lacp:lacp/pdu-statistic/recv-pdunum": {
+    "name": "Received LACP PDUs"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/members/member/huawei-lacp:lacp/pdu-statistic/recv-err-pdunum": {
+    "name": "Received error LACP PDUs"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/members/member/huawei-lacp:lacp/pdu-statistic/send-pdunum": {
+    "name": "Transmitted LACP PDUs"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/members/member/huawei-lacp:lacp/pdu-statistic/recv-marker-pdunum": {
+    "name": "Received Marker LACP PDUs"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/members/member/huawei-lacp:lacp/pdu-statistic/recv-err-makernum": {
+    "name": "Received error Marker LACP PDUs"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/members/member/huawei-lacp:lacp/pdu-statistic/send-makernum": {
+    "name": "Transmitted Marker LACP PDUs"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/huawei-lacp:lacp": {
+    "name": "LACP Attribute On Eth-Trunk"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/huawei-lacp:lacp/receive-timeout-type": {
+    "name": "Packet Timeout Type"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/huawei-lacp:lacp/fast-timeout-value": {
+    "name": "Packet Timeout Value"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/huawei-lacp:lacp/support-preempt": {
+    "name": "Preemption Support Flag"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/huawei-lacp:lacp/preempt-delay": {
+    "name": "Preemption Delay Time"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/huawei-lacp:lacp/select-port-std": {
+    "name": "Port Selecting Method"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/huawei-lacp:lacp/max-active-num": {
+    "name": "Upper Limit of Up Links"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/huawei-lacp:lacp/collect-max-delay": {
+    "name": "Max delay time of collecting"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/huawei-lacp:lacp/mix-rate-enable": {
+    "name": "Mix-rate link Support Flag"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/huawei-lacp:lacp/backup-enable": {
+    "name": "Backup Mode Support Flag"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/huawei-lacp:lacp/damp-state-enable": {
+    "name": "Dampening state-flapping Flag"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/huawei-lacp:lacp/damp-mac-enable": {
+    "name": "Dampening unexpected-pdu Flag"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/huawei-lacp:lacp/sys-mac": {
+    "name": "Interface LACP System ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/huawei-lacp:lacp/sys-priority": {
+    "name": "Trunk LACP System Priority"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/huawei-lacp:lacp/m-lag": {
+    "name": "Interface M-LAG"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/huawei-lacp:lacp/m-lag/sys-priority": {
+    "name": "System Priority"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/huawei-lacp:lacp/m-lag/sys-mac": {
+    "name": "System MAC"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/huawei-lacp:lacp/track-vrrp": {
+    "name": "Eth-Trunk interface binding VRRP"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/huawei-lacp:lacp/track-vrrp/vrrp-id": {
+    "name": "VRRP ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/huawei-lacp:lacp/track-vrrp/if-name": {
+    "name": "Specified interface"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/huawei-lacp:lacp/track-vrrp/sys-priority": {
+    "name": "LACP priority of VRRP-bound Eth-Trunk interface"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/huawei-lacp:lacp/track-vrrp/id-ext": {
+    "name": "Enabling status of LACP port number extension"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/huawei-lacp:lacp/portup-num": {
+    "name": "Up LACP interfaces"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/huawei-lacp:lacp/oper-syspri": {
+    "name": "LACP operate System priority"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/huawei-lacp:lacp/oper-sysmac": {
+    "name": "LACP operate System ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/huawei-lacp:lacp/sysmac-source": {
+    "name": "Source of LACP operate System ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/huawei-lacp:lacp/portkey": {
+    "name": "LACP Configured PortKey"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "/huawei-bfd:bfd/huawei-bfd-fwm:forwarding-match": {
+    "name": "BFD转发匹配信息"
+  },
+  "/huawei-bfd:bfd/huawei-bfd-fwm:forwarding-match/remote-discriminator-values": {
+    "name": "远端标识符"
+  },
+  "/huawei-bfd:bfd/huawei-bfd-fwm:forwarding-samediscr": {
+    "name": "BFD转发配置相同的标识符"
+  },
+  "/huawei-bfd:bfd/huawei-bfd-fwm:forwarding-samediscr/same-discriminator-disable": {
+    "name": "去使能配置相同的标识符"
+  }
+}

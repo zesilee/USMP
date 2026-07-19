@@ -14,18 +14,18 @@
             :type="row[column.path] ? 'success' : 'info'"
             size="small"
           >
-            {{ row[column.path] ? '启用' : '禁用' }}
+            {{ row[column.path] ? t('common.enabled') : t('common.disabled') }}
           </el-tag>
           <span v-else>{{ row[column.path] }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="操作" width="150" fixed="right">
+      <el-table-column :label="t('common.actions')" width="150" fixed="right">
         <template #default="{ row, $index }">
           <el-button type="primary" size="small" link @click="$emit('edit', row, $index)">
-            编辑
+            {{ t('common.edit') }}
           </el-button>
           <el-button type="danger" size="small" link @click="$emit('delete', row, $index)">
-            删除
+            {{ t('common.delete') }}
           </el-button>
         </template>
       </el-table-column>
@@ -33,14 +33,17 @@
 
     <div class="table-actions">
       <el-button type="primary" class="add-button" @click="$emit('add')">
-        新增配置项
+        {{ t('console.addConfigItem') }}
       </el-button>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n'
 import type { Field } from '../../utils/crdSchemaParser'
+
+const { t } = useI18n()
 
 defineProps<{
   columns: Field[]

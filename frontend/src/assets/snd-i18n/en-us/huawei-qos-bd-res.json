@@ -1,0 +1,17 @@
+{
+  "/huawei-bd:bd/instances/instance/huawei-qos-bd:qos": {
+    "name": "Qos"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-qos-bd:qos/traffic-policys": {
+    "name": "Traffic-policys"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-qos-bd:qos/traffic-policys/traffic-policy": {
+    "name": "Traffic-policy"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-qos-bd:qos/traffic-policys/traffic-policy/direction": {
+    "name": "Direction"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-qos-bd:qos/traffic-policys/traffic-policy/policy-name": {
+    "name": "Policy-name"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "/huawei-network-instance:ni": {
+    "name": "L3VPN通用配置"
+  },
+  "/huawei-network-instance:network-instance/global": {
+    "name": "L3VPN全局配置"
+  },
+  "/huawei-network-instance:network-instance/global/cfg-router-id": {
+    "name": "BGP路由器标识设定值"
+  },
+  "/huawei-network-instance:network-instance/global/as-notation-plain": {
+    "name": "设置BGP4字节AS的显示格式为无格式的整数型"
+  },
+  "/huawei-network-instance:network-instance/global/route-distinguisher-auto-ip": {
+    "name": "自动分配RD"
+  },
+  "/huawei-network-instance:network-instance/instances": {
+    "name": "VPN实例列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance": {
+    "name": "VPN实例"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/name": {
+    "name": "VPN实例名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/description": {
+    "name": "描述信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/sys-router-id": {
+    "name": "BGP实际路由器标识"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/vrf-id": {
+    "name": "实例ID"
+  }
+}

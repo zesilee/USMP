@@ -1,0 +1,11 @@
+{
+  "/huawei-ifm:ifm/interfaces/interface/huawei-monitor-group:track-monitor-group": {
+    "name": "Track Interface"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-monitor-group:track-monitor-group/name": {
+    "name": "Monitor Group Name"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-monitor-group:track-monitor-group/down-weight": {
+    "name": "Down Weight"
+  }
+}

@@ -1,0 +1,416 @@
+{
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/huawei-bgp-evpn:l2vpn-evpn": {
+    "name": "路由计数"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/huawei-bgp-evpn:l2vpn-evpn/statistics": {
+    "name": "路由计数"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/huawei-bgp-evpn:l2vpn-evpn/statistics/statistic": {
+    "name": "路由计数"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/huawei-bgp-evpn:l2vpn-evpn/statistics/statistic/vpn-name": {
+    "name": "BGP VPN实例名"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/huawei-bgp-evpn:l2vpn-evpn/statistics/statistic/total-route-number": {
+    "name": "EVPN路由总数"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/huawei-bgp-evpn:l2vpn-evpn/statistics/statistic/ad-route-number": {
+    "name": "A-D路由统计"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/huawei-bgp-evpn:l2vpn-evpn/statistics/statistic/mac-route-number": {
+    "name": "MAC地址通告路由"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/huawei-bgp-evpn:l2vpn-evpn/statistics/statistic/include-route-number": {
+    "name": "组播路由"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/huawei-bgp-evpn:l2vpn-evpn/statistics/statistic/es-route-number": {
+    "name": "以太网段路由"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/huawei-bgp-evpn:l2vpn-evpn/statistics/statistic/ip-prefix-route-number": {
+    "name": "IP前缀路由"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/huawei-bgp-evpn:l2vpn-evpn/statistics/statistic/smet-route-number": {
+    "name": "SMET路由统计"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/huawei-bgp-evpn:l2vpn-evpn/statistics/statistic/igmp-join-route-number": {
+    "name": "IGMP Join Synch路由统计"
+  },
+  "/huawei-bgp:bgp/base-process/huawei-bgp-routing-table:bgp-route/huawei-bgp-evpn:l2vpn-evpn/statistics/statistic/igmp-leave-route-number": {
+    "name": "IGMP Leave Synch路由统计"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/afs/af/huawei-bgp-evpn:l2vpn-evpn": {
+    "name": "EVPN地址族配置"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/afs/af/huawei-bgp-evpn:l2vpn-evpn/policy-vpntarget": {
+    "name": "VPN-Target过滤使能"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/afs/af/huawei-bgp-evpn:l2vpn-evpn/add-path-select-num": {
+    "name": "AddPath路由数量"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/afs/af/huawei-bgp-evpn:l2vpn-evpn/label-free-delay": {
+    "name": "标签释放延迟时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/afs/af/huawei-bgp-evpn:l2vpn-evpn/route-select-delay": {
+    "name": "路由选择延迟时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/afs/af/huawei-bgp-evpn:l2vpn-evpn/exclusive-eviad-enable": {
+    "name": "使能路由选择延迟"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/afs/af/huawei-bgp-evpn:l2vpn-evpn/label-per-nexthop": {
+    "name": "分配下一跳标签"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/afs/af/huawei-bgp-evpn:l2vpn-evpn/auto-frr": {
+    "name": "自动快速重路由"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/afs/af/huawei-bgp-evpn:l2vpn-evpn/detection-threshold": {
+    "name": "慢邻居检测门限"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/afs/af/huawei-bgp-evpn:l2vpn-evpn/absolute-detection-threshold": {
+    "name": "检测慢邻居绝对门限"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/afs/af/huawei-bgp-evpn:l2vpn-evpn/tunnel-selector": {
+    "name": "隧道选择器"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/afs/af/huawei-bgp-evpn:l2vpn-evpn/vpn-orf-enable": {
+    "name": "使能ORF功能"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peer-groups/peer-group/afs/af/huawei-bgp-evpn:l2vpn-evpn": {
+    "name": "EVPN地址族对等体组配置"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peer-groups/peer-group/afs/af/huawei-bgp-evpn:l2vpn-evpn/reflect-client": {
+    "name": "路由反射器客户"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peer-groups/peer-group/afs/af/huawei-bgp-evpn:l2vpn-evpn/import-policy-type": {
+    "name": "路由入口过滤策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peer-groups/peer-group/afs/af/huawei-bgp-evpn:l2vpn-evpn/import-policy-type/rtp-ref": {
+    "name": "路由策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peer-groups/peer-group/afs/af/huawei-bgp-evpn:l2vpn-evpn/import-policy-type/rtp-ref/import-policy": {
+    "name": "引入路由过滤策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peer-groups/peer-group/afs/af/huawei-bgp-evpn:l2vpn-evpn/export-policy-type": {
+    "name": "路由出口过滤策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peer-groups/peer-group/afs/af/huawei-bgp-evpn:l2vpn-evpn/export-policy-type/rtp-ref": {
+    "name": "路由策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peer-groups/peer-group/afs/af/huawei-bgp-evpn:l2vpn-evpn/export-policy-type/rtp-ref/export-policy": {
+    "name": "发布路由过滤策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peer-groups/peer-group/afs/af/huawei-bgp-evpn:l2vpn-evpn/es-ad-compatible": {
+    "name": "A-D ES路由兼容"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peer-groups/peer-group/afs/af/huawei-bgp-evpn:l2vpn-evpn/split-group-name": {
+    "name": "分离组名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peer-groups/peer-group/afs/af/huawei-bgp-evpn:l2vpn-evpn/vpn-orf-disable": {
+    "name": "去使能VPN ORF"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peer-groups/peer-group/afs/af/huawei-bgp-evpn:l2vpn-evpn/upe-enable": {
+    "name": "指定对等体组为下游服务提供边界路由器"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peer-groups/peer-group/afs/af/huawei-bgp-evpn:l2vpn-evpn/next-hop-mode": {
+    "name": "下一跳模式"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peer-groups/peer-group/afs/af/huawei-bgp-evpn:l2vpn-evpn/advertise-community": {
+    "name": "团体属性发布"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peer-groups/peer-group/afs/af/huawei-bgp-evpn:l2vpn-evpn/advertise-large-community": {
+    "name": "发送增强团体属性"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peer-groups/peer-group/afs/af/huawei-bgp-evpn:l2vpn-evpn/advertise-arp": {
+    "name": "发布ARP路由"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peer-groups/peer-group/afs/af/huawei-bgp-evpn:l2vpn-evpn/advertise-irb": {
+    "name": "发布IRB路由"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peer-groups/peer-group/afs/af/huawei-bgp-evpn:l2vpn-evpn/advertise-irbv6": {
+    "name": "发布IRBv6路由"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peer-groups/peer-group/afs/af/huawei-bgp-evpn:l2vpn-evpn/advertise-nd": {
+    "name": "发布ND路由"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peer-groups/peer-group/afs/af/huawei-bgp-evpn:l2vpn-evpn/advertise-encap-type": {
+    "name": "发送数据包封装类型"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peer-groups/peer-group/afs/af/huawei-bgp-evpn:l2vpn-evpn/advertise-suppressed-route": {
+    "name": "发布被抑制的明细路由"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peer-groups/peer-group/afs/af/huawei-bgp-evpn:l2vpn-evpn/advertise-add-path-mode": {
+    "name": "AddPath能力"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peer-groups/peer-group/afs/af/huawei-bgp-evpn:l2vpn-evpn/advertise-add-path-num": {
+    "name": "AddPath路由发布数量"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peer-groups/peer-group/afs/af/huawei-bgp-evpn:l2vpn-evpn/all-route-limit": {
+    "name": "使能最大路由限制"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peer-groups/peer-group/afs/af/huawei-bgp-evpn:l2vpn-evpn/mac-route-limit": {
+    "name": "MAC路由限制"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peer-groups/peer-group/afs/af/huawei-bgp-evpn:l2vpn-evpn/route-limit": {
+    "name": "最大接收路由数量"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peer-groups/peer-group/afs/af/huawei-bgp-evpn:l2vpn-evpn/route-limit-percent": {
+    "name": "当达到最大百分比时产生告警信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peer-groups/peer-group/afs/af/huawei-bgp-evpn:l2vpn-evpn/route-limit-type": {
+    "name": "设置路由超限类型"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peer-groups/peer-group/afs/af/huawei-bgp-evpn:l2vpn-evpn/route-limit-idle-timeout": {
+    "name": "路由超限断连自动重建连接超时定时器"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peer-groups/peer-group/afs/af/huawei-bgp-evpn:l2vpn-evpn/route-update-interval": {
+    "name": "路由发布间隔"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peer-groups/peer-group/afs/af/huawei-bgp-evpn:l2vpn-evpn/reoriginated-route-enable": {
+    "name": "重新生成路由使能"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peer-groups/peer-group/afs/af/huawei-bgp-evpn:l2vpn-evpn/reoriginated-mac-ip-route": {
+    "name": "MAC-IP路由重生成后发送"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peer-groups/peer-group/afs/af/huawei-bgp-evpn:l2vpn-evpn/reoriginated-mac-ipv6-route": {
+    "name": "MAC-IPv6路由重生成后发送"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peer-groups/peer-group/afs/af/huawei-bgp-evpn:l2vpn-evpn/reoriginated-ip-route": {
+    "name": "IP路由重生成后发送"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peer-groups/peer-group/afs/af/huawei-bgp-evpn:l2vpn-evpn/reoriginated-ipv6-route": {
+    "name": "IPv6路由重生成后发送"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peer-groups/peer-group/afs/af/huawei-bgp-evpn:l2vpn-evpn/reoriginated-vpnv4-route": {
+    "name": "VPNV4路由重生成后发送"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peer-groups/peer-group/afs/af/huawei-bgp-evpn:l2vpn-evpn/reoriginated-vpnv6-route": {
+    "name": "VPNv6路由重生成后发送"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peer-groups/peer-group/afs/af/huawei-bgp-evpn:l2vpn-evpn/high-priority": {
+    "name": "高优先级"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peer-groups/peer-group/afs/af/huawei-bgp-evpn:l2vpn-evpn/preferred-value": {
+    "name": "优选级数值"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peers/peer/afs/af/huawei-bgp-evpn:l2vpn-evpn": {
+    "name": "EVPN地址族对等体配置"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peers/peer/afs/af/huawei-bgp-evpn:l2vpn-evpn/group-name": {
+    "name": "所属对等体组名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peers/peer/afs/af/huawei-bgp-evpn:l2vpn-evpn/reflect-client": {
+    "name": "路由反射器客户"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peers/peer/afs/af/huawei-bgp-evpn:l2vpn-evpn/import-policy-type": {
+    "name": "路由入口过滤策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peers/peer/afs/af/huawei-bgp-evpn:l2vpn-evpn/import-policy-type/rtp-ref": {
+    "name": "路由策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peers/peer/afs/af/huawei-bgp-evpn:l2vpn-evpn/import-policy-type/rtp-ref/import-policy": {
+    "name": "引入路由过滤策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peers/peer/afs/af/huawei-bgp-evpn:l2vpn-evpn/export-policy-type": {
+    "name": "路由出口过滤策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peers/peer/afs/af/huawei-bgp-evpn:l2vpn-evpn/export-policy-type/rtp-ref": {
+    "name": "路由策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peers/peer/afs/af/huawei-bgp-evpn:l2vpn-evpn/export-policy-type/rtp-ref/export-policy": {
+    "name": "发布路由过滤策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peers/peer/afs/af/huawei-bgp-evpn:l2vpn-evpn/advertise-community": {
+    "name": "发送团体属性"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peers/peer/afs/af/huawei-bgp-evpn:l2vpn-evpn/advertise-large-community": {
+    "name": "发送增强团体属性"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peers/peer/afs/af/huawei-bgp-evpn:l2vpn-evpn/advertise-arp": {
+    "name": "发布ARP路由"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peers/peer/afs/af/huawei-bgp-evpn:l2vpn-evpn/advertise-irb": {
+    "name": "发布IRB路由"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peers/peer/afs/af/huawei-bgp-evpn:l2vpn-evpn/advertise-irbv6": {
+    "name": "发布IRBv6路由"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peers/peer/afs/af/huawei-bgp-evpn:l2vpn-evpn/advertise-nd": {
+    "name": "发布ND路由"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peers/peer/afs/af/huawei-bgp-evpn:l2vpn-evpn/advertise-encap-type": {
+    "name": "发送数据包封装类型"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peers/peer/afs/af/huawei-bgp-evpn:l2vpn-evpn/advertise-add-path-mode": {
+    "name": "AddPath能力"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peers/peer/afs/af/huawei-bgp-evpn:l2vpn-evpn/advertise-add-path-num": {
+    "name": "AddPath路由发布数量"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peers/peer/afs/af/huawei-bgp-evpn:l2vpn-evpn/advertise-suppressed-route": {
+    "name": "发布被抑制的明细路由"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peers/peer/afs/af/huawei-bgp-evpn:l2vpn-evpn/advertise-suppressed-route-status": {
+    "name": "是否发布被抑制的明细路由有效状态"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peers/peer/afs/af/huawei-bgp-evpn:l2vpn-evpn/all-route-limit": {
+    "name": "使能最大路由限制"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peers/peer/afs/af/huawei-bgp-evpn:l2vpn-evpn/mac-route-limit": {
+    "name": "MAC路由超限"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peers/peer/afs/af/huawei-bgp-evpn:l2vpn-evpn/route-limit": {
+    "name": "最大接收路由数量"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peers/peer/afs/af/huawei-bgp-evpn:l2vpn-evpn/route-limit-percent": {
+    "name": "当达到最大百分比时产生告警信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peers/peer/afs/af/huawei-bgp-evpn:l2vpn-evpn/route-limit-type": {
+    "name": "设置路由超限类型"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peers/peer/afs/af/huawei-bgp-evpn:l2vpn-evpn/route-limit-idle-timeout": {
+    "name": "路由超限断连自动重建连接的超时定时器"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peers/peer/afs/af/huawei-bgp-evpn:l2vpn-evpn/route-update-interval": {
+    "name": "路由发布间隔"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peers/peer/afs/af/huawei-bgp-evpn:l2vpn-evpn/reoriginate-route-enable": {
+    "name": "重新生成路由使能"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peers/peer/afs/af/huawei-bgp-evpn:l2vpn-evpn/reoriginate-vpnv4-route": {
+    "name": "VPNV4路由重生成后发送"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peers/peer/afs/af/huawei-bgp-evpn:l2vpn-evpn/reoriginate-mac-route": {
+    "name": "MAC路由重生成后发送"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peers/peer/afs/af/huawei-bgp-evpn:l2vpn-evpn/reoriginate-mac-ip-route": {
+    "name": "MAC-IP路由重生成后发送"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peers/peer/afs/af/huawei-bgp-evpn:l2vpn-evpn/reoriginate-mac-ipv6-route": {
+    "name": "MAC-IPv6路由重生成后发送"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peers/peer/afs/af/huawei-bgp-evpn:l2vpn-evpn/reoriginate-ip-route": {
+    "name": "IP路由重生成后发送"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peers/peer/afs/af/huawei-bgp-evpn:l2vpn-evpn/reoriginate-ipv6-route": {
+    "name": "IPv6路由重生成后发送"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peers/peer/afs/af/huawei-bgp-evpn:l2vpn-evpn/reoriginate-vpnv6-route": {
+    "name": "VPNv6路由重生成后发送"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peers/peer/afs/af/huawei-bgp-evpn:l2vpn-evpn/graceful-restart-static-timer": {
+    "name": "重建BGP会话的最大时长"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peers/peer/afs/af/huawei-bgp-evpn:l2vpn-evpn/es-ad-compatible": {
+    "name": "A-D ES路由兼容"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peers/peer/afs/af/huawei-bgp-evpn:l2vpn-evpn/split-group-name": {
+    "name": "分离组名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peers/peer/afs/af/huawei-bgp-evpn:l2vpn-evpn/vpn-orf-disable": {
+    "name": "去使能VPN ORF"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peers/peer/afs/af/huawei-bgp-evpn:l2vpn-evpn/upe-enable": {
+    "name": "指定对等体为下游服务提供边界路由器"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peers/peer/afs/af/huawei-bgp-evpn:l2vpn-evpn/next-hop-mode": {
+    "name": "下一跳模式"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peers/peer/afs/af/huawei-bgp-evpn:l2vpn-evpn/high-priority": {
+    "name": "高优先级"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peers/peer/afs/af/huawei-bgp-evpn:l2vpn-evpn/high-priority-status": {
+    "name": "高优先级状态"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peers/peer/afs/af/huawei-bgp-evpn:l2vpn-evpn/preferred-value": {
+    "name": "优先级数值"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peers/peer/afs/af/huawei-bgp-evpn:l2vpn-evpn/path-attribute-treats": {
+    "name": "路径属性处理表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peers/peer/afs/af/huawei-bgp-evpn:l2vpn-evpn/path-attribute-treats/path-attribute-treat": {
+    "name": "路径属性处理"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peers/peer/afs/af/huawei-bgp-evpn:l2vpn-evpn/path-attribute-treats/path-attribute-treat/treat-type": {
+    "name": "处理类型"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peers/peer/afs/af/huawei-bgp-evpn:l2vpn-evpn/path-attribute-treats/path-attribute-treat/discard-id-map": {
+    "name": "丢弃处理ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peers/peer/afs/af/huawei-bgp-evpn:l2vpn-evpn/path-attribute-treats/path-attribute-treat/withdraw-id-map": {
+    "name": "撤销处理ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/peers/peer/afs/af/huawei-bgp-evpn:l2vpn-evpn/path-attribute-treats/path-attribute-treat/unknown-id-map": {
+    "name": "作为未知处理ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/afs/af/ipv4-unicast/huawei-bgp-evpn:evpn": {
+    "name": "EVPN IPv4 配置"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/afs/af/ipv4-unicast/huawei-bgp-evpn:evpn/srv6": {
+    "name": "EVPN SRv6 配置"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/afs/af/ipv4-unicast/huawei-bgp-evpn:evpn/srv6/mode": {
+    "name": "SRv6迭代模式配置"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/afs/af/ipv4-unicast/huawei-bgp-evpn:evpn/srv6/down-switch": {
+    "name": "TE隧道切换到BE隧道"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/afs/af/ipv4-unicast/huawei-bgp-evpn:evpn/common": {
+    "name": "EVPN公共属性"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/afs/af/ipv4-unicast/huawei-bgp-evpn:evpn/common/reoriginate-disable": {
+    "name": "重生成去使能"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/afs/af/ipv4-unicast/huawei-bgp-evpn:evpn/irb-asymmetric": {
+    "name": "配置IRB非对称模式"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/afs/af/ipv4-unicast/huawei-bgp-evpn:evpn/irb-asymmetric/irb-asymmetric-mode": {
+    "name": "IRB非对称模式"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/afs/af/ipv4-unicast/huawei-bgp-evpn:evpn/irb-asymmetric/irb-asymmetric-mode/irb-asymmetric": {
+    "name": "IRB非对称模式"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/afs/af/ipv4-unicast/huawei-bgp-evpn:evpn/irb-asymmetric/irb-asymmetric-mode/irb-asymmetric/irb-asymmetric": {
+    "name": "IRB非对称模式"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/afs/af/ipv4-unicast/huawei-bgp-evpn:evpn/local-cross": {
+    "name": "EVPN本地交叉属性"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/afs/af/ipv4-unicast/huawei-bgp-evpn:evpn/local-cross/remote-cross-route-enable": {
+    "name": "远端路由使能本地交叉"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/afs/af/ipv6-unicast/huawei-bgp-evpn:evpn": {
+    "name": "EVPN IPv6 配置"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/afs/af/ipv6-unicast/huawei-bgp-evpn:evpn/srv6": {
+    "name": "EVPN SRv6"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/afs/af/ipv6-unicast/huawei-bgp-evpn:evpn/srv6/mode": {
+    "name": "SRv6迭代模式配置"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/afs/af/ipv6-unicast/huawei-bgp-evpn:evpn/srv6/down-switch": {
+    "name": "TE隧道切换到BE隧道"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/afs/af/ipv6-unicast/huawei-bgp-evpn:evpn/common": {
+    "name": "EVPN公共属性"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/afs/af/ipv6-unicast/huawei-bgp-evpn:evpn/common/reoriginate-disable": {
+    "name": "重生成去使能"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/afs/af/ipv6-unicast/huawei-bgp-evpn:evpn/irb-asymmetric": {
+    "name": "配置IRB非对称模式"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/afs/af/ipv6-unicast/huawei-bgp-evpn:evpn/irb-asymmetric/irb-asymmetric-mode": {
+    "name": "IRB非对称模式"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/afs/af/ipv6-unicast/huawei-bgp-evpn:evpn/irb-asymmetric/irb-asymmetric-mode/irb-asymmetric": {
+    "name": "IRB非对称模式"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/afs/af/ipv6-unicast/huawei-bgp-evpn:evpn/irb-asymmetric/irb-asymmetric-mode/irb-asymmetric/irb-asymmetric": {
+    "name": "IRB非对称模式"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/afs/af/ipv6-unicast/huawei-bgp-evpn:evpn/local-cross": {
+    "name": "EVPN本地交叉属性"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-bgp:bgp/base-process/afs/af/ipv6-unicast/huawei-bgp-evpn:evpn/local-cross/remote-cross-route-enable": {
+    "name": "远端路由使能本地交叉"
+  }
+}

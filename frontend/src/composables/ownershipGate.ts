@@ -1,4 +1,5 @@
 import { ElMessageBox } from 'element-plus'
+import { i18n } from '../i18n'
 
 // FE-18 二期：归属硬锁阻断确认流。
 // 后端信封恒 HTTP 200——409 归属拒绝以 resolved 响应到达，调用方须按 code 分支：
@@ -21,10 +22,11 @@ export function ownershipRejectionOf(res: unknown): OwnershipRejection | null {
 // （调用方带 force=true 重发），取消返回 false（中止流程，不抛错）。
 export async function confirmOwnershipOverride(rej: OwnershipRejection): Promise<boolean> {
   try {
+    const t = i18n.global.t
     await ElMessageBox.confirm(
-      `该路径由业务配置 ${rej.intents.join('、')} 管理，意图收敛时会覆盖本次手工修改。确定强制下发？`,
-      '路径已被业务配置认领',
-      { confirmButtonText: '强制下发', cancelButtonText: '取消', type: 'warning' },
+      t('console.ownership.confirm', { intents: rej.intents.join('、') }),
+      t('console.ownership.title'),
+      { confirmButtonText: t('console.ownership.forcePush'), cancelButtonText: t('common.cancel'), type: 'warning' },
     )
     return true
   } catch {

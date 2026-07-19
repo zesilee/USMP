@@ -1,0 +1,26 @@
+{
+  "/huawei-system-resources-usage:system-resources-usage": {
+    "name": "资源使用"
+  },
+  "/huawei-system-resources-usage:system-resources-usage/resources": {
+    "name": "资源使用信息"
+  },
+  "/huawei-system-resources-usage:system-resources-usage/resources/resource": {
+    "name": "资源信息"
+  },
+  "/huawei-system-resources-usage:system-resources-usage/resources/resource/slot": {
+    "name": "槽位号"
+  },
+  "/huawei-system-resources-usage:system-resources-usage/resources/resource/resource-name": {
+    "name": "资源名"
+  },
+  "/huawei-system-resources-usage:system-resources-usage/resources/resource/total": {
+    "name": "资源总数"
+  },
+  "/huawei-system-resources-usage:system-resources-usage/resources/resource/allocated": {
+    "name": "已使用资源数"
+  },
+  "/huawei-system-resources-usage:system-resources-usage/resources/resource/free": {
+    "name": "空闲资源数"
+  }
+}

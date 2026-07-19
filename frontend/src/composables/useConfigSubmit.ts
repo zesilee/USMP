@@ -1,6 +1,7 @@
 import { ref, computed } from 'vue'
 import { ElMessage } from 'element-plus'
 import { setConfig, getConfig, getDeviceReconcile } from '../api'
+import { i18n } from '../i18n'
 import { ownershipRejectionOf, confirmOwnershipOverride } from './ownershipGate'
 import {
   deriveReconcileProgress,
@@ -87,7 +88,7 @@ export function useConfigSubmit(opts: UseConfigSubmitOptions) {
           // 信封恒 200：force 重发的失败（如设备错误）也以 resolved 信封到达，
           // 必须按 success 判定，不能误入成功链（§9 不伪装成功）。
           if ((res.data as any)?.success === false) {
-            error.value = (res.data as any)?.message || '强制下发失败'
+            error.value = (res.data as any)?.message || i18n.global.t('console.forcePushFailed')
             set('error')
             return
           }
@@ -98,7 +99,7 @@ export function useConfigSubmit(opts: UseConfigSubmitOptions) {
           ElMessage.warning(`${warn.message}（${(warn.intents || []).join('、')}）`)
         }
       } catch (e: any) {
-        error.value = e?.response?.data?.message || e?.message || '下发失败'
+        error.value = e?.response?.data?.message || e?.message || i18n.global.t('console.pushFailed')
         set('error')
         return
       }

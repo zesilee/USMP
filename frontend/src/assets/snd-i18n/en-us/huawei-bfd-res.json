@@ -1,0 +1,1382 @@
+{
+  "/huawei-bfd:bfd": {
+    "name": "BFD Enabling Flag"
+  },
+  "/huawei-bfd:bfd/global": {
+    "name": "Global BFD Information"
+  },
+  "/huawei-bfd:bfd/global/delay-up-timer": {
+    "name": "Duration during BFD session delays going Up"
+  },
+  "/huawei-bfd:bfd/global/mpls-passive": {
+    "name": "Enable MPLS Passive Session"
+  },
+  "/huawei-bfd:bfd/global/ping-interval": {
+    "name": "LSP Ping Interval (s)"
+  },
+  "/huawei-bfd:bfd/global/process-mode": {
+    "name": "BFD deployment mode"
+  },
+  "/huawei-bfd:bfd/global/process-central-slot": {
+    "name": "The central process slot"
+  },
+  "/huawei-bfd:bfd/global/process-central-slot2": {
+    "name": "The central process slot"
+  },
+  "/huawei-bfd:bfd/global/default-ip": {
+    "name": "Default IP"
+  },
+  "/huawei-bfd:bfd/global/tos-exp": {
+    "name": "Packet Priority"
+  },
+  "/huawei-bfd:bfd/global/tos-exp-static": {
+    "name": "Priority of static session packets"
+  },
+  "/huawei-bfd:bfd/global/echo-passive": {
+    "name": "Passive Echo Enabling Flag"
+  },
+  "/huawei-bfd:bfd/global/basic-acl-num": {
+    "name": "ACL number of a BFD session"
+  },
+  "/huawei-bfd:bfd/global/init-wait-time": {
+    "name": "Dampening initial-wait time"
+  },
+  "/huawei-bfd:bfd/global/max-wait-time": {
+    "name": "Dampening maximum-wait time"
+  },
+  "/huawei-bfd:bfd/global/second-wait-time": {
+    "name": "Dampening secondary-wait time"
+  },
+  "/huawei-bfd:bfd/global/link-bundle-init-time": {
+    "name": "Link-Bundle dampening initial-wait time"
+  },
+  "/huawei-bfd:bfd/global/link-bundle-max-time": {
+    "name": "Link-Bundle dampening maximum-wait time"
+  },
+  "/huawei-bfd:bfd/global/link-bundle-second-time": {
+    "name": "Link-Bundle dampening secondary-wait time"
+  },
+  "/huawei-bfd:bfd/global/link-bundle-l3-mode": {
+    "name": "Link-Bundle layer 3 mode"
+  },
+  "/huawei-bfd:bfd/global/lsp-path-check": {
+    "name": "Check of whether LSP path mismatches"
+  },
+  "/huawei-bfd:bfd/global/ipv6-trap-separated": {
+    "name": "Separate report of IPv6 Up and Down traps"
+  },
+  "/huawei-bfd:bfd/sessions": {
+    "name": "BFD Session List"
+  },
+  "/huawei-bfd:bfd/sessions/session": {
+    "name": "BFD Session"
+  },
+  "/huawei-bfd:bfd/sessions/session/name": {
+    "name": "Session Name"
+  },
+  "/huawei-bfd:bfd/sessions/session/admin-down": {
+    "name": "Administrator Down"
+  },
+  "/huawei-bfd:bfd/sessions/session/description": {
+    "name": "Enable L2 Proxy"
+  },
+  "/huawei-bfd:bfd/sessions/session/detect-multiplier": {
+    "name": "Detection Multiplier"
+  },
+  "/huawei-bfd:bfd/sessions/session/wtr-time": {
+    "name": "BFD Passive Session Peer Ip"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type": {
+    "name": "BFD Session List"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static": {
+    "name": "List of BFD statistic session configurations"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/tos-exp": {
+    "name": "Packets Priority"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type": {
+    "name": "List of BFD static session configurations"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip": {
+    "name": "List of BFD static IP session configurations"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type": {
+    "name": "List of BFD ip session configurations"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv4": {
+    "name": "List of BFD static IPv4 session configurations"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv4/source-address-static-ipv4": {
+    "name": "Source IP Address"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv4/select-board-slot-static-ipv4": {
+    "name": "BFD Passive Session Peer Ip"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv4/select-board-slot2-static-ipv4": {
+    "name": "BFD Passive Session Peer Ip"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv4/multicast-or-unicast-ip": {
+    "name": "BFD Session List"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv4/multicast-or-unicast-ip/multicast": {
+    "name": "BFD auto session for multicast IP"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv4/multicast-or-unicast-ip/multicast/min-tx-interval-multicast-ipv4": {
+    "name": "Minimum Sending Interval (ms)"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv4/multicast-or-unicast-ip/multicast/min-rx-interval-multicast-ipv4": {
+    "name": "Minimum Receive Interval (ms)"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv4/multicast-or-unicast-ip/multicast/local-discriminator-multicast-ipv4": {
+    "name": "BFD Passive Session Peer Ip"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv4/multicast-or-unicast-ip/multicast/remote-discriminator-multicast-ipv4": {
+    "name": "BFD Passive Session Peer Ip"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv4/multicast-or-unicast-ip/multicast/out-if-name-multicast-ipv4": {
+    "name": "Outbound interface name"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv4/multicast-or-unicast-ip/multicast/process-pst-multicast-ipv4": {
+    "name": "PST Operation Flag"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv4/multicast-or-unicast-ip/multicast/lag-multicast-ipv4": {
+    "name": "LAG Detection Flag"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv4/multicast-or-unicast-ip/multicast/pis-multicast-ipv4": {
+    "name": "BFD Passive Session Peer Ip"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv4/multicast-or-unicast-ip/multicast/pis-sub-if-multicast-ipv4": {
+    "name": "BFD Passive Session Peer Ip"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv4/multicast-or-unicast-ip/multicast/pis-no-impact-multicast-ipv4": {
+    "name": "BFD Passive Session Peer Ip"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv4/multicast-or-unicast-ip/multicast/dot1q-vid-multicast-ipv4": {
+    "name": "VLAN ID of Dot1q Sub-if"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv4/multicast-or-unicast-ip/multicast/qinq-pe-vid-multicast-ipv4": {
+    "name": "BFD Passive Session Peer Ip"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv4/multicast-or-unicast-ip/multicast/qinq-ce-vid-multicast-ipv4": {
+    "name": "BFD Passive Session Peer Ip"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv4/multicast-or-unicast-ip/multicast/auth-algorithm-multicast-ipv4": {
+    "name": "Enable L2 Proxy"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv4/multicast-or-unicast-ip/multicast/key-id-multicast-ipv4": {
+    "name": "BFD Passive Session Peer Ip"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv4/multicast-or-unicast-ip/multicast/cipher-string-multicast-ipv4": {
+    "name": "Enable L2 Proxy"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv4/multicast-or-unicast-ip/multicast/negotiation-timeout-multicast-ipv4": {
+    "name": "BFD negotiation timeout period"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv4/multicast-or-unicast-ip/multicast/unlimited-nego-multicast-ipv4": {
+    "name": "Unlimited Multicast Session Negotiation"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv4/multicast-or-unicast-ip/unicast": {
+    "name": "List of unicast destination address configurations"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv4/multicast-or-unicast-ip/unicast/min-tx-interval": {
+    "name": "Minimum Send Interval"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv4/multicast-or-unicast-ip/unicast/min-rx-interval": {
+    "name": "Minimum Receive Interval"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv4/multicast-or-unicast-ip/unicast/min-echo-rx-interval": {
+    "name": "Interval at Which One-Arm Echo Packets Are Received (ms)"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv4/multicast-or-unicast-ip/unicast/local-discriminator": {
+    "name": "Local Discriminator"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv4/multicast-or-unicast-ip/unicast/remote-discriminator": {
+    "name": "Remote Discriminator"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv4/multicast-or-unicast-ip/unicast/out-if-name-static-unicast-ipv4": {
+    "name": "Outbound Interface Name"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv4/multicast-or-unicast-ip/unicast/is-set-track-if-static-ipv4": {
+    "name": "BFD Passive Session Peer Ip"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv4/multicast-or-unicast-ip/unicast/track-if-name-static-ipv4": {
+    "name": "BFD Passive Session Peer Ip"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv4/multicast-or-unicast-ip/unicast/process-pst-static-unicast-ipv4": {
+    "name": "BFD Passive Session Peer Ip"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv4/multicast-or-unicast-ip/unicast/destination-address-static-unicast-ipv4": {
+    "name": "Destination IP Address"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv4/multicast-or-unicast-ip/unicast/vrf-name-static-unicast-ipv4": {
+    "name": "VPN Instance Name"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv4/multicast-or-unicast-ip/unicast/one-arm-echo-static-unicast-ipv4": {
+    "name": "BFD Passive Session Peer Ip"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv4/multicast-or-unicast-ip/unicast/one-arm-echo-destination-address-static-unicast-ipv4": {
+    "name": "BFD Passive Session Peer Ip"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv4/multicast-or-unicast-ip/unicast/per-link-static-unicast-ipv4": {
+    "name": "Each member link"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv4/multicast-or-unicast-ip/unicast/is-group-static-unicast-ipv4": {
+    "name": "BFD Passive Session Peer Ip"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv6": {
+    "name": "BFD static session for IPv6"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv6/select-board-slot-static-ipv6": {
+    "name": "Slot ID of a Forcibly Selected Board"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv6/select-board-slot2-static-ipv6": {
+    "name": "ID of the slot for second forcible board selection"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv6/min-tx-interval-static-ipv6": {
+    "name": "BFD Passive Session Peer Ip"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv6/min-rx-interval-static-ipv6": {
+    "name": "BFD Passive Session Peer Ip"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv6/min-echo-rx-interval-static-ipv6": {
+    "name": "BFD Passive Session Peer Ip"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv6/local-discriminator-static-ipv6": {
+    "name": "Local Discriminator of a BFD Session"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv6/remote-discriminator-static-ipv6": {
+    "name": "BFD Passive Session Peer Ip"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv6/out-if-name-static-ipv6": {
+    "name": "Outbound Interface Name"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv6/destination-address-static-ipv6": {
+    "name": "Destination IP Address"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv6/source-address-static-ipv6": {
+    "name": "Source IP Address"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv6/vrf-name-static-ipv6": {
+    "name": "BFD Passive Session Peer Ip"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv6/is-set-track-if-static-ipv6": {
+    "name": "BFD Passive Session Peer Ip"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv6/track-if-name-static-ipv6": {
+    "name": "BFD Passive Session Peer Ip"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv6/one-arm-echo-static-ipv6": {
+    "name": "BFD Passive Session Peer Ip"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv6/one-arm-echo-destination-address-static-ipv6": {
+    "name": "BFD Passive Session Peer Ip"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv6/process-pst-static-ipv6": {
+    "name": "BFD Passive Session Peer Ip"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv6/is-group-static-ipv6": {
+    "name": "BFD Passive Session Peer Ip"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ldp-lsp": {
+    "name": "BFD static session for LDP-LSP"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ldp-lsp/min-tx-interval-static-ldp-lsp": {
+    "name": "BFD Passive Session Peer Ip"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ldp-lsp/min-rx-interval-static-ldp-lsp": {
+    "name": "BFD Passive Session Peer Ip"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ldp-lsp/local-discriminator-static-ldp-lsp": {
+    "name": "BFD Passive Session Peer Ip"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ldp-lsp/remote-discriminator-static-ldp-lsp": {
+    "name": "Remote Discriminator"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ldp-lsp/out-if-name-static-ldp-lsp": {
+    "name": "Out interface name"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ldp-lsp/destination-address-static-ldp-lsp": {
+    "name": "BFD Passive Session Peer Ip"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ldp-lsp/next-hop-address-static-ldp-lsp": {
+    "name": "Next Hop IP Address"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ldp-lsp/process-pst-static-ldp-lsp": {
+    "name": "BFD Passive Session Peer Ip"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/auto": {
+    "name": "BFD auto session"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/auto/auto-session-link-type": {
+    "name": "BFD auto session link type"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/auto/auto-session-link-type/ip": {
+    "name": "BFD auto session for IP"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/auto/auto-session-link-type/ip/out-if-name-auto-ip": {
+    "name": "Outbound Interface Name"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/auto/auto-session-link-type/ip/process-pst-auto-ip": {
+    "name": "Enable L2 Proxy"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/auto/auto-session-link-type/ip/address-type": {
+    "name": "Address type of BFD auto session"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/auto/auto-session-link-type/ip/address-type/ipv4": {
+    "name": "BFD auto session for IPv4"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/auto/auto-session-link-type/ip/address-type/ipv4/min-tx-interval-auto-ipv4": {
+    "name": "Enable L2 Proxy"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/auto/auto-session-link-type/ip/address-type/ipv4/min-rx-interval-auto-ipv4": {
+    "name": "Minimum Receive Interval (ms)"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/auto/auto-session-link-type/ip/address-type/ipv4/destination-address-auto-ipv4": {
+    "name": "Destination IP Address"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/auto/auto-session-link-type/ip/address-type/ipv4/source-address-auto-ipv4": {
+    "name": "Enable L2 Proxy"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/auto/auto-session-link-type/ip/address-type/ipv4/vrf-name-auto-ipv4": {
+    "name": "Enable L2 Proxy"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/auto/auto-session-link-type/ip/address-type/ipv4/select-board-slot-auto-ipv4": {
+    "name": "ID of the slot for forcible board selection"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/auto/auto-session-link-type/ip/address-type/ipv4/select-board-slot2-auto-ipv4": {
+    "name": "ID of the slot for second forcible board selection"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/auto/auto-session-link-type/ip/address-type/ipv4/bundle-mode-auto-ipv4": {
+    "name": "Mode of Link-bundle session"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/auto/auto-session-link-type/ip/address-type/ipv4/pis-auto-ipv4": {
+    "name": "Enable/disable update the PIS"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/auto/auto-session-link-type/ip/address-type/ipv4/pis-no-impact-auto-ipv4": {
+    "name": "Enable/disable impact on reboot"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/auto/auto-session-link-type/ip/address-type/ipv6": {
+    "name": "BFD auto session for IPv6"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/auto/auto-session-link-type/ip/address-type/ipv6/min-tx-interval-auto-ipv6": {
+    "name": "Minimum Sending Interval (ms)"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/auto/auto-session-link-type/ip/address-type/ipv6/min-rx-interval-auto-ipv6": {
+    "name": "Enable L2 Proxy"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/auto/auto-session-link-type/ip/address-type/ipv6/destination-address-auto-ipv6": {
+    "name": "Destination IP Address"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/auto/auto-session-link-type/ip/address-type/ipv6/source-address-auto-ipv6": {
+    "name": "Enable L2 Proxy"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/auto/auto-session-link-type/ip/address-type/ipv6/vrf-name-auto-ipv6": {
+    "name": "VPN Instance Name"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/auto/auto-session-link-type/ip/address-type/ipv6/select-board-slot-auto-ipv6": {
+    "name": "ID of the slot for forcible board selection"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/auto/auto-session-link-type/ip/address-type/ipv6/select-board-slot2-auto-ipv6": {
+    "name": "ID of the slot for second forcible board selection"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/auto/auto-session-link-type/ip/address-type/ipv6/bundle-mode-auto-ipv6": {
+    "name": "Mode of Link-bundle session"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/auto/auto-session-link-type/ip/address-type/ipv6/pis-auto-ipv6": {
+    "name": "Enable/disable update the PIS"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/auto/auto-session-link-type/ip/address-type/ipv6/pis-no-impact-auto-ipv6": {
+    "name": "Enable/disable impact on reboot"
+  },
+  "/huawei-bfd:bfd/sessions/session/groups": {
+    "name": "Sub-session List"
+  },
+  "/huawei-bfd:bfd/sessions/session/groups/group": {
+    "name": "Sub-session"
+  },
+  "/huawei-bfd:bfd/sessions/session/groups/group/sub-local-discriminator": {
+    "name": "Local Discriminator of a BFD Session"
+  },
+  "/huawei-bfd:bfd/sessions/session/groups/group/sub-remote-discriminator": {
+    "name": "Remote Discriminator"
+  },
+  "/huawei-bfd:bfd/sessions/session/groups/group/sub-select-slot-id": {
+    "name": "Slot ID of a Forcibly Selected Board"
+  },
+  "/huawei-bfd:bfd/sessions/session/running": {
+    "name": "Session Running Information"
+  },
+  "/huawei-bfd:bfd/sessions/session/running/state": {
+    "name": "Session Status"
+  },
+  "/huawei-bfd:bfd/sessions/session/running/udp-destination-port": {
+    "name": "UDP Destination Port Number"
+  },
+  "/huawei-bfd:bfd/sessions/session/running/detect-mode": {
+    "name": "Detection Mode"
+  },
+  "/huawei-bfd:bfd/sessions/session/running/remote-demand-mode": {
+    "name": "Remote Demand Mode"
+  },
+  "/huawei-bfd:bfd/sessions/session/running/actual-tx-interval": {
+    "name": "Actual Sending Interval (ms)"
+  },
+  "/huawei-bfd:bfd/sessions/session/running/actual-rx-interval": {
+    "name": "Actual Receiving Interval (ms)"
+  },
+  "/huawei-bfd:bfd/sessions/session/running/actual-multiplier": {
+    "name": "Actual Detection Multiplier"
+  },
+  "/huawei-bfd:bfd/sessions/session/running/detect-time": {
+    "name": "Detection Interval (ms)"
+  },
+  "/huawei-bfd:bfd/sessions/session/running/ttl": {
+    "name": "TTL of BFD Packets"
+  },
+  "/huawei-bfd:bfd/sessions/session/running/tx-timer-id": {
+    "name": "Packet Sending Timer"
+  },
+  "/huawei-bfd:bfd/sessions/session/running/detect-timer-id": {
+    "name": "Detect Timer"
+  },
+  "/huawei-bfd:bfd/sessions/session/running/init-timer-id": {
+    "name": "Init Timeout Timer"
+  },
+  "/huawei-bfd:bfd/sessions/session/running/wtr-timer-id": {
+    "name": "WTR Timer"
+  },
+  "/huawei-bfd:bfd/sessions/session/running/not-up-reason": {
+    "name": "Reason Why a Session Cannot Go Up"
+  },
+  "/huawei-bfd:bfd/sessions/session/running/acl-num": {
+    "name": "Number of ACLs"
+  },
+  "/huawei-bfd:bfd/sessions/session/running/local-diag": {
+    "name": "Local Diagnosis"
+  },
+  "/huawei-bfd:bfd/sessions/session/running/echo-tx-timer-id": {
+    "name": "Timer Used for a Session to Send Echo Packets"
+  },
+  "/huawei-bfd:bfd/sessions/session/running/local-discriminator": {
+    "name": "Local Discriminator of a BFD Session"
+  },
+  "/huawei-bfd:bfd/sessions/session/running/remote-discriminator": {
+    "name": "Remote Discriminator"
+  },
+  "/huawei-bfd:bfd/sessions/session/running/min-tx-interval": {
+    "name": "Minimum Sending Interval (ms)"
+  },
+  "/huawei-bfd:bfd/sessions/session/running/min-rx-interval": {
+    "name": "Minimum Receive Interval (ms)"
+  },
+  "/huawei-bfd:bfd/passive-session": {
+    "name": "Entirely Dynamic (Passive)"
+  },
+  "/huawei-bfd:bfd/passive-session/destination-udps": {
+    "name": "List of BFD passive session Dest UDP Port"
+  },
+  "/huawei-bfd:bfd/passive-session/destination-udps/destination-udp": {
+    "name": "Configure the Dest UDP Port"
+  },
+  "/huawei-bfd:bfd/passive-session/destination-udps/destination-udp/peer-ip": {
+    "name": "Destination Address of a Passive BFD Session"
+  },
+  "/huawei-bfd:bfd/passive-session/detect-multipliers": {
+    "name": "List of BFD passive session Pass DM"
+  },
+  "/huawei-bfd:bfd/passive-session/detect-multipliers/detect-multiplier": {
+    "name": "DetectMulti of BFD passive session policy"
+  },
+  "/huawei-bfd:bfd/passive-session/detect-multipliers/detect-multiplier/peer-ip": {
+    "name": "Destination Address of a Passive BFD Session"
+  },
+  "/huawei-bfd:bfd/passive-session/detect-multipliers/detect-multiplier/detect-multiplier": {
+    "name": "Modify the detectMulti of BFD passive session"
+  },
+  "/huawei-bfd:bfd/discriminator-use": {
+    "name": "BFD Reserved Discriminator Number"
+  },
+  "/huawei-bfd:bfd/discriminator-use/reserved-num": {
+    "name": "Number of reserved discriminators"
+  },
+  "/huawei-bfd:bfd/discriminator-use/reserved-discriminators": {
+    "name": "Operational state of reserving local discriminator"
+  },
+  "/huawei-bfd:bfd/discriminator-use/is-used": {
+    "name": "Operational state of discriminator using flag"
+  },
+  "/huawei-bfd:bfd/discriminator-use/is-used/local-discriminator": {
+    "name": "Local Discriminator of a BFD Session"
+  },
+  "/huawei-bfd:bfd/discriminator-use/is-used/is-used": {
+    "name": "Local discriminator use flag"
+  },
+  "/huawei-bfd:bfd/sbfd": {
+    "name": "Global SBFD Information"
+  },
+  "/huawei-bfd:bfd/sbfd/discriminator-maps": {
+    "name": "Relation between SBFD discriminator and IP"
+  },
+  "/huawei-bfd:bfd/sbfd/discriminator-maps/discriminator-map": {
+    "name": "Relation between SBFD discriminator and IP"
+  },
+  "/huawei-bfd:bfd/sbfd/discriminator-maps/discriminator-map/peer-ip": {
+    "name": "SBFD Destination IP Address"
+  },
+  "/huawei-bfd:bfd/sbfd/discriminator-maps/discriminator-map/remote-discriminator": {
+    "name": "SBFD reflector integer type discriminator"
+  },
+  "/huawei-bfd:bfd/sbfd/reflector-discriminator-ids": {
+    "name": "List of SBFD reflector discriminator"
+  },
+  "/huawei-bfd:bfd/sbfd/reflector-discriminator-ids/reflector-discriminator-id": {
+    "name": "SBFD reflector integer type discriminator"
+  },
+  "/huawei-bfd:bfd/sbfd/reflector-discriminator-ids/reflector-discriminator-id/discriminator-id": {
+    "name": "SBFD reflector integer type discriminator"
+  },
+  "/huawei-bfd:bfd/sbfd/reflector-discriminator-ips": {
+    "name": "SBFD Reflector IP Type Discriminator List"
+  },
+  "/huawei-bfd:bfd/sbfd/reflector-discriminator-ips/reflector-discriminator-ip": {
+    "name": "SBFD Reflector IP Type Discriminator"
+  },
+  "/huawei-bfd:bfd/sbfd/reflector-discriminator-ips/reflector-discriminator-ip/discriminator-ip": {
+    "name": "SBFD Reflector IP Type Discriminator"
+  },
+  "/huawei-bfd:bfd/sbfd/reflector-discriminators": {
+    "name": "SBFD reflector discriminator information"
+  },
+  "/huawei-bfd:bfd/sbfd/reflector-discriminators/reflector-discriminator": {
+    "name": "SBFD reflector discriminator information"
+  },
+  "/huawei-bfd:bfd/sbfd/reflector-discriminators/reflector-discriminator/reflector-discriminator-id": {
+    "name": "SBFD reflector integer type information"
+  },
+  "/huawei-bfd:bfd/sbfd/reflector-discriminators/reflector-discriminator/reflector-discriminator-ip": {
+    "name": "SBFD reflector IP type information"
+  },
+  "/huawei-bfd:bfd/sbfd/reflector-discriminators/reflector-discriminator/discriminator-state": {
+    "name": "SBFD reflector station information"
+  },
+  "/huawei-bfd:bfd/sbfd/reflector-discriminators/reflector-discriminator/create-type": {
+    "name": "SBFD reflector discriminator create type"
+  },
+  "/huawei-bfd:bfd/authentication-keys": {
+    "name": "BFD authentication information"
+  },
+  "/huawei-bfd:bfd/authentication-keys/authentication-key": {
+    "name": "BFD authentication information"
+  },
+  "/huawei-bfd:bfd/authentication-keys/authentication-key/peer-ip": {
+    "name": "Destination address of BFD authentication"
+  },
+  "/huawei-bfd:bfd/authentication-keys/authentication-key/vpn-name": {
+    "name": "VPN Name of BFD authentication"
+  },
+  "/huawei-bfd:bfd/authentication-keys/authentication-key/session-type": {
+    "name": "Session type of BFD authentication"
+  },
+  "/huawei-bfd:bfd/authentication-keys/authentication-key/auth-algorithm": {
+    "name": "BFD session authentication mode"
+  },
+  "/huawei-bfd:bfd/authentication-keys/authentication-key/key-id": {
+    "name": "Key ID of BFD authentication"
+  },
+  "/huawei-bfd:bfd/authentication-keys/authentication-key/cipher-string": {
+    "name": "Authentication password"
+  },
+  "/huawei-bfd:bfd/statistics": {
+    "name": "Global BFD Statistics"
+  },
+  "/huawei-bfd:bfd/statistics/inner-state": {
+    "name": "HA Status of BFD Components"
+  },
+  "/huawei-bfd:bfd/statistics/ip-session-num": {
+    "name": "IP Sessions"
+  },
+  "/huawei-bfd:bfd/statistics/ldp-lsp-session-num": {
+    "name": "LDP LSP Sessions"
+  },
+  "/huawei-bfd:bfd/statistics/static-lsp-session-num": {
+    "name": "Static LSP Sessions"
+  },
+  "/huawei-bfd:bfd/statistics/te-lsp-session-num": {
+    "name": "TE LSP Sessions"
+  },
+  "/huawei-bfd:bfd/statistics/total-session-num": {
+    "name": "BFD Sessions"
+  },
+  "/huawei-bfd:bfd/statistics/session-up-num": {
+    "name": "Up Sessions"
+  },
+  "/huawei-bfd:bfd/statistics/session-down-num": {
+    "name": "Down Sessions"
+  },
+  "/huawei-bfd:bfd/statistics/static-session-num": {
+    "name": "Static Sessions"
+  },
+  "/huawei-bfd:bfd/statistics/dyn-session-num": {
+    "name": "Dynamic Sessions"
+  },
+  "/huawei-bfd:bfd/statistics/auto-session-num": {
+    "name": "Static Auto-Nego Sessions"
+  },
+  "/huawei-bfd:bfd/statistics/passive-session-num": {
+    "name": "Entirely Dynamic Sessions"
+  },
+  "/huawei-bfd:bfd/statistics/te-tunnel-session-num": {
+    "name": "TE Tunnel Sessions"
+  },
+  "/huawei-bfd:bfd/statistics/used-discriminator-num": {
+    "name": "Used Session IDs"
+  },
+  "/huawei-bfd:bfd/statistics/pw-session-num": {
+    "name": "PW Sessions"
+  },
+  "/huawei-bfd:bfd/statistics/vsi-pw-session-num": {
+    "name": "VSI PW Sessions"
+  },
+  "/huawei-bfd:bfd/statistics/ldp-tunnel-session-num": {
+    "name": "LDP Tunnel Sessions"
+  },
+  "/huawei-bfd:bfd/statistics/bgp-tunnel-session-num": {
+    "name": "BGP Tunnel Sessions"
+  },
+  "/huawei-bfd:bfd/statistics/vxlan-session-num": {
+    "name": "BFD Passive Session Peer Ip"
+  },
+  "/huawei-bfd:bfd/statistics/srbe-tunnel-session-num": {
+    "name": "SR-BE Tunnel Sessions"
+  },
+  "/huawei-bfd:bfd/statistics/main-session-up-num": {
+    "name": "BFD Passive Session Peer Ip"
+  },
+  "/huawei-bfd:bfd/statistics/main-session-down-num": {
+    "name": "BFD Passive Session Peer Ip"
+  },
+  "/huawei-bfd:bfd/statistics/sub-session-up-num": {
+    "name": "BFD Passive Session Peer Ip"
+  },
+  "/huawei-bfd:bfd/statistics/sub-session-down-num": {
+    "name": "BFD Passive Session Peer Ip"
+  },
+  "/huawei-bfd:bfd/statistics/used-bfd-res-num": {
+    "name": "Number of BFD resources in use"
+  },
+  "/huawei-bfd:bfd/statistics/max-bfd-res-num": {
+    "name": "Maximum number of BFD resources"
+  },
+  "/huawei-bfd:bfd/statistics/max-crc-session-num": {
+    "name": "Maximum number of BFD sessions"
+  },
+  "/huawei-bfd:bfd/statistics/current-crc-session-num": {
+    "name": "Current number of BFD sessions"
+  },
+  "/huawei-bfd:bfd/statistics/sid-list-session-num": {
+    "name": "BFD Passive Session Peer Ip"
+  },
+  "/huawei-bfd:bfd/statistics/sbfd-ref-session-num": {
+    "name": "Number of S-BFD sessions"
+  },
+  "/huawei-bfd:bfd/statistics/p2mp-session-num": {
+    "name": "Number of BFD for P2MP sessions"
+  },
+  "/huawei-bfd:bfd/all-sessions": {
+    "name": "All BFD Sessions"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session": {
+    "name": "All BFD Sessions"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/name": {
+    "name": "BFD Session Name"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/create-type": {
+    "name": "Creation Type"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/type": {
+    "name": "Session Type"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/local-discriminator": {
+    "name": "Local Discriminator of a BFD Session"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/remote-discriminator": {
+    "name": "Remote Discriminator"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/link-type": {
+    "name": "Session Link Type"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/destination-address": {
+    "name": "Destination IP Address"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/source-address": {
+    "name": "Source IP Address"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/next-hop": {
+    "name": "Next Hop IP Address"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/out-if-name": {
+    "name": "Outbound interface name"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/vrf-name": {
+    "name": "VPN Instance Name"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/tunnel-name": {
+    "name": "Tunnel Name"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/te-backup": {
+    "name": "Secondary TE-LSP"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/min-tx-interval": {
+    "name": "Minimum Sending Interval (ms)"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/min-rx-interval": {
+    "name": "Minimum Receive Interval (ms)"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/detect-multiplier": {
+    "name": "Detection Multiplier"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/demand-enable": {
+    "name": "Enabling the Demand Mode"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/wtr-timer-int": {
+    "name": "WTR (ms)"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/tos-exp": {
+    "name": "Packets Priority"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/shut-down": {
+    "name": "Administrator Down"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/description": {
+    "name": "Description"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/config-pst": {
+    "name": "Configure PST"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/process-pst": {
+    "name": "Operate PST"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/pis": {
+    "name": "Process Interface Status"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/bind-application": {
+    "name": "Binding a Session to an Application"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/fsm-board-slot": {
+    "name": "Board Selection Number"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/pw-ttl-mode": {
+    "name": "PW TTL Mode"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/pw-ttl": {
+    "name": "PW TTL"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/node": {
+    "name": "PW Node"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/encap-type": {
+    "name": "Encapsulation Type"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/track-interface": {
+    "name": "Track Interface"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/local-vc-label": {
+    "name": "Local VC Label"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/remote-vc-label": {
+    "name": "Remote VC Label"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/swap-vc-label": {
+    "name": "Swap VC Label"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/lsp-token": {
+    "name": "LSP Token"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/vsi-name": {
+    "name": "VSI Name"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/vsi-peer-address": {
+    "name": "VSI Peer IP Address"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/vc-id": {
+    "name": "VC ID"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/remote-peer": {
+    "name": "Remote Peer"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/pw-secondary": {
+    "name": "Secondary PW"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/dot1q-vid": {
+    "name": "VLAN ID of Dot1q Sub-if"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/qinq-pe-vid": {
+    "name": "Outer VLAN ID of a QinQ Packet"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/qinq-ce-vid": {
+    "name": "In VLAN ID of QinQ Sub-if"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/echo-passive": {
+    "name": "Passive Echo Enable State"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/basic-acl-num": {
+    "name": "ACL Number"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/min-echo-rx-int": {
+    "name": "Rec Int of One-Arm Ech (ms)"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/lag": {
+    "name": "LAG Detection Flag"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/main-sub-role": {
+    "name": "Role of session"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/bundle-mode": {
+    "name": "Mode of Link-bundle session"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/color": {
+    "name": "Color"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/segment-list-id": {
+    "name": "Segment List ID"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/running": {
+    "name": "BFD Session Running Info"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/running/state": {
+    "name": "Status"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/running/udp-destination-port": {
+    "name": "UDP Destination Port Number"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/running/detect-mode": {
+    "name": "Detection Mode"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/running/remote-demand-mode": {
+    "name": "Remote Demand Mode"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/running/actual-tx-interval": {
+    "name": "Actual Sending Interval (ms)"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/running/actual-rx-interval": {
+    "name": "Actual Receiving Interval (ms)"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/running/actual-multiplier": {
+    "name": "Actual Detection Multiplier"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/running/detect-time": {
+    "name": "Detection Interval (ms)"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/running/ttl": {
+    "name": "TTL"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/running/tx-timer-id": {
+    "name": "Packet Sending Timer"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/running/detect-timer-id": {
+    "name": "Detect Timer"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/running/init-timer-id": {
+    "name": "Session Init Timeout Timer"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/running/wtr-timer-id": {
+    "name": "Session WTR Timer"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/running/not-up-reason": {
+    "name": "Session Not Up Reason"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/running/acl-num": {
+    "name": "Session ACL Number"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/running/local-diag": {
+    "name": "Local Diagnosis"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/running/echo-tx-timer-id": {
+    "name": "Enable L2 Proxy"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/running/local-discriminator": {
+    "name": "Local Discriminator"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/running/remote-discriminator": {
+    "name": "Remote Discriminator"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/running/min-tx-interval": {
+    "name": "Minimum Send Interval (ms)"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/running/min-rx-interval": {
+    "name": "Minimum Receive Interval (ms)"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/statistics": {
+    "name": "BFD Session Statistics"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/statistics/last-down-time": {
+    "name": "Last Down Time"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/statistics/time-from-down": {
+    "name": "Time From Last Down"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/statistics/create-time": {
+    "name": "Creation Time"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/statistics/time-from-create": {
+    "name": "Creation Duration"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/statistics/last-up-time": {
+    "name": "Last Up Time"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/statistics/time-from-up": {
+    "name": "Time From Up"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/statistics/receive-packet": {
+    "name": "Received Packets"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/statistics/send-packet": {
+    "name": "Sent Packets"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/statistics/down-count": {
+    "name": "Down Sessions"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/statistics/receive-bad-packet": {
+    "name": "Received Bad Packets"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/statistics/send-bad-packet": {
+    "name": "Sent Bad Packets"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/statistics/short-break-count": {
+    "name": "Short Breaks"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/statistics/lsp-ping-count": {
+    "name": "Sent LSP Ping Packets"
+  },
+  "/huawei-bfd:bfd/bind-interfaces": {
+    "name": "Information between BFD and interface"
+  },
+  "/huawei-bfd:bfd/bind-interfaces/bind-interface": {
+    "name": "Information between BFD and interface"
+  },
+  "/huawei-bfd:bfd/bind-interfaces/bind-interface/if-name": {
+    "name": "Interface Name"
+  },
+  "/huawei-bfd:bfd/bind-interfaces/bind-interface/session-count": {
+    "name": "BFD session statistics"
+  },
+  "/huawei-bfd:bfd/bind-interfaces/bind-interface/if-oper-status": {
+    "name": "Operating status"
+  },
+  "/huawei-bfd:bfd/crc-lsp-sessions": {
+    "name": "All LSP CRC-ERR Sessions"
+  },
+  "/huawei-bfd:bfd/crc-lsp-sessions/crc-lsp-session": {
+    "name": "LSP CRC-ERR session information"
+  },
+  "/huawei-bfd:bfd/crc-lsp-sessions/crc-lsp-session/ingress-lsr-id": {
+    "name": "ID of an ingress LSR"
+  },
+  "/huawei-bfd:bfd/crc-lsp-sessions/crc-lsp-session/tunnel-id": {
+    "name": "Tunnel ID"
+  },
+  "/huawei-bfd:bfd/crc-lsp-sessions/crc-lsp-session/lsp-id": {
+    "name": "LSP ID"
+  },
+  "/huawei-bfd:bfd/crc-lsp-sessions/crc-lsp-session/session-type": {
+    "name": "Type of CRC-ERR sessions"
+  },
+  "/huawei-bfd:bfd/crc-lsp-sessions/crc-lsp-session/fault-type": {
+    "name": "Fault type"
+  },
+  "/huawei-bfd:bfd/crc-lsp-sessions/crc-lsp-session/tunnel-name": {
+    "name": "Tunnel Name"
+  },
+  "/huawei-bfd:bfd/crc-lsp-sessions/crc-lsp-session/lsp-role": {
+    "name": "LSP role"
+  },
+  "/huawei-bfd:bfd/crc-lsp-sessions/crc-lsp-session/out-if-name": {
+    "name": "Outbound interface name"
+  },
+  "/huawei-bfd:bfd/crc-lsp-sessions/crc-lsp-session/lsp-token": {
+    "name": "LSP token"
+  },
+  "/huawei-bfd:bfd/crc-lsp-sessions/crc-lsp-session/fsm-board-id": {
+    "name": "Number of board selection for a BFD session"
+  },
+  "/huawei-bfd:bfd/crc-lsp-sessions/crc-lsp-session/min-tx-interval": {
+    "name": "Minimum Sending Interval (ms)"
+  },
+  "/huawei-bfd:bfd/crc-lsp-sessions/crc-lsp-session/max-tx-interval": {
+    "name": "Maximum interval"
+  },
+  "/huawei-bfd:bfd/crc-lsp-sessions/crc-lsp-session/actual-tx-interval": {
+    "name": "Actual interval"
+  },
+  "/huawei-bfd:bfd/crc-lsp-sessions/crc-lsp-session/detect-multiplier": {
+    "name": "Detection Multiplier"
+  },
+  "/huawei-bfd:bfd/crc-lsp-sessions/crc-lsp-session/source-address": {
+    "name": "Source IP address"
+  },
+  "/huawei-bfd:bfd/crc-lsp-sessions/crc-lsp-session/destination-address": {
+    "name": "Destination IP address"
+  },
+  "/huawei-bfd:bfd/crc-lsp-sessions/crc-lsp-session/dest-port": {
+    "name": "Destination port number"
+  },
+  "/huawei-bfd:bfd/crc-lsp-sessions/crc-lsp-session/tos-exp": {
+    "name": "Priority of a packet"
+  },
+  "/huawei-bfd:bfd/crc-lsp-sessions/crc-lsp-session/lsp-inbount-interfaces": {
+    "name": "Statistics of inbound interface"
+  },
+  "/huawei-bfd:bfd/crc-sec-sessions": {
+    "name": "Information about all section CRC-ERR sessions"
+  },
+  "/huawei-bfd:bfd/crc-sec-sessions/crc-sec-session": {
+    "name": "Information about a section CRC-ERR session"
+  },
+  "/huawei-bfd:bfd/crc-sec-sessions/crc-sec-session/if-name": {
+    "name": "Interface name"
+  },
+  "/huawei-bfd:bfd/crc-sec-sessions/crc-sec-session/session-type": {
+    "name": "Type of a CRC-ERR session"
+  },
+  "/huawei-bfd:bfd/crc-sec-sessions/crc-sec-session/fault-type": {
+    "name": "Fault type"
+  },
+  "/huawei-bfd:bfd/crc-sec-sessions/crc-sec-session/fsm-board-id": {
+    "name": "Number of board selection for a BFD session"
+  },
+  "/huawei-bfd:bfd/crc-sec-sessions/crc-sec-session/min-tx-interval": {
+    "name": "Minimum Sending Interval (ms)"
+  },
+  "/huawei-bfd:bfd/crc-sec-sessions/crc-sec-session/max-tx-interval": {
+    "name": "Maximum interval"
+  },
+  "/huawei-bfd:bfd/crc-sec-sessions/crc-sec-session/actual-tx-interval": {
+    "name": "Actual interval"
+  },
+  "/huawei-bfd:bfd/crc-sec-sessions/crc-sec-session/detect-multiplier": {
+    "name": "Detection Multiplier"
+  },
+  "/huawei-bfd:bfd/crc-sec-sessions/crc-sec-session/destination-address": {
+    "name": "Destination IP address"
+  },
+  "/huawei-bfd:bfd/crc-sec-sessions/crc-sec-session/dest-port": {
+    "name": "Destination port number"
+  },
+  "/huawei-bfd:bfd/crc-sec-sessions/crc-sec-session/tos-exp": {
+    "name": "Priority of a packet"
+  },
+  "/huawei-bfd:bfd/crc-ip-sessions": {
+    "name": "All IP CRC-ERR sessions information"
+  },
+  "/huawei-bfd:bfd/crc-ip-sessions/crc-ip-session": {
+    "name": "IP CRC-ERR Session"
+  },
+  "/huawei-bfd:bfd/crc-ip-sessions/crc-ip-session/if-name": {
+    "name": "Interface name"
+  },
+  "/huawei-bfd:bfd/crc-ip-sessions/crc-ip-session/destination-address": {
+    "name": "Destination IP Address"
+  },
+  "/huawei-bfd:bfd/crc-ip-sessions/crc-ip-session/source-address": {
+    "name": "Source IP address of a CRC-ERR session"
+  },
+  "/huawei-bfd:bfd/crc-ip-sessions/crc-ip-session/dest-port": {
+    "name": "Destination port number of a CRC-ERR session"
+  },
+  "/huawei-bfd:bfd/crc-ip-sessions/crc-ip-session/session-type": {
+    "name": "Type of a CRC-ERR session"
+  },
+  "/huawei-bfd:bfd/crc-ip-sessions/crc-ip-session/fault-type": {
+    "name": "Fault type"
+  },
+  "/huawei-bfd:bfd/crc-ip-sessions/crc-ip-session/fsm-board-id": {
+    "name": "Number of board selection for a BFD session"
+  },
+  "/huawei-bfd:bfd/crc-ip-sessions/crc-ip-session/min-tx-interval": {
+    "name": "Minimum interval"
+  },
+  "/huawei-bfd:bfd/crc-ip-sessions/crc-ip-session/max-tx-interval": {
+    "name": "Maximum interval"
+  },
+  "/huawei-bfd:bfd/crc-ip-sessions/crc-ip-session/actual-tx-interval": {
+    "name": "Actual interval"
+  },
+  "/huawei-bfd:bfd/crc-ip-sessions/crc-ip-session/detect-multiplier": {
+    "name": "Detection Multiplier"
+  },
+  "/huawei-bfd:bfd/crc-ip-sessions/crc-ip-session/tos-exp": {
+    "name": "Priority of a packet"
+  },
+  "/huawei-bfd:bfd/crc-ip-sessions/crc-ip-session/vrf-name": {
+    "name": "VPN name"
+  },
+  "/huawei-bfd:bfd/crc-ip-sessions/crc-ip-session/local-bit-err-rate": {
+    "name": "Local Bit Err Rate"
+  },
+  "/huawei-bfd:bfd/crc-ip-sessions/crc-ip-session/remote-bit-err-rate": {
+    "name": "Remote Bit Err Rate"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions": {
+    "name": "List of all BFD for P2MP sessions"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session": {
+    "name": "BFD for P2MP Sessions"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/session-name": {
+    "name": "Name of a BFD session"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/local-discriminator": {
+    "name": "Local discriminator of a BFD session"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/create-type": {
+    "name": "Creation Type"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/session-type": {
+    "name": "Type of a BFD session"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/multicast-session-type": {
+    "name": "Type of a multicast session"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/p2mp-id": {
+    "name": "P2MP ID"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/p2mp-ingress-lsr-id": {
+    "name": "ID of an ingress LSR"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/p2mp-tunnel-id": {
+    "name": "P2MP Tunnel ID"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/root-ip": {
+    "name": "ROOT IP"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/lsp-id": {
+    "name": "MLDP P2MP LSPID"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/opaque-id": {
+    "name": "MLDP OPAQUE ID"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/remote-discriminator": {
+    "name": "Remote Discriminator"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/link-type": {
+    "name": "Type of the link detected by a BFD session"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/destination-address": {
+    "name": "Destination IP Address"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/min-tx-interval": {
+    "name": "Minimum interval"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/min-rx-interval": {
+    "name": "Minimum interval"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/detect-multiplier": {
+    "name": "Detection multiplier"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/tos-exp": {
+    "name": "Priority of a packet"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/description": {
+    "name": "Description"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/bind-application": {
+    "name": "Information about the application"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/fsm-board-slot": {
+    "name": "Board Selection Number"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/track-interface": {
+    "name": "Track Interface"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/multi-cast-session-running": {
+    "name": "Information about a BFD session"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/multi-cast-session-running/session-state": {
+    "name": "Status of a BFD session"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/multi-cast-session-running/udp-dst-port": {
+    "name": "Destination port number"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/multi-cast-session-running/detect-mode": {
+    "name": "Actual detection mode for a BFD session"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/multi-cast-session-running/re-demand-mode": {
+    "name": "Whether the remote end is in demand mode"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/multi-cast-session-running/act-tx-interval": {
+    "name": "Actual Sending Interval (ms)"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/multi-cast-session-running/act-rx-interval": {
+    "name": "Actual interval"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/multi-cast-session-running/act-multiplier": {
+    "name": "Actual detection multiplier"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/multi-cast-session-running/detect-time": {
+    "name": "Detection interval"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/multi-cast-session-running/ttl": {
+    "name": "Time to live (TTL) value of BFD packets"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/multi-cast-session-running/tx-timer-id": {
+    "name": "Packet Sending Timer"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/multi-cast-session-running/detect-timer-id": {
+    "name": "Detect timer of a BFD session"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/multi-cast-session-running/init-timer-id": {
+    "name": "Init timeout timer of a BFD session"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/multi-cast-session-running/wtr-timer-id": {
+    "name": "WTR timer of a BFD session"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/multi-cast-session-running/not-up-reason": {
+    "name": "Reason Why a Session Cannot Go Up"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/multi-cast-session-running/acl-num": {
+    "name": "Number of ACLs"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/multi-cast-session-running/local-diag": {
+    "name": "Reason why a BFD session becomes Down last time"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/multi-cast-session-running/echo-tx-timer-id": {
+    "name": "Sending timer of a BFD session with Echo"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/multi-cast-session-running/remote-discriminator": {
+    "name": "Remote discriminator of a BFD session"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/multi-cast-session-running/min-tx-interval": {
+    "name": "Minimum Sending Interval (ms)"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/multi-cast-session-running/min-rx-interval": {
+    "name": "Minimum Receive Interval (ms)"
+  },
+  "/huawei-bfd:bfd/bfd-bundle-sessions": {
+    "name": "Bundle Sessions"
+  },
+  "/huawei-bfd:bfd/bfd-bundle-sessions/bfd-bundle-session": {
+    "name": "Bundle Sessions"
+  },
+  "/huawei-bfd:bfd/bfd-bundle-sessions/bfd-bundle-session/local-discriminator": {
+    "name": "Local discriminator"
+  },
+  "/huawei-bfd:bfd/bfd-bundle-sessions/bfd-bundle-session/remote-discriminator": {
+    "name": "Remote discriminator"
+  },
+  "/huawei-bfd:bfd/bfd-bundle-sessions/bfd-bundle-session/session-name": {
+    "name": "BFD Session Name"
+  },
+  "/huawei-bfd:bfd/bfd-bundle-sessions/bfd-bundle-session/main-sub-role": {
+    "name": "Role of session"
+  },
+  "/huawei-bfd:bfd/bfd-bundle-sessions/bfd-bundle-session/main-session-name": {
+    "name": "Main Session Name"
+  },
+  "/huawei-bfd:bfd/bfd-bundle-sessions/bfd-bundle-session/state": {
+    "name": "Session Status"
+  },
+  "/huawei-bfd:bfd/bfd-bundle-sessions/bfd-bundle-session/detect-mode": {
+    "name": "Detection Mode"
+  },
+  "/huawei-bfd:bfd/bfd-bundle-sessions/bfd-bundle-session/create-type": {
+    "name": "Creation Type"
+  },
+  "/huawei-bfd:bfd/bfd-bundle-sessions/bfd-bundle-session/link-type": {
+    "name": "Detected Link Type"
+  },
+  "/huawei-bfd:bfd/bfd-bundle-sessions/bfd-bundle-session/destination-address": {
+    "name": "Destination IP Address"
+  },
+  "/huawei-bfd:bfd/bfd-bundle-sessions/bfd-bundle-session/source-address": {
+    "name": "Source IP Address"
+  },
+  "/huawei-bfd:bfd/bfd-bundle-sessions/bfd-bundle-session/fsm-board-slot": {
+    "name": "Board Selection Number"
+  },
+  "/huawei-bfd:bfd/bfd-bundle-sessions/bfd-bundle-session/tos-exp": {
+    "name": "Packet Priority"
+  },
+  "/huawei-bfd:bfd/bfd-bundle-sessions/bfd-bundle-session/min-tx-interval": {
+    "name": "Minimum Sending Interval (Millisecond)"
+  },
+  "/huawei-bfd:bfd/bfd-bundle-sessions/bfd-bundle-session/min-rx-interval": {
+    "name": "Minimum Receive Interval (ms)"
+  },
+  "/huawei-bfd:bfd/bfd-bundle-sessions/bfd-bundle-session/detect-multiplier": {
+    "name": "Detection Multiplier"
+  },
+  "/huawei-bfd:bfd/bfd-bundle-sessions/bfd-bundle-session/act-tx-interval": {
+    "name": "Actual Sending Interval (ms)"
+  },
+  "/huawei-bfd:bfd/bfd-bundle-sessions/bfd-bundle-session/act-rx-interval": {
+    "name": "Actual Receiving Interval (ms)"
+  },
+  "/huawei-bfd:bfd/bfd-bundle-sessions/bfd-bundle-session/act-detect-multiplier": {
+    "name": "Actual Detection Multiplier"
+  },
+  "/huawei-bfd:bfd/bfd-bundle-sessions/bfd-bundle-session/detect-time": {
+    "name": "Detection Interval (ms)"
+  },
+  "/huawei-bfd:bfd/bfd-bundle-sessions/bfd-bundle-session/dest-port": {
+    "name": "UDP Destination Port Number"
+  },
+  "/huawei-bfd:bfd/bfd-bundle-sessions/bfd-bundle-session/wtr-timer-int": {
+    "name": "WTR (Millisecond)"
+  },
+  "/huawei-bfd:bfd/bfd-bundle-sessions/bfd-bundle-session/local-diag": {
+    "name": "Local Diagnosis"
+  },
+  "/huawei-bfd:bfd/bfd-bundle-sessions/bfd-bundle-session/bind-application": {
+    "name": "Session Binding Application"
+  },
+  "/huawei-bfd:bfd/bfd-bundle-sessions/bfd-bundle-session/sub-session-count": {
+    "name": "Number of Sub Session"
+  },
+  "/huawei-bfd:bfd/bfd-bundle-sessions/bfd-bundle-session/out-if-name": {
+    "name": "Outbound interface name"
+  },
+  "/huawei-bfd:bfd/bfd-bundle-sessions/bfd-bundle-session/bundle-mode": {
+    "name": "Mode of Link-bundle session"
+  },
+  "/huawei-bfd:bfd/bfd-bundle-sessions/bfd-bundle-session/vrf-name": {
+    "name": "VPN Instance Name"
+  },
+  "/huawei-bfd:bfd/bfd-bundle-sessions/bfd-bundle-session/disp-session-type": {
+    "name": "Session Type"
+  },
+  "/huawei-bfd:bfd/bfd-bundle-sessions/bfd-bundle-session/te-backup": {
+    "name": "Whether an LSP link is a backup TE LSP"
+  },
+  "/huawei-bfd:bfd/bfd-bundle-sessions/bfd-bundle-session/tunnel-id": {
+    "name": "Tunnel ID"
+  },
+  "/huawei-bfd:bfd/bfd-bundle-sessions/bfd-bundle-session/pw-secondary": {
+    "name": "Secondary PW"
+  },
+  "/huawei-bfd:bfd/bfd-bundle-sessions/bfd-bundle-session/vsi-name": {
+    "name": "VSI name"
+  },
+  "/huawei-bfd:change-session-board": {
+    "name": "Manually migrates BFD sessions to another board"
+  },
+  "/huawei-bfd:change-session-board/input/local-discriminator": {
+    "name": "Local Discriminator"
+  },
+  "/huawei-bfd:change-session-board/input/select-slot-id": {
+    "name": "Slot ID of the target board"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-bfd:bfd": {
+    "name": "BFD"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-bfd:bfd/enable-trunk-crc-bit-error": {
+    "name": "Enable bit error detection"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-bfd:bfd/enable-trigger-if-down": {
+    "name": "Enable BFD trigger interface down"
+  },
+  "/rpcs/huawei-bfd:bfd/change-session-board": {
+    "name": "Manually migrates BFD sessions to another board"
+  }
+}

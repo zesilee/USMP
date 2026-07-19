@@ -1,0 +1,413 @@
+{
+  "/huawei-syslog:syslog": {
+    "name": "Syslog"
+  },
+  "/huawei-syslog:syslog/servers": {
+    "name": "Login Authentication Banner File"
+  },
+  "/huawei-syslog:syslog/servers/server": {
+    "name": "Log Server"
+  },
+  "/huawei-syslog:syslog/servers/server/ip-type": {
+    "name": "Login Authentication Banner Text"
+  },
+  "/huawei-syslog:syslog/servers/server/ipaddress": {
+    "name": "Log Server Address"
+  },
+  "/huawei-syslog:syslog/servers/server/is-default-vpn": {
+    "name": "Use Default VPN or Not"
+  },
+  "/huawei-syslog:syslog/servers/server/vrf-name": {
+    "name": "Start Session Banner File"
+  },
+  "/huawei-syslog:syslog/servers/server/host-name": {
+    "name": "Host name"
+  },
+  "/huawei-syslog:syslog/servers/server/is-activated": {
+    "name": "Enable the log host"
+  },
+  "/huawei-syslog:syslog/servers/server/level": {
+    "name": "Log Server Level"
+  },
+  "/huawei-syslog:syslog/servers/server/port": {
+    "name": "Number of a port"
+  },
+  "/huawei-syslog:syslog/servers/server/facility": {
+    "name": "Log Record Tool"
+  },
+  "/huawei-syslog:syslog/servers/server/channel-id": {
+    "name": "Channel Number"
+  },
+  "/huawei-syslog:syslog/servers/server/channel-name": {
+    "name": "Channel Name"
+  },
+  "/huawei-syslog:syslog/servers/server/timestamp": {
+    "name": "Log Server Timestamp"
+  },
+  "/huawei-syslog:syslog/servers/server/transport-mode": {
+    "name": "Transport Mode"
+  },
+  "/huawei-syslog:syslog/servers/server/ssl-policy-name": {
+    "name": "SSL Policy Name"
+  },
+  "/huawei-syslog:syslog/servers/server/source-ip": {
+    "name": "Syslog Source IP Address"
+  },
+  "/huawei-syslog:syslog/servers/server/dns-identifier-name": {
+    "name": "DNS Identifier Name"
+  },
+  "/huawei-syslog:syslog/servers/server/is-security-only": {
+    "name": "Syslog Support Security Log"
+  },
+  "/huawei-syslog:syslog/servers/server/facility-mask": {
+    "name": "Configure facility of the syslog host"
+  },
+  "/huawei-syslog:syslog/servers/server/severity-mask": {
+    "name": "Configure Severity of Logs"
+  },
+  "/huawei-syslog:syslog/servers/server/is-brief-format": {
+    "name": "Syslog Brief Format"
+  },
+  "/huawei-syslog:syslog/global-parameter": {
+    "name": "Group Name"
+  },
+  "/huawei-syslog:syslog/global-parameter/info-center-enable": {
+    "name": "RADIUS Server Timeout Value (s)"
+  },
+  "/huawei-syslog:syslog/global-parameter/buffer-size": {
+    "name": "Authentication Timeout Interval (s)"
+  },
+  "/huawei-syslog:syslog/global-parameter/suppress-enable": {
+    "name": "Accounting Timeout Interval (s)"
+  },
+  "/huawei-syslog:syslog/global-parameter/log-timestamp": {
+    "name": "Attribute Translation Enabled"
+  },
+  "/huawei-syslog:syslog/global-parameter/trap-timestamp": {
+    "name": "NAS IP Address"
+  },
+  "/huawei-syslog:syslog/global-parameter/debug-timestamp": {
+    "name": "Domain Mode"
+  },
+  "/huawei-syslog:syslog/global-parameter/interface-name": {
+    "name": "RADIUS IPV4 Server Configuration"
+  },
+  "/huawei-syslog:syslog/global-parameter/logbuffer-enable": {
+    "name": "Server IPV4 Address"
+  },
+  "/huawei-syslog:syslog/global-parameter/trapbuffer-enable": {
+    "name": "Server Mode"
+  },
+  "/huawei-syslog:syslog/global-parameter/trapbuffer-size": {
+    "name": "Shared Key"
+  },
+  "/huawei-syslog:syslog/global-parameter/packet-priority": {
+    "name": "RADIUS IPV6 Server List"
+  },
+  "/huawei-syslog:syslog/global-parameter/source-port": {
+    "name": "IPV6 serverType"
+  },
+  "/huawei-syslog:syslog/global-parameter/log-none-timezone": {
+    "name": "Server Port"
+  },
+  "/huawei-syslog:syslog/global-parameter/trap-none-timezone": {
+    "name": "Syslog security log"
+  },
+  "/huawei-syslog:syslog/global-parameter/debug-none-timezone": {
+    "name": "Log Name Information Table"
+  },
+  "/huawei-syslog:syslog/global-parameter/delay-suppress-enable": {
+    "name": "Log Name Information"
+  },
+  "/huawei-syslog:syslog/global-parameter/event-logging-all": {
+    "name": "Log Feature Name"
+  },
+  "/huawei-syslog:syslog/info-center-channels": {
+    "name": "Log Name"
+  },
+  "/huawei-syslog:syslog/info-center-channels/info-center-channel": {
+    "name": "Log Level"
+  },
+  "/huawei-syslog:syslog/info-center-channels/info-center-channel/channel-id": {
+    "name": "Security Log or Not"
+  },
+  "/huawei-syslog:syslog/info-center-channels/info-center-channel/channel-default-name": {
+    "name": "Log Type"
+  },
+  "/huawei-syslog:syslog/info-center-channels/info-center-channel/channel-name": {
+    "name": "Syslog security log"
+  },
+  "/huawei-syslog:syslog/info-center-sources": {
+    "name": "Output Rules In Channel"
+  },
+  "/huawei-syslog:syslog/info-center-sources/info-center-source": {
+    "name": "Output Rule In Channel"
+  },
+  "/huawei-syslog:syslog/info-center-sources/info-center-source/module-name": {
+    "name": "Module Name"
+  },
+  "/huawei-syslog:syslog/info-center-sources/info-center-source/channel-id": {
+    "name": "Channel Number"
+  },
+  "/huawei-syslog:syslog/info-center-sources/info-center-source/channel-name": {
+    "name": "Channel Name"
+  },
+  "/huawei-syslog:syslog/info-center-sources/info-center-source/enable-log": {
+    "name": "Log Output State"
+  },
+  "/huawei-syslog:syslog/info-center-sources/info-center-source/enable-log-level": {
+    "name": "Log Level"
+  },
+  "/huawei-syslog:syslog/info-center-sources/info-center-source/enable-trap": {
+    "name": "Trap Output State"
+  },
+  "/huawei-syslog:syslog/info-center-sources/info-center-source/enable-trap-level": {
+    "name": "Trap Level"
+  },
+  "/huawei-syslog:syslog/info-center-sources/info-center-source/enable-debug": {
+    "name": "Debug Output State"
+  },
+  "/huawei-syslog:syslog/info-center-sources/info-center-source/enable-debug-level": {
+    "name": "Debug Level"
+  },
+  "/huawei-syslog:syslog/log-switch-list": {
+    "name": "Log Name Information Table"
+  },
+  "/huawei-syslog:syslog/log-switch-list/log-switch": {
+    "name": "Log Name Information"
+  },
+  "/huawei-syslog:syslog/log-switch-list/log-switch/feature-name": {
+    "name": "Log Feature Name"
+  },
+  "/huawei-syslog:syslog/log-switch-list/log-switch/log-name": {
+    "name": "Log Name"
+  },
+  "/huawei-syslog:syslog/log-switch-list/log-switch/log-level": {
+    "name": "Log Level"
+  },
+  "/huawei-syslog:syslog/log-switch-list/log-switch/security-log-flag": {
+    "name": "Security Log or Not"
+  },
+  "/huawei-syslog:syslog/log-switch-list/log-switch/log-type": {
+    "name": "Log Type"
+  },
+  "/huawei-syslog:syslog/info-center-filters": {
+    "name": "Info-Center Filter Table"
+  },
+  "/huawei-syslog:syslog/info-center-filters/info-center-filter": {
+    "name": "Info-Center Filter"
+  },
+  "/huawei-syslog:syslog/info-center-filters/info-center-filter/feature-name": {
+    "name": "Filter Log Feature Name"
+  },
+  "/huawei-syslog:syslog/info-center-filters/info-center-filter/filter-log-name": {
+    "name": "Filter Log Name"
+  },
+  "/huawei-syslog:syslog/domain-servers": {
+    "name": "Domain Syslog Servers"
+  },
+  "/huawei-syslog:syslog/domain-servers/domain-server": {
+    "name": "Domain Log Server"
+  },
+  "/huawei-syslog:syslog/domain-servers/domain-server/server-domain": {
+    "name": "Log Server Domain Address"
+  },
+  "/huawei-syslog:syslog/domain-servers/domain-server/is-default-vpn": {
+    "name": "Use Default VPN or Not"
+  },
+  "/huawei-syslog:syslog/domain-servers/domain-server/vrf-name": {
+    "name": "Log Server VPN Name"
+  },
+  "/huawei-syslog:syslog/domain-servers/domain-server/level": {
+    "name": "Log Server Level"
+  },
+  "/huawei-syslog:syslog/domain-servers/domain-server/server-port": {
+    "name": "Port Number"
+  },
+  "/huawei-syslog:syslog/domain-servers/domain-server/facility": {
+    "name": "Log Record Tool"
+  },
+  "/huawei-syslog:syslog/domain-servers/domain-server/channel-id": {
+    "name": "Channel Number"
+  },
+  "/huawei-syslog:syslog/domain-servers/domain-server/channel-name": {
+    "name": "Channel Name"
+  },
+  "/huawei-syslog:syslog/domain-servers/domain-server/timestamp": {
+    "name": "Log Server Timestamp Format"
+  },
+  "/huawei-syslog:syslog/domain-servers/domain-server/transport-mode": {
+    "name": "Transport Mode"
+  },
+  "/huawei-syslog:syslog/domain-servers/domain-server/ssl-policy-name": {
+    "name": "SSL Policy Name"
+  },
+  "/huawei-syslog:syslog/domain-servers/domain-server/is-brief-format": {
+    "name": "Syslog Brief Format"
+  },
+  "/huawei-syslog:syslog/domain-servers/domain-server/is-security-only": {
+    "name": "Syslog security log"
+  },
+  "/huawei-syslog:syslog/logfiles": {
+    "name": "Log File Info Table"
+  },
+  "/huawei-syslog:syslog/logfiles/logfile": {
+    "name": "Log File Info"
+  },
+  "/huawei-syslog:syslog/logfiles/logfile/logfile-type": {
+    "name": "Log File Type"
+  },
+  "/huawei-syslog:syslog/logfiles/logfile/max-file-num": {
+    "name": "Max File of the Same Type"
+  },
+  "/huawei-syslog:syslog/logfiles/logfile/max-file-size": {
+    "name": "Max File Size (MB)"
+  },
+  "/huawei-syslog:syslog/direction-channels": {
+    "name": "Output and Channel Binding"
+  },
+  "/huawei-syslog:syslog/direction-channels/direction-channel": {
+    "name": "Direction and Channel"
+  },
+  "/huawei-syslog:syslog/direction-channels/direction-channel/output-direction": {
+    "name": "Direction"
+  },
+  "/huawei-syslog:syslog/direction-channels/direction-channel/default-channel-id": {
+    "name": "Default Channel Number"
+  },
+  "/huawei-syslog:syslog/direction-channels/direction-channel/channel-id": {
+    "name": "Configuration Channel Number"
+  },
+  "/huawei-syslog:syslog/direction-channels/direction-channel/channel-name": {
+    "name": "Configuration Channel Name"
+  },
+  "/huawei-syslog:syslog/info-center-statistics": {
+    "name": "Info-Center Statistics Table"
+  },
+  "/huawei-syslog:syslog/info-center-statistics/info-center-statistic": {
+    "name": "Info-Center Statistics"
+  },
+  "/huawei-syslog:syslog/info-center-statistics/info-center-statistic/module-name": {
+    "name": "Module Name"
+  },
+  "/huawei-syslog:syslog/info-center-statistics/info-center-statistic/receive-log": {
+    "name": "Log Receive"
+  },
+  "/huawei-syslog:syslog/info-center-statistics/info-center-statistic/drop-log": {
+    "name": "Log Drop"
+  },
+  "/huawei-syslog:syslog/info-center-statistics/info-center-statistic/receive-diaglog": {
+    "name": "Diagnose Receive"
+  },
+  "/huawei-syslog:syslog/info-center-statistics/info-center-statistic/drop-diaglog": {
+    "name": "Diagnose Drop"
+  },
+  "/huawei-syslog:syslog/info-center-statistics/info-center-statistic/receive-eventtrap": {
+    "name": "Event Trap Receive"
+  },
+  "/huawei-syslog:syslog/info-center-statistics/info-center-statistic/drop-eventtrap": {
+    "name": "Event Trap Drop"
+  },
+  "/huawei-syslog:syslog/info-center-statistics/info-center-statistic/receive-debug": {
+    "name": "Debug Log Receive"
+  },
+  "/huawei-syslog:syslog/info-center-statistics/info-center-statistic/drop-debug": {
+    "name": "Debug Log Drop"
+  },
+  "/huawei-syslog:syslog/info-center-buffers": {
+    "name": "Buffer Statistics Table"
+  },
+  "/huawei-syslog:syslog/info-center-buffers/info-center-buffer": {
+    "name": "Buffer Statistics"
+  },
+  "/huawei-syslog:syslog/info-center-buffers/info-center-buffer/buffer-name": {
+    "name": "Buffer Name"
+  },
+  "/huawei-syslog:syslog/info-center-buffers/info-center-buffer/enable-flag": {
+    "name": "Buffer Enable State"
+  },
+  "/huawei-syslog:syslog/info-center-buffers/info-center-buffer/max-buffer-size": {
+    "name": "Max Buffer Size"
+  },
+  "/huawei-syslog:syslog/info-center-buffers/info-center-buffer/cur-buffer-size": {
+    "name": "Current Buffer Size"
+  },
+  "/huawei-syslog:syslog/info-center-buffers/info-center-buffer/current-message": {
+    "name": "Current Messages"
+  },
+  "/huawei-syslog:syslog/info-center-buffers/info-center-buffer/dropped-message": {
+    "name": "Dropped Messages"
+  },
+  "/huawei-syslog:syslog/info-center-buffers/info-center-buffer/overwrite-message": {
+    "name": "Overwritten Messages"
+  },
+  "/huawei-syslog:syslog/info-center-buffers/info-center-buffer/channel-id": {
+    "name": "Channel Number"
+  },
+  "/huawei-syslog:syslog/info-center-buffers/info-center-buffer/channel-name": {
+    "name": "Channel Name"
+  },
+  "/huawei-syslog:syslog/modules": {
+    "name": "Module Name Information Table"
+  },
+  "/huawei-syslog:syslog/modules/module": {
+    "name": "Module Name Information"
+  },
+  "/huawei-syslog:syslog/modules/module/module-name": {
+    "name": "Module Name"
+  },
+  "/huawei-syslog:syslog/logbuffers": {
+    "name": "Log Buffer Table"
+  },
+  "/huawei-syslog:syslog/logbuffers/logbuffer": {
+    "name": "Log Buffer"
+  },
+  "/huawei-syslog:syslog/logbuffers/logbuffer/sequence": {
+    "name": "Log Sequence Number"
+  },
+  "/huawei-syslog:syslog/logbuffers/logbuffer/starttime": {
+    "name": "Query Start Time"
+  },
+  "/huawei-syslog:syslog/logbuffers/logbuffer/endtime": {
+    "name": "Query End Time"
+  },
+  "/huawei-syslog:syslog/logbuffers/logbuffer/level": {
+    "name": "Query Log Level"
+  },
+  "/huawei-syslog:syslog/logbuffers/logbuffer/log-content": {
+    "name": "Log Content"
+  },
+  "/huawei-syslog:syslog/trapbuffers": {
+    "name": "Trap Buffer Table"
+  },
+  "/huawei-syslog:syslog/trapbuffers/trapbuffer": {
+    "name": "Trap Buffer"
+  },
+  "/huawei-syslog:syslog/trapbuffers/trapbuffer/sequence": {
+    "name": "Trap Sequence Number"
+  },
+  "/huawei-syslog:syslog/trapbuffers/trapbuffer/trap-content": {
+    "name": "Trap Content"
+  },
+  "/huawei-syslog:syslog/securitybuffers": {
+    "name": "Security of Log Buffer Table"
+  },
+  "/huawei-syslog:syslog/securitybuffers/securitybuffer": {
+    "name": "Security of Log Buffer"
+  },
+  "/huawei-syslog:syslog/securitybuffers/securitybuffer/sequence": {
+    "name": "Log Sequence Number"
+  },
+  "/huawei-syslog:syslog/securitybuffers/securitybuffer/starttime": {
+    "name": "Query Start Time"
+  },
+  "/huawei-syslog:syslog/securitybuffers/securitybuffer/endtime": {
+    "name": "Query End Time"
+  },
+  "/huawei-syslog:syslog/securitybuffers/securitybuffer/level": {
+    "name": "Query Log Level"
+  },
+  "/huawei-syslog:syslog/securitybuffers/securitybuffer/log-content": {
+    "name": "Log Content"
+  }
+}

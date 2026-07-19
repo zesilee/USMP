@@ -3,14 +3,14 @@
     <!-- 页头 -->
     <div class="ph">
       <div>
-        <h1>车队概览</h1>
+        <h1>{{ t('dashboard.title') }}</h1>
         <div class="sub">
-          {{ o.total }} 台设备 · 声明式对账实时同步 · 数据直读自 NETCONF / gNMI，不落库
+          {{ t('dashboard.subtitle', { total: o.total }) }}
         </div>
       </div>
       <div class="ph-actions">
-        <el-button :loading="loading" @click="load">刷新</el-button>
-        <el-button type="primary" @click="goConfig">下发配置</el-button>
+        <el-button :loading="loading" @click="load">{{ t('common.refresh') }}</el-button>
+        <el-button type="primary" @click="goConfig">{{ t('dashboard.pushConfig') }}</el-button>
       </div>
     </div>
 
@@ -19,7 +19,7 @@
       class="load-error"
       type="error"
       :closable="false"
-      :title="`概览加载失败：${error}`"
+      :title="t('dashboard.loadError', { error })"
     />
 
     <!-- hero + 统计栈 -->
@@ -28,20 +28,20 @@
 
       <div class="stat-stack">
         <div class="card stat">
-          <div class="stat-k">在线设备</div>
+          <div class="stat-k">{{ t('dashboard.onlineDevices') }}</div>
           <div class="stat-v mono">{{ o.online }}<span class="u">/ {{ o.total }}</span></div>
         </div>
         <div class="card stat">
-          <div class="stat-k">待对账变更</div>
+          <div class="stat-k">{{ t('dashboard.pendingChanges') }}</div>
           <div class="stat-v mono">
             {{ o.pendingCount }}
-            <span v-if="o.pendingCount > 0" class="trend warn">需处理</span>
-            <span v-else class="trend up">全部收敛</span>
+            <span v-if="o.pendingCount > 0" class="trend warn">{{ t('common.state.attention') }}</span>
+            <span v-else class="trend up">{{ t('dashboard.allConverged') }}</span>
           </div>
         </div>
         <div class="card stat">
-          <div class="stat-k">未对账设备</div>
-          <div class="stat-v mono">{{ o.unknownCount }}<span class="u">台 · 无 desired 态</span></div>
+          <div class="stat-k">{{ t('dashboard.unknownDevices') }}</div>
+          <div class="stat-v mono">{{ o.unknownCount }}<span class="u">{{ t('dashboard.unknownUnit') }}</span></div>
         </div>
       </div>
     </div>
@@ -50,13 +50,13 @@
     <div class="grid-2">
       <div class="card">
         <div class="card-h">
-          <h3>待对账设备 · 期望态 ↔ 实际态</h3>
-          <span class="meta">Reconciler 周期轮询</span>
+          <h3>{{ t('dashboard.ledgerTitle') }}</h3>
+          <span class="meta">{{ t('dashboard.ledgerMeta') }}</span>
         </div>
         <div class="wrap-tbl">
           <table class="tbl">
             <thead>
-              <tr><th>设备</th><th>结局</th><th>最近对账</th></tr>
+              <tr><th>{{ t('common.device') }}</th><th>{{ t('dashboard.colOutcome') }}</th><th>{{ t('dashboard.colLastReconcile') }}</th></tr>
             </thead>
             <tbody>
               <tr v-for="row in o.ledger" :key="row.ip">
@@ -67,20 +67,20 @@
             </tbody>
           </table>
           <div v-if="o.ledger.length === 0" class="empty">
-            {{ o.total === 0 ? '暂无设备' : '全部设备已收敛 · 无待对账变更' }}
+            {{ o.total === 0 ? t('dashboard.noDevices') : t('dashboard.allConvergedEmpty') }}
           </div>
         </div>
       </div>
 
       <div class="card">
         <div class="card-h">
-          <h3>最近对账</h3>
-          <button class="link" @click="goLogs">查看全部</button>
+          <h3>{{ t('dashboard.recentTitle') }}</h3>
+          <button class="link" @click="goLogs">{{ t('dashboard.viewAll') }}</button>
         </div>
         <div class="wrap-tbl">
           <table class="tbl">
             <thead>
-              <tr><th>设备</th><th>结局</th><th>时刻</th></tr>
+              <tr><th>{{ t('common.device') }}</th><th>{{ t('dashboard.colOutcome') }}</th><th>{{ t('dashboard.colTime') }}</th></tr>
             </thead>
             <tbody>
               <tr v-for="row in recentTop" :key="row.ip">
@@ -90,7 +90,7 @@
               </tr>
             </tbody>
           </table>
-          <div v-if="recentTop.length === 0" class="empty">暂无对账记录</div>
+          <div v-if="recentTop.length === 0" class="empty">{{ t('dashboard.noRecords') }}</div>
         </div>
       </div>
     </div>
@@ -100,11 +100,13 @@
 <script setup lang="ts">
 import { computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 import { useFleetOverview } from '../composables/useFleetOverview'
 import ConvergenceHero from '../components/dashboard/ConvergenceHero.vue'
 import ReconcileChip from '../components/dashboard/ReconcileChip.vue'
 
 const router = useRouter()
+const { t } = useI18n()
 const { overview, loading, error, load } = useFleetOverview()
 
 const o = overview

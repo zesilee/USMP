@@ -1,0 +1,107 @@
+{
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-ip-statistics:ip-statistics-enable": {
+    "name": "IP traffic statistics of interfaces"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-ip-statistics:ip-statistics-enable/ip-statistics-mode": {
+    "name": "IP traffic statistics mode"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-ip-statistics:ip-statistics-enable/ip-statistics-mode/independent-mode": {
+    "name": "Traffic statistics independent mode"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-ip-statistics:ip-statistics-enable/ip-statistics-mode/independent-mode/independent-mode": {
+    "name": "Traffic statistics independent mode"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-ip-statistics:ip-statistics-enable/ip-statistics-mode/independent-mode/independent-mode/ipv4-enable": {
+    "name": "IPv4 traffic statistics enable"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-ip-statistics:ip-statistics-enable/ip-statistics-mode/independent-mode/independent-mode/ipv4-direction": {
+    "name": "IPv4 traffic statistics direction"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-ip-statistics:ip-statistics-enable/ip-statistics-mode/independent-mode/independent-mode/ipv6-enable": {
+    "name": "IPv6 traffic statistics enable"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-ip-statistics:ip-statistics-enable/ip-statistics-mode/independent-mode/independent-mode/ipv6-direction": {
+    "name": "IPv6 traffic statistics direction"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-ip-statistics:ip-statistics-enable/ip-statistics-mode/unified-mode": {
+    "name": "Traffic statistics unified mode"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-ip-statistics:ip-statistics-enable/ip-statistics-mode/unified-mode/unified-mode": {
+    "name": "Traffic statistics unified mode"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-ip-statistics:ip-statistics-enable/ip-statistics-mode/unified-mode/unified-mode/ip-enable": {
+    "name": "IP traffic statistics enable"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-ip-statistics:ip-statistics": {
+    "name": "Statistics of IP traffic"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-ip-statistics:ip-statistics/receive-ip-packet": {
+    "name": "Total number of IP packets received"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-ip-statistics:ip-statistics/send-ip-packet": {
+    "name": "Total number of IP packets sent"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-ip-statistics:ip-statistics/receive-ip-bit-rate": {
+    "name": "Rate of IP traffic bits received"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-ip-statistics:ip-statistics/send-ip-bit-rate": {
+    "name": "Rate of IP traffic bits sent"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-ip-statistics:ip-statistics/receive-ip-packet-rate": {
+    "name": "Rate of IP traffic packets received"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-ip-statistics:ip-statistics/send-ip-packet-rate": {
+    "name": "Rate of IP traffic packets sent"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-ip-statistics:ip-statistics/receive-ipv4-packet": {
+    "name": "Number of IPv4 traffic packets received"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-ip-statistics:ip-statistics/send-ipv4-packet": {
+    "name": "Number of IPv4 traffic packets sent"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-ip-statistics:ip-statistics/receive-ipv4-bit-rate": {
+    "name": "Rate of IPv4 traffic bits received"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-ip-statistics:ip-statistics/send-ipv4-bit-rate": {
+    "name": "Rate of IPv4 traffic bits sent"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-ip-statistics:ip-statistics/receive-ipv4-packet-rate": {
+    "name": "Rate of IPv4 traffic packets received"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-ip-statistics:ip-statistics/send-ipv4-packet-rate": {
+    "name": "Rate of IPv4 traffic packets sent"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-ip-statistics:ip-statistics/receive-ipv6-packet": {
+    "name": "Number of IPv6 traffic packets received"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-ip-statistics:ip-statistics/send-ipv6-packet": {
+    "name": "Number of IPv6 traffic packets sent"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-ip-statistics:ip-statistics/receive-ipv6-bit-rate": {
+    "name": "Rate of IPv6 traffic bits received"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-ip-statistics:ip-statistics/send-ipv6-bit-rate": {
+    "name": "Rate of IPv6 traffic bits sent"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-ip-statistics:ip-statistics/receive-ipv6-packet-rate": {
+    "name": "Rate of IPv6 traffic packets received"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-ip-statistics:ip-statistics/send-ipv6-packet-rate": {
+    "name": "Rate of IPv6 traffic packets sent"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-ip-statistics:ip-statistics-peak": {
+    "name": "Statistics of peak traffic"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-ip-statistics:ip-statistics-peak/receive-peak-bit": {
+    "name": "Number of peak traffic bits received"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-ip-statistics:ip-statistics-peak/receive-peak-time": {
+    "name": "Time of peak traffic received"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-ip-statistics:ip-statistics-peak/send-peak-bit": {
+    "name": "Number of peak traffic bits sent"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-ip-statistics:ip-statistics-peak/send-peak-time": {
+    "name": "Time of peak traffic sent"
+  }
+}

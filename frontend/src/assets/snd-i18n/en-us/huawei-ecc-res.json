@@ -1,0 +1,53 @@
+{
+  "/huawei-ecc:ecc": {
+    "name": "ECC"
+  },
+  "/huawei-ecc:ecc/ecc-global": {
+    "name": "Global Configuration"
+  },
+  "/huawei-ecc:ecc/ecc-global/max-key-pair": {
+    "name": "Max Keypair"
+  },
+  "/huawei-ecc:ecc/local-key": {
+    "name": "Local Key Table"
+  },
+  "/huawei-ecc:ecc/local-key/key-size": {
+    "name": "Keypair Size"
+  },
+  "/huawei-ecc:ecc/local-key/host-key-name": {
+    "name": "Hostkey Name"
+  },
+  "/huawei-ecc:ecc/local-key/host-key-code": {
+    "name": "Hostkey Code"
+  },
+  "/huawei-ecc:ecc/local-key/host-key-pem": {
+    "name": "PEM Hostkey Code"
+  },
+  "/huawei-ecc:ecc/peer-keys": {
+    "name": "Peer Key Table"
+  },
+  "/huawei-ecc:ecc/peer-keys/peer-key": {
+    "name": "Peer Key"
+  },
+  "/huawei-ecc:ecc/peer-keys/peer-key/key-name": {
+    "name": "Key Name"
+  },
+  "/huawei-ecc:ecc/peer-keys/peer-key/key-code": {
+    "name": "Key Code"
+  },
+  "/huawei-ecc:ecc/key-pairs": {
+    "name": "ECC Keypairs"
+  },
+  "/huawei-ecc:ecc/key-pairs/key-pair": {
+    "name": "ECC Keypair"
+  },
+  "/huawei-ecc:ecc/key-pairs/key-pair/key-pair-label": {
+    "name": "Keypair Label Name"
+  },
+  "/huawei-ecc:ecc/key-pairs/key-pair/key-size": {
+    "name": "Keypair Size"
+  },
+  "/huawei-ecc:ecc/key-pairs/key-pair/host-key-code": {
+    "name": "ECC Hostkey"
+  }
+}

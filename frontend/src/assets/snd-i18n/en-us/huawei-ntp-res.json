@@ -1,0 +1,59 @@
+{
+  "/huawei-ntp:ntp": {
+    "name": "NTP"
+  },
+  "/huawei-ntp:ntp/disables": {
+    "name": "NTP Service Disable"
+  },
+  "/huawei-ntp:ntp/disables/disable": {
+    "name": "NTP Service Disable Configuration"
+  },
+  "/huawei-ntp:ntp/disables/disable/addr-family": {
+    "name": "Address Family"
+  },
+  "/huawei-ntp:ntp/unicasts": {
+    "name": "NTP Unicast"
+  },
+  "/huawei-ntp:ntp/unicasts/unicast": {
+    "name": "NTP Unicast Configuration"
+  },
+  "/huawei-ntp:ntp/unicasts/unicast/ip-address": {
+    "name": "IP Address"
+  },
+  "/huawei-ntp:ntp/unicasts/unicast/type": {
+    "name": "Type"
+  },
+  "/huawei-ntp:ntp/unicasts/unicast/vpn-name": {
+    "name": "VPN Instance Name"
+  },
+  "/huawei-ntp:ntp/unicasts/unicast/version": {
+    "name": "Version"
+  },
+  "/huawei-ntp:ntp/unicasts/unicast/is-preferred": {
+    "name": "Enable Preference"
+  },
+  "/huawei-ntp:ntp/unicasts/unicast/ifname": {
+    "name": "Interface Name"
+  },
+  "/huawei-ntp:ntp/unicasts/unicast/key-id": {
+    "name": "Key ID"
+  },
+  "/huawei-ntp:ntp/unicasts/unicast/max-poll-interval": {
+    "name": "Maximum Poll Interval"
+  },
+  "/huawei-ntp:ntp/unicasts/unicast/min-poll-interval": {
+    "name": "Minimum Poll Interval"
+  },
+  "/huawei-ntp:ntp/unicasts/unicast/is-preempt": {
+    "name": "Enable Preempt"
+  },
+  "/huawei-ntp:ntp/unicasts/unicast/is-burst": {
+    "name": "Enable Burst"
+  },
+  "/huawei-ntp:ntp/unicasts/unicast/is-iburst": {
+    "name": "Enable Iburst"
+  },
+  "/huawei-ntp:ntp/unicasts/unicast/port-number": {
+    "name": "Port Number"
+  }
+}

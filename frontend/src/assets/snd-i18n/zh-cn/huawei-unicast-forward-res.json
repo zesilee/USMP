@@ -1,0 +1,89 @@
+{
+  "/huawei-unicast-forward:unicast-forward": {
+    "name": "单播转发"
+  },
+  "/huawei-unicast-forward:unicast-forward/global-uc-attribute": {
+    "name": "配置全局属性"
+  },
+  "/huawei-unicast-forward:unicast-forward/global-uc-attribute/fib-miss": {
+    "name": "配置FIB MISS功能"
+  },
+  "/huawei-unicast-forward:unicast-forward/global-uc-attribute/icmp-reply-fast": {
+    "name": "配置PING快回功能"
+  },
+  "/huawei-unicast-forward:unicast-forward/global-uc-attribute/nexthop-spt": {
+    "name": "配置单下一跳BGP快速刷新"
+  },
+  "/huawei-unicast-forward:unicast-forward/global-uc-attribute/ipv4-force-frag": {
+    "name": "配置 IPv4 强制分段功能"
+  },
+  "/huawei-unicast-forward:unicast-forward/global-uc-attribute/mtu-force-frag": {
+    "name": "配置IPv4 MTU 强制分段功能"
+  },
+  "/huawei-unicast-forward:unicast-forward/global-uc-attribute/indirect-nexthop": {
+    "name": "配置BGP远程对等体的下一跳跟踪功能"
+  },
+  "/huawei-unicast-forward:unicast-forward/global-uc-attribute/ignore-mac": {
+    "name": "忽略目的MAC地址功能"
+  },
+  "/huawei-unicast-forward:unicast-forward/global-uc-attribute/ttl-decrement": {
+    "name": "TTL减1功能"
+  },
+  "/huawei-unicast-forward:unicast-forward/global-uc-attribute/trunk-nd-mode": {
+    "name": "配置 Trunk ND全局模式"
+  },
+  "/huawei-unicast-forward:unicast-forward/global-uc-attribute/trunk-arp-mode": {
+    "name": "配置Trunk-ARP模式功能"
+  },
+  "/huawei-unicast-forward:unicast-forward/global-uc-attribute/mpls-6pe-ttl-mode": {
+    "name": "配置MPLS-6pe-ttl-mode功能"
+  },
+  "/huawei-unicast-forward:unicast-forward/vxlan-forward-ospf": {
+    "name": "VXLAN下OSPF报文转发模式"
+  },
+  "/huawei-unicast-forward:unicast-forward/vxlan-forward-ospf/ospf-behavior": {
+    "name": "VXLAN下OSPF报文转发模式"
+  },
+  "/huawei-unicast-forward:unicast-forward/vxlan-forward-ospfv3": {
+    "name": "VXLAN下OSPFv3报文转发模式"
+  },
+  "/huawei-unicast-forward:unicast-forward/vxlan-forward-ospfv3/ospfv3-behavior": {
+    "name": "VXLAN下OSPFv3报文转发模式"
+  },
+  "/huawei-unicast-forward:unicast-forward/backup-groups": {
+    "name": "备份组配置"
+  },
+  "/huawei-unicast-forward:unicast-forward/backup-groups/backup-group": {
+    "name": "备份组配置"
+  },
+  "/huawei-unicast-forward:unicast-forward/backup-groups/backup-group/backup-group-name": {
+    "name": "备份组名称"
+  },
+  "/huawei-unicast-forward:unicast-forward/backup-groups/backup-group/if-name1": {
+    "name": "接口1"
+  },
+  "/huawei-unicast-forward:unicast-forward/backup-groups/backup-group/if-name2": {
+    "name": "接口2"
+  },
+  "/huawei-unicast-forward:unicast-forward/vxlan-anycast-gateway-extend": {
+    "name": "分布式网关扩展功能"
+  },
+  "/huawei-unicast-forward:unicast-forward/vxlan-anycast-gateway-extend/enable": {
+    "name": "使能/去使能分布式网关扩展功能"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-unicast-forward:unicast-forward": {
+    "name": "配置全局属性"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-unicast-forward:unicast-forward/mtu-check-enable": {
+    "name": "GRE隧道MTU检查功能"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-unicast-forward:unicast-forward/mtu-check-enable/enable": {
+    "name": "GRE隧道MTU检查功能"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-unicast-forward:unicast-forward/tunnel-pipe-dscp": {
+    "name": "配置Tunnel接口的差分服务模式为Pipe模式"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-unicast-forward:unicast-forward/tunnel-pipe-dscp/dscpvalue": {
+    "name": "配置Tunnel接口的差分服务模式为Pipe模式"
+  }
+}

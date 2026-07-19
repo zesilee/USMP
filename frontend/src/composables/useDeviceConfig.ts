@@ -1,6 +1,7 @@
 import { ref } from 'vue'
 import { getConfig, getYangSchema } from '../api'
 import type { Field } from '../utils/crdSchemaParser'
+import { i18n } from '../i18n'
 import { useFreshnessStore } from '../stores/freshness'
 
 // 通用设备配置流（Stack B 直连）。任意华为模块（vlan/ifm/...）只需提供下述参数即可
@@ -82,7 +83,7 @@ export function useDeviceConfig(opts: DeviceConfigOptions) {
       })
       items.value = extractRows(payload, opts.listKey, opts.keyField)
     } catch (e: any) {
-      error.value = e?.response?.data?.message || e?.message || '读取失败'
+      error.value = e?.response?.data?.message || e?.message || i18n.global.t('console.readFailed')
       items.value = []
     } finally {
       loading.value = false

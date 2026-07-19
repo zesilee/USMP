@@ -1,0 +1,1382 @@
+{
+  "/huawei-bfd:bfd": {
+    "name": "BFD使能标志"
+  },
+  "/huawei-bfd:bfd/global": {
+    "name": "BFD全局信息"
+  },
+  "/huawei-bfd:bfd/global/delay-up-timer": {
+    "name": "会话延迟Up时间(秒)"
+  },
+  "/huawei-bfd:bfd/global/mpls-passive": {
+    "name": "使能MPLS被动会话"
+  },
+  "/huawei-bfd:bfd/global/ping-interval": {
+    "name": "LSP Ping间隔(秒)"
+  },
+  "/huawei-bfd:bfd/global/process-mode": {
+    "name": "部署方式"
+  },
+  "/huawei-bfd:bfd/global/process-central-slot": {
+    "name": "会话主集中处理板"
+  },
+  "/huawei-bfd:bfd/global/process-central-slot2": {
+    "name": "会话主集中处理板2"
+  },
+  "/huawei-bfd:bfd/global/default-ip": {
+    "name": "组播IP地址"
+  },
+  "/huawei-bfd:bfd/global/tos-exp": {
+    "name": "动态BFD会话报文优先级"
+  },
+  "/huawei-bfd:bfd/global/tos-exp-static": {
+    "name": "静态BFD会话报文优先级"
+  },
+  "/huawei-bfd:bfd/global/echo-passive": {
+    "name": "被动Echo使能标记"
+  },
+  "/huawei-bfd:bfd/global/basic-acl-num": {
+    "name": "ACL Number"
+  },
+  "/huawei-bfd:bfd/global/init-wait-time": {
+    "name": "震荡抑制初始等待时间"
+  },
+  "/huawei-bfd:bfd/global/max-wait-time": {
+    "name": "震荡抑制最大等待时间"
+  },
+  "/huawei-bfd:bfd/global/second-wait-time": {
+    "name": "震荡抑制二次等待时间"
+  },
+  "/huawei-bfd:bfd/global/link-bundle-init-time": {
+    "name": "LinkBundle震荡抑制初始等待时间"
+  },
+  "/huawei-bfd:bfd/global/link-bundle-max-time": {
+    "name": "LinkBundle震荡抑制最大等待时间"
+  },
+  "/huawei-bfd:bfd/global/link-bundle-second-time": {
+    "name": "LinkBundle震荡抑制二次等待时间"
+  },
+  "/huawei-bfd:bfd/global/link-bundle-l3-mode": {
+    "name": "LinkBundle三层模式"
+  },
+  "/huawei-bfd:bfd/global/lsp-path-check": {
+    "name": "主备LSP路径一致性检查"
+  },
+  "/huawei-bfd:bfd/global/ipv6-trap-separated": {
+    "name": "IPv6的Up/Down Trap独立上报"
+  },
+  "/huawei-bfd:bfd/sessions": {
+    "name": "BFD配置会话列表"
+  },
+  "/huawei-bfd:bfd/sessions/session": {
+    "name": "BFD配置会话"
+  },
+  "/huawei-bfd:bfd/sessions/session/name": {
+    "name": "会话名称"
+  },
+  "/huawei-bfd:bfd/sessions/session/admin-down": {
+    "name": "管理DOWN"
+  },
+  "/huawei-bfd:bfd/sessions/session/description": {
+    "name": "描述信息"
+  },
+  "/huawei-bfd:bfd/sessions/session/detect-multiplier": {
+    "name": "检测倍数"
+  },
+  "/huawei-bfd:bfd/sessions/session/wtr-time": {
+    "name": "等待恢复时间(min)"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type": {
+    "name": "BFD会话列表"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static": {
+    "name": "BFD静态会话列表"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/tos-exp": {
+    "name": "报文优先级"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type": {
+    "name": "BFD会话列表"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip": {
+    "name": "BFD静态IP会话列表"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type": {
+    "name": "BFD会话列表"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv4": {
+    "name": "BFD静态IPv4会话列表"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv4/source-address-static-ipv4": {
+    "name": "源IP地址"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv4/select-board-slot-static-ipv4": {
+    "name": "强制选板槽位号"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv4/select-board-slot2-static-ipv4": {
+    "name": "第二块强制选板槽位号"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv4/multicast-or-unicast-ip": {
+    "name": "BFD会话列表"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv4/multicast-or-unicast-ip/multicast": {
+    "name": "组播IP类型BFD会话"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv4/multicast-or-unicast-ip/multicast/min-tx-interval-multicast-ipv4": {
+    "name": "最小发送间隔(ms)"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv4/multicast-or-unicast-ip/multicast/min-rx-interval-multicast-ipv4": {
+    "name": "最小接收间隔(ms)"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv4/multicast-or-unicast-ip/multicast/local-discriminator-multicast-ipv4": {
+    "name": "本地标识符"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv4/multicast-or-unicast-ip/multicast/remote-discriminator-multicast-ipv4": {
+    "name": "远端标识符"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv4/multicast-or-unicast-ip/multicast/out-if-name-multicast-ipv4": {
+    "name": "出接口名称"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv4/multicast-or-unicast-ip/multicast/process-pst-multicast-ipv4": {
+    "name": "操作PST标志"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv4/multicast-or-unicast-ip/multicast/lag-multicast-ipv4": {
+    "name": "检测LAG标记"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv4/multicast-or-unicast-ip/multicast/pis-multicast-ipv4": {
+    "name": "操作接口PIS标志"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv4/multicast-or-unicast-ip/multicast/pis-sub-if-multicast-ipv4": {
+    "name": "操作关联子接口的PIS标志"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv4/multicast-or-unicast-ip/multicast/pis-no-impact-multicast-ipv4": {
+    "name": "重启操作接口PIS标志"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv4/multicast-or-unicast-ip/multicast/dot1q-vid-multicast-ipv4": {
+    "name": "Dot1q的VLAN ID"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv4/multicast-or-unicast-ip/multicast/qinq-pe-vid-multicast-ipv4": {
+    "name": "QinQ的外层VLAN ID"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv4/multicast-or-unicast-ip/multicast/qinq-ce-vid-multicast-ipv4": {
+    "name": "QinQ的内层VLAN ID"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv4/multicast-or-unicast-ip/multicast/auth-algorithm-multicast-ipv4": {
+    "name": "认证模式"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv4/multicast-or-unicast-ip/multicast/key-id-multicast-ipv4": {
+    "name": "验证字标识符"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv4/multicast-or-unicast-ip/multicast/cipher-string-multicast-ipv4": {
+    "name": "认证密码"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv4/multicast-or-unicast-ip/multicast/negotiation-timeout-multicast-ipv4": {
+    "name": "协商超时间隔(s)"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv4/multicast-or-unicast-ip/multicast/unlimited-nego-multicast-ipv4": {
+    "name": "组播会话无限制协商"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv4/multicast-or-unicast-ip/unicast": {
+    "name": "BFD静态IPv4单播会话列表"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv4/multicast-or-unicast-ip/unicast/min-tx-interval": {
+    "name": "最小发送间隔"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv4/multicast-or-unicast-ip/unicast/min-rx-interval": {
+    "name": "最小接收间隔"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv4/multicast-or-unicast-ip/unicast/min-echo-rx-interval": {
+    "name": "单臂Echo会话的收包间隔(ms)"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv4/multicast-or-unicast-ip/unicast/local-discriminator": {
+    "name": "本地标识符"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv4/multicast-or-unicast-ip/unicast/remote-discriminator": {
+    "name": "远端标识符"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv4/multicast-or-unicast-ip/unicast/out-if-name-static-unicast-ipv4": {
+    "name": "出接口名称"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv4/multicast-or-unicast-ip/unicast/is-set-track-if-static-ipv4": {
+    "name": "是否Track AC接口"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv4/multicast-or-unicast-ip/unicast/track-if-name-static-ipv4": {
+    "name": "Track接口名称"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv4/multicast-or-unicast-ip/unicast/process-pst-static-unicast-ipv4": {
+    "name": "操作PST标志"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv4/multicast-or-unicast-ip/unicast/destination-address-static-unicast-ipv4": {
+    "name": "目的IP地址"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv4/multicast-or-unicast-ip/unicast/vrf-name-static-unicast-ipv4": {
+    "name": "VPN名称"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv4/multicast-or-unicast-ip/unicast/one-arm-echo-static-unicast-ipv4": {
+    "name": "单臂Echo"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv4/multicast-or-unicast-ip/unicast/one-arm-echo-destination-address-static-unicast-ipv4": {
+    "name": "单臂Echo目的ip地址"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv4/multicast-or-unicast-ip/unicast/per-link-static-unicast-ipv4": {
+    "name": "每个成员链路"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv4/multicast-or-unicast-ip/unicast/is-group-static-unicast-ipv4": {
+    "name": "会话组"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv6": {
+    "name": "IPv6类型BFD静态会话"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv6/select-board-slot-static-ipv6": {
+    "name": "强制选板槽位号"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv6/select-board-slot2-static-ipv6": {
+    "name": "强制二次选板槽位号"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv6/min-tx-interval-static-ipv6": {
+    "name": "最小发送间隔(ms)"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv6/min-rx-interval-static-ipv6": {
+    "name": "最小接收间隔(ms)"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv6/min-echo-rx-interval-static-ipv6": {
+    "name": "单臂Echo会话的收包间隔(ms)"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv6/local-discriminator-static-ipv6": {
+    "name": "本地标识符"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv6/remote-discriminator-static-ipv6": {
+    "name": "远端标识符"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv6/out-if-name-static-ipv6": {
+    "name": "出接口名称"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv6/destination-address-static-ipv6": {
+    "name": "目的IP地址"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv6/source-address-static-ipv6": {
+    "name": "源IP地址"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv6/vrf-name-static-ipv6": {
+    "name": "VPN名称"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv6/is-set-track-if-static-ipv6": {
+    "name": "是否Track AC接口"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv6/track-if-name-static-ipv6": {
+    "name": "Track接口名称"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv6/one-arm-echo-static-ipv6": {
+    "name": "单臂Echo"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv6/one-arm-echo-destination-address-static-ipv6": {
+    "name": "单臂Echo目的IPv6地址"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv6/process-pst-static-ipv6": {
+    "name": "操作PST标志"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ip/ip-address-type/ipv6/is-group-static-ipv6": {
+    "name": "会话组"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ldp-lsp": {
+    "name": "LDP-LSP类型BFD静态会话"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ldp-lsp/min-tx-interval-static-ldp-lsp": {
+    "name": "最小发送间隔(ms)"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ldp-lsp/min-rx-interval-static-ldp-lsp": {
+    "name": "最小接收间隔(ms)"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ldp-lsp/local-discriminator-static-ldp-lsp": {
+    "name": "本地标识符"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ldp-lsp/remote-discriminator-static-ldp-lsp": {
+    "name": "远端标识符"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ldp-lsp/out-if-name-static-ldp-lsp": {
+    "name": "出接口名称"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ldp-lsp/destination-address-static-ldp-lsp": {
+    "name": "目的IP地址"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ldp-lsp/next-hop-address-static-ldp-lsp": {
+    "name": "下一跳IP地址"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/static/static-session-link-type/ldp-lsp/process-pst-static-ldp-lsp": {
+    "name": "操作PST标志"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/auto": {
+    "name": "BFD自协商会话"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/auto/auto-session-link-type": {
+    "name": "BFD自协商会话链路类型"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/auto/auto-session-link-type/ip": {
+    "name": "IP类型BFD自协商会话"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/auto/auto-session-link-type/ip/out-if-name-auto-ip": {
+    "name": "出接口名称"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/auto/auto-session-link-type/ip/process-pst-auto-ip": {
+    "name": "操作PST标志"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/auto/auto-session-link-type/ip/address-type": {
+    "name": "BFD自协商会话IP链路IP地址类型"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/auto/auto-session-link-type/ip/address-type/ipv4": {
+    "name": "IPv4类型BFD自协商会话"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/auto/auto-session-link-type/ip/address-type/ipv4/min-tx-interval-auto-ipv4": {
+    "name": "最小发送间隔(ms)"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/auto/auto-session-link-type/ip/address-type/ipv4/min-rx-interval-auto-ipv4": {
+    "name": "最小接收间隔(ms)"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/auto/auto-session-link-type/ip/address-type/ipv4/destination-address-auto-ipv4": {
+    "name": "目的IP地址"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/auto/auto-session-link-type/ip/address-type/ipv4/source-address-auto-ipv4": {
+    "name": "源IP地址"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/auto/auto-session-link-type/ip/address-type/ipv4/vrf-name-auto-ipv4": {
+    "name": "VPN名称"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/auto/auto-session-link-type/ip/address-type/ipv4/select-board-slot-auto-ipv4": {
+    "name": "强制选板槽位号"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/auto/auto-session-link-type/ip/address-type/ipv4/select-board-slot2-auto-ipv4": {
+    "name": "强制二次选板槽位号"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/auto/auto-session-link-type/ip/address-type/ipv4/bundle-mode-auto-ipv4": {
+    "name": "Link-bundle会话模式"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/auto/auto-session-link-type/ip/address-type/ipv4/pis-auto-ipv4": {
+    "name": "启用/禁用更新PIS"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/auto/auto-session-link-type/ip/address-type/ipv4/pis-no-impact-auto-ipv4": {
+    "name": "开关重启影响"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/auto/auto-session-link-type/ip/address-type/ipv6": {
+    "name": "IPv6类型BFD自协商会话"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/auto/auto-session-link-type/ip/address-type/ipv6/min-tx-interval-auto-ipv6": {
+    "name": "最小发送间隔(ms)"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/auto/auto-session-link-type/ip/address-type/ipv6/min-rx-interval-auto-ipv6": {
+    "name": "最小接收间隔(ms)"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/auto/auto-session-link-type/ip/address-type/ipv6/destination-address-auto-ipv6": {
+    "name": "目的IP地址"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/auto/auto-session-link-type/ip/address-type/ipv6/source-address-auto-ipv6": {
+    "name": "源IP地址"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/auto/auto-session-link-type/ip/address-type/ipv6/vrf-name-auto-ipv6": {
+    "name": "VPN名称"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/auto/auto-session-link-type/ip/address-type/ipv6/select-board-slot-auto-ipv6": {
+    "name": "强制选板槽位号"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/auto/auto-session-link-type/ip/address-type/ipv6/select-board-slot2-auto-ipv6": {
+    "name": "强制二次选板槽位号"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/auto/auto-session-link-type/ip/address-type/ipv6/bundle-mode-auto-ipv6": {
+    "name": "Link-bundle会话模式"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/auto/auto-session-link-type/ip/address-type/ipv6/pis-auto-ipv6": {
+    "name": "启用/禁用更新PIS"
+  },
+  "/huawei-bfd:bfd/sessions/session/session-type/auto/auto-session-link-type/ip/address-type/ipv6/pis-no-impact-auto-ipv6": {
+    "name": "开关重启影响"
+  },
+  "/huawei-bfd:bfd/sessions/session/groups": {
+    "name": "子会话列表"
+  },
+  "/huawei-bfd:bfd/sessions/session/groups/group": {
+    "name": "子会话"
+  },
+  "/huawei-bfd:bfd/sessions/session/groups/group/sub-local-discriminator": {
+    "name": "本地标识符"
+  },
+  "/huawei-bfd:bfd/sessions/session/groups/group/sub-remote-discriminator": {
+    "name": "远端标识符"
+  },
+  "/huawei-bfd:bfd/sessions/session/groups/group/sub-select-slot-id": {
+    "name": "强制选板槽位号"
+  },
+  "/huawei-bfd:bfd/sessions/session/running": {
+    "name": "会话运行信息"
+  },
+  "/huawei-bfd:bfd/sessions/session/running/state": {
+    "name": "会话状态"
+  },
+  "/huawei-bfd:bfd/sessions/session/running/udp-destination-port": {
+    "name": "UDP目的端口号"
+  },
+  "/huawei-bfd:bfd/sessions/session/running/detect-mode": {
+    "name": "检测模式"
+  },
+  "/huawei-bfd:bfd/sessions/session/running/remote-demand-mode": {
+    "name": "远端demand模式"
+  },
+  "/huawei-bfd:bfd/sessions/session/running/actual-tx-interval": {
+    "name": "实际发送间隔(ms)"
+  },
+  "/huawei-bfd:bfd/sessions/session/running/actual-rx-interval": {
+    "name": "实际接收间隔(ms)"
+  },
+  "/huawei-bfd:bfd/sessions/session/running/actual-multiplier": {
+    "name": "实际检测倍数"
+  },
+  "/huawei-bfd:bfd/sessions/session/running/detect-time": {
+    "name": "检测时间(ms)"
+  },
+  "/huawei-bfd:bfd/sessions/session/running/ttl": {
+    "name": "BFD报文的TTL"
+  },
+  "/huawei-bfd:bfd/sessions/session/running/tx-timer-id": {
+    "name": "发包定时器"
+  },
+  "/huawei-bfd:bfd/sessions/session/running/detect-timer-id": {
+    "name": "检测定时器"
+  },
+  "/huawei-bfd:bfd/sessions/session/running/init-timer-id": {
+    "name": "Init超时定时器"
+  },
+  "/huawei-bfd:bfd/sessions/session/running/wtr-timer-id": {
+    "name": "WTR定时器"
+  },
+  "/huawei-bfd:bfd/sessions/session/running/not-up-reason": {
+    "name": "会话不Up原因"
+  },
+  "/huawei-bfd:bfd/sessions/session/running/acl-num": {
+    "name": "ACL数"
+  },
+  "/huawei-bfd:bfd/sessions/session/running/local-diag": {
+    "name": "本地诊断字"
+  },
+  "/huawei-bfd:bfd/sessions/session/running/echo-tx-timer-id": {
+    "name": "会话回声发送定时器"
+  },
+  "/huawei-bfd:bfd/sessions/session/running/local-discriminator": {
+    "name": "本地标识符"
+  },
+  "/huawei-bfd:bfd/sessions/session/running/remote-discriminator": {
+    "name": "远端标识符"
+  },
+  "/huawei-bfd:bfd/sessions/session/running/min-tx-interval": {
+    "name": "最小发送间隔(ms)"
+  },
+  "/huawei-bfd:bfd/sessions/session/running/min-rx-interval": {
+    "name": "最小接收间隔(ms)"
+  },
+  "/huawei-bfd:bfd/passive-session": {
+    "name": "完全动态(被动)会话"
+  },
+  "/huawei-bfd:bfd/passive-session/destination-udps": {
+    "name": "BFD被动会话目的UDP端口配置表"
+  },
+  "/huawei-bfd:bfd/passive-session/destination-udps/destination-udp": {
+    "name": "BFD被动会话目的UDP端口配置"
+  },
+  "/huawei-bfd:bfd/passive-session/destination-udps/destination-udp/peer-ip": {
+    "name": "BFD被动会话目的地址"
+  },
+  "/huawei-bfd:bfd/passive-session/detect-multipliers": {
+    "name": "BFD被动会话检测倍数配置表"
+  },
+  "/huawei-bfd:bfd/passive-session/detect-multipliers/detect-multiplier": {
+    "name": "BFD被动会话检测倍数配置"
+  },
+  "/huawei-bfd:bfd/passive-session/detect-multipliers/detect-multiplier/peer-ip": {
+    "name": "BFD被动会话目的地址"
+  },
+  "/huawei-bfd:bfd/passive-session/detect-multipliers/detect-multiplier/detect-multiplier": {
+    "name": "BFD被动会话检测倍数"
+  },
+  "/huawei-bfd:bfd/discriminator-use": {
+    "name": "BFD预留标识符数量"
+  },
+  "/huawei-bfd:bfd/discriminator-use/reserved-num": {
+    "name": "预留标识符数量"
+  },
+  "/huawei-bfd:bfd/discriminator-use/reserved-discriminators": {
+    "name": "预留的本地标识符"
+  },
+  "/huawei-bfd:bfd/discriminator-use/is-used": {
+    "name": "标识符占用"
+  },
+  "/huawei-bfd:bfd/discriminator-use/is-used/local-discriminator": {
+    "name": "本地标识符"
+  },
+  "/huawei-bfd:bfd/discriminator-use/is-used/is-used": {
+    "name": "占用标记"
+  },
+  "/huawei-bfd:bfd/sbfd": {
+    "name": "SBFD全局信息"
+  },
+  "/huawei-bfd:bfd/sbfd/discriminator-maps": {
+    "name": "SBFD目的地址与远端整型描述符匹配关系"
+  },
+  "/huawei-bfd:bfd/sbfd/discriminator-maps/discriminator-map": {
+    "name": "SBFD目的地址与远端整型描述符匹配关系"
+  },
+  "/huawei-bfd:bfd/sbfd/discriminator-maps/discriminator-map/peer-ip": {
+    "name": "SBFD目的地址"
+  },
+  "/huawei-bfd:bfd/sbfd/discriminator-maps/discriminator-map/remote-discriminator": {
+    "name": "SBFD远端整型描述符"
+  },
+  "/huawei-bfd:bfd/sbfd/reflector-discriminator-ids": {
+    "name": "SBFD反射端整型标识符配置列表"
+  },
+  "/huawei-bfd:bfd/sbfd/reflector-discriminator-ids/reflector-discriminator-id": {
+    "name": "SBFD反射端整型标识符配置"
+  },
+  "/huawei-bfd:bfd/sbfd/reflector-discriminator-ids/reflector-discriminator-id/discriminator-id": {
+    "name": "SBFD反射端整型标识符"
+  },
+  "/huawei-bfd:bfd/sbfd/reflector-discriminator-ips": {
+    "name": "SBFD反射端IP类型标识符配置列表"
+  },
+  "/huawei-bfd:bfd/sbfd/reflector-discriminator-ips/reflector-discriminator-ip": {
+    "name": "SBFD反射端IP类型标识符配置"
+  },
+  "/huawei-bfd:bfd/sbfd/reflector-discriminator-ips/reflector-discriminator-ip/discriminator-ip": {
+    "name": "SBFD反射端IP类型标识符"
+  },
+  "/huawei-bfd:bfd/sbfd/reflector-discriminators": {
+    "name": "SBFD反射端标识符配置信息列表"
+  },
+  "/huawei-bfd:bfd/sbfd/reflector-discriminators/reflector-discriminator": {
+    "name": "SBFD反射端标识符配置信息"
+  },
+  "/huawei-bfd:bfd/sbfd/reflector-discriminators/reflector-discriminator/reflector-discriminator-id": {
+    "name": "SBFD反射端整型标识符信息"
+  },
+  "/huawei-bfd:bfd/sbfd/reflector-discriminators/reflector-discriminator/reflector-discriminator-ip": {
+    "name": "SBFD反射端IP类型标识符信息"
+  },
+  "/huawei-bfd:bfd/sbfd/reflector-discriminators/reflector-discriminator/discriminator-state": {
+    "name": "SBFD反射端标识符状态信息"
+  },
+  "/huawei-bfd:bfd/sbfd/reflector-discriminators/reflector-discriminator/create-type": {
+    "name": "SBFD反射端标识符创建类型信息"
+  },
+  "/huawei-bfd:bfd/authentication-keys": {
+    "name": "BFD认证信息配置"
+  },
+  "/huawei-bfd:bfd/authentication-keys/authentication-key": {
+    "name": "BFD认证信息配置"
+  },
+  "/huawei-bfd:bfd/authentication-keys/authentication-key/peer-ip": {
+    "name": "BFD认证信息的目的地址"
+  },
+  "/huawei-bfd:bfd/authentication-keys/authentication-key/vpn-name": {
+    "name": "BFD认证信息的VPN名称"
+  },
+  "/huawei-bfd:bfd/authentication-keys/authentication-key/session-type": {
+    "name": "BFD认证信息的会话类型"
+  },
+  "/huawei-bfd:bfd/authentication-keys/authentication-key/auth-algorithm": {
+    "name": "BFD认证信息的认证算法"
+  },
+  "/huawei-bfd:bfd/authentication-keys/authentication-key/key-id": {
+    "name": "BFD认证信息的Key ID"
+  },
+  "/huawei-bfd:bfd/authentication-keys/authentication-key/cipher-string": {
+    "name": "BFD认证信息的密码串"
+  },
+  "/huawei-bfd:bfd/statistics": {
+    "name": "BFD全局统计信息"
+  },
+  "/huawei-bfd:bfd/statistics/inner-state": {
+    "name": "BFD组件HA状态"
+  },
+  "/huawei-bfd:bfd/statistics/ip-session-num": {
+    "name": "IP会话数"
+  },
+  "/huawei-bfd:bfd/statistics/ldp-lsp-session-num": {
+    "name": "LDP LSP会话数"
+  },
+  "/huawei-bfd:bfd/statistics/static-lsp-session-num": {
+    "name": "Static LSP会话数"
+  },
+  "/huawei-bfd:bfd/statistics/te-lsp-session-num": {
+    "name": "TE LSP会话数"
+  },
+  "/huawei-bfd:bfd/statistics/total-session-num": {
+    "name": "BFD会话总数"
+  },
+  "/huawei-bfd:bfd/statistics/session-up-num": {
+    "name": "Up会话数"
+  },
+  "/huawei-bfd:bfd/statistics/session-down-num": {
+    "name": "Down会话数"
+  },
+  "/huawei-bfd:bfd/statistics/static-session-num": {
+    "name": "静态会话数"
+  },
+  "/huawei-bfd:bfd/statistics/dyn-session-num": {
+    "name": "动态会话数"
+  },
+  "/huawei-bfd:bfd/statistics/auto-session-num": {
+    "name": "静态自协商会话数"
+  },
+  "/huawei-bfd:bfd/statistics/passive-session-num": {
+    "name": "完全动态会话数"
+  },
+  "/huawei-bfd:bfd/statistics/te-tunnel-session-num": {
+    "name": "TE隧道会话数"
+  },
+  "/huawei-bfd:bfd/statistics/used-discriminator-num": {
+    "name": "已用会话标识符数"
+  },
+  "/huawei-bfd:bfd/statistics/pw-session-num": {
+    "name": "PW会话数"
+  },
+  "/huawei-bfd:bfd/statistics/vsi-pw-session-num": {
+    "name": "VSI PW会话数"
+  },
+  "/huawei-bfd:bfd/statistics/ldp-tunnel-session-num": {
+    "name": "LDP隧道会话数"
+  },
+  "/huawei-bfd:bfd/statistics/bgp-tunnel-session-num": {
+    "name": "BGP隧道会话数"
+  },
+  "/huawei-bfd:bfd/statistics/vxlan-session-num": {
+    "name": "VXLAN会话数"
+  },
+  "/huawei-bfd:bfd/statistics/srbe-tunnel-session-num": {
+    "name": "SR-BE隧道会话数"
+  },
+  "/huawei-bfd:bfd/statistics/main-session-up-num": {
+    "name": "主会话Up数"
+  },
+  "/huawei-bfd:bfd/statistics/main-session-down-num": {
+    "name": "主会话Down数"
+  },
+  "/huawei-bfd:bfd/statistics/sub-session-up-num": {
+    "name": "子会话Up数"
+  },
+  "/huawei-bfd:bfd/statistics/sub-session-down-num": {
+    "name": "子会话Down数"
+  },
+  "/huawei-bfd:bfd/statistics/used-bfd-res-num": {
+    "name": "已使用BFD资源数量"
+  },
+  "/huawei-bfd:bfd/statistics/max-bfd-res-num": {
+    "name": "整机最大支持的BFD资源数量"
+  },
+  "/huawei-bfd:bfd/statistics/max-crc-session-num": {
+    "name": "整机最大支持的BFD误码会话数量"
+  },
+  "/huawei-bfd:bfd/statistics/current-crc-session-num": {
+    "name": "当前BFD误码会话数量"
+  },
+  "/huawei-bfd:bfd/statistics/sid-list-session-num": {
+    "name": "Segment List会话数"
+  },
+  "/huawei-bfd:bfd/statistics/sbfd-ref-session-num": {
+    "name": "反射端建立的S-BFD会话数目"
+  },
+  "/huawei-bfd:bfd/statistics/p2mp-session-num": {
+    "name": "BFD for P2MP会话数量"
+  },
+  "/huawei-bfd:bfd/all-sessions": {
+    "name": "全部会话"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session": {
+    "name": "BFD全部会话"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/name": {
+    "name": "BFD会话名称"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/create-type": {
+    "name": "创建方式"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/type": {
+    "name": "会话类型"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/local-discriminator": {
+    "name": "本地标识符"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/remote-discriminator": {
+    "name": "远端标识符"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/link-type": {
+    "name": "会话链路类型"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/destination-address": {
+    "name": "目的IP地址"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/source-address": {
+    "name": "源IP地址"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/next-hop": {
+    "name": "下一跳IP地址"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/out-if-name": {
+    "name": "出接口名称"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/vrf-name": {
+    "name": "VPN名称"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/tunnel-name": {
+    "name": "隧道名称"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/te-backup": {
+    "name": "备TE-LSP"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/min-tx-interval": {
+    "name": "最小发送间隔(ms)"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/min-rx-interval": {
+    "name": "最小接收间隔(ms)"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/detect-multiplier": {
+    "name": "检测倍数"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/demand-enable": {
+    "name": "使能查询模式"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/wtr-timer-int": {
+    "name": "等待恢复时间(ms)"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/tos-exp": {
+    "name": "报文优先级"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/shut-down": {
+    "name": "管理DOWN"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/description": {
+    "name": "描述信息"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/config-pst": {
+    "name": "配置PST信息"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/process-pst": {
+    "name": "操作PST表"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/pis": {
+    "name": "操作接口PIS标志"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/bind-application": {
+    "name": "会话绑定应用"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/fsm-board-slot": {
+    "name": "选板号"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/pw-ttl-mode": {
+    "name": "PW TTL模式"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/pw-ttl": {
+    "name": "PW TTL"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/node": {
+    "name": "PW NODE"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/encap-type": {
+    "name": "封装类型"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/track-interface": {
+    "name": "Track接口"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/local-vc-label": {
+    "name": "本地VC标签"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/remote-vc-label": {
+    "name": "远端VC标签"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/swap-vc-label": {
+    "name": "交换VC标签"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/lsp-token": {
+    "name": "LSP Token"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/vsi-name": {
+    "name": "VSI名称"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/vsi-peer-address": {
+    "name": "VSI Peer IP"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/vc-id": {
+    "name": "VC ID"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/remote-peer": {
+    "name": "远端PEER"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/pw-secondary": {
+    "name": "备PW"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/dot1q-vid": {
+    "name": "Dot1q的VLAN ID"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/qinq-pe-vid": {
+    "name": "QinQ的外层VLAN ID"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/qinq-ce-vid": {
+    "name": "QinQ的内层VLAN ID"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/echo-passive": {
+    "name": "被动会话使能状态"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/basic-acl-num": {
+    "name": "ACL Number"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/min-echo-rx-int": {
+    "name": "单臂Echo会话的收包间隔(ms)"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/lag": {
+    "name": "检测LAG标记"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/main-sub-role": {
+    "name": "会话角色"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/bundle-mode": {
+    "name": "Link-bundle会话模式"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/color": {
+    "name": "报文着色值"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/segment-list-id": {
+    "name": "Segment List标记符"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/running": {
+    "name": "会话运行信息"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/running/state": {
+    "name": "会话状态"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/running/udp-destination-port": {
+    "name": "UDP目的端口号"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/running/detect-mode": {
+    "name": "检测模式"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/running/remote-demand-mode": {
+    "name": "远端demand模式"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/running/actual-tx-interval": {
+    "name": "实际发送间隔(ms)"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/running/actual-rx-interval": {
+    "name": "实际接收间隔(ms)"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/running/actual-multiplier": {
+    "name": "实际检测倍数"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/running/detect-time": {
+    "name": "检测时间(ms)"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/running/ttl": {
+    "name": "BFD报文的TTL"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/running/tx-timer-id": {
+    "name": "发包定时器"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/running/detect-timer-id": {
+    "name": "检测定时器"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/running/init-timer-id": {
+    "name": "Init超时定时器"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/running/wtr-timer-id": {
+    "name": "WTR定时器"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/running/not-up-reason": {
+    "name": "会话不Up原因"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/running/acl-num": {
+    "name": "ACL数"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/running/local-diag": {
+    "name": "本地诊断字"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/running/echo-tx-timer-id": {
+    "name": "会话回声发送定时器"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/running/local-discriminator": {
+    "name": "本地标识符"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/running/remote-discriminator": {
+    "name": "远端标识符"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/running/min-tx-interval": {
+    "name": "最小发送间隔(ms)"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/running/min-rx-interval": {
+    "name": "最小接收间隔(ms)"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/statistics": {
+    "name": "会话统计信息"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/statistics/last-down-time": {
+    "name": "上一次Down的时间"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/statistics/time-from-down": {
+    "name": "距离上次会话Down的时长"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/statistics/create-time": {
+    "name": "会话创建时间"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/statistics/time-from-create": {
+    "name": "BFD会话创建的时长"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/statistics/last-up-time": {
+    "name": "上一次Up的时间"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/statistics/time-from-up": {
+    "name": "上一次Up持续时长"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/statistics/receive-packet": {
+    "name": "收到的报文数目"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/statistics/send-packet": {
+    "name": "发送的报文数目"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/statistics/down-count": {
+    "name": "会话DOWN次数"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/statistics/receive-bad-packet": {
+    "name": "收到的坏包数目"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/statistics/send-bad-packet": {
+    "name": "发送的坏包数目"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/statistics/short-break-count": {
+    "name": "闪断计数"
+  },
+  "/huawei-bfd:bfd/all-sessions/all-session/statistics/lsp-ping-count": {
+    "name": "发送LSP PING报文数"
+  },
+  "/huawei-bfd:bfd/bind-interfaces": {
+    "name": "会话绑定接口信息"
+  },
+  "/huawei-bfd:bfd/bind-interfaces/bind-interface": {
+    "name": "会话绑定接口信息"
+  },
+  "/huawei-bfd:bfd/bind-interfaces/bind-interface/if-name": {
+    "name": "接口名称"
+  },
+  "/huawei-bfd:bfd/bind-interfaces/bind-interface/session-count": {
+    "name": "接口的bfd会话统计数"
+  },
+  "/huawei-bfd:bfd/bind-interfaces/bind-interface/if-oper-status": {
+    "name": "接口操作状态"
+  },
+  "/huawei-bfd:bfd/crc-lsp-sessions": {
+    "name": "全部LSP类型误码会话"
+  },
+  "/huawei-bfd:bfd/crc-lsp-sessions/crc-lsp-session": {
+    "name": "LSP类型误码会话"
+  },
+  "/huawei-bfd:bfd/crc-lsp-sessions/crc-lsp-session/ingress-lsr-id": {
+    "name": "Ingress LSR ID"
+  },
+  "/huawei-bfd:bfd/crc-lsp-sessions/crc-lsp-session/tunnel-id": {
+    "name": "Tunnel ID"
+  },
+  "/huawei-bfd:bfd/crc-lsp-sessions/crc-lsp-session/lsp-id": {
+    "name": "LSP ID"
+  },
+  "/huawei-bfd:bfd/crc-lsp-sessions/crc-lsp-session/session-type": {
+    "name": "误码会话类型"
+  },
+  "/huawei-bfd:bfd/crc-lsp-sessions/crc-lsp-session/fault-type": {
+    "name": "故障类型"
+  },
+  "/huawei-bfd:bfd/crc-lsp-sessions/crc-lsp-session/tunnel-name": {
+    "name": "Tunnel名称"
+  },
+  "/huawei-bfd:bfd/crc-lsp-sessions/crc-lsp-session/lsp-role": {
+    "name": "LSP主备角色"
+  },
+  "/huawei-bfd:bfd/crc-lsp-sessions/crc-lsp-session/out-if-name": {
+    "name": "出接口名称"
+  },
+  "/huawei-bfd:bfd/crc-lsp-sessions/crc-lsp-session/lsp-token": {
+    "name": "LSP token"
+  },
+  "/huawei-bfd:bfd/crc-lsp-sessions/crc-lsp-session/fsm-board-id": {
+    "name": "选板板号"
+  },
+  "/huawei-bfd:bfd/crc-lsp-sessions/crc-lsp-session/min-tx-interval": {
+    "name": "最小发送间隔(ms)"
+  },
+  "/huawei-bfd:bfd/crc-lsp-sessions/crc-lsp-session/max-tx-interval": {
+    "name": "最大发送间隔(ms)"
+  },
+  "/huawei-bfd:bfd/crc-lsp-sessions/crc-lsp-session/actual-tx-interval": {
+    "name": "实际发送间隔(ms)"
+  },
+  "/huawei-bfd:bfd/crc-lsp-sessions/crc-lsp-session/detect-multiplier": {
+    "name": "检测倍数"
+  },
+  "/huawei-bfd:bfd/crc-lsp-sessions/crc-lsp-session/source-address": {
+    "name": "源IP地址"
+  },
+  "/huawei-bfd:bfd/crc-lsp-sessions/crc-lsp-session/destination-address": {
+    "name": "目的IP地址"
+  },
+  "/huawei-bfd:bfd/crc-lsp-sessions/crc-lsp-session/dest-port": {
+    "name": "目的端口号"
+  },
+  "/huawei-bfd:bfd/crc-lsp-sessions/crc-lsp-session/tos-exp": {
+    "name": "报文优先级"
+  },
+  "/huawei-bfd:bfd/crc-lsp-sessions/crc-lsp-session/lsp-inbount-interfaces": {
+    "name": "入接口名称"
+  },
+  "/huawei-bfd:bfd/crc-sec-sessions": {
+    "name": "全部Section类型误码会话"
+  },
+  "/huawei-bfd:bfd/crc-sec-sessions/crc-sec-session": {
+    "name": "Section类型误码会话"
+  },
+  "/huawei-bfd:bfd/crc-sec-sessions/crc-sec-session/if-name": {
+    "name": "接口名称"
+  },
+  "/huawei-bfd:bfd/crc-sec-sessions/crc-sec-session/session-type": {
+    "name": "误码会话类型"
+  },
+  "/huawei-bfd:bfd/crc-sec-sessions/crc-sec-session/fault-type": {
+    "name": "故障类型"
+  },
+  "/huawei-bfd:bfd/crc-sec-sessions/crc-sec-session/fsm-board-id": {
+    "name": "选板板号"
+  },
+  "/huawei-bfd:bfd/crc-sec-sessions/crc-sec-session/min-tx-interval": {
+    "name": "最小发送间隔(ms)"
+  },
+  "/huawei-bfd:bfd/crc-sec-sessions/crc-sec-session/max-tx-interval": {
+    "name": "最大发送间隔(ms)"
+  },
+  "/huawei-bfd:bfd/crc-sec-sessions/crc-sec-session/actual-tx-interval": {
+    "name": "实际发送间隔(ms)"
+  },
+  "/huawei-bfd:bfd/crc-sec-sessions/crc-sec-session/detect-multiplier": {
+    "name": "检测倍数"
+  },
+  "/huawei-bfd:bfd/crc-sec-sessions/crc-sec-session/destination-address": {
+    "name": "目的IP地址"
+  },
+  "/huawei-bfd:bfd/crc-sec-sessions/crc-sec-session/dest-port": {
+    "name": "目的端口号"
+  },
+  "/huawei-bfd:bfd/crc-sec-sessions/crc-sec-session/tos-exp": {
+    "name": "报文优先级"
+  },
+  "/huawei-bfd:bfd/crc-ip-sessions": {
+    "name": "全部IP类型误码会话"
+  },
+  "/huawei-bfd:bfd/crc-ip-sessions/crc-ip-session": {
+    "name": "IP类型误码会话"
+  },
+  "/huawei-bfd:bfd/crc-ip-sessions/crc-ip-session/if-name": {
+    "name": "接口名称"
+  },
+  "/huawei-bfd:bfd/crc-ip-sessions/crc-ip-session/destination-address": {
+    "name": "目的IP地址"
+  },
+  "/huawei-bfd:bfd/crc-ip-sessions/crc-ip-session/source-address": {
+    "name": "源IP地址"
+  },
+  "/huawei-bfd:bfd/crc-ip-sessions/crc-ip-session/dest-port": {
+    "name": "目的端口号"
+  },
+  "/huawei-bfd:bfd/crc-ip-sessions/crc-ip-session/session-type": {
+    "name": "误码会话类型"
+  },
+  "/huawei-bfd:bfd/crc-ip-sessions/crc-ip-session/fault-type": {
+    "name": "故障类型"
+  },
+  "/huawei-bfd:bfd/crc-ip-sessions/crc-ip-session/fsm-board-id": {
+    "name": "选板板号"
+  },
+  "/huawei-bfd:bfd/crc-ip-sessions/crc-ip-session/min-tx-interval": {
+    "name": "最小发送间隔(ms)"
+  },
+  "/huawei-bfd:bfd/crc-ip-sessions/crc-ip-session/max-tx-interval": {
+    "name": "最大发送间隔(ms)"
+  },
+  "/huawei-bfd:bfd/crc-ip-sessions/crc-ip-session/actual-tx-interval": {
+    "name": "实际发送间隔(ms)"
+  },
+  "/huawei-bfd:bfd/crc-ip-sessions/crc-ip-session/detect-multiplier": {
+    "name": "检测倍数"
+  },
+  "/huawei-bfd:bfd/crc-ip-sessions/crc-ip-session/tos-exp": {
+    "name": "报文优先级"
+  },
+  "/huawei-bfd:bfd/crc-ip-sessions/crc-ip-session/vrf-name": {
+    "name": "VRF名称"
+  },
+  "/huawei-bfd:bfd/crc-ip-sessions/crc-ip-session/local-bit-err-rate": {
+    "name": "本端误码率"
+  },
+  "/huawei-bfd:bfd/crc-ip-sessions/crc-ip-session/remote-bit-err-rate": {
+    "name": "远端误码率"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions": {
+    "name": "BFD for P2MP会话"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session": {
+    "name": "BFD for P2MP会话"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/session-name": {
+    "name": "BFD会话名称"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/local-discriminator": {
+    "name": "本地标识符"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/create-type": {
+    "name": "创建方式"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/session-type": {
+    "name": "会话类型"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/multicast-session-type": {
+    "name": "P2MP会话类型"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/p2mp-id": {
+    "name": "P2MP ID"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/p2mp-ingress-lsr-id": {
+    "name": "头结点LSR ID"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/p2mp-tunnel-id": {
+    "name": "P2MP隧道ID"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/root-ip": {
+    "name": "MLDP根节点IP"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/lsp-id": {
+    "name": "MLDP P2MP LSPID"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/opaque-id": {
+    "name": "MLDP OPAQUE ID"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/remote-discriminator": {
+    "name": "远端标识符"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/link-type": {
+    "name": "会话链路类型"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/destination-address": {
+    "name": "目的IP地址"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/min-tx-interval": {
+    "name": "最小发送间隔(ms)"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/min-rx-interval": {
+    "name": "最小接收间隔(ms)"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/detect-multiplier": {
+    "name": "检测倍数"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/tos-exp": {
+    "name": "报文优先级"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/description": {
+    "name": "描述信息"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/bind-application": {
+    "name": "会话绑定应用"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/fsm-board-slot": {
+    "name": "选板号"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/track-interface": {
+    "name": "Track接口"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/multi-cast-session-running": {
+    "name": "会话运行信息"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/multi-cast-session-running/session-state": {
+    "name": "会话状态"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/multi-cast-session-running/udp-dst-port": {
+    "name": "UDP目的端口号"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/multi-cast-session-running/detect-mode": {
+    "name": "检测模式"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/multi-cast-session-running/re-demand-mode": {
+    "name": "远端DEMAND模式"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/multi-cast-session-running/act-tx-interval": {
+    "name": "实际发送间隔(ms)"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/multi-cast-session-running/act-rx-interval": {
+    "name": "实际接收间隔(ms)"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/multi-cast-session-running/act-multiplier": {
+    "name": "实际检测倍数"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/multi-cast-session-running/detect-time": {
+    "name": "检测时间(ms)"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/multi-cast-session-running/ttl": {
+    "name": "BFD报文的TTL"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/multi-cast-session-running/tx-timer-id": {
+    "name": "发包定时器"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/multi-cast-session-running/detect-timer-id": {
+    "name": "检测定时器"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/multi-cast-session-running/init-timer-id": {
+    "name": "Init超时定时器"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/multi-cast-session-running/wtr-timer-id": {
+    "name": "WTR定时器"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/multi-cast-session-running/not-up-reason": {
+    "name": "会话不Up原因"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/multi-cast-session-running/acl-num": {
+    "name": "ACL数"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/multi-cast-session-running/local-diag": {
+    "name": "本地诊断字"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/multi-cast-session-running/echo-tx-timer-id": {
+    "name": "会话回声发送定时器"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/multi-cast-session-running/remote-discriminator": {
+    "name": "远端标识符"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/multi-cast-session-running/min-tx-interval": {
+    "name": "最小发送间隔(ms)"
+  },
+  "/huawei-bfd:bfd/mul-cast-sessions/mul-cast-session/multi-cast-session-running/min-rx-interval": {
+    "name": "最小接收间隔(ms)"
+  },
+  "/huawei-bfd:bfd/bfd-bundle-sessions": {
+    "name": "Bundle会话"
+  },
+  "/huawei-bfd:bfd/bfd-bundle-sessions/bfd-bundle-session": {
+    "name": "Bundle会话"
+  },
+  "/huawei-bfd:bfd/bfd-bundle-sessions/bfd-bundle-session/local-discriminator": {
+    "name": "本地标识符"
+  },
+  "/huawei-bfd:bfd/bfd-bundle-sessions/bfd-bundle-session/remote-discriminator": {
+    "name": "远端标识符"
+  },
+  "/huawei-bfd:bfd/bfd-bundle-sessions/bfd-bundle-session/session-name": {
+    "name": "BFD会话名称"
+  },
+  "/huawei-bfd:bfd/bfd-bundle-sessions/bfd-bundle-session/main-sub-role": {
+    "name": "会话角色"
+  },
+  "/huawei-bfd:bfd/bfd-bundle-sessions/bfd-bundle-session/main-session-name": {
+    "name": "主会话名称"
+  },
+  "/huawei-bfd:bfd/bfd-bundle-sessions/bfd-bundle-session/state": {
+    "name": "会话状态"
+  },
+  "/huawei-bfd:bfd/bfd-bundle-sessions/bfd-bundle-session/detect-mode": {
+    "name": "检测模式"
+  },
+  "/huawei-bfd:bfd/bfd-bundle-sessions/bfd-bundle-session/create-type": {
+    "name": "创建方式"
+  },
+  "/huawei-bfd:bfd/bfd-bundle-sessions/bfd-bundle-session/link-type": {
+    "name": "会话链路类型"
+  },
+  "/huawei-bfd:bfd/bfd-bundle-sessions/bfd-bundle-session/destination-address": {
+    "name": "目的IP地址"
+  },
+  "/huawei-bfd:bfd/bfd-bundle-sessions/bfd-bundle-session/source-address": {
+    "name": "源IP地址"
+  },
+  "/huawei-bfd:bfd/bfd-bundle-sessions/bfd-bundle-session/fsm-board-slot": {
+    "name": "选板号"
+  },
+  "/huawei-bfd:bfd/bfd-bundle-sessions/bfd-bundle-session/tos-exp": {
+    "name": "报文优先级"
+  },
+  "/huawei-bfd:bfd/bfd-bundle-sessions/bfd-bundle-session/min-tx-interval": {
+    "name": "最小发送间隔(ms)"
+  },
+  "/huawei-bfd:bfd/bfd-bundle-sessions/bfd-bundle-session/min-rx-interval": {
+    "name": "最小接收间隔(ms)"
+  },
+  "/huawei-bfd:bfd/bfd-bundle-sessions/bfd-bundle-session/detect-multiplier": {
+    "name": "检测倍数"
+  },
+  "/huawei-bfd:bfd/bfd-bundle-sessions/bfd-bundle-session/act-tx-interval": {
+    "name": "实际发送间隔(ms)"
+  },
+  "/huawei-bfd:bfd/bfd-bundle-sessions/bfd-bundle-session/act-rx-interval": {
+    "name": "实际接收间隔(ms)"
+  },
+  "/huawei-bfd:bfd/bfd-bundle-sessions/bfd-bundle-session/act-detect-multiplier": {
+    "name": "实际检测倍数"
+  },
+  "/huawei-bfd:bfd/bfd-bundle-sessions/bfd-bundle-session/detect-time": {
+    "name": "检测时间(ms)"
+  },
+  "/huawei-bfd:bfd/bfd-bundle-sessions/bfd-bundle-session/dest-port": {
+    "name": "UDP目的端口号"
+  },
+  "/huawei-bfd:bfd/bfd-bundle-sessions/bfd-bundle-session/wtr-timer-int": {
+    "name": "等待恢复时间(ms)"
+  },
+  "/huawei-bfd:bfd/bfd-bundle-sessions/bfd-bundle-session/local-diag": {
+    "name": "本地诊断字"
+  },
+  "/huawei-bfd:bfd/bfd-bundle-sessions/bfd-bundle-session/bind-application": {
+    "name": "会话绑定应用"
+  },
+  "/huawei-bfd:bfd/bfd-bundle-sessions/bfd-bundle-session/sub-session-count": {
+    "name": "子会话个数"
+  },
+  "/huawei-bfd:bfd/bfd-bundle-sessions/bfd-bundle-session/out-if-name": {
+    "name": "出接口名称"
+  },
+  "/huawei-bfd:bfd/bfd-bundle-sessions/bfd-bundle-session/bundle-mode": {
+    "name": "Link-bundle会话模式"
+  },
+  "/huawei-bfd:bfd/bfd-bundle-sessions/bfd-bundle-session/vrf-name": {
+    "name": "VPN名称"
+  },
+  "/huawei-bfd:bfd/bfd-bundle-sessions/bfd-bundle-session/disp-session-type": {
+    "name": "会话类型"
+  },
+  "/huawei-bfd:bfd/bfd-bundle-sessions/bfd-bundle-session/te-backup": {
+    "name": "备TE-LSP"
+  },
+  "/huawei-bfd:bfd/bfd-bundle-sessions/bfd-bundle-session/tunnel-id": {
+    "name": "Tunnel ID"
+  },
+  "/huawei-bfd:bfd/bfd-bundle-sessions/bfd-bundle-session/pw-secondary": {
+    "name": "备PW"
+  },
+  "/huawei-bfd:bfd/bfd-bundle-sessions/bfd-bundle-session/vsi-name": {
+    "name": "VSI名称"
+  },
+  "/huawei-bfd:change-session-board": {
+    "name": "手动迁板"
+  },
+  "/rpcs/huawei-bfd:bfd/change-session-board": {
+    "name": "手动迁板"
+  },
+  "/huawei-bfd:change-session-board/input/local-discriminator": {
+    "name": "本地描述符"
+  },
+  "/huawei-bfd:change-session-board/input/select-slot-id": {
+    "name": "目标板Slot ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-bfd:bfd": {
+    "name": "BFD"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-bfd:bfd/enable-trunk-crc-bit-error": {
+    "name": "使能Trunk接口的误码倒换功能"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-bfd:bfd/enable-trigger-if-down": {
+    "name": "使能BFD会话与其绑定的接口进行状态联动"
+  }
+}

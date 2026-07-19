@@ -1,0 +1,110 @@
+{
+  "/huawei-ifm-trunk:ifm-trunk": {
+    "name": "Trunk接口"
+  },
+  "/huawei-ifm-trunk:ifm-trunk/global": {
+    "name": "Trunk全局属性"
+  },
+  "/huawei-ifm-trunk:ifm-trunk/global/trunk-member-trap-enable": {
+    "name": "Trunk全局属性"
+  },
+  "/huawei-ifm-trunk:trunk-switch": {
+    "name": "主备Trunk倒换"
+  },
+  "/huawei-ifm-trunk:trunk-switch/input/if-name": {
+    "name": "接口名"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk": {
+    "name": "Trunk接口信息"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/min-up-num": {
+    "name": "链路UP下限阈值"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/min-up-bandwidth": {
+    "name": "链路UP下限带宽阈值"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/max-up-num": {
+    "name": "最大有效带宽链路数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/type": {
+    "name": "Trunk接口类型"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/hash-type": {
+    "name": "散列方式"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/work-mode": {
+    "name": "工作模式"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/smart-link-flush-vlan": {
+    "name": "Smart-link flush报文发送vlan Id"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/inactive-port-shutdown": {
+    "name": "激光器关光使能"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/preempt-enable": {
+    "name": "延时切换使能"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/preempt-delay-minutes": {
+    "name": "等待恢复时间(分钟)"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/preempt-delay-seconds": {
+    "name": "等待恢复时间(秒)"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/preempt-delay-milliseconds": {
+    "name": "等待恢复时间(毫秒)"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/up-member-num": {
+    "name": "Up的成员接口数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/online-member-num": {
+    "name": "在线成员接口数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/member-num": {
+    "name": "成员接口数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/max-bandwidth": {
+    "name": "最大带宽(比特/秒)"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/members": {
+    "name": "Trunk成员接口列表"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/members/member": {
+    "name": "Trunk成员接口"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/members/member/name": {
+    "name": "Trunk成员口名"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/members/member/weight": {
+    "name": "接口权重"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/members/member/status": {
+    "name": "接口状态"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/members/member/is-master": {
+    "name": "指定主接口"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/members/member/role": {
+    "name": "接口主备"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/members/member/lacp-negotiation-mode": {
+    "name": "LACP协商模式"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/forwardings": {
+    "name": "Trunk转发表列表"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/forwardings/forwarding": {
+    "name": "Trunk转发表"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/forwardings/forwarding/id": {
+    "name": "记录序号"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/forwardings/forwarding/master-port": {
+    "name": "Master接口名"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ifm-trunk:trunk/forwardings/forwarding/slave-port": {
+    "name": "Slave接口名"
+  },
+  "/rpcs/huawei-ifm-trunk:ifm-trunk/trunk-switch": {
+    "name": "主备Trunk倒换"
+  }
+}

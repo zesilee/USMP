@@ -1,0 +1,506 @@
+{
+  "/huawei-evpn:evpn": {
+    "name": "EVPN配置"
+  },
+  "/huawei-evpn:evpn/base-process": {
+    "name": "基础配置"
+  },
+  "/huawei-evpn:evpn/base-process/redundancy-mode": {
+    "name": "冗余模式"
+  },
+  "/huawei-evpn:evpn/base-process/source-address": {
+    "name": "源地址"
+  },
+  "/huawei-evpn:evpn/base-process/evpn-overlay": {
+    "name": "使能EVPN作为VXLAN的控制平面"
+  },
+  "/huawei-evpn:evpn/site": {
+    "name": "全局evpn配置视图"
+  },
+  "/huawei-evpn:evpn/site/df-election-mode": {
+    "name": "全局配置DF选举模式"
+  },
+  "/huawei-evpn:evpn/site/vpws-df-election-mode": {
+    "name": "VPWS类型的DF选举模式"
+  },
+  "/huawei-evpn:evpn/site/ac-influnced-enable": {
+    "name": "AC影响DF选举模式"
+  },
+  "/huawei-evpn:evpn/site/ad-per-es-split": {
+    "name": "EVPN AD路由分割模式"
+  },
+  "/huawei-evpn:evpn/site/irb-reoriginated": {
+    "name": "非BD下允许IRB重生成"
+  },
+  "/huawei-evpn:evpn/site/vlan-extend-private-enable": {
+    "name": "VLAN扩展"
+  },
+  "/huawei-evpn:evpn/site/vlan-extend-redirect-enable": {
+    "name": "VLAN重定向"
+  },
+  "/huawei-evpn:evpn/site/local-remote-frr-enable": {
+    "name": "本远快速重路由"
+  },
+  "/huawei-evpn:evpn/site/bypass-vxlan-enable": {
+    "name": "Bypass VXLAN模式"
+  },
+  "/huawei-evpn:evpn/site/alm-threshold": {
+    "name": "路由超限告警阈值"
+  },
+  "/huawei-evpn:evpn/site/recovery-percentage": {
+    "name": "路由超限告警恢复百分比"
+  },
+  "/huawei-evpn:evpn/site/local-remote-vpws-frr-enable": {
+    "name": "VPWS类型的本远端MAC路由快速重路由"
+  },
+  "/huawei-evpn:evpn/site/remote-vpws-frr-enable": {
+    "name": "VPWS类型的远端MAC路由快速重路由使能"
+  },
+  "/huawei-evpn:evpn/site/irb-split-group": {
+    "name": "分组发布IRB"
+  },
+  "/huawei-evpn:evpn/site/compatible": {
+    "name": "IRB路由重生成ARP路由和prefix路由"
+  },
+  "/huawei-evpn:evpn/site/advertising-vxlan-tunnel-mac": {
+    "name": "发布VXLAN隧道侧MAC路由"
+  },
+  "/huawei-evpn:evpn/site/advertise-suppressed-route": {
+    "name": "发布被抑制的明细路由"
+  },
+  "/huawei-evpn:evpn/site/routerid-extend-private-enable": {
+    "name": "Router ID扩展"
+  },
+  "/huawei-evpn:evpn/site/mac-duplication": {
+    "name": "MAC迁移"
+  },
+  "/huawei-evpn:evpn/site/mac-duplication/period": {
+    "name": "检测次数"
+  },
+  "/huawei-evpn:evpn/site/mac-duplication/cycle": {
+    "name": "检测周期"
+  },
+  "/huawei-evpn:evpn/site/mac-duplication/recycle": {
+    "name": "解除抑制周期"
+  },
+  "/huawei-evpn:evpn/site/static-esis": {
+    "name": "静态ESI表"
+  },
+  "/huawei-evpn:evpn/site/static-esis/static-esi": {
+    "name": "静态ESI实例"
+  },
+  "/huawei-evpn:evpn/site/static-esis/static-esi/esi": {
+    "name": "静态ESI"
+  },
+  "/huawei-evpn:evpn/site/static-esis/static-esi/redundancy-mode": {
+    "name": "冗余模式"
+  },
+  "/huawei-evpn:evpn/site/static-esis/static-esi/df-election-type": {
+    "name": "ESI的DF选举类型"
+  },
+  "/huawei-evpn:evpn/site/static-esis/static-esi/preference": {
+    "name": "ESI优先级"
+  },
+  "/huawei-evpn:evpn/site/static-esis/static-esi/non-revertive": {
+    "name": "不可逆配置"
+  },
+  "/huawei-evpn:evpn/site/dynamic-esis": {
+    "name": "动态ESI表"
+  },
+  "/huawei-evpn:evpn/site/dynamic-esis/dynamic-esi": {
+    "name": "动态ESI实例"
+  },
+  "/huawei-evpn:evpn/site/dynamic-esis/dynamic-esi/esi-name": {
+    "name": "动态ESI名字"
+  },
+  "/huawei-evpn:evpn/site/dynamic-esis/dynamic-esi/redundancy-mode": {
+    "name": "冗余模式"
+  },
+  "/huawei-evpn:evpn/site/dynamic-esis/dynamic-esi/df-election-type": {
+    "name": "ESI的DF选举类型"
+  },
+  "/huawei-evpn:evpn/site/dynamic-esis/dynamic-esi/preference": {
+    "name": "ESI优先级"
+  },
+  "/huawei-evpn:evpn/site/dynamic-esis/dynamic-esi/non-revertive": {
+    "name": "不可逆配置"
+  },
+  "/huawei-evpn:evpn/instances": {
+    "name": "EVPN实例列表"
+  },
+  "/huawei-evpn:evpn/instances/instance": {
+    "name": "EVPN实例"
+  },
+  "/huawei-evpn:evpn/instances/instance/name": {
+    "name": "EVPN实例名称"
+  },
+  "/huawei-evpn:evpn/instances/instance/type": {
+    "name": "EVPN实例类型"
+  },
+  "/huawei-evpn:evpn/instances/instance/normal-evpn": {
+    "name": "普通EVPN实例"
+  },
+  "/huawei-evpn:evpn/instances/instance/normal-evpn/description": {
+    "name": "描述信息"
+  },
+  "/huawei-evpn:evpn/instances/instance/normal-evpn/rd": {
+    "name": "路由标识"
+  },
+  "/huawei-evpn:evpn/instances/instance/normal-evpn/tunnel-policy-name": {
+    "name": "隧道策略名称"
+  },
+  "/huawei-evpn:evpn/instances/instance/normal-evpn/import-policy-name": {
+    "name": "入口路由策略"
+  },
+  "/huawei-evpn:evpn/instances/instance/normal-evpn/export-policy-name": {
+    "name": "出口路由策略"
+  },
+  "/huawei-evpn:evpn/instances/instance/normal-evpn/local-remote-frr": {
+    "name": "本远FRR"
+  },
+  "/huawei-evpn:evpn/instances/instance/normal-evpn/mac-balance-enable": {
+    "name": "MAC路由负载分担"
+  },
+  "/huawei-evpn:evpn/instances/instance/normal-evpn/isolate-spoken": {
+    "name": "转发隔离"
+  },
+  "/huawei-evpn:evpn/instances/instance/normal-evpn/export-acl-name-or-id": {
+    "name": "发布IPv4路由ACL规则标识"
+  },
+  "/huawei-evpn:evpn/instances/instance/normal-evpn/import-acl-name-or-id": {
+    "name": "接收IPv4路由ACL规则标识"
+  },
+  "/huawei-evpn:evpn/instances/instance/normal-evpn/etree-enable": {
+    "name": "配置EVPN E-Tree"
+  },
+  "/huawei-evpn:evpn/instances/instance/normal-evpn/control-word": {
+    "name": "EVPN控制字功能"
+  },
+  "/huawei-evpn:evpn/instances/instance/normal-evpn/rts": {
+    "name": "RT列表"
+  },
+  "/huawei-evpn:evpn/instances/instance/normal-evpn/rts/rt": {
+    "name": "RT"
+  },
+  "/huawei-evpn:evpn/instances/instance/normal-evpn/rts/rt/vrf-rt-type": {
+    "name": "RT类型"
+  },
+  "/huawei-evpn:evpn/instances/instance/normal-evpn/rts/rt/vrf-rt-value": {
+    "name": "RT值"
+  },
+  "/huawei-evpn:evpn/instances/instance/normal-evpn/mac-duplication": {
+    "name": "MAC迁移"
+  },
+  "/huawei-evpn:evpn/instances/instance/normal-evpn/mac-duplication/period": {
+    "name": "检测次数"
+  },
+  "/huawei-evpn:evpn/instances/instance/normal-evpn/mac-duplication/cycle": {
+    "name": "检测周期"
+  },
+  "/huawei-evpn:evpn/instances/instance/normal-evpn/mac-duplication/recycle": {
+    "name": "解除抑制周期"
+  },
+  "/huawei-evpn:evpn/instances/instance/normal-evpn/mac-duplication/blackhole": {
+    "name": "设置黑洞"
+  },
+  "/huawei-evpn:evpn/instances/instance/b-evpn": {
+    "name": "B-EVPN实例"
+  },
+  "/huawei-evpn:evpn/instances/instance/b-evpn/description": {
+    "name": "描述信息"
+  },
+  "/huawei-evpn:evpn/instances/instance/b-evpn/rd": {
+    "name": "路由标识"
+  },
+  "/huawei-evpn:evpn/instances/instance/b-evpn/bmac": {
+    "name": "桥域源MAC"
+  },
+  "/huawei-evpn:evpn/instances/instance/b-evpn/tunnel-policy-name": {
+    "name": "隧道策略名称"
+  },
+  "/huawei-evpn:evpn/instances/instance/b-evpn/rts": {
+    "name": "RT列表"
+  },
+  "/huawei-evpn:evpn/instances/instance/b-evpn/rts/rt": {
+    "name": "RT"
+  },
+  "/huawei-evpn:evpn/instances/instance/b-evpn/rts/rt/vrf-rt-type": {
+    "name": "RT类型"
+  },
+  "/huawei-evpn:evpn/instances/instance/b-evpn/rts/rt/vrf-rt-value": {
+    "name": "RT值"
+  },
+  "/huawei-evpn:evpn/instances/instance/bd-evpn": {
+    "name": "BD模式EVPN"
+  },
+  "/huawei-evpn:evpn/instances/instance/bd-evpn/description": {
+    "name": "描述文本"
+  },
+  "/huawei-evpn:evpn/instances/instance/bd-evpn/rd": {
+    "name": "路由标识"
+  },
+  "/huawei-evpn:evpn/instances/instance/bd-evpn/import-policy-name": {
+    "name": "入口路由策略"
+  },
+  "/huawei-evpn:evpn/instances/instance/bd-evpn/export-policy-name": {
+    "name": "出口路由策略"
+  },
+  "/huawei-evpn:evpn/instances/instance/bd-evpn/tunnel-policy-name": {
+    "name": "隧道策略名称"
+  },
+  "/huawei-evpn:evpn/instances/instance/bd-evpn/local-remote-frr": {
+    "name": "本远快速重路由"
+  },
+  "/huawei-evpn:evpn/instances/instance/bd-evpn/default-color": {
+    "name": "默认颜色"
+  },
+  "/huawei-evpn:evpn/instances/instance/bd-evpn/mac-balance-enable": {
+    "name": "MAC负载分担"
+  },
+  "/huawei-evpn:evpn/instances/instance/bd-evpn/export-acl-name-or-id": {
+    "name": "发布IPv4路由ACL规则标识"
+  },
+  "/huawei-evpn:evpn/instances/instance/bd-evpn/import-acl-name-or-id": {
+    "name": "接收IPv4路由ACL规则标识"
+  },
+  "/huawei-evpn:evpn/instances/instance/bd-evpn/bypass-vxlan": {
+    "name": "Bypass VXLAN能力"
+  },
+  "/huawei-evpn:evpn/instances/instance/bd-evpn/etree-enable": {
+    "name": "配置EVPN E-Tree"
+  },
+  "/huawei-evpn:evpn/instances/instance/bd-evpn/srv6-mode": {
+    "name": "SRv6场景下基于prefix SID的隧道迭代模式"
+  },
+  "/huawei-evpn:evpn/instances/instance/bd-evpn/down-switch": {
+    "name": "TE隧道故障切换BE隧道"
+  },
+  "/huawei-evpn:evpn/instances/instance/bd-evpn/control-word": {
+    "name": "EVPN控制字功能"
+  },
+  "/huawei-evpn:evpn/instances/instance/bd-evpn/mac-route-advertise": {
+    "name": "本地MAC路由不发布"
+  },
+  "/huawei-evpn:evpn/instances/instance/bd-evpn/rts": {
+    "name": "RT列表"
+  },
+  "/huawei-evpn:evpn/instances/instance/bd-evpn/rts/rt": {
+    "name": "RT"
+  },
+  "/huawei-evpn:evpn/instances/instance/bd-evpn/rts/rt/vrf-rt-type": {
+    "name": "RT类型"
+  },
+  "/huawei-evpn:evpn/instances/instance/bd-evpn/rts/rt/vrf-rt-value": {
+    "name": "RT值"
+  },
+  "/huawei-evpn:evpn/instances/instance/bd-evpn/mac-duplication": {
+    "name": "MAC迁移"
+  },
+  "/huawei-evpn:evpn/instances/instance/bd-evpn/mac-duplication/period": {
+    "name": "检测次数"
+  },
+  "/huawei-evpn:evpn/instances/instance/bd-evpn/mac-duplication/cycle": {
+    "name": "检测周期"
+  },
+  "/huawei-evpn:evpn/instances/instance/bd-evpn/mac-duplication/recycle": {
+    "name": "解除抑制周期"
+  },
+  "/huawei-evpn:evpn/instances/instance/bd-evpn/mac-duplication/blackhole": {
+    "name": "设置黑洞"
+  },
+  "/huawei-evpn:evpn/instances/instance/bd-evpn/mac-duplication/source-blackhole": {
+    "name": "阻断源端口"
+  },
+  "/huawei-evpn:evpn/instances/instance/vpws-evpn": {
+    "name": "VPWS模式EVPN"
+  },
+  "/huawei-evpn:evpn/instances/instance/vpws-evpn/description": {
+    "name": "描述文本"
+  },
+  "/huawei-evpn:evpn/instances/instance/vpws-evpn/rd": {
+    "name": "路由标识"
+  },
+  "/huawei-evpn:evpn/instances/instance/vpws-evpn/import-policy-name": {
+    "name": "入口路由策略"
+  },
+  "/huawei-evpn:evpn/instances/instance/vpws-evpn/export-policy-name": {
+    "name": "出口路由策略"
+  },
+  "/huawei-evpn:evpn/instances/instance/vpws-evpn/tunnel-policy-name": {
+    "name": "隧道策略名称"
+  },
+  "/huawei-evpn:evpn/instances/instance/vpws-evpn/local-remote-frr": {
+    "name": "本远端FRR"
+  },
+  "/huawei-evpn:evpn/instances/instance/vpws-evpn/remote-frr": {
+    "name": "远端FRR"
+  },
+  "/huawei-evpn:evpn/instances/instance/vpws-evpn/default-color": {
+    "name": "默认颜色"
+  },
+  "/huawei-evpn:evpn/instances/instance/vpws-evpn/export-acl-name-or-id": {
+    "name": "发布IPv4路由ACL规则标识"
+  },
+  "/huawei-evpn:evpn/instances/instance/vpws-evpn/import-acl-name-or-id": {
+    "name": "接收IPv4路由ACL规则标识"
+  },
+  "/huawei-evpn:evpn/instances/instance/vpws-evpn/timer-revert-delay": {
+    "name": "路由延时选举时间"
+  },
+  "/huawei-evpn:evpn/instances/instance/vpws-evpn/srv6-mode": {
+    "name": "SRv6场景下基于prefix sid的隧道迭代模式"
+  },
+  "/huawei-evpn:evpn/instances/instance/vpws-evpn/down-switch": {
+    "name": "TE隧道故障切换BE隧道"
+  },
+  "/huawei-evpn:evpn/instances/instance/vpws-evpn/rts": {
+    "name": "RT列表"
+  },
+  "/huawei-evpn:evpn/instances/instance/vpws-evpn/rts/rt": {
+    "name": "RT"
+  },
+  "/huawei-evpn:evpn/instances/instance/vpws-evpn/rts/rt/vrf-rt-type": {
+    "name": "RT类型"
+  },
+  "/huawei-evpn:evpn/instances/instance/vpws-evpn/rts/rt/vrf-rt-value": {
+    "name": "RT值"
+  },
+  "/huawei-evpn:evpn/instances/instance/tunnel-infos": {
+    "name": "隧道信息列表"
+  },
+  "/huawei-evpn:evpn/instances/instance/tunnel-infos/tunnel-info": {
+    "name": "隧道信息"
+  },
+  "/huawei-evpn:evpn/instances/instance/tunnel-infos/tunnel-info/type": {
+    "name": "隧道类型"
+  },
+  "/huawei-evpn:evpn/instances/instance/tunnel-infos/tunnel-info/peer-ip": {
+    "name": "下一跳"
+  },
+  "/huawei-evpn:evpn/instances/instance/tunnel-infos/tunnel-info/id": {
+    "name": "隧道索引"
+  },
+  "/huawei-evpn:evpn/instances/instance/tunnel-infos/tunnel-info/color": {
+    "name": "颜色"
+  },
+  "/huawei-evpn:evpn/instances/instance/tunnel-infos/tunnel-info/name": {
+    "name": "隧道名"
+  },
+  "/huawei-evpn:evpn/remote-sids": {
+    "name": "远端SID信息列表"
+  },
+  "/huawei-evpn:evpn/remote-sids/remote-sid": {
+    "name": "远端SID信息"
+  },
+  "/huawei-evpn:evpn/remote-sids/remote-sid/remote-sid": {
+    "name": "远端SID属性"
+  },
+  "/huawei-evpn:evpn/remote-sids/remote-sid/locator-sid": {
+    "name": "Locator SID"
+  },
+  "/huawei-evpn:evpn/remote-sids/remote-sid/locator-mask-length": {
+    "name": "Locator SID的掩码长度"
+  },
+  "/huawei-evpn:evpn/remote-sids/remote-sid/evpn-type": {
+    "name": "EVPN类型"
+  },
+  "/huawei-evpn:evpn/remote-sids/remote-sid/evpn-name": {
+    "name": "EVPN实例名称"
+  },
+  "/huawei-evpn:evpn/remote-sids/remote-sid/bd-id": {
+    "name": "BD标识"
+  },
+  "/huawei-evpn:evpn/remote-sids/remote-sid/evpl-id": {
+    "name": "EVPL实例标识"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-evpn:evpn": {
+    "name": "远端ESI高级信息"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-evpn:evpn/name": {
+    "name": "EVPN实例名称"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-evpn:evpn/pbb-source-mac": {
+    "name": "B-MAC地址"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-evpn:evpn/esi": {
+    "name": "静态ESI"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-evpn:evpn/esi-name": {
+    "name": "动态ESI名字"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-evpn:evpn/es-recovery-timer": {
+    "name": "ES恢复定时器"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-evpn:evpn/track-bfd-name": {
+    "name": "ES联动BFD"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-evpn:evpn/e-tree-leaf": {
+    "name": "接口的E-Tree leaf属性"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-evpn:evpn": {
+    "name": "公网EVPN实例"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-evpn:evpn/import-policy-name": {
+    "name": "引入路由过滤策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-evpn:evpn/export-policy-name": {
+    "name": "发布路由过滤策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-evpn:evpn/mpls-routing": {
+    "name": "EVPN MPLS三层路由功能"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-evpn:evpn/tunnel-policy-name": {
+    "name": "EVPN的隧道策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-evpn:evpn/default-color": {
+    "name": "默认颜色"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-evpn:evpn/irb2ip": {
+    "name": "IRB路由重生成IP前缀路由"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-evpn:evpn/extend-vpn-targets": {
+    "name": "扩展RT列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-evpn:evpn/extend-vpn-targets/extend-vpn-target": {
+    "name": "扩展RT"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-evpn:evpn/extend-vpn-targets/extend-vpn-target/vrf-rt-value": {
+    "name": "RT值"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-evpn:evpn/extend-vpn-targets/extend-vpn-target/vrf-rt-type": {
+    "name": "RT类型"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-evpn:evpn/state": {
+    "name": "EVPN状态"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-evpn:evpn/state/label": {
+    "name": "EVPN标签"
+  },
+  "/huawei-bd:bd/instances/instance/service-points/service-point/huawei-evpn:evpn": {
+    "name": "配置BD的E-Tree leaf属性表"
+  },
+  "/huawei-bd:bd/instances/instance/service-points/service-point/huawei-evpn:evpn/e-tree-leaf": {
+    "name": "BD的E-Tree leaf属性"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-evpn:evpn": {
+    "name": "EVPN绑定BD关系表"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-evpn:evpn/name": {
+    "name": "EVPN实例"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-evpn:evpn/esi": {
+    "name": "静态ESI"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-evpn:evpn/tag": {
+    "name": "BD标签"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-evpn:evpn/interface-track-peers": {
+    "name": "跟踪的邻居列表"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-evpn:evpn/interface-track-peers/interface-track-peer": {
+    "name": "跟踪的邻居信息"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-evpn:evpn/interface-track-peers/interface-track-peer/es-track-address": {
+    "name": "跟踪的邻居地址"
+  }
+}

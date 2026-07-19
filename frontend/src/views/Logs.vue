@@ -2,23 +2,23 @@
   <div class="logs">
     <div class="page-header">
       <div>
-        <h2>操作日志</h2>
-        <div class="sub">每条下发的对账结局都可追溯 · 保留于本地 JSON 元信息（§8）</div>
+        <h2>{{ t('logs.title') }}</h2>
+        <div class="sub">{{ t('logs.subtitle') }}</div>
       </div>
       <div class="header-actions">
-        <el-input v-model="searchKeyword" placeholder="按设备 / 操作人搜索" :prefix-icon="Search" clearable class="search-input" />
-        <el-select v-model="statusFilter" placeholder="全部结果" clearable class="filter-select">
+        <el-input v-model="searchKeyword" :placeholder="t('logs.searchPlaceholder')" :prefix-icon="Search" clearable class="search-input" />
+        <el-select v-model="statusFilter" :placeholder="t('logs.allOutcomes')" clearable class="filter-select">
           <el-option v-for="o in statusOptions" :key="o.value" :label="o.label" :value="o.value" />
         </el-select>
-        <el-button :icon="Refresh" @click="load" :loading="loading">刷新</el-button>
+        <el-button :icon="Refresh" @click="load" :loading="loading">{{ t('common.refresh') }}</el-button>
       </div>
     </div>
 
     <el-table :data="paginatedRows" class="logs-table" v-loading="loading">
-      <el-table-column label="时间" width="180">
+      <el-table-column :label="t('logs.colTime')" width="180">
         <template #default="{ row }"><span class="mono dim">{{ formatTime(row.timestamp) }}</span></template>
       </el-table-column>
-      <el-table-column label="操作" width="170">
+      <el-table-column :label="t('logs.colOp')" width="170">
         <template #default="{ row }">
           <div class="log-op">
             <div class="op-ico">
@@ -28,25 +28,25 @@
           </div>
         </template>
       </el-table-column>
-      <el-table-column label="设备" width="150">
+      <el-table-column :label="t('logs.colDevice')" width="150">
         <template #default="{ row }"><span class="strong">{{ row.device || '—' }}</span></template>
       </el-table-column>
-      <el-table-column label="变更" min-width="160">
+      <el-table-column :label="t('logs.colChange')" min-width="160">
         <template #default="{ row }"><span class="mono change">{{ row.summary || '—' }}</span></template>
       </el-table-column>
-      <el-table-column label="操作人" width="120">
+      <el-table-column :label="t('logs.colActor')" width="120">
         <template #default="{ row }"><span class="dim">{{ row.actor || '—' }}</span></template>
       </el-table-column>
-      <el-table-column label="对账结局" width="130">
+      <el-table-column :label="t('logs.colOutcome')" width="130">
         <template #default="{ row }"><ReconcileChip :state="row.reconcileState" /></template>
       </el-table-column>
       <template #empty>
-        <span>{{ loading ? '加载中…' : '暂无操作日志' }}</span>
+        <span>{{ loading ? t('logs.loadingEllipsis') : t('logs.emptyNone') }}</span>
       </template>
     </el-table>
 
     <div class="footnote">
-      变更列为下发内容摘要（值级 was→now 差异待后端记录）· 操作人为 system（后端无鉴权用户上下文）· 对账结局为查询时实时态。
+      {{ t('logs.footnote') }}
     </div>
 
     <div class="pagination-wrapper">
@@ -59,19 +59,22 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { Refresh, Search } from '@element-plus/icons-vue'
 import { getLogs } from '../api'
 import { deriveLogRows, type LogRow } from '../utils/logRows'
 import type { DisplayState } from '../composables/useFleetOverview'
 import ReconcileChip from '../components/dashboard/ReconcileChip.vue'
 
-const statusOptions: { label: string; value: DisplayState }[] = [
-  { label: '已收敛', value: 'conv' },
-  { label: '收敛中', value: 'recon' },
-  { label: '已漂移', value: 'drift' },
-  { label: '下发失败', value: 'error' },
-  { label: '未对账', value: 'unknown' },
-]
+const { t } = useI18n()
+
+const statusOptions = computed<{ label: string; value: DisplayState }[]>(() => [
+  { label: t('common.state.conv'), value: 'conv' },
+  { label: t('common.state.recon'), value: 'recon' },
+  { label: t('common.state.drift'), value: 'drift' },
+  { label: t('common.state.error'), value: 'error' },
+  { label: t('common.state.unknown'), value: 'unknown' },
+])
 
 const rows = ref<LogRow[]>([])
 const loading = ref(false)

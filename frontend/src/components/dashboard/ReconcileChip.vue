@@ -7,6 +7,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 import type { DisplayState } from '../../composables/useFleetOverview'
 
 // 对账四态 chip（收敛/收敛中/漂移/失败/离线/未对账）。原型 chip 口径 + 令牌配色。
@@ -14,16 +15,14 @@ const props = defineProps<{
   state: DisplayState
 }>()
 
-const VARIANTS: Record<DisplayState, { label: string; cls: string }> = {
-  conv: { label: '已收敛', cls: 'conv' },
-  recon: { label: '收敛中', cls: 'recon' },
-  drift: { label: '已漂移', cls: 'drift' },
-  error: { label: '下发失败', cls: 'error' },
-  off: { label: '离线', cls: 'off' },
-  unknown: { label: '未对账', cls: 'unknown' },
-}
+const { t } = useI18n()
 
-const variant = computed(() => VARIANTS[props.state] ?? VARIANTS.unknown)
+const STATES: DisplayState[] = ['conv', 'recon', 'drift', 'error', 'off', 'unknown']
+
+const variant = computed(() => {
+  const s: DisplayState = STATES.includes(props.state) ? props.state : 'unknown'
+  return { label: t(`common.state.${s}`), cls: s }
+})
 </script>
 
 <style scoped>

@@ -1,0 +1,116 @@
+{
+  "/huawei-mvpn:mvpn": {
+    "name": "MVPN"
+  },
+  "/huawei-mvpn:mvpn/globals": {
+    "name": "Global MVPN Configuration List"
+  },
+  "/huawei-mvpn:mvpn/globals/global": {
+    "name": "Global MVPN Configuration"
+  },
+  "/huawei-mvpn:mvpn/globals/global/address-family": {
+    "name": "Address Family"
+  },
+  "/huawei-mvpn:mvpn/globals/global/mvpn-id": {
+    "name": "MVPN ID"
+  },
+  "/huawei-mvpn:mvpn/globals/global/enable-inter-area-segmented": {
+    "name": "Enable Segmented Tunnel Globally on ABR"
+  },
+  "/huawei-mvpn:mvpn/globals/global/apply-explicit-null-label": {
+    "name": "Enable IPV6 Explicit Null to apply Label"
+  },
+  "/huawei-mvpn:mvpn/ipv6-underlay-globals": {
+    "name": "Ipv6 Underlay Global Configuration List"
+  },
+  "/huawei-mvpn:mvpn/ipv6-underlay-globals/ipv6-underlay-global": {
+    "name": "Ipv6 Underlay Global Configuration"
+  },
+  "/huawei-mvpn:mvpn/ipv6-underlay-globals/ipv6-underlay-global/address-family": {
+    "name": "Address Family"
+  },
+  "/huawei-mvpn:mvpn/ipv6-underlay-globals/ipv6-underlay-global/mvpn-id": {
+    "name": "MVPN IPv6 ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-mvpn:mvpn": {
+    "name": "MVPN ID List"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-mvpn:mvpn/mvpn-id": {
+    "name": "MVPN ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-mvpn:mvpn/local-admin-id": {
+    "name": "Local VPN instance ID"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-mvpn:mvpn/mvpn-type": {
+    "name": "MVPN Type"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-mvpn:mvpn/mvpn-type/ng-mvpn": {
+    "name": "NG Type MVPN"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-mvpn:mvpn/mvpn-type/ng-mvpn/ng": {
+    "name": "MVPN Attribute"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-mvpn:mvpn/mvpn-type/ng-mvpn/ng/signaling-mode": {
+    "name": "Signaling Mode"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-mvpn:mvpn/mvpn-type/ng-mvpn/ng/is-sender-site": {
+    "name": "Configure Sender PE"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-mvpn:mvpn/mvpn-type/ng-mvpn/ng/is-ipv6-underlay": {
+    "name": "IPv6 Underlay Configuration"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-mvpn:mvpn/mvpn-type/ng-mvpn/ng/rpt-spt-mode": {
+    "name": "W-G Mode"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-mvpn:mvpn/mvpn-type/ng-mvpn/ng/is-inter-as": {
+    "name": "Configure Auto-discovery InterAs"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-mvpn:mvpn/mvpn-type/ng-mvpn/ng/is-c-multicast-frr": {
+    "name": "Configuring FRR"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-mvpn:mvpn/mvpn-type/ng-mvpn/ng/frr-acl-name6": {
+    "name": "Configuring an IPv6 FRR Policy"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-mvpn:mvpn/mvpn-type/ng-mvpn/ng/frr-acl-name": {
+    "name": "Configuring an IPv4 FRR Policy"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-mvpn:mvpn/mvpn-type/ng-mvpn/ng/frr-flow-based-acl-name": {
+    "name": "Traffic-Detection-based IPv4 FRR Policy"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-mvpn:mvpn/mvpn-type/ng-mvpn/ng/frr-flow-based-acl-name6": {
+    "name": "Configure Flow-based IPv6 FRR Policy"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-mvpn:mvpn/mvpn-type/ng-mvpn/ng/is-compatible-draft": {
+    "name": "Is compatible draft"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-mvpn:mvpn/mvpn-type/ng-mvpn/ng/is-export-msdp": {
+    "name": "Export Source Active To Msdp"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-mvpn:mvpn/mvpn-type/ng-mvpn/ng/is-import-msdp": {
+    "name": "Import Source Active From Msdp"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-mvpn:mvpn/mvpn-type/ng-mvpn/ng/spmsi-tnl-detect-delay": {
+    "name": "Tunnel Detect Delay (s)"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-mvpn:mvpn/mvpn-type/ng-mvpn/ng/rpt-prune-delay": {
+    "name": "RPT prune Delay (s)"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-mvpn:mvpn/mvpn-type/ng-mvpn/ng/inter-area-seg-enable": {
+    "name": "Enable Intra-Area Segmented Tunnel"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-mvpn:mvpn/mvpn-type/ng-mvpn/ng/umh-select-type": {
+    "name": "Configure UMH Select Type"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-mvpn:mvpn/mvpn-type/ng-mvpn/ng/bier-entropy-mode": {
+    "name": "MVPN BIER Load Balance Entropy"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-mvpn:mvpn/mvpn-type/ng-mvpn/ng/ipmsi-to-spmsi-switch-immediately": {
+    "name": "Ipmsi to Spmsi Switch Immediately"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-mvpn:mvpn/mvpn-type/ng-mvpn/ng/ipmsi-tunnel": {
+    "name": "P2MP Tunnel Attribute List"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-mvpn:mvpn/mvpn-type/ng-mvpn/ng/ipmsi-tunnel/tunnel-mode": {
+    "name": "I-PMSI Tunnel Mode"
+  }
+}

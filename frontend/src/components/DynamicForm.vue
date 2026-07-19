@@ -2,7 +2,7 @@
   <div class="dynamic-form">
     <el-alert
       v-if="loading"
-      title="加载中..."
+      :title="t('common.loading')"
       type="info"
       :closable="false"
       show-icon
@@ -22,7 +22,7 @@
       class="config-form"
     >
       <!-- Simple display of raw XML/config for now - proper parsing will come after backend has structured JSON -->
-      <el-form-item label="配置数据">
+      <el-form-item :label="t('console.configData')">
         <el-input
           v-model="formDataJson"
           type="textarea"
@@ -33,10 +33,10 @@
 
       <el-form-item>
         <el-button type="primary" @click="handleSubmit" :loading="submitting">
-          提交配置
+          {{ t('console.submitConfig') }}
         </el-button>
         <el-button @click="handleRefresh">
-          刷新
+          {{ t('common.refresh') }}
         </el-button>
       </el-form-item>
 
@@ -48,13 +48,16 @@
       </div>
     </el-form>
 
-    <el-empty v-else description="暂无配置数据，请点击刷新获取"></el-empty>
+    <el-empty v-else :description="t('console.emptyConfigData')"></el-empty>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, computed, onMounted, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { getConfig, setConfig } from '../api'
+
+const { t } = useI18n()
 
 interface Props {
   deviceIp: string
@@ -87,7 +90,7 @@ const loadConfig = async (forceRefresh = false) => {
       error.value = res.data.message
     }
   } catch (err: any) {
-    error.value = err.message || '加载配置失败'
+    error.value = err.message || t('console.loadConfigFailed')
   } finally {
     loading.value = false
   }
@@ -113,7 +116,7 @@ const handleSubmit = async () => {
   } catch (err: any) {
     lastResult.value = {
       success: false,
-      message: err.message || '提交失败',
+      message: err.message || t('console.submitFailed'),
     }
   } finally {
     submitting.value = false

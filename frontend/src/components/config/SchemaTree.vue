@@ -1,10 +1,10 @@
 <template>
   <div class="schema-tree">
     <div class="tree-h">
-      YANG 模型<span v-if="moduleLabel" class="mod mono"> · {{ moduleLabel }}</span>
+      {{ t('console.tree.title') }}<span v-if="moduleLabel" class="mod mono"> · {{ moduleLabel }}</span>
     </div>
 
-    <div v-if="!nodes.length" class="tree-empty">模型加载中…</div>
+    <div v-if="!nodes.length" class="tree-empty">{{ t('console.tree.loading') }}</div>
 
     <div
       v-for="node in nodes"
@@ -23,14 +23,17 @@
       </span>
     </div>
 
-    <div v-if="nodes.length" class="tree-foot">绿色＝可配置字段 · 灰色＝只读</div>
+    <div v-if="nodes.length" class="tree-foot">{{ t('console.tree.legend') }}</div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 import type { Field } from '../../utils/crdSchemaParser'
 import { deriveSchemaTree } from '../../utils/schemaTree'
+
+const { t } = useI18n()
 
 const props = withDefaults(
   defineProps<{
@@ -44,7 +47,11 @@ const props = withDefaults(
 
 defineEmits<{ (e: 'node-click', node: ReturnType<typeof deriveSchemaTree>[number]): void }>()
 
-const kindLabel: Record<'container' | 'list' | 'leaf', string> = { container: '容器', list: '列表', leaf: '叶子' }
+const kindLabel = computed<Record<'container' | 'list' | 'leaf', string>>(() => ({
+  container: t('console.tree.kindContainer'),
+  list: t('console.tree.kindList'),
+  leaf: t('console.tree.kindLeaf'),
+}))
 
 const nodes = computed(() => deriveSchemaTree(props.fields, { keyField: props.keyField }))
 </script>

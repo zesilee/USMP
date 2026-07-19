@@ -1,0 +1,59 @@
+{
+  "/huawei-dsa:dsa": {
+    "name": "DSA"
+  },
+  "/huawei-dsa:dsa/dsa-global": {
+    "name": "Global Configuration"
+  },
+  "/huawei-dsa:dsa/dsa-global/max-key-pair": {
+    "name": "Max Keypair"
+  },
+  "/huawei-dsa:dsa/local-key": {
+    "name": "Local Key"
+  },
+  "/huawei-dsa:dsa/local-key/key-size": {
+    "name": "Keypair Size"
+  },
+  "/huawei-dsa:dsa/local-key/host-key-name": {
+    "name": "Hostkey Name"
+  },
+  "/huawei-dsa:dsa/local-key/host-key-code": {
+    "name": "Hostkey Code"
+  },
+  "/huawei-dsa:dsa/local-key/host-key-pem": {
+    "name": "PEM Hostkey Code"
+  },
+  "/huawei-dsa:dsa/local-key/host-key-openssh": {
+    "name": "OpenSSH Hostkey Code"
+  },
+  "/huawei-dsa:dsa/peer-keys": {
+    "name": "Peer Key Table"
+  },
+  "/huawei-dsa:dsa/peer-keys/peer-key": {
+    "name": "Peer Key"
+  },
+  "/huawei-dsa:dsa/peer-keys/peer-key/key-name": {
+    "name": "Key Name"
+  },
+  "/huawei-dsa:dsa/peer-keys/peer-key/key-code": {
+    "name": "Key Code"
+  },
+  "/huawei-dsa:dsa/peer-keys/peer-key/encoding-type": {
+    "name": "Encode Type"
+  },
+  "/huawei-dsa:dsa/key-pairs": {
+    "name": "DSA Keypairs"
+  },
+  "/huawei-dsa:dsa/key-pairs/key-pair": {
+    "name": "DSA Keypair"
+  },
+  "/huawei-dsa:dsa/key-pairs/key-pair/key-pair-label": {
+    "name": "Keypair Label Name"
+  },
+  "/huawei-dsa:dsa/key-pairs/key-pair/key-size": {
+    "name": "Keypair Size"
+  },
+  "/huawei-dsa:dsa/key-pairs/key-pair/host-key-code": {
+    "name": "DSA Hostkey"
+  }
+}

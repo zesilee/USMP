@@ -1,0 +1,506 @@
+{
+  "/huawei-evpn:evpn": {
+    "name": "EVPN"
+  },
+  "/huawei-evpn:evpn/base-process": {
+    "name": "Base Process"
+  },
+  "/huawei-evpn:evpn/base-process/redundancy-mode": {
+    "name": "Redundancy Mode"
+  },
+  "/huawei-evpn:evpn/base-process/source-address": {
+    "name": "Source address"
+  },
+  "/huawei-evpn:evpn/base-process/evpn-overlay": {
+    "name": "Enable EVPN as the VXLAN control plane"
+  },
+  "/huawei-evpn:evpn/site": {
+    "name": "Global EVPN Configuration View"
+  },
+  "/huawei-evpn:evpn/site/df-election-mode": {
+    "name": "Global Configuration DF Election Mode"
+  },
+  "/huawei-evpn:evpn/site/vpws-df-election-mode": {
+    "name": "VPWS DF Select Mode"
+  },
+  "/huawei-evpn:evpn/site/ac-influnced-enable": {
+    "name": "AC State Influenced DF Mode"
+  },
+  "/huawei-evpn:evpn/site/ad-per-es-split": {
+    "name": "EVPN Ad Per ES Route Split Mode"
+  },
+  "/huawei-evpn:evpn/site/irb-reoriginated": {
+    "name": "IRB Regeneration in Non-BD Scenario"
+  },
+  "/huawei-evpn:evpn/site/vlan-extend-private-enable": {
+    "name": "VLAN Extend"
+  },
+  "/huawei-evpn:evpn/site/vlan-extend-redirect-enable": {
+    "name": "VLAN Redirect"
+  },
+  "/huawei-evpn:evpn/site/local-remote-frr-enable": {
+    "name": "Local/Remote MAC FRR"
+  },
+  "/huawei-evpn:evpn/site/bypass-vxlan-enable": {
+    "name": "Bypass VXLAN Mode"
+  },
+  "/huawei-evpn:evpn/site/alm-threshold": {
+    "name": "Alarm Route Threshold"
+  },
+  "/huawei-evpn:evpn/site/recovery-percentage": {
+    "name": "Alarm Route Clearance Percentage"
+  },
+  "/huawei-evpn:evpn/site/local-remote-vpws-frr-enable": {
+    "name": "Local/Remote MAC FRR"
+  },
+  "/huawei-evpn:evpn/site/remote-vpws-frr-enable": {
+    "name": "Remote FRR for VPWS"
+  },
+  "/huawei-evpn:evpn/site/irb-split-group": {
+    "name": "Group-by-Group IRB Advertisement"
+  },
+  "/huawei-evpn:evpn/site/compatible": {
+    "name": "IRB Routes Regenerated ARP and Prefix Routes"
+  },
+  "/huawei-evpn:evpn/site/advertising-vxlan-tunnel-mac": {
+    "name": "Advertising MAC Routes Learned by VXLAN Tunnel"
+  },
+  "/huawei-evpn:evpn/site/advertise-suppressed-route": {
+    "name": "Advertise Suppressed Detail Route"
+  },
+  "/huawei-evpn:evpn/site/routerid-extend-private-enable": {
+    "name": "Router ID Extend"
+  },
+  "/huawei-evpn:evpn/site/mac-duplication": {
+    "name": "Mac Duplication"
+  },
+  "/huawei-evpn:evpn/site/mac-duplication/period": {
+    "name": "Detection Times"
+  },
+  "/huawei-evpn:evpn/site/mac-duplication/cycle": {
+    "name": "Detection Interval"
+  },
+  "/huawei-evpn:evpn/site/mac-duplication/recycle": {
+    "name": "Unsuppression Period"
+  },
+  "/huawei-evpn:evpn/site/static-esis": {
+    "name": "Static ESI Table"
+  },
+  "/huawei-evpn:evpn/site/static-esis/static-esi": {
+    "name": "Static ESI Instance"
+  },
+  "/huawei-evpn:evpn/site/static-esis/static-esi/esi": {
+    "name": "Static ESI"
+  },
+  "/huawei-evpn:evpn/site/static-esis/static-esi/redundancy-mode": {
+    "name": "Redundancy Mode"
+  },
+  "/huawei-evpn:evpn/site/static-esis/static-esi/df-election-type": {
+    "name": "ESI DF Election Type"
+  },
+  "/huawei-evpn:evpn/site/static-esis/static-esi/preference": {
+    "name": "ESI Preference"
+  },
+  "/huawei-evpn:evpn/site/static-esis/static-esi/non-revertive": {
+    "name": "Non-revertive Mode"
+  },
+  "/huawei-evpn:evpn/site/dynamic-esis": {
+    "name": "Dynamic ESI Table"
+  },
+  "/huawei-evpn:evpn/site/dynamic-esis/dynamic-esi": {
+    "name": "Dynamic ESI Instance"
+  },
+  "/huawei-evpn:evpn/site/dynamic-esis/dynamic-esi/esi-name": {
+    "name": "Dynamic ESI Name"
+  },
+  "/huawei-evpn:evpn/site/dynamic-esis/dynamic-esi/redundancy-mode": {
+    "name": "Redundancy Mode"
+  },
+  "/huawei-evpn:evpn/site/dynamic-esis/dynamic-esi/df-election-type": {
+    "name": "ESI DF Election Type"
+  },
+  "/huawei-evpn:evpn/site/dynamic-esis/dynamic-esi/preference": {
+    "name": "ESI Preference"
+  },
+  "/huawei-evpn:evpn/site/dynamic-esis/dynamic-esi/non-revertive": {
+    "name": "Non-revertive Mode"
+  },
+  "/huawei-evpn:evpn/instances": {
+    "name": "EVPN Instance List"
+  },
+  "/huawei-evpn:evpn/instances/instance": {
+    "name": "EVPN Instance"
+  },
+  "/huawei-evpn:evpn/instances/instance/name": {
+    "name": "EVPN Instance Name"
+  },
+  "/huawei-evpn:evpn/instances/instance/type": {
+    "name": "EVPN Instance Type"
+  },
+  "/huawei-evpn:evpn/instances/instance/normal-evpn": {
+    "name": "Normal EVPN Instance"
+  },
+  "/huawei-evpn:evpn/instances/instance/normal-evpn/description": {
+    "name": "Description"
+  },
+  "/huawei-evpn:evpn/instances/instance/normal-evpn/rd": {
+    "name": "RD"
+  },
+  "/huawei-evpn:evpn/instances/instance/normal-evpn/tunnel-policy-name": {
+    "name": "Tunnel Policy Name"
+  },
+  "/huawei-evpn:evpn/instances/instance/normal-evpn/import-policy-name": {
+    "name": "Import Policy Name"
+  },
+  "/huawei-evpn:evpn/instances/instance/normal-evpn/export-policy-name": {
+    "name": "Export Policy Name"
+  },
+  "/huawei-evpn:evpn/instances/instance/normal-evpn/local-remote-frr": {
+    "name": "Local/Remote MAC FRR"
+  },
+  "/huawei-evpn:evpn/instances/instance/normal-evpn/mac-balance-enable": {
+    "name": "MAC Balance"
+  },
+  "/huawei-evpn:evpn/instances/instance/normal-evpn/isolate-spoken": {
+    "name": "Forwarding Isolation"
+  },
+  "/huawei-evpn:evpn/instances/instance/normal-evpn/export-acl-name-or-id": {
+    "name": "ACL Rules For Advertised IPv4 Routes"
+  },
+  "/huawei-evpn:evpn/instances/instance/normal-evpn/import-acl-name-or-id": {
+    "name": "ACL Rules For Received IPv4 Routes"
+  },
+  "/huawei-evpn:evpn/instances/instance/normal-evpn/etree-enable": {
+    "name": "EVPN E-Tree"
+  },
+  "/huawei-evpn:evpn/instances/instance/normal-evpn/control-word": {
+    "name": "EVPN Control Word"
+  },
+  "/huawei-evpn:evpn/instances/instance/normal-evpn/rts": {
+    "name": "RT List"
+  },
+  "/huawei-evpn:evpn/instances/instance/normal-evpn/rts/rt": {
+    "name": "RT"
+  },
+  "/huawei-evpn:evpn/instances/instance/normal-evpn/rts/rt/vrf-rt-type": {
+    "name": "RT Type"
+  },
+  "/huawei-evpn:evpn/instances/instance/normal-evpn/rts/rt/vrf-rt-value": {
+    "name": "RT Value"
+  },
+  "/huawei-evpn:evpn/instances/instance/normal-evpn/mac-duplication": {
+    "name": "MAC Duplication"
+  },
+  "/huawei-evpn:evpn/instances/instance/normal-evpn/mac-duplication/period": {
+    "name": "Duplication Times"
+  },
+  "/huawei-evpn:evpn/instances/instance/normal-evpn/mac-duplication/cycle": {
+    "name": "Detection Interval"
+  },
+  "/huawei-evpn:evpn/instances/instance/normal-evpn/mac-duplication/recycle": {
+    "name": "Unsuppression Period"
+  },
+  "/huawei-evpn:evpn/instances/instance/normal-evpn/mac-duplication/blackhole": {
+    "name": "Blackhole Setting"
+  },
+  "/huawei-evpn:evpn/instances/instance/b-evpn": {
+    "name": "Backbone EVPN Instance"
+  },
+  "/huawei-evpn:evpn/instances/instance/b-evpn/description": {
+    "name": "Description"
+  },
+  "/huawei-evpn:evpn/instances/instance/b-evpn/rd": {
+    "name": "RD"
+  },
+  "/huawei-evpn:evpn/instances/instance/b-evpn/bmac": {
+    "name": "B-MAC"
+  },
+  "/huawei-evpn:evpn/instances/instance/b-evpn/tunnel-policy-name": {
+    "name": "Tunnel Policy Name"
+  },
+  "/huawei-evpn:evpn/instances/instance/b-evpn/rts": {
+    "name": "RT List"
+  },
+  "/huawei-evpn:evpn/instances/instance/b-evpn/rts/rt": {
+    "name": "RT"
+  },
+  "/huawei-evpn:evpn/instances/instance/b-evpn/rts/rt/vrf-rt-type": {
+    "name": "RT Type"
+  },
+  "/huawei-evpn:evpn/instances/instance/b-evpn/rts/rt/vrf-rt-value": {
+    "name": "RT Value"
+  },
+  "/huawei-evpn:evpn/instances/instance/bd-evpn": {
+    "name": "BD Mode EVPN Instance"
+  },
+  "/huawei-evpn:evpn/instances/instance/bd-evpn/description": {
+    "name": "Description"
+  },
+  "/huawei-evpn:evpn/instances/instance/bd-evpn/rd": {
+    "name": "RD"
+  },
+  "/huawei-evpn:evpn/instances/instance/bd-evpn/import-policy-name": {
+    "name": "Import Policy Name"
+  },
+  "/huawei-evpn:evpn/instances/instance/bd-evpn/export-policy-name": {
+    "name": "Export Policy Name"
+  },
+  "/huawei-evpn:evpn/instances/instance/bd-evpn/tunnel-policy-name": {
+    "name": "Tunnel Policy Name"
+  },
+  "/huawei-evpn:evpn/instances/instance/bd-evpn/local-remote-frr": {
+    "name": "Local/Remote MAC FRR"
+  },
+  "/huawei-evpn:evpn/instances/instance/bd-evpn/default-color": {
+    "name": "Default Color"
+  },
+  "/huawei-evpn:evpn/instances/instance/bd-evpn/mac-balance-enable": {
+    "name": "MAC Balance"
+  },
+  "/huawei-evpn:evpn/instances/instance/bd-evpn/export-acl-name-or-id": {
+    "name": "ACL Rules For Advertised IPv4 Routes"
+  },
+  "/huawei-evpn:evpn/instances/instance/bd-evpn/import-acl-name-or-id": {
+    "name": "ACL Rules For Received IPv4 Routes"
+  },
+  "/huawei-evpn:evpn/instances/instance/bd-evpn/bypass-vxlan": {
+    "name": "Bypass VXLAN Capability"
+  },
+  "/huawei-evpn:evpn/instances/instance/bd-evpn/etree-enable": {
+    "name": "EVPN E-Tree"
+  },
+  "/huawei-evpn:evpn/instances/instance/bd-evpn/srv6-mode": {
+    "name": "SRv6 Iteration Mode"
+  },
+  "/huawei-evpn:evpn/instances/instance/bd-evpn/down-switch": {
+    "name": "TE Tunnel Failover BE Path"
+  },
+  "/huawei-evpn:evpn/instances/instance/bd-evpn/control-word": {
+    "name": "EVPN Control Word"
+  },
+  "/huawei-evpn:evpn/instances/instance/bd-evpn/mac-route-advertise": {
+    "name": "No Advertise Local MAC Route"
+  },
+  "/huawei-evpn:evpn/instances/instance/bd-evpn/rts": {
+    "name": "RT List"
+  },
+  "/huawei-evpn:evpn/instances/instance/bd-evpn/rts/rt": {
+    "name": "RT"
+  },
+  "/huawei-evpn:evpn/instances/instance/bd-evpn/rts/rt/vrf-rt-type": {
+    "name": "RT Type"
+  },
+  "/huawei-evpn:evpn/instances/instance/bd-evpn/rts/rt/vrf-rt-value": {
+    "name": "RT Value"
+  },
+  "/huawei-evpn:evpn/instances/instance/bd-evpn/mac-duplication": {
+    "name": "MAC Duplication"
+  },
+  "/huawei-evpn:evpn/instances/instance/bd-evpn/mac-duplication/period": {
+    "name": "Duplication Times"
+  },
+  "/huawei-evpn:evpn/instances/instance/bd-evpn/mac-duplication/cycle": {
+    "name": "Detection Interval"
+  },
+  "/huawei-evpn:evpn/instances/instance/bd-evpn/mac-duplication/recycle": {
+    "name": "Unsuppression Period"
+  },
+  "/huawei-evpn:evpn/instances/instance/bd-evpn/mac-duplication/blackhole": {
+    "name": "Blackhole Setting"
+  },
+  "/huawei-evpn:evpn/instances/instance/bd-evpn/mac-duplication/source-blackhole": {
+    "name": "Source Blackhole"
+  },
+  "/huawei-evpn:evpn/instances/instance/vpws-evpn": {
+    "name": "VPWS Mode EVPN Instance"
+  },
+  "/huawei-evpn:evpn/instances/instance/vpws-evpn/description": {
+    "name": "Description"
+  },
+  "/huawei-evpn:evpn/instances/instance/vpws-evpn/rd": {
+    "name": "RD"
+  },
+  "/huawei-evpn:evpn/instances/instance/vpws-evpn/import-policy-name": {
+    "name": "Import Policy Name"
+  },
+  "/huawei-evpn:evpn/instances/instance/vpws-evpn/export-policy-name": {
+    "name": "Export Policy Name"
+  },
+  "/huawei-evpn:evpn/instances/instance/vpws-evpn/tunnel-policy-name": {
+    "name": "Tunnel Policy Name"
+  },
+  "/huawei-evpn:evpn/instances/instance/vpws-evpn/local-remote-frr": {
+    "name": "Local/Remote MAC FRR"
+  },
+  "/huawei-evpn:evpn/instances/instance/vpws-evpn/remote-frr": {
+    "name": "Remote MAC FRR"
+  },
+  "/huawei-evpn:evpn/instances/instance/vpws-evpn/default-color": {
+    "name": "Default Color"
+  },
+  "/huawei-evpn:evpn/instances/instance/vpws-evpn/export-acl-name-or-id": {
+    "name": "ACL Rules For Advertised IPv4 Routes"
+  },
+  "/huawei-evpn:evpn/instances/instance/vpws-evpn/import-acl-name-or-id": {
+    "name": "ACL Rules For Received IPv4 Routes"
+  },
+  "/huawei-evpn:evpn/instances/instance/vpws-evpn/timer-revert-delay": {
+    "name": "Route Delay Election Time"
+  },
+  "/huawei-evpn:evpn/instances/instance/vpws-evpn/srv6-mode": {
+    "name": "SRv6 Iteration Mode"
+  },
+  "/huawei-evpn:evpn/instances/instance/vpws-evpn/down-switch": {
+    "name": "TE Tunnel Failover BE Path"
+  },
+  "/huawei-evpn:evpn/instances/instance/vpws-evpn/rts": {
+    "name": "RT List"
+  },
+  "/huawei-evpn:evpn/instances/instance/vpws-evpn/rts/rt": {
+    "name": "RT"
+  },
+  "/huawei-evpn:evpn/instances/instance/vpws-evpn/rts/rt/vrf-rt-type": {
+    "name": "RT Type"
+  },
+  "/huawei-evpn:evpn/instances/instance/vpws-evpn/rts/rt/vrf-rt-value": {
+    "name": "RT Value"
+  },
+  "/huawei-evpn:evpn/instances/instance/tunnel-infos": {
+    "name": "Tunnel Informations List"
+  },
+  "/huawei-evpn:evpn/instances/instance/tunnel-infos/tunnel-info": {
+    "name": "Tunnel Informations"
+  },
+  "/huawei-evpn:evpn/instances/instance/tunnel-infos/tunnel-info/type": {
+    "name": "Tunnel Type"
+  },
+  "/huawei-evpn:evpn/instances/instance/tunnel-infos/tunnel-info/peer-ip": {
+    "name": "Peer IP"
+  },
+  "/huawei-evpn:evpn/instances/instance/tunnel-infos/tunnel-info/id": {
+    "name": "Tunnel ID"
+  },
+  "/huawei-evpn:evpn/instances/instance/tunnel-infos/tunnel-info/color": {
+    "name": "Color"
+  },
+  "/huawei-evpn:evpn/instances/instance/tunnel-infos/tunnel-info/name": {
+    "name": "Tunnel Name"
+  },
+  "/huawei-evpn:evpn/remote-sids": {
+    "name": "Remote SID Information List"
+  },
+  "/huawei-evpn:evpn/remote-sids/remote-sid": {
+    "name": "Remote SID Information"
+  },
+  "/huawei-evpn:evpn/remote-sids/remote-sid/remote-sid": {
+    "name": "Remote SID Attribute"
+  },
+  "/huawei-evpn:evpn/remote-sids/remote-sid/locator-sid": {
+    "name": "Locator SID"
+  },
+  "/huawei-evpn:evpn/remote-sids/remote-sid/locator-mask-length": {
+    "name": "Locator SID Mask Length"
+  },
+  "/huawei-evpn:evpn/remote-sids/remote-sid/evpn-type": {
+    "name": "EVPN Instance Type"
+  },
+  "/huawei-evpn:evpn/remote-sids/remote-sid/evpn-name": {
+    "name": "EVPN Instance Name"
+  },
+  "/huawei-evpn:evpn/remote-sids/remote-sid/bd-id": {
+    "name": "BD ID"
+  },
+  "/huawei-evpn:evpn/remote-sids/remote-sid/evpl-id": {
+    "name": "EVPL Instance ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-evpn:evpn": {
+    "name": "Remote ESI Advanced Information"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-evpn:evpn/name": {
+    "name": "EVPN Instance Name"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-evpn:evpn/pbb-source-mac": {
+    "name": "B-MAC Address"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-evpn:evpn/esi": {
+    "name": "Static ESI"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-evpn:evpn/esi-name": {
+    "name": "Dynamic ESI Name"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-evpn:evpn/es-recovery-timer": {
+    "name": "ES Recovery Timer"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-evpn:evpn/track-bfd-name": {
+    "name": "ES Track BFD"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-evpn:evpn/e-tree-leaf": {
+    "name": "Interface E-Tree Leaf Attribute"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-evpn:evpn": {
+    "name": "Configure EVPN"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-evpn:evpn/import-policy-name": {
+    "name": "Filtering Policy for Imported Routes"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-evpn:evpn/export-policy-name": {
+    "name": "Route Export Policy"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-evpn:evpn/mpls-routing": {
+    "name": "EVPN MPLS Layer 3 Routing Function"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-evpn:evpn/tunnel-policy-name": {
+    "name": "Tunnel Policy Name"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-evpn:evpn/default-color": {
+    "name": "Default Color"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-evpn:evpn/irb2ip": {
+    "name": "IRB Routes Regenerated IP Prefix Routes"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-evpn:evpn/extend-vpn-targets": {
+    "name": "Extended RT List"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-evpn:evpn/extend-vpn-targets/extend-vpn-target": {
+    "name": "Extended RT"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-evpn:evpn/extend-vpn-targets/extend-vpn-target/vrf-rt-value": {
+    "name": "RT Value"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-evpn:evpn/extend-vpn-targets/extend-vpn-target/vrf-rt-type": {
+    "name": "RT Type"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-evpn:evpn/state": {
+    "name": "EVPN Attribute State"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-l3vpn:afs/af/huawei-evpn:evpn/state/label": {
+    "name": "EVPN Lable"
+  },
+  "/huawei-bd:bd/instances/instance/service-points/service-point/huawei-evpn:evpn": {
+    "name": "BD E-Tree Leaf Attribute"
+  },
+  "/huawei-bd:bd/instances/instance/service-points/service-point/huawei-evpn:evpn/e-tree-leaf": {
+    "name": "BD E-Tree Leaf Attribute"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-evpn:evpn": {
+    "name": "BD List Bound to EVPN Instance"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-evpn:evpn/name": {
+    "name": "EVPN Instance Name"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-evpn:evpn/esi": {
+    "name": "Static ESI"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-evpn:evpn/tag": {
+    "name": "BD Tag"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-evpn:evpn/interface-track-peers": {
+    "name": "Track Peer List"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-evpn:evpn/interface-track-peers/interface-track-peer": {
+    "name": "Track Peer Info"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-evpn:evpn/interface-track-peers/interface-track-peer/es-track-address": {
+    "name": "Track Peer Address"
+  }
+}

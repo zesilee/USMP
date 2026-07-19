@@ -10,9 +10,9 @@
     <slot />
     <template #footer v-if="showFooter">
       <div class="drawer-footer">
-        <el-button @click="handleCancel">取消</el-button>
+        <el-button @click="handleCancel">{{ t('common.cancel') }}</el-button>
         <el-button type="primary" @click="handleSubmit" :loading="submitting">
-          {{ submitText }}
+          {{ submitLabel }}
         </el-button>
       </div>
     </template>
@@ -20,6 +20,9 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
+
 interface Props {
   modelValue: boolean
   title: string
@@ -30,9 +33,12 @@ interface Props {
 
 const props = withDefaults(defineProps<Props>(), {
   showFooter: false,
-  submitText: '提交',
+  submitText: undefined,
   submitting: false
 })
+
+const { t } = useI18n()
+const submitLabel = computed(() => props.submitText ?? t('common.submit'))
 
 const emit = defineEmits<{
   'update:modelValue': [value: boolean]

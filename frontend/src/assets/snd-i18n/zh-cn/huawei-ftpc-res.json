@@ -1,0 +1,80 @@
+{
+  "/huawei-ftpc:ftpc": {
+    "name": "FTP客户端"
+  },
+  "/huawei-ftpc:ftpc/client": {
+    "name": "FTP客户端配置"
+  },
+  "/huawei-ftpc:ftpc/client/source-ipv4-address": {
+    "name": "源IPv4地址"
+  },
+  "/huawei-ftpc:ftpc/client/source-interface-name": {
+    "name": "源接口名"
+  },
+  "/huawei-ftpc:ftpc/client/src-ipv6-addr": {
+    "name": "源IPv6地址"
+  },
+  "/huawei-ftpc:ftpc/client/ipv6-vpn-instance-name": {
+    "name": "IPv6 VPN实例名"
+  },
+  "/huawei-ftpc:ftpc/global-vpn": {
+    "name": "Vpn设置"
+  },
+  "/huawei-ftpc:ftpc/global-vpn/vpn-name": {
+    "name": "管理VPN名称"
+  },
+  "/huawei-ftpc:ftpc/global-vpn/ipv6-vpn-name": {
+    "name": "管理IPv6 VPN名称"
+  },
+  "/huawei-ftpc:ftpc-transfer-file": {
+    "name": "FTP客户端传输文件"
+  },
+  "/huawei-ftpc:ftpc-transfer-file/input/server-port": {
+    "name": "服务器端口"
+  },
+  "/huawei-ftpc:ftpc-transfer-file/input/source-ipv4-address": {
+    "name": "源IPv4地址"
+  },
+  "/huawei-ftpc:ftpc-transfer-file/input/source-ipv6-address": {
+    "name": "源IPv6地址"
+  },
+  "/huawei-ftpc:ftpc-transfer-file/input/server-ipv4-address": {
+    "name": "服务器IPv4地址或服务器主机名称"
+  },
+  "/huawei-ftpc:ftpc-transfer-file/input/server-ipv6-address": {
+    "name": "服务器IPv6地址或服务器主机名称"
+  },
+  "/huawei-ftpc:ftpc-transfer-file/input/command-type": {
+    "name": "传输类型"
+  },
+  "/huawei-ftpc:ftpc-transfer-file/input/user-name": {
+    "name": "用户名"
+  },
+  "/huawei-ftpc:ftpc-transfer-file/input/password": {
+    "name": "密码"
+  },
+  "/huawei-ftpc:ftpc-transfer-file/input/local-file-name": {
+    "name": "本地机器文件名"
+  },
+  "/huawei-ftpc:ftpc-transfer-file/input/remote-file-name": {
+    "name": "远端机器文件名"
+  },
+  "/huawei-ftpc:ftpc-transfer-file/input/remote-extension": {
+    "name": "远端机器文件名后缀"
+  },
+  "/huawei-ftpc:ftpc-transfer-file/input/vpn-name": {
+    "name": "VPN实例名"
+  },
+  "/huawei-ftpc:ftpc-transfer-file/input/ipv6-vpn-name": {
+    "name": "IPv6 VPN实例名"
+  },
+  "/huawei-ftpc:ftpc-transfer-file/input/is-public-net": {
+    "name": "使用公网VPN"
+  },
+  "/huawei-ftpc:ftpc-transfer-file/input/source-interface-name": {
+    "name": "源接口名"
+  },
+  "/rpcs/huawei-ftpc:ftpc/ftpc-transfer-file": {
+    "name": "FTP客户端传输文件"
+  }
+}

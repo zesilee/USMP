@@ -1,5 +1,6 @@
 import type { Field } from './crdSchemaParser'
 import { evalPredicate } from './xpathEval'
+import { i18n } from '../i18n'
 
 // 通用模块控制台的纯逻辑层（FE-10/FE-11）：Tab 派生、列派生、search-filter、
 // 行级 when 单元格、运行时配置路径派生。全部由 schema 元数据驱动，零模块硬编码。
@@ -55,11 +56,12 @@ export function deriveTabs(fields: Field[] | undefined): ConsoleTab[] {
     tabs.push({ name: leafName(f), label: f.label || leafName(f), kind: 'form', field: f, readonly: ro })
   }
   if (looseLeaves.length) {
+    const basicLabel = i18n.global.t('console.basicTab')
     tabs.unshift({
       name: '__basic__',
-      label: '基本属性',
+      label: basicLabel,
       kind: 'form',
-      field: { path: '', type: 'group', label: '基本属性', fields: looseLeaves },
+      field: { path: '', type: 'group', label: basicLabel, fields: looseLeaves },
       readonly: looseLeaves.every((f) => !!f.readonly),
     })
   }

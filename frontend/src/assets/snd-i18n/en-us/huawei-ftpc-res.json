@@ -1,0 +1,80 @@
+{
+  "/huawei-ftpc:ftpc": {
+    "name": "FTP Client"
+  },
+  "/huawei-ftpc:ftpc/client": {
+    "name": "FTP Client Configuration"
+  },
+  "/huawei-ftpc:ftpc/client/source-ipv4-address": {
+    "name": "Source IPv4 Address"
+  },
+  "/huawei-ftpc:ftpc/client/source-interface-name": {
+    "name": "Source Interface Name"
+  },
+  "/huawei-ftpc:ftpc/client/src-ipv6-addr": {
+    "name": "Source IPv6 Address"
+  },
+  "/huawei-ftpc:ftpc/client/ipv6-vpn-instance-name": {
+    "name": "IPv6 VPN Name"
+  },
+  "/huawei-ftpc:ftpc/global-vpn": {
+    "name": "VPN Setting"
+  },
+  "/huawei-ftpc:ftpc/global-vpn/vpn-name": {
+    "name": "VPN Name"
+  },
+  "/huawei-ftpc:ftpc/global-vpn/ipv6-vpn-name": {
+    "name": "IPv6 VPN Name"
+  },
+  "/huawei-ftpc:ftpc-transfer-file": {
+    "name": "FTP Client Transfer"
+  },
+  "/huawei-ftpc:ftpc-transfer-file/input/server-port": {
+    "name": "Server Port"
+  },
+  "/huawei-ftpc:ftpc-transfer-file/input/source-ipv4-address": {
+    "name": "Source IPv4 Address"
+  },
+  "/huawei-ftpc:ftpc-transfer-file/input/source-ipv6-address": {
+    "name": "Source IPv6 Address"
+  },
+  "/huawei-ftpc:ftpc-transfer-file/input/server-ipv4-address": {
+    "name": "Server IPv4 Address or Server Hostname"
+  },
+  "/huawei-ftpc:ftpc-transfer-file/input/server-ipv6-address": {
+    "name": "Server IPv6 Address or Server Hostname"
+  },
+  "/huawei-ftpc:ftpc-transfer-file/input/command-type": {
+    "name": "Transfer Type"
+  },
+  "/huawei-ftpc:ftpc-transfer-file/input/user-name": {
+    "name": "Username"
+  },
+  "/huawei-ftpc:ftpc-transfer-file/input/password": {
+    "name": "Password"
+  },
+  "/huawei-ftpc:ftpc-transfer-file/input/local-file-name": {
+    "name": "Local Machine File Name"
+  },
+  "/huawei-ftpc:ftpc-transfer-file/input/remote-file-name": {
+    "name": "Remote Machine File Name"
+  },
+  "/huawei-ftpc:ftpc-transfer-file/input/remote-extension": {
+    "name": "Remote Extension"
+  },
+  "/huawei-ftpc:ftpc-transfer-file/input/vpn-name": {
+    "name": "VPN Instance Name"
+  },
+  "/huawei-ftpc:ftpc-transfer-file/input/ipv6-vpn-name": {
+    "name": "IPv6 VPN Instance Name"
+  },
+  "/huawei-ftpc:ftpc-transfer-file/input/is-public-net": {
+    "name": "Public NetWork"
+  },
+  "/huawei-ftpc:ftpc-transfer-file/input/source-interface-name": {
+    "name": "Source Interface Name"
+  },
+  "/rpcs/huawei-ftpc:ftpc/ftpc-transfer-file": {
+    "name": "FTP Client Transfer"
+  }
+}

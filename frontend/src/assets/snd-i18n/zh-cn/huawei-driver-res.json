@@ -1,0 +1,482 @@
+{
+  "/huawei-driver:driver": {
+    "name": "驱动配置"
+  },
+  "/huawei-driver:driver/global-attribute": {
+    "name": "全局属性"
+  },
+  "/huawei-driver:driver/global-attribute/energy-mode": {
+    "name": "节能模式"
+  },
+  "/huawei-driver:driver/global-attribute/sampling-period": {
+    "name": "采样周期"
+  },
+  "/huawei-driver:driver/global-attribute/system-mac-address": {
+    "name": "系统MAC地址"
+  },
+  "/huawei-driver:driver/global-attribute/system-mac-number": {
+    "name": "系统MAC地址的数量"
+  },
+  "/huawei-driver:driver/global-attribute/cur-system-work-mode": {
+    "name": "系统当前工作模式"
+  },
+  "/huawei-driver:driver/global-attribute/next-system-work-mode": {
+    "name": "系统下次启动工作模式"
+  },
+  "/huawei-driver:driver/temperature2s": {
+    "name": "温度传感器"
+  },
+  "/huawei-driver:driver/temperature2s/temperature2": {
+    "name": "温度传感器"
+  },
+  "/huawei-driver:driver/temperature2s/temperature2/position": {
+    "name": "位置"
+  },
+  "/huawei-driver:driver/temperature2s/temperature2/sensor-id": {
+    "name": "传感器号"
+  },
+  "/huawei-driver:driver/temperature2s/temperature2/minor-threshold-percent": {
+    "name": "轻微高温告警门限配置比"
+  },
+  "/huawei-driver:driver/temperature2s/temperature2/major-threshold-percent": {
+    "name": "严重高温告警门限配置比"
+  },
+  "/huawei-driver:driver/temperature2s/temperature2/fatal-threshold-percent": {
+    "name": "致命高温告警门限配置比"
+  },
+  "/huawei-driver:driver/temperature2s/temperature2/fan-adjust-high-temperature": {
+    "name": "风扇调速上限"
+  },
+  "/huawei-driver:driver/temperature2s/temperature2/fan-adjust-low-temperature": {
+    "name": "风扇调速下限"
+  },
+  "/huawei-driver:driver/temperature2s/temperature2/pcb-name": {
+    "name": "模块名"
+  },
+  "/huawei-driver:driver/temperature2s/temperature2/sensor-name": {
+    "name": "传感器名"
+  },
+  "/huawei-driver:driver/temperature2s/temperature2/state": {
+    "name": "传感器状态"
+  },
+  "/huawei-driver:driver/temperature2s/temperature2/current-temperature": {
+    "name": "传感器温度"
+  },
+  "/huawei-driver:driver/temperature2s/temperature2/minor-threshold": {
+    "name": "温度轻微告警上限阈值"
+  },
+  "/huawei-driver:driver/temperature2s/temperature2/major-threshold": {
+    "name": "温度严重告警上限阈值"
+  },
+  "/huawei-driver:driver/temperature2s/temperature2/fatal-threshold": {
+    "name": "温度致命告警上限阈值"
+  },
+  "/huawei-driver:driver/voltages": {
+    "name": "电压传感器信息"
+  },
+  "/huawei-driver:driver/voltages/voltage": {
+    "name": "电压传感器信息"
+  },
+  "/huawei-driver:driver/voltages/voltage/position": {
+    "name": "位置信息"
+  },
+  "/huawei-driver:driver/voltages/voltage/sensor-id": {
+    "name": "传感器编号"
+  },
+  "/huawei-driver:driver/voltages/voltage/major-low-threshold-percent": {
+    "name": "严重欠压门限配置比"
+  },
+  "/huawei-driver:driver/voltages/voltage/fatal-low-threshold-percent": {
+    "name": "致命欠压门限配置比"
+  },
+  "/huawei-driver:driver/voltages/voltage/major-high-threshold-percent": {
+    "name": "严重过压门限配置比"
+  },
+  "/huawei-driver:driver/voltages/voltage/fatal-high-threshold-percent": {
+    "name": "致命过压门限配置比"
+  },
+  "/huawei-driver:driver/voltages/voltage/pcb-name": {
+    "name": "模块名"
+  },
+  "/huawei-driver:driver/voltages/voltage/sensor-name": {
+    "name": "传感器名"
+  },
+  "/huawei-driver:driver/voltages/voltage/state": {
+    "name": "传感器状态"
+  },
+  "/huawei-driver:driver/voltages/voltage/current-voltage": {
+    "name": "实时电压值"
+  },
+  "/huawei-driver:driver/voltages/voltage/required-voltage": {
+    "name": "所需基础电压"
+  },
+  "/huawei-driver:driver/voltages/voltage/major-low-threshold": {
+    "name": "欠压严重告警下限阈值"
+  },
+  "/huawei-driver:driver/voltages/voltage/fatal-low-threshold": {
+    "name": "欠压致命告警下限阈值"
+  },
+  "/huawei-driver:driver/voltages/voltage/major-high-threshold": {
+    "name": "过压严重告警上限阈值"
+  },
+  "/huawei-driver:driver/voltages/voltage/fatal-high-threshold": {
+    "name": "过压致命告警上限阈值"
+  },
+  "/huawei-driver:driver/voltages/voltage/ratio": {
+    "name": "分压比"
+  },
+  "/huawei-driver:driver/area-energyinfos": {
+    "name": "功耗列表"
+  },
+  "/huawei-driver:driver/area-energyinfos/area-energyinfo": {
+    "name": "功耗统计"
+  },
+  "/huawei-driver:driver/area-energyinfos/area-energyinfo/chassis-position": {
+    "name": "机框位置"
+  },
+  "/huawei-driver:driver/area-energyinfos/area-energyinfo/area-id": {
+    "name": "域号"
+  },
+  "/huawei-driver:driver/area-energyinfos/area-energyinfo/area-rated-power": {
+    "name": "额定功率"
+  },
+  "/huawei-driver:driver/area-energyinfos/area-energyinfo/area-assigned-power": {
+    "name": "分配功率"
+  },
+  "/huawei-driver:driver/area-energyinfos/area-energyinfo/area-used-power": {
+    "name": "已使用功率"
+  },
+  "/huawei-driver:driver/area-energyinfos/area-energyinfo/area-left-power": {
+    "name": "剩余功率"
+  },
+  "/huawei-driver:driver/area-energyinfos/area-energyinfo/board-energys": {
+    "name": "单板功耗列表"
+  },
+  "/huawei-driver:driver/area-energyinfos/area-energyinfo/board-energys/board-energy": {
+    "name": "单板功耗统计"
+  },
+  "/huawei-driver:driver/area-energyinfos/area-energyinfo/board-energys/board-energy/position": {
+    "name": "单板位置"
+  },
+  "/huawei-driver:driver/area-energyinfos/area-energyinfo/board-energys/board-energy/entity-index": {
+    "name": "板索引"
+  },
+  "/huawei-driver:driver/area-energyinfos/area-energyinfo/board-energys/board-energy/pcb-name": {
+    "name": "板类型"
+  },
+  "/huawei-driver:driver/area-energyinfos/area-energyinfo/board-energys/board-energy/voltage-value": {
+    "name": "当前电压值"
+  },
+  "/huawei-driver:driver/area-energyinfos/area-energyinfo/board-energys/board-energy/electrical-value": {
+    "name": "当前电流值"
+  },
+  "/huawei-driver:driver/area-energyinfos/area-energyinfo/board-energys/board-energy/current-power": {
+    "name": "当前功率"
+  },
+  "/huawei-driver:driver/area-energyinfos/area-energyinfo/board-energys/board-energy/rated-power": {
+    "name": "额定功率"
+  },
+  "/huawei-driver:driver/area-energyinfos/area-energyinfo/board-energys/board-energy/power-threshold": {
+    "name": "功率门限"
+  },
+  "/huawei-driver:driver/area-energyinfos/area-energyinfo/board-energys/board-energy/efficiency": {
+    "name": "效率值"
+  },
+  "/huawei-driver:driver/electronic-labels": {
+    "name": "电子标签列表"
+  },
+  "/huawei-driver:driver/electronic-labels/electronic-label": {
+    "name": "电子标签"
+  },
+  "/huawei-driver:driver/electronic-labels/electronic-label/entity-class": {
+    "name": "实体类别"
+  },
+  "/huawei-driver:driver/electronic-labels/electronic-label/position": {
+    "name": "位置"
+  },
+  "/huawei-driver:driver/electronic-labels/electronic-label/entity-serial-number": {
+    "name": "实体序列号"
+  },
+  "/huawei-driver:driver/electronic-labels/electronic-label/entity-index": {
+    "name": "实体索引"
+  },
+  "/huawei-driver:driver/electronic-labels/electronic-label/entity-bomid": {
+    "name": "物料清单ID"
+  },
+  "/huawei-driver:power-on-mpu": {
+    "name": "上电主控板"
+  },
+  "/huawei-driver:power-on-mpu/input/board-position": {
+    "name": "单板位置"
+  },
+  "/huawei-driver:power-off-mpu": {
+    "name": "下电主控板"
+  },
+  "/huawei-driver:power-off-mpu/input/board-position": {
+    "name": "单板位置"
+  },
+  "/huawei-driver:power-off-mpu/input/auto-power-on": {
+    "name": "自动上电"
+  },
+  "/huawei-driver:power-on-lpu": {
+    "name": "上电接口板"
+  },
+  "/huawei-driver:power-on-lpu/input/board-position": {
+    "name": "单板位置"
+  },
+  "/huawei-driver:power-off-lpu": {
+    "name": "下电接口板"
+  },
+  "/huawei-driver:power-off-lpu/input/board-position": {
+    "name": "单板位置"
+  },
+  "/huawei-driver:power-off-lpu/input/auto-power-on": {
+    "name": "自动上电"
+  },
+  "/huawei-driver:power-on-sfu": {
+    "name": "上电交换网板"
+  },
+  "/huawei-driver:power-on-sfu/input/board-position": {
+    "name": "单板位置"
+  },
+  "/huawei-driver:power-off-sfu": {
+    "name": "下电交换网板"
+  },
+  "/huawei-driver:power-off-sfu/input/board-position": {
+    "name": "单板位置"
+  },
+  "/huawei-driver:power-off-sfu/input/auto-power-on": {
+    "name": "自动上电"
+  },
+  "/huawei-driver:power-on-card": {
+    "name": "子卡上电"
+  },
+  "/huawei-driver:power-on-card/input/card-position": {
+    "name": "子卡位置"
+  },
+  "/huawei-driver:power-off-card": {
+    "name": "子卡下电"
+  },
+  "/huawei-driver:power-off-card/input/card-position": {
+    "name": "子卡位置"
+  },
+  "/huawei-driver:power-off-card/input/auto-power-on": {
+    "name": "自动上电"
+  },
+  "/huawei-driver:set-boot-password": {
+    "name": "设置指定槽位Boot密码"
+  },
+  "/huawei-driver:set-boot-password/input/slot-id": {
+    "name": "槽位号"
+  },
+  "/huawei-driver:set-boot-password/input/old-password": {
+    "name": "旧密码"
+  },
+  "/huawei-driver:set-boot-password/input/new-password": {
+    "name": "新密码"
+  },
+  "/huawei-devm:devm/chassiss/chassis/huawei-driver:fan-attribute": {
+    "name": "风扇属性"
+  },
+  "/huawei-devm:devm/chassiss/chassis/huawei-driver:fan-attribute/workmode": {
+    "name": "风扇模式"
+  },
+  "/huawei-devm:devm/chassiss/chassis/huawei-driver:fan-attribute/speed": {
+    "name": "风扇速度"
+  },
+  "/huawei-devm:devm/chassiss/chassis/huawei-driver:power-supply-attribute": {
+    "name": "电源信息"
+  },
+  "/huawei-devm:devm/chassiss/chassis/huawei-driver:power-supply-attribute/pm-output-limit": {
+    "name": "封顶功耗"
+  },
+  "/huawei-devm:devm/chassiss/chassis/huawei-driver:power-supply-attribute/pm-input-voltage-110": {
+    "name": "电源输入电压"
+  },
+  "/huawei-devm:devm/chassiss/chassis/huawei-driver:power-supply-attribute/power-supply-mode": {
+    "name": "电源供电模式"
+  },
+  "/huawei-devm:devm/chassiss/chassis/huawei-driver:power-supply-attribute/power-supply-input": {
+    "name": "电源供电功率"
+  },
+  "/huawei-devm:devm/chassiss/chassis/huawei-driver:power-supply-attribute/power-supply-temp": {
+    "name": "机箱工作温度"
+  },
+  "/huawei-devm:devm/chassiss/chassis/huawei-driver:power-supply-attribute/power-supply-limit": {
+    "name": "框功率"
+  },
+  "/huawei-devm:devm/chassiss/chassis/huawei-driver:power-supply-attribute/power-supply-alarm-limit": {
+    "name": "告警限制功率"
+  },
+  "/huawei-devm:devm/chassiss/chassis/huawei-driver:power-supply-attribute/power-supply-assigned": {
+    "name": "预计功率"
+  },
+  "/huawei-devm:devm/chassiss/chassis/huawei-driver:power-supply-attribute/power-supply-assigned-utility": {
+    "name": "预计利用率"
+  },
+  "/huawei-devm:devm/chassiss/chassis/huawei-driver:power-supply-attribute/power-supply-left": {
+    "name": "机框配电余额"
+  },
+  "/huawei-devm:devm/chassiss/chassis/huawei-driver:power-supply-attribute/power-supply-real": {
+    "name": "机框实时功耗"
+  },
+  "/huawei-devm:devm/chassiss/chassis/huawei-driver:power-supply-attribute/power-supply-real-utility": {
+    "name": "机框实时功耗利用率"
+  },
+  "/huawei-devm:devm/huawei-driver:driver": {
+    "name": "驱动信息"
+  },
+  "/huawei-devm:devm/huawei-driver:driver/pms": {
+    "name": "电源列表"
+  },
+  "/huawei-devm:devm/huawei-driver:driver/pms/pm": {
+    "name": "电源"
+  },
+  "/huawei-devm:devm/huawei-driver:driver/pms/pm/position": {
+    "name": "位置"
+  },
+  "/huawei-devm:devm/huawei-driver:driver/pms/pm/serial-number": {
+    "name": "编号"
+  },
+  "/huawei-devm:devm/huawei-driver:driver/pms/pm/input-power-value": {
+    "name": "输入功率(W)"
+  },
+  "/huawei-devm:devm/huawei-driver:driver/pms/pm/output-voltage-value": {
+    "name": "输出电压值(V)"
+  },
+  "/huawei-devm:devm/huawei-driver:driver/pms/pm/output-electrical-value": {
+    "name": "输出电流值(A)"
+  },
+  "/huawei-devm:devm/huawei-driver:driver/pms/pm/output-power-value": {
+    "name": "输出功率(W)"
+  },
+  "/huawei-devm:devm/huawei-driver:driver/pms/pm/pm-status": {
+    "name": "PM状态"
+  },
+  "/huawei-devm:devm/huawei-driver:driver/fans": {
+    "name": "风扇信息"
+  },
+  "/huawei-devm:devm/huawei-driver:driver/fans/fan": {
+    "name": "风扇信息"
+  },
+  "/huawei-devm:devm/huawei-driver:driver/fans/fan/position": {
+    "name": "位置"
+  },
+  "/huawei-devm:devm/huawei-driver:driver/fans/fan/entity-index": {
+    "name": "物理索引"
+  },
+  "/huawei-devm:devm/huawei-driver:driver/fans/fan/board-type": {
+    "name": "板类型"
+  },
+  "/huawei-devm:devm/huawei-driver:driver/fans/fan/work-mode": {
+    "name": "工作模式"
+  },
+  "/huawei-devm:devm/huawei-driver:driver/fans/fan/speed": {
+    "name": "风扇速率"
+  },
+  "/huawei-devm:devm/huawei-driver:driver/fans/fan/fan-rate": {
+    "name": "额定速率"
+  },
+  "/huawei-devm:devm/huawei-driver:driver/fans/fan/monitor-cable-state": {
+    "name": "监控风扇状态"
+  },
+  "/huawei-devm:devm/huawei-driver:driver/fans/fan/register": {
+    "name": "风扇注册"
+  },
+  "/huawei-devm:devm/huawei-driver:driver/fans/fan/present": {
+    "name": "风扇在位"
+  },
+  "/huawei-devm:devm/huawei-driver:driver/fans/fan/fan-number": {
+    "name": "风扇数量"
+  },
+  "/huawei-devm:devm/huawei-driver:driver/fans/fan/global-speed": {
+    "name": "风扇速度百分比"
+  },
+  "/huawei-devm:devm/huawei-driver:driver/power-supplys": {
+    "name": "电源信息"
+  },
+  "/huawei-devm:devm/huawei-driver:driver/power-supplys/power-supply": {
+    "name": "电源信息"
+  },
+  "/huawei-devm:devm/huawei-driver:driver/power-supplys/power-supply/position": {
+    "name": "电源位置信息"
+  },
+  "/huawei-devm:devm/huawei-driver:driver/power-supplys/power-supply/entity-index": {
+    "name": "电源索引"
+  },
+  "/huawei-devm:devm/huawei-driver:driver/power-supplys/power-supply/board-type": {
+    "name": "电源板类型"
+  },
+  "/huawei-devm:devm/huawei-driver:driver/power-supplys/power-supply/work-mode": {
+    "name": "工作模式"
+  },
+  "/huawei-devm:devm/huawei-driver:driver/power-supplys/power-supply/monitor-cable-state": {
+    "name": "电源监控状态"
+  },
+  "/huawei-devm:devm/huawei-driver:driver/power-supplys/power-supply/power-state": {
+    "name": "电源状态"
+  },
+  "/huawei-devm:devm/huawei-driver:driver/power-supplys/power-supply/abnormal-number": {
+    "name": "异常数量"
+  },
+  "/huawei-devm:devm/huawei-driver:driver/power-supplys/power-supply/normal-number": {
+    "name": "正常数量"
+  },
+  "/huawei-devm:devm/huawei-driver:driver/power-supplys/power-supply/power-environments": {
+    "name": "电源环境"
+  },
+  "/huawei-devm:devm/huawei-driver:driver/power-supplys/power-supply/power-environments/power-environment": {
+    "name": "电源环境"
+  },
+  "/huawei-devm:devm/huawei-driver:driver/power-supplys/power-supply/power-environments/power-environment/pem-index": {
+    "name": "电源索引"
+  },
+  "/huawei-devm:devm/huawei-driver:driver/power-supplys/power-supply/power-environments/power-environment/voltage-value": {
+    "name": "电压值"
+  },
+  "/huawei-devm:devm/huawei-driver:driver/power-supplys/power-supply/power-environments/power-environment/electrical-value": {
+    "name": "电流值"
+  },
+  "/huawei-devm:devm/huawei-driver:driver/power-supplys/power-supply/power-environments/power-environment/temperature-value": {
+    "name": "温度值"
+  },
+  "/huawei-devm:devm/huawei-driver:driver/power-supplys/power-supply/power-environments/power-environment/power-value": {
+    "name": "功率值"
+  },
+  "/huawei-devm:devm/huawei-driver:driver/power-supplys/power-supply/power-environments/power-environment/out-voltage-value": {
+    "name": "输出电压值"
+  },
+  "/huawei-devm:devm/huawei-driver:driver/power-supplys/power-supply/power-environments/power-environment/out-electrical-value": {
+    "name": "输出电流值"
+  },
+  "/huawei-devm:devm/huawei-driver:driver/power-supplys/power-supply/power-environments/power-environment/out-power-value": {
+    "name": "输出功率值"
+  },
+  "/rpcs/huawei-driver:driver/power-on-mpu": {
+    "name": "上电主控板"
+  },
+  "/rpcs/huawei-driver:driver/power-off-mpu": {
+    "name": "下电主控板"
+  },
+  "/rpcs/huawei-driver:driver/power-on-lpu": {
+    "name": "上电接口板"
+  },
+  "/rpcs/huawei-driver:driver/power-off-lpu": {
+    "name": "下电接口板"
+  },
+  "/rpcs/huawei-driver:driver/power-on-sfu": {
+    "name": "上电交换网板"
+  },
+  "/rpcs/huawei-driver:driver/power-off-sfu": {
+    "name": "下电交换网板"
+  },
+  "/rpcs/huawei-driver:driver/power-on-card": {
+    "name": "子卡上电"
+  },
+  "/rpcs/huawei-driver:driver/power-off-card": {
+    "name": "子卡下电"
+  },
+  "/rpcs/huawei-driver:driver/set-boot-password": {
+    "name": "设置指定槽位Boot密码"
+  }
+}

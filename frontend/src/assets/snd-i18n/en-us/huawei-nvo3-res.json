@@ -1,0 +1,242 @@
+{
+  "/huawei-nvo3:nvo3": {
+    "name": "NVO3 Mangement"
+  },
+  "/huawei-nvo3:nvo3/vni-instances": {
+    "name": "VNI Instances"
+  },
+  "/huawei-nvo3:nvo3/vni-instances/vni-instance": {
+    "name": "VNI Instance"
+  },
+  "/huawei-nvo3:nvo3/vni-instances/vni-instance/vni": {
+    "name": "VNI ID"
+  },
+  "/huawei-nvo3:nvo3/vni-instances/vni-instance/source-nve": {
+    "name": "Interface NVE"
+  },
+  "/huawei-nvo3:nvo3/vni-instances/vni-instance/state": {
+    "name": "VNI State"
+  },
+  "/huawei-nvo3:nvo3/vni-instances/vni-instance/protocol-bgp": {
+    "name": "Dynamic Peer Learning"
+  },
+  "/huawei-nvo3:nvo3/vni-instances/vni-instance/static-peers": {
+    "name": "Static BUM Peers"
+  },
+  "/huawei-nvo3:nvo3/vni-instances/vni-instance/static-peers/static-peer": {
+    "name": "Static BUM Peer"
+  },
+  "/huawei-nvo3:nvo3/vni-instances/vni-instance/static-peers/static-peer/address": {
+    "name": "VTEP Address"
+  },
+  "/huawei-nvo3:nvo3/vni-instances/vni-instance/static-evpl-peers": {
+    "name": "Static EVPL Peers"
+  },
+  "/huawei-nvo3:nvo3/vni-instances/vni-instance/static-evpl-peers/static-evpl-peer": {
+    "name": "Static EVPL Peer"
+  },
+  "/huawei-nvo3:nvo3/vni-instances/vni-instance/static-evpl-peers/static-evpl-peer/address": {
+    "name": "VTEP Address"
+  },
+  "/huawei-nvo3:nvo3/vni-instances/vni-instance/static-evpl-peers/static-evpl-peer/preference": {
+    "name": "VXLAN Tunnel Preference"
+  },
+  "/huawei-nvo3:nvo3/vni-instances/vni-instance/mcast-groups": {
+    "name": "MCASTGROUP"
+  },
+  "/huawei-nvo3:nvo3/vni-instances/vni-instance/mcast-groups/mcast-group": {
+    "name": "Multicast Group"
+  },
+  "/huawei-nvo3:nvo3/vni-instances/vni-instance/mcast-groups/mcast-group/address": {
+    "name": "Address"
+  },
+  "/huawei-nvo3:nvo3/vni-labels": {
+    "name": "VXLAN Network Identifiers"
+  },
+  "/huawei-nvo3:nvo3/vni-labels/vni-label": {
+    "name": "VXLAN Network Identifier"
+  },
+  "/huawei-nvo3:nvo3/vni-labels/vni-label/vni": {
+    "name": "VXLAN Network Identifier"
+  },
+  "/huawei-nvo3:nvo3/vteps": {
+    "name": "VTEPs"
+  },
+  "/huawei-nvo3:nvo3/vteps/peers": {
+    "name": "BUM Peers"
+  },
+  "/huawei-nvo3:nvo3/vteps/peers/peer": {
+    "name": "BUM Peer"
+  },
+  "/huawei-nvo3:nvo3/vteps/peers/peer/vni": {
+    "name": "VNI"
+  },
+  "/huawei-nvo3:nvo3/vteps/peers/peer/source": {
+    "name": "Source Address"
+  },
+  "/huawei-nvo3:nvo3/vteps/peers/peer/destination": {
+    "name": "Destination Address"
+  },
+  "/huawei-nvo3:nvo3/vteps/peers/peer/type": {
+    "name": "Tunnel Type"
+  },
+  "/huawei-nvo3:nvo3/vteps/peers/peer/out-vni": {
+    "name": "Out VNI"
+  },
+  "/huawei-nvo3:nvo3/vteps/evpl-peers": {
+    "name": "EVPL Peers"
+  },
+  "/huawei-nvo3:nvo3/vteps/evpl-peers/evpl-peer": {
+    "name": "VXLAN Tunnel Information"
+  },
+  "/huawei-nvo3:nvo3/vteps/evpl-peers/evpl-peer/id": {
+    "name": "EVPL Instance ID"
+  },
+  "/huawei-nvo3:nvo3/vteps/evpl-peers/evpl-peer/vni": {
+    "name": "VNI"
+  },
+  "/huawei-nvo3:nvo3/vteps/evpl-peers/evpl-peer/source": {
+    "name": "VXLAN Tunnel Source Point"
+  },
+  "/huawei-nvo3:nvo3/vteps/evpl-peers/evpl-peer/peer": {
+    "name": "Primary VTEP Address"
+  },
+  "/huawei-nvo3:nvo3/vteps/evpl-peers/evpl-peer/out-vni": {
+    "name": "Mapping VNI"
+  },
+  "/huawei-nvo3:nvo3/vteps/evpl-peers/evpl-peer/backup-peer": {
+    "name": "Backup VTEP Address"
+  },
+  "/huawei-nvo3:nvo3/vteps/evpl-peers/evpl-peer/backup-out-vni": {
+    "name": "Backup VNI"
+  },
+  "/huawei-nvo3:nvo3/vteps/evpl-peers/evpl-peer/bypass-peer": {
+    "name": "Bypass VTEP Address"
+  },
+  "/huawei-nvo3:nvo3/vteps/evpl-peers/evpl-peer/bypass-out-vni": {
+    "name": "Bypass VNI"
+  },
+  "/huawei-nvo3:nvo3/vteps/cu-peers": {
+    "name": "CU Mode Peers"
+  },
+  "/huawei-nvo3:nvo3/vteps/cu-peers/cu-peer": {
+    "name": "CU Mode Peer"
+  },
+  "/huawei-nvo3:nvo3/vteps/cu-peers/cu-peer/vni": {
+    "name": "VNI ID"
+  },
+  "/huawei-nvo3:nvo3/vteps/cu-peers/cu-peer/source": {
+    "name": "Source Address"
+  },
+  "/huawei-nvo3:nvo3/vteps/cu-peers/cu-peer/destination": {
+    "name": "The Remote Address"
+  },
+  "/huawei-nvo3:nvo3/vteps/cu-peers/cu-peer/type": {
+    "name": "Tunnel type"
+  },
+  "/huawei-nvo3:nvo3/vteps/cu-peers/cu-peer/out-vni": {
+    "name": "OUT VNI ID"
+  },
+  "/huawei-nvo3:nvo3/vteps/cu-peers/cu-peer/nqa-state": {
+    "name": "NQA State"
+  },
+  "/huawei-nvo3:nvo3/vteps/cu-peers/cu-peer/packet-loss-ratio": {
+    "name": "NQA Packet Loss Ratio"
+  },
+  "/huawei-nvo3:nvo3/global-attribute": {
+    "name": "VXLAN global attribute"
+  },
+  "/huawei-nvo3:nvo3/global-attribute/exact-sub-enable": {
+    "name": "Enable exact route subscribe"
+  },
+  "/huawei-nvo3:nvo3/tunnels": {
+    "name": "VXLAN Tunnels"
+  },
+  "/huawei-nvo3:nvo3/tunnels/tunnel": {
+    "name": "VXLAN Tunnel"
+  },
+  "/huawei-nvo3:nvo3/tunnels/tunnel/id": {
+    "name": "Tunnel ID"
+  },
+  "/huawei-nvo3:nvo3/tunnels/tunnel/source": {
+    "name": "Source Address"
+  },
+  "/huawei-nvo3:nvo3/tunnels/tunnel/destination": {
+    "name": "Destination Address"
+  },
+  "/huawei-nvo3:nvo3/tunnels/tunnel/mode": {
+    "name": "Tunnel Mode"
+  },
+  "/huawei-nvo3:nvo3/tunnels/tunnel/state": {
+    "name": "Tunnel State"
+  },
+  "/huawei-nvo3:nvo3/tunnels/tunnel/type": {
+    "name": "Tunnel Type"
+  },
+  "/huawei-nvo3:nvo3/tunnels/tunnel/up-time": {
+    "name": "Tunnel Up Time"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3:nve": {
+    "name": "Nve Attribute"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3:nve/attribute": {
+    "name": "NVE"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3:nve/attribute/source-vtep-ip": {
+    "name": "Local VTEP IP Address"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3:nve/attribute/source-vtep-ipv6": {
+    "name": "Local VTEP IPv6 Address"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3:nve/attribute/phys-address": {
+    "name": "Physical MAC Address"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3:nve/attribute/bypass-vtep-ip": {
+    "name": "Local Bypass VTEP IP Address"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3:nve/attribute/bypass-vtep-ipv6": {
+    "name": "Local Bypass VTEP IPv6 Address"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3:nvo3-gateway": {
+    "name": "Antcast gateway"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3:nvo3-gateway/vxlan-anycast-gateway": {
+    "name": "VXLAN Antcast Gateway"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3:nvo3-gateway/common-anycast-gateway": {
+    "name": "Common Anycast Gateway"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-nvo3:nvo3": {
+    "name": "VNI2VRFS"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-nvo3:nvo3/vni-list": {
+    "name": "VNI2VRF"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-nvo3:nvo3/vni-list/vni": {
+    "name": "VNI ID"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-nvo3:nvo3": {
+    "name": "VNI2BDS"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-nvo3:nvo3/vni-list": {
+    "name": "VNI2BD"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-nvo3:nvo3/vni-list/vni": {
+    "name": "VNI ID"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-nvo3:nvo3/vni-list/split-horizon": {
+    "name": "Split-horizon-mode"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-nvo3:nvo3/map-vnis": {
+    "name": "MAPVNI2BD"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-nvo3:nvo3/map-vnis/map-vni": {
+    "name": "VNI Mapping"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-nvo3:nvo3/map-vnis/map-vni/vni": {
+    "name": "VXLAN Network Identifier"
+  },
+  "/huawei-bd:bd/instances/instance/huawei-nvo3:nvo3/map-vnis/map-vni/split-group": {
+    "name": "Split Group"
+  }
+}

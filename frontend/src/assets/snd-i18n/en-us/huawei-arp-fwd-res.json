@@ -1,0 +1,8 @@
+{
+  "/huawei-ifm:ifm/interfaces/interface/huawei-arp-fwd:arp-miss-enable": {
+    "name": "ARP Miss"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-arp-fwd:arp-miss-enable/enable": {
+    "name": "ARP Miss Enable"
+  }
+}

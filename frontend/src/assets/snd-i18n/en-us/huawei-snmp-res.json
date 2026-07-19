@@ -1,0 +1,782 @@
+{
+  "/huawei-snmp:snmp": {
+    "name": "SNMP"
+  },
+  "/huawei-snmp:snmp/agent-flag": {
+    "name": "Agent Enable Switch"
+  },
+  "/huawei-snmp:snmp/agent-flag/agent-enable": {
+    "name": "Agent Enable Switch"
+  },
+  "/huawei-snmp:snmp/engine": {
+    "name": "SNMP Engine"
+  },
+  "/huawei-snmp:snmp/engine/version": {
+    "name": "SNMP Version"
+  },
+  "/huawei-snmp:snmp/engine/id": {
+    "name": "SNMP Engine ID"
+  },
+  "/huawei-snmp:snmp/engine/max-msg-size": {
+    "name": "SNMP Engine Max Message Size"
+  },
+  "/huawei-snmp:snmp/system": {
+    "name": "SNMP Global Configuration"
+  },
+  "/huawei-snmp:snmp/system/trap-source-interface-name": {
+    "name": "Interface Name to Send Trap"
+  },
+  "/huawei-snmp:snmp/system/trap-source-ipv4-address": {
+    "name": "Source IP to Send Trap"
+  },
+  "/huawei-snmp:snmp/system/inform-timeout": {
+    "name": "Inform Response Timeout (Seconds)"
+  },
+  "/huawei-snmp:snmp/system/inform-resend-times": {
+    "name": "Inform Resend Times"
+  },
+  "/huawei-snmp:snmp/system/inform-pend-number": {
+    "name": "Alarms Not Confirmed"
+  },
+  "/huawei-snmp:snmp/system/packet-priority": {
+    "name": "Priority for SNMP Response Packet"
+  },
+  "/huawei-snmp:snmp/system/trap-packet-priority": {
+    "name": "Priority for SNMP Trap Packets"
+  },
+  "/huawei-snmp:snmp/system/listen-port": {
+    "name": "SNMP Listen Port"
+  },
+  "/huawei-snmp:snmp/system/trap-listen-port": {
+    "name": "SNMP Trap Port"
+  },
+  "/huawei-snmp:snmp/system/acl": {
+    "name": "Global ACL at SNMP Protocol Level"
+  },
+  "/huawei-snmp:snmp/system/community-cmplx-check": {
+    "name": "Community Complexity Check"
+  },
+  "/huawei-snmp:snmp/system/usm-user-cmplx-check": {
+    "name": "Usm User Password Complexity Check"
+  },
+  "/huawei-snmp:snmp/system/ext-err-code-enable": {
+    "name": "Extend Error Code Enable"
+  },
+  "/huawei-snmp:snmp/system/set-cache-enable": {
+    "name": "Set-cache Enable"
+  },
+  "/huawei-snmp:snmp/system/local-user-cmplx-check": {
+    "name": "Local User Password Complexity Check"
+  },
+  "/huawei-snmp:snmp/system/protocol-source-interface-name": {
+    "name": "Protocol source interface"
+  },
+  "/huawei-snmp:snmp/system/password-min-length": {
+    "name": "Password Minimum Length"
+  },
+  "/huawei-snmp:snmp/system/getbulk-timeout": {
+    "name": "Get-bulk Timeout"
+  },
+  "/huawei-snmp:snmp/system/protocol-source-ipv6-address": {
+    "name": "Protocol Source IPv6 Address"
+  },
+  "/huawei-snmp:snmp/system/vpn-instance-name": {
+    "name": "IPv4 VPN Instance Name"
+  },
+  "/huawei-snmp:snmp/system/ipv6-vpn-instance-name": {
+    "name": "IPv6 VPN Instance Name"
+  },
+  "/huawei-snmp:snmp/system/is-public-net": {
+    "name": "IsPublicNet"
+  },
+  "/huawei-snmp:snmp/system/is-ipv6-public-net": {
+    "name": "IsIPv6PublicNet"
+  },
+  "/huawei-snmp:snmp/system/ctx-engineid-check-enable": {
+    "name": "Context Engine ID Check Enable"
+  },
+  "/huawei-snmp:snmp/system/ipv4-listen-disable": {
+    "name": "IPv4 Listen Disable Switch"
+  },
+  "/huawei-snmp:snmp/system/ipv6-listen-disable": {
+    "name": "IPv6 Listen Disable Switch"
+  },
+  "/huawei-snmp:snmp/source-interfaces": {
+    "name": "SNMP Interface List"
+  },
+  "/huawei-snmp:snmp/source-interfaces/source-interface": {
+    "name": "SNMP Interface"
+  },
+  "/huawei-snmp:snmp/source-interfaces/source-interface/interface-name": {
+    "name": "Interface Name"
+  },
+  "/huawei-snmp:snmp/ipv6-sources": {
+    "name": "SNMP IPv6 List"
+  },
+  "/huawei-snmp:snmp/ipv6-sources/ipv6-source": {
+    "name": "SNMP IPv6"
+  },
+  "/huawei-snmp:snmp/ipv6-sources/ipv6-source/src-ipv6-address": {
+    "name": "IPv6 Address"
+  },
+  "/huawei-snmp:snmp/ipv6-sources/ipv6-source/vpn-name": {
+    "name": "VPN Name"
+  },
+  "/huawei-snmp:snmp/all-interface": {
+    "name": "SNMP Listen All Interface"
+  },
+  "/huawei-snmp:snmp/all-interface/all-ipv4-interface": {
+    "name": "SNMP Listen All IPv4 Interface"
+  },
+  "/huawei-snmp:snmp/all-interface/all-ipv6-interface": {
+    "name": "SNMP Listen All IPv6 Interface"
+  },
+  "/huawei-snmp:snmp/target-hosts": {
+    "name": "Target Hosts"
+  },
+  "/huawei-snmp:snmp/target-hosts/target-host": {
+    "name": "Target Host"
+  },
+  "/huawei-snmp:snmp/target-hosts/target-host/nms-name": {
+    "name": "Target Host Name"
+  },
+  "/huawei-snmp:snmp/target-hosts/target-host/domain": {
+    "name": "Network Address Type"
+  },
+  "/huawei-snmp:snmp/target-hosts/target-host/address": {
+    "name": "Network Address"
+  },
+  "/huawei-snmp:snmp/target-hosts/target-host/target-inform-timeout": {
+    "name": "Inform Response Timeout (Seconds)"
+  },
+  "/huawei-snmp:snmp/target-hosts/target-host/target-inform-resend-times": {
+    "name": "Inform Resend Times"
+  },
+  "/huawei-snmp:snmp/target-hosts/target-host/notify-type": {
+    "name": "Notice the Type of Information"
+  },
+  "/huawei-snmp:snmp/target-hosts/target-host/vpn-instance-name": {
+    "name": "VPN Instance Name"
+  },
+  "/huawei-snmp:snmp/target-hosts/target-host/port-number": {
+    "name": "Port number"
+  },
+  "/huawei-snmp:snmp/target-hosts/target-host/params": {
+    "name": "Configuration Parameters"
+  },
+  "/huawei-snmp:snmp/target-hosts/target-host/params/v1": {
+    "name": "Security model v1"
+  },
+  "/huawei-snmp:snmp/target-hosts/target-host/params/v1/security-name-v1": {
+    "name": "SNMPv1 Security Name"
+  },
+  "/huawei-snmp:snmp/target-hosts/target-host/params/v2c": {
+    "name": "Security model v2c"
+  },
+  "/huawei-snmp:snmp/target-hosts/target-host/params/v2c/security-name-v2c": {
+    "name": "SNMPv2c Security Name"
+  },
+  "/huawei-snmp:snmp/target-hosts/target-host/params/usm": {
+    "name": "Security model v3"
+  },
+  "/huawei-snmp:snmp/target-hosts/target-host/params/usm/usm-name": {
+    "name": "Security Name V3"
+  },
+  "/huawei-snmp:snmp/target-hosts/target-host/params/usm/security-level": {
+    "name": "Security Level"
+  },
+  "/huawei-snmp:snmp/target-hosts/target-host/private-netmanager": {
+    "name": "Private-netmanager"
+  },
+  "/huawei-snmp:snmp/target-hosts/target-host/is-public-net": {
+    "name": "Public-net"
+  },
+  "/huawei-snmp:snmp/target-hosts/target-host/ext-vb": {
+    "name": "Ext-vb"
+  },
+  "/huawei-snmp:snmp/target-hosts/target-host/notify-fltr-profile-name": {
+    "name": "Notify-filter-profile"
+  },
+  "/huawei-snmp:snmp/target-hosts/target-host/retries-num": {
+    "name": "Retries"
+  },
+  "/huawei-snmp:snmp/target-hosts/target-host/pending-num": {
+    "name": "Pending"
+  },
+  "/huawei-snmp:snmp/target-hosts/target-host/sent-num": {
+    "name": "Sent"
+  },
+  "/huawei-snmp:snmp/target-hosts/target-host/dropped-num": {
+    "name": "Dropped"
+  },
+  "/huawei-snmp:snmp/target-hosts/target-host/failed-num": {
+    "name": "Failed"
+  },
+  "/huawei-snmp:snmp/target-hosts/target-host/confirmed-num": {
+    "name": "Confirmed"
+  },
+  "/huawei-snmp:snmp/target-hosts/target-host/interface-name": {
+    "name": "Interface Name to Send Trap"
+  },
+  "/huawei-snmp:snmp/target-hosts/target-host/is-need-heart-beat": {
+    "name": "IsNeedHeartBeat"
+  },
+  "/huawei-snmp:snmp/target-hosts/target-host/heart-beat-time": {
+    "name": "HeartBeatTime"
+  },
+  "/huawei-snmp:snmp/target-hosts/target-host/status": {
+    "name": "IsTargetAlive"
+  },
+  "/huawei-snmp:snmp/mib-views": {
+    "name": "MIB view list"
+  },
+  "/huawei-snmp:snmp/mib-views/mib-view": {
+    "name": "MIB View Name"
+  },
+  "/huawei-snmp:snmp/mib-views/mib-view/view-name": {
+    "name": "MIB View Name"
+  },
+  "/huawei-snmp:snmp/mib-views/mib-view/sub-tree": {
+    "name": "MIB Subtree"
+  },
+  "/huawei-snmp:snmp/mib-views/mib-view/type": {
+    "name": "Filter Type"
+  },
+  "/huawei-snmp:snmp/v3-groups": {
+    "name": "SNMPv3 Groups"
+  },
+  "/huawei-snmp:snmp/v3-groups/v3-group": {
+    "name": "SNMPv3 Groups"
+  },
+  "/huawei-snmp:snmp/v3-groups/v3-group/group-name": {
+    "name": "SNMPv3 Group Name"
+  },
+  "/huawei-snmp:snmp/v3-groups/v3-group/security-level": {
+    "name": "Security Level"
+  },
+  "/huawei-snmp:snmp/v3-groups/v3-group/read-view-name": {
+    "name": "Read View Name"
+  },
+  "/huawei-snmp:snmp/v3-groups/v3-group/write-view-name": {
+    "name": "Write View Name"
+  },
+  "/huawei-snmp:snmp/v3-groups/v3-group/notify-view-name": {
+    "name": "Notify View Name"
+  },
+  "/huawei-snmp:snmp/v3-groups/v3-group/acl-number": {
+    "name": "ACL"
+  },
+  "/huawei-snmp:snmp/usm-users": {
+    "name": "USM Users"
+  },
+  "/huawei-snmp:snmp/usm-users/usm-user": {
+    "name": "USM User"
+  },
+  "/huawei-snmp:snmp/usm-users/usm-user/user-name": {
+    "name": "User Name"
+  },
+  "/huawei-snmp:snmp/usm-users/usm-user/group-name": {
+    "name": "Group Name"
+  },
+  "/huawei-snmp:snmp/usm-users/usm-user/is-auth-localized": {
+    "name": "Authentication-mode Flag"
+  },
+  "/huawei-snmp:snmp/usm-users/usm-user/auth-protocol": {
+    "name": "Authentication Protocol"
+  },
+  "/huawei-snmp:snmp/usm-users/usm-user/auth-key": {
+    "name": "Authentication Password"
+  },
+  "/huawei-snmp:snmp/usm-users/usm-user/is-priv-localized": {
+    "name": "Privacy-mode Flag"
+  },
+  "/huawei-snmp:snmp/usm-users/usm-user/priv-protocol": {
+    "name": "Encryption Protocol"
+  },
+  "/huawei-snmp:snmp/usm-users/usm-user/priv-key": {
+    "name": "Encrypted Password"
+  },
+  "/huawei-snmp:snmp/usm-users/usm-user/acl-number": {
+    "name": "ACL"
+  },
+  "/huawei-snmp:snmp/usm-users/usm-user/active-status": {
+    "name": "State"
+  },
+  "/huawei-snmp:snmp/usm-users/usm-user/left-lock-time": {
+    "name": "Left Lock Time"
+  },
+  "/huawei-snmp:snmp/local-users": {
+    "name": "Local Users"
+  },
+  "/huawei-snmp:snmp/local-users/local-user": {
+    "name": "Local User"
+  },
+  "/huawei-snmp:snmp/local-users/local-user/name": {
+    "name": "User Name"
+  },
+  "/huawei-snmp:snmp/local-users/local-user/auth-protocol": {
+    "name": "Authentication Protocol"
+  },
+  "/huawei-snmp:snmp/local-users/local-user/auth-key": {
+    "name": "Authentication Password"
+  },
+  "/huawei-snmp:snmp/local-users/local-user/priv-protocol": {
+    "name": "Encryption Protocol"
+  },
+  "/huawei-snmp:snmp/local-users/local-user/priv-key": {
+    "name": "Encrypted Password"
+  },
+  "/huawei-snmp:snmp/local-users/local-user/active-status": {
+    "name": "State"
+  },
+  "/huawei-snmp:snmp/local-users/local-user/left-lock-time": {
+    "name": "Left Lock Time"
+  },
+  "/huawei-snmp:snmp/communitys": {
+    "name": "Communitys"
+  },
+  "/huawei-snmp:snmp/communitys/community": {
+    "name": "Community"
+  },
+  "/huawei-snmp:snmp/communitys/community/name": {
+    "name": "Community Name"
+  },
+  "/huawei-snmp:snmp/communitys/community/access-right": {
+    "name": "Access Right"
+  },
+  "/huawei-snmp:snmp/communitys/community/view-name": {
+    "name": "Mib View Name"
+  },
+  "/huawei-snmp:snmp/communitys/community/acl": {
+    "name": "ACL"
+  },
+  "/huawei-snmp:snmp/communitys/community/alias-name": {
+    "name": "Alias Name"
+  },
+  "/huawei-snmp:snmp/standard-communitys": {
+    "name": "Standard Communitys"
+  },
+  "/huawei-snmp:snmp/standard-communitys/standard-community": {
+    "name": "Community"
+  },
+  "/huawei-snmp:snmp/standard-communitys/standard-community/alias-name": {
+    "name": "Alias Name"
+  },
+  "/huawei-snmp:snmp/standard-communitys/standard-community/name": {
+    "name": "Community Name"
+  },
+  "/huawei-snmp:snmp/standard-communitys/standard-community/access-right": {
+    "name": "Access Right"
+  },
+  "/huawei-snmp:snmp/standard-communitys/standard-community/view-name": {
+    "name": "Mib View Name"
+  },
+  "/huawei-snmp:snmp/standard-communitys/standard-community/acl": {
+    "name": "ACL"
+  },
+  "/huawei-snmp:snmp/black-list": {
+    "name": "System Global Blacklist Configuration"
+  },
+  "/huawei-snmp:snmp/black-list/ip-disable": {
+    "name": "IP Blocking Enable"
+  },
+  "/huawei-snmp:snmp/black-list/user-disable": {
+    "name": "User Blocking Enable"
+  },
+  "/huawei-snmp:snmp/black-list/user-fail-count": {
+    "name": "User Failure Count"
+  },
+  "/huawei-snmp:snmp/black-list/user-period": {
+    "name": "User Blocked Period"
+  },
+  "/huawei-snmp:snmp/black-list/user-reactive-time": {
+    "name": "User Reactive Period"
+  },
+  "/huawei-snmp:snmp/notification": {
+    "name": "Notification Global Config"
+  },
+  "/huawei-snmp:snmp/notification/notif-log-enable": {
+    "name": "Log Enable Switch"
+  },
+  "/huawei-snmp:snmp/notification/notif-global-ageout": {
+    "name": "Log Ageout"
+  },
+  "/huawei-snmp:snmp/notification/notif-global-limit": {
+    "name": "Log Limit"
+  },
+  "/huawei-snmp:snmp/ntfy-fltr-prfs": {
+    "name": "Notify Filter Profiles"
+  },
+  "/huawei-snmp:snmp/ntfy-fltr-prfs/ntfy-fltr-prf": {
+    "name": "Notify Filter Profile"
+  },
+  "/huawei-snmp:snmp/ntfy-fltr-prfs/ntfy-fltr-prf/name": {
+    "name": "Profile Name"
+  },
+  "/huawei-snmp:snmp/ntfy-fltr-prfs/ntfy-fltr-prf/subtree": {
+    "name": "MIB Subtree"
+  },
+  "/huawei-snmp:snmp/ntfy-fltr-prfs/ntfy-fltr-prf/type": {
+    "name": "Filter Type"
+  },
+  "/huawei-snmp:snmp/glbal-stats": {
+    "name": "SNMP Statistics"
+  },
+  "/huawei-snmp:snmp/glbal-stats/in-pkts": {
+    "name": "IN Packets"
+  },
+  "/huawei-snmp:snmp/glbal-stats/out-pkts": {
+    "name": "Out Packets"
+  },
+  "/huawei-snmp:snmp/glbal-stats/in-bad-versions": {
+    "name": "Bad Version Packets"
+  },
+  "/huawei-snmp:snmp/glbal-stats/in-bad-cmmty-names": {
+    "name": "IN Bad Community Names"
+  },
+  "/huawei-snmp:snmp/glbal-stats/in-bad-cmmty-users": {
+    "name": "IN Bad Community User"
+  },
+  "/huawei-snmp:snmp/glbal-stats/in-asn-parse-errs": {
+    "name": "ASN Parse Errors"
+  },
+  "/huawei-snmp:snmp/glbal-stats/in-too-bigs": {
+    "name": "IN Too Big"
+  },
+  "/huawei-snmp:snmp/glbal-stats/in-nosuch-names": {
+    "name": "IN No Such Names"
+  },
+  "/huawei-snmp:snmp/glbal-stats/in-bad-values": {
+    "name": "IN Bad Values"
+  },
+  "/huawei-snmp:snmp/glbal-stats/in-read-onlys": {
+    "name": "IN Read-Onlys"
+  },
+  "/huawei-snmp:snmp/glbal-stats/in-gen-errs": {
+    "name": "IN Gen Errors"
+  },
+  "/huawei-snmp:snmp/glbal-stats/in-total-req-vars": {
+    "name": "IN Total Request Variables"
+  },
+  "/huawei-snmp:snmp/glbal-stats/in-total-set-vars": {
+    "name": "IN Total Variables Set"
+  },
+  "/huawei-snmp:snmp/glbal-stats/in-get-reqs": {
+    "name": "IN Get-Requests"
+  },
+  "/huawei-snmp:snmp/glbal-stats/in-get-nexts": {
+    "name": "IN Get-Next Requests"
+  },
+  "/huawei-snmp:snmp/glbal-stats/in-set-reqs": {
+    "name": "IN Set Request"
+  },
+  "/huawei-snmp:snmp/glbal-stats/in-get-resps": {
+    "name": "IN Get Response"
+  },
+  "/huawei-snmp:snmp/glbal-stats/in-traps": {
+    "name": "IN Traps"
+  },
+  "/huawei-snmp:snmp/glbal-stats/out-too-bigs": {
+    "name": "IN Packets Too Big"
+  },
+  "/huawei-snmp:snmp/glbal-stats/out-nosuch-names": {
+    "name": "IN No Such Names"
+  },
+  "/huawei-snmp:snmp/glbal-stats/out-bad-values": {
+    "name": "IN Bad Value"
+  },
+  "/huawei-snmp:snmp/glbal-stats/out-gen-errs": {
+    "name": "Out Gen Errors"
+  },
+  "/huawei-snmp:snmp/glbal-stats/out-get-reqs": {
+    "name": "Out Get-Requests"
+  },
+  "/huawei-snmp:snmp/glbal-stats/out-get-nexts": {
+    "name": "Out Get-Next Requests"
+  },
+  "/huawei-snmp:snmp/glbal-stats/out-set-reqs": {
+    "name": "Out Set Request"
+  },
+  "/huawei-snmp:snmp/glbal-stats/out-get-resps": {
+    "name": "Out Get Response"
+  },
+  "/huawei-snmp:snmp/glbal-stats/out-traps": {
+    "name": "Out Traps"
+  },
+  "/huawei-snmp:snmp/glbal-stats/silent-drops": {
+    "name": "Silent Drops"
+  },
+  "/huawei-snmp:snmp/glbal-stats/in-get-bulks": {
+    "name": "IN Get-Bulk Requests"
+  },
+  "/huawei-snmp:snmp/glbal-stats/out-get-bulks": {
+    "name": "Out Get-Bulk Requests"
+  },
+  "/huawei-snmp:snmp/glbal-stats/in-informs": {
+    "name": "IN Informs"
+  },
+  "/huawei-snmp:snmp/glbal-stats/in-proxy-pkts": {
+    "name": "IN Proxy Packets"
+  },
+  "/huawei-snmp:snmp/glbal-stats/proxy-drops": {
+    "name": "Proxy Drops"
+  },
+  "/huawei-snmp:snmp/usm-stats": {
+    "name": "USM Statistics"
+  },
+  "/huawei-snmp:snmp/usm-stats/unknown-user-mame": {
+    "name": "Unknown User Name Packets"
+  },
+  "/huawei-snmp:snmp/usm-stats/wrong-digests": {
+    "name": "Wrong Digest"
+  },
+  "/huawei-snmp:snmp/usm-stats/unsuppt-sec-levs": {
+    "name": "Unsupported Security Level"
+  },
+  "/huawei-snmp:snmp/usm-stats/out-tm-windows": {
+    "name": "Authentication Packets Outside Window"
+  },
+  "/huawei-snmp:snmp/usm-stats/unknown-engine-ids": {
+    "name": "Unknown Engine ID"
+  },
+  "/huawei-snmp:snmp/usm-stats/decryption-errs": {
+    "name": "Decryption Failure Errors"
+  },
+  "/huawei-snmp:snmp/mpd-stats": {
+    "name": "Message Processing and Statistics"
+  },
+  "/huawei-snmp:snmp/mpd-stats/unknown-sec-model": {
+    "name": "Unknown Security Model"
+  },
+  "/huawei-snmp:snmp/mpd-stats/inval-msgs": {
+    "name": "Invalid Messages"
+  },
+  "/huawei-snmp:snmp/mpd-stats/unknown-pduhandle": {
+    "name": "Unknown PDU Handle"
+  },
+  "/huawei-snmp:snmp/ntfcation-stats": {
+    "name": "Ntfcation-stats"
+  },
+  "/huawei-snmp:snmp/ntfcation-stats/total-ntfs-logged": {
+    "name": "Saved Notification Number"
+  },
+  "/huawei-snmp:snmp/ntfcation-stats/total-ntfs-bumped": {
+    "name": "Removed Notification Number"
+  },
+  "/huawei-snmp:snmp/ntfcation-stats/total-log-entrs": {
+    "name": "Current Notification Number"
+  },
+  "/huawei-snmp:snmp/proxy": {
+    "name": "Proxy"
+  },
+  "/huawei-snmp:snmp/proxy/communitys": {
+    "name": "Proxy Communitys"
+  },
+  "/huawei-snmp:snmp/proxy/communitys/community": {
+    "name": "Proxy Community"
+  },
+  "/huawei-snmp:snmp/proxy/communitys/community/name": {
+    "name": "Proxy Community Name"
+  },
+  "/huawei-snmp:snmp/proxy/communitys/community/engine-id": {
+    "name": "Remote Engine ID"
+  },
+  "/huawei-snmp:snmp/proxy/communitys/community/acl": {
+    "name": "ACL"
+  },
+  "/huawei-snmp:snmp/proxy/communitys/community/alias-name": {
+    "name": "Alias Name"
+  },
+  "/huawei-snmp:snmp/proxy/standard-communitys": {
+    "name": "Standard Proxy Communitys"
+  },
+  "/huawei-snmp:snmp/proxy/standard-communitys/standard-community": {
+    "name": "Proxy Community"
+  },
+  "/huawei-snmp:snmp/proxy/standard-communitys/standard-community/alias-name": {
+    "name": "Alias Name"
+  },
+  "/huawei-snmp:snmp/proxy/standard-communitys/standard-community/name": {
+    "name": "Proxy Community Name"
+  },
+  "/huawei-snmp:snmp/proxy/standard-communitys/standard-community/engine-id": {
+    "name": "Remote Engine ID"
+  },
+  "/huawei-snmp:snmp/proxy/standard-communitys/standard-community/acl": {
+    "name": "ACL"
+  },
+  "/huawei-snmp:snmp/proxy/target-hosts": {
+    "name": "Proxy Target Hosts"
+  },
+  "/huawei-snmp:snmp/proxy/target-hosts/target-host": {
+    "name": "Proxy Target Host"
+  },
+  "/huawei-snmp:snmp/proxy/target-hosts/target-host/name": {
+    "name": "Proxy Target Host Name"
+  },
+  "/huawei-snmp:snmp/proxy/target-hosts/target-host/domain": {
+    "name": "Network Address Type"
+  },
+  "/huawei-snmp:snmp/proxy/target-hosts/target-host/address": {
+    "name": "Network Address"
+  },
+  "/huawei-snmp:snmp/proxy/target-hosts/target-host/timeout": {
+    "name": "Response Timeout (Seconds)"
+  },
+  "/huawei-snmp:snmp/proxy/target-hosts/target-host/vpn": {
+    "name": "VPN Instance Name"
+  },
+  "/huawei-snmp:snmp/proxy/target-hosts/target-host/port-num": {
+    "name": "UDP Port Number"
+  },
+  "/huawei-snmp:snmp/proxy/target-hosts/target-host/params": {
+    "name": "Proxy configuration parameters"
+  },
+  "/huawei-snmp:snmp/proxy/target-hosts/target-host/params/v1": {
+    "name": "Security Model V1"
+  },
+  "/huawei-snmp:snmp/proxy/target-hosts/target-host/params/v1/security-name-v1": {
+    "name": "Security Name"
+  },
+  "/huawei-snmp:snmp/proxy/target-hosts/target-host/params/v2c": {
+    "name": "Security Model V2c"
+  },
+  "/huawei-snmp:snmp/proxy/target-hosts/target-host/params/v2c/security-name-v2c": {
+    "name": "Security Name V2c"
+  },
+  "/huawei-snmp:snmp/proxy/target-hosts/target-host/params/usm": {
+    "name": "Security Model V3"
+  },
+  "/huawei-snmp:snmp/proxy/target-hosts/target-host/params/usm/usm-name": {
+    "name": "Security Name V3"
+  },
+  "/huawei-snmp:snmp/proxy/target-hosts/target-host/params/usm/security-level": {
+    "name": "Security Level"
+  },
+  "/huawei-snmp:snmp/proxy/target-hosts/target-host/interface-name": {
+    "name": "Interface Name to Send Trap"
+  },
+  "/huawei-snmp:snmp/proxy/target-hosts/target-host/public-net": {
+    "name": "Public-net"
+  },
+  "/huawei-snmp:snmp/proxy/rules": {
+    "name": "Proxy Rules"
+  },
+  "/huawei-snmp:snmp/proxy/rules/rule": {
+    "name": "Proxy Rule"
+  },
+  "/huawei-snmp:snmp/proxy/rules/rule/name": {
+    "name": "Proxy Rule Name"
+  },
+  "/huawei-snmp:snmp/proxy/rules/rule/type": {
+    "name": "Type"
+  },
+  "/huawei-snmp:snmp/proxy/rules/rule/engine-id": {
+    "name": "Remote Engine ID"
+  },
+  "/huawei-snmp:snmp/proxy/rules/rule/host-name": {
+    "name": "Proxy Target Host Name"
+  },
+  "/huawei-snmp:snmp/proxy/rules/rule/security-model": {
+    "name": "Security Model"
+  },
+  "/huawei-snmp:snmp/proxy/rules/rule/security-name": {
+    "name": "Security Name"
+  },
+  "/huawei-snmp:snmp/proxy/rules/rule/security-v3-name": {
+    "name": "Security Name V3"
+  },
+  "/huawei-snmp:snmp/proxy/rules/rule/security-level": {
+    "name": "Security Level"
+  },
+  "/huawei-snmp:snmp/proxy/usm-users": {
+    "name": "Proxy USM User"
+  },
+  "/huawei-snmp:snmp/proxy/usm-users/engine-id": {
+    "name": "Engine ID"
+  },
+  "/huawei-snmp:snmp/proxy/usm-users/usm-user": {
+    "name": "Proxy USM Users"
+  },
+  "/huawei-snmp:snmp/proxy/usm-users/usm-user/user-name": {
+    "name": "User Name"
+  },
+  "/huawei-snmp:snmp/proxy/usm-users/usm-user/group-name": {
+    "name": "Group Name"
+  },
+  "/huawei-snmp:snmp/proxy/usm-users/usm-user/is-auth-localized": {
+    "name": "Authentication-mode Flag"
+  },
+  "/huawei-snmp:snmp/proxy/usm-users/usm-user/auth-protocol": {
+    "name": "Authentication Protocol"
+  },
+  "/huawei-snmp:snmp/proxy/usm-users/usm-user/auth-key": {
+    "name": "Authentication Password"
+  },
+  "/huawei-snmp:snmp/proxy/usm-users/usm-user/is-priv-localized": {
+    "name": "Privacy-mode Flag"
+  },
+  "/huawei-snmp:snmp/proxy/usm-users/usm-user/priv-protocol": {
+    "name": "Encryption Protocol"
+  },
+  "/huawei-snmp:snmp/proxy/usm-users/usm-user/priv-key": {
+    "name": "Encryption Password"
+  },
+  "/huawei-snmp:snmp/proxy/usm-users/usm-user/acl-number": {
+    "name": "ACL"
+  },
+  "/huawei-snmp:snmp/proxy/usm-users/usm-user/active-status": {
+    "name": "State"
+  },
+  "/huawei-snmp:snmp/proxy/usm-users/usm-user/left-lock-time": {
+    "name": "Left Lock Time(s)"
+  },
+  "/huawei-snmp:snmp/proxy/source-interfaces": {
+    "name": "SNMP Interface List"
+  },
+  "/huawei-snmp:snmp/proxy/source-interfaces/source-interface": {
+    "name": "SNMP Proxy Interface"
+  },
+  "/huawei-snmp:snmp/proxy/source-interfaces/source-interface/interface-name": {
+    "name": "Interface Name"
+  },
+  "/huawei-snmp:snmp/proxy/ipv6-sources": {
+    "name": "SNMP Proxy IPv6 List"
+  },
+  "/huawei-snmp:snmp/proxy/ipv6-sources/ipv6-source": {
+    "name": "SNMP Proxy IPv6"
+  },
+  "/huawei-snmp:snmp/proxy/ipv6-sources/ipv6-source/src-ipv6-address": {
+    "name": "IPv6 Address"
+  },
+  "/huawei-snmp:snmp/proxy/ipv6-sources/ipv6-source/vpn-name": {
+    "name": "VPN Name"
+  },
+  "/huawei-snmp:snmp/proxy/all-interface": {
+    "name": "SNMP Proxy Listen All Interface"
+  },
+  "/huawei-snmp:snmp/proxy/all-interface/all-ipv4-interface": {
+    "name": "SNMP Listen All IPv4 Interface"
+  },
+  "/huawei-snmp:snmp/proxy/all-interface/all-ipv6-interface": {
+    "name": "SNMP Listen All IPv6 Interface"
+  },
+  "/huawei-snmp:activate-users": {
+    "name": "Activate Users"
+  },
+  "/huawei-snmp:activate-users/input/activate-users": {
+    "name": "List of Activate-users"
+  },
+  "/huawei-snmp:activate-users/input/activate-users/activate-user": {
+    "name": "Activate User"
+  },
+  "/huawei-snmp:activate-users/input/activate-users/activate-user/name": {
+    "name": "USM User Name"
+  },
+  "/huawei-snmp:activate-users/input/activate-users/activate-user/engine-id": {
+    "name": "Remote Engine ID"
+  },
+  "/rpcs/huawei-snmp:snmp/activate-users": {
+    "name": "Activate Users"
+  }
+}

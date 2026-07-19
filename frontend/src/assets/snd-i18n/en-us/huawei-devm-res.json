@@ -1,0 +1,767 @@
+{
+  "/huawei-devm:devm": {
+    "name": "Global Configuration"
+  },
+  "/huawei-devm:devm/physical-entitys": {
+    "name": "Physical Entities"
+  },
+  "/huawei-devm:devm/physical-entitys/physical-entity": {
+    "name": "Physical Entity"
+  },
+  "/huawei-devm:devm/physical-entitys/physical-entity/class": {
+    "name": "Class"
+  },
+  "/huawei-devm:devm/physical-entitys/physical-entity/position": {
+    "name": "Position"
+  },
+  "/huawei-devm:devm/physical-entitys/physical-entity/serial-number": {
+    "name": "Number"
+  },
+  "/huawei-devm:devm/physical-entitys/physical-entity/index": {
+    "name": "Index"
+  },
+  "/huawei-devm:devm/physical-entitys/physical-entity/chassis-index": {
+    "name": "Chassis Index"
+  },
+  "/huawei-devm:devm/physical-entitys/physical-entity/board-index": {
+    "name": "Board Index"
+  },
+  "/huawei-devm:devm/physical-entitys/physical-entity/name": {
+    "name": "Name"
+  },
+  "/huawei-devm:devm/physical-entitys/physical-entity/entity-description": {
+    "name": "Description"
+  },
+  "/huawei-devm:devm/physical-entitys/physical-entity/alias": {
+    "name": "Alias"
+  },
+  "/huawei-devm:devm/physical-entitys/physical-entity/vendor-type": {
+    "name": "Hardware Type"
+  },
+  "/huawei-devm:devm/physical-entitys/physical-entity/contained-index": {
+    "name": "Parent Index"
+  },
+  "/huawei-devm:devm/physical-entitys/physical-entity/parent-relative-position": {
+    "name": "Relative Position"
+  },
+  "/huawei-devm:devm/physical-entitys/physical-entity/hardware-version": {
+    "name": "Hardware Version"
+  },
+  "/huawei-devm:devm/physical-entitys/physical-entity/firmware-version": {
+    "name": "Firmware Version"
+  },
+  "/huawei-devm:devm/physical-entitys/physical-entity/software-version": {
+    "name": "Software Version"
+  },
+  "/huawei-devm:devm/physical-entitys/physical-entity/module-name": {
+    "name": "Module Name"
+  },
+  "/huawei-devm:devm/physical-entitys/physical-entity/is-fru": {
+    "name": "Replaceable Unit Flag"
+  },
+  "/huawei-devm:devm/physical-entitys/physical-entity/admin-state": {
+    "name": "Administration State"
+  },
+  "/huawei-devm:devm/physical-entitys/physical-entity/running-state": {
+    "name": "Operation State"
+  },
+  "/huawei-devm:devm/physical-entitys/physical-entity/standby-state": {
+    "name": "Active/Standby State"
+  },
+  "/huawei-devm:devm/physical-entitys/physical-entity/system-oid": {
+    "name": "Entity OID"
+  },
+  "/huawei-devm:devm/physical-entitys/physical-entity/ls-name": {
+    "name": "LS Name"
+  },
+  "/huawei-devm:devm/logic-entitys": {
+    "name": "Logic entitys"
+  },
+  "/huawei-devm:devm/logic-entitys/logic-entity": {
+    "name": "Logic entity"
+  },
+  "/huawei-devm:devm/logic-entitys/logic-entity/class": {
+    "name": "Class"
+  },
+  "/huawei-devm:devm/logic-entitys/logic-entity/position": {
+    "name": "Position"
+  },
+  "/huawei-devm:devm/logic-entitys/logic-entity/serial-number": {
+    "name": "Serial number"
+  },
+  "/huawei-devm:devm/logic-entitys/logic-entity/vendor-type": {
+    "name": "Vendor type"
+  },
+  "/huawei-devm:devm/logic-entitys/logic-entity/name": {
+    "name": "Name"
+  },
+  "/huawei-devm:devm/logic-entitys/logic-entity/entity-description": {
+    "name": "Entity description"
+  },
+  "/huawei-devm:devm/logic-entitys/logic-entity/index": {
+    "name": "Index"
+  },
+  "/huawei-devm:devm/logic-entitys/logic-entity/parent-index": {
+    "name": "Parent index"
+  },
+  "/huawei-devm:devm/logic-entitys/logic-entity/parent-relative-position": {
+    "name": "Parent relative position"
+  },
+  "/huawei-devm:devm/chassiss": {
+    "name": "Chassises"
+  },
+  "/huawei-devm:devm/chassiss/chassis": {
+    "name": "Chassis"
+  },
+  "/huawei-devm:devm/chassiss/chassis/position": {
+    "name": "Position"
+  },
+  "/huawei-devm:devm/chassiss/chassis/index": {
+    "name": "Index"
+  },
+  "/huawei-devm:devm/chassiss/chassis/type": {
+    "name": "Chassis Type"
+  },
+  "/huawei-devm:devm/chassiss/chassis/service-type": {
+    "name": "Service Type"
+  },
+  "/huawei-devm:devm/chassiss/chassis/slot-num": {
+    "name": "Number of Slots"
+  },
+  "/huawei-devm:devm/chassiss/chassis/board-num": {
+    "name": "Number of Boards"
+  },
+  "/huawei-devm:devm/chassiss/chassis/fan-num": {
+    "name": "Number of Fans"
+  },
+  "/huawei-devm:devm/chassiss/chassis/power-num": {
+    "name": "Number of Power Modules"
+  },
+  "/huawei-devm:devm/chassiss/chassis/up-time": {
+    "name": "Running Time"
+  },
+  "/huawei-devm:devm/chassiss/chassis/status-last-change": {
+    "name": "Running Status Change Time"
+  },
+  "/huawei-devm:devm/chassiss/chassis/entity-last-change": {
+    "name": "Entity Change Time"
+  },
+  "/huawei-devm:devm/chassiss/chassis/dust-clean-cycle": {
+    "name": "Dust Clean Cycle"
+  },
+  "/huawei-devm:devm/chassiss/chassis/last-clean-date": {
+    "name": "Last Clean Date"
+  },
+  "/huawei-devm:devm/chassiss/chassis/up-to-last-clean": {
+    "name": "Up To Last Clean"
+  },
+  "/huawei-devm:devm/chassiss/chassis/alarm-exist-days": {
+    "name": "Alarm Exist Days"
+  },
+  "/huawei-devm:devm/chassiss/chassis/monitor-board-changes": {
+    "name": "Monitor Board Changes"
+  },
+  "/huawei-devm:devm/chassiss/chassis/monitor-board-changes/monitor-board-change": {
+    "name": "Monitor Board Change"
+  },
+  "/huawei-devm:devm/chassiss/chassis/monitor-board-changes/monitor-board-change/board-index": {
+    "name": "Board Index"
+  },
+  "/huawei-devm:devm/chassiss/chassis/monitor-board-changes/monitor-board-change/status-last-change": {
+    "name": "Running Status Change Time"
+  },
+  "/huawei-devm:devm/chassiss/chassis/monitor-board-changes/monitor-board-change/entity-last-change": {
+    "name": "Entity Change Time"
+  },
+  "/huawei-devm:devm/logic-containers": {
+    "name": "Logic Slots"
+  },
+  "/huawei-devm:devm/logic-containers/logic-container": {
+    "name": "Logic Slot"
+  },
+  "/huawei-devm:devm/logic-containers/logic-container/position": {
+    "name": "Position"
+  },
+  "/huawei-devm:devm/logic-containers/logic-container/index": {
+    "name": "Index"
+  },
+  "/huawei-devm:devm/logic-containers/logic-container/container-type": {
+    "name": "Type"
+  },
+  "/huawei-devm:devm/logic-containers/logic-container/equiped-entity-type": {
+    "name": "Equipped Entity Type"
+  },
+  "/huawei-devm:devm/logic-containers/logic-container/supported-entity-types": {
+    "name": "List of Supported Entity Types"
+  },
+  "/huawei-devm:devm/logic-containers/logic-container/supported-entity-types/supported-entity-type": {
+    "name": "List of Supported Entity Types"
+  },
+  "/huawei-devm:devm/logic-containers/logic-container/supported-entity-types/supported-entity-type/entity-type": {
+    "name": "Entity Type"
+  },
+  "/huawei-devm:devm/containers": {
+    "name": "Containers"
+  },
+  "/huawei-devm:devm/containers/container": {
+    "name": "Container"
+  },
+  "/huawei-devm:devm/containers/container/position": {
+    "name": "Position"
+  },
+  "/huawei-devm:devm/containers/container/index": {
+    "name": "Index"
+  },
+  "/huawei-devm:devm/containers/container/type": {
+    "name": "Type"
+  },
+  "/huawei-devm:devm/containers/container/equiped-entity-type": {
+    "name": "Type of an Equipped Entity"
+  },
+  "/huawei-devm:devm/containers/container/supported-entity-types": {
+    "name": "Supported-entity-types"
+  },
+  "/huawei-devm:devm/containers/container/supported-entity-types/supported-entity-type": {
+    "name": "SupportedEntityType"
+  },
+  "/huawei-devm:devm/containers/container/supported-entity-types/supported-entity-type/entity-type": {
+    "name": "Entity-type"
+  },
+  "/huawei-devm:devm/mpu-boards": {
+    "name": "MPU Boards"
+  },
+  "/huawei-devm:devm/mpu-boards/mpu-board": {
+    "name": "MPU Board"
+  },
+  "/huawei-devm:devm/mpu-boards/mpu-board/position": {
+    "name": "Position"
+  },
+  "/huawei-devm:devm/mpu-boards/mpu-board/index": {
+    "name": "Index"
+  },
+  "/huawei-devm:devm/mpu-boards/mpu-board/board-type": {
+    "name": "Board Type"
+  },
+  "/huawei-devm:devm/mpu-boards/mpu-board/up-time": {
+    "name": "Running Time"
+  },
+  "/huawei-devm:devm/mpu-boards/mpu-board/sdram-size": {
+    "name": "SDRAM Size"
+  },
+  "/huawei-devm:devm/mpu-boards/mpu-board/nvram-size": {
+    "name": "NVRAM Size"
+  },
+  "/huawei-devm:devm/mpu-boards/mpu-board/flash-size": {
+    "name": "Flash Size"
+  },
+  "/huawei-devm:devm/mpu-boards/mpu-board/ls-role": {
+    "name": "Role"
+  },
+  "/huawei-devm:devm/mpu-boards/mpu-board/last-reset-time": {
+    "name": "Last Reset Time"
+  },
+  "/huawei-devm:devm/mpu-boards/mpu-board/last-reset-reason": {
+    "name": "Last Reset Reason"
+  },
+  "/huawei-devm:devm/mpu-boards/mpu-board/register-time": {
+    "name": "Registration Time"
+  },
+  "/huawei-devm:devm/mpu-boards/mpu-board/is-register": {
+    "name": "Registered or not"
+  },
+  "/huawei-devm:devm/mpu-boards/mpu-board/cfcard-size": {
+    "name": "Cfcard Memory Size"
+  },
+  "/huawei-devm:devm/mpu-boards/mpu-board/cfcard2-size": {
+    "name": "Cfcard2 Memory Size"
+  },
+  "/huawei-devm:devm/lpu-boards": {
+    "name": "LPU Boards"
+  },
+  "/huawei-devm:devm/lpu-boards/lpu-board": {
+    "name": "LPU Board"
+  },
+  "/huawei-devm:devm/lpu-boards/lpu-board/position": {
+    "name": "Position"
+  },
+  "/huawei-devm:devm/lpu-boards/lpu-board/index": {
+    "name": "Index"
+  },
+  "/huawei-devm:devm/lpu-boards/lpu-board/board-type": {
+    "name": "Board Type"
+  },
+  "/huawei-devm:devm/lpu-boards/lpu-board/sdram-size": {
+    "name": "SDRAM Size"
+  },
+  "/huawei-devm:devm/lpu-boards/lpu-board/flash-size": {
+    "name": "Flash Size"
+  },
+  "/huawei-devm:devm/lpu-boards/lpu-board/up-time": {
+    "name": "Running Time"
+  },
+  "/huawei-devm:devm/lpu-boards/lpu-board/np-rdram-size": {
+    "name": "NP RDRAM Size"
+  },
+  "/huawei-devm:devm/lpu-boards/lpu-board/np-sram-size": {
+    "name": "NP SRAM Size"
+  },
+  "/huawei-devm:devm/lpu-boards/lpu-board/service-type": {
+    "name": "Service Type"
+  },
+  "/huawei-devm:devm/lpu-boards/lpu-board/next-service-type": {
+    "name": "Type of Next Started Service Board"
+  },
+  "/huawei-devm:devm/lpu-boards/lpu-board/pic-num": {
+    "name": "Number of PICs"
+  },
+  "/huawei-devm:devm/lpu-boards/lpu-board/sub-slot-num": {
+    "name": "Number of Subcard Slots"
+  },
+  "/huawei-devm:devm/lpu-boards/lpu-board/clock-8k-port": {
+    "name": "8K Clock Port"
+  },
+  "/huawei-devm:devm/lpu-boards/lpu-board/current-l3-clk": {
+    "name": "Current L3 Clock Source"
+  },
+  "/huawei-devm:devm/lpu-boards/lpu-board/register-time": {
+    "name": "Registration Time"
+  },
+  "/huawei-devm:devm/lpu-boards/lpu-board/is-register": {
+    "name": "Registered or not"
+  },
+  "/huawei-devm:devm/sfu-boards": {
+    "name": "SFU Boards"
+  },
+  "/huawei-devm:devm/sfu-boards/sfu-board": {
+    "name": "SFU Board"
+  },
+  "/huawei-devm:devm/sfu-boards/sfu-board/position": {
+    "name": "Position"
+  },
+  "/huawei-devm:devm/sfu-boards/sfu-board/index": {
+    "name": "Index"
+  },
+  "/huawei-devm:devm/sfu-boards/sfu-board/board-type": {
+    "name": "Board Type"
+  },
+  "/huawei-devm:devm/sfu-boards/sfu-board/sdram-size": {
+    "name": "SDRAM Size"
+  },
+  "/huawei-devm:devm/sfu-boards/sfu-board/flash-size": {
+    "name": "Flash Size"
+  },
+  "/huawei-devm:devm/sfu-boards/sfu-board/up-time": {
+    "name": "Running Time"
+  },
+  "/huawei-devm:devm/sfu-boards/sfu-board/register-time": {
+    "name": "Registration Time"
+  },
+  "/huawei-devm:devm/sfu-boards/sfu-board/is-register": {
+    "name": "Registered or not"
+  },
+  "/huawei-devm:devm/cards": {
+    "name": "Cards"
+  },
+  "/huawei-devm:devm/cards/card": {
+    "name": "Card"
+  },
+  "/huawei-devm:devm/cards/card/position": {
+    "name": "Position"
+  },
+  "/huawei-devm:devm/cards/card/index": {
+    "name": "Index"
+  },
+  "/huawei-devm:devm/cards/card/type": {
+    "name": "Type"
+  },
+  "/huawei-devm:devm/cards/card/hard-type": {
+    "name": "Hard type"
+  },
+  "/huawei-devm:devm/cards/card/port-num": {
+    "name": "Port num"
+  },
+  "/huawei-devm:devm/cards/card/init-status": {
+    "name": "Init status"
+  },
+  "/huawei-devm:devm/cards/card/register-status": {
+    "name": "Register status"
+  },
+  "/huawei-devm:devm/cards/card/pic": {
+    "name": "Pic"
+  },
+  "/huawei-devm:devm/cards/card/pic/logic-status": {
+    "name": "Logic status"
+  },
+  "/huawei-devm:devm/cards/card/pic/up-time": {
+    "name": "Up time"
+  },
+  "/huawei-devm:devm/cf-cards": {
+    "name": "CF Cards"
+  },
+  "/huawei-devm:devm/cf-cards/cf-card": {
+    "name": "CF Card"
+  },
+  "/huawei-devm:devm/cf-cards/cf-card/position": {
+    "name": "Position"
+  },
+  "/huawei-devm:devm/cf-cards/cf-card/serial-number": {
+    "name": "Number"
+  },
+  "/huawei-devm:devm/cf-cards/cf-card/index": {
+    "name": "Index"
+  },
+  "/huawei-devm:devm/cf-cards/cf-card/card-type": {
+    "name": "Card Type"
+  },
+  "/huawei-devm:devm/cf-cards/cf-card/memory-size": {
+    "name": "Memory Size"
+  },
+  "/huawei-devm:devm/cf-cards/cf-card/memory-used": {
+    "name": "Memory Used"
+  },
+  "/huawei-devm:devm/cf-cards/cf-card/memory-free": {
+    "name": "Memory Available"
+  },
+  "/huawei-devm:devm/ports": {
+    "name": "Ports"
+  },
+  "/huawei-devm:devm/ports/port": {
+    "name": "Port"
+  },
+  "/huawei-devm:devm/ports/port/position": {
+    "name": "Position"
+  },
+  "/huawei-devm:devm/ports/port/index": {
+    "name": "Index"
+  },
+  "/huawei-devm:devm/ports/port/admin-state": {
+    "name": "Administration State"
+  },
+  "/huawei-devm:devm/ports/port/type": {
+    "name": "Port Type"
+  },
+  "/huawei-devm:devm/ports/port/hard-type": {
+    "name": "Hardware Type"
+  },
+  "/huawei-devm:devm/ports/port/loopback-mode": {
+    "name": "Loopback Mode"
+  },
+  "/huawei-devm:devm/ports/port/enable-transmission-delay": {
+    "name": "Port Tx Delay Enable"
+  },
+  "/huawei-devm:devm/ports/port/last-up-time": {
+    "name": "Last Up Time"
+  },
+  "/huawei-devm:devm/ports/port/last-down-time": {
+    "name": "Last Down Time"
+  },
+  "/huawei-devm:devm/ports/port/medium-type": {
+    "name": "Medium Type"
+  },
+  "/huawei-devm:devm/ports/port/optical-equipped": {
+    "name": "Optical Transceiver Equip Flag"
+  },
+  "/huawei-devm:devm/ports/port/physical-bandwidth": {
+    "name": "Physical Bandwidth"
+  },
+  "/huawei-devm:devm/logic-ports": {
+    "name": "Logic Ports"
+  },
+  "/huawei-devm:devm/logic-ports/logic-port": {
+    "name": "Logic Port"
+  },
+  "/huawei-devm:devm/logic-ports/logic-port/position": {
+    "name": "Position"
+  },
+  "/huawei-devm:devm/logic-ports/logic-port/serial-number": {
+    "name": "Number"
+  },
+  "/huawei-devm:devm/logic-ports/logic-port/port-type": {
+    "name": "Port Type"
+  },
+  "/huawei-devm:devm/logic-ports/logic-port/index": {
+    "name": "Index"
+  },
+  "/huawei-devm:devm/logic-ports/logic-port/admin-state": {
+    "name": "Administration State"
+  },
+  "/huawei-devm:devm/logic-ports/logic-port/hard-type": {
+    "name": "Hardware Type"
+  },
+  "/huawei-devm:devm/logic-ports/logic-port/enable-transmission-delay": {
+    "name": "Port Tx Delay Enable"
+  },
+  "/huawei-devm:devm/logic-ports/logic-port/level": {
+    "name": "Port Speed Level"
+  },
+  "/huawei-devm:devm/entity-classes": {
+    "name": "Entity Classes"
+  },
+  "/huawei-devm:devm/entity-classes/entity-class": {
+    "name": "Entity Class"
+  },
+  "/huawei-devm:devm/entity-classes/entity-class/class-name": {
+    "name": "Entity Type"
+  },
+  "/huawei-devm:devm/entity-classes/entity-class/is-resetable": {
+    "name": "Reset Flag"
+  },
+  "/huawei-devm:devm/entity-classes/entity-class/is-switchoverable": {
+    "name": "Switchover Flag"
+  },
+  "/huawei-devm:devm/inconsistent-entitys": {
+    "name": "Incompatible Entities"
+  },
+  "/huawei-devm:devm/inconsistent-entitys/inconsistent-entity": {
+    "name": "Incompatible Entity"
+  },
+  "/huawei-devm:devm/inconsistent-entitys/inconsistent-entity/class": {
+    "name": "Entity Class"
+  },
+  "/huawei-devm:devm/inconsistent-entitys/inconsistent-entity/position": {
+    "name": "Position"
+  },
+  "/huawei-devm:devm/inconsistent-entitys/inconsistent-entity/serial-number": {
+    "name": "Number"
+  },
+  "/huawei-devm:devm/inconsistent-entitys/inconsistent-entity/logical-type": {
+    "name": "Logical Type"
+  },
+  "/huawei-devm:devm/inconsistent-entitys/inconsistent-entity/physical-type": {
+    "name": "Physical Type"
+  },
+  "/huawei-devm:devm/inconsistent-entitys/inconsistent-entity/oper-state": {
+    "name": "Running status"
+  },
+  "/huawei-devm:devm/offlines": {
+    "name": "Offline configurations"
+  },
+  "/huawei-devm:devm/offlines/offline": {
+    "name": "Offline configuration"
+  },
+  "/huawei-devm:devm/offlines/offline/class": {
+    "name": "Class"
+  },
+  "/huawei-devm:devm/offlines/offline/position": {
+    "name": "Position"
+  },
+  "/huawei-devm:devm/schedule-reboot": {
+    "name": "Schedule reboot"
+  },
+  "/huawei-devm:devm/schedule-reboot/datetime": {
+    "name": "Datetime"
+  },
+  "/huawei-devm:devm/schedule-reboot/delay-time": {
+    "name": "Delay time"
+  },
+  "/huawei-devm:reset-board": {
+    "name": "Reset Board"
+  },
+  "/huawei-devm:reset-board/input/board-position": {
+    "name": "Board Position"
+  },
+  "/huawei-devm:reset-mpu-board": {
+    "name": "Reset MPU"
+  },
+  "/huawei-devm:reset-mpu-board/input/board-position": {
+    "name": "Board Position"
+  },
+  "/huawei-devm:reset-lpu-board": {
+    "name": "Reset LPU"
+  },
+  "/huawei-devm:reset-lpu-board/input/board-position": {
+    "name": "Board Position"
+  },
+  "/huawei-devm:reset-sfu-board": {
+    "name": "Reset SFU"
+  },
+  "/huawei-devm:reset-sfu-board/input/board-position": {
+    "name": "Board Position"
+  },
+  "/huawei-devm:reset-card": {
+    "name": "Reset card"
+  },
+  "/huawei-devm:reset-card/input/card-position": {
+    "name": "Card position"
+  },
+  "/huawei-devm:reboot": {
+    "name": "Reboot"
+  },
+  "/huawei-devm:reboot/input/save-flag": {
+    "name": "Save Configuration Flag"
+  },
+  "/huawei-devm:transfer-pnpp": {
+    "name": "Transfer pnpp File"
+  },
+  "/huawei-devm:transfer-pnpp/input/server-ip-address": {
+    "name": "Server IP Address"
+  },
+  "/huawei-devm:transfer-pnpp/input/server-port": {
+    "name": "Server Port"
+  },
+  "/huawei-devm:transfer-pnpp/input/vpn-instance-name": {
+    "name": "VPN Instance Name"
+  },
+  "/huawei-devm:transfer-pnpp/input/source-ipv4-address": {
+    "name": "Source IPV4 Address"
+  },
+  "/huawei-devm:transfer-pnpp/input/source-interface-name": {
+    "name": "Source Interface Name"
+  },
+  "/huawei-devm:transfer-pnpp/input/server-type": {
+    "name": "Server Type"
+  },
+  "/huawei-devm:transfer-pnpp/input/command-type": {
+    "name": "Command Type"
+  },
+  "/huawei-devm:transfer-pnpp/input/user-name": {
+    "name": "User Name"
+  },
+  "/huawei-devm:transfer-pnpp/input/password": {
+    "name": "Password"
+  },
+  "/huawei-devm:transfer-pnpp/input/local-file-name": {
+    "name": "Local File Name"
+  },
+  "/huawei-devm:transfer-pnpp/input/remote-file-name": {
+    "name": "Remote File Name"
+  },
+  "/huawei-devm:transfer-pnpp/input/remote-extension": {
+    "name": "Remote Extension"
+  },
+  "/huawei-devm:transfer-pnpp/input/secure-transfer-options": {
+    "name": "Secure Transfer Options"
+  },
+  "/huawei-devm:transfer-pnpp/input/secure-transfer-options/prefer-kex": {
+    "name": "Prefer Kex"
+  },
+  "/huawei-devm:transfer-pnpp/input/secure-transfer-options/prefer-stoc-cipher": {
+    "name": "Prefer Stoc Cipher"
+  },
+  "/huawei-devm:transfer-pnpp/input/secure-transfer-options/prefer-ctos-cipher": {
+    "name": "Prefer Ctos Cipher"
+  },
+  "/huawei-devm:transfer-pnpp/input/secure-transfer-options/prefer-stoc-hmac": {
+    "name": "Prefer Stoc Hmac"
+  },
+  "/huawei-devm:transfer-pnpp/input/secure-transfer-options/prefer-ctos-hmac": {
+    "name": "Prefer Ctos Hmac"
+  },
+  "/huawei-devm:transfer-pnpp/input/secure-transfer-options/keep-alive-interval": {
+    "name": "Keepalive interval"
+  },
+  "/huawei-devm:transfer-pnpp/input/secure-transfer-options/keep-alive-count": {
+    "name": "Keepalive Count"
+  },
+  "/huawei-devm:reset-offline-config": {
+    "name": "Reset Offline Config"
+  },
+  "/huawei-devm:reset-offline-config/input/board-position": {
+    "name": "Board-position"
+  },
+  "/huawei-devm:clear-inactive-config": {
+    "name": "Clear inactive configuration"
+  },
+  "/huawei-devm:clear-inactive-config/input/entity-class": {
+    "name": "Inactive configuration class"
+  },
+  "/huawei-devm:clear-inactive-config/input/position": {
+    "name": "Inactive configuration position"
+  },
+  "/huawei-devm:cold-reset-lpu": {
+    "name": "Cold Reset LPU"
+  },
+  "/huawei-devm:cold-reset-lpu/input/board-position": {
+    "name": "Board Position"
+  },
+  "/huawei-devm:warm-reset-lpu": {
+    "name": "Warm Reset LPU"
+  },
+  "/huawei-devm:warm-reset-lpu/input/board-position": {
+    "name": "Board Position"
+  },
+  "/huawei-devm:cold-reset-mpu": {
+    "name": "Cold Reset MPU"
+  },
+  "/huawei-devm:cold-reset-mpu/input/board-position": {
+    "name": "Board Position"
+  },
+  "/huawei-devm:warm-reset-mpu": {
+    "name": "Warm Reset MPU"
+  },
+  "/huawei-devm:warm-reset-mpu/input/board-position": {
+    "name": "Board Position"
+  },
+  "/huawei-devm:schedule-reboot-at-time": {
+    "name": "Schedule reboot at time"
+  },
+  "/huawei-devm:schedule-reboot-at-time/input/schedule-date": {
+    "name": "Schedule date"
+  },
+  "/huawei-devm:schedule-reboot-at-time/input/schedule-datetime": {
+    "name": "Schedule datetime"
+  },
+  "/huawei-devm:schedule-reboot-at-time/input/save-flag": {
+    "name": "Save flag"
+  },
+  "/huawei-devm:schedule-reboot-delay-time": {
+    "name": "Schedule reboot delay time"
+  },
+  "/huawei-devm:schedule-reboot-delay-time/input/delay-time": {
+    "name": "Delay time"
+  },
+  "/huawei-devm:schedule-reboot-delay-time/input/save-flag": {
+    "name": "Save flag"
+  },
+  "/huawei-devm:undo-schedule-reboot": {
+    "name": "Undo schedule reboot"
+  },
+  "/rpcs/huawei-devm:devm/reset-board": {
+    "name": "Reset Board"
+  },
+  "/rpcs/huawei-devm:devm/reset-mpu-board": {
+    "name": "Reset MPU"
+  },
+  "/rpcs/huawei-devm:devm/reset-lpu-board": {
+    "name": "Reset LPU"
+  },
+  "/rpcs/huawei-devm:devm/reset-sfu-board": {
+    "name": "Reset SFU"
+  },
+  "/rpcs/huawei-devm:devm/reset-card": {
+    "name": "Reset card"
+  },
+  "/rpcs/huawei-devm:devm/reboot": {
+    "name": "Reboot"
+  },
+  "/rpcs/huawei-devm:devm/transfer-pnpp": {
+    "name": "Transfer pnpp File"
+  },
+  "/rpcs/huawei-devm:devm/reset-offline-config": {
+    "name": "Reset Offline Config"
+  },
+  "/rpcs/huawei-devm:devm/clear-inactive-config": {
+    "name": "Clear inactive configuration"
+  },
+  "/rpcs/huawei-devm:devm/cold-reset-lpu": {
+    "name": "Cold Reset LPU"
+  },
+  "/rpcs/huawei-devm:devm/warm-reset-lpu": {
+    "name": "Warm Reset LPU"
+  },
+  "/rpcs/huawei-devm:devm/cold-reset-mpu": {
+    "name": "Cold Reset MPU"
+  },
+  "/rpcs/huawei-devm:devm/warm-reset-mpu": {
+    "name": "Warm Reset MPU"
+  },
+  "/rpcs/huawei-devm:devm/schedule-reboot-at-time": {
+    "name": "Schedule reboot at time"
+  },
+  "/rpcs/huawei-devm:devm/schedule-reboot-delay-time": {
+    "name": "Schedule reboot delay time"
+  },
+  "/rpcs/huawei-devm:devm/undo-schedule-reboot": {
+    "name": "Undo schedule reboot"
+  }
+}

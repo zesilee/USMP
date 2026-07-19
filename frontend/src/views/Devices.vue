@@ -2,62 +2,62 @@
   <div class="devices">
     <div class="page-header">
       <div>
-        <h2>设备管理</h2>
-        <div class="sub">直连 NETCONF (SSH 830) / gNMI · 会话状态实时刷新</div>
+        <h2>{{ t('devices.title') }}</h2>
+        <div class="sub">{{ t('devices.subtitle') }}</div>
       </div>
       <div class="header-actions">
-        <el-input v-model="searchKeyword" placeholder="按 IP 或名称搜索" :prefix-icon="Search" clearable class="search-input" />
-        <el-select v-model="statusFilter" placeholder="全部状态" clearable class="filter-select">
-          <el-option label="在线" value="online" />
-          <el-option label="离线" value="offline" />
+        <el-input v-model="searchKeyword" :placeholder="t('devices.searchPlaceholder')" :prefix-icon="Search" clearable class="search-input" />
+        <el-select v-model="statusFilter" :placeholder="t('devices.allStatus')" clearable class="filter-select">
+          <el-option :label="t('common.online')" value="online" />
+          <el-option :label="t('common.offline')" value="offline" />
         </el-select>
-        <el-select v-model="vendorFilter" placeholder="全部厂商" clearable class="filter-select">
+        <el-select v-model="vendorFilter" :placeholder="t('devices.allVendors')" clearable class="filter-select">
           <el-option v-for="v in vendors" :key="v" :label="v" :value="v" />
         </el-select>
-        <el-button :icon="Refresh" @click="handleRefresh" :loading="loading">刷新</el-button>
+        <el-button :icon="Refresh" @click="handleRefresh" :loading="loading">{{ t('common.refresh') }}</el-button>
       </div>
     </div>
 
     <el-table :data="paginatedRows" class="device-table" v-loading="loading">
-      <el-table-column label="IP 地址" width="150">
+      <el-table-column :label="t('devices.colIp')" width="150">
         <template #default="{ row }"><span class="mono strong">{{ row.ip }}</span></template>
       </el-table-column>
-      <el-table-column label="名称" width="170">
+      <el-table-column :label="t('devices.colName')" width="170">
         <template #default="{ row }"><span class="strong">{{ row.name || '—' }}</span></template>
       </el-table-column>
-      <el-table-column label="厂商 / 型号" min-width="150">
+      <el-table-column :label="t('devices.colVendorModel')" min-width="150">
         <template #default="{ row }"><span class="dim">{{ row.vendorModel || '—' }}</span></template>
       </el-table-column>
-      <el-table-column label="角色" width="100">
+      <el-table-column :label="t('devices.colRole')" width="100">
         <template #default="{ row }">
           <el-tag v-if="row.role" size="small" type="info" data-test="device-role">{{ row.role }}</el-tag>
           <span v-else class="dim">—</span>
         </template>
       </el-table-column>
-      <el-table-column label="会话" width="120">
+      <el-table-column :label="t('devices.colSession')" width="120">
         <template #default="{ row }">
           <span class="chip" :class="row.session === 'connected' ? 'conv' : 'off'">
-            <span class="glyph" aria-hidden="true"></span>{{ row.session === 'connected' ? '已连接' : '断开' }}
+            <span class="glyph" aria-hidden="true"></span>{{ row.session === 'connected' ? t('devices.sessionConnected') : t('devices.sessionDisconnected') }}
           </span>
         </template>
       </el-table-column>
-      <el-table-column label="负载 (1h)" width="110">
+      <el-table-column :label="t('devices.colLoad')" width="110">
         <template #default="{ row }"><Sparkline :points="row.load" /></template>
       </el-table-column>
-      <el-table-column label="收敛态" width="120">
+      <el-table-column :label="t('devices.colReconcile')" width="120">
         <template #default="{ row }"><ReconcileChip :state="row.reconcileState" /></template>
       </el-table-column>
-      <el-table-column label="最后同步" min-width="140">
+      <el-table-column :label="t('devices.colLastSync')" min-width="140">
         <template #default="{ row }"><span class="mono dim">{{ row.lastSync || '—' }}</span></template>
       </el-table-column>
-      <el-table-column label="操作" width="180" fixed="right">
+      <el-table-column :label="t('common.actions')" width="180" fixed="right">
         <template #default="{ row }">
-          <el-button type="primary" size="small" link @click="goToConfig(row)">查看配置</el-button>
-          <el-button type="info" size="small" link @click="handleTestConnection(row)">连接测试</el-button>
+          <el-button type="primary" size="small" link @click="goToConfig(row)">{{ t('devices.viewConfig') }}</el-button>
+          <el-button type="info" size="small" link @click="handleTestConnection(row)">{{ t('devices.testConnection') }}</el-button>
         </template>
       </el-table-column>
       <template #empty>
-        <span>{{ loading ? '加载中…' : '暂无设备' }}</span>
+        <span>{{ loading ? t('devices.loadingEllipsis') : t('devices.emptyNone') }}</span>
       </template>
     </el-table>
 
@@ -72,6 +72,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, watch } from 'vue'
 import { useRouter } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 import { Refresh, Search } from '@element-plus/icons-vue'
 import { ElMessage } from 'element-plus'
 import { useDeviceStore } from '../stores/device'
@@ -82,6 +83,7 @@ import ReconcileChip from '../components/dashboard/ReconcileChip.vue'
 import Sparkline from '../components/common/Sparkline.vue'
 
 const router = useRouter()
+const { t } = useI18n()
 const store = useDeviceStore()
 
 const searchKeyword = ref('')
@@ -140,7 +142,7 @@ function goToConfig(row: DeviceRow) {
 
 async function handleTestConnection(row: DeviceRow) {
   const result = await store.testConnection(row.id)
-  if (result.success) ElMessage.success(`${row.name || row.ip} 连接测试成功`)
+  if (result.success) ElMessage.success(t('devices.connTestSuccess', { name: row.name || row.ip }))
   else ElMessage.error(`${row.name || row.ip} ${result.message}`)
 }
 

@@ -1,6 +1,6 @@
 <template>
   <div class="reconcile-steps">
-    <div class="section-lbl">对账进行中 · Reconciler</div>
+    <div class="section-lbl">{{ t('console.steps.title') }}</div>
     <div class="recon-steps">
       <template v-for="(s, i) in progress.steps" :key="s.key">
         <div class="rstep" :class="s.state">
@@ -27,20 +27,23 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 import type { ReconcileProgress } from '../../utils/reconcileProgress'
 
 const props = defineProps<{ progress: ReconcileProgress; timedOut?: boolean }>()
 
+const { t } = useI18n()
+
 // 终局徽标：收敛/漂移/失败；超时（未拿到终态）诚实标注「仍在对账」而非成功。
 const resultChip = computed(() => {
-  if (props.timedOut) return { cls: 'recon', label: '对账仍在进行 · 可去概览大盘继续观察' }
+  if (props.timedOut) return { cls: 'recon', label: t('console.steps.timeout') }
   switch (props.progress.outcome) {
     case 'converged':
-      return { cls: 'conv', label: '已收敛 · 期望态与实际态一致' }
+      return { cls: 'conv', label: t('console.steps.conv') }
     case 'drifted':
-      return { cls: 'drift', label: '已漂移 · 回读发现差异（reconciler 将持续纠偏）' }
+      return { cls: 'drift', label: t('console.steps.drift') }
     case 'error':
-      return { cls: 'error', label: '下发失败 · 保留原配置' }
+      return { cls: 'error', label: t('console.steps.error') }
     default:
       return null
   }

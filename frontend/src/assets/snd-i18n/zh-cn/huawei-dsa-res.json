@@ -1,0 +1,59 @@
+{
+  "/huawei-dsa:dsa": {
+    "name": "DSA"
+  },
+  "/huawei-dsa:dsa/dsa-global": {
+    "name": "DSA全局配置"
+  },
+  "/huawei-dsa:dsa/dsa-global/max-key-pair": {
+    "name": "最大密钥对"
+  },
+  "/huawei-dsa:dsa/local-key": {
+    "name": "本地密钥"
+  },
+  "/huawei-dsa:dsa/local-key/key-size": {
+    "name": "密钥对大小"
+  },
+  "/huawei-dsa:dsa/local-key/host-key-name": {
+    "name": "主机密钥名称"
+  },
+  "/huawei-dsa:dsa/local-key/host-key-code": {
+    "name": "主机密钥代码"
+  },
+  "/huawei-dsa:dsa/local-key/host-key-pem": {
+    "name": "PEM格式主机密钥代码"
+  },
+  "/huawei-dsa:dsa/local-key/host-key-openssh": {
+    "name": "OpenSSH格式主机密钥代码"
+  },
+  "/huawei-dsa:dsa/peer-keys": {
+    "name": "对端密钥表"
+  },
+  "/huawei-dsa:dsa/peer-keys/peer-key": {
+    "name": "DSA对端密钥"
+  },
+  "/huawei-dsa:dsa/peer-keys/peer-key/key-name": {
+    "name": "密钥名称"
+  },
+  "/huawei-dsa:dsa/peer-keys/peer-key/key-code": {
+    "name": "密钥代码"
+  },
+  "/huawei-dsa:dsa/peer-keys/peer-key/encoding-type": {
+    "name": "编码类型"
+  },
+  "/huawei-dsa:dsa/key-pairs": {
+    "name": "DSA密钥对"
+  },
+  "/huawei-dsa:dsa/key-pairs/key-pair": {
+    "name": "DSA密钥对"
+  },
+  "/huawei-dsa:dsa/key-pairs/key-pair/key-pair-label": {
+    "name": "密钥对标签名称"
+  },
+  "/huawei-dsa:dsa/key-pairs/key-pair/key-size": {
+    "name": "密钥对大小"
+  },
+  "/huawei-dsa:dsa/key-pairs/key-pair/host-key-code": {
+    "name": "DSA主机密钥"
+  }
+}

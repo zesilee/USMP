@@ -1,0 +1,179 @@
+{
+  "/huawei-sflow:sflow": {
+    "name": "SFlow"
+  },
+  "/huawei-sflow:sflow/sflow-enable": {
+    "name": "Enabling/Disabling sFlow"
+  },
+  "/huawei-sflow:sflow/sflow-enable/global": {
+    "name": "Configuring Global sFlow Attributes"
+  },
+  "/huawei-sflow:sflow/sflow-enable/global/agent-ipv4-address": {
+    "name": "Agent IPv4 Address"
+  },
+  "/huawei-sflow:sflow/sflow-enable/global/agent-ipv6-address": {
+    "name": "Agent IPv6 Address"
+  },
+  "/huawei-sflow:sflow/sflow-enable/global/source-ipv4-address": {
+    "name": "Source IPv4 Address"
+  },
+  "/huawei-sflow:sflow/sflow-enable/global/source-ipv6-address": {
+    "name": "Source IPv6 Address"
+  },
+  "/huawei-sflow:sflow/sflow-enable/collectors": {
+    "name": "SFlow Collector List"
+  },
+  "/huawei-sflow:sflow/sflow-enable/collectors/collector": {
+    "name": "Configuring an sFlow Collector"
+  },
+  "/huawei-sflow:sflow/sflow-enable/collectors/collector/collector-id": {
+    "name": "Collector ID"
+  },
+  "/huawei-sflow:sflow/sflow-enable/collectors/collector/description": {
+    "name": "Collector Description"
+  },
+  "/huawei-sflow:sflow/sflow-enable/collectors/collector/max-packet-length": {
+    "name": "Maximum Packet Length"
+  },
+  "/huawei-sflow:sflow/sflow-enable/collectors/collector/ip-server": {
+    "name": "Configure Collector IPv4/IPv6 Address"
+  },
+  "/huawei-sflow:sflow/sflow-enable/collectors/collector/ip-server/ip-type": {
+    "name": "IP Address"
+  },
+  "/huawei-sflow:sflow/sflow-enable/collectors/collector/ip-server/ip-type/ipv4-address": {
+    "name": "IPv4 Address"
+  },
+  "/huawei-sflow:sflow/sflow-enable/collectors/collector/ip-server/ip-type/ipv4-address/ipv4-address": {
+    "name": "IPv4 Address"
+  },
+  "/huawei-sflow:sflow/sflow-enable/collectors/collector/ip-server/ip-type/ipv6-address": {
+    "name": "IPv6 Address"
+  },
+  "/huawei-sflow:sflow/sflow-enable/collectors/collector/ip-server/ip-type/ipv6-address/ipv6-address": {
+    "name": "IPv6 Address"
+  },
+  "/huawei-sflow:sflow/sflow-enable/collectors/collector/ip-server/vpn-name": {
+    "name": "VPN Instance Name"
+  },
+  "/huawei-sflow:sflow/sflow-enable/collectors/collector/ip-server/udp-port": {
+    "name": "UDP Destination Port Number"
+  },
+  "/huawei-sflow:sflow/sflow-enable/collectors/collector/ip-server/dscp-value": {
+    "name": "DSCP Priority"
+  },
+  "/huawei-sflow:sflow/slot-statistics": {
+    "name": "List of Slot-based sFlow Statistics"
+  },
+  "/huawei-sflow:sflow/slot-statistics/slot-statistic": {
+    "name": "Slot-based sFlow Statistics"
+  },
+  "/huawei-sflow:sflow/slot-statistics/slot-statistic/slot-id": {
+    "name": "Slot ID"
+  },
+  "/huawei-sflow:sflow/slot-statistics/slot-statistic/collector-id": {
+    "name": "Collector ID"
+  },
+  "/huawei-sflow:sflow/slot-statistics/slot-statistic/packet-count": {
+    "name": "Number of Sent Packets"
+  },
+  "/huawei-sflow:sflow/slot-statistics/slot-statistic/flow-sample-count": {
+    "name": "Number of sampled packets"
+  },
+  "/huawei-sflow:sflow/slot-statistics/slot-statistic/inbound-flow-sample-count": {
+    "name": "Number of Packets Sampled in the Inbound Direction"
+  },
+  "/huawei-sflow:sflow/slot-statistics/slot-statistic/outbound-flow-sample-count": {
+    "name": "Number of Packets Sampled in the Outbound Direction"
+  },
+  "/huawei-sflow:sflow/slot-statistics/slot-statistic/counter-sample-count": {
+    "name": "Sampling Statistics"
+  },
+  "/huawei-sflow:sflow/interface-statistics": {
+    "name": "List of Interface-based sFlow Statistics"
+  },
+  "/huawei-sflow:sflow/interface-statistics/interface-statistic": {
+    "name": "Interface-based sFlow statistics"
+  },
+  "/huawei-sflow:sflow/interface-statistics/interface-statistic/interface-name": {
+    "name": "Interface Name"
+  },
+  "/huawei-sflow:sflow/interface-statistics/interface-statistic/direction": {
+    "name": "Direction"
+  },
+  "/huawei-sflow:sflow/interface-statistics/interface-statistic/slot-id": {
+    "name": "Slot ID"
+  },
+  "/huawei-sflow:sflow/interface-statistics/interface-statistic/flow-sample-count": {
+    "name": "Number of sampled flows"
+  },
+  "/huawei-sflow:reset-interface-statistics": {
+    "name": "Clearing sFlow Packet Statistics on an Interface"
+  },
+  "/huawei-sflow:reset-interface-statistics/input/interface-name": {
+    "name": "Interface Name"
+  },
+  "/huawei-sflow:reset-interface-statistics/input/slot-id": {
+    "name": "Slot ID"
+  },
+  "/huawei-sflow:reset-slot-statistics": {
+    "name": "Clearing sFlow Packet Statistics in a Slot"
+  },
+  "/huawei-sflow:reset-slot-statistics/input/slot-id": {
+    "name": "Slot ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-sflow:sflow": {
+    "name": "SFlow Interface Configuration"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-sflow:sflow/bind-collectors": {
+    "name": "Flow Sampling Configuration"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-sflow:sflow/bind-collectors/bind-collector": {
+    "name": "Flow Sampling Configuration"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-sflow:sflow/bind-collectors/bind-collector/direction": {
+    "name": "Direction"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-sflow:sflow/bind-collectors/bind-collector/collector-id": {
+    "name": "Collector ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-sflow:sflow/bind-collectors/bind-collector/secondary-collector-id": {
+    "name": "ID of the Second Collector"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-sflow:sflow/bind-collectors/bind-collector/flow-sampling-rate": {
+    "name": "Sampling Ratio"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-sflow:sflow/bind-collectors/bind-collector/max-header": {
+    "name": "Packet Truncation"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-sflow:sflow/bind-collectors/bind-collector/max-header/length": {
+    "name": "Packet Truncation Based on a Specified Length"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-sflow:sflow/bind-collectors/bind-collector/max-header/length/length": {
+    "name": "Truncation Length"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-sflow:sflow/bind-collectors/bind-collector/max-header/head-only": {
+    "name": "Packet Header Truncation"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-sflow:sflow/bind-collectors/bind-collector/max-header/head-only/head-only": {
+    "name": "Packet Header Truncation"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-sflow:sflow/counter": {
+    "name": "SFlow Interface Statistics and Sampling Configuration"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-sflow:sflow/counter/collector-id": {
+    "name": "Collector ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-sflow:sflow/counter/secondary-collector-id": {
+    "name": "ID of the Second Collector"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-sflow:sflow/counter/interval": {
+    "name": "Sampling Interval"
+  },
+  "/rpcs/huawei-sflow:sflow/reset-interface-statistics": {
+    "name": "Clearing sFlow Packet Statistics on an Interface"
+  },
+  "/rpcs/huawei-sflow:sflow/reset-slot-statistics": {
+    "name": "Clearing sFlow Packet Statistics in a Slot"
+  }
+}

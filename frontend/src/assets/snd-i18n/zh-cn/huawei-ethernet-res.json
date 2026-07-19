@@ -1,0 +1,602 @@
+{
+  "/huawei-ethernet:create-qinq-termination": {
+    "name": "创建Qinq封装"
+  },
+  "/huawei-ethernet:create-qinq-termination/input/interface-name": {
+    "name": "子接口名"
+  },
+  "/huawei-ethernet:create-qinq-termination/input/pe-vlan-begin": {
+    "name": "外层VLAN起始ID"
+  },
+  "/huawei-ethernet:create-qinq-termination/input/pe-vlan-end": {
+    "name": "外层VLAN终止ID"
+  },
+  "/huawei-ethernet:create-qinq-termination/input/ce-vlan-begin": {
+    "name": "内层VLAN起始ID"
+  },
+  "/huawei-ethernet:create-qinq-termination/input/ce-vlan-end": {
+    "name": "内层VLAN终止ID"
+  },
+  "/huawei-ethernet:create-qinq-termination/input/group-id": {
+    "name": "VLAN组号"
+  },
+  "/huawei-ethernet:delete-qinq-termination": {
+    "name": "删除Qinq封装"
+  },
+  "/huawei-ethernet:delete-qinq-termination/input/interface-name": {
+    "name": "子接口名"
+  },
+  "/huawei-ethernet:delete-qinq-termination/input/pe-vlan-begin": {
+    "name": "外层VLAN起始ID"
+  },
+  "/huawei-ethernet:delete-qinq-termination/input/pe-vlan-end": {
+    "name": "外层VLAN终止ID"
+  },
+  "/huawei-ethernet:delete-qinq-termination/input/ce-vlan-begin": {
+    "name": "内层VLAN起始ID"
+  },
+  "/huawei-ethernet:delete-qinq-termination/input/ce-vlan-end": {
+    "name": "内层VLAN终止ID"
+  },
+  "/huawei-ethernet:delete-qinq-termination/input/group-id": {
+    "name": "VLAN组号"
+  },
+  "/huawei-ethernet:create-user-vlan-qinq": {
+    "name": "创建User-Vlan QinQ"
+  },
+  "/huawei-ethernet:create-user-vlan-qinq/input/interface-name": {
+    "name": "接口名"
+  },
+  "/huawei-ethernet:create-user-vlan-qinq/input/pe-vlan-begin": {
+    "name": "外层VLAN起始ID"
+  },
+  "/huawei-ethernet:create-user-vlan-qinq/input/pe-vlan-end": {
+    "name": "外层VLAN终止ID"
+  },
+  "/huawei-ethernet:create-user-vlan-qinq/input/ce-vlan-begin": {
+    "name": "内层VLAN起始ID"
+  },
+  "/huawei-ethernet:create-user-vlan-qinq/input/ce-vlan-end": {
+    "name": "内层VLAN终止ID"
+  },
+  "/huawei-ethernet:delete-user-vlan-qinq": {
+    "name": "删除User-Vlan QinQ"
+  },
+  "/huawei-ethernet:delete-user-vlan-qinq/input/interface-name": {
+    "name": "接口名"
+  },
+  "/huawei-ethernet:delete-user-vlan-qinq/input/pe-vlan-begin": {
+    "name": "外层VLAN起始ID"
+  },
+  "/huawei-ethernet:delete-user-vlan-qinq/input/pe-vlan-end": {
+    "name": "外层VLAN终止ID"
+  },
+  "/huawei-ethernet:delete-user-vlan-qinq/input/ce-vlan-begin": {
+    "name": "内层VLAN起始ID"
+  },
+  "/huawei-ethernet:delete-user-vlan-qinq/input/ce-vlan-end": {
+    "name": "内层VLAN终止ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet": {
+    "name": "配置以太接口"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/main-interface": {
+    "name": "主接口属性"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/main-interface/vlan-swap": {
+    "name": "两层Tag 交换使能"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/main-interface/qinq-protocol": {
+    "name": "以太类型"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/main-interface/encapsulation": {
+    "name": "封装"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/main-interface/encapsulation/pvid": {
+    "name": "端口VLAN ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/main-interface/l2-attribute": {
+    "name": "接口二层属性"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/main-interface/l2-attribute/link-type": {
+    "name": "链路类型"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/main-interface/l2-attribute/pvid": {
+    "name": "缺省VLAN标识"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/main-interface/l2-attribute/trunk-vlans": {
+    "name": "允许通过的VLAN列表"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/main-interface/l2-attribute/untag-vlans": {
+    "name": "允许通过的UnTag VLAN列表"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/main-interface/l2-attribute/untag-discarding": {
+    "name": "丢弃untag报文"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/main-interface/l2-attribute/vlan-stackings": {
+    "name": "VLAN Stacking列表"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/main-interface/l2-attribute/vlan-stackings/vlan-stacking": {
+    "name": "配置VLAN Stacking"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/main-interface/l2-attribute/vlan-stackings/vlan-stacking/stacking-vlan": {
+    "name": "Stacking后VLAN"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/main-interface/l2-attribute/vlan-stackings/vlan-stacking/ce-default": {
+    "name": "对接收的不带Tag的报文添加一层VLAN"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/main-interface/l2-attribute/vlan-stackings/vlan-stacking/trans-vlans": {
+    "name": "Stacking前VLAN"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/main-interface/l2-attribute/vlan-mappings": {
+    "name": "VLAN Mapping列表"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/main-interface/l2-attribute/vlan-mappings/vlan-mapping": {
+    "name": "配置VLAN Mapping"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/main-interface/l2-attribute/vlan-mappings/vlan-mapping/mapping-vlan": {
+    "name": "Mapping后VLAN"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/main-interface/l2-attribute/vlan-mappings/vlan-mapping/trans-vlans": {
+    "name": "Mapping前VLAN"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/main-interface/l2-attribute/statistics-enable-vlans": {
+    "name": "配置VLAN流量统计使能列表"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/main-interface/l2-attribute/statistics-enable-vlans/vlans": {
+    "name": "VLAN列表"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface": {
+    "name": "三层子接口流属性"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/vlan-groups": {
+    "name": "子接口VLAN组列表"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/vlan-groups/vlan-group": {
+    "name": "子接口VLAN组"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/vlan-groups/vlan-group/id": {
+    "name": "VLAN组号"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/vlan-groups/vlan-group/mode": {
+    "name": "工作组模式"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/vlan-groups/vlan-group/statistic-enable": {
+    "name": "使能报文统计"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/vlan-groups/vlan-group/description": {
+    "name": "VLAN组的描述"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type": {
+    "name": "封装类型"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/vlan-type": {
+    "name": "子接口类型"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/vlan-type/vlan-type-dot1q": {
+    "name": "VLAN类型子接口配置"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/vlan-type/vlan-type-dot1q/vlan-type-vid": {
+    "name": "VLAN ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/dot1q-termination": {
+    "name": "Dot1q封装"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/dot1q-termination/dot1q-termination": {
+    "name": "Dot1q终接子接口配置"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/dot1q-termination/dot1q-termination/tag": {
+    "name": "标记"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/dot1q-termination/dot1q-termination/arp-broadcast-enable": {
+    "name": "ARP广播使能"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/dot1q-termination/dot1q-termination/dot1q-vlans": {
+    "name": "Dot1q终结VLAN配置列表"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/dot1q-termination/dot1q-termination/dot1q-vlans/dot1q-vlans-group": {
+    "name": "带VLAN group的Dot1q终结VLAN配置"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/dot1q-termination/dot1q-termination/dot1q-vlans/dot1q-vlans-group/group-id": {
+    "name": "VLAN组号"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/dot1q-termination/dot1q-termination/dot1q-vlans/dot1q-vlans-group/vlan-list": {
+    "name": "VLAN ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/dot1q-termination/dot1q-termination/dot1q-vlans/dot1q-vlans": {
+    "name": "Dot1q终结VLAN配置"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/dot1q-termination/dot1q-termination/dot1q-vlans/dot1q-vlans/vlan-list": {
+    "name": "Dot1q终结内层VLAN列表"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/dot1q-termination/dot1q-termination/vrrps": {
+    "name": "Dot1qVrrp列表"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/dot1q-termination/dot1q-termination/vrrps/vrrp": {
+    "name": "Dot1qVrrp表项"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/dot1q-termination/dot1q-termination/vrrps/vrrp/vlan-id": {
+    "name": "VLAN ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/dot1q-termination/dot1q-termination/pwtag": {
+    "name": "PW标签"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/dot1q-termination/dot1q-termination/pwtag/tag-vid-mode": {
+    "name": "标签模式"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/dot1q-termination/dot1q-termination/pwtag/tag-vid": {
+    "name": "用户指定VLAN"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/dot1q-termination/dot1q-termination/pwtag/tag-8021p-mode": {
+    "name": "802.1p的模式"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/dot1q-termination/dot1q-termination/pwtag/tag-8021p-value": {
+    "name": "用户指定的802.1p值"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/qinq-termination": {
+    "name": "配置qinq-termination"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/qinq-termination/qinq-termination": {
+    "name": "QINQ终接子接口配置列表"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/qinq-termination/qinq-termination/tag": {
+    "name": "标记"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/qinq-termination/qinq-termination/arp-broadcast-enable": {
+    "name": "ARP广播使能"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/qinq-termination/qinq-termination/remark-8021p": {
+    "name": "8021p映射"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/qinq-termination/qinq-termination/remark-8021p/remark-type": {
+    "name": "映射类型"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/qinq-termination/qinq-termination/remark-8021p/precedence-value": {
+    "name": "8021p优先级"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/qinq-termination/qinq-termination/symmetry-mode": {
+    "name": "对称方式"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/qinq-termination/qinq-termination/symmetry-mode/symmetry-type": {
+    "name": "对称类型"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/qinq-termination/qinq-termination/symmetry-mode/user-mode": {
+    "name": "用户模式"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/qinq-termination/qinq-termination/qinq-vids": {
+    "name": "QinQ终结VLAN配置列表"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/qinq-termination/qinq-termination/qinq-vids/qinq-vid": {
+    "name": "QinQ终结VLAN配置列表"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/qinq-termination/qinq-termination/qinq-vids/qinq-vid/pe-vlan-begin": {
+    "name": "外层VLAN起始ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/qinq-termination/qinq-termination/qinq-vids/qinq-vid/pe-vlan-end": {
+    "name": "外层VLAN终止ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/qinq-termination/qinq-termination/qinq-vids/qinq-vid/ce-vlan-begin": {
+    "name": "内层VLAN起始ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/qinq-termination/qinq-termination/qinq-vids/qinq-vid/ce-vlan-end": {
+    "name": "内层VLAN终止ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/qinq-termination/qinq-termination/qinq-vids/qinq-vid/group-id": {
+    "name": "VLAN组号"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/qinq-termination/qinq-termination/vrrps": {
+    "name": "QinQ VRRP列表"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/qinq-termination/qinq-termination/vrrps/vrrp": {
+    "name": "QinQ VRRP表项"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/qinq-termination/qinq-termination/vrrps/vrrp/pe-vlan-id": {
+    "name": "外层VLAN ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/qinq-termination/qinq-termination/vrrps/vrrp/ce-vlan-id": {
+    "name": "内层VLAN ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/qinq-termination/qinq-termination/pwtag": {
+    "name": "PW标签"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/qinq-termination/qinq-termination/pwtag/tag-vid-mode": {
+    "name": "标签模式"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/qinq-termination/qinq-termination/pwtag/tag-vid": {
+    "name": "用户指定VLAN"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/qinq-termination/qinq-termination/pwtag/tag-8021p-mode": {
+    "name": "802.1p的模式"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/qinq-termination/qinq-termination/pwtag/tag-8021p-value": {
+    "name": "用户指定的802.1p值"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/qinq-stacking": {
+    "name": "QinQ Stacking子接口"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/qinq-stacking/qinq-stacking": {
+    "name": "QinQ Stacking配置列表"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/qinq-stacking/qinq-stacking/pe-vid": {
+    "name": "指定外层tag"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/qinq-stacking/qinq-stacking/stacking-vid": {
+    "name": "QinQ Stacking配置列表"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/qinq-stacking/qinq-stacking/stacking-vid/vlan-id-begin": {
+    "name": "QinQ Stacking外层VLAN"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/qinq-stacking/qinq-stacking/stacking-vid/vlan-id-end": {
+    "name": "QinQ Stacking内层VLAN"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/qinq-stacking/qinq-stacking/stacking-vid/group-id": {
+    "name": "VLAN组号"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/qinq-mapping": {
+    "name": "QinQ映射子接口"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/qinq-mapping/qinq-mapping": {
+    "name": "QinQ Mapping配置列表"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/qinq-mapping/qinq-mapping/mapping-vids": {
+    "name": "QinQ Mapping配置列表"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/qinq-mapping/qinq-mapping/mapping-vids/mapping-vid": {
+    "name": "配置QinQ Mapping"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/qinq-mapping/qinq-mapping/mapping-vids/mapping-vid/vlan-id": {
+    "name": "VLAN ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/qinq-mapping/qinq-mapping/mapping-vids/mapping-vid/mapping-vlan-id": {
+    "name": "映射后的VLAN ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/qinq-mapping/qinq-mapping/mapping-vids/mapping-vid/group-id": {
+    "name": "VLAN组号"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/qinq-stacking-policy": {
+    "name": "QinQ策略VLAN配置"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/qinq-stacking-policy/stacking-policy": {
+    "name": "Stacking策略VLAN配置"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/qinq-stacking-policy/stacking-policy/policy-vlans": {
+    "name": "策略VLAN列表"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/qinq-stacking-policy/stacking-policy/policy-vlans/policy-vlan": {
+    "name": "策略VLAN"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/qinq-stacking-policy/stacking-policy/policy-vlans/policy-vlan/policy-type": {
+    "name": "策略类型"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/qinq-stacking-policy/stacking-policy/policy-vlans/policy-vlan/vlan-id-begin": {
+    "name": "VLAN起始ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/qinq-stacking-policy/stacking-policy/policy-vlans/policy-vlan/vlan-id-end": {
+    "name": "VLAN终止ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/qinq-stacking-policy/stacking-policy/policy-vlans/policy-vlan/value-8021p": {
+    "name": "802.1p策略列表"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/qinq-stacking-policy/stacking-policy/policy-vlans/policy-vlan/dscp-values": {
+    "name": "DSCP策略列表"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/qinq-stacking-policy/stacking-policy/policy-vlan-groups": {
+    "name": "带VLAN group的策略VLAN列表"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/qinq-stacking-policy/stacking-policy/policy-vlan-groups/policy-vlan-group": {
+    "name": "带VLAN group的策略VLAN"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/qinq-stacking-policy/stacking-policy/policy-vlan-groups/policy-vlan-group/policy-type": {
+    "name": "策略类型"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/qinq-stacking-policy/stacking-policy/policy-vlan-groups/policy-vlan-group/group-id": {
+    "name": "VLAN组号"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/qinq-stacking-policy/stacking-policy/policy-vlan-groups/policy-vlan-group/vlan-id-begin": {
+    "name": "VLAN起始ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/qinq-stacking-policy/stacking-policy/policy-vlan-groups/policy-vlan-group/vlan-id-end": {
+    "name": "VLAN终止ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/qinq-stacking-policy/stacking-policy/policy-vlan-groups/policy-vlan-group/value-8021p": {
+    "name": "802.1p策略列表"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/qinq-stacking-policy/stacking-policy/policy-vlan-groups/policy-vlan-group/dscp-values": {
+    "name": "DSCP策略列表"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/user-vlan-comm": {
+    "name": "配置User-VLAN"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/user-vlan-comm/user-vlan-common": {
+    "name": "User-VLAN QinQ配置列表"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/user-vlan-comm/user-vlan-common/user-vlan-qinqs": {
+    "name": "User-VLAN QinQ"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/user-vlan-comm/user-vlan-common/user-vlan-qinqs/user-vlan-qinq": {
+    "name": "User-Vlan QinQ"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/user-vlan-comm/user-vlan-common/user-vlan-qinqs/user-vlan-qinq/pe-vlan-begin": {
+    "name": "外层VLAN起始ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/user-vlan-comm/user-vlan-common/user-vlan-qinqs/user-vlan-qinq/pe-vlan-end": {
+    "name": "外层VLAN终止ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/user-vlan-comm/user-vlan-common/user-vlan-qinqs/user-vlan-qinq/ce-vlan-begin": {
+    "name": "内层VLAN起始ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/user-vlan-comm/user-vlan-common/user-vlan-qinqs/user-vlan-qinq/ce-vlan-end": {
+    "name": "内层VLAN终止ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/user-vlan-comm/user-vlan-common/user-vlan-qinqs/descriptions": {
+    "name": "用户VLAN描述信息"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/user-vlan-comm/user-vlan-common/user-vlan-qinqs/descriptions/description": {
+    "name": "用户VLAN描述信息"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/user-vlan-comm/user-vlan-common/user-vlan-qinqs/descriptions/description/pe-vlan-id": {
+    "name": "外层VLAN ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/user-vlan-comm/user-vlan-common/user-vlan-qinqs/descriptions/description/ce-vlan-id": {
+    "name": "内层VLAN ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/user-vlan-comm/user-vlan-common/user-vlan-qinqs/descriptions/description/description": {
+    "name": "用户VLAN描述信息"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/user-vlan-comm/user-vlan-common/user-vlan-dot1q": {
+    "name": "User-VLAN Dot1q业务信息"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/user-vlan-comm/user-vlan-common/user-vlan-dot1q/vlan-list": {
+    "name": "VLAN ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/user-vlan-comm/user-vlan-common/user-vlan-dot1q/descriptions": {
+    "name": "用户VLAN描述信息"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/user-vlan-comm/user-vlan-common/user-vlan-dot1q/descriptions/description": {
+    "name": "用户VLAN描述信息"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/user-vlan-comm/user-vlan-common/user-vlan-dot1q/descriptions/description/vlan-id": {
+    "name": "VLAN ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/user-vlan-comm/user-vlan-common/user-vlan-dot1q/descriptions/description/description": {
+    "name": "用户vlan描述信息"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/user-vlan-any": {
+    "name": "User-vlan Any"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l3-sub-interface/flow-type/user-vlan-any/user-vlan-any": {
+    "name": "Any-Other标记"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l2-sub-interface": {
+    "name": "二层子接口属性"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l2-sub-interface/local-switch": {
+    "name": "本地交换"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l2-sub-interface/flow-type": {
+    "name": "封装类型"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l2-sub-interface/flow-type/default": {
+    "name": "Default封装"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l2-sub-interface/flow-type/default/default": {
+    "name": "Default封装"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l2-sub-interface/flow-type/untag": {
+    "name": "Untag封装"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l2-sub-interface/flow-type/untag/untag": {
+    "name": "Untag封装"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l2-sub-interface/flow-type/dot1q": {
+    "name": "Dot1q封装"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l2-sub-interface/flow-type/dot1q/dot1q": {
+    "name": "Dot1q封装列表"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l2-sub-interface/flow-type/dot1q/dot1q/policy": {
+    "name": "策略类型"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l2-sub-interface/flow-type/dot1q/dot1q/policy/no-policy": {
+    "name": "无策略"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l2-sub-interface/flow-type/dot1q/dot1q/policy/no-policy/vlans": {
+    "name": "VLAN封装列表"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l2-sub-interface/flow-type/dot1q/dot1q/policy/no-policy/vlans/vlan-list": {
+    "name": "VLAN列表"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l2-sub-interface/flow-type/dot1q/dot1q/policy/policy": {
+    "name": "带策略"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l2-sub-interface/flow-type/dot1q/dot1q/policy/policy/policy-vlans": {
+    "name": "VLAN策略封装列表"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l2-sub-interface/flow-type/dot1q/dot1q/policy/policy/policy-vlans/policy-vlan": {
+    "name": "VLAN策略封装"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l2-sub-interface/flow-type/dot1q/dot1q/policy/policy/policy-vlans/policy-vlan/vlan-id-begin": {
+    "name": "起始VLAN ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l2-sub-interface/flow-type/dot1q/dot1q/policy/policy/policy-vlans/policy-vlan/vlan-id-end": {
+    "name": "终止VLAN ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l2-sub-interface/flow-type/dot1q/dot1q/policy/policy/policy-vlans/policy-vlan/dot1q-8021p": {
+    "name": "8021p优先级"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l2-sub-interface/flow-type/qinq": {
+    "name": "QinQ封装"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l2-sub-interface/flow-type/qinq/qinqs": {
+    "name": "QinQ封装列表"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l2-sub-interface/flow-type/qinq/qinqs/qinq-vids": {
+    "name": "QinQ封装列表"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l2-sub-interface/flow-type/qinq/qinqs/qinq-vids/qinq-vid": {
+    "name": "配置QinQ封装"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l2-sub-interface/flow-type/qinq/qinqs/qinq-vids/qinq-vid/pe-vlan-id": {
+    "name": "外层VLAN ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l2-sub-interface/flow-type/qinq/qinqs/qinq-vids/qinq-vid/ce-vlan-list": {
+    "name": "内层VLAN 列表"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l2-sub-interface/flow-type/qinq/qinqs/qinq-vid-ce-default": {
+    "name": "配置不指定内层VLAN的QinQ封装"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l2-sub-interface/flow-type/qinq/qinqs/qinq-vid-ce-default/pe-vlan-list": {
+    "name": "外层VLAN列表"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l2-sub-interface/flow-type/qinq/qinqs/qinq-with-pe-segments": {
+    "name": "PE为VLAN段的QinQ段封装列表"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l2-sub-interface/flow-type/qinq/qinqs/qinq-with-pe-segments/qinq-with-pe-segment": {
+    "name": "配置PE为VLAN段的QINQ封装"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l2-sub-interface/flow-type/qinq/qinqs/qinq-with-pe-segments/qinq-with-pe-segment/pe-vlan-begin": {
+    "name": "外层VLAN起始ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l2-sub-interface/flow-type/qinq/qinqs/qinq-with-pe-segments/qinq-with-pe-segment/pe-vlan-end": {
+    "name": "外层VLAN终止ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l2-sub-interface/flow-type/qinq/qinqs/qinq-with-pe-segments/qinq-with-pe-segment/ce-vlan-begin": {
+    "name": "内层VLAN起始ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l2-sub-interface/flow-type/qinq/qinqs/qinq-with-pe-segments/qinq-with-pe-segment/ce-vlan-end": {
+    "name": "内层VLAN终止ID"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l2-sub-interface/flow-action": {
+    "name": "报文修改信息"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l2-sub-interface/flow-action/action-type": {
+    "name": "流动作类型"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l2-sub-interface/flow-action/out-vlan-id": {
+    "name": "修改后外层VLAN"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l2-sub-interface/flow-action/inner-vlan-id": {
+    "name": "修改后内层VLAN"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l2-sub-interface/flow-action/outer-8021p": {
+    "name": "修改后外层8021p值"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l2-sub-interface/flow-action/inner-8021p": {
+    "name": "修改后内层8021p值"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ethernet:ethernet/l2-sub-interface/flow-action/offset-value": {
+    "name": "修改后VLAN偏移值"
+  },
+  "/rpcs/huawei-ethernet:ethernet/create-qinq-termination": {
+    "name": "创建Qinq封装"
+  },
+  "/rpcs/huawei-ethernet:ethernet/delete-qinq-termination": {
+    "name": "删除Qinq封装"
+  },
+  "/rpcs/huawei-ethernet:ethernet/create-user-vlan-qinq": {
+    "name": "创建User-Vlan QinQ"
+  },
+  "/rpcs/huawei-ethernet:ethernet/delete-user-vlan-qinq": {
+    "name": "删除User-Vlan QinQ"
+  }
+}

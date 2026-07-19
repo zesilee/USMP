@@ -1,0 +1,29 @@
+{
+  "/huawei-ifm:ifm/interfaces/interface/huawei-l2vpn:track-pw-state": {
+    "name": "跟踪PW状态"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-l2vpn:l3ve-delay-up": {
+    "name": "L3VE接口延时启动"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-l2vpn:l3ve-delay-up/time": {
+    "name": "延迟时间"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-l2vpn:arp-sending": {
+    "name": "ARP发送方式"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-l2vpn:arp-sending/type": {
+    "name": "ARP发送类型"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-l2vpn:arp-sending/expire-time": {
+    "name": "老化时间"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-l2vpn:nd-sending": {
+    "name": "ND发送方式"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-l2vpn:nd-sending/type": {
+    "name": "ND发送类型"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-l2vpn:nd-sending/expire-time": {
+    "name": "老化时间"
+  }
+}

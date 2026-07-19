@@ -1,0 +1,65 @@
+{
+  "/huawei-macsec:macsec": {
+    "name": "MACsec"
+  },
+  "/huawei-macsec:macsec/macsec-profiles": {
+    "name": "MACsec profile list"
+  },
+  "/huawei-macsec:macsec/macsec-profiles/macsec-profile": {
+    "name": "MACsec profile name"
+  },
+  "/huawei-macsec:macsec/macsec-profiles/macsec-profile/name": {
+    "name": "MACsec profile name"
+  },
+  "/huawei-macsec:macsec/macsec-profiles/macsec-profile/policy": {
+    "name": "MACsec policy function"
+  },
+  "/huawei-macsec:macsec/macsec-profiles/macsec-profile/replay-window": {
+    "name": "Replay protection window"
+  },
+  "/huawei-macsec:macsec/macsec-profiles/macsec-profile/include-sci": {
+    "name": "Frame header containing SCI"
+  },
+  "/huawei-macsec:macsec/macsec-profiles/macsec-profile/sak-life": {
+    "name": "SAK timeout period"
+  },
+  "/huawei-macsec:macsec/macsec-profiles/macsec-profile/mka-life": {
+    "name": "MKA session timeout period"
+  },
+  "/huawei-macsec:macsec/macsec-profiles/macsec-profile/keyserver-priority": {
+    "name": "Priority of the MKA key server"
+  },
+  "/huawei-macsec:macsec/macsec-profiles/macsec-profile/cryptographic-algorithm": {
+    "name": "MKA key generation algorithm"
+  },
+  "/huawei-macsec:macsec/macsec-profiles/macsec-profile/confident-offset": {
+    "name": "MACsec encryption offset"
+  },
+  "/huawei-macsec:macsec/macsec-profiles/macsec-profile/mode": {
+    "name": "MACsec encryption mode"
+  },
+  "/huawei-macsec:macsec/macsec-profiles/macsec-profile/cipher-suite": {
+    "name": "Encryption algorithm for MACsec data packets"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-macsec:macsec": {
+    "name": "MACsec application configuration"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-macsec:macsec/macsec-profile": {
+    "name": "MACsec profile name"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-macsec:macsec/macsec-profile/name": {
+    "name": "MACsec profile name"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-macsec:macsec/ckn-caks": {
+    "name": "Static CKN and CAK list"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-macsec:macsec/ckn-caks/ckn-cak": {
+    "name": "Key name - key"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-macsec:macsec/ckn-caks/ckn-cak/ckn": {
+    "name": "Key name"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-macsec:macsec/ckn-caks/ckn-cak/cak": {
+    "name": "Key"
+  }
+}

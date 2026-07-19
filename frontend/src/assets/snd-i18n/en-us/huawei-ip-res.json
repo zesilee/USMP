@@ -1,0 +1,167 @@
+{
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4": {
+    "name": "Configure IPv4 Addresses"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/address": {
+    "name": "Configure IPv4 Addresses"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/address/common-address": {
+    "name": "IPv4 Common Addresses"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/address/common-address/addresses": {
+    "name": "IPv4 Common Addresses"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/address/common-address/addresses/address": {
+    "name": "IPv4 Common Addresses"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/address/common-address/addresses/address/ip": {
+    "name": "IPv4 Address"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/address/common-address/addresses/address/mask": {
+    "name": "IPv4 Address Mask"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/address/common-address/addresses/address/type": {
+    "name": "IPv4 Address Type"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/address/unnumbered-address": {
+    "name": "Unnumbered Address"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/address/unnumbered-address/unnumbered-address": {
+    "name": "Unnumbered Address"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/address/unnumbered-address/unnumbered-address/unnumbered-if-name": {
+    "name": "Unnumbered Interface"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/address/negotiate-address": {
+    "name": "Negotiate Address"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/address/negotiate-address/negotiation-address": {
+    "name": "Negotiate Address"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/address/negotiate-address/negotiation-address/negotiation-type": {
+    "name": "Negotiate Type"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/state": {
+    "name": "Show IPv4 Addresses"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/state/addresses": {
+    "name": "IPv4 addresses"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/state/addresses/address": {
+    "name": "IPv4 Address"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/state/addresses/address/ip": {
+    "name": "IPv4 Address"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/state/addresses/address/mask": {
+    "name": "IPv4 Address Mask"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/state/addresses/address/type": {
+    "name": "IPv4 Address Type"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/state/addresses/address/is-block": {
+    "name": "Blocked Or Not"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/state/gateways": {
+    "name": "Gateway Address List"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/state/gateways/gateway": {
+    "name": "Gateway Address Running Status"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv4/state/gateways/gateway/gateway": {
+    "name": "Interface Gateway"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6": {
+    "name": "Configure IPv6 Addresses"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/mtu6": {
+    "name": "IPv6 MTU"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/spread-mtu-flag": {
+    "name": "IPv6 MTU Spread Flag"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/auto-link-local": {
+    "name": "Configure IPv6 Auto Link-local Enable Flag"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/address": {
+    "name": "Configure IPv6 Address List"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/address/common-address": {
+    "name": "Common IPv6 Address"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/address/common-address/addresses": {
+    "name": "Common IPv6 Address"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/address/common-address/addresses/address": {
+    "name": "IPv6 Address"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/address/common-address/addresses/address/ip": {
+    "name": "IPv6 Address"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/address/common-address/addresses/address/prefix-length": {
+    "name": "IPv6 Address Prefix Length"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/address/common-address/addresses/address/type": {
+    "name": "IPv6 Address Type"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/address/common-address/addresses/address/algorithm-type": {
+    "name": "IPv6 Address Algorithm Type"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/nd-prefixs": {
+    "name": "Prefix View List"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/nd-prefixs/nd-prefix": {
+    "name": "Prefix View"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/nd-prefixs/nd-prefix/prefix": {
+    "name": "Prefix IPv6 Address"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/nd-prefixs/nd-prefix/prefix-len": {
+    "name": "Prefix Address Length"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/nd-prefixs/nd-prefix/valid-lifetime": {
+    "name": "Valid Life Time"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/nd-prefixs/nd-prefix/preferred-lifetime": {
+    "name": "Preferred Life Time"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/nd-prefixs/nd-prefix/auto-flag": {
+    "name": "Autoconfig Flag"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/nd-prefixs/nd-prefix/on-link-flag": {
+    "name": "On-link Flag"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/state": {
+    "name": "Show IPv6 Addresses"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/state/mtu6": {
+    "name": "IPv6 MTU"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/state/addresses": {
+    "name": "IPv6 Address"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/state/addresses/address": {
+    "name": "IPv6 Address"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/state/addresses/address/ip": {
+    "name": "IPv6 Address"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/state/addresses/address/prefix-length": {
+    "name": "IPv6 Address Prefix Length"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/state/addresses/address/type": {
+    "name": "IPv6 Address Type"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/state/addresses/address/algorithm-type": {
+    "name": "IPv6 Address Algorithm Type"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/state/addresses/address/collision-count": {
+    "name": "IPv6 Address Collisions Counts"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/state/addresses/address/is-block": {
+    "name": "Blocked Or Not"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-ip:ipv6/state/addresses/address/status": {
+    "name": "IPv6 Address Status"
+  }
+}

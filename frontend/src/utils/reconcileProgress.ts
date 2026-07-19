@@ -1,3 +1,5 @@
+import { i18n } from '../i18n'
+
 // 下发抽屉的对账阶段状态机。idle→validating→pushing→reading→(converged|drifted|error)。
 // 前三个为编排进行时的本地阶段，后三个为后端 reconcile outcome 的终态映射。
 export type ReconcilePhase =
@@ -25,12 +27,15 @@ export interface ReconcileProgress {
   done: boolean
 }
 
-// 三步固定文案（对齐设计原型的 reconcile 步骤）。
-const STEP_META: { key: ProgressStep['key']; title: string; sub: string }[] = [
-  { key: 'validate', title: '校验期望态', sub: 'YANG 约束通过' },
-  { key: 'push', title: '编码并下发 edit-config', sub: 'NETCONF SSH 830 · commit' },
-  { key: 'read', title: '回读实际态并对齐', sub: '缓存失效 · gNMI 确认' },
-]
+// 三步固定文案（对齐设计原型的 reconcile 步骤）。i18n 求值放在调用时，跟随当前语言。
+function stepMeta(): { key: ProgressStep['key']; title: string; sub: string }[] {
+  const t = i18n.global.t
+  return [
+    { key: 'validate', title: t('console.steps.validate'), sub: t('console.steps.validateSub') },
+    { key: 'push', title: t('console.steps.push'), sub: t('console.steps.pushSub') },
+    { key: 'read', title: t('console.steps.read'), sub: t('console.steps.readSub') },
+  ]
+}
 
 // 各阶段 → [validate, push, read] 三步状态；read 的终态由 outcome 决定。
 const STEP_STATES: Record<ReconcilePhase, [StepState, StepState, StepState]> = {
@@ -52,7 +57,7 @@ const OUTCOME_OF: Partial<Record<ReconcilePhase, FinalOutcome>> = {
 export function deriveReconcileProgress(phase: ReconcilePhase): ReconcileProgress {
   const states = STEP_STATES[phase] ?? STEP_STATES.idle
   return {
-    steps: STEP_META.map((m, i) => ({ ...m, state: states[i] })),
+    steps: stepMeta().map((m, i) => ({ ...m, state: states[i] })),
     outcome: OUTCOME_OF[phase] ?? null,
     done: phase === 'converged' || phase === 'drifted' || phase === 'error',
   }

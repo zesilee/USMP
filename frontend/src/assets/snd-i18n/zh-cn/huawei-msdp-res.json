@@ -1,0 +1,413 @@
+{
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp": {
+    "name": "MSDP"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global": {
+    "name": "MSDP配置"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/cache-sa-enable": {
+    "name": "使能SA缓存功能"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/encap-data-enable": {
+    "name": "使能封装数据报文"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/originating-rp-interface": {
+    "name": "逻辑RP接口名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/retry-interval": {
+    "name": "重试周期"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/sa-cache-holdtime": {
+    "name": "SA缓存生存期"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/import-source-enable": {
+    "name": "限制通告SA信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/import-source-policy-name": {
+    "name": "通告SA信息策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers": {
+    "name": "MSDP对等体配置列表"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer": {
+    "name": "MSDP对等体配置"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/address": {
+    "name": "对等体地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/connect-interface": {
+    "name": "本地接口名称"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/minimum-ttl": {
+    "name": "TTL阈值"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/description": {
+    "name": "MSDP对等体的描述性文本"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/mesh-group-name": {
+    "name": "全连接组"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/sa-cache-maximum": {
+    "name": "SA缓存最大值"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/request-sa-enable": {
+    "name": "使能立即发送SA"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/is-shutdown": {
+    "name": "连接断开"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/authentication-type": {
+    "name": "认证类型"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/authentication-type/keychain": {
+    "name": "Keychain认证"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/authentication-type/keychain/keychain-name": {
+    "name": "Keychain名"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/authentication-type/md5": {
+    "name": "MD5密码认证"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/authentication-type/md5/md5-password": {
+    "name": "密码"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/authentication-type/md5/md5-simple-flag": {
+    "name": "MD5密码类型"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/static-rpf-enable": {
+    "name": "RPF使能"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/static-rpf-prefix-name": {
+    "name": "RPF对等体策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/sa-policy-export-enable": {
+    "name": "使能SA转发策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/sa-policy-export-name": {
+    "name": "SA转发策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/sa-policy-local-export-enable": {
+    "name": "使能发送本地创建SA策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/sa-policy-local-export-name": {
+    "name": "发送本地创建SA策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/sa-policy-import-enable": {
+    "name": "使能SA接收策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/sa-policy-import-name": {
+    "name": "SA接收策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/sa-request-policy-enable": {
+    "name": "使能SA请求策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/sa-request-policy-name": {
+    "name": "SA请求策略"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/holdtime": {
+    "name": "对等体表项生存时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/keep-alive-interval": {
+    "name": "保活间隔"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/status": {
+    "name": "MSDP对等体信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/status/as-num": {
+    "name": "自治号"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/status/state": {
+    "name": "会话状态"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/status/up-or-down-time": {
+    "name": "会话建立/失败时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/status/connection-interface-address": {
+    "name": "接口地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/status/send-message-count": {
+    "name": "发送报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/status/receive-message-count": {
+    "name": "接收报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/status/discard-message-count": {
+    "name": "丢弃待发送报文"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/status/elapsed-time": {
+    "name": "最后一次清除间隔"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/status/sa-learned-count": {
+    "name": "SA缓存数量"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/status/input-queue-size": {
+    "name": "输入缓存数据长度"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/status/output-queue-size": {
+    "name": "输出缓存数据长度"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/status/rpf-check-fail-count": {
+    "name": "丢弃的SA报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/status/receive-sa-message-count": {
+    "name": "接收SA报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/status/send-sa-message-count": {
+    "name": "发送SA报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/status/receive-sa-requeset-count": {
+    "name": "接收SA请求报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/status/send-sa-request-count": {
+    "name": "发送SA请求报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/status/receive-sa-response-count": {
+    "name": "接收SA响应报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/status/send-sa-response-count": {
+    "name": "发送SA响应报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/status/receive-data-packet-count": {
+    "name": "接收带数据SA报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/status/send-data-packet-count": {
+    "name": "发送带数据SA报文数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/status/reset-count": {
+    "name": "重置次数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/status/fsm-estab-trans": {
+    "name": "进入ESTABLISHED的次数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/status/fsm-estab-time": {
+    "name": "进入ESTABLISHED的时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/status/last-receive-message-time": {
+    "name": "上次收到报文的时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/status/remote-port": {
+    "name": "对端端口"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/status/local-port": {
+    "name": "本地端口"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/status/encap-type": {
+    "name": "SA消息组包的类型"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/status/connect-attempts": {
+    "name": "连接尝试的次数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/control-message-counters": {
+    "name": "MSDP报文的计数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/control-message-counters/sa-received": {
+    "name": "接收SA消息数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/control-message-counters/sa-sent": {
+    "name": "发送SA消息数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/control-message-counters/sa-invalid": {
+    "name": "无效SA消息数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/control-message-counters/sa-request-received": {
+    "name": "接收SA Request消息数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/control-message-counters/sa-request-sent": {
+    "name": "发送SA Request消息数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/control-message-counters/sa-request-invalid": {
+    "name": "无效SA Request消息数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/control-message-counters/sa-response-received": {
+    "name": "接收SA Response消息数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/control-message-counters/sa-response-sent": {
+    "name": "发送SA Response消息数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/control-message-counters/sa-response-invalid": {
+    "name": "无效SA Response消息数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/control-message-counters/keep-alive-received": {
+    "name": "接收KeepAlive消息数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/control-message-counters/keep-alive-sent": {
+    "name": "发送KeepAlive消息数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/control-message-counters/keep-alive-invalid": {
+    "name": "无效KeepAlive消息数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/control-message-counters/notification-received": {
+    "name": "接收Notification消息数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/control-message-counters/notification-sent": {
+    "name": "发送Notification消息数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/control-message-counters/notification-invalid": {
+    "name": "无效Notification消息数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/control-message-counters/traceroute-request-received": {
+    "name": "接收Traceroute Request消息数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/control-message-counters/traceroute-request-sent": {
+    "name": "发送Traceroute Request消息数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/control-message-counters/traceroute-request-invalid": {
+    "name": "无效Traceroute Request消息数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/control-message-counters/traceroute-reply-received": {
+    "name": "接收Traceroute Reply消息数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/control-message-counters/traceroute-reply-sent": {
+    "name": "发送Traceroute Reply消息数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/control-message-counters/traceroute-reply-invalid": {
+    "name": "无效Traceroute Reply消息数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/control-message-counters/data-received": {
+    "name": "接收Data Packets消息数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/control-message-counters/data-sent": {
+    "name": "发送Data Packets消息数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/control-message-counters/data-invalid": {
+    "name": "无效Data Packets消息数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/control-message-counters/unknown-received": {
+    "name": "接收Unknown Type消息数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/control-message-counters/unknown-sent": {
+    "name": "发送Unknown Type消息数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/control-message-counters/unknown-invalid": {
+    "name": "无效Unknown Type消息数"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/invalid-packet": {
+    "name": "无效MSDP报文"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/invalid-packet/sa": {
+    "name": "无效SA报文"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/invalid-packet/sa/fault-length": {
+    "name": "无效的报文长度"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/invalid-packet/sa/bad-length-x": {
+    "name": "无效的Length-x字段"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/invalid-packet/sa/bad-sprefix": {
+    "name": "无效的Sprefix字段"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/invalid-packet/sa/invalid-multicast-group": {
+    "name": "无效组播组地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/invalid-packet/sa/invalid-multicast-source": {
+    "name": "无效组播源地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/invalid-packet/sa/bad-encap-data": {
+    "name": "无效的封装数据"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/invalid-packet/sa/illegal-rp-address": {
+    "name": "非法RP地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/invalid-packet/sa/rp-loop": {
+    "name": "RP地址为本地地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/invalid-packet/sa-response": {
+    "name": "无效SA Response报文"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/invalid-packet/sa-response/fault-length": {
+    "name": "无效的报文长度"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/invalid-packet/sa-response/bad-length-x": {
+    "name": "无效的Length-x字段"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/invalid-packet/sa-response/bad-sprefix": {
+    "name": "无效的Sprefix字段"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/invalid-packet/sa-response/invalid-multicast-group": {
+    "name": "无效组播组地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/invalid-packet/sa-response/invalid-multicast-source": {
+    "name": "无效组播源地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/invalid-packet/sa-response/illegal-rp-address": {
+    "name": "非法RP地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/invalid-packet/sa-response/rp-loop": {
+    "name": "RP地址为本地地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/invalid-packet/sa-request": {
+    "name": "无效SA Request报文"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/invalid-packet/sa-request/fault-length": {
+    "name": "无效的报文长度"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/invalid-packet/sa-request/invalid-multicast-group": {
+    "name": "无效组播组地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/invalid-packet/keep-alive": {
+    "name": "无效Keep Alive报文"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/invalid-packet/keep-alive/fault-length": {
+    "name": "无效的报文长度"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/invalid-packet/notification": {
+    "name": "无效Notification报文"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/peers/peer/invalid-packet/notification/fault-length": {
+    "name": "无效的报文长度"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/sa-caches": {
+    "name": "MSDP SA cache信息"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/sa-caches/sa-cache": {
+    "name": "MSDP SA cache状态"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/sa-caches/sa-cache/source-address": {
+    "name": "源地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/sa-caches/sa-cache/group-address": {
+    "name": "组地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/sa-caches/sa-cache/orig-rp-address": {
+    "name": "源RP地址"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/sa-caches/sa-cache/protocol": {
+    "name": "协议"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/sa-caches/sa-cache/as-num": {
+    "name": "自治号"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/sa-caches/sa-cache/up-time": {
+    "name": "建立时间"
+  },
+  "/huawei-network-instance:network-instance/instances/instance/huawei-msdp:msdp/global/sa-caches/sa-cache/expire-time": {
+    "name": "超时时间"
+  },
+  "/huawei-multicast:multicast/huawei-msdp:msdp": {
+    "name": "配置MSDP(组播源发现协议)"
+  },
+  "/huawei-multicast:multicast/huawei-msdp:msdp/invalid-packets": {
+    "name": "MSDP无效报文详细列表"
+  },
+  "/huawei-multicast:multicast/huawei-msdp:msdp/invalid-packets/invalid-packet": {
+    "name": "MSDP无效报文详细信息"
+  },
+  "/huawei-multicast:multicast/huawei-msdp:msdp/invalid-packets/invalid-packet/packet-index": {
+    "name": "MSDP无效报文索引"
+  },
+  "/huawei-multicast:multicast/huawei-msdp:msdp/invalid-packets/invalid-packet/interface": {
+    "name": "接口名称"
+  },
+  "/huawei-multicast:multicast/huawei-msdp:msdp/invalid-packets/invalid-packet/time": {
+    "name": "时间"
+  },
+  "/huawei-multicast:multicast/huawei-msdp:msdp/invalid-packets/invalid-packet/message-length": {
+    "name": "报文长度"
+  },
+  "/huawei-multicast:multicast/huawei-msdp:msdp/invalid-packets/invalid-packet/invalid-reason": {
+    "name": "无效报文类型"
+  },
+  "/huawei-multicast:multicast/huawei-msdp:msdp/invalid-packets/invalid-packet/packet-content": {
+    "name": "无效报文内容"
+  }
+}

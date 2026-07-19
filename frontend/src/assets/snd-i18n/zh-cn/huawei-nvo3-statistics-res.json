@@ -1,0 +1,335 @@
+{
+  "/huawei-nvo3-statistics:reset-vni-label-statistics": {
+    "name": "清除VNI粒度流量统计"
+  },
+  "/huawei-nvo3-statistics:reset-vni-label-statistics/input/vni": {
+    "name": "VNI"
+  },
+  "/huawei-nvo3-statistics:reset-vtep-statistics": {
+    "name": "清除流量统计"
+  },
+  "/huawei-nvo3-statistics:reset-vtep-statistics/input/vni": {
+    "name": "VNI"
+  },
+  "/huawei-nvo3-statistics:reset-vtep-statistics/input/source": {
+    "name": "源地址"
+  },
+  "/huawei-nvo3-statistics:reset-vtep-statistics/input/peer": {
+    "name": "对端IP"
+  },
+  "/huawei-nvo3-statistics:reset-vtep-statistics/input/mode": {
+    "name": "模式"
+  },
+  "/huawei-nvo3-statistics:reset-vtep-statistics/input/direction": {
+    "name": "方向"
+  },
+  "/huawei-nvo3-statistics:reset-ipv6-vtep-statistics": {
+    "name": "清除IPv6 VXLAN流量统计"
+  },
+  "/huawei-nvo3-statistics:reset-ipv6-vtep-statistics/input/vni": {
+    "name": "VNI"
+  },
+  "/huawei-nvo3-statistics:reset-ipv6-vtep-statistics/input/source": {
+    "name": "源地址"
+  },
+  "/huawei-nvo3-statistics:reset-ipv6-vtep-statistics/input/peer": {
+    "name": "对端IP"
+  },
+  "/huawei-nvo3-statistics:reset-ipv6-vtep-statistics/input/mode": {
+    "name": "模式"
+  },
+  "/huawei-nvo3-statistics:reset-ipv6-vtep-statistics/input/direction": {
+    "name": "方向"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3-statistics:nvo3-vtep-statistics": {
+    "name": "隧道流量统计"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3-statistics:nvo3-vtep-statistics/nvo3-vtep-statistic": {
+    "name": "使能统计"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3-statistics:nvo3-vtep-statistics/nvo3-vtep-statistic/vni": {
+    "name": "VNI"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3-statistics:nvo3-vtep-statistics/nvo3-vtep-statistic/peer": {
+    "name": "对端IP"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3-statistics:nvo3-vtep-statistics/nvo3-vtep-statistic/mode": {
+    "name": "统计模式"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3-statistics:nvo3-vtep-statistics/nvo3-vtep-statistic/direction": {
+    "name": "统计方向"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3-statistics:nvo3-vtep-statistics/nvo3-vtep-statistic/collections": {
+    "name": "统计信息"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3-statistics:nvo3-vtep-statistics/nvo3-vtep-statistic/collections/collection": {
+    "name": "流量统计"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3-statistics:nvo3-vtep-statistics/nvo3-vtep-statistic/collections/collection/source-addr": {
+    "name": "源IP"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3-statistics:nvo3-vtep-statistics/nvo3-vtep-statistic/collections/collection/send-bits-rate": {
+    "name": "每秒发送位数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3-statistics:nvo3-vtep-statistics/nvo3-vtep-statistic/collections/collection/send-pkts-rate": {
+    "name": "每秒发送包数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3-statistics:nvo3-vtep-statistics/nvo3-vtep-statistic/collections/collection/send-unicast-pkts": {
+    "name": "发送单播包数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3-statistics:nvo3-vtep-statistics/nvo3-vtep-statistic/collections/collection/send-multicast-pkts": {
+    "name": "发送多播包数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3-statistics:nvo3-vtep-statistics/nvo3-vtep-statistic/collections/collection/send-broadcast-pkts": {
+    "name": "发送广播包数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3-statistics:nvo3-vtep-statistics/nvo3-vtep-statistic/collections/collection/send-total-bytes": {
+    "name": "发送总字节数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3-statistics:nvo3-vtep-statistics/nvo3-vtep-statistic/collections/collection/send-total-pkts": {
+    "name": "发送总包数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3-statistics:nvo3-vtep-statistics/nvo3-vtep-statistic/collections/collection/receive-bits-rate": {
+    "name": "每秒收到位数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3-statistics:nvo3-vtep-statistics/nvo3-vtep-statistic/collections/collection/receive-pkts-rate": {
+    "name": "每秒收到包数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3-statistics:nvo3-vtep-statistics/nvo3-vtep-statistic/collections/collection/receive-unicast-pkts": {
+    "name": "收到单播包数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3-statistics:nvo3-vtep-statistics/nvo3-vtep-statistic/collections/collection/receive-multicast-pkts": {
+    "name": "收到多播包数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3-statistics:nvo3-vtep-statistics/nvo3-vtep-statistic/collections/collection/receive-broadcast-pkts": {
+    "name": "收到广播包数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3-statistics:nvo3-vtep-statistics/nvo3-vtep-statistic/collections/collection/receive-total-bytes": {
+    "name": "收到字节总数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3-statistics:nvo3-vtep-statistics/nvo3-vtep-statistic/collections/collection/receive-total-pkts": {
+    "name": "收到总包数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3-statistics:nvo3-vtep-statistics/nvo3-vtep-statistic/collections/collection/drop-unicast-pkts": {
+    "name": "丢弃单播包数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3-statistics:nvo3-vtep-statistics/nvo3-vtep-statistic/collections/collection/drop-multicast-pkts": {
+    "name": "丢弃多播包数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3-statistics:nvo3-vtep-statistics/nvo3-vtep-statistic/collections/collection/drop-broadcast-pkts": {
+    "name": "丢弃广播包数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3-statistics:nvo3-ipv6-vtep-statistics": {
+    "name": "IPv6 VXLAN隧道流量统计"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3-statistics:nvo3-ipv6-vtep-statistics/nvo3-ipv6-vtep-statistic": {
+    "name": "使能统计"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3-statistics:nvo3-ipv6-vtep-statistics/nvo3-ipv6-vtep-statistic/vni": {
+    "name": "VNI"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3-statistics:nvo3-ipv6-vtep-statistics/nvo3-ipv6-vtep-statistic/peer": {
+    "name": "对端IP"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3-statistics:nvo3-ipv6-vtep-statistics/nvo3-ipv6-vtep-statistic/mode": {
+    "name": "统计模式"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3-statistics:nvo3-ipv6-vtep-statistics/nvo3-ipv6-vtep-statistic/direction": {
+    "name": "统计方向"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3-statistics:nvo3-ipv6-vtep-statistics/nvo3-ipv6-vtep-statistic/collections": {
+    "name": "统计信息"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3-statistics:nvo3-ipv6-vtep-statistics/nvo3-ipv6-vtep-statistic/collections/collection": {
+    "name": "流量统计"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3-statistics:nvo3-ipv6-vtep-statistics/nvo3-ipv6-vtep-statistic/collections/collection/source-addr": {
+    "name": "源IP"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3-statistics:nvo3-ipv6-vtep-statistics/nvo3-ipv6-vtep-statistic/collections/collection/send-bits-rate": {
+    "name": "每秒发送位数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3-statistics:nvo3-ipv6-vtep-statistics/nvo3-ipv6-vtep-statistic/collections/collection/send-pkts-rate": {
+    "name": "每秒发送包数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3-statistics:nvo3-ipv6-vtep-statistics/nvo3-ipv6-vtep-statistic/collections/collection/send-unicast-pkts": {
+    "name": "发送单播包数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3-statistics:nvo3-ipv6-vtep-statistics/nvo3-ipv6-vtep-statistic/collections/collection/send-multicast-pkts": {
+    "name": "发送多播包数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3-statistics:nvo3-ipv6-vtep-statistics/nvo3-ipv6-vtep-statistic/collections/collection/send-broadcast-pkts": {
+    "name": "发送广播包数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3-statistics:nvo3-ipv6-vtep-statistics/nvo3-ipv6-vtep-statistic/collections/collection/send-total-bytes": {
+    "name": "发送总字节数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3-statistics:nvo3-ipv6-vtep-statistics/nvo3-ipv6-vtep-statistic/collections/collection/send-total-pkts": {
+    "name": "发送总包数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3-statistics:nvo3-ipv6-vtep-statistics/nvo3-ipv6-vtep-statistic/collections/collection/receive-bits-rate": {
+    "name": "每秒收到位数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3-statistics:nvo3-ipv6-vtep-statistics/nvo3-ipv6-vtep-statistic/collections/collection/receive-pkts-rate": {
+    "name": "每秒收到包数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3-statistics:nvo3-ipv6-vtep-statistics/nvo3-ipv6-vtep-statistic/collections/collection/receive-unicast-pkts": {
+    "name": "收到单播包数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3-statistics:nvo3-ipv6-vtep-statistics/nvo3-ipv6-vtep-statistic/collections/collection/receive-multicast-pkts": {
+    "name": "收到多播包数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3-statistics:nvo3-ipv6-vtep-statistics/nvo3-ipv6-vtep-statistic/collections/collection/receive-broadcast-pkts": {
+    "name": "收到广播包数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3-statistics:nvo3-ipv6-vtep-statistics/nvo3-ipv6-vtep-statistic/collections/collection/receive-total-bytes": {
+    "name": "收到字节总数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3-statistics:nvo3-ipv6-vtep-statistics/nvo3-ipv6-vtep-statistic/collections/collection/receive-total-pkts": {
+    "name": "收到总包数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3-statistics:nvo3-ipv6-vtep-statistics/nvo3-ipv6-vtep-statistic/collections/collection/drop-unicast-pkts": {
+    "name": "丢弃单播包数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3-statistics:nvo3-ipv6-vtep-statistics/nvo3-ipv6-vtep-statistic/collections/collection/drop-multicast-pkts": {
+    "name": "丢弃多播包数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3-statistics:nvo3-ipv6-vtep-statistics/nvo3-ipv6-vtep-statistic/collections/collection/drop-broadcast-pkts": {
+    "name": "丢弃广播包数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3-statistics:nvo3-tunnel-statistics": {
+    "name": "使能统计"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3-statistics:nvo3-tunnel-statistics/nvo3-tunnel-statistic": {
+    "name": "使能统计"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3-statistics:nvo3-tunnel-statistics/nvo3-tunnel-statistic/vni": {
+    "name": "VNI"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3-statistics:nvo3-tunnel-statistics/nvo3-tunnel-statistic/source": {
+    "name": "源IP"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3-statistics:nvo3-tunnel-statistics/nvo3-tunnel-statistic/peer": {
+    "name": "对端IP"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3-statistics:nvo3-tunnel-statistics/nvo3-tunnel-statistic/send-bits-rate": {
+    "name": "每秒发送位数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3-statistics:nvo3-tunnel-statistics/nvo3-tunnel-statistic/send-pkts-rate": {
+    "name": "每秒发送包数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3-statistics:nvo3-tunnel-statistics/nvo3-tunnel-statistic/send-unicast-pkts": {
+    "name": "发送单播包数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3-statistics:nvo3-tunnel-statistics/nvo3-tunnel-statistic/send-multicast-pkts": {
+    "name": "发送多播包数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3-statistics:nvo3-tunnel-statistics/nvo3-tunnel-statistic/send-broadcast-pkts": {
+    "name": "发送广播包数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3-statistics:nvo3-tunnel-statistics/nvo3-tunnel-statistic/send-total-bytes": {
+    "name": "发送总字节数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3-statistics:nvo3-tunnel-statistics/nvo3-tunnel-statistic/send-total-pkts": {
+    "name": "发送总包数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3-statistics:nvo3-tunnel-statistics/nvo3-tunnel-statistic/receive-bits-rate": {
+    "name": "每秒收到位数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3-statistics:nvo3-tunnel-statistics/nvo3-tunnel-statistic/receive-pkts-rate": {
+    "name": "每秒收到包数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3-statistics:nvo3-tunnel-statistics/nvo3-tunnel-statistic/receive-unicast-pkts": {
+    "name": "收到单播包数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3-statistics:nvo3-tunnel-statistics/nvo3-tunnel-statistic/receive-multicast-pkts": {
+    "name": "收到多播包数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3-statistics:nvo3-tunnel-statistics/nvo3-tunnel-statistic/receive-broadcast-pkts": {
+    "name": "收到广播包数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3-statistics:nvo3-tunnel-statistics/nvo3-tunnel-statistic/receive-total-bytes": {
+    "name": "收到字节总数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3-statistics:nvo3-tunnel-statistics/nvo3-tunnel-statistic/receive-total-pkts": {
+    "name": "收到总包数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3-statistics:nvo3-tunnel-statistics/nvo3-tunnel-statistic/drop-unicast-pkts": {
+    "name": "丢弃单播包数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3-statistics:nvo3-tunnel-statistics/nvo3-tunnel-statistic/drop-multicast-pkts": {
+    "name": "丢弃多播包数"
+  },
+  "/huawei-ifm:ifm/interfaces/interface/huawei-nvo3-statistics:nvo3-tunnel-statistics/nvo3-tunnel-statistic/drop-broadcast-pkts": {
+    "name": "丢弃广播包数"
+  },
+  "/huawei-nvo3:nvo3/vni-labels/vni-label/huawei-nvo3-statistics:statistics": {
+    "name": "VNI统计"
+  },
+  "/huawei-nvo3:nvo3/vni-labels/vni-label/huawei-nvo3-statistics:statistics/enable": {
+    "name": "使能VNI统计"
+  },
+  "/huawei-nvo3:nvo3/vni-labels/vni-label/huawei-nvo3-statistics:statistics/collections": {
+    "name": "统计信息"
+  },
+  "/huawei-nvo3:nvo3/vni-labels/vni-label/huawei-nvo3-statistics:statistics/collections/send-bits-rate": {
+    "name": "每秒发送位数"
+  },
+  "/huawei-nvo3:nvo3/vni-labels/vni-label/huawei-nvo3-statistics:statistics/collections/send-pkts-rate": {
+    "name": "每秒发送包数"
+  },
+  "/huawei-nvo3:nvo3/vni-labels/vni-label/huawei-nvo3-statistics:statistics/collections/send-unicast-pkts": {
+    "name": "发送单播包数"
+  },
+  "/huawei-nvo3:nvo3/vni-labels/vni-label/huawei-nvo3-statistics:statistics/collections/send-multicast-pkts": {
+    "name": "发送多播包数"
+  },
+  "/huawei-nvo3:nvo3/vni-labels/vni-label/huawei-nvo3-statistics:statistics/collections/send-broadcast-pkts": {
+    "name": "发送广播包数"
+  },
+  "/huawei-nvo3:nvo3/vni-labels/vni-label/huawei-nvo3-statistics:statistics/collections/send-total-bytes": {
+    "name": "发送总字节数"
+  },
+  "/huawei-nvo3:nvo3/vni-labels/vni-label/huawei-nvo3-statistics:statistics/collections/send-total-pkts": {
+    "name": "发送总包数"
+  },
+  "/huawei-nvo3:nvo3/vni-labels/vni-label/huawei-nvo3-statistics:statistics/collections/receive-bits-rate": {
+    "name": "每秒收到位数"
+  },
+  "/huawei-nvo3:nvo3/vni-labels/vni-label/huawei-nvo3-statistics:statistics/collections/receive-pkts-rate": {
+    "name": "每秒收到包数"
+  },
+  "/huawei-nvo3:nvo3/vni-labels/vni-label/huawei-nvo3-statistics:statistics/collections/receive-unicast-pkts": {
+    "name": "收到单播包数"
+  },
+  "/huawei-nvo3:nvo3/vni-labels/vni-label/huawei-nvo3-statistics:statistics/collections/receive-multicast-pkts": {
+    "name": "收到多播包数"
+  },
+  "/huawei-nvo3:nvo3/vni-labels/vni-label/huawei-nvo3-statistics:statistics/collections/receive-broadcast-pkts": {
+    "name": "收到广播包数"
+  },
+  "/huawei-nvo3:nvo3/vni-labels/vni-label/huawei-nvo3-statistics:statistics/collections/receive-total-bytes": {
+    "name": "收到字节总数"
+  },
+  "/huawei-nvo3:nvo3/vni-labels/vni-label/huawei-nvo3-statistics:statistics/collections/receive-total-pkts": {
+    "name": "收到总包数"
+  },
+  "/huawei-nvo3:nvo3/vni-labels/vni-label/huawei-nvo3-statistics:statistics/collections/drop-unicast-pkts": {
+    "name": "丢弃单播包数"
+  },
+  "/huawei-nvo3:nvo3/vni-labels/vni-label/huawei-nvo3-statistics:statistics/collections/drop-multicast-pkts": {
+    "name": "丢弃多播包数"
+  },
+  "/huawei-nvo3:nvo3/vni-labels/vni-label/huawei-nvo3-statistics:statistics/collections/drop-broadcast-pkts": {
+    "name": "丢弃广播包数"
+  },
+  "/rpcs/huawei-nvo3-statistics:nvo3-statistics/reset-vni-label-statistics": {
+    "name": "清除VNI粒度流量统计"
+  },
+  "/rpcs/huawei-nvo3-statistics:nvo3-statistics/reset-vtep-statistics": {
+    "name": "清除流量统计"
+  },
+  "/rpcs/huawei-nvo3-statistics:nvo3-statistics/reset-ipv6-vtep-statistics": {
+    "name": "清除IPv6 VXLAN流量统计"
+  }
+}

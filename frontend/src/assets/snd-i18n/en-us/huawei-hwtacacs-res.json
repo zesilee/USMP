@@ -1,0 +1,74 @@
+{
+  "/huawei-hwtacacs:hwtacacs": {
+    "name": "HWTACACS"
+  },
+  "/huawei-hwtacacs:hwtacacs/global": {
+    "name": "HWTACACS Global Configuration"
+  },
+  "/huawei-hwtacacs:hwtacacs/global/is-enable": {
+    "name": "Is Enable"
+  },
+  "/huawei-hwtacacs:hwtacacs/global/service-name": {
+    "name": "Service Name"
+  },
+  "/huawei-hwtacacs:hwtacacs/global/default-remote-address": {
+    "name": "Default Remote Address"
+  },
+  "/huawei-hwtacacs:hwtacacs/global/acct-stop-packet-resend-times": {
+    "name": "Acct Stop Packet Resend Times"
+  },
+  "/huawei-hwtacacs:hwtacacs/templates": {
+    "name": "HWTACACS Template List"
+  },
+  "/huawei-hwtacacs:hwtacacs/templates/template": {
+    "name": "Template"
+  },
+  "/huawei-hwtacacs:hwtacacs/templates/template/name": {
+    "name": "Name"
+  },
+  "/huawei-hwtacacs:hwtacacs/templates/template/response-timeout": {
+    "name": "Timeout Interval"
+  },
+  "/huawei-hwtacacs:hwtacacs/templates/template/quiet-time": {
+    "name": "Quiet Time"
+  },
+  "/huawei-hwtacacs:hwtacacs/templates/template/shared-key": {
+    "name": "Sahred Key"
+  },
+  "/huawei-hwtacacs:hwtacacs/templates/template/source-address": {
+    "name": "SourceAddress"
+  },
+  "/huawei-hwtacacs:hwtacacs/templates/template/source-address/ip": {
+    "name": "IP Address"
+  },
+  "/huawei-hwtacacs:hwtacacs/templates/template/source-address/ip/source-ip-address": {
+    "name": "Source IP Address"
+  },
+  "/huawei-hwtacacs:hwtacacs/templates/template/source-address/interface": {
+    "name": "Interface"
+  },
+  "/huawei-hwtacacs:hwtacacs/templates/template/source-address/interface/interface-name": {
+    "name": "InterfaceName"
+  },
+  "/huawei-hwtacacs:hwtacacs/templates/template/source-ipv6-address": {
+    "name": "SourvceIpv6IP"
+  },
+  "/huawei-hwtacacs:hwtacacs/templates/template/source-ipv6-address/ip": {
+    "name": "IP"
+  },
+  "/huawei-hwtacacs:hwtacacs/templates/template/source-ipv6-address/ip/ipv6-address": {
+    "name": "HWTACACSIPv6Address"
+  },
+  "/huawei-hwtacacs:hwtacacs/templates/template/source-ipv6-address/interface": {
+    "name": "Interface"
+  },
+  "/huawei-hwtacacs:hwtacacs/templates/template/source-ipv6-address/interface/ipv6-interface-name": {
+    "name": "HWTACACSIPv6Interface"
+  },
+  "/huawei-hwtacacs:hwtacacs/templates/template/domain-mode": {
+    "name": "DomainMode"
+  },
+  "/huawei-hwtacacs:hwtacacs/templates/template/traffic-unit": {
+    "name": "TrafficUnit"
+  }
+}

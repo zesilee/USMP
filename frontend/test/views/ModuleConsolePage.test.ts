@@ -29,8 +29,10 @@ describe('ModuleConsolePage · Tab 由模块根派生（零模块硬编码，FE-
   it('根子节点派生一级 Tab：global/damp 表单、interfaces/auto-recovery-times 列表', async () => {
     const w = mountPage()
     await flushPromises()
+    await flushPromises() // res 懒加载重标（UI-03）落定
     const labels = w.findAll('.el-tabs__item').map((n) => n.text().trim())
-    expect(labels).toEqual(['global', 'damp', 'interfaces', 'auto-recovery-times'])
+    // UI-03：Tab 标签经 snd res 本地化（zh 默认）；tab name 仍为 YANG 节点名。
+    expect(labels).toEqual(['全局配置属性', '接口物理状态振荡抑制使能', '接口列表', '自动恢复时间列表'])
     const vm = w.vm as any
     const kinds = Object.fromEntries(vm.tabs.map((t: any) => [t.name, t.kind]))
     expect(kinds).toEqual({
@@ -44,11 +46,12 @@ describe('ModuleConsolePage · Tab 由模块根派生（零模块硬编码，FE-
   it('面包屑 = 配置/厂商/模块/激活 Tab，随 Tab 切换联动', async () => {
     const w = mountPage()
     await flushPromises()
+    await flushPromises() // res 懒加载重标（UI-03）落定
     const crumb = () => w.findAll('.el-breadcrumb__inner').map((n) => n.text().trim())
-    expect(crumb()).toEqual(['配置', 'huawei', 'ifm', 'global'])
+    expect(crumb()).toEqual(['配置', 'huawei', 'ifm', '全局配置属性'])
     ;(w.vm as any).activeTab = 'interfaces'
     await flushPromises()
-    expect(crumb()).toEqual(['配置', 'huawei', 'ifm', 'interfaces'])
+    expect(crumb()).toEqual(['配置', 'huawei', 'ifm', '接口列表'])
   })
 
   it('schema 加载失败：错误提示可见、页面不崩（R08）', async () => {

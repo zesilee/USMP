@@ -1,0 +1,59 @@
+{
+  "/huawei-vxlan-path-detect:vxlan-path-detect": {
+    "name": "VXLAN路径检测"
+  },
+  "/huawei-vxlan-path-detect:vxlan-path-detect/ipv4-dscp-path-detect": {
+    "name": "配置IPv4 DSCP路径探测"
+  },
+  "/huawei-vxlan-path-detect:vxlan-path-detect/ipv4-dscp-path-detect/dscp-value": {
+    "name": "路径探测的dscp值"
+  },
+  "/huawei-vxlan-path-detect:vxlan-path-detect/ipv6-dscp-path-detect": {
+    "name": "配置IPv6 DSCP路径探测"
+  },
+  "/huawei-vxlan-path-detect:vxlan-path-detect/ipv6-dscp-path-detect/dscp-value": {
+    "name": "路径探测的dscp值"
+  },
+  "/huawei-vxlan-path-detect:vxlan-path-detect/ip-ping-detects": {
+    "name": "IP ping探测列表"
+  },
+  "/huawei-vxlan-path-detect:vxlan-path-detect/ip-ping-detects/ip-ping-detect": {
+    "name": "配置IP ping探测"
+  },
+  "/huawei-vxlan-path-detect:vxlan-path-detect/ip-ping-detects/ip-ping-detect/src-ip": {
+    "name": "源IPv4地址"
+  },
+  "/huawei-vxlan-path-detect:vxlan-path-detect/ip-ping-detects/ip-ping-detect/dst-ip": {
+    "name": "目的IPv4地址"
+  },
+  "/huawei-vxlan-path-detect:vxlan-path-detect/mac-ping-detects": {
+    "name": "MAC ping探测列表"
+  },
+  "/huawei-vxlan-path-detect:vxlan-path-detect/mac-ping-detects/mac-ping-detect": {
+    "name": "配置MAC ping探测"
+  },
+  "/huawei-vxlan-path-detect:vxlan-path-detect/mac-ping-detects/mac-ping-detect/src-ip": {
+    "name": "源IPv4地址"
+  },
+  "/huawei-vxlan-path-detect:vxlan-path-detect/mac-ping-detects/mac-ping-detect/dst-ip": {
+    "name": "目的IPv4地址"
+  },
+  "/huawei-vxlan-path-detect:vxlan-path-detect/mac-ping-detects/mac-ping-detect/src-mac": {
+    "name": "源MAC地址"
+  },
+  "/huawei-vxlan-path-detect:vxlan-path-detect/mac-ping-detects/mac-ping-detect/dst-mac": {
+    "name": "目的MAC地址"
+  },
+  "/huawei-vxlan-path-detect:vxlan-path-detect/ipv6-ping-detects": {
+    "name": "IPv6 ping探测列表"
+  },
+  "/huawei-vxlan-path-detect:vxlan-path-detect/ipv6-ping-detects/ipv6-ping-detect": {
+    "name": "配置IPv6 ping探测"
+  },
+  "/huawei-vxlan-path-detect:vxlan-path-detect/ipv6-ping-detects/ipv6-ping-detect/src-ipv6": {
+    "name": "源IPv6地址"
+  },
+  "/huawei-vxlan-path-detect:vxlan-path-detect/ipv6-ping-detects/ipv6-ping-detect/dst-ipv6": {
+    "name": "目的IPv6地址"
+  }
+}

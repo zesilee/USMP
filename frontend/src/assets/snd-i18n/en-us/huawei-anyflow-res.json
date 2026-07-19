@@ -1,0 +1,38 @@
+{
+  "/huawei-anyflow:anyflow": {
+    "name": "Any flow"
+  },
+  "/huawei-anyflow:anyflow/global": {
+    "name": "Configure any flow global setting"
+  },
+  "/huawei-anyflow:anyflow/global/enable": {
+    "name": "Enable or disable anyflow"
+  },
+  "/huawei-anyflow:anyflow/global/aging-time": {
+    "name": "Flow table agint time"
+  },
+  "/huawei-anyflow:anyflow/global/export-interval": {
+    "name": "Export time interval"
+  },
+  "/huawei-anyflow:anyflow/global/hardware-aging-time": {
+    "name": "Hardware flow table agint time"
+  },
+  "/huawei-anyflow:anyflow/global/hardware-export-interval": {
+    "name": "Hardware flowtable interval"
+  },
+  "/huawei-anyflow:anyflow/global/collect-id": {
+    "name": "The collect id"
+  },
+  "/huawei-anyflow:anyflow/global/flow-aggregation": {
+    "name": "Enable or disable flow aggregation"
+  },
+  "/huawei-anyflow:anyflow/global/aggregation-service-port": {
+    "name": "The range of Layer 4 port numbers"
+  },
+  "/huawei-anyflow:anyflow/global/aggregation-aging-time": {
+    "name": "Flow table agint time"
+  },
+  "/huawei-anyflow:anyflow/global/aggregation-export-interval": {
+    "name": "Export time interval"
+  }
+}
