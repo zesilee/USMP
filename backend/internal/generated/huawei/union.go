@@ -13,9 +13,61 @@ using the following YANG input files:
   - huawei-extension
   - huawei-bgp
   - huawei-network-instance
+  - huawei-analysis-collector
+  - huawei-anyflow
+  - huawei-arp
+  - huawei-bd
+  - huawei-cfg
+  - huawei-devm
+  - huawei-driver
+  - huawei-dsa
+  - huawei-ecc
+  - huawei-evpn
+  - huawei-fib
+  - huawei-ftpc
+  - huawei-grpc
+  - huawei-hwtacacs
+  - huawei-ifm-trunk
+  - huawei-ip
+  - huawei-l3-multicast
+  - huawei-lacp
+  - huawei-license
+  - huawei-lldp
+  - huawei-loadbalance
+  - huawei-m-lag
+  - huawei-mac-flapping-detect
+  - huawei-macsec
+  - huawei-microsegmentation
+  - huawei-mirror
+  - huawei-monitor-link
+  - huawei-mstp
+  - huawei-multicast
+  - huawei-mvpn
+  - huawei-nqa
+  - huawei-ntp
+  - huawei-nvo3
+  - huawei-openflow-agent
+  - huawei-ospfv2
+  - huawei-ospfv3
+  - huawei-packetevent
+  - huawei-qos
+  - huawei-rsa
+  - huawei-sflow
+  - huawei-sm2
+  - huawei-snmp
+  - huawei-syslog
+  - huawei-system-resources-usage
+  - huawei-unicast-forward
+  - huawei-vrrp
+  - huawei-vty
+  - huawei-vxlan-ext
+  - huawei-vxlan-path-detect
+  - openconfig-telemetry
+  - usmp-deviations
 
 Imported modules were sourced from:
   - ../snd/ce6866p-yang/...
+  - ../backend/internal/yang/deviations/...
 */
 package huawei
 

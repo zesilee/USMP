@@ -39,7 +39,7 @@ func Load() (schema.Schema, error) {
 // task-name 任务域映射（BR-01 category）：模块级扩展不存活于内嵌运行期 schema
 //（全树扫描实证=0，ygot 生成丢弃模块级语句），构建期从与 ygot 生成集同源同版本的
 // 模型提取，生成物提交入库（运行期零 submodule 依赖）。升级模型版本时一并重跑。
-//go:generate go run ../../tools/tasknamegen -path=../../../snd/ce6866p-yang -modules=huawei-vlan,huawei-ifm,huawei-system -output=./taskname.gen.go -package=yangschema
+//go:generate go run ../../tools/tasknamegen -path=../../../snd/ce6866p-yang -modules=huawei-vlan,huawei-ifm,huawei-system,huawei-pub-type,huawei-extension,huawei-bgp,huawei-network-instance,huawei-analysis-collector,huawei-anyflow,huawei-arp,huawei-bd,huawei-cfg,huawei-devm,huawei-driver,huawei-dsa,huawei-ecc,huawei-evpn,huawei-fib,huawei-ftpc,huawei-grpc,huawei-hwtacacs,huawei-ifm-trunk,huawei-ip,huawei-l3-multicast,huawei-lacp,huawei-license,huawei-lldp,huawei-loadbalance,huawei-m-lag,huawei-mac-flapping-detect,huawei-macsec,huawei-microsegmentation,huawei-mirror,huawei-monitor-link,huawei-mstp,huawei-multicast,huawei-mvpn,huawei-nqa,huawei-ntp,huawei-nvo3,huawei-openflow-agent,huawei-ospfv2,huawei-ospfv3,huawei-packetevent,huawei-qos,huawei-rsa,huawei-sflow,huawei-sm2,huawei-snmp,huawei-syslog,huawei-system-resources-usage,huawei-unicast-forward,huawei-vrrp,huawei-vty,huawei-vxlan-ext,huawei-vxlan-path-detect,openconfig-telemetry -output=./taskname.gen.go -package=yangschema
 
 // SND blacklist（CN-03）：构建期 revision 匹配后生成模块名集合，运行期零 snd 文件依赖。
 //go:generate go run ../../tools/blacklistgen -blacklist=../../../snd/ce6866p-yang/blacklist.xml -path=../../../snd/ce6866p-yang -output=./blacklist.gen.go -package=yangschema
