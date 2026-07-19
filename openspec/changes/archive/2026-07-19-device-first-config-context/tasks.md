@@ -28,5 +28,5 @@
 ## 5. 收口
 
 - [x] 5.1 全量前端单测 + typecheck + 覆盖率棘轮不降（T08，必要时上调阈值）
-- [ ] 5.2 code review + What/Why/How 提交 + PR + CI 全绿
-- [ ] 5.3 `/opsx:sync` delta → 主 spec；`/opsx:archive` 归档
+- [x] 5.2 code review + What/Why/How 提交 + PR + CI 全绿
+- [x] 5.3 `/opsx:sync` delta → 主 spec；`/opsx:archive` 归档
