@@ -304,8 +304,9 @@ func (m *DefaultManager) TriggerReconcile(deviceID, path string) bool {
 		return false
 	}
 	for _, ctrl := range m.controllers {
-		// The controller name contains the module identifier at registration.
-		if strings.Contains(ctrl.Name(), d.ControllerToken) {
+		// 精确名匹配（DR-02/full-yang-onboarding）：控制器命名约定 <vendor>-<token>。
+		// 子串匹配在全量模块下必撞（routing⊂routing-policy、ifm⊂ifm-trunk 等）。
+		if ctrl.Name() == d.Vendor+"-"+d.ControllerToken {
 			ctrl.Enqueue(predicate.Event{
 				Type:     predicate.UpdateEvent,
 				DeviceID: deviceID,

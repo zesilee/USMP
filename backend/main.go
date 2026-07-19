@@ -10,6 +10,7 @@ import (
 	"github.com/leezesi/usmp/backend/internal/controller/bgp"
 	"github.com/leezesi/usmp/backend/internal/controller/ifm"
 	"github.com/leezesi/usmp/backend/internal/controller/networkinstance"
+	"github.com/leezesi/usmp/backend/internal/controller/plainmodule"
 	"github.com/leezesi/usmp/backend/internal/controller/system"
 	"github.com/leezesi/usmp/backend/internal/controller/vlan"
 	"github.com/leezesi/usmp/backend/internal/intent"
@@ -17,6 +18,7 @@ import (
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/audit"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/controller"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/device"
+	yangdriver "github.com/leezesi/usmp/backend/pkg/yang-runtime/driver"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/leader"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/manager"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/predicate"
@@ -123,6 +125,27 @@ func main() {
 
 	mgr.AddController(niCtrl)
 	log.Printf("Huawei network-instance controller registered successfully")
+
+	// 全量 plain-container 模块控制器（full-yang-onboarding D4）：驱动描述符注册表
+	// 循环装配，新模块零控制器代码。排除上面已有专属控制器的模块（谓词/周期有
+	// 历史语义）；描述符含 XML 编解码数据才具备回读/下发通道。
+	explicit := map[string]bool{"system": true, "vlan": true, "ifm": true, "bgp": true, "network-instance": true}
+	plainCount := 0
+	for _, d := range yangdriver.All() {
+		if d.Vendor != "huawei" || d.XML == nil || explicit[d.Module] {
+			continue
+		}
+		anchor := d.EncodeAnchor
+		plainCtrl := controller.ControllerManagedBy("huawei-" + d.Module).
+			WithReconciler(plainmodule.New(cs, clientPool, mgr.GetDeviceStore(), anchor)).
+			WithSource(nativeGate.Wrap(source.NewPeriodicSourceWithLister(5*time.Minute, mgr.GetDeviceStore(), anchor))).
+			WithPredicate(predicate.Prefix(anchor)).
+			WithWorkerCount(1).
+			Build()
+		mgr.AddController(plainCtrl)
+		plainCount++
+	}
+	log.Printf("registered %d plain-module controllers from driver registry", plainCount)
 
 	// 业务网络配置意图控制器（business-network-config）：BusinessVlanService CR
 	// watch → 校验/展开/status 回写（旧 BusinessVlan 桥接已退役，本控制器是唯一意图面）。
