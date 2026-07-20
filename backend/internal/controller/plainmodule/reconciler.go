@@ -2,6 +2,10 @@
 // （full-yang-onboarding design D4）：xpl/tunnelmgmt/routingpolicy/acl reconciler
 // 完全同构（仅锚点与 GoStruct 类型异），收敛为按驱动描述符参数化的单实现——
 // 新模块零 reconciler 代码，main.go 按注册表循环装配控制器。
+//
+// 本包 1:N 服务 drivers/huawei_modules.go plainModules 表内全部模块（57 个）；
+// 仅 system/vlan/ifm/bgp/network-instance 五个形态特殊模块保留专属包。
+// 完整映射关系与「加模块/拆专属包」操作守则见 ../README.md。
 package plainmodule
 
 import (
