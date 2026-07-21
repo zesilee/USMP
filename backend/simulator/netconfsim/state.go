@@ -1,5 +1,7 @@
 package netconfsim
 
+import "strings"
+
 // State overlay merging for the <get> RPC (NS-08). The state tree holds
 // config-false data injected via SetState; <get> responds with running+state
 // merged, while <get-config> keeps returning the running tree only.
@@ -10,6 +12,18 @@ package netconfsim
 // not resurface as a ghost entry. Pure state nodes (containers/leaves/lists
 // with no config counterpart at all) are appended as-is, and a leaf present in
 // both trees takes the state value.
+
+// unwrapConfig peels a transparent top-level <config> wrapper (the shape
+// SetRunningConfig/deviceToConfigXML seeds carry) so merging and <get> output
+// always operate at module-container level. Trees without the wrapper pass
+// through unchanged. The returned synthetic root shares children with n —
+// clone before mutating.
+func unwrapConfig(n *dataNode) *dataNode {
+	if len(n.Children) == 1 && strings.EqualFold(n.Children[0].Name.Local, "config") {
+		return &dataNode{Children: n.Children[0].Children}
+	}
+	return n
+}
 
 // mergeState merges the state overlay into target, a private clone of running.
 func mergeState(target, state *dataNode) {

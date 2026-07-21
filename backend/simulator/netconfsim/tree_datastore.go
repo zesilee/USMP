@@ -114,8 +114,10 @@ func (d *treeDatastore) GetFiltered(filterXML []byte) ([]byte, error) {
 		filter = f
 	}
 	d.mu.RLock()
-	merged := d.running.clone()
-	mergeState(merged, d.state)
+	// 双侧剥 <config> 透明壳后在模块容器层合并：running 的种子形态（带壳/不带壳）
+	// 不得影响合并层级，<get> 输出以模块容器为顶层。
+	merged := unwrapConfig(d.running).clone()
+	mergeState(merged, unwrapConfig(d.state))
 	d.mu.RUnlock()
 	if filter == nil {
 		return merged.xmlBytes(), nil

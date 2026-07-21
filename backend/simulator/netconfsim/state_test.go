@@ -234,6 +234,46 @@ func TestStateOverlayFilteredGet(t *testing.T) {
 	}
 }
 
+// running 树带 <config> 包裹（SetRunningConfig/带壳 XML 种子的历史形态）时，
+// 合并必须在模块容器层进行——状态树不得被当「纯状态容器」追加成顶层兄弟，
+// <get> 输出以模块容器为顶层（无 <config> 壳）。
+func TestStateOverlayMergesThroughConfigWrapper(t *testing.T) {
+	ds := newTreeDatastore()
+	mustSetRunning(t, ds, "<config>"+stateIfmRunning+"</config>")
+	mustSetState(t, ds, stateIfmOverlay)
+
+	out := mustGetFiltered(t, ds, "")
+	got := treeFromXML(t, out)
+	if got.child("config") != nil {
+		t.Fatalf("<get> output must unwrap the <config> wrapper: %s", out)
+	}
+	ifaces := got.find("ifm", "interfaces").children("interface")
+	if len(ifaces) != 2 {
+		t.Fatalf("want 2 interfaces after merge through wrapper, got %d: %s", len(ifaces), out)
+	}
+	var withState *dataNode
+	for _, it := range ifaces {
+		if k := it.child("name"); k != nil && k.leafText() == "200GE0/1/0" {
+			withState = it
+		}
+	}
+	if withState == nil || withState.child("dynamic") == nil {
+		t.Fatalf("state must merge into the wrapped config entry (not a top-level sibling): %s", out)
+	}
+	// 配置叶必须还在——若状态树被当独立树返回则 mtu 丢失
+	if v := withState.child("mtu"); v == nil || v.leafText() != "9216" {
+		t.Fatalf("config leaf lost when merging through wrapper: %s", out)
+	}
+
+	// 带 filter 的读同样不得命中「状态树顶层兄弟」旁路
+	filtered := mustGetFiltered(t, ds, `<ifm xmlns="urn:huawei:params:xml:ns:yang:huawei-ifm"><interfaces><interface><name>200GE0/1/0</name></interface></interfaces></ifm>`)
+	fgot := treeFromXML(t, filtered)
+	fifaces := fgot.find("ifm", "interfaces").children("interface")
+	if len(fifaces) != 1 || fifaces[0].child("dynamic") == nil || fifaces[0].child("mtu") == nil {
+		t.Fatalf("filtered get through wrapper must return merged entry with config+state: %s", filtered)
+	}
+}
+
 // SetState 畸形 XML 报错且不改变已有状态。
 func TestStateOverlaySetStateError(t *testing.T) {
 	ds := newTreeDatastore()

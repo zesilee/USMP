@@ -7,7 +7,7 @@ YANG 模型中 `config false` 的状态字段（如接口 `dynamic` 容器的 op
 ## What Changes
 
 - 模拟网元 netconfsim 实现 NETCONF `<get>` RPC（RFC6241 §7.7）：返回 running 配置树与状态数据 overlay 树的合并结果，支持 subtree filter；`<get-config>` 行为不变（仅返回配置树）。
-- 模拟网元新增状态数据 overlay 数据存：`SetStateDataXML` 注入、独立于 running 树（edit-config 不触碰）、附带 `DemoStateSeed` 演示种子（IFM 接口 `dynamic` + VLAN `status`，设备侧数字枚举形态）。
+- 模拟网元新增状态数据 overlay 数据存：`SetStateDataXML` 注入、独立于 running 树（edit-config 不触碰）、附带 `DemoStateSeed` 演示种子（IFM 接口 `dynamic`，设备侧数字枚举形态；VLAN 状态场景由集成测试覆盖）。
 - device-protocol NETCONF 客户端新增 `WithStateData()` GetOption：置位时发 `<get>`（scrapligo `Driver.Get`），缺省仍发 `<get-config>`；断线重试/幂等语义与现有读一致。
 - config-api `GET /config` 读路径改用 `WithStateData()`：返回数据含 config=false 状态子树，缓存/TTL/降级语义不变。
 - 对账（Reconciler）读路径**不变**：仍走 `<get-config>`，diff 只比配置数据（desired⊆actual 子集比对本就忽略多余叶，此处显式保持语义纯净）。

@@ -53,7 +53,7 @@ scrapligo v1.4.0 原生提供 `Driver.Get(filter string, opts...)`（`driver/net
 
 ### D6 演示种子：DemoStateSeed 只覆盖 IFM dynamic
 
-`DemoStateSeed` 为 5 条 demo 接口提供 `<dynamic>`（oper-status/link-status/physical-status/mac-address/bandwidth/line-protocol-up-time 等，设备侧数字枚举形态，与 DemoSeedConfig 注释约定一致）。VLAN `status` 不进 demo 种子（demo 无 VLAN 配置，合并会按 D2 丢弃），由集成测试覆盖（测试内自行种 vlan 配置+状态）。`cmd/netconf-simulator/main.go` 启动时注入。
+`DemoStateSeed` 为 5 条 demo 接口提供 `<dynamic>`（oper-status/link-status/physical-status/mac-address/bandwidth/line-protocol-up-time 等，设备侧数字枚举形态，与 DemoSeedConfig 注释约定一致）。VLAN 状态不进 demo 种子（demo 无 VLAN 配置，合并会按 D2 丢弃），由集成测试覆盖（测试内自行种 vlan 配置 + `statistics` 状态——该型号 vlan 条目无 `status` 叶，config false 状态面是 `statistics` 计数器容器）。`cmd/netconf-simulator/main.go` 启动时注入。
 
 ## Risks / Trade-offs
 

@@ -4,7 +4,7 @@
 
 ### Requirement: NS-08 `<get>` RPC 与状态数据 overlay
 
-模拟器 SHALL 实现 NETCONF `<get>` RPC（RFC6241 §7.7）：返回 running 配置树与状态数据 overlay 树的**合并结果**（状态叶挂接到配置树对应节点下，同名节点以状态树为准），并 SHALL 支持与 get-config 相同的 subtree filter 语义。状态数据 overlay SHALL 经 `SetStateDataXML` 注入、独立于 running/candidate 数据存——edit-config/commit/discard-changes SHALL NOT 影响状态树。`<get-config>` 行为 SHALL 保持不变（仅返回配置树，不含状态数据）。模拟器 SHALL 内置 `DemoStateSeed` 演示状态种子（IFM 接口 `dynamic` 容器 + VLAN `status`，设备侧数字枚举形态），standalone 二进制启动时 SHALL 注入。
+模拟器 SHALL 实现 NETCONF `<get>` RPC（RFC6241 §7.7）：返回 running 配置树与状态数据 overlay 树的**合并结果**（状态叶挂接到配置树对应节点下，同名节点以状态树为准），并 SHALL 支持与 get-config 相同的 subtree filter 语义。状态数据 overlay SHALL 经 `SetStateDataXML` 注入、独立于 running/candidate 数据存——edit-config/commit/discard-changes SHALL NOT 影响状态树。`<get-config>` 行为 SHALL 保持不变（仅返回配置树，不含状态数据）。模拟器 SHALL 内置 `DemoStateSeed` 演示状态种子（IFM 接口 `dynamic` 容器，设备侧数字枚举形态；demo 配置无 VLAN 故 VLAN 状态场景由集成测试覆盖），standalone 二进制启动时 SHALL 注入。
 
 #### Scenario: get 返回配置+状态合并树
 - **WHEN** 经 `SetStateDataXML` 注入接口 `dynamic` 状态子树后，客户端发送携 subtree filter 的 `<get>`

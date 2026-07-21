@@ -17,9 +17,9 @@
 
 ## 3. API：GET /config 携状态（BR-01）
 
-- [ ] 3.1 B3 红灯：config_handler 测试——fetch 返回含状态子树的 XML 时响应 data 含 RFC7951 状态字段；无状态子树时响应与改动前等值（不构造占位）
-- [ ] 3.2 实现 fetchFromDevice 追加 client.WithStateData()（D5），3.1 转绿
-- [ ] 3.3 B2 端到端：sim（配置+状态 seed）→ manager/clientpool → GET /config 返回含 `dynamic` 字段；VLAN 场景（测试内种 vlan 配置+status 状态）同断言
+- [x] 3.1 B3 红灯：config_handler 测试——fetch 返回含状态子树的 XML 时响应 data 含 RFC7951 状态字段；无状态子树时响应与改动前等值（不构造占位）
+- [x] 3.2 实现 fetchFromDevice 追加 client.WithStateData()（D5），3.1 转绿
+- [x] 3.3 B2 端到端：sim（配置+状态 seed）→ manager/clientpool → GET /config 返回含 `dynamic` 字段；VLAN 场景（测试内种 vlan 配置+status 状态）同断言
 
 ## 4. 演示种子与 standalone 二进制
 
