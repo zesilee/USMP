@@ -200,6 +200,10 @@ function toggleCollapse() {
   padding: 10px;
   overflow-y: auto;
   background: transparent;
+  /* 层级缩进走 EP 的 --el-menu-level 计算（每级 +12px 紧凑级距），任意深度
+     单调递增。历史固定 padding-left:44px 在左树 3 层化后把 huawei-xx 叶子
+     钉得比二级分类标题还浅（错位回归见 SidebarTreeIndent.browser.test）。 */
+  --el-menu-level-padding: 12px;
 }
 .nav :deep(.el-menu-item),
 .nav :deep(.el-sub-menu__title) {
@@ -227,7 +231,6 @@ function toggleCollapse() {
 }
 .nav :deep(.el-sub-menu .el-menu-item) {
   min-width: 0;
-  padding-left: 44px !important;
 }
 
 /* 侧栏底部状态 */
