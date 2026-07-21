@@ -4,7 +4,7 @@
 
 ### Requirement: DP-09 NETCONF `<get>` 状态读
 
-NETCONF 客户端 `Get` SHALL 支持 `WithStateData()` GetOption：置位时 SHALL 发送 `<get>` RPC（携与 get-config 相同规则构造的 subtree filter），返回设备的配置+状态合并数据；缺省（未置位）SHALL 保持 DP-03 行为（`<get-config>` running）。`<get>` 读路径的断线自愈语义 SHALL 与 DP-05 一致：传输层错误 SHALL 标记连接失效、重连并重试一次（`<get>` 幂等，重试安全）。
+NETCONF 客户端 `Get` SHALL 支持 `WithStateData()` GetOption：置位时 SHALL 发送 `<get>` RPC，携由请求 path 构造的 subtree filter（模块命名空间经驱动注册表解析，未注册模块降级为无命名空间通配；list 谓词剥除、整列表读），返回设备的配置+状态合并数据；缺省（未置位）SHALL 保持 DP-03 行为（`<get-config>` running，含其既有 filter 构造）。`<get>` 读路径的断线自愈语义 SHALL 与 DP-05 一致：传输层错误 SHALL 标记连接失效、重连并重试一次（`<get>` 幂等，重试安全）。
 
 #### Scenario: WithStateData 发 get RPC
 - **WHEN** 调用方以 `client.WithStateData()` 调用 `Get(ctx, path)`

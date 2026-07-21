@@ -11,9 +11,9 @@
 
 ## 2. 客户端：WithStateData option（DP-09）
 
-- [ ] 2.1 B1 红灯：GetOptions.IncludeState 测试——WithStateData 置位走 `<get>`、缺省仍 get-config、get 路径传输层错误重连重试一次
-- [ ] 2.2 实现 WithStateData + NETCONFClient.Get 按 option 选 driver.Get/driver.GetConfig（D4），2.1 转绿
-- [ ] 2.3 B2 红灯→绿：集成测试（`*_integration_test.go`，testing.Short 跳过）——sim 种配置+状态 overlay，client.WithStateData 回读经 xmlcodec 解码含 `dynamic` 状态叶；不带 option 回读不含
+- [x] 2.1 B1 红灯：GetOptions.IncludeState 测试——WithStateData 置位走 `<get>`、缺省仍 get-config、get 路径传输层错误重连重试一次
+- [x] 2.2 实现 WithStateData + NETCONFClient.Get 按 option 选 driver.Get/driver.GetConfig（D4），2.1 转绿
+- [x] 2.3 B2 红灯→绿：集成测试（`*_integration_test.go`，testing.Short 跳过）——sim 种配置+状态 overlay，client.WithStateData 回读经 xmlcodec 解码含 `dynamic` 状态叶；不带 option 回读不含
 
 ## 3. API：GET /config 携状态（BR-01）
 

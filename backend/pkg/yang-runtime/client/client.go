@@ -30,6 +30,9 @@ type GetOptions struct {
 	Datastore string
 	// Timeout is the request timeout
 	Timeout time.Duration
+	// IncludeState requests config-false state data too: the read is issued as
+	// a NETCONF <get> instead of <get-config> (DP-09).
+	IncludeState bool
 }
 
 // WithDatastore sets the datastore for get operations
@@ -56,6 +59,18 @@ type getOptionTimeout struct {
 
 func (o *getOptionTimeout) Apply(opts *GetOptions) {
 	opts.Timeout = o.timeout
+}
+
+// WithStateData requests config-false state data in the read: the RPC becomes
+// a NETCONF <get> (config+state merged) instead of <get-config> (DP-09).
+func WithStateData() GetOption {
+	return getOptionStateData{}
+}
+
+type getOptionStateData struct{}
+
+func (getOptionStateData) Apply(opts *GetOptions) {
+	opts.IncludeState = true
 }
 
 // SetOption is an option for Set operations
