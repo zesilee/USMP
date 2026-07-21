@@ -293,10 +293,10 @@ function keyOf(f: Field): string {
   return seg || f.path
 }
 
-// 子字段：group/list 的直接子项。read-only 的 oper 叶子（如 member-port/state）不参与配置。
-const childFields = computed<Field[]>(() =>
-  (props.field.fields || []).filter(f => !f.readonly)
-)
+// 子字段：group/list 的直接子项。readonly 叶保留渲染——禁用态回显 config=false
+// 状态值（FE-14/BR-01，读路径 <get> 已带回状态数据）；payload/校验排除由
+// useConfigForm 处理，不参与配置下发。
+const childFields = computed<Field[]>(() => props.field.fields || [])
 
 const rows = computed<Record<string, any>[]>(() =>
   Array.isArray(props.modelValue) ? props.modelValue : []

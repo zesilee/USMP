@@ -105,3 +105,54 @@ describe('FieldRenderer · 动态缺省占位与单位后缀（FE-15）', () => 
     expect(without.find('.field-units').exists()).toBe(false)
   })
 })
+
+describe('FieldRenderer · group 内 readonly 状态叶回显（NS-08/BR-01，FE-14 对齐）', () => {
+  const dynGroup = {
+    path: '/ifm/interfaces/interface/dynamic',
+    type: 'group' as const,
+    label: '接口动态信息',
+    readonly: true,
+    fields: [
+      { path: '/ifm/interfaces/interface/dynamic/mac-address', type: 'string' as const, label: 'mac-address', readonly: true },
+      { path: '/ifm/interfaces/interface/dynamic/oper-status', type: 'string' as const, label: 'oper-status', readonly: true },
+    ],
+  }
+
+  it('readonly 子叶应渲染为禁用输入并回显状态值（不得被过滤成空组）', () => {
+    const w = mount(FieldRenderer, {
+      props: {
+        field: dynGroup,
+        modelValue: { 'mac-address': '00:e0:fc:12:34:01', 'oper-status': 'up' },
+      },
+      global: { plugins: [ElementPlus] },
+    })
+    const inputs = w.findAll('input')
+    expect(inputs.length).toBeGreaterThanOrEqual(2)
+    const mac = inputs.find((i) => (i.element as HTMLInputElement).value === '00:e0:fc:12:34:01')
+    expect(mac, 'mac-address 状态值应回显').toBeTruthy()
+    expect((mac!.element as HTMLInputElement).disabled).toBe(true)
+  })
+
+  it('混合 group：readonly 叶与可写叶并存时两者都渲染，仅 readonly 禁用', () => {
+    const mixed = {
+      path: '/x/g',
+      type: 'group' as const,
+      label: 'g',
+      fields: [
+        { path: '/x/g/writable', type: 'string' as const, label: 'writable' },
+        { path: '/x/g/state', type: 'string' as const, label: 'state', readonly: true },
+      ],
+    }
+    const w = mount(FieldRenderer, {
+      props: { field: mixed, modelValue: { writable: 'a', state: 'b' } },
+      global: { plugins: [ElementPlus] },
+    })
+    const inputs = w.findAll('input')
+    const writable = inputs.find((i) => (i.element as HTMLInputElement).value === 'a')
+    const state = inputs.find((i) => (i.element as HTMLInputElement).value === 'b')
+    expect(writable, '可写叶应渲染').toBeTruthy()
+    expect((writable!.element as HTMLInputElement).disabled).toBe(false)
+    expect(state, 'readonly 叶应渲染回显').toBeTruthy()
+    expect((state!.element as HTMLInputElement).disabled).toBe(true)
+  })
+})

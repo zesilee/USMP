@@ -28,6 +28,10 @@ func main() {
 		// staging 演示种子：3 main-interface/200GE/up + 2 sub-interface/Vlanif/down，
 		// 供通用模块控制台的表格/高级搜索/行级 when 冒烟断言。
 		sim.SetRunningConfigXML([]byte(netconfsim.DemoSeedConfig))
+		// config-false 状态种子（NS-08）：<get> 合并回读点亮前端只读字段。
+		if err := sim.SetStateDataXML([]byte(netconfsim.DemoStateSeed)); err != nil {
+			log.Fatalf("seed state data: %v", err)
+		}
 	}
 
 	if err := sim.Start(); err != nil {

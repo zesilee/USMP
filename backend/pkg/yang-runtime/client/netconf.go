@@ -186,16 +186,26 @@ func (c *NETCONFClient) Get(ctx context.Context, path string, opts ...GetOption)
 		return &GetResult{Error: err}, err
 	}
 
-	resp, err := driver.GetConfig(getOpts.Datastore, withFilter)
+	// IncludeState → <get>（配置+状态合并，DP-09）；缺省 <get-config>（DP-03）。
+	// scrapligo 的 Get 会把传入串包进 <filter type="subtree">，故这里传 subtree
+	// filter 体而非 get-config 的 <filter> 包装元素。
+	doGet := func(d *netconf.Driver) (*response.NetconfResponse, error) {
+		if getOpts.IncludeState {
+			return d.Get(constructSubtreeFilter(path))
+		}
+		return d.GetConfig(getOpts.Datastore, withFilter)
+	}
+
+	resp, err := doGet(driver)
 	if err != nil && isTransportError(err) {
 		// 连接已死（设备重启/闪断/超时后被 scrapligo 关闭）：重连并重试一次。
-		// get-config 幂等，重试安全。
+		// get/get-config 均幂等，重试安全。
 		c.markDisconnected()
 		driver, rerr := c.ensureConnected()
 		if rerr != nil {
 			return &GetResult{Error: err}, err
 		}
-		resp, err = driver.GetConfig(getOpts.Datastore, withFilter)
+		resp, err = doGet(driver)
 	}
 	if err != nil {
 		if isTransportError(err) {
@@ -476,6 +486,67 @@ func (c *NETCONFClient) constructFilter(path string) string {
 	// For simplicity, we use an XPath filter for the path
 	// Convert /interfaces/interface[name='eth0'] to XPath notation
 	return fmt.Sprintf(`<filter xmlns="urn:ietf:params:xml:ns:netconf:base:1.0" select="%s"/>`, path)
+}
+
+// constructSubtreeFilter builds a subtree-filter body for the <get> RPC from a
+// config path（如 /ifm:ifm/ifm:interfaces → <ifm xmlns="…"><interfaces/></ifm>）。
+// 模块命名空间经驱动注册表解析（未注册模块降级为无命名空间通配，subtree
+// filter 语义下匹配任意命名空间）；list 谓词剥除（整列表读，与写路径的谓词
+// 拒绝语义对齐）。空路径返回 ""（scrapligo 不构造 filter → 全量 <get>）。
+func constructSubtreeFilter(path string) string {
+	norm := strings.TrimRight(strings.TrimSpace(path), "/")
+	// 谓词值可含 "/"（如 [name='GE0/0/1']），须在按 "/" 切段前整体剥除 […] 区段。
+	stripped := norm
+	if strings.Contains(stripped, "[") {
+		var sb strings.Builder
+		depth := 0
+		for _, r := range stripped {
+			switch {
+			case r == '[':
+				depth++
+			case r == ']' && depth > 0:
+				depth--
+			case depth == 0:
+				sb.WriteRune(r)
+			}
+		}
+		stripped = sb.String()
+	}
+	var names []string
+	for _, seg := range strings.Split(strings.Trim(stripped, "/"), "/") {
+		if i := strings.Index(seg, ":"); i >= 0 {
+			seg = seg[i+1:]
+		}
+		if seg != "" {
+			names = append(names, seg)
+		}
+	}
+	if len(names) == 0 {
+		return ""
+	}
+	ns := ""
+	if d, ok := yangdriver.DecoderFor(norm); ok && d.XML != nil {
+		ns = d.XML.Namespace
+	}
+	var b strings.Builder
+	for i, name := range names {
+		b.WriteByte('<')
+		b.WriteString(name)
+		if i == 0 && ns != "" {
+			fmt.Fprintf(&b, ` xmlns=%q`, ns)
+		}
+		if i == len(names)-1 {
+			b.WriteString("/>")
+		} else {
+			b.WriteByte('>')
+		}
+	}
+	for i := len(names) - 2; i >= 0; i-- {
+		b.WriteString("</")
+		b.WriteString(names[i])
+		b.WriteByte('>')
+	}
+	return b.String()
 }
 
 func (c *NETCONFClient) marshalChange(change Change) (string, error) {

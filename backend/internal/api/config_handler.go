@@ -54,7 +54,9 @@ func (h *ConfigHandler) fetchFromDevice(ctx context.Context, ip, path string) (i
 	if !cli.IsConnected() {
 		return nil, errDeviceNotConnected
 	}
-	result, err := cli.Get(ctx, path, client.WithDatastore("running"))
+	// WithStateData（BR-01/DP-09）：发 <get> 而非 <get-config>，回读同时携带
+	// config=false 状态子树（接口 dynamic、VLAN status 等），前端只读控件回显。
+	result, err := cli.Get(ctx, path, client.WithDatastore("running"), client.WithStateData())
 	if err != nil {
 		return nil, err
 	}

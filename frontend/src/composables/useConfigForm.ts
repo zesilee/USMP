@@ -123,17 +123,38 @@ export function useConfigForm(fields: Ref<Field[]> | ComputedRef<Field[]>, keyFi
     return r
   })
 
+  // 深层排除 readonly 后代（FE-14 补全，NS-08/BR-01）：读路径带回 config=false
+  // 状态后，可写 group/嵌套 list 的行对象里会携带 readonly 子叶的设备值；Encode
+  // 是 populated-means-pushed，state 叶随 payload 下发真机会被拒绝，须按 schema
+  // 递归剥除。schema 未描述的键原样保留（宽进严出，R08）。
+  function stripReadonlyDeep(field: Field, value: any): any {
+    if (!field.fields?.length || value == null || typeof value !== 'object') return value
+    const kids = field.fields
+    const stripObj = (obj: Record<string, any>): Record<string, any> => {
+      const r: Record<string, any> = {}
+      for (const key of Object.keys(obj)) {
+        const child = kids.find((c) => keyOf(c) === key)
+        if (child?.readonly) continue
+        r[key] = child ? stripReadonlyDeep(child, obj[key]) : obj[key]
+      }
+      return r
+    }
+    if (Array.isArray(value)) return value.map((v) => (v && typeof v === 'object' && !Array.isArray(v) ? stripObj(v) : v))
+    return stripObj(value)
+  }
+
   // 下发 payload：仅当前可见字段的键（when 隐藏 = 节点不存在）；undefined 键剔除
-  //（presence 关闭 = 节点不存在，FE-12）。
+  //（presence 关闭 = 节点不存在，FE-12）；group/list 值按 schema 深层剥除 readonly。
   function visiblePayload(): Record<string, any> {
-    const keys = new Set(editableFlat.value.map(keyOf))
+    const editable = new Map(editableFlat.value.map((f) => [keyOf(f), f]))
     // dynamicDefault 叶空值不入 payload（FE-15）：空=「设备自行决定」，下发空串会覆写设备缺省。
     const dynKeys = new Set(editableFlat.value.filter((f) => f.dynamicDefault).map(keyOf))
     const out: Record<string, any> = {}
     for (const k of Object.keys(formData)) {
-      if (!keys.has(k) || formData[k] === undefined) continue
+      const f = editable.get(k)
+      if (!f || formData[k] === undefined) continue
       if (dynKeys.has(k) && (formData[k] === '' || formData[k] === null)) continue
-      out[k] = formData[k]
+      out[k] = stripReadonlyDeep(f, formData[k])
     }
     return out
   }

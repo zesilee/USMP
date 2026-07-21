@@ -110,6 +110,27 @@ test.describe('部署冒烟 - 前端 SPA', () => {
     await expect(page.getByText('200GE0/1/1.1', { exact: false }).first()).toBeVisible()
   })
 
+  // config=false 只读字段回显（NS-08/BR-01）：读路径 <get> 带回状态种子，
+  // 编辑抽屉内 dynamic/mac-address 以禁用态展示状态值。
+  test('接口编辑抽屉回显 config=false 状态字段（dynamic/mac-address）', async ({ page }) => {
+    await page.goto('/module/ifm', { waitUntil: 'networkidle' })
+    await pickDevice(page)
+    await page.getByRole('tab', { name: '接口列表', exact: true }).click()
+    await expect(page.getByText('200GE0/1/0', { exact: true }).first()).toBeVisible({ timeout: 20000 })
+
+    // 打开种子行 200GE0/1/0 的编辑抽屉
+    const row = page.locator('.el-table__row', { hasText: '200GE0/1/0' }).first()
+    await row.getByRole('button', { name: '编辑' }).click()
+
+    // dynamic 容器渲染为「接口动态信息」el-form-item（组标题在 form-item 标签上，
+    // SND i18n 汉化），嵌套子叶为 .sub-field（标签「生效MAC地址」）。
+    const drawer = page.locator('.el-drawer')
+    const dynItem = drawer.locator('.el-form-item').filter({ hasText: '接口动态信息' }).first()
+    const macRow = dynItem.locator('.sub-field').filter({ hasText: '生效MAC地址' }).first()
+    await expect(macRow.locator('input').first()).toHaveValue('00:e0:fc:12:34:01', { timeout: 15000 })
+    await expect(macRow.locator('input').first()).toBeDisabled()
+  })
+
   // 高级搜索（ext:support-filter 驱动）：class=sub-interface 过滤后主接口行消失。
   test('高级搜索按 class 过滤（support-filter 驱动）', async ({ page }) => {
     await page.goto('/module/ifm', { waitUntil: 'networkidle' })

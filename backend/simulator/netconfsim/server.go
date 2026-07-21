@@ -156,6 +156,8 @@ func (s *sshServer) handleRequest(msg string) string {
 	// Dispatch by structurally decoding the RPC envelope rather than substring
 	// matching, so an RPC keyword appearing in element content cannot mislead.
 	switch classifyRPC(msg) {
+	case rpcGet:
+		return s.handleGet(msg, msgID)
 	case rpcGetConfig:
 		return s.handleGetConfig(msg, msgID)
 	case rpcEditConfig:
@@ -165,7 +167,7 @@ func (s *sshServer) handleRequest(msg string) string {
 	case rpcDiscardChanges:
 		return s.handleDiscardChanges(msg, msgID)
 	default:
-		// Return ok for unsupported/unknown RPCs (lock/unlock/get/…).
+		// Return ok for unsupported/unknown RPCs (lock/unlock/…).
 		return okReply(msgID)
 	}
 }
@@ -175,6 +177,7 @@ type rpcKind int
 
 const (
 	rpcUnknown rpcKind = iota
+	rpcGet
 	rpcGetConfig
 	rpcEditConfig
 	rpcCommit
@@ -187,6 +190,7 @@ const (
 // the datastore switch (T5).
 type rpcEnvelope struct {
 	XMLName        xml.Name  `xml:"rpc"`
+	Get            *struct{} `xml:"get"`
 	GetConfig      *struct{} `xml:"get-config"`
 	EditConfig     *struct{} `xml:"edit-config"`
 	Commit         *struct{} `xml:"commit"`
@@ -201,6 +205,8 @@ func classifyRPC(msg string) rpcKind {
 		return rpcUnknown
 	}
 	switch {
+	case env.Get != nil:
+		return rpcGet
 	case env.GetConfig != nil:
 		return rpcGetConfig
 	case env.EditConfig != nil:
@@ -304,6 +310,41 @@ func extractMessageID(msg string) string {
 
 func okReply(msgID string) string {
 	return fmt.Sprintf(`<rpc-reply xmlns="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="%s"><ok/></rpc-reply>`, msgID)
+}
+
+// handleGet serves the <get> RPC (RFC 6241 §7.7, NS-08): running config merged
+// with the state overlay, optionally narrowed by a subtree filter.
+func (s *sshServer) handleGet(msg, msgID string) string {
+	if err, ok := s.scenario.ErrorOnRPC["get"]; ok {
+		return errorReply(msgID, err.Error())
+	}
+	data, err := s.store.GetFiltered([]byte(extractFilter(msg)))
+	if err != nil {
+		return errorReply(msgID, err.Error())
+	}
+	return fmt.Sprintf(`<rpc-reply xmlns="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="%s"><data>%s</data></rpc-reply>`, msgID, data)
+}
+
+// extractFilter returns the inner content of the RPC's <filter> element, or ""
+// when absent/self-closing (raw-string scan, same style as the other handlers).
+func extractFilter(msg string) string {
+	start := strings.Index(msg, "<filter")
+	if start == -1 {
+		return ""
+	}
+	open := strings.Index(msg[start:], ">")
+	if open == -1 {
+		return ""
+	}
+	if strings.HasSuffix(msg[start:start+open+1], "/>") {
+		return ""
+	}
+	inner := msg[start+open+1:]
+	end := strings.LastIndex(inner, "</filter>")
+	if end == -1 {
+		return ""
+	}
+	return strings.TrimSpace(inner[:end])
 }
 
 func (s *sshServer) handleGetConfig(msg, msgID string) string {
