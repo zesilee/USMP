@@ -190,6 +190,13 @@ func deviceToConfigXML(dev interface{}) []byte {
 	return buf
 }
 
+// SetStateDataXML sets the config-false state overlay from XML bytes (NS-08):
+// merged into <get> responses, invisible to <get-config>, untouched by config
+// writes. Returns the parse error, leaving prior state intact on failure.
+func (s *Simulator) SetStateDataXML(xmlBytes []byte) error {
+	return s.store.SetState(xmlBytes)
+}
+
 // SetCapabilities sets extra YANG-module capabilities to advertise in the NETCONF
 // hello (in addition to base:1.0/:candidate/:writable-running). Must be called
 // before Start. Used to exercise per-device capability-based module narrowing.

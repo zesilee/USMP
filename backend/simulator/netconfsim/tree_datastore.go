@@ -19,6 +19,10 @@ type treeDatastore struct {
 	running   *dataNode
 	candidate *dataNode
 
+	// state is the config-false overlay tree (NS-08): injected via SetState,
+	// merged into <get> responses, untouched by every config write path.
+	state *dataNode
+
 	// confirmed-commit state (NS-07): snapshot of running taken at the FIRST
 	// confirmed commit of a chain, and the confirmation timer. A non-nil timer
 	// means a confirmed commit is pending.
@@ -32,6 +36,7 @@ func newTreeDatastore() *treeDatastore {
 	return &treeDatastore{
 		running:   &dataNode{},
 		candidate: &dataNode{},
+		state:     &dataNode{},
 	}
 }
 
@@ -80,6 +85,42 @@ func (d *treeDatastore) SetRunning(xmlBytes []byte) error {
 	d.running = node
 	d.candidate = node.clone()
 	return nil
+}
+
+// SetState parses the given XML and replaces the state overlay tree (NS-08).
+// A parse error leaves the existing state untouched.
+func (d *treeDatastore) SetState(xmlBytes []byte) error {
+	node, err := parseXML(xmlBytes)
+	if err != nil {
+		return err
+	}
+	d.mu.Lock()
+	defer d.mu.Unlock()
+	d.state = node
+	return nil
+}
+
+// GetFiltered serializes the running tree merged with the state overlay after
+// applying a subtree filter — the <get> RPC response body (NS-08). An empty/nil
+// filter returns the whole merged tree. The merge operates on a private clone,
+// so neither running nor state is ever mutated.
+func (d *treeDatastore) GetFiltered(filterXML []byte) ([]byte, error) {
+	var filter *dataNode
+	if len(strings.TrimSpace(string(filterXML))) > 0 {
+		f, err := parseXML(filterXML)
+		if err != nil {
+			return nil, err
+		}
+		filter = f
+	}
+	d.mu.RLock()
+	merged := d.running.clone()
+	mergeState(merged, d.state)
+	d.mu.RUnlock()
+	if filter == nil {
+		return merged.xmlBytes(), nil
+	}
+	return filterTree(merged, filter).xmlBytes(), nil
 }
 
 // Commit copies the candidate tree onto running.
