@@ -23,10 +23,12 @@
 
 ## 4. 演示种子与 standalone 二进制
 
-- [ ] 4.1 B1 红灯→绿：DemoStateSeed 常量 + seed 测试（5 条接口 dynamic 全给值、数字枚举形态断言、与 DemoSeedConfig 键对齐）
-- [ ] 4.2 cmd/netconf-simulator 启动注入 DemoStateSeed；审 staging-smoke.spec.ts 既有断言不受新增字段影响，追加只读字段有值断言（F4，`make e2e-local` 全绿）
+- [x] 4.1 B1 红灯→绿：DemoStateSeed 常量 + seed 测试（5 条接口 dynamic 全给值、数字枚举形态断言、与 DemoSeedConfig 键对齐）
+- [x] 4.2 cmd/netconf-simulator 启动注入 DemoStateSeed；审 staging-smoke.spec.ts 既有断言不受新增字段影响，追加只读字段有值断言（F4，`make e2e-local` 全绿）
+
+- [x] 4.3 前端 FE-14 对齐（实现中发现）：FieldRenderer group 子字段派生移除 readonly 过滤——嵌套状态叶（dynamic 等）禁用态回显；F2 组件测试先红后绿（纯 readonly 组 + 混合组两用例）
 
 ## 5. 收尾门禁
 
-- [ ] 5.1 `go test ./...` 全绿 + `-race` 干净（R09）；覆盖率不低于 backend/.coverage-baseline（T08，补测后上调）
-- [ ] 5.2 go-code-review-check 通过（T04）；What/Why/How 提交（≤500 行/commit，超出拆分）
+- [x] 5.1 `go test ./...` 全绿 + `-race` 干净（R09）；覆盖率不低于 backend/.coverage-baseline（T08，补测后上调）
+- [x] 5.2 go-code-review-check 通过（T04）；What/Why/How 提交（≤500 行/commit，超出拆分）

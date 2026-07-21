@@ -20,7 +20,7 @@ scrapligo v1.4.0 原生提供 `Driver.Get(filter string, opts...)`（`driver/net
 **Non-Goals:**
 - 对账（Reconciler）读路径不动：仍 `<get-config>`，diff 只比配置数据。
 - 不做状态数据的独立缓存/独立 TTL——合并结果沿用 RunningCache（key=ip|path，TTL 30s）。
-- 不做前端改动（渲染管道已就绪）；不做 gNMI（R02 规划能力）。
+- 前端仅一处 FE-14 对齐（apply 中实测发现）：FieldRenderer 的 group 子字段派生曾以 `filter(f => !f.readonly)` 藏掉嵌套状态叶（当年恒空、藏掉是合理降噪），移除该过滤改为禁用态回显；其余渲染管道零改动。不做 gNMI（R02 规划能力）。
 - 不实现 `<get>` 的 with-defaults、origin 等扩展语义。
 
 ## Decisions

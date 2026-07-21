@@ -30,5 +30,5 @@ YANG 模型中 `config false` 的状态字段（如接口 `dynamic` 容器的 op
 - `backend/simulator/netconfsim/`：server.go（RPC 分发 + handleGet）、tree_datastore.go 或新 state 存、seed.go（DemoStateSeed）、cmd/netconf-simulator/main.go。
 - `backend/pkg/yang-runtime/client/`：client.go（GetOption）、netconf.go（Get 按 option 选 RPC）。
 - `backend/internal/api/config_handler.go`：fetchFromDevice 加 `WithStateData()`。
-- 前端零改动（只读渲染管道已就绪）；staging E2E 冒烟可追加只读字段断言。
+- 前端一处 FE-14 对齐：`FieldRenderer` group 子字段派生移除 readonly 过滤（历史上状态叶恒空、藏掉合理；现须禁用态回显），其余渲染管道零改动；staging E2E 冒烟追加只读字段回显断言。
 - 测试：B1（sim get/合并/filter/并发）、B2（集成：seed 状态→API 回读含状态）、B3（handler 含状态数据透传）；覆盖率棘轮不下降（T08）。
