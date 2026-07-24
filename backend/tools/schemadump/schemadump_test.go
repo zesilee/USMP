@@ -2,6 +2,8 @@ package main
 
 import (
 	"encoding/json"
+	"os"
+	"path/filepath"
 	"testing"
 
 	"github.com/leezesi/usmp/backend/internal/api"
@@ -87,6 +89,67 @@ func TestExportAll_FixtureSelfConsistent(t *testing.T) {
 		if ys.Vendor == "" {
 			t.Errorf("module %q: fixture missing vendor", name)
 		}
+	}
+}
+
+// run() 写盘管线：落盘全部 fixture、清除陈旧 *.json、文件内容 == exportAll。
+func TestRun_WritesAllAndClearsStale(t *testing.T) {
+	s := loadSchema(t)
+	dir := t.TempDir()
+
+	// 预置一份陈旧 fixture 与一个非 json 文件——前者应被清、后者应保留。
+	stale := filepath.Join(dir, "__removed_module__.json")
+	keep := filepath.Join(dir, "README.md")
+	if err := os.WriteFile(stale, []byte("{}"), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	if err := os.WriteFile(keep, []byte("keep me"), 0o644); err != nil {
+		t.Fatal(err)
+	}
+
+	n, err := run(s, dir)
+	if err != nil {
+		t.Fatalf("run: %v", err)
+	}
+
+	want := loadedModuleNames(s)
+	if n != len(want) {
+		t.Fatalf("run wrote %d fixtures, want %d", n, len(want))
+	}
+	if _, err := os.Stat(stale); !os.IsNotExist(err) {
+		t.Errorf("stale *.json not removed (dir must be a pure function of schema)")
+	}
+	if _, err := os.Stat(keep); err != nil {
+		t.Errorf("non-json file README.md must be preserved: %v", err)
+	}
+
+	// 落盘内容与内存导出逐字节一致（run 不引入额外变换）。
+	fixtures, err := exportAll(s)
+	if err != nil {
+		t.Fatalf("exportAll: %v", err)
+	}
+	for name := range want {
+		got, err := os.ReadFile(filepath.Join(dir, name+".json"))
+		if err != nil {
+			t.Errorf("missing fixture file %s.json: %v", name, err)
+			continue
+		}
+		if string(got) != string(fixtures[name]) {
+			t.Errorf("module %q: on-disk fixture != exportAll output", name)
+		}
+	}
+}
+
+// run() 到不可创建的输出路径应返回错误（负路径，不 panic）。
+func TestRun_MkdirError(t *testing.T) {
+	s := loadSchema(t)
+	// 用一个已存在的普通文件当「目录」——MkdirAll 应失败。
+	f := filepath.Join(t.TempDir(), "not-a-dir")
+	if err := os.WriteFile(f, []byte("x"), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	if _, err := run(s, filepath.Join(f, "sub")); err == nil {
+		t.Error("run should error when output dir cannot be created")
 	}
 }
 
