@@ -22,11 +22,13 @@ export default defineConfig({
       // 2026-07-08 P3 choice 补测后实测：Stmts 71.25 / Branch 70.02 / Funcs 62.75 / Lines 71.47。
       // 2026-07-13 legacy CRD 链路退役（低覆盖代码删除，分母重算）后实测：
       // Stmts 79.53 / Branch 75.61 / Funcs 72.21 / Lines 80.08。
+      // 2026-07-24 派生黄金套件（GD-01，moduleConsole/schemaTree 100%）后实测：
+      // Stmts 84.73 / Branch 78.48 / Funcs 78.18 / Lines 85.28 —— funcs/lines 上调。
       thresholds: {
         statements: 84,
         branches: 78,
-        functions: 77,
-        lines: 84
+        functions: 78,
+        lines: 85
       }
     }
   },
