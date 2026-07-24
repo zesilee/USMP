@@ -1,0 +1,3414 @@
+{
+  "module": "driver",
+  "tabs": [
+    {
+      "name": "area-energyinfos",
+      "kind": "list"
+    },
+    {
+      "name": "board-powers",
+      "kind": "list"
+    },
+    {
+      "name": "bootinfos",
+      "kind": "list"
+    },
+    {
+      "name": "chassis-run-modes",
+      "kind": "list"
+    },
+    {
+      "name": "check-running-software-safes",
+      "kind": "list"
+    },
+    {
+      "name": "electric-current-infos",
+      "kind": "list"
+    },
+    {
+      "name": "electronic-labels",
+      "kind": "list"
+    },
+    {
+      "name": "global-attribute",
+      "kind": "form"
+    },
+    {
+      "name": "inner-links",
+      "kind": "list"
+    },
+    {
+      "name": "interface-match-check-states",
+      "kind": "list"
+    },
+    {
+      "name": "io-inspect-attributes",
+      "kind": "list"
+    },
+    {
+      "name": "io-inspect-states",
+      "kind": "list"
+    },
+    {
+      "name": "mbusnodes",
+      "kind": "list"
+    },
+    {
+      "name": "multi-chassis-attributes",
+      "kind": "list"
+    },
+    {
+      "name": "rollback-attribute",
+      "kind": "form"
+    },
+    {
+      "name": "slave-defaults",
+      "kind": "list"
+    },
+    {
+      "name": "slot-statistics",
+      "kind": "list"
+    },
+    {
+      "name": "stratum-3-clocks",
+      "kind": "list"
+    },
+    {
+      "name": "system-sync-clocks",
+      "kind": "list"
+    },
+    {
+      "name": "temperature2s",
+      "kind": "list"
+    },
+    {
+      "name": "temperatures",
+      "kind": "list"
+    },
+    {
+      "name": "voltageinfos",
+      "kind": "list"
+    },
+    {
+      "name": "voltages",
+      "kind": "list"
+    }
+  ],
+  "lists": {
+    "area-energyinfos": {
+      "keyField": "area-id",
+      "columns": [
+        {
+          "name": "area-id",
+          "widget": "number"
+        },
+        {
+          "name": "chassis-position",
+          "widget": "string"
+        },
+        {
+          "name": "area-assigned-power",
+          "widget": "string"
+        },
+        {
+          "name": "area-left-power",
+          "widget": "string"
+        },
+        {
+          "name": "area-rated-power",
+          "widget": "string"
+        },
+        {
+          "name": "area-used-power",
+          "widget": "string"
+        }
+      ],
+      "filterable": []
+    },
+    "board-powers": {
+      "keyField": "position",
+      "columns": [
+        {
+          "name": "position",
+          "widget": "string"
+        },
+        {
+          "name": "current-power",
+          "widget": "string"
+        },
+        {
+          "name": "efficiency",
+          "widget": "string"
+        },
+        {
+          "name": "electrical-value",
+          "widget": "string"
+        },
+        {
+          "name": "entity-index",
+          "widget": "number"
+        },
+        {
+          "name": "pcb-name",
+          "widget": "string"
+        },
+        {
+          "name": "power-threshold",
+          "widget": "string"
+        },
+        {
+          "name": "rated-power",
+          "widget": "string"
+        },
+        {
+          "name": "voltage-value",
+          "widget": "string"
+        }
+      ],
+      "filterable": []
+    },
+    "bootinfos": {
+      "keyField": "position",
+      "columns": [
+        {
+          "name": "position",
+          "widget": "string"
+        },
+        {
+          "name": "board-type",
+          "widget": "string"
+        },
+        {
+          "name": "rot",
+          "widget": "string"
+        }
+      ],
+      "filterable": []
+    },
+    "chassis-run-modes": {
+      "keyField": "chassis-id",
+      "columns": [
+        {
+          "name": "chassis-id",
+          "widget": "string"
+        },
+        {
+          "name": "current-run-mode",
+          "widget": "enum"
+        },
+        {
+          "name": "next-run-mode",
+          "widget": "enum"
+        },
+        {
+          "name": "current-run-cluster",
+          "widget": "string"
+        },
+        {
+          "name": "next-run-cluster",
+          "widget": "string"
+        }
+      ],
+      "filterable": []
+    },
+    "check-running-software-safes": {
+      "keyField": "item",
+      "columns": [
+        {
+          "name": "item",
+          "widget": "enum"
+        },
+        {
+          "name": "position",
+          "widget": "string"
+        },
+        {
+          "name": "result",
+          "widget": "enum"
+        },
+        {
+          "name": "board-type",
+          "widget": "string"
+        },
+        {
+          "name": "pkgsha256hash",
+          "widget": "string"
+        },
+        {
+          "name": "runsha256hash",
+          "widget": "string"
+        }
+      ],
+      "filterable": []
+    },
+    "electric-current-infos": {
+      "keyField": "address",
+      "columns": [
+        {
+          "name": "address",
+          "widget": "string"
+        },
+        {
+          "name": "channel",
+          "widget": "number"
+        },
+        {
+          "name": "i2c",
+          "widget": "number"
+        },
+        {
+          "name": "position",
+          "widget": "string"
+        },
+        {
+          "name": "state",
+          "widget": "enum"
+        },
+        {
+          "name": "current",
+          "widget": "string"
+        },
+        {
+          "name": "fatal-high-threshold",
+          "widget": "string"
+        },
+        {
+          "name": "fatal-low-threshold",
+          "widget": "string"
+        },
+        {
+          "name": "major-high-threshold",
+          "widget": "string"
+        }
+      ],
+      "filterable": []
+    },
+    "electronic-labels": {
+      "keyField": "entity-class",
+      "columns": [
+        {
+          "name": "entity-class",
+          "widget": "enum"
+        },
+        {
+          "name": "entity-serial-number",
+          "widget": "number"
+        },
+        {
+          "name": "position",
+          "widget": "string"
+        },
+        {
+          "name": "archives-info-version",
+          "widget": "string"
+        },
+        {
+          "name": "barcode",
+          "widget": "string"
+        },
+        {
+          "name": "board-type",
+          "widget": "string"
+        },
+        {
+          "name": "bom-english-desc",
+          "widget": "string"
+        },
+        {
+          "name": "bom-local-desc",
+          "widget": "string"
+        },
+        {
+          "name": "entity-asset-id",
+          "widget": "string"
+        }
+      ],
+      "filterable": []
+    },
+    "inner-links": {
+      "keyField": "left-chassis-position",
+      "columns": [
+        {
+          "name": "left-chassis-position",
+          "widget": "string"
+        },
+        {
+          "name": "link-type",
+          "widget": "enum"
+        },
+        {
+          "name": "right-chassis-position",
+          "widget": "string"
+        },
+        {
+          "name": "alarm-state",
+          "widget": "enum"
+        },
+        {
+          "name": "left-chassis-type",
+          "widget": "enum"
+        },
+        {
+          "name": "operation-state",
+          "widget": "enum"
+        },
+        {
+          "name": "right-chassis-type",
+          "widget": "enum"
+        },
+        {
+          "name": "link-index",
+          "widget": "string"
+        },
+        {
+          "name": "link-name",
+          "widget": "string"
+        }
+      ],
+      "filterable": []
+    },
+    "interface-match-check-states": {
+      "keyField": "position",
+      "columns": [
+        {
+          "name": "position",
+          "widget": "string"
+        },
+        {
+          "name": "object",
+          "widget": "enum"
+        }
+      ],
+      "filterable": []
+    },
+    "io-inspect-attributes": {
+      "keyField": "index",
+      "columns": [
+        {
+          "name": "index",
+          "widget": "number"
+        },
+        {
+          "name": "position",
+          "widget": "string"
+        },
+        {
+          "name": "alarm-name",
+          "widget": "string"
+        },
+        {
+          "name": "default-states",
+          "widget": "enum"
+        }
+      ],
+      "filterable": []
+    },
+    "io-inspect-states": {
+      "keyField": "index",
+      "columns": [
+        {
+          "name": "index",
+          "widget": "number"
+        },
+        {
+          "name": "position",
+          "widget": "string"
+        },
+        {
+          "name": "alarm-status",
+          "widget": "enum"
+        },
+        {
+          "name": "default-states",
+          "widget": "enum"
+        },
+        {
+          "name": "states",
+          "widget": "enum"
+        },
+        {
+          "name": "alarm-name",
+          "widget": "string"
+        }
+      ],
+      "filterable": []
+    },
+    "mbusnodes": {
+      "keyField": "slot-id",
+      "columns": [
+        {
+          "name": "slot-id",
+          "widget": "string"
+        },
+        {
+          "name": "board-type",
+          "widget": "string"
+        },
+        {
+          "name": "eeprom-number",
+          "widget": "number"
+        },
+        {
+          "name": "register",
+          "widget": "string"
+        },
+        {
+          "name": "temperature-monitor-number",
+          "widget": "number"
+        },
+        {
+          "name": "voltage-monitor-number",
+          "widget": "number"
+        }
+      ],
+      "filterable": []
+    },
+    "multi-chassis-attributes": {
+      "keyField": "current-chassis-id",
+      "columns": [
+        {
+          "name": "current-chassis-id",
+          "widget": "number"
+        },
+        {
+          "name": "chassis-type",
+          "widget": "enum"
+        },
+        {
+          "name": "next-chassis-id",
+          "widget": "number"
+        }
+      ],
+      "filterable": []
+    },
+    "slave-defaults": {
+      "keyField": "chassis-id",
+      "columns": [
+        {
+          "name": "chassis-id",
+          "widget": "string"
+        },
+        {
+          "name": "slot-id",
+          "widget": "string"
+        },
+        {
+          "name": "slave-default",
+          "widget": "string"
+        }
+      ],
+      "filterable": []
+    },
+    "slot-statistics": {
+      "keyField": "chassis-id",
+      "columns": [
+        {
+          "name": "chassis-id",
+          "widget": "string"
+        },
+        {
+          "name": "slot-type",
+          "widget": "enum"
+        },
+        {
+          "name": "online-slot-number",
+          "widget": "number"
+        },
+        {
+          "name": "total-slot-number",
+          "widget": "number"
+        }
+      ],
+      "filterable": []
+    },
+    "stratum-3-clocks": {
+      "keyField": "slot-id",
+      "columns": [
+        {
+          "name": "slot-id",
+          "widget": "string"
+        },
+        {
+          "name": "board-device-type",
+          "widget": "enum"
+        },
+        {
+          "name": "clock-type",
+          "widget": "enum"
+        },
+        {
+          "name": "switch-mode",
+          "widget": "enum"
+        },
+        {
+          "name": "clock-slot-id",
+          "widget": "string"
+        }
+      ],
+      "filterable": []
+    },
+    "system-sync-clocks": {
+      "keyField": "slot-id",
+      "columns": [
+        {
+          "name": "slot-id",
+          "widget": "string"
+        },
+        {
+          "name": "board-device-type",
+          "widget": "enum"
+        },
+        {
+          "name": "clock-type",
+          "widget": "enum"
+        },
+        {
+          "name": "lock-state",
+          "widget": "enum"
+        },
+        {
+          "name": "switch-mode",
+          "widget": "enum"
+        },
+        {
+          "name": "clock-slot-id",
+          "widget": "string"
+        }
+      ],
+      "filterable": []
+    },
+    "temperature2s": {
+      "keyField": "position",
+      "columns": [
+        {
+          "name": "position",
+          "widget": "string"
+        },
+        {
+          "name": "sensor-id",
+          "widget": "number"
+        },
+        {
+          "name": "state",
+          "widget": "enum"
+        },
+        {
+          "name": "current-temperature",
+          "widget": "number"
+        },
+        {
+          "name": "fan-adjust-high-temperature",
+          "widget": "number"
+        },
+        {
+          "name": "fan-adjust-low-temperature",
+          "widget": "number"
+        },
+        {
+          "name": "fatal-threshold",
+          "widget": "number"
+        },
+        {
+          "name": "fatal-threshold-percent",
+          "widget": "number"
+        },
+        {
+          "name": "major-threshold",
+          "widget": "number"
+        }
+      ],
+      "filterable": [
+        "sensor-name"
+      ]
+    },
+    "temperatures": {
+      "keyField": "address",
+      "columns": [
+        {
+          "name": "address",
+          "widget": "string"
+        },
+        {
+          "name": "channel",
+          "widget": "number"
+        },
+        {
+          "name": "i2c",
+          "widget": "number"
+        },
+        {
+          "name": "position",
+          "widget": "string"
+        },
+        {
+          "name": "fan-tmax",
+          "widget": "number"
+        },
+        {
+          "name": "fan-tmin",
+          "widget": "number"
+        },
+        {
+          "name": "state",
+          "widget": "enum"
+        },
+        {
+          "name": "current-temperature",
+          "widget": "number"
+        },
+        {
+          "name": "entity-index",
+          "widget": "number"
+        }
+      ],
+      "filterable": []
+    },
+    "voltageinfos": {
+      "keyField": "address",
+      "columns": [
+        {
+          "name": "address",
+          "widget": "string"
+        },
+        {
+          "name": "channel",
+          "widget": "number"
+        },
+        {
+          "name": "i2c",
+          "widget": "number"
+        },
+        {
+          "name": "position",
+          "widget": "string"
+        },
+        {
+          "name": "state",
+          "widget": "enum"
+        },
+        {
+          "name": "current-voltage",
+          "widget": "string"
+        },
+        {
+          "name": "entity-index",
+          "widget": "number"
+        },
+        {
+          "name": "fatal-voltage-threshold-high",
+          "widget": "number"
+        },
+        {
+          "name": "fatal-voltage-threshold-low",
+          "widget": "number"
+        }
+      ],
+      "filterable": []
+    },
+    "voltages": {
+      "keyField": "position",
+      "columns": [
+        {
+          "name": "position",
+          "widget": "string"
+        },
+        {
+          "name": "sensor-id",
+          "widget": "number"
+        },
+        {
+          "name": "state",
+          "widget": "enum"
+        },
+        {
+          "name": "current-voltage",
+          "widget": "string"
+        },
+        {
+          "name": "fatal-high-threshold",
+          "widget": "string"
+        },
+        {
+          "name": "fatal-high-threshold-percent",
+          "widget": "number"
+        },
+        {
+          "name": "fatal-low-threshold",
+          "widget": "string"
+        },
+        {
+          "name": "fatal-low-threshold-percent",
+          "widget": "number"
+        },
+        {
+          "name": "major-high-threshold",
+          "widget": "string"
+        }
+      ],
+      "filterable": [
+        "sensor-name"
+      ]
+    }
+  },
+  "tree": [
+    {
+      "path": "/driver/area-energyinfos",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/area-energyinfos/area-energyinfo",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/area-energyinfos/area-energyinfo/area-assigned-power",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/area-energyinfos/area-energyinfo/area-id",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/area-energyinfos/area-energyinfo/area-left-power",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/area-energyinfos/area-energyinfo/area-rated-power",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/area-energyinfos/area-energyinfo/area-used-power",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/area-energyinfos/area-energyinfo/board-energys",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/area-energyinfos/area-energyinfo/board-energys/board-energy",
+      "kind": "list",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/area-energyinfos/area-energyinfo/board-energys/board-energy/current-power",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/area-energyinfos/area-energyinfo/board-energys/board-energy/efficiency",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/area-energyinfos/area-energyinfo/board-energys/board-energy/electrical-value",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/area-energyinfos/area-energyinfo/board-energys/board-energy/entity-index",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/area-energyinfos/area-energyinfo/board-energys/board-energy/pcb-name",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/area-energyinfos/area-energyinfo/board-energys/board-energy/position",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/area-energyinfos/area-energyinfo/board-energys/board-energy/power-threshold",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/area-energyinfos/area-energyinfo/board-energys/board-energy/rated-power",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/area-energyinfos/area-energyinfo/board-energys/board-energy/voltage-value",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/area-energyinfos/area-energyinfo/chassis-position",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/board-powers",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/board-powers/board-power",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/board-powers/board-power/current-power",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/board-powers/board-power/efficiency",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/board-powers/board-power/electrical-value",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/board-powers/board-power/entity-index",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/board-powers/board-power/pcb-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/board-powers/board-power/position",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/board-powers/board-power/power-threshold",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/board-powers/board-power/rated-power",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/board-powers/board-power/voltage-value",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/bootinfos",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/bootinfos/bootinfo",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/bootinfos/bootinfo/board-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/bootinfos/bootinfo/position",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/bootinfos/bootinfo/rot",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/chassis-run-modes",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/chassis-run-modes/chassis-run-mode",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/chassis-run-modes/chassis-run-mode/chassis-id",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/chassis-run-modes/chassis-run-mode/current-run-cluster",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/chassis-run-modes/chassis-run-mode/current-run-mode",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/chassis-run-modes/chassis-run-mode/next-run-cluster",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/chassis-run-modes/chassis-run-mode/next-run-mode",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/check-running-software-safes",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/check-running-software-safes/check-running-software-safe",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/check-running-software-safes/check-running-software-safe/board-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/check-running-software-safes/check-running-software-safe/item",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/check-running-software-safes/check-running-software-safe/pkgsha256hash",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/check-running-software-safes/check-running-software-safe/position",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/check-running-software-safes/check-running-software-safe/result",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/check-running-software-safes/check-running-software-safe/runsha256hash",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/electric-current-infos",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/electric-current-infos/electric-current-info",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/electric-current-infos/electric-current-info/address",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/electric-current-infos/electric-current-info/channel",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/electric-current-infos/electric-current-info/current",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/electric-current-infos/electric-current-info/fatal-high-threshold",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/electric-current-infos/electric-current-info/fatal-low-threshold",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/electric-current-infos/electric-current-info/i2c",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/electric-current-infos/electric-current-info/major-high-threshold",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/electric-current-infos/electric-current-info/major-low-threshold",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/electric-current-infos/electric-current-info/pcb-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/electric-current-infos/electric-current-info/position",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/electric-current-infos/electric-current-info/required-current",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/electric-current-infos/electric-current-info/state",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/electronic-labels",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/electronic-labels/electronic-label",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/electronic-labels/electronic-label/archives-info-version",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/electronic-labels/electronic-label/barcode",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/electronic-labels/electronic-label/board-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/electronic-labels/electronic-label/bom-english-desc",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/electronic-labels/electronic-label/bom-local-desc",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/electronic-labels/electronic-label/entity-asset-id",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/electronic-labels/electronic-label/entity-bomid",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/electronic-labels/electronic-label/entity-class",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/electronic-labels/electronic-label/entity-clei-code",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/electronic-labels/electronic-label/entity-elabel-extend",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/electronic-labels/electronic-label/entity-elabel-version",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/electronic-labels/electronic-label/entity-index",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/electronic-labels/electronic-label/entity-issue-number",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/electronic-labels/electronic-label/entity-model",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/electronic-labels/electronic-label/entity-open-bomid",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/electronic-labels/electronic-label/entity-serial-number",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/electronic-labels/electronic-label/entity-update-log",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/electronic-labels/electronic-label/manufacturer-code",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/electronic-labels/electronic-label/manufacturer-date",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/electronic-labels/electronic-label/manufacturer-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/electronic-labels/electronic-label/position",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/electronic-labels/electronic-label/silk-screen",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/global-attribute",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/driver/global-attribute/auto-upgrade-model",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/global-attribute/board-channel-check-status",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/global-attribute/board-power-on-delay",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/driver/global-attribute/card-power-on-delay",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/driver/global-attribute/chassis-last-change-time",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/global-attribute/cur-chassis-number",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/global-attribute/cur-device-work-mode",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/global-attribute/cur-forward-mode",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/global-attribute/cur-system-mac-address",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/global-attribute/cur-system-mode",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/global-attribute/cur-system-work-mode",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/global-attribute/cur-work-mode",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/global-attribute/dustproof-check",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/driver/global-attribute/energy-mode",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/driver/global-attribute/energy-saving-pm",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/driver/global-attribute/energy-saving-pm-status",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/global-attribute/entity-fault-board-isolate",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/driver/global-attribute/entity-fault-card-isolate",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/driver/global-attribute/fault-strategy",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/driver/global-attribute/high-temp-switch",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/driver/global-attribute/interface-match-check",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/driver/global-attribute/least-sfu-number",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/driver/global-attribute/max-chassis-number",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/global-attribute/next-device-work-mode",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/global-attribute/next-forward-mode",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/driver/global-attribute/next-system-mode",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/global-attribute/next-system-work-mode",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/global-attribute/next-work-mode",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/global-attribute/offline-function",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/driver/global-attribute/optional-entity-fault-isolate",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/driver/global-attribute/pic-reload-cycle",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/driver/global-attribute/power-consumption",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/global-attribute/sampling-period",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/driver/global-attribute/sfu-switch-mode",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/driver/global-attribute/split-resume",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/global-attribute/switch-port-mode",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/global-attribute/system-mac-address",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/driver/global-attribute/system-mac-number",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/driver/global-attribute/system-service-type",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/global-attribute/system-trap",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/driver/global-attribute/temp-query-mode",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/driver/global-attribute/usb-uart-status",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/global-attribute/vlt-query-mode",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/driver/global-attribute/warm-backup-mode",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/driver/global-attribute/warm-backup-states",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/inner-links",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/inner-links/inner-link",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/inner-links/inner-link/alarm-state",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/inner-links/inner-link/left-chassis-position",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/inner-links/inner-link/left-chassis-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/inner-links/inner-link/link-index",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/inner-links/inner-link/link-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/inner-links/inner-link/link-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/inner-links/inner-link/operation-state",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/inner-links/inner-link/physical-inner-links",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/inner-links/inner-link/physical-inner-links/physical-inner-link",
+      "kind": "list",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/inner-links/inner-link/physical-inner-links/physical-inner-link/check-points",
+      "kind": "container",
+      "depth": 4,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/inner-links/inner-link/physical-inner-links/physical-inner-link/check-points/check-point",
+      "kind": "list",
+      "depth": 5,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/inner-links/inner-link/physical-inner-links/physical-inner-link/check-points/check-point/entity-class",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/inner-links/inner-link/physical-inner-links/physical-inner-link/check-points/check-point/entity-name",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/inner-links/inner-link/physical-inner-links/physical-inner-link/check-points/check-point/index",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/inner-links/inner-link/physical-inner-links/physical-inner-link/check-points/check-point/reason-description",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/inner-links/inner-link/physical-inner-links/physical-inner-link/check-points/check-point/reason-id",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/inner-links/inner-link/physical-inner-links/physical-inner-link/check-points/check-point/repair-description",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/inner-links/inner-link/physical-inner-links/physical-inner-link/check-points/check-point/repair-id",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/inner-links/inner-link/physical-inner-links/physical-inner-link/check-points/check-point/status",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/inner-links/inner-link/physical-inner-links/physical-inner-link/left-port-name",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/inner-links/inner-link/physical-inner-links/physical-inner-link/operation-status",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/inner-links/inner-link/physical-inner-links/physical-inner-link/physical-link-name",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/inner-links/inner-link/physical-inner-links/physical-inner-link/repair-description",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/inner-links/inner-link/physical-inner-links/physical-inner-link/repair-id",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/inner-links/inner-link/physical-inner-links/physical-inner-link/right-port-name",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/inner-links/inner-link/right-chassis-position",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/inner-links/inner-link/right-chassis-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/interface-match-check-states",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/interface-match-check-states/interface-match-check-state",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/interface-match-check-states/interface-match-check-state/object",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/interface-match-check-states/interface-match-check-state/position",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/io-inspect-attributes",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/driver/io-inspect-attributes/io-inspect-attribute",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/driver/io-inspect-attributes/io-inspect-attribute/alarm-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/driver/io-inspect-attributes/io-inspect-attribute/default-states",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/driver/io-inspect-attributes/io-inspect-attribute/index",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/driver/io-inspect-attributes/io-inspect-attribute/position",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/driver/io-inspect-states",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/io-inspect-states/io-inspect-state",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/io-inspect-states/io-inspect-state/alarm-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/io-inspect-states/io-inspect-state/alarm-status",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/io-inspect-states/io-inspect-state/default-states",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/io-inspect-states/io-inspect-state/index",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/io-inspect-states/io-inspect-state/position",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/io-inspect-states/io-inspect-state/states",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/mbusnodes",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/mbusnodes/mbusnode",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/mbusnodes/mbusnode/board-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/mbusnodes/mbusnode/eeprom-number",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/mbusnodes/mbusnode/register",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/mbusnodes/mbusnode/slot-id",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/mbusnodes/mbusnode/temperature-monitor-number",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/mbusnodes/mbusnode/voltage-monitor-number",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/multi-chassis-attributes",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/multi-chassis-attributes/multi-chassis-attribute",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/multi-chassis-attributes/multi-chassis-attribute/chassis-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/multi-chassis-attributes/multi-chassis-attribute/current-chassis-id",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/multi-chassis-attributes/multi-chassis-attribute/next-chassis-id",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/rollback-attribute",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/rollback-attribute/rollback-config-file",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/rollback-attribute/rollback-paf-file",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/rollback-attribute/rollback-patch-file",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/rollback-attribute/rollback-remain-time",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/rollback-attribute/rollback-result",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/rollback-attribute/rollback-soft-pack",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/slave-defaults",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/slave-defaults/slave-default",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/slave-defaults/slave-default/chassis-id",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/slave-defaults/slave-default/slave-default",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/slave-defaults/slave-default/slot-id",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/slot-statistics",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/slot-statistics/slot-statistic",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/slot-statistics/slot-statistic/chassis-id",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/slot-statistics/slot-statistic/online-slot-number",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/slot-statistics/slot-statistic/slot-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/slot-statistics/slot-statistic/total-slot-number",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/stratum-3-clocks",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/stratum-3-clocks/stratum-3-clock",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/stratum-3-clocks/stratum-3-clock/board-device-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/stratum-3-clocks/stratum-3-clock/clock-slot-id",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/stratum-3-clocks/stratum-3-clock/clock-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/stratum-3-clocks/stratum-3-clock/slot-id",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/stratum-3-clocks/stratum-3-clock/switch-mode",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/system-sync-clocks",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/system-sync-clocks/system-sync-clock",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/system-sync-clocks/system-sync-clock/board-device-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/system-sync-clocks/system-sync-clock/clock-slot-id",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/system-sync-clocks/system-sync-clock/clock-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/system-sync-clocks/system-sync-clock/lock-state",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/system-sync-clocks/system-sync-clock/slot-id",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/system-sync-clocks/system-sync-clock/switch-mode",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/temperature2s",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/driver/temperature2s/temperature2",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/driver/temperature2s/temperature2/current-temperature",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/temperature2s/temperature2/fan-adjust-high-temperature",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/driver/temperature2s/temperature2/fan-adjust-low-temperature",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/driver/temperature2s/temperature2/fatal-threshold",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/temperature2s/temperature2/fatal-threshold-percent",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/driver/temperature2s/temperature2/major-threshold",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/temperature2s/temperature2/major-threshold-percent",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/driver/temperature2s/temperature2/minor-threshold",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/temperature2s/temperature2/minor-threshold-percent",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/driver/temperature2s/temperature2/pcb-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/temperature2s/temperature2/position",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/driver/temperature2s/temperature2/sensor-id",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/driver/temperature2s/temperature2/sensor-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/temperature2s/temperature2/state",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/temperatures",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/driver/temperatures/temperature",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/driver/temperatures/temperature/address",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/driver/temperatures/temperature/channel",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/driver/temperatures/temperature/current-temperature",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/temperatures/temperature/entity-index",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/temperatures/temperature/fan-tmax",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/driver/temperatures/temperature/fan-tmax-states",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/temperatures/temperature/fan-tmin",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/driver/temperatures/temperature/fan-tmin-states",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/temperatures/temperature/fatal",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/driver/temperatures/temperature/fatal-alarm-threshold",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/temperatures/temperature/i2c",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/driver/temperatures/temperature/major",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/driver/temperatures/temperature/major-alarm-threshold",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/temperatures/temperature/minor",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/driver/temperatures/temperature/minor-alarm-threshold",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/temperatures/temperature/pcb-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/temperatures/temperature/position",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/driver/temperatures/temperature/state",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/voltageinfos",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/driver/voltageinfos/voltageinfo",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/driver/voltageinfos/voltageinfo/address",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/driver/voltageinfos/voltageinfo/channel",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/driver/voltageinfos/voltageinfo/current-voltage",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/voltageinfos/voltageinfo/entity-index",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/voltageinfos/voltageinfo/fatal-voltage-threshold-high",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/driver/voltageinfos/voltageinfo/fatal-voltage-threshold-low",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/driver/voltageinfos/voltageinfo/high-threshold",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/voltageinfos/voltageinfo/i2c",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/driver/voltageinfos/voltageinfo/low-threshold",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/voltageinfos/voltageinfo/major-high-threshold",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/voltageinfos/voltageinfo/major-low-threshold",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/voltageinfos/voltageinfo/major-voltage-threshold-high",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/driver/voltageinfos/voltageinfo/major-voltage-threshold-low",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/driver/voltageinfos/voltageinfo/pcb-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/voltageinfos/voltageinfo/position",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/driver/voltageinfos/voltageinfo/required-voltage",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/voltageinfos/voltageinfo/state",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/voltageinfos/voltageinfo/voltage-ratio",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/voltages",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/driver/voltages/voltage",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/driver/voltages/voltage/current-voltage",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/voltages/voltage/fatal-high-threshold",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/voltages/voltage/fatal-high-threshold-percent",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/driver/voltages/voltage/fatal-low-threshold",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/voltages/voltage/fatal-low-threshold-percent",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/driver/voltages/voltage/major-high-threshold",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/voltages/voltage/major-high-threshold-percent",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/driver/voltages/voltage/major-low-threshold",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/voltages/voltage/major-low-threshold-percent",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/driver/voltages/voltage/pcb-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/voltages/voltage/position",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/driver/voltages/voltage/ratio",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/voltages/voltage/required-voltage",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/voltages/voltage/sensor-id",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/driver/voltages/voltage/sensor-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/driver/voltages/voltage/state",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    }
+  ]
+}

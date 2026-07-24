@@ -1,0 +1,233 @@
+{
+  "module": "vxlan-path-detect",
+  "tabs": [
+    {
+      "name": "ip-ping-detects",
+      "kind": "list"
+    },
+    {
+      "name": "ipv4-dscp-path-detect",
+      "kind": "form"
+    },
+    {
+      "name": "ipv6-dscp-path-detect",
+      "kind": "form"
+    },
+    {
+      "name": "ipv6-ping-detects",
+      "kind": "list"
+    },
+    {
+      "name": "mac-ping-detects",
+      "kind": "list"
+    }
+  ],
+  "lists": {
+    "ip-ping-detects": {
+      "keyField": "dst-ip",
+      "columns": [
+        {
+          "name": "dst-ip",
+          "widget": "string"
+        },
+        {
+          "name": "src-ip",
+          "widget": "string"
+        }
+      ],
+      "filterable": []
+    },
+    "ipv6-ping-detects": {
+      "keyField": "dst-ipv6",
+      "columns": [
+        {
+          "name": "dst-ipv6",
+          "widget": "string"
+        },
+        {
+          "name": "src-ipv6",
+          "widget": "string"
+        }
+      ],
+      "filterable": []
+    },
+    "mac-ping-detects": {
+      "keyField": "dst-ip",
+      "columns": [
+        {
+          "name": "dst-ip",
+          "widget": "string"
+        },
+        {
+          "name": "src-ip",
+          "widget": "string"
+        },
+        {
+          "name": "dst-mac",
+          "widget": "string"
+        },
+        {
+          "name": "src-mac",
+          "widget": "string"
+        }
+      ],
+      "filterable": []
+    }
+  },
+  "tree": [
+    {
+      "path": "/vxlan-path-detect/ip-ping-detects",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/vxlan-path-detect/ip-ping-detects/ip-ping-detect",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/vxlan-path-detect/ip-ping-detects/ip-ping-detect/dst-ip",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/vxlan-path-detect/ip-ping-detects/ip-ping-detect/src-ip",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/vxlan-path-detect/ipv4-dscp-path-detect",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/vxlan-path-detect/ipv4-dscp-path-detect/dscp-value",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/vxlan-path-detect/ipv6-dscp-path-detect",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/vxlan-path-detect/ipv6-dscp-path-detect/dscp-value",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/vxlan-path-detect/ipv6-ping-detects",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/vxlan-path-detect/ipv6-ping-detects/ipv6-ping-detect",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/vxlan-path-detect/ipv6-ping-detects/ipv6-ping-detect/dst-ipv6",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/vxlan-path-detect/ipv6-ping-detects/ipv6-ping-detect/src-ipv6",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/vxlan-path-detect/mac-ping-detects",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/vxlan-path-detect/mac-ping-detects/mac-ping-detect",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/vxlan-path-detect/mac-ping-detects/mac-ping-detect/dst-ip",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/vxlan-path-detect/mac-ping-detects/mac-ping-detect/dst-mac",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/vxlan-path-detect/mac-ping-detects/mac-ping-detect/src-ip",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/vxlan-path-detect/mac-ping-detects/mac-ping-detect/src-mac",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    }
+  ]
+}

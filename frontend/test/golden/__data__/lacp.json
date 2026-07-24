@@ -1,0 +1,157 @@
+{
+  "module": "lacp",
+  "tabs": [
+    {
+      "name": "global",
+      "kind": "form"
+    },
+    {
+      "name": "trouble-shoots",
+      "kind": "list"
+    }
+  ],
+  "lists": {
+    "trouble-shoots": {
+      "keyField": "index",
+      "columns": [
+        {
+          "name": "index",
+          "widget": "number"
+        },
+        {
+          "name": "description",
+          "widget": "string"
+        },
+        {
+          "name": "time",
+          "widget": "string"
+        }
+      ],
+      "filterable": []
+    }
+  },
+  "tree": [
+    {
+      "path": "/lacp/global",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/lacp/global/adminkey-change2lagid",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/lacp/global/alarm-control",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/lacp/global/force-down",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/lacp/global/ignore-aggregation",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/lacp/global/m-lag",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/lacp/global/m-lag/sys-mac",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/lacp/global/m-lag/sys-priority",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/lacp/global/sys-priority",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/lacp/trouble-shoots",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/lacp/trouble-shoots/trouble-shoot",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/lacp/trouble-shoots/trouble-shoot/description",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/lacp/trouble-shoots/trouble-shoot/index",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/lacp/trouble-shoots/trouble-shoot/time",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    }
+  ]
+}

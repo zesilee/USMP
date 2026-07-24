@@ -1,0 +1,110 @@
+{
+  "module": "time-range",
+  "title": "time-range",
+  "vendor": "huawei",
+  "fields": [
+    {
+      "path": "/time-range/time-range-instances",
+      "type": "group",
+      "label": "time-range-instances",
+      "fields": [
+        {
+          "path": "/time-range/time-range-instances/time-range-instance",
+          "type": "list",
+          "label": "time-range-instance",
+          "fields": [
+            {
+              "path": "/time-range/time-range-instances/time-range-instance/absolute-ranges",
+              "type": "group",
+              "label": "absolute-ranges",
+              "fields": [
+                {
+                  "path": "/time-range/time-range-instances/time-range-instance/absolute-ranges/absolute-range",
+                  "type": "list",
+                  "label": "absolute-range",
+                  "fields": [
+                    {
+                      "path": "/time-range/time-range-instances/time-range-instance/absolute-ranges/absolute-range/end-time",
+                      "type": "string",
+                      "label": "end-time",
+                      "pattern": "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?(Z|[\\+\\-]\\d{2}:\\d{2})",
+                      "isKey": true
+                    },
+                    {
+                      "path": "/time-range/time-range-instances/time-range-instance/absolute-ranges/absolute-range/start-time",
+                      "type": "string",
+                      "label": "start-time",
+                      "pattern": "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?(Z|[\\+\\-]\\d{2}:\\d{2})",
+                      "isKey": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/time-range/time-range-instances/time-range-instance/name",
+              "type": "string",
+              "label": "name",
+              "pattern": "([a-zA-Z]([^\\s]*))",
+              "isKey": true
+            },
+            {
+              "path": "/time-range/time-range-instances/time-range-instance/period-ranges",
+              "type": "group",
+              "label": "period-ranges",
+              "fields": [
+                {
+                  "path": "/time-range/time-range-instances/time-range-instance/period-ranges/period-range",
+                  "type": "list",
+                  "label": "period-range",
+                  "fields": [
+                    {
+                      "path": "/time-range/time-range-instances/time-range-instance/period-ranges/period-range/day-of-week",
+                      "type": "string",
+                      "label": "day-of-week",
+                      "isKey": true
+                    },
+                    {
+                      "path": "/time-range/time-range-instances/time-range-instance/period-ranges/period-range/end-time",
+                      "type": "string",
+                      "label": "end-time",
+                      "pattern": "(([0-1][0-9])|(2[0-3])|[0-9]):([0-5][0-9]|[0-9])",
+                      "isKey": true
+                    },
+                    {
+                      "path": "/time-range/time-range-instances/time-range-instance/period-ranges/period-range/start-time",
+                      "type": "string",
+                      "label": "start-time",
+                      "pattern": "(([0-1][0-9])|(2[0-3])|[0-9]):([0-5][0-9]|[0-9])",
+                      "isKey": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/time-range/time-range-instances/time-range-instance/status",
+              "type": "enum",
+              "label": "status",
+              "options": [
+                {
+                  "label": "active",
+                  "value": "active"
+                },
+                {
+                  "label": "not-in-service",
+                  "value": "not-in-service"
+                },
+                {
+                  "label": "not-ready",
+                  "value": "not-ready"
+                }
+              ],
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

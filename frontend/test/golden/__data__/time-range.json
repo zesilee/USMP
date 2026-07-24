@@ -1,0 +1,138 @@
+{
+  "module": "time-range",
+  "tabs": [
+    {
+      "name": "time-range-instances",
+      "kind": "list"
+    }
+  ],
+  "lists": {
+    "time-range-instances": {
+      "keyField": "name",
+      "columns": [
+        {
+          "name": "name",
+          "widget": "string"
+        },
+        {
+          "name": "status",
+          "widget": "enum"
+        }
+      ],
+      "filterable": []
+    }
+  },
+  "tree": [
+    {
+      "path": "/time-range/time-range-instances",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/time-range/time-range-instances/time-range-instance",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/time-range/time-range-instances/time-range-instance/absolute-ranges",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/time-range/time-range-instances/time-range-instance/absolute-ranges/absolute-range",
+      "kind": "list",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/time-range/time-range-instances/time-range-instance/absolute-ranges/absolute-range/end-time",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/time-range/time-range-instances/time-range-instance/absolute-ranges/absolute-range/start-time",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/time-range/time-range-instances/time-range-instance/name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/time-range/time-range-instances/time-range-instance/period-ranges",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/time-range/time-range-instances/time-range-instance/period-ranges/period-range",
+      "kind": "list",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/time-range/time-range-instances/time-range-instance/period-ranges/period-range/day-of-week",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/time-range/time-range-instances/time-range-instance/period-ranges/period-range/end-time",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/time-range/time-range-instances/time-range-instance/period-ranges/period-range/start-time",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/time-range/time-range-instances/time-range-instance/status",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    }
+  ]
+}

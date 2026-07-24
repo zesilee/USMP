@@ -1,0 +1,169 @@
+{
+  "module": "monitor-link",
+  "title": "monitor-link",
+  "vendor": "huawei",
+  "fields": [
+    {
+      "path": "/monitor-link/monitor-link-groups",
+      "type": "group",
+      "label": "monitor-link-groups",
+      "fields": [
+        {
+          "path": "/monitor-link/monitor-link-groups/monitor-link-group",
+          "type": "list",
+          "label": "monitor-link-group",
+          "fields": [
+            {
+              "path": "/monitor-link/monitor-link-groups/monitor-link-group/downlink-interfaces",
+              "type": "group",
+              "label": "downlink-interfaces",
+              "fields": [
+                {
+                  "path": "/monitor-link/monitor-link-groups/monitor-link-group/downlink-interfaces/downlink-interface",
+                  "type": "list",
+                  "label": "downlink-interface",
+                  "fields": [
+                    {
+                      "path": "/monitor-link/monitor-link-groups/monitor-link-group/downlink-interfaces/downlink-interface/id",
+                      "type": "number",
+                      "label": "id",
+                      "required": true,
+                      "minimum": 1,
+                      "maximum": 512
+                    },
+                    {
+                      "path": "/monitor-link/monitor-link-groups/monitor-link-group/downlink-interfaces/downlink-interface/if-name",
+                      "type": "string",
+                      "label": "if-name",
+                      "must": [
+                        {
+                          "expr": "/ifm:ifm/ifm:interfaces/ifm:interface[ifm:name=current()]/ifm:class='main-interface'"
+                        },
+                        {
+                          "expr": "not(/mtlk:monitor-link/mtlk:monitor-link-groups/mtlk:monitor-link-group/mtlk:uplink-interfaces/mtlk:uplink-interface[if-name = current()])"
+                        }
+                      ],
+                      "isKey": true
+                    },
+                    {
+                      "path": "/monitor-link/monitor-link-groups/monitor-link-group/downlink-interfaces/downlink-interface/last-down-time",
+                      "type": "string",
+                      "label": "last-down-time",
+                      "pattern": "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?(Z|[\\+\\-]\\d{2}:\\d{2})",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/monitor-link/monitor-link-groups/monitor-link-group/downlink-interfaces/downlink-interface/last-up-time",
+                      "type": "string",
+                      "label": "last-up-time",
+                      "pattern": "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?(Z|[\\+\\-]\\d{2}:\\d{2})",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/monitor-link/monitor-link-groups/monitor-link-group/downlink-interfaces/downlink-interface/port-state",
+                      "type": "enum",
+                      "label": "port-state",
+                      "options": [
+                        {
+                          "label": "down",
+                          "value": "down"
+                        },
+                        {
+                          "label": "none",
+                          "value": "none"
+                        },
+                        {
+                          "label": "up",
+                          "value": "up"
+                        }
+                      ],
+                      "readonly": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/monitor-link/monitor-link-groups/monitor-link-group/enable",
+              "type": "boolean",
+              "label": "enable"
+            },
+            {
+              "path": "/monitor-link/monitor-link-groups/monitor-link-group/id",
+              "type": "number",
+              "label": "id",
+              "minimum": 1,
+              "maximum": 24,
+              "isKey": true
+            },
+            {
+              "path": "/monitor-link/monitor-link-groups/monitor-link-group/recover-time",
+              "type": "number",
+              "label": "recover-time",
+              "maximum": 300
+            },
+            {
+              "path": "/monitor-link/monitor-link-groups/monitor-link-group/uplink-interfaces",
+              "type": "group",
+              "label": "uplink-interfaces",
+              "fields": [
+                {
+                  "path": "/monitor-link/monitor-link-groups/monitor-link-group/uplink-interfaces/uplink-interface",
+                  "type": "list",
+                  "label": "uplink-interface",
+                  "fields": [
+                    {
+                      "path": "/monitor-link/monitor-link-groups/monitor-link-group/uplink-interfaces/uplink-interface/if-name",
+                      "type": "string",
+                      "label": "if-name",
+                      "must": [
+                        {
+                          "expr": "/ifm:ifm/ifm:interfaces/ifm:interface[ifm:name=current()]/ifm:class='main-interface'"
+                        }
+                      ],
+                      "isKey": true
+                    },
+                    {
+                      "path": "/monitor-link/monitor-link-groups/monitor-link-group/uplink-interfaces/uplink-interface/last-down-time",
+                      "type": "string",
+                      "label": "last-down-time",
+                      "pattern": "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?(Z|[\\+\\-]\\d{2}:\\d{2})",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/monitor-link/monitor-link-groups/monitor-link-group/uplink-interfaces/uplink-interface/last-up-time",
+                      "type": "string",
+                      "label": "last-up-time",
+                      "pattern": "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?(Z|[\\+\\-]\\d{2}:\\d{2})",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/monitor-link/monitor-link-groups/monitor-link-group/uplink-interfaces/uplink-interface/port-state",
+                      "type": "enum",
+                      "label": "port-state",
+                      "options": [
+                        {
+                          "label": "down",
+                          "value": "down"
+                        },
+                        {
+                          "label": "none",
+                          "value": "none"
+                        },
+                        {
+                          "label": "up",
+                          "value": "up"
+                        }
+                      ],
+                      "readonly": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

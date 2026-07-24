@@ -1,0 +1,289 @@
+{
+  "module": "vty",
+  "tabs": [
+    {
+      "name": "line-global",
+      "kind": "form"
+    },
+    {
+      "name": "lines",
+      "kind": "list"
+    }
+  ],
+  "lists": {
+    "lines": {
+      "keyField": "index",
+      "columns": [
+        {
+          "name": "index",
+          "widget": "number"
+        },
+        {
+          "name": "auth-mode",
+          "widget": "enum"
+        },
+        {
+          "name": "proto-inbound",
+          "widget": "enum"
+        },
+        {
+          "name": "shell-enable",
+          "widget": "enum"
+        },
+        {
+          "name": "acl4-inbound",
+          "widget": "string"
+        },
+        {
+          "name": "acl4-inbound-num",
+          "widget": "string"
+        },
+        {
+          "name": "acl4-outbound",
+          "widget": "string"
+        },
+        {
+          "name": "acl4-outbound-num",
+          "widget": "string"
+        },
+        {
+          "name": "acl6-inbound",
+          "widget": "string"
+        }
+      ],
+      "filterable": [
+        "acl4-inbound",
+        "acl4-inbound-num",
+        "acl4-outbound",
+        "acl4-outbound-num",
+        "acl6-inbound",
+        "acl6-inbound-num",
+        "acl6-outbound",
+        "acl6-outbound-num",
+        "auth-mode",
+        "history-cmd-size",
+        "idle-timeout-min",
+        "idle-timeout-sec",
+        "privilege-level",
+        "proto-inbound",
+        "screen-length",
+        "shell-enable"
+      ]
+    }
+  },
+  "tree": [
+    {
+      "path": "/vty/line-global",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/vty/line-global/max-users",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/vty/line-global/password-lock",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/vty/line-global/security-policy",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/vty/lines",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/vty/lines/line",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/vty/lines/line/acl4-inbound",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/vty/lines/line/acl4-inbound-num",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/vty/lines/line/acl4-outbound",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/vty/lines/line/acl4-outbound-num",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/vty/lines/line/acl6-inbound",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/vty/lines/line/acl6-inbound-num",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/vty/lines/line/acl6-outbound",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/vty/lines/line/acl6-outbound-num",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/vty/lines/line/auth-mode",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/vty/lines/line/auth-password",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/vty/lines/line/history-cmd-size",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/vty/lines/line/idle-timeout-min",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/vty/lines/line/idle-timeout-sec",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/vty/lines/line/index",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/vty/lines/line/privilege-level",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/vty/lines/line/proto-inbound",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/vty/lines/line/screen-length",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/vty/lines/line/shell-enable",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    }
+  ]
+}

@@ -1,0 +1,593 @@
+{
+  "module": "ssl",
+  "tabs": [
+    {
+      "name": "ssl-cipher-suites",
+      "kind": "list"
+    },
+    {
+      "name": "ssl-policys",
+      "kind": "list"
+    }
+  ],
+  "lists": {
+    "ssl-cipher-suites": {
+      "keyField": "cipher-suite-name",
+      "columns": [
+        {
+          "name": "cipher-suite-name",
+          "widget": "string"
+        }
+      ],
+      "filterable": []
+    },
+    "ssl-policys": {
+      "keyField": "policy-name",
+      "columns": [
+        {
+          "name": "policy-name",
+          "widget": "string"
+        },
+        {
+          "name": "basic-const-enable",
+          "widget": "enum"
+        },
+        {
+          "name": "cert-ver3-enable",
+          "widget": "enum"
+        },
+        {
+          "name": "crl-ver2-enable",
+          "widget": "enum"
+        },
+        {
+          "name": "exclude-ciphermode-cbc",
+          "widget": "enum"
+        },
+        {
+          "name": "exclude-hmac-sha1",
+          "widget": "enum"
+        },
+        {
+          "name": "exclude-rsa-kex",
+          "widget": "enum"
+        },
+        {
+          "name": "key-usage-enable",
+          "widget": "enum"
+        },
+        {
+          "name": "mini-version",
+          "widget": "enum"
+        }
+      ],
+      "filterable": [
+        "basic-const-enable",
+        "cert-ver3-enable",
+        "crl-ver2-enable",
+        "key-usage-enable",
+        "mini-path-len",
+        "mini-version"
+      ]
+    }
+  },
+  "tree": [
+    {
+      "path": "/ssl/ssl-cipher-suites",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/ssl/ssl-cipher-suites/ssl-cipher-suite",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/ssl/ssl-cipher-suites/ssl-cipher-suite/cipher-suite-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/ssl/ssl-cipher-suites/ssl-cipher-suite/ssl-ciphers",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "leaf-list",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/ssl/ssl-policys",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/ssl/ssl-policys/ssl-policy",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/ssl/ssl-policys/ssl-policy/basic-const-enable",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/ssl/ssl-policys/ssl-policy/cert-loads",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/ssl/ssl-policys/ssl-policy/cert-loads/cert-load",
+      "kind": "list",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/ssl/ssl-policys/ssl-policy/cert-loads/cert-load/auth-code-crt",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/ssl/ssl-policys/ssl-policy/cert-loads/cert-load/auth-code-mac",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/ssl/ssl-policys/ssl-policy/cert-loads/cert-load/cert-file",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/ssl/ssl-policys/ssl-policy/cert-loads/cert-load/cert-type",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/ssl/ssl-policys/ssl-policy/cert-loads/cert-load/is-cert-file-encrypted",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/ssl/ssl-policys/ssl-policy/cert-loads/cert-load/is-mac",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/ssl/ssl-policys/ssl-policy/cert-loads/cert-load/issuer-name",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/ssl/ssl-policys/ssl-policy/cert-loads/cert-load/key-file",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/ssl/ssl-policys/ssl-policy/cert-loads/cert-load/key-type",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/ssl/ssl-policys/ssl-policy/cert-loads/cert-load/valid-not-after",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/ssl/ssl-policys/ssl-policy/cert-loads/cert-load/valid-not-before",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/ssl/ssl-policys/ssl-policy/cert-ver3-enable",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/ssl/ssl-policys/ssl-policy/certificate-files",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/ssl/ssl-policys/ssl-policy/certificate-files/certificate-file",
+      "kind": "list",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/ssl/ssl-policys/ssl-policy/certificate-files/certificate-file/certificates",
+      "kind": "container",
+      "depth": 4,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/ssl/ssl-policys/ssl-policy/certificate-files/certificate-file/certificates/certificate",
+      "kind": "list",
+      "depth": 5,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/ssl/ssl-policys/ssl-policy/certificate-files/certificate-file/certificates/certificate/cert-state",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/ssl/ssl-policys/ssl-policy/certificate-files/certificate-file/certificates/certificate/common-name",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/ssl/ssl-policys/ssl-policy/certificate-files/certificate-file/certificates/certificate/end-time",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/ssl/ssl-policys/ssl-policy/certificate-files/certificate-file/certificates/certificate/issuer",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/ssl/ssl-policys/ssl-policy/certificate-files/certificate-file/certificates/certificate/key-usage",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/ssl/ssl-policys/ssl-policy/certificate-files/certificate-file/certificates/certificate/public-key-algorithm",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/ssl/ssl-policys/ssl-policy/certificate-files/certificate-file/certificates/certificate/serial-number",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/ssl/ssl-policys/ssl-policy/certificate-files/certificate-file/certificates/certificate/signature-algorithm",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/ssl/ssl-policys/ssl-policy/certificate-files/certificate-file/certificates/certificate/start-time",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/ssl/ssl-policys/ssl-policy/certificate-files/certificate-file/certificates/certificate/subject",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/ssl/ssl-policys/ssl-policy/certificate-files/certificate-file/certificates/certificate/subject-alternative-name",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/ssl/ssl-policys/ssl-policy/certificate-files/certificate-file/certificates/certificate/version",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/ssl/ssl-policys/ssl-policy/certificate-files/certificate-file/file-name",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/ssl/ssl-policys/ssl-policy/certificate-files/certificate-file/file-type",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/ssl/ssl-policys/ssl-policy/cipher-suite-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/ssl/ssl-policys/ssl-policy/crl-loads",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/ssl/ssl-policys/ssl-policy/crl-loads/crl-load",
+      "kind": "list",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/ssl/ssl-policys/ssl-policy/crl-loads/crl-load/crl-file",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/ssl/ssl-policys/ssl-policy/crl-loads/crl-load/crl-type",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/ssl/ssl-policys/ssl-policy/crl-ver2-enable",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/ssl/ssl-policys/ssl-policy/exclude-ciphermode-cbc",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/ssl/ssl-policys/ssl-policy/exclude-hmac-sha1",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/ssl/ssl-policys/ssl-policy/exclude-rsa-kex",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/ssl/ssl-policys/ssl-policy/feature-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "leaf-list",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/ssl/ssl-policys/ssl-policy/key-usage-enable",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/ssl/ssl-policys/ssl-policy/mini-path-len",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/ssl/ssl-policys/ssl-policy/mini-version",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/ssl/ssl-policys/ssl-policy/pki-realm",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/ssl/ssl-policys/ssl-policy/policy-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/ssl/ssl-policys/ssl-policy/trust-ca-loads",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/ssl/ssl-policys/ssl-policy/trust-ca-loads/trust-ca-load",
+      "kind": "list",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/ssl/ssl-policys/ssl-policy/trust-ca-loads/trust-ca-load/auth-code",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/ssl/ssl-policys/ssl-policy/trust-ca-loads/trust-ca-load/ca-file",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/ssl/ssl-policys/ssl-policy/trust-ca-loads/trust-ca-load/ca-type",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    }
+  ]
+}

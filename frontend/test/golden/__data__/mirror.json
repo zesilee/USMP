@@ -1,0 +1,663 @@
+{
+  "module": "mirror",
+  "tabs": [
+    {
+      "name": "global-observe-groups",
+      "kind": "list"
+    },
+    {
+      "name": "global-observers",
+      "kind": "list"
+    },
+    {
+      "name": "instances",
+      "kind": "list"
+    },
+    {
+      "name": "observe-user-define-acls",
+      "kind": "list"
+    },
+    {
+      "name": "query-ports",
+      "kind": "list"
+    },
+    {
+      "name": "statistic-enable",
+      "kind": "form"
+    }
+  ],
+  "lists": {
+    "global-observe-groups": {
+      "keyField": "group-id",
+      "columns": [
+        {
+          "name": "group-id",
+          "widget": "number"
+        }
+      ],
+      "filterable": []
+    },
+    "global-observers": {
+      "keyField": "observe-index",
+      "columns": [
+        {
+          "name": "observe-index",
+          "widget": "number"
+        },
+        {
+          "name": "cir-unit",
+          "widget": "enum"
+        },
+        {
+          "name": "enhance-mode",
+          "widget": "enum"
+        },
+        {
+          "name": "erspan-type",
+          "widget": "enum"
+        },
+        {
+          "name": "cir",
+          "widget": "number"
+        },
+        {
+          "name": "dscp",
+          "widget": "number"
+        },
+        {
+          "name": "dst-ip",
+          "widget": "string"
+        },
+        {
+          "name": "erspan-id",
+          "widget": "number"
+        },
+        {
+          "name": "interface-name",
+          "widget": "string"
+        }
+      ],
+      "filterable": []
+    },
+    "instances": {
+      "keyField": "instance-name",
+      "columns": [
+        {
+          "name": "instance-name",
+          "widget": "string"
+        }
+      ],
+      "filterable": []
+    },
+    "observe-user-define-acls": {
+      "keyField": "filter-id",
+      "columns": [
+        {
+          "name": "filter-id",
+          "widget": "number"
+        }
+      ],
+      "filterable": []
+    },
+    "query-ports": {
+      "keyField": "if-name",
+      "columns": [
+        {
+          "name": "if-name",
+          "widget": "string"
+        },
+        {
+          "name": "direction",
+          "widget": "enum"
+        },
+        {
+          "name": "type",
+          "widget": "enum"
+        },
+        {
+          "name": "in-bps",
+          "widget": "number"
+        },
+        {
+          "name": "in-bytes",
+          "widget": "number"
+        },
+        {
+          "name": "in-drop-bps",
+          "widget": "number"
+        },
+        {
+          "name": "in-drop-bytes",
+          "widget": "number"
+        },
+        {
+          "name": "in-drop-packets",
+          "widget": "number"
+        },
+        {
+          "name": "in-drop-pps",
+          "widget": "number"
+        }
+      ],
+      "filterable": []
+    }
+  },
+  "tree": [
+    {
+      "path": "/mirror/global-observe-groups",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mirror/global-observe-groups/global-observe-group",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mirror/global-observe-groups/global-observe-group/group-id",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mirror/global-observe-groups/global-observe-group/interface-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "leaf-list",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mirror/global-observers",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mirror/global-observers/global-observer",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mirror/global-observers/global-observer/cir",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mirror/global-observers/global-observer/cir-unit",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mirror/global-observers/global-observer/dscp",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mirror/global-observers/global-observer/dst-ip",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mirror/global-observers/global-observer/enhance-mode",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mirror/global-observers/global-observer/erspan-id",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mirror/global-observers/global-observer/erspan-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mirror/global-observers/global-observer/interface-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/mirror/global-observers/global-observer/length",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mirror/global-observers/global-observer/observe-index",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mirror/global-observers/global-observer/src-ip",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mirror/global-observers/global-observer/vlan-id",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mirror/instances",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mirror/instances/instance",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mirror/instances/instance/instance-car",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mirror/instances/instance/instance-car/cbs",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/mirror/instances/instance/instance-car/cir",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/mirror/instances/instance/instance-car/pbs",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mirror/instances/instance/instance-car/pir",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mirror/instances/instance/instance-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mirror/instances/instance/instance-slice",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mirror/instances/instance/instance-slice/slice-size",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/mirror/observe-user-define-acls",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mirror/observe-user-define-acls/observe-user-define-acl",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mirror/observe-user-define-acls/observe-user-define-acl/filter-id",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mirror/observe-user-define-acls/observe-user-define-acl/offsets",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mirror/observe-user-define-acls/observe-user-define-acl/offsets/offset",
+      "kind": "list",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mirror/observe-user-define-acls/observe-user-define-acl/offsets/offset/config-index",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mirror/observe-user-define-acls/observe-user-define-acl/offsets/offset/offset-value",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/mirror/observe-user-define-acls/observe-user-define-acl/offsets/offset/payload-mask",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/mirror/observe-user-define-acls/observe-user-define-acl/offsets/offset/payload-value",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/mirror/query-ports",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/mirror/query-ports/query-port",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/mirror/query-ports/query-port/direction",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/mirror/query-ports/query-port/if-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/mirror/query-ports/query-port/in-bps",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/mirror/query-ports/query-port/in-bytes",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/mirror/query-ports/query-port/in-drop-bps",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/mirror/query-ports/query-port/in-drop-bytes",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/mirror/query-ports/query-port/in-drop-packets",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/mirror/query-ports/query-port/in-drop-pps",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/mirror/query-ports/query-port/in-packets",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/mirror/query-ports/query-port/in-pps",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/mirror/query-ports/query-port/out-bps",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/mirror/query-ports/query-port/out-bytes",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/mirror/query-ports/query-port/out-drop-bps",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/mirror/query-ports/query-port/out-drop-bytes",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/mirror/query-ports/query-port/out-drop-packets",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/mirror/query-ports/query-port/out-drop-pps",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/mirror/query-ports/query-port/out-packets",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/mirror/query-ports/query-port/out-pps",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/mirror/query-ports/query-port/type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/mirror/statistic-enable",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    }
+  ]
+}

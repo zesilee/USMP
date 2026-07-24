@@ -1,0 +1,74 @@
+{
+  "module": "monitor-group",
+  "title": "monitor-group",
+  "vendor": "huawei",
+  "fields": [
+    {
+      "path": "/monitor-group/groups",
+      "type": "group",
+      "label": "groups",
+      "fields": [
+        {
+          "path": "/monitor-group/groups/group",
+          "type": "list",
+          "label": "group",
+          "fields": [
+            {
+              "path": "/monitor-group/groups/group/binding-ifs",
+              "type": "group",
+              "label": "binding-ifs",
+              "fields": [
+                {
+                  "path": "/monitor-group/groups/group/binding-ifs/binding-if",
+                  "type": "list",
+                  "label": "binding-if",
+                  "fields": [
+                    {
+                      "path": "/monitor-group/groups/group/binding-ifs/binding-if/down-weight",
+                      "type": "number",
+                      "label": "down-weight",
+                      "minimum": 1,
+                      "maximum": 1000
+                    },
+                    {
+                      "path": "/monitor-group/groups/group/binding-ifs/binding-if/if-name",
+                      "type": "string",
+                      "label": "if-name",
+                      "isKey": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/monitor-group/groups/group/enable-status",
+              "type": "enum",
+              "label": "enable-status",
+              "options": [
+                {
+                  "label": "active",
+                  "value": "active"
+                },
+                {
+                  "label": "inactive",
+                  "value": "inactive"
+                }
+              ]
+            },
+            {
+              "path": "/monitor-group/groups/group/name",
+              "type": "string",
+              "label": "name",
+              "isKey": true
+            },
+            {
+              "path": "/monitor-group/groups/group/trigger-up-delay",
+              "type": "number",
+              "label": "trigger-up-delay"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

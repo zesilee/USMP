@@ -1,0 +1,100 @@
+{
+  "module": "analysis-collector",
+  "tabs": [
+    {
+      "name": "collectors",
+      "kind": "list"
+    }
+  ],
+  "lists": {
+    "collectors": {
+      "keyField": "id",
+      "columns": [
+        {
+          "name": "id",
+          "widget": "number"
+        },
+        {
+          "name": "dst-port",
+          "widget": "number"
+        },
+        {
+          "name": "host-address",
+          "widget": "string"
+        },
+        {
+          "name": "src-address",
+          "widget": "string"
+        },
+        {
+          "name": "vpn-name",
+          "widget": "string"
+        }
+      ],
+      "filterable": []
+    }
+  },
+  "tree": [
+    {
+      "path": "/analysis-collector/collectors",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/analysis-collector/collectors/collector",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/analysis-collector/collectors/collector/dst-port",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/analysis-collector/collectors/collector/host-address",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/analysis-collector/collectors/collector/id",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/analysis-collector/collectors/collector/src-address",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/analysis-collector/collectors/collector/vpn-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    }
+  ]
+}

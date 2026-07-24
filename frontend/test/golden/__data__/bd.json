@@ -1,0 +1,923 @@
+{
+  "module": "bd",
+  "tabs": [
+    {
+      "name": "instances",
+      "kind": "list"
+    }
+  ],
+  "lists": {
+    "instances": {
+      "keyField": "id",
+      "columns": [
+        {
+          "name": "id",
+          "widget": "number"
+        },
+        {
+          "name": "statistic-discard",
+          "widget": "enum"
+        },
+        {
+          "name": "admin-status",
+          "widget": "enum"
+        },
+        {
+          "name": "broadcast-discard",
+          "widget": "enum"
+        },
+        {
+          "name": "encapsulation",
+          "widget": "enum"
+        },
+        {
+          "name": "mac-learning",
+          "widget": "enum"
+        },
+        {
+          "name": "split-horizon",
+          "widget": "enum"
+        },
+        {
+          "name": "statistic-enable",
+          "widget": "enum"
+        },
+        {
+          "name": "status",
+          "widget": "enum"
+        }
+      ],
+      "filterable": []
+    }
+  },
+  "tree": [
+    {
+      "path": "/bd/instances",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/admin-status",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/arp-list",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/arp-list/broadcast-suppress",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "choice",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/arp-list/check-item",
+      "kind": "container",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/arp-list/check-item/ip-check",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/arp-list/check-item/mac-check",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/arp-list/check-item/vxlan-tunnel",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/arp-list/collect-host-enable",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/arp-list/dynamic-enable",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/arp-list/l2proxy-enable",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/arp-list/l2proxy-expire-time",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/arp-list/l2proxy-gw-enable",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/arp-list/rate-limit",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/arp-statistics",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/arp-statistics/discard-other",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/arp-statistics/l2proxy-reply",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/arp-statistics/miss-discard",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/arp-statistics/receive-gratis-packets",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/arp-statistics/receive-proxy-packets",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/arp-statistics/receive-reply",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/arp-statistics/receive-req-packets",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/arp-statistics/receive-total-packets",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/arp-statistics/send-broadcast-packets",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/arp-statistics/send-gratis-packets",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/arp-statistics/send-proxy-packets",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/arp-statistics/send-total-packets",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/arp-statistics/send-unicast-packets",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/arp-user-entry",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/arp-user-entry/flag",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/arp-user-entry/ip-addr",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/arp-user-entry/mac-addr",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/arp-user-entry/vtep",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/bind-service",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/bind-service/evpn-name",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/bind-service/vni",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/bind-service/vsi-name",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/bind-vlan",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/bind-vlan/vlan-list",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/broadcast-discard",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/description",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/encapsulation",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/evpn",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/evpn/esi",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/evpn/interface-track-peers",
+      "kind": "container",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/evpn/interface-track-peers/interface-track-peer",
+      "kind": "list",
+      "depth": 4,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/evpn/interface-track-peers/interface-track-peer/es-track-address",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/evpn/name",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/evpn/tag",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/id",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/m-lag-reserved",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/m-lag-reserved/enable",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/mac-aging-time",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/mac-learning",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/mirror",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/mirror/bd-port-mirrors",
+      "kind": "container",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/mirror/bd-port-mirrors/bd-port-mirror",
+      "kind": "list",
+      "depth": 4,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/mirror/bd-port-mirrors/bd-port-mirror/direction",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/mirror/bd-port-mirrors/bd-port-mirror/group-name",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/mirror/bd-port-mirrors/bd-port-mirror/instance-name",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/bd/instances/instance/nvo3",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/nvo3/map-vnis",
+      "kind": "container",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/nvo3/map-vnis/map-vni",
+      "kind": "list",
+      "depth": 4,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/nvo3/map-vnis/map-vni/split-group",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/bd/instances/instance/nvo3/map-vnis/map-vni/vni",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/nvo3/vni-list",
+      "kind": "list",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/nvo3/vni-list/split-horizon",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/nvo3/vni-list/vni",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/service-points",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/service-points/service-point",
+      "kind": "list",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/service-points/service-point/evpn",
+      "kind": "container",
+      "depth": 4,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/service-points/service-point/evpn/e-tree-leaf",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/service-points/service-point/interface-name",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/service-points/service-point/split-horizon",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/split-horizon",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/statistic-discard",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/statistic-enable",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/statistics",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/statistics/inbound-bps",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/statistics/inbound-broadcast-drops",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/statistics/inbound-broadcasts",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/statistics/inbound-bytes",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/statistics/inbound-multicasts",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/statistics/inbound-packets",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/statistics/inbound-pps",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/statistics/inbound-unicasts",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/statistics/inbound-unknown-multicast-drops",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/statistics/inbound-unknown-unicast-drops",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/statistics/outbound-bps",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/statistics/outbound-broadcasts",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/statistics/outbound-bytes",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/statistics/outbound-multicasts",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/statistics/outbound-packets",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/statistics/outbound-pps",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/statistics/outbound-unicasts",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/status",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/unknown-multicast-discard",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bd/instances/instance/unknown-unicast-discard",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    }
+  ]
+}

@@ -1,0 +1,137 @@
+{
+  "module": "ospfv3",
+  "tabs": [
+    {
+      "name": "advertise-max-cost",
+      "kind": "form"
+    },
+    {
+      "name": "check-rt-id",
+      "kind": "form"
+    },
+    {
+      "name": "flush-source-trace",
+      "kind": "form"
+    },
+    {
+      "name": "session-car",
+      "kind": "form"
+    }
+  ],
+  "lists": {},
+  "tree": [
+    {
+      "path": "/ospfv3/advertise-max-cost",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/ospfv3/advertise-max-cost/enable",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/ospfv3/check-rt-id",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/ospfv3/check-rt-id/conflict-flag",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/ospfv3/flush-source-trace",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/ospfv3/flush-source-trace/enable",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/ospfv3/flush-source-trace/port",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/ospfv3/session-car",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/ospfv3/session-car/cbs-interval",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/ospfv3/session-car/cir-interval",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/ospfv3/session-car/enable",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/ospfv3/session-car/pbs-interval",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/ospfv3/session-car/pir-interval",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    }
+  ]
+}

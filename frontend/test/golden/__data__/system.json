@@ -1,0 +1,230 @@
+{
+  "module": "system",
+  "tabs": [
+    {
+      "name": "security-configurations",
+      "kind": "list"
+    },
+    {
+      "name": "system-info",
+      "kind": "form"
+    }
+  ],
+  "lists": {
+    "security-configurations": {
+      "keyField": "feature-name",
+      "columns": [
+        {
+          "name": "feature-name",
+          "widget": "string"
+        },
+        {
+          "name": "security-item",
+          "widget": "string"
+        },
+        {
+          "name": "item-content",
+          "widget": "string"
+        }
+      ],
+      "filterable": []
+    }
+  },
+  "tree": [
+    {
+      "path": "/system/security-configurations",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/system/security-configurations/security-configuration",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/system/security-configurations/security-configuration/feature-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/system/security-configurations/security-configuration/item-content",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/system/security-configurations/security-configuration/security-item",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/system/system-info",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/system/system-info/esn",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/system/system-info/mac",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/system/system-info/patch-version",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/system/system-info/platform-name",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/system/system-info/platform-version",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/system/system-info/product-name",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/system/system-info/product-version",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/system/system-info/software-name",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/system/system-info/sys-contact",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/system/system-info/sys-desc",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/system/system-info/sys-location",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/system/system-info/sys-name",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/system/system-info/sys-object-id",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/system/system-info/sys-service",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/system/system-info/sys-uptime",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/system/system-info/system-gmt-time",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    }
+  ]
+}

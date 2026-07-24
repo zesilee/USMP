@@ -1,0 +1,1105 @@
+{
+  "module": "macsec",
+  "tabs": [
+    {
+      "name": "macsec-profiles",
+      "kind": "list"
+    },
+    {
+      "name": "statistics",
+      "kind": "form"
+    }
+  ],
+  "lists": {
+    "macsec-profiles": {
+      "keyField": "name",
+      "columns": [
+        {
+          "name": "name",
+          "widget": "string"
+        },
+        {
+          "name": "cryptographic-algorithm",
+          "widget": "enum"
+        },
+        {
+          "name": "mode",
+          "widget": "enum"
+        },
+        {
+          "name": "policy",
+          "widget": "enum"
+        },
+        {
+          "name": "confident-offset",
+          "widget": "number"
+        },
+        {
+          "name": "include-sci",
+          "widget": "boolean"
+        },
+        {
+          "name": "keyserver-priority",
+          "widget": "number"
+        },
+        {
+          "name": "mka-life",
+          "widget": "number"
+        },
+        {
+          "name": "replay-window",
+          "widget": "number"
+        }
+      ],
+      "filterable": []
+    }
+  },
+  "tree": [
+    {
+      "path": "/macsec/macsec-profiles",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/macsec/macsec-profiles/macsec-profile",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/macsec/macsec-profiles/macsec-profile/cipher-suite",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "leaf-list",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/macsec/macsec-profiles/macsec-profile/confident-offset",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/macsec/macsec-profiles/macsec-profile/cryptographic-algorithm",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/macsec/macsec-profiles/macsec-profile/include-sci",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/macsec/macsec-profiles/macsec-profile/keyserver-priority",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/macsec/macsec-profiles/macsec-profile/mka-life",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/macsec/macsec-profiles/macsec-profile/mode",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/macsec/macsec-profiles/macsec-profile/name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/macsec/macsec-profiles/macsec-profile/policy",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/macsec/macsec-profiles/macsec-profile/replay-window",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/macsec/macsec-profiles/macsec-profile/sak-life",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-macsecs",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-macsecs/interface-macsec",
+      "kind": "list",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-macsecs/interface-macsec/badtag-packets",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-macsecs/interface-macsec/decrypted-bytes",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-macsecs/interface-macsec/encrypted-bytes",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-macsecs/interface-macsec/encrypted-packets",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-macsecs/interface-macsec/input-protected-bytes",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-macsecs/interface-macsec/interface-name",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-macsecs/interface-macsec/late-packets",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-macsecs/interface-macsec/no-using-sa-packets",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-macsecs/interface-macsec/not-valid-packets",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-macsecs/interface-macsec/output-protected-bytes",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-macsecs/interface-macsec/protected-packets",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-macsecs/interface-macsec/valid-packets",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka",
+      "kind": "list",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/capability",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/ce-vlan",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/cfi",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/ckn1",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/ckn2",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/confidentiality-offset",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/drop-mka-packets",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/frame-validation",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/include-sci",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/interface-name",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/key-server-priority",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/key-server1",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/key-server2",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/latest-sak-association1",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/latest-sak-association2",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/latest-sak-key-identifier1",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/latest-sak-key-identifier2",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/latest-sak-key-number1",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/latest-sak-key-number2",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/latest-sak-reason",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/latest-sak-status1",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/latest-sak-status2",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/live-peers1",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/live-peers2",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/lpl-capability1",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/lpl-capability2",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/lpl-member-identifier1",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/lpl-member-identifier2",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/lpl-message-sequence-number1",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/lpl-message-sequence-number2",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/lpl-priority1",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/lpl-priority2",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/lpl-receive-sci1",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/lpl-receive-sci2",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/lpl-short-sci1",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/lpl-short-sci2",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/macsec-cipher-suite",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/member-identifier1",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/member-identifier2",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/message-sequence-number1",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/message-sequence-number2",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/mka-cipher-suite",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/mka-life-time",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/mka-status1",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/mka-status2",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/mka-transmit-interval",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/mode",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/old-sak-association1",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/old-sak-association2",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/old-sak-key-identifier1",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/old-sak-key-identifier2",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/old-sak-key-number1",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/old-sak-key-number2",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/old-sak-status1",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/old-sak-status2",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/pe-vlan",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/potential-peers1",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/potential-peers2",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/ppl-capability1",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/ppl-capability2",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/ppl-member-identifier1",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/ppl-member-identifier2",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/ppl-message-sequence-number1",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/ppl-message-sequence-number2",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/ppl-priority1",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/ppl-priority2",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/ppl-receive-sci1",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/ppl-receive-sci2",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/ppl-short-sci1",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/ppl-short-sci2",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/principal-actor1",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/principal-actor2",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/priority",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/protocol",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/replay-protection",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/replay-window",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/rx-mka-packets",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/sak-delete-times",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/sak-install-times",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/sak-life-time",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/sak-swap-times",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/transmit-sci",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/transmit-short-sci1",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/transmit-short-sci2",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/tx-mka-packets",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/wrong-ckn-num",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/macsec/statistics/interface-mkas/interface-mka/wrong-icv-num",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    }
+  ]
+}

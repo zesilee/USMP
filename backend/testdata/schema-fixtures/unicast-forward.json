@@ -1,0 +1,417 @@
+{
+  "module": "unicast-forward",
+  "title": "unicast-forward",
+  "vendor": "huawei",
+  "fields": [
+    {
+      "path": "/unicast-forward/backup-groups",
+      "type": "group",
+      "label": "backup-groups",
+      "fields": [
+        {
+          "path": "/unicast-forward/backup-groups/backup-group",
+          "type": "list",
+          "label": "backup-group",
+          "fields": [
+            {
+              "path": "/unicast-forward/backup-groups/backup-group/backup-group-name",
+              "type": "string",
+              "label": "backup-group-name",
+              "isKey": true
+            },
+            {
+              "path": "/unicast-forward/backup-groups/backup-group/if-name1",
+              "type": "string",
+              "label": "if-name1",
+              "required": true,
+              "must": [
+                {
+                  "expr": "/ifm:ifm/ifm:interfaces/ifm:interface[ifm:name = current()]/ifm:type='Eth-Trunk'"
+                },
+                {
+                  "expr": "/ifm:ifm/ifm:interfaces/ifm:interface[ifm:name = current()]/ethernet:ethernet/ethernet:main-interface/ethernet:l2-attribute"
+                }
+              ]
+            },
+            {
+              "path": "/unicast-forward/backup-groups/backup-group/if-name2",
+              "type": "string",
+              "label": "if-name2",
+              "required": true,
+              "must": [
+                {
+                  "expr": "/ifm:ifm/ifm:interfaces/ifm:interface[ifm:name = current()]/ifm:type='Eth-Trunk'"
+                },
+                {
+                  "expr": "/ifm:ifm/ifm:interfaces/ifm:interface[ifm:name = current()]/ethernet:ethernet/ethernet:main-interface/ethernet:l2-attribute"
+                },
+                {
+                  "expr": "count(../../backup-group[if-name1=current()])=0"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/unicast-forward/global-gre",
+      "type": "group",
+      "label": "global-gre",
+      "fields": [
+        {
+          "path": "/unicast-forward/global-gre/forward-mode",
+          "type": "enum",
+          "label": "forward-mode",
+          "options": [
+            {
+              "label": "loopback",
+              "value": "loopback"
+            },
+            {
+              "label": "through",
+              "value": "through"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/unicast-forward/global-nexthop-spt",
+      "type": "group",
+      "label": "global-nexthop-spt",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/unicast-forward/global-nexthop-spt/state",
+          "type": "string",
+          "label": "state",
+          "readonly": true
+        }
+      ]
+    },
+    {
+      "path": "/unicast-forward/global-uc-attribute",
+      "type": "group",
+      "label": "global-uc-attribute",
+      "fields": [
+        {
+          "path": "/unicast-forward/global-uc-attribute/fib-miss",
+          "type": "boolean",
+          "label": "fib-miss"
+        },
+        {
+          "path": "/unicast-forward/global-uc-attribute/icmp-reply-fast",
+          "type": "boolean",
+          "label": "icmp-reply-fast"
+        },
+        {
+          "path": "/unicast-forward/global-uc-attribute/ignore-mac",
+          "type": "boolean",
+          "label": "ignore-mac"
+        },
+        {
+          "path": "/unicast-forward/global-uc-attribute/indirect-nexthop",
+          "type": "boolean",
+          "label": "indirect-nexthop"
+        },
+        {
+          "path": "/unicast-forward/global-uc-attribute/ipv4-force-frag",
+          "type": "boolean",
+          "label": "ipv4-force-frag"
+        },
+        {
+          "path": "/unicast-forward/global-uc-attribute/mpls-6pe-ttl-mode",
+          "type": "enum",
+          "label": "mpls-6pe-ttl-mode",
+          "options": [
+            {
+              "label": "pipe",
+              "value": "pipe"
+            },
+            {
+              "label": "uniform",
+              "value": "uniform"
+            }
+          ]
+        },
+        {
+          "path": "/unicast-forward/global-uc-attribute/mtu-force-frag",
+          "type": "boolean",
+          "label": "mtu-force-frag"
+        },
+        {
+          "path": "/unicast-forward/global-uc-attribute/nexthop-spt",
+          "type": "boolean",
+          "label": "nexthop-spt"
+        },
+        {
+          "path": "/unicast-forward/global-uc-attribute/trunk-arp-mode",
+          "type": "boolean",
+          "label": "trunk-arp-mode"
+        },
+        {
+          "path": "/unicast-forward/global-uc-attribute/trunk-nd-mode",
+          "type": "boolean",
+          "label": "trunk-nd-mode"
+        },
+        {
+          "path": "/unicast-forward/global-uc-attribute/ttl-decrement",
+          "type": "boolean",
+          "label": "ttl-decrement"
+        }
+      ]
+    },
+    {
+      "path": "/unicast-forward/high-re-modes",
+      "type": "group",
+      "label": "high-re-modes",
+      "fields": [
+        {
+          "path": "/unicast-forward/high-re-modes/high-re-mode",
+          "type": "list",
+          "label": "high-re-mode",
+          "fields": [
+            {
+              "path": "/unicast-forward/high-re-modes/high-re-mode/position",
+              "type": "string",
+              "label": "position",
+              "isKey": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/unicast-forward/ip-urpf",
+      "type": "group",
+      "label": "ip-urpf",
+      "fields": [
+        {
+          "path": "/unicast-forward/ip-urpf/allow-default-route",
+          "type": "boolean",
+          "label": "allow-default-route"
+        }
+      ]
+    },
+    {
+      "path": "/unicast-forward/ip-urpf-check-mode",
+      "type": "group",
+      "label": "ip-urpf-check-mode",
+      "fields": [
+        {
+          "path": "/unicast-forward/ip-urpf-check-mode/check-mode",
+          "type": "enum",
+          "label": "check-mode",
+          "required": true,
+          "options": [
+            {
+              "label": "loose",
+              "value": "loose"
+            },
+            {
+              "label": "strict",
+              "value": "strict"
+            }
+          ]
+        }
+      ],
+      "presence": true
+    },
+    {
+      "path": "/unicast-forward/ipv4-ttl-expired-forwards",
+      "type": "group",
+      "label": "ipv4-ttl-expired-forwards",
+      "fields": [
+        {
+          "path": "/unicast-forward/ipv4-ttl-expired-forwards/ipv4-ttl-expired-forward",
+          "type": "list",
+          "label": "ipv4-ttl-expired-forward",
+          "fields": [
+            {
+              "path": "/unicast-forward/ipv4-ttl-expired-forwards/ipv4-ttl-expired-forward/ipv4-nexthop-addrs",
+              "type": "group",
+              "label": "ipv4-nexthop-addrs",
+              "fields": [
+                {
+                  "path": "/unicast-forward/ipv4-ttl-expired-forwards/ipv4-ttl-expired-forward/ipv4-nexthop-addrs/ipv4-nexthop-addr",
+                  "type": "list",
+                  "label": "ipv4-nexthop-addr",
+                  "fields": [
+                    {
+                      "path": "/unicast-forward/ipv4-ttl-expired-forwards/ipv4-ttl-expired-forward/ipv4-nexthop-addrs/ipv4-nexthop-addr/ipv4-address",
+                      "type": "string",
+                      "label": "ipv4-address",
+                      "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?",
+                      "isKey": true
+                    },
+                    {
+                      "path": "/unicast-forward/ipv4-ttl-expired-forwards/ipv4-ttl-expired-forward/ipv4-nexthop-addrs/ipv4-nexthop-addr/vpn-instance-name",
+                      "type": "string",
+                      "label": "vpn-instance-name",
+                      "isKey": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/unicast-forward/ipv4-ttl-expired-forwards/ipv4-ttl-expired-forward/nexthop-group-id",
+              "type": "number",
+              "label": "nexthop-group-id",
+              "minimum": 1,
+              "maximum": 4,
+              "isKey": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/unicast-forward/ipv6-ttl-expired-forwards",
+      "type": "group",
+      "label": "ipv6-ttl-expired-forwards",
+      "fields": [
+        {
+          "path": "/unicast-forward/ipv6-ttl-expired-forwards/ipv6-ttl-expired-forward",
+          "type": "list",
+          "label": "ipv6-ttl-expired-forward",
+          "fields": [
+            {
+              "path": "/unicast-forward/ipv6-ttl-expired-forwards/ipv6-ttl-expired-forward/ipv6-nexthop-addrs",
+              "type": "group",
+              "label": "ipv6-nexthop-addrs",
+              "fields": [
+                {
+                  "path": "/unicast-forward/ipv6-ttl-expired-forwards/ipv6-ttl-expired-forward/ipv6-nexthop-addrs/ipv6-nexthop-addr",
+                  "type": "list",
+                  "label": "ipv6-nexthop-addr",
+                  "fields": [
+                    {
+                      "path": "/unicast-forward/ipv6-ttl-expired-forwards/ipv6-ttl-expired-forward/ipv6-nexthop-addrs/ipv6-nexthop-addr/ipv6-address",
+                      "type": "string",
+                      "label": "ipv6-address",
+                      "pattern": "((:|[0-9a-fA-F]{0,4}):)([0-9a-fA-F]{0,4}:){0,5}((([0-9a-fA-F]{0,4}:)?(:|[0-9a-fA-F]{0,4}))|(((25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])))(%[\\p{N}\\p{L}]+)?",
+                      "isKey": true
+                    },
+                    {
+                      "path": "/unicast-forward/ipv6-ttl-expired-forwards/ipv6-ttl-expired-forward/ipv6-nexthop-addrs/ipv6-nexthop-addr/vpn-instance-name",
+                      "type": "string",
+                      "label": "vpn-instance-name",
+                      "isKey": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/unicast-forward/ipv6-ttl-expired-forwards/ipv6-ttl-expired-forward/nexthop-group-id",
+              "type": "number",
+              "label": "nexthop-group-id",
+              "minimum": 1,
+              "maximum": 4,
+              "isKey": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/unicast-forward/na-anti-attack-statistics",
+      "type": "group",
+      "label": "na-anti-attack-statistics",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/unicast-forward/na-anti-attack-statistics/na-anti-attack-statistic",
+          "type": "list",
+          "label": "na-anti-attack-statistic",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/unicast-forward/na-anti-attack-statistics/na-anti-attack-statistic/na-drop-count",
+              "type": "number",
+              "label": "na-drop-count",
+              "readonly": true
+            },
+            {
+              "path": "/unicast-forward/na-anti-attack-statistics/na-anti-attack-statistic/na-tocpu-count",
+              "type": "number",
+              "label": "na-tocpu-count",
+              "readonly": true
+            },
+            {
+              "path": "/unicast-forward/na-anti-attack-statistics/na-anti-attack-statistic/slot-id",
+              "type": "string",
+              "label": "slot-id",
+              "readonly": true,
+              "isKey": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/unicast-forward/vxlan-anycast-gateway-extend",
+      "type": "group",
+      "label": "vxlan-anycast-gateway-extend",
+      "fields": [
+        {
+          "path": "/unicast-forward/vxlan-anycast-gateway-extend/enable",
+          "type": "boolean",
+          "label": "enable"
+        }
+      ]
+    },
+    {
+      "path": "/unicast-forward/vxlan-central-reassemble",
+      "type": "group",
+      "label": "vxlan-central-reassemble",
+      "presence": true
+    },
+    {
+      "path": "/unicast-forward/vxlan-forward-ospf",
+      "type": "group",
+      "label": "vxlan-forward-ospf",
+      "fields": [
+        {
+          "path": "/unicast-forward/vxlan-forward-ospf/ospf-behavior",
+          "type": "enum",
+          "label": "ospf-behavior",
+          "options": [
+            {
+              "label": "disable",
+              "value": "disable"
+            },
+            {
+              "label": "discard",
+              "value": "discard"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/unicast-forward/vxlan-forward-ospfv3",
+      "type": "group",
+      "label": "vxlan-forward-ospfv3",
+      "fields": [
+        {
+          "path": "/unicast-forward/vxlan-forward-ospfv3/ospfv3-behavior",
+          "type": "enum",
+          "label": "ospfv3-behavior",
+          "options": [
+            {
+              "label": "disable",
+              "value": "disable"
+            },
+            {
+              "label": "discard",
+              "value": "discard"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

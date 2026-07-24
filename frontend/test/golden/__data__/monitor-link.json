@@ -1,0 +1,187 @@
+{
+  "module": "monitor-link",
+  "tabs": [
+    {
+      "name": "monitor-link-groups",
+      "kind": "list"
+    }
+  ],
+  "lists": {
+    "monitor-link-groups": {
+      "keyField": "id",
+      "columns": [
+        {
+          "name": "id",
+          "widget": "number"
+        },
+        {
+          "name": "enable",
+          "widget": "boolean"
+        },
+        {
+          "name": "recover-time",
+          "widget": "number"
+        }
+      ],
+      "filterable": []
+    }
+  },
+  "tree": [
+    {
+      "path": "/monitor-link/monitor-link-groups",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/monitor-link/monitor-link-groups/monitor-link-group",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/monitor-link/monitor-link-groups/monitor-link-group/downlink-interfaces",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/monitor-link/monitor-link-groups/monitor-link-group/downlink-interfaces/downlink-interface",
+      "kind": "list",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/monitor-link/monitor-link-groups/monitor-link-group/downlink-interfaces/downlink-interface/id",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/monitor-link/monitor-link-groups/monitor-link-group/downlink-interfaces/downlink-interface/if-name",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/monitor-link/monitor-link-groups/monitor-link-group/downlink-interfaces/downlink-interface/last-down-time",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/monitor-link/monitor-link-groups/monitor-link-group/downlink-interfaces/downlink-interface/last-up-time",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/monitor-link/monitor-link-groups/monitor-link-group/downlink-interfaces/downlink-interface/port-state",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/monitor-link/monitor-link-groups/monitor-link-group/enable",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/monitor-link/monitor-link-groups/monitor-link-group/id",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/monitor-link/monitor-link-groups/monitor-link-group/recover-time",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/monitor-link/monitor-link-groups/monitor-link-group/uplink-interfaces",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/monitor-link/monitor-link-groups/monitor-link-group/uplink-interfaces/uplink-interface",
+      "kind": "list",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/monitor-link/monitor-link-groups/monitor-link-group/uplink-interfaces/uplink-interface/if-name",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/monitor-link/monitor-link-groups/monitor-link-group/uplink-interfaces/uplink-interface/last-down-time",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/monitor-link/monitor-link-groups/monitor-link-group/uplink-interfaces/uplink-interface/last-up-time",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/monitor-link/monitor-link-groups/monitor-link-group/uplink-interfaces/uplink-interface/port-state",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    }
+  ]
+}

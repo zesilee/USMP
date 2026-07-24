@@ -1,0 +1,82 @@
+{
+  "module": "packetevent",
+  "title": "packetevent",
+  "vendor": "huawei",
+  "fields": [
+    {
+      "path": "/packetevent/global",
+      "type": "group",
+      "label": "global",
+      "fields": [
+        {
+          "path": "/packetevent/global/collect-id",
+          "type": "string",
+          "label": "collect-id"
+        },
+        {
+          "path": "/packetevent/global/drop-event",
+          "type": "group",
+          "label": "drop-event",
+          "fields": [
+            {
+              "path": "/packetevent/global/drop-event/acl-deny",
+              "type": "boolean",
+              "label": "acl-deny"
+            },
+            {
+              "path": "/packetevent/global/drop-event/aging-time",
+              "type": "number",
+              "label": "aging-time",
+              "maximum": 3600
+            },
+            {
+              "path": "/packetevent/global/drop-event/buffer-overflow",
+              "type": "boolean",
+              "label": "buffer-overflow"
+            },
+            {
+              "path": "/packetevent/global/drop-event/forward-exception",
+              "type": "boolean",
+              "label": "forward-exception"
+            },
+            {
+              "path": "/packetevent/global/drop-event/forward-normal",
+              "type": "boolean",
+              "label": "forward-normal"
+            }
+          ],
+          "presence": true
+        },
+        {
+          "path": "/packetevent/global/export-interval",
+          "type": "number",
+          "label": "export-interval",
+          "minimum": 1,
+          "maximum": 1800
+        },
+        {
+          "path": "/packetevent/global/latency-event",
+          "type": "group",
+          "label": "latency-event",
+          "fields": [
+            {
+              "path": "/packetevent/global/latency-event/aging-time",
+              "type": "number",
+              "label": "aging-time",
+              "maximum": 3600
+            },
+            {
+              "path": "/packetevent/global/latency-event/latency-threshold",
+              "type": "number",
+              "label": "latency-threshold",
+              "minimum": 768,
+              "maximum": 1000000
+            }
+          ],
+          "presence": true
+        }
+      ],
+      "presence": true
+    }
+  ]
+}

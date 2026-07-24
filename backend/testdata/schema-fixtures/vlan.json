@@ -1,0 +1,1102 @@
+{
+  "module": "vlan",
+  "title": "vlan",
+  "vendor": "huawei",
+  "fields": [
+    {
+      "path": "/vlan/default-instance",
+      "type": "group",
+      "label": "default-instance",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/vlan/default-instance/vlan-list",
+          "type": "string",
+          "label": "vlan-list",
+          "pattern": "([0-9]|,|\\+|\\-|\\(|\\))+",
+          "readonly": true
+        }
+      ]
+    },
+    {
+      "path": "/vlan/dynamic-vlans",
+      "type": "group",
+      "label": "dynamic-vlans",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/vlan/dynamic-vlans/dynamic-vlan",
+          "type": "list",
+          "label": "dynamic-vlan",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/vlan/dynamic-vlans/dynamic-vlan/active-ports",
+              "type": "group",
+              "label": "active-ports",
+              "readonly": true,
+              "fields": [
+                {
+                  "path": "/vlan/dynamic-vlans/dynamic-vlan/active-ports/active-port",
+                  "type": "list",
+                  "label": "active-port",
+                  "readonly": true,
+                  "fields": [
+                    {
+                      "path": "/vlan/dynamic-vlans/dynamic-vlan/active-ports/active-port/access-type",
+                      "type": "enum",
+                      "label": "access-type",
+                      "options": [
+                        {
+                          "label": "access",
+                          "value": "access"
+                        },
+                        {
+                          "label": "dot1qtunnel",
+                          "value": "dot1qtunnel"
+                        },
+                        {
+                          "label": "hybrid",
+                          "value": "hybrid"
+                        },
+                        {
+                          "label": "trunk",
+                          "value": "trunk"
+                        }
+                      ],
+                      "readonly": true
+                    },
+                    {
+                      "path": "/vlan/dynamic-vlans/dynamic-vlan/active-ports/active-port/interface-name",
+                      "type": "string",
+                      "label": "interface-name",
+                      "readonly": true,
+                      "isKey": true
+                    },
+                    {
+                      "path": "/vlan/dynamic-vlans/dynamic-vlan/active-ports/active-port/tag-mode",
+                      "type": "enum",
+                      "label": "tag-mode",
+                      "options": [
+                        {
+                          "label": "tag",
+                          "value": "tag"
+                        },
+                        {
+                          "label": "untag",
+                          "value": "untag"
+                        }
+                      ],
+                      "readonly": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/vlan/dynamic-vlans/dynamic-vlan/description",
+              "type": "string",
+              "label": "description",
+              "readonly": true
+            },
+            {
+              "path": "/vlan/dynamic-vlans/dynamic-vlan/id",
+              "type": "number",
+              "label": "id",
+              "minimum": 1,
+              "maximum": 4094,
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/vlan/dynamic-vlans/dynamic-vlan/status",
+              "type": "enum",
+              "label": "status",
+              "options": [
+                {
+                  "label": "down",
+                  "value": "down"
+                },
+                {
+                  "label": "up",
+                  "value": "up"
+                }
+              ],
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/vlan/instances",
+      "type": "group",
+      "label": "instances",
+      "fields": [
+        {
+          "path": "/vlan/instances/instance",
+          "type": "list",
+          "label": "instance",
+          "fields": [
+            {
+              "path": "/vlan/instances/instance/id",
+              "type": "number",
+              "label": "id",
+              "minimum": 1,
+              "maximum": 4094,
+              "isKey": true
+            },
+            {
+              "path": "/vlan/instances/instance/vlan-list",
+              "type": "string",
+              "label": "vlan-list",
+              "required": true,
+              "pattern": "([0-9]|,|\\+|\\-|\\(|\\))+"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/vlan/vlans",
+      "type": "group",
+      "label": "vlans",
+      "fields": [
+        {
+          "path": "/vlan/vlans/vlan",
+          "type": "list",
+          "label": "vlan",
+          "fields": [
+            {
+              "path": "/vlan/vlans/vlan/admin-status",
+              "type": "enum",
+              "label": "admin-status",
+              "options": [
+                {
+                  "label": "down",
+                  "value": "down"
+                },
+                {
+                  "label": "up",
+                  "value": "up"
+                }
+              ]
+            },
+            {
+              "path": "/vlan/vlans/vlan/arp-ip-pool",
+              "type": "group",
+              "label": "arp-ip-pool",
+              "fields": [
+                {
+                  "path": "/vlan/vlans/vlan/arp-ip-pool/ip-begin",
+                  "type": "string",
+                  "label": "ip-begin",
+                  "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?"
+                },
+                {
+                  "path": "/vlan/vlans/vlan/arp-ip-pool/ip-end",
+                  "type": "string",
+                  "label": "ip-end",
+                  "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?",
+                  "must": [
+                    {
+                      "expr": "../ip-begin"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/vlan/vlans/vlan/arp-l2proxys",
+              "type": "group",
+              "label": "arp-l2proxys",
+              "readonly": true,
+              "fields": [
+                {
+                  "path": "/vlan/vlans/vlan/arp-l2proxys/arp-l2proxy",
+                  "type": "list",
+                  "label": "arp-l2proxy",
+                  "readonly": true,
+                  "fields": [
+                    {
+                      "path": "/vlan/vlans/vlan/arp-l2proxys/arp-l2proxy/aging-time",
+                      "type": "number",
+                      "label": "aging-time",
+                      "minimum": 1,
+                      "maximum": 62640,
+                      "readonly": true
+                    },
+                    {
+                      "path": "/vlan/vlans/vlan/arp-l2proxys/arp-l2proxy/if-name",
+                      "type": "string",
+                      "label": "if-name",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/vlan/vlans/vlan/arp-l2proxys/arp-l2proxy/ip-addr",
+                      "type": "string",
+                      "label": "ip-addr",
+                      "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?",
+                      "readonly": true,
+                      "isKey": true
+                    },
+                    {
+                      "path": "/vlan/vlans/vlan/arp-l2proxys/arp-l2proxy/mac-addr",
+                      "type": "string",
+                      "label": "mac-addr",
+                      "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/vlan/vlans/vlan/arp-l2proxys/arp-l2proxy/status",
+                      "type": "enum",
+                      "label": "status",
+                      "options": [
+                        {
+                          "label": "conflict",
+                          "value": "conflict"
+                        },
+                        {
+                          "label": "dynamic",
+                          "value": "dynamic"
+                        },
+                        {
+                          "label": "static",
+                          "value": "static"
+                        }
+                      ],
+                      "readonly": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/vlan/vlans/vlan/arp-mff",
+              "type": "group",
+              "label": "arp-mff",
+              "fields": [
+                {
+                  "path": "/vlan/vlans/vlan/arp-mff/dynlearn-enable",
+                  "type": "boolean",
+                  "label": "dynlearn-enable",
+                  "when": "../mff-enable='true'"
+                },
+                {
+                  "path": "/vlan/vlans/vlan/arp-mff/gateway-detect-enable",
+                  "type": "boolean",
+                  "label": "gateway-detect-enable",
+                  "when": "../mff-enable='true'"
+                },
+                {
+                  "path": "/vlan/vlans/vlan/arp-mff/max-user-num",
+                  "type": "number",
+                  "label": "max-user-num",
+                  "minimum": 10,
+                  "maximum": 2000,
+                  "when": "../mff-enable='true'"
+                },
+                {
+                  "path": "/vlan/vlans/vlan/arp-mff/mff-enable",
+                  "type": "boolean",
+                  "label": "mff-enable",
+                  "must": [
+                    {
+                      "expr": "/arp:arp/arp:global/arp:gmff-enable='true'"
+                    }
+                  ]
+                },
+                {
+                  "path": "/vlan/vlans/vlan/arp-mff/server-ips",
+                  "type": "group",
+                  "label": "server-ips",
+                  "when": "../mff-enable='true'",
+                  "fields": [
+                    {
+                      "path": "/vlan/vlans/vlan/arp-mff/server-ips/server-ip",
+                      "type": "list",
+                      "label": "server-ip",
+                      "fields": [
+                        {
+                          "path": "/vlan/vlans/vlan/arp-mff/server-ips/server-ip/ip-addr",
+                          "type": "string",
+                          "label": "ip-addr",
+                          "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?",
+                          "isKey": true
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "path": "/vlan/vlans/vlan/arp-mff/static-gateway-ipaddr",
+                  "type": "string",
+                  "label": "static-gateway-ipaddr",
+                  "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?",
+                  "when": "../mff-enable='true'"
+                },
+                {
+                  "path": "/vlan/vlans/vlan/arp-mff/trans-req-enable",
+                  "type": "boolean",
+                  "label": "trans-req-enable",
+                  "when": "../mff-enable='true'"
+                }
+              ]
+            },
+            {
+              "path": "/vlan/vlans/vlan/arp-rate-limit",
+              "type": "group",
+              "label": "arp-rate-limit",
+              "fields": [
+                {
+                  "path": "/vlan/vlans/vlan/arp-rate-limit/suppress-type",
+                  "type": "enum",
+                  "label": "suppress-type",
+                  "options": [
+                    {
+                      "label": "arp",
+                      "value": "arp"
+                    },
+                    {
+                      "label": "arp-miss",
+                      "value": "arp-miss"
+                    }
+                  ]
+                },
+                {
+                  "path": "/vlan/vlans/vlan/arp-rate-limit/suppress-value",
+                  "type": "number",
+                  "label": "suppress-value",
+                  "maximum": 65536
+                }
+              ]
+            },
+            {
+              "path": "/vlan/vlans/vlan/arp-security",
+              "type": "group",
+              "label": "arp-security",
+              "fields": [
+                {
+                  "path": "/vlan/vlans/vlan/arp-security/check-items",
+                  "type": "group",
+                  "label": "check-items",
+                  "fields": [
+                    {
+                      "path": "/vlan/vlans/vlan/arp-security/check-items/interface",
+                      "type": "boolean",
+                      "label": "interface"
+                    },
+                    {
+                      "path": "/vlan/vlans/vlan/arp-security/check-items/ip-check",
+                      "type": "boolean",
+                      "label": "ip-check"
+                    },
+                    {
+                      "path": "/vlan/vlans/vlan/arp-security/check-items/mac-check",
+                      "type": "boolean",
+                      "label": "mac-check"
+                    }
+                  ]
+                },
+                {
+                  "path": "/vlan/vlans/vlan/arp-security/dhcpsnoop-enable",
+                  "type": "boolean",
+                  "label": "dhcpsnoop-enable",
+                  "must": [
+                    {
+                      "expr": "../l2proxy-enable='false'"
+                    }
+                  ]
+                },
+                {
+                  "path": "/vlan/vlans/vlan/arp-security/dynamic-enable",
+                  "type": "boolean",
+                  "label": "dynamic-enable"
+                },
+                {
+                  "path": "/vlan/vlans/vlan/arp-security/l2proxy-dyn-learn",
+                  "type": "boolean",
+                  "label": "l2proxy-dyn-learn",
+                  "when": "../l2proxy-enable='true'"
+                },
+                {
+                  "path": "/vlan/vlans/vlan/arp-security/l2proxy-enable",
+                  "type": "boolean",
+                  "label": "l2proxy-enable",
+                  "must": [
+                    {
+                      "expr": "../dhcpsnoop-enable='false'"
+                    }
+                  ]
+                },
+                {
+                  "path": "/vlan/vlans/vlan/arp-security/l2proxy-expire-time",
+                  "type": "number",
+                  "label": "l2proxy-expire-time",
+                  "minimum": 1,
+                  "maximum": 62640,
+                  "when": "../l2proxy-enable='true'"
+                },
+                {
+                  "path": "/vlan/vlans/vlan/arp-security/l2proxy-max-num",
+                  "type": "number",
+                  "label": "l2proxy-max-num",
+                  "minimum": 1,
+                  "maximum": 32768,
+                  "when": "../l2proxy-enable='true'"
+                },
+                {
+                  "path": "/vlan/vlans/vlan/arp-security/snooping-enable",
+                  "type": "boolean",
+                  "label": "snooping-enable"
+                }
+              ]
+            },
+            {
+              "path": "/vlan/vlans/vlan/arp-statisticss",
+              "type": "group",
+              "label": "arp-statisticss",
+              "readonly": true,
+              "fields": [
+                {
+                  "path": "/vlan/vlans/vlan/arp-statisticss/arp-statistics",
+                  "type": "list",
+                  "label": "arp-statistics",
+                  "readonly": true,
+                  "fields": [
+                    {
+                      "path": "/vlan/vlans/vlan/arp-statisticss/arp-statistics/gateway-ip",
+                      "type": "string",
+                      "label": "gateway-ip",
+                      "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?",
+                      "readonly": true,
+                      "isKey": true
+                    },
+                    {
+                      "path": "/vlan/vlans/vlan/arp-statisticss/arp-statistics/gateway-mac",
+                      "type": "string",
+                      "label": "gateway-mac",
+                      "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/vlan/vlans/vlan/arp-statisticss/arp-statistics/user-entries",
+                      "type": "group",
+                      "label": "user-entries",
+                      "readonly": true,
+                      "fields": [
+                        {
+                          "path": "/vlan/vlans/vlan/arp-statisticss/arp-statistics/user-entries/user-entry",
+                          "type": "list",
+                          "label": "user-entry",
+                          "readonly": true,
+                          "fields": [
+                            {
+                              "path": "/vlan/vlans/vlan/arp-statisticss/arp-statistics/user-entries/user-entry/if-name",
+                              "type": "string",
+                              "label": "if-name",
+                              "readonly": true
+                            },
+                            {
+                              "path": "/vlan/vlans/vlan/arp-statisticss/arp-statistics/user-entries/user-entry/ip-addr",
+                              "type": "string",
+                              "label": "ip-addr",
+                              "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?",
+                              "readonly": true,
+                              "isKey": true
+                            },
+                            {
+                              "path": "/vlan/vlans/vlan/arp-statisticss/arp-statistics/user-entries/user-entry/mac-addr",
+                              "type": "string",
+                              "label": "mac-addr",
+                              "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+                              "readonly": true
+                            },
+                            {
+                              "path": "/vlan/vlans/vlan/arp-statisticss/arp-statistics/user-entries/user-entry/user-type",
+                              "type": "enum",
+                              "label": "user-type",
+                              "options": [
+                                {
+                                  "label": "dynamic",
+                                  "value": "dynamic"
+                                },
+                                {
+                                  "label": "static",
+                                  "value": "static"
+                                }
+                              ],
+                              "readonly": true
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/vlan/vlans/vlan/broadcast-discard",
+              "type": "enum",
+              "label": "broadcast-discard",
+              "options": [
+                {
+                  "label": "disable",
+                  "value": "disable"
+                },
+                {
+                  "label": "enable",
+                  "value": "enable"
+                }
+              ]
+            },
+            {
+              "path": "/vlan/vlans/vlan/description",
+              "type": "string",
+              "label": "description",
+              "pattern": "([^? \\n\\r\\t][^?\\n\\r\\t]*[^? \\n\\r\\t])|[^? \\n\\r\\t]",
+              "dynamicDefault": true
+            },
+            {
+              "path": "/vlan/vlans/vlan/id",
+              "type": "number",
+              "label": "id",
+              "minimum": 1,
+              "maximum": 4094,
+              "isKey": true
+            },
+            {
+              "path": "/vlan/vlans/vlan/ip-subnet-vlans",
+              "type": "group",
+              "label": "ip-subnet-vlans",
+              "fields": [
+                {
+                  "path": "/vlan/vlans/vlan/ip-subnet-vlans/ip-subnet-vlan",
+                  "type": "list",
+                  "label": "ip-subnet-vlan",
+                  "fields": [
+                    {
+                      "path": "/vlan/vlans/vlan/ip-subnet-vlans/ip-subnet-vlan/index",
+                      "type": "number",
+                      "label": "index",
+                      "minimum": 1,
+                      "maximum": 12,
+                      "isKey": true
+                    },
+                    {
+                      "path": "/vlan/vlans/vlan/ip-subnet-vlans/ip-subnet-vlan/ip-prefix",
+                      "type": "string",
+                      "label": "ip-prefix",
+                      "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])/(([0-9])|([1-2][0-9])|(3[0-2]))"
+                    },
+                    {
+                      "path": "/vlan/vlans/vlan/ip-subnet-vlans/ip-subnet-vlan/priority",
+                      "type": "number",
+                      "label": "priority",
+                      "maximum": 7
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/vlan/vlans/vlan/mac-aging-time",
+              "type": "number",
+              "label": "mac-aging-time",
+              "maximum": 1000000,
+              "when": "not(../type='super')"
+            },
+            {
+              "path": "/vlan/vlans/vlan/mac-learning",
+              "type": "enum",
+              "label": "mac-learning",
+              "options": [
+                {
+                  "label": "disable",
+                  "value": "disable"
+                },
+                {
+                  "label": "enable",
+                  "value": "enable"
+                }
+              ]
+            },
+            {
+              "path": "/vlan/vlans/vlan/member-ports",
+              "type": "group",
+              "label": "member-ports",
+              "readonly": true,
+              "when": "not(../type='super')",
+              "fields": [
+                {
+                  "path": "/vlan/vlans/vlan/member-ports/member-port",
+                  "type": "list",
+                  "label": "member-port",
+                  "readonly": true,
+                  "fields": [
+                    {
+                      "path": "/vlan/vlans/vlan/member-ports/member-port/access-type",
+                      "type": "enum",
+                      "label": "access-type",
+                      "options": [
+                        {
+                          "label": "access",
+                          "value": "access"
+                        },
+                        {
+                          "label": "dot1qtunnel",
+                          "value": "dot1qtunnel"
+                        },
+                        {
+                          "label": "hybrid",
+                          "value": "hybrid"
+                        },
+                        {
+                          "label": "trunk",
+                          "value": "trunk"
+                        }
+                      ],
+                      "readonly": true
+                    },
+                    {
+                      "path": "/vlan/vlans/vlan/member-ports/member-port/interface-name",
+                      "type": "string",
+                      "label": "interface-name",
+                      "readonly": true,
+                      "isKey": true
+                    },
+                    {
+                      "path": "/vlan/vlans/vlan/member-ports/member-port/state",
+                      "type": "enum",
+                      "label": "state",
+                      "options": [
+                        {
+                          "label": "down",
+                          "value": "down"
+                        },
+                        {
+                          "label": "up",
+                          "value": "up"
+                        }
+                      ],
+                      "readonly": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/vlan/vlans/vlan/mirror",
+              "type": "group",
+              "label": "mirror",
+              "fields": [
+                {
+                  "path": "/vlan/vlans/vlan/mirror/observe-groups",
+                  "type": "group",
+                  "label": "observe-groups",
+                  "fields": [
+                    {
+                      "path": "/vlan/vlans/vlan/mirror/observe-groups/observe-group",
+                      "type": "list",
+                      "label": "observe-group",
+                      "fields": [
+                        {
+                          "path": "/vlan/vlans/vlan/mirror/observe-groups/observe-group/direction",
+                          "type": "enum",
+                          "label": "direction",
+                          "options": [
+                            {
+                              "label": "both",
+                              "value": "both"
+                            },
+                            {
+                              "label": "inbound",
+                              "value": "inbound"
+                            },
+                            {
+                              "label": "outbound",
+                              "value": "outbound"
+                            }
+                          ],
+                          "isKey": true
+                        },
+                        {
+                          "path": "/vlan/vlans/vlan/mirror/observe-groups/observe-group/group-id",
+                          "type": "number",
+                          "label": "group-id",
+                          "minimum": 1,
+                          "maximum": 128,
+                          "isKey": true
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "path": "/vlan/vlans/vlan/mirror/observe-ports",
+                  "type": "group",
+                  "label": "observe-ports",
+                  "fields": [
+                    {
+                      "path": "/vlan/vlans/vlan/mirror/observe-ports/observe-port",
+                      "type": "list",
+                      "label": "observe-port",
+                      "fields": [
+                        {
+                          "path": "/vlan/vlans/vlan/mirror/observe-ports/observe-port/direction",
+                          "type": "enum",
+                          "label": "direction",
+                          "options": [
+                            {
+                              "label": "both",
+                              "value": "both"
+                            },
+                            {
+                              "label": "inbound",
+                              "value": "inbound"
+                            },
+                            {
+                              "label": "outbound",
+                              "value": "outbound"
+                            }
+                          ],
+                          "isKey": true
+                        },
+                        {
+                          "path": "/vlan/vlans/vlan/mirror/observe-ports/observe-port/observe-index",
+                          "type": "number",
+                          "label": "observe-index",
+                          "minimum": 1,
+                          "maximum": 8,
+                          "isKey": true
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/vlan/vlans/vlan/name",
+              "type": "string",
+              "label": "name"
+            },
+            {
+              "path": "/vlan/vlans/vlan/statistic-discard",
+              "type": "enum",
+              "label": "statistic-discard",
+              "options": [
+                {
+                  "label": "disable",
+                  "value": "disable"
+                },
+                {
+                  "label": "enable",
+                  "value": "enable"
+                }
+              ],
+              "when": "../statistic-enable='enable'"
+            },
+            {
+              "path": "/vlan/vlans/vlan/statistic-enable",
+              "type": "enum",
+              "label": "statistic-enable",
+              "options": [
+                {
+                  "label": "disable",
+                  "value": "disable"
+                },
+                {
+                  "label": "enable",
+                  "value": "enable"
+                }
+              ]
+            },
+            {
+              "path": "/vlan/vlans/vlan/statistics",
+              "type": "group",
+              "label": "statistics",
+              "readonly": true,
+              "fields": [
+                {
+                  "path": "/vlan/vlans/vlan/statistics/inbound-broadcast-drops",
+                  "type": "number",
+                  "label": "inbound-broadcast-drops",
+                  "readonly": true
+                },
+                {
+                  "path": "/vlan/vlans/vlan/statistics/inbound-broadcasts",
+                  "type": "number",
+                  "label": "inbound-broadcasts",
+                  "readonly": true
+                },
+                {
+                  "path": "/vlan/vlans/vlan/statistics/inbound-bytes",
+                  "type": "number",
+                  "label": "inbound-bytes",
+                  "readonly": true
+                },
+                {
+                  "path": "/vlan/vlans/vlan/statistics/inbound-multicasts",
+                  "type": "number",
+                  "label": "inbound-multicasts",
+                  "readonly": true
+                },
+                {
+                  "path": "/vlan/vlans/vlan/statistics/inbound-packets",
+                  "type": "number",
+                  "label": "inbound-packets",
+                  "readonly": true
+                },
+                {
+                  "path": "/vlan/vlans/vlan/statistics/inbound-unicasts",
+                  "type": "number",
+                  "label": "inbound-unicasts",
+                  "readonly": true
+                },
+                {
+                  "path": "/vlan/vlans/vlan/statistics/inbound-unknown-multicast-drops",
+                  "type": "number",
+                  "label": "inbound-unknown-multicast-drops",
+                  "readonly": true
+                },
+                {
+                  "path": "/vlan/vlans/vlan/statistics/inbound-unknown-unicast-drops",
+                  "type": "number",
+                  "label": "inbound-unknown-unicast-drops",
+                  "readonly": true
+                },
+                {
+                  "path": "/vlan/vlans/vlan/statistics/outbound-broadcasts",
+                  "type": "number",
+                  "label": "outbound-broadcasts",
+                  "readonly": true
+                },
+                {
+                  "path": "/vlan/vlans/vlan/statistics/outbound-bytes",
+                  "type": "number",
+                  "label": "outbound-bytes",
+                  "readonly": true
+                },
+                {
+                  "path": "/vlan/vlans/vlan/statistics/outbound-multicasts",
+                  "type": "number",
+                  "label": "outbound-multicasts",
+                  "readonly": true
+                },
+                {
+                  "path": "/vlan/vlans/vlan/statistics/outbound-packets",
+                  "type": "number",
+                  "label": "outbound-packets",
+                  "readonly": true
+                },
+                {
+                  "path": "/vlan/vlans/vlan/statistics/outbound-unicasts",
+                  "type": "number",
+                  "label": "outbound-unicasts",
+                  "readonly": true
+                }
+              ]
+            },
+            {
+              "path": "/vlan/vlans/vlan/super-vlan",
+              "type": "string",
+              "label": "super-vlan",
+              "required": true,
+              "when": "../type='sub'",
+              "must": [
+                {
+                  "expr": "/vlan:vlan/vlan:vlans/vlan:vlan[id=current()]/vlan:type = 'super'"
+                }
+              ]
+            },
+            {
+              "path": "/vlan/vlans/vlan/suppression",
+              "type": "group",
+              "label": "suppression",
+              "fields": [
+                {
+                  "path": "/vlan/vlans/vlan/suppression/inbound",
+                  "type": "enum",
+                  "label": "inbound",
+                  "options": [
+                    {
+                      "label": "disable",
+                      "value": "disable"
+                    },
+                    {
+                      "label": "enable",
+                      "value": "enable"
+                    }
+                  ]
+                },
+                {
+                  "path": "/vlan/vlans/vlan/suppression/outbound",
+                  "type": "enum",
+                  "label": "outbound",
+                  "options": [
+                    {
+                      "label": "disable",
+                      "value": "disable"
+                    },
+                    {
+                      "label": "enable",
+                      "value": "enable"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/vlan/vlans/vlan/traffic-policy-applys",
+              "type": "group",
+              "label": "traffic-policy-applys",
+              "fields": [
+                {
+                  "path": "/vlan/vlans/vlan/traffic-policy-applys/traffic-policy-apply",
+                  "type": "list",
+                  "label": "traffic-policy-apply",
+                  "fields": [
+                    {
+                      "path": "/vlan/vlans/vlan/traffic-policy-applys/traffic-policy-apply/direction",
+                      "type": "enum",
+                      "label": "direction",
+                      "options": [
+                        {
+                          "label": "inbound",
+                          "value": "inbound"
+                        },
+                        {
+                          "label": "outbound",
+                          "value": "outbound"
+                        }
+                      ],
+                      "isKey": true
+                    },
+                    {
+                      "path": "/vlan/vlans/vlan/traffic-policy-applys/traffic-policy-apply/policy-name",
+                      "type": "string",
+                      "label": "policy-name",
+                      "isKey": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/vlan/vlans/vlan/type",
+              "type": "enum",
+              "label": "type",
+              "options": [
+                {
+                  "label": "common",
+                  "value": "common"
+                },
+                {
+                  "label": "sub",
+                  "value": "sub"
+                },
+                {
+                  "label": "super",
+                  "value": "super"
+                }
+              ]
+            },
+            {
+              "path": "/vlan/vlans/vlan/unknown-multicast-discard",
+              "type": "enum",
+              "label": "unknown-multicast-discard",
+              "options": [
+                {
+                  "label": "disable",
+                  "value": "disable"
+                },
+                {
+                  "label": "enable",
+                  "value": "enable"
+                }
+              ]
+            },
+            {
+              "path": "/vlan/vlans/vlan/unknown-unicast-discard",
+              "type": "group",
+              "label": "unknown-unicast-discard",
+              "fields": [
+                {
+                  "path": "/vlan/vlans/vlan/unknown-unicast-discard/discard",
+                  "type": "enum",
+                  "label": "discard",
+                  "options": [
+                    {
+                      "label": "disable",
+                      "value": "disable"
+                    },
+                    {
+                      "label": "enable",
+                      "value": "enable"
+                    }
+                  ]
+                },
+                {
+                  "path": "/vlan/vlans/vlan/unknown-unicast-discard/mac-learning-enable",
+                  "type": "enum",
+                  "label": "mac-learning-enable",
+                  "options": [
+                    {
+                      "label": "disable",
+                      "value": "disable"
+                    },
+                    {
+                      "label": "enable",
+                      "value": "enable"
+                    }
+                  ],
+                  "when": "../discard='enable'"
+                }
+              ]
+            },
+            {
+              "path": "/vlan/vlans/vlan/unkown-unicast-discard",
+              "type": "group",
+              "label": "unkown-unicast-discard",
+              "fields": [
+                {
+                  "path": "/vlan/vlans/vlan/unkown-unicast-discard/discard",
+                  "type": "enum",
+                  "label": "discard",
+                  "options": [
+                    {
+                      "label": "disable",
+                      "value": "disable"
+                    },
+                    {
+                      "label": "enable",
+                      "value": "enable"
+                    }
+                  ]
+                },
+                {
+                  "path": "/vlan/vlans/vlan/unkown-unicast-discard/mac-learning-enable",
+                  "type": "enum",
+                  "label": "mac-learning-enable",
+                  "options": [
+                    {
+                      "label": "disable",
+                      "value": "disable"
+                    },
+                    {
+                      "label": "enable",
+                      "value": "enable"
+                    }
+                  ],
+                  "when": "../discard='enable'"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

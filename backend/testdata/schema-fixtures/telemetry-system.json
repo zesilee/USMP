@@ -1,0 +1,577 @@
+{
+  "module": "telemetry-system",
+  "title": "telemetry-system",
+  "vendor": "huawei",
+  "fields": [
+    {
+      "path": "/telemetry-system/destination-groups",
+      "type": "group",
+      "label": "destination-groups",
+      "fields": [
+        {
+          "path": "/telemetry-system/destination-groups/destination-group",
+          "type": "list",
+          "label": "destination-group",
+          "fields": [
+            {
+              "path": "/telemetry-system/destination-groups/destination-group/config",
+              "type": "group",
+              "label": "config",
+              "fields": [
+                {
+                  "path": "/telemetry-system/destination-groups/destination-group/config/group-id",
+                  "type": "string",
+                  "label": "group-id"
+                }
+              ]
+            },
+            {
+              "path": "/telemetry-system/destination-groups/destination-group/destinations",
+              "type": "group",
+              "label": "destinations",
+              "fields": [
+                {
+                  "path": "/telemetry-system/destination-groups/destination-group/destinations/destination",
+                  "type": "list",
+                  "label": "destination",
+                  "fields": [
+                    {
+                      "path": "/telemetry-system/destination-groups/destination-group/destinations/destination/config",
+                      "type": "group",
+                      "label": "config",
+                      "fields": [
+                        {
+                          "path": "/telemetry-system/destination-groups/destination-group/destinations/destination/config/destination-address",
+                          "type": "string",
+                          "label": "destination-address"
+                        },
+                        {
+                          "path": "/telemetry-system/destination-groups/destination-group/destinations/destination/config/destination-port",
+                          "type": "number",
+                          "label": "destination-port"
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/telemetry-system/destination-groups/destination-group/destinations/destination/destination-address",
+                      "type": "string",
+                      "label": "destination-address",
+                      "isKey": true
+                    },
+                    {
+                      "path": "/telemetry-system/destination-groups/destination-group/destinations/destination/destination-port",
+                      "type": "string",
+                      "label": "destination-port",
+                      "isKey": true
+                    },
+                    {
+                      "path": "/telemetry-system/destination-groups/destination-group/destinations/destination/state",
+                      "type": "group",
+                      "label": "state",
+                      "readonly": true,
+                      "fields": [
+                        {
+                          "path": "/telemetry-system/destination-groups/destination-group/destinations/destination/state/destination-address",
+                          "type": "string",
+                          "label": "destination-address",
+                          "readonly": true
+                        },
+                        {
+                          "path": "/telemetry-system/destination-groups/destination-group/destinations/destination/state/destination-port",
+                          "type": "number",
+                          "label": "destination-port",
+                          "readonly": true
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/telemetry-system/destination-groups/destination-group/group-id",
+              "type": "string",
+              "label": "group-id",
+              "isKey": true
+            },
+            {
+              "path": "/telemetry-system/destination-groups/destination-group/state",
+              "type": "group",
+              "label": "state",
+              "readonly": true,
+              "fields": [
+                {
+                  "path": "/telemetry-system/destination-groups/destination-group/state/group-id",
+                  "type": "string",
+                  "label": "group-id",
+                  "readonly": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/telemetry-system/sensor-groups",
+      "type": "group",
+      "label": "sensor-groups",
+      "fields": [
+        {
+          "path": "/telemetry-system/sensor-groups/sensor-group",
+          "type": "list",
+          "label": "sensor-group",
+          "fields": [
+            {
+              "path": "/telemetry-system/sensor-groups/sensor-group/config",
+              "type": "group",
+              "label": "config",
+              "fields": [
+                {
+                  "path": "/telemetry-system/sensor-groups/sensor-group/config/sensor-group-id",
+                  "type": "string",
+                  "label": "sensor-group-id"
+                }
+              ]
+            },
+            {
+              "path": "/telemetry-system/sensor-groups/sensor-group/sensor-group-id",
+              "type": "string",
+              "label": "sensor-group-id",
+              "isKey": true
+            },
+            {
+              "path": "/telemetry-system/sensor-groups/sensor-group/sensor-paths",
+              "type": "group",
+              "label": "sensor-paths",
+              "fields": [
+                {
+                  "path": "/telemetry-system/sensor-groups/sensor-group/sensor-paths/sensor-path",
+                  "type": "list",
+                  "label": "sensor-path",
+                  "fields": [
+                    {
+                      "path": "/telemetry-system/sensor-groups/sensor-group/sensor-paths/sensor-path/config",
+                      "type": "group",
+                      "label": "config",
+                      "fields": [
+                        {
+                          "path": "/telemetry-system/sensor-groups/sensor-group/sensor-paths/sensor-path/config/exclude-filter",
+                          "type": "string",
+                          "label": "exclude-filter"
+                        },
+                        {
+                          "path": "/telemetry-system/sensor-groups/sensor-group/sensor-paths/sensor-path/config/path",
+                          "type": "string",
+                          "label": "path"
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/telemetry-system/sensor-groups/sensor-group/sensor-paths/sensor-path/path",
+                      "type": "string",
+                      "label": "path",
+                      "isKey": true
+                    },
+                    {
+                      "path": "/telemetry-system/sensor-groups/sensor-group/sensor-paths/sensor-path/state",
+                      "type": "group",
+                      "label": "state",
+                      "readonly": true,
+                      "fields": [
+                        {
+                          "path": "/telemetry-system/sensor-groups/sensor-group/sensor-paths/sensor-path/state/exclude-filter",
+                          "type": "string",
+                          "label": "exclude-filter",
+                          "readonly": true
+                        },
+                        {
+                          "path": "/telemetry-system/sensor-groups/sensor-group/sensor-paths/sensor-path/state/path",
+                          "type": "string",
+                          "label": "path",
+                          "readonly": true
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/telemetry-system/sensor-groups/sensor-group/state",
+              "type": "group",
+              "label": "state",
+              "readonly": true,
+              "fields": [
+                {
+                  "path": "/telemetry-system/sensor-groups/sensor-group/state/sensor-group-id",
+                  "type": "string",
+                  "label": "sensor-group-id",
+                  "readonly": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/telemetry-system/subscriptions",
+      "type": "group",
+      "label": "subscriptions",
+      "fields": [
+        {
+          "path": "/telemetry-system/subscriptions/dynamic",
+          "type": "group",
+          "label": "dynamic",
+          "fields": [
+            {
+              "path": "/telemetry-system/subscriptions/dynamic/subscription",
+              "type": "list",
+              "label": "subscription",
+              "readonly": true,
+              "fields": [
+                {
+                  "path": "/telemetry-system/subscriptions/dynamic/subscription/sensor-paths",
+                  "type": "group",
+                  "label": "sensor-paths",
+                  "readonly": true,
+                  "fields": [
+                    {
+                      "path": "/telemetry-system/subscriptions/dynamic/subscription/sensor-paths/sensor-path",
+                      "type": "list",
+                      "label": "sensor-path",
+                      "readonly": true,
+                      "fields": [
+                        {
+                          "path": "/telemetry-system/subscriptions/dynamic/subscription/sensor-paths/sensor-path/path",
+                          "type": "string",
+                          "label": "path",
+                          "readonly": true,
+                          "isKey": true
+                        },
+                        {
+                          "path": "/telemetry-system/subscriptions/dynamic/subscription/sensor-paths/sensor-path/state",
+                          "type": "group",
+                          "label": "state",
+                          "readonly": true,
+                          "fields": [
+                            {
+                              "path": "/telemetry-system/subscriptions/dynamic/subscription/sensor-paths/sensor-path/state/exclude-filter",
+                              "type": "string",
+                              "label": "exclude-filter",
+                              "readonly": true
+                            },
+                            {
+                              "path": "/telemetry-system/subscriptions/dynamic/subscription/sensor-paths/sensor-path/state/path",
+                              "type": "string",
+                              "label": "path",
+                              "readonly": true
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "path": "/telemetry-system/subscriptions/dynamic/subscription/state",
+                  "type": "group",
+                  "label": "state",
+                  "readonly": true,
+                  "fields": [
+                    {
+                      "path": "/telemetry-system/subscriptions/dynamic/subscription/state/destination-address",
+                      "type": "string",
+                      "label": "destination-address",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/telemetry-system/subscriptions/dynamic/subscription/state/destination-port",
+                      "type": "number",
+                      "label": "destination-port",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/telemetry-system/subscriptions/dynamic/subscription/state/encoding",
+                      "type": "enum",
+                      "label": "encoding",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/telemetry-system/subscriptions/dynamic/subscription/state/heartbeat-interval",
+                      "type": "number",
+                      "label": "heartbeat-interval",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/telemetry-system/subscriptions/dynamic/subscription/state/originated-qos-marking",
+                      "type": "number",
+                      "label": "originated-qos-marking",
+                      "maximum": 63,
+                      "readonly": true
+                    },
+                    {
+                      "path": "/telemetry-system/subscriptions/dynamic/subscription/state/protocol",
+                      "type": "enum",
+                      "label": "protocol",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/telemetry-system/subscriptions/dynamic/subscription/state/sample-interval",
+                      "type": "number",
+                      "label": "sample-interval",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/telemetry-system/subscriptions/dynamic/subscription/state/subscription-id",
+                      "type": "number",
+                      "label": "subscription-id",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/telemetry-system/subscriptions/dynamic/subscription/state/suppress-redundant",
+                      "type": "boolean",
+                      "label": "suppress-redundant",
+                      "readonly": true
+                    }
+                  ]
+                },
+                {
+                  "path": "/telemetry-system/subscriptions/dynamic/subscription/subscription-id",
+                  "type": "string",
+                  "label": "subscription-id",
+                  "readonly": true,
+                  "isKey": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "path": "/telemetry-system/subscriptions/persistent",
+          "type": "group",
+          "label": "persistent",
+          "fields": [
+            {
+              "path": "/telemetry-system/subscriptions/persistent/subscription",
+              "type": "list",
+              "label": "subscription",
+              "fields": [
+                {
+                  "path": "/telemetry-system/subscriptions/persistent/subscription/config",
+                  "type": "group",
+                  "label": "config",
+                  "fields": [
+                    {
+                      "path": "/telemetry-system/subscriptions/persistent/subscription/config/encoding",
+                      "type": "enum",
+                      "label": "encoding"
+                    },
+                    {
+                      "path": "/telemetry-system/subscriptions/persistent/subscription/config/local-source-address",
+                      "type": "string",
+                      "label": "local-source-address"
+                    },
+                    {
+                      "path": "/telemetry-system/subscriptions/persistent/subscription/config/originated-qos-marking",
+                      "type": "number",
+                      "label": "originated-qos-marking",
+                      "maximum": 63
+                    },
+                    {
+                      "path": "/telemetry-system/subscriptions/persistent/subscription/config/protocol",
+                      "type": "enum",
+                      "label": "protocol"
+                    },
+                    {
+                      "path": "/telemetry-system/subscriptions/persistent/subscription/config/subscription-name",
+                      "type": "string",
+                      "label": "subscription-name"
+                    }
+                  ]
+                },
+                {
+                  "path": "/telemetry-system/subscriptions/persistent/subscription/destination-groups",
+                  "type": "group",
+                  "label": "destination-groups",
+                  "fields": [
+                    {
+                      "path": "/telemetry-system/subscriptions/persistent/subscription/destination-groups/destination-group",
+                      "type": "list",
+                      "label": "destination-group",
+                      "fields": [
+                        {
+                          "path": "/telemetry-system/subscriptions/persistent/subscription/destination-groups/destination-group/config",
+                          "type": "group",
+                          "label": "config",
+                          "fields": [
+                            {
+                              "path": "/telemetry-system/subscriptions/persistent/subscription/destination-groups/destination-group/config/group-id",
+                              "type": "string",
+                              "label": "group-id"
+                            }
+                          ]
+                        },
+                        {
+                          "path": "/telemetry-system/subscriptions/persistent/subscription/destination-groups/destination-group/group-id",
+                          "type": "string",
+                          "label": "group-id",
+                          "isKey": true
+                        },
+                        {
+                          "path": "/telemetry-system/subscriptions/persistent/subscription/destination-groups/destination-group/state",
+                          "type": "group",
+                          "label": "state",
+                          "readonly": true,
+                          "fields": [
+                            {
+                              "path": "/telemetry-system/subscriptions/persistent/subscription/destination-groups/destination-group/state/group-id",
+                              "type": "string",
+                              "label": "group-id",
+                              "readonly": true
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "path": "/telemetry-system/subscriptions/persistent/subscription/sensor-profiles",
+                  "type": "group",
+                  "label": "sensor-profiles",
+                  "fields": [
+                    {
+                      "path": "/telemetry-system/subscriptions/persistent/subscription/sensor-profiles/sensor-profile",
+                      "type": "list",
+                      "label": "sensor-profile",
+                      "fields": [
+                        {
+                          "path": "/telemetry-system/subscriptions/persistent/subscription/sensor-profiles/sensor-profile/config",
+                          "type": "group",
+                          "label": "config",
+                          "fields": [
+                            {
+                              "path": "/telemetry-system/subscriptions/persistent/subscription/sensor-profiles/sensor-profile/config/heartbeat-interval",
+                              "type": "number",
+                              "label": "heartbeat-interval"
+                            },
+                            {
+                              "path": "/telemetry-system/subscriptions/persistent/subscription/sensor-profiles/sensor-profile/config/sample-interval",
+                              "type": "number",
+                              "label": "sample-interval"
+                            },
+                            {
+                              "path": "/telemetry-system/subscriptions/persistent/subscription/sensor-profiles/sensor-profile/config/sensor-group",
+                              "type": "string",
+                              "label": "sensor-group"
+                            },
+                            {
+                              "path": "/telemetry-system/subscriptions/persistent/subscription/sensor-profiles/sensor-profile/config/suppress-redundant",
+                              "type": "boolean",
+                              "label": "suppress-redundant"
+                            }
+                          ]
+                        },
+                        {
+                          "path": "/telemetry-system/subscriptions/persistent/subscription/sensor-profiles/sensor-profile/sensor-group",
+                          "type": "string",
+                          "label": "sensor-group",
+                          "isKey": true
+                        },
+                        {
+                          "path": "/telemetry-system/subscriptions/persistent/subscription/sensor-profiles/sensor-profile/state",
+                          "type": "group",
+                          "label": "state",
+                          "readonly": true,
+                          "fields": [
+                            {
+                              "path": "/telemetry-system/subscriptions/persistent/subscription/sensor-profiles/sensor-profile/state/heartbeat-interval",
+                              "type": "number",
+                              "label": "heartbeat-interval",
+                              "readonly": true
+                            },
+                            {
+                              "path": "/telemetry-system/subscriptions/persistent/subscription/sensor-profiles/sensor-profile/state/sample-interval",
+                              "type": "number",
+                              "label": "sample-interval",
+                              "readonly": true
+                            },
+                            {
+                              "path": "/telemetry-system/subscriptions/persistent/subscription/sensor-profiles/sensor-profile/state/sensor-group",
+                              "type": "string",
+                              "label": "sensor-group",
+                              "readonly": true
+                            },
+                            {
+                              "path": "/telemetry-system/subscriptions/persistent/subscription/sensor-profiles/sensor-profile/state/suppress-redundant",
+                              "type": "boolean",
+                              "label": "suppress-redundant",
+                              "readonly": true
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "path": "/telemetry-system/subscriptions/persistent/subscription/state",
+                  "type": "group",
+                  "label": "state",
+                  "readonly": true,
+                  "fields": [
+                    {
+                      "path": "/telemetry-system/subscriptions/persistent/subscription/state/encoding",
+                      "type": "enum",
+                      "label": "encoding",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/telemetry-system/subscriptions/persistent/subscription/state/local-source-address",
+                      "type": "string",
+                      "label": "local-source-address",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/telemetry-system/subscriptions/persistent/subscription/state/originated-qos-marking",
+                      "type": "number",
+                      "label": "originated-qos-marking",
+                      "maximum": 63,
+                      "readonly": true
+                    },
+                    {
+                      "path": "/telemetry-system/subscriptions/persistent/subscription/state/protocol",
+                      "type": "enum",
+                      "label": "protocol",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/telemetry-system/subscriptions/persistent/subscription/state/subscription-id",
+                      "type": "number",
+                      "label": "subscription-id",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/telemetry-system/subscriptions/persistent/subscription/state/subscription-name",
+                      "type": "string",
+                      "label": "subscription-name",
+                      "readonly": true
+                    }
+                  ]
+                },
+                {
+                  "path": "/telemetry-system/subscriptions/persistent/subscription/subscription-name",
+                  "type": "string",
+                  "label": "subscription-name",
+                  "isKey": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

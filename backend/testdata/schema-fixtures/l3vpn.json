@@ -1,0 +1,33 @@
+{
+  "module": "l3vpn",
+  "title": "l3vpn",
+  "vendor": "huawei",
+  "fields": [
+    {
+      "path": "/l3vpn/statistics",
+      "type": "group",
+      "label": "statistics",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/l3vpn/statistics/ipv4-vpn-number",
+          "type": "number",
+          "label": "ipv4-vpn-number",
+          "readonly": true
+        },
+        {
+          "path": "/l3vpn/statistics/ipv6-vpn-number",
+          "type": "number",
+          "label": "ipv6-vpn-number",
+          "readonly": true
+        },
+        {
+          "path": "/l3vpn/statistics/vpn-total-number",
+          "type": "number",
+          "label": "vpn-total-number",
+          "readonly": true
+        }
+      ]
+    }
+  ]
+}

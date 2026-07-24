@@ -1,0 +1,480 @@
+{
+  "module": "microsegmentation",
+  "title": "microsegmentation",
+  "vendor": "huawei",
+  "fields": [
+    {
+      "path": "/microsegmentation/apply-global-policys",
+      "type": "group",
+      "label": "apply-global-policys",
+      "fields": [
+        {
+          "path": "/microsegmentation/apply-global-policys/apply-global-policy",
+          "type": "list",
+          "label": "apply-global-policy",
+          "fields": [
+            {
+              "path": "/microsegmentation/apply-global-policys/apply-global-policy/policy-name",
+              "type": "string",
+              "label": "policy-name",
+              "isKey": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/microsegmentation/endpoint-groups",
+      "type": "group",
+      "label": "endpoint-groups",
+      "when": "(../global/enable = \"true\")",
+      "fields": [
+        {
+          "path": "/microsegmentation/endpoint-groups/endpoint-group",
+          "type": "list",
+          "label": "endpoint-group",
+          "fields": [
+            {
+              "path": "/microsegmentation/endpoint-groups/endpoint-group/any-member",
+              "type": "group",
+              "label": "any-member",
+              "fields": [
+                {
+                  "path": "/microsegmentation/endpoint-groups/endpoint-group/any-member/ip-any",
+                  "type": "string",
+                  "label": "ip-any"
+                },
+                {
+                  "path": "/microsegmentation/endpoint-groups/endpoint-group/any-member/ipv6-any",
+                  "type": "string",
+                  "label": "ipv6-any"
+                }
+              ]
+            },
+            {
+              "path": "/microsegmentation/endpoint-groups/endpoint-group/description",
+              "type": "string",
+              "label": "description"
+            },
+            {
+              "path": "/microsegmentation/endpoint-groups/endpoint-group/intra-epg-behavior",
+              "type": "enum",
+              "label": "intra-epg-behavior",
+              "options": [
+                {
+                  "label": "deny",
+                  "value": "deny"
+                },
+                {
+                  "label": "none",
+                  "value": "none"
+                },
+                {
+                  "label": "permit",
+                  "value": "permit"
+                }
+              ]
+            },
+            {
+              "path": "/microsegmentation/endpoint-groups/endpoint-group/ip-members",
+              "type": "group",
+              "label": "ip-members",
+              "fields": [
+                {
+                  "path": "/microsegmentation/endpoint-groups/endpoint-group/ip-members/ip-member",
+                  "type": "list",
+                  "label": "ip-member",
+                  "fields": [
+                    {
+                      "path": "/microsegmentation/endpoint-groups/endpoint-group/ip-members/ip-member/ip-address",
+                      "type": "string",
+                      "label": "ip-address",
+                      "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?",
+                      "isKey": true
+                    },
+                    {
+                      "path": "/microsegmentation/endpoint-groups/endpoint-group/ip-members/ip-member/prefix-len",
+                      "type": "number",
+                      "label": "prefix-len",
+                      "maximum": 32,
+                      "isKey": true
+                    },
+                    {
+                      "path": "/microsegmentation/endpoint-groups/endpoint-group/ip-members/ip-member/vpn-name",
+                      "type": "string",
+                      "label": "vpn-name",
+                      "must": [
+                        {
+                          "expr": "/ni:network-instance/ni:instances/ni:instance[ni:name=current()]/l3vpn:afs/l3vpn:af[l3vpn:type='ipv4-unicast']"
+                        }
+                      ],
+                      "isKey": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/microsegmentation/endpoint-groups/endpoint-group/ipv6-members",
+              "type": "group",
+              "label": "ipv6-members",
+              "fields": [
+                {
+                  "path": "/microsegmentation/endpoint-groups/endpoint-group/ipv6-members/ipv6-member",
+                  "type": "list",
+                  "label": "ipv6-member",
+                  "fields": [
+                    {
+                      "path": "/microsegmentation/endpoint-groups/endpoint-group/ipv6-members/ipv6-member/ipv6-address",
+                      "type": "string",
+                      "label": "ipv6-address",
+                      "pattern": "((:|[0-9a-fA-F]{0,4}):)([0-9a-fA-F]{0,4}:){0,5}((([0-9a-fA-F]{0,4}:)?(:|[0-9a-fA-F]{0,4}))|(((25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])))(%[\\p{N}\\p{L}]+)?",
+                      "isKey": true
+                    },
+                    {
+                      "path": "/microsegmentation/endpoint-groups/endpoint-group/ipv6-members/ipv6-member/prefix-len",
+                      "type": "number",
+                      "label": "prefix-len",
+                      "maximum": 128,
+                      "isKey": true
+                    },
+                    {
+                      "path": "/microsegmentation/endpoint-groups/endpoint-group/ipv6-members/ipv6-member/vpn-name",
+                      "type": "string",
+                      "label": "vpn-name",
+                      "must": [
+                        {
+                          "expr": "/ni:network-instance/ni:instances/ni:instance[ni:name=current()]/l3vpn:afs/l3vpn:af[l3vpn:type='ipv6-unicast']"
+                        }
+                      ],
+                      "isKey": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/microsegmentation/endpoint-groups/endpoint-group/segment-id",
+              "type": "number",
+              "label": "segment-id",
+              "minimum": 1,
+              "maximum": 65535,
+              "isKey": true
+            },
+            {
+              "path": "/microsegmentation/endpoint-groups/endpoint-group/segment-name",
+              "type": "string",
+              "label": "segment-name",
+              "supportFilter": true
+            },
+            {
+              "path": "/microsegmentation/endpoint-groups/endpoint-group/statistics-enable",
+              "type": "boolean",
+              "label": "statistics-enable"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/microsegmentation/global",
+      "type": "group",
+      "label": "global",
+      "fields": [
+        {
+          "path": "/microsegmentation/global/default-epg-action",
+          "type": "enum",
+          "label": "default-epg-action",
+          "options": [
+            {
+              "label": "deny",
+              "value": "deny"
+            },
+            {
+              "label": "permit",
+              "value": "permit"
+            }
+          ],
+          "when": "(../enable = \"true\")"
+        },
+        {
+          "path": "/microsegmentation/global/enable",
+          "type": "boolean",
+          "label": "enable"
+        },
+        {
+          "path": "/microsegmentation/global/epg-logging",
+          "type": "enum",
+          "label": "epg-logging",
+          "options": [
+            {
+              "label": "all-logging",
+              "value": "all-logging"
+            },
+            {
+              "label": "deny-logging",
+              "value": "deny-logging"
+            },
+            {
+              "label": "permit-logging",
+              "value": "permit-logging"
+            }
+          ],
+          "when": "(../enable = \"true\")"
+        },
+        {
+          "path": "/microsegmentation/global/policy-statistics-enable",
+          "type": "boolean",
+          "label": "policy-statistics-enable"
+        },
+        {
+          "path": "/microsegmentation/global/same-epg-action",
+          "type": "enum",
+          "label": "same-epg-action",
+          "options": [
+            {
+              "label": "deny",
+              "value": "deny"
+            },
+            {
+              "label": "none",
+              "value": "none"
+            },
+            {
+              "label": "permit",
+              "value": "permit"
+            }
+          ],
+          "when": "(../enable = \"true\")"
+        },
+        {
+          "path": "/microsegmentation/global/unknown-epg-action",
+          "type": "enum",
+          "label": "unknown-epg-action",
+          "options": [
+            {
+              "label": "deny",
+              "value": "deny"
+            },
+            {
+              "label": "permit",
+              "value": "permit"
+            }
+          ],
+          "when": "(../enable = \"true\")"
+        }
+      ]
+    },
+    {
+      "path": "/microsegmentation/segment-behaviors",
+      "type": "group",
+      "label": "segment-behaviors",
+      "when": "(../global/enable = \"true\")",
+      "fields": [
+        {
+          "path": "/microsegmentation/segment-behaviors/segment-behavior",
+          "type": "list",
+          "label": "segment-behavior",
+          "fields": [
+            {
+              "path": "/microsegmentation/segment-behaviors/segment-behavior/behavior-name",
+              "type": "string",
+              "label": "behavior-name",
+              "isKey": true
+            },
+            {
+              "path": "/microsegmentation/segment-behaviors/segment-behavior/statistics-enable",
+              "type": "boolean",
+              "label": "statistics-enable"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/microsegmentation/segment-classifiers",
+      "type": "group",
+      "label": "segment-classifiers",
+      "when": "(../global/enable = \"true\")",
+      "fields": [
+        {
+          "path": "/microsegmentation/segment-classifiers/segment-classifier",
+          "type": "list",
+          "label": "segment-classifier",
+          "fields": [
+            {
+              "path": "/microsegmentation/segment-classifiers/segment-classifier/classifier-name",
+              "type": "string",
+              "label": "classifier-name",
+              "isKey": true
+            },
+            {
+              "path": "/microsegmentation/segment-classifiers/segment-classifier/rules",
+              "type": "group",
+              "label": "rules",
+              "fields": [
+                {
+                  "path": "/microsegmentation/segment-classifiers/segment-classifier/rules/rule",
+                  "type": "list",
+                  "label": "rule",
+                  "fields": [
+                    {
+                      "path": "/microsegmentation/segment-classifiers/segment-classifier/rules/rule/action",
+                      "type": "enum",
+                      "label": "action",
+                      "options": [
+                        {
+                          "label": "deny",
+                          "value": "deny"
+                        },
+                        {
+                          "label": "permit",
+                          "value": "permit"
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/microsegmentation/segment-classifiers/segment-classifier/rules/rule/destination-port-begin",
+                      "type": "number",
+                      "label": "destination-port-begin",
+                      "maximum": 65535,
+                      "must": [
+                        {
+                          "expr": "(../protocol=6 or ../protocol=17) and (../destination-port-begin \u003c= ../destination-port-end) and not(../destination-port-begin=0 and ../destination-port-end=65535)"
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/microsegmentation/segment-classifiers/segment-classifier/rules/rule/destination-port-end",
+                      "type": "number",
+                      "label": "destination-port-end",
+                      "maximum": 65535,
+                      "must": [
+                        {
+                          "expr": "(../protocol=6 or ../protocol=17) and (../destination-port-begin \u003c= ../destination-port-end) and not(../destination-port-begin=0 and ../destination-port-end=65535)"
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/microsegmentation/segment-classifiers/segment-classifier/rules/rule/destination-segment-id",
+                      "type": "number",
+                      "label": "destination-segment-id",
+                      "minimum": 1,
+                      "maximum": 65535
+                    },
+                    {
+                      "path": "/microsegmentation/segment-classifiers/segment-classifier/rules/rule/logging-enable",
+                      "type": "boolean",
+                      "label": "logging-enable"
+                    },
+                    {
+                      "path": "/microsegmentation/segment-classifiers/segment-classifier/rules/rule/priority",
+                      "type": "number",
+                      "label": "priority",
+                      "maximum": 4095,
+                      "isKey": true
+                    },
+                    {
+                      "path": "/microsegmentation/segment-classifiers/segment-classifier/rules/rule/protocol",
+                      "type": "number",
+                      "label": "protocol",
+                      "maximum": 255
+                    },
+                    {
+                      "path": "/microsegmentation/segment-classifiers/segment-classifier/rules/rule/source-port-begin",
+                      "type": "number",
+                      "label": "source-port-begin",
+                      "maximum": 65535,
+                      "must": [
+                        {
+                          "expr": "(../protocol=6 or ../protocol=17) and (../source-port-begin \u003c= ../source-port-end) and not(../source-port-begin=0 and ../source-port-end=65535)"
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/microsegmentation/segment-classifiers/segment-classifier/rules/rule/source-port-end",
+                      "type": "number",
+                      "label": "source-port-end",
+                      "maximum": 65535,
+                      "must": [
+                        {
+                          "expr": "(../protocol=6 or ../protocol=17) and (../source-port-begin \u003c= ../source-port-end) and not(../source-port-begin=0 and ../source-port-end=65535)"
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/microsegmentation/segment-classifiers/segment-classifier/rules/rule/source-segment-id",
+                      "type": "number",
+                      "label": "source-segment-id",
+                      "minimum": 1,
+                      "maximum": 65535
+                    },
+                    {
+                      "path": "/microsegmentation/segment-classifiers/segment-classifier/rules/rule/statistics-enable",
+                      "type": "boolean",
+                      "label": "statistics-enable"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/microsegmentation/segment-policys",
+      "type": "group",
+      "label": "segment-policys",
+      "when": "(../global/enable = \"true\")",
+      "fields": [
+        {
+          "path": "/microsegmentation/segment-policys/segment-policy",
+          "type": "list",
+          "label": "segment-policy",
+          "fields": [
+            {
+              "path": "/microsegmentation/segment-policys/segment-policy/classifier-behavior-combinations",
+              "type": "group",
+              "label": "classifier-behavior-combinations",
+              "fields": [
+                {
+                  "path": "/microsegmentation/segment-policys/segment-policy/classifier-behavior-combinations/classifier-behavior-combination",
+                  "type": "list",
+                  "label": "classifier-behavior-combination",
+                  "fields": [
+                    {
+                      "path": "/microsegmentation/segment-policys/segment-policy/classifier-behavior-combinations/classifier-behavior-combination/behavior-name",
+                      "type": "string",
+                      "label": "behavior-name",
+                      "required": true
+                    },
+                    {
+                      "path": "/microsegmentation/segment-policys/segment-policy/classifier-behavior-combinations/classifier-behavior-combination/classifier-name",
+                      "type": "string",
+                      "label": "classifier-name",
+                      "isKey": true
+                    },
+                    {
+                      "path": "/microsegmentation/segment-policys/segment-policy/classifier-behavior-combinations/classifier-behavior-combination/precedence",
+                      "type": "number",
+                      "label": "precedence",
+                      "required": true,
+                      "maximum": 511
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/microsegmentation/segment-policys/segment-policy/policy-name",
+              "type": "string",
+              "label": "policy-name",
+              "isKey": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

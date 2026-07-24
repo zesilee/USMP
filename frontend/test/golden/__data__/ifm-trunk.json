@@ -1,0 +1,29 @@
+{
+  "module": "ifm-trunk",
+  "tabs": [
+    {
+      "name": "global",
+      "kind": "form"
+    }
+  ],
+  "lists": {},
+  "tree": [
+    {
+      "path": "/ifm-trunk/global",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/ifm-trunk/global/trunk-member-trap-enable",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "module": "analysis-collector",
+  "title": "analysis-collector",
+  "vendor": "huawei",
+  "fields": [
+    {
+      "path": "/analysis-collector/collectors",
+      "type": "group",
+      "label": "collectors",
+      "fields": [
+        {
+          "path": "/analysis-collector/collectors/collector",
+          "type": "list",
+          "label": "collector",
+          "fields": [
+            {
+              "path": "/analysis-collector/collectors/collector/dst-port",
+              "type": "number",
+              "label": "dst-port",
+              "minimum": 1,
+              "maximum": 65535
+            },
+            {
+              "path": "/analysis-collector/collectors/collector/host-address",
+              "type": "string",
+              "label": "host-address",
+              "required": true
+            },
+            {
+              "path": "/analysis-collector/collectors/collector/id",
+              "type": "number",
+              "label": "id",
+              "minimum": 1,
+              "maximum": 5,
+              "isKey": true
+            },
+            {
+              "path": "/analysis-collector/collectors/collector/src-address",
+              "type": "string",
+              "label": "src-address",
+              "required": true
+            },
+            {
+              "path": "/analysis-collector/collectors/collector/vpn-name",
+              "type": "string",
+              "label": "vpn-name",
+              "must": [
+                {
+                  "expr": "/ni:network-instance/ni:instances/ni:instance[ni:name=current()]/l3vpn:afs/l3vpn:af[l3vpn:type='ipv4-unicast']\nor /ni:network-instance/ni:instances/ni:instance[ni:name=current()]/l3vpn:afs/l3vpn:af[l3vpn:type='ipv6-unicast']"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

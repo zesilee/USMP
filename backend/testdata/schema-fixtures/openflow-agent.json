@@ -1,0 +1,212 @@
+{
+  "module": "openflow-agent",
+  "title": "openflow-agent",
+  "vendor": "huawei",
+  "fields": [
+    {
+      "path": "/openflow-agent/priority",
+      "type": "group",
+      "label": "priority",
+      "fields": [
+        {
+          "path": "/openflow-agent/priority/dscp",
+          "type": "number",
+          "label": "dscp",
+          "maximum": 63
+        }
+      ]
+    },
+    {
+      "path": "/openflow-agent/sdnagent",
+      "type": "group",
+      "label": "sdnagent",
+      "fields": [
+        {
+          "path": "/openflow-agent/sdnagent/controllers",
+          "type": "group",
+          "label": "controllers",
+          "fields": [
+            {
+              "path": "/openflow-agent/sdnagent/controllers/controller",
+              "type": "list",
+              "label": "controller",
+              "fields": [
+                {
+                  "path": "/openflow-agent/sdnagent/controllers/controller/controller-address",
+                  "type": "string",
+                  "label": "controller-address",
+                  "isKey": true
+                },
+                {
+                  "path": "/openflow-agent/sdnagent/controllers/controller/openflow-attributes",
+                  "type": "group",
+                  "label": "openflow-attributes",
+                  "fields": [
+                    {
+                      "path": "/openflow-agent/sdnagent/controllers/controller/openflow-attributes/agent-address",
+                      "type": "string",
+                      "label": "agent-address",
+                      "must": [
+                        {
+                          "expr": "(not(contains(., ':')) and not(contains(../../controller-address, ':'))) or (contains(., ':') and contains(../../controller-address, ':'))"
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/openflow-agent/sdnagent/controllers/controller/openflow-attributes/echo-interval",
+                      "type": "number",
+                      "label": "echo-interval",
+                      "minimum": 5,
+                      "maximum": 60
+                    },
+                    {
+                      "path": "/openflow-agent/sdnagent/controllers/controller/openflow-attributes/keychain-name",
+                      "type": "string",
+                      "label": "keychain-name"
+                    },
+                    {
+                      "path": "/openflow-agent/sdnagent/controllers/controller/openflow-attributes/ssl-policy-name",
+                      "type": "string",
+                      "label": "ssl-policy-name"
+                    }
+                  ],
+                  "presence": true
+                },
+                {
+                  "path": "/openflow-agent/sdnagent/controllers/controller/vpn-name",
+                  "type": "string",
+                  "label": "vpn-name",
+                  "isKey": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "path": "/openflow-agent/sdnagent/description",
+          "type": "string",
+          "label": "description"
+        },
+        {
+          "path": "/openflow-agent/sdnagent/source-ip",
+          "type": "group",
+          "label": "source-ip",
+          "fields": [
+            {
+              "path": "/openflow-agent/sdnagent/source-ip/source-address",
+              "type": "string",
+              "label": "source-address",
+              "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?"
+            }
+          ]
+        },
+        {
+          "path": "/openflow-agent/sdnagent/source-ipv6",
+          "type": "group",
+          "label": "source-ipv6",
+          "fields": [
+            {
+              "path": "/openflow-agent/sdnagent/source-ipv6/source-address",
+              "type": "string",
+              "label": "source-address",
+              "pattern": "((:|[0-9a-fA-F]{0,4}):)([0-9a-fA-F]{0,4}:){0,5}((([0-9a-fA-F]{0,4}:)?(:|[0-9a-fA-F]{0,4}))|(((25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])))(%[\\p{N}\\p{L}]+)?"
+            }
+          ]
+        }
+      ],
+      "presence": true
+    },
+    {
+      "path": "/openflow-agent/session-infos",
+      "type": "group",
+      "label": "session-infos",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/openflow-agent/session-infos/session-info",
+          "type": "list",
+          "label": "session-info",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/openflow-agent/session-infos/session-info/agent-address",
+              "type": "string",
+              "label": "agent-address",
+              "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?",
+              "readonly": true
+            },
+            {
+              "path": "/openflow-agent/session-infos/session-info/controller-address",
+              "type": "string",
+              "label": "controller-address",
+              "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?",
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/openflow-agent/session-infos/session-info/role",
+              "type": "enum",
+              "label": "role",
+              "options": [
+                {
+                  "label": "EQUAL",
+                  "value": "EQUAL"
+                },
+                {
+                  "label": "MASTER",
+                  "value": "MASTER"
+                },
+                {
+                  "label": "NOCHANGE",
+                  "value": "NOCHANGE"
+                },
+                {
+                  "label": "SLAVE",
+                  "value": "SLAVE"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "path": "/openflow-agent/session-infos/session-info/state",
+              "type": "enum",
+              "label": "state",
+              "options": [
+                {
+                  "label": "CONNECTED",
+                  "value": "CONNECTED"
+                },
+                {
+                  "label": "INIT",
+                  "value": "INIT"
+                },
+                {
+                  "label": "REGISTERED",
+                  "value": "REGISTERED"
+                },
+                {
+                  "label": "TOCREATE",
+                  "value": "TOCREATE"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "path": "/openflow-agent/session-infos/session-info/up-time",
+              "type": "number",
+              "label": "up-time",
+              "readonly": true
+            },
+            {
+              "path": "/openflow-agent/session-infos/session-info/vpn-name",
+              "type": "string",
+              "label": "vpn-name",
+              "readonly": true,
+              "isKey": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

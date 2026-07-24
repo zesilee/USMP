@@ -1,0 +1,3054 @@
+{
+  "module": "acl",
+  "title": "acl",
+  "vendor": "huawei",
+  "fields": [
+    {
+      "path": "/acl/group6s",
+      "type": "group",
+      "label": "group6s",
+      "fields": [
+        {
+          "path": "/acl/group6s/group6",
+          "type": "list",
+          "label": "group6",
+          "fields": [
+            {
+              "path": "/acl/group6s/group6/description",
+              "type": "string",
+              "label": "description",
+              "pattern": "[^\\?\\s](([^\\?\\s]*)|[^\\t\\?]*[^\\?\\s])"
+            },
+            {
+              "path": "/acl/group6s/group6/identity",
+              "type": "string",
+              "label": "identity",
+              "pattern": "([1-3]\\d{3})|([6-9]\\d{3})|([0-9a-zA-Z]([^\\s]*))",
+              "isKey": true
+            },
+            {
+              "path": "/acl/group6s/group6/match-order",
+              "type": "enum",
+              "label": "match-order",
+              "options": [
+                {
+                  "label": "auto",
+                  "value": "auto"
+                },
+                {
+                  "label": "config",
+                  "value": "config"
+                }
+              ],
+              "supportFilter": true
+            },
+            {
+              "path": "/acl/group6s/group6/rule-advances",
+              "type": "group",
+              "label": "rule-advances",
+              "when": "(../type = 'advance')",
+              "fields": [
+                {
+                  "path": "/acl/group6s/group6/rule-advances/rule-advance",
+                  "type": "list",
+                  "label": "rule-advance",
+                  "fields": [
+                    {
+                      "path": "/acl/group6s/group6/rule-advances/rule-advance/action",
+                      "type": "enum",
+                      "label": "action",
+                      "required": true,
+                      "options": [
+                        {
+                          "label": "deny",
+                          "value": "deny"
+                        },
+                        {
+                          "label": "permit",
+                          "value": "permit"
+                        }
+                      ],
+                      "supportFilter": true
+                    },
+                    {
+                      "path": "/acl/group6s/group6/rule-advances/rule-advance/active-status",
+                      "type": "enum",
+                      "label": "active-status",
+                      "options": [
+                        {
+                          "label": "active",
+                          "value": "active"
+                        },
+                        {
+                          "label": "not-in-service",
+                          "value": "not-in-service"
+                        },
+                        {
+                          "label": "not-ready",
+                          "value": "not-ready"
+                        }
+                      ],
+                      "readonly": true
+                    },
+                    {
+                      "path": "/acl/group6s/group6/rule-advances/rule-advance/description",
+                      "type": "string",
+                      "label": "description",
+                      "pattern": "[^\\?\\s](([^\\?\\s]*)|[^\\t\\?]*[^\\?\\s])",
+                      "supportFilter": true
+                    },
+                    {
+                      "path": "/acl/group6s/group6/rule-advances/rule-advance/dest",
+                      "type": "choice",
+                      "label": "dest",
+                      "cases": [
+                        {
+                          "name": "ip",
+                          "label": "ip",
+                          "fields": [
+                            {
+                              "path": "/acl/group6s/group6/rule-advances/rule-advance/dest-ipaddr",
+                              "type": "string",
+                              "label": "dest-ipaddr",
+                              "required": true,
+                              "pattern": "((:|[0-9a-fA-F]{0,4}):)([0-9a-fA-F]{0,4}:){0,5}((([0-9a-fA-F]{0,4}:)?(:|[0-9a-fA-F]{0,4}))|(((25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])))(%[\\p{N}\\p{L}]+)?"
+                            },
+                            {
+                              "path": "/acl/group6s/group6/rule-advances/rule-advance/dest-ipaddr-mask",
+                              "type": "choice",
+                              "label": "dest-ipaddr-mask",
+                              "cases": [
+                                {
+                                  "name": "negative-mask",
+                                  "label": "negative-mask",
+                                  "fields": [
+                                    {
+                                      "path": "/acl/group6s/group6/rule-advances/rule-advance/dest-wild",
+                                      "type": "string",
+                                      "label": "dest-wild",
+                                      "pattern": "((:|[0-9a-fA-F]{0,4}):)([0-9a-fA-F]{0,4}:){0,5}((([0-9a-fA-F]{0,4}:)?(:|[0-9a-fA-F]{0,4}))|(((25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])))(%[\\p{N}\\p{L}]+)?"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "name": "positive-mask-len",
+                                  "label": "positive-mask-len",
+                                  "fields": [
+                                    {
+                                      "path": "/acl/group6s/group6/rule-advances/rule-advance/dest-mask-len",
+                                      "type": "number",
+                                      "label": "dest-mask-len",
+                                      "minimum": 1,
+                                      "maximum": 128
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/acl/group6s/group6/rule-advances/rule-advance/dest-port",
+                      "type": "choice",
+                      "label": "dest-port",
+                      "cases": [
+                        {
+                          "name": "not-equal",
+                          "label": "not-equal",
+                          "fields": [
+                            {
+                              "path": "/acl/group6s/group6/rule-advances/rule-advance/dest-port-value",
+                              "type": "number",
+                              "label": "dest-port-value",
+                              "when": "../protocol=6 or ../protocol=17"
+                            }
+                          ]
+                        },
+                        {
+                          "name": "range",
+                          "label": "range",
+                          "fields": [
+                            {
+                              "path": "/acl/group6s/group6/rule-advances/rule-advance/dest-port-begin",
+                              "type": "number",
+                              "label": "dest-port-begin",
+                              "when": "../protocol=6 or ../protocol=17",
+                              "must": [
+                                {
+                                  "expr": "((../dest-port-begin and ../dest-port-end) and (../dest-port-begin\u003c=../dest-port-end) and not(../dest-port-begin=0 and ../dest-port-end=65535)) or (not (../dest-port-begin) and  not (../dest-port-end))"
+                                },
+                                {
+                                  "expr": "(not(../fragment-type))"
+                                }
+                              ]
+                            },
+                            {
+                              "path": "/acl/group6s/group6/rule-advances/rule-advance/dest-port-end",
+                              "type": "number",
+                              "label": "dest-port-end",
+                              "when": "../protocol=6 or ../protocol=17",
+                              "must": [
+                                {
+                                  "expr": "((../dest-port-begin and ../dest-port-end) and (../dest-port-begin\u003c=../dest-port-end) and not(../dest-port-begin=0 and ../dest-port-end=65535)) or (not (../dest-port-begin) and  not (../dest-port-end))"
+                                },
+                                {
+                                  "expr": "(not(../fragment-type))"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/acl/group6s/group6/rule-advances/rule-advance/fragment-type",
+                      "type": "enum",
+                      "label": "fragment-type",
+                      "options": [
+                        {
+                          "label": "fragment",
+                          "value": "fragment"
+                        }
+                      ],
+                      "must": [
+                        {
+                          "expr": "(not(../dest-port-begin) and not(../dest-port-end) and not(../source-port-begin) and not(../source-port-end))"
+                        }
+                      ],
+                      "supportFilter": true
+                    },
+                    {
+                      "path": "/acl/group6s/group6/rule-advances/rule-advance/icmp-code",
+                      "type": "number",
+                      "label": "icmp-code",
+                      "maximum": 255,
+                      "when": "../protocol=58 and ../icmp-type"
+                    },
+                    {
+                      "path": "/acl/group6s/group6/rule-advances/rule-advance/icmp-type",
+                      "type": "number",
+                      "label": "icmp-type",
+                      "maximum": 255,
+                      "when": "../protocol=58"
+                    },
+                    {
+                      "path": "/acl/group6s/group6/rule-advances/rule-advance/icmp-type-end",
+                      "type": "number",
+                      "label": "icmp-type-end",
+                      "maximum": 255,
+                      "when": "../protocol=58 and ../icmp-type"
+                    },
+                    {
+                      "path": "/acl/group6s/group6/rule-advances/rule-advance/id",
+                      "type": "number",
+                      "label": "id",
+                      "required": true,
+                      "maximum": 4294967294,
+                      "when": "../../../match-order = 'config'",
+                      "supportFilter": true
+                    },
+                    {
+                      "path": "/acl/group6s/group6/rule-advances/rule-advance/log-enable",
+                      "type": "boolean",
+                      "label": "log-enable"
+                    },
+                    {
+                      "path": "/acl/group6s/group6/rule-advances/rule-advance/match-statistics",
+                      "type": "group",
+                      "label": "match-statistics",
+                      "readonly": true,
+                      "fields": [
+                        {
+                          "path": "/acl/group6s/group6/rule-advances/rule-advance/match-statistics/match-count",
+                          "type": "number",
+                          "label": "match-count",
+                          "readonly": true
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/acl/group6s/group6/rule-advances/rule-advance/name",
+                      "type": "string",
+                      "label": "name",
+                      "pattern": "[^_\\s][^\\s]*",
+                      "isKey": true
+                    },
+                    {
+                      "path": "/acl/group6s/group6/rule-advances/rule-advance/packets-priority",
+                      "type": "choice",
+                      "label": "packets-priority",
+                      "cases": [
+                        {
+                          "name": "dscp",
+                          "label": "dscp",
+                          "fields": [
+                            {
+                              "path": "/acl/group6s/group6/rule-advances/rule-advance/dscp",
+                              "type": "number",
+                              "label": "dscp",
+                              "maximum": 63
+                            }
+                          ]
+                        },
+                        {
+                          "name": "tos",
+                          "label": "tos",
+                          "fields": [
+                            {
+                              "path": "/acl/group6s/group6/rule-advances/rule-advance/precedence",
+                              "type": "number",
+                              "label": "precedence",
+                              "maximum": 7
+                            },
+                            {
+                              "path": "/acl/group6s/group6/rule-advances/rule-advance/tos",
+                              "type": "number",
+                              "label": "tos",
+                              "maximum": 15
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/acl/group6s/group6/rule-advances/rule-advance/priority",
+                      "type": "number",
+                      "label": "priority",
+                      "maximum": 4294967294,
+                      "readonly": true
+                    },
+                    {
+                      "path": "/acl/group6s/group6/rule-advances/rule-advance/protocol-type",
+                      "type": "choice",
+                      "label": "protocol-type",
+                      "cases": [
+                        {
+                          "name": "single",
+                          "label": "single",
+                          "fields": [
+                            {
+                              "path": "/acl/group6s/group6/rule-advances/rule-advance/protocol",
+                              "type": "number",
+                              "label": "protocol",
+                              "supportFilter": true
+                            }
+                          ]
+                        },
+                        {
+                          "name": "zero",
+                          "label": "zero",
+                          "fields": [
+                            {
+                              "path": "/acl/group6s/group6/rule-advances/rule-advance/hoport",
+                              "type": "string",
+                              "label": "hoport"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/acl/group6s/group6/rule-advances/rule-advance/source",
+                      "type": "choice",
+                      "label": "source",
+                      "cases": [
+                        {
+                          "name": "ip",
+                          "label": "ip",
+                          "fields": [
+                            {
+                              "path": "/acl/group6s/group6/rule-advances/rule-advance/source-ipaddr",
+                              "type": "string",
+                              "label": "source-ipaddr",
+                              "required": true,
+                              "pattern": "((:|[0-9a-fA-F]{0,4}):)([0-9a-fA-F]{0,4}:){0,5}((([0-9a-fA-F]{0,4}:)?(:|[0-9a-fA-F]{0,4}))|(((25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])))(%[\\p{N}\\p{L}]+)?"
+                            },
+                            {
+                              "path": "/acl/group6s/group6/rule-advances/rule-advance/source-ipaddr-mask",
+                              "type": "choice",
+                              "label": "source-ipaddr-mask",
+                              "cases": [
+                                {
+                                  "name": "negative-mask",
+                                  "label": "negative-mask",
+                                  "fields": [
+                                    {
+                                      "path": "/acl/group6s/group6/rule-advances/rule-advance/source-wild",
+                                      "type": "string",
+                                      "label": "source-wild",
+                                      "pattern": "((:|[0-9a-fA-F]{0,4}):)([0-9a-fA-F]{0,4}:){0,5}((([0-9a-fA-F]{0,4}:)?(:|[0-9a-fA-F]{0,4}))|(((25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])))(%[\\p{N}\\p{L}]+)?"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "name": "positive-mask-len",
+                                  "label": "positive-mask-len",
+                                  "fields": [
+                                    {
+                                      "path": "/acl/group6s/group6/rule-advances/rule-advance/source-mask-len",
+                                      "type": "number",
+                                      "label": "source-mask-len",
+                                      "minimum": 1,
+                                      "maximum": 128
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "name": "ip-pool",
+                          "label": "ip-pool",
+                          "fields": [
+                            {
+                              "path": "/acl/group6s/group6/rule-advances/rule-advance/source-pool6-name",
+                              "type": "string",
+                              "label": "source-pool6-name",
+                              "supportFilter": true
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/acl/group6s/group6/rule-advances/rule-advance/source-port",
+                      "type": "choice",
+                      "label": "source-port",
+                      "cases": [
+                        {
+                          "name": "not-equal",
+                          "label": "not-equal",
+                          "fields": [
+                            {
+                              "path": "/acl/group6s/group6/rule-advances/rule-advance/source-port-value",
+                              "type": "number",
+                              "label": "source-port-value",
+                              "when": "../protocol=6 or ../protocol=17"
+                            }
+                          ]
+                        },
+                        {
+                          "name": "range",
+                          "label": "range",
+                          "fields": [
+                            {
+                              "path": "/acl/group6s/group6/rule-advances/rule-advance/source-port-begin",
+                              "type": "number",
+                              "label": "source-port-begin",
+                              "when": "../protocol=6 or ../protocol=17",
+                              "must": [
+                                {
+                                  "expr": "((../source-port-begin and ../source-port-end) and (../source-port-begin\u003c=../source-port-end) and not(../source-port-begin=0 and ../source-port-end=65535)) or (not (../source-port-begin) and  not (../source-port-end))"
+                                },
+                                {
+                                  "expr": "(not(../fragment-type))"
+                                }
+                              ]
+                            },
+                            {
+                              "path": "/acl/group6s/group6/rule-advances/rule-advance/source-port-end",
+                              "type": "number",
+                              "label": "source-port-end",
+                              "when": "(../protocol=6 or ../protocol=17)",
+                              "must": [
+                                {
+                                  "expr": "((../source-port-begin and ../source-port-end) and (../source-port-begin\u003c=../source-port-end) and not(../source-port-begin=0 and ../source-port-end=65535)) or (not (../source-port-begin) and  not (../source-port-end))"
+                                },
+                                {
+                                  "expr": "(not(../fragment-type))"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/acl/group6s/group6/rule-advances/rule-advance/tcp-flag",
+                      "type": "choice",
+                      "label": "tcp-flag",
+                      "cases": [
+                        {
+                          "name": "established",
+                          "label": "established",
+                          "fields": [
+                            {
+                              "path": "/acl/group6s/group6/rule-advances/rule-advance/established",
+                              "type": "string",
+                              "label": "established",
+                              "when": "../protocol=6"
+                            }
+                          ]
+                        },
+                        {
+                          "name": "mask",
+                          "label": "mask",
+                          "fields": [
+                            {
+                              "path": "/acl/group6s/group6/rule-advances/rule-advance/tcp-flag-mask",
+                              "type": "number",
+                              "label": "tcp-flag-mask",
+                              "maximum": 63,
+                              "when": "../protocol=6 and ../tcp-flag-value"
+                            },
+                            {
+                              "path": "/acl/group6s/group6/rule-advances/rule-advance/tcp-flag-value",
+                              "type": "number",
+                              "label": "tcp-flag-value",
+                              "maximum": 63,
+                              "when": "../protocol=6"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/acl/group6s/group6/rule-advances/rule-advance/time-range-name",
+                      "type": "string",
+                      "label": "time-range-name"
+                    },
+                    {
+                      "path": "/acl/group6s/group6/rule-advances/rule-advance/vni",
+                      "type": "number",
+                      "label": "vni",
+                      "minimum": 1,
+                      "maximum": 16777215,
+                      "when": "../protocol=17",
+                      "supportFilter": true
+                    },
+                    {
+                      "path": "/acl/group6s/group6/rule-advances/rule-advance/vpn",
+                      "type": "choice",
+                      "label": "vpn",
+                      "cases": [
+                        {
+                          "name": "vpn-any",
+                          "label": "vpn-any",
+                          "fields": [
+                            {
+                              "path": "/acl/group6s/group6/rule-advances/rule-advance/vpn-any",
+                              "type": "string",
+                              "label": "vpn-any"
+                            }
+                          ]
+                        },
+                        {
+                          "name": "vpn-instance",
+                          "label": "vpn-instance",
+                          "fields": [
+                            {
+                              "path": "/acl/group6s/group6/rule-advances/rule-advance/vpn-name",
+                              "type": "string",
+                              "label": "vpn-name",
+                              "must": [
+                                {
+                                  "expr": "/ni:network-instance/ni:instances/ni:instance[ni:name=current()]/l3vpn:afs/l3vpn:af[l3vpn:type='ipv6-unicast']"
+                                }
+                              ],
+                              "supportFilter": true
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/acl/group6s/group6/rule-basics",
+              "type": "group",
+              "label": "rule-basics",
+              "when": "(../type = 'basic')",
+              "fields": [
+                {
+                  "path": "/acl/group6s/group6/rule-basics/rule-basic",
+                  "type": "list",
+                  "label": "rule-basic",
+                  "fields": [
+                    {
+                      "path": "/acl/group6s/group6/rule-basics/rule-basic/action",
+                      "type": "enum",
+                      "label": "action",
+                      "required": true,
+                      "options": [
+                        {
+                          "label": "deny",
+                          "value": "deny"
+                        },
+                        {
+                          "label": "permit",
+                          "value": "permit"
+                        }
+                      ],
+                      "supportFilter": true
+                    },
+                    {
+                      "path": "/acl/group6s/group6/rule-basics/rule-basic/active-status",
+                      "type": "enum",
+                      "label": "active-status",
+                      "options": [
+                        {
+                          "label": "active",
+                          "value": "active"
+                        },
+                        {
+                          "label": "not-in-service",
+                          "value": "not-in-service"
+                        },
+                        {
+                          "label": "not-ready",
+                          "value": "not-ready"
+                        }
+                      ],
+                      "readonly": true
+                    },
+                    {
+                      "path": "/acl/group6s/group6/rule-basics/rule-basic/description",
+                      "type": "string",
+                      "label": "description",
+                      "pattern": "[^\\?\\s](([^\\?\\s]*)|[^\\t\\?]*[^\\?\\s])",
+                      "supportFilter": true
+                    },
+                    {
+                      "path": "/acl/group6s/group6/rule-basics/rule-basic/fragment-type",
+                      "type": "enum",
+                      "label": "fragment-type",
+                      "options": [
+                        {
+                          "label": "fragment",
+                          "value": "fragment"
+                        }
+                      ],
+                      "supportFilter": true
+                    },
+                    {
+                      "path": "/acl/group6s/group6/rule-basics/rule-basic/id",
+                      "type": "number",
+                      "label": "id",
+                      "required": true,
+                      "maximum": 4294967294,
+                      "when": "../../../match-order = 'config'",
+                      "supportFilter": true
+                    },
+                    {
+                      "path": "/acl/group6s/group6/rule-basics/rule-basic/match-statistics",
+                      "type": "group",
+                      "label": "match-statistics",
+                      "readonly": true,
+                      "fields": [
+                        {
+                          "path": "/acl/group6s/group6/rule-basics/rule-basic/match-statistics/match-count",
+                          "type": "number",
+                          "label": "match-count",
+                          "readonly": true
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/acl/group6s/group6/rule-basics/rule-basic/name",
+                      "type": "string",
+                      "label": "name",
+                      "pattern": "[^\\s\\?]*",
+                      "isKey": true
+                    },
+                    {
+                      "path": "/acl/group6s/group6/rule-basics/rule-basic/source-ip-mask",
+                      "type": "choice",
+                      "label": "source-ip-mask",
+                      "cases": [
+                        {
+                          "name": "negative-mask",
+                          "label": "negative-mask",
+                          "fields": [
+                            {
+                              "path": "/acl/group6s/group6/rule-basics/rule-basic/source-wild",
+                              "type": "string",
+                              "label": "source-wild",
+                              "pattern": "((:|[0-9a-fA-F]{0,4}):)([0-9a-fA-F]{0,4}:){0,5}((([0-9a-fA-F]{0,4}:)?(:|[0-9a-fA-F]{0,4}))|(((25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])))(%[\\p{N}\\p{L}]+)?",
+                              "when": "../source-ipaddr"
+                            }
+                          ]
+                        },
+                        {
+                          "name": "positive-mask-len",
+                          "label": "positive-mask-len",
+                          "fields": [
+                            {
+                              "path": "/acl/group6s/group6/rule-basics/rule-basic/source-mask-len",
+                              "type": "number",
+                              "label": "source-mask-len",
+                              "minimum": 1,
+                              "maximum": 128,
+                              "when": "../source-ipaddr"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/acl/group6s/group6/rule-basics/rule-basic/source-ipaddr",
+                      "type": "string",
+                      "label": "source-ipaddr",
+                      "pattern": "((:|[0-9a-fA-F]{0,4}):)([0-9a-fA-F]{0,4}:){0,5}((([0-9a-fA-F]{0,4}:)?(:|[0-9a-fA-F]{0,4}))|(((25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])))(%[\\p{N}\\p{L}]+)?",
+                      "supportFilter": true
+                    },
+                    {
+                      "path": "/acl/group6s/group6/rule-basics/rule-basic/time-range-name",
+                      "type": "string",
+                      "label": "time-range-name",
+                      "supportFilter": true
+                    },
+                    {
+                      "path": "/acl/group6s/group6/rule-basics/rule-basic/vpn",
+                      "type": "choice",
+                      "label": "vpn",
+                      "cases": [
+                        {
+                          "name": "vpn-any",
+                          "label": "vpn-any",
+                          "fields": [
+                            {
+                              "path": "/acl/group6s/group6/rule-basics/rule-basic/vpn-any",
+                              "type": "string",
+                              "label": "vpn-any",
+                              "supportFilter": true
+                            }
+                          ]
+                        },
+                        {
+                          "name": "vpn-instance",
+                          "label": "vpn-instance",
+                          "fields": [
+                            {
+                              "path": "/acl/group6s/group6/rule-basics/rule-basic/vpn-name",
+                              "type": "string",
+                              "label": "vpn-name",
+                              "must": [
+                                {
+                                  "expr": "/ni:network-instance/ni:instances/ni:instance[ni:name=current()]/l3vpn:afs/l3vpn:af[l3vpn:type='ipv6-unicast']"
+                                }
+                              ],
+                              "supportFilter": true
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/acl/group6s/group6/rule-interfaces",
+              "type": "group",
+              "label": "rule-interfaces",
+              "when": "(../type = 'interface')",
+              "fields": [
+                {
+                  "path": "/acl/group6s/group6/rule-interfaces/rule-interface",
+                  "type": "list",
+                  "label": "rule-interface",
+                  "fields": [
+                    {
+                      "path": "/acl/group6s/group6/rule-interfaces/rule-interface/action",
+                      "type": "enum",
+                      "label": "action",
+                      "required": true,
+                      "options": [
+                        {
+                          "label": "deny",
+                          "value": "deny"
+                        },
+                        {
+                          "label": "permit",
+                          "value": "permit"
+                        }
+                      ],
+                      "supportFilter": true
+                    },
+                    {
+                      "path": "/acl/group6s/group6/rule-interfaces/rule-interface/active-status",
+                      "type": "enum",
+                      "label": "active-status",
+                      "options": [
+                        {
+                          "label": "active",
+                          "value": "active"
+                        },
+                        {
+                          "label": "not-in-service",
+                          "value": "not-in-service"
+                        },
+                        {
+                          "label": "not-ready",
+                          "value": "not-ready"
+                        }
+                      ],
+                      "readonly": true
+                    },
+                    {
+                      "path": "/acl/group6s/group6/rule-interfaces/rule-interface/description",
+                      "type": "string",
+                      "label": "description",
+                      "pattern": "[^\\?\\s](([^\\?\\s]*)|[^\\t\\?]*[^\\?\\s])"
+                    },
+                    {
+                      "path": "/acl/group6s/group6/rule-interfaces/rule-interface/id",
+                      "type": "number",
+                      "label": "id",
+                      "required": true,
+                      "maximum": 4294967294,
+                      "when": "../../../match-order = 'config'",
+                      "supportFilter": true
+                    },
+                    {
+                      "path": "/acl/group6s/group6/rule-interfaces/rule-interface/interface",
+                      "type": "choice",
+                      "label": "interface",
+                      "cases": [
+                        {
+                          "name": "interface-any",
+                          "label": "interface-any",
+                          "fields": [
+                            {
+                              "path": "/acl/group6s/group6/rule-interfaces/rule-interface/if-any",
+                              "type": "boolean",
+                              "label": "if-any"
+                            }
+                          ]
+                        },
+                        {
+                          "name": "interface-name",
+                          "label": "interface-name",
+                          "fields": [
+                            {
+                              "path": "/acl/group6s/group6/rule-interfaces/rule-interface/if-name",
+                              "type": "string",
+                              "label": "if-name"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/acl/group6s/group6/rule-interfaces/rule-interface/match-statistics",
+                      "type": "group",
+                      "label": "match-statistics",
+                      "readonly": true,
+                      "fields": [
+                        {
+                          "path": "/acl/group6s/group6/rule-interfaces/rule-interface/match-statistics/match-count",
+                          "type": "number",
+                          "label": "match-count",
+                          "readonly": true
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/acl/group6s/group6/rule-interfaces/rule-interface/name",
+                      "type": "string",
+                      "label": "name",
+                      "pattern": "[^_\\s][^\\s]*",
+                      "isKey": true
+                    },
+                    {
+                      "path": "/acl/group6s/group6/rule-interfaces/rule-interface/time-range-name",
+                      "type": "string",
+                      "label": "time-range-name"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/acl/group6s/group6/step",
+              "type": "number",
+              "label": "step",
+              "minimum": 1,
+              "maximum": 20
+            },
+            {
+              "path": "/acl/group6s/group6/type",
+              "type": "enum",
+              "label": "type",
+              "required": true,
+              "options": [
+                {
+                  "label": "UCL",
+                  "value": "UCL"
+                },
+                {
+                  "label": "advance",
+                  "value": "advance"
+                },
+                {
+                  "label": "basic",
+                  "value": "basic"
+                },
+                {
+                  "label": "interface",
+                  "value": "interface"
+                }
+              ],
+              "supportFilter": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/acl/groups",
+      "type": "group",
+      "label": "groups",
+      "fields": [
+        {
+          "path": "/acl/groups/group",
+          "type": "list",
+          "label": "group",
+          "fields": [
+            {
+              "path": "/acl/groups/group/description",
+              "type": "string",
+              "label": "description",
+              "pattern": "[^\\?\\s](([^\\?\\s]*)|[^\\t\\?]*[^\\?\\s])"
+            },
+            {
+              "path": "/acl/groups/group/identity",
+              "type": "string",
+              "label": "identity",
+              "pattern": "([1-9]\\d{3})|(10[0-9]{3})|(23[0-9]{3})|(99999)|([0-9a-zA-Z]([^\\s]*))",
+              "isKey": true
+            },
+            {
+              "path": "/acl/groups/group/match-order",
+              "type": "enum",
+              "label": "match-order",
+              "options": [
+                {
+                  "label": "auto",
+                  "value": "auto"
+                },
+                {
+                  "label": "config",
+                  "value": "config"
+                }
+              ],
+              "supportFilter": true
+            },
+            {
+              "path": "/acl/groups/group/number",
+              "type": "number",
+              "label": "number",
+              "minimum": 1000,
+              "maximum": 23999
+            },
+            {
+              "path": "/acl/groups/group/rule-advances",
+              "type": "group",
+              "label": "rule-advances",
+              "when": "(../type = 'advance')",
+              "fields": [
+                {
+                  "path": "/acl/groups/group/rule-advances/rule-advance",
+                  "type": "list",
+                  "label": "rule-advance",
+                  "fields": [
+                    {
+                      "path": "/acl/groups/group/rule-advances/rule-advance/action",
+                      "type": "enum",
+                      "label": "action",
+                      "required": true,
+                      "options": [
+                        {
+                          "label": "deny",
+                          "value": "deny"
+                        },
+                        {
+                          "label": "permit",
+                          "value": "permit"
+                        }
+                      ],
+                      "supportFilter": true
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-advances/rule-advance/active-status",
+                      "type": "enum",
+                      "label": "active-status",
+                      "options": [
+                        {
+                          "label": "active",
+                          "value": "active"
+                        },
+                        {
+                          "label": "not-in-service",
+                          "value": "not-in-service"
+                        },
+                        {
+                          "label": "not-ready",
+                          "value": "not-ready"
+                        }
+                      ],
+                      "readonly": true
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-advances/rule-advance/description",
+                      "type": "string",
+                      "label": "description",
+                      "pattern": "[^\\?\\s](([^\\?\\s]*)|[^\\t\\?]*[^\\?\\s])",
+                      "supportFilter": true
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-advances/rule-advance/dest",
+                      "type": "choice",
+                      "label": "dest",
+                      "cases": [
+                        {
+                          "name": "ip",
+                          "label": "ip",
+                          "fields": [
+                            {
+                              "path": "/acl/groups/group/rule-advances/rule-advance/dest-ipaddr",
+                              "type": "string",
+                              "label": "dest-ipaddr",
+                              "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?",
+                              "must": [
+                                {
+                                  "expr": "(../dest-ipaddr and ../dest-wild) or (not (../dest-ipaddr) and not (../dest-wild))"
+                                }
+                              ],
+                              "supportFilter": true
+                            },
+                            {
+                              "path": "/acl/groups/group/rule-advances/rule-advance/dest-wild",
+                              "type": "string",
+                              "label": "dest-wild",
+                              "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?",
+                              "must": [
+                                {
+                                  "expr": "(../dest-ipaddr and ../dest-wild) or (not (../dest-ipaddr) and not (../dest-wild))"
+                                }
+                              ],
+                              "supportFilter": true
+                            }
+                          ]
+                        },
+                        {
+                          "name": "ip-pool",
+                          "label": "ip-pool",
+                          "fields": [
+                            {
+                              "path": "/acl/groups/group/rule-advances/rule-advance/dest-pool-name",
+                              "type": "string",
+                              "label": "dest-pool-name"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-advances/rule-advance/dest-port",
+                      "type": "choice",
+                      "label": "dest-port",
+                      "cases": [
+                        {
+                          "name": "not-equal",
+                          "label": "not-equal",
+                          "fields": [
+                            {
+                              "path": "/acl/groups/group/rule-advances/rule-advance/dest-port-value",
+                              "type": "number",
+                              "label": "dest-port-value",
+                              "when": "../protocol=17 or ../protocol=6"
+                            }
+                          ]
+                        },
+                        {
+                          "name": "port-pool",
+                          "label": "port-pool",
+                          "fields": [
+                            {
+                              "path": "/acl/groups/group/rule-advances/rule-advance/dest-port-pool-name",
+                              "type": "string",
+                              "label": "dest-port-pool-name",
+                              "when": "../protocol=17 or ../protocol=6"
+                            }
+                          ]
+                        },
+                        {
+                          "name": "range",
+                          "label": "range",
+                          "fields": [
+                            {
+                              "path": "/acl/groups/group/rule-advances/rule-advance/dest-port-begin",
+                              "type": "number",
+                              "label": "dest-port-begin",
+                              "when": "../protocol=17 or ../protocol=6",
+                              "must": [
+                                {
+                                  "expr": "((../dest-port-begin and ../dest-port-end) and (../dest-port-begin\u003c=../dest-port-end) and not(../dest-port-begin=0 and ../dest-port-end=65535)) or (not (../dest-port-begin) and  not (../dest-port-end))"
+                                },
+                                {
+                                  "expr": "(not (../fragment-type) or (../fragment-type!='fragment' and ../fragment-type!='fragment-subseq'))"
+                                }
+                              ]
+                            },
+                            {
+                              "path": "/acl/groups/group/rule-advances/rule-advance/dest-port-end",
+                              "type": "number",
+                              "label": "dest-port-end",
+                              "when": "../protocol=17 or ../protocol=6",
+                              "must": [
+                                {
+                                  "expr": "((../dest-port-begin and ../dest-port-end) and (../dest-port-begin\u003c=../dest-port-end) and not(../dest-port-begin=0 and ../dest-port-end=65535)) or (not (../dest-port-begin) and  not (../dest-port-end))"
+                                },
+                                {
+                                  "expr": "(not (../fragment-type) or (../fragment-type!='fragment' and ../fragment-type!='fragment-subseq'))"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-advances/rule-advance/fragment-type",
+                      "type": "enum",
+                      "label": "fragment-type",
+                      "options": [
+                        {
+                          "label": "fragment",
+                          "value": "fragment"
+                        },
+                        {
+                          "label": "fragment-spe-first",
+                          "value": "fragment-spe-first"
+                        },
+                        {
+                          "label": "fragment-subseq",
+                          "value": "fragment-subseq"
+                        },
+                        {
+                          "label": "non-fragment",
+                          "value": "non-fragment"
+                        },
+                        {
+                          "label": "non-subseq",
+                          "value": "non-subseq"
+                        }
+                      ],
+                      "must": [
+                        {
+                          "expr": "(../fragment-type!='fragment' and ../fragment-type!='fragment-subseq') or ((../fragment-type='fragment' or ../fragment-type='fragment-subseq') and (not(../dest-port-begin) and not(../source-port-begin) and not(../dest-port-end) and not(../source-port-end)))"
+                        }
+                      ],
+                      "supportFilter": true
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-advances/rule-advance/icmp-code",
+                      "type": "number",
+                      "label": "icmp-code",
+                      "maximum": 255,
+                      "when": "../protocol=1 and ../icmp-type"
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-advances/rule-advance/icmp-type",
+                      "type": "number",
+                      "label": "icmp-type",
+                      "maximum": 255,
+                      "when": "../protocol=1"
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-advances/rule-advance/icmp-type-end",
+                      "type": "number",
+                      "label": "icmp-type-end",
+                      "maximum": 255,
+                      "when": "../protocol=1 and ../icmp-type",
+                      "must": [
+                        {
+                          "expr": "../icmp-type\u003c../icmp-type-end"
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-advances/rule-advance/id",
+                      "type": "number",
+                      "label": "id",
+                      "required": true,
+                      "maximum": 4294967294,
+                      "when": "../../../match-order = 'config'",
+                      "supportFilter": true
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-advances/rule-advance/igmp-type",
+                      "type": "number",
+                      "label": "igmp-type",
+                      "maximum": 255,
+                      "when": "../protocol=2"
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-advances/rule-advance/log-enable",
+                      "type": "boolean",
+                      "label": "log-enable"
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-advances/rule-advance/match-statistics",
+                      "type": "group",
+                      "label": "match-statistics",
+                      "readonly": true,
+                      "fields": [
+                        {
+                          "path": "/acl/groups/group/rule-advances/rule-advance/match-statistics/match-count",
+                          "type": "number",
+                          "label": "match-count",
+                          "readonly": true
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-advances/rule-advance/name",
+                      "type": "string",
+                      "label": "name",
+                      "pattern": "[^_\\s][^\\s]*",
+                      "isKey": true
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-advances/rule-advance/packet-length",
+                      "type": "choice",
+                      "label": "packet-length",
+                      "cases": [
+                        {
+                          "name": "not-equal",
+                          "label": "not-equal",
+                          "fields": [
+                            {
+                              "path": "/acl/groups/group/rule-advances/rule-advance/packet-len-value",
+                              "type": "number",
+                              "label": "packet-len-value"
+                            }
+                          ]
+                        },
+                        {
+                          "name": "range",
+                          "label": "range",
+                          "fields": [
+                            {
+                              "path": "/acl/groups/group/rule-advances/rule-advance/packet-len-begin",
+                              "type": "number",
+                              "label": "packet-len-begin",
+                              "must": [
+                                {
+                                  "expr": "((../packet-len-begin and ../packet-len-end) and (../packet-len-begin\u003c=../packet-len-end) and not(../packet-len-begin=0 and ../packet-len-end=65535)) or (not (../packet-len-begin) and not (../packet-len-end))"
+                                }
+                              ]
+                            },
+                            {
+                              "path": "/acl/groups/group/rule-advances/rule-advance/packet-len-end",
+                              "type": "number",
+                              "label": "packet-len-end",
+                              "must": [
+                                {
+                                  "expr": "((../packet-len-begin and ../packet-len-end) and (../packet-len-begin\u003c=../packet-len-end) and not(../packet-len-begin=0 and ../packet-len-end=65535)) or (not (../packet-len-begin) and not (../packet-len-end))"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-advances/rule-advance/packets-priority",
+                      "type": "choice",
+                      "label": "packets-priority",
+                      "cases": [
+                        {
+                          "name": "dscp",
+                          "label": "dscp",
+                          "fields": [
+                            {
+                              "path": "/acl/groups/group/rule-advances/rule-advance/dscp",
+                              "type": "number",
+                              "label": "dscp",
+                              "maximum": 63
+                            }
+                          ]
+                        },
+                        {
+                          "name": "tos",
+                          "label": "tos",
+                          "fields": [
+                            {
+                              "path": "/acl/groups/group/rule-advances/rule-advance/precedence",
+                              "type": "number",
+                              "label": "precedence",
+                              "maximum": 7
+                            },
+                            {
+                              "path": "/acl/groups/group/rule-advances/rule-advance/tos",
+                              "type": "number",
+                              "label": "tos",
+                              "maximum": 15
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-advances/rule-advance/priority",
+                      "type": "number",
+                      "label": "priority",
+                      "maximum": 4294967294,
+                      "readonly": true
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-advances/rule-advance/protocol-type",
+                      "type": "choice",
+                      "label": "protocol-type",
+                      "cases": [
+                        {
+                          "name": "single",
+                          "label": "single",
+                          "fields": [
+                            {
+                              "path": "/acl/groups/group/rule-advances/rule-advance/protocol",
+                              "type": "number",
+                              "label": "protocol",
+                              "supportFilter": true
+                            }
+                          ]
+                        },
+                        {
+                          "name": "zero",
+                          "label": "zero",
+                          "fields": [
+                            {
+                              "path": "/acl/groups/group/rule-advances/rule-advance/protocol-zero",
+                              "type": "string",
+                              "label": "protocol-zero"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-advances/rule-advance/source",
+                      "type": "choice",
+                      "label": "source",
+                      "cases": [
+                        {
+                          "name": "ip",
+                          "label": "ip",
+                          "fields": [
+                            {
+                              "path": "/acl/groups/group/rule-advances/rule-advance/source-ipaddr",
+                              "type": "string",
+                              "label": "source-ipaddr",
+                              "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?",
+                              "must": [
+                                {
+                                  "expr": "(../source-ipaddr and ../source-wild) or (not (../source-ipaddr) and not (../source-wild))"
+                                }
+                              ],
+                              "supportFilter": true
+                            },
+                            {
+                              "path": "/acl/groups/group/rule-advances/rule-advance/source-wild",
+                              "type": "string",
+                              "label": "source-wild",
+                              "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?",
+                              "must": [
+                                {
+                                  "expr": "(../source-ipaddr and ../source-wild) or (not (../source-ipaddr) and not (../source-wild))"
+                                }
+                              ],
+                              "supportFilter": true
+                            }
+                          ]
+                        },
+                        {
+                          "name": "ip-pool",
+                          "label": "ip-pool",
+                          "fields": [
+                            {
+                              "path": "/acl/groups/group/rule-advances/rule-advance/source-pool-name",
+                              "type": "string",
+                              "label": "source-pool-name"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-advances/rule-advance/source-port",
+                      "type": "choice",
+                      "label": "source-port",
+                      "cases": [
+                        {
+                          "name": "not-equal",
+                          "label": "not-equal",
+                          "fields": [
+                            {
+                              "path": "/acl/groups/group/rule-advances/rule-advance/source-port-value",
+                              "type": "number",
+                              "label": "source-port-value",
+                              "when": "../protocol=17 or ../protocol=6"
+                            }
+                          ]
+                        },
+                        {
+                          "name": "port-pool",
+                          "label": "port-pool",
+                          "fields": [
+                            {
+                              "path": "/acl/groups/group/rule-advances/rule-advance/src-port-pool-name",
+                              "type": "string",
+                              "label": "src-port-pool-name",
+                              "when": "../protocol=17 or ../protocol=6"
+                            }
+                          ]
+                        },
+                        {
+                          "name": "range",
+                          "label": "range",
+                          "fields": [
+                            {
+                              "path": "/acl/groups/group/rule-advances/rule-advance/source-port-begin",
+                              "type": "number",
+                              "label": "source-port-begin",
+                              "when": "../protocol=17 or ../protocol=6",
+                              "must": [
+                                {
+                                  "expr": "((../source-port-begin and ../source-port-end) and (../source-port-begin\u003c=../source-port-end) and not(../source-port-begin=0 and ../source-port-end=65535)) or (not (../source-port-begin) and not (../source-port-end))"
+                                },
+                                {
+                                  "expr": "(not (../fragment-type) or (../fragment-type!='fragment' and ../fragment-type!='fragment-subseq'))"
+                                }
+                              ]
+                            },
+                            {
+                              "path": "/acl/groups/group/rule-advances/rule-advance/source-port-end",
+                              "type": "number",
+                              "label": "source-port-end",
+                              "when": "../protocol=17 or ../protocol=6",
+                              "must": [
+                                {
+                                  "expr": "((../source-port-begin and ../source-port-end) and (../source-port-begin\u003c=../source-port-end) and not(../source-port-begin=0 and ../source-port-end=65535)) or (not (../source-port-begin) and not (../source-port-end))"
+                                },
+                                {
+                                  "expr": "(not (../fragment-type) or (../fragment-type!='fragment' and ../fragment-type!='fragment-subseq'))"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-advances/rule-advance/tcp-flag",
+                      "type": "choice",
+                      "label": "tcp-flag",
+                      "cases": [
+                        {
+                          "name": "established",
+                          "label": "established",
+                          "fields": [
+                            {
+                              "path": "/acl/groups/group/rule-advances/rule-advance/established",
+                              "type": "string",
+                              "label": "established",
+                              "when": "../protocol=6"
+                            }
+                          ]
+                        },
+                        {
+                          "name": "mask",
+                          "label": "mask",
+                          "fields": [
+                            {
+                              "path": "/acl/groups/group/rule-advances/rule-advance/tcp-flag-mask",
+                              "type": "number",
+                              "label": "tcp-flag-mask",
+                              "maximum": 63,
+                              "when": "../protocol=6"
+                            },
+                            {
+                              "path": "/acl/groups/group/rule-advances/rule-advance/tcp-flag-value",
+                              "type": "number",
+                              "label": "tcp-flag-value",
+                              "required": true,
+                              "maximum": 63,
+                              "when": "../protocol=6"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-advances/rule-advance/time-range-name",
+                      "type": "string",
+                      "label": "time-range-name",
+                      "supportFilter": true
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-advances/rule-advance/ttl",
+                      "type": "choice",
+                      "label": "ttl",
+                      "cases": [
+                        {
+                          "name": "not-equal",
+                          "label": "not-equal",
+                          "fields": [
+                            {
+                              "path": "/acl/groups/group/rule-advances/rule-advance/ttl-value",
+                              "type": "number",
+                              "label": "ttl-value",
+                              "minimum": 1,
+                              "maximum": 255
+                            }
+                          ]
+                        },
+                        {
+                          "name": "range",
+                          "label": "range",
+                          "fields": [
+                            {
+                              "path": "/acl/groups/group/rule-advances/rule-advance/ttl-begin",
+                              "type": "number",
+                              "label": "ttl-begin",
+                              "required": true,
+                              "minimum": 1,
+                              "maximum": 255,
+                              "must": [
+                                {
+                                  "expr": "((../ttl-begin\u003c=../ttl-end) and not(../ttl-begin=1 and ../ttl-end=255))"
+                                }
+                              ]
+                            },
+                            {
+                              "path": "/acl/groups/group/rule-advances/rule-advance/ttl-end",
+                              "type": "number",
+                              "label": "ttl-end",
+                              "required": true,
+                              "minimum": 1,
+                              "maximum": 255,
+                              "must": [
+                                {
+                                  "expr": "((../ttl-begin\u003c=../ttl-end) and not(../ttl-begin=1 and ../ttl-end=255))"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-advances/rule-advance/ttl-expired",
+                      "type": "boolean",
+                      "label": "ttl-expired"
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-advances/rule-advance/vni",
+                      "type": "number",
+                      "label": "vni",
+                      "minimum": 1,
+                      "maximum": 16777215,
+                      "when": "../protocol=17"
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-advances/rule-advance/vpn",
+                      "type": "choice",
+                      "label": "vpn",
+                      "cases": [
+                        {
+                          "name": "vpn-any",
+                          "label": "vpn-any",
+                          "fields": [
+                            {
+                              "path": "/acl/groups/group/rule-advances/rule-advance/vpn-any",
+                              "type": "string",
+                              "label": "vpn-any"
+                            }
+                          ]
+                        },
+                        {
+                          "name": "vpn-instance",
+                          "label": "vpn-instance",
+                          "fields": [
+                            {
+                              "path": "/acl/groups/group/rule-advances/rule-advance/vpn-name",
+                              "type": "string",
+                              "label": "vpn-name",
+                              "must": [
+                                {
+                                  "expr": "/ni:network-instance/ni:instances/ni:instance[ni:name=current()]/l3vpn:afs/l3vpn:af[l3vpn:type='ipv4-unicast']"
+                                }
+                              ],
+                              "supportFilter": true
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/acl/groups/group/rule-arps",
+              "type": "group",
+              "label": "rule-arps",
+              "when": "(../type = 'ARP')",
+              "fields": [
+                {
+                  "path": "/acl/groups/group/rule-arps/rule-arp",
+                  "type": "list",
+                  "label": "rule-arp",
+                  "fields": [
+                    {
+                      "path": "/acl/groups/group/rule-arps/rule-arp/action",
+                      "type": "enum",
+                      "label": "action",
+                      "required": true,
+                      "options": [
+                        {
+                          "label": "deny",
+                          "value": "deny"
+                        },
+                        {
+                          "label": "permit",
+                          "value": "permit"
+                        }
+                      ],
+                      "supportFilter": true
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-arps/rule-arp/active-status",
+                      "type": "enum",
+                      "label": "active-status",
+                      "options": [
+                        {
+                          "label": "active",
+                          "value": "active"
+                        },
+                        {
+                          "label": "not-in-service",
+                          "value": "not-in-service"
+                        },
+                        {
+                          "label": "not-ready",
+                          "value": "not-ready"
+                        }
+                      ],
+                      "readonly": true
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-arps/rule-arp/description",
+                      "type": "string",
+                      "label": "description",
+                      "pattern": "[^\\?\\s](([^\\?\\s]*)|[^\\t\\?]*[^\\?\\s])"
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-arps/rule-arp/dest-ipaddr",
+                      "type": "string",
+                      "label": "dest-ipaddr",
+                      "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?",
+                      "must": [
+                        {
+                          "expr": "(../dest-ipaddr and ../dest-wild) or (not (../dest-ipaddr) and not (../dest-wild))"
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-arps/rule-arp/dest-mac",
+                      "type": "string",
+                      "label": "dest-mac",
+                      "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+                      "when": "not(../packet-mode='request')",
+                      "must": [
+                        {
+                          "expr": "(../dest-mac and ../dest-mac-mask) or (not (../dest-mac) and not (../dest-mac-mask))"
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-arps/rule-arp/dest-mac-mask",
+                      "type": "string",
+                      "label": "dest-mac-mask",
+                      "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+                      "when": "not(../packet-mode='request')",
+                      "must": [
+                        {
+                          "expr": "(../dest-mac and ../dest-mac-mask) or (not (../dest-mac) and not (../dest-mac-mask))"
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-arps/rule-arp/dest-wild",
+                      "type": "string",
+                      "label": "dest-wild",
+                      "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?",
+                      "must": [
+                        {
+                          "expr": "(../dest-ipaddr and ../dest-wild) or (not (../dest-ipaddr) and not (../dest-wild))"
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-arps/rule-arp/id",
+                      "type": "number",
+                      "label": "id",
+                      "required": true,
+                      "maximum": 4294967294,
+                      "when": "../../../match-order = 'config'",
+                      "supportFilter": true
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-arps/rule-arp/match-statistics",
+                      "type": "group",
+                      "label": "match-statistics",
+                      "readonly": true,
+                      "fields": [
+                        {
+                          "path": "/acl/groups/group/rule-arps/rule-arp/match-statistics/match-count",
+                          "type": "number",
+                          "label": "match-count",
+                          "readonly": true
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-arps/rule-arp/name",
+                      "type": "string",
+                      "label": "name",
+                      "pattern": "[^_\\s][^\\s]*",
+                      "isKey": true
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-arps/rule-arp/packet-mode",
+                      "type": "enum",
+                      "label": "packet-mode",
+                      "options": [
+                        {
+                          "label": "reply",
+                          "value": "reply"
+                        },
+                        {
+                          "label": "request",
+                          "value": "request"
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-arps/rule-arp/source-ipaddr",
+                      "type": "string",
+                      "label": "source-ipaddr",
+                      "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?",
+                      "must": [
+                        {
+                          "expr": "(../source-ipaddr and ../source-wild) or (not (../source-ipaddr) and not (../source-wild))"
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-arps/rule-arp/source-mac",
+                      "type": "string",
+                      "label": "source-mac",
+                      "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+                      "must": [
+                        {
+                          "expr": "(../source-mac and ../source-mac-mask) or (not (../source-mac) and not (../source-mac-mask))"
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-arps/rule-arp/source-mac-mask",
+                      "type": "string",
+                      "label": "source-mac-mask",
+                      "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+                      "must": [
+                        {
+                          "expr": "(../source-mac and ../source-mac-mask) or (not (../source-mac) and not (../source-mac-mask))"
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-arps/rule-arp/source-wild",
+                      "type": "string",
+                      "label": "source-wild",
+                      "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?",
+                      "must": [
+                        {
+                          "expr": "(../source-ipaddr and ../source-wild) or (not (../source-ipaddr) and not (../source-wild))"
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-arps/rule-arp/time-range-name",
+                      "type": "string",
+                      "label": "time-range-name"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/acl/groups/group/rule-basics",
+              "type": "group",
+              "label": "rule-basics",
+              "when": "(../type = 'basic')",
+              "fields": [
+                {
+                  "path": "/acl/groups/group/rule-basics/rule-basic",
+                  "type": "list",
+                  "label": "rule-basic",
+                  "fields": [
+                    {
+                      "path": "/acl/groups/group/rule-basics/rule-basic/action",
+                      "type": "enum",
+                      "label": "action",
+                      "required": true,
+                      "options": [
+                        {
+                          "label": "deny",
+                          "value": "deny"
+                        },
+                        {
+                          "label": "permit",
+                          "value": "permit"
+                        }
+                      ],
+                      "supportFilter": true
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-basics/rule-basic/active-status",
+                      "type": "enum",
+                      "label": "active-status",
+                      "options": [
+                        {
+                          "label": "active",
+                          "value": "active"
+                        },
+                        {
+                          "label": "not-in-service",
+                          "value": "not-in-service"
+                        },
+                        {
+                          "label": "not-ready",
+                          "value": "not-ready"
+                        }
+                      ],
+                      "readonly": true
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-basics/rule-basic/description",
+                      "type": "string",
+                      "label": "description",
+                      "pattern": "[^\\?\\s](([^\\?\\s]*)|[^\\t\\?]*[^\\?\\s])",
+                      "supportFilter": true
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-basics/rule-basic/fragment-type",
+                      "type": "enum",
+                      "label": "fragment-type",
+                      "options": [
+                        {
+                          "label": "fragment",
+                          "value": "fragment"
+                        },
+                        {
+                          "label": "fragment-spe-first",
+                          "value": "fragment-spe-first"
+                        },
+                        {
+                          "label": "fragment-subseq",
+                          "value": "fragment-subseq"
+                        },
+                        {
+                          "label": "non-fragment",
+                          "value": "non-fragment"
+                        },
+                        {
+                          "label": "non-subseq",
+                          "value": "non-subseq"
+                        }
+                      ],
+                      "supportFilter": true
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-basics/rule-basic/id",
+                      "type": "number",
+                      "label": "id",
+                      "required": true,
+                      "maximum": 4294967294,
+                      "when": "../../../match-order = 'config'",
+                      "supportFilter": true
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-basics/rule-basic/log-enable",
+                      "type": "boolean",
+                      "label": "log-enable"
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-basics/rule-basic/match-statistics",
+                      "type": "group",
+                      "label": "match-statistics",
+                      "readonly": true,
+                      "fields": [
+                        {
+                          "path": "/acl/groups/group/rule-basics/rule-basic/match-statistics/match-count",
+                          "type": "number",
+                          "label": "match-count",
+                          "readonly": true
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-basics/rule-basic/name",
+                      "type": "string",
+                      "label": "name",
+                      "pattern": "[^_\\s][^\\s]*",
+                      "isKey": true
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-basics/rule-basic/priority",
+                      "type": "number",
+                      "label": "priority",
+                      "maximum": 4294967294,
+                      "readonly": true
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-basics/rule-basic/source-ipaddr",
+                      "type": "string",
+                      "label": "source-ipaddr",
+                      "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?",
+                      "must": [
+                        {
+                          "expr": "(../source-ipaddr and ../source-wild) or (not (../source-ipaddr) and not (../source-wild))"
+                        }
+                      ],
+                      "supportFilter": true
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-basics/rule-basic/source-wild",
+                      "type": "string",
+                      "label": "source-wild",
+                      "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?",
+                      "must": [
+                        {
+                          "expr": "(../source-ipaddr and ../source-wild) or (not (../source-ipaddr) and not (../source-wild))"
+                        }
+                      ],
+                      "supportFilter": true
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-basics/rule-basic/time-range-name",
+                      "type": "string",
+                      "label": "time-range-name",
+                      "supportFilter": true
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-basics/rule-basic/vpn",
+                      "type": "choice",
+                      "label": "vpn",
+                      "cases": [
+                        {
+                          "name": "vpn-any",
+                          "label": "vpn-any",
+                          "fields": [
+                            {
+                              "path": "/acl/groups/group/rule-basics/rule-basic/vpn-any",
+                              "type": "string",
+                              "label": "vpn-any"
+                            }
+                          ]
+                        },
+                        {
+                          "name": "vpn-instance",
+                          "label": "vpn-instance",
+                          "fields": [
+                            {
+                              "path": "/acl/groups/group/rule-basics/rule-basic/vpn-name",
+                              "type": "string",
+                              "label": "vpn-name",
+                              "must": [
+                                {
+                                  "expr": "/ni:network-instance/ni:instances/ni:instance[ni:name=current()]/l3vpn:afs/l3vpn:af[l3vpn:type='ipv4-unicast']"
+                                }
+                              ],
+                              "supportFilter": true
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/acl/groups/group/rule-ethernets",
+              "type": "group",
+              "label": "rule-ethernets",
+              "when": "(../type = 'link')",
+              "fields": [
+                {
+                  "path": "/acl/groups/group/rule-ethernets/rule-ethernet",
+                  "type": "list",
+                  "label": "rule-ethernet",
+                  "fields": [
+                    {
+                      "path": "/acl/groups/group/rule-ethernets/rule-ethernet/action",
+                      "type": "enum",
+                      "label": "action",
+                      "required": true,
+                      "options": [
+                        {
+                          "label": "deny",
+                          "value": "deny"
+                        },
+                        {
+                          "label": "permit",
+                          "value": "permit"
+                        }
+                      ],
+                      "supportFilter": true
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-ethernets/rule-ethernet/active-status",
+                      "type": "enum",
+                      "label": "active-status",
+                      "options": [
+                        {
+                          "label": "active",
+                          "value": "active"
+                        },
+                        {
+                          "label": "not-in-service",
+                          "value": "not-in-service"
+                        },
+                        {
+                          "label": "not-ready",
+                          "value": "not-ready"
+                        }
+                      ],
+                      "readonly": true
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-ethernets/rule-ethernet/ce-vlan-id",
+                      "type": "number",
+                      "label": "ce-vlan-id",
+                      "minimum": 1,
+                      "maximum": 4094
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-ethernets/rule-ethernet/ce-vlan-id-mask",
+                      "type": "string",
+                      "label": "ce-vlan-id-mask",
+                      "pattern": "0[xX][a-fA-F0-9]{1,3}",
+                      "must": [
+                        {
+                          "expr": "../ce-vlan-id"
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-ethernets/rule-ethernet/ce-vlan-value-8021p",
+                      "type": "number",
+                      "label": "ce-vlan-value-8021p",
+                      "maximum": 7
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-ethernets/rule-ethernet/description",
+                      "type": "string",
+                      "label": "description",
+                      "pattern": "[^\\?\\s](([^\\?\\s]*)|[^\\t\\?]*[^\\?\\s])"
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-ethernets/rule-ethernet/dest-mac",
+                      "type": "string",
+                      "label": "dest-mac",
+                      "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}"
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-ethernets/rule-ethernet/dest-mac-mask",
+                      "type": "string",
+                      "label": "dest-mac-mask",
+                      "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+                      "when": "../dest-mac"
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-ethernets/rule-ethernet/double-tag",
+                      "type": "boolean",
+                      "label": "double-tag"
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-ethernets/rule-ethernet/encap-type",
+                      "type": "enum",
+                      "label": "encap-type",
+                      "options": [
+                        {
+                          "label": "802.3",
+                          "value": "802.3"
+                        },
+                        {
+                          "label": "ether-ii",
+                          "value": "ether-ii"
+                        },
+                        {
+                          "label": "snap",
+                          "value": "snap"
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-ethernets/rule-ethernet/frame-mask",
+                      "type": "string",
+                      "label": "frame-mask",
+                      "pattern": "0[xX][a-fA-F0-9]{1,4}",
+                      "when": "../frame-type"
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-ethernets/rule-ethernet/frame-type",
+                      "type": "string",
+                      "label": "frame-type",
+                      "pattern": "0[xX][a-fA-F0-9]{1,4}"
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-ethernets/rule-ethernet/id",
+                      "type": "number",
+                      "label": "id",
+                      "required": true,
+                      "maximum": 4294967294,
+                      "when": "../../../match-order = 'config'",
+                      "supportFilter": true
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-ethernets/rule-ethernet/match-statistics",
+                      "type": "group",
+                      "label": "match-statistics",
+                      "readonly": true,
+                      "fields": [
+                        {
+                          "path": "/acl/groups/group/rule-ethernets/rule-ethernet/match-statistics/match-count",
+                          "type": "number",
+                          "label": "match-count",
+                          "readonly": true
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-ethernets/rule-ethernet/name",
+                      "type": "string",
+                      "label": "name",
+                      "pattern": "[^_\\s][^\\s]*",
+                      "isKey": true
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-ethernets/rule-ethernet/priority",
+                      "type": "number",
+                      "label": "priority",
+                      "maximum": 4294967294,
+                      "readonly": true
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-ethernets/rule-ethernet/source-mac",
+                      "type": "string",
+                      "label": "source-mac",
+                      "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}"
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-ethernets/rule-ethernet/source-mac-mask",
+                      "type": "string",
+                      "label": "source-mac-mask",
+                      "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+                      "when": "../source-mac"
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-ethernets/rule-ethernet/time-range-name",
+                      "type": "string",
+                      "label": "time-range-name"
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-ethernets/rule-ethernet/value-8021p",
+                      "type": "number",
+                      "label": "value-8021p",
+                      "maximum": 7
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-ethernets/rule-ethernet/vlan-id",
+                      "type": "number",
+                      "label": "vlan-id",
+                      "minimum": 1,
+                      "maximum": 4094
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-ethernets/rule-ethernet/vlan-id-mask",
+                      "type": "string",
+                      "label": "vlan-id-mask",
+                      "pattern": "0[xX][a-fA-F0-9]{1,3}",
+                      "must": [
+                        {
+                          "expr": "../vlan-id"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/acl/groups/group/rule-interfaces",
+              "type": "group",
+              "label": "rule-interfaces",
+              "when": "(../type = 'interface')",
+              "fields": [
+                {
+                  "path": "/acl/groups/group/rule-interfaces/rule-interface",
+                  "type": "list",
+                  "label": "rule-interface",
+                  "fields": [
+                    {
+                      "path": "/acl/groups/group/rule-interfaces/rule-interface/action",
+                      "type": "enum",
+                      "label": "action",
+                      "required": true,
+                      "options": [
+                        {
+                          "label": "deny",
+                          "value": "deny"
+                        },
+                        {
+                          "label": "permit",
+                          "value": "permit"
+                        }
+                      ],
+                      "supportFilter": true
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-interfaces/rule-interface/active-status",
+                      "type": "enum",
+                      "label": "active-status",
+                      "options": [
+                        {
+                          "label": "active",
+                          "value": "active"
+                        },
+                        {
+                          "label": "not-in-service",
+                          "value": "not-in-service"
+                        },
+                        {
+                          "label": "not-ready",
+                          "value": "not-ready"
+                        }
+                      ],
+                      "readonly": true
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-interfaces/rule-interface/description",
+                      "type": "string",
+                      "label": "description",
+                      "pattern": "[^\\?\\s](([^\\?\\s]*)|[^\\t\\?]*[^\\?\\s])"
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-interfaces/rule-interface/id",
+                      "type": "number",
+                      "label": "id",
+                      "required": true,
+                      "maximum": 4294967294,
+                      "when": "../../../match-order = 'config'",
+                      "supportFilter": true
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-interfaces/rule-interface/interface",
+                      "type": "choice",
+                      "label": "interface",
+                      "cases": [
+                        {
+                          "name": "interface-any",
+                          "label": "interface-any",
+                          "fields": [
+                            {
+                              "path": "/acl/groups/group/rule-interfaces/rule-interface/if-any",
+                              "type": "string",
+                              "label": "if-any"
+                            }
+                          ]
+                        },
+                        {
+                          "name": "interface-name",
+                          "label": "interface-name",
+                          "fields": [
+                            {
+                              "path": "/acl/groups/group/rule-interfaces/rule-interface/if-name",
+                              "type": "string",
+                              "label": "if-name"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-interfaces/rule-interface/match-statistics",
+                      "type": "group",
+                      "label": "match-statistics",
+                      "readonly": true,
+                      "fields": [
+                        {
+                          "path": "/acl/groups/group/rule-interfaces/rule-interface/match-statistics/match-count",
+                          "type": "number",
+                          "label": "match-count",
+                          "readonly": true
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-interfaces/rule-interface/name",
+                      "type": "string",
+                      "label": "name",
+                      "pattern": "[^_\\s][^\\s]*",
+                      "isKey": true
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-interfaces/rule-interface/time-range-name",
+                      "type": "string",
+                      "label": "time-range-name"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/acl/groups/group/rule-mplss",
+              "type": "group",
+              "label": "rule-mplss",
+              "when": "(../type = 'mpls')",
+              "fields": [
+                {
+                  "path": "/acl/groups/group/rule-mplss/rule-mpls",
+                  "type": "list",
+                  "label": "rule-mpls",
+                  "fields": [
+                    {
+                      "path": "/acl/groups/group/rule-mplss/rule-mpls/action",
+                      "type": "enum",
+                      "label": "action",
+                      "required": true,
+                      "options": [
+                        {
+                          "label": "deny",
+                          "value": "deny"
+                        },
+                        {
+                          "label": "permit",
+                          "value": "permit"
+                        }
+                      ],
+                      "supportFilter": true
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-mplss/rule-mpls/description",
+                      "type": "string",
+                      "label": "description",
+                      "pattern": "[^\\?\\s](([^\\?\\s]*)|[^\\t\\?]*[^\\?\\s])"
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-mplss/rule-mpls/id",
+                      "type": "number",
+                      "label": "id",
+                      "required": true,
+                      "maximum": 4294967294,
+                      "when": "../../../match-order = 'config'",
+                      "supportFilter": true
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-mplss/rule-mpls/lables",
+                      "type": "group",
+                      "label": "lables",
+                      "fields": [
+                        {
+                          "path": "/acl/groups/group/rule-mplss/rule-mpls/lables/lable",
+                          "type": "list",
+                          "label": "lable",
+                          "fields": [
+                            {
+                              "path": "/acl/groups/group/rule-mplss/rule-mpls/lables/lable/exp-value",
+                              "type": "number",
+                              "label": "exp-value",
+                              "maximum": 7
+                            },
+                            {
+                              "path": "/acl/groups/group/rule-mplss/rule-mpls/lables/lable/label-value",
+                              "type": "number",
+                              "label": "label-value",
+                              "maximum": 1048575
+                            },
+                            {
+                              "path": "/acl/groups/group/rule-mplss/rule-mpls/lables/lable/sequence",
+                              "type": "number",
+                              "label": "sequence",
+                              "minimum": 1,
+                              "maximum": 4,
+                              "isKey": true
+                            },
+                            {
+                              "path": "/acl/groups/group/rule-mplss/rule-mpls/lables/lable/ttl-begin",
+                              "type": "number",
+                              "label": "ttl-begin",
+                              "maximum": 255,
+                              "when": "../sequence != 4"
+                            },
+                            {
+                              "path": "/acl/groups/group/rule-mplss/rule-mpls/lables/lable/ttl-end",
+                              "type": "number",
+                              "label": "ttl-end",
+                              "maximum": 255,
+                              "when": "../sequence != 4"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-mplss/rule-mpls/match-statistics",
+                      "type": "group",
+                      "label": "match-statistics",
+                      "readonly": true,
+                      "fields": [
+                        {
+                          "path": "/acl/groups/group/rule-mplss/rule-mpls/match-statistics/match-count",
+                          "type": "number",
+                          "label": "match-count",
+                          "readonly": true
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-mplss/rule-mpls/name",
+                      "type": "string",
+                      "label": "name",
+                      "pattern": "[^_\\s][^\\s]*",
+                      "isKey": true
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-mplss/rule-mpls/priority",
+                      "type": "number",
+                      "label": "priority",
+                      "maximum": 4294967294,
+                      "readonly": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/acl/groups/group/rule-users",
+              "type": "group",
+              "label": "rule-users",
+              "when": "(../type = 'user')",
+              "fields": [
+                {
+                  "path": "/acl/groups/group/rule-users/rule-user",
+                  "type": "list",
+                  "label": "rule-user",
+                  "fields": [
+                    {
+                      "path": "/acl/groups/group/rule-users/rule-user/action",
+                      "type": "enum",
+                      "label": "action",
+                      "required": true,
+                      "options": [
+                        {
+                          "label": "deny",
+                          "value": "deny"
+                        },
+                        {
+                          "label": "permit",
+                          "value": "permit"
+                        }
+                      ],
+                      "supportFilter": true
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-users/rule-user/active-status",
+                      "type": "enum",
+                      "label": "active-status",
+                      "options": [
+                        {
+                          "label": "active",
+                          "value": "active"
+                        },
+                        {
+                          "label": "not-in-service",
+                          "value": "not-in-service"
+                        },
+                        {
+                          "label": "not-ready",
+                          "value": "not-ready"
+                        }
+                      ],
+                      "readonly": true
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-users/rule-user/description",
+                      "type": "string",
+                      "label": "description",
+                      "pattern": "[^\\?\\s](([^\\?\\s]*)|[^\\t\\?]*[^\\?\\s])"
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-users/rule-user/id",
+                      "type": "number",
+                      "label": "id",
+                      "required": true,
+                      "maximum": 4294967294,
+                      "when": "../../../match-order = 'config'",
+                      "supportFilter": true
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-users/rule-user/match-statistics",
+                      "type": "group",
+                      "label": "match-statistics",
+                      "readonly": true,
+                      "fields": [
+                        {
+                          "path": "/acl/groups/group/rule-users/rule-user/match-statistics/match-count",
+                          "type": "number",
+                          "label": "match-count",
+                          "readonly": true
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-users/rule-user/name",
+                      "type": "string",
+                      "label": "name",
+                      "pattern": "[^_\\s][^\\s]*",
+                      "isKey": true
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-users/rule-user/offset-begin",
+                      "type": "enum",
+                      "label": "offset-begin",
+                      "options": [
+                        {
+                          "label": "inner-ipv4-head",
+                          "value": "inner-ipv4-head"
+                        },
+                        {
+                          "label": "ipv4-head",
+                          "value": "ipv4-head"
+                        },
+                        {
+                          "label": "l2-head",
+                          "value": "l2-head"
+                        },
+                        {
+                          "label": "l4-head",
+                          "value": "l4-head"
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-users/rule-user/offset1",
+                      "type": "number",
+                      "label": "offset1",
+                      "required": true,
+                      "when": "../user-rule1",
+                      "must": [
+                        {
+                          "expr": "((../offset-begin = 'l2-head' and ../offset1 \u003c= 114 and ../offset1 \u003e= 2 and (../offset1) mod 4 = 2) or ((../offset-begin = 'ipv4-head' or ../offset-begin = 'l4-head') and ../offset1 \u003c= 96 and ../offset1 \u003e= 0 and (../offset1) mod 4 = 0) or (../offset-begin = 'inner-ipv4-head' and ../offset1 \u003c= 60 and ../offset1 \u003e= 0 and (../offset1) mod 4 = 0))"
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-users/rule-user/offset2",
+                      "type": "number",
+                      "label": "offset2",
+                      "required": true,
+                      "when": "../user-rule2",
+                      "must": [
+                        {
+                          "expr": "((../offset-begin = 'l2-head' and ../offset2 \u003c= 114 and ../offset2 \u003e= 2 and (../offset2) mod 4 = 2) or ((../offset-begin = 'ipv4-head' or ../offset-begin = 'l4-head') and ../offset2 \u003c= 96 and ../offset2 \u003e= 0 and (../offset2) mod 4 = 0) or (../offset-begin = 'inner-ipv4-head' and ../offset2 \u003c= 60 and ../offset2 \u003e= 0 and (../offset2) mod 4 = 0))"
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-users/rule-user/offset3",
+                      "type": "number",
+                      "label": "offset3",
+                      "required": true,
+                      "when": "../user-rule3",
+                      "must": [
+                        {
+                          "expr": "((../offset-begin = 'l2-head' and ../offset3 \u003c= 114 and ../offset3 \u003e= 2 and (../offset3) mod 4 = 2) or ((../offset-begin = 'ipv4-head' or ../offset-begin = 'l4-head') and ../offset3 \u003c= 96 and ../offset3 \u003e= 0 and (../offset3) mod 4 = 0) or (../offset-begin = 'inner-ipv4-head' and ../offset3 \u003c= 60 and ../offset3 \u003e= 0 and (../offset3) mod 4 = 0))"
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-users/rule-user/offset4",
+                      "type": "number",
+                      "label": "offset4",
+                      "required": true,
+                      "when": "../user-rule4",
+                      "must": [
+                        {
+                          "expr": "((../offset-begin = 'l2-head' and ../offset4 \u003c= 114 and ../offset4 \u003e= 2 and (../offset4) mod 4 = 2) or ((../offset-begin = 'ipv4-head' or ../offset-begin = 'l4-head') and ../offset4 \u003c= 96 and ../offset4 \u003e= 0 and (../offset4) mod 4 = 0) or (../offset-begin = 'inner-ipv4-head' and ../offset4 \u003c= 60 and ../offset4 \u003e= 0 and (../offset4) mod 4 = 0))"
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-users/rule-user/offset5",
+                      "type": "number",
+                      "label": "offset5",
+                      "required": true,
+                      "when": "../user-rule5",
+                      "must": [
+                        {
+                          "expr": "((../offset-begin = 'l2-head' and ../offset5 \u003c= 114 and ../offset5 \u003e= 2 and (../offset5) mod 4 = 2) or ((../offset-begin = 'ipv4-head' or ../offset-begin = 'l4-head') and ../offset5 \u003c= 96 and ../offset5 \u003e= 0 and (../offset5) mod 4 = 0) or (../offset-begin = 'inner-ipv4-head' and ../offset5 \u003c= 60 and ../offset5 \u003e= 0 and (../offset5) mod 4 = 0))"
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-users/rule-user/offset6",
+                      "type": "number",
+                      "label": "offset6",
+                      "required": true,
+                      "when": "../user-rule6",
+                      "must": [
+                        {
+                          "expr": "((../offset-begin = 'l2-head' and ../offset6 \u003c= 114 and ../offset6 \u003e= 2 and (../offset6) mod 4 = 2) or ((../offset-begin = 'ipv4-head' or ../offset-begin = 'l4-head') and ../offset6 \u003c= 96 and ../offset6 \u003e= 0 and (../offset6) mod 4 = 0) or (../offset-begin = 'inner-ipv4-head' and ../offset6 \u003c= 60 and ../offset6 \u003e= 0 and (../offset6) mod 4 = 0))"
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-users/rule-user/offset7",
+                      "type": "number",
+                      "label": "offset7",
+                      "required": true,
+                      "when": "../user-rule7",
+                      "must": [
+                        {
+                          "expr": "((../offset-begin = 'l2-head' and ../offset7 \u003c= 114 and ../offset7 \u003e= 2 and (../offset7) mod 4 = 2) or ((../offset-begin = 'ipv4-head' or ../offset-begin = 'l4-head') and ../offset7 \u003c= 96 and ../offset7 \u003e= 0 and (../offset7) mod 4 = 0) or (../offset-begin = 'inner-ipv4-head' and ../offset7 \u003c= 60 and ../offset7 \u003e= 0 and (../offset7) mod 4 = 0))"
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-users/rule-user/offset8",
+                      "type": "number",
+                      "label": "offset8",
+                      "required": true,
+                      "when": "../user-rule8",
+                      "must": [
+                        {
+                          "expr": "((../offset-begin = 'l2-head' and ../offset8 \u003c= 114 and ../offset8 \u003e= 2 and (../offset8) mod 4 = 2) or ((../offset-begin = 'ipv4-head' or ../offset-begin = 'l4-head') and ../offset8 \u003c= 96 and ../offset8 \u003e= 0 and (../offset8) mod 4 = 0) or (../offset-begin = 'inner-ipv4-head' and ../offset8 \u003c= 60 and ../offset8 \u003e= 0 and (../offset8) mod 4 = 0))"
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-users/rule-user/time-range-name",
+                      "type": "string",
+                      "label": "time-range-name"
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-users/rule-user/user-rule1",
+                      "type": "string",
+                      "label": "user-rule1",
+                      "pattern": "(0x|0X)?[0-9a-fA-F]+"
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-users/rule-user/user-rule1-mask",
+                      "type": "string",
+                      "label": "user-rule1-mask",
+                      "required": true,
+                      "pattern": "(0x|0X)?[0-9a-fA-F]+",
+                      "when": "../user-rule1"
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-users/rule-user/user-rule2",
+                      "type": "string",
+                      "label": "user-rule2",
+                      "pattern": "(0x|0X)?[0-9a-fA-F]+",
+                      "when": "../user-rule1"
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-users/rule-user/user-rule2-mask",
+                      "type": "string",
+                      "label": "user-rule2-mask",
+                      "required": true,
+                      "pattern": "(0x|0X)?[0-9a-fA-F]+",
+                      "when": "../user-rule2"
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-users/rule-user/user-rule3",
+                      "type": "string",
+                      "label": "user-rule3",
+                      "pattern": "(0x|0X)?[0-9a-fA-F]+",
+                      "when": "../user-rule2"
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-users/rule-user/user-rule3-mask",
+                      "type": "string",
+                      "label": "user-rule3-mask",
+                      "required": true,
+                      "pattern": "(0x|0X)?[0-9a-fA-F]+",
+                      "when": "../user-rule3"
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-users/rule-user/user-rule4",
+                      "type": "string",
+                      "label": "user-rule4",
+                      "pattern": "(0x|0X)?[0-9a-fA-F]+",
+                      "when": "../user-rule3"
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-users/rule-user/user-rule4-mask",
+                      "type": "string",
+                      "label": "user-rule4-mask",
+                      "required": true,
+                      "pattern": "(0x|0X)?[0-9a-fA-F]+",
+                      "when": "../user-rule4"
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-users/rule-user/user-rule5",
+                      "type": "string",
+                      "label": "user-rule5",
+                      "pattern": "(0x|0X)?[0-9a-fA-F]+",
+                      "when": "../user-rule4"
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-users/rule-user/user-rule5-mask",
+                      "type": "string",
+                      "label": "user-rule5-mask",
+                      "required": true,
+                      "pattern": "(0x|0X)?[0-9a-fA-F]+",
+                      "when": "../user-rule5"
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-users/rule-user/user-rule6",
+                      "type": "string",
+                      "label": "user-rule6",
+                      "pattern": "(0x|0X)?[0-9a-fA-F]+",
+                      "when": "../user-rule5"
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-users/rule-user/user-rule6-mask",
+                      "type": "string",
+                      "label": "user-rule6-mask",
+                      "required": true,
+                      "pattern": "(0x|0X)?[0-9a-fA-F]+",
+                      "when": "../user-rule6"
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-users/rule-user/user-rule7",
+                      "type": "string",
+                      "label": "user-rule7",
+                      "pattern": "(0x|0X)?[0-9a-fA-F]+",
+                      "when": "../user-rule6"
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-users/rule-user/user-rule7-mask",
+                      "type": "string",
+                      "label": "user-rule7-mask",
+                      "required": true,
+                      "pattern": "(0x|0X)?[0-9a-fA-F]+",
+                      "when": "../user-rule7"
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-users/rule-user/user-rule8",
+                      "type": "string",
+                      "label": "user-rule8",
+                      "pattern": "(0x|0X)?[0-9a-fA-F]+",
+                      "when": "../user-rule7"
+                    },
+                    {
+                      "path": "/acl/groups/group/rule-users/rule-user/user-rule8-mask",
+                      "type": "string",
+                      "label": "user-rule8-mask",
+                      "required": true,
+                      "pattern": "(0x|0X)?[0-9a-fA-F]+",
+                      "when": "../user-rule8"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/acl/groups/group/step",
+              "type": "number",
+              "label": "step",
+              "minimum": 1,
+              "maximum": 20
+            },
+            {
+              "path": "/acl/groups/group/type",
+              "type": "enum",
+              "label": "type",
+              "required": true,
+              "options": [
+                {
+                  "label": "ARP",
+                  "value": "ARP"
+                },
+                {
+                  "label": "UCL",
+                  "value": "UCL"
+                },
+                {
+                  "label": "advance",
+                  "value": "advance"
+                },
+                {
+                  "label": "basic",
+                  "value": "basic"
+                },
+                {
+                  "label": "interface",
+                  "value": "interface"
+                },
+                {
+                  "label": "link",
+                  "value": "link"
+                },
+                {
+                  "label": "mpls",
+                  "value": "mpls"
+                },
+                {
+                  "label": "user",
+                  "value": "user"
+                }
+              ],
+              "supportFilter": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/acl/ip-pool6s",
+      "type": "group",
+      "label": "ip-pool6s",
+      "fields": [
+        {
+          "path": "/acl/ip-pool6s/ip-pool6",
+          "type": "list",
+          "label": "ip-pool6",
+          "fields": [
+            {
+              "path": "/acl/ip-pool6s/ip-pool6/apply-bgp-ipv6-peer",
+              "type": "boolean",
+              "label": "apply-bgp-ipv6-peer",
+              "supportFilter": true
+            },
+            {
+              "path": "/acl/ip-pool6s/ip-pool6/bgp-peer-vpn",
+              "type": "enum",
+              "label": "bgp-peer-vpn",
+              "options": [
+                {
+                  "label": "all",
+                  "value": "all"
+                },
+                {
+                  "label": "all-private",
+                  "value": "all-private"
+                },
+                {
+                  "label": "single",
+                  "value": "single"
+                }
+              ],
+              "when": "not(../apply-bgp-ipv6-peer='false')",
+              "supportFilter": true
+            },
+            {
+              "path": "/acl/ip-pool6s/ip-pool6/bgp-peer-vpn-name",
+              "type": "string",
+              "label": "bgp-peer-vpn-name",
+              "when": "not(../apply-bgp-ipv6-peer='false' or ../bgp-peer-vpn!='single') or ../bgp-peer-vpn='single'",
+              "supportFilter": true
+            },
+            {
+              "path": "/acl/ip-pool6s/ip-pool6/name",
+              "type": "string",
+              "label": "name",
+              "isKey": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/acl/ip-pools",
+      "type": "group",
+      "label": "ip-pools",
+      "fields": [
+        {
+          "path": "/acl/ip-pools/ip-pool",
+          "type": "list",
+          "label": "ip-pool",
+          "fields": [
+            {
+              "path": "/acl/ip-pools/ip-pool/apply-bgp-ipv4-peer",
+              "type": "boolean",
+              "label": "apply-bgp-ipv4-peer",
+              "supportFilter": true
+            },
+            {
+              "path": "/acl/ip-pools/ip-pool/bgp-peer-vpn",
+              "type": "enum",
+              "label": "bgp-peer-vpn",
+              "options": [
+                {
+                  "label": "all",
+                  "value": "all"
+                },
+                {
+                  "label": "all-private",
+                  "value": "all-private"
+                },
+                {
+                  "label": "single",
+                  "value": "single"
+                }
+              ],
+              "when": "(../apply-bgp-ipv4-peer='true')",
+              "supportFilter": true
+            },
+            {
+              "path": "/acl/ip-pools/ip-pool/bgp-peer-vpn-name",
+              "type": "string",
+              "label": "bgp-peer-vpn-name",
+              "when": "(../bgp-peer-vpn='single')",
+              "must": [
+                {
+                  "expr": "../bgp-peer-vpn-name='_public_' or not(../../ip-pool[bgp-peer-vpn-name=current()])"
+                },
+                {
+                  "expr": "/ni:network-instance/ni:instances/ni:instance[ni:name=current()]/l3vpn:afs/l3vpn:af[l3vpn:type='ipv4-unicast']"
+                }
+              ],
+              "supportFilter": true
+            },
+            {
+              "path": "/acl/ip-pools/ip-pool/ipaddrs",
+              "type": "group",
+              "label": "ipaddrs",
+              "must": [
+                {
+                  "expr": "not(../apply-bgp-ipv4-peer) or (../apply-bgp-ipv4-peer='false')"
+                }
+              ],
+              "fields": [
+                {
+                  "path": "/acl/ip-pools/ip-pool/ipaddrs/ipaddr",
+                  "type": "list",
+                  "label": "ipaddr",
+                  "fields": [
+                    {
+                      "path": "/acl/ip-pools/ip-pool/ipaddrs/ipaddr/address",
+                      "type": "string",
+                      "label": "address",
+                      "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?",
+                      "isKey": true
+                    },
+                    {
+                      "path": "/acl/ip-pools/ip-pool/ipaddrs/ipaddr/mask",
+                      "type": "string",
+                      "label": "mask",
+                      "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?",
+                      "isKey": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/acl/ip-pools/ip-pool/name",
+              "type": "string",
+              "label": "name",
+              "isKey": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/acl/port-pools",
+      "type": "group",
+      "label": "port-pools",
+      "fields": [
+        {
+          "path": "/acl/port-pools/port-pool",
+          "type": "list",
+          "label": "port-pool",
+          "fields": [
+            {
+              "path": "/acl/port-pools/port-pool/name",
+              "type": "string",
+              "label": "name",
+              "isKey": true
+            },
+            {
+              "path": "/acl/port-pools/port-pool/ports",
+              "type": "group",
+              "label": "ports",
+              "fields": [
+                {
+                  "path": "/acl/port-pools/port-pool/ports/port",
+                  "type": "list",
+                  "label": "port",
+                  "fields": [
+                    {
+                      "path": "/acl/port-pools/port-pool/ports/port/number-begin",
+                      "type": "number",
+                      "label": "number-begin",
+                      "isKey": true
+                    },
+                    {
+                      "path": "/acl/port-pools/port-pool/ports/port/number-end",
+                      "type": "number",
+                      "label": "number-end",
+                      "isKey": true
+                    },
+                    {
+                      "path": "/acl/port-pools/port-pool/ports/port/operation",
+                      "type": "enum",
+                      "label": "operation",
+                      "options": [
+                        {
+                          "label": "eq",
+                          "value": "eq"
+                        },
+                        {
+                          "label": "gt",
+                          "value": "gt"
+                        },
+                        {
+                          "label": "lt",
+                          "value": "lt"
+                        },
+                        {
+                          "label": "neq",
+                          "value": "neq"
+                        },
+                        {
+                          "label": "range",
+                          "value": "range"
+                        }
+                      ],
+                      "isKey": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

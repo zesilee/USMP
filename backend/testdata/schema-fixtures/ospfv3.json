@@ -1,0 +1,94 @@
+{
+  "module": "ospfv3",
+  "title": "ospfv3",
+  "vendor": "huawei",
+  "fields": [
+    {
+      "path": "/ospfv3/advertise-max-cost",
+      "type": "group",
+      "label": "advertise-max-cost",
+      "fields": [
+        {
+          "path": "/ospfv3/advertise-max-cost/enable",
+          "type": "boolean",
+          "label": "enable"
+        }
+      ]
+    },
+    {
+      "path": "/ospfv3/check-rt-id",
+      "type": "group",
+      "label": "check-rt-id",
+      "fields": [
+        {
+          "path": "/ospfv3/check-rt-id/conflict-flag",
+          "type": "boolean",
+          "label": "conflict-flag"
+        }
+      ]
+    },
+    {
+      "path": "/ospfv3/flush-source-trace",
+      "type": "group",
+      "label": "flush-source-trace",
+      "fields": [
+        {
+          "path": "/ospfv3/flush-source-trace/enable",
+          "type": "boolean",
+          "label": "enable"
+        },
+        {
+          "path": "/ospfv3/flush-source-trace/port",
+          "type": "number",
+          "label": "port",
+          "minimum": 1025,
+          "maximum": 65535
+        }
+      ]
+    },
+    {
+      "path": "/ospfv3/session-car",
+      "type": "group",
+      "label": "session-car",
+      "must": [
+        {
+          "expr": "pir-interval\u003e=cir-interval"
+        },
+        {
+          "expr": "pbs-interval\u003e=cbs-interval"
+        }
+      ],
+      "fields": [
+        {
+          "path": "/ospfv3/session-car/cbs-interval",
+          "type": "number",
+          "label": "cbs-interval",
+          "maximum": 1000000
+        },
+        {
+          "path": "/ospfv3/session-car/cir-interval",
+          "type": "number",
+          "label": "cir-interval",
+          "maximum": 1000000
+        },
+        {
+          "path": "/ospfv3/session-car/enable",
+          "type": "boolean",
+          "label": "enable"
+        },
+        {
+          "path": "/ospfv3/session-car/pbs-interval",
+          "type": "number",
+          "label": "pbs-interval",
+          "maximum": 10000000
+        },
+        {
+          "path": "/ospfv3/session-car/pir-interval",
+          "type": "number",
+          "label": "pir-interval",
+          "maximum": 1000000
+        }
+      ]
+    }
+  ]
+}

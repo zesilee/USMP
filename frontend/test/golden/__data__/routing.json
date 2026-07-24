@@ -1,0 +1,610 @@
+{
+  "module": "routing",
+  "tabs": [
+    {
+      "name": "routing-manage",
+      "kind": "form"
+    },
+    {
+      "name": "static-routing",
+      "kind": "form"
+    }
+  ],
+  "lists": {},
+  "tree": [
+    {
+      "path": "/routing/routing-manage",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing/routing-manage/global-active-vpn-route-statistics",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/routing/routing-manage/global-active-vpn-route-statistics/direct-number",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/routing/routing-manage/global-active-vpn-route-statistics/total-number",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/routing/routing-manage/ipv4-threshold",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing/routing-manage/ipv4-threshold/lower-percent",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing/routing-manage/ipv4-threshold/upper-percent",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing/routing-manage/ipv4-vpn-route-statisticss",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/routing/routing-manage/ipv4-vpn-route-statisticss/ipv4-vpn-route-statistics",
+      "kind": "list",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/routing/routing-manage/ipv4-vpn-route-statisticss/ipv4-vpn-route-statistics/active-num",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/routing/routing-manage/ipv4-vpn-route-statisticss/ipv4-vpn-route-statistics/added-num",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/routing/routing-manage/ipv4-vpn-route-statisticss/ipv4-vpn-route-statistics/deleted-num",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/routing/routing-manage/ipv4-vpn-route-statisticss/ipv4-vpn-route-statistics/freed-num",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/routing/routing-manage/ipv4-vpn-route-statisticss/ipv4-vpn-route-statistics/protocol-type",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/routing/routing-manage/ipv4-vpn-route-statisticss/ipv4-vpn-route-statistics/total-num",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/routing/routing-manage/ipv6-threshold",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing/routing-manage/ipv6-threshold/lower-percent",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing/routing-manage/ipv6-threshold/upper-percent",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing/routing-manage/ipv6-vpn-route-statisticss",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/routing/routing-manage/ipv6-vpn-route-statisticss/ipv6-vpn-route-statistics",
+      "kind": "list",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/routing/routing-manage/ipv6-vpn-route-statisticss/ipv6-vpn-route-statistics/active-num",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/routing/routing-manage/ipv6-vpn-route-statisticss/ipv6-vpn-route-statistics/added-num",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/routing/routing-manage/ipv6-vpn-route-statisticss/ipv6-vpn-route-statistics/deleted-num",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/routing/routing-manage/ipv6-vpn-route-statisticss/ipv6-vpn-route-statistics/freed-num",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/routing/routing-manage/ipv6-vpn-route-statisticss/ipv6-vpn-route-statistics/protocol-type",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/routing/routing-manage/ipv6-vpn-route-statisticss/ipv6-vpn-route-statistics/total-num",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/routing/routing-manage/iterative-restrain",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing/routing-manage/iterative-restrain/enable",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing/routing-manage/iterative-restrain/increase-time",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing/routing-manage/iterative-restrain/max-time",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing/routing-manage/iterative-restrain/start-time",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing/routing-manage/relay-default-routes",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing/routing-manage/relay-default-routes/relay-default-route",
+      "kind": "list",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing/routing-manage/relay-default-routes/relay-default-route/address-family",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing/routing-manage/relay-default-routes/relay-default-route/protocol-type",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing/routing-manage/relay-label",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing/routing-manage/relay-label/ipv4-set",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing/routing-manage/relay-label/ipv6-set",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing/routing-manage/relay-tunnel",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing/routing-manage/relay-tunnel/enable",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing/routing-manage/relay-tunnel/ipv4-prefix-ref",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing/routing-manage/relay-tunnel/tunnel-policy-ref",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing/static-routing",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing/static-routing/ipv4-relay-tunnel",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing/static-routing/ipv4-relay-tunnel/enable",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing/static-routing/ipv4-relay-tunnel/ipv4-prefix-ref",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing/static-routing/ipv4-relay-tunnel/tunnel-policy-ref",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing/static-routing/ipv4-site",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing/static-routing/ipv4-site/current-route-num",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/routing/static-routing/ipv4-site/inherit-cost-switch",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing/static-routing/ipv4-site/max-route-num",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/routing/static-routing/ipv4-site/min-rx-interval",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing/static-routing/ipv4-site/min-tx-interval",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing/static-routing/ipv4-site/multiplier",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing/static-routing/ipv4-site/preference",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing/static-routing/ipv4-site/relay-arp-vlink",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing/static-routing/ipv4-site/relay-remote",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing/static-routing/ipv4-site/relay-switch",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing/static-routing/ipv6-site",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing/static-routing/ipv6-site/current-route-num",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/routing/static-routing/ipv6-site/max-route-num",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/routing/static-routing/ipv6-site/min-rx-interval",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing/static-routing/ipv6-site/min-tx-interval",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing/static-routing/ipv6-site/multiplier",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing/static-routing/ipv6-site/preference",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing/static-routing/ipv6-site/relay-arp-vlink6",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing/static-routing/max-route-number",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/routing/static-routing/max-route-number/num",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    }
+  ]
+}

@@ -1,0 +1,150 @@
+{
+  "module": "dsa",
+  "title": "dsa",
+  "vendor": "huawei",
+  "fields": [
+    {
+      "path": "/dsa/dsa-global",
+      "type": "group",
+      "label": "dsa-global",
+      "fields": [
+        {
+          "path": "/dsa/dsa-global/max-key-pair",
+          "type": "number",
+          "label": "max-key-pair",
+          "minimum": 1,
+          "maximum": 20
+        }
+      ]
+    },
+    {
+      "path": "/dsa/key-pairs",
+      "type": "group",
+      "label": "key-pairs",
+      "fields": [
+        {
+          "path": "/dsa/key-pairs/key-pair",
+          "type": "list",
+          "label": "key-pair",
+          "fields": [
+            {
+              "path": "/dsa/key-pairs/key-pair/host-key-code",
+              "type": "string",
+              "label": "host-key-code",
+              "readonly": true,
+              "supportFilter": true
+            },
+            {
+              "path": "/dsa/key-pairs/key-pair/key-pair-label",
+              "type": "string",
+              "label": "key-pair-label",
+              "pattern": "[a-zA-Z0-9_]*",
+              "isKey": true
+            },
+            {
+              "path": "/dsa/key-pairs/key-pair/key-size",
+              "type": "enum",
+              "label": "key-size",
+              "options": [
+                {
+                  "label": "2048",
+                  "value": "2048"
+                }
+              ],
+              "supportFilter": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/dsa/local-key",
+      "type": "group",
+      "label": "local-key",
+      "fields": [
+        {
+          "path": "/dsa/local-key/host-key-code",
+          "type": "string",
+          "label": "host-key-code",
+          "readonly": true
+        },
+        {
+          "path": "/dsa/local-key/host-key-name",
+          "type": "string",
+          "label": "host-key-name",
+          "readonly": true
+        },
+        {
+          "path": "/dsa/local-key/host-key-openssh",
+          "type": "string",
+          "label": "host-key-openssh",
+          "readonly": true
+        },
+        {
+          "path": "/dsa/local-key/host-key-pem",
+          "type": "string",
+          "label": "host-key-pem",
+          "readonly": true
+        },
+        {
+          "path": "/dsa/local-key/key-size",
+          "type": "enum",
+          "label": "key-size",
+          "options": [
+            {
+              "label": "2048",
+              "value": "2048"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/dsa/peer-keys",
+      "type": "group",
+      "label": "peer-keys",
+      "fields": [
+        {
+          "path": "/dsa/peer-keys/peer-key",
+          "type": "list",
+          "label": "peer-key",
+          "fields": [
+            {
+              "path": "/dsa/peer-keys/peer-key/encoding-type",
+              "type": "enum",
+              "label": "encoding-type",
+              "options": [
+                {
+                  "label": "der",
+                  "value": "der"
+                },
+                {
+                  "label": "openssh",
+                  "value": "openssh"
+                },
+                {
+                  "label": "pem",
+                  "value": "pem"
+                }
+              ],
+              "supportFilter": true
+            },
+            {
+              "path": "/dsa/peer-keys/peer-key/key-code",
+              "type": "string",
+              "label": "key-code",
+              "required": true,
+              "supportFilter": true
+            },
+            {
+              "path": "/dsa/peer-keys/peer-key/key-name",
+              "type": "string",
+              "label": "key-name",
+              "isKey": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

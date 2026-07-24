@@ -1,0 +1,650 @@
+{
+  "module": "nvo3",
+  "title": "nvo3",
+  "vendor": "huawei",
+  "fields": [
+    {
+      "path": "/nvo3/global-attribute",
+      "type": "group",
+      "label": "global-attribute",
+      "fields": [
+        {
+          "path": "/nvo3/global-attribute/exact-sub-enable",
+          "type": "boolean",
+          "label": "exact-sub-enable"
+        }
+      ]
+    },
+    {
+      "path": "/nvo3/tunnels",
+      "type": "group",
+      "label": "tunnels",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/nvo3/tunnels/tunnel",
+          "type": "list",
+          "label": "tunnel",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/nvo3/tunnels/tunnel/destination",
+              "type": "string",
+              "label": "destination",
+              "readonly": true,
+              "supportFilter": true
+            },
+            {
+              "path": "/nvo3/tunnels/tunnel/id",
+              "type": "number",
+              "label": "id",
+              "minimum": 1,
+              "maximum": 4294967295,
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/nvo3/tunnels/tunnel/mode",
+              "type": "enum",
+              "label": "mode",
+              "options": [
+                {
+                  "label": "cu-mode",
+                  "value": "cu-mode"
+                },
+                {
+                  "label": "default-mode",
+                  "value": "default-mode"
+                }
+              ],
+              "readonly": true,
+              "supportFilter": true
+            },
+            {
+              "path": "/nvo3/tunnels/tunnel/source",
+              "type": "string",
+              "label": "source",
+              "readonly": true,
+              "supportFilter": true
+            },
+            {
+              "path": "/nvo3/tunnels/tunnel/state",
+              "type": "enum",
+              "label": "state",
+              "options": [
+                {
+                  "label": "down",
+                  "value": "down"
+                },
+                {
+                  "label": "up",
+                  "value": "up"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "path": "/nvo3/tunnels/tunnel/type",
+              "type": "enum",
+              "label": "type",
+              "options": [
+                {
+                  "label": "dynamic",
+                  "value": "dynamic"
+                },
+                {
+                  "label": "static",
+                  "value": "static"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "path": "/nvo3/tunnels/tunnel/up-time",
+              "type": "string",
+              "label": "up-time",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/nvo3/vni-instances",
+      "type": "group",
+      "label": "vni-instances",
+      "fields": [
+        {
+          "path": "/nvo3/vni-instances/vni-instance",
+          "type": "list",
+          "label": "vni-instance",
+          "fields": [
+            {
+              "path": "/nvo3/vni-instances/vni-instance/mcast-groups",
+              "type": "group",
+              "label": "mcast-groups",
+              "fields": [
+                {
+                  "path": "/nvo3/vni-instances/vni-instance/mcast-groups/mcast-group",
+                  "type": "list",
+                  "label": "mcast-group",
+                  "fields": [
+                    {
+                      "path": "/nvo3/vni-instances/vni-instance/mcast-groups/mcast-group/address",
+                      "type": "string",
+                      "label": "address",
+                      "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?",
+                      "isKey": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/nvo3/vni-instances/vni-instance/protocol-bgp",
+              "type": "enum",
+              "label": "protocol-bgp",
+              "options": [
+                {
+                  "label": "peer",
+                  "value": "peer"
+                }
+              ]
+            },
+            {
+              "path": "/nvo3/vni-instances/vni-instance/source-nve",
+              "type": "string",
+              "label": "source-nve",
+              "must": [
+                {
+                  "expr": "/ifm:ifm/ifm:interfaces/ifm:interface[ifm:name=current()]/ifm:type='Nve'"
+                }
+              ],
+              "isKey": true
+            },
+            {
+              "path": "/nvo3/vni-instances/vni-instance/state",
+              "type": "enum",
+              "label": "state",
+              "options": [
+                {
+                  "label": "down",
+                  "value": "down"
+                },
+                {
+                  "label": "up",
+                  "value": "up"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "path": "/nvo3/vni-instances/vni-instance/static-evpl-peers",
+              "type": "group",
+              "label": "static-evpl-peers",
+              "fields": [
+                {
+                  "path": "/nvo3/vni-instances/vni-instance/static-evpl-peers/static-evpl-peer",
+                  "type": "list",
+                  "label": "static-evpl-peer",
+                  "fields": [
+                    {
+                      "path": "/nvo3/vni-instances/vni-instance/static-evpl-peers/static-evpl-peer/address",
+                      "type": "string",
+                      "label": "address",
+                      "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?",
+                      "must": [
+                        {
+                          "expr": "(not(../../../static-peers/static-peer) and not(../../../protocol-bgp)) or not(../address)"
+                        }
+                      ],
+                      "isKey": true
+                    },
+                    {
+                      "path": "/nvo3/vni-instances/vni-instance/static-evpl-peers/static-evpl-peer/preference",
+                      "type": "enum",
+                      "label": "preference",
+                      "options": [
+                        {
+                          "label": "bypass",
+                          "value": "bypass"
+                        },
+                        {
+                          "label": "primary",
+                          "value": "primary"
+                        },
+                        {
+                          "label": "secondary",
+                          "value": "secondary"
+                        }
+                      ],
+                      "operationExclude": [
+                        "update"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/nvo3/vni-instances/vni-instance/static-peers",
+              "type": "group",
+              "label": "static-peers",
+              "fields": [
+                {
+                  "path": "/nvo3/vni-instances/vni-instance/static-peers/static-peer",
+                  "type": "list",
+                  "label": "static-peer",
+                  "fields": [
+                    {
+                      "path": "/nvo3/vni-instances/vni-instance/static-peers/static-peer/address",
+                      "type": "string",
+                      "label": "address",
+                      "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?",
+                      "isKey": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/nvo3/vni-instances/vni-instance/vni",
+              "type": "number",
+              "label": "vni",
+              "minimum": 1,
+              "maximum": 16777215,
+              "isKey": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/nvo3/vni-labels",
+      "type": "group",
+      "label": "vni-labels",
+      "fields": [
+        {
+          "path": "/nvo3/vni-labels/vni-label",
+          "type": "list",
+          "label": "vni-label",
+          "fields": [
+            {
+              "path": "/nvo3/vni-labels/vni-label/statistics",
+              "type": "group",
+              "label": "statistics",
+              "fields": [
+                {
+                  "path": "/nvo3/vni-labels/vni-label/statistics/collections",
+                  "type": "group",
+                  "label": "collections",
+                  "readonly": true,
+                  "when": "../enable='true'",
+                  "fields": [
+                    {
+                      "path": "/nvo3/vni-labels/vni-label/statistics/collections/drop-broadcast-pkts",
+                      "type": "number",
+                      "label": "drop-broadcast-pkts",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/nvo3/vni-labels/vni-label/statistics/collections/drop-multicast-pkts",
+                      "type": "number",
+                      "label": "drop-multicast-pkts",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/nvo3/vni-labels/vni-label/statistics/collections/drop-unicast-pkts",
+                      "type": "number",
+                      "label": "drop-unicast-pkts",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/nvo3/vni-labels/vni-label/statistics/collections/receive-bits-rate",
+                      "type": "number",
+                      "label": "receive-bits-rate",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/nvo3/vni-labels/vni-label/statistics/collections/receive-broadcast-pkts",
+                      "type": "number",
+                      "label": "receive-broadcast-pkts",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/nvo3/vni-labels/vni-label/statistics/collections/receive-multicast-pkts",
+                      "type": "number",
+                      "label": "receive-multicast-pkts",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/nvo3/vni-labels/vni-label/statistics/collections/receive-pkts-rate",
+                      "type": "number",
+                      "label": "receive-pkts-rate",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/nvo3/vni-labels/vni-label/statistics/collections/receive-total-bytes",
+                      "type": "number",
+                      "label": "receive-total-bytes",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/nvo3/vni-labels/vni-label/statistics/collections/receive-total-pkts",
+                      "type": "number",
+                      "label": "receive-total-pkts",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/nvo3/vni-labels/vni-label/statistics/collections/receive-unicast-pkts",
+                      "type": "number",
+                      "label": "receive-unicast-pkts",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/nvo3/vni-labels/vni-label/statistics/collections/send-bits-rate",
+                      "type": "number",
+                      "label": "send-bits-rate",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/nvo3/vni-labels/vni-label/statistics/collections/send-broadcast-pkts",
+                      "type": "number",
+                      "label": "send-broadcast-pkts",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/nvo3/vni-labels/vni-label/statistics/collections/send-multicast-pkts",
+                      "type": "number",
+                      "label": "send-multicast-pkts",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/nvo3/vni-labels/vni-label/statistics/collections/send-pkts-rate",
+                      "type": "number",
+                      "label": "send-pkts-rate",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/nvo3/vni-labels/vni-label/statistics/collections/send-total-bytes",
+                      "type": "number",
+                      "label": "send-total-bytes",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/nvo3/vni-labels/vni-label/statistics/collections/send-total-pkts",
+                      "type": "number",
+                      "label": "send-total-pkts",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/nvo3/vni-labels/vni-label/statistics/collections/send-unicast-pkts",
+                      "type": "number",
+                      "label": "send-unicast-pkts",
+                      "readonly": true
+                    }
+                  ]
+                },
+                {
+                  "path": "/nvo3/vni-labels/vni-label/statistics/enable",
+                  "type": "boolean",
+                  "label": "enable"
+                }
+              ]
+            },
+            {
+              "path": "/nvo3/vni-labels/vni-label/vni",
+              "type": "number",
+              "label": "vni",
+              "minimum": 1,
+              "maximum": 16777215,
+              "isKey": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/nvo3/vteps",
+      "type": "group",
+      "label": "vteps",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/nvo3/vteps/cu-peers",
+          "type": "group",
+          "label": "cu-peers",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/nvo3/vteps/cu-peers/cu-peer",
+              "type": "list",
+              "label": "cu-peer",
+              "readonly": true,
+              "fields": [
+                {
+                  "path": "/nvo3/vteps/cu-peers/cu-peer/destination",
+                  "type": "string",
+                  "label": "destination",
+                  "readonly": true,
+                  "isKey": true
+                },
+                {
+                  "path": "/nvo3/vteps/cu-peers/cu-peer/nqa-state",
+                  "type": "enum",
+                  "label": "nqa-state",
+                  "options": [
+                    {
+                      "label": "down",
+                      "value": "down"
+                    },
+                    {
+                      "label": "unknown",
+                      "value": "unknown"
+                    },
+                    {
+                      "label": "up",
+                      "value": "up"
+                    }
+                  ],
+                  "readonly": true
+                },
+                {
+                  "path": "/nvo3/vteps/cu-peers/cu-peer/out-vni",
+                  "type": "number",
+                  "label": "out-vni",
+                  "minimum": 1,
+                  "maximum": 16777215,
+                  "readonly": true
+                },
+                {
+                  "path": "/nvo3/vteps/cu-peers/cu-peer/packet-loss-ratio",
+                  "type": "number",
+                  "label": "packet-loss-ratio",
+                  "maximum": 100,
+                  "readonly": true
+                },
+                {
+                  "path": "/nvo3/vteps/cu-peers/cu-peer/source",
+                  "type": "string",
+                  "label": "source",
+                  "readonly": true,
+                  "isKey": true
+                },
+                {
+                  "path": "/nvo3/vteps/cu-peers/cu-peer/type",
+                  "type": "enum",
+                  "label": "type",
+                  "options": [
+                    {
+                      "label": "dynamic",
+                      "value": "dynamic"
+                    },
+                    {
+                      "label": "static",
+                      "value": "static"
+                    }
+                  ],
+                  "readonly": true
+                },
+                {
+                  "path": "/nvo3/vteps/cu-peers/cu-peer/vni",
+                  "type": "number",
+                  "label": "vni",
+                  "minimum": 1,
+                  "maximum": 16777215,
+                  "readonly": true,
+                  "isKey": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "path": "/nvo3/vteps/evpl-peers",
+          "type": "group",
+          "label": "evpl-peers",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/nvo3/vteps/evpl-peers/evpl-peer",
+              "type": "list",
+              "label": "evpl-peer",
+              "readonly": true,
+              "fields": [
+                {
+                  "path": "/nvo3/vteps/evpl-peers/evpl-peer/backup-out-vni",
+                  "type": "number",
+                  "label": "backup-out-vni",
+                  "minimum": 1,
+                  "maximum": 16777215,
+                  "readonly": true
+                },
+                {
+                  "path": "/nvo3/vteps/evpl-peers/evpl-peer/backup-peer",
+                  "type": "string",
+                  "label": "backup-peer",
+                  "readonly": true
+                },
+                {
+                  "path": "/nvo3/vteps/evpl-peers/evpl-peer/bypass-out-vni",
+                  "type": "number",
+                  "label": "bypass-out-vni",
+                  "minimum": 1,
+                  "maximum": 16777215,
+                  "readonly": true
+                },
+                {
+                  "path": "/nvo3/vteps/evpl-peers/evpl-peer/bypass-peer",
+                  "type": "string",
+                  "label": "bypass-peer",
+                  "readonly": true
+                },
+                {
+                  "path": "/nvo3/vteps/evpl-peers/evpl-peer/id",
+                  "type": "number",
+                  "label": "id",
+                  "minimum": 1,
+                  "maximum": 16777215,
+                  "readonly": true,
+                  "isKey": true
+                },
+                {
+                  "path": "/nvo3/vteps/evpl-peers/evpl-peer/out-vni",
+                  "type": "number",
+                  "label": "out-vni",
+                  "minimum": 1,
+                  "maximum": 16777215,
+                  "readonly": true
+                },
+                {
+                  "path": "/nvo3/vteps/evpl-peers/evpl-peer/peer",
+                  "type": "string",
+                  "label": "peer",
+                  "readonly": true
+                },
+                {
+                  "path": "/nvo3/vteps/evpl-peers/evpl-peer/source",
+                  "type": "string",
+                  "label": "source",
+                  "readonly": true
+                },
+                {
+                  "path": "/nvo3/vteps/evpl-peers/evpl-peer/vni",
+                  "type": "number",
+                  "label": "vni",
+                  "minimum": 1,
+                  "maximum": 16777215,
+                  "readonly": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "path": "/nvo3/vteps/peers",
+          "type": "group",
+          "label": "peers",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/nvo3/vteps/peers/peer",
+              "type": "list",
+              "label": "peer",
+              "readonly": true,
+              "fields": [
+                {
+                  "path": "/nvo3/vteps/peers/peer/destination",
+                  "type": "string",
+                  "label": "destination",
+                  "readonly": true,
+                  "isKey": true
+                },
+                {
+                  "path": "/nvo3/vteps/peers/peer/out-vni",
+                  "type": "number",
+                  "label": "out-vni",
+                  "minimum": 1,
+                  "maximum": 16777215,
+                  "readonly": true
+                },
+                {
+                  "path": "/nvo3/vteps/peers/peer/source",
+                  "type": "string",
+                  "label": "source",
+                  "readonly": true,
+                  "isKey": true
+                },
+                {
+                  "path": "/nvo3/vteps/peers/peer/type",
+                  "type": "enum",
+                  "label": "type",
+                  "options": [
+                    {
+                      "label": "dynamic",
+                      "value": "dynamic"
+                    },
+                    {
+                      "label": "static",
+                      "value": "static"
+                    }
+                  ],
+                  "readonly": true
+                },
+                {
+                  "path": "/nvo3/vteps/peers/peer/vni",
+                  "type": "number",
+                  "label": "vni",
+                  "minimum": 1,
+                  "maximum": 16777215,
+                  "readonly": true,
+                  "isKey": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

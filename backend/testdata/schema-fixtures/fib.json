@@ -1,0 +1,328 @@
+{
+  "module": "fib",
+  "title": "fib",
+  "vendor": "huawei",
+  "fields": [
+    {
+      "path": "/fib/route-statistics",
+      "type": "group",
+      "label": "route-statistics",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/fib/route-statistics/ip-route-entry-counts",
+          "type": "group",
+          "label": "ip-route-entry-counts",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/fib/route-statistics/ip-route-entry-counts/ip-route-entry-count",
+              "type": "list",
+              "label": "ip-route-entry-count",
+              "readonly": true,
+              "fields": [
+                {
+                  "path": "/fib/route-statistics/ip-route-entry-counts/ip-route-entry-count/entrycount",
+                  "type": "number",
+                  "label": "entrycount",
+                  "maximum": 10000000,
+                  "readonly": true
+                },
+                {
+                  "path": "/fib/route-statistics/ip-route-entry-counts/ip-route-entry-count/slot",
+                  "type": "string",
+                  "label": "slot",
+                  "readonly": true,
+                  "isKey": true
+                },
+                {
+                  "path": "/fib/route-statistics/ip-route-entry-counts/ip-route-entry-count/vpn-name",
+                  "type": "string",
+                  "label": "vpn-name",
+                  "readonly": true,
+                  "isKey": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "path": "/fib/route-statistics/ip-route-resources",
+          "type": "group",
+          "label": "ip-route-resources",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/fib/route-statistics/ip-route-resources/ip-route-resource",
+              "type": "list",
+              "label": "ip-route-resource",
+              "readonly": true,
+              "fields": [
+                {
+                  "path": "/fib/route-statistics/ip-route-resources/ip-route-resource/slot",
+                  "type": "string",
+                  "label": "slot",
+                  "readonly": true,
+                  "isKey": true
+                },
+                {
+                  "path": "/fib/route-statistics/ip-route-resources/ip-route-resource/total",
+                  "type": "number",
+                  "label": "total",
+                  "maximum": 10000000,
+                  "readonly": true
+                },
+                {
+                  "path": "/fib/route-statistics/ip-route-resources/ip-route-resource/used",
+                  "type": "number",
+                  "label": "used",
+                  "maximum": 10000000,
+                  "readonly": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "path": "/fib/route-statistics/ipv6-route-entry-counts",
+          "type": "group",
+          "label": "ipv6-route-entry-counts",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/fib/route-statistics/ipv6-route-entry-counts/ipv6-route-entry-count",
+              "type": "list",
+              "label": "ipv6-route-entry-count",
+              "readonly": true,
+              "fields": [
+                {
+                  "path": "/fib/route-statistics/ipv6-route-entry-counts/ipv6-route-entry-count/entry-count",
+                  "type": "number",
+                  "label": "entry-count",
+                  "maximum": 10000000,
+                  "readonly": true
+                },
+                {
+                  "path": "/fib/route-statistics/ipv6-route-entry-counts/ipv6-route-entry-count/slot",
+                  "type": "string",
+                  "label": "slot",
+                  "readonly": true,
+                  "isKey": true
+                },
+                {
+                  "path": "/fib/route-statistics/ipv6-route-entry-counts/ipv6-route-entry-count/vpn-name",
+                  "type": "string",
+                  "label": "vpn-name",
+                  "readonly": true,
+                  "isKey": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "path": "/fib/route-statistics/ipv6-route-resources",
+          "type": "group",
+          "label": "ipv6-route-resources",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/fib/route-statistics/ipv6-route-resources/ipv6-route-resource",
+              "type": "list",
+              "label": "ipv6-route-resource",
+              "readonly": true,
+              "fields": [
+                {
+                  "path": "/fib/route-statistics/ipv6-route-resources/ipv6-route-resource/slot",
+                  "type": "string",
+                  "label": "slot",
+                  "readonly": true,
+                  "isKey": true
+                },
+                {
+                  "path": "/fib/route-statistics/ipv6-route-resources/ipv6-route-resource/total",
+                  "type": "number",
+                  "label": "total",
+                  "maximum": 10000000,
+                  "readonly": true
+                },
+                {
+                  "path": "/fib/route-statistics/ipv6-route-resources/ipv6-route-resource/used",
+                  "type": "number",
+                  "label": "used",
+                  "maximum": 10000000,
+                  "readonly": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/fib/unicast-afs",
+      "type": "group",
+      "label": "unicast-afs",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/fib/unicast-afs/unicast-af",
+          "type": "list",
+          "label": "unicast-af",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/fib/unicast-afs/unicast-af/af-type",
+              "type": "enum",
+              "label": "af-type",
+              "options": [
+                {
+                  "label": "ipv4unicast",
+                  "value": "ipv4unicast"
+                },
+                {
+                  "label": "ipv6unicast",
+                  "value": "ipv6unicast"
+                }
+              ],
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/fib/unicast-afs/unicast-af/position",
+              "type": "string",
+              "label": "position",
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/fib/unicast-afs/unicast-af/routes",
+              "type": "group",
+              "label": "routes",
+              "readonly": true,
+              "fields": [
+                {
+                  "path": "/fib/unicast-afs/unicast-af/routes/route",
+                  "type": "list",
+                  "label": "route",
+                  "readonly": true,
+                  "fields": [
+                    {
+                      "path": "/fib/unicast-afs/unicast-af/routes/route/bak-if-name",
+                      "type": "string",
+                      "label": "bak-if-name",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/fib/unicast-afs/unicast-af/routes/route/bak-inner-lable",
+                      "type": "string",
+                      "label": "bak-inner-lable",
+                      "pattern": "(0x|0X)?[0-9a-fA-F]+",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/fib/unicast-afs/unicast-af/routes/route/bak-lsp-token",
+                      "type": "string",
+                      "label": "bak-lsp-token",
+                      "pattern": "(0x|0X)?[0-9a-fA-F]+",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/fib/unicast-afs/unicast-af/routes/route/bak-nexthop",
+                      "type": "string",
+                      "label": "bak-nexthop",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/fib/unicast-afs/unicast-af/routes/route/bgp-nexthop",
+                      "type": "string",
+                      "label": "bgp-nexthop",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/fib/unicast-afs/unicast-af/routes/route/destination",
+                      "type": "string",
+                      "label": "destination",
+                      "readonly": true,
+                      "isKey": true
+                    },
+                    {
+                      "path": "/fib/unicast-afs/unicast-af/routes/route/if-name",
+                      "type": "string",
+                      "label": "if-name",
+                      "readonly": true,
+                      "isKey": true
+                    },
+                    {
+                      "path": "/fib/unicast-afs/unicast-af/routes/route/inner-label",
+                      "type": "string",
+                      "label": "inner-label",
+                      "pattern": "(0x|0X)?[0-9a-fA-F]+",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/fib/unicast-afs/unicast-af/routes/route/lsp-token",
+                      "type": "string",
+                      "label": "lsp-token",
+                      "pattern": "(0x|0X)?[0-9a-fA-F]+",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/fib/unicast-afs/unicast-af/routes/route/mask",
+                      "type": "number",
+                      "label": "mask",
+                      "maximum": 128,
+                      "readonly": true,
+                      "isKey": true
+                    },
+                    {
+                      "path": "/fib/unicast-afs/unicast-af/routes/route/nexthop",
+                      "type": "string",
+                      "label": "nexthop",
+                      "readonly": true,
+                      "isKey": true
+                    },
+                    {
+                      "path": "/fib/unicast-afs/unicast-af/routes/route/tunnel-id",
+                      "type": "string",
+                      "label": "tunnel-id",
+                      "readonly": true,
+                      "isKey": true
+                    },
+                    {
+                      "path": "/fib/unicast-afs/unicast-af/routes/route/vlan-id",
+                      "type": "number",
+                      "label": "vlan-id",
+                      "readonly": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/fib/unicast-afs/unicast-af/statistics",
+              "type": "group",
+              "label": "statistics",
+              "readonly": true,
+              "fields": [
+                {
+                  "path": "/fib/unicast-afs/unicast-af/statistics/total-num",
+                  "type": "number",
+                  "label": "total-num",
+                  "readonly": true
+                }
+              ]
+            },
+            {
+              "path": "/fib/unicast-afs/unicast-af/vrf-name",
+              "type": "string",
+              "label": "vrf-name",
+              "readonly": true,
+              "isKey": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

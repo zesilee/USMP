@@ -32,7 +32,18 @@ happy-dom 是近似实现，**测不准**这些 → 必须 F3：
 | el-select / teleport / 嵌套 list 增删改 | **F3 真浏览器**（add/edit/remove 全覆盖） |
 | 新页面 / 路由 / 端到端用户流 | F4 staging-smoke |
 | 改 API 类型 / 契约 | typecheck + 契约漂移门禁 |
+| **改控制台派生逻辑**（deriveTabs/deriveColumns/deriveKeyField/filterableFields/deriveSchemaTree） | **派生黄金（全模块）**——UPDATE_GOLDEN=1 刷新后人工核对受影响模块 |
 | **修 Bug** | 先写复现该 Bug 的回归测试（红）再修（T07） |
+
+## 派生黄金（F1，GD-01~04）
+
+`test/golden/` 对 `backend/testdata/schema-fixtures/` 的**全部模块** fixture 跑上述派生纯函数，把「模块→控制台形态」（Tab/主键/列/可过滤字段/架构树结论）钉为一模块一份黄金（`__data__/<module>.json`）。模块级端到端断言 3/60 → 全量。
+
+**它证明什么**：schema → 控制台形态的派生是**确定的、且未发生非预期变化**。任一模块的 Tab/列/主键/控件类别派生被意外改动，比对失败并定位到模块。新增 fixture 自动纳入覆盖（缺黄金即失败）。
+
+**它不证明什么**（GD-04，别夸大）：不证明派生结果**对用户合理**、控件好用、视觉正确。「60/60 覆盖」只指结构回归面，不是功能验证。派生结果是否合理由首次生成黄金时的一次性人工审阅确认，此后黄金只承担回归防线；语义/视觉正确性由 F2/F3/F4 与人工承担。
+
+**更新**：仅在派生逻辑或 fixture 变更的**预期**刷新时 `UPDATE_GOLDEN=1 npx vitest run test/golden`，并人工核对受影响模块的 diff（刻意不用 vitest `-u`，避免顺手全刷）。黄金与 fixture 均为生成物，已在体积门禁排除清单。
 
 ## 目录结构
 
@@ -41,7 +52,8 @@ frontend/
 ├── test/                     # vitest 套件（happy-dom + browser）
 │   ├── utils/ composables/ stores/   # F1
 │   ├── components/ views/            # F2
-│   └── browser/                     # F3（真 Chromium，vitest.browser.config.ts）
+│   ├── browser/                     # F3（真 Chromium，vitest.browser.config.ts）
+│   └── golden/                      # F1 派生黄金（__data__/<module>.json，读 backend fixture）
 ├── tests/                    # F4：Playwright（staging-smoke.spec.ts）
 ├── vitest.config.ts          # F1/F2：happy-dom，exclude test/browser/**，coverage.thresholds
 ├── vitest.browser.config.ts  # F3：playwright provider，仅 include test/browser/**
@@ -53,6 +65,7 @@ frontend/
 - `vitest.config.ts` 的 `coverage.thresholds`（statements/branches/functions/lines）为**只准升不准降**的棘轮，`frontend-ci.yml` 跑 `npm run test:coverage`，低于阈值即 fail。
 - 补测后**同步上调阈值**到新水平，形成单向棘轮。本地自查：`npm run test:coverage`。
 - 基线实测(2026-07-06)：Stmts 66.55 / Branch 66.57 / Funcs 56.67 / Lines 66.88。
+- 派生黄金后(2026-07-24)：CI 实测 Funcs 77.44、Lines 85.x（黄金把 moduleConsole/schemaTree 打到 100%）。阈值维持 84/78/77/84——本地测量会被同机 staging 后端灌水（fetch 成功回调多覆盖数个函数），只锁 CI 可复现下界。
 
 ## 门禁（本地 + CI）
 

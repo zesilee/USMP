@@ -1,0 +1,575 @@
+{
+  "module": "mstp",
+  "tabs": [
+    {
+      "name": "default-process",
+      "kind": "form"
+    },
+    {
+      "name": "global",
+      "kind": "form"
+    },
+    {
+      "name": "processs",
+      "kind": "list"
+    }
+  ],
+  "lists": {
+    "processs": {
+      "keyField": "id",
+      "columns": [
+        {
+          "name": "id",
+          "widget": "number"
+        },
+        {
+          "name": "mode",
+          "widget": "enum"
+        },
+        {
+          "name": "path-cost-standard",
+          "widget": "enum"
+        },
+        {
+          "name": "bpdu-protection",
+          "widget": "boolean"
+        },
+        {
+          "name": "enable",
+          "widget": "boolean"
+        },
+        {
+          "name": "forward-delay",
+          "widget": "number"
+        },
+        {
+          "name": "hello-time",
+          "widget": "number"
+        },
+        {
+          "name": "max-age",
+          "widget": "number"
+        },
+        {
+          "name": "max-hops",
+          "widget": "number"
+        }
+      ],
+      "filterable": []
+    }
+  },
+  "tree": [
+    {
+      "path": "/mstp/default-process",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mstp/default-process/bpdu-protection",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mstp/default-process/default-instance",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mstp/default-process/default-instance/priority",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mstp/default-process/default-instance/root-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mstp/default-process/default-instance/vlan-mapping",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/mstp/default-process/enable",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mstp/default-process/forward-delay",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mstp/default-process/hello-time",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mstp/default-process/instances",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mstp/default-process/instances/instance",
+      "kind": "list",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mstp/default-process/instances/instance/id",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mstp/default-process/instances/instance/priority",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mstp/default-process/instances/instance/root-type",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mstp/default-process/instances/instance/vlan-mapping",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mstp/default-process/max-age",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mstp/default-process/max-hops",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mstp/default-process/mode",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mstp/default-process/path-cost-standard",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mstp/default-process/region-name",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mstp/default-process/revision-level",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mstp/default-process/tc-protection",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mstp/default-process/tc-protection-interval",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mstp/default-process/tc-protection-threshold",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mstp/default-process/timer-factor",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mstp/global",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mstp/global/bpdu-filter",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mstp/global/bridge-address",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mstp/global/edge-port",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mstp/global/transmit-limit",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mstp/global/vstp-enable",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mstp/processs",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mstp/processs/process",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mstp/processs/process/bpdu-protection",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mstp/processs/process/default-instance",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mstp/processs/process/default-instance/priority",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mstp/processs/process/default-instance/root-type",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mstp/processs/process/default-instance/vlan-mapping",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/mstp/processs/process/enable",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mstp/processs/process/forward-delay",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mstp/processs/process/hello-time",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mstp/processs/process/id",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mstp/processs/process/instances",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mstp/processs/process/instances/instance",
+      "kind": "list",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mstp/processs/process/instances/instance/id",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mstp/processs/process/instances/instance/priority",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mstp/processs/process/instances/instance/root-type",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mstp/processs/process/instances/instance/vlan-mapping",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mstp/processs/process/max-age",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mstp/processs/process/max-hops",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mstp/processs/process/mode",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mstp/processs/process/path-cost-standard",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mstp/processs/process/region-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mstp/processs/process/revision-level",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mstp/processs/process/tc-protection",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mstp/processs/process/tc-protection-interval",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mstp/processs/process/tc-protection-threshold",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mstp/processs/process/timer-factor",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    }
+  ]
+}

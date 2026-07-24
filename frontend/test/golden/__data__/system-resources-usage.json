@@ -1,0 +1,100 @@
+{
+  "module": "system-resources-usage",
+  "tabs": [
+    {
+      "name": "resources",
+      "kind": "list"
+    }
+  ],
+  "lists": {
+    "resources": {
+      "keyField": "resource-name",
+      "columns": [
+        {
+          "name": "resource-name",
+          "widget": "string"
+        },
+        {
+          "name": "slot",
+          "widget": "string"
+        },
+        {
+          "name": "allocated",
+          "widget": "number"
+        },
+        {
+          "name": "free",
+          "widget": "number"
+        },
+        {
+          "name": "total",
+          "widget": "number"
+        }
+      ],
+      "filterable": []
+    }
+  },
+  "tree": [
+    {
+      "path": "/system-resources-usage/resources",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/system-resources-usage/resources/resource",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/system-resources-usage/resources/resource/allocated",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/system-resources-usage/resources/resource/free",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/system-resources-usage/resources/resource/resource-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/system-resources-usage/resources/resource/slot",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/system-resources-usage/resources/resource/total",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    }
+  ]
+}

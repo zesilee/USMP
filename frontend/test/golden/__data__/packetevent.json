@@ -1,0 +1,117 @@
+{
+  "module": "packetevent",
+  "tabs": [
+    {
+      "name": "global",
+      "kind": "form"
+    }
+  ],
+  "lists": {},
+  "tree": [
+    {
+      "path": "/packetevent/global",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/packetevent/global/collect-id",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/packetevent/global/drop-event",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/packetevent/global/drop-event/acl-deny",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/packetevent/global/drop-event/aging-time",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/packetevent/global/drop-event/buffer-overflow",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/packetevent/global/drop-event/forward-exception",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/packetevent/global/drop-event/forward-normal",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/packetevent/global/export-interval",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/packetevent/global/latency-event",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/packetevent/global/latency-event/aging-time",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/packetevent/global/latency-event/latency-threshold",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    }
+  ]
+}

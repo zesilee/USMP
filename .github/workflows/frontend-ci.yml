@@ -16,11 +16,15 @@ on:
     paths:
       - 'frontend/**'
       - '.github/workflows/frontend-ci.yml'
+      # schema fixture 是前端派生黄金的输入（GD-01）：纯后端 PR 改了 fixture
+      # 却漏刷黄金时，也要触发前端 CI 让黄金比对测试兜住漂移。
+      - 'backend/testdata/schema-fixtures/**'
   push:
     branches: [main]
     paths:
       - 'frontend/**'
       - '.github/workflows/frontend-ci.yml'
+      - 'backend/testdata/schema-fixtures/**'
 
 # 同一分支/PR 新推送时取消进行中的旧运行，避免并行叠加消耗分钟。
 concurrency:

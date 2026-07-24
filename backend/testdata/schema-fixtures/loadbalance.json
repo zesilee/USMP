@@ -1,0 +1,1127 @@
+{
+  "module": "loadbalance",
+  "title": "loadbalance",
+  "vendor": "huawei",
+  "fields": [
+    {
+      "path": "/loadbalance/avoid-degradations",
+      "type": "group",
+      "label": "avoid-degradations",
+      "fields": [
+        {
+          "path": "/loadbalance/avoid-degradations/avoid-degradation",
+          "type": "list",
+          "label": "avoid-degradation",
+          "fields": [
+            {
+              "path": "/loadbalance/avoid-degradations/avoid-degradation/forward-type",
+              "type": "enum",
+              "label": "forward-type",
+              "options": [
+                {
+                  "label": "ipv4",
+                  "value": "ipv4"
+                },
+                {
+                  "label": "ipv6",
+                  "value": "ipv6"
+                },
+                {
+                  "label": "mpls",
+                  "value": "mpls"
+                },
+                {
+                  "label": "vll",
+                  "value": "vll"
+                }
+              ],
+              "isKey": true
+            },
+            {
+              "path": "/loadbalance/avoid-degradations/avoid-degradation/position",
+              "type": "string",
+              "label": "position",
+              "isKey": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/loadbalance/dlb-enables",
+      "type": "group",
+      "label": "dlb-enables",
+      "fields": [
+        {
+          "path": "/loadbalance/dlb-enables/dlb-enable",
+          "type": "list",
+          "label": "dlb-enable",
+          "fields": [
+            {
+              "path": "/loadbalance/dlb-enables/dlb-enable/vpn-name",
+              "type": "string",
+              "label": "vpn-name",
+              "isKey": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/loadbalance/dynamic-load-balance-profile",
+      "type": "group",
+      "label": "dynamic-load-balance-profile",
+      "fields": [
+        {
+          "path": "/loadbalance/dynamic-load-balance-profile/time-gap",
+          "type": "number",
+          "label": "time-gap",
+          "maximum": 1000
+        }
+      ]
+    },
+    {
+      "path": "/loadbalance/ecmp-stateful",
+      "type": "group",
+      "label": "ecmp-stateful",
+      "must": [
+        {
+          "expr": "maximum\u003eminimum"
+        }
+      ],
+      "fields": [
+        {
+          "path": "/loadbalance/ecmp-stateful/accuracy",
+          "type": "number",
+          "label": "accuracy",
+          "minimum": 1,
+          "maximum": 4
+        },
+        {
+          "path": "/loadbalance/ecmp-stateful/maximum",
+          "type": "number",
+          "label": "maximum",
+          "minimum": 2,
+          "maximum": 64
+        },
+        {
+          "path": "/loadbalance/ecmp-stateful/minimum",
+          "type": "number",
+          "label": "minimum",
+          "minimum": 1,
+          "maximum": 63
+        }
+      ],
+      "presence": true
+    },
+    {
+      "path": "/loadbalance/global-attribute",
+      "type": "group",
+      "label": "global-attribute",
+      "fields": [
+        {
+          "path": "/loadbalance/global-attribute/avoid-ipv4-enable",
+          "type": "boolean",
+          "label": "avoid-ipv4-enable"
+        },
+        {
+          "path": "/loadbalance/global-attribute/avoid-ipv6-enable",
+          "type": "boolean",
+          "label": "avoid-ipv6-enable"
+        },
+        {
+          "path": "/loadbalance/global-attribute/avoid-mpls-enable",
+          "type": "boolean",
+          "label": "avoid-mpls-enable"
+        },
+        {
+          "path": "/loadbalance/global-attribute/dynamic-enable",
+          "type": "boolean",
+          "label": "dynamic-enable"
+        },
+        {
+          "path": "/loadbalance/global-attribute/flow-label",
+          "type": "choice",
+          "label": "flow-label",
+          "cases": [
+            {
+              "name": "disable",
+              "label": "disable",
+              "fields": [
+                {
+                  "path": "/loadbalance/global-attribute/flow-label-disable",
+                  "type": "group",
+                  "label": "flow-label-disable",
+                  "presence": true
+                }
+              ]
+            },
+            {
+              "name": "hash-bit",
+              "label": "hash-bit",
+              "fields": [
+                {
+                  "path": "/loadbalance/global-attribute/flow-label-bit",
+                  "type": "enum",
+                  "label": "flow-label-bit",
+                  "options": [
+                    {
+                      "label": "bit-16",
+                      "value": "bit-16"
+                    },
+                    {
+                      "label": "bit-20",
+                      "value": "bit-20"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "path": "/loadbalance/global-attribute/hash-arithmetic-trunk-enhance",
+          "type": "group",
+          "label": "hash-arithmetic-trunk-enhance",
+          "presence": true
+        },
+        {
+          "path": "/loadbalance/global-attribute/mpls-loadblc-wtr",
+          "type": "number",
+          "label": "mpls-loadblc-wtr",
+          "maximum": 60
+        },
+        {
+          "path": "/loadbalance/global-attribute/mpls-sr-transit-enable",
+          "type": "boolean",
+          "label": "mpls-sr-transit-enable"
+        },
+        {
+          "path": "/loadbalance/global-attribute/mpls-te-convergence-enable",
+          "type": "boolean",
+          "label": "mpls-te-convergence-enable"
+        },
+        {
+          "path": "/loadbalance/global-attribute/mpls-trunk-enhance-fwd",
+          "type": "boolean",
+          "label": "mpls-trunk-enhance-fwd"
+        },
+        {
+          "path": "/loadbalance/global-attribute/mpls-ucmp-enable",
+          "type": "boolean",
+          "label": "mpls-ucmp-enable"
+        },
+        {
+          "path": "/loadbalance/global-attribute/rail-group-enable",
+          "type": "boolean",
+          "label": "rail-group-enable",
+          "must": [
+            {
+              "expr": "not(../rail-group-enable = 'true' and (../../load-balance-ecmp-enable/is-enable = 'true' or ../../load-balance-ecmp-profile/vxlan-overlay-local-preference/local-preference-mode or /ni:network-instance/ni:instances/ni:instance[ni:name='/ni:network-instance/ni:instances/ni:instance/ni:name']/bgp:bgp/bgp:base-process/bgp:afs/bgp:af[bgp:type = 'ipv4uni']/bgp:ipv4-unicast/bgp:load-balancing/bgp:adaptive-routing or /ni:network-instance/ni:instances/ni:instance[ni:name='_public_']/bgp:bgp/bgp:base-process/bgp:afs/bgp:af[bgp:type = 'ipv4uni']/bgp:ipv4-unicast/bgp:common/bgp:load-balancing-ucmp = 'true' or /ni:network-instance/ni:instances/ni:instance[ni:name='_public_']/bgp:bgp/bgp:base-process/bgp:afs/bgp:af[bgp:type = 'ipv6uni']/bgp:ipv6-unicast/bgp:common/bgp:load-balancing-ucmp = 'true'))"
+            }
+          ]
+        },
+        {
+          "path": "/loadbalance/global-attribute/trunk-enhance-fwd",
+          "type": "boolean",
+          "label": "trunk-enhance-fwd"
+        },
+        {
+          "path": "/loadbalance/global-attribute/trunk-multicast-enable",
+          "type": "boolean",
+          "label": "trunk-multicast-enable"
+        },
+        {
+          "path": "/loadbalance/global-attribute/tunnel-info-gtp-enable",
+          "type": "boolean",
+          "label": "tunnel-info-gtp-enable"
+        },
+        {
+          "path": "/loadbalance/global-attribute/unequal-cost",
+          "type": "choice",
+          "label": "unequal-cost",
+          "cases": [
+            {
+              "name": "ucmp",
+              "label": "ucmp",
+              "fields": [
+                {
+                  "path": "/loadbalance/global-attribute/ucmp-enable",
+                  "type": "boolean",
+                  "label": "ucmp-enable"
+                }
+              ]
+            },
+            {
+              "name": "ucmp-bandwidth-config",
+              "label": "ucmp-bandwidth-config",
+              "fields": [
+                {
+                  "path": "/loadbalance/global-attribute/ucmp-bandwidth-config-enable",
+                  "type": "string",
+                  "label": "ucmp-bandwidth-config-enable"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "path": "/loadbalance/global-attribute/vxlan-l2deep-hash-enable",
+          "type": "boolean",
+          "label": "vxlan-l2deep-hash-enable"
+        },
+        {
+          "path": "/loadbalance/global-attribute/vxlan-l2vni-enable",
+          "type": "boolean",
+          "label": "vxlan-l2vni-enable"
+        },
+        {
+          "path": "/loadbalance/global-attribute/vxlan-l3vni-enable",
+          "type": "boolean",
+          "label": "vxlan-l3vni-enable"
+        }
+      ]
+    },
+    {
+      "path": "/loadbalance/hash-instructions",
+      "type": "group",
+      "label": "hash-instructions",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/loadbalance/hash-instructions/hash-instruction",
+          "type": "list",
+          "label": "hash-instruction",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/loadbalance/hash-instructions/hash-instruction/infos",
+              "type": "group",
+              "label": "infos",
+              "readonly": true,
+              "fields": [
+                {
+                  "path": "/loadbalance/hash-instructions/hash-instruction/infos/info",
+                  "type": "string",
+                  "label": "info",
+                  "readonly": true
+                }
+              ]
+            },
+            {
+              "path": "/loadbalance/hash-instructions/hash-instruction/query-type",
+              "type": "enum",
+              "label": "query-type",
+              "options": [
+                {
+                  "label": "all",
+                  "value": "all"
+                },
+                {
+                  "label": "slot",
+                  "value": "slot"
+                }
+              ],
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/loadbalance/hash-instructions/hash-instruction/slot-id",
+              "type": "string",
+              "label": "slot-id",
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/loadbalance/hash-instructions/hash-instruction/tunnel-gtp-enable",
+              "type": "boolean",
+              "label": "tunnel-gtp-enable",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/loadbalance/hash-key-ip",
+      "type": "group",
+      "label": "hash-key-ip",
+      "fields": [
+        {
+          "path": "/loadbalance/hash-key-ip/ip-type",
+          "type": "enum",
+          "label": "ip-type",
+          "options": [
+            {
+              "label": "destination-ip",
+              "value": "destination-ip"
+            },
+            {
+              "label": "source-ip",
+              "value": "source-ip"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/loadbalance/hash-key-ip-slots",
+      "type": "group",
+      "label": "hash-key-ip-slots",
+      "fields": [
+        {
+          "path": "/loadbalance/hash-key-ip-slots/hash-key-ip-slot",
+          "type": "list",
+          "label": "hash-key-ip-slot",
+          "fields": [
+            {
+              "path": "/loadbalance/hash-key-ip-slots/hash-key-ip-slot/ip-type",
+              "type": "enum",
+              "label": "ip-type",
+              "required": true,
+              "options": [
+                {
+                  "label": "destination-ip",
+                  "value": "destination-ip"
+                },
+                {
+                  "label": "source-ip",
+                  "value": "source-ip"
+                }
+              ]
+            },
+            {
+              "path": "/loadbalance/hash-key-ip-slots/hash-key-ip-slot/slot-id",
+              "type": "string",
+              "label": "slot-id",
+              "isKey": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/loadbalance/ip-load-balance",
+      "type": "group",
+      "label": "ip-load-balance",
+      "must": [
+        {
+          "expr": "not(mode = 'flow' and src-ip = 'false' and dst-ip = 'false' and src-port = 'false' and dst-port = 'false')"
+        }
+      ],
+      "fields": [
+        {
+          "path": "/loadbalance/ip-load-balance/dst-ip",
+          "type": "boolean",
+          "label": "dst-ip",
+          "when": "(../mode = 'flow')"
+        },
+        {
+          "path": "/loadbalance/ip-load-balance/dst-port",
+          "type": "boolean",
+          "label": "dst-port",
+          "when": "(../mode = 'flow')"
+        },
+        {
+          "path": "/loadbalance/ip-load-balance/mode",
+          "type": "enum",
+          "label": "mode",
+          "options": [
+            {
+              "label": "flow",
+              "value": "flow"
+            },
+            {
+              "label": "packet",
+              "value": "packet"
+            }
+          ]
+        },
+        {
+          "path": "/loadbalance/ip-load-balance/src-ip",
+          "type": "boolean",
+          "label": "src-ip",
+          "when": "(../mode = 'flow')"
+        },
+        {
+          "path": "/loadbalance/ip-load-balance/src-port",
+          "type": "boolean",
+          "label": "src-port",
+          "when": "(../mode = 'flow')"
+        }
+      ]
+    },
+    {
+      "path": "/loadbalance/ip-load-balance-reverse-route-enable",
+      "type": "group",
+      "label": "ip-load-balance-reverse-route-enable",
+      "fields": [
+        {
+          "path": "/loadbalance/ip-load-balance-reverse-route-enable/enable",
+          "type": "boolean",
+          "label": "enable"
+        }
+      ]
+    },
+    {
+      "path": "/loadbalance/ipv6-load-balance",
+      "type": "group",
+      "label": "ipv6-load-balance",
+      "must": [
+        {
+          "expr": "not(mode = 'flow' and src-ip = 'false' and dst-ip = 'false' and src-port = 'false' and dst-port = 'false')"
+        }
+      ],
+      "fields": [
+        {
+          "path": "/loadbalance/ipv6-load-balance/dst-ip",
+          "type": "boolean",
+          "label": "dst-ip",
+          "when": "(../mode = 'flow')"
+        },
+        {
+          "path": "/loadbalance/ipv6-load-balance/dst-port",
+          "type": "boolean",
+          "label": "dst-port",
+          "when": "(../mode = 'flow')"
+        },
+        {
+          "path": "/loadbalance/ipv6-load-balance/mode",
+          "type": "enum",
+          "label": "mode",
+          "options": [
+            {
+              "label": "flow",
+              "value": "flow"
+            },
+            {
+              "label": "packet",
+              "value": "packet"
+            }
+          ]
+        },
+        {
+          "path": "/loadbalance/ipv6-load-balance/src-ip",
+          "type": "boolean",
+          "label": "src-ip",
+          "when": "(../mode = 'flow')"
+        },
+        {
+          "path": "/loadbalance/ipv6-load-balance/src-port",
+          "type": "boolean",
+          "label": "src-port",
+          "when": "(../mode = 'flow')"
+        }
+      ]
+    },
+    {
+      "path": "/loadbalance/ipv6-load-balance-reverse-route-enable",
+      "type": "group",
+      "label": "ipv6-load-balance-reverse-route-enable",
+      "fields": [
+        {
+          "path": "/loadbalance/ipv6-load-balance-reverse-route-enable/enable",
+          "type": "boolean",
+          "label": "enable"
+        }
+      ]
+    },
+    {
+      "path": "/loadbalance/load-balance-ecmp-enable",
+      "type": "group",
+      "label": "load-balance-ecmp-enable",
+      "fields": [
+        {
+          "path": "/loadbalance/load-balance-ecmp-enable/is-enable",
+          "type": "boolean",
+          "label": "is-enable"
+        }
+      ]
+    },
+    {
+      "path": "/loadbalance/load-balance-ecmp-profile",
+      "type": "group",
+      "label": "load-balance-ecmp-profile",
+      "fields": [
+        {
+          "path": "/loadbalance/load-balance-ecmp-profile/dynamic-ecmp-mode",
+          "type": "group",
+          "label": "dynamic-ecmp-mode",
+          "fields": [
+            {
+              "path": "/loadbalance/load-balance-ecmp-profile/dynamic-ecmp-mode/flowlet-gap-time",
+              "type": "number",
+              "label": "flowlet-gap-time",
+              "minimum": 16,
+              "maximum": 32000,
+              "when": "../mode='eligible'"
+            },
+            {
+              "path": "/loadbalance/load-balance-ecmp-profile/dynamic-ecmp-mode/mode",
+              "type": "enum",
+              "label": "mode",
+              "options": [
+                {
+                  "label": "eligible",
+                  "value": "eligible"
+                },
+                {
+                  "label": "fixed",
+                  "value": "fixed"
+                },
+                {
+                  "label": "spray",
+                  "value": "spray"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "path": "/loadbalance/load-balance-ecmp-profile/ecmp-attribute",
+          "type": "group",
+          "label": "ecmp-attribute",
+          "fields": [
+            {
+              "path": "/loadbalance/load-balance-ecmp-profile/ecmp-attribute/gtp-teid",
+              "type": "string",
+              "label": "gtp-teid"
+            }
+          ]
+        },
+        {
+          "path": "/loadbalance/load-balance-ecmp-profile/ecmp-local-preference",
+          "type": "group",
+          "label": "ecmp-local-preference",
+          "fields": [
+            {
+              "path": "/loadbalance/load-balance-ecmp-profile/ecmp-local-preference/enable",
+              "type": "boolean",
+              "label": "enable"
+            }
+          ]
+        },
+        {
+          "path": "/loadbalance/load-balance-ecmp-profile/ecmp-symmetry",
+          "type": "group",
+          "label": "ecmp-symmetry",
+          "fields": [
+            {
+              "path": "/loadbalance/load-balance-ecmp-profile/ecmp-symmetry/enable",
+              "type": "boolean",
+              "label": "enable"
+            }
+          ]
+        },
+        {
+          "path": "/loadbalance/load-balance-ecmp-profile/ip-hash",
+          "type": "group",
+          "label": "ip-hash",
+          "must": [
+            {
+              "expr": "not(sip='false' and dip='false' and vlan='false' and l4sport='false' and l4dport='false' and protocol='false' and src-interface='false' and flowlabel='false')"
+            }
+          ],
+          "fields": [
+            {
+              "path": "/loadbalance/load-balance-ecmp-profile/ip-hash/dip",
+              "type": "boolean",
+              "label": "dip"
+            },
+            {
+              "path": "/loadbalance/load-balance-ecmp-profile/ip-hash/dscp",
+              "type": "boolean",
+              "label": "dscp"
+            },
+            {
+              "path": "/loadbalance/load-balance-ecmp-profile/ip-hash/flowlabel",
+              "type": "boolean",
+              "label": "flowlabel"
+            },
+            {
+              "path": "/loadbalance/load-balance-ecmp-profile/ip-hash/l4dport",
+              "type": "boolean",
+              "label": "l4dport"
+            },
+            {
+              "path": "/loadbalance/load-balance-ecmp-profile/ip-hash/l4sport",
+              "type": "boolean",
+              "label": "l4sport"
+            },
+            {
+              "path": "/loadbalance/load-balance-ecmp-profile/ip-hash/protocol",
+              "type": "boolean",
+              "label": "protocol"
+            },
+            {
+              "path": "/loadbalance/load-balance-ecmp-profile/ip-hash/sip",
+              "type": "boolean",
+              "label": "sip"
+            },
+            {
+              "path": "/loadbalance/load-balance-ecmp-profile/ip-hash/src-interface",
+              "type": "boolean",
+              "label": "src-interface"
+            },
+            {
+              "path": "/loadbalance/load-balance-ecmp-profile/ip-hash/vlan",
+              "type": "boolean",
+              "label": "vlan"
+            }
+          ]
+        },
+        {
+          "path": "/loadbalance/load-balance-ecmp-profile/ip-tunnel-hash",
+          "type": "group",
+          "label": "ip-tunnel-hash",
+          "fields": [
+            {
+              "path": "/loadbalance/load-balance-ecmp-profile/ip-tunnel-hash/dst-mac",
+              "type": "boolean",
+              "label": "dst-mac"
+            },
+            {
+              "path": "/loadbalance/load-balance-ecmp-profile/ip-tunnel-hash/include-erspan",
+              "type": "boolean",
+              "label": "include-erspan"
+            },
+            {
+              "path": "/loadbalance/load-balance-ecmp-profile/ip-tunnel-hash/inner-dst-ip",
+              "type": "boolean",
+              "label": "inner-dst-ip"
+            },
+            {
+              "path": "/loadbalance/load-balance-ecmp-profile/ip-tunnel-hash/inner-l4-dport",
+              "type": "boolean",
+              "label": "inner-l4-dport"
+            },
+            {
+              "path": "/loadbalance/load-balance-ecmp-profile/ip-tunnel-hash/inner-l4-sport",
+              "type": "boolean",
+              "label": "inner-l4-sport"
+            },
+            {
+              "path": "/loadbalance/load-balance-ecmp-profile/ip-tunnel-hash/inner-protocol",
+              "type": "boolean",
+              "label": "inner-protocol"
+            },
+            {
+              "path": "/loadbalance/load-balance-ecmp-profile/ip-tunnel-hash/inner-src-ip",
+              "type": "boolean",
+              "label": "inner-src-ip"
+            },
+            {
+              "path": "/loadbalance/load-balance-ecmp-profile/ip-tunnel-hash/src-interface",
+              "type": "boolean",
+              "label": "src-interface"
+            },
+            {
+              "path": "/loadbalance/load-balance-ecmp-profile/ip-tunnel-hash/src-mac",
+              "type": "boolean",
+              "label": "src-mac"
+            }
+          ]
+        },
+        {
+          "path": "/loadbalance/load-balance-ecmp-profile/load-balance-ecmp-hashmode",
+          "type": "group",
+          "label": "load-balance-ecmp-hashmode",
+          "fields": [
+            {
+              "path": "/loadbalance/load-balance-ecmp-profile/load-balance-ecmp-hashmode/bfd-vxlan-bundle-random-hash",
+              "type": "boolean",
+              "label": "bfd-vxlan-bundle-random-hash"
+            },
+            {
+              "path": "/loadbalance/load-balance-ecmp-profile/load-balance-ecmp-hashmode/hash-mode",
+              "type": "enum",
+              "label": "hash-mode",
+              "options": [
+                {
+                  "label": "mode0",
+                  "value": "mode0"
+                },
+                {
+                  "label": "mode1",
+                  "value": "mode1"
+                },
+                {
+                  "label": "mode10",
+                  "value": "mode10"
+                },
+                {
+                  "label": "mode11",
+                  "value": "mode11"
+                },
+                {
+                  "label": "mode12",
+                  "value": "mode12"
+                },
+                {
+                  "label": "mode13",
+                  "value": "mode13"
+                },
+                {
+                  "label": "mode14",
+                  "value": "mode14"
+                },
+                {
+                  "label": "mode15",
+                  "value": "mode15"
+                },
+                {
+                  "label": "mode2",
+                  "value": "mode2"
+                },
+                {
+                  "label": "mode3",
+                  "value": "mode3"
+                },
+                {
+                  "label": "mode4",
+                  "value": "mode4"
+                },
+                {
+                  "label": "mode5",
+                  "value": "mode5"
+                },
+                {
+                  "label": "mode6",
+                  "value": "mode6"
+                },
+                {
+                  "label": "mode7",
+                  "value": "mode7"
+                },
+                {
+                  "label": "mode8",
+                  "value": "mode8"
+                },
+                {
+                  "label": "mode9",
+                  "value": "mode9"
+                }
+              ]
+            },
+            {
+              "path": "/loadbalance/load-balance-ecmp-profile/load-balance-ecmp-hashmode/overlay-hash-mode",
+              "type": "enum",
+              "label": "overlay-hash-mode",
+              "options": [
+                {
+                  "label": "mode0",
+                  "value": "mode0"
+                },
+                {
+                  "label": "mode1",
+                  "value": "mode1"
+                },
+                {
+                  "label": "mode10",
+                  "value": "mode10"
+                },
+                {
+                  "label": "mode11",
+                  "value": "mode11"
+                },
+                {
+                  "label": "mode12",
+                  "value": "mode12"
+                },
+                {
+                  "label": "mode13",
+                  "value": "mode13"
+                },
+                {
+                  "label": "mode14",
+                  "value": "mode14"
+                },
+                {
+                  "label": "mode15",
+                  "value": "mode15"
+                },
+                {
+                  "label": "mode2",
+                  "value": "mode2"
+                },
+                {
+                  "label": "mode3",
+                  "value": "mode3"
+                },
+                {
+                  "label": "mode4",
+                  "value": "mode4"
+                },
+                {
+                  "label": "mode5",
+                  "value": "mode5"
+                },
+                {
+                  "label": "mode6",
+                  "value": "mode6"
+                },
+                {
+                  "label": "mode7",
+                  "value": "mode7"
+                },
+                {
+                  "label": "mode8",
+                  "value": "mode8"
+                },
+                {
+                  "label": "mode9",
+                  "value": "mode9"
+                }
+              ]
+            },
+            {
+              "path": "/loadbalance/load-balance-ecmp-profile/load-balance-ecmp-hashmode/underlay-hash-mode",
+              "type": "enum",
+              "label": "underlay-hash-mode",
+              "options": [
+                {
+                  "label": "mode0",
+                  "value": "mode0"
+                },
+                {
+                  "label": "mode1",
+                  "value": "mode1"
+                },
+                {
+                  "label": "mode10",
+                  "value": "mode10"
+                },
+                {
+                  "label": "mode11",
+                  "value": "mode11"
+                },
+                {
+                  "label": "mode12",
+                  "value": "mode12"
+                },
+                {
+                  "label": "mode13",
+                  "value": "mode13"
+                },
+                {
+                  "label": "mode14",
+                  "value": "mode14"
+                },
+                {
+                  "label": "mode15",
+                  "value": "mode15"
+                },
+                {
+                  "label": "mode2",
+                  "value": "mode2"
+                },
+                {
+                  "label": "mode3",
+                  "value": "mode3"
+                },
+                {
+                  "label": "mode4",
+                  "value": "mode4"
+                },
+                {
+                  "label": "mode5",
+                  "value": "mode5"
+                },
+                {
+                  "label": "mode6",
+                  "value": "mode6"
+                },
+                {
+                  "label": "mode7",
+                  "value": "mode7"
+                },
+                {
+                  "label": "mode8",
+                  "value": "mode8"
+                },
+                {
+                  "label": "mode9",
+                  "value": "mode9"
+                }
+              ]
+            },
+            {
+              "path": "/loadbalance/load-balance-ecmp-profile/load-balance-ecmp-hashmode/vxlan-overlay-local-preference",
+              "type": "enum",
+              "label": "vxlan-overlay-local-preference",
+              "options": [
+                {
+                  "label": "local-preference",
+                  "value": "local-preference"
+                },
+                {
+                  "label": "network-local-preference",
+                  "value": "network-local-preference"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "path": "/loadbalance/load-balance-ecmp-profile/load-balance-ecmp-seed",
+          "type": "group",
+          "label": "load-balance-ecmp-seed",
+          "fields": [
+            {
+              "path": "/loadbalance/load-balance-ecmp-profile/load-balance-ecmp-seed/overlay-seed-data",
+              "type": "number",
+              "label": "overlay-seed-data",
+              "maximum": 255
+            },
+            {
+              "path": "/loadbalance/load-balance-ecmp-profile/load-balance-ecmp-seed/seed-data",
+              "type": "number",
+              "label": "seed-data",
+              "maximum": 255
+            },
+            {
+              "path": "/loadbalance/load-balance-ecmp-profile/load-balance-ecmp-seed/underlay-seed-data",
+              "type": "number",
+              "label": "underlay-seed-data",
+              "maximum": 255,
+              "must": [
+                {
+                  "expr": "not(../../../global-attribute/rail-group-enable = 'true' and ../underlay-seed-data != 0)"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "path": "/loadbalance/load-balance-ecmp-profile/load-balance-ecmp-universal",
+          "type": "group",
+          "label": "load-balance-ecmp-universal",
+          "fields": [
+            {
+              "path": "/loadbalance/load-balance-ecmp-profile/load-balance-ecmp-universal/overlay-universal-id",
+              "type": "number",
+              "label": "overlay-universal-id",
+              "maximum": 15
+            },
+            {
+              "path": "/loadbalance/load-balance-ecmp-profile/load-balance-ecmp-universal/underlay-universal-id",
+              "type": "number",
+              "label": "underlay-universal-id",
+              "maximum": 15,
+              "must": [
+                {
+                  "expr": "not(../../../global-attribute/rail-group-enable = 'true' and ../underlay-universal-id != 0)"
+                }
+              ]
+            },
+            {
+              "path": "/loadbalance/load-balance-ecmp-profile/load-balance-ecmp-universal/universal-id",
+              "type": "number",
+              "label": "universal-id",
+              "minimum": 1,
+              "maximum": 16
+            }
+          ]
+        },
+        {
+          "path": "/loadbalance/load-balance-ecmp-profile/local-preference-enhanced",
+          "type": "group",
+          "label": "local-preference-enhanced",
+          "fields": [
+            {
+              "path": "/loadbalance/load-balance-ecmp-profile/local-preference-enhanced/enable",
+              "type": "boolean",
+              "label": "enable"
+            }
+          ]
+        },
+        {
+          "path": "/loadbalance/load-balance-ecmp-profile/vxlan-hash",
+          "type": "group",
+          "label": "vxlan-hash",
+          "must": [
+            {
+              "expr": "not(inner-src-ip='false' and inner-dst-ip='false' and inner-l4-dport='false' and inner-l4-sport='false' and inner-protocol='false' and src-interface='false' and vni='false')"
+            }
+          ],
+          "fields": [
+            {
+              "path": "/loadbalance/load-balance-ecmp-profile/vxlan-hash/inner-dst-ip",
+              "type": "boolean",
+              "label": "inner-dst-ip"
+            },
+            {
+              "path": "/loadbalance/load-balance-ecmp-profile/vxlan-hash/inner-l4-dport",
+              "type": "boolean",
+              "label": "inner-l4-dport"
+            },
+            {
+              "path": "/loadbalance/load-balance-ecmp-profile/vxlan-hash/inner-l4-sport",
+              "type": "boolean",
+              "label": "inner-l4-sport"
+            },
+            {
+              "path": "/loadbalance/load-balance-ecmp-profile/vxlan-hash/inner-protocol",
+              "type": "boolean",
+              "label": "inner-protocol"
+            },
+            {
+              "path": "/loadbalance/load-balance-ecmp-profile/vxlan-hash/inner-src-ip",
+              "type": "boolean",
+              "label": "inner-src-ip"
+            },
+            {
+              "path": "/loadbalance/load-balance-ecmp-profile/vxlan-hash/src-interface",
+              "type": "boolean",
+              "label": "src-interface"
+            },
+            {
+              "path": "/loadbalance/load-balance-ecmp-profile/vxlan-hash/vni",
+              "type": "boolean",
+              "label": "vni"
+            }
+          ]
+        },
+        {
+          "path": "/loadbalance/load-balance-ecmp-profile/vxlan-overlay-local-preference",
+          "type": "group",
+          "label": "vxlan-overlay-local-preference",
+          "fields": [
+            {
+              "path": "/loadbalance/load-balance-ecmp-profile/vxlan-overlay-local-preference/local-preference-mode",
+              "type": "enum",
+              "label": "local-preference-mode",
+              "options": [
+                {
+                  "label": "all",
+                  "value": "all"
+                },
+                {
+                  "label": "vxlan",
+                  "value": "vxlan"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/loadbalance/load-balance-ecmp-stateful-enhanced",
+      "type": "group",
+      "label": "load-balance-ecmp-stateful-enhanced",
+      "must": [
+        {
+          "expr": "../load-balance-ecmp-enable/is-enable='true' or (../load-balance-ecmp-enable/is-enable='false' and is-enable='false')"
+        }
+      ],
+      "fields": [
+        {
+          "path": "/loadbalance/load-balance-ecmp-stateful-enhanced/is-enable",
+          "type": "boolean",
+          "label": "is-enable"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,267 @@
+{
+  "module": "openflow-agent",
+  "tabs": [
+    {
+      "name": "priority",
+      "kind": "form"
+    },
+    {
+      "name": "sdnagent",
+      "kind": "form"
+    },
+    {
+      "name": "session-infos",
+      "kind": "list"
+    }
+  ],
+  "lists": {
+    "session-infos": {
+      "keyField": "controller-address",
+      "columns": [
+        {
+          "name": "controller-address",
+          "widget": "string"
+        },
+        {
+          "name": "vpn-name",
+          "widget": "string"
+        },
+        {
+          "name": "role",
+          "widget": "enum"
+        },
+        {
+          "name": "state",
+          "widget": "enum"
+        },
+        {
+          "name": "agent-address",
+          "widget": "string"
+        },
+        {
+          "name": "up-time",
+          "widget": "number"
+        }
+      ],
+      "filterable": []
+    }
+  },
+  "tree": [
+    {
+      "path": "/openflow-agent/priority",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/openflow-agent/priority/dscp",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/openflow-agent/sdnagent",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/openflow-agent/sdnagent/controllers",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/openflow-agent/sdnagent/controllers/controller",
+      "kind": "list",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/openflow-agent/sdnagent/controllers/controller/controller-address",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/openflow-agent/sdnagent/controllers/controller/openflow-attributes",
+      "kind": "container",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/openflow-agent/sdnagent/controllers/controller/openflow-attributes/agent-address",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/openflow-agent/sdnagent/controllers/controller/openflow-attributes/echo-interval",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/openflow-agent/sdnagent/controllers/controller/openflow-attributes/keychain-name",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/openflow-agent/sdnagent/controllers/controller/openflow-attributes/ssl-policy-name",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/openflow-agent/sdnagent/controllers/controller/vpn-name",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/openflow-agent/sdnagent/description",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/openflow-agent/sdnagent/source-ip",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/openflow-agent/sdnagent/source-ip/source-address",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/openflow-agent/sdnagent/source-ipv6",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/openflow-agent/sdnagent/source-ipv6/source-address",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/openflow-agent/session-infos",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/openflow-agent/session-infos/session-info",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/openflow-agent/session-infos/session-info/agent-address",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/openflow-agent/session-infos/session-info/controller-address",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/openflow-agent/session-infos/session-info/role",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/openflow-agent/session-infos/session-info/state",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/openflow-agent/session-infos/session-info/up-time",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/openflow-agent/session-infos/session-info/vpn-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    }
+  ]
+}

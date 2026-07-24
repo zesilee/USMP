@@ -1,0 +1,580 @@
+{
+  "module": "routing",
+  "title": "routing",
+  "vendor": "huawei",
+  "fields": [
+    {
+      "path": "/routing/routing-manage",
+      "type": "group",
+      "label": "routing-manage",
+      "fields": [
+        {
+          "path": "/routing/routing-manage/global-active-vpn-route-statistics",
+          "type": "group",
+          "label": "global-active-vpn-route-statistics",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/routing/routing-manage/global-active-vpn-route-statistics/direct-number",
+              "type": "number",
+              "label": "direct-number",
+              "readonly": true
+            },
+            {
+              "path": "/routing/routing-manage/global-active-vpn-route-statistics/total-number",
+              "type": "number",
+              "label": "total-number",
+              "readonly": true
+            }
+          ]
+        },
+        {
+          "path": "/routing/routing-manage/ipv4-threshold",
+          "type": "group",
+          "label": "ipv4-threshold",
+          "must": [
+            {
+              "expr": "upper-percent\u003elower-percent"
+            }
+          ],
+          "fields": [
+            {
+              "path": "/routing/routing-manage/ipv4-threshold/lower-percent",
+              "type": "number",
+              "label": "lower-percent",
+              "minimum": 1,
+              "maximum": 100
+            },
+            {
+              "path": "/routing/routing-manage/ipv4-threshold/upper-percent",
+              "type": "number",
+              "label": "upper-percent",
+              "minimum": 1,
+              "maximum": 100
+            }
+          ]
+        },
+        {
+          "path": "/routing/routing-manage/ipv4-vpn-route-statisticss",
+          "type": "group",
+          "label": "ipv4-vpn-route-statisticss",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/routing/routing-manage/ipv4-vpn-route-statisticss/ipv4-vpn-route-statistics",
+              "type": "list",
+              "label": "ipv4-vpn-route-statistics",
+              "readonly": true,
+              "fields": [
+                {
+                  "path": "/routing/routing-manage/ipv4-vpn-route-statisticss/ipv4-vpn-route-statistics/active-num",
+                  "type": "number",
+                  "label": "active-num",
+                  "readonly": true
+                },
+                {
+                  "path": "/routing/routing-manage/ipv4-vpn-route-statisticss/ipv4-vpn-route-statistics/added-num",
+                  "type": "number",
+                  "label": "added-num",
+                  "readonly": true
+                },
+                {
+                  "path": "/routing/routing-manage/ipv4-vpn-route-statisticss/ipv4-vpn-route-statistics/deleted-num",
+                  "type": "number",
+                  "label": "deleted-num",
+                  "readonly": true
+                },
+                {
+                  "path": "/routing/routing-manage/ipv4-vpn-route-statisticss/ipv4-vpn-route-statistics/freed-num",
+                  "type": "number",
+                  "label": "freed-num",
+                  "readonly": true
+                },
+                {
+                  "path": "/routing/routing-manage/ipv4-vpn-route-statisticss/ipv4-vpn-route-statistics/protocol-type",
+                  "type": "enum",
+                  "label": "protocol-type",
+                  "options": [
+                    {
+                      "label": "bgp",
+                      "value": "bgp"
+                    },
+                    {
+                      "label": "direct",
+                      "value": "direct"
+                    },
+                    {
+                      "label": "isis",
+                      "value": "isis"
+                    },
+                    {
+                      "label": "opr",
+                      "value": "opr"
+                    },
+                    {
+                      "label": "ospf",
+                      "value": "ospf"
+                    },
+                    {
+                      "label": "rip",
+                      "value": "rip"
+                    },
+                    {
+                      "label": "static",
+                      "value": "static"
+                    },
+                    {
+                      "label": "total",
+                      "value": "total"
+                    },
+                    {
+                      "label": "unr",
+                      "value": "unr"
+                    }
+                  ],
+                  "readonly": true,
+                  "isKey": true
+                },
+                {
+                  "path": "/routing/routing-manage/ipv4-vpn-route-statisticss/ipv4-vpn-route-statistics/total-num",
+                  "type": "number",
+                  "label": "total-num",
+                  "readonly": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "path": "/routing/routing-manage/ipv6-threshold",
+          "type": "group",
+          "label": "ipv6-threshold",
+          "must": [
+            {
+              "expr": "upper-percent\u003elower-percent"
+            }
+          ],
+          "fields": [
+            {
+              "path": "/routing/routing-manage/ipv6-threshold/lower-percent",
+              "type": "number",
+              "label": "lower-percent",
+              "minimum": 1,
+              "maximum": 100
+            },
+            {
+              "path": "/routing/routing-manage/ipv6-threshold/upper-percent",
+              "type": "number",
+              "label": "upper-percent",
+              "minimum": 1,
+              "maximum": 100
+            }
+          ]
+        },
+        {
+          "path": "/routing/routing-manage/ipv6-vpn-route-statisticss",
+          "type": "group",
+          "label": "ipv6-vpn-route-statisticss",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/routing/routing-manage/ipv6-vpn-route-statisticss/ipv6-vpn-route-statistics",
+              "type": "list",
+              "label": "ipv6-vpn-route-statistics",
+              "readonly": true,
+              "fields": [
+                {
+                  "path": "/routing/routing-manage/ipv6-vpn-route-statisticss/ipv6-vpn-route-statistics/active-num",
+                  "type": "number",
+                  "label": "active-num",
+                  "readonly": true
+                },
+                {
+                  "path": "/routing/routing-manage/ipv6-vpn-route-statisticss/ipv6-vpn-route-statistics/added-num",
+                  "type": "number",
+                  "label": "added-num",
+                  "readonly": true
+                },
+                {
+                  "path": "/routing/routing-manage/ipv6-vpn-route-statisticss/ipv6-vpn-route-statistics/deleted-num",
+                  "type": "number",
+                  "label": "deleted-num",
+                  "readonly": true
+                },
+                {
+                  "path": "/routing/routing-manage/ipv6-vpn-route-statisticss/ipv6-vpn-route-statistics/freed-num",
+                  "type": "number",
+                  "label": "freed-num",
+                  "readonly": true
+                },
+                {
+                  "path": "/routing/routing-manage/ipv6-vpn-route-statisticss/ipv6-vpn-route-statistics/protocol-type",
+                  "type": "enum",
+                  "label": "protocol-type",
+                  "options": [
+                    {
+                      "label": "bgp",
+                      "value": "bgp"
+                    },
+                    {
+                      "label": "direct",
+                      "value": "direct"
+                    },
+                    {
+                      "label": "isis",
+                      "value": "isis"
+                    },
+                    {
+                      "label": "opr",
+                      "value": "opr"
+                    },
+                    {
+                      "label": "ospfv3",
+                      "value": "ospfv3"
+                    },
+                    {
+                      "label": "ripng",
+                      "value": "ripng"
+                    },
+                    {
+                      "label": "static",
+                      "value": "static"
+                    },
+                    {
+                      "label": "total",
+                      "value": "total"
+                    },
+                    {
+                      "label": "unr",
+                      "value": "unr"
+                    }
+                  ],
+                  "readonly": true,
+                  "isKey": true
+                },
+                {
+                  "path": "/routing/routing-manage/ipv6-vpn-route-statisticss/ipv6-vpn-route-statistics/total-num",
+                  "type": "number",
+                  "label": "total-num",
+                  "readonly": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "path": "/routing/routing-manage/iterative-restrain",
+          "type": "group",
+          "label": "iterative-restrain",
+          "fields": [
+            {
+              "path": "/routing/routing-manage/iterative-restrain/enable",
+              "type": "boolean",
+              "label": "enable"
+            },
+            {
+              "path": "/routing/routing-manage/iterative-restrain/increase-time",
+              "type": "number",
+              "label": "increase-time",
+              "minimum": 1000,
+              "maximum": 5000
+            },
+            {
+              "path": "/routing/routing-manage/iterative-restrain/max-time",
+              "type": "number",
+              "label": "max-time",
+              "minimum": 5000,
+              "maximum": 60000
+            },
+            {
+              "path": "/routing/routing-manage/iterative-restrain/start-time",
+              "type": "number",
+              "label": "start-time",
+              "minimum": 500,
+              "maximum": 2000
+            }
+          ]
+        },
+        {
+          "path": "/routing/routing-manage/relay-default-routes",
+          "type": "group",
+          "label": "relay-default-routes",
+          "fields": [
+            {
+              "path": "/routing/routing-manage/relay-default-routes/relay-default-route",
+              "type": "list",
+              "label": "relay-default-route",
+              "fields": [
+                {
+                  "path": "/routing/routing-manage/relay-default-routes/relay-default-route/address-family",
+                  "type": "enum",
+                  "label": "address-family",
+                  "options": [
+                    {
+                      "label": "ipv4-unicast",
+                      "value": "ipv4-unicast"
+                    },
+                    {
+                      "label": "ipv6-unicast",
+                      "value": "ipv6-unicast"
+                    }
+                  ],
+                  "must": [
+                    {
+                      "expr": "../address-family='ipv4-unicast' or (not(../protocol-type='msr') and ../address-family='ipv6-unicast')"
+                    }
+                  ],
+                  "isKey": true
+                },
+                {
+                  "path": "/routing/routing-manage/relay-default-routes/relay-default-route/protocol-type",
+                  "type": "enum",
+                  "label": "protocol-type",
+                  "options": [
+                    {
+                      "label": "msr",
+                      "value": "msr"
+                    },
+                    {
+                      "label": "static",
+                      "value": "static"
+                    }
+                  ],
+                  "must": [
+                    {
+                      "expr": "../protocol-type='static' or (../protocol-type='msr' and ../address-family='ipv4-unicast')"
+                    }
+                  ],
+                  "isKey": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "path": "/routing/routing-manage/relay-label",
+          "type": "group",
+          "label": "relay-label",
+          "fields": [
+            {
+              "path": "/routing/routing-manage/relay-label/ipv4-set",
+              "type": "boolean",
+              "label": "ipv4-set"
+            },
+            {
+              "path": "/routing/routing-manage/relay-label/ipv6-set",
+              "type": "boolean",
+              "label": "ipv6-set"
+            }
+          ]
+        },
+        {
+          "path": "/routing/routing-manage/relay-tunnel",
+          "type": "group",
+          "label": "relay-tunnel",
+          "fields": [
+            {
+              "path": "/routing/routing-manage/relay-tunnel/enable",
+              "type": "boolean",
+              "label": "enable"
+            },
+            {
+              "path": "/routing/routing-manage/relay-tunnel/ipv4-prefix-ref",
+              "type": "string",
+              "label": "ipv4-prefix-ref",
+              "when": "../enable='true'",
+              "must": [
+                {
+                  "expr": "../enable='true' or not(../ipv4-prefix-ref)"
+                }
+              ]
+            },
+            {
+              "path": "/routing/routing-manage/relay-tunnel/tunnel-policy-ref",
+              "type": "string",
+              "label": "tunnel-policy-ref",
+              "when": "../enable='true'",
+              "must": [
+                {
+                  "expr": "../enable='true' or not(../tunnel-policy-ref)"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/routing/static-routing",
+      "type": "group",
+      "label": "static-routing",
+      "fields": [
+        {
+          "path": "/routing/static-routing/ipv4-relay-tunnel",
+          "type": "group",
+          "label": "ipv4-relay-tunnel",
+          "fields": [
+            {
+              "path": "/routing/static-routing/ipv4-relay-tunnel/enable",
+              "type": "boolean",
+              "label": "enable"
+            },
+            {
+              "path": "/routing/static-routing/ipv4-relay-tunnel/ipv4-prefix-ref",
+              "type": "string",
+              "label": "ipv4-prefix-ref",
+              "when": "../enable='true'",
+              "must": [
+                {
+                  "expr": "../enable='true' or not(../ipv4-prefix-ref)"
+                }
+              ]
+            },
+            {
+              "path": "/routing/static-routing/ipv4-relay-tunnel/tunnel-policy-ref",
+              "type": "string",
+              "label": "tunnel-policy-ref",
+              "when": "../enable='true'",
+              "must": [
+                {
+                  "expr": "../enable='true' or not(../tunnel-policy-ref)"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "path": "/routing/static-routing/ipv4-site",
+          "type": "group",
+          "label": "ipv4-site",
+          "fields": [
+            {
+              "path": "/routing/static-routing/ipv4-site/current-route-num",
+              "type": "number",
+              "label": "current-route-num",
+              "readonly": true
+            },
+            {
+              "path": "/routing/static-routing/ipv4-site/inherit-cost-switch",
+              "type": "boolean",
+              "label": "inherit-cost-switch"
+            },
+            {
+              "path": "/routing/static-routing/ipv4-site/max-route-num",
+              "type": "number",
+              "label": "max-route-num",
+              "readonly": true
+            },
+            {
+              "path": "/routing/static-routing/ipv4-site/min-rx-interval",
+              "type": "number",
+              "label": "min-rx-interval",
+              "dynamicDefault": true
+            },
+            {
+              "path": "/routing/static-routing/ipv4-site/min-tx-interval",
+              "type": "number",
+              "label": "min-tx-interval",
+              "dynamicDefault": true
+            },
+            {
+              "path": "/routing/static-routing/ipv4-site/multiplier",
+              "type": "number",
+              "label": "multiplier",
+              "minimum": 3,
+              "maximum": 50
+            },
+            {
+              "path": "/routing/static-routing/ipv4-site/preference",
+              "type": "number",
+              "label": "preference",
+              "minimum": 1,
+              "maximum": 255,
+              "dynamicDefault": true
+            },
+            {
+              "path": "/routing/static-routing/ipv4-site/relay-arp-vlink",
+              "type": "boolean",
+              "label": "relay-arp-vlink"
+            },
+            {
+              "path": "/routing/static-routing/ipv4-site/relay-remote",
+              "type": "boolean",
+              "label": "relay-remote"
+            },
+            {
+              "path": "/routing/static-routing/ipv4-site/relay-switch",
+              "type": "boolean",
+              "label": "relay-switch"
+            }
+          ]
+        },
+        {
+          "path": "/routing/static-routing/ipv6-site",
+          "type": "group",
+          "label": "ipv6-site",
+          "fields": [
+            {
+              "path": "/routing/static-routing/ipv6-site/current-route-num",
+              "type": "number",
+              "label": "current-route-num",
+              "readonly": true
+            },
+            {
+              "path": "/routing/static-routing/ipv6-site/max-route-num",
+              "type": "number",
+              "label": "max-route-num",
+              "readonly": true
+            },
+            {
+              "path": "/routing/static-routing/ipv6-site/min-rx-interval",
+              "type": "number",
+              "label": "min-rx-interval",
+              "dynamicDefault": true
+            },
+            {
+              "path": "/routing/static-routing/ipv6-site/min-tx-interval",
+              "type": "number",
+              "label": "min-tx-interval",
+              "dynamicDefault": true
+            },
+            {
+              "path": "/routing/static-routing/ipv6-site/multiplier",
+              "type": "number",
+              "label": "multiplier",
+              "minimum": 3,
+              "maximum": 50
+            },
+            {
+              "path": "/routing/static-routing/ipv6-site/preference",
+              "type": "number",
+              "label": "preference",
+              "minimum": 1,
+              "maximum": 255,
+              "dynamicDefault": true
+            },
+            {
+              "path": "/routing/static-routing/ipv6-site/relay-arp-vlink6",
+              "type": "boolean",
+              "label": "relay-arp-vlink6"
+            }
+          ]
+        },
+        {
+          "path": "/routing/static-routing/max-route-number",
+          "type": "group",
+          "label": "max-route-number",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/routing/static-routing/max-route-number/num",
+              "type": "number",
+              "label": "num",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

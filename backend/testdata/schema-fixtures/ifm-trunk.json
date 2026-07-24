@@ -1,0 +1,19 @@
+{
+  "module": "ifm-trunk",
+  "title": "ifm-trunk",
+  "vendor": "huawei",
+  "fields": [
+    {
+      "path": "/ifm-trunk/global",
+      "type": "group",
+      "label": "global",
+      "fields": [
+        {
+          "path": "/ifm-trunk/global/trunk-member-trap-enable",
+          "type": "boolean",
+          "label": "trunk-member-trap-enable"
+        }
+      ]
+    }
+  ]
+}

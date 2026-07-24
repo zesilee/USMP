@@ -1,0 +1,2458 @@
+{
+  "module": "snmp",
+  "tabs": [
+    {
+      "name": "agent-flag",
+      "kind": "form"
+    },
+    {
+      "name": "all-interface",
+      "kind": "form"
+    },
+    {
+      "name": "black-list",
+      "kind": "form"
+    },
+    {
+      "name": "communitys",
+      "kind": "list"
+    },
+    {
+      "name": "engine",
+      "kind": "form"
+    },
+    {
+      "name": "glbal-stats",
+      "kind": "form"
+    },
+    {
+      "name": "ipv6-sources",
+      "kind": "list"
+    },
+    {
+      "name": "local-users",
+      "kind": "list"
+    },
+    {
+      "name": "mib-views",
+      "kind": "list"
+    },
+    {
+      "name": "mpd-stats",
+      "kind": "form"
+    },
+    {
+      "name": "notification",
+      "kind": "form"
+    },
+    {
+      "name": "ntfcation-stats",
+      "kind": "form"
+    },
+    {
+      "name": "ntfy-fltr-prfs",
+      "kind": "list"
+    },
+    {
+      "name": "proxy",
+      "kind": "form"
+    },
+    {
+      "name": "source-interfaces",
+      "kind": "list"
+    },
+    {
+      "name": "standard-communitys",
+      "kind": "list"
+    },
+    {
+      "name": "system",
+      "kind": "form"
+    },
+    {
+      "name": "target-hosts",
+      "kind": "list"
+    },
+    {
+      "name": "usm-stats",
+      "kind": "form"
+    },
+    {
+      "name": "usm-users",
+      "kind": "list"
+    },
+    {
+      "name": "v3-groups",
+      "kind": "list"
+    }
+  ],
+  "lists": {
+    "communitys": {
+      "keyField": "name",
+      "columns": [
+        {
+          "name": "name",
+          "widget": "string"
+        },
+        {
+          "name": "access-right",
+          "widget": "enum"
+        },
+        {
+          "name": "acl",
+          "widget": "string"
+        },
+        {
+          "name": "alias-name",
+          "widget": "string"
+        },
+        {
+          "name": "view-name",
+          "widget": "string"
+        }
+      ],
+      "filterable": []
+    },
+    "ipv6-sources": {
+      "keyField": "src-ipv6-address",
+      "columns": [
+        {
+          "name": "src-ipv6-address",
+          "widget": "string"
+        },
+        {
+          "name": "vpn-name",
+          "widget": "string"
+        }
+      ],
+      "filterable": []
+    },
+    "local-users": {
+      "keyField": "name",
+      "columns": [
+        {
+          "name": "name",
+          "widget": "string"
+        },
+        {
+          "name": "auth-protocol",
+          "widget": "enum"
+        },
+        {
+          "name": "priv-protocol",
+          "widget": "enum"
+        },
+        {
+          "name": "active-status",
+          "widget": "string"
+        },
+        {
+          "name": "auth-key",
+          "widget": "string"
+        },
+        {
+          "name": "left-lock-time",
+          "widget": "number"
+        },
+        {
+          "name": "priv-key",
+          "widget": "string"
+        }
+      ],
+      "filterable": []
+    },
+    "mib-views": {
+      "keyField": "sub-tree",
+      "columns": [
+        {
+          "name": "sub-tree",
+          "widget": "string"
+        },
+        {
+          "name": "view-name",
+          "widget": "string"
+        },
+        {
+          "name": "type",
+          "widget": "enum"
+        }
+      ],
+      "filterable": []
+    },
+    "ntfy-fltr-prfs": {
+      "keyField": "name",
+      "columns": [
+        {
+          "name": "name",
+          "widget": "string"
+        },
+        {
+          "name": "subtree",
+          "widget": "string"
+        },
+        {
+          "name": "type",
+          "widget": "enum"
+        }
+      ],
+      "filterable": []
+    },
+    "source-interfaces": {
+      "keyField": "interface-name",
+      "columns": [
+        {
+          "name": "interface-name",
+          "widget": "string"
+        }
+      ],
+      "filterable": []
+    },
+    "standard-communitys": {
+      "keyField": "alias-name",
+      "columns": [
+        {
+          "name": "alias-name",
+          "widget": "string"
+        },
+        {
+          "name": "access-right",
+          "widget": "enum"
+        },
+        {
+          "name": "acl",
+          "widget": "string"
+        },
+        {
+          "name": "name",
+          "widget": "string"
+        },
+        {
+          "name": "view-name",
+          "widget": "string"
+        }
+      ],
+      "filterable": []
+    },
+    "target-hosts": {
+      "keyField": "nms-name",
+      "columns": [
+        {
+          "name": "nms-name",
+          "widget": "string"
+        },
+        {
+          "name": "heart-beat-time",
+          "widget": "number"
+        },
+        {
+          "name": "target-inform-resend-times",
+          "widget": "number"
+        },
+        {
+          "name": "target-inform-timeout",
+          "widget": "number"
+        },
+        {
+          "name": "domain",
+          "widget": "enum"
+        },
+        {
+          "name": "notify-type",
+          "widget": "enum"
+        },
+        {
+          "name": "address",
+          "widget": "string"
+        },
+        {
+          "name": "confirmed-num",
+          "widget": "number"
+        },
+        {
+          "name": "dropped-num",
+          "widget": "number"
+        }
+      ],
+      "filterable": []
+    },
+    "usm-users": {
+      "keyField": "user-name",
+      "columns": [
+        {
+          "name": "user-name",
+          "widget": "string"
+        },
+        {
+          "name": "auth-key",
+          "widget": "string"
+        },
+        {
+          "name": "priv-key",
+          "widget": "string"
+        },
+        {
+          "name": "auth-protocol",
+          "widget": "enum"
+        },
+        {
+          "name": "priv-protocol",
+          "widget": "enum"
+        },
+        {
+          "name": "acl-number",
+          "widget": "string"
+        },
+        {
+          "name": "active-status",
+          "widget": "string"
+        },
+        {
+          "name": "group-name",
+          "widget": "string"
+        },
+        {
+          "name": "is-auth-localized",
+          "widget": "boolean"
+        }
+      ],
+      "filterable": []
+    },
+    "v3-groups": {
+      "keyField": "group-name",
+      "columns": [
+        {
+          "name": "group-name",
+          "widget": "string"
+        },
+        {
+          "name": "security-level",
+          "widget": "enum"
+        },
+        {
+          "name": "acl-number",
+          "widget": "string"
+        },
+        {
+          "name": "notify-view-name",
+          "widget": "string"
+        },
+        {
+          "name": "read-view-name",
+          "widget": "string"
+        },
+        {
+          "name": "write-view-name",
+          "widget": "string"
+        }
+      ],
+      "filterable": []
+    }
+  },
+  "tree": [
+    {
+      "path": "/snmp/agent-flag",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/agent-flag/agent-enable",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/all-interface",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/all-interface/all-ipv4-interface",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/all-interface/all-ipv6-interface",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/black-list",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/black-list/ip-disable",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/black-list/user-disable",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/black-list/user-fail-count",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/black-list/user-period",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/black-list/user-reactive-time",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/communitys",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/communitys/community",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/communitys/community/access-right",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/snmp/communitys/community/acl",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/communitys/community/alias-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/communitys/community/name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/communitys/community/view-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/engine",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/engine/id",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/engine/max-msg-size",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/engine/version",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/glbal-stats",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/snmp/glbal-stats/in-asn-parse-errs",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/snmp/glbal-stats/in-bad-cmmty-names",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/snmp/glbal-stats/in-bad-cmmty-users",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/snmp/glbal-stats/in-bad-values",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/snmp/glbal-stats/in-bad-versions",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/snmp/glbal-stats/in-gen-errs",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/snmp/glbal-stats/in-get-bulks",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/snmp/glbal-stats/in-get-nexts",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/snmp/glbal-stats/in-get-reqs",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/snmp/glbal-stats/in-get-resps",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/snmp/glbal-stats/in-informs",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/snmp/glbal-stats/in-nosuch-names",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/snmp/glbal-stats/in-pkts",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/snmp/glbal-stats/in-proxy-pkts",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/snmp/glbal-stats/in-read-onlys",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/snmp/glbal-stats/in-set-reqs",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/snmp/glbal-stats/in-too-bigs",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/snmp/glbal-stats/in-total-req-vars",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/snmp/glbal-stats/in-total-set-vars",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/snmp/glbal-stats/in-traps",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/snmp/glbal-stats/out-bad-values",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/snmp/glbal-stats/out-gen-errs",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/snmp/glbal-stats/out-get-bulks",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/snmp/glbal-stats/out-get-nexts",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/snmp/glbal-stats/out-get-reqs",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/snmp/glbal-stats/out-get-resps",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/snmp/glbal-stats/out-nosuch-names",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/snmp/glbal-stats/out-pkts",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/snmp/glbal-stats/out-set-reqs",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/snmp/glbal-stats/out-too-bigs",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/snmp/glbal-stats/out-traps",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/snmp/glbal-stats/proxy-drops",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/snmp/glbal-stats/silent-drops",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/snmp/ipv6-sources",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/ipv6-sources/ipv6-source",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/ipv6-sources/ipv6-source/src-ipv6-address",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/ipv6-sources/ipv6-source/vpn-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/local-users",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/local-users/local-user",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/local-users/local-user/active-status",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/snmp/local-users/local-user/auth-key",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/snmp/local-users/local-user/auth-protocol",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/snmp/local-users/local-user/left-lock-time",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/snmp/local-users/local-user/name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/local-users/local-user/priv-key",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/snmp/local-users/local-user/priv-protocol",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/snmp/mib-views",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/mib-views/mib-view",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/mib-views/mib-view/sub-tree",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/mib-views/mib-view/type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/snmp/mib-views/mib-view/view-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/mpd-stats",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/snmp/mpd-stats/inval-msgs",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/snmp/mpd-stats/unknown-pduhandle",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/snmp/mpd-stats/unknown-sec-model",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/snmp/notification",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/notification/notif-global-ageout",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/notification/notif-global-limit",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/notification/notif-log-enable",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/ntfcation-stats",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/snmp/ntfcation-stats/total-log-entrs",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/snmp/ntfcation-stats/total-ntfs-bumped",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/snmp/ntfcation-stats/total-ntfs-logged",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/snmp/ntfy-fltr-prfs",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/ntfy-fltr-prfs/ntfy-fltr-prf",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/ntfy-fltr-prfs/ntfy-fltr-prf/name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/ntfy-fltr-prfs/ntfy-fltr-prf/subtree",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/ntfy-fltr-prfs/ntfy-fltr-prf/type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/proxy",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/proxy/all-interface",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/proxy/all-interface/all-ipv4-interface",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/proxy/all-interface/all-ipv6-interface",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/proxy/communitys",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/proxy/communitys/community",
+      "kind": "list",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/proxy/communitys/community/acl",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/proxy/communitys/community/alias-name",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/proxy/communitys/community/engine-id",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/snmp/proxy/communitys/community/name",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/proxy/ipv6-sources",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/proxy/ipv6-sources/ipv6-source",
+      "kind": "list",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/proxy/ipv6-sources/ipv6-source/src-ipv6-address",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/proxy/ipv6-sources/ipv6-source/vpn-name",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/proxy/rules",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/proxy/rules/rule",
+      "kind": "list",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/proxy/rules/rule/engine-id",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/snmp/proxy/rules/rule/host-name",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/snmp/proxy/rules/rule/name",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/proxy/rules/rule/security-level",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/proxy/rules/rule/security-model",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/snmp/proxy/rules/rule/security-name",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/snmp/proxy/rules/rule/security-v3-name",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/snmp/proxy/rules/rule/type",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/snmp/proxy/source-interfaces",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/proxy/source-interfaces/source-interface",
+      "kind": "list",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/proxy/source-interfaces/source-interface/interface-name",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/proxy/standard-communitys",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/proxy/standard-communitys/standard-community",
+      "kind": "list",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/proxy/standard-communitys/standard-community/acl",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/proxy/standard-communitys/standard-community/alias-name",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/proxy/standard-communitys/standard-community/engine-id",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/snmp/proxy/standard-communitys/standard-community/name",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/snmp/proxy/target-hosts",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/proxy/target-hosts/target-host",
+      "kind": "list",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/proxy/target-hosts/target-host/address",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/snmp/proxy/target-hosts/target-host/domain",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/snmp/proxy/target-hosts/target-host/interface-name",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/proxy/target-hosts/target-host/name",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/proxy/target-hosts/target-host/params",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "choice",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/proxy/target-hosts/target-host/port-num",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/snmp/proxy/target-hosts/target-host/public-net",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/proxy/target-hosts/target-host/timeout",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/proxy/target-hosts/target-host/vpn",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/proxy/usm-users",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/proxy/usm-users/engine-id",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/proxy/usm-users/usm-user",
+      "kind": "list",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/proxy/usm-users/usm-user/acl-number",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/proxy/usm-users/usm-user/active-status",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/snmp/proxy/usm-users/usm-user/auth-key",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/snmp/proxy/usm-users/usm-user/auth-protocol",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/proxy/usm-users/usm-user/group-name",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/proxy/usm-users/usm-user/is-auth-localized",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "boolean",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/snmp/proxy/usm-users/usm-user/is-priv-localized",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "boolean",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/snmp/proxy/usm-users/usm-user/left-lock-time",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/snmp/proxy/usm-users/usm-user/priv-key",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/snmp/proxy/usm-users/usm-user/priv-protocol",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/proxy/usm-users/usm-user/user-name",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/source-interfaces",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/source-interfaces/source-interface",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/source-interfaces/source-interface/interface-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/standard-communitys",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/standard-communitys/standard-community",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/standard-communitys/standard-community/access-right",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/snmp/standard-communitys/standard-community/acl",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/standard-communitys/standard-community/alias-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/standard-communitys/standard-community/name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/snmp/standard-communitys/standard-community/view-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/system",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/system/acl",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/system/community-cmplx-check",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/system/ctx-engineid-check-enable",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/system/ext-err-code-enable",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/system/getbulk-timeout",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/system/inform-pend-number",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/system/inform-resend-times",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/system/inform-timeout",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/system/ipv4-listen-disable",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/system/ipv6-listen-disable",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/system/ipv6-vpn-instance-name",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/system/is-ipv6-public-net",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/system/is-public-net",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/system/listen-port",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/system/local-user-cmplx-check",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/system/packet-priority",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/system/password-min-length",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/system/protocol-source-interface-name",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/system/protocol-source-ipv6-address",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/system/set-cache-enable",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/system/trap-listen-port",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/system/trap-packet-priority",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/system/trap-source-interface-name",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/system/trap-source-ipv4-address",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/system/usm-user-cmplx-check",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/system/vpn-instance-name",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/target-hosts",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/target-hosts/target-host",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/target-hosts/target-host/address",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/snmp/target-hosts/target-host/confirmed-num",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/snmp/target-hosts/target-host/domain",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/snmp/target-hosts/target-host/dropped-num",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/snmp/target-hosts/target-host/ext-vb",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/target-hosts/target-host/failed-num",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/snmp/target-hosts/target-host/heart-beat-time",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/target-hosts/target-host/interface-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/target-hosts/target-host/is-need-heart-beat",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/target-hosts/target-host/is-public-net",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/target-hosts/target-host/nms-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/target-hosts/target-host/notify-fltr-profile-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/target-hosts/target-host/notify-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/snmp/target-hosts/target-host/params",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "choice",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/target-hosts/target-host/pending-num",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/snmp/target-hosts/target-host/port-number",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/target-hosts/target-host/private-netmanager",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/target-hosts/target-host/retries-num",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/snmp/target-hosts/target-host/sent-num",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/snmp/target-hosts/target-host/status",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/snmp/target-hosts/target-host/target-inform-resend-times",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/target-hosts/target-host/target-inform-timeout",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/target-hosts/target-host/vpn-instance-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/usm-stats",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/snmp/usm-stats/decryption-errs",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/snmp/usm-stats/out-tm-windows",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/snmp/usm-stats/unknown-engine-ids",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/snmp/usm-stats/unknown-user-mame",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/snmp/usm-stats/unsuppt-sec-levs",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/snmp/usm-stats/wrong-digests",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/snmp/usm-users",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/usm-users/usm-user",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/usm-users/usm-user/acl-number",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/usm-users/usm-user/active-status",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/snmp/usm-users/usm-user/auth-key",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/snmp/usm-users/usm-user/auth-protocol",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/usm-users/usm-user/group-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/usm-users/usm-user/is-auth-localized",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/snmp/usm-users/usm-user/is-priv-localized",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/snmp/usm-users/usm-user/left-lock-time",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/snmp/usm-users/usm-user/priv-key",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/snmp/usm-users/usm-user/priv-protocol",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/usm-users/usm-user/user-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/v3-groups",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/v3-groups/v3-group",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/v3-groups/v3-group/acl-number",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/v3-groups/v3-group/group-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/v3-groups/v3-group/notify-view-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/v3-groups/v3-group/read-view-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/v3-groups/v3-group/security-level",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/snmp/v3-groups/v3-group/write-view-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    }
+  ]
+}

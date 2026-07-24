@@ -1,0 +1,497 @@
+{
+  "module": "evpl",
+  "title": "evpl",
+  "vendor": "huawei",
+  "fields": [
+    {
+      "path": "/evpl/instances",
+      "type": "group",
+      "label": "instances",
+      "fields": [
+        {
+          "path": "/evpl/instances/instance",
+          "type": "list",
+          "label": "instance",
+          "fields": [
+            {
+              "path": "/evpl/instances/instance/evpl-statistics",
+              "type": "group",
+              "label": "evpl-statistics",
+              "when": "(../mode = 'vxlan-mode')",
+              "fields": [
+                {
+                  "path": "/evpl/instances/instance/evpl-statistics/statistics-enable",
+                  "type": "boolean",
+                  "label": "statistics-enable"
+                }
+              ]
+            },
+            {
+              "path": "/evpl/instances/instance/evpn",
+              "type": "group",
+              "label": "evpn",
+              "fields": [
+                {
+                  "path": "/evpl/instances/instance/evpn/balancing-ignore-esi",
+                  "type": "boolean",
+                  "label": "balancing-ignore-esi",
+                  "when": "../name"
+                },
+                {
+                  "path": "/evpl/instances/instance/evpn/control-word",
+                  "type": "boolean",
+                  "label": "control-word",
+                  "when": "../name",
+                  "must": [
+                    {
+                      "expr": "(../control-word='true' and ../../evpl:mode='mpls-mode') or ../control-word!='true'"
+                    }
+                  ]
+                },
+                {
+                  "path": "/evpl/instances/instance/evpn/evpl-info",
+                  "type": "group",
+                  "label": "evpl-info",
+                  "readonly": true,
+                  "fields": [
+                    {
+                      "path": "/evpl/instances/instance/evpn/evpl-info/ac-interface",
+                      "type": "string",
+                      "label": "ac-interface",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/evpl/instances/instance/evpn/evpl-info/evpl-state",
+                      "type": "enum",
+                      "label": "evpl-state",
+                      "options": [
+                        {
+                          "label": "down",
+                          "value": "down"
+                        },
+                        {
+                          "label": "up",
+                          "value": "up"
+                        }
+                      ],
+                      "readonly": true
+                    },
+                    {
+                      "path": "/evpl/instances/instance/evpn/evpl-info/evpl-type",
+                      "type": "enum",
+                      "label": "evpl-type",
+                      "options": [
+                        {
+                          "label": "mpls-mode",
+                          "value": "mpls-mode"
+                        },
+                        {
+                          "label": "srv6-mode",
+                          "value": "srv6-mode"
+                        },
+                        {
+                          "label": "vxlan-mode",
+                          "value": "vxlan-mode"
+                        }
+                      ],
+                      "readonly": true
+                    },
+                    {
+                      "path": "/evpl/instances/instance/evpn/evpl-info/if-last-up-time",
+                      "type": "string",
+                      "label": "if-last-up-time",
+                      "pattern": "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?(Z|[\\+\\-]\\d{2}:\\d{2})",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/evpl/instances/instance/evpn/evpl-info/last-backup-time",
+                      "type": "string",
+                      "label": "last-backup-time",
+                      "pattern": "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?(Z|[\\+\\-]\\d{2}:\\d{2})",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/evpl/instances/instance/evpn/evpl-info/last-pri-time",
+                      "type": "string",
+                      "label": "last-pri-time",
+                      "pattern": "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?(Z|[\\+\\-]\\d{2}:\\d{2})",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/evpl/instances/instance/evpn/evpl-info/local-ctrl-word",
+                      "type": "boolean",
+                      "label": "local-ctrl-word",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/evpl/instances/instance/evpn/evpl-info/local-df-state",
+                      "type": "enum",
+                      "label": "local-df-state",
+                      "options": [
+                        {
+                          "label": "backup",
+                          "value": "backup"
+                        },
+                        {
+                          "label": "none",
+                          "value": "none"
+                        },
+                        {
+                          "label": "primary",
+                          "value": "primary"
+                        }
+                      ],
+                      "readonly": true
+                    },
+                    {
+                      "path": "/evpl/instances/instance/evpn/evpl-info/local-mtu",
+                      "type": "number",
+                      "label": "local-mtu",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/evpl/instances/instance/evpn/evpl-info/local-reduancy-mode",
+                      "type": "enum",
+                      "label": "local-reduancy-mode",
+                      "options": [
+                        {
+                          "label": "all-active",
+                          "value": "all-active"
+                        },
+                        {
+                          "label": "single-active",
+                          "value": "single-active"
+                        }
+                      ],
+                      "readonly": true
+                    },
+                    {
+                      "path": "/evpl/instances/instance/evpn/evpl-info/remote-back-df-num",
+                      "type": "number",
+                      "label": "remote-back-df-num",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/evpl/instances/instance/evpn/evpl-info/remote-none-df-num",
+                      "type": "number",
+                      "label": "remote-none-df-num",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/evpl/instances/instance/evpn/evpl-info/remote-pri-df-num",
+                      "type": "number",
+                      "label": "remote-pri-df-num",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/evpl/instances/instance/evpn/evpl-info/remote-reduancy-mode",
+                      "type": "enum",
+                      "label": "remote-reduancy-mode",
+                      "options": [
+                        {
+                          "label": "all-active",
+                          "value": "all-active"
+                        },
+                        {
+                          "label": "single-active",
+                          "value": "single-active"
+                        }
+                      ],
+                      "readonly": true
+                    },
+                    {
+                      "path": "/evpl/instances/instance/evpn/evpl-info/tunnel-type",
+                      "type": "enum",
+                      "label": "tunnel-type",
+                      "options": [
+                        {
+                          "label": "mpls",
+                          "value": "mpls"
+                        },
+                        {
+                          "label": "native-ipv6",
+                          "value": "native-ipv6"
+                        },
+                        {
+                          "label": "vxlan",
+                          "value": "vxlan"
+                        }
+                      ],
+                      "readonly": true
+                    }
+                  ]
+                },
+                {
+                  "path": "/evpl/instances/instance/evpn/evpl-peer-info",
+                  "type": "group",
+                  "label": "evpl-peer-info",
+                  "readonly": true,
+                  "fields": [
+                    {
+                      "path": "/evpl/instances/instance/evpn/evpl-peer-info/eline-role",
+                      "type": "enum",
+                      "label": "eline-role",
+                      "options": [
+                        {
+                          "label": "backup",
+                          "value": "backup"
+                        },
+                        {
+                          "label": "bypass",
+                          "value": "bypass"
+                        },
+                        {
+                          "label": "primary",
+                          "value": "primary"
+                        }
+                      ],
+                      "readonly": true
+                    },
+                    {
+                      "path": "/evpl/instances/instance/evpn/evpl-peer-info/nexthop-ip",
+                      "type": "string",
+                      "label": "nexthop-ip",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/evpl/instances/instance/evpn/evpl-peer-info/peer-ip",
+                      "type": "string",
+                      "label": "peer-ip",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/evpl/instances/instance/evpn/evpl-peer-info/remote-ctrl-word",
+                      "type": "boolean",
+                      "label": "remote-ctrl-word",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/evpl/instances/instance/evpn/evpl-peer-info/remote-df-state",
+                      "type": "enum",
+                      "label": "remote-df-state",
+                      "options": [
+                        {
+                          "label": "backup",
+                          "value": "backup"
+                        },
+                        {
+                          "label": "none",
+                          "value": "none"
+                        },
+                        {
+                          "label": "primary",
+                          "value": "primary"
+                        }
+                      ],
+                      "readonly": true
+                    },
+                    {
+                      "path": "/evpl/instances/instance/evpn/evpl-peer-info/remote-esi",
+                      "type": "string",
+                      "label": "remote-esi",
+                      "pattern": "( *(00([0-9a-fA-F]){2}\\.(([0-9a-fA-F]){4}\\.){3}(([0-9a-fA-F]){4}))? *)",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/evpl/instances/instance/evpn/evpl-peer-info/remote-mtu",
+                      "type": "number",
+                      "label": "remote-mtu",
+                      "minimum": 1,
+                      "maximum": 4294967295,
+                      "readonly": true
+                    }
+                  ]
+                },
+                {
+                  "path": "/evpl/instances/instance/evpn/ignore-match-mtu",
+                  "type": "boolean",
+                  "label": "ignore-match-mtu",
+                  "when": "../name"
+                },
+                {
+                  "path": "/evpl/instances/instance/evpn/local-service-id",
+                  "type": "number",
+                  "label": "local-service-id",
+                  "required": true,
+                  "minimum": 1,
+                  "maximum": 16777215,
+                  "when": "../name",
+                  "must": [
+                    {
+                      "expr": "(../local-service-id and ../remote-service-id) or (not(../local-service-id) and not(../remote-service-id))"
+                    }
+                  ],
+                  "operationExclude": [
+                    "update"
+                  ]
+                },
+                {
+                  "path": "/evpl/instances/instance/evpn/name",
+                  "type": "string",
+                  "label": "name",
+                  "when": "../../evpl:mode!='vxlan-mode'",
+                  "must": [
+                    {
+                      "expr": "/evpn:evpn/evpn:instances/evpn:instance[name=current()]/evpn:type='vpws-evpn' and /evpn:evpn/evpn:instances/evpn:instance[name=current()]/evpn:vpws-evpn/evpn:rd"
+                    }
+                  ]
+                },
+                {
+                  "path": "/evpl/instances/instance/evpn/remote-service-id",
+                  "type": "number",
+                  "label": "remote-service-id",
+                  "required": true,
+                  "minimum": 1,
+                  "maximum": 16777215,
+                  "when": "../name",
+                  "must": [
+                    {
+                      "expr": "(../local-service-id and ../remote-service-id) or (not(../local-service-id) and not(../remote-service-id))"
+                    }
+                  ],
+                  "operationExclude": [
+                    "update"
+                  ]
+                }
+              ],
+              "presence": true
+            },
+            {
+              "path": "/evpl/instances/instance/id",
+              "type": "number",
+              "label": "id",
+              "minimum": 1,
+              "maximum": 16777215,
+              "isKey": true
+            },
+            {
+              "path": "/evpl/instances/instance/interfaces",
+              "type": "group",
+              "label": "interfaces",
+              "when": "(../mode != 'vxlan-mode')",
+              "fields": [
+                {
+                  "path": "/evpl/instances/instance/interfaces/interface",
+                  "type": "list",
+                  "label": "interface",
+                  "fields": [
+                    {
+                      "path": "/evpl/instances/instance/interfaces/interface/name",
+                      "type": "string",
+                      "label": "name",
+                      "must": [
+                        {
+                          "expr": "(/ifm:ifm/ifm:interfaces/ifm:interface[ifm:name=current()]/ifm:type = 'PW-VE' and /ifm:ifm/ifm:interfaces/ifm:interface[ifm:name=current()]/ifm:class != 'main-interface') or (/ifm:ifm/ifm:interfaces/ifm:interface[ifm:name=current()]/ifm:type != 'PW-VE')"
+                        }
+                      ],
+                      "isKey": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/evpl/instances/instance/mode",
+              "type": "enum",
+              "label": "mode",
+              "required": true,
+              "options": [
+                {
+                  "label": "mpls-mode",
+                  "value": "mpls-mode"
+                },
+                {
+                  "label": "srv6-mode",
+                  "value": "srv6-mode"
+                },
+                {
+                  "label": "vxlan-mode",
+                  "value": "vxlan-mode"
+                }
+              ],
+              "operationExclude": [
+                "update"
+              ]
+            },
+            {
+              "path": "/evpl/instances/instance/nvo3",
+              "type": "group",
+              "label": "nvo3",
+              "when": "./evpl:mode = 'vxlan-mode'",
+              "fields": [
+                {
+                  "path": "/evpl/instances/instance/nvo3/attribute",
+                  "type": "group",
+                  "label": "attribute",
+                  "fields": [
+                    {
+                      "path": "/evpl/instances/instance/nvo3/attribute/vtep-ip",
+                      "type": "string",
+                      "label": "vtep-ip",
+                      "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?"
+                    }
+                  ]
+                },
+                {
+                  "path": "/evpl/instances/instance/nvo3/vni-lists",
+                  "type": "group",
+                  "label": "vni-lists",
+                  "fields": [
+                    {
+                      "path": "/evpl/instances/instance/nvo3/vni-lists/vni-list",
+                      "type": "list",
+                      "label": "vni-list",
+                      "fields": [
+                        {
+                          "path": "/evpl/instances/instance/nvo3/vni-lists/vni-list/vni",
+                          "type": "number",
+                          "label": "vni",
+                          "minimum": 1,
+                          "maximum": 16777215,
+                          "isKey": true
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/evpl/instances/instance/peers",
+              "type": "group",
+              "label": "peers",
+              "when": "(../mode = 'vxlan-mode')",
+              "fields": [
+                {
+                  "path": "/evpl/instances/instance/peers/peer",
+                  "type": "list",
+                  "label": "peer",
+                  "fields": [
+                    {
+                      "path": "/evpl/instances/instance/peers/peer/name",
+                      "type": "string",
+                      "label": "name",
+                      "must": [
+                        {
+                          "expr": "/ifm:ifm/ifm:interfaces/ifm:interface[ifm:name=current()]/ifm:type = 'PW-VE' and /ifm:ifm/ifm:interfaces/ifm:interface[ifm:name=current()]/ifm:class = 'main-interface'"
+                        }
+                      ],
+                      "isKey": true
+                    },
+                    {
+                      "path": "/evpl/instances/instance/peers/peer/peer-ip",
+                      "type": "string",
+                      "label": "peer-ip",
+                      "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?",
+                      "isKey": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

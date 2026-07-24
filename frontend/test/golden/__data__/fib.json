@@ -1,0 +1,408 @@
+{
+  "module": "fib",
+  "tabs": [
+    {
+      "name": "route-statistics",
+      "kind": "form"
+    },
+    {
+      "name": "unicast-afs",
+      "kind": "list"
+    }
+  ],
+  "lists": {
+    "unicast-afs": {
+      "keyField": "af-type",
+      "columns": [
+        {
+          "name": "af-type",
+          "widget": "enum"
+        },
+        {
+          "name": "position",
+          "widget": "string"
+        },
+        {
+          "name": "vrf-name",
+          "widget": "string"
+        }
+      ],
+      "filterable": []
+    }
+  },
+  "tree": [
+    {
+      "path": "/fib/route-statistics",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/fib/route-statistics/ip-route-entry-counts",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/fib/route-statistics/ip-route-entry-counts/ip-route-entry-count",
+      "kind": "list",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/fib/route-statistics/ip-route-entry-counts/ip-route-entry-count/entrycount",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/fib/route-statistics/ip-route-entry-counts/ip-route-entry-count/slot",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/fib/route-statistics/ip-route-entry-counts/ip-route-entry-count/vpn-name",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/fib/route-statistics/ip-route-resources",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/fib/route-statistics/ip-route-resources/ip-route-resource",
+      "kind": "list",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/fib/route-statistics/ip-route-resources/ip-route-resource/slot",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/fib/route-statistics/ip-route-resources/ip-route-resource/total",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/fib/route-statistics/ip-route-resources/ip-route-resource/used",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/fib/route-statistics/ipv6-route-entry-counts",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/fib/route-statistics/ipv6-route-entry-counts/ipv6-route-entry-count",
+      "kind": "list",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/fib/route-statistics/ipv6-route-entry-counts/ipv6-route-entry-count/entry-count",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/fib/route-statistics/ipv6-route-entry-counts/ipv6-route-entry-count/slot",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/fib/route-statistics/ipv6-route-entry-counts/ipv6-route-entry-count/vpn-name",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/fib/route-statistics/ipv6-route-resources",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/fib/route-statistics/ipv6-route-resources/ipv6-route-resource",
+      "kind": "list",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/fib/route-statistics/ipv6-route-resources/ipv6-route-resource/slot",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/fib/route-statistics/ipv6-route-resources/ipv6-route-resource/total",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/fib/route-statistics/ipv6-route-resources/ipv6-route-resource/used",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/fib/unicast-afs",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/fib/unicast-afs/unicast-af",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/fib/unicast-afs/unicast-af/af-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/fib/unicast-afs/unicast-af/position",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/fib/unicast-afs/unicast-af/routes",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/fib/unicast-afs/unicast-af/routes/route",
+      "kind": "list",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/fib/unicast-afs/unicast-af/routes/route/bak-if-name",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/fib/unicast-afs/unicast-af/routes/route/bak-inner-lable",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/fib/unicast-afs/unicast-af/routes/route/bak-lsp-token",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/fib/unicast-afs/unicast-af/routes/route/bak-nexthop",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/fib/unicast-afs/unicast-af/routes/route/bgp-nexthop",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/fib/unicast-afs/unicast-af/routes/route/destination",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/fib/unicast-afs/unicast-af/routes/route/if-name",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/fib/unicast-afs/unicast-af/routes/route/inner-label",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/fib/unicast-afs/unicast-af/routes/route/lsp-token",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/fib/unicast-afs/unicast-af/routes/route/mask",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/fib/unicast-afs/unicast-af/routes/route/nexthop",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/fib/unicast-afs/unicast-af/routes/route/tunnel-id",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/fib/unicast-afs/unicast-af/routes/route/vlan-id",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/fib/unicast-afs/unicast-af/statistics",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/fib/unicast-afs/unicast-af/statistics/total-num",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/fib/unicast-afs/unicast-af/vrf-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    }
+  ]
+}

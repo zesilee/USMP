@@ -1,0 +1,630 @@
+{
+  "module": "ssl",
+  "title": "ssl",
+  "vendor": "huawei",
+  "fields": [
+    {
+      "path": "/ssl/ssl-cipher-suites",
+      "type": "group",
+      "label": "ssl-cipher-suites",
+      "fields": [
+        {
+          "path": "/ssl/ssl-cipher-suites/ssl-cipher-suite",
+          "type": "list",
+          "label": "ssl-cipher-suite",
+          "fields": [
+            {
+              "path": "/ssl/ssl-cipher-suites/ssl-cipher-suite/cipher-suite-name",
+              "type": "string",
+              "label": "cipher-suite-name",
+              "isKey": true
+            },
+            {
+              "path": "/ssl/ssl-cipher-suites/ssl-cipher-suite/ssl-ciphers",
+              "type": "leaf-list",
+              "label": "ssl-ciphers",
+              "options": [
+                {
+                  "label": "aes-128-ccm-sha256",
+                  "value": "aes-128-ccm-sha256"
+                },
+                {
+                  "label": "aes-128-gcm-sha256",
+                  "value": "aes-128-gcm-sha256"
+                },
+                {
+                  "label": "aes-256-gcm-sha384",
+                  "value": "aes-256-gcm-sha384"
+                },
+                {
+                  "label": "chacha20-poly1305-sha256",
+                  "value": "chacha20-poly1305-sha256"
+                },
+                {
+                  "label": "dhe-dss-with-aes-128-gcm-sha256",
+                  "value": "dhe-dss-with-aes-128-gcm-sha256"
+                },
+                {
+                  "label": "dhe-dss-with-aes-128-sha",
+                  "value": "dhe-dss-with-aes-128-sha"
+                },
+                {
+                  "label": "dhe-dss-with-aes-256-gcm-sha384",
+                  "value": "dhe-dss-with-aes-256-gcm-sha384"
+                },
+                {
+                  "label": "dhe-dss-with-aes-256-sha",
+                  "value": "dhe-dss-with-aes-256-sha"
+                },
+                {
+                  "label": "dhe-rsa-with-aes-128-gcm-sha256",
+                  "value": "dhe-rsa-with-aes-128-gcm-sha256"
+                },
+                {
+                  "label": "dhe-rsa-with-aes-128-sha",
+                  "value": "dhe-rsa-with-aes-128-sha"
+                },
+                {
+                  "label": "dhe-rsa-with-aes-256-gcm-sha384",
+                  "value": "dhe-rsa-with-aes-256-gcm-sha384"
+                },
+                {
+                  "label": "dhe-rsa-with-aes-256-sha",
+                  "value": "dhe-rsa-with-aes-256-sha"
+                },
+                {
+                  "label": "ecdhe-rsa-with-aes-128-gcm-sha256",
+                  "value": "ecdhe-rsa-with-aes-128-gcm-sha256"
+                },
+                {
+                  "label": "ecdhe-rsa-with-aes-256-gcm-sha384",
+                  "value": "ecdhe-rsa-with-aes-256-gcm-sha384"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/ssl/ssl-policys",
+      "type": "group",
+      "label": "ssl-policys",
+      "fields": [
+        {
+          "path": "/ssl/ssl-policys/ssl-policy",
+          "type": "list",
+          "label": "ssl-policy",
+          "fields": [
+            {
+              "path": "/ssl/ssl-policys/ssl-policy/basic-const-enable",
+              "type": "enum",
+              "label": "basic-const-enable",
+              "options": [
+                {
+                  "label": "disable",
+                  "value": "disable"
+                },
+                {
+                  "label": "enable",
+                  "value": "enable"
+                }
+              ],
+              "supportFilter": true
+            },
+            {
+              "path": "/ssl/ssl-policys/ssl-policy/cert-loads",
+              "type": "group",
+              "label": "cert-loads",
+              "when": "not(/ssl:ssl/ssl:ssl-policys/ssl:ssl-policy/ssl:policy-name)",
+              "fields": [
+                {
+                  "path": "/ssl/ssl-policys/ssl-policy/cert-loads/cert-load",
+                  "type": "list",
+                  "label": "cert-load",
+                  "fields": [
+                    {
+                      "path": "/ssl/ssl-policys/ssl-policy/cert-loads/cert-load/auth-code-crt",
+                      "type": "string",
+                      "label": "auth-code-crt",
+                      "when": "not(../cert-type='asn1-cert') or ../cert-type!='asn1-cert' and ../cert-type!='pfx-cert' or ../cert-type='pfx-cert' and ../is-mac=0 or ../cert-type='pfx-cert' and ../is-mac=1 or ../cert-type='pfx-cert'",
+                      "supportFilter": true
+                    },
+                    {
+                      "path": "/ssl/ssl-policys/ssl-policy/cert-loads/cert-load/auth-code-mac",
+                      "type": "string",
+                      "label": "auth-code-mac",
+                      "when": "not(../cert-type!='asn1-cert' and ../cert-type!='pfx-cert' or ../cert-type='asn1-cert' or ../cert-type='pfx-cert' and ../is-mac=0) or ../cert-type='pfx-cert' and ../is-mac=1 or ../cert-type='pfx-cert'",
+                      "supportFilter": true
+                    },
+                    {
+                      "path": "/ssl/ssl-policys/ssl-policy/cert-loads/cert-load/cert-file",
+                      "type": "string",
+                      "label": "cert-file",
+                      "isKey": true
+                    },
+                    {
+                      "path": "/ssl/ssl-policys/ssl-policy/cert-loads/cert-load/cert-type",
+                      "type": "enum",
+                      "label": "cert-type",
+                      "required": true,
+                      "options": [
+                        {
+                          "label": "asn1-cert",
+                          "value": "asn1-cert"
+                        },
+                        {
+                          "label": "pem-cert",
+                          "value": "pem-cert"
+                        },
+                        {
+                          "label": "pem-chain",
+                          "value": "pem-chain"
+                        },
+                        {
+                          "label": "pfx-cert",
+                          "value": "pfx-cert"
+                        }
+                      ],
+                      "supportFilter": true
+                    },
+                    {
+                      "path": "/ssl/ssl-policys/ssl-policy/cert-loads/cert-load/is-cert-file-encrypted",
+                      "type": "enum",
+                      "label": "is-cert-file-encrypted",
+                      "options": [
+                        {
+                          "label": "isencrypted",
+                          "value": "isencrypted"
+                        },
+                        {
+                          "label": "notencrytep",
+                          "value": "notencrytep"
+                        }
+                      ],
+                      "readonly": true,
+                      "supportFilter": true
+                    },
+                    {
+                      "path": "/ssl/ssl-policys/ssl-policy/cert-loads/cert-load/is-mac",
+                      "type": "number",
+                      "label": "is-mac",
+                      "maximum": 1,
+                      "when": "not(../cert-type!='asn1-cert' and ../cert-type!='pfx-cert' or ../cert-type='asn1-cert') or ../cert-type='pfx-cert'",
+                      "supportFilter": true
+                    },
+                    {
+                      "path": "/ssl/ssl-policys/ssl-policy/cert-loads/cert-load/issuer-name",
+                      "type": "string",
+                      "label": "issuer-name",
+                      "readonly": true,
+                      "when": "not(not(../cert-file)) or not(../cert-file)",
+                      "supportFilter": true
+                    },
+                    {
+                      "path": "/ssl/ssl-policys/ssl-policy/cert-loads/cert-load/key-file",
+                      "type": "string",
+                      "label": "key-file",
+                      "when": "not(../cert-type='pfx-cert' and ../is-mac=1) or ../cert-type!='asn1-cert' and ../cert-type!='pfx-cert' or ../cert-type='asn1-cert' or ../cert-type='pfx-cert' and ../is-mac=0 or ../cert-type='pfx-cert'",
+                      "supportFilter": true
+                    },
+                    {
+                      "path": "/ssl/ssl-policys/ssl-policy/cert-loads/cert-load/key-type",
+                      "type": "enum",
+                      "label": "key-type",
+                      "required": true,
+                      "options": [
+                        {
+                          "label": "dsa",
+                          "value": "dsa"
+                        },
+                        {
+                          "label": "rsa",
+                          "value": "rsa"
+                        }
+                      ],
+                      "when": "../cert-type!='asn1-cert' and ../cert-type!='pfx-cert' or ../cert-type='asn1-cert' or ../cert-type='pfx-cert' and ../is-mac=0 or ../cert-type='pfx-cert' and ../is-mac=1 or ../cert-type='pfx-cert'",
+                      "supportFilter": true
+                    },
+                    {
+                      "path": "/ssl/ssl-policys/ssl-policy/cert-loads/cert-load/valid-not-after",
+                      "type": "string",
+                      "label": "valid-not-after",
+                      "readonly": true,
+                      "when": "not(not(../cert-file)) or not(../cert-file)",
+                      "supportFilter": true
+                    },
+                    {
+                      "path": "/ssl/ssl-policys/ssl-policy/cert-loads/cert-load/valid-not-before",
+                      "type": "string",
+                      "label": "valid-not-before",
+                      "readonly": true,
+                      "when": "not(not(../cert-file)) or not(../cert-file)",
+                      "supportFilter": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/ssl/ssl-policys/ssl-policy/cert-ver3-enable",
+              "type": "enum",
+              "label": "cert-ver3-enable",
+              "options": [
+                {
+                  "label": "disable",
+                  "value": "disable"
+                },
+                {
+                  "label": "enable",
+                  "value": "enable"
+                }
+              ],
+              "supportFilter": true
+            },
+            {
+              "path": "/ssl/ssl-policys/ssl-policy/certificate-files",
+              "type": "group",
+              "label": "certificate-files",
+              "readonly": true,
+              "fields": [
+                {
+                  "path": "/ssl/ssl-policys/ssl-policy/certificate-files/certificate-file",
+                  "type": "list",
+                  "label": "certificate-file",
+                  "readonly": true,
+                  "fields": [
+                    {
+                      "path": "/ssl/ssl-policys/ssl-policy/certificate-files/certificate-file/certificates",
+                      "type": "group",
+                      "label": "certificates",
+                      "readonly": true,
+                      "fields": [
+                        {
+                          "path": "/ssl/ssl-policys/ssl-policy/certificate-files/certificate-file/certificates/certificate",
+                          "type": "list",
+                          "label": "certificate",
+                          "readonly": true,
+                          "fields": [
+                            {
+                              "path": "/ssl/ssl-policys/ssl-policy/certificate-files/certificate-file/certificates/certificate/cert-state",
+                              "type": "enum",
+                              "label": "cert-state",
+                              "options": [
+                                {
+                                  "label": "about-to-expire",
+                                  "value": "about-to-expire"
+                                },
+                                {
+                                  "label": "expired",
+                                  "value": "expired"
+                                },
+                                {
+                                  "label": "normal",
+                                  "value": "normal"
+                                }
+                              ],
+                              "readonly": true
+                            },
+                            {
+                              "path": "/ssl/ssl-policys/ssl-policy/certificate-files/certificate-file/certificates/certificate/common-name",
+                              "type": "string",
+                              "label": "common-name",
+                              "readonly": true
+                            },
+                            {
+                              "path": "/ssl/ssl-policys/ssl-policy/certificate-files/certificate-file/certificates/certificate/end-time",
+                              "type": "string",
+                              "label": "end-time",
+                              "pattern": "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?(Z|[\\+\\-]\\d{2}:\\d{2})",
+                              "readonly": true
+                            },
+                            {
+                              "path": "/ssl/ssl-policys/ssl-policy/certificate-files/certificate-file/certificates/certificate/issuer",
+                              "type": "string",
+                              "label": "issuer",
+                              "readonly": true
+                            },
+                            {
+                              "path": "/ssl/ssl-policys/ssl-policy/certificate-files/certificate-file/certificates/certificate/key-usage",
+                              "type": "string",
+                              "label": "key-usage",
+                              "readonly": true
+                            },
+                            {
+                              "path": "/ssl/ssl-policys/ssl-policy/certificate-files/certificate-file/certificates/certificate/public-key-algorithm",
+                              "type": "string",
+                              "label": "public-key-algorithm",
+                              "readonly": true
+                            },
+                            {
+                              "path": "/ssl/ssl-policys/ssl-policy/certificate-files/certificate-file/certificates/certificate/serial-number",
+                              "type": "string",
+                              "label": "serial-number",
+                              "readonly": true,
+                              "isKey": true
+                            },
+                            {
+                              "path": "/ssl/ssl-policys/ssl-policy/certificate-files/certificate-file/certificates/certificate/signature-algorithm",
+                              "type": "string",
+                              "label": "signature-algorithm",
+                              "readonly": true
+                            },
+                            {
+                              "path": "/ssl/ssl-policys/ssl-policy/certificate-files/certificate-file/certificates/certificate/start-time",
+                              "type": "string",
+                              "label": "start-time",
+                              "pattern": "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?(Z|[\\+\\-]\\d{2}:\\d{2})",
+                              "readonly": true
+                            },
+                            {
+                              "path": "/ssl/ssl-policys/ssl-policy/certificate-files/certificate-file/certificates/certificate/subject",
+                              "type": "string",
+                              "label": "subject",
+                              "readonly": true
+                            },
+                            {
+                              "path": "/ssl/ssl-policys/ssl-policy/certificate-files/certificate-file/certificates/certificate/subject-alternative-name",
+                              "type": "string",
+                              "label": "subject-alternative-name",
+                              "readonly": true
+                            },
+                            {
+                              "path": "/ssl/ssl-policys/ssl-policy/certificate-files/certificate-file/certificates/certificate/version",
+                              "type": "string",
+                              "label": "version",
+                              "readonly": true
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/ssl/ssl-policys/ssl-policy/certificate-files/certificate-file/file-name",
+                      "type": "string",
+                      "label": "file-name",
+                      "readonly": true,
+                      "isKey": true
+                    },
+                    {
+                      "path": "/ssl/ssl-policys/ssl-policy/certificate-files/certificate-file/file-type",
+                      "type": "enum",
+                      "label": "file-type",
+                      "options": [
+                        {
+                          "label": "certificate",
+                          "value": "certificate"
+                        },
+                        {
+                          "label": "crl",
+                          "value": "crl"
+                        },
+                        {
+                          "label": "trusted-ca",
+                          "value": "trusted-ca"
+                        }
+                      ],
+                      "readonly": true,
+                      "isKey": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/ssl/ssl-policys/ssl-policy/cipher-suite-name",
+              "type": "string",
+              "label": "cipher-suite-name"
+            },
+            {
+              "path": "/ssl/ssl-policys/ssl-policy/crl-loads",
+              "type": "group",
+              "label": "crl-loads",
+              "when": "not(/ssl:ssl/ssl:ssl-policys/ssl:ssl-policy/ssl:policy-name)",
+              "fields": [
+                {
+                  "path": "/ssl/ssl-policys/ssl-policy/crl-loads/crl-load",
+                  "type": "list",
+                  "label": "crl-load",
+                  "fields": [
+                    {
+                      "path": "/ssl/ssl-policys/ssl-policy/crl-loads/crl-load/crl-file",
+                      "type": "string",
+                      "label": "crl-file",
+                      "isKey": true
+                    },
+                    {
+                      "path": "/ssl/ssl-policys/ssl-policy/crl-loads/crl-load/crl-type",
+                      "type": "enum",
+                      "label": "crl-type",
+                      "required": true,
+                      "options": [
+                        {
+                          "label": "asn1-crl",
+                          "value": "asn1-crl"
+                        },
+                        {
+                          "label": "pem-crl",
+                          "value": "pem-crl"
+                        }
+                      ],
+                      "supportFilter": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/ssl/ssl-policys/ssl-policy/crl-ver2-enable",
+              "type": "enum",
+              "label": "crl-ver2-enable",
+              "options": [
+                {
+                  "label": "disable",
+                  "value": "disable"
+                },
+                {
+                  "label": "enable",
+                  "value": "enable"
+                }
+              ],
+              "supportFilter": true
+            },
+            {
+              "path": "/ssl/ssl-policys/ssl-policy/exclude-ciphermode-cbc",
+              "type": "enum",
+              "label": "exclude-ciphermode-cbc",
+              "options": [
+                {
+                  "label": "disable",
+                  "value": "disable"
+                },
+                {
+                  "label": "enable",
+                  "value": "enable"
+                }
+              ]
+            },
+            {
+              "path": "/ssl/ssl-policys/ssl-policy/exclude-hmac-sha1",
+              "type": "enum",
+              "label": "exclude-hmac-sha1",
+              "options": [
+                {
+                  "label": "disable",
+                  "value": "disable"
+                },
+                {
+                  "label": "enable",
+                  "value": "enable"
+                }
+              ]
+            },
+            {
+              "path": "/ssl/ssl-policys/ssl-policy/exclude-rsa-kex",
+              "type": "enum",
+              "label": "exclude-rsa-kex",
+              "options": [
+                {
+                  "label": "disable",
+                  "value": "disable"
+                },
+                {
+                  "label": "enable",
+                  "value": "enable"
+                }
+              ]
+            },
+            {
+              "path": "/ssl/ssl-policys/ssl-policy/feature-name",
+              "type": "leaf-list",
+              "label": "feature-name",
+              "readonly": true
+            },
+            {
+              "path": "/ssl/ssl-policys/ssl-policy/key-usage-enable",
+              "type": "enum",
+              "label": "key-usage-enable",
+              "options": [
+                {
+                  "label": "disable",
+                  "value": "disable"
+                },
+                {
+                  "label": "enable",
+                  "value": "enable"
+                }
+              ],
+              "supportFilter": true
+            },
+            {
+              "path": "/ssl/ssl-policys/ssl-policy/mini-path-len",
+              "type": "number",
+              "label": "mini-path-len",
+              "minimum": 1,
+              "maximum": 1024,
+              "supportFilter": true
+            },
+            {
+              "path": "/ssl/ssl-policys/ssl-policy/mini-version",
+              "type": "enum",
+              "label": "mini-version",
+              "options": [
+                {
+                  "label": "tls1.2",
+                  "value": "tls1.2"
+                },
+                {
+                  "label": "tls1.3",
+                  "value": "tls1.3"
+                }
+              ],
+              "supportFilter": true
+            },
+            {
+              "path": "/ssl/ssl-policys/ssl-policy/pki-realm",
+              "type": "string",
+              "label": "pki-realm"
+            },
+            {
+              "path": "/ssl/ssl-policys/ssl-policy/policy-name",
+              "type": "string",
+              "label": "policy-name",
+              "pattern": "[a-z0-9_]*",
+              "isKey": true
+            },
+            {
+              "path": "/ssl/ssl-policys/ssl-policy/trust-ca-loads",
+              "type": "group",
+              "label": "trust-ca-loads",
+              "when": "not(/ssl:ssl/ssl:ssl-policys/ssl:ssl-policy/ssl:policy-name)",
+              "fields": [
+                {
+                  "path": "/ssl/ssl-policys/ssl-policy/trust-ca-loads/trust-ca-load",
+                  "type": "list",
+                  "label": "trust-ca-load",
+                  "fields": [
+                    {
+                      "path": "/ssl/ssl-policys/ssl-policy/trust-ca-loads/trust-ca-load/auth-code",
+                      "type": "string",
+                      "label": "auth-code",
+                      "when": "not(../ca-type!='pfx-ca')",
+                      "supportFilter": true
+                    },
+                    {
+                      "path": "/ssl/ssl-policys/ssl-policy/trust-ca-loads/trust-ca-load/ca-file",
+                      "type": "string",
+                      "label": "ca-file",
+                      "isKey": true
+                    },
+                    {
+                      "path": "/ssl/ssl-policys/ssl-policy/trust-ca-loads/trust-ca-load/ca-type",
+                      "type": "enum",
+                      "label": "ca-type",
+                      "required": true,
+                      "options": [
+                        {
+                          "label": "asn1-ca",
+                          "value": "asn1-ca"
+                        },
+                        {
+                          "label": "pem-ca",
+                          "value": "pem-ca"
+                        },
+                        {
+                          "label": "pfx-ca",
+                          "value": "pfx-ca"
+                        }
+                      ],
+                      "supportFilter": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

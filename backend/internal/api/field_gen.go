@@ -25,6 +25,15 @@ func buildYangSchema(mod schema.Module) YangSchema {
 	return ys
 }
 
+// BuildYangSchemaNested is the exported entry point for out-of-package tooling
+// (the schemadump fixture exporter). It delegates to buildYangSchemaNested so
+// the HTTP handler (GET /yang/schema/:module?form=nested) and the fixture
+// exporter share exactly one derivation path — the invariant SF-03 guards.
+// Pure visibility shim, no logic of its own.
+func BuildYangSchemaNested(mod schema.Module) YangSchema {
+	return buildYangSchemaNested(mod)
+}
+
 // buildYangSchemaNested generates a *nested tree* form schema: containers become
 // type=group FieldDefs and lists become type=list FieldDefs, each carrying their
 // child fields in .Fields (recursively). This preserves structure that the flat

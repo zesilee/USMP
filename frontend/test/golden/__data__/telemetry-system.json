@@ -1,0 +1,807 @@
+{
+  "module": "telemetry-system",
+  "tabs": [
+    {
+      "name": "destination-groups",
+      "kind": "list"
+    },
+    {
+      "name": "sensor-groups",
+      "kind": "list"
+    },
+    {
+      "name": "subscriptions",
+      "kind": "form"
+    }
+  ],
+  "lists": {
+    "destination-groups": {
+      "keyField": "group-id",
+      "columns": [
+        {
+          "name": "group-id",
+          "widget": "string"
+        }
+      ],
+      "filterable": []
+    },
+    "sensor-groups": {
+      "keyField": "sensor-group-id",
+      "columns": [
+        {
+          "name": "sensor-group-id",
+          "widget": "string"
+        }
+      ],
+      "filterable": []
+    }
+  },
+  "tree": [
+    {
+      "path": "/telemetry-system/destination-groups",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/destination-groups/destination-group",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/destination-groups/destination-group/config",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/destination-groups/destination-group/config/group-id",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/destination-groups/destination-group/destinations",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/destination-groups/destination-group/destinations/destination",
+      "kind": "list",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/destination-groups/destination-group/destinations/destination/config",
+      "kind": "container",
+      "depth": 4,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/destination-groups/destination-group/destinations/destination/config/destination-address",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/destination-groups/destination-group/destinations/destination/config/destination-port",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/destination-groups/destination-group/destinations/destination/destination-address",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/destination-groups/destination-group/destinations/destination/destination-port",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/destination-groups/destination-group/destinations/destination/state",
+      "kind": "container",
+      "depth": 4,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/destination-groups/destination-group/destinations/destination/state/destination-address",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/destination-groups/destination-group/destinations/destination/state/destination-port",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/destination-groups/destination-group/group-id",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/destination-groups/destination-group/state",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/destination-groups/destination-group/state/group-id",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/sensor-groups",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/sensor-groups/sensor-group",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/sensor-groups/sensor-group/config",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/sensor-groups/sensor-group/config/sensor-group-id",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/sensor-groups/sensor-group/sensor-group-id",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/sensor-groups/sensor-group/sensor-paths",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/sensor-groups/sensor-group/sensor-paths/sensor-path",
+      "kind": "list",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/sensor-groups/sensor-group/sensor-paths/sensor-path/config",
+      "kind": "container",
+      "depth": 4,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/sensor-groups/sensor-group/sensor-paths/sensor-path/config/exclude-filter",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/sensor-groups/sensor-group/sensor-paths/sensor-path/config/path",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/sensor-groups/sensor-group/sensor-paths/sensor-path/path",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/sensor-groups/sensor-group/sensor-paths/sensor-path/state",
+      "kind": "container",
+      "depth": 4,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/sensor-groups/sensor-group/sensor-paths/sensor-path/state/exclude-filter",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/sensor-groups/sensor-group/sensor-paths/sensor-path/state/path",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/sensor-groups/sensor-group/state",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/sensor-groups/sensor-group/state/sensor-group-id",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/subscriptions",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/subscriptions/dynamic",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/subscriptions/dynamic/subscription",
+      "kind": "list",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/subscriptions/dynamic/subscription/sensor-paths",
+      "kind": "container",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/subscriptions/dynamic/subscription/sensor-paths/sensor-path",
+      "kind": "list",
+      "depth": 4,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/subscriptions/dynamic/subscription/sensor-paths/sensor-path/path",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/subscriptions/dynamic/subscription/sensor-paths/sensor-path/state",
+      "kind": "container",
+      "depth": 5,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/subscriptions/dynamic/subscription/sensor-paths/sensor-path/state/exclude-filter",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/subscriptions/dynamic/subscription/sensor-paths/sensor-path/state/path",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/subscriptions/dynamic/subscription/state",
+      "kind": "container",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/subscriptions/dynamic/subscription/state/destination-address",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/subscriptions/dynamic/subscription/state/destination-port",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/subscriptions/dynamic/subscription/state/encoding",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/subscriptions/dynamic/subscription/state/heartbeat-interval",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/subscriptions/dynamic/subscription/state/originated-qos-marking",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/subscriptions/dynamic/subscription/state/protocol",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/subscriptions/dynamic/subscription/state/sample-interval",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/subscriptions/dynamic/subscription/state/subscription-id",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/subscriptions/dynamic/subscription/state/suppress-redundant",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "boolean",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/subscriptions/dynamic/subscription/subscription-id",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/subscriptions/persistent",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/subscriptions/persistent/subscription",
+      "kind": "list",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/subscriptions/persistent/subscription/config",
+      "kind": "container",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/subscriptions/persistent/subscription/config/encoding",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/subscriptions/persistent/subscription/config/local-source-address",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/subscriptions/persistent/subscription/config/originated-qos-marking",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/subscriptions/persistent/subscription/config/protocol",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/subscriptions/persistent/subscription/config/subscription-name",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/subscriptions/persistent/subscription/destination-groups",
+      "kind": "container",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/subscriptions/persistent/subscription/destination-groups/destination-group",
+      "kind": "list",
+      "depth": 4,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/subscriptions/persistent/subscription/destination-groups/destination-group/config",
+      "kind": "container",
+      "depth": 5,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/subscriptions/persistent/subscription/destination-groups/destination-group/config/group-id",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/subscriptions/persistent/subscription/destination-groups/destination-group/group-id",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/subscriptions/persistent/subscription/destination-groups/destination-group/state",
+      "kind": "container",
+      "depth": 5,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/subscriptions/persistent/subscription/destination-groups/destination-group/state/group-id",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/subscriptions/persistent/subscription/sensor-profiles",
+      "kind": "container",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/subscriptions/persistent/subscription/sensor-profiles/sensor-profile",
+      "kind": "list",
+      "depth": 4,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/subscriptions/persistent/subscription/sensor-profiles/sensor-profile/config",
+      "kind": "container",
+      "depth": 5,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/subscriptions/persistent/subscription/sensor-profiles/sensor-profile/config/heartbeat-interval",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/subscriptions/persistent/subscription/sensor-profiles/sensor-profile/config/sample-interval",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/subscriptions/persistent/subscription/sensor-profiles/sensor-profile/config/sensor-group",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/subscriptions/persistent/subscription/sensor-profiles/sensor-profile/config/suppress-redundant",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/subscriptions/persistent/subscription/sensor-profiles/sensor-profile/sensor-group",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/subscriptions/persistent/subscription/sensor-profiles/sensor-profile/state",
+      "kind": "container",
+      "depth": 5,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/subscriptions/persistent/subscription/sensor-profiles/sensor-profile/state/heartbeat-interval",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/subscriptions/persistent/subscription/sensor-profiles/sensor-profile/state/sample-interval",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/subscriptions/persistent/subscription/sensor-profiles/sensor-profile/state/sensor-group",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/subscriptions/persistent/subscription/sensor-profiles/sensor-profile/state/suppress-redundant",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "boolean",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/subscriptions/persistent/subscription/state",
+      "kind": "container",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/subscriptions/persistent/subscription/state/encoding",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/subscriptions/persistent/subscription/state/local-source-address",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/subscriptions/persistent/subscription/state/originated-qos-marking",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/subscriptions/persistent/subscription/state/protocol",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/subscriptions/persistent/subscription/state/subscription-id",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/subscriptions/persistent/subscription/state/subscription-name",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/telemetry-system/subscriptions/persistent/subscription/subscription-name",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    }
+  ]
+}

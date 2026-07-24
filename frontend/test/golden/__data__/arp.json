@@ -1,0 +1,2024 @@
+{
+  "module": "arp",
+  "tabs": [
+    {
+      "name": "anti-attack-records",
+      "kind": "list"
+    },
+    {
+      "name": "bd-tracks",
+      "kind": "list"
+    },
+    {
+      "name": "cached-statistics",
+      "kind": "list"
+    },
+    {
+      "name": "current-speed-limits",
+      "kind": "list"
+    },
+    {
+      "name": "duplicate-items",
+      "kind": "list"
+    },
+    {
+      "name": "entry-statistics",
+      "kind": "list"
+    },
+    {
+      "name": "error-packets",
+      "kind": "list"
+    },
+    {
+      "name": "global",
+      "kind": "form"
+    },
+    {
+      "name": "global-speed-limits",
+      "kind": "list"
+    },
+    {
+      "name": "ip-conflicts",
+      "kind": "list"
+    },
+    {
+      "name": "openflow-tbls",
+      "kind": "list"
+    },
+    {
+      "name": "query-entries",
+      "kind": "list"
+    },
+    {
+      "name": "speed-limits",
+      "kind": "list"
+    },
+    {
+      "name": "static-arps",
+      "kind": "list"
+    },
+    {
+      "name": "statisticss",
+      "kind": "list"
+    },
+    {
+      "name": "track-statistics",
+      "kind": "list"
+    }
+  ],
+  "lists": {
+    "anti-attack-records": {
+      "keyField": "attack-time",
+      "columns": [
+        {
+          "name": "attack-time",
+          "widget": "string"
+        },
+        {
+          "name": "dest-ip-addr",
+          "widget": "string"
+        },
+        {
+          "name": "interface",
+          "widget": "string"
+        },
+        {
+          "name": "src-ip-addr",
+          "widget": "string"
+        },
+        {
+          "name": "supp-type",
+          "widget": "enum"
+        }
+      ],
+      "filterable": []
+    },
+    "bd-tracks": {
+      "keyField": "ip-addr",
+      "columns": [
+        {
+          "name": "ip-addr",
+          "widget": "string"
+        },
+        {
+          "name": "new-ifname",
+          "widget": "string"
+        },
+        {
+          "name": "old-ifname",
+          "widget": "string"
+        },
+        {
+          "name": "op-code",
+          "widget": "enum"
+        },
+        {
+          "name": "sys-time",
+          "widget": "string"
+        },
+        {
+          "name": "bd-id",
+          "widget": "string"
+        },
+        {
+          "name": "mac-addr",
+          "widget": "string"
+        }
+      ],
+      "filterable": []
+    },
+    "cached-statistics": {
+      "keyField": "evn-name",
+      "columns": [
+        {
+          "name": "evn-name",
+          "widget": "string"
+        },
+        {
+          "name": "ip-addr",
+          "widget": "string"
+        },
+        {
+          "name": "vlan-id",
+          "widget": "string"
+        },
+        {
+          "name": "aging-time",
+          "widget": "number"
+        },
+        {
+          "name": "if-name",
+          "widget": "string"
+        },
+        {
+          "name": "mac-addr",
+          "widget": "string"
+        }
+      ],
+      "filterable": []
+    },
+    "current-speed-limits": {
+      "keyField": "ip-type",
+      "columns": [
+        {
+          "name": "ip-type",
+          "widget": "enum"
+        },
+        {
+          "name": "slot-id",
+          "widget": "string"
+        },
+        {
+          "name": "suppress-type",
+          "widget": "enum"
+        },
+        {
+          "name": "suppress-value",
+          "widget": "number"
+        }
+      ],
+      "filterable": []
+    },
+    "duplicate-items": {
+      "keyField": "bridge-id",
+      "columns": [
+        {
+          "name": "bridge-id",
+          "widget": "number"
+        },
+        {
+          "name": "bridge-type",
+          "widget": "enum"
+        },
+        {
+          "name": "mac-addr",
+          "widget": "string"
+        },
+        {
+          "name": "aging-time",
+          "widget": "number"
+        },
+        {
+          "name": "if-name",
+          "widget": "string"
+        },
+        {
+          "name": "ip-addr",
+          "widget": "string"
+        },
+        {
+          "name": "peer-addr",
+          "widget": "string"
+        },
+        {
+          "name": "source-addr",
+          "widget": "string"
+        },
+        {
+          "name": "vni",
+          "widget": "number"
+        }
+      ],
+      "filterable": []
+    },
+    "entry-statistics": {
+      "keyField": "slot-id",
+      "columns": [
+        {
+          "name": "slot-id",
+          "widget": "string"
+        },
+        {
+          "name": "dynamic-num",
+          "widget": "number"
+        },
+        {
+          "name": "exceed-flag",
+          "widget": "boolean"
+        },
+        {
+          "name": "redirect-num",
+          "widget": "number"
+        },
+        {
+          "name": "remote-num",
+          "widget": "number"
+        },
+        {
+          "name": "static-num",
+          "widget": "number"
+        }
+      ],
+      "filterable": []
+    },
+    "error-packets": {
+      "keyField": "sequence",
+      "columns": [
+        {
+          "name": "sequence",
+          "widget": "number"
+        },
+        {
+          "name": "slot-id",
+          "widget": "string"
+        },
+        {
+          "name": "if-name",
+          "widget": "string"
+        },
+        {
+          "name": "receive-content",
+          "widget": "string"
+        },
+        {
+          "name": "receive-time",
+          "widget": "string"
+        }
+      ],
+      "filterable": []
+    },
+    "global-speed-limits": {
+      "keyField": "ip-type",
+      "columns": [
+        {
+          "name": "ip-type",
+          "widget": "enum"
+        },
+        {
+          "name": "suppress-type",
+          "widget": "enum"
+        },
+        {
+          "name": "port-type",
+          "widget": "enum"
+        },
+        {
+          "name": "suppress-value",
+          "widget": "number"
+        }
+      ],
+      "filterable": []
+    },
+    "ip-conflicts": {
+      "keyField": "conflict-count",
+      "columns": [
+        {
+          "name": "conflict-count",
+          "widget": "number"
+        },
+        {
+          "name": "conflict-type",
+          "widget": "enum"
+        },
+        {
+          "name": "ip-addr",
+          "widget": "string"
+        },
+        {
+          "name": "local-ifname",
+          "widget": "string"
+        },
+        {
+          "name": "sys-time",
+          "widget": "string"
+        },
+        {
+          "name": "header-dst-mac",
+          "widget": "string"
+        },
+        {
+          "name": "header-src-mac",
+          "widget": "string"
+        },
+        {
+          "name": "local-cevlan",
+          "widget": "number"
+        },
+        {
+          "name": "local-mac",
+          "widget": "string"
+        }
+      ],
+      "filterable": []
+    },
+    "openflow-tbls": {
+      "keyField": "ip-addr",
+      "columns": [
+        {
+          "name": "ip-addr",
+          "widget": "string"
+        },
+        {
+          "name": "vni",
+          "widget": "number"
+        },
+        {
+          "name": "mac-addr",
+          "widget": "string"
+        },
+        {
+          "name": "vtep-ip",
+          "widget": "string"
+        }
+      ],
+      "filterable": []
+    },
+    "query-entries": {
+      "keyField": "ip-addr",
+      "columns": [
+        {
+          "name": "ip-addr",
+          "widget": "string"
+        },
+        {
+          "name": "ni-name",
+          "widget": "string"
+        },
+        {
+          "name": "style-type",
+          "widget": "enum"
+        },
+        {
+          "name": "ce-vlan",
+          "widget": "number"
+        },
+        {
+          "name": "expire-time",
+          "widget": "number"
+        },
+        {
+          "name": "if-name",
+          "widget": "string"
+        },
+        {
+          "name": "mac-addr",
+          "widget": "string"
+        },
+        {
+          "name": "pe-vlan",
+          "widget": "number"
+        },
+        {
+          "name": "peer-addr",
+          "widget": "string"
+        }
+      ],
+      "filterable": []
+    },
+    "speed-limits": {
+      "keyField": "ip-type",
+      "columns": [
+        {
+          "name": "ip-type",
+          "widget": "enum"
+        },
+        {
+          "name": "slot-id",
+          "widget": "string"
+        },
+        {
+          "name": "suppress-type",
+          "widget": "enum"
+        },
+        {
+          "name": "suppress-value",
+          "widget": "number"
+        }
+      ],
+      "filterable": []
+    },
+    "static-arps": {
+      "keyField": "ip-addr",
+      "columns": [
+        {
+          "name": "ip-addr",
+          "widget": "string"
+        },
+        {
+          "name": "ni-name",
+          "widget": "string"
+        },
+        {
+          "name": "mac-addr",
+          "widget": "string"
+        },
+        {
+          "name": "vlan-id",
+          "widget": "number"
+        },
+        {
+          "name": "vxlan-id",
+          "widget": "number"
+        }
+      ],
+      "filterable": []
+    },
+    "statisticss": {
+      "keyField": "slot-id",
+      "columns": [
+        {
+          "name": "slot-id",
+          "widget": "string"
+        },
+        {
+          "name": "learn-count",
+          "widget": "number"
+        },
+        {
+          "name": "miss-drop-limit",
+          "widget": "number"
+        },
+        {
+          "name": "miss-drop-other",
+          "widget": "number"
+        },
+        {
+          "name": "miss-received",
+          "widget": "number"
+        },
+        {
+          "name": "packets-drop-limit",
+          "widget": "number"
+        },
+        {
+          "name": "packets-drop-other",
+          "widget": "number"
+        },
+        {
+          "name": "packets-drop-speedlmt",
+          "widget": "number"
+        },
+        {
+          "name": "packets-proxy-supp",
+          "widget": "number"
+        }
+      ],
+      "filterable": []
+    },
+    "track-statistics": {
+      "keyField": "ip-addr",
+      "columns": [
+        {
+          "name": "ip-addr",
+          "widget": "string"
+        },
+        {
+          "name": "new-ifname",
+          "widget": "string"
+        },
+        {
+          "name": "old-ifname",
+          "widget": "string"
+        },
+        {
+          "name": "op-code",
+          "widget": "enum"
+        },
+        {
+          "name": "sys-time",
+          "widget": "string"
+        },
+        {
+          "name": "vlan-id",
+          "widget": "string"
+        },
+        {
+          "name": "mac-addr",
+          "widget": "string"
+        }
+      ],
+      "filterable": []
+    }
+  },
+  "tree": [
+    {
+      "path": "/arp/anti-attack-records",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/anti-attack-records/anti-attack-record",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/anti-attack-records/anti-attack-record/attack-time",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/anti-attack-records/anti-attack-record/dest-ip-addr",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/anti-attack-records/anti-attack-record/interface",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/anti-attack-records/anti-attack-record/src-ip-addr",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/anti-attack-records/anti-attack-record/supp-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/bd-tracks",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/bd-tracks/bd-track",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/bd-tracks/bd-track/bd-id",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/bd-tracks/bd-track/ip-addr",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/bd-tracks/bd-track/mac-addr",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/bd-tracks/bd-track/new-ifname",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/bd-tracks/bd-track/old-ifname",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/bd-tracks/bd-track/op-code",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/bd-tracks/bd-track/sys-time",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/cached-statistics",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/cached-statistics/cached-statistic",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/cached-statistics/cached-statistic/aging-time",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/cached-statistics/cached-statistic/evn-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/cached-statistics/cached-statistic/if-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/cached-statistics/cached-statistic/ip-addr",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/cached-statistics/cached-statistic/mac-addr",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/cached-statistics/cached-statistic/vlan-id",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/current-speed-limits",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/current-speed-limits/current-speed-limit",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/current-speed-limits/current-speed-limit/ip-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/current-speed-limits/current-speed-limit/slot-id",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/current-speed-limits/current-speed-limit/suppress-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/current-speed-limits/current-speed-limit/suppress-value",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/duplicate-items",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/duplicate-items/duplicate-item",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/duplicate-items/duplicate-item/aging-time",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/duplicate-items/duplicate-item/bridge-id",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/duplicate-items/duplicate-item/bridge-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/duplicate-items/duplicate-item/if-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/duplicate-items/duplicate-item/ip-addr",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/duplicate-items/duplicate-item/mac-addr",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/duplicate-items/duplicate-item/peer-addr",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/duplicate-items/duplicate-item/source-addr",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/duplicate-items/duplicate-item/vni",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/entry-statistics",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/entry-statistics/entry-statistic",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/entry-statistics/entry-statistic/dynamic-num",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/entry-statistics/entry-statistic/exceed-flag",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/entry-statistics/entry-statistic/redirect-num",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/entry-statistics/entry-statistic/remote-num",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/entry-statistics/entry-statistic/slot-id",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/entry-statistics/entry-statistic/static-num",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/error-packets",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/error-packets/error-packet",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/error-packets/error-packet/if-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/error-packets/error-packet/receive-content",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/error-packets/error-packet/receive-time",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/error-packets/error-packet/sequence",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/error-packets/error-packet/slot-id",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/global",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/arp/global/arp-fast-reply",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/arp/global/broadcast-max-num",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/arp/global/check-type",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/arp/global/con-send-enable",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/arp/global/con-send-maxnum",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/arp/global/dfs-backup-rate",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/arp/global/diff-learn-disable",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/arp/global/evncfg",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/arp/global/evncfg/cache-enable",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/arp/global/evncfg/cache-timeout",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/arp/global/expire-time",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/arp/global/gateway-dup-enable",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/arp/global/gmff-enable",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/arp/global/gratuitous-drop",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/arp/global/gratuitous-interval",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/arp/global/gratuitous-send",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/arp/global/host-conflict-period",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/arp/global/host-conflict-threshold",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/arp/global/ipconflict-detect-enable",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/arp/global/l2topo-detect-enable",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/arp/global/max-static-num",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/arp/global/multicast-learning-enable",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/arp/global/passive-learn-enable",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/arp/global/probe-times",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/arp/global/rate-trap-interval",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/arp/global/snooping-enable",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/arp/global/src-mac-check",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/arp/global/strict-learn-enable",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/arp/global/timeout-enable",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/arp/global/topo-detect-disable",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/arp/global/vlanif-expiretime",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/arp/global-speed-limits",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/arp/global-speed-limits/global-speed-limit",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/arp/global-speed-limits/global-speed-limit/ip-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/arp/global-speed-limits/global-speed-limit/port-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/arp/global-speed-limits/global-speed-limit/suppress-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/arp/global-speed-limits/global-speed-limit/suppress-value",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/arp/ip-conflicts",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/ip-conflicts/ip-conflict",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/ip-conflicts/ip-conflict/conflict-count",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/ip-conflicts/ip-conflict/conflict-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/ip-conflicts/ip-conflict/header-dst-mac",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/ip-conflicts/ip-conflict/header-src-mac",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/ip-conflicts/ip-conflict/ip-addr",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/ip-conflicts/ip-conflict/local-cevlan",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/ip-conflicts/ip-conflict/local-ifname",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/ip-conflicts/ip-conflict/local-mac",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/ip-conflicts/ip-conflict/local-vlan",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/ip-conflicts/ip-conflict/receive-cevlan",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/ip-conflicts/ip-conflict/receive-ifname",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/ip-conflicts/ip-conflict/receive-mac",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/ip-conflicts/ip-conflict/receive-vlan",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/ip-conflicts/ip-conflict/slot-id",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/ip-conflicts/ip-conflict/suppress-count",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/ip-conflicts/ip-conflict/sys-time",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/openflow-tbls",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/openflow-tbls/openflow-tbl",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/openflow-tbls/openflow-tbl/ip-addr",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/openflow-tbls/openflow-tbl/mac-addr",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/openflow-tbls/openflow-tbl/vni",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/openflow-tbls/openflow-tbl/vtep-ip",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/query-entries",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/query-entries/query-entry",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/query-entries/query-entry/ce-vlan",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/query-entries/query-entry/expire-time",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/query-entries/query-entry/if-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/query-entries/query-entry/ip-addr",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/query-entries/query-entry/mac-addr",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/query-entries/query-entry/ni-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/query-entries/query-entry/pe-vlan",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/query-entries/query-entry/peer-addr",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/query-entries/query-entry/pvc",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/query-entries/query-entry/slot-id",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/query-entries/query-entry/source-addr",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/query-entries/query-entry/style-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/query-entries/query-entry/vni",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/query-entries/query-entry/work-if-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/speed-limits",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/arp/speed-limits/speed-limit",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/arp/speed-limits/speed-limit/ip-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/arp/speed-limits/speed-limit/slot-id",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/arp/speed-limits/speed-limit/suppress-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/arp/speed-limits/speed-limit/suppress-value",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/arp/static-arps",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/arp/static-arps/static-arp",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/arp/static-arps/static-arp/ip-addr",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/arp/static-arps/static-arp/mac-addr",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/arp/static-arps/static-arp/ni-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/arp/static-arps/static-arp/tunnel-ip",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "choice",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/arp/static-arps/static-arp/vlan-id",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/arp/static-arps/static-arp/vxlan-id",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/arp/statisticss",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/statisticss/statistics",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/statisticss/statistics/learn-count",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/statisticss/statistics/miss-drop-limit",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/statisticss/statistics/miss-drop-other",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/statisticss/statistics/miss-received",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/statisticss/statistics/packets-drop-limit",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/statisticss/statistics/packets-drop-other",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/statisticss/statistics/packets-drop-speedlmt",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/statisticss/statistics/packets-proxy-supp",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/statisticss/statistics/packets-received",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/statisticss/statistics/slot-id",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/track-statistics",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/track-statistics/track-statistic",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/track-statistics/track-statistic/ip-addr",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/track-statistics/track-statistic/mac-addr",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/track-statistics/track-statistic/new-ifname",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/track-statistics/track-statistic/old-ifname",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/track-statistics/track-statistic/op-code",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/track-statistics/track-statistic/sys-time",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/arp/track-statistics/track-statistic/vlan-id",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    }
+  ]
+}

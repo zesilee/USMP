@@ -1,0 +1,1279 @@
+{
+  "module": "evpn",
+  "tabs": [
+    {
+      "name": "base-process",
+      "kind": "form"
+    },
+    {
+      "name": "instances",
+      "kind": "list"
+    },
+    {
+      "name": "remote-sids",
+      "kind": "list"
+    },
+    {
+      "name": "site",
+      "kind": "form"
+    }
+  ],
+  "lists": {
+    "instances": {
+      "keyField": "name",
+      "columns": [
+        {
+          "name": "name",
+          "widget": "string"
+        },
+        {
+          "name": "type",
+          "widget": "enum"
+        }
+      ],
+      "filterable": []
+    },
+    "remote-sids": {
+      "keyField": "remote-sid",
+      "columns": [
+        {
+          "name": "remote-sid",
+          "widget": "string"
+        },
+        {
+          "name": "evpn-type",
+          "widget": "enum"
+        },
+        {
+          "name": "bd-id",
+          "widget": "number"
+        },
+        {
+          "name": "evpl-id",
+          "widget": "number"
+        },
+        {
+          "name": "evpn-name",
+          "widget": "string"
+        },
+        {
+          "name": "locator-mask-length",
+          "widget": "number"
+        },
+        {
+          "name": "locator-sid",
+          "widget": "string"
+        }
+      ],
+      "filterable": []
+    }
+  },
+  "tree": [
+    {
+      "path": "/evpn/base-process",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/base-process/evpn-overlay",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/base-process/redundancy-mode",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/base-process/source-address",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/b-evpn",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/b-evpn/bmac",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/b-evpn/description",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/b-evpn/rd",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/b-evpn/rts",
+      "kind": "container",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/b-evpn/rts/rt",
+      "kind": "list",
+      "depth": 4,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/b-evpn/rts/rt/vrf-rt-type",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/b-evpn/rts/rt/vrf-rt-value",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/b-evpn/tunnel-policy-name",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/bd-evpn",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/bd-evpn/bypass-vxlan",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/bd-evpn/control-word",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/bd-evpn/default-color",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/bd-evpn/description",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/bd-evpn/down-switch",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/bd-evpn/etree-enable",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/bd-evpn/export-acl-name-or-id",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/bd-evpn/export-policy-name",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/bd-evpn/import-acl-name-or-id",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/bd-evpn/import-policy-name",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/bd-evpn/local-remote-frr",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/bd-evpn/mac-balance-enable",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/bd-evpn/mac-duplication",
+      "kind": "container",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/bd-evpn/mac-duplication/blackhole",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/bd-evpn/mac-duplication/cycle",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/bd-evpn/mac-duplication/period",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/bd-evpn/mac-duplication/recycle",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/bd-evpn/mac-duplication/source-blackhole",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/bd-evpn/mac-route-advertise",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/bd-evpn/rd",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/bd-evpn/rts",
+      "kind": "container",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/bd-evpn/rts/rt",
+      "kind": "list",
+      "depth": 4,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/bd-evpn/rts/rt/vrf-rt-type",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/bd-evpn/rts/rt/vrf-rt-value",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/bd-evpn/srv6-mode",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/bd-evpn/tunnel-policy-name",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/normal-evpn",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/normal-evpn/control-word",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/normal-evpn/description",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/normal-evpn/etree-enable",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/normal-evpn/export-acl-name-or-id",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/normal-evpn/export-policy-name",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/normal-evpn/import-acl-name-or-id",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/normal-evpn/import-policy-name",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/normal-evpn/isolate-spoken",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/normal-evpn/local-remote-frr",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/normal-evpn/mac-balance-enable",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/normal-evpn/mac-duplication",
+      "kind": "container",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/normal-evpn/mac-duplication/blackhole",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/normal-evpn/mac-duplication/cycle",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/normal-evpn/mac-duplication/period",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/normal-evpn/mac-duplication/recycle",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/normal-evpn/rd",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/normal-evpn/rts",
+      "kind": "container",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/normal-evpn/rts/rt",
+      "kind": "list",
+      "depth": 4,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/normal-evpn/rts/rt/vrf-rt-type",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/normal-evpn/rts/rt/vrf-rt-value",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/normal-evpn/tunnel-policy-name",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/tunnel-infos",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/tunnel-infos/tunnel-info",
+      "kind": "list",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/tunnel-infos/tunnel-info/color",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/tunnel-infos/tunnel-info/id",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/tunnel-infos/tunnel-info/name",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/tunnel-infos/tunnel-info/peer-ip",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/tunnel-infos/tunnel-info/type",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/vpws-evpn",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/vpws-evpn/default-color",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/vpws-evpn/description",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/vpws-evpn/down-switch",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/vpws-evpn/export-acl-name-or-id",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/vpws-evpn/export-policy-name",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/vpws-evpn/import-acl-name-or-id",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/vpws-evpn/import-policy-name",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/vpws-evpn/local-remote-frr",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/vpws-evpn/rd",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/vpws-evpn/remote-frr",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/vpws-evpn/rts",
+      "kind": "container",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/vpws-evpn/rts/rt",
+      "kind": "list",
+      "depth": 4,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/vpws-evpn/rts/rt/vrf-rt-type",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/vpws-evpn/rts/rt/vrf-rt-value",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/vpws-evpn/srv6-mode",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/vpws-evpn/timer-revert-delay",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/instances/instance/vpws-evpn/tunnel-policy-name",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/remote-sids",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/evpn/remote-sids/remote-sid",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/evpn/remote-sids/remote-sid/bd-id",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/evpn/remote-sids/remote-sid/evpl-id",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/evpn/remote-sids/remote-sid/evpn-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/evpn/remote-sids/remote-sid/evpn-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/evpn/remote-sids/remote-sid/locator-mask-length",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/evpn/remote-sids/remote-sid/locator-sid",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/evpn/remote-sids/remote-sid/remote-sid",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/evpn/site",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/site/ac-influnced-enable",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/site/ad-per-es-split",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/site/advertise-suppressed-route",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/site/advertising-vxlan-tunnel-mac",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/site/alm-threshold",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/site/bypass-vxlan-enable",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/site/compatible",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/site/df-election-mode",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/site/dynamic-esis",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/site/dynamic-esis/dynamic-esi",
+      "kind": "list",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/site/dynamic-esis/dynamic-esi/df-election-type",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/site/dynamic-esis/dynamic-esi/esi-name",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/site/dynamic-esis/dynamic-esi/non-revertive",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/site/dynamic-esis/dynamic-esi/preference",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/site/dynamic-esis/dynamic-esi/redundancy-mode",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/site/irb-reoriginated",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/site/irb-split-group",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/site/local-remote-frr-enable",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/site/local-remote-vpws-frr-enable",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/site/mac-duplication",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/site/mac-duplication/cycle",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/site/mac-duplication/period",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/site/mac-duplication/recycle",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/site/recovery-percentage",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/site/remote-vpws-frr-enable",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/site/routerid-extend-private-enable",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/site/static-esis",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/site/static-esis/static-esi",
+      "kind": "list",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/site/static-esis/static-esi/df-election-type",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/site/static-esis/static-esi/esi",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/site/static-esis/static-esi/non-revertive",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/site/static-esis/static-esi/preference",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/site/static-esis/static-esi/redundancy-mode",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/site/vlan-extend-private-enable",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/site/vlan-extend-redirect-enable",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/evpn/site/vpws-df-election-mode",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    }
+  ]
+}

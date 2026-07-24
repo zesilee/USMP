@@ -1,0 +1,140 @@
+{
+  "module": "ecc",
+  "title": "ecc",
+  "vendor": "huawei",
+  "fields": [
+    {
+      "path": "/ecc/ecc-global",
+      "type": "group",
+      "label": "ecc-global",
+      "fields": [
+        {
+          "path": "/ecc/ecc-global/max-key-pair",
+          "type": "number",
+          "label": "max-key-pair",
+          "minimum": 1,
+          "maximum": 20
+        }
+      ]
+    },
+    {
+      "path": "/ecc/key-pairs",
+      "type": "group",
+      "label": "key-pairs",
+      "fields": [
+        {
+          "path": "/ecc/key-pairs/key-pair",
+          "type": "list",
+          "label": "key-pair",
+          "fields": [
+            {
+              "path": "/ecc/key-pairs/key-pair/host-key-code",
+              "type": "string",
+              "label": "host-key-code",
+              "readonly": true,
+              "supportFilter": true
+            },
+            {
+              "path": "/ecc/key-pairs/key-pair/key-pair-label",
+              "type": "string",
+              "label": "key-pair-label",
+              "pattern": "[a-zA-Z0-9_]*",
+              "isKey": true
+            },
+            {
+              "path": "/ecc/key-pairs/key-pair/key-size",
+              "type": "enum",
+              "label": "key-size",
+              "options": [
+                {
+                  "label": "256",
+                  "value": "256"
+                },
+                {
+                  "label": "384",
+                  "value": "384"
+                },
+                {
+                  "label": "521",
+                  "value": "521"
+                }
+              ],
+              "supportFilter": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/ecc/local-key",
+      "type": "group",
+      "label": "local-key",
+      "fields": [
+        {
+          "path": "/ecc/local-key/host-key-code",
+          "type": "string",
+          "label": "host-key-code",
+          "readonly": true
+        },
+        {
+          "path": "/ecc/local-key/host-key-name",
+          "type": "string",
+          "label": "host-key-name",
+          "readonly": true
+        },
+        {
+          "path": "/ecc/local-key/host-key-pem",
+          "type": "string",
+          "label": "host-key-pem",
+          "readonly": true
+        },
+        {
+          "path": "/ecc/local-key/key-size",
+          "type": "enum",
+          "label": "key-size",
+          "options": [
+            {
+              "label": "256",
+              "value": "256"
+            },
+            {
+              "label": "384",
+              "value": "384"
+            },
+            {
+              "label": "521",
+              "value": "521"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/ecc/peer-keys",
+      "type": "group",
+      "label": "peer-keys",
+      "fields": [
+        {
+          "path": "/ecc/peer-keys/peer-key",
+          "type": "list",
+          "label": "peer-key",
+          "fields": [
+            {
+              "path": "/ecc/peer-keys/peer-key/key-code",
+              "type": "string",
+              "label": "key-code",
+              "required": true,
+              "supportFilter": true
+            },
+            {
+              "path": "/ecc/peer-keys/peer-key/key-name",
+              "type": "string",
+              "label": "key-name",
+              "isKey": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

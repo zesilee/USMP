@@ -1,0 +1,104 @@
+{
+  "module": "vxlan-ext",
+  "title": "vxlan-ext",
+  "vendor": "huawei",
+  "fields": [
+    {
+      "path": "/vxlan-ext/bridge-domain-bind-vlan-enhanced",
+      "type": "group",
+      "label": "bridge-domain-bind-vlan-enhanced",
+      "presence": true
+    },
+    {
+      "path": "/vxlan-ext/force-redirects",
+      "type": "group",
+      "label": "force-redirects",
+      "fields": [
+        {
+          "path": "/vxlan-ext/force-redirects/force-redirect",
+          "type": "list",
+          "label": "force-redirect",
+          "fields": [
+            {
+              "path": "/vxlan-ext/force-redirects/force-redirect/if-name",
+              "type": "string",
+              "label": "if-name",
+              "isKey": true
+            },
+            {
+              "path": "/vxlan-ext/force-redirects/force-redirect/vni-begin",
+              "type": "number",
+              "label": "vni-begin",
+              "required": true,
+              "minimum": 1,
+              "maximum": 16777215,
+              "isKey": true
+            },
+            {
+              "path": "/vxlan-ext/force-redirects/force-redirect/vni-end",
+              "type": "number",
+              "label": "vni-end",
+              "minimum": 1,
+              "maximum": 16777215,
+              "isKey": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/vxlan-ext/ospf-disable",
+      "type": "group",
+      "label": "ospf-disable",
+      "fields": [
+        {
+          "path": "/vxlan-ext/ospf-disable/disable",
+          "type": "boolean",
+          "label": "disable"
+        },
+        {
+          "path": "/vxlan-ext/ospf-disable/ospf",
+          "type": "enum",
+          "label": "ospf",
+          "options": [
+            {
+              "label": "ospf",
+              "value": "ospf"
+            },
+            {
+              "label": "ospfv3",
+              "value": "ospfv3"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/vxlan-ext/ospf-discard",
+      "type": "group",
+      "label": "ospf-discard",
+      "fields": [
+        {
+          "path": "/vxlan-ext/ospf-discard/discard",
+          "type": "boolean",
+          "label": "discard"
+        },
+        {
+          "path": "/vxlan-ext/ospf-discard/ospf",
+          "type": "enum",
+          "label": "ospf",
+          "options": [
+            {
+              "label": "ospf",
+              "value": "ospf"
+            },
+            {
+              "label": "ospfv3",
+              "value": "ospfv3"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

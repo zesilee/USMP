@@ -1,0 +1,594 @@
+{
+  "module": "unicast-forward",
+  "tabs": [
+    {
+      "name": "backup-groups",
+      "kind": "list"
+    },
+    {
+      "name": "global-gre",
+      "kind": "form"
+    },
+    {
+      "name": "global-nexthop-spt",
+      "kind": "form"
+    },
+    {
+      "name": "global-uc-attribute",
+      "kind": "form"
+    },
+    {
+      "name": "high-re-modes",
+      "kind": "list"
+    },
+    {
+      "name": "ip-urpf",
+      "kind": "form"
+    },
+    {
+      "name": "ip-urpf-check-mode",
+      "kind": "form"
+    },
+    {
+      "name": "ipv4-ttl-expired-forwards",
+      "kind": "list"
+    },
+    {
+      "name": "ipv6-ttl-expired-forwards",
+      "kind": "list"
+    },
+    {
+      "name": "na-anti-attack-statistics",
+      "kind": "list"
+    },
+    {
+      "name": "vxlan-anycast-gateway-extend",
+      "kind": "form"
+    },
+    {
+      "name": "vxlan-central-reassemble",
+      "kind": "form"
+    },
+    {
+      "name": "vxlan-forward-ospf",
+      "kind": "form"
+    },
+    {
+      "name": "vxlan-forward-ospfv3",
+      "kind": "form"
+    }
+  ],
+  "lists": {
+    "backup-groups": {
+      "keyField": "backup-group-name",
+      "columns": [
+        {
+          "name": "backup-group-name",
+          "widget": "string"
+        },
+        {
+          "name": "if-name1",
+          "widget": "string"
+        },
+        {
+          "name": "if-name2",
+          "widget": "string"
+        }
+      ],
+      "filterable": []
+    },
+    "high-re-modes": {
+      "keyField": "position",
+      "columns": [
+        {
+          "name": "position",
+          "widget": "string"
+        }
+      ],
+      "filterable": []
+    },
+    "ipv4-ttl-expired-forwards": {
+      "keyField": "nexthop-group-id",
+      "columns": [
+        {
+          "name": "nexthop-group-id",
+          "widget": "number"
+        }
+      ],
+      "filterable": []
+    },
+    "ipv6-ttl-expired-forwards": {
+      "keyField": "nexthop-group-id",
+      "columns": [
+        {
+          "name": "nexthop-group-id",
+          "widget": "number"
+        }
+      ],
+      "filterable": []
+    },
+    "na-anti-attack-statistics": {
+      "keyField": "slot-id",
+      "columns": [
+        {
+          "name": "slot-id",
+          "widget": "string"
+        },
+        {
+          "name": "na-drop-count",
+          "widget": "number"
+        },
+        {
+          "name": "na-tocpu-count",
+          "widget": "number"
+        }
+      ],
+      "filterable": []
+    }
+  },
+  "tree": [
+    {
+      "path": "/unicast-forward/backup-groups",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/unicast-forward/backup-groups/backup-group",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/unicast-forward/backup-groups/backup-group/backup-group-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/unicast-forward/backup-groups/backup-group/if-name1",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/unicast-forward/backup-groups/backup-group/if-name2",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/unicast-forward/global-gre",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/unicast-forward/global-gre/forward-mode",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/unicast-forward/global-nexthop-spt",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/unicast-forward/global-nexthop-spt/state",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/unicast-forward/global-uc-attribute",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/unicast-forward/global-uc-attribute/fib-miss",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/unicast-forward/global-uc-attribute/icmp-reply-fast",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/unicast-forward/global-uc-attribute/ignore-mac",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/unicast-forward/global-uc-attribute/indirect-nexthop",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/unicast-forward/global-uc-attribute/ipv4-force-frag",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/unicast-forward/global-uc-attribute/mpls-6pe-ttl-mode",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/unicast-forward/global-uc-attribute/mtu-force-frag",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/unicast-forward/global-uc-attribute/nexthop-spt",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/unicast-forward/global-uc-attribute/trunk-arp-mode",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/unicast-forward/global-uc-attribute/trunk-nd-mode",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/unicast-forward/global-uc-attribute/ttl-decrement",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/unicast-forward/high-re-modes",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/unicast-forward/high-re-modes/high-re-mode",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/unicast-forward/high-re-modes/high-re-mode/position",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/unicast-forward/ip-urpf",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/unicast-forward/ip-urpf/allow-default-route",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/unicast-forward/ip-urpf-check-mode",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/unicast-forward/ip-urpf-check-mode/check-mode",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/unicast-forward/ipv4-ttl-expired-forwards",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/unicast-forward/ipv4-ttl-expired-forwards/ipv4-ttl-expired-forward",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/unicast-forward/ipv4-ttl-expired-forwards/ipv4-ttl-expired-forward/ipv4-nexthop-addrs",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/unicast-forward/ipv4-ttl-expired-forwards/ipv4-ttl-expired-forward/ipv4-nexthop-addrs/ipv4-nexthop-addr",
+      "kind": "list",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/unicast-forward/ipv4-ttl-expired-forwards/ipv4-ttl-expired-forward/ipv4-nexthop-addrs/ipv4-nexthop-addr/ipv4-address",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/unicast-forward/ipv4-ttl-expired-forwards/ipv4-ttl-expired-forward/ipv4-nexthop-addrs/ipv4-nexthop-addr/vpn-instance-name",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/unicast-forward/ipv4-ttl-expired-forwards/ipv4-ttl-expired-forward/nexthop-group-id",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/unicast-forward/ipv6-ttl-expired-forwards",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/unicast-forward/ipv6-ttl-expired-forwards/ipv6-ttl-expired-forward",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/unicast-forward/ipv6-ttl-expired-forwards/ipv6-ttl-expired-forward/ipv6-nexthop-addrs",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/unicast-forward/ipv6-ttl-expired-forwards/ipv6-ttl-expired-forward/ipv6-nexthop-addrs/ipv6-nexthop-addr",
+      "kind": "list",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/unicast-forward/ipv6-ttl-expired-forwards/ipv6-ttl-expired-forward/ipv6-nexthop-addrs/ipv6-nexthop-addr/ipv6-address",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/unicast-forward/ipv6-ttl-expired-forwards/ipv6-ttl-expired-forward/ipv6-nexthop-addrs/ipv6-nexthop-addr/vpn-instance-name",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/unicast-forward/ipv6-ttl-expired-forwards/ipv6-ttl-expired-forward/nexthop-group-id",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/unicast-forward/na-anti-attack-statistics",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/unicast-forward/na-anti-attack-statistics/na-anti-attack-statistic",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/unicast-forward/na-anti-attack-statistics/na-anti-attack-statistic/na-drop-count",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/unicast-forward/na-anti-attack-statistics/na-anti-attack-statistic/na-tocpu-count",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/unicast-forward/na-anti-attack-statistics/na-anti-attack-statistic/slot-id",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/unicast-forward/vxlan-anycast-gateway-extend",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/unicast-forward/vxlan-anycast-gateway-extend/enable",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/unicast-forward/vxlan-central-reassemble",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/unicast-forward/vxlan-forward-ospf",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/unicast-forward/vxlan-forward-ospf/ospf-behavior",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/unicast-forward/vxlan-forward-ospfv3",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/unicast-forward/vxlan-forward-ospfv3/ospfv3-behavior",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    }
+  ]
+}

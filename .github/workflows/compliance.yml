@@ -105,3 +105,17 @@ jobs:
             exit 1
           fi
           echo "Generated code is reproducible"
+
+      - name: Check Schema Fixtures Reproducible (SF-04 regen-and-diff)
+        working-directory: .
+        run: |
+          # schema fixture 为生成物：重跑 make gen-schema-fixtures 并断言零漂移。
+          # 无条件运行（成本约 1s）——不按路径 gate，避免漏 field_gen.go 等间接影响
+          # schema 输出的改动放过漂移。fixture 由 backend schema 纯函数导出，忠实性
+          # 另由 B3 等值测试（TestSchemaFixtureEquivalence_ToolMatchesHTTP）守护。
+          make gen-schema-fixtures
+          if ! git diff --exit-code backend/testdata/schema-fixtures/; then
+            echo "::error::[SF-04] Schema fixture drift: backend/testdata/schema-fixtures/ 与 make gen-schema-fixtures 输出不一致（生成物勿手改，改后端 schema 后重跑 make gen-schema-fixtures 提交）"
+            exit 1
+          fi
+          echo "Schema fixtures are reproducible"

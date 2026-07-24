@@ -1,0 +1,761 @@
+{
+  "module": "tunnel-management",
+  "title": "tunnel-management",
+  "vendor": "huawei",
+  "fields": [
+    {
+      "path": "/tunnel-management/subscribe-tunnel-policys",
+      "type": "group",
+      "label": "subscribe-tunnel-policys",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/tunnel-management/subscribe-tunnel-policys/subscribe-tunnel-policy",
+          "type": "list",
+          "label": "subscribe-tunnel-policy",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/tunnel-management/subscribe-tunnel-policys/subscribe-tunnel-policy/count",
+              "type": "number",
+              "label": "count",
+              "readonly": true
+            },
+            {
+              "path": "/tunnel-management/subscribe-tunnel-policys/subscribe-tunnel-policy/policy-exist",
+              "type": "enum",
+              "label": "policy-exist",
+              "options": [
+                {
+                  "label": "false",
+                  "value": "false"
+                },
+                {
+                  "label": "true",
+                  "value": "true"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "path": "/tunnel-management/subscribe-tunnel-policys/subscribe-tunnel-policy/policy-name",
+              "type": "string",
+              "label": "policy-name",
+              "readonly": true,
+              "isKey": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/tunnel-management/tunnel-down-switch",
+      "type": "group",
+      "label": "tunnel-down-switch",
+      "fields": [
+        {
+          "path": "/tunnel-management/tunnel-down-switch/enable",
+          "type": "boolean",
+          "label": "enable"
+        }
+      ]
+    },
+    {
+      "path": "/tunnel-management/tunnel-infos",
+      "type": "group",
+      "label": "tunnel-infos",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/tunnel-management/tunnel-infos/tunnel-info",
+          "type": "list",
+          "label": "tunnel-info",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/tunnel-management/tunnel-infos/tunnel-info/cost",
+              "type": "number",
+              "label": "cost",
+              "readonly": true
+            },
+            {
+              "path": "/tunnel-management/tunnel-infos/tunnel-info/destination",
+              "type": "string",
+              "label": "destination",
+              "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?",
+              "readonly": true
+            },
+            {
+              "path": "/tunnel-management/tunnel-infos/tunnel-info/id",
+              "type": "string",
+              "label": "id",
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/tunnel-management/tunnel-infos/tunnel-info/name",
+              "type": "string",
+              "label": "name",
+              "readonly": true
+            },
+            {
+              "path": "/tunnel-management/tunnel-infos/tunnel-info/sr-te-policy-color",
+              "type": "number",
+              "label": "sr-te-policy-color",
+              "readonly": true
+            },
+            {
+              "path": "/tunnel-management/tunnel-infos/tunnel-info/sr-te-policy-group",
+              "type": "number",
+              "label": "sr-te-policy-group",
+              "readonly": true
+            },
+            {
+              "path": "/tunnel-management/tunnel-infos/tunnel-info/status",
+              "type": "enum",
+              "label": "status",
+              "options": [
+                {
+                  "label": "down",
+                  "value": "down"
+                },
+                {
+                  "label": "up",
+                  "value": "up"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "path": "/tunnel-management/tunnel-infos/tunnel-info/type",
+              "type": "enum",
+              "label": "type",
+              "options": [
+                {
+                  "label": "4over6",
+                  "value": "4over6"
+                },
+                {
+                  "label": "6over4",
+                  "value": "6over4"
+                },
+                {
+                  "label": "6rd",
+                  "value": "6rd"
+                },
+                {
+                  "label": "6to4",
+                  "value": "6to4"
+                },
+                {
+                  "label": "bgp",
+                  "value": "bgp"
+                },
+                {
+                  "label": "gre",
+                  "value": "gre"
+                },
+                {
+                  "label": "gre6",
+                  "value": "gre6"
+                },
+                {
+                  "label": "invalid",
+                  "value": "invalid"
+                },
+                {
+                  "label": "ipsec",
+                  "value": "ipsec"
+                },
+                {
+                  "label": "ldp",
+                  "value": "ldp"
+                },
+                {
+                  "label": "ldp-lsp",
+                  "value": "ldp-lsp"
+                },
+                {
+                  "label": "ldp6",
+                  "value": "ldp6"
+                },
+                {
+                  "label": "mpls-local-ifnet",
+                  "value": "mpls-local-ifnet"
+                },
+                {
+                  "label": "nvgre",
+                  "value": "nvgre"
+                },
+                {
+                  "label": "p2mp-gre",
+                  "value": "p2mp-gre"
+                },
+                {
+                  "label": "p2mp-ldp",
+                  "value": "p2mp-ldp"
+                },
+                {
+                  "label": "p2mp-te",
+                  "value": "p2mp-te"
+                },
+                {
+                  "label": "sr-te",
+                  "value": "sr-te"
+                },
+                {
+                  "label": "sr-te-policy",
+                  "value": "sr-te-policy"
+                },
+                {
+                  "label": "sr-te-policy-group",
+                  "value": "sr-te-policy-group"
+                },
+                {
+                  "label": "srbe-lsp",
+                  "value": "srbe-lsp"
+                },
+                {
+                  "label": "srv6",
+                  "value": "srv6"
+                },
+                {
+                  "label": "srv6-te-policy",
+                  "value": "srv6-te-policy"
+                },
+                {
+                  "label": "srv6-te-policy-group",
+                  "value": "srv6-te-policy-group"
+                },
+                {
+                  "label": "static-lsp",
+                  "value": "static-lsp"
+                },
+                {
+                  "label": "sub-group",
+                  "value": "sub-group"
+                },
+                {
+                  "label": "sub-te",
+                  "value": "sub-te"
+                },
+                {
+                  "label": "te",
+                  "value": "te"
+                },
+                {
+                  "label": "tnl-group",
+                  "value": "tnl-group"
+                },
+                {
+                  "label": "uni",
+                  "value": "uni"
+                },
+                {
+                  "label": "vxlan",
+                  "value": "vxlan"
+                },
+                {
+                  "label": "vxlan-nvo3",
+                  "value": "vxlan-nvo3"
+                },
+                {
+                  "label": "vxlan6-nvo3",
+                  "value": "vxlan6-nvo3"
+                }
+              ],
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/tunnel-management/tunnel-policys",
+      "type": "group",
+      "label": "tunnel-policys",
+      "fields": [
+        {
+          "path": "/tunnel-management/tunnel-policys/tunnel-policy",
+          "type": "list",
+          "label": "tunnel-policy",
+          "fields": [
+            {
+              "path": "/tunnel-management/tunnel-policys/tunnel-policy/description",
+              "type": "string",
+              "label": "description"
+            },
+            {
+              "path": "/tunnel-management/tunnel-policys/tunnel-policy/ipv4-set",
+              "type": "group",
+              "label": "ipv4-set",
+              "fields": [
+                {
+                  "path": "/tunnel-management/tunnel-policys/tunnel-policy/ipv4-set/policy-type",
+                  "type": "choice",
+                  "label": "policy-type",
+                  "cases": [
+                    {
+                      "name": "binding",
+                      "label": "binding",
+                      "fields": [
+                        {
+                          "path": "/tunnel-management/tunnel-policys/tunnel-policy/ipv4-set/nexthops",
+                          "type": "group",
+                          "label": "nexthops",
+                          "fields": [
+                            {
+                              "path": "/tunnel-management/tunnel-policys/tunnel-policy/ipv4-set/nexthops/nexthop",
+                              "type": "list",
+                              "label": "nexthop",
+                              "fields": [
+                                {
+                                  "path": "/tunnel-management/tunnel-policys/tunnel-policy/ipv4-set/nexthops/nexthop/address",
+                                  "type": "string",
+                                  "label": "address",
+                                  "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?",
+                                  "isKey": true
+                                },
+                                {
+                                  "path": "/tunnel-management/tunnel-policys/tunnel-policy/ipv4-set/nexthops/nexthop/auto-names",
+                                  "type": "group",
+                                  "label": "auto-names",
+                                  "when": "../bind-type='auto'",
+                                  "fields": [
+                                    {
+                                      "path": "/tunnel-management/tunnel-policys/tunnel-policy/ipv4-set/nexthops/nexthop/auto-names/auto-name",
+                                      "type": "list",
+                                      "label": "auto-name",
+                                      "fields": [
+                                        {
+                                          "path": "/tunnel-management/tunnel-policys/tunnel-policy/ipv4-set/nexthops/nexthop/auto-names/auto-name/name",
+                                          "type": "string",
+                                          "label": "name",
+                                          "isKey": true
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "path": "/tunnel-management/tunnel-policys/tunnel-policy/ipv4-set/nexthops/nexthop/bind-type",
+                                  "type": "enum",
+                                  "label": "bind-type",
+                                  "required": true,
+                                  "options": [
+                                    {
+                                      "label": "auto",
+                                      "value": "auto"
+                                    },
+                                    {
+                                      "label": "sr-te-policy-group",
+                                      "value": "sr-te-policy-group"
+                                    },
+                                    {
+                                      "label": "te",
+                                      "value": "te"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "path": "/tunnel-management/tunnel-policys/tunnel-policy/ipv4-set/nexthops/nexthop/down-switch",
+                                  "type": "boolean",
+                                  "label": "down-switch",
+                                  "must": [
+                                    {
+                                      "expr": "(../down-switch='true' and ../include-ldp='false') or ../down-switch='false'"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "path": "/tunnel-management/tunnel-policys/tunnel-policy/ipv4-set/nexthops/nexthop/ignore-destination-check",
+                                  "type": "boolean",
+                                  "label": "ignore-destination-check"
+                                },
+                                {
+                                  "path": "/tunnel-management/tunnel-policys/tunnel-policy/ipv4-set/nexthops/nexthop/include-ldp",
+                                  "type": "boolean",
+                                  "label": "include-ldp",
+                                  "must": [
+                                    {
+                                      "expr": "../include-ldp='false' or (../bind-type='te' and ../down-switch='false')"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "path": "/tunnel-management/tunnel-policys/tunnel-policy/ipv4-set/nexthops/nexthop/tunnel-names",
+                                  "type": "group",
+                                  "label": "tunnel-names",
+                                  "when": "../bind-type='te'",
+                                  "fields": [
+                                    {
+                                      "path": "/tunnel-management/tunnel-policys/tunnel-policy/ipv4-set/nexthops/nexthop/tunnel-names/tunnel-name",
+                                      "type": "list",
+                                      "label": "tunnel-name",
+                                      "fields": [
+                                        {
+                                          "path": "/tunnel-management/tunnel-policys/tunnel-policy/ipv4-set/nexthops/nexthop/tunnel-names/tunnel-name/name",
+                                          "type": "string",
+                                          "label": "name",
+                                          "must": [
+                                            {
+                                              "expr": "/ifm:ifm/ifm:interfaces/ifm:interface[ifm:name=current()]/ifm:type='Tunnel'"
+                                            }
+                                          ],
+                                          "isKey": true
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "name": "select-sequences",
+                      "label": "select-sequences",
+                      "fields": [
+                        {
+                          "path": "/tunnel-management/tunnel-policys/tunnel-policy/ipv4-set/select-sequence",
+                          "type": "group",
+                          "label": "select-sequence",
+                          "fields": [
+                            {
+                              "path": "/tunnel-management/tunnel-policys/tunnel-policy/ipv4-set/select-sequence/loadbalance",
+                              "type": "number",
+                              "label": "loadbalance",
+                              "required": true,
+                              "minimum": 1,
+                              "maximum": 128
+                            },
+                            {
+                              "path": "/tunnel-management/tunnel-policys/tunnel-policy/ipv4-set/select-sequence/select-tunnel-types",
+                              "type": "group",
+                              "label": "select-tunnel-types",
+                              "fields": [
+                                {
+                                  "path": "/tunnel-management/tunnel-policys/tunnel-policy/ipv4-set/select-sequence/select-tunnel-types/select-tunnel-type",
+                                  "type": "list",
+                                  "label": "select-tunnel-type",
+                                  "fields": [
+                                    {
+                                      "path": "/tunnel-management/tunnel-policys/tunnel-policy/ipv4-set/select-sequence/select-tunnel-types/select-tunnel-type/type",
+                                      "type": "enum",
+                                      "label": "type",
+                                      "options": [
+                                        {
+                                          "label": "bgp",
+                                          "value": "bgp"
+                                        },
+                                        {
+                                          "label": "cr-lsp",
+                                          "value": "cr-lsp"
+                                        },
+                                        {
+                                          "label": "gre",
+                                          "value": "gre"
+                                        },
+                                        {
+                                          "label": "ldp",
+                                          "value": "ldp"
+                                        },
+                                        {
+                                          "label": "lsp",
+                                          "value": "lsp"
+                                        },
+                                        {
+                                          "label": "sr-te",
+                                          "value": "sr-te"
+                                        },
+                                        {
+                                          "label": "sr-te-policy",
+                                          "value": "sr-te-policy"
+                                        },
+                                        {
+                                          "label": "srbe-lsp",
+                                          "value": "srbe-lsp"
+                                        },
+                                        {
+                                          "label": "te",
+                                          "value": "te"
+                                        }
+                                      ],
+                                      "must": [
+                                        {
+                                          "expr": "(../type='sr-te-policy' and ../../../unmix = 'true') or (../type != 'sr-te-policy')"
+                                        }
+                                      ],
+                                      "isKey": true
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "path": "/tunnel-management/tunnel-policys/tunnel-policy/ipv4-set/select-sequence/unmix",
+                              "type": "boolean",
+                              "label": "unmix"
+                            }
+                          ],
+                          "presence": true
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/tunnel-management/tunnel-policys/tunnel-policy/ipv6-set",
+              "type": "group",
+              "label": "ipv6-set",
+              "fields": [
+                {
+                  "path": "/tunnel-management/tunnel-policys/tunnel-policy/ipv6-set/policy-type",
+                  "type": "choice",
+                  "label": "policy-type",
+                  "cases": [
+                    {
+                      "name": "select-sequences",
+                      "label": "select-sequences",
+                      "fields": [
+                        {
+                          "path": "/tunnel-management/tunnel-policys/tunnel-policy/ipv6-set/select-sequence",
+                          "type": "group",
+                          "label": "select-sequence",
+                          "fields": [
+                            {
+                              "path": "/tunnel-management/tunnel-policys/tunnel-policy/ipv6-set/select-sequence/loadbalance",
+                              "type": "number",
+                              "label": "loadbalance",
+                              "required": true,
+                              "minimum": 1,
+                              "maximum": 128
+                            },
+                            {
+                              "path": "/tunnel-management/tunnel-policys/tunnel-policy/ipv6-set/select-sequence/select-tunnel-types",
+                              "type": "group",
+                              "label": "select-tunnel-types",
+                              "fields": [
+                                {
+                                  "path": "/tunnel-management/tunnel-policys/tunnel-policy/ipv6-set/select-sequence/select-tunnel-types/select-tunnel-type",
+                                  "type": "list",
+                                  "label": "select-tunnel-type",
+                                  "fields": [
+                                    {
+                                      "path": "/tunnel-management/tunnel-policys/tunnel-policy/ipv6-set/select-sequence/select-tunnel-types/select-tunnel-type/type",
+                                      "type": "enum",
+                                      "label": "type",
+                                      "options": [
+                                        {
+                                          "label": "srv6-te-policy",
+                                          "value": "srv6-te-policy"
+                                        },
+                                        {
+                                          "label": "srv6-te-policy-group",
+                                          "value": "srv6-te-policy-group"
+                                        }
+                                      ],
+                                      "isKey": true
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "path": "/tunnel-management/tunnel-policys/tunnel-policy/ipv6-set/select-sequence/unmix",
+                              "type": "boolean",
+                              "label": "unmix",
+                              "must": [
+                                {
+                                  "expr": "(../select-tunnel-types/select-tunnel-type[type = 'srv6-te-policy'] and ../select-tunnel-types/select-tunnel-type[type = 'srv6-te-policy-group'] and ../unmix = 'true') or (../unmix = 'false')"
+                                }
+                              ]
+                            }
+                          ],
+                          "presence": true
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/tunnel-management/tunnel-policys/tunnel-policy/name",
+              "type": "string",
+              "label": "name",
+              "isKey": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/tunnel-management/tunnel-statisticss",
+      "type": "group",
+      "label": "tunnel-statisticss",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/tunnel-management/tunnel-statisticss/tunnel-statistics",
+          "type": "list",
+          "label": "tunnel-statistics",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/tunnel-management/tunnel-statisticss/tunnel-statistics/number",
+              "type": "number",
+              "label": "number",
+              "readonly": true
+            },
+            {
+              "path": "/tunnel-management/tunnel-statisticss/tunnel-statistics/type",
+              "type": "enum",
+              "label": "type",
+              "options": [
+                {
+                  "label": "4over6",
+                  "value": "4over6"
+                },
+                {
+                  "label": "6over4",
+                  "value": "6over4"
+                },
+                {
+                  "label": "6rd",
+                  "value": "6rd"
+                },
+                {
+                  "label": "6to4",
+                  "value": "6to4"
+                },
+                {
+                  "label": "bgp",
+                  "value": "bgp"
+                },
+                {
+                  "label": "gre",
+                  "value": "gre"
+                },
+                {
+                  "label": "gre6",
+                  "value": "gre6"
+                },
+                {
+                  "label": "invalid",
+                  "value": "invalid"
+                },
+                {
+                  "label": "ipsec",
+                  "value": "ipsec"
+                },
+                {
+                  "label": "ldp",
+                  "value": "ldp"
+                },
+                {
+                  "label": "ldp-lsp",
+                  "value": "ldp-lsp"
+                },
+                {
+                  "label": "ldp6",
+                  "value": "ldp6"
+                },
+                {
+                  "label": "mpls-local-ifnet",
+                  "value": "mpls-local-ifnet"
+                },
+                {
+                  "label": "nvgre",
+                  "value": "nvgre"
+                },
+                {
+                  "label": "p2mp-gre",
+                  "value": "p2mp-gre"
+                },
+                {
+                  "label": "p2mp-ldp",
+                  "value": "p2mp-ldp"
+                },
+                {
+                  "label": "p2mp-te",
+                  "value": "p2mp-te"
+                },
+                {
+                  "label": "sr-te",
+                  "value": "sr-te"
+                },
+                {
+                  "label": "sr-te-policy",
+                  "value": "sr-te-policy"
+                },
+                {
+                  "label": "sr-te-policy-group",
+                  "value": "sr-te-policy-group"
+                },
+                {
+                  "label": "srbe-lsp",
+                  "value": "srbe-lsp"
+                },
+                {
+                  "label": "srv6",
+                  "value": "srv6"
+                },
+                {
+                  "label": "srv6-te-policy",
+                  "value": "srv6-te-policy"
+                },
+                {
+                  "label": "srv6-te-policy-group",
+                  "value": "srv6-te-policy-group"
+                },
+                {
+                  "label": "static-lsp",
+                  "value": "static-lsp"
+                },
+                {
+                  "label": "sub-group",
+                  "value": "sub-group"
+                },
+                {
+                  "label": "sub-te",
+                  "value": "sub-te"
+                },
+                {
+                  "label": "te",
+                  "value": "te"
+                },
+                {
+                  "label": "tnl-group",
+                  "value": "tnl-group"
+                },
+                {
+                  "label": "uni",
+                  "value": "uni"
+                },
+                {
+                  "label": "vxlan",
+                  "value": "vxlan"
+                },
+                {
+                  "label": "vxlan-nvo3",
+                  "value": "vxlan-nvo3"
+                },
+                {
+                  "label": "vxlan6-nvo3",
+                  "value": "vxlan6-nvo3"
+                }
+              ],
+              "readonly": true,
+              "isKey": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

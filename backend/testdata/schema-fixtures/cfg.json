@@ -1,0 +1,1184 @@
+{
+  "module": "cfg",
+  "title": "cfg",
+  "vendor": "huawei",
+  "fields": [
+    {
+      "path": "/cfg/auto-backup",
+      "type": "group",
+      "label": "auto-backup",
+      "fields": [
+        {
+          "path": "/cfg/auto-backup/interval-time",
+          "type": "number",
+          "label": "interval-time",
+          "minimum": 1,
+          "maximum": 7
+        },
+        {
+          "path": "/cfg/auto-backup/start-time",
+          "type": "string",
+          "label": "start-time",
+          "pattern": "(([0-1][0-9])|(2[0-3])|[0-9]):([0-5][0-9]|[0-9])"
+        }
+      ]
+    },
+    {
+      "path": "/cfg/autosave",
+      "type": "group",
+      "label": "autosave",
+      "fields": [
+        {
+          "path": "/cfg/autosave/cpu-limit",
+          "type": "number",
+          "label": "cpu-limit",
+          "minimum": 1,
+          "maximum": 100
+        },
+        {
+          "path": "/cfg/autosave/delay-time",
+          "type": "number",
+          "label": "delay-time",
+          "minimum": 1,
+          "maximum": 60,
+          "must": [
+            {
+              "expr": "../interval-time \u003e ../delay-time"
+            }
+          ]
+        },
+        {
+          "path": "/cfg/autosave/interval-time",
+          "type": "number",
+          "label": "interval-time",
+          "minimum": 30,
+          "maximum": 43200,
+          "must": [
+            {
+              "expr": "../interval-time \u003e ../delay-time"
+            }
+          ]
+        }
+      ],
+      "presence": true
+    },
+    {
+      "path": "/cfg/autosave-checkpoint",
+      "type": "group",
+      "label": "autosave-checkpoint",
+      "fields": [
+        {
+          "path": "/cfg/autosave-checkpoint/start-time",
+          "type": "string",
+          "label": "start-time",
+          "pattern": "(([0-1][0-9])|(2[0-3])|[0-9]):([0-5][0-9]|[0-9])"
+        }
+      ]
+    },
+    {
+      "path": "/cfg/backup-and-recovery-states",
+      "type": "group",
+      "label": "backup-and-recovery-states",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/cfg/backup-and-recovery-states/backup-and-recovery-state",
+          "type": "list",
+          "label": "backup-and-recovery-state",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/cfg/backup-and-recovery-states/backup-and-recovery-state/filename",
+              "type": "string",
+              "label": "filename",
+              "readonly": true
+            },
+            {
+              "path": "/cfg/backup-and-recovery-states/backup-and-recovery-state/index",
+              "type": "number",
+              "label": "index",
+              "minimum": 1,
+              "maximum": 2147483647,
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/cfg/backup-and-recovery-states/backup-and-recovery-state/last-time",
+              "type": "number",
+              "label": "last-time",
+              "readonly": true
+            },
+            {
+              "path": "/cfg/backup-and-recovery-states/backup-and-recovery-state/operate-progress",
+              "type": "number",
+              "label": "operate-progress",
+              "maximum": 100,
+              "readonly": true
+            },
+            {
+              "path": "/cfg/backup-and-recovery-states/backup-and-recovery-state/operation-type",
+              "type": "enum",
+              "label": "operation-type",
+              "options": [
+                {
+                  "label": "delstartup",
+                  "value": "delstartup"
+                },
+                {
+                  "label": "net2running",
+                  "value": "net2running"
+                },
+                {
+                  "label": "net2startup",
+                  "value": "net2startup"
+                },
+                {
+                  "label": "running2net",
+                  "value": "running2net"
+                },
+                {
+                  "label": "running2startup",
+                  "value": "running2startup"
+                },
+                {
+                  "label": "startup2net",
+                  "value": "startup2net"
+                },
+                {
+                  "label": "startup2running",
+                  "value": "startup2running"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "path": "/cfg/backup-and-recovery-states/backup-and-recovery-state/service-type",
+              "type": "enum",
+              "label": "service-type",
+              "options": [
+                {
+                  "label": "cfg",
+                  "value": "cfg"
+                },
+                {
+                  "label": "common",
+                  "value": "common"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "path": "/cfg/backup-and-recovery-states/backup-and-recovery-state/start-time",
+              "type": "string",
+              "label": "start-time",
+              "pattern": "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?(Z|[\\+\\-]\\d{2}:\\d{2})",
+              "readonly": true
+            },
+            {
+              "path": "/cfg/backup-and-recovery-states/backup-and-recovery-state/state",
+              "type": "enum",
+              "label": "state",
+              "options": [
+                {
+                  "label": "auth-fail",
+                  "value": "auth-fail"
+                },
+                {
+                  "label": "device-busy",
+                  "value": "device-busy"
+                },
+                {
+                  "label": "device-full",
+                  "value": "device-full"
+                },
+                {
+                  "label": "file-open-error",
+                  "value": "file-open-error"
+                },
+                {
+                  "label": "file-transfer-error",
+                  "value": "file-transfer-error"
+                },
+                {
+                  "label": "invalid-dest-name",
+                  "value": "invalid-dest-name"
+                },
+                {
+                  "label": "invalid-operation",
+                  "value": "invalid-operation"
+                },
+                {
+                  "label": "invalid-server-address",
+                  "value": "invalid-server-address"
+                },
+                {
+                  "label": "invalid-source-name",
+                  "value": "invalid-source-name"
+                },
+                {
+                  "label": "running",
+                  "value": "running"
+                },
+                {
+                  "label": "success",
+                  "value": "success"
+                },
+                {
+                  "label": "timeout",
+                  "value": "timeout"
+                },
+                {
+                  "label": "unknown-failure",
+                  "value": "unknown-failure"
+                }
+              ],
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/cfg/backup-servers",
+      "type": "group",
+      "label": "backup-servers",
+      "fields": [
+        {
+          "path": "/cfg/backup-servers/backup-server",
+          "type": "list",
+          "label": "backup-server",
+          "fields": [
+            {
+              "path": "/cfg/backup-servers/backup-server/password",
+              "type": "string",
+              "label": "password",
+              "required": true,
+              "when": "not(../transport-type='tftp')"
+            },
+            {
+              "path": "/cfg/backup-servers/backup-server/path",
+              "type": "string",
+              "label": "path"
+            },
+            {
+              "path": "/cfg/backup-servers/backup-server/port",
+              "type": "number",
+              "label": "port",
+              "minimum": 1,
+              "maximum": 65535,
+              "when": "not(../transport-type='tftp')"
+            },
+            {
+              "path": "/cfg/backup-servers/backup-server/server-ip",
+              "type": "string",
+              "label": "server-ip",
+              "isKey": true
+            },
+            {
+              "path": "/cfg/backup-servers/backup-server/transport-type",
+              "type": "enum",
+              "label": "transport-type",
+              "required": true,
+              "options": [
+                {
+                  "label": "ftp",
+                  "value": "ftp"
+                },
+                {
+                  "label": "sftp",
+                  "value": "sftp"
+                },
+                {
+                  "label": "tftp",
+                  "value": "tftp"
+                }
+              ]
+            },
+            {
+              "path": "/cfg/backup-servers/backup-server/username",
+              "type": "string",
+              "label": "username",
+              "required": true,
+              "when": "not(../transport-type='tftp')"
+            },
+            {
+              "path": "/cfg/backup-servers/backup-server/vpn-instance",
+              "type": "string",
+              "label": "vpn-instance",
+              "isKey": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/cfg/cfg-files",
+      "type": "group",
+      "label": "cfg-files",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/cfg/cfg-files/cfg-file",
+          "type": "list",
+          "label": "cfg-file",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/cfg/cfg-files/cfg-file/create-time",
+              "type": "string",
+              "label": "create-time",
+              "pattern": "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?(Z|[\\+\\-]\\d{2}:\\d{2})",
+              "readonly": true
+            },
+            {
+              "path": "/cfg/cfg-files/cfg-file/file-current-changes",
+              "type": "group",
+              "label": "file-current-changes",
+              "readonly": true,
+              "fields": [
+                {
+                  "path": "/cfg/cfg-files/cfg-file/file-current-changes/file-current-change",
+                  "type": "list",
+                  "label": "file-current-change",
+                  "readonly": true,
+                  "fields": [
+                    {
+                      "path": "/cfg/cfg-files/cfg-file/file-current-changes/file-current-change/config-change",
+                      "type": "string",
+                      "label": "config-change",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/cfg/cfg-files/cfg-file/file-current-changes/file-current-change/index",
+                      "type": "number",
+                      "label": "index",
+                      "readonly": true,
+                      "isKey": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/cfg/cfg-files/cfg-file/filename",
+              "type": "string",
+              "label": "filename",
+              "pattern": ".+\\.(zip|cfg|dat)",
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/cfg/cfg-files/cfg-file/size",
+              "type": "number",
+              "label": "size",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/cfg/checkpoints",
+      "type": "group",
+      "label": "checkpoints",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/cfg/checkpoints/checkpoint",
+          "type": "list",
+          "label": "checkpoint",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/cfg/checkpoints/checkpoint/client",
+              "type": "enum",
+              "label": "client",
+              "options": [
+                {
+                  "label": "cli",
+                  "value": "cli"
+                },
+                {
+                  "label": "inner",
+                  "value": "inner"
+                },
+                {
+                  "label": "mml",
+                  "value": "mml"
+                },
+                {
+                  "label": "netconf",
+                  "value": "netconf"
+                },
+                {
+                  "label": "restore",
+                  "value": "restore"
+                },
+                {
+                  "label": "rollback",
+                  "value": "rollback"
+                },
+                {
+                  "label": "snmp",
+                  "value": "snmp"
+                },
+                {
+                  "label": "system",
+                  "value": "system"
+                },
+                {
+                  "label": "y2",
+                  "value": "y2"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "path": "/cfg/checkpoints/checkpoint/commit-id",
+              "type": "string",
+              "label": "commit-id",
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/cfg/checkpoints/checkpoint/current-point-changes",
+              "type": "group",
+              "label": "current-point-changes",
+              "readonly": true,
+              "fields": [
+                {
+                  "path": "/cfg/checkpoints/checkpoint/current-point-changes/current-point-change",
+                  "type": "list",
+                  "label": "current-point-change",
+                  "readonly": true,
+                  "fields": [
+                    {
+                      "path": "/cfg/checkpoints/checkpoint/current-point-changes/current-point-change/config-change",
+                      "type": "string",
+                      "label": "config-change",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/cfg/checkpoints/checkpoint/current-point-changes/current-point-change/index",
+                      "type": "number",
+                      "label": "index",
+                      "readonly": true,
+                      "isKey": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/cfg/checkpoints/checkpoint/description",
+              "type": "string",
+              "label": "description",
+              "readonly": true
+            },
+            {
+              "path": "/cfg/checkpoints/checkpoint/line",
+              "type": "string",
+              "label": "line",
+              "readonly": true
+            },
+            {
+              "path": "/cfg/checkpoints/checkpoint/since-point-changes",
+              "type": "group",
+              "label": "since-point-changes",
+              "readonly": true,
+              "fields": [
+                {
+                  "path": "/cfg/checkpoints/checkpoint/since-point-changes/since-point-change",
+                  "type": "list",
+                  "label": "since-point-change",
+                  "readonly": true,
+                  "fields": [
+                    {
+                      "path": "/cfg/checkpoints/checkpoint/since-point-changes/since-point-change/config-change",
+                      "type": "string",
+                      "label": "config-change",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/cfg/checkpoints/checkpoint/since-point-changes/since-point-change/index",
+                      "type": "number",
+                      "label": "index",
+                      "readonly": true,
+                      "isKey": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/cfg/checkpoints/checkpoint/timestamp",
+              "type": "string",
+              "label": "timestamp",
+              "pattern": "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?(Z|[\\+\\-]\\d{2}:\\d{2})",
+              "readonly": true
+            },
+            {
+              "path": "/cfg/checkpoints/checkpoint/user-label",
+              "type": "string",
+              "label": "user-label",
+              "readonly": true
+            },
+            {
+              "path": "/cfg/checkpoints/checkpoint/username",
+              "type": "string",
+              "label": "username",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/cfg/clear-interface-results",
+      "type": "group",
+      "label": "clear-interface-results",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/cfg/clear-interface-results/clear-interface-result",
+          "type": "list",
+          "label": "clear-interface-result",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/cfg/clear-interface-results/clear-interface-result/interface-name",
+              "type": "string",
+              "label": "interface-name",
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/cfg/clear-interface-results/clear-interface-result/result",
+              "type": "string",
+              "label": "result",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/cfg/config-auto-backup-files",
+      "type": "group",
+      "label": "config-auto-backup-files",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/cfg/config-auto-backup-files/config-auto-backup-file",
+          "type": "list",
+          "label": "config-auto-backup-file",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/cfg/config-auto-backup-files/config-auto-backup-file/auto-backup-time",
+              "type": "string",
+              "label": "auto-backup-time",
+              "pattern": "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?(Z|[\\+\\-]\\d{2}:\\d{2})",
+              "readonly": true,
+              "isKey": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/cfg/config-change-flowid",
+      "type": "group",
+      "label": "config-change-flowid",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/cfg/config-change-flowid/config-baseline-time",
+          "type": "string",
+          "label": "config-baseline-time",
+          "pattern": "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?(Z|[\\+\\-]\\d{2}:\\d{2})",
+          "readonly": true
+        },
+        {
+          "path": "/cfg/config-change-flowid/config-change-flowid",
+          "type": "number",
+          "label": "config-change-flowid",
+          "readonly": true
+        }
+      ]
+    },
+    {
+      "path": "/cfg/config-recover-results",
+      "type": "group",
+      "label": "config-recover-results",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/cfg/config-recover-results/config-recover-result",
+          "type": "list",
+          "label": "config-recover-result",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/cfg/config-recover-results/config-recover-result/command",
+              "type": "string",
+              "label": "command",
+              "readonly": true
+            },
+            {
+              "path": "/cfg/config-recover-results/config-recover-result/index",
+              "type": "number",
+              "label": "index",
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/cfg/config-recover-results/config-recover-result/line",
+              "type": "number",
+              "label": "line",
+              "readonly": true
+            },
+            {
+              "path": "/cfg/config-recover-results/config-recover-result/reason",
+              "type": "enum",
+              "label": "reason",
+              "options": [
+                {
+                  "label": "execute-failed",
+                  "value": "execute-failed"
+                },
+                {
+                  "label": "execute-timeout",
+                  "value": "execute-timeout"
+                },
+                {
+                  "label": "unknown-command",
+                  "value": "unknown-command"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "path": "/cfg/config-recover-results/config-recover-result/time",
+              "type": "string",
+              "label": "time",
+              "pattern": "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?(Z|[\\+\\-]\\d{2}:\\d{2})",
+              "readonly": true
+            },
+            {
+              "path": "/cfg/config-recover-results/config-recover-result/view",
+              "type": "string",
+              "label": "view",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/cfg/config-rollback-result",
+      "type": "group",
+      "label": "config-rollback-result",
+      "readonly": true
+    },
+    {
+      "path": "/cfg/config-sessions",
+      "type": "group",
+      "label": "config-sessions",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/cfg/config-sessions/config-session",
+          "type": "list",
+          "label": "config-session",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/cfg/config-sessions/config-session/client",
+              "type": "enum",
+              "label": "client",
+              "options": [
+                {
+                  "label": "cli",
+                  "value": "cli"
+                },
+                {
+                  "label": "inner",
+                  "value": "inner"
+                },
+                {
+                  "label": "mml",
+                  "value": "mml"
+                },
+                {
+                  "label": "netconf",
+                  "value": "netconf"
+                },
+                {
+                  "label": "restore",
+                  "value": "restore"
+                },
+                {
+                  "label": "rollback",
+                  "value": "rollback"
+                },
+                {
+                  "label": "snmp",
+                  "value": "snmp"
+                },
+                {
+                  "label": "system",
+                  "value": "system"
+                },
+                {
+                  "label": "y2",
+                  "value": "y2"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "path": "/cfg/config-sessions/config-session/create-time",
+              "type": "string",
+              "label": "create-time",
+              "pattern": "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?(Z|[\\+\\-]\\d{2}:\\d{2})",
+              "readonly": true
+            },
+            {
+              "path": "/cfg/config-sessions/config-session/line",
+              "type": "string",
+              "label": "line",
+              "readonly": true
+            },
+            {
+              "path": "/cfg/config-sessions/config-session/lock-reason",
+              "type": "string",
+              "label": "lock-reason",
+              "readonly": true
+            },
+            {
+              "path": "/cfg/config-sessions/config-session/sessionid",
+              "type": "number",
+              "label": "sessionid",
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/cfg/config-sessions/config-session/username",
+              "type": "string",
+              "label": "username",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/cfg/configuration-operation-cpu-limit",
+      "type": "group",
+      "label": "configuration-operation-cpu-limit",
+      "fields": [
+        {
+          "path": "/cfg/configuration-operation-cpu-limit/netconf-cpu-limit",
+          "type": "number",
+          "label": "netconf-cpu-limit",
+          "minimum": 30,
+          "maximum": 100
+        },
+        {
+          "path": "/cfg/configuration-operation-cpu-limit/netconf-switch",
+          "type": "boolean",
+          "label": "netconf-switch"
+        },
+        {
+          "path": "/cfg/configuration-operation-cpu-limit/snmp-cpu-limit",
+          "type": "number",
+          "label": "snmp-cpu-limit",
+          "minimum": 30,
+          "maximum": 100
+        },
+        {
+          "path": "/cfg/configuration-operation-cpu-limit/snmp-switch",
+          "type": "boolean",
+          "label": "snmp-switch"
+        }
+      ]
+    },
+    {
+      "path": "/cfg/global-switch",
+      "type": "group",
+      "label": "global-switch",
+      "fields": [
+        {
+          "path": "/cfg/global-switch/appdata-detect-switch",
+          "type": "boolean",
+          "label": "appdata-detect-switch"
+        },
+        {
+          "path": "/cfg/global-switch/checkpoint-switch",
+          "type": "boolean",
+          "label": "checkpoint-switch"
+        },
+        {
+          "path": "/cfg/global-switch/configuration-slave-detect-switch",
+          "type": "boolean",
+          "label": "configuration-slave-detect-switch"
+        }
+      ]
+    },
+    {
+      "path": "/cfg/last-save-info",
+      "type": "group",
+      "label": "last-save-info",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/cfg/last-save-info/save-method",
+          "type": "enum",
+          "label": "save-method",
+          "options": [
+            {
+              "label": "automatically",
+              "value": "automatically"
+            },
+            {
+              "label": "manually",
+              "value": "manually"
+            }
+          ],
+          "readonly": true
+        },
+        {
+          "path": "/cfg/last-save-info/save-result",
+          "type": "enum",
+          "label": "save-result",
+          "options": [
+            {
+              "label": "failed",
+              "value": "failed"
+            },
+            {
+              "label": "successed",
+              "value": "successed"
+            }
+          ],
+          "readonly": true
+        },
+        {
+          "path": "/cfg/last-save-info/save-time",
+          "type": "string",
+          "label": "save-time",
+          "pattern": "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?(Z|[\\+\\-]\\d{2}:\\d{2})",
+          "readonly": true
+        }
+      ]
+    },
+    {
+      "path": "/cfg/lock-by-username",
+      "type": "group",
+      "label": "lock-by-username",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/cfg/lock-by-username/identifier",
+          "type": "number",
+          "label": "identifier",
+          "readonly": true
+        },
+        {
+          "path": "/cfg/lock-by-username/lock-time",
+          "type": "string",
+          "label": "lock-time",
+          "pattern": "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?(Z|[\\+\\-]\\d{2}:\\d{2})",
+          "readonly": true
+        },
+        {
+          "path": "/cfg/lock-by-username/lock-username",
+          "type": "string",
+          "label": "lock-username",
+          "readonly": true
+        },
+        {
+          "path": "/cfg/lock-by-username/unlock-time",
+          "type": "string",
+          "label": "unlock-time",
+          "pattern": "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?(Z|[\\+\\-]\\d{2}:\\d{2})",
+          "readonly": true
+        },
+        {
+          "path": "/cfg/lock-by-username/unlock-username",
+          "type": "string",
+          "label": "unlock-username",
+          "readonly": true
+        }
+      ]
+    },
+    {
+      "path": "/cfg/lock-by-users",
+      "type": "group",
+      "label": "lock-by-users",
+      "fields": [
+        {
+          "path": "/cfg/lock-by-users/lock-by-user",
+          "type": "list",
+          "label": "lock-by-user",
+          "fields": [
+            {
+              "path": "/cfg/lock-by-users/lock-by-user/identifier",
+              "type": "number",
+              "label": "identifier",
+              "readonly": true
+            },
+            {
+              "path": "/cfg/lock-by-users/lock-by-user/lock-time",
+              "type": "string",
+              "label": "lock-time",
+              "pattern": "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?(Z|[\\+\\-]\\d{2}:\\d{2})",
+              "readonly": true
+            },
+            {
+              "path": "/cfg/lock-by-users/lock-by-user/lock-username",
+              "type": "string",
+              "label": "lock-username",
+              "isKey": true
+            },
+            {
+              "path": "/cfg/lock-by-users/lock-by-user/unlock-time",
+              "type": "string",
+              "label": "unlock-time",
+              "pattern": "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?(Z|[\\+\\-]\\d{2}:\\d{2})",
+              "readonly": true
+            },
+            {
+              "path": "/cfg/lock-by-users/lock-by-user/unlock-username",
+              "type": "string",
+              "label": "unlock-username",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/cfg/saved-configuration-time",
+      "type": "group",
+      "label": "saved-configuration-time",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/cfg/saved-configuration-time/auto-save-time",
+          "type": "string",
+          "label": "auto-save-time",
+          "pattern": "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?(Z|[\\+\\-]\\d{2}:\\d{2})",
+          "readonly": true
+        },
+        {
+          "path": "/cfg/saved-configuration-time/manual-save-time",
+          "type": "string",
+          "label": "manual-save-time",
+          "pattern": "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?(Z|[\\+\\-]\\d{2}:\\d{2})",
+          "readonly": true
+        }
+      ]
+    },
+    {
+      "path": "/cfg/startup-infos",
+      "type": "group",
+      "label": "startup-infos",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/cfg/startup-infos/startup-info",
+          "type": "list",
+          "label": "startup-info",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/cfg/startup-infos/startup-info/configed-system-software",
+              "type": "string",
+              "label": "configed-system-software",
+              "readonly": true
+            },
+            {
+              "path": "/cfg/startup-infos/startup-info/current-cfg-file",
+              "type": "string",
+              "label": "current-cfg-file",
+              "readonly": true
+            },
+            {
+              "path": "/cfg/startup-infos/startup-info/current-patch-file",
+              "type": "string",
+              "label": "current-patch-file",
+              "readonly": true
+            },
+            {
+              "path": "/cfg/startup-infos/startup-info/current-system-software",
+              "type": "string",
+              "label": "current-system-software",
+              "readonly": true
+            },
+            {
+              "path": "/cfg/startup-infos/startup-info/next-cfg-file",
+              "type": "string",
+              "label": "next-cfg-file",
+              "readonly": true
+            },
+            {
+              "path": "/cfg/startup-infos/startup-info/next-patch-file",
+              "type": "string",
+              "label": "next-patch-file",
+              "readonly": true
+            },
+            {
+              "path": "/cfg/startup-infos/startup-info/next-system-software",
+              "type": "string",
+              "label": "next-system-software",
+              "readonly": true
+            },
+            {
+              "path": "/cfg/startup-infos/startup-info/position",
+              "type": "string",
+              "label": "position",
+              "readonly": true,
+              "isKey": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/cfg/startup-lock",
+      "type": "group",
+      "label": "startup-lock",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/cfg/startup-lock/lock-time",
+          "type": "string",
+          "label": "lock-time",
+          "pattern": "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?(Z|[\\+\\-]\\d{2}:\\d{2})",
+          "readonly": true
+        },
+        {
+          "path": "/cfg/startup-lock/session-name",
+          "type": "string",
+          "label": "session-name",
+          "readonly": true
+        },
+        {
+          "path": "/cfg/startup-lock/user-index",
+          "type": "number",
+          "label": "user-index",
+          "minimum": 1,
+          "maximum": 65534,
+          "readonly": true
+        },
+        {
+          "path": "/cfg/startup-lock/user-ip",
+          "type": "string",
+          "label": "user-ip",
+          "readonly": true
+        },
+        {
+          "path": "/cfg/startup-lock/username",
+          "type": "string",
+          "label": "username",
+          "readonly": true
+        }
+      ]
+    },
+    {
+      "path": "/cfg/trial-status",
+      "type": "group",
+      "label": "trial-status",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/cfg/trial-status/status",
+          "type": "enum",
+          "label": "status",
+          "options": [
+            {
+              "label": "active",
+              "value": "active"
+            },
+            {
+              "label": "canceling",
+              "value": "canceling"
+            },
+            {
+              "label": "inactive",
+              "value": "inactive"
+            },
+            {
+              "label": "wait-cancel",
+              "value": "wait-cancel"
+            }
+          ],
+          "readonly": true
+        },
+        {
+          "path": "/cfg/trial-status/time-left",
+          "type": "number",
+          "label": "time-left",
+          "maximum": 65535,
+          "readonly": true
+        }
+      ]
+    },
+    {
+      "path": "/cfg/user-lock",
+      "type": "group",
+      "label": "user-lock",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/cfg/user-lock/last-config-time",
+          "type": "string",
+          "label": "last-config-time",
+          "pattern": "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?(Z|[\\+\\-]\\d{2}:\\d{2})",
+          "readonly": true
+        },
+        {
+          "path": "/cfg/user-lock/lock-time",
+          "type": "string",
+          "label": "lock-time",
+          "pattern": "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?(Z|[\\+\\-]\\d{2}:\\d{2})",
+          "readonly": true
+        },
+        {
+          "path": "/cfg/user-lock/session-name",
+          "type": "string",
+          "label": "session-name",
+          "readonly": true
+        },
+        {
+          "path": "/cfg/user-lock/user-index",
+          "type": "number",
+          "label": "user-index",
+          "minimum": 1,
+          "maximum": 65534,
+          "readonly": true
+        },
+        {
+          "path": "/cfg/user-lock/user-ip",
+          "type": "string",
+          "label": "user-ip",
+          "readonly": true
+        },
+        {
+          "path": "/cfg/user-lock/user-lock-timeout-time",
+          "type": "number",
+          "label": "user-lock-timeout-time",
+          "readonly": true
+        },
+        {
+          "path": "/cfg/user-lock/username",
+          "type": "string",
+          "label": "username",
+          "readonly": true
+        }
+      ]
+    }
+  ]
+}

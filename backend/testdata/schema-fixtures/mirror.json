@@ -1,0 +1,480 @@
+{
+  "module": "mirror",
+  "title": "mirror",
+  "vendor": "huawei",
+  "fields": [
+    {
+      "path": "/mirror/global-observe-groups",
+      "type": "group",
+      "label": "global-observe-groups",
+      "fields": [
+        {
+          "path": "/mirror/global-observe-groups/global-observe-group",
+          "type": "list",
+          "label": "global-observe-group",
+          "fields": [
+            {
+              "path": "/mirror/global-observe-groups/global-observe-group/group-id",
+              "type": "number",
+              "label": "group-id",
+              "minimum": 1,
+              "maximum": 128,
+              "isKey": true
+            },
+            {
+              "path": "/mirror/global-observe-groups/global-observe-group/interface-name",
+              "type": "leaf-list",
+              "label": "interface-name"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/mirror/global-observers",
+      "type": "group",
+      "label": "global-observers",
+      "fields": [
+        {
+          "path": "/mirror/global-observers/global-observer",
+          "type": "list",
+          "label": "global-observer",
+          "fields": [
+            {
+              "path": "/mirror/global-observers/global-observer/cir",
+              "type": "number",
+              "label": "cir",
+              "minimum": 24,
+              "maximum": 100000000
+            },
+            {
+              "path": "/mirror/global-observers/global-observer/cir-unit",
+              "type": "enum",
+              "label": "cir-unit",
+              "options": [
+                {
+                  "label": "gbps",
+                  "value": "gbps"
+                },
+                {
+                  "label": "kbps",
+                  "value": "kbps"
+                },
+                {
+                  "label": "mbps",
+                  "value": "mbps"
+                }
+              ]
+            },
+            {
+              "path": "/mirror/global-observers/global-observer/dscp",
+              "type": "number",
+              "label": "dscp",
+              "maximum": 63
+            },
+            {
+              "path": "/mirror/global-observers/global-observer/dst-ip",
+              "type": "string",
+              "label": "dst-ip"
+            },
+            {
+              "path": "/mirror/global-observers/global-observer/enhance-mode",
+              "type": "enum",
+              "label": "enhance-mode",
+              "options": [
+                {
+                  "label": "disable",
+                  "value": "disable"
+                },
+                {
+                  "label": "enable",
+                  "value": "enable"
+                }
+              ]
+            },
+            {
+              "path": "/mirror/global-observers/global-observer/erspan-id",
+              "type": "number",
+              "label": "erspan-id",
+              "maximum": 1023
+            },
+            {
+              "path": "/mirror/global-observers/global-observer/erspan-type",
+              "type": "enum",
+              "label": "erspan-type",
+              "options": [
+                {
+                  "label": "v2",
+                  "value": "v2"
+                },
+                {
+                  "label": "v3",
+                  "value": "v3"
+                }
+              ]
+            },
+            {
+              "path": "/mirror/global-observers/global-observer/interface-name",
+              "type": "string",
+              "label": "interface-name",
+              "required": true
+            },
+            {
+              "path": "/mirror/global-observers/global-observer/length",
+              "type": "number",
+              "label": "length",
+              "minimum": 64,
+              "maximum": 256
+            },
+            {
+              "path": "/mirror/global-observers/global-observer/observe-index",
+              "type": "number",
+              "label": "observe-index",
+              "minimum": 1,
+              "maximum": 255,
+              "isKey": true
+            },
+            {
+              "path": "/mirror/global-observers/global-observer/src-ip",
+              "type": "string",
+              "label": "src-ip"
+            },
+            {
+              "path": "/mirror/global-observers/global-observer/vlan-id",
+              "type": "number",
+              "label": "vlan-id",
+              "minimum": 1,
+              "maximum": 4094
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/mirror/instances",
+      "type": "group",
+      "label": "instances",
+      "fields": [
+        {
+          "path": "/mirror/instances/instance",
+          "type": "list",
+          "label": "instance",
+          "fields": [
+            {
+              "path": "/mirror/instances/instance/instance-car",
+              "type": "group",
+              "label": "instance-car",
+              "must": [
+                {
+                  "expr": "(not(./pir) and not(./pbs)) or (./pbs)"
+                },
+                {
+                  "expr": "not(./pir) or ./pir\u003e=./cir"
+                }
+              ],
+              "fields": [
+                {
+                  "path": "/mirror/instances/instance/instance-car/cbs",
+                  "type": "number",
+                  "label": "cbs",
+                  "required": true
+                },
+                {
+                  "path": "/mirror/instances/instance/instance-car/cir",
+                  "type": "number",
+                  "label": "cir",
+                  "required": true
+                },
+                {
+                  "path": "/mirror/instances/instance/instance-car/pbs",
+                  "type": "number",
+                  "label": "pbs"
+                },
+                {
+                  "path": "/mirror/instances/instance/instance-car/pir",
+                  "type": "number",
+                  "label": "pir",
+                  "minimum": 1,
+                  "maximum": 4294967295
+                }
+              ],
+              "presence": true
+            },
+            {
+              "path": "/mirror/instances/instance/instance-name",
+              "type": "string",
+              "label": "instance-name",
+              "isKey": true
+            },
+            {
+              "path": "/mirror/instances/instance/instance-slice",
+              "type": "group",
+              "label": "instance-slice",
+              "fields": [
+                {
+                  "path": "/mirror/instances/instance/instance-slice/slice-size",
+                  "type": "number",
+                  "label": "slice-size",
+                  "required": true,
+                  "minimum": 64,
+                  "maximum": 9600
+                }
+              ],
+              "presence": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/mirror/observe-user-define-acls",
+      "type": "group",
+      "label": "observe-user-define-acls",
+      "fields": [
+        {
+          "path": "/mirror/observe-user-define-acls/observe-user-define-acl",
+          "type": "list",
+          "label": "observe-user-define-acl",
+          "fields": [
+            {
+              "path": "/mirror/observe-user-define-acls/observe-user-define-acl/filter-id",
+              "type": "number",
+              "label": "filter-id",
+              "minimum": 1,
+              "maximum": 8,
+              "isKey": true
+            },
+            {
+              "path": "/mirror/observe-user-define-acls/observe-user-define-acl/offsets",
+              "type": "group",
+              "label": "offsets",
+              "fields": [
+                {
+                  "path": "/mirror/observe-user-define-acls/observe-user-define-acl/offsets/offset",
+                  "type": "list",
+                  "label": "offset",
+                  "fields": [
+                    {
+                      "path": "/mirror/observe-user-define-acls/observe-user-define-acl/offsets/offset/config-index",
+                      "type": "number",
+                      "label": "config-index",
+                      "minimum": 1,
+                      "maximum": 4,
+                      "isKey": true
+                    },
+                    {
+                      "path": "/mirror/observe-user-define-acls/observe-user-define-acl/offsets/offset/offset-value",
+                      "type": "number",
+                      "label": "offset-value",
+                      "required": true,
+                      "maximum": 114
+                    },
+                    {
+                      "path": "/mirror/observe-user-define-acls/observe-user-define-acl/offsets/offset/payload-mask",
+                      "type": "string",
+                      "label": "payload-mask",
+                      "required": true,
+                      "pattern": "(0x|0X)?[0-9a-fA-F]+"
+                    },
+                    {
+                      "path": "/mirror/observe-user-define-acls/observe-user-define-acl/offsets/offset/payload-value",
+                      "type": "string",
+                      "label": "payload-value",
+                      "required": true,
+                      "pattern": "(0x|0X)?[0-9a-fA-F]+"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/mirror/query-ports",
+      "type": "group",
+      "label": "query-ports",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/mirror/query-ports/query-port",
+          "type": "list",
+          "label": "query-port",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/mirror/query-ports/query-port/direction",
+              "type": "enum",
+              "label": "direction",
+              "options": [
+                {
+                  "label": "cpu",
+                  "value": "cpu"
+                },
+                {
+                  "label": "in",
+                  "value": "in"
+                },
+                {
+                  "label": "in-cpu",
+                  "value": "in-cpu"
+                },
+                {
+                  "label": "in-out",
+                  "value": "in-out"
+                },
+                {
+                  "label": "in-out-cpu",
+                  "value": "in-out-cpu"
+                },
+                {
+                  "label": "out",
+                  "value": "out"
+                },
+                {
+                  "label": "out-cpu",
+                  "value": "out-cpu"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "path": "/mirror/query-ports/query-port/if-name",
+              "type": "string",
+              "label": "if-name",
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/mirror/query-ports/query-port/in-bps",
+              "type": "number",
+              "label": "in-bps",
+              "readonly": true
+            },
+            {
+              "path": "/mirror/query-ports/query-port/in-bytes",
+              "type": "number",
+              "label": "in-bytes",
+              "readonly": true
+            },
+            {
+              "path": "/mirror/query-ports/query-port/in-drop-bps",
+              "type": "number",
+              "label": "in-drop-bps",
+              "readonly": true
+            },
+            {
+              "path": "/mirror/query-ports/query-port/in-drop-bytes",
+              "type": "number",
+              "label": "in-drop-bytes",
+              "readonly": true
+            },
+            {
+              "path": "/mirror/query-ports/query-port/in-drop-packets",
+              "type": "number",
+              "label": "in-drop-packets",
+              "readonly": true
+            },
+            {
+              "path": "/mirror/query-ports/query-port/in-drop-pps",
+              "type": "number",
+              "label": "in-drop-pps",
+              "readonly": true
+            },
+            {
+              "path": "/mirror/query-ports/query-port/in-packets",
+              "type": "number",
+              "label": "in-packets",
+              "readonly": true
+            },
+            {
+              "path": "/mirror/query-ports/query-port/in-pps",
+              "type": "number",
+              "label": "in-pps",
+              "readonly": true
+            },
+            {
+              "path": "/mirror/query-ports/query-port/out-bps",
+              "type": "number",
+              "label": "out-bps",
+              "readonly": true
+            },
+            {
+              "path": "/mirror/query-ports/query-port/out-bytes",
+              "type": "number",
+              "label": "out-bytes",
+              "readonly": true
+            },
+            {
+              "path": "/mirror/query-ports/query-port/out-drop-bps",
+              "type": "number",
+              "label": "out-drop-bps",
+              "readonly": true
+            },
+            {
+              "path": "/mirror/query-ports/query-port/out-drop-bytes",
+              "type": "number",
+              "label": "out-drop-bytes",
+              "readonly": true
+            },
+            {
+              "path": "/mirror/query-ports/query-port/out-drop-packets",
+              "type": "number",
+              "label": "out-drop-packets",
+              "readonly": true
+            },
+            {
+              "path": "/mirror/query-ports/query-port/out-drop-pps",
+              "type": "number",
+              "label": "out-drop-pps",
+              "readonly": true
+            },
+            {
+              "path": "/mirror/query-ports/query-port/out-packets",
+              "type": "number",
+              "label": "out-packets",
+              "readonly": true
+            },
+            {
+              "path": "/mirror/query-ports/query-port/out-pps",
+              "type": "number",
+              "label": "out-pps",
+              "readonly": true
+            },
+            {
+              "path": "/mirror/query-ports/query-port/type",
+              "type": "enum",
+              "label": "type",
+              "options": [
+                {
+                  "label": "policy",
+                  "value": "policy"
+                },
+                {
+                  "label": "port",
+                  "value": "port"
+                },
+                {
+                  "label": "traffic",
+                  "value": "traffic"
+                },
+                {
+                  "label": "vlan",
+                  "value": "vlan"
+                }
+              ],
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/mirror/statistic-enable",
+      "type": "group",
+      "label": "statistic-enable",
+      "presence": true
+    }
+  ]
+}

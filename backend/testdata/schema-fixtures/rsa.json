@@ -1,0 +1,161 @@
+{
+  "module": "rsa",
+  "title": "rsa",
+  "vendor": "huawei",
+  "fields": [
+    {
+      "path": "/rsa/key-pairs",
+      "type": "group",
+      "label": "key-pairs",
+      "fields": [
+        {
+          "path": "/rsa/key-pairs/key-pair",
+          "type": "list",
+          "label": "key-pair",
+          "fields": [
+            {
+              "path": "/rsa/key-pairs/key-pair/host-key-code",
+              "type": "string",
+              "label": "host-key-code",
+              "readonly": true,
+              "supportFilter": true
+            },
+            {
+              "path": "/rsa/key-pairs/key-pair/key-pair-label",
+              "type": "string",
+              "label": "key-pair-label",
+              "pattern": "[a-z0-9_]*",
+              "isKey": true
+            },
+            {
+              "path": "/rsa/key-pairs/key-pair/key-size",
+              "type": "number",
+              "label": "key-size",
+              "minimum": 2048,
+              "maximum": 3072,
+              "supportFilter": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/rsa/local-key",
+      "type": "group",
+      "label": "local-key",
+      "fields": [
+        {
+          "path": "/rsa/local-key/host-key-code",
+          "type": "string",
+          "label": "host-key-code",
+          "readonly": true
+        },
+        {
+          "path": "/rsa/local-key/host-key-name",
+          "type": "string",
+          "label": "host-key-name",
+          "readonly": true
+        },
+        {
+          "path": "/rsa/local-key/host-key-openssh",
+          "type": "string",
+          "label": "host-key-openssh",
+          "readonly": true
+        },
+        {
+          "path": "/rsa/local-key/host-key-pem",
+          "type": "string",
+          "label": "host-key-pem",
+          "readonly": true
+        },
+        {
+          "path": "/rsa/local-key/host-key-ssh1",
+          "type": "string",
+          "label": "host-key-ssh1",
+          "readonly": true
+        },
+        {
+          "path": "/rsa/local-key/key-size",
+          "type": "number",
+          "label": "key-size",
+          "minimum": 2048,
+          "maximum": 3072
+        },
+        {
+          "path": "/rsa/local-key/server-key-code",
+          "type": "string",
+          "label": "server-key-code",
+          "readonly": true
+        },
+        {
+          "path": "/rsa/local-key/server-key-name",
+          "type": "string",
+          "label": "server-key-name",
+          "readonly": true
+        }
+      ],
+      "presence": true
+    },
+    {
+      "path": "/rsa/peer-keys",
+      "type": "group",
+      "label": "peer-keys",
+      "fields": [
+        {
+          "path": "/rsa/peer-keys/peer-key",
+          "type": "list",
+          "label": "peer-key",
+          "fields": [
+            {
+              "path": "/rsa/peer-keys/peer-key/encode-type",
+              "type": "enum",
+              "label": "encode-type",
+              "options": [
+                {
+                  "label": "der",
+                  "value": "der"
+                },
+                {
+                  "label": "openssh",
+                  "value": "openssh"
+                },
+                {
+                  "label": "pem",
+                  "value": "pem"
+                }
+              ],
+              "supportFilter": true
+            },
+            {
+              "path": "/rsa/peer-keys/peer-key/key-code",
+              "type": "string",
+              "label": "key-code",
+              "required": true,
+              "supportFilter": true
+            },
+            {
+              "path": "/rsa/peer-keys/peer-key/key-name",
+              "type": "string",
+              "label": "key-name",
+              "isKey": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/rsa/rsa-global",
+      "type": "group",
+      "label": "rsa-global",
+      "fields": [
+        {
+          "path": "/rsa/rsa-global/max-key-pair",
+          "type": "number",
+          "label": "max-key-pair",
+          "minimum": 1,
+          "maximum": 20
+        }
+      ]
+    }
+  ]
+}

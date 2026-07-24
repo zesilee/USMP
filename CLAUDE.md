@@ -166,6 +166,7 @@ explore → propose → apply → sync → archive
 | 前端组件/页面逻辑 | F2（含 add/**edit/remove**/校验态，非只 render） |
 | 前端 el-select/teleport/嵌套 list 增删改 | **F3 真浏览器** |
 | 新页面/路由/端到端流 | F4 staging-smoke |
+| **改控制台派生逻辑**（deriveTabs/deriveColumns/deriveKeyField/filterableFields/deriveSchemaTree） | **派生黄金（全模块，GD-01）**——刷新后人工核对受影响模块，缺黄金/漂移即拦（SF-04） |
 
 > 详见 [frontend/TESTING.md](frontend/TESTING.md)（前端分层权威规范）。
 

@@ -1,0 +1,356 @@
+{
+  "module": "sflow",
+  "tabs": [
+    {
+      "name": "interface-statistics",
+      "kind": "list"
+    },
+    {
+      "name": "sflow-enable",
+      "kind": "form"
+    },
+    {
+      "name": "slot-statistics",
+      "kind": "list"
+    }
+  ],
+  "lists": {
+    "interface-statistics": {
+      "keyField": "direction",
+      "columns": [
+        {
+          "name": "direction",
+          "widget": "enum"
+        },
+        {
+          "name": "interface-name",
+          "widget": "string"
+        },
+        {
+          "name": "slot-id",
+          "widget": "string"
+        },
+        {
+          "name": "flow-sample-count",
+          "widget": "number"
+        }
+      ],
+      "filterable": []
+    },
+    "slot-statistics": {
+      "keyField": "collector-id",
+      "columns": [
+        {
+          "name": "collector-id",
+          "widget": "number"
+        },
+        {
+          "name": "slot-id",
+          "widget": "string"
+        },
+        {
+          "name": "counter-sample-count",
+          "widget": "number"
+        },
+        {
+          "name": "flow-sample-count",
+          "widget": "number"
+        },
+        {
+          "name": "inbound-flow-sample-count",
+          "widget": "number"
+        },
+        {
+          "name": "outbound-flow-sample-count",
+          "widget": "number"
+        },
+        {
+          "name": "packet-count",
+          "widget": "number"
+        }
+      ],
+      "filterable": []
+    }
+  },
+  "tree": [
+    {
+      "path": "/sflow/interface-statistics",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/sflow/interface-statistics/interface-statistic",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/sflow/interface-statistics/interface-statistic/direction",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/sflow/interface-statistics/interface-statistic/flow-sample-count",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/sflow/interface-statistics/interface-statistic/interface-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/sflow/interface-statistics/interface-statistic/slot-id",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/sflow/sflow-enable",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/sflow/sflow-enable/collectors",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/sflow/sflow-enable/collectors/collector",
+      "kind": "list",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/sflow/sflow-enable/collectors/collector/collector-id",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/sflow/sflow-enable/collectors/collector/description",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/sflow/sflow-enable/collectors/collector/ip-server",
+      "kind": "container",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/sflow/sflow-enable/collectors/collector/ip-server/dscp-value",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/sflow/sflow-enable/collectors/collector/ip-server/ip-type",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "choice",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/sflow/sflow-enable/collectors/collector/ip-server/udp-port",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/sflow/sflow-enable/collectors/collector/ip-server/vpn-name",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/sflow/sflow-enable/collectors/collector/max-packet-length",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/sflow/sflow-enable/global",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/sflow/sflow-enable/global/agent-ipv4-address",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/sflow/sflow-enable/global/agent-ipv6-address",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/sflow/sflow-enable/global/extended-route-data",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/sflow/sflow-enable/global/source-ipv4-address",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/sflow/sflow-enable/global/source-ipv6-address",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/sflow/slot-statistics",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/sflow/slot-statistics/slot-statistic",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/sflow/slot-statistics/slot-statistic/collector-id",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/sflow/slot-statistics/slot-statistic/counter-sample-count",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/sflow/slot-statistics/slot-statistic/flow-sample-count",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/sflow/slot-statistics/slot-statistic/inbound-flow-sample-count",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/sflow/slot-statistics/slot-statistic/outbound-flow-sample-count",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/sflow/slot-statistics/slot-statistic/packet-count",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/sflow/slot-statistics/slot-statistic/slot-id",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "module": "ftpc",
+  "tabs": [
+    {
+      "name": "client",
+      "kind": "form"
+    },
+    {
+      "name": "global-vpn",
+      "kind": "form"
+    }
+  ],
+  "lists": {},
+  "tree": [
+    {
+      "path": "/ftpc/client",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/ftpc/client/ipv6-vpn-instance-name",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/ftpc/client/source-interface-name",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/ftpc/client/source-ipv4-address",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/ftpc/client/src-ipv6-addr",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/ftpc/global-vpn",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/ftpc/global-vpn/ipv6-vpn-name",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/ftpc/global-vpn/vpn-name",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    }
+  ]
+}

@@ -1,0 +1,3241 @@
+{
+  "module": "routing-policy",
+  "tabs": [
+    {
+      "name": "as-path-filters",
+      "kind": "list"
+    },
+    {
+      "name": "community-filters",
+      "kind": "list"
+    },
+    {
+      "name": "community-lists",
+      "kind": "list"
+    },
+    {
+      "name": "eth-tag-filters",
+      "kind": "list"
+    },
+    {
+      "name": "ext-community-encapsulation-filters",
+      "kind": "list"
+    },
+    {
+      "name": "ext-community-filters",
+      "kind": "list"
+    },
+    {
+      "name": "ext-community-segmented-nexthop-filters",
+      "kind": "list"
+    },
+    {
+      "name": "ext-community-soo-filters",
+      "kind": "list"
+    },
+    {
+      "name": "ipv4-prefix-filters",
+      "kind": "list"
+    },
+    {
+      "name": "ipv6-prefix-filters",
+      "kind": "list"
+    },
+    {
+      "name": "large-community-filters",
+      "kind": "list"
+    },
+    {
+      "name": "large-community-lists",
+      "kind": "list"
+    },
+    {
+      "name": "mac-filters",
+      "kind": "list"
+    },
+    {
+      "name": "policy-definitions",
+      "kind": "list"
+    },
+    {
+      "name": "rd-filters",
+      "kind": "list"
+    },
+    {
+      "name": "tunnel-selectors",
+      "kind": "list"
+    },
+    {
+      "name": "vni-filters",
+      "kind": "list"
+    }
+  ],
+  "lists": {
+    "as-path-filters": {
+      "keyField": "name",
+      "columns": [
+        {
+          "name": "name",
+          "widget": "string"
+        }
+      ],
+      "filterable": []
+    },
+    "community-filters": {
+      "keyField": "name",
+      "columns": [
+        {
+          "name": "name",
+          "widget": "string"
+        },
+        {
+          "name": "filter-type",
+          "widget": "enum"
+        }
+      ],
+      "filterable": []
+    },
+    "community-lists": {
+      "keyField": "name",
+      "columns": [
+        {
+          "name": "name",
+          "widget": "string"
+        }
+      ],
+      "filterable": []
+    },
+    "eth-tag-filters": {
+      "keyField": "name",
+      "columns": [
+        {
+          "name": "name",
+          "widget": "string"
+        }
+      ],
+      "filterable": []
+    },
+    "ext-community-encapsulation-filters": {
+      "keyField": "name",
+      "columns": [
+        {
+          "name": "name",
+          "widget": "string"
+        },
+        {
+          "name": "filter-type",
+          "widget": "enum"
+        }
+      ],
+      "filterable": []
+    },
+    "ext-community-filters": {
+      "keyField": "name",
+      "columns": [
+        {
+          "name": "name",
+          "widget": "string"
+        },
+        {
+          "name": "filter-type",
+          "widget": "enum"
+        }
+      ],
+      "filterable": []
+    },
+    "ext-community-segmented-nexthop-filters": {
+      "keyField": "name",
+      "columns": [
+        {
+          "name": "name",
+          "widget": "string"
+        },
+        {
+          "name": "filter-type",
+          "widget": "enum"
+        }
+      ],
+      "filterable": []
+    },
+    "ext-community-soo-filters": {
+      "keyField": "name",
+      "columns": [
+        {
+          "name": "name",
+          "widget": "string"
+        },
+        {
+          "name": "filter-type",
+          "widget": "enum"
+        }
+      ],
+      "filterable": []
+    },
+    "ipv4-prefix-filters": {
+      "keyField": "name",
+      "columns": [
+        {
+          "name": "name",
+          "widget": "string"
+        },
+        {
+          "name": "deny-count",
+          "widget": "number"
+        },
+        {
+          "name": "description",
+          "widget": "string"
+        },
+        {
+          "name": "permit-count",
+          "widget": "number"
+        }
+      ],
+      "filterable": []
+    },
+    "ipv6-prefix-filters": {
+      "keyField": "name",
+      "columns": [
+        {
+          "name": "name",
+          "widget": "string"
+        },
+        {
+          "name": "deny-count",
+          "widget": "number"
+        },
+        {
+          "name": "description",
+          "widget": "string"
+        },
+        {
+          "name": "permit-count",
+          "widget": "number"
+        }
+      ],
+      "filterable": []
+    },
+    "large-community-filters": {
+      "keyField": "name",
+      "columns": [
+        {
+          "name": "name",
+          "widget": "string"
+        },
+        {
+          "name": "filter-type",
+          "widget": "enum"
+        }
+      ],
+      "filterable": []
+    },
+    "large-community-lists": {
+      "keyField": "name",
+      "columns": [
+        {
+          "name": "name",
+          "widget": "string"
+        }
+      ],
+      "filterable": []
+    },
+    "mac-filters": {
+      "keyField": "name",
+      "columns": [
+        {
+          "name": "name",
+          "widget": "string"
+        }
+      ],
+      "filterable": []
+    },
+    "policy-definitions": {
+      "keyField": "name",
+      "columns": [
+        {
+          "name": "name",
+          "widget": "string"
+        }
+      ],
+      "filterable": []
+    },
+    "rd-filters": {
+      "keyField": "name",
+      "columns": [
+        {
+          "name": "name",
+          "widget": "string"
+        }
+      ],
+      "filterable": []
+    },
+    "tunnel-selectors": {
+      "keyField": "name",
+      "columns": [
+        {
+          "name": "name",
+          "widget": "string"
+        }
+      ],
+      "filterable": []
+    },
+    "vni-filters": {
+      "keyField": "name",
+      "columns": [
+        {
+          "name": "name",
+          "widget": "string"
+        }
+      ],
+      "filterable": []
+    }
+  },
+  "tree": [
+    {
+      "path": "/routing-policy/as-path-filters",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/as-path-filters/as-path-filter",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/as-path-filters/as-path-filter/name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/as-path-filters/as-path-filter/nodes",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/as-path-filters/as-path-filter/nodes/node",
+      "kind": "list",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/as-path-filters/as-path-filter/nodes/node/match-mode",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/routing-policy/as-path-filters/as-path-filter/nodes/node/regular",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/routing-policy/as-path-filters/as-path-filter/nodes/node/sequence",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/community-filters",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/community-filters/community-filter",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/community-filters/community-filter/advanced-nodes",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/community-filters/community-filter/advanced-nodes/advanced-node",
+      "kind": "list",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/community-filters/community-filter/advanced-nodes/advanced-node/match-mode",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/routing-policy/community-filters/community-filter/advanced-nodes/advanced-node/regular",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/routing-policy/community-filters/community-filter/advanced-nodes/advanced-node/sequence",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/community-filters/community-filter/basic-nodes",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/community-filters/community-filter/basic-nodes/basic-node",
+      "kind": "list",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/community-filters/community-filter/basic-nodes/basic-node/community-members",
+      "kind": "container",
+      "depth": 4,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/community-filters/community-filter/basic-nodes/basic-node/community-members/community-member",
+      "kind": "list",
+      "depth": 5,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/community-filters/community-filter/basic-nodes/basic-node/community-members/community-member/internet-strict-match",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/community-filters/community-filter/basic-nodes/basic-node/community-members/community-member/value",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/community-filters/community-filter/basic-nodes/basic-node/match-mode",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/routing-policy/community-filters/community-filter/basic-nodes/basic-node/sequence",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/community-filters/community-filter/filter-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/routing-policy/community-filters/community-filter/name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/community-lists",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/community-lists/community-list",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/community-lists/community-list/community-member",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "leaf-list",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/community-lists/community-list/name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/eth-tag-filters",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/eth-tag-filters/eth-tag-filter",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/eth-tag-filters/eth-tag-filter/eth-tag-members",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/eth-tag-filters/eth-tag-filter/eth-tag-members/eth-tag-member",
+      "kind": "list",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/eth-tag-filters/eth-tag-filter/eth-tag-members/eth-tag-member/value",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/eth-tag-filters/eth-tag-filter/name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/ext-community-encapsulation-filters",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/ext-community-encapsulation-filters/ext-community-encapsulation-filter",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/ext-community-encapsulation-filters/ext-community-encapsulation-filter/advanced-nodes",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/ext-community-encapsulation-filters/ext-community-encapsulation-filter/advanced-nodes/advanced-node",
+      "kind": "list",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/ext-community-encapsulation-filters/ext-community-encapsulation-filter/advanced-nodes/advanced-node/match-mode",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/routing-policy/ext-community-encapsulation-filters/ext-community-encapsulation-filter/advanced-nodes/advanced-node/regular",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/routing-policy/ext-community-encapsulation-filters/ext-community-encapsulation-filter/advanced-nodes/advanced-node/sequence",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/ext-community-encapsulation-filters/ext-community-encapsulation-filter/basic-nodes",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/ext-community-encapsulation-filters/ext-community-encapsulation-filter/basic-nodes/basic-node",
+      "kind": "list",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/ext-community-encapsulation-filters/ext-community-encapsulation-filter/basic-nodes/basic-node/ext-community-encapsulation-members",
+      "kind": "container",
+      "depth": 4,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/ext-community-encapsulation-filters/ext-community-encapsulation-filter/basic-nodes/basic-node/ext-community-encapsulation-members/ext-community-encapsulation-member",
+      "kind": "list",
+      "depth": 5,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/ext-community-encapsulation-filters/ext-community-encapsulation-filter/basic-nodes/basic-node/ext-community-encapsulation-members/ext-community-encapsulation-member/value",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/ext-community-encapsulation-filters/ext-community-encapsulation-filter/basic-nodes/basic-node/match-mode",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/routing-policy/ext-community-encapsulation-filters/ext-community-encapsulation-filter/basic-nodes/basic-node/sequence",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/ext-community-encapsulation-filters/ext-community-encapsulation-filter/filter-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/routing-policy/ext-community-encapsulation-filters/ext-community-encapsulation-filter/name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/ext-community-filters",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/ext-community-filters/ext-community-filter",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/ext-community-filters/ext-community-filter/advanced-nodes",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/ext-community-filters/ext-community-filter/advanced-nodes/advanced-node",
+      "kind": "list",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/ext-community-filters/ext-community-filter/advanced-nodes/advanced-node/match-mode",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/routing-policy/ext-community-filters/ext-community-filter/advanced-nodes/advanced-node/regular",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/routing-policy/ext-community-filters/ext-community-filter/advanced-nodes/advanced-node/sequence",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/ext-community-filters/ext-community-filter/basic-nodes",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/ext-community-filters/ext-community-filter/basic-nodes/basic-node",
+      "kind": "list",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/ext-community-filters/ext-community-filter/basic-nodes/basic-node/ext-community-members",
+      "kind": "container",
+      "depth": 4,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/ext-community-filters/ext-community-filter/basic-nodes/basic-node/ext-community-members/ext-community-member",
+      "kind": "list",
+      "depth": 5,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/ext-community-filters/ext-community-filter/basic-nodes/basic-node/ext-community-members/ext-community-member/value",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/ext-community-filters/ext-community-filter/basic-nodes/basic-node/match-mode",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/routing-policy/ext-community-filters/ext-community-filter/basic-nodes/basic-node/sequence",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/ext-community-filters/ext-community-filter/filter-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/routing-policy/ext-community-filters/ext-community-filter/name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/ext-community-segmented-nexthop-filters",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/ext-community-segmented-nexthop-filters/ext-community-segmented-nexthop-filter",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/ext-community-segmented-nexthop-filters/ext-community-segmented-nexthop-filter/advanced-nodes",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/ext-community-segmented-nexthop-filters/ext-community-segmented-nexthop-filter/advanced-nodes/advanced-node",
+      "kind": "list",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/ext-community-segmented-nexthop-filters/ext-community-segmented-nexthop-filter/advanced-nodes/advanced-node/match-mode",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/routing-policy/ext-community-segmented-nexthop-filters/ext-community-segmented-nexthop-filter/advanced-nodes/advanced-node/regular",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/routing-policy/ext-community-segmented-nexthop-filters/ext-community-segmented-nexthop-filter/advanced-nodes/advanced-node/sequence",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/ext-community-segmented-nexthop-filters/ext-community-segmented-nexthop-filter/basic-nodes",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/ext-community-segmented-nexthop-filters/ext-community-segmented-nexthop-filter/basic-nodes/basic-node",
+      "kind": "list",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/ext-community-segmented-nexthop-filters/ext-community-segmented-nexthop-filter/basic-nodes/basic-node/ext-community-segmented-nexthop-members",
+      "kind": "container",
+      "depth": 4,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/ext-community-segmented-nexthop-filters/ext-community-segmented-nexthop-filter/basic-nodes/basic-node/ext-community-segmented-nexthop-members/ext-community-segmented-nexthop-member",
+      "kind": "list",
+      "depth": 5,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/ext-community-segmented-nexthop-filters/ext-community-segmented-nexthop-filter/basic-nodes/basic-node/ext-community-segmented-nexthop-members/ext-community-segmented-nexthop-member/value",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/ext-community-segmented-nexthop-filters/ext-community-segmented-nexthop-filter/basic-nodes/basic-node/match-mode",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/routing-policy/ext-community-segmented-nexthop-filters/ext-community-segmented-nexthop-filter/basic-nodes/basic-node/sequence",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/ext-community-segmented-nexthop-filters/ext-community-segmented-nexthop-filter/filter-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/routing-policy/ext-community-segmented-nexthop-filters/ext-community-segmented-nexthop-filter/name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/ext-community-soo-filters",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/ext-community-soo-filters/ext-community-soo-filter",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/ext-community-soo-filters/ext-community-soo-filter/advanced-nodes",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/ext-community-soo-filters/ext-community-soo-filter/advanced-nodes/advanced-node",
+      "kind": "list",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/ext-community-soo-filters/ext-community-soo-filter/advanced-nodes/advanced-node/match-mode",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/routing-policy/ext-community-soo-filters/ext-community-soo-filter/advanced-nodes/advanced-node/regular",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/routing-policy/ext-community-soo-filters/ext-community-soo-filter/advanced-nodes/advanced-node/sequence",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/ext-community-soo-filters/ext-community-soo-filter/basic-nodes",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/ext-community-soo-filters/ext-community-soo-filter/basic-nodes/basic-node",
+      "kind": "list",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/ext-community-soo-filters/ext-community-soo-filter/basic-nodes/basic-node/community-member",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "leaf-list",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/ext-community-soo-filters/ext-community-soo-filter/basic-nodes/basic-node/match-mode",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/routing-policy/ext-community-soo-filters/ext-community-soo-filter/basic-nodes/basic-node/sequence",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/ext-community-soo-filters/ext-community-soo-filter/filter-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/routing-policy/ext-community-soo-filters/ext-community-soo-filter/name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/ipv4-prefix-filters",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/ipv4-prefix-filters/ipv4-prefix-filter",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/ipv4-prefix-filters/ipv4-prefix-filter/deny-count",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/ipv4-prefix-filters/ipv4-prefix-filter/description",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/ipv4-prefix-filters/ipv4-prefix-filter/name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/ipv4-prefix-filters/ipv4-prefix-filter/nodes",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/ipv4-prefix-filters/ipv4-prefix-filter/nodes/node",
+      "kind": "list",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/ipv4-prefix-filters/ipv4-prefix-filter/nodes/node/ip-address",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/routing-policy/ipv4-prefix-filters/ipv4-prefix-filter/nodes/node/masklength",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/routing-policy/ipv4-prefix-filters/ipv4-prefix-filter/nodes/node/masklength-lower",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/ipv4-prefix-filters/ipv4-prefix-filter/nodes/node/masklength-upper",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/ipv4-prefix-filters/ipv4-prefix-filter/nodes/node/match-mode",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/routing-policy/ipv4-prefix-filters/ipv4-prefix-filter/nodes/node/match-network",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/ipv4-prefix-filters/ipv4-prefix-filter/nodes/node/sequence",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/ipv4-prefix-filters/ipv4-prefix-filter/permit-count",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/ipv6-prefix-filters",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/ipv6-prefix-filters/ipv6-prefix-filter",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/ipv6-prefix-filters/ipv6-prefix-filter/deny-count",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/ipv6-prefix-filters/ipv6-prefix-filter/description",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/ipv6-prefix-filters/ipv6-prefix-filter/name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/ipv6-prefix-filters/ipv6-prefix-filter/nodes",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/ipv6-prefix-filters/ipv6-prefix-filter/nodes/node",
+      "kind": "list",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/ipv6-prefix-filters/ipv6-prefix-filter/nodes/node/ipv6-address",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/routing-policy/ipv6-prefix-filters/ipv6-prefix-filter/nodes/node/masklength",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/routing-policy/ipv6-prefix-filters/ipv6-prefix-filter/nodes/node/masklength-lower",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/ipv6-prefix-filters/ipv6-prefix-filter/nodes/node/masklength-upper",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/ipv6-prefix-filters/ipv6-prefix-filter/nodes/node/match-mode",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/routing-policy/ipv6-prefix-filters/ipv6-prefix-filter/nodes/node/match-network",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/ipv6-prefix-filters/ipv6-prefix-filter/nodes/node/sequence",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/ipv6-prefix-filters/ipv6-prefix-filter/permit-count",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/large-community-filters",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/large-community-filters/large-community-filter",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/large-community-filters/large-community-filter/advanced-nodes",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/large-community-filters/large-community-filter/advanced-nodes/advanced-node",
+      "kind": "list",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/large-community-filters/large-community-filter/advanced-nodes/advanced-node/match-mode",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/routing-policy/large-community-filters/large-community-filter/advanced-nodes/advanced-node/regular",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/routing-policy/large-community-filters/large-community-filter/advanced-nodes/advanced-node/sequence",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/large-community-filters/large-community-filter/basic-nodes",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/large-community-filters/large-community-filter/basic-nodes/basic-node",
+      "kind": "list",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/large-community-filters/large-community-filter/basic-nodes/basic-node/large-community-members",
+      "kind": "container",
+      "depth": 4,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/large-community-filters/large-community-filter/basic-nodes/basic-node/large-community-members/large-community-member",
+      "kind": "list",
+      "depth": 5,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/large-community-filters/large-community-filter/basic-nodes/basic-node/large-community-members/large-community-member/value",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/large-community-filters/large-community-filter/basic-nodes/basic-node/match-mode",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/routing-policy/large-community-filters/large-community-filter/basic-nodes/basic-node/sequence",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/large-community-filters/large-community-filter/filter-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/routing-policy/large-community-filters/large-community-filter/name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/large-community-lists",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/large-community-lists/large-community-list",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/large-community-lists/large-community-list/large-community-members",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/large-community-lists/large-community-list/large-community-members/large-community-member",
+      "kind": "list",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/large-community-lists/large-community-list/large-community-members/large-community-member/value",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/large-community-lists/large-community-list/name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/mac-filters",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/mac-filters/mac-filter",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/mac-filters/mac-filter/mac-members",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/mac-filters/mac-filter/mac-members/mac-member",
+      "kind": "list",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/mac-filters/mac-filter/mac-members/mac-member/value",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/mac-filters/mac-filter/name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node",
+      "kind": "list",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions",
+      "kind": "container",
+      "depth": 4,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-aigp",
+      "kind": "container",
+      "depth": 5,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-aigp/operation",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-aigp/value",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-as-path",
+      "kind": "container",
+      "depth": 5,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-as-path/as-path-string",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "choice",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-as-path/operation",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-community",
+      "kind": "container",
+      "depth": 5,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-community/operation",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-community/set-community",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "choice",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-community-filter-delete",
+      "kind": "container",
+      "depth": 5,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-community-filter-delete/name",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-cost",
+      "kind": "container",
+      "depth": 5,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-cost/operation",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-cost/value",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-cost-type",
+      "kind": "container",
+      "depth": 5,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-cost-type/value",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-dampening",
+      "kind": "container",
+      "depth": 5,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-dampening/ceiling-value",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-dampening/half-life-value",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-dampening/reuse-value",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-dampening/suppress-value",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-entropy-label-none",
+      "kind": "container",
+      "depth": 5,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-entropy-label-none/entropy-label-none",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ext-community",
+      "kind": "container",
+      "depth": 5,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ext-community/ext-community-members",
+      "kind": "container",
+      "depth": 6,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ext-community/ext-community-members/ext-community-member",
+      "kind": "list",
+      "depth": 7,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ext-community/ext-community-members/ext-community-member/value",
+      "kind": "leaf",
+      "depth": 8,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ext-community/operation",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ext-community-color",
+      "kind": "container",
+      "depth": 5,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ext-community-color/value",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ext-community-redirect-ip",
+      "kind": "container",
+      "depth": 5,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ext-community-redirect-ip/value",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ext-community-redirect-vpn",
+      "kind": "container",
+      "depth": 5,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ext-community-redirect-vpn/value",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ext-community-soo",
+      "kind": "container",
+      "depth": 5,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ext-community-soo/communities",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "leaf-list",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ext-community-soo/operation",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ipv4-gateway",
+      "kind": "container",
+      "depth": 5,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ipv4-gateway/address",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ipv4-gateway/gateway-type",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ipv4-nexthop",
+      "kind": "container",
+      "depth": 5,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ipv4-nexthop/ipv4-nexthop-set",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "choice",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ipv6-gateway",
+      "kind": "container",
+      "depth": 5,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ipv6-gateway/address",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ipv6-gateway/gateway-type",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ipv6-nexthop",
+      "kind": "container",
+      "depth": 5,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ipv6-nexthop/ipv6-nexthop-set",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "choice",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-large-community",
+      "kind": "container",
+      "depth": 5,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-large-community/operation",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-large-community/set-large-community",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "choice",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-local-preference",
+      "kind": "container",
+      "depth": 5,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-local-preference/operation",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-local-preference/value",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-mpls-label",
+      "kind": "container",
+      "depth": 5,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-mpls-label/mpls-label",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-origin",
+      "kind": "container",
+      "depth": 5,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-origin/origin-type",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-origin/value",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-peer-id",
+      "kind": "container",
+      "depth": 5,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-peer-id/value",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-preference",
+      "kind": "container",
+      "depth": 5,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-preference/value",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-preferred",
+      "kind": "container",
+      "depth": 5,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-preferred/value",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-priority",
+      "kind": "container",
+      "depth": 5,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-priority/value",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-qos-parameter",
+      "kind": "container",
+      "depth": 5,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-qos-parameter/set-qos-parameter",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "choice",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-route-type",
+      "kind": "container",
+      "depth": 5,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-route-type/value",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-tag",
+      "kind": "container",
+      "depth": 5,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-tag/value",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-traffic",
+      "kind": "container",
+      "depth": 5,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-traffic/value",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions",
+      "kind": "container",
+      "depth": 4,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-as-path-filters",
+      "kind": "container",
+      "depth": 5,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-as-path-filters/match-as-path-filter",
+      "kind": "list",
+      "depth": 6,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-as-path-filters/match-as-path-filter/filter-name",
+      "kind": "leaf",
+      "depth": 7,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-as-path-length",
+      "kind": "container",
+      "depth": 5,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-as-path-length/as-path-length-set",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "choice",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-community-filters",
+      "kind": "container",
+      "depth": 5,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-community-filters/match-community-filter",
+      "kind": "list",
+      "depth": 6,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-community-filters/match-community-filter/community-filter-ref",
+      "kind": "leaf",
+      "depth": 7,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-community-filters/match-community-filter/match-type",
+      "kind": "leaf",
+      "depth": 7,
+      "dataType": "choice",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-cost",
+      "kind": "container",
+      "depth": 5,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-cost/cost-set",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "choice",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-eth-tag-filter",
+      "kind": "container",
+      "depth": 5,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-eth-tag-filter/eth-tag-filter-ref",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ext-community-encapsulation-filter",
+      "kind": "container",
+      "depth": 5,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ext-community-encapsulation-filter/ext-community-encapsulation-list-ref",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ext-community-filters",
+      "kind": "container",
+      "depth": 5,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ext-community-filters/match-ext-community-filter",
+      "kind": "list",
+      "depth": 6,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ext-community-filters/match-ext-community-filter/ext-community-filter-ref",
+      "kind": "leaf",
+      "depth": 7,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ext-community-segmented-nexthop-filter",
+      "kind": "container",
+      "depth": 5,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ext-community-segmented-nexthop-filter/ext-community-segmented-nexthop-filter-ref",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ext-community-soo",
+      "kind": "container",
+      "depth": 5,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ext-community-soo/ext-community-soo-filter-ref",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-group-address",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "choice",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-interfaces",
+      "kind": "container",
+      "depth": 5,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-interfaces/match-interface",
+      "kind": "list",
+      "depth": 6,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-interfaces/match-interface/interface-name",
+      "kind": "leaf",
+      "depth": 7,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ipv4-destination",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "choice",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ipv4-nexthop",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "choice",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ipv4-route-source",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "choice",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ipv6-destination",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "choice",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ipv6-nexthop",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "choice",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ipv6-route-source",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "choice",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-l2vni-filter",
+      "kind": "container",
+      "depth": 5,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-l2vni-filter/l2vni-filter-ref",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-l2vni-filter/match-type",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-l3vni-filter",
+      "kind": "container",
+      "depth": 5,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-l3vni-filter/l3vni-filter-ref",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-l3vni-filter/match-type",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-large-community-filters",
+      "kind": "container",
+      "depth": 5,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-large-community-filters/match-large-community-filter",
+      "kind": "list",
+      "depth": 6,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-large-community-filters/match-large-community-filter/community-filter-ref",
+      "kind": "leaf",
+      "depth": 7,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-large-community-filters/match-large-community-filter/match-type",
+      "kind": "leaf",
+      "depth": 7,
+      "dataType": "choice",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-mac-filter",
+      "kind": "container",
+      "depth": 5,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-mac-filter/mac-filter-ref",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-mpls-label",
+      "kind": "container",
+      "depth": 5,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-mpls-label/mpls-label",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-mpls-label/mpls-label2",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-preference",
+      "kind": "container",
+      "depth": 5,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-preference/value",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-prefix-mod",
+      "kind": "container",
+      "depth": 5,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-prefix-mod/mod-result",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-prefix-mod/mod-value",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-protocols",
+      "kind": "container",
+      "depth": 5,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-protocols/match-protocol",
+      "kind": "list",
+      "depth": 6,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-protocols/match-protocol/protocol",
+      "kind": "leaf",
+      "depth": 7,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-rd-filter",
+      "kind": "container",
+      "depth": 5,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-rd-filter/rd-filter-ref",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-route-originator",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "choice",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-route-types",
+      "kind": "container",
+      "depth": 5,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-route-types/match-route-type",
+      "kind": "list",
+      "depth": 6,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-route-types/match-route-type/route-type",
+      "kind": "leaf",
+      "depth": 7,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-rpki",
+      "kind": "container",
+      "depth": 5,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-rpki/origin-as-validation",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-tag",
+      "kind": "container",
+      "depth": 5,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-tag/value",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/description",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/match-count",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/match-mode",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/next-node-choice",
+      "kind": "container",
+      "depth": 4,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/next-node-choice/is-goto-next-node",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/next-node-choice/next-node-sequence",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/sequence",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/rd-filters",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/rd-filters/rd-filter",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/rd-filters/rd-filter/name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/rd-filters/rd-filter/nodes",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/rd-filters/rd-filter/nodes/node",
+      "kind": "list",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/rd-filters/rd-filter/nodes/node/match-mode",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/routing-policy/rd-filters/rd-filter/nodes/node/rd-strings",
+      "kind": "container",
+      "depth": 4,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/rd-filters/rd-filter/nodes/node/rd-strings/rd-string",
+      "kind": "list",
+      "depth": 5,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/rd-filters/rd-filter/nodes/node/rd-strings/rd-string/value",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/rd-filters/rd-filter/nodes/node/sequence",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/tunnel-selectors",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/tunnel-selectors/tunnel-selector",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/tunnel-selectors/tunnel-selector/name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/tunnel-selectors/tunnel-selector/nodes",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/tunnel-selectors/tunnel-selector/nodes/node",
+      "kind": "list",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/tunnel-selectors/tunnel-selector/nodes/node/actions",
+      "kind": "container",
+      "depth": 4,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/tunnel-selectors/tunnel-selector/nodes/node/actions/apply-tunnel-policy",
+      "kind": "container",
+      "depth": 5,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/tunnel-selectors/tunnel-selector/nodes/node/actions/apply-tunnel-policy/tunnel-policy-ref",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/tunnel-selectors/tunnel-selector/nodes/node/conditions",
+      "kind": "container",
+      "depth": 4,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/tunnel-selectors/tunnel-selector/nodes/node/conditions/match-community-filters",
+      "kind": "container",
+      "depth": 5,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/tunnel-selectors/tunnel-selector/nodes/node/conditions/match-community-filters/match-community-filter",
+      "kind": "list",
+      "depth": 6,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/tunnel-selectors/tunnel-selector/nodes/node/conditions/match-community-filters/match-community-filter/community-filter-ref",
+      "kind": "leaf",
+      "depth": 7,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/tunnel-selectors/tunnel-selector/nodes/node/conditions/match-community-filters/match-community-filter/match-type",
+      "kind": "leaf",
+      "depth": 7,
+      "dataType": "choice",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/tunnel-selectors/tunnel-selector/nodes/node/conditions/match-ipv4-destination",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "choice",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/tunnel-selectors/tunnel-selector/nodes/node/conditions/match-ipv4-nexthop",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "choice",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/tunnel-selectors/tunnel-selector/nodes/node/conditions/match-ipv4-route-source",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "choice",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/tunnel-selectors/tunnel-selector/nodes/node/conditions/match-ipv6-nexthop",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "choice",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/tunnel-selectors/tunnel-selector/nodes/node/conditions/match-rd-filter",
+      "kind": "container",
+      "depth": 5,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/tunnel-selectors/tunnel-selector/nodes/node/conditions/match-rd-filter/rd-filter-ref",
+      "kind": "leaf",
+      "depth": 6,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/tunnel-selectors/tunnel-selector/nodes/node/match-mode",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/routing-policy/tunnel-selectors/tunnel-selector/nodes/node/sequence",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/vni-filters",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/vni-filters/vni-filter",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/vni-filters/vni-filter/name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/vni-filters/vni-filter/vni-members",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/vni-filters/vni-filter/vni-members/vni-member",
+      "kind": "list",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/routing-policy/vni-filters/vni-filter/vni-members/vni-member/value",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    }
+  ]
+}

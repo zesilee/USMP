@@ -1,0 +1,465 @@
+{
+  "module": "multicast",
+  "title": "multicast",
+  "vendor": "huawei",
+  "fields": [
+    {
+      "path": "/multicast/default-parameter",
+      "type": "group",
+      "label": "default-parameter",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/multicast/default-parameter/load-splitting-rule",
+          "type": "string",
+          "label": "load-splitting-rule",
+          "readonly": true
+        },
+        {
+          "path": "/multicast/default-parameter/multi-topology",
+          "type": "string",
+          "label": "multi-topology",
+          "readonly": true
+        },
+        {
+          "path": "/multicast/default-parameter/route-selection-rule",
+          "type": "string",
+          "label": "route-selection-rule",
+          "readonly": true
+        }
+      ]
+    },
+    {
+      "path": "/multicast/global",
+      "type": "group",
+      "label": "global",
+      "fields": [
+        {
+          "path": "/multicast/global/ipv4",
+          "type": "group",
+          "label": "ipv4",
+          "fields": [
+            {
+              "path": "/multicast/global/ipv4/bas-igmp-extranet-enable",
+              "type": "boolean",
+              "label": "bas-igmp-extranet-enable"
+            },
+            {
+              "path": "/multicast/global/ipv4/qinq-extranet-enable",
+              "type": "boolean",
+              "label": "qinq-extranet-enable"
+            },
+            {
+              "path": "/multicast/global/ipv4/vbdif-extranet-enable",
+              "type": "boolean",
+              "label": "vbdif-extranet-enable"
+            },
+            {
+              "path": "/multicast/global/ipv4/vlanif-extranet-enable",
+              "type": "boolean",
+              "label": "vlanif-extranet-enable"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/multicast/global-outgoing-interface-limit-counts",
+      "type": "group",
+      "label": "global-outgoing-interface-limit-counts",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/multicast/global-outgoing-interface-limit-counts/global-outgoing-interface-limit-count",
+          "type": "list",
+          "label": "global-outgoing-interface-limit-count",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/multicast/global-outgoing-interface-limit-counts/global-outgoing-interface-limit-count/address-family",
+              "type": "enum",
+              "label": "address-family",
+              "options": [
+                {
+                  "label": "ipv4unicast",
+                  "value": "ipv4unicast"
+                },
+                {
+                  "label": "ipv6unicast",
+                  "value": "ipv6unicast"
+                }
+              ],
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/multicast/global-outgoing-interface-limit-counts/global-outgoing-interface-limit-count/limit-type",
+              "type": "enum",
+              "label": "limit-type",
+              "options": [
+                {
+                  "label": "pim-sm",
+                  "value": "pim-sm"
+                }
+              ],
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/multicast/global-outgoing-interface-limit-counts/global-outgoing-interface-limit-count/limit-value",
+              "type": "number",
+              "label": "limit-value",
+              "minimum": 1,
+              "maximum": 4294967295,
+              "readonly": true
+            },
+            {
+              "path": "/multicast/global-outgoing-interface-limit-counts/global-outgoing-interface-limit-count/lower-threshold-value",
+              "type": "number",
+              "label": "lower-threshold-value",
+              "minimum": 1,
+              "maximum": 4294967295,
+              "readonly": true
+            },
+            {
+              "path": "/multicast/global-outgoing-interface-limit-counts/global-outgoing-interface-limit-count/source-group-outgoing-interface-count",
+              "type": "number",
+              "label": "source-group-outgoing-interface-count",
+              "readonly": true
+            },
+            {
+              "path": "/multicast/global-outgoing-interface-limit-counts/global-outgoing-interface-limit-count/star-group-outgoing-interface-count",
+              "type": "number",
+              "label": "star-group-outgoing-interface-count",
+              "readonly": true
+            },
+            {
+              "path": "/multicast/global-outgoing-interface-limit-counts/global-outgoing-interface-limit-count/total-outgoing-interface-count",
+              "type": "number",
+              "label": "total-outgoing-interface-count",
+              "readonly": true
+            },
+            {
+              "path": "/multicast/global-outgoing-interface-limit-counts/global-outgoing-interface-limit-count/upper-threshold-value",
+              "type": "number",
+              "label": "upper-threshold-value",
+              "minimum": 1,
+              "maximum": 4294967295,
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/multicast/interface-default-parameter",
+      "type": "group",
+      "label": "interface-default-parameter",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/multicast/interface-default-parameter/minimum-ttl",
+          "type": "number",
+          "label": "minimum-ttl",
+          "minimum": 1,
+          "maximum": 255,
+          "readonly": true
+        }
+      ]
+    },
+    {
+      "path": "/multicast/invalid-packet-max-count",
+      "type": "group",
+      "label": "invalid-packet-max-count",
+      "fields": [
+        {
+          "path": "/multicast/invalid-packet-max-count/ipv4",
+          "type": "group",
+          "label": "ipv4",
+          "fields": [
+            {
+              "path": "/multicast/invalid-packet-max-count/ipv4/igmp-packets",
+              "type": "number",
+              "label": "igmp-packets",
+              "minimum": 1,
+              "maximum": 100
+            },
+            {
+              "path": "/multicast/invalid-packet-max-count/ipv4/igmp-snooping-packets",
+              "type": "number",
+              "label": "igmp-snooping-packets",
+              "minimum": 1,
+              "maximum": 100
+            },
+            {
+              "path": "/multicast/invalid-packet-max-count/ipv4/msdp-packets",
+              "type": "number",
+              "label": "msdp-packets",
+              "minimum": 1,
+              "maximum": 100
+            },
+            {
+              "path": "/multicast/invalid-packet-max-count/ipv4/mvpn-packets",
+              "type": "number",
+              "label": "mvpn-packets",
+              "minimum": 1,
+              "maximum": 100
+            },
+            {
+              "path": "/multicast/invalid-packet-max-count/ipv4/pim-packets",
+              "type": "number",
+              "label": "pim-packets",
+              "minimum": 1,
+              "maximum": 100
+            }
+          ]
+        },
+        {
+          "path": "/multicast/invalid-packet-max-count/ipv6",
+          "type": "group",
+          "label": "ipv6",
+          "fields": [
+            {
+              "path": "/multicast/invalid-packet-max-count/ipv6/mld-packets",
+              "type": "number",
+              "label": "mld-packets",
+              "minimum": 1,
+              "maximum": 100
+            },
+            {
+              "path": "/multicast/invalid-packet-max-count/ipv6/mld-snooping-packets",
+              "type": "number",
+              "label": "mld-snooping-packets",
+              "minimum": 1,
+              "maximum": 100
+            },
+            {
+              "path": "/multicast/invalid-packet-max-count/ipv6/pim-packets",
+              "type": "number",
+              "label": "pim-packets",
+              "minimum": 1,
+              "maximum": 100
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/multicast/session-car",
+      "type": "group",
+      "label": "session-car",
+      "fields": [
+        {
+          "path": "/multicast/session-car/pim",
+          "type": "group",
+          "label": "pim",
+          "must": [
+            {
+              "expr": "pir-interval\u003e=cir-interval"
+            },
+            {
+              "expr": "pbs-interval\u003e=cbs-interval"
+            }
+          ],
+          "fields": [
+            {
+              "path": "/multicast/session-car/pim/cbs-interval",
+              "type": "number",
+              "label": "cbs-interval",
+              "maximum": 1000000
+            },
+            {
+              "path": "/multicast/session-car/pim/cir-interval",
+              "type": "number",
+              "label": "cir-interval",
+              "maximum": 1000000
+            },
+            {
+              "path": "/multicast/session-car/pim/enable",
+              "type": "boolean",
+              "label": "enable"
+            },
+            {
+              "path": "/multicast/session-car/pim/pbs-interval",
+              "type": "number",
+              "label": "pbs-interval",
+              "maximum": 10000000
+            },
+            {
+              "path": "/multicast/session-car/pim/pir-interval",
+              "type": "number",
+              "label": "pir-interval",
+              "maximum": 1000000
+            }
+          ]
+        },
+        {
+          "path": "/multicast/session-car/pim-ipv6",
+          "type": "group",
+          "label": "pim-ipv6",
+          "must": [
+            {
+              "expr": "pir-interval\u003e=cir-interval"
+            },
+            {
+              "expr": "pbs-interval\u003e=cbs-interval"
+            }
+          ],
+          "fields": [
+            {
+              "path": "/multicast/session-car/pim-ipv6/cbs-interval",
+              "type": "number",
+              "label": "cbs-interval",
+              "maximum": 1000000
+            },
+            {
+              "path": "/multicast/session-car/pim-ipv6/cir-interval",
+              "type": "number",
+              "label": "cir-interval",
+              "maximum": 1000000
+            },
+            {
+              "path": "/multicast/session-car/pim-ipv6/enable",
+              "type": "boolean",
+              "label": "enable"
+            },
+            {
+              "path": "/multicast/session-car/pim-ipv6/pbs-interval",
+              "type": "number",
+              "label": "pbs-interval",
+              "maximum": 10000000
+            },
+            {
+              "path": "/multicast/session-car/pim-ipv6/pir-interval",
+              "type": "number",
+              "label": "pir-interval",
+              "maximum": 1000000
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/multicast/ssm-mapping-policys",
+      "type": "group",
+      "label": "ssm-mapping-policys",
+      "fields": [
+        {
+          "path": "/multicast/ssm-mapping-policys/ssm-mapping-policy",
+          "type": "list",
+          "label": "ssm-mapping-policy",
+          "fields": [
+            {
+              "path": "/multicast/ssm-mapping-policys/ssm-mapping-policy/address-family",
+              "type": "enum",
+              "label": "address-family",
+              "options": [
+                {
+                  "label": "ipv4unicast",
+                  "value": "ipv4unicast"
+                },
+                {
+                  "label": "ipv6unicast",
+                  "value": "ipv6unicast"
+                }
+              ],
+              "isKey": true
+            },
+            {
+              "path": "/multicast/ssm-mapping-policys/ssm-mapping-policy/groups",
+              "type": "group",
+              "label": "groups",
+              "fields": [
+                {
+                  "path": "/multicast/ssm-mapping-policys/ssm-mapping-policy/groups/group",
+                  "type": "list",
+                  "label": "group",
+                  "fields": [
+                    {
+                      "path": "/multicast/ssm-mapping-policys/ssm-mapping-policy/groups/group/group-address",
+                      "type": "string",
+                      "label": "group-address",
+                      "isKey": true
+                    },
+                    {
+                      "path": "/multicast/ssm-mapping-policys/ssm-mapping-policy/groups/group/mask-length",
+                      "type": "number",
+                      "label": "mask-length",
+                      "maximum": 128,
+                      "isKey": true
+                    },
+                    {
+                      "path": "/multicast/ssm-mapping-policys/ssm-mapping-policy/groups/group/source-address",
+                      "type": "string",
+                      "label": "source-address",
+                      "isKey": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/multicast/ssm-mapping-policys/ssm-mapping-policy/policy-name",
+              "type": "string",
+              "label": "policy-name",
+              "isKey": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/multicast/trap-parameter",
+      "type": "group",
+      "label": "trap-parameter",
+      "fields": [
+        {
+          "path": "/multicast/trap-parameter/pim-notification-interval",
+          "type": "group",
+          "label": "pim-notification-interval",
+          "fields": [
+            {
+              "path": "/multicast/trap-parameter/pim-notification-interval/interface-election-dr",
+              "type": "number",
+              "label": "interface-election-dr",
+              "maximum": 65535
+            },
+            {
+              "path": "/multicast/trap-parameter/pim-notification-interval/invalid-join-prune",
+              "type": "number",
+              "label": "invalid-join-prune",
+              "minimum": 10,
+              "maximum": 65535
+            },
+            {
+              "path": "/multicast/trap-parameter/pim-notification-interval/invalid-register",
+              "type": "number",
+              "label": "invalid-register",
+              "minimum": 10,
+              "maximum": 65535
+            },
+            {
+              "path": "/multicast/trap-parameter/pim-notification-interval/neighbor-loss",
+              "type": "number",
+              "label": "neighbor-loss",
+              "maximum": 65535
+            },
+            {
+              "path": "/multicast/trap-parameter/pim-notification-interval/new-neighbor",
+              "type": "number",
+              "label": "new-neighbor",
+              "maximum": 65535
+            },
+            {
+              "path": "/multicast/trap-parameter/pim-notification-interval/rp-mapping-change",
+              "type": "number",
+              "label": "rp-mapping-change",
+              "maximum": 65535
+            }
+          ]
+        }
+      ],
+      "presence": true
+    }
+  ]
+}

@@ -1,0 +1,256 @@
+{
+  "module": "vty",
+  "title": "vty",
+  "vendor": "huawei",
+  "fields": [
+    {
+      "path": "/vty/line-global",
+      "type": "group",
+      "label": "line-global",
+      "fields": [
+        {
+          "path": "/vty/line-global/max-users",
+          "type": "number",
+          "label": "max-users",
+          "maximum": 21,
+          "readonly": true
+        },
+        {
+          "path": "/vty/line-global/password-lock",
+          "type": "boolean",
+          "label": "password-lock"
+        },
+        {
+          "path": "/vty/line-global/security-policy",
+          "type": "boolean",
+          "label": "security-policy"
+        }
+      ]
+    },
+    {
+      "path": "/vty/lines",
+      "type": "group",
+      "label": "lines",
+      "fields": [
+        {
+          "path": "/vty/lines/line",
+          "type": "list",
+          "label": "line",
+          "fields": [
+            {
+              "path": "/vty/lines/line/acl4-inbound",
+              "type": "string",
+              "label": "acl4-inbound",
+              "must": [
+                {
+                  "expr": "/acl:acl/acl:groups/acl:group[acl:identity=current()]/acl:type='basic' or /acl:acl/acl:groups/acl:group[acl:identity=current()]/acl:type='advance'"
+                }
+              ],
+              "supportFilter": true
+            },
+            {
+              "path": "/vty/lines/line/acl4-inbound-num",
+              "type": "string",
+              "label": "acl4-inbound-num",
+              "must": [
+                {
+                  "expr": "/acl:acl/acl:groups/acl:group[acl:identity=current()]/acl:type='basic' or /acl:acl/acl:groups/acl:group[acl:identity=current()]/acl:type='advance'"
+                }
+              ],
+              "supportFilter": true
+            },
+            {
+              "path": "/vty/lines/line/acl4-outbound",
+              "type": "string",
+              "label": "acl4-outbound",
+              "must": [
+                {
+                  "expr": "/acl:acl/acl:groups/acl:group[acl:identity=current()]/acl:type='basic' or /acl:acl/acl:groups/acl:group[acl:identity=current()]/acl:type='advance'"
+                }
+              ],
+              "supportFilter": true
+            },
+            {
+              "path": "/vty/lines/line/acl4-outbound-num",
+              "type": "string",
+              "label": "acl4-outbound-num",
+              "must": [
+                {
+                  "expr": "/acl:acl/acl:groups/acl:group[acl:identity=current()]/acl:type='basic' or /acl:acl/acl:groups/acl:group[acl:identity=current()]/acl:type='advance'"
+                }
+              ],
+              "supportFilter": true
+            },
+            {
+              "path": "/vty/lines/line/acl6-inbound",
+              "type": "string",
+              "label": "acl6-inbound",
+              "must": [
+                {
+                  "expr": "/acl:acl/acl:group6s/acl:group6[acl:identity=current()]/acl:type='basic' or /acl:acl/acl:group6s/acl:group6[acl:identity=current()]/acl:type='advance'"
+                }
+              ],
+              "supportFilter": true
+            },
+            {
+              "path": "/vty/lines/line/acl6-inbound-num",
+              "type": "string",
+              "label": "acl6-inbound-num",
+              "must": [
+                {
+                  "expr": "/acl:acl/acl:group6s/acl:group6[acl:identity=current()]/acl:type='basic' or /acl:acl/acl:group6s/acl:group6[acl:identity=current()]/acl:type='advance'"
+                }
+              ],
+              "supportFilter": true
+            },
+            {
+              "path": "/vty/lines/line/acl6-outbound",
+              "type": "string",
+              "label": "acl6-outbound",
+              "must": [
+                {
+                  "expr": "/acl:acl/acl:group6s/acl:group6[acl:identity=current()]/acl:type='basic' or /acl:acl/acl:group6s/acl:group6[acl:identity=current()]/acl:type='advance'"
+                }
+              ],
+              "supportFilter": true
+            },
+            {
+              "path": "/vty/lines/line/acl6-outbound-num",
+              "type": "string",
+              "label": "acl6-outbound-num",
+              "must": [
+                {
+                  "expr": "/acl:acl/acl:group6s/acl:group6[acl:identity=current()]/acl:type='basic' or /acl:acl/acl:group6s/acl:group6[acl:identity=current()]/acl:type='advance'"
+                }
+              ],
+              "supportFilter": true
+            },
+            {
+              "path": "/vty/lines/line/auth-mode",
+              "type": "enum",
+              "label": "auth-mode",
+              "options": [
+                {
+                  "label": "aaa",
+                  "value": "aaa"
+                },
+                {
+                  "label": "init",
+                  "value": "init"
+                },
+                {
+                  "label": "none",
+                  "value": "none"
+                },
+                {
+                  "label": "password",
+                  "value": "password"
+                }
+              ],
+              "must": [
+                {
+                  "expr": "(../auth-mode='aaa' and ../proto-inbound='ssh') or not(../proto-inbound='ssh')"
+                }
+              ],
+              "supportFilter": true
+            },
+            {
+              "path": "/vty/lines/line/auth-password",
+              "type": "string",
+              "label": "auth-password",
+              "must": [
+                {
+                  "expr": "../auth-mode='password'"
+                }
+              ]
+            },
+            {
+              "path": "/vty/lines/line/history-cmd-size",
+              "type": "number",
+              "label": "history-cmd-size",
+              "maximum": 256,
+              "supportFilter": true
+            },
+            {
+              "path": "/vty/lines/line/idle-timeout-min",
+              "type": "number",
+              "label": "idle-timeout-min",
+              "maximum": 35791,
+              "supportFilter": true
+            },
+            {
+              "path": "/vty/lines/line/idle-timeout-sec",
+              "type": "number",
+              "label": "idle-timeout-sec",
+              "maximum": 59,
+              "supportFilter": true
+            },
+            {
+              "path": "/vty/lines/line/index",
+              "type": "number",
+              "label": "index",
+              "minimum": 34,
+              "maximum": 54,
+              "isKey": true
+            },
+            {
+              "path": "/vty/lines/line/privilege-level",
+              "type": "number",
+              "label": "privilege-level",
+              "maximum": 15,
+              "supportFilter": true
+            },
+            {
+              "path": "/vty/lines/line/proto-inbound",
+              "type": "enum",
+              "label": "proto-inbound",
+              "options": [
+                {
+                  "label": "all",
+                  "value": "all"
+                },
+                {
+                  "label": "ssh",
+                  "value": "ssh"
+                },
+                {
+                  "label": "telnet",
+                  "value": "telnet"
+                }
+              ],
+              "must": [
+                {
+                  "expr": "(../auth-mode='aaa' and ../proto-inbound='ssh') or not(../proto-inbound='ssh')"
+                }
+              ],
+              "supportFilter": true
+            },
+            {
+              "path": "/vty/lines/line/screen-length",
+              "type": "number",
+              "label": "screen-length",
+              "maximum": 512,
+              "supportFilter": true
+            },
+            {
+              "path": "/vty/lines/line/shell-enable",
+              "type": "enum",
+              "label": "shell-enable",
+              "options": [
+                {
+                  "label": "false",
+                  "value": "false"
+                },
+                {
+                  "label": "true",
+                  "value": "true"
+                }
+              ],
+              "supportFilter": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

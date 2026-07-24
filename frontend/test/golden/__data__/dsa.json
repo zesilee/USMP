@@ -1,0 +1,223 @@
+{
+  "module": "dsa",
+  "tabs": [
+    {
+      "name": "dsa-global",
+      "kind": "form"
+    },
+    {
+      "name": "key-pairs",
+      "kind": "list"
+    },
+    {
+      "name": "local-key",
+      "kind": "form"
+    },
+    {
+      "name": "peer-keys",
+      "kind": "list"
+    }
+  ],
+  "lists": {
+    "key-pairs": {
+      "keyField": "key-pair-label",
+      "columns": [
+        {
+          "name": "key-pair-label",
+          "widget": "string"
+        },
+        {
+          "name": "key-size",
+          "widget": "enum"
+        },
+        {
+          "name": "host-key-code",
+          "widget": "string"
+        }
+      ],
+      "filterable": [
+        "host-key-code",
+        "key-size"
+      ]
+    },
+    "peer-keys": {
+      "keyField": "key-name",
+      "columns": [
+        {
+          "name": "key-name",
+          "widget": "string"
+        },
+        {
+          "name": "encoding-type",
+          "widget": "enum"
+        },
+        {
+          "name": "key-code",
+          "widget": "string"
+        }
+      ],
+      "filterable": [
+        "encoding-type",
+        "key-code"
+      ]
+    }
+  },
+  "tree": [
+    {
+      "path": "/dsa/dsa-global",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/dsa/dsa-global/max-key-pair",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/dsa/key-pairs",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/dsa/key-pairs/key-pair",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/dsa/key-pairs/key-pair/host-key-code",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/dsa/key-pairs/key-pair/key-pair-label",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/dsa/key-pairs/key-pair/key-size",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/dsa/local-key",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/dsa/local-key/host-key-code",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/dsa/local-key/host-key-name",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/dsa/local-key/host-key-openssh",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/dsa/local-key/host-key-pem",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/dsa/local-key/key-size",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/dsa/peer-keys",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/dsa/peer-keys/peer-key",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/dsa/peer-keys/peer-key/encoding-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/dsa/peer-keys/peer-key/key-code",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/dsa/peer-keys/peer-key/key-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    }
+  ]
+}

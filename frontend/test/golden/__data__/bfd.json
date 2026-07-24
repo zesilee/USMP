@@ -1,0 +1,3525 @@
+{
+  "module": "bfd",
+  "tabs": [
+    {
+      "name": "all-sessions",
+      "kind": "list"
+    },
+    {
+      "name": "authentication-keys",
+      "kind": "list"
+    },
+    {
+      "name": "bfd-bundle-sessions",
+      "kind": "list"
+    },
+    {
+      "name": "bind-interfaces",
+      "kind": "list"
+    },
+    {
+      "name": "crc-ip-sessions",
+      "kind": "list"
+    },
+    {
+      "name": "crc-lsp-sessions",
+      "kind": "list"
+    },
+    {
+      "name": "crc-sec-sessions",
+      "kind": "list"
+    },
+    {
+      "name": "discriminator-use",
+      "kind": "form"
+    },
+    {
+      "name": "global",
+      "kind": "form"
+    },
+    {
+      "name": "mul-cast-sessions",
+      "kind": "list"
+    },
+    {
+      "name": "passive-session",
+      "kind": "form"
+    },
+    {
+      "name": "sbfd",
+      "kind": "form"
+    },
+    {
+      "name": "sessions",
+      "kind": "list"
+    },
+    {
+      "name": "statistics",
+      "kind": "form"
+    }
+  ],
+  "lists": {
+    "all-sessions": {
+      "keyField": "name",
+      "columns": [
+        {
+          "name": "name",
+          "widget": "string"
+        },
+        {
+          "name": "bundle-mode",
+          "widget": "enum"
+        },
+        {
+          "name": "config-pst",
+          "widget": "enum"
+        },
+        {
+          "name": "create-type",
+          "widget": "enum"
+        },
+        {
+          "name": "echo-passive",
+          "widget": "enum"
+        },
+        {
+          "name": "encap-type",
+          "widget": "enum"
+        },
+        {
+          "name": "link-type",
+          "widget": "enum"
+        },
+        {
+          "name": "main-sub-role",
+          "widget": "enum"
+        },
+        {
+          "name": "node",
+          "widget": "enum"
+        }
+      ],
+      "filterable": [
+        "local-discriminator"
+      ]
+    },
+    "authentication-keys": {
+      "keyField": "peer-ip",
+      "columns": [
+        {
+          "name": "peer-ip",
+          "widget": "string"
+        },
+        {
+          "name": "session-type",
+          "widget": "enum"
+        },
+        {
+          "name": "vpn-name",
+          "widget": "string"
+        },
+        {
+          "name": "auth-algorithm",
+          "widget": "enum"
+        },
+        {
+          "name": "cipher-string",
+          "widget": "string"
+        },
+        {
+          "name": "key-id",
+          "widget": "number"
+        }
+      ],
+      "filterable": []
+    },
+    "bfd-bundle-sessions": {
+      "keyField": "local-discriminator",
+      "columns": [
+        {
+          "name": "local-discriminator",
+          "widget": "number"
+        },
+        {
+          "name": "bundle-mode",
+          "widget": "enum"
+        },
+        {
+          "name": "create-type",
+          "widget": "enum"
+        },
+        {
+          "name": "detect-mode",
+          "widget": "enum"
+        },
+        {
+          "name": "disp-session-type",
+          "widget": "enum"
+        },
+        {
+          "name": "link-type",
+          "widget": "enum"
+        },
+        {
+          "name": "local-diag",
+          "widget": "enum"
+        },
+        {
+          "name": "main-sub-role",
+          "widget": "enum"
+        },
+        {
+          "name": "state",
+          "widget": "enum"
+        }
+      ],
+      "filterable": [
+        "disp-session-type",
+        "out-if-name"
+      ]
+    },
+    "bind-interfaces": {
+      "keyField": "if-name",
+      "columns": [
+        {
+          "name": "if-name",
+          "widget": "string"
+        },
+        {
+          "name": "if-oper-status",
+          "widget": "enum"
+        },
+        {
+          "name": "session-count",
+          "widget": "number"
+        }
+      ],
+      "filterable": []
+    },
+    "crc-ip-sessions": {
+      "keyField": "destination-address",
+      "columns": [
+        {
+          "name": "destination-address",
+          "widget": "string"
+        },
+        {
+          "name": "if-name",
+          "widget": "string"
+        },
+        {
+          "name": "fault-type",
+          "widget": "enum"
+        },
+        {
+          "name": "session-type",
+          "widget": "enum"
+        },
+        {
+          "name": "actual-tx-interval",
+          "widget": "number"
+        },
+        {
+          "name": "dest-port",
+          "widget": "number"
+        },
+        {
+          "name": "detect-multiplier",
+          "widget": "number"
+        },
+        {
+          "name": "fsm-board-id",
+          "widget": "number"
+        },
+        {
+          "name": "local-bit-err-rate",
+          "widget": "string"
+        }
+      ],
+      "filterable": []
+    },
+    "crc-lsp-sessions": {
+      "keyField": "ingress-lsr-id",
+      "columns": [
+        {
+          "name": "ingress-lsr-id",
+          "widget": "string"
+        },
+        {
+          "name": "lsp-id",
+          "widget": "number"
+        },
+        {
+          "name": "tunnel-id",
+          "widget": "number"
+        },
+        {
+          "name": "fault-type",
+          "widget": "enum"
+        },
+        {
+          "name": "lsp-role",
+          "widget": "enum"
+        },
+        {
+          "name": "session-type",
+          "widget": "enum"
+        },
+        {
+          "name": "actual-tx-interval",
+          "widget": "number"
+        },
+        {
+          "name": "dest-port",
+          "widget": "number"
+        },
+        {
+          "name": "destination-address",
+          "widget": "string"
+        }
+      ],
+      "filterable": [
+        "lsp-role",
+        "tunnel-name"
+      ]
+    },
+    "crc-sec-sessions": {
+      "keyField": "if-name",
+      "columns": [
+        {
+          "name": "if-name",
+          "widget": "string"
+        },
+        {
+          "name": "fault-type",
+          "widget": "enum"
+        },
+        {
+          "name": "session-type",
+          "widget": "enum"
+        },
+        {
+          "name": "actual-tx-interval",
+          "widget": "number"
+        },
+        {
+          "name": "dest-port",
+          "widget": "number"
+        },
+        {
+          "name": "destination-address",
+          "widget": "string"
+        },
+        {
+          "name": "detect-multiplier",
+          "widget": "number"
+        },
+        {
+          "name": "fsm-board-id",
+          "widget": "number"
+        },
+        {
+          "name": "max-tx-interval",
+          "widget": "number"
+        }
+      ],
+      "filterable": []
+    },
+    "mul-cast-sessions": {
+      "keyField": "local-discriminator",
+      "columns": [
+        {
+          "name": "local-discriminator",
+          "widget": "number"
+        },
+        {
+          "name": "session-name",
+          "widget": "string"
+        },
+        {
+          "name": "create-type",
+          "widget": "enum"
+        },
+        {
+          "name": "link-type",
+          "widget": "enum"
+        },
+        {
+          "name": "multicast-session-type",
+          "widget": "enum"
+        },
+        {
+          "name": "session-type",
+          "widget": "enum"
+        },
+        {
+          "name": "bind-application",
+          "widget": "string"
+        },
+        {
+          "name": "description",
+          "widget": "string"
+        },
+        {
+          "name": "destination-address",
+          "widget": "string"
+        }
+      ],
+      "filterable": []
+    },
+    "sessions": {
+      "keyField": "name",
+      "columns": [
+        {
+          "name": "name",
+          "widget": "string"
+        },
+        {
+          "name": "admin-down",
+          "widget": "boolean"
+        },
+        {
+          "name": "description",
+          "widget": "string"
+        },
+        {
+          "name": "detect-multiplier",
+          "widget": "number"
+        },
+        {
+          "name": "wtr-time",
+          "widget": "number"
+        }
+      ],
+      "filterable": []
+    }
+  },
+  "tree": [
+    {
+      "path": "/bfd/all-sessions",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/basic-acl-num",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/bind-application",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/bundle-mode",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/color",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/config-pst",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/create-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/demand-enable",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/description",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/destination-address",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/detect-multiplier",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/dot1q-vid",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/echo-passive",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/encap-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/fsm-board-slot",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/lag",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/link-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/local-discriminator",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/local-vc-label",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/lsp-token",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/main-sub-role",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/min-echo-rx-int",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/min-rx-interval",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/min-tx-interval",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/next-hop",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/node",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/out-if-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/pis",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/process-pst",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/pw-secondary",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/pw-ttl",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/pw-ttl-mode",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/qinq-ce-vid",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/qinq-pe-vid",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/remote-discriminator",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/remote-peer",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/remote-vc-label",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/running",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/running/acl-num",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/running/actual-multiplier",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/running/actual-rx-interval",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/running/actual-tx-interval",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/running/detect-mode",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/running/detect-time",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/running/detect-timer-id",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/running/echo-tx-timer-id",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/running/init-timer-id",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/running/local-diag",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/running/local-discriminator",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/running/min-rx-interval",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/running/min-tx-interval",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/running/not-up-reason",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/running/remote-demand-mode",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "boolean",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/running/remote-discriminator",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/running/state",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/running/ttl",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/running/tx-timer-id",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/running/udp-destination-port",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/running/wtr-timer-id",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/segment-list-id",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/shut-down",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/source-address",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/statistics",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/statistics/create-time",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/statistics/down-count",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/statistics/last-down-time",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/statistics/last-up-time",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/statistics/lsp-ping-count",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/statistics/receive-bad-packet",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/statistics/receive-packet",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/statistics/send-bad-packet",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/statistics/send-packet",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/statistics/short-break-count",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/statistics/time-from-create",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/statistics/time-from-down",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/statistics/time-from-up",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/swap-vc-label",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/te-backup",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/tos-exp",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/track-interface",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/tunnel-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/vc-id",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/vrf-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/vsi-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/vsi-peer-address",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/all-sessions/all-session/wtr-timer-int",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/authentication-keys",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bfd/authentication-keys/authentication-key",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bfd/authentication-keys/authentication-key/auth-algorithm",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/bfd/authentication-keys/authentication-key/cipher-string",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/bfd/authentication-keys/authentication-key/key-id",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/bfd/authentication-keys/authentication-key/peer-ip",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bfd/authentication-keys/authentication-key/session-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bfd/authentication-keys/authentication-key/vpn-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bfd/bfd-bundle-sessions",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/bfd-bundle-sessions/bfd-bundle-session",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/bfd-bundle-sessions/bfd-bundle-session/act-detect-multiplier",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/bfd-bundle-sessions/bfd-bundle-session/act-rx-interval",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/bfd-bundle-sessions/bfd-bundle-session/act-tx-interval",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/bfd-bundle-sessions/bfd-bundle-session/bind-application",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/bfd-bundle-sessions/bfd-bundle-session/bundle-mode",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/bfd-bundle-sessions/bfd-bundle-session/create-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/bfd-bundle-sessions/bfd-bundle-session/dest-port",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/bfd-bundle-sessions/bfd-bundle-session/destination-address",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/bfd-bundle-sessions/bfd-bundle-session/detect-mode",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/bfd-bundle-sessions/bfd-bundle-session/detect-multiplier",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/bfd-bundle-sessions/bfd-bundle-session/detect-time",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/bfd-bundle-sessions/bfd-bundle-session/disp-session-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/bfd-bundle-sessions/bfd-bundle-session/fsm-board-slot",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/bfd-bundle-sessions/bfd-bundle-session/link-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/bfd-bundle-sessions/bfd-bundle-session/local-diag",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/bfd-bundle-sessions/bfd-bundle-session/local-discriminator",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/bfd-bundle-sessions/bfd-bundle-session/main-session-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/bfd-bundle-sessions/bfd-bundle-session/main-sub-role",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/bfd-bundle-sessions/bfd-bundle-session/min-rx-interval",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/bfd-bundle-sessions/bfd-bundle-session/min-tx-interval",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/bfd-bundle-sessions/bfd-bundle-session/out-if-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/bfd-bundle-sessions/bfd-bundle-session/pw-secondary",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/bfd-bundle-sessions/bfd-bundle-session/remote-discriminator",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/bfd-bundle-sessions/bfd-bundle-session/session-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/bfd-bundle-sessions/bfd-bundle-session/source-address",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/bfd-bundle-sessions/bfd-bundle-session/state",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/bfd-bundle-sessions/bfd-bundle-session/sub-session-count",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/bfd-bundle-sessions/bfd-bundle-session/te-backup",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/bfd-bundle-sessions/bfd-bundle-session/tos-exp",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/bfd-bundle-sessions/bfd-bundle-session/tunnel-id",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/bfd-bundle-sessions/bfd-bundle-session/vrf-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/bfd-bundle-sessions/bfd-bundle-session/vsi-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/bfd-bundle-sessions/bfd-bundle-session/wtr-timer-int",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/bind-interfaces",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/bind-interfaces/bind-interface",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/bind-interfaces/bind-interface/if-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/bind-interfaces/bind-interface/if-oper-status",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/bind-interfaces/bind-interface/session-count",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/crc-ip-sessions",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/crc-ip-sessions/crc-ip-session",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/crc-ip-sessions/crc-ip-session/actual-tx-interval",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/crc-ip-sessions/crc-ip-session/dest-port",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/crc-ip-sessions/crc-ip-session/destination-address",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/crc-ip-sessions/crc-ip-session/detect-multiplier",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/crc-ip-sessions/crc-ip-session/fault-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/crc-ip-sessions/crc-ip-session/fsm-board-id",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/crc-ip-sessions/crc-ip-session/if-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/crc-ip-sessions/crc-ip-session/local-bit-err-rate",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/crc-ip-sessions/crc-ip-session/max-tx-interval",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/crc-ip-sessions/crc-ip-session/min-tx-interval",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/crc-ip-sessions/crc-ip-session/remote-bit-err-rate",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/crc-ip-sessions/crc-ip-session/session-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/crc-ip-sessions/crc-ip-session/source-address",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/crc-ip-sessions/crc-ip-session/tos-exp",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/crc-ip-sessions/crc-ip-session/vrf-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/crc-lsp-sessions",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/crc-lsp-sessions/crc-lsp-session",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/crc-lsp-sessions/crc-lsp-session/actual-tx-interval",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/crc-lsp-sessions/crc-lsp-session/dest-port",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/crc-lsp-sessions/crc-lsp-session/destination-address",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/crc-lsp-sessions/crc-lsp-session/detect-multiplier",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/crc-lsp-sessions/crc-lsp-session/fault-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/crc-lsp-sessions/crc-lsp-session/fsm-board-id",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/crc-lsp-sessions/crc-lsp-session/ingress-lsr-id",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/crc-lsp-sessions/crc-lsp-session/lsp-id",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/crc-lsp-sessions/crc-lsp-session/lsp-inbount-interfaces",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "leaf-list",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/crc-lsp-sessions/crc-lsp-session/lsp-role",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/crc-lsp-sessions/crc-lsp-session/lsp-token",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/crc-lsp-sessions/crc-lsp-session/max-tx-interval",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/crc-lsp-sessions/crc-lsp-session/min-tx-interval",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/crc-lsp-sessions/crc-lsp-session/out-if-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/crc-lsp-sessions/crc-lsp-session/session-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/crc-lsp-sessions/crc-lsp-session/source-address",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/crc-lsp-sessions/crc-lsp-session/tos-exp",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/crc-lsp-sessions/crc-lsp-session/tunnel-id",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/crc-lsp-sessions/crc-lsp-session/tunnel-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/crc-sec-sessions",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/crc-sec-sessions/crc-sec-session",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/crc-sec-sessions/crc-sec-session/actual-tx-interval",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/crc-sec-sessions/crc-sec-session/dest-port",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/crc-sec-sessions/crc-sec-session/destination-address",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/crc-sec-sessions/crc-sec-session/detect-multiplier",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/crc-sec-sessions/crc-sec-session/fault-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/crc-sec-sessions/crc-sec-session/fsm-board-id",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/crc-sec-sessions/crc-sec-session/if-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/crc-sec-sessions/crc-sec-session/max-tx-interval",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/crc-sec-sessions/crc-sec-session/min-tx-interval",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/crc-sec-sessions/crc-sec-session/session-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/crc-sec-sessions/crc-sec-session/tos-exp",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/discriminator-use",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bfd/discriminator-use/is-used",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/discriminator-use/is-used/is-used",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/discriminator-use/is-used/local-discriminator",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/discriminator-use/reserved-discriminators",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "leaf-list",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/discriminator-use/reserved-num",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bfd/global",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bfd/global/basic-acl-num",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bfd/global/default-ip",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bfd/global/delay-up-timer",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bfd/global/echo-passive",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bfd/global/init-wait-time",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bfd/global/ipv6-trap-separated",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bfd/global/link-bundle-init-time",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bfd/global/link-bundle-l3-mode",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bfd/global/link-bundle-max-time",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bfd/global/link-bundle-second-time",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bfd/global/lsp-path-check",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bfd/global/max-wait-time",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bfd/global/mpls-passive",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bfd/global/ping-interval",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bfd/global/process-central-slot",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bfd/global/process-central-slot2",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bfd/global/process-mode",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bfd/global/second-wait-time",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bfd/global/tos-exp",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bfd/global/tos-exp-static",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bfd/mul-cast-sessions",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/mul-cast-sessions/mul-cast-session",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/mul-cast-sessions/mul-cast-session/bind-application",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/mul-cast-sessions/mul-cast-session/create-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/mul-cast-sessions/mul-cast-session/description",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/mul-cast-sessions/mul-cast-session/destination-address",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/mul-cast-sessions/mul-cast-session/detect-multiplier",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/mul-cast-sessions/mul-cast-session/fsm-board-slot",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/mul-cast-sessions/mul-cast-session/link-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/mul-cast-sessions/mul-cast-session/local-discriminator",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/mul-cast-sessions/mul-cast-session/lsp-id",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/mul-cast-sessions/mul-cast-session/min-rx-interval",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/mul-cast-sessions/mul-cast-session/min-tx-interval",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/mul-cast-sessions/mul-cast-session/multi-cast-session-running",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/mul-cast-sessions/mul-cast-session/multi-cast-session-running/acl-num",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/mul-cast-sessions/mul-cast-session/multi-cast-session-running/act-multiplier",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/mul-cast-sessions/mul-cast-session/multi-cast-session-running/act-rx-interval",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/mul-cast-sessions/mul-cast-session/multi-cast-session-running/act-tx-interval",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/mul-cast-sessions/mul-cast-session/multi-cast-session-running/detect-mode",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/mul-cast-sessions/mul-cast-session/multi-cast-session-running/detect-time",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/mul-cast-sessions/mul-cast-session/multi-cast-session-running/detect-timer-id",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/mul-cast-sessions/mul-cast-session/multi-cast-session-running/echo-tx-timer-id",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/mul-cast-sessions/mul-cast-session/multi-cast-session-running/init-timer-id",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/mul-cast-sessions/mul-cast-session/multi-cast-session-running/local-diag",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/mul-cast-sessions/mul-cast-session/multi-cast-session-running/min-rx-interval",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/mul-cast-sessions/mul-cast-session/multi-cast-session-running/min-tx-interval",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/mul-cast-sessions/mul-cast-session/multi-cast-session-running/not-up-reason",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/mul-cast-sessions/mul-cast-session/multi-cast-session-running/re-demand-mode",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "boolean",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/mul-cast-sessions/mul-cast-session/multi-cast-session-running/remote-discriminator",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/mul-cast-sessions/mul-cast-session/multi-cast-session-running/session-state",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/mul-cast-sessions/mul-cast-session/multi-cast-session-running/ttl",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/mul-cast-sessions/mul-cast-session/multi-cast-session-running/tx-timer-id",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/mul-cast-sessions/mul-cast-session/multi-cast-session-running/udp-dst-port",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/mul-cast-sessions/mul-cast-session/multi-cast-session-running/wtr-timer-id",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/mul-cast-sessions/mul-cast-session/multicast-session-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/mul-cast-sessions/mul-cast-session/opaque-id",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/mul-cast-sessions/mul-cast-session/p2mp-id",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/mul-cast-sessions/mul-cast-session/p2mp-ingress-lsr-id",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/mul-cast-sessions/mul-cast-session/p2mp-tunnel-id",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/mul-cast-sessions/mul-cast-session/remote-discriminator",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/mul-cast-sessions/mul-cast-session/root-ip",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/mul-cast-sessions/mul-cast-session/session-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/mul-cast-sessions/mul-cast-session/session-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/mul-cast-sessions/mul-cast-session/tos-exp",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/mul-cast-sessions/mul-cast-session/track-interface",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/passive-session",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bfd/passive-session/destination-udps",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bfd/passive-session/destination-udps/destination-udp",
+      "kind": "list",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bfd/passive-session/destination-udps/destination-udp/peer-ip",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bfd/passive-session/detect-multipliers",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bfd/passive-session/detect-multipliers/detect-multiplier",
+      "kind": "list",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bfd/passive-session/detect-multipliers/detect-multiplier/detect-multiplier",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/bfd/passive-session/detect-multipliers/detect-multiplier/peer-ip",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bfd/sbfd",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bfd/sbfd/discriminator-maps",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bfd/sbfd/discriminator-maps/discriminator-map",
+      "kind": "list",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bfd/sbfd/discriminator-maps/discriminator-map/peer-ip",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bfd/sbfd/discriminator-maps/discriminator-map/remote-discriminator",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bfd/sbfd/reflector-discriminator-ids",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bfd/sbfd/reflector-discriminator-ids/reflector-discriminator-id",
+      "kind": "list",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bfd/sbfd/reflector-discriminator-ids/reflector-discriminator-id/discriminator-id",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bfd/sbfd/reflector-discriminator-ips",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bfd/sbfd/reflector-discriminator-ips/reflector-discriminator-ip",
+      "kind": "list",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bfd/sbfd/reflector-discriminator-ips/reflector-discriminator-ip/discriminator-ip",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bfd/sbfd/reflector-discriminators",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/sbfd/reflector-discriminators/reflector-discriminator",
+      "kind": "list",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/sbfd/reflector-discriminators/reflector-discriminator/create-type",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/sbfd/reflector-discriminators/reflector-discriminator/discriminator-state",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/sbfd/reflector-discriminators/reflector-discriminator/reflector-discriminator-id",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/sbfd/reflector-discriminators/reflector-discriminator/reflector-discriminator-ip",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/sessions",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bfd/sessions/session",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bfd/sessions/session/admin-down",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bfd/sessions/session/description",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bfd/sessions/session/detect-multiplier",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bfd/sessions/session/groups",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bfd/sessions/session/groups/group",
+      "kind": "list",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bfd/sessions/session/groups/group/sub-local-discriminator",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bfd/sessions/session/groups/group/sub-remote-discriminator",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/bfd/sessions/session/groups/group/sub-select-slot-id",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/bfd/sessions/session/name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bfd/sessions/session/running",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/sessions/session/running/acl-num",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/sessions/session/running/actual-multiplier",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/sessions/session/running/actual-rx-interval",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/sessions/session/running/actual-tx-interval",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/sessions/session/running/detect-mode",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/sessions/session/running/detect-time",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/sessions/session/running/detect-timer-id",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/sessions/session/running/echo-tx-timer-id",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/sessions/session/running/init-timer-id",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/sessions/session/running/local-diag",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/sessions/session/running/local-discriminator",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/sessions/session/running/min-rx-interval",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/sessions/session/running/min-tx-interval",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/sessions/session/running/not-up-reason",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/sessions/session/running/remote-demand-mode",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "boolean",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/sessions/session/running/remote-discriminator",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/sessions/session/running/state",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/sessions/session/running/ttl",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/sessions/session/running/tx-timer-id",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/sessions/session/running/udp-destination-port",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/sessions/session/running/wtr-timer-id",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/sessions/session/session-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "choice",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bfd/sessions/session/wtr-time",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/bfd/statistics",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/statistics/auto-session-num",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/statistics/bgp-tunnel-session-num",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/statistics/current-crc-session-num",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/statistics/dyn-session-num",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/statistics/inner-state",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/statistics/ip-session-num",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/statistics/ldp-lsp-session-num",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/statistics/ldp-tunnel-session-num",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/statistics/main-session-down-num",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/statistics/main-session-up-num",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/statistics/max-bfd-res-num",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/statistics/max-crc-session-num",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/statistics/p2mp-session-num",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/statistics/passive-session-num",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/statistics/pw-session-num",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/statistics/sbfd-ref-session-num",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/statistics/session-down-num",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/statistics/session-up-num",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/statistics/sid-list-session-num",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/statistics/srbe-tunnel-session-num",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/statistics/static-lsp-session-num",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/statistics/static-session-num",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/statistics/sub-session-down-num",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/statistics/sub-session-up-num",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/statistics/te-lsp-session-num",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/statistics/te-tunnel-session-num",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/statistics/total-session-num",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/statistics/used-bfd-res-num",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/statistics/used-discriminator-num",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/statistics/vsi-pw-session-num",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/bfd/statistics/vxlan-session-num",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    }
+  ]
+}
