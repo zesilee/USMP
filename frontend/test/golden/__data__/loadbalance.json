@@ -1,0 +1,1190 @@
+{
+  "module": "loadbalance",
+  "tabs": [
+    {
+      "name": "avoid-degradations",
+      "kind": "list"
+    },
+    {
+      "name": "dlb-enables",
+      "kind": "list"
+    },
+    {
+      "name": "dynamic-load-balance-profile",
+      "kind": "form"
+    },
+    {
+      "name": "ecmp-stateful",
+      "kind": "form"
+    },
+    {
+      "name": "global-attribute",
+      "kind": "form"
+    },
+    {
+      "name": "hash-instructions",
+      "kind": "list"
+    },
+    {
+      "name": "hash-key-ip",
+      "kind": "form"
+    },
+    {
+      "name": "hash-key-ip-slots",
+      "kind": "list"
+    },
+    {
+      "name": "ip-load-balance",
+      "kind": "form"
+    },
+    {
+      "name": "ip-load-balance-reverse-route-enable",
+      "kind": "form"
+    },
+    {
+      "name": "ipv6-load-balance",
+      "kind": "form"
+    },
+    {
+      "name": "ipv6-load-balance-reverse-route-enable",
+      "kind": "form"
+    },
+    {
+      "name": "load-balance-ecmp-enable",
+      "kind": "form"
+    },
+    {
+      "name": "load-balance-ecmp-profile",
+      "kind": "form"
+    },
+    {
+      "name": "load-balance-ecmp-stateful-enhanced",
+      "kind": "form"
+    }
+  ],
+  "lists": {
+    "avoid-degradations": {
+      "keyField": "forward-type",
+      "columns": [
+        {
+          "name": "forward-type",
+          "widget": "enum"
+        },
+        {
+          "name": "position",
+          "widget": "string"
+        }
+      ],
+      "filterable": []
+    },
+    "dlb-enables": {
+      "keyField": "vpn-name",
+      "columns": [
+        {
+          "name": "vpn-name",
+          "widget": "string"
+        }
+      ],
+      "filterable": []
+    },
+    "hash-instructions": {
+      "keyField": "query-type",
+      "columns": [
+        {
+          "name": "query-type",
+          "widget": "enum"
+        },
+        {
+          "name": "slot-id",
+          "widget": "string"
+        },
+        {
+          "name": "tunnel-gtp-enable",
+          "widget": "boolean"
+        }
+      ],
+      "filterable": []
+    },
+    "hash-key-ip-slots": {
+      "keyField": "slot-id",
+      "columns": [
+        {
+          "name": "slot-id",
+          "widget": "string"
+        },
+        {
+          "name": "ip-type",
+          "widget": "enum"
+        }
+      ],
+      "filterable": []
+    }
+  },
+  "tree": [
+    {
+      "path": "/loadbalance/avoid-degradations",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/avoid-degradations/avoid-degradation",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/avoid-degradations/avoid-degradation/forward-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/avoid-degradations/avoid-degradation/position",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/dlb-enables",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/dlb-enables/dlb-enable",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/dlb-enables/dlb-enable/vpn-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/dynamic-load-balance-profile",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/dynamic-load-balance-profile/time-gap",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/ecmp-stateful",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/ecmp-stateful/accuracy",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/ecmp-stateful/maximum",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/ecmp-stateful/minimum",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/global-attribute",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/global-attribute/avoid-ipv4-enable",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/global-attribute/avoid-ipv6-enable",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/global-attribute/avoid-mpls-enable",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/global-attribute/dynamic-enable",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/global-attribute/flow-label",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "choice",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/global-attribute/hash-arithmetic-trunk-enhance",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/global-attribute/mpls-loadblc-wtr",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/global-attribute/mpls-sr-transit-enable",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/global-attribute/mpls-te-convergence-enable",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/global-attribute/mpls-trunk-enhance-fwd",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/global-attribute/mpls-ucmp-enable",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/global-attribute/rail-group-enable",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/global-attribute/trunk-enhance-fwd",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/global-attribute/trunk-multicast-enable",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/global-attribute/tunnel-info-gtp-enable",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/global-attribute/unequal-cost",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "choice",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/global-attribute/vxlan-l2deep-hash-enable",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/global-attribute/vxlan-l2vni-enable",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/global-attribute/vxlan-l3vni-enable",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/hash-instructions",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/hash-instructions/hash-instruction",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/hash-instructions/hash-instruction/infos",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/hash-instructions/hash-instruction/infos/info",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/hash-instructions/hash-instruction/query-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/hash-instructions/hash-instruction/slot-id",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/hash-instructions/hash-instruction/tunnel-gtp-enable",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/hash-key-ip",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/hash-key-ip/ip-type",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/hash-key-ip-slots",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/hash-key-ip-slots/hash-key-ip-slot",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/hash-key-ip-slots/hash-key-ip-slot/ip-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/loadbalance/hash-key-ip-slots/hash-key-ip-slot/slot-id",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/ip-load-balance",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/ip-load-balance/dst-ip",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/ip-load-balance/dst-port",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/ip-load-balance/mode",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/ip-load-balance/src-ip",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/ip-load-balance/src-port",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/ip-load-balance-reverse-route-enable",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/ip-load-balance-reverse-route-enable/enable",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/ipv6-load-balance",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/ipv6-load-balance/dst-ip",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/ipv6-load-balance/dst-port",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/ipv6-load-balance/mode",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/ipv6-load-balance/src-ip",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/ipv6-load-balance/src-port",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/ipv6-load-balance-reverse-route-enable",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/ipv6-load-balance-reverse-route-enable/enable",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/load-balance-ecmp-enable",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/load-balance-ecmp-enable/is-enable",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/load-balance-ecmp-profile",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/load-balance-ecmp-profile/dynamic-ecmp-mode",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/load-balance-ecmp-profile/dynamic-ecmp-mode/flowlet-gap-time",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/load-balance-ecmp-profile/dynamic-ecmp-mode/mode",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/load-balance-ecmp-profile/ecmp-attribute",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/load-balance-ecmp-profile/ecmp-attribute/gtp-teid",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/load-balance-ecmp-profile/ecmp-local-preference",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/load-balance-ecmp-profile/ecmp-local-preference/enable",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/load-balance-ecmp-profile/ecmp-symmetry",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/load-balance-ecmp-profile/ecmp-symmetry/enable",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/load-balance-ecmp-profile/ip-hash",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/load-balance-ecmp-profile/ip-hash/dip",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/load-balance-ecmp-profile/ip-hash/dscp",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/load-balance-ecmp-profile/ip-hash/flowlabel",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/load-balance-ecmp-profile/ip-hash/l4dport",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/load-balance-ecmp-profile/ip-hash/l4sport",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/load-balance-ecmp-profile/ip-hash/protocol",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/load-balance-ecmp-profile/ip-hash/sip",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/load-balance-ecmp-profile/ip-hash/src-interface",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/load-balance-ecmp-profile/ip-hash/vlan",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/load-balance-ecmp-profile/ip-tunnel-hash",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/load-balance-ecmp-profile/ip-tunnel-hash/dst-mac",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/load-balance-ecmp-profile/ip-tunnel-hash/include-erspan",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/load-balance-ecmp-profile/ip-tunnel-hash/inner-dst-ip",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/load-balance-ecmp-profile/ip-tunnel-hash/inner-l4-dport",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/load-balance-ecmp-profile/ip-tunnel-hash/inner-l4-sport",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/load-balance-ecmp-profile/ip-tunnel-hash/inner-protocol",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/load-balance-ecmp-profile/ip-tunnel-hash/inner-src-ip",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/load-balance-ecmp-profile/ip-tunnel-hash/src-interface",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/load-balance-ecmp-profile/ip-tunnel-hash/src-mac",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/load-balance-ecmp-profile/load-balance-ecmp-hashmode",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/load-balance-ecmp-profile/load-balance-ecmp-hashmode/bfd-vxlan-bundle-random-hash",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/load-balance-ecmp-profile/load-balance-ecmp-hashmode/hash-mode",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/load-balance-ecmp-profile/load-balance-ecmp-hashmode/overlay-hash-mode",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/load-balance-ecmp-profile/load-balance-ecmp-hashmode/underlay-hash-mode",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/load-balance-ecmp-profile/load-balance-ecmp-hashmode/vxlan-overlay-local-preference",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/load-balance-ecmp-profile/load-balance-ecmp-seed",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/load-balance-ecmp-profile/load-balance-ecmp-seed/overlay-seed-data",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/load-balance-ecmp-profile/load-balance-ecmp-seed/seed-data",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/load-balance-ecmp-profile/load-balance-ecmp-seed/underlay-seed-data",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/load-balance-ecmp-profile/load-balance-ecmp-universal",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/load-balance-ecmp-profile/load-balance-ecmp-universal/overlay-universal-id",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/load-balance-ecmp-profile/load-balance-ecmp-universal/underlay-universal-id",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/load-balance-ecmp-profile/load-balance-ecmp-universal/universal-id",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/load-balance-ecmp-profile/local-preference-enhanced",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/load-balance-ecmp-profile/local-preference-enhanced/enable",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/load-balance-ecmp-profile/vxlan-hash",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/load-balance-ecmp-profile/vxlan-hash/inner-dst-ip",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/load-balance-ecmp-profile/vxlan-hash/inner-l4-dport",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/load-balance-ecmp-profile/vxlan-hash/inner-l4-sport",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/load-balance-ecmp-profile/vxlan-hash/inner-protocol",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/load-balance-ecmp-profile/vxlan-hash/inner-src-ip",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/load-balance-ecmp-profile/vxlan-hash/src-interface",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/load-balance-ecmp-profile/vxlan-hash/vni",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/load-balance-ecmp-profile/vxlan-overlay-local-preference",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/load-balance-ecmp-profile/vxlan-overlay-local-preference/local-preference-mode",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/load-balance-ecmp-stateful-enhanced",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/loadbalance/load-balance-ecmp-stateful-enhanced/is-enable",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    }
+  ]
+}

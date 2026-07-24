@@ -1,0 +1,218 @@
+{
+  "module": "ntp",
+  "tabs": [
+    {
+      "name": "disables",
+      "kind": "list"
+    },
+    {
+      "name": "unicasts",
+      "kind": "list"
+    }
+  ],
+  "lists": {
+    "disables": {
+      "keyField": "addr-family",
+      "columns": [
+        {
+          "name": "addr-family",
+          "widget": "enum"
+        }
+      ],
+      "filterable": []
+    },
+    "unicasts": {
+      "keyField": "ip-address",
+      "columns": [
+        {
+          "name": "ip-address",
+          "widget": "string"
+        },
+        {
+          "name": "type",
+          "widget": "enum"
+        },
+        {
+          "name": "vpn-name",
+          "widget": "string"
+        },
+        {
+          "name": "is-burst",
+          "widget": "boolean"
+        },
+        {
+          "name": "is-iburst",
+          "widget": "boolean"
+        },
+        {
+          "name": "ifname",
+          "widget": "string"
+        },
+        {
+          "name": "is-preempt",
+          "widget": "boolean"
+        },
+        {
+          "name": "is-preferred",
+          "widget": "boolean"
+        },
+        {
+          "name": "max-poll-interval",
+          "widget": "number"
+        }
+      ],
+      "filterable": []
+    }
+  },
+  "tree": [
+    {
+      "path": "/ntp/disables",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/ntp/disables/disable",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/ntp/disables/disable/addr-family",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/ntp/unicasts",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/ntp/unicasts/unicast",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/ntp/unicasts/unicast/ifname",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/ntp/unicasts/unicast/ip-address",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/ntp/unicasts/unicast/is-burst",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/ntp/unicasts/unicast/is-iburst",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/ntp/unicasts/unicast/is-preempt",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/ntp/unicasts/unicast/is-preferred",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/ntp/unicasts/unicast/max-poll-interval",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/ntp/unicasts/unicast/min-poll-interval",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/ntp/unicasts/unicast/port-number",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/ntp/unicasts/unicast/type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/ntp/unicasts/unicast/version",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/ntp/unicasts/unicast/vpn-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    }
+  ]
+}

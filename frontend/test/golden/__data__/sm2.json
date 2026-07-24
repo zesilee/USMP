@@ -1,0 +1,131 @@
+{
+  "module": "sm2",
+  "tabs": [
+    {
+      "name": "sm2-key-pairs",
+      "kind": "list"
+    },
+    {
+      "name": "sm2-peer-keys",
+      "kind": "list"
+    }
+  ],
+  "lists": {
+    "sm2-key-pairs": {
+      "keyField": "key-pair-label",
+      "columns": [
+        {
+          "name": "key-pair-label",
+          "widget": "string"
+        },
+        {
+          "name": "host-key-code",
+          "widget": "string"
+        },
+        {
+          "name": "key-size",
+          "widget": "number"
+        }
+      ],
+      "filterable": [
+        "host-key-code",
+        "key-size"
+      ]
+    },
+    "sm2-peer-keys": {
+      "keyField": "key-name",
+      "columns": [
+        {
+          "name": "key-name",
+          "widget": "string"
+        },
+        {
+          "name": "key-code",
+          "widget": "string"
+        }
+      ],
+      "filterable": [
+        "key-code"
+      ]
+    }
+  },
+  "tree": [
+    {
+      "path": "/sm2/sm2-key-pairs",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/sm2/sm2-key-pairs/sm2-key-pair",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/sm2/sm2-key-pairs/sm2-key-pair/host-key-code",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/sm2/sm2-key-pairs/sm2-key-pair/key-pair-label",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/sm2/sm2-key-pairs/sm2-key-pair/key-size",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/sm2/sm2-peer-keys",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/sm2/sm2-peer-keys/sm2-peer-key",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/sm2/sm2-peer-keys/sm2-peer-key/key-code",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/sm2/sm2-peer-keys/sm2-peer-key/key-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    }
+  ]
+}

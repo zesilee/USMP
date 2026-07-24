@@ -1,0 +1,642 @@
+{
+  "module": "multicast",
+  "tabs": [
+    {
+      "name": "default-parameter",
+      "kind": "form"
+    },
+    {
+      "name": "global",
+      "kind": "form"
+    },
+    {
+      "name": "global-outgoing-interface-limit-counts",
+      "kind": "list"
+    },
+    {
+      "name": "interface-default-parameter",
+      "kind": "form"
+    },
+    {
+      "name": "invalid-packet-max-count",
+      "kind": "form"
+    },
+    {
+      "name": "session-car",
+      "kind": "form"
+    },
+    {
+      "name": "ssm-mapping-policys",
+      "kind": "list"
+    },
+    {
+      "name": "trap-parameter",
+      "kind": "form"
+    }
+  ],
+  "lists": {
+    "global-outgoing-interface-limit-counts": {
+      "keyField": "address-family",
+      "columns": [
+        {
+          "name": "address-family",
+          "widget": "enum"
+        },
+        {
+          "name": "limit-type",
+          "widget": "enum"
+        },
+        {
+          "name": "limit-value",
+          "widget": "number"
+        },
+        {
+          "name": "lower-threshold-value",
+          "widget": "number"
+        },
+        {
+          "name": "source-group-outgoing-interface-count",
+          "widget": "number"
+        },
+        {
+          "name": "star-group-outgoing-interface-count",
+          "widget": "number"
+        },
+        {
+          "name": "total-outgoing-interface-count",
+          "widget": "number"
+        },
+        {
+          "name": "upper-threshold-value",
+          "widget": "number"
+        }
+      ],
+      "filterable": []
+    },
+    "ssm-mapping-policys": {
+      "keyField": "address-family",
+      "columns": [
+        {
+          "name": "address-family",
+          "widget": "enum"
+        },
+        {
+          "name": "policy-name",
+          "widget": "string"
+        }
+      ],
+      "filterable": []
+    }
+  },
+  "tree": [
+    {
+      "path": "/multicast/default-parameter",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/multicast/default-parameter/load-splitting-rule",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/multicast/default-parameter/multi-topology",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/multicast/default-parameter/route-selection-rule",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/multicast/global",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/multicast/global/ipv4",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/multicast/global/ipv4/bas-igmp-extranet-enable",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/multicast/global/ipv4/qinq-extranet-enable",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/multicast/global/ipv4/vbdif-extranet-enable",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/multicast/global/ipv4/vlanif-extranet-enable",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/multicast/global-outgoing-interface-limit-counts",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/multicast/global-outgoing-interface-limit-counts/global-outgoing-interface-limit-count",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/multicast/global-outgoing-interface-limit-counts/global-outgoing-interface-limit-count/address-family",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/multicast/global-outgoing-interface-limit-counts/global-outgoing-interface-limit-count/limit-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/multicast/global-outgoing-interface-limit-counts/global-outgoing-interface-limit-count/limit-value",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/multicast/global-outgoing-interface-limit-counts/global-outgoing-interface-limit-count/lower-threshold-value",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/multicast/global-outgoing-interface-limit-counts/global-outgoing-interface-limit-count/source-group-outgoing-interface-count",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/multicast/global-outgoing-interface-limit-counts/global-outgoing-interface-limit-count/star-group-outgoing-interface-count",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/multicast/global-outgoing-interface-limit-counts/global-outgoing-interface-limit-count/total-outgoing-interface-count",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/multicast/global-outgoing-interface-limit-counts/global-outgoing-interface-limit-count/upper-threshold-value",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/multicast/interface-default-parameter",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/multicast/interface-default-parameter/minimum-ttl",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/multicast/invalid-packet-max-count",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/multicast/invalid-packet-max-count/ipv4",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/multicast/invalid-packet-max-count/ipv4/igmp-packets",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/multicast/invalid-packet-max-count/ipv4/igmp-snooping-packets",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/multicast/invalid-packet-max-count/ipv4/msdp-packets",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/multicast/invalid-packet-max-count/ipv4/mvpn-packets",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/multicast/invalid-packet-max-count/ipv4/pim-packets",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/multicast/invalid-packet-max-count/ipv6",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/multicast/invalid-packet-max-count/ipv6/mld-packets",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/multicast/invalid-packet-max-count/ipv6/mld-snooping-packets",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/multicast/invalid-packet-max-count/ipv6/pim-packets",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/multicast/session-car",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/multicast/session-car/pim",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/multicast/session-car/pim/cbs-interval",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/multicast/session-car/pim/cir-interval",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/multicast/session-car/pim/enable",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/multicast/session-car/pim/pbs-interval",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/multicast/session-car/pim/pir-interval",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/multicast/session-car/pim-ipv6",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/multicast/session-car/pim-ipv6/cbs-interval",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/multicast/session-car/pim-ipv6/cir-interval",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/multicast/session-car/pim-ipv6/enable",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/multicast/session-car/pim-ipv6/pbs-interval",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/multicast/session-car/pim-ipv6/pir-interval",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/multicast/ssm-mapping-policys",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/multicast/ssm-mapping-policys/ssm-mapping-policy",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/multicast/ssm-mapping-policys/ssm-mapping-policy/address-family",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/multicast/ssm-mapping-policys/ssm-mapping-policy/groups",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/multicast/ssm-mapping-policys/ssm-mapping-policy/groups/group",
+      "kind": "list",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/multicast/ssm-mapping-policys/ssm-mapping-policy/groups/group/group-address",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/multicast/ssm-mapping-policys/ssm-mapping-policy/groups/group/mask-length",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/multicast/ssm-mapping-policys/ssm-mapping-policy/groups/group/source-address",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/multicast/ssm-mapping-policys/ssm-mapping-policy/policy-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/multicast/trap-parameter",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/multicast/trap-parameter/pim-notification-interval",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/multicast/trap-parameter/pim-notification-interval/interface-election-dr",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/multicast/trap-parameter/pim-notification-interval/invalid-join-prune",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/multicast/trap-parameter/pim-notification-interval/invalid-register",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/multicast/trap-parameter/pim-notification-interval/neighbor-loss",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/multicast/trap-parameter/pim-notification-interval/new-neighbor",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/multicast/trap-parameter/pim-notification-interval/rp-mapping-change",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    }
+  ]
+}

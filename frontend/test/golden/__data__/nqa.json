@@ -1,0 +1,4587 @@
+{
+  "module": "nqa",
+  "tabs": [
+    {
+      "name": "global",
+      "kind": "form"
+    },
+    {
+      "name": "groups",
+      "kind": "list"
+    },
+    {
+      "name": "instances",
+      "kind": "list"
+    },
+    {
+      "name": "record",
+      "kind": "form"
+    },
+    {
+      "name": "reflectors",
+      "kind": "list"
+    },
+    {
+      "name": "server",
+      "kind": "form"
+    },
+    {
+      "name": "testflows",
+      "kind": "list"
+    },
+    {
+      "name": "upload",
+      "kind": "form"
+    }
+  ],
+  "lists": {
+    "groups": {
+      "keyField": "group-name",
+      "columns": [
+        {
+          "name": "group-name",
+          "widget": "string"
+        }
+      ],
+      "filterable": []
+    },
+    "instances": {
+      "keyField": "admin-name",
+      "columns": [
+        {
+          "name": "admin-name",
+          "widget": "string"
+        },
+        {
+          "name": "test-name",
+          "widget": "string"
+        }
+      ],
+      "filterable": []
+    },
+    "reflectors": {
+      "keyField": "reflector-id",
+      "columns": [
+        {
+          "name": "reflector-id",
+          "widget": "number"
+        },
+        {
+          "name": "reflector-type",
+          "widget": "enum"
+        },
+        {
+          "name": "ce-vlan",
+          "widget": "number"
+        },
+        {
+          "name": "dest-port",
+          "widget": "number"
+        },
+        {
+          "name": "end-time",
+          "widget": "string"
+        },
+        {
+          "name": "exchange-port",
+          "widget": "boolean"
+        },
+        {
+          "name": "if-name",
+          "widget": "string"
+        },
+        {
+          "name": "pe-vlan",
+          "widget": "number"
+        },
+        {
+          "name": "recommended-test-mac",
+          "widget": "string"
+        }
+      ],
+      "filterable": []
+    },
+    "testflows": {
+      "keyField": "testflow-id",
+      "columns": [
+        {
+          "name": "testflow-id",
+          "widget": "number"
+        },
+        {
+          "name": "increment-type",
+          "widget": "enum"
+        },
+        {
+          "name": "begin-dest-ip",
+          "widget": "string"
+        },
+        {
+          "name": "begin-dest-mac",
+          "widget": "string"
+        },
+        {
+          "name": "begin-source-ip",
+          "widget": "string"
+        },
+        {
+          "name": "begin-source-mac",
+          "widget": "string"
+        },
+        {
+          "name": "begin-udp-dest-port",
+          "widget": "number"
+        },
+        {
+          "name": "begin-udp-source-port",
+          "widget": "number"
+        },
+        {
+          "name": "ce-vid",
+          "widget": "number"
+        }
+      ],
+      "filterable": []
+    }
+  },
+  "tree": [
+    {
+      "path": "/nqa/global",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/global/fec-validation-ldp-enable",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/global/fec-validation-sr-prefix-enable",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/global/gmac-ltm-receive-enable",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/global/gmac-ping-enable",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/global/gmac-trace-enable",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/global/jitter-tag-version",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/global/lbm-receive-enable",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/global/lspv-cpu-limit",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/global/lspv-enable",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/global/lspv-fec-compitable-enable",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/global/lspv-ipv6-enable",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/global/ltm-receive-enable",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/global/mtrace-echo-enable",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/global/reflector-max-id",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/global/test-max-flow-id",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/global/trunk-member-inspect-enable",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/global/vxlan-echo-v4",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/global/vxlan-echo-v4/port",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/nqa/global/vxlan-echo-v4/source-ip-if-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/global/vxlan-echo-v6",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/global/vxlan-echo-v6/port",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/nqa/global/vxlan-echo-v6/source-ip-if-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/groups",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/groups/group",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/groups/group/group-members",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/groups/group/group-members/group-member",
+      "kind": "list",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/groups/group/group-members/group-member/admin-name",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/groups/group/group-members/group-member/test-name",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/groups/group/group-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/instances",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/instances/instance",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/instances/instance/admin-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/instances/instance/execution-policy",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/instances/instance/execution-policy/execution-policy",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "choice",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/instances/instance/test-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/instances/instance/type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "choice",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/record",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/ethernet-service-results",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/ethernet-service-results/ethernet-service-result",
+      "kind": "list",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/ethernet-service-results/ethernet-service-result/admin-name",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/ethernet-service-results/ethernet-service-result/estimate-test-time",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/ethernet-service-results/ethernet-service-result/flow-num",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/ethernet-service-results/ethernet-service-result/flow-step-fins",
+      "kind": "container",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/ethernet-service-results/ethernet-service-result/flow-step-fins/flow-step-fin",
+      "kind": "list",
+      "depth": 4,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/ethernet-service-results/ethernet-service-result/flow-step-fins/flow-step-fin/fin-status",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/ethernet-service-results/ethernet-service-result/flow-step-fins/flow-step-fin/flow-id",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/ethernet-service-results/ethernet-service-result/flow-step-fins/flow-step-fin/test-step",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/ethernet-service-results/ethernet-service-result/last-step",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/ethernet-service-results/ethernet-service-result/mode",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/ethernet-service-results/ethernet-service-result/real-test-time",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/ethernet-service-results/ethernet-service-result/running-index",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/ethernet-service-results/ethernet-service-result/test-finish-status",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/ethernet-service-results/ethernet-service-result/test-name",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/ethernet-service-results/ethernet-service-result/test-result",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/ethernet-service-results/ethernet-service-result/test-result-index",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/ethernet-service-results/ethernet-service-result/test-unit-steps",
+      "kind": "container",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/ethernet-service-results/ethernet-service-result/test-unit-steps/test-unit-step",
+      "kind": "list",
+      "depth": 4,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/ethernet-service-results/ethernet-service-result/test-unit-steps/test-unit-step/avail-ratio",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/ethernet-service-results/ethernet-service-result/test-unit-steps/test-unit-step/begin-time",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/ethernet-service-results/ethernet-service-result/test-unit-steps/test-unit-step/end-time",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/ethernet-service-results/ethernet-service-result/test-unit-steps/test-unit-step/flow-id",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/ethernet-service-results/ethernet-service-result/test-unit-steps/test-unit-step/frame-loss-count",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/ethernet-service-results/ethernet-service-result/test-unit-steps/test-unit-step/frame-packet-loss-ratio",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/ethernet-service-results/ethernet-service-result/test-unit-steps/test-unit-step/max-frame-delay-vari",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/ethernet-service-results/ethernet-service-result/test-unit-steps/test-unit-step/max-frame-trans-delay",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/ethernet-service-results/ethernet-service-result/test-unit-steps/test-unit-step/max-information-rate",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/ethernet-service-results/ethernet-service-result/test-unit-steps/test-unit-step/mean-frame-delay-vari",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/ethernet-service-results/ethernet-service-result/test-unit-steps/test-unit-step/mean-frame-trans-delay",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/ethernet-service-results/ethernet-service-result/test-unit-steps/test-unit-step/mean-information-rate",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/ethernet-service-results/ethernet-service-result/test-unit-steps/test-unit-step/min-frame-delay-vari",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/ethernet-service-results/ethernet-service-result/test-unit-steps/test-unit-step/min-frame-trans-delay",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/ethernet-service-results/ethernet-service-result/test-unit-steps/test-unit-step/min-information-rate",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/ethernet-service-results/ethernet-service-result/test-unit-steps/test-unit-step/test-result",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/ethernet-service-results/ethernet-service-result/test-unit-steps/test-unit-step/test-stage",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/ethernet-service-results/ethernet-service-result/test-unit-steps/test-unit-step/test-step",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/ethernet-service-results/ethernet-service-result/test-unit-steps/test-unit-step/unavail-count",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/general-flow-results",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/general-flow-results/general-flow-result",
+      "kind": "list",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/general-flow-results/general-flow-result/admin-name",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/general-flow-results/general-flow-result/end-test-time",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/general-flow-results/general-flow-result/estimate-remain-time",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/general-flow-results/general-flow-result/gflow-details",
+      "kind": "container",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/general-flow-results/general-flow-result/gflow-details/gflow-detail",
+      "kind": "list",
+      "depth": 4,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/general-flow-results/general-flow-result/gflow-details/gflow-detail/completions",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/general-flow-results/general-flow-result/gflow-details/gflow-detail/index",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/general-flow-results/general-flow-result/gflow-details/gflow-detail/jitter-average",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/general-flow-results/general-flow-result/gflow-details/gflow-detail/jitter-max",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/general-flow-results/general-flow-result/gflow-details/gflow-detail/jitter-min",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/general-flow-results/general-flow-result/gflow-details/gflow-detail/loss-ratio",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/general-flow-results/general-flow-result/gflow-details/gflow-detail/packet-size",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/general-flow-results/general-flow-result/gflow-details/gflow-detail/precision",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/general-flow-results/general-flow-result/gflow-details/gflow-detail/receive-conut",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/general-flow-results/general-flow-result/gflow-details/gflow-detail/receive-rate",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/general-flow-results/general-flow-result/gflow-details/gflow-detail/rtt-average",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/general-flow-results/general-flow-result/gflow-details/gflow-detail/rtt-max",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/general-flow-results/general-flow-result/gflow-details/gflow-detail/rtt-min",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/general-flow-results/general-flow-result/gflow-details/gflow-detail/send-conut",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/general-flow-results/general-flow-result/gflow-details/gflow-detail/send-rate",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/general-flow-results/general-flow-result/gflow-details/gflow-detail/throughput",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/general-flow-results/general-flow-result/measure",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/general-flow-results/general-flow-result/path-learning-time",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/general-flow-results/general-flow-result/rate-class",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/general-flow-results/general-flow-result/running-index",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/general-flow-results/general-flow-result/start-test-time",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/general-flow-results/general-flow-result/status",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/general-flow-results/general-flow-result/test-name",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/general-flow-results/general-flow-result/test-time",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/general-flow-results/general-flow-result/total-time",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/jitter-results",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/jitter-results/jitter-result",
+      "kind": "list",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/jitter-results/jitter-result/admin-name",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/jitter-results/jitter-result/average-jitter",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/jitter-results/jitter-result/average-jitter-ds",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/jitter-results/jitter-result/average-jitter-sd",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/jitter-results/jitter-result/avg-delay-ds",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/jitter-results/jitter-result/avg-delay-sd",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/jitter-results/jitter-result/busies",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/jitter-results/jitter-result/completions",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/jitter-results/jitter-result/drops",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/jitter-results/jitter-result/icpif",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/jitter-results/jitter-result/jitter-in",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/jitter-results/jitter-result/jitter-out",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/jitter-results/jitter-result/max-delay-ds",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/jitter-results/jitter-result/max-delay-sd",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/jitter-results/jitter-result/max-jitter-nds",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/jitter-results/jitter-result/max-jitter-nsd",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/jitter-results/jitter-result/max-jitter-pds",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/jitter-results/jitter-result/max-jitter-psd",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/jitter-results/jitter-result/min-delay-ds",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/jitter-results/jitter-result/min-delay-sd",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/jitter-results/jitter-result/min-jitter-nds",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/jitter-results/jitter-result/min-jitter-nsd",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/jitter-results/jitter-result/min-jitter-pds",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/jitter-results/jitter-result/min-jitter-psd",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/jitter-results/jitter-result/mos-cq",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/jitter-results/jitter-result/num-jitter-nds",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/jitter-results/jitter-result/num-jitter-nsd",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/jitter-results/jitter-result/num-jitter-pds",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/jitter-results/jitter-result/num-jitter-psd",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/jitter-results/jitter-result/num-of-owd",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/jitter-results/jitter-result/num-of-rtt",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/jitter-results/jitter-result/owd-sum-ds",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/jitter-results/jitter-result/owd-sum-sd",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/jitter-results/jitter-result/owd-thresholds-ds",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/jitter-results/jitter-result/owd-thresholds-sd",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/jitter-results/jitter-result/packet-loss-ds",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/jitter-results/jitter-result/packet-loss-ratio",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/jitter-results/jitter-result/packet-loss-sd",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/jitter-results/jitter-result/packet-loss-unknown",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/jitter-results/jitter-result/response-probes",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/jitter-results/jitter-result/rtd-thresholds",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/jitter-results/jitter-result/rtt-average",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/jitter-results/jitter-result/rtt-max",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/jitter-results/jitter-result/rtt-min",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/jitter-results/jitter-result/rtt-status-errors",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/jitter-results/jitter-result/rtt-sum",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/jitter-results/jitter-result/rtt-sum-square",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/jitter-results/jitter-result/running-index",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/jitter-results/jitter-result/sent-probes",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/jitter-results/jitter-result/sequence-errors",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/jitter-results/jitter-result/square-sum-delay",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/jitter-results/jitter-result/square-sum-delay-sd",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/jitter-results/jitter-result/square-sum-jitter-nds",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/jitter-results/jitter-result/square-sum-jitter-nsd",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/jitter-results/jitter-result/square-sum-jitter-pds",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/jitter-results/jitter-result/square-sum-jitter-psd",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/jitter-results/jitter-result/status",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/jitter-results/jitter-result/sum-jitter-nds",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/jitter-results/jitter-result/sum-jitter-nsd",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/jitter-results/jitter-result/sum-jitter-pds",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/jitter-results/jitter-result/sum-jitter-psd",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/jitter-results/jitter-result/test-name",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/jitter-results/jitter-result/time-unit",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/jitter-results/jitter-result/timeouts",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/lsp-jitter-results",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/lsp-jitter-results/lsp-jitter-result",
+      "kind": "list",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/lsp-jitter-results/lsp-jitter-result/admin-name",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/lsp-jitter-results/lsp-jitter-result/average-jitter-sd",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/lsp-jitter-results/lsp-jitter-result/busies",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/lsp-jitter-results/lsp-jitter-result/completions",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/lsp-jitter-results/lsp-jitter-result/drops",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/lsp-jitter-results/lsp-jitter-result/jitter-out",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/lsp-jitter-results/lsp-jitter-result/max-jitter-nsd",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/lsp-jitter-results/lsp-jitter-result/max-jitter-psd",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/lsp-jitter-results/lsp-jitter-result/min-jitter-nsd",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/lsp-jitter-results/lsp-jitter-result/min-jitter-psd",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/lsp-jitter-results/lsp-jitter-result/num-jitter-nsd",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/lsp-jitter-results/lsp-jitter-result/num-jitter-psd",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/lsp-jitter-results/lsp-jitter-result/num-of-rtt",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/lsp-jitter-results/lsp-jitter-result/packet-loss-ratio",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/lsp-jitter-results/lsp-jitter-result/packet-loss-unknown",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/lsp-jitter-results/lsp-jitter-result/probe-responses",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/lsp-jitter-results/lsp-jitter-result/rtd-thresholds",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/lsp-jitter-results/lsp-jitter-result/rtt-average",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/lsp-jitter-results/lsp-jitter-result/rtt-max",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/lsp-jitter-results/lsp-jitter-result/rtt-min",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/lsp-jitter-results/lsp-jitter-result/rtt-status-errors",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/lsp-jitter-results/lsp-jitter-result/rtt-sum",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/lsp-jitter-results/lsp-jitter-result/rtt-sum-square",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/lsp-jitter-results/lsp-jitter-result/running-index",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/lsp-jitter-results/lsp-jitter-result/sent-probes",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/lsp-jitter-results/lsp-jitter-result/sequence-errors",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/lsp-jitter-results/lsp-jitter-result/square-sum-jitter-nsd",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/lsp-jitter-results/lsp-jitter-result/square-sum-jitter-psd",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/lsp-jitter-results/lsp-jitter-result/status",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/lsp-jitter-results/lsp-jitter-result/sum-jitter-nsd",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/lsp-jitter-results/lsp-jitter-result/sum-jitter-psd",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/lsp-jitter-results/lsp-jitter-result/test-name",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/lsp-jitter-results/lsp-jitter-result/timeouts",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/multi-path-results",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/multi-path-results/multi-path-result",
+      "kind": "list",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/multi-path-results/multi-path-result/admin-name",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/multi-path-results/multi-path-result/busies",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/multi-path-results/multi-path-result/completions",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/multi-path-results/multi-path-result/dest-address",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/multi-path-results/multi-path-result/disconnects",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/multi-path-results/multi-path-result/discriminator",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/multi-path-results/multi-path-result/drops",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/multi-path-results/multi-path-result/last-probe-time",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/multi-path-results/multi-path-result/no-connections",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/multi-path-results/multi-path-result/node-address",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/multi-path-results/multi-path-result/packet-loss-ratio",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/multi-path-results/multi-path-result/path-index",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/multi-path-results/multi-path-result/path-type",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/multi-path-results/multi-path-result/preference",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/multi-path-results/multi-path-result/protocol-origin",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/multi-path-results/multi-path-result/response-probes",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/multi-path-results/multi-path-result/rtd-thresholds",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/multi-path-results/multi-path-result/rtt-average",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/multi-path-results/multi-path-result/rtt-max",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/multi-path-results/multi-path-result/rtt-min",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/multi-path-results/multi-path-result/rtt-status-errors",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/multi-path-results/multi-path-result/rtt-sum",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/multi-path-results/multi-path-result/rtt-sum-square",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/multi-path-results/multi-path-result/running-index",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/multi-path-results/multi-path-result/segment-list-id",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/multi-path-results/multi-path-result/sent-probes",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/multi-path-results/multi-path-result/sequence-errors",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/multi-path-results/multi-path-result/status",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/multi-path-results/multi-path-result/test-attempts",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/multi-path-results/multi-path-result/test-name",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/multi-path-results/multi-path-result/timeouts",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/multi-path-results/multi-path-result/xc-index",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/path-jitter-results",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/path-jitter-results/path-jitter-result",
+      "kind": "list",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/path-jitter-results/path-jitter-result/admin-name",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/path-jitter-results/path-jitter-result/path-jitter-hops",
+      "kind": "container",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/path-jitter-results/path-jitter-result/path-jitter-hops/path-jitter-hop",
+      "kind": "list",
+      "depth": 4,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/path-jitter-results/path-jitter-result/path-jitter-hops/path-jitter-hop/average-jitter",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/path-jitter-results/path-jitter-result/path-jitter-hops/path-jitter-hop/average-jitter-ds",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/path-jitter-results/path-jitter-result/path-jitter-hops/path-jitter-hop/average-jitter-sd",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/path-jitter-results/path-jitter-result/path-jitter-hops/path-jitter-hop/busies",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/path-jitter-results/path-jitter-result/path-jitter-hops/path-jitter-hop/dest-address",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/path-jitter-results/path-jitter-result/path-jitter-hops/path-jitter-hop/drops",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/path-jitter-results/path-jitter-result/path-jitter-hops/path-jitter-hop/index",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/path-jitter-results/path-jitter-result/path-jitter-hops/path-jitter-hop/jitter-completions",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/path-jitter-results/path-jitter-result/path-jitter-hops/path-jitter-hop/jitter-in",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/path-jitter-results/path-jitter-result/path-jitter-hops/path-jitter-hop/jitter-out",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/path-jitter-results/path-jitter-result/path-jitter-hops/path-jitter-hop/jitter-status",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/path-jitter-results/path-jitter-result/path-jitter-hops/path-jitter-hop/max-delay-ds",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/path-jitter-results/path-jitter-result/path-jitter-hops/path-jitter-hop/max-delay-sd",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/path-jitter-results/path-jitter-result/path-jitter-hops/path-jitter-hop/max-jitter-nds",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/path-jitter-results/path-jitter-result/path-jitter-hops/path-jitter-hop/max-jitter-nsd",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/path-jitter-results/path-jitter-result/path-jitter-hops/path-jitter-hop/max-jitter-pds",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/path-jitter-results/path-jitter-result/path-jitter-hops/path-jitter-hop/max-jitter-psd",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/path-jitter-results/path-jitter-result/path-jitter-hops/path-jitter-hop/min-jitter-nds",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/path-jitter-results/path-jitter-result/path-jitter-hops/path-jitter-hop/min-jitter-nsd",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/path-jitter-results/path-jitter-result/path-jitter-hops/path-jitter-hop/min-jitter-pds",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/path-jitter-results/path-jitter-result/path-jitter-hops/path-jitter-hop/min-jitter-psd",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/path-jitter-results/path-jitter-result/path-jitter-hops/path-jitter-hop/num-jitter-nds",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/path-jitter-results/path-jitter-result/path-jitter-hops/path-jitter-hop/num-jitter-nsd",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/path-jitter-results/path-jitter-result/path-jitter-hops/path-jitter-hop/num-jitter-pds",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/path-jitter-results/path-jitter-result/path-jitter-hops/path-jitter-hop/num-jitter-psd",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/path-jitter-results/path-jitter-result/path-jitter-hops/path-jitter-hop/num-of-owd",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/path-jitter-results/path-jitter-result/path-jitter-hops/path-jitter-hop/num-of-rtt",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/path-jitter-results/path-jitter-result/path-jitter-hops/path-jitter-hop/owd-sum-ds",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/path-jitter-results/path-jitter-result/path-jitter-hops/path-jitter-hop/owd-sum-sd",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/path-jitter-results/path-jitter-result/path-jitter-hops/path-jitter-hop/response-probes",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/path-jitter-results/path-jitter-result/path-jitter-hops/path-jitter-hop/rtt-average",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/path-jitter-results/path-jitter-result/path-jitter-hops/path-jitter-hop/rtt-max",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/path-jitter-results/path-jitter-result/path-jitter-hops/path-jitter-hop/rtt-min",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/path-jitter-results/path-jitter-result/path-jitter-hops/path-jitter-hop/rtt-status-errors",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/path-jitter-results/path-jitter-result/path-jitter-hops/path-jitter-hop/rtt-sum",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/path-jitter-results/path-jitter-result/path-jitter-hops/path-jitter-hop/rtt-sum-square",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/path-jitter-results/path-jitter-result/path-jitter-hops/path-jitter-hop/sent-probes",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/path-jitter-results/path-jitter-result/path-jitter-hops/path-jitter-hop/sequence-errors",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/path-jitter-results/path-jitter-result/path-jitter-hops/path-jitter-hop/square-sum-jitter-nds",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/path-jitter-results/path-jitter-result/path-jitter-hops/path-jitter-hop/square-sum-jitter-nsd",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/path-jitter-results/path-jitter-result/path-jitter-hops/path-jitter-hop/square-sum-jitter-pds",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/path-jitter-results/path-jitter-result/path-jitter-hops/path-jitter-hop/square-sum-jitter-psd",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/path-jitter-results/path-jitter-result/path-jitter-hops/path-jitter-hop/sum-jitter-nds",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/path-jitter-results/path-jitter-result/path-jitter-hops/path-jitter-hop/sum-jitter-nsd",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/path-jitter-results/path-jitter-result/path-jitter-hops/path-jitter-hop/sum-jitter-pds",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/path-jitter-results/path-jitter-result/path-jitter-hops/path-jitter-hop/sum-jitter-psd",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/path-jitter-results/path-jitter-result/path-jitter-hops/path-jitter-hop/timeouts",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/path-jitter-results/path-jitter-result/path-status",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/path-jitter-results/path-jitter-result/running-index",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/path-jitter-results/path-jitter-result/status",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/path-jitter-results/path-jitter-result/test-name",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/path-jitter-results/path-jitter-result/trace-completions",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/path-mtu-results",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/path-mtu-results/path-mtu-result",
+      "kind": "list",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/path-mtu-results/path-mtu-result/admin-name",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/path-mtu-results/path-mtu-result/busies",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/path-mtu-results/path-mtu-result/completions",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/path-mtu-results/path-mtu-result/dest-address",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/path-mtu-results/path-mtu-result/drops",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/path-mtu-results/path-mtu-result/mtu",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/path-mtu-results/path-mtu-result/mtu-max",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/path-mtu-results/path-mtu-result/mtu-min",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/path-mtu-results/path-mtu-result/response-probes",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/path-mtu-results/path-mtu-result/running-index",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/path-mtu-results/path-mtu-result/sent-probes",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/path-mtu-results/path-mtu-result/status",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/path-mtu-results/path-mtu-result/step",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/path-mtu-results/path-mtu-result/test-name",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/path-mtu-results/path-mtu-result/timeouts",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/results",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/results/result",
+      "kind": "list",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/results/result/admin-name",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/results/result/busies",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/results/result/completions",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/results/result/dest-address",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/results/result/disconnects",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/results/result/drops",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/results/result/last-probe-time",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/results/result/no-connections",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/results/result/packet-loss-ratio",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/results/result/response-probes",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/results/result/rtd-thresholds",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/results/result/rtt-average",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/results/result/rtt-max",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/results/result/rtt-min",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/results/result/rtt-status-errors",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/results/result/rtt-sum",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/results/result/rtt-sum-square",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/results/result/running-index",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/results/result/sent-probes",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/results/result/sequence-errors",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/results/result/status",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/results/result/test-attempts",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/results/result/test-name",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/results/result/timeouts",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/trace-multi-path-results",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/trace-multi-path-results/trace-multi-path-result",
+      "kind": "list",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/trace-multi-path-results/trace-multi-path-result/admin-name",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/trace-multi-path-results/trace-multi-path-result/busies",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/trace-multi-path-results/trace-multi-path-result/completions",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/trace-multi-path-results/trace-multi-path-result/disconnects",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/trace-multi-path-results/trace-multi-path-result/discriminator",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/trace-multi-path-results/trace-multi-path-result/drops",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/trace-multi-path-results/trace-multi-path-result/hops",
+      "kind": "container",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/trace-multi-path-results/trace-multi-path-result/hops/hop",
+      "kind": "list",
+      "depth": 4,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/trace-multi-path-results/trace-multi-path-result/hops/hop/dest-address",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/trace-multi-path-results/trace-multi-path-result/hops/hop/index",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/trace-multi-path-results/trace-multi-path-result/hops/hop/last-probe-time",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/trace-multi-path-results/trace-multi-path-result/hops/hop/packet-loss-ratio",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/trace-multi-path-results/trace-multi-path-result/hops/hop/response-probes",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/trace-multi-path-results/trace-multi-path-result/hops/hop/rtd-thresholds",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/trace-multi-path-results/trace-multi-path-result/hops/hop/rtt-average",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/trace-multi-path-results/trace-multi-path-result/hops/hop/rtt-max",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/trace-multi-path-results/trace-multi-path-result/hops/hop/rtt-min",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/trace-multi-path-results/trace-multi-path-result/hops/hop/rtt-sum",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/trace-multi-path-results/trace-multi-path-result/hops/hop/rtt-sum-square",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/trace-multi-path-results/trace-multi-path-result/hops/hop/sent-probes",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/trace-multi-path-results/trace-multi-path-result/no-connections",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/trace-multi-path-results/trace-multi-path-result/node-address",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/trace-multi-path-results/trace-multi-path-result/path-index",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/trace-multi-path-results/trace-multi-path-result/path-type",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/trace-multi-path-results/trace-multi-path-result/preference",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/trace-multi-path-results/trace-multi-path-result/protocol-origin",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/trace-multi-path-results/trace-multi-path-result/rtt-status-errors",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/trace-multi-path-results/trace-multi-path-result/running-index",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/trace-multi-path-results/trace-multi-path-result/segment-list-id",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/trace-multi-path-results/trace-multi-path-result/sequence-errors",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/trace-multi-path-results/trace-multi-path-result/status",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/trace-multi-path-results/trace-multi-path-result/test-attempts",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/trace-multi-path-results/trace-multi-path-result/test-name",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/trace-multi-path-results/trace-multi-path-result/timeouts",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/trace-multi-path-results/trace-multi-path-result/xc-index",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/trace-results",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/trace-results/trace-result",
+      "kind": "list",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/trace-results/trace-result/admin-name",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/trace-results/trace-result/busies",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/trace-results/trace-result/completions",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/trace-results/trace-result/disconnects",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/trace-results/trace-result/drops",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/trace-results/trace-result/hops",
+      "kind": "container",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/trace-results/trace-result/hops/hop",
+      "kind": "list",
+      "depth": 4,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/trace-results/trace-result/hops/hop/dest-address",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/trace-results/trace-result/hops/hop/index",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/trace-results/trace-result/hops/hop/last-probe-time",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/trace-results/trace-result/hops/hop/packet-loss-ratio",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/trace-results/trace-result/hops/hop/response-probes",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/trace-results/trace-result/hops/hop/rtd-thresholds",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/trace-results/trace-result/hops/hop/rtt-average",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/trace-results/trace-result/hops/hop/rtt-max",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/trace-results/trace-result/hops/hop/rtt-min",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/trace-results/trace-result/hops/hop/rtt-sum",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/trace-results/trace-result/hops/hop/rtt-sum-square",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/trace-results/trace-result/hops/hop/sent-probes",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/trace-results/trace-result/no-connections",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/trace-results/trace-result/rtt-status-errors",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/trace-results/trace-result/running-index",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/trace-results/trace-result/sequence-errors",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/trace-results/trace-result/status",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/trace-results/trace-result/test-attempts",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/trace-results/trace-result/test-name",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/record/trace-results/trace-result/timeouts",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/reflectors",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/reflectors/reflector",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/reflectors/reflector/address",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "choice",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/reflectors/reflector/ce-vlan",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/reflectors/reflector/dest-port",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/reflectors/reflector/end-time",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/nqa/reflectors/reflector/exchange-port",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/reflectors/reflector/if-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/nqa/reflectors/reflector/pe-vlan",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/reflectors/reflector/recommended-test-mac",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/reflectors/reflector/reflect-flow-ids",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/reflectors/reflector/reflect-flow-ids/reflect-flow-id",
+      "kind": "list",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/reflectors/reflector/reflect-flow-ids/reflect-flow-id/flow-id",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/reflectors/reflector/reflector-id",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/reflectors/reflector/reflector-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/nqa/reflectors/reflector/share-mode",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/reflectors/reflector/source-port",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/reflectors/reflector/survival-time",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/server",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/server/icmp-servers",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/server/icmp-servers/icmp-server",
+      "kind": "list",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/server/icmp-servers/icmp-server/ni-name",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/server/icmp-servers/icmp-server/server-address",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/server/tcp-servers",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/server/tcp-servers/tcp-server",
+      "kind": "list",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/server/tcp-servers/tcp-server/ni-name",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/server/tcp-servers/tcp-server/server-address",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/server/tcp-servers/tcp-server/server-port",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/server/udp-servers",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/server/udp-servers/udp-server",
+      "kind": "list",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/server/udp-servers/udp-server/ni-name",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/server/udp-servers/udp-server/server-address",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/server/udp-servers/udp-server/server-port",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/testflows",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/testflows/testflow",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/testflows/testflow/begin-dest-ip",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/testflows/testflow/begin-dest-mac",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/testflows/testflow/begin-source-ip",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/testflows/testflow/begin-source-mac",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/testflows/testflow/begin-udp-dest-port",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/testflows/testflow/begin-udp-source-port",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/testflows/testflow/ce-vid",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/testflows/testflow/cir",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/testflows/testflow/cir-simple-test",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/testflows/testflow/color-mode",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/testflows/testflow/color-mode/green-begin-value",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/testflows/testflow/color-mode/green-end-value",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/testflows/testflow/color-mode/priority-type",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/testflows/testflow/color-mode/yellow-begin-value",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/testflows/testflow/color-mode/yellow-end-value",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/testflows/testflow/count",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/testflows/testflow/description",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/testflows/testflow/eir",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/testflows/testflow/end-ce-vid",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/testflows/testflow/end-dest-ip",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/testflows/testflow/end-dest-mac",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/testflows/testflow/end-source-ip",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/testflows/testflow/end-source-mac",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/testflows/testflow/end-udp-dest-port",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/testflows/testflow/end-udp-source-port",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/testflows/testflow/fdv",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/testflows/testflow/flr",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/testflows/testflow/ftd",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/testflows/testflow/increment-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/testflows/testflow/ip-mask",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/testflows/testflow/is-color-aware",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/testflows/testflow/mac-mask",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/testflows/testflow/pe-vid",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/testflows/testflow/step",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/testflows/testflow/testflow-id",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/testflows/testflow/traffic-policing",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/upload",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/upload/files",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/upload/files/file",
+      "kind": "list",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/upload/files/file/index",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/upload/files/file/name",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/upload/files/file/retry-times",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/upload/files/file/status",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/upload/files/file/upload-time",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/nqa/upload/intances",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/upload/intances/intance",
+      "kind": "list",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/upload/intances/intance/file-name",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/upload/intances/intance/interval",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/upload/intances/intance/ni-name",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/upload/intances/intance/pass-word",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/upload/intances/intance/port-number",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/upload/intances/intance/retry-times",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/upload/intances/intance/server-address",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/upload/intances/intance/test-type",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/nqa/upload/intances/intance/user-name",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    }
+  ]
+}

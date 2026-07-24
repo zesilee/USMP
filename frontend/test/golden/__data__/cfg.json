@@ -1,0 +1,1567 @@
+{
+  "module": "cfg",
+  "tabs": [
+    {
+      "name": "auto-backup",
+      "kind": "form"
+    },
+    {
+      "name": "autosave",
+      "kind": "form"
+    },
+    {
+      "name": "autosave-checkpoint",
+      "kind": "form"
+    },
+    {
+      "name": "backup-and-recovery-states",
+      "kind": "list"
+    },
+    {
+      "name": "backup-servers",
+      "kind": "list"
+    },
+    {
+      "name": "cfg-files",
+      "kind": "list"
+    },
+    {
+      "name": "checkpoints",
+      "kind": "list"
+    },
+    {
+      "name": "clear-interface-results",
+      "kind": "list"
+    },
+    {
+      "name": "config-auto-backup-files",
+      "kind": "list"
+    },
+    {
+      "name": "config-change-flowid",
+      "kind": "form"
+    },
+    {
+      "name": "config-recover-results",
+      "kind": "list"
+    },
+    {
+      "name": "config-rollback-result",
+      "kind": "form"
+    },
+    {
+      "name": "config-sessions",
+      "kind": "list"
+    },
+    {
+      "name": "configuration-operation-cpu-limit",
+      "kind": "form"
+    },
+    {
+      "name": "global-switch",
+      "kind": "form"
+    },
+    {
+      "name": "last-save-info",
+      "kind": "form"
+    },
+    {
+      "name": "lock-by-username",
+      "kind": "form"
+    },
+    {
+      "name": "lock-by-users",
+      "kind": "list"
+    },
+    {
+      "name": "saved-configuration-time",
+      "kind": "form"
+    },
+    {
+      "name": "startup-infos",
+      "kind": "list"
+    },
+    {
+      "name": "startup-lock",
+      "kind": "form"
+    },
+    {
+      "name": "trial-status",
+      "kind": "form"
+    },
+    {
+      "name": "user-lock",
+      "kind": "form"
+    }
+  ],
+  "lists": {
+    "backup-and-recovery-states": {
+      "keyField": "index",
+      "columns": [
+        {
+          "name": "index",
+          "widget": "number"
+        },
+        {
+          "name": "operation-type",
+          "widget": "enum"
+        },
+        {
+          "name": "service-type",
+          "widget": "enum"
+        },
+        {
+          "name": "state",
+          "widget": "enum"
+        },
+        {
+          "name": "filename",
+          "widget": "string"
+        },
+        {
+          "name": "last-time",
+          "widget": "number"
+        },
+        {
+          "name": "operate-progress",
+          "widget": "number"
+        },
+        {
+          "name": "start-time",
+          "widget": "string"
+        }
+      ],
+      "filterable": []
+    },
+    "backup-servers": {
+      "keyField": "server-ip",
+      "columns": [
+        {
+          "name": "server-ip",
+          "widget": "string"
+        },
+        {
+          "name": "vpn-instance",
+          "widget": "string"
+        },
+        {
+          "name": "password",
+          "widget": "string"
+        },
+        {
+          "name": "port",
+          "widget": "number"
+        },
+        {
+          "name": "username",
+          "widget": "string"
+        },
+        {
+          "name": "transport-type",
+          "widget": "enum"
+        },
+        {
+          "name": "path",
+          "widget": "string"
+        }
+      ],
+      "filterable": []
+    },
+    "cfg-files": {
+      "keyField": "filename",
+      "columns": [
+        {
+          "name": "filename",
+          "widget": "string"
+        },
+        {
+          "name": "create-time",
+          "widget": "string"
+        },
+        {
+          "name": "size",
+          "widget": "number"
+        }
+      ],
+      "filterable": []
+    },
+    "checkpoints": {
+      "keyField": "commit-id",
+      "columns": [
+        {
+          "name": "commit-id",
+          "widget": "string"
+        },
+        {
+          "name": "client",
+          "widget": "enum"
+        },
+        {
+          "name": "description",
+          "widget": "string"
+        },
+        {
+          "name": "line",
+          "widget": "string"
+        },
+        {
+          "name": "timestamp",
+          "widget": "string"
+        },
+        {
+          "name": "user-label",
+          "widget": "string"
+        },
+        {
+          "name": "username",
+          "widget": "string"
+        }
+      ],
+      "filterable": []
+    },
+    "clear-interface-results": {
+      "keyField": "interface-name",
+      "columns": [
+        {
+          "name": "interface-name",
+          "widget": "string"
+        },
+        {
+          "name": "result",
+          "widget": "string"
+        }
+      ],
+      "filterable": []
+    },
+    "config-auto-backup-files": {
+      "keyField": "auto-backup-time",
+      "columns": [
+        {
+          "name": "auto-backup-time",
+          "widget": "string"
+        }
+      ],
+      "filterable": []
+    },
+    "config-recover-results": {
+      "keyField": "index",
+      "columns": [
+        {
+          "name": "index",
+          "widget": "number"
+        },
+        {
+          "name": "reason",
+          "widget": "enum"
+        },
+        {
+          "name": "command",
+          "widget": "string"
+        },
+        {
+          "name": "line",
+          "widget": "number"
+        },
+        {
+          "name": "time",
+          "widget": "string"
+        },
+        {
+          "name": "view",
+          "widget": "string"
+        }
+      ],
+      "filterable": []
+    },
+    "config-sessions": {
+      "keyField": "sessionid",
+      "columns": [
+        {
+          "name": "sessionid",
+          "widget": "number"
+        },
+        {
+          "name": "client",
+          "widget": "enum"
+        },
+        {
+          "name": "create-time",
+          "widget": "string"
+        },
+        {
+          "name": "line",
+          "widget": "string"
+        },
+        {
+          "name": "lock-reason",
+          "widget": "string"
+        },
+        {
+          "name": "username",
+          "widget": "string"
+        }
+      ],
+      "filterable": []
+    },
+    "lock-by-users": {
+      "keyField": "lock-username",
+      "columns": [
+        {
+          "name": "lock-username",
+          "widget": "string"
+        },
+        {
+          "name": "identifier",
+          "widget": "number"
+        },
+        {
+          "name": "lock-time",
+          "widget": "string"
+        },
+        {
+          "name": "unlock-time",
+          "widget": "string"
+        },
+        {
+          "name": "unlock-username",
+          "widget": "string"
+        }
+      ],
+      "filterable": []
+    },
+    "startup-infos": {
+      "keyField": "position",
+      "columns": [
+        {
+          "name": "position",
+          "widget": "string"
+        },
+        {
+          "name": "configed-system-software",
+          "widget": "string"
+        },
+        {
+          "name": "current-cfg-file",
+          "widget": "string"
+        },
+        {
+          "name": "current-patch-file",
+          "widget": "string"
+        },
+        {
+          "name": "current-system-software",
+          "widget": "string"
+        },
+        {
+          "name": "next-cfg-file",
+          "widget": "string"
+        },
+        {
+          "name": "next-patch-file",
+          "widget": "string"
+        },
+        {
+          "name": "next-system-software",
+          "widget": "string"
+        }
+      ],
+      "filterable": []
+    }
+  },
+  "tree": [
+    {
+      "path": "/cfg/auto-backup",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/cfg/auto-backup/interval-time",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/cfg/auto-backup/start-time",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/cfg/autosave",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/cfg/autosave/cpu-limit",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/cfg/autosave/delay-time",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/cfg/autosave/interval-time",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/cfg/autosave-checkpoint",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/cfg/autosave-checkpoint/start-time",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/cfg/backup-and-recovery-states",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/backup-and-recovery-states/backup-and-recovery-state",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/backup-and-recovery-states/backup-and-recovery-state/filename",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/backup-and-recovery-states/backup-and-recovery-state/index",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/backup-and-recovery-states/backup-and-recovery-state/last-time",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/backup-and-recovery-states/backup-and-recovery-state/operate-progress",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/backup-and-recovery-states/backup-and-recovery-state/operation-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/backup-and-recovery-states/backup-and-recovery-state/service-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/backup-and-recovery-states/backup-and-recovery-state/start-time",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/backup-and-recovery-states/backup-and-recovery-state/state",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/backup-servers",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/cfg/backup-servers/backup-server",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/cfg/backup-servers/backup-server/password",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/cfg/backup-servers/backup-server/path",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/cfg/backup-servers/backup-server/port",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/cfg/backup-servers/backup-server/server-ip",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/cfg/backup-servers/backup-server/transport-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/cfg/backup-servers/backup-server/username",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/cfg/backup-servers/backup-server/vpn-instance",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/cfg/cfg-files",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/cfg-files/cfg-file",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/cfg-files/cfg-file/create-time",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/cfg-files/cfg-file/file-current-changes",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/cfg-files/cfg-file/file-current-changes/file-current-change",
+      "kind": "list",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/cfg-files/cfg-file/file-current-changes/file-current-change/config-change",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/cfg-files/cfg-file/file-current-changes/file-current-change/index",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/cfg-files/cfg-file/filename",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/cfg-files/cfg-file/size",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/checkpoints",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/checkpoints/checkpoint",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/checkpoints/checkpoint/client",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/checkpoints/checkpoint/commit-id",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/checkpoints/checkpoint/current-point-changes",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/checkpoints/checkpoint/current-point-changes/current-point-change",
+      "kind": "list",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/checkpoints/checkpoint/current-point-changes/current-point-change/config-change",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/checkpoints/checkpoint/current-point-changes/current-point-change/index",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/checkpoints/checkpoint/description",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/checkpoints/checkpoint/line",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/checkpoints/checkpoint/since-point-changes",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/checkpoints/checkpoint/since-point-changes/since-point-change",
+      "kind": "list",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/checkpoints/checkpoint/since-point-changes/since-point-change/config-change",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/checkpoints/checkpoint/since-point-changes/since-point-change/index",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/checkpoints/checkpoint/timestamp",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/checkpoints/checkpoint/user-label",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/checkpoints/checkpoint/username",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/clear-interface-results",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/clear-interface-results/clear-interface-result",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/clear-interface-results/clear-interface-result/interface-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/clear-interface-results/clear-interface-result/result",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/config-auto-backup-files",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/config-auto-backup-files/config-auto-backup-file",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/config-auto-backup-files/config-auto-backup-file/auto-backup-time",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/config-change-flowid",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/config-change-flowid/config-baseline-time",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/config-change-flowid/config-change-flowid",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/config-recover-results",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/config-recover-results/config-recover-result",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/config-recover-results/config-recover-result/command",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/config-recover-results/config-recover-result/index",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/config-recover-results/config-recover-result/line",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/config-recover-results/config-recover-result/reason",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/config-recover-results/config-recover-result/time",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/config-recover-results/config-recover-result/view",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/config-rollback-result",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/config-sessions",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/config-sessions/config-session",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/config-sessions/config-session/client",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/config-sessions/config-session/create-time",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/config-sessions/config-session/line",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/config-sessions/config-session/lock-reason",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/config-sessions/config-session/sessionid",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/config-sessions/config-session/username",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/configuration-operation-cpu-limit",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/cfg/configuration-operation-cpu-limit/netconf-cpu-limit",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/cfg/configuration-operation-cpu-limit/netconf-switch",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/cfg/configuration-operation-cpu-limit/snmp-cpu-limit",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/cfg/configuration-operation-cpu-limit/snmp-switch",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/cfg/global-switch",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/cfg/global-switch/appdata-detect-switch",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/cfg/global-switch/checkpoint-switch",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/cfg/global-switch/configuration-slave-detect-switch",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/cfg/last-save-info",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/last-save-info/save-method",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/last-save-info/save-result",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/last-save-info/save-time",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/lock-by-username",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/lock-by-username/identifier",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/lock-by-username/lock-time",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/lock-by-username/lock-username",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/lock-by-username/unlock-time",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/lock-by-username/unlock-username",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/lock-by-users",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/cfg/lock-by-users/lock-by-user",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/cfg/lock-by-users/lock-by-user/identifier",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/lock-by-users/lock-by-user/lock-time",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/lock-by-users/lock-by-user/lock-username",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/cfg/lock-by-users/lock-by-user/unlock-time",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/lock-by-users/lock-by-user/unlock-username",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/saved-configuration-time",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/saved-configuration-time/auto-save-time",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/saved-configuration-time/manual-save-time",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/startup-infos",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/startup-infos/startup-info",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/startup-infos/startup-info/configed-system-software",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/startup-infos/startup-info/current-cfg-file",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/startup-infos/startup-info/current-patch-file",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/startup-infos/startup-info/current-system-software",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/startup-infos/startup-info/next-cfg-file",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/startup-infos/startup-info/next-patch-file",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/startup-infos/startup-info/next-system-software",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/startup-infos/startup-info/position",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/startup-lock",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/startup-lock/lock-time",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/startup-lock/session-name",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/startup-lock/user-index",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/startup-lock/user-ip",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/startup-lock/username",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/trial-status",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/trial-status/status",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/trial-status/time-left",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/user-lock",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/user-lock/last-config-time",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/user-lock/lock-time",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/user-lock/session-name",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/user-lock/user-index",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/user-lock/user-ip",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/user-lock/user-lock-timeout-time",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/cfg/user-lock/username",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    }
+  ]
+}

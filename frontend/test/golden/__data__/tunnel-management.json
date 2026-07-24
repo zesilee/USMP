@@ -1,0 +1,363 @@
+{
+  "module": "tunnel-management",
+  "tabs": [
+    {
+      "name": "subscribe-tunnel-policys",
+      "kind": "list"
+    },
+    {
+      "name": "tunnel-down-switch",
+      "kind": "form"
+    },
+    {
+      "name": "tunnel-infos",
+      "kind": "list"
+    },
+    {
+      "name": "tunnel-policys",
+      "kind": "list"
+    },
+    {
+      "name": "tunnel-statisticss",
+      "kind": "list"
+    }
+  ],
+  "lists": {
+    "subscribe-tunnel-policys": {
+      "keyField": "policy-name",
+      "columns": [
+        {
+          "name": "policy-name",
+          "widget": "string"
+        },
+        {
+          "name": "policy-exist",
+          "widget": "enum"
+        },
+        {
+          "name": "count",
+          "widget": "number"
+        }
+      ],
+      "filterable": []
+    },
+    "tunnel-infos": {
+      "keyField": "id",
+      "columns": [
+        {
+          "name": "id",
+          "widget": "string"
+        },
+        {
+          "name": "status",
+          "widget": "enum"
+        },
+        {
+          "name": "type",
+          "widget": "enum"
+        },
+        {
+          "name": "cost",
+          "widget": "number"
+        },
+        {
+          "name": "destination",
+          "widget": "string"
+        },
+        {
+          "name": "name",
+          "widget": "string"
+        },
+        {
+          "name": "sr-te-policy-color",
+          "widget": "number"
+        },
+        {
+          "name": "sr-te-policy-group",
+          "widget": "number"
+        }
+      ],
+      "filterable": []
+    },
+    "tunnel-policys": {
+      "keyField": "name",
+      "columns": [
+        {
+          "name": "name",
+          "widget": "string"
+        },
+        {
+          "name": "description",
+          "widget": "string"
+        }
+      ],
+      "filterable": []
+    },
+    "tunnel-statisticss": {
+      "keyField": "type",
+      "columns": [
+        {
+          "name": "type",
+          "widget": "enum"
+        },
+        {
+          "name": "number",
+          "widget": "number"
+        }
+      ],
+      "filterable": []
+    }
+  },
+  "tree": [
+    {
+      "path": "/tunnel-management/subscribe-tunnel-policys",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/tunnel-management/subscribe-tunnel-policys/subscribe-tunnel-policy",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/tunnel-management/subscribe-tunnel-policys/subscribe-tunnel-policy/count",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/tunnel-management/subscribe-tunnel-policys/subscribe-tunnel-policy/policy-exist",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/tunnel-management/subscribe-tunnel-policys/subscribe-tunnel-policy/policy-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/tunnel-management/tunnel-down-switch",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/tunnel-management/tunnel-down-switch/enable",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/tunnel-management/tunnel-infos",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/tunnel-management/tunnel-infos/tunnel-info",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/tunnel-management/tunnel-infos/tunnel-info/cost",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/tunnel-management/tunnel-infos/tunnel-info/destination",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/tunnel-management/tunnel-infos/tunnel-info/id",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/tunnel-management/tunnel-infos/tunnel-info/name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/tunnel-management/tunnel-infos/tunnel-info/sr-te-policy-color",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/tunnel-management/tunnel-infos/tunnel-info/sr-te-policy-group",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/tunnel-management/tunnel-infos/tunnel-info/status",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/tunnel-management/tunnel-infos/tunnel-info/type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/tunnel-management/tunnel-policys",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/tunnel-management/tunnel-policys/tunnel-policy",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/tunnel-management/tunnel-policys/tunnel-policy/description",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/tunnel-management/tunnel-policys/tunnel-policy/ipv4-set",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/tunnel-management/tunnel-policys/tunnel-policy/ipv4-set/policy-type",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "choice",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/tunnel-management/tunnel-policys/tunnel-policy/ipv6-set",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/tunnel-management/tunnel-policys/tunnel-policy/ipv6-set/policy-type",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "choice",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/tunnel-management/tunnel-policys/tunnel-policy/name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/tunnel-management/tunnel-statisticss",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/tunnel-management/tunnel-statisticss/tunnel-statistics",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/tunnel-management/tunnel-statisticss/tunnel-statistics/number",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/tunnel-management/tunnel-statisticss/tunnel-statistics/type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    }
+  ]
+}

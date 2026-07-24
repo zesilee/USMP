@@ -1,0 +1,191 @@
+{
+  "module": "mac-flapping-detect",
+  "tabs": [
+    {
+      "name": "exclude-bds",
+      "kind": "list"
+    },
+    {
+      "name": "exclude-mac-addresses",
+      "kind": "list"
+    },
+    {
+      "name": "exclude-vlan",
+      "kind": "form"
+    },
+    {
+      "name": "global-attribute",
+      "kind": "form"
+    }
+  ],
+  "lists": {
+    "exclude-bds": {
+      "keyField": "bd-begin",
+      "columns": [
+        {
+          "name": "bd-begin",
+          "widget": "number"
+        },
+        {
+          "name": "bd-end",
+          "widget": "number"
+        }
+      ],
+      "filterable": []
+    },
+    "exclude-mac-addresses": {
+      "keyField": "address",
+      "columns": [
+        {
+          "name": "address",
+          "widget": "string"
+        },
+        {
+          "name": "mask",
+          "widget": "number"
+        }
+      ],
+      "filterable": []
+    }
+  },
+  "tree": [
+    {
+      "path": "/mac-flapping-detect/exclude-bds",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mac-flapping-detect/exclude-bds/exclude-bd",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mac-flapping-detect/exclude-bds/exclude-bd/bd-begin",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mac-flapping-detect/exclude-bds/exclude-bd/bd-end",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mac-flapping-detect/exclude-mac-addresses",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mac-flapping-detect/exclude-mac-addresses/exclude-mac-address",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mac-flapping-detect/exclude-mac-addresses/exclude-mac-address/address",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mac-flapping-detect/exclude-mac-addresses/exclude-mac-address/mask",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mac-flapping-detect/exclude-vlan",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mac-flapping-detect/exclude-vlan/vlan-list",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mac-flapping-detect/global-attribute",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mac-flapping-detect/global-attribute/aging-time",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mac-flapping-detect/global-attribute/detect-enable",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mac-flapping-detect/global-attribute/detect-type",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "choice",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mac-flapping-detect/global-attribute/trap-enable",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mac-flapping-detect/global-attribute/trap-interval",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    }
+  ]
+}

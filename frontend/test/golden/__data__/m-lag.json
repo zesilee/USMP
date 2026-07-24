@@ -1,0 +1,603 @@
+{
+  "module": "m-lag",
+  "tabs": [
+    {
+      "name": "dfs-groups",
+      "kind": "list"
+    },
+    {
+      "name": "negotiation-states",
+      "kind": "list"
+    }
+  ],
+  "lists": {
+    "dfs-groups": {
+      "keyField": "group-id",
+      "columns": [
+        {
+          "name": "group-id",
+          "widget": "number"
+        },
+        {
+          "name": "priority",
+          "widget": "number"
+        }
+      ],
+      "filterable": []
+    },
+    "negotiation-states": {
+      "keyField": "dfs-role",
+      "columns": [
+        {
+          "name": "dfs-role",
+          "widget": "enum"
+        },
+        {
+          "name": "heart-beat-state",
+          "widget": "enum"
+        }
+      ],
+      "filterable": []
+    }
+  },
+  "tree": [
+    {
+      "path": "/m-lag/dfs-groups",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/m-lag/dfs-groups/dfs-group",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/m-lag/dfs-groups/dfs-group/authentication",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/m-lag/dfs-groups/dfs-group/authentication/mode",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/m-lag/dfs-groups/dfs-group/authentication/password",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/m-lag/dfs-groups/dfs-group/consistency-check",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/m-lag/dfs-groups/dfs-group/consistency-check/mode",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/m-lag/dfs-groups/dfs-group/dad-error-down",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/m-lag/dfs-groups/dfs-group/dad-error-down/delay",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/m-lag/dfs-groups/dfs-group/dad-error-down/enable",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/m-lag/dfs-groups/dfs-group/dad-error-down/error-down-mode",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/m-lag/dfs-groups/dfs-group/group-id",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/m-lag/dfs-groups/dfs-group/lacp-switch-delay",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/m-lag/dfs-groups/dfs-group/lacp-switch-delay/system-id-switch-mode",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "choice",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/m-lag/dfs-groups/dfs-group/mac-address-remain",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/m-lag/dfs-groups/dfs-group/mac-address-remain/paired-port",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/m-lag/dfs-groups/dfs-group/mac-address-remain/unpaired-port",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/m-lag/dfs-groups/dfs-group/priority",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/m-lag/dfs-groups/dfs-group/sessions",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/m-lag/dfs-groups/dfs-group/sessions/session",
+      "kind": "list",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/m-lag/dfs-groups/dfs-group/sessions/session/dfs-proto-type",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/m-lag/dfs-groups/dfs-group/sessions/session/peer-ip",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/m-lag/dfs-groups/dfs-group/sessions/session/peer-port",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/m-lag/dfs-groups/dfs-group/sessions/session/socket-type",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/m-lag/dfs-groups/dfs-group/sessions/session/source-ip",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/m-lag/dfs-groups/dfs-group/sessions/session/timeout",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/m-lag/dfs-groups/dfs-group/sessions/session/vpn-name",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/m-lag/dfs-groups/dfs-group/up-delay",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/m-lag/dfs-groups/dfs-group/up-delay/auto-recovery-interval",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/m-lag/dfs-groups/dfs-group/up-delay/up-delay-timer",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/m-lag/negotiation-states",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/m-lag/negotiation-states/negotiation-state",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/m-lag/negotiation-states/negotiation-state/dfs-group-states",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/m-lag/negotiation-states/negotiation-state/dfs-group-states/dfs-group-state",
+      "kind": "list",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/m-lag/negotiation-states/negotiation-state/dfs-group-states/dfs-group-state/causation",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/m-lag/negotiation-states/negotiation-state/dfs-group-states/dfs-group-state/consistency-check",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/m-lag/negotiation-states/negotiation-state/dfs-group-states/dfs-group-state/device-type",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/m-lag/negotiation-states/negotiation-state/dfs-group-states/dfs-group-state/group-id",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/m-lag/negotiation-states/negotiation-state/dfs-group-states/dfs-group-state/ip-address",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/m-lag/negotiation-states/negotiation-state/dfs-group-states/dfs-group-state/priority",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/m-lag/negotiation-states/negotiation-state/dfs-group-states/dfs-group-state/state",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/m-lag/negotiation-states/negotiation-state/dfs-group-states/dfs-group-state/system-id",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/m-lag/negotiation-states/negotiation-state/dfs-group-states/dfs-group-state/system-name",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/m-lag/negotiation-states/negotiation-state/dfs-group-states/dfs-group-state/udp-port",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/m-lag/negotiation-states/negotiation-state/dfs-group-states/dfs-group-state/version",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/m-lag/negotiation-states/negotiation-state/dfs-group-states/dfs-group-state/vpn-name",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/m-lag/negotiation-states/negotiation-state/dfs-group-states/m-lags",
+      "kind": "container",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/m-lag/negotiation-states/negotiation-state/dfs-group-states/m-lags/m-lag",
+      "kind": "list",
+      "depth": 4,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/m-lag/negotiation-states/negotiation-state/dfs-group-states/m-lags/m-lag/causation",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/m-lag/negotiation-states/negotiation-state/dfs-group-states/m-lags/m-lag/consistency-check",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/m-lag/negotiation-states/negotiation-state/dfs-group-states/m-lags/m-lag/group-id",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/m-lag/negotiation-states/negotiation-state/dfs-group-states/m-lags/m-lag/id",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/m-lag/negotiation-states/negotiation-state/dfs-group-states/m-lags/m-lag/interface-name",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/m-lag/negotiation-states/negotiation-state/dfs-group-states/m-lags/m-lag/port-role",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/m-lag/negotiation-states/negotiation-state/dfs-group-states/m-lags/m-lag/port-state",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/m-lag/negotiation-states/negotiation-state/dfs-group-states/m-lags/m-lag/port-status",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/m-lag/negotiation-states/negotiation-state/dfs-group-states/peer-link-states",
+      "kind": "container",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/m-lag/negotiation-states/negotiation-state/dfs-group-states/peer-link-states/peer-link-state",
+      "kind": "list",
+      "depth": 4,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/m-lag/negotiation-states/negotiation-state/dfs-group-states/peer-link-states/peer-link-state/group-id",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/m-lag/negotiation-states/negotiation-state/dfs-group-states/peer-link-states/peer-link-state/interface-name",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/m-lag/negotiation-states/negotiation-state/dfs-group-states/peer-link-states/peer-link-state/link-id",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/m-lag/negotiation-states/negotiation-state/dfs-group-states/peer-link-states/peer-link-state/port-state",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/m-lag/negotiation-states/negotiation-state/dfs-role",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/m-lag/negotiation-states/negotiation-state/heart-beat-state",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    }
+  ]
+}

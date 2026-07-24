@@ -1,0 +1,4797 @@
+{
+  "module": "devm",
+  "tabs": [
+    {
+      "name": "cards",
+      "kind": "list"
+    },
+    {
+      "name": "cf-cards",
+      "kind": "list"
+    },
+    {
+      "name": "chassiss",
+      "kind": "list"
+    },
+    {
+      "name": "containers",
+      "kind": "list"
+    },
+    {
+      "name": "driver",
+      "kind": "form"
+    },
+    {
+      "name": "entity-classes",
+      "kind": "list"
+    },
+    {
+      "name": "inconsistent-entitys",
+      "kind": "list"
+    },
+    {
+      "name": "logic-containers",
+      "kind": "list"
+    },
+    {
+      "name": "logic-entitys",
+      "kind": "list"
+    },
+    {
+      "name": "logic-ports",
+      "kind": "list"
+    },
+    {
+      "name": "lpu-boards",
+      "kind": "list"
+    },
+    {
+      "name": "mpu-boards",
+      "kind": "list"
+    },
+    {
+      "name": "offlines",
+      "kind": "list"
+    },
+    {
+      "name": "physical-entitys",
+      "kind": "list"
+    },
+    {
+      "name": "ports",
+      "kind": "list"
+    },
+    {
+      "name": "schedule-reboot",
+      "kind": "form"
+    },
+    {
+      "name": "sfu-boards",
+      "kind": "list"
+    }
+  ],
+  "lists": {
+    "cards": {
+      "keyField": "index",
+      "columns": [
+        {
+          "name": "index",
+          "widget": "number"
+        },
+        {
+          "name": "position",
+          "widget": "string"
+        },
+        {
+          "name": "init-status",
+          "widget": "enum"
+        },
+        {
+          "name": "register-status",
+          "widget": "enum"
+        },
+        {
+          "name": "hard-type",
+          "widget": "string"
+        },
+        {
+          "name": "port-num",
+          "widget": "number"
+        },
+        {
+          "name": "type",
+          "widget": "string"
+        }
+      ],
+      "filterable": []
+    },
+    "cf-cards": {
+      "keyField": "position",
+      "columns": [
+        {
+          "name": "position",
+          "widget": "string"
+        },
+        {
+          "name": "serial-number",
+          "widget": "string"
+        },
+        {
+          "name": "card-type",
+          "widget": "string"
+        },
+        {
+          "name": "index",
+          "widget": "number"
+        },
+        {
+          "name": "memory-free",
+          "widget": "number"
+        },
+        {
+          "name": "memory-size",
+          "widget": "number"
+        },
+        {
+          "name": "memory-used",
+          "widget": "number"
+        }
+      ],
+      "filterable": []
+    },
+    "chassiss": {
+      "keyField": "position",
+      "columns": [
+        {
+          "name": "position",
+          "widget": "string"
+        },
+        {
+          "name": "current-run-mode",
+          "widget": "enum"
+        },
+        {
+          "name": "next-run-mode",
+          "widget": "enum"
+        },
+        {
+          "name": "alarm-exist-days",
+          "widget": "number"
+        },
+        {
+          "name": "board-num",
+          "widget": "number"
+        },
+        {
+          "name": "current-id",
+          "widget": "number"
+        },
+        {
+          "name": "dust-clean-cycle",
+          "widget": "number"
+        },
+        {
+          "name": "entity-last-change",
+          "widget": "number"
+        },
+        {
+          "name": "fan-num",
+          "widget": "number"
+        }
+      ],
+      "filterable": []
+    },
+    "containers": {
+      "keyField": "position",
+      "columns": [
+        {
+          "name": "position",
+          "widget": "string"
+        },
+        {
+          "name": "equiped-entity-type",
+          "widget": "string"
+        },
+        {
+          "name": "index",
+          "widget": "number"
+        },
+        {
+          "name": "type",
+          "widget": "string"
+        }
+      ],
+      "filterable": []
+    },
+    "entity-classes": {
+      "keyField": "class-name",
+      "columns": [
+        {
+          "name": "class-name",
+          "widget": "enum"
+        },
+        {
+          "name": "is-resetable",
+          "widget": "boolean"
+        },
+        {
+          "name": "is-switchoverable",
+          "widget": "boolean"
+        }
+      ],
+      "filterable": []
+    },
+    "inconsistent-entitys": {
+      "keyField": "class",
+      "columns": [
+        {
+          "name": "class",
+          "widget": "enum"
+        },
+        {
+          "name": "position",
+          "widget": "string"
+        },
+        {
+          "name": "serial-number",
+          "widget": "string"
+        },
+        {
+          "name": "logical-type",
+          "widget": "enum"
+        },
+        {
+          "name": "oper-state",
+          "widget": "enum"
+        },
+        {
+          "name": "physical-type",
+          "widget": "enum"
+        }
+      ],
+      "filterable": []
+    },
+    "logic-containers": {
+      "keyField": "position",
+      "columns": [
+        {
+          "name": "position",
+          "widget": "string"
+        },
+        {
+          "name": "container-type",
+          "widget": "enum"
+        },
+        {
+          "name": "equiped-entity-type",
+          "widget": "enum"
+        },
+        {
+          "name": "index",
+          "widget": "number"
+        }
+      ],
+      "filterable": []
+    },
+    "logic-entitys": {
+      "keyField": "class",
+      "columns": [
+        {
+          "name": "class",
+          "widget": "enum"
+        },
+        {
+          "name": "position",
+          "widget": "string"
+        },
+        {
+          "name": "serial-number",
+          "widget": "string"
+        },
+        {
+          "name": "oper-state",
+          "widget": "enum"
+        },
+        {
+          "name": "vendor-type",
+          "widget": "enum"
+        },
+        {
+          "name": "entity-description",
+          "widget": "string"
+        },
+        {
+          "name": "index",
+          "widget": "number"
+        },
+        {
+          "name": "memo",
+          "widget": "string"
+        },
+        {
+          "name": "name",
+          "widget": "string"
+        }
+      ],
+      "filterable": []
+    },
+    "logic-ports": {
+      "keyField": "port-type",
+      "columns": [
+        {
+          "name": "port-type",
+          "widget": "enum"
+        },
+        {
+          "name": "position",
+          "widget": "string"
+        },
+        {
+          "name": "serial-number",
+          "widget": "string"
+        },
+        {
+          "name": "admin-state",
+          "widget": "enum"
+        },
+        {
+          "name": "hard-type",
+          "widget": "enum"
+        },
+        {
+          "name": "level",
+          "widget": "enum"
+        },
+        {
+          "name": "enable-transmission-delay",
+          "widget": "number"
+        },
+        {
+          "name": "index",
+          "widget": "number"
+        }
+      ],
+      "filterable": []
+    },
+    "lpu-boards": {
+      "keyField": "position",
+      "columns": [
+        {
+          "name": "position",
+          "widget": "string"
+        },
+        {
+          "name": "next-service-type",
+          "widget": "enum"
+        },
+        {
+          "name": "service-type",
+          "widget": "enum"
+        },
+        {
+          "name": "board-type",
+          "widget": "string"
+        },
+        {
+          "name": "clock-8k-port",
+          "widget": "string"
+        },
+        {
+          "name": "current-l3-clk",
+          "widget": "number"
+        },
+        {
+          "name": "flash-size",
+          "widget": "number"
+        },
+        {
+          "name": "index",
+          "widget": "number"
+        },
+        {
+          "name": "is-register",
+          "widget": "boolean"
+        }
+      ],
+      "filterable": []
+    },
+    "mpu-boards": {
+      "keyField": "position",
+      "columns": [
+        {
+          "name": "position",
+          "widget": "string"
+        },
+        {
+          "name": "ls-role",
+          "widget": "enum"
+        },
+        {
+          "name": "board-type",
+          "widget": "string"
+        },
+        {
+          "name": "cfcard-size",
+          "widget": "number"
+        },
+        {
+          "name": "cfcard2-size",
+          "widget": "number"
+        },
+        {
+          "name": "flash-size",
+          "widget": "number"
+        },
+        {
+          "name": "index",
+          "widget": "number"
+        },
+        {
+          "name": "is-register",
+          "widget": "boolean"
+        },
+        {
+          "name": "last-reset-reason",
+          "widget": "string"
+        }
+      ],
+      "filterable": []
+    },
+    "offlines": {
+      "keyField": "class",
+      "columns": [
+        {
+          "name": "class",
+          "widget": "enum"
+        },
+        {
+          "name": "position",
+          "widget": "string"
+        }
+      ],
+      "filterable": []
+    },
+    "physical-entitys": {
+      "keyField": "class",
+      "columns": [
+        {
+          "name": "class",
+          "widget": "enum"
+        },
+        {
+          "name": "position",
+          "widget": "string"
+        },
+        {
+          "name": "serial-number",
+          "widget": "string"
+        },
+        {
+          "name": "admin-state",
+          "widget": "enum"
+        },
+        {
+          "name": "running-state",
+          "widget": "enum"
+        },
+        {
+          "name": "standby-state",
+          "widget": "enum"
+        },
+        {
+          "name": "alias",
+          "widget": "string"
+        },
+        {
+          "name": "board-index",
+          "widget": "number"
+        },
+        {
+          "name": "chassis-index",
+          "widget": "number"
+        }
+      ],
+      "filterable": []
+    },
+    "ports": {
+      "keyField": "position",
+      "columns": [
+        {
+          "name": "position",
+          "widget": "string"
+        },
+        {
+          "name": "admin-state",
+          "widget": "enum"
+        },
+        {
+          "name": "hard-type",
+          "widget": "enum"
+        },
+        {
+          "name": "loopback-mode",
+          "widget": "enum"
+        },
+        {
+          "name": "medium-type",
+          "widget": "enum"
+        },
+        {
+          "name": "type",
+          "widget": "enum"
+        },
+        {
+          "name": "enable-transmission-delay",
+          "widget": "number"
+        },
+        {
+          "name": "index",
+          "widget": "number"
+        },
+        {
+          "name": "last-down-time",
+          "widget": "string"
+        }
+      ],
+      "filterable": [
+        "index",
+        "medium-type",
+        "type"
+      ]
+    },
+    "sfu-boards": {
+      "keyField": "position",
+      "columns": [
+        {
+          "name": "position",
+          "widget": "string"
+        },
+        {
+          "name": "board-type",
+          "widget": "string"
+        },
+        {
+          "name": "flash-size",
+          "widget": "number"
+        },
+        {
+          "name": "index",
+          "widget": "number"
+        },
+        {
+          "name": "is-register",
+          "widget": "boolean"
+        },
+        {
+          "name": "register-time",
+          "widget": "string"
+        },
+        {
+          "name": "sdram-size",
+          "widget": "number"
+        },
+        {
+          "name": "up-time",
+          "widget": "number"
+        }
+      ],
+      "filterable": []
+    }
+  },
+  "tree": [
+    {
+      "path": "/devm/cards",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/cards/card",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/cards/card/hard-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/cards/card/index",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/cards/card/init-status",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/cards/card/pic",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/cards/card/pic/logic-status",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/cards/card/pic/up-time",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/cards/card/port-num",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/cards/card/position",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/cards/card/register-status",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/cards/card/type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/cf-cards",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/cf-cards/cf-card",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/cf-cards/cf-card/card-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/cf-cards/cf-card/index",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/cf-cards/cf-card/memory-free",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/cf-cards/cf-card/memory-size",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/cf-cards/cf-card/memory-used",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/cf-cards/cf-card/position",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/cf-cards/cf-card/serial-number",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/chassiss",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/chassiss/chassis",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/chassiss/chassis/alarm-exist-days",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/chassiss/chassis/board-num",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/chassiss/chassis/current-id",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/chassiss/chassis/current-run-mode",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/chassiss/chassis/dust-clean-cycle",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/chassiss/chassis/dustproof-attribute",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/chassiss/chassis/dustproof-attribute/dustproof-delay-time",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/chassiss/chassis/dustproof-attribute/dustproofcheck",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/chassiss/chassis/entity-last-change",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/chassiss/chassis/fan-attribute",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/chassiss/chassis/fan-attribute/speed",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/chassiss/chassis/fan-attribute/workmode",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/chassiss/chassis/fan-num",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/chassiss/chassis/index",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/chassiss/chassis/last-clean-date",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/chassiss/chassis/monitor-board-changes",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/chassiss/chassis/monitor-board-changes/monitor-board-change",
+      "kind": "list",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/chassiss/chassis/monitor-board-changes/monitor-board-change/board-index",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/chassiss/chassis/monitor-board-changes/monitor-board-change/entity-last-change",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/chassiss/chassis/monitor-board-changes/monitor-board-change/status-last-change",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/chassiss/chassis/next-id",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/chassiss/chassis/next-run-mode",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/chassiss/chassis/position",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/chassiss/chassis/power-num",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/chassiss/chassis/power-supply-attribute",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/chassiss/chassis/power-supply-attribute/pm-input-voltage-110",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/chassiss/chassis/power-supply-attribute/pm-output-limit",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/chassiss/chassis/power-supply-attribute/power-supply-alarm-limit",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/chassiss/chassis/power-supply-attribute/power-supply-assigned",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/chassiss/chassis/power-supply-attribute/power-supply-assigned-utility",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/chassiss/chassis/power-supply-attribute/power-supply-input",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/chassiss/chassis/power-supply-attribute/power-supply-left",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/chassiss/chassis/power-supply-attribute/power-supply-limit",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/chassiss/chassis/power-supply-attribute/power-supply-mode",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/chassiss/chassis/power-supply-attribute/power-supply-real",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/chassiss/chassis/power-supply-attribute/power-supply-real-utility",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/chassiss/chassis/power-supply-attribute/power-supply-temp",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/chassiss/chassis/service-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/chassiss/chassis/slot-num",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/chassiss/chassis/status-last-change",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/chassiss/chassis/type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/chassiss/chassis/up-time",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/chassiss/chassis/up-to-last-clean",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/containers",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/containers/container",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/containers/container/equiped-entity-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/containers/container/index",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/containers/container/position",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/containers/container/supported-entity-types",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/containers/container/supported-entity-types/supported-entity-type",
+      "kind": "list",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/containers/container/supported-entity-types/supported-entity-type/entity-type",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/containers/container/type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/ccus",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/ccus/ccu",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/ccus/ccu/software-version",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/cmus",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/cmus/cmu",
+      "kind": "list",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/cmus/cmu/board-type",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/cmus/cmu/cmu-alarms",
+      "kind": "container",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/cmus/cmu/cmu-alarms/cmu-alarm",
+      "kind": "list",
+      "depth": 4,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/cmus/cmu/cmu-alarms/cmu-alarm/alarm-id",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/cmus/cmu/cmu-alarms/cmu-alarm/alarm-level",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/cmus/cmu/cmu-analogs",
+      "kind": "container",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/cmus/cmu/cmu-analogs/cmu-analog",
+      "kind": "list",
+      "depth": 4,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/cmus/cmu/cmu-analogs/cmu-analog/alarm-high",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/cmus/cmu/cmu-analogs/cmu-analog/alarm-low",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/cmus/cmu/cmu-analogs/cmu-analog/analog-id",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/cmus/cmu/cmu-analogs/cmu-analog/analog-name",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/cmus/cmu/cmu-analogs/cmu-analog/analog-object",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/cmus/cmu/cmu-analogs/cmu-analog/analog-type",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/cmus/cmu/cmu-analogs/cmu-analog/wanted",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/cmus/cmu/cmu-analogs/cmu-analog/work-high",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/cmus/cmu/cmu-analogs/cmu-analog/work-low",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/cmus/cmu/cmu-relays",
+      "kind": "container",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/cmus/cmu/cmu-relays/cmu-relay",
+      "kind": "list",
+      "depth": 4,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/cmus/cmu/cmu-relays/cmu-relay/relay-alarm-mode",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/cmus/cmu/cmu-relays/cmu-relay/relay-id",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/cmus/cmu/cmu-relays/cmu-relay/relay-name",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/cmus/cmu/cmu-switchs",
+      "kind": "container",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/cmus/cmu/cmu-switchs/cmu-switch",
+      "kind": "list",
+      "depth": 4,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/cmus/cmu/cmu-switchs/cmu-switch/alarm-mode",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/cmus/cmu/cmu-switchs/cmu-switch/switch-fog",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/cmus/cmu/cmu-switchs/cmu-switch/switch-id",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/cmus/cmu/cmu-switchs/cmu-switch/switch-name",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/cmus/cmu/entity-index",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/cmus/cmu/flash-size",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/cmus/cmu/position",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/cmus/cmu/role",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/cmus/cmu/sdram-size",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/cmus/cmu/up-time",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/dacss",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/dacss/dacs",
+      "kind": "list",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/dacss/dacs/board-type",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/dacss/dacs/dacs-area",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/dacss/dacs/entity-index",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/dacss/dacs/insource-plane",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/dacss/dacs/insource-plane-a",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/dacss/dacs/insource-plane-b",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/dacss/dacs/output-electrical-value",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/dacss/dacs/output-status",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/dacss/dacs/output-voltage-value",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/dacss/dacs/position",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/dacss/dacs/serial-number",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/dacss/dacs/status",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/dmus",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/dmus/dmu",
+      "kind": "list",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/dmus/dmu/board-type",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/dmus/dmu/entity-index",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/dmus/dmu/position",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/dmus/dmu/present",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/dmus/dmu/register",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/dmus/dmu/work",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/ecus",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/ecus/ecu",
+      "kind": "list",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/ecus/ecu/board-type",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": true
+    },
+    {
+      "path": "/devm/driver/ecus/ecu/entity-index",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/ecus/ecu/flash-size",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/ecus/ecu/ofc-card-number",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/ecus/ecu/position",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/ecus/ecu/sdram-size",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/ecus/ecu/subcard-slot-number",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/ecus/ecu/up-time",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/fans",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/fans/fan",
+      "kind": "list",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/fans/fan/board-type",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/fans/fan/entity-index",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/fans/fan/fan-number",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/fans/fan/fan-rate",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/fans/fan/global-speed",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/fans/fan/monitor-cable-state",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/fans/fan/position",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/fans/fan/present",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/fans/fan/register",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/fans/fan/speed",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/fans/fan/work-mode",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/icus",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/icus/icu",
+      "kind": "list",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/icus/icu/board-type",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": true
+    },
+    {
+      "path": "/devm/driver/icus/icu/entity-index",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/icus/icu/flash-size",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/icus/icu/position",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/icus/icu/sdram-size",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/icus/icu/up-time",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/lcds",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/lcds/lcd",
+      "kind": "list",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/lcds/lcd/board-type",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/lcds/lcd/entity-index",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/lcds/lcd/position",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/pdus",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/pdus/pdu",
+      "kind": "list",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/pdus/pdu/abnormal-number",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/pdus/pdu/board-type",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/pdus/pdu/entity-index",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/pdus/pdu/normal-number",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/pdus/pdu/position",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/pdus/pdu/power-state",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/pdus/pdu/work-mode",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/pms",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/pms/pm",
+      "kind": "list",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/pms/pm/board-type",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/pms/pm/entity-index",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/pms/pm/input-electrical-value",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/pms/pm/input-power-value",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/pms/pm/input-voltage-value",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/pms/pm/monitor-cable-state",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/pms/pm/output-electrical-value",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/pms/pm/output-power-value",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/pms/pm/output-voltage-value",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/pms/pm/pm-area",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/pms/pm/pm-status",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/pms/pm/position",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/pms/pm/serial-number",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/pms/pm/single-input",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/pmus",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/pmus/pmu",
+      "kind": "list",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/pmus/pmu/board-type",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/pmus/pmu/entity-index",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/pmus/pmu/ha-status",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/pmus/pmu/position",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/pmus/pmu/present",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/pmus/pmu/register",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/pmus/pmu/work",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/power-supplys",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/power-supplys/power-supply",
+      "kind": "list",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/power-supplys/power-supply/abnormal-number",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/power-supplys/power-supply/board-type",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/power-supplys/power-supply/entity-index",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/power-supplys/power-supply/monitor-cable-state",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/power-supplys/power-supply/normal-number",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/power-supplys/power-supply/position",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/power-supplys/power-supply/power-environments",
+      "kind": "container",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/power-supplys/power-supply/power-environments/power-environment",
+      "kind": "list",
+      "depth": 4,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/power-supplys/power-supply/power-environments/power-environment/electrical-value",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/power-supplys/power-supply/power-environments/power-environment/out-electrical-value",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/power-supplys/power-supply/power-environments/power-environment/out-power-value",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/power-supplys/power-supply/power-environments/power-environment/out-voltage-value",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/power-supplys/power-supply/power-environments/power-environment/pem-index",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/power-supplys/power-supply/power-environments/power-environment/power-value",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/power-supplys/power-supply/power-environments/power-environment/temperature-value",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/power-supplys/power-supply/power-environments/power-environment/voltage-value",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/power-supplys/power-supply/power-state",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/power-supplys/power-supply/work-mode",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/vsus",
+      "kind": "container",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/vsus/vsu",
+      "kind": "list",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/vsus/vsu/position",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/driver/vsus/vsu/service-type",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/entity-classes",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/entity-classes/entity-class",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/entity-classes/entity-class/class-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/entity-classes/entity-class/is-resetable",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/entity-classes/entity-class/is-switchoverable",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/inconsistent-entitys",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/inconsistent-entitys/inconsistent-entity",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/inconsistent-entitys/inconsistent-entity/class",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/inconsistent-entitys/inconsistent-entity/logical-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/inconsistent-entitys/inconsistent-entity/oper-state",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/inconsistent-entitys/inconsistent-entity/physical-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/inconsistent-entitys/inconsistent-entity/position",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/inconsistent-entitys/inconsistent-entity/serial-number",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/logic-containers",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/logic-containers/logic-container",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/logic-containers/logic-container/container-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/logic-containers/logic-container/equiped-entity-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/logic-containers/logic-container/index",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/logic-containers/logic-container/position",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/logic-containers/logic-container/supported-entity-types",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/logic-containers/logic-container/supported-entity-types/supported-entity-type",
+      "kind": "list",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/logic-containers/logic-container/supported-entity-types/supported-entity-type/entity-type",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/logic-entitys",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/logic-entitys/logic-entity",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/logic-entitys/logic-entity/class",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/logic-entitys/logic-entity/entity-description",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/logic-entitys/logic-entity/index",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/logic-entitys/logic-entity/memo",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/logic-entitys/logic-entity/name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/logic-entitys/logic-entity/oper-state",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/logic-entitys/logic-entity/parent-index",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/logic-entitys/logic-entity/parent-relative-position",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/logic-entitys/logic-entity/position",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/logic-entitys/logic-entity/serial-number",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/logic-entitys/logic-entity/vendor-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/logic-ports",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/logic-ports/logic-port",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/logic-ports/logic-port/admin-state",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/logic-ports/logic-port/enable-transmission-delay",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/logic-ports/logic-port/hard-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/devm/logic-ports/logic-port/index",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/logic-ports/logic-port/level",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/devm/logic-ports/logic-port/port-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/logic-ports/logic-port/position",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/logic-ports/logic-port/serial-number",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/board-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/clock-8k-port",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/current-l3-clk",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/driver",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/driver/l3-clocks",
+      "kind": "container",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/driver/l3-clocks/l3-clock",
+      "kind": "list",
+      "depth": 4,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/driver/l3-clocks/l3-clock/clock-id",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/driver/l3-clocks/l3-clock/l3-clock-state",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/flash-size",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/index",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/is-register",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/loadbalance",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/loadbalance/dynamic-adjust",
+      "kind": "container",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/loadbalance/dynamic-adjust/enable",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/loadbalance/hash-arithmetic",
+      "kind": "container",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/loadbalance/hash-arithmetic/arithmetic",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/loadbalance/hash-arithmetic/second-hash-flag",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/loadbalance/hash-fields",
+      "kind": "container",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/loadbalance/hash-fields/hash-field",
+      "kind": "list",
+      "depth": 4,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/loadbalance/hash-fields/hash-field/material",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/loadbalance/hash-fields/hash-field/trunk-ecmp",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/loadbalance/hash-multipe",
+      "kind": "container",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/loadbalance/hash-multipe/multipe-flag",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/loadbalance/hash-seed",
+      "kind": "container",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/loadbalance/hash-seed/custom-seed",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/loadbalance/hash-seed/random-flag",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/loadbalance/hashs",
+      "kind": "container",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/loadbalance/hashs/hash",
+      "kind": "list",
+      "depth": 4,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/loadbalance/hashs/hash/arithmetic",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/loadbalance/hashs/hash/box1",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/loadbalance/hashs/hash/box2",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/loadbalance/hashs/hash/custom-seed",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/loadbalance/hashs/hash/material",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/loadbalance/hashs/hash/random-flag",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/loadbalance/hashs/hash/trunk-ecmp",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/loadbalance/hashs/hash/type",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/mirror",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/mirror/observe-filters",
+      "kind": "container",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/mirror/observe-filters/observe-filter",
+      "kind": "list",
+      "depth": 4,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/mirror/observe-filters/observe-filter/dst-ipaddr",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/mirror/observe-filters/observe-filter/dst-ipaddr-mask",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/mirror/observe-filters/observe-filter/dst-macaddr",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/mirror/observe-filters/observe-filter/dst-port",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/mirror/observe-filters/observe-filter/eth-type",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/mirror/observe-filters/observe-filter/filter-id",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/mirror/observe-filters/observe-filter/pppoe-session-id",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/mirror/observe-filters/observe-filter/protocol-type",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "choice",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/mirror/observe-filters/observe-filter/src-ipaddr",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/mirror/observe-filters/observe-filter/src-ipaddr-mask",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/mirror/observe-filters/observe-filter/src-macaddr",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/mirror/observe-filters/observe-filter/src-port",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/mirror/observe-filters/observe-filter/vlan",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/mirror/rate-limit-percent",
+      "kind": "container",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/mirror/rate-limit-percent/rate-value",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/mirror/slot-observe",
+      "kind": "container",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/mirror/slot-observe/observe-index",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/next-service-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/np-rdram-size",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/np-sram-size",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/pic-num",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/position",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/register-time",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/sdram-size",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/service-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/sflow",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/sflow/slot-sampling",
+      "kind": "container",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/sflow/slot-sampling/enable",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/sub-slot-num",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/unicast-forward",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/unicast-forward/arp-fast-reply",
+      "kind": "container",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/unicast-forward/arp-fast-reply/enable",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/unicast-forward/gre-ttl-mode",
+      "kind": "container",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/unicast-forward/gre-ttl-mode/ttl-mode",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/unicast-forward/ipv4-uc",
+      "kind": "container",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/unicast-forward/ipv4-uc/force-frag",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/unicast-forward/ipv4-uc/icmp-reply-fast",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/unicast-forward/l3-lcs-capacitys",
+      "kind": "container",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/unicast-forward/l3-lcs-capacitys/slot-l3-lcs-capacity",
+      "kind": "list",
+      "depth": 4,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/unicast-forward/l3-lcs-capacitys/slot-l3-lcs-capacity/capacity-enable",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/unicast-forward/l3-lcs-capacitys/slot-l3-lcs-capacity/service-type",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/unicast-forward/nd-fast-reply",
+      "kind": "container",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/unicast-forward/nd-fast-reply/enable",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/unicast-forward/vxlan-rdr-trunks",
+      "kind": "container",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/unicast-forward/vxlan-rdr-trunks/vxlan-rdr-trunk",
+      "kind": "list",
+      "depth": 4,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/unicast-forward/vxlan-rdr-trunks/vxlan-rdr-trunk/dest-slot-id1",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/unicast-forward/vxlan-rdr-trunks/vxlan-rdr-trunk/dest-slot-id2",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/unicast-forward/vxlan-rdr-trunks/vxlan-rdr-trunk/redirect-type",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/lpu-boards/lpu-board/up-time",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/mpu-boards",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/mpu-boards/mpu-board",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/mpu-boards/mpu-board/board-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/mpu-boards/mpu-board/cfcard-size",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/mpu-boards/mpu-board/cfcard2-size",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/mpu-boards/mpu-board/flash-size",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/mpu-boards/mpu-board/index",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/mpu-boards/mpu-board/is-register",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/mpu-boards/mpu-board/last-reset-reason",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/mpu-boards/mpu-board/last-reset-time",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/mpu-boards/mpu-board/loadbalance",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/mpu-boards/mpu-board/loadbalance/dynamic-adjust",
+      "kind": "container",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/mpu-boards/mpu-board/loadbalance/dynamic-adjust/enable",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/mpu-boards/mpu-board/loadbalance/hash-arithmetic",
+      "kind": "container",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/mpu-boards/mpu-board/loadbalance/hash-arithmetic/arithmetic",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/mpu-boards/mpu-board/loadbalance/hash-arithmetic/second-hash-flag",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/mpu-boards/mpu-board/loadbalance/hash-fields",
+      "kind": "container",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/mpu-boards/mpu-board/loadbalance/hash-fields/hash-field",
+      "kind": "list",
+      "depth": 4,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/mpu-boards/mpu-board/loadbalance/hash-fields/hash-field/material",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/mpu-boards/mpu-board/loadbalance/hash-fields/hash-field/trunk-ecmp",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/mpu-boards/mpu-board/loadbalance/hash-multipe",
+      "kind": "container",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/mpu-boards/mpu-board/loadbalance/hash-multipe/multipe-flag",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/mpu-boards/mpu-board/loadbalance/hash-seed",
+      "kind": "container",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/mpu-boards/mpu-board/loadbalance/hash-seed/custom-seed",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/mpu-boards/mpu-board/loadbalance/hash-seed/random-flag",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/mpu-boards/mpu-board/ls-role",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/mpu-boards/mpu-board/mirror",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/mpu-boards/mpu-board/mirror/observe-filters",
+      "kind": "container",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/mpu-boards/mpu-board/mirror/observe-filters/observe-filter",
+      "kind": "list",
+      "depth": 4,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/mpu-boards/mpu-board/mirror/observe-filters/observe-filter/dst-ipaddr",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/mpu-boards/mpu-board/mirror/observe-filters/observe-filter/dst-ipaddr-mask",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/mpu-boards/mpu-board/mirror/observe-filters/observe-filter/dst-macaddr",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/mpu-boards/mpu-board/mirror/observe-filters/observe-filter/dst-port",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/mpu-boards/mpu-board/mirror/observe-filters/observe-filter/eth-type",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/mpu-boards/mpu-board/mirror/observe-filters/observe-filter/filter-id",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/mpu-boards/mpu-board/mirror/observe-filters/observe-filter/pppoe-session-id",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/mpu-boards/mpu-board/mirror/observe-filters/observe-filter/protocol-type",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "choice",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/mpu-boards/mpu-board/mirror/observe-filters/observe-filter/src-ipaddr",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/mpu-boards/mpu-board/mirror/observe-filters/observe-filter/src-ipaddr-mask",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/mpu-boards/mpu-board/mirror/observe-filters/observe-filter/src-macaddr",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/mpu-boards/mpu-board/mirror/observe-filters/observe-filter/src-port",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/mpu-boards/mpu-board/mirror/observe-filters/observe-filter/vlan",
+      "kind": "leaf",
+      "depth": 5,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/mpu-boards/mpu-board/mirror/slot-observe",
+      "kind": "container",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/mpu-boards/mpu-board/mirror/slot-observe/observe-index",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/devm/mpu-boards/mpu-board/nvram-size",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/mpu-boards/mpu-board/position",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/mpu-boards/mpu-board/register-time",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/mpu-boards/mpu-board/sdram-size",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/mpu-boards/mpu-board/sflow",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/mpu-boards/mpu-board/sflow/slot-sampling",
+      "kind": "container",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/mpu-boards/mpu-board/sflow/slot-sampling/enable",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/mpu-boards/mpu-board/unicast-forward",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/mpu-boards/mpu-board/unicast-forward/arp-fast-reply",
+      "kind": "container",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/mpu-boards/mpu-board/unicast-forward/arp-fast-reply/enable",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/mpu-boards/mpu-board/unicast-forward/gre-ttl-mode",
+      "kind": "container",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/mpu-boards/mpu-board/unicast-forward/gre-ttl-mode/ttl-mode",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/mpu-boards/mpu-board/unicast-forward/ipv4-uc",
+      "kind": "container",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/mpu-boards/mpu-board/unicast-forward/ipv4-uc/force-frag",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/mpu-boards/mpu-board/unicast-forward/ipv4-uc/icmp-reply-fast",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/mpu-boards/mpu-board/unicast-forward/nd-fast-reply",
+      "kind": "container",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/mpu-boards/mpu-board/unicast-forward/nd-fast-reply/enable",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/mpu-boards/mpu-board/up-time",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/offlines",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/offlines/offline",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/offlines/offline/class",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/offlines/offline/position",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/physical-entitys",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/physical-entitys/physical-entity",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/physical-entitys/physical-entity/admin-state",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/physical-entitys/physical-entity/alias",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/physical-entitys/physical-entity/board-index",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/physical-entitys/physical-entity/chassis-index",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/physical-entitys/physical-entity/class",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/physical-entitys/physical-entity/contained-index",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/physical-entitys/physical-entity/entity-description",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/physical-entitys/physical-entity/firmware-version",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/physical-entitys/physical-entity/hardware-version",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/physical-entitys/physical-entity/index",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/physical-entitys/physical-entity/is-fru",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/physical-entitys/physical-entity/ls-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/physical-entitys/physical-entity/module-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/physical-entitys/physical-entity/name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/physical-entitys/physical-entity/parent-relative-position",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/physical-entitys/physical-entity/position",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/physical-entitys/physical-entity/running-state",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/physical-entitys/physical-entity/serial-number",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/physical-entitys/physical-entity/software-version",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/physical-entitys/physical-entity/standby-state",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/physical-entitys/physical-entity/system-oid",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/physical-entitys/physical-entity/vendor-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/ports",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/ports/port",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/ports/port/admin-state",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/ports/port/enable-transmission-delay",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/ports/port/hard-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/ports/port/index",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/ports/port/last-down-time",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/ports/port/last-up-time",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/ports/port/loopback-mode",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/ports/port/medium-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/ports/port/optical-equipped",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/ports/port/physical-bandwidth",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/ports/port/position",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/ports/port/type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/devm/schedule-reboot",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/schedule-reboot/datetime",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/schedule-reboot/delay-time",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/sfu-boards",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/sfu-boards/sfu-board",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/sfu-boards/sfu-board/board-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/sfu-boards/sfu-board/flash-size",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/sfu-boards/sfu-board/index",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/sfu-boards/sfu-board/is-register",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/sfu-boards/sfu-board/position",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/sfu-boards/sfu-board/register-time",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/sfu-boards/sfu-board/sdram-size",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/devm/sfu-boards/sfu-board/up-time",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    }
+  ]
+}

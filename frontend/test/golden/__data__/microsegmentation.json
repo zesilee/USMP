@@ -1,0 +1,607 @@
+{
+  "module": "microsegmentation",
+  "tabs": [
+    {
+      "name": "apply-global-policys",
+      "kind": "list"
+    },
+    {
+      "name": "endpoint-groups",
+      "kind": "list"
+    },
+    {
+      "name": "global",
+      "kind": "form"
+    },
+    {
+      "name": "segment-behaviors",
+      "kind": "list"
+    },
+    {
+      "name": "segment-classifiers",
+      "kind": "list"
+    },
+    {
+      "name": "segment-policys",
+      "kind": "list"
+    }
+  ],
+  "lists": {
+    "apply-global-policys": {
+      "keyField": "policy-name",
+      "columns": [
+        {
+          "name": "policy-name",
+          "widget": "string"
+        }
+      ],
+      "filterable": []
+    },
+    "endpoint-groups": {
+      "keyField": "segment-id",
+      "columns": [
+        {
+          "name": "segment-id",
+          "widget": "number"
+        },
+        {
+          "name": "intra-epg-behavior",
+          "widget": "enum"
+        },
+        {
+          "name": "description",
+          "widget": "string"
+        },
+        {
+          "name": "segment-name",
+          "widget": "string"
+        },
+        {
+          "name": "statistics-enable",
+          "widget": "boolean"
+        }
+      ],
+      "filterable": [
+        "segment-name"
+      ]
+    },
+    "segment-behaviors": {
+      "keyField": "behavior-name",
+      "columns": [
+        {
+          "name": "behavior-name",
+          "widget": "string"
+        },
+        {
+          "name": "statistics-enable",
+          "widget": "boolean"
+        }
+      ],
+      "filterable": []
+    },
+    "segment-classifiers": {
+      "keyField": "classifier-name",
+      "columns": [
+        {
+          "name": "classifier-name",
+          "widget": "string"
+        }
+      ],
+      "filterable": []
+    },
+    "segment-policys": {
+      "keyField": "policy-name",
+      "columns": [
+        {
+          "name": "policy-name",
+          "widget": "string"
+        }
+      ],
+      "filterable": []
+    }
+  },
+  "tree": [
+    {
+      "path": "/microsegmentation/apply-global-policys",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/microsegmentation/apply-global-policys/apply-global-policy",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/microsegmentation/apply-global-policys/apply-global-policy/policy-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/microsegmentation/endpoint-groups",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/microsegmentation/endpoint-groups/endpoint-group",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/microsegmentation/endpoint-groups/endpoint-group/any-member",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/microsegmentation/endpoint-groups/endpoint-group/any-member/ip-any",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/microsegmentation/endpoint-groups/endpoint-group/any-member/ipv6-any",
+      "kind": "leaf",
+      "depth": 3,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/microsegmentation/endpoint-groups/endpoint-group/description",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/microsegmentation/endpoint-groups/endpoint-group/intra-epg-behavior",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/microsegmentation/endpoint-groups/endpoint-group/ip-members",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/microsegmentation/endpoint-groups/endpoint-group/ip-members/ip-member",
+      "kind": "list",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/microsegmentation/endpoint-groups/endpoint-group/ip-members/ip-member/ip-address",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/microsegmentation/endpoint-groups/endpoint-group/ip-members/ip-member/prefix-len",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/microsegmentation/endpoint-groups/endpoint-group/ip-members/ip-member/vpn-name",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/microsegmentation/endpoint-groups/endpoint-group/ipv6-members",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/microsegmentation/endpoint-groups/endpoint-group/ipv6-members/ipv6-member",
+      "kind": "list",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/microsegmentation/endpoint-groups/endpoint-group/ipv6-members/ipv6-member/ipv6-address",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/microsegmentation/endpoint-groups/endpoint-group/ipv6-members/ipv6-member/prefix-len",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/microsegmentation/endpoint-groups/endpoint-group/ipv6-members/ipv6-member/vpn-name",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/microsegmentation/endpoint-groups/endpoint-group/segment-id",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/microsegmentation/endpoint-groups/endpoint-group/segment-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/microsegmentation/endpoint-groups/endpoint-group/statistics-enable",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/microsegmentation/global",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/microsegmentation/global/default-epg-action",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/microsegmentation/global/enable",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/microsegmentation/global/epg-logging",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/microsegmentation/global/policy-statistics-enable",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/microsegmentation/global/same-epg-action",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/microsegmentation/global/unknown-epg-action",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/microsegmentation/segment-behaviors",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/microsegmentation/segment-behaviors/segment-behavior",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/microsegmentation/segment-behaviors/segment-behavior/behavior-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/microsegmentation/segment-behaviors/segment-behavior/statistics-enable",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/microsegmentation/segment-classifiers",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/microsegmentation/segment-classifiers/segment-classifier",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/microsegmentation/segment-classifiers/segment-classifier/classifier-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/microsegmentation/segment-classifiers/segment-classifier/rules",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/microsegmentation/segment-classifiers/segment-classifier/rules/rule",
+      "kind": "list",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/microsegmentation/segment-classifiers/segment-classifier/rules/rule/action",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/microsegmentation/segment-classifiers/segment-classifier/rules/rule/destination-port-begin",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/microsegmentation/segment-classifiers/segment-classifier/rules/rule/destination-port-end",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/microsegmentation/segment-classifiers/segment-classifier/rules/rule/destination-segment-id",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/microsegmentation/segment-classifiers/segment-classifier/rules/rule/logging-enable",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/microsegmentation/segment-classifiers/segment-classifier/rules/rule/priority",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/microsegmentation/segment-classifiers/segment-classifier/rules/rule/protocol",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/microsegmentation/segment-classifiers/segment-classifier/rules/rule/source-port-begin",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/microsegmentation/segment-classifiers/segment-classifier/rules/rule/source-port-end",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/microsegmentation/segment-classifiers/segment-classifier/rules/rule/source-segment-id",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/microsegmentation/segment-classifiers/segment-classifier/rules/rule/statistics-enable",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/microsegmentation/segment-policys",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/microsegmentation/segment-policys/segment-policy",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/microsegmentation/segment-policys/segment-policy/classifier-behavior-combinations",
+      "kind": "container",
+      "depth": 2,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/microsegmentation/segment-policys/segment-policy/classifier-behavior-combinations/classifier-behavior-combination",
+      "kind": "list",
+      "depth": 3,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/microsegmentation/segment-policys/segment-policy/classifier-behavior-combinations/classifier-behavior-combination/behavior-name",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/microsegmentation/segment-policys/segment-policy/classifier-behavior-combinations/classifier-behavior-combination/classifier-name",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/microsegmentation/segment-policys/segment-policy/classifier-behavior-combinations/classifier-behavior-combination/precedence",
+      "kind": "leaf",
+      "depth": 4,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/microsegmentation/segment-policys/segment-policy/policy-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    }
+  ]
+}

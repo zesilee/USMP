@@ -1,0 +1,139 @@
+{
+  "module": "mvpn",
+  "tabs": [
+    {
+      "name": "globals",
+      "kind": "list"
+    },
+    {
+      "name": "ipv6-underlay-globals",
+      "kind": "list"
+    }
+  ],
+  "lists": {
+    "globals": {
+      "keyField": "address-family",
+      "columns": [
+        {
+          "name": "address-family",
+          "widget": "enum"
+        },
+        {
+          "name": "apply-explicit-null-label",
+          "widget": "boolean"
+        },
+        {
+          "name": "enable-inter-area-segmented",
+          "widget": "boolean"
+        },
+        {
+          "name": "mvpn-id",
+          "widget": "string"
+        }
+      ],
+      "filterable": []
+    },
+    "ipv6-underlay-globals": {
+      "keyField": "address-family",
+      "columns": [
+        {
+          "name": "address-family",
+          "widget": "enum"
+        },
+        {
+          "name": "mvpn-id",
+          "widget": "string"
+        }
+      ],
+      "filterable": []
+    }
+  },
+  "tree": [
+    {
+      "path": "/mvpn/globals",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mvpn/globals/global",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mvpn/globals/global/address-family",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mvpn/globals/global/apply-explicit-null-label",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mvpn/globals/global/enable-inter-area-segmented",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mvpn/globals/global/mvpn-id",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/mvpn/ipv6-underlay-globals",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mvpn/ipv6-underlay-globals/ipv6-underlay-global",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mvpn/ipv6-underlay-globals/ipv6-underlay-global/address-family",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/mvpn/ipv6-underlay-globals/ipv6-underlay-global/mvpn-id",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    }
+  ]
+}

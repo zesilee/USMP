@@ -1,0 +1,80 @@
+{
+  "module": "business-vlan-service",
+  "tabs": [
+    {
+      "name": "__basic__",
+      "kind": "form"
+    },
+    {
+      "name": "devices",
+      "kind": "list"
+    }
+  ],
+  "lists": {
+    "devices": {
+      "keyField": "ip",
+      "columns": [
+        {
+          "name": "ip",
+          "widget": "string"
+        }
+      ],
+      "filterable": []
+    }
+  },
+  "tree": [
+    {
+      "path": "/business-vlan-service/devices",
+      "kind": "list",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/business-vlan-service/devices/access-ports",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "leaf-list",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/business-vlan-service/devices/ip",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/business-vlan-service/devices/trunk-ports",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "leaf-list",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/business-vlan-service/name",
+      "kind": "leaf",
+      "depth": 0,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/business-vlan-service/vlan-id",
+      "kind": "leaf",
+      "depth": 0,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    }
+  ]
+}

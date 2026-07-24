@@ -1,0 +1,146 @@
+{
+  "module": "vxlan-ext",
+  "tabs": [
+    {
+      "name": "bridge-domain-bind-vlan-enhanced",
+      "kind": "form"
+    },
+    {
+      "name": "force-redirects",
+      "kind": "list"
+    },
+    {
+      "name": "ospf-disable",
+      "kind": "form"
+    },
+    {
+      "name": "ospf-discard",
+      "kind": "form"
+    }
+  ],
+  "lists": {
+    "force-redirects": {
+      "keyField": "if-name",
+      "columns": [
+        {
+          "name": "if-name",
+          "widget": "string"
+        },
+        {
+          "name": "vni-begin",
+          "widget": "number"
+        },
+        {
+          "name": "vni-end",
+          "widget": "number"
+        }
+      ],
+      "filterable": []
+    }
+  },
+  "tree": [
+    {
+      "path": "/vxlan-ext/bridge-domain-bind-vlan-enhanced",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/vxlan-ext/force-redirects",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/vxlan-ext/force-redirects/force-redirect",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/vxlan-ext/force-redirects/force-redirect/if-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/vxlan-ext/force-redirects/force-redirect/vni-begin",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/vxlan-ext/force-redirects/force-redirect/vni-end",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/vxlan-ext/ospf-disable",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/vxlan-ext/ospf-disable/disable",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/vxlan-ext/ospf-disable/ospf",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/vxlan-ext/ospf-discard",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/vxlan-ext/ospf-discard/discard",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/vxlan-ext/ospf-discard/ospf",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    }
+  ]
+}

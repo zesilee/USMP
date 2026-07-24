@@ -1,0 +1,1691 @@
+{
+  "module": "syslog",
+  "tabs": [
+    {
+      "name": "direction-channels",
+      "kind": "list"
+    },
+    {
+      "name": "domain-servers",
+      "kind": "list"
+    },
+    {
+      "name": "global-parameter",
+      "kind": "form"
+    },
+    {
+      "name": "info-center-buffers",
+      "kind": "list"
+    },
+    {
+      "name": "info-center-channels",
+      "kind": "list"
+    },
+    {
+      "name": "info-center-filters",
+      "kind": "list"
+    },
+    {
+      "name": "info-center-sources",
+      "kind": "list"
+    },
+    {
+      "name": "info-center-statistics",
+      "kind": "list"
+    },
+    {
+      "name": "log-switch-list",
+      "kind": "list"
+    },
+    {
+      "name": "logbuffers",
+      "kind": "list"
+    },
+    {
+      "name": "logfiles",
+      "kind": "list"
+    },
+    {
+      "name": "modules",
+      "kind": "list"
+    },
+    {
+      "name": "securitybuffers",
+      "kind": "list"
+    },
+    {
+      "name": "servers",
+      "kind": "list"
+    },
+    {
+      "name": "trapbuffers",
+      "kind": "list"
+    }
+  ],
+  "lists": {
+    "direction-channels": {
+      "keyField": "output-direction",
+      "columns": [
+        {
+          "name": "output-direction",
+          "widget": "string"
+        },
+        {
+          "name": "channel-id",
+          "widget": "string"
+        },
+        {
+          "name": "channel-name",
+          "widget": "string"
+        },
+        {
+          "name": "default-channel-id",
+          "widget": "number"
+        }
+      ],
+      "filterable": []
+    },
+    "domain-servers": {
+      "keyField": "is-default-vpn",
+      "columns": [
+        {
+          "name": "is-default-vpn",
+          "widget": "boolean"
+        },
+        {
+          "name": "server-domain",
+          "widget": "string"
+        },
+        {
+          "name": "vrf-name",
+          "widget": "string"
+        },
+        {
+          "name": "facility",
+          "widget": "enum"
+        },
+        {
+          "name": "level",
+          "widget": "enum"
+        },
+        {
+          "name": "timestamp",
+          "widget": "enum"
+        },
+        {
+          "name": "transport-mode",
+          "widget": "enum"
+        },
+        {
+          "name": "channel-id",
+          "widget": "string"
+        },
+        {
+          "name": "channel-name",
+          "widget": "string"
+        }
+      ],
+      "filterable": []
+    },
+    "info-center-buffers": {
+      "keyField": "buffer-name",
+      "columns": [
+        {
+          "name": "buffer-name",
+          "widget": "string"
+        },
+        {
+          "name": "channel-id",
+          "widget": "number"
+        },
+        {
+          "name": "channel-name",
+          "widget": "string"
+        },
+        {
+          "name": "cur-buffer-size",
+          "widget": "number"
+        },
+        {
+          "name": "current-message",
+          "widget": "number"
+        },
+        {
+          "name": "dropped-message",
+          "widget": "number"
+        },
+        {
+          "name": "enable-flag",
+          "widget": "boolean"
+        },
+        {
+          "name": "max-buffer-size",
+          "widget": "number"
+        },
+        {
+          "name": "overwrite-message",
+          "widget": "number"
+        }
+      ],
+      "filterable": []
+    },
+    "info-center-channels": {
+      "keyField": "channel-id",
+      "columns": [
+        {
+          "name": "channel-id",
+          "widget": "number"
+        },
+        {
+          "name": "channel-default-name",
+          "widget": "string"
+        },
+        {
+          "name": "channel-name",
+          "widget": "string"
+        }
+      ],
+      "filterable": []
+    },
+    "info-center-filters": {
+      "keyField": "feature-name",
+      "columns": [
+        {
+          "name": "feature-name",
+          "widget": "string"
+        },
+        {
+          "name": "filter-log-name",
+          "widget": "string"
+        }
+      ],
+      "filterable": []
+    },
+    "info-center-sources": {
+      "keyField": "channel-id",
+      "columns": [
+        {
+          "name": "channel-id",
+          "widget": "string"
+        },
+        {
+          "name": "module-name",
+          "widget": "string"
+        },
+        {
+          "name": "enable-debug-level",
+          "widget": "enum"
+        },
+        {
+          "name": "enable-log-level",
+          "widget": "enum"
+        },
+        {
+          "name": "enable-trap-level",
+          "widget": "enum"
+        },
+        {
+          "name": "channel-name",
+          "widget": "string"
+        },
+        {
+          "name": "enable-debug",
+          "widget": "boolean"
+        },
+        {
+          "name": "enable-log",
+          "widget": "boolean"
+        },
+        {
+          "name": "enable-trap",
+          "widget": "boolean"
+        }
+      ],
+      "filterable": []
+    },
+    "info-center-statistics": {
+      "keyField": "module-name",
+      "columns": [
+        {
+          "name": "module-name",
+          "widget": "string"
+        },
+        {
+          "name": "drop-debug",
+          "widget": "number"
+        },
+        {
+          "name": "drop-diaglog",
+          "widget": "number"
+        },
+        {
+          "name": "drop-eventtrap",
+          "widget": "number"
+        },
+        {
+          "name": "drop-log",
+          "widget": "number"
+        },
+        {
+          "name": "receive-debug",
+          "widget": "number"
+        },
+        {
+          "name": "receive-diaglog",
+          "widget": "number"
+        },
+        {
+          "name": "receive-eventtrap",
+          "widget": "number"
+        },
+        {
+          "name": "receive-log",
+          "widget": "number"
+        }
+      ],
+      "filterable": []
+    },
+    "log-switch-list": {
+      "keyField": "feature-name",
+      "columns": [
+        {
+          "name": "feature-name",
+          "widget": "string"
+        },
+        {
+          "name": "log-name",
+          "widget": "string"
+        },
+        {
+          "name": "log-level",
+          "widget": "enum"
+        },
+        {
+          "name": "log-type",
+          "widget": "enum"
+        },
+        {
+          "name": "security-log-flag",
+          "widget": "boolean"
+        }
+      ],
+      "filterable": []
+    },
+    "logbuffers": {
+      "keyField": "sequence",
+      "columns": [
+        {
+          "name": "sequence",
+          "widget": "number"
+        },
+        {
+          "name": "level",
+          "widget": "enum"
+        },
+        {
+          "name": "endtime",
+          "widget": "string"
+        },
+        {
+          "name": "log-content",
+          "widget": "string"
+        },
+        {
+          "name": "starttime",
+          "widget": "string"
+        }
+      ],
+      "filterable": [
+        "endtime",
+        "level",
+        "starttime"
+      ]
+    },
+    "logfiles": {
+      "keyField": "logfile-type",
+      "columns": [
+        {
+          "name": "logfile-type",
+          "widget": "enum"
+        },
+        {
+          "name": "max-file-num",
+          "widget": "number"
+        },
+        {
+          "name": "max-file-size",
+          "widget": "number"
+        }
+      ],
+      "filterable": []
+    },
+    "modules": {
+      "keyField": "module-name",
+      "columns": [
+        {
+          "name": "module-name",
+          "widget": "string"
+        }
+      ],
+      "filterable": []
+    },
+    "securitybuffers": {
+      "keyField": "sequence",
+      "columns": [
+        {
+          "name": "sequence",
+          "widget": "number"
+        },
+        {
+          "name": "level",
+          "widget": "enum"
+        },
+        {
+          "name": "endtime",
+          "widget": "string"
+        },
+        {
+          "name": "log-content",
+          "widget": "string"
+        },
+        {
+          "name": "starttime",
+          "widget": "string"
+        }
+      ],
+      "filterable": [
+        "endtime",
+        "level",
+        "starttime"
+      ]
+    },
+    "servers": {
+      "keyField": "ip-type",
+      "columns": [
+        {
+          "name": "ip-type",
+          "widget": "enum"
+        },
+        {
+          "name": "ipaddress",
+          "widget": "string"
+        },
+        {
+          "name": "is-default-vpn",
+          "widget": "boolean"
+        },
+        {
+          "name": "vrf-name",
+          "widget": "string"
+        },
+        {
+          "name": "facility",
+          "widget": "enum"
+        },
+        {
+          "name": "level",
+          "widget": "enum"
+        },
+        {
+          "name": "timestamp",
+          "widget": "enum"
+        },
+        {
+          "name": "transport-mode",
+          "widget": "enum"
+        },
+        {
+          "name": "channel-id",
+          "widget": "string"
+        }
+      ],
+      "filterable": [
+        "channel-id",
+        "facility",
+        "level",
+        "port",
+        "source-ip",
+        "timestamp",
+        "transport-mode"
+      ]
+    },
+    "trapbuffers": {
+      "keyField": "sequence",
+      "columns": [
+        {
+          "name": "sequence",
+          "widget": "number"
+        },
+        {
+          "name": "trap-content",
+          "widget": "string"
+        }
+      ],
+      "filterable": []
+    }
+  },
+  "tree": [
+    {
+      "path": "/syslog/direction-channels",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/direction-channels/direction-channel",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/direction-channels/direction-channel/channel-id",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/direction-channels/direction-channel/channel-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/syslog/direction-channels/direction-channel/default-channel-id",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/syslog/direction-channels/direction-channel/output-direction",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/domain-servers",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/domain-servers/domain-server",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/domain-servers/domain-server/channel-id",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/domain-servers/domain-server/channel-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/syslog/domain-servers/domain-server/facility",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/domain-servers/domain-server/is-brief-format",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/domain-servers/domain-server/is-default-vpn",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/domain-servers/domain-server/is-security-only",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/domain-servers/domain-server/level",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/domain-servers/domain-server/server-domain",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/domain-servers/domain-server/server-port",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/domain-servers/domain-server/ssl-policy-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/domain-servers/domain-server/timestamp",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/domain-servers/domain-server/transport-mode",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/domain-servers/domain-server/vrf-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/global-parameter",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/global-parameter/buffer-size",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/global-parameter/debug-none-timezone",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/global-parameter/debug-timestamp",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/global-parameter/delay-suppress-enable",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/global-parameter/event-logging-all",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/global-parameter/hostname",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/global-parameter/info-center-enable",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/global-parameter/interface-name",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/global-parameter/log-none-timezone",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/global-parameter/log-timestamp",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/global-parameter/logbuffer-enable",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/global-parameter/packet-priority",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/global-parameter/send-switch",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/global-parameter/source-port",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/global-parameter/suppress-enable",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/global-parameter/trap-none-timezone",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/global-parameter/trap-timestamp",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/global-parameter/trapbuffer-enable",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/global-parameter/trapbuffer-size",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/global-parameter/user-def-hostname",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/info-center-buffers",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/syslog/info-center-buffers/info-center-buffer",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/syslog/info-center-buffers/info-center-buffer/buffer-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/syslog/info-center-buffers/info-center-buffer/channel-id",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/syslog/info-center-buffers/info-center-buffer/channel-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/syslog/info-center-buffers/info-center-buffer/cur-buffer-size",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/syslog/info-center-buffers/info-center-buffer/current-message",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/syslog/info-center-buffers/info-center-buffer/dropped-message",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/syslog/info-center-buffers/info-center-buffer/enable-flag",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/syslog/info-center-buffers/info-center-buffer/max-buffer-size",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/syslog/info-center-buffers/info-center-buffer/overwrite-message",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/syslog/info-center-channels",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/info-center-channels/info-center-channel",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/info-center-channels/info-center-channel/channel-default-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/syslog/info-center-channels/info-center-channel/channel-id",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/info-center-channels/info-center-channel/channel-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/info-center-filters",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/info-center-filters/info-center-filter",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/info-center-filters/info-center-filter/feature-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/info-center-filters/info-center-filter/filter-log-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/info-center-sources",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/info-center-sources/info-center-source",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/info-center-sources/info-center-source/channel-id",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/info-center-sources/info-center-source/channel-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/syslog/info-center-sources/info-center-source/enable-debug",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/info-center-sources/info-center-source/enable-debug-level",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/info-center-sources/info-center-source/enable-log",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/info-center-sources/info-center-source/enable-log-level",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/info-center-sources/info-center-source/enable-trap",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/info-center-sources/info-center-source/enable-trap-level",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/info-center-sources/info-center-source/module-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/info-center-statistics",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/syslog/info-center-statistics/info-center-statistic",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/syslog/info-center-statistics/info-center-statistic/drop-debug",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/syslog/info-center-statistics/info-center-statistic/drop-diaglog",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/syslog/info-center-statistics/info-center-statistic/drop-eventtrap",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/syslog/info-center-statistics/info-center-statistic/drop-log",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/syslog/info-center-statistics/info-center-statistic/module-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/syslog/info-center-statistics/info-center-statistic/receive-debug",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/syslog/info-center-statistics/info-center-statistic/receive-diaglog",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/syslog/info-center-statistics/info-center-statistic/receive-eventtrap",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/syslog/info-center-statistics/info-center-statistic/receive-log",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/syslog/log-switch-list",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/log-switch-list/log-switch",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/log-switch-list/log-switch/feature-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/log-switch-list/log-switch/log-level",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/log-switch-list/log-switch/log-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/log-switch-list/log-switch/log-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/syslog/log-switch-list/log-switch/security-log-flag",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/syslog/logbuffers",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/syslog/logbuffers/logbuffer",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/syslog/logbuffers/logbuffer/endtime",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/syslog/logbuffers/logbuffer/level",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/syslog/logbuffers/logbuffer/log-content",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/syslog/logbuffers/logbuffer/sequence",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/syslog/logbuffers/logbuffer/starttime",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/syslog/logfiles",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/logfiles/logfile",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/logfiles/logfile/logfile-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/logfiles/logfile/max-file-num",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/logfiles/logfile/max-file-size",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/modules",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/syslog/modules/module",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/syslog/modules/module/module-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/syslog/securitybuffers",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/syslog/securitybuffers/securitybuffer",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/syslog/securitybuffers/securitybuffer/endtime",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/syslog/securitybuffers/securitybuffer/level",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/syslog/securitybuffers/securitybuffer/log-content",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/syslog/securitybuffers/securitybuffer/sequence",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/syslog/securitybuffers/securitybuffer/starttime",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/syslog/servers",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/servers/server",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/servers/server/channel-id",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/servers/server/channel-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/syslog/servers/server/dns-identifier-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/servers/server/facility",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/servers/server/facility-mask",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/servers/server/host-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/servers/server/ip-type",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/servers/server/ipaddress",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/servers/server/is-activated",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/servers/server/is-brief-format",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/servers/server/is-default-vpn",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/servers/server/is-security-only",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/servers/server/level",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/servers/server/port",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/servers/server/severity-mask",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/servers/server/source-ip",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/servers/server/ssl-policy-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/servers/server/timestamp",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/servers/server/transport-mode",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/servers/server/vrf-name",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/syslog/trapbuffers",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/syslog/trapbuffers/trapbuffer",
+      "kind": "list",
+      "depth": 1,
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/syslog/trapbuffers/trapbuffer/sequence",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "number",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    },
+    {
+      "path": "/syslog/trapbuffers/trapbuffer/trap-content",
+      "kind": "leaf",
+      "depth": 2,
+      "dataType": "string",
+      "isConfig": false,
+      "isReadonly": true,
+      "required": false
+    }
+  ]
+}
