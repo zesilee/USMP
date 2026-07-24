@@ -20,7 +20,7 @@ FAILED=0
 # ──────────────────────────────────────────────
 # 1. Git Hooks 激活
 # ──────────────────────────────────────────────
-echo -e "${YELLOW}[1/6] 激活 Git Hooks...${NC}"
+echo -e "${YELLOW}[1/8] 激活 Git Hooks...${NC}"
 git config core.hooksPath .githooks
 chmod +x .githooks/pre-commit .githooks/commit-msg .githooks/pre-push 2>/dev/null || true
 if [ -f .githooks/post-checkout ]; then
@@ -31,7 +31,7 @@ echo -e "${GREEN}  ✅ core.hooksPath = .githooks${NC}"
 # ──────────────────────────────────────────────
 # 2. 后端依赖
 # ──────────────────────────────────────────────
-echo -e "${YELLOW}[2/6] 安装后端依赖...${NC}"
+echo -e "${YELLOW}[2/8] 安装后端依赖...${NC}"
 if [ -d backend ]; then
   (cd backend && go mod download 2>&1)
   echo -e "${GREEN}  ✅ Go 依赖已安装${NC}"
@@ -42,7 +42,7 @@ fi
 # ──────────────────────────────────────────────
 # 3. 前端依赖
 # ──────────────────────────────────────────────
-echo -e "${YELLOW}[3/6] 安装前端依赖...${NC}"
+echo -e "${YELLOW}[3/8] 安装前端依赖...${NC}"
 if [ -d frontend ] && [ -f frontend/package.json ]; then
   (cd frontend && npm install --silent 2>&1 || npm install 2>&1)
   echo -e "${GREEN}  ✅ 前端依赖已安装${NC}"
@@ -53,7 +53,7 @@ fi
 # ──────────────────────────────────────────────
 # 4. 基线测试
 # ──────────────────────────────────────────────
-echo -e "${YELLOW}[4/6] 运行基线测试...${NC}"
+echo -e "${YELLOW}[4/8] 运行基线测试...${NC}"
 if [ -d backend ]; then
   if (cd backend && go test ./... -count=1 -timeout=120s 2>&1); then
     echo -e "${GREEN}  ✅ 基线测试全绿${NC}"
@@ -68,7 +68,7 @@ fi
 # ──────────────────────────────────────────────
 # 5. 验证拦截体系
 # ──────────────────────────────────────────────
-echo -e "${YELLOW}[5/6] 验证拦截体系...${NC}"
+echo -e "${YELLOW}[5/8] 验证拦截体系...${NC}"
 HOOKS_PATH=$(git config core.hooksPath 2>/dev/null || echo "")
 if [ "$HOOKS_PATH" = ".githooks" ]; then
   PRE_COMMIT=$([ -x .githooks/pre-commit ] && echo '✅' || echo '❌')
@@ -86,7 +86,7 @@ fi
 # 6. 环境摘要
 # ──────────────────────────────────────────────
 echo ""
-echo -e "${YELLOW}[6/7] 环境摘要${NC}"
+echo -e "${YELLOW}[6/8] 环境摘要${NC}"
 echo -e "  CLAUDE.md:    $(wc -l < CLAUDE.md 2>/dev/null || echo '?') 行（AI 执行规范）"
 echo -e "  TEAM_HANDBOOK:$(wc -l < TEAM_HANDBOOK.md 2>/dev/null || echo '?') 行（开发协作指南）"
 echo -e "  OpenSpec:     $(ls openspec/specs/ 2>/dev/null | wc -l | tr -d ' ') 个能力规格"
@@ -96,7 +96,7 @@ echo -e "  Git Hooks:    $(ls .githooks/ 2>/dev/null | wc -l | tr -d ' ') 个"
 # ──────────────────────────────────────────────
 # 7. 任务目录
 # ──────────────────────────────────────────────
-echo -e "${YELLOW}[7/7] 初始化任务目录...${NC}"
+echo -e "${YELLOW}[7/8] 初始化任务目录...${NC}"
 mkdir -p openspec/tasks/archive
 IN_PROGRESS=$(grep -rl 'status: in_progress' openspec/tasks/ 2>/dev/null | grep -v archive | wc -l | tr -d ' ' || true)
 PENDING=$(grep -rl 'status: pending' openspec/tasks/ 2>/dev/null | grep -v archive | wc -l | tr -d ' ' || true)
@@ -108,6 +108,18 @@ if [ "$TOTAL" -gt 0 ]; then
   echo -e "  💡 运行 /task list 查看未完成任务"
 else
   echo -e "  ✅ openspec/tasks/ 就绪 (无进行中任务)"
+fi
+
+# ──────────────────────────────────────────────
+# 8. AI 记忆归档链接
+# ──────────────────────────────────────────────
+# 记忆默认写在仓库外的 ~/.claude/projects/<编码路径>/memory/，换机器即全丢。
+# 这一步把它换成指向 docs/memory 的软链接，让记忆随仓库进 git。
+echo -e "${YELLOW}[8/8] 归档 AI 记忆到 docs/memory...${NC}"
+if ./scripts/link-memory.sh >/dev/null 2>&1; then
+  echo -e "${GREEN}  ✅ 记忆已链接到 docs/memory（$(ls docs/memory/*.md 2>/dev/null | wc -l | tr -d ' ') 条）${NC}"
+else
+  echo -e "${YELLOW}  ⚠ 记忆链接失败，可稍后重试: make memory-link${NC}"
 fi
 
 # ──────────────────────────────────────────────

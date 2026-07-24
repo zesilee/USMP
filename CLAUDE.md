@@ -345,3 +345,21 @@ explore → propose → apply → sync → archive
 | SR03 | 任务切换时，先 `/task sync` 保存当前状态，再切换 |
 | SR04 | `/task list` 随时可查看所有任务状态 |
 | SR05 | `/task resume <slug>` 恢复任务时，自动读取上下文恢复提示和恢复指令 |
+
+## §13 记忆归档
+
+> AI 项目记忆的**唯一真身是 `docs/memory/`**，随仓库进 git、随 PR 推到远端。
+> 背景：记忆默认写在仓库外的 `~/.claude/projects/<编码路径>/memory/`，机器一换/一下线就全丢。
+> 现由 `scripts/link-memory.sh` 把该目录换成指向 `docs/memory/` 的软链接，写记忆＝直接写进仓库工作区。
+
+| 编号 | 规则 |
+|------|------|
+| MEM01 | 记忆文件只放 `docs/memory/`，一条记忆一个文件，索引在 `docs/memory/MEMORY.md`（每条一行，禁止把正文塞进索引） |
+| MEM02 | `make memory-link` 建立/修复链接，**幂等**；克隆到新机器后由 `make setup` 自动执行（bootstrap 第 8 步） |
+| MEM03 | `make memory-check` 只读校验链接健康；`make memory-test` 跑脚本行为测试 |
+| MEM04 | 记忆变更会出现在 `git status`。**记忆随功能 PR 一起提交即可，但不得与功能改动混在同一个 commit**——单独一个 `docs: 记忆更新` commit（§5 提交规范「单次 Commit 仅对应一个原子功能」） |
+| MEM05 | 迁移**绝不破坏性删除**：存量记忆先并入 `docs/memory/`，同名异内容时仓库版本优先，原目录整体改名备份 |
+| MEM06 | worktree 有独立记忆目录，`link-memory.sh` 一并收编链回主仓，**避免在 worktree 写的记忆随 worktree 删除而蒸发** |
+| MEM07 | 禁止把凭据/密钥/token 写进记忆（R16 同口径）——记忆现在是会推到远端的仓库内容 |
+
+> pre-push 检测到 `docs/memory` 有未提交变更时**提醒但不拦截**（知识沉淀不阻断代码推送）。
