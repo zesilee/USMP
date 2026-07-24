@@ -65,7 +65,7 @@ frontend/
 - `vitest.config.ts` 的 `coverage.thresholds`（statements/branches/functions/lines）为**只准升不准降**的棘轮，`frontend-ci.yml` 跑 `npm run test:coverage`，低于阈值即 fail。
 - 补测后**同步上调阈值**到新水平，形成单向棘轮。本地自查：`npm run test:coverage`。
 - 基线实测(2026-07-06)：Stmts 66.55 / Branch 66.57 / Funcs 56.67 / Lines 66.88。
-- 派生黄金后(2026-07-24)：Stmts 84.73 / Branch 78.48 / Funcs 78.18 / Lines 85.28（阈值 84/78/78/85）。
+- 派生黄金后(2026-07-24)：CI 实测 Funcs 77.44、Lines 85.x（黄金把 moduleConsole/schemaTree 打到 100%）。阈值维持 84/78/77/84——本地测量会被同机 staging 后端灌水（fetch 成功回调多覆盖数个函数），只锁 CI 可复现下界。
 
 ## 门禁（本地 + CI）
 
