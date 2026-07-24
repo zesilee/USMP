@@ -1,0 +1,55 @@
+{
+  "module": "ftpc",
+  "title": "ftpc",
+  "vendor": "huawei",
+  "fields": [
+    {
+      "path": "/ftpc/client",
+      "type": "group",
+      "label": "client",
+      "fields": [
+        {
+          "path": "/ftpc/client/ipv6-vpn-instance-name",
+          "type": "string",
+          "label": "ipv6-vpn-instance-name",
+          "when": "../src-ipv6-addr"
+        },
+        {
+          "path": "/ftpc/client/source-interface-name",
+          "type": "string",
+          "label": "source-interface-name",
+          "when": "not(../source-ipv4-address)"
+        },
+        {
+          "path": "/ftpc/client/source-ipv4-address",
+          "type": "string",
+          "label": "source-ipv4-address",
+          "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?"
+        },
+        {
+          "path": "/ftpc/client/src-ipv6-addr",
+          "type": "string",
+          "label": "src-ipv6-addr",
+          "pattern": "((:|[0-9a-fA-F]{0,4}):)([0-9a-fA-F]{0,4}:){0,5}((([0-9a-fA-F]{0,4}:)?(:|[0-9a-fA-F]{0,4}))|(((25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])))(%[\\p{N}\\p{L}]+)?"
+        }
+      ]
+    },
+    {
+      "path": "/ftpc/global-vpn",
+      "type": "group",
+      "label": "global-vpn",
+      "fields": [
+        {
+          "path": "/ftpc/global-vpn/ipv6-vpn-name",
+          "type": "string",
+          "label": "ipv6-vpn-name"
+        },
+        {
+          "path": "/ftpc/global-vpn/vpn-name",
+          "type": "string",
+          "label": "vpn-name"
+        }
+      ]
+    }
+  ]
+}

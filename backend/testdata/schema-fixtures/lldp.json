@@ -1,0 +1,131 @@
+{
+  "module": "lldp",
+  "title": "lldp",
+  "vendor": "huawei",
+  "fields": [
+    {
+      "path": "/lldp/global-attribute",
+      "type": "group",
+      "label": "global-attribute",
+      "fields": [
+        {
+          "path": "/lldp/global-attribute/fast-count",
+          "type": "number",
+          "label": "fast-count",
+          "minimum": 1,
+          "maximum": 8
+        },
+        {
+          "path": "/lldp/global-attribute/management-address-mode",
+          "type": "choice",
+          "label": "management-address-mode",
+          "cases": [
+            {
+              "name": "global-mode",
+              "label": "global-mode",
+              "fields": [
+                {
+                  "path": "/lldp/global-attribute/management-address-ipv4-bind-if",
+                  "type": "string",
+                  "label": "management-address-ipv4-bind-if"
+                },
+                {
+                  "path": "/lldp/global-attribute/managment-address",
+                  "type": "string",
+                  "label": "managment-address"
+                }
+              ]
+            },
+            {
+              "name": "interface-mode",
+              "label": "interface-mode",
+              "fields": [
+                {
+                  "path": "/lldp/global-attribute/management-address-if-mode",
+                  "type": "string",
+                  "label": "management-address-if-mode"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "path": "/lldp/global-attribute/mdn-status",
+          "type": "enum",
+          "label": "mdn-status",
+          "options": [
+            {
+              "label": "disabled",
+              "value": "disabled"
+            },
+            {
+              "label": "rx-only",
+              "value": "rx-only"
+            }
+          ]
+        },
+        {
+          "path": "/lldp/global-attribute/message-transmission-delay",
+          "type": "number",
+          "label": "message-transmission-delay",
+          "minimum": 1,
+          "maximum": 8192,
+          "must": [
+            {
+              "expr": "../message-transmission-interval\u003e=(../message-transmission-delay*4)"
+            }
+          ]
+        },
+        {
+          "path": "/lldp/global-attribute/message-transmission-hold-multiplier",
+          "type": "number",
+          "label": "message-transmission-hold-multiplier",
+          "minimum": 2,
+          "maximum": 10
+        },
+        {
+          "path": "/lldp/global-attribute/message-transmission-interval",
+          "type": "number",
+          "label": "message-transmission-interval",
+          "minimum": 5,
+          "maximum": 32768,
+          "must": [
+            {
+              "expr": "../message-transmission-interval\u003e=(../message-transmission-delay*4)"
+            }
+          ]
+        },
+        {
+          "path": "/lldp/global-attribute/restart-delay",
+          "type": "number",
+          "label": "restart-delay",
+          "minimum": 1,
+          "maximum": 10
+        },
+        {
+          "path": "/lldp/global-attribute/trap-enable",
+          "type": "enum",
+          "label": "trap-enable",
+          "options": [
+            {
+              "label": "disabled",
+              "value": "disabled"
+            },
+            {
+              "label": "enabled",
+              "value": "enabled"
+            }
+          ],
+          "readonly": true
+        },
+        {
+          "path": "/lldp/global-attribute/trap-interval",
+          "type": "number",
+          "label": "trap-interval",
+          "minimum": 5,
+          "maximum": 3600
+        }
+      ]
+    }
+  ]
+}

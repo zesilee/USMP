@@ -1,0 +1,539 @@
+{
+  "module": "mstp",
+  "title": "mstp",
+  "vendor": "huawei",
+  "fields": [
+    {
+      "path": "/mstp/default-process",
+      "type": "group",
+      "label": "default-process",
+      "fields": [
+        {
+          "path": "/mstp/default-process/bpdu-protection",
+          "type": "boolean",
+          "label": "bpdu-protection"
+        },
+        {
+          "path": "/mstp/default-process/default-instance",
+          "type": "group",
+          "label": "default-instance",
+          "fields": [
+            {
+              "path": "/mstp/default-process/default-instance/priority",
+              "type": "number",
+              "label": "priority",
+              "maximum": 61440,
+              "when": "../root-type='normal'",
+              "must": [
+                {
+                  "expr": "(../priority) mod 4096 = 0"
+                }
+              ]
+            },
+            {
+              "path": "/mstp/default-process/default-instance/root-type",
+              "type": "enum",
+              "label": "root-type",
+              "options": [
+                {
+                  "label": "normal",
+                  "value": "normal"
+                },
+                {
+                  "label": "primary",
+                  "value": "primary"
+                },
+                {
+                  "label": "secondary",
+                  "value": "secondary"
+                }
+              ]
+            },
+            {
+              "path": "/mstp/default-process/default-instance/vlan-mapping",
+              "type": "string",
+              "label": "vlan-mapping",
+              "pattern": "([0-9]|,|\\+|\\-|\\(|\\))+",
+              "readonly": true
+            }
+          ]
+        },
+        {
+          "path": "/mstp/default-process/enable",
+          "type": "boolean",
+          "label": "enable"
+        },
+        {
+          "path": "/mstp/default-process/forward-delay",
+          "type": "number",
+          "label": "forward-delay",
+          "minimum": 400,
+          "maximum": 3000,
+          "must": [
+            {
+              "expr": "(../forward-delay) mod 100 = 0"
+            }
+          ]
+        },
+        {
+          "path": "/mstp/default-process/hello-time",
+          "type": "number",
+          "label": "hello-time",
+          "minimum": 100,
+          "maximum": 1000,
+          "must": [
+            {
+              "expr": "(../hello-time) mod 100 = 0"
+            }
+          ]
+        },
+        {
+          "path": "/mstp/default-process/instances",
+          "type": "group",
+          "label": "instances",
+          "fields": [
+            {
+              "path": "/mstp/default-process/instances/instance",
+              "type": "list",
+              "label": "instance",
+              "fields": [
+                {
+                  "path": "/mstp/default-process/instances/instance/id",
+                  "type": "number",
+                  "label": "id",
+                  "minimum": 1,
+                  "maximum": 4094,
+                  "isKey": true
+                },
+                {
+                  "path": "/mstp/default-process/instances/instance/priority",
+                  "type": "number",
+                  "label": "priority",
+                  "maximum": 61440,
+                  "when": "../root-type='normal'",
+                  "must": [
+                    {
+                      "expr": "(../priority) mod 4096 = 0"
+                    }
+                  ]
+                },
+                {
+                  "path": "/mstp/default-process/instances/instance/root-type",
+                  "type": "enum",
+                  "label": "root-type",
+                  "options": [
+                    {
+                      "label": "normal",
+                      "value": "normal"
+                    },
+                    {
+                      "label": "primary",
+                      "value": "primary"
+                    },
+                    {
+                      "label": "secondary",
+                      "value": "secondary"
+                    }
+                  ]
+                },
+                {
+                  "path": "/mstp/default-process/instances/instance/vlan-mapping",
+                  "type": "string",
+                  "label": "vlan-mapping",
+                  "pattern": "([0-9]|,|\\+|\\-|\\(|\\))+"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "path": "/mstp/default-process/max-age",
+          "type": "number",
+          "label": "max-age",
+          "minimum": 600,
+          "maximum": 4000,
+          "must": [
+            {
+              "expr": "(../max-age) mod 100 = 0"
+            }
+          ]
+        },
+        {
+          "path": "/mstp/default-process/max-hops",
+          "type": "number",
+          "label": "max-hops",
+          "minimum": 1,
+          "maximum": 40
+        },
+        {
+          "path": "/mstp/default-process/mode",
+          "type": "enum",
+          "label": "mode",
+          "options": [
+            {
+              "label": "mstp",
+              "value": "mstp"
+            },
+            {
+              "label": "rstp",
+              "value": "rstp"
+            },
+            {
+              "label": "stp",
+              "value": "stp"
+            },
+            {
+              "label": "vbst",
+              "value": "vbst"
+            }
+          ]
+        },
+        {
+          "path": "/mstp/default-process/path-cost-standard",
+          "type": "enum",
+          "label": "path-cost-standard",
+          "options": [
+            {
+              "label": "dot1d-1998",
+              "value": "dot1d-1998"
+            },
+            {
+              "label": "dot1t",
+              "value": "dot1t"
+            },
+            {
+              "label": "legacy",
+              "value": "legacy"
+            }
+          ]
+        },
+        {
+          "path": "/mstp/default-process/region-name",
+          "type": "string",
+          "label": "region-name",
+          "dynamicDefault": true
+        },
+        {
+          "path": "/mstp/default-process/revision-level",
+          "type": "number",
+          "label": "revision-level"
+        },
+        {
+          "path": "/mstp/default-process/tc-protection",
+          "type": "boolean",
+          "label": "tc-protection"
+        },
+        {
+          "path": "/mstp/default-process/tc-protection-interval",
+          "type": "number",
+          "label": "tc-protection-interval",
+          "minimum": 1,
+          "maximum": 600
+        },
+        {
+          "path": "/mstp/default-process/tc-protection-threshold",
+          "type": "number",
+          "label": "tc-protection-threshold",
+          "minimum": 1,
+          "maximum": 255
+        },
+        {
+          "path": "/mstp/default-process/timer-factor",
+          "type": "number",
+          "label": "timer-factor",
+          "minimum": 1,
+          "maximum": 10
+        }
+      ]
+    },
+    {
+      "path": "/mstp/global",
+      "type": "group",
+      "label": "global",
+      "fields": [
+        {
+          "path": "/mstp/global/bpdu-filter",
+          "type": "boolean",
+          "label": "bpdu-filter"
+        },
+        {
+          "path": "/mstp/global/bridge-address",
+          "type": "string",
+          "label": "bridge-address",
+          "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}"
+        },
+        {
+          "path": "/mstp/global/edge-port",
+          "type": "boolean",
+          "label": "edge-port"
+        },
+        {
+          "path": "/mstp/global/transmit-limit",
+          "type": "number",
+          "label": "transmit-limit",
+          "minimum": 1,
+          "maximum": 255
+        },
+        {
+          "path": "/mstp/global/vstp-enable",
+          "type": "boolean",
+          "label": "vstp-enable"
+        }
+      ]
+    },
+    {
+      "path": "/mstp/processs",
+      "type": "group",
+      "label": "processs",
+      "fields": [
+        {
+          "path": "/mstp/processs/process",
+          "type": "list",
+          "label": "process",
+          "fields": [
+            {
+              "path": "/mstp/processs/process/bpdu-protection",
+              "type": "boolean",
+              "label": "bpdu-protection"
+            },
+            {
+              "path": "/mstp/processs/process/default-instance",
+              "type": "group",
+              "label": "default-instance",
+              "fields": [
+                {
+                  "path": "/mstp/processs/process/default-instance/priority",
+                  "type": "number",
+                  "label": "priority",
+                  "maximum": 61440,
+                  "when": "../root-type='normal'",
+                  "must": [
+                    {
+                      "expr": "(../priority) mod 4096 = 0"
+                    }
+                  ]
+                },
+                {
+                  "path": "/mstp/processs/process/default-instance/root-type",
+                  "type": "enum",
+                  "label": "root-type",
+                  "options": [
+                    {
+                      "label": "normal",
+                      "value": "normal"
+                    },
+                    {
+                      "label": "primary",
+                      "value": "primary"
+                    },
+                    {
+                      "label": "secondary",
+                      "value": "secondary"
+                    }
+                  ]
+                },
+                {
+                  "path": "/mstp/processs/process/default-instance/vlan-mapping",
+                  "type": "string",
+                  "label": "vlan-mapping",
+                  "pattern": "([0-9]|,|\\+|\\-|\\(|\\))+",
+                  "readonly": true
+                }
+              ]
+            },
+            {
+              "path": "/mstp/processs/process/enable",
+              "type": "boolean",
+              "label": "enable"
+            },
+            {
+              "path": "/mstp/processs/process/forward-delay",
+              "type": "number",
+              "label": "forward-delay",
+              "minimum": 400,
+              "maximum": 3000,
+              "must": [
+                {
+                  "expr": "(../forward-delay) mod 100 = 0"
+                }
+              ]
+            },
+            {
+              "path": "/mstp/processs/process/hello-time",
+              "type": "number",
+              "label": "hello-time",
+              "minimum": 100,
+              "maximum": 1000,
+              "must": [
+                {
+                  "expr": "(../hello-time) mod 100 = 0"
+                }
+              ]
+            },
+            {
+              "path": "/mstp/processs/process/id",
+              "type": "number",
+              "label": "id",
+              "minimum": 1,
+              "maximum": 256,
+              "isKey": true
+            },
+            {
+              "path": "/mstp/processs/process/instances",
+              "type": "group",
+              "label": "instances",
+              "fields": [
+                {
+                  "path": "/mstp/processs/process/instances/instance",
+                  "type": "list",
+                  "label": "instance",
+                  "fields": [
+                    {
+                      "path": "/mstp/processs/process/instances/instance/id",
+                      "type": "number",
+                      "label": "id",
+                      "minimum": 1,
+                      "maximum": 4094,
+                      "isKey": true
+                    },
+                    {
+                      "path": "/mstp/processs/process/instances/instance/priority",
+                      "type": "number",
+                      "label": "priority",
+                      "maximum": 61440,
+                      "when": "../root-type='normal'",
+                      "must": [
+                        {
+                          "expr": "(../priority) mod 4096 = 0"
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/mstp/processs/process/instances/instance/root-type",
+                      "type": "enum",
+                      "label": "root-type",
+                      "options": [
+                        {
+                          "label": "normal",
+                          "value": "normal"
+                        },
+                        {
+                          "label": "primary",
+                          "value": "primary"
+                        },
+                        {
+                          "label": "secondary",
+                          "value": "secondary"
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/mstp/processs/process/instances/instance/vlan-mapping",
+                      "type": "string",
+                      "label": "vlan-mapping",
+                      "pattern": "([0-9]|,|\\+|\\-|\\(|\\))+"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/mstp/processs/process/max-age",
+              "type": "number",
+              "label": "max-age",
+              "minimum": 600,
+              "maximum": 4000,
+              "must": [
+                {
+                  "expr": "(../max-age) mod 100 = 0"
+                }
+              ]
+            },
+            {
+              "path": "/mstp/processs/process/max-hops",
+              "type": "number",
+              "label": "max-hops",
+              "minimum": 1,
+              "maximum": 40
+            },
+            {
+              "path": "/mstp/processs/process/mode",
+              "type": "enum",
+              "label": "mode",
+              "options": [
+                {
+                  "label": "mstp",
+                  "value": "mstp"
+                },
+                {
+                  "label": "rstp",
+                  "value": "rstp"
+                },
+                {
+                  "label": "stp",
+                  "value": "stp"
+                }
+              ]
+            },
+            {
+              "path": "/mstp/processs/process/path-cost-standard",
+              "type": "enum",
+              "label": "path-cost-standard",
+              "options": [
+                {
+                  "label": "dot1d-1998",
+                  "value": "dot1d-1998"
+                },
+                {
+                  "label": "dot1t",
+                  "value": "dot1t"
+                },
+                {
+                  "label": "legacy",
+                  "value": "legacy"
+                }
+              ]
+            },
+            {
+              "path": "/mstp/processs/process/region-name",
+              "type": "string",
+              "label": "region-name",
+              "dynamicDefault": true
+            },
+            {
+              "path": "/mstp/processs/process/revision-level",
+              "type": "number",
+              "label": "revision-level"
+            },
+            {
+              "path": "/mstp/processs/process/tc-protection",
+              "type": "boolean",
+              "label": "tc-protection"
+            },
+            {
+              "path": "/mstp/processs/process/tc-protection-interval",
+              "type": "number",
+              "label": "tc-protection-interval",
+              "minimum": 1,
+              "maximum": 600
+            },
+            {
+              "path": "/mstp/processs/process/tc-protection-threshold",
+              "type": "number",
+              "label": "tc-protection-threshold",
+              "minimum": 1,
+              "maximum": 255
+            },
+            {
+              "path": "/mstp/processs/process/timer-factor",
+              "type": "number",
+              "label": "timer-factor",
+              "minimum": 1,
+              "maximum": 10
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1543 @@
+{
+  "module": "license",
+  "title": "license",
+  "vendor": "huawei",
+  "fields": [
+    {
+      "path": "/license/cloud-servers",
+      "type": "group",
+      "label": "cloud-servers",
+      "fields": [
+        {
+          "path": "/license/cloud-servers/cloud-server",
+          "type": "list",
+          "label": "cloud-server",
+          "fields": [
+            {
+              "path": "/license/cloud-servers/cloud-server/register-state",
+              "type": "enum",
+              "label": "register-state",
+              "options": [
+                {
+                  "label": "register",
+                  "value": "register"
+                },
+                {
+                  "label": "unregister",
+                  "value": "unregister"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "path": "/license/cloud-servers/cloud-server/server-ip",
+              "type": "string",
+              "label": "server-ip",
+              "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?",
+              "isKey": true
+            },
+            {
+              "path": "/license/cloud-servers/cloud-server/server-port",
+              "type": "number",
+              "label": "server-port",
+              "isKey": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/license/global-states",
+      "type": "group",
+      "label": "global-states",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/license/global-states/global-state",
+          "type": "list",
+          "label": "global-state",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/license/global-states/global-state/active-filename",
+              "type": "string",
+              "label": "active-filename",
+              "readonly": true
+            },
+            {
+              "path": "/license/global-states/global-state/active-state",
+              "type": "enum",
+              "label": "active-state",
+              "options": [
+                {
+                  "label": "default",
+                  "value": "default"
+                },
+                {
+                  "label": "demo",
+                  "value": "demo"
+                },
+                {
+                  "label": "emergency",
+                  "value": "emergency"
+                },
+                {
+                  "label": "normal",
+                  "value": "normal"
+                },
+                {
+                  "label": "trial",
+                  "value": "trial"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "path": "/license/global-states/global-state/chassis-id",
+              "type": "string",
+              "label": "chassis-id",
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/license/global-states/global-state/esn",
+              "type": "string",
+              "label": "esn",
+              "readonly": true
+            },
+            {
+              "path": "/license/global-states/global-state/license-mode",
+              "type": "enum",
+              "label": "license-mode",
+              "options": [
+                {
+                  "label": "cloud",
+                  "value": "cloud"
+                },
+                {
+                  "label": "common",
+                  "value": "common"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "path": "/license/global-states/global-state/revoke-ticket",
+              "type": "string",
+              "label": "revoke-ticket",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/license/license-files",
+      "type": "group",
+      "label": "license-files",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/license/license-files/license-file",
+          "type": "list",
+          "label": "license-file",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/license/license-files/license-file/chassis-id",
+              "type": "string",
+              "label": "chassis-id",
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/license/license-files/license-file/features",
+              "type": "group",
+              "label": "features",
+              "readonly": true,
+              "fields": [
+                {
+                  "path": "/license/license-files/license-file/features/feature",
+                  "type": "list",
+                  "label": "feature",
+                  "readonly": true,
+                  "fields": [
+                    {
+                      "path": "/license/license-files/license-file/features/feature/auth-type",
+                      "type": "enum",
+                      "label": "auth-type",
+                      "options": [
+                        {
+                          "label": "commercial",
+                          "value": "commercial"
+                        },
+                        {
+                          "label": "demo",
+                          "value": "demo"
+                        }
+                      ],
+                      "readonly": true
+                    },
+                    {
+                      "path": "/license/license-files/license-file/features/feature/esn",
+                      "type": "string",
+                      "label": "esn",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/license/license-files/license-file/features/feature/feature-items",
+                      "type": "group",
+                      "label": "feature-items",
+                      "readonly": true,
+                      "fields": [
+                        {
+                          "path": "/license/license-files/license-file/features/feature/feature-items/feature-item",
+                          "type": "list",
+                          "label": "feature-item",
+                          "readonly": true,
+                          "fields": [
+                            {
+                              "path": "/license/license-files/license-file/features/feature/feature-items/feature-item/name",
+                              "type": "string",
+                              "label": "name",
+                              "readonly": true,
+                              "isKey": true
+                            },
+                            {
+                              "path": "/license/license-files/license-file/features/feature/feature-items/feature-item/value",
+                              "type": "number",
+                              "label": "value",
+                              "readonly": true
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/license/license-files/license-file/features/feature/hardware-deadline",
+                      "type": "string",
+                      "label": "hardware-deadline",
+                      "pattern": "\\d{4}-\\d{2}-\\d{2}",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/license/license-files/license-file/features/feature/name",
+                      "type": "string",
+                      "label": "name",
+                      "readonly": true,
+                      "isKey": true
+                    },
+                    {
+                      "path": "/license/license-files/license-file/features/feature/product",
+                      "type": "string",
+                      "label": "product",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/license/license-files/license-file/features/feature/running-deadline",
+                      "type": "string",
+                      "label": "running-deadline",
+                      "pattern": "\\d{4}-\\d{2}-\\d{2}",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/license/license-files/license-file/features/feature/software-deadline",
+                      "type": "string",
+                      "label": "software-deadline",
+                      "pattern": "\\d{4}-\\d{2}-\\d{2}",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/license/license-files/license-file/features/feature/trial-days",
+                      "type": "number",
+                      "label": "trial-days",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/license/license-files/license-file/features/feature/upgrate-deadline",
+                      "type": "string",
+                      "label": "upgrate-deadline",
+                      "pattern": "\\d{4}-\\d{2}-\\d{2}",
+                      "readonly": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/license/license-files/license-file/filename",
+              "type": "string",
+              "label": "filename",
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/license/license-files/license-file/filesize",
+              "type": "number",
+              "label": "filesize",
+              "readonly": true
+            },
+            {
+              "path": "/license/license-files/license-file/general",
+              "type": "group",
+              "label": "general",
+              "readonly": true,
+              "fields": [
+                {
+                  "path": "/license/license-files/license-file/general/country",
+                  "type": "string",
+                  "label": "country",
+                  "readonly": true
+                },
+                {
+                  "path": "/license/license-files/license-file/general/created-time",
+                  "type": "string",
+                  "label": "created-time",
+                  "pattern": "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?(Z|[\\+\\-]\\d{2}:\\d{2})",
+                  "readonly": true
+                },
+                {
+                  "path": "/license/license-files/license-file/general/creator",
+                  "type": "string",
+                  "label": "creator",
+                  "readonly": true
+                },
+                {
+                  "path": "/license/license-files/license-file/general/customer",
+                  "type": "string",
+                  "label": "customer",
+                  "readonly": true
+                },
+                {
+                  "path": "/license/license-files/license-file/general/office",
+                  "type": "string",
+                  "label": "office",
+                  "readonly": true
+                },
+                {
+                  "path": "/license/license-files/license-file/general/serial-number",
+                  "type": "string",
+                  "label": "serial-number",
+                  "readonly": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/license/license-items",
+      "type": "group",
+      "label": "license-items",
+      "fields": [
+        {
+          "path": "/license/license-items/license-item",
+          "type": "list",
+          "label": "license-item",
+          "fields": [
+            {
+              "path": "/license/license-items/license-item/current-value",
+              "type": "number",
+              "label": "current-value",
+              "readonly": true
+            },
+            {
+              "path": "/license/license-items/license-item/default-value",
+              "type": "number",
+              "label": "default-value",
+              "readonly": true
+            },
+            {
+              "path": "/license/license-items/license-item/description",
+              "type": "string",
+              "label": "description",
+              "readonly": true
+            },
+            {
+              "path": "/license/license-items/license-item/emergency-remain-day",
+              "type": "number",
+              "label": "emergency-remain-day",
+              "readonly": true
+            },
+            {
+              "path": "/license/license-items/license-item/emergency-remain-times",
+              "type": "number",
+              "label": "emergency-remain-times",
+              "readonly": true
+            },
+            {
+              "path": "/license/license-items/license-item/emergency-state",
+              "type": "enum",
+              "label": "emergency-state",
+              "options": [
+                {
+                  "label": "disable",
+                  "value": "disable"
+                },
+                {
+                  "label": "enable",
+                  "value": "enable"
+                },
+                {
+                  "label": "not-supported",
+                  "value": "not-supported"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "path": "/license/license-items/license-item/expired-date",
+              "type": "string",
+              "label": "expired-date",
+              "readonly": true
+            },
+            {
+              "path": "/license/license-items/license-item/maximum-value",
+              "type": "number",
+              "label": "maximum-value",
+              "readonly": true
+            },
+            {
+              "path": "/license/license-items/license-item/name",
+              "type": "string",
+              "label": "name",
+              "isKey": true
+            },
+            {
+              "path": "/license/license-items/license-item/port-aggregations",
+              "type": "group",
+              "label": "port-aggregations",
+              "when": "../lcs:name='LCR5S03CRAG12' or ../lcs:name='LCR5S03CRAG13' or ../lcs:name='LCR5S03CRAG14' or ../lcs:name='LCR6S62CRAG12' or ../lcs:name='LCR6S62CRAG13' or ../lcs:name='LCR6S62CRAG14' or ../lcs:name='LCR5S03CRAG15'",
+              "fields": [
+                {
+                  "path": "/license/license-items/license-item/port-aggregations/port-aggregation",
+                  "type": "list",
+                  "label": "port-aggregation",
+                  "fields": [
+                    {
+                      "path": "/license/license-items/license-item/port-aggregations/port-aggregation/position",
+                      "type": "string",
+                      "label": "position",
+                      "isKey": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/license/license-items/license-item/port-core-aggregations",
+              "type": "group",
+              "label": "port-core-aggregations",
+              "when": "../lcs:name='LCX6S60NPCAAP' or ../lcs:name='LCX6S60XPCAAP' or ../lcs:name='LCX6S60NPCAAQ' or ../lcs:name='LCR8S00CRAGC4' or ../lcs:name='LCR8S00CRAGC2' or ../lcs:name='LCR8SF0CRAGC4' or ../lcs:name='LCR8SF0CRAGC1' or ../lcs:name='LCR5S00CRAGC2' or ../lcs:name='LCR5S00CRAGC4' or ../lcs:name='LTNRS00CRAGC2' or ../lcs:name='LTNRS00CRAGC4' or ../lcs:name='LCR8S0XCAGGC0' or ../lcs:name='LCR8S0XCAGGC3' or ../lcs:name='LCR8S0VCAGGC0' or ../lcs:name='LCR8S0VCAGGC3' or ../lcs:name='LCR8S80CRAGC4' or ../lcs:name='LCR8S80CRAGC1'",
+              "fields": [
+                {
+                  "path": "/license/license-items/license-item/port-core-aggregations/port-core-aggregation",
+                  "type": "list",
+                  "label": "port-core-aggregation",
+                  "fields": [
+                    {
+                      "path": "/license/license-items/license-item/port-core-aggregations/port-core-aggregation/position",
+                      "type": "string",
+                      "label": "position",
+                      "isKey": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/license/license-items/license-item/port-hqoss",
+              "type": "group",
+              "label": "port-hqoss",
+              "when": "../lcs:name='LCR5S40NHQS0P' or ../lcs:name='LCR5S40XHQS0P' or ../lcs:name='LCR5S40GHQS0P' or ../lcs:name='LCR5S40VHQS0P' or ../lcs:name='LCR5S40YHQS0P'",
+              "fields": [
+                {
+                  "path": "/license/license-items/license-item/port-hqoss/port-hqos",
+                  "type": "list",
+                  "label": "port-hqos",
+                  "fields": [
+                    {
+                      "path": "/license/license-items/license-item/port-hqoss/port-hqos/active-status",
+                      "type": "enum",
+                      "label": "active-status",
+                      "options": [
+                        {
+                          "label": "activated",
+                          "value": "activated"
+                        },
+                        {
+                          "label": "allocated",
+                          "value": "allocated"
+                        }
+                      ],
+                      "readonly": true
+                    },
+                    {
+                      "path": "/license/license-items/license-item/port-hqoss/port-hqos/position",
+                      "type": "string",
+                      "label": "position",
+                      "isKey": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/license/license-items/license-item/port-l3vpn-evpns",
+              "type": "group",
+              "label": "port-l3vpn-evpns",
+              "when": "../lcs:name='LCR5S03L3VP12' or ../lcs:name='LCR5S03L3VP13' or ../lcs:name='LCR5S03L3VP14' or ../lcs:name='LCR5S03L3VP15' or ../lcs:name='LCR6S62L3VP12' or ../lcs:name='LCR6S62L3VP13' or ../lcs:name='LCR6S62L3VP14' or ../lcs:name='LCR5S0M1L3V13' or ../lcs:name='LCX6S6M1L3V13'",
+              "fields": [
+                {
+                  "path": "/license/license-items/license-item/port-l3vpn-evpns/port-l3vpn-evpn",
+                  "type": "list",
+                  "label": "port-l3vpn-evpn",
+                  "fields": [
+                    {
+                      "path": "/license/license-items/license-item/port-l3vpn-evpns/port-l3vpn-evpn/position",
+                      "type": "string",
+                      "label": "position",
+                      "isKey": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/license/license-items/license-item/port-l3vpns",
+              "type": "group",
+              "label": "port-l3vpns",
+              "when": "../lcs:name='LCR5S40NL3V0P' or ../lcs:name='LCR5S40XL3V0P' or ../lcs:name='LCR5S40GL3V0P' or ../lcs:name='LCX6S00NL3V0P' or ../lcs:name='LCX6S00XL3V0P' or ../lcs:name='LCX6S00GL3V0P' or ../lcs:name='LTNRS69NL3V0P' or ../lcs:name='LTNRS69XL3V0P' or ../lcs:name='LTNRS69GL3V0P' or ../lcs:name='LCR5S5KNL3V0P' or ../lcs:name='LCR5S5KXL3V0P' or ../lcs:name='LCR9S9KNL3V0P' or ../lcs:name='LCR9S9KXL3V0P' or ../lcs:name='LCX6S00NL3VAP' or ../lcs:name='LCX6S00XL3VAP' or ../lcs:name='LCR6S00NL3VAQ' or ../lcs:name='LCR9S9KNL3V0L' or ../lcs:name='LCR9S9KXL3V0L' or ../lcs:name='LCR5S40VL3V0P' or ../lcs:name='LCR5S40YL3V0P' or ../lcs:name='LCX6S00VL3V0P' or ../lcs:name='LCX6S00YL3V0P' or ../lcs:name='LTNRS00VL3V0P' or ../lcs:name='LTNRS00YL3V0P' or ../lcs:name='LCR9S9KNL3V0Q' or ../lcs:name='LCR8S00L3VPC2' or ../lcs:name='LCR8S00L3VPC4' or ../lcs:name='LCR8SF0L3VPC4' or ../lcs:name='LCR8SF0L3VPC1' or ../lcs:name='LTNRS00L3VPC2' or ../lcs:name='LTNRS00L3VPC4' or ../lcs:name='LCR5S00L3VPC2' or ../lcs:name='LCR5S00L3VPC4' or ../lcs:name='LCR8S0VL3VNC3' or ../lcs:name='LCR8S0XL3VNC3' or ../lcs:name='LCR8S0VL3VNC0' or ../lcs:name='LCR8S0XL3VNC0' or ../lcs:name='LCR5S5KKL3V0P' or ../lcs:name='LCR8S80L3VPC4' or ../lcs:name='LCR8S80L3VPC1'",
+              "fields": [
+                {
+                  "path": "/license/license-items/license-item/port-l3vpns/port-l3vpn",
+                  "type": "list",
+                  "label": "port-l3vpn",
+                  "fields": [
+                    {
+                      "path": "/license/license-items/license-item/port-l3vpns/port-l3vpn/position",
+                      "type": "string",
+                      "label": "position",
+                      "isKey": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/license/license-items/license-item/port-macsecs",
+              "type": "group",
+              "label": "port-macsecs",
+              "when": "../lcs:name='LCR9S9KMACS00' or ../lcs:name='LCR5MACSEC01' or ../lcs:name='LCR5MACSEC02' or ../lcs:name='LCX6S60NMSEAP' or ../lcs:name='LANKMACSEC011' or ../lcs:name='LANKMACSEC026' or ../lcs:name='LANKMACSEC051' or ../lcs:name='LCR9S9K0XMS80' or ../lcs:name='LCR9S9K0NMS80' or ../lcs:name='LCR9S9K0NMS85' or ../lcs:name='LTNRS00YMSC0P' or ../lcs:name='LTNRS00VMSC0P' or ../lcs:name='LTNRS00NMSC0P' or ../lcs:name='LCR5S40YMSC0P' or ../lcs:name='LCR5S40VMSC0P' or ../lcs:name='LCR5S40NMSC0P' or ../lcs:name='LCX6S00YMSC0P' or ../lcs:name='LCX6S00VMSC0P' or ../lcs:name='LCX6S00NMSC0P' or ../lcs:name='LCR5S40XMSC0P' or ../lcs:name='LCX6S40YMSC0P' or ../lcs:name='LTNRS40YMSC0P' or ../lcs:name='LCX6S00VMSC01' or ../lcs:name='LCX6S00YMSC01' or ../lcs:name='LCR5SMACSEC05' or ../lcs:name='LCR5SMACSEC06' or ../lcs:name='LCR8SMACSECC2' or ../lcs:name='LCR8SMACSECC4' or ../lcs:name='LTNRSMACSECC4'or ../lcs:name='LTNRSMACSECC2' or ../lcs:name='LCR5SMACSECC2' or ../lcs:name='LCR5SMACSECC4' or ../lcs:name='LCX6S00NMSC01' or ../lcs:name='LCX6S00XMSC01' or ../lcs:name='LCX6S00GMSC01' or ../lcs:name='LTNRS00GMSC0P' or ../lcs:name='LCR5S40GMSC0P' or ../lcs:name='LCX6S40GMSC0P' or ../lcs:name='LCR8S8KXMSCCP' or ../lcs:name='LCR8S8KXMSCCR' or ../lcs:name='LANKMACSEC101' or ../lcs:name='LCR8SM6MACSC1' or ../lcs:name='LCR8SM6MACSC0'",
+              "fields": [
+                {
+                  "path": "/license/license-items/license-item/port-macsecs/port-macsec",
+                  "type": "list",
+                  "label": "port-macsec",
+                  "fields": [
+                    {
+                      "path": "/license/license-items/license-item/port-macsecs/port-macsec/active-status",
+                      "type": "enum",
+                      "label": "active-status",
+                      "options": [
+                        {
+                          "label": "activated",
+                          "value": "activated"
+                        },
+                        {
+                          "label": "allocated",
+                          "value": "allocated"
+                        }
+                      ],
+                      "readonly": true
+                    },
+                    {
+                      "path": "/license/license-items/license-item/port-macsecs/port-macsec/position",
+                      "type": "string",
+                      "label": "position",
+                      "isKey": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/license/license-items/license-item/port-peerings",
+              "type": "group",
+              "label": "port-peerings",
+              "when": "../lcs:name='LCX6S60NPEEAP' or ../lcs:name='LCX6S60XPEEAP' or ../lcs:name='LCR5S03PEER12' or ../lcs:name='LCR5S03PEER13' or ../lcs:name='LCR5S03PEER14' or ../lcs:name='LCR6S62PEER12' or ../lcs:name='LCR6S62PEER13' or ../lcs:name='LCR6S62PEER14' or ../lcs:name='LCR8S0VCIGWC3' or ../lcs:name='LCR8S0XCIGWC3' or ../lcs:name='LCR8S0VCIGWC0' or ../lcs:name='LCR8S0XCIGWC0' or ../lcs:name='LCR5S03PEER15'",
+              "fields": [
+                {
+                  "path": "/license/license-items/license-item/port-peerings/port-peering",
+                  "type": "list",
+                  "label": "port-peering",
+                  "fields": [
+                    {
+                      "path": "/license/license-items/license-item/port-peerings/port-peering/position",
+                      "type": "string",
+                      "label": "position",
+                      "isKey": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/license/license-items/license-item/port-service-enhances",
+              "type": "group",
+              "label": "port-service-enhances",
+              "when": "../lcs:name='LCR5S0M1SEN13' or ../lcs:name='LCX6S6M1SEN13' or ../lcs:name='LANNS0AVAND01' or ../lcs:name='LANNS0AVAND02' or ../lcs:name='LANNS0AVAND03' or ../lcs:name='LANNS0AVAND04' or ../lcs:name='LANHS00SADV50' or ../lcs:name='LANHS00SADV10'",
+              "fields": [
+                {
+                  "path": "/license/license-items/license-item/port-service-enhances/port-service-enhance",
+                  "type": "list",
+                  "label": "port-service-enhance",
+                  "fields": [
+                    {
+                      "path": "/license/license-items/license-item/port-service-enhances/port-service-enhance/position",
+                      "type": "string",
+                      "label": "position",
+                      "isKey": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/license/license-items/license-item/port-srv6s",
+              "type": "group",
+              "label": "port-srv6s",
+              "when": "../lcs:name='LCR9S9KKSR680' or ../lcs:name='LCR9S9KNSR680' or ../lcs:name='LCR9S9KXSR680' or ../lcs:name='LCR9S9KNSR68L' or ../lcs:name='LCR9S9KXSR68L' or ../lcs:name='LANNS00SRV621' or ../lcs:name='LANNS00SRV622' or ../lcs:name='LANNS00SRV623' or ../lcs:name='LANNS00SRV624' or ../lcs:name='LANNS00SRV625' or ../lcs:name='LCR5S40SRV601' or ../lcs:name='LCR5S40SRV602' or ../lcs:name='LCR5S40SRV603' or ../lcs:name='LCR5S40SRV604' or ../lcs:name='LCX6S00SRV601' or ../lcs:name='LCX6S00SRV602' or ../lcs:name='LCX6S00SRV603' or ../lcs:name='LCX6S00SRV604' or ../lcs:name='LTNRS69SRV601' or ../lcs:name='LTNRS69SRV602' or ../lcs:name='LTNRS69SRV603' or ../lcs:name='LTNRS69SRV604' or ../lcs:name='LCR5S42SRV611' or ../lcs:name='LCR5S42SRV612' or ../lcs:name='LCR5S42SRV613' or ../lcs:name='LCR5S42SRV614' or ../lcs:name='LCR5S0M1SR613' or ../lcs:name='LCR8SF0SRV6C1' or ../lcs:name='LCR8SF0SRV6C4' or ../lcs:name='LCR8S00SRV6C2' or ../lcs:name='LCR8S00SRV6C4' or ../lcs:name='LTNRS00SRV6C2' or ../lcs:name='LTNRS00SRV6C4' or ../lcs:name='LCR5S00SRV6C2' or ../lcs:name='LCR5S00SRV6C4' or ../lcs:name='LCR8S0VSRV6C3' or ../lcs:name='LCR8S0XSRV6C3' or ../lcs:name='LCR8S0VSRV6C0' or ../lcs:name='LCR8S0XSRV6C0' or ../lcs:name='LANNS00SRV624' or ../lcs:name='LANNS00SRV622' or ../lcs:name='LCR8S80SRV6C4' or ../lcs:name='LCR8S80SRV6C1'",
+              "fields": [
+                {
+                  "path": "/license/license-items/license-item/port-srv6s/port-srv6",
+                  "type": "list",
+                  "label": "port-srv6",
+                  "fields": [
+                    {
+                      "path": "/license/license-items/license-item/port-srv6s/port-srv6/position",
+                      "type": "string",
+                      "label": "position",
+                      "isKey": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/license/license-items/license-item/status",
+              "type": "enum",
+              "label": "status",
+              "options": [
+                {
+                  "label": "default",
+                  "value": "default"
+                },
+                {
+                  "label": "demo",
+                  "value": "demo"
+                },
+                {
+                  "label": "emergency",
+                  "value": "emergency"
+                },
+                {
+                  "label": "inactive",
+                  "value": "inactive"
+                },
+                {
+                  "label": "normal",
+                  "value": "normal"
+                },
+                {
+                  "label": "trial",
+                  "value": "trial"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "path": "/license/license-items/license-item/trial-remain-day",
+              "type": "number",
+              "label": "trial-remain-day",
+              "readonly": true
+            },
+            {
+              "path": "/license/license-items/license-item/trial-remain-times",
+              "type": "number",
+              "label": "trial-remain-times",
+              "readonly": true
+            },
+            {
+              "path": "/license/license-items/license-item/trial-state",
+              "type": "enum",
+              "label": "trial-state",
+              "options": [
+                {
+                  "label": "disable",
+                  "value": "disable"
+                },
+                {
+                  "label": "enable",
+                  "value": "enable"
+                },
+                {
+                  "label": "not-supported",
+                  "value": "not-supported"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "path": "/license/license-items/license-item/type",
+              "type": "enum",
+              "label": "type",
+              "options": [
+                {
+                  "label": "function",
+                  "value": "function"
+                },
+                {
+                  "label": "resource",
+                  "value": "resource"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "path": "/license/license-items/license-item/used-value",
+              "type": "number",
+              "label": "used-value",
+              "readonly": true
+            }
+          ],
+          "operationExclude": [
+            "create",
+            "delete"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/license/license-sale-items",
+      "type": "group",
+      "label": "license-sale-items",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/license/license-sale-items/license-sale-item",
+          "type": "list",
+          "label": "license-sale-item",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/license/license-sale-items/license-sale-item/description",
+              "type": "string",
+              "label": "description",
+              "readonly": true
+            },
+            {
+              "path": "/license/license-sale-items/license-sale-item/license-items",
+              "type": "group",
+              "label": "license-items",
+              "readonly": true,
+              "fields": [
+                {
+                  "path": "/license/license-sale-items/license-sale-item/license-items/license-item",
+                  "type": "list",
+                  "label": "license-item",
+                  "readonly": true,
+                  "fields": [
+                    {
+                      "path": "/license/license-sale-items/license-sale-item/license-items/license-item/current-value",
+                      "type": "number",
+                      "label": "current-value",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/license/license-sale-items/license-sale-item/license-items/license-item/default-value",
+                      "type": "number",
+                      "label": "default-value",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/license/license-sale-items/license-sale-item/license-items/license-item/description",
+                      "type": "string",
+                      "label": "description",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/license/license-sale-items/license-sale-item/license-items/license-item/emergency-remain-day",
+                      "type": "number",
+                      "label": "emergency-remain-day",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/license/license-sale-items/license-sale-item/license-items/license-item/emergency-remain-times",
+                      "type": "number",
+                      "label": "emergency-remain-times",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/license/license-sale-items/license-sale-item/license-items/license-item/emergency-state",
+                      "type": "enum",
+                      "label": "emergency-state",
+                      "options": [
+                        {
+                          "label": "disable",
+                          "value": "disable"
+                        },
+                        {
+                          "label": "enable",
+                          "value": "enable"
+                        },
+                        {
+                          "label": "not-supported",
+                          "value": "not-supported"
+                        }
+                      ],
+                      "readonly": true
+                    },
+                    {
+                      "path": "/license/license-sale-items/license-sale-item/license-items/license-item/expired-date",
+                      "type": "string",
+                      "label": "expired-date",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/license/license-sale-items/license-sale-item/license-items/license-item/maximum-value",
+                      "type": "number",
+                      "label": "maximum-value",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/license/license-sale-items/license-sale-item/license-items/license-item/name",
+                      "type": "string",
+                      "label": "name",
+                      "readonly": true,
+                      "isKey": true
+                    },
+                    {
+                      "path": "/license/license-sale-items/license-sale-item/license-items/license-item/status",
+                      "type": "enum",
+                      "label": "status",
+                      "options": [
+                        {
+                          "label": "default",
+                          "value": "default"
+                        },
+                        {
+                          "label": "demo",
+                          "value": "demo"
+                        },
+                        {
+                          "label": "emergency",
+                          "value": "emergency"
+                        },
+                        {
+                          "label": "inactive",
+                          "value": "inactive"
+                        },
+                        {
+                          "label": "normal",
+                          "value": "normal"
+                        },
+                        {
+                          "label": "trial",
+                          "value": "trial"
+                        }
+                      ],
+                      "readonly": true
+                    },
+                    {
+                      "path": "/license/license-sale-items/license-sale-item/license-items/license-item/trial-remain-day",
+                      "type": "number",
+                      "label": "trial-remain-day",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/license/license-sale-items/license-sale-item/license-items/license-item/trial-remain-times",
+                      "type": "number",
+                      "label": "trial-remain-times",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/license/license-sale-items/license-sale-item/license-items/license-item/trial-state",
+                      "type": "enum",
+                      "label": "trial-state",
+                      "options": [
+                        {
+                          "label": "disable",
+                          "value": "disable"
+                        },
+                        {
+                          "label": "enable",
+                          "value": "enable"
+                        },
+                        {
+                          "label": "not-supported",
+                          "value": "not-supported"
+                        }
+                      ],
+                      "readonly": true
+                    },
+                    {
+                      "path": "/license/license-sale-items/license-sale-item/license-items/license-item/type",
+                      "type": "enum",
+                      "label": "type",
+                      "options": [
+                        {
+                          "label": "function",
+                          "value": "function"
+                        },
+                        {
+                          "label": "resource",
+                          "value": "resource"
+                        }
+                      ],
+                      "readonly": true
+                    },
+                    {
+                      "path": "/license/license-sale-items/license-sale-item/license-items/license-item/used-value",
+                      "type": "number",
+                      "label": "used-value",
+                      "readonly": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/license/license-sale-items/license-sale-item/name",
+              "type": "string",
+              "label": "name",
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/license/license-sale-items/license-sale-item/sale-value",
+              "type": "number",
+              "label": "sale-value",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/license/resource-thresholds",
+      "type": "group",
+      "label": "resource-thresholds",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/license/resource-thresholds/resource-threshold",
+          "type": "list",
+          "label": "resource-threshold",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/license/resource-thresholds/resource-threshold/configurable-switch",
+              "type": "boolean",
+              "label": "configurable-switch",
+              "readonly": true
+            },
+            {
+              "path": "/license/resource-thresholds/resource-threshold/description",
+              "type": "string",
+              "label": "description",
+              "readonly": true
+            },
+            {
+              "path": "/license/resource-thresholds/resource-threshold/name",
+              "type": "string",
+              "label": "name",
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/license/resource-thresholds/resource-threshold/threshold",
+              "type": "number",
+              "label": "threshold",
+              "minimum": 50,
+              "maximum": 95,
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/license/resource-usages",
+      "type": "group",
+      "label": "resource-usages",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/license/resource-usages/resource-usage",
+          "type": "list",
+          "label": "resource-usage",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/license/resource-usages/resource-usage/active-value",
+              "type": "number",
+              "label": "active-value",
+              "readonly": true
+            },
+            {
+              "path": "/license/resource-usages/resource-usage/name",
+              "type": "string",
+              "label": "name",
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/license/resource-usages/resource-usage/port-aggregations",
+              "type": "group",
+              "label": "port-aggregations",
+              "readonly": true,
+              "when": "../lcs:name='LCR5S03CRAG12' or ../lcs:name='LCR5S03CRAG13' or ../lcs:name='LCR5S03CRAG14' or ../lcs:name='LCR6S62CRAG12' or ../lcs:name='LCR6S62CRAG13' or ../lcs:name='LCR6S62CRAG14' or ../lcs:name='LCR5S03CRAG15'",
+              "fields": [
+                {
+                  "path": "/license/resource-usages/resource-usage/port-aggregations/port-aggregation",
+                  "type": "list",
+                  "label": "port-aggregation",
+                  "readonly": true,
+                  "fields": [
+                    {
+                      "path": "/license/resource-usages/resource-usage/port-aggregations/port-aggregation/active-status",
+                      "type": "enum",
+                      "label": "active-status",
+                      "options": [
+                        {
+                          "label": "activated",
+                          "value": "activated"
+                        },
+                        {
+                          "label": "allocated",
+                          "value": "allocated"
+                        },
+                        {
+                          "label": "unallocated",
+                          "value": "unallocated"
+                        }
+                      ],
+                      "readonly": true
+                    },
+                    {
+                      "path": "/license/resource-usages/resource-usage/port-aggregations/port-aggregation/position",
+                      "type": "string",
+                      "label": "position",
+                      "readonly": true,
+                      "isKey": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/license/resource-usages/resource-usage/port-core-aggregations",
+              "type": "group",
+              "label": "port-core-aggregations",
+              "readonly": true,
+              "when": "../lcs:name='LCX6S60NPCAAP' or ../lcs:name='LCX6S60XPCAAP' or ../lcs:name='LCX6S60NPCAAQ' or ../lcs:name='LCR8S00CRAGC4' or ../lcs:name='LCR8S00CRAGC2' or ../lcs:name='LCR8SF0CRAGC4' or ../lcs:name='LCR8SF0CRAGC1' or ../lcs:name='LCR5S00CRAGC2' or ../lcs:name='LCR5S00CRAGC4' or ../lcs:name='LTNRS00CRAGC2' or ../lcs:name='LTNRS00CRAGC4' or ../lcs:name='LCR8S0XCAGGC0' or ../lcs:name='LCR8S0XCAGGC3' or ../lcs:name='LCR8S0VCAGGC0' or ../lcs:name='LCR8S0VCAGGC3' or ../lcs:name='LCR8S80CRAGC4' or ../lcs:name='LCR8S80CRAGC1'",
+              "fields": [
+                {
+                  "path": "/license/resource-usages/resource-usage/port-core-aggregations/port-core-aggregation",
+                  "type": "list",
+                  "label": "port-core-aggregation",
+                  "readonly": true,
+                  "fields": [
+                    {
+                      "path": "/license/resource-usages/resource-usage/port-core-aggregations/port-core-aggregation/active-status",
+                      "type": "enum",
+                      "label": "active-status",
+                      "options": [
+                        {
+                          "label": "activated",
+                          "value": "activated"
+                        },
+                        {
+                          "label": "allocated",
+                          "value": "allocated"
+                        },
+                        {
+                          "label": "unallocated",
+                          "value": "unallocated"
+                        }
+                      ],
+                      "readonly": true
+                    },
+                    {
+                      "path": "/license/resource-usages/resource-usage/port-core-aggregations/port-core-aggregation/position",
+                      "type": "string",
+                      "label": "position",
+                      "readonly": true,
+                      "isKey": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/license/resource-usages/resource-usage/port-l3vpn-evpns",
+              "type": "group",
+              "label": "port-l3vpn-evpns",
+              "readonly": true,
+              "when": "../lcs:name='LCR5S03L3VP12' or ../lcs:name='LCR5S03L3VP13' or ../lcs:name='LCR5S03L3VP14' or ../lcs:name='LCR5S03L3VP15' or ../lcs:name='LCR6S62L3VP12' or ../lcs:name='LCR6S62L3VP13' or ../lcs:name='LCR6S62L3VP14' or ../lcs:name='LCR5S0M1L3V13' or ../lcs:name='LCX6S6M1L3V13'",
+              "fields": [
+                {
+                  "path": "/license/resource-usages/resource-usage/port-l3vpn-evpns/port-l3vpn-evpn",
+                  "type": "list",
+                  "label": "port-l3vpn-evpn",
+                  "readonly": true,
+                  "fields": [
+                    {
+                      "path": "/license/resource-usages/resource-usage/port-l3vpn-evpns/port-l3vpn-evpn/active-status",
+                      "type": "enum",
+                      "label": "active-status",
+                      "options": [
+                        {
+                          "label": "activated",
+                          "value": "activated"
+                        },
+                        {
+                          "label": "allocated",
+                          "value": "allocated"
+                        },
+                        {
+                          "label": "unallocated",
+                          "value": "unallocated"
+                        }
+                      ],
+                      "readonly": true
+                    },
+                    {
+                      "path": "/license/resource-usages/resource-usage/port-l3vpn-evpns/port-l3vpn-evpn/position",
+                      "type": "string",
+                      "label": "position",
+                      "readonly": true,
+                      "isKey": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/license/resource-usages/resource-usage/port-l3vpns",
+              "type": "group",
+              "label": "port-l3vpns",
+              "readonly": true,
+              "when": "../lcs:name='LCR5S40NL3V0P' or ../lcs:name='LCR5S40XL3V0P' or ../lcs:name='LCR5S40GL3V0P' or ../lcs:name='LCX6S00NL3V0P' or ../lcs:name='LCX6S00XL3V0P' or ../lcs:name='LCX6S00GL3V0P' or ../lcs:name='LTNRS69NL3V0P' or ../lcs:name='LTNRS69XL3V0P' or ../lcs:name='LTNRS69GL3V0P' or ../lcs:name='LCR5S5KNL3V0P' or ../lcs:name='LCR5S5KXL3V0P' or ../lcs:name='LCR9S9KNL3V0P' or ../lcs:name='LCR9S9KXL3V0P' or ../lcs:name='LCX6S00NL3VAP' or ../lcs:name='LCX6S00XL3VAP' or ../lcs:name='LCR6S00NL3VAQ' or ../lcs:name='LCR9S9KNL3V0L' or ../lcs:name='LCR9S9KXL3V0L' or ../lcs:name='LCR5S40VL3V0P' or ../lcs:name='LCR5S40YL3V0P' or ../lcs:name='LCX6S00VL3V0P' or ../lcs:name='LCX6S00YL3V0P' or ../lcs:name='LTNRS00VL3V0P' or ../lcs:name='LTNRS00YL3V0P' or ../lcs:name='LCR9S9KNL3V0Q' or ../lcs:name='LCR8S00L3VPC2' or ../lcs:name='LCR8S00L3VPC4' or ../lcs:name='LCR8SF0L3VPC4' or ../lcs:name='LCR8SF0L3VPC1' or ../lcs:name='LTNRS00L3VPC2' or ../lcs:name='LTNRS00L3VPC4' or ../lcs:name='LCR5S00L3VPC2' or ../lcs:name='LCR5S00L3VPC4' or ../lcs:name='LCR8S0VL3VNC3' or ../lcs:name='LCR8S0XL3VNC3' or ../lcs:name='LCR8S0VL3VNC0' or ../lcs:name='LCR8S0XL3VNC0' or ../lcs:name='LCR5S5KKL3V0P' or ../lcs:name='LCR8S80L3VPC4' or ../lcs:name='LCR8S80L3VPC1'",
+              "fields": [
+                {
+                  "path": "/license/resource-usages/resource-usage/port-l3vpns/port-l3vpn",
+                  "type": "list",
+                  "label": "port-l3vpn",
+                  "readonly": true,
+                  "fields": [
+                    {
+                      "path": "/license/resource-usages/resource-usage/port-l3vpns/port-l3vpn/active-status",
+                      "type": "enum",
+                      "label": "active-status",
+                      "options": [
+                        {
+                          "label": "activated",
+                          "value": "activated"
+                        },
+                        {
+                          "label": "allocated",
+                          "value": "allocated"
+                        },
+                        {
+                          "label": "unallocated",
+                          "value": "unallocated"
+                        }
+                      ],
+                      "readonly": true
+                    },
+                    {
+                      "path": "/license/resource-usages/resource-usage/port-l3vpns/port-l3vpn/position",
+                      "type": "string",
+                      "label": "position",
+                      "readonly": true,
+                      "isKey": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/license/resource-usages/resource-usage/port-peerings",
+              "type": "group",
+              "label": "port-peerings",
+              "readonly": true,
+              "when": "../lcs:name='LCX6S60NPEEAP' or ../lcs:name='LCX6S60XPEEAP' or ../lcs:name='LCR5S03PEER12' or ../lcs:name='LCR5S03PEER13' or ../lcs:name='LCR5S03PEER14' or ../lcs:name='LCR6S62PEER12' or ../lcs:name='LCR6S62PEER13' or ../lcs:name='LCR6S62PEER14' or ../lcs:name='LCR8S0VCIGWC3' or ../lcs:name='LCR8S0XCIGWC3' or ../lcs:name='LCR8S0VCIGWC0' or ../lcs:name='LCR8S0XCIGWC0' or ../lcs:name='LCR5S03PEER15'",
+              "fields": [
+                {
+                  "path": "/license/resource-usages/resource-usage/port-peerings/port-peering",
+                  "type": "list",
+                  "label": "port-peering",
+                  "readonly": true,
+                  "fields": [
+                    {
+                      "path": "/license/resource-usages/resource-usage/port-peerings/port-peering/active-status",
+                      "type": "enum",
+                      "label": "active-status",
+                      "options": [
+                        {
+                          "label": "activated",
+                          "value": "activated"
+                        },
+                        {
+                          "label": "allocated",
+                          "value": "allocated"
+                        },
+                        {
+                          "label": "unallocated",
+                          "value": "unallocated"
+                        }
+                      ],
+                      "readonly": true
+                    },
+                    {
+                      "path": "/license/resource-usages/resource-usage/port-peerings/port-peering/position",
+                      "type": "string",
+                      "label": "position",
+                      "readonly": true,
+                      "isKey": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/license/resource-usages/resource-usage/port-service-enhances",
+              "type": "group",
+              "label": "port-service-enhances",
+              "readonly": true,
+              "when": "../lcs:name='LCR5S0M1SEN13' or ../lcs:name='LCX6S6M1SEN13' or ../lcs:name='LANNS0AVAND01' or ../lcs:name='LANNS0AVAND02' or ../lcs:name='LANNS0AVAND03' or ../lcs:name='LANNS0AVAND04' or ../lcs:name='LANHS00SADV50' or ../lcs:name='LANHS00SADV10'",
+              "fields": [
+                {
+                  "path": "/license/resource-usages/resource-usage/port-service-enhances/port-service-enhance",
+                  "type": "list",
+                  "label": "port-service-enhance",
+                  "readonly": true,
+                  "fields": [
+                    {
+                      "path": "/license/resource-usages/resource-usage/port-service-enhances/port-service-enhance/active-status",
+                      "type": "enum",
+                      "label": "active-status",
+                      "options": [
+                        {
+                          "label": "activated",
+                          "value": "activated"
+                        },
+                        {
+                          "label": "allocated",
+                          "value": "allocated"
+                        },
+                        {
+                          "label": "unallocated",
+                          "value": "unallocated"
+                        }
+                      ],
+                      "readonly": true
+                    },
+                    {
+                      "path": "/license/resource-usages/resource-usage/port-service-enhances/port-service-enhance/position",
+                      "type": "string",
+                      "label": "position",
+                      "readonly": true,
+                      "isKey": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/license/resource-usages/resource-usage/port-srv6s",
+              "type": "group",
+              "label": "port-srv6s",
+              "readonly": true,
+              "when": "../lcs:name='LCR9S9KKSR680' or ../lcs:name='LCR9S9KNSR680' or ../lcs:name='LCR9S9KXSR680' or ../lcs:name='LCR9S9KNSR68L' or ../lcs:name='LCR9S9KXSR68L' or ../lcs:name='LANNS00SRV621' or ../lcs:name='LANNS00SRV622' or ../lcs:name='LANNS00SRV623' or ../lcs:name='LANNS00SRV624' or ../lcs:name='LANNS00SRV625' or ../lcs:name='LCR5S40SRV601' or ../lcs:name='LCR5S40SRV602' or ../lcs:name='LCR5S40SRV603' or ../lcs:name='LCR5S40SRV604' or ../lcs:name='LCX6S00SRV601' or ../lcs:name='LCX6S00SRV602' or ../lcs:name='LCX6S00SRV603' or ../lcs:name='LCX6S00SRV604' or ../lcs:name='LTNRS69SRV601' or ../lcs:name='LTNRS69SRV602' or ../lcs:name='LTNRS69SRV603' or ../lcs:name='LTNRS69SRV604' or ../lcs:name='LCR5S42SRV611' or ../lcs:name='LCR5S42SRV612' or ../lcs:name='LCR5S42SRV613' or ../lcs:name='LCR5S42SRV614' or ../lcs:name='LCR5S0M1SR613' or ../lcs:name='LCR8SF0SRV6C1' or ../lcs:name='LCR8SF0SRV6C4' or ../lcs:name='LCR8S00SRV6C2' or ../lcs:name='LCR8S00SRV6C4' or ../lcs:name='LTNRS00SRV6C2' or ../lcs:name='LTNRS00SRV6C4' or ../lcs:name='LCR5S00SRV6C2' or ../lcs:name='LCR5S00SRV6C4' or ../lcs:name='LCR8S0VSRV6C3' or ../lcs:name='LCR8S0XSRV6C3' or ../lcs:name='LCR8S0VSRV6C0' or ../lcs:name='LCR8S0XSRV6C0' or ../lcs:name='LANNS00SRV624' or ../lcs:name='LANNS00SRV622' or ../lcs:name='LCR8S80SRV6C4' or ../lcs:name='LCR8S80SRV6C1'",
+              "fields": [
+                {
+                  "path": "/license/resource-usages/resource-usage/port-srv6s/port-srv6",
+                  "type": "list",
+                  "label": "port-srv6",
+                  "readonly": true,
+                  "fields": [
+                    {
+                      "path": "/license/resource-usages/resource-usage/port-srv6s/port-srv6/active-status",
+                      "type": "enum",
+                      "label": "active-status",
+                      "options": [
+                        {
+                          "label": "activated",
+                          "value": "activated"
+                        },
+                        {
+                          "label": "allocated",
+                          "value": "allocated"
+                        },
+                        {
+                          "label": "unallocated",
+                          "value": "unallocated"
+                        }
+                      ],
+                      "readonly": true
+                    },
+                    {
+                      "path": "/license/resource-usages/resource-usage/port-srv6s/port-srv6/position",
+                      "type": "string",
+                      "label": "position",
+                      "readonly": true,
+                      "isKey": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/license/resource-usages/resource-usage/usage",
+              "type": "number",
+              "label": "usage",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/license/spec-items",
+      "type": "group",
+      "label": "spec-items",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/license/spec-items/spec-item",
+          "type": "list",
+          "label": "spec-item",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/license/spec-items/spec-item/current-value",
+              "type": "number",
+              "label": "current-value",
+              "readonly": true
+            },
+            {
+              "path": "/license/spec-items/spec-item/default-value",
+              "type": "number",
+              "label": "default-value",
+              "readonly": true
+            },
+            {
+              "path": "/license/spec-items/spec-item/description",
+              "type": "string",
+              "label": "description",
+              "readonly": true
+            },
+            {
+              "path": "/license/spec-items/spec-item/maximum-value",
+              "type": "number",
+              "label": "maximum-value",
+              "readonly": true
+            },
+            {
+              "path": "/license/spec-items/spec-item/minimum-value",
+              "type": "number",
+              "label": "minimum-value",
+              "readonly": true
+            },
+            {
+              "path": "/license/spec-items/spec-item/name",
+              "type": "string",
+              "label": "name",
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/license/spec-items/spec-item/type",
+              "type": "enum",
+              "label": "type",
+              "options": [
+                {
+                  "label": "default",
+                  "value": "default"
+                },
+                {
+                  "label": "function",
+                  "value": "function"
+                },
+                {
+                  "label": "maximum",
+                  "value": "maximum"
+                },
+                {
+                  "label": "minimum",
+                  "value": "minimum"
+                },
+                {
+                  "label": "resource",
+                  "value": "resource"
+                }
+              ],
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/license/stack-sale-items",
+      "type": "group",
+      "label": "stack-sale-items",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/license/stack-sale-items/stack-sale-item",
+          "type": "list",
+          "label": "stack-sale-item",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/license/stack-sale-items/stack-sale-item/chassis-id",
+              "type": "string",
+              "label": "chassis-id",
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/license/stack-sale-items/stack-sale-item/license-sale-items",
+              "type": "group",
+              "label": "license-sale-items",
+              "readonly": true,
+              "fields": [
+                {
+                  "path": "/license/stack-sale-items/stack-sale-item/license-sale-items/license-sale-item",
+                  "type": "list",
+                  "label": "license-sale-item",
+                  "readonly": true,
+                  "fields": [
+                    {
+                      "path": "/license/stack-sale-items/stack-sale-item/license-sale-items/license-sale-item/description",
+                      "type": "string",
+                      "label": "description",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/license/stack-sale-items/stack-sale-item/license-sale-items/license-sale-item/license-items",
+                      "type": "group",
+                      "label": "license-items",
+                      "readonly": true,
+                      "fields": [
+                        {
+                          "path": "/license/stack-sale-items/stack-sale-item/license-sale-items/license-sale-item/license-items/license-item",
+                          "type": "list",
+                          "label": "license-item",
+                          "readonly": true,
+                          "fields": [
+                            {
+                              "path": "/license/stack-sale-items/stack-sale-item/license-sale-items/license-sale-item/license-items/license-item/current-value",
+                              "type": "number",
+                              "label": "current-value",
+                              "readonly": true
+                            },
+                            {
+                              "path": "/license/stack-sale-items/stack-sale-item/license-sale-items/license-sale-item/license-items/license-item/default-value",
+                              "type": "number",
+                              "label": "default-value",
+                              "readonly": true
+                            },
+                            {
+                              "path": "/license/stack-sale-items/stack-sale-item/license-sale-items/license-sale-item/license-items/license-item/description",
+                              "type": "string",
+                              "label": "description",
+                              "readonly": true
+                            },
+                            {
+                              "path": "/license/stack-sale-items/stack-sale-item/license-sale-items/license-sale-item/license-items/license-item/expired-date",
+                              "type": "string",
+                              "label": "expired-date",
+                              "readonly": true
+                            },
+                            {
+                              "path": "/license/stack-sale-items/stack-sale-item/license-sale-items/license-sale-item/license-items/license-item/maximum-value",
+                              "type": "number",
+                              "label": "maximum-value",
+                              "readonly": true
+                            },
+                            {
+                              "path": "/license/stack-sale-items/stack-sale-item/license-sale-items/license-sale-item/license-items/license-item/name",
+                              "type": "string",
+                              "label": "name",
+                              "readonly": true,
+                              "isKey": true
+                            },
+                            {
+                              "path": "/license/stack-sale-items/stack-sale-item/license-sale-items/license-sale-item/license-items/license-item/status",
+                              "type": "string",
+                              "label": "status",
+                              "readonly": true
+                            },
+                            {
+                              "path": "/license/stack-sale-items/stack-sale-item/license-sale-items/license-sale-item/license-items/license-item/trial-remain-day",
+                              "type": "number",
+                              "label": "trial-remain-day",
+                              "readonly": true
+                            },
+                            {
+                              "path": "/license/stack-sale-items/stack-sale-item/license-sale-items/license-sale-item/license-items/license-item/trial-remain-times",
+                              "type": "number",
+                              "label": "trial-remain-times",
+                              "readonly": true
+                            },
+                            {
+                              "path": "/license/stack-sale-items/stack-sale-item/license-sale-items/license-sale-item/license-items/license-item/trial-state",
+                              "type": "string",
+                              "label": "trial-state",
+                              "readonly": true
+                            },
+                            {
+                              "path": "/license/stack-sale-items/stack-sale-item/license-sale-items/license-sale-item/license-items/license-item/type",
+                              "type": "string",
+                              "label": "type",
+                              "readonly": true
+                            },
+                            {
+                              "path": "/license/stack-sale-items/stack-sale-item/license-sale-items/license-sale-item/license-items/license-item/used-value",
+                              "type": "number",
+                              "label": "used-value",
+                              "readonly": true
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/license/stack-sale-items/stack-sale-item/license-sale-items/license-sale-item/name",
+                      "type": "string",
+                      "label": "name",
+                      "readonly": true,
+                      "isKey": true
+                    },
+                    {
+                      "path": "/license/stack-sale-items/stack-sale-item/license-sale-items/license-sale-item/sale-value",
+                      "type": "number",
+                      "label": "sale-value",
+                      "readonly": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

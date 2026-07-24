@@ -1,0 +1,55 @@
+{
+  "module": "system-resources-usage",
+  "title": "system-resources-usage",
+  "vendor": "huawei",
+  "fields": [
+    {
+      "path": "/system-resources-usage/resources",
+      "type": "group",
+      "label": "resources",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/system-resources-usage/resources/resource",
+          "type": "list",
+          "label": "resource",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/system-resources-usage/resources/resource/allocated",
+              "type": "number",
+              "label": "allocated",
+              "readonly": true
+            },
+            {
+              "path": "/system-resources-usage/resources/resource/free",
+              "type": "number",
+              "label": "free",
+              "readonly": true
+            },
+            {
+              "path": "/system-resources-usage/resources/resource/resource-name",
+              "type": "string",
+              "label": "resource-name",
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/system-resources-usage/resources/resource/slot",
+              "type": "string",
+              "label": "slot",
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/system-resources-usage/resources/resource/total",
+              "type": "number",
+              "label": "total",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

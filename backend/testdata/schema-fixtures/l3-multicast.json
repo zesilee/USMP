@@ -1,0 +1,161 @@
+{
+  "module": "l3-multicast",
+  "title": "l3-multicast",
+  "vendor": "huawei",
+  "fields": [
+    {
+      "path": "/l3-multicast/ipv4",
+      "type": "group",
+      "label": "ipv4",
+      "fields": [
+        {
+          "path": "/l3-multicast/ipv4/limits",
+          "type": "group",
+          "label": "limits",
+          "fields": [
+            {
+              "path": "/l3-multicast/ipv4/limits/limit",
+              "type": "list",
+              "label": "limit",
+              "fields": [
+                {
+                  "path": "/l3-multicast/ipv4/limits/limit/current-count",
+                  "type": "number",
+                  "label": "current-count",
+                  "readonly": true
+                },
+                {
+                  "path": "/l3-multicast/ipv4/limits/limit/lower-threshold",
+                  "type": "number",
+                  "label": "lower-threshold",
+                  "minimum": 1,
+                  "maximum": 100
+                },
+                {
+                  "path": "/l3-multicast/ipv4/limits/limit/type",
+                  "type": "enum",
+                  "label": "type",
+                  "options": [
+                    {
+                      "label": "bidir-pim-star-group",
+                      "value": "bidir-pim-star-group"
+                    },
+                    {
+                      "label": "pim-dm-source-group",
+                      "value": "pim-dm-source-group"
+                    },
+                    {
+                      "label": "pim-dm-star-group",
+                      "value": "pim-dm-star-group"
+                    },
+                    {
+                      "label": "pim-sm-source-group",
+                      "value": "pim-sm-source-group"
+                    },
+                    {
+                      "label": "pim-sm-star-group",
+                      "value": "pim-sm-star-group"
+                    }
+                  ],
+                  "isKey": true
+                },
+                {
+                  "path": "/l3-multicast/ipv4/limits/limit/upper-threshold",
+                  "type": "number",
+                  "label": "upper-threshold",
+                  "minimum": 1,
+                  "maximum": 100
+                },
+                {
+                  "path": "/l3-multicast/ipv4/limits/limit/value",
+                  "type": "number",
+                  "label": "value",
+                  "required": true,
+                  "minimum": 1,
+                  "maximum": 16384
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/l3-multicast/ipv6",
+      "type": "group",
+      "label": "ipv6",
+      "fields": [
+        {
+          "path": "/l3-multicast/ipv6/limits",
+          "type": "group",
+          "label": "limits",
+          "fields": [
+            {
+              "path": "/l3-multicast/ipv6/limits/limit",
+              "type": "list",
+              "label": "limit",
+              "fields": [
+                {
+                  "path": "/l3-multicast/ipv6/limits/limit/current-count",
+                  "type": "number",
+                  "label": "current-count",
+                  "readonly": true
+                },
+                {
+                  "path": "/l3-multicast/ipv6/limits/limit/lower-threshold",
+                  "type": "number",
+                  "label": "lower-threshold",
+                  "minimum": 1,
+                  "maximum": 100
+                },
+                {
+                  "path": "/l3-multicast/ipv6/limits/limit/type",
+                  "type": "enum",
+                  "label": "type",
+                  "options": [
+                    {
+                      "label": "bidir-pim-star-group",
+                      "value": "bidir-pim-star-group"
+                    },
+                    {
+                      "label": "pim-dm-source-group",
+                      "value": "pim-dm-source-group"
+                    },
+                    {
+                      "label": "pim-dm-star-group",
+                      "value": "pim-dm-star-group"
+                    },
+                    {
+                      "label": "pim-sm-source-group",
+                      "value": "pim-sm-source-group"
+                    },
+                    {
+                      "label": "pim-sm-star-group",
+                      "value": "pim-sm-star-group"
+                    }
+                  ],
+                  "isKey": true
+                },
+                {
+                  "path": "/l3-multicast/ipv6/limits/limit/upper-threshold",
+                  "type": "number",
+                  "label": "upper-threshold",
+                  "minimum": 1,
+                  "maximum": 100
+                },
+                {
+                  "path": "/l3-multicast/ipv6/limits/limit/value",
+                  "type": "number",
+                  "label": "value",
+                  "required": true,
+                  "minimum": 1,
+                  "maximum": 16384
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

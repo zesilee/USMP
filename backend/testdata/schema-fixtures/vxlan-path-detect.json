@@ -1,0 +1,133 @@
+{
+  "module": "vxlan-path-detect",
+  "title": "vxlan-path-detect",
+  "vendor": "huawei",
+  "fields": [
+    {
+      "path": "/vxlan-path-detect/ip-ping-detects",
+      "type": "group",
+      "label": "ip-ping-detects",
+      "fields": [
+        {
+          "path": "/vxlan-path-detect/ip-ping-detects/ip-ping-detect",
+          "type": "list",
+          "label": "ip-ping-detect",
+          "fields": [
+            {
+              "path": "/vxlan-path-detect/ip-ping-detects/ip-ping-detect/dst-ip",
+              "type": "string",
+              "label": "dst-ip",
+              "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?",
+              "isKey": true
+            },
+            {
+              "path": "/vxlan-path-detect/ip-ping-detects/ip-ping-detect/src-ip",
+              "type": "string",
+              "label": "src-ip",
+              "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?",
+              "isKey": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/vxlan-path-detect/ipv4-dscp-path-detect",
+      "type": "group",
+      "label": "ipv4-dscp-path-detect",
+      "fields": [
+        {
+          "path": "/vxlan-path-detect/ipv4-dscp-path-detect/dscp-value",
+          "type": "number",
+          "label": "dscp-value",
+          "required": true,
+          "maximum": 63
+        }
+      ],
+      "presence": true
+    },
+    {
+      "path": "/vxlan-path-detect/ipv6-dscp-path-detect",
+      "type": "group",
+      "label": "ipv6-dscp-path-detect",
+      "fields": [
+        {
+          "path": "/vxlan-path-detect/ipv6-dscp-path-detect/dscp-value",
+          "type": "number",
+          "label": "dscp-value",
+          "required": true,
+          "maximum": 63
+        }
+      ],
+      "presence": true
+    },
+    {
+      "path": "/vxlan-path-detect/ipv6-ping-detects",
+      "type": "group",
+      "label": "ipv6-ping-detects",
+      "fields": [
+        {
+          "path": "/vxlan-path-detect/ipv6-ping-detects/ipv6-ping-detect",
+          "type": "list",
+          "label": "ipv6-ping-detect",
+          "fields": [
+            {
+              "path": "/vxlan-path-detect/ipv6-ping-detects/ipv6-ping-detect/dst-ipv6",
+              "type": "string",
+              "label": "dst-ipv6",
+              "pattern": "((:|[0-9a-fA-F]{0,4}):)([0-9a-fA-F]{0,4}:){0,5}((([0-9a-fA-F]{0,4}:)?(:|[0-9a-fA-F]{0,4}))|(((25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])))(%[\\p{N}\\p{L}]+)?",
+              "isKey": true
+            },
+            {
+              "path": "/vxlan-path-detect/ipv6-ping-detects/ipv6-ping-detect/src-ipv6",
+              "type": "string",
+              "label": "src-ipv6",
+              "pattern": "((:|[0-9a-fA-F]{0,4}):)([0-9a-fA-F]{0,4}:){0,5}((([0-9a-fA-F]{0,4}:)?(:|[0-9a-fA-F]{0,4}))|(((25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])))(%[\\p{N}\\p{L}]+)?",
+              "isKey": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/vxlan-path-detect/mac-ping-detects",
+      "type": "group",
+      "label": "mac-ping-detects",
+      "fields": [
+        {
+          "path": "/vxlan-path-detect/mac-ping-detects/mac-ping-detect",
+          "type": "list",
+          "label": "mac-ping-detect",
+          "fields": [
+            {
+              "path": "/vxlan-path-detect/mac-ping-detects/mac-ping-detect/dst-ip",
+              "type": "string",
+              "label": "dst-ip",
+              "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?",
+              "isKey": true
+            },
+            {
+              "path": "/vxlan-path-detect/mac-ping-detects/mac-ping-detect/dst-mac",
+              "type": "string",
+              "label": "dst-mac",
+              "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}"
+            },
+            {
+              "path": "/vxlan-path-detect/mac-ping-detects/mac-ping-detect/src-ip",
+              "type": "string",
+              "label": "src-ip",
+              "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?",
+              "isKey": true
+            },
+            {
+              "path": "/vxlan-path-detect/mac-ping-detects/mac-ping-detect/src-mac",
+              "type": "string",
+              "label": "src-mac",
+              "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

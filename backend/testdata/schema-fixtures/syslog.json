@@ -1,0 +1,1532 @@
+{
+  "module": "syslog",
+  "title": "syslog",
+  "vendor": "huawei",
+  "fields": [
+    {
+      "path": "/syslog/direction-channels",
+      "type": "group",
+      "label": "direction-channels",
+      "fields": [
+        {
+          "path": "/syslog/direction-channels/direction-channel",
+          "type": "list",
+          "label": "direction-channel",
+          "fields": [
+            {
+              "path": "/syslog/direction-channels/direction-channel/channel-id",
+              "type": "string",
+              "label": "channel-id",
+              "dynamicDefault": true
+            },
+            {
+              "path": "/syslog/direction-channels/direction-channel/channel-name",
+              "type": "string",
+              "label": "channel-name",
+              "readonly": true
+            },
+            {
+              "path": "/syslog/direction-channels/direction-channel/default-channel-id",
+              "type": "number",
+              "label": "default-channel-id",
+              "maximum": 9,
+              "readonly": true
+            },
+            {
+              "path": "/syslog/direction-channels/direction-channel/output-direction",
+              "type": "string",
+              "label": "output-direction",
+              "isKey": true
+            }
+          ],
+          "operationExclude": [
+            "create",
+            "delete"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/syslog/domain-servers",
+      "type": "group",
+      "label": "domain-servers",
+      "fields": [
+        {
+          "path": "/syslog/domain-servers/domain-server",
+          "type": "list",
+          "label": "domain-server",
+          "fields": [
+            {
+              "path": "/syslog/domain-servers/domain-server/channel-id",
+              "type": "string",
+              "label": "channel-id"
+            },
+            {
+              "path": "/syslog/domain-servers/domain-server/channel-name",
+              "type": "string",
+              "label": "channel-name",
+              "readonly": true
+            },
+            {
+              "path": "/syslog/domain-servers/domain-server/facility",
+              "type": "enum",
+              "label": "facility",
+              "options": [
+                {
+                  "label": "local0",
+                  "value": "local0"
+                },
+                {
+                  "label": "local1",
+                  "value": "local1"
+                },
+                {
+                  "label": "local2",
+                  "value": "local2"
+                },
+                {
+                  "label": "local3",
+                  "value": "local3"
+                },
+                {
+                  "label": "local4",
+                  "value": "local4"
+                },
+                {
+                  "label": "local5",
+                  "value": "local5"
+                },
+                {
+                  "label": "local6",
+                  "value": "local6"
+                },
+                {
+                  "label": "local7",
+                  "value": "local7"
+                }
+              ]
+            },
+            {
+              "path": "/syslog/domain-servers/domain-server/is-brief-format",
+              "type": "boolean",
+              "label": "is-brief-format"
+            },
+            {
+              "path": "/syslog/domain-servers/domain-server/is-default-vpn",
+              "type": "boolean",
+              "label": "is-default-vpn",
+              "isKey": true
+            },
+            {
+              "path": "/syslog/domain-servers/domain-server/is-security-only",
+              "type": "boolean",
+              "label": "is-security-only",
+              "must": [
+                {
+                  "expr": "../is-security-only='false' or ../ssl-policy-name"
+                }
+              ]
+            },
+            {
+              "path": "/syslog/domain-servers/domain-server/level",
+              "type": "enum",
+              "label": "level",
+              "options": [
+                {
+                  "label": "alert",
+                  "value": "alert"
+                },
+                {
+                  "label": "critical",
+                  "value": "critical"
+                },
+                {
+                  "label": "debugging",
+                  "value": "debugging"
+                },
+                {
+                  "label": "emergencies",
+                  "value": "emergencies"
+                },
+                {
+                  "label": "error",
+                  "value": "error"
+                },
+                {
+                  "label": "informational",
+                  "value": "informational"
+                },
+                {
+                  "label": "notification",
+                  "value": "notification"
+                },
+                {
+                  "label": "warning",
+                  "value": "warning"
+                }
+              ]
+            },
+            {
+              "path": "/syslog/domain-servers/domain-server/server-domain",
+              "type": "string",
+              "label": "server-domain",
+              "isKey": true
+            },
+            {
+              "path": "/syslog/domain-servers/domain-server/server-port",
+              "type": "number",
+              "label": "server-port",
+              "minimum": 1,
+              "maximum": 65535
+            },
+            {
+              "path": "/syslog/domain-servers/domain-server/ssl-policy-name",
+              "type": "string",
+              "label": "ssl-policy-name",
+              "must": [
+                {
+                  "expr": "../transport-mode='tcp'"
+                }
+              ]
+            },
+            {
+              "path": "/syslog/domain-servers/domain-server/timestamp",
+              "type": "enum",
+              "label": "timestamp",
+              "options": [
+                {
+                  "label": "UTC",
+                  "value": "UTC"
+                },
+                {
+                  "label": "localtime",
+                  "value": "localtime"
+                }
+              ]
+            },
+            {
+              "path": "/syslog/domain-servers/domain-server/transport-mode",
+              "type": "enum",
+              "label": "transport-mode",
+              "options": [
+                {
+                  "label": "tcp",
+                  "value": "tcp"
+                },
+                {
+                  "label": "udp",
+                  "value": "udp"
+                }
+              ]
+            },
+            {
+              "path": "/syslog/domain-servers/domain-server/vrf-name",
+              "type": "string",
+              "label": "vrf-name",
+              "must": [
+                {
+                  "expr": "not(../is-default-vpn='true') or (../is-default-vpn='true' and ../vrf-name='_public_')"
+                }
+              ],
+              "isKey": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/syslog/global-parameter",
+      "type": "group",
+      "label": "global-parameter",
+      "fields": [
+        {
+          "path": "/syslog/global-parameter/buffer-size",
+          "type": "number",
+          "label": "buffer-size",
+          "maximum": 102400
+        },
+        {
+          "path": "/syslog/global-parameter/debug-none-timezone",
+          "type": "boolean",
+          "label": "debug-none-timezone"
+        },
+        {
+          "path": "/syslog/global-parameter/debug-timestamp",
+          "type": "enum",
+          "label": "debug-timestamp",
+          "options": [
+            {
+              "label": "date-boot",
+              "value": "date-boot"
+            },
+            {
+              "label": "date-millisecond",
+              "value": "date-millisecond"
+            },
+            {
+              "label": "date-second",
+              "value": "date-second"
+            },
+            {
+              "label": "date-tenthsecond",
+              "value": "date-tenthsecond"
+            },
+            {
+              "label": "formatdate-millisecond",
+              "value": "formatdate-millisecond"
+            },
+            {
+              "label": "formatdate-second",
+              "value": "formatdate-second"
+            },
+            {
+              "label": "formatdate-tenthsecond",
+              "value": "formatdate-tenthsecond"
+            },
+            {
+              "label": "shortdate-millisecond",
+              "value": "shortdate-millisecond"
+            },
+            {
+              "label": "shortdate-second",
+              "value": "shortdate-second"
+            },
+            {
+              "label": "shortdate-tenthsecond",
+              "value": "shortdate-tenthsecond"
+            }
+          ]
+        },
+        {
+          "path": "/syslog/global-parameter/delay-suppress-enable",
+          "type": "boolean",
+          "label": "delay-suppress-enable"
+        },
+        {
+          "path": "/syslog/global-parameter/event-logging-all",
+          "type": "boolean",
+          "label": "event-logging-all"
+        },
+        {
+          "path": "/syslog/global-parameter/hostname",
+          "type": "enum",
+          "label": "hostname",
+          "options": [
+            {
+              "label": "esn",
+              "value": "esn"
+            },
+            {
+              "label": "sysname",
+              "value": "sysname"
+            },
+            {
+              "label": "user-defined",
+              "value": "user-defined"
+            }
+          ]
+        },
+        {
+          "path": "/syslog/global-parameter/info-center-enable",
+          "type": "boolean",
+          "label": "info-center-enable"
+        },
+        {
+          "path": "/syslog/global-parameter/interface-name",
+          "type": "string",
+          "label": "interface-name"
+        },
+        {
+          "path": "/syslog/global-parameter/log-none-timezone",
+          "type": "boolean",
+          "label": "log-none-timezone"
+        },
+        {
+          "path": "/syslog/global-parameter/log-timestamp",
+          "type": "enum",
+          "label": "log-timestamp",
+          "options": [
+            {
+              "label": "date-boot",
+              "value": "date-boot"
+            },
+            {
+              "label": "date-millisecond",
+              "value": "date-millisecond"
+            },
+            {
+              "label": "date-second",
+              "value": "date-second"
+            },
+            {
+              "label": "date-tenthsecond",
+              "value": "date-tenthsecond"
+            },
+            {
+              "label": "formatdate-millisecond",
+              "value": "formatdate-millisecond"
+            },
+            {
+              "label": "formatdate-second",
+              "value": "formatdate-second"
+            },
+            {
+              "label": "formatdate-tenthsecond",
+              "value": "formatdate-tenthsecond"
+            },
+            {
+              "label": "shortdate-millisecond",
+              "value": "shortdate-millisecond"
+            },
+            {
+              "label": "shortdate-second",
+              "value": "shortdate-second"
+            },
+            {
+              "label": "shortdate-tenthsecond",
+              "value": "shortdate-tenthsecond"
+            }
+          ]
+        },
+        {
+          "path": "/syslog/global-parameter/logbuffer-enable",
+          "type": "boolean",
+          "label": "logbuffer-enable"
+        },
+        {
+          "path": "/syslog/global-parameter/packet-priority",
+          "type": "number",
+          "label": "packet-priority",
+          "maximum": 7
+        },
+        {
+          "path": "/syslog/global-parameter/send-switch",
+          "type": "enum",
+          "label": "send-switch",
+          "options": [
+            {
+              "label": "off",
+              "value": "off"
+            },
+            {
+              "label": "on",
+              "value": "on"
+            }
+          ]
+        },
+        {
+          "path": "/syslog/global-parameter/source-port",
+          "type": "number",
+          "label": "source-port",
+          "minimum": 1025,
+          "maximum": 65535
+        },
+        {
+          "path": "/syslog/global-parameter/suppress-enable",
+          "type": "boolean",
+          "label": "suppress-enable"
+        },
+        {
+          "path": "/syslog/global-parameter/trap-none-timezone",
+          "type": "boolean",
+          "label": "trap-none-timezone"
+        },
+        {
+          "path": "/syslog/global-parameter/trap-timestamp",
+          "type": "enum",
+          "label": "trap-timestamp",
+          "options": [
+            {
+              "label": "date-boot",
+              "value": "date-boot"
+            },
+            {
+              "label": "date-millisecond",
+              "value": "date-millisecond"
+            },
+            {
+              "label": "date-second",
+              "value": "date-second"
+            },
+            {
+              "label": "date-tenthsecond",
+              "value": "date-tenthsecond"
+            },
+            {
+              "label": "formatdate-millisecond",
+              "value": "formatdate-millisecond"
+            },
+            {
+              "label": "formatdate-second",
+              "value": "formatdate-second"
+            },
+            {
+              "label": "formatdate-tenthsecond",
+              "value": "formatdate-tenthsecond"
+            },
+            {
+              "label": "shortdate-millisecond",
+              "value": "shortdate-millisecond"
+            },
+            {
+              "label": "shortdate-second",
+              "value": "shortdate-second"
+            },
+            {
+              "label": "shortdate-tenthsecond",
+              "value": "shortdate-tenthsecond"
+            }
+          ]
+        },
+        {
+          "path": "/syslog/global-parameter/trapbuffer-enable",
+          "type": "boolean",
+          "label": "trapbuffer-enable"
+        },
+        {
+          "path": "/syslog/global-parameter/trapbuffer-size",
+          "type": "number",
+          "label": "trapbuffer-size",
+          "maximum": 1024
+        },
+        {
+          "path": "/syslog/global-parameter/user-def-hostname",
+          "type": "string",
+          "label": "user-def-hostname",
+          "when": "../hostname = 'user-defined'"
+        }
+      ],
+      "operationExclude": [
+        "create",
+        "delete"
+      ]
+    },
+    {
+      "path": "/syslog/info-center-buffers",
+      "type": "group",
+      "label": "info-center-buffers",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/syslog/info-center-buffers/info-center-buffer",
+          "type": "list",
+          "label": "info-center-buffer",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/syslog/info-center-buffers/info-center-buffer/buffer-name",
+              "type": "string",
+              "label": "buffer-name",
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/syslog/info-center-buffers/info-center-buffer/channel-id",
+              "type": "number",
+              "label": "channel-id",
+              "maximum": 9,
+              "readonly": true
+            },
+            {
+              "path": "/syslog/info-center-buffers/info-center-buffer/channel-name",
+              "type": "string",
+              "label": "channel-name",
+              "readonly": true
+            },
+            {
+              "path": "/syslog/info-center-buffers/info-center-buffer/cur-buffer-size",
+              "type": "number",
+              "label": "cur-buffer-size",
+              "minimum": 1,
+              "maximum": 10240,
+              "readonly": true
+            },
+            {
+              "path": "/syslog/info-center-buffers/info-center-buffer/current-message",
+              "type": "number",
+              "label": "current-message",
+              "readonly": true
+            },
+            {
+              "path": "/syslog/info-center-buffers/info-center-buffer/dropped-message",
+              "type": "number",
+              "label": "dropped-message",
+              "readonly": true
+            },
+            {
+              "path": "/syslog/info-center-buffers/info-center-buffer/enable-flag",
+              "type": "boolean",
+              "label": "enable-flag",
+              "readonly": true
+            },
+            {
+              "path": "/syslog/info-center-buffers/info-center-buffer/max-buffer-size",
+              "type": "number",
+              "label": "max-buffer-size",
+              "minimum": 1,
+              "maximum": 10240,
+              "readonly": true
+            },
+            {
+              "path": "/syslog/info-center-buffers/info-center-buffer/overwrite-message",
+              "type": "number",
+              "label": "overwrite-message",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/syslog/info-center-channels",
+      "type": "group",
+      "label": "info-center-channels",
+      "fields": [
+        {
+          "path": "/syslog/info-center-channels/info-center-channel",
+          "type": "list",
+          "label": "info-center-channel",
+          "fields": [
+            {
+              "path": "/syslog/info-center-channels/info-center-channel/channel-default-name",
+              "type": "string",
+              "label": "channel-default-name",
+              "readonly": true
+            },
+            {
+              "path": "/syslog/info-center-channels/info-center-channel/channel-id",
+              "type": "number",
+              "label": "channel-id",
+              "maximum": 9,
+              "isKey": true
+            },
+            {
+              "path": "/syslog/info-center-channels/info-center-channel/channel-name",
+              "type": "string",
+              "label": "channel-name",
+              "pattern": "[a-zA-Z][a-zA-Z0-9]*",
+              "dynamicDefault": true
+            }
+          ],
+          "operationExclude": [
+            "create",
+            "delete"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/syslog/info-center-filters",
+      "type": "group",
+      "label": "info-center-filters",
+      "fields": [
+        {
+          "path": "/syslog/info-center-filters/info-center-filter",
+          "type": "list",
+          "label": "info-center-filter",
+          "fields": [
+            {
+              "path": "/syslog/info-center-filters/info-center-filter/feature-name",
+              "type": "string",
+              "label": "feature-name",
+              "isKey": true
+            },
+            {
+              "path": "/syslog/info-center-filters/info-center-filter/filter-log-name",
+              "type": "string",
+              "label": "filter-log-name",
+              "isKey": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/syslog/info-center-sources",
+      "type": "group",
+      "label": "info-center-sources",
+      "fields": [
+        {
+          "path": "/syslog/info-center-sources/info-center-source",
+          "type": "list",
+          "label": "info-center-source",
+          "fields": [
+            {
+              "path": "/syslog/info-center-sources/info-center-source/channel-id",
+              "type": "string",
+              "label": "channel-id",
+              "isKey": true
+            },
+            {
+              "path": "/syslog/info-center-sources/info-center-source/channel-name",
+              "type": "string",
+              "label": "channel-name",
+              "readonly": true
+            },
+            {
+              "path": "/syslog/info-center-sources/info-center-source/enable-debug",
+              "type": "boolean",
+              "label": "enable-debug",
+              "dynamicDefault": true
+            },
+            {
+              "path": "/syslog/info-center-sources/info-center-source/enable-debug-level",
+              "type": "enum",
+              "label": "enable-debug-level",
+              "options": [
+                {
+                  "label": "alert",
+                  "value": "alert"
+                },
+                {
+                  "label": "critical",
+                  "value": "critical"
+                },
+                {
+                  "label": "debugging",
+                  "value": "debugging"
+                },
+                {
+                  "label": "emergencies",
+                  "value": "emergencies"
+                },
+                {
+                  "label": "error",
+                  "value": "error"
+                },
+                {
+                  "label": "informational",
+                  "value": "informational"
+                },
+                {
+                  "label": "notification",
+                  "value": "notification"
+                },
+                {
+                  "label": "warning",
+                  "value": "warning"
+                }
+              ]
+            },
+            {
+              "path": "/syslog/info-center-sources/info-center-source/enable-log",
+              "type": "boolean",
+              "label": "enable-log",
+              "dynamicDefault": true
+            },
+            {
+              "path": "/syslog/info-center-sources/info-center-source/enable-log-level",
+              "type": "enum",
+              "label": "enable-log-level",
+              "options": [
+                {
+                  "label": "alert",
+                  "value": "alert"
+                },
+                {
+                  "label": "critical",
+                  "value": "critical"
+                },
+                {
+                  "label": "debugging",
+                  "value": "debugging"
+                },
+                {
+                  "label": "emergencies",
+                  "value": "emergencies"
+                },
+                {
+                  "label": "error",
+                  "value": "error"
+                },
+                {
+                  "label": "informational",
+                  "value": "informational"
+                },
+                {
+                  "label": "notification",
+                  "value": "notification"
+                },
+                {
+                  "label": "warning",
+                  "value": "warning"
+                }
+              ],
+              "dynamicDefault": true
+            },
+            {
+              "path": "/syslog/info-center-sources/info-center-source/enable-trap",
+              "type": "boolean",
+              "label": "enable-trap",
+              "dynamicDefault": true
+            },
+            {
+              "path": "/syslog/info-center-sources/info-center-source/enable-trap-level",
+              "type": "enum",
+              "label": "enable-trap-level",
+              "options": [
+                {
+                  "label": "alert",
+                  "value": "alert"
+                },
+                {
+                  "label": "critical",
+                  "value": "critical"
+                },
+                {
+                  "label": "debugging",
+                  "value": "debugging"
+                },
+                {
+                  "label": "emergencies",
+                  "value": "emergencies"
+                },
+                {
+                  "label": "error",
+                  "value": "error"
+                },
+                {
+                  "label": "informational",
+                  "value": "informational"
+                },
+                {
+                  "label": "notification",
+                  "value": "notification"
+                },
+                {
+                  "label": "warning",
+                  "value": "warning"
+                }
+              ]
+            },
+            {
+              "path": "/syslog/info-center-sources/info-center-source/module-name",
+              "type": "string",
+              "label": "module-name",
+              "pattern": "[^A-Z]*",
+              "isKey": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/syslog/info-center-statistics",
+      "type": "group",
+      "label": "info-center-statistics",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/syslog/info-center-statistics/info-center-statistic",
+          "type": "list",
+          "label": "info-center-statistic",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/syslog/info-center-statistics/info-center-statistic/drop-debug",
+              "type": "number",
+              "label": "drop-debug",
+              "readonly": true
+            },
+            {
+              "path": "/syslog/info-center-statistics/info-center-statistic/drop-diaglog",
+              "type": "number",
+              "label": "drop-diaglog",
+              "readonly": true
+            },
+            {
+              "path": "/syslog/info-center-statistics/info-center-statistic/drop-eventtrap",
+              "type": "number",
+              "label": "drop-eventtrap",
+              "readonly": true
+            },
+            {
+              "path": "/syslog/info-center-statistics/info-center-statistic/drop-log",
+              "type": "number",
+              "label": "drop-log",
+              "readonly": true
+            },
+            {
+              "path": "/syslog/info-center-statistics/info-center-statistic/module-name",
+              "type": "string",
+              "label": "module-name",
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/syslog/info-center-statistics/info-center-statistic/receive-debug",
+              "type": "number",
+              "label": "receive-debug",
+              "readonly": true
+            },
+            {
+              "path": "/syslog/info-center-statistics/info-center-statistic/receive-diaglog",
+              "type": "number",
+              "label": "receive-diaglog",
+              "readonly": true
+            },
+            {
+              "path": "/syslog/info-center-statistics/info-center-statistic/receive-eventtrap",
+              "type": "number",
+              "label": "receive-eventtrap",
+              "readonly": true
+            },
+            {
+              "path": "/syslog/info-center-statistics/info-center-statistic/receive-log",
+              "type": "number",
+              "label": "receive-log",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/syslog/log-switch-list",
+      "type": "group",
+      "label": "log-switch-list",
+      "fields": [
+        {
+          "path": "/syslog/log-switch-list/log-switch",
+          "type": "list",
+          "label": "log-switch",
+          "fields": [
+            {
+              "path": "/syslog/log-switch-list/log-switch/feature-name",
+              "type": "string",
+              "label": "feature-name",
+              "isKey": true
+            },
+            {
+              "path": "/syslog/log-switch-list/log-switch/log-level",
+              "type": "enum",
+              "label": "log-level",
+              "options": [
+                {
+                  "label": "alert",
+                  "value": "alert"
+                },
+                {
+                  "label": "critical",
+                  "value": "critical"
+                },
+                {
+                  "label": "debugging",
+                  "value": "debugging"
+                },
+                {
+                  "label": "emergencies",
+                  "value": "emergencies"
+                },
+                {
+                  "label": "error",
+                  "value": "error"
+                },
+                {
+                  "label": "informational",
+                  "value": "informational"
+                },
+                {
+                  "label": "notification",
+                  "value": "notification"
+                },
+                {
+                  "label": "warning",
+                  "value": "warning"
+                }
+              ],
+              "dynamicDefault": true
+            },
+            {
+              "path": "/syslog/log-switch-list/log-switch/log-name",
+              "type": "string",
+              "label": "log-name",
+              "isKey": true
+            },
+            {
+              "path": "/syslog/log-switch-list/log-switch/log-type",
+              "type": "enum",
+              "label": "log-type",
+              "options": [
+                {
+                  "label": "alarmlog",
+                  "value": "alarmlog"
+                },
+                {
+                  "label": "diaglog",
+                  "value": "diaglog"
+                },
+                {
+                  "label": "eventlog",
+                  "value": "eventlog"
+                },
+                {
+                  "label": "maintainlog",
+                  "value": "maintainlog"
+                },
+                {
+                  "label": "notificationlog",
+                  "value": "notificationlog"
+                },
+                {
+                  "label": "operlog",
+                  "value": "operlog"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "path": "/syslog/log-switch-list/log-switch/security-log-flag",
+              "type": "boolean",
+              "label": "security-log-flag",
+              "readonly": true
+            }
+          ],
+          "operationExclude": [
+            "create",
+            "delete"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/syslog/logbuffers",
+      "type": "group",
+      "label": "logbuffers",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/syslog/logbuffers/logbuffer",
+          "type": "list",
+          "label": "logbuffer",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/syslog/logbuffers/logbuffer/endtime",
+              "type": "string",
+              "label": "endtime",
+              "pattern": "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?(Z|[\\+\\-]\\d{2}:\\d{2})",
+              "readonly": true,
+              "supportFilter": true
+            },
+            {
+              "path": "/syslog/logbuffers/logbuffer/level",
+              "type": "enum",
+              "label": "level",
+              "options": [
+                {
+                  "label": "alert",
+                  "value": "alert"
+                },
+                {
+                  "label": "critical",
+                  "value": "critical"
+                },
+                {
+                  "label": "debugging",
+                  "value": "debugging"
+                },
+                {
+                  "label": "emergencies",
+                  "value": "emergencies"
+                },
+                {
+                  "label": "error",
+                  "value": "error"
+                },
+                {
+                  "label": "informational",
+                  "value": "informational"
+                },
+                {
+                  "label": "notification",
+                  "value": "notification"
+                },
+                {
+                  "label": "warning",
+                  "value": "warning"
+                }
+              ],
+              "readonly": true,
+              "supportFilter": true
+            },
+            {
+              "path": "/syslog/logbuffers/logbuffer/log-content",
+              "type": "string",
+              "label": "log-content",
+              "readonly": true
+            },
+            {
+              "path": "/syslog/logbuffers/logbuffer/sequence",
+              "type": "number",
+              "label": "sequence",
+              "minimum": 1,
+              "maximum": 102400,
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/syslog/logbuffers/logbuffer/starttime",
+              "type": "string",
+              "label": "starttime",
+              "pattern": "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?(Z|[\\+\\-]\\d{2}:\\d{2})",
+              "readonly": true,
+              "supportFilter": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/syslog/logfiles",
+      "type": "group",
+      "label": "logfiles",
+      "fields": [
+        {
+          "path": "/syslog/logfiles/logfile",
+          "type": "list",
+          "label": "logfile",
+          "fields": [
+            {
+              "path": "/syslog/logfiles/logfile/logfile-type",
+              "type": "enum",
+              "label": "logfile-type",
+              "options": [
+                {
+                  "label": "debug",
+                  "value": "debug"
+                },
+                {
+                  "label": "log",
+                  "value": "log"
+                },
+                {
+                  "label": "operation",
+                  "value": "operation"
+                },
+                {
+                  "label": "security",
+                  "value": "security"
+                }
+              ],
+              "isKey": true
+            },
+            {
+              "path": "/syslog/logfiles/logfile/max-file-num",
+              "type": "number",
+              "label": "max-file-num",
+              "minimum": 1,
+              "maximum": 500,
+              "dynamicDefault": true
+            },
+            {
+              "path": "/syslog/logfiles/logfile/max-file-size",
+              "type": "number",
+              "label": "max-file-size",
+              "minimum": 1,
+              "maximum": 32,
+              "must": [
+                {
+                  "expr": "(../logfile-type='debug' and ../max-file-size='8') or ((../logfile-type='security' or ../logfile-type='operation') and (../max-file-size\u003e=1 and ../max-file-size\u003c=4))or (../logfile-type='log' and (../max-file-size='4' or ../max-file-size='8' or ../max-file-size='16' or ../max-file-size='32'))"
+                }
+              ],
+              "dynamicDefault": true
+            }
+          ],
+          "operationExclude": [
+            "create",
+            "delete"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/syslog/modules",
+      "type": "group",
+      "label": "modules",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/syslog/modules/module",
+          "type": "list",
+          "label": "module",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/syslog/modules/module/module-name",
+              "type": "string",
+              "label": "module-name",
+              "readonly": true,
+              "isKey": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/syslog/securitybuffers",
+      "type": "group",
+      "label": "securitybuffers",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/syslog/securitybuffers/securitybuffer",
+          "type": "list",
+          "label": "securitybuffer",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/syslog/securitybuffers/securitybuffer/endtime",
+              "type": "string",
+              "label": "endtime",
+              "pattern": "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?(Z|[\\+\\-]\\d{2}:\\d{2})",
+              "readonly": true,
+              "supportFilter": true
+            },
+            {
+              "path": "/syslog/securitybuffers/securitybuffer/level",
+              "type": "enum",
+              "label": "level",
+              "options": [
+                {
+                  "label": "alert",
+                  "value": "alert"
+                },
+                {
+                  "label": "critical",
+                  "value": "critical"
+                },
+                {
+                  "label": "debugging",
+                  "value": "debugging"
+                },
+                {
+                  "label": "emergencies",
+                  "value": "emergencies"
+                },
+                {
+                  "label": "error",
+                  "value": "error"
+                },
+                {
+                  "label": "informational",
+                  "value": "informational"
+                },
+                {
+                  "label": "notification",
+                  "value": "notification"
+                },
+                {
+                  "label": "warning",
+                  "value": "warning"
+                }
+              ],
+              "readonly": true,
+              "supportFilter": true
+            },
+            {
+              "path": "/syslog/securitybuffers/securitybuffer/log-content",
+              "type": "string",
+              "label": "log-content",
+              "readonly": true
+            },
+            {
+              "path": "/syslog/securitybuffers/securitybuffer/sequence",
+              "type": "number",
+              "label": "sequence",
+              "minimum": 1,
+              "maximum": 102400,
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/syslog/securitybuffers/securitybuffer/starttime",
+              "type": "string",
+              "label": "starttime",
+              "pattern": "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?(Z|[\\+\\-]\\d{2}:\\d{2})",
+              "readonly": true,
+              "supportFilter": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/syslog/servers",
+      "type": "group",
+      "label": "servers",
+      "fields": [
+        {
+          "path": "/syslog/servers/server",
+          "type": "list",
+          "label": "server",
+          "fields": [
+            {
+              "path": "/syslog/servers/server/channel-id",
+              "type": "string",
+              "label": "channel-id",
+              "supportFilter": true
+            },
+            {
+              "path": "/syslog/servers/server/channel-name",
+              "type": "string",
+              "label": "channel-name",
+              "readonly": true
+            },
+            {
+              "path": "/syslog/servers/server/dns-identifier-name",
+              "type": "string",
+              "label": "dns-identifier-name",
+              "must": [
+                {
+                  "expr": "../transport-mode='tcp' and ../ssl-policy-name"
+                }
+              ]
+            },
+            {
+              "path": "/syslog/servers/server/facility",
+              "type": "enum",
+              "label": "facility",
+              "options": [
+                {
+                  "label": "local0",
+                  "value": "local0"
+                },
+                {
+                  "label": "local1",
+                  "value": "local1"
+                },
+                {
+                  "label": "local2",
+                  "value": "local2"
+                },
+                {
+                  "label": "local3",
+                  "value": "local3"
+                },
+                {
+                  "label": "local4",
+                  "value": "local4"
+                },
+                {
+                  "label": "local5",
+                  "value": "local5"
+                },
+                {
+                  "label": "local6",
+                  "value": "local6"
+                },
+                {
+                  "label": "local7",
+                  "value": "local7"
+                }
+              ],
+              "supportFilter": true
+            },
+            {
+              "path": "/syslog/servers/server/facility-mask",
+              "type": "string",
+              "label": "facility-mask"
+            },
+            {
+              "path": "/syslog/servers/server/host-name",
+              "type": "string",
+              "label": "host-name"
+            },
+            {
+              "path": "/syslog/servers/server/ip-type",
+              "type": "enum",
+              "label": "ip-type",
+              "options": [
+                {
+                  "label": "ipv4",
+                  "value": "ipv4"
+                },
+                {
+                  "label": "ipv6",
+                  "value": "ipv6"
+                }
+              ],
+              "isKey": true
+            },
+            {
+              "path": "/syslog/servers/server/ipaddress",
+              "type": "string",
+              "label": "ipaddress",
+              "isKey": true
+            },
+            {
+              "path": "/syslog/servers/server/is-activated",
+              "type": "boolean",
+              "label": "is-activated"
+            },
+            {
+              "path": "/syslog/servers/server/is-brief-format",
+              "type": "boolean",
+              "label": "is-brief-format"
+            },
+            {
+              "path": "/syslog/servers/server/is-default-vpn",
+              "type": "boolean",
+              "label": "is-default-vpn",
+              "isKey": true
+            },
+            {
+              "path": "/syslog/servers/server/is-security-only",
+              "type": "boolean",
+              "label": "is-security-only",
+              "must": [
+                {
+                  "expr": "../is-security-only='false' or (../is-security-only='true' and ../ssl-policy-name)"
+                }
+              ]
+            },
+            {
+              "path": "/syslog/servers/server/level",
+              "type": "enum",
+              "label": "level",
+              "options": [
+                {
+                  "label": "alert",
+                  "value": "alert"
+                },
+                {
+                  "label": "critical",
+                  "value": "critical"
+                },
+                {
+                  "label": "debugging",
+                  "value": "debugging"
+                },
+                {
+                  "label": "emergencies",
+                  "value": "emergencies"
+                },
+                {
+                  "label": "error",
+                  "value": "error"
+                },
+                {
+                  "label": "informational",
+                  "value": "informational"
+                },
+                {
+                  "label": "notification",
+                  "value": "notification"
+                },
+                {
+                  "label": "warning",
+                  "value": "warning"
+                }
+              ],
+              "supportFilter": true
+            },
+            {
+              "path": "/syslog/servers/server/port",
+              "type": "number",
+              "label": "port",
+              "minimum": 1,
+              "maximum": 65535,
+              "supportFilter": true
+            },
+            {
+              "path": "/syslog/servers/server/severity-mask",
+              "type": "string",
+              "label": "severity-mask"
+            },
+            {
+              "path": "/syslog/servers/server/source-ip",
+              "type": "string",
+              "label": "source-ip",
+              "supportFilter": true
+            },
+            {
+              "path": "/syslog/servers/server/ssl-policy-name",
+              "type": "string",
+              "label": "ssl-policy-name",
+              "must": [
+                {
+                  "expr": "../transport-mode='tcp'"
+                }
+              ]
+            },
+            {
+              "path": "/syslog/servers/server/timestamp",
+              "type": "enum",
+              "label": "timestamp",
+              "options": [
+                {
+                  "label": "UTC",
+                  "value": "UTC"
+                },
+                {
+                  "label": "localtime",
+                  "value": "localtime"
+                }
+              ],
+              "supportFilter": true
+            },
+            {
+              "path": "/syslog/servers/server/transport-mode",
+              "type": "enum",
+              "label": "transport-mode",
+              "options": [
+                {
+                  "label": "tcp",
+                  "value": "tcp"
+                },
+                {
+                  "label": "udp",
+                  "value": "udp"
+                }
+              ],
+              "supportFilter": true
+            },
+            {
+              "path": "/syslog/servers/server/vrf-name",
+              "type": "string",
+              "label": "vrf-name",
+              "must": [
+                {
+                  "expr": "not(../is-default-vpn='true') or (../is-default-vpn='true' and ../vrf-name='_public_')"
+                }
+              ],
+              "isKey": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/syslog/trapbuffers",
+      "type": "group",
+      "label": "trapbuffers",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/syslog/trapbuffers/trapbuffer",
+          "type": "list",
+          "label": "trapbuffer",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/syslog/trapbuffers/trapbuffer/sequence",
+              "type": "number",
+              "label": "sequence",
+              "minimum": 1,
+              "maximum": 1024,
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/syslog/trapbuffers/trapbuffer/trap-content",
+              "type": "string",
+              "label": "trap-content",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

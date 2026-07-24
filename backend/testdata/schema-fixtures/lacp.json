@@ -1,0 +1,96 @@
+{
+  "module": "lacp",
+  "title": "lacp",
+  "vendor": "huawei",
+  "fields": [
+    {
+      "path": "/lacp/global",
+      "type": "group",
+      "label": "global",
+      "fields": [
+        {
+          "path": "/lacp/global/adminkey-change2lagid",
+          "type": "boolean",
+          "label": "adminkey-change2lagid"
+        },
+        {
+          "path": "/lacp/global/alarm-control",
+          "type": "boolean",
+          "label": "alarm-control"
+        },
+        {
+          "path": "/lacp/global/force-down",
+          "type": "boolean",
+          "label": "force-down"
+        },
+        {
+          "path": "/lacp/global/ignore-aggregation",
+          "type": "boolean",
+          "label": "ignore-aggregation"
+        },
+        {
+          "path": "/lacp/global/m-lag",
+          "type": "group",
+          "label": "m-lag",
+          "fields": [
+            {
+              "path": "/lacp/global/m-lag/sys-mac",
+              "type": "string",
+              "label": "sys-mac",
+              "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+              "dynamicDefault": true
+            },
+            {
+              "path": "/lacp/global/m-lag/sys-priority",
+              "type": "number",
+              "label": "sys-priority"
+            }
+          ]
+        },
+        {
+          "path": "/lacp/global/sys-priority",
+          "type": "number",
+          "label": "sys-priority"
+        }
+      ]
+    },
+    {
+      "path": "/lacp/trouble-shoots",
+      "type": "group",
+      "label": "trouble-shoots",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/lacp/trouble-shoots/trouble-shoot",
+          "type": "list",
+          "label": "trouble-shoot",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/lacp/trouble-shoots/trouble-shoot/description",
+              "type": "string",
+              "label": "description",
+              "readonly": true
+            },
+            {
+              "path": "/lacp/trouble-shoots/trouble-shoot/index",
+              "type": "number",
+              "label": "index",
+              "minimum": 1,
+              "maximum": 5,
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/lacp/trouble-shoots/trouble-shoot/time",
+              "type": "string",
+              "label": "time",
+              "pattern": "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?(Z|[\\+\\-]\\d{2}:\\d{2})",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

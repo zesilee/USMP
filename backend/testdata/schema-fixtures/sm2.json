@@ -1,0 +1,68 @@
+{
+  "module": "sm2",
+  "title": "sm2",
+  "vendor": "huawei",
+  "fields": [
+    {
+      "path": "/sm2/sm2-key-pairs",
+      "type": "group",
+      "label": "sm2-key-pairs",
+      "fields": [
+        {
+          "path": "/sm2/sm2-key-pairs/sm2-key-pair",
+          "type": "list",
+          "label": "sm2-key-pair",
+          "fields": [
+            {
+              "path": "/sm2/sm2-key-pairs/sm2-key-pair/host-key-code",
+              "type": "string",
+              "label": "host-key-code",
+              "readonly": true,
+              "supportFilter": true
+            },
+            {
+              "path": "/sm2/sm2-key-pairs/sm2-key-pair/key-pair-label",
+              "type": "string",
+              "label": "key-pair-label",
+              "pattern": "[a-zA-Z0-9_]*",
+              "isKey": true
+            },
+            {
+              "path": "/sm2/sm2-key-pairs/sm2-key-pair/key-size",
+              "type": "number",
+              "label": "key-size",
+              "supportFilter": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/sm2/sm2-peer-keys",
+      "type": "group",
+      "label": "sm2-peer-keys",
+      "fields": [
+        {
+          "path": "/sm2/sm2-peer-keys/sm2-peer-key",
+          "type": "list",
+          "label": "sm2-peer-key",
+          "fields": [
+            {
+              "path": "/sm2/sm2-peer-keys/sm2-peer-key/key-code",
+              "type": "string",
+              "label": "key-code",
+              "required": true,
+              "supportFilter": true
+            },
+            {
+              "path": "/sm2/sm2-peer-keys/sm2-peer-key/key-name",
+              "type": "string",
+              "label": "key-name",
+              "isKey": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,4480 @@
+{
+  "module": "bfd",
+  "title": "bfd",
+  "vendor": "huawei",
+  "fields": [
+    {
+      "path": "/bfd/all-sessions",
+      "type": "group",
+      "label": "all-sessions",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/bfd/all-sessions/all-session",
+          "type": "list",
+          "label": "all-session",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/bfd/all-sessions/all-session/basic-acl-num",
+              "type": "number",
+              "label": "basic-acl-num",
+              "minimum": 2000,
+              "maximum": 2999,
+              "readonly": true
+            },
+            {
+              "path": "/bfd/all-sessions/all-session/bind-application",
+              "type": "string",
+              "label": "bind-application",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/all-sessions/all-session/bundle-mode",
+              "type": "enum",
+              "label": "bundle-mode",
+              "options": [
+                {
+                  "label": "bundle-com-unshare",
+                  "value": "bundle-com-unshare"
+                },
+                {
+                  "label": "bundle-compatible",
+                  "value": "bundle-compatible"
+                },
+                {
+                  "label": "bundle-standard",
+                  "value": "bundle-standard"
+                },
+                {
+                  "label": "bundle-std-unshare",
+                  "value": "bundle-std-unshare"
+                },
+                {
+                  "label": "cfg-from-master",
+                  "value": "cfg-from-master"
+                },
+                {
+                  "label": "cfg-remote-ap",
+                  "value": "cfg-remote-ap"
+                },
+                {
+                  "label": "none",
+                  "value": "none"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "path": "/bfd/all-sessions/all-session/color",
+              "type": "number",
+              "label": "color",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/all-sessions/all-session/config-pst",
+              "type": "enum",
+              "label": "config-pst",
+              "options": [
+                {
+                  "label": "disable",
+                  "value": "disable"
+                },
+                {
+                  "label": "enable",
+                  "value": "enable"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "path": "/bfd/all-sessions/all-session/create-type",
+              "type": "enum",
+              "label": "create-type",
+              "options": [
+                {
+                  "label": "passive",
+                  "value": "passive"
+                },
+                {
+                  "label": "session-auto",
+                  "value": "session-auto"
+                },
+                {
+                  "label": "session-dynamic",
+                  "value": "session-dynamic"
+                },
+                {
+                  "label": "session-static",
+                  "value": "session-static"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "path": "/bfd/all-sessions/all-session/demand-enable",
+              "type": "boolean",
+              "label": "demand-enable",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/all-sessions/all-session/description",
+              "type": "string",
+              "label": "description",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/all-sessions/all-session/destination-address",
+              "type": "string",
+              "label": "destination-address",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/all-sessions/all-session/detect-multiplier",
+              "type": "number",
+              "label": "detect-multiplier",
+              "minimum": 3,
+              "maximum": 50,
+              "readonly": true
+            },
+            {
+              "path": "/bfd/all-sessions/all-session/dot1q-vid",
+              "type": "number",
+              "label": "dot1q-vid",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/all-sessions/all-session/echo-passive",
+              "type": "enum",
+              "label": "echo-passive",
+              "options": [
+                {
+                  "label": "disable",
+                  "value": "disable"
+                },
+                {
+                  "label": "enable",
+                  "value": "enable"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "path": "/bfd/all-sessions/all-session/encap-type",
+              "type": "enum",
+              "label": "encap-type",
+              "options": [
+                {
+                  "label": "atm-1to1-vcc",
+                  "value": "atm-1to1-vcc"
+                },
+                {
+                  "label": "atm-1to1-vpc",
+                  "value": "atm-1to1-vpc"
+                },
+                {
+                  "label": "atm-aal5-pdu",
+                  "value": "atm-aal5-pdu"
+                },
+                {
+                  "label": "atm-aal5-sdu",
+                  "value": "atm-aal5-sdu"
+                },
+                {
+                  "label": "atm-nto1-vcc",
+                  "value": "atm-nto1-vcc"
+                },
+                {
+                  "label": "atm-nto1-vpc",
+                  "value": "atm-nto1-vpc"
+                },
+                {
+                  "label": "atm-trans-cell",
+                  "value": "atm-trans-cell"
+                },
+                {
+                  "label": "cem",
+                  "value": "cem"
+                },
+                {
+                  "label": "cep",
+                  "value": "cep"
+                },
+                {
+                  "label": "cesopsn-basic",
+                  "value": "cesopsn-basic"
+                },
+                {
+                  "label": "cesopsn-tdm",
+                  "value": "cesopsn-tdm"
+                },
+                {
+                  "label": "ethernet",
+                  "value": "ethernet"
+                },
+                {
+                  "label": "fr",
+                  "value": "fr"
+                },
+                {
+                  "label": "fr-dlci",
+                  "value": "fr-dlci"
+                },
+                {
+                  "label": "fr-port-mode",
+                  "value": "fr-port-mode"
+                },
+                {
+                  "label": "hdlc",
+                  "value": "hdlc"
+                },
+                {
+                  "label": "ip-interworking",
+                  "value": "ip-interworking"
+                },
+                {
+                  "label": "ip-layer2",
+                  "value": "ip-layer2"
+                },
+                {
+                  "label": "ppp",
+                  "value": "ppp"
+                },
+                {
+                  "label": "satop-e1",
+                  "value": "satop-e1"
+                },
+                {
+                  "label": "satop-e3",
+                  "value": "satop-e3"
+                },
+                {
+                  "label": "satop-t1",
+                  "value": "satop-t1"
+                },
+                {
+                  "label": "satop-t3",
+                  "value": "satop-t3"
+                },
+                {
+                  "label": "tdmoip-aal1",
+                  "value": "tdmoip-aal1"
+                },
+                {
+                  "label": "tdmoip-aal2",
+                  "value": "tdmoip-aal2"
+                },
+                {
+                  "label": "unsupport",
+                  "value": "unsupport"
+                },
+                {
+                  "label": "vlan",
+                  "value": "vlan"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "path": "/bfd/all-sessions/all-session/fsm-board-slot",
+              "type": "string",
+              "label": "fsm-board-slot",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/all-sessions/all-session/lag",
+              "type": "boolean",
+              "label": "lag",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/all-sessions/all-session/link-type",
+              "type": "enum",
+              "label": "link-type",
+              "options": [
+                {
+                  "label": "bgp-tunnel",
+                  "value": "bgp-tunnel"
+                },
+                {
+                  "label": "ip",
+                  "value": "ip"
+                },
+                {
+                  "label": "ldp-lsp",
+                  "value": "ldp-lsp"
+                },
+                {
+                  "label": "ldp-tunnel",
+                  "value": "ldp-tunnel"
+                },
+                {
+                  "label": "other",
+                  "value": "other"
+                },
+                {
+                  "label": "p2mp-ldp",
+                  "value": "p2mp-ldp"
+                },
+                {
+                  "label": "p2mp-te",
+                  "value": "p2mp-te"
+                },
+                {
+                  "label": "sid-list",
+                  "value": "sid-list"
+                },
+                {
+                  "label": "sr-be-tunnel",
+                  "value": "sr-be-tunnel"
+                },
+                {
+                  "label": "static-lsp",
+                  "value": "static-lsp"
+                },
+                {
+                  "label": "te-lsp",
+                  "value": "te-lsp"
+                },
+                {
+                  "label": "te-tunnel",
+                  "value": "te-tunnel"
+                },
+                {
+                  "label": "vll-pw",
+                  "value": "vll-pw"
+                },
+                {
+                  "label": "vsi-pw",
+                  "value": "vsi-pw"
+                },
+                {
+                  "label": "vxlan",
+                  "value": "vxlan"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "path": "/bfd/all-sessions/all-session/local-discriminator",
+              "type": "number",
+              "label": "local-discriminator",
+              "minimum": 1,
+              "maximum": 4294967295,
+              "readonly": true,
+              "supportFilter": true
+            },
+            {
+              "path": "/bfd/all-sessions/all-session/local-vc-label",
+              "type": "number",
+              "label": "local-vc-label",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/all-sessions/all-session/lsp-token",
+              "type": "number",
+              "label": "lsp-token",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/all-sessions/all-session/main-sub-role",
+              "type": "enum",
+              "label": "main-sub-role",
+              "options": [
+                {
+                  "label": "bundle-main",
+                  "value": "bundle-main"
+                },
+                {
+                  "label": "bundle-sub",
+                  "value": "bundle-sub"
+                },
+                {
+                  "label": "none",
+                  "value": "none"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "path": "/bfd/all-sessions/all-session/min-echo-rx-int",
+              "type": "number",
+              "label": "min-echo-rx-int",
+              "minimum": 3,
+              "maximum": 20000,
+              "readonly": true
+            },
+            {
+              "path": "/bfd/all-sessions/all-session/min-rx-interval",
+              "type": "number",
+              "label": "min-rx-interval",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/all-sessions/all-session/min-tx-interval",
+              "type": "number",
+              "label": "min-tx-interval",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/all-sessions/all-session/name",
+              "type": "string",
+              "label": "name",
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/bfd/all-sessions/all-session/next-hop",
+              "type": "string",
+              "label": "next-hop",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/all-sessions/all-session/node",
+              "type": "enum",
+              "label": "node",
+              "options": [
+                {
+                  "label": "none",
+                  "value": "none"
+                },
+                {
+                  "label": "upe",
+                  "value": "upe"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "path": "/bfd/all-sessions/all-session/out-if-name",
+              "type": "string",
+              "label": "out-if-name",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/all-sessions/all-session/pis",
+              "type": "enum",
+              "label": "pis",
+              "options": [
+                {
+                  "label": "disable",
+                  "value": "disable"
+                },
+                {
+                  "label": "enable",
+                  "value": "enable"
+                },
+                {
+                  "label": "enable-subif",
+                  "value": "enable-subif"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "path": "/bfd/all-sessions/all-session/process-pst",
+              "type": "enum",
+              "label": "process-pst",
+              "options": [
+                {
+                  "label": "disable",
+                  "value": "disable"
+                },
+                {
+                  "label": "enable",
+                  "value": "enable"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "path": "/bfd/all-sessions/all-session/pw-secondary",
+              "type": "enum",
+              "label": "pw-secondary",
+              "options": [
+                {
+                  "label": "master",
+                  "value": "master"
+                },
+                {
+                  "label": "secondary",
+                  "value": "secondary"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "path": "/bfd/all-sessions/all-session/pw-ttl",
+              "type": "number",
+              "label": "pw-ttl",
+              "minimum": 1,
+              "maximum": 255,
+              "readonly": true
+            },
+            {
+              "path": "/bfd/all-sessions/all-session/pw-ttl-mode",
+              "type": "enum",
+              "label": "pw-ttl-mode",
+              "options": [
+                {
+                  "label": "auto",
+                  "value": "auto"
+                },
+                {
+                  "label": "config",
+                  "value": "config"
+                },
+                {
+                  "label": "default",
+                  "value": "default"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "path": "/bfd/all-sessions/all-session/qinq-ce-vid",
+              "type": "number",
+              "label": "qinq-ce-vid",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/all-sessions/all-session/qinq-pe-vid",
+              "type": "number",
+              "label": "qinq-pe-vid",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/all-sessions/all-session/remote-discriminator",
+              "type": "number",
+              "label": "remote-discriminator",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/all-sessions/all-session/remote-peer",
+              "type": "string",
+              "label": "remote-peer",
+              "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/all-sessions/all-session/remote-vc-label",
+              "type": "number",
+              "label": "remote-vc-label",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/all-sessions/all-session/running",
+              "type": "group",
+              "label": "running",
+              "readonly": true,
+              "fields": [
+                {
+                  "path": "/bfd/all-sessions/all-session/running/acl-num",
+                  "type": "number",
+                  "label": "acl-num",
+                  "readonly": true
+                },
+                {
+                  "path": "/bfd/all-sessions/all-session/running/actual-multiplier",
+                  "type": "number",
+                  "label": "actual-multiplier",
+                  "readonly": true
+                },
+                {
+                  "path": "/bfd/all-sessions/all-session/running/actual-rx-interval",
+                  "type": "number",
+                  "label": "actual-rx-interval",
+                  "readonly": true
+                },
+                {
+                  "path": "/bfd/all-sessions/all-session/running/actual-tx-interval",
+                  "type": "number",
+                  "label": "actual-tx-interval",
+                  "readonly": true
+                },
+                {
+                  "path": "/bfd/all-sessions/all-session/running/detect-mode",
+                  "type": "enum",
+                  "label": "detect-mode",
+                  "options": [
+                    {
+                      "label": "async-one-arm-echo",
+                      "value": "async-one-arm-echo"
+                    },
+                    {
+                      "label": "async-with-echo",
+                      "value": "async-with-echo"
+                    },
+                    {
+                      "label": "async-without-echo",
+                      "value": "async-without-echo"
+                    },
+                    {
+                      "label": "demand-with-echo",
+                      "value": "demand-with-echo"
+                    },
+                    {
+                      "label": "demand-without-echo",
+                      "value": "demand-without-echo"
+                    },
+                    {
+                      "label": "seamless-without-echo",
+                      "value": "seamless-without-echo"
+                    }
+                  ],
+                  "readonly": true
+                },
+                {
+                  "path": "/bfd/all-sessions/all-session/running/detect-time",
+                  "type": "number",
+                  "label": "detect-time",
+                  "readonly": true
+                },
+                {
+                  "path": "/bfd/all-sessions/all-session/running/detect-timer-id",
+                  "type": "number",
+                  "label": "detect-timer-id",
+                  "readonly": true
+                },
+                {
+                  "path": "/bfd/all-sessions/all-session/running/echo-tx-timer-id",
+                  "type": "number",
+                  "label": "echo-tx-timer-id",
+                  "readonly": true
+                },
+                {
+                  "path": "/bfd/all-sessions/all-session/running/init-timer-id",
+                  "type": "number",
+                  "label": "init-timer-id",
+                  "readonly": true
+                },
+                {
+                  "path": "/bfd/all-sessions/all-session/running/local-diag",
+                  "type": "enum",
+                  "label": "local-diag",
+                  "options": [
+                    {
+                      "label": "admin-down",
+                      "value": "admin-down"
+                    },
+                    {
+                      "label": "concat-path-down",
+                      "value": "concat-path-down"
+                    },
+                    {
+                      "label": "detect-down",
+                      "value": "detect-down"
+                    },
+                    {
+                      "label": "echo-down",
+                      "value": "echo-down"
+                    },
+                    {
+                      "label": "forwarding-reset",
+                      "value": "forwarding-reset"
+                    },
+                    {
+                      "label": "neighbor-down",
+                      "value": "neighbor-down"
+                    },
+                    {
+                      "label": "none",
+                      "value": "none"
+                    },
+                    {
+                      "label": "path-down",
+                      "value": "path-down"
+                    },
+                    {
+                      "label": "receive-admin-down",
+                      "value": "receive-admin-down"
+                    },
+                    {
+                      "label": "reverse-concat-path-down",
+                      "value": "reverse-concat-path-down"
+                    }
+                  ],
+                  "readonly": true
+                },
+                {
+                  "path": "/bfd/all-sessions/all-session/running/local-discriminator",
+                  "type": "number",
+                  "label": "local-discriminator",
+                  "readonly": true
+                },
+                {
+                  "path": "/bfd/all-sessions/all-session/running/min-rx-interval",
+                  "type": "number",
+                  "label": "min-rx-interval",
+                  "readonly": true
+                },
+                {
+                  "path": "/bfd/all-sessions/all-session/running/min-tx-interval",
+                  "type": "number",
+                  "label": "min-tx-interval",
+                  "readonly": true
+                },
+                {
+                  "path": "/bfd/all-sessions/all-session/running/not-up-reason",
+                  "type": "enum",
+                  "label": "not-up-reason",
+                  "options": [
+                    {
+                      "label": "board-delayup",
+                      "value": "board-delayup"
+                    },
+                    {
+                      "label": "board-hardbad-macfcs-fault",
+                      "value": "board-hardbad-macfcs-fault"
+                    },
+                    {
+                      "label": "board-selecting-failed",
+                      "value": "board-selecting-failed"
+                    },
+                    {
+                      "label": "in-negotiation",
+                      "value": "in-negotiation"
+                    },
+                    {
+                      "label": "in-negotiation-1",
+                      "value": "in-negotiation-1"
+                    },
+                    {
+                      "label": "reach-centralized-mode-limit",
+                      "value": "reach-centralized-mode-limit"
+                    },
+                    {
+                      "label": "remote-rx-equal-zero",
+                      "value": "remote-rx-equal-zero"
+                    },
+                    {
+                      "label": "sess-state-up",
+                      "value": "sess-state-up"
+                    },
+                    {
+                      "label": "unsupported-tunnel-type",
+                      "value": "unsupported-tunnel-type"
+                    }
+                  ],
+                  "readonly": true
+                },
+                {
+                  "path": "/bfd/all-sessions/all-session/running/remote-demand-mode",
+                  "type": "boolean",
+                  "label": "remote-demand-mode",
+                  "readonly": true
+                },
+                {
+                  "path": "/bfd/all-sessions/all-session/running/remote-discriminator",
+                  "type": "number",
+                  "label": "remote-discriminator",
+                  "readonly": true
+                },
+                {
+                  "path": "/bfd/all-sessions/all-session/running/state",
+                  "type": "enum",
+                  "label": "state",
+                  "options": [
+                    {
+                      "label": "admin-down",
+                      "value": "admin-down"
+                    },
+                    {
+                      "label": "down",
+                      "value": "down"
+                    },
+                    {
+                      "label": "init",
+                      "value": "init"
+                    },
+                    {
+                      "label": "up",
+                      "value": "up"
+                    }
+                  ],
+                  "readonly": true
+                },
+                {
+                  "path": "/bfd/all-sessions/all-session/running/ttl",
+                  "type": "number",
+                  "label": "ttl",
+                  "minimum": 1,
+                  "maximum": 255,
+                  "readonly": true
+                },
+                {
+                  "path": "/bfd/all-sessions/all-session/running/tx-timer-id",
+                  "type": "number",
+                  "label": "tx-timer-id",
+                  "readonly": true
+                },
+                {
+                  "path": "/bfd/all-sessions/all-session/running/udp-destination-port",
+                  "type": "number",
+                  "label": "udp-destination-port",
+                  "readonly": true
+                },
+                {
+                  "path": "/bfd/all-sessions/all-session/running/wtr-timer-id",
+                  "type": "number",
+                  "label": "wtr-timer-id",
+                  "readonly": true
+                }
+              ]
+            },
+            {
+              "path": "/bfd/all-sessions/all-session/segment-list-id",
+              "type": "number",
+              "label": "segment-list-id",
+              "minimum": 1,
+              "maximum": 4294967295,
+              "readonly": true
+            },
+            {
+              "path": "/bfd/all-sessions/all-session/shut-down",
+              "type": "boolean",
+              "label": "shut-down",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/all-sessions/all-session/source-address",
+              "type": "string",
+              "label": "source-address",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/all-sessions/all-session/statistics",
+              "type": "group",
+              "label": "statistics",
+              "readonly": true,
+              "fields": [
+                {
+                  "path": "/bfd/all-sessions/all-session/statistics/create-time",
+                  "type": "string",
+                  "label": "create-time",
+                  "pattern": "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?(Z|[\\+\\-]\\d{2}:\\d{2})",
+                  "readonly": true
+                },
+                {
+                  "path": "/bfd/all-sessions/all-session/statistics/down-count",
+                  "type": "number",
+                  "label": "down-count",
+                  "readonly": true
+                },
+                {
+                  "path": "/bfd/all-sessions/all-session/statistics/last-down-time",
+                  "type": "string",
+                  "label": "last-down-time",
+                  "pattern": "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?(Z|[\\+\\-]\\d{2}:\\d{2})",
+                  "readonly": true
+                },
+                {
+                  "path": "/bfd/all-sessions/all-session/statistics/last-up-time",
+                  "type": "string",
+                  "label": "last-up-time",
+                  "pattern": "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?(Z|[\\+\\-]\\d{2}:\\d{2})",
+                  "readonly": true
+                },
+                {
+                  "path": "/bfd/all-sessions/all-session/statistics/lsp-ping-count",
+                  "type": "number",
+                  "label": "lsp-ping-count",
+                  "readonly": true
+                },
+                {
+                  "path": "/bfd/all-sessions/all-session/statistics/receive-bad-packet",
+                  "type": "number",
+                  "label": "receive-bad-packet",
+                  "readonly": true
+                },
+                {
+                  "path": "/bfd/all-sessions/all-session/statistics/receive-packet",
+                  "type": "number",
+                  "label": "receive-packet",
+                  "readonly": true
+                },
+                {
+                  "path": "/bfd/all-sessions/all-session/statistics/send-bad-packet",
+                  "type": "number",
+                  "label": "send-bad-packet",
+                  "readonly": true
+                },
+                {
+                  "path": "/bfd/all-sessions/all-session/statistics/send-packet",
+                  "type": "number",
+                  "label": "send-packet",
+                  "readonly": true
+                },
+                {
+                  "path": "/bfd/all-sessions/all-session/statistics/short-break-count",
+                  "type": "number",
+                  "label": "short-break-count",
+                  "readonly": true
+                },
+                {
+                  "path": "/bfd/all-sessions/all-session/statistics/time-from-create",
+                  "type": "string",
+                  "label": "time-from-create",
+                  "readonly": true
+                },
+                {
+                  "path": "/bfd/all-sessions/all-session/statistics/time-from-down",
+                  "type": "string",
+                  "label": "time-from-down",
+                  "readonly": true
+                },
+                {
+                  "path": "/bfd/all-sessions/all-session/statistics/time-from-up",
+                  "type": "string",
+                  "label": "time-from-up",
+                  "readonly": true
+                }
+              ]
+            },
+            {
+              "path": "/bfd/all-sessions/all-session/swap-vc-label",
+              "type": "number",
+              "label": "swap-vc-label",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/all-sessions/all-session/te-backup",
+              "type": "enum",
+              "label": "te-backup",
+              "options": [
+                {
+                  "label": "backup",
+                  "value": "backup"
+                },
+                {
+                  "label": "none",
+                  "value": "none"
+                },
+                {
+                  "label": "primary",
+                  "value": "primary"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "path": "/bfd/all-sessions/all-session/tos-exp",
+              "type": "number",
+              "label": "tos-exp",
+              "maximum": 7,
+              "readonly": true
+            },
+            {
+              "path": "/bfd/all-sessions/all-session/track-interface",
+              "type": "string",
+              "label": "track-interface",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/all-sessions/all-session/tunnel-name",
+              "type": "string",
+              "label": "tunnel-name",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/all-sessions/all-session/type",
+              "type": "enum",
+              "label": "type",
+              "options": [
+                {
+                  "label": "bgp-tnl",
+                  "value": "bgp-tnl"
+                },
+                {
+                  "label": "ldp-lsp",
+                  "value": "ldp-lsp"
+                },
+                {
+                  "label": "ldp-tnl",
+                  "value": "ldp-tnl"
+                },
+                {
+                  "label": "multi-hop-ip",
+                  "value": "multi-hop-ip"
+                },
+                {
+                  "label": "p2mp-ldp",
+                  "value": "p2mp-ldp"
+                },
+                {
+                  "label": "p2mp-te",
+                  "value": "p2mp-te"
+                },
+                {
+                  "label": "sid-list",
+                  "value": "sid-list"
+                },
+                {
+                  "label": "single-hop-ip",
+                  "value": "single-hop-ip"
+                },
+                {
+                  "label": "sr-be-tnl",
+                  "value": "sr-be-tnl"
+                },
+                {
+                  "label": "static-lsp",
+                  "value": "static-lsp"
+                },
+                {
+                  "label": "te-ldp",
+                  "value": "te-ldp"
+                },
+                {
+                  "label": "tunnel",
+                  "value": "tunnel"
+                },
+                {
+                  "label": "vll-pw",
+                  "value": "vll-pw"
+                },
+                {
+                  "label": "vsi-pw",
+                  "value": "vsi-pw"
+                },
+                {
+                  "label": "vxlan",
+                  "value": "vxlan"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "path": "/bfd/all-sessions/all-session/vc-id",
+              "type": "number",
+              "label": "vc-id",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/all-sessions/all-session/vrf-name",
+              "type": "string",
+              "label": "vrf-name",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/all-sessions/all-session/vsi-name",
+              "type": "string",
+              "label": "vsi-name",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/all-sessions/all-session/vsi-peer-address",
+              "type": "string",
+              "label": "vsi-peer-address",
+              "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/all-sessions/all-session/wtr-timer-int",
+              "type": "number",
+              "label": "wtr-timer-int",
+              "minimum": 1,
+              "maximum": 60,
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/bfd/authentication-keys",
+      "type": "group",
+      "label": "authentication-keys",
+      "fields": [
+        {
+          "path": "/bfd/authentication-keys/authentication-key",
+          "type": "list",
+          "label": "authentication-key",
+          "fields": [
+            {
+              "path": "/bfd/authentication-keys/authentication-key/auth-algorithm",
+              "type": "enum",
+              "label": "auth-algorithm",
+              "required": true,
+              "options": [
+                {
+                  "label": "met-sha1",
+                  "value": "met-sha1"
+                },
+                {
+                  "label": "none",
+                  "value": "none"
+                }
+              ],
+              "must": [
+                {
+                  "expr": "../auth-algorithm='met-sha1'"
+                }
+              ]
+            },
+            {
+              "path": "/bfd/authentication-keys/authentication-key/cipher-string",
+              "type": "string",
+              "label": "cipher-string",
+              "required": true
+            },
+            {
+              "path": "/bfd/authentication-keys/authentication-key/key-id",
+              "type": "number",
+              "label": "key-id",
+              "required": true,
+              "minimum": 1,
+              "maximum": 255
+            },
+            {
+              "path": "/bfd/authentication-keys/authentication-key/peer-ip",
+              "type": "string",
+              "label": "peer-ip",
+              "isKey": true
+            },
+            {
+              "path": "/bfd/authentication-keys/authentication-key/session-type",
+              "type": "enum",
+              "label": "session-type",
+              "options": [
+                {
+                  "label": "ip-multi-hop",
+                  "value": "ip-multi-hop"
+                },
+                {
+                  "label": "ip-single-hop",
+                  "value": "ip-single-hop"
+                },
+                {
+                  "label": "lsp-tunnel",
+                  "value": "lsp-tunnel"
+                },
+                {
+                  "label": "mpls-passive",
+                  "value": "mpls-passive"
+                }
+              ],
+              "isKey": true
+            },
+            {
+              "path": "/bfd/authentication-keys/authentication-key/vpn-name",
+              "type": "string",
+              "label": "vpn-name",
+              "must": [
+                {
+                  "expr": "(contains(../peer-ip,':') and /ni:network-instance/ni:instances/ni:instance[ni:name = current()]/l3vpn:afs/l3vpn:af[l3vpn:type='ipv6-unicast']) or (not(contains(../peer-ip,':')) and /ni:network-instance/ni:instances/ni:instance[ni:name = current()]/l3vpn:afs/l3vpn:af[l3vpn:type='ipv4-unicast']) or (../vpn-name = '_public_')"
+                }
+              ],
+              "isKey": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/bfd/bfd-bundle-sessions",
+      "type": "group",
+      "label": "bfd-bundle-sessions",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/bfd/bfd-bundle-sessions/bfd-bundle-session",
+          "type": "list",
+          "label": "bfd-bundle-session",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/bfd/bfd-bundle-sessions/bfd-bundle-session/act-detect-multiplier",
+              "type": "number",
+              "label": "act-detect-multiplier",
+              "minimum": 3,
+              "maximum": 50,
+              "readonly": true
+            },
+            {
+              "path": "/bfd/bfd-bundle-sessions/bfd-bundle-session/act-rx-interval",
+              "type": "number",
+              "label": "act-rx-interval",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/bfd-bundle-sessions/bfd-bundle-session/act-tx-interval",
+              "type": "number",
+              "label": "act-tx-interval",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/bfd-bundle-sessions/bfd-bundle-session/bind-application",
+              "type": "string",
+              "label": "bind-application",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/bfd-bundle-sessions/bfd-bundle-session/bundle-mode",
+              "type": "enum",
+              "label": "bundle-mode",
+              "options": [
+                {
+                  "label": "bundle-com-unshare",
+                  "value": "bundle-com-unshare"
+                },
+                {
+                  "label": "bundle-compatible",
+                  "value": "bundle-compatible"
+                },
+                {
+                  "label": "bundle-standard",
+                  "value": "bundle-standard"
+                },
+                {
+                  "label": "bundle-std-unshare",
+                  "value": "bundle-std-unshare"
+                },
+                {
+                  "label": "cfg-from-master",
+                  "value": "cfg-from-master"
+                },
+                {
+                  "label": "cfg-remote-ap",
+                  "value": "cfg-remote-ap"
+                },
+                {
+                  "label": "none",
+                  "value": "none"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "path": "/bfd/bfd-bundle-sessions/bfd-bundle-session/create-type",
+              "type": "enum",
+              "label": "create-type",
+              "options": [
+                {
+                  "label": "passive",
+                  "value": "passive"
+                },
+                {
+                  "label": "session-auto",
+                  "value": "session-auto"
+                },
+                {
+                  "label": "session-dynamic",
+                  "value": "session-dynamic"
+                },
+                {
+                  "label": "session-static",
+                  "value": "session-static"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "path": "/bfd/bfd-bundle-sessions/bfd-bundle-session/dest-port",
+              "type": "number",
+              "label": "dest-port",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/bfd-bundle-sessions/bfd-bundle-session/destination-address",
+              "type": "string",
+              "label": "destination-address",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/bfd-bundle-sessions/bfd-bundle-session/detect-mode",
+              "type": "enum",
+              "label": "detect-mode",
+              "options": [
+                {
+                  "label": "async-one-arm-echo",
+                  "value": "async-one-arm-echo"
+                },
+                {
+                  "label": "async-with-echo",
+                  "value": "async-with-echo"
+                },
+                {
+                  "label": "async-without-echo",
+                  "value": "async-without-echo"
+                },
+                {
+                  "label": "demand-with-echo",
+                  "value": "demand-with-echo"
+                },
+                {
+                  "label": "demand-without-echo",
+                  "value": "demand-without-echo"
+                },
+                {
+                  "label": "seamless-without-echo",
+                  "value": "seamless-without-echo"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "path": "/bfd/bfd-bundle-sessions/bfd-bundle-session/detect-multiplier",
+              "type": "number",
+              "label": "detect-multiplier",
+              "minimum": 3,
+              "maximum": 50,
+              "readonly": true
+            },
+            {
+              "path": "/bfd/bfd-bundle-sessions/bfd-bundle-session/detect-time",
+              "type": "number",
+              "label": "detect-time",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/bfd-bundle-sessions/bfd-bundle-session/disp-session-type",
+              "type": "enum",
+              "label": "disp-session-type",
+              "options": [
+                {
+                  "label": "group",
+                  "value": "group"
+                },
+                {
+                  "label": "link-bundle",
+                  "value": "link-bundle"
+                },
+                {
+                  "label": "perlink",
+                  "value": "perlink"
+                }
+              ],
+              "readonly": true,
+              "supportFilter": true
+            },
+            {
+              "path": "/bfd/bfd-bundle-sessions/bfd-bundle-session/fsm-board-slot",
+              "type": "string",
+              "label": "fsm-board-slot",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/bfd-bundle-sessions/bfd-bundle-session/link-type",
+              "type": "enum",
+              "label": "link-type",
+              "options": [
+                {
+                  "label": "bgp-tunnel",
+                  "value": "bgp-tunnel"
+                },
+                {
+                  "label": "ip",
+                  "value": "ip"
+                },
+                {
+                  "label": "ldp-lsp",
+                  "value": "ldp-lsp"
+                },
+                {
+                  "label": "ldp-tunnel",
+                  "value": "ldp-tunnel"
+                },
+                {
+                  "label": "other",
+                  "value": "other"
+                },
+                {
+                  "label": "p2mp-ldp",
+                  "value": "p2mp-ldp"
+                },
+                {
+                  "label": "p2mp-te",
+                  "value": "p2mp-te"
+                },
+                {
+                  "label": "sid-list",
+                  "value": "sid-list"
+                },
+                {
+                  "label": "sr-be-tunnel",
+                  "value": "sr-be-tunnel"
+                },
+                {
+                  "label": "static-lsp",
+                  "value": "static-lsp"
+                },
+                {
+                  "label": "te-lsp",
+                  "value": "te-lsp"
+                },
+                {
+                  "label": "te-tunnel",
+                  "value": "te-tunnel"
+                },
+                {
+                  "label": "vll-pw",
+                  "value": "vll-pw"
+                },
+                {
+                  "label": "vsi-pw",
+                  "value": "vsi-pw"
+                },
+                {
+                  "label": "vxlan",
+                  "value": "vxlan"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "path": "/bfd/bfd-bundle-sessions/bfd-bundle-session/local-diag",
+              "type": "enum",
+              "label": "local-diag",
+              "options": [
+                {
+                  "label": "admin-down",
+                  "value": "admin-down"
+                },
+                {
+                  "label": "concat-path-down",
+                  "value": "concat-path-down"
+                },
+                {
+                  "label": "detect-down",
+                  "value": "detect-down"
+                },
+                {
+                  "label": "echo-down",
+                  "value": "echo-down"
+                },
+                {
+                  "label": "forwarding-reset",
+                  "value": "forwarding-reset"
+                },
+                {
+                  "label": "neighbor-down",
+                  "value": "neighbor-down"
+                },
+                {
+                  "label": "none",
+                  "value": "none"
+                },
+                {
+                  "label": "path-down",
+                  "value": "path-down"
+                },
+                {
+                  "label": "receive-admin-down",
+                  "value": "receive-admin-down"
+                },
+                {
+                  "label": "reverse-concat-path-down",
+                  "value": "reverse-concat-path-down"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "path": "/bfd/bfd-bundle-sessions/bfd-bundle-session/local-discriminator",
+              "type": "number",
+              "label": "local-discriminator",
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/bfd/bfd-bundle-sessions/bfd-bundle-session/main-session-name",
+              "type": "string",
+              "label": "main-session-name",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/bfd-bundle-sessions/bfd-bundle-session/main-sub-role",
+              "type": "enum",
+              "label": "main-sub-role",
+              "options": [
+                {
+                  "label": "bundle-main",
+                  "value": "bundle-main"
+                },
+                {
+                  "label": "bundle-sub",
+                  "value": "bundle-sub"
+                },
+                {
+                  "label": "none",
+                  "value": "none"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "path": "/bfd/bfd-bundle-sessions/bfd-bundle-session/min-rx-interval",
+              "type": "number",
+              "label": "min-rx-interval",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/bfd-bundle-sessions/bfd-bundle-session/min-tx-interval",
+              "type": "number",
+              "label": "min-tx-interval",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/bfd-bundle-sessions/bfd-bundle-session/out-if-name",
+              "type": "string",
+              "label": "out-if-name",
+              "readonly": true,
+              "supportFilter": true
+            },
+            {
+              "path": "/bfd/bfd-bundle-sessions/bfd-bundle-session/pw-secondary",
+              "type": "boolean",
+              "label": "pw-secondary",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/bfd-bundle-sessions/bfd-bundle-session/remote-discriminator",
+              "type": "number",
+              "label": "remote-discriminator",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/bfd-bundle-sessions/bfd-bundle-session/session-name",
+              "type": "string",
+              "label": "session-name",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/bfd-bundle-sessions/bfd-bundle-session/source-address",
+              "type": "string",
+              "label": "source-address",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/bfd-bundle-sessions/bfd-bundle-session/state",
+              "type": "enum",
+              "label": "state",
+              "options": [
+                {
+                  "label": "admin-down",
+                  "value": "admin-down"
+                },
+                {
+                  "label": "down",
+                  "value": "down"
+                },
+                {
+                  "label": "init",
+                  "value": "init"
+                },
+                {
+                  "label": "up",
+                  "value": "up"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "path": "/bfd/bfd-bundle-sessions/bfd-bundle-session/sub-session-count",
+              "type": "number",
+              "label": "sub-session-count",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/bfd-bundle-sessions/bfd-bundle-session/te-backup",
+              "type": "boolean",
+              "label": "te-backup",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/bfd-bundle-sessions/bfd-bundle-session/tos-exp",
+              "type": "number",
+              "label": "tos-exp",
+              "maximum": 7,
+              "readonly": true
+            },
+            {
+              "path": "/bfd/bfd-bundle-sessions/bfd-bundle-session/tunnel-id",
+              "type": "number",
+              "label": "tunnel-id",
+              "minimum": 1,
+              "maximum": 65535,
+              "readonly": true
+            },
+            {
+              "path": "/bfd/bfd-bundle-sessions/bfd-bundle-session/vrf-name",
+              "type": "string",
+              "label": "vrf-name",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/bfd-bundle-sessions/bfd-bundle-session/vsi-name",
+              "type": "string",
+              "label": "vsi-name",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/bfd-bundle-sessions/bfd-bundle-session/wtr-timer-int",
+              "type": "number",
+              "label": "wtr-timer-int",
+              "minimum": 1,
+              "maximum": 3600000,
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/bfd/bind-interfaces",
+      "type": "group",
+      "label": "bind-interfaces",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/bfd/bind-interfaces/bind-interface",
+          "type": "list",
+          "label": "bind-interface",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/bfd/bind-interfaces/bind-interface/if-name",
+              "type": "string",
+              "label": "if-name",
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/bfd/bind-interfaces/bind-interface/if-oper-status",
+              "type": "enum",
+              "label": "if-oper-status",
+              "options": [
+                {
+                  "label": "down",
+                  "value": "down"
+                },
+                {
+                  "label": "up",
+                  "value": "up"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "path": "/bfd/bind-interfaces/bind-interface/session-count",
+              "type": "number",
+              "label": "session-count",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/bfd/crc-ip-sessions",
+      "type": "group",
+      "label": "crc-ip-sessions",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/bfd/crc-ip-sessions/crc-ip-session",
+          "type": "list",
+          "label": "crc-ip-session",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/bfd/crc-ip-sessions/crc-ip-session/actual-tx-interval",
+              "type": "number",
+              "label": "actual-tx-interval",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/crc-ip-sessions/crc-ip-session/dest-port",
+              "type": "number",
+              "label": "dest-port",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/crc-ip-sessions/crc-ip-session/destination-address",
+              "type": "string",
+              "label": "destination-address",
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/bfd/crc-ip-sessions/crc-ip-session/detect-multiplier",
+              "type": "number",
+              "label": "detect-multiplier",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/crc-ip-sessions/crc-ip-session/fault-type",
+              "type": "enum",
+              "label": "fault-type",
+              "options": [
+                {
+                  "label": "local-interface-fault",
+                  "value": "local-interface-fault"
+                },
+                {
+                  "label": "local-interface-fault-and-remote-interface-fault",
+                  "value": "local-interface-fault-and-remote-interface-fault"
+                },
+                {
+                  "label": "remote-interface-fault",
+                  "value": "remote-interface-fault"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "path": "/bfd/crc-ip-sessions/crc-ip-session/fsm-board-id",
+              "type": "number",
+              "label": "fsm-board-id",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/crc-ip-sessions/crc-ip-session/if-name",
+              "type": "string",
+              "label": "if-name",
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/bfd/crc-ip-sessions/crc-ip-session/local-bit-err-rate",
+              "type": "string",
+              "label": "local-bit-err-rate",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/crc-ip-sessions/crc-ip-session/max-tx-interval",
+              "type": "number",
+              "label": "max-tx-interval",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/crc-ip-sessions/crc-ip-session/min-tx-interval",
+              "type": "number",
+              "label": "min-tx-interval",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/crc-ip-sessions/crc-ip-session/remote-bit-err-rate",
+              "type": "string",
+              "label": "remote-bit-err-rate",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/crc-ip-sessions/crc-ip-session/session-type",
+              "type": "enum",
+              "label": "session-type",
+              "options": [
+                {
+                  "label": "ip-peer",
+                  "value": "ip-peer"
+                },
+                {
+                  "label": "p",
+                  "value": "p"
+                },
+                {
+                  "label": "pe",
+                  "value": "pe"
+                },
+                {
+                  "label": "section",
+                  "value": "section"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "path": "/bfd/crc-ip-sessions/crc-ip-session/source-address",
+              "type": "string",
+              "label": "source-address",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/crc-ip-sessions/crc-ip-session/tos-exp",
+              "type": "number",
+              "label": "tos-exp",
+              "maximum": 7,
+              "readonly": true
+            },
+            {
+              "path": "/bfd/crc-ip-sessions/crc-ip-session/vrf-name",
+              "type": "string",
+              "label": "vrf-name",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/bfd/crc-lsp-sessions",
+      "type": "group",
+      "label": "crc-lsp-sessions",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/bfd/crc-lsp-sessions/crc-lsp-session",
+          "type": "list",
+          "label": "crc-lsp-session",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/bfd/crc-lsp-sessions/crc-lsp-session/actual-tx-interval",
+              "type": "number",
+              "label": "actual-tx-interval",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/crc-lsp-sessions/crc-lsp-session/dest-port",
+              "type": "number",
+              "label": "dest-port",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/crc-lsp-sessions/crc-lsp-session/destination-address",
+              "type": "string",
+              "label": "destination-address",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/crc-lsp-sessions/crc-lsp-session/detect-multiplier",
+              "type": "number",
+              "label": "detect-multiplier",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/crc-lsp-sessions/crc-lsp-session/fault-type",
+              "type": "enum",
+              "label": "fault-type",
+              "options": [
+                {
+                  "label": "interface-fault",
+                  "value": "interface-fault"
+                },
+                {
+                  "label": "interface-fault-and-remote-pe-fault",
+                  "value": "interface-fault-and-remote-pe-fault"
+                },
+                {
+                  "label": "interface-fault-and-transit-fault",
+                  "value": "interface-fault-and-transit-fault"
+                },
+                {
+                  "label": "interface-fault-and-transit-fault-and-remote-pe-fault",
+                  "value": "interface-fault-and-transit-fault-and-remote-pe-fault"
+                },
+                {
+                  "label": "remote-pe-fault",
+                  "value": "remote-pe-fault"
+                },
+                {
+                  "label": "transit-fault",
+                  "value": "transit-fault"
+                },
+                {
+                  "label": "transit-fault-and-remote-pe-fault",
+                  "value": "transit-fault-and-remote-pe-fault"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "path": "/bfd/crc-lsp-sessions/crc-lsp-session/fsm-board-id",
+              "type": "number",
+              "label": "fsm-board-id",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/crc-lsp-sessions/crc-lsp-session/ingress-lsr-id",
+              "type": "string",
+              "label": "ingress-lsr-id",
+              "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?",
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/bfd/crc-lsp-sessions/crc-lsp-session/lsp-id",
+              "type": "number",
+              "label": "lsp-id",
+              "minimum": 1,
+              "maximum": 65535,
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/bfd/crc-lsp-sessions/crc-lsp-session/lsp-inbount-interfaces",
+              "type": "leaf-list",
+              "label": "lsp-inbount-interfaces",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/crc-lsp-sessions/crc-lsp-session/lsp-role",
+              "type": "enum",
+              "label": "lsp-role",
+              "options": [
+                {
+                  "label": "backup",
+                  "value": "backup"
+                },
+                {
+                  "label": "invalid",
+                  "value": "invalid"
+                },
+                {
+                  "label": "primary",
+                  "value": "primary"
+                }
+              ],
+              "readonly": true,
+              "supportFilter": true
+            },
+            {
+              "path": "/bfd/crc-lsp-sessions/crc-lsp-session/lsp-token",
+              "type": "number",
+              "label": "lsp-token",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/crc-lsp-sessions/crc-lsp-session/max-tx-interval",
+              "type": "number",
+              "label": "max-tx-interval",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/crc-lsp-sessions/crc-lsp-session/min-tx-interval",
+              "type": "number",
+              "label": "min-tx-interval",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/crc-lsp-sessions/crc-lsp-session/out-if-name",
+              "type": "string",
+              "label": "out-if-name",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/crc-lsp-sessions/crc-lsp-session/session-type",
+              "type": "enum",
+              "label": "session-type",
+              "options": [
+                {
+                  "label": "ip-peer",
+                  "value": "ip-peer"
+                },
+                {
+                  "label": "p",
+                  "value": "p"
+                },
+                {
+                  "label": "pe",
+                  "value": "pe"
+                },
+                {
+                  "label": "section",
+                  "value": "section"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "path": "/bfd/crc-lsp-sessions/crc-lsp-session/source-address",
+              "type": "string",
+              "label": "source-address",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/crc-lsp-sessions/crc-lsp-session/tos-exp",
+              "type": "number",
+              "label": "tos-exp",
+              "maximum": 7,
+              "readonly": true
+            },
+            {
+              "path": "/bfd/crc-lsp-sessions/crc-lsp-session/tunnel-id",
+              "type": "number",
+              "label": "tunnel-id",
+              "minimum": 1,
+              "maximum": 65535,
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/bfd/crc-lsp-sessions/crc-lsp-session/tunnel-name",
+              "type": "string",
+              "label": "tunnel-name",
+              "readonly": true,
+              "supportFilter": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/bfd/crc-sec-sessions",
+      "type": "group",
+      "label": "crc-sec-sessions",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/bfd/crc-sec-sessions/crc-sec-session",
+          "type": "list",
+          "label": "crc-sec-session",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/bfd/crc-sec-sessions/crc-sec-session/actual-tx-interval",
+              "type": "number",
+              "label": "actual-tx-interval",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/crc-sec-sessions/crc-sec-session/dest-port",
+              "type": "number",
+              "label": "dest-port",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/crc-sec-sessions/crc-sec-session/destination-address",
+              "type": "string",
+              "label": "destination-address",
+              "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/crc-sec-sessions/crc-sec-session/detect-multiplier",
+              "type": "number",
+              "label": "detect-multiplier",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/crc-sec-sessions/crc-sec-session/fault-type",
+              "type": "enum",
+              "label": "fault-type",
+              "options": [
+                {
+                  "label": "local-section-fault",
+                  "value": "local-section-fault"
+                },
+                {
+                  "label": "local-section-fault-and-remote-section-fault",
+                  "value": "local-section-fault-and-remote-section-fault"
+                },
+                {
+                  "label": "remote-section-fault",
+                  "value": "remote-section-fault"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "path": "/bfd/crc-sec-sessions/crc-sec-session/fsm-board-id",
+              "type": "number",
+              "label": "fsm-board-id",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/crc-sec-sessions/crc-sec-session/if-name",
+              "type": "string",
+              "label": "if-name",
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/bfd/crc-sec-sessions/crc-sec-session/max-tx-interval",
+              "type": "number",
+              "label": "max-tx-interval",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/crc-sec-sessions/crc-sec-session/min-tx-interval",
+              "type": "number",
+              "label": "min-tx-interval",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/crc-sec-sessions/crc-sec-session/session-type",
+              "type": "enum",
+              "label": "session-type",
+              "options": [
+                {
+                  "label": "ip-peer",
+                  "value": "ip-peer"
+                },
+                {
+                  "label": "p",
+                  "value": "p"
+                },
+                {
+                  "label": "pe",
+                  "value": "pe"
+                },
+                {
+                  "label": "section",
+                  "value": "section"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "path": "/bfd/crc-sec-sessions/crc-sec-session/tos-exp",
+              "type": "number",
+              "label": "tos-exp",
+              "maximum": 7,
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/bfd/discriminator-use",
+      "type": "group",
+      "label": "discriminator-use",
+      "fields": [
+        {
+          "path": "/bfd/discriminator-use/is-used",
+          "type": "list",
+          "label": "is-used",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/bfd/discriminator-use/is-used/is-used",
+              "type": "boolean",
+              "label": "is-used",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/discriminator-use/is-used/local-discriminator",
+              "type": "number",
+              "label": "local-discriminator",
+              "minimum": 1,
+              "maximum": 16384,
+              "readonly": true,
+              "isKey": true
+            }
+          ]
+        },
+        {
+          "path": "/bfd/discriminator-use/reserved-discriminators",
+          "type": "leaf-list",
+          "label": "reserved-discriminators",
+          "minimum": 1,
+          "maximum": 16384,
+          "readonly": true
+        },
+        {
+          "path": "/bfd/discriminator-use/reserved-num",
+          "type": "number",
+          "label": "reserved-num",
+          "minimum": 1,
+          "maximum": 500
+        }
+      ]
+    },
+    {
+      "path": "/bfd/global",
+      "type": "group",
+      "label": "global",
+      "fields": [
+        {
+          "path": "/bfd/global/basic-acl-num",
+          "type": "string",
+          "label": "basic-acl-num",
+          "when": "(../echo-passive='true')",
+          "must": [
+            {
+              "expr": "/acl:acl/acl:groups/acl:group[acl:identity = current()]/acl:type = 'basic'"
+            }
+          ]
+        },
+        {
+          "path": "/bfd/global/default-ip",
+          "type": "string",
+          "label": "default-ip",
+          "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?"
+        },
+        {
+          "path": "/bfd/global/delay-up-timer",
+          "type": "number",
+          "label": "delay-up-timer",
+          "minimum": 1,
+          "maximum": 600
+        },
+        {
+          "path": "/bfd/global/echo-passive",
+          "type": "boolean",
+          "label": "echo-passive"
+        },
+        {
+          "path": "/bfd/global/init-wait-time",
+          "type": "number",
+          "label": "init-wait-time",
+          "minimum": 1,
+          "maximum": 3600000,
+          "must": [
+            {
+              "expr": "../init-wait-time \u003c ../max-wait-time"
+            }
+          ]
+        },
+        {
+          "path": "/bfd/global/ipv6-trap-separated",
+          "type": "boolean",
+          "label": "ipv6-trap-separated"
+        },
+        {
+          "path": "/bfd/global/link-bundle-init-time",
+          "type": "number",
+          "label": "link-bundle-init-time",
+          "minimum": 6000,
+          "maximum": 3600000,
+          "must": [
+            {
+              "expr": "../link-bundle-init-time \u003c ../link-bundle-max-time"
+            }
+          ]
+        },
+        {
+          "path": "/bfd/global/link-bundle-l3-mode",
+          "type": "boolean",
+          "label": "link-bundle-l3-mode"
+        },
+        {
+          "path": "/bfd/global/link-bundle-max-time",
+          "type": "number",
+          "label": "link-bundle-max-time",
+          "minimum": 20000,
+          "maximum": 3600000,
+          "must": [
+            {
+              "expr": "(../link-bundle-init-time \u003c ../link-bundle-max-time) and (../link-bundle-second-time \u003c ../link-bundle-max-time)"
+            }
+          ]
+        },
+        {
+          "path": "/bfd/global/link-bundle-second-time",
+          "type": "number",
+          "label": "link-bundle-second-time",
+          "minimum": 10000,
+          "maximum": 3600000,
+          "must": [
+            {
+              "expr": "../link-bundle-second-time \u003c ../link-bundle-max-time"
+            }
+          ]
+        },
+        {
+          "path": "/bfd/global/lsp-path-check",
+          "type": "boolean",
+          "label": "lsp-path-check"
+        },
+        {
+          "path": "/bfd/global/max-wait-time",
+          "type": "number",
+          "label": "max-wait-time",
+          "minimum": 1,
+          "maximum": 3600000,
+          "must": [
+            {
+              "expr": "(../init-wait-time \u003c ../max-wait-time) and (../second-wait-time \u003c ../max-wait-time)"
+            }
+          ]
+        },
+        {
+          "path": "/bfd/global/mpls-passive",
+          "type": "boolean",
+          "label": "mpls-passive"
+        },
+        {
+          "path": "/bfd/global/ping-interval",
+          "type": "number",
+          "label": "ping-interval",
+          "minimum": 30,
+          "maximum": 600
+        },
+        {
+          "path": "/bfd/global/process-central-slot",
+          "type": "string",
+          "label": "process-central-slot",
+          "pattern": "(^\\w{0,3}\\d{0,2}(/\\d{1,2}){0,1}$)",
+          "when": "../process-mode = 'central'"
+        },
+        {
+          "path": "/bfd/global/process-central-slot2",
+          "type": "string",
+          "label": "process-central-slot2",
+          "pattern": "(^\\w{0,3}\\d{0,2}(/\\d{1,2}){0,1}$)",
+          "when": "../process-mode = 'central' and ../process-central-slot",
+          "must": [
+            {
+              "expr": "../process-central-slot2 != ../process-central-slot"
+            }
+          ]
+        },
+        {
+          "path": "/bfd/global/process-mode",
+          "type": "enum",
+          "label": "process-mode",
+          "options": [
+            {
+              "label": "central",
+              "value": "central"
+            },
+            {
+              "label": "distribute",
+              "value": "distribute"
+            }
+          ]
+        },
+        {
+          "path": "/bfd/global/second-wait-time",
+          "type": "number",
+          "label": "second-wait-time",
+          "minimum": 1,
+          "maximum": 3600000,
+          "must": [
+            {
+              "expr": "../second-wait-time \u003c ../max-wait-time"
+            }
+          ]
+        },
+        {
+          "path": "/bfd/global/tos-exp",
+          "type": "number",
+          "label": "tos-exp",
+          "maximum": 7
+        },
+        {
+          "path": "/bfd/global/tos-exp-static",
+          "type": "number",
+          "label": "tos-exp-static",
+          "maximum": 7
+        }
+      ]
+    },
+    {
+      "path": "/bfd/mul-cast-sessions",
+      "type": "group",
+      "label": "mul-cast-sessions",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/bfd/mul-cast-sessions/mul-cast-session",
+          "type": "list",
+          "label": "mul-cast-session",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/bfd/mul-cast-sessions/mul-cast-session/bind-application",
+              "type": "string",
+              "label": "bind-application",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/mul-cast-sessions/mul-cast-session/create-type",
+              "type": "enum",
+              "label": "create-type",
+              "options": [
+                {
+                  "label": "session-dynamic",
+                  "value": "session-dynamic"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "path": "/bfd/mul-cast-sessions/mul-cast-session/description",
+              "type": "string",
+              "label": "description",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/mul-cast-sessions/mul-cast-session/destination-address",
+              "type": "string",
+              "label": "destination-address",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/mul-cast-sessions/mul-cast-session/detect-multiplier",
+              "type": "number",
+              "label": "detect-multiplier",
+              "minimum": 3,
+              "maximum": 50,
+              "readonly": true
+            },
+            {
+              "path": "/bfd/mul-cast-sessions/mul-cast-session/fsm-board-slot",
+              "type": "string",
+              "label": "fsm-board-slot",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/mul-cast-sessions/mul-cast-session/link-type",
+              "type": "enum",
+              "label": "link-type",
+              "options": [
+                {
+                  "label": "bgp-tunnel",
+                  "value": "bgp-tunnel"
+                },
+                {
+                  "label": "ip",
+                  "value": "ip"
+                },
+                {
+                  "label": "ldp-lsp",
+                  "value": "ldp-lsp"
+                },
+                {
+                  "label": "ldp-tunnel",
+                  "value": "ldp-tunnel"
+                },
+                {
+                  "label": "other",
+                  "value": "other"
+                },
+                {
+                  "label": "p2mp-ldp",
+                  "value": "p2mp-ldp"
+                },
+                {
+                  "label": "p2mp-te",
+                  "value": "p2mp-te"
+                },
+                {
+                  "label": "sid-list",
+                  "value": "sid-list"
+                },
+                {
+                  "label": "sr-be-tunnel",
+                  "value": "sr-be-tunnel"
+                },
+                {
+                  "label": "static-lsp",
+                  "value": "static-lsp"
+                },
+                {
+                  "label": "te-lsp",
+                  "value": "te-lsp"
+                },
+                {
+                  "label": "te-tunnel",
+                  "value": "te-tunnel"
+                },
+                {
+                  "label": "vll-pw",
+                  "value": "vll-pw"
+                },
+                {
+                  "label": "vsi-pw",
+                  "value": "vsi-pw"
+                },
+                {
+                  "label": "vxlan",
+                  "value": "vxlan"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "path": "/bfd/mul-cast-sessions/mul-cast-session/local-discriminator",
+              "type": "number",
+              "label": "local-discriminator",
+              "minimum": 1,
+              "maximum": 32768,
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/bfd/mul-cast-sessions/mul-cast-session/lsp-id",
+              "type": "number",
+              "label": "lsp-id",
+              "minimum": 1,
+              "maximum": 65535,
+              "readonly": true
+            },
+            {
+              "path": "/bfd/mul-cast-sessions/mul-cast-session/min-rx-interval",
+              "type": "number",
+              "label": "min-rx-interval",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/mul-cast-sessions/mul-cast-session/min-tx-interval",
+              "type": "number",
+              "label": "min-tx-interval",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/mul-cast-sessions/mul-cast-session/multi-cast-session-running",
+              "type": "group",
+              "label": "multi-cast-session-running",
+              "readonly": true,
+              "fields": [
+                {
+                  "path": "/bfd/mul-cast-sessions/mul-cast-session/multi-cast-session-running/acl-num",
+                  "type": "number",
+                  "label": "acl-num",
+                  "readonly": true
+                },
+                {
+                  "path": "/bfd/mul-cast-sessions/mul-cast-session/multi-cast-session-running/act-multiplier",
+                  "type": "number",
+                  "label": "act-multiplier",
+                  "readonly": true
+                },
+                {
+                  "path": "/bfd/mul-cast-sessions/mul-cast-session/multi-cast-session-running/act-rx-interval",
+                  "type": "number",
+                  "label": "act-rx-interval",
+                  "readonly": true
+                },
+                {
+                  "path": "/bfd/mul-cast-sessions/mul-cast-session/multi-cast-session-running/act-tx-interval",
+                  "type": "number",
+                  "label": "act-tx-interval",
+                  "readonly": true
+                },
+                {
+                  "path": "/bfd/mul-cast-sessions/mul-cast-session/multi-cast-session-running/detect-mode",
+                  "type": "enum",
+                  "label": "detect-mode",
+                  "options": [
+                    {
+                      "label": "async-one-arm-echo",
+                      "value": "async-one-arm-echo"
+                    },
+                    {
+                      "label": "async-with-echo",
+                      "value": "async-with-echo"
+                    },
+                    {
+                      "label": "async-without-echo",
+                      "value": "async-without-echo"
+                    },
+                    {
+                      "label": "demand-with-echo",
+                      "value": "demand-with-echo"
+                    },
+                    {
+                      "label": "demand-without-echo",
+                      "value": "demand-without-echo"
+                    },
+                    {
+                      "label": "seamless-without-echo",
+                      "value": "seamless-without-echo"
+                    }
+                  ],
+                  "readonly": true
+                },
+                {
+                  "path": "/bfd/mul-cast-sessions/mul-cast-session/multi-cast-session-running/detect-time",
+                  "type": "number",
+                  "label": "detect-time",
+                  "readonly": true
+                },
+                {
+                  "path": "/bfd/mul-cast-sessions/mul-cast-session/multi-cast-session-running/detect-timer-id",
+                  "type": "number",
+                  "label": "detect-timer-id",
+                  "readonly": true
+                },
+                {
+                  "path": "/bfd/mul-cast-sessions/mul-cast-session/multi-cast-session-running/echo-tx-timer-id",
+                  "type": "number",
+                  "label": "echo-tx-timer-id",
+                  "readonly": true
+                },
+                {
+                  "path": "/bfd/mul-cast-sessions/mul-cast-session/multi-cast-session-running/init-timer-id",
+                  "type": "number",
+                  "label": "init-timer-id",
+                  "readonly": true
+                },
+                {
+                  "path": "/bfd/mul-cast-sessions/mul-cast-session/multi-cast-session-running/local-diag",
+                  "type": "enum",
+                  "label": "local-diag",
+                  "options": [
+                    {
+                      "label": "admin-down",
+                      "value": "admin-down"
+                    },
+                    {
+                      "label": "concat-path-down",
+                      "value": "concat-path-down"
+                    },
+                    {
+                      "label": "detect-down",
+                      "value": "detect-down"
+                    },
+                    {
+                      "label": "echo-down",
+                      "value": "echo-down"
+                    },
+                    {
+                      "label": "forwarding-reset",
+                      "value": "forwarding-reset"
+                    },
+                    {
+                      "label": "neighbor-down",
+                      "value": "neighbor-down"
+                    },
+                    {
+                      "label": "none",
+                      "value": "none"
+                    },
+                    {
+                      "label": "path-down",
+                      "value": "path-down"
+                    },
+                    {
+                      "label": "receive-admin-down",
+                      "value": "receive-admin-down"
+                    },
+                    {
+                      "label": "reverse-concat-path-down",
+                      "value": "reverse-concat-path-down"
+                    }
+                  ],
+                  "readonly": true
+                },
+                {
+                  "path": "/bfd/mul-cast-sessions/mul-cast-session/multi-cast-session-running/min-rx-interval",
+                  "type": "number",
+                  "label": "min-rx-interval",
+                  "readonly": true
+                },
+                {
+                  "path": "/bfd/mul-cast-sessions/mul-cast-session/multi-cast-session-running/min-tx-interval",
+                  "type": "number",
+                  "label": "min-tx-interval",
+                  "readonly": true
+                },
+                {
+                  "path": "/bfd/mul-cast-sessions/mul-cast-session/multi-cast-session-running/not-up-reason",
+                  "type": "enum",
+                  "label": "not-up-reason",
+                  "options": [
+                    {
+                      "label": "board-delayup",
+                      "value": "board-delayup"
+                    },
+                    {
+                      "label": "board-hardbad-macfcs-fault",
+                      "value": "board-hardbad-macfcs-fault"
+                    },
+                    {
+                      "label": "board-selecting-failed",
+                      "value": "board-selecting-failed"
+                    },
+                    {
+                      "label": "in-negotiation",
+                      "value": "in-negotiation"
+                    },
+                    {
+                      "label": "in-negotiation-1",
+                      "value": "in-negotiation-1"
+                    },
+                    {
+                      "label": "reach-centralized-mode-limit",
+                      "value": "reach-centralized-mode-limit"
+                    },
+                    {
+                      "label": "remote-rx-equal-zero",
+                      "value": "remote-rx-equal-zero"
+                    },
+                    {
+                      "label": "sess-state-up",
+                      "value": "sess-state-up"
+                    },
+                    {
+                      "label": "unsupported-tunnel-type",
+                      "value": "unsupported-tunnel-type"
+                    }
+                  ],
+                  "readonly": true
+                },
+                {
+                  "path": "/bfd/mul-cast-sessions/mul-cast-session/multi-cast-session-running/re-demand-mode",
+                  "type": "boolean",
+                  "label": "re-demand-mode",
+                  "readonly": true
+                },
+                {
+                  "path": "/bfd/mul-cast-sessions/mul-cast-session/multi-cast-session-running/remote-discriminator",
+                  "type": "number",
+                  "label": "remote-discriminator",
+                  "readonly": true
+                },
+                {
+                  "path": "/bfd/mul-cast-sessions/mul-cast-session/multi-cast-session-running/session-state",
+                  "type": "enum",
+                  "label": "session-state",
+                  "options": [
+                    {
+                      "label": "admin-down",
+                      "value": "admin-down"
+                    },
+                    {
+                      "label": "down",
+                      "value": "down"
+                    },
+                    {
+                      "label": "init",
+                      "value": "init"
+                    },
+                    {
+                      "label": "up",
+                      "value": "up"
+                    }
+                  ],
+                  "readonly": true
+                },
+                {
+                  "path": "/bfd/mul-cast-sessions/mul-cast-session/multi-cast-session-running/ttl",
+                  "type": "number",
+                  "label": "ttl",
+                  "minimum": 1,
+                  "maximum": 255,
+                  "readonly": true
+                },
+                {
+                  "path": "/bfd/mul-cast-sessions/mul-cast-session/multi-cast-session-running/tx-timer-id",
+                  "type": "number",
+                  "label": "tx-timer-id",
+                  "readonly": true
+                },
+                {
+                  "path": "/bfd/mul-cast-sessions/mul-cast-session/multi-cast-session-running/udp-dst-port",
+                  "type": "number",
+                  "label": "udp-dst-port",
+                  "readonly": true
+                },
+                {
+                  "path": "/bfd/mul-cast-sessions/mul-cast-session/multi-cast-session-running/wtr-timer-id",
+                  "type": "number",
+                  "label": "wtr-timer-id",
+                  "readonly": true
+                }
+              ]
+            },
+            {
+              "path": "/bfd/mul-cast-sessions/mul-cast-session/multicast-session-type",
+              "type": "enum",
+              "label": "multicast-session-type",
+              "options": [
+                {
+                  "label": "multi-point-client",
+                  "value": "multi-point-client"
+                },
+                {
+                  "label": "multi-point-head",
+                  "value": "multi-point-head"
+                },
+                {
+                  "label": "multi-point-tail",
+                  "value": "multi-point-tail"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "path": "/bfd/mul-cast-sessions/mul-cast-session/opaque-id",
+              "type": "string",
+              "label": "opaque-id",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/mul-cast-sessions/mul-cast-session/p2mp-id",
+              "type": "string",
+              "label": "p2mp-id",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/mul-cast-sessions/mul-cast-session/p2mp-ingress-lsr-id",
+              "type": "string",
+              "label": "p2mp-ingress-lsr-id",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/mul-cast-sessions/mul-cast-session/p2mp-tunnel-id",
+              "type": "number",
+              "label": "p2mp-tunnel-id",
+              "minimum": 1,
+              "maximum": 65535,
+              "readonly": true
+            },
+            {
+              "path": "/bfd/mul-cast-sessions/mul-cast-session/remote-discriminator",
+              "type": "number",
+              "label": "remote-discriminator",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/mul-cast-sessions/mul-cast-session/root-ip",
+              "type": "string",
+              "label": "root-ip",
+              "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?",
+              "readonly": true
+            },
+            {
+              "path": "/bfd/mul-cast-sessions/mul-cast-session/session-name",
+              "type": "string",
+              "label": "session-name",
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/bfd/mul-cast-sessions/mul-cast-session/session-type",
+              "type": "enum",
+              "label": "session-type",
+              "options": [
+                {
+                  "label": "bgp-tnl",
+                  "value": "bgp-tnl"
+                },
+                {
+                  "label": "ldp-lsp",
+                  "value": "ldp-lsp"
+                },
+                {
+                  "label": "ldp-tnl",
+                  "value": "ldp-tnl"
+                },
+                {
+                  "label": "multi-hop-ip",
+                  "value": "multi-hop-ip"
+                },
+                {
+                  "label": "p2mp-ldp",
+                  "value": "p2mp-ldp"
+                },
+                {
+                  "label": "p2mp-te",
+                  "value": "p2mp-te"
+                },
+                {
+                  "label": "sid-list",
+                  "value": "sid-list"
+                },
+                {
+                  "label": "single-hop-ip",
+                  "value": "single-hop-ip"
+                },
+                {
+                  "label": "sr-be-tnl",
+                  "value": "sr-be-tnl"
+                },
+                {
+                  "label": "static-lsp",
+                  "value": "static-lsp"
+                },
+                {
+                  "label": "te-ldp",
+                  "value": "te-ldp"
+                },
+                {
+                  "label": "tunnel",
+                  "value": "tunnel"
+                },
+                {
+                  "label": "vll-pw",
+                  "value": "vll-pw"
+                },
+                {
+                  "label": "vsi-pw",
+                  "value": "vsi-pw"
+                },
+                {
+                  "label": "vxlan",
+                  "value": "vxlan"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "path": "/bfd/mul-cast-sessions/mul-cast-session/tos-exp",
+              "type": "number",
+              "label": "tos-exp",
+              "maximum": 7,
+              "readonly": true
+            },
+            {
+              "path": "/bfd/mul-cast-sessions/mul-cast-session/track-interface",
+              "type": "string",
+              "label": "track-interface",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/bfd/passive-session",
+      "type": "group",
+      "label": "passive-session",
+      "fields": [
+        {
+          "path": "/bfd/passive-session/destination-udps",
+          "type": "group",
+          "label": "destination-udps",
+          "fields": [
+            {
+              "path": "/bfd/passive-session/destination-udps/destination-udp",
+              "type": "list",
+              "label": "destination-udp",
+              "fields": [
+                {
+                  "path": "/bfd/passive-session/destination-udps/destination-udp/peer-ip",
+                  "type": "string",
+                  "label": "peer-ip",
+                  "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?",
+                  "isKey": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "path": "/bfd/passive-session/detect-multipliers",
+          "type": "group",
+          "label": "detect-multipliers",
+          "fields": [
+            {
+              "path": "/bfd/passive-session/detect-multipliers/detect-multiplier",
+              "type": "list",
+              "label": "detect-multiplier",
+              "fields": [
+                {
+                  "path": "/bfd/passive-session/detect-multipliers/detect-multiplier/detect-multiplier",
+                  "type": "number",
+                  "label": "detect-multiplier",
+                  "required": true,
+                  "minimum": 3,
+                  "maximum": 50
+                },
+                {
+                  "path": "/bfd/passive-session/detect-multipliers/detect-multiplier/peer-ip",
+                  "type": "string",
+                  "label": "peer-ip",
+                  "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?",
+                  "isKey": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/bfd/sbfd",
+      "type": "group",
+      "label": "sbfd",
+      "fields": [
+        {
+          "path": "/bfd/sbfd/discriminator-maps",
+          "type": "group",
+          "label": "discriminator-maps",
+          "fields": [
+            {
+              "path": "/bfd/sbfd/discriminator-maps/discriminator-map",
+              "type": "list",
+              "label": "discriminator-map",
+              "fields": [
+                {
+                  "path": "/bfd/sbfd/discriminator-maps/discriminator-map/peer-ip",
+                  "type": "string",
+                  "label": "peer-ip",
+                  "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?",
+                  "isKey": true
+                },
+                {
+                  "path": "/bfd/sbfd/discriminator-maps/discriminator-map/remote-discriminator",
+                  "type": "number",
+                  "label": "remote-discriminator",
+                  "minimum": 1,
+                  "maximum": 4294967295,
+                  "isKey": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "path": "/bfd/sbfd/reflector-discriminator-ids",
+          "type": "group",
+          "label": "reflector-discriminator-ids",
+          "fields": [
+            {
+              "path": "/bfd/sbfd/reflector-discriminator-ids/reflector-discriminator-id",
+              "type": "list",
+              "label": "reflector-discriminator-id",
+              "fields": [
+                {
+                  "path": "/bfd/sbfd/reflector-discriminator-ids/reflector-discriminator-id/discriminator-id",
+                  "type": "number",
+                  "label": "discriminator-id",
+                  "minimum": 16777216,
+                  "maximum": 3758096383,
+                  "isKey": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "path": "/bfd/sbfd/reflector-discriminator-ips",
+          "type": "group",
+          "label": "reflector-discriminator-ips",
+          "fields": [
+            {
+              "path": "/bfd/sbfd/reflector-discriminator-ips/reflector-discriminator-ip",
+              "type": "list",
+              "label": "reflector-discriminator-ip",
+              "fields": [
+                {
+                  "path": "/bfd/sbfd/reflector-discriminator-ips/reflector-discriminator-ip/discriminator-ip",
+                  "type": "string",
+                  "label": "discriminator-ip",
+                  "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?",
+                  "isKey": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "path": "/bfd/sbfd/reflector-discriminators",
+          "type": "group",
+          "label": "reflector-discriminators",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/bfd/sbfd/reflector-discriminators/reflector-discriminator",
+              "type": "list",
+              "label": "reflector-discriminator",
+              "readonly": true,
+              "fields": [
+                {
+                  "path": "/bfd/sbfd/reflector-discriminators/reflector-discriminator/create-type",
+                  "type": "enum",
+                  "label": "create-type",
+                  "options": [
+                    {
+                      "label": "dynamic",
+                      "value": "dynamic"
+                    },
+                    {
+                      "label": "integer",
+                      "value": "integer"
+                    },
+                    {
+                      "label": "interface",
+                      "value": "interface"
+                    },
+                    {
+                      "label": "ipv4",
+                      "value": "ipv4"
+                    },
+                    {
+                      "label": "ipv6",
+                      "value": "ipv6"
+                    }
+                  ],
+                  "readonly": true
+                },
+                {
+                  "path": "/bfd/sbfd/reflector-discriminators/reflector-discriminator/discriminator-state",
+                  "type": "enum",
+                  "label": "discriminator-state",
+                  "options": [
+                    {
+                      "label": "active",
+                      "value": "active"
+                    },
+                    {
+                      "label": "inactive",
+                      "value": "inactive"
+                    }
+                  ],
+                  "readonly": true
+                },
+                {
+                  "path": "/bfd/sbfd/reflector-discriminators/reflector-discriminator/reflector-discriminator-id",
+                  "type": "number",
+                  "label": "reflector-discriminator-id",
+                  "readonly": true,
+                  "isKey": true
+                },
+                {
+                  "path": "/bfd/sbfd/reflector-discriminators/reflector-discriminator/reflector-discriminator-ip",
+                  "type": "string",
+                  "label": "reflector-discriminator-ip",
+                  "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?",
+                  "readonly": true
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "presence": true
+    },
+    {
+      "path": "/bfd/sessions",
+      "type": "group",
+      "label": "sessions",
+      "fields": [
+        {
+          "path": "/bfd/sessions/session",
+          "type": "list",
+          "label": "session",
+          "fields": [
+            {
+              "path": "/bfd/sessions/session/admin-down",
+              "type": "boolean",
+              "label": "admin-down"
+            },
+            {
+              "path": "/bfd/sessions/session/description",
+              "type": "string",
+              "label": "description",
+              "pattern": "([^\\s?]+[\\s]*[^?]*[^\\s?]+|[^\\s?]*)"
+            },
+            {
+              "path": "/bfd/sessions/session/detect-multiplier",
+              "type": "number",
+              "label": "detect-multiplier",
+              "minimum": 3,
+              "maximum": 50
+            },
+            {
+              "path": "/bfd/sessions/session/groups",
+              "type": "group",
+              "label": "groups",
+              "when": "../is-group-static-unicast-ipv4='true' or ../is-group-static-ipv6='true'",
+              "fields": [
+                {
+                  "path": "/bfd/sessions/session/groups/group",
+                  "type": "list",
+                  "label": "group",
+                  "fields": [
+                    {
+                      "path": "/bfd/sessions/session/groups/group/sub-local-discriminator",
+                      "type": "number",
+                      "label": "sub-local-discriminator",
+                      "minimum": 1,
+                      "maximum": 16384,
+                      "isKey": true
+                    },
+                    {
+                      "path": "/bfd/sessions/session/groups/group/sub-remote-discriminator",
+                      "type": "number",
+                      "label": "sub-remote-discriminator",
+                      "required": true,
+                      "minimum": 1,
+                      "maximum": 4294967295
+                    },
+                    {
+                      "path": "/bfd/sessions/session/groups/group/sub-select-slot-id",
+                      "type": "string",
+                      "label": "sub-select-slot-id",
+                      "required": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/bfd/sessions/session/name",
+              "type": "string",
+              "label": "name",
+              "pattern": "([^\\s?]+[\\s]*[^?]*[^\\s?]+|[^\\s?]*)",
+              "isKey": true
+            },
+            {
+              "path": "/bfd/sessions/session/running",
+              "type": "group",
+              "label": "running",
+              "readonly": true,
+              "fields": [
+                {
+                  "path": "/bfd/sessions/session/running/acl-num",
+                  "type": "number",
+                  "label": "acl-num",
+                  "readonly": true
+                },
+                {
+                  "path": "/bfd/sessions/session/running/actual-multiplier",
+                  "type": "number",
+                  "label": "actual-multiplier",
+                  "readonly": true
+                },
+                {
+                  "path": "/bfd/sessions/session/running/actual-rx-interval",
+                  "type": "number",
+                  "label": "actual-rx-interval",
+                  "readonly": true
+                },
+                {
+                  "path": "/bfd/sessions/session/running/actual-tx-interval",
+                  "type": "number",
+                  "label": "actual-tx-interval",
+                  "readonly": true
+                },
+                {
+                  "path": "/bfd/sessions/session/running/detect-mode",
+                  "type": "enum",
+                  "label": "detect-mode",
+                  "options": [
+                    {
+                      "label": "async-one-arm-echo",
+                      "value": "async-one-arm-echo"
+                    },
+                    {
+                      "label": "async-with-echo",
+                      "value": "async-with-echo"
+                    },
+                    {
+                      "label": "async-without-echo",
+                      "value": "async-without-echo"
+                    },
+                    {
+                      "label": "demand-with-echo",
+                      "value": "demand-with-echo"
+                    },
+                    {
+                      "label": "demand-without-echo",
+                      "value": "demand-without-echo"
+                    },
+                    {
+                      "label": "seamless-without-echo",
+                      "value": "seamless-without-echo"
+                    }
+                  ],
+                  "readonly": true
+                },
+                {
+                  "path": "/bfd/sessions/session/running/detect-time",
+                  "type": "number",
+                  "label": "detect-time",
+                  "readonly": true
+                },
+                {
+                  "path": "/bfd/sessions/session/running/detect-timer-id",
+                  "type": "number",
+                  "label": "detect-timer-id",
+                  "readonly": true
+                },
+                {
+                  "path": "/bfd/sessions/session/running/echo-tx-timer-id",
+                  "type": "number",
+                  "label": "echo-tx-timer-id",
+                  "readonly": true
+                },
+                {
+                  "path": "/bfd/sessions/session/running/init-timer-id",
+                  "type": "number",
+                  "label": "init-timer-id",
+                  "readonly": true
+                },
+                {
+                  "path": "/bfd/sessions/session/running/local-diag",
+                  "type": "enum",
+                  "label": "local-diag",
+                  "options": [
+                    {
+                      "label": "admin-down",
+                      "value": "admin-down"
+                    },
+                    {
+                      "label": "concat-path-down",
+                      "value": "concat-path-down"
+                    },
+                    {
+                      "label": "detect-down",
+                      "value": "detect-down"
+                    },
+                    {
+                      "label": "echo-down",
+                      "value": "echo-down"
+                    },
+                    {
+                      "label": "forwarding-reset",
+                      "value": "forwarding-reset"
+                    },
+                    {
+                      "label": "neighbor-down",
+                      "value": "neighbor-down"
+                    },
+                    {
+                      "label": "none",
+                      "value": "none"
+                    },
+                    {
+                      "label": "path-down",
+                      "value": "path-down"
+                    },
+                    {
+                      "label": "receive-admin-down",
+                      "value": "receive-admin-down"
+                    },
+                    {
+                      "label": "reverse-concat-path-down",
+                      "value": "reverse-concat-path-down"
+                    }
+                  ],
+                  "readonly": true
+                },
+                {
+                  "path": "/bfd/sessions/session/running/local-discriminator",
+                  "type": "number",
+                  "label": "local-discriminator",
+                  "readonly": true
+                },
+                {
+                  "path": "/bfd/sessions/session/running/min-rx-interval",
+                  "type": "number",
+                  "label": "min-rx-interval",
+                  "readonly": true
+                },
+                {
+                  "path": "/bfd/sessions/session/running/min-tx-interval",
+                  "type": "number",
+                  "label": "min-tx-interval",
+                  "readonly": true
+                },
+                {
+                  "path": "/bfd/sessions/session/running/not-up-reason",
+                  "type": "enum",
+                  "label": "not-up-reason",
+                  "options": [
+                    {
+                      "label": "board-delayup",
+                      "value": "board-delayup"
+                    },
+                    {
+                      "label": "board-hardbad-macfcs-fault",
+                      "value": "board-hardbad-macfcs-fault"
+                    },
+                    {
+                      "label": "board-selecting-failed",
+                      "value": "board-selecting-failed"
+                    },
+                    {
+                      "label": "in-negotiation",
+                      "value": "in-negotiation"
+                    },
+                    {
+                      "label": "in-negotiation-1",
+                      "value": "in-negotiation-1"
+                    },
+                    {
+                      "label": "reach-centralized-mode-limit",
+                      "value": "reach-centralized-mode-limit"
+                    },
+                    {
+                      "label": "remote-rx-equal-zero",
+                      "value": "remote-rx-equal-zero"
+                    },
+                    {
+                      "label": "sess-state-up",
+                      "value": "sess-state-up"
+                    },
+                    {
+                      "label": "unsupported-tunnel-type",
+                      "value": "unsupported-tunnel-type"
+                    }
+                  ],
+                  "readonly": true
+                },
+                {
+                  "path": "/bfd/sessions/session/running/remote-demand-mode",
+                  "type": "boolean",
+                  "label": "remote-demand-mode",
+                  "readonly": true
+                },
+                {
+                  "path": "/bfd/sessions/session/running/remote-discriminator",
+                  "type": "number",
+                  "label": "remote-discriminator",
+                  "readonly": true
+                },
+                {
+                  "path": "/bfd/sessions/session/running/state",
+                  "type": "enum",
+                  "label": "state",
+                  "options": [
+                    {
+                      "label": "admin-down",
+                      "value": "admin-down"
+                    },
+                    {
+                      "label": "down",
+                      "value": "down"
+                    },
+                    {
+                      "label": "init",
+                      "value": "init"
+                    },
+                    {
+                      "label": "up",
+                      "value": "up"
+                    }
+                  ],
+                  "readonly": true
+                },
+                {
+                  "path": "/bfd/sessions/session/running/ttl",
+                  "type": "number",
+                  "label": "ttl",
+                  "minimum": 1,
+                  "maximum": 255,
+                  "readonly": true
+                },
+                {
+                  "path": "/bfd/sessions/session/running/tx-timer-id",
+                  "type": "number",
+                  "label": "tx-timer-id",
+                  "readonly": true
+                },
+                {
+                  "path": "/bfd/sessions/session/running/udp-destination-port",
+                  "type": "number",
+                  "label": "udp-destination-port",
+                  "readonly": true
+                },
+                {
+                  "path": "/bfd/sessions/session/running/wtr-timer-id",
+                  "type": "number",
+                  "label": "wtr-timer-id",
+                  "readonly": true
+                }
+              ]
+            },
+            {
+              "path": "/bfd/sessions/session/session-type",
+              "type": "choice",
+              "label": "session-type",
+              "cases": [
+                {
+                  "name": "auto",
+                  "label": "auto",
+                  "fields": [
+                    {
+                      "path": "/bfd/sessions/session/auto-session-link-type",
+                      "type": "choice",
+                      "label": "auto-session-link-type",
+                      "cases": [
+                        {
+                          "name": "ip",
+                          "label": "ip",
+                          "fields": [
+                            {
+                              "path": "/bfd/sessions/session/address-type",
+                              "type": "choice",
+                              "label": "address-type",
+                              "cases": [
+                                {
+                                  "name": "ipv4",
+                                  "label": "ipv4",
+                                  "fields": [
+                                    {
+                                      "path": "/bfd/sessions/session/bundle-mode-auto-ipv4",
+                                      "type": "enum",
+                                      "label": "bundle-mode-auto-ipv4",
+                                      "options": [
+                                        {
+                                          "label": "bundle-com-unshare",
+                                          "value": "bundle-com-unshare"
+                                        },
+                                        {
+                                          "label": "bundle-compatible",
+                                          "value": "bundle-compatible"
+                                        },
+                                        {
+                                          "label": "bundle-standard",
+                                          "value": "bundle-standard"
+                                        },
+                                        {
+                                          "label": "bundle-std-unshare",
+                                          "value": "bundle-std-unshare"
+                                        },
+                                        {
+                                          "label": "cfg-from-master",
+                                          "value": "cfg-from-master"
+                                        },
+                                        {
+                                          "label": "cfg-remote-ap",
+                                          "value": "cfg-remote-ap"
+                                        },
+                                        {
+                                          "label": "none",
+                                          "value": "none"
+                                        }
+                                      ],
+                                      "when": "../out-if-name-auto-ip"
+                                    },
+                                    {
+                                      "path": "/bfd/sessions/session/destination-address-auto-ipv4",
+                                      "type": "string",
+                                      "label": "destination-address-auto-ipv4",
+                                      "required": true,
+                                      "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?"
+                                    },
+                                    {
+                                      "path": "/bfd/sessions/session/min-rx-interval-auto-ipv4",
+                                      "type": "number",
+                                      "label": "min-rx-interval-auto-ipv4",
+                                      "minimum": 3,
+                                      "maximum": 20000
+                                    },
+                                    {
+                                      "path": "/bfd/sessions/session/min-tx-interval-auto-ipv4",
+                                      "type": "number",
+                                      "label": "min-tx-interval-auto-ipv4",
+                                      "minimum": 3,
+                                      "maximum": 20000
+                                    },
+                                    {
+                                      "path": "/bfd/sessions/session/pis-auto-ipv4",
+                                      "type": "boolean",
+                                      "label": "pis-auto-ipv4",
+                                      "when": "../bundle-mode-auto-ipv4 != 'none'"
+                                    },
+                                    {
+                                      "path": "/bfd/sessions/session/pis-no-impact-auto-ipv4",
+                                      "type": "boolean",
+                                      "label": "pis-no-impact-auto-ipv4"
+                                    },
+                                    {
+                                      "path": "/bfd/sessions/session/select-board-slot-auto-ipv4",
+                                      "type": "string",
+                                      "label": "select-board-slot-auto-ipv4"
+                                    },
+                                    {
+                                      "path": "/bfd/sessions/session/select-board-slot2-auto-ipv4",
+                                      "type": "string",
+                                      "label": "select-board-slot2-auto-ipv4",
+                                      "when": "../select-board-slot-auto-ipv4",
+                                      "must": [
+                                        {
+                                          "expr": "../select-board-slot-auto-ipv4!=../select-board-slot2-auto-ipv4"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "path": "/bfd/sessions/session/source-address-auto-ipv4",
+                                      "type": "string",
+                                      "label": "source-address-auto-ipv4",
+                                      "required": true,
+                                      "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?"
+                                    },
+                                    {
+                                      "path": "/bfd/sessions/session/vrf-name-auto-ipv4",
+                                      "type": "string",
+                                      "label": "vrf-name-auto-ipv4",
+                                      "must": [
+                                        {
+                                          "expr": "/ni:network-instance/ni:instances/ni:instance[ni:name = current()]/l3vpn:afs/l3vpn:af[l3vpn:type='ipv4-unicast']"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "name": "ipv6",
+                                  "label": "ipv6",
+                                  "fields": [
+                                    {
+                                      "path": "/bfd/sessions/session/bundle-mode-auto-ipv6",
+                                      "type": "enum",
+                                      "label": "bundle-mode-auto-ipv6",
+                                      "options": [
+                                        {
+                                          "label": "bundle-com-unshare",
+                                          "value": "bundle-com-unshare"
+                                        },
+                                        {
+                                          "label": "bundle-compatible",
+                                          "value": "bundle-compatible"
+                                        },
+                                        {
+                                          "label": "bundle-standard",
+                                          "value": "bundle-standard"
+                                        },
+                                        {
+                                          "label": "bundle-std-unshare",
+                                          "value": "bundle-std-unshare"
+                                        },
+                                        {
+                                          "label": "cfg-from-master",
+                                          "value": "cfg-from-master"
+                                        },
+                                        {
+                                          "label": "cfg-remote-ap",
+                                          "value": "cfg-remote-ap"
+                                        },
+                                        {
+                                          "label": "none",
+                                          "value": "none"
+                                        }
+                                      ],
+                                      "when": "../out-if-name-auto-ip"
+                                    },
+                                    {
+                                      "path": "/bfd/sessions/session/destination-address-auto-ipv6",
+                                      "type": "string",
+                                      "label": "destination-address-auto-ipv6",
+                                      "required": true,
+                                      "pattern": "((:|[0-9a-fA-F]{0,4}):)([0-9a-fA-F]{0,4}:){0,5}((([0-9a-fA-F]{0,4}:)?(:|[0-9a-fA-F]{0,4}))|(((25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])))(%[\\p{N}\\p{L}]+)?"
+                                    },
+                                    {
+                                      "path": "/bfd/sessions/session/min-rx-interval-auto-ipv6",
+                                      "type": "number",
+                                      "label": "min-rx-interval-auto-ipv6",
+                                      "minimum": 3,
+                                      "maximum": 20000
+                                    },
+                                    {
+                                      "path": "/bfd/sessions/session/min-tx-interval-auto-ipv6",
+                                      "type": "number",
+                                      "label": "min-tx-interval-auto-ipv6",
+                                      "minimum": 3,
+                                      "maximum": 20000
+                                    },
+                                    {
+                                      "path": "/bfd/sessions/session/pis-auto-ipv6",
+                                      "type": "boolean",
+                                      "label": "pis-auto-ipv6",
+                                      "when": "../bundle-mode-auto-ipv6 != 'none'"
+                                    },
+                                    {
+                                      "path": "/bfd/sessions/session/pis-no-impact-auto-ipv6",
+                                      "type": "boolean",
+                                      "label": "pis-no-impact-auto-ipv6"
+                                    },
+                                    {
+                                      "path": "/bfd/sessions/session/select-board-slot-auto-ipv6",
+                                      "type": "string",
+                                      "label": "select-board-slot-auto-ipv6"
+                                    },
+                                    {
+                                      "path": "/bfd/sessions/session/select-board-slot2-auto-ipv6",
+                                      "type": "string",
+                                      "label": "select-board-slot2-auto-ipv6",
+                                      "when": "../select-board-slot-auto-ipv6",
+                                      "must": [
+                                        {
+                                          "expr": "../select-board-slot-auto-ipv6!=../select-board-slot2-auto-ipv6"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "path": "/bfd/sessions/session/source-address-auto-ipv6",
+                                      "type": "string",
+                                      "label": "source-address-auto-ipv6",
+                                      "required": true,
+                                      "pattern": "((:|[0-9a-fA-F]{0,4}):)([0-9a-fA-F]{0,4}:){0,5}((([0-9a-fA-F]{0,4}:)?(:|[0-9a-fA-F]{0,4}))|(((25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])))(%[\\p{N}\\p{L}]+)?"
+                                    },
+                                    {
+                                      "path": "/bfd/sessions/session/vrf-name-auto-ipv6",
+                                      "type": "string",
+                                      "label": "vrf-name-auto-ipv6",
+                                      "must": [
+                                        {
+                                          "expr": "/ni:network-instance/ni:instances/ni:instance[ni:name = current()]/l3vpn:afs/l3vpn:af[l3vpn:type='ipv6-unicast']"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "path": "/bfd/sessions/session/out-if-name-auto-ip",
+                              "type": "string",
+                              "label": "out-if-name-auto-ip"
+                            },
+                            {
+                              "path": "/bfd/sessions/session/process-pst-auto-ip",
+                              "type": "boolean",
+                              "label": "process-pst-auto-ip",
+                              "when": "../out-if-name-auto-ip"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "name": "static",
+                  "label": "static",
+                  "fields": [
+                    {
+                      "path": "/bfd/sessions/session/static-session-link-type",
+                      "type": "choice",
+                      "label": "static-session-link-type",
+                      "cases": [
+                        {
+                          "name": "ip",
+                          "label": "ip",
+                          "fields": [
+                            {
+                              "path": "/bfd/sessions/session/ip-address-type",
+                              "type": "choice",
+                              "label": "ip-address-type",
+                              "cases": [
+                                {
+                                  "name": "ipv4",
+                                  "label": "ipv4",
+                                  "fields": [
+                                    {
+                                      "path": "/bfd/sessions/session/multicast-or-unicast-ip",
+                                      "type": "choice",
+                                      "label": "multicast-or-unicast-ip",
+                                      "cases": [
+                                        {
+                                          "name": "multicast",
+                                          "label": "multicast",
+                                          "fields": [
+                                            {
+                                              "path": "/bfd/sessions/session/auth-algorithm-multicast-ipv4",
+                                              "type": "enum",
+                                              "label": "auth-algorithm-multicast-ipv4",
+                                              "options": [
+                                                {
+                                                  "label": "met-sha1",
+                                                  "value": "met-sha1"
+                                                },
+                                                {
+                                                  "label": "none",
+                                                  "value": "none"
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "path": "/bfd/sessions/session/cipher-string-multicast-ipv4",
+                                              "type": "string",
+                                              "label": "cipher-string-multicast-ipv4",
+                                              "required": true,
+                                              "when": "../auth-algorithm-multicast-ipv4='met-sha1'"
+                                            },
+                                            {
+                                              "path": "/bfd/sessions/session/dot1q-vid-multicast-ipv4",
+                                              "type": "number",
+                                              "label": "dot1q-vid-multicast-ipv4",
+                                              "minimum": 1,
+                                              "maximum": 4094,
+                                              "when": "/ifm:ifm/ifm:interfaces/ifm:interface/ethernet:ethernet/ethernet:l3-sub-interface/ethernet:dot1q-termination"
+                                            },
+                                            {
+                                              "path": "/bfd/sessions/session/key-id-multicast-ipv4",
+                                              "type": "number",
+                                              "label": "key-id-multicast-ipv4",
+                                              "required": true,
+                                              "minimum": 1,
+                                              "maximum": 255,
+                                              "when": "../auth-algorithm-multicast-ipv4='met-sha1'"
+                                            },
+                                            {
+                                              "path": "/bfd/sessions/session/lag-multicast-ipv4",
+                                              "type": "boolean",
+                                              "label": "lag-multicast-ipv4"
+                                            },
+                                            {
+                                              "path": "/bfd/sessions/session/local-discriminator-multicast-ipv4",
+                                              "type": "number",
+                                              "label": "local-discriminator-multicast-ipv4",
+                                              "minimum": 1,
+                                              "maximum": 16384
+                                            },
+                                            {
+                                              "path": "/bfd/sessions/session/min-rx-interval-multicast-ipv4",
+                                              "type": "number",
+                                              "label": "min-rx-interval-multicast-ipv4",
+                                              "minimum": 3,
+                                              "maximum": 20000
+                                            },
+                                            {
+                                              "path": "/bfd/sessions/session/min-tx-interval-multicast-ipv4",
+                                              "type": "number",
+                                              "label": "min-tx-interval-multicast-ipv4",
+                                              "minimum": 3,
+                                              "maximum": 20000
+                                            },
+                                            {
+                                              "path": "/bfd/sessions/session/negotiation-timeout-multicast-ipv4",
+                                              "type": "number",
+                                              "label": "negotiation-timeout-multicast-ipv4",
+                                              "minimum": 3,
+                                              "maximum": 10000,
+                                              "when": "../auth-algorithm-multicast-ipv4='met-sha1'"
+                                            },
+                                            {
+                                              "path": "/bfd/sessions/session/out-if-name-multicast-ipv4",
+                                              "type": "string",
+                                              "label": "out-if-name-multicast-ipv4",
+                                              "required": true
+                                            },
+                                            {
+                                              "path": "/bfd/sessions/session/pis-multicast-ipv4",
+                                              "type": "boolean",
+                                              "label": "pis-multicast-ipv4"
+                                            },
+                                            {
+                                              "path": "/bfd/sessions/session/pis-no-impact-multicast-ipv4",
+                                              "type": "boolean",
+                                              "label": "pis-no-impact-multicast-ipv4",
+                                              "when": "../pis-multicast-ipv4 = 'true'"
+                                            },
+                                            {
+                                              "path": "/bfd/sessions/session/pis-sub-if-multicast-ipv4",
+                                              "type": "boolean",
+                                              "label": "pis-sub-if-multicast-ipv4",
+                                              "when": "../pis-multicast-ipv4 = 'true'"
+                                            },
+                                            {
+                                              "path": "/bfd/sessions/session/process-pst-multicast-ipv4",
+                                              "type": "boolean",
+                                              "label": "process-pst-multicast-ipv4"
+                                            },
+                                            {
+                                              "path": "/bfd/sessions/session/qinq-ce-vid-multicast-ipv4",
+                                              "type": "number",
+                                              "label": "qinq-ce-vid-multicast-ipv4",
+                                              "minimum": 1,
+                                              "maximum": 4094,
+                                              "when": "/ifm:ifm/ifm:interfaces/ifm:interface/ethernet:ethernet/ethernet:l3-sub-interface/ethernet:qinq-termination",
+                                              "must": [
+                                                {
+                                                  "expr": "../qinq-pe-vid-multicast-ipv4"
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "path": "/bfd/sessions/session/qinq-pe-vid-multicast-ipv4",
+                                              "type": "number",
+                                              "label": "qinq-pe-vid-multicast-ipv4",
+                                              "minimum": 1,
+                                              "maximum": 4094,
+                                              "when": "/ifm:ifm/ifm:interfaces/ifm:interface/ethernet:ethernet/ethernet:l3-sub-interface/ethernet:qinq-termination",
+                                              "must": [
+                                                {
+                                                  "expr": "../qinq-ce-vid-multicast-ipv4"
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "path": "/bfd/sessions/session/remote-discriminator-multicast-ipv4",
+                                              "type": "number",
+                                              "label": "remote-discriminator-multicast-ipv4",
+                                              "minimum": 1,
+                                              "maximum": 4294967295
+                                            },
+                                            {
+                                              "path": "/bfd/sessions/session/unlimited-nego-multicast-ipv4",
+                                              "type": "boolean",
+                                              "label": "unlimited-nego-multicast-ipv4"
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "name": "unicast",
+                                          "label": "unicast",
+                                          "fields": [
+                                            {
+                                              "path": "/bfd/sessions/session/destination-address-static-unicast-ipv4",
+                                              "type": "string",
+                                              "label": "destination-address-static-unicast-ipv4",
+                                              "required": true,
+                                              "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?"
+                                            },
+                                            {
+                                              "path": "/bfd/sessions/session/is-group-static-unicast-ipv4",
+                                              "type": "boolean",
+                                              "label": "is-group-static-unicast-ipv4",
+                                              "when": "not(../out-if-name-static-unicast-ipv4)"
+                                            },
+                                            {
+                                              "path": "/bfd/sessions/session/is-set-track-if-static-ipv4",
+                                              "type": "boolean",
+                                              "label": "is-set-track-if-static-ipv4",
+                                              "when": "not(../out-if-name-static-unicast-ipv4)"
+                                            },
+                                            {
+                                              "path": "/bfd/sessions/session/local-discriminator",
+                                              "type": "number",
+                                              "label": "local-discriminator",
+                                              "minimum": 1,
+                                              "maximum": 16384,
+                                              "when": "not(../is-group-static-unicast-ipv4='true')"
+                                            },
+                                            {
+                                              "path": "/bfd/sessions/session/min-echo-rx-interval",
+                                              "type": "number",
+                                              "label": "min-echo-rx-interval",
+                                              "minimum": 3,
+                                              "maximum": 20000,
+                                              "when": "../one-arm-echo-static-unicast-ipv4='true'"
+                                            },
+                                            {
+                                              "path": "/bfd/sessions/session/min-rx-interval",
+                                              "type": "number",
+                                              "label": "min-rx-interval",
+                                              "minimum": 3,
+                                              "maximum": 20000,
+                                              "when": "not(../one-arm-echo-static-unicast-ipv4) or ../one-arm-echo-static-unicast-ipv4='false'"
+                                            },
+                                            {
+                                              "path": "/bfd/sessions/session/min-tx-interval",
+                                              "type": "number",
+                                              "label": "min-tx-interval",
+                                              "minimum": 3,
+                                              "maximum": 20000,
+                                              "when": "not(../one-arm-echo-static-unicast-ipv4) or ../one-arm-echo-static-unicast-ipv4='false'"
+                                            },
+                                            {
+                                              "path": "/bfd/sessions/session/one-arm-echo-destination-address-static-unicast-ipv4",
+                                              "type": "string",
+                                              "label": "one-arm-echo-destination-address-static-unicast-ipv4",
+                                              "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?",
+                                              "when": "../one-arm-echo-static-unicast-ipv4='true'"
+                                            },
+                                            {
+                                              "path": "/bfd/sessions/session/one-arm-echo-static-unicast-ipv4",
+                                              "type": "boolean",
+                                              "label": "one-arm-echo-static-unicast-ipv4",
+                                              "when": "../out-if-name-static-unicast-ipv4"
+                                            },
+                                            {
+                                              "path": "/bfd/sessions/session/out-if-name-static-unicast-ipv4",
+                                              "type": "string",
+                                              "label": "out-if-name-static-unicast-ipv4",
+                                              "must": [
+                                                {
+                                                  "expr": "(not(../vrf-name-static-unicast-ipv4) and (/ifm:ifm/ifm:interfaces/ifm:interface[ifm:name=current()]/ifm:vrf-name='_public_')) or ((../vrf-name-static-unicast-ipv4) and (../vrf-name-static-unicast-ipv4=/ifm:ifm/ifm:interfaces/ifm:interface[ifm:name=current()]/ifm:vrf-name))"
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "path": "/bfd/sessions/session/per-link-static-unicast-ipv4",
+                                              "type": "boolean",
+                                              "label": "per-link-static-unicast-ipv4",
+                                              "when": "../source-address-static-ipv4 and ../one-arm-echo-static-unicast-ipv4"
+                                            },
+                                            {
+                                              "path": "/bfd/sessions/session/process-pst-static-unicast-ipv4",
+                                              "type": "boolean",
+                                              "label": "process-pst-static-unicast-ipv4",
+                                              "when": "../out-if-name-static-unicast-ipv4"
+                                            },
+                                            {
+                                              "path": "/bfd/sessions/session/remote-discriminator",
+                                              "type": "number",
+                                              "label": "remote-discriminator",
+                                              "minimum": 1,
+                                              "maximum": 4294967295,
+                                              "when": "not(../is-group-static-unicast-ipv4='true' or ../one-arm-echo-static-unicast-ipv4='true')"
+                                            },
+                                            {
+                                              "path": "/bfd/sessions/session/track-if-name-static-ipv4",
+                                              "type": "string",
+                                              "label": "track-if-name-static-ipv4",
+                                              "required": true,
+                                              "when": "../is-set-track-if-static-ipv4='true'"
+                                            },
+                                            {
+                                              "path": "/bfd/sessions/session/vrf-name-static-unicast-ipv4",
+                                              "type": "string",
+                                              "label": "vrf-name-static-unicast-ipv4",
+                                              "must": [
+                                                {
+                                                  "expr": "/ni:network-instance/ni:instances/ni:instance[ni:name = current()]/l3vpn:afs/l3vpn:af[l3vpn:type='ipv4-unicast']"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "path": "/bfd/sessions/session/select-board-slot-static-ipv4",
+                                      "type": "string",
+                                      "label": "select-board-slot-static-ipv4",
+                                      "must": [
+                                        {
+                                          "expr": "../destination-address-static-unicast-ipv4 and not(../out-if-name-static-unicast-ipv4)"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "path": "/bfd/sessions/session/select-board-slot2-static-ipv4",
+                                      "type": "string",
+                                      "label": "select-board-slot2-static-ipv4",
+                                      "when": "../select-board-slot-static-ipv4",
+                                      "must": [
+                                        {
+                                          "expr": "../select-board-slot-static-ipv4!=../select-board-slot2-static-ipv4"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "path": "/bfd/sessions/session/source-address-static-ipv4",
+                                      "type": "string",
+                                      "label": "source-address-static-ipv4",
+                                      "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "name": "ipv6",
+                                  "label": "ipv6",
+                                  "fields": [
+                                    {
+                                      "path": "/bfd/sessions/session/destination-address-static-ipv6",
+                                      "type": "string",
+                                      "label": "destination-address-static-ipv6",
+                                      "required": true,
+                                      "pattern": "((:|[0-9a-fA-F]{0,4}):)([0-9a-fA-F]{0,4}:){0,5}((([0-9a-fA-F]{0,4}:)?(:|[0-9a-fA-F]{0,4}))|(((25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])))(%[\\p{N}\\p{L}]+)?"
+                                    },
+                                    {
+                                      "path": "/bfd/sessions/session/is-group-static-ipv6",
+                                      "type": "boolean",
+                                      "label": "is-group-static-ipv6",
+                                      "when": "not(../out-if-name-static-ipv6)"
+                                    },
+                                    {
+                                      "path": "/bfd/sessions/session/is-set-track-if-static-ipv6",
+                                      "type": "boolean",
+                                      "label": "is-set-track-if-static-ipv6",
+                                      "when": "not(../out-if-name-static-ipv6)"
+                                    },
+                                    {
+                                      "path": "/bfd/sessions/session/local-discriminator-static-ipv6",
+                                      "type": "number",
+                                      "label": "local-discriminator-static-ipv6",
+                                      "minimum": 1,
+                                      "maximum": 16384,
+                                      "when": "not(../is-group-static-ipv6='true')"
+                                    },
+                                    {
+                                      "path": "/bfd/sessions/session/min-echo-rx-interval-static-ipv6",
+                                      "type": "number",
+                                      "label": "min-echo-rx-interval-static-ipv6",
+                                      "minimum": 3,
+                                      "maximum": 20000,
+                                      "when": "../one-arm-echo-static-ipv6='true'"
+                                    },
+                                    {
+                                      "path": "/bfd/sessions/session/min-rx-interval-static-ipv6",
+                                      "type": "number",
+                                      "label": "min-rx-interval-static-ipv6",
+                                      "minimum": 3,
+                                      "maximum": 20000,
+                                      "when": "not(../one-arm-echo-static-ipv6) or ../one-arm-echo-static-ipv6='false'"
+                                    },
+                                    {
+                                      "path": "/bfd/sessions/session/min-tx-interval-static-ipv6",
+                                      "type": "number",
+                                      "label": "min-tx-interval-static-ipv6",
+                                      "minimum": 3,
+                                      "maximum": 20000,
+                                      "when": "not(../one-arm-echo-static-ipv6) or ../one-arm-echo-static-ipv6='false'"
+                                    },
+                                    {
+                                      "path": "/bfd/sessions/session/one-arm-echo-destination-address-static-ipv6",
+                                      "type": "string",
+                                      "label": "one-arm-echo-destination-address-static-ipv6",
+                                      "pattern": "((:|[0-9a-fA-F]{0,4}):)([0-9a-fA-F]{0,4}:){0,5}((([0-9a-fA-F]{0,4}:)?(:|[0-9a-fA-F]{0,4}))|(((25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])))(%[\\p{N}\\p{L}]+)?",
+                                      "when": "../one-arm-echo-static-ipv6='true'"
+                                    },
+                                    {
+                                      "path": "/bfd/sessions/session/one-arm-echo-static-ipv6",
+                                      "type": "boolean",
+                                      "label": "one-arm-echo-static-ipv6",
+                                      "when": "../out-if-name-static-ipv6"
+                                    },
+                                    {
+                                      "path": "/bfd/sessions/session/out-if-name-static-ipv6",
+                                      "type": "string",
+                                      "label": "out-if-name-static-ipv6",
+                                      "must": [
+                                        {
+                                          "expr": "(not(../vrf-name-static-ipv6) and (/ifm:ifm/ifm:interfaces/ifm:interface[ifm:name=current()]/ifm:vrf-name='_public_')) or ((../vrf-name-static-ipv6) and (../vrf-name-static-ipv6=/ifm:ifm/ifm:interfaces/ifm:interface[ifm:name=current()]/ifm:vrf-name))"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "path": "/bfd/sessions/session/process-pst-static-ipv6",
+                                      "type": "boolean",
+                                      "label": "process-pst-static-ipv6",
+                                      "when": "../out-if-name-static-ipv6"
+                                    },
+                                    {
+                                      "path": "/bfd/sessions/session/remote-discriminator-static-ipv6",
+                                      "type": "number",
+                                      "label": "remote-discriminator-static-ipv6",
+                                      "minimum": 1,
+                                      "maximum": 4294967295,
+                                      "when": "not(../is-group-static-ipv6='true' or ../one-arm-echo-static-ipv6='true')"
+                                    },
+                                    {
+                                      "path": "/bfd/sessions/session/select-board-slot-static-ipv6",
+                                      "type": "string",
+                                      "label": "select-board-slot-static-ipv6"
+                                    },
+                                    {
+                                      "path": "/bfd/sessions/session/select-board-slot2-static-ipv6",
+                                      "type": "string",
+                                      "label": "select-board-slot2-static-ipv6",
+                                      "when": "../select-board-slot-static-ipv6",
+                                      "must": [
+                                        {
+                                          "expr": "../select-board-slot-static-ipv6!=../select-board-slot2-static-ipv6"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "path": "/bfd/sessions/session/source-address-static-ipv6",
+                                      "type": "string",
+                                      "label": "source-address-static-ipv6",
+                                      "pattern": "((:|[0-9a-fA-F]{0,4}):)([0-9a-fA-F]{0,4}:){0,5}((([0-9a-fA-F]{0,4}:)?(:|[0-9a-fA-F]{0,4}))|(((25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])))(%[\\p{N}\\p{L}]+)?"
+                                    },
+                                    {
+                                      "path": "/bfd/sessions/session/track-if-name-static-ipv6",
+                                      "type": "string",
+                                      "label": "track-if-name-static-ipv6",
+                                      "required": true,
+                                      "when": "../is-set-track-if-static-ipv6='true'"
+                                    },
+                                    {
+                                      "path": "/bfd/sessions/session/vrf-name-static-ipv6",
+                                      "type": "string",
+                                      "label": "vrf-name-static-ipv6",
+                                      "must": [
+                                        {
+                                          "expr": "/ni:network-instance/ni:instances/ni:instance[ni:name = current()]/l3vpn:afs/l3vpn:af[l3vpn:type='ipv6-unicast']"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "name": "ldp-lsp",
+                          "label": "ldp-lsp",
+                          "fields": [
+                            {
+                              "path": "/bfd/sessions/session/destination-address-static-ldp-lsp",
+                              "type": "string",
+                              "label": "destination-address-static-ldp-lsp",
+                              "required": true,
+                              "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?"
+                            },
+                            {
+                              "path": "/bfd/sessions/session/local-discriminator-static-ldp-lsp",
+                              "type": "number",
+                              "label": "local-discriminator-static-ldp-lsp",
+                              "minimum": 1,
+                              "maximum": 16384
+                            },
+                            {
+                              "path": "/bfd/sessions/session/min-rx-interval-static-ldp-lsp",
+                              "type": "number",
+                              "label": "min-rx-interval-static-ldp-lsp",
+                              "minimum": 3,
+                              "maximum": 20000
+                            },
+                            {
+                              "path": "/bfd/sessions/session/min-tx-interval-static-ldp-lsp",
+                              "type": "number",
+                              "label": "min-tx-interval-static-ldp-lsp",
+                              "minimum": 3,
+                              "maximum": 20000
+                            },
+                            {
+                              "path": "/bfd/sessions/session/next-hop-address-static-ldp-lsp",
+                              "type": "string",
+                              "label": "next-hop-address-static-ldp-lsp",
+                              "required": true,
+                              "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?"
+                            },
+                            {
+                              "path": "/bfd/sessions/session/out-if-name-static-ldp-lsp",
+                              "type": "string",
+                              "label": "out-if-name-static-ldp-lsp"
+                            },
+                            {
+                              "path": "/bfd/sessions/session/process-pst-static-ldp-lsp",
+                              "type": "boolean",
+                              "label": "process-pst-static-ldp-lsp"
+                            },
+                            {
+                              "path": "/bfd/sessions/session/remote-discriminator-static-ldp-lsp",
+                              "type": "number",
+                              "label": "remote-discriminator-static-ldp-lsp",
+                              "minimum": 1,
+                              "maximum": 4294967295
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/bfd/sessions/session/tos-exp",
+                      "type": "number",
+                      "label": "tos-exp",
+                      "maximum": 7
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/bfd/sessions/session/wtr-time",
+              "type": "number",
+              "label": "wtr-time",
+              "minimum": 1,
+              "maximum": 60
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/bfd/statistics",
+      "type": "group",
+      "label": "statistics",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/bfd/statistics/auto-session-num",
+          "type": "number",
+          "label": "auto-session-num",
+          "readonly": true
+        },
+        {
+          "path": "/bfd/statistics/bgp-tunnel-session-num",
+          "type": "number",
+          "label": "bgp-tunnel-session-num",
+          "readonly": true
+        },
+        {
+          "path": "/bfd/statistics/current-crc-session-num",
+          "type": "number",
+          "label": "current-crc-session-num",
+          "readonly": true
+        },
+        {
+          "path": "/bfd/statistics/dyn-session-num",
+          "type": "number",
+          "label": "dyn-session-num",
+          "readonly": true
+        },
+        {
+          "path": "/bfd/statistics/inner-state",
+          "type": "enum",
+          "label": "inner-state",
+          "options": [
+            {
+              "label": "await",
+              "value": "await"
+            },
+            {
+              "label": "batch-backup",
+              "value": "batch-backup"
+            },
+            {
+              "label": "init",
+              "value": "init"
+            },
+            {
+              "label": "smooth-app",
+              "value": "smooth-app"
+            },
+            {
+              "label": "smooth-fei",
+              "value": "smooth-fei"
+            },
+            {
+              "label": "smooth-fes",
+              "value": "smooth-fes"
+            },
+            {
+              "label": "smooth-inside",
+              "value": "smooth-inside"
+            },
+            {
+              "label": "work",
+              "value": "work"
+            }
+          ],
+          "readonly": true
+        },
+        {
+          "path": "/bfd/statistics/ip-session-num",
+          "type": "number",
+          "label": "ip-session-num",
+          "readonly": true
+        },
+        {
+          "path": "/bfd/statistics/ldp-lsp-session-num",
+          "type": "number",
+          "label": "ldp-lsp-session-num",
+          "readonly": true
+        },
+        {
+          "path": "/bfd/statistics/ldp-tunnel-session-num",
+          "type": "number",
+          "label": "ldp-tunnel-session-num",
+          "readonly": true
+        },
+        {
+          "path": "/bfd/statistics/main-session-down-num",
+          "type": "number",
+          "label": "main-session-down-num",
+          "readonly": true
+        },
+        {
+          "path": "/bfd/statistics/main-session-up-num",
+          "type": "number",
+          "label": "main-session-up-num",
+          "readonly": true
+        },
+        {
+          "path": "/bfd/statistics/max-bfd-res-num",
+          "type": "number",
+          "label": "max-bfd-res-num",
+          "readonly": true
+        },
+        {
+          "path": "/bfd/statistics/max-crc-session-num",
+          "type": "number",
+          "label": "max-crc-session-num",
+          "readonly": true
+        },
+        {
+          "path": "/bfd/statistics/p2mp-session-num",
+          "type": "number",
+          "label": "p2mp-session-num",
+          "readonly": true
+        },
+        {
+          "path": "/bfd/statistics/passive-session-num",
+          "type": "number",
+          "label": "passive-session-num",
+          "readonly": true
+        },
+        {
+          "path": "/bfd/statistics/pw-session-num",
+          "type": "number",
+          "label": "pw-session-num",
+          "readonly": true
+        },
+        {
+          "path": "/bfd/statistics/sbfd-ref-session-num",
+          "type": "number",
+          "label": "sbfd-ref-session-num",
+          "readonly": true
+        },
+        {
+          "path": "/bfd/statistics/session-down-num",
+          "type": "number",
+          "label": "session-down-num",
+          "readonly": true
+        },
+        {
+          "path": "/bfd/statistics/session-up-num",
+          "type": "number",
+          "label": "session-up-num",
+          "readonly": true
+        },
+        {
+          "path": "/bfd/statistics/sid-list-session-num",
+          "type": "number",
+          "label": "sid-list-session-num",
+          "readonly": true
+        },
+        {
+          "path": "/bfd/statistics/srbe-tunnel-session-num",
+          "type": "number",
+          "label": "srbe-tunnel-session-num",
+          "readonly": true
+        },
+        {
+          "path": "/bfd/statistics/static-lsp-session-num",
+          "type": "number",
+          "label": "static-lsp-session-num",
+          "readonly": true
+        },
+        {
+          "path": "/bfd/statistics/static-session-num",
+          "type": "number",
+          "label": "static-session-num",
+          "readonly": true
+        },
+        {
+          "path": "/bfd/statistics/sub-session-down-num",
+          "type": "number",
+          "label": "sub-session-down-num",
+          "readonly": true
+        },
+        {
+          "path": "/bfd/statistics/sub-session-up-num",
+          "type": "number",
+          "label": "sub-session-up-num",
+          "readonly": true
+        },
+        {
+          "path": "/bfd/statistics/te-lsp-session-num",
+          "type": "number",
+          "label": "te-lsp-session-num",
+          "readonly": true
+        },
+        {
+          "path": "/bfd/statistics/te-tunnel-session-num",
+          "type": "number",
+          "label": "te-tunnel-session-num",
+          "readonly": true
+        },
+        {
+          "path": "/bfd/statistics/total-session-num",
+          "type": "number",
+          "label": "total-session-num",
+          "readonly": true
+        },
+        {
+          "path": "/bfd/statistics/used-bfd-res-num",
+          "type": "number",
+          "label": "used-bfd-res-num",
+          "readonly": true
+        },
+        {
+          "path": "/bfd/statistics/used-discriminator-num",
+          "type": "number",
+          "label": "used-discriminator-num",
+          "readonly": true
+        },
+        {
+          "path": "/bfd/statistics/vsi-pw-session-num",
+          "type": "number",
+          "label": "vsi-pw-session-num",
+          "readonly": true
+        },
+        {
+          "path": "/bfd/statistics/vxlan-session-num",
+          "type": "number",
+          "label": "vxlan-session-num",
+          "readonly": true
+        }
+      ]
+    }
+  ]
+}

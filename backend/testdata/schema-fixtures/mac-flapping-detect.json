@@ -1,0 +1,178 @@
+{
+  "module": "mac-flapping-detect",
+  "title": "mac-flapping-detect",
+  "vendor": "huawei",
+  "fields": [
+    {
+      "path": "/mac-flapping-detect/exclude-bds",
+      "type": "group",
+      "label": "exclude-bds",
+      "fields": [
+        {
+          "path": "/mac-flapping-detect/exclude-bds/exclude-bd",
+          "type": "list",
+          "label": "exclude-bd",
+          "fields": [
+            {
+              "path": "/mac-flapping-detect/exclude-bds/exclude-bd/bd-begin",
+              "type": "number",
+              "label": "bd-begin",
+              "minimum": 1,
+              "maximum": 16777215,
+              "isKey": true
+            },
+            {
+              "path": "/mac-flapping-detect/exclude-bds/exclude-bd/bd-end",
+              "type": "number",
+              "label": "bd-end",
+              "minimum": 1,
+              "maximum": 16777215,
+              "isKey": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/mac-flapping-detect/exclude-mac-addresses",
+      "type": "group",
+      "label": "exclude-mac-addresses",
+      "fields": [
+        {
+          "path": "/mac-flapping-detect/exclude-mac-addresses/exclude-mac-address",
+          "type": "list",
+          "label": "exclude-mac-address",
+          "fields": [
+            {
+              "path": "/mac-flapping-detect/exclude-mac-addresses/exclude-mac-address/address",
+              "type": "string",
+              "label": "address",
+              "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+              "isKey": true
+            },
+            {
+              "path": "/mac-flapping-detect/exclude-mac-addresses/exclude-mac-address/mask",
+              "type": "number",
+              "label": "mask",
+              "minimum": 24,
+              "maximum": 48,
+              "isKey": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/mac-flapping-detect/exclude-vlan",
+      "type": "group",
+      "label": "exclude-vlan",
+      "fields": [
+        {
+          "path": "/mac-flapping-detect/exclude-vlan/vlan-list",
+          "type": "string",
+          "label": "vlan-list",
+          "pattern": "([0-9]|,|\\+|\\-|\\(|\\))+"
+        }
+      ]
+    },
+    {
+      "path": "/mac-flapping-detect/global-attribute",
+      "type": "group",
+      "label": "global-attribute",
+      "fields": [
+        {
+          "path": "/mac-flapping-detect/global-attribute/aging-time",
+          "type": "number",
+          "label": "aging-time",
+          "minimum": 60,
+          "maximum": 900
+        },
+        {
+          "path": "/mac-flapping-detect/global-attribute/detect-enable",
+          "type": "enum",
+          "label": "detect-enable",
+          "options": [
+            {
+              "label": "disable",
+              "value": "disable"
+            },
+            {
+              "label": "enable",
+              "value": "enable"
+            }
+          ]
+        },
+        {
+          "path": "/mac-flapping-detect/global-attribute/detect-type",
+          "type": "choice",
+          "label": "detect-type",
+          "cases": [
+            {
+              "name": "level",
+              "label": "level",
+              "fields": [
+                {
+                  "path": "/mac-flapping-detect/global-attribute/detect-level",
+                  "type": "enum",
+                  "label": "detect-level",
+                  "options": [
+                    {
+                      "label": "high",
+                      "value": "high"
+                    },
+                    {
+                      "label": "low",
+                      "value": "low"
+                    },
+                    {
+                      "label": "middle",
+                      "value": "middle"
+                    }
+                  ],
+                  "when": "../detect-enable='enable'"
+                }
+              ]
+            },
+            {
+              "name": "threshold",
+              "label": "threshold",
+              "fields": [
+                {
+                  "path": "/mac-flapping-detect/global-attribute/detect-threshold",
+                  "type": "number",
+                  "label": "detect-threshold",
+                  "minimum": 3,
+                  "maximum": 10000,
+                  "when": "../detect-enable='enable'"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "path": "/mac-flapping-detect/global-attribute/trap-enable",
+          "type": "enum",
+          "label": "trap-enable",
+          "options": [
+            {
+              "label": "disable",
+              "value": "disable"
+            },
+            {
+              "label": "enable",
+              "value": "enable"
+            }
+          ]
+        },
+        {
+          "path": "/mac-flapping-detect/global-attribute/trap-interval",
+          "type": "number",
+          "label": "trap-interval",
+          "minimum": 2,
+          "maximum": 30,
+          "when": "../trap-enable='enable'"
+        }
+      ]
+    }
+  ]
+}

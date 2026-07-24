@@ -1,0 +1,209 @@
+{
+  "module": "grpc",
+  "title": "grpc",
+  "vendor": "huawei",
+  "fields": [
+    {
+      "path": "/grpc/client",
+      "type": "group",
+      "label": "client",
+      "fields": [
+        {
+          "path": "/grpc/client/ssl-policy",
+          "type": "string",
+          "label": "ssl-policy"
+        },
+        {
+          "path": "/grpc/client/ssl-policy-peer",
+          "type": "boolean",
+          "label": "ssl-policy-peer"
+        },
+        {
+          "path": "/grpc/client/ssl-verify-cn-name",
+          "type": "string",
+          "label": "ssl-verify-cn-name",
+          "when": "../ssl-policy"
+        }
+      ]
+    },
+    {
+      "path": "/grpc/service",
+      "type": "group",
+      "label": "service",
+      "must": [
+        {
+          "expr": "server-enable='false' or source-address"
+        }
+      ],
+      "fields": [
+        {
+          "path": "/grpc/service/acl-number-or-name",
+          "type": "string",
+          "label": "acl-number-or-name",
+          "must": [
+            {
+              "expr": "/acl:acl/acl:groups/acl:group[acl:identity=current()]/acl:type='basic' or /acl:acl/acl:groups/acl:group[acl:identity=current()]/acl:type='advance'"
+            }
+          ]
+        },
+        {
+          "path": "/grpc/service/idle-timeout",
+          "type": "number",
+          "label": "idle-timeout",
+          "minimum": 1,
+          "maximum": 3600
+        },
+        {
+          "path": "/grpc/service/server-enable",
+          "type": "boolean",
+          "label": "server-enable"
+        },
+        {
+          "path": "/grpc/service/server-port",
+          "type": "number",
+          "label": "server-port",
+          "minimum": 10000,
+          "maximum": 57999
+        },
+        {
+          "path": "/grpc/service/source-address",
+          "type": "string",
+          "label": "source-address",
+          "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?"
+        },
+        {
+          "path": "/grpc/service/ssl-policy",
+          "type": "string",
+          "label": "ssl-policy"
+        },
+        {
+          "path": "/grpc/service/ssl-policy-peer",
+          "type": "boolean",
+          "label": "ssl-policy-peer"
+        },
+        {
+          "path": "/grpc/service/vpn-name",
+          "type": "string",
+          "label": "vpn-name",
+          "when": "../source-address",
+          "must": [
+            {
+              "expr": "/ni:network-instance/ni:instances/ni:instance[ni:name = current()]/l3vpn:afs/l3vpn:af[l3vpn:type='ipv4-unicast']"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/grpc/service-ipv6",
+      "type": "group",
+      "label": "service-ipv6",
+      "must": [
+        {
+          "expr": "server-enable='false' or source-address"
+        }
+      ],
+      "fields": [
+        {
+          "path": "/grpc/service-ipv6/acl-number-or-name",
+          "type": "string",
+          "label": "acl-number-or-name",
+          "must": [
+            {
+              "expr": "/acl:acl/acl:group6s/acl:group6[acl:identity=current()]/acl:type='basic' or /acl:acl/acl:group6s/acl:group6[acl:identity=current()]/acl:type='advance'"
+            }
+          ]
+        },
+        {
+          "path": "/grpc/service-ipv6/idle-timeout",
+          "type": "number",
+          "label": "idle-timeout",
+          "minimum": 1,
+          "maximum": 3600
+        },
+        {
+          "path": "/grpc/service-ipv6/server-enable",
+          "type": "boolean",
+          "label": "server-enable"
+        },
+        {
+          "path": "/grpc/service-ipv6/server-port",
+          "type": "number",
+          "label": "server-port",
+          "minimum": 10000,
+          "maximum": 57999
+        },
+        {
+          "path": "/grpc/service-ipv6/source-address",
+          "type": "string",
+          "label": "source-address",
+          "pattern": "((:|[0-9a-fA-F]{0,4}):)([0-9a-fA-F]{0,4}:){0,5}((([0-9a-fA-F]{0,4}:)?(:|[0-9a-fA-F]{0,4}))|(((25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])))(%[\\p{N}\\p{L}]+)?"
+        },
+        {
+          "path": "/grpc/service-ipv6/ssl-policy",
+          "type": "string",
+          "label": "ssl-policy"
+        },
+        {
+          "path": "/grpc/service-ipv6/ssl-policy-peer",
+          "type": "boolean",
+          "label": "ssl-policy-peer"
+        },
+        {
+          "path": "/grpc/service-ipv6/vpn-name",
+          "type": "string",
+          "label": "vpn-name",
+          "when": "../source-address",
+          "must": [
+            {
+              "expr": "/ni:network-instance/ni:instances/ni:instance[ni:name = current()]/l3vpn:afs/l3vpn:af[l3vpn:type='ipv6-unicast']"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/grpc/session-car",
+      "type": "group",
+      "label": "session-car",
+      "fields": [
+        {
+          "path": "/grpc/session-car/cbs-interval",
+          "type": "number",
+          "label": "cbs-interval",
+          "minimum": 1,
+          "maximum": 1000000
+        },
+        {
+          "path": "/grpc/session-car/cir-interval",
+          "type": "number",
+          "label": "cir-interval",
+          "minimum": 1,
+          "maximum": 1000000
+        },
+        {
+          "path": "/grpc/session-car/enable",
+          "type": "boolean",
+          "label": "enable"
+        },
+        {
+          "path": "/grpc/session-car/pbs-interval",
+          "type": "number",
+          "label": "pbs-interval",
+          "minimum": 1,
+          "maximum": 1000000
+        },
+        {
+          "path": "/grpc/session-car/pir-interval",
+          "type": "number",
+          "label": "pir-interval",
+          "minimum": 1,
+          "maximum": 1000000
+        }
+      ],
+      "operationExclude": [
+        "delete"
+      ]
+    }
+  ]
+}

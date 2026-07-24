@@ -1,0 +1,1351 @@
+{
+  "module": "evpn",
+  "title": "evpn",
+  "vendor": "huawei",
+  "fields": [
+    {
+      "path": "/evpn/base-process",
+      "type": "group",
+      "label": "base-process",
+      "fields": [
+        {
+          "path": "/evpn/base-process/evpn-overlay",
+          "type": "boolean",
+          "label": "evpn-overlay",
+          "must": [
+            {
+              "expr": "(../evpn-overlay!='true' and not(../../instances/instance)) or ../evpn-overlay='true'"
+            }
+          ]
+        },
+        {
+          "path": "/evpn/base-process/redundancy-mode",
+          "type": "enum",
+          "label": "redundancy-mode",
+          "options": [
+            {
+              "label": "all-active",
+              "value": "all-active"
+            },
+            {
+              "label": "single-active",
+              "value": "single-active"
+            }
+          ]
+        },
+        {
+          "path": "/evpn/base-process/source-address",
+          "type": "string",
+          "label": "source-address",
+          "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?",
+          "operationExclude": [
+            "update"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/evpn/instances",
+      "type": "group",
+      "label": "instances",
+      "fields": [
+        {
+          "path": "/evpn/instances/instance",
+          "type": "list",
+          "label": "instance",
+          "fields": [
+            {
+              "path": "/evpn/instances/instance/b-evpn",
+              "type": "group",
+              "label": "b-evpn",
+              "when": "../type = 'b-evpn'",
+              "fields": [
+                {
+                  "path": "/evpn/instances/instance/b-evpn/bmac",
+                  "type": "string",
+                  "label": "bmac",
+                  "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+                  "when": "../rd"
+                },
+                {
+                  "path": "/evpn/instances/instance/b-evpn/description",
+                  "type": "string",
+                  "label": "description",
+                  "pattern": "([^?]*)"
+                },
+                {
+                  "path": "/evpn/instances/instance/b-evpn/rd",
+                  "type": "string",
+                  "label": "rd",
+                  "operationExclude": [
+                    "update"
+                  ]
+                },
+                {
+                  "path": "/evpn/instances/instance/b-evpn/rts",
+                  "type": "group",
+                  "label": "rts",
+                  "when": "../rd",
+                  "fields": [
+                    {
+                      "path": "/evpn/instances/instance/b-evpn/rts/rt",
+                      "type": "list",
+                      "label": "rt",
+                      "fields": [
+                        {
+                          "path": "/evpn/instances/instance/b-evpn/rts/rt/vrf-rt-type",
+                          "type": "enum",
+                          "label": "vrf-rt-type",
+                          "options": [
+                            {
+                              "label": "export-extcommunity",
+                              "value": "export-extcommunity"
+                            },
+                            {
+                              "label": "import-extcommunity",
+                              "value": "import-extcommunity"
+                            }
+                          ],
+                          "isKey": true
+                        },
+                        {
+                          "path": "/evpn/instances/instance/b-evpn/rts/rt/vrf-rt-value",
+                          "type": "string",
+                          "label": "vrf-rt-value",
+                          "isKey": true
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "path": "/evpn/instances/instance/b-evpn/tunnel-policy-name",
+                  "type": "string",
+                  "label": "tunnel-policy-name",
+                  "when": "../rd",
+                  "must": [
+                    {
+                      "expr": "not(/tnlm:tunnel-management/tnlm:tunnel-policys/tnlm:tunnel-policy[tnlm:name=current()]/tnlm:ipv6-set/tnlm:select-sequence/tnlm:select-tunnel-types/tnlm:select-tunnel-type) and /tnlm:tunnel-management/tnlm:tunnel-policys/tnlm:tunnel-policy[tnlm:name=current()]/tnlm:ipv4-set/tnlm:select-sequence/tnlm:select-tunnel-types/tnlm:select-tunnel-type[tnlm:type!='gre'] and /tnlm:tunnel-management/tnlm:tunnel-policys/tnlm:tunnel-policy[tnlm:name=current()]/tnlm:ipv4-set/tnlm:select-sequence/tnlm:select-tunnel-types/tnlm:select-tunnel-type[tnlm:type!='sr-te-policy'] and /tnlm:tunnel-management/tnlm:tunnel-policys/tnlm:tunnel-policy[tnlm:name=current()]/tnlm:ipv4-set/tnlm:select-sequence/tnlm:select-tunnel-types/tnlm:select-tunnel-type[tnlm:type!='bgp']"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/evpn/instances/instance/bd-evpn",
+              "type": "group",
+              "label": "bd-evpn",
+              "when": "../type = 'bd-evpn'",
+              "fields": [
+                {
+                  "path": "/evpn/instances/instance/bd-evpn/bypass-vxlan",
+                  "type": "enum",
+                  "label": "bypass-vxlan",
+                  "options": [
+                    {
+                      "label": "default",
+                      "value": "default"
+                    },
+                    {
+                      "label": "disable",
+                      "value": "disable"
+                    },
+                    {
+                      "label": "enable",
+                      "value": "enable"
+                    }
+                  ]
+                },
+                {
+                  "path": "/evpn/instances/instance/bd-evpn/control-word",
+                  "type": "boolean",
+                  "label": "control-word",
+                  "must": [
+                    {
+                      "expr": "(../control-word='true' and not(../srv6-mode)) or ../control-word!='true'"
+                    }
+                  ]
+                },
+                {
+                  "path": "/evpn/instances/instance/bd-evpn/default-color",
+                  "type": "number",
+                  "label": "default-color",
+                  "when": "../rd"
+                },
+                {
+                  "path": "/evpn/instances/instance/bd-evpn/description",
+                  "type": "string",
+                  "label": "description",
+                  "pattern": "([^?]*)"
+                },
+                {
+                  "path": "/evpn/instances/instance/bd-evpn/down-switch",
+                  "type": "boolean",
+                  "label": "down-switch",
+                  "when": "../rd and ../srv6-mode='te'"
+                },
+                {
+                  "path": "/evpn/instances/instance/bd-evpn/etree-enable",
+                  "type": "boolean",
+                  "label": "etree-enable"
+                },
+                {
+                  "path": "/evpn/instances/instance/bd-evpn/export-acl-name-or-id",
+                  "type": "string",
+                  "label": "export-acl-name-or-id"
+                },
+                {
+                  "path": "/evpn/instances/instance/bd-evpn/export-policy-name",
+                  "type": "string",
+                  "label": "export-policy-name",
+                  "when": "../rd"
+                },
+                {
+                  "path": "/evpn/instances/instance/bd-evpn/import-acl-name-or-id",
+                  "type": "string",
+                  "label": "import-acl-name-or-id"
+                },
+                {
+                  "path": "/evpn/instances/instance/bd-evpn/import-policy-name",
+                  "type": "string",
+                  "label": "import-policy-name",
+                  "when": "../rd"
+                },
+                {
+                  "path": "/evpn/instances/instance/bd-evpn/local-remote-frr",
+                  "type": "enum",
+                  "label": "local-remote-frr",
+                  "options": [
+                    {
+                      "label": "default",
+                      "value": "default"
+                    },
+                    {
+                      "label": "disable",
+                      "value": "disable"
+                    },
+                    {
+                      "label": "enable",
+                      "value": "enable"
+                    }
+                  ]
+                },
+                {
+                  "path": "/evpn/instances/instance/bd-evpn/mac-balance-enable",
+                  "type": "boolean",
+                  "label": "mac-balance-enable"
+                },
+                {
+                  "path": "/evpn/instances/instance/bd-evpn/mac-duplication",
+                  "type": "group",
+                  "label": "mac-duplication",
+                  "fields": [
+                    {
+                      "path": "/evpn/instances/instance/bd-evpn/mac-duplication/blackhole",
+                      "type": "boolean",
+                      "label": "blackhole"
+                    },
+                    {
+                      "path": "/evpn/instances/instance/bd-evpn/mac-duplication/cycle",
+                      "type": "number",
+                      "label": "cycle",
+                      "minimum": 60,
+                      "maximum": 900,
+                      "must": [
+                        {
+                          "expr": "(../cycle mod 10 = 0) and ((../period and ../cycle) or (not(../period) and not(../cycle)))"
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/evpn/instances/instance/bd-evpn/mac-duplication/period",
+                      "type": "number",
+                      "label": "period",
+                      "minimum": 3,
+                      "maximum": 10,
+                      "must": [
+                        {
+                          "expr": "(../period and ../cycle) or (not(../period) and not(../cycle))"
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/evpn/instances/instance/bd-evpn/mac-duplication/recycle",
+                      "type": "number",
+                      "label": "recycle",
+                      "minimum": 120,
+                      "maximum": 3600,
+                      "must": [
+                        {
+                          "expr": "../recycle mod 10 = 0"
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/evpn/instances/instance/bd-evpn/mac-duplication/source-blackhole",
+                      "type": "boolean",
+                      "label": "source-blackhole",
+                      "when": "../blackhole='true'"
+                    }
+                  ],
+                  "presence": true
+                },
+                {
+                  "path": "/evpn/instances/instance/bd-evpn/mac-route-advertise",
+                  "type": "enum",
+                  "label": "mac-route-advertise",
+                  "options": [
+                    {
+                      "label": "disable",
+                      "value": "disable"
+                    },
+                    {
+                      "label": "enable",
+                      "value": "enable"
+                    }
+                  ]
+                },
+                {
+                  "path": "/evpn/instances/instance/bd-evpn/rd",
+                  "type": "string",
+                  "label": "rd",
+                  "operationExclude": [
+                    "update"
+                  ]
+                },
+                {
+                  "path": "/evpn/instances/instance/bd-evpn/rts",
+                  "type": "group",
+                  "label": "rts",
+                  "when": "../rd",
+                  "fields": [
+                    {
+                      "path": "/evpn/instances/instance/bd-evpn/rts/rt",
+                      "type": "list",
+                      "label": "rt",
+                      "fields": [
+                        {
+                          "path": "/evpn/instances/instance/bd-evpn/rts/rt/vrf-rt-type",
+                          "type": "enum",
+                          "label": "vrf-rt-type",
+                          "options": [
+                            {
+                              "label": "export-extcommunity",
+                              "value": "export-extcommunity"
+                            },
+                            {
+                              "label": "import-extcommunity",
+                              "value": "import-extcommunity"
+                            }
+                          ],
+                          "isKey": true
+                        },
+                        {
+                          "path": "/evpn/instances/instance/bd-evpn/rts/rt/vrf-rt-value",
+                          "type": "string",
+                          "label": "vrf-rt-value",
+                          "isKey": true
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "path": "/evpn/instances/instance/bd-evpn/srv6-mode",
+                  "type": "enum",
+                  "label": "srv6-mode",
+                  "options": [
+                    {
+                      "label": "be",
+                      "value": "be"
+                    },
+                    {
+                      "label": "te",
+                      "value": "te"
+                    }
+                  ],
+                  "when": "../rd",
+                  "must": [
+                    {
+                      "expr": "../control-word!='true'"
+                    }
+                  ]
+                },
+                {
+                  "path": "/evpn/instances/instance/bd-evpn/tunnel-policy-name",
+                  "type": "string",
+                  "label": "tunnel-policy-name",
+                  "when": "../rd",
+                  "must": [
+                    {
+                      "expr": "/tnlm:tunnel-management/tnlm:tunnel-policys/tnlm:tunnel-policy[tnlm:name=current()]/tnlm:ipv6-set/tnlm:select-sequence/tnlm:select-tunnel-types/tnlm:select-tunnel-type[tnlm:type!='srv6-te-policy-group'] and /tnlm:tunnel-management/tnlm:tunnel-policys/tnlm:tunnel-policy[tnlm:name=current()]/tnlm:ipv4-set/tnlm:select-sequence/tnlm:select-tunnel-types/tnlm:select-tunnel-type[tnlm:type!='gre']"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/evpn/instances/instance/name",
+              "type": "string",
+              "label": "name",
+              "must": [
+                {
+                  "expr": "../name!='_public_'"
+                }
+              ],
+              "isKey": true
+            },
+            {
+              "path": "/evpn/instances/instance/normal-evpn",
+              "type": "group",
+              "label": "normal-evpn",
+              "when": "../type = 'normal'",
+              "fields": [
+                {
+                  "path": "/evpn/instances/instance/normal-evpn/control-word",
+                  "type": "boolean",
+                  "label": "control-word"
+                },
+                {
+                  "path": "/evpn/instances/instance/normal-evpn/description",
+                  "type": "string",
+                  "label": "description",
+                  "pattern": "([^?]*)"
+                },
+                {
+                  "path": "/evpn/instances/instance/normal-evpn/etree-enable",
+                  "type": "boolean",
+                  "label": "etree-enable"
+                },
+                {
+                  "path": "/evpn/instances/instance/normal-evpn/export-acl-name-or-id",
+                  "type": "string",
+                  "label": "export-acl-name-or-id"
+                },
+                {
+                  "path": "/evpn/instances/instance/normal-evpn/export-policy-name",
+                  "type": "string",
+                  "label": "export-policy-name",
+                  "when": "../rd"
+                },
+                {
+                  "path": "/evpn/instances/instance/normal-evpn/import-acl-name-or-id",
+                  "type": "string",
+                  "label": "import-acl-name-or-id"
+                },
+                {
+                  "path": "/evpn/instances/instance/normal-evpn/import-policy-name",
+                  "type": "string",
+                  "label": "import-policy-name",
+                  "when": "../rd"
+                },
+                {
+                  "path": "/evpn/instances/instance/normal-evpn/isolate-spoken",
+                  "type": "enum",
+                  "label": "isolate-spoken",
+                  "options": [
+                    {
+                      "label": "default",
+                      "value": "default"
+                    },
+                    {
+                      "label": "isolateflag",
+                      "value": "isolateflag"
+                    }
+                  ]
+                },
+                {
+                  "path": "/evpn/instances/instance/normal-evpn/local-remote-frr",
+                  "type": "enum",
+                  "label": "local-remote-frr",
+                  "options": [
+                    {
+                      "label": "default",
+                      "value": "default"
+                    },
+                    {
+                      "label": "disable",
+                      "value": "disable"
+                    },
+                    {
+                      "label": "enable",
+                      "value": "enable"
+                    }
+                  ]
+                },
+                {
+                  "path": "/evpn/instances/instance/normal-evpn/mac-balance-enable",
+                  "type": "boolean",
+                  "label": "mac-balance-enable"
+                },
+                {
+                  "path": "/evpn/instances/instance/normal-evpn/mac-duplication",
+                  "type": "group",
+                  "label": "mac-duplication",
+                  "fields": [
+                    {
+                      "path": "/evpn/instances/instance/normal-evpn/mac-duplication/blackhole",
+                      "type": "boolean",
+                      "label": "blackhole"
+                    },
+                    {
+                      "path": "/evpn/instances/instance/normal-evpn/mac-duplication/cycle",
+                      "type": "number",
+                      "label": "cycle",
+                      "minimum": 60,
+                      "maximum": 900,
+                      "must": [
+                        {
+                          "expr": "(../cycle mod 10 = 0) and ((../period and ../cycle) or (not(../period) and not(../cycle)))"
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/evpn/instances/instance/normal-evpn/mac-duplication/period",
+                      "type": "number",
+                      "label": "period",
+                      "minimum": 3,
+                      "maximum": 10,
+                      "must": [
+                        {
+                          "expr": "(../period and ../cycle) or (not(../period) and not(../cycle))"
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/evpn/instances/instance/normal-evpn/mac-duplication/recycle",
+                      "type": "number",
+                      "label": "recycle",
+                      "minimum": 120,
+                      "maximum": 3600,
+                      "must": [
+                        {
+                          "expr": "../recycle mod 10 = 0"
+                        }
+                      ]
+                    }
+                  ],
+                  "presence": true
+                },
+                {
+                  "path": "/evpn/instances/instance/normal-evpn/rd",
+                  "type": "string",
+                  "label": "rd",
+                  "operationExclude": [
+                    "update"
+                  ]
+                },
+                {
+                  "path": "/evpn/instances/instance/normal-evpn/rts",
+                  "type": "group",
+                  "label": "rts",
+                  "when": "../rd",
+                  "fields": [
+                    {
+                      "path": "/evpn/instances/instance/normal-evpn/rts/rt",
+                      "type": "list",
+                      "label": "rt",
+                      "fields": [
+                        {
+                          "path": "/evpn/instances/instance/normal-evpn/rts/rt/vrf-rt-type",
+                          "type": "enum",
+                          "label": "vrf-rt-type",
+                          "options": [
+                            {
+                              "label": "export-extcommunity",
+                              "value": "export-extcommunity"
+                            },
+                            {
+                              "label": "import-extcommunity",
+                              "value": "import-extcommunity"
+                            }
+                          ],
+                          "isKey": true
+                        },
+                        {
+                          "path": "/evpn/instances/instance/normal-evpn/rts/rt/vrf-rt-value",
+                          "type": "string",
+                          "label": "vrf-rt-value",
+                          "isKey": true
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "path": "/evpn/instances/instance/normal-evpn/tunnel-policy-name",
+                  "type": "string",
+                  "label": "tunnel-policy-name",
+                  "when": "../rd",
+                  "must": [
+                    {
+                      "expr": "not(/tnlm:tunnel-management/tnlm:tunnel-policys/tnlm:tunnel-policy[tnlm:name=current()]/tnlm:ipv6-set/tnlm:select-sequence/tnlm:select-tunnel-types/tnlm:select-tunnel-type) and /tnlm:tunnel-management/tnlm:tunnel-policys/tnlm:tunnel-policy[tnlm:name=current()]/tnlm:ipv4-set/tnlm:select-sequence/tnlm:select-tunnel-types/tnlm:select-tunnel-type[tnlm:type!='gre']"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/evpn/instances/instance/tunnel-infos",
+              "type": "group",
+              "label": "tunnel-infos",
+              "readonly": true,
+              "fields": [
+                {
+                  "path": "/evpn/instances/instance/tunnel-infos/tunnel-info",
+                  "type": "list",
+                  "label": "tunnel-info",
+                  "readonly": true,
+                  "fields": [
+                    {
+                      "path": "/evpn/instances/instance/tunnel-infos/tunnel-info/color",
+                      "type": "number",
+                      "label": "color",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/evpn/instances/instance/tunnel-infos/tunnel-info/id",
+                      "type": "number",
+                      "label": "id",
+                      "readonly": true,
+                      "isKey": true
+                    },
+                    {
+                      "path": "/evpn/instances/instance/tunnel-infos/tunnel-info/name",
+                      "type": "string",
+                      "label": "name",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/evpn/instances/instance/tunnel-infos/tunnel-info/peer-ip",
+                      "type": "string",
+                      "label": "peer-ip",
+                      "readonly": true,
+                      "isKey": true
+                    },
+                    {
+                      "path": "/evpn/instances/instance/tunnel-infos/tunnel-info/type",
+                      "type": "enum",
+                      "label": "type",
+                      "options": [
+                        {
+                          "label": "4over6",
+                          "value": "4over6"
+                        },
+                        {
+                          "label": "6over4",
+                          "value": "6over4"
+                        },
+                        {
+                          "label": "6rd",
+                          "value": "6rd"
+                        },
+                        {
+                          "label": "6to4",
+                          "value": "6to4"
+                        },
+                        {
+                          "label": "bgp",
+                          "value": "bgp"
+                        },
+                        {
+                          "label": "bgp-local-ifnet",
+                          "value": "bgp-local-ifnet"
+                        },
+                        {
+                          "label": "gre",
+                          "value": "gre"
+                        },
+                        {
+                          "label": "gre6",
+                          "value": "gre6"
+                        },
+                        {
+                          "label": "invalid",
+                          "value": "invalid"
+                        },
+                        {
+                          "label": "ipsec",
+                          "value": "ipsec"
+                        },
+                        {
+                          "label": "ldp",
+                          "value": "ldp"
+                        },
+                        {
+                          "label": "ldp6",
+                          "value": "ldp6"
+                        },
+                        {
+                          "label": "nvgre",
+                          "value": "nvgre"
+                        },
+                        {
+                          "label": "p2mp-gre",
+                          "value": "p2mp-gre"
+                        },
+                        {
+                          "label": "p2mp-ldp",
+                          "value": "p2mp-ldp"
+                        },
+                        {
+                          "label": "p2mp-te",
+                          "value": "p2mp-te"
+                        },
+                        {
+                          "label": "sr-te",
+                          "value": "sr-te"
+                        },
+                        {
+                          "label": "sr-te-policy",
+                          "value": "sr-te-policy"
+                        },
+                        {
+                          "label": "sr-te-policy-group",
+                          "value": "sr-te-policy-group"
+                        },
+                        {
+                          "label": "srbe-lsp",
+                          "value": "srbe-lsp"
+                        },
+                        {
+                          "label": "srv6",
+                          "value": "srv6"
+                        },
+                        {
+                          "label": "srv6-te-policy",
+                          "value": "srv6-te-policy"
+                        },
+                        {
+                          "label": "static-lsp",
+                          "value": "static-lsp"
+                        },
+                        {
+                          "label": "sub-group",
+                          "value": "sub-group"
+                        },
+                        {
+                          "label": "sub-te",
+                          "value": "sub-te"
+                        },
+                        {
+                          "label": "te",
+                          "value": "te"
+                        },
+                        {
+                          "label": "tnl-group",
+                          "value": "tnl-group"
+                        },
+                        {
+                          "label": "uni",
+                          "value": "uni"
+                        },
+                        {
+                          "label": "vxlan",
+                          "value": "vxlan"
+                        },
+                        {
+                          "label": "vxlan-nvo3",
+                          "value": "vxlan-nvo3"
+                        }
+                      ],
+                      "readonly": true,
+                      "isKey": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/evpn/instances/instance/type",
+              "type": "enum",
+              "label": "type",
+              "options": [
+                {
+                  "label": "b-evpn",
+                  "value": "b-evpn"
+                },
+                {
+                  "label": "bd-evpn",
+                  "value": "bd-evpn"
+                },
+                {
+                  "label": "i-evpn",
+                  "value": "i-evpn"
+                },
+                {
+                  "label": "normal",
+                  "value": "normal"
+                },
+                {
+                  "label": "vpws-evpn",
+                  "value": "vpws-evpn"
+                }
+              ],
+              "operationExclude": [
+                "update",
+                "delete"
+              ]
+            },
+            {
+              "path": "/evpn/instances/instance/vpws-evpn",
+              "type": "group",
+              "label": "vpws-evpn",
+              "when": "../type = 'vpws-evpn'",
+              "fields": [
+                {
+                  "path": "/evpn/instances/instance/vpws-evpn/default-color",
+                  "type": "number",
+                  "label": "default-color",
+                  "when": "../rd"
+                },
+                {
+                  "path": "/evpn/instances/instance/vpws-evpn/description",
+                  "type": "string",
+                  "label": "description",
+                  "pattern": "([^?]*)"
+                },
+                {
+                  "path": "/evpn/instances/instance/vpws-evpn/down-switch",
+                  "type": "boolean",
+                  "label": "down-switch",
+                  "when": "../rd and ../srv6-mode='te'"
+                },
+                {
+                  "path": "/evpn/instances/instance/vpws-evpn/export-acl-name-or-id",
+                  "type": "string",
+                  "label": "export-acl-name-or-id"
+                },
+                {
+                  "path": "/evpn/instances/instance/vpws-evpn/export-policy-name",
+                  "type": "string",
+                  "label": "export-policy-name",
+                  "when": "../rd"
+                },
+                {
+                  "path": "/evpn/instances/instance/vpws-evpn/import-acl-name-or-id",
+                  "type": "string",
+                  "label": "import-acl-name-or-id"
+                },
+                {
+                  "path": "/evpn/instances/instance/vpws-evpn/import-policy-name",
+                  "type": "string",
+                  "label": "import-policy-name",
+                  "when": "../rd"
+                },
+                {
+                  "path": "/evpn/instances/instance/vpws-evpn/local-remote-frr",
+                  "type": "enum",
+                  "label": "local-remote-frr",
+                  "options": [
+                    {
+                      "label": "default",
+                      "value": "default"
+                    },
+                    {
+                      "label": "disable",
+                      "value": "disable"
+                    },
+                    {
+                      "label": "enable",
+                      "value": "enable"
+                    }
+                  ]
+                },
+                {
+                  "path": "/evpn/instances/instance/vpws-evpn/rd",
+                  "type": "string",
+                  "label": "rd",
+                  "operationExclude": [
+                    "update"
+                  ]
+                },
+                {
+                  "path": "/evpn/instances/instance/vpws-evpn/remote-frr",
+                  "type": "enum",
+                  "label": "remote-frr",
+                  "options": [
+                    {
+                      "label": "default",
+                      "value": "default"
+                    },
+                    {
+                      "label": "disable",
+                      "value": "disable"
+                    },
+                    {
+                      "label": "enable",
+                      "value": "enable"
+                    }
+                  ]
+                },
+                {
+                  "path": "/evpn/instances/instance/vpws-evpn/rts",
+                  "type": "group",
+                  "label": "rts",
+                  "when": "../rd",
+                  "fields": [
+                    {
+                      "path": "/evpn/instances/instance/vpws-evpn/rts/rt",
+                      "type": "list",
+                      "label": "rt",
+                      "fields": [
+                        {
+                          "path": "/evpn/instances/instance/vpws-evpn/rts/rt/vrf-rt-type",
+                          "type": "enum",
+                          "label": "vrf-rt-type",
+                          "options": [
+                            {
+                              "label": "export-extcommunity",
+                              "value": "export-extcommunity"
+                            },
+                            {
+                              "label": "import-extcommunity",
+                              "value": "import-extcommunity"
+                            }
+                          ],
+                          "isKey": true
+                        },
+                        {
+                          "path": "/evpn/instances/instance/vpws-evpn/rts/rt/vrf-rt-value",
+                          "type": "string",
+                          "label": "vrf-rt-value",
+                          "isKey": true
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "path": "/evpn/instances/instance/vpws-evpn/srv6-mode",
+                  "type": "enum",
+                  "label": "srv6-mode",
+                  "options": [
+                    {
+                      "label": "be",
+                      "value": "be"
+                    },
+                    {
+                      "label": "te",
+                      "value": "te"
+                    }
+                  ],
+                  "when": "../rd"
+                },
+                {
+                  "path": "/evpn/instances/instance/vpws-evpn/timer-revert-delay",
+                  "type": "number",
+                  "label": "timer-revert-delay",
+                  "maximum": 3600,
+                  "when": "../rd"
+                },
+                {
+                  "path": "/evpn/instances/instance/vpws-evpn/tunnel-policy-name",
+                  "type": "string",
+                  "label": "tunnel-policy-name",
+                  "when": "../rd",
+                  "must": [
+                    {
+                      "expr": "/tnlm:tunnel-management/tnlm:tunnel-policys/tnlm:tunnel-policy[tnlm:name=current()]/tnlm:ipv6-set/tnlm:select-sequence/tnlm:select-tunnel-types/tnlm:select-tunnel-type[tnlm:type!='srv6-te-policy-group'] and /tnlm:tunnel-management/tnlm:tunnel-policys/tnlm:tunnel-policy[tnlm:name=current()]/tnlm:ipv4-set/tnlm:select-sequence/tnlm:select-tunnel-types/tnlm:select-tunnel-type[tnlm:type!='gre']"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/evpn/remote-sids",
+      "type": "group",
+      "label": "remote-sids",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/evpn/remote-sids/remote-sid",
+          "type": "list",
+          "label": "remote-sid",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/evpn/remote-sids/remote-sid/bd-id",
+              "type": "number",
+              "label": "bd-id",
+              "maximum": 16777215,
+              "readonly": true
+            },
+            {
+              "path": "/evpn/remote-sids/remote-sid/evpl-id",
+              "type": "number",
+              "label": "evpl-id",
+              "minimum": 1,
+              "maximum": 16777215,
+              "readonly": true
+            },
+            {
+              "path": "/evpn/remote-sids/remote-sid/evpn-name",
+              "type": "string",
+              "label": "evpn-name",
+              "readonly": true
+            },
+            {
+              "path": "/evpn/remote-sids/remote-sid/evpn-type",
+              "type": "enum",
+              "label": "evpn-type",
+              "options": [
+                {
+                  "label": "b-evpn",
+                  "value": "b-evpn"
+                },
+                {
+                  "label": "bd-evpn",
+                  "value": "bd-evpn"
+                },
+                {
+                  "label": "i-evpn",
+                  "value": "i-evpn"
+                },
+                {
+                  "label": "normal",
+                  "value": "normal"
+                },
+                {
+                  "label": "vpws-evpn",
+                  "value": "vpws-evpn"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "path": "/evpn/remote-sids/remote-sid/locator-mask-length",
+              "type": "number",
+              "label": "locator-mask-length",
+              "maximum": 128,
+              "readonly": true
+            },
+            {
+              "path": "/evpn/remote-sids/remote-sid/locator-sid",
+              "type": "string",
+              "label": "locator-sid",
+              "pattern": "((:|[0-9a-fA-F]{0,4}):)([0-9a-fA-F]{0,4}:){0,5}((([0-9a-fA-F]{0,4}:)?(:|[0-9a-fA-F]{0,4}))|(((25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])))(%[\\p{N}\\p{L}]+)?",
+              "readonly": true
+            },
+            {
+              "path": "/evpn/remote-sids/remote-sid/remote-sid",
+              "type": "string",
+              "label": "remote-sid",
+              "pattern": "((:|[0-9a-fA-F]{0,4}):)([0-9a-fA-F]{0,4}:){0,5}((([0-9a-fA-F]{0,4}:)?(:|[0-9a-fA-F]{0,4}))|(((25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])))(%[\\p{N}\\p{L}]+)?",
+              "readonly": true,
+              "isKey": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/evpn/site",
+      "type": "group",
+      "label": "site",
+      "fields": [
+        {
+          "path": "/evpn/site/ac-influnced-enable",
+          "type": "boolean",
+          "label": "ac-influnced-enable"
+        },
+        {
+          "path": "/evpn/site/ad-per-es-split",
+          "type": "enum",
+          "label": "ad-per-es-split",
+          "options": [
+            {
+              "label": "divide-rt",
+              "value": "divide-rt"
+            },
+            {
+              "label": "dont-divide-rt",
+              "value": "dont-divide-rt"
+            }
+          ]
+        },
+        {
+          "path": "/evpn/site/advertise-suppressed-route",
+          "type": "boolean",
+          "label": "advertise-suppressed-route"
+        },
+        {
+          "path": "/evpn/site/advertising-vxlan-tunnel-mac",
+          "type": "boolean",
+          "label": "advertising-vxlan-tunnel-mac"
+        },
+        {
+          "path": "/evpn/site/alm-threshold",
+          "type": "number",
+          "label": "alm-threshold",
+          "minimum": 1,
+          "maximum": 4294967295
+        },
+        {
+          "path": "/evpn/site/bypass-vxlan-enable",
+          "type": "boolean",
+          "label": "bypass-vxlan-enable"
+        },
+        {
+          "path": "/evpn/site/compatible",
+          "type": "boolean",
+          "label": "compatible"
+        },
+        {
+          "path": "/evpn/site/df-election-mode",
+          "type": "enum",
+          "label": "df-election-mode",
+          "options": [
+            {
+              "label": "per-interface",
+              "value": "per-interface"
+            },
+            {
+              "label": "per-vlan",
+              "value": "per-vlan"
+            }
+          ]
+        },
+        {
+          "path": "/evpn/site/dynamic-esis",
+          "type": "group",
+          "label": "dynamic-esis",
+          "fields": [
+            {
+              "path": "/evpn/site/dynamic-esis/dynamic-esi",
+              "type": "list",
+              "label": "dynamic-esi",
+              "fields": [
+                {
+                  "path": "/evpn/site/dynamic-esis/dynamic-esi/df-election-type",
+                  "type": "enum",
+                  "label": "df-election-type",
+                  "options": [
+                    {
+                      "label": "default",
+                      "value": "default"
+                    },
+                    {
+                      "label": "preference-based",
+                      "value": "preference-based"
+                    }
+                  ]
+                },
+                {
+                  "path": "/evpn/site/dynamic-esis/dynamic-esi/esi-name",
+                  "type": "string",
+                  "label": "esi-name",
+                  "isKey": true
+                },
+                {
+                  "path": "/evpn/site/dynamic-esis/dynamic-esi/non-revertive",
+                  "type": "boolean",
+                  "label": "non-revertive",
+                  "when": "../df-election-type='preference-based'"
+                },
+                {
+                  "path": "/evpn/site/dynamic-esis/dynamic-esi/preference",
+                  "type": "number",
+                  "label": "preference",
+                  "when": "../df-election-type='preference-based'"
+                },
+                {
+                  "path": "/evpn/site/dynamic-esis/dynamic-esi/redundancy-mode",
+                  "type": "enum",
+                  "label": "redundancy-mode",
+                  "options": [
+                    {
+                      "label": "all-active",
+                      "value": "all-active"
+                    },
+                    {
+                      "label": "none",
+                      "value": "none"
+                    },
+                    {
+                      "label": "single-active",
+                      "value": "single-active"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "path": "/evpn/site/irb-reoriginated",
+          "type": "boolean",
+          "label": "irb-reoriginated"
+        },
+        {
+          "path": "/evpn/site/irb-split-group",
+          "type": "boolean",
+          "label": "irb-split-group"
+        },
+        {
+          "path": "/evpn/site/local-remote-frr-enable",
+          "type": "boolean",
+          "label": "local-remote-frr-enable"
+        },
+        {
+          "path": "/evpn/site/local-remote-vpws-frr-enable",
+          "type": "boolean",
+          "label": "local-remote-vpws-frr-enable"
+        },
+        {
+          "path": "/evpn/site/mac-duplication",
+          "type": "group",
+          "label": "mac-duplication",
+          "fields": [
+            {
+              "path": "/evpn/site/mac-duplication/cycle",
+              "type": "number",
+              "label": "cycle",
+              "minimum": 60,
+              "maximum": 900,
+              "must": [
+                {
+                  "expr": "../cycle mod 10 = 0"
+                }
+              ]
+            },
+            {
+              "path": "/evpn/site/mac-duplication/period",
+              "type": "number",
+              "label": "period",
+              "minimum": 3,
+              "maximum": 10
+            },
+            {
+              "path": "/evpn/site/mac-duplication/recycle",
+              "type": "number",
+              "label": "recycle",
+              "minimum": 120,
+              "maximum": 3600,
+              "must": [
+                {
+                  "expr": "../recycle mod 10 = 0"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "path": "/evpn/site/recovery-percentage",
+          "type": "number",
+          "label": "recovery-percentage",
+          "minimum": 1,
+          "maximum": 95,
+          "when": "../alm-threshold"
+        },
+        {
+          "path": "/evpn/site/remote-vpws-frr-enable",
+          "type": "boolean",
+          "label": "remote-vpws-frr-enable"
+        },
+        {
+          "path": "/evpn/site/routerid-extend-private-enable",
+          "type": "boolean",
+          "label": "routerid-extend-private-enable"
+        },
+        {
+          "path": "/evpn/site/static-esis",
+          "type": "group",
+          "label": "static-esis",
+          "fields": [
+            {
+              "path": "/evpn/site/static-esis/static-esi",
+              "type": "list",
+              "label": "static-esi",
+              "fields": [
+                {
+                  "path": "/evpn/site/static-esis/static-esi/df-election-type",
+                  "type": "enum",
+                  "label": "df-election-type",
+                  "options": [
+                    {
+                      "label": "default",
+                      "value": "default"
+                    },
+                    {
+                      "label": "preference-based",
+                      "value": "preference-based"
+                    }
+                  ]
+                },
+                {
+                  "path": "/evpn/site/static-esis/static-esi/esi",
+                  "type": "string",
+                  "label": "esi",
+                  "pattern": "( *(00([0-9a-fA-F]){2}\\.(([0-9a-fA-F]){4}\\.){3}(([0-9a-fA-F]){4}))? *)",
+                  "isKey": true
+                },
+                {
+                  "path": "/evpn/site/static-esis/static-esi/non-revertive",
+                  "type": "boolean",
+                  "label": "non-revertive",
+                  "when": "../df-election-type='preference-based'"
+                },
+                {
+                  "path": "/evpn/site/static-esis/static-esi/preference",
+                  "type": "number",
+                  "label": "preference",
+                  "when": "../df-election-type='preference-based'"
+                },
+                {
+                  "path": "/evpn/site/static-esis/static-esi/redundancy-mode",
+                  "type": "enum",
+                  "label": "redundancy-mode",
+                  "options": [
+                    {
+                      "label": "all-active",
+                      "value": "all-active"
+                    },
+                    {
+                      "label": "none",
+                      "value": "none"
+                    },
+                    {
+                      "label": "single-active",
+                      "value": "single-active"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "path": "/evpn/site/vlan-extend-private-enable",
+          "type": "boolean",
+          "label": "vlan-extend-private-enable"
+        },
+        {
+          "path": "/evpn/site/vlan-extend-redirect-enable",
+          "type": "boolean",
+          "label": "vlan-extend-redirect-enable"
+        },
+        {
+          "path": "/evpn/site/vpws-df-election-mode",
+          "type": "enum",
+          "label": "vpws-df-election-mode",
+          "options": [
+            {
+              "label": "per-interface",
+              "value": "per-interface"
+            },
+            {
+              "label": "per-serviceid",
+              "value": "per-serviceid"
+            }
+          ]
+        }
+      ],
+      "presence": true
+    }
+  ]
+}

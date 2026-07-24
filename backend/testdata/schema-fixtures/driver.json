@@ -1,0 +1,3157 @@
+{
+  "module": "driver",
+  "title": "driver",
+  "vendor": "huawei",
+  "fields": [
+    {
+      "path": "/driver/area-energyinfos",
+      "type": "group",
+      "label": "area-energyinfos",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/driver/area-energyinfos/area-energyinfo",
+          "type": "list",
+          "label": "area-energyinfo",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/driver/area-energyinfos/area-energyinfo/area-assigned-power",
+              "type": "string",
+              "label": "area-assigned-power",
+              "readonly": true
+            },
+            {
+              "path": "/driver/area-energyinfos/area-energyinfo/area-id",
+              "type": "number",
+              "label": "area-id",
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/driver/area-energyinfos/area-energyinfo/area-left-power",
+              "type": "string",
+              "label": "area-left-power",
+              "readonly": true
+            },
+            {
+              "path": "/driver/area-energyinfos/area-energyinfo/area-rated-power",
+              "type": "string",
+              "label": "area-rated-power",
+              "readonly": true
+            },
+            {
+              "path": "/driver/area-energyinfos/area-energyinfo/area-used-power",
+              "type": "string",
+              "label": "area-used-power",
+              "readonly": true
+            },
+            {
+              "path": "/driver/area-energyinfos/area-energyinfo/board-energys",
+              "type": "group",
+              "label": "board-energys",
+              "readonly": true,
+              "fields": [
+                {
+                  "path": "/driver/area-energyinfos/area-energyinfo/board-energys/board-energy",
+                  "type": "list",
+                  "label": "board-energy",
+                  "readonly": true,
+                  "fields": [
+                    {
+                      "path": "/driver/area-energyinfos/area-energyinfo/board-energys/board-energy/current-power",
+                      "type": "string",
+                      "label": "current-power",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/driver/area-energyinfos/area-energyinfo/board-energys/board-energy/efficiency",
+                      "type": "string",
+                      "label": "efficiency",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/driver/area-energyinfos/area-energyinfo/board-energys/board-energy/electrical-value",
+                      "type": "string",
+                      "label": "electrical-value",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/driver/area-energyinfos/area-energyinfo/board-energys/board-energy/entity-index",
+                      "type": "number",
+                      "label": "entity-index",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/driver/area-energyinfos/area-energyinfo/board-energys/board-energy/pcb-name",
+                      "type": "string",
+                      "label": "pcb-name",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/driver/area-energyinfos/area-energyinfo/board-energys/board-energy/position",
+                      "type": "string",
+                      "label": "position",
+                      "readonly": true,
+                      "isKey": true
+                    },
+                    {
+                      "path": "/driver/area-energyinfos/area-energyinfo/board-energys/board-energy/power-threshold",
+                      "type": "string",
+                      "label": "power-threshold",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/driver/area-energyinfos/area-energyinfo/board-energys/board-energy/rated-power",
+                      "type": "string",
+                      "label": "rated-power",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/driver/area-energyinfos/area-energyinfo/board-energys/board-energy/voltage-value",
+                      "type": "string",
+                      "label": "voltage-value",
+                      "readonly": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/driver/area-energyinfos/area-energyinfo/chassis-position",
+              "type": "string",
+              "label": "chassis-position",
+              "readonly": true,
+              "isKey": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/driver/board-powers",
+      "type": "group",
+      "label": "board-powers",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/driver/board-powers/board-power",
+          "type": "list",
+          "label": "board-power",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/driver/board-powers/board-power/current-power",
+              "type": "string",
+              "label": "current-power",
+              "readonly": true
+            },
+            {
+              "path": "/driver/board-powers/board-power/efficiency",
+              "type": "string",
+              "label": "efficiency",
+              "readonly": true
+            },
+            {
+              "path": "/driver/board-powers/board-power/electrical-value",
+              "type": "string",
+              "label": "electrical-value",
+              "readonly": true
+            },
+            {
+              "path": "/driver/board-powers/board-power/entity-index",
+              "type": "number",
+              "label": "entity-index",
+              "readonly": true
+            },
+            {
+              "path": "/driver/board-powers/board-power/pcb-name",
+              "type": "string",
+              "label": "pcb-name",
+              "readonly": true
+            },
+            {
+              "path": "/driver/board-powers/board-power/position",
+              "type": "string",
+              "label": "position",
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/driver/board-powers/board-power/power-threshold",
+              "type": "string",
+              "label": "power-threshold",
+              "readonly": true
+            },
+            {
+              "path": "/driver/board-powers/board-power/rated-power",
+              "type": "string",
+              "label": "rated-power",
+              "readonly": true
+            },
+            {
+              "path": "/driver/board-powers/board-power/voltage-value",
+              "type": "string",
+              "label": "voltage-value",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/driver/bootinfos",
+      "type": "group",
+      "label": "bootinfos",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/driver/bootinfos/bootinfo",
+          "type": "list",
+          "label": "bootinfo",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/driver/bootinfos/bootinfo/board-type",
+              "type": "string",
+              "label": "board-type",
+              "readonly": true
+            },
+            {
+              "path": "/driver/bootinfos/bootinfo/position",
+              "type": "string",
+              "label": "position",
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/driver/bootinfos/bootinfo/rot",
+              "type": "string",
+              "label": "rot",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/driver/chassis-run-modes",
+      "type": "group",
+      "label": "chassis-run-modes",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/driver/chassis-run-modes/chassis-run-mode",
+          "type": "list",
+          "label": "chassis-run-mode",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/driver/chassis-run-modes/chassis-run-mode/chassis-id",
+              "type": "string",
+              "label": "chassis-id",
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/driver/chassis-run-modes/chassis-run-mode/current-run-cluster",
+              "type": "string",
+              "label": "current-run-cluster",
+              "readonly": true
+            },
+            {
+              "path": "/driver/chassis-run-modes/chassis-run-mode/current-run-mode",
+              "type": "enum",
+              "label": "current-run-mode",
+              "options": [
+                {
+                  "label": "ccc-0",
+                  "value": "ccc-0"
+                },
+                {
+                  "label": "ccc-1",
+                  "value": "ccc-1"
+                },
+                {
+                  "label": "ccc-2",
+                  "value": "ccc-2"
+                },
+                {
+                  "label": "single",
+                  "value": "single"
+                },
+                {
+                  "label": "virtual-cluster-chassis",
+                  "value": "virtual-cluster-chassis"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "path": "/driver/chassis-run-modes/chassis-run-mode/next-run-cluster",
+              "type": "string",
+              "label": "next-run-cluster",
+              "readonly": true
+            },
+            {
+              "path": "/driver/chassis-run-modes/chassis-run-mode/next-run-mode",
+              "type": "enum",
+              "label": "next-run-mode",
+              "options": [
+                {
+                  "label": "ccc-0",
+                  "value": "ccc-0"
+                },
+                {
+                  "label": "ccc-1",
+                  "value": "ccc-1"
+                },
+                {
+                  "label": "ccc-2",
+                  "value": "ccc-2"
+                },
+                {
+                  "label": "single",
+                  "value": "single"
+                },
+                {
+                  "label": "virtual-cluster-chassis",
+                  "value": "virtual-cluster-chassis"
+                }
+              ],
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/driver/check-running-software-safes",
+      "type": "group",
+      "label": "check-running-software-safes",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/driver/check-running-software-safes/check-running-software-safe",
+          "type": "list",
+          "label": "check-running-software-safe",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/driver/check-running-software-safes/check-running-software-safe/board-type",
+              "type": "string",
+              "label": "board-type",
+              "readonly": true
+            },
+            {
+              "path": "/driver/check-running-software-safes/check-running-software-safe/item",
+              "type": "enum",
+              "label": "item",
+              "options": [
+                {
+                  "label": "bios",
+                  "value": "bios"
+                },
+                {
+                  "label": "bootload",
+                  "value": "bootload"
+                }
+              ],
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/driver/check-running-software-safes/check-running-software-safe/pkgsha256hash",
+              "type": "string",
+              "label": "pkgsha256hash",
+              "readonly": true
+            },
+            {
+              "path": "/driver/check-running-software-safes/check-running-software-safe/position",
+              "type": "string",
+              "label": "position",
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/driver/check-running-software-safes/check-running-software-safe/result",
+              "type": "enum",
+              "label": "result",
+              "options": [
+                {
+                  "label": "fail",
+                  "value": "fail"
+                },
+                {
+                  "label": "not-support",
+                  "value": "not-support"
+                },
+                {
+                  "label": "pass",
+                  "value": "pass"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "path": "/driver/check-running-software-safes/check-running-software-safe/runsha256hash",
+              "type": "string",
+              "label": "runsha256hash",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/driver/electric-current-infos",
+      "type": "group",
+      "label": "electric-current-infos",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/driver/electric-current-infos/electric-current-info",
+          "type": "list",
+          "label": "electric-current-info",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/driver/electric-current-infos/electric-current-info/address",
+              "type": "string",
+              "label": "address",
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/driver/electric-current-infos/electric-current-info/channel",
+              "type": "number",
+              "label": "channel",
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/driver/electric-current-infos/electric-current-info/current",
+              "type": "string",
+              "label": "current",
+              "readonly": true
+            },
+            {
+              "path": "/driver/electric-current-infos/electric-current-info/fatal-high-threshold",
+              "type": "string",
+              "label": "fatal-high-threshold",
+              "readonly": true
+            },
+            {
+              "path": "/driver/electric-current-infos/electric-current-info/fatal-low-threshold",
+              "type": "string",
+              "label": "fatal-low-threshold",
+              "readonly": true
+            },
+            {
+              "path": "/driver/electric-current-infos/electric-current-info/i2c",
+              "type": "number",
+              "label": "i2c",
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/driver/electric-current-infos/electric-current-info/major-high-threshold",
+              "type": "string",
+              "label": "major-high-threshold",
+              "readonly": true
+            },
+            {
+              "path": "/driver/electric-current-infos/electric-current-info/major-low-threshold",
+              "type": "string",
+              "label": "major-low-threshold",
+              "readonly": true
+            },
+            {
+              "path": "/driver/electric-current-infos/electric-current-info/pcb-name",
+              "type": "string",
+              "label": "pcb-name",
+              "readonly": true
+            },
+            {
+              "path": "/driver/electric-current-infos/electric-current-info/position",
+              "type": "string",
+              "label": "position",
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/driver/electric-current-infos/electric-current-info/required-current",
+              "type": "string",
+              "label": "required-current",
+              "readonly": true
+            },
+            {
+              "path": "/driver/electric-current-infos/electric-current-info/state",
+              "type": "enum",
+              "label": "state",
+              "options": [
+                {
+                  "label": "fatal",
+                  "value": "fatal"
+                },
+                {
+                  "label": "major",
+                  "value": "major"
+                },
+                {
+                  "label": "minor",
+                  "value": "minor"
+                },
+                {
+                  "label": "normal",
+                  "value": "normal"
+                },
+                {
+                  "label": "unknown",
+                  "value": "unknown"
+                },
+                {
+                  "label": "unsupported",
+                  "value": "unsupported"
+                }
+              ],
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/driver/electronic-labels",
+      "type": "group",
+      "label": "electronic-labels",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/driver/electronic-labels/electronic-label",
+          "type": "list",
+          "label": "electronic-label",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/driver/electronic-labels/electronic-label/archives-info-version",
+              "type": "string",
+              "label": "archives-info-version",
+              "readonly": true
+            },
+            {
+              "path": "/driver/electronic-labels/electronic-label/barcode",
+              "type": "string",
+              "label": "barcode",
+              "readonly": true
+            },
+            {
+              "path": "/driver/electronic-labels/electronic-label/board-type",
+              "type": "string",
+              "label": "board-type",
+              "readonly": true
+            },
+            {
+              "path": "/driver/electronic-labels/electronic-label/bom-english-desc",
+              "type": "string",
+              "label": "bom-english-desc",
+              "readonly": true
+            },
+            {
+              "path": "/driver/electronic-labels/electronic-label/bom-local-desc",
+              "type": "string",
+              "label": "bom-local-desc",
+              "readonly": true
+            },
+            {
+              "path": "/driver/electronic-labels/electronic-label/entity-asset-id",
+              "type": "string",
+              "label": "entity-asset-id",
+              "readonly": true
+            },
+            {
+              "path": "/driver/electronic-labels/electronic-label/entity-bomid",
+              "type": "string",
+              "label": "entity-bomid",
+              "readonly": true
+            },
+            {
+              "path": "/driver/electronic-labels/electronic-label/entity-class",
+              "type": "enum",
+              "label": "entity-class",
+              "options": [
+                {
+                  "label": "board",
+                  "value": "board"
+                },
+                {
+                  "label": "card",
+                  "value": "card"
+                },
+                {
+                  "label": "cf-module",
+                  "value": "cf-module"
+                },
+                {
+                  "label": "chassis",
+                  "value": "chassis"
+                },
+                {
+                  "label": "clock-module",
+                  "value": "clock-module"
+                },
+                {
+                  "label": "cmu-module",
+                  "value": "cmu-module"
+                },
+                {
+                  "label": "container",
+                  "value": "container"
+                },
+                {
+                  "label": "dacs",
+                  "value": "dacs"
+                },
+                {
+                  "label": "dmu",
+                  "value": "dmu"
+                },
+                {
+                  "label": "ecu-module",
+                  "value": "ecu-module"
+                },
+                {
+                  "label": "fan",
+                  "value": "fan"
+                },
+                {
+                  "label": "flexiblecard-module",
+                  "value": "flexiblecard-module"
+                },
+                {
+                  "label": "icu-module",
+                  "value": "icu-module"
+                },
+                {
+                  "label": "lcd",
+                  "value": "lcd"
+                },
+                {
+                  "label": "lfe",
+                  "value": "lfe"
+                },
+                {
+                  "label": "lpu-module",
+                  "value": "lpu-module"
+                },
+                {
+                  "label": "mpu-module",
+                  "value": "mpu-module"
+                },
+                {
+                  "label": "other",
+                  "value": "other"
+                },
+                {
+                  "label": "pdu",
+                  "value": "pdu"
+                },
+                {
+                  "label": "pem",
+                  "value": "pem"
+                },
+                {
+                  "label": "pm",
+                  "value": "pm"
+                },
+                {
+                  "label": "pmu",
+                  "value": "pmu"
+                },
+                {
+                  "label": "port",
+                  "value": "port"
+                },
+                {
+                  "label": "powersupply",
+                  "value": "powersupply"
+                },
+                {
+                  "label": "pp-module",
+                  "value": "pp-module"
+                },
+                {
+                  "label": "sfu-module",
+                  "value": "sfu-module"
+                },
+                {
+                  "label": "swf-module",
+                  "value": "swf-module"
+                },
+                {
+                  "label": "tsu",
+                  "value": "tsu"
+                }
+              ],
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/driver/electronic-labels/electronic-label/entity-clei-code",
+              "type": "string",
+              "label": "entity-clei-code",
+              "readonly": true
+            },
+            {
+              "path": "/driver/electronic-labels/electronic-label/entity-elabel-extend",
+              "type": "string",
+              "label": "entity-elabel-extend",
+              "readonly": true
+            },
+            {
+              "path": "/driver/electronic-labels/electronic-label/entity-elabel-version",
+              "type": "string",
+              "label": "entity-elabel-version",
+              "readonly": true
+            },
+            {
+              "path": "/driver/electronic-labels/electronic-label/entity-index",
+              "type": "number",
+              "label": "entity-index",
+              "readonly": true
+            },
+            {
+              "path": "/driver/electronic-labels/electronic-label/entity-issue-number",
+              "type": "string",
+              "label": "entity-issue-number",
+              "readonly": true
+            },
+            {
+              "path": "/driver/electronic-labels/electronic-label/entity-model",
+              "type": "string",
+              "label": "entity-model",
+              "readonly": true
+            },
+            {
+              "path": "/driver/electronic-labels/electronic-label/entity-open-bomid",
+              "type": "string",
+              "label": "entity-open-bomid",
+              "readonly": true
+            },
+            {
+              "path": "/driver/electronic-labels/electronic-label/entity-serial-number",
+              "type": "number",
+              "label": "entity-serial-number",
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/driver/electronic-labels/electronic-label/entity-update-log",
+              "type": "string",
+              "label": "entity-update-log",
+              "readonly": true
+            },
+            {
+              "path": "/driver/electronic-labels/electronic-label/manufacturer-code",
+              "type": "string",
+              "label": "manufacturer-code",
+              "readonly": true
+            },
+            {
+              "path": "/driver/electronic-labels/electronic-label/manufacturer-date",
+              "type": "string",
+              "label": "manufacturer-date",
+              "readonly": true
+            },
+            {
+              "path": "/driver/electronic-labels/electronic-label/manufacturer-name",
+              "type": "string",
+              "label": "manufacturer-name",
+              "readonly": true
+            },
+            {
+              "path": "/driver/electronic-labels/electronic-label/position",
+              "type": "string",
+              "label": "position",
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/driver/electronic-labels/electronic-label/silk-screen",
+              "type": "string",
+              "label": "silk-screen",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/driver/global-attribute",
+      "type": "group",
+      "label": "global-attribute",
+      "fields": [
+        {
+          "path": "/driver/global-attribute/auto-upgrade-model",
+          "type": "enum",
+          "label": "auto-upgrade-model",
+          "options": [
+            {
+              "label": "close",
+              "value": "close"
+            },
+            {
+              "label": "open",
+              "value": "open"
+            }
+          ],
+          "readonly": true
+        },
+        {
+          "path": "/driver/global-attribute/board-channel-check-status",
+          "type": "enum",
+          "label": "board-channel-check-status",
+          "options": [
+            {
+              "label": "disable",
+              "value": "disable"
+            },
+            {
+              "label": "enable",
+              "value": "enable"
+            }
+          ],
+          "readonly": true
+        },
+        {
+          "path": "/driver/global-attribute/board-power-on-delay",
+          "type": "number",
+          "label": "board-power-on-delay",
+          "maximum": 65535
+        },
+        {
+          "path": "/driver/global-attribute/card-power-on-delay",
+          "type": "number",
+          "label": "card-power-on-delay",
+          "maximum": 65535
+        },
+        {
+          "path": "/driver/global-attribute/chassis-last-change-time",
+          "type": "number",
+          "label": "chassis-last-change-time",
+          "readonly": true
+        },
+        {
+          "path": "/driver/global-attribute/cur-chassis-number",
+          "type": "number",
+          "label": "cur-chassis-number",
+          "readonly": true
+        },
+        {
+          "path": "/driver/global-attribute/cur-device-work-mode",
+          "type": "enum",
+          "label": "cur-device-work-mode",
+          "options": [
+            {
+              "label": "base-function",
+              "value": "base-function"
+            },
+            {
+              "label": "ptn-iot-mode",
+              "value": "ptn-iot-mode"
+            }
+          ],
+          "readonly": true
+        },
+        {
+          "path": "/driver/global-attribute/cur-forward-mode",
+          "type": "enum",
+          "label": "cur-forward-mode",
+          "options": [
+            {
+              "label": "compatible",
+              "value": "compatible"
+            },
+            {
+              "label": "enhance",
+              "value": "enhance"
+            }
+          ],
+          "readonly": true
+        },
+        {
+          "path": "/driver/global-attribute/cur-system-mac-address",
+          "type": "string",
+          "label": "cur-system-mac-address",
+          "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+          "readonly": true
+        },
+        {
+          "path": "/driver/global-attribute/cur-system-mode",
+          "type": "enum",
+          "label": "cur-system-mode",
+          "options": [
+            {
+              "label": "classic",
+              "value": "classic"
+            },
+            {
+              "label": "ls",
+              "value": "ls"
+            }
+          ],
+          "readonly": true
+        },
+        {
+          "path": "/driver/global-attribute/cur-system-work-mode",
+          "type": "enum",
+          "label": "cur-system-work-mode",
+          "options": [
+            {
+              "label": "e-series",
+              "value": "e-series"
+            },
+            {
+              "label": "j-series",
+              "value": "j-series"
+            },
+            {
+              "label": "j2x-series",
+              "value": "j2x-series"
+            },
+            {
+              "label": "jx-series",
+              "value": "jx-series"
+            },
+            {
+              "label": "p-series",
+              "value": "p-series"
+            },
+            {
+              "label": "x-series",
+              "value": "x-series"
+            }
+          ],
+          "readonly": true
+        },
+        {
+          "path": "/driver/global-attribute/cur-work-mode",
+          "type": "enum",
+          "label": "cur-work-mode",
+          "options": [
+            {
+              "label": "non-redundant",
+              "value": "non-redundant"
+            },
+            {
+              "label": "redundant",
+              "value": "redundant"
+            }
+          ],
+          "readonly": true
+        },
+        {
+          "path": "/driver/global-attribute/dustproof-check",
+          "type": "enum",
+          "label": "dustproof-check",
+          "options": [
+            {
+              "label": "no",
+              "value": "no"
+            },
+            {
+              "label": "yes",
+              "value": "yes"
+            }
+          ]
+        },
+        {
+          "path": "/driver/global-attribute/energy-mode",
+          "type": "enum",
+          "label": "energy-mode",
+          "options": [
+            {
+              "label": "basic",
+              "value": "basic"
+            },
+            {
+              "label": "deep",
+              "value": "deep"
+            },
+            {
+              "label": "optimal",
+              "value": "optimal"
+            },
+            {
+              "label": "standard",
+              "value": "standard"
+            }
+          ]
+        },
+        {
+          "path": "/driver/global-attribute/energy-saving-pm",
+          "type": "enum",
+          "label": "energy-saving-pm",
+          "options": [
+            {
+              "label": "disable",
+              "value": "disable"
+            },
+            {
+              "label": "enable",
+              "value": "enable"
+            }
+          ],
+          "must": [
+            {
+              "expr": "not(../energy-mode='standard' and ../energy-saving-pm='enable')"
+            }
+          ],
+          "dynamicDefault": true
+        },
+        {
+          "path": "/driver/global-attribute/energy-saving-pm-status",
+          "type": "enum",
+          "label": "energy-saving-pm-status",
+          "options": [
+            {
+              "label": "disable",
+              "value": "disable"
+            },
+            {
+              "label": "enable",
+              "value": "enable"
+            }
+          ],
+          "readonly": true
+        },
+        {
+          "path": "/driver/global-attribute/entity-fault-board-isolate",
+          "type": "enum",
+          "label": "entity-fault-board-isolate",
+          "options": [
+            {
+              "label": "disable",
+              "value": "disable"
+            },
+            {
+              "label": "enable",
+              "value": "enable"
+            }
+          ]
+        },
+        {
+          "path": "/driver/global-attribute/entity-fault-card-isolate",
+          "type": "enum",
+          "label": "entity-fault-card-isolate",
+          "options": [
+            {
+              "label": "disable",
+              "value": "disable"
+            },
+            {
+              "label": "enable",
+              "value": "enable"
+            }
+          ]
+        },
+        {
+          "path": "/driver/global-attribute/fault-strategy",
+          "type": "enum",
+          "label": "fault-strategy",
+          "options": [
+            {
+              "label": "isolate",
+              "value": "isolate"
+            },
+            {
+              "label": "reset",
+              "value": "reset"
+            }
+          ]
+        },
+        {
+          "path": "/driver/global-attribute/high-temp-switch",
+          "type": "enum",
+          "label": "high-temp-switch",
+          "options": [
+            {
+              "label": "no",
+              "value": "no"
+            },
+            {
+              "label": "yes",
+              "value": "yes"
+            }
+          ]
+        },
+        {
+          "path": "/driver/global-attribute/interface-match-check",
+          "type": "enum",
+          "label": "interface-match-check",
+          "options": [
+            {
+              "label": "disable",
+              "value": "disable"
+            },
+            {
+              "label": "enable",
+              "value": "enable"
+            }
+          ]
+        },
+        {
+          "path": "/driver/global-attribute/least-sfu-number",
+          "type": "number",
+          "label": "least-sfu-number",
+          "minimum": 1,
+          "maximum": 8
+        },
+        {
+          "path": "/driver/global-attribute/max-chassis-number",
+          "type": "number",
+          "label": "max-chassis-number",
+          "minimum": 1,
+          "maximum": 255,
+          "readonly": true
+        },
+        {
+          "path": "/driver/global-attribute/next-device-work-mode",
+          "type": "enum",
+          "label": "next-device-work-mode",
+          "options": [
+            {
+              "label": "base-function",
+              "value": "base-function"
+            },
+            {
+              "label": "ptn-iot-mode",
+              "value": "ptn-iot-mode"
+            }
+          ],
+          "readonly": true
+        },
+        {
+          "path": "/driver/global-attribute/next-forward-mode",
+          "type": "enum",
+          "label": "next-forward-mode",
+          "options": [
+            {
+              "label": "compatible",
+              "value": "compatible"
+            },
+            {
+              "label": "enhance",
+              "value": "enhance"
+            }
+          ]
+        },
+        {
+          "path": "/driver/global-attribute/next-system-mode",
+          "type": "enum",
+          "label": "next-system-mode",
+          "options": [
+            {
+              "label": "classic",
+              "value": "classic"
+            },
+            {
+              "label": "ls",
+              "value": "ls"
+            }
+          ],
+          "readonly": true
+        },
+        {
+          "path": "/driver/global-attribute/next-system-work-mode",
+          "type": "enum",
+          "label": "next-system-work-mode",
+          "options": [
+            {
+              "label": "e-series",
+              "value": "e-series"
+            },
+            {
+              "label": "j-series",
+              "value": "j-series"
+            },
+            {
+              "label": "j2x-series",
+              "value": "j2x-series"
+            },
+            {
+              "label": "jx-series",
+              "value": "jx-series"
+            },
+            {
+              "label": "p-series",
+              "value": "p-series"
+            },
+            {
+              "label": "x-series",
+              "value": "x-series"
+            }
+          ],
+          "readonly": true
+        },
+        {
+          "path": "/driver/global-attribute/next-work-mode",
+          "type": "enum",
+          "label": "next-work-mode",
+          "options": [
+            {
+              "label": "non-redundant",
+              "value": "non-redundant"
+            },
+            {
+              "label": "redundant",
+              "value": "redundant"
+            }
+          ],
+          "readonly": true
+        },
+        {
+          "path": "/driver/global-attribute/offline-function",
+          "type": "enum",
+          "label": "offline-function",
+          "options": [
+            {
+              "label": "disable",
+              "value": "disable"
+            },
+            {
+              "label": "enable",
+              "value": "enable"
+            }
+          ]
+        },
+        {
+          "path": "/driver/global-attribute/optional-entity-fault-isolate",
+          "type": "enum",
+          "label": "optional-entity-fault-isolate",
+          "options": [
+            {
+              "label": "disable",
+              "value": "disable"
+            },
+            {
+              "label": "enable",
+              "value": "enable"
+            }
+          ]
+        },
+        {
+          "path": "/driver/global-attribute/pic-reload-cycle",
+          "type": "enum",
+          "label": "pic-reload-cycle",
+          "options": [
+            {
+              "label": "1440min",
+              "value": "1440min"
+            },
+            {
+              "label": "15min",
+              "value": "15min"
+            },
+            {
+              "label": "30min",
+              "value": "30min"
+            },
+            {
+              "label": "5min",
+              "value": "5min"
+            },
+            {
+              "label": "60min",
+              "value": "60min"
+            }
+          ]
+        },
+        {
+          "path": "/driver/global-attribute/power-consumption",
+          "type": "string",
+          "label": "power-consumption",
+          "readonly": true
+        },
+        {
+          "path": "/driver/global-attribute/sampling-period",
+          "type": "enum",
+          "label": "sampling-period",
+          "options": [
+            {
+              "label": "fifteen-minutes",
+              "value": "fifteen-minutes"
+            },
+            {
+              "label": "one-day",
+              "value": "one-day"
+            },
+            {
+              "label": "one-hour",
+              "value": "one-hour"
+            },
+            {
+              "label": "one-month",
+              "value": "one-month"
+            },
+            {
+              "label": "one-week",
+              "value": "one-week"
+            },
+            {
+              "label": "thirty-minutes",
+              "value": "thirty-minutes"
+            }
+          ]
+        },
+        {
+          "path": "/driver/global-attribute/sfu-switch-mode",
+          "type": "enum",
+          "label": "sfu-switch-mode",
+          "options": [
+            {
+              "label": "disable",
+              "value": "disable"
+            },
+            {
+              "label": "enable",
+              "value": "enable"
+            }
+          ]
+        },
+        {
+          "path": "/driver/global-attribute/split-resume",
+          "type": "enum",
+          "label": "split-resume",
+          "options": [
+            {
+              "label": "fast-preemption",
+              "value": "fast-preemption"
+            },
+            {
+              "label": "slave-reset",
+              "value": "slave-reset"
+            }
+          ],
+          "readonly": true
+        },
+        {
+          "path": "/driver/global-attribute/switch-port-mode",
+          "type": "string",
+          "label": "switch-port-mode",
+          "readonly": true
+        },
+        {
+          "path": "/driver/global-attribute/system-mac-address",
+          "type": "string",
+          "label": "system-mac-address",
+          "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}"
+        },
+        {
+          "path": "/driver/global-attribute/system-mac-number",
+          "type": "number",
+          "label": "system-mac-number",
+          "minimum": 1,
+          "maximum": 32,
+          "when": "../system-mac-address"
+        },
+        {
+          "path": "/driver/global-attribute/system-service-type",
+          "type": "string",
+          "label": "system-service-type",
+          "readonly": true
+        },
+        {
+          "path": "/driver/global-attribute/system-trap",
+          "type": "enum",
+          "label": "system-trap",
+          "options": [
+            {
+              "label": "base-trap",
+              "value": "base-trap"
+            },
+            {
+              "label": "dc-trap",
+              "value": "dc-trap"
+            },
+            {
+              "label": "entity-trap",
+              "value": "entity-trap"
+            }
+          ]
+        },
+        {
+          "path": "/driver/global-attribute/temp-query-mode",
+          "type": "enum",
+          "label": "temp-query-mode",
+          "options": [
+            {
+              "label": "brief",
+              "value": "brief"
+            },
+            {
+              "label": "default",
+              "value": "default"
+            }
+          ]
+        },
+        {
+          "path": "/driver/global-attribute/usb-uart-status",
+          "type": "enum",
+          "label": "usb-uart-status",
+          "options": [
+            {
+              "label": "closed",
+              "value": "closed"
+            },
+            {
+              "label": "not-support",
+              "value": "not-support"
+            },
+            {
+              "label": "open",
+              "value": "open"
+            }
+          ],
+          "readonly": true
+        },
+        {
+          "path": "/driver/global-attribute/vlt-query-mode",
+          "type": "enum",
+          "label": "vlt-query-mode",
+          "options": [
+            {
+              "label": "brief",
+              "value": "brief"
+            },
+            {
+              "label": "default",
+              "value": "default"
+            }
+          ]
+        },
+        {
+          "path": "/driver/global-attribute/warm-backup-mode",
+          "type": "enum",
+          "label": "warm-backup-mode",
+          "options": [
+            {
+              "label": "disable",
+              "value": "disable"
+            },
+            {
+              "label": "enable",
+              "value": "enable"
+            }
+          ],
+          "must": [
+            {
+              "expr": "not((../energy-mode='deep' or ../energy-mode='optimal') and (../warm-backup-mode='enable'))"
+            }
+          ]
+        },
+        {
+          "path": "/driver/global-attribute/warm-backup-states",
+          "type": "enum",
+          "label": "warm-backup-states",
+          "options": [
+            {
+              "label": "off",
+              "value": "off"
+            },
+            {
+              "label": "on",
+              "value": "on"
+            }
+          ],
+          "readonly": true
+        }
+      ]
+    },
+    {
+      "path": "/driver/inner-links",
+      "type": "group",
+      "label": "inner-links",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/driver/inner-links/inner-link",
+          "type": "list",
+          "label": "inner-link",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/driver/inner-links/inner-link/alarm-state",
+              "type": "enum",
+              "label": "alarm-state",
+              "options": [
+                {
+                  "label": "fault",
+                  "value": "fault"
+                },
+                {
+                  "label": "normal",
+                  "value": "normal"
+                },
+                {
+                  "label": "partial-fault",
+                  "value": "partial-fault"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "path": "/driver/inner-links/inner-link/left-chassis-position",
+              "type": "string",
+              "label": "left-chassis-position",
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/driver/inner-links/inner-link/left-chassis-type",
+              "type": "enum",
+              "label": "left-chassis-type",
+              "options": [
+                {
+                  "label": "central-chassis",
+                  "value": "central-chassis"
+                },
+                {
+                  "label": "line-chassis",
+                  "value": "line-chassis"
+                },
+                {
+                  "label": "other",
+                  "value": "other"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "path": "/driver/inner-links/inner-link/link-index",
+              "type": "string",
+              "label": "link-index",
+              "readonly": true
+            },
+            {
+              "path": "/driver/inner-links/inner-link/link-name",
+              "type": "string",
+              "label": "link-name",
+              "readonly": true
+            },
+            {
+              "path": "/driver/inner-links/inner-link/link-type",
+              "type": "enum",
+              "label": "link-type",
+              "options": [
+                {
+                  "label": "control-channel",
+                  "value": "control-channel"
+                },
+                {
+                  "label": "forward-channel",
+                  "value": "forward-channel"
+                },
+                {
+                  "label": "monitor-channel",
+                  "value": "monitor-channel"
+                },
+                {
+                  "label": "other",
+                  "value": "other"
+                }
+              ],
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/driver/inner-links/inner-link/operation-state",
+              "type": "enum",
+              "label": "operation-state",
+              "options": [
+                {
+                  "label": "fault",
+                  "value": "fault"
+                },
+                {
+                  "label": "normal",
+                  "value": "normal"
+                },
+                {
+                  "label": "partial-fault",
+                  "value": "partial-fault"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "path": "/driver/inner-links/inner-link/physical-inner-links",
+              "type": "group",
+              "label": "physical-inner-links",
+              "readonly": true,
+              "fields": [
+                {
+                  "path": "/driver/inner-links/inner-link/physical-inner-links/physical-inner-link",
+                  "type": "list",
+                  "label": "physical-inner-link",
+                  "readonly": true,
+                  "fields": [
+                    {
+                      "path": "/driver/inner-links/inner-link/physical-inner-links/physical-inner-link/check-points",
+                      "type": "group",
+                      "label": "check-points",
+                      "readonly": true,
+                      "fields": [
+                        {
+                          "path": "/driver/inner-links/inner-link/physical-inner-links/physical-inner-link/check-points/check-point",
+                          "type": "list",
+                          "label": "check-point",
+                          "readonly": true,
+                          "fields": [
+                            {
+                              "path": "/driver/inner-links/inner-link/physical-inner-links/physical-inner-link/check-points/check-point/entity-class",
+                              "type": "enum",
+                              "label": "entity-class",
+                              "options": [
+                                {
+                                  "label": "board",
+                                  "value": "board"
+                                },
+                                {
+                                  "label": "card",
+                                  "value": "card"
+                                },
+                                {
+                                  "label": "cf-module",
+                                  "value": "cf-module"
+                                },
+                                {
+                                  "label": "chassis",
+                                  "value": "chassis"
+                                },
+                                {
+                                  "label": "clock-module",
+                                  "value": "clock-module"
+                                },
+                                {
+                                  "label": "cmu-module",
+                                  "value": "cmu-module"
+                                },
+                                {
+                                  "label": "container",
+                                  "value": "container"
+                                },
+                                {
+                                  "label": "dacs",
+                                  "value": "dacs"
+                                },
+                                {
+                                  "label": "dmu",
+                                  "value": "dmu"
+                                },
+                                {
+                                  "label": "ecu-module",
+                                  "value": "ecu-module"
+                                },
+                                {
+                                  "label": "fan",
+                                  "value": "fan"
+                                },
+                                {
+                                  "label": "flexiblecard-module",
+                                  "value": "flexiblecard-module"
+                                },
+                                {
+                                  "label": "icu-module",
+                                  "value": "icu-module"
+                                },
+                                {
+                                  "label": "lcd",
+                                  "value": "lcd"
+                                },
+                                {
+                                  "label": "lfe",
+                                  "value": "lfe"
+                                },
+                                {
+                                  "label": "lpu-module",
+                                  "value": "lpu-module"
+                                },
+                                {
+                                  "label": "mpu-module",
+                                  "value": "mpu-module"
+                                },
+                                {
+                                  "label": "other",
+                                  "value": "other"
+                                },
+                                {
+                                  "label": "pdu",
+                                  "value": "pdu"
+                                },
+                                {
+                                  "label": "pem",
+                                  "value": "pem"
+                                },
+                                {
+                                  "label": "pm",
+                                  "value": "pm"
+                                },
+                                {
+                                  "label": "pmu",
+                                  "value": "pmu"
+                                },
+                                {
+                                  "label": "port",
+                                  "value": "port"
+                                },
+                                {
+                                  "label": "powersupply",
+                                  "value": "powersupply"
+                                },
+                                {
+                                  "label": "pp-module",
+                                  "value": "pp-module"
+                                },
+                                {
+                                  "label": "sfu-module",
+                                  "value": "sfu-module"
+                                },
+                                {
+                                  "label": "swf-module",
+                                  "value": "swf-module"
+                                },
+                                {
+                                  "label": "tsu",
+                                  "value": "tsu"
+                                }
+                              ],
+                              "readonly": true
+                            },
+                            {
+                              "path": "/driver/inner-links/inner-link/physical-inner-links/physical-inner-link/check-points/check-point/entity-name",
+                              "type": "string",
+                              "label": "entity-name",
+                              "readonly": true
+                            },
+                            {
+                              "path": "/driver/inner-links/inner-link/physical-inner-links/physical-inner-link/check-points/check-point/index",
+                              "type": "number",
+                              "label": "index",
+                              "readonly": true,
+                              "isKey": true
+                            },
+                            {
+                              "path": "/driver/inner-links/inner-link/physical-inner-links/physical-inner-link/check-points/check-point/reason-description",
+                              "type": "string",
+                              "label": "reason-description",
+                              "readonly": true
+                            },
+                            {
+                              "path": "/driver/inner-links/inner-link/physical-inner-links/physical-inner-link/check-points/check-point/reason-id",
+                              "type": "number",
+                              "label": "reason-id",
+                              "readonly": true
+                            },
+                            {
+                              "path": "/driver/inner-links/inner-link/physical-inner-links/physical-inner-link/check-points/check-point/repair-description",
+                              "type": "string",
+                              "label": "repair-description",
+                              "readonly": true
+                            },
+                            {
+                              "path": "/driver/inner-links/inner-link/physical-inner-links/physical-inner-link/check-points/check-point/repair-id",
+                              "type": "number",
+                              "label": "repair-id",
+                              "readonly": true
+                            },
+                            {
+                              "path": "/driver/inner-links/inner-link/physical-inner-links/physical-inner-link/check-points/check-point/status",
+                              "type": "enum",
+                              "label": "status",
+                              "options": [
+                                {
+                                  "label": "fault",
+                                  "value": "fault"
+                                },
+                                {
+                                  "label": "normal",
+                                  "value": "normal"
+                                },
+                                {
+                                  "label": "partial-fault",
+                                  "value": "partial-fault"
+                                }
+                              ],
+                              "readonly": true
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/driver/inner-links/inner-link/physical-inner-links/physical-inner-link/left-port-name",
+                      "type": "string",
+                      "label": "left-port-name",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/driver/inner-links/inner-link/physical-inner-links/physical-inner-link/operation-status",
+                      "type": "enum",
+                      "label": "operation-status",
+                      "options": [
+                        {
+                          "label": "fault",
+                          "value": "fault"
+                        },
+                        {
+                          "label": "normal",
+                          "value": "normal"
+                        },
+                        {
+                          "label": "partial-fault",
+                          "value": "partial-fault"
+                        }
+                      ],
+                      "readonly": true
+                    },
+                    {
+                      "path": "/driver/inner-links/inner-link/physical-inner-links/physical-inner-link/physical-link-name",
+                      "type": "string",
+                      "label": "physical-link-name",
+                      "readonly": true,
+                      "isKey": true
+                    },
+                    {
+                      "path": "/driver/inner-links/inner-link/physical-inner-links/physical-inner-link/repair-description",
+                      "type": "string",
+                      "label": "repair-description",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/driver/inner-links/inner-link/physical-inner-links/physical-inner-link/repair-id",
+                      "type": "number",
+                      "label": "repair-id",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/driver/inner-links/inner-link/physical-inner-links/physical-inner-link/right-port-name",
+                      "type": "string",
+                      "label": "right-port-name",
+                      "readonly": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/driver/inner-links/inner-link/right-chassis-position",
+              "type": "string",
+              "label": "right-chassis-position",
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/driver/inner-links/inner-link/right-chassis-type",
+              "type": "enum",
+              "label": "right-chassis-type",
+              "options": [
+                {
+                  "label": "central-chassis",
+                  "value": "central-chassis"
+                },
+                {
+                  "label": "line-chassis",
+                  "value": "line-chassis"
+                },
+                {
+                  "label": "other",
+                  "value": "other"
+                }
+              ],
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/driver/interface-match-check-states",
+      "type": "group",
+      "label": "interface-match-check-states",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/driver/interface-match-check-states/interface-match-check-state",
+          "type": "list",
+          "label": "interface-match-check-state",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/driver/interface-match-check-states/interface-match-check-state/object",
+              "type": "enum",
+              "label": "object",
+              "options": [
+                {
+                  "label": "board",
+                  "value": "board"
+                },
+                {
+                  "label": "card",
+                  "value": "card"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "path": "/driver/interface-match-check-states/interface-match-check-state/position",
+              "type": "string",
+              "label": "position",
+              "readonly": true,
+              "isKey": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/driver/io-inspect-attributes",
+      "type": "group",
+      "label": "io-inspect-attributes",
+      "fields": [
+        {
+          "path": "/driver/io-inspect-attributes/io-inspect-attribute",
+          "type": "list",
+          "label": "io-inspect-attribute",
+          "fields": [
+            {
+              "path": "/driver/io-inspect-attributes/io-inspect-attribute/alarm-name",
+              "type": "string",
+              "label": "alarm-name",
+              "operationExclude": [
+                "update",
+                "delete"
+              ]
+            },
+            {
+              "path": "/driver/io-inspect-attributes/io-inspect-attribute/default-states",
+              "type": "enum",
+              "label": "default-states",
+              "required": true,
+              "options": [
+                {
+                  "label": "close",
+                  "value": "close"
+                },
+                {
+                  "label": "open",
+                  "value": "open"
+                }
+              ]
+            },
+            {
+              "path": "/driver/io-inspect-attributes/io-inspect-attribute/index",
+              "type": "number",
+              "label": "index",
+              "isKey": true
+            },
+            {
+              "path": "/driver/io-inspect-attributes/io-inspect-attribute/position",
+              "type": "string",
+              "label": "position",
+              "isKey": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/driver/io-inspect-states",
+      "type": "group",
+      "label": "io-inspect-states",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/driver/io-inspect-states/io-inspect-state",
+          "type": "list",
+          "label": "io-inspect-state",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/driver/io-inspect-states/io-inspect-state/alarm-name",
+              "type": "string",
+              "label": "alarm-name",
+              "readonly": true
+            },
+            {
+              "path": "/driver/io-inspect-states/io-inspect-state/alarm-status",
+              "type": "enum",
+              "label": "alarm-status",
+              "options": [
+                {
+                  "label": "abnormal",
+                  "value": "abnormal"
+                },
+                {
+                  "label": "normal",
+                  "value": "normal"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "path": "/driver/io-inspect-states/io-inspect-state/default-states",
+              "type": "enum",
+              "label": "default-states",
+              "options": [
+                {
+                  "label": "NA",
+                  "value": "NA"
+                },
+                {
+                  "label": "close",
+                  "value": "close"
+                },
+                {
+                  "label": "open",
+                  "value": "open"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "path": "/driver/io-inspect-states/io-inspect-state/index",
+              "type": "number",
+              "label": "index",
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/driver/io-inspect-states/io-inspect-state/position",
+              "type": "string",
+              "label": "position",
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/driver/io-inspect-states/io-inspect-state/states",
+              "type": "enum",
+              "label": "states",
+              "options": [
+                {
+                  "label": "NA",
+                  "value": "NA"
+                },
+                {
+                  "label": "close",
+                  "value": "close"
+                },
+                {
+                  "label": "open",
+                  "value": "open"
+                }
+              ],
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/driver/mbusnodes",
+      "type": "group",
+      "label": "mbusnodes",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/driver/mbusnodes/mbusnode",
+          "type": "list",
+          "label": "mbusnode",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/driver/mbusnodes/mbusnode/board-type",
+              "type": "string",
+              "label": "board-type",
+              "readonly": true
+            },
+            {
+              "path": "/driver/mbusnodes/mbusnode/eeprom-number",
+              "type": "number",
+              "label": "eeprom-number",
+              "maximum": 24,
+              "readonly": true
+            },
+            {
+              "path": "/driver/mbusnodes/mbusnode/register",
+              "type": "string",
+              "label": "register",
+              "readonly": true
+            },
+            {
+              "path": "/driver/mbusnodes/mbusnode/slot-id",
+              "type": "string",
+              "label": "slot-id",
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/driver/mbusnodes/mbusnode/temperature-monitor-number",
+              "type": "number",
+              "label": "temperature-monitor-number",
+              "maximum": 128,
+              "readonly": true
+            },
+            {
+              "path": "/driver/mbusnodes/mbusnode/voltage-monitor-number",
+              "type": "number",
+              "label": "voltage-monitor-number",
+              "maximum": 128,
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/driver/multi-chassis-attributes",
+      "type": "group",
+      "label": "multi-chassis-attributes",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/driver/multi-chassis-attributes/multi-chassis-attribute",
+          "type": "list",
+          "label": "multi-chassis-attribute",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/driver/multi-chassis-attributes/multi-chassis-attribute/chassis-type",
+              "type": "enum",
+              "label": "chassis-type",
+              "options": [
+                {
+                  "label": "ccc",
+                  "value": "ccc"
+                },
+                {
+                  "label": "clc",
+                  "value": "clc"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "path": "/driver/multi-chassis-attributes/multi-chassis-attribute/current-chassis-id",
+              "type": "number",
+              "label": "current-chassis-id",
+              "minimum": 1,
+              "maximum": 2,
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/driver/multi-chassis-attributes/multi-chassis-attribute/next-chassis-id",
+              "type": "number",
+              "label": "next-chassis-id",
+              "minimum": 1,
+              "maximum": 2,
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/driver/rollback-attribute",
+      "type": "group",
+      "label": "rollback-attribute",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/driver/rollback-attribute/rollback-config-file",
+          "type": "string",
+          "label": "rollback-config-file",
+          "readonly": true
+        },
+        {
+          "path": "/driver/rollback-attribute/rollback-paf-file",
+          "type": "string",
+          "label": "rollback-paf-file",
+          "readonly": true
+        },
+        {
+          "path": "/driver/rollback-attribute/rollback-patch-file",
+          "type": "string",
+          "label": "rollback-patch-file",
+          "readonly": true
+        },
+        {
+          "path": "/driver/rollback-attribute/rollback-remain-time",
+          "type": "string",
+          "label": "rollback-remain-time",
+          "readonly": true
+        },
+        {
+          "path": "/driver/rollback-attribute/rollback-result",
+          "type": "string",
+          "label": "rollback-result",
+          "readonly": true
+        },
+        {
+          "path": "/driver/rollback-attribute/rollback-soft-pack",
+          "type": "string",
+          "label": "rollback-soft-pack",
+          "readonly": true
+        }
+      ]
+    },
+    {
+      "path": "/driver/slave-defaults",
+      "type": "group",
+      "label": "slave-defaults",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/driver/slave-defaults/slave-default",
+          "type": "list",
+          "label": "slave-default",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/driver/slave-defaults/slave-default/chassis-id",
+              "type": "string",
+              "label": "chassis-id",
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/driver/slave-defaults/slave-default/slave-default",
+              "type": "string",
+              "label": "slave-default",
+              "readonly": true
+            },
+            {
+              "path": "/driver/slave-defaults/slave-default/slot-id",
+              "type": "string",
+              "label": "slot-id",
+              "readonly": true,
+              "isKey": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/driver/slot-statistics",
+      "type": "group",
+      "label": "slot-statistics",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/driver/slot-statistics/slot-statistic",
+          "type": "list",
+          "label": "slot-statistic",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/driver/slot-statistics/slot-statistic/chassis-id",
+              "type": "string",
+              "label": "chassis-id",
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/driver/slot-statistics/slot-statistic/online-slot-number",
+              "type": "number",
+              "label": "online-slot-number",
+              "maximum": 65535,
+              "readonly": true
+            },
+            {
+              "path": "/driver/slot-statistics/slot-statistic/slot-type",
+              "type": "enum",
+              "label": "slot-type",
+              "options": [
+                {
+                  "label": "CMU",
+                  "value": "CMU"
+                },
+                {
+                  "label": "FAN",
+                  "value": "FAN"
+                },
+                {
+                  "label": "ICU",
+                  "value": "ICU"
+                },
+                {
+                  "label": "IPU",
+                  "value": "IPU"
+                },
+                {
+                  "label": "LPU",
+                  "value": "LPU"
+                },
+                {
+                  "label": "MPU",
+                  "value": "MPU"
+                },
+                {
+                  "label": "PMU",
+                  "value": "PMU"
+                },
+                {
+                  "label": "POWER",
+                  "value": "POWER"
+                },
+                {
+                  "label": "SFU",
+                  "value": "SFU"
+                }
+              ],
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/driver/slot-statistics/slot-statistic/total-slot-number",
+              "type": "number",
+              "label": "total-slot-number",
+              "minimum": 1,
+              "maximum": 65535,
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/driver/stratum-3-clocks",
+      "type": "group",
+      "label": "stratum-3-clocks",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/driver/stratum-3-clocks/stratum-3-clock",
+          "type": "list",
+          "label": "stratum-3-clock",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/driver/stratum-3-clocks/stratum-3-clock/board-device-type",
+              "type": "enum",
+              "label": "board-device-type",
+              "options": [
+                {
+                  "label": "LPU",
+                  "value": "LPU"
+                },
+                {
+                  "label": "SFU",
+                  "value": "SFU"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "path": "/driver/stratum-3-clocks/stratum-3-clock/clock-slot-id",
+              "type": "string",
+              "label": "clock-slot-id",
+              "readonly": true
+            },
+            {
+              "path": "/driver/stratum-3-clocks/stratum-3-clock/clock-type",
+              "type": "enum",
+              "label": "clock-type",
+              "options": [
+                {
+                  "label": "line-clock",
+                  "value": "line-clock"
+                },
+                {
+                  "label": "syn-clock",
+                  "value": "syn-clock"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "path": "/driver/stratum-3-clocks/stratum-3-clock/slot-id",
+              "type": "string",
+              "label": "slot-id",
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/driver/stratum-3-clocks/stratum-3-clock/switch-mode",
+              "type": "enum",
+              "label": "switch-mode",
+              "options": [
+                {
+                  "label": "auto-choice",
+                  "value": "auto-choice"
+                },
+                {
+                  "label": "force-choice",
+                  "value": "force-choice"
+                }
+              ],
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/driver/system-sync-clocks",
+      "type": "group",
+      "label": "system-sync-clocks",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/driver/system-sync-clocks/system-sync-clock",
+          "type": "list",
+          "label": "system-sync-clock",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/driver/system-sync-clocks/system-sync-clock/board-device-type",
+              "type": "enum",
+              "label": "board-device-type",
+              "options": [
+                {
+                  "label": "LPU",
+                  "value": "LPU"
+                },
+                {
+                  "label": "SFU",
+                  "value": "SFU"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "path": "/driver/system-sync-clocks/system-sync-clock/clock-slot-id",
+              "type": "string",
+              "label": "clock-slot-id",
+              "readonly": true
+            },
+            {
+              "path": "/driver/system-sync-clocks/system-sync-clock/clock-type",
+              "type": "enum",
+              "label": "clock-type",
+              "options": [
+                {
+                  "label": "line-clock",
+                  "value": "line-clock"
+                },
+                {
+                  "label": "syn-clock",
+                  "value": "syn-clock"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "path": "/driver/system-sync-clocks/system-sync-clock/lock-state",
+              "type": "enum",
+              "label": "lock-state",
+              "options": [
+                {
+                  "label": "locked",
+                  "value": "locked"
+                },
+                {
+                  "label": "unlocked",
+                  "value": "unlocked"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "path": "/driver/system-sync-clocks/system-sync-clock/slot-id",
+              "type": "string",
+              "label": "slot-id",
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/driver/system-sync-clocks/system-sync-clock/switch-mode",
+              "type": "enum",
+              "label": "switch-mode",
+              "options": [
+                {
+                  "label": "auto-choice",
+                  "value": "auto-choice"
+                },
+                {
+                  "label": "force-choice",
+                  "value": "force-choice"
+                }
+              ],
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/driver/temperature2s",
+      "type": "group",
+      "label": "temperature2s",
+      "fields": [
+        {
+          "path": "/driver/temperature2s/temperature2",
+          "type": "list",
+          "label": "temperature2",
+          "fields": [
+            {
+              "path": "/driver/temperature2s/temperature2/current-temperature",
+              "type": "number",
+              "label": "current-temperature",
+              "readonly": true
+            },
+            {
+              "path": "/driver/temperature2s/temperature2/fan-adjust-high-temperature",
+              "type": "number",
+              "label": "fan-adjust-high-temperature",
+              "required": true,
+              "minimum": -50,
+              "maximum": 127,
+              "must": [
+                {
+                  "expr": "(../fan-adjust-high-temperature\u003e../fan-adjust-low-temperature)"
+                }
+              ]
+            },
+            {
+              "path": "/driver/temperature2s/temperature2/fan-adjust-low-temperature",
+              "type": "number",
+              "label": "fan-adjust-low-temperature",
+              "required": true,
+              "minimum": -50,
+              "maximum": 127,
+              "must": [
+                {
+                  "expr": "(../fan-adjust-low-temperature\u003c../fan-adjust-high-temperature)"
+                }
+              ]
+            },
+            {
+              "path": "/driver/temperature2s/temperature2/fatal-threshold",
+              "type": "number",
+              "label": "fatal-threshold",
+              "readonly": true
+            },
+            {
+              "path": "/driver/temperature2s/temperature2/fatal-threshold-percent",
+              "type": "number",
+              "label": "fatal-threshold-percent",
+              "required": true,
+              "minimum": 80,
+              "maximum": 120
+            },
+            {
+              "path": "/driver/temperature2s/temperature2/major-threshold",
+              "type": "number",
+              "label": "major-threshold",
+              "readonly": true
+            },
+            {
+              "path": "/driver/temperature2s/temperature2/major-threshold-percent",
+              "type": "number",
+              "label": "major-threshold-percent",
+              "required": true,
+              "minimum": 80,
+              "maximum": 120
+            },
+            {
+              "path": "/driver/temperature2s/temperature2/minor-threshold",
+              "type": "number",
+              "label": "minor-threshold",
+              "readonly": true
+            },
+            {
+              "path": "/driver/temperature2s/temperature2/minor-threshold-percent",
+              "type": "number",
+              "label": "minor-threshold-percent",
+              "required": true,
+              "minimum": 80,
+              "maximum": 120
+            },
+            {
+              "path": "/driver/temperature2s/temperature2/pcb-name",
+              "type": "string",
+              "label": "pcb-name",
+              "readonly": true
+            },
+            {
+              "path": "/driver/temperature2s/temperature2/position",
+              "type": "string",
+              "label": "position",
+              "isKey": true
+            },
+            {
+              "path": "/driver/temperature2s/temperature2/sensor-id",
+              "type": "number",
+              "label": "sensor-id",
+              "minimum": 1,
+              "maximum": 255,
+              "isKey": true
+            },
+            {
+              "path": "/driver/temperature2s/temperature2/sensor-name",
+              "type": "string",
+              "label": "sensor-name",
+              "readonly": true,
+              "supportFilter": true
+            },
+            {
+              "path": "/driver/temperature2s/temperature2/state",
+              "type": "enum",
+              "label": "state",
+              "options": [
+                {
+                  "label": "fatal",
+                  "value": "fatal"
+                },
+                {
+                  "label": "major",
+                  "value": "major"
+                },
+                {
+                  "label": "minor",
+                  "value": "minor"
+                },
+                {
+                  "label": "normal",
+                  "value": "normal"
+                },
+                {
+                  "label": "unknown",
+                  "value": "unknown"
+                },
+                {
+                  "label": "unsupported",
+                  "value": "unsupported"
+                }
+              ],
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/driver/temperatures",
+      "type": "group",
+      "label": "temperatures",
+      "fields": [
+        {
+          "path": "/driver/temperatures/temperature",
+          "type": "list",
+          "label": "temperature",
+          "fields": [
+            {
+              "path": "/driver/temperatures/temperature/address",
+              "type": "string",
+              "label": "address",
+              "isKey": true
+            },
+            {
+              "path": "/driver/temperatures/temperature/channel",
+              "type": "number",
+              "label": "channel",
+              "isKey": true
+            },
+            {
+              "path": "/driver/temperatures/temperature/current-temperature",
+              "type": "number",
+              "label": "current-temperature",
+              "readonly": true
+            },
+            {
+              "path": "/driver/temperatures/temperature/entity-index",
+              "type": "number",
+              "label": "entity-index",
+              "readonly": true
+            },
+            {
+              "path": "/driver/temperatures/temperature/fan-tmax",
+              "type": "number",
+              "label": "fan-tmax",
+              "minimum": -50,
+              "maximum": 127,
+              "when": "../minor and ../major and ../fatal",
+              "must": [
+                {
+                  "expr": "(../fan-tmax\u003e=../fan-tmin)"
+                }
+              ],
+              "dynamicDefault": true
+            },
+            {
+              "path": "/driver/temperatures/temperature/fan-tmax-states",
+              "type": "number",
+              "label": "fan-tmax-states",
+              "minimum": -50,
+              "maximum": 127,
+              "readonly": true
+            },
+            {
+              "path": "/driver/temperatures/temperature/fan-tmin",
+              "type": "number",
+              "label": "fan-tmin",
+              "minimum": -50,
+              "maximum": 127,
+              "when": "../minor and ../major and ../fatal",
+              "must": [
+                {
+                  "expr": "(../fan-tmin\u003c=../fan-tmax)"
+                }
+              ],
+              "dynamicDefault": true
+            },
+            {
+              "path": "/driver/temperatures/temperature/fan-tmin-states",
+              "type": "number",
+              "label": "fan-tmin-states",
+              "minimum": -50,
+              "maximum": 127,
+              "readonly": true
+            },
+            {
+              "path": "/driver/temperatures/temperature/fatal",
+              "type": "number",
+              "label": "fatal",
+              "minimum": 80,
+              "maximum": 120,
+              "must": [
+                {
+                  "expr": "(../fatal\u003e=../minor and ../fatal\u003e=../major)"
+                }
+              ]
+            },
+            {
+              "path": "/driver/temperatures/temperature/fatal-alarm-threshold",
+              "type": "number",
+              "label": "fatal-alarm-threshold",
+              "readonly": true
+            },
+            {
+              "path": "/driver/temperatures/temperature/i2c",
+              "type": "number",
+              "label": "i2c",
+              "isKey": true
+            },
+            {
+              "path": "/driver/temperatures/temperature/major",
+              "type": "number",
+              "label": "major",
+              "minimum": 80,
+              "maximum": 120,
+              "must": [
+                {
+                  "expr": "(../major\u003e=../minor and ../major\u003c=../fatal)"
+                }
+              ]
+            },
+            {
+              "path": "/driver/temperatures/temperature/major-alarm-threshold",
+              "type": "number",
+              "label": "major-alarm-threshold",
+              "readonly": true
+            },
+            {
+              "path": "/driver/temperatures/temperature/minor",
+              "type": "number",
+              "label": "minor",
+              "minimum": 80,
+              "maximum": 120,
+              "must": [
+                {
+                  "expr": "(../minor\u003c=../major and ../minor\u003c=../fatal)"
+                }
+              ]
+            },
+            {
+              "path": "/driver/temperatures/temperature/minor-alarm-threshold",
+              "type": "number",
+              "label": "minor-alarm-threshold",
+              "readonly": true
+            },
+            {
+              "path": "/driver/temperatures/temperature/pcb-name",
+              "type": "string",
+              "label": "pcb-name",
+              "readonly": true
+            },
+            {
+              "path": "/driver/temperatures/temperature/position",
+              "type": "string",
+              "label": "position",
+              "isKey": true
+            },
+            {
+              "path": "/driver/temperatures/temperature/state",
+              "type": "enum",
+              "label": "state",
+              "options": [
+                {
+                  "label": "fatal",
+                  "value": "fatal"
+                },
+                {
+                  "label": "major",
+                  "value": "major"
+                },
+                {
+                  "label": "minor",
+                  "value": "minor"
+                },
+                {
+                  "label": "normal",
+                  "value": "normal"
+                },
+                {
+                  "label": "unknown",
+                  "value": "unknown"
+                },
+                {
+                  "label": "unsupported",
+                  "value": "unsupported"
+                }
+              ],
+              "readonly": true
+            }
+          ],
+          "operationExclude": [
+            "create"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/driver/voltageinfos",
+      "type": "group",
+      "label": "voltageinfos",
+      "fields": [
+        {
+          "path": "/driver/voltageinfos/voltageinfo",
+          "type": "list",
+          "label": "voltageinfo",
+          "fields": [
+            {
+              "path": "/driver/voltageinfos/voltageinfo/address",
+              "type": "string",
+              "label": "address",
+              "isKey": true
+            },
+            {
+              "path": "/driver/voltageinfos/voltageinfo/channel",
+              "type": "number",
+              "label": "channel",
+              "isKey": true
+            },
+            {
+              "path": "/driver/voltageinfos/voltageinfo/current-voltage",
+              "type": "string",
+              "label": "current-voltage",
+              "readonly": true
+            },
+            {
+              "path": "/driver/voltageinfos/voltageinfo/entity-index",
+              "type": "number",
+              "label": "entity-index",
+              "readonly": true
+            },
+            {
+              "path": "/driver/voltageinfos/voltageinfo/fatal-voltage-threshold-high",
+              "type": "number",
+              "label": "fatal-voltage-threshold-high",
+              "minimum": 80,
+              "maximum": 120,
+              "must": [
+                {
+                  "expr": "(../fatal-voltage-threshold-high\u003e=../major-voltage-threshold-low and ../fatal-voltage-threshold-high\u003e=../major-voltage-threshold-high and ../fatal-voltage-threshold-high\u003e=../fatal-voltage-threshold-low)"
+                }
+              ]
+            },
+            {
+              "path": "/driver/voltageinfos/voltageinfo/fatal-voltage-threshold-low",
+              "type": "number",
+              "label": "fatal-voltage-threshold-low",
+              "minimum": 80,
+              "maximum": 120,
+              "must": [
+                {
+                  "expr": "(../fatal-voltage-threshold-low\u003c=../major-voltage-threshold-low and ../fatal-voltage-threshold-low\u003c=../major-voltage-threshold-high and ../fatal-voltage-threshold-low\u003c=../fatal-voltage-threshold-high)"
+                }
+              ]
+            },
+            {
+              "path": "/driver/voltageinfos/voltageinfo/high-threshold",
+              "type": "string",
+              "label": "high-threshold",
+              "readonly": true
+            },
+            {
+              "path": "/driver/voltageinfos/voltageinfo/i2c",
+              "type": "number",
+              "label": "i2c",
+              "isKey": true
+            },
+            {
+              "path": "/driver/voltageinfos/voltageinfo/low-threshold",
+              "type": "string",
+              "label": "low-threshold",
+              "readonly": true
+            },
+            {
+              "path": "/driver/voltageinfos/voltageinfo/major-high-threshold",
+              "type": "string",
+              "label": "major-high-threshold",
+              "readonly": true
+            },
+            {
+              "path": "/driver/voltageinfos/voltageinfo/major-low-threshold",
+              "type": "string",
+              "label": "major-low-threshold",
+              "readonly": true
+            },
+            {
+              "path": "/driver/voltageinfos/voltageinfo/major-voltage-threshold-high",
+              "type": "number",
+              "label": "major-voltage-threshold-high",
+              "minimum": 80,
+              "maximum": 120,
+              "must": [
+                {
+                  "expr": "(../major-voltage-threshold-high\u003e=../major-voltage-threshold-low and ../major-voltage-threshold-high\u003e=../fatal-voltage-threshold-low and ../major-voltage-threshold-high\u003c=../fatal-voltage-threshold-high)"
+                }
+              ]
+            },
+            {
+              "path": "/driver/voltageinfos/voltageinfo/major-voltage-threshold-low",
+              "type": "number",
+              "label": "major-voltage-threshold-low",
+              "minimum": 80,
+              "maximum": 120,
+              "must": [
+                {
+                  "expr": "(../major-voltage-threshold-low\u003c=../major-voltage-threshold-high and ../major-voltage-threshold-low\u003e=../fatal-voltage-threshold-low and ../major-voltage-threshold-low\u003c=../fatal-voltage-threshold-high)"
+                }
+              ]
+            },
+            {
+              "path": "/driver/voltageinfos/voltageinfo/pcb-name",
+              "type": "string",
+              "label": "pcb-name",
+              "readonly": true
+            },
+            {
+              "path": "/driver/voltageinfos/voltageinfo/position",
+              "type": "string",
+              "label": "position",
+              "isKey": true
+            },
+            {
+              "path": "/driver/voltageinfos/voltageinfo/required-voltage",
+              "type": "string",
+              "label": "required-voltage",
+              "readonly": true
+            },
+            {
+              "path": "/driver/voltageinfos/voltageinfo/state",
+              "type": "enum",
+              "label": "state",
+              "options": [
+                {
+                  "label": "fatal",
+                  "value": "fatal"
+                },
+                {
+                  "label": "major",
+                  "value": "major"
+                },
+                {
+                  "label": "minor",
+                  "value": "minor"
+                },
+                {
+                  "label": "normal",
+                  "value": "normal"
+                },
+                {
+                  "label": "unknown",
+                  "value": "unknown"
+                },
+                {
+                  "label": "unsupported",
+                  "value": "unsupported"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "path": "/driver/voltageinfos/voltageinfo/voltage-ratio",
+              "type": "string",
+              "label": "voltage-ratio",
+              "readonly": true
+            }
+          ],
+          "operationExclude": [
+            "create"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/driver/voltages",
+      "type": "group",
+      "label": "voltages",
+      "fields": [
+        {
+          "path": "/driver/voltages/voltage",
+          "type": "list",
+          "label": "voltage",
+          "fields": [
+            {
+              "path": "/driver/voltages/voltage/current-voltage",
+              "type": "string",
+              "label": "current-voltage",
+              "readonly": true
+            },
+            {
+              "path": "/driver/voltages/voltage/fatal-high-threshold",
+              "type": "string",
+              "label": "fatal-high-threshold",
+              "readonly": true
+            },
+            {
+              "path": "/driver/voltages/voltage/fatal-high-threshold-percent",
+              "type": "number",
+              "label": "fatal-high-threshold-percent",
+              "required": true,
+              "minimum": 80,
+              "maximum": 120
+            },
+            {
+              "path": "/driver/voltages/voltage/fatal-low-threshold",
+              "type": "string",
+              "label": "fatal-low-threshold",
+              "readonly": true
+            },
+            {
+              "path": "/driver/voltages/voltage/fatal-low-threshold-percent",
+              "type": "number",
+              "label": "fatal-low-threshold-percent",
+              "required": true,
+              "minimum": 80,
+              "maximum": 120
+            },
+            {
+              "path": "/driver/voltages/voltage/major-high-threshold",
+              "type": "string",
+              "label": "major-high-threshold",
+              "readonly": true
+            },
+            {
+              "path": "/driver/voltages/voltage/major-high-threshold-percent",
+              "type": "number",
+              "label": "major-high-threshold-percent",
+              "required": true,
+              "minimum": 80,
+              "maximum": 120
+            },
+            {
+              "path": "/driver/voltages/voltage/major-low-threshold",
+              "type": "string",
+              "label": "major-low-threshold",
+              "readonly": true
+            },
+            {
+              "path": "/driver/voltages/voltage/major-low-threshold-percent",
+              "type": "number",
+              "label": "major-low-threshold-percent",
+              "required": true,
+              "minimum": 80,
+              "maximum": 120
+            },
+            {
+              "path": "/driver/voltages/voltage/pcb-name",
+              "type": "string",
+              "label": "pcb-name",
+              "readonly": true
+            },
+            {
+              "path": "/driver/voltages/voltage/position",
+              "type": "string",
+              "label": "position",
+              "isKey": true
+            },
+            {
+              "path": "/driver/voltages/voltage/ratio",
+              "type": "string",
+              "label": "ratio",
+              "readonly": true
+            },
+            {
+              "path": "/driver/voltages/voltage/required-voltage",
+              "type": "string",
+              "label": "required-voltage",
+              "readonly": true
+            },
+            {
+              "path": "/driver/voltages/voltage/sensor-id",
+              "type": "number",
+              "label": "sensor-id",
+              "minimum": 1,
+              "maximum": 255,
+              "isKey": true
+            },
+            {
+              "path": "/driver/voltages/voltage/sensor-name",
+              "type": "string",
+              "label": "sensor-name",
+              "readonly": true,
+              "supportFilter": true
+            },
+            {
+              "path": "/driver/voltages/voltage/state",
+              "type": "enum",
+              "label": "state",
+              "options": [
+                {
+                  "label": "fatal",
+                  "value": "fatal"
+                },
+                {
+                  "label": "major",
+                  "value": "major"
+                },
+                {
+                  "label": "minor",
+                  "value": "minor"
+                },
+                {
+                  "label": "normal",
+                  "value": "normal"
+                },
+                {
+                  "label": "unknown",
+                  "value": "unknown"
+                },
+                {
+                  "label": "unsupported",
+                  "value": "unsupported"
+                }
+              ],
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

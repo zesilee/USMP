@@ -1,0 +1,1051 @@
+{
+  "module": "hwtacacs",
+  "title": "hwtacacs",
+  "vendor": "huawei",
+  "fields": [
+    {
+      "path": "/hwtacacs/global",
+      "type": "group",
+      "label": "global",
+      "fields": [
+        {
+          "path": "/hwtacacs/global/acct-stop-packet-resend-times",
+          "type": "number",
+          "label": "acct-stop-packet-resend-times",
+          "maximum": 300
+        },
+        {
+          "path": "/hwtacacs/global/default-remote-address",
+          "type": "string",
+          "label": "default-remote-address"
+        },
+        {
+          "path": "/hwtacacs/global/is-enable",
+          "type": "boolean",
+          "label": "is-enable"
+        },
+        {
+          "path": "/hwtacacs/global/service-name",
+          "type": "string",
+          "label": "service-name"
+        }
+      ]
+    },
+    {
+      "path": "/hwtacacs/templates",
+      "type": "group",
+      "label": "templates",
+      "fields": [
+        {
+          "path": "/hwtacacs/templates/template",
+          "type": "list",
+          "label": "template",
+          "fields": [
+            {
+              "path": "/hwtacacs/templates/template/domain-mode",
+              "type": "enum",
+              "label": "domain-mode",
+              "options": [
+                {
+                  "label": "domain-exclude",
+                  "value": "domain-exclude"
+                },
+                {
+                  "label": "domain-include",
+                  "value": "domain-include"
+                },
+                {
+                  "label": "original",
+                  "value": "original"
+                }
+              ]
+            },
+            {
+              "path": "/hwtacacs/templates/template/ipv4-servers",
+              "type": "group",
+              "label": "ipv4-servers",
+              "fields": [
+                {
+                  "path": "/hwtacacs/templates/template/ipv4-servers/ipv4-server",
+                  "type": "list",
+                  "label": "ipv4-server",
+                  "fields": [
+                    {
+                      "path": "/hwtacacs/templates/template/ipv4-servers/ipv4-server/acct-req-num",
+                      "type": "number",
+                      "label": "acct-req-num",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/hwtacacs/templates/template/ipv4-servers/ipv4-server/acct-rsp-num",
+                      "type": "number",
+                      "label": "acct-rsp-num",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/hwtacacs/templates/template/ipv4-servers/ipv4-server/acct-server-close-num",
+                      "type": "number",
+                      "label": "acct-server-close-num",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/hwtacacs/templates/template/ipv4-servers/ipv4-server/acct-server-open-num",
+                      "type": "number",
+                      "label": "acct-server-open-num",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/hwtacacs/templates/template/ipv4-servers/ipv4-server/authen-req-num",
+                      "type": "number",
+                      "label": "authen-req-num",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/hwtacacs/templates/template/ipv4-servers/ipv4-server/authen-rsp-num",
+                      "type": "number",
+                      "label": "authen-rsp-num",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/hwtacacs/templates/template/ipv4-servers/ipv4-server/authen-server-close-num",
+                      "type": "number",
+                      "label": "authen-server-close-num",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/hwtacacs/templates/template/ipv4-servers/ipv4-server/authen-server-open-num",
+                      "type": "number",
+                      "label": "authen-server-open-num",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/hwtacacs/templates/template/ipv4-servers/ipv4-server/author-req-num",
+                      "type": "number",
+                      "label": "author-req-num",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/hwtacacs/templates/template/ipv4-servers/ipv4-server/author-rsp-num",
+                      "type": "number",
+                      "label": "author-rsp-num",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/hwtacacs/templates/template/ipv4-servers/ipv4-server/author-server-close-num",
+                      "type": "number",
+                      "label": "author-server-close-num",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/hwtacacs/templates/template/ipv4-servers/ipv4-server/author-server-open-num",
+                      "type": "number",
+                      "label": "author-server-open-num",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/hwtacacs/templates/template/ipv4-servers/ipv4-server/is-current-server",
+                      "type": "boolean",
+                      "label": "is-current-server",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/hwtacacs/templates/template/ipv4-servers/ipv4-server/is-mux-mode-enable",
+                      "type": "boolean",
+                      "label": "is-mux-mode-enable"
+                    },
+                    {
+                      "path": "/hwtacacs/templates/template/ipv4-servers/ipv4-server/is-public-net",
+                      "type": "boolean",
+                      "label": "is-public-net",
+                      "isKey": true
+                    },
+                    {
+                      "path": "/hwtacacs/templates/template/ipv4-servers/ipv4-server/is-secondary-server",
+                      "type": "boolean",
+                      "label": "is-secondary-server",
+                      "isKey": true
+                    },
+                    {
+                      "path": "/hwtacacs/templates/template/ipv4-servers/ipv4-server/server-current-state",
+                      "type": "enum",
+                      "label": "server-current-state",
+                      "options": [
+                        {
+                          "label": "down",
+                          "value": "down"
+                        },
+                        {
+                          "label": "up",
+                          "value": "up"
+                        }
+                      ],
+                      "readonly": true
+                    },
+                    {
+                      "path": "/hwtacacs/templates/template/ipv4-servers/ipv4-server/server-ip-address",
+                      "type": "string",
+                      "label": "server-ip-address",
+                      "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?",
+                      "isKey": true
+                    },
+                    {
+                      "path": "/hwtacacs/templates/template/ipv4-servers/ipv4-server/server-port",
+                      "type": "number",
+                      "label": "server-port",
+                      "minimum": 1,
+                      "maximum": 65535
+                    },
+                    {
+                      "path": "/hwtacacs/templates/template/ipv4-servers/ipv4-server/server-type",
+                      "type": "enum",
+                      "label": "server-type",
+                      "options": [
+                        {
+                          "label": "accounting",
+                          "value": "accounting"
+                        },
+                        {
+                          "label": "authentication",
+                          "value": "authentication"
+                        },
+                        {
+                          "label": "authorization",
+                          "value": "authorization"
+                        },
+                        {
+                          "label": "common",
+                          "value": "common"
+                        }
+                      ],
+                      "isKey": true
+                    },
+                    {
+                      "path": "/hwtacacs/templates/template/ipv4-servers/ipv4-server/shared-key",
+                      "type": "string",
+                      "label": "shared-key"
+                    },
+                    {
+                      "path": "/hwtacacs/templates/template/ipv4-servers/ipv4-server/vpn-name",
+                      "type": "string",
+                      "label": "vpn-name",
+                      "must": [
+                        {
+                          "expr": "not(../is-public-net='true') or (../is-public-net='true' and ../vpn-name='_public_')"
+                        }
+                      ],
+                      "isKey": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/hwtacacs/templates/template/ipv6-servers",
+              "type": "group",
+              "label": "ipv6-servers",
+              "fields": [
+                {
+                  "path": "/hwtacacs/templates/template/ipv6-servers/ipv6-server",
+                  "type": "list",
+                  "label": "ipv6-server",
+                  "fields": [
+                    {
+                      "path": "/hwtacacs/templates/template/ipv6-servers/ipv6-server/is-mux-mode-enable",
+                      "type": "boolean",
+                      "label": "is-mux-mode-enable"
+                    },
+                    {
+                      "path": "/hwtacacs/templates/template/ipv6-servers/ipv6-server/is-secondary-server",
+                      "type": "boolean",
+                      "label": "is-secondary-server",
+                      "isKey": true
+                    },
+                    {
+                      "path": "/hwtacacs/templates/template/ipv6-servers/ipv6-server/server-ip-address",
+                      "type": "string",
+                      "label": "server-ip-address",
+                      "pattern": "((:|[0-9a-fA-F]{0,4}):)([0-9a-fA-F]{0,4}:){0,5}((([0-9a-fA-F]{0,4}:)?(:|[0-9a-fA-F]{0,4}))|(((25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])))(%[\\p{N}\\p{L}]+)?",
+                      "isKey": true
+                    },
+                    {
+                      "path": "/hwtacacs/templates/template/ipv6-servers/ipv6-server/server-port",
+                      "type": "number",
+                      "label": "server-port",
+                      "minimum": 1,
+                      "maximum": 65535
+                    },
+                    {
+                      "path": "/hwtacacs/templates/template/ipv6-servers/ipv6-server/server-type",
+                      "type": "enum",
+                      "label": "server-type",
+                      "options": [
+                        {
+                          "label": "accounting",
+                          "value": "accounting"
+                        },
+                        {
+                          "label": "authentication",
+                          "value": "authentication"
+                        },
+                        {
+                          "label": "authorization",
+                          "value": "authorization"
+                        },
+                        {
+                          "label": "common",
+                          "value": "common"
+                        }
+                      ],
+                      "isKey": true
+                    },
+                    {
+                      "path": "/hwtacacs/templates/template/ipv6-servers/ipv6-server/shared-key",
+                      "type": "string",
+                      "label": "shared-key"
+                    },
+                    {
+                      "path": "/hwtacacs/templates/template/ipv6-servers/ipv6-server/vpn-name",
+                      "type": "string",
+                      "label": "vpn-name",
+                      "isKey": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/hwtacacs/templates/template/name",
+              "type": "string",
+              "label": "name",
+              "isKey": true
+            },
+            {
+              "path": "/hwtacacs/templates/template/quiet-time",
+              "type": "number",
+              "label": "quiet-time",
+              "minimum": 1,
+              "maximum": 255
+            },
+            {
+              "path": "/hwtacacs/templates/template/response-timeout",
+              "type": "number",
+              "label": "response-timeout",
+              "minimum": 1,
+              "maximum": 300
+            },
+            {
+              "path": "/hwtacacs/templates/template/servers",
+              "type": "group",
+              "label": "servers",
+              "fields": [
+                {
+                  "path": "/hwtacacs/templates/template/servers/server",
+                  "type": "list",
+                  "label": "server",
+                  "fields": [
+                    {
+                      "path": "/hwtacacs/templates/template/servers/server/ip-address",
+                      "type": "string",
+                      "label": "ip-address",
+                      "isKey": true
+                    },
+                    {
+                      "path": "/hwtacacs/templates/template/servers/server/is-mux-mode-enable",
+                      "type": "boolean",
+                      "label": "is-mux-mode-enable"
+                    },
+                    {
+                      "path": "/hwtacacs/templates/template/servers/server/ni-name",
+                      "type": "string",
+                      "label": "ni-name",
+                      "isKey": true
+                    },
+                    {
+                      "path": "/hwtacacs/templates/template/servers/server/port",
+                      "type": "number",
+                      "label": "port",
+                      "minimum": 1,
+                      "maximum": 65535
+                    },
+                    {
+                      "path": "/hwtacacs/templates/template/servers/server/priority",
+                      "type": "enum",
+                      "label": "priority",
+                      "required": true,
+                      "options": [
+                        {
+                          "label": "fourth",
+                          "value": "fourth"
+                        },
+                        {
+                          "label": "master",
+                          "value": "master"
+                        },
+                        {
+                          "label": "secondary",
+                          "value": "secondary"
+                        },
+                        {
+                          "label": "third",
+                          "value": "third"
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/hwtacacs/templates/template/servers/server/public-net",
+                      "type": "boolean",
+                      "label": "public-net",
+                      "required": true,
+                      "when": "../ni-name = '_public_'"
+                    },
+                    {
+                      "path": "/hwtacacs/templates/template/servers/server/shared-key",
+                      "type": "string",
+                      "label": "shared-key"
+                    },
+                    {
+                      "path": "/hwtacacs/templates/template/servers/server/status",
+                      "type": "group",
+                      "label": "status",
+                      "readonly": true,
+                      "fields": [
+                        {
+                          "path": "/hwtacacs/templates/template/servers/server/status/acct-close-num",
+                          "type": "number",
+                          "label": "acct-close-num",
+                          "readonly": true
+                        },
+                        {
+                          "path": "/hwtacacs/templates/template/servers/server/status/acct-req-num",
+                          "type": "number",
+                          "label": "acct-req-num",
+                          "readonly": true
+                        },
+                        {
+                          "path": "/hwtacacs/templates/template/servers/server/status/acct-rsp-num",
+                          "type": "number",
+                          "label": "acct-rsp-num",
+                          "readonly": true
+                        },
+                        {
+                          "path": "/hwtacacs/templates/template/servers/server/status/acct-server-open-num",
+                          "type": "number",
+                          "label": "acct-server-open-num",
+                          "readonly": true
+                        },
+                        {
+                          "path": "/hwtacacs/templates/template/servers/server/status/authen-close-num",
+                          "type": "number",
+                          "label": "authen-close-num",
+                          "readonly": true
+                        },
+                        {
+                          "path": "/hwtacacs/templates/template/servers/server/status/authen-open-num",
+                          "type": "number",
+                          "label": "authen-open-num",
+                          "readonly": true
+                        },
+                        {
+                          "path": "/hwtacacs/templates/template/servers/server/status/authen-req-num",
+                          "type": "number",
+                          "label": "authen-req-num",
+                          "readonly": true
+                        },
+                        {
+                          "path": "/hwtacacs/templates/template/servers/server/status/authen-rsp-num",
+                          "type": "number",
+                          "label": "authen-rsp-num",
+                          "readonly": true
+                        },
+                        {
+                          "path": "/hwtacacs/templates/template/servers/server/status/author-close-num",
+                          "type": "number",
+                          "label": "author-close-num",
+                          "readonly": true
+                        },
+                        {
+                          "path": "/hwtacacs/templates/template/servers/server/status/author-open-num",
+                          "type": "number",
+                          "label": "author-open-num",
+                          "readonly": true
+                        },
+                        {
+                          "path": "/hwtacacs/templates/template/servers/server/status/author-req-num",
+                          "type": "number",
+                          "label": "author-req-num",
+                          "readonly": true
+                        },
+                        {
+                          "path": "/hwtacacs/templates/template/servers/server/status/author-rsp-num",
+                          "type": "number",
+                          "label": "author-rsp-num",
+                          "readonly": true
+                        },
+                        {
+                          "path": "/hwtacacs/templates/template/servers/server/status/is-current-server",
+                          "type": "boolean",
+                          "label": "is-current-server",
+                          "readonly": true
+                        },
+                        {
+                          "path": "/hwtacacs/templates/template/servers/server/status/server-current-state",
+                          "type": "enum",
+                          "label": "server-current-state",
+                          "options": [
+                            {
+                              "label": "down",
+                              "value": "down"
+                            },
+                            {
+                              "label": "up",
+                              "value": "up"
+                            }
+                          ],
+                          "readonly": true
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/hwtacacs/templates/template/servers/server/type",
+                      "type": "enum",
+                      "label": "type",
+                      "options": [
+                        {
+                          "label": "accounting",
+                          "value": "accounting"
+                        },
+                        {
+                          "label": "authentication",
+                          "value": "authentication"
+                        },
+                        {
+                          "label": "authorization",
+                          "value": "authorization"
+                        },
+                        {
+                          "label": "common",
+                          "value": "common"
+                        }
+                      ],
+                      "isKey": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/hwtacacs/templates/template/shared-key",
+              "type": "string",
+              "label": "shared-key"
+            },
+            {
+              "path": "/hwtacacs/templates/template/source-address",
+              "type": "choice",
+              "label": "source-address",
+              "cases": [
+                {
+                  "name": "interface",
+                  "label": "interface",
+                  "fields": [
+                    {
+                      "path": "/hwtacacs/templates/template/interface-name",
+                      "type": "string",
+                      "label": "interface-name"
+                    }
+                  ]
+                },
+                {
+                  "name": "ip",
+                  "label": "ip",
+                  "fields": [
+                    {
+                      "path": "/hwtacacs/templates/template/source-ip-address",
+                      "type": "string",
+                      "label": "source-ip-address",
+                      "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/hwtacacs/templates/template/source-ipv6-address",
+              "type": "choice",
+              "label": "source-ipv6-address",
+              "cases": [
+                {
+                  "name": "interface",
+                  "label": "interface",
+                  "fields": [
+                    {
+                      "path": "/hwtacacs/templates/template/ipv6-interface-name",
+                      "type": "string",
+                      "label": "ipv6-interface-name"
+                    }
+                  ]
+                },
+                {
+                  "name": "ip",
+                  "label": "ip",
+                  "fields": [
+                    {
+                      "path": "/hwtacacs/templates/template/ipv6-address",
+                      "type": "string",
+                      "label": "ipv6-address",
+                      "pattern": "((:|[0-9a-fA-F]{0,4}):)([0-9a-fA-F]{0,4}:){0,5}((([0-9a-fA-F]{0,4}:)?(:|[0-9a-fA-F]{0,4}))|(((25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])))(%[\\p{N}\\p{L}]+)?"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/hwtacacs/templates/template/status",
+              "type": "group",
+              "label": "status",
+              "readonly": true,
+              "fields": [
+                {
+                  "path": "/hwtacacs/templates/template/status/acct-follow-num",
+                  "type": "number",
+                  "label": "acct-follow-num",
+                  "readonly": true
+                },
+                {
+                  "path": "/hwtacacs/templates/template/status/acct-not-proc-req-num",
+                  "type": "number",
+                  "label": "acct-not-proc-req-num",
+                  "readonly": true
+                },
+                {
+                  "path": "/hwtacacs/templates/template/status/acct-req-num",
+                  "type": "number",
+                  "label": "acct-req-num",
+                  "readonly": true
+                },
+                {
+                  "path": "/hwtacacs/templates/template/status/acct-rsp-err-num",
+                  "type": "number",
+                  "label": "acct-rsp-err-num",
+                  "readonly": true
+                },
+                {
+                  "path": "/hwtacacs/templates/template/status/acct-rsp-num",
+                  "type": "number",
+                  "label": "acct-rsp-num",
+                  "readonly": true
+                },
+                {
+                  "path": "/hwtacacs/templates/template/status/acct-rsp-pass-num",
+                  "type": "number",
+                  "label": "acct-rsp-pass-num",
+                  "readonly": true
+                },
+                {
+                  "path": "/hwtacacs/templates/template/status/acct-server-close-num",
+                  "type": "number",
+                  "label": "acct-server-close-num",
+                  "readonly": true
+                },
+                {
+                  "path": "/hwtacacs/templates/template/status/acct-server-open-num",
+                  "type": "number",
+                  "label": "acct-server-open-num",
+                  "readonly": true
+                },
+                {
+                  "path": "/hwtacacs/templates/template/status/acct-start-pkt-num",
+                  "type": "number",
+                  "label": "acct-start-pkt-num",
+                  "readonly": true
+                },
+                {
+                  "path": "/hwtacacs/templates/template/status/acct-stop-pkt-num",
+                  "type": "number",
+                  "label": "acct-stop-pkt-num",
+                  "readonly": true
+                },
+                {
+                  "path": "/hwtacacs/templates/template/status/authen-abort-num",
+                  "type": "number",
+                  "label": "authen-abort-num",
+                  "readonly": true
+                },
+                {
+                  "path": "/hwtacacs/templates/template/status/authen-change-password-num",
+                  "type": "number",
+                  "label": "authen-change-password-num",
+                  "readonly": true
+                },
+                {
+                  "path": "/hwtacacs/templates/template/status/authen-connect-num",
+                  "type": "number",
+                  "label": "authen-connect-num",
+                  "readonly": true
+                },
+                {
+                  "path": "/hwtacacs/templates/template/status/authen-follow-num",
+                  "type": "number",
+                  "label": "authen-follow-num",
+                  "readonly": true
+                },
+                {
+                  "path": "/hwtacacs/templates/template/status/authen-get-data-num",
+                  "type": "number",
+                  "label": "authen-get-data-num",
+                  "readonly": true
+                },
+                {
+                  "path": "/hwtacacs/templates/template/status/authen-get-password-num",
+                  "type": "number",
+                  "label": "authen-get-password-num",
+                  "readonly": true
+                },
+                {
+                  "path": "/hwtacacs/templates/template/status/authen-get-user-num",
+                  "type": "number",
+                  "label": "authen-get-user-num",
+                  "readonly": true
+                },
+                {
+                  "path": "/hwtacacs/templates/template/status/authen-login-num",
+                  "type": "number",
+                  "label": "authen-login-num",
+                  "readonly": true
+                },
+                {
+                  "path": "/hwtacacs/templates/template/status/authen-malform-num",
+                  "type": "number",
+                  "label": "authen-malform-num",
+                  "readonly": true
+                },
+                {
+                  "path": "/hwtacacs/templates/template/status/authen-not-proc-req-num",
+                  "type": "number",
+                  "label": "authen-not-proc-req-num",
+                  "readonly": true
+                },
+                {
+                  "path": "/hwtacacs/templates/template/status/authen-pkt-drop-num",
+                  "type": "number",
+                  "label": "authen-pkt-drop-num",
+                  "readonly": true
+                },
+                {
+                  "path": "/hwtacacs/templates/template/status/authen-req-num",
+                  "type": "number",
+                  "label": "authen-req-num",
+                  "readonly": true
+                },
+                {
+                  "path": "/hwtacacs/templates/template/status/authen-restart-num",
+                  "type": "number",
+                  "label": "authen-restart-num",
+                  "readonly": true
+                },
+                {
+                  "path": "/hwtacacs/templates/template/status/authen-round-trip-time",
+                  "type": "number",
+                  "label": "authen-round-trip-time",
+                  "readonly": true
+                },
+                {
+                  "path": "/hwtacacs/templates/template/status/authen-rsp-err-num",
+                  "type": "number",
+                  "label": "authen-rsp-err-num",
+                  "readonly": true
+                },
+                {
+                  "path": "/hwtacacs/templates/template/status/authen-rsp-fail-num",
+                  "type": "number",
+                  "label": "authen-rsp-fail-num",
+                  "readonly": true
+                },
+                {
+                  "path": "/hwtacacs/templates/template/status/authen-rsp-num",
+                  "type": "number",
+                  "label": "authen-rsp-num",
+                  "readonly": true
+                },
+                {
+                  "path": "/hwtacacs/templates/template/status/authen-rsp-pass-num",
+                  "type": "number",
+                  "label": "authen-rsp-pass-num",
+                  "readonly": true
+                },
+                {
+                  "path": "/hwtacacs/templates/template/status/authen-send-num",
+                  "type": "number",
+                  "label": "authen-send-num",
+                  "readonly": true
+                },
+                {
+                  "path": "/hwtacacs/templates/template/status/authen-send-password-num",
+                  "type": "number",
+                  "label": "authen-send-password-num",
+                  "readonly": true
+                },
+                {
+                  "path": "/hwtacacs/templates/template/status/authen-server-close-num",
+                  "type": "number",
+                  "label": "authen-server-close-num",
+                  "readonly": true
+                },
+                {
+                  "path": "/hwtacacs/templates/template/status/authen-server-open-num",
+                  "type": "number",
+                  "label": "authen-server-open-num",
+                  "readonly": true
+                },
+                {
+                  "path": "/hwtacacs/templates/template/status/authen-timeout-num",
+                  "type": "number",
+                  "label": "authen-timeout-num",
+                  "readonly": true
+                },
+                {
+                  "path": "/hwtacacs/templates/template/status/authen-unknown-num",
+                  "type": "number",
+                  "label": "authen-unknown-num",
+                  "readonly": true
+                },
+                {
+                  "path": "/hwtacacs/templates/template/status/author-exec-num",
+                  "type": "number",
+                  "label": "author-exec-num",
+                  "readonly": true
+                },
+                {
+                  "path": "/hwtacacs/templates/template/status/author-malform-num",
+                  "type": "number",
+                  "label": "author-malform-num",
+                  "readonly": true
+                },
+                {
+                  "path": "/hwtacacs/templates/template/status/author-not-proc-req-num",
+                  "type": "number",
+                  "label": "author-not-proc-req-num",
+                  "readonly": true
+                },
+                {
+                  "path": "/hwtacacs/templates/template/status/author-pkt-drop-num",
+                  "type": "number",
+                  "label": "author-pkt-drop-num",
+                  "readonly": true
+                },
+                {
+                  "path": "/hwtacacs/templates/template/status/author-ppp-num",
+                  "type": "number",
+                  "label": "author-ppp-num",
+                  "readonly": true
+                },
+                {
+                  "path": "/hwtacacs/templates/template/status/author-req-num",
+                  "type": "number",
+                  "label": "author-req-num",
+                  "readonly": true
+                },
+                {
+                  "path": "/hwtacacs/templates/template/status/author-round-trip-time",
+                  "type": "number",
+                  "label": "author-round-trip-time",
+                  "readonly": true
+                },
+                {
+                  "path": "/hwtacacs/templates/template/status/author-rsp-err-num",
+                  "type": "number",
+                  "label": "author-rsp-err-num",
+                  "readonly": true
+                },
+                {
+                  "path": "/hwtacacs/templates/template/status/author-rsp-exec-num",
+                  "type": "number",
+                  "label": "author-rsp-exec-num",
+                  "readonly": true
+                },
+                {
+                  "path": "/hwtacacs/templates/template/status/author-rsp-num",
+                  "type": "number",
+                  "label": "author-rsp-num",
+                  "readonly": true
+                },
+                {
+                  "path": "/hwtacacs/templates/template/status/author-rsp-ppp-num",
+                  "type": "number",
+                  "label": "author-rsp-ppp-num",
+                  "readonly": true
+                },
+                {
+                  "path": "/hwtacacs/templates/template/status/author-rsp-vpdn-num",
+                  "type": "number",
+                  "label": "author-rsp-vpdn-num",
+                  "readonly": true
+                },
+                {
+                  "path": "/hwtacacs/templates/template/status/author-server-close-num",
+                  "type": "number",
+                  "label": "author-server-close-num",
+                  "readonly": true
+                },
+                {
+                  "path": "/hwtacacs/templates/template/status/author-server-open-num",
+                  "type": "number",
+                  "label": "author-server-open-num",
+                  "readonly": true
+                },
+                {
+                  "path": "/hwtacacs/templates/template/status/author-timeout-num",
+                  "type": "number",
+                  "label": "author-timeout-num",
+                  "readonly": true
+                },
+                {
+                  "path": "/hwtacacs/templates/template/status/author-unknown-num",
+                  "type": "number",
+                  "label": "author-unknown-num",
+                  "readonly": true
+                },
+                {
+                  "path": "/hwtacacs/templates/template/status/author-vpdn-num",
+                  "type": "number",
+                  "label": "author-vpdn-num",
+                  "readonly": true
+                },
+                {
+                  "path": "/hwtacacs/templates/template/status/cur-account-port",
+                  "type": "number",
+                  "label": "cur-account-port",
+                  "readonly": true
+                },
+                {
+                  "path": "/hwtacacs/templates/template/status/cur-account-server",
+                  "type": "string",
+                  "label": "cur-account-server",
+                  "readonly": true
+                },
+                {
+                  "path": "/hwtacacs/templates/template/status/cur-authen-port",
+                  "type": "number",
+                  "label": "cur-authen-port",
+                  "readonly": true
+                },
+                {
+                  "path": "/hwtacacs/templates/template/status/cur-authen-server",
+                  "type": "string",
+                  "label": "cur-authen-server",
+                  "readonly": true
+                },
+                {
+                  "path": "/hwtacacs/templates/template/status/cur-author-port",
+                  "type": "number",
+                  "label": "cur-author-port",
+                  "readonly": true
+                },
+                {
+                  "path": "/hwtacacs/templates/template/status/cur-author-server",
+                  "type": "string",
+                  "label": "cur-author-server",
+                  "readonly": true
+                },
+                {
+                  "path": "/hwtacacs/templates/template/status/pri-account-port",
+                  "type": "number",
+                  "label": "pri-account-port",
+                  "readonly": true
+                },
+                {
+                  "path": "/hwtacacs/templates/template/status/pri-account-server",
+                  "type": "string",
+                  "label": "pri-account-server",
+                  "readonly": true
+                },
+                {
+                  "path": "/hwtacacs/templates/template/status/pri-authen-port",
+                  "type": "number",
+                  "label": "pri-authen-port",
+                  "readonly": true
+                },
+                {
+                  "path": "/hwtacacs/templates/template/status/pri-authen-server",
+                  "type": "string",
+                  "label": "pri-authen-server",
+                  "readonly": true
+                },
+                {
+                  "path": "/hwtacacs/templates/template/status/pri-author-port",
+                  "type": "number",
+                  "label": "pri-author-port",
+                  "readonly": true
+                },
+                {
+                  "path": "/hwtacacs/templates/template/status/pri-author-server",
+                  "type": "string",
+                  "label": "pri-author-server",
+                  "readonly": true
+                },
+                {
+                  "path": "/hwtacacs/templates/template/status/pri-common-port",
+                  "type": "number",
+                  "label": "pri-common-port",
+                  "readonly": true
+                },
+                {
+                  "path": "/hwtacacs/templates/template/status/pri-common-server",
+                  "type": "string",
+                  "label": "pri-common-server",
+                  "readonly": true
+                },
+                {
+                  "path": "/hwtacacs/templates/template/status/sec-account-server-num",
+                  "type": "number",
+                  "label": "sec-account-server-num",
+                  "readonly": true
+                },
+                {
+                  "path": "/hwtacacs/templates/template/status/sec-authen-server-num",
+                  "type": "number",
+                  "label": "sec-authen-server-num",
+                  "readonly": true
+                },
+                {
+                  "path": "/hwtacacs/templates/template/status/sec-author-server-num",
+                  "type": "number",
+                  "label": "sec-author-server-num",
+                  "readonly": true
+                },
+                {
+                  "path": "/hwtacacs/templates/template/status/sec-common-server-num",
+                  "type": "number",
+                  "label": "sec-common-server-num",
+                  "readonly": true
+                }
+              ]
+            },
+            {
+              "path": "/hwtacacs/templates/template/traffic-unit",
+              "type": "enum",
+              "label": "traffic-unit",
+              "options": [
+                {
+                  "label": "byte",
+                  "value": "byte"
+                },
+                {
+                  "label": "gbyte",
+                  "value": "gbyte"
+                },
+                {
+                  "label": "kbyte",
+                  "value": "kbyte"
+                },
+                {
+                  "label": "mbyte",
+                  "value": "mbyte"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

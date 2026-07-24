@@ -1,0 +1,142 @@
+{
+  "module": "ospfv2",
+  "title": "ospfv2",
+  "vendor": "huawei",
+  "fields": [
+    {
+      "path": "/ospfv2/advertise-max-cost",
+      "type": "group",
+      "label": "advertise-max-cost",
+      "fields": [
+        {
+          "path": "/ospfv2/advertise-max-cost/enable",
+          "type": "boolean",
+          "label": "enable"
+        }
+      ]
+    },
+    {
+      "path": "/ospfv2/check-rt-id",
+      "type": "group",
+      "label": "check-rt-id",
+      "fields": [
+        {
+          "path": "/ospfv2/check-rt-id/conflict-flag",
+          "type": "boolean",
+          "label": "conflict-flag"
+        }
+      ]
+    },
+    {
+      "path": "/ospfv2/flush-source-trace",
+      "type": "group",
+      "label": "flush-source-trace",
+      "fields": [
+        {
+          "path": "/ospfv2/flush-source-trace/enable",
+          "type": "boolean",
+          "label": "enable"
+        },
+        {
+          "path": "/ospfv2/flush-source-trace/port",
+          "type": "number",
+          "label": "port",
+          "minimum": 1025,
+          "maximum": 65535
+        },
+        {
+          "path": "/ospfv2/flush-source-trace/vlink-enable",
+          "type": "boolean",
+          "label": "vlink-enable"
+        },
+        {
+          "path": "/ospfv2/flush-source-trace/vlink-port",
+          "type": "number",
+          "label": "vlink-port",
+          "minimum": 1025,
+          "maximum": 65535
+        }
+      ]
+    },
+    {
+      "path": "/ospfv2/maxage-lsa-protect",
+      "type": "group",
+      "label": "maxage-lsa-protect",
+      "fields": [
+        {
+          "path": "/ospfv2/maxage-lsa-protect/disable",
+          "type": "boolean",
+          "label": "disable"
+        }
+      ]
+    },
+    {
+      "path": "/ospfv2/mib-binding",
+      "type": "group",
+      "label": "mib-binding",
+      "fields": [
+        {
+          "path": "/ospfv2/mib-binding/process-id",
+          "type": "string",
+          "label": "process-id"
+        }
+      ]
+    },
+    {
+      "path": "/ospfv2/session-car",
+      "type": "group",
+      "label": "session-car",
+      "must": [
+        {
+          "expr": "pir-interval\u003e=cir-interval"
+        },
+        {
+          "expr": "pbs-interval\u003e=cbs-interval"
+        }
+      ],
+      "fields": [
+        {
+          "path": "/ospfv2/session-car/cbs-interval",
+          "type": "number",
+          "label": "cbs-interval",
+          "maximum": 1000000
+        },
+        {
+          "path": "/ospfv2/session-car/cir-interval",
+          "type": "number",
+          "label": "cir-interval",
+          "maximum": 1000000
+        },
+        {
+          "path": "/ospfv2/session-car/enable",
+          "type": "boolean",
+          "label": "enable"
+        },
+        {
+          "path": "/ospfv2/session-car/pbs-interval",
+          "type": "number",
+          "label": "pbs-interval",
+          "maximum": 10000000
+        },
+        {
+          "path": "/ospfv2/session-car/pir-interval",
+          "type": "number",
+          "label": "pir-interval",
+          "maximum": 1000000
+        }
+      ]
+    },
+    {
+      "path": "/ospfv2/suppress-flap-intf",
+      "type": "group",
+      "label": "suppress-flap-intf",
+      "fields": [
+        {
+          "path": "/ospfv2/suppress-flap-intf/disable",
+          "type": "boolean",
+          "label": "disable"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,92 @@
+{
+  "module": "mvpn",
+  "title": "mvpn",
+  "vendor": "huawei",
+  "fields": [
+    {
+      "path": "/mvpn/globals",
+      "type": "group",
+      "label": "globals",
+      "fields": [
+        {
+          "path": "/mvpn/globals/global",
+          "type": "list",
+          "label": "global",
+          "fields": [
+            {
+              "path": "/mvpn/globals/global/address-family",
+              "type": "enum",
+              "label": "address-family",
+              "options": [
+                {
+                  "label": "ipv4-unicast",
+                  "value": "ipv4-unicast"
+                },
+                {
+                  "label": "ipv6-unicast",
+                  "value": "ipv6-unicast"
+                }
+              ],
+              "isKey": true
+            },
+            {
+              "path": "/mvpn/globals/global/apply-explicit-null-label",
+              "type": "boolean",
+              "label": "apply-explicit-null-label",
+              "when": "../address-family='ipv6-unicast'"
+            },
+            {
+              "path": "/mvpn/globals/global/enable-inter-area-segmented",
+              "type": "boolean",
+              "label": "enable-inter-area-segmented",
+              "when": "../address-family='ipv4-unicast'"
+            },
+            {
+              "path": "/mvpn/globals/global/mvpn-id",
+              "type": "string",
+              "label": "mvpn-id",
+              "required": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/mvpn/ipv6-underlay-globals",
+      "type": "group",
+      "label": "ipv6-underlay-globals",
+      "fields": [
+        {
+          "path": "/mvpn/ipv6-underlay-globals/ipv6-underlay-global",
+          "type": "list",
+          "label": "ipv6-underlay-global",
+          "fields": [
+            {
+              "path": "/mvpn/ipv6-underlay-globals/ipv6-underlay-global/address-family",
+              "type": "enum",
+              "label": "address-family",
+              "options": [
+                {
+                  "label": "ipv4-unicast",
+                  "value": "ipv4-unicast"
+                },
+                {
+                  "label": "ipv6-unicast",
+                  "value": "ipv6-unicast"
+                }
+              ],
+              "isKey": true
+            },
+            {
+              "path": "/mvpn/ipv6-underlay-globals/ipv6-underlay-global/mvpn-id",
+              "type": "string",
+              "label": "mvpn-id",
+              "required": true,
+              "pattern": "((:|[0-9a-fA-F]{0,4}):)([0-9a-fA-F]{0,4}:){0,5}((([0-9a-fA-F]{0,4}:)?(:|[0-9a-fA-F]{0,4}))|(((25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])))(%[\\p{N}\\p{L}]+)?"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

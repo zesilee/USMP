@@ -1,0 +1,1414 @@
+{
+  "module": "arp",
+  "title": "arp",
+  "vendor": "huawei",
+  "fields": [
+    {
+      "path": "/arp/anti-attack-records",
+      "type": "group",
+      "label": "anti-attack-records",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/arp/anti-attack-records/anti-attack-record",
+          "type": "list",
+          "label": "anti-attack-record",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/arp/anti-attack-records/anti-attack-record/attack-time",
+              "type": "string",
+              "label": "attack-time",
+              "pattern": "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?(Z|[\\+\\-]\\d{2}:\\d{2})",
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/arp/anti-attack-records/anti-attack-record/dest-ip-addr",
+              "type": "string",
+              "label": "dest-ip-addr",
+              "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?",
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/arp/anti-attack-records/anti-attack-record/interface",
+              "type": "string",
+              "label": "interface",
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/arp/anti-attack-records/anti-attack-record/src-ip-addr",
+              "type": "string",
+              "label": "src-ip-addr",
+              "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?",
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/arp/anti-attack-records/anti-attack-record/supp-type",
+              "type": "enum",
+              "label": "supp-type",
+              "options": [
+                {
+                  "label": "arp",
+                  "value": "arp"
+                },
+                {
+                  "label": "arp-miss",
+                  "value": "arp-miss"
+                }
+              ],
+              "readonly": true,
+              "isKey": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/arp/bd-tracks",
+      "type": "group",
+      "label": "bd-tracks",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/arp/bd-tracks/bd-track",
+          "type": "list",
+          "label": "bd-track",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/arp/bd-tracks/bd-track/bd-id",
+              "type": "string",
+              "label": "bd-id",
+              "readonly": true
+            },
+            {
+              "path": "/arp/bd-tracks/bd-track/ip-addr",
+              "type": "string",
+              "label": "ip-addr",
+              "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?",
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/arp/bd-tracks/bd-track/mac-addr",
+              "type": "string",
+              "label": "mac-addr",
+              "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+              "readonly": true
+            },
+            {
+              "path": "/arp/bd-tracks/bd-track/new-ifname",
+              "type": "string",
+              "label": "new-ifname",
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/arp/bd-tracks/bd-track/old-ifname",
+              "type": "string",
+              "label": "old-ifname",
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/arp/bd-tracks/bd-track/op-code",
+              "type": "enum",
+              "label": "op-code",
+              "options": [
+                {
+                  "label": "delete",
+                  "value": "delete"
+                },
+                {
+                  "label": "modify",
+                  "value": "modify"
+                }
+              ],
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/arp/bd-tracks/bd-track/sys-time",
+              "type": "string",
+              "label": "sys-time",
+              "pattern": "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?(Z|[\\+\\-]\\d{2}:\\d{2})",
+              "readonly": true,
+              "isKey": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/arp/cached-statistics",
+      "type": "group",
+      "label": "cached-statistics",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/arp/cached-statistics/cached-statistic",
+          "type": "list",
+          "label": "cached-statistic",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/arp/cached-statistics/cached-statistic/aging-time",
+              "type": "number",
+              "label": "aging-time",
+              "maximum": 4294967294,
+              "readonly": true
+            },
+            {
+              "path": "/arp/cached-statistics/cached-statistic/evn-name",
+              "type": "string",
+              "label": "evn-name",
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/arp/cached-statistics/cached-statistic/if-name",
+              "type": "string",
+              "label": "if-name",
+              "readonly": true
+            },
+            {
+              "path": "/arp/cached-statistics/cached-statistic/ip-addr",
+              "type": "string",
+              "label": "ip-addr",
+              "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?",
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/arp/cached-statistics/cached-statistic/mac-addr",
+              "type": "string",
+              "label": "mac-addr",
+              "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+              "readonly": true
+            },
+            {
+              "path": "/arp/cached-statistics/cached-statistic/vlan-id",
+              "type": "string",
+              "label": "vlan-id",
+              "readonly": true,
+              "isKey": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/arp/current-speed-limits",
+      "type": "group",
+      "label": "current-speed-limits",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/arp/current-speed-limits/current-speed-limit",
+          "type": "list",
+          "label": "current-speed-limit",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/arp/current-speed-limits/current-speed-limit/ip-type",
+              "type": "enum",
+              "label": "ip-type",
+              "options": [
+                {
+                  "label": "dest-ip",
+                  "value": "dest-ip"
+                },
+                {
+                  "label": "global-port",
+                  "value": "global-port"
+                },
+                {
+                  "label": "src-ip",
+                  "value": "src-ip"
+                }
+              ],
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/arp/current-speed-limits/current-speed-limit/slot-id",
+              "type": "string",
+              "label": "slot-id",
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/arp/current-speed-limits/current-speed-limit/suppress-type",
+              "type": "enum",
+              "label": "suppress-type",
+              "options": [
+                {
+                  "label": "arp",
+                  "value": "arp"
+                },
+                {
+                  "label": "arp-miss",
+                  "value": "arp-miss"
+                }
+              ],
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/arp/current-speed-limits/current-speed-limit/suppress-value",
+              "type": "number",
+              "label": "suppress-value",
+              "maximum": 65536,
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/arp/duplicate-items",
+      "type": "group",
+      "label": "duplicate-items",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/arp/duplicate-items/duplicate-item",
+          "type": "list",
+          "label": "duplicate-item",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/arp/duplicate-items/duplicate-item/aging-time",
+              "type": "number",
+              "label": "aging-time",
+              "minimum": 1,
+              "maximum": 180,
+              "readonly": true
+            },
+            {
+              "path": "/arp/duplicate-items/duplicate-item/bridge-id",
+              "type": "number",
+              "label": "bridge-id",
+              "minimum": 1,
+              "maximum": 16777215,
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/arp/duplicate-items/duplicate-item/bridge-type",
+              "type": "enum",
+              "label": "bridge-type",
+              "options": [
+                {
+                  "label": "bd",
+                  "value": "bd"
+                },
+                {
+                  "label": "vlan",
+                  "value": "vlan"
+                }
+              ],
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/arp/duplicate-items/duplicate-item/if-name",
+              "type": "string",
+              "label": "if-name",
+              "readonly": true
+            },
+            {
+              "path": "/arp/duplicate-items/duplicate-item/ip-addr",
+              "type": "string",
+              "label": "ip-addr",
+              "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?",
+              "readonly": true
+            },
+            {
+              "path": "/arp/duplicate-items/duplicate-item/mac-addr",
+              "type": "string",
+              "label": "mac-addr",
+              "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/arp/duplicate-items/duplicate-item/peer-addr",
+              "type": "string",
+              "label": "peer-addr",
+              "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?",
+              "readonly": true
+            },
+            {
+              "path": "/arp/duplicate-items/duplicate-item/source-addr",
+              "type": "string",
+              "label": "source-addr",
+              "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?",
+              "readonly": true
+            },
+            {
+              "path": "/arp/duplicate-items/duplicate-item/vni",
+              "type": "number",
+              "label": "vni",
+              "minimum": 1,
+              "maximum": 16777215,
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/arp/entry-statistics",
+      "type": "group",
+      "label": "entry-statistics",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/arp/entry-statistics/entry-statistic",
+          "type": "list",
+          "label": "entry-statistic",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/arp/entry-statistics/entry-statistic/dynamic-num",
+              "type": "number",
+              "label": "dynamic-num",
+              "maximum": 4294967294,
+              "readonly": true
+            },
+            {
+              "path": "/arp/entry-statistics/entry-statistic/exceed-flag",
+              "type": "boolean",
+              "label": "exceed-flag",
+              "readonly": true
+            },
+            {
+              "path": "/arp/entry-statistics/entry-statistic/redirect-num",
+              "type": "number",
+              "label": "redirect-num",
+              "maximum": 4294967294,
+              "readonly": true
+            },
+            {
+              "path": "/arp/entry-statistics/entry-statistic/remote-num",
+              "type": "number",
+              "label": "remote-num",
+              "maximum": 4294967294,
+              "readonly": true
+            },
+            {
+              "path": "/arp/entry-statistics/entry-statistic/slot-id",
+              "type": "string",
+              "label": "slot-id",
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/arp/entry-statistics/entry-statistic/static-num",
+              "type": "number",
+              "label": "static-num",
+              "maximum": 4294967294,
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/arp/error-packets",
+      "type": "group",
+      "label": "error-packets",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/arp/error-packets/error-packet",
+          "type": "list",
+          "label": "error-packet",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/arp/error-packets/error-packet/if-name",
+              "type": "string",
+              "label": "if-name",
+              "readonly": true
+            },
+            {
+              "path": "/arp/error-packets/error-packet/receive-content",
+              "type": "string",
+              "label": "receive-content",
+              "readonly": true
+            },
+            {
+              "path": "/arp/error-packets/error-packet/receive-time",
+              "type": "string",
+              "label": "receive-time",
+              "pattern": "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?(Z|[\\+\\-]\\d{2}:\\d{2})",
+              "readonly": true
+            },
+            {
+              "path": "/arp/error-packets/error-packet/sequence",
+              "type": "number",
+              "label": "sequence",
+              "minimum": 1,
+              "maximum": 10,
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/arp/error-packets/error-packet/slot-id",
+              "type": "string",
+              "label": "slot-id",
+              "readonly": true,
+              "isKey": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/arp/global",
+      "type": "group",
+      "label": "global",
+      "fields": [
+        {
+          "path": "/arp/global/arp-fast-reply",
+          "type": "boolean",
+          "label": "arp-fast-reply"
+        },
+        {
+          "path": "/arp/global/broadcast-max-num",
+          "type": "number",
+          "label": "broadcast-max-num",
+          "maximum": 3000
+        },
+        {
+          "path": "/arp/global/check-type",
+          "type": "enum",
+          "label": "check-type",
+          "options": [
+            {
+              "label": "fix-all",
+              "value": "fix-all"
+            },
+            {
+              "label": "fix-mac",
+              "value": "fix-mac"
+            },
+            {
+              "label": "no-fix",
+              "value": "no-fix"
+            },
+            {
+              "label": "send-ack",
+              "value": "send-ack"
+            }
+          ]
+        },
+        {
+          "path": "/arp/global/con-send-enable",
+          "type": "boolean",
+          "label": "con-send-enable"
+        },
+        {
+          "path": "/arp/global/con-send-maxnum",
+          "type": "number",
+          "label": "con-send-maxnum",
+          "minimum": 1,
+          "maximum": 10,
+          "when": "../con-send-enable='true'"
+        },
+        {
+          "path": "/arp/global/dfs-backup-rate",
+          "type": "number",
+          "label": "dfs-backup-rate",
+          "minimum": 1,
+          "maximum": 65535
+        },
+        {
+          "path": "/arp/global/diff-learn-disable",
+          "type": "boolean",
+          "label": "diff-learn-disable"
+        },
+        {
+          "path": "/arp/global/evncfg",
+          "type": "group",
+          "label": "evncfg",
+          "fields": [
+            {
+              "path": "/arp/global/evncfg/cache-enable",
+              "type": "boolean",
+              "label": "cache-enable"
+            },
+            {
+              "path": "/arp/global/evncfg/cache-timeout",
+              "type": "number",
+              "label": "cache-timeout",
+              "maximum": 1000000
+            }
+          ]
+        },
+        {
+          "path": "/arp/global/expire-time",
+          "type": "number",
+          "label": "expire-time",
+          "minimum": 60,
+          "maximum": 86400
+        },
+        {
+          "path": "/arp/global/gateway-dup-enable",
+          "type": "boolean",
+          "label": "gateway-dup-enable"
+        },
+        {
+          "path": "/arp/global/gmff-enable",
+          "type": "boolean",
+          "label": "gmff-enable"
+        },
+        {
+          "path": "/arp/global/gratuitous-drop",
+          "type": "boolean",
+          "label": "gratuitous-drop"
+        },
+        {
+          "path": "/arp/global/gratuitous-interval",
+          "type": "number",
+          "label": "gratuitous-interval",
+          "minimum": 1,
+          "maximum": 86400,
+          "when": "../gratuitous-send='true'"
+        },
+        {
+          "path": "/arp/global/gratuitous-send",
+          "type": "boolean",
+          "label": "gratuitous-send"
+        },
+        {
+          "path": "/arp/global/host-conflict-period",
+          "type": "number",
+          "label": "host-conflict-period",
+          "minimum": 2,
+          "maximum": 36000
+        },
+        {
+          "path": "/arp/global/host-conflict-threshold",
+          "type": "number",
+          "label": "host-conflict-threshold",
+          "minimum": 1,
+          "maximum": 1000
+        },
+        {
+          "path": "/arp/global/ipconflict-detect-enable",
+          "type": "boolean",
+          "label": "ipconflict-detect-enable"
+        },
+        {
+          "path": "/arp/global/l2topo-detect-enable",
+          "type": "boolean",
+          "label": "l2topo-detect-enable"
+        },
+        {
+          "path": "/arp/global/max-static-num",
+          "type": "number",
+          "label": "max-static-num",
+          "maximum": 65536
+        },
+        {
+          "path": "/arp/global/multicast-learning-enable",
+          "type": "boolean",
+          "label": "multicast-learning-enable"
+        },
+        {
+          "path": "/arp/global/passive-learn-enable",
+          "type": "boolean",
+          "label": "passive-learn-enable"
+        },
+        {
+          "path": "/arp/global/probe-times",
+          "type": "number",
+          "label": "probe-times",
+          "maximum": 10
+        },
+        {
+          "path": "/arp/global/rate-trap-interval",
+          "type": "number",
+          "label": "rate-trap-interval",
+          "maximum": 1200
+        },
+        {
+          "path": "/arp/global/snooping-enable",
+          "type": "boolean",
+          "label": "snooping-enable"
+        },
+        {
+          "path": "/arp/global/src-mac-check",
+          "type": "boolean",
+          "label": "src-mac-check"
+        },
+        {
+          "path": "/arp/global/strict-learn-enable",
+          "type": "boolean",
+          "label": "strict-learn-enable"
+        },
+        {
+          "path": "/arp/global/timeout-enable",
+          "type": "boolean",
+          "label": "timeout-enable"
+        },
+        {
+          "path": "/arp/global/topo-detect-disable",
+          "type": "boolean",
+          "label": "topo-detect-disable"
+        },
+        {
+          "path": "/arp/global/vlanif-expiretime",
+          "type": "number",
+          "label": "vlanif-expiretime",
+          "minimum": 60,
+          "maximum": 86400
+        }
+      ]
+    },
+    {
+      "path": "/arp/global-speed-limits",
+      "type": "group",
+      "label": "global-speed-limits",
+      "fields": [
+        {
+          "path": "/arp/global-speed-limits/global-speed-limit",
+          "type": "list",
+          "label": "global-speed-limit",
+          "fields": [
+            {
+              "path": "/arp/global-speed-limits/global-speed-limit/ip-type",
+              "type": "enum",
+              "label": "ip-type",
+              "options": [
+                {
+                  "label": "dest-ip",
+                  "value": "dest-ip"
+                },
+                {
+                  "label": "global-port",
+                  "value": "global-port"
+                },
+                {
+                  "label": "src-ip",
+                  "value": "src-ip"
+                }
+              ],
+              "must": [
+                {
+                  "expr": "((../suppress-type='arp-miss') and (../ip-type='dest-ip')) or ((../suppress-type='arp') and (../ip-type='dest-ip')) or ((../suppress-type='arp') and (../ip-type='global-port'))"
+                }
+              ],
+              "isKey": true
+            },
+            {
+              "path": "/arp/global-speed-limits/global-speed-limit/port-type",
+              "type": "enum",
+              "label": "port-type",
+              "options": [
+                {
+                  "label": "src-port",
+                  "value": "src-port"
+                }
+              ]
+            },
+            {
+              "path": "/arp/global-speed-limits/global-speed-limit/suppress-type",
+              "type": "enum",
+              "label": "suppress-type",
+              "options": [
+                {
+                  "label": "arp",
+                  "value": "arp"
+                },
+                {
+                  "label": "arp-miss",
+                  "value": "arp-miss"
+                }
+              ],
+              "must": [
+                {
+                  "expr": "((../suppress-type='arp-miss') and (../ip-type='dest-ip')) or ((../suppress-type='arp') and (../ip-type='dest-ip')) or ((../suppress-type='arp') and (../ip-type='global-port'))"
+                }
+              ],
+              "isKey": true
+            },
+            {
+              "path": "/arp/global-speed-limits/global-speed-limit/suppress-value",
+              "type": "number",
+              "label": "suppress-value",
+              "maximum": 65536
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/arp/ip-conflicts",
+      "type": "group",
+      "label": "ip-conflicts",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/arp/ip-conflicts/ip-conflict",
+          "type": "list",
+          "label": "ip-conflict",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/arp/ip-conflicts/ip-conflict/conflict-count",
+              "type": "number",
+              "label": "conflict-count",
+              "maximum": 4294967294,
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/arp/ip-conflicts/ip-conflict/conflict-type",
+              "type": "enum",
+              "label": "conflict-type",
+              "options": [
+                {
+                  "label": "local-ce-ip-conflict",
+                  "value": "local-ce-ip-conflict"
+                },
+                {
+                  "label": "local-ip-conflict",
+                  "value": "local-ip-conflict"
+                },
+                {
+                  "label": "remote-ip-conflict",
+                  "value": "remote-ip-conflict"
+                }
+              ],
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/arp/ip-conflicts/ip-conflict/header-dst-mac",
+              "type": "string",
+              "label": "header-dst-mac",
+              "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+              "readonly": true
+            },
+            {
+              "path": "/arp/ip-conflicts/ip-conflict/header-src-mac",
+              "type": "string",
+              "label": "header-src-mac",
+              "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+              "readonly": true
+            },
+            {
+              "path": "/arp/ip-conflicts/ip-conflict/ip-addr",
+              "type": "string",
+              "label": "ip-addr",
+              "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?",
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/arp/ip-conflicts/ip-conflict/local-cevlan",
+              "type": "number",
+              "label": "local-cevlan",
+              "maximum": 4094,
+              "readonly": true
+            },
+            {
+              "path": "/arp/ip-conflicts/ip-conflict/local-ifname",
+              "type": "string",
+              "label": "local-ifname",
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/arp/ip-conflicts/ip-conflict/local-mac",
+              "type": "string",
+              "label": "local-mac",
+              "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+              "readonly": true
+            },
+            {
+              "path": "/arp/ip-conflicts/ip-conflict/local-vlan",
+              "type": "number",
+              "label": "local-vlan",
+              "maximum": 4094,
+              "readonly": true
+            },
+            {
+              "path": "/arp/ip-conflicts/ip-conflict/receive-cevlan",
+              "type": "number",
+              "label": "receive-cevlan",
+              "maximum": 4094,
+              "readonly": true
+            },
+            {
+              "path": "/arp/ip-conflicts/ip-conflict/receive-ifname",
+              "type": "string",
+              "label": "receive-ifname",
+              "readonly": true
+            },
+            {
+              "path": "/arp/ip-conflicts/ip-conflict/receive-mac",
+              "type": "string",
+              "label": "receive-mac",
+              "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+              "readonly": true
+            },
+            {
+              "path": "/arp/ip-conflicts/ip-conflict/receive-vlan",
+              "type": "number",
+              "label": "receive-vlan",
+              "maximum": 4094,
+              "readonly": true
+            },
+            {
+              "path": "/arp/ip-conflicts/ip-conflict/slot-id",
+              "type": "string",
+              "label": "slot-id",
+              "readonly": true
+            },
+            {
+              "path": "/arp/ip-conflicts/ip-conflict/suppress-count",
+              "type": "number",
+              "label": "suppress-count",
+              "maximum": 4294967294,
+              "readonly": true
+            },
+            {
+              "path": "/arp/ip-conflicts/ip-conflict/sys-time",
+              "type": "string",
+              "label": "sys-time",
+              "pattern": "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?(Z|[\\+\\-]\\d{2}:\\d{2})",
+              "readonly": true,
+              "isKey": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/arp/openflow-tbls",
+      "type": "group",
+      "label": "openflow-tbls",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/arp/openflow-tbls/openflow-tbl",
+          "type": "list",
+          "label": "openflow-tbl",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/arp/openflow-tbls/openflow-tbl/ip-addr",
+              "type": "string",
+              "label": "ip-addr",
+              "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?",
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/arp/openflow-tbls/openflow-tbl/mac-addr",
+              "type": "string",
+              "label": "mac-addr",
+              "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+              "readonly": true
+            },
+            {
+              "path": "/arp/openflow-tbls/openflow-tbl/vni",
+              "type": "number",
+              "label": "vni",
+              "minimum": 1,
+              "maximum": 16000000,
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/arp/openflow-tbls/openflow-tbl/vtep-ip",
+              "type": "string",
+              "label": "vtep-ip",
+              "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/arp/query-entries",
+      "type": "group",
+      "label": "query-entries",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/arp/query-entries/query-entry",
+          "type": "list",
+          "label": "query-entry",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/arp/query-entries/query-entry/ce-vlan",
+              "type": "number",
+              "label": "ce-vlan",
+              "minimum": 1,
+              "maximum": 4094,
+              "readonly": true
+            },
+            {
+              "path": "/arp/query-entries/query-entry/expire-time",
+              "type": "number",
+              "label": "expire-time",
+              "minimum": 1,
+              "maximum": 1440,
+              "readonly": true
+            },
+            {
+              "path": "/arp/query-entries/query-entry/if-name",
+              "type": "string",
+              "label": "if-name",
+              "readonly": true
+            },
+            {
+              "path": "/arp/query-entries/query-entry/ip-addr",
+              "type": "string",
+              "label": "ip-addr",
+              "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?",
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/arp/query-entries/query-entry/mac-addr",
+              "type": "string",
+              "label": "mac-addr",
+              "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+              "readonly": true
+            },
+            {
+              "path": "/arp/query-entries/query-entry/ni-name",
+              "type": "string",
+              "label": "ni-name",
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/arp/query-entries/query-entry/pe-vlan",
+              "type": "number",
+              "label": "pe-vlan",
+              "minimum": 1,
+              "maximum": 4094,
+              "readonly": true
+            },
+            {
+              "path": "/arp/query-entries/query-entry/peer-addr",
+              "type": "string",
+              "label": "peer-addr",
+              "readonly": true
+            },
+            {
+              "path": "/arp/query-entries/query-entry/pvc",
+              "type": "number",
+              "label": "pvc",
+              "readonly": true
+            },
+            {
+              "path": "/arp/query-entries/query-entry/slot-id",
+              "type": "string",
+              "label": "slot-id",
+              "readonly": true
+            },
+            {
+              "path": "/arp/query-entries/query-entry/source-addr",
+              "type": "string",
+              "label": "source-addr",
+              "readonly": true
+            },
+            {
+              "path": "/arp/query-entries/query-entry/style-type",
+              "type": "enum",
+              "label": "style-type",
+              "options": [
+                {
+                  "label": "backup-arp",
+                  "value": "backup-arp"
+                },
+                {
+                  "label": "dynamic-arp",
+                  "value": "dynamic-arp"
+                },
+                {
+                  "label": "interface-arp",
+                  "value": "interface-arp"
+                },
+                {
+                  "label": "openflow-arp",
+                  "value": "openflow-arp"
+                },
+                {
+                  "label": "redirect-arp",
+                  "value": "redirect-arp"
+                },
+                {
+                  "label": "static-arp",
+                  "value": "static-arp"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "path": "/arp/query-entries/query-entry/vni",
+              "type": "number",
+              "label": "vni",
+              "minimum": 1,
+              "maximum": 16777215,
+              "readonly": true
+            },
+            {
+              "path": "/arp/query-entries/query-entry/work-if-name",
+              "type": "string",
+              "label": "work-if-name",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/arp/speed-limits",
+      "type": "group",
+      "label": "speed-limits",
+      "fields": [
+        {
+          "path": "/arp/speed-limits/speed-limit",
+          "type": "list",
+          "label": "speed-limit",
+          "fields": [
+            {
+              "path": "/arp/speed-limits/speed-limit/ip-type",
+              "type": "enum",
+              "label": "ip-type",
+              "options": [
+                {
+                  "label": "dest-ip",
+                  "value": "dest-ip"
+                },
+                {
+                  "label": "global-port",
+                  "value": "global-port"
+                },
+                {
+                  "label": "src-ip",
+                  "value": "src-ip"
+                }
+              ],
+              "must": [
+                {
+                  "expr": "(../suppress-type='arp' and (../ip-type='dest-ip' or ../ip-type='src-ip')) or (../suppress-type='arp-miss' and ../ip-type='src-ip')"
+                }
+              ],
+              "isKey": true
+            },
+            {
+              "path": "/arp/speed-limits/speed-limit/slot-id",
+              "type": "string",
+              "label": "slot-id",
+              "isKey": true
+            },
+            {
+              "path": "/arp/speed-limits/speed-limit/suppress-type",
+              "type": "enum",
+              "label": "suppress-type",
+              "options": [
+                {
+                  "label": "arp",
+                  "value": "arp"
+                },
+                {
+                  "label": "arp-miss",
+                  "value": "arp-miss"
+                }
+              ],
+              "must": [
+                {
+                  "expr": "(../suppress-type='arp' and (../ip-type='dest-ip' or ../ip-type='src-ip')) or (../suppress-type='arp-miss' and ../ip-type='src-ip')"
+                }
+              ],
+              "isKey": true
+            },
+            {
+              "path": "/arp/speed-limits/speed-limit/suppress-value",
+              "type": "number",
+              "label": "suppress-value",
+              "required": true,
+              "maximum": 65536
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/arp/static-arps",
+      "type": "group",
+      "label": "static-arps",
+      "fields": [
+        {
+          "path": "/arp/static-arps/static-arp",
+          "type": "list",
+          "label": "static-arp",
+          "fields": [
+            {
+              "path": "/arp/static-arps/static-arp/ip-addr",
+              "type": "string",
+              "label": "ip-addr",
+              "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?",
+              "isKey": true
+            },
+            {
+              "path": "/arp/static-arps/static-arp/mac-addr",
+              "type": "string",
+              "label": "mac-addr",
+              "required": true,
+              "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}"
+            },
+            {
+              "path": "/arp/static-arps/static-arp/ni-name",
+              "type": "string",
+              "label": "ni-name",
+              "must": [
+                {
+                  "expr": "/ni:network-instance/ni:instances/ni:instance[ni:name=current()]/l3vpn:afs/l3vpn:af[l3vpn:type='ipv4-unicast']"
+                }
+              ],
+              "isKey": true
+            },
+            {
+              "path": "/arp/static-arps/static-arp/tunnel-ip",
+              "type": "choice",
+              "label": "tunnel-ip",
+              "cases": [
+                {
+                  "name": "ipv4-ip",
+                  "label": "ipv4-ip",
+                  "fields": [
+                    {
+                      "path": "/arp/static-arps/static-arp/peer-addr",
+                      "type": "string",
+                      "label": "peer-addr",
+                      "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?"
+                    },
+                    {
+                      "path": "/arp/static-arps/static-arp/source-addr",
+                      "type": "string",
+                      "label": "source-addr",
+                      "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?"
+                    }
+                  ]
+                },
+                {
+                  "name": "ipv6-ip",
+                  "label": "ipv6-ip",
+                  "fields": [
+                    {
+                      "path": "/arp/static-arps/static-arp/peer-ipv6-addr",
+                      "type": "string",
+                      "label": "peer-ipv6-addr",
+                      "pattern": "((:|[0-9a-fA-F]{0,4}):)([0-9a-fA-F]{0,4}:){0,5}((([0-9a-fA-F]{0,4}:)?(:|[0-9a-fA-F]{0,4}))|(((25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])))(%[\\p{N}\\p{L}]+)?"
+                    },
+                    {
+                      "path": "/arp/static-arps/static-arp/source-ipv6-addr",
+                      "type": "string",
+                      "label": "source-ipv6-addr",
+                      "pattern": "((:|[0-9a-fA-F]{0,4}):)([0-9a-fA-F]{0,4}:){0,5}((([0-9a-fA-F]{0,4}:)?(:|[0-9a-fA-F]{0,4}))|(((25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])))(%[\\p{N}\\p{L}]+)?"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/arp/static-arps/static-arp/vlan-id",
+              "type": "number",
+              "label": "vlan-id",
+              "minimum": 1,
+              "maximum": 4094
+            },
+            {
+              "path": "/arp/static-arps/static-arp/vxlan-id",
+              "type": "number",
+              "label": "vxlan-id",
+              "minimum": 1,
+              "maximum": 16777215
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/arp/statisticss",
+      "type": "group",
+      "label": "statisticss",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/arp/statisticss/statistics",
+          "type": "list",
+          "label": "statistics",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/arp/statisticss/statistics/learn-count",
+              "type": "number",
+              "label": "learn-count",
+              "maximum": 4294967294,
+              "readonly": true
+            },
+            {
+              "path": "/arp/statisticss/statistics/miss-drop-limit",
+              "type": "number",
+              "label": "miss-drop-limit",
+              "maximum": 4294967294,
+              "readonly": true
+            },
+            {
+              "path": "/arp/statisticss/statistics/miss-drop-other",
+              "type": "number",
+              "label": "miss-drop-other",
+              "maximum": 4294967294,
+              "readonly": true
+            },
+            {
+              "path": "/arp/statisticss/statistics/miss-received",
+              "type": "number",
+              "label": "miss-received",
+              "maximum": 4294967294,
+              "readonly": true
+            },
+            {
+              "path": "/arp/statisticss/statistics/packets-drop-limit",
+              "type": "number",
+              "label": "packets-drop-limit",
+              "maximum": 4294967294,
+              "readonly": true
+            },
+            {
+              "path": "/arp/statisticss/statistics/packets-drop-other",
+              "type": "number",
+              "label": "packets-drop-other",
+              "maximum": 4294967294,
+              "readonly": true
+            },
+            {
+              "path": "/arp/statisticss/statistics/packets-drop-speedlmt",
+              "type": "number",
+              "label": "packets-drop-speedlmt",
+              "maximum": 4294967294,
+              "readonly": true
+            },
+            {
+              "path": "/arp/statisticss/statistics/packets-proxy-supp",
+              "type": "number",
+              "label": "packets-proxy-supp",
+              "maximum": 4294967294,
+              "readonly": true
+            },
+            {
+              "path": "/arp/statisticss/statistics/packets-received",
+              "type": "number",
+              "label": "packets-received",
+              "maximum": 4294967294,
+              "readonly": true
+            },
+            {
+              "path": "/arp/statisticss/statistics/slot-id",
+              "type": "string",
+              "label": "slot-id",
+              "readonly": true,
+              "isKey": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/arp/track-statistics",
+      "type": "group",
+      "label": "track-statistics",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/arp/track-statistics/track-statistic",
+          "type": "list",
+          "label": "track-statistic",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/arp/track-statistics/track-statistic/ip-addr",
+              "type": "string",
+              "label": "ip-addr",
+              "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?",
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/arp/track-statistics/track-statistic/mac-addr",
+              "type": "string",
+              "label": "mac-addr",
+              "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+              "readonly": true
+            },
+            {
+              "path": "/arp/track-statistics/track-statistic/new-ifname",
+              "type": "string",
+              "label": "new-ifname",
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/arp/track-statistics/track-statistic/old-ifname",
+              "type": "string",
+              "label": "old-ifname",
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/arp/track-statistics/track-statistic/op-code",
+              "type": "enum",
+              "label": "op-code",
+              "options": [
+                {
+                  "label": "delete",
+                  "value": "delete"
+                },
+                {
+                  "label": "modify",
+                  "value": "modify"
+                }
+              ],
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/arp/track-statistics/track-statistic/sys-time",
+              "type": "string",
+              "label": "sys-time",
+              "pattern": "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?(Z|[\\+\\-]\\d{2}:\\d{2})",
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/arp/track-statistics/track-statistic/vlan-id",
+              "type": "string",
+              "label": "vlan-id",
+              "readonly": true,
+              "isKey": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

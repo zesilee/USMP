@@ -1,0 +1,687 @@
+{
+  "module": "m-lag",
+  "title": "m-lag",
+  "vendor": "huawei",
+  "fields": [
+    {
+      "path": "/m-lag/dfs-groups",
+      "type": "group",
+      "label": "dfs-groups",
+      "fields": [
+        {
+          "path": "/m-lag/dfs-groups/dfs-group",
+          "type": "list",
+          "label": "dfs-group",
+          "fields": [
+            {
+              "path": "/m-lag/dfs-groups/dfs-group/authentication",
+              "type": "group",
+              "label": "authentication",
+              "fields": [
+                {
+                  "path": "/m-lag/dfs-groups/dfs-group/authentication/mode",
+                  "type": "enum",
+                  "label": "mode",
+                  "required": true,
+                  "options": [
+                    {
+                      "label": "hmac-sha256",
+                      "value": "hmac-sha256"
+                    }
+                  ]
+                },
+                {
+                  "path": "/m-lag/dfs-groups/dfs-group/authentication/password",
+                  "type": "string",
+                  "label": "password",
+                  "required": true
+                }
+              ],
+              "presence": true
+            },
+            {
+              "path": "/m-lag/dfs-groups/dfs-group/consistency-check",
+              "type": "group",
+              "label": "consistency-check",
+              "fields": [
+                {
+                  "path": "/m-lag/dfs-groups/dfs-group/consistency-check/mode",
+                  "type": "enum",
+                  "label": "mode",
+                  "options": [
+                    {
+                      "label": "disable",
+                      "value": "disable"
+                    },
+                    {
+                      "label": "loose",
+                      "value": "loose"
+                    },
+                    {
+                      "label": "strict",
+                      "value": "strict"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/m-lag/dfs-groups/dfs-group/dad-error-down",
+              "type": "group",
+              "label": "dad-error-down",
+              "fields": [
+                {
+                  "path": "/m-lag/dfs-groups/dfs-group/dad-error-down/delay",
+                  "type": "number",
+                  "label": "delay",
+                  "maximum": 7200,
+                  "when": "../enable ='true'"
+                },
+                {
+                  "path": "/m-lag/dfs-groups/dfs-group/dad-error-down/enable",
+                  "type": "boolean",
+                  "label": "enable"
+                },
+                {
+                  "path": "/m-lag/dfs-groups/dfs-group/dad-error-down/error-down-mode",
+                  "type": "enum",
+                  "label": "error-down-mode",
+                  "options": [
+                    {
+                      "label": "routing-switch",
+                      "value": "routing-switch"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/m-lag/dfs-groups/dfs-group/group-id",
+              "type": "number",
+              "label": "group-id",
+              "minimum": 1,
+              "maximum": 1,
+              "isKey": true
+            },
+            {
+              "path": "/m-lag/dfs-groups/dfs-group/lacp-switch-delay",
+              "type": "group",
+              "label": "lacp-switch-delay",
+              "fields": [
+                {
+                  "path": "/m-lag/dfs-groups/dfs-group/lacp-switch-delay/system-id-switch-mode",
+                  "type": "choice",
+                  "label": "system-id-switch-mode",
+                  "cases": [
+                    {
+                      "name": "immediately",
+                      "label": "immediately",
+                      "fields": [
+                        {
+                          "path": "/m-lag/dfs-groups/dfs-group/lacp-switch-delay/immediately",
+                          "type": "string",
+                          "label": "immediately"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "no-switch",
+                      "label": "no-switch",
+                      "fields": [
+                        {
+                          "path": "/m-lag/dfs-groups/dfs-group/lacp-switch-delay/no-switch",
+                          "type": "string",
+                          "label": "no-switch"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "switch-delay",
+                      "label": "switch-delay",
+                      "fields": [
+                        {
+                          "path": "/m-lag/dfs-groups/dfs-group/lacp-switch-delay/delay-timer",
+                          "type": "number",
+                          "label": "delay-timer",
+                          "minimum": 1,
+                          "maximum": 3600
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/m-lag/dfs-groups/dfs-group/mac-address-remain",
+              "type": "group",
+              "label": "mac-address-remain",
+              "fields": [
+                {
+                  "path": "/m-lag/dfs-groups/dfs-group/mac-address-remain/paired-port",
+                  "type": "boolean",
+                  "label": "paired-port"
+                },
+                {
+                  "path": "/m-lag/dfs-groups/dfs-group/mac-address-remain/unpaired-port",
+                  "type": "boolean",
+                  "label": "unpaired-port"
+                }
+              ]
+            },
+            {
+              "path": "/m-lag/dfs-groups/dfs-group/priority",
+              "type": "number",
+              "label": "priority",
+              "minimum": 1,
+              "maximum": 254
+            },
+            {
+              "path": "/m-lag/dfs-groups/dfs-group/sessions",
+              "type": "group",
+              "label": "sessions",
+              "fields": [
+                {
+                  "path": "/m-lag/dfs-groups/dfs-group/sessions/session",
+                  "type": "list",
+                  "label": "session",
+                  "fields": [
+                    {
+                      "path": "/m-lag/dfs-groups/dfs-group/sessions/session/dfs-proto-type",
+                      "type": "enum",
+                      "label": "dfs-proto-type",
+                      "options": [
+                        {
+                          "label": "keepalive",
+                          "value": "keepalive"
+                        }
+                      ],
+                      "isKey": true
+                    },
+                    {
+                      "path": "/m-lag/dfs-groups/dfs-group/sessions/session/peer-ip",
+                      "type": "string",
+                      "label": "peer-ip",
+                      "must": [
+                        {
+                          "expr": "(../peer-ip != ../source-ip)"
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/m-lag/dfs-groups/dfs-group/sessions/session/peer-port",
+                      "type": "number",
+                      "label": "peer-port",
+                      "minimum": 1025,
+                      "maximum": 2048,
+                      "must": [
+                        {
+                          "expr": "(../peer-ip and ../peer-port) or (not (../peer-ip) and not (../peer-port))"
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/m-lag/dfs-groups/dfs-group/sessions/session/socket-type",
+                      "type": "enum",
+                      "label": "socket-type",
+                      "options": [
+                        {
+                          "label": "UDP",
+                          "value": "UDP"
+                        }
+                      ],
+                      "must": [
+                        {
+                          "expr": "(../peer-ip and ../socket-type) or (not (../peer-ip) and not (../socket-type))"
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/m-lag/dfs-groups/dfs-group/sessions/session/source-ip",
+                      "type": "string",
+                      "label": "source-ip",
+                      "required": true
+                    },
+                    {
+                      "path": "/m-lag/dfs-groups/dfs-group/sessions/session/timeout",
+                      "type": "number",
+                      "label": "timeout",
+                      "minimum": 3,
+                      "maximum": 60,
+                      "when": "../dfs-proto-type ='keepalive'"
+                    },
+                    {
+                      "path": "/m-lag/dfs-groups/dfs-group/sessions/session/vpn-name",
+                      "type": "string",
+                      "label": "vpn-name"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/m-lag/dfs-groups/dfs-group/up-delay",
+              "type": "group",
+              "label": "up-delay",
+              "fields": [
+                {
+                  "path": "/m-lag/dfs-groups/dfs-group/up-delay/auto-recovery-interval",
+                  "type": "number",
+                  "label": "auto-recovery-interval",
+                  "maximum": 180
+                },
+                {
+                  "path": "/m-lag/dfs-groups/dfs-group/up-delay/up-delay-timer",
+                  "type": "number",
+                  "label": "up-delay-timer",
+                  "maximum": 3600
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/m-lag/negotiation-states",
+      "type": "group",
+      "label": "negotiation-states",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/m-lag/negotiation-states/negotiation-state",
+          "type": "list",
+          "label": "negotiation-state",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/m-lag/negotiation-states/negotiation-state/dfs-group-states",
+              "type": "group",
+              "label": "dfs-group-states",
+              "readonly": true,
+              "fields": [
+                {
+                  "path": "/m-lag/negotiation-states/negotiation-state/dfs-group-states/dfs-group-state",
+                  "type": "list",
+                  "label": "dfs-group-state",
+                  "readonly": true,
+                  "fields": [
+                    {
+                      "path": "/m-lag/negotiation-states/negotiation-state/dfs-group-states/dfs-group-state/causation",
+                      "type": "enum",
+                      "label": "causation",
+                      "options": [
+                        {
+                          "label": "AUTHENTICATION-FAILED",
+                          "value": "AUTHENTICATION-FAILED"
+                        },
+                        {
+                          "label": "DETECT",
+                          "value": "DETECT"
+                        },
+                        {
+                          "label": "NOADDRESS",
+                          "value": "NOADDRESS"
+                        },
+                        {
+                          "label": "NOAUTHENTICATION",
+                          "value": "NOAUTHENTICATION"
+                        },
+                        {
+                          "label": "NOPEERLINK",
+                          "value": "NOPEERLINK"
+                        },
+                        {
+                          "label": "PEERLINKDOWN",
+                          "value": "PEERLINKDOWN"
+                        },
+                        {
+                          "label": "SAMEMAC",
+                          "value": "SAMEMAC"
+                        },
+                        {
+                          "label": "TIMEOUT",
+                          "value": "TIMEOUT"
+                        },
+                        {
+                          "label": "TYPEMISMATCH",
+                          "value": "TYPEMISMATCH"
+                        },
+                        {
+                          "label": "VERSIONMISMATCH",
+                          "value": "VERSIONMISMATCH"
+                        }
+                      ],
+                      "readonly": true
+                    },
+                    {
+                      "path": "/m-lag/negotiation-states/negotiation-state/dfs-group-states/dfs-group-state/consistency-check",
+                      "type": "enum",
+                      "label": "consistency-check",
+                      "options": [
+                        {
+                          "label": "failed",
+                          "value": "failed"
+                        },
+                        {
+                          "label": "success",
+                          "value": "success"
+                        }
+                      ],
+                      "readonly": true
+                    },
+                    {
+                      "path": "/m-lag/negotiation-states/negotiation-state/dfs-group-states/dfs-group-state/device-type",
+                      "type": "string",
+                      "label": "device-type",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/m-lag/negotiation-states/negotiation-state/dfs-group-states/dfs-group-state/group-id",
+                      "type": "number",
+                      "label": "group-id",
+                      "minimum": 1,
+                      "maximum": 1,
+                      "readonly": true,
+                      "isKey": true
+                    },
+                    {
+                      "path": "/m-lag/negotiation-states/negotiation-state/dfs-group-states/dfs-group-state/ip-address",
+                      "type": "string",
+                      "label": "ip-address",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/m-lag/negotiation-states/negotiation-state/dfs-group-states/dfs-group-state/priority",
+                      "type": "number",
+                      "label": "priority",
+                      "minimum": 1,
+                      "maximum": 254,
+                      "readonly": true
+                    },
+                    {
+                      "path": "/m-lag/negotiation-states/negotiation-state/dfs-group-states/dfs-group-state/state",
+                      "type": "enum",
+                      "label": "state",
+                      "options": [
+                        {
+                          "label": "master",
+                          "value": "master"
+                        },
+                        {
+                          "label": "slave",
+                          "value": "slave"
+                        }
+                      ],
+                      "readonly": true
+                    },
+                    {
+                      "path": "/m-lag/negotiation-states/negotiation-state/dfs-group-states/dfs-group-state/system-id",
+                      "type": "string",
+                      "label": "system-id",
+                      "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/m-lag/negotiation-states/negotiation-state/dfs-group-states/dfs-group-state/system-name",
+                      "type": "string",
+                      "label": "system-name",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/m-lag/negotiation-states/negotiation-state/dfs-group-states/dfs-group-state/udp-port",
+                      "type": "number",
+                      "label": "udp-port",
+                      "minimum": 1025,
+                      "maximum": 2048,
+                      "readonly": true
+                    },
+                    {
+                      "path": "/m-lag/negotiation-states/negotiation-state/dfs-group-states/dfs-group-state/version",
+                      "type": "string",
+                      "label": "version",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/m-lag/negotiation-states/negotiation-state/dfs-group-states/dfs-group-state/vpn-name",
+                      "type": "string",
+                      "label": "vpn-name",
+                      "readonly": true
+                    }
+                  ]
+                },
+                {
+                  "path": "/m-lag/negotiation-states/negotiation-state/dfs-group-states/m-lags",
+                  "type": "group",
+                  "label": "m-lags",
+                  "readonly": true,
+                  "fields": [
+                    {
+                      "path": "/m-lag/negotiation-states/negotiation-state/dfs-group-states/m-lags/m-lag",
+                      "type": "list",
+                      "label": "m-lag",
+                      "readonly": true,
+                      "fields": [
+                        {
+                          "path": "/m-lag/negotiation-states/negotiation-state/dfs-group-states/m-lags/m-lag/causation",
+                          "type": "enum",
+                          "label": "causation",
+                          "options": [
+                            {
+                              "label": "LACPINCONSISTENT",
+                              "value": "LACPINCONSISTENT"
+                            },
+                            {
+                              "label": "MLAGINCONSISTENT",
+                              "value": "MLAGINCONSISTENT"
+                            },
+                            {
+                              "label": "MLAGMEMBERINCONSISTENT",
+                              "value": "MLAGMEMBERINCONSISTENT"
+                            },
+                            {
+                              "label": "PORTVLANINCONSISTENT",
+                              "value": "PORTVLANINCONSISTENT"
+                            },
+                            {
+                              "label": "STPINCONSISTENT",
+                              "value": "STPINCONSISTENT"
+                            },
+                            {
+                              "label": "STPPRIORITYINCONSISTENT",
+                              "value": "STPPRIORITYINCONSISTENT"
+                            }
+                          ],
+                          "readonly": true
+                        },
+                        {
+                          "path": "/m-lag/negotiation-states/negotiation-state/dfs-group-states/m-lags/m-lag/consistency-check",
+                          "type": "enum",
+                          "label": "consistency-check",
+                          "options": [
+                            {
+                              "label": "failed",
+                              "value": "failed"
+                            },
+                            {
+                              "label": "success",
+                              "value": "success"
+                            }
+                          ],
+                          "readonly": true
+                        },
+                        {
+                          "path": "/m-lag/negotiation-states/negotiation-state/dfs-group-states/m-lags/m-lag/group-id",
+                          "type": "number",
+                          "label": "group-id",
+                          "minimum": 1,
+                          "maximum": 1,
+                          "readonly": true
+                        },
+                        {
+                          "path": "/m-lag/negotiation-states/negotiation-state/dfs-group-states/m-lags/m-lag/id",
+                          "type": "number",
+                          "label": "id",
+                          "minimum": 1,
+                          "maximum": 2048,
+                          "readonly": true,
+                          "isKey": true
+                        },
+                        {
+                          "path": "/m-lag/negotiation-states/negotiation-state/dfs-group-states/m-lags/m-lag/interface-name",
+                          "type": "string",
+                          "label": "interface-name",
+                          "readonly": true
+                        },
+                        {
+                          "path": "/m-lag/negotiation-states/negotiation-state/dfs-group-states/m-lags/m-lag/port-role",
+                          "type": "enum",
+                          "label": "port-role",
+                          "options": [
+                            {
+                              "label": "backup",
+                              "value": "backup"
+                            },
+                            {
+                              "label": "invalid",
+                              "value": "invalid"
+                            },
+                            {
+                              "label": "master",
+                              "value": "master"
+                            }
+                          ],
+                          "readonly": true
+                        },
+                        {
+                          "path": "/m-lag/negotiation-states/negotiation-state/dfs-group-states/m-lags/m-lag/port-state",
+                          "type": "enum",
+                          "label": "port-state",
+                          "options": [
+                            {
+                              "label": "DOWN",
+                              "value": "DOWN"
+                            },
+                            {
+                              "label": "UP",
+                              "value": "UP"
+                            }
+                          ],
+                          "readonly": true
+                        },
+                        {
+                          "path": "/m-lag/negotiation-states/negotiation-state/dfs-group-states/m-lags/m-lag/port-status",
+                          "type": "enum",
+                          "label": "port-status",
+                          "options": [
+                            {
+                              "label": "active",
+                              "value": "active"
+                            },
+                            {
+                              "label": "inactive",
+                              "value": "inactive"
+                            }
+                          ],
+                          "readonly": true
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "path": "/m-lag/negotiation-states/negotiation-state/dfs-group-states/peer-link-states",
+                  "type": "group",
+                  "label": "peer-link-states",
+                  "readonly": true,
+                  "fields": [
+                    {
+                      "path": "/m-lag/negotiation-states/negotiation-state/dfs-group-states/peer-link-states/peer-link-state",
+                      "type": "list",
+                      "label": "peer-link-state",
+                      "readonly": true,
+                      "fields": [
+                        {
+                          "path": "/m-lag/negotiation-states/negotiation-state/dfs-group-states/peer-link-states/peer-link-state/group-id",
+                          "type": "number",
+                          "label": "group-id",
+                          "minimum": 1,
+                          "maximum": 1,
+                          "readonly": true,
+                          "isKey": true
+                        },
+                        {
+                          "path": "/m-lag/negotiation-states/negotiation-state/dfs-group-states/peer-link-states/peer-link-state/interface-name",
+                          "type": "string",
+                          "label": "interface-name",
+                          "readonly": true
+                        },
+                        {
+                          "path": "/m-lag/negotiation-states/negotiation-state/dfs-group-states/peer-link-states/peer-link-state/link-id",
+                          "type": "number",
+                          "label": "link-id",
+                          "minimum": 1,
+                          "maximum": 1,
+                          "readonly": true
+                        },
+                        {
+                          "path": "/m-lag/negotiation-states/negotiation-state/dfs-group-states/peer-link-states/peer-link-state/port-state",
+                          "type": "enum",
+                          "label": "port-state",
+                          "options": [
+                            {
+                              "label": "DOWN",
+                              "value": "DOWN"
+                            },
+                            {
+                              "label": "UP",
+                              "value": "UP"
+                            }
+                          ],
+                          "readonly": true
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/m-lag/negotiation-states/negotiation-state/dfs-role",
+              "type": "enum",
+              "label": "dfs-role",
+              "options": [
+                {
+                  "label": "local",
+                  "value": "local"
+                },
+                {
+                  "label": "peer",
+                  "value": "peer"
+                }
+              ],
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/m-lag/negotiation-states/negotiation-state/heart-beat-state",
+              "type": "enum",
+              "label": "heart-beat-state",
+              "options": [
+                {
+                  "label": "lost",
+                  "value": "lost"
+                },
+                {
+                  "label": "ok",
+                  "value": "ok"
+                }
+              ],
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

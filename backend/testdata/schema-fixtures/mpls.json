@@ -1,0 +1,696 @@
+{
+  "module": "mpls",
+  "title": "mpls",
+  "vendor": "huawei",
+  "fields": [
+    {
+      "path": "/mpls/common",
+      "type": "group",
+      "label": "common",
+      "fields": [
+        {
+          "path": "/mpls/common/bit-err-levels",
+          "type": "group",
+          "label": "bit-err-levels",
+          "fields": [
+            {
+              "path": "/mpls/common/bit-err-levels/bit-err-level",
+              "type": "list",
+              "label": "bit-err-level",
+              "fields": [
+                {
+                  "path": "/mpls/common/bit-err-levels/bit-err-level/level-number",
+                  "type": "number",
+                  "label": "level-number",
+                  "minimum": 1,
+                  "maximum": 3,
+                  "isKey": true
+                },
+                {
+                  "path": "/mpls/common/bit-err-levels/bit-err-level/resume-coe",
+                  "type": "number",
+                  "label": "resume-coe",
+                  "required": true,
+                  "minimum": 1,
+                  "maximum": 9
+                },
+                {
+                  "path": "/mpls/common/bit-err-levels/bit-err-level/resume-pow",
+                  "type": "number",
+                  "label": "resume-pow",
+                  "required": true,
+                  "minimum": 1,
+                  "maximum": 7,
+                  "must": [
+                    {
+                      "expr": "../resume-pow\u003e=../switch-pow"
+                    }
+                  ]
+                },
+                {
+                  "path": "/mpls/common/bit-err-levels/bit-err-level/switch-coe",
+                  "type": "number",
+                  "label": "switch-coe",
+                  "required": true,
+                  "minimum": 1,
+                  "maximum": 9,
+                  "must": [
+                    {
+                      "expr": "../switch-pow!=../resume-pow or ../switch-coe\u003e=../resume-coe"
+                    }
+                  ]
+                },
+                {
+                  "path": "/mpls/common/bit-err-levels/bit-err-level/switch-pow",
+                  "type": "number",
+                  "label": "switch-pow",
+                  "required": true,
+                  "minimum": 1,
+                  "maximum": 7
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "path": "/mpls/common/cross-connects",
+          "type": "group",
+          "label": "cross-connects",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/mpls/common/cross-connects/cross-connect",
+              "type": "list",
+              "label": "cross-connect",
+              "readonly": true,
+              "fields": [
+                {
+                  "path": "/mpls/common/cross-connects/cross-connect/insegment-index",
+                  "type": "number",
+                  "label": "insegment-index",
+                  "readonly": true,
+                  "isKey": true
+                },
+                {
+                  "path": "/mpls/common/cross-connects/cross-connect/outsegment-index",
+                  "type": "number",
+                  "label": "outsegment-index",
+                  "readonly": true,
+                  "isKey": true
+                },
+                {
+                  "path": "/mpls/common/cross-connects/cross-connect/xc-in-interface-name",
+                  "type": "string",
+                  "label": "xc-in-interface-name",
+                  "readonly": true
+                },
+                {
+                  "path": "/mpls/common/cross-connects/cross-connect/xc-in-label",
+                  "type": "number",
+                  "label": "xc-in-label",
+                  "readonly": true
+                },
+                {
+                  "path": "/mpls/common/cross-connects/cross-connect/xc-index",
+                  "type": "number",
+                  "label": "xc-index",
+                  "readonly": true,
+                  "isKey": true
+                },
+                {
+                  "path": "/mpls/common/cross-connects/cross-connect/xc-next-hop",
+                  "type": "string",
+                  "label": "xc-next-hop",
+                  "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?",
+                  "readonly": true
+                },
+                {
+                  "path": "/mpls/common/cross-connects/cross-connect/xc-out-interface-name",
+                  "type": "string",
+                  "label": "xc-out-interface-name",
+                  "readonly": true
+                },
+                {
+                  "path": "/mpls/common/cross-connects/cross-connect/xc-out-label",
+                  "type": "number",
+                  "label": "xc-out-label",
+                  "readonly": true
+                },
+                {
+                  "path": "/mpls/common/cross-connects/cross-connect/xc-outgoing-tunnel-id",
+                  "type": "number",
+                  "label": "xc-outgoing-tunnel-id",
+                  "readonly": true
+                },
+                {
+                  "path": "/mpls/common/cross-connects/cross-connect/xc-outgoing-tunnel-type",
+                  "type": "enum",
+                  "label": "xc-outgoing-tunnel-type",
+                  "options": [
+                    {
+                      "label": "bgp",
+                      "value": "bgp"
+                    },
+                    {
+                      "label": "srbe",
+                      "value": "srbe"
+                    }
+                  ],
+                  "readonly": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "path": "/mpls/common/global",
+          "type": "group",
+          "label": "global",
+          "fields": [
+            {
+              "path": "/mpls/common/global/diff-serv-mode",
+              "type": "enum",
+              "label": "diff-serv-mode",
+              "options": [
+                {
+                  "label": "pipe",
+                  "value": "pipe"
+                },
+                {
+                  "label": "uniform",
+                  "value": "uniform"
+                }
+              ],
+              "when": "../mpls-enable='true'"
+            },
+            {
+              "path": "/mpls/common/global/entropy-label-capability",
+              "type": "boolean",
+              "label": "entropy-label-capability",
+              "when": "../mpls-enable='true'"
+            },
+            {
+              "path": "/mpls/common/global/ftn-delay-time",
+              "type": "number",
+              "label": "ftn-delay-time",
+              "maximum": 120,
+              "when": "../mpls-enable='true'"
+            },
+            {
+              "path": "/mpls/common/global/ldp-ttl-mode",
+              "type": "enum",
+              "label": "ldp-ttl-mode",
+              "options": [
+                {
+                  "label": "pipe",
+                  "value": "pipe"
+                },
+                {
+                  "label": "uniform",
+                  "value": "uniform"
+                }
+              ],
+              "when": "../mpls-enable='true'"
+            },
+            {
+              "path": "/mpls/common/global/lsr-id",
+              "type": "string",
+              "label": "lsr-id",
+              "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?"
+            },
+            {
+              "path": "/mpls/common/global/mpls-enable",
+              "type": "boolean",
+              "label": "mpls-enable"
+            },
+            {
+              "path": "/mpls/common/global/mpls-mtu-independent",
+              "type": "boolean",
+              "label": "mpls-mtu-independent",
+              "when": "../mpls-enable='true'"
+            },
+            {
+              "path": "/mpls/common/global/null-lable-type",
+              "type": "enum",
+              "label": "null-lable-type",
+              "options": [
+                {
+                  "label": "explicit-null",
+                  "value": "explicit-null"
+                },
+                {
+                  "label": "implicit-null",
+                  "value": "implicit-null"
+                },
+                {
+                  "label": "non-null",
+                  "value": "non-null"
+                }
+              ],
+              "when": "../mpls-enable='true'"
+            },
+            {
+              "path": "/mpls/common/global/sr-exp-mode",
+              "type": "enum",
+              "label": "sr-exp-mode",
+              "options": [
+                {
+                  "label": "pipe",
+                  "value": "pipe"
+                },
+                {
+                  "label": "uniform",
+                  "value": "uniform"
+                }
+              ],
+              "when": "../mpls-enable='true'"
+            },
+            {
+              "path": "/mpls/common/global/sr-ttl-mode",
+              "type": "enum",
+              "label": "sr-ttl-mode",
+              "options": [
+                {
+                  "label": "pipe",
+                  "value": "pipe"
+                },
+                {
+                  "label": "uniform",
+                  "value": "uniform"
+                }
+              ],
+              "when": "../mpls-enable='true'"
+            },
+            {
+              "path": "/mpls/common/global/te-ttl-mode",
+              "type": "enum",
+              "label": "te-ttl-mode",
+              "options": [
+                {
+                  "label": "pipe",
+                  "value": "pipe"
+                },
+                {
+                  "label": "uniform",
+                  "value": "uniform"
+                }
+              ],
+              "when": "../mpls-enable='true'"
+            }
+          ]
+        },
+        {
+          "path": "/mpls/common/ilm-label-stacks",
+          "type": "group",
+          "label": "ilm-label-stacks",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/mpls/common/ilm-label-stacks/ilm-label-stack",
+              "type": "list",
+              "label": "ilm-label-stack",
+              "readonly": true,
+              "fields": [
+                {
+                  "path": "/mpls/common/ilm-label-stacks/ilm-label-stack/in-label",
+                  "type": "number",
+                  "label": "in-label",
+                  "readonly": true,
+                  "isKey": true
+                },
+                {
+                  "path": "/mpls/common/ilm-label-stacks/ilm-label-stack/label-stack",
+                  "type": "number",
+                  "label": "label-stack",
+                  "readonly": true,
+                  "isKey": true
+                },
+                {
+                  "path": "/mpls/common/ilm-label-stacks/ilm-label-stack/level",
+                  "type": "number",
+                  "label": "level",
+                  "readonly": true,
+                  "isKey": true
+                },
+                {
+                  "path": "/mpls/common/ilm-label-stacks/ilm-label-stack/out-interface-name",
+                  "type": "string",
+                  "label": "out-interface-name",
+                  "readonly": true
+                },
+                {
+                  "path": "/mpls/common/ilm-label-stacks/ilm-label-stack/out-label",
+                  "type": "number",
+                  "label": "out-label",
+                  "readonly": true
+                },
+                {
+                  "path": "/mpls/common/ilm-label-stacks/ilm-label-stack/type",
+                  "type": "string",
+                  "label": "type",
+                  "readonly": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "path": "/mpls/common/lsp-statistics",
+          "type": "group",
+          "label": "lsp-statistics",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/mpls/common/lsp-statistics/lsp-statistic",
+              "type": "list",
+              "label": "lsp-statistic",
+              "readonly": true,
+              "fields": [
+                {
+                  "path": "/mpls/common/lsp-statistics/lsp-statistic/egress-lsp",
+                  "type": "number",
+                  "label": "egress-lsp",
+                  "readonly": true
+                },
+                {
+                  "path": "/mpls/common/lsp-statistics/lsp-statistic/ingress-lsp",
+                  "type": "number",
+                  "label": "ingress-lsp",
+                  "readonly": true
+                },
+                {
+                  "path": "/mpls/common/lsp-statistics/lsp-statistic/lsp-type",
+                  "type": "enum",
+                  "label": "lsp-type",
+                  "options": [
+                    {
+                      "label": "asbr-lsp",
+                      "value": "asbr-lsp"
+                    },
+                    {
+                      "label": "bgp-ipv6-lsp",
+                      "value": "bgp-ipv6-lsp"
+                    },
+                    {
+                      "label": "bgp-lsp",
+                      "value": "bgp-lsp"
+                    },
+                    {
+                      "label": "crlsp",
+                      "value": "crlsp"
+                    },
+                    {
+                      "label": "l3vpn-ipv6-lsp",
+                      "value": "l3vpn-ipv6-lsp"
+                    },
+                    {
+                      "label": "ldp-lsp",
+                      "value": "ldp-lsp"
+                    },
+                    {
+                      "label": "lsp",
+                      "value": "lsp"
+                    },
+                    {
+                      "label": "rsvp-crlsp",
+                      "value": "rsvp-crlsp"
+                    },
+                    {
+                      "label": "static-crlsp",
+                      "value": "static-crlsp"
+                    },
+                    {
+                      "label": "static-lsp",
+                      "value": "static-lsp"
+                    }
+                  ],
+                  "readonly": true,
+                  "isKey": true
+                },
+                {
+                  "path": "/mpls/common/lsp-statistics/lsp-statistic/total-lsp",
+                  "type": "number",
+                  "label": "total-lsp",
+                  "readonly": true
+                },
+                {
+                  "path": "/mpls/common/lsp-statistics/lsp-statistic/transit-lsp",
+                  "type": "number",
+                  "label": "transit-lsp",
+                  "readonly": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "path": "/mpls/common/session-car",
+          "type": "group",
+          "label": "session-car"
+        },
+        {
+          "path": "/mpls/common/threshold-alarm",
+          "type": "group",
+          "label": "threshold-alarm",
+          "when": "/mpls:mpls/mpls:common/mpls:global/mpls:mpls-enable='true'",
+          "fields": [
+            {
+              "path": "/mpls/common/threshold-alarm/autobypass-tunnel-number",
+              "type": "group",
+              "label": "autobypass-tunnel-number",
+              "must": [
+                {
+                  "expr": "(not(upper-value) and not(lower-value)) or upper-value\u003elower-value"
+                }
+              ],
+              "fields": [
+                {
+                  "path": "/mpls/common/threshold-alarm/autobypass-tunnel-number/lower-value",
+                  "type": "number",
+                  "label": "lower-value",
+                  "minimum": 1,
+                  "maximum": 100
+                },
+                {
+                  "path": "/mpls/common/threshold-alarm/autobypass-tunnel-number/upper-value",
+                  "type": "number",
+                  "label": "upper-value",
+                  "minimum": 1,
+                  "maximum": 100
+                }
+              ]
+            },
+            {
+              "path": "/mpls/common/threshold-alarm/autoprimary-tunnel-number",
+              "type": "group",
+              "label": "autoprimary-tunnel-number",
+              "must": [
+                {
+                  "expr": "(not(upper-value) and not(lower-value)) or upper-value\u003elower-value"
+                }
+              ],
+              "fields": [
+                {
+                  "path": "/mpls/common/threshold-alarm/autoprimary-tunnel-number/lower-value",
+                  "type": "number",
+                  "label": "lower-value",
+                  "minimum": 1,
+                  "maximum": 100
+                },
+                {
+                  "path": "/mpls/common/threshold-alarm/autoprimary-tunnel-number/upper-value",
+                  "type": "number",
+                  "label": "upper-value",
+                  "minimum": 1,
+                  "maximum": 100
+                }
+              ]
+            },
+            {
+              "path": "/mpls/common/threshold-alarm/dynamic-label-number",
+              "type": "group",
+              "label": "dynamic-label-number",
+              "must": [
+                {
+                  "expr": "(not(upper-value) and not(lower-value)) or upper-value\u003elower-value"
+                }
+              ],
+              "fields": [
+                {
+                  "path": "/mpls/common/threshold-alarm/dynamic-label-number/lower-value",
+                  "type": "number",
+                  "label": "lower-value",
+                  "minimum": 1,
+                  "maximum": 100
+                },
+                {
+                  "path": "/mpls/common/threshold-alarm/dynamic-label-number/upper-value",
+                  "type": "number",
+                  "label": "upper-value",
+                  "minimum": 1,
+                  "maximum": 100
+                }
+              ]
+            },
+            {
+              "path": "/mpls/common/threshold-alarm/ldp-lsp-number",
+              "type": "group",
+              "label": "ldp-lsp-number",
+              "must": [
+                {
+                  "expr": "(not(upper-value) and not(lower-value)) or upper-value\u003elower-value"
+                }
+              ],
+              "fields": [
+                {
+                  "path": "/mpls/common/threshold-alarm/ldp-lsp-number/lower-value",
+                  "type": "number",
+                  "label": "lower-value",
+                  "minimum": 1,
+                  "maximum": 100
+                },
+                {
+                  "path": "/mpls/common/threshold-alarm/ldp-lsp-number/upper-value",
+                  "type": "number",
+                  "label": "upper-value",
+                  "minimum": 1,
+                  "maximum": 100
+                }
+              ]
+            },
+            {
+              "path": "/mpls/common/threshold-alarm/mldp-branch-number",
+              "type": "group",
+              "label": "mldp-branch-number",
+              "must": [
+                {
+                  "expr": "(not(upper-value) and not(lower-value)) or upper-value\u003elower-value"
+                }
+              ],
+              "fields": [
+                {
+                  "path": "/mpls/common/threshold-alarm/mldp-branch-number/lower-value",
+                  "type": "number",
+                  "label": "lower-value",
+                  "minimum": 1,
+                  "maximum": 100
+                },
+                {
+                  "path": "/mpls/common/threshold-alarm/mldp-branch-number/upper-value",
+                  "type": "number",
+                  "label": "upper-value",
+                  "minimum": 1,
+                  "maximum": 100
+                }
+              ]
+            },
+            {
+              "path": "/mpls/common/threshold-alarm/mldp-tree-number",
+              "type": "group",
+              "label": "mldp-tree-number",
+              "must": [
+                {
+                  "expr": "(not(upper-value) and not(lower-value)) or upper-value\u003elower-value"
+                }
+              ],
+              "fields": [
+                {
+                  "path": "/mpls/common/threshold-alarm/mldp-tree-number/lower-value",
+                  "type": "number",
+                  "label": "lower-value",
+                  "minimum": 1,
+                  "maximum": 100
+                },
+                {
+                  "path": "/mpls/common/threshold-alarm/mldp-tree-number/upper-value",
+                  "type": "number",
+                  "label": "upper-value",
+                  "minimum": 1,
+                  "maximum": 100
+                }
+              ]
+            },
+            {
+              "path": "/mpls/common/threshold-alarm/outsegment-number",
+              "type": "group",
+              "label": "outsegment-number",
+              "must": [
+                {
+                  "expr": "(not(upper-value) and not(lower-value)) or upper-value\u003elower-value"
+                }
+              ],
+              "fields": [
+                {
+                  "path": "/mpls/common/threshold-alarm/outsegment-number/lower-value",
+                  "type": "number",
+                  "label": "lower-value",
+                  "minimum": 1,
+                  "maximum": 100
+                },
+                {
+                  "path": "/mpls/common/threshold-alarm/outsegment-number/upper-value",
+                  "type": "number",
+                  "label": "upper-value",
+                  "minimum": 1,
+                  "maximum": 100
+                }
+              ]
+            },
+            {
+              "path": "/mpls/common/threshold-alarm/remote-adjacency-number",
+              "type": "group",
+              "label": "remote-adjacency-number",
+              "must": [
+                {
+                  "expr": "(not(upper-value) and not(lower-value)) or upper-value\u003elower-value"
+                }
+              ],
+              "fields": [
+                {
+                  "path": "/mpls/common/threshold-alarm/remote-adjacency-number/lower-value",
+                  "type": "number",
+                  "label": "lower-value",
+                  "minimum": 1,
+                  "maximum": 100
+                },
+                {
+                  "path": "/mpls/common/threshold-alarm/remote-adjacency-number/upper-value",
+                  "type": "number",
+                  "label": "upper-value",
+                  "minimum": 1,
+                  "maximum": 100
+                }
+              ]
+            },
+            {
+              "path": "/mpls/common/threshold-alarm/rsvp-lsp-number",
+              "type": "group",
+              "label": "rsvp-lsp-number",
+              "must": [
+                {
+                  "expr": "(not(upper-value) and not(lower-value)) or upper-value\u003elower-value"
+                }
+              ],
+              "fields": [
+                {
+                  "path": "/mpls/common/threshold-alarm/rsvp-lsp-number/lower-value",
+                  "type": "number",
+                  "label": "lower-value",
+                  "minimum": 1,
+                  "maximum": 100
+                },
+                {
+                  "path": "/mpls/common/threshold-alarm/rsvp-lsp-number/upper-value",
+                  "type": "number",
+                  "label": "upper-value",
+                  "minimum": 1,
+                  "maximum": 100
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

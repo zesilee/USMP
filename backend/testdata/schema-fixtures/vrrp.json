@@ -1,0 +1,116 @@
+{
+  "module": "vrrp",
+  "title": "vrrp",
+  "vendor": "huawei",
+  "fields": [
+    {
+      "path": "/vrrp/global",
+      "type": "group",
+      "label": "global",
+      "fields": [
+        {
+          "path": "/vrrp/global/adv-time-learn",
+          "type": "boolean",
+          "label": "adv-time-learn"
+        },
+        {
+          "path": "/vrrp/global/gratuitous-arp-enable",
+          "type": "boolean",
+          "label": "gratuitous-arp-enable"
+        },
+        {
+          "path": "/vrrp/global/gratuitous-enhance-enable",
+          "type": "boolean",
+          "label": "gratuitous-enhance-enable"
+        },
+        {
+          "path": "/vrrp/global/gratuitous-timeout",
+          "type": "number",
+          "label": "gratuitous-timeout",
+          "minimum": 30,
+          "maximum": 1200,
+          "when": "../gratuitous-arp-enable='true'"
+        },
+        {
+          "path": "/vrrp/global/ping-enable",
+          "type": "boolean",
+          "label": "ping-enable"
+        },
+        {
+          "path": "/vrrp/global/recover-delay",
+          "type": "number",
+          "label": "recover-delay",
+          "maximum": 3600
+        },
+        {
+          "path": "/vrrp/global/smooth-switch-time",
+          "type": "number",
+          "label": "smooth-switch-time",
+          "minimum": 1,
+          "maximum": 255,
+          "when": "not(../adv-time-learn='false')"
+        },
+        {
+          "path": "/vrrp/global/unicast-port",
+          "type": "number",
+          "label": "unicast-port",
+          "minimum": 1025,
+          "maximum": 65535
+        },
+        {
+          "path": "/vrrp/global/v6-cks-mode",
+          "type": "enum",
+          "label": "v6-cks-mode",
+          "options": [
+            {
+              "label": "exclude-pseudo-header",
+              "value": "exclude-pseudo-header"
+            },
+            {
+              "label": "include-pseudo-header",
+              "value": "include-pseudo-header"
+            }
+          ]
+        },
+        {
+          "path": "/vrrp/global/version",
+          "type": "enum",
+          "label": "version",
+          "options": [
+            {
+              "label": "v2",
+              "value": "v2"
+            },
+            {
+              "label": "v3",
+              "value": "v3"
+            }
+          ]
+        },
+        {
+          "path": "/vrrp/global/virtual-iproute-enable",
+          "type": "boolean",
+          "label": "virtual-iproute-enable"
+        },
+        {
+          "path": "/vrrp/global/virtual-isis-enable",
+          "type": "boolean",
+          "label": "virtual-isis-enable",
+          "when": "not(../virtual-iproute-enable='false')"
+        },
+        {
+          "path": "/vrrp/global/virtual-ospf-enable",
+          "type": "boolean",
+          "label": "virtual-ospf-enable",
+          "when": "not(../virtual-iproute-enable='false')"
+        },
+        {
+          "path": "/vrrp/global/virtual-rip-enable",
+          "type": "boolean",
+          "label": "virtual-rip-enable",
+          "when": "not(../virtual-iproute-enable='false')"
+        }
+      ]
+    }
+  ]
+}

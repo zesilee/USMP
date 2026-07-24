@@ -2,7 +2,7 @@
 # 用法: make <target>
 
 .PHONY: setup bootstrap test lint compliance hook-install hook-verify help \
-	staging-up staging-down staging-logs staging-ps e2e-local gen-contract gen-yang gen-crd sync-snd-i18n dev \
+	staging-up staging-down staging-logs staging-ps e2e-local gen-contract gen-yang gen-crd gen-schema-fixtures sync-snd-i18n dev \
 	memory-link memory-check memory-test
 
 # 默认目标
@@ -114,6 +114,10 @@ gen-crd: ## 重新生成业务意图 CRD manifest（YANG→CRD，BIC-01；CI 以
 		-kind=BusinessVlanService -plural=businessvlanservices \
 		-output=../deploy/crds/businessvlanservices.biz.usmp.io.yaml
 	@echo "✅ gen-crd 完成（生成物勿手改，改意图 YANG 后重跑 make gen-crd）"
+
+gen-schema-fixtures: ## 重新生成全模块 schema fixture（前端派生黄金/设备一致性矩阵的共享输入；CI 以 regen-and-diff 验证零漂移）
+	@cd backend && go run ./tools/schemadump -output=testdata/schema-fixtures
+	@echo "✅ gen-schema-fixtures 完成（生成物勿手改，改后端 schema 后重跑 make gen-schema-fixtures）"
 
 e2e-local: ## 本地复现 CI：起 staging → 健康等待 → 浏览器冒烟（提交前必跑，pre-push 亦调用）
 	@bash scripts/e2e-smoke.sh

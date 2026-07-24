@@ -1,0 +1,803 @@
+{
+  "module": "bd",
+  "title": "bd",
+  "vendor": "huawei",
+  "fields": [
+    {
+      "path": "/bd/instances",
+      "type": "group",
+      "label": "instances",
+      "fields": [
+        {
+          "path": "/bd/instances/instance",
+          "type": "list",
+          "label": "instance",
+          "fields": [
+            {
+              "path": "/bd/instances/instance/admin-status",
+              "type": "enum",
+              "label": "admin-status",
+              "options": [
+                {
+                  "label": "down",
+                  "value": "down"
+                },
+                {
+                  "label": "up",
+                  "value": "up"
+                }
+              ]
+            },
+            {
+              "path": "/bd/instances/instance/arp-list",
+              "type": "group",
+              "label": "arp-list",
+              "fields": [
+                {
+                  "path": "/bd/instances/instance/arp-list/broadcast-suppress",
+                  "type": "choice",
+                  "label": "broadcast-suppress",
+                  "cases": [
+                    {
+                      "name": "enable",
+                      "label": "enable",
+                      "fields": [
+                        {
+                          "path": "/bd/instances/instance/arp-list/broadcast-suppress-enable",
+                          "type": "string",
+                          "label": "broadcast-suppress-enable"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "mismatch-discard-enable",
+                      "label": "mismatch-discard-enable",
+                      "fields": [
+                        {
+                          "path": "/bd/instances/instance/arp-list/broadcast-suppress-discard",
+                          "type": "string",
+                          "label": "broadcast-suppress-discard"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "path": "/bd/instances/instance/arp-list/check-item",
+                  "type": "group",
+                  "label": "check-item",
+                  "fields": [
+                    {
+                      "path": "/bd/instances/instance/arp-list/check-item/ip-check",
+                      "type": "boolean",
+                      "label": "ip-check"
+                    },
+                    {
+                      "path": "/bd/instances/instance/arp-list/check-item/mac-check",
+                      "type": "boolean",
+                      "label": "mac-check"
+                    },
+                    {
+                      "path": "/bd/instances/instance/arp-list/check-item/vxlan-tunnel",
+                      "type": "boolean",
+                      "label": "vxlan-tunnel"
+                    }
+                  ]
+                },
+                {
+                  "path": "/bd/instances/instance/arp-list/collect-host-enable",
+                  "type": "boolean",
+                  "label": "collect-host-enable",
+                  "when": "../l2proxy-enable='true'"
+                },
+                {
+                  "path": "/bd/instances/instance/arp-list/dynamic-enable",
+                  "type": "boolean",
+                  "label": "dynamic-enable"
+                },
+                {
+                  "path": "/bd/instances/instance/arp-list/l2proxy-enable",
+                  "type": "boolean",
+                  "label": "l2proxy-enable"
+                },
+                {
+                  "path": "/bd/instances/instance/arp-list/l2proxy-expire-time",
+                  "type": "number",
+                  "label": "l2proxy-expire-time",
+                  "minimum": 1,
+                  "maximum": 62640,
+                  "when": "../l2proxy-enable='true'"
+                },
+                {
+                  "path": "/bd/instances/instance/arp-list/l2proxy-gw-enable",
+                  "type": "boolean",
+                  "label": "l2proxy-gw-enable",
+                  "when": "../broadcast-suppress-enable or ../broadcast-suppress-discard"
+                },
+                {
+                  "path": "/bd/instances/instance/arp-list/rate-limit",
+                  "type": "number",
+                  "label": "rate-limit",
+                  "maximum": 65536
+                }
+              ]
+            },
+            {
+              "path": "/bd/instances/instance/arp-statistics",
+              "type": "group",
+              "label": "arp-statistics",
+              "readonly": true,
+              "fields": [
+                {
+                  "path": "/bd/instances/instance/arp-statistics/discard-other",
+                  "type": "number",
+                  "label": "discard-other",
+                  "readonly": true
+                },
+                {
+                  "path": "/bd/instances/instance/arp-statistics/l2proxy-reply",
+                  "type": "number",
+                  "label": "l2proxy-reply",
+                  "readonly": true
+                },
+                {
+                  "path": "/bd/instances/instance/arp-statistics/miss-discard",
+                  "type": "number",
+                  "label": "miss-discard",
+                  "readonly": true
+                },
+                {
+                  "path": "/bd/instances/instance/arp-statistics/receive-gratis-packets",
+                  "type": "number",
+                  "label": "receive-gratis-packets",
+                  "readonly": true
+                },
+                {
+                  "path": "/bd/instances/instance/arp-statistics/receive-proxy-packets",
+                  "type": "number",
+                  "label": "receive-proxy-packets",
+                  "readonly": true
+                },
+                {
+                  "path": "/bd/instances/instance/arp-statistics/receive-reply",
+                  "type": "number",
+                  "label": "receive-reply",
+                  "readonly": true
+                },
+                {
+                  "path": "/bd/instances/instance/arp-statistics/receive-req-packets",
+                  "type": "number",
+                  "label": "receive-req-packets",
+                  "readonly": true
+                },
+                {
+                  "path": "/bd/instances/instance/arp-statistics/receive-total-packets",
+                  "type": "number",
+                  "label": "receive-total-packets",
+                  "readonly": true
+                },
+                {
+                  "path": "/bd/instances/instance/arp-statistics/send-broadcast-packets",
+                  "type": "number",
+                  "label": "send-broadcast-packets",
+                  "readonly": true
+                },
+                {
+                  "path": "/bd/instances/instance/arp-statistics/send-gratis-packets",
+                  "type": "number",
+                  "label": "send-gratis-packets",
+                  "readonly": true
+                },
+                {
+                  "path": "/bd/instances/instance/arp-statistics/send-proxy-packets",
+                  "type": "number",
+                  "label": "send-proxy-packets",
+                  "readonly": true
+                },
+                {
+                  "path": "/bd/instances/instance/arp-statistics/send-total-packets",
+                  "type": "number",
+                  "label": "send-total-packets",
+                  "readonly": true
+                },
+                {
+                  "path": "/bd/instances/instance/arp-statistics/send-unicast-packets",
+                  "type": "number",
+                  "label": "send-unicast-packets",
+                  "readonly": true
+                }
+              ]
+            },
+            {
+              "path": "/bd/instances/instance/arp-user-entry",
+              "type": "group",
+              "label": "arp-user-entry",
+              "readonly": true,
+              "fields": [
+                {
+                  "path": "/bd/instances/instance/arp-user-entry/flag",
+                  "type": "string",
+                  "label": "flag",
+                  "readonly": true
+                },
+                {
+                  "path": "/bd/instances/instance/arp-user-entry/ip-addr",
+                  "type": "string",
+                  "label": "ip-addr",
+                  "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?",
+                  "readonly": true
+                },
+                {
+                  "path": "/bd/instances/instance/arp-user-entry/mac-addr",
+                  "type": "string",
+                  "label": "mac-addr",
+                  "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+                  "readonly": true
+                },
+                {
+                  "path": "/bd/instances/instance/arp-user-entry/vtep",
+                  "type": "string",
+                  "label": "vtep",
+                  "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?",
+                  "readonly": true
+                }
+              ]
+            },
+            {
+              "path": "/bd/instances/instance/bind-service",
+              "type": "group",
+              "label": "bind-service",
+              "readonly": true,
+              "fields": [
+                {
+                  "path": "/bd/instances/instance/bind-service/evpn-name",
+                  "type": "string",
+                  "label": "evpn-name",
+                  "readonly": true
+                },
+                {
+                  "path": "/bd/instances/instance/bind-service/vni",
+                  "type": "number",
+                  "label": "vni",
+                  "minimum": 1,
+                  "maximum": 16777215,
+                  "readonly": true
+                },
+                {
+                  "path": "/bd/instances/instance/bind-service/vsi-name",
+                  "type": "string",
+                  "label": "vsi-name",
+                  "readonly": true
+                }
+              ]
+            },
+            {
+              "path": "/bd/instances/instance/bind-vlan",
+              "type": "group",
+              "label": "bind-vlan",
+              "fields": [
+                {
+                  "path": "/bd/instances/instance/bind-vlan/vlan-list",
+                  "type": "string",
+                  "label": "vlan-list",
+                  "pattern": "([0-9]|,|\\+|\\-|\\(|\\))+"
+                }
+              ]
+            },
+            {
+              "path": "/bd/instances/instance/broadcast-discard",
+              "type": "enum",
+              "label": "broadcast-discard",
+              "options": [
+                {
+                  "label": "disable",
+                  "value": "disable"
+                },
+                {
+                  "label": "enable",
+                  "value": "enable"
+                }
+              ]
+            },
+            {
+              "path": "/bd/instances/instance/description",
+              "type": "string",
+              "label": "description"
+            },
+            {
+              "path": "/bd/instances/instance/encapsulation",
+              "type": "enum",
+              "label": "encapsulation",
+              "options": [
+                {
+                  "label": "raw",
+                  "value": "raw"
+                },
+                {
+                  "label": "tagged",
+                  "value": "tagged"
+                }
+              ]
+            },
+            {
+              "path": "/bd/instances/instance/evpn",
+              "type": "group",
+              "label": "evpn",
+              "fields": [
+                {
+                  "path": "/bd/instances/instance/evpn/esi",
+                  "type": "string",
+                  "label": "esi",
+                  "pattern": "( *(00([0-9a-fA-F]){2}\\.(([0-9a-fA-F]){4}\\.){3}(([0-9a-fA-F]){4}))? *)",
+                  "when": "../name and ../../nvo3:nvo3/nvo3:vni-list/nvo3:vni[../nvo3:split-horizon='true']"
+                },
+                {
+                  "path": "/bd/instances/instance/evpn/interface-track-peers",
+                  "type": "group",
+                  "label": "interface-track-peers",
+                  "when": "(../name and ../../nvo3:nvo3/nvo3:vni-list/nvo3:vni[../nvo3:split-horizon='true'])",
+                  "fields": [
+                    {
+                      "path": "/bd/instances/instance/evpn/interface-track-peers/interface-track-peer",
+                      "type": "list",
+                      "label": "interface-track-peer",
+                      "fields": [
+                        {
+                          "path": "/bd/instances/instance/evpn/interface-track-peers/interface-track-peer/es-track-address",
+                          "type": "string",
+                          "label": "es-track-address",
+                          "must": [
+                            {
+                              "expr": "/ni:network-instance/ni:instances/ni:instance/bgp:bgp/bgp:base-process/bgp:peers/bgp:peer/bgp:afs/bgp:af/bgp-evpn:l2vpn-evpn"
+                            }
+                          ],
+                          "isKey": true
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "path": "/bd/instances/instance/evpn/name",
+                  "type": "string",
+                  "label": "name",
+                  "must": [
+                    {
+                      "expr": "/evpn:evpn/evpn:instances/evpn:instance[name=current()]/evpn:type='bd-evpn'"
+                    }
+                  ]
+                },
+                {
+                  "path": "/bd/instances/instance/evpn/tag",
+                  "type": "number",
+                  "label": "tag",
+                  "minimum": 1,
+                  "maximum": 4094,
+                  "when": "../name",
+                  "operationExclude": [
+                    "update"
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/bd/instances/instance/id",
+              "type": "number",
+              "label": "id",
+              "minimum": 1,
+              "maximum": 16777215,
+              "isKey": true
+            },
+            {
+              "path": "/bd/instances/instance/m-lag-reserved",
+              "type": "group",
+              "label": "m-lag-reserved",
+              "fields": [
+                {
+                  "path": "/bd/instances/instance/m-lag-reserved/enable",
+                  "type": "boolean",
+                  "label": "enable"
+                }
+              ]
+            },
+            {
+              "path": "/bd/instances/instance/mac-aging-time",
+              "type": "number",
+              "label": "mac-aging-time",
+              "maximum": 1000000
+            },
+            {
+              "path": "/bd/instances/instance/mac-learning",
+              "type": "enum",
+              "label": "mac-learning",
+              "options": [
+                {
+                  "label": "disable",
+                  "value": "disable"
+                },
+                {
+                  "label": "enable",
+                  "value": "enable"
+                }
+              ]
+            },
+            {
+              "path": "/bd/instances/instance/mirror",
+              "type": "group",
+              "label": "mirror",
+              "fields": [
+                {
+                  "path": "/bd/instances/instance/mirror/bd-port-mirrors",
+                  "type": "group",
+                  "label": "bd-port-mirrors",
+                  "fields": [
+                    {
+                      "path": "/bd/instances/instance/mirror/bd-port-mirrors/bd-port-mirror",
+                      "type": "list",
+                      "label": "bd-port-mirror",
+                      "fields": [
+                        {
+                          "path": "/bd/instances/instance/mirror/bd-port-mirrors/bd-port-mirror/direction",
+                          "type": "enum",
+                          "label": "direction",
+                          "options": [
+                            {
+                              "label": "both",
+                              "value": "both"
+                            },
+                            {
+                              "label": "inbound",
+                              "value": "inbound"
+                            },
+                            {
+                              "label": "outbound",
+                              "value": "outbound"
+                            }
+                          ],
+                          "isKey": true
+                        },
+                        {
+                          "path": "/bd/instances/instance/mirror/bd-port-mirrors/bd-port-mirror/group-name",
+                          "type": "string",
+                          "label": "group-name"
+                        },
+                        {
+                          "path": "/bd/instances/instance/mirror/bd-port-mirrors/bd-port-mirror/instance-name",
+                          "type": "string",
+                          "label": "instance-name",
+                          "required": true
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/bd/instances/instance/nvo3",
+              "type": "group",
+              "label": "nvo3",
+              "fields": [
+                {
+                  "path": "/bd/instances/instance/nvo3/map-vnis",
+                  "type": "group",
+                  "label": "map-vnis",
+                  "fields": [
+                    {
+                      "path": "/bd/instances/instance/nvo3/map-vnis/map-vni",
+                      "type": "list",
+                      "label": "map-vni",
+                      "fields": [
+                        {
+                          "path": "/bd/instances/instance/nvo3/map-vnis/map-vni/split-group",
+                          "type": "string",
+                          "label": "split-group",
+                          "required": true
+                        },
+                        {
+                          "path": "/bd/instances/instance/nvo3/map-vnis/map-vni/vni",
+                          "type": "number",
+                          "label": "vni",
+                          "minimum": 1,
+                          "maximum": 16777215,
+                          "isKey": true
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "path": "/bd/instances/instance/nvo3/vni-list",
+                  "type": "list",
+                  "label": "vni-list",
+                  "fields": [
+                    {
+                      "path": "/bd/instances/instance/nvo3/vni-list/split-horizon",
+                      "type": "boolean",
+                      "label": "split-horizon"
+                    },
+                    {
+                      "path": "/bd/instances/instance/nvo3/vni-list/vni",
+                      "type": "number",
+                      "label": "vni",
+                      "minimum": 1,
+                      "maximum": 16777215,
+                      "isKey": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/bd/instances/instance/service-points",
+              "type": "group",
+              "label": "service-points",
+              "fields": [
+                {
+                  "path": "/bd/instances/instance/service-points/service-point",
+                  "type": "list",
+                  "label": "service-point",
+                  "fields": [
+                    {
+                      "path": "/bd/instances/instance/service-points/service-point/evpn",
+                      "type": "group",
+                      "label": "evpn",
+                      "fields": [
+                        {
+                          "path": "/bd/instances/instance/service-points/service-point/evpn/e-tree-leaf",
+                          "type": "boolean",
+                          "label": "e-tree-leaf",
+                          "must": [
+                            {
+                              "expr": "(../e-tree-leaf = 'true' and ../../../../evpn:evpn/evpn:name and /evpn:evpn/evpn:instances/evpn:instance[evpn:name=current()/../../../../evpn:evpn/evpn:name]/evpn:bd-evpn/evpn:etree-enable = 'true') or (../e-tree-leaf = 'false')"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/bd/instances/instance/service-points/service-point/interface-name",
+                      "type": "string",
+                      "label": "interface-name",
+                      "must": [
+                        {
+                          "expr": "/ifm:ifm/ifm:interfaces/ifm:interface[ifm:name=current()]/ifm:l2-mode-enable = 'true'"
+                        }
+                      ],
+                      "isKey": true
+                    },
+                    {
+                      "path": "/bd/instances/instance/service-points/service-point/split-horizon",
+                      "type": "enum",
+                      "label": "split-horizon",
+                      "options": [
+                        {
+                          "label": "disable",
+                          "value": "disable"
+                        },
+                        {
+                          "label": "enable",
+                          "value": "enable"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/bd/instances/instance/split-horizon",
+              "type": "enum",
+              "label": "split-horizon",
+              "options": [
+                {
+                  "label": "disable",
+                  "value": "disable"
+                },
+                {
+                  "label": "enable",
+                  "value": "enable"
+                }
+              ]
+            },
+            {
+              "path": "/bd/instances/instance/statistic-discard",
+              "type": "enum",
+              "label": "statistic-discard",
+              "options": [
+                {
+                  "label": "disable",
+                  "value": "disable"
+                },
+                {
+                  "label": "enable",
+                  "value": "enable"
+                }
+              ],
+              "when": "../statistic-enable='enable'"
+            },
+            {
+              "path": "/bd/instances/instance/statistic-enable",
+              "type": "enum",
+              "label": "statistic-enable",
+              "options": [
+                {
+                  "label": "disable",
+                  "value": "disable"
+                },
+                {
+                  "label": "enable",
+                  "value": "enable"
+                }
+              ]
+            },
+            {
+              "path": "/bd/instances/instance/statistics",
+              "type": "group",
+              "label": "statistics",
+              "readonly": true,
+              "fields": [
+                {
+                  "path": "/bd/instances/instance/statistics/inbound-bps",
+                  "type": "number",
+                  "label": "inbound-bps",
+                  "readonly": true
+                },
+                {
+                  "path": "/bd/instances/instance/statistics/inbound-broadcast-drops",
+                  "type": "number",
+                  "label": "inbound-broadcast-drops",
+                  "readonly": true
+                },
+                {
+                  "path": "/bd/instances/instance/statistics/inbound-broadcasts",
+                  "type": "number",
+                  "label": "inbound-broadcasts",
+                  "readonly": true
+                },
+                {
+                  "path": "/bd/instances/instance/statistics/inbound-bytes",
+                  "type": "number",
+                  "label": "inbound-bytes",
+                  "readonly": true
+                },
+                {
+                  "path": "/bd/instances/instance/statistics/inbound-multicasts",
+                  "type": "number",
+                  "label": "inbound-multicasts",
+                  "readonly": true
+                },
+                {
+                  "path": "/bd/instances/instance/statistics/inbound-packets",
+                  "type": "number",
+                  "label": "inbound-packets",
+                  "readonly": true
+                },
+                {
+                  "path": "/bd/instances/instance/statistics/inbound-pps",
+                  "type": "number",
+                  "label": "inbound-pps",
+                  "readonly": true
+                },
+                {
+                  "path": "/bd/instances/instance/statistics/inbound-unicasts",
+                  "type": "number",
+                  "label": "inbound-unicasts",
+                  "readonly": true
+                },
+                {
+                  "path": "/bd/instances/instance/statistics/inbound-unknown-multicast-drops",
+                  "type": "number",
+                  "label": "inbound-unknown-multicast-drops",
+                  "readonly": true
+                },
+                {
+                  "path": "/bd/instances/instance/statistics/inbound-unknown-unicast-drops",
+                  "type": "number",
+                  "label": "inbound-unknown-unicast-drops",
+                  "readonly": true
+                },
+                {
+                  "path": "/bd/instances/instance/statistics/outbound-bps",
+                  "type": "number",
+                  "label": "outbound-bps",
+                  "readonly": true
+                },
+                {
+                  "path": "/bd/instances/instance/statistics/outbound-broadcasts",
+                  "type": "number",
+                  "label": "outbound-broadcasts",
+                  "readonly": true
+                },
+                {
+                  "path": "/bd/instances/instance/statistics/outbound-bytes",
+                  "type": "number",
+                  "label": "outbound-bytes",
+                  "readonly": true
+                },
+                {
+                  "path": "/bd/instances/instance/statistics/outbound-multicasts",
+                  "type": "number",
+                  "label": "outbound-multicasts",
+                  "readonly": true
+                },
+                {
+                  "path": "/bd/instances/instance/statistics/outbound-packets",
+                  "type": "number",
+                  "label": "outbound-packets",
+                  "readonly": true
+                },
+                {
+                  "path": "/bd/instances/instance/statistics/outbound-pps",
+                  "type": "number",
+                  "label": "outbound-pps",
+                  "readonly": true
+                },
+                {
+                  "path": "/bd/instances/instance/statistics/outbound-unicasts",
+                  "type": "number",
+                  "label": "outbound-unicasts",
+                  "readonly": true
+                }
+              ]
+            },
+            {
+              "path": "/bd/instances/instance/status",
+              "type": "enum",
+              "label": "status",
+              "options": [
+                {
+                  "label": "admin-down",
+                  "value": "admin-down"
+                },
+                {
+                  "label": "down",
+                  "value": "down"
+                },
+                {
+                  "label": "invalid",
+                  "value": "invalid"
+                },
+                {
+                  "label": "up",
+                  "value": "up"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "path": "/bd/instances/instance/unknown-multicast-discard",
+              "type": "enum",
+              "label": "unknown-multicast-discard",
+              "options": [
+                {
+                  "label": "disable",
+                  "value": "disable"
+                },
+                {
+                  "label": "enable",
+                  "value": "enable"
+                }
+              ]
+            },
+            {
+              "path": "/bd/instances/instance/unknown-unicast-discard",
+              "type": "enum",
+              "label": "unknown-unicast-discard",
+              "options": [
+                {
+                  "label": "disable",
+                  "value": "disable"
+                },
+                {
+                  "label": "enable",
+                  "value": "enable"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

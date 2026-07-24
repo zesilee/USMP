@@ -1,0 +1,2012 @@
+{
+  "module": "snmp",
+  "title": "snmp",
+  "vendor": "huawei",
+  "fields": [
+    {
+      "path": "/snmp/agent-flag",
+      "type": "group",
+      "label": "agent-flag",
+      "fields": [
+        {
+          "path": "/snmp/agent-flag/agent-enable",
+          "type": "boolean",
+          "label": "agent-enable"
+        }
+      ]
+    },
+    {
+      "path": "/snmp/all-interface",
+      "type": "group",
+      "label": "all-interface",
+      "fields": [
+        {
+          "path": "/snmp/all-interface/all-ipv4-interface",
+          "type": "boolean",
+          "label": "all-ipv4-interface"
+        },
+        {
+          "path": "/snmp/all-interface/all-ipv6-interface",
+          "type": "boolean",
+          "label": "all-ipv6-interface"
+        }
+      ]
+    },
+    {
+      "path": "/snmp/black-list",
+      "type": "group",
+      "label": "black-list",
+      "fields": [
+        {
+          "path": "/snmp/black-list/ip-disable",
+          "type": "boolean",
+          "label": "ip-disable"
+        },
+        {
+          "path": "/snmp/black-list/user-disable",
+          "type": "boolean",
+          "label": "user-disable"
+        },
+        {
+          "path": "/snmp/black-list/user-fail-count",
+          "type": "number",
+          "label": "user-fail-count",
+          "maximum": 10
+        },
+        {
+          "path": "/snmp/black-list/user-period",
+          "type": "number",
+          "label": "user-period",
+          "minimum": 1,
+          "maximum": 120
+        },
+        {
+          "path": "/snmp/black-list/user-reactive-time",
+          "type": "number",
+          "label": "user-reactive-time",
+          "maximum": 1000
+        }
+      ]
+    },
+    {
+      "path": "/snmp/communitys",
+      "type": "group",
+      "label": "communitys",
+      "fields": [
+        {
+          "path": "/snmp/communitys/community",
+          "type": "list",
+          "label": "community",
+          "fields": [
+            {
+              "path": "/snmp/communitys/community/access-right",
+              "type": "enum",
+              "label": "access-right",
+              "required": true,
+              "options": [
+                {
+                  "label": "read",
+                  "value": "read"
+                },
+                {
+                  "label": "write",
+                  "value": "write"
+                }
+              ]
+            },
+            {
+              "path": "/snmp/communitys/community/acl",
+              "type": "string",
+              "label": "acl"
+            },
+            {
+              "path": "/snmp/communitys/community/alias-name",
+              "type": "string",
+              "label": "alias-name",
+              "must": [
+                {
+                  "expr": "(../alias-name!=../name)"
+                }
+              ]
+            },
+            {
+              "path": "/snmp/communitys/community/name",
+              "type": "string",
+              "label": "name",
+              "must": [
+                {
+                  "expr": "string-length(../name)\u003e=../../../system/password-min-length or ../../../system/community-cmplx-check='false'"
+                }
+              ],
+              "isKey": true
+            },
+            {
+              "path": "/snmp/communitys/community/view-name",
+              "type": "string",
+              "label": "view-name"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/snmp/engine",
+      "type": "group",
+      "label": "engine",
+      "fields": [
+        {
+          "path": "/snmp/engine/id",
+          "type": "string",
+          "label": "id",
+          "pattern": "([0-9a-fA-F]{2}(:[0-9a-fA-F]{2})*)?"
+        },
+        {
+          "path": "/snmp/engine/max-msg-size",
+          "type": "number",
+          "label": "max-msg-size",
+          "minimum": 484,
+          "maximum": 17940
+        },
+        {
+          "path": "/snmp/engine/version",
+          "type": "enum",
+          "label": "version",
+          "options": [
+            {
+              "label": "all",
+              "value": "all"
+            },
+            {
+              "label": "none",
+              "value": "none"
+            },
+            {
+              "label": "v1",
+              "value": "v1"
+            },
+            {
+              "label": "v1v2c",
+              "value": "v1v2c"
+            },
+            {
+              "label": "v1v3",
+              "value": "v1v3"
+            },
+            {
+              "label": "v2c",
+              "value": "v2c"
+            },
+            {
+              "label": "v2cv3",
+              "value": "v2cv3"
+            },
+            {
+              "label": "v3",
+              "value": "v3"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/snmp/glbal-stats",
+      "type": "group",
+      "label": "glbal-stats",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/snmp/glbal-stats/in-asn-parse-errs",
+          "type": "number",
+          "label": "in-asn-parse-errs",
+          "readonly": true
+        },
+        {
+          "path": "/snmp/glbal-stats/in-bad-cmmty-names",
+          "type": "number",
+          "label": "in-bad-cmmty-names",
+          "readonly": true
+        },
+        {
+          "path": "/snmp/glbal-stats/in-bad-cmmty-users",
+          "type": "number",
+          "label": "in-bad-cmmty-users",
+          "readonly": true
+        },
+        {
+          "path": "/snmp/glbal-stats/in-bad-values",
+          "type": "number",
+          "label": "in-bad-values",
+          "readonly": true
+        },
+        {
+          "path": "/snmp/glbal-stats/in-bad-versions",
+          "type": "number",
+          "label": "in-bad-versions",
+          "readonly": true
+        },
+        {
+          "path": "/snmp/glbal-stats/in-gen-errs",
+          "type": "number",
+          "label": "in-gen-errs",
+          "readonly": true
+        },
+        {
+          "path": "/snmp/glbal-stats/in-get-bulks",
+          "type": "number",
+          "label": "in-get-bulks",
+          "readonly": true
+        },
+        {
+          "path": "/snmp/glbal-stats/in-get-nexts",
+          "type": "number",
+          "label": "in-get-nexts",
+          "readonly": true
+        },
+        {
+          "path": "/snmp/glbal-stats/in-get-reqs",
+          "type": "number",
+          "label": "in-get-reqs",
+          "readonly": true
+        },
+        {
+          "path": "/snmp/glbal-stats/in-get-resps",
+          "type": "number",
+          "label": "in-get-resps",
+          "readonly": true
+        },
+        {
+          "path": "/snmp/glbal-stats/in-informs",
+          "type": "number",
+          "label": "in-informs",
+          "readonly": true
+        },
+        {
+          "path": "/snmp/glbal-stats/in-nosuch-names",
+          "type": "number",
+          "label": "in-nosuch-names",
+          "readonly": true
+        },
+        {
+          "path": "/snmp/glbal-stats/in-pkts",
+          "type": "number",
+          "label": "in-pkts",
+          "readonly": true
+        },
+        {
+          "path": "/snmp/glbal-stats/in-proxy-pkts",
+          "type": "number",
+          "label": "in-proxy-pkts",
+          "readonly": true
+        },
+        {
+          "path": "/snmp/glbal-stats/in-read-onlys",
+          "type": "number",
+          "label": "in-read-onlys",
+          "readonly": true
+        },
+        {
+          "path": "/snmp/glbal-stats/in-set-reqs",
+          "type": "number",
+          "label": "in-set-reqs",
+          "readonly": true
+        },
+        {
+          "path": "/snmp/glbal-stats/in-too-bigs",
+          "type": "number",
+          "label": "in-too-bigs",
+          "readonly": true
+        },
+        {
+          "path": "/snmp/glbal-stats/in-total-req-vars",
+          "type": "number",
+          "label": "in-total-req-vars",
+          "readonly": true
+        },
+        {
+          "path": "/snmp/glbal-stats/in-total-set-vars",
+          "type": "number",
+          "label": "in-total-set-vars",
+          "readonly": true
+        },
+        {
+          "path": "/snmp/glbal-stats/in-traps",
+          "type": "number",
+          "label": "in-traps",
+          "readonly": true
+        },
+        {
+          "path": "/snmp/glbal-stats/out-bad-values",
+          "type": "number",
+          "label": "out-bad-values",
+          "readonly": true
+        },
+        {
+          "path": "/snmp/glbal-stats/out-gen-errs",
+          "type": "number",
+          "label": "out-gen-errs",
+          "readonly": true
+        },
+        {
+          "path": "/snmp/glbal-stats/out-get-bulks",
+          "type": "number",
+          "label": "out-get-bulks",
+          "readonly": true
+        },
+        {
+          "path": "/snmp/glbal-stats/out-get-nexts",
+          "type": "number",
+          "label": "out-get-nexts",
+          "readonly": true
+        },
+        {
+          "path": "/snmp/glbal-stats/out-get-reqs",
+          "type": "number",
+          "label": "out-get-reqs",
+          "readonly": true
+        },
+        {
+          "path": "/snmp/glbal-stats/out-get-resps",
+          "type": "number",
+          "label": "out-get-resps",
+          "readonly": true
+        },
+        {
+          "path": "/snmp/glbal-stats/out-nosuch-names",
+          "type": "number",
+          "label": "out-nosuch-names",
+          "readonly": true
+        },
+        {
+          "path": "/snmp/glbal-stats/out-pkts",
+          "type": "number",
+          "label": "out-pkts",
+          "readonly": true
+        },
+        {
+          "path": "/snmp/glbal-stats/out-set-reqs",
+          "type": "number",
+          "label": "out-set-reqs",
+          "readonly": true
+        },
+        {
+          "path": "/snmp/glbal-stats/out-too-bigs",
+          "type": "number",
+          "label": "out-too-bigs",
+          "readonly": true
+        },
+        {
+          "path": "/snmp/glbal-stats/out-traps",
+          "type": "number",
+          "label": "out-traps",
+          "readonly": true
+        },
+        {
+          "path": "/snmp/glbal-stats/proxy-drops",
+          "type": "number",
+          "label": "proxy-drops",
+          "readonly": true
+        },
+        {
+          "path": "/snmp/glbal-stats/silent-drops",
+          "type": "number",
+          "label": "silent-drops",
+          "readonly": true
+        }
+      ]
+    },
+    {
+      "path": "/snmp/ipv6-sources",
+      "type": "group",
+      "label": "ipv6-sources",
+      "fields": [
+        {
+          "path": "/snmp/ipv6-sources/ipv6-source",
+          "type": "list",
+          "label": "ipv6-source",
+          "fields": [
+            {
+              "path": "/snmp/ipv6-sources/ipv6-source/src-ipv6-address",
+              "type": "string",
+              "label": "src-ipv6-address",
+              "pattern": "((:|[0-9a-fA-F]{0,4}):)([0-9a-fA-F]{0,4}:){0,5}((([0-9a-fA-F]{0,4}:)?(:|[0-9a-fA-F]{0,4}))|(((25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])))(%[\\p{N}\\p{L}]+)?",
+              "isKey": true
+            },
+            {
+              "path": "/snmp/ipv6-sources/ipv6-source/vpn-name",
+              "type": "string",
+              "label": "vpn-name"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/snmp/local-users",
+      "type": "group",
+      "label": "local-users",
+      "fields": [
+        {
+          "path": "/snmp/local-users/local-user",
+          "type": "list",
+          "label": "local-user",
+          "fields": [
+            {
+              "path": "/snmp/local-users/local-user/active-status",
+              "type": "string",
+              "label": "active-status",
+              "readonly": true
+            },
+            {
+              "path": "/snmp/local-users/local-user/auth-key",
+              "type": "string",
+              "label": "auth-key",
+              "required": true,
+              "must": [
+                {
+                  "expr": "((../../../system/local-user-cmplx-check='true') and (string-length(../auth-key)) \u003e= ../../../system/password-min-length) or (../../../system/local-user-cmplx-check!='true')"
+                }
+              ]
+            },
+            {
+              "path": "/snmp/local-users/local-user/auth-protocol",
+              "type": "enum",
+              "label": "auth-protocol",
+              "required": true,
+              "options": [
+                {
+                  "label": "md5",
+                  "value": "md5"
+                },
+                {
+                  "label": "sha",
+                  "value": "sha"
+                },
+                {
+                  "label": "sha2-224",
+                  "value": "sha2-224"
+                },
+                {
+                  "label": "sha2-256",
+                  "value": "sha2-256"
+                },
+                {
+                  "label": "sha2-384",
+                  "value": "sha2-384"
+                },
+                {
+                  "label": "sha2-512",
+                  "value": "sha2-512"
+                }
+              ]
+            },
+            {
+              "path": "/snmp/local-users/local-user/left-lock-time",
+              "type": "number",
+              "label": "left-lock-time",
+              "minimum": 1,
+              "maximum": 4294967295,
+              "readonly": true
+            },
+            {
+              "path": "/snmp/local-users/local-user/name",
+              "type": "string",
+              "label": "name",
+              "isKey": true
+            },
+            {
+              "path": "/snmp/local-users/local-user/priv-key",
+              "type": "string",
+              "label": "priv-key",
+              "required": true,
+              "must": [
+                {
+                  "expr": "((../../../system/local-user-cmplx-check='true') and (string-length(../priv-key)) \u003e= ../../../system/password-min-length) or (../../../system/local-user-cmplx-check!='true')"
+                }
+              ]
+            },
+            {
+              "path": "/snmp/local-users/local-user/priv-protocol",
+              "type": "enum",
+              "label": "priv-protocol",
+              "required": true,
+              "options": [
+                {
+                  "label": "3des168",
+                  "value": "3des168"
+                },
+                {
+                  "label": "aes128",
+                  "value": "aes128"
+                },
+                {
+                  "label": "aes192",
+                  "value": "aes192"
+                },
+                {
+                  "label": "aes256",
+                  "value": "aes256"
+                },
+                {
+                  "label": "des56",
+                  "value": "des56"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/snmp/mib-views",
+      "type": "group",
+      "label": "mib-views",
+      "fields": [
+        {
+          "path": "/snmp/mib-views/mib-view",
+          "type": "list",
+          "label": "mib-view",
+          "fields": [
+            {
+              "path": "/snmp/mib-views/mib-view/sub-tree",
+              "type": "string",
+              "label": "sub-tree",
+              "isKey": true
+            },
+            {
+              "path": "/snmp/mib-views/mib-view/type",
+              "type": "enum",
+              "label": "type",
+              "required": true,
+              "options": [
+                {
+                  "label": "excluded",
+                  "value": "excluded"
+                },
+                {
+                  "label": "included",
+                  "value": "included"
+                }
+              ]
+            },
+            {
+              "path": "/snmp/mib-views/mib-view/view-name",
+              "type": "string",
+              "label": "view-name",
+              "isKey": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/snmp/mpd-stats",
+      "type": "group",
+      "label": "mpd-stats",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/snmp/mpd-stats/inval-msgs",
+          "type": "number",
+          "label": "inval-msgs",
+          "readonly": true
+        },
+        {
+          "path": "/snmp/mpd-stats/unknown-pduhandle",
+          "type": "number",
+          "label": "unknown-pduhandle",
+          "readonly": true
+        },
+        {
+          "path": "/snmp/mpd-stats/unknown-sec-model",
+          "type": "number",
+          "label": "unknown-sec-model",
+          "readonly": true
+        }
+      ]
+    },
+    {
+      "path": "/snmp/notification",
+      "type": "group",
+      "label": "notification",
+      "fields": [
+        {
+          "path": "/snmp/notification/notif-global-ageout",
+          "type": "number",
+          "label": "notif-global-ageout",
+          "maximum": 36
+        },
+        {
+          "path": "/snmp/notification/notif-global-limit",
+          "type": "number",
+          "label": "notif-global-limit",
+          "minimum": 1,
+          "maximum": 15000
+        },
+        {
+          "path": "/snmp/notification/notif-log-enable",
+          "type": "boolean",
+          "label": "notif-log-enable"
+        }
+      ]
+    },
+    {
+      "path": "/snmp/ntfcation-stats",
+      "type": "group",
+      "label": "ntfcation-stats",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/snmp/ntfcation-stats/total-log-entrs",
+          "type": "number",
+          "label": "total-log-entrs",
+          "readonly": true
+        },
+        {
+          "path": "/snmp/ntfcation-stats/total-ntfs-bumped",
+          "type": "number",
+          "label": "total-ntfs-bumped",
+          "readonly": true
+        },
+        {
+          "path": "/snmp/ntfcation-stats/total-ntfs-logged",
+          "type": "number",
+          "label": "total-ntfs-logged",
+          "readonly": true
+        }
+      ]
+    },
+    {
+      "path": "/snmp/ntfy-fltr-prfs",
+      "type": "group",
+      "label": "ntfy-fltr-prfs",
+      "fields": [
+        {
+          "path": "/snmp/ntfy-fltr-prfs/ntfy-fltr-prf",
+          "type": "list",
+          "label": "ntfy-fltr-prf",
+          "fields": [
+            {
+              "path": "/snmp/ntfy-fltr-prfs/ntfy-fltr-prf/name",
+              "type": "string",
+              "label": "name",
+              "isKey": true
+            },
+            {
+              "path": "/snmp/ntfy-fltr-prfs/ntfy-fltr-prf/subtree",
+              "type": "string",
+              "label": "subtree",
+              "isKey": true
+            },
+            {
+              "path": "/snmp/ntfy-fltr-prfs/ntfy-fltr-prf/type",
+              "type": "enum",
+              "label": "type",
+              "options": [
+                {
+                  "label": "excluded",
+                  "value": "excluded"
+                },
+                {
+                  "label": "included",
+                  "value": "included"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/snmp/proxy",
+      "type": "group",
+      "label": "proxy",
+      "fields": [
+        {
+          "path": "/snmp/proxy/all-interface",
+          "type": "group",
+          "label": "all-interface",
+          "fields": [
+            {
+              "path": "/snmp/proxy/all-interface/all-ipv4-interface",
+              "type": "boolean",
+              "label": "all-ipv4-interface"
+            },
+            {
+              "path": "/snmp/proxy/all-interface/all-ipv6-interface",
+              "type": "boolean",
+              "label": "all-ipv6-interface"
+            }
+          ]
+        },
+        {
+          "path": "/snmp/proxy/communitys",
+          "type": "group",
+          "label": "communitys",
+          "fields": [
+            {
+              "path": "/snmp/proxy/communitys/community",
+              "type": "list",
+              "label": "community",
+              "fields": [
+                {
+                  "path": "/snmp/proxy/communitys/community/acl",
+                  "type": "string",
+                  "label": "acl"
+                },
+                {
+                  "path": "/snmp/proxy/communitys/community/alias-name",
+                  "type": "string",
+                  "label": "alias-name"
+                },
+                {
+                  "path": "/snmp/proxy/communitys/community/engine-id",
+                  "type": "string",
+                  "label": "engine-id",
+                  "required": true,
+                  "pattern": "([0-9a-fA-F]{2}(:[0-9a-fA-F]{2})*)?",
+                  "supportFilter": true
+                },
+                {
+                  "path": "/snmp/proxy/communitys/community/name",
+                  "type": "string",
+                  "label": "name",
+                  "must": [
+                    {
+                      "expr": "string-length(../name)\u003e=../../../../system/password-min-length or ../../../../system/community-cmplx-check='false'"
+                    }
+                  ],
+                  "isKey": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "path": "/snmp/proxy/ipv6-sources",
+          "type": "group",
+          "label": "ipv6-sources",
+          "fields": [
+            {
+              "path": "/snmp/proxy/ipv6-sources/ipv6-source",
+              "type": "list",
+              "label": "ipv6-source",
+              "fields": [
+                {
+                  "path": "/snmp/proxy/ipv6-sources/ipv6-source/src-ipv6-address",
+                  "type": "string",
+                  "label": "src-ipv6-address",
+                  "pattern": "((:|[0-9a-fA-F]{0,4}):)([0-9a-fA-F]{0,4}:){0,5}((([0-9a-fA-F]{0,4}:)?(:|[0-9a-fA-F]{0,4}))|(((25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])))(%[\\p{N}\\p{L}]+)?",
+                  "isKey": true
+                },
+                {
+                  "path": "/snmp/proxy/ipv6-sources/ipv6-source/vpn-name",
+                  "type": "string",
+                  "label": "vpn-name"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "path": "/snmp/proxy/rules",
+          "type": "group",
+          "label": "rules",
+          "fields": [
+            {
+              "path": "/snmp/proxy/rules/rule",
+              "type": "list",
+              "label": "rule",
+              "fields": [
+                {
+                  "path": "/snmp/proxy/rules/rule/engine-id",
+                  "type": "string",
+                  "label": "engine-id",
+                  "required": true,
+                  "pattern": "([0-9a-fA-F]{2}(:[0-9a-fA-F]{2})*)?"
+                },
+                {
+                  "path": "/snmp/proxy/rules/rule/host-name",
+                  "type": "string",
+                  "label": "host-name",
+                  "required": true
+                },
+                {
+                  "path": "/snmp/proxy/rules/rule/name",
+                  "type": "string",
+                  "label": "name",
+                  "isKey": true
+                },
+                {
+                  "path": "/snmp/proxy/rules/rule/security-level",
+                  "type": "enum",
+                  "label": "security-level",
+                  "options": [
+                    {
+                      "label": "authentication",
+                      "value": "authentication"
+                    },
+                    {
+                      "label": "noAuthNoPriv",
+                      "value": "noAuthNoPriv"
+                    },
+                    {
+                      "label": "privacy",
+                      "value": "privacy"
+                    }
+                  ],
+                  "must": [
+                    {
+                      "expr": "(../security-model!='v3' and ../security-level='noAuthNoPriv') or (../security-model='v3')"
+                    }
+                  ]
+                },
+                {
+                  "path": "/snmp/proxy/rules/rule/security-model",
+                  "type": "enum",
+                  "label": "security-model",
+                  "required": true,
+                  "options": [
+                    {
+                      "label": "v1",
+                      "value": "v1"
+                    },
+                    {
+                      "label": "v2c",
+                      "value": "v2c"
+                    },
+                    {
+                      "label": "v3",
+                      "value": "v3"
+                    }
+                  ],
+                  "must": [
+                    {
+                      "expr": "(../type='inform' and (../security-model='v2c' or ../security-model='v3') ) or ((not(../type='inform') and (../security-model='v1' or ../security-model='v2c' or ../security-model='v3') ))"
+                    }
+                  ]
+                },
+                {
+                  "path": "/snmp/proxy/rules/rule/security-name",
+                  "type": "string",
+                  "label": "security-name",
+                  "required": true,
+                  "when": "../security-model != 'v3'"
+                },
+                {
+                  "path": "/snmp/proxy/rules/rule/security-v3-name",
+                  "type": "string",
+                  "label": "security-v3-name",
+                  "required": true,
+                  "when": "../security-model='v3'"
+                },
+                {
+                  "path": "/snmp/proxy/rules/rule/type",
+                  "type": "enum",
+                  "label": "type",
+                  "required": true,
+                  "options": [
+                    {
+                      "label": "inform",
+                      "value": "inform"
+                    },
+                    {
+                      "label": "read",
+                      "value": "read"
+                    },
+                    {
+                      "label": "trap",
+                      "value": "trap"
+                    },
+                    {
+                      "label": "write",
+                      "value": "write"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "path": "/snmp/proxy/source-interfaces",
+          "type": "group",
+          "label": "source-interfaces",
+          "fields": [
+            {
+              "path": "/snmp/proxy/source-interfaces/source-interface",
+              "type": "list",
+              "label": "source-interface",
+              "fields": [
+                {
+                  "path": "/snmp/proxy/source-interfaces/source-interface/interface-name",
+                  "type": "string",
+                  "label": "interface-name",
+                  "isKey": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "path": "/snmp/proxy/standard-communitys",
+          "type": "group",
+          "label": "standard-communitys",
+          "fields": [
+            {
+              "path": "/snmp/proxy/standard-communitys/standard-community",
+              "type": "list",
+              "label": "standard-community",
+              "fields": [
+                {
+                  "path": "/snmp/proxy/standard-communitys/standard-community/acl",
+                  "type": "string",
+                  "label": "acl"
+                },
+                {
+                  "path": "/snmp/proxy/standard-communitys/standard-community/alias-name",
+                  "type": "string",
+                  "label": "alias-name",
+                  "must": [
+                    {
+                      "expr": "(../alias-name!=../name)"
+                    }
+                  ],
+                  "isKey": true
+                },
+                {
+                  "path": "/snmp/proxy/standard-communitys/standard-community/engine-id",
+                  "type": "string",
+                  "label": "engine-id",
+                  "required": true,
+                  "pattern": "([0-9a-fA-F]{2}(:[0-9a-fA-F]{2})*)?",
+                  "supportFilter": true
+                },
+                {
+                  "path": "/snmp/proxy/standard-communitys/standard-community/name",
+                  "type": "string",
+                  "label": "name",
+                  "required": true,
+                  "must": [
+                    {
+                      "expr": "string-length(../name)\u003e=../../../../system/password-min-length or ../../../../system/community-cmplx-check='false'"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "path": "/snmp/proxy/target-hosts",
+          "type": "group",
+          "label": "target-hosts",
+          "fields": [
+            {
+              "path": "/snmp/proxy/target-hosts/target-host",
+              "type": "list",
+              "label": "target-host",
+              "fields": [
+                {
+                  "path": "/snmp/proxy/target-hosts/target-host/address",
+                  "type": "string",
+                  "label": "address",
+                  "required": true
+                },
+                {
+                  "path": "/snmp/proxy/target-hosts/target-host/domain",
+                  "type": "enum",
+                  "label": "domain",
+                  "required": true,
+                  "options": [
+                    {
+                      "label": "snmpUDPDomain",
+                      "value": "snmpUDPDomain"
+                    }
+                  ]
+                },
+                {
+                  "path": "/snmp/proxy/target-hosts/target-host/interface-name",
+                  "type": "string",
+                  "label": "interface-name"
+                },
+                {
+                  "path": "/snmp/proxy/target-hosts/target-host/name",
+                  "type": "string",
+                  "label": "name",
+                  "must": [
+                    {
+                      "expr": "count(/snmp/target-hosts/target-host[nms-name = current()]) = 0"
+                    }
+                  ],
+                  "isKey": true
+                },
+                {
+                  "path": "/snmp/proxy/target-hosts/target-host/params",
+                  "type": "choice",
+                  "label": "params",
+                  "cases": [
+                    {
+                      "name": "usm",
+                      "label": "usm",
+                      "fields": [
+                        {
+                          "path": "/snmp/proxy/target-hosts/target-host/security-level",
+                          "type": "enum",
+                          "label": "security-level",
+                          "required": true,
+                          "options": [
+                            {
+                              "label": "authentication",
+                              "value": "authentication"
+                            },
+                            {
+                              "label": "noAuthNoPriv",
+                              "value": "noAuthNoPriv"
+                            },
+                            {
+                              "label": "privacy",
+                              "value": "privacy"
+                            }
+                          ]
+                        },
+                        {
+                          "path": "/snmp/proxy/target-hosts/target-host/usm-name",
+                          "type": "string",
+                          "label": "usm-name",
+                          "required": true
+                        }
+                      ]
+                    },
+                    {
+                      "name": "v1",
+                      "label": "v1",
+                      "fields": [
+                        {
+                          "path": "/snmp/proxy/target-hosts/target-host/security-name-v1",
+                          "type": "string",
+                          "label": "security-name-v1",
+                          "required": true
+                        }
+                      ]
+                    },
+                    {
+                      "name": "v2c",
+                      "label": "v2c",
+                      "fields": [
+                        {
+                          "path": "/snmp/proxy/target-hosts/target-host/security-name-v2c",
+                          "type": "string",
+                          "label": "security-name-v2c",
+                          "required": true
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "path": "/snmp/proxy/target-hosts/target-host/port-num",
+                  "type": "number",
+                  "label": "port-num",
+                  "required": true,
+                  "minimum": 1,
+                  "maximum": 65535
+                },
+                {
+                  "path": "/snmp/proxy/target-hosts/target-host/public-net",
+                  "type": "boolean",
+                  "label": "public-net"
+                },
+                {
+                  "path": "/snmp/proxy/target-hosts/target-host/timeout",
+                  "type": "number",
+                  "label": "timeout",
+                  "minimum": 1,
+                  "maximum": 1800
+                },
+                {
+                  "path": "/snmp/proxy/target-hosts/target-host/vpn",
+                  "type": "string",
+                  "label": "vpn",
+                  "must": [
+                    {
+                      "expr": "not(../public-net='true') or (../public-net='true' and ../vpn='_public_')"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "path": "/snmp/proxy/usm-users",
+          "type": "list",
+          "label": "usm-users",
+          "fields": [
+            {
+              "path": "/snmp/proxy/usm-users/engine-id",
+              "type": "string",
+              "label": "engine-id",
+              "pattern": "([0-9a-fA-F]{2}(:[0-9a-fA-F]{2})*)?",
+              "isKey": true
+            },
+            {
+              "path": "/snmp/proxy/usm-users/usm-user",
+              "type": "list",
+              "label": "usm-user",
+              "fields": [
+                {
+                  "path": "/snmp/proxy/usm-users/usm-user/acl-number",
+                  "type": "string",
+                  "label": "acl-number"
+                },
+                {
+                  "path": "/snmp/proxy/usm-users/usm-user/active-status",
+                  "type": "string",
+                  "label": "active-status",
+                  "readonly": true
+                },
+                {
+                  "path": "/snmp/proxy/usm-users/usm-user/auth-key",
+                  "type": "string",
+                  "label": "auth-key",
+                  "required": true,
+                  "when": "../auth-protocol != 'noAuth'",
+                  "must": [
+                    {
+                      "expr": "string-length(../auth-key)\u003e=../../../../system/password-min-length or ../../../../system/usm-user-cmplx-check='false'"
+                    }
+                  ]
+                },
+                {
+                  "path": "/snmp/proxy/usm-users/usm-user/auth-protocol",
+                  "type": "enum",
+                  "label": "auth-protocol",
+                  "options": [
+                    {
+                      "label": "md5",
+                      "value": "md5"
+                    },
+                    {
+                      "label": "noAuth",
+                      "value": "noAuth"
+                    },
+                    {
+                      "label": "sha",
+                      "value": "sha"
+                    },
+                    {
+                      "label": "sha2-224",
+                      "value": "sha2-224"
+                    },
+                    {
+                      "label": "sha2-256",
+                      "value": "sha2-256"
+                    },
+                    {
+                      "label": "sha2-384",
+                      "value": "sha2-384"
+                    },
+                    {
+                      "label": "sha2-512",
+                      "value": "sha2-512"
+                    }
+                  ]
+                },
+                {
+                  "path": "/snmp/proxy/usm-users/usm-user/group-name",
+                  "type": "string",
+                  "label": "group-name"
+                },
+                {
+                  "path": "/snmp/proxy/usm-users/usm-user/is-auth-localized",
+                  "type": "boolean",
+                  "label": "is-auth-localized",
+                  "readonly": true
+                },
+                {
+                  "path": "/snmp/proxy/usm-users/usm-user/is-priv-localized",
+                  "type": "boolean",
+                  "label": "is-priv-localized",
+                  "readonly": true
+                },
+                {
+                  "path": "/snmp/proxy/usm-users/usm-user/left-lock-time",
+                  "type": "number",
+                  "label": "left-lock-time",
+                  "readonly": true
+                },
+                {
+                  "path": "/snmp/proxy/usm-users/usm-user/priv-key",
+                  "type": "string",
+                  "label": "priv-key",
+                  "required": true,
+                  "when": "../auth-protocol!='noAuth' and ../priv-protocol!='noPriv'",
+                  "must": [
+                    {
+                      "expr": "string-length(../priv-key)\u003e=../../../../system/password-min-length or ../../../../system/usm-user-cmplx-check='false'"
+                    }
+                  ]
+                },
+                {
+                  "path": "/snmp/proxy/usm-users/usm-user/priv-protocol",
+                  "type": "enum",
+                  "label": "priv-protocol",
+                  "options": [
+                    {
+                      "label": "3des168",
+                      "value": "3des168"
+                    },
+                    {
+                      "label": "aes128",
+                      "value": "aes128"
+                    },
+                    {
+                      "label": "aes192",
+                      "value": "aes192"
+                    },
+                    {
+                      "label": "aes256",
+                      "value": "aes256"
+                    },
+                    {
+                      "label": "des56",
+                      "value": "des56"
+                    },
+                    {
+                      "label": "noPriv",
+                      "value": "noPriv"
+                    }
+                  ],
+                  "must": [
+                    {
+                      "expr": "../priv-protocol='noPriv' or (../priv-protocol!='noPriv' and ../auth-protocol!='noAuth')"
+                    }
+                  ]
+                },
+                {
+                  "path": "/snmp/proxy/usm-users/usm-user/user-name",
+                  "type": "string",
+                  "label": "user-name",
+                  "isKey": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/snmp/source-interfaces",
+      "type": "group",
+      "label": "source-interfaces",
+      "fields": [
+        {
+          "path": "/snmp/source-interfaces/source-interface",
+          "type": "list",
+          "label": "source-interface",
+          "fields": [
+            {
+              "path": "/snmp/source-interfaces/source-interface/interface-name",
+              "type": "string",
+              "label": "interface-name",
+              "isKey": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/snmp/standard-communitys",
+      "type": "group",
+      "label": "standard-communitys",
+      "fields": [
+        {
+          "path": "/snmp/standard-communitys/standard-community",
+          "type": "list",
+          "label": "standard-community",
+          "fields": [
+            {
+              "path": "/snmp/standard-communitys/standard-community/access-right",
+              "type": "enum",
+              "label": "access-right",
+              "required": true,
+              "options": [
+                {
+                  "label": "read",
+                  "value": "read"
+                },
+                {
+                  "label": "write",
+                  "value": "write"
+                }
+              ]
+            },
+            {
+              "path": "/snmp/standard-communitys/standard-community/acl",
+              "type": "string",
+              "label": "acl"
+            },
+            {
+              "path": "/snmp/standard-communitys/standard-community/alias-name",
+              "type": "string",
+              "label": "alias-name",
+              "must": [
+                {
+                  "expr": "(../alias-name!=../name)"
+                }
+              ],
+              "isKey": true
+            },
+            {
+              "path": "/snmp/standard-communitys/standard-community/name",
+              "type": "string",
+              "label": "name",
+              "required": true,
+              "must": [
+                {
+                  "expr": "string-length(../name)\u003e=../../../system/password-min-length or ../../../system/community-cmplx-check='false'"
+                }
+              ]
+            },
+            {
+              "path": "/snmp/standard-communitys/standard-community/view-name",
+              "type": "string",
+              "label": "view-name"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/snmp/system",
+      "type": "group",
+      "label": "system",
+      "fields": [
+        {
+          "path": "/snmp/system/acl",
+          "type": "string",
+          "label": "acl"
+        },
+        {
+          "path": "/snmp/system/community-cmplx-check",
+          "type": "boolean",
+          "label": "community-cmplx-check"
+        },
+        {
+          "path": "/snmp/system/ctx-engineid-check-enable",
+          "type": "boolean",
+          "label": "ctx-engineid-check-enable"
+        },
+        {
+          "path": "/snmp/system/ext-err-code-enable",
+          "type": "boolean",
+          "label": "ext-err-code-enable"
+        },
+        {
+          "path": "/snmp/system/getbulk-timeout",
+          "type": "number",
+          "label": "getbulk-timeout",
+          "maximum": 600
+        },
+        {
+          "path": "/snmp/system/inform-pend-number",
+          "type": "number",
+          "label": "inform-pend-number",
+          "minimum": 1,
+          "maximum": 2048
+        },
+        {
+          "path": "/snmp/system/inform-resend-times",
+          "type": "number",
+          "label": "inform-resend-times",
+          "maximum": 10
+        },
+        {
+          "path": "/snmp/system/inform-timeout",
+          "type": "number",
+          "label": "inform-timeout",
+          "minimum": 1,
+          "maximum": 1800
+        },
+        {
+          "path": "/snmp/system/ipv4-listen-disable",
+          "type": "boolean",
+          "label": "ipv4-listen-disable"
+        },
+        {
+          "path": "/snmp/system/ipv6-listen-disable",
+          "type": "boolean",
+          "label": "ipv6-listen-disable"
+        },
+        {
+          "path": "/snmp/system/ipv6-vpn-instance-name",
+          "type": "string",
+          "label": "ipv6-vpn-instance-name",
+          "must": [
+            {
+              "expr": "../ipv6-vpn-instance-name='_public_' or ../is-ipv6-public-net='false'"
+            }
+          ]
+        },
+        {
+          "path": "/snmp/system/is-ipv6-public-net",
+          "type": "boolean",
+          "label": "is-ipv6-public-net"
+        },
+        {
+          "path": "/snmp/system/is-public-net",
+          "type": "boolean",
+          "label": "is-public-net"
+        },
+        {
+          "path": "/snmp/system/listen-port",
+          "type": "number",
+          "label": "listen-port",
+          "minimum": 161,
+          "maximum": 65535
+        },
+        {
+          "path": "/snmp/system/local-user-cmplx-check",
+          "type": "boolean",
+          "label": "local-user-cmplx-check"
+        },
+        {
+          "path": "/snmp/system/packet-priority",
+          "type": "number",
+          "label": "packet-priority",
+          "maximum": 7
+        },
+        {
+          "path": "/snmp/system/password-min-length",
+          "type": "number",
+          "label": "password-min-length",
+          "minimum": 8,
+          "maximum": 16
+        },
+        {
+          "path": "/snmp/system/protocol-source-interface-name",
+          "type": "string",
+          "label": "protocol-source-interface-name"
+        },
+        {
+          "path": "/snmp/system/protocol-source-ipv6-address",
+          "type": "string",
+          "label": "protocol-source-ipv6-address",
+          "pattern": "((:|[0-9a-fA-F]{0,4}):)([0-9a-fA-F]{0,4}:){0,5}((([0-9a-fA-F]{0,4}:)?(:|[0-9a-fA-F]{0,4}))|(((25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])))(%[\\p{N}\\p{L}]+)?"
+        },
+        {
+          "path": "/snmp/system/set-cache-enable",
+          "type": "boolean",
+          "label": "set-cache-enable"
+        },
+        {
+          "path": "/snmp/system/trap-listen-port",
+          "type": "number",
+          "label": "trap-listen-port",
+          "minimum": 1025,
+          "maximum": 65535
+        },
+        {
+          "path": "/snmp/system/trap-packet-priority",
+          "type": "number",
+          "label": "trap-packet-priority",
+          "maximum": 7
+        },
+        {
+          "path": "/snmp/system/trap-source-interface-name",
+          "type": "string",
+          "label": "trap-source-interface-name"
+        },
+        {
+          "path": "/snmp/system/trap-source-ipv4-address",
+          "type": "string",
+          "label": "trap-source-ipv4-address",
+          "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?"
+        },
+        {
+          "path": "/snmp/system/usm-user-cmplx-check",
+          "type": "boolean",
+          "label": "usm-user-cmplx-check"
+        },
+        {
+          "path": "/snmp/system/vpn-instance-name",
+          "type": "string",
+          "label": "vpn-instance-name",
+          "must": [
+            {
+              "expr": "../vpn-instance-name='_public_' or ../is-public-net='false'"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/snmp/target-hosts",
+      "type": "group",
+      "label": "target-hosts",
+      "fields": [
+        {
+          "path": "/snmp/target-hosts/target-host",
+          "type": "list",
+          "label": "target-host",
+          "fields": [
+            {
+              "path": "/snmp/target-hosts/target-host/address",
+              "type": "string",
+              "label": "address",
+              "required": true
+            },
+            {
+              "path": "/snmp/target-hosts/target-host/confirmed-num",
+              "type": "number",
+              "label": "confirmed-num",
+              "readonly": true
+            },
+            {
+              "path": "/snmp/target-hosts/target-host/domain",
+              "type": "enum",
+              "label": "domain",
+              "required": true,
+              "options": [
+                {
+                  "label": "snmpUDPDomain",
+                  "value": "snmpUDPDomain"
+                }
+              ]
+            },
+            {
+              "path": "/snmp/target-hosts/target-host/dropped-num",
+              "type": "number",
+              "label": "dropped-num",
+              "readonly": true
+            },
+            {
+              "path": "/snmp/target-hosts/target-host/ext-vb",
+              "type": "boolean",
+              "label": "ext-vb"
+            },
+            {
+              "path": "/snmp/target-hosts/target-host/failed-num",
+              "type": "number",
+              "label": "failed-num",
+              "readonly": true
+            },
+            {
+              "path": "/snmp/target-hosts/target-host/heart-beat-time",
+              "type": "number",
+              "label": "heart-beat-time",
+              "minimum": 1,
+              "maximum": 48,
+              "when": "../is-need-heart-beat = 'true'"
+            },
+            {
+              "path": "/snmp/target-hosts/target-host/interface-name",
+              "type": "string",
+              "label": "interface-name"
+            },
+            {
+              "path": "/snmp/target-hosts/target-host/is-need-heart-beat",
+              "type": "boolean",
+              "label": "is-need-heart-beat"
+            },
+            {
+              "path": "/snmp/target-hosts/target-host/is-public-net",
+              "type": "boolean",
+              "label": "is-public-net"
+            },
+            {
+              "path": "/snmp/target-hosts/target-host/nms-name",
+              "type": "string",
+              "label": "nms-name",
+              "isKey": true
+            },
+            {
+              "path": "/snmp/target-hosts/target-host/notify-fltr-profile-name",
+              "type": "string",
+              "label": "notify-fltr-profile-name"
+            },
+            {
+              "path": "/snmp/target-hosts/target-host/notify-type",
+              "type": "enum",
+              "label": "notify-type",
+              "required": true,
+              "options": [
+                {
+                  "label": "inform",
+                  "value": "inform"
+                },
+                {
+                  "label": "trap",
+                  "value": "trap"
+                }
+              ]
+            },
+            {
+              "path": "/snmp/target-hosts/target-host/params",
+              "type": "choice",
+              "label": "params",
+              "cases": [
+                {
+                  "name": "usm",
+                  "label": "usm",
+                  "fields": [
+                    {
+                      "path": "/snmp/target-hosts/target-host/security-level",
+                      "type": "enum",
+                      "label": "security-level",
+                      "required": true,
+                      "options": [
+                        {
+                          "label": "authentication",
+                          "value": "authentication"
+                        },
+                        {
+                          "label": "noAuthNoPriv",
+                          "value": "noAuthNoPriv"
+                        },
+                        {
+                          "label": "privacy",
+                          "value": "privacy"
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/snmp/target-hosts/target-host/usm-name",
+                      "type": "string",
+                      "label": "usm-name",
+                      "required": true
+                    }
+                  ]
+                },
+                {
+                  "name": "v1",
+                  "label": "v1",
+                  "fields": [
+                    {
+                      "path": "/snmp/target-hosts/target-host/security-name-v1",
+                      "type": "string",
+                      "label": "security-name-v1",
+                      "required": true,
+                      "when": "../notify-type != 'inform'"
+                    }
+                  ]
+                },
+                {
+                  "name": "v2c",
+                  "label": "v2c",
+                  "fields": [
+                    {
+                      "path": "/snmp/target-hosts/target-host/security-name-v2c",
+                      "type": "string",
+                      "label": "security-name-v2c",
+                      "required": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/snmp/target-hosts/target-host/pending-num",
+              "type": "number",
+              "label": "pending-num",
+              "readonly": true
+            },
+            {
+              "path": "/snmp/target-hosts/target-host/port-number",
+              "type": "number",
+              "label": "port-number",
+              "maximum": 65535
+            },
+            {
+              "path": "/snmp/target-hosts/target-host/private-netmanager",
+              "type": "boolean",
+              "label": "private-netmanager"
+            },
+            {
+              "path": "/snmp/target-hosts/target-host/retries-num",
+              "type": "number",
+              "label": "retries-num",
+              "readonly": true
+            },
+            {
+              "path": "/snmp/target-hosts/target-host/sent-num",
+              "type": "number",
+              "label": "sent-num",
+              "readonly": true
+            },
+            {
+              "path": "/snmp/target-hosts/target-host/status",
+              "type": "boolean",
+              "label": "status",
+              "readonly": true
+            },
+            {
+              "path": "/snmp/target-hosts/target-host/target-inform-resend-times",
+              "type": "number",
+              "label": "target-inform-resend-times",
+              "maximum": 10,
+              "when": "../notify-type = 'inform'"
+            },
+            {
+              "path": "/snmp/target-hosts/target-host/target-inform-timeout",
+              "type": "number",
+              "label": "target-inform-timeout",
+              "minimum": 1,
+              "maximum": 1800,
+              "when": "../notify-type = 'inform'"
+            },
+            {
+              "path": "/snmp/target-hosts/target-host/vpn-instance-name",
+              "type": "string",
+              "label": "vpn-instance-name",
+              "must": [
+                {
+                  "expr": "../vpn-instance-name='_public_' or ../is-public-net='false'"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/snmp/usm-stats",
+      "type": "group",
+      "label": "usm-stats",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/snmp/usm-stats/decryption-errs",
+          "type": "number",
+          "label": "decryption-errs",
+          "maximum": 2147483647,
+          "readonly": true
+        },
+        {
+          "path": "/snmp/usm-stats/out-tm-windows",
+          "type": "number",
+          "label": "out-tm-windows",
+          "maximum": 2147483647,
+          "readonly": true
+        },
+        {
+          "path": "/snmp/usm-stats/unknown-engine-ids",
+          "type": "number",
+          "label": "unknown-engine-ids",
+          "maximum": 2147483647,
+          "readonly": true
+        },
+        {
+          "path": "/snmp/usm-stats/unknown-user-mame",
+          "type": "number",
+          "label": "unknown-user-mame",
+          "maximum": 2147483647,
+          "readonly": true
+        },
+        {
+          "path": "/snmp/usm-stats/unsuppt-sec-levs",
+          "type": "number",
+          "label": "unsuppt-sec-levs",
+          "maximum": 2147483647,
+          "readonly": true
+        },
+        {
+          "path": "/snmp/usm-stats/wrong-digests",
+          "type": "number",
+          "label": "wrong-digests",
+          "maximum": 2147483647,
+          "readonly": true
+        }
+      ]
+    },
+    {
+      "path": "/snmp/usm-users",
+      "type": "group",
+      "label": "usm-users",
+      "fields": [
+        {
+          "path": "/snmp/usm-users/usm-user",
+          "type": "list",
+          "label": "usm-user",
+          "fields": [
+            {
+              "path": "/snmp/usm-users/usm-user/acl-number",
+              "type": "string",
+              "label": "acl-number"
+            },
+            {
+              "path": "/snmp/usm-users/usm-user/active-status",
+              "type": "string",
+              "label": "active-status",
+              "readonly": true
+            },
+            {
+              "path": "/snmp/usm-users/usm-user/auth-key",
+              "type": "string",
+              "label": "auth-key",
+              "required": true,
+              "when": "../auth-protocol != 'noAuth'",
+              "must": [
+                {
+                  "expr": "string-length(../auth-key)\u003e=../../../system/password-min-length or ../../../system/usm-user-cmplx-check='false'"
+                }
+              ]
+            },
+            {
+              "path": "/snmp/usm-users/usm-user/auth-protocol",
+              "type": "enum",
+              "label": "auth-protocol",
+              "options": [
+                {
+                  "label": "md5",
+                  "value": "md5"
+                },
+                {
+                  "label": "noAuth",
+                  "value": "noAuth"
+                },
+                {
+                  "label": "sha",
+                  "value": "sha"
+                },
+                {
+                  "label": "sha2-224",
+                  "value": "sha2-224"
+                },
+                {
+                  "label": "sha2-256",
+                  "value": "sha2-256"
+                },
+                {
+                  "label": "sha2-384",
+                  "value": "sha2-384"
+                },
+                {
+                  "label": "sha2-512",
+                  "value": "sha2-512"
+                }
+              ]
+            },
+            {
+              "path": "/snmp/usm-users/usm-user/group-name",
+              "type": "string",
+              "label": "group-name"
+            },
+            {
+              "path": "/snmp/usm-users/usm-user/is-auth-localized",
+              "type": "boolean",
+              "label": "is-auth-localized",
+              "readonly": true
+            },
+            {
+              "path": "/snmp/usm-users/usm-user/is-priv-localized",
+              "type": "boolean",
+              "label": "is-priv-localized",
+              "readonly": true
+            },
+            {
+              "path": "/snmp/usm-users/usm-user/left-lock-time",
+              "type": "number",
+              "label": "left-lock-time",
+              "readonly": true
+            },
+            {
+              "path": "/snmp/usm-users/usm-user/priv-key",
+              "type": "string",
+              "label": "priv-key",
+              "required": true,
+              "when": "../auth-protocol!='noAuth' and ../priv-protocol!='noPriv'",
+              "must": [
+                {
+                  "expr": "string-length(../priv-key)\u003e=../../../system/password-min-length or ../../../system/usm-user-cmplx-check='false'"
+                }
+              ]
+            },
+            {
+              "path": "/snmp/usm-users/usm-user/priv-protocol",
+              "type": "enum",
+              "label": "priv-protocol",
+              "options": [
+                {
+                  "label": "3des168",
+                  "value": "3des168"
+                },
+                {
+                  "label": "aes128",
+                  "value": "aes128"
+                },
+                {
+                  "label": "aes192",
+                  "value": "aes192"
+                },
+                {
+                  "label": "aes256",
+                  "value": "aes256"
+                },
+                {
+                  "label": "des56",
+                  "value": "des56"
+                },
+                {
+                  "label": "noPriv",
+                  "value": "noPriv"
+                }
+              ],
+              "must": [
+                {
+                  "expr": "../priv-protocol='noPriv' or (../priv-protocol!='noPriv' and ../auth-protocol!='noAuth')"
+                }
+              ]
+            },
+            {
+              "path": "/snmp/usm-users/usm-user/user-name",
+              "type": "string",
+              "label": "user-name",
+              "isKey": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/snmp/v3-groups",
+      "type": "group",
+      "label": "v3-groups",
+      "fields": [
+        {
+          "path": "/snmp/v3-groups/v3-group",
+          "type": "list",
+          "label": "v3-group",
+          "fields": [
+            {
+              "path": "/snmp/v3-groups/v3-group/acl-number",
+              "type": "string",
+              "label": "acl-number"
+            },
+            {
+              "path": "/snmp/v3-groups/v3-group/group-name",
+              "type": "string",
+              "label": "group-name",
+              "isKey": true
+            },
+            {
+              "path": "/snmp/v3-groups/v3-group/notify-view-name",
+              "type": "string",
+              "label": "notify-view-name"
+            },
+            {
+              "path": "/snmp/v3-groups/v3-group/read-view-name",
+              "type": "string",
+              "label": "read-view-name"
+            },
+            {
+              "path": "/snmp/v3-groups/v3-group/security-level",
+              "type": "enum",
+              "label": "security-level",
+              "options": [
+                {
+                  "label": "authentication",
+                  "value": "authentication"
+                },
+                {
+                  "label": "noAuthNoPriv",
+                  "value": "noAuthNoPriv"
+                },
+                {
+                  "label": "privacy",
+                  "value": "privacy"
+                }
+              ],
+              "isKey": true
+            },
+            {
+              "path": "/snmp/v3-groups/v3-group/write-view-name",
+              "type": "string",
+              "label": "write-view-name"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

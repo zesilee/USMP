@@ -1,0 +1,330 @@
+{
+  "module": "xpl",
+  "title": "xpl",
+  "vendor": "huawei",
+  "fields": [
+    {
+      "path": "/xpl/as-path-lists",
+      "type": "group",
+      "label": "as-path-lists",
+      "fields": [
+        {
+          "path": "/xpl/as-path-lists/as-path-list",
+          "type": "list",
+          "label": "as-path-list",
+          "fields": [
+            {
+              "path": "/xpl/as-path-lists/as-path-list/content",
+              "type": "string",
+              "label": "content",
+              "required": true
+            },
+            {
+              "path": "/xpl/as-path-lists/as-path-list/name",
+              "type": "string",
+              "label": "name",
+              "pattern": "\\s*([0-9a-zA-Z][0-9a-zA-Z\\-_\\.]{0,200})\\s*",
+              "isKey": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/xpl/community-lists",
+      "type": "group",
+      "label": "community-lists",
+      "fields": [
+        {
+          "path": "/xpl/community-lists/community-list",
+          "type": "list",
+          "label": "community-list",
+          "fields": [
+            {
+              "path": "/xpl/community-lists/community-list/content",
+              "type": "string",
+              "label": "content",
+              "required": true
+            },
+            {
+              "path": "/xpl/community-lists/community-list/name",
+              "type": "string",
+              "label": "name",
+              "pattern": "\\s*([0-9a-zA-Z][0-9a-zA-Z\\-_\\.]{0,200})\\s*",
+              "isKey": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/xpl/ext-community-rt-lists",
+      "type": "group",
+      "label": "ext-community-rt-lists",
+      "fields": [
+        {
+          "path": "/xpl/ext-community-rt-lists/ext-community-rt-list",
+          "type": "list",
+          "label": "ext-community-rt-list",
+          "fields": [
+            {
+              "path": "/xpl/ext-community-rt-lists/ext-community-rt-list/content",
+              "type": "string",
+              "label": "content",
+              "required": true
+            },
+            {
+              "path": "/xpl/ext-community-rt-lists/ext-community-rt-list/name",
+              "type": "string",
+              "label": "name",
+              "pattern": "\\s*([0-9a-zA-Z][0-9a-zA-Z\\-_\\.]{0,200})\\s*",
+              "isKey": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/xpl/ext-community-soo-lists",
+      "type": "group",
+      "label": "ext-community-soo-lists",
+      "fields": [
+        {
+          "path": "/xpl/ext-community-soo-lists/ext-community-soo-list",
+          "type": "list",
+          "label": "ext-community-soo-list",
+          "fields": [
+            {
+              "path": "/xpl/ext-community-soo-lists/ext-community-soo-list/content",
+              "type": "string",
+              "label": "content",
+              "required": true
+            },
+            {
+              "path": "/xpl/ext-community-soo-lists/ext-community-soo-list/name",
+              "type": "string",
+              "label": "name",
+              "pattern": "\\s*([0-9a-zA-Z][0-9a-zA-Z\\-_\\.]{0,200})\\s*",
+              "isKey": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/xpl/global",
+      "type": "group",
+      "label": "global",
+      "fields": [
+        {
+          "path": "/xpl/global/content",
+          "type": "string",
+          "label": "content"
+        }
+      ]
+    },
+    {
+      "path": "/xpl/interface-lists",
+      "type": "group",
+      "label": "interface-lists",
+      "fields": [
+        {
+          "path": "/xpl/interface-lists/interface-list",
+          "type": "list",
+          "label": "interface-list",
+          "fields": [
+            {
+              "path": "/xpl/interface-lists/interface-list/interface-sets",
+              "type": "group",
+              "label": "interface-sets",
+              "fields": [
+                {
+                  "path": "/xpl/interface-lists/interface-list/interface-sets/interface-set",
+                  "type": "list",
+                  "label": "interface-set",
+                  "fields": [
+                    {
+                      "path": "/xpl/interface-lists/interface-list/interface-sets/interface-set/interface-name",
+                      "type": "string",
+                      "label": "interface-name",
+                      "isKey": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/xpl/interface-lists/interface-list/name",
+              "type": "string",
+              "label": "name",
+              "pattern": "\\s*([0-9a-zA-Z][0-9a-zA-Z\\-_\\.]{0,200})\\s*",
+              "isKey": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/xpl/ipv4-prefix-lists",
+      "type": "group",
+      "label": "ipv4-prefix-lists",
+      "fields": [
+        {
+          "path": "/xpl/ipv4-prefix-lists/ipv4-prefix-list",
+          "type": "list",
+          "label": "ipv4-prefix-list",
+          "fields": [
+            {
+              "path": "/xpl/ipv4-prefix-lists/ipv4-prefix-list/content",
+              "type": "string",
+              "label": "content",
+              "required": true
+            },
+            {
+              "path": "/xpl/ipv4-prefix-lists/ipv4-prefix-list/name",
+              "type": "string",
+              "label": "name",
+              "pattern": "\\s*([0-9a-zA-Z][0-9a-zA-Z\\-_\\.]{0,200})\\s*",
+              "isKey": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/xpl/ipv6-prefix-lists",
+      "type": "group",
+      "label": "ipv6-prefix-lists",
+      "fields": [
+        {
+          "path": "/xpl/ipv6-prefix-lists/ipv6-prefix-list",
+          "type": "list",
+          "label": "ipv6-prefix-list",
+          "fields": [
+            {
+              "path": "/xpl/ipv6-prefix-lists/ipv6-prefix-list/content",
+              "type": "string",
+              "label": "content",
+              "required": true
+            },
+            {
+              "path": "/xpl/ipv6-prefix-lists/ipv6-prefix-list/name",
+              "type": "string",
+              "label": "name",
+              "pattern": "\\s*([0-9a-zA-Z][0-9a-zA-Z\\-_\\.]{0,200})\\s*",
+              "isKey": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/xpl/large-community-lists",
+      "type": "group",
+      "label": "large-community-lists",
+      "fields": [
+        {
+          "path": "/xpl/large-community-lists/large-community-list",
+          "type": "list",
+          "label": "large-community-list",
+          "fields": [
+            {
+              "path": "/xpl/large-community-lists/large-community-list/content",
+              "type": "string",
+              "label": "content",
+              "required": true
+            },
+            {
+              "path": "/xpl/large-community-lists/large-community-list/name",
+              "type": "string",
+              "label": "name",
+              "pattern": "\\s*([0-9a-zA-Z][0-9a-zA-Z\\-_\\.]{0,200})\\s*",
+              "isKey": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/xpl/rd-lists",
+      "type": "group",
+      "label": "rd-lists",
+      "fields": [
+        {
+          "path": "/xpl/rd-lists/rd-list",
+          "type": "list",
+          "label": "rd-list",
+          "fields": [
+            {
+              "path": "/xpl/rd-lists/rd-list/content",
+              "type": "string",
+              "label": "content",
+              "required": true
+            },
+            {
+              "path": "/xpl/rd-lists/rd-list/name",
+              "type": "string",
+              "label": "name",
+              "pattern": "\\s*([0-9a-zA-Z][0-9a-zA-Z\\-_\\.]{0,200})\\s*",
+              "isKey": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/xpl/route-filters",
+      "type": "group",
+      "label": "route-filters",
+      "fields": [
+        {
+          "path": "/xpl/route-filters/route-filter",
+          "type": "list",
+          "label": "route-filter",
+          "fields": [
+            {
+              "path": "/xpl/route-filters/route-filter/content",
+              "type": "string",
+              "label": "content",
+              "required": true
+            },
+            {
+              "path": "/xpl/route-filters/route-filter/name",
+              "type": "string",
+              "label": "name",
+              "pattern": "\\s*(([0-9a-zA-Z][0-9a-zA-Z\\-_\\.]{0,200})|([0-9a-zA-Z][0-9a-zA-Z\\-_\\.]{0,200}[\\(](($)?[0-9a-zA-Z][0-9a-zA-Z\\-_\\.]{0,200})(([,]($)?[0-9a-zA-Z][0-9a-zA-Z\\-_\\.]{0,200}){0,7})[\\)]))\\s*",
+              "isKey": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/xpl/route-flow-group-lists",
+      "type": "group",
+      "label": "route-flow-group-lists",
+      "fields": [
+        {
+          "path": "/xpl/route-flow-group-lists/route-flow-group-list",
+          "type": "list",
+          "label": "route-flow-group-list",
+          "fields": [
+            {
+              "path": "/xpl/route-flow-group-lists/route-flow-group-list/content",
+              "type": "string",
+              "label": "content",
+              "required": true
+            },
+            {
+              "path": "/xpl/route-flow-group-lists/route-flow-group-list/name",
+              "type": "string",
+              "label": "name",
+              "pattern": "\\s*([0-9a-zA-Z][0-9a-zA-Z\\-_\\.]{0,200})\\s*",
+              "isKey": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

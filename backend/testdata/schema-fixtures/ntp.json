@@ -1,0 +1,139 @@
+{
+  "module": "ntp",
+  "title": "ntp",
+  "vendor": "huawei",
+  "fields": [
+    {
+      "path": "/ntp/disables",
+      "type": "group",
+      "label": "disables",
+      "fields": [
+        {
+          "path": "/ntp/disables/disable",
+          "type": "list",
+          "label": "disable",
+          "fields": [
+            {
+              "path": "/ntp/disables/disable/addr-family",
+              "type": "enum",
+              "label": "addr-family",
+              "options": [
+                {
+                  "label": "IPv4",
+                  "value": "IPv4"
+                },
+                {
+                  "label": "IPv6",
+                  "value": "IPv6"
+                }
+              ],
+              "isKey": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/ntp/unicasts",
+      "type": "group",
+      "label": "unicasts",
+      "fields": [
+        {
+          "path": "/ntp/unicasts/unicast",
+          "type": "list",
+          "label": "unicast",
+          "fields": [
+            {
+              "path": "/ntp/unicasts/unicast/ifname",
+              "type": "string",
+              "label": "ifname",
+              "must": [
+                {
+                  "expr": "/ifm:ifm/ifm:interfaces/ifm:interface[ifm:name=current()]/ifm:vrf-name = ../vpn-name"
+                }
+              ]
+            },
+            {
+              "path": "/ntp/unicasts/unicast/ip-address",
+              "type": "string",
+              "label": "ip-address",
+              "isKey": true
+            },
+            {
+              "path": "/ntp/unicasts/unicast/is-burst",
+              "type": "boolean",
+              "label": "is-burst",
+              "when": "../type!='Peer'"
+            },
+            {
+              "path": "/ntp/unicasts/unicast/is-iburst",
+              "type": "boolean",
+              "label": "is-iburst",
+              "when": "../type!='Peer'"
+            },
+            {
+              "path": "/ntp/unicasts/unicast/is-preempt",
+              "type": "boolean",
+              "label": "is-preempt"
+            },
+            {
+              "path": "/ntp/unicasts/unicast/is-preferred",
+              "type": "boolean",
+              "label": "is-preferred"
+            },
+            {
+              "path": "/ntp/unicasts/unicast/max-poll-interval",
+              "type": "number",
+              "label": "max-poll-interval",
+              "minimum": 10,
+              "maximum": 17
+            },
+            {
+              "path": "/ntp/unicasts/unicast/min-poll-interval",
+              "type": "number",
+              "label": "min-poll-interval",
+              "minimum": 3,
+              "maximum": 6
+            },
+            {
+              "path": "/ntp/unicasts/unicast/port-number",
+              "type": "number",
+              "label": "port-number",
+              "minimum": 123,
+              "maximum": 65535
+            },
+            {
+              "path": "/ntp/unicasts/unicast/type",
+              "type": "enum",
+              "label": "type",
+              "options": [
+                {
+                  "label": "Peer",
+                  "value": "Peer"
+                },
+                {
+                  "label": "Server",
+                  "value": "Server"
+                }
+              ],
+              "isKey": true
+            },
+            {
+              "path": "/ntp/unicasts/unicast/version",
+              "type": "number",
+              "label": "version",
+              "minimum": 1,
+              "maximum": 4
+            },
+            {
+              "path": "/ntp/unicasts/unicast/vpn-name",
+              "type": "string",
+              "label": "vpn-name",
+              "isKey": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

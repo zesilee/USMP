@@ -1,0 +1,78 @@
+{
+  "module": "anyflow",
+  "title": "anyflow",
+  "vendor": "huawei",
+  "fields": [
+    {
+      "path": "/anyflow/global",
+      "type": "group",
+      "label": "global",
+      "fields": [
+        {
+          "path": "/anyflow/global/aggregation-aging-time",
+          "type": "number",
+          "label": "aggregation-aging-time",
+          "minimum": 5,
+          "maximum": 500
+        },
+        {
+          "path": "/anyflow/global/aggregation-export-interval",
+          "type": "number",
+          "label": "aggregation-export-interval",
+          "minimum": 10,
+          "maximum": 1800
+        },
+        {
+          "path": "/anyflow/global/aggregation-service-port",
+          "type": "leaf-list",
+          "label": "aggregation-service-port",
+          "pattern": "\\d+(\\.\\.\\d+)?"
+        },
+        {
+          "path": "/anyflow/global/aging-time",
+          "type": "number",
+          "label": "aging-time",
+          "minimum": 5,
+          "maximum": 500
+        },
+        {
+          "path": "/anyflow/global/collect-id",
+          "type": "string",
+          "label": "collect-id"
+        },
+        {
+          "path": "/anyflow/global/enable",
+          "type": "boolean",
+          "label": "enable"
+        },
+        {
+          "path": "/anyflow/global/export-interval",
+          "type": "number",
+          "label": "export-interval",
+          "minimum": 10,
+          "maximum": 1800
+        },
+        {
+          "path": "/anyflow/global/flow-aggregation",
+          "type": "boolean",
+          "label": "flow-aggregation"
+        },
+        {
+          "path": "/anyflow/global/hardware-aging-time",
+          "type": "number",
+          "label": "hardware-aging-time",
+          "minimum": 2,
+          "maximum": 300000
+        },
+        {
+          "path": "/anyflow/global/hardware-export-interval",
+          "type": "number",
+          "label": "hardware-export-interval",
+          "minimum": 5,
+          "maximum": 100
+        }
+      ],
+      "presence": true
+    }
+  ]
+}

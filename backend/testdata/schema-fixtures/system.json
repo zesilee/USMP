@@ -1,0 +1,144 @@
+{
+  "module": "system",
+  "title": "system",
+  "vendor": "huawei",
+  "fields": [
+    {
+      "path": "/system/security-configurations",
+      "type": "group",
+      "label": "security-configurations",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/system/security-configurations/security-configuration",
+          "type": "list",
+          "label": "security-configuration",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/system/security-configurations/security-configuration/feature-name",
+              "type": "string",
+              "label": "feature-name",
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/system/security-configurations/security-configuration/item-content",
+              "type": "string",
+              "label": "item-content",
+              "readonly": true
+            },
+            {
+              "path": "/system/security-configurations/security-configuration/security-item",
+              "type": "string",
+              "label": "security-item",
+              "readonly": true,
+              "isKey": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/system/system-info",
+      "type": "group",
+      "label": "system-info",
+      "fields": [
+        {
+          "path": "/system/system-info/esn",
+          "type": "string",
+          "label": "esn",
+          "readonly": true
+        },
+        {
+          "path": "/system/system-info/mac",
+          "type": "string",
+          "label": "mac",
+          "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+          "readonly": true
+        },
+        {
+          "path": "/system/system-info/patch-version",
+          "type": "string",
+          "label": "patch-version",
+          "readonly": true
+        },
+        {
+          "path": "/system/system-info/platform-name",
+          "type": "string",
+          "label": "platform-name",
+          "readonly": true
+        },
+        {
+          "path": "/system/system-info/platform-version",
+          "type": "string",
+          "label": "platform-version",
+          "readonly": true
+        },
+        {
+          "path": "/system/system-info/product-name",
+          "type": "string",
+          "label": "product-name",
+          "readonly": true
+        },
+        {
+          "path": "/system/system-info/product-version",
+          "type": "string",
+          "label": "product-version",
+          "readonly": true
+        },
+        {
+          "path": "/system/system-info/software-name",
+          "type": "string",
+          "label": "software-name",
+          "readonly": true
+        },
+        {
+          "path": "/system/system-info/sys-contact",
+          "type": "string",
+          "label": "sys-contact"
+        },
+        {
+          "path": "/system/system-info/sys-desc",
+          "type": "string",
+          "label": "sys-desc",
+          "readonly": true
+        },
+        {
+          "path": "/system/system-info/sys-location",
+          "type": "string",
+          "label": "sys-location"
+        },
+        {
+          "path": "/system/system-info/sys-name",
+          "type": "string",
+          "label": "sys-name"
+        },
+        {
+          "path": "/system/system-info/sys-object-id",
+          "type": "string",
+          "label": "sys-object-id",
+          "readonly": true
+        },
+        {
+          "path": "/system/system-info/sys-service",
+          "type": "string",
+          "label": "sys-service",
+          "readonly": true
+        },
+        {
+          "path": "/system/system-info/sys-uptime",
+          "type": "number",
+          "label": "sys-uptime",
+          "readonly": true
+        },
+        {
+          "path": "/system/system-info/system-gmt-time",
+          "type": "number",
+          "label": "system-gmt-time",
+          "readonly": true
+        }
+      ]
+    }
+  ]
+}

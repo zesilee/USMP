@@ -1,0 +1,293 @@
+{
+  "module": "sflow",
+  "title": "sflow",
+  "vendor": "huawei",
+  "fields": [
+    {
+      "path": "/sflow/interface-statistics",
+      "type": "group",
+      "label": "interface-statistics",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/sflow/interface-statistics/interface-statistic",
+          "type": "list",
+          "label": "interface-statistic",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/sflow/interface-statistics/interface-statistic/direction",
+              "type": "enum",
+              "label": "direction",
+              "options": [
+                {
+                  "label": "inbound",
+                  "value": "inbound"
+                },
+                {
+                  "label": "outbound",
+                  "value": "outbound"
+                }
+              ],
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/sflow/interface-statistics/interface-statistic/flow-sample-count",
+              "type": "number",
+              "label": "flow-sample-count",
+              "readonly": true
+            },
+            {
+              "path": "/sflow/interface-statistics/interface-statistic/interface-name",
+              "type": "string",
+              "label": "interface-name",
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/sflow/interface-statistics/interface-statistic/slot-id",
+              "type": "string",
+              "label": "slot-id",
+              "readonly": true,
+              "isKey": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/sflow/sflow-enable",
+      "type": "group",
+      "label": "sflow-enable",
+      "fields": [
+        {
+          "path": "/sflow/sflow-enable/collectors",
+          "type": "group",
+          "label": "collectors",
+          "fields": [
+            {
+              "path": "/sflow/sflow-enable/collectors/collector",
+              "type": "list",
+              "label": "collector",
+              "fields": [
+                {
+                  "path": "/sflow/sflow-enable/collectors/collector/collector-id",
+                  "type": "number",
+                  "label": "collector-id",
+                  "minimum": 1,
+                  "maximum": 2,
+                  "isKey": true
+                },
+                {
+                  "path": "/sflow/sflow-enable/collectors/collector/description",
+                  "type": "string",
+                  "label": "description",
+                  "pattern": "[a-zA-Z0-9._]{1,255}"
+                },
+                {
+                  "path": "/sflow/sflow-enable/collectors/collector/ip-server",
+                  "type": "group",
+                  "label": "ip-server",
+                  "fields": [
+                    {
+                      "path": "/sflow/sflow-enable/collectors/collector/ip-server/dscp-value",
+                      "type": "number",
+                      "label": "dscp-value",
+                      "maximum": 63
+                    },
+                    {
+                      "path": "/sflow/sflow-enable/collectors/collector/ip-server/ip-type",
+                      "type": "choice",
+                      "label": "ip-type",
+                      "cases": [
+                        {
+                          "name": "ipv4-address",
+                          "label": "ipv4-address",
+                          "fields": [
+                            {
+                              "path": "/sflow/sflow-enable/collectors/collector/ip-server/ipv4-address",
+                              "type": "string",
+                              "label": "ipv4-address",
+                              "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?",
+                              "must": [
+                                {
+                                  "expr": "../ipv4-address!='0.0.0.0'"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "name": "ipv6-address",
+                          "label": "ipv6-address",
+                          "fields": [
+                            {
+                              "path": "/sflow/sflow-enable/collectors/collector/ip-server/ipv6-address",
+                              "type": "string",
+                              "label": "ipv6-address",
+                              "pattern": "((:|[0-9a-fA-F]{0,4}):)([0-9a-fA-F]{0,4}:){0,5}((([0-9a-fA-F]{0,4}:)?(:|[0-9a-fA-F]{0,4}))|(((25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])))(%[\\p{N}\\p{L}]+)?",
+                              "must": [
+                                {
+                                  "expr": "../ipv6-address!='::'"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/sflow/sflow-enable/collectors/collector/ip-server/udp-port",
+                      "type": "number",
+                      "label": "udp-port",
+                      "minimum": 1,
+                      "maximum": 65535
+                    },
+                    {
+                      "path": "/sflow/sflow-enable/collectors/collector/ip-server/vpn-name",
+                      "type": "string",
+                      "label": "vpn-name",
+                      "must": [
+                        {
+                          "expr": "(../ipv4-address and /ni:network-instance/ni:instances/ni:instance[ni:name=current()]/l3vpn:afs/l3vpn:af[l3vpn:type='ipv4-unicast']) or (../ipv6-address and /ni:network-instance/ni:instances/ni:instance[ni:name=current()]/l3vpn:afs/l3vpn:af[l3vpn:type='ipv6-unicast'])"
+                        }
+                      ]
+                    }
+                  ],
+                  "presence": true
+                },
+                {
+                  "path": "/sflow/sflow-enable/collectors/collector/max-packet-length",
+                  "type": "number",
+                  "label": "max-packet-length",
+                  "minimum": 1024,
+                  "maximum": 8100
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "path": "/sflow/sflow-enable/global",
+          "type": "group",
+          "label": "global",
+          "fields": [
+            {
+              "path": "/sflow/sflow-enable/global/agent-ipv4-address",
+              "type": "string",
+              "label": "agent-ipv4-address",
+              "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?",
+              "must": [
+                {
+                  "expr": "../agent-ipv4-address!='0.0.0.0'"
+                }
+              ]
+            },
+            {
+              "path": "/sflow/sflow-enable/global/agent-ipv6-address",
+              "type": "string",
+              "label": "agent-ipv6-address",
+              "pattern": "((:|[0-9a-fA-F]{0,4}):)([0-9a-fA-F]{0,4}:){0,5}((([0-9a-fA-F]{0,4}:)?(:|[0-9a-fA-F]{0,4}))|(((25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])))(%[\\p{N}\\p{L}]+)?",
+              "must": [
+                {
+                  "expr": "../agent-ipv6-address!='::'"
+                }
+              ]
+            },
+            {
+              "path": "/sflow/sflow-enable/global/extended-route-data",
+              "type": "enum",
+              "label": "extended-route-data",
+              "options": [
+                {
+                  "label": "disable",
+                  "value": "disable"
+                },
+                {
+                  "label": "enable",
+                  "value": "enable"
+                }
+              ]
+            },
+            {
+              "path": "/sflow/sflow-enable/global/source-ipv4-address",
+              "type": "string",
+              "label": "source-ipv4-address",
+              "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?"
+            },
+            {
+              "path": "/sflow/sflow-enable/global/source-ipv6-address",
+              "type": "string",
+              "label": "source-ipv6-address",
+              "pattern": "((:|[0-9a-fA-F]{0,4}):)([0-9a-fA-F]{0,4}:){0,5}((([0-9a-fA-F]{0,4}:)?(:|[0-9a-fA-F]{0,4}))|(((25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])))(%[\\p{N}\\p{L}]+)?"
+            }
+          ]
+        }
+      ],
+      "presence": true
+    },
+    {
+      "path": "/sflow/slot-statistics",
+      "type": "group",
+      "label": "slot-statistics",
+      "readonly": true,
+      "fields": [
+        {
+          "path": "/sflow/slot-statistics/slot-statistic",
+          "type": "list",
+          "label": "slot-statistic",
+          "readonly": true,
+          "fields": [
+            {
+              "path": "/sflow/slot-statistics/slot-statistic/collector-id",
+              "type": "number",
+              "label": "collector-id",
+              "minimum": 1,
+              "maximum": 2,
+              "readonly": true,
+              "isKey": true
+            },
+            {
+              "path": "/sflow/slot-statistics/slot-statistic/counter-sample-count",
+              "type": "number",
+              "label": "counter-sample-count",
+              "readonly": true
+            },
+            {
+              "path": "/sflow/slot-statistics/slot-statistic/flow-sample-count",
+              "type": "number",
+              "label": "flow-sample-count",
+              "readonly": true
+            },
+            {
+              "path": "/sflow/slot-statistics/slot-statistic/inbound-flow-sample-count",
+              "type": "number",
+              "label": "inbound-flow-sample-count",
+              "readonly": true
+            },
+            {
+              "path": "/sflow/slot-statistics/slot-statistic/outbound-flow-sample-count",
+              "type": "number",
+              "label": "outbound-flow-sample-count",
+              "readonly": true
+            },
+            {
+              "path": "/sflow/slot-statistics/slot-statistic/packet-count",
+              "type": "number",
+              "label": "packet-count",
+              "readonly": true
+            },
+            {
+              "path": "/sflow/slot-statistics/slot-statistic/slot-id",
+              "type": "string",
+              "label": "slot-id",
+              "readonly": true,
+              "isKey": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

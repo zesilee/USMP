@@ -1,0 +1,3530 @@
+{
+  "module": "routing-policy",
+  "title": "routing-policy",
+  "vendor": "huawei",
+  "fields": [
+    {
+      "path": "/routing-policy/as-path-filters",
+      "type": "group",
+      "label": "as-path-filters",
+      "fields": [
+        {
+          "path": "/routing-policy/as-path-filters/as-path-filter",
+          "type": "list",
+          "label": "as-path-filter",
+          "fields": [
+            {
+              "path": "/routing-policy/as-path-filters/as-path-filter/name",
+              "type": "string",
+              "label": "name",
+              "isKey": true
+            },
+            {
+              "path": "/routing-policy/as-path-filters/as-path-filter/nodes",
+              "type": "group",
+              "label": "nodes",
+              "fields": [
+                {
+                  "path": "/routing-policy/as-path-filters/as-path-filter/nodes/node",
+                  "type": "list",
+                  "label": "node",
+                  "fields": [
+                    {
+                      "path": "/routing-policy/as-path-filters/as-path-filter/nodes/node/match-mode",
+                      "type": "enum",
+                      "label": "match-mode",
+                      "required": true,
+                      "options": [
+                        {
+                          "label": "deny",
+                          "value": "deny"
+                        },
+                        {
+                          "label": "permit",
+                          "value": "permit"
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/routing-policy/as-path-filters/as-path-filter/nodes/node/regular",
+                      "type": "string",
+                      "label": "regular",
+                      "required": true
+                    },
+                    {
+                      "path": "/routing-policy/as-path-filters/as-path-filter/nodes/node/sequence",
+                      "type": "number",
+                      "label": "sequence",
+                      "minimum": 1,
+                      "maximum": 4294967295,
+                      "isKey": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/routing-policy/community-filters",
+      "type": "group",
+      "label": "community-filters",
+      "fields": [
+        {
+          "path": "/routing-policy/community-filters/community-filter",
+          "type": "list",
+          "label": "community-filter",
+          "fields": [
+            {
+              "path": "/routing-policy/community-filters/community-filter/advanced-nodes",
+              "type": "group",
+              "label": "advanced-nodes",
+              "when": "../filter-type='advanced'",
+              "fields": [
+                {
+                  "path": "/routing-policy/community-filters/community-filter/advanced-nodes/advanced-node",
+                  "type": "list",
+                  "label": "advanced-node",
+                  "fields": [
+                    {
+                      "path": "/routing-policy/community-filters/community-filter/advanced-nodes/advanced-node/match-mode",
+                      "type": "enum",
+                      "label": "match-mode",
+                      "required": true,
+                      "options": [
+                        {
+                          "label": "deny",
+                          "value": "deny"
+                        },
+                        {
+                          "label": "permit",
+                          "value": "permit"
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/routing-policy/community-filters/community-filter/advanced-nodes/advanced-node/regular",
+                      "type": "string",
+                      "label": "regular",
+                      "required": true
+                    },
+                    {
+                      "path": "/routing-policy/community-filters/community-filter/advanced-nodes/advanced-node/sequence",
+                      "type": "number",
+                      "label": "sequence",
+                      "minimum": 1,
+                      "maximum": 4294967295,
+                      "isKey": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/routing-policy/community-filters/community-filter/basic-nodes",
+              "type": "group",
+              "label": "basic-nodes",
+              "when": "../filter-type='basic'",
+              "fields": [
+                {
+                  "path": "/routing-policy/community-filters/community-filter/basic-nodes/basic-node",
+                  "type": "list",
+                  "label": "basic-node",
+                  "fields": [
+                    {
+                      "path": "/routing-policy/community-filters/community-filter/basic-nodes/basic-node/community-members",
+                      "type": "group",
+                      "label": "community-members",
+                      "fields": [
+                        {
+                          "path": "/routing-policy/community-filters/community-filter/basic-nodes/basic-node/community-members/community-member",
+                          "type": "list",
+                          "label": "community-member",
+                          "fields": [
+                            {
+                              "path": "/routing-policy/community-filters/community-filter/basic-nodes/basic-node/community-members/community-member/internet-strict-match",
+                              "type": "boolean",
+                              "label": "internet-strict-match",
+                              "when": "../value='internet'"
+                            },
+                            {
+                              "path": "/routing-policy/community-filters/community-filter/basic-nodes/basic-node/community-members/community-member/value",
+                              "type": "string",
+                              "label": "value",
+                              "isKey": true
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/routing-policy/community-filters/community-filter/basic-nodes/basic-node/match-mode",
+                      "type": "enum",
+                      "label": "match-mode",
+                      "required": true,
+                      "options": [
+                        {
+                          "label": "deny",
+                          "value": "deny"
+                        },
+                        {
+                          "label": "permit",
+                          "value": "permit"
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/routing-policy/community-filters/community-filter/basic-nodes/basic-node/sequence",
+                      "type": "number",
+                      "label": "sequence",
+                      "minimum": 1,
+                      "maximum": 4294967295,
+                      "isKey": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/routing-policy/community-filters/community-filter/filter-type",
+              "type": "enum",
+              "label": "filter-type",
+              "required": true,
+              "options": [
+                {
+                  "label": "advanced",
+                  "value": "advanced"
+                },
+                {
+                  "label": "basic",
+                  "value": "basic"
+                }
+              ],
+              "operationExclude": [
+                "update"
+              ]
+            },
+            {
+              "path": "/routing-policy/community-filters/community-filter/name",
+              "type": "string",
+              "label": "name",
+              "isKey": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/routing-policy/community-lists",
+      "type": "group",
+      "label": "community-lists",
+      "fields": [
+        {
+          "path": "/routing-policy/community-lists/community-list",
+          "type": "list",
+          "label": "community-list",
+          "fields": [
+            {
+              "path": "/routing-policy/community-lists/community-list/community-member",
+              "type": "leaf-list",
+              "label": "community-member"
+            },
+            {
+              "path": "/routing-policy/community-lists/community-list/name",
+              "type": "string",
+              "label": "name",
+              "isKey": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/routing-policy/eth-tag-filters",
+      "type": "group",
+      "label": "eth-tag-filters",
+      "fields": [
+        {
+          "path": "/routing-policy/eth-tag-filters/eth-tag-filter",
+          "type": "list",
+          "label": "eth-tag-filter",
+          "fields": [
+            {
+              "path": "/routing-policy/eth-tag-filters/eth-tag-filter/eth-tag-members",
+              "type": "group",
+              "label": "eth-tag-members",
+              "fields": [
+                {
+                  "path": "/routing-policy/eth-tag-filters/eth-tag-filter/eth-tag-members/eth-tag-member",
+                  "type": "list",
+                  "label": "eth-tag-member",
+                  "fields": [
+                    {
+                      "path": "/routing-policy/eth-tag-filters/eth-tag-filter/eth-tag-members/eth-tag-member/value",
+                      "type": "number",
+                      "label": "value",
+                      "isKey": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/routing-policy/eth-tag-filters/eth-tag-filter/name",
+              "type": "string",
+              "label": "name",
+              "isKey": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/routing-policy/ext-community-encapsulation-filters",
+      "type": "group",
+      "label": "ext-community-encapsulation-filters",
+      "fields": [
+        {
+          "path": "/routing-policy/ext-community-encapsulation-filters/ext-community-encapsulation-filter",
+          "type": "list",
+          "label": "ext-community-encapsulation-filter",
+          "fields": [
+            {
+              "path": "/routing-policy/ext-community-encapsulation-filters/ext-community-encapsulation-filter/advanced-nodes",
+              "type": "group",
+              "label": "advanced-nodes",
+              "when": "../filter-type='advanced'",
+              "fields": [
+                {
+                  "path": "/routing-policy/ext-community-encapsulation-filters/ext-community-encapsulation-filter/advanced-nodes/advanced-node",
+                  "type": "list",
+                  "label": "advanced-node",
+                  "fields": [
+                    {
+                      "path": "/routing-policy/ext-community-encapsulation-filters/ext-community-encapsulation-filter/advanced-nodes/advanced-node/match-mode",
+                      "type": "enum",
+                      "label": "match-mode",
+                      "required": true,
+                      "options": [
+                        {
+                          "label": "deny",
+                          "value": "deny"
+                        },
+                        {
+                          "label": "permit",
+                          "value": "permit"
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/routing-policy/ext-community-encapsulation-filters/ext-community-encapsulation-filter/advanced-nodes/advanced-node/regular",
+                      "type": "string",
+                      "label": "regular",
+                      "required": true
+                    },
+                    {
+                      "path": "/routing-policy/ext-community-encapsulation-filters/ext-community-encapsulation-filter/advanced-nodes/advanced-node/sequence",
+                      "type": "number",
+                      "label": "sequence",
+                      "minimum": 1,
+                      "maximum": 4294967295,
+                      "isKey": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/routing-policy/ext-community-encapsulation-filters/ext-community-encapsulation-filter/basic-nodes",
+              "type": "group",
+              "label": "basic-nodes",
+              "when": "../filter-type='basic'",
+              "fields": [
+                {
+                  "path": "/routing-policy/ext-community-encapsulation-filters/ext-community-encapsulation-filter/basic-nodes/basic-node",
+                  "type": "list",
+                  "label": "basic-node",
+                  "fields": [
+                    {
+                      "path": "/routing-policy/ext-community-encapsulation-filters/ext-community-encapsulation-filter/basic-nodes/basic-node/ext-community-encapsulation-members",
+                      "type": "group",
+                      "label": "ext-community-encapsulation-members",
+                      "fields": [
+                        {
+                          "path": "/routing-policy/ext-community-encapsulation-filters/ext-community-encapsulation-filter/basic-nodes/basic-node/ext-community-encapsulation-members/ext-community-encapsulation-member",
+                          "type": "list",
+                          "label": "ext-community-encapsulation-member",
+                          "fields": [
+                            {
+                              "path": "/routing-policy/ext-community-encapsulation-filters/ext-community-encapsulation-filter/basic-nodes/basic-node/ext-community-encapsulation-members/ext-community-encapsulation-member/value",
+                              "type": "string",
+                              "label": "value",
+                              "isKey": true
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/routing-policy/ext-community-encapsulation-filters/ext-community-encapsulation-filter/basic-nodes/basic-node/match-mode",
+                      "type": "enum",
+                      "label": "match-mode",
+                      "required": true,
+                      "options": [
+                        {
+                          "label": "deny",
+                          "value": "deny"
+                        },
+                        {
+                          "label": "permit",
+                          "value": "permit"
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/routing-policy/ext-community-encapsulation-filters/ext-community-encapsulation-filter/basic-nodes/basic-node/sequence",
+                      "type": "number",
+                      "label": "sequence",
+                      "minimum": 1,
+                      "maximum": 4294967295,
+                      "isKey": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/routing-policy/ext-community-encapsulation-filters/ext-community-encapsulation-filter/filter-type",
+              "type": "enum",
+              "label": "filter-type",
+              "required": true,
+              "options": [
+                {
+                  "label": "advanced",
+                  "value": "advanced"
+                },
+                {
+                  "label": "basic",
+                  "value": "basic"
+                }
+              ]
+            },
+            {
+              "path": "/routing-policy/ext-community-encapsulation-filters/ext-community-encapsulation-filter/name",
+              "type": "string",
+              "label": "name",
+              "isKey": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/routing-policy/ext-community-filters",
+      "type": "group",
+      "label": "ext-community-filters",
+      "fields": [
+        {
+          "path": "/routing-policy/ext-community-filters/ext-community-filter",
+          "type": "list",
+          "label": "ext-community-filter",
+          "fields": [
+            {
+              "path": "/routing-policy/ext-community-filters/ext-community-filter/advanced-nodes",
+              "type": "group",
+              "label": "advanced-nodes",
+              "when": "../filter-type='advanced'",
+              "fields": [
+                {
+                  "path": "/routing-policy/ext-community-filters/ext-community-filter/advanced-nodes/advanced-node",
+                  "type": "list",
+                  "label": "advanced-node",
+                  "fields": [
+                    {
+                      "path": "/routing-policy/ext-community-filters/ext-community-filter/advanced-nodes/advanced-node/match-mode",
+                      "type": "enum",
+                      "label": "match-mode",
+                      "required": true,
+                      "options": [
+                        {
+                          "label": "deny",
+                          "value": "deny"
+                        },
+                        {
+                          "label": "permit",
+                          "value": "permit"
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/routing-policy/ext-community-filters/ext-community-filter/advanced-nodes/advanced-node/regular",
+                      "type": "string",
+                      "label": "regular",
+                      "required": true
+                    },
+                    {
+                      "path": "/routing-policy/ext-community-filters/ext-community-filter/advanced-nodes/advanced-node/sequence",
+                      "type": "number",
+                      "label": "sequence",
+                      "minimum": 1,
+                      "maximum": 4294967295,
+                      "isKey": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/routing-policy/ext-community-filters/ext-community-filter/basic-nodes",
+              "type": "group",
+              "label": "basic-nodes",
+              "when": "../filter-type='basic'",
+              "fields": [
+                {
+                  "path": "/routing-policy/ext-community-filters/ext-community-filter/basic-nodes/basic-node",
+                  "type": "list",
+                  "label": "basic-node",
+                  "fields": [
+                    {
+                      "path": "/routing-policy/ext-community-filters/ext-community-filter/basic-nodes/basic-node/ext-community-members",
+                      "type": "group",
+                      "label": "ext-community-members",
+                      "fields": [
+                        {
+                          "path": "/routing-policy/ext-community-filters/ext-community-filter/basic-nodes/basic-node/ext-community-members/ext-community-member",
+                          "type": "list",
+                          "label": "ext-community-member",
+                          "fields": [
+                            {
+                              "path": "/routing-policy/ext-community-filters/ext-community-filter/basic-nodes/basic-node/ext-community-members/ext-community-member/value",
+                              "type": "string",
+                              "label": "value",
+                              "isKey": true
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/routing-policy/ext-community-filters/ext-community-filter/basic-nodes/basic-node/match-mode",
+                      "type": "enum",
+                      "label": "match-mode",
+                      "required": true,
+                      "options": [
+                        {
+                          "label": "deny",
+                          "value": "deny"
+                        },
+                        {
+                          "label": "permit",
+                          "value": "permit"
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/routing-policy/ext-community-filters/ext-community-filter/basic-nodes/basic-node/sequence",
+                      "type": "number",
+                      "label": "sequence",
+                      "minimum": 1,
+                      "maximum": 4294967295,
+                      "isKey": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/routing-policy/ext-community-filters/ext-community-filter/filter-type",
+              "type": "enum",
+              "label": "filter-type",
+              "required": true,
+              "options": [
+                {
+                  "label": "advanced",
+                  "value": "advanced"
+                },
+                {
+                  "label": "basic",
+                  "value": "basic"
+                }
+              ],
+              "operationExclude": [
+                "update"
+              ]
+            },
+            {
+              "path": "/routing-policy/ext-community-filters/ext-community-filter/name",
+              "type": "string",
+              "label": "name",
+              "isKey": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/routing-policy/ext-community-segmented-nexthop-filters",
+      "type": "group",
+      "label": "ext-community-segmented-nexthop-filters",
+      "fields": [
+        {
+          "path": "/routing-policy/ext-community-segmented-nexthop-filters/ext-community-segmented-nexthop-filter",
+          "type": "list",
+          "label": "ext-community-segmented-nexthop-filter",
+          "fields": [
+            {
+              "path": "/routing-policy/ext-community-segmented-nexthop-filters/ext-community-segmented-nexthop-filter/advanced-nodes",
+              "type": "group",
+              "label": "advanced-nodes",
+              "when": "../filter-type='advanced'",
+              "fields": [
+                {
+                  "path": "/routing-policy/ext-community-segmented-nexthop-filters/ext-community-segmented-nexthop-filter/advanced-nodes/advanced-node",
+                  "type": "list",
+                  "label": "advanced-node",
+                  "fields": [
+                    {
+                      "path": "/routing-policy/ext-community-segmented-nexthop-filters/ext-community-segmented-nexthop-filter/advanced-nodes/advanced-node/match-mode",
+                      "type": "enum",
+                      "label": "match-mode",
+                      "required": true,
+                      "options": [
+                        {
+                          "label": "deny",
+                          "value": "deny"
+                        },
+                        {
+                          "label": "permit",
+                          "value": "permit"
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/routing-policy/ext-community-segmented-nexthop-filters/ext-community-segmented-nexthop-filter/advanced-nodes/advanced-node/regular",
+                      "type": "string",
+                      "label": "regular",
+                      "required": true
+                    },
+                    {
+                      "path": "/routing-policy/ext-community-segmented-nexthop-filters/ext-community-segmented-nexthop-filter/advanced-nodes/advanced-node/sequence",
+                      "type": "number",
+                      "label": "sequence",
+                      "minimum": 1,
+                      "maximum": 4294967295,
+                      "isKey": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/routing-policy/ext-community-segmented-nexthop-filters/ext-community-segmented-nexthop-filter/basic-nodes",
+              "type": "group",
+              "label": "basic-nodes",
+              "when": "../filter-type='basic'",
+              "fields": [
+                {
+                  "path": "/routing-policy/ext-community-segmented-nexthop-filters/ext-community-segmented-nexthop-filter/basic-nodes/basic-node",
+                  "type": "list",
+                  "label": "basic-node",
+                  "fields": [
+                    {
+                      "path": "/routing-policy/ext-community-segmented-nexthop-filters/ext-community-segmented-nexthop-filter/basic-nodes/basic-node/ext-community-segmented-nexthop-members",
+                      "type": "group",
+                      "label": "ext-community-segmented-nexthop-members",
+                      "fields": [
+                        {
+                          "path": "/routing-policy/ext-community-segmented-nexthop-filters/ext-community-segmented-nexthop-filter/basic-nodes/basic-node/ext-community-segmented-nexthop-members/ext-community-segmented-nexthop-member",
+                          "type": "list",
+                          "label": "ext-community-segmented-nexthop-member",
+                          "fields": [
+                            {
+                              "path": "/routing-policy/ext-community-segmented-nexthop-filters/ext-community-segmented-nexthop-filter/basic-nodes/basic-node/ext-community-segmented-nexthop-members/ext-community-segmented-nexthop-member/value",
+                              "type": "string",
+                              "label": "value",
+                              "isKey": true
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/routing-policy/ext-community-segmented-nexthop-filters/ext-community-segmented-nexthop-filter/basic-nodes/basic-node/match-mode",
+                      "type": "enum",
+                      "label": "match-mode",
+                      "required": true,
+                      "options": [
+                        {
+                          "label": "deny",
+                          "value": "deny"
+                        },
+                        {
+                          "label": "permit",
+                          "value": "permit"
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/routing-policy/ext-community-segmented-nexthop-filters/ext-community-segmented-nexthop-filter/basic-nodes/basic-node/sequence",
+                      "type": "number",
+                      "label": "sequence",
+                      "minimum": 1,
+                      "maximum": 4294967295,
+                      "isKey": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/routing-policy/ext-community-segmented-nexthop-filters/ext-community-segmented-nexthop-filter/filter-type",
+              "type": "enum",
+              "label": "filter-type",
+              "required": true,
+              "options": [
+                {
+                  "label": "advanced",
+                  "value": "advanced"
+                },
+                {
+                  "label": "basic",
+                  "value": "basic"
+                }
+              ],
+              "operationExclude": [
+                "update"
+              ]
+            },
+            {
+              "path": "/routing-policy/ext-community-segmented-nexthop-filters/ext-community-segmented-nexthop-filter/name",
+              "type": "string",
+              "label": "name",
+              "isKey": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/routing-policy/ext-community-soo-filters",
+      "type": "group",
+      "label": "ext-community-soo-filters",
+      "fields": [
+        {
+          "path": "/routing-policy/ext-community-soo-filters/ext-community-soo-filter",
+          "type": "list",
+          "label": "ext-community-soo-filter",
+          "fields": [
+            {
+              "path": "/routing-policy/ext-community-soo-filters/ext-community-soo-filter/advanced-nodes",
+              "type": "group",
+              "label": "advanced-nodes",
+              "when": "../filter-type='advanced'",
+              "fields": [
+                {
+                  "path": "/routing-policy/ext-community-soo-filters/ext-community-soo-filter/advanced-nodes/advanced-node",
+                  "type": "list",
+                  "label": "advanced-node",
+                  "fields": [
+                    {
+                      "path": "/routing-policy/ext-community-soo-filters/ext-community-soo-filter/advanced-nodes/advanced-node/match-mode",
+                      "type": "enum",
+                      "label": "match-mode",
+                      "required": true,
+                      "options": [
+                        {
+                          "label": "deny",
+                          "value": "deny"
+                        },
+                        {
+                          "label": "permit",
+                          "value": "permit"
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/routing-policy/ext-community-soo-filters/ext-community-soo-filter/advanced-nodes/advanced-node/regular",
+                      "type": "string",
+                      "label": "regular",
+                      "required": true
+                    },
+                    {
+                      "path": "/routing-policy/ext-community-soo-filters/ext-community-soo-filter/advanced-nodes/advanced-node/sequence",
+                      "type": "number",
+                      "label": "sequence",
+                      "minimum": 1,
+                      "maximum": 4294967295,
+                      "isKey": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/routing-policy/ext-community-soo-filters/ext-community-soo-filter/basic-nodes",
+              "type": "group",
+              "label": "basic-nodes",
+              "when": "../filter-type='basic'",
+              "fields": [
+                {
+                  "path": "/routing-policy/ext-community-soo-filters/ext-community-soo-filter/basic-nodes/basic-node",
+                  "type": "list",
+                  "label": "basic-node",
+                  "fields": [
+                    {
+                      "path": "/routing-policy/ext-community-soo-filters/ext-community-soo-filter/basic-nodes/basic-node/community-member",
+                      "type": "leaf-list",
+                      "label": "community-member"
+                    },
+                    {
+                      "path": "/routing-policy/ext-community-soo-filters/ext-community-soo-filter/basic-nodes/basic-node/match-mode",
+                      "type": "enum",
+                      "label": "match-mode",
+                      "required": true,
+                      "options": [
+                        {
+                          "label": "deny",
+                          "value": "deny"
+                        },
+                        {
+                          "label": "permit",
+                          "value": "permit"
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/routing-policy/ext-community-soo-filters/ext-community-soo-filter/basic-nodes/basic-node/sequence",
+                      "type": "number",
+                      "label": "sequence",
+                      "minimum": 1,
+                      "maximum": 4294967295,
+                      "isKey": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/routing-policy/ext-community-soo-filters/ext-community-soo-filter/filter-type",
+              "type": "enum",
+              "label": "filter-type",
+              "required": true,
+              "options": [
+                {
+                  "label": "advanced",
+                  "value": "advanced"
+                },
+                {
+                  "label": "basic",
+                  "value": "basic"
+                }
+              ],
+              "operationExclude": [
+                "update"
+              ]
+            },
+            {
+              "path": "/routing-policy/ext-community-soo-filters/ext-community-soo-filter/name",
+              "type": "string",
+              "label": "name",
+              "isKey": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/routing-policy/ipv4-prefix-filters",
+      "type": "group",
+      "label": "ipv4-prefix-filters",
+      "fields": [
+        {
+          "path": "/routing-policy/ipv4-prefix-filters/ipv4-prefix-filter",
+          "type": "list",
+          "label": "ipv4-prefix-filter",
+          "fields": [
+            {
+              "path": "/routing-policy/ipv4-prefix-filters/ipv4-prefix-filter/deny-count",
+              "type": "number",
+              "label": "deny-count",
+              "maximum": 65535,
+              "readonly": true
+            },
+            {
+              "path": "/routing-policy/ipv4-prefix-filters/ipv4-prefix-filter/description",
+              "type": "string",
+              "label": "description"
+            },
+            {
+              "path": "/routing-policy/ipv4-prefix-filters/ipv4-prefix-filter/name",
+              "type": "string",
+              "label": "name",
+              "isKey": true
+            },
+            {
+              "path": "/routing-policy/ipv4-prefix-filters/ipv4-prefix-filter/nodes",
+              "type": "group",
+              "label": "nodes",
+              "fields": [
+                {
+                  "path": "/routing-policy/ipv4-prefix-filters/ipv4-prefix-filter/nodes/node",
+                  "type": "list",
+                  "label": "node",
+                  "fields": [
+                    {
+                      "path": "/routing-policy/ipv4-prefix-filters/ipv4-prefix-filter/nodes/node/ip-address",
+                      "type": "string",
+                      "label": "ip-address",
+                      "required": true,
+                      "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?"
+                    },
+                    {
+                      "path": "/routing-policy/ipv4-prefix-filters/ipv4-prefix-filter/nodes/node/masklength",
+                      "type": "number",
+                      "label": "masklength",
+                      "required": true,
+                      "maximum": 32
+                    },
+                    {
+                      "path": "/routing-policy/ipv4-prefix-filters/ipv4-prefix-filter/nodes/node/masklength-lower",
+                      "type": "number",
+                      "label": "masklength-lower",
+                      "maximum": 32
+                    },
+                    {
+                      "path": "/routing-policy/ipv4-prefix-filters/ipv4-prefix-filter/nodes/node/masklength-upper",
+                      "type": "number",
+                      "label": "masklength-upper",
+                      "minimum": 1,
+                      "maximum": 32
+                    },
+                    {
+                      "path": "/routing-policy/ipv4-prefix-filters/ipv4-prefix-filter/nodes/node/match-mode",
+                      "type": "enum",
+                      "label": "match-mode",
+                      "required": true,
+                      "options": [
+                        {
+                          "label": "deny",
+                          "value": "deny"
+                        },
+                        {
+                          "label": "permit",
+                          "value": "permit"
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/routing-policy/ipv4-prefix-filters/ipv4-prefix-filter/nodes/node/match-network",
+                      "type": "boolean",
+                      "label": "match-network",
+                      "must": [
+                        {
+                          "expr": "../ip-address='0.0.0.0' or ../match-network='false'"
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/routing-policy/ipv4-prefix-filters/ipv4-prefix-filter/nodes/node/sequence",
+                      "type": "number",
+                      "label": "sequence",
+                      "minimum": 1,
+                      "maximum": 4294967295,
+                      "isKey": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/routing-policy/ipv4-prefix-filters/ipv4-prefix-filter/permit-count",
+              "type": "number",
+              "label": "permit-count",
+              "maximum": 65535,
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/routing-policy/ipv6-prefix-filters",
+      "type": "group",
+      "label": "ipv6-prefix-filters",
+      "fields": [
+        {
+          "path": "/routing-policy/ipv6-prefix-filters/ipv6-prefix-filter",
+          "type": "list",
+          "label": "ipv6-prefix-filter",
+          "fields": [
+            {
+              "path": "/routing-policy/ipv6-prefix-filters/ipv6-prefix-filter/deny-count",
+              "type": "number",
+              "label": "deny-count",
+              "maximum": 65535,
+              "readonly": true
+            },
+            {
+              "path": "/routing-policy/ipv6-prefix-filters/ipv6-prefix-filter/description",
+              "type": "string",
+              "label": "description"
+            },
+            {
+              "path": "/routing-policy/ipv6-prefix-filters/ipv6-prefix-filter/name",
+              "type": "string",
+              "label": "name",
+              "isKey": true
+            },
+            {
+              "path": "/routing-policy/ipv6-prefix-filters/ipv6-prefix-filter/nodes",
+              "type": "group",
+              "label": "nodes",
+              "fields": [
+                {
+                  "path": "/routing-policy/ipv6-prefix-filters/ipv6-prefix-filter/nodes/node",
+                  "type": "list",
+                  "label": "node",
+                  "fields": [
+                    {
+                      "path": "/routing-policy/ipv6-prefix-filters/ipv6-prefix-filter/nodes/node/ipv6-address",
+                      "type": "string",
+                      "label": "ipv6-address",
+                      "required": true,
+                      "pattern": "((:|[0-9a-fA-F]{0,4}):)([0-9a-fA-F]{0,4}:){0,5}((([0-9a-fA-F]{0,4}:)?(:|[0-9a-fA-F]{0,4}))|(((25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])))(%[\\p{N}\\p{L}]+)?"
+                    },
+                    {
+                      "path": "/routing-policy/ipv6-prefix-filters/ipv6-prefix-filter/nodes/node/masklength",
+                      "type": "number",
+                      "label": "masklength",
+                      "required": true,
+                      "maximum": 128
+                    },
+                    {
+                      "path": "/routing-policy/ipv6-prefix-filters/ipv6-prefix-filter/nodes/node/masklength-lower",
+                      "type": "number",
+                      "label": "masklength-lower",
+                      "maximum": 128
+                    },
+                    {
+                      "path": "/routing-policy/ipv6-prefix-filters/ipv6-prefix-filter/nodes/node/masklength-upper",
+                      "type": "number",
+                      "label": "masklength-upper",
+                      "minimum": 1,
+                      "maximum": 128
+                    },
+                    {
+                      "path": "/routing-policy/ipv6-prefix-filters/ipv6-prefix-filter/nodes/node/match-mode",
+                      "type": "enum",
+                      "label": "match-mode",
+                      "required": true,
+                      "options": [
+                        {
+                          "label": "deny",
+                          "value": "deny"
+                        },
+                        {
+                          "label": "permit",
+                          "value": "permit"
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/routing-policy/ipv6-prefix-filters/ipv6-prefix-filter/nodes/node/match-network",
+                      "type": "boolean",
+                      "label": "match-network",
+                      "must": [
+                        {
+                          "expr": "../match-network='false' or ../ipv6-address='::'"
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/routing-policy/ipv6-prefix-filters/ipv6-prefix-filter/nodes/node/sequence",
+                      "type": "number",
+                      "label": "sequence",
+                      "minimum": 1,
+                      "maximum": 4294967295,
+                      "isKey": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/routing-policy/ipv6-prefix-filters/ipv6-prefix-filter/permit-count",
+              "type": "number",
+              "label": "permit-count",
+              "maximum": 65535,
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/routing-policy/large-community-filters",
+      "type": "group",
+      "label": "large-community-filters",
+      "fields": [
+        {
+          "path": "/routing-policy/large-community-filters/large-community-filter",
+          "type": "list",
+          "label": "large-community-filter",
+          "fields": [
+            {
+              "path": "/routing-policy/large-community-filters/large-community-filter/advanced-nodes",
+              "type": "group",
+              "label": "advanced-nodes",
+              "when": "../filter-type='advanced'",
+              "fields": [
+                {
+                  "path": "/routing-policy/large-community-filters/large-community-filter/advanced-nodes/advanced-node",
+                  "type": "list",
+                  "label": "advanced-node",
+                  "fields": [
+                    {
+                      "path": "/routing-policy/large-community-filters/large-community-filter/advanced-nodes/advanced-node/match-mode",
+                      "type": "enum",
+                      "label": "match-mode",
+                      "required": true,
+                      "options": [
+                        {
+                          "label": "deny",
+                          "value": "deny"
+                        },
+                        {
+                          "label": "permit",
+                          "value": "permit"
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/routing-policy/large-community-filters/large-community-filter/advanced-nodes/advanced-node/regular",
+                      "type": "string",
+                      "label": "regular",
+                      "required": true
+                    },
+                    {
+                      "path": "/routing-policy/large-community-filters/large-community-filter/advanced-nodes/advanced-node/sequence",
+                      "type": "number",
+                      "label": "sequence",
+                      "minimum": 1,
+                      "maximum": 4294967295,
+                      "isKey": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/routing-policy/large-community-filters/large-community-filter/basic-nodes",
+              "type": "group",
+              "label": "basic-nodes",
+              "when": "../filter-type='basic'",
+              "fields": [
+                {
+                  "path": "/routing-policy/large-community-filters/large-community-filter/basic-nodes/basic-node",
+                  "type": "list",
+                  "label": "basic-node",
+                  "fields": [
+                    {
+                      "path": "/routing-policy/large-community-filters/large-community-filter/basic-nodes/basic-node/large-community-members",
+                      "type": "group",
+                      "label": "large-community-members",
+                      "fields": [
+                        {
+                          "path": "/routing-policy/large-community-filters/large-community-filter/basic-nodes/basic-node/large-community-members/large-community-member",
+                          "type": "list",
+                          "label": "large-community-member",
+                          "fields": [
+                            {
+                              "path": "/routing-policy/large-community-filters/large-community-filter/basic-nodes/basic-node/large-community-members/large-community-member/value",
+                              "type": "string",
+                              "label": "value",
+                              "isKey": true
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/routing-policy/large-community-filters/large-community-filter/basic-nodes/basic-node/match-mode",
+                      "type": "enum",
+                      "label": "match-mode",
+                      "required": true,
+                      "options": [
+                        {
+                          "label": "deny",
+                          "value": "deny"
+                        },
+                        {
+                          "label": "permit",
+                          "value": "permit"
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/routing-policy/large-community-filters/large-community-filter/basic-nodes/basic-node/sequence",
+                      "type": "number",
+                      "label": "sequence",
+                      "minimum": 1,
+                      "maximum": 4294967295,
+                      "isKey": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/routing-policy/large-community-filters/large-community-filter/filter-type",
+              "type": "enum",
+              "label": "filter-type",
+              "required": true,
+              "options": [
+                {
+                  "label": "advanced",
+                  "value": "advanced"
+                },
+                {
+                  "label": "basic",
+                  "value": "basic"
+                }
+              ],
+              "operationExclude": [
+                "update"
+              ]
+            },
+            {
+              "path": "/routing-policy/large-community-filters/large-community-filter/name",
+              "type": "string",
+              "label": "name",
+              "pattern": "([^?]*[^?0-9][^?]*)",
+              "isKey": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/routing-policy/large-community-lists",
+      "type": "group",
+      "label": "large-community-lists",
+      "fields": [
+        {
+          "path": "/routing-policy/large-community-lists/large-community-list",
+          "type": "list",
+          "label": "large-community-list",
+          "fields": [
+            {
+              "path": "/routing-policy/large-community-lists/large-community-list/large-community-members",
+              "type": "group",
+              "label": "large-community-members",
+              "fields": [
+                {
+                  "path": "/routing-policy/large-community-lists/large-community-list/large-community-members/large-community-member",
+                  "type": "list",
+                  "label": "large-community-member",
+                  "fields": [
+                    {
+                      "path": "/routing-policy/large-community-lists/large-community-list/large-community-members/large-community-member/value",
+                      "type": "string",
+                      "label": "value",
+                      "isKey": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/routing-policy/large-community-lists/large-community-list/name",
+              "type": "string",
+              "label": "name",
+              "pattern": "([a-zA-Z].*)",
+              "isKey": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/routing-policy/mac-filters",
+      "type": "group",
+      "label": "mac-filters",
+      "fields": [
+        {
+          "path": "/routing-policy/mac-filters/mac-filter",
+          "type": "list",
+          "label": "mac-filter",
+          "fields": [
+            {
+              "path": "/routing-policy/mac-filters/mac-filter/mac-members",
+              "type": "group",
+              "label": "mac-members",
+              "fields": [
+                {
+                  "path": "/routing-policy/mac-filters/mac-filter/mac-members/mac-member",
+                  "type": "list",
+                  "label": "mac-member",
+                  "fields": [
+                    {
+                      "path": "/routing-policy/mac-filters/mac-filter/mac-members/mac-member/value",
+                      "type": "string",
+                      "label": "value",
+                      "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+                      "isKey": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/routing-policy/mac-filters/mac-filter/name",
+              "type": "string",
+              "label": "name",
+              "isKey": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/routing-policy/policy-definitions",
+      "type": "group",
+      "label": "policy-definitions",
+      "fields": [
+        {
+          "path": "/routing-policy/policy-definitions/policy-definition",
+          "type": "list",
+          "label": "policy-definition",
+          "fields": [
+            {
+              "path": "/routing-policy/policy-definitions/policy-definition/name",
+              "type": "string",
+              "label": "name",
+              "isKey": true
+            },
+            {
+              "path": "/routing-policy/policy-definitions/policy-definition/nodes",
+              "type": "group",
+              "label": "nodes",
+              "fields": [
+                {
+                  "path": "/routing-policy/policy-definitions/policy-definition/nodes/node",
+                  "type": "list",
+                  "label": "node",
+                  "fields": [
+                    {
+                      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions",
+                      "type": "group",
+                      "label": "actions",
+                      "fields": [
+                        {
+                          "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-aigp",
+                          "type": "group",
+                          "label": "apply-aigp",
+                          "fields": [
+                            {
+                              "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-aigp/operation",
+                              "type": "enum",
+                              "label": "operation",
+                              "required": true,
+                              "options": [
+                                {
+                                  "label": "config",
+                                  "value": "config"
+                                },
+                                {
+                                  "label": "inherit-cost",
+                                  "value": "inherit-cost"
+                                }
+                              ]
+                            },
+                            {
+                              "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-aigp/value",
+                              "type": "number",
+                              "label": "value",
+                              "required": true,
+                              "when": "../operation!='inherit-cost'"
+                            }
+                          ],
+                          "presence": true
+                        },
+                        {
+                          "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-as-path",
+                          "type": "group",
+                          "label": "apply-as-path",
+                          "fields": [
+                            {
+                              "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-as-path/as-path-string",
+                              "type": "choice",
+                              "label": "as-path-string",
+                              "cases": [
+                                {
+                                  "name": "as-string",
+                                  "label": "as-string",
+                                  "fields": [
+                                    {
+                                      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-as-path/value",
+                                      "type": "string",
+                                      "label": "value",
+                                      "pattern": "([0-9\\. ]*)"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-as-path/operation",
+                              "type": "enum",
+                              "label": "operation",
+                              "required": true,
+                              "options": [
+                                {
+                                  "label": "additive",
+                                  "value": "additive"
+                                },
+                                {
+                                  "label": "delete",
+                                  "value": "delete"
+                                },
+                                {
+                                  "label": "delete-special",
+                                  "value": "delete-special"
+                                },
+                                {
+                                  "label": "replace",
+                                  "value": "replace"
+                                }
+                              ]
+                            }
+                          ],
+                          "presence": true
+                        },
+                        {
+                          "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-community",
+                          "type": "group",
+                          "label": "apply-community",
+                          "fields": [
+                            {
+                              "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-community/operation",
+                              "type": "enum",
+                              "label": "operation",
+                              "required": true,
+                              "options": [
+                                {
+                                  "label": "add",
+                                  "value": "add"
+                                },
+                                {
+                                  "label": "delete",
+                                  "value": "delete"
+                                },
+                                {
+                                  "label": "replace",
+                                  "value": "replace"
+                                }
+                              ]
+                            },
+                            {
+                              "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-community/set-community",
+                              "type": "choice",
+                              "label": "set-community",
+                              "cases": [
+                                {
+                                  "name": "inline",
+                                  "label": "inline",
+                                  "fields": [
+                                    {
+                                      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-community/communities",
+                                      "type": "leaf-list",
+                                      "label": "communities"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "name": "inline-string",
+                                  "label": "inline-string",
+                                  "fields": [
+                                    {
+                                      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-community/value",
+                                      "type": "string",
+                                      "label": "value",
+                                      "pattern": "([0-9a-zA-Z\\-: ]*)"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "name": "reference",
+                                  "label": "reference",
+                                  "fields": [
+                                    {
+                                      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-community/community-list-ref",
+                                      "type": "string",
+                                      "label": "community-list-ref"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ],
+                          "presence": true
+                        },
+                        {
+                          "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-community-filter-delete",
+                          "type": "group",
+                          "label": "apply-community-filter-delete",
+                          "fields": [
+                            {
+                              "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-community-filter-delete/name",
+                              "type": "string",
+                              "label": "name"
+                            }
+                          ]
+                        },
+                        {
+                          "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-cost",
+                          "type": "group",
+                          "label": "apply-cost",
+                          "fields": [
+                            {
+                              "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-cost/operation",
+                              "type": "enum",
+                              "label": "operation",
+                              "required": true,
+                              "options": [
+                                {
+                                  "label": "add",
+                                  "value": "add"
+                                },
+                                {
+                                  "label": "inherit",
+                                  "value": "inherit"
+                                },
+                                {
+                                  "label": "none",
+                                  "value": "none"
+                                },
+                                {
+                                  "label": "replace",
+                                  "value": "replace"
+                                },
+                                {
+                                  "label": "sub",
+                                  "value": "sub"
+                                }
+                              ]
+                            },
+                            {
+                              "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-cost/value",
+                              "type": "number",
+                              "label": "value",
+                              "required": true,
+                              "when": "../operation!='inherit' and ../operation!='none'"
+                            }
+                          ],
+                          "presence": true
+                        },
+                        {
+                          "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-cost-type",
+                          "type": "group",
+                          "label": "apply-cost-type",
+                          "fields": [
+                            {
+                              "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-cost-type/value",
+                              "type": "enum",
+                              "label": "value",
+                              "options": [
+                                {
+                                  "label": "external",
+                                  "value": "external"
+                                },
+                                {
+                                  "label": "internal",
+                                  "value": "internal"
+                                },
+                                {
+                                  "label": "internal-inc-ibgp",
+                                  "value": "internal-inc-ibgp"
+                                },
+                                {
+                                  "label": "med-inherit-aigp",
+                                  "value": "med-inherit-aigp"
+                                },
+                                {
+                                  "label": "med-plus-igp",
+                                  "value": "med-plus-igp"
+                                },
+                                {
+                                  "label": "type-1",
+                                  "value": "type-1"
+                                },
+                                {
+                                  "label": "type-2",
+                                  "value": "type-2"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-dampening",
+                          "type": "group",
+                          "label": "apply-dampening",
+                          "must": [
+                            {
+                              "expr": "reuse-value\u003csuppress-value and suppress-value\u003cceiling-value"
+                            }
+                          ],
+                          "fields": [
+                            {
+                              "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-dampening/ceiling-value",
+                              "type": "number",
+                              "label": "ceiling-value",
+                              "required": true,
+                              "minimum": 1001,
+                              "maximum": 20000
+                            },
+                            {
+                              "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-dampening/half-life-value",
+                              "type": "number",
+                              "label": "half-life-value",
+                              "required": true,
+                              "minimum": 1,
+                              "maximum": 45
+                            },
+                            {
+                              "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-dampening/reuse-value",
+                              "type": "number",
+                              "label": "reuse-value",
+                              "required": true,
+                              "minimum": 1,
+                              "maximum": 20000
+                            },
+                            {
+                              "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-dampening/suppress-value",
+                              "type": "number",
+                              "label": "suppress-value",
+                              "required": true,
+                              "minimum": 1,
+                              "maximum": 20000
+                            }
+                          ],
+                          "presence": true
+                        },
+                        {
+                          "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-entropy-label-none",
+                          "type": "group",
+                          "label": "apply-entropy-label-none",
+                          "fields": [
+                            {
+                              "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-entropy-label-none/entropy-label-none",
+                              "type": "boolean",
+                              "label": "entropy-label-none",
+                              "required": true
+                            }
+                          ],
+                          "presence": true
+                        },
+                        {
+                          "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ext-community",
+                          "type": "group",
+                          "label": "apply-ext-community",
+                          "fields": [
+                            {
+                              "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ext-community/ext-community-members",
+                              "type": "group",
+                              "label": "ext-community-members",
+                              "fields": [
+                                {
+                                  "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ext-community/ext-community-members/ext-community-member",
+                                  "type": "list",
+                                  "label": "ext-community-member",
+                                  "fields": [
+                                    {
+                                      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ext-community/ext-community-members/ext-community-member/value",
+                                      "type": "string",
+                                      "label": "value",
+                                      "isKey": true
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ext-community/operation",
+                              "type": "enum",
+                              "label": "operation",
+                              "required": true,
+                              "options": [
+                                {
+                                  "label": "add",
+                                  "value": "add"
+                                },
+                                {
+                                  "label": "delete",
+                                  "value": "delete"
+                                },
+                                {
+                                  "label": "replace",
+                                  "value": "replace"
+                                }
+                              ]
+                            }
+                          ],
+                          "presence": true
+                        },
+                        {
+                          "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ext-community-color",
+                          "type": "group",
+                          "label": "apply-ext-community-color",
+                          "fields": [
+                            {
+                              "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ext-community-color/value",
+                              "type": "string",
+                              "label": "value",
+                              "required": true
+                            }
+                          ],
+                          "presence": true
+                        },
+                        {
+                          "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ext-community-redirect-ip",
+                          "type": "group",
+                          "label": "apply-ext-community-redirect-ip",
+                          "fields": [
+                            {
+                              "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ext-community-redirect-ip/value",
+                              "type": "string",
+                              "label": "value"
+                            }
+                          ]
+                        },
+                        {
+                          "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ext-community-redirect-vpn",
+                          "type": "group",
+                          "label": "apply-ext-community-redirect-vpn",
+                          "fields": [
+                            {
+                              "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ext-community-redirect-vpn/value",
+                              "type": "string",
+                              "label": "value"
+                            }
+                          ]
+                        },
+                        {
+                          "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ext-community-soo",
+                          "type": "group",
+                          "label": "apply-ext-community-soo",
+                          "fields": [
+                            {
+                              "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ext-community-soo/communities",
+                              "type": "leaf-list",
+                              "label": "communities"
+                            },
+                            {
+                              "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ext-community-soo/operation",
+                              "type": "enum",
+                              "label": "operation",
+                              "required": true,
+                              "options": [
+                                {
+                                  "label": "add",
+                                  "value": "add"
+                                }
+                              ]
+                            }
+                          ],
+                          "presence": true
+                        },
+                        {
+                          "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ipv4-gateway",
+                          "type": "group",
+                          "label": "apply-ipv4-gateway",
+                          "fields": [
+                            {
+                              "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ipv4-gateway/address",
+                              "type": "string",
+                              "label": "address",
+                              "required": true,
+                              "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?",
+                              "when": "../gateway-type='ip-address'"
+                            },
+                            {
+                              "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ipv4-gateway/gateway-type",
+                              "type": "enum",
+                              "label": "gateway-type",
+                              "required": true,
+                              "options": [
+                                {
+                                  "label": "ip-address",
+                                  "value": "ip-address"
+                                },
+                                {
+                                  "label": "none",
+                                  "value": "none"
+                                },
+                                {
+                                  "label": "origin-nexthop",
+                                  "value": "origin-nexthop"
+                                }
+                              ]
+                            }
+                          ],
+                          "presence": true
+                        },
+                        {
+                          "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ipv4-nexthop",
+                          "type": "group",
+                          "label": "apply-ipv4-nexthop",
+                          "fields": [
+                            {
+                              "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ipv4-nexthop/ipv4-nexthop-set",
+                              "type": "choice",
+                              "label": "ipv4-nexthop-set",
+                              "cases": [
+                                {
+                                  "name": "blackhole",
+                                  "label": "blackhole",
+                                  "fields": [
+                                    {
+                                      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ipv4-nexthop/blackhole",
+                                      "type": "string",
+                                      "label": "blackhole"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "name": "nexthop",
+                                  "label": "nexthop",
+                                  "fields": [
+                                    {
+                                      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ipv4-nexthop/nexthop",
+                                      "type": "string",
+                                      "label": "nexthop",
+                                      "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "name": "peer-address",
+                                  "label": "peer-address",
+                                  "fields": [
+                                    {
+                                      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ipv4-nexthop/peer-address",
+                                      "type": "string",
+                                      "label": "peer-address"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ipv6-gateway",
+                          "type": "group",
+                          "label": "apply-ipv6-gateway",
+                          "fields": [
+                            {
+                              "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ipv6-gateway/address",
+                              "type": "string",
+                              "label": "address",
+                              "required": true,
+                              "pattern": "((:|[0-9a-fA-F]{0,4}):)([0-9a-fA-F]{0,4}:){0,5}((([0-9a-fA-F]{0,4}:)?(:|[0-9a-fA-F]{0,4}))|(((25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])))(%[\\p{N}\\p{L}]+)?",
+                              "when": "../gateway-type='ip-address'"
+                            },
+                            {
+                              "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ipv6-gateway/gateway-type",
+                              "type": "enum",
+                              "label": "gateway-type",
+                              "required": true,
+                              "options": [
+                                {
+                                  "label": "ip-address",
+                                  "value": "ip-address"
+                                },
+                                {
+                                  "label": "none",
+                                  "value": "none"
+                                },
+                                {
+                                  "label": "origin-nexthop",
+                                  "value": "origin-nexthop"
+                                }
+                              ]
+                            }
+                          ],
+                          "presence": true
+                        },
+                        {
+                          "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ipv6-nexthop",
+                          "type": "group",
+                          "label": "apply-ipv6-nexthop",
+                          "fields": [
+                            {
+                              "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ipv6-nexthop/ipv6-nexthop-set",
+                              "type": "choice",
+                              "label": "ipv6-nexthop-set",
+                              "cases": [
+                                {
+                                  "name": "blackhole",
+                                  "label": "blackhole",
+                                  "fields": [
+                                    {
+                                      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ipv6-nexthop/blackhole",
+                                      "type": "string",
+                                      "label": "blackhole"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "name": "ipv6-nexthop",
+                                  "label": "ipv6-nexthop",
+                                  "fields": [
+                                    {
+                                      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ipv6-nexthop/ipv6-nexthop",
+                                      "type": "string",
+                                      "label": "ipv6-nexthop",
+                                      "pattern": "((:|[0-9a-fA-F]{0,4}):)([0-9a-fA-F]{0,4}:){0,5}((([0-9a-fA-F]{0,4}:)?(:|[0-9a-fA-F]{0,4}))|(((25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])))(%[\\p{N}\\p{L}]+)?"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "name": "peer-address",
+                                  "label": "peer-address",
+                                  "fields": [
+                                    {
+                                      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ipv6-nexthop/peer-address",
+                                      "type": "string",
+                                      "label": "peer-address"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-large-community",
+                          "type": "group",
+                          "label": "apply-large-community",
+                          "fields": [
+                            {
+                              "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-large-community/operation",
+                              "type": "enum",
+                              "label": "operation",
+                              "required": true,
+                              "options": [
+                                {
+                                  "label": "add",
+                                  "value": "add"
+                                },
+                                {
+                                  "label": "delete",
+                                  "value": "delete"
+                                },
+                                {
+                                  "label": "delete-special",
+                                  "value": "delete-special"
+                                },
+                                {
+                                  "label": "replace",
+                                  "value": "replace"
+                                }
+                              ]
+                            },
+                            {
+                              "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-large-community/set-large-community",
+                              "type": "choice",
+                              "label": "set-large-community",
+                              "cases": [
+                                {
+                                  "name": "inline",
+                                  "label": "inline",
+                                  "fields": [
+                                    {
+                                      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-large-community/large-community-members",
+                                      "type": "group",
+                                      "label": "large-community-members",
+                                      "fields": [
+                                        {
+                                          "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-large-community/large-community-members/large-community-member",
+                                          "type": "list",
+                                          "label": "large-community-member",
+                                          "fields": [
+                                            {
+                                              "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-large-community/large-community-members/large-community-member/value",
+                                              "type": "string",
+                                              "label": "value",
+                                              "isKey": true
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "name": "reference",
+                                  "label": "reference",
+                                  "fields": [
+                                    {
+                                      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-large-community/large-community-list-ref",
+                                      "type": "string",
+                                      "label": "large-community-list-ref"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ],
+                          "presence": true
+                        },
+                        {
+                          "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-local-preference",
+                          "type": "group",
+                          "label": "apply-local-preference",
+                          "fields": [
+                            {
+                              "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-local-preference/operation",
+                              "type": "enum",
+                              "label": "operation",
+                              "required": true,
+                              "options": [
+                                {
+                                  "label": "add",
+                                  "value": "add"
+                                },
+                                {
+                                  "label": "replace",
+                                  "value": "replace"
+                                },
+                                {
+                                  "label": "sub",
+                                  "value": "sub"
+                                }
+                              ]
+                            },
+                            {
+                              "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-local-preference/value",
+                              "type": "number",
+                              "label": "value",
+                              "required": true
+                            }
+                          ],
+                          "presence": true
+                        },
+                        {
+                          "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-mpls-label",
+                          "type": "group",
+                          "label": "apply-mpls-label",
+                          "fields": [
+                            {
+                              "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-mpls-label/mpls-label",
+                              "type": "string",
+                              "label": "mpls-label"
+                            }
+                          ]
+                        },
+                        {
+                          "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-origin",
+                          "type": "group",
+                          "label": "apply-origin",
+                          "fields": [
+                            {
+                              "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-origin/origin-type",
+                              "type": "enum",
+                              "label": "origin-type",
+                              "required": true,
+                              "options": [
+                                {
+                                  "label": "egp",
+                                  "value": "egp"
+                                },
+                                {
+                                  "label": "igp",
+                                  "value": "igp"
+                                },
+                                {
+                                  "label": "incomplete",
+                                  "value": "incomplete"
+                                }
+                              ]
+                            },
+                            {
+                              "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-origin/value",
+                              "type": "string",
+                              "label": "value",
+                              "required": true,
+                              "pattern": "((([1-9]\\d{0,8})|([1-3]\\d{9})|(4[0-1]\\d{8})|(42[0-8]\\d{7})|(429[0-3]\\d{6})|(4294[0-8]\\d{5})|(42949[0-5]\\d{4})|(429496[0-6]\\d{3})|(4294967[0-1]\\d{2})|(42949672[0-8]\\d{1})|(429496729[0-5]))|((([1-9]\\d{0,3})|([1-5]\\d{4})|(6[0-4]\\d{3})|(65[0-4]\\d{2})|(655[0-2]\\d)|(6553[0-5]))[\\.](([0-9]\\d{0,3})|([1-5]\\d{4})|(6[0-4]\\d{3})|(65[0-4]\\d{2})|(655[0-2]\\d)|(6553[0-5]))))",
+                              "when": "../origin-type='egp'"
+                            }
+                          ],
+                          "presence": true
+                        },
+                        {
+                          "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-peer-id",
+                          "type": "group",
+                          "label": "apply-peer-id",
+                          "fields": [
+                            {
+                              "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-peer-id/value",
+                              "type": "number",
+                              "label": "value",
+                              "required": true,
+                              "minimum": 1,
+                              "maximum": 255
+                            }
+                          ],
+                          "presence": true
+                        },
+                        {
+                          "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-preference",
+                          "type": "group",
+                          "label": "apply-preference",
+                          "fields": [
+                            {
+                              "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-preference/value",
+                              "type": "number",
+                              "label": "value",
+                              "minimum": 1,
+                              "maximum": 255
+                            }
+                          ]
+                        },
+                        {
+                          "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-preferred",
+                          "type": "group",
+                          "label": "apply-preferred",
+                          "fields": [
+                            {
+                              "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-preferred/value",
+                              "type": "number",
+                              "label": "value",
+                              "maximum": 65535
+                            }
+                          ]
+                        },
+                        {
+                          "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-priority",
+                          "type": "group",
+                          "label": "apply-priority",
+                          "fields": [
+                            {
+                              "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-priority/value",
+                              "type": "number",
+                              "label": "value",
+                              "minimum": 1,
+                              "maximum": 255
+                            }
+                          ]
+                        },
+                        {
+                          "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-qos-parameter",
+                          "type": "group",
+                          "label": "apply-qos-parameter",
+                          "fields": [
+                            {
+                              "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-qos-parameter/set-qos-parameter",
+                              "type": "choice",
+                              "label": "set-qos-parameter",
+                              "cases": [
+                                {
+                                  "name": "local-id-ip-precedence",
+                                  "label": "local-id-ip-precedence",
+                                  "fields": [
+                                    {
+                                      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-qos-parameter/ip-precedence",
+                                      "type": "number",
+                                      "label": "ip-precedence",
+                                      "maximum": 7
+                                    },
+                                    {
+                                      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-qos-parameter/qos-local-id",
+                                      "type": "number",
+                                      "label": "qos-local-id",
+                                      "minimum": 1,
+                                      "maximum": 4294967295
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-route-type",
+                          "type": "group",
+                          "label": "apply-route-type",
+                          "fields": [
+                            {
+                              "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-route-type/value",
+                              "type": "enum",
+                              "label": "value",
+                              "options": [
+                                {
+                                  "label": "isis-level-1",
+                                  "value": "isis-level-1"
+                                },
+                                {
+                                  "label": "isis-level-12",
+                                  "value": "isis-level-12"
+                                },
+                                {
+                                  "label": "isis-level-2",
+                                  "value": "isis-level-2"
+                                },
+                                {
+                                  "label": "ospf-backbone",
+                                  "value": "ospf-backbone"
+                                },
+                                {
+                                  "label": "ospf-stub-area",
+                                  "value": "ospf-stub-area"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-tag",
+                          "type": "group",
+                          "label": "apply-tag",
+                          "fields": [
+                            {
+                              "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-tag/value",
+                              "type": "number",
+                              "label": "value"
+                            }
+                          ]
+                        },
+                        {
+                          "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-traffic",
+                          "type": "group",
+                          "label": "apply-traffic",
+                          "fields": [
+                            {
+                              "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-traffic/value",
+                              "type": "number",
+                              "label": "value",
+                              "minimum": 1,
+                              "maximum": 64
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions",
+                      "type": "group",
+                      "label": "conditions",
+                      "fields": [
+                        {
+                          "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-as-path-filters",
+                          "type": "group",
+                          "label": "match-as-path-filters",
+                          "fields": [
+                            {
+                              "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-as-path-filters/match-as-path-filter",
+                              "type": "list",
+                              "label": "match-as-path-filter",
+                              "fields": [
+                                {
+                                  "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-as-path-filters/match-as-path-filter/filter-name",
+                                  "type": "string",
+                                  "label": "filter-name",
+                                  "isKey": true
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-as-path-length",
+                          "type": "group",
+                          "label": "match-as-path-length",
+                          "fields": [
+                            {
+                              "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-as-path-length/as-path-length-set",
+                              "type": "choice",
+                              "label": "as-path-length-set",
+                              "cases": [
+                                {
+                                  "name": "range",
+                                  "label": "range",
+                                  "fields": [
+                                    {
+                                      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-as-path-length/lower",
+                                      "type": "number",
+                                      "label": "lower",
+                                      "maximum": 2046,
+                                      "must": [
+                                        {
+                                          "expr": "(../lower\u003c=../upper and ../lower and ../upper) or (not(../lower) and not(../upper))"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-as-path-length/upper",
+                                      "type": "number",
+                                      "label": "upper",
+                                      "minimum": 1,
+                                      "maximum": 2047,
+                                      "must": [
+                                        {
+                                          "expr": "(../lower\u003c=../upper and ../lower and ../upper) or (not(../lower) and not(../upper))"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "name": "value",
+                                  "label": "value",
+                                  "fields": [
+                                    {
+                                      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-as-path-length/value",
+                                      "type": "number",
+                                      "label": "value",
+                                      "maximum": 2047
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-community-filters",
+                          "type": "group",
+                          "label": "match-community-filters",
+                          "fields": [
+                            {
+                              "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-community-filters/match-community-filter",
+                              "type": "list",
+                              "label": "match-community-filter",
+                              "fields": [
+                                {
+                                  "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-community-filters/match-community-filter/community-filter-ref",
+                                  "type": "string",
+                                  "label": "community-filter-ref",
+                                  "isKey": true
+                                },
+                                {
+                                  "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-community-filters/match-community-filter/match-type",
+                                  "type": "choice",
+                                  "label": "match-type",
+                                  "cases": [
+                                    {
+                                      "name": "sort-match",
+                                      "label": "sort-match",
+                                      "fields": [
+                                        {
+                                          "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-community-filters/match-community-filter/sort-match",
+                                          "type": "string",
+                                          "label": "sort-match"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "name": "whole-match",
+                                      "label": "whole-match",
+                                      "fields": [
+                                        {
+                                          "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-community-filters/match-community-filter/whole-match",
+                                          "type": "string",
+                                          "label": "whole-match"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-cost",
+                          "type": "group",
+                          "label": "match-cost",
+                          "fields": [
+                            {
+                              "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-cost/cost-set",
+                              "type": "choice",
+                              "label": "cost-set",
+                              "cases": [
+                                {
+                                  "name": "range",
+                                  "label": "range",
+                                  "fields": [
+                                    {
+                                      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-cost/lower",
+                                      "type": "number",
+                                      "label": "lower",
+                                      "maximum": 4294967294,
+                                      "must": [
+                                        {
+                                          "expr": "../lower \u003c ../upper"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-cost/upper",
+                                      "type": "number",
+                                      "label": "upper",
+                                      "minimum": 1,
+                                      "maximum": 4294967295,
+                                      "must": [
+                                        {
+                                          "expr": "../lower \u003c ../upper"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "name": "value",
+                                  "label": "value",
+                                  "fields": [
+                                    {
+                                      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-cost/value",
+                                      "type": "number",
+                                      "label": "value"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-eth-tag-filter",
+                          "type": "group",
+                          "label": "match-eth-tag-filter",
+                          "fields": [
+                            {
+                              "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-eth-tag-filter/eth-tag-filter-ref",
+                              "type": "string",
+                              "label": "eth-tag-filter-ref",
+                              "required": true
+                            }
+                          ],
+                          "presence": true
+                        },
+                        {
+                          "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ext-community-encapsulation-filter",
+                          "type": "group",
+                          "label": "match-ext-community-encapsulation-filter",
+                          "fields": [
+                            {
+                              "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ext-community-encapsulation-filter/ext-community-encapsulation-list-ref",
+                              "type": "string",
+                              "label": "ext-community-encapsulation-list-ref"
+                            }
+                          ]
+                        },
+                        {
+                          "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ext-community-filters",
+                          "type": "group",
+                          "label": "match-ext-community-filters",
+                          "fields": [
+                            {
+                              "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ext-community-filters/match-ext-community-filter",
+                              "type": "list",
+                              "label": "match-ext-community-filter",
+                              "fields": [
+                                {
+                                  "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ext-community-filters/match-ext-community-filter/ext-community-filter-ref",
+                                  "type": "string",
+                                  "label": "ext-community-filter-ref",
+                                  "isKey": true
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ext-community-segmented-nexthop-filter",
+                          "type": "group",
+                          "label": "match-ext-community-segmented-nexthop-filter",
+                          "fields": [
+                            {
+                              "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ext-community-segmented-nexthop-filter/ext-community-segmented-nexthop-filter-ref",
+                              "type": "string",
+                              "label": "ext-community-segmented-nexthop-filter-ref"
+                            }
+                          ]
+                        },
+                        {
+                          "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ext-community-soo",
+                          "type": "group",
+                          "label": "match-ext-community-soo",
+                          "fields": [
+                            {
+                              "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ext-community-soo/ext-community-soo-filter-ref",
+                              "type": "string",
+                              "label": "ext-community-soo-filter-ref"
+                            }
+                          ]
+                        },
+                        {
+                          "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-group-address",
+                          "type": "choice",
+                          "label": "match-group-address",
+                          "cases": [
+                            {
+                              "name": "ipv4-prefix",
+                              "label": "ipv4-prefix",
+                              "fields": [
+                                {
+                                  "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-group-address-ipv4-prefix",
+                                  "type": "group",
+                                  "label": "match-group-address-ipv4-prefix",
+                                  "fields": [
+                                    {
+                                      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-group-address-ipv4-prefix/prefix-filter-ref",
+                                      "type": "string",
+                                      "label": "prefix-filter-ref"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-interfaces",
+                          "type": "group",
+                          "label": "match-interfaces",
+                          "fields": [
+                            {
+                              "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-interfaces/match-interface",
+                              "type": "list",
+                              "label": "match-interface",
+                              "fields": [
+                                {
+                                  "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-interfaces/match-interface/interface-name",
+                                  "type": "string",
+                                  "label": "interface-name",
+                                  "isKey": true
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ipv4-destination",
+                          "type": "choice",
+                          "label": "match-ipv4-destination",
+                          "cases": [
+                            {
+                              "name": "ipv4-prefix",
+                              "label": "ipv4-prefix",
+                              "fields": [
+                                {
+                                  "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ipv4-prefix",
+                                  "type": "group",
+                                  "label": "match-ipv4-prefix",
+                                  "fields": [
+                                    {
+                                      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ipv4-prefix/prefix-filter-ref",
+                                      "type": "string",
+                                      "label": "prefix-filter-ref"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ipv4-nexthop",
+                          "type": "choice",
+                          "label": "match-ipv4-nexthop",
+                          "cases": [
+                            {
+                              "name": "ipv4-prefix",
+                              "label": "ipv4-prefix",
+                              "fields": [
+                                {
+                                  "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-nexthop-ipv4-prefix",
+                                  "type": "group",
+                                  "label": "match-nexthop-ipv4-prefix",
+                                  "fields": [
+                                    {
+                                      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-nexthop-ipv4-prefix/prefix-filter-ref",
+                                      "type": "string",
+                                      "label": "prefix-filter-ref"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ipv4-route-source",
+                          "type": "choice",
+                          "label": "match-ipv4-route-source",
+                          "cases": [
+                            {
+                              "name": "ipv4-prefix",
+                              "label": "ipv4-prefix",
+                              "fields": [
+                                {
+                                  "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-route-source-ipv4-prefix",
+                                  "type": "group",
+                                  "label": "match-route-source-ipv4-prefix",
+                                  "fields": [
+                                    {
+                                      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-route-source-ipv4-prefix/prefix-filter-ref",
+                                      "type": "string",
+                                      "label": "prefix-filter-ref"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ipv6-destination",
+                          "type": "choice",
+                          "label": "match-ipv6-destination",
+                          "cases": [
+                            {
+                              "name": "ipv6-prefix",
+                              "label": "ipv6-prefix",
+                              "fields": [
+                                {
+                                  "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ipv6-prefix",
+                                  "type": "group",
+                                  "label": "match-ipv6-prefix",
+                                  "fields": [
+                                    {
+                                      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ipv6-prefix/prefix-filter-ref",
+                                      "type": "string",
+                                      "label": "prefix-filter-ref"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ipv6-nexthop",
+                          "type": "choice",
+                          "label": "match-ipv6-nexthop",
+                          "cases": [
+                            {
+                              "name": "ipv6-prefix",
+                              "label": "ipv6-prefix",
+                              "fields": [
+                                {
+                                  "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-nexthop-ipv6-prefix",
+                                  "type": "group",
+                                  "label": "match-nexthop-ipv6-prefix",
+                                  "fields": [
+                                    {
+                                      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-nexthop-ipv6-prefix/prefix-filter-ref",
+                                      "type": "string",
+                                      "label": "prefix-filter-ref"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-ipv6-route-source",
+                          "type": "choice",
+                          "label": "match-ipv6-route-source",
+                          "cases": [
+                            {
+                              "name": "ipv6-prefix",
+                              "label": "ipv6-prefix",
+                              "fields": [
+                                {
+                                  "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-route-source-ipv6-prefix",
+                                  "type": "group",
+                                  "label": "match-route-source-ipv6-prefix",
+                                  "fields": [
+                                    {
+                                      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-route-source-ipv6-prefix/prefix-filter-ref",
+                                      "type": "string",
+                                      "label": "prefix-filter-ref"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-l2vni-filter",
+                          "type": "group",
+                          "label": "match-l2vni-filter",
+                          "fields": [
+                            {
+                              "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-l2vni-filter/l2vni-filter-ref",
+                              "type": "string",
+                              "label": "l2vni-filter-ref",
+                              "required": true,
+                              "when": "../match-type='match-special'",
+                              "must": [
+                                {
+                                  "expr": "../match-type='match-special' or (../match-type='match-all' and not(../l2vni-filter-ref))"
+                                }
+                              ]
+                            },
+                            {
+                              "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-l2vni-filter/match-type",
+                              "type": "enum",
+                              "label": "match-type",
+                              "required": true,
+                              "options": [
+                                {
+                                  "label": "match-all",
+                                  "value": "match-all"
+                                },
+                                {
+                                  "label": "match-special",
+                                  "value": "match-special"
+                                }
+                              ]
+                            }
+                          ],
+                          "presence": true
+                        },
+                        {
+                          "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-l3vni-filter",
+                          "type": "group",
+                          "label": "match-l3vni-filter",
+                          "fields": [
+                            {
+                              "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-l3vni-filter/l3vni-filter-ref",
+                              "type": "string",
+                              "label": "l3vni-filter-ref",
+                              "required": true,
+                              "when": "../match-type='match-special'",
+                              "must": [
+                                {
+                                  "expr": "../match-type='match-special' or (../match-type='match-all' and not(../l3vni-filter-ref))"
+                                }
+                              ]
+                            },
+                            {
+                              "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-l3vni-filter/match-type",
+                              "type": "enum",
+                              "label": "match-type",
+                              "required": true,
+                              "options": [
+                                {
+                                  "label": "match-all",
+                                  "value": "match-all"
+                                },
+                                {
+                                  "label": "match-special",
+                                  "value": "match-special"
+                                }
+                              ]
+                            }
+                          ],
+                          "presence": true
+                        },
+                        {
+                          "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-large-community-filters",
+                          "type": "group",
+                          "label": "match-large-community-filters",
+                          "fields": [
+                            {
+                              "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-large-community-filters/match-large-community-filter",
+                              "type": "list",
+                              "label": "match-large-community-filter",
+                              "fields": [
+                                {
+                                  "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-large-community-filters/match-large-community-filter/community-filter-ref",
+                                  "type": "string",
+                                  "label": "community-filter-ref",
+                                  "isKey": true
+                                },
+                                {
+                                  "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-large-community-filters/match-large-community-filter/match-type",
+                                  "type": "choice",
+                                  "label": "match-type",
+                                  "cases": [
+                                    {
+                                      "name": "whole-match",
+                                      "label": "whole-match",
+                                      "fields": [
+                                        {
+                                          "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-large-community-filters/match-large-community-filter/whole-match",
+                                          "type": "string",
+                                          "label": "whole-match"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-mac-filter",
+                          "type": "group",
+                          "label": "match-mac-filter",
+                          "fields": [
+                            {
+                              "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-mac-filter/mac-filter-ref",
+                              "type": "string",
+                              "label": "mac-filter-ref",
+                              "required": true
+                            }
+                          ],
+                          "presence": true
+                        },
+                        {
+                          "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-mpls-label",
+                          "type": "group",
+                          "label": "match-mpls-label",
+                          "fields": [
+                            {
+                              "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-mpls-label/mpls-label",
+                              "type": "string",
+                              "label": "mpls-label"
+                            },
+                            {
+                              "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-mpls-label/mpls-label2",
+                              "type": "string",
+                              "label": "mpls-label2"
+                            }
+                          ]
+                        },
+                        {
+                          "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-preference",
+                          "type": "group",
+                          "label": "match-preference",
+                          "fields": [
+                            {
+                              "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-preference/value",
+                              "type": "number",
+                              "label": "value"
+                            }
+                          ]
+                        },
+                        {
+                          "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-prefix-mod",
+                          "type": "group",
+                          "label": "match-prefix-mod",
+                          "must": [
+                            {
+                              "expr": "(mod-result\u003cmod-value)"
+                            }
+                          ],
+                          "fields": [
+                            {
+                              "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-prefix-mod/mod-result",
+                              "type": "number",
+                              "label": "mod-result",
+                              "required": true,
+                              "maximum": 127
+                            },
+                            {
+                              "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-prefix-mod/mod-value",
+                              "type": "number",
+                              "label": "mod-value",
+                              "required": true,
+                              "minimum": 1,
+                              "maximum": 128
+                            }
+                          ],
+                          "presence": true
+                        },
+                        {
+                          "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-protocols",
+                          "type": "group",
+                          "label": "match-protocols",
+                          "fields": [
+                            {
+                              "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-protocols/match-protocol",
+                              "type": "list",
+                              "label": "match-protocol",
+                              "fields": [
+                                {
+                                  "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-protocols/match-protocol/protocol",
+                                  "type": "enum",
+                                  "label": "protocol",
+                                  "options": [
+                                    {
+                                      "label": "bgp",
+                                      "value": "bgp"
+                                    },
+                                    {
+                                      "label": "direct",
+                                      "value": "direct"
+                                    },
+                                    {
+                                      "label": "isis",
+                                      "value": "isis"
+                                    },
+                                    {
+                                      "label": "ospf",
+                                      "value": "ospf"
+                                    },
+                                    {
+                                      "label": "ospfv3",
+                                      "value": "ospfv3"
+                                    },
+                                    {
+                                      "label": "rip",
+                                      "value": "rip"
+                                    },
+                                    {
+                                      "label": "ripng",
+                                      "value": "ripng"
+                                    },
+                                    {
+                                      "label": "static",
+                                      "value": "static"
+                                    },
+                                    {
+                                      "label": "unr",
+                                      "value": "unr"
+                                    }
+                                  ],
+                                  "isKey": true
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-rd-filter",
+                          "type": "group",
+                          "label": "match-rd-filter",
+                          "fields": [
+                            {
+                              "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-rd-filter/rd-filter-ref",
+                              "type": "string",
+                              "label": "rd-filter-ref",
+                              "required": true
+                            }
+                          ],
+                          "presence": true
+                        },
+                        {
+                          "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-route-originator",
+                          "type": "choice",
+                          "label": "match-route-originator",
+                          "cases": [
+                            {
+                              "name": "ipv4-prefix",
+                              "label": "ipv4-prefix",
+                              "fields": [
+                                {
+                                  "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-originator-ipv4-prefix",
+                                  "type": "group",
+                                  "label": "match-originator-ipv4-prefix",
+                                  "fields": [
+                                    {
+                                      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-originator-ipv4-prefix/prefix-filter-ref",
+                                      "type": "string",
+                                      "label": "prefix-filter-ref"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-route-types",
+                          "type": "group",
+                          "label": "match-route-types",
+                          "fields": [
+                            {
+                              "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-route-types/match-route-type",
+                              "type": "list",
+                              "label": "match-route-type",
+                              "fields": [
+                                {
+                                  "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-route-types/match-route-type/route-type",
+                                  "type": "enum",
+                                  "label": "route-type",
+                                  "options": [
+                                    {
+                                      "label": "ebgp",
+                                      "value": "ebgp"
+                                    },
+                                    {
+                                      "label": "evpn-ad",
+                                      "value": "evpn-ad"
+                                    },
+                                    {
+                                      "label": "evpn-es",
+                                      "value": "evpn-es"
+                                    },
+                                    {
+                                      "label": "evpn-inclusive",
+                                      "value": "evpn-inclusive"
+                                    },
+                                    {
+                                      "label": "evpn-join",
+                                      "value": "evpn-join"
+                                    },
+                                    {
+                                      "label": "evpn-leave",
+                                      "value": "evpn-leave"
+                                    },
+                                    {
+                                      "label": "evpn-mac",
+                                      "value": "evpn-mac"
+                                    },
+                                    {
+                                      "label": "evpn-prefix",
+                                      "value": "evpn-prefix"
+                                    },
+                                    {
+                                      "label": "evpn-smet",
+                                      "value": "evpn-smet"
+                                    },
+                                    {
+                                      "label": "external1",
+                                      "value": "external1"
+                                    },
+                                    {
+                                      "label": "external2",
+                                      "value": "external2"
+                                    },
+                                    {
+                                      "label": "ibgp",
+                                      "value": "ibgp"
+                                    },
+                                    {
+                                      "label": "internal",
+                                      "value": "internal"
+                                    },
+                                    {
+                                      "label": "isis-level1",
+                                      "value": "isis-level1"
+                                    },
+                                    {
+                                      "label": "isis-level2",
+                                      "value": "isis-level2"
+                                    },
+                                    {
+                                      "label": "mvpn1",
+                                      "value": "mvpn1"
+                                    },
+                                    {
+                                      "label": "mvpn2",
+                                      "value": "mvpn2"
+                                    },
+                                    {
+                                      "label": "mvpn3",
+                                      "value": "mvpn3"
+                                    },
+                                    {
+                                      "label": "mvpn4",
+                                      "value": "mvpn4"
+                                    },
+                                    {
+                                      "label": "mvpn5",
+                                      "value": "mvpn5"
+                                    },
+                                    {
+                                      "label": "mvpn6",
+                                      "value": "mvpn6"
+                                    },
+                                    {
+                                      "label": "mvpn7",
+                                      "value": "mvpn7"
+                                    },
+                                    {
+                                      "label": "nssa-external1",
+                                      "value": "nssa-external1"
+                                    },
+                                    {
+                                      "label": "nssa-external2",
+                                      "value": "nssa-external2"
+                                    }
+                                  ],
+                                  "isKey": true
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-rpki",
+                          "type": "group",
+                          "label": "match-rpki",
+                          "fields": [
+                            {
+                              "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-rpki/origin-as-validation",
+                              "type": "enum",
+                              "label": "origin-as-validation",
+                              "options": [
+                                {
+                                  "label": "invalid",
+                                  "value": "invalid"
+                                },
+                                {
+                                  "label": "not-found",
+                                  "value": "not-found"
+                                },
+                                {
+                                  "label": "valid",
+                                  "value": "valid"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-tag",
+                          "type": "group",
+                          "label": "match-tag",
+                          "fields": [
+                            {
+                              "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/conditions/match-tag/value",
+                              "type": "number",
+                              "label": "value"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/description",
+                      "type": "string",
+                      "label": "description"
+                    },
+                    {
+                      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/match-count",
+                      "type": "number",
+                      "label": "match-count",
+                      "readonly": true
+                    },
+                    {
+                      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/match-mode",
+                      "type": "enum",
+                      "label": "match-mode",
+                      "required": true,
+                      "options": [
+                        {
+                          "label": "deny",
+                          "value": "deny"
+                        },
+                        {
+                          "label": "permit",
+                          "value": "permit"
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/next-node-choice",
+                      "type": "group",
+                      "label": "next-node-choice",
+                      "fields": [
+                        {
+                          "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/next-node-choice/is-goto-next-node",
+                          "type": "boolean",
+                          "label": "is-goto-next-node"
+                        },
+                        {
+                          "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/next-node-choice/next-node-sequence",
+                          "type": "number",
+                          "label": "next-node-sequence",
+                          "minimum": 1,
+                          "maximum": 65535,
+                          "when": "../is-goto-next-node='true'"
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/sequence",
+                      "type": "number",
+                      "label": "sequence",
+                      "maximum": 65535,
+                      "isKey": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/routing-policy/rd-filters",
+      "type": "group",
+      "label": "rd-filters",
+      "fields": [
+        {
+          "path": "/routing-policy/rd-filters/rd-filter",
+          "type": "list",
+          "label": "rd-filter",
+          "fields": [
+            {
+              "path": "/routing-policy/rd-filters/rd-filter/name",
+              "type": "string",
+              "label": "name",
+              "isKey": true
+            },
+            {
+              "path": "/routing-policy/rd-filters/rd-filter/nodes",
+              "type": "group",
+              "label": "nodes",
+              "fields": [
+                {
+                  "path": "/routing-policy/rd-filters/rd-filter/nodes/node",
+                  "type": "list",
+                  "label": "node",
+                  "fields": [
+                    {
+                      "path": "/routing-policy/rd-filters/rd-filter/nodes/node/match-mode",
+                      "type": "enum",
+                      "label": "match-mode",
+                      "required": true,
+                      "options": [
+                        {
+                          "label": "deny",
+                          "value": "deny"
+                        },
+                        {
+                          "label": "permit",
+                          "value": "permit"
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/routing-policy/rd-filters/rd-filter/nodes/node/rd-strings",
+                      "type": "group",
+                      "label": "rd-strings",
+                      "fields": [
+                        {
+                          "path": "/routing-policy/rd-filters/rd-filter/nodes/node/rd-strings/rd-string",
+                          "type": "list",
+                          "label": "rd-string",
+                          "fields": [
+                            {
+                              "path": "/routing-policy/rd-filters/rd-filter/nodes/node/rd-strings/rd-string/value",
+                              "type": "string",
+                              "label": "value",
+                              "isKey": true
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/routing-policy/rd-filters/rd-filter/nodes/node/sequence",
+                      "type": "number",
+                      "label": "sequence",
+                      "minimum": 1,
+                      "maximum": 4294967295,
+                      "isKey": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/routing-policy/tunnel-selectors",
+      "type": "group",
+      "label": "tunnel-selectors",
+      "fields": [
+        {
+          "path": "/routing-policy/tunnel-selectors/tunnel-selector",
+          "type": "list",
+          "label": "tunnel-selector",
+          "fields": [
+            {
+              "path": "/routing-policy/tunnel-selectors/tunnel-selector/name",
+              "type": "string",
+              "label": "name",
+              "isKey": true
+            },
+            {
+              "path": "/routing-policy/tunnel-selectors/tunnel-selector/nodes",
+              "type": "group",
+              "label": "nodes",
+              "fields": [
+                {
+                  "path": "/routing-policy/tunnel-selectors/tunnel-selector/nodes/node",
+                  "type": "list",
+                  "label": "node",
+                  "fields": [
+                    {
+                      "path": "/routing-policy/tunnel-selectors/tunnel-selector/nodes/node/actions",
+                      "type": "group",
+                      "label": "actions",
+                      "fields": [
+                        {
+                          "path": "/routing-policy/tunnel-selectors/tunnel-selector/nodes/node/actions/apply-tunnel-policy",
+                          "type": "group",
+                          "label": "apply-tunnel-policy",
+                          "fields": [
+                            {
+                              "path": "/routing-policy/tunnel-selectors/tunnel-selector/nodes/node/actions/apply-tunnel-policy/tunnel-policy-ref",
+                              "type": "string",
+                              "label": "tunnel-policy-ref"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/routing-policy/tunnel-selectors/tunnel-selector/nodes/node/conditions",
+                      "type": "group",
+                      "label": "conditions",
+                      "fields": [
+                        {
+                          "path": "/routing-policy/tunnel-selectors/tunnel-selector/nodes/node/conditions/match-community-filters",
+                          "type": "group",
+                          "label": "match-community-filters",
+                          "fields": [
+                            {
+                              "path": "/routing-policy/tunnel-selectors/tunnel-selector/nodes/node/conditions/match-community-filters/match-community-filter",
+                              "type": "list",
+                              "label": "match-community-filter",
+                              "fields": [
+                                {
+                                  "path": "/routing-policy/tunnel-selectors/tunnel-selector/nodes/node/conditions/match-community-filters/match-community-filter/community-filter-ref",
+                                  "type": "string",
+                                  "label": "community-filter-ref",
+                                  "isKey": true
+                                },
+                                {
+                                  "path": "/routing-policy/tunnel-selectors/tunnel-selector/nodes/node/conditions/match-community-filters/match-community-filter/match-type",
+                                  "type": "choice",
+                                  "label": "match-type",
+                                  "cases": [
+                                    {
+                                      "name": "sort-match",
+                                      "label": "sort-match",
+                                      "fields": [
+                                        {
+                                          "path": "/routing-policy/tunnel-selectors/tunnel-selector/nodes/node/conditions/match-community-filters/match-community-filter/sort-match",
+                                          "type": "string",
+                                          "label": "sort-match"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "name": "whole-match",
+                                      "label": "whole-match",
+                                      "fields": [
+                                        {
+                                          "path": "/routing-policy/tunnel-selectors/tunnel-selector/nodes/node/conditions/match-community-filters/match-community-filter/whole-match",
+                                          "type": "string",
+                                          "label": "whole-match"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "path": "/routing-policy/tunnel-selectors/tunnel-selector/nodes/node/conditions/match-ipv4-destination",
+                          "type": "choice",
+                          "label": "match-ipv4-destination",
+                          "cases": [
+                            {
+                              "name": "ipv4-prefix",
+                              "label": "ipv4-prefix",
+                              "fields": [
+                                {
+                                  "path": "/routing-policy/tunnel-selectors/tunnel-selector/nodes/node/conditions/match-ipv4-prefix",
+                                  "type": "group",
+                                  "label": "match-ipv4-prefix",
+                                  "fields": [
+                                    {
+                                      "path": "/routing-policy/tunnel-selectors/tunnel-selector/nodes/node/conditions/match-ipv4-prefix/prefix-filter-ref",
+                                      "type": "string",
+                                      "label": "prefix-filter-ref"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "path": "/routing-policy/tunnel-selectors/tunnel-selector/nodes/node/conditions/match-ipv4-nexthop",
+                          "type": "choice",
+                          "label": "match-ipv4-nexthop",
+                          "cases": [
+                            {
+                              "name": "ipv4-prefix",
+                              "label": "ipv4-prefix",
+                              "fields": [
+                                {
+                                  "path": "/routing-policy/tunnel-selectors/tunnel-selector/nodes/node/conditions/match-nexthop-ipv4-prefix",
+                                  "type": "group",
+                                  "label": "match-nexthop-ipv4-prefix",
+                                  "fields": [
+                                    {
+                                      "path": "/routing-policy/tunnel-selectors/tunnel-selector/nodes/node/conditions/match-nexthop-ipv4-prefix/prefix-filter-ref",
+                                      "type": "string",
+                                      "label": "prefix-filter-ref"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "path": "/routing-policy/tunnel-selectors/tunnel-selector/nodes/node/conditions/match-ipv4-route-source",
+                          "type": "choice",
+                          "label": "match-ipv4-route-source",
+                          "cases": [
+                            {
+                              "name": "ipv4-prefix",
+                              "label": "ipv4-prefix",
+                              "fields": [
+                                {
+                                  "path": "/routing-policy/tunnel-selectors/tunnel-selector/nodes/node/conditions/match-route-source-ipv4-prefix",
+                                  "type": "group",
+                                  "label": "match-route-source-ipv4-prefix",
+                                  "fields": [
+                                    {
+                                      "path": "/routing-policy/tunnel-selectors/tunnel-selector/nodes/node/conditions/match-route-source-ipv4-prefix/prefix-filter-ref",
+                                      "type": "string",
+                                      "label": "prefix-filter-ref"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "path": "/routing-policy/tunnel-selectors/tunnel-selector/nodes/node/conditions/match-ipv6-nexthop",
+                          "type": "choice",
+                          "label": "match-ipv6-nexthop",
+                          "cases": [
+                            {
+                              "name": "ipv6-prefix",
+                              "label": "ipv6-prefix",
+                              "fields": [
+                                {
+                                  "path": "/routing-policy/tunnel-selectors/tunnel-selector/nodes/node/conditions/match-nexthop-ipv6-prefix",
+                                  "type": "group",
+                                  "label": "match-nexthop-ipv6-prefix",
+                                  "fields": [
+                                    {
+                                      "path": "/routing-policy/tunnel-selectors/tunnel-selector/nodes/node/conditions/match-nexthop-ipv6-prefix/prefix-filter-ref",
+                                      "type": "string",
+                                      "label": "prefix-filter-ref"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "path": "/routing-policy/tunnel-selectors/tunnel-selector/nodes/node/conditions/match-rd-filter",
+                          "type": "group",
+                          "label": "match-rd-filter",
+                          "fields": [
+                            {
+                              "path": "/routing-policy/tunnel-selectors/tunnel-selector/nodes/node/conditions/match-rd-filter/rd-filter-ref",
+                              "type": "string",
+                              "label": "rd-filter-ref"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/routing-policy/tunnel-selectors/tunnel-selector/nodes/node/match-mode",
+                      "type": "enum",
+                      "label": "match-mode",
+                      "required": true,
+                      "options": [
+                        {
+                          "label": "deny",
+                          "value": "deny"
+                        },
+                        {
+                          "label": "permit",
+                          "value": "permit"
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/routing-policy/tunnel-selectors/tunnel-selector/nodes/node/sequence",
+                      "type": "number",
+                      "label": "sequence",
+                      "maximum": 65535,
+                      "isKey": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/routing-policy/vni-filters",
+      "type": "group",
+      "label": "vni-filters",
+      "fields": [
+        {
+          "path": "/routing-policy/vni-filters/vni-filter",
+          "type": "list",
+          "label": "vni-filter",
+          "fields": [
+            {
+              "path": "/routing-policy/vni-filters/vni-filter/name",
+              "type": "string",
+              "label": "name",
+              "isKey": true
+            },
+            {
+              "path": "/routing-policy/vni-filters/vni-filter/vni-members",
+              "type": "group",
+              "label": "vni-members",
+              "fields": [
+                {
+                  "path": "/routing-policy/vni-filters/vni-filter/vni-members/vni-member",
+                  "type": "list",
+                  "label": "vni-member",
+                  "fields": [
+                    {
+                      "path": "/routing-policy/vni-filters/vni-filter/vni-members/vni-member/value",
+                      "type": "number",
+                      "label": "value",
+                      "minimum": 1,
+                      "maximum": 16777215,
+                      "isKey": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
