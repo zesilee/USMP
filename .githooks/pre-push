@@ -83,6 +83,23 @@ if [ "$FRONTEND_CHANGED" = 1 ] && [ "${USMP_SKIP_E2E:-0}" != 1 ]; then
 fi
 
 # ──────────────────────────────────────────────
+# AI 记忆未提交提醒（只提醒，不拦截）
+# ──────────────────────────────────────────────
+# docs/memory 是记忆的唯一真身（见 CLAUDE.md §13）。记忆没提交就等于没备份，
+# 机器一没就全丢。但记忆属于「知识沉淀」不属于「代码正确性」，故不阻断推送。
+MAIN_ROOT=$(git rev-parse --git-common-dir 2>/dev/null || echo "")
+case "$MAIN_ROOT" in /*) ;; *) MAIN_ROOT="$(cd "$MAIN_ROOT" 2>/dev/null && pwd || echo "")" ;; esac
+if [ -n "$MAIN_ROOT" ]; then
+  MEM_ROOT="$(dirname "$MAIN_ROOT")/docs/memory"
+  if [ -d "$MEM_ROOT" ]; then
+    DIRTY=$(git -C "$(dirname "$MAIN_ROOT")" status --porcelain -- docs/memory 2>/dev/null | wc -l | tr -d ' ')
+    if [ "${DIRTY:-0}" -gt 0 ]; then
+      echo -e "${YELLOW}[pre-push] 💡 docs/memory 有 ${DIRTY} 处未提交的记忆变更——记得提交，否则换机器就丢了${NC}"
+    fi
+  fi
+fi
+
+# ──────────────────────────────────────────────
 # 结果
 # ──────────────────────────────────────────────
 if [ "$FAILED" -eq 1 ]; then
