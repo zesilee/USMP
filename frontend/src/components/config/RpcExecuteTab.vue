@@ -9,11 +9,11 @@
     <p class="rpc-tip">{{ t('console.rpc.tip') }}</p>
 
     <el-form label-position="top" class="rpc-form">
-      <el-form-item v-for="f in rpc.input" :key="f.path" :label="labelOf(f)" :required="!!f.required">
+      <el-form-item v-for="f in resolvedInputs" :key="f.path" :label="labelOf(f)" :required="!!f.required">
         <FieldRenderer :field="f" :model-value="values[keyOf(f)]"
           @update:model-value="values[keyOf(f)] = $event" />
       </el-form-item>
-      <div v-if="!rpc.input.length" class="rpc-empty">{{ t('console.rpc.noInput') }}</div>
+      <div v-if="!resolvedInputs.length" class="rpc-empty">{{ t('console.rpc.noInput') }}</div>
     </el-form>
 
     <div class="actions">
@@ -29,13 +29,15 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, computed } from 'vue'
+import { ref, reactive, computed, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { ElMessageBox } from 'element-plus'
-import { executeRpc } from '../../api'
+import { executeRpc, getConfig } from '../../api'
 import type { Field } from '../../utils/crdSchemaParser'
 import type { ConsoleTab, RpcDef } from '../../utils/moduleConsole'
 import { leafName } from '../../utils/moduleConsole'
+import { extractRows } from '../../composables/useDeviceConfig'
+import { parseLeafref } from '../../utils/leafref'
 import FieldRenderer from './FieldRenderer.vue'
 
 const props = defineProps<{
@@ -52,12 +54,48 @@ const running = ref(false)
 const result = ref('')
 const resultType = ref<'success' | 'error'>('success')
 
+// leafref 输入的目标值下拉选项（键=输入叶名，FE-19）。设备/rpc 变化时按需拉取。
+const leafrefOptions = reactive<Record<string, { label: string; value: string }[]>>({})
+
 function keyOf(f: Field): string {
   return leafName(f)
 }
 function labelOf(f: Field): string {
   return f.label || leafName(f)
 }
+
+// 渲染用的输入字段：leafref 且已解析出目标值 → 注入 options（FieldRenderer 渲成
+// 下拉）；否则原样（文本框）。设备离线/拉取失败时 options 为空 → 降级文本输入（R08）。
+const resolvedInputs = computed<Field[]>(() =>
+  rpc.value.input.map((f) => {
+    const opts = leafrefOptions[keyOf(f)]
+    return f.leafRef && opts?.length ? { ...f, options: opts } : f
+  }),
+)
+
+// 拉取每个 leafref 输入的目标列表 → 下拉选项。解析路径经 getConfig+extractRows，
+// 失败静默降级（保留文本输入，不打扰执行主流程）。
+async function loadLeafrefOptions() {
+  for (const k of Object.keys(leafrefOptions)) delete leafrefOptions[k]
+  if (!props.device) return
+  for (const f of rpc.value.input) {
+    const target = parseLeafref(f.leafRef)
+    if (!target) continue
+    try {
+      const res = await getConfig(props.device, target.fetchPath)
+      const rows = extractRows(res.data?.data, target.listKey, target.keyField)
+      const opts = rows
+        .map((r) => String(r[target.keyField] ?? ''))
+        .filter((v) => v !== '')
+        .map((v) => ({ label: v, value: v }))
+      if (opts.length) leafrefOptions[keyOf(f)] = opts
+    } catch {
+      /* 拉取失败降级文本输入（R08） */
+    }
+  }
+}
+
+watch(() => [props.device, rpc.value.name], loadLeafrefOptions, { immediate: true })
 
 // 所有 mandatory input 有值才可执行（§9：校验拦截，不下发）。
 const submittable = computed(() =>

@@ -42,6 +42,9 @@ export interface Field {
   dynamicDefault?: boolean
   // units 携带 YANG units：输入控件展示单位后缀（FE-15）。
   units?: string
+  // leafRef 携带 leafref 目标 XPath（FE-19）：非空时可解析目标列表渲染为下拉
+  // （如 rpc 输入 if-name→接口名）。后端 rpc input 首用。
+  leafRef?: string
 }
 
 interface OpenAPIProperty {
