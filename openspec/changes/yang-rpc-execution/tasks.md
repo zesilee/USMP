@@ -3,14 +3,14 @@
 ### 1. Worktree 与基线
 
 - [ ] 1.1 创建 worktree，验证 `.gitignore`，跑基线 `make compliance` 全绿
-- [ ] 1.2 扫全模块 rpc：列出各模块 rpc 名与 input 结构，定稿高危关键词清单（Open-Q3）
+- [x] 1.2 扫全模块 rpc：列出各模块 rpc 名与 input 结构，定稿高危关键词清单（Open-Q3）
 
 ### 2. rpcgen 构建期提取（B1，RPC-01）
 
-- [ ] 2.1 **先写测试**：`backend/tools/rpcgen` B1——(a) huawei-ifm 提取出全部 rpc；(b) `reset-if-counters-by-name` 的 input `if-name` 带 leafref 目标 + mandatory；(c) 模块动态发现不硬编码；(d) 提取确定性（两次逐字节一致）。红灯先行
-- [ ] 2.2 实现 rpcgen：goyang 解析 → `Entry.RPC` 提取 rpc 名 + input 叶树（含 leafref/mandatory/units/range/pattern）→ 生成 `internal/yangschema/rpc.gen.go`。形状对齐 lefttreegen/tasknamegen。转绿
-- [ ] 2.3 高危分类（RPC-04）：名称启发式（restart/reboot/reload/reset/clear/delete…）打 highRisk 标，B1 断言 restart-if 高危、reset-if-counters 按清单归类
-- [ ] 2.4 `Makefile` 加 `gen-rpc`；执行生成 rpc.gen.go 入库
+- [x] 2.1 **先写测试**：`backend/tools/rpcgen` B1——(a) huawei-ifm 提取出全部 rpc；(b) `reset-if-counters-by-name` 的 input `if-name` 带 leafref 目标 + mandatory；(c) 模块动态发现不硬编码；(d) 提取确定性（两次逐字节一致）。红灯先行
+- [x] 2.2 实现 rpcgen：goyang 解析 → `Entry.RPC` 提取 rpc 名 + input 叶树（含 leafref/mandatory/units/range/pattern）→ 生成 `internal/yangschema/rpc.gen.go`。形状对齐 lefttreegen/tasknamegen。转绿
+- [x] 2.3 高危分类（RPC-04）：名称启发式（restart/reboot/reload/reset/clear/delete…）打 highRisk 标，B1 断言 restart-if 高危、reset-if-counters 按清单归类
+- [x] 2.4 `Makefile` 加 `gen-rpc`；执行生成 rpc.gen.go 入库
 
 ### 3. 列 rpc API（B3，RPC-02/05）
 

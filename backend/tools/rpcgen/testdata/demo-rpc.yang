@@ -1,0 +1,40 @@
+module demo-rpc {
+  namespace "urn:demo:rpc";
+  prefix dr;
+
+  container ifm {
+    list interface {
+      key name;
+      leaf name { type string; }
+    }
+  }
+
+  rpc reset-counters {
+    description "Clear statistics — mild, base confirm.";
+    input {
+      leaf if-name {
+        type leafref { path "/dr:ifm/dr:interface/dr:name"; }
+        mandatory true;
+        description "Interface to clear.";
+      }
+    }
+  }
+
+  rpc restart-if {
+    description "Restart an interface — high risk.";
+    input {
+      leaf if-name {
+        type string;
+        mandatory true;
+      }
+      leaf grace-period {
+        type uint32;
+        units "seconds";
+      }
+    }
+  }
+
+  rpc ping-op {
+    description "No input rpc.";
+  }
+}
