@@ -2008,5 +2008,12 @@
         }
       ]
     }
+  ],
+  "rpcs": [
+    {
+      "name": "activate-users",
+      "label": "activate-users",
+      "input": null
+    }
   ]
 }

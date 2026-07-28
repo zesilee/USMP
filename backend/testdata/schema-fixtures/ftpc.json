@@ -51,5 +51,94 @@
         }
       ]
     }
+  ],
+  "rpcs": [
+    {
+      "name": "ftpc-transfer-file",
+      "label": "ftpc-transfer-file",
+      "input": [
+        {
+          "path": "command-type",
+          "type": "enum",
+          "label": "command-type"
+        },
+        {
+          "path": "ipv6-vpn-name",
+          "type": "string",
+          "label": "ipv6-vpn-name",
+          "leafRef": "/ni:network-instance/ni:instances/ni:instance/ni:name"
+        },
+        {
+          "path": "is-public-net",
+          "type": "boolean",
+          "label": "is-public-net"
+        },
+        {
+          "path": "local-file-name",
+          "type": "string",
+          "label": "local-file-name"
+        },
+        {
+          "path": "password",
+          "type": "string",
+          "label": "password",
+          "required": true
+        },
+        {
+          "path": "remote-extension",
+          "type": "string",
+          "label": "remote-extension"
+        },
+        {
+          "path": "remote-file-name",
+          "type": "string",
+          "label": "remote-file-name"
+        },
+        {
+          "path": "server-ipv4-address",
+          "type": "string",
+          "label": "server-ipv4-address"
+        },
+        {
+          "path": "server-ipv6-address",
+          "type": "string",
+          "label": "server-ipv6-address"
+        },
+        {
+          "path": "server-port",
+          "type": "number",
+          "label": "server-port"
+        },
+        {
+          "path": "source-interface-name",
+          "type": "string",
+          "label": "source-interface-name"
+        },
+        {
+          "path": "source-ipv4-address",
+          "type": "string",
+          "label": "source-ipv4-address",
+          "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?"
+        },
+        {
+          "path": "source-ipv6-address",
+          "type": "string",
+          "label": "source-ipv6-address",
+          "pattern": "((:|[0-9a-fA-F]{0,4}):)([0-9a-fA-F]{0,4}:){0,5}((([0-9a-fA-F]{0,4}:)?(:|[0-9a-fA-F]{0,4}))|(((25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])))(%[\\p{N}\\p{L}]+)?"
+        },
+        {
+          "path": "user-name",
+          "type": "string",
+          "label": "user-name",
+          "required": true
+        },
+        {
+          "path": "vpn-name",
+          "type": "string",
+          "label": "vpn-name",
+          "leafRef": "/ni:network-instance/ni:instances/ni:instance/ni:name"
+        }
+      ]
+    }
   ]
 }

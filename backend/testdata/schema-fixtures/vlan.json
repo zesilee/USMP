@@ -1098,5 +1098,19 @@
         }
       ]
     }
+  ],
+  "rpcs": [
+    {
+      "name": "reset-vlan-statistics",
+      "label": "reset-vlan-statistics",
+      "input": [
+        {
+          "path": "vlan-id",
+          "type": "number",
+          "label": "vlan-id",
+          "required": true
+        }
+      ]
+    }
   ]
 }

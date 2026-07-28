@@ -56134,5 +56134,281 @@
         }
       ]
     }
+  ],
+  "rpcs": [
+    {
+      "name": "clear-inactive-config",
+      "label": "clear-inactive-config",
+      "input": [
+        {
+          "path": "entity-class",
+          "type": "enum",
+          "label": "entity-class",
+          "required": true
+        },
+        {
+          "path": "position",
+          "type": "string",
+          "label": "position",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "cold-reset-lpu",
+      "label": "cold-reset-lpu",
+      "highRisk": true,
+      "input": [
+        {
+          "path": "board-position",
+          "type": "string",
+          "label": "board-position",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "cold-reset-mpu",
+      "label": "cold-reset-mpu",
+      "highRisk": true,
+      "input": [
+        {
+          "path": "board-position",
+          "type": "string",
+          "label": "board-position",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "reboot",
+      "label": "reboot",
+      "highRisk": true,
+      "input": [
+        {
+          "path": "save-flag",
+          "type": "boolean",
+          "label": "save-flag"
+        }
+      ]
+    },
+    {
+      "name": "reset-board",
+      "label": "reset-board",
+      "input": [
+        {
+          "path": "board-position",
+          "type": "string",
+          "label": "board-position",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "reset-card",
+      "label": "reset-card",
+      "input": [
+        {
+          "path": "card-position",
+          "type": "string",
+          "label": "card-position",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "reset-lpu-board",
+      "label": "reset-lpu-board",
+      "input": [
+        {
+          "path": "board-position",
+          "type": "string",
+          "label": "board-position",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "reset-mpu-board",
+      "label": "reset-mpu-board",
+      "input": [
+        {
+          "path": "board-position",
+          "type": "string",
+          "label": "board-position",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "reset-offline-config",
+      "label": "reset-offline-config",
+      "input": [
+        {
+          "path": "board-position",
+          "type": "string",
+          "label": "board-position",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "reset-sfu-board",
+      "label": "reset-sfu-board",
+      "input": [
+        {
+          "path": "board-position",
+          "type": "string",
+          "label": "board-position",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "schedule-reboot-at-time",
+      "label": "schedule-reboot-at-time",
+      "highRisk": true,
+      "input": [
+        {
+          "path": "save-flag",
+          "type": "boolean",
+          "label": "save-flag"
+        },
+        {
+          "path": "schedule-date",
+          "type": "string",
+          "label": "schedule-date",
+          "required": true,
+          "pattern": "\\d{4}-\\d{2}-\\d{2}"
+        },
+        {
+          "path": "schedule-datetime",
+          "type": "string",
+          "label": "schedule-datetime",
+          "required": true,
+          "pattern": "(([0-1][0-9])|(2[0-3])|[0-9]):([0-5][0-9]|[0-9])"
+        }
+      ]
+    },
+    {
+      "name": "schedule-reboot-delay-time",
+      "label": "schedule-reboot-delay-time",
+      "highRisk": true,
+      "input": [
+        {
+          "path": "delay-time",
+          "type": "string",
+          "label": "delay-time",
+          "required": true
+        },
+        {
+          "path": "save-flag",
+          "type": "boolean",
+          "label": "save-flag"
+        }
+      ]
+    },
+    {
+      "name": "transfer-pnpp",
+      "label": "transfer-pnpp",
+      "input": [
+        {
+          "path": "command-type",
+          "type": "enum",
+          "label": "command-type"
+        },
+        {
+          "path": "local-file-name",
+          "type": "string",
+          "label": "local-file-name"
+        },
+        {
+          "path": "password",
+          "type": "string",
+          "label": "password",
+          "required": true
+        },
+        {
+          "path": "remote-extension",
+          "type": "string",
+          "label": "remote-extension"
+        },
+        {
+          "path": "remote-file-name",
+          "type": "string",
+          "label": "remote-file-name"
+        },
+        {
+          "path": "server-ip-address",
+          "type": "string",
+          "label": "server-ip-address",
+          "required": true
+        },
+        {
+          "path": "server-port",
+          "type": "number",
+          "label": "server-port"
+        },
+        {
+          "path": "server-type",
+          "type": "enum",
+          "label": "server-type"
+        },
+        {
+          "path": "source-interface-name",
+          "type": "string",
+          "label": "source-interface-name"
+        },
+        {
+          "path": "source-ipv4-address",
+          "type": "string",
+          "label": "source-ipv4-address",
+          "pattern": "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?"
+        },
+        {
+          "path": "user-name",
+          "type": "string",
+          "label": "user-name",
+          "required": true
+        },
+        {
+          "path": "vpn-instance-name",
+          "type": "string",
+          "label": "vpn-instance-name"
+        }
+      ]
+    },
+    {
+      "name": "undo-schedule-reboot",
+      "label": "undo-schedule-reboot",
+      "highRisk": true,
+      "input": null
+    },
+    {
+      "name": "warm-reset-lpu",
+      "label": "warm-reset-lpu",
+      "highRisk": true,
+      "input": [
+        {
+          "path": "board-position",
+          "type": "string",
+          "label": "board-position",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "warm-reset-mpu",
+      "label": "warm-reset-mpu",
+      "highRisk": true,
+      "input": [
+        {
+          "path": "board-position",
+          "type": "string",
+          "label": "board-position",
+          "required": true
+        }
+      ]
+    }
   ]
 }

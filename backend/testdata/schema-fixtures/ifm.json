@@ -17041,5 +17041,134 @@
         }
       ]
     }
+  ],
+  "rpcs": [
+    {
+      "name": "reset-if-control-flap-counts",
+      "label": "reset-if-control-flap-counts",
+      "input": [
+        {
+          "path": "if-name",
+          "type": "string",
+          "label": "if-name",
+          "required": true,
+          "leafRef": "/ifm:ifm/ifm:interfaces/ifm:interface/ifm:name"
+        }
+      ]
+    },
+    {
+      "name": "reset-if-control-flap-penalty",
+      "label": "reset-if-control-flap-penalty",
+      "input": [
+        {
+          "path": "if-name",
+          "type": "string",
+          "label": "if-name",
+          "required": true,
+          "leafRef": "/ifm:ifm/ifm:interfaces/ifm:interface/ifm:name"
+        }
+      ]
+    },
+    {
+      "name": "reset-if-counters-all",
+      "label": "reset-if-counters-all",
+      "input": [
+        {
+          "path": "all-if",
+          "type": "boolean",
+          "label": "all-if",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "reset-if-counters-by-name",
+      "label": "reset-if-counters-by-name",
+      "input": [
+        {
+          "path": "if-name",
+          "type": "string",
+          "label": "if-name",
+          "required": true,
+          "leafRef": "/ifm:ifm/ifm:interfaces/ifm:interface/ifm:name"
+        }
+      ]
+    },
+    {
+      "name": "reset-if-counters-by-type",
+      "label": "reset-if-counters-by-type",
+      "input": [
+        {
+          "path": "if-type",
+          "type": "enum",
+          "label": "if-type",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "reset-if-mib-counters-all",
+      "label": "reset-if-mib-counters-all",
+      "input": [
+        {
+          "path": "all-if",
+          "type": "boolean",
+          "label": "all-if",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "reset-if-mib-counters-by-name",
+      "label": "reset-if-mib-counters-by-name",
+      "input": [
+        {
+          "path": "if-name",
+          "type": "string",
+          "label": "if-name",
+          "required": true,
+          "leafRef": "/ifm:ifm/ifm:interfaces/ifm:interface/ifm:name"
+        }
+      ]
+    },
+    {
+      "name": "reset-if-mib-counters-by-type",
+      "label": "reset-if-mib-counters-by-type",
+      "input": [
+        {
+          "path": "if-type",
+          "type": "enum",
+          "label": "if-type",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "reset-remote-if-counters",
+      "label": "reset-remote-if-counters",
+      "input": [
+        {
+          "path": "if-name",
+          "type": "string",
+          "label": "if-name",
+          "required": true,
+          "leafRef": "/ifm:ifm/ifm:interfaces/ifm:interface/ifm:name"
+        }
+      ]
+    },
+    {
+      "name": "restart-if",
+      "label": "restart-if",
+      "highRisk": true,
+      "input": [
+        {
+          "path": "if-name",
+          "type": "string",
+          "label": "if-name",
+          "required": true,
+          "leafRef": "/ifm:ifm/ifm:interfaces/ifm:interface/ifm:name"
+        }
+      ]
+    }
   ]
 }

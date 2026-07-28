@@ -1539,5 +1539,129 @@
         }
       ]
     }
+  ],
+  "rpcs": [
+    {
+      "name": "license-active",
+      "label": "license-active",
+      "input": [
+        {
+          "path": "filename",
+          "type": "string",
+          "label": "filename",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "license-assign",
+      "label": "license-assign",
+      "input": [
+        {
+          "path": "item-name",
+          "type": "string",
+          "label": "item-name"
+        },
+        {
+          "path": "item-num",
+          "type": "number",
+          "label": "item-num"
+        }
+      ]
+    },
+    {
+      "name": "license-delete",
+      "label": "license-delete",
+      "highRisk": true,
+      "input": [
+        {
+          "path": "filename",
+          "type": "string",
+          "label": "filename",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "license-emergency",
+      "label": "license-emergency",
+      "input": null
+    },
+    {
+      "name": "license-export",
+      "label": "license-export",
+      "input": [
+        {
+          "path": "filename",
+          "type": "string",
+          "label": "filename",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "license-revoke",
+      "label": "license-revoke",
+      "input": null
+    },
+    {
+      "name": "license-revoke-chassis",
+      "label": "license-revoke-chassis",
+      "input": [
+        {
+          "path": "chassis-id",
+          "type": "string",
+          "label": "chassis-id"
+        }
+      ]
+    },
+    {
+      "name": "license-switch-mode",
+      "label": "license-switch-mode",
+      "highRisk": true,
+      "input": [
+        {
+          "path": "license-mode",
+          "type": "enum",
+          "label": "license-mode"
+        }
+      ]
+    },
+    {
+      "name": "license-trial",
+      "label": "license-trial",
+      "input": [
+        {
+          "path": "trial-switch",
+          "type": "boolean",
+          "label": "trial-switch",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "license-verify",
+      "label": "license-verify",
+      "input": [
+        {
+          "path": "filename",
+          "type": "string",
+          "label": "filename",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "startup-paf",
+      "label": "startup-paf",
+      "input": [
+        {
+          "path": "filename",
+          "type": "string",
+          "label": "filename",
+          "required": true
+        }
+      ]
+    }
   ]
 }

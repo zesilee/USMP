@@ -64,6 +64,10 @@ func loadUncached() (schema.Schema, error) {
 // SND left-tree（LT-01）：构建期生成分组树 + 叶子根容器映射，运行期零 snd 文件依赖。
 //go:generate go run ../../tools/lefttreegen -tree=../../../snd/webui/template/left-tree.json -path=../../../snd/ce6866p-yang -output=./lefttree.gen.go -package=yangschema
 
+// YANG rpc 定义（RPC-01）：构建期以 goyang 从 YANG 源提取每模块 rpc（名称/高危/
+// 输入叶），ygot 运行期 schema 不含 rpc。模块清单与厂商 taskname 同源。
+//go:generate go run ../../tools/rpcgen -path=../../../snd/ce6866p-yang -modules=huawei-vlan,huawei-ifm,huawei-system,huawei-pub-type,huawei-extension,huawei-bgp,huawei-network-instance,huawei-analysis-collector,huawei-anyflow,huawei-arp,huawei-bd,huawei-cfg,huawei-devm,huawei-driver,huawei-dsa,huawei-ecc,huawei-evpn,huawei-fib,huawei-ftpc,huawei-grpc,huawei-hwtacacs,huawei-ifm-trunk,huawei-ip,huawei-l3-multicast,huawei-lacp,huawei-license,huawei-lldp,huawei-loadbalance,huawei-m-lag,huawei-mac-flapping-detect,huawei-macsec,huawei-microsegmentation,huawei-mirror,huawei-monitor-link,huawei-mstp,huawei-multicast,huawei-mvpn,huawei-nqa,huawei-ntp,huawei-nvo3,huawei-openflow-agent,huawei-ospfv2,huawei-ospfv3,huawei-packetevent,huawei-qos,huawei-rsa,huawei-sflow,huawei-sm2,huawei-snmp,huawei-syslog,huawei-system-resources-usage,huawei-unicast-forward,huawei-vrrp,huawei-vty,huawei-vxlan-ext,huawei-vxlan-path-detect,openconfig-telemetry -output=./rpc.gen.go -package=yangschema
+
 // 业务意图模型的 task-name 与厂商模型不同源（backend/internal/yang/models 入库
 // 模型，无 submodule 依赖），独立生成文件与变量避免冲突。
 //go:generate go run ../../tools/tasknamegen -path=../yang/models -modules=usmp-business-vlan -output=./taskname_business.gen.go -package=yangschema -var=BusinessTaskNames

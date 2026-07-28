@@ -289,5 +289,39 @@
         }
       ]
     }
+  ],
+  "rpcs": [
+    {
+      "name": "reset-interface-statistics",
+      "label": "reset-interface-statistics",
+      "input": [
+        {
+          "path": "interface-name",
+          "type": "string",
+          "label": "interface-name",
+          "required": true,
+          "leafRef": "/ifm:ifm/ifm:interfaces/ifm:interface/ifm:name"
+        },
+        {
+          "path": "slot-id",
+          "type": "string",
+          "label": "slot-id",
+          "leafRef": "/devm:devm/devm:lpu-boards/devm:lpu-board/devm:position"
+        }
+      ]
+    },
+    {
+      "name": "reset-slot-statistics",
+      "label": "reset-slot-statistics",
+      "input": [
+        {
+          "path": "slot-id",
+          "type": "string",
+          "label": "slot-id",
+          "required": true,
+          "leafRef": "/devm:devm/devm:lpu-boards/devm:lpu-board/devm:position"
+        }
+      ]
+    }
   ]
 }

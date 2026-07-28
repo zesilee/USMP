@@ -413,5 +413,19 @@
         }
       ]
     }
+  ],
+  "rpcs": [
+    {
+      "name": "reset-na-anti-attack-statistic",
+      "label": "reset-na-anti-attack-statistic",
+      "input": [
+        {
+          "path": "slot-id",
+          "type": "string",
+          "label": "slot-id",
+          "required": true
+        }
+      ]
+    }
   ]
 }

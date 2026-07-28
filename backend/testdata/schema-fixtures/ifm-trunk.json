@@ -15,5 +15,21 @@
         }
       ]
     }
+  ],
+  "rpcs": [
+    {
+      "name": "trunk-switch",
+      "label": "trunk-switch",
+      "highRisk": true,
+      "input": [
+        {
+          "path": "if-name",
+          "type": "string",
+          "label": "if-name",
+          "required": true,
+          "leafRef": "/ifm:ifm/ifm:interfaces/ifm:interface/ifm:name"
+        }
+      ]
+    }
   ]
 }

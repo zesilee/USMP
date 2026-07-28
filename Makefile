@@ -119,5 +119,9 @@ gen-schema-fixtures: ## 重新生成全模块 schema fixture（前端派生黄�
 	@cd backend && go run ./tools/schemadump -output=testdata/schema-fixtures
 	@echo "✅ gen-schema-fixtures 完成（生成物勿手改，改后端 schema 后重跑 make gen-schema-fixtures）"
 
+gen-rpc: ## 重新生成 YANG rpc 定义生成物（RPC-01；构建期 goyang 提取，CI 以 regen-and-diff 验证零漂移）
+	@cd backend && go generate -run rpcgen ./internal/yangschema/
+	@echo "✅ gen-rpc 完成（生成物勿手改，改 YANG 源/模块清单后重跑 make gen-rpc）"
+
 e2e-local: ## 本地复现 CI：起 staging → 健康等待 → 浏览器冒烟（提交前必跑，pre-push 亦调用）
 	@bash scripts/e2e-smoke.sh

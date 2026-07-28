@@ -20427,5 +20427,457 @@
         }
       ]
     }
+  ],
+  "rpcs": [
+    {
+      "name": "reset-fabric-queue-multicast-statistics",
+      "label": "reset-fabric-queue-multicast-statistics",
+      "input": [
+        {
+          "path": "slot-id",
+          "type": "string",
+          "label": "slot-id",
+          "required": true,
+          "pattern": "(c[cl]c\\d+/)?\\d+"
+        }
+      ]
+    },
+    {
+      "name": "reset-fabric-queue-unicast-statistics",
+      "label": "reset-fabric-queue-unicast-statistics",
+      "input": [
+        {
+          "path": "destination-slot-id",
+          "type": "string",
+          "label": "destination-slot-id",
+          "pattern": "(c[cl]c\\d+/)?\\d+"
+        },
+        {
+          "path": "source-slot-id",
+          "type": "string",
+          "label": "source-slot-id",
+          "required": true,
+          "pattern": "(c[cl]c\\d+/)?\\d+"
+        }
+      ]
+    },
+    {
+      "name": "reset-global-policy-statistics",
+      "label": "reset-global-policy-statistics",
+      "input": [
+        {
+          "path": "direction",
+          "type": "enum",
+          "label": "direction",
+          "required": true
+        },
+        {
+          "path": "policy-name",
+          "type": "string",
+          "label": "policy-name",
+          "required": true
+        },
+        {
+          "path": "slot-id",
+          "type": "string",
+          "label": "slot-id"
+        }
+      ]
+    },
+    {
+      "name": "reset-interface-buffer-usage-statistics",
+      "label": "reset-interface-buffer-usage-statistics",
+      "input": [
+        {
+          "path": "interface-name",
+          "type": "string",
+          "label": "interface-name"
+        },
+        {
+          "path": "slot-id",
+          "type": "string",
+          "label": "slot-id",
+          "pattern": "(c[cl]c\\d+/)?\\d+"
+        }
+      ]
+    },
+    {
+      "name": "reset-interface-car-statistics",
+      "label": "reset-interface-car-statistics",
+      "input": [
+        {
+          "path": "ce-vid",
+          "type": "number",
+          "label": "ce-vid"
+        },
+        {
+          "path": "direction",
+          "type": "enum",
+          "label": "direction",
+          "required": true
+        },
+        {
+          "path": "interface-name",
+          "type": "string",
+          "label": "interface-name",
+          "required": true
+        },
+        {
+          "path": "vid",
+          "type": "number",
+          "label": "vid"
+        },
+        {
+          "path": "vlan-id",
+          "type": "number",
+          "label": "vlan-id"
+        }
+      ]
+    },
+    {
+      "name": "reset-interface-default-flow-queue-statistics",
+      "label": "reset-interface-default-flow-queue-statistics",
+      "input": [
+        {
+          "path": "interface-name",
+          "type": "string",
+          "label": "interface-name",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "reset-interface-ecn-statistics",
+      "label": "reset-interface-ecn-statistics",
+      "input": [
+        {
+          "path": "interface-name",
+          "type": "string",
+          "label": "interface-name"
+        }
+      ]
+    },
+    {
+      "name": "reset-interface-hard-pipe-statistics",
+      "label": "reset-interface-hard-pipe-statistics",
+      "input": [
+        {
+          "path": "interface-name",
+          "type": "string",
+          "label": "interface-name",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "reset-interface-lv-hard-pipe-statistics",
+      "label": "reset-interface-lv-hard-pipe-statistics",
+      "input": [
+        {
+          "path": "interface-name",
+          "type": "string",
+          "label": "interface-name",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "reset-interface-port-queue-statistics",
+      "label": "reset-interface-port-queue-statistics",
+      "input": [
+        {
+          "path": "default",
+          "type": "string",
+          "label": "default"
+        },
+        {
+          "path": "interface-name",
+          "type": "string",
+          "label": "interface-name",
+          "leafRef": "/ifm:ifm/ifm:interfaces/ifm:interface/ifm:name"
+        },
+        {
+          "path": "on-board",
+          "type": "string",
+          "label": "on-board"
+        },
+        {
+          "path": "service-class",
+          "type": "enum",
+          "label": "service-class"
+        }
+      ]
+    },
+    {
+      "name": "reset-interface-profile-statistics",
+      "label": "reset-interface-profile-statistics",
+      "input": [
+        {
+          "path": "direction",
+          "type": "enum",
+          "label": "direction",
+          "required": true
+        },
+        {
+          "path": "interface-name",
+          "type": "string",
+          "label": "interface-name",
+          "required": true
+        },
+        {
+          "path": "pe-vlan-id",
+          "type": "number",
+          "label": "pe-vlan-id",
+          "required": true
+        },
+        {
+          "path": "vlan-id",
+          "type": "number",
+          "label": "vlan-id",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "reset-interface-sub-port-queue-statistics",
+      "label": "reset-interface-sub-port-queue-statistics",
+      "input": [
+        {
+          "path": "interface-name",
+          "type": "string",
+          "label": "interface-name",
+          "required": true,
+          "leafRef": "/ifm:ifm/ifm:interfaces/ifm:interface/ifm:name"
+        }
+      ]
+    },
+    {
+      "name": "reset-interface-traffic-policy-statistics",
+      "label": "reset-interface-traffic-policy-statistics",
+      "input": [
+        {
+          "path": "direction",
+          "type": "enum",
+          "label": "direction",
+          "required": true
+        },
+        {
+          "path": "interface-name",
+          "type": "string",
+          "label": "interface-name",
+          "required": true,
+          "leafRef": "/ifm:ifm/ifm:interfaces/ifm:interface/ifm:name"
+        },
+        {
+          "path": "pe-vlan-id",
+          "type": "number",
+          "label": "pe-vlan-id",
+          "required": true
+        },
+        {
+          "path": "vlan-id",
+          "type": "number",
+          "label": "vlan-id",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "reset-interface-user-group-queue-statistics",
+      "label": "reset-interface-user-group-queue-statistics",
+      "input": [
+        {
+          "path": "ce-vlan-id",
+          "type": "number",
+          "label": "ce-vlan-id"
+        },
+        {
+          "path": "direction",
+          "type": "enum",
+          "label": "direction",
+          "required": true
+        },
+        {
+          "path": "interface-name",
+          "type": "string",
+          "label": "interface-name",
+          "required": true
+        },
+        {
+          "path": "pe-vlan-id",
+          "type": "number",
+          "label": "pe-vlan-id"
+        },
+        {
+          "path": "vlan-id",
+          "type": "number",
+          "label": "vlan-id"
+        }
+      ]
+    },
+    {
+      "name": "reset-interface-user-queue-statistics",
+      "label": "reset-interface-user-queue-statistics",
+      "input": [
+        {
+          "path": "direction",
+          "type": "enum",
+          "label": "direction",
+          "required": true
+        },
+        {
+          "path": "interface-name",
+          "type": "string",
+          "label": "interface-name",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "reset-mpls-te-statistics",
+      "label": "reset-mpls-te-statistics",
+      "input": [
+        {
+          "path": "direction",
+          "type": "enum",
+          "label": "direction",
+          "required": true
+        },
+        {
+          "path": "interface-name",
+          "type": "string",
+          "label": "interface-name",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "reset-queue-statistics",
+      "label": "reset-queue-statistics",
+      "input": [
+        {
+          "path": "interface-name",
+          "type": "string",
+          "label": "interface-name",
+          "leafRef": "/ifm:ifm/ifm:interfaces/ifm:interface/ifm:name"
+        },
+        {
+          "path": "service-class",
+          "type": "enum",
+          "label": "service-class"
+        },
+        {
+          "path": "slot-id",
+          "type": "string",
+          "label": "slot-id",
+          "pattern": "(c[cl]c\\d+/)?\\d+"
+        }
+      ]
+    },
+    {
+      "name": "reset-slot-port-queue-statistics",
+      "label": "reset-slot-port-queue-statistics",
+      "input": [
+        {
+          "path": "service-class",
+          "type": "enum",
+          "label": "service-class"
+        },
+        {
+          "path": "slot-id",
+          "type": "string",
+          "label": "slot-id",
+          "required": true,
+          "pattern": "(c[cl]c\\d+/)?\\d+"
+        }
+      ]
+    },
+    {
+      "name": "reset-user-group-queue-statistics",
+      "label": "reset-user-group-queue-statistics",
+      "input": [
+        {
+          "path": "direction",
+          "type": "enum",
+          "label": "direction",
+          "required": true
+        },
+        {
+          "path": "slot-id",
+          "type": "string",
+          "label": "slot-id"
+        },
+        {
+          "path": "user-group-queue-name",
+          "type": "string",
+          "label": "user-group-queue-name",
+          "required": true,
+          "leafRef": "/qos:qos/qos:queue-scheduler-template/qos:user-group-queues/qos:user-group-queue/qos:name"
+        }
+      ]
+    },
+    {
+      "name": "reset-user-informations",
+      "label": "reset-user-informations",
+      "input": [
+        {
+          "path": "direction",
+          "type": "enum",
+          "label": "direction",
+          "required": true
+        },
+        {
+          "path": "id",
+          "type": "number",
+          "label": "id",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "reset-vlan-traffic-policy-statistics",
+      "label": "reset-vlan-traffic-policy-statistics",
+      "input": [
+        {
+          "path": "direction",
+          "type": "enum",
+          "label": "direction"
+        },
+        {
+          "path": "policy-name",
+          "type": "string",
+          "label": "policy-name",
+          "leafRef": "/qos:qos/qos:classifier-template/qos:traffic-policys/qos:traffic-policy/qos:name"
+        },
+        {
+          "path": "vlan-id",
+          "type": "number",
+          "label": "vlan-id"
+        }
+      ]
+    },
+    {
+      "name": "reset-vpn-traffic-policy-statistics",
+      "label": "reset-vpn-traffic-policy-statistics",
+      "input": [
+        {
+          "path": "direction",
+          "type": "enum",
+          "label": "direction"
+        },
+        {
+          "path": "policy-name",
+          "type": "string",
+          "label": "policy-name",
+          "leafRef": "/qos:qos/qos:classifier-template/qos:traffic-policys/qos:traffic-policy/qos:name"
+        },
+        {
+          "path": "vpn-instance",
+          "type": "string",
+          "label": "vpn-instance",
+          "leafRef": "/ni:network-instance/ni:instances/ni:instance/ni:name"
+        }
+      ]
+    }
   ]
 }
