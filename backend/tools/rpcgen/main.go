@@ -182,24 +182,32 @@ func main() {
 		log.Fatal("rpcgen: -path, -modules and -output are required")
 	}
 
-	modules := strings.Split(*modulesCSV, ",")
-	rpcs, err := buildRPCs(*yangDir, modules)
+	n, total, err := run(*yangDir, strings.Split(*modulesCSV, ","), *output, *pkg)
 	if err != nil {
 		log.Fatalf("rpcgen: %v", err)
 	}
+	log.Printf("rpcgen: wrote %s (%d modules, %d rpcs)", *output, n, total)
+}
 
-	src, err := render(rpcs, *pkg)
+// run extracts, renders and writes the rpc definitions, returning the module and
+// rpc counts. Extracted from main so the extract→render→write pipeline is
+// unit-testable without spawning a process.
+func run(yangDir string, modules []string, output, pkg string) (nModules, nRPCs int, err error) {
+	rpcs, err := buildRPCs(yangDir, modules)
 	if err != nil {
-		log.Fatalf("rpcgen: %v", err)
+		return 0, 0, err
 	}
-	if err := os.WriteFile(*output, src, 0o644); err != nil {
-		log.Fatalf("rpcgen: write: %v", err)
+	src, err := render(rpcs, pkg)
+	if err != nil {
+		return 0, 0, err
 	}
-	total := 0
+	if err := os.WriteFile(output, src, 0o644); err != nil {
+		return 0, 0, fmt.Errorf("write %s: %w", output, err)
+	}
 	for _, v := range rpcs {
-		total += len(v)
+		nRPCs += len(v)
 	}
-	log.Printf("rpcgen: wrote %s (%d modules, %d rpcs)", *output, len(rpcs), total)
+	return len(rpcs), nRPCs, nil
 }
 
 // render emits the deterministic ModuleRPCs literal.

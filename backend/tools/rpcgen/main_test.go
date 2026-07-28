@@ -1,6 +1,10 @@
 package main
 
-import "testing"
+import (
+	"os"
+	"strings"
+	"testing"
+)
 
 // RPC-01/RPC-04：从 YANG 提取 rpc 定义——名称、input 叶（类型/leafref/mandatory/
 // units）、高危分类。正/负路径覆盖。
@@ -126,3 +130,49 @@ func TestHighRisk(t *testing.T) {
 		}
 	}
 }
+
+// render 产出合法 Go 且含 ModuleRPCs 与已知 rpc（覆盖 codegen 路径）。
+func TestRender(t *testing.T) {
+	rpcs, err := buildRPCs("testdata", []string{"demo-rpc"})
+	if err != nil {
+		t.Fatalf("buildRPCs: %v", err)
+	}
+	src, err := render(rpcs, "yangschema")
+	if err != nil {
+		t.Fatalf("render: %v", err)
+	}
+	s := string(src)
+	for _, want := range []string{"package yangschema", "var ModuleRPCs", "restart-if", "HighRisk: true", "LeafRef:"} {
+		if !contains(s, want) {
+			t.Errorf("render 输出缺 %q", want)
+		}
+	}
+}
+
+// run 落盘全链：写文件、内容含 ModuleRPCs、计数正确。
+func TestRun(t *testing.T) {
+	out := t.TempDir() + "/rpc.gen.go"
+	nMod, nRPC, err := run("testdata", []string{"demo-rpc"}, out, "yangschema")
+	if err != nil {
+		t.Fatalf("run: %v", err)
+	}
+	if nMod != 1 || nRPC != 3 {
+		t.Fatalf("run 计数 = (%d,%d), want (1,3)", nMod, nRPC)
+	}
+	b, err := os.ReadFile(out)
+	if err != nil {
+		t.Fatalf("read output: %v", err)
+	}
+	if !contains(string(b), "var ModuleRPCs") {
+		t.Error("落盘文件缺 ModuleRPCs")
+	}
+}
+
+// run 到不可写路径应返回错误（负路径，不 panic）。
+func TestRun_WriteError(t *testing.T) {
+	if _, _, err := run("testdata", []string{"demo-rpc"}, t.TempDir()+"/nope/rpc.gen.go", "yangschema"); err == nil {
+		t.Error("写入不可创建路径应报错")
+	}
+}
+
+func contains(s, sub string) bool { return strings.Contains(s, sub) }
