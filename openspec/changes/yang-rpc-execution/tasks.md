@@ -39,9 +39,9 @@
 
 ### 7. 执行 API（B3，RPC-03）
 
-- [ ] 7.1 **先写测试**：`POST /rpc/:ip/:module/:rpc` B3——成功执行返回结果；缺 mandatory input 拒绝不下发；设备 rpc-error 明确回传；断言**不写配置缓存/不触发对账**（D4）
-- [ ] 7.2 实现 `rpc_handler.go` 执行端点；`make gen-contract`；契约漂移
-- [ ] 7.3 覆盖率棘轮 + review + 提交 + PR
+- [x] 7.1 **先写测试**：`POST /rpc/:ip/:module/:rpc` B3——成功执行返回结果；缺 mandatory input 拒绝不下发；设备 rpc-error 明确回传；断言**不写配置缓存/不触发对账**（D4）
+- [x] 7.2 实现 `rpc_handler.go` 执行端点；`make gen-contract`；契约漂移
+- [x] 7.3 覆盖率棘轮 + review + 提交 + PR
 
 ## 阶段③ 前端渲染执行（前端，一 PR）
 

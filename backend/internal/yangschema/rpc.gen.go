@@ -587,3 +587,24 @@ var ModuleRPCs = map[string][]RPCDef{
 		}},
 	},
 }
+
+// ModuleRPCNamespace 是各模块的 YANG namespace（键同 ModuleRPCs），构建 <rpc> payload 用。
+var ModuleRPCNamespace = map[string]string{
+	"arp":             "urn:huawei:yang:huawei-arp",
+	"cfg":             "urn:huawei:yang:huawei-cfg",
+	"devm":            "urn:huawei:yang:huawei-devm",
+	"driver":          "urn:huawei:yang:huawei-driver",
+	"evpn":            "urn:huawei:yang:huawei-evpn",
+	"ftpc":            "urn:huawei:yang:huawei-ftpc",
+	"ifm":             "urn:huawei:yang:huawei-ifm",
+	"ifm-trunk":       "urn:huawei:yang:huawei-ifm-trunk",
+	"license":         "urn:huawei:yang:huawei-license",
+	"macsec":          "urn:huawei:yang:huawei-macsec",
+	"nqa":             "urn:huawei:yang:huawei-nqa",
+	"openflow-agent":  "urn:huawei:yang:huawei-openflow-agent",
+	"qos":             "urn:huawei:yang:huawei-qos",
+	"sflow":           "urn:huawei:yang:huawei-sflow",
+	"snmp":            "urn:huawei:yang:huawei-snmp",
+	"unicast-forward": "urn:huawei:yang:huawei-unicast-forward",
+	"vlan":            "urn:huawei:yang:huawei-vlan",
+}

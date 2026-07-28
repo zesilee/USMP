@@ -9,7 +9,7 @@ import (
 // RPC-01/RPC-04：从 YANG 提取 rpc 定义——名称、input 叶（类型/leafref/mandatory/
 // units）、高危分类。正/负路径覆盖。
 func TestBuildRPCs(t *testing.T) {
-	got, err := buildRPCs("testdata", []string{"demo-rpc"})
+	got, _, err := buildRPCs("testdata", []string{"demo-rpc"})
 	if err != nil {
 		t.Fatalf("buildRPCs: %v", err)
 	}
@@ -90,11 +90,11 @@ func TestBuildRPCs(t *testing.T) {
 
 // 确定性：同输入两次提取结果一致（regen-and-diff 前提）。
 func TestBuildRPCs_Deterministic(t *testing.T) {
-	a, err := buildRPCs("testdata", []string{"demo-rpc"})
+	a, _, err := buildRPCs("testdata", []string{"demo-rpc"})
 	if err != nil {
 		t.Fatalf("run1: %v", err)
 	}
-	b, err := buildRPCs("testdata", []string{"demo-rpc"})
+	b, _, err := buildRPCs("testdata", []string{"demo-rpc"})
 	if err != nil {
 		t.Fatalf("run2: %v", err)
 	}
@@ -133,11 +133,11 @@ func TestHighRisk(t *testing.T) {
 
 // render 产出合法 Go 且含 ModuleRPCs 与已知 rpc（覆盖 codegen 路径）。
 func TestRender(t *testing.T) {
-	rpcs, err := buildRPCs("testdata", []string{"demo-rpc"})
+	rpcs, ns, err := buildRPCs("testdata", []string{"demo-rpc"})
 	if err != nil {
 		t.Fatalf("buildRPCs: %v", err)
 	}
-	src, err := render(rpcs, "yangschema")
+	src, err := render(rpcs, ns, "yangschema")
 	if err != nil {
 		t.Fatalf("render: %v", err)
 	}

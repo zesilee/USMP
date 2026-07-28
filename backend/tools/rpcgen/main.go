@@ -62,9 +62,11 @@ func isHighRisk(name string) bool {
 	return false
 }
 
-// buildRPCs parses the given modules under yangDir and returns, per module, its
-// rpc definitions. Modules that fail to parse are skipped (logged), never fatal.
-func buildRPCs(yangDir string, modules []string) (map[string][]RPCDef, error) {
+// buildRPCs parses the given modules under yangDir and returns, per root
+// container, its rpc definitions and the module namespace (needed to build the
+// <rpc> payload — the runtime ygot schema carries no per-module namespace).
+// Modules that fail to parse are skipped (logged), never fatal.
+func buildRPCs(yangDir string, modules []string) (map[string][]RPCDef, map[string]string, error) {
 	ms := yang.NewModules()
 	ms.AddPath(yangDir)
 	for _, m := range modules {
@@ -79,6 +81,7 @@ func buildRPCs(yangDir string, modules []string) (map[string][]RPCDef, error) {
 	}
 
 	out := make(map[string][]RPCDef, len(modules))
+	ns := make(map[string]string, len(modules))
 	for _, m := range modules {
 		mod, ok := ms.Modules[m]
 		if !ok || mod == nil {
@@ -87,6 +90,10 @@ func buildRPCs(yangDir string, modules []string) (map[string][]RPCDef, error) {
 		e := yang.ToEntry(mod)
 		if e == nil {
 			continue
+		}
+		namespace := ""
+		if mod.Namespace != nil {
+			namespace = mod.Namespace.Name
 		}
 		var defs []RPCDef
 		var roots []string
@@ -118,13 +125,15 @@ func buildRPCs(yangDir string, modules []string) (map[string][]RPCDef, error) {
 		// (not servable via container route, but never dropped).
 		if len(roots) == 0 {
 			out[m] = defs
+			ns[m] = namespace
 			continue
 		}
 		for _, r := range roots {
 			out[r] = defs
+			ns[r] = namespace
 		}
 	}
-	return out, nil
+	return out, ns, nil
 }
 
 // inputLeaves flattens an rpc's <input> container into ordered input leaves.
@@ -193,11 +202,11 @@ func main() {
 // rpc counts. Extracted from main so the extract→render→write pipeline is
 // unit-testable without spawning a process.
 func run(yangDir string, modules []string, output, pkg string) (nModules, nRPCs int, err error) {
-	rpcs, err := buildRPCs(yangDir, modules)
+	rpcs, ns, err := buildRPCs(yangDir, modules)
 	if err != nil {
 		return 0, 0, err
 	}
-	src, err := render(rpcs, pkg)
+	src, err := render(rpcs, ns, pkg)
 	if err != nil {
 		return 0, 0, err
 	}
@@ -210,8 +219,8 @@ func run(yangDir string, modules []string, output, pkg string) (nModules, nRPCs 
 	return len(rpcs), nRPCs, nil
 }
 
-// render emits the deterministic ModuleRPCs literal.
-func render(rpcs map[string][]RPCDef, pkg string) ([]byte, error) {
+// render emits the deterministic ModuleRPCs + ModuleRPCNamespace literals.
+func render(rpcs map[string][]RPCDef, namespaces map[string]string, pkg string) ([]byte, error) {
 	mods := make([]string, 0, len(rpcs))
 	for m := range rpcs {
 		mods = append(mods, m)
@@ -274,6 +283,15 @@ var ModuleRPCs = map[string][]RPCDef{
 			b.WriteString("\t\t}},\n")
 		}
 		b.WriteString("\t},\n")
+	}
+	b.WriteString("}\n\n")
+
+	// ModuleRPCNamespace: root container → module YANG namespace (rpc payload
+	// needs it; the runtime ygot schema carries no per-module namespace).
+	b.WriteString("// ModuleRPCNamespace 是各模块的 YANG namespace（键同 ModuleRPCs），构建 <rpc> payload 用。\n")
+	b.WriteString("var ModuleRPCNamespace = map[string]string{\n")
+	for _, m := range mods {
+		fmt.Fprintf(&b, "\t%q: %q,\n", m, namespaces[m])
 	}
 	b.WriteString("}\n")
 
