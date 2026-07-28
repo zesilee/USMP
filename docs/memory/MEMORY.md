@@ -1,5 +1,7 @@
 # 项目记忆索引
 
+- [YANG rpc执行](yang-rpc-execution.md) — 做/改 rpc(运维操作:清计数/重启接口)相关前必读：四层链路(rpcgen构建期提取→/yang/schema列rpc→ExecuteRPC执行→RpcExecuteTab前端)全交付(#228/#229/#230)、ExecuteRPC不重试(有副作用)、rpc不入缓存、全部执行前确认+高危升级、两个follow-up(leafref下拉/标签本地化)、docker服旧包坑
+
 - [schema驱动测试地基](schema-driven-test-harness.md) — 改前端派生逻辑/加YANG模块/碰schema契约前必读：fixture导出+68模块派生黄金已交付(PR#223)、SF-03忠实性锚点(改field_gen会红是对的,重跑gen-schema-fixtures)、黄金只记派生结论不含i18n、cap=9截断follow-up、后续三步(设备一致性矩阵/E2E瘦身/真机门)
 
 - [换机器环境清单](server-migration-env-checklist.md) — 迁服务器/新环境首跑必读：迁移会丢 gh 二进制(→push 直接炸)、node_modules 半旧(→前端测试全灭)、Playwright 要装两套浏览器(1217+1228)、hooksPath 绝对路径误报；含全绿基线与容器 unhealthy 误报解释
