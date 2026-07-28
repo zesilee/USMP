@@ -111,11 +111,13 @@ test.describe('部署冒烟 - 前端 SPA', () => {
     await expect(rpcTab).toBeVisible({ timeout: 15000 })
     await rpcTab.click()
 
-    // 执行面板：input（if-name）+ 执行按钮渲染（schema 驱动）。
-    await expect(page.locator('[data-test="rpc-execute"]')).toBeVisible({ timeout: 15000 })
-    await expect(page.getByText('if-name', { exact: false }).first()).toBeVisible()
+    // 执行面板：input（if-name）+ 执行按钮渲染（schema 驱动）。el-tabs 常驻全部
+    // 面板，故按 pane id 精确定位当前 rpc 的执行面板（避免 10 个 rpc 面板撞选择器）。
+    const pane = page.locator('#pane-__rpc__reset-if-counters-by-name')
+    await expect(pane.locator('[data-test="rpc-execute"]')).toBeVisible({ timeout: 15000 })
+    await expect(pane.getByText('if-name', { exact: false }).first()).toBeVisible()
     // 缺 mandatory input → 执行按钮禁用（§9 校验拦截）。
-    await expect(page.locator('[data-test="rpc-execute"]')).toBeDisabled()
+    await expect(pane.locator('[data-test="rpc-execute"]')).toBeDisabled()
   })
 
   // 种子数据（模拟网元 DemoSeedConfig）：5 条接口回读进表格，sub 行显示 parent-name。
