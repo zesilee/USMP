@@ -74,3 +74,7 @@ func TestProbeOnline_PassesProtocolAuto(t *testing.T) {
 		t.Fatalf("probeOnline must pass Protocol=AUTO, got %q", p.lastInfo.Protocol)
 	}
 }
+
+func (f *fakeClient) ExecuteRPC(context.Context, string, string, []client.RPCInput) (*client.RPCResult, error) {
+	return &client.RPCResult{OK: true}, nil
+}

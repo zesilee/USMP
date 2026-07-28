@@ -27,15 +27,15 @@
 
 ### 5. device-protocol ExecuteRPC（B1，DP-10）
 
-- [ ] 5.1 **先写测试**：ExecuteRPC 编解码 B1——input→`<rpc>` payload（命名空间=模块 ns）编码正确；`<rpc-reply>` 的 ok/数据/`<rpc-error>` 解析正确；负路径不 panic
-- [ ] 5.2 实现 `ExecuteRPC(ctx, module, rpc, inputs)`：scrapligo `Driver.RPC` 发送、解析 reply；断线重试/超时复用既有语义；get/edit-config 路径不动
-- [ ] 5.3 B1 断言读写路径行为不变（回归）
+- [x] 5.1 **先写测试**：ExecuteRPC 编解码 B1——input→`<rpc>` payload（命名空间=模块 ns）编码正确；`<rpc-reply>` 的 ok/数据/`<rpc-error>` 解析正确；负路径不 panic
+- [x] 5.2 实现 `ExecuteRPC(ctx, module, rpc, inputs)`：scrapligo `Driver.RPC` 发送、解析 reply；断线重试/超时复用既有语义；get/edit-config 路径不动
+- [x] 5.3 B1 断言读写路径行为不变（回归）
 
 ### 6. 模拟网元 custom rpc（B2，NS-09）
 
-- [ ] 6.1 **先写测试**：netconfsim B2——classifyRPC 识别 custom rpc；执行 reset-if-counters-by-name(if-name=存在接口)→校验通过→记录→ok；leafref 不存在→rpc-error；未识别 rpc→ok
-- [ ] 6.2 实现 custom-rpc 分发：input 校验（mandatory/leafref 存在性）+ 调用记录 + 结果注入
-- [ ] 6.3 **端到端集成测试**（T02）：client ExecuteRPC → sim 校验/记录 → 结果回读，覆盖成功 + 负路径（缺 mandatory / leafref 不存在）
+- [x] 6.1 **先写测试**：netconfsim B2——classifyRPC 识别 custom rpc；执行 reset-if-counters-by-name(if-name=存在接口)→校验通过→记录→ok；leafref 不存在→rpc-error；未识别 rpc→ok
+- [x] 6.2 实现 custom-rpc 分发：input 校验（mandatory/leafref 存在性）+ 调用记录 + 结果注入
+- [x] 6.3 **端到端集成测试**（T02）：client ExecuteRPC → sim 校验/记录 → 结果回读，覆盖成功 + 负路径（缺 mandatory / leafref 不存在）
 
 ### 7. 执行 API（B3，RPC-03）
 

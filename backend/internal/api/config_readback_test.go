@@ -50,3 +50,7 @@ func TestFetchFromDevice_ParsesIfmInterfaces(t *testing.T) {
 	first, _ := list[0].(map[string]interface{})
 	assert.Equal(t, "GigabitEthernet0/0/2", first["name"], "回读应含新增接口的 yang 命名字段")
 }
+
+func (c *xmlClient) ExecuteRPC(context.Context, string, string, []client.RPCInput) (*client.RPCResult, error) {
+	return &client.RPCResult{OK: true}, nil
+}

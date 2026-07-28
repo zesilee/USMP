@@ -132,6 +132,9 @@ type Client interface {
 	Get(ctx context.Context, path string, opts ...GetOption) (*GetResult, error)
 	// Set applies configuration changes to the device
 	Set(ctx context.Context, changes []Change, opts ...SetOption) (*SetResult, error)
+	// ExecuteRPC executes a NETCONF <rpc> operation (DP-10): namespaced rpcName
+	// with input leaves; returns the parsed reply. No auto-retry (side effects).
+	ExecuteRPC(ctx context.Context, namespace, rpcName string, inputs []RPCInput) (*RPCResult, error)
 	// Subscribe subscribes to state change notifications from the device
 	Subscribe(ctx context.Context, path string, handler func(Notification)) error
 	// Close closes the client connection
