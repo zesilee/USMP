@@ -54,7 +54,7 @@ describe('ConvergenceHero · 收敛率 hero', () => {
     expect(w.find('.legend-foot').text()).toContain('未对账')
   })
 
-  it('空车队：收敛率 0、分段条渲染空段、无 chip、无脚注', () => {
+  it('无设备：收敛率 0、分段条渲染空段、无 chip、无脚注', () => {
     const empty = deriveOverview([], {})
     const w = mount(ConvergenceHero, { props: { overview: empty } })
     expect(w.find('.conv-pct').text()).toContain('0')

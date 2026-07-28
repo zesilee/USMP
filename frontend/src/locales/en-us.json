@@ -50,7 +50,7 @@
     }
   },
   "header": {
-    "fleet": "Fleet",
+    "fleet": "Home",
     "breadcrumbAria": "Breadcrumb",
     "searchPlaceholder": "Search devices, configs…",
     "onlineCount": "{online}/{total} online",
@@ -59,7 +59,7 @@
     "localeZh": "中文",
     "localeEn": "English",
     "crumb": {
-      "dashboard": "Fleet Overview",
+      "dashboard": "Device Overview",
       "devices": "Devices",
       "interface": "Interface Configuration",
       "vlan": "VLAN Configuration",
@@ -153,7 +153,7 @@
     "persistenceHint": "Running config never persisted (R03)"
   },
   "dashboard": {
-    "title": "Fleet Overview",
+    "title": "Device Overview",
     "subtitle": "{total} devices · Declarative reconciliation in real time · Data read live from NETCONF / gNMI, never persisted",
     "pushConfig": "Push Config",
     "loadError": "Failed to load overview: {error}",
@@ -174,7 +174,7 @@
     "noRecords": "No reconcile records",
     "statusDist": "Device Status Distribution",
     "hero": {
-      "fleetPrefix": "Fleet ",
+      "fleetPrefix": "Device ",
       "rateWord": "convergence rate",
       "rateDesc": "Share of devices whose desired and actual state match",
       "segbarTitle": "Segmented by convergence state",

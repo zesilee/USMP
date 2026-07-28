@@ -45,7 +45,7 @@ const MIXED_FLEET = {
   ],
 }
 
-describe('Dashboard View · 车队概览（真数据）', () => {
+describe('Dashboard View · 设备总览（真数据）', () => {
   beforeEach(() => {
     vi.clearAllMocks()
   })
@@ -78,7 +78,7 @@ describe('Dashboard View · 车队概览（真数据）', () => {
     expect(tables[1].findAll('tbody tr').length).toBe(4)
   })
 
-  it('空车队：收敛率 0 且台账空态提示暂无设备', async () => {
+  it('无设备：收敛率 0 且台账空态提示暂无设备', async () => {
     seed([], { summary: {}, devices: [] })
     const w = await mountDash()
     expect(w.find('.conv-pct').text()).toContain('0')

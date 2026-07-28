@@ -1,8 +1,8 @@
 import { describe, it, expect } from 'vitest'
 import { deriveOverview, type DeviceInput, type FleetInput } from '../../src/composables/useFleetOverview'
 
-describe('deriveOverview · 车队概览派生（纯函数）', () => {
-  it('空车队：全 0、收敛率 0、台账/最近皆空', () => {
+describe('deriveOverview · 设备总览派生（纯函数）', () => {
+  it('无设备：全 0、收敛率 0、台账/最近皆空', () => {
     const o = deriveOverview([], {})
     expect(o.total).toBe(0)
     expect(o.online).toBe(0)
