@@ -68,3 +68,15 @@
 
 - [ ] 11.1 首模块 huawei-ifm 端到端真机抽验（发布前，模拟网元绿≠真机绿边界，R4）
 - [ ] 11.2 文档：TESTING.md / 相关 README 补 rpc 能力定位；确认管线泛化到其余模块 rpc 自动可用
+
+## 收官说明（archive）
+
+三阶段核心全部交付并合入 main：Phase① 列 rpc（#228）、Phase② 执行通道（#229）、
+Phase③ 前端渲染执行（#230）。归档时以下明确**延后为独立 follow-up**（不阻断 rpc 端到端可用）：
+
+- **8.4 / 9.3 leafref 下拉**：rpc 输入 leafref（如 if-name）暂用文本框；下拉需接设备
+  实时接口列表数据源。→ 独立 change 实现。
+- **11.1 真机抽验**：发布前门禁（模拟网元绿≠真机绿，R4），无真机不做。
+- **rpc 标签本地化**：rpc Tab 暂用后端原始名；snd res 已含中文名，本地化待接
+  （localizeFields 扩到 rpc 路径）。
+- **rpcgen units**：goyang v1.6.0 不传 rpc-input 叶 units，best-effort（已在代码注释标注）。

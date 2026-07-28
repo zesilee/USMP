@@ -3,9 +3,7 @@
 ## Purpose
 
 device-protocol 是 Stack B 的设备接入层（C5）：连接池按设备 IP 复用连接，NETCONF/gNMI 协议客户端向上暴露 Get/Set/Subscribe/DiscardCandidate。连接信息（IP/端口/凭据/协议）由调用方从共享 DeviceStore 解析后传入，本层只负责按传入 info 建连——netconf 客户端**不再有 admin/admin 兜底**：未注册设备以空凭据建连、SSH 干净失败，而非静默掩盖缺失的注册。当前实现存在若干契约缺口：gNMI 为规划能力（空壳 client 已删，工厂显式未实现错误）、NETCONF `Subscribe` 未实现、`Release` 为 no-op、`CloseAll` 仅返回最后一个错误（吞掉其余）；这些缺口在下方对应 Requirement 的负路径 Scenario 中显式记录。
-
 ## Requirements
-
 ### Requirement: DP-01 连接复用（双检锁）
 
 `ClientPool.Get(info)` SHALL 按设备 IP 复用已建立且 `IsConnected()` 为真的 client；否则 SHALL 经 factory 新建并存入池。新建路径 SHALL 用双检锁（读锁快路径命中已连接 client，否则取写锁后再次检查）防止并发重复建连。`Release(ip)` 为 no-op（每设备常驻一个 client，不回收）。
@@ -146,3 +144,23 @@ NETCONF 客户端 `Get` SHALL 支持 `WithStateData()` GetOption：置位时 SHA
 #### Scenario: get 读断线自愈
 - **WHEN** `<get>` 请求遇传输层错误（EOF/连接重置）
 - **THEN** 客户端 SHALL 标记连接失效、重连并重试一次；重试仍失败 SHALL 返回错误且不 panic（R08）
+
+### Requirement: DP-10 NETCONF `<rpc>` 自定义操作执行
+
+device-protocol SHALL 提供执行任意模块 rpc 的能力：把 rpc 名与 input 值编码为 NETCONF `<rpc>` payload（命名空间取模块 namespace）下发，解析 `<rpc-reply>` 返回结果（`<ok/>` / 数据 / `<rpc-error>`）。断线重试、超时、连接复用语义 SHALL 与既有读写（DP-03 get-config / edit-config）一致。既有 get/edit-config/commit 行为 SHALL 不变。
+
+#### Scenario: 执行 rpc 并返回 ok
+
+- **WHEN** 以 input（if-name=X）执行 `reset-if-counters-by-name`
+- **THEN** device-protocol SHALL 发送含该 input 的 `<rpc>`，并在设备返回 `<ok/>` 时返回成功结果
+
+#### Scenario: 解析 rpc-error
+
+- **WHEN** 设备对 rpc 返回 `<rpc-error>`
+- **THEN** device-protocol SHALL 把错误结构解析并返回，SHALL NOT panic（R08）
+
+#### Scenario: 读写路径不受影响
+
+- **WHEN** rpc 执行能力引入后执行常规 get-config / edit-config
+- **THEN** 其行为 SHALL 与引入前完全一致
+

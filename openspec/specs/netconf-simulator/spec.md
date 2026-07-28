@@ -3,9 +3,7 @@
 ## Purpose
 
 netconf-simulator 为 YANG 业务提供可编程的模拟设备对端，支撑端到端集成测试（T02）。它是**单一、结构化、协议保真、测试/部署解耦**的 NETCONF 模拟网元：支持 SSH+NETCONF 会话、candidate/commit 数据存语义、故障注入与断言助手；同时以诚实命名的内存 REST 桩承担前端 E2E 后端（非 NETCONF），并可编译为无 `testing` 依赖的独立二进制部署。历史迁移债 D10（两个模拟器并存）已消除。反向还原自 `backend/simulator/netconfsim/`，忠实 as-built（经 `refactor-netconf-simulator` 重构）。
-
 ## Requirements
-
 ### Requirement: NS-01 NETCONF 会话
 
 模拟器 SHALL 经 SSH（随机端口，密码认证 admin/admin，`PasswordCallback` 校验，SHALL NOT 使用 `NoClientAuth`）暴露 netconf subsystem。连接建立后 SHALL 发送 NETCONF hello，广告 `base:1.0` + `:candidate` + `:writable-running` 能力，随后进入 RPC 分发循环。
@@ -109,3 +107,24 @@ netconf-simulator 为 YANG 业务提供可编程的模拟设备对端，支撑�
 #### Scenario: 并发 get 与写操作安全
 - **WHEN** 多客户端并发发送 `<get>` 与 edit-config/commit
 - **THEN** 模拟器 SHALL NOT 出现数据竞态（`-race` 干净，R09），各响应均为一致快照
+
+### Requirement: NS-09 custom rpc 分发与校验
+
+模拟网元 SHALL 识别非 get/get-config/edit-config 的模块 custom rpc，校验其 input（mandatory 存在、leafref 目标存在于当前 running 树），记录调用 `(rpc 名, input 值)` 供测试断言，并返回 `<ok/>` 或注入的结果/错误。未识别的 rpc SHALL 仍返回 ok（NS 既有降级不变）。
+
+#### Scenario: 执行 rpc 被识别、校验、记录
+
+- **WHEN** 收到 `reset-if-counters-by-name`（if-name = running 树中存在的接口）
+- **THEN** 模拟网元 SHALL 校验通过、记录该调用、返回 `<ok/>`
+- **AND** 测试 SHALL 能读取到该调用记录以断言端到端
+
+#### Scenario: leafref 目标不存在 → rpc-error
+
+- **WHEN** 收到 rpc，其 leafref input 指向 running 树中不存在的目标
+- **THEN** 模拟网元 SHALL 返回 `<rpc-error>`（供负路径集成测试）
+
+#### Scenario: 未识别 rpc 降级
+
+- **WHEN** 收到无对应处理的 rpc
+- **THEN** 模拟网元 SHALL 返回 ok（既有降级语义不变）
+
