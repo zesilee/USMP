@@ -3,7 +3,7 @@ import { mount, flushPromises } from '@vue/test-utils'
 import { createPinia } from 'pinia'
 import ElementPlus, { ElMessageBox } from 'element-plus'
 import RpcExecuteTab from '../../src/components/config/RpcExecuteTab.vue'
-import { executeRpc } from '../../src/api'
+import { executeRpc, getConfig } from '../../src/api'
 import { deriveRpcTabs } from '../../src/utils/moduleConsole'
 
 vi.mock('../../src/api')
@@ -30,6 +30,7 @@ function mountTab(tab = resetTab, device = '10.0.0.1') {
 beforeEach(() => {
   vi.clearAllMocks()
   vi.mocked(executeRpc).mockResolvedValue({ data: { success: true, data: { ok: true, reply: '', highRisk: false } } } as any)
+  vi.mocked(getConfig).mockResolvedValue({ data: { data: {} } } as any)
 })
 
 describe('RpcExecuteTab（FE-19/20）', () => {
@@ -96,5 +97,31 @@ describe('RpcExecuteTab（FE-19/20）', () => {
     const alert = w.find('[data-test="rpc-result"]')
     expect(alert.exists()).toBe(true)
     expect(alert.text()).toContain('interface busy')
+  })
+})
+
+describe('RpcExecuteTab · leafref 下拉（FE-19）', () => {
+  it('leafref 输入解析目标列表 → 渲染为可搜索下拉，含接口名选项', async () => {
+    vi.mocked(getConfig).mockResolvedValue({
+      data: { data: { interface: [{ name: '200GE0/1/0' }, { name: '200GE0/1/1' }] } },
+    } as any)
+    const w = mountTab(resetTab)
+    await flushPromises()
+
+    // 拉取路径由 leafRef 解析：/ifm/interfaces/interface/name → /ifm/interfaces
+    expect(vi.mocked(getConfig)).toHaveBeenCalledWith('10.0.0.1', '/ifm/interfaces')
+    // if-name 渲染为 leafref 下拉（非文本框）
+    expect(w.find('[data-test="leafref-select"]').exists()).toBe(true)
+    // 选项来自设备接口列表
+    const vm = w.vm as any
+    expect(vm.resolvedInputs[0].options.map((o: any) => o.value)).toEqual(['200GE0/1/0', '200GE0/1/1'])
+  })
+
+  it('拉取失败/空列表 → 降级文本输入（R08，不阻断执行）', async () => {
+    vi.mocked(getConfig).mockRejectedValue(new Error('offline'))
+    const w = mountTab(resetTab)
+    await flushPromises()
+    expect(w.find('[data-test="leafref-select"]').exists()).toBe(false)
+    expect(w.find('input').exists()).toBe(true) // 文本框兜底
   })
 })
