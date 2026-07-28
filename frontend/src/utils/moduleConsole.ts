@@ -8,13 +8,35 @@ import { i18n } from '../i18n'
 export interface ConsoleTab {
   name: string
   label: string
-  kind: 'list' | 'form'
+  kind: 'list' | 'form' | 'rpc'
   /** Tab 对应的模块根子节点（列表 Tab 时为包裹容器或裸 list，configPath 取其 path）。 */
   field: Field
   /** kind==='list' 时的目标 list 节点。 */
   listField?: Field
   /** 整棵子树为 state 数据（config false，FE-14）：降级只读视图，无编辑/下发入口。 */
   readonly?: boolean
+  /** kind==='rpc' 时的 rpc 定义（执行面板据此渲染输入与执行，FE-19）。 */
+  rpc?: RpcDef
+}
+
+/** 一个 rpc 的前端呈现契约（FE-19，对齐后端 RPCSchema）：input 复用 Field 渲染。 */
+export interface RpcDef {
+  name: string
+  label: string
+  highRisk?: boolean
+  input: Field[]
+}
+
+// rpc 与模块顶层 container 平级呈现（FE-19）：每个 rpc 派生一个 kind==='rpc' 的 Tab，
+// 携带 rpc 定义；field 为合成占位（Tab 契约要求非空），执行面板只读 tab.rpc。
+export function deriveRpcTabs(rpcs: RpcDef[] | undefined): ConsoleTab[] {
+  return (rpcs || []).map((r) => ({
+    name: '__rpc__' + r.name,
+    label: r.label || r.name,
+    kind: 'rpc' as const,
+    field: { path: '', type: 'group', label: r.label || r.name, fields: r.input },
+    rpc: r,
+  }))
 }
 
 const SCALAR_TYPES = new Set<Field['type']>(['string', 'number', 'boolean', 'enum'])

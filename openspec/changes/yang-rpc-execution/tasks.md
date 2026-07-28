@@ -47,21 +47,21 @@
 
 ### 8. rpc 渲染与执行（F1/F2，FE-19）
 
-- [ ] 8.1 **先写测试**：rpc 派生纯函数 F1——从 schema.rpcs 派生 rpc 导航条目（与 container 平级）；执行 payload 组装（input 值→请求体）
-- [ ] 8.2 模块控制台加 rpc 区（与 container Tab 平级，D6）；点 rpc 开执行面板
-- [ ] 8.3 **F2 组件**：执行面板由 input FieldDef 渲染（复用 FieldRenderer）；mandatory 校验拦截执行；执行回显结果/错误
+- [x] 8.1 **先写测试**：rpc 派生纯函数 F1——从 schema.rpcs 派生 rpc 导航条目（与 container 平级）；执行 payload 组装（input 值→请求体）
+- [x] 8.2 模块控制台加 rpc 区（与 container Tab 平级，D6）；点 rpc 开执行面板
+- [x] 8.3 **F2 组件**：执行面板由 input FieldDef 渲染（复用 FieldRenderer）；mandatory 校验拦截执行；执行回显结果/错误
 - [ ] 8.4 **F3 真浏览器**：if-name leafref 下拉（el-select 弹层）真实交互——选接口、校验态
 
 ### 9. 高危确认（F2，FE-20）
 
-- [ ] 9.1 **先写测试**：F2——普通 rpc 执行前弹基础确认（rpc 名/input/目标设备）；高危 rpc 升级警示；取消不下发
-- [ ] 9.2 实现确认对话（基础 + 高危升级样式）；接执行 API
+- [x] 9.1 **先写测试**：F2——普通 rpc 执行前弹基础确认（rpc 名/input/目标设备）；高危 rpc 升级警示；取消不下发
+- [x] 9.2 实现确认对话（基础 + 高危升级样式）；接执行 API
 - [ ] 9.3 leafref 下拉数据源：执行面板打开时拉目标列表（Open-Q4）；设备离线降级手工输入（R08）
 
 ### 10. 端到端 + 收尾
 
-- [ ] 10.1 **F4 staging-smoke**：huawei-ifm 控制台出现 rpc「按接口名清除统计」、执行面板渲染 if-name、校验拦截（冒烟）
-- [ ] 10.2 前端覆盖率棘轮 + typecheck + `make e2e-local` 全绿
+- [x] 10.1 **F4 staging-smoke**：huawei-ifm 控制台出现 rpc「按接口名清除统计」、执行面板渲染 if-name、校验拦截（冒烟）
+- [x] 10.2 前端覆盖率棘轮 + typecheck + `make e2e-local` 全绿
 - [ ] 10.3 review + 提交 + PR；合入后 `/opsx:sync` + `/opsx:archive`
 
 ## 收尾（跨阶段）

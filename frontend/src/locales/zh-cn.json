@@ -286,6 +286,18 @@
       "kindContainer": "容器",
       "kindList": "列表",
       "kindLeaf": "叶子"
+    },
+    "rpc": {
+      "highRisk": "高危",
+      "tip": "执行一次设备运维操作，不修改配置、不入对账。",
+      "noInput": "无输入参数",
+      "execute": "执行",
+      "confirmTitle": "确认执行操作",
+      "confirmBody": "将对设备 {device} 执行「{rpc}」：{inputs}。确定执行？",
+      "confirmOk": "执行",
+      "done": "已执行",
+      "doneReply": "已执行：{reply}",
+      "failed": "执行失败"
     }
   }
 }

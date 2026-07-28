@@ -39,6 +39,7 @@
     <el-tabs v-else-if="tabs.length" v-model="activeTab" class="console-tabs">
       <el-tab-pane v-for="tab in tabs" :key="tab.name" :label="tab.label" :name="tab.name">
         <ModuleListTab v-if="tab.kind === 'list'" :tab="tab" :root-name="rootName" :device="store.selectedDeviceIp" />
+        <RpcExecuteTab v-else-if="tab.kind === 'rpc'" :tab="tab" :module="rootName" :device="store.selectedDeviceIp" />
         <ModuleFormTab v-else :tab="tab" :root-name="rootName" :device="store.selectedDeviceIp" />
       </el-tab-pane>
     </el-tabs>
@@ -56,9 +57,10 @@ import { useLocaleStore } from '../stores/locale'
 import { useMenuStore } from '../stores/menu'
 import { useDeviceStore } from '../stores/device'
 import type { Field } from '../utils/crdSchemaParser'
-import { deriveTabs, type ConsoleTab } from '../utils/moduleConsole'
+import { deriveTabs, deriveRpcTabs, type ConsoleTab, type RpcDef } from '../utils/moduleConsole'
 import ModuleListTab from '../components/config/ModuleListTab.vue'
 import ModuleFormTab from '../components/config/ModuleFormTab.vue'
+import RpcExecuteTab from '../components/config/RpcExecuteTab.vue'
 
 const route = useRoute()
 const localeStore = useLocaleStore()
@@ -83,6 +85,8 @@ const title = ref('')
 const vendor = ref('')
 const rootName = ref('')
 const schemaFields = ref<Field[]>([])
+// 模块 rpc（FE-19）：与容器 Tab 平级呈现；标签用后端原始名（i18n 本地化留后续）。
+const rpcs = ref<RpcDef[]>([])
 
 // 软归属（FE-18）：选中设备上本模块的认领意图清单；查询失败静默降级为无徽标（R08）。
 const ownershipIntents = ref<string[]>([])
@@ -102,7 +106,11 @@ async function loadOwnership() {
   }
 }
 
-const tabs = computed<ConsoleTab[]>(() => deriveTabs(schemaFields.value))
+// 配置容器 Tab + rpc Tab 平级合并（FE-19）：rpc 排在容器之后、同一 Tab 栏。
+const tabs = computed<ConsoleTab[]>(() => [
+  ...deriveTabs(schemaFields.value),
+  ...deriveRpcTabs(rpcs.value),
+])
 const activeTab = ref('')
 const activeTabLabel = computed(() => tabs.value.find((t) => t.name === activeTab.value)?.label || '')
 
@@ -124,6 +132,7 @@ async function loadSchema() {
     const res = await getYangSchema(moduleName.value, 'nested')
     const data = res.data?.data
     rawFields = data?.fields ?? []
+    rpcs.value = (data?.rpcs ?? []) as RpcDef[]
     title.value = data?.title || moduleName.value
     vendor.value = data?.vendor || ''
     // 运行时配置路径的根段 = 模块根容器名（schema title 即 root.Name()）。
