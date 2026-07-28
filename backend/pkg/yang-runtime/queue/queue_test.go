@@ -5,6 +5,8 @@ import (
 	"time"
 
 	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
+	clocktesting "k8s.io/utils/clock/testing"
 )
 
 func TestNewStandardQueue(t *testing.T) {
@@ -42,29 +44,58 @@ func TestStandardQueueShutdown(t *testing.T) {
 	assert.Nil(t, item)
 }
 
+// TestDelayingQueueAddAfter verifies AddAfter delivers items in ready-time order
+// and never before their delay elapses. Driven by a fake clock so timing is
+// deterministic — no wall-clock bounds, no flakiness under -race/load (this test
+// was historically flaky on the old real-time impl: a 0-delay item could race the
+// process loop into a fixed idle sleep and arrive ~100ms late).
 func TestDelayingQueueAddAfter(t *testing.T) {
-	q := NewDelayingQueue(NewStandardQueue())
+	fake := clocktesting.NewFakeClock(time.Now())
+	q := newDelayingQueueWithClock(NewStandardQueue(), fake)
 	defer q.ShutDown()
 
-	q.AddAfter("fast", 0*time.Millisecond)
-	q.AddAfter("slow", 100*time.Millisecond)
+	q.AddAfter("fast", 0)                    // ready immediately (no time advance)
+	q.AddAfter("slow", 100*time.Millisecond) // ready only after +100ms
 
-	// Fast should be available immediately
-	start := time.Now()
+	// "fast" (0 delay) is delivered without advancing the clock — the newItem
+	// wakeup makes it prompt regardless of what the loop was parked on.
 	item, shutdown := q.Get()
 	assert.False(t, shutdown)
 	assert.Equal(t, "fast", item)
 	q.Done(item)
-	assert.Less(t, time.Since(start), 50*time.Millisecond)
 
-	// Slow should take ~100ms
-	start = time.Now()
+	// "slow" must NOT arrive until the clock crosses its 100ms delay. Wait for
+	// process() to park on slow's timer, then advance time exactly to it.
+	require.Eventually(t, fake.HasWaiters, time.Second, 100*time.Microsecond,
+		"process() should be parked on slow's timer before we step the clock")
+	fake.Step(100 * time.Millisecond)
+
 	item, shutdown = q.Get()
 	assert.False(t, shutdown)
 	assert.Equal(t, "slow", item)
 	q.Done(item)
-	duration := time.Since(start)
-	assert.GreaterOrEqual(t, duration.Milliseconds(), int64(50))
+}
+
+// TestDelayingQueueAddAfterHonorsSooner is the direct regression for the fixed
+// bug: an item added with a SHORTER delay while the loop is already parked on a
+// longer wait must still be delivered on time (previously it waited on the stale
+// timer). Deterministic via fake clock.
+func TestDelayingQueueAddAfterHonorsSooner(t *testing.T) {
+	fake := clocktesting.NewFakeClock(time.Now())
+	q := newDelayingQueueWithClock(NewStandardQueue(), fake)
+	defer q.ShutDown()
+
+	// Park the loop on a long wait first.
+	q.AddAfter("long", time.Hour)
+	require.Eventually(t, fake.HasWaiters, time.Second, 100*time.Microsecond)
+
+	// Now add a ready-now item; it must be delivered without advancing the clock
+	// (the old impl would have kept sleeping on the 1h timer).
+	q.AddAfter("now", 0)
+	item, shutdown := q.Get()
+	assert.False(t, shutdown)
+	assert.Equal(t, "now", item)
+	q.Done(item)
 }
 
 func TestRateLimitingExponential(t *testing.T) {

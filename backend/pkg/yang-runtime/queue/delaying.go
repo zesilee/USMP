@@ -5,26 +5,42 @@ import (
 	"sync"
 	"sync/atomic"
 	"time"
+
+	"k8s.io/utils/clock"
 )
 
 // delayingQueue implements a queue that supports delayed item processing
 type delayingQueue struct {
 	base         Interface
 	delayedItems delayedHeap
-	next         chan interface{}
 	stop         chan struct{}
-	wg           sync.WaitGroup
-	mu           sync.Mutex
-	shutdown     bool
+	// newItem wakes process() whenever AddAfter enqueues an item, so a shorter
+	// delay added while the loop is parked on a longer wait is honored promptly
+	// (fixes the race/latency where a fresh 0-delay item waited on a stale timer).
+	newItem chan struct{}
+	// clock is injectable so tests can drive time deterministically (RealClock
+	// in production). Set once at construction, never mutated → lock-free reads.
+	clock    clock.Clock
+	wg       sync.WaitGroup
+	mu       sync.Mutex
+	shutdown bool
 }
 
-// NewDelayingQueue creates a new delaying queue
+// NewDelayingQueue creates a new delaying queue backed by the real clock.
 func NewDelayingQueue(base Interface) RateLimitingInterface {
+	return newDelayingQueueWithClock(base, clock.RealClock{})
+}
+
+// newDelayingQueueWithClock creates a delaying queue with an injectable clock.
+// Unexported: only in-package tests need a fake clock; production always uses
+// NewDelayingQueue (real clock).
+func newDelayingQueueWithClock(base Interface, clk clock.Clock) RateLimitingInterface {
 	dq := &delayingQueue{
-		base:     base,
+		base:         base,
 		delayedItems: make(delayedHeap, 0),
-		next:     make(chan interface{}),
-		stop:     make(chan struct{}),
+		stop:         make(chan struct{}),
+		newItem:      make(chan struct{}, 1),
+		clock:        clk,
 	}
 	heap.Init(&dq.delayedItems)
 	dq.wg.Add(1)
@@ -39,7 +55,12 @@ func (dq *delayingQueue) Add(item interface{}) {
 
 // Len implements Interface
 func (dq *delayingQueue) Len() int {
-	return dq.base.Len() + dq.delayedItems.Len()
+	// delayedItems is mutated by process() under dq.mu; read it under the same
+	// lock to stay race-free. base has its own synchronization.
+	dq.mu.Lock()
+	delayed := dq.delayedItems.Len()
+	dq.mu.Unlock()
+	return dq.base.Len() + delayed
 }
 
 // Get implements Interface
@@ -82,13 +103,21 @@ func (dq *delayingQueue) ShuttingDown() bool {
 
 // AddAfter implements RateLimitingInterface
 func (dq *delayingQueue) AddAfter(item interface{}, delay time.Duration) {
-	when := time.Now().Add(delay)
+	when := dq.clock.Now().Add(delay)
 	dq.mu.Lock()
-	defer dq.mu.Unlock()
 	heap.Push(&dq.delayedItems, &delayedEntry{
 		item:  item,
 		ready: when,
 	})
+	dq.mu.Unlock()
+
+	// Wake process() to re-evaluate: the new item may be ready now or sooner
+	// than whatever wait it is currently parked on. Non-blocking — one pending
+	// signal is enough to force a full re-evaluation of the heap.
+	select {
+	case dq.newItem <- struct{}{}:
+	default:
+	}
 }
 
 // AddRateLimited implements RateLimitingInterface
@@ -111,6 +140,11 @@ func (dq *delayingQueue) NumRequeues(item interface{}) int {
 func (dq *delayingQueue) process() {
 	defer dq.wg.Done()
 
+	// Fallback wait when the heap is empty. The newItem signal wakes the loop the
+	// instant anything is added, so this only bounds idle time if a signal were
+	// ever missed — kept long (not a busy poll) since correctness rides on newItem.
+	const idleWait = time.Hour
+
 	for {
 		select {
 		case <-dq.stop:
@@ -118,41 +152,36 @@ func (dq *delayingQueue) process() {
 		default:
 		}
 
+		now := dq.clock.Now()
+
+		// Deliver every item whose ready time has arrived (drains all currently
+		// ready items, not just one per tick).
 		dq.mu.Lock()
-		var nextItem *delayedEntry
+		for dq.delayedItems.Len() > 0 && !dq.delayedItems[0].ready.After(now) {
+			entry := heap.Pop(&dq.delayedItems).(*delayedEntry)
+			dq.mu.Unlock()
+			dq.base.Add(entry.item) // may block (unbuffered base) — back-pressure, by design
+			dq.mu.Lock()
+		}
+		wait := idleWait
 		if dq.delayedItems.Len() > 0 {
-			nextItem = dq.delayedItems[0]
-			if time.Now().After(nextItem.ready) {
-				heap.Pop(&dq.delayedItems)
-			} else {
-				nextItem = nil
-			}
+			wait = dq.delayedItems[0].ready.Sub(now)
 		}
 		dq.mu.Unlock()
 
-		if nextItem != nil {
-			dq.base.Add(nextItem.item)
+		if wait <= 0 {
+			continue // an item became ready while delivering; re-evaluate now
 		}
 
-		// Wait until next item is ready or we're stopped
-		dq.mu.Lock()
-		var waitTime time.Duration
-		if dq.delayedItems.Len() > 0 {
-			nextReady := dq.delayedItems[0].ready
-			waitTime = nextReady.Sub(time.Now())
-			if waitTime < 0 {
-				waitTime = 0
-			}
-		} else {
-			waitTime = 100 * time.Millisecond
-		}
-		dq.mu.Unlock()
-
+		timer := dq.clock.NewTimer(wait)
 		select {
 		case <-dq.stop:
+			timer.Stop()
 			return
-		case <-time.After(waitTime):
-			// Continue
+		case <-dq.newItem:
+			timer.Stop() // a new (possibly sooner) item arrived — re-evaluate
+		case <-timer.C():
+			// next item's ready time reached
 		}
 	}
 }
@@ -230,8 +259,8 @@ func (rlq *rateLimitingQueue) NumRequeues(item interface{}) int {
 
 // standardQueue is the base blocking queue implementation
 type standardQueue struct {
-	queue     chan interface{}
-	shutdown  atomic.Bool
+	queue    chan interface{}
+	shutdown atomic.Bool
 }
 
 // Add implements Interface
