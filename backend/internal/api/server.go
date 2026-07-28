@@ -66,6 +66,9 @@ func (s *Server) setupRoutes() {
 			configGroup.DELETE("/:ip/*path", configHandler.DeleteConfig)
 		}
 
+		// rpc 执行（RPC-03）：触发模块运维操作，不写缓存/不对账（§8/D4）
+		v1.POST("/rpc/:ip/:module/:rpc", NewRPCHandler(s.manager).Execute)
+
 		// Soft-ownership query (BIO-07：原生控制台徽标/手改提示数据面)
 		v1.GET("/ownership/:device", NewOwnershipHandler().Query)
 

@@ -22,6 +22,7 @@ type sshServer struct {
 	store     *treeDatastore
 	scenario  *ScenarioConfig
 	extraCaps []string // extra YANG-module capabilities advertised in hello
+	rpcLog    *rpcLog  // custom module rpc 记录（NS-09，供端到端断言）
 	done      chan struct{}
 }
 
@@ -167,7 +168,10 @@ func (s *sshServer) handleRequest(msg string) string {
 	case rpcDiscardChanges:
 		return s.handleDiscardChanges(msg, msgID)
 	default:
-		// Return ok for unsupported/unknown RPCs (lock/unlock/…).
+		// 模块 custom rpc（NS-09）：记录并回复；否则（lock/unlock/…）返回 ok。
+		if op, inputs, ok := customRPC(msg); ok {
+			return s.handleCustomRPC(op, inputs, msgID)
+		}
 		return okReply(msgID)
 	}
 }

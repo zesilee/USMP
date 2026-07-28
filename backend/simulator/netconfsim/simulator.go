@@ -30,6 +30,7 @@ type Simulator struct {
 	store     *treeDatastore
 	scenario  *ScenarioConfig
 	extraCaps []string
+	rpcLog    *rpcLog
 
 	listenPort int // 0 = random free port
 
@@ -63,9 +64,16 @@ func NewSimulator() *Simulator {
 		addr:     defaultAddr,
 		store:    newTreeDatastore(),
 		scenario: NewScenarioConfig(),
+		rpcLog:   newRPCLog(),
 		done:     make(chan struct{}),
 		conns:    make(map[net.Conn]struct{}),
 	}
+}
+
+// RecordedRPCs returns the custom module rpcs the simulator has executed (NS-09),
+// for end-to-end test assertions.
+func (s *Simulator) RecordedRPCs() []RecordedRPC {
+	return s.rpcLog.snapshot()
 }
 
 // Start starts the NETCONF simulator.
@@ -110,6 +118,7 @@ func (s *Simulator) Start() error {
 		store:     s.store,
 		scenario:  s.scenario,
 		extraCaps: s.extraCaps,
+		rpcLog:    s.rpcLog,
 		done:      s.done,
 	}
 

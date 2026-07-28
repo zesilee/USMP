@@ -501,3 +501,7 @@ func ptrUint16(v uint16) *uint16 {
 func ptrString(s string) *string {
 	return &s
 }
+
+func (m *MockClient) ExecuteRPC(ctx context.Context, namespace, rpcName string, inputs []client.RPCInput) (*client.RPCResult, error) {
+	return &client.RPCResult{OK: true}, nil
+}

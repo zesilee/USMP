@@ -177,3 +177,7 @@ func TestFetchFromDevice_NoStateDataUnchanged(t *testing.T) {
 	assert.False(t, hasDyn, "无状态数据时不得构造空 dynamic 占位")
 	assert.Equal(t, "GE0/0/1", first["name"])
 }
+
+func (c *optCaptureClient) ExecuteRPC(context.Context, string, string, []client.RPCInput) (*client.RPCResult, error) {
+	return &client.RPCResult{OK: true}, nil
+}
