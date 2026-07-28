@@ -27,7 +27,7 @@ export const getDeviceStatus = (ip: string) => {
   return api.get<ApiEnvelope<DeviceConnStatus>>(`/devices/${ip}/status`)
 }
 
-// Reconcile API —— 车队/单设备对账结局（desired↔actual 收敛），供概览大盘消费。
+// Reconcile API —— 全网/单设备对账结局（desired↔actual 收敛），供概览大盘消费。
 export const getFleetReconcile = () => {
   return api.get<ApiEnvelope<FleetReconcileData>>('/reconcile/status')
 }

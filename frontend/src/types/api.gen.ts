@@ -702,7 +702,7 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /** 车队级对账结局聚合（收敛台账 / 概览大盘用） */
+        /** 全网对账结局聚合（收敛台账 / 概览大盘用） */
         get: {
             parameters: {
                 query?: never;
@@ -712,7 +712,7 @@ export interface paths {
             };
             requestBody?: never;
             responses: {
-                /** @description 车队对账聚合；summary 按结局计数，仅含已对账设备（unknown 需与设备列表相减派生） */
+                /** @description 全网对账结局聚合；summary 按结局计数，仅含已对账设备（unknown 需与设备列表相减派生） */
                 200: {
                     headers: {
                         [name: string]: unknown;

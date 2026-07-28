@@ -39,7 +39,7 @@ import ReconcileChip from './ReconcileChip.vue'
 
 const { t } = useI18n()
 
-// 车队收敛率 hero：大号收敛率 + 分段条 + 四态图例。纯展示，全部输入经 overview prop。
+// 设备收敛率 hero：大号收敛率 + 分段条 + 四态图例。纯展示，全部输入经 overview prop。
 const props = defineProps<{
   overview: Overview
 }>()
