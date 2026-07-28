@@ -2,6 +2,7 @@ import { describe, it, expect } from 'vitest'
 import type { Field } from '../../src/utils/crdSchemaParser'
 import {
   deriveTabs,
+  deriveRpcTabs,
   deriveColumns,
   deriveKeyField,
   filterableFields,
@@ -238,5 +239,39 @@ describe('deriveTabs · readonly 子树降级只读 Tab（FE-14）', () => {
     const rwLeaf: Field = { path: '/ifm/name', type: 'string', label: 'name' }
     expect(deriveTabs([roLeaf])[0].readonly).toBe(true)
     expect(deriveTabs([roLeaf, rwLeaf])[0].readonly).toBeFalsy()
+  })
+})
+
+describe('deriveRpcTabs（FE-19：rpc 与容器平级派生）', () => {
+  const rpcs = [
+    {
+      name: 'reset-if-counters-by-name',
+      label: '按接口名清除统计',
+      highRisk: false,
+      input: [{ path: 'if-name', type: 'string' as const, label: 'if-name', required: true, leafRef: '/ifm/interfaces/interface/name' }],
+    },
+    { name: 'restart-if', label: '重启接口', highRisk: true, input: [] as Field[] },
+  ]
+
+  it('每个 rpc 派生一个 kind=rpc 的 Tab，携带 rpc 定义', () => {
+    const tabs = deriveRpcTabs(rpcs)
+    expect(tabs).toHaveLength(2)
+    expect(tabs[0].kind).toBe('rpc')
+    expect(tabs[0].label).toBe('按接口名清除统计')
+    expect(tabs[0].rpc?.name).toBe('reset-if-counters-by-name')
+    expect(tabs[0].rpc?.input[0].required).toBe(true)
+    // name 前缀避免与容器 Tab 撞名
+    expect(tabs[0].name.startsWith('__rpc__')).toBe(true)
+  })
+
+  it('高危标记透传', () => {
+    const tabs = deriveRpcTabs(rpcs)
+    expect(tabs[1].rpc?.highRisk).toBe(true)
+    expect(tabs[0].rpc?.highRisk).toBe(false)
+  })
+
+  it('空/undefined 输入 → 空数组', () => {
+    expect(deriveRpcTabs([])).toEqual([])
+    expect(deriveRpcTabs(undefined)).toEqual([])
   })
 })

@@ -286,6 +286,18 @@
       "kindContainer": "Container",
       "kindList": "List",
       "kindLeaf": "Leaf"
+    },
+    "rpc": {
+      "highRisk": "High risk",
+      "tip": "Runs a one-shot device operation. Does not change config or trigger reconcile.",
+      "noInput": "No input",
+      "execute": "Execute",
+      "confirmTitle": "Confirm operation",
+      "confirmBody": "Execute \"{rpc}\" on device {device}: {inputs}. Proceed?",
+      "confirmOk": "Execute",
+      "done": "Executed",
+      "doneReply": "Executed: {reply}",
+      "failed": "Execution failed"
     }
   }
 }

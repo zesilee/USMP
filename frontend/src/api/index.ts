@@ -58,6 +58,15 @@ export const setConfig = (ip: string, path: string, data: any, force = false) =>
   })
 }
 
+// rpc 执行（RPC-03/FE-19）：触发模块运维操作（清计数/重启接口等），不写缓存/不对账。
+// inputs 为输入叶值（叶名→值）；返回执行结果（ok/reply）或错误信封。
+export const executeRpc = (ip: string, module: string, rpc: string, inputs: Record<string, string>) => {
+  return api.post<ApiResponse<{ ok: boolean; reply: string; highRisk: boolean }>>(
+    `/rpc/${ip}/${module}/${encodeURIComponent(rpc)}`,
+    { inputs },
+  )
+}
+
 // 行删除（FE-16，命令语义）：key 为条目主键（vlan→id、interface→name），经 query 承载
 // （接口名含斜杠，axios params 自动 URL 编码）。
 export const deleteConfig = (ip: string, path: string, key: string | number, force = false) => {

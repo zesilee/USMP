@@ -100,6 +100,24 @@ test.describe('部署冒烟 - 前端 SPA', () => {
     await expect(page.getByText('mtu', { exact: false }).first()).toBeVisible({ timeout: 15000 })
   })
 
+  // rpc 与容器 Tab 平级呈现 + 执行面板动态渲染（FE-19）：huawei-ifm 的 rpc
+  // （reset-if-counters-by-name 等）作为 Tab 出现，点开渲染出输入与执行按钮。
+  test('接口控制台出现 rpc Tab，执行面板渲染输入与执行按钮', async ({ page }) => {
+    await page.goto('/module/ifm', { waitUntil: 'networkidle' })
+    await pickDevice(page)
+
+    // rpc 作为一级 Tab 与容器平级（标签为后端原始 rpc 名）。
+    const rpcTab = page.getByRole('tab', { name: 'reset-if-counters-by-name', exact: true })
+    await expect(rpcTab).toBeVisible({ timeout: 15000 })
+    await rpcTab.click()
+
+    // 执行面板：input（if-name）+ 执行按钮渲染（schema 驱动）。
+    await expect(page.locator('[data-test="rpc-execute"]')).toBeVisible({ timeout: 15000 })
+    await expect(page.getByText('if-name', { exact: false }).first()).toBeVisible()
+    // 缺 mandatory input → 执行按钮禁用（§9 校验拦截）。
+    await expect(page.locator('[data-test="rpc-execute"]')).toBeDisabled()
+  })
+
   // 种子数据（模拟网元 DemoSeedConfig）：5 条接口回读进表格，sub 行显示 parent-name。
   test('接口列表应展示模拟网元种子行（3 main + 2 sub）', async ({ page }) => {
     await page.goto('/module/ifm', { waitUntil: 'networkidle' })
