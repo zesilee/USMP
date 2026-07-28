@@ -3,7 +3,7 @@ import { listDevices, getFleetReconcile } from '../api'
 import type { ReconcileOutcome } from '../types/api'
 import { i18n } from '../i18n'
 
-// 车队概览派生：把 /devices（在线态）与 /reconcile/status（对账四态聚合，PR-B1/B3 真数据）
+// 设备总览派生：把 /devices（在线态）与 /reconcile/status（对账四态聚合，PR-B1/B3 真数据）
 // 合成大盘所需的收敛率、四态分段、待对账台账、最近对账。
 //
 // 数据边界（诚实）：

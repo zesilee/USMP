@@ -92,10 +92,10 @@ func (h *ReconcileHandler) GetDeviceReconcile(c *gin.Context) {
 
 // GetFleetReconcile handles GET /reconcile/status.
 //
-// @Summary  车队级对账结局聚合（收敛台账 / 概览大盘用）
+// @Summary  全网对账结局聚合（收敛台账 / 概览大盘用）
 // @Tags     reconcile
 // @Produce  json
-// @Success  200 {object} Response{data=FleetReconcileData} "车队对账聚合；summary 按结局计数，仅含已对账设备（unknown 需与设备列表相减派生）"
+// @Success  200 {object} Response{data=FleetReconcileData} "全网对账结局聚合；summary 按结局计数，仅含已对账设备（unknown 需与设备列表相减派生）"
 // @Router   /reconcile/status [get]
 func (h *ReconcileHandler) GetFleetReconcile(c *gin.Context) {
 	all := h.manager.GetReconcileStatus().Snapshot()
