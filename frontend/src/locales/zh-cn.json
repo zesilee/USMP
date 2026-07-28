@@ -50,7 +50,7 @@
     }
   },
   "header": {
-    "fleet": "车队",
+    "fleet": "首页",
     "breadcrumbAria": "面包屑",
     "searchPlaceholder": "搜索设备、配置…",
     "onlineCount": "{online}/{total} 在线",
@@ -59,7 +59,7 @@
     "localeZh": "中文",
     "localeEn": "English",
     "crumb": {
-      "dashboard": "车队概览",
+      "dashboard": "设备总览",
       "devices": "设备管理",
       "interface": "接口配置",
       "vlan": "VLAN 配置",
@@ -153,7 +153,7 @@
     "persistenceHint": "运行配置不落库（R03）"
   },
   "dashboard": {
-    "title": "车队概览",
+    "title": "设备总览",
     "subtitle": "{total} 台设备 · 声明式对账实时同步 · 数据直读自 NETCONF / gNMI，不落库",
     "pushConfig": "下发配置",
     "loadError": "概览加载失败：{error}",
@@ -174,7 +174,7 @@
     "noRecords": "暂无对账记录",
     "statusDist": "设备状态分布",
     "hero": {
-      "fleetPrefix": "车队",
+      "fleetPrefix": "设备",
       "rateWord": "收敛率",
       "rateDesc": "期望态与实际态一致的设备占比",
       "segbarTitle": "按收敛状态分段",

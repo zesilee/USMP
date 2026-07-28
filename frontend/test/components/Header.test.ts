@@ -81,14 +81,14 @@ describe('Header Component', () => {
       await router.push('/')
       await router.isReady()
       const wrapper = mountHeader()
-      // zh 基线：面包屑根为「车队」
-      expect(wrapper.find('.crumb-root').text()).toBe('车队')
+      // zh 基线：面包屑根为「首页」
+      expect(wrapper.find('.crumb-root').text()).toBe('首页')
 
       await wrapper.find('[data-test="locale-en"]').trigger('click')
       await wrapper.vm.$nextTick()
 
-      expect(wrapper.find('.crumb-root').text()).toBe('Fleet')
-      expect(wrapper.find('.crumb').text()).toContain('Fleet Overview')
+      expect(wrapper.find('.crumb-root').text()).toBe('Home')
+      expect(wrapper.find('.crumb').text()).toContain('Device Overview')
       expect(localStorage.getItem(LOCALE_STORAGE_KEY)).toBe('en-us')
       expect(useLocaleStore().locale).toBe('en-us')
     })
@@ -97,11 +97,11 @@ describe('Header Component', () => {
       const wrapper = mountHeader()
       await wrapper.find('[data-test="locale-en"]').trigger('click')
       await wrapper.vm.$nextTick()
-      expect(wrapper.find('.crumb-root').text()).toBe('Fleet')
+      expect(wrapper.find('.crumb-root').text()).toBe('Home')
 
       await wrapper.find('[data-test="locale-zh"]').trigger('click')
       await wrapper.vm.$nextTick()
-      expect(wrapper.find('.crumb-root').text()).toBe('车队')
+      expect(wrapper.find('.crumb-root').text()).toBe('首页')
       expect(localStorage.getItem(LOCALE_STORAGE_KEY)).toBe('zh-cn')
     })
   })
