@@ -208,5 +208,17 @@
         }
       ]
     }
+  ],
+  "rpcs": [
+    {
+      "name": "reset-all-sessions",
+      "label": "reset-all-sessions",
+      "input": null
+    },
+    {
+      "name": "reset-all-statistics",
+      "label": "reset-all-statistics",
+      "input": null
+    }
   ]
 }

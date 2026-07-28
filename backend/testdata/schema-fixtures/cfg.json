@@ -1180,5 +1180,288 @@
         }
       ]
     }
+  ],
+  "rpcs": [
+    {
+      "name": "cfg-file-backup-and-recovery",
+      "label": "cfg-file-backup-and-recovery",
+      "input": [
+        {
+          "path": "filename",
+          "type": "string",
+          "label": "filename"
+        },
+        {
+          "path": "index",
+          "type": "number",
+          "label": "index",
+          "required": true
+        },
+        {
+          "path": "operation-type",
+          "type": "enum",
+          "label": "operation-type",
+          "required": true
+        },
+        {
+          "path": "password",
+          "type": "string",
+          "label": "password"
+        },
+        {
+          "path": "server-ip",
+          "type": "string",
+          "label": "server-ip",
+          "required": true
+        },
+        {
+          "path": "transport-type",
+          "type": "enum",
+          "label": "transport-type",
+          "required": true
+        },
+        {
+          "path": "use-net-manager-vpn",
+          "type": "boolean",
+          "label": "use-net-manager-vpn"
+        },
+        {
+          "path": "username",
+          "type": "string",
+          "label": "username"
+        },
+        {
+          "path": "vpn-instance",
+          "type": "string",
+          "label": "vpn-instance"
+        }
+      ]
+    },
+    {
+      "name": "clear-interface-config",
+      "label": "clear-interface-config",
+      "input": [
+        {
+          "path": "interface-name",
+          "type": "string",
+          "label": "interface-name",
+          "required": true,
+          "leafRef": "/ifm:ifm/ifm:interfaces/ifm:interface/ifm:name"
+        }
+      ]
+    },
+    {
+      "name": "clear-startup",
+      "label": "clear-startup",
+      "input": null
+    },
+    {
+      "name": "config-recovery-by-time",
+      "label": "config-recovery-by-time",
+      "input": [
+        {
+          "path": "auto-backup-time",
+          "type": "string",
+          "label": "auto-backup-time",
+          "required": true,
+          "pattern": "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?(Z|[\\+\\-]\\d{2}:\\d{2})"
+        }
+      ]
+    },
+    {
+      "name": "create-user-label-checkpoint",
+      "label": "create-user-label-checkpoint",
+      "input": [
+        {
+          "path": "description",
+          "type": "string",
+          "label": "description"
+        },
+        {
+          "path": "user-label",
+          "type": "string",
+          "label": "user-label",
+          "required": true,
+          "pattern": ".*[^\\s]+.*"
+        }
+      ]
+    },
+    {
+      "name": "delete-checkpoint-by-oldest-num",
+      "label": "delete-checkpoint-by-oldest-num",
+      "highRisk": true,
+      "input": [
+        {
+          "path": "checkpoint-num",
+          "type": "number",
+          "label": "checkpoint-num"
+        }
+      ]
+    },
+    {
+      "name": "delete-startup",
+      "label": "delete-startup",
+      "highRisk": true,
+      "input": null
+    },
+    {
+      "name": "delete-startup-reserved-dcn",
+      "label": "delete-startup-reserved-dcn",
+      "highRisk": true,
+      "input": null
+    },
+    {
+      "name": "delete-user-label-checkpoint",
+      "label": "delete-user-label-checkpoint",
+      "highRisk": true,
+      "input": [
+        {
+          "path": "commit-id",
+          "type": "string",
+          "label": "commit-id",
+          "leafRef": "/cfg:cfg/cfg:checkpoints/cfg:checkpoint/cfg:commit-id"
+        }
+      ]
+    },
+    {
+      "name": "reset-user-label-by-commit-id",
+      "label": "reset-user-label-by-commit-id",
+      "input": [
+        {
+          "path": "commit-id",
+          "type": "string",
+          "label": "commit-id",
+          "required": true,
+          "leafRef": "/cfg:cfg/cfg:checkpoints/cfg:checkpoint/cfg:commit-id"
+        }
+      ]
+    },
+    {
+      "name": "rollback-by-commit-id",
+      "label": "rollback-by-commit-id",
+      "highRisk": true,
+      "input": [
+        {
+          "path": "commit-id",
+          "type": "string",
+          "label": "commit-id",
+          "leafRef": "/cfg:cfg/cfg:checkpoints/cfg:checkpoint/cfg:commit-id"
+        }
+      ]
+    },
+    {
+      "name": "rollback-by-file",
+      "label": "rollback-by-file",
+      "highRisk": true,
+      "input": [
+        {
+          "path": "filename",
+          "type": "string",
+          "label": "filename",
+          "required": true,
+          "leafRef": "/cfg:cfg/cfg:cfg-files/cfg:cfg-file/cfg:filename"
+        }
+      ]
+    },
+    {
+      "name": "rollback-by-last-num",
+      "label": "rollback-by-last-num",
+      "highRisk": true,
+      "input": [
+        {
+          "path": "checkpoint-num",
+          "type": "number",
+          "label": "checkpoint-num"
+        }
+      ]
+    },
+    {
+      "name": "rollback-by-user-label",
+      "label": "rollback-by-user-label",
+      "highRisk": true,
+      "input": [
+        {
+          "path": "commit-id",
+          "type": "string",
+          "label": "commit-id",
+          "leafRef": "/cfg:cfg/cfg:checkpoints/cfg:checkpoint/cfg:commit-id"
+        },
+        {
+          "path": "user-label",
+          "type": "string",
+          "label": "user-label",
+          "leafRef": "/cfg:cfg/cfg:checkpoints/cfg:checkpoint/cfg:user-label"
+        }
+      ]
+    },
+    {
+      "name": "save",
+      "label": "save",
+      "input": [
+        {
+          "path": "filename",
+          "type": "string",
+          "label": "filename",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "save-all-virtual-systems",
+      "label": "save-all-virtual-systems",
+      "input": null
+    },
+    {
+      "name": "set-startup",
+      "label": "set-startup",
+      "input": [
+        {
+          "path": "filename",
+          "type": "string",
+          "label": "filename",
+          "required": true,
+          "leafRef": "/cfg:cfg/cfg:cfg-files/cfg:cfg-file/cfg:filename"
+        }
+      ]
+    },
+    {
+      "name": "set-user-label-by-commit-id",
+      "label": "set-user-label-by-commit-id",
+      "input": [
+        {
+          "path": "commit-id",
+          "type": "string",
+          "label": "commit-id",
+          "required": true,
+          "leafRef": "/cfg:cfg/cfg:checkpoints/cfg:checkpoint/cfg:commit-id"
+        },
+        {
+          "path": "user-label",
+          "type": "string",
+          "label": "user-label",
+          "required": true,
+          "pattern": ".*[^\\s]+.*"
+        }
+      ]
+    },
+    {
+      "name": "specify-slot-set-startup",
+      "label": "specify-slot-set-startup",
+      "input": [
+        {
+          "path": "filename",
+          "type": "string",
+          "label": "filename",
+          "required": true,
+          "leafRef": "/cfg:cfg/cfg:cfg-files/cfg:cfg-file/cfg:filename"
+        },
+        {
+          "path": "position",
+          "type": "string",
+          "label": "position",
+          "leafRef": "/devm:devm/devm:mpu-boards/devm:mpu-board/devm:position"
+        }
+      ]
+    }
   ]
 }

@@ -106,6 +106,18 @@ jobs:
           fi
           echo "Generated code is reproducible"
 
+      - name: Check RPC Definitions Reproducible (RPC-01 regen-and-diff)
+        working-directory: .
+        run: |
+          # rpc.gen.go 为生成物（构建期 goyang 提取）：重跑 make gen-rpc 并断言零漂移。
+          # 无条件运行（成本约 1s）——不按路径 gate，避免漏 rpcgen 工具/YANG 源改动。
+          make gen-rpc
+          if ! git diff --exit-code backend/internal/yangschema/rpc.gen.go; then
+            echo "::error::[RPC-01] RPC 生成物漂移: backend/internal/yangschema/rpc.gen.go 与 make gen-rpc 输出不一致（生成物勿手改，改 YANG 源/rpcgen/模块清单后重跑 make gen-rpc 提交）"
+            exit 1
+          fi
+          echo "RPC definitions are reproducible"
+
       - name: Check Schema Fixtures Reproducible (SF-04 regen-and-diff)
         working-directory: .
         run: |

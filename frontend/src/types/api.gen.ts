@@ -982,6 +982,11 @@ export interface components {
              */
             isKey?: boolean;
             label?: string;
+            /**
+             * @description LeafRef 携带 leafref 目标 XPath（RPC-02）：非空时前端可据此渲染为目标值下拉
+             *     （如 rpc 输入 if-name→接口名）。配置叶目前不填（omitempty），首用于 rpc 输入。
+             */
+            leafRef?: string;
             maximum?: number;
             minimum?: number;
             /** @description Must 携带 YANG `must` 约束（XPath 表达式 + 提示），驱动前端跨字段校验（R05）。 */
@@ -1085,6 +1090,12 @@ export interface components {
             errors?: number;
             total_connections?: number;
         };
+        "api.RPCSchema": {
+            highRisk?: boolean;
+            input?: components["schemas"]["api.FieldDef"][];
+            label?: string;
+            name?: string;
+        };
         "api.ReconcileInfo": {
             message?: string;
             triggered?: boolean;
@@ -1114,6 +1125,8 @@ export interface components {
             fields?: components["schemas"]["api.FieldDef"][];
             listCols?: components["schemas"]["api.FieldDef"][];
             module?: string;
+            /** @description RPCs 是该模块的 rpc（RPC-02）：与配置节点平级，input 复用 FieldDef 渲染。 */
+            rpcs?: components["schemas"]["api.RPCSchema"][];
             title?: string;
             vendor?: string;
         };

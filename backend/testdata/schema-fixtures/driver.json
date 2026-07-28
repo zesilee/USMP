@@ -3153,5 +3153,786 @@
         }
       ]
     }
+  ],
+  "rpcs": [
+    {
+      "name": "auto-upgrade-models",
+      "label": "auto-upgrade-models",
+      "highRisk": true,
+      "input": [
+        {
+          "path": "auto-upgrade-model",
+          "type": "enum",
+          "label": "auto-upgrade-model"
+        }
+      ]
+    },
+    {
+      "name": "board-channel-check",
+      "label": "board-channel-check",
+      "input": [
+        {
+          "path": "enable",
+          "type": "enum",
+          "label": "enable",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "check-hardware-compatibility",
+      "label": "check-hardware-compatibility",
+      "input": null
+    },
+    {
+      "name": "check-hardware-version",
+      "label": "check-hardware-version",
+      "input": [
+        {
+          "path": "chassis-id",
+          "type": "string",
+          "label": "chassis-id"
+        }
+      ]
+    },
+    {
+      "name": "check-lcm-channel",
+      "label": "check-lcm-channel",
+      "input": null
+    },
+    {
+      "name": "check-system-software",
+      "label": "check-system-software",
+      "input": null
+    },
+    {
+      "name": "clear-nv-port-bip8-err-alarm",
+      "label": "clear-nv-port-bip8-err-alarm",
+      "input": [
+        {
+          "path": "if-name",
+          "type": "string",
+          "label": "if-name",
+          "leafRef": "/ifm:ifm/ifm:interfaces/ifm:interface/ifm:name"
+        }
+      ]
+    },
+    {
+      "name": "clear-nv-port-crc-err-alarm",
+      "label": "clear-nv-port-crc-err-alarm",
+      "input": [
+        {
+          "path": "if-name",
+          "type": "string",
+          "label": "if-name",
+          "leafRef": "/ifm:ifm/ifm:interfaces/ifm:interface/ifm:name"
+        }
+      ]
+    },
+    {
+      "name": "clear-nv-port-input-err-alarm",
+      "label": "clear-nv-port-input-err-alarm",
+      "input": [
+        {
+          "path": "if-name",
+          "type": "string",
+          "label": "if-name",
+          "leafRef": "/ifm:ifm/ifm:interfaces/ifm:interface/ifm:name"
+        }
+      ]
+    },
+    {
+      "name": "clear-nv-port-output-err-alarm",
+      "label": "clear-nv-port-output-err-alarm",
+      "input": [
+        {
+          "path": "if-name",
+          "type": "string",
+          "label": "if-name",
+          "leafRef": "/ifm:ifm/ifm:interfaces/ifm:interface/ifm:name"
+        }
+      ]
+    },
+    {
+      "name": "clear-nv-port-sdh-err-alarm",
+      "label": "clear-nv-port-sdh-err-alarm",
+      "input": [
+        {
+          "path": "if-name",
+          "type": "string",
+          "label": "if-name",
+          "leafRef": "/ifm:ifm/ifm:interfaces/ifm:interface/ifm:name"
+        }
+      ]
+    },
+    {
+      "name": "clear-nv-port-symbol-err-alarm",
+      "label": "clear-nv-port-symbol-err-alarm",
+      "input": [
+        {
+          "path": "if-name",
+          "type": "string",
+          "label": "if-name",
+          "leafRef": "/ifm:ifm/ifm:interfaces/ifm:interface/ifm:name"
+        }
+      ]
+    },
+    {
+      "name": "clear-nv-port-trans-alarm",
+      "label": "clear-nv-port-trans-alarm",
+      "input": [
+        {
+          "path": "if-name",
+          "type": "string",
+          "label": "if-name",
+          "leafRef": "/ifm:ifm/ifm:interfaces/ifm:interface/ifm:name"
+        }
+      ]
+    },
+    {
+      "name": "clear-nv-port-tx-pause-err-alarm",
+      "label": "clear-nv-port-tx-pause-err-alarm",
+      "input": [
+        {
+          "path": "if-name",
+          "type": "string",
+          "label": "if-name",
+          "leafRef": "/ifm:ifm/ifm:interfaces/ifm:interface/ifm:name"
+        }
+      ]
+    },
+    {
+      "name": "clear-port-bip8-err-alarm",
+      "label": "clear-port-bip8-err-alarm",
+      "input": [
+        {
+          "path": "port-position",
+          "type": "string",
+          "label": "port-position",
+          "leafRef": "/devm:devm/devm:ports/devm:port/devm:position"
+        }
+      ]
+    },
+    {
+      "name": "clear-port-tx-pause-err-alarm",
+      "label": "clear-port-tx-pause-err-alarm",
+      "input": [
+        {
+          "path": "port-position",
+          "type": "string",
+          "label": "port-position",
+          "leafRef": "/devm:devm/devm:ports/devm:port/devm:position"
+        }
+      ]
+    },
+    {
+      "name": "interface-match-check-recovery",
+      "label": "interface-match-check-recovery",
+      "input": [
+        {
+          "path": "position",
+          "type": "string",
+          "label": "position"
+        }
+      ]
+    },
+    {
+      "name": "multi-level-alarm-boolean",
+      "label": "multi-level-alarm-boolean",
+      "input": [
+        {
+          "path": "alarm-level",
+          "type": "enum",
+          "label": "alarm-level"
+        },
+        {
+          "path": "index",
+          "type": "string",
+          "label": "index",
+          "required": true
+        },
+        {
+          "path": "operation-flag",
+          "type": "enum",
+          "label": "operation-flag",
+          "required": true
+        },
+        {
+          "path": "relation",
+          "type": "enum",
+          "label": "relation"
+        },
+        {
+          "path": "slot",
+          "type": "string",
+          "label": "slot",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "power-off-card",
+      "label": "power-off-card",
+      "highRisk": true,
+      "input": [
+        {
+          "path": "auto-power-on",
+          "type": "string",
+          "label": "auto-power-on"
+        },
+        {
+          "path": "card-position",
+          "type": "string",
+          "label": "card-position",
+          "required": true,
+          "leafRef": "/devm:devm/devm:cards/devm:card/devm:position"
+        }
+      ]
+    },
+    {
+      "name": "power-off-ecu",
+      "label": "power-off-ecu",
+      "highRisk": true,
+      "input": [
+        {
+          "path": "auto-power-on",
+          "type": "string",
+          "label": "auto-power-on"
+        },
+        {
+          "path": "board-position",
+          "type": "string",
+          "label": "board-position",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "power-off-icu",
+      "label": "power-off-icu",
+      "highRisk": true,
+      "input": [
+        {
+          "path": "auto-power-on",
+          "type": "string",
+          "label": "auto-power-on"
+        },
+        {
+          "path": "board-position",
+          "type": "string",
+          "label": "board-position",
+          "required": true,
+          "leafRef": "/devm:devm/driver:driver/driver:icus/driver:icu/driver:position"
+        }
+      ]
+    },
+    {
+      "name": "power-off-lpu",
+      "label": "power-off-lpu",
+      "highRisk": true,
+      "input": [
+        {
+          "path": "auto-power-on",
+          "type": "string",
+          "label": "auto-power-on"
+        },
+        {
+          "path": "board-position",
+          "type": "string",
+          "label": "board-position",
+          "required": true,
+          "leafRef": "/devm:devm/devm:lpu-boards/devm:lpu-board/devm:position"
+        }
+      ]
+    },
+    {
+      "name": "power-off-mpu",
+      "label": "power-off-mpu",
+      "highRisk": true,
+      "input": [
+        {
+          "path": "auto-power-on",
+          "type": "string",
+          "label": "auto-power-on"
+        },
+        {
+          "path": "board-position",
+          "type": "string",
+          "label": "board-position",
+          "required": true,
+          "leafRef": "/devm:devm/devm:mpu-boards/devm:mpu-board/devm:position"
+        }
+      ]
+    },
+    {
+      "name": "power-off-sfu",
+      "label": "power-off-sfu",
+      "highRisk": true,
+      "input": [
+        {
+          "path": "auto-power-on",
+          "type": "string",
+          "label": "auto-power-on"
+        },
+        {
+          "path": "board-position",
+          "type": "string",
+          "label": "board-position",
+          "required": true,
+          "leafRef": "/devm:devm/devm:sfu-boards/devm:sfu-board/devm:position"
+        }
+      ]
+    },
+    {
+      "name": "power-on-card",
+      "label": "power-on-card",
+      "highRisk": true,
+      "input": [
+        {
+          "path": "card-position",
+          "type": "string",
+          "label": "card-position",
+          "required": true,
+          "leafRef": "/devm:devm/devm:cards/devm:card/devm:position"
+        }
+      ]
+    },
+    {
+      "name": "power-on-ecu",
+      "label": "power-on-ecu",
+      "highRisk": true,
+      "input": [
+        {
+          "path": "board-position",
+          "type": "string",
+          "label": "board-position",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "power-on-icu",
+      "label": "power-on-icu",
+      "highRisk": true,
+      "input": [
+        {
+          "path": "board-position",
+          "type": "string",
+          "label": "board-position",
+          "required": true,
+          "leafRef": "/devm:devm/driver:driver/driver:icus/driver:icu/driver:position"
+        }
+      ]
+    },
+    {
+      "name": "power-on-lpu",
+      "label": "power-on-lpu",
+      "highRisk": true,
+      "input": [
+        {
+          "path": "board-position",
+          "type": "string",
+          "label": "board-position",
+          "required": true,
+          "leafRef": "/devm:devm/devm:lpu-boards/devm:lpu-board/devm:position"
+        }
+      ]
+    },
+    {
+      "name": "power-on-mpu",
+      "label": "power-on-mpu",
+      "highRisk": true,
+      "input": [
+        {
+          "path": "board-position",
+          "type": "string",
+          "label": "board-position",
+          "required": true,
+          "leafRef": "/devm:devm/devm:mpu-boards/devm:mpu-board/devm:position"
+        }
+      ]
+    },
+    {
+      "name": "power-on-sfu",
+      "label": "power-on-sfu",
+      "highRisk": true,
+      "input": [
+        {
+          "path": "board-position",
+          "type": "string",
+          "label": "board-position",
+          "required": true,
+          "leafRef": "/devm:devm/devm:sfu-boards/devm:sfu-board/devm:position"
+        }
+      ]
+    },
+    {
+      "name": "reset-cmu-board",
+      "label": "reset-cmu-board",
+      "input": [
+        {
+          "path": "board-position",
+          "type": "string",
+          "label": "board-position",
+          "leafRef": "/devm:devm/driver:driver/driver:cmus/driver:cmu/driver:position"
+        }
+      ]
+    },
+    {
+      "name": "reset-dustproof-net",
+      "label": "reset-dustproof-net",
+      "input": [
+        {
+          "path": "chassis-position",
+          "type": "string",
+          "label": "chassis-position",
+          "leafRef": "/devm:devm/devm:chassiss/devm:chassis/devm:position"
+        }
+      ]
+    },
+    {
+      "name": "reset-ecu-board",
+      "label": "reset-ecu-board",
+      "input": [
+        {
+          "path": "board-position",
+          "type": "string",
+          "label": "board-position"
+        }
+      ]
+    },
+    {
+      "name": "reset-fan-board",
+      "label": "reset-fan-board",
+      "input": [
+        {
+          "path": "board-position",
+          "type": "string",
+          "label": "board-position",
+          "leafRef": "/devm:devm/driver:driver/driver:fans/driver:fan/driver:position"
+        }
+      ]
+    },
+    {
+      "name": "reset-icu-board",
+      "label": "reset-icu-board",
+      "input": [
+        {
+          "path": "board-position",
+          "type": "string",
+          "label": "board-position",
+          "leafRef": "/devm:devm/driver:driver/driver:icus/driver:icu/driver:position"
+        }
+      ]
+    },
+    {
+      "name": "reset-lcd",
+      "label": "reset-lcd",
+      "input": [
+        {
+          "path": "board-position",
+          "type": "string",
+          "label": "board-position"
+        }
+      ]
+    },
+    {
+      "name": "reset-mbus-node",
+      "label": "reset-mbus-node",
+      "input": [
+        {
+          "path": "board-position",
+          "type": "string",
+          "label": "board-position",
+          "leafRef": "/driver:driver/driver:mbusnodes/driver:mbusnode/driver:slot-id"
+        }
+      ]
+    },
+    {
+      "name": "rollback",
+      "label": "rollback",
+      "highRisk": true,
+      "input": [
+        {
+          "path": "rollback-choice",
+          "type": "enum",
+          "label": "rollback-choice"
+        }
+      ]
+    },
+    {
+      "name": "set-boot-password",
+      "label": "set-boot-password",
+      "input": [
+        {
+          "path": "new-password",
+          "type": "string",
+          "label": "new-password",
+          "required": true
+        },
+        {
+          "path": "old-password",
+          "type": "string",
+          "label": "old-password"
+        },
+        {
+          "path": "slot-id",
+          "type": "string",
+          "label": "slot-id",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "set-chassis-run-mode",
+      "label": "set-chassis-run-mode",
+      "input": [
+        {
+          "path": "chassis-id",
+          "type": "string",
+          "label": "chassis-id"
+        },
+        {
+          "path": "next-run-cluster",
+          "type": "string",
+          "label": "next-run-cluster"
+        },
+        {
+          "path": "next-run-mode",
+          "type": "enum",
+          "label": "next-run-mode",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "set-flash-lock",
+      "label": "set-flash-lock",
+      "input": [
+        {
+          "path": "days",
+          "type": "number",
+          "label": "days"
+        },
+        {
+          "path": "flash-lock",
+          "type": "enum",
+          "label": "flash-lock"
+        }
+      ]
+    },
+    {
+      "name": "set-led-flash",
+      "label": "set-led-flash",
+      "input": [
+        {
+          "path": "alarm-status-time",
+          "type": "number",
+          "label": "alarm-status-time"
+        },
+        {
+          "path": "cancel-time",
+          "type": "number",
+          "label": "cancel-time"
+        },
+        {
+          "path": "flash-time",
+          "type": "number",
+          "label": "flash-time"
+        }
+      ]
+    },
+    {
+      "name": "set-multi-chassis-id",
+      "label": "set-multi-chassis-id",
+      "input": [
+        {
+          "path": "current-chassis-id",
+          "type": "number",
+          "label": "current-chassis-id"
+        },
+        {
+          "path": "next-chassis-id",
+          "type": "number",
+          "label": "next-chassis-id"
+        }
+      ]
+    },
+    {
+      "name": "set-next-system-mode",
+      "label": "set-next-system-mode",
+      "input": [
+        {
+          "path": "next-system-mode",
+          "type": "enum",
+          "label": "next-system-mode"
+        }
+      ]
+    },
+    {
+      "name": "set-next-work-mode",
+      "label": "set-next-work-mode",
+      "input": [
+        {
+          "path": "next-work-mode",
+          "type": "enum",
+          "label": "next-work-mode",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "set-npu-led-flash",
+      "label": "set-npu-led-flash",
+      "input": [
+        {
+          "path": "alarm-status-time",
+          "type": "number",
+          "label": "alarm-status-time"
+        },
+        {
+          "path": "board-position",
+          "type": "string",
+          "label": "board-position",
+          "required": true,
+          "leafRef": "/devm:devm/devm:lpu-boards/devm:lpu-board/devm:position"
+        },
+        {
+          "path": "cancel-time",
+          "type": "number",
+          "label": "cancel-time"
+        },
+        {
+          "path": "flash-time",
+          "type": "number",
+          "label": "flash-time"
+        }
+      ]
+    },
+    {
+      "name": "set-nv-laser-turn",
+      "label": "set-nv-laser-turn",
+      "input": [
+        {
+          "path": "if-name",
+          "type": "string",
+          "label": "if-name",
+          "leafRef": "/ifm:ifm/ifm:interfaces/ifm:interface/ifm:name"
+        },
+        {
+          "path": "laser-shutdown",
+          "type": "enum",
+          "label": "laser-shutdown"
+        },
+        {
+          "path": "laser-test-time",
+          "type": "number",
+          "label": "laser-test-time"
+        }
+      ]
+    },
+    {
+      "name": "set-slave-default",
+      "label": "set-slave-default",
+      "input": [
+        {
+          "path": "chassis-id",
+          "type": "string",
+          "label": "chassis-id"
+        }
+      ]
+    },
+    {
+      "name": "set-slot-led-flash",
+      "label": "set-slot-led-flash",
+      "input": [
+        {
+          "path": "alarm-status-time",
+          "type": "number",
+          "label": "alarm-status-time"
+        },
+        {
+          "path": "board-position",
+          "type": "string",
+          "label": "board-position",
+          "required": true,
+          "leafRef": "/devm:devm/devm:mpu-boards/devm:mpu-board/devm:position"
+        },
+        {
+          "path": "cancel-time",
+          "type": "number",
+          "label": "cancel-time"
+        },
+        {
+          "path": "flash-time",
+          "type": "number",
+          "label": "flash-time"
+        }
+      ]
+    },
+    {
+      "name": "set-split-resume",
+      "label": "set-split-resume",
+      "input": [
+        {
+          "path": "split-resume",
+          "type": "enum",
+          "label": "split-resume",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "set-usb-uart-stat",
+      "label": "set-usb-uart-stat",
+      "input": [
+        {
+          "path": "usb-uart-status",
+          "type": "enum",
+          "label": "usb-uart-status"
+        }
+      ]
+    },
+    {
+      "name": "set-vsu-service-type",
+      "label": "set-vsu-service-type",
+      "input": [
+        {
+          "path": "position",
+          "type": "string",
+          "label": "position",
+          "required": true
+        },
+        {
+          "path": "service-type",
+          "type": "enum",
+          "label": "service-type",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "sysmac-load",
+      "label": "sysmac-load",
+      "input": [
+        {
+          "path": "chassis-id",
+          "type": "number",
+          "label": "chassis-id"
+        },
+        {
+          "path": "slot-id",
+          "type": "string",
+          "label": "slot-id",
+          "required": true
+        },
+        {
+          "path": "sysmac-file",
+          "type": "string",
+          "label": "sysmac-file",
+          "required": true
+        }
+      ]
+    }
   ]
 }

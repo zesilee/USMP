@@ -766,5 +766,31 @@
         }
       ]
     }
+  ],
+  "rpcs": [
+    {
+      "name": "reset-macsec-statistics",
+      "label": "reset-macsec-statistics",
+      "input": [
+        {
+          "path": "interface-name",
+          "type": "string",
+          "label": "interface-name",
+          "leafRef": "/ifm:ifm/ifm:interfaces/ifm:interface/ifm:name"
+        }
+      ]
+    },
+    {
+      "name": "reset-mka-statistics",
+      "label": "reset-mka-statistics",
+      "input": [
+        {
+          "path": "interface-name",
+          "type": "string",
+          "label": "interface-name",
+          "leafRef": "/ifm:ifm/ifm:interfaces/ifm:interface/ifm:name"
+        }
+      ]
+    }
   ]
 }

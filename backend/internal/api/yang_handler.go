@@ -67,6 +67,9 @@ type FieldDef struct {
 	DynamicDefault bool `json:"dynamicDefault,omitempty"`
 	// Units 携带 YANG `units`（BR-09）：输入控件展示单位后缀（如 bit/s）。
 	Units string `json:"units,omitempty"`
+	// LeafRef 携带 leafref 目标 XPath（RPC-02）：非空时前端可据此渲染为目标值下拉
+	// （如 rpc 输入 if-name→接口名）。配置叶目前不填（omitempty），首用于 rpc 输入。
+	LeafRef string `json:"leafRef,omitempty"`
 }
 
 // CaseDef 是 YANG `choice` 的一个 `case` 分支：name 为 case 名，fields 为其子字段
@@ -97,6 +100,17 @@ type YangSchema struct {
 	Vendor   string     `json:"vendor"`
 	Fields   []FieldDef `json:"fields"`
 	ListCols []FieldDef `json:"listCols,omitempty"`
+	// RPCs 是该模块的 rpc（RPC-02）：与配置节点平级，input 复用 FieldDef 渲染。
+	RPCs []RPCSchema `json:"rpcs,omitempty"`
+}
+
+// RPCSchema 是一个 rpc 的呈现契约（RPC-02/04）：名称、高危标记、input 字段树。
+// input 复用 FieldDef，前端渲染管线零改动即可复用（leafref/mandatory/units）。
+type RPCSchema struct {
+	Name     string     `json:"name"`
+	Label    string     `json:"label"`
+	HighRisk bool       `json:"highRisk,omitempty"`
+	Input    []FieldDef `json:"input"`
 }
 
 // YangHandler handles YANG model API requests

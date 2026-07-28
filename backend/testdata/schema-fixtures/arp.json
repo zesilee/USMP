@@ -1410,5 +1410,38 @@
         }
       ]
     }
+  ],
+  "rpcs": [
+    {
+      "name": "batch-delete-all",
+      "label": "batch-delete-all",
+      "highRisk": true,
+      "input": null
+    },
+    {
+      "name": "batch-delete-vpn",
+      "label": "batch-delete-vpn",
+      "highRisk": true,
+      "input": [
+        {
+          "path": "ni-name",
+          "type": "string",
+          "label": "ni-name",
+          "leafRef": "/arp:arp/arp:static-arps/arp:static-arp/arp:ni-name"
+        }
+      ]
+    },
+    {
+      "name": "convert-to-static",
+      "label": "convert-to-static",
+      "input": [
+        {
+          "path": "if-name",
+          "type": "string",
+          "label": "if-name",
+          "leafRef": "/arp:arp/arp:query-entries/arp:query-entry/arp:if-name"
+        }
+      ]
+    }
   ]
 }

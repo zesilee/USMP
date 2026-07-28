@@ -8894,5 +8894,27 @@
         }
       ]
     }
+  ],
+  "rpcs": [
+    {
+      "name": "test-instance-execution",
+      "label": "test-instance-execution",
+      "input": [
+        {
+          "path": "admin-name",
+          "type": "string",
+          "label": "admin-name",
+          "required": true,
+          "leafRef": "/nqa/instances/instance/admin-name"
+        },
+        {
+          "path": "test-name",
+          "type": "string",
+          "label": "test-name",
+          "required": true,
+          "leafRef": "/nqa/instances/instance/test-name"
+        }
+      ]
+    }
   ]
 }

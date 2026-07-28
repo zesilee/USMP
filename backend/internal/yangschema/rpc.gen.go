@@ -24,7 +24,7 @@ type RPCDef struct {
 
 // ModuleRPCs 是各模块的 rpc 定义（键为模块根容器名，与 schema 一致）。
 var ModuleRPCs = map[string][]RPCDef{
-	"huawei-arp": {
+	"arp": {
 		{Name: "batch-delete-all", HighRisk: true},
 		{Name: "batch-delete-vpn", HighRisk: true, Input: []RPCInputLeaf{
 			{Name: "ni-name", Type: "leafref", LeafRef: "/arp:arp/arp:static-arps/arp:static-arp/arp:ni-name"},
@@ -33,7 +33,7 @@ var ModuleRPCs = map[string][]RPCDef{
 			{Name: "if-name", Type: "leafref", LeafRef: "/arp:arp/arp:query-entries/arp:query-entry/arp:if-name"},
 		}},
 	},
-	"huawei-cfg": {
+	"cfg": {
 		{Name: "cfg-file-backup-and-recovery", HighRisk: false, Input: []RPCInputLeaf{
 			{Name: "filename", Type: "string"},
 			{Name: "index", Type: "number", Mandatory: true},
@@ -96,7 +96,7 @@ var ModuleRPCs = map[string][]RPCDef{
 			{Name: "position", Type: "leafref", LeafRef: "/devm:devm/devm:mpu-boards/devm:mpu-board/devm:position"},
 		}},
 	},
-	"huawei-devm": {
+	"devm": {
 		{Name: "clear-inactive-config", HighRisk: false, Input: []RPCInputLeaf{
 			{Name: "entity-class", Type: "enum", Mandatory: true},
 			{Name: "position", Type: "string", Mandatory: true},
@@ -159,7 +159,7 @@ var ModuleRPCs = map[string][]RPCDef{
 			{Name: "board-position", Type: "string", Mandatory: true},
 		}},
 	},
-	"huawei-driver": {
+	"driver": {
 		{Name: "auto-upgrade-models", HighRisk: true, Input: []RPCInputLeaf{
 			{Name: "auto-upgrade-model", Type: "enum"},
 		}},
@@ -343,7 +343,7 @@ var ModuleRPCs = map[string][]RPCDef{
 			{Name: "sysmac-file", Type: "string", Mandatory: true},
 		}},
 	},
-	"huawei-evpn": {
+	"evpn": {
 		{Name: "reset-mac-address", HighRisk: false, Input: []RPCInputLeaf{
 			{Name: "bd-id", Type: "number"},
 			{Name: "mac-address", Type: "string", Pattern: "[0-9a-f]{4}(-[0-9a-f]{4}){2}"},
@@ -357,7 +357,7 @@ var ModuleRPCs = map[string][]RPCDef{
 			{Name: "name", Type: "string"},
 		}},
 	},
-	"huawei-ftpc": {
+	"ftpc": {
 		{Name: "ftpc-transfer-file", HighRisk: false, Input: []RPCInputLeaf{
 			{Name: "command-type", Type: "enum"},
 			{Name: "ipv6-vpn-name", Type: "leafref", LeafRef: "/ni:network-instance/ni:instances/ni:instance/ni:name"},
@@ -376,7 +376,7 @@ var ModuleRPCs = map[string][]RPCDef{
 			{Name: "vpn-name", Type: "leafref", LeafRef: "/ni:network-instance/ni:instances/ni:instance/ni:name"},
 		}},
 	},
-	"huawei-ifm": {
+	"ifm": {
 		{Name: "reset-if-control-flap-counts", HighRisk: false, Input: []RPCInputLeaf{
 			{Name: "if-name", Type: "leafref", LeafRef: "/ifm:ifm/ifm:interfaces/ifm:interface/ifm:name", Mandatory: true},
 		}},
@@ -408,12 +408,12 @@ var ModuleRPCs = map[string][]RPCDef{
 			{Name: "if-name", Type: "leafref", LeafRef: "/ifm:ifm/ifm:interfaces/ifm:interface/ifm:name", Mandatory: true},
 		}},
 	},
-	"huawei-ifm-trunk": {
+	"ifm-trunk": {
 		{Name: "trunk-switch", HighRisk: true, Input: []RPCInputLeaf{
 			{Name: "if-name", Type: "leafref", LeafRef: "/ifm:ifm/ifm:interfaces/ifm:interface/ifm:name", Mandatory: true},
 		}},
 	},
-	"huawei-license": {
+	"license": {
 		{Name: "license-active", HighRisk: false, Input: []RPCInputLeaf{
 			{Name: "filename", Type: "string", Mandatory: true},
 		}},
@@ -445,7 +445,7 @@ var ModuleRPCs = map[string][]RPCDef{
 			{Name: "filename", Type: "string", Mandatory: true},
 		}},
 	},
-	"huawei-macsec": {
+	"macsec": {
 		{Name: "reset-macsec-statistics", HighRisk: false, Input: []RPCInputLeaf{
 			{Name: "interface-name", Type: "leafref", LeafRef: "/ifm:ifm/ifm:interfaces/ifm:interface/ifm:name"},
 		}},
@@ -453,17 +453,17 @@ var ModuleRPCs = map[string][]RPCDef{
 			{Name: "interface-name", Type: "leafref", LeafRef: "/ifm:ifm/ifm:interfaces/ifm:interface/ifm:name"},
 		}},
 	},
-	"huawei-nqa": {
+	"nqa": {
 		{Name: "test-instance-execution", HighRisk: false, Input: []RPCInputLeaf{
 			{Name: "admin-name", Type: "leafref", LeafRef: "/nqa/instances/instance/admin-name", Mandatory: true},
 			{Name: "test-name", Type: "leafref", LeafRef: "/nqa/instances/instance/test-name", Mandatory: true},
 		}},
 	},
-	"huawei-openflow-agent": {
+	"openflow-agent": {
 		{Name: "reset-all-sessions", HighRisk: false},
 		{Name: "reset-all-statistics", HighRisk: false},
 	},
-	"huawei-qos": {
+	"qos": {
 		{Name: "reset-fabric-queue-multicast-statistics", HighRisk: false, Input: []RPCInputLeaf{
 			{Name: "slot-id", Type: "string", Mandatory: true, Pattern: "(c[cl]c\\d+/)?\\d+"},
 		}},
@@ -564,7 +564,7 @@ var ModuleRPCs = map[string][]RPCDef{
 			{Name: "vpn-instance", Type: "leafref", LeafRef: "/ni:network-instance/ni:instances/ni:instance/ni:name"},
 		}},
 	},
-	"huawei-sflow": {
+	"sflow": {
 		{Name: "reset-interface-statistics", HighRisk: false, Input: []RPCInputLeaf{
 			{Name: "interface-name", Type: "leafref", LeafRef: "/ifm:ifm/ifm:interfaces/ifm:interface/ifm:name", Mandatory: true},
 			{Name: "slot-id", Type: "leafref", LeafRef: "/devm:devm/devm:lpu-boards/devm:lpu-board/devm:position"},
@@ -573,15 +573,15 @@ var ModuleRPCs = map[string][]RPCDef{
 			{Name: "slot-id", Type: "leafref", LeafRef: "/devm:devm/devm:lpu-boards/devm:lpu-board/devm:position", Mandatory: true},
 		}},
 	},
-	"huawei-snmp": {
+	"snmp": {
 		{Name: "activate-users", HighRisk: false},
 	},
-	"huawei-unicast-forward": {
+	"unicast-forward": {
 		{Name: "reset-na-anti-attack-statistic", HighRisk: false, Input: []RPCInputLeaf{
 			{Name: "slot-id", Type: "string", Mandatory: true},
 		}},
 	},
-	"huawei-vlan": {
+	"vlan": {
 		{Name: "reset-vlan-statistics", HighRisk: false, Input: []RPCInputLeaf{
 			{Name: "vlan-id", Type: "number", Mandatory: true},
 		}},

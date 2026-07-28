@@ -1347,5 +1347,56 @@
       ],
       "presence": true
     }
+  ],
+  "rpcs": [
+    {
+      "name": "reset-mac-address",
+      "label": "reset-mac-address",
+      "input": [
+        {
+          "path": "bd-id",
+          "type": "number",
+          "label": "bd-id"
+        },
+        {
+          "path": "mac-address",
+          "type": "string",
+          "label": "mac-address",
+          "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}"
+        },
+        {
+          "path": "name",
+          "type": "string",
+          "label": "name"
+        }
+      ]
+    },
+    {
+      "name": "reset-mac-duplication",
+      "label": "reset-mac-duplication",
+      "input": [
+        {
+          "path": "bd-id",
+          "type": "number",
+          "label": "bd-id"
+        },
+        {
+          "path": "name",
+          "type": "string",
+          "label": "name"
+        }
+      ]
+    },
+    {
+      "name": "reset-mac-instance",
+      "label": "reset-mac-instance",
+      "input": [
+        {
+          "path": "name",
+          "type": "string",
+          "label": "name"
+        }
+      ]
+    }
   ]
 }

@@ -89,20 +89,39 @@ func buildRPCs(yangDir string, modules []string) (map[string][]RPCDef, error) {
 			continue
 		}
 		var defs []RPCDef
+		var roots []string
 		for name, child := range e.Dir {
-			if child == nil || child.RPC == nil || len(child.Errors) > 0 {
+			switch {
+			case child == nil || len(child.Errors) > 0:
 				continue
+			case child.RPC != nil:
+				defs = append(defs, RPCDef{
+					Name:     name,
+					HighRisk: isHighRisk(name),
+					Input:    inputLeaves(child.RPC.Input),
+				})
+			case child.Dir != nil:
+				// config root container — the runtime schema keys modules by this name.
+				roots = append(roots, name)
 			}
-			defs = append(defs, RPCDef{
-				Name:     name,
-				HighRisk: isHighRisk(name),
-				Input:    inputLeaves(child.RPC.Input),
-			})
+		}
+		if len(defs) == 0 {
+			continue
 		}
 		// Deterministic order (e.Dir is a map) — regen-and-diff depends on it.
 		sort.Slice(defs, func(i, j int) bool { return defs[i].Name < defs[j].Name })
-		if len(defs) > 0 {
+
+		// Key by root container name (same key the runtime schema / schema API use),
+		// so ModuleRPCs[<container>] serves rpcs at /yang/schema/<container>. rpcs are
+		// module-level; a module with several roots exposes its rpcs under each. A
+		// module with rpcs but no config container falls back to its module name
+		// (not servable via container route, but never dropped).
+		if len(roots) == 0 {
 			out[m] = defs
+			continue
+		}
+		for _, r := range roots {
+			out[r] = defs
 		}
 	}
 	return out, nil

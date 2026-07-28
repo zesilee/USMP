@@ -10,9 +10,9 @@ func TestBuildRPCs(t *testing.T) {
 		t.Fatalf("buildRPCs: %v", err)
 	}
 
-	rpcs, ok := got["demo-rpc"]
+	rpcs, ok := got["ifm"]
 	if !ok {
-		t.Fatalf("demo-rpc 未提取到 rpc")
+		t.Fatalf("demo-rpc 未提取到 rpc(键=根容器 ifm)")
 	}
 	if len(rpcs) != 3 {
 		t.Fatalf("rpc 数 = %d, want 3 (reset-counters/restart-if/ping-op)", len(rpcs))
@@ -94,12 +94,12 @@ func TestBuildRPCs_Deterministic(t *testing.T) {
 	if err != nil {
 		t.Fatalf("run2: %v", err)
 	}
-	if len(a["demo-rpc"]) != len(b["demo-rpc"]) {
+	if len(a["ifm"]) != len(b["ifm"]) {
 		t.Fatalf("两次 rpc 数不一致")
 	}
-	for i := range a["demo-rpc"] {
-		if a["demo-rpc"][i].Name != b["demo-rpc"][i].Name {
-			t.Errorf("rpc 顺序不确定: %d %q vs %q", i, a["demo-rpc"][i].Name, b["demo-rpc"][i].Name)
+	for i := range a["ifm"] {
+		if a["ifm"][i].Name != b["ifm"][i].Name {
+			t.Errorf("rpc 顺序不确定: %d %q vs %q", i, a["ifm"][i].Name, b["ifm"][i].Name)
 		}
 	}
 }

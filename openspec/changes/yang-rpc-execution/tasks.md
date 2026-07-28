@@ -14,13 +14,13 @@
 
 ### 3. 列 rpc API（B3，RPC-02/05）
 
-- [ ] 3.1 **先写测试**：`/yang/schema/:module` 响应含 rpcs 数组——B3 断言 huawei-ifm 含 rpc 列表、input 为 FieldDef、if-name mandatory+leafref；无 rpc 模块 rpcs 为空不报错
-- [ ] 3.2 schema 响应加 `rpcs` 字段（input 复用 FieldDef 构建逻辑）；厂商边界 BR-11 一致（仅 huawei/usmp）
-- [ ] 3.3 `make gen-contract` 重生成 api.gen.ts；契约漂移门禁
+- [x] 3.1 **先写测试**：`/yang/schema/:module` 响应含 rpcs 数组——B3 断言 huawei-ifm 含 rpc 列表、input 为 FieldDef、if-name mandatory+leafref；无 rpc 模块 rpcs 为空不报错
+- [x] 3.2 schema 响应加 `rpcs` 字段（input 复用 FieldDef 构建逻辑）；厂商边界 BR-11 一致（仅 huawei/usmp）
+- [x] 3.3 `make gen-contract` 重生成 api.gen.ts；契约漂移门禁
 
 ### 4. 门禁 + 提交
 
-- [ ] 4.1 CI regen-and-diff 校验 rpc.gen.go 零漂移（RPC-01，并入 compliance）；pr-size 排除生成物（若需）
+- [x] 4.1 CI regen-and-diff 校验 rpc.gen.go 零漂移（RPC-01，并入 compliance）；pr-size 排除生成物（若需）
 - [ ] 4.2 覆盖率棘轮不下降（T08）；`go-code-review-check` 过；What/Why/How 提交；完成分支 PR
 
 ## 阶段② NETCONF 执行通道（后端，一 PR）
