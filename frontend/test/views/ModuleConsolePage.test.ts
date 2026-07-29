@@ -60,6 +60,42 @@ describe('ModuleConsolePage · Tab 由模块根派生（零模块硬编码，FE-
     expect(crumb()).toEqual(['配置', 'huawei', 'ifm', '接口列表'])
   })
 
+  it('UI-03 rpc 扩展：rpc Tab 标签经 res 本地化（非原始节点名）', async () => {
+    // 含 rpc 的 schema（真实 huawei-ifm rpc restart-if + input if-name）。
+    vi.mocked(getYangSchema).mockResolvedValue({
+      data: {
+        success: true,
+        data: {
+          module: 'ifm',
+          title: 'ifm',
+          vendor: 'huawei',
+          fields: ifmNestedSchema.fields,
+          rpcs: [
+            {
+              name: 'restart-if',
+              label: 'restart-if',
+              highRisk: true,
+              input: [{ path: 'if-name', type: 'string', label: 'if-name' }],
+            },
+          ],
+        },
+      },
+    } as any)
+    const w = mountPage()
+    await flushPromises()
+    await flushPromises() // res 懒加载重标（UI-03）落定
+    const labels = w.findAll('.el-tabs__item').map((n) => n.text().trim())
+    // rpc Tab 与配置容器平级，标签本地化为中文（原始名为 restart-if）。
+    expect(labels).toContain('重启接口')
+    expect(labels).not.toContain('restart-if')
+    const vm = w.vm as any
+    const rpcTab = vm.tabs.find((t: any) => t.name === '__rpc__restart-if')
+    // 派生标签与其执行面板读取的 rpc.label / input 叶标签均本地化。
+    expect(rpcTab.label).toBe('重启接口')
+    expect(rpcTab.rpc.label).toBe('重启接口')
+    expect(rpcTab.rpc.input[0].label).toBe('重启接口名')
+  })
+
   it('schema 加载失败：错误提示可见、页面不崩（R08）', async () => {
     vi.mocked(getYangSchema).mockRejectedValue(new Error('boom'))
     const w = mountPage()

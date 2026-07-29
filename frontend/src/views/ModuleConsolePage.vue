@@ -52,7 +52,7 @@ import { ref, computed, watch, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { getYangSchema, getOwnership } from '../api'
-import { localizeFields } from '../composables/useFieldLabels'
+import { localizeFields, localizeRpcs } from '../composables/useFieldLabels'
 import { useLocaleStore } from '../stores/locale'
 import { useMenuStore } from '../stores/menu'
 import { useDeviceStore } from '../stores/device'
@@ -85,7 +85,8 @@ const title = ref('')
 const vendor = ref('')
 const rootName = ref('')
 const schemaFields = ref<Field[]>([])
-// 模块 rpc（FE-19）：与容器 Tab 平级呈现；标签用后端原始名（i18n 本地化留后续）。
+// 模块 rpc（FE-19）：与容器 Tab 平级呈现。首帧用后端原始名，res 就绪后经
+// localizeRpcs 原位替换为本地化标签（UI-03，与配置字段同款查表）。
 const rpcs = ref<RpcDef[]>([])
 
 // 软归属（FE-18）：选中设备上本模块的认领意图清单；查询失败静默降级为无徽标（R08）。
@@ -116,13 +117,22 @@ const activeTabLabel = computed(() => tabs.value.find((t) => t.name === activeTa
 
 // 原始 schema（YANG 节点名标签）；展示层按语言经 res 查表重标（UI-03）。
 let rawFields: any[] = []
+// 原始 rpc（YANG 节点名标签）；同经 res 查表重标（UI-03 rpc 扩展）。
+let rawRpcs: RpcDef[] = []
 
 async function relabelFields() {
   // 查不到/缺文件回退原始标签（R08）；locale 切换即时重查。res 懒加载为异步，
-  // 首帧先渲染原始标签（不阻塞 Tab 派生），就绪后原位替换。
+  // 首帧先渲染原始标签（不阻塞 Tab 派生），就绪后原位替换。配置字段与 rpc 同源
+  // 并行查表，同一 rootName 守卫防止快速切模块时的回填竞态。
   const root = rootName.value
-  const localized = await localizeFields(rawFields, root, localeStore.locale, menuStore.leftTree)
-  if (rootName.value === root) schemaFields.value = localized
+  const [localizedFields, localizedRpcs] = await Promise.all([
+    localizeFields(rawFields, root, localeStore.locale, menuStore.leftTree),
+    localizeRpcs(rawRpcs, root, localeStore.locale, menuStore.leftTree),
+  ])
+  if (rootName.value === root) {
+    schemaFields.value = localizedFields
+    rpcs.value = localizedRpcs
+  }
 }
 
 async function loadSchema() {
@@ -132,7 +142,8 @@ async function loadSchema() {
     const res = await getYangSchema(moduleName.value, 'nested')
     const data = res.data?.data
     rawFields = data?.fields ?? []
-    rpcs.value = (data?.rpcs ?? []) as RpcDef[]
+    rawRpcs = (data?.rpcs ?? []) as RpcDef[]
+    rpcs.value = rawRpcs
     title.value = data?.title || moduleName.value
     vendor.value = data?.vendor || ''
     // 运行时配置路径的根段 = 模块根容器名（schema title 即 root.Name()）。

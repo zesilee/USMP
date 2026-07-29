@@ -102,20 +102,23 @@ test.describe('部署冒烟 - 前端 SPA', () => {
 
   // rpc 与容器 Tab 平级呈现 + 执行面板动态渲染（FE-19）：huawei-ifm 的 rpc
   // （reset-if-counters-by-name 等）作为 Tab 出现，点开渲染出输入与执行按钮。
+  // 标签经 snd res 本地化（UI-03 rpc 扩展）：Tab 显示中文「按接口名清除统计」，
+  // 而 Tab 内部 name（pane id）仍用原始 rpc 名（本地化只改 label 不改 name）。
   test('接口控制台出现 rpc Tab，执行面板渲染输入与执行按钮', async ({ page }) => {
     await page.goto('/module/ifm', { waitUntil: 'networkidle' })
     await pickDevice(page)
 
-    // rpc 作为一级 Tab 与容器平级（标签为后端原始 rpc 名）。
-    const rpcTab = page.getByRole('tab', { name: 'reset-if-counters-by-name', exact: true })
+    // rpc 作为一级 Tab 与容器平级，标签本地化为中文（非原始 reset-if-counters-by-name）。
+    const rpcTab = page.getByRole('tab', { name: '按接口名清除统计', exact: true })
     await expect(rpcTab).toBeVisible({ timeout: 15000 })
     await rpcTab.click()
 
-    // 执行面板：input（if-name）+ 执行按钮渲染（schema 驱动）。el-tabs 常驻全部
-    // 面板，故按 pane id 精确定位当前 rpc 的执行面板（避免 10 个 rpc 面板撞选择器）。
+    // 执行面板：input + 执行按钮渲染（schema 驱动）。el-tabs 常驻全部面板，故按
+    // pane id（原始 rpc name，未本地化）精确定位（避免 10 个 rpc 面板撞选择器）。
     const pane = page.locator('#pane-__rpc__reset-if-counters-by-name')
     await expect(pane.locator('[data-test="rpc-execute"]')).toBeVisible({ timeout: 15000 })
-    await expect(pane.getByText('if-name', { exact: false }).first()).toBeVisible()
+    // schema 驱动的 input 表单项渲染（label 亦本地化，此处只验结构存在）。
+    await expect(pane.locator('.rpc-form .el-form-item').first()).toBeVisible()
     // 缺 mandatory input → 执行按钮禁用（§9 校验拦截）。
     await expect(pane.locator('[data-test="rpc-execute"]')).toBeDisabled()
   })
@@ -164,9 +167,11 @@ test.describe('部署冒烟 - 前端 SPA', () => {
     await page.locator('.el-select-dropdown__item:visible', { hasText: 'sub-interface' }).first().click()
     await panel.getByRole('button', { name: '查询' }).click()
 
-    // 主接口行被过滤掉，仅剩 2 条 sub-interface
-    await expect(page.getByText('200GE0/1/2', { exact: false })).toHaveCount(0)
-    await expect(page.getByText('200GE0/1/0.1', { exact: false }).first()).toBeVisible()
+    // 主接口行被过滤掉，仅剩 2 条 sub-interface。断言限定在表格行内：rpc 的
+    // if-name leafref 下拉（多个 rpc 面板常驻）也把接口名作为 teleport 选项渲染进
+    // 页面，页面级 getByText 会误命中这些隐藏下拉项（实测 6 个），故只查表格行。
+    await expect(page.locator('.el-table__row', { hasText: '200GE0/1/2' })).toHaveCount(0)
+    await expect(page.locator('.el-table__row', { hasText: '200GE0/1/0.1' }).first()).toBeVisible()
   })
 
   // 接口 when 约束（FE-07）：parent-name 由 YANG `when "../class='sub-interface'"` 门控。
