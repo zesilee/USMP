@@ -1,6 +1,6 @@
 ---
 name: yang-rpc-execution
-description: 做/改 YANG rpc(运维操作)相关前必读——四层链路、执行不重试、rpc不入缓存、高危确认、两个follow-up
+description: 做/改 YANG rpc(运维操作)相关前必读——四层链路、执行不重试、rpc不入缓存、高危确认、两个follow-up已全交付(leafref下拉#232+标签本地化#233)
 metadata:
   type: project
 ---
@@ -18,6 +18,8 @@ metadata:
 - **rpc 不入配置缓存/不触发对账**（§8/D4）：无 desired/actual，是一次性动作。
 - **全部 rpc 执行前确认**（非只高危）：rpc 都改设备状态；highRisk（名称含 restart/reboot/power/delete/rollback/upgrade 等破坏性动词，rpcgen 打标）升级 error 警示。reset/clear-counters 温和不判高危。
 
-**两个 follow-up（未做）**：① **leafref 下拉**——if-name 暂用文本框，下拉需接设备实时接口列表数据源（tasks 8.4/9.3）；② **rpc 标签本地化**——Tab 用后端原始名，snd res 已含中文名（如「按接口名清除统计」），待 localizeFields 扩到 rpc 路径。
+**两个 follow-up 均已交付**：① **leafref 下拉 ✅**（#232 `cc8756b`）——`utils/leafref.ts` parseLeafref + RpcExecuteTab 按 leafRef 经 getConfig+extractRows 拉设备实时接口列表注入 options，离线/失败/空降级文本输入（R08）。② **rpc 标签本地化 ✅**（#233 `be47f0b`，change 归档 `2026-07-29-rpc-label-localization`，主 spec UI-03 扩展）——`localizeRpcs`（`useFieldLabels`）按 rpc 键规律查 snd res 重标 Tab 与 input 叶：**rpc 标签键无根容器段** `/<sourceModule>:<rpcName>`（区别配置叶 `/<sourceModule>:<root>/...`），input 叶 `/<sourceModule>:<rpcName>/input/<叶名>`；**只改 label 不动 name/path**（执行 API 路径与 payload 键不受影响）；缺键/缺文件回退原名。ModuleConsolePage `relabelFields` 并行本地化配置字段+rpc，rootName 守卫防竞态。纯前端消费既有 res，零契约改动。真机验证仍留发布门禁。
 
-**踩坑**：docker staging 共享 `usmp-staging` 工程会服**旧前端包**（构建缓存，非代码 bug）——验证前端改动用 `npm run build` + `serve -s dist` 直服，别信 docker staging 的旧包。el-tabs 常驻全部面板，测试选按钮要按 `#pane-<tabname>` 限定（否则 10 个 rpc 面板撞选择器）。详见 [[schema-driven-test-harness]]（同为 YANG 模型驱动链路）、[[backend-ci-flaky-tests]]。
+**踩坑**：docker staging 共享 `usmp-staging` 工程会服**旧前端包**（构建缓存，非代码 bug）——验证前端改动用 `npm run build` + `serve -s dist` 直服，别信 docker staging 的旧包。el-tabs 常驻全部面板，测试选按钮要按 `#pane-<tabname>` 限定（否则 10 个 rpc 面板撞选择器）。
+
+**#233 新踩坑（worktree 前端交付通用）**：① **常驻 rpc 面板的 leafref 下拉污染页面级 e2e 断言**——el-tabs 保活全部 rpc 面板，每个含 if-name 的 rpc 都把接口名渲成 teleport 下拉隐藏项（实测 6 个），页面级 `getByText('200GE0/1/2').toHaveCount(0)` 被误命中；断言要**限定到 `.el-table__row`** 等真正作用域（本次修了高级搜索冒烟的既有脆弱断言）。② **worktree 里 `node_modules` 别用 symlink**——docker `COPY . .` 无 `.dockerignore` 会把符号链接当文件去替容器内 `npm install` 的目录→build 炸；且 `ln -sf 目标 已存在的symlink` 会在真目录里造嵌套自引用，污染出一个坏 `node_modules`（vitest 127 挂、Vue resolveComponent 警告）。正解：commit 前挂干净 symlink（pre-commit vitest 要 node_modules），**push 前删 symlink**（pre-push docker 建镜像；host playwright 靠 `npx` 自取 runner，不需 host node_modules）。③ **别用 `npx vitest`**——会误取 npx 缓存里那个没装 `@vitejs/plugin-vue` 的 vitest，`.vue` 解析直接报 invalid JS；用 `node ./node_modules/vitest/vitest.mjs run`。详见 [[schema-driven-test-harness]]（同为 YANG 模型驱动链路）、[[frontend-contract-gen]]（playwright 双版本坑）、[[backend-ci-flaky-tests]]。
