@@ -65,6 +65,41 @@ export function resKeyFor(sourceModule: string, path: string): string {
   return `/${sourceModule}:${path.replace(/^\//, '')}`
 }
 
+// rpc 是模块顶层语句（非配置树节点），res 键规律不同：rpc 标签无根容器段
+// （`/<sourceModule>:<rpcName>`），input 叶带 `/input/` 段
+// （`/<sourceModule>:<rpcName>/input/<叶名>`）。区别于配置叶的 `/<sourceModule>:<root>/...`。
+interface LocalizableRpc {
+  name: string
+  label?: string
+  input?: LocalizableField[]
+}
+
+// localizeRpcs 按 rpc 键规律查表重标 rpc 标签与其 input 叶标签（不改入参；
+// 查不到/缺文件保留原 label，R08）。与 localizeFields 复用同一 res 加载与源模块反查。
+export async function localizeRpcs<T extends LocalizableRpc>(
+  rpcs: T[],
+  root: string,
+  locale: string,
+  leftTree: LeftTreeNode[],
+): Promise<T[]> {
+  const sourceModule = sourceModuleFor(root, leftTree)
+  const res = await loadFieldRes(locale, sourceModule)
+  if (!res) return rpcs
+  return rpcs.map((r) => {
+    const out: T = { ...r }
+    const rpcHit = res[`/${sourceModule}:${r.name}`]
+    if (rpcHit?.name) out.label = rpcHit.name
+    if (r.input) {
+      out.input = r.input.map((f) => {
+        const leaf = (f.path || '').split('/').filter(Boolean).pop() || f.path || ''
+        const fHit = res[`/${sourceModule}:${r.name}/input/${leaf}`]
+        return fHit?.name ? { ...f, label: fHit.name } : f
+      })
+    }
+    return out
+  })
+}
+
 // localizeFields 返回替换 label 后的新字段树（不改入参；查不到保留原 label）。
 export async function localizeFields<T extends LocalizableField>(
   fields: T[],
