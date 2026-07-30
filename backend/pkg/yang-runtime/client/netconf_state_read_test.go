@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"strings"
 	"testing"
+	"time"
 
 	"github.com/openconfig/ygot/ygot"
 
@@ -176,15 +177,16 @@ func TestNETCONFClient_GetWithStateData_SelfHeal(t *testing.T) {
 	}
 
 	// 制造「死连接但自认在线」（复用 ReconnectAfterConnectionLoss 手法）。
+	// Close 错误可忽略：目的就是把连接弄死，scrapligo 对将死连接的 Close 偶发
+	// 报错——此前这里 Fatalf 会把失败引向 cleanup 里对半死 driver 的二次 Close
+	// 死锁（CI 卡满 5 分钟包超时的根因触发点）。
 	c.mu.Lock()
 	deadDriver := c.driver
 	c.mu.Unlock()
 	if deadDriver == nil {
 		t.Fatal("expected live driver after successful get")
 	}
-	if err := deadDriver.Close(); err != nil {
-		t.Fatalf("close underlying driver: %v", err)
-	}
+	_ = deadDriver.Close()
 
 	res, err := c.Get(ctx, "/ifm:ifm/ifm:interfaces", WithStateData())
 	if err != nil {
@@ -192,5 +194,33 @@ func TestNETCONFClient_GetWithStateData_SelfHeal(t *testing.T) {
 	}
 	if !strings.Contains(fmt.Sprintf("%s", res.Data), "oper-status") {
 		t.Fatalf("healed state get missing state data: %.500s", res.Data)
+	}
+}
+
+// 回归（T07）：半死连接上 Close 必须有界返回，不许挂死调用方——scrapligo
+// v1.4.0 对已 Close 过一次的 driver 再 Close 会永久阻塞在无缓冲 done 发送
+// （read loop 已退无人接收）。CI 曾因「测试 Fatalf → cleanup → c.Close()」
+// 链路踩中此死锁，卡满 5 分钟包超时（PR #235 首轮红）。
+func TestNETCONFClient_CloseAfterConnectionLoss_Bounded(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping integration test in short mode")
+	}
+	sim := startSim(t)
+	c := newSimClient(t, sim)
+	if _, err := c.Get(context.Background(), "/ifm:ifm/ifm:interfaces"); err != nil {
+		t.Fatalf("initial get: %v", err)
+	}
+	c.mu.Lock()
+	deadDriver := c.driver
+	c.mu.Unlock()
+	_ = deadDriver.Close() // 第一次 Close：把 driver 弄成半死态
+
+	done := make(chan error, 1)
+	go func() { done <- c.Close() }()
+	select {
+	case <-done:
+		// 优雅关闭成功或有界超时错误都可接受，关键是「一定返回」。
+	case <-time.After(15 * time.Second):
+		t.Fatal("Close blocked >15s on dead connection (scrapligo close deadlock)")
 	}
 }

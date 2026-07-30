@@ -10,7 +10,7 @@ metadata:
 scrapligo v1.4.0（已是最新版，无上游修复）三个缺陷及 USMP 防线（PR #131 合入 main；前身 #129 堆叠在 #128 上被误合进死分支从未到达 main，见下）：
 
 1. **Driver 非并发安全**：`buildPayload` 的 `messageID++` 无锁（并发 RPC → 重复 message-id → 响应被错领/丢失 → 挂到 60s op-timeout）；`Channel.Write` 无锁（帧字节交错，设备端解析卡死）。防线：`NETCONFClient.opMu` 串行化 Get/Set/DiscardCandidate（#128 先加，本分支保留并重构）。
-2. **死连接上 `Driver.Close()` 必死锁**：read loop 阻塞在无缓冲 `d.errs<-` 发送、Close 阻塞在无缓冲 `d.done<-` 发送，互等。防线：`markDisconnected` 绕过 Driver.Close，异步 `driver.Channel.Close()` + recover；卡在 errs 的 read goroutine 会泄漏（量与断连次数同阶，接受）。
+2. **死连接上 `Driver.Close()` 必死锁**：read loop 阻塞在无缓冲 `d.errs<-` 发送、Close 阻塞在无缓冲 `d.done<-` 发送，互等。防线：`markDisconnected` 绕过 Driver.Close，异步 `driver.Channel.Close()` + recover；卡在 errs 的 read goroutine 会泄漏（量与断连次数同阶，接受）。**2026-07-30 补齐优雅关闭面**：`NETCONFClient.Close()` 也曾裸调 driver.Close()——对已 Close 过一次的 driver 再 Close 同样永久阻塞（测试 Fatalf→cleanup→Close 链路踩中，PR #235 首轮 CI 卡满 5 分钟包超时，即 [[backend-ci-flaky-tests]] 里"SelfHeal 挂"的真根因，非偶发）。现已有界化：goroutine 内优雅关闭等 5s（closeTimeout），超时退化关传输层；回归测试 `TestNETCONFClient_CloseAfterConnectionLoss_Bounded` 钉死。测试里故意杀连接的 `deadDriver.Close()` 错误一律忽略不 Fatalf。
 3. **连接被对端强杀时内部数据竞态**（channel reader vs `Channel.Read`）：-race 下测试杀掉带活跃连接的 sim 必误报。防线：重连回归测试用「优雅关闭底层 driver 但保留 connected=true」注入死连接状态，不真杀 sim。
 
 **故障签名**：「GET /config 持续 500 EOF + reconcile 某路径 error: EOF 直到重启后端」= 传输层死后 `connected` 恒 true、ClientPool 的 IsConnected() 复用死连接（已修：isTransportError → markDisconnected → 重拨，Get 幂等重试一次）。触发源常是前端模块控制台并行拉多个 YANG 子树。

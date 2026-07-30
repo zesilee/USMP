@@ -137,9 +137,9 @@ func TestNETCONFClient_ReconnectAfterConnectionLoss(t *testing.T) {
 	if deadDriver == nil {
 		t.Fatal("expected live driver after successful get")
 	}
-	if err := deadDriver.Close(); err != nil {
-		t.Fatalf("close underlying driver: %v", err)
-	}
+	// Close 错误可忽略：目的就是弄死连接；Fatalf 会把失败引向 cleanup 对半死
+	// driver 的二次 Close（有界超时兜底虽不再挂死，但没必要制造假失败）。
+	_ = deadDriver.Close()
 
 	// 修复前：connected 恒为 true、driver 不重建，这里每次调用都瞬间失败
 	// （生产表现为持续 500 EOF 直到重启后端）。修复后：Get 识别传输层错误
