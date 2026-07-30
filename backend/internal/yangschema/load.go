@@ -61,8 +61,9 @@ func loadUncached() (schema.Schema, error) {
 // SND blacklist（CN-03）：构建期 revision 匹配后生成模块名集合，运行期零 snd 文件依赖。
 //go:generate go run ../../tools/blacklistgen -blacklist=../../../snd/ce6866p-yang/blacklist.xml -path=../../../snd/ce6866p-yang -output=./blacklist.gen.go -package=yangschema
 
-// SND left-tree（LT-01）：构建期生成分组树 + 叶子根容器映射，运行期零 snd 文件依赖。
-//go:generate go run ../../tools/lefttreegen -tree=../../../snd/webui/template/left-tree.json -path=../../../snd/ce6866p-yang -output=./lefttree.gen.go -package=yangschema
+// SND left-tree（LT-01）：构建期生成分组树 + 叶子根容器映射 + 模块级 container/rpc
+// 子节点（双语标签自 snd res 烘焙），运行期零 snd 文件依赖。
+//go:generate go run ../../tools/lefttreegen -tree=../../../snd/webui/template/left-tree.json -path=../../../snd/ce6866p-yang -res=../../../snd/resources/i18n -output=./lefttree.gen.go -package=yangschema
 
 // YANG rpc 定义（RPC-01）：构建期以 goyang 从 YANG 源提取每模块 rpc（名称/高危/
 // 输入叶），ygot 运行期 schema 不含 rpc。模块清单与厂商 taskname 同源。

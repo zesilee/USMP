@@ -20,8 +20,14 @@ type LeftTreeNodeDTO struct {
 	// Module 是首个已加载根容器名（前端路由 /module/<module>）；不可用叶省略。
 	Module string `json:"module,omitempty"`
 	// Supported 标记该设备 hello 能力是否覆盖此模块；仅 ?device= 且协商可得时携带。
-	Supported *bool             `json:"supported,omitempty"`
-	Children  []LeftTreeNodeDTO `json:"children,omitempty"`
+	Supported *bool `json:"supported,omitempty"`
+	// Kind/Name/HighRisk 仅模块级子节点携带（LT-02 children）：kind=container 路由
+	// /module/<name>，kind=rpc 路由 /module/<父叶module>/rpc/<name>；highRisk 仅
+	// 高危 rpc 为 true 时出现。分组与模块叶自身省略（契约向后兼容）。
+	Kind     string            `json:"kind,omitempty"`
+	Name     string            `json:"name,omitempty"`
+	HighRisk bool              `json:"highRisk,omitempty"`
+	Children []LeftTreeNodeDTO `json:"children,omitempty"`
 }
 
 // LeftTree serves the SND left tree with per-leaf availability (LT-02).
@@ -85,8 +91,20 @@ func convertLeftTree(nodes []yangschema.LeftTreeNode, loaded, supported map[stri
 				}
 				dto.Supported = &sup
 			}
+			// LT-02 children：available 叶透出模块级 container/rpc 平级子节点；
+			// container 仅已加载根容器（未加载无控制台可路由），rpc 全量透出。
+			if avail {
+				for _, mn := range n.Nodes {
+					if mn.Kind == "container" && !loaded[mn.Name] {
+						continue
+					}
+					dto.Children = append(dto.Children, LeftTreeNodeDTO{
+						Zh: mn.Zh, En: mn.En, Kind: mn.Kind, Name: mn.Name, HighRisk: mn.HighRisk,
+					})
+				}
+			}
 		}
-		dto.Children = convertLeftTree(n.Children, loaded, supported)
+		dto.Children = append(dto.Children, convertLeftTree(n.Children, loaded, supported)...)
 		out = append(out, dto)
 	}
 	return out

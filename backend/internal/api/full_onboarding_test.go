@@ -35,7 +35,9 @@ func TestLeftTreeFullAvailabilityBaseline(t *testing.T) {
 	total, available := 0, 0
 	walk = func(nodes []LeftTreeNodeDTO) {
 		for _, n := range nodes {
-			if len(n.Children) > 0 {
+			// 模块叶现在也带 children（LT-02 模块级 container/rpc 子节点），
+			// 叶判定以 SourceModule 为准；分组继续下钻。
+			if n.SourceModule == "" {
 				walk(n.Children)
 				continue
 			}

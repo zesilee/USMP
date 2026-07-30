@@ -18,6 +18,8 @@ import (
 	"strings"
 
 	"github.com/openconfig/goyang/pkg/yang"
+
+	"github.com/leezesi/usmp/backend/tools/internal/rpcrisk"
 )
 
 // RPCInputLeaf is one input leaf of an rpc, in a shape the runtime maps to a
@@ -38,28 +40,9 @@ type RPCDef struct {
 	Input    []RPCInputLeaf
 }
 
-// highRiskWords flag rpcs with major, often irreversible device impact — restart/
-// power/delete/rollback/upgrade/etc. Deliberately excludes the mild, common
-// reset-/clear-counters family (those get the base confirm, not the escalated
-// warning). Heuristic by design (D5); can later switch to a model annotation.
-var highRiskWords = []string{
-	"restart", "reboot", "reload", "warm", "cold", "power",
-	"delete", "batch", "erase", "format", "rollback", "switch",
-	"upgrade", "undo",
-}
-
-// isHighRisk reports whether an rpc name matches a high-risk verb (word-boundary
-// on '-', so "reset" never matches "restart" and "clear" never matches).
+// isHighRisk 委托共享分类器 rpcrisk（左树节点警示与执行确认分级同一口径，D5/D2）。
 func isHighRisk(name string) bool {
-	segs := strings.Split(name, "-")
-	for _, s := range segs {
-		for _, w := range highRiskWords {
-			if s == w {
-				return true
-			}
-		}
-	}
-	return false
+	return rpcrisk.IsHighRisk(name)
 }
 
 // buildRPCs parses the given modules under yangDir and returns, per root
