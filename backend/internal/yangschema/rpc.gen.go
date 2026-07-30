@@ -24,6 +24,14 @@ type RPCDef struct {
 
 // ModuleRPCs 是各模块的 rpc 定义（键为模块根容器名，与 schema 一致）。
 var ModuleRPCs = map[string][]RPCDef{
+	"acl": {
+		{Name: "reset-count", HighRisk: false, Input: []RPCInputLeaf{
+			{Name: "identify", Type: "string", Mandatory: true, Pattern: "([1-9]\\d{3})|(10[0-9]{3})|(23[0-9]{3})|(99999)|([0-9a-zA-Z]([^\\s]*))"},
+		}},
+		{Name: "reset-count6", HighRisk: false, Input: []RPCInputLeaf{
+			{Name: "identify", Type: "string", Mandatory: true, Pattern: "([1-3]\\d{3})|([6-9]\\d{3})|([0-9a-zA-Z]([^\\s]*))"},
+		}},
+	},
 	"arp": {
 		{Name: "batch-delete-all", HighRisk: true},
 		{Name: "batch-delete-vpn", HighRisk: true, Input: []RPCInputLeaf{
@@ -31,6 +39,12 @@ var ModuleRPCs = map[string][]RPCDef{
 		}},
 		{Name: "convert-to-static", HighRisk: false, Input: []RPCInputLeaf{
 			{Name: "if-name", Type: "leafref", LeafRef: "/arp:arp/arp:query-entries/arp:query-entry/arp:if-name"},
+		}},
+	},
+	"bfd": {
+		{Name: "change-session-board", HighRisk: false, Input: []RPCInputLeaf{
+			{Name: "local-discriminator", Type: "number", Mandatory: true},
+			{Name: "select-slot-id", Type: "string", Mandatory: true},
 		}},
 	},
 	"cfg": {
@@ -463,6 +477,48 @@ var ModuleRPCs = map[string][]RPCDef{
 		{Name: "reset-all-sessions", HighRisk: false},
 		{Name: "reset-all-statistics", HighRisk: false},
 	},
+	"pic": {
+		{Name: "attr-abort", HighRisk: false, Input: []RPCInputLeaf{
+			{Name: "position", Type: "string", Mandatory: true},
+		}},
+		{Name: "attr-start", HighRisk: false, Input: []RPCInputLeaf{
+			{Name: "position", Type: "string", Mandatory: true},
+		}},
+		{Name: "clear-port-crc-err-alarm", HighRisk: false, Input: []RPCInputLeaf{
+			{Name: "port-position", Type: "string", Mandatory: true},
+		}},
+		{Name: "clear-port-input-err-alarm", HighRisk: false, Input: []RPCInputLeaf{
+			{Name: "port-position", Type: "string", Mandatory: true},
+		}},
+		{Name: "clear-port-output-err-alarm", HighRisk: false, Input: []RPCInputLeaf{
+			{Name: "port-position", Type: "string", Mandatory: true},
+		}},
+		{Name: "clear-port-rx-pause-err-alarm", HighRisk: false, Input: []RPCInputLeaf{
+			{Name: "port-position", Type: "string", Mandatory: true},
+		}},
+		{Name: "clear-port-sdh-err-alarm", HighRisk: false, Input: []RPCInputLeaf{
+			{Name: "port-position", Type: "string", Mandatory: true},
+		}},
+		{Name: "clear-port-symbol-err-alarm", HighRisk: false, Input: []RPCInputLeaf{
+			{Name: "port-position", Type: "string", Mandatory: true},
+		}},
+		{Name: "clear-port-trans-alarm", HighRisk: false, Input: []RPCInputLeaf{
+			{Name: "port-position", Type: "string", Mandatory: true},
+		}},
+		{Name: "laser-turn", HighRisk: false, Input: []RPCInputLeaf{
+			{Name: "laser-shutdown", Type: "enum"},
+			{Name: "laser-test-time", Type: "number"},
+			{Name: "port-position", Type: "string", Mandatory: true},
+		}},
+		{Name: "port-prbs-check-result-get", HighRisk: false, Input: []RPCInputLeaf{
+			{Name: "port-name", Type: "string"},
+		}},
+		{Name: "port-prbs-check-start", HighRisk: false},
+		{Name: "port-prbs-check-stop", HighRisk: false},
+		{Name: "upgrade-optical-module", HighRisk: true, Input: []RPCInputLeaf{
+			{Name: "board-position", Type: "string"},
+		}},
+	},
 	"qos": {
 		{Name: "reset-fabric-queue-multicast-statistics", HighRisk: false, Input: []RPCInputLeaf{
 			{Name: "slot-id", Type: "string", Mandatory: true, Pattern: "(c[cl]c\\d+/)?\\d+"},
@@ -564,6 +620,24 @@ var ModuleRPCs = map[string][]RPCDef{
 			{Name: "vpn-instance", Type: "leafref", LeafRef: "/ni:network-instance/ni:instances/ni:instance/ni:name"},
 		}},
 	},
+	"routing": {
+		{Name: "reset-ipv4-route-statistics", HighRisk: false, Input: []RPCInputLeaf{
+			{Name: "protocol-type", Type: "enum"},
+			{Name: "topology-name", Type: "leafref", LeafRef: "/ni:network-instance/ni:instances/ni:instance/l3vpn:afs/l3vpn:af/rt:routing/rt:routing-manage/rt:topologys/rt:topology/rt:name"},
+			{Name: "vrf-name", Type: "leafref", LeafRef: "/ni:network-instance/ni:instances/ni:instance/ni:name"},
+		}},
+		{Name: "reset-ipv6-route-statistics", HighRisk: false, Input: []RPCInputLeaf{
+			{Name: "protocol-type", Type: "enum"},
+			{Name: "topology-name", Type: "leafref", LeafRef: "/ni:network-instance/ni:instances/ni:instance/l3vpn:afs/l3vpn:af/rt:routing/rt:routing-manage/rt:topologys/rt:topology/rt:name"},
+			{Name: "vrf-name", Type: "leafref", LeafRef: "/ni:network-instance/ni:instances/ni:instance/ni:name"},
+		}},
+		{Name: "reset-vpnv4-statistics", HighRisk: false, Input: []RPCInputLeaf{
+			{Name: "protocol-type", Type: "enum"},
+		}},
+		{Name: "reset-vpnv6-statistics", HighRisk: false, Input: []RPCInputLeaf{
+			{Name: "protocol-type", Type: "enum"},
+		}},
+	},
 	"sflow": {
 		{Name: "reset-interface-statistics", HighRisk: false, Input: []RPCInputLeaf{
 			{Name: "interface-name", Type: "leafref", LeafRef: "/ifm:ifm/ifm:interfaces/ifm:interface/ifm:name", Mandatory: true},
@@ -590,7 +664,9 @@ var ModuleRPCs = map[string][]RPCDef{
 
 // ModuleRPCNamespace 是各模块的 YANG namespace（键同 ModuleRPCs），构建 <rpc> payload 用。
 var ModuleRPCNamespace = map[string]string{
+	"acl":             "urn:huawei:yang:huawei-acl",
 	"arp":             "urn:huawei:yang:huawei-arp",
+	"bfd":             "urn:huawei:yang:huawei-bfd",
 	"cfg":             "urn:huawei:yang:huawei-cfg",
 	"devm":            "urn:huawei:yang:huawei-devm",
 	"driver":          "urn:huawei:yang:huawei-driver",
@@ -602,7 +678,9 @@ var ModuleRPCNamespace = map[string]string{
 	"macsec":          "urn:huawei:yang:huawei-macsec",
 	"nqa":             "urn:huawei:yang:huawei-nqa",
 	"openflow-agent":  "urn:huawei:yang:huawei-openflow-agent",
+	"pic":             "urn:huawei:yang:huawei-pic",
 	"qos":             "urn:huawei:yang:huawei-qos",
+	"routing":         "urn:huawei:yang:huawei-routing",
 	"sflow":           "urn:huawei:yang:huawei-sflow",
 	"snmp":            "urn:huawei:yang:huawei-snmp",
 	"unicast-forward": "urn:huawei:yang:huawei-unicast-forward",

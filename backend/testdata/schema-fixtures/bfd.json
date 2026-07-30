@@ -4476,5 +4476,25 @@
         }
       ]
     }
+  ],
+  "rpcs": [
+    {
+      "name": "change-session-board",
+      "label": "change-session-board",
+      "input": [
+        {
+          "path": "local-discriminator",
+          "type": "number",
+          "label": "local-discriminator",
+          "required": true
+        },
+        {
+          "path": "select-slot-id",
+          "type": "string",
+          "label": "select-slot-id",
+          "required": true
+        }
+      ]
+    }
   ]
 }

@@ -22,6 +22,8 @@ import (
 	"strings"
 
 	"github.com/openconfig/goyang/pkg/yang"
+
+	"github.com/leezesi/usmp/backend/tools/internal/rpcrisk"
 )
 
 // jsonNode mirrors one left-tree.json node.
@@ -43,12 +45,25 @@ type TreeNode struct {
 	En             string
 	SourceModule   string
 	RootContainers []string
+	Nodes          []ModuleNode
 	Children       []TreeNode
 }
 
+// ModuleNode is one module-level child of a leaf: a top-level data container or
+// an rpc, flattened as siblings（模块顶层同级平铺，LT-01）. Labels are baked from
+// the snd res files at build time (missing keys fall back to the raw name, R08).
+type ModuleNode struct {
+	Kind     string // "container" | "rpc"
+	Name     string
+	Zh       string
+	En       string
+	HighRisk bool // rpc only（rpcrisk 共享口径）
+}
+
 // buildTree parses left-tree.json and resolves each leaf's root containers
-// from the YANG sources in yangDir.
-func buildTree(treePath, yangDir string) ([]TreeNode, error) {
+// and module-level nodes (containers + rpcs) from the YANG sources in yangDir;
+// zh/en labels are baked from resDir/{zh-cn,en-us}/<module>-res.json.
+func buildTree(treePath, yangDir, resDir string) ([]TreeNode, error) {
 	raw, err := os.ReadFile(treePath)
 	if err != nil {
 		return nil, fmt.Errorf("read left-tree: %w", err)
@@ -87,6 +102,7 @@ func buildTree(treePath, yangDir string) ([]TreeNode, error) {
 		}
 	}
 	roots := map[string][]string{}
+	rpcs := map[string][]string{}
 	for m := range modules {
 		mod, ok := ms.Modules[m]
 		if !ok || mod == nil {
@@ -96,16 +112,23 @@ func buildTree(treePath, yangDir string) ([]TreeNode, error) {
 		if e == nil {
 			continue
 		}
-		var cs []string
+		var cs, rs []string
 		for name, child := range e.Dir {
-			if child != nil && child.Dir != nil && child.RPC == nil && len(child.Errors) == 0 {
+			switch {
+			case child == nil || len(child.Errors) > 0:
+			case child.RPC != nil:
+				rs = append(rs, name)
+			case child.Dir != nil:
 				cs = append(cs, name)
 			}
 		}
 		sort.Strings(cs)
+		sort.Strings(rs)
 		roots[m] = cs
+		rpcs[m] = rs
 	}
 
+	labels := newResLabels(resDir)
 	var convert func(ns []jsonNode) []TreeNode
 	convert = func(ns []jsonNode) []TreeNode {
 		out := make([]TreeNode, 0, len(ns))
@@ -114,6 +137,7 @@ func buildTree(treePath, yangDir string) ([]TreeNode, error) {
 			if m := leafModule(n); m != "" {
 				t.SourceModule = m
 				t.RootContainers = roots[m]
+				t.Nodes = moduleNodes(m, roots[m], rpcs[m], labels)
 			}
 			t.Children = convert(n.Children)
 			out = append(out, t)
@@ -121,6 +145,68 @@ func buildTree(treePath, yangDir string) ([]TreeNode, error) {
 		return out
 	}
 	return convert(root.LeftTree), nil
+}
+
+// moduleNodes flattens a leaf module's top-level containers and rpcs as ordered
+// siblings（container 前、rpc 后，各自字典序）with res-baked bilingual labels.
+func moduleNodes(module string, roots, rpcNames []string, labels *resLabels) []ModuleNode {
+	out := make([]ModuleNode, 0, len(roots)+len(rpcNames))
+	for _, c := range roots {
+		zh, en := labels.lookup(module, c)
+		out = append(out, ModuleNode{Kind: "container", Name: c, Zh: zh, En: en})
+	}
+	for _, r := range rpcNames {
+		zh, en := labels.lookup(module, r)
+		out = append(out, ModuleNode{Kind: "rpc", Name: r, Zh: zh, En: en, HighRisk: rpcrisk.IsHighRisk(r)})
+	}
+	return out
+}
+
+// resLabels lazily loads per-module snd res files（键 `/<module>:<node>` → name）.
+// Any missing file/key falls back to the raw node name — logged, never fatal
+// (R08: 缺标签不阻断生成).
+type resLabels struct {
+	dir   string
+	cache map[string]map[string]string // locale/module → path → name
+}
+
+func newResLabels(dir string) *resLabels {
+	return &resLabels{dir: dir, cache: map[string]map[string]string{}}
+}
+
+func (r *resLabels) lookup(module, node string) (zh, en string) {
+	key := "/" + module + ":" + node
+	zh = r.name("zh-cn", module, key, node)
+	en = r.name("en-us", module, key, node)
+	return zh, en
+}
+
+func (r *resLabels) name(locale, module, key, fallback string) string {
+	ck := locale + "/" + module
+	m, ok := r.cache[ck]
+	if !ok {
+		m = map[string]string{}
+		raw, err := os.ReadFile(filepath.Join(r.dir, locale, module+"-res.json"))
+		if err != nil {
+			log.Printf("lefttreegen: res %s/%s: %v (labels fall back to raw names)", locale, module, err)
+		} else {
+			var entries map[string]struct {
+				Name string `json:"name"`
+			}
+			if err := json.Unmarshal(raw, &entries); err != nil {
+				log.Printf("lefttreegen: res %s/%s: %v (labels fall back to raw names)", locale, module, err)
+			} else {
+				for k, v := range entries {
+					m[k] = v.Name
+				}
+			}
+		}
+		r.cache[ck] = m
+	}
+	if n := m[key]; n != "" {
+		return n
+	}
+	return fallback
 }
 
 // leafModule returns the source module name of a leaf node ("" for groups).
@@ -134,14 +220,15 @@ func leafModule(n jsonNode) string {
 func main() {
 	treePath := flag.String("tree", "", "path to left-tree.json")
 	yangDir := flag.String("path", "", "YANG source directory")
+	resDir := flag.String("res", "", "snd i18n resources directory (zh-cn/en-us res.json)")
 	output := flag.String("output", "", "output .go file")
 	pkg := flag.String("package", "yangschema", "output package name")
 	flag.Parse()
-	if *treePath == "" || *yangDir == "" || *output == "" {
-		log.Fatal("lefttreegen: -tree, -path and -output are required")
+	if *treePath == "" || *yangDir == "" || *resDir == "" || *output == "" {
+		log.Fatal("lefttreegen: -tree, -path, -res and -output are required")
 	}
 
-	nodes, err := buildTree(*treePath, *yangDir)
+	nodes, err := buildTree(*treePath, *yangDir, *resDir)
 	if err != nil {
 		log.Fatalf("lefttreegen: %v", err)
 	}
@@ -155,12 +242,24 @@ func main() {
 package %s
 
 // LeftTreeNode 是左树节点：分组（Children 非空）或叶子（SourceModule 非空）。
+// 叶子的 Nodes 是模块顶层 container 与 rpc 的平铺同级子节点（LT-01）。
 type LeftTreeNode struct {
 	Zh             string
 	En             string
 	SourceModule   string
 	RootContainers []string
+	Nodes          []LeftTreeModuleNode
 	Children       []LeftTreeNode
+}
+
+// LeftTreeModuleNode 是叶子的模块级子节点：顶层数据容器或 rpc，双语标签
+// 构建期自 snd res 烘焙（缺键回退原名）；HighRisk 与 rpcgen 同口径。
+type LeftTreeModuleNode struct {
+	Kind     string
+	Name     string
+	Zh       string
+	En       string
+	HighRisk bool
 }
 
 // LeftTree 是完整 SND 左树。
@@ -206,6 +305,17 @@ func renderNodes(ns []TreeNode, depth int) string {
 					fmt.Fprintf(&b, "%q", c)
 				}
 				b.WriteString("}")
+			}
+			if len(n.Nodes) > 0 {
+				b.WriteString(", Nodes: []LeftTreeModuleNode{\n")
+				for _, mn := range n.Nodes {
+					fmt.Fprintf(&b, "%s\t{Kind: %q, Name: %q, Zh: %q, En: %q", ind, mn.Kind, mn.Name, mn.Zh, mn.En)
+					if mn.HighRisk {
+						b.WriteString(", HighRisk: true")
+					}
+					b.WriteString("},\n")
+				}
+				b.WriteString(ind + "}")
 			}
 		}
 		if len(n.Children) > 0 {

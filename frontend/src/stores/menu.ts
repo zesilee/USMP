@@ -3,7 +3,9 @@ import { ref, computed } from 'vue'
 import { listYangModules, getLeftTree } from '../api'
 import { i18n } from '../i18n'
 
-// SND 左树节点（LT-03）：分组（children）或叶子（sourceModule；available/module 标注）。
+// SND 左树节点（LT-03）：分组（children）、叶子（sourceModule；available/module
+// 标注），或叶子下的模块级子节点（kind=container/rpc，与 YANG 模块顶层同级平铺，
+// LT-02）——container 路由 /module/<name>、rpc 路由 /module/<叶module>/rpc/<name>。
 export interface LeftTreeNode {
   zh: string
   en: string
@@ -11,6 +13,9 @@ export interface LeftTreeNode {
   available?: boolean
   module?: string
   supported?: boolean
+  kind?: 'container' | 'rpc'
+  name?: string
+  highRisk?: boolean
   children?: LeftTreeNode[]
 }
 

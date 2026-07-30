@@ -8,4 +8,5 @@ module demo-good {
     leaf y { type string; }
   }
   rpc do-thing { }
+  rpc restart-thing { }
 }

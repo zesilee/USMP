@@ -6,205 +6,520 @@
 package yangschema
 
 // LeftTreeNode 是左树节点：分组（Children 非空）或叶子（SourceModule 非空）。
+// 叶子的 Nodes 是模块顶层 container 与 rpc 的平铺同级子节点（LT-01）。
 type LeftTreeNode struct {
 	Zh             string
 	En             string
 	SourceModule   string
 	RootContainers []string
+	Nodes          []LeftTreeModuleNode
 	Children       []LeftTreeNode
+}
+
+// LeftTreeModuleNode 是叶子的模块级子节点：顶层数据容器或 rpc，双语标签
+// 构建期自 snd res 烘焙（缺键回退原名）；HighRisk 与 rpcgen 同口径。
+type LeftTreeModuleNode struct {
+	Kind     string
+	Name     string
+	Zh       string
+	En       string
+	HighRisk bool
 }
 
 // LeftTree 是完整 SND 左树。
 var LeftTree = []LeftTreeNode{
 	{Zh: "基础配置", En: "Basic Configuration", Children: []LeftTreeNode{
 		{Zh: "登录设备命令行界面", En: "CLI-based Device Login", Children: []LeftTreeNode{
-			{Zh: "huawei-dsa", En: "huawei-dsa", SourceModule: "huawei-dsa", RootContainers: []string{"dsa"}},
-			{Zh: "huawei-ecc", En: "huawei-ecc", SourceModule: "huawei-ecc", RootContainers: []string{"ecc"}},
-			{Zh: "huawei-rsa", En: "huawei-rsa", SourceModule: "huawei-rsa", RootContainers: []string{"rsa"}},
-			{Zh: "huawei-vty", En: "huawei-vty", SourceModule: "huawei-vty", RootContainers: []string{"vty"}},
+			{Zh: "huawei-dsa", En: "huawei-dsa", SourceModule: "huawei-dsa", RootContainers: []string{"dsa"}, Nodes: []LeftTreeModuleNode{
+				{Kind: "container", Name: "dsa", Zh: "DSA", En: "DSA"},
+			}},
+			{Zh: "huawei-ecc", En: "huawei-ecc", SourceModule: "huawei-ecc", RootContainers: []string{"ecc"}, Nodes: []LeftTreeModuleNode{
+				{Kind: "container", Name: "ecc", Zh: "ECC", En: "ECC"},
+			}},
+			{Zh: "huawei-rsa", En: "huawei-rsa", SourceModule: "huawei-rsa", RootContainers: []string{"rsa"}, Nodes: []LeftTreeModuleNode{
+				{Kind: "container", Name: "rsa", Zh: "RSA", En: "RSA"},
+			}},
+			{Zh: "huawei-vty", En: "huawei-vty", SourceModule: "huawei-vty", RootContainers: []string{"vty"}, Nodes: []LeftTreeModuleNode{
+				{Kind: "container", Name: "vty", Zh: "VTY", En: "VTY"},
+			}},
 		}},
 		{Zh: "文件系统管理", En: "File System Management", Children: []LeftTreeNode{
-			{Zh: "huawei-ftpc", En: "huawei-ftpc", SourceModule: "huawei-ftpc", RootContainers: []string{"ftpc"}},
+			{Zh: "huawei-ftpc", En: "huawei-ftpc", SourceModule: "huawei-ftpc", RootContainers: []string{"ftpc"}, Nodes: []LeftTreeModuleNode{
+				{Kind: "container", Name: "ftpc", Zh: "FTP客户端", En: "FTP Client"},
+				{Kind: "rpc", Name: "ftpc-transfer-file", Zh: "FTP客户端传输文件", En: "FTP Client Transfer"},
+			}},
 		}},
 		{Zh: "配置文件管理", En: "Configuration File Management", Children: []LeftTreeNode{
-			{Zh: "huawei-cfg", En: "huawei-cfg", SourceModule: "huawei-cfg", RootContainers: []string{"cfg"}},
+			{Zh: "huawei-cfg", En: "huawei-cfg", SourceModule: "huawei-cfg", RootContainers: []string{"cfg"}, Nodes: []LeftTreeModuleNode{
+				{Kind: "container", Name: "cfg", Zh: "配置管理", En: "Configuration Management"},
+				{Kind: "rpc", Name: "cfg-file-backup-and-recovery", Zh: "配置备份和恢复", En: "Configuration Backup and Recovery"},
+				{Kind: "rpc", Name: "clear-interface-config", Zh: "清除接口配置", En: "Clear Interface Configuration"},
+				{Kind: "rpc", Name: "clear-startup", Zh: "clear-startup", En: "clear-startup"},
+				{Kind: "rpc", Name: "config-recovery-by-time", Zh: "config-recovery-by-time", En: "config-recovery-by-time"},
+				{Kind: "rpc", Name: "create-user-label-checkpoint", Zh: "创建配置标签回退点", En: "Create User Label Checkpoint"},
+				{Kind: "rpc", Name: "delete-checkpoint-by-oldest-num", Zh: "删除配置回退点", En: "Deleted CheckPoints", HighRisk: true},
+				{Kind: "rpc", Name: "delete-startup", Zh: "delete-startup", En: "delete-startup", HighRisk: true},
+				{Kind: "rpc", Name: "delete-startup-reserved-dcn", Zh: "delete-startup-reserved-dcn", En: "delete-startup-reserved-dcn", HighRisk: true},
+				{Kind: "rpc", Name: "delete-user-label-checkpoint", Zh: "删除配置标签回退点", En: "Delete User Label Checkpoint", HighRisk: true},
+				{Kind: "rpc", Name: "reset-user-label-by-commit-id", Zh: "reset-user-label-by-commit-id", En: "reset-user-label-by-commit-id"},
+				{Kind: "rpc", Name: "rollback-by-commit-id", Zh: "根据指定的配置回退点ID执行配置回退", En: "Rollback by Configure CheckPoint ID", HighRisk: true},
+				{Kind: "rpc", Name: "rollback-by-file", Zh: "配置替换到指定的配置文件", En: "Rollback by Configuration File Name", HighRisk: true},
+				{Kind: "rpc", Name: "rollback-by-last-num", Zh: "根据指定的配置回退点个数执行配置回退", En: "Rollback by Point Count", HighRisk: true},
+				{Kind: "rpc", Name: "rollback-by-user-label", Zh: "根据指定的配置标签回退点执行配置回退", En: "Rollback by User Label Point ID", HighRisk: true},
+				{Kind: "rpc", Name: "save", Zh: "保存配置", En: "Save the Configuration"},
+				{Kind: "rpc", Name: "save-all-virtual-systems", Zh: "save-all-virtual-systems", En: "save-all-virtual-systems"},
+				{Kind: "rpc", Name: "set-startup", Zh: "设置下次启动文件", En: "Set Startup File"},
+				{Kind: "rpc", Name: "set-user-label-by-commit-id", Zh: "设置配置回退点标签", En: "Set User Label"},
+				{Kind: "rpc", Name: "specify-slot-set-startup", Zh: "specify-slot-set-startup", En: "specify-slot-set-startup"},
+			}},
 		}},
 	}},
 	{Zh: "以太网交换", En: "Ethernet Switching", Children: []LeftTreeNode{
 		{Zh: "VLAN", En: "VLAN", Children: []LeftTreeNode{
-			{Zh: "huawei-vlan", En: "huawei-vlan", SourceModule: "huawei-vlan", RootContainers: []string{"vlan"}},
-			{Zh: "huawei-ethernet", En: "huawei-ethernet", SourceModule: "huawei-ethernet"},
-			{Zh: "huawei-bd", En: "huawei-bd", SourceModule: "huawei-bd", RootContainers: []string{"bd"}},
+			{Zh: "huawei-vlan", En: "huawei-vlan", SourceModule: "huawei-vlan", RootContainers: []string{"vlan"}, Nodes: []LeftTreeModuleNode{
+				{Kind: "container", Name: "vlan", Zh: "VLAN", En: "VLAN"},
+				{Kind: "rpc", Name: "reset-vlan-statistics", Zh: "reset-vlan-statistics", En: "reset-vlan-statistics"},
+			}},
+			{Zh: "huawei-ethernet", En: "huawei-ethernet", SourceModule: "huawei-ethernet", Nodes: []LeftTreeModuleNode{
+				{Kind: "rpc", Name: "create-qinq-termination", Zh: "创建Qinq封装", En: "Create QinQ Tag Termination"},
+				{Kind: "rpc", Name: "create-user-vlan-qinq", Zh: "创建User-Vlan QinQ", En: "Create User-Vlan QinQ"},
+				{Kind: "rpc", Name: "delete-qinq-termination", Zh: "删除Qinq封装", En: "Delete QinQ Tag Termination", HighRisk: true},
+				{Kind: "rpc", Name: "delete-user-vlan-qinq", Zh: "删除User-Vlan QinQ", En: "Delete User-Vlan QinQ", HighRisk: true},
+			}},
+			{Zh: "huawei-bd", En: "huawei-bd", SourceModule: "huawei-bd", RootContainers: []string{"bd"}, Nodes: []LeftTreeModuleNode{
+				{Kind: "container", Name: "bd", Zh: "桥域配置", En: "Bridge domain configuration"},
+			}},
 		}},
 		{Zh: "MAC", En: "MAC", Children: []LeftTreeNode{
-			{Zh: "huawei-mac-flapping-detect", En: "huawei-mac-flapping-detect", SourceModule: "huawei-mac-flapping-detect", RootContainers: []string{"mac-flapping-detect"}},
+			{Zh: "huawei-mac-flapping-detect", En: "huawei-mac-flapping-detect", SourceModule: "huawei-mac-flapping-detect", RootContainers: []string{"mac-flapping-detect"}, Nodes: []LeftTreeModuleNode{
+				{Kind: "container", Name: "mac-flapping-detect", Zh: "MAC漂移检测", En: "MAC address flapping detection"},
+			}},
 		}},
 		{Zh: "Eth-Trunk", En: "Eth-Trunk", Children: []LeftTreeNode{
-			{Zh: "huawei-ifm-trunk", En: "huawei-ifm-trunk", SourceModule: "huawei-ifm-trunk", RootContainers: []string{"ifm-trunk"}},
-			{Zh: "huawei-lacp", En: "huawei-lacp", SourceModule: "huawei-lacp", RootContainers: []string{"lacp"}},
+			{Zh: "huawei-ifm-trunk", En: "huawei-ifm-trunk", SourceModule: "huawei-ifm-trunk", RootContainers: []string{"ifm-trunk"}, Nodes: []LeftTreeModuleNode{
+				{Kind: "container", Name: "ifm-trunk", Zh: "Trunk接口", En: "Trunk Interface"},
+				{Kind: "rpc", Name: "trunk-switch", Zh: "主备Trunk倒换", En: "Trunk Switch", HighRisk: true},
+			}},
+			{Zh: "huawei-lacp", En: "huawei-lacp", SourceModule: "huawei-lacp", RootContainers: []string{"lacp"}, Nodes: []LeftTreeModuleNode{
+				{Kind: "container", Name: "lacp", Zh: "LACP属性", En: "LACP Attributes"},
+			}},
 		}},
 		{Zh: "STP_RSTP_MSTP", En: "STP_RSTP_MSTP", Children: []LeftTreeNode{
-			{Zh: "huawei-mstp", En: "huawei-mstp", SourceModule: "huawei-mstp", RootContainers: []string{"mstp"}},
+			{Zh: "huawei-mstp", En: "huawei-mstp", SourceModule: "huawei-mstp", RootContainers: []string{"mstp"}, Nodes: []LeftTreeModuleNode{
+				{Kind: "container", Name: "mstp", Zh: "MSTP", En: "MSTP"},
+			}},
 		}},
 	}},
 	{Zh: "可靠性", En: "High Availability", Children: []LeftTreeNode{
 		{Zh: "BFD", En: "BFD", Children: []LeftTreeNode{
-			{Zh: "huawei-bfd", En: "huawei-bfd", SourceModule: "huawei-bfd", RootContainers: []string{"bfd"}},
+			{Zh: "huawei-bfd", En: "huawei-bfd", SourceModule: "huawei-bfd", RootContainers: []string{"bfd"}, Nodes: []LeftTreeModuleNode{
+				{Kind: "container", Name: "bfd", Zh: "BFD使能标志", En: "BFD Enabling Flag"},
+				{Kind: "rpc", Name: "change-session-board", Zh: "手动迁板", En: "Manually migrates BFD sessions to another board"},
+			}},
 		}},
 		{Zh: "M-LAG", En: "M-LAG", Children: []LeftTreeNode{
-			{Zh: "huawei-m-lag", En: "huawei-m-lag", SourceModule: "huawei-m-lag", RootContainers: []string{"m-lag"}},
+			{Zh: "huawei-m-lag", En: "huawei-m-lag", SourceModule: "huawei-m-lag", RootContainers: []string{"m-lag"}, Nodes: []LeftTreeModuleNode{
+				{Kind: "container", Name: "m-lag", Zh: "M-LAG配置和状态", En: "M-LAG configuration and states"},
+			}},
 		}},
 		{Zh: "VRRP", En: "VRRP", Children: []LeftTreeNode{
-			{Zh: "huawei-vrrp", En: "huawei-vrrp", SourceModule: "huawei-vrrp", RootContainers: []string{"vrrp"}},
+			{Zh: "huawei-vrrp", En: "huawei-vrrp", SourceModule: "huawei-vrrp", RootContainers: []string{"vrrp"}, Nodes: []LeftTreeModuleNode{
+				{Kind: "container", Name: "vrrp", Zh: "VRRP", En: "Vrrp"},
+			}},
 		}},
 		{Zh: "Monitor Link", En: "Monitor Link", Children: []LeftTreeNode{
-			{Zh: "huawei-monitor-link", En: "huawei-monitor-link", SourceModule: "huawei-monitor-link", RootContainers: []string{"monitor-link"}},
+			{Zh: "huawei-monitor-link", En: "huawei-monitor-link", SourceModule: "huawei-monitor-link", RootContainers: []string{"monitor-link"}, Nodes: []LeftTreeModuleNode{
+				{Kind: "container", Name: "monitor-link", Zh: "monitor-link", En: "monitor-link"},
+			}},
 		}},
 	}},
 	{Zh: "系统监控", En: "System Monitor", Children: []LeftTreeNode{
 		{Zh: "NQA", En: "NQA", Children: []LeftTreeNode{
-			{Zh: "huawei-nqa", En: "huawei-nqa", SourceModule: "huawei-nqa", RootContainers: []string{"nqa"}},
+			{Zh: "huawei-nqa", En: "huawei-nqa", SourceModule: "huawei-nqa", RootContainers: []string{"nqa"}, Nodes: []LeftTreeModuleNode{
+				{Kind: "container", Name: "nqa", Zh: "NQA业务", En: "NQA Service"},
+				{Kind: "rpc", Name: "test-instance-execution", Zh: "NQA测试例执行策略", En: "NQA test instance execution policy"},
+			}},
 		}},
 		{Zh: "镜像", En: "Mirroring", Children: []LeftTreeNode{
-			{Zh: "huawei-mirror", En: "huawei-mirror", SourceModule: "huawei-mirror", RootContainers: []string{"mirror"}},
+			{Zh: "huawei-mirror", En: "huawei-mirror", SourceModule: "huawei-mirror", RootContainers: []string{"mirror"}, Nodes: []LeftTreeModuleNode{
+				{Kind: "container", Name: "mirror", Zh: "镜像", En: "Mirror"},
+			}},
 		}},
 		{Zh: "路径/连通性探测", En: "Path and Connectivity Detection", Children: []LeftTreeNode{
-			{Zh: "huawei-vxlan-path-detect", En: "huawei-vxlan-path-detect", SourceModule: "huawei-vxlan-path-detect", RootContainers: []string{"vxlan-path-detect"}},
+			{Zh: "huawei-vxlan-path-detect", En: "huawei-vxlan-path-detect", SourceModule: "huawei-vxlan-path-detect", RootContainers: []string{"vxlan-path-detect"}, Nodes: []LeftTreeModuleNode{
+				{Kind: "container", Name: "vxlan-path-detect", Zh: "VXLAN路径检测", En: "VXLAN-path-detect"},
+			}},
 		}},
 		{Zh: "gRPC", En: "gRPC", Children: []LeftTreeNode{
-			{Zh: "huawei-grpc", En: "huawei-grpc", SourceModule: "huawei-grpc", RootContainers: []string{"grpc"}},
+			{Zh: "huawei-grpc", En: "huawei-grpc", SourceModule: "huawei-grpc", RootContainers: []string{"grpc"}, Nodes: []LeftTreeModuleNode{
+				{Kind: "container", Name: "grpc", Zh: "grpc", En: "grpc"},
+			}},
 		}},
 		{Zh: "全流分析", En: "AnyFlow", Children: []LeftTreeNode{
-			{Zh: "huawei-anyflow", En: "huawei-anyflow", SourceModule: "huawei-anyflow", RootContainers: []string{"anyflow"}},
+			{Zh: "huawei-anyflow", En: "huawei-anyflow", SourceModule: "huawei-anyflow", RootContainers: []string{"anyflow"}, Nodes: []LeftTreeModuleNode{
+				{Kind: "container", Name: "anyflow", Zh: "进入Any-Flow视图", En: "Any flow"},
+			}},
 		}},
 		{Zh: "智能流量分析", En: "Intelligent Traffic Analysis", Children: []LeftTreeNode{
-			{Zh: "huawei-analysis-collector", En: "huawei-analysis-collector", SourceModule: "huawei-analysis-collector", RootContainers: []string{"analysis-collector"}},
+			{Zh: "huawei-analysis-collector", En: "huawei-analysis-collector", SourceModule: "huawei-analysis-collector", RootContainers: []string{"analysis-collector"}, Nodes: []LeftTreeModuleNode{
+				{Kind: "container", Name: "analysis-collector", Zh: "数据采集器信息", En: "Data collector information"},
+			}},
 		}},
 		{Zh: "Packet Event", En: "Packet Event", Children: []LeftTreeNode{
-			{Zh: "huawei-packetevent", En: "huawei-packetevent", SourceModule: "huawei-packetevent", RootContainers: []string{"packetevent"}},
+			{Zh: "huawei-packetevent", En: "huawei-packetevent", SourceModule: "huawei-packetevent", RootContainers: []string{"packetevent"}, Nodes: []LeftTreeModuleNode{
+				{Kind: "container", Name: "packetevent", Zh: "包事件", En: "Packet event"},
+			}},
 		}},
 		{Zh: "sFlow", En: "sFlow", Children: []LeftTreeNode{
-			{Zh: "huawei-sflow", En: "huawei-sflow", SourceModule: "huawei-sflow", RootContainers: []string{"sflow"}},
+			{Zh: "huawei-sflow", En: "huawei-sflow", SourceModule: "huawei-sflow", RootContainers: []string{"sflow"}, Nodes: []LeftTreeModuleNode{
+				{Kind: "container", Name: "sflow", Zh: "SFLOW特性", En: "SFlow"},
+				{Kind: "rpc", Name: "reset-interface-statistics", Zh: "清除接口的sFlow报文统计信息", En: "Clearing sFlow Packet Statistics on an Interface"},
+				{Kind: "rpc", Name: "reset-slot-statistics", Zh: "清除槽位的sFlow报文统计信息", En: "Clearing sFlow Packet Statistics in a Slot"},
+			}},
 		}},
 		{Zh: "Telemetry", En: "Telemetry", Children: []LeftTreeNode{
-			{Zh: "openconfig-telemetry", En: "openconfig-telemetry", SourceModule: "openconfig-telemetry", RootContainers: []string{"telemetry-system"}},
+			{Zh: "openconfig-telemetry", En: "openconfig-telemetry", SourceModule: "openconfig-telemetry", RootContainers: []string{"telemetry-system"}, Nodes: []LeftTreeModuleNode{
+				{Kind: "container", Name: "telemetry-system", Zh: "telemetry-system", En: "telemetry-system"},
+			}},
 		}},
 	}},
 	{Zh: "IP路由", En: "IP Routing", Children: []LeftTreeNode{
 		{Zh: "OSPF", En: "OSPF", Children: []LeftTreeNode{
-			{Zh: "huawei-ospfv2", En: "huawei-ospfv2", SourceModule: "huawei-ospfv2", RootContainers: []string{"ospfv2"}},
-			{Zh: "huawei-ospfv3", En: "huawei-ospfv3", SourceModule: "huawei-ospfv3", RootContainers: []string{"ospfv3"}},
+			{Zh: "huawei-ospfv2", En: "huawei-ospfv2", SourceModule: "huawei-ospfv2", RootContainers: []string{"ospfv2"}, Nodes: []LeftTreeModuleNode{
+				{Kind: "container", Name: "ospfv2", Zh: "全局属性", En: "Global Attributes"},
+			}},
+			{Zh: "huawei-ospfv3", En: "huawei-ospfv3", SourceModule: "huawei-ospfv3", RootContainers: []string{"ospfv3"}, Nodes: []LeftTreeModuleNode{
+				{Kind: "container", Name: "ospfv3", Zh: "全局属性", En: "OSPFv3 global"},
+			}},
 		}},
 		{Zh: "路由管理", En: "Route Management", Children: []LeftTreeNode{
-			{Zh: "huawei-fib", En: "huawei-fib", SourceModule: "huawei-fib", RootContainers: []string{"fib"}},
-			{Zh: "huawei-routing", En: "huawei-routing", SourceModule: "huawei-routing", RootContainers: []string{"routing"}},
+			{Zh: "huawei-fib", En: "huawei-fib", SourceModule: "huawei-fib", RootContainers: []string{"fib"}, Nodes: []LeftTreeModuleNode{
+				{Kind: "container", Name: "fib", Zh: "转发信息表", En: "Forwarding information base"},
+			}},
+			{Zh: "huawei-routing", En: "huawei-routing", SourceModule: "huawei-routing", RootContainers: []string{"routing"}, Nodes: []LeftTreeModuleNode{
+				{Kind: "container", Name: "routing", Zh: "routing", En: "routing"},
+				{Kind: "rpc", Name: "reset-ipv4-route-statistics", Zh: "reset-ipv4-route-statistics", En: "reset-ipv4-route-statistics"},
+				{Kind: "rpc", Name: "reset-ipv6-route-statistics", Zh: "reset-ipv6-route-statistics", En: "reset-ipv6-route-statistics"},
+				{Kind: "rpc", Name: "reset-vpnv4-statistics", Zh: "reset-vpnv4-statistics", En: "reset-vpnv4-statistics"},
+				{Kind: "rpc", Name: "reset-vpnv6-statistics", Zh: "reset-vpnv6-statistics", En: "reset-vpnv6-statistics"},
+			}},
 		}},
 		{Zh: "BGP", En: "BGP", Children: []LeftTreeNode{
-			{Zh: "huawei-bgp", En: "huawei-bgp", SourceModule: "huawei-bgp", RootContainers: []string{"bgp"}},
+			{Zh: "huawei-bgp", En: "huawei-bgp", SourceModule: "huawei-bgp", RootContainers: []string{"bgp"}, Nodes: []LeftTreeModuleNode{
+				{Kind: "container", Name: "bgp", Zh: "BGP通用配置", En: "Universal BGP Configurations"},
+			}},
 		}},
 		{Zh: "路由策略", En: "Routing Policy", Children: []LeftTreeNode{
-			{Zh: "huawei-routing-policy", En: "huawei-routing-policy", SourceModule: "huawei-routing-policy", RootContainers: []string{"routing-policy"}},
+			{Zh: "huawei-routing-policy", En: "huawei-routing-policy", SourceModule: "huawei-routing-policy", RootContainers: []string{"routing-policy"}, Nodes: []LeftTreeModuleNode{
+				{Kind: "container", Name: "routing-policy", Zh: "routing-policy", En: "routing-policy"},
+			}},
 		}},
 	}},
 	{Zh: "接口管理", En: "Interface Management", Children: []LeftTreeNode{
 		{Zh: "接口基础", En: "Interface Basic", Children: []LeftTreeNode{
-			{Zh: "huawei-ifm", En: "huawei-ifm", SourceModule: "huawei-ifm", RootContainers: []string{"ifm"}},
+			{Zh: "huawei-ifm", En: "huawei-ifm", SourceModule: "huawei-ifm", RootContainers: []string{"ifm"}, Nodes: []LeftTreeModuleNode{
+				{Kind: "container", Name: "ifm", Zh: "通用接口", En: "Common Interface"},
+				{Kind: "rpc", Name: "reset-if-control-flap-counts", Zh: "清除振荡抑制次数", En: "Clear Flapping Control Times"},
+				{Kind: "rpc", Name: "reset-if-control-flap-penalty", Zh: "清除惩罚值", En: "Clear Penalty Value"},
+				{Kind: "rpc", Name: "reset-if-counters-all", Zh: "清除所有接口统计", En: "Clear All Interface Statistics"},
+				{Kind: "rpc", Name: "reset-if-counters-by-name", Zh: "按接口名清除统计", En: "Clear Statistics By Interface Name"},
+				{Kind: "rpc", Name: "reset-if-counters-by-type", Zh: "按接口类型清除统计", En: "Clear Statistics By Interface Type"},
+				{Kind: "rpc", Name: "reset-if-mib-counters-all", Zh: "清除所有接口mib终端统计", En: "Clear MIB Statistics About All Interfaces"},
+				{Kind: "rpc", Name: "reset-if-mib-counters-by-name", Zh: "按接口名清除mib终端统计", En: "Clear MIB Statistics by Interface Name"},
+				{Kind: "rpc", Name: "reset-if-mib-counters-by-type", Zh: "按接口类型清除mib终端统计", En: "Clear MIB Statistics by Interface Type"},
+				{Kind: "rpc", Name: "reset-remote-if-counters", Zh: "按照接口名清除远端接口统计", En: "Clear Remote Interface Statistics"},
+				{Kind: "rpc", Name: "restart-if", Zh: "重启接口", En: "Restart interface", HighRisk: true},
+			}},
 		}},
 		{Zh: "以太网接口", En: "Ethernet Interface", Children: []LeftTreeNode{
-			{Zh: "huawei-pic", En: "huawei-pic", SourceModule: "huawei-pic", RootContainers: []string{"pic"}},
+			{Zh: "huawei-pic", En: "huawei-pic", SourceModule: "huawei-pic", RootContainers: []string{"pic"}, Nodes: []LeftTreeModuleNode{
+				{Kind: "container", Name: "pic", Zh: "子卡属性", En: "Pic Configuration"},
+				{Kind: "rpc", Name: "attr-abort", Zh: "attr-abort", En: "attr-abort"},
+				{Kind: "rpc", Name: "attr-start", Zh: "attr-start", En: "attr-start"},
+				{Kind: "rpc", Name: "clear-port-crc-err-alarm", Zh: "clear-port-crc-err-alarm", En: "clear-port-crc-err-alarm"},
+				{Kind: "rpc", Name: "clear-port-input-err-alarm", Zh: "clear-port-input-err-alarm", En: "clear-port-input-err-alarm"},
+				{Kind: "rpc", Name: "clear-port-output-err-alarm", Zh: "clear-port-output-err-alarm", En: "clear-port-output-err-alarm"},
+				{Kind: "rpc", Name: "clear-port-rx-pause-err-alarm", Zh: "clear-port-rx-pause-err-alarm", En: "clear-port-rx-pause-err-alarm"},
+				{Kind: "rpc", Name: "clear-port-sdh-err-alarm", Zh: "clear-port-sdh-err-alarm", En: "clear-port-sdh-err-alarm"},
+				{Kind: "rpc", Name: "clear-port-symbol-err-alarm", Zh: "clear-port-symbol-err-alarm", En: "clear-port-symbol-err-alarm"},
+				{Kind: "rpc", Name: "clear-port-trans-alarm", Zh: "clear-port-trans-alarm", En: "clear-port-trans-alarm"},
+				{Kind: "rpc", Name: "laser-turn", Zh: "激光器开关", En: "Laser turn"},
+				{Kind: "rpc", Name: "port-prbs-check-result-get", Zh: "获取PRBS检查结果", En: "Get PRBS check result"},
+				{Kind: "rpc", Name: "port-prbs-check-start", Zh: "PRBS检查开始", En: "PRBS check start"},
+				{Kind: "rpc", Name: "port-prbs-check-stop", Zh: "PRBS检查停止", En: "PRBS check stop"},
+				{Kind: "rpc", Name: "upgrade-optical-module", Zh: "光模块升级", En: "Optical module upgrade", HighRisk: true},
+			}},
 		}},
 	}},
 	{Zh: "系统管理", En: "System Management", Children: []LeftTreeNode{
 		{Zh: "硬件管理", En: "Hardware Management", Children: []LeftTreeNode{
-			{Zh: "huawei-devm", En: "huawei-devm", SourceModule: "huawei-devm", RootContainers: []string{"devm"}},
-			{Zh: "huawei-driver", En: "huawei-driver", SourceModule: "huawei-driver", RootContainers: []string{"driver"}},
+			{Zh: "huawei-devm", En: "huawei-devm", SourceModule: "huawei-devm", RootContainers: []string{"devm"}, Nodes: []LeftTreeModuleNode{
+				{Kind: "container", Name: "devm", Zh: "全局配置", En: "Global Configuration"},
+				{Kind: "rpc", Name: "clear-inactive-config", Zh: "清除离线配置", En: "Clear inactive configuration"},
+				{Kind: "rpc", Name: "cold-reset-lpu", Zh: "硬复位接口板", En: "Cold Reset LPU", HighRisk: true},
+				{Kind: "rpc", Name: "cold-reset-mpu", Zh: "硬复位主控板", En: "Cold Reset MPU", HighRisk: true},
+				{Kind: "rpc", Name: "reboot", Zh: "整机复位", En: "Reboot", HighRisk: true},
+				{Kind: "rpc", Name: "reset-board", Zh: "复位单板", En: "Reset Board"},
+				{Kind: "rpc", Name: "reset-card", Zh: "重启子卡", En: "Reset card"},
+				{Kind: "rpc", Name: "reset-lpu-board", Zh: "复位接口板", En: "Reset LPU"},
+				{Kind: "rpc", Name: "reset-mpu-board", Zh: "复位主控板", En: "Reset MPU"},
+				{Kind: "rpc", Name: "reset-offline-config", Zh: "清离线配置", En: "Reset Offline Config"},
+				{Kind: "rpc", Name: "reset-sfu-board", Zh: "复位交换网板", En: "Reset SFU"},
+				{Kind: "rpc", Name: "schedule-reboot-at-time", Zh: "定时重启的时间", En: "Schedule reboot at time", HighRisk: true},
+				{Kind: "rpc", Name: "schedule-reboot-delay-time", Zh: "定时重启延迟时间", En: "Schedule reboot delay time", HighRisk: true},
+				{Kind: "rpc", Name: "transfer-pnpp", Zh: "传输pnpp文件", En: "Transfer pnpp File"},
+				{Kind: "rpc", Name: "undo-schedule-reboot", Zh: "取消定时重启", En: "Undo schedule reboot", HighRisk: true},
+				{Kind: "rpc", Name: "warm-reset-lpu", Zh: "软复位接口板", En: "Warm Reset LPU", HighRisk: true},
+				{Kind: "rpc", Name: "warm-reset-mpu", Zh: "软复位主控板", En: "Warm Reset MPU", HighRisk: true},
+			}},
+			{Zh: "huawei-driver", En: "huawei-driver", SourceModule: "huawei-driver", RootContainers: []string{"driver"}, Nodes: []LeftTreeModuleNode{
+				{Kind: "container", Name: "driver", Zh: "驱动配置", En: "Driver Configuration"},
+				{Kind: "rpc", Name: "auto-upgrade-models", Zh: "auto-upgrade-models", En: "auto-upgrade-models", HighRisk: true},
+				{Kind: "rpc", Name: "board-channel-check", Zh: "board-channel-check", En: "board-channel-check"},
+				{Kind: "rpc", Name: "check-hardware-compatibility", Zh: "check-hardware-compatibility", En: "check-hardware-compatibility"},
+				{Kind: "rpc", Name: "check-hardware-version", Zh: "check-hardware-version", En: "check-hardware-version"},
+				{Kind: "rpc", Name: "check-lcm-channel", Zh: "check-lcm-channel", En: "check-lcm-channel"},
+				{Kind: "rpc", Name: "check-system-software", Zh: "check-system-software", En: "check-system-software"},
+				{Kind: "rpc", Name: "clear-nv-port-bip8-err-alarm", Zh: "clear-nv-port-bip8-err-alarm", En: "clear-nv-port-bip8-err-alarm"},
+				{Kind: "rpc", Name: "clear-nv-port-crc-err-alarm", Zh: "clear-nv-port-crc-err-alarm", En: "clear-nv-port-crc-err-alarm"},
+				{Kind: "rpc", Name: "clear-nv-port-input-err-alarm", Zh: "clear-nv-port-input-err-alarm", En: "clear-nv-port-input-err-alarm"},
+				{Kind: "rpc", Name: "clear-nv-port-output-err-alarm", Zh: "clear-nv-port-output-err-alarm", En: "clear-nv-port-output-err-alarm"},
+				{Kind: "rpc", Name: "clear-nv-port-sdh-err-alarm", Zh: "clear-nv-port-sdh-err-alarm", En: "clear-nv-port-sdh-err-alarm"},
+				{Kind: "rpc", Name: "clear-nv-port-symbol-err-alarm", Zh: "clear-nv-port-symbol-err-alarm", En: "clear-nv-port-symbol-err-alarm"},
+				{Kind: "rpc", Name: "clear-nv-port-trans-alarm", Zh: "clear-nv-port-trans-alarm", En: "clear-nv-port-trans-alarm"},
+				{Kind: "rpc", Name: "clear-nv-port-tx-pause-err-alarm", Zh: "clear-nv-port-tx-pause-err-alarm", En: "clear-nv-port-tx-pause-err-alarm"},
+				{Kind: "rpc", Name: "clear-port-bip8-err-alarm", Zh: "clear-port-bip8-err-alarm", En: "clear-port-bip8-err-alarm"},
+				{Kind: "rpc", Name: "clear-port-tx-pause-err-alarm", Zh: "clear-port-tx-pause-err-alarm", En: "clear-port-tx-pause-err-alarm"},
+				{Kind: "rpc", Name: "interface-match-check-recovery", Zh: "interface-match-check-recovery", En: "interface-match-check-recovery"},
+				{Kind: "rpc", Name: "multi-level-alarm-boolean", Zh: "multi-level-alarm-boolean", En: "multi-level-alarm-boolean"},
+				{Kind: "rpc", Name: "power-off-card", Zh: "子卡下电", En: "Power off card", HighRisk: true},
+				{Kind: "rpc", Name: "power-off-ecu", Zh: "power-off-ecu", En: "power-off-ecu", HighRisk: true},
+				{Kind: "rpc", Name: "power-off-icu", Zh: "power-off-icu", En: "power-off-icu", HighRisk: true},
+				{Kind: "rpc", Name: "power-off-lpu", Zh: "下电接口板", En: "Power Off Lpu", HighRisk: true},
+				{Kind: "rpc", Name: "power-off-mpu", Zh: "下电主控板", En: "Power Off Mpu", HighRisk: true},
+				{Kind: "rpc", Name: "power-off-sfu", Zh: "下电交换网板", En: "Power Off Sfu", HighRisk: true},
+				{Kind: "rpc", Name: "power-on-card", Zh: "子卡上电", En: "Power on card", HighRisk: true},
+				{Kind: "rpc", Name: "power-on-ecu", Zh: "power-on-ecu", En: "power-on-ecu", HighRisk: true},
+				{Kind: "rpc", Name: "power-on-icu", Zh: "power-on-icu", En: "power-on-icu", HighRisk: true},
+				{Kind: "rpc", Name: "power-on-lpu", Zh: "上电接口板", En: "Power On Lpu", HighRisk: true},
+				{Kind: "rpc", Name: "power-on-mpu", Zh: "上电主控板", En: "Power On Mpu", HighRisk: true},
+				{Kind: "rpc", Name: "power-on-sfu", Zh: "上电交换网板", En: "Power On Sfu", HighRisk: true},
+				{Kind: "rpc", Name: "reset-cmu-board", Zh: "reset-cmu-board", En: "reset-cmu-board"},
+				{Kind: "rpc", Name: "reset-dustproof-net", Zh: "reset-dustproof-net", En: "reset-dustproof-net"},
+				{Kind: "rpc", Name: "reset-ecu-board", Zh: "reset-ecu-board", En: "reset-ecu-board"},
+				{Kind: "rpc", Name: "reset-fan-board", Zh: "reset-fan-board", En: "reset-fan-board"},
+				{Kind: "rpc", Name: "reset-icu-board", Zh: "reset-icu-board", En: "reset-icu-board"},
+				{Kind: "rpc", Name: "reset-lcd", Zh: "reset-lcd", En: "reset-lcd"},
+				{Kind: "rpc", Name: "reset-mbus-node", Zh: "reset-mbus-node", En: "reset-mbus-node"},
+				{Kind: "rpc", Name: "rollback", Zh: "rollback", En: "rollback", HighRisk: true},
+				{Kind: "rpc", Name: "set-boot-password", Zh: "设置指定槽位Boot密码", En: "Set Boot Password"},
+				{Kind: "rpc", Name: "set-chassis-run-mode", Zh: "set-chassis-run-mode", En: "set-chassis-run-mode"},
+				{Kind: "rpc", Name: "set-flash-lock", Zh: "set-flash-lock", En: "set-flash-lock"},
+				{Kind: "rpc", Name: "set-led-flash", Zh: "set-led-flash", En: "set-led-flash"},
+				{Kind: "rpc", Name: "set-multi-chassis-id", Zh: "set-multi-chassis-id", En: "set-multi-chassis-id"},
+				{Kind: "rpc", Name: "set-next-system-mode", Zh: "set-next-system-mode", En: "set-next-system-mode"},
+				{Kind: "rpc", Name: "set-next-work-mode", Zh: "set-next-work-mode", En: "set-next-work-mode"},
+				{Kind: "rpc", Name: "set-npu-led-flash", Zh: "set-npu-led-flash", En: "set-npu-led-flash"},
+				{Kind: "rpc", Name: "set-nv-laser-turn", Zh: "set-nv-laser-turn", En: "set-nv-laser-turn"},
+				{Kind: "rpc", Name: "set-slave-default", Zh: "set-slave-default", En: "set-slave-default"},
+				{Kind: "rpc", Name: "set-slot-led-flash", Zh: "set-slot-led-flash", En: "set-slot-led-flash"},
+				{Kind: "rpc", Name: "set-split-resume", Zh: "set-split-resume", En: "set-split-resume"},
+				{Kind: "rpc", Name: "set-usb-uart-stat", Zh: "set-usb-uart-stat", En: "set-usb-uart-stat"},
+				{Kind: "rpc", Name: "set-vsu-service-type", Zh: "set-vsu-service-type", En: "set-vsu-service-type"},
+				{Kind: "rpc", Name: "sysmac-load", Zh: "sysmac-load", En: "sysmac-load"},
+			}},
 		}},
 		{Zh: "信息管理", En: "Information Management", Children: []LeftTreeNode{
-			{Zh: "huawei-syslog", En: "huawei-syslog", SourceModule: "huawei-syslog", RootContainers: []string{"syslog"}},
+			{Zh: "huawei-syslog", En: "huawei-syslog", SourceModule: "huawei-syslog", RootContainers: []string{"syslog"}, Nodes: []LeftTreeModuleNode{
+				{Kind: "container", Name: "syslog", Zh: "SYSLOG", En: "Syslog"},
+			}},
 		}},
 		{Zh: "NTP", En: "NTP", Children: []LeftTreeNode{
-			{Zh: "huawei-ntp", En: "huawei-ntp", SourceModule: "huawei-ntp", RootContainers: []string{"ntp"}},
+			{Zh: "huawei-ntp", En: "huawei-ntp", SourceModule: "huawei-ntp", RootContainers: []string{"ntp"}, Nodes: []LeftTreeModuleNode{
+				{Kind: "container", Name: "ntp", Zh: "NTP", En: "NTP"},
+			}},
 		}},
 		{Zh: "LLDP", En: "LLDP", Children: []LeftTreeNode{
-			{Zh: "huawei-lldp", En: "huawei-lldp", SourceModule: "huawei-lldp", RootContainers: []string{"lldp"}},
+			{Zh: "huawei-lldp", En: "huawei-lldp", SourceModule: "huawei-lldp", RootContainers: []string{"lldp"}, Nodes: []LeftTreeModuleNode{
+				{Kind: "container", Name: "lldp", Zh: "全局LLDP状态", En: "Global LLDP Status"},
+			}},
 		}},
 		{Zh: "SNMP", En: "SNMP", Children: []LeftTreeNode{
-			{Zh: "huawei-snmp", En: "huawei-snmp", SourceModule: "huawei-snmp", RootContainers: []string{"snmp"}},
+			{Zh: "huawei-snmp", En: "huawei-snmp", SourceModule: "huawei-snmp", RootContainers: []string{"snmp"}, Nodes: []LeftTreeModuleNode{
+				{Kind: "container", Name: "snmp", Zh: "SNMP", En: "SNMP"},
+				{Kind: "rpc", Name: "activate-users", Zh: "激活用户", En: "Activate Users"},
+			}},
 		}},
 		{Zh: "OpenFlow", En: "OpenFlow", Children: []LeftTreeNode{
-			{Zh: "huawei-openflow-agent", En: "huawei-openflow-agent", SourceModule: "huawei-openflow-agent", RootContainers: []string{"openflow-agent"}},
+			{Zh: "huawei-openflow-agent", En: "huawei-openflow-agent", SourceModule: "huawei-openflow-agent", RootContainers: []string{"openflow-agent"}, Nodes: []LeftTreeModuleNode{
+				{Kind: "container", Name: "openflow-agent", Zh: "配置OpenFlow agents", En: "Configure OpenFlow agents"},
+				{Kind: "rpc", Name: "reset-all-sessions", Zh: "重置所有OpenFlow会话", En: "Reset all OpenFlow sessions"},
+				{Kind: "rpc", Name: "reset-all-statistics", Zh: "重置所有OpenFlow统计", En: "Reset all OpenFlow statistics"},
+			}},
 		}},
 		{Zh: "升级维护", En: "Upgrade Maintenance", Children: []LeftTreeNode{
-			{Zh: "huawei-license", En: "huawei-license", SourceModule: "huawei-license", RootContainers: []string{"license"}},
-			{Zh: "huawei-system-resources-usage", En: "huawei-system-resources-usage", SourceModule: "huawei-system-resources-usage", RootContainers: []string{"system-resources-usage"}},
+			{Zh: "huawei-license", En: "huawei-license", SourceModule: "huawei-license", RootContainers: []string{"license"}, Nodes: []LeftTreeModuleNode{
+				{Kind: "container", Name: "license", Zh: "license", En: "license"},
+				{Kind: "rpc", Name: "license-active", Zh: "激活License", En: "Active License File"},
+				{Kind: "rpc", Name: "license-assign", Zh: "分配云化license", En: "Assign Cloud License"},
+				{Kind: "rpc", Name: "license-delete", Zh: "删除License文件", En: "Delete License File", HighRisk: true},
+				{Kind: "rpc", Name: "license-emergency", Zh: "激活License紧急模式", En: "Active License Emergency State"},
+				{Kind: "rpc", Name: "license-export", Zh: "导出License", En: "Exporting a License File"},
+				{Kind: "rpc", Name: "license-revoke", Zh: "失效License", En: "Revoke License File"},
+				{Kind: "rpc", Name: "license-revoke-chassis", Zh: "指定设备ID失效License", En: "Revoke License File By Device ID"},
+				{Kind: "rpc", Name: "license-switch-mode", Zh: "License模式切换", En: "Switch license mode", HighRisk: true},
+				{Kind: "rpc", Name: "license-trial", Zh: "打开/关闭控制项试用", En: "Enabling or Disabling Control Item Trial"},
+				{Kind: "rpc", Name: "license-verify", Zh: "校验License", En: "Verify License File"},
+				{Kind: "rpc", Name: "startup-paf", Zh: "设置下次启动paf文件", En: "Specifying a PAF File for a Next Startup"},
+			}},
+			{Zh: "huawei-system-resources-usage", En: "huawei-system-resources-usage", SourceModule: "huawei-system-resources-usage", RootContainers: []string{"system-resources-usage"}, Nodes: []LeftTreeModuleNode{
+				{Kind: "container", Name: "system-resources-usage", Zh: "资源使用", En: "Resource usage"},
+			}},
 		}},
 	}},
 	{Zh: "安全", En: "Security", Children: []LeftTreeNode{
 		{Zh: "MACsec", En: "MACsec", Children: []LeftTreeNode{
-			{Zh: "huawei-macsec", En: "huawei-macsec", SourceModule: "huawei-macsec", RootContainers: []string{"macsec"}},
+			{Zh: "huawei-macsec", En: "huawei-macsec", SourceModule: "huawei-macsec", RootContainers: []string{"macsec"}, Nodes: []LeftTreeModuleNode{
+				{Kind: "container", Name: "macsec", Zh: "MACsec", En: "MACsec"},
+				{Kind: "rpc", Name: "reset-macsec-statistics", Zh: "reset-macsec-statistics", En: "reset-macsec-statistics"},
+				{Kind: "rpc", Name: "reset-mka-statistics", Zh: "reset-mka-statistics", En: "reset-mka-statistics"},
+			}},
 		}},
 		{Zh: "SSH", En: "SSH", Children: []LeftTreeNode{
-			{Zh: "huawei-sm2", En: "huawei-sm2", SourceModule: "huawei-sm2", RootContainers: []string{"sm2"}},
+			{Zh: "huawei-sm2", En: "huawei-sm2", SourceModule: "huawei-sm2", RootContainers: []string{"sm2"}, Nodes: []LeftTreeModuleNode{
+				{Kind: "container", Name: "sm2", Zh: "SM2对端密钥表", En: "SM2 peer key table"},
+			}},
 		}},
 		{Zh: "微分段", En: "Microsegmentation", Children: []LeftTreeNode{
-			{Zh: "huawei-microsegmentation", En: "huawei-microsegmentation", SourceModule: "huawei-microsegmentation", RootContainers: []string{"microsegmentation"}},
+			{Zh: "huawei-microsegmentation", En: "huawei-microsegmentation", SourceModule: "huawei-microsegmentation", RootContainers: []string{"microsegmentation"}, Nodes: []LeftTreeModuleNode{
+				{Kind: "container", Name: "microsegmentation", Zh: "microsegmentation", En: "microsegmentation"},
+			}},
 		}},
 	}},
 	{Zh: "IP地址与服务", En: "IP Addresses and Services", Children: []LeftTreeNode{
 		{Zh: "IPv4基础", En: "IPv4 Basic", Children: []LeftTreeNode{
-			{Zh: "huawei-unicast-forward", En: "huawei-unicast-forward", SourceModule: "huawei-unicast-forward", RootContainers: []string{"unicast-forward"}},
+			{Zh: "huawei-unicast-forward", En: "huawei-unicast-forward", SourceModule: "huawei-unicast-forward", RootContainers: []string{"unicast-forward"}, Nodes: []LeftTreeModuleNode{
+				{Kind: "container", Name: "unicast-forward", Zh: "单播转发", En: "Unicast forward"},
+				{Kind: "rpc", Name: "reset-na-anti-attack-statistic", Zh: "reset-na-anti-attack-statistic", En: "reset-na-anti-attack-statistic"},
+			}},
 			{Zh: "huawei-ip", En: "huawei-ip", SourceModule: "huawei-ip"},
 		}},
 		{Zh: "负载分担", En: "Load Balancing", Children: []LeftTreeNode{
-			{Zh: "huawei-loadbalance", En: "huawei-loadbalance", SourceModule: "huawei-loadbalance", RootContainers: []string{"loadbalance"}},
+			{Zh: "huawei-loadbalance", En: "huawei-loadbalance", SourceModule: "huawei-loadbalance", RootContainers: []string{"loadbalance"}, Nodes: []LeftTreeModuleNode{
+				{Kind: "container", Name: "loadbalance", Zh: "负载均衡", En: "Loadbalance"},
+			}},
 		}},
 		{Zh: "ARP", En: "ARP", Children: []LeftTreeNode{
-			{Zh: "huawei-arp", En: "huawei-arp", SourceModule: "huawei-arp", RootContainers: []string{"arp"}},
+			{Zh: "huawei-arp", En: "huawei-arp", SourceModule: "huawei-arp", RootContainers: []string{"arp"}, Nodes: []LeftTreeModuleNode{
+				{Kind: "container", Name: "arp", Zh: "ARP管理", En: "ARP Management"},
+				{Kind: "rpc", Name: "batch-delete-all", Zh: "batch-delete-all", En: "batch-delete-all", HighRisk: true},
+				{Kind: "rpc", Name: "batch-delete-vpn", Zh: "batch-delete-vpn", En: "batch-delete-vpn", HighRisk: true},
+				{Kind: "rpc", Name: "convert-to-static", Zh: "convert-to-static", En: "convert-to-static"},
+			}},
 		}},
 		{Zh: "ACL", En: "ACL", Children: []LeftTreeNode{
-			{Zh: "huawei-acl", En: "huawei-acl", SourceModule: "huawei-acl", RootContainers: []string{"acl"}},
-			{Zh: "huawei-time-range", En: "huawei-time-range", SourceModule: "huawei-time-range", RootContainers: []string{"time-range"}},
+			{Zh: "huawei-acl", En: "huawei-acl", SourceModule: "huawei-acl", RootContainers: []string{"acl"}, Nodes: []LeftTreeModuleNode{
+				{Kind: "container", Name: "acl", Zh: "ACL", En: "ACL"},
+				{Kind: "rpc", Name: "reset-count", Zh: "重置ACL匹配计数", En: "Resetting the ACL Matching Count"},
+				{Kind: "rpc", Name: "reset-count6", Zh: "重置ACL6匹配计数", En: "Resetting the ACL6 Matching Count"},
+			}},
+			{Zh: "huawei-time-range", En: "huawei-time-range", SourceModule: "huawei-time-range", RootContainers: []string{"time-range"}, Nodes: []LeftTreeModuleNode{
+				{Kind: "container", Name: "time-range", Zh: "time-range", En: "time-range"},
+			}},
 		}},
 	}},
 	{Zh: "IP组播", En: "IP Multicast", Children: []LeftTreeNode{
 		{Zh: "IPv4组播路由管理", En: "IPv4 Multicast Route Management", Children: []LeftTreeNode{
-			{Zh: "huawei-l3-multicast", En: "huawei-l3-multicast", SourceModule: "huawei-l3-multicast", RootContainers: []string{"l3-multicast"}},
-			{Zh: "huawei-multicast", En: "huawei-multicast", SourceModule: "huawei-multicast", RootContainers: []string{"multicast"}},
+			{Zh: "huawei-l3-multicast", En: "huawei-l3-multicast", SourceModule: "huawei-l3-multicast", RootContainers: []string{"l3-multicast"}, Nodes: []LeftTreeModuleNode{
+				{Kind: "container", Name: "l3-multicast", Zh: "l3-multicast", En: "l3-multicast"},
+			}},
+			{Zh: "huawei-multicast", En: "huawei-multicast", SourceModule: "huawei-multicast", RootContainers: []string{"multicast"}, Nodes: []LeftTreeModuleNode{
+				{Kind: "container", Name: "multicast", Zh: "multicast", En: "multicast"},
+			}},
 		}},
 		{Zh: "IPv4三层组播Over VXLAN", En: "IPv4 Layer 3 Multicast over VXLAN", Children: []LeftTreeNode{
-			{Zh: "huawei-mvpn", En: "huawei-mvpn", SourceModule: "huawei-mvpn", RootContainers: []string{"mvpn"}},
+			{Zh: "huawei-mvpn", En: "huawei-mvpn", SourceModule: "huawei-mvpn", RootContainers: []string{"mvpn"}, Nodes: []LeftTreeModuleNode{
+				{Kind: "container", Name: "mvpn", Zh: "组播VPN", En: "MVPN"},
+			}},
 		}},
 	}},
 	{Zh: "VPN", En: "VPN", Children: []LeftTreeNode{
 		{Zh: "GRE", En: "GRE", Children: []LeftTreeNode{
-			{Zh: "huawei-gre", En: "huawei-gre", SourceModule: "huawei-gre"},
+			{Zh: "huawei-gre", En: "huawei-gre", SourceModule: "huawei-gre", Nodes: []LeftTreeModuleNode{
+				{Kind: "rpc", Name: "reset-keep-alive", Zh: "清除Keepalive报文计数", En: "Clear Keepalive packet statistics"},
+			}},
 		}},
 		{Zh: "IPv4 L3VPN", En: "IPv4 L3VPN", Children: []LeftTreeNode{
-			{Zh: "huawei-l3vpn", En: "huawei-l3vpn", SourceModule: "huawei-l3vpn", RootContainers: []string{"l3vpn"}},
-			{Zh: "huawei-network-instance", En: "huawei-network-instance", SourceModule: "huawei-network-instance", RootContainers: []string{"network-instance"}},
+			{Zh: "huawei-l3vpn", En: "huawei-l3vpn", SourceModule: "huawei-l3vpn", RootContainers: []string{"l3vpn"}, Nodes: []LeftTreeModuleNode{
+				{Kind: "container", Name: "l3vpn", Zh: "L3VPN", En: "L3VPN"},
+			}},
+			{Zh: "huawei-network-instance", En: "huawei-network-instance", SourceModule: "huawei-network-instance", RootContainers: []string{"network-instance"}, Nodes: []LeftTreeModuleNode{
+				{Kind: "container", Name: "network-instance", Zh: "network-instance", En: "network-instance"},
+			}},
 		}},
 		{Zh: "隧道管理", En: "Tunnel Management", Children: []LeftTreeNode{
-			{Zh: "huawei-tunnel-management", En: "huawei-tunnel-management", SourceModule: "huawei-tunnel-management", RootContainers: []string{"tunnel-management"}},
+			{Zh: "huawei-tunnel-management", En: "huawei-tunnel-management", SourceModule: "huawei-tunnel-management", RootContainers: []string{"tunnel-management"}, Nodes: []LeftTreeModuleNode{
+				{Kind: "container", Name: "tunnel-management", Zh: "tunnel-management", En: "tunnel-management"},
+			}},
 		}},
 		{Zh: "EVPN", En: "EVPN", Children: []LeftTreeNode{
-			{Zh: "huawei-evpn", En: "huawei-evpn", SourceModule: "huawei-evpn", RootContainers: []string{"evpn"}},
+			{Zh: "huawei-evpn", En: "huawei-evpn", SourceModule: "huawei-evpn", RootContainers: []string{"evpn"}, Nodes: []LeftTreeModuleNode{
+				{Kind: "container", Name: "evpn", Zh: "EVPN配置", En: "EVPN"},
+				{Kind: "rpc", Name: "reset-mac-address", Zh: "reset-mac-address", En: "reset-mac-address"},
+				{Kind: "rpc", Name: "reset-mac-duplication", Zh: "reset-mac-duplication", En: "reset-mac-duplication"},
+				{Kind: "rpc", Name: "reset-mac-instance", Zh: "reset-mac-instance", En: "reset-mac-instance"},
+			}},
 		}},
 	}},
 	{Zh: "VXLAN", En: "VXLAN", Children: []LeftTreeNode{
 		{Zh: "VXLAN", En: "VXLAN", Children: []LeftTreeNode{
-			{Zh: "huawei-vxlan-ext", En: "huawei-vxlan-ext", SourceModule: "huawei-vxlan-ext", RootContainers: []string{"vxlan-ext"}},
-			{Zh: "huawei-nvo3", En: "huawei-nvo3", SourceModule: "huawei-nvo3", RootContainers: []string{"nvo3"}},
-			{Zh: "huawei-nvo3-statistics", En: "huawei-nvo3-statistics", SourceModule: "huawei-nvo3-statistics"},
+			{Zh: "huawei-vxlan-ext", En: "huawei-vxlan-ext", SourceModule: "huawei-vxlan-ext", RootContainers: []string{"vxlan-ext"}, Nodes: []LeftTreeModuleNode{
+				{Kind: "container", Name: "vxlan-ext", Zh: "VXLAN扩展功能", En: "VXLAN extension functions"},
+			}},
+			{Zh: "huawei-nvo3", En: "huawei-nvo3", SourceModule: "huawei-nvo3", RootContainers: []string{"nvo3"}, Nodes: []LeftTreeModuleNode{
+				{Kind: "container", Name: "nvo3", Zh: "NVO3管理", En: "NVO3 Mangement"},
+			}},
+			{Zh: "huawei-nvo3-statistics", En: "huawei-nvo3-statistics", SourceModule: "huawei-nvo3-statistics", Nodes: []LeftTreeModuleNode{
+				{Kind: "rpc", Name: "reset-ipv6-vtep-statistics", Zh: "清除IPv6 VXLAN流量统计", En: "Clear IPv6 VXLAN Traffic Statistics"},
+				{Kind: "rpc", Name: "reset-vni-label-statistics", Zh: "清除VNI粒度流量统计", En: "Clear VNI Traffic Statistics"},
+				{Kind: "rpc", Name: "reset-vtep-statistics", Zh: "清除流量统计", En: "Clear Traffic Statistics"},
+			}},
 		}},
 	}},
 	{Zh: "用户接入与认证", En: "User Access and Authentication", Children: []LeftTreeNode{
 		{Zh: "AAA", En: "AAA", Children: []LeftTreeNode{
-			{Zh: "huawei-hwtacacs", En: "huawei-hwtacacs", SourceModule: "huawei-hwtacacs", RootContainers: []string{"hwtacacs"}},
+			{Zh: "huawei-hwtacacs", En: "huawei-hwtacacs", SourceModule: "huawei-hwtacacs", RootContainers: []string{"hwtacacs"}, Nodes: []LeftTreeModuleNode{
+				{Kind: "container", Name: "hwtacacs", Zh: "HWTACACS", En: "HWTACACS"},
+			}},
 		}},
 	}},
 	{Zh: "QOS", En: "QOS", Children: []LeftTreeNode{
 		{Zh: "QOS", En: "QOS", Children: []LeftTreeNode{
-			{Zh: "huawei-qos", En: "huawei-qos", SourceModule: "huawei-qos", RootContainers: []string{"qos"}},
+			{Zh: "huawei-qos", En: "huawei-qos", SourceModule: "huawei-qos", RootContainers: []string{"qos"}, Nodes: []LeftTreeModuleNode{
+				{Kind: "container", Name: "qos", Zh: "QOS", En: "Qos"},
+				{Kind: "rpc", Name: "reset-fabric-queue-multicast-statistics", Zh: "reset-fabric-queue-multicast-statistics", En: "reset-fabric-queue-multicast-statistics"},
+				{Kind: "rpc", Name: "reset-fabric-queue-unicast-statistics", Zh: "reset-fabric-queue-unicast-statistics", En: "reset-fabric-queue-unicast-statistics"},
+				{Kind: "rpc", Name: "reset-global-policy-statistics", Zh: "重置全局策略统计", En: "Reset-global-policy-statistics"},
+				{Kind: "rpc", Name: "reset-interface-buffer-usage-statistics", Zh: "重置接口缓冲区使用情况统计", En: "Reset-interface-buffer-usage-statistics"},
+				{Kind: "rpc", Name: "reset-interface-car-statistics", Zh: "重置CAR接口统计", En: "Reset-interface-car-statistics"},
+				{Kind: "rpc", Name: "reset-interface-default-flow-queue-statistics", Zh: "reset-interface-default-flow-queue-statistics", En: "reset-interface-default-flow-queue-statistics"},
+				{Kind: "rpc", Name: "reset-interface-ecn-statistics", Zh: "重置接口ecn统计信息", En: "Reset-interface-ecn-statistics"},
+				{Kind: "rpc", Name: "reset-interface-hard-pipe-statistics", Zh: "reset-interface-hard-pipe-statistics", En: "reset-interface-hard-pipe-statistics"},
+				{Kind: "rpc", Name: "reset-interface-lv-hard-pipe-statistics", Zh: "reset-interface-lv-hard-pipe-statistics", En: "reset-interface-lv-hard-pipe-statistics"},
+				{Kind: "rpc", Name: "reset-interface-port-queue-statistics", Zh: "reset-interface-port-queue-statistics", En: "reset-interface-port-queue-statistics"},
+				{Kind: "rpc", Name: "reset-interface-profile-statistics", Zh: "reset-interface-profile-statistics", En: "reset-interface-profile-statistics"},
+				{Kind: "rpc", Name: "reset-interface-sub-port-queue-statistics", Zh: "reset-interface-sub-port-queue-statistics", En: "reset-interface-sub-port-queue-statistics"},
+				{Kind: "rpc", Name: "reset-interface-traffic-policy-statistics", Zh: "重置接口流策略统计", En: "Reset-interface-traffic-policy-statistics"},
+				{Kind: "rpc", Name: "reset-interface-user-group-queue-statistics", Zh: "reset-interface-user-group-queue-statistics", En: "reset-interface-user-group-queue-statistics"},
+				{Kind: "rpc", Name: "reset-interface-user-queue-statistics", Zh: "reset-interface-user-queue-statistics", En: "reset-interface-user-queue-statistics"},
+				{Kind: "rpc", Name: "reset-mpls-te-statistics", Zh: "reset-mpls-te-statistics", En: "reset-mpls-te-statistics"},
+				{Kind: "rpc", Name: "reset-queue-statistics", Zh: "重置队列统计", En: "Reset-queue-statistics"},
+				{Kind: "rpc", Name: "reset-slot-port-queue-statistics", Zh: "reset-slot-port-queue-statistics", En: "reset-slot-port-queue-statistics"},
+				{Kind: "rpc", Name: "reset-user-group-queue-statistics", Zh: "reset-user-group-queue-statistics", En: "reset-user-group-queue-statistics"},
+				{Kind: "rpc", Name: "reset-user-informations", Zh: "reset-user-informations", En: "reset-user-informations"},
+				{Kind: "rpc", Name: "reset-vlan-traffic-policy-statistics", Zh: "复位VLAN流策略统计", En: "Reset-vlan-traffic-policy-statistics"},
+				{Kind: "rpc", Name: "reset-vpn-traffic-policy-statistics", Zh: "复位VPN流策略统计", En: "Reset-vpn-traffic-policy-statistics"},
+			}},
 		}},
 	}},
 }

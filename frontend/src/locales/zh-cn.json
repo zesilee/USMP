@@ -219,6 +219,7 @@
     "ownedTooltip": "由业务配置管理：{intents}（意图收敛会覆盖手工修改）",
     "schemaLoading": "模块 schema 加载中…",
     "schemaLoadFailed": "schema 加载失败",
+    "rpcNotFound": "该模块下不存在运维操作 {rpc}",
     "advancedSearch": "高级搜索",
     "selectPlaceholder": "选择{label}",
     "inputPlaceholder": "输入{label}",

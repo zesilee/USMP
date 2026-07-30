@@ -11,7 +11,7 @@ metadata:
 1. **构建期提取** `backend/tools/rpcgen`（`make gen-rpc`）：goyang 从 YANG 提取 rpc → `internal/yangschema/rpc.gen.go`（149 rpc/17 模块）。ygot 运行期 schema **不含 rpc**，故必须构建期提取。**键=根容器名**（同 schema module key，如 ifm）；另出 `ModuleRPCNamespace`（运行期 schema 也不含 per-module namespace，rpc payload 需要）。
 2. **列 rpc** `/yang/schema/:module` 响应加 `rpcs`（RPCSchema：name/label/highRisk/input）；input 复用 FieldDef；leafref→Type=string+LeafRef 携目标。FieldDef 加了 `leafRef` 字段。
 3. **执行通道** `client.ExecuteRPC(namespace,rpc,inputs)`（DP-10）：scrapligo `Driver.RPC` 发 `<rpc>`、解析 reply。`POST /rpc/:ip/:module/:rpc`（RPC-03）：API 层校验 mandatory（有 schema），模拟网元不校验（无 schema、只记录+可注入错误 via scenario.ErrorOnRPC）。
-4. **前端** `RpcExecuteTab.vue`：`deriveRpcTabs` 把 rpc 派生成 kind='rpc' 的 Tab 与容器平级（name 加 `__rpc__` 前缀防撞）；FieldRenderer 渲 input；ElMessageBox 二次确认。
+4. **前端** `RpcExecuteTab.vue`：FieldRenderer 渲 input；ElMessageBox 二次确认。**2026-07-30 起 rpc 入口已从控制台 Tab 栏迁到左树**（[[left-tree-module-expansion]]）：`deriveRpcTabs` 仍在（rpc 直达页 `/module/:m/rpc/:name` 复用其派生），但不再合入 tabs 栏。
 
 **三条必须记住的设计**：
 - **ExecuteRPC 不自愈重试**（区别于幂等 Get）：rpc 有副作用，传输中断后重发会重复执行（重启两遍），失败即上抛。

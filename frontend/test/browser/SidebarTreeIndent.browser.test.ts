@@ -22,7 +22,14 @@ const LEFT_TREE = [
       {
         zh: '接口基础', en: 'Interface Base',
         children: [
-          { zh: 'huawei-ifm', en: 'huawei-ifm', sourceModule: 'huawei-ifm', module: 'ifm', available: true },
+          {
+            zh: 'huawei-ifm', en: 'huawei-ifm', sourceModule: 'huawei-ifm', module: 'ifm', available: true,
+            // 模块级子节点（LT-02）：container 与 rpc 平级平铺，树加深到第 5 层。
+            children: [
+              { zh: '通用接口', en: 'Common Interface', kind: 'container', name: 'ifm' },
+              { zh: '重启接口', en: 'Restart interface', kind: 'rpc', name: 'restart-if', highRisk: true },
+            ],
+          },
         ],
       },
     ],
@@ -46,6 +53,7 @@ describe('Sidebar 左树层级缩进（F3 真浏览器）', () => {
       routes: [
         { path: '/', component: { template: '<div />' } },
         { path: '/module/:name', component: { template: '<div />' } },
+        { path: '/module/:name/rpc/:rpcName', component: { template: '<div />' } },
       ],
     })
     const wrapper = mount(Sidebar, {
@@ -68,24 +76,38 @@ describe('Sidebar 左树层级缩进（F3 真浏览器）', () => {
     titleOf('接口管理').click()
     await vi.waitFor(() => expect(titleOf('接口基础').offsetParent).not.toBeNull())
     titleOf('接口基础').click()
+    // 模块叶现在是可展开分组（LT-03）：继续展开到模块级 container/rpc 子节点。
+    await vi.waitFor(() => expect(titleOf('huawei-ifm').offsetParent).not.toBeNull())
+    titleOf('huawei-ifm').click()
 
-    const leaf = await vi.waitFor(() => {
-      const el = Array.from(document.querySelectorAll('.el-menu-item'))
-        .find((i) => i.textContent?.trim() === 'huawei-ifm') as HTMLElement
+    const nodeItem = (text: string) =>
+      Array.from(document.querySelectorAll('.el-menu-item'))
+        .find((i) => i.textContent?.trim().startsWith(text)) as HTMLElement
+    const containerNode = await vi.waitFor(() => {
+      const el = nodeItem('通用接口')
       expect(el).toBeTruthy()
       expect(el.offsetParent).not.toBeNull()
       return el
     })
+    const rpcNode = nodeItem('重启接口')
+    expect(rpcNode).toBeTruthy()
 
     const pRoot = padLeft(titleOf('原生配置'))
     const pCat = padLeft(titleOf('接口管理'))
     const pSub = padLeft(titleOf('接口基础'))
-    const pLeaf = padLeft(leaf)
+    const pLeaf = padLeft(titleOf('huawei-ifm'))
+    const pNode = padLeft(containerNode)
+    const pRpc = padLeft(rpcNode)
 
     // 单调递增：每级都比上一级深（错位 bug 的形态是 pLeaf < pSub）
     expect(pCat, `分类(${pCat}) 应深于根组(${pRoot})`).toBeGreaterThan(pRoot)
     expect(pSub, `子分类(${pSub}) 应深于分类(${pCat})`).toBeGreaterThan(pCat)
     expect(pLeaf, `huawei-xx 叶子(${pLeaf}) 应深于子分类(${pSub})——错位回归点`).toBeGreaterThan(pSub)
+    expect(pNode, `container 节点(${pNode}) 应深于模块叶(${pLeaf})`).toBeGreaterThan(pLeaf)
+    // container 与 rpc 平级：同深度。
+    expect(pRpc, `rpc 节点(${pRpc}) 应与 container 同深`).toBe(pNode)
+    // 高危 rpc 警示图标为真实图标节点（R12）。
+    expect(rpcNode.querySelector('.rpc-high-risk')).toBeTruthy()
 
     wrapper.unmount()
   })

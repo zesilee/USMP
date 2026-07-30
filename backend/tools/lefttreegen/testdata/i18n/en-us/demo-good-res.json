@@ -1,0 +1,4 @@
+{
+  "/demo-good:goodroot": { "name": "Good Root" },
+  "/demo-good:do-thing": { "name": "Do Thing" }
+}

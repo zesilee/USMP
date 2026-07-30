@@ -1072,8 +1072,16 @@ export interface components {
             available?: boolean;
             children?: components["schemas"]["api.LeftTreeNodeDTO"][];
             en?: string;
+            highRisk?: boolean;
+            /**
+             * @description Kind/Name/HighRisk 仅模块级子节点携带（LT-02 children）：kind=container 路由
+             *     /module/<name>，kind=rpc 路由 /module/<父叶module>/rpc/<name>；highRisk 仅
+             *     高危 rpc 为 true 时出现。分组与模块叶自身省略（契约向后兼容）。
+             */
+            kind?: string;
             /** @description Module 是首个已加载根容器名（前端路由 /module/<module>）；不可用叶省略。 */
             module?: string;
+            name?: string;
             /** @description SourceModule 是叶子的 SND 源模块名（如 huawei-vlan）；分组为空。 */
             sourceModule?: string;
             /** @description Supported 标记该设备 hello 能力是否覆盖此模块；仅 ?device= 且协商可得时携带。 */

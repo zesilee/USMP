@@ -218,6 +218,7 @@
     "ownedBadge": "Managed by business config ({n})",
     "ownedTooltip": "Managed by business config: {intents} (intent reconciliation overrides manual changes)",
     "schemaLoading": "Loading module schema…",
+    "rpcNotFound": "RPC {rpc} does not exist in this module",
     "schemaLoadFailed": "Failed to load schema",
     "advancedSearch": "Advanced Search",
     "selectPlaceholder": "Select {label}",
