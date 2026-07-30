@@ -351,7 +351,16 @@ func (c *NETCONFClient) Subscribe(ctx context.Context, path string, handler func
 	return fmt.Errorf("subscription not implemented for NETCONF")
 }
 
-// Close implements Client interface
+// closeTimeout bounds the graceful <close-session> teardown. scrapligo v1.4.0
+// 在半死连接（read loop 已退）上 Close 会永久阻塞于无缓冲 done 发送——健康
+// 连接的优雅关闭远快于此界，超时即判定连接已死。
+const closeTimeout = 5 * time.Second
+
+// Close implements Client interface.
+// 有界关闭：优雅路径走 driver.Close()（发 <close-session>），超时/内部 panic
+// 则退化为直接关传输层释放 fd（markDisconnected 同款兜底）。半死连接上泄漏
+// 一个阻塞在 scrapligo done 发送上的 goroutine，量级与异常关闭次数同阶，
+// 换取调用链永不挂死（R08；此前 CI 曾在 cleanup→Close 上卡满包超时）。
 func (c *NETCONFClient) Close() error {
 	c.mu.Lock()
 	defer c.mu.Unlock()
@@ -359,11 +368,25 @@ func (c *NETCONFClient) Close() error {
 	if !c.connected || c.driver == nil {
 		return nil
 	}
-
-	err := c.driver.Close()
+	driver := c.driver
 	c.connected = false
 	c.driver = nil
-	return err
+
+	done := make(chan error, 1)
+	go func() {
+		defer func() { _ = recover() }() // 第三方 double-close panic 不许崩进程（R09）
+		done <- driver.Close()
+	}()
+	select {
+	case err := <-done:
+		return err
+	case <-time.After(closeTimeout):
+		go func() {
+			defer func() { _ = recover() }()
+			_ = driver.Channel.Close()
+		}()
+		return fmt.Errorf("netconf close timed out after %s (connection presumed dead, transport force-closed)", closeTimeout)
+	}
 }
 
 // IsConnected implements Client interface
