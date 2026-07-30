@@ -576,5 +576,75 @@
         }
       ]
     }
+  ],
+  "rpcs": [
+    {
+      "name": "reset-ipv4-route-statistics",
+      "label": "reset-ipv4-route-statistics",
+      "input": [
+        {
+          "path": "protocol-type",
+          "type": "enum",
+          "label": "protocol-type"
+        },
+        {
+          "path": "topology-name",
+          "type": "string",
+          "label": "topology-name",
+          "leafRef": "/ni:network-instance/ni:instances/ni:instance/l3vpn:afs/l3vpn:af/rt:routing/rt:routing-manage/rt:topologys/rt:topology/rt:name"
+        },
+        {
+          "path": "vrf-name",
+          "type": "string",
+          "label": "vrf-name",
+          "leafRef": "/ni:network-instance/ni:instances/ni:instance/ni:name"
+        }
+      ]
+    },
+    {
+      "name": "reset-ipv6-route-statistics",
+      "label": "reset-ipv6-route-statistics",
+      "input": [
+        {
+          "path": "protocol-type",
+          "type": "enum",
+          "label": "protocol-type"
+        },
+        {
+          "path": "topology-name",
+          "type": "string",
+          "label": "topology-name",
+          "leafRef": "/ni:network-instance/ni:instances/ni:instance/l3vpn:afs/l3vpn:af/rt:routing/rt:routing-manage/rt:topologys/rt:topology/rt:name"
+        },
+        {
+          "path": "vrf-name",
+          "type": "string",
+          "label": "vrf-name",
+          "leafRef": "/ni:network-instance/ni:instances/ni:instance/ni:name"
+        }
+      ]
+    },
+    {
+      "name": "reset-vpnv4-statistics",
+      "label": "reset-vpnv4-statistics",
+      "input": [
+        {
+          "path": "protocol-type",
+          "type": "enum",
+          "label": "protocol-type"
+        }
+      ]
+    },
+    {
+      "name": "reset-vpnv6-statistics",
+      "label": "reset-vpnv6-statistics",
+      "input": [
+        {
+          "path": "protocol-type",
+          "type": "enum",
+          "label": "protocol-type"
+        }
+      ]
+    }
   ]
 }
