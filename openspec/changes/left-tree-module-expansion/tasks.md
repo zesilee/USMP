@@ -35,5 +35,5 @@
 ## 6. E2E 与收尾
 
 - [x] 6.1 staging-smoke（F4）：rpc 入口断言从 Tab 栏迁移到左树（展开模块叶→点 rpc 节点→执行面板可见）；顺带确认 #233 的 teleport 污染断言随 rpc 退出常驻渲染而消解
-- [ ] 6.2 `make e2e-local` 全绿；前后端全量测试 + `-race`；覆盖率不低于棘轮基线（T08，补测后上调）
-- [ ] 6.3 code review（go-code-review-check）+ What/Why/How 分组提交 + 记忆更新（单独 docs commit，MEM04）
+- [x] 6.2 `make e2e-local` 全绿；前后端全量测试 + `-race`；覆盖率不低于棘轮基线（T08，补测后上调）
+- [x] 6.3 code review（go-code-review-check）+ What/Why/How 分组提交 + 记忆更新（单独 docs commit，MEM04）
