@@ -17,7 +17,14 @@ const sampleTree = [
         zh: 'VLAN',
         en: 'VLAN',
         children: [
-          { zh: 'huawei-vlan', en: 'huawei-vlan', sourceModule: 'huawei-vlan', available: true, module: 'vlan' },
+          {
+            zh: 'huawei-vlan', en: 'huawei-vlan', sourceModule: 'huawei-vlan', available: true, module: 'vlan',
+            // LT-02 模块级子节点：container/rpc 平级（kind/name/highRisk 原样入 store）。
+            children: [
+              { zh: 'VLAN配置', en: 'VLAN Config', kind: 'container', name: 'vlan' },
+              { zh: '重启VLAN', en: 'Restart VLAN', kind: 'rpc', name: 'restart-vlan', highRisk: true },
+            ],
+          },
         ],
       },
     ],
@@ -42,6 +49,12 @@ describe('menu store · loadLeftTree（LT-03）', () => {
     expect(store.leftTree).toHaveLength(2)
     expect(store.leftTree[0].zh).toBe('以太网交换')
     expect(store.leftTree[0].children![0].children![0].module).toBe('vlan')
+    // LT-02 children：kind/name/highRisk 原样透传（类型收编进 LeftTreeNode）。
+    const moduleChildren = store.leftTree[0].children![0].children![0].children!
+    expect(moduleChildren[0].kind).toBe('container')
+    expect(moduleChildren[0].name).toBe('vlan')
+    expect(moduleChildren[1].kind).toBe('rpc')
+    expect(moduleChildren[1].highRisk).toBe(true)
     expect(store.leftTreeLoaded).toBe(true)
   })
 

@@ -34,12 +34,28 @@
       data-test="select-device-empty"
       :description="t('console.selectDeviceFirst')"
     />
+    <!-- rpc 直达模式（FE-19）：左树 rpc 节点入口，仅渲染该 rpc 执行面板；
+         未知 rpcName 明确报错不崩（R08）。 -->
+    <template v-else-if="rpcMode">
+      <div v-if="activeRpcTab" class="console-tabs">
+        <RpcExecuteTab :tab="activeRpcTab" :module="rootName" :device="store.selectedDeviceIp" />
+      </div>
+      <el-alert
+        v-else-if="schemaLoaded"
+        data-test="rpc-not-found"
+        :title="t('console.rpcNotFound', { rpc: rpcName })"
+        type="error"
+        :closable="false"
+        show-icon
+      />
+      <el-empty v-else :description="t('console.schemaLoading')" />
+    </template>
     <!-- 一级 Tab：模块根顶层子节点派生（list→列表页、group/choice→表单页，FE-10）。
-         Tab 组件常驻（不销毁），切换保留各 Tab 表单/搜索状态。 -->
+         rpc 不再进 Tab 栏（FE-19 导航落点=左树）。Tab 组件常驻（不销毁），切换
+         保留各 Tab 表单/搜索状态。 -->
     <el-tabs v-else-if="tabs.length" v-model="activeTab" class="console-tabs">
       <el-tab-pane v-for="tab in tabs" :key="tab.name" :label="tab.label" :name="tab.name">
         <ModuleListTab v-if="tab.kind === 'list'" :tab="tab" :root-name="rootName" :device="store.selectedDeviceIp" />
-        <RpcExecuteTab v-else-if="tab.kind === 'rpc'" :tab="tab" :module="rootName" :device="store.selectedDeviceIp" />
         <ModuleFormTab v-else :tab="tab" :root-name="rootName" :device="store.selectedDeviceIp" />
       </el-tab-pane>
     </el-tabs>
@@ -69,6 +85,9 @@ const { t } = useI18n()
 const store = useDeviceStore()
 
 const moduleName = computed(() => String(route.params.module || ''))
+// rpc 直达模式（FE-19）：/module/:module/rpc/:rpcName，仅渲染该 rpc 执行面板。
+const rpcName = computed(() => String(route.params.rpcName || ''))
+const rpcMode = computed(() => !!rpcName.value)
 // 入页优先级 query > store：深链/「查看配置」显式指定则覆盖全局上下文，
 // 无 query 时沿用既有选中（跨模块保持）。用 watch 而非仅 setup 一次性执行：
 // 组件在 /module/:module 间复用，前进/后退到携带 ?device= 的历史条目也须生效。
@@ -107,13 +126,20 @@ async function loadOwnership() {
   }
 }
 
-// 配置容器 Tab + rpc Tab 平级合并（FE-19）：rpc 排在容器之后、同一 Tab 栏。
-const tabs = computed<ConsoleTab[]>(() => [
-  ...deriveTabs(schemaFields.value),
-  ...deriveRpcTabs(rpcs.value),
-])
+// 配置容器 Tab（FE-10）；rpc 不再进 Tab 栏（FE-19：导航落点迁移到左树）。
+const tabs = computed<ConsoleTab[]>(() => deriveTabs(schemaFields.value))
+// rpc 直达面板：按路由 rpcName 从派生 rpc Tab 中取（label/input 已本地化，UI-03）。
+const activeRpcTab = computed<ConsoleTab | undefined>(() =>
+  deriveRpcTabs(rpcs.value).find((t) => t.rpc?.name === rpcName.value),
+)
+// schema 是否已就位（rpc 模式区分「加载中」与「rpc 名不存在」，R08 明确报错）。
+const schemaLoaded = computed(() => !!rootName.value)
 const activeTab = ref('')
-const activeTabLabel = computed(() => tabs.value.find((t) => t.name === activeTab.value)?.label || '')
+const activeTabLabel = computed(() =>
+  rpcMode.value
+    ? activeRpcTab.value?.label || ''
+    : tabs.value.find((t) => t.name === activeTab.value)?.label || '',
+)
 
 // 原始 schema（YANG 节点名标签）；展示层按语言经 res 查表重标（UI-03）。
 let rawFields: any[] = []

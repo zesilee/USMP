@@ -24,6 +24,12 @@ const routes = [
     name: 'module-console',
     component: () => import('../views/ModuleConsolePage.vue')
   },
+  {
+    // rpc 直达（FE-19）：左树 rpc 节点入口，仅渲染该 rpc 执行面板。
+    path: '/module/:module/rpc/:rpcName',
+    name: 'module-rpc',
+    component: () => import('../views/ModuleConsolePage.vue')
+  },
   // 旧配置页路由迁移到通用模块控制台（FE-13）：保留书签可达（DeviceConfigPage 已物理删除）。
   {
     path: '/config/interface',

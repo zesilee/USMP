@@ -100,27 +100,33 @@ test.describe('部署冒烟 - 前端 SPA', () => {
     await expect(page.getByText('mtu', { exact: false }).first()).toBeVisible({ timeout: 15000 })
   })
 
-  // rpc 与容器 Tab 平级呈现 + 执行面板动态渲染（FE-19）：huawei-ifm 的 rpc
-  // （reset-if-counters-by-name 等）作为 Tab 出现，点开渲染出输入与执行按钮。
-  // 标签经 snd res 本地化（UI-03 rpc 扩展）：Tab 显示中文「按接口名清除统计」，
-  // 而 Tab 内部 name（pane id）仍用原始 rpc 名（本地化只改 label 不改 name）。
-  test('接口控制台出现 rpc Tab，执行面板渲染输入与执行按钮', async ({ page }) => {
+  // rpc 入口收敛到左树（FE-19/LT-03）：模块叶展开出 container 与 rpc 平级节点，
+  // 点 rpc 节点直达执行页（/module/ifm/rpc/<name>），控制台 Tab 栏不再有 rpc Tab。
+  // 标签经烘焙双语（LT-01）：树节点显示中文「按接口名清除统计」。
+  test('左树展开模块叶出 rpc 节点，直达执行页渲染输入与执行按钮', async ({ page }) => {
     await page.goto('/module/ifm', { waitUntil: 'networkidle' })
     await pickDevice(page)
 
-    // rpc 作为一级 Tab 与容器平级，标签本地化为中文（非原始 reset-if-counters-by-name）。
-    const rpcTab = page.getByRole('tab', { name: '按接口名清除统计', exact: true })
-    await expect(rpcTab).toBeVisible({ timeout: 15000 })
-    await rpcTab.click()
+    // Tab 栏无 rpc Tab（导航落点已迁移到左树）。
+    await expect(page.getByRole('tab', { name: '接口列表', exact: true })).toBeVisible({ timeout: 15000 })
+    await expect(page.getByRole('tab', { name: '按接口名清除统计', exact: true })).toHaveCount(0)
 
-    // 执行面板：input + 执行按钮渲染（schema 驱动）。el-tabs 常驻全部面板，故按
-    // pane id（原始 rpc name，未本地化）精确定位（避免 10 个 rpc 面板撞选择器）。
-    const pane = page.locator('#pane-__rpc__reset-if-counters-by-name')
-    await expect(pane.locator('[data-test="rpc-execute"]')).toBeVisible({ timeout: 15000 })
-    // schema 驱动的 input 表单项渲染（label 亦本地化，此处只验结构存在）。
-    await expect(pane.locator('.rpc-form .el-form-item').first()).toBeVisible()
+    // 左树：接口管理 → 接口基础 → huawei-ifm（可展开叶）→ rpc 节点。
+    await page.locator('[data-test="lefttree-group-接口管理"] .el-sub-menu__title').first().click()
+    await page.locator('[data-test="lefttree-group-接口基础"] .el-sub-menu__title').first().click()
+    await page.locator('[data-test="lefttree-leaf-huawei-ifm"] .el-sub-menu__title').first().click()
+    // container 节点（通用接口）与 rpc 节点平级可见。
+    await expect(page.locator('[data-test="lefttree-node-ifm"]')).toBeVisible({ timeout: 15000 })
+    const rpcNode = page.locator('[data-test="lefttree-rpc-ifm-reset-if-counters-by-name"]')
+    await expect(rpcNode).toContainText('按接口名清除统计')
+    await rpcNode.click()
+    await expect(page).toHaveURL(/module\/ifm\/rpc\/reset-if-counters-by-name/)
+
+    // 执行页：仅该 rpc 面板（无 Tab 栏），input + 执行按钮渲染（schema 驱动）。
+    await expect(page.locator('[data-test="rpc-execute"]')).toBeVisible({ timeout: 15000 })
+    await expect(page.locator('.rpc-form .el-form-item').first()).toBeVisible()
     // 缺 mandatory input → 执行按钮禁用（§9 校验拦截）。
-    await expect(pane.locator('[data-test="rpc-execute"]')).toBeDisabled()
+    await expect(page.locator('[data-test="rpc-execute"]')).toBeDisabled()
   })
 
   // 种子数据（模拟网元 DemoSeedConfig）：5 条接口回读进表格，sub 行显示 parent-name。
@@ -204,10 +210,11 @@ test.describe('部署冒烟 - 前端 SPA', () => {
     await pickDevice(page)
     await expect(page.getByRole('tab', { name: 'VLAN列表', exact: true })).toBeVisible({ timeout: 15000 })
 
-    // 侧栏 SND 左树（LT-03）内点 ifm 叶 —— 需展开 接口管理→接口基础 分组。
+    // 侧栏 SND 左树（LT-03）：展开 接口管理→接口基础→huawei-ifm 叶，点 container 节点。
     await page.locator('[data-test="lefttree-group-接口管理"] .el-sub-menu__title').first().click()
     await page.locator('[data-test="lefttree-group-接口基础"] .el-sub-menu__title').first().click()
-    await page.locator('[data-test="lefttree-leaf-huawei-ifm"]').click()
+    await page.locator('[data-test="lefttree-leaf-huawei-ifm"] .el-sub-menu__title').first().click()
+    await page.locator('[data-test="lefttree-node-ifm"]').click()
     await expect(page).toHaveURL(/module\/ifm/)
 
     // 设备上下文跨模块保持：无需重新选设备
@@ -232,8 +239,10 @@ test.describe('部署冒烟 - 前端 SPA', () => {
     const leaves: any[] = []
     const walk = (nodes: any[]) => {
       for (const n of nodes || []) {
-        if (n.children?.length) walk(n.children)
-        else leaves.push(n)
+        // 模块叶现在也带 children（LT-02 模块级 container/rpc 子节点），
+        // 叶判定以 sourceModule 为准。
+        if (n.sourceModule) leaves.push(n)
+        else walk(n.children || [])
       }
     }
     walk(body.data)
@@ -269,7 +278,8 @@ test.describe('部署冒烟 - 前端 SPA', () => {
     // 左树切到 VLAN 模块：设备上下文沿用，Tab 直接渲染（未选设备时只会显示引导空态）
     await page.locator('[data-test="lefttree-group-以太网交换"] .el-sub-menu__title').first().click()
     await page.locator('[data-test="lefttree-group-VLAN"] .el-sub-menu__title').first().click()
-    await page.locator('[data-test="lefttree-leaf-huawei-vlan"]').click()
+    await page.locator('[data-test="lefttree-leaf-huawei-vlan"] .el-sub-menu__title').first().click()
+    await page.locator('[data-test="lefttree-node-vlan"]').click()
     await expect(page).toHaveURL(/module\/vlan/)
     await expect(page.getByRole('tab', { name: 'VLAN列表', exact: true })).toBeVisible({ timeout: 15000 })
     await expect(page.locator('[data-test="select-device-empty"]')).toHaveCount(0)
@@ -322,11 +332,12 @@ test.describe('部署冒烟 - 业务网络配置', () => {
     await page.goto('/business/business-vlan-service', { waitUntil: 'networkidle' })
     await expect(page.locator('[data-test="business-table"], [data-test="business-unavailable"]').first()).toBeVisible({ timeout: 15000 })
 
-    // 原生配置子菜单在业务路由下默认折叠，逐层展开 SND 左树再点叶（LT-03）。
+    // 原生配置子菜单在业务路由下默认折叠，逐层展开 SND 左树再点 container 节点（LT-03）。
     await page.locator('.el-sub-menu', { hasText: '原生配置' }).locator('.el-sub-menu__title').first().click()
     await page.locator('[data-test="lefttree-group-以太网交换"] .el-sub-menu__title').first().click()
     await page.locator('[data-test="lefttree-group-VLAN"] .el-sub-menu__title').first().click()
-    await page.locator('[data-test="lefttree-leaf-huawei-vlan"]').click()
+    await page.locator('[data-test="lefttree-leaf-huawei-vlan"] .el-sub-menu__title').first().click()
+    await page.locator('[data-test="lefttree-node-vlan"]').click()
     await expect(page).toHaveURL(/module\/vlan/)
     // 全局设备上下文（FE-10）：业务侧进入无设备选中，先选设备再断言 Tab
     await pickDevice(page)

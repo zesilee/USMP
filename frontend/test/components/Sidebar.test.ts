@@ -21,6 +21,7 @@ function mockLeftTree(data: any[] | Error) {
 }
 
 vi.mock('@element-plus/icons-vue', () => ({
+  WarningFilled: { template: '<span />' },
   DataLine: { template: '<span />' },
   Monitor: { template: '<span />' },
   Connection: { template: '<span />' },
@@ -136,6 +137,7 @@ describe('Sidebar · SND 左树（LT-03）', () => {
     routes: [
       { path: '/', name: 'dashboard', component: {} },
       { path: '/module/:module', name: 'module-console', component: {} },
+      { path: '/module/:module/rpc/:rpcName', name: 'module-rpc', component: {} },
     ],
   })
 
@@ -144,7 +146,11 @@ describe('Sidebar · SND 左树（LT-03）', () => {
       zh: '以太网交换', en: 'Ethernet Switching',
       children: [
         { zh: 'VLAN', en: 'VLAN', children: [
-          { zh: 'huawei-vlan', en: 'huawei-vlan', sourceModule: 'huawei-vlan', available: true, module: 'vlan' },
+          { zh: 'huawei-vlan', en: 'huawei-vlan', sourceModule: 'huawei-vlan', available: true, module: 'vlan', children: [
+            { zh: 'VLAN配置', en: 'VLAN Config', kind: 'container', name: 'vlan' },
+            { zh: '清除VLAN统计', en: 'Clear VLAN Statistics', kind: 'rpc', name: 'reset-vlan-statistics' },
+            { zh: '重启VLAN', en: 'Restart VLAN', kind: 'rpc', name: 'restart-vlan', highRisk: true },
+          ]},
         ]},
       ],
     },
@@ -159,17 +165,56 @@ describe('Sidebar · SND 左树（LT-03）', () => {
     vi.restoreAllMocks()
   })
 
-  it('左树加载成功：渲染分组与叶子，已接入叶路由 /module/<root>', async () => {
+  it('左树加载成功：模块叶展开为分组，container 子节点路由 /module/<root>', async () => {
     mockLeftTree(sampleTree)
     mockYangModules([])
     const wrapper = mount(Sidebar, { global: { plugins: [router, ElementPlus] } })
     await new Promise((r) => setTimeout(r))
     expect(wrapper.find('[data-test="lefttree-group-以太网交换"]').exists()).toBe(true)
+    // 带 children 的模块叶变可展开分组（锚点保留在标题上）。
     const vlanLeaf = wrapper.find('[data-test="lefttree-leaf-huawei-vlan"]')
     expect(vlanLeaf.exists()).toBe(true)
-    await vlanLeaf.trigger('click')
+    // container 子节点：本地化标签 + 路由控制台。
+    const containerNode = wrapper.find('[data-test="lefttree-node-vlan"]')
+    expect(containerNode.exists()).toBe(true)
+    expect(containerNode.text()).toContain('VLAN配置')
+    await containerNode.trigger('click')
     await new Promise((r) => setTimeout(r))
     expect(router.currentRoute.value.path).toBe('/module/vlan')
+  })
+
+  it('rpc 子节点与 container 平级：路由 /module/<root>/rpc/<name>，高危带警示标识', async () => {
+    mockLeftTree(sampleTree)
+    mockYangModules([])
+    const wrapper = mount(Sidebar, { global: { plugins: [router, ElementPlus] } })
+    await new Promise((r) => setTimeout(r))
+    const rpcNode = wrapper.find('[data-test="lefttree-rpc-vlan-reset-vlan-statistics"]')
+    expect(rpcNode.exists()).toBe(true)
+    expect(rpcNode.text()).toContain('清除VLAN统计')
+    // 温和 rpc 无警示标识；高危 rpc 有（R12：图标而非 emoji）。
+    expect(rpcNode.find('.rpc-high-risk').exists()).toBe(false)
+    const riskNode = wrapper.find('[data-test="lefttree-rpc-vlan-restart-vlan"]')
+    expect(riskNode.exists()).toBe(true)
+    expect(riskNode.find('.rpc-high-risk').exists()).toBe(true)
+    await rpcNode.trigger('click')
+    await new Promise((r) => setTimeout(r))
+    expect(router.currentRoute.value.path).toBe('/module/vlan/rpc/reset-vlan-statistics')
+  })
+
+  it('无 children 的可用叶保持直达菜单项（向后兼容）', async () => {
+    mockLeftTree([
+      { zh: '组', en: 'G', children: [
+        { zh: 'huawei-ifm', en: 'huawei-ifm', sourceModule: 'huawei-ifm', available: true, module: 'ifm' },
+      ]},
+    ])
+    mockYangModules([])
+    const wrapper = mount(Sidebar, { global: { plugins: [router, ElementPlus] } })
+    await new Promise((r) => setTimeout(r))
+    const leaf = wrapper.find('[data-test="lefttree-leaf-huawei-ifm"]')
+    expect(leaf.exists()).toBe(true)
+    await leaf.trigger('click')
+    await new Promise((r) => setTimeout(r))
+    expect(router.currentRoute.value.path).toBe('/module/ifm')
   })
 
   it('未接入叶：禁用态 + 「未接入」占位（全树+占位拍板）', async () => {
