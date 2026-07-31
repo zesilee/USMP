@@ -68,6 +68,11 @@
 - **WHEN** 业务意图（BIO-03）经既有 2PC 下发
 - **THEN** 行为 SHALL 与本变更前一致（Fragment 扩展对既有调用方零影响）
 
+#### Scenario: 归属硬锁一致生效（BR-11 口径）
+
+- **WHEN** 变更集含被业务意图认领路径的条目且未携带 `force=true`
+- **THEN** SHALL 返回 409 与认领意图清单、SHALL NOT 向设备下发任何条目；携带 `force=true` SHALL 放行并在审计中留痕
+
 ### Requirement: CS-05 叶级删除编码
 
 XML 编码通道 SHALL 支持叶级删除：给定 list 条目定位（主键叶）与待删除叶集合，SHALL 生成「条目定位键 + 目标叶携 `nc:operation="delete"`」的 edit-config 片段，用于字段级清除的提交与预览；编码 SHALL 幂等（同输入同输出）。
