@@ -28,10 +28,11 @@ const richTab = {
 }
 
 let mounted: VueWrapper[] = []
+let pinia: ReturnType<typeof createPinia>
 function mountTab() {
   const w = mount(ModuleListTab, {
     props: { tab: richTab, rootName: 'ifm', device: '10.0.0.1' },
-    global: { plugins: [createPinia(), ElementPlus] },
+    global: { plugins: [pinia, ElementPlus] },
     attachTo: document.body,
   })
   mounted.push(w)
@@ -45,7 +46,8 @@ afterEach(() => {
 })
 
 beforeEach(() => {
-  setActivePinia(createPinia())
+  pinia = createPinia()
+  setActivePinia(pinia)
   vi.resetAllMocks()
   vi.mocked(getConfig).mockResolvedValue({ data: { data: { data: { interface: seedRows } } } } as any)
   vi.mocked(setConfig).mockResolvedValue({ data: { data: { reconciliation: { triggered: true } } } } as any)
@@ -138,5 +140,40 @@ describe('ModuleListTab（真浏览器）· master-detail 与弹层（FE-11/FE-2
     await vi.waitFor(() => {
       expect(headerTexts()).not.toContain('description')
     }, { timeout: 3000 })
+  })
+})
+
+describe('ModuleListTab（真浏览器）· 批量删除菜单与标记视图（FE-11 二期）', () => {
+  it('勾选两行 → 更多▾（teleport 菜单）→ 批量删除确认 → 待删除标记×2 + 取消删除还原', async () => {
+    const { useChangesetStore } = await import('../../src/stores/changeset')
+    const { ElMessageBox } = await import('element-plus')
+    const w = mountTab()
+    await new Promise((r) => setTimeout(r, 50))
+
+    // 真实 checkbox 勾选前两行
+    const boxes = document.body.querySelectorAll('.el-table__body .el-checkbox__original')
+    ;(boxes[0] as HTMLElement).click()
+    ;(boxes[1] as HTMLElement).click()
+    await w.vm.$nextTick()
+
+    const confirmSpy = vi.spyOn(ElMessageBox, 'confirm').mockResolvedValue('confirm' as any)
+    // 打开 teleport 下拉并点批量删除
+    await w.find('[data-test="batch-more"]').trigger('click')
+    await new Promise((r) => setTimeout(r, 100))
+    const item = document.body.querySelector('[data-test="batch-delete"]') as HTMLElement
+    expect(item).toBeTruthy()
+    item.click()
+    await new Promise((r) => setTimeout(r, 50))
+
+    const cs = useChangesetStore()
+    expect(cs.countFor('10.0.0.1')).toBe(2)
+    expect(document.body.querySelectorAll('[data-test="mark-delete"]').length).toBe(2)
+    expect(document.body.querySelectorAll('[data-test="undelete-btn"]').length).toBe(2)
+
+    // 取消删除一条 → 标记还原
+    ;(document.body.querySelector('[data-test="undelete-btn"]') as HTMLElement).click()
+    await new Promise((r) => setTimeout(r, 50))
+    expect(cs.countFor('10.0.0.1')).toBe(1)
+    confirmSpy.mockRestore()
   })
 })

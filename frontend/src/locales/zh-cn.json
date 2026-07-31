@@ -270,7 +270,8 @@
       "headPre": "下发预览 · ",
       "headPost": " 项改动",
       "tagNew": "新增",
-      "empty": "尚无改动 · 修改字段后在此预览下发差异"
+      "empty": "尚无改动 · 修改字段后在此预览下发差异",
+      "tagRemoved": "删除"
     },
     "steps": {
       "title": "对账进行中 · Reconciler",
@@ -345,7 +346,22 @@
       "baselineDesired": "控制器期望配置",
       "baselineCache": "缓存回读",
       "baselineDevice": "设备实时回读",
-      "baselineNone": "无基线（按全新配置计算）"
-    }
+      "baselineNone": "无基线（按全新配置计算）",
+      "commitConfirm": "将把 {count} 条待提交变更一次性下发到设备（整体生效或整体回退）。确定提交？",
+      "leaveConfirm": "存在未提交的配置变更，离开页面后草稿将丢失。确定离开？"
+    },
+    "stageChange": "确定",
+    "clearFieldTipDelete": "清除后提交将从设备删除该配置项",
+    "moreActions": "更多",
+    "batchDelete": "批量删除",
+    "batchDeleteConfirm": "将把选中的 {n} 条记录标记为待删除（提交后生效）。继续？",
+    "batchMarkedDelete": "{n} 条已标记待删除",
+    "markCreate": "待创建",
+    "markUpdate": "已修改",
+    "markDelete": "待删除",
+    "undelete": "取消删除",
+    "stagedOk": "已加入待提交变更",
+    "markedDelete": "已标记待删除（提交后生效）",
+    "pendingCreateRemoved": "已移除该待创建条目"
   }
 }

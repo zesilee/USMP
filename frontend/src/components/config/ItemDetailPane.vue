@@ -9,7 +9,6 @@
       <el-button data-test="detail-close" size="small" @click="emit('close')">{{ t('common.close') }}</el-button>
     </div>
 
-    <template v-if="!flowActive">
       <!-- 二级 Tab（deriveDetailTabs 驱动）：仅存在嵌套子节点时渲染 Tab 头（FE-21 退化边界） -->
       <el-tabs v-if="detailTabs.length > 1" v-model="activeDetail" class="detail-tabs">
         <el-tab-pane v-for="dt in detailTabs" :key="dt.name" :label="dt.label" :name="dt.name" />
@@ -25,8 +24,9 @@
                 <!-- key 叶钥匙标识（FE-22，R12 真实图标） -->
                 <el-icon v-if="field.isKey" class="key-icon" data-test="key-icon"><Key /></el-icon>
                 <span>{{ field.label }}</span>
-                <!-- 字段级清除（FE-22）：本地清空=本次不下发该叶，非设备侧删除 -->
-                <el-tooltip v-if="clearableField(field)" :content="t('console.clearFieldTip')" placement="top">
+                <!-- 字段级清除（FE-22 二期）：基线有值=删除意图（提交后从设备删除），
+                     基线无值=仅置空本地值（该键不入 payload）。 -->
+                <el-tooltip v-if="clearableField(field)" :content="clearTipFor(field)" placement="top">
                   <el-icon class="clear-icon" :data-test="`clear-${form.keyOf(field)}`" @click.stop="clearField(field)"><Delete /></el-icon>
                 </el-tooltip>
               </span>
@@ -45,30 +45,19 @@
       <div class="detail-footer">
         <el-button @click="emit('close')">{{ t('common.cancel') }}</el-button>
         <el-button type="primary" data-test="detail-submit" :disabled="!form.submittable.value" @click="submit">
-          {{ t('console.pushAndReconcile') }}
+          {{ t('console.stageChange') }}
         </el-button>
       </div>
-    </template>
-
-    <!-- 下发/对账进度（编排复用，即时下发语义不变） -->
-    <template v-else>
-      <ReconcileSteps :progress="submitFlow.progress.value" :timed-out="submitFlow.timedOut.value" />
-      <div class="detail-footer">
-        <el-button type="primary" :disabled="!flowDone" @click="submitFlow.reset()">
-          {{ flowDone ? t('console.backToForm') : t('console.reconciling') }}
-        </el-button>
-      </div>
-    </template>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, computed, reactive, watch } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { Key, Delete } from '@element-plus/icons-vue'
 import type { FormInstance } from 'element-plus'
 import { useConfigForm } from '../../composables/useConfigForm'
-import { useConfigSubmit } from '../../composables/useConfigSubmit'
+import { useChangesetStore } from '../../stores/changeset'
 import type { Field } from '../../utils/crdSchemaParser'
 import {
   deriveDetailTabs,
@@ -79,7 +68,6 @@ import {
 } from '../../utils/moduleConsole'
 import FieldRenderer from './FieldRenderer.vue'
 import DiffPreview from './DiffPreview.vue'
-import ReconcileSteps from './ReconcileSteps.vue'
 
 const props = defineProps<{
   tab: ConsoleTab
@@ -91,25 +79,20 @@ const props = defineProps<{
   postKey: string
 }>()
 
-const emit = defineEmits<{ close: []; saved: [key: string] }>()
+const emit = defineEmits<{ close: []; staged: [key: string] }>()
 const { t } = useI18n()
 
 const listField = computed<Field>(() => props.tab.listField || props.tab.field)
 const keyField = computed(() => deriveKeyField(listField.value))
 const detailTabs = computed(() => deriveDetailTabs(listField.value))
-const configPath = computed(() => configPathFor(props.rootName, props.tab.field.path))
+// 变更集条目路径：后端 ChangesetReq 按锚点前缀匹配，须带前导斜杠（与 REST URL 形态不同）。
+const configPath = computed(() => '/' + configPathFor(props.rootName, props.tab.field.path))
 const itemFields = computed<Field[]>(() => listField.value.fields || [])
 
-const form = useConfigForm(itemFields, keyField)
-const submitOpts = reactive({ configPath: '', listKey: '' })
-watch([configPath, () => props.postKey, listField], () => {
-  submitOpts.configPath = configPath.value
-  submitOpts.listKey = props.postKey || leafName(listField.value)
-}, { immediate: true })
-const submitFlow = useConfigSubmit(submitOpts)
-
-const flowActive = computed(() => submitFlow.phase.value !== 'idle')
-const flowDone = computed(() => submitFlow.progress.value.done || submitFlow.timedOut.value)
+// 攒批模式（FE-21/FE-03）：removals 开启——基线有值被清 = 删除意图入 diff。
+const form = useConfigForm(itemFields, keyField, { removals: true })
+const changeset = useChangesetStore()
+const postListKey = computed(() => props.postKey || leafName(listField.value))
 
 const activeDetail = ref('__main__')
 const formRef = ref<FormInstance>()
@@ -150,21 +133,43 @@ function clearField(f: Field) {
   delete form.formData[form.keyOf(f)]
 }
 
-// 未提交草稿（FE-21 切行确认判据）：有 diff 且不在下发流中。
-const dirty = computed(() => !flowActive.value && form.diff.value.length > 0)
+// 清除 tooltip 按基线区分语义（FE-22）：有基线值=删除意图，无=本地置空。
+function clearTipFor(f: Field): string {
+  const k = form.keyOf(f)
+  const baseVal = form.original.value[k]
+  return baseVal !== undefined && baseVal !== null && String(baseVal) !== ''
+    ? t('console.clearFieldTipDelete')
+    : t('console.clearFieldTip')
+}
 
-// mode/row 变化即重置表单与流（切行/切建）；行内容以主键为准判定变化。
+// 未入集草稿（FE-21 切行确认判据）：相对「行数据+变更集回填」有 diff。
+const dirty = computed(() => form.diff.value.length > 0)
+
+// mode/row 变化即重置表单（切行/切建）。变更集已有该条目 → 以其最新值回填
+// 并保持首次 baseline（FE-21 合并语义）：payload 覆盖行数据、cleared 叶置空。
 watch(
   [() => props.mode, () => props.row],
   () => {
-    submitFlow.reset()
-    form.resetForm(props.row ? { ...props.row } : {})
+    const seed: Record<string, any> = props.row ? { ...props.row } : {}
+    const pending = props.row
+      ? changeset.entryFor(props.device, configPath.value, String(props.row[keyField.value] ?? ''))
+      : undefined
+    if (pending && pending.op !== 'delete') {
+      Object.assign(seed, pending.payload ?? {})
+      for (const k of pending.cleared ?? []) delete seed[k]
+    }
+    form.resetForm(seed)
+    // diff/dirty 基线锚定设备实际态（首次快照）：变更集回填值应呈现为「已改动」。
+    if (pending && pending.op !== 'delete') {
+      form.original.value = { ...(pending.baseline ?? (props.row ? { ...props.row } : {})) }
+    }
     formRef.value?.clearValidate()
     activeDetail.value = '__main__'
   },
   { immediate: true },
 )
 
+// 确定 = 写入变更集（FE-21 攒批）：不发任何写请求；提交经工具栏「提交配置」。
 async function submit() {
   if (!props.device) return
   if (formRef.value) {
@@ -176,8 +181,18 @@ async function submit() {
   }
   if (form.blocked.value) return
   const keyValue = String(form.formData[keyField.value] ?? '')
-  await submitFlow.run(props.device, form.visiblePayload())
-  if (submitFlow.phase.value !== 'error') emit('saved', keyValue)
+  const cleared = form.clearedKeys.value
+  changeset.upsert(props.device, {
+    op: props.mode === 'create' ? 'create' : 'update',
+    path: configPath.value,
+    listKey: postListKey.value,
+    keyValue,
+    payload: form.visiblePayload(),
+    cleared,
+    baseline: { ...form.original.value },
+    label: `${props.tab.label} ${keyValue}`,
+  })
+  emit('staged', keyValue)
 }
 
 defineExpose({ dirty, form, submit, isFieldDisabled })

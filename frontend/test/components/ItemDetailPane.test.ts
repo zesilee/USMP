@@ -1,9 +1,10 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { mount, flushPromises } from '@vue/test-utils'
-import { createPinia } from 'pinia'
+import { createPinia, setActivePinia, type Pinia } from 'pinia'
 import ElementPlus from 'element-plus'
 import ItemDetailPane from '../../src/components/config/ItemDetailPane.vue'
 import { setConfig, getDeviceReconcile } from '../../src/api'
+import { useChangesetStore } from '../../src/stores/changeset'
 import { deriveTabs } from '../../src/utils/moduleConsole'
 import type { Field } from '../../src/utils/crdSchemaParser'
 import { ifmNestedSchema, seedRows } from '../views/moduleConsole.fixture'
@@ -35,6 +36,8 @@ const richTab = {
   listField: richList,
 }
 
+let pinia: Pinia
+
 function mountPane(extra: Record<string, any> = {}) {
   return mount(ItemDetailPane, {
     props: {
@@ -46,11 +49,14 @@ function mountPane(extra: Record<string, any> = {}) {
       postKey: 'interface',
       ...extra,
     },
-    global: { plugins: [createPinia(), ElementPlus] },
+    global: { plugins: [pinia, ElementPlus] },
   })
 }
 
 beforeEach(() => {
+  // 共享 pinia：mount 与测试内 useChangesetStore 必须同实例（断言变更集内容）。
+  pinia = createPinia()
+  setActivePinia(pinia)
   // resetAllMocks 而非 clearAllMocks：Once 队列跨用例残留会让 baseline 桩错位，
   // 轮询永远读到空 statuses → 真延时打满超时。
   vi.resetAllMocks()
@@ -129,7 +135,7 @@ describe('ItemDetailPane · 表单编辑（FE-11 门禁语义迁移）', () => {
     expect(vm.dirty).toBe(true)
   })
 
-  it('提交：调 setConfig 且 payload 含变更；成功 emit saved（携主键值）', async () => {
+  it('确定=入变更集（FE-21 攒批）：零网络请求、条目携 op/payload/baseline，emit staged', async () => {
     const w = mountPane()
     await flushPromises()
     const vm = w.vm as any
@@ -137,12 +143,57 @@ describe('ItemDetailPane · 表单编辑（FE-11 门禁语义迁移）', () => {
     await flushPromises()
     await vm.submit()
     await flushPromises()
-    expect(vi.mocked(setConfig)).toHaveBeenCalledTimes(1)
-    const [ip, path, payload] = vi.mocked(setConfig).mock.calls[0]
-    expect(ip).toBe('10.0.0.1')
-    expect(path).toContain('ifm:interfaces')
-    expect(JSON.stringify(payload)).toContain('new-desc')
-    expect(w.emitted('saved')?.[0]?.[0]).toBe('200GE0/1/0.1')
+    expect(vi.mocked(setConfig)).not.toHaveBeenCalled()
+
+    const cs = useChangesetStore()
+    const entry = cs.entryFor('10.0.0.1', '/ifm:ifm/ifm:interfaces', '200GE0/1/0.1')!
+    expect(entry).toBeTruthy()
+    expect(entry.op).toBe('update')
+    expect(entry.payload?.['description']).toBe('new-desc')
+    expect(entry.baseline?.['admin-status']).toBe('down')
+    expect(w.emitted('staged')?.[0]?.[0]).toBe('200GE0/1/0.1')
+  })
+
+  it('创建态确定：op=create 入集（FE-21 创建态入集）', async () => {
+    const w = mountPane({ mode: 'create', row: null })
+    await flushPromises()
+    const vm = w.vm as any
+    vm.form.formData['name'] = 'GE9/9/9'
+    vm.form.formData['class'] = 'main-interface'
+    await flushPromises()
+    await vm.submit()
+    await flushPromises()
+    const entry = useChangesetStore().entryFor('10.0.0.1', '/ifm:ifm/ifm:interfaces', 'GE9/9/9')!
+    expect(entry?.op).toBe('create')
+    expect(vi.mocked(setConfig)).not.toHaveBeenCalled()
+  })
+
+  it('编辑变更集已有条目：以最新值回填并合并更新（FE-21 合并语义）', async () => {
+    const cs = useChangesetStore()
+    cs.upsert('10.0.0.1', {
+      op: 'update',
+      path: '/ifm:ifm/ifm:interfaces',
+      listKey: 'interface',
+      keyValue: '200GE0/1/0.1',
+      payload: { name: '200GE0/1/0.1', description: 'pending-v1' },
+      cleared: [],
+      baseline: { ...seedRows[3] },
+      label: 'interface 200GE0/1/0.1',
+    })
+    const w = mountPane()
+    await flushPromises()
+    const vm = w.vm as any
+    expect(vm.form.formData['description']).toBe('pending-v1')
+
+    vm.form.formData['description'] = 'pending-v2'
+    await flushPromises()
+    await vm.submit()
+    await flushPromises()
+    expect(cs.countFor('10.0.0.1')).toBe(1)
+    const entry = cs.entryFor('10.0.0.1', '/ifm:ifm/ifm:interfaces', '200GE0/1/0.1')!
+    expect(entry.payload?.['description']).toBe('pending-v2')
+    expect(entry.baseline?.['admin-status']).toBe('down')
+    w.unmount()
   })
 
   it('NCE 控件规范（FE-22）：key 叶钥匙图标；三列栅格与整行控件类', async () => {
@@ -154,11 +205,11 @@ describe('ItemDetailPane · 表单编辑（FE-11 门禁语义迁移）', () => {
     expect(w.find('.config-form--grid').exists()).toBe(true)
   })
 
-  it('字段级清除（FE-22）：有值可编辑字段可清除→不入 diff/payload；key/禁用叶无清除钮', async () => {
+  it('字段级清除·基线无值（FE-22 边界）：本次新填又清掉→不入 diff/payload/cleared', async () => {
     const w = mountPane()
     await flushPromises()
     const vm = w.vm as any
-    // description 有值 → 清除钮出现
+    // description 基线无值，本次新填再清除 → 仅置空
     vm.form.formData['description'] = 'to-clear'
     await flushPromises()
     const clearBtn = w.find('[data-test="clear-description"]')
@@ -170,6 +221,26 @@ describe('ItemDetailPane · 表单编辑（FE-11 门禁语义迁移）', () => {
     expect('description' in vm.form.visiblePayload()).toBe(false)
     // key 叶编辑态禁用 → 无清除钮；readonly 同理
     expect(w.find('[data-test="clear-name"]').exists()).toBe(false)
+  })
+
+  it('字段级清除·基线有值=删除意图（FE-22 二期语义）：diff 现 remove、确定后 cleared 入集', async () => {
+    const w = mountPane()
+    await flushPromises()
+    const vm = w.vm as any
+    // admin-status 基线值 down → 清除 = 删除意图
+    const clearBtn = w.find('[data-test="clear-admin-status"]')
+    expect(clearBtn.exists()).toBe(true)
+    await clearBtn.trigger('click')
+    await flushPromises()
+    const rm = vm.form.diff.value.find((d: any) => d.key === 'admin-status')
+    expect(rm?.op).toBe('remove')
+    expect(vm.dirty).toBe(true, )
+
+    await vm.submit()
+    await flushPromises()
+    const entry = useChangesetStore().entryFor('10.0.0.1', '/ifm:ifm/ifm:interfaces', '200GE0/1/0.1')!
+    expect(entry.cleared).toContain('admin-status')
+    expect('admin-status' in (entry.payload ?? {})).toBe(false)
   })
 
   it('必填字段清除后提交被权威门禁拦截（FE-22 负路径）', async () => {

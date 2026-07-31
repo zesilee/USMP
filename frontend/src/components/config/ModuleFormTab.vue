@@ -52,7 +52,7 @@
 
     <!-- 整 Tab readonly（config false state 子树）：只读视图，无下发入口（FE-14） -->
     <div v-if="!tab.readonly" class="actions">
-      <el-button type="primary" :disabled="!device || !form.submittable.value" @click="submit">{{ t('console.push') }}</el-button>
+      <el-button type="primary" :disabled="!device || !form.submittable.value" @click="submit">{{ t('console.stageChange') }}</el-button>
       <span class="form-tip">{{ t('console.formTipPresence') }}</span>
     </div>
     <div v-else class="actions">
@@ -66,9 +66,9 @@ import { ref, computed, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { Key, Delete } from '@element-plus/icons-vue'
 import { ElMessage, type FormInstance } from 'element-plus'
-import { getConfig, setConfig } from '../../api'
-import { ownershipRejectionOf, confirmOwnershipOverride } from '../../composables/ownershipGate'
+import { getConfig } from '../../api'
 import { useConfigForm } from '../../composables/useConfigForm'
+import { useChangesetStore } from '../../stores/changeset'
 import { evalPredicate } from '../../utils/xpathEval'
 import type { Field } from '../../utils/crdSchemaParser'
 import type { ConsoleTab } from '../../utils/moduleConsole'
@@ -89,7 +89,8 @@ const configPath = computed(() =>
 )
 // readonly 叶保留渲染（禁用态回显 state 值），payload/校验排除由 useConfigForm 处理（FE-14）。
 const fields = computed<Field[]>(() => props.tab.field.fields || [])
-const form = useConfigForm(fields)
+// 攒批模式（FE-03）：removals 开启——基线有值被清 = 删除意图入 diff。
+const form = useConfigForm(fields, undefined, { removals: true })
 const formRef = ref<FormInstance>()
 const error = ref('')
 
@@ -181,7 +182,9 @@ async function load() {
 
 watch(() => props.device, load, { immediate: true })
 
-// ===== 下发 =====
+// ===== 确定=入变更集（FE-03 攒批）：不发写请求；归属硬锁与下发经「提交配置」 =====
+const changeset = useChangesetStore()
+
 async function submit() {
   if (!props.device) return
   if (formRef.value) {
@@ -192,32 +195,15 @@ async function submit() {
     }
   }
   if (form.blocked.value) return
-  try {
-    let res = await setConfig(props.device, configPath.value, form.visiblePayload())
-    // 归属硬锁（FE-18 二期）：信封 409 → 阻断确认 → 确认后携 force 重发，取消则中止
-    // （不置错误态、不刷新）。
-    const rej = ownershipRejectionOf(res)
-    if (rej) {
-      if (!(await confirmOwnershipOverride(rej))) return
-      res = await setConfig(props.device, configPath.value, form.visiblePayload(), true)
-      // 信封恒 200：force 重发失败按 success 判定，如实透出（§9）。
-      if ((res.data as any)?.success === false) {
-        error.value = (res.data as any)?.message || t('console.forcePushFailed')
-        return
-      }
-    }
-    // 软归属警告（FE-18/BR-11）：force 放行仍附带，非阻断提示，下发照常。
-    const warn = (res.data as any)?.data?.ownershipWarning
-    if (warn?.message) {
-      ElMessage.warning(`${warn.message}（${(warn.intents || []).join('、')}）`)
-    } else {
-      ElMessage.success(t('console.pushed'))
-    }
-    await load()
-  } catch (e: any) {
-    // 后端不支持写入的路径（如尚无转换器）原样透出错误（§9）。
-    error.value = e?.response?.data?.message || e?.message || t('console.pushFailed')
-  }
+  changeset.upsert(props.device, {
+    op: 'update',
+    path: '/' + configPath.value,
+    payload: form.visiblePayload(),
+    cleared: form.clearedKeys.value,
+    baseline: { ...form.original.value },
+    label: props.tab.label,
+  })
+  ElMessage.success(t('console.stagedOk'))
 }
 </script>
 

@@ -8,7 +8,16 @@ import type { Field } from '../utils/crdSchemaParser'
 // 模型驱动表单编排（自旧配置页收敛的通用逻辑，FE-07/08/09 语义不变）：
 // 约束引擎（when 显隐/must 校验）、pattern/range/required 规则、choice 展开、
 // 差异比对与可提交门禁、仅可见字段入 payload。供通用控制台的列表/表单 Tab 复用。
-export function useConfigForm(fields: Ref<Field[]> | ComputedRef<Field[]>, keyField?: Ref<string> | ComputedRef<string>) {
+export interface UseConfigFormOptions {
+  /** 启用 diff 删除表达（FE-22 二期）：基线有值被清 → remove 条目入 diff（攒批链路开启）。 */
+  removals?: boolean
+}
+
+export function useConfigForm(
+  fields: Ref<Field[]> | ComputedRef<Field[]>,
+  keyField?: Ref<string> | ComputedRef<string>,
+  opts?: UseConfigFormOptions,
+) {
   const formData = reactive<Record<string, any>>({})
   const original = ref<Record<string, any>>({}) // 已回填的实际态基线（新增时为空）
 
@@ -74,7 +83,9 @@ export function useConfigForm(fields: Ref<Field[]> | ComputedRef<Field[]>, keyFi
     }),
   )
 
-  const diff = computed(() => computeDiff(formData, original.value, editableFlat.value))
+  const diff = computed(() => computeDiff(formData, original.value, editableFlat.value, { removals: opts?.removals }))
+  // 删除意图叶（FE-22 二期）：基线有值被清除的键，随条目入变更集（cleared）。
+  const clearedKeys = computed(() => diff.value.filter((d) => d.op === 'remove').map((d) => d.key))
   const submittable = computed(
     () =>
       diff.value.length > 0 &&
@@ -168,6 +179,7 @@ export function useConfigForm(fields: Ref<Field[]> | ComputedRef<Field[]>, keyFi
   return {
     formData,
     original,
+    clearedKeys,
     engine,
     mustViolations,
     visibleFields,
