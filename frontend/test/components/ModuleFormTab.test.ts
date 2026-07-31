@@ -24,6 +24,29 @@ beforeEach(() => {
   vi.mocked(setConfig).mockResolvedValue({ data: { data: {} } } as any)
 })
 
+describe('ModuleFormTab · 嵌套 group 二级 Tab（FE-02 NCE 形态）', () => {
+  it('global tab → 主 Tab(global) + ipv4-conflict-enable 子 Tab；所有面板常驻（隐藏非销毁）', async () => {
+    const w = mountTab()
+    await flushPromises()
+    const tabNames = w.findAll('.el-tabs__item').map((n) => n.text().trim())
+    expect(tabNames[0]).toBe('global')
+    expect(tabNames).toContain('ipv4-conflict-enable')
+    // 非激活面板常驻 DOM（状态保留 + 既有 vm 级断言不破）
+    expect(w.findAll('.el-switch').length).toBeGreaterThan(0)
+  })
+
+  it('无嵌套 group 的表单 Tab 不渲染二级 Tab 头（退化边界）', async () => {
+    const dampTab = deriveTabs(ifmNestedSchema.fields).find((t) => t.name === 'damp')!
+    const w = mount(ModuleFormTab, {
+      props: { tab: dampTab, rootName: 'ifm', device: '10.0.0.1' },
+      global: { plugins: [createPinia(), ElementPlus] },
+    })
+    await flushPromises()
+    expect(w.findAll('.el-tabs__item')).toHaveLength(0)
+    expect(w.findAll('.el-form-item').length).toBeGreaterThan(0)
+  })
+})
+
 describe('ModuleFormTab · presence 容器（FE-12）', () => {
   it('presence group 渲染为开关；ignore-primary-sub=true 时 must 不满足 → 禁用并强制关', async () => {
     const w = mountTab()

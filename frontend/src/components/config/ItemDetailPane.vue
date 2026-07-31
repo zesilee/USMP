@@ -16,13 +16,28 @@
       </el-tabs>
 
       <el-form ref="formRef" :model="form.formData" :rules="form.rules.value" label-position="top" class="config-form">
-        <el-form-item v-for="field in activeFields" :key="field.path" :label="field.label" :prop="form.keyOf(field)">
-          <FieldRenderer v-if="field.type === 'choice'" :field="field" :model-value="form.choiceScope(field)"
-            @update:model-value="form.onChoiceUpdate(field, $event)" />
-          <FieldRenderer v-else :field="field" :disabled="isFieldDisabled(field)"
-            :model-value="form.formData[form.keyOf(field)]"
-            @update:model-value="form.formData[form.keyOf(field)] = $event" />
-        </el-form-item>
+        <!-- NCE 三列栅格（FE-22）：标量流式补位，choice/leaf-list/嵌套容器整行 -->
+        <div class="config-form--grid">
+          <el-form-item v-for="field in activeFields" :key="field.path" :prop="form.keyOf(field)"
+            :class="{ 'fi-span-full': spansFull(field) }">
+            <template #label>
+              <span class="fi-label">
+                <!-- key 叶钥匙标识（FE-22，R12 真实图标） -->
+                <el-icon v-if="field.isKey" class="key-icon" data-test="key-icon"><Key /></el-icon>
+                <span>{{ field.label }}</span>
+                <!-- 字段级清除（FE-22）：本地清空=本次不下发该叶，非设备侧删除 -->
+                <el-tooltip v-if="clearableField(field)" :content="t('console.clearFieldTip')" placement="top">
+                  <el-icon class="clear-icon" :data-test="`clear-${form.keyOf(field)}`" @click.stop="clearField(field)"><Delete /></el-icon>
+                </el-tooltip>
+              </span>
+            </template>
+            <FieldRenderer v-if="field.type === 'choice'" :field="field" :model-value="form.choiceScope(field)"
+              @update:model-value="form.onChoiceUpdate(field, $event)" />
+            <FieldRenderer v-else :field="field" :disabled="isFieldDisabled(field)"
+              :model-value="form.formData[form.keyOf(field)]"
+              @update:model-value="form.formData[form.keyOf(field)] = $event" />
+          </el-form-item>
+        </div>
         <el-empty v-if="!activeFields.length" :description="t('console.emptyGroup')" />
       </el-form>
 
@@ -50,6 +65,7 @@
 <script setup lang="ts">
 import { ref, computed, reactive, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { Key, Delete } from '@element-plus/icons-vue'
 import type { FormInstance } from 'element-plus'
 import { useConfigForm } from '../../composables/useConfigForm'
 import { useConfigSubmit } from '../../composables/useConfigSubmit'
@@ -119,6 +135,21 @@ function isFieldDisabled(f: Field): boolean {
   return props.mode === 'edit' && (!!f.isKey || !!f.operationExclude?.includes('update'))
 }
 
+// NCE 三列栅格（FE-22）：宽控件占整行。
+function spansFull(f: Field): boolean {
+  return f.type === 'choice' || f.type === 'leaf-list' || f.type === 'list' || f.type === 'group'
+}
+
+// 字段级清除（FE-22）：可编辑且有值才出清除钮；choice 成员键分散，不提供整体清除。
+function clearableField(f: Field): boolean {
+  if (f.type === 'choice' || isFieldDisabled(f)) return false
+  return form.formData[form.keyOf(f)] !== undefined
+}
+
+function clearField(f: Field) {
+  delete form.formData[form.keyOf(f)]
+}
+
 // 未提交草稿（FE-21 切行确认判据）：有 diff 且不在下发流中。
 const dirty = computed(() => !flowActive.value && form.diff.value.length > 0)
 
@@ -177,5 +208,47 @@ defineExpose({ dirty, form, submit, isFieldDisabled })
   display: flex;
   justify-content: flex-end;
   gap: 8px;
+}
+
+/* NCE 三列栅格（FE-22）：when 隐藏字段不渲染即不占位，流式补位 */
+.config-form--grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: 32px;
+}
+
+.fi-span-full {
+  grid-column: 1 / -1;
+}
+
+@media (max-width: 1280px) {
+  .config-form--grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 900px) {
+  .config-form--grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.fi-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.key-icon {
+  color: var(--ink-2, #5c6b7a);
+}
+
+.clear-icon {
+  cursor: pointer;
+  color: var(--ink-3, #93a2b1);
+}
+
+.clear-icon:hover {
+  color: var(--st-off, #c45656);
 }
 </style>

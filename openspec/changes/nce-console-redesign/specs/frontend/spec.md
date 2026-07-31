@@ -126,7 +126,7 @@ Field 带 group/pattern/min/max/required 时，前端渲染 SHALL 按分组组�
 
 ### Requirement: FE-22 NCE 表单控件规范（三列栅格/key 标识/约束占位/字段级清除）
 
-详情编辑区与表单 Tab 的表单 SHALL 按三列栅格布局（窄视口 SHALL 降为 2/1 列；choice、leaf-list、嵌套子表格 SHALL 占整行；when 隐藏字段 SHALL NOT 占位）。key 叶 SHALL 呈现钥匙标识（真实图标，R12）且编辑态只读。未携带 `dynamicDefault` 的字段 SHALL 由约束元数据合成 placeholder（range→`整数 合法范围: <范围>`、length→`合法长度: <范围>`；`dynamicDefault` 字段保持 FE-15 「系统自动分配」占位优先）。每个可编辑且已有值的字段旁 SHALL 提供清除控件：点击 SHALL 清空该字段本地值（该键不入 payload），tooltip SHALL 明示「清空后本次不下发该字段」，SHALL NOT 暗示设备侧删除语义（leaf 级删除属二期攒批变更集）。
+详情编辑区与表单 Tab 的表单 SHALL 按三列栅格布局（窄视口 SHALL 降为 2/1 列；choice、leaf-list、嵌套子表格 SHALL 占整行；when 隐藏字段 SHALL NOT 占位）。key 叶 SHALL 呈现钥匙标识（真实图标，R12）且编辑态只读。未携带 `dynamicDefault` 的字段 SHALL 由**当前 schema 契约携带的**约束元数据合成 placeholder（数值 range→`整数 合法范围: <范围>`；字符串 length 现契约未透出，待后端补充元数据后按同规则自动生效；`dynamicDefault` 字段保持 FE-15 「系统自动分配」占位优先，显式 placeholder 优先级最高）。每个可编辑且已有值的字段旁 SHALL 提供清除控件：点击 SHALL 清空该字段本地值（该键不入 payload），tooltip SHALL 明示「清空后本次不下发该字段」，SHALL NOT 暗示设备侧删除语义（leaf 级删除属二期攒批变更集）。
 
 #### Scenario: 三列栅格与整行控件
 
@@ -140,8 +140,8 @@ Field 带 group/pattern/min/max/required 时，前端渲染 SHALL 按分组组�
 
 #### Scenario: 约束合成占位
 
-- **WHEN** 字段携带 range `[60, 1000000]` / length `[1..31]`
-- **THEN** 输入框空值时 SHALL 展示 `整数 合法范围: [60, 1000000]` / `合法长度: [1..31]` 占位；`dynamicDefault` 字段 SHALL 仍展示「系统自动分配」
+- **WHEN** 数值字段携带 range `[60, 1000000]`
+- **THEN** 输入框空值时 SHALL 展示 `整数 合法范围: [60, 1000000]` 占位；`dynamicDefault` 字段 SHALL 仍展示「系统自动分配」；显式 placeholder SHALL 优先于合成占位
 
 #### Scenario: 字段级清除
 

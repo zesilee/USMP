@@ -145,6 +145,48 @@ describe('ItemDetailPane · 表单编辑（FE-11 门禁语义迁移）', () => {
     expect(w.emitted('saved')?.[0]?.[0]).toBe('200GE0/1/0.1')
   })
 
+  it('NCE 控件规范（FE-22）：key 叶钥匙图标；三列栅格与整行控件类', async () => {
+    const w = mountPane()
+    await flushPromises()
+    // key 叶（name）label 带钥匙图标
+    expect(w.find('[data-test="key-icon"]').exists()).toBe(true)
+    // 表单挂三列栅格类；leaf-list/嵌套容器项占整行
+    expect(w.find('.config-form--grid').exists()).toBe(true)
+  })
+
+  it('字段级清除（FE-22）：有值可编辑字段可清除→不入 diff/payload；key/禁用叶无清除钮', async () => {
+    const w = mountPane()
+    await flushPromises()
+    const vm = w.vm as any
+    // description 有值 → 清除钮出现
+    vm.form.formData['description'] = 'to-clear'
+    await flushPromises()
+    const clearBtn = w.find('[data-test="clear-description"]')
+    expect(clearBtn.exists()).toBe(true)
+    await clearBtn.trigger('click')
+    await flushPromises()
+    expect(vm.form.formData['description']).toBeUndefined()
+    expect(vm.form.diff.value.some((d: any) => d.key === 'description')).toBe(false)
+    expect('description' in vm.form.visiblePayload()).toBe(false)
+    // key 叶编辑态禁用 → 无清除钮；readonly 同理
+    expect(w.find('[data-test="clear-name"]').exists()).toBe(false)
+  })
+
+  it('必填字段清除后提交被权威门禁拦截（FE-22 负路径）', async () => {
+    const w = mountPane({ mode: 'create', row: null })
+    await flushPromises()
+    const vm = w.vm as any
+    vm.form.formData['name'] = 'GE0/0/1'
+    await flushPromises()
+    const clearBtn = w.find('[data-test="clear-name"]')
+    expect(clearBtn.exists()).toBe(true) // 创建态 key 可编辑，可清除
+    await clearBtn.trigger('click')
+    await flushPromises()
+    expect(vm.form.blocked.value).toBe(true)
+    await vm.submit()
+    expect(vi.mocked(setConfig)).not.toHaveBeenCalled()
+  })
+
   it('行切换（row prop 变化）重置表单为新行数据', async () => {
     const w = mountPane()
     await flushPromises()

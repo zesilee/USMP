@@ -46,13 +46,17 @@
       <span v-if="field.units" class="field-units">{{ field.units }}</span>
     </div>
 
-    <!-- Boolean -->
-    <el-switch
+    <!-- Boolean → 「打开/关闭」radio（FE-01 NCE 形态）：值仍 true/false；
+         可选 boolean 未选=两项均不选中（键不入 payload 由表单层保证）。 -->
+    <el-radio-group
       v-else-if="field.type === 'boolean'"
       :model-value="modelValue"
       @update:model-value="$emit('update:modelValue', $event)"
       :disabled="field.readonly || disabled"
-    />
+    >
+      <el-radio :value="true">{{ t('console.boolOn') }}</el-radio>
+      <el-radio :value="false">{{ t('console.boolOff') }}</el-radio>
+    </el-radio-group>
 
     <!-- Enum：必填且 ≤3 选项 → 分段控件（FE-01，NCE 保真）；segmented 无清空能力，
          可选枚举需保留「清空=键不入 payload」语义，故仅必填走此分支。 -->
@@ -302,9 +306,21 @@ const segmentedOptions = computed(() =>
   (props.field.options || []).map((o) => ({ label: o.label, value: o.value })),
 )
 
-// dynamicDefault（FE-15）：空值=系统自动分配，占位提示之；显式 placeholder 优先。
+// 占位优先级（FE-15/FE-22）：显式 placeholder > dynamicDefault「系统自动分配」>
+// 约束元数据合成（数值 range；字符串 length 契约暂无元数据，透出后同规则自动生效）。
+const rangePlaceholder = computed<string | undefined>(() => {
+  if (props.field.type !== 'number') return undefined
+  const { minimum: min, maximum: max } = props.field
+  if (min != null && max != null) return t('console.rangeBoth', { min, max })
+  if (min != null) return t('console.rangeMin', { min })
+  if (max != null) return t('console.rangeMax', { max })
+  return undefined
+})
+
 const placeholderOf = computed<string | undefined>(() =>
-  props.field.placeholder || (props.field.dynamicDefault ? t('console.autoAssigned') : undefined),
+  props.field.placeholder ||
+  (props.field.dynamicDefault ? t('console.autoAssigned') : undefined) ||
+  rangePlaceholder.value,
 )
 
 // 数据以 YANG 叶子名（path 末段）为键，对齐后端转换（非 full path）。

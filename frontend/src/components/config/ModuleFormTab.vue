@@ -3,15 +3,50 @@
     <el-alert v-if="error" :title="error" type="warning" :closable="false" show-icon />
 
     <el-form ref="formRef" :model="form.formData" :rules="form.rules.value" label-position="top" class="config-form">
-      <el-form-item v-for="field in form.visibleFields.value" :key="field.path"
-        :label="labelOf(field)" :prop="form.keyOf(field)"
-        :error="presenceMustError(field)">
-        <FieldRenderer v-if="field.type === 'choice'" :field="field" :model-value="form.choiceScope(field)"
-          @update:model-value="form.onChoiceUpdate(field, $event)" />
-        <FieldRenderer v-else :field="field" :disabled="presenceBlocked(field) || !!field.readonly"
-          :model-value="form.formData[form.keyOf(field)]"
-          @update:model-value="form.formData[form.keyOf(field)] = $event" />
-      </el-form-item>
+      <!-- 嵌套 group → 二级 Tab（FE-02 NCE 形态）：>1 分组渲染 Tab 头；面板常驻
+           （隐藏非销毁）保住跨 Tab 校验/diff 与状态。 -->
+      <el-tabs v-if="innerTabs.length > 1" v-model="activeInner" class="inner-tabs">
+        <el-tab-pane v-for="tt in innerTabs" :key="tt.name" :label="tt.label" :name="tt.name">
+          <div class="config-form--grid">
+            <el-form-item v-for="field in paneFields(tt)" :key="field.path" :prop="form.keyOf(field)"
+              :error="presenceMustError(field)" :class="{ 'fi-span-full': spansFull(field) }">
+              <template #label>
+                <span class="fi-label">
+                  <el-icon v-if="field.isKey" class="key-icon" data-test="key-icon"><Key /></el-icon>
+                  <span>{{ labelOf(field) }}</span>
+                  <el-tooltip v-if="clearableField(field)" :content="t('console.clearFieldTip')" placement="top">
+                    <el-icon class="clear-icon" :data-test="`clear-${form.keyOf(field)}`" @click.stop="clearField(field)"><Delete /></el-icon>
+                  </el-tooltip>
+                </span>
+              </template>
+              <FieldRenderer v-if="field.type === 'choice'" :field="field" :model-value="form.choiceScope(field)"
+                @update:model-value="form.onChoiceUpdate(field, $event)" />
+              <FieldRenderer v-else :field="field" :disabled="presenceBlocked(field) || !!field.readonly"
+                :model-value="form.formData[form.keyOf(field)]"
+                @update:model-value="form.formData[form.keyOf(field)] = $event" />
+            </el-form-item>
+          </div>
+        </el-tab-pane>
+      </el-tabs>
+      <div v-else class="config-form--grid">
+        <el-form-item v-for="field in paneFields(innerTabs[0])" :key="field.path" :prop="form.keyOf(field)"
+          :error="presenceMustError(field)" :class="{ 'fi-span-full': spansFull(field) }">
+          <template #label>
+            <span class="fi-label">
+              <el-icon v-if="field.isKey" class="key-icon" data-test="key-icon"><Key /></el-icon>
+              <span>{{ labelOf(field) }}</span>
+              <el-tooltip v-if="clearableField(field)" :content="t('console.clearFieldTip')" placement="top">
+                <el-icon class="clear-icon" :data-test="`clear-${form.keyOf(field)}`" @click.stop="clearField(field)"><Delete /></el-icon>
+              </el-tooltip>
+            </span>
+          </template>
+          <FieldRenderer v-if="field.type === 'choice'" :field="field" :model-value="form.choiceScope(field)"
+            @update:model-value="form.onChoiceUpdate(field, $event)" />
+          <FieldRenderer v-else :field="field" :disabled="presenceBlocked(field) || !!field.readonly"
+            :model-value="form.formData[form.keyOf(field)]"
+            @update:model-value="form.formData[form.keyOf(field)] = $event" />
+        </el-form-item>
+      </div>
       <div v-if="!form.visibleFields.value.length" class="empty-tip">{{ t('console.emptyGroup') }}</div>
     </el-form>
 
@@ -29,6 +64,7 @@
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { Key, Delete } from '@element-plus/icons-vue'
 import { ElMessage, type FormInstance } from 'element-plus'
 import { getConfig, setConfig } from '../../api'
 import { ownershipRejectionOf, confirmOwnershipOverride } from '../../composables/ownershipGate'
@@ -36,7 +72,7 @@ import { useConfigForm } from '../../composables/useConfigForm'
 import { evalPredicate } from '../../utils/xpathEval'
 import type { Field } from '../../utils/crdSchemaParser'
 import type { ConsoleTab } from '../../utils/moduleConsole'
-import { configPathFor, leafName } from '../../utils/moduleConsole'
+import { configPathFor, deriveDetailTabs, leafName } from '../../utils/moduleConsole'
 import FieldRenderer from './FieldRenderer.vue'
 
 const props = defineProps<{
@@ -59,6 +95,34 @@ const error = ref('')
 
 function labelOf(f: Field): string {
   return f.label || leafName(f)
+}
+
+// 嵌套 group → 二级 Tab（FE-02 NCE 形态）：复用 deriveDetailTabs（标量→主 Tab、
+// 嵌套 group→子表单 Tab、嵌套 list→子表格 Tab）。单 Tab 退化不渲染 Tab 头。
+const innerTabs = computed(() => deriveDetailTabs(props.tab.field))
+const activeInner = ref('__main__')
+watch(() => props.tab, () => { activeInner.value = '__main__' })
+
+function paneFields(tt?: { name: string; field: Field }): Field[] {
+  if (!tt) return []
+  const visible = new Set(form.visibleFields.value.map((f) => f.path))
+  if (tt.name === '__main__') return (tt.field.fields || []).filter((f) => visible.has(f.path))
+  return [tt.field].filter((f) => visible.has(f.path))
+}
+
+// NCE 三列栅格（FE-22）：宽控件占整行。
+function spansFull(f: Field): boolean {
+  return f.type === 'choice' || f.type === 'leaf-list' || f.type === 'list' || f.type === 'group'
+}
+
+// 字段级清除（FE-22）：可编辑且有值才出清除钮；choice 成员键分散不提供整体清除。
+function clearableField(f: Field): boolean {
+  if (f.type === 'choice' || f.readonly || presenceBlocked(f)) return false
+  return form.formData[form.keyOf(f)] !== undefined
+}
+
+function clearField(f: Field) {
+  delete form.formData[form.keyOf(f)]
 }
 
 // ===== presence 容器的 must 门禁（FE-12）=====
@@ -162,7 +226,48 @@ async function submit() {
   display: flex;
   flex-direction: column;
   gap: 14px;
-  max-width: 640px;
+}
+
+/* NCE 三列栅格（FE-22）：when 隐藏字段不渲染即不占位 */
+.config-form--grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: 32px;
+}
+
+.fi-span-full {
+  grid-column: 1 / -1;
+}
+
+@media (max-width: 1280px) {
+  .config-form--grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 900px) {
+  .config-form--grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.fi-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.key-icon {
+  color: var(--ink-2, #5c6b7a);
+}
+
+.clear-icon {
+  cursor: pointer;
+  color: var(--ink-3, #93a2b1);
+}
+
+.clear-icon:hover {
+  color: var(--st-off, #c45656);
 }
 
 .config-form {
