@@ -7,12 +7,12 @@
 
 ## 1. 后端纯函数层（PR-1）
 
-- [ ] 1.1 B1 红灯：edit-config 编码分派导出函数测试——从 `client.marshalChange` 提取（注册表分派 + `xmlcodec.Encode/EncodeDelete`），覆盖 add/modify/delete、无 XML 通道模块返回显式不支持错误、与既有 marshalChange 输出字节一致（回归锚点）
-- [ ] 1.2 实现编码分派导出纯函数（`pkg/yang-runtime/client` 或新 preview 包），`NETCONFClient.marshalChange` 改为其薄封装，绿灯
-- [ ] 1.3 B1 红灯：回滚反算测试（CS-02）——ADD↔条目删除、DELETE↔按基线重建、MODIFY 旧值重编码、混合变更集、空 diff 边界
-- [ ] 1.4 实现回滚反算纯函数，绿灯
-- [ ] 1.5 B1 红灯：xmlcodec 叶级删除测试（CS-05）——主键定位+目标叶 `nc:operation="delete"`、多叶、嵌套条目、幂等、不误删条目
-- [ ] 1.6 实现 `xmlcodec` 叶级删除编码，绿灯；race 全绿，commit（What/Why/How）+ PR-1
+- [x] 1.1 B1 红灯：edit-config 编码分派导出函数测试——从 `client.marshalChange` 提取（注册表分派 + `xmlcodec.Encode/EncodeDelete`），覆盖 add/modify/delete、无 XML 通道模块返回显式不支持错误、与既有 marshalChange 输出字节一致（回归锚点）
+- [x] 1.2 实现编码分派导出纯函数（`pkg/yang-runtime/client` 或新 preview 包），`NETCONFClient.marshalChange` 改为其薄封装，绿灯
+- [x] 1.3 B1 红灯：回滚反算测试（CS-02）——ADD↔条目删除、DELETE↔按基线重建、MODIFY 旧值重编码、混合变更集、空 diff 边界
+- [x] 1.4 实现回滚反算纯函数，绿灯
+- [x] 1.5 B1 红灯：xmlcodec 叶级删除测试（CS-05）——主键定位+目标叶 `nc:operation="delete"`、多叶、嵌套条目、幂等、不误删条目
+- [x] 1.6 实现 `xmlcodec` 叶级删除编码，绿灯；race 全绿，commit（What/Why/How）+ PR-1
 
 ## 2. 后端接口层（PR-2）
 
