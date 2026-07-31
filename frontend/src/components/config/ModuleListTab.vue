@@ -8,6 +8,19 @@
       <el-button :icon="RefreshRight" :disabled="!device" data-test="list-refresh" @click="load()">
         {{ t('common.refresh') }}
       </el-button>
+      <!-- 批量菜单（FE-11 二期）：多选行批量删除入变更集 -->
+      <el-dropdown v-if="!tab.readonly && canDelete" trigger="click" @command="onBatchCommand">
+        <el-button data-test="batch-more">
+          {{ t('console.moreActions') }}<el-icon><ArrowDown /></el-icon>
+        </el-button>
+        <template #dropdown>
+          <el-dropdown-menu>
+            <el-dropdown-item command="batch-delete" :disabled="!selectedRows.length" data-test="batch-delete">
+              {{ t('console.batchDelete') }}
+            </el-dropdown-item>
+          </el-dropdown-menu>
+        </template>
+      </el-dropdown>
       <el-button v-if="searchFields.length" link type="primary" class="adv-toggle" @click="searchOpen = !searchOpen">
         {{ t('console.advancedSearch') }}
         <el-icon><ArrowUp v-if="searchOpen" /><ArrowDown v-else /></el-icon>
@@ -61,9 +74,19 @@
       v-loading="loading"
       class="list-table"
       highlight-current-row
+      :row-class-name="rowClass"
       @row-click="onRowClick"
+      @selection-change="onSelectionChange"
     >
       <el-table-column type="selection" width="42" />
+      <!-- 变更集标记合成视图（FE-11 二期）：待创建/已修改/待删除 -->
+      <el-table-column width="72">
+        <template #default="{ row }">
+          <el-tag v-if="rowMark(row) === 'create'" size="small" type="success" data-test="mark-create">{{ t('console.markCreate') }}</el-tag>
+          <el-tag v-else-if="rowMark(row) === 'update'" size="small" type="warning" data-test="mark-update">{{ t('console.markUpdate') }}</el-tag>
+          <el-tag v-else-if="rowMark(row) === 'delete'" size="small" type="danger" data-test="mark-delete">{{ t('console.markDelete') }}</el-tag>
+        </template>
+      </el-table-column>
       <el-table-column
         v-for="col in shownColumns"
         :key="col.path"
@@ -92,7 +115,15 @@
         <template #default="{ row }">
           <el-button v-if="canUpdate" type="primary" size="small" link @click.stop="openEdit(row)">{{ t('common.edit') }}</el-button>
           <el-button
-            v-if="canDelete"
+            v-if="canDelete && rowMark(row) === 'delete'"
+            type="warning"
+            size="small"
+            link
+            data-test="undelete-btn"
+            @click.stop="onUndelete(row)"
+          >{{ t('console.undelete') }}</el-button>
+          <el-button
+            v-else-if="canDelete"
             type="danger"
             size="small"
             link
@@ -132,7 +163,7 @@
       :row="selectedRow"
       :post-key="postKey || leafName(listField)"
       @close="closeDetail"
-      @saved="onSaved"
+      @staged="onStaged"
     />
   </div>
 </template>
@@ -142,9 +173,9 @@ import { ref, reactive, computed, watch, nextTick } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { Plus, ArrowDown, ArrowUp, RefreshRight, Setting } from '@element-plus/icons-vue'
 import { ElMessage, ElMessageBox, type TableInstance } from 'element-plus'
-import { getConfig, deleteConfig } from '../../api'
-import { ownershipRejectionOf, confirmOwnershipOverride } from '../../composables/ownershipGate'
+import { getConfig } from '../../api'
 import { useFreshnessStore } from '../../stores/freshness'
+import { useChangesetStore } from '../../stores/changeset'
 import type { Field } from '../../utils/crdSchemaParser'
 import type { ConsoleTab } from '../../utils/moduleConsole'
 import {
@@ -170,6 +201,9 @@ const { t } = useI18n()
 
 const listField = computed<Field>(() => props.tab.listField || props.tab.field)
 const configPath = computed(() => configPathFor(props.rootName, props.tab.field.path))
+// 变更集条目路径（与 ItemDetailPane 同源）：后端契约按锚点前缀匹配，带前导斜杠。
+const entryPath = computed(() => '/' + configPath.value)
+const changeset = useChangesetStore()
 const keyField = computed(() => deriveKeyField(listField.value))
 const allColumns = computed(() => deriveAllColumns(listField.value))
 const searchFields = computed(() => filterableFields(listField.value))
@@ -301,7 +335,28 @@ function resetSearch() {
   page.value = 1
 }
 
-const filteredRows = computed(() => filterRows(items.value, applied.value, searchFields.value))
+// 标记合成视图（FE-11 二期）：设备行 + 变更集待创建行（按主键去重，设备行优先）。
+const mergedItems = computed(() => {
+  const existing = new Set(items.value.map((r) => String(r[keyField.value])))
+  const pendingCreates = changeset
+    .entriesFor(props.device)
+    .filter((e) => e.path === entryPath.value && e.op === 'create' && !existing.has(String(e.keyValue)))
+    .map((e) => ({ ...(e.payload ?? {}) }))
+  return [...items.value, ...pendingCreates]
+})
+
+// 行标记：create/update/delete/''（重置或提交清空后即时还原）。
+function rowMark(row: Record<string, any>): '' | 'create' | 'update' | 'delete' {
+  const e = changeset.entryFor(props.device, entryPath.value, String(row[keyField.value]))
+  return (e?.op as any) ?? ''
+}
+
+function rowClass({ row }: { row: Record<string, any> }): string {
+  const m = rowMark(row)
+  return m ? `row-${m}` : ''
+}
+
+const filteredRows = computed(() => filterRows(mergedItems.value, applied.value, searchFields.value))
 
 // ===== 分页（客户端） =====
 const page = ref(1)
@@ -312,6 +367,10 @@ const pagedRows = computed(() =>
 
 // ===== 列表详情同屏（FE-21）：选中行 + 详情态，切行/切建带未提交草稿确认 =====
 const tableRef = ref<TableInstance>()
+const selectedRows = ref<Record<string, any>[]>([])
+function onSelectionChange(rows: Record<string, any>[]) {
+  selectedRows.value = rows
+}
 const paneRef = ref<InstanceType<typeof ItemDetailPane>>()
 const selectedRow = ref<Record<string, any> | null>(null)
 const detailMode = ref<'edit' | 'create' | null>(null)
@@ -375,10 +434,11 @@ function syncCurrentRow() {
   highlight(found)
 }
 
-// 提交成功（FE-21）：刷新列表并保持详情区展开为该条目（创建态切为编辑态）。
-async function onSaved(key: string) {
-  await load()
-  const found = items.value.find((r) => String(r[keyField.value]) === key) || null
+// 确定入集（FE-21 攒批）：设备数据未变不重载；标记行即时出现；创建态切为
+// 该待创建条目的编辑态（合成视图行）。
+function onStaged(key: string) {
+  ElMessage.success(t('console.stagedOk'))
+  const found = mergedItems.value.find((r) => String(r[keyField.value]) === key) || null
   if (found) {
     selectedRow.value = found
     detailMode.value = 'edit'
@@ -386,9 +446,10 @@ async function onSaved(key: string) {
   }
 }
 
-// ===== 行删除（FE-16，命令语义）：确认 → DELETE → 成功刷新 / 失败如实透出（§9） =====
+// ===== 行删除（FE-16 攒批）：确认 → 入变更集删除项（零请求）；提交经「提交配置」 =====
 async function onDelete(row: Record<string, any>) {
-  const key = row[keyField.value]
+  const key = String(row[keyField.value])
+  const pendingCreate = rowMark(row) === 'create'
   try {
     await ElMessageBox.confirm(
       t('console.deleteConfirm', { key: keyField.value, value: key }),
@@ -396,30 +457,47 @@ async function onDelete(row: Record<string, any>) {
       { type: 'warning', confirmButtonText: t('common.delete'), cancelButtonText: t('common.cancel') },
     )
   } catch {
-    return // 用户取消：零请求
+    return // 用户取消：变更集零改动
   }
+  changeset.markDelete(props.device, {
+    path: entryPath.value,
+    listKey: postKey.value || leafName(listField.value),
+    keyValue: key,
+    label: `${props.tab.label} ${key}`,
+  })
+  // 删除的是当前详情条目 → 收起详情（待创建被移除/既有转待删除，均不悬挂表单）。
+  if (String(selectedRow.value?.[keyField.value] ?? '') === key) closeDetail()
+  ElMessage.success(pendingCreate ? t('console.pendingCreateRemoved') : t('console.markedDelete'))
+}
+
+// 取消删除（FE-16）：移除该删除项，行恢复常态。
+function onUndelete(row: Record<string, any>) {
+  changeset.unmarkDelete(props.device, entryPath.value, String(row[keyField.value]))
+}
+
+// 批量删除（FE-11 二期）：选中行逐条入集（list 级门禁由入口控制）。
+async function onBatchCommand(cmd: string) {
+  if (cmd !== 'batch-delete' || !selectedRows.value.length) return
   try {
-    const res = await deleteConfig(props.device, configPath.value, key)
-    // 归属硬锁（FE-18 二期）：信封 409 → 阻断确认 → 确认后携 force 重发，取消中止。
-    const rej = ownershipRejectionOf(res)
-    if (rej) {
-      if (!(await confirmOwnershipOverride(rej))) return
-      const forced = await deleteConfig(props.device, configPath.value, key, true)
-      // 信封恒 200：force 重发失败按 success 判定，如实透出（§9）。
-      if ((forced.data as any)?.success === false) {
-        error.value = (forced.data as any)?.message || t('console.forceDeleteFailed')
-        return
-      }
-    }
-    ElMessage.success(t('console.deletedReconcile'))
-    error.value = ''
-    // 删除的是当前详情条目 → 收起详情（不悬挂已删数据）。
-    if (selectedRow.value?.[keyField.value] === key) closeDetail()
-    await load()
-  } catch (e: any) {
-    // 设备/门禁错误如实展示，列表保持原状（R08/§9）。
-    error.value = e?.response?.data?.message || e?.message || t('console.deleteFailed')
+    await ElMessageBox.confirm(
+      t('console.batchDeleteConfirm', { n: selectedRows.value.length }),
+      t('common.confirmDelete'),
+      { type: 'warning', confirmButtonText: t('common.delete'), cancelButtonText: t('common.cancel') },
+    )
+  } catch {
+    return
   }
+  for (const row of selectedRows.value) {
+    const key = String(row[keyField.value])
+    changeset.markDelete(props.device, {
+      path: entryPath.value,
+      listKey: postKey.value || leafName(listField.value),
+      keyValue: key,
+      label: `${props.tab.label} ${key}`,
+    })
+    if (String(selectedRow.value?.[keyField.value] ?? '') === key) closeDetail()
+  }
+  ElMessage.success(t('console.batchMarkedDelete', { n: selectedRows.value.length }))
 }
 </script>
 

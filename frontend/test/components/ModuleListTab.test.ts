@@ -1,10 +1,11 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { mount, flushPromises } from '@vue/test-utils'
-import { createPinia } from 'pinia'
+import { createPinia, setActivePinia, type Pinia } from 'pinia'
 import ElementPlus, { ElMessageBox } from 'element-plus'
 import ModuleListTab from '../../src/components/config/ModuleListTab.vue'
 import ItemDetailPane from '../../src/components/config/ItemDetailPane.vue'
 import { getConfig, deleteConfig, setConfig, getDeviceReconcile } from '../../src/api'
+import { useChangesetStore } from '../../src/stores/changeset'
 import { deriveTabs } from '../../src/utils/moduleConsole'
 import { ifmNestedSchema, seedRows } from '../views/moduleConsole.fixture'
 
@@ -12,14 +13,18 @@ vi.mock('../../src/api')
 
 const interfacesTab = deriveTabs(ifmNestedSchema.fields).find((t) => t.name === 'interfaces')!
 
+let pinia: Pinia
+
 function mountTab() {
   return mount(ModuleListTab, {
     props: { tab: interfacesTab, rootName: 'ifm', device: '10.0.0.1' },
-    global: { plugins: [createPinia(), ElementPlus] },
+    global: { plugins: [pinia, ElementPlus] },
   })
 }
 
 beforeEach(() => {
+  pinia = createPinia()
+  setActivePinia(pinia)
   vi.resetAllMocks()
   vi.mocked(getConfig).mockResolvedValue({ data: { data: { data: { interface: seedRows } } } } as any)
   vi.mocked(setConfig).mockResolvedValue({ data: { data: { reconciliation: { triggered: true } } } } as any)
@@ -303,29 +308,48 @@ describe('ModuleListTab · 只读列表 Tab（FE-14）', () => {
   })
 })
 
-describe('ModuleListTab · 行删除（FE-16）', () => {
-  it('门禁允许时删除按钮可用；确认后以行主键调 DELETE 并刷新', async () => {
+describe('ModuleListTab · 行删除入变更集（FE-16 攒批）', () => {
+  it('确认后零请求：入变更集删除项、行现待删除标记、按钮变取消删除', async () => {
     const w = mountTab()
     await flushPromises()
+    const confirmSpy = vi.spyOn(ElMessageBox, 'confirm').mockResolvedValue('confirm' as any)
 
     const delBtn = w.findAll('.el-table__body .el-button').find((b) => b.text() === '删除')!
-    expect(delBtn.attributes('disabled')).toBeUndefined()
-    expect(delBtn.attributes('aria-disabled')).not.toBe('true')
-
-    const confirmSpy = vi.spyOn(ElMessageBox, 'confirm').mockResolvedValue('confirm' as any)
-    vi.mocked(deleteConfig).mockResolvedValue({ data: { code: 0, success: true, data: {} } } as any)
-    const loadsBefore = vi.mocked(getConfig).mock.calls.length
-
     await delBtn.trigger('click')
     await flushPromises()
 
-    expect(confirmSpy).toHaveBeenCalled()
-    expect(vi.mocked(deleteConfig)).toHaveBeenCalledTimes(1)
-    const [ip, path, key] = vi.mocked(deleteConfig).mock.calls[0]
-    expect(ip).toBe('10.0.0.1')
-    expect(path).toContain('ifm:interfaces')
-    expect(key).toBe('200GE0/1/0')
-    expect(vi.mocked(getConfig).mock.calls.length).toBeGreaterThan(loadsBefore)
+    expect(vi.mocked(deleteConfig)).not.toHaveBeenCalled()
+    const cs = useChangesetStore()
+    expect(cs.isPendingDelete('10.0.0.1', '/ifm:ifm/ifm:interfaces', '200GE0/1/0')).toBe(true)
+    expect(w.find('[data-test="mark-delete"]').exists()).toBe(true)
+    expect(w.find('[data-test="undelete-btn"]').exists()).toBe(true)
+    confirmSpy.mockRestore()
+  })
+
+  it('取消删除：删除项移除、标记还原（FE-16）', async () => {
+    const w = mountTab()
+    await flushPromises()
+    const confirmSpy = vi.spyOn(ElMessageBox, 'confirm').mockResolvedValue('confirm' as any)
+    await w.findAll('.el-table__body .el-button').find((b) => b.text() === '删除')!.trigger('click')
+    await flushPromises()
+
+    await w.find('[data-test="undelete-btn"]').trigger('click')
+    await flushPromises()
+    expect(useChangesetStore().countFor('10.0.0.1')).toBe(0)
+    expect(w.find('[data-test="mark-delete"]').exists()).toBe(false)
+    confirmSpy.mockRestore()
+  })
+
+  it('取消确认：变更集零改动', async () => {
+    const w = mountTab()
+    await flushPromises()
+    const confirmSpy = vi.spyOn(ElMessageBox, 'confirm').mockRejectedValue('cancel')
+
+    const delBtn = w.findAll('.el-table__body .el-button').find((b) => b.text() === '删除')!
+    await delBtn.trigger('click')
+    await flushPromises()
+
+    expect(useChangesetStore().countFor('10.0.0.1')).toBe(0)
     confirmSpy.mockRestore()
   })
 
@@ -340,101 +364,66 @@ describe('ModuleListTab · 行删除（FE-16）', () => {
     confirmSpy.mockRestore()
   })
 
-  it('取消确认：零请求', async () => {
+  it('删除待创建条目 = 直接移除且不产生删除项（FE-16 边界）', async () => {
     const w = mountTab()
     await flushPromises()
-    const confirmSpy = vi.spyOn(ElMessageBox, 'confirm').mockRejectedValue('cancel')
-
-    const delBtn = w.findAll('.el-table__body .el-button').find((b) => b.text() === '删除')!
-    await delBtn.trigger('click')
-    await flushPromises()
-
-    expect(vi.mocked(deleteConfig)).not.toHaveBeenCalled()
-    confirmSpy.mockRestore()
-  })
-
-  it('删除失败：错误如实可见、列表不变（R08/§9）', async () => {
-    const w = mountTab()
-    await flushPromises()
-    const confirmSpy = vi.spyOn(ElMessageBox, 'confirm').mockResolvedValue('confirm' as any)
-    vi.mocked(deleteConfig).mockRejectedValue({
-      response: { data: { message: '设备删除失败: data-missing' } },
+    const cs = useChangesetStore()
+    cs.upsert('10.0.0.1', {
+      op: 'create',
+      path: '/ifm:ifm/ifm:interfaces',
+      listKey: 'interface',
+      keyValue: 'GE-NEW',
+      payload: { name: 'GE-NEW', class: 'main-interface' },
+      cleared: [],
+      baseline: null,
+      label: 'interface GE-NEW',
     })
-
-    const delBtn = w.findAll('.el-table__body .el-button').find((b) => b.text() === '删除')!
-    await delBtn.trigger('click')
     await flushPromises()
+    // 合成视图：待创建行出现且带标记
+    expect(w.text()).toContain('GE-NEW')
+    expect(w.find('[data-test="mark-create"]').exists()).toBe(true)
 
-    expect(w.text()).toContain('data-missing')
-    expect(w.findAll('.el-table__body tr')).toHaveLength(5)
-    confirmSpy.mockRestore()
-  })
-})
-
-// FE-18 二期（F2）：行删除命中归属硬锁 409 → 阻断确认 → force 重发 / 取消中止。
-describe('ModuleListTab · 行删除归属硬锁 409', () => {
-  const rejected409 = {
-    data: { code: 409, success: false, message: '条目由业务意图管理', data: { intents: ['default/biz-100'] } },
-  } as any
-
-  it('409 → 确认覆盖 → 携 force 重发 DELETE', async () => {
-    const w = mountTab()
-    await flushPromises()
-    const delBtn = w.findAll('.el-table__body .el-button').find((b) => b.text() === '删除')!
     const confirmSpy = vi.spyOn(ElMessageBox, 'confirm').mockResolvedValue('confirm' as any)
-    vi.mocked(deleteConfig)
-      .mockResolvedValueOnce(rejected409)
-      .mockResolvedValueOnce({ data: { code: 0, success: true, data: {} } } as any)
-
-    await delBtn.trigger('click')
+    const rowBtns = w.findAll('.el-table__body .el-button').filter((b) => b.text() === '删除')
+    await rowBtns[rowBtns.length - 1].trigger('click') // 待创建行在合成视图末尾
     await flushPromises()
 
-    expect(vi.mocked(deleteConfig)).toHaveBeenCalledTimes(2)
-    expect(vi.mocked(deleteConfig).mock.calls[1][3]).toBe(true)
-    const ownershipCall = confirmSpy.mock.calls.find((c) => String(c[0]).includes('default/biz-100'))
-    expect(ownershipCall).toBeTruthy()
-    expect(w.text()).not.toContain('条目由业务意图管理')
+    expect(cs.countFor('10.0.0.1')).toBe(0)
+    expect(w.text()).not.toContain('GE-NEW')
     confirmSpy.mockRestore()
   })
 
-  it('409 → 取消覆盖 → 不重发、不置错误态', async () => {
+  it('批量删除：多选 → 更多▾ → 确认 → 逐条入集（FE-11 二期）', async () => {
     const w = mountTab()
     await flushPromises()
-    const delBtn = w.findAll('.el-table__body .el-button').find((b) => b.text() === '删除')!
-    const confirmSpy = vi
-      .spyOn(ElMessageBox, 'confirm')
-      .mockResolvedValueOnce('confirm' as any)
-      .mockRejectedValueOnce('cancel')
-    vi.mocked(deleteConfig).mockResolvedValue(rejected409)
-
-    await delBtn.trigger('click')
-    await flushPromises()
-
-    expect(vi.mocked(deleteConfig)).toHaveBeenCalledTimes(1)
-    expect(w.find('.el-alert').exists()).toBe(false)
-    confirmSpy.mockRestore()
-  })
-})
-
-// force 重发失败（信封 success=false）→ 错误如实展示，不误报「已删除」（§9）。
-describe('ModuleListTab · force 重发失败如实透出', () => {
-  it('409 → 确认 → force DELETE 返回失败信封 → 展示错误', async () => {
-    const w = mountTab()
-    await flushPromises()
-    const delBtn = w.findAll('.el-table__body .el-button').find((b) => b.text() === '删除')!
+    const vm = w.vm as any
+    // 直接驱动 selection 状态（checkbox 交互属 F3 真浏览器域）
+    vm.onSelectionChange([{ ...seedRows[0] }, { ...seedRows[1] }])
     const confirmSpy = vi.spyOn(ElMessageBox, 'confirm').mockResolvedValue('confirm' as any)
-    vi.mocked(deleteConfig)
-      .mockResolvedValueOnce({
-        data: { code: 409, success: false, message: '条目由业务意图管理', data: { intents: ['default/biz-100'] } },
-      } as any)
-      .mockResolvedValueOnce({ data: { code: 502, success: false, message: '设备删除失败: data-missing' } } as any)
-
-    await delBtn.trigger('click')
+    await vm.onBatchCommand('batch-delete')
     await flushPromises()
 
-    expect(vi.mocked(deleteConfig)).toHaveBeenCalledTimes(2)
-    expect(w.text()).toContain('设备删除失败')
-    expect(w.text()).not.toContain('已删除并触发对账')
+    const cs = useChangesetStore()
+    expect(cs.countFor('10.0.0.1')).toBe(2)
+    expect(cs.isPendingDelete('10.0.0.1', '/ifm:ifm/ifm:interfaces', '200GE0/1/0')).toBe(true)
+    expect(cs.isPendingDelete('10.0.0.1', '/ifm:ifm/ifm:interfaces', '200GE0/1/1')).toBe(true)
     confirmSpy.mockRestore()
+  })
+
+  it('修改标记：变更集含该行 update 条目 → 已修改标记（合成视图）', async () => {
+    const w = mountTab()
+    await flushPromises()
+    useChangesetStore().upsert('10.0.0.1', {
+      op: 'update',
+      path: '/ifm:ifm/ifm:interfaces',
+      listKey: 'interface',
+      keyValue: '200GE0/1/0',
+      payload: { name: '200GE0/1/0', description: 'x' },
+      cleared: [],
+      baseline: { ...seedRows[0] },
+      label: 'interface 200GE0/1/0',
+    })
+    await flushPromises()
+    expect(w.find('[data-test="mark-update"]').exists()).toBe(true)
   })
 })
