@@ -61,6 +61,10 @@ func (s *Server) setupRoutes() {
 		configGroup := v1.Group("/config")
 		{
 			configHandler := NewConfigHandler(s.manager)
+			// 攒批变更集（config-changeset）：静态段 "changeset" 与 ":ip" 参数段
+			// 在 gin 1.10 共存（静态优先），先注册以示意优先级。
+			changesetHandler := NewChangesetHandler(s.manager)
+			configGroup.POST("/changeset/preview", changesetHandler.Preview)
 			configGroup.GET("/:ip/*path", configHandler.GetConfig)
 			configGroup.POST("/:ip/*path", configHandler.SetConfig)
 			configGroup.DELETE("/:ip/*path", configHandler.DeleteConfig)
