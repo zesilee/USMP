@@ -76,6 +76,56 @@ export const deleteConfig = (ip: string, path: string, key: string | number, for
   })
 }
 
+// 攒批变更集 API（config-changeset，FE-23）——请求体由 changeset store
+// toRequest() 序列化（op/path/payload/key/cleared）。
+export interface ChangesetPreviewEntryDTO {
+  op: string
+  path: string
+  baseline_source: 'desired' | 'cache' | 'device' | 'none'
+  forward_xml?: string
+  rollback_xml?: string
+  unsupported?: boolean
+  unsupported_reason?: string
+  diff: Array<{ type: 'ADD' | 'DELETE' | 'MODIFY'; path: string; old?: unknown; new?: unknown }>
+}
+
+export interface ChangesetPreviewDataDTO {
+  device: string
+  entries: ChangesetPreviewEntryDTO[]
+  summary: { adds: number; deletes: number; modifies: number; total: number }
+}
+
+export interface ChangesetCommitDataDTO {
+  status: string
+  device: string
+  entries: number
+  non_transactional?: boolean
+  reconciliation: { triggered: boolean; message: string }
+}
+
+export interface ChangesetRequestDTO {
+  device: string
+  entries: Array<{
+    op: string
+    path: string
+    payload?: Record<string, unknown>
+    key?: string
+    cleared?: string[]
+  }>
+}
+
+// 试运行预览（CS-01）：纯计算不下发，返回正向/回滚报文与 diff 树。
+export const previewChangeset = (req: ChangesetRequestDTO) => {
+  return api.post<ApiResponse<ChangesetPreviewDataDTO>>('/config/changeset/preview', req)
+}
+
+// 批量原子提交（CS-04）：整体生效或整体回退；force 覆盖归属硬锁（审计留痕）。
+export const commitChangeset = (req: ChangesetRequestDTO, force = false) => {
+  return api.post<ApiResponse<ChangesetCommitDataDTO>>('/config/changeset/commit', req, {
+    params: force ? { force: true } : undefined,
+  })
+}
+
 // Schema API - 获取 YANG 模型定义
 export const getSchema = (path: string) => {
   return api.get<ApiResponse<any>>(`/schema/${path}`)
