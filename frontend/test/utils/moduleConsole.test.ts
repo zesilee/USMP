@@ -3,7 +3,9 @@ import type { Field } from '../../src/utils/crdSchemaParser'
 import {
   deriveTabs,
   deriveRpcTabs,
+  deriveDetailTabs,
   deriveColumns,
+  deriveAllColumns,
   deriveKeyField,
   filterableFields,
   filterRows,
@@ -239,6 +241,111 @@ describe('deriveTabs · readonly 子树降级只读 Tab（FE-14）', () => {
     const rwLeaf: Field = { path: '/ifm/name', type: 'string', label: 'name' }
     expect(deriveTabs([roLeaf])[0].readonly).toBe(true)
     expect(deriveTabs([roLeaf, rwLeaf])[0].readonly).toBeFalsy()
+  })
+})
+
+describe('deriveDetailTabs · 详情二级 Tab 派生（FE-21）', () => {
+  const dleaf = (name: string, extra: Partial<Field> = {}): Field => ({
+    path: `/ifm/interfaces/interface/${name}`,
+    type: 'string',
+    label: name,
+    ...extra,
+  })
+  const dampGroup: Field = {
+    path: '/ifm/interfaces/interface/damp',
+    type: 'group',
+    label: 'damp',
+    fields: [dleaf('suppress', { type: 'number' })],
+  }
+  // group 包裹单 list（常见形态）→ 子表格 Tab
+  const wrappedList: Field = {
+    path: '/ifm/interfaces/interface/sub-ifs',
+    type: 'group',
+    label: 'sub-ifs',
+    fields: [
+      {
+        path: '/ifm/interfaces/interface/sub-ifs/sub-if',
+        type: 'list',
+        label: 'sub-if',
+        fields: [dleaf('id', { isKey: true })],
+      },
+    ],
+  }
+  const bareList: Field = {
+    path: '/ifm/interfaces/interface/addrs',
+    type: 'list',
+    label: 'addrs',
+    fields: [dleaf('ip', { isKey: true })],
+  }
+  const detailList: Field = {
+    path: '/ifm/interfaces/interface',
+    type: 'list',
+    label: 'interface',
+    fields: [
+      dleaf('name', { isKey: true }),
+      dleaf('mtu', { type: 'number' }),
+      dleaf('groups', { type: 'leaf-list' }),
+      dampGroup,
+      wrappedList,
+      bareList,
+    ],
+  }
+
+  it('标量/leaf-list 叶 → 首个主表单 Tab（label=list 标签）', () => {
+    const tabs = deriveDetailTabs(detailList)
+    expect(tabs[0].name).toBe('__main__')
+    expect(tabs[0].kind).toBe('form')
+    expect(tabs[0].label).toBe('interface')
+    expect(tabs[0].field.fields?.map((f) => f.label)).toEqual(['name', 'mtu', 'groups'])
+  })
+
+  it('嵌套 group → 子表单 Tab；裸嵌套 list 与 group 包裹单 list → 子表格 Tab（schema 序）', () => {
+    const tabs = deriveDetailTabs(detailList)
+    expect(tabs.map((t) => t.name)).toEqual(['__main__', 'damp', 'sub-ifs', 'addrs'])
+    const byName = Object.fromEntries(tabs.map((t) => [t.name, t]))
+    expect(byName['damp'].kind).toBe('form')
+    expect(byName['sub-ifs'].kind).toBe('list')
+    expect(byName['sub-ifs'].listField?.path).toBe('/ifm/interfaces/interface/sub-ifs/sub-if')
+    expect(byName['addrs'].kind).toBe('list')
+    expect(byName['addrs'].listField?.path).toBe(bareList.path)
+  })
+
+  it('无嵌套子节点 → 仅单主 Tab（FE-21 退化边界）', () => {
+    const flat: Field = { ...detailList, fields: [dleaf('name', { isKey: true }), dleaf('mtu')] }
+    const tabs = deriveDetailTabs(flat)
+    expect(tabs).toHaveLength(1)
+    expect(tabs[0].name).toBe('__main__')
+  })
+
+  it('readonly 嵌套子树 → 只读子 Tab；主 Tab 跟随 list 自身 readonly', () => {
+    const roGroup: Field = { ...dampGroup, readonly: true }
+    const tabs = deriveDetailTabs({ ...detailList, fields: [dleaf('name'), roGroup] })
+    const byName = Object.fromEntries(tabs.map((t) => [t.name, t]))
+    expect(byName['damp'].readonly).toBe(true)
+    expect(byName['__main__'].readonly).toBeFalsy()
+    const roTabs = deriveDetailTabs({ ...detailList, readonly: true, fields: [dleaf('name', { readonly: true })] })
+    expect(roTabs[0].readonly).toBe(true)
+  })
+
+  it('空/undefined fields → 单主 Tab 空表单（降级不崩，R08）', () => {
+    expect(deriveDetailTabs({ ...detailList, fields: [] })).toHaveLength(1)
+    expect(deriveDetailTabs({ ...detailList, fields: undefined })).toHaveLength(1)
+  })
+})
+
+describe('deriveAllColumns · 可用列全集（FE-11 列设置）', () => {
+  it('全集含全部标量叶（group/list 子节点不入列），层序与默认集一致', () => {
+    const all = deriveAllColumns(interfaceList).map((c) => c.label)
+    expect(all).toHaveLength(11)
+    expect(all).toContain('mtu')
+    expect(all).toContain('vrf-name')
+    expect(all).not.toContain('damp')
+  })
+
+  it('默认集 = 全集前缀（默认 9 列语义不变）', () => {
+    const all = deriveAllColumns(interfaceList)
+    const defaults = deriveColumns(interfaceList, 9)
+    expect(defaults.map((c) => c.path)).toEqual(all.slice(0, 9).map((c) => c.path))
   })
 })
 

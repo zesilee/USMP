@@ -23,7 +23,51 @@
           "widget": "number"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "group-id",
+          "widget": "number"
+        },
+        {
+          "name": "priority",
+          "widget": "number"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        },
+        {
+          "name": "authentication",
+          "kind": "form"
+        },
+        {
+          "name": "consistency-check",
+          "kind": "form"
+        },
+        {
+          "name": "dad-error-down",
+          "kind": "form"
+        },
+        {
+          "name": "lacp-switch-delay",
+          "kind": "form"
+        },
+        {
+          "name": "mac-address-remain",
+          "kind": "form"
+        },
+        {
+          "name": "sessions",
+          "kind": "list"
+        },
+        {
+          "name": "up-delay",
+          "kind": "form"
+        }
+      ]
     },
     "negotiation-states": {
       "keyField": "dfs-role",
@@ -37,7 +81,27 @@
           "widget": "enum"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "dfs-role",
+          "widget": "enum"
+        },
+        {
+          "name": "heart-beat-state",
+          "widget": "enum"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        },
+        {
+          "name": "dfs-group-states",
+          "kind": "form"
+        }
+      ]
     }
   },
   "tree": [

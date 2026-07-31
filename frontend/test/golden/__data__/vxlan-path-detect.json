@@ -35,7 +35,23 @@
           "widget": "string"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "dst-ip",
+          "widget": "string"
+        },
+        {
+          "name": "src-ip",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "ipv6-ping-detects": {
       "keyField": "dst-ipv6",
@@ -49,7 +65,23 @@
           "widget": "string"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "dst-ipv6",
+          "widget": "string"
+        },
+        {
+          "name": "src-ipv6",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "mac-ping-detects": {
       "keyField": "dst-ip",
@@ -71,7 +103,31 @@
           "widget": "string"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "dst-ip",
+          "widget": "string"
+        },
+        {
+          "name": "src-ip",
+          "widget": "string"
+        },
+        {
+          "name": "dst-mac",
+          "widget": "string"
+        },
+        {
+          "name": "src-mac",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     }
   },
   "tree": [

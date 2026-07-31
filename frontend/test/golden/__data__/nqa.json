@@ -43,7 +43,23 @@
           "widget": "string"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "group-name",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        },
+        {
+          "name": "group-members",
+          "kind": "list"
+        }
+      ]
     },
     "instances": {
       "keyField": "admin-name",
@@ -57,7 +73,27 @@
           "widget": "string"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "admin-name",
+          "widget": "string"
+        },
+        {
+          "name": "test-name",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        },
+        {
+          "name": "execution-policy",
+          "kind": "form"
+        }
+      ]
     },
     "reflectors": {
       "keyField": "reflector-id",
@@ -99,7 +135,67 @@
           "widget": "string"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "reflector-id",
+          "widget": "number"
+        },
+        {
+          "name": "reflector-type",
+          "widget": "enum"
+        },
+        {
+          "name": "ce-vlan",
+          "widget": "number"
+        },
+        {
+          "name": "dest-port",
+          "widget": "number"
+        },
+        {
+          "name": "end-time",
+          "widget": "string"
+        },
+        {
+          "name": "exchange-port",
+          "widget": "boolean"
+        },
+        {
+          "name": "if-name",
+          "widget": "string"
+        },
+        {
+          "name": "pe-vlan",
+          "widget": "number"
+        },
+        {
+          "name": "recommended-test-mac",
+          "widget": "string"
+        },
+        {
+          "name": "share-mode",
+          "widget": "boolean"
+        },
+        {
+          "name": "source-port",
+          "widget": "number"
+        },
+        {
+          "name": "survival-time",
+          "widget": "number"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        },
+        {
+          "name": "reflect-flow-ids",
+          "kind": "list"
+        }
+      ]
     },
     "testflows": {
       "keyField": "testflow-id",
@@ -141,7 +237,139 @@
           "widget": "number"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "testflow-id",
+          "widget": "number"
+        },
+        {
+          "name": "increment-type",
+          "widget": "enum"
+        },
+        {
+          "name": "begin-dest-ip",
+          "widget": "string"
+        },
+        {
+          "name": "begin-dest-mac",
+          "widget": "string"
+        },
+        {
+          "name": "begin-source-ip",
+          "widget": "string"
+        },
+        {
+          "name": "begin-source-mac",
+          "widget": "string"
+        },
+        {
+          "name": "begin-udp-dest-port",
+          "widget": "number"
+        },
+        {
+          "name": "begin-udp-source-port",
+          "widget": "number"
+        },
+        {
+          "name": "ce-vid",
+          "widget": "number"
+        },
+        {
+          "name": "cir",
+          "widget": "number"
+        },
+        {
+          "name": "cir-simple-test",
+          "widget": "boolean"
+        },
+        {
+          "name": "count",
+          "widget": "number"
+        },
+        {
+          "name": "description",
+          "widget": "string"
+        },
+        {
+          "name": "eir",
+          "widget": "number"
+        },
+        {
+          "name": "end-ce-vid",
+          "widget": "number"
+        },
+        {
+          "name": "end-dest-ip",
+          "widget": "string"
+        },
+        {
+          "name": "end-dest-mac",
+          "widget": "string"
+        },
+        {
+          "name": "end-source-ip",
+          "widget": "string"
+        },
+        {
+          "name": "end-source-mac",
+          "widget": "string"
+        },
+        {
+          "name": "end-udp-dest-port",
+          "widget": "number"
+        },
+        {
+          "name": "end-udp-source-port",
+          "widget": "number"
+        },
+        {
+          "name": "fdv",
+          "widget": "number"
+        },
+        {
+          "name": "flr",
+          "widget": "number"
+        },
+        {
+          "name": "ftd",
+          "widget": "number"
+        },
+        {
+          "name": "ip-mask",
+          "widget": "string"
+        },
+        {
+          "name": "is-color-aware",
+          "widget": "boolean"
+        },
+        {
+          "name": "mac-mask",
+          "widget": "string"
+        },
+        {
+          "name": "pe-vid",
+          "widget": "number"
+        },
+        {
+          "name": "step",
+          "widget": "number"
+        },
+        {
+          "name": "traffic-policing",
+          "widget": "boolean"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        },
+        {
+          "name": "color-mode",
+          "kind": "form"
+        }
+      ]
     }
   },
   "tree": [

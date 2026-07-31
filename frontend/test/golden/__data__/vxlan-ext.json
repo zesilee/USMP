@@ -35,7 +35,27 @@
           "widget": "number"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "if-name",
+          "widget": "string"
+        },
+        {
+          "name": "vni-begin",
+          "widget": "number"
+        },
+        {
+          "name": "vni-end",
+          "widget": "number"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     }
   },
   "tree": [

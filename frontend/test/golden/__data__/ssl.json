@@ -19,7 +19,19 @@
           "widget": "string"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "cipher-suite-name",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "ssl-policys": {
       "keyField": "policy-name",
@@ -61,6 +73,56 @@
           "widget": "enum"
         }
       ],
+      "allColumns": [
+        {
+          "name": "policy-name",
+          "widget": "string"
+        },
+        {
+          "name": "basic-const-enable",
+          "widget": "enum"
+        },
+        {
+          "name": "cert-ver3-enable",
+          "widget": "enum"
+        },
+        {
+          "name": "crl-ver2-enable",
+          "widget": "enum"
+        },
+        {
+          "name": "exclude-ciphermode-cbc",
+          "widget": "enum"
+        },
+        {
+          "name": "exclude-hmac-sha1",
+          "widget": "enum"
+        },
+        {
+          "name": "exclude-rsa-kex",
+          "widget": "enum"
+        },
+        {
+          "name": "key-usage-enable",
+          "widget": "enum"
+        },
+        {
+          "name": "mini-version",
+          "widget": "enum"
+        },
+        {
+          "name": "cipher-suite-name",
+          "widget": "string"
+        },
+        {
+          "name": "mini-path-len",
+          "widget": "number"
+        },
+        {
+          "name": "pki-realm",
+          "widget": "string"
+        }
+      ],
       "filterable": [
         "basic-const-enable",
         "cert-ver3-enable",
@@ -68,6 +130,28 @@
         "key-usage-enable",
         "mini-path-len",
         "mini-version"
+      ],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        },
+        {
+          "name": "cert-loads",
+          "kind": "list"
+        },
+        {
+          "name": "certificate-files",
+          "kind": "list"
+        },
+        {
+          "name": "crl-loads",
+          "kind": "list"
+        },
+        {
+          "name": "trust-ca-loads",
+          "kind": "list"
+        }
       ]
     }
   },

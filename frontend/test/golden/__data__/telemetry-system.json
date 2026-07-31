@@ -23,7 +23,31 @@
           "widget": "string"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "group-id",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        },
+        {
+          "name": "config",
+          "kind": "form"
+        },
+        {
+          "name": "destinations",
+          "kind": "list"
+        },
+        {
+          "name": "state",
+          "kind": "form"
+        }
+      ]
     },
     "sensor-groups": {
       "keyField": "sensor-group-id",
@@ -33,7 +57,31 @@
           "widget": "string"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "sensor-group-id",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        },
+        {
+          "name": "config",
+          "kind": "form"
+        },
+        {
+          "name": "sensor-paths",
+          "kind": "list"
+        },
+        {
+          "name": "state",
+          "kind": "form"
+        }
+      ]
     }
   },
   "tree": [

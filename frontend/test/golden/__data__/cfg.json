@@ -131,7 +131,47 @@
           "widget": "string"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "index",
+          "widget": "number"
+        },
+        {
+          "name": "operation-type",
+          "widget": "enum"
+        },
+        {
+          "name": "service-type",
+          "widget": "enum"
+        },
+        {
+          "name": "state",
+          "widget": "enum"
+        },
+        {
+          "name": "filename",
+          "widget": "string"
+        },
+        {
+          "name": "last-time",
+          "widget": "number"
+        },
+        {
+          "name": "operate-progress",
+          "widget": "number"
+        },
+        {
+          "name": "start-time",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "backup-servers": {
       "keyField": "server-ip",
@@ -165,7 +205,43 @@
           "widget": "string"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "server-ip",
+          "widget": "string"
+        },
+        {
+          "name": "vpn-instance",
+          "widget": "string"
+        },
+        {
+          "name": "password",
+          "widget": "string"
+        },
+        {
+          "name": "port",
+          "widget": "number"
+        },
+        {
+          "name": "username",
+          "widget": "string"
+        },
+        {
+          "name": "transport-type",
+          "widget": "enum"
+        },
+        {
+          "name": "path",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "cfg-files": {
       "keyField": "filename",
@@ -183,7 +259,31 @@
           "widget": "number"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "filename",
+          "widget": "string"
+        },
+        {
+          "name": "create-time",
+          "widget": "string"
+        },
+        {
+          "name": "size",
+          "widget": "number"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        },
+        {
+          "name": "file-current-changes",
+          "kind": "list"
+        }
+      ]
     },
     "checkpoints": {
       "keyField": "commit-id",
@@ -217,7 +317,51 @@
           "widget": "string"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "commit-id",
+          "widget": "string"
+        },
+        {
+          "name": "client",
+          "widget": "enum"
+        },
+        {
+          "name": "description",
+          "widget": "string"
+        },
+        {
+          "name": "line",
+          "widget": "string"
+        },
+        {
+          "name": "timestamp",
+          "widget": "string"
+        },
+        {
+          "name": "user-label",
+          "widget": "string"
+        },
+        {
+          "name": "username",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        },
+        {
+          "name": "current-point-changes",
+          "kind": "list"
+        },
+        {
+          "name": "since-point-changes",
+          "kind": "list"
+        }
+      ]
     },
     "clear-interface-results": {
       "keyField": "interface-name",
@@ -231,7 +375,23 @@
           "widget": "string"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "interface-name",
+          "widget": "string"
+        },
+        {
+          "name": "result",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "config-auto-backup-files": {
       "keyField": "auto-backup-time",
@@ -241,7 +401,19 @@
           "widget": "string"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "auto-backup-time",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "config-recover-results": {
       "keyField": "index",
@@ -271,7 +443,39 @@
           "widget": "string"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "index",
+          "widget": "number"
+        },
+        {
+          "name": "reason",
+          "widget": "enum"
+        },
+        {
+          "name": "command",
+          "widget": "string"
+        },
+        {
+          "name": "line",
+          "widget": "number"
+        },
+        {
+          "name": "time",
+          "widget": "string"
+        },
+        {
+          "name": "view",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "config-sessions": {
       "keyField": "sessionid",
@@ -301,7 +505,39 @@
           "widget": "string"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "sessionid",
+          "widget": "number"
+        },
+        {
+          "name": "client",
+          "widget": "enum"
+        },
+        {
+          "name": "create-time",
+          "widget": "string"
+        },
+        {
+          "name": "line",
+          "widget": "string"
+        },
+        {
+          "name": "lock-reason",
+          "widget": "string"
+        },
+        {
+          "name": "username",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "lock-by-users": {
       "keyField": "lock-username",
@@ -327,7 +563,35 @@
           "widget": "string"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "lock-username",
+          "widget": "string"
+        },
+        {
+          "name": "identifier",
+          "widget": "number"
+        },
+        {
+          "name": "lock-time",
+          "widget": "string"
+        },
+        {
+          "name": "unlock-time",
+          "widget": "string"
+        },
+        {
+          "name": "unlock-username",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "startup-infos": {
       "keyField": "position",
@@ -365,7 +629,47 @@
           "widget": "string"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "position",
+          "widget": "string"
+        },
+        {
+          "name": "configed-system-software",
+          "widget": "string"
+        },
+        {
+          "name": "current-cfg-file",
+          "widget": "string"
+        },
+        {
+          "name": "current-patch-file",
+          "widget": "string"
+        },
+        {
+          "name": "current-system-software",
+          "widget": "string"
+        },
+        {
+          "name": "next-cfg-file",
+          "widget": "string"
+        },
+        {
+          "name": "next-patch-file",
+          "widget": "string"
+        },
+        {
+          "name": "next-system-software",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     }
   },
   "tree": [

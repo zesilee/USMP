@@ -19,7 +19,19 @@
           "widget": "enum"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "addr-family",
+          "widget": "enum"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "unicasts": {
       "keyField": "ip-address",
@@ -61,7 +73,63 @@
           "widget": "number"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "ip-address",
+          "widget": "string"
+        },
+        {
+          "name": "type",
+          "widget": "enum"
+        },
+        {
+          "name": "vpn-name",
+          "widget": "string"
+        },
+        {
+          "name": "is-burst",
+          "widget": "boolean"
+        },
+        {
+          "name": "is-iburst",
+          "widget": "boolean"
+        },
+        {
+          "name": "ifname",
+          "widget": "string"
+        },
+        {
+          "name": "is-preempt",
+          "widget": "boolean"
+        },
+        {
+          "name": "is-preferred",
+          "widget": "boolean"
+        },
+        {
+          "name": "max-poll-interval",
+          "widget": "number"
+        },
+        {
+          "name": "min-poll-interval",
+          "widget": "number"
+        },
+        {
+          "name": "port-number",
+          "widget": "number"
+        },
+        {
+          "name": "version",
+          "widget": "number"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     }
   },
   "tree": [

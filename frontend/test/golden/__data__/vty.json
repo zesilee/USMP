@@ -51,6 +51,80 @@
           "widget": "string"
         }
       ],
+      "allColumns": [
+        {
+          "name": "index",
+          "widget": "number"
+        },
+        {
+          "name": "auth-mode",
+          "widget": "enum"
+        },
+        {
+          "name": "proto-inbound",
+          "widget": "enum"
+        },
+        {
+          "name": "shell-enable",
+          "widget": "enum"
+        },
+        {
+          "name": "acl4-inbound",
+          "widget": "string"
+        },
+        {
+          "name": "acl4-inbound-num",
+          "widget": "string"
+        },
+        {
+          "name": "acl4-outbound",
+          "widget": "string"
+        },
+        {
+          "name": "acl4-outbound-num",
+          "widget": "string"
+        },
+        {
+          "name": "acl6-inbound",
+          "widget": "string"
+        },
+        {
+          "name": "acl6-inbound-num",
+          "widget": "string"
+        },
+        {
+          "name": "acl6-outbound",
+          "widget": "string"
+        },
+        {
+          "name": "acl6-outbound-num",
+          "widget": "string"
+        },
+        {
+          "name": "auth-password",
+          "widget": "string"
+        },
+        {
+          "name": "history-cmd-size",
+          "widget": "number"
+        },
+        {
+          "name": "idle-timeout-min",
+          "widget": "number"
+        },
+        {
+          "name": "idle-timeout-sec",
+          "widget": "number"
+        },
+        {
+          "name": "privilege-level",
+          "widget": "number"
+        },
+        {
+          "name": "screen-length",
+          "widget": "number"
+        }
+      ],
       "filterable": [
         "acl4-inbound",
         "acl4-inbound-num",
@@ -68,6 +142,12 @@
         "proto-inbound",
         "screen-length",
         "shell-enable"
+      ],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
       ]
     }
   },

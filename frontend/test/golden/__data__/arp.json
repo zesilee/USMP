@@ -91,7 +91,35 @@
           "widget": "enum"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "attack-time",
+          "widget": "string"
+        },
+        {
+          "name": "dest-ip-addr",
+          "widget": "string"
+        },
+        {
+          "name": "interface",
+          "widget": "string"
+        },
+        {
+          "name": "src-ip-addr",
+          "widget": "string"
+        },
+        {
+          "name": "supp-type",
+          "widget": "enum"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "bd-tracks": {
       "keyField": "ip-addr",
@@ -125,7 +153,43 @@
           "widget": "string"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "ip-addr",
+          "widget": "string"
+        },
+        {
+          "name": "new-ifname",
+          "widget": "string"
+        },
+        {
+          "name": "old-ifname",
+          "widget": "string"
+        },
+        {
+          "name": "op-code",
+          "widget": "enum"
+        },
+        {
+          "name": "sys-time",
+          "widget": "string"
+        },
+        {
+          "name": "bd-id",
+          "widget": "string"
+        },
+        {
+          "name": "mac-addr",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "cached-statistics": {
       "keyField": "evn-name",
@@ -155,7 +219,39 @@
           "widget": "string"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "evn-name",
+          "widget": "string"
+        },
+        {
+          "name": "ip-addr",
+          "widget": "string"
+        },
+        {
+          "name": "vlan-id",
+          "widget": "string"
+        },
+        {
+          "name": "aging-time",
+          "widget": "number"
+        },
+        {
+          "name": "if-name",
+          "widget": "string"
+        },
+        {
+          "name": "mac-addr",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "current-speed-limits": {
       "keyField": "ip-type",
@@ -177,7 +273,31 @@
           "widget": "number"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "ip-type",
+          "widget": "enum"
+        },
+        {
+          "name": "slot-id",
+          "widget": "string"
+        },
+        {
+          "name": "suppress-type",
+          "widget": "enum"
+        },
+        {
+          "name": "suppress-value",
+          "widget": "number"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "duplicate-items": {
       "keyField": "bridge-id",
@@ -219,7 +339,51 @@
           "widget": "number"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "bridge-id",
+          "widget": "number"
+        },
+        {
+          "name": "bridge-type",
+          "widget": "enum"
+        },
+        {
+          "name": "mac-addr",
+          "widget": "string"
+        },
+        {
+          "name": "aging-time",
+          "widget": "number"
+        },
+        {
+          "name": "if-name",
+          "widget": "string"
+        },
+        {
+          "name": "ip-addr",
+          "widget": "string"
+        },
+        {
+          "name": "peer-addr",
+          "widget": "string"
+        },
+        {
+          "name": "source-addr",
+          "widget": "string"
+        },
+        {
+          "name": "vni",
+          "widget": "number"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "entry-statistics": {
       "keyField": "slot-id",
@@ -249,7 +413,39 @@
           "widget": "number"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "slot-id",
+          "widget": "string"
+        },
+        {
+          "name": "dynamic-num",
+          "widget": "number"
+        },
+        {
+          "name": "exceed-flag",
+          "widget": "boolean"
+        },
+        {
+          "name": "redirect-num",
+          "widget": "number"
+        },
+        {
+          "name": "remote-num",
+          "widget": "number"
+        },
+        {
+          "name": "static-num",
+          "widget": "number"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "error-packets": {
       "keyField": "sequence",
@@ -275,7 +471,35 @@
           "widget": "string"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "sequence",
+          "widget": "number"
+        },
+        {
+          "name": "slot-id",
+          "widget": "string"
+        },
+        {
+          "name": "if-name",
+          "widget": "string"
+        },
+        {
+          "name": "receive-content",
+          "widget": "string"
+        },
+        {
+          "name": "receive-time",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "global-speed-limits": {
       "keyField": "ip-type",
@@ -297,7 +521,31 @@
           "widget": "number"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "ip-type",
+          "widget": "enum"
+        },
+        {
+          "name": "suppress-type",
+          "widget": "enum"
+        },
+        {
+          "name": "port-type",
+          "widget": "enum"
+        },
+        {
+          "name": "suppress-value",
+          "widget": "number"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "ip-conflicts": {
       "keyField": "conflict-count",
@@ -339,7 +587,79 @@
           "widget": "string"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "conflict-count",
+          "widget": "number"
+        },
+        {
+          "name": "conflict-type",
+          "widget": "enum"
+        },
+        {
+          "name": "ip-addr",
+          "widget": "string"
+        },
+        {
+          "name": "local-ifname",
+          "widget": "string"
+        },
+        {
+          "name": "sys-time",
+          "widget": "string"
+        },
+        {
+          "name": "header-dst-mac",
+          "widget": "string"
+        },
+        {
+          "name": "header-src-mac",
+          "widget": "string"
+        },
+        {
+          "name": "local-cevlan",
+          "widget": "number"
+        },
+        {
+          "name": "local-mac",
+          "widget": "string"
+        },
+        {
+          "name": "local-vlan",
+          "widget": "number"
+        },
+        {
+          "name": "receive-cevlan",
+          "widget": "number"
+        },
+        {
+          "name": "receive-ifname",
+          "widget": "string"
+        },
+        {
+          "name": "receive-mac",
+          "widget": "string"
+        },
+        {
+          "name": "receive-vlan",
+          "widget": "number"
+        },
+        {
+          "name": "slot-id",
+          "widget": "string"
+        },
+        {
+          "name": "suppress-count",
+          "widget": "number"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "openflow-tbls": {
       "keyField": "ip-addr",
@@ -361,7 +681,31 @@
           "widget": "string"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "ip-addr",
+          "widget": "string"
+        },
+        {
+          "name": "vni",
+          "widget": "number"
+        },
+        {
+          "name": "mac-addr",
+          "widget": "string"
+        },
+        {
+          "name": "vtep-ip",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "query-entries": {
       "keyField": "ip-addr",
@@ -403,7 +747,71 @@
           "widget": "string"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "ip-addr",
+          "widget": "string"
+        },
+        {
+          "name": "ni-name",
+          "widget": "string"
+        },
+        {
+          "name": "style-type",
+          "widget": "enum"
+        },
+        {
+          "name": "ce-vlan",
+          "widget": "number"
+        },
+        {
+          "name": "expire-time",
+          "widget": "number"
+        },
+        {
+          "name": "if-name",
+          "widget": "string"
+        },
+        {
+          "name": "mac-addr",
+          "widget": "string"
+        },
+        {
+          "name": "pe-vlan",
+          "widget": "number"
+        },
+        {
+          "name": "peer-addr",
+          "widget": "string"
+        },
+        {
+          "name": "pvc",
+          "widget": "number"
+        },
+        {
+          "name": "slot-id",
+          "widget": "string"
+        },
+        {
+          "name": "source-addr",
+          "widget": "string"
+        },
+        {
+          "name": "vni",
+          "widget": "number"
+        },
+        {
+          "name": "work-if-name",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "speed-limits": {
       "keyField": "ip-type",
@@ -425,7 +833,31 @@
           "widget": "number"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "ip-type",
+          "widget": "enum"
+        },
+        {
+          "name": "slot-id",
+          "widget": "string"
+        },
+        {
+          "name": "suppress-type",
+          "widget": "enum"
+        },
+        {
+          "name": "suppress-value",
+          "widget": "number"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "static-arps": {
       "keyField": "ip-addr",
@@ -451,7 +883,35 @@
           "widget": "number"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "ip-addr",
+          "widget": "string"
+        },
+        {
+          "name": "ni-name",
+          "widget": "string"
+        },
+        {
+          "name": "mac-addr",
+          "widget": "string"
+        },
+        {
+          "name": "vlan-id",
+          "widget": "number"
+        },
+        {
+          "name": "vxlan-id",
+          "widget": "number"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "statisticss": {
       "keyField": "slot-id",
@@ -493,7 +953,55 @@
           "widget": "number"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "slot-id",
+          "widget": "string"
+        },
+        {
+          "name": "learn-count",
+          "widget": "number"
+        },
+        {
+          "name": "miss-drop-limit",
+          "widget": "number"
+        },
+        {
+          "name": "miss-drop-other",
+          "widget": "number"
+        },
+        {
+          "name": "miss-received",
+          "widget": "number"
+        },
+        {
+          "name": "packets-drop-limit",
+          "widget": "number"
+        },
+        {
+          "name": "packets-drop-other",
+          "widget": "number"
+        },
+        {
+          "name": "packets-drop-speedlmt",
+          "widget": "number"
+        },
+        {
+          "name": "packets-proxy-supp",
+          "widget": "number"
+        },
+        {
+          "name": "packets-received",
+          "widget": "number"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "track-statistics": {
       "keyField": "ip-addr",
@@ -527,7 +1035,43 @@
           "widget": "string"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "ip-addr",
+          "widget": "string"
+        },
+        {
+          "name": "new-ifname",
+          "widget": "string"
+        },
+        {
+          "name": "old-ifname",
+          "widget": "string"
+        },
+        {
+          "name": "op-code",
+          "widget": "enum"
+        },
+        {
+          "name": "sys-time",
+          "widget": "string"
+        },
+        {
+          "name": "vlan-id",
+          "widget": "string"
+        },
+        {
+          "name": "mac-addr",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     }
   },
   "tree": [

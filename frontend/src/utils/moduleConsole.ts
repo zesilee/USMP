@@ -90,6 +90,45 @@ export function deriveTabs(fields: Field[] | undefined): ConsoleTab[] {
   return tabs
 }
 
+// 详情二级 Tab（FE-21）：list 条目的非容器子节点（标量/leaf-list/choice）聚合为
+// 首个主表单 Tab；嵌套 group→子表单 Tab、嵌套 list（含 group 包裹单 list）→子表格
+// Tab，schema 序。无嵌套时退化为单主 Tab；fields 缺失降级空表单不崩（R08）。
+export function deriveDetailTabs(listField: Field): ConsoleTab[] {
+  const mainFields: Field[] = []
+  const subTabs: ConsoleTab[] = []
+  for (const f of listField.fields || []) {
+    if (f.type !== 'group' && f.type !== 'list') {
+      mainFields.push(f)
+      continue
+    }
+    const ro = !!f.readonly
+    if (f.type === 'list') {
+      subTabs.push({ name: leafName(f), label: f.label || leafName(f), kind: 'list', field: f, listField: f, readonly: ro })
+      continue
+    }
+    const kids = (f.fields || []).filter((c) => ro || !c.readonly)
+    if (kids.length === 1 && kids[0].type === 'list') {
+      subTabs.push({ name: leafName(f), label: f.label || leafName(f), kind: 'list', field: f, listField: kids[0], readonly: ro })
+      continue
+    }
+    subTabs.push({ name: leafName(f), label: f.label || leafName(f), kind: 'form', field: f, readonly: ro })
+  }
+  const label = listField.label || leafName(listField)
+  const main: ConsoleTab = {
+    name: '__main__',
+    label,
+    kind: 'form',
+    field: { path: listField.path, type: 'group', label, fields: mainFields },
+    readonly: !!listField.readonly,
+  }
+  return [main, ...subTabs]
+}
+
+/** 可用列全集（FE-11 列设置）：同分层启发式、不封顶——默认集恒为其前缀。 */
+export function deriveAllColumns(listField: Field): Field[] {
+  return deriveColumns(listField, Infinity)
+}
+
 /** keyField：isKey 叶优先；缺失时回退首个标量叶（降级，R08）。 */
 export function deriveKeyField(listField: Field): string {
   const leaves = scalarLeaves(listField)

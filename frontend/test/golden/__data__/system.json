@@ -27,7 +27,27 @@
           "widget": "string"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "feature-name",
+          "widget": "string"
+        },
+        {
+          "name": "security-item",
+          "widget": "string"
+        },
+        {
+          "name": "item-content",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     }
   },
   "tree": [

@@ -35,7 +35,71 @@
           "widget": "number"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "name",
+          "widget": "string"
+        },
+        {
+          "name": "description",
+          "widget": "string"
+        },
+        {
+          "name": "traffic-statistic-enable",
+          "widget": "boolean"
+        },
+        {
+          "name": "sys-router-id",
+          "widget": "string"
+        },
+        {
+          "name": "vrf-id",
+          "widget": "number"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        },
+        {
+          "name": "afs",
+          "kind": "list"
+        },
+        {
+          "name": "bgp",
+          "kind": "form"
+        },
+        {
+          "name": "gre",
+          "kind": "form"
+        },
+        {
+          "name": "mpls",
+          "kind": "form"
+        },
+        {
+          "name": "multicast",
+          "kind": "form"
+        },
+        {
+          "name": "nvo3",
+          "kind": "list"
+        },
+        {
+          "name": "ospfv2",
+          "kind": "form"
+        },
+        {
+          "name": "ospfv3",
+          "kind": "form"
+        },
+        {
+          "name": "qos",
+          "kind": "form"
+        }
+      ]
     }
   },
   "tree": [

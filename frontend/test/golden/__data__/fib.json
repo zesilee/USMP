@@ -27,7 +27,35 @@
           "widget": "string"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "af-type",
+          "widget": "enum"
+        },
+        {
+          "name": "position",
+          "widget": "string"
+        },
+        {
+          "name": "vrf-name",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        },
+        {
+          "name": "routes",
+          "kind": "list"
+        },
+        {
+          "name": "statistics",
+          "kind": "form"
+        }
+      ]
     }
   },
   "tree": [

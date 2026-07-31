@@ -43,7 +43,23 @@
           "widget": "number"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "error-down-type",
+          "widget": "enum"
+        },
+        {
+          "name": "time-value",
+          "widget": "number"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "interfaces": {
       "keyField": "name",
@@ -85,9 +101,313 @@
           "widget": "enum"
         }
       ],
+      "allColumns": [
+        {
+          "name": "name",
+          "widget": "string"
+        },
+        {
+          "name": "class",
+          "widget": "enum"
+        },
+        {
+          "name": "l2-mode-enable",
+          "widget": "boolean"
+        },
+        {
+          "name": "number",
+          "widget": "string"
+        },
+        {
+          "name": "parent-name",
+          "widget": "string"
+        },
+        {
+          "name": "router-type",
+          "widget": "enum"
+        },
+        {
+          "name": "type",
+          "widget": "enum"
+        },
+        {
+          "name": "down-delay-time",
+          "widget": "number"
+        },
+        {
+          "name": "admin-status",
+          "widget": "enum"
+        },
+        {
+          "name": "encapsulation-type",
+          "widget": "enum"
+        },
+        {
+          "name": "link-protocol",
+          "widget": "enum"
+        },
+        {
+          "name": "service-type",
+          "widget": "enum"
+        },
+        {
+          "name": "statistic-mode",
+          "widget": "enum"
+        },
+        {
+          "name": "aggregation-name",
+          "widget": "string"
+        },
+        {
+          "name": "clear-ip-df",
+          "widget": "boolean"
+        },
+        {
+          "name": "description",
+          "widget": "string"
+        },
+        {
+          "name": "index",
+          "widget": "number"
+        },
+        {
+          "name": "is-l2-switch",
+          "widget": "boolean"
+        },
+        {
+          "name": "l2-switch-port-index",
+          "widget": "number"
+        },
+        {
+          "name": "link-up-down-trap-enable",
+          "widget": "boolean"
+        },
+        {
+          "name": "mac-address",
+          "widget": "string"
+        },
+        {
+          "name": "mtu",
+          "widget": "number"
+        },
+        {
+          "name": "position",
+          "widget": "string"
+        },
+        {
+          "name": "spread-mtu-flag",
+          "widget": "boolean"
+        },
+        {
+          "name": "statistic-enable",
+          "widget": "boolean"
+        },
+        {
+          "name": "statistic-interval",
+          "widget": "number"
+        },
+        {
+          "name": "vrf-name",
+          "widget": "string"
+        },
+        {
+          "name": "vs-name",
+          "widget": "string"
+        }
+      ],
       "filterable": [
         "class",
         "type"
+      ],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        },
+        {
+          "name": "arp-entry",
+          "kind": "form"
+        },
+        {
+          "name": "arp-limits",
+          "kind": "list"
+        },
+        {
+          "name": "arp-port-security",
+          "kind": "form"
+        },
+        {
+          "name": "arp-sending",
+          "kind": "form"
+        },
+        {
+          "name": "arp-statistics",
+          "kind": "form"
+        },
+        {
+          "name": "arp-status-detect",
+          "kind": "form"
+        },
+        {
+          "name": "bdif-attribute",
+          "kind": "form"
+        },
+        {
+          "name": "bfd",
+          "kind": "form"
+        },
+        {
+          "name": "common-statistics",
+          "kind": "form"
+        },
+        {
+          "name": "control-flap",
+          "kind": "form"
+        },
+        {
+          "name": "damp-state",
+          "kind": "form"
+        },
+        {
+          "name": "dynamic",
+          "kind": "form"
+        },
+        {
+          "name": "error-down",
+          "kind": "form"
+        },
+        {
+          "name": "ethernet",
+          "kind": "form"
+        },
+        {
+          "name": "evpn",
+          "kind": "form"
+        },
+        {
+          "name": "flood-proxy",
+          "kind": "form"
+        },
+        {
+          "name": "force-decapsulation",
+          "kind": "form"
+        },
+        {
+          "name": "ipv4",
+          "kind": "form"
+        },
+        {
+          "name": "ipv6",
+          "kind": "form"
+        },
+        {
+          "name": "l2subif-dot1q-egr-vids",
+          "kind": "form"
+        },
+        {
+          "name": "l3ve-delay-up",
+          "kind": "form"
+        },
+        {
+          "name": "lldp",
+          "kind": "form"
+        },
+        {
+          "name": "loadbalance",
+          "kind": "form"
+        },
+        {
+          "name": "m-lag",
+          "kind": "form"
+        },
+        {
+          "name": "macsec",
+          "kind": "form"
+        },
+        {
+          "name": "mib-statistics",
+          "kind": "form"
+        },
+        {
+          "name": "mirror",
+          "kind": "form"
+        },
+        {
+          "name": "nd-sending",
+          "kind": "form"
+        },
+        {
+          "name": "nve",
+          "kind": "form"
+        },
+        {
+          "name": "nvo3-gateway",
+          "kind": "form"
+        },
+        {
+          "name": "nvo3-ipv6-vtep-statistics",
+          "kind": "list"
+        },
+        {
+          "name": "nvo3-tunnel-statistics",
+          "kind": "list"
+        },
+        {
+          "name": "nvo3-vtep-statistics",
+          "kind": "list"
+        },
+        {
+          "name": "packet-policys",
+          "kind": "list"
+        },
+        {
+          "name": "qos",
+          "kind": "form"
+        },
+        {
+          "name": "routing",
+          "kind": "form"
+        },
+        {
+          "name": "sflow",
+          "kind": "form"
+        },
+        {
+          "name": "sub-interface-lldp",
+          "kind": "form"
+        },
+        {
+          "name": "track-monitor-group",
+          "kind": "form"
+        },
+        {
+          "name": "track-pw-state",
+          "kind": "form"
+        },
+        {
+          "name": "trap-threshold",
+          "kind": "form"
+        },
+        {
+          "name": "trunk",
+          "kind": "form"
+        },
+        {
+          "name": "tunnel-protocol",
+          "kind": "form"
+        },
+        {
+          "name": "unicast-forward",
+          "kind": "form"
+        },
+        {
+          "name": "vlanif-attribute",
+          "kind": "form"
+        },
+        {
+          "name": "vrrp",
+          "kind": "form"
+        }
       ]
     },
     "remote-interfaces": {
@@ -102,7 +422,27 @@
           "widget": "number"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "name",
+          "widget": "string"
+        },
+        {
+          "name": "index",
+          "widget": "number"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        },
+        {
+          "name": "remote-statistics-state",
+          "kind": "form"
+        }
+      ]
     },
     "static-dimension-ranges": {
       "keyField": "type",
@@ -128,7 +468,35 @@
           "widget": "string"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "type",
+          "widget": "enum"
+        },
+        {
+          "name": "card-range",
+          "widget": "string"
+        },
+        {
+          "name": "chassis-range",
+          "widget": "string"
+        },
+        {
+          "name": "port-range",
+          "widget": "string"
+        },
+        {
+          "name": "slot-range",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     }
   },
   "tree": [

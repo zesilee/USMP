@@ -19,7 +19,31 @@
           "widget": "enum"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "name",
+          "widget": "string"
+        },
+        {
+          "name": "status",
+          "widget": "enum"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        },
+        {
+          "name": "absolute-ranges",
+          "kind": "list"
+        },
+        {
+          "name": "period-ranges",
+          "kind": "list"
+        }
+      ]
     }
   },
   "tree": [

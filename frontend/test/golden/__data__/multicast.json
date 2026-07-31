@@ -71,7 +71,47 @@
           "widget": "number"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "address-family",
+          "widget": "enum"
+        },
+        {
+          "name": "limit-type",
+          "widget": "enum"
+        },
+        {
+          "name": "limit-value",
+          "widget": "number"
+        },
+        {
+          "name": "lower-threshold-value",
+          "widget": "number"
+        },
+        {
+          "name": "source-group-outgoing-interface-count",
+          "widget": "number"
+        },
+        {
+          "name": "star-group-outgoing-interface-count",
+          "widget": "number"
+        },
+        {
+          "name": "total-outgoing-interface-count",
+          "widget": "number"
+        },
+        {
+          "name": "upper-threshold-value",
+          "widget": "number"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "ssm-mapping-policys": {
       "keyField": "address-family",
@@ -85,7 +125,27 @@
           "widget": "string"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "address-family",
+          "widget": "enum"
+        },
+        {
+          "name": "policy-name",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        },
+        {
+          "name": "groups",
+          "kind": "list"
+        }
+      ]
     }
   },
   "tree": [

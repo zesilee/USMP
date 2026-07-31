@@ -35,7 +35,31 @@
           "widget": "string"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "id",
+          "widget": "number"
+        },
+        {
+          "name": "status",
+          "widget": "enum"
+        },
+        {
+          "name": "description",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        },
+        {
+          "name": "active-ports",
+          "kind": "list"
+        }
+      ]
     },
     "instances": {
       "keyField": "id",
@@ -49,7 +73,23 @@
           "widget": "string"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "id",
+          "widget": "number"
+        },
+        {
+          "name": "vlan-list",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "vlans": {
       "keyField": "id",
@@ -91,7 +131,119 @@
           "widget": "enum"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "id",
+          "widget": "number"
+        },
+        {
+          "name": "mac-aging-time",
+          "widget": "number"
+        },
+        {
+          "name": "statistic-discard",
+          "widget": "enum"
+        },
+        {
+          "name": "super-vlan",
+          "widget": "string"
+        },
+        {
+          "name": "admin-status",
+          "widget": "enum"
+        },
+        {
+          "name": "broadcast-discard",
+          "widget": "enum"
+        },
+        {
+          "name": "mac-learning",
+          "widget": "enum"
+        },
+        {
+          "name": "statistic-enable",
+          "widget": "enum"
+        },
+        {
+          "name": "type",
+          "widget": "enum"
+        },
+        {
+          "name": "unknown-multicast-discard",
+          "widget": "enum"
+        },
+        {
+          "name": "description",
+          "widget": "string"
+        },
+        {
+          "name": "name",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        },
+        {
+          "name": "arp-ip-pool",
+          "kind": "form"
+        },
+        {
+          "name": "arp-l2proxys",
+          "kind": "list"
+        },
+        {
+          "name": "arp-mff",
+          "kind": "form"
+        },
+        {
+          "name": "arp-rate-limit",
+          "kind": "form"
+        },
+        {
+          "name": "arp-security",
+          "kind": "form"
+        },
+        {
+          "name": "arp-statisticss",
+          "kind": "list"
+        },
+        {
+          "name": "ip-subnet-vlans",
+          "kind": "list"
+        },
+        {
+          "name": "member-ports",
+          "kind": "list"
+        },
+        {
+          "name": "mirror",
+          "kind": "form"
+        },
+        {
+          "name": "statistics",
+          "kind": "form"
+        },
+        {
+          "name": "suppression",
+          "kind": "form"
+        },
+        {
+          "name": "traffic-policy-applys",
+          "kind": "list"
+        },
+        {
+          "name": "unknown-unicast-discard",
+          "kind": "form"
+        },
+        {
+          "name": "unkown-unicast-discard",
+          "kind": "form"
+        }
+      ]
     }
   },
   "tree": [
