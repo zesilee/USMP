@@ -49,7 +49,9 @@
                       "path": "/routing-policy/as-path-filters/as-path-filter/nodes/node/regular",
                       "type": "string",
                       "label": "regular",
-                      "required": true
+                      "required": true,
+                      "minLength": 1,
+                      "maxLength": 1024
                     },
                     {
                       "path": "/routing-policy/as-path-filters/as-path-filter/nodes/node/sequence",
@@ -108,7 +110,9 @@
                       "path": "/routing-policy/community-filters/community-filter/advanced-nodes/advanced-node/regular",
                       "type": "string",
                       "label": "regular",
-                      "required": true
+                      "required": true,
+                      "minLength": 1,
+                      "maxLength": 1024
                     },
                     {
                       "path": "/routing-policy/community-filters/community-filter/advanced-nodes/advanced-node/sequence",
@@ -235,6 +239,8 @@
               "path": "/routing-policy/community-lists/community-list/name",
               "type": "string",
               "label": "name",
+              "minLength": 1,
+              "maxLength": 63,
               "isKey": true
             }
           ]
@@ -275,6 +281,8 @@
               "path": "/routing-policy/eth-tag-filters/eth-tag-filter/name",
               "type": "string",
               "label": "name",
+              "minLength": 1,
+              "maxLength": 63,
               "isKey": true
             }
           ]
@@ -322,7 +330,9 @@
                       "path": "/routing-policy/ext-community-encapsulation-filters/ext-community-encapsulation-filter/advanced-nodes/advanced-node/regular",
                       "type": "string",
                       "label": "regular",
-                      "required": true
+                      "required": true,
+                      "minLength": 1,
+                      "maxLength": 1024
                     },
                     {
                       "path": "/routing-policy/ext-community-encapsulation-filters/ext-community-encapsulation-filter/advanced-nodes/advanced-node/sequence",
@@ -361,6 +371,8 @@
                               "path": "/routing-policy/ext-community-encapsulation-filters/ext-community-encapsulation-filter/basic-nodes/basic-node/ext-community-encapsulation-members/ext-community-encapsulation-member/value",
                               "type": "string",
                               "label": "value",
+                              "minLength": 3,
+                              "maxLength": 7,
                               "isKey": true
                             }
                           ]
@@ -415,6 +427,8 @@
               "path": "/routing-policy/ext-community-encapsulation-filters/ext-community-encapsulation-filter/name",
               "type": "string",
               "label": "name",
+              "minLength": 1,
+              "maxLength": 51,
               "isKey": true
             }
           ]
@@ -462,7 +476,9 @@
                       "path": "/routing-policy/ext-community-filters/ext-community-filter/advanced-nodes/advanced-node/regular",
                       "type": "string",
                       "label": "regular",
-                      "required": true
+                      "required": true,
+                      "minLength": 1,
+                      "maxLength": 1024
                     },
                     {
                       "path": "/routing-policy/ext-community-filters/ext-community-filter/advanced-nodes/advanced-node/sequence",
@@ -501,6 +517,8 @@
                               "path": "/routing-policy/ext-community-filters/ext-community-filter/basic-nodes/basic-node/ext-community-members/ext-community-member/value",
                               "type": "string",
                               "label": "value",
+                              "minLength": 3,
+                              "maxLength": 21,
                               "isKey": true
                             }
                           ]
@@ -605,7 +623,9 @@
                       "path": "/routing-policy/ext-community-segmented-nexthop-filters/ext-community-segmented-nexthop-filter/advanced-nodes/advanced-node/regular",
                       "type": "string",
                       "label": "regular",
-                      "required": true
+                      "required": true,
+                      "minLength": 1,
+                      "maxLength": 1024
                     },
                     {
                       "path": "/routing-policy/ext-community-segmented-nexthop-filters/ext-community-segmented-nexthop-filter/advanced-nodes/advanced-node/sequence",
@@ -644,6 +664,8 @@
                               "path": "/routing-policy/ext-community-segmented-nexthop-filters/ext-community-segmented-nexthop-filter/basic-nodes/basic-node/ext-community-segmented-nexthop-members/ext-community-segmented-nexthop-member/value",
                               "type": "string",
                               "label": "value",
+                              "minLength": 3,
+                              "maxLength": 21,
                               "isKey": true
                             }
                           ]
@@ -701,6 +723,8 @@
               "path": "/routing-policy/ext-community-segmented-nexthop-filters/ext-community-segmented-nexthop-filter/name",
               "type": "string",
               "label": "name",
+              "minLength": 1,
+              "maxLength": 51,
               "isKey": true
             }
           ]
@@ -748,7 +772,9 @@
                       "path": "/routing-policy/ext-community-soo-filters/ext-community-soo-filter/advanced-nodes/advanced-node/regular",
                       "type": "string",
                       "label": "regular",
-                      "required": true
+                      "required": true,
+                      "minLength": 1,
+                      "maxLength": 1024
                     },
                     {
                       "path": "/routing-policy/ext-community-soo-filters/ext-community-soo-filter/advanced-nodes/advanced-node/sequence",
@@ -776,7 +802,9 @@
                     {
                       "path": "/routing-policy/ext-community-soo-filters/ext-community-soo-filter/basic-nodes/basic-node/community-member",
                       "type": "leaf-list",
-                      "label": "community-member"
+                      "label": "community-member",
+                      "minLength": 3,
+                      "maxLength": 21
                     },
                     {
                       "path": "/routing-policy/ext-community-soo-filters/ext-community-soo-filter/basic-nodes/basic-node/match-mode",
@@ -829,6 +857,8 @@
               "path": "/routing-policy/ext-community-soo-filters/ext-community-soo-filter/name",
               "type": "string",
               "label": "name",
+              "minLength": 1,
+              "maxLength": 51,
               "isKey": true
             }
           ]
@@ -855,12 +885,16 @@
             {
               "path": "/routing-policy/ipv4-prefix-filters/ipv4-prefix-filter/description",
               "type": "string",
-              "label": "description"
+              "label": "description",
+              "minLength": 1,
+              "maxLength": 80
             },
             {
               "path": "/routing-policy/ipv4-prefix-filters/ipv4-prefix-filter/name",
               "type": "string",
               "label": "name",
+              "minLength": 1,
+              "maxLength": 169,
               "isKey": true
             },
             {
@@ -969,12 +1003,16 @@
             {
               "path": "/routing-policy/ipv6-prefix-filters/ipv6-prefix-filter/description",
               "type": "string",
-              "label": "description"
+              "label": "description",
+              "minLength": 1,
+              "maxLength": 80
             },
             {
               "path": "/routing-policy/ipv6-prefix-filters/ipv6-prefix-filter/name",
               "type": "string",
               "label": "name",
+              "minLength": 1,
+              "maxLength": 169,
               "isKey": true
             },
             {
@@ -1104,7 +1142,9 @@
                       "path": "/routing-policy/large-community-filters/large-community-filter/advanced-nodes/advanced-node/regular",
                       "type": "string",
                       "label": "regular",
-                      "required": true
+                      "required": true,
+                      "minLength": 1,
+                      "maxLength": 1024
                     },
                     {
                       "path": "/routing-policy/large-community-filters/large-community-filter/advanced-nodes/advanced-node/sequence",
@@ -1143,6 +1183,8 @@
                               "path": "/routing-policy/large-community-filters/large-community-filter/basic-nodes/basic-node/large-community-members/large-community-member/value",
                               "type": "string",
                               "label": "value",
+                              "minLength": 5,
+                              "maxLength": 32,
                               "isKey": true
                             }
                           ]
@@ -1201,6 +1243,8 @@
               "type": "string",
               "label": "name",
               "pattern": "([^?]*[^?0-9][^?]*)",
+              "minLength": 1,
+              "maxLength": 51,
               "isKey": true
             }
           ]
@@ -1231,6 +1275,8 @@
                       "path": "/routing-policy/large-community-lists/large-community-list/large-community-members/large-community-member/value",
                       "type": "string",
                       "label": "value",
+                      "minLength": 5,
+                      "maxLength": 32,
                       "isKey": true
                     }
                   ]
@@ -1242,6 +1288,8 @@
               "type": "string",
               "label": "name",
               "pattern": "([a-zA-Z].*)",
+              "minLength": 1,
+              "maxLength": 63,
               "isKey": true
             }
           ]
@@ -1273,6 +1321,7 @@
                       "type": "string",
                       "label": "value",
                       "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+                      "maxLength": 255,
                       "isKey": true
                     }
                   ]
@@ -1283,6 +1332,8 @@
               "path": "/routing-policy/mac-filters/mac-filter/name",
               "type": "string",
               "label": "name",
+              "minLength": 1,
+              "maxLength": 63,
               "isKey": true
             }
           ]
@@ -1303,6 +1354,8 @@
               "path": "/routing-policy/policy-definitions/policy-definition/name",
               "type": "string",
               "label": "name",
+              "minLength": 1,
+              "maxLength": 200,
               "isKey": true
             },
             {
@@ -1369,7 +1422,9 @@
                                       "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-as-path/value",
                                       "type": "string",
                                       "label": "value",
-                                      "pattern": "([0-9\\. ]*)"
+                                      "pattern": "([0-9\\. ]*)",
+                                      "minLength": 1,
+                                      "maxLength": 3071
                                     }
                                   ]
                                 }
@@ -1451,7 +1506,9 @@
                                       "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-community/value",
                                       "type": "string",
                                       "label": "value",
-                                      "pattern": "([0-9a-zA-Z\\-: ]*)"
+                                      "pattern": "([0-9a-zA-Z\\-: ]*)",
+                                      "minLength": 1,
+                                      "maxLength": 392
                                     }
                                   ]
                                 },
@@ -1646,6 +1703,8 @@
                                       "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ext-community/ext-community-members/ext-community-member/value",
                                       "type": "string",
                                       "label": "value",
+                                      "minLength": 3,
+                                      "maxLength": 21,
                                       "isKey": true
                                     }
                                   ]
@@ -1684,7 +1743,9 @@
                               "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ext-community-color/value",
                               "type": "string",
                               "label": "value",
-                              "required": true
+                              "required": true,
+                              "minLength": 3,
+                              "maxLength": 12
                             }
                           ],
                           "presence": true
@@ -1697,7 +1758,9 @@
                             {
                               "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ext-community-redirect-ip/value",
                               "type": "string",
-                              "label": "value"
+                              "label": "value",
+                              "minLength": 9,
+                              "maxLength": 17
                             }
                           ]
                         },
@@ -1709,7 +1772,9 @@
                             {
                               "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ext-community-redirect-vpn/value",
                               "type": "string",
-                              "label": "value"
+                              "label": "value",
+                              "minLength": 3,
+                              "maxLength": 21
                             }
                           ]
                         },
@@ -1721,7 +1786,9 @@
                             {
                               "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ext-community-soo/communities",
                               "type": "leaf-list",
-                              "label": "communities"
+                              "label": "communities",
+                              "minLength": 3,
+                              "maxLength": 21
                             },
                             {
                               "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-ext-community-soo/operation",
@@ -1958,6 +2025,8 @@
                                               "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/actions/apply-large-community/large-community-members/large-community-member/value",
                                               "type": "string",
                                               "label": "value",
+                                              "minLength": 5,
+                                              "maxLength": 32,
                                               "isKey": true
                                             }
                                           ]
@@ -2059,6 +2128,8 @@
                               "label": "value",
                               "required": true,
                               "pattern": "((([1-9]\\d{0,8})|([1-3]\\d{9})|(4[0-1]\\d{8})|(42[0-8]\\d{7})|(429[0-3]\\d{6})|(4294[0-8]\\d{5})|(42949[0-5]\\d{4})|(429496[0-6]\\d{3})|(4294967[0-1]\\d{2})|(42949672[0-8]\\d{1})|(429496729[0-5]))|((([1-9]\\d{0,3})|([1-5]\\d{4})|(6[0-4]\\d{3})|(65[0-4]\\d{2})|(655[0-2]\\d)|(6553[0-5]))[\\.](([0-9]\\d{0,3})|([1-5]\\d{4})|(6[0-4]\\d{3})|(65[0-4]\\d{2})|(655[0-2]\\d)|(6553[0-5]))))",
+                              "minLength": 1,
+                              "maxLength": 11,
                               "when": "../origin-type='egp'"
                             }
                           ],
@@ -3103,7 +3174,9 @@
                     {
                       "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/description",
                       "type": "string",
-                      "label": "description"
+                      "label": "description",
+                      "minLength": 1,
+                      "maxLength": 80
                     },
                     {
                       "path": "/routing-policy/policy-definitions/policy-definition/nodes/node/match-count",
@@ -3218,6 +3291,8 @@
                               "path": "/routing-policy/rd-filters/rd-filter/nodes/node/rd-strings/rd-string/value",
                               "type": "string",
                               "label": "value",
+                              "minLength": 3,
+                              "maxLength": 21,
                               "isKey": true
                             }
                           ]
@@ -3254,6 +3329,8 @@
               "path": "/routing-policy/tunnel-selectors/tunnel-selector/name",
               "type": "string",
               "label": "name",
+              "minLength": 1,
+              "maxLength": 40,
               "isKey": true
             },
             {
@@ -3498,6 +3575,8 @@
               "path": "/routing-policy/vni-filters/vni-filter/name",
               "type": "string",
               "label": "name",
+              "minLength": 1,
+              "maxLength": 63,
               "isKey": true
             },
             {

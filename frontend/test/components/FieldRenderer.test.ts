@@ -232,3 +232,29 @@ describe('FieldRenderer · group 内 readonly 状态叶回显（NS-08/BR-01，FE
     expect((state!.element as HTMLInputElement).disabled).toBe(true)
   })
 })
+
+describe('FieldRenderer · 字符串 length 合成占位（FE-22/D9）', () => {
+  it('minLength+maxLength → 合法长度占位；显式 placeholder 与 dynamicDefault 优先', () => {
+    const f = (extra: any = {}) =>
+      mount(FieldRenderer, {
+        props: { field: { path: '/x/name', type: 'string', label: 'name', minLength: 1, maxLength: 31, ...extra } as any, modelValue: '' },
+        global: { plugins: [ElementPlus] },
+      })
+    expect(f().find('input').attributes('placeholder')).toBe('合法长度: [1..31]')
+    expect(f({ placeholder: '显式占位' }).find('input').attributes('placeholder')).toBe('显式占位')
+    expect(f({ dynamicDefault: true }).find('input').attributes('placeholder')).toContain('系统自动分配')
+  })
+
+  it('仅一侧界与数值字段不受影响（边界）', () => {
+    const one = mount(FieldRenderer, {
+      props: { field: { path: '/x/desc', type: 'string', label: 'desc', maxLength: 80 } as any, modelValue: '' },
+      global: { plugins: [ElementPlus] },
+    })
+    expect(one.find('input').attributes('placeholder')).toBe('合法长度: ≤ 80')
+    const num = mount(FieldRenderer, {
+      props: { field: { path: '/x/mtu', type: 'number', label: 'mtu', minimum: 60, maximum: 9600 } as any, modelValue: undefined },
+      global: { plugins: [ElementPlus] },
+    })
+    expect(num.find('input').attributes('placeholder')).toBe('整数 合法范围: [60, 9600]')
+  })
+})

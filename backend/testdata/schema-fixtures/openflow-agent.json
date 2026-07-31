@@ -62,7 +62,8 @@
                     {
                       "path": "/openflow-agent/sdnagent/controllers/controller/openflow-attributes/keychain-name",
                       "type": "string",
-                      "label": "keychain-name"
+                      "label": "keychain-name",
+                      "maxLength": 47
                     },
                     {
                       "path": "/openflow-agent/sdnagent/controllers/controller/openflow-attributes/ssl-policy-name",
@@ -85,7 +86,9 @@
         {
           "path": "/openflow-agent/sdnagent/description",
           "type": "string",
-          "label": "description"
+          "label": "description",
+          "minLength": 1,
+          "maxLength": 63
         },
         {
           "path": "/openflow-agent/sdnagent/source-ip",
@@ -201,6 +204,7 @@
               "path": "/openflow-agent/session-infos/session-info/vpn-name",
               "type": "string",
               "label": "vpn-name",
+              "maxLength": 32,
               "readonly": true,
               "isKey": true
             }

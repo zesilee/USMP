@@ -41,6 +41,8 @@
               "path": "/loadbalance/avoid-degradations/avoid-degradation/position",
               "type": "string",
               "label": "position",
+              "minLength": 1,
+              "maxLength": 16,
               "isKey": true
             }
           ]
@@ -304,6 +306,8 @@
                   "path": "/loadbalance/hash-instructions/hash-instruction/infos/info",
                   "type": "string",
                   "label": "info",
+                  "minLength": 1,
+                  "maxLength": 127,
                   "readonly": true
                 }
               ]
@@ -329,6 +333,7 @@
               "path": "/loadbalance/hash-instructions/hash-instruction/slot-id",
               "type": "string",
               "label": "slot-id",
+              "maxLength": 32,
               "readonly": true,
               "isKey": true
             },
@@ -394,6 +399,8 @@
               "path": "/loadbalance/hash-key-ip-slots/hash-key-ip-slot/slot-id",
               "type": "string",
               "label": "slot-id",
+              "minLength": 1,
+              "maxLength": 32,
               "isKey": true
             }
           ]

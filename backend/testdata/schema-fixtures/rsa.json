@@ -17,6 +17,7 @@
               "path": "/rsa/key-pairs/key-pair/host-key-code",
               "type": "string",
               "label": "host-key-code",
+              "maxLength": 2048,
               "readonly": true,
               "supportFilter": true
             },
@@ -25,6 +26,8 @@
               "type": "string",
               "label": "key-pair-label",
               "pattern": "[a-z0-9_]*",
+              "minLength": 1,
+              "maxLength": 35,
               "isKey": true
             },
             {
@@ -48,30 +51,35 @@
           "path": "/rsa/local-key/host-key-code",
           "type": "string",
           "label": "host-key-code",
+          "maxLength": 1024,
           "readonly": true
         },
         {
           "path": "/rsa/local-key/host-key-name",
           "type": "string",
           "label": "host-key-name",
+          "maxLength": 264,
           "readonly": true
         },
         {
           "path": "/rsa/local-key/host-key-openssh",
           "type": "string",
           "label": "host-key-openssh",
+          "maxLength": 1920,
           "readonly": true
         },
         {
           "path": "/rsa/local-key/host-key-pem",
           "type": "string",
           "label": "host-key-pem",
+          "maxLength": 1920,
           "readonly": true
         },
         {
           "path": "/rsa/local-key/host-key-ssh1",
           "type": "string",
           "label": "host-key-ssh1",
+          "maxLength": 1024,
           "readonly": true
         },
         {
@@ -85,12 +93,14 @@
           "path": "/rsa/local-key/server-key-code",
           "type": "string",
           "label": "server-key-code",
+          "maxLength": 1024,
           "readonly": true
         },
         {
           "path": "/rsa/local-key/server-key-name",
           "type": "string",
           "label": "server-key-name",
+          "maxLength": 264,
           "readonly": true
         }
       ],
@@ -131,12 +141,16 @@
               "type": "string",
               "label": "key-code",
               "required": true,
+              "minLength": 1,
+              "maxLength": 1024,
               "supportFilter": true
             },
             {
               "path": "/rsa/peer-keys/peer-key/key-name",
               "type": "string",
               "label": "key-name",
+              "minLength": 1,
+              "maxLength": 40,
               "isKey": true
             }
           ]

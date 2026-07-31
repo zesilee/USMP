@@ -17,7 +17,9 @@
         {
           "path": "/hwtacacs/global/default-remote-address",
           "type": "string",
-          "label": "default-remote-address"
+          "label": "default-remote-address",
+          "minLength": 1,
+          "maxLength": 31
         },
         {
           "path": "/hwtacacs/global/is-enable",
@@ -27,7 +29,9 @@
         {
           "path": "/hwtacacs/global/service-name",
           "type": "string",
-          "label": "service-name"
+          "label": "service-name",
+          "minLength": 1,
+          "maxLength": 32
         }
       ]
     },
@@ -222,12 +226,16 @@
                     {
                       "path": "/hwtacacs/templates/template/ipv4-servers/ipv4-server/shared-key",
                       "type": "string",
-                      "label": "shared-key"
+                      "label": "shared-key",
+                      "minLength": 1,
+                      "maxLength": 432
                     },
                     {
                       "path": "/hwtacacs/templates/template/ipv4-servers/ipv4-server/vpn-name",
                       "type": "string",
                       "label": "vpn-name",
+                      "minLength": 1,
+                      "maxLength": 31,
                       "must": [
                         {
                           "expr": "not(../is-public-net='true') or (../is-public-net='true' and ../vpn-name='_public_')"
@@ -301,12 +309,16 @@
                     {
                       "path": "/hwtacacs/templates/template/ipv6-servers/ipv6-server/shared-key",
                       "type": "string",
-                      "label": "shared-key"
+                      "label": "shared-key",
+                      "minLength": 1,
+                      "maxLength": 432
                     },
                     {
                       "path": "/hwtacacs/templates/template/ipv6-servers/ipv6-server/vpn-name",
                       "type": "string",
                       "label": "vpn-name",
+                      "minLength": 1,
+                      "maxLength": 31,
                       "isKey": true
                     }
                   ]
@@ -317,6 +329,8 @@
               "path": "/hwtacacs/templates/template/name",
               "type": "string",
               "label": "name",
+              "minLength": 1,
+              "maxLength": 32,
               "isKey": true
             },
             {
@@ -401,7 +415,9 @@
                     {
                       "path": "/hwtacacs/templates/template/servers/server/shared-key",
                       "type": "string",
-                      "label": "shared-key"
+                      "label": "shared-key",
+                      "minLength": 1,
+                      "maxLength": 432
                     },
                     {
                       "path": "/hwtacacs/templates/template/servers/server/status",
@@ -536,7 +552,9 @@
             {
               "path": "/hwtacacs/templates/template/shared-key",
               "type": "string",
-              "label": "shared-key"
+              "label": "shared-key",
+              "minLength": 1,
+              "maxLength": 432
             },
             {
               "path": "/hwtacacs/templates/template/source-address",
@@ -920,6 +938,8 @@
                   "path": "/hwtacacs/templates/template/status/cur-account-server",
                   "type": "string",
                   "label": "cur-account-server",
+                  "minLength": 1,
+                  "maxLength": 255,
                   "readonly": true
                 },
                 {
@@ -932,6 +952,8 @@
                   "path": "/hwtacacs/templates/template/status/cur-authen-server",
                   "type": "string",
                   "label": "cur-authen-server",
+                  "minLength": 1,
+                  "maxLength": 255,
                   "readonly": true
                 },
                 {
@@ -944,6 +966,8 @@
                   "path": "/hwtacacs/templates/template/status/cur-author-server",
                   "type": "string",
                   "label": "cur-author-server",
+                  "minLength": 1,
+                  "maxLength": 255,
                   "readonly": true
                 },
                 {
@@ -956,6 +980,8 @@
                   "path": "/hwtacacs/templates/template/status/pri-account-server",
                   "type": "string",
                   "label": "pri-account-server",
+                  "minLength": 1,
+                  "maxLength": 255,
                   "readonly": true
                 },
                 {
@@ -968,6 +994,8 @@
                   "path": "/hwtacacs/templates/template/status/pri-authen-server",
                   "type": "string",
                   "label": "pri-authen-server",
+                  "minLength": 1,
+                  "maxLength": 255,
                   "readonly": true
                 },
                 {
@@ -980,6 +1008,8 @@
                   "path": "/hwtacacs/templates/template/status/pri-author-server",
                   "type": "string",
                   "label": "pri-author-server",
+                  "minLength": 1,
+                  "maxLength": 255,
                   "readonly": true
                 },
                 {
@@ -992,6 +1022,8 @@
                   "path": "/hwtacacs/templates/template/status/pri-common-server",
                   "type": "string",
                   "label": "pri-common-server",
+                  "minLength": 1,
+                  "maxLength": 255,
                   "readonly": true
                 },
                 {

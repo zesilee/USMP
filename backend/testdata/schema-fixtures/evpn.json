@@ -65,18 +65,23 @@
                   "type": "string",
                   "label": "bmac",
                   "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+                  "maxLength": 255,
                   "when": "../rd"
                 },
                 {
                   "path": "/evpn/instances/instance/b-evpn/description",
                   "type": "string",
                   "label": "description",
-                  "pattern": "([^?]*)"
+                  "pattern": "([^?]*)",
+                  "minLength": 1,
+                  "maxLength": 63
                 },
                 {
                   "path": "/evpn/instances/instance/b-evpn/rd",
                   "type": "string",
                   "label": "rd",
+                  "minLength": 3,
+                  "maxLength": 21,
                   "operationExclude": [
                     "update"
                   ]
@@ -112,6 +117,8 @@
                           "path": "/evpn/instances/instance/b-evpn/rts/rt/vrf-rt-value",
                           "type": "string",
                           "label": "vrf-rt-value",
+                          "minLength": 3,
+                          "maxLength": 21,
                           "isKey": true
                         }
                       ]
@@ -176,7 +183,9 @@
                   "path": "/evpn/instances/instance/bd-evpn/description",
                   "type": "string",
                   "label": "description",
-                  "pattern": "([^?]*)"
+                  "pattern": "([^?]*)",
+                  "minLength": 1,
+                  "maxLength": 63
                 },
                 {
                   "path": "/evpn/instances/instance/bd-evpn/down-switch",
@@ -309,6 +318,8 @@
                   "path": "/evpn/instances/instance/bd-evpn/rd",
                   "type": "string",
                   "label": "rd",
+                  "minLength": 3,
+                  "maxLength": 21,
                   "operationExclude": [
                     "update"
                   ]
@@ -344,6 +355,8 @@
                           "path": "/evpn/instances/instance/bd-evpn/rts/rt/vrf-rt-value",
                           "type": "string",
                           "label": "vrf-rt-value",
+                          "minLength": 3,
+                          "maxLength": 21,
                           "isKey": true
                         }
                       ]
@@ -388,6 +401,8 @@
               "path": "/evpn/instances/instance/name",
               "type": "string",
               "label": "name",
+              "minLength": 1,
+              "maxLength": 31,
               "must": [
                 {
                   "expr": "../name!='_public_'"
@@ -410,7 +425,9 @@
                   "path": "/evpn/instances/instance/normal-evpn/description",
                   "type": "string",
                   "label": "description",
-                  "pattern": "([^?]*)"
+                  "pattern": "([^?]*)",
+                  "minLength": 1,
+                  "maxLength": 63
                 },
                 {
                   "path": "/evpn/instances/instance/normal-evpn/etree-enable",
@@ -531,6 +548,8 @@
                   "path": "/evpn/instances/instance/normal-evpn/rd",
                   "type": "string",
                   "label": "rd",
+                  "minLength": 3,
+                  "maxLength": 21,
                   "operationExclude": [
                     "update"
                   ]
@@ -566,6 +585,8 @@
                           "path": "/evpn/instances/instance/normal-evpn/rts/rt/vrf-rt-value",
                           "type": "string",
                           "label": "vrf-rt-value",
+                          "minLength": 3,
+                          "maxLength": 21,
                           "isKey": true
                         }
                       ]
@@ -614,6 +635,7 @@
                       "path": "/evpn/instances/instance/tunnel-infos/tunnel-info/name",
                       "type": "string",
                       "label": "name",
+                      "maxLength": 256,
                       "readonly": true
                     },
                     {
@@ -803,7 +825,9 @@
                   "path": "/evpn/instances/instance/vpws-evpn/description",
                   "type": "string",
                   "label": "description",
-                  "pattern": "([^?]*)"
+                  "pattern": "([^?]*)",
+                  "minLength": 1,
+                  "maxLength": 63
                 },
                 {
                   "path": "/evpn/instances/instance/vpws-evpn/down-switch",
@@ -856,6 +880,8 @@
                   "path": "/evpn/instances/instance/vpws-evpn/rd",
                   "type": "string",
                   "label": "rd",
+                  "minLength": 3,
+                  "maxLength": 21,
                   "operationExclude": [
                     "update"
                   ]
@@ -910,6 +936,8 @@
                           "path": "/evpn/instances/instance/vpws-evpn/rts/rt/vrf-rt-value",
                           "type": "string",
                           "label": "vrf-rt-value",
+                          "minLength": 3,
+                          "maxLength": 21,
                           "isKey": true
                         }
                       ]
@@ -987,6 +1015,8 @@
               "path": "/evpn/remote-sids/remote-sid/evpn-name",
               "type": "string",
               "label": "evpn-name",
+              "minLength": 1,
+              "maxLength": 31,
               "readonly": true
             },
             {
@@ -1139,6 +1169,8 @@
                   "path": "/evpn/site/dynamic-esis/dynamic-esi/esi-name",
                   "type": "string",
                   "label": "esi-name",
+                  "minLength": 1,
+                  "maxLength": 31,
                   "isKey": true
                 },
                 {
@@ -1282,6 +1314,8 @@
                   "type": "string",
                   "label": "esi",
                   "pattern": "( *(00([0-9a-fA-F]){2}\\.(([0-9a-fA-F]){4}\\.){3}(([0-9a-fA-F]){4}))? *)",
+                  "minLength": 1,
+                  "maxLength": 24,
                   "isKey": true
                 },
                 {

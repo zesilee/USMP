@@ -211,6 +211,18 @@ func leafToField(leaf schema.LeafNode, group string) FieldDef {
 	if mx, ok := leaf.RangeMax(); ok {
 		f.Maximum = mx
 	}
+	// 字符串 length 约束（D9）：schema 层为可选能力（类型断言），缺失即跳过（R08）。
+	if ll, ok := leaf.(interface {
+		LengthMin() (int, bool)
+		LengthMax() (int, bool)
+	}); ok {
+		if mn, has := ll.LengthMin(); has {
+			f.MinLength = mn
+		}
+		if mx, has := ll.LengthMax(); has {
+			f.MaxLength = mx
+		}
+	}
 	// leaf-list → 前端渲染为可增删的多值输入（元素类型/枚举选项仍随 f 携带）。
 	if leaf.IsLeafList() {
 		f.Type = "leaf-list"

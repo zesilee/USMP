@@ -17,6 +17,8 @@
               "path": "/unicast-forward/backup-groups/backup-group/backup-group-name",
               "type": "string",
               "label": "backup-group-name",
+              "minLength": 1,
+              "maxLength": 31,
               "isKey": true
             },
             {
@@ -86,6 +88,8 @@
           "path": "/unicast-forward/global-nexthop-spt/state",
           "type": "string",
           "label": "state",
+          "minLength": 1,
+          "maxLength": 127,
           "readonly": true
         }
       ]
@@ -176,6 +180,8 @@
               "path": "/unicast-forward/high-re-modes/high-re-mode/position",
               "type": "string",
               "label": "position",
+              "minLength": 1,
+              "maxLength": 32,
               "isKey": true
             }
           ]
@@ -344,6 +350,8 @@
               "path": "/unicast-forward/na-anti-attack-statistics/na-anti-attack-statistic/slot-id",
               "type": "string",
               "label": "slot-id",
+              "minLength": 1,
+              "maxLength": 32,
               "readonly": true,
               "isKey": true
             }

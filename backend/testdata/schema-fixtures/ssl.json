@@ -17,6 +17,8 @@
               "path": "/ssl/ssl-cipher-suites/ssl-cipher-suite/cipher-suite-name",
               "type": "string",
               "label": "cipher-suite-name",
+              "minLength": 1,
+              "maxLength": 32,
               "isKey": true
             },
             {
@@ -127,6 +129,8 @@
                       "path": "/ssl/ssl-policys/ssl-policy/cert-loads/cert-load/auth-code-crt",
                       "type": "string",
                       "label": "auth-code-crt",
+                      "minLength": 1,
+                      "maxLength": 168,
                       "when": "not(../cert-type='asn1-cert') or ../cert-type!='asn1-cert' and ../cert-type!='pfx-cert' or ../cert-type='pfx-cert' and ../is-mac=0 or ../cert-type='pfx-cert' and ../is-mac=1 or ../cert-type='pfx-cert'",
                       "supportFilter": true
                     },
@@ -134,6 +138,8 @@
                       "path": "/ssl/ssl-policys/ssl-policy/cert-loads/cert-load/auth-code-mac",
                       "type": "string",
                       "label": "auth-code-mac",
+                      "minLength": 1,
+                      "maxLength": 168,
                       "when": "not(../cert-type!='asn1-cert' and ../cert-type!='pfx-cert' or ../cert-type='asn1-cert' or ../cert-type='pfx-cert' and ../is-mac=0) or ../cert-type='pfx-cert' and ../is-mac=1 or ../cert-type='pfx-cert'",
                       "supportFilter": true
                     },
@@ -141,6 +147,8 @@
                       "path": "/ssl/ssl-policys/ssl-policy/cert-loads/cert-load/cert-file",
                       "type": "string",
                       "label": "cert-file",
+                      "minLength": 1,
+                      "maxLength": 64,
                       "isKey": true
                     },
                     {
@@ -197,6 +205,8 @@
                       "path": "/ssl/ssl-policys/ssl-policy/cert-loads/cert-load/issuer-name",
                       "type": "string",
                       "label": "issuer-name",
+                      "minLength": 1,
+                      "maxLength": 255,
                       "readonly": true,
                       "when": "not(not(../cert-file)) or not(../cert-file)",
                       "supportFilter": true
@@ -205,6 +215,8 @@
                       "path": "/ssl/ssl-policys/ssl-policy/cert-loads/cert-load/key-file",
                       "type": "string",
                       "label": "key-file",
+                      "minLength": 1,
+                      "maxLength": 64,
                       "when": "not(../cert-type='pfx-cert' and ../is-mac=1) or ../cert-type!='asn1-cert' and ../cert-type!='pfx-cert' or ../cert-type='asn1-cert' or ../cert-type='pfx-cert' and ../is-mac=0 or ../cert-type='pfx-cert'",
                       "supportFilter": true
                     },
@@ -230,6 +242,8 @@
                       "path": "/ssl/ssl-policys/ssl-policy/cert-loads/cert-load/valid-not-after",
                       "type": "string",
                       "label": "valid-not-after",
+                      "minLength": 1,
+                      "maxLength": 255,
                       "readonly": true,
                       "when": "not(not(../cert-file)) or not(../cert-file)",
                       "supportFilter": true
@@ -238,6 +252,8 @@
                       "path": "/ssl/ssl-policys/ssl-policy/cert-loads/cert-load/valid-not-before",
                       "type": "string",
                       "label": "valid-not-before",
+                      "minLength": 1,
+                      "maxLength": 255,
                       "readonly": true,
                       "when": "not(not(../cert-file)) or not(../cert-file)",
                       "supportFilter": true
@@ -310,6 +326,8 @@
                               "path": "/ssl/ssl-policys/ssl-policy/certificate-files/certificate-file/certificates/certificate/common-name",
                               "type": "string",
                               "label": "common-name",
+                              "minLength": 1,
+                              "maxLength": 255,
                               "readonly": true
                             },
                             {
@@ -323,24 +341,32 @@
                               "path": "/ssl/ssl-policys/ssl-policy/certificate-files/certificate-file/certificates/certificate/issuer",
                               "type": "string",
                               "label": "issuer",
+                              "minLength": 1,
+                              "maxLength": 1023,
                               "readonly": true
                             },
                             {
                               "path": "/ssl/ssl-policys/ssl-policy/certificate-files/certificate-file/certificates/certificate/key-usage",
                               "type": "string",
                               "label": "key-usage",
+                              "minLength": 1,
+                              "maxLength": 255,
                               "readonly": true
                             },
                             {
                               "path": "/ssl/ssl-policys/ssl-policy/certificate-files/certificate-file/certificates/certificate/public-key-algorithm",
                               "type": "string",
                               "label": "public-key-algorithm",
+                              "minLength": 1,
+                              "maxLength": 63,
                               "readonly": true
                             },
                             {
                               "path": "/ssl/ssl-policys/ssl-policy/certificate-files/certificate-file/certificates/certificate/serial-number",
                               "type": "string",
                               "label": "serial-number",
+                              "minLength": 1,
+                              "maxLength": 63,
                               "readonly": true,
                               "isKey": true
                             },
@@ -348,6 +374,8 @@
                               "path": "/ssl/ssl-policys/ssl-policy/certificate-files/certificate-file/certificates/certificate/signature-algorithm",
                               "type": "string",
                               "label": "signature-algorithm",
+                              "minLength": 1,
+                              "maxLength": 63,
                               "readonly": true
                             },
                             {
@@ -361,18 +389,24 @@
                               "path": "/ssl/ssl-policys/ssl-policy/certificate-files/certificate-file/certificates/certificate/subject",
                               "type": "string",
                               "label": "subject",
+                              "minLength": 1,
+                              "maxLength": 1023,
                               "readonly": true
                             },
                             {
                               "path": "/ssl/ssl-policys/ssl-policy/certificate-files/certificate-file/certificates/certificate/subject-alternative-name",
                               "type": "string",
                               "label": "subject-alternative-name",
+                              "minLength": 1,
+                              "maxLength": 255,
                               "readonly": true
                             },
                             {
                               "path": "/ssl/ssl-policys/ssl-policy/certificate-files/certificate-file/certificates/certificate/version",
                               "type": "string",
                               "label": "version",
+                              "minLength": 1,
+                              "maxLength": 63,
                               "readonly": true
                             }
                           ]
@@ -383,6 +417,8 @@
                       "path": "/ssl/ssl-policys/ssl-policy/certificate-files/certificate-file/file-name",
                       "type": "string",
                       "label": "file-name",
+                      "minLength": 1,
+                      "maxLength": 64,
                       "readonly": true,
                       "isKey": true
                     },
@@ -414,7 +450,9 @@
             {
               "path": "/ssl/ssl-policys/ssl-policy/cipher-suite-name",
               "type": "string",
-              "label": "cipher-suite-name"
+              "label": "cipher-suite-name",
+              "minLength": 1,
+              "maxLength": 32
             },
             {
               "path": "/ssl/ssl-policys/ssl-policy/crl-loads",
@@ -431,6 +469,8 @@
                       "path": "/ssl/ssl-policys/ssl-policy/crl-loads/crl-load/crl-file",
                       "type": "string",
                       "label": "crl-file",
+                      "minLength": 1,
+                      "maxLength": 64,
                       "isKey": true
                     },
                     {
@@ -519,6 +559,8 @@
               "path": "/ssl/ssl-policys/ssl-policy/feature-name",
               "type": "leaf-list",
               "label": "feature-name",
+              "minLength": 1,
+              "maxLength": 50,
               "readonly": true
             },
             {
@@ -564,13 +606,17 @@
             {
               "path": "/ssl/ssl-policys/ssl-policy/pki-realm",
               "type": "string",
-              "label": "pki-realm"
+              "label": "pki-realm",
+              "minLength": 1,
+              "maxLength": 64
             },
             {
               "path": "/ssl/ssl-policys/ssl-policy/policy-name",
               "type": "string",
               "label": "policy-name",
               "pattern": "[a-z0-9_]*",
+              "minLength": 1,
+              "maxLength": 23,
               "isKey": true
             },
             {
@@ -588,6 +634,8 @@
                       "path": "/ssl/ssl-policys/ssl-policy/trust-ca-loads/trust-ca-load/auth-code",
                       "type": "string",
                       "label": "auth-code",
+                      "minLength": 1,
+                      "maxLength": 168,
                       "when": "not(../ca-type!='pfx-ca')",
                       "supportFilter": true
                     },
@@ -595,6 +643,8 @@
                       "path": "/ssl/ssl-policys/ssl-policy/trust-ca-loads/trust-ca-load/ca-file",
                       "type": "string",
                       "label": "ca-file",
+                      "minLength": 1,
+                      "maxLength": 64,
                       "isKey": true
                     },
                     {

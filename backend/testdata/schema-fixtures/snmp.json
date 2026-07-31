@@ -97,12 +97,16 @@
             {
               "path": "/snmp/communitys/community/acl",
               "type": "string",
-              "label": "acl"
+              "label": "acl",
+              "minLength": 1,
+              "maxLength": 32
             },
             {
               "path": "/snmp/communitys/community/alias-name",
               "type": "string",
               "label": "alias-name",
+              "minLength": 1,
+              "maxLength": 32,
               "must": [
                 {
                   "expr": "(../alias-name!=../name)"
@@ -113,6 +117,8 @@
               "path": "/snmp/communitys/community/name",
               "type": "string",
               "label": "name",
+              "minLength": 1,
+              "maxLength": 168,
               "must": [
                 {
                   "expr": "string-length(../name)\u003e=../../../system/password-min-length or ../../../system/community-cmplx-check='false'"
@@ -414,7 +420,9 @@
             {
               "path": "/snmp/ipv6-sources/ipv6-source/vpn-name",
               "type": "string",
-              "label": "vpn-name"
+              "label": "vpn-name",
+              "minLength": 1,
+              "maxLength": 31
             }
           ]
         }
@@ -434,6 +442,8 @@
               "path": "/snmp/local-users/local-user/active-status",
               "type": "string",
               "label": "active-status",
+              "minLength": 1,
+              "maxLength": 9,
               "readonly": true
             },
             {
@@ -441,6 +451,8 @@
               "type": "string",
               "label": "auth-key",
               "required": true,
+              "minLength": 1,
+              "maxLength": 432,
               "must": [
                 {
                   "expr": "((../../../system/local-user-cmplx-check='true') and (string-length(../auth-key)) \u003e= ../../../system/password-min-length) or (../../../system/local-user-cmplx-check!='true')"
@@ -491,6 +503,8 @@
               "path": "/snmp/local-users/local-user/name",
               "type": "string",
               "label": "name",
+              "minLength": 1,
+              "maxLength": 32,
               "isKey": true
             },
             {
@@ -498,6 +512,8 @@
               "type": "string",
               "label": "priv-key",
               "required": true,
+              "minLength": 1,
+              "maxLength": 432,
               "must": [
                 {
                   "expr": "((../../../system/local-user-cmplx-check='true') and (string-length(../priv-key)) \u003e= ../../../system/password-min-length) or (../../../system/local-user-cmplx-check!='true')"
@@ -550,6 +566,8 @@
               "path": "/snmp/mib-views/mib-view/sub-tree",
               "type": "string",
               "label": "sub-tree",
+              "minLength": 1,
+              "maxLength": 255,
               "isKey": true
             },
             {
@@ -572,6 +590,8 @@
               "path": "/snmp/mib-views/mib-view/view-name",
               "type": "string",
               "label": "view-name",
+              "minLength": 1,
+              "maxLength": 32,
               "isKey": true
             }
           ]
@@ -669,12 +689,16 @@
               "path": "/snmp/ntfy-fltr-prfs/ntfy-fltr-prf/name",
               "type": "string",
               "label": "name",
+              "minLength": 1,
+              "maxLength": 32,
               "isKey": true
             },
             {
               "path": "/snmp/ntfy-fltr-prfs/ntfy-fltr-prf/subtree",
               "type": "string",
               "label": "subtree",
+              "minLength": 1,
+              "maxLength": 255,
               "isKey": true
             },
             {
@@ -731,12 +755,16 @@
                 {
                   "path": "/snmp/proxy/communitys/community/acl",
                   "type": "string",
-                  "label": "acl"
+                  "label": "acl",
+                  "minLength": 1,
+                  "maxLength": 32
                 },
                 {
                   "path": "/snmp/proxy/communitys/community/alias-name",
                   "type": "string",
-                  "label": "alias-name"
+                  "label": "alias-name",
+                  "minLength": 1,
+                  "maxLength": 32
                 },
                 {
                   "path": "/snmp/proxy/communitys/community/engine-id",
@@ -750,6 +778,8 @@
                   "path": "/snmp/proxy/communitys/community/name",
                   "type": "string",
                   "label": "name",
+                  "minLength": 1,
+                  "maxLength": 168,
                   "must": [
                     {
                       "expr": "string-length(../name)\u003e=../../../../system/password-min-length or ../../../../system/community-cmplx-check='false'"
@@ -781,7 +811,9 @@
                 {
                   "path": "/snmp/proxy/ipv6-sources/ipv6-source/vpn-name",
                   "type": "string",
-                  "label": "vpn-name"
+                  "label": "vpn-name",
+                  "minLength": 1,
+                  "maxLength": 31
                 }
               ]
             }
@@ -808,12 +840,16 @@
                   "path": "/snmp/proxy/rules/rule/host-name",
                   "type": "string",
                   "label": "host-name",
-                  "required": true
+                  "required": true,
+                  "minLength": 1,
+                  "maxLength": 32
                 },
                 {
                   "path": "/snmp/proxy/rules/rule/name",
                   "type": "string",
                   "label": "name",
+                  "minLength": 1,
+                  "maxLength": 32,
                   "isKey": true
                 },
                 {
@@ -870,6 +906,8 @@
                   "type": "string",
                   "label": "security-name",
                   "required": true,
+                  "minLength": 1,
+                  "maxLength": 168,
                   "when": "../security-model != 'v3'"
                 },
                 {
@@ -877,6 +915,8 @@
                   "type": "string",
                   "label": "security-v3-name",
                   "required": true,
+                  "minLength": 1,
+                  "maxLength": 32,
                   "when": "../security-model='v3'"
                 },
                 {
@@ -921,6 +961,8 @@
                   "path": "/snmp/proxy/source-interfaces/source-interface/interface-name",
                   "type": "string",
                   "label": "interface-name",
+                  "minLength": 1,
+                  "maxLength": 63,
                   "isKey": true
                 }
               ]
@@ -940,12 +982,16 @@
                 {
                   "path": "/snmp/proxy/standard-communitys/standard-community/acl",
                   "type": "string",
-                  "label": "acl"
+                  "label": "acl",
+                  "minLength": 1,
+                  "maxLength": 32
                 },
                 {
                   "path": "/snmp/proxy/standard-communitys/standard-community/alias-name",
                   "type": "string",
                   "label": "alias-name",
+                  "minLength": 1,
+                  "maxLength": 32,
                   "must": [
                     {
                       "expr": "(../alias-name!=../name)"
@@ -966,6 +1012,8 @@
                   "type": "string",
                   "label": "name",
                   "required": true,
+                  "minLength": 1,
+                  "maxLength": 168,
                   "must": [
                     {
                       "expr": "string-length(../name)\u003e=../../../../system/password-min-length or ../../../../system/community-cmplx-check='false'"
@@ -1007,12 +1055,16 @@
                 {
                   "path": "/snmp/proxy/target-hosts/target-host/interface-name",
                   "type": "string",
-                  "label": "interface-name"
+                  "label": "interface-name",
+                  "minLength": 1,
+                  "maxLength": 63
                 },
                 {
                   "path": "/snmp/proxy/target-hosts/target-host/name",
                   "type": "string",
                   "label": "name",
+                  "minLength": 1,
+                  "maxLength": 32,
                   "must": [
                     {
                       "expr": "count(/snmp/target-hosts/target-host[nms-name = current()]) = 0"
@@ -1053,7 +1105,9 @@
                           "path": "/snmp/proxy/target-hosts/target-host/usm-name",
                           "type": "string",
                           "label": "usm-name",
-                          "required": true
+                          "required": true,
+                          "minLength": 1,
+                          "maxLength": 32
                         }
                       ]
                     },
@@ -1065,7 +1119,9 @@
                           "path": "/snmp/proxy/target-hosts/target-host/security-name-v1",
                           "type": "string",
                           "label": "security-name-v1",
-                          "required": true
+                          "required": true,
+                          "minLength": 1,
+                          "maxLength": 168
                         }
                       ]
                     },
@@ -1077,7 +1133,9 @@
                           "path": "/snmp/proxy/target-hosts/target-host/security-name-v2c",
                           "type": "string",
                           "label": "security-name-v2c",
-                          "required": true
+                          "required": true,
+                          "minLength": 1,
+                          "maxLength": 168
                         }
                       ]
                     }
@@ -1107,6 +1165,8 @@
                   "path": "/snmp/proxy/target-hosts/target-host/vpn",
                   "type": "string",
                   "label": "vpn",
+                  "minLength": 1,
+                  "maxLength": 31,
                   "must": [
                     {
                       "expr": "not(../public-net='true') or (../public-net='true' and ../vpn='_public_')"
@@ -1137,12 +1197,16 @@
                 {
                   "path": "/snmp/proxy/usm-users/usm-user/acl-number",
                   "type": "string",
-                  "label": "acl-number"
+                  "label": "acl-number",
+                  "minLength": 1,
+                  "maxLength": 32
                 },
                 {
                   "path": "/snmp/proxy/usm-users/usm-user/active-status",
                   "type": "string",
                   "label": "active-status",
+                  "minLength": 1,
+                  "maxLength": 9,
                   "readonly": true
                 },
                 {
@@ -1150,6 +1214,8 @@
                   "type": "string",
                   "label": "auth-key",
                   "required": true,
+                  "minLength": 1,
+                  "maxLength": 432,
                   "when": "../auth-protocol != 'noAuth'",
                   "must": [
                     {
@@ -1195,7 +1261,9 @@
                 {
                   "path": "/snmp/proxy/usm-users/usm-user/group-name",
                   "type": "string",
-                  "label": "group-name"
+                  "label": "group-name",
+                  "minLength": 1,
+                  "maxLength": 32
                 },
                 {
                   "path": "/snmp/proxy/usm-users/usm-user/is-auth-localized",
@@ -1220,6 +1288,8 @@
                   "type": "string",
                   "label": "priv-key",
                   "required": true,
+                  "minLength": 1,
+                  "maxLength": 432,
                   "when": "../auth-protocol!='noAuth' and ../priv-protocol!='noPriv'",
                   "must": [
                     {
@@ -1267,6 +1337,8 @@
                   "path": "/snmp/proxy/usm-users/usm-user/user-name",
                   "type": "string",
                   "label": "user-name",
+                  "minLength": 1,
+                  "maxLength": 32,
                   "isKey": true
                 }
               ]
@@ -1289,6 +1361,8 @@
               "path": "/snmp/source-interfaces/source-interface/interface-name",
               "type": "string",
               "label": "interface-name",
+              "minLength": 1,
+              "maxLength": 63,
               "isKey": true
             }
           ]
@@ -1324,12 +1398,16 @@
             {
               "path": "/snmp/standard-communitys/standard-community/acl",
               "type": "string",
-              "label": "acl"
+              "label": "acl",
+              "minLength": 1,
+              "maxLength": 32
             },
             {
               "path": "/snmp/standard-communitys/standard-community/alias-name",
               "type": "string",
               "label": "alias-name",
+              "minLength": 1,
+              "maxLength": 32,
               "must": [
                 {
                   "expr": "(../alias-name!=../name)"
@@ -1342,6 +1420,8 @@
               "type": "string",
               "label": "name",
               "required": true,
+              "minLength": 1,
+              "maxLength": 168,
               "must": [
                 {
                   "expr": "string-length(../name)\u003e=../../../system/password-min-length or ../../../system/community-cmplx-check='false'"
@@ -1351,7 +1431,9 @@
             {
               "path": "/snmp/standard-communitys/standard-community/view-name",
               "type": "string",
-              "label": "view-name"
+              "label": "view-name",
+              "minLength": 1,
+              "maxLength": 32
             }
           ]
         }
@@ -1365,7 +1447,9 @@
         {
           "path": "/snmp/system/acl",
           "type": "string",
-          "label": "acl"
+          "label": "acl",
+          "minLength": 1,
+          "maxLength": 32
         },
         {
           "path": "/snmp/system/community-cmplx-check",
@@ -1422,6 +1506,8 @@
           "path": "/snmp/system/ipv6-vpn-instance-name",
           "type": "string",
           "label": "ipv6-vpn-instance-name",
+          "minLength": 1,
+          "maxLength": 31,
           "must": [
             {
               "expr": "../ipv6-vpn-instance-name='_public_' or ../is-ipv6-public-net='false'"
@@ -1466,7 +1552,9 @@
         {
           "path": "/snmp/system/protocol-source-interface-name",
           "type": "string",
-          "label": "protocol-source-interface-name"
+          "label": "protocol-source-interface-name",
+          "minLength": 1,
+          "maxLength": 63
         },
         {
           "path": "/snmp/system/protocol-source-ipv6-address",
@@ -1495,7 +1583,9 @@
         {
           "path": "/snmp/system/trap-source-interface-name",
           "type": "string",
-          "label": "trap-source-interface-name"
+          "label": "trap-source-interface-name",
+          "minLength": 1,
+          "maxLength": 63
         },
         {
           "path": "/snmp/system/trap-source-ipv4-address",
@@ -1512,6 +1602,8 @@
           "path": "/snmp/system/vpn-instance-name",
           "type": "string",
           "label": "vpn-instance-name",
+          "minLength": 1,
+          "maxLength": 31,
           "must": [
             {
               "expr": "../vpn-instance-name='_public_' or ../is-public-net='false'"
@@ -1582,7 +1674,9 @@
             {
               "path": "/snmp/target-hosts/target-host/interface-name",
               "type": "string",
-              "label": "interface-name"
+              "label": "interface-name",
+              "minLength": 1,
+              "maxLength": 63
             },
             {
               "path": "/snmp/target-hosts/target-host/is-need-heart-beat",
@@ -1598,12 +1692,16 @@
               "path": "/snmp/target-hosts/target-host/nms-name",
               "type": "string",
               "label": "nms-name",
+              "minLength": 1,
+              "maxLength": 32,
               "isKey": true
             },
             {
               "path": "/snmp/target-hosts/target-host/notify-fltr-profile-name",
               "type": "string",
-              "label": "notify-fltr-profile-name"
+              "label": "notify-fltr-profile-name",
+              "minLength": 1,
+              "maxLength": 32
             },
             {
               "path": "/snmp/target-hosts/target-host/notify-type",
@@ -1654,7 +1752,9 @@
                       "path": "/snmp/target-hosts/target-host/usm-name",
                       "type": "string",
                       "label": "usm-name",
-                      "required": true
+                      "required": true,
+                      "minLength": 1,
+                      "maxLength": 32
                     }
                   ]
                 },
@@ -1667,6 +1767,8 @@
                       "type": "string",
                       "label": "security-name-v1",
                       "required": true,
+                      "minLength": 1,
+                      "maxLength": 168,
                       "when": "../notify-type != 'inform'"
                     }
                   ]
@@ -1679,7 +1781,9 @@
                       "path": "/snmp/target-hosts/target-host/security-name-v2c",
                       "type": "string",
                       "label": "security-name-v2c",
-                      "required": true
+                      "required": true,
+                      "minLength": 1,
+                      "maxLength": 168
                     }
                   ]
                 }
@@ -1739,6 +1843,8 @@
               "path": "/snmp/target-hosts/target-host/vpn-instance-name",
               "type": "string",
               "label": "vpn-instance-name",
+              "minLength": 1,
+              "maxLength": 31,
               "must": [
                 {
                   "expr": "../vpn-instance-name='_public_' or ../is-public-net='false'"
@@ -1812,12 +1918,16 @@
             {
               "path": "/snmp/usm-users/usm-user/acl-number",
               "type": "string",
-              "label": "acl-number"
+              "label": "acl-number",
+              "minLength": 1,
+              "maxLength": 32
             },
             {
               "path": "/snmp/usm-users/usm-user/active-status",
               "type": "string",
               "label": "active-status",
+              "minLength": 1,
+              "maxLength": 9,
               "readonly": true
             },
             {
@@ -1825,6 +1935,8 @@
               "type": "string",
               "label": "auth-key",
               "required": true,
+              "minLength": 1,
+              "maxLength": 432,
               "when": "../auth-protocol != 'noAuth'",
               "must": [
                 {
@@ -1870,7 +1982,9 @@
             {
               "path": "/snmp/usm-users/usm-user/group-name",
               "type": "string",
-              "label": "group-name"
+              "label": "group-name",
+              "minLength": 1,
+              "maxLength": 32
             },
             {
               "path": "/snmp/usm-users/usm-user/is-auth-localized",
@@ -1895,6 +2009,8 @@
               "type": "string",
               "label": "priv-key",
               "required": true,
+              "minLength": 1,
+              "maxLength": 432,
               "when": "../auth-protocol!='noAuth' and ../priv-protocol!='noPriv'",
               "must": [
                 {
@@ -1942,6 +2058,8 @@
               "path": "/snmp/usm-users/usm-user/user-name",
               "type": "string",
               "label": "user-name",
+              "minLength": 1,
+              "maxLength": 32,
               "isKey": true
             }
           ]
@@ -1961,12 +2079,16 @@
             {
               "path": "/snmp/v3-groups/v3-group/acl-number",
               "type": "string",
-              "label": "acl-number"
+              "label": "acl-number",
+              "minLength": 1,
+              "maxLength": 32
             },
             {
               "path": "/snmp/v3-groups/v3-group/group-name",
               "type": "string",
               "label": "group-name",
+              "minLength": 1,
+              "maxLength": 32,
               "isKey": true
             },
             {

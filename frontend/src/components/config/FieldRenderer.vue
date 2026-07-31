@@ -307,7 +307,7 @@ const segmentedOptions = computed(() =>
 )
 
 // 占位优先级（FE-15/FE-22）：显式 placeholder > dynamicDefault「系统自动分配」>
-// 约束元数据合成（数值 range；字符串 length 契约暂无元数据，透出后同规则自动生效）。
+// 约束元数据合成（数值 range / 字符串 length，D9 后契约携带）。
 const rangePlaceholder = computed<string | undefined>(() => {
   if (props.field.type !== 'number') return undefined
   const { minimum: min, maximum: max } = props.field
@@ -317,10 +317,20 @@ const rangePlaceholder = computed<string | undefined>(() => {
   return undefined
 })
 
+const lengthPlaceholder = computed<string | undefined>(() => {
+  if (props.field.type !== 'string') return undefined
+  const { minLength: min, maxLength: max } = props.field
+  if (min != null && max != null) return t('console.lengthBoth', { min, max })
+  if (min != null) return t('console.lengthMin', { min })
+  if (max != null) return t('console.lengthMax', { max })
+  return undefined
+})
+
 const placeholderOf = computed<string | undefined>(() =>
   props.field.placeholder ||
   (props.field.dynamicDefault ? t('console.autoAssigned') : undefined) ||
-  rangePlaceholder.value,
+  rangePlaceholder.value ||
+  lengthPlaceholder.value,
 )
 
 // 数据以 YANG 叶子名（path 末段）为键，对齐后端转换（非 full path）。

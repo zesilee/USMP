@@ -607,6 +607,8 @@
                           "path": "/l2vpn/common/pw-apss/pw-aps/aps-vpws-instances/aps-vpws-instance/description",
                           "type": "string",
                           "label": "description",
+                          "minLength": 1,
+                          "maxLength": 128,
                           "readonly": true
                         },
                         {
@@ -730,6 +732,8 @@
                           "path": "/l2vpn/common/pw-apss/pw-aps/aps-vpws-instances/aps-vpws-instance/instance-name",
                           "type": "string",
                           "label": "instance-name",
+                          "minLength": 1,
+                          "maxLength": 31,
                           "readonly": true
                         }
                       ]
@@ -739,7 +743,9 @@
                 {
                   "path": "/l2vpn/common/pw-apss/pw-aps/description",
                   "type": "string",
-                  "label": "description"
+                  "label": "description",
+                  "minLength": 1,
+                  "maxLength": 63
                 },
                 {
                   "path": "/l2vpn/common/pw-apss/pw-aps/holdoff",
@@ -813,6 +819,8 @@
                       "path": "/l2vpn/common/pw-apss/pw-aps/pw-aps-info/alarm",
                       "type": "string",
                       "label": "alarm",
+                      "minLength": 1,
+                      "maxLength": 256,
                       "readonly": true
                     },
                     {
@@ -1259,6 +1267,8 @@
                   "path": "/l2vpn/common/pw-templates/pw-template/name",
                   "type": "string",
                   "label": "name",
+                  "minLength": 1,
+                  "maxLength": 19,
                   "isKey": true
                 },
                 {
@@ -1285,7 +1295,9 @@
                       "path": "/l2vpn/common/pw-templates/pw-template/tdm-parameter/idle-code",
                       "type": "string",
                       "label": "idle-code",
-                      "pattern": "([0-9a-fA-F]{2}(:[0-9a-fA-F]{2})*)?"
+                      "pattern": "([0-9a-fA-F]{2}(:[0-9a-fA-F]{2})*)?",
+                      "minLength": 1,
+                      "maxLength": 2
                     },
                     {
                       "path": "/l2vpn/common/pw-templates/pw-template/tdm-parameter/jitter-buffer",
@@ -1341,12 +1353,15 @@
                 {
                   "path": "/l2vpn/common/pw-templates/pw-template/tunnel-policy",
                   "type": "string",
-                  "label": "tunnel-policy"
+                  "label": "tunnel-policy",
+                  "minLength": 1,
+                  "maxLength": 39
                 },
                 {
                   "path": "/l2vpn/common/pw-templates/pw-template/vccv-capability",
                   "type": "string",
                   "label": "vccv-capability",
+                  "maxLength": 40,
                   "readonly": true
                 }
               ]
@@ -1573,6 +1588,8 @@
                               "path": "/l2vpn/common/vpls-statistic/vpls-tunnel-references/vpls-tunnel-reference/references/reference/instance-name",
                               "type": "string",
                               "label": "instance-name",
+                              "minLength": 1,
+                              "maxLength": 31,
                               "readonly": true,
                               "isKey": true
                             }
@@ -1584,6 +1601,8 @@
                       "path": "/l2vpn/common/vpls-statistic/vpls-tunnel-references/vpls-tunnel-reference/tunnel-policy",
                       "type": "string",
                       "label": "tunnel-policy",
+                      "minLength": 1,
+                      "maxLength": 39,
                       "readonly": true,
                       "isKey": true
                     }
@@ -1607,6 +1626,8 @@
                   "path": "/l2vpn/common/vpws-bgp-vpns/vpws-bgp-vpn/auto-route-distinguisher",
                   "type": "string",
                   "label": "auto-route-distinguisher",
+                  "minLength": 3,
+                  "maxLength": 21,
                   "readonly": true
                 },
                 {
@@ -1695,6 +1716,8 @@
                   "path": "/l2vpn/common/vpws-bgp-vpns/vpws-bgp-vpn/name",
                   "type": "string",
                   "label": "name",
+                  "minLength": 1,
+                  "maxLength": 31,
                   "isKey": true
                 },
                 {
@@ -1762,6 +1785,7 @@
                           "path": "/l2vpn/common/vpws-bgp-vpns/vpws-bgp-vpn/remote-sites/remote-site/route-distinguisher",
                           "type": "string",
                           "label": "route-distinguisher",
+                          "maxLength": 21,
                           "readonly": true
                         }
                       ]
@@ -1771,7 +1795,9 @@
                 {
                   "path": "/l2vpn/common/vpws-bgp-vpns/vpws-bgp-vpn/route-distinguisher",
                   "type": "string",
-                  "label": "route-distinguisher"
+                  "label": "route-distinguisher",
+                  "minLength": 3,
+                  "maxLength": 21
                 },
                 {
                   "path": "/l2vpn/common/vpws-bgp-vpns/vpws-bgp-vpn/sites",
@@ -1844,6 +1870,8 @@
                           "path": "/l2vpn/common/vpws-bgp-vpns/vpws-bgp-vpn/sites/site/name",
                           "type": "string",
                           "label": "name",
+                          "minLength": 1,
+                          "maxLength": 20,
                           "isKey": true
                         },
                         {
@@ -1892,6 +1920,8 @@
                           "path": "/l2vpn/common/vpws-bgp-vpns/vpws-bgp-vpn/vpn-targets/vpn-target/rt-value",
                           "type": "string",
                           "label": "rt-value",
+                          "minLength": 3,
+                          "maxLength": 21,
                           "isKey": true
                         }
                       ]
@@ -2345,18 +2375,24 @@
               "path": "/l2vpn/instances/instance/description",
               "type": "string",
               "label": "description",
+              "minLength": 1,
+              "maxLength": 128,
               "when": "not(../type='vpws-switch' or ../type='vpws-bgp')"
             },
             {
               "path": "/l2vpn/instances/instance/last-up-time",
               "type": "string",
               "label": "last-up-time",
+              "minLength": 1,
+              "maxLength": 80,
               "readonly": true
             },
             {
               "path": "/l2vpn/instances/instance/name",
               "type": "string",
               "label": "name",
+              "minLength": 1,
+              "maxLength": 31,
               "isKey": true
             },
             {
@@ -2383,6 +2419,8 @@
               "path": "/l2vpn/instances/instance/total-up-time",
               "type": "string",
               "label": "total-up-time",
+              "minLength": 1,
+              "maxLength": 80,
               "readonly": true
             },
             {
@@ -2504,6 +2542,8 @@
                           "path": "/l2vpn/instances/instance/vpls/acs/ac/last-up-time",
                           "type": "string",
                           "label": "last-up-time",
+                          "minLength": 1,
+                          "maxLength": 60,
                           "readonly": true
                         },
                         {
@@ -2531,6 +2571,8 @@
                           "type": "string",
                           "label": "site-name",
                           "pattern": "[a-zA-Z][a-zA-Z0-9_-]*",
+                          "minLength": 1,
+                          "maxLength": 19,
                           "when": "../../../bgp-multi-homing-signaling/sites/site/site-id"
                         },
                         {
@@ -2571,6 +2613,8 @@
                           "path": "/l2vpn/instances/instance/vpls/acs/ac/total-up-time",
                           "type": "string",
                           "label": "total-up-time",
+                          "minLength": 1,
+                          "maxLength": 60,
                           "readonly": true
                         }
                       ]
@@ -2620,6 +2664,8 @@
                           "path": "/l2vpn/instances/instance/vpls/bds/bd/last-up-time",
                           "type": "string",
                           "label": "last-up-time",
+                          "minLength": 1,
+                          "maxLength": 60,
                           "readonly": true
                         },
                         {
@@ -2661,6 +2707,8 @@
                           "path": "/l2vpn/instances/instance/vpls/bds/bd/total-up-time",
                           "type": "string",
                           "label": "total-up-time",
+                          "minLength": 1,
+                          "maxLength": 60,
                           "readonly": true
                         }
                       ]
@@ -2682,6 +2730,8 @@
                       "path": "/l2vpn/instances/instance/vpls/bgp-multi-homing-signaling/auto-route-distinguisher",
                       "type": "string",
                       "label": "auto-route-distinguisher",
+                      "minLength": 3,
+                      "maxLength": 21,
                       "readonly": true
                     },
                     {
@@ -2733,6 +2783,8 @@
                           "type": "string",
                           "label": "name",
                           "pattern": "[a-zA-Z][a-zA-Z0-9_-]*",
+                          "minLength": 1,
+                          "maxLength": 19,
                           "must": [
                             {
                               "expr": "../name='default'"
@@ -2787,12 +2839,15 @@
                               "type": "string",
                               "label": "backup-pw-token",
                               "pattern": "(0x|0X)?[0-9a-fA-F]+",
+                              "minLength": 1,
+                              "maxLength": 10,
                               "readonly": true
                             },
                             {
                               "path": "/l2vpn/instances/instance/vpls/bgp-multi-homing-signaling/pw-infos/pw-info/broadcast-tunnel-key",
                               "type": "string",
                               "label": "broadcast-tunnel-key",
+                              "maxLength": 21,
                               "readonly": true
                             },
                             {
@@ -2843,6 +2898,8 @@
                               "type": "string",
                               "label": "main-pw-token",
                               "pattern": "(0x|0X)?[0-9a-fA-F]+",
+                              "minLength": 1,
+                              "maxLength": 10,
                               "readonly": true
                             },
                             {
@@ -2977,6 +3034,8 @@
                               "path": "/l2vpn/instances/instance/vpls/bgp-multi-homing-signaling/pw-infos/pw-info/total-up-time",
                               "type": "string",
                               "label": "total-up-time",
+                              "minLength": 1,
+                              "maxLength": 80,
                               "readonly": true
                             },
                             {
@@ -3136,6 +3195,8 @@
                                       "path": "/l2vpn/instances/instance/vpls/bgp-multi-homing-signaling/pw-infos/pw-info/tunnels/tunnel/out-interface",
                                       "type": "string",
                                       "label": "out-interface",
+                                      "minLength": 1,
+                                      "maxLength": 63,
                                       "readonly": true
                                     },
                                     {
@@ -3149,6 +3210,7 @@
                                       "path": "/l2vpn/instances/instance/vpls/bgp-multi-homing-signaling/pw-infos/pw-info/tunnels/tunnel/tunnel-key",
                                       "type": "string",
                                       "label": "tunnel-key",
+                                      "maxLength": 21,
                                       "readonly": true,
                                       "isKey": true
                                     },
@@ -3156,6 +3218,7 @@
                                       "path": "/l2vpn/instances/instance/vpls/bgp-multi-homing-signaling/pw-infos/pw-info/tunnels/tunnel/tunnel-name",
                                       "type": "string",
                                       "label": "tunnel-name",
+                                      "maxLength": 64,
                                       "readonly": true
                                     },
                                     {
@@ -3247,7 +3310,9 @@
                             {
                               "path": "/l2vpn/instances/instance/vpls/bgp-multi-homing-signaling/pws/pw/name",
                               "type": "string",
-                              "label": "name"
+                              "label": "name",
+                              "minLength": 1,
+                              "maxLength": 15
                             },
                             {
                               "path": "/l2vpn/instances/instance/vpls/bgp-multi-homing-signaling/pws/pw/peer-ip",
@@ -3273,7 +3338,9 @@
                     {
                       "path": "/l2vpn/instances/instance/vpls/bgp-multi-homing-signaling/route-distinguisher",
                       "type": "string",
-                      "label": "route-distinguisher"
+                      "label": "route-distinguisher",
+                      "minLength": 3,
+                      "maxLength": 21
                     },
                     {
                       "path": "/l2vpn/instances/instance/vpls/bgp-multi-homing-signaling/site-range",
@@ -3310,6 +3377,8 @@
                               "type": "string",
                               "label": "name",
                               "pattern": "[a-zA-Z][a-zA-Z0-9_-]*",
+                              "minLength": 1,
+                              "maxLength": 19,
                               "must": [
                                 {
                                   "expr": "not(../name='default')"
@@ -3372,6 +3441,8 @@
                               "path": "/l2vpn/instances/instance/vpls/bgp-multi-homing-signaling/vpn-targets/vpn-target/rt-value",
                               "type": "string",
                               "label": "rt-value",
+                              "minLength": 3,
+                              "maxLength": 21,
                               "isKey": true
                             }
                           ]
@@ -3396,6 +3467,8 @@
                       "path": "/l2vpn/instances/instance/vpls/bgp-signaling/auto-route-distinguisher",
                       "type": "string",
                       "label": "auto-route-distinguisher",
+                      "minLength": 3,
+                      "maxLength": 21,
                       "readonly": true
                     },
                     {
@@ -3546,12 +3619,15 @@
                               "type": "string",
                               "label": "backup-pw-token",
                               "pattern": "(0x|0X)?[0-9a-fA-F]+",
+                              "minLength": 1,
+                              "maxLength": 10,
                               "readonly": true
                             },
                             {
                               "path": "/l2vpn/instances/instance/vpls/bgp-signaling/pw-infos/pw-info/broadcast-tunnel-key",
                               "type": "string",
                               "label": "broadcast-tunnel-key",
+                              "maxLength": 21,
                               "readonly": true
                             },
                             {
@@ -3602,6 +3678,8 @@
                               "type": "string",
                               "label": "main-pw-token",
                               "pattern": "(0x|0X)?[0-9a-fA-F]+",
+                              "minLength": 1,
+                              "maxLength": 10,
                               "readonly": true
                             },
                             {
@@ -3792,6 +3870,8 @@
                               "path": "/l2vpn/instances/instance/vpls/bgp-signaling/pw-infos/pw-info/total-up-time",
                               "type": "string",
                               "label": "total-up-time",
+                              "minLength": 1,
+                              "maxLength": 80,
                               "readonly": true
                             },
                             {
@@ -3951,6 +4031,8 @@
                                       "path": "/l2vpn/instances/instance/vpls/bgp-signaling/pw-infos/pw-info/tunnels/tunnel/out-interface",
                                       "type": "string",
                                       "label": "out-interface",
+                                      "minLength": 1,
+                                      "maxLength": 63,
                                       "readonly": true
                                     },
                                     {
@@ -3964,6 +4046,7 @@
                                       "path": "/l2vpn/instances/instance/vpls/bgp-signaling/pw-infos/pw-info/tunnels/tunnel/tunnel-key",
                                       "type": "string",
                                       "label": "tunnel-key",
+                                      "maxLength": 21,
                                       "readonly": true,
                                       "isKey": true
                                     },
@@ -3971,6 +4054,7 @@
                                       "path": "/l2vpn/instances/instance/vpls/bgp-signaling/pw-infos/pw-info/tunnels/tunnel/tunnel-name",
                                       "type": "string",
                                       "label": "tunnel-name",
+                                      "maxLength": 64,
                                       "readonly": true
                                     },
                                     {
@@ -4062,7 +4146,9 @@
                             {
                               "path": "/l2vpn/instances/instance/vpls/bgp-signaling/pws/pw/name",
                               "type": "string",
-                              "label": "name"
+                              "label": "name",
+                              "minLength": 1,
+                              "maxLength": 15
                             },
                             {
                               "path": "/l2vpn/instances/instance/vpls/bgp-signaling/pws/pw/peer-ip",
@@ -4204,7 +4290,9 @@
                     {
                       "path": "/l2vpn/instances/instance/vpls/bgp-signaling/route-distinguisher",
                       "type": "string",
-                      "label": "route-distinguisher"
+                      "label": "route-distinguisher",
+                      "minLength": 3,
+                      "maxLength": 21
                     },
                     {
                       "path": "/l2vpn/instances/instance/vpls/bgp-signaling/sites",
@@ -4274,6 +4362,8 @@
                               "path": "/l2vpn/instances/instance/vpls/bgp-signaling/vpn-targets/vpn-target/rt-value",
                               "type": "string",
                               "label": "rt-value",
+                              "minLength": 3,
+                              "maxLength": 21,
                               "isKey": true
                             }
                           ]
@@ -4307,7 +4397,9 @@
                             {
                               "path": "/l2vpn/instances/instance/vpls/bgpad-signaling/pws/pw/name",
                               "type": "string",
-                              "label": "name"
+                              "label": "name",
+                              "minLength": 1,
+                              "maxLength": 15
                             },
                             {
                               "path": "/l2vpn/instances/instance/vpls/bgpad-signaling/pws/pw/peer-ip",
@@ -4334,6 +4426,8 @@
                       "path": "/l2vpn/instances/instance/vpls/bgpad-signaling/route-distinguisher",
                       "type": "string",
                       "label": "route-distinguisher",
+                      "minLength": 3,
+                      "maxLength": 21,
                       "readonly": true
                     },
                     {
@@ -4366,7 +4460,9 @@
                     {
                       "path": "/l2vpn/instances/instance/vpls/bgpad-signaling/vpls-id",
                       "type": "string",
-                      "label": "vpls-id"
+                      "label": "vpls-id",
+                      "minLength": 3,
+                      "maxLength": 21
                     },
                     {
                       "path": "/l2vpn/instances/instance/vpls/bgpad-signaling/vpn-targets",
@@ -4399,6 +4495,8 @@
                               "path": "/l2vpn/instances/instance/vpls/bgpad-signaling/vpn-targets/vpn-target/rt-value",
                               "type": "string",
                               "label": "rt-value",
+                              "minLength": 3,
+                              "maxLength": 21,
                               "isKey": true
                             }
                           ]
@@ -4562,6 +4660,7 @@
                           "path": "/l2vpn/instances/instance/vpls/ipmsi/root/p2mp-template-name",
                           "type": "string",
                           "label": "p2mp-template-name",
+                          "maxLength": 32,
                           "when": "../te-p2mp-dynamic='false' and ../mc-tunnel-type='te-p2mp'"
                         },
                         {
@@ -4999,6 +5098,8 @@
                               "path": "/l2vpn/instances/instance/vpls/ldp-signaling/pws/pw/name",
                               "type": "string",
                               "label": "name",
+                              "minLength": 1,
+                              "maxLength": 15,
                               "operationExclude": [
                                 "update"
                               ]
@@ -5139,7 +5240,9 @@
                             {
                               "path": "/l2vpn/instances/instance/vpls/ldp-signaling/pws/pw/tunnel-policy",
                               "type": "string",
-                              "label": "tunnel-policy"
+                              "label": "tunnel-policy",
+                              "minLength": 1,
+                              "maxLength": 39
                             },
                             {
                               "path": "/l2vpn/instances/instance/vpls/ldp-signaling/pws/pw/upe",
@@ -5188,6 +5291,8 @@
                               "path": "/l2vpn/instances/instance/vpls/ldp-signaling/redundancy-protect-groups/redundancy-protect-group/name",
                               "type": "string",
                               "label": "name",
+                              "minLength": 1,
+                              "maxLength": 15,
                               "isKey": true
                             },
                             {
@@ -5527,6 +5632,8 @@
                       "path": "/l2vpn/instances/instance/vpls/pbb/b-evpn",
                       "type": "string",
                       "label": "b-evpn",
+                      "minLength": 1,
+                      "maxLength": 31,
                       "must": [
                         {
                           "expr": "../../work-mode='i-vsi-b-evpn-interworking' and ../i-tag"
@@ -5548,6 +5655,7 @@
                       "type": "string",
                       "label": "backbone-destination-mac",
                       "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+                      "maxLength": 255,
                       "when": "../../work-mode='i-vsi' or ../../work-mode='i-vsi-p2p'"
                     },
                     {
@@ -5555,6 +5663,7 @@
                       "type": "string",
                       "label": "backbone-source-mac",
                       "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+                      "maxLength": 255,
                       "when": "../../work-mode='b-vsi' or ../../work-mode='i-vsi' or ../../work-mode='i-vsi-p2p'"
                     },
                     {
@@ -5599,6 +5708,8 @@
                   "path": "/l2vpn/instances/instance/vpls/track-admin-vsi",
                   "type": "string",
                   "label": "track-admin-vsi",
+                  "minLength": 1,
+                  "maxLength": 31,
                   "when": "../work-mode='normal' or ../work-mode='b-vsi'",
                   "must": [
                     {
@@ -5624,7 +5735,9 @@
                 {
                   "path": "/l2vpn/instances/instance/vpls/tunnel-policy",
                   "type": "string",
-                  "label": "tunnel-policy"
+                  "label": "tunnel-policy",
+                  "minLength": 1,
+                  "maxLength": 39
                 },
                 {
                   "path": "/l2vpn/instances/instance/vpls/unknown-multicast-action",
@@ -5781,12 +5894,16 @@
                       "path": "/l2vpn/instances/instance/vpws-bgp/oam-mapping/ma-name",
                       "type": "string",
                       "label": "ma-name",
+                      "minLength": 1,
+                      "maxLength": 43,
                       "when": "../type='1ag'"
                     },
                     {
                       "path": "/l2vpn/instances/instance/vpws-bgp/oam-mapping/md-name",
                       "type": "string",
                       "label": "md-name",
+                      "minLength": 1,
+                      "maxLength": 43,
                       "when": "../type='1ag'"
                     },
                     {
@@ -5923,7 +6040,9 @@
                         {
                           "path": "/l2vpn/instances/instance/vpws-bgp/pws/pw/tunnel-policy",
                           "type": "string",
-                          "label": "tunnel-policy"
+                          "label": "tunnel-policy",
+                          "minLength": 1,
+                          "maxLength": 39
                         }
                       ]
                     }
@@ -6045,6 +6164,8 @@
                       "path": "/l2vpn/instances/instance/vpws-ldp/ac-oam-mapping/ma-name",
                       "type": "string",
                       "label": "ma-name",
+                      "minLength": 1,
+                      "maxLength": 43,
                       "when": "../type='1ag'",
                       "operationExclude": [
                         "update",
@@ -6055,6 +6176,8 @@
                       "path": "/l2vpn/instances/instance/vpws-ldp/ac-oam-mapping/md-name",
                       "type": "string",
                       "label": "md-name",
+                      "minLength": 1,
+                      "maxLength": 43,
                       "when": "../type='1ag'",
                       "operationExclude": [
                         "update",
@@ -6135,6 +6258,7 @@
                                   "type": "string",
                                   "label": "mac-address",
                                   "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+                                  "maxLength": 255,
                                   "readonly": true
                                 },
                                 {
@@ -6203,7 +6327,8 @@
                               "path": "/l2vpn/instances/instance/vpws-ldp/acs/ac/arp-entry/local-ce-mac",
                               "type": "string",
                               "label": "local-ce-mac",
-                              "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}"
+                              "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+                              "maxLength": 255
                             },
                             {
                               "path": "/l2vpn/instances/instance/vpws-ldp/acs/ac/arp-entry/remote-ce-ip",
@@ -6580,7 +6705,9 @@
                               "path": "/l2vpn/instances/instance/vpws-ldp/out-acs/out-ac/tdm-parameter/idle-code",
                               "type": "string",
                               "label": "idle-code",
-                              "pattern": "([0-9a-fA-F]{2}(:[0-9a-fA-F]{2})*)?"
+                              "pattern": "([0-9a-fA-F]{2}(:[0-9a-fA-F]{2})*)?",
+                              "minLength": 1,
+                              "maxLength": 2
                             },
                             {
                               "path": "/l2vpn/instances/instance/vpws-ldp/out-acs/out-ac/tdm-parameter/jitter-buffer",
@@ -7014,6 +7141,8 @@
                               "path": "/l2vpn/instances/instance/vpws-ldp/pws/pw/pw-info/bfd-for-pw",
                               "type": "string",
                               "label": "bfd-for-pw",
+                              "minLength": 1,
+                              "maxLength": 19,
                               "readonly": true
                             },
                             {
@@ -7056,6 +7185,8 @@
                               "path": "/l2vpn/instances/instance/vpws-ldp/pws/pw/pw-info/create-time",
                               "type": "string",
                               "label": "create-time",
+                              "minLength": 1,
+                              "maxLength": 80,
                               "readonly": true
                             },
                             {
@@ -7081,6 +7212,7 @@
                                       "path": "/l2vpn/instances/instance/vpws-ldp/pws/pw/pw-info/down-causes/down-cause/down-cause",
                                       "type": "string",
                                       "label": "down-cause",
+                                      "maxLength": 100,
                                       "readonly": true
                                     },
                                     {
@@ -7098,6 +7230,8 @@
                               "path": "/l2vpn/instances/instance/vpws-ldp/pws/pw/pw-info/dynamic-bfd-session",
                               "type": "string",
                               "label": "dynamic-bfd-session",
+                              "minLength": 1,
+                              "maxLength": 19,
                               "readonly": true
                             },
                             {
@@ -7236,12 +7370,14 @@
                               "path": "/l2vpn/instances/instance/vpws-ldp/pws/pw/pw-info/hard-pipe-expand-ratio",
                               "type": "string",
                               "label": "hard-pipe-expand-ratio",
+                              "maxLength": 7,
                               "readonly": true
                             },
                             {
                               "path": "/l2vpn/instances/instance/vpws-ldp/pws/pw/pw-info/idle-code",
                               "type": "string",
                               "label": "idle-code",
+                              "maxLength": 3,
                               "readonly": true
                             },
                             {
@@ -7352,6 +7488,7 @@
                                       "path": "/l2vpn/instances/instance/vpws-ldp/pws/pw/pw-info/label-stacks/label-stack/label",
                                       "type": "string",
                                       "label": "label",
+                                      "maxLength": 20,
                                       "readonly": true
                                     },
                                     {
@@ -7382,6 +7519,7 @@
                                       "path": "/l2vpn/instances/instance/vpws-ldp/pws/pw/pw-info/label-stacks/label-stack/type",
                                       "type": "string",
                                       "label": "type",
+                                      "maxLength": 20,
                                       "readonly": true
                                     }
                                   ]
@@ -7392,12 +7530,16 @@
                               "path": "/l2vpn/instances/instance/vpws-ldp/pws/pw/pw-info/last-change-time",
                               "type": "string",
                               "label": "last-change-time",
+                              "minLength": 1,
+                              "maxLength": 80,
                               "readonly": true
                             },
                             {
                               "path": "/l2vpn/instances/instance/vpws-ldp/pws/pw/pw-info/last-up-time",
                               "type": "string",
                               "label": "last-up-time",
+                              "minLength": 1,
+                              "maxLength": 80,
                               "readonly": true
                             },
                             {
@@ -7553,6 +7695,8 @@
                               "type": "string",
                               "label": "local-state-code",
                               "pattern": "(0x|0X)?[0-9a-fA-F]+",
+                              "minLength": 1,
+                              "maxLength": 10,
                               "readonly": true
                             },
                             {
@@ -7577,6 +7721,7 @@
                               "path": "/l2vpn/instances/instance/vpws-ldp/pws/pw/pw-info/local-vccv",
                               "type": "string",
                               "label": "local-vccv",
+                              "maxLength": 40,
                               "readonly": true
                             },
                             {
@@ -7625,6 +7770,8 @@
                               "path": "/l2vpn/instances/instance/vpws-ldp/pws/pw/pw-info/oam-fault-type",
                               "type": "string",
                               "label": "oam-fault-type",
+                              "minLength": 1,
+                              "maxLength": 100,
                               "readonly": true
                             },
                             {
@@ -7899,6 +8046,8 @@
                               "type": "string",
                               "label": "remote-state-code",
                               "pattern": "(0x|0X)?[0-9a-fA-F]+",
+                              "minLength": 1,
+                              "maxLength": 10,
                               "readonly": true
                             },
                             {
@@ -7923,6 +8072,7 @@
                               "path": "/l2vpn/instances/instance/vpws-ldp/pws/pw/pw-info/remote-vccv",
                               "type": "string",
                               "label": "remote-vccv",
+                              "maxLength": 40,
                               "readonly": true
                             },
                             {
@@ -7930,6 +8080,8 @@
                               "type": "string",
                               "label": "remote-vccv-code",
                               "pattern": "(0x|0X)?[0-9a-fA-F]+",
+                              "minLength": 1,
+                              "maxLength": 10,
                               "readonly": true
                             },
                             {
@@ -8058,12 +8210,14 @@
                                       "path": "/l2vpn/instances/instance/vpws-ldp/pws/pw/pw-info/status-changes/status-change/reason",
                                       "type": "string",
                                       "label": "reason",
+                                      "maxLength": 100,
                                       "readonly": true
                                     },
                                     {
                                       "path": "/l2vpn/instances/instance/vpws-ldp/pws/pw/pw-info/status-changes/status-change/timestamp",
                                       "type": "string",
                                       "label": "timestamp",
+                                      "maxLength": 60,
                                       "readonly": true
                                     }
                                   ]
@@ -8080,12 +8234,16 @@
                               "path": "/l2vpn/instances/instance/vpws-ldp/pws/pw/pw-info/template-name",
                               "type": "string",
                               "label": "template-name",
+                              "minLength": 1,
+                              "maxLength": 19,
                               "readonly": true
                             },
                             {
                               "path": "/l2vpn/instances/instance/vpws-ldp/pws/pw/pw-info/total-up-time",
                               "type": "string",
                               "label": "total-up-time",
+                              "minLength": 1,
+                              "maxLength": 80,
                               "readonly": true
                             },
                             {
@@ -8098,6 +8256,8 @@
                               "path": "/l2vpn/instances/instance/vpws-ldp/pws/pw/pw-info/tunnel-policy",
                               "type": "string",
                               "label": "tunnel-policy",
+                              "minLength": 1,
+                              "maxLength": 39,
                               "readonly": true
                             },
                             {
@@ -8123,6 +8283,7 @@
                                       "path": "/l2vpn/instances/instance/vpws-ldp/pws/pw/pw-info/tunnels/tunnel/tunnel-key",
                                       "type": "string",
                                       "label": "tunnel-key",
+                                      "maxLength": 21,
                                       "readonly": true,
                                       "isKey": true
                                     },
@@ -8130,6 +8291,7 @@
                                       "path": "/l2vpn/instances/instance/vpws-ldp/pws/pw/pw-info/tunnels/tunnel/tunnel-name",
                                       "type": "string",
                                       "label": "tunnel-name",
+                                      "maxLength": 64,
                                       "readonly": true
                                     },
                                     {
@@ -8208,6 +8370,8 @@
                               "path": "/l2vpn/instances/instance/vpws-ldp/pws/pw/pw-info/up-time",
                               "type": "string",
                               "label": "up-time",
+                              "minLength": 1,
+                              "maxLength": 80,
                               "readonly": true
                             }
                           ]
@@ -8302,6 +8466,8 @@
                               "type": "string",
                               "label": "idle-code",
                               "pattern": "[a-fA-F0-9]{1,2}",
+                              "minLength": 1,
+                              "maxLength": 2,
                               "dynamicDefault": true
                             },
                             {
@@ -8474,6 +8640,8 @@
                               "path": "/l2vpn/instances/instance/vpws-ldp/pws/pw/traffic-statistics/last-clear-time",
                               "type": "string",
                               "label": "last-clear-time",
+                              "minLength": 1,
+                              "maxLength": 60,
                               "readonly": true
                             },
                             {
@@ -8523,6 +8691,8 @@
                           "path": "/l2vpn/instances/instance/vpws-ldp/pws/pw/tunnel-policy",
                           "type": "string",
                           "label": "tunnel-policy",
+                          "minLength": 1,
+                          "maxLength": 39,
                           "when": "../role!='pw-bypass'"
                         },
                         {
@@ -8659,12 +8829,15 @@
                           "path": "/l2vpn/instances/instance/vpws-ldp/reliability/reroute/last-switchback-reason",
                           "type": "string",
                           "label": "last-switchback-reason",
+                          "maxLength": 100,
                           "readonly": true
                         },
                         {
                           "path": "/l2vpn/instances/instance/vpws-ldp/reliability/reroute/last-switchback-time",
                           "type": "string",
                           "label": "last-switchback-time",
+                          "minLength": 1,
+                          "maxLength": 60,
                           "readonly": true
                         },
                         {
@@ -8712,7 +8885,9 @@
                 {
                   "path": "/l2vpn/instances/instance/vpws-ldp/service-name",
                   "type": "string",
-                  "label": "service-name"
+                  "label": "service-name",
+                  "minLength": 1,
+                  "maxLength": 31
                 }
               ],
               "operationExclude": [
@@ -8775,7 +8950,8 @@
                               "path": "/l2vpn/instances/instance/vpws-local-ccc/acs/ac/arp-entry/local-ce-mac",
                               "type": "string",
                               "label": "local-ce-mac",
-                              "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}"
+                              "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+                              "maxLength": 255
                             },
                             {
                               "path": "/l2vpn/instances/instance/vpws-local-ccc/acs/ac/arp-entry/remote-ce-ip",
@@ -9004,7 +9180,9 @@
                       "path": "/l2vpn/instances/instance/vpws-local-ccc/tdm-parameter/idle-code",
                       "type": "string",
                       "label": "idle-code",
-                      "pattern": "([0-9a-fA-F]{2}(:[0-9a-fA-F]{2})*)?"
+                      "pattern": "([0-9a-fA-F]{2}(:[0-9a-fA-F]{2})*)?",
+                      "minLength": 1,
+                      "maxLength": 2
                     },
                     {
                       "path": "/l2vpn/instances/instance/vpws-local-ccc/tdm-parameter/jitter-buffer",
@@ -9080,6 +9258,7 @@
                                   "type": "string",
                                   "label": "mac-address",
                                   "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+                                  "maxLength": 255,
                                   "readonly": true
                                 },
                                 {
@@ -9138,7 +9317,8 @@
                               "path": "/l2vpn/instances/instance/vpws-remote-ccc/acs/ac/arp-entry/local-ce-mac",
                               "type": "string",
                               "label": "local-ce-mac",
-                              "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}"
+                              "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+                              "maxLength": 255
                             },
                             {
                               "path": "/l2vpn/instances/instance/vpws-remote-ccc/acs/ac/arp-entry/remote-ce-ip",
@@ -9477,6 +9657,8 @@
                   "path": "/l2vpn/instances/instance/vpws-switch/create-time",
                   "type": "string",
                   "label": "create-time",
+                  "minLength": 1,
+                  "maxLength": 80,
                   "readonly": true
                 },
                 {
@@ -9604,6 +9786,8 @@
                   "path": "/l2vpn/instances/instance/vpws-switch/last-change-time",
                   "type": "string",
                   "label": "last-change-time",
+                  "minLength": 1,
+                  "maxLength": 80,
                   "readonly": true
                 },
                 {
@@ -9813,7 +9997,9 @@
                         {
                           "path": "/l2vpn/instances/instance/vpws-switch/pws/pw/tunnel-policy",
                           "type": "string",
-                          "label": "tunnel-policy"
+                          "label": "tunnel-policy",
+                          "minLength": 1,
+                          "maxLength": 39
                         }
                       ],
                       "operationExclude": [
@@ -9881,12 +10067,15 @@
                           "path": "/l2vpn/instances/instance/vpws-switch/reliability/reroute/last-switchback-reason",
                           "type": "string",
                           "label": "last-switchback-reason",
+                          "maxLength": 100,
                           "readonly": true
                         },
                         {
                           "path": "/l2vpn/instances/instance/vpws-switch/reliability/reroute/last-switchback-time",
                           "type": "string",
                           "label": "last-switchback-time",
+                          "minLength": 1,
+                          "maxLength": 60,
                           "readonly": true
                         },
                         {
@@ -9953,6 +10142,8 @@
                   "path": "/l2vpn/instances/instance/vpws-switch/up-time",
                   "type": "string",
                   "label": "up-time",
+                  "minLength": 1,
+                  "maxLength": 80,
                   "readonly": true
                 }
               ],

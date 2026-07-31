@@ -211,6 +211,8 @@
           "path": "/mstp/default-process/region-name",
           "type": "string",
           "label": "region-name",
+          "minLength": 1,
+          "maxLength": 32,
           "dynamicDefault": true
         },
         {
@@ -260,7 +262,8 @@
           "path": "/mstp/global/bridge-address",
           "type": "string",
           "label": "bridge-address",
-          "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}"
+          "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+          "maxLength": 255
         },
         {
           "path": "/mstp/global/edge-port",
@@ -498,6 +501,8 @@
               "path": "/mstp/processs/process/region-name",
               "type": "string",
               "label": "region-name",
+              "minLength": 1,
+              "maxLength": 32,
               "dynamicDefault": true
             },
             {

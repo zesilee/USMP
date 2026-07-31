@@ -62,6 +62,8 @@
               "path": "/license/global-states/global-state/active-filename",
               "type": "string",
               "label": "active-filename",
+              "minLength": 5,
+              "maxLength": 127,
               "readonly": true
             },
             {
@@ -96,6 +98,7 @@
               "path": "/license/global-states/global-state/chassis-id",
               "type": "string",
               "label": "chassis-id",
+              "maxLength": 31,
               "readonly": true,
               "isKey": true
             },
@@ -103,6 +106,8 @@
               "path": "/license/global-states/global-state/esn",
               "type": "string",
               "label": "esn",
+              "minLength": 1,
+              "maxLength": 2047,
               "readonly": true
             },
             {
@@ -125,6 +130,8 @@
               "path": "/license/global-states/global-state/revoke-ticket",
               "type": "string",
               "label": "revoke-ticket",
+              "minLength": 1,
+              "maxLength": 135,
               "readonly": true
             }
           ]
@@ -147,6 +154,7 @@
               "path": "/license/license-files/license-file/chassis-id",
               "type": "string",
               "label": "chassis-id",
+              "maxLength": 31,
               "readonly": true,
               "isKey": true
             },
@@ -182,6 +190,7 @@
                       "path": "/license/license-files/license-file/features/feature/esn",
                       "type": "string",
                       "label": "esn",
+                      "maxLength": 2055,
                       "readonly": true
                     },
                     {
@@ -200,6 +209,7 @@
                               "path": "/license/license-files/license-file/features/feature/feature-items/feature-item/name",
                               "type": "string",
                               "label": "name",
+                              "maxLength": 63,
                               "readonly": true,
                               "isKey": true
                             },
@@ -224,6 +234,7 @@
                       "path": "/license/license-files/license-file/features/feature/name",
                       "type": "string",
                       "label": "name",
+                      "maxLength": 63,
                       "readonly": true,
                       "isKey": true
                     },
@@ -231,6 +242,7 @@
                       "path": "/license/license-files/license-file/features/feature/product",
                       "type": "string",
                       "label": "product",
+                      "maxLength": 63,
                       "readonly": true
                     },
                     {
@@ -268,6 +280,8 @@
               "path": "/license/license-files/license-file/filename",
               "type": "string",
               "label": "filename",
+              "minLength": 5,
+              "maxLength": 127,
               "readonly": true,
               "isKey": true
             },
@@ -287,6 +301,7 @@
                   "path": "/license/license-files/license-file/general/country",
                   "type": "string",
                   "label": "country",
+                  "maxLength": 63,
                   "readonly": true
                 },
                 {
@@ -300,24 +315,28 @@
                   "path": "/license/license-files/license-file/general/creator",
                   "type": "string",
                   "label": "creator",
+                  "maxLength": 63,
                   "readonly": true
                 },
                 {
                   "path": "/license/license-files/license-file/general/customer",
                   "type": "string",
                   "label": "customer",
+                  "maxLength": 63,
                   "readonly": true
                 },
                 {
                   "path": "/license/license-files/license-file/general/office",
                   "type": "string",
                   "label": "office",
+                  "maxLength": 63,
                   "readonly": true
                 },
                 {
                   "path": "/license/license-files/license-file/general/serial-number",
                   "type": "string",
                   "label": "serial-number",
+                  "maxLength": 63,
                   "readonly": true
                 }
               ]
@@ -352,6 +371,8 @@
               "path": "/license/license-items/license-item/description",
               "type": "string",
               "label": "description",
+              "minLength": 1,
+              "maxLength": 255,
               "readonly": true
             },
             {
@@ -390,6 +411,8 @@
               "path": "/license/license-items/license-item/expired-date",
               "type": "string",
               "label": "expired-date",
+              "minLength": 1,
+              "maxLength": 71,
               "readonly": true
             },
             {
@@ -402,6 +425,8 @@
               "path": "/license/license-items/license-item/name",
               "type": "string",
               "label": "name",
+              "minLength": 1,
+              "maxLength": 31,
               "isKey": true
             },
             {
@@ -419,6 +444,8 @@
                       "path": "/license/license-items/license-item/port-aggregations/port-aggregation/position",
                       "type": "string",
                       "label": "position",
+                      "minLength": 1,
+                      "maxLength": 32,
                       "isKey": true
                     }
                   ]
@@ -440,6 +467,8 @@
                       "path": "/license/license-items/license-item/port-core-aggregations/port-core-aggregation/position",
                       "type": "string",
                       "label": "position",
+                      "minLength": 1,
+                      "maxLength": 32,
                       "isKey": true
                     }
                   ]
@@ -477,6 +506,8 @@
                       "path": "/license/license-items/license-item/port-hqoss/port-hqos/position",
                       "type": "string",
                       "label": "position",
+                      "minLength": 1,
+                      "maxLength": 32,
                       "isKey": true
                     }
                   ]
@@ -498,6 +529,8 @@
                       "path": "/license/license-items/license-item/port-l3vpn-evpns/port-l3vpn-evpn/position",
                       "type": "string",
                       "label": "position",
+                      "minLength": 1,
+                      "maxLength": 32,
                       "isKey": true
                     }
                   ]
@@ -519,6 +552,8 @@
                       "path": "/license/license-items/license-item/port-l3vpns/port-l3vpn/position",
                       "type": "string",
                       "label": "position",
+                      "minLength": 1,
+                      "maxLength": 32,
                       "isKey": true
                     }
                   ]
@@ -556,6 +591,8 @@
                       "path": "/license/license-items/license-item/port-macsecs/port-macsec/position",
                       "type": "string",
                       "label": "position",
+                      "minLength": 1,
+                      "maxLength": 32,
                       "isKey": true
                     }
                   ]
@@ -577,6 +614,8 @@
                       "path": "/license/license-items/license-item/port-peerings/port-peering/position",
                       "type": "string",
                       "label": "position",
+                      "minLength": 1,
+                      "maxLength": 32,
                       "isKey": true
                     }
                   ]
@@ -598,6 +637,8 @@
                       "path": "/license/license-items/license-item/port-service-enhances/port-service-enhance/position",
                       "type": "string",
                       "label": "position",
+                      "minLength": 1,
+                      "maxLength": 32,
                       "isKey": true
                     }
                   ]
@@ -619,6 +660,8 @@
                       "path": "/license/license-items/license-item/port-srv6s/port-srv6/position",
                       "type": "string",
                       "label": "position",
+                      "minLength": 1,
+                      "maxLength": 32,
                       "isKey": true
                     }
                   ]
@@ -735,6 +778,8 @@
               "path": "/license/license-sale-items/license-sale-item/description",
               "type": "string",
               "label": "description",
+              "minLength": 1,
+              "maxLength": 255,
               "readonly": true
             },
             {
@@ -765,6 +810,8 @@
                       "path": "/license/license-sale-items/license-sale-item/license-items/license-item/description",
                       "type": "string",
                       "label": "description",
+                      "minLength": 1,
+                      "maxLength": 255,
                       "readonly": true
                     },
                     {
@@ -803,6 +850,8 @@
                       "path": "/license/license-sale-items/license-sale-item/license-items/license-item/expired-date",
                       "type": "string",
                       "label": "expired-date",
+                      "minLength": 1,
+                      "maxLength": 71,
                       "readonly": true
                     },
                     {
@@ -815,6 +864,8 @@
                       "path": "/license/license-sale-items/license-sale-item/license-items/license-item/name",
                       "type": "string",
                       "label": "name",
+                      "minLength": 1,
+                      "maxLength": 31,
                       "readonly": true,
                       "isKey": true
                     },
@@ -912,6 +963,8 @@
               "path": "/license/license-sale-items/license-sale-item/name",
               "type": "string",
               "label": "name",
+              "minLength": 1,
+              "maxLength": 31,
               "readonly": true,
               "isKey": true
             },
@@ -947,12 +1000,14 @@
               "path": "/license/resource-thresholds/resource-threshold/description",
               "type": "string",
               "label": "description",
+              "maxLength": 255,
               "readonly": true
             },
             {
               "path": "/license/resource-thresholds/resource-threshold/name",
               "type": "string",
               "label": "name",
+              "maxLength": 31,
               "readonly": true,
               "isKey": true
             },
@@ -990,6 +1045,7 @@
               "path": "/license/resource-usages/resource-usage/name",
               "type": "string",
               "label": "name",
+              "maxLength": 31,
               "readonly": true,
               "isKey": true
             },
@@ -1030,6 +1086,8 @@
                       "path": "/license/resource-usages/resource-usage/port-aggregations/port-aggregation/position",
                       "type": "string",
                       "label": "position",
+                      "minLength": 1,
+                      "maxLength": 32,
                       "readonly": true,
                       "isKey": true
                     }
@@ -1074,6 +1132,8 @@
                       "path": "/license/resource-usages/resource-usage/port-core-aggregations/port-core-aggregation/position",
                       "type": "string",
                       "label": "position",
+                      "minLength": 1,
+                      "maxLength": 32,
                       "readonly": true,
                       "isKey": true
                     }
@@ -1118,6 +1178,8 @@
                       "path": "/license/resource-usages/resource-usage/port-l3vpn-evpns/port-l3vpn-evpn/position",
                       "type": "string",
                       "label": "position",
+                      "minLength": 1,
+                      "maxLength": 32,
                       "readonly": true,
                       "isKey": true
                     }
@@ -1162,6 +1224,8 @@
                       "path": "/license/resource-usages/resource-usage/port-l3vpns/port-l3vpn/position",
                       "type": "string",
                       "label": "position",
+                      "minLength": 1,
+                      "maxLength": 32,
                       "readonly": true,
                       "isKey": true
                     }
@@ -1206,6 +1270,8 @@
                       "path": "/license/resource-usages/resource-usage/port-peerings/port-peering/position",
                       "type": "string",
                       "label": "position",
+                      "minLength": 1,
+                      "maxLength": 32,
                       "readonly": true,
                       "isKey": true
                     }
@@ -1250,6 +1316,8 @@
                       "path": "/license/resource-usages/resource-usage/port-service-enhances/port-service-enhance/position",
                       "type": "string",
                       "label": "position",
+                      "minLength": 1,
+                      "maxLength": 32,
                       "readonly": true,
                       "isKey": true
                     }
@@ -1294,6 +1362,8 @@
                       "path": "/license/resource-usages/resource-usage/port-srv6s/port-srv6/position",
                       "type": "string",
                       "label": "position",
+                      "minLength": 1,
+                      "maxLength": 32,
                       "readonly": true,
                       "isKey": true
                     }
@@ -1339,6 +1409,7 @@
               "path": "/license/spec-items/spec-item/description",
               "type": "string",
               "label": "description",
+              "maxLength": 127,
               "readonly": true
             },
             {
@@ -1357,6 +1428,7 @@
               "path": "/license/spec-items/spec-item/name",
               "type": "string",
               "label": "name",
+              "maxLength": 63,
               "readonly": true,
               "isKey": true
             },
@@ -1408,6 +1480,7 @@
               "path": "/license/stack-sale-items/stack-sale-item/chassis-id",
               "type": "string",
               "label": "chassis-id",
+              "maxLength": 31,
               "readonly": true,
               "isKey": true
             },
@@ -1427,6 +1500,8 @@
                       "path": "/license/stack-sale-items/stack-sale-item/license-sale-items/license-sale-item/description",
                       "type": "string",
                       "label": "description",
+                      "minLength": 1,
+                      "maxLength": 255,
                       "readonly": true
                     },
                     {
@@ -1457,12 +1532,16 @@
                               "path": "/license/stack-sale-items/stack-sale-item/license-sale-items/license-sale-item/license-items/license-item/description",
                               "type": "string",
                               "label": "description",
+                              "minLength": 1,
+                              "maxLength": 255,
                               "readonly": true
                             },
                             {
                               "path": "/license/stack-sale-items/stack-sale-item/license-sale-items/license-sale-item/license-items/license-item/expired-date",
                               "type": "string",
                               "label": "expired-date",
+                              "minLength": 1,
+                              "maxLength": 71,
                               "readonly": true
                             },
                             {
@@ -1475,6 +1554,8 @@
                               "path": "/license/stack-sale-items/stack-sale-item/license-sale-items/license-sale-item/license-items/license-item/name",
                               "type": "string",
                               "label": "name",
+                              "minLength": 1,
+                              "maxLength": 31,
                               "readonly": true,
                               "isKey": true
                             },
@@ -1482,6 +1563,8 @@
                               "path": "/license/stack-sale-items/stack-sale-item/license-sale-items/license-sale-item/license-items/license-item/status",
                               "type": "string",
                               "label": "status",
+                              "minLength": 1,
+                              "maxLength": 49,
                               "readonly": true
                             },
                             {
@@ -1500,12 +1583,16 @@
                               "path": "/license/stack-sale-items/stack-sale-item/license-sale-items/license-sale-item/license-items/license-item/trial-state",
                               "type": "string",
                               "label": "trial-state",
+                              "minLength": 1,
+                              "maxLength": 15,
                               "readonly": true
                             },
                             {
                               "path": "/license/stack-sale-items/stack-sale-item/license-sale-items/license-sale-item/license-items/license-item/type",
                               "type": "string",
                               "label": "type",
+                              "minLength": 1,
+                              "maxLength": 49,
                               "readonly": true
                             },
                             {
@@ -1522,6 +1609,8 @@
                       "path": "/license/stack-sale-items/stack-sale-item/license-sale-items/license-sale-item/name",
                       "type": "string",
                       "label": "name",
+                      "minLength": 1,
+                      "maxLength": 31,
                       "readonly": true,
                       "isKey": true
                     },

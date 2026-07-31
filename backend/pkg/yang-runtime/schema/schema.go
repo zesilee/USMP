@@ -435,6 +435,10 @@ type defaultLeaf struct {
 	rangeMin       int
 	rangeMax       int
 	hasMin         bool
+	lengthMin      int
+	hasLenMin      bool
+	lengthMax      int
+	hasLenMax      bool
 	hasMax         bool
 	leafList       bool
 	supportFilter  bool
@@ -520,6 +524,16 @@ func (l *defaultLeaf) RangeMin() (int, bool) {
 // RangeMax implements LeafNode interface
 func (l *defaultLeaf) RangeMax() (int, bool) {
 	return l.rangeMax, l.hasMax
+}
+
+// LengthMin 返回字符串 `length` 下界（显式 length 语句才有，D9）。
+func (l *defaultLeaf) LengthMin() (int, bool) {
+	return l.lengthMin, l.hasLenMin
+}
+
+// LengthMax 返回字符串 `length` 上界。
+func (l *defaultLeaf) LengthMax() (int, bool) {
+	return l.lengthMax, l.hasLenMax
 }
 
 // IsLeafList implements LeafNode interface

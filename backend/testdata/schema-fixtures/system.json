@@ -19,6 +19,8 @@
               "path": "/system/security-configurations/security-configuration/feature-name",
               "type": "string",
               "label": "feature-name",
+              "minLength": 1,
+              "maxLength": 31,
               "readonly": true,
               "isKey": true
             },
@@ -26,12 +28,16 @@
               "path": "/system/security-configurations/security-configuration/item-content",
               "type": "string",
               "label": "item-content",
+              "minLength": 1,
+              "maxLength": 1023,
               "readonly": true
             },
             {
               "path": "/system/security-configurations/security-configuration/security-item",
               "type": "string",
               "label": "security-item",
+              "minLength": 1,
+              "maxLength": 127,
               "readonly": true,
               "isKey": true
             }
@@ -48,6 +54,7 @@
           "path": "/system/system-info/esn",
           "type": "string",
           "label": "esn",
+          "maxLength": 511,
           "readonly": true
         },
         {
@@ -55,69 +62,88 @@
           "type": "string",
           "label": "mac",
           "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+          "maxLength": 255,
           "readonly": true
         },
         {
           "path": "/system/system-info/patch-version",
           "type": "string",
           "label": "patch-version",
+          "minLength": 1,
+          "maxLength": 255,
           "readonly": true
         },
         {
           "path": "/system/system-info/platform-name",
           "type": "string",
           "label": "platform-name",
+          "maxLength": 255,
           "readonly": true
         },
         {
           "path": "/system/system-info/platform-version",
           "type": "string",
           "label": "platform-version",
+          "minLength": 1,
+          "maxLength": 255,
           "readonly": true
         },
         {
           "path": "/system/system-info/product-name",
           "type": "string",
           "label": "product-name",
+          "maxLength": 255,
           "readonly": true
         },
         {
           "path": "/system/system-info/product-version",
           "type": "string",
           "label": "product-version",
+          "minLength": 1,
+          "maxLength": 255,
           "readonly": true
         },
         {
           "path": "/system/system-info/software-name",
           "type": "string",
           "label": "software-name",
+          "minLength": 4,
+          "maxLength": 255,
           "readonly": true
         },
         {
           "path": "/system/system-info/sys-contact",
           "type": "string",
-          "label": "sys-contact"
+          "label": "sys-contact",
+          "minLength": 1,
+          "maxLength": 255
         },
         {
           "path": "/system/system-info/sys-desc",
           "type": "string",
           "label": "sys-desc",
+          "maxLength": 255,
           "readonly": true
         },
         {
           "path": "/system/system-info/sys-location",
           "type": "string",
-          "label": "sys-location"
+          "label": "sys-location",
+          "minLength": 1,
+          "maxLength": 255
         },
         {
           "path": "/system/system-info/sys-name",
           "type": "string",
-          "label": "sys-name"
+          "label": "sys-name",
+          "minLength": 1,
+          "maxLength": 246
         },
         {
           "path": "/system/system-info/sys-object-id",
           "type": "string",
           "label": "sys-object-id",
+          "maxLength": 255,
           "readonly": true
         },
         {

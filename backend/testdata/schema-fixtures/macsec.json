@@ -97,6 +97,8 @@
               "path": "/macsec/macsec-profiles/macsec-profile/name",
               "type": "string",
               "label": "name",
+              "minLength": 1,
+              "maxLength": 31,
               "isKey": true
             },
             {
@@ -247,24 +249,32 @@
                   "path": "/macsec/statistics/interface-mkas/interface-mka/ce-vlan",
                   "type": "string",
                   "label": "ce-vlan",
+                  "minLength": 1,
+                  "maxLength": 8,
                   "readonly": true
                 },
                 {
                   "path": "/macsec/statistics/interface-mkas/interface-mka/cfi",
                   "type": "string",
                   "label": "cfi",
+                  "minLength": 1,
+                  "maxLength": 4,
                   "readonly": true
                 },
                 {
                   "path": "/macsec/statistics/interface-mkas/interface-mka/ckn1",
                   "type": "string",
                   "label": "ckn1",
+                  "minLength": 1,
+                  "maxLength": 65,
                   "readonly": true
                 },
                 {
                   "path": "/macsec/statistics/interface-mkas/interface-mka/ckn2",
                   "type": "string",
                   "label": "ckn2",
+                  "minLength": 1,
+                  "maxLength": 65,
                   "readonly": true
                 },
                 {
@@ -283,12 +293,16 @@
                   "path": "/macsec/statistics/interface-mkas/interface-mka/frame-validation",
                   "type": "string",
                   "label": "frame-validation",
+                  "minLength": 1,
+                  "maxLength": 64,
                   "readonly": true
                 },
                 {
                   "path": "/macsec/statistics/interface-mkas/interface-mka/include-sci",
                   "type": "string",
                   "label": "include-sci",
+                  "minLength": 1,
+                  "maxLength": 64,
                   "readonly": true
                 },
                 {
@@ -308,66 +322,88 @@
                   "path": "/macsec/statistics/interface-mkas/interface-mka/key-server1",
                   "type": "string",
                   "label": "key-server1",
+                  "minLength": 1,
+                  "maxLength": 64,
                   "readonly": true
                 },
                 {
                   "path": "/macsec/statistics/interface-mkas/interface-mka/key-server2",
                   "type": "string",
                   "label": "key-server2",
+                  "minLength": 1,
+                  "maxLength": 64,
                   "readonly": true
                 },
                 {
                   "path": "/macsec/statistics/interface-mkas/interface-mka/latest-sak-association1",
                   "type": "string",
                   "label": "latest-sak-association1",
+                  "minLength": 1,
+                  "maxLength": 64,
                   "readonly": true
                 },
                 {
                   "path": "/macsec/statistics/interface-mkas/interface-mka/latest-sak-association2",
                   "type": "string",
                   "label": "latest-sak-association2",
+                  "minLength": 1,
+                  "maxLength": 64,
                   "readonly": true
                 },
                 {
                   "path": "/macsec/statistics/interface-mkas/interface-mka/latest-sak-key-identifier1",
                   "type": "string",
                   "label": "latest-sak-key-identifier1",
+                  "minLength": 1,
+                  "maxLength": 33,
                   "readonly": true
                 },
                 {
                   "path": "/macsec/statistics/interface-mkas/interface-mka/latest-sak-key-identifier2",
                   "type": "string",
                   "label": "latest-sak-key-identifier2",
+                  "minLength": 1,
+                  "maxLength": 33,
                   "readonly": true
                 },
                 {
                   "path": "/macsec/statistics/interface-mkas/interface-mka/latest-sak-key-number1",
                   "type": "string",
                   "label": "latest-sak-key-number1",
+                  "minLength": 1,
+                  "maxLength": 64,
                   "readonly": true
                 },
                 {
                   "path": "/macsec/statistics/interface-mkas/interface-mka/latest-sak-key-number2",
                   "type": "string",
                   "label": "latest-sak-key-number2",
+                  "minLength": 1,
+                  "maxLength": 64,
                   "readonly": true
                 },
                 {
                   "path": "/macsec/statistics/interface-mkas/interface-mka/latest-sak-reason",
                   "type": "string",
                   "label": "latest-sak-reason",
+                  "minLength": 1,
+                  "maxLength": 64,
                   "readonly": true
                 },
                 {
                   "path": "/macsec/statistics/interface-mkas/interface-mka/latest-sak-status1",
                   "type": "string",
                   "label": "latest-sak-status1",
+                  "minLength": 1,
+                  "maxLength": 64,
                   "readonly": true
                 },
                 {
                   "path": "/macsec/statistics/interface-mkas/interface-mka/latest-sak-status2",
                   "type": "string",
                   "label": "latest-sak-status2",
+                  "minLength": 1,
+                  "maxLength": 64,
                   "readonly": true
                 },
                 {
@@ -386,90 +422,120 @@
                   "path": "/macsec/statistics/interface-mkas/interface-mka/lpl-capability1",
                   "type": "string",
                   "label": "lpl-capability1",
+                  "minLength": 1,
+                  "maxLength": 64,
                   "readonly": true
                 },
                 {
                   "path": "/macsec/statistics/interface-mkas/interface-mka/lpl-capability2",
                   "type": "string",
                   "label": "lpl-capability2",
+                  "minLength": 1,
+                  "maxLength": 64,
                   "readonly": true
                 },
                 {
                   "path": "/macsec/statistics/interface-mkas/interface-mka/lpl-member-identifier1",
                   "type": "string",
                   "label": "lpl-member-identifier1",
+                  "minLength": 1,
+                  "maxLength": 25,
                   "readonly": true
                 },
                 {
                   "path": "/macsec/statistics/interface-mkas/interface-mka/lpl-member-identifier2",
                   "type": "string",
                   "label": "lpl-member-identifier2",
+                  "minLength": 1,
+                  "maxLength": 25,
                   "readonly": true
                 },
                 {
                   "path": "/macsec/statistics/interface-mkas/interface-mka/lpl-message-sequence-number1",
                   "type": "string",
                   "label": "lpl-message-sequence-number1",
+                  "minLength": 1,
+                  "maxLength": 64,
                   "readonly": true
                 },
                 {
                   "path": "/macsec/statistics/interface-mkas/interface-mka/lpl-message-sequence-number2",
                   "type": "string",
                   "label": "lpl-message-sequence-number2",
+                  "minLength": 1,
+                  "maxLength": 64,
                   "readonly": true
                 },
                 {
                   "path": "/macsec/statistics/interface-mkas/interface-mka/lpl-priority1",
                   "type": "string",
                   "label": "lpl-priority1",
+                  "minLength": 1,
+                  "maxLength": 64,
                   "readonly": true
                 },
                 {
                   "path": "/macsec/statistics/interface-mkas/interface-mka/lpl-priority2",
                   "type": "string",
                   "label": "lpl-priority2",
+                  "minLength": 1,
+                  "maxLength": 64,
                   "readonly": true
                 },
                 {
                   "path": "/macsec/statistics/interface-mkas/interface-mka/lpl-receive-sci1",
                   "type": "string",
                   "label": "lpl-receive-sci1",
+                  "minLength": 1,
+                  "maxLength": 17,
                   "readonly": true
                 },
                 {
                   "path": "/macsec/statistics/interface-mkas/interface-mka/lpl-receive-sci2",
                   "type": "string",
                   "label": "lpl-receive-sci2",
+                  "minLength": 1,
+                  "maxLength": 17,
                   "readonly": true
                 },
                 {
                   "path": "/macsec/statistics/interface-mkas/interface-mka/lpl-short-sci1",
                   "type": "string",
                   "label": "lpl-short-sci1",
+                  "minLength": 1,
+                  "maxLength": 64,
                   "readonly": true
                 },
                 {
                   "path": "/macsec/statistics/interface-mkas/interface-mka/lpl-short-sci2",
                   "type": "string",
                   "label": "lpl-short-sci2",
+                  "minLength": 1,
+                  "maxLength": 64,
                   "readonly": true
                 },
                 {
                   "path": "/macsec/statistics/interface-mkas/interface-mka/macsec-cipher-suite",
                   "type": "string",
                   "label": "macsec-cipher-suite",
+                  "minLength": 1,
+                  "maxLength": 64,
                   "readonly": true
                 },
                 {
                   "path": "/macsec/statistics/interface-mkas/interface-mka/member-identifier1",
                   "type": "string",
                   "label": "member-identifier1",
+                  "minLength": 1,
+                  "maxLength": 65,
                   "readonly": true
                 },
                 {
                   "path": "/macsec/statistics/interface-mkas/interface-mka/member-identifier2",
                   "type": "string",
                   "label": "member-identifier2",
+                  "minLength": 1,
+                  "maxLength": 65,
                   "readonly": true
                 },
                 {
@@ -488,6 +554,8 @@
                   "path": "/macsec/statistics/interface-mkas/interface-mka/mka-cipher-suite",
                   "type": "string",
                   "label": "mka-cipher-suite",
+                  "minLength": 1,
+                  "maxLength": 64,
                   "readonly": true
                 },
                 {
@@ -500,12 +568,16 @@
                   "path": "/macsec/statistics/interface-mkas/interface-mka/mka-status1",
                   "type": "string",
                   "label": "mka-status1",
+                  "minLength": 1,
+                  "maxLength": 64,
                   "readonly": true
                 },
                 {
                   "path": "/macsec/statistics/interface-mkas/interface-mka/mka-status2",
                   "type": "string",
                   "label": "mka-status2",
+                  "minLength": 1,
+                  "maxLength": 64,
                   "readonly": true
                 },
                 {
@@ -518,60 +590,80 @@
                   "path": "/macsec/statistics/interface-mkas/interface-mka/mode",
                   "type": "string",
                   "label": "mode",
+                  "minLength": 1,
+                  "maxLength": 64,
                   "readonly": true
                 },
                 {
                   "path": "/macsec/statistics/interface-mkas/interface-mka/old-sak-association1",
                   "type": "string",
                   "label": "old-sak-association1",
+                  "minLength": 1,
+                  "maxLength": 64,
                   "readonly": true
                 },
                 {
                   "path": "/macsec/statistics/interface-mkas/interface-mka/old-sak-association2",
                   "type": "string",
                   "label": "old-sak-association2",
+                  "minLength": 1,
+                  "maxLength": 64,
                   "readonly": true
                 },
                 {
                   "path": "/macsec/statistics/interface-mkas/interface-mka/old-sak-key-identifier1",
                   "type": "string",
                   "label": "old-sak-key-identifier1",
+                  "minLength": 1,
+                  "maxLength": 33,
                   "readonly": true
                 },
                 {
                   "path": "/macsec/statistics/interface-mkas/interface-mka/old-sak-key-identifier2",
                   "type": "string",
                   "label": "old-sak-key-identifier2",
+                  "minLength": 1,
+                  "maxLength": 33,
                   "readonly": true
                 },
                 {
                   "path": "/macsec/statistics/interface-mkas/interface-mka/old-sak-key-number1",
                   "type": "string",
                   "label": "old-sak-key-number1",
+                  "minLength": 1,
+                  "maxLength": 64,
                   "readonly": true
                 },
                 {
                   "path": "/macsec/statistics/interface-mkas/interface-mka/old-sak-key-number2",
                   "type": "string",
                   "label": "old-sak-key-number2",
+                  "minLength": 1,
+                  "maxLength": 64,
                   "readonly": true
                 },
                 {
                   "path": "/macsec/statistics/interface-mkas/interface-mka/old-sak-status1",
                   "type": "string",
                   "label": "old-sak-status1",
+                  "minLength": 1,
+                  "maxLength": 64,
                   "readonly": true
                 },
                 {
                   "path": "/macsec/statistics/interface-mkas/interface-mka/old-sak-status2",
                   "type": "string",
                   "label": "old-sak-status2",
+                  "minLength": 1,
+                  "maxLength": 64,
                   "readonly": true
                 },
                 {
                   "path": "/macsec/statistics/interface-mkas/interface-mka/pe-vlan",
                   "type": "string",
                   "label": "pe-vlan",
+                  "minLength": 1,
+                  "maxLength": 8,
                   "readonly": true
                 },
                 {
@@ -590,102 +682,136 @@
                   "path": "/macsec/statistics/interface-mkas/interface-mka/ppl-capability1",
                   "type": "string",
                   "label": "ppl-capability1",
+                  "minLength": 1,
+                  "maxLength": 64,
                   "readonly": true
                 },
                 {
                   "path": "/macsec/statistics/interface-mkas/interface-mka/ppl-capability2",
                   "type": "string",
                   "label": "ppl-capability2",
+                  "minLength": 1,
+                  "maxLength": 64,
                   "readonly": true
                 },
                 {
                   "path": "/macsec/statistics/interface-mkas/interface-mka/ppl-member-identifier1",
                   "type": "string",
                   "label": "ppl-member-identifier1",
+                  "minLength": 1,
+                  "maxLength": 25,
                   "readonly": true
                 },
                 {
                   "path": "/macsec/statistics/interface-mkas/interface-mka/ppl-member-identifier2",
                   "type": "string",
                   "label": "ppl-member-identifier2",
+                  "minLength": 1,
+                  "maxLength": 25,
                   "readonly": true
                 },
                 {
                   "path": "/macsec/statistics/interface-mkas/interface-mka/ppl-message-sequence-number1",
                   "type": "string",
                   "label": "ppl-message-sequence-number1",
+                  "minLength": 1,
+                  "maxLength": 64,
                   "readonly": true
                 },
                 {
                   "path": "/macsec/statistics/interface-mkas/interface-mka/ppl-message-sequence-number2",
                   "type": "string",
                   "label": "ppl-message-sequence-number2",
+                  "minLength": 1,
+                  "maxLength": 64,
                   "readonly": true
                 },
                 {
                   "path": "/macsec/statistics/interface-mkas/interface-mka/ppl-priority1",
                   "type": "string",
                   "label": "ppl-priority1",
+                  "minLength": 1,
+                  "maxLength": 64,
                   "readonly": true
                 },
                 {
                   "path": "/macsec/statistics/interface-mkas/interface-mka/ppl-priority2",
                   "type": "string",
                   "label": "ppl-priority2",
+                  "minLength": 1,
+                  "maxLength": 64,
                   "readonly": true
                 },
                 {
                   "path": "/macsec/statistics/interface-mkas/interface-mka/ppl-receive-sci1",
                   "type": "string",
                   "label": "ppl-receive-sci1",
+                  "minLength": 1,
+                  "maxLength": 17,
                   "readonly": true
                 },
                 {
                   "path": "/macsec/statistics/interface-mkas/interface-mka/ppl-receive-sci2",
                   "type": "string",
                   "label": "ppl-receive-sci2",
+                  "minLength": 1,
+                  "maxLength": 17,
                   "readonly": true
                 },
                 {
                   "path": "/macsec/statistics/interface-mkas/interface-mka/ppl-short-sci1",
                   "type": "string",
                   "label": "ppl-short-sci1",
+                  "minLength": 1,
+                  "maxLength": 64,
                   "readonly": true
                 },
                 {
                   "path": "/macsec/statistics/interface-mkas/interface-mka/ppl-short-sci2",
                   "type": "string",
                   "label": "ppl-short-sci2",
+                  "minLength": 1,
+                  "maxLength": 64,
                   "readonly": true
                 },
                 {
                   "path": "/macsec/statistics/interface-mkas/interface-mka/principal-actor1",
                   "type": "string",
                   "label": "principal-actor1",
+                  "minLength": 1,
+                  "maxLength": 64,
                   "readonly": true
                 },
                 {
                   "path": "/macsec/statistics/interface-mkas/interface-mka/principal-actor2",
                   "type": "string",
                   "label": "principal-actor2",
+                  "minLength": 1,
+                  "maxLength": 64,
                   "readonly": true
                 },
                 {
                   "path": "/macsec/statistics/interface-mkas/interface-mka/priority",
                   "type": "string",
                   "label": "priority",
+                  "minLength": 1,
+                  "maxLength": 4,
                   "readonly": true
                 },
                 {
                   "path": "/macsec/statistics/interface-mkas/interface-mka/protocol",
                   "type": "string",
                   "label": "protocol",
+                  "minLength": 1,
+                  "maxLength": 8,
                   "readonly": true
                 },
                 {
                   "path": "/macsec/statistics/interface-mkas/interface-mka/replay-protection",
                   "type": "string",
                   "label": "replay-protection",
+                  "minLength": 1,
+                  "maxLength": 64,
                   "readonly": true
                 },
                 {
@@ -716,6 +842,8 @@
                   "path": "/macsec/statistics/interface-mkas/interface-mka/sak-life-time",
                   "type": "string",
                   "label": "sak-life-time",
+                  "minLength": 1,
+                  "maxLength": 64,
                   "readonly": true
                 },
                 {
@@ -728,18 +856,24 @@
                   "path": "/macsec/statistics/interface-mkas/interface-mka/transmit-sci",
                   "type": "string",
                   "label": "transmit-sci",
+                  "minLength": 1,
+                  "maxLength": 64,
                   "readonly": true
                 },
                 {
                   "path": "/macsec/statistics/interface-mkas/interface-mka/transmit-short-sci1",
                   "type": "string",
                   "label": "transmit-short-sci1",
+                  "minLength": 1,
+                  "maxLength": 64,
                   "readonly": true
                 },
                 {
                   "path": "/macsec/statistics/interface-mkas/interface-mka/transmit-short-sci2",
                   "type": "string",
                   "label": "transmit-short-sci2",
+                  "minLength": 1,
+                  "maxLength": 64,
                   "readonly": true
                 },
                 {

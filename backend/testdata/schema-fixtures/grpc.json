@@ -22,6 +22,8 @@
           "path": "/grpc/client/ssl-verify-cn-name",
           "type": "string",
           "label": "ssl-verify-cn-name",
+          "minLength": 1,
+          "maxLength": 32,
           "when": "../ssl-policy"
         }
       ]

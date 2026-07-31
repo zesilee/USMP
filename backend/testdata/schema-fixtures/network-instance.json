@@ -57,6 +57,8 @@
                       "path": "/network-instance/instances/instance/afs/af/effect-route-distinguisher",
                       "type": "string",
                       "label": "effect-route-distinguisher",
+                      "minLength": 3,
+                      "maxLength": 21,
                       "readonly": true
                     },
                     {
@@ -106,6 +108,8 @@
                                   "path": "/network-instance/instances/instance/afs/af/evpn/extend-vpn-targets/extend-vpn-target/vrf-rt-value",
                                   "type": "string",
                                   "label": "vrf-rt-value",
+                                  "minLength": 3,
+                                  "maxLength": 21,
                                   "isKey": true
                                 }
                               ]
@@ -315,6 +319,8 @@
                                       "type": "string",
                                       "label": "frr-acl-name",
                                       "pattern": "([1-9]\\d{3})|(10[0-9]{3})|(23[0-9]{3})|(99999)|([0-9a-zA-Z]([^\\s]*))",
+                                      "minLength": 1,
+                                      "maxLength": 64,
                                       "when": "../../../l3vpn:type='ipv4-unicast' and ../is-c-multicast-frr='true'",
                                       "must": [
                                         {
@@ -629,6 +635,8 @@
                       "path": "/network-instance/instances/instance/afs/af/route-distinguisher",
                       "type": "string",
                       "label": "route-distinguisher",
+                      "minLength": 3,
+                      "maxLength": 21,
                       "when": "../../../ni:name!='_public_'"
                     },
                     {
@@ -681,6 +689,8 @@
                                               "type": "string",
                                               "label": "filter-parameter",
                                               "pattern": "(\\([^\\)]*\\))",
+                                              "minLength": 1,
+                                              "maxLength": 1609,
                                               "when": "../filter-name"
                                             }
                                           ]
@@ -895,6 +905,8 @@
                                       "path": "/network-instance/instances/instance/afs/af/routing/routing-manage/topologys/topology/name",
                                       "type": "string",
                                       "label": "name",
+                                      "minLength": 1,
+                                      "maxLength": 31,
                                       "must": [
                                         {
                                           "expr": "../../../../../../../ni:name='_public_' or ../name='base'"
@@ -1021,6 +1033,7 @@
                                                   "path": "/network-instance/instances/instance/afs/af/routing/routing-manage/topologys/topology/routes/ipv4-unicast-routes/ipv4-unicast-route/age",
                                                   "type": "string",
                                                   "label": "age",
+                                                  "maxLength": 20,
                                                   "readonly": true
                                                 },
                                                 {
@@ -1129,12 +1142,16 @@
                                                   "type": "string",
                                                   "label": "indirect-id",
                                                   "pattern": "(0x|0X)?[0-9a-fA-F]+",
+                                                  "minLength": 1,
+                                                  "maxLength": 10,
                                                   "readonly": true
                                                 },
                                                 {
                                                   "path": "/network-instance/instances/instance/afs/af/routing/routing-manage/topologys/topology/routes/ipv4-unicast-routes/ipv4-unicast-route/interface-name",
                                                   "type": "string",
                                                   "label": "interface-name",
+                                                  "minLength": 1,
+                                                  "maxLength": 63,
                                                   "readonly": true,
                                                   "isKey": true
                                                 },
@@ -1263,6 +1280,8 @@
                                                   "type": "string",
                                                   "label": "qos-id",
                                                   "pattern": "(0x|0X)?[0-9a-fA-F]+",
+                                                  "minLength": 1,
+                                                  "maxLength": 10,
                                                   "readonly": true
                                                 },
                                                 {
@@ -1557,6 +1576,7 @@
                                                           "path": "/network-instance/instances/instance/afs/af/routing/routing-manage/topologys/topology/routes/ipv4-unicast-routes/ipv4-unicast-route/label-stack",
                                                           "type": "string",
                                                           "label": "label-stack",
+                                                          "maxLength": 120,
                                                           "readonly": true
                                                         },
                                                         {
@@ -1593,6 +1613,7 @@
                                                           "path": "/network-instance/instances/instance/afs/af/routing/routing-manage/topologys/topology/routes/ipv4-unicast-routes/ipv4-unicast-route/policy-name",
                                                           "type": "string",
                                                           "label": "policy-name",
+                                                          "maxLength": 31,
                                                           "readonly": true
                                                         }
                                                       ]
@@ -1728,6 +1749,7 @@
                                                   "path": "/network-instance/instances/instance/afs/af/routing/routing-manage/topologys/topology/routes/ipv6-unicast-routes/ipv6-unicast-route/age",
                                                   "type": "string",
                                                   "label": "age",
+                                                  "maxLength": 20,
                                                   "readonly": true
                                                 },
                                                 {
@@ -1836,12 +1858,16 @@
                                                   "type": "string",
                                                   "label": "indirect-id",
                                                   "pattern": "(0x|0X)?[0-9a-fA-F]+",
+                                                  "minLength": 1,
+                                                  "maxLength": 10,
                                                   "readonly": true
                                                 },
                                                 {
                                                   "path": "/network-instance/instances/instance/afs/af/routing/routing-manage/topologys/topology/routes/ipv6-unicast-routes/ipv6-unicast-route/interface-name",
                                                   "type": "string",
                                                   "label": "interface-name",
+                                                  "minLength": 1,
+                                                  "maxLength": 63,
                                                   "readonly": true,
                                                   "isKey": true
                                                 },
@@ -1970,6 +1996,8 @@
                                                   "type": "string",
                                                   "label": "qos-id",
                                                   "pattern": "(0x|0X)?[0-9a-fA-F]+",
+                                                  "minLength": 1,
+                                                  "maxLength": 10,
                                                   "readonly": true
                                                 },
                                                 {
@@ -2151,6 +2179,7 @@
                                       "path": "/network-instance/instances/instance/afs/af/routing/static-routing/bfd-templates/bfd-template/interface-name",
                                       "type": "string",
                                       "label": "interface-name",
+                                      "maxLength": 63,
                                       "isKey": true
                                     },
                                     {
@@ -2237,6 +2266,8 @@
                                               "type": "string",
                                               "label": "filter-parameter",
                                               "pattern": "(\\([^\\)]*\\))",
+                                              "minLength": 1,
+                                              "maxLength": 1609,
                                               "when": "../filter-name"
                                             }
                                           ]
@@ -2278,6 +2309,8 @@
                                       "path": "/network-instance/instances/instance/afs/af/routing/static-routing/ipv4-multicast-routes/ipv4-multicast-route/bfd-detect",
                                       "type": "string",
                                       "label": "bfd-detect",
+                                      "minLength": 1,
+                                      "maxLength": 36,
                                       "readonly": true
                                     },
                                     {
@@ -2285,12 +2318,15 @@
                                       "type": "string",
                                       "label": "indirect-id",
                                       "pattern": "(0x|0X)?[0-9a-fA-F]+",
+                                      "minLength": 1,
+                                      "maxLength": 10,
                                       "readonly": true
                                     },
                                     {
                                       "path": "/network-instance/instances/instance/afs/af/routing/static-routing/ipv4-multicast-routes/ipv4-multicast-route/interface-name",
                                       "type": "string",
                                       "label": "interface-name",
+                                      "maxLength": 63,
                                       "must": [
                                         {
                                           "expr": "(../interface-name!='' and ../next-hop='0.0.0.0') or (not(../next-hop='0.0.0.0') and ../interface-name='')"
@@ -2302,6 +2338,8 @@
                                       "path": "/network-instance/instances/instance/afs/af/routing/static-routing/ipv4-multicast-routes/ipv4-multicast-route/interface-state",
                                       "type": "string",
                                       "label": "interface-state",
+                                      "minLength": 1,
+                                      "maxLength": 8,
                                       "readonly": true
                                     },
                                     {
@@ -2342,6 +2380,7 @@
                                       "path": "/network-instance/instances/instance/afs/af/routing/static-routing/ipv4-multicast-routes/ipv4-multicast-route/relay-interface",
                                       "type": "string",
                                       "label": "relay-interface",
+                                      "maxLength": 63,
                                       "readonly": true
                                     },
                                     {
@@ -2360,12 +2399,16 @@
                                       "path": "/network-instance/instances/instance/afs/af/routing/static-routing/ipv4-multicast-routes/ipv4-multicast-route/state",
                                       "type": "string",
                                       "label": "state",
+                                      "minLength": 1,
+                                      "maxLength": 20,
                                       "readonly": true
                                     },
                                     {
                                       "path": "/network-instance/instances/instance/afs/af/routing/static-routing/ipv4-multicast-routes/ipv4-multicast-route/tunnel-id",
                                       "type": "string",
                                       "label": "tunnel-id",
+                                      "minLength": 1,
+                                      "maxLength": 21,
                                       "readonly": true
                                     }
                                   ]
@@ -2388,6 +2431,8 @@
                                       "path": "/network-instance/instances/instance/afs/af/routing/static-routing/ipv4-routes/ipv4-route/bfd-detect",
                                       "type": "string",
                                       "label": "bfd-detect",
+                                      "minLength": 1,
+                                      "maxLength": 36,
                                       "readonly": true
                                     },
                                     {
@@ -2400,6 +2445,7 @@
                                       "path": "/network-instance/instances/instance/afs/af/routing/static-routing/ipv4-routes/ipv4-route/bfd-type",
                                       "type": "string",
                                       "label": "bfd-type",
+                                      "maxLength": 15,
                                       "readonly": true
                                     },
                                     {
@@ -2412,12 +2458,15 @@
                                       "path": "/network-instance/instances/instance/afs/af/routing/static-routing/ipv4-routes/ipv4-route/efm-detect",
                                       "type": "string",
                                       "label": "efm-detect",
+                                      "minLength": 1,
+                                      "maxLength": 8,
                                       "readonly": true
                                     },
                                     {
                                       "path": "/network-instance/instances/instance/afs/af/routing/static-routing/ipv4-routes/ipv4-route/efm-interface-name",
                                       "type": "string",
                                       "label": "efm-interface-name",
+                                      "maxLength": 63,
                                       "readonly": true
                                     },
                                     {
@@ -2425,6 +2474,8 @@
                                       "type": "string",
                                       "label": "indirect-id",
                                       "pattern": "(0x|0X)?[0-9a-fA-F]+",
+                                      "minLength": 1,
+                                      "maxLength": 10,
                                       "readonly": true
                                     },
                                     {
@@ -2437,6 +2488,7 @@
                                       "path": "/network-instance/instances/instance/afs/af/routing/static-routing/ipv4-routes/ipv4-route/interface-name",
                                       "type": "string",
                                       "label": "interface-name",
+                                      "maxLength": 63,
                                       "readonly": true,
                                       "isKey": true
                                     },
@@ -2444,6 +2496,8 @@
                                       "path": "/network-instance/instances/instance/afs/af/routing/static-routing/ipv4-routes/ipv4-route/interface-state",
                                       "type": "string",
                                       "label": "interface-state",
+                                      "minLength": 1,
+                                      "maxLength": 8,
                                       "readonly": true
                                     },
                                     {
@@ -2489,6 +2543,8 @@
                                       "path": "/network-instance/instances/instance/afs/af/routing/static-routing/ipv4-routes/ipv4-route/nqa-detect",
                                       "type": "string",
                                       "label": "nqa-detect",
+                                      "minLength": 1,
+                                      "maxLength": 8,
                                       "readonly": true
                                     },
                                     {
@@ -2516,6 +2572,7 @@
                                       "path": "/network-instance/instances/instance/afs/af/routing/static-routing/ipv4-routes/ipv4-route/relay-interface-name",
                                       "type": "string",
                                       "label": "relay-interface-name",
+                                      "maxLength": 63,
                                       "readonly": true,
                                       "isKey": true
                                     },
@@ -2536,6 +2593,8 @@
                                       "path": "/network-instance/instances/instance/afs/af/routing/static-routing/ipv4-routes/ipv4-route/state",
                                       "type": "string",
                                       "label": "state",
+                                      "minLength": 1,
+                                      "maxLength": 25,
                                       "readonly": true
                                     },
                                     {
@@ -2557,6 +2616,7 @@
                                       "path": "/network-instance/instances/instance/afs/af/routing/static-routing/ipv4-routes/ipv4-route/tunnel-id",
                                       "type": "string",
                                       "label": "tunnel-id",
+                                      "maxLength": 21,
                                       "readonly": true,
                                       "isKey": true
                                     },
@@ -2607,6 +2667,8 @@
                                       "path": "/network-instance/instances/instance/afs/af/routing/static-routing/ipv6-routes/ipv6-route/bfd-detect",
                                       "type": "string",
                                       "label": "bfd-detect",
+                                      "minLength": 1,
+                                      "maxLength": 36,
                                       "readonly": true
                                     },
                                     {
@@ -2619,6 +2681,7 @@
                                       "path": "/network-instance/instances/instance/afs/af/routing/static-routing/ipv6-routes/ipv6-route/bfd-type",
                                       "type": "string",
                                       "label": "bfd-type",
+                                      "maxLength": 15,
                                       "readonly": true
                                     },
                                     {
@@ -2631,12 +2694,15 @@
                                       "path": "/network-instance/instances/instance/afs/af/routing/static-routing/ipv6-routes/ipv6-route/efm-detect",
                                       "type": "string",
                                       "label": "efm-detect",
+                                      "minLength": 1,
+                                      "maxLength": 8,
                                       "readonly": true
                                     },
                                     {
                                       "path": "/network-instance/instances/instance/afs/af/routing/static-routing/ipv6-routes/ipv6-route/efm-interface-name",
                                       "type": "string",
                                       "label": "efm-interface-name",
+                                      "maxLength": 63,
                                       "readonly": true
                                     },
                                     {
@@ -2644,6 +2710,8 @@
                                       "type": "string",
                                       "label": "indirect-id",
                                       "pattern": "(0x|0X)?[0-9a-fA-F]+",
+                                      "minLength": 1,
+                                      "maxLength": 10,
                                       "readonly": true
                                     },
                                     {
@@ -2656,6 +2724,7 @@
                                       "path": "/network-instance/instances/instance/afs/af/routing/static-routing/ipv6-routes/ipv6-route/interface-name",
                                       "type": "string",
                                       "label": "interface-name",
+                                      "maxLength": 63,
                                       "readonly": true,
                                       "isKey": true
                                     },
@@ -2663,6 +2732,8 @@
                                       "path": "/network-instance/instances/instance/afs/af/routing/static-routing/ipv6-routes/ipv6-route/interface-state",
                                       "type": "string",
                                       "label": "interface-state",
+                                      "minLength": 1,
+                                      "maxLength": 8,
                                       "readonly": true
                                     },
                                     {
@@ -2708,6 +2779,8 @@
                                       "path": "/network-instance/instances/instance/afs/af/routing/static-routing/ipv6-routes/ipv6-route/nqa-detect",
                                       "type": "string",
                                       "label": "nqa-detect",
+                                      "minLength": 1,
+                                      "maxLength": 8,
                                       "readonly": true
                                     },
                                     {
@@ -2735,6 +2808,7 @@
                                       "path": "/network-instance/instances/instance/afs/af/routing/static-routing/ipv6-routes/ipv6-route/relay-interface-name",
                                       "type": "string",
                                       "label": "relay-interface-name",
+                                      "maxLength": 63,
                                       "readonly": true,
                                       "isKey": true
                                     },
@@ -2755,6 +2829,8 @@
                                       "path": "/network-instance/instances/instance/afs/af/routing/static-routing/ipv6-routes/ipv6-route/state",
                                       "type": "string",
                                       "label": "state",
+                                      "minLength": 1,
+                                      "maxLength": 25,
                                       "readonly": true
                                     },
                                     {
@@ -2776,6 +2852,7 @@
                                       "path": "/network-instance/instances/instance/afs/af/routing/static-routing/ipv6-routes/ipv6-route/tunnel-id",
                                       "type": "string",
                                       "label": "tunnel-id",
+                                      "maxLength": 21,
                                       "readonly": true,
                                       "isKey": true
                                     },
@@ -2872,7 +2949,9 @@
                                     {
                                       "path": "/network-instance/instances/instance/afs/af/routing/static-routing/unicast-routes/unicast-route/description",
                                       "type": "string",
-                                      "label": "description"
+                                      "label": "description",
+                                      "minLength": 1,
+                                      "maxLength": 150
                                     },
                                     {
                                       "path": "/network-instance/instances/instance/afs/af/routing/static-routing/unicast-routes/unicast-route/dhcp-enable",
@@ -2903,6 +2982,7 @@
                                       "path": "/network-instance/instances/instance/afs/af/routing/static-routing/unicast-routes/unicast-route/interface-name",
                                       "type": "string",
                                       "label": "interface-name",
+                                      "maxLength": 63,
                                       "must": [
                                         {
                                           "expr": "(../interface-name!='') or not(../next-hop='0.0.0.0')"
@@ -3137,6 +3217,7 @@
                               "path": "/network-instance/instances/instance/afs/af/tunnel-infos/tunnel-info/name",
                               "type": "string",
                               "label": "name",
+                              "maxLength": 256,
                               "readonly": true
                             },
                             {
@@ -3350,6 +3431,8 @@
                               "path": "/network-instance/instances/instance/afs/af/vpn-targets/vpn-target/value",
                               "type": "string",
                               "label": "value",
+                              "minLength": 3,
+                              "maxLength": 21,
                               "isKey": true
                             }
                           ]
@@ -8147,6 +8230,8 @@
                               "path": "/network-instance/instances/instance/bgp/base-process/egress-engineer-peer-sets/egress-engineer-peer-set/peer-set-name",
                               "type": "string",
                               "label": "peer-set-name",
+                              "minLength": 1,
+                              "maxLength": 63,
                               "isKey": true
                             },
                             {
@@ -8197,6 +8282,8 @@
                               "path": "/network-instance/instances/instance/bgp/base-process/peer-bfd-session-states/peer-bfd-session-state/if-name",
                               "type": "string",
                               "label": "if-name",
+                              "minLength": 1,
+                              "maxLength": 63,
                               "readonly": true
                             },
                             {
@@ -8395,6 +8482,8 @@
                                               "type": "string",
                                               "label": "padding",
                                               "pattern": "(([0-9A-F])*)",
+                                              "minLength": 1,
+                                              "maxLength": 32,
                                               "when": "../advertise-entropy-label='true'"
                                             }
                                           ]
@@ -8650,6 +8739,8 @@
                                           "path": "/network-instance/instances/instance/bgp/base-process/peer-groups/peer-group/afs/af/ipv4-labeluni/soo",
                                           "type": "string",
                                           "label": "soo",
+                                          "minLength": 3,
+                                          "maxLength": 21,
                                           "when": "../../../../../../../../ni:name!='_public_'"
                                         },
                                         {
@@ -9141,6 +9232,8 @@
                                               "type": "string",
                                               "label": "padding",
                                               "pattern": "(([0-9A-F])*)",
+                                              "minLength": 1,
+                                              "maxLength": 32,
                                               "when": "../advertise-entropy-label='true'"
                                             }
                                           ]
@@ -9209,6 +9302,8 @@
                                                       "path": "/network-instance/instances/instance/bgp/base-process/peer-groups/peer-group/afs/af/ipv4-unicast/export-filter/parameter",
                                                       "type": "string",
                                                       "label": "parameter",
+                                                      "minLength": 1,
+                                                      "maxLength": 1609,
                                                       "when": "../name"
                                                     }
                                                   ]
@@ -9261,6 +9356,8 @@
                                                       "path": "/network-instance/instances/instance/bgp/base-process/peer-groups/peer-group/afs/af/ipv4-unicast/import-filter/parameter",
                                                       "type": "string",
                                                       "label": "parameter",
+                                                      "minLength": 1,
+                                                      "maxLength": 1609,
                                                       "when": "../name"
                                                     }
                                                   ]
@@ -9534,6 +9631,8 @@
                                           "path": "/network-instance/instances/instance/bgp/base-process/peer-groups/peer-group/afs/af/ipv4-unicast/soo",
                                           "type": "string",
                                           "label": "soo",
+                                          "minLength": 3,
+                                          "maxLength": 21,
                                           "when": "../../../../../../../../ni:name!='_public_'"
                                         },
                                         {
@@ -10316,6 +10415,8 @@
                                           "path": "/network-instance/instances/instance/bgp/base-process/peer-groups/peer-group/afs/af/ipv6-unicast/soo",
                                           "type": "string",
                                           "label": "soo",
+                                          "minLength": 3,
+                                          "maxLength": 21,
                                           "when": "../../../../../../../../ni:name!='_public_'"
                                         },
                                         {
@@ -10906,7 +11007,9 @@
                                         {
                                           "path": "/network-instance/instances/instance/bgp/base-process/peer-groups/peer-group/afs/af/l2vpn-evpn/split-group-name",
                                           "type": "string",
-                                          "label": "split-group-name"
+                                          "label": "split-group-name",
+                                          "minLength": 1,
+                                          "maxLength": 31
                                         },
                                         {
                                           "path": "/network-instance/instances/instance/bgp/base-process/peer-groups/peer-group/afs/af/l2vpn-evpn/upe-enable",
@@ -11111,7 +11214,9 @@
                               "path": "/network-instance/instances/instance/bgp/base-process/peer-groups/peer-group/description",
                               "type": "string",
                               "label": "description",
-                              "pattern": "([^?]*)"
+                              "pattern": "([^?]*)",
+                              "minLength": 1,
+                              "maxLength": 255
                             },
                             {
                               "path": "/network-instance/instances/instance/bgp/base-process/peer-groups/peer-group/ebgp-max-hop",
@@ -11142,6 +11247,8 @@
                                   "type": "string",
                                   "label": "fake-as",
                                   "pattern": "((([1-9]\\d{0,8})|([1-3]\\d{9})|(4[0-1]\\d{8})|(42[0-8]\\d{7})|(429[0-3]\\d{6})|(4294[0-8]\\d{5})|(42949[0-5]\\d{4})|(429496[0-6]\\d{3})|(4294967[0-1]\\d{2})|(42949672[0-8]\\d{1})|(429496729[0-5]))|((([1-9]\\d{0,3})|([1-5]\\d{4})|(6[0-4]\\d{3})|(65[0-4]\\d{2})|(655[0-2]\\d)|(6553[0-5]))[\\.](([0-9]\\d{0,3})|([1-5]\\d{4})|(6[0-4]\\d{3})|(65[0-4]\\d{2})|(655[0-2]\\d)|(6553[0-5]))))",
+                                  "minLength": 1,
+                                  "maxLength": 11,
                                   "when": "../../bgp:type='ebgp'"
                                 },
                                 {
@@ -11168,6 +11275,8 @@
                               "type": "string",
                               "label": "group-as",
                               "pattern": "((([1-9]\\d{0,8})|([1-3]\\d{9})|(4[0-1]\\d{8})|(42[0-8]\\d{7})|(429[0-3]\\d{6})|(4294[0-8]\\d{5})|(42949[0-5]\\d{4})|(429496[0-6]\\d{3})|(4294967[0-1]\\d{2})|(42949672[0-8]\\d{1})|(429496729[0-5]))|((([1-9]\\d{0,3})|([1-5]\\d{4})|(6[0-4]\\d{3})|(65[0-4]\\d{2})|(655[0-2]\\d)|(6553[0-5]))[\\.](([0-9]\\d{0,3})|([1-5]\\d{4})|(6[0-4]\\d{3})|(65[0-4]\\d{2})|(655[0-2]\\d)|(6553[0-5]))))",
+                              "minLength": 1,
+                              "maxLength": 11,
                               "when": "not(../type='ibgp')"
                             },
                             {
@@ -11179,6 +11288,8 @@
                               "path": "/network-instance/instances/instance/bgp/base-process/peer-groups/peer-group/key-chain-name",
                               "type": "string",
                               "label": "key-chain-name",
+                              "minLength": 1,
+                              "maxLength": 47,
                               "must": [
                                 {
                                   "expr": "not(../password-type and ../password-type!='null' and ../key-chain-name)"
@@ -11190,6 +11301,8 @@
                               "type": "leaf-list",
                               "label": "listen-as",
                               "pattern": "((([1-9]\\d{0,8})|([1-3]\\d{9})|(4[0-1]\\d{8})|(42[0-8]\\d{7})|(429[0-3]\\d{6})|(4294[0-8]\\d{5})|(42949[0-5]\\d{4})|(429496[0-6]\\d{3})|(4294967[0-1]\\d{2})|(42949672[0-8]\\d{1})|(429496729[0-5]))|((([1-9]\\d{0,3})|([1-5]\\d{4})|(6[0-4]\\d{3})|(65[0-4]\\d{2})|(655[0-2]\\d)|(6553[0-5]))[\\.](([0-9]\\d{0,3})|([1-5]\\d{4})|(6[0-4]\\d{3})|(65[0-4]\\d{2})|(655[0-2]\\d)|(6553[0-5]))))",
+                              "minLength": 1,
+                              "maxLength": 11,
                               "when": "(../peer-establish-mode = 'dynamic' or ../peer-establish-mode = 'dynamic-ipv6') and ../type = 'ebgp'"
                             },
                             {
@@ -11261,6 +11374,8 @@
                               "type": "string",
                               "label": "name",
                               "pattern": "([^\\? ]+)",
+                              "minLength": 1,
+                              "maxLength": 47,
                               "isKey": true
                             },
                             {
@@ -11268,6 +11383,8 @@
                               "type": "string",
                               "label": "password-text",
                               "required": true,
+                              "minLength": 1,
+                              "maxLength": 432,
                               "when": "../password-type and ../password-type!='null'"
                             },
                             {
@@ -11546,6 +11663,8 @@
                               "path": "/network-instance/instances/instance/bgp/base-process/peer-states/peer-state/current-event",
                               "type": "string",
                               "label": "current-event",
+                              "minLength": 1,
+                              "maxLength": 39,
                               "readonly": true
                             },
                             {
@@ -11681,6 +11800,8 @@
                               "type": "string",
                               "label": "remote-as",
                               "pattern": "((([1-9]\\d{0,8})|([1-3]\\d{9})|(4[0-1]\\d{8})|(42[0-8]\\d{7})|(429[0-3]\\d{6})|(4294[0-8]\\d{5})|(42949[0-5]\\d{4})|(429496[0-6]\\d{3})|(4294967[0-1]\\d{2})|(42949672[0-8]\\d{1})|(429496729[0-5]))|((([1-9]\\d{0,3})|([1-5]\\d{4})|(6[0-4]\\d{3})|(65[0-4]\\d{2})|(655[0-2]\\d)|(6553[0-5]))[\\.](([0-9]\\d{0,3})|([1-5]\\d{4})|(6[0-4]\\d{3})|(65[0-4]\\d{2})|(655[0-2]\\d)|(6553[0-5]))))",
+                              "minLength": 1,
+                              "maxLength": 11,
                               "readonly": true
                             },
                             {
@@ -11937,6 +12058,8 @@
                                               "type": "string",
                                               "label": "effect-padding",
                                               "pattern": "(([0-9A-F])*)",
+                                              "minLength": 1,
+                                              "maxLength": 32,
                                               "readonly": true,
                                               "when": "../effect-advertise-entropy-label='true'"
                                             },
@@ -11964,6 +12087,8 @@
                                               "type": "string",
                                               "label": "padding",
                                               "pattern": "(([0-9A-F])*)",
+                                              "minLength": 1,
+                                              "maxLength": 32,
                                               "when": "../advertise-entropy-label='enable'"
                                             }
                                           ]
@@ -12275,6 +12400,8 @@
                                           "path": "/network-instance/instances/instance/bgp/base-process/peers/peer/afs/af/ipv4-labeluni/soo",
                                           "type": "string",
                                           "label": "soo",
+                                          "minLength": 3,
+                                          "maxLength": 21,
                                           "when": "../../../../../../../../ni:name!='_public_'"
                                         },
                                         {
@@ -12895,6 +13022,8 @@
                                               "type": "string",
                                               "label": "effect-padding",
                                               "pattern": "(([0-9A-F])*)",
+                                              "minLength": 1,
+                                              "maxLength": 32,
                                               "readonly": true,
                                               "when": "../effect-advertise-entropy-label='true'"
                                             },
@@ -12922,6 +13051,8 @@
                                               "type": "string",
                                               "label": "padding",
                                               "pattern": "(([0-9A-F])*)",
+                                              "minLength": 1,
+                                              "maxLength": 32,
                                               "when": "../advertise-entropy-label='enable'"
                                             }
                                           ]
@@ -12990,6 +13121,8 @@
                                                       "path": "/network-instance/instances/instance/bgp/base-process/peers/peer/afs/af/ipv4-unicast/export-filter/parameter",
                                                       "type": "string",
                                                       "label": "parameter",
+                                                      "minLength": 1,
+                                                      "maxLength": 1609,
                                                       "when": "../name"
                                                     }
                                                   ]
@@ -13055,6 +13188,8 @@
                                                       "path": "/network-instance/instances/instance/bgp/base-process/peers/peer/afs/af/ipv4-unicast/import-filter/parameter",
                                                       "type": "string",
                                                       "label": "parameter",
+                                                      "minLength": 1,
+                                                      "maxLength": 1609,
                                                       "when": "../name"
                                                     }
                                                   ]
@@ -13392,6 +13527,8 @@
                                           "path": "/network-instance/instances/instance/bgp/base-process/peers/peer/afs/af/ipv4-unicast/soo",
                                           "type": "string",
                                           "label": "soo",
+                                          "minLength": 3,
+                                          "maxLength": 21,
                                           "when": "../../../../../../../../ni:name!='_public_'"
                                         },
                                         {
@@ -14373,6 +14510,8 @@
                                           "path": "/network-instance/instances/instance/bgp/base-process/peers/peer/afs/af/ipv6-unicast/soo",
                                           "type": "string",
                                           "label": "soo",
+                                          "minLength": 3,
+                                          "maxLength": 21,
                                           "when": "../../../../../../../../ni:name!='_public_'"
                                         },
                                         {
@@ -15160,7 +15299,9 @@
                                         {
                                           "path": "/network-instance/instances/instance/bgp/base-process/peers/peer/afs/af/l2vpn-evpn/split-group-name",
                                           "type": "string",
-                                          "label": "split-group-name"
+                                          "label": "split-group-name",
+                                          "minLength": 1,
+                                          "maxLength": 31
                                         },
                                         {
                                           "path": "/network-instance/instances/instance/bgp/base-process/peers/peer/afs/af/l2vpn-evpn/upe-enable",
@@ -15206,6 +15347,8 @@
                                           "path": "/network-instance/instances/instance/bgp/base-process/peers/peer/afs/af/state/current-event",
                                           "type": "string",
                                           "label": "current-event",
+                                          "minLength": 1,
+                                          "maxLength": 39,
                                           "readonly": true
                                         },
                                         {
@@ -15256,6 +15399,8 @@
                                           "path": "/network-instance/instances/instance/bgp/base-process/peers/peer/afs/af/state/discard-attribute",
                                           "type": "string",
                                           "label": "discard-attribute",
+                                          "minLength": 1,
+                                          "maxLength": 300,
                                           "readonly": true
                                         },
                                         {
@@ -15368,6 +15513,8 @@
                                           "path": "/network-instance/instances/instance/bgp/base-process/peers/peer/afs/af/state/negotiate-add-path",
                                           "type": "string",
                                           "label": "negotiate-add-path",
+                                          "minLength": 1,
+                                          "maxLength": 50,
                                           "readonly": true
                                         },
                                         {
@@ -15388,6 +15535,8 @@
                                           "path": "/network-instance/instances/instance/bgp/base-process/peers/peer/afs/af/state/negotiate-label-add-path",
                                           "type": "string",
                                           "label": "negotiate-label-add-path",
+                                          "minLength": 1,
+                                          "maxLength": 50,
                                           "readonly": true
                                         },
                                         {
@@ -15436,6 +15585,8 @@
                                           "path": "/network-instance/instances/instance/bgp/base-process/peers/peer/afs/af/state/receive-add-path",
                                           "type": "string",
                                           "label": "receive-add-path",
+                                          "minLength": 1,
+                                          "maxLength": 50,
                                           "readonly": true
                                         },
                                         {
@@ -15467,6 +15618,8 @@
                                           "path": "/network-instance/instances/instance/bgp/base-process/peers/peer/afs/af/state/receive-label-add-path",
                                           "type": "string",
                                           "label": "receive-label-add-path",
+                                          "minLength": 1,
+                                          "maxLength": 50,
                                           "readonly": true
                                         },
                                         {
@@ -15534,6 +15687,8 @@
                                           "path": "/network-instance/instances/instance/bgp/base-process/peers/peer/afs/af/state/remote-as",
                                           "type": "string",
                                           "label": "remote-as",
+                                          "minLength": 1,
+                                          "maxLength": 11,
                                           "readonly": true
                                         },
                                         {
@@ -15643,6 +15798,8 @@
                                           "path": "/network-instance/instances/instance/bgp/base-process/peers/peer/afs/af/state/up-down-duration",
                                           "type": "string",
                                           "label": "up-down-duration",
+                                          "minLength": 1,
+                                          "maxLength": 49,
                                           "readonly": true
                                         },
                                         {
@@ -15886,7 +16043,9 @@
                               "path": "/network-instance/instances/instance/bgp/base-process/peers/peer/description",
                               "type": "string",
                               "label": "description",
-                              "pattern": "([^?]*)"
+                              "pattern": "([^?]*)",
+                              "minLength": 1,
+                              "maxLength": 255
                             },
                             {
                               "path": "/network-instance/instances/instance/bgp/base-process/peers/peer/ebgp-max-hop",
@@ -15970,7 +16129,9 @@
                                   "path": "/network-instance/instances/instance/bgp/base-process/peers/peer/fake-as-parameter/fake-as",
                                   "type": "string",
                                   "label": "fake-as",
-                                  "pattern": "((([1-9]\\d{0,8})|([1-3]\\d{9})|(4[0-1]\\d{8})|(42[0-8]\\d{7})|(429[0-3]\\d{6})|(4294[0-8]\\d{5})|(42949[0-5]\\d{4})|(429496[0-6]\\d{3})|(4294967[0-1]\\d{2})|(42949672[0-8]\\d{1})|(429496729[0-5]))|((([1-9]\\d{0,3})|([1-5]\\d{4})|(6[0-4]\\d{3})|(65[0-4]\\d{2})|(655[0-2]\\d)|(6553[0-5]))[\\.](([0-9]\\d{0,3})|([1-5]\\d{4})|(6[0-4]\\d{3})|(65[0-4]\\d{2})|(655[0-2]\\d)|(6553[0-5]))))"
+                                  "pattern": "((([1-9]\\d{0,8})|([1-3]\\d{9})|(4[0-1]\\d{8})|(42[0-8]\\d{7})|(429[0-3]\\d{6})|(4294[0-8]\\d{5})|(42949[0-5]\\d{4})|(429496[0-6]\\d{3})|(4294967[0-1]\\d{2})|(42949672[0-8]\\d{1})|(429496729[0-5]))|((([1-9]\\d{0,3})|([1-5]\\d{4})|(6[0-4]\\d{3})|(65[0-4]\\d{2})|(655[0-2]\\d)|(6553[0-5]))[\\.](([0-9]\\d{0,3})|([1-5]\\d{4})|(6[0-4]\\d{3})|(65[0-4]\\d{2})|(655[0-2]\\d)|(6553[0-5]))))",
+                                  "minLength": 1,
+                                  "maxLength": 11
                                 },
                                 {
                                   "path": "/network-instance/instances/instance/bgp/base-process/peers/peer/fake-as-parameter/prepend-fake-as",
@@ -16008,6 +16169,8 @@
                               "path": "/network-instance/instances/instance/bgp/base-process/peers/peer/key-chain-name",
                               "type": "string",
                               "label": "key-chain-name",
+                              "minLength": 1,
+                              "maxLength": 47,
                               "must": [
                                 {
                                   "expr": "not(../password-type and ../password-type!='null' and ../key-chain-name)"
@@ -16084,6 +16247,8 @@
                               "type": "string",
                               "label": "password-text",
                               "required": true,
+                              "minLength": 1,
+                              "maxLength": 432,
                               "when": "../password-type and ../password-type!='null'"
                             },
                             {
@@ -16124,6 +16289,8 @@
                               "label": "remote-as",
                               "required": true,
                               "pattern": "((([1-9]\\d{0,8})|([1-3]\\d{9})|(4[0-1]\\d{8})|(42[0-8]\\d{7})|(429[0-3]\\d{6})|(4294[0-8]\\d{5})|(42949[0-5]\\d{4})|(429496[0-6]\\d{3})|(4294967[0-1]\\d{2})|(42949672[0-8]\\d{1})|(429496729[0-5]))|((([1-9]\\d{0,3})|([1-5]\\d{4})|(6[0-4]\\d{3})|(65[0-4]\\d{2})|(655[0-2]\\d)|(6553[0-5]))[\\.](([0-9]\\d{0,3})|([1-5]\\d{4})|(6[0-4]\\d{3})|(65[0-4]\\d{2})|(655[0-2]\\d)|(6553[0-5]))))",
+                              "minLength": 1,
+                              "maxLength": 11,
                               "operationExclude": [
                                 "update"
                               ]
@@ -16241,13 +16408,17 @@
                           "path": "/network-instance/instances/instance/bgp/base-process/vpn-as-number/local-ipv4",
                           "type": "string",
                           "label": "local-ipv4",
-                          "pattern": "((([1-9]\\d{0,8})|([1-3]\\d{9})|(4[0-1]\\d{8})|(42[0-8]\\d{7})|(429[0-3]\\d{6})|(4294[0-8]\\d{5})|(42949[0-5]\\d{4})|(429496[0-6]\\d{3})|(4294967[0-1]\\d{2})|(42949672[0-8]\\d{1})|(429496729[0-5]))|((([1-9]\\d{0,3})|([1-5]\\d{4})|(6[0-4]\\d{3})|(65[0-4]\\d{2})|(655[0-2]\\d)|(6553[0-5]))[\\.](([0-9]\\d{0,3})|([1-5]\\d{4})|(6[0-4]\\d{3})|(65[0-4]\\d{2})|(655[0-2]\\d)|(6553[0-5]))))"
+                          "pattern": "((([1-9]\\d{0,8})|([1-3]\\d{9})|(4[0-1]\\d{8})|(42[0-8]\\d{7})|(429[0-3]\\d{6})|(4294[0-8]\\d{5})|(42949[0-5]\\d{4})|(429496[0-6]\\d{3})|(4294967[0-1]\\d{2})|(42949672[0-8]\\d{1})|(429496729[0-5]))|((([1-9]\\d{0,3})|([1-5]\\d{4})|(6[0-4]\\d{3})|(65[0-4]\\d{2})|(655[0-2]\\d)|(6553[0-5]))[\\.](([0-9]\\d{0,3})|([1-5]\\d{4})|(6[0-4]\\d{3})|(65[0-4]\\d{2})|(655[0-2]\\d)|(6553[0-5]))))",
+                          "minLength": 1,
+                          "maxLength": 11
                         },
                         {
                           "path": "/network-instance/instances/instance/bgp/base-process/vpn-as-number/local-ipv6",
                           "type": "string",
                           "label": "local-ipv6",
-                          "pattern": "((([1-9]\\d{0,8})|([1-3]\\d{9})|(4[0-1]\\d{8})|(42[0-8]\\d{7})|(429[0-3]\\d{6})|(4294[0-8]\\d{5})|(42949[0-5]\\d{4})|(429496[0-6]\\d{3})|(4294967[0-1]\\d{2})|(42949672[0-8]\\d{1})|(429496729[0-5]))|((([1-9]\\d{0,3})|([1-5]\\d{4})|(6[0-4]\\d{3})|(65[0-4]\\d{2})|(655[0-2]\\d)|(6553[0-5]))[\\.](([0-9]\\d{0,3})|([1-5]\\d{4})|(6[0-4]\\d{3})|(65[0-4]\\d{2})|(655[0-2]\\d)|(6553[0-5]))))"
+                          "pattern": "((([1-9]\\d{0,8})|([1-3]\\d{9})|(4[0-1]\\d{8})|(42[0-8]\\d{7})|(429[0-3]\\d{6})|(4294[0-8]\\d{5})|(42949[0-5]\\d{4})|(429496[0-6]\\d{3})|(4294967[0-1]\\d{2})|(42949672[0-8]\\d{1})|(429496729[0-5]))|((([1-9]\\d{0,3})|([1-5]\\d{4})|(6[0-4]\\d{3})|(65[0-4]\\d{2})|(655[0-2]\\d)|(6553[0-5]))[\\.](([0-9]\\d{0,3})|([1-5]\\d{4})|(6[0-4]\\d{3})|(65[0-4]\\d{2})|(655[0-2]\\d)|(6553[0-5]))))",
+                          "minLength": 1,
+                          "maxLength": 11
                         }
                       ]
                     }
@@ -16265,6 +16436,8 @@
               "type": "string",
               "label": "description",
               "pattern": "([^?]*)",
+              "minLength": 1,
+              "maxLength": 242,
               "when": "not(../name='_public_')"
             },
             {
@@ -16896,6 +17069,8 @@
               "path": "/network-instance/instances/instance/name",
               "type": "string",
               "label": "name",
+              "minLength": 1,
+              "maxLength": 31,
               "isKey": true
             },
             {
@@ -17003,6 +17178,7 @@
                                   "path": "/network-instance/instances/instance/ospfv2/sites/site/abr-asbr-statistics/abr-asbr-statistic/if-name",
                                   "type": "string",
                                   "label": "if-name",
+                                  "maxLength": 64,
                                   "readonly": true
                                 },
                                 {
@@ -17232,12 +17408,16 @@
                                       "path": "/network-instance/instances/instance/ospfv2/sites/site/areas/area/authentication/auth-text-md5",
                                       "type": "string",
                                       "label": "auth-text-md5",
+                                      "minLength": 1,
+                                      "maxLength": 432,
                                       "when": "../mode='hmac-md5' or ../mode='hmac-sha256' or ../mode='md5'"
                                     },
                                     {
                                       "path": "/network-instance/instances/instance/ospfv2/sites/site/areas/area/authentication/auth-text-simple",
                                       "type": "string",
                                       "label": "auth-text-simple",
+                                      "minLength": 1,
+                                      "maxLength": 128,
                                       "when": "../mode='simple'"
                                     },
                                     {
@@ -17245,6 +17425,8 @@
                                       "type": "string",
                                       "label": "key-chain-name",
                                       "required": true,
+                                      "minLength": 1,
+                                      "maxLength": 47,
                                       "when": "../mode='keychain'"
                                     },
                                     {
@@ -17292,7 +17474,9 @@
                                   "path": "/network-instance/instances/instance/ospfv2/sites/site/areas/area/description",
                                   "type": "string",
                                   "label": "description",
-                                  "pattern": "([^?]*)"
+                                  "pattern": "([^?]*)",
+                                  "minLength": 1,
+                                  "maxLength": 80
                                 },
                                 {
                                   "path": "/network-instance/instances/instance/ospfv2/sites/site/areas/area/disp-data",
@@ -17543,6 +17727,8 @@
                                               "path": "/network-instance/instances/instance/ospfv2/sites/site/areas/area/interfaces/interface/authentication/auth-text-md5",
                                               "type": "string",
                                               "label": "auth-text-md5",
+                                              "minLength": 1,
+                                              "maxLength": 432,
                                               "when": "../mode='hmac-md5' or ../mode='hmac-sha256' or ../mode='md5'",
                                               "must": [
                                                 {
@@ -17554,6 +17740,8 @@
                                               "path": "/network-instance/instances/instance/ospfv2/sites/site/areas/area/interfaces/interface/authentication/auth-text-simple",
                                               "type": "string",
                                               "label": "auth-text-simple",
+                                              "minLength": 1,
+                                              "maxLength": 128,
                                               "when": "../mode='simple'"
                                             },
                                             {
@@ -17561,6 +17749,8 @@
                                               "type": "string",
                                               "label": "key-chain-name",
                                               "required": true,
+                                              "minLength": 1,
+                                              "maxLength": 47,
                                               "when": "../mode='keychain'"
                                             },
                                             {
@@ -17859,6 +18049,8 @@
                                               "path": "/network-instance/instances/instance/ospfv2/sites/site/areas/area/interfaces/interface/disp-data/peer-flap-timer",
                                               "type": "string",
                                               "label": "peer-flap-timer",
+                                              "minLength": 1,
+                                              "maxLength": 40,
                                               "readonly": true
                                             },
                                             {
@@ -18651,12 +18843,16 @@
                                                       "path": "/network-instance/instances/instance/ospfv2/sites/site/areas/area/interfaces/interface/multi-areas/multi-area/authentication/auth-text-md5",
                                                       "type": "string",
                                                       "label": "auth-text-md5",
+                                                      "minLength": 1,
+                                                      "maxLength": 432,
                                                       "when": "../mode='hmac-md5' or ../mode='hmac-sha256' or ../mode='md5'"
                                                     },
                                                     {
                                                       "path": "/network-instance/instances/instance/ospfv2/sites/site/areas/area/interfaces/interface/multi-areas/multi-area/authentication/auth-text-simple",
                                                       "type": "string",
                                                       "label": "auth-text-simple",
+                                                      "minLength": 1,
+                                                      "maxLength": 128,
                                                       "when": "../mode='simple'"
                                                     },
                                                     {
@@ -18664,6 +18860,8 @@
                                                       "type": "string",
                                                       "label": "key-chain-name",
                                                       "required": true,
+                                                      "minLength": 1,
+                                                      "maxLength": 47,
                                                       "when": "../mode='keychain'"
                                                     },
                                                     {
@@ -19074,6 +19272,8 @@
                                                   "path": "/network-instance/instances/instance/ospfv2/sites/site/areas/area/interfaces/interface/nbr-statistics/nbr-statistic/adj-flags",
                                                   "type": "string",
                                                   "label": "adj-flags",
+                                                  "minLength": 1,
+                                                  "maxLength": 20,
                                                   "readonly": true
                                                 },
                                                 {
@@ -19105,6 +19305,8 @@
                                                   "path": "/network-instance/instances/instance/ospfv2/sites/site/areas/area/interfaces/interface/nbr-statistics/nbr-statistic/dead-due-timer",
                                                   "type": "string",
                                                   "label": "dead-due-timer",
+                                                  "minLength": 1,
+                                                  "maxLength": 16,
                                                   "readonly": true
                                                 },
                                                 {
@@ -19239,6 +19441,8 @@
                                                   "path": "/network-instance/instances/instance/ospfv2/sites/site/areas/area/interfaces/interface/nbr-statistics/nbr-statistic/up-time",
                                                   "type": "string",
                                                   "label": "up-time",
+                                                  "minLength": 1,
+                                                  "maxLength": 16,
                                                   "readonly": true
                                                 },
                                                 {
@@ -19549,7 +19753,9 @@
                                           "path": "/network-instance/instances/instance/ospfv2/sites/site/areas/area/networks/network/description",
                                           "type": "string",
                                           "label": "description",
-                                          "pattern": "([^?]*)"
+                                          "pattern": "([^?]*)",
+                                          "minLength": 1,
+                                          "maxLength": 80
                                         },
                                         {
                                           "path": "/network-instance/instances/instance/ospfv2/sites/site/areas/area/networks/network/ip-address",
@@ -19651,6 +19857,8 @@
                                               "path": "/network-instance/instances/instance/ospfv2/sites/site/areas/area/sham-links/sham-link/authentication/auth-text-md5",
                                               "type": "string",
                                               "label": "auth-text-md5",
+                                              "minLength": 1,
+                                              "maxLength": 432,
                                               "when": "../mode='hmac-sha256' or ../mode='md5' or ../mode='hmac-md5'",
                                               "must": [
                                                 {
@@ -19662,6 +19870,8 @@
                                               "path": "/network-instance/instances/instance/ospfv2/sites/site/areas/area/sham-links/sham-link/authentication/auth-text-simple",
                                               "type": "string",
                                               "label": "auth-text-simple",
+                                              "minLength": 1,
+                                              "maxLength": 128,
                                               "when": "../mode='simple'"
                                             },
                                             {
@@ -19669,6 +19879,8 @@
                                               "type": "string",
                                               "label": "key-chain-name",
                                               "required": true,
+                                              "minLength": 1,
+                                              "maxLength": 47,
                                               "when": "../mode='keychain'"
                                             },
                                             {
@@ -19840,6 +20052,8 @@
                                               "path": "/network-instance/instances/instance/ospfv2/sites/site/areas/area/vlink-peers/vlink-peer/authentication/auth-text-md5",
                                               "type": "string",
                                               "label": "auth-text-md5",
+                                              "minLength": 1,
+                                              "maxLength": 432,
                                               "when": "../mode='hmac-sha256' or ../mode='md5' or ../mode='hmac-md5'",
                                               "must": [
                                                 {
@@ -19851,6 +20065,8 @@
                                               "path": "/network-instance/instances/instance/ospfv2/sites/site/areas/area/vlink-peers/vlink-peer/authentication/auth-text-simple",
                                               "type": "string",
                                               "label": "auth-text-simple",
+                                              "minLength": 1,
+                                              "maxLength": 128,
                                               "when": "../mode='simple'"
                                             },
                                             {
@@ -19858,6 +20074,8 @@
                                               "type": "string",
                                               "label": "key-chain-name",
                                               "required": true,
+                                              "minLength": 1,
+                                              "maxLength": 47,
                                               "when": "../mode='keychain'"
                                             },
                                             {
@@ -20420,7 +20638,9 @@
                           "path": "/network-instance/instances/instance/ospfv2/sites/site/description",
                           "type": "string",
                           "label": "description",
-                          "pattern": "([^?]*)"
+                          "pattern": "([^?]*)",
+                          "minLength": 1,
+                          "maxLength": 80
                         },
                         {
                           "path": "/network-instance/instances/instance/ospfv2/sites/site/disp-data",
@@ -21764,6 +21984,8 @@
                               "path": "/network-instance/instances/instance/ospfv2/sites/site/host-name/value",
                               "type": "string",
                               "label": "value",
+                              "minLength": 1,
+                              "maxLength": 255,
                               "when": "../enable='true'"
                             }
                           ]
@@ -21947,6 +22169,7 @@
                                   "path": "/network-instance/instances/instance/ospfv2/sites/site/last-down-nbrs/last-down-nbr/if-name",
                                   "type": "string",
                                   "label": "if-name",
+                                  "maxLength": 64,
                                   "readonly": true,
                                   "isKey": true
                                 },
@@ -22486,12 +22709,16 @@
                                   "path": "/network-instance/instances/instance/ospfv2/sites/site/lsdb-statistics/lsdb-statistic/check-sum",
                                   "type": "string",
                                   "label": "check-sum",
+                                  "minLength": 1,
+                                  "maxLength": 10,
                                   "readonly": true
                                 },
                                 {
                                   "path": "/network-instance/instances/instance/ospfv2/sites/site/lsdb-statistics/lsdb-statistic/host-name",
                                   "type": "string",
                                   "label": "host-name",
+                                  "minLength": 1,
+                                  "maxLength": 255,
                                   "readonly": true
                                 },
                                 {
@@ -22524,6 +22751,8 @@
                                   "path": "/network-instance/instances/instance/ospfv2/sites/site/lsdb-statistics/lsdb-statistic/lsa-sequence-num",
                                   "type": "string",
                                   "label": "lsa-sequence-num",
+                                  "minLength": 1,
+                                  "maxLength": 12,
                                   "readonly": true
                                 },
                                 {
@@ -22929,12 +23158,16 @@
                                       "path": "/network-instance/instances/instance/ospfv2/sites/site/lsdb-statistics/lsdb-statistic/rilsa/algorithm",
                                       "type": "string",
                                       "label": "algorithm",
+                                      "minLength": 1,
+                                      "maxLength": 255,
                                       "readonly": true
                                     },
                                     {
                                       "path": "/network-instance/instances/instance/ospfv2/sites/site/lsdb-statistics/lsdb-statistic/rilsa/host-name",
                                       "type": "string",
                                       "label": "host-name",
+                                      "minLength": 1,
+                                      "maxLength": 255,
                                       "readonly": true
                                     }
                                   ]
@@ -23053,12 +23286,16 @@
                                           "path": "/network-instance/instances/instance/ospfv2/sites/site/migp-routings/migp-routing/nexthop-datas/nexthop-data/flags-disp",
                                           "type": "string",
                                           "label": "flags-disp",
+                                          "minLength": 1,
+                                          "maxLength": 8,
                                           "readonly": true
                                         },
                                         {
                                           "path": "/network-instance/instances/instance/ospfv2/sites/site/migp-routings/migp-routing/nexthop-datas/nexthop-data/if-name",
                                           "type": "string",
                                           "label": "if-name",
+                                          "minLength": 1,
+                                          "maxLength": 64,
                                           "readonly": true
                                         },
                                         {
@@ -23196,6 +23433,8 @@
                                           "path": "/network-instance/instances/instance/ospfv2/sites/site/neighbors/neighbor/datas/data/dead-due-timer",
                                           "type": "string",
                                           "label": "dead-due-timer",
+                                          "minLength": 1,
+                                          "maxLength": 16,
                                           "readonly": true
                                         },
                                         {
@@ -23275,6 +23514,8 @@
                                           "path": "/network-instance/instances/instance/ospfv2/sites/site/neighbors/neighbor/datas/data/up-time",
                                           "type": "string",
                                           "label": "up-time",
+                                          "minLength": 1,
+                                          "maxLength": 16,
                                           "readonly": true
                                         },
                                         {
@@ -23292,12 +23533,15 @@
                                   "path": "/network-instance/instances/instance/ospfv2/sites/site/neighbors/neighbor/host-name",
                                   "type": "string",
                                   "label": "host-name",
+                                  "minLength": 1,
+                                  "maxLength": 255,
                                   "readonly": true
                                 },
                                 {
                                   "path": "/network-instance/instances/instance/ospfv2/sites/site/neighbors/neighbor/if-name",
                                   "type": "string",
                                   "label": "if-name",
+                                  "maxLength": 64,
                                   "readonly": true,
                                   "isKey": true
                                 },
@@ -23399,6 +23643,7 @@
                                   "path": "/network-instance/instances/instance/ospfv2/sites/site/nexthop-paras/nexthop-para/if-name",
                                   "type": "string",
                                   "label": "if-name",
+                                  "maxLength": 64,
                                   "readonly": true,
                                   "isKey": true
                                 },
@@ -23590,7 +23835,9 @@
                                   "path": "/network-instance/instances/instance/ospfv2/sites/site/private-net/domain-id/value",
                                   "type": "string",
                                   "label": "value",
-                                  "pattern": "(0x|0X)?[0-9a-fA-F]+"
+                                  "pattern": "(0x|0X)?[0-9a-fA-F]+",
+                                  "minLength": 1,
+                                  "maxLength": 10
                                 }
                               ],
                               "presence": true
@@ -23642,6 +23889,8 @@
                                       "type": "string",
                                       "label": "value",
                                       "pattern": "(0x|0X)?[0-9a-fA-F]+",
+                                      "minLength": 1,
+                                      "maxLength": 10,
                                       "isKey": true
                                     }
                                   ]
@@ -23894,6 +24143,8 @@
                                           "path": "/network-instance/instances/instance/ospfv2/sites/site/routings/routing/nexthop-datas/nexthop-data/bak-if-name",
                                           "type": "string",
                                           "label": "bak-if-name",
+                                          "minLength": 1,
+                                          "maxLength": 64,
                                           "readonly": true
                                         },
                                         {
@@ -23907,12 +24158,16 @@
                                           "path": "/network-instance/instances/instance/ospfv2/sites/site/routings/routing/nexthop-datas/nexthop-data/flags-disp",
                                           "type": "string",
                                           "label": "flags-disp",
+                                          "minLength": 1,
+                                          "maxLength": 8,
                                           "readonly": true
                                         },
                                         {
                                           "path": "/network-instance/instances/instance/ospfv2/sites/site/routings/routing/nexthop-datas/nexthop-data/if-name",
                                           "type": "string",
                                           "label": "if-name",
+                                          "minLength": 1,
+                                          "maxLength": 64,
                                           "readonly": true
                                         },
                                         {
@@ -24592,6 +24847,8 @@
                                       "path": "/network-instance/instances/instance/ospfv3/sites/site/areas/area/authentication/auth-text",
                                       "type": "string",
                                       "label": "auth-text",
+                                      "minLength": 1,
+                                      "maxLength": 432,
                                       "when": "../mode='hmac-sha256'"
                                     },
                                     {
@@ -24623,7 +24880,9 @@
                                   "path": "/network-instance/instances/instance/ospfv3/sites/site/areas/area/description",
                                   "type": "string",
                                   "label": "description",
-                                  "pattern": "([^?]*)"
+                                  "pattern": "([^?]*)",
+                                  "minLength": 1,
+                                  "maxLength": 80
                                 },
                                 {
                                   "path": "/network-instance/instances/instance/ospfv3/sites/site/areas/area/filters",
@@ -24735,6 +24994,8 @@
                                               "path": "/network-instance/instances/instance/ospfv3/sites/site/areas/area/interfaces/interface/authentication/auth-text",
                                               "type": "string",
                                               "label": "auth-text",
+                                              "minLength": 1,
+                                              "maxLength": 432,
                                               "when": "../mode='hmac-sha256'"
                                             },
                                             {
@@ -24949,6 +25210,8 @@
                                                   "path": "/network-instance/instances/instance/ospfv3/sites/site/areas/area/interfaces/interface/neighbors/neighbor/host-name",
                                                   "type": "string",
                                                   "label": "host-name",
+                                                  "minLength": 1,
+                                                  "maxLength": 255,
                                                   "readonly": true,
                                                   "supportFilter": true
                                                 },
@@ -25398,6 +25661,8 @@
                               "type": "string",
                               "label": "text",
                               "required": true,
+                              "minLength": 1,
+                              "maxLength": 432,
                               "when": "../mode!='none'"
                             }
                           ]
@@ -25625,7 +25890,9 @@
                           "path": "/network-instance/instances/instance/ospfv3/sites/site/description",
                           "type": "string",
                           "label": "description",
-                          "pattern": "([^?]*)"
+                          "pattern": "([^?]*)",
+                          "minLength": 1,
+                          "maxLength": 80
                         },
                         {
                           "path": "/network-instance/instances/instance/ospfv3/sites/site/fa-mode",
@@ -25966,6 +26233,8 @@
                               "path": "/network-instance/instances/instance/ospfv3/sites/site/host-name/name",
                               "type": "string",
                               "label": "name",
+                              "minLength": 1,
+                              "maxLength": 255,
                               "when": "(../enable='true')"
                             }
                           ]
@@ -26307,7 +26576,9 @@
                                   "path": "/network-instance/instances/instance/ospfv3/sites/site/private-net/domain-id/value",
                                   "type": "string",
                                   "label": "value",
-                                  "pattern": "(0x|0X)?[0-9a-fA-F]+"
+                                  "pattern": "(0x|0X)?[0-9a-fA-F]+",
+                                  "minLength": 1,
+                                  "maxLength": 10
                                 }
                               ],
                               "presence": true
@@ -26359,6 +26630,8 @@
                                       "type": "string",
                                       "label": "value",
                                       "pattern": "(0x|0X)?[0-9a-fA-F]+",
+                                      "minLength": 1,
+                                      "maxLength": 10,
                                       "isKey": true
                                     }
                                   ]

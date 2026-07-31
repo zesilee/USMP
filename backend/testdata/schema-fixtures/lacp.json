@@ -38,6 +38,7 @@
               "type": "string",
               "label": "sys-mac",
               "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+              "maxLength": 255,
               "dynamicDefault": true
             },
             {
@@ -70,6 +71,7 @@
               "path": "/lacp/trouble-shoots/trouble-shoot/description",
               "type": "string",
               "label": "description",
+              "maxLength": 600,
               "readonly": true
             },
             {

@@ -34,7 +34,9 @@
                   "path": "/m-lag/dfs-groups/dfs-group/authentication/password",
                   "type": "string",
                   "label": "password",
-                  "required": true
+                  "required": true,
+                  "minLength": 6,
+                  "maxLength": 432
                 }
               ],
               "presence": true
@@ -374,6 +376,8 @@
                       "path": "/m-lag/negotiation-states/negotiation-state/dfs-group-states/dfs-group-state/device-type",
                       "type": "string",
                       "label": "device-type",
+                      "minLength": 1,
+                      "maxLength": 50,
                       "readonly": true
                     },
                     {
@@ -420,12 +424,15 @@
                       "type": "string",
                       "label": "system-id",
                       "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+                      "maxLength": 255,
                       "readonly": true
                     },
                     {
                       "path": "/m-lag/negotiation-states/negotiation-state/dfs-group-states/dfs-group-state/system-name",
                       "type": "string",
                       "label": "system-name",
+                      "minLength": 1,
+                      "maxLength": 246,
                       "readonly": true
                     },
                     {
@@ -440,6 +447,8 @@
                       "path": "/m-lag/negotiation-states/negotiation-state/dfs-group-states/dfs-group-state/version",
                       "type": "string",
                       "label": "version",
+                      "minLength": 1,
+                      "maxLength": 31,
                       "readonly": true
                     },
                     {
@@ -531,6 +540,8 @@
                           "path": "/m-lag/negotiation-states/negotiation-state/dfs-group-states/m-lags/m-lag/interface-name",
                           "type": "string",
                           "label": "interface-name",
+                          "minLength": 1,
+                          "maxLength": 63,
                           "readonly": true
                         },
                         {
@@ -614,6 +625,8 @@
                           "path": "/m-lag/negotiation-states/negotiation-state/dfs-group-states/peer-link-states/peer-link-state/interface-name",
                           "type": "string",
                           "label": "interface-name",
+                          "minLength": 1,
+                          "maxLength": 63,
                           "readonly": true
                         },
                         {

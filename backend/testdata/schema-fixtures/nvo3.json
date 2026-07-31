@@ -103,6 +103,8 @@
               "path": "/nvo3/tunnels/tunnel/up-time",
               "type": "string",
               "label": "up-time",
+              "minLength": 1,
+              "maxLength": 10,
               "readonly": true
             }
           ]

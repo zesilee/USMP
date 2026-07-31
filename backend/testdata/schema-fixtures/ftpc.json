@@ -12,12 +12,16 @@
           "path": "/ftpc/client/ipv6-vpn-instance-name",
           "type": "string",
           "label": "ipv6-vpn-instance-name",
+          "minLength": 1,
+          "maxLength": 31,
           "when": "../src-ipv6-addr"
         },
         {
           "path": "/ftpc/client/source-interface-name",
           "type": "string",
           "label": "source-interface-name",
+          "minLength": 1,
+          "maxLength": 63,
           "when": "not(../source-ipv4-address)"
         },
         {
@@ -42,12 +46,16 @@
         {
           "path": "/ftpc/global-vpn/ipv6-vpn-name",
           "type": "string",
-          "label": "ipv6-vpn-name"
+          "label": "ipv6-vpn-name",
+          "minLength": 1,
+          "maxLength": 31
         },
         {
           "path": "/ftpc/global-vpn/vpn-name",
           "type": "string",
-          "label": "vpn-name"
+          "label": "vpn-name",
+          "minLength": 1,
+          "maxLength": 31
         }
       ]
     }

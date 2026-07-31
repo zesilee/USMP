@@ -19,6 +19,8 @@
               "path": "/driver/area-energyinfos/area-energyinfo/area-assigned-power",
               "type": "string",
               "label": "area-assigned-power",
+              "minLength": 1,
+              "maxLength": 255,
               "readonly": true
             },
             {
@@ -32,18 +34,24 @@
               "path": "/driver/area-energyinfos/area-energyinfo/area-left-power",
               "type": "string",
               "label": "area-left-power",
+              "minLength": 1,
+              "maxLength": 255,
               "readonly": true
             },
             {
               "path": "/driver/area-energyinfos/area-energyinfo/area-rated-power",
               "type": "string",
               "label": "area-rated-power",
+              "minLength": 1,
+              "maxLength": 255,
               "readonly": true
             },
             {
               "path": "/driver/area-energyinfos/area-energyinfo/area-used-power",
               "type": "string",
               "label": "area-used-power",
+              "minLength": 1,
+              "maxLength": 255,
               "readonly": true
             },
             {
@@ -62,18 +70,24 @@
                       "path": "/driver/area-energyinfos/area-energyinfo/board-energys/board-energy/current-power",
                       "type": "string",
                       "label": "current-power",
+                      "minLength": 1,
+                      "maxLength": 255,
                       "readonly": true
                     },
                     {
                       "path": "/driver/area-energyinfos/area-energyinfo/board-energys/board-energy/efficiency",
                       "type": "string",
                       "label": "efficiency",
+                      "minLength": 1,
+                      "maxLength": 255,
                       "readonly": true
                     },
                     {
                       "path": "/driver/area-energyinfos/area-energyinfo/board-energys/board-energy/electrical-value",
                       "type": "string",
                       "label": "electrical-value",
+                      "minLength": 1,
+                      "maxLength": 255,
                       "readonly": true
                     },
                     {
@@ -86,12 +100,16 @@
                       "path": "/driver/area-energyinfos/area-energyinfo/board-energys/board-energy/pcb-name",
                       "type": "string",
                       "label": "pcb-name",
+                      "minLength": 1,
+                      "maxLength": 32,
                       "readonly": true
                     },
                     {
                       "path": "/driver/area-energyinfos/area-energyinfo/board-energys/board-energy/position",
                       "type": "string",
                       "label": "position",
+                      "minLength": 1,
+                      "maxLength": 32,
                       "readonly": true,
                       "isKey": true
                     },
@@ -99,18 +117,24 @@
                       "path": "/driver/area-energyinfos/area-energyinfo/board-energys/board-energy/power-threshold",
                       "type": "string",
                       "label": "power-threshold",
+                      "minLength": 1,
+                      "maxLength": 255,
                       "readonly": true
                     },
                     {
                       "path": "/driver/area-energyinfos/area-energyinfo/board-energys/board-energy/rated-power",
                       "type": "string",
                       "label": "rated-power",
+                      "minLength": 1,
+                      "maxLength": 255,
                       "readonly": true
                     },
                     {
                       "path": "/driver/area-energyinfos/area-energyinfo/board-energys/board-energy/voltage-value",
                       "type": "string",
                       "label": "voltage-value",
+                      "minLength": 1,
+                      "maxLength": 255,
                       "readonly": true
                     }
                   ]
@@ -121,6 +145,8 @@
               "path": "/driver/area-energyinfos/area-energyinfo/chassis-position",
               "type": "string",
               "label": "chassis-position",
+              "minLength": 1,
+              "maxLength": 32,
               "readonly": true,
               "isKey": true
             }
@@ -144,18 +170,24 @@
               "path": "/driver/board-powers/board-power/current-power",
               "type": "string",
               "label": "current-power",
+              "minLength": 1,
+              "maxLength": 255,
               "readonly": true
             },
             {
               "path": "/driver/board-powers/board-power/efficiency",
               "type": "string",
               "label": "efficiency",
+              "minLength": 1,
+              "maxLength": 255,
               "readonly": true
             },
             {
               "path": "/driver/board-powers/board-power/electrical-value",
               "type": "string",
               "label": "electrical-value",
+              "minLength": 1,
+              "maxLength": 255,
               "readonly": true
             },
             {
@@ -168,12 +200,16 @@
               "path": "/driver/board-powers/board-power/pcb-name",
               "type": "string",
               "label": "pcb-name",
+              "minLength": 1,
+              "maxLength": 32,
               "readonly": true
             },
             {
               "path": "/driver/board-powers/board-power/position",
               "type": "string",
               "label": "position",
+              "minLength": 1,
+              "maxLength": 32,
               "readonly": true,
               "isKey": true
             },
@@ -181,18 +217,24 @@
               "path": "/driver/board-powers/board-power/power-threshold",
               "type": "string",
               "label": "power-threshold",
+              "minLength": 1,
+              "maxLength": 255,
               "readonly": true
             },
             {
               "path": "/driver/board-powers/board-power/rated-power",
               "type": "string",
               "label": "rated-power",
+              "minLength": 1,
+              "maxLength": 255,
               "readonly": true
             },
             {
               "path": "/driver/board-powers/board-power/voltage-value",
               "type": "string",
               "label": "voltage-value",
+              "minLength": 1,
+              "maxLength": 255,
               "readonly": true
             }
           ]
@@ -215,12 +257,16 @@
               "path": "/driver/bootinfos/bootinfo/board-type",
               "type": "string",
               "label": "board-type",
+              "minLength": 1,
+              "maxLength": 32,
               "readonly": true
             },
             {
               "path": "/driver/bootinfos/bootinfo/position",
               "type": "string",
               "label": "position",
+              "minLength": 1,
+              "maxLength": 32,
               "readonly": true,
               "isKey": true
             },
@@ -228,6 +274,8 @@
               "path": "/driver/bootinfos/bootinfo/rot",
               "type": "string",
               "label": "rot",
+              "minLength": 1,
+              "maxLength": 32,
               "readonly": true
             }
           ]
@@ -250,6 +298,8 @@
               "path": "/driver/chassis-run-modes/chassis-run-mode/chassis-id",
               "type": "string",
               "label": "chassis-id",
+              "minLength": 1,
+              "maxLength": 31,
               "readonly": true,
               "isKey": true
             },
@@ -257,6 +307,8 @@
               "path": "/driver/chassis-run-modes/chassis-run-mode/current-run-cluster",
               "type": "string",
               "label": "current-run-cluster",
+              "minLength": 1,
+              "maxLength": 4,
               "readonly": true
             },
             {
@@ -291,6 +343,8 @@
               "path": "/driver/chassis-run-modes/chassis-run-mode/next-run-cluster",
               "type": "string",
               "label": "next-run-cluster",
+              "minLength": 1,
+              "maxLength": 3,
               "readonly": true
             },
             {
@@ -341,6 +395,8 @@
               "path": "/driver/check-running-software-safes/check-running-software-safe/board-type",
               "type": "string",
               "label": "board-type",
+              "minLength": 1,
+              "maxLength": 32,
               "readonly": true
             },
             {
@@ -364,12 +420,16 @@
               "path": "/driver/check-running-software-safes/check-running-software-safe/pkgsha256hash",
               "type": "string",
               "label": "pkgsha256hash",
+              "minLength": 1,
+              "maxLength": 255,
               "readonly": true
             },
             {
               "path": "/driver/check-running-software-safes/check-running-software-safe/position",
               "type": "string",
               "label": "position",
+              "minLength": 1,
+              "maxLength": 32,
               "readonly": true,
               "isKey": true
             },
@@ -397,6 +457,8 @@
               "path": "/driver/check-running-software-safes/check-running-software-safe/runsha256hash",
               "type": "string",
               "label": "runsha256hash",
+              "minLength": 1,
+              "maxLength": 255,
               "readonly": true
             }
           ]
@@ -419,6 +481,8 @@
               "path": "/driver/electric-current-infos/electric-current-info/address",
               "type": "string",
               "label": "address",
+              "minLength": 1,
+              "maxLength": 50,
               "readonly": true,
               "isKey": true
             },
@@ -433,18 +497,24 @@
               "path": "/driver/electric-current-infos/electric-current-info/current",
               "type": "string",
               "label": "current",
+              "minLength": 1,
+              "maxLength": 50,
               "readonly": true
             },
             {
               "path": "/driver/electric-current-infos/electric-current-info/fatal-high-threshold",
               "type": "string",
               "label": "fatal-high-threshold",
+              "minLength": 1,
+              "maxLength": 50,
               "readonly": true
             },
             {
               "path": "/driver/electric-current-infos/electric-current-info/fatal-low-threshold",
               "type": "string",
               "label": "fatal-low-threshold",
+              "minLength": 1,
+              "maxLength": 50,
               "readonly": true
             },
             {
@@ -458,24 +528,32 @@
               "path": "/driver/electric-current-infos/electric-current-info/major-high-threshold",
               "type": "string",
               "label": "major-high-threshold",
+              "minLength": 1,
+              "maxLength": 50,
               "readonly": true
             },
             {
               "path": "/driver/electric-current-infos/electric-current-info/major-low-threshold",
               "type": "string",
               "label": "major-low-threshold",
+              "minLength": 1,
+              "maxLength": 50,
               "readonly": true
             },
             {
               "path": "/driver/electric-current-infos/electric-current-info/pcb-name",
               "type": "string",
               "label": "pcb-name",
+              "minLength": 1,
+              "maxLength": 50,
               "readonly": true
             },
             {
               "path": "/driver/electric-current-infos/electric-current-info/position",
               "type": "string",
               "label": "position",
+              "minLength": 1,
+              "maxLength": 32,
               "readonly": true,
               "isKey": true
             },
@@ -483,6 +561,8 @@
               "path": "/driver/electric-current-infos/electric-current-info/required-current",
               "type": "string",
               "label": "required-current",
+              "minLength": 1,
+              "maxLength": 50,
               "readonly": true
             },
             {
@@ -537,42 +617,56 @@
               "path": "/driver/electronic-labels/electronic-label/archives-info-version",
               "type": "string",
               "label": "archives-info-version",
+              "minLength": 1,
+              "maxLength": 128,
               "readonly": true
             },
             {
               "path": "/driver/electronic-labels/electronic-label/barcode",
               "type": "string",
               "label": "barcode",
+              "minLength": 1,
+              "maxLength": 128,
               "readonly": true
             },
             {
               "path": "/driver/electronic-labels/electronic-label/board-type",
               "type": "string",
               "label": "board-type",
+              "minLength": 1,
+              "maxLength": 128,
               "readonly": true
             },
             {
               "path": "/driver/electronic-labels/electronic-label/bom-english-desc",
               "type": "string",
               "label": "bom-english-desc",
+              "minLength": 1,
+              "maxLength": 256,
               "readonly": true
             },
             {
               "path": "/driver/electronic-labels/electronic-label/bom-local-desc",
               "type": "string",
               "label": "bom-local-desc",
+              "minLength": 1,
+              "maxLength": 256,
               "readonly": true
             },
             {
               "path": "/driver/electronic-labels/electronic-label/entity-asset-id",
               "type": "string",
               "label": "entity-asset-id",
+              "minLength": 1,
+              "maxLength": 128,
               "readonly": true
             },
             {
               "path": "/driver/electronic-labels/electronic-label/entity-bomid",
               "type": "string",
               "label": "entity-bomid",
+              "minLength": 1,
+              "maxLength": 128,
               "readonly": true
             },
             {
@@ -700,18 +794,24 @@
               "path": "/driver/electronic-labels/electronic-label/entity-clei-code",
               "type": "string",
               "label": "entity-clei-code",
+              "minLength": 1,
+              "maxLength": 128,
               "readonly": true
             },
             {
               "path": "/driver/electronic-labels/electronic-label/entity-elabel-extend",
               "type": "string",
               "label": "entity-elabel-extend",
+              "minLength": 1,
+              "maxLength": 270,
               "readonly": true
             },
             {
               "path": "/driver/electronic-labels/electronic-label/entity-elabel-version",
               "type": "string",
               "label": "entity-elabel-version",
+              "minLength": 1,
+              "maxLength": 128,
               "readonly": true
             },
             {
@@ -724,18 +824,24 @@
               "path": "/driver/electronic-labels/electronic-label/entity-issue-number",
               "type": "string",
               "label": "entity-issue-number",
+              "minLength": 1,
+              "maxLength": 128,
               "readonly": true
             },
             {
               "path": "/driver/electronic-labels/electronic-label/entity-model",
               "type": "string",
               "label": "entity-model",
+              "minLength": 1,
+              "maxLength": 128,
               "readonly": true
             },
             {
               "path": "/driver/electronic-labels/electronic-label/entity-open-bomid",
               "type": "string",
               "label": "entity-open-bomid",
+              "minLength": 1,
+              "maxLength": 128,
               "readonly": true
             },
             {
@@ -749,30 +855,40 @@
               "path": "/driver/electronic-labels/electronic-label/entity-update-log",
               "type": "string",
               "label": "entity-update-log",
+              "minLength": 1,
+              "maxLength": 128,
               "readonly": true
             },
             {
               "path": "/driver/electronic-labels/electronic-label/manufacturer-code",
               "type": "string",
               "label": "manufacturer-code",
+              "minLength": 1,
+              "maxLength": 128,
               "readonly": true
             },
             {
               "path": "/driver/electronic-labels/electronic-label/manufacturer-date",
               "type": "string",
               "label": "manufacturer-date",
+              "minLength": 1,
+              "maxLength": 128,
               "readonly": true
             },
             {
               "path": "/driver/electronic-labels/electronic-label/manufacturer-name",
               "type": "string",
               "label": "manufacturer-name",
+              "minLength": 1,
+              "maxLength": 128,
               "readonly": true
             },
             {
               "path": "/driver/electronic-labels/electronic-label/position",
               "type": "string",
               "label": "position",
+              "minLength": 1,
+              "maxLength": 32,
               "readonly": true,
               "isKey": true
             },
@@ -780,6 +896,8 @@
               "path": "/driver/electronic-labels/electronic-label/silk-screen",
               "type": "string",
               "label": "silk-screen",
+              "minLength": 1,
+              "maxLength": 256,
               "readonly": true
             }
           ]
@@ -884,6 +1002,7 @@
           "type": "string",
           "label": "cur-system-mac-address",
           "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+          "maxLength": 255,
           "readonly": true
         },
         {
@@ -1271,6 +1390,8 @@
           "path": "/driver/global-attribute/power-consumption",
           "type": "string",
           "label": "power-consumption",
+          "minLength": 1,
+          "maxLength": 255,
           "readonly": true
         },
         {
@@ -1339,13 +1460,16 @@
           "path": "/driver/global-attribute/switch-port-mode",
           "type": "string",
           "label": "switch-port-mode",
+          "minLength": 1,
+          "maxLength": 128,
           "readonly": true
         },
         {
           "path": "/driver/global-attribute/system-mac-address",
           "type": "string",
           "label": "system-mac-address",
-          "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}"
+          "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+          "maxLength": 255
         },
         {
           "path": "/driver/global-attribute/system-mac-number",
@@ -1359,6 +1483,8 @@
           "path": "/driver/global-attribute/system-service-type",
           "type": "string",
           "label": "system-service-type",
+          "minLength": 1,
+          "maxLength": 128,
           "readonly": true
         },
         {
@@ -1504,6 +1630,8 @@
               "path": "/driver/inner-links/inner-link/left-chassis-position",
               "type": "string",
               "label": "left-chassis-position",
+              "minLength": 1,
+              "maxLength": 32,
               "readonly": true,
               "isKey": true
             },
@@ -1531,12 +1659,16 @@
               "path": "/driver/inner-links/inner-link/link-index",
               "type": "string",
               "label": "link-index",
+              "minLength": 1,
+              "maxLength": 64,
               "readonly": true
             },
             {
               "path": "/driver/inner-links/inner-link/link-name",
               "type": "string",
               "label": "link-name",
+              "minLength": 1,
+              "maxLength": 64,
               "readonly": true
             },
             {
@@ -1732,6 +1864,8 @@
                               "path": "/driver/inner-links/inner-link/physical-inner-links/physical-inner-link/check-points/check-point/entity-name",
                               "type": "string",
                               "label": "entity-name",
+                              "minLength": 1,
+                              "maxLength": 255,
                               "readonly": true
                             },
                             {
@@ -1745,6 +1879,8 @@
                               "path": "/driver/inner-links/inner-link/physical-inner-links/physical-inner-link/check-points/check-point/reason-description",
                               "type": "string",
                               "label": "reason-description",
+                              "minLength": 1,
+                              "maxLength": 255,
                               "readonly": true
                             },
                             {
@@ -1757,6 +1893,8 @@
                               "path": "/driver/inner-links/inner-link/physical-inner-links/physical-inner-link/check-points/check-point/repair-description",
                               "type": "string",
                               "label": "repair-description",
+                              "minLength": 1,
+                              "maxLength": 255,
                               "readonly": true
                             },
                             {
@@ -1793,6 +1931,8 @@
                       "path": "/driver/inner-links/inner-link/physical-inner-links/physical-inner-link/left-port-name",
                       "type": "string",
                       "label": "left-port-name",
+                      "minLength": 1,
+                      "maxLength": 128,
                       "readonly": true
                     },
                     {
@@ -1819,6 +1959,8 @@
                       "path": "/driver/inner-links/inner-link/physical-inner-links/physical-inner-link/physical-link-name",
                       "type": "string",
                       "label": "physical-link-name",
+                      "minLength": 1,
+                      "maxLength": 128,
                       "readonly": true,
                       "isKey": true
                     },
@@ -1826,6 +1968,8 @@
                       "path": "/driver/inner-links/inner-link/physical-inner-links/physical-inner-link/repair-description",
                       "type": "string",
                       "label": "repair-description",
+                      "minLength": 1,
+                      "maxLength": 255,
                       "readonly": true
                     },
                     {
@@ -1838,6 +1982,8 @@
                       "path": "/driver/inner-links/inner-link/physical-inner-links/physical-inner-link/right-port-name",
                       "type": "string",
                       "label": "right-port-name",
+                      "minLength": 1,
+                      "maxLength": 128,
                       "readonly": true
                     }
                   ]
@@ -1848,6 +1994,8 @@
               "path": "/driver/inner-links/inner-link/right-chassis-position",
               "type": "string",
               "label": "right-chassis-position",
+              "minLength": 1,
+              "maxLength": 32,
               "readonly": true,
               "isKey": true
             },
@@ -1907,6 +2055,8 @@
               "path": "/driver/interface-match-check-states/interface-match-check-state/position",
               "type": "string",
               "label": "position",
+              "minLength": 1,
+              "maxLength": 30,
               "readonly": true,
               "isKey": true
             }
@@ -1928,6 +2078,8 @@
               "path": "/driver/io-inspect-attributes/io-inspect-attribute/alarm-name",
               "type": "string",
               "label": "alarm-name",
+              "minLength": 1,
+              "maxLength": 16,
               "operationExclude": [
                 "update",
                 "delete"
@@ -1959,6 +2111,8 @@
               "path": "/driver/io-inspect-attributes/io-inspect-attribute/position",
               "type": "string",
               "label": "position",
+              "minLength": 1,
+              "maxLength": 32,
               "isKey": true
             }
           ]
@@ -1981,6 +2135,8 @@
               "path": "/driver/io-inspect-states/io-inspect-state/alarm-name",
               "type": "string",
               "label": "alarm-name",
+              "minLength": 1,
+              "maxLength": 16,
               "readonly": true
             },
             {
@@ -2030,6 +2186,8 @@
               "path": "/driver/io-inspect-states/io-inspect-state/position",
               "type": "string",
               "label": "position",
+              "minLength": 1,
+              "maxLength": 32,
               "readonly": true,
               "isKey": true
             },
@@ -2073,6 +2231,8 @@
               "path": "/driver/mbusnodes/mbusnode/board-type",
               "type": "string",
               "label": "board-type",
+              "minLength": 1,
+              "maxLength": 63,
               "readonly": true
             },
             {
@@ -2086,12 +2246,16 @@
               "path": "/driver/mbusnodes/mbusnode/register",
               "type": "string",
               "label": "register",
+              "minLength": 1,
+              "maxLength": 63,
               "readonly": true
             },
             {
               "path": "/driver/mbusnodes/mbusnode/slot-id",
               "type": "string",
               "label": "slot-id",
+              "minLength": 1,
+              "maxLength": 30,
               "readonly": true,
               "isKey": true
             },
@@ -2172,36 +2336,48 @@
           "path": "/driver/rollback-attribute/rollback-config-file",
           "type": "string",
           "label": "rollback-config-file",
+          "minLength": 1,
+          "maxLength": 255,
           "readonly": true
         },
         {
           "path": "/driver/rollback-attribute/rollback-paf-file",
           "type": "string",
           "label": "rollback-paf-file",
+          "minLength": 1,
+          "maxLength": 255,
           "readonly": true
         },
         {
           "path": "/driver/rollback-attribute/rollback-patch-file",
           "type": "string",
           "label": "rollback-patch-file",
+          "minLength": 1,
+          "maxLength": 255,
           "readonly": true
         },
         {
           "path": "/driver/rollback-attribute/rollback-remain-time",
           "type": "string",
           "label": "rollback-remain-time",
+          "minLength": 1,
+          "maxLength": 255,
           "readonly": true
         },
         {
           "path": "/driver/rollback-attribute/rollback-result",
           "type": "string",
           "label": "rollback-result",
+          "minLength": 1,
+          "maxLength": 255,
           "readonly": true
         },
         {
           "path": "/driver/rollback-attribute/rollback-soft-pack",
           "type": "string",
           "label": "rollback-soft-pack",
+          "minLength": 1,
+          "maxLength": 255,
           "readonly": true
         }
       ]
@@ -2222,6 +2398,8 @@
               "path": "/driver/slave-defaults/slave-default/chassis-id",
               "type": "string",
               "label": "chassis-id",
+              "minLength": 1,
+              "maxLength": 32,
               "readonly": true,
               "isKey": true
             },
@@ -2229,12 +2407,16 @@
               "path": "/driver/slave-defaults/slave-default/slave-default",
               "type": "string",
               "label": "slave-default",
+              "minLength": 1,
+              "maxLength": 64,
               "readonly": true
             },
             {
               "path": "/driver/slave-defaults/slave-default/slot-id",
               "type": "string",
               "label": "slot-id",
+              "minLength": 1,
+              "maxLength": 32,
               "readonly": true,
               "isKey": true
             }
@@ -2258,6 +2440,8 @@
               "path": "/driver/slot-statistics/slot-statistic/chassis-id",
               "type": "string",
               "label": "chassis-id",
+              "minLength": 1,
+              "maxLength": 32,
               "readonly": true,
               "isKey": true
             },
@@ -2357,6 +2541,8 @@
               "path": "/driver/stratum-3-clocks/stratum-3-clock/clock-slot-id",
               "type": "string",
               "label": "clock-slot-id",
+              "minLength": 1,
+              "maxLength": 32,
               "readonly": true
             },
             {
@@ -2379,6 +2565,8 @@
               "path": "/driver/stratum-3-clocks/stratum-3-clock/slot-id",
               "type": "string",
               "label": "slot-id",
+              "minLength": 1,
+              "maxLength": 32,
               "readonly": true,
               "isKey": true
             },
@@ -2434,6 +2622,8 @@
               "path": "/driver/system-sync-clocks/system-sync-clock/clock-slot-id",
               "type": "string",
               "label": "clock-slot-id",
+              "minLength": 1,
+              "maxLength": 32,
               "readonly": true
             },
             {
@@ -2472,6 +2662,8 @@
               "path": "/driver/system-sync-clocks/system-sync-clock/slot-id",
               "type": "string",
               "label": "slot-id",
+              "minLength": 1,
+              "maxLength": 32,
               "readonly": true,
               "isKey": true
             },
@@ -2583,12 +2775,16 @@
               "path": "/driver/temperature2s/temperature2/pcb-name",
               "type": "string",
               "label": "pcb-name",
+              "minLength": 1,
+              "maxLength": 50,
               "readonly": true
             },
             {
               "path": "/driver/temperature2s/temperature2/position",
               "type": "string",
               "label": "position",
+              "minLength": 1,
+              "maxLength": 50,
               "isKey": true
             },
             {
@@ -2603,6 +2799,8 @@
               "path": "/driver/temperature2s/temperature2/sensor-name",
               "type": "string",
               "label": "sensor-name",
+              "minLength": 1,
+              "maxLength": 50,
               "readonly": true,
               "supportFilter": true
             },
@@ -2656,6 +2854,8 @@
               "path": "/driver/temperatures/temperature/address",
               "type": "string",
               "label": "address",
+              "minLength": 1,
+              "maxLength": 50,
               "isKey": true
             },
             {
@@ -2784,12 +2984,16 @@
               "path": "/driver/temperatures/temperature/pcb-name",
               "type": "string",
               "label": "pcb-name",
+              "minLength": 1,
+              "maxLength": 50,
               "readonly": true
             },
             {
               "path": "/driver/temperatures/temperature/position",
               "type": "string",
               "label": "position",
+              "minLength": 1,
+              "maxLength": 50,
               "isKey": true
             },
             {
@@ -2845,6 +3049,8 @@
               "path": "/driver/voltageinfos/voltageinfo/address",
               "type": "string",
               "label": "address",
+              "minLength": 1,
+              "maxLength": 50,
               "isKey": true
             },
             {
@@ -2857,6 +3063,8 @@
               "path": "/driver/voltageinfos/voltageinfo/current-voltage",
               "type": "string",
               "label": "current-voltage",
+              "minLength": 1,
+              "maxLength": 50,
               "readonly": true
             },
             {
@@ -2893,6 +3101,8 @@
               "path": "/driver/voltageinfos/voltageinfo/high-threshold",
               "type": "string",
               "label": "high-threshold",
+              "minLength": 1,
+              "maxLength": 50,
               "readonly": true
             },
             {
@@ -2905,18 +3115,24 @@
               "path": "/driver/voltageinfos/voltageinfo/low-threshold",
               "type": "string",
               "label": "low-threshold",
+              "minLength": 1,
+              "maxLength": 50,
               "readonly": true
             },
             {
               "path": "/driver/voltageinfos/voltageinfo/major-high-threshold",
               "type": "string",
               "label": "major-high-threshold",
+              "minLength": 1,
+              "maxLength": 50,
               "readonly": true
             },
             {
               "path": "/driver/voltageinfos/voltageinfo/major-low-threshold",
               "type": "string",
               "label": "major-low-threshold",
+              "minLength": 1,
+              "maxLength": 50,
               "readonly": true
             },
             {
@@ -2947,18 +3163,24 @@
               "path": "/driver/voltageinfos/voltageinfo/pcb-name",
               "type": "string",
               "label": "pcb-name",
+              "minLength": 1,
+              "maxLength": 50,
               "readonly": true
             },
             {
               "path": "/driver/voltageinfos/voltageinfo/position",
               "type": "string",
               "label": "position",
+              "minLength": 1,
+              "maxLength": 50,
               "isKey": true
             },
             {
               "path": "/driver/voltageinfos/voltageinfo/required-voltage",
               "type": "string",
               "label": "required-voltage",
+              "minLength": 1,
+              "maxLength": 50,
               "readonly": true
             },
             {
@@ -2997,6 +3219,8 @@
               "path": "/driver/voltageinfos/voltageinfo/voltage-ratio",
               "type": "string",
               "label": "voltage-ratio",
+              "minLength": 1,
+              "maxLength": 50,
               "readonly": true
             }
           ],
@@ -3020,12 +3244,16 @@
               "path": "/driver/voltages/voltage/current-voltage",
               "type": "string",
               "label": "current-voltage",
+              "minLength": 1,
+              "maxLength": 50,
               "readonly": true
             },
             {
               "path": "/driver/voltages/voltage/fatal-high-threshold",
               "type": "string",
               "label": "fatal-high-threshold",
+              "minLength": 1,
+              "maxLength": 50,
               "readonly": true
             },
             {
@@ -3040,6 +3268,8 @@
               "path": "/driver/voltages/voltage/fatal-low-threshold",
               "type": "string",
               "label": "fatal-low-threshold",
+              "minLength": 1,
+              "maxLength": 50,
               "readonly": true
             },
             {
@@ -3054,6 +3284,8 @@
               "path": "/driver/voltages/voltage/major-high-threshold",
               "type": "string",
               "label": "major-high-threshold",
+              "minLength": 1,
+              "maxLength": 50,
               "readonly": true
             },
             {
@@ -3068,6 +3300,8 @@
               "path": "/driver/voltages/voltage/major-low-threshold",
               "type": "string",
               "label": "major-low-threshold",
+              "minLength": 1,
+              "maxLength": 50,
               "readonly": true
             },
             {
@@ -3082,24 +3316,32 @@
               "path": "/driver/voltages/voltage/pcb-name",
               "type": "string",
               "label": "pcb-name",
+              "minLength": 1,
+              "maxLength": 50,
               "readonly": true
             },
             {
               "path": "/driver/voltages/voltage/position",
               "type": "string",
               "label": "position",
+              "minLength": 1,
+              "maxLength": 50,
               "isKey": true
             },
             {
               "path": "/driver/voltages/voltage/ratio",
               "type": "string",
               "label": "ratio",
+              "minLength": 1,
+              "maxLength": 50,
               "readonly": true
             },
             {
               "path": "/driver/voltages/voltage/required-voltage",
               "type": "string",
               "label": "required-voltage",
+              "minLength": 1,
+              "maxLength": 50,
               "readonly": true
             },
             {
@@ -3114,6 +3356,8 @@
               "path": "/driver/voltages/voltage/sensor-name",
               "type": "string",
               "label": "sensor-name",
+              "minLength": 1,
+              "maxLength": 50,
               "readonly": true,
               "supportFilter": true
             },

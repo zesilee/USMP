@@ -110,7 +110,8 @@
               "path": "/vxlan-path-detect/mac-ping-detects/mac-ping-detect/dst-mac",
               "type": "string",
               "label": "dst-mac",
-              "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}"
+              "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+              "maxLength": 255
             },
             {
               "path": "/vxlan-path-detect/mac-ping-detects/mac-ping-detect/src-ip",
@@ -123,7 +124,8 @@
               "path": "/vxlan-path-detect/mac-ping-detects/mac-ping-detect/src-mac",
               "type": "string",
               "label": "src-mac",
-              "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}"
+              "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+              "maxLength": 255
             }
           ]
         }

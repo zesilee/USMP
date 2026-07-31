@@ -158,6 +158,8 @@
               "path": "/vty/lines/line/auth-password",
               "type": "string",
               "label": "auth-password",
+              "minLength": 8,
+              "maxLength": 128,
               "must": [
                 {
                   "expr": "../auth-mode='password'"
