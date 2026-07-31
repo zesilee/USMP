@@ -26,10 +26,10 @@
 
 ## 3. 前端纯逻辑层（PR-3）
 
-- [ ] 3.1 F1 红灯：changeset store 测试——add/update/delete 条目、同条目合并（baseline 保首次快照）、删除待创建=直接移除、按设备隔离、清空、计数派生
-- [ ] 3.2 实现 `stores/changeset.ts`，绿灯
-- [ ] 3.3 F1 红灯：`configDiff` 删除表达测试——`DiffEntry.op`、基线有值清除→remove、基线无值清除仍忽略、既有 add/modify 语义字节不变
-- [ ] 3.4 实现 configDiff 扩展 + API client（preview/commit 两函数），绿灯
+- [x] 3.1 F1 红灯：changeset store 测试——add/update/delete 条目、同条目合并（baseline 保首次快照）、删除待创建=直接移除、按设备隔离、清空、计数派生
+- [x] 3.2 实现 `stores/changeset.ts`，绿灯
+- [x] 3.3 F1 红灯：`configDiff` 删除表达测试——`DiffEntry.op`、基线有值清除→remove、基线无值清除仍忽略、既有 add/modify 语义字节不变
+- [x] 3.4 实现 configDiff 扩展 + API client（preview/commit 两函数），绿灯
 - [ ] 3.5 覆盖率棘轮核对，commit + PR-3
 
 ## 4. 前端工具栏与弹窗（PR-4）
