@@ -57,6 +57,51 @@ describe('computeDiff · 实时差异（表单值 ↔ 已回填 actual）', () =
   })
 })
 
+describe('computeDiff · 删除表达（removals 开关，FE-22 二期语义）', () => {
+  it('缺省不开启：行为与一期字节不变（清空仍不算改动）', () => {
+    const original = { id: 100, name: 'keep' }
+    expect(computeDiff({ id: 100, name: '' }, original, fields)).toEqual([])
+  })
+
+  it('removals:true + 基线有值清空（空串）→ remove 条目（was=旧值，now 空）', () => {
+    const original = { id: 100, name: 'goner' }
+    const diff = computeDiff({ id: 100, name: '' }, original, fields, { removals: true })
+    expect(diff).toHaveLength(1)
+    expect(diff[0]).toMatchObject({ key: 'name', op: 'remove', was: 'goner' })
+  })
+
+  it('removals:true + 基线有值字段被删除（undefined，clearField 语义）→ remove', () => {
+    const original = { id: 100, name: 'goner' }
+    const diff = computeDiff({ id: 100 }, original, fields, { removals: true })
+    expect(diff.map((d) => [d.key, d.op])).toEqual([['name', 'remove']])
+  })
+
+  it('removals:true + 基线无值清空 → 仍忽略（本次新填又清掉，不产生删除意图）', () => {
+    const original = { id: 100 }
+    expect(computeDiff({ id: 100, name: '' }, original, fields, { removals: true })).toEqual([])
+  })
+
+  it('op 字段全量标注：add/modify/remove 并存且保持 fields 顺序', () => {
+    const original = { name: 'old', 'admin-status': 'up' }
+    const form = { id: 7, name: 'new' } // admin-status 被清
+    const diff = computeDiff(form, original, fields, { removals: true })
+    expect(diff.map((d) => [d.key, d.op])).toEqual([
+      ['id', 'add'],
+      ['name', 'modify'],
+      ['admin-status', 'remove'],
+    ])
+    expect(diff[0].isNew).toBe(true) // isNew 向后兼容 = op==='add'
+  })
+
+  it('既有 add/modify 输出也携 op（不开 removals 同样标注）', () => {
+    const diff = computeDiff({ id: 5, name: 'n' }, { name: 'o' }, fields)
+    expect(diff.map((d) => [d.key, d.op])).toEqual([
+      ['id', 'add'],
+      ['name', 'modify'],
+    ])
+  })
+})
+
 describe('missingRequired · 数值 0 视为已填', () => {
   it('required 数值字段填 0 不算缺失', () => {
     const numFields: Field[] = [{ path: '/x/mtu', type: 'number', label: 'MTU', required: true }]
