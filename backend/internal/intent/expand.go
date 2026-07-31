@@ -24,6 +24,17 @@ const (
 	IfmPath  = "/ifm:ifm/ifm:interfaces"
 )
 
+// FragmentOp 标记片段的下发语义（CS-04）。零值 = merge（既有意图链路语义，
+// BIO-03 零变化）；delete = 键定位条目删除（攒批变更集的删除条目）。
+type FragmentOp string
+
+const (
+	// FragmentOpMerge 缺省合并写入（AddChange）。
+	FragmentOpMerge FragmentOp = ""
+	// FragmentOpDelete 键定位条目删除（DeleteChange，目标在 Config）。
+	FragmentOpDelete FragmentOp = "delete"
+)
+
 // Fragment is one expanded native-config unit: what the orchestrator writes
 // into the desired ConfigStore for one (device, native module) pair after the
 // cross-device transaction succeeds (BIO-03).
@@ -32,6 +43,11 @@ type Fragment struct {
 	Module string        // native module root name ("vlan" / "ifm")
 	Path   string        // native desired path
 	Config ygot.GoStruct // typed native config (huawei generated, R04)
+	// Op 是下发语义（CS-04 攒批扩展）；零值 merge 保持既有意图链路行为。
+	Op FragmentOp
+	// RawXML 非空时为预编码 edit-config 片段（如叶级删除，CS-05），prepare
+	// 以字符串透传下发，忽略 Config。
+	RawXML string
 }
 
 // Claim records soft ownership of one native entry on one device (BIO-07).
