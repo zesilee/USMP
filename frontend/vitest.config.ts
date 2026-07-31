@@ -8,6 +8,9 @@ export default defineConfig({
     environment: 'happy-dom',
     setupFiles: ['./test/setup.ts'],
     globals: true,
+    // NCE 改版后控制台组件树变重（el-table 排序/筛选 + 详情区），CI 慢跑道上
+    // 单用例可超默认 5s（本地恒 <3s）；上限放宽而非削测试面。
+    testTimeout: 15000,
     include: ['src/**/*.{test,spec}.{js,ts,jsx,tsx}', 'test/**/*.{test,spec}.{js,ts,jsx,tsx}'],
     // test/browser/** 属浏览器模式套件（vitest.browser.config.ts），不在 happy-dom 下跑
     exclude: ['**/node_modules/**', '**/dist/**', 'test/browser/**'],
