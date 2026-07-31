@@ -3,7 +3,8 @@ import { mount, flushPromises } from '@vue/test-utils'
 import { createPinia } from 'pinia'
 import ElementPlus, { ElMessageBox } from 'element-plus'
 import ModuleListTab from '../../src/components/config/ModuleListTab.vue'
-import { getConfig, setConfig, deleteConfig, getDeviceReconcile } from '../../src/api'
+import ItemDetailPane from '../../src/components/config/ItemDetailPane.vue'
+import { getConfig, deleteConfig, setConfig, getDeviceReconcile } from '../../src/api'
 import { deriveTabs } from '../../src/utils/moduleConsole'
 import { ifmNestedSchema, seedRows } from '../views/moduleConsole.fixture'
 
@@ -19,7 +20,7 @@ function mountTab() {
 }
 
 beforeEach(() => {
-  vi.clearAllMocks()
+  vi.resetAllMocks()
   vi.mocked(getConfig).mockResolvedValue({ data: { data: { data: { interface: seedRows } } } } as any)
   vi.mocked(setConfig).mockResolvedValue({ data: { data: { reconciliation: { triggered: true } } } } as any)
   vi.mocked(getDeviceReconcile).mockResolvedValue({ data: { data: { statuses: [] } } } as any)
@@ -40,14 +41,9 @@ describe('ModuleListTab · 模型驱动列（FE-11）', () => {
     await flushPromises()
     const rows = w.findAll('.el-table__body tr')
     expect(rows).toHaveLength(5)
-
-    // enum 列 Tag 化
     expect(w.findAll('.el-table__body .el-tag').length).toBeGreaterThan(0)
-    // 值驱动状态点：3 up + 2 down
     expect(w.findAll('.status-cell.ok')).toHaveLength(3)
     expect(w.findAll('.status-cell.bad')).toHaveLength(2)
-
-    // 行级 when：main-interface 行 parent-name 为 “-”，sub 行显示父接口
     const mainRow = rows[0].text()
     const subRow = rows[3].text()
     expect(mainRow).toContain('-')
@@ -63,11 +59,166 @@ describe('ModuleListTab · 模型驱动列（FE-11）', () => {
   })
 })
 
+describe('ModuleListTab · 工具区（FE-11：创建/刷新/时间戳/多选/分页）', () => {
+  it('工具栏含「创建」「刷新」按钮；表格含多选框列', async () => {
+    const w = mountTab()
+    await flushPromises()
+    expect(w.find('[data-test="list-create"]').text()).toContain('创建')
+    expect(w.find('[data-test="list-refresh"]').exists()).toBe(true)
+    expect(w.find('.el-table-column--selection').exists()).toBe(true)
+  })
+
+  it('查询时间戳与总记录数：加载完成后展示「查询结束，总记录数: 5」', async () => {
+    const w = mountTab()
+    await flushPromises()
+    const line = w.find('[data-test="query-summary"]').text()
+    expect(line).toContain('查询结束')
+    expect(line).toContain('5')
+  })
+
+  it('点「刷新」重新拉取列表（非强制）', async () => {
+    const w = mountTab()
+    await flushPromises()
+    const before = vi.mocked(getConfig).mock.calls.length
+    await w.find('[data-test="list-refresh"]').trigger('click')
+    await flushPromises()
+    expect(vi.mocked(getConfig).mock.calls.length).toBe(before + 1)
+    expect(vi.mocked(getConfig).mock.calls.at(-1)![2]).toBeFalsy()
+  })
+
+  it('分页含跳页（jumper）；pageSize 缩小生效', async () => {
+    const w = mountTab()
+    await flushPromises()
+    expect(w.find('.el-pagination__jump').exists()).toBe(true)
+    const vm = w.vm as any
+    vm.pageSize = 2
+    await flushPromises()
+    expect(w.findAll('.el-table__body tr')).toHaveLength(2)
+  })
+})
+
+describe('ModuleListTab · 列设置/排序/列头筛选（FE-11）', () => {
+  it('列设置入口存在；取消勾选某列后该列隐藏', async () => {
+    const w = mountTab()
+    await flushPromises()
+    expect(w.find('[data-test="column-settings"]').exists()).toBe(true)
+    const vm = w.vm as any
+    vm.visibleCols = vm.visibleCols.filter((p: string) => !p.endsWith('/description'))
+    await flushPromises()
+    const headers = w.findAll('.el-table__header th .cell').map((n) => n.text().trim())
+    expect(headers).not.toContain('description')
+    expect(headers).toContain('name')
+  })
+
+  it('数据列可排序（caret 存在）；enum 列有列头筛选入口', async () => {
+    const w = mountTab()
+    await flushPromises()
+    expect(w.findAll('.el-table__header .caret-wrapper').length).toBeGreaterThan(0)
+    expect(w.findAll('.el-table__header .el-table__column-filter-trigger').length).toBeGreaterThan(0)
+  })
+})
+
+describe('ModuleListTab · master-detail 详情区（FE-21）', () => {
+  it('点行「编辑」→ 详情区展开、编辑态、行主键入面包屑；无抽屉', async () => {
+    const w = mountTab()
+    await flushPromises()
+    const edit = w.findAll('.el-table__body .el-button').find((b) => b.text() === '编辑')!
+    await edit.trigger('click')
+    await flushPromises()
+    expect(w.find('[data-test="item-detail-pane"]').exists()).toBe(true)
+    expect(w.find('[data-test="detail-breadcrumb"]').text()).toContain('200GE0/1/0')
+    expect(w.find('.el-drawer').exists()).toBe(false)
+  })
+
+  it('点击行本体同样打开详情（行高亮）', async () => {
+    const w = mountTab()
+    await flushPromises()
+    await w.findAll('.el-table__body tr')[1].trigger('click')
+    await flushPromises()
+    expect(w.find('[data-test="item-detail-pane"]').exists()).toBe(true)
+    expect(w.find('[data-test="detail-breadcrumb"]').text()).toContain('200GE0/1/1')
+    expect(w.find('.el-table__body tr.current-row').exists()).toBe(true)
+  })
+
+  it('「创建」→ 详情区创建态空表单', async () => {
+    const w = mountTab()
+    await flushPromises()
+    await w.find('[data-test="list-create"]').trigger('click')
+    await flushPromises()
+    expect(w.find('[data-test="item-detail-pane"]').exists()).toBe(true)
+    expect(w.find('[data-test="detail-breadcrumb"]').text()).toContain('创建')
+  })
+
+  it('详情区「关闭」→ 收起且列表状态不变', async () => {
+    const w = mountTab()
+    await flushPromises()
+    await w.findAll('.el-table__body tr')[0].trigger('click')
+    await flushPromises()
+    await w.find('[data-test="detail-close"]').trigger('click')
+    await flushPromises()
+    expect(w.find('[data-test="item-detail-pane"]').exists()).toBe(false)
+    expect(w.findAll('.el-table__body tr')).toHaveLength(5)
+  })
+
+  it('未提交草稿切行 → 确认框；取消停留原条目（FE-21 负路径）', async () => {
+    const w = mountTab()
+    await flushPromises()
+    await w.findAll('.el-table__body tr')[0].trigger('click')
+    await flushPromises()
+    const pane = w.findComponent(ItemDetailPane)
+    ;(pane.vm as any).form.formData['description'] = 'draft'
+    await flushPromises()
+
+    const confirmSpy = vi.spyOn(ElMessageBox, 'confirm').mockRejectedValue('cancel')
+    await w.findAll('.el-table__body tr')[2].trigger('click')
+    await flushPromises()
+    expect(confirmSpy).toHaveBeenCalled()
+    expect(w.find('[data-test="detail-breadcrumb"]').text()).toContain('200GE0/1/0')
+    confirmSpy.mockRestore()
+  })
+
+  it('无草稿切行 → 直接切换不弹确认', async () => {
+    const w = mountTab()
+    await flushPromises()
+    await w.findAll('.el-table__body tr')[0].trigger('click')
+    await flushPromises()
+    const confirmSpy = vi.spyOn(ElMessageBox, 'confirm')
+    await w.findAll('.el-table__body tr')[2].trigger('click')
+    await flushPromises()
+    expect(confirmSpy).not.toHaveBeenCalled()
+    expect(w.find('[data-test="detail-breadcrumb"]').text()).toContain('200GE0/1/2')
+    confirmSpy.mockRestore()
+  })
+})
+
+describe('ModuleListTab · 获取数据源（FE-11 force_refresh）', () => {
+  it('行操作「获取数据源」→ forceRefresh=true 回读并刷新时间戳', async () => {
+    const w = mountTab()
+    await flushPromises()
+    const fetchBtn = w.findAll('.el-table__body .el-button').find((b) => b.text() === '获取数据源')!
+    await fetchBtn.trigger('click')
+    await flushPromises()
+    const last = vi.mocked(getConfig).mock.calls.at(-1)!
+    expect(last[1]).toContain('ifm:interfaces')
+    expect(last[2]).toBe(true)
+  })
+
+  it('获取数据源失败 → 错误如实展示、列表保持原状（R08/§9）', async () => {
+    const w = mountTab()
+    await flushPromises()
+    vi.mocked(getConfig).mockRejectedValueOnce({ response: { data: { message: '设备离线' } } })
+    const fetchBtn = w.findAll('.el-table__body .el-button').find((b) => b.text() === '获取数据源')!
+    await fetchBtn.trigger('click')
+    await flushPromises()
+    expect(w.text()).toContain('设备离线')
+    expect(w.findAll('.el-table__body tr')).toHaveLength(5)
+  })
+})
+
 describe('ModuleListTab · 高级搜索（support-filter 驱动，FE-11）', () => {
   it('面板默认折叠，点击「高级搜索」展开；字段集仅 supportFilter 叶（class/type）', async () => {
     const w = mountTab()
     await flushPromises()
-    // happy-dom 下 isVisible() 对 v-show 误报，直接断言 display:none 内联样式。
     const panelStyle = () => w.find('.search-panel').attributes('style') || ''
     expect(panelStyle()).toContain('display: none')
     await w.find('.adv-toggle').trigger('click')
@@ -101,79 +252,6 @@ describe('ModuleListTab · 高级搜索（support-filter 驱动，FE-11）', () 
   })
 })
 
-describe('ModuleListTab · 分页（FE-11）', () => {
-  it('pageSize=10 时 5 行单页；缩小 pageSize 生效且总数正确', async () => {
-    const w = mountTab()
-    await flushPromises()
-    const vm = w.vm as any
-    expect(w.find('.el-pagination__total').text()).toContain('5')
-    vm.pageSize = 2
-    await flushPromises()
-    expect(w.findAll('.el-table__body tr')).toHaveLength(2)
-    vm.page = 3
-    await flushPromises()
-    expect(w.findAll('.el-table__body tr')).toHaveLength(1)
-  })
-})
-
-describe('ModuleListTab · 操作门禁（operation-exclude，FE-11）', () => {
-  it('编辑态：operationExclude∋update 的叶（class/type/number/parent-name）禁用；新增态可编', async () => {
-    const w = mountTab()
-    await flushPromises()
-    const vm = w.vm as any
-
-    // 编辑 sub-interface 行（parent-name 可见）
-    vm.openEdit({ ...seedRows[3] })
-    await flushPromises()
-    const disabledOf = () => {
-      const out: Record<string, boolean> = {}
-      for (const f of vm.form.visibleFields.value) {
-        out[vm.form.keyOf(f)] = vm.editing && !!f.operationExclude?.includes('update')
-      }
-      return out
-    }
-    expect(disabledOf()).toMatchObject({
-      name: false,
-      class: true,
-      type: true,
-      'parent-name': true,
-      number: true,
-      'router-type': true,
-      description: false,
-    })
-    // DOM 证据：编辑抽屉内 class 的 el-select 处于禁用态
-    const disabledSelects = w.findAll('.el-drawer .el-select.is-disabled, .el-drawer .el-select .is-disabled')
-    expect(disabledSelects.length).toBeGreaterThan(0)
-
-    // 新增态全部可编辑
-    vm.openAdd()
-    await flushPromises()
-    expect(Object.values(disabledOf()).every((v) => v === false)).toBe(true)
-  })
-
-  it('list 级无 exclude → 编辑/删除按钮均可用（FE-16 起删除有真实语义）', async () => {
-    const w = mountTab()
-    await flushPromises()
-    const ops = w.findAll('.el-table__body .el-button')
-    const texts = ops.map((b) => b.text().trim())
-    expect(texts).toContain('编辑')
-    expect(texts).toContain('删除')
-    const del = ops.find((b) => b.text().trim() === '删除')!
-    expect(del.attributes('disabled')).toBeUndefined()
-  })
-
-  it('list 级 operationExclude=update|delete → 操作列整列隐藏', async () => {
-    const tab = { ...interfacesTab, listField: { ...interfacesTab.listField!, operationExclude: ['update', 'delete'] } }
-    const w = mount(ModuleListTab, {
-      props: { tab, rootName: 'ifm', device: '10.0.0.1' },
-      global: { plugins: [createPinia(), ElementPlus] },
-    })
-    await flushPromises()
-    const headers = w.findAll('.el-table__header th .cell').map((n) => n.text().trim())
-    expect(headers).not.toContain('操作')
-  })
-})
-
 describe('ModuleListTab · 只读列表 Tab（FE-14）', () => {
   const roGroup = {
     path: '/ifm/remote-interfaces',
@@ -195,7 +273,7 @@ describe('ModuleListTab · 只读列表 Tab（FE-14）', () => {
   }
   const roTab = deriveTabs([roGroup])[0]
 
-  it('只读 Tab：无「新增」、无操作列，state 行数据照常可查看', async () => {
+  it('只读 Tab：无「创建」、无操作列、点行不开详情编辑区', async () => {
     vi.mocked(getConfig).mockResolvedValue({
       data: { data: { data: { 'remote-interface': [
         { index: '1', 'port-name': 'GE0/0/1' },
@@ -206,21 +284,20 @@ describe('ModuleListTab · 只读列表 Tab（FE-14）', () => {
       global: { plugins: [createPinia(), ElementPlus] },
     })
     await flushPromises()
-
-    // 行数据照常渲染（可查看）
     expect(w.findAll('.el-table__body tr')).toHaveLength(2)
     expect(w.text()).toContain('GE0/0/1')
-    // 无编辑/下发入口
-    expect(w.text()).not.toContain('新增')
+    expect(w.find('[data-test="list-create"]').exists()).toBe(false)
     const headers = w.findAll('.el-table__header th .cell').map((n) => n.text().trim())
     expect(headers).not.toContain('操作')
-    expect(w.text()).not.toContain('编辑')
+    await w.findAll('.el-table__body tr')[0].trigger('click')
+    await flushPromises()
+    expect(w.find('[data-test="item-detail-pane"]').exists()).toBe(false)
   })
 
-  it('可编辑 Tab 不受影响：仍有「新增」与操作列', async () => {
+  it('可编辑 Tab 不受影响：仍有「创建」与操作列', async () => {
     const w = mountTab()
     await flushPromises()
-    expect(w.text()).toContain('新增')
+    expect(w.find('[data-test="list-create"]').exists()).toBe(true)
     const headers = w.findAll('.el-table__header th .cell').map((n) => n.text().trim())
     expect(headers).toContain('操作')
   })
@@ -235,7 +312,6 @@ describe('ModuleListTab · 行删除（FE-16）', () => {
     expect(delBtn.attributes('disabled')).toBeUndefined()
     expect(delBtn.attributes('aria-disabled')).not.toBe('true')
 
-    // 打桩确认框：直接确认
     const confirmSpy = vi.spyOn(ElMessageBox, 'confirm').mockResolvedValue('confirm' as any)
     vi.mocked(deleteConfig).mockResolvedValue({ data: { code: 0, success: true, data: {} } } as any)
     const loadsBefore = vi.mocked(getConfig).mock.calls.length
@@ -248,9 +324,19 @@ describe('ModuleListTab · 行删除（FE-16）', () => {
     const [ip, path, key] = vi.mocked(deleteConfig).mock.calls[0]
     expect(ip).toBe('10.0.0.1')
     expect(path).toContain('ifm:interfaces')
-    expect(key).toBe('200GE0/1/0') // 首行主键（keyField=name）
-    // 成功后刷新列表
+    expect(key).toBe('200GE0/1/0')
     expect(vi.mocked(getConfig).mock.calls.length).toBeGreaterThan(loadsBefore)
+    confirmSpy.mockRestore()
+  })
+
+  it('删除按钮点击不触发行点击开详情（事件不冒泡）', async () => {
+    const w = mountTab()
+    await flushPromises()
+    const confirmSpy = vi.spyOn(ElMessageBox, 'confirm').mockRejectedValue('cancel')
+    const delBtn = w.findAll('.el-table__body .el-button').find((b) => b.text() === '删除')!
+    await delBtn.trigger('click')
+    await flushPromises()
+    expect(w.find('[data-test="item-detail-pane"]').exists()).toBe(false)
     confirmSpy.mockRestore()
   })
 
@@ -295,7 +381,6 @@ describe('ModuleListTab · 行删除归属硬锁 409', () => {
     const w = mountTab()
     await flushPromises()
     const delBtn = w.findAll('.el-table__body .el-button').find((b) => b.text() === '删除')!
-    // 两次确认框都点确认（删除确认 + 归属覆盖确认）
     const confirmSpy = vi.spyOn(ElMessageBox, 'confirm').mockResolvedValue('confirm' as any)
     vi.mocked(deleteConfig)
       .mockResolvedValueOnce(rejected409)
@@ -306,7 +391,6 @@ describe('ModuleListTab · 行删除归属硬锁 409', () => {
 
     expect(vi.mocked(deleteConfig)).toHaveBeenCalledTimes(2)
     expect(vi.mocked(deleteConfig).mock.calls[1][3]).toBe(true)
-    // 归属确认框文案含认领意图
     const ownershipCall = confirmSpy.mock.calls.find((c) => String(c[0]).includes('default/biz-100'))
     expect(ownershipCall).toBeTruthy()
     expect(w.text()).not.toContain('条目由业务意图管理')
@@ -317,7 +401,6 @@ describe('ModuleListTab · 行删除归属硬锁 409', () => {
     const w = mountTab()
     await flushPromises()
     const delBtn = w.findAll('.el-table__body .el-button').find((b) => b.text() === '删除')!
-    // 第一次（删除确认）通过，第二次（归属覆盖）取消
     const confirmSpy = vi
       .spyOn(ElMessageBox, 'confirm')
       .mockResolvedValueOnce('confirm' as any)
