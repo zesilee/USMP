@@ -23,6 +23,7 @@
 - [删除语义](config-delete-semantics.md) — 改写链路/删除/netconfsim前必读：声明式通道刻意删不了(walkMap subset)→DELETE命令通道、先移desired再下发、sim已接RFC edit-config(整树替换退役)、opMu写事务串行化、华为vlan key是id；**PR#145「内置接口删不掉」根因=写链路漏发模块顶层容器`<ifm>/<vlan>`发扁平根→设备嵌套树匹配不到,已修为嵌套+Decode锚定容器解vlan同名歧义**
 - [呈现元数据收割](ext-ui-annotations.md) — 扩展注解词汇/改FieldDef前必读：模块级扩展不存活运行期schema(task-name走构建期codegen)、3模块仅4种存量扩展、自造ui-*已决策推迟、R04门禁禁提交generated/、readonly-must门禁死锁模式
 - [通用模块控制台](generic-module-console.md) — 改 /module 控制台/FieldDef/呈现扩展前必读：交付状态、路径派生规律、presence/删除债、rebase 注意
+- [NCE配置台改版](nce-console-redesign.md) — 改配置台/前端测试前必读：一期全交付(master-detail抽屉退役/列设置/获取数据源/控件规范/左树搜索,PR#238-241+PR4)、攒批提交=二期、6个前端测试踩坑(autoUnmount只限happy-dom/resetAllMocks/getByRole隐藏面板/el-input属性透传/并行跑测试假失败/棘轮85·79·79·86)
 - [iMaster NCE洞察](imaster-nce-ux-insights.md) — 优化前端/YANG自动渲染前必读：华为AOC把R05做成框架(YANG→四件套)、用render-*扩展把渲染意图编码进模型、YANG类型→ElementPlus控件映射表、NCE设计系统；全文+截图在 docs/research/imaster-nce-ux-insights.md
 
 - [test-server进程泄漏](test-server-process-leak.md) — 「8080被占/后端起不来」先查：cmd/test-server 编译成 /tmp/tsrv 后台跑，worktree删了进程不清理、长期霸占8080；ss+/proc定位，sudo kill

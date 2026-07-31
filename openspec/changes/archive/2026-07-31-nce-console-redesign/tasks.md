@@ -47,6 +47,6 @@
 
 ## 5. 收尾
 
-- [ ] 5.1 `/opsx:sync`：三份 delta（frontend/left-tree-navigation/console-derivation-golden）合入主 spec
-- [ ] 5.2 对照 7 张目标截图逐项走查（左树/工具区/master-detail/三列表单/控件规范），差异清单确认或立后续项
-- [ ] 5.3 记忆归档（docs/memory：改版决策与二期攒批提交待办）+ `/opsx:archive`
+- [x] 5.1 `/opsx:sync`：三份 delta（frontend/left-tree-navigation/console-derivation-golden）合入主 spec
+- [x] 5.2 对照 7 张目标截图逐项走查（左树/工具区/master-detail/三列表单/控件规范），差异清单确认或立后续项
+- [x] 5.3 记忆归档（docs/memory：改版决策与二期攒批提交待办）+ `/opsx:archive`
