@@ -16,12 +16,12 @@
 
 ## 2. 后端接口层（PR-2）
 
-- [ ] 2.1 B3 红灯：`POST /config/changeset/preview` 契约测试（CS-01/02/03）——正向/回滚 XML + diff 树 + 基线来源标注、desired 优先→cache→实时 GET 基线链、无副作用（desired/缓存/审计零变化）、幂等、400 负路径
-- [ ] 2.2 实现 preview handler + 路由注册，绿灯
-- [ ] 2.3 B1 红灯：`intent.Fragment` 加 `Op` 字段与 prepare 删除映射测试——delete→DeleteChange/叶级删除、缺省 merge 零行为变化（BIO-03 既有测试全绿回归）
-- [ ] 2.4 实现 Fragment Op 扩展，绿灯
-- [ ] 2.5 B3+B2 红灯：`POST /config/changeset/commit` 契约与 netconfsim 集成测试（CS-04）——跨模块原子提交、中途失败 discard 整体回退（scenario.ErrorOnRPC 注入）、删除条目端到端、desired 后写时序、审计逐条目、意图链路零回归
-- [ ] 2.6 实现 commit handler（TxCoordinator 复用、设备锁、desired/缓存/审计/对账时序），绿灯
+- [x] 2.1 B3 红灯：`POST /config/changeset/preview` 契约测试（CS-01/02/03）——正向/回滚 XML + diff 树 + 基线来源标注、desired 优先→cache→实时 GET 基线链、无副作用（desired/缓存/审计零变化）、幂等、400 负路径
+- [x] 2.2 实现 preview handler + 路由注册，绿灯
+- [x] 2.3 B1 红灯：`intent.Fragment` 加 `Op` 字段与 prepare 删除映射测试——delete→DeleteChange/叶级删除、缺省 merge 零行为变化（BIO-03 既有测试全绿回归）
+- [x] 2.4 实现 Fragment Op 扩展，绿灯
+- [x] 2.5 B3+B2 红灯：`POST /config/changeset/commit` 契约与 netconfsim 集成测试（CS-04）——跨模块原子提交、中途失败 discard 整体回退（scenario.ErrorOnRPC 注入）、删除条目端到端、desired 后写时序、审计逐条目、意图链路零回归
+- [x] 2.6 实现 commit handler（TxCoordinator 复用、设备锁、desired/缓存/审计/对账时序），绿灯
 - [ ] 2.7 后端覆盖率棘轮核对（T08），commit + PR-2
 
 ## 3. 前端纯逻辑层（PR-3）
