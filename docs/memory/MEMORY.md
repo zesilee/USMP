@@ -50,3 +50,4 @@
 - [前端重设计](frontend-redesign.md) — 商用级高保真原型**已批准并合入main**(#78+#79)；浅色iMaster NCE气质+收敛台账+新鲜度环+模型驱动YANG树；落地计划见 docs/superpowers/plans/2026-07-05-frontend-design-landing.md + openspec/tasks/同名
 - [落地迭代工作方式](frontend-landing-workflow.md) — 每PR用独立agent检视设计/测试/开发；CI过后自助merge；关键风险记risklog供次日规划；认真测试设计；长迭代注意上下文压缩保留关键信息
 - [落地风险台账](frontend-landing-risklog.md) — PR-B1对账态(drifted=已纠正非持久/status无TTL/desired 5min过期/fleet不含unknown)；PR-B2(config GET不缓存、force_refresh是TODO、与§8矛盾)
+- [攒批提交二期](nce-batch-commit.md) — 做配置台提交链路/变更集/试运行相关前必读：二期全交付(变更集/preview/commit 2PC/即时下发退役)、desired后写时序、pr-size不豁免openspec文档、worktree真目录node_modules勿再symlink、vitest4 unhandled rejection红整套件、阈值86/79/80/87+后端72.3
