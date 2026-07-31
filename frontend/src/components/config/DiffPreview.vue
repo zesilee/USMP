@@ -7,7 +7,11 @@
       <div v-for="d in diff" :key="d.key" class="dva-row">
         <div class="dk">{{ d.label }}</div>
         <div class="dv changed">
-          <template v-if="d.isNew">
+          <template v-if="d.op === 'remove'">
+            <span class="was removed">{{ fmt(d.was) }}</span>
+            <span class="tag-removed">{{ t('console.diff.tagRemoved') }}</span>
+          </template>
+          <template v-else-if="d.isNew">
             <span class="now">{{ fmt(d.now) }}</span>
             <span class="tag-new">{{ t('console.diff.tagNew') }}</span>
           </template>
@@ -105,6 +109,17 @@ const fmt = (v: any): string => (v === '' || v == null ? '—' : String(v))
 .arrow {
   color: var(--ink-3, #93a2b1);
   margin: 0 5px;
+}
+
+.tag-removed {
+  font-family: var(--f-sans, sans-serif);
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--st-off, #c45656);
+  background: #fbe9e9;
+  padding: 1px 6px;
+  border-radius: 4px;
+  letter-spacing: 0.03em;
 }
 
 .tag-new {
