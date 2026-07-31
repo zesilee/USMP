@@ -196,6 +196,123 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/config/changeset/commit": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** 变更集批量原子提交（整体生效或整体回退） */
+        post: {
+            parameters: {
+                query?: {
+                    /** @description 覆盖业务意图归属硬锁（force=true，审计留痕） */
+                    force?: boolean;
+                };
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: components["requestBodies"]["api.ChangesetReq"];
+            responses: {
+                /** @description 已提交并触发对账 */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["api.Response"] & {
+                            data?: components["schemas"]["api.ChangesetCommitData"];
+                        };
+                    };
+                };
+                /** @description 变更集解析失败 */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["api.Response"];
+                    };
+                };
+                /** @description 路径被业务意图认领（无 force 拒绝） */
+                409: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["api.Response"] & {
+                            data?: components["schemas"]["api.OwnershipRejection"];
+                        };
+                    };
+                };
+                /** @description 设备下发失败（已整体回退） */
+                502: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["api.Response"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/config/changeset/preview": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** 变更集试运行预览（正向/回滚报文 + diff 树，不下发） */
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: components["requestBodies"]["api.ChangesetReq"];
+            responses: {
+                /** @description 预览结果 */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["api.Response"] & {
+                            data?: components["schemas"]["api.ChangesetPreviewData"];
+                        };
+                    };
+                };
+                /** @description 变更集解析失败 */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["api.Response"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/config/{ip}/{path}": {
         parameters: {
             query?: never;
@@ -949,6 +1066,59 @@ export interface components {
             label?: string;
             name?: string;
         };
+        "api.ChangesetCommitData": {
+            device?: string;
+            entries?: number;
+            /** @description NonTransactional 标记设备缺 :confirmed-commit 降级普通 commit（DP-08）。 */
+            non_transactional?: boolean;
+            reconciliation?: components["schemas"]["api.ReconcileInfo"];
+            /** @description COMMITTED */
+            status?: string;
+        };
+        "api.ChangesetEntryReq": {
+            /** @description update：字段级清除的叶名（CS-05） */
+            cleared?: string[];
+            /** @description delete：list 主键值 */
+            key?: string;
+            /** @description create | update | delete */
+            op?: string;
+            /** @description 请求路径（锚点或其子路径） */
+            path?: string;
+            /** @description create/update：以 path 为根的 RFC7951 子树 */
+            payload?: {
+                [key: string]: unknown;
+            };
+        };
+        "api.ChangesetPreviewData": {
+            device?: string;
+            entries?: components["schemas"]["api.ChangesetPreviewEntry"][];
+            summary?: components["schemas"]["api.ChangesetSummary"];
+        };
+        "api.ChangesetPreviewEntry": {
+            /** @description desired | cache | device | none */
+            baseline_source?: string;
+            diff?: components["schemas"]["api.DiffChangeDTO"][];
+            /**
+             * @description ForwardXML/RollbackXML 为 edit-config 片段；无 XML 通道时为空且
+             *     Unsupported=true（CS-03 如实降级，绝不伪造报文）。
+             */
+            forward_xml?: string;
+            op?: string;
+            path?: string;
+            rollback_xml?: string;
+            unsupported?: boolean;
+            unsupported_reason?: string;
+        };
+        "api.ChangesetReq": {
+            device?: string;
+            entries?: components["schemas"]["api.ChangesetEntryReq"][];
+        };
+        "api.ChangesetSummary": {
+            adds?: number;
+            deletes?: number;
+            modifies?: number;
+            total?: number;
+        };
         "api.ConfigDeleteData": {
             key?: string;
             /** @description OwnershipWarning 软归属提示（BR-11）：条目被业务意图认领时附带，不拦截。 */
@@ -1000,6 +1170,13 @@ export interface components {
             username?: string;
             /** @description Vendor 厂商标识（SND 驱动选择，缺省 huawei） */
             vendor?: string;
+        };
+        "api.DiffChangeDTO": {
+            new?: unknown;
+            old?: unknown;
+            path?: string;
+            /** @description ADD | DELETE | MODIFY */
+            type?: string;
         };
         "api.FieldDef": {
             /**
@@ -1194,7 +1371,14 @@ export interface components {
     };
     responses: never;
     parameters: never;
-    requestBodies: never;
+    requestBodies: {
+        /** @description 单设备变更集 */
+        "api.ChangesetReq": {
+            content: {
+                "application/json": components["schemas"]["api.ChangesetReq"];
+            };
+        };
+    };
     headers: never;
     pathItems: never;
 }
